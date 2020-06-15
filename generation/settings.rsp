@@ -1,0 +1,77 @@
+--file
+generation\main.cpp
+--output
+sources\Win32MetadataLib\win32.cs
+--additional
+-m32
+-Wno-expansion-to-defined
+-Wno-ignored-attributes
+-Wno-ignored-pragma-intrinsic
+-Wno-nonportable-include-path
+-Wno-pragma-pack
+--config
+exclude-funcs-without-lib-path
+explicit-vtbls
+compatible-codegen
+log-visited-funcs-with-lib-path
+--headerFile
+generation\header.txt
+--include-directory
+C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/shared
+C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/um
+--traverse
+C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/shared/*
+C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/um/*
+C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/winrt/inspectable.h
+C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/winrt/roparameterizediid.h
+C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/winrt/roapi.h
+C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/winrt/hstring.h
+C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/winrt/winstring.h
+C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/winrt/activation.h
+C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/winrt/shcore.h
+D:\repos\win32metadata\generation\main.cpp
+--methodClassName
+Apis
+--namespace
+Microsoft.Windows.Sdk
+--with-callconv
+*=Winapi
+--exclude
+_STORAGE_MEDIA_SERIAL_NUMBER_DATA
+_PERSISTENT_RESERVE_COMMAND
+_STREAM_INFORMATION_ENTRY
+ITypeMarshal
+RoGetActivatableClassRegistration
+_SCONTEXT_QUEUE
+CABINETSTATE
+SHELLFLAGSTATE
+_ImageArchitectureHeader
+_DEV_QUERY_RESULT_ACTION_DATA
+_DNS_CONNECTION_PROXY_INFO
+_EVENT_PROPERTY_INFO
+RoGetServerActivatableClasses
+_MIDL_STUB_MESSAGE
+_PROPSHEETPAGEA
+_PROPSHEETPAGEA_V1
+_PROPSHEETPAGEA_V2
+_PROPSHEETPAGEA_V3
+_PROPSHEETPAGEW_V1
+_PROPSHEETPAGEW_V2
+_PROPSHEETPAGEW_V3
+_PROPSHEETPAGEW
+_PROPSHEETHEADERA_V1
+_PROPSHEETHEADERA_V2
+_PROPSHEETHEADERW_V1
+_PROPSHEETHEADERW_V2
+tagSF_TYPE
+tagCOINIT
+IActiveDesktopP
+IADesktopP2
+INewShortcutHookA
+INewShortcutHookW
+IColumnProvider
+IPrintDialogCallback
+IPrintDialogServices
+_PSAPI_WORKING_SET_BLOCK
+_PSAPI_WORKING_SET_EX_BLOCK
+WSAPOLLDATA
