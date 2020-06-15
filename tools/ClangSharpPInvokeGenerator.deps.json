@@ -1,0 +1,122 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "ClangSharpPInvokeGenerator/10.0.0-beta": {
+        "dependencies": {
+          "ClangSharp.PInvokeGenerator": "10.0.0-beta",
+          "System.CommandLine": "2.0.0-beta1.20253.1"
+        },
+        "runtime": {
+          "ClangSharpPInvokeGenerator.dll": {}
+        }
+      },
+      "libclang/10.0.0": {},
+      "libClangSharp/10.0.0-beta1": {},
+      "Microsoft.Bcl.HashCode/1.1.0": {
+        "runtime": {
+          "lib/netcoreapp2.1/Microsoft.Bcl.HashCode.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "4.700.19.56404"
+          }
+        }
+      },
+      "Microsoft.CSharp/4.4.1": {},
+      "System.CommandLine/2.0.0-beta1.20253.1": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.4.1",
+          "System.Memory": "4.5.4"
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.CommandLine.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.20.25301"
+          }
+        }
+      },
+      "System.Memory/4.5.4": {},
+      "ClangSharp/10.0.0-beta": {
+        "dependencies": {
+          "Microsoft.Bcl.HashCode": "1.1.0",
+          "System.Memory": "4.5.4",
+          "libclang": "10.0.0",
+          "libClangSharp": "10.0.0-beta1"
+        },
+        "runtime": {
+          "ClangSharp.dll": {}
+        }
+      },
+      "ClangSharp.PInvokeGenerator/10.0.0-beta": {
+        "dependencies": {
+          "ClangSharp": "10.0.0-beta"
+        },
+        "runtime": {
+          "ClangSharp.PInvokeGenerator.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ClangSharpPInvokeGenerator/10.0.0-beta": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "libclang/10.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-SqUUQvGNjDY4mKXZ+4Iz1DkHnkkTxsANnvW4oewbVnnEZqJ5QjVV/e+yrlSe+56BeJtbqojNeGmTwt6IzyhD5Q==",
+      "path": "libclang/10.0.0",
+      "hashPath": "libclang.10.0.0.nupkg.sha512"
+    },
+    "libClangSharp/10.0.0-beta1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-860Pz/JVoL19ftjG8CmuKxWrxZwsnskvT9hnb0ZgKxO91l7w2ZZvY7C7KMDM3Rt2vvUY++GV0fL7iz50a0BWDw==",
+      "path": "libclangsharp/10.0.0-beta1",
+      "hashPath": "libclangsharp.10.0.0-beta1.nupkg.sha512"
+    },
+    "Microsoft.Bcl.HashCode/1.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-J2G1k+u5unBV+aYcwxo94ip16Rkp65pgWFb0R6zwJipzWNMgvqlWeuI7/+R+e8bob66LnSG+llLJ+z8wI94cHg==",
+      "path": "microsoft.bcl.hashcode/1.1.0",
+      "hashPath": "microsoft.bcl.hashcode.1.1.0.nupkg.sha512"
+    },
+    "Microsoft.CSharp/4.4.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-A5hI3gk6WpcBI0QGZY6/d5CCaYUxJgi7iENn1uYEng+Olo8RfI5ReGVkjXjeu3VR3srLvVYREATXa2M0X7FYJA==",
+      "path": "microsoft.csharp/4.4.1",
+      "hashPath": "microsoft.csharp.4.4.1.nupkg.sha512"
+    },
+    "System.CommandLine/2.0.0-beta1.20253.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Ig+OUi1IXF3OX+S3e1+mjqK9J6ro0eoUokYRUbTjBGpL0lrgXxsBic66THXHD8K2Fb9c0Gk85ESzPgZ9Cz9Wvg==",
+      "path": "system.commandline/2.0.0-beta1.20253.1",
+      "hashPath": "system.commandline.2.0.0-beta1.20253.1.nupkg.sha512"
+    },
+    "System.Memory/4.5.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-1MbJTHS1lZ4bS4FmsJjnuGJOu88ZzTT2rLvrhW7Ygic+pC0NWA+3hgAen0HRdsocuQXCkUTdFn9yHJJhsijDXw==",
+      "path": "system.memory/4.5.4",
+      "hashPath": "system.memory.4.5.4.nupkg.sha512"
+    },
+    "ClangSharp/10.0.0-beta": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ClangSharp.PInvokeGenerator/10.0.0-beta": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
