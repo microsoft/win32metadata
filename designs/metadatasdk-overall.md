@@ -6,7 +6,7 @@ Provide the public surface area of the Win32 SDK in a language-agnostic format t
 
 ## Motivation
 
-The public API surface area of Win32 is described with C/C++ headers. These are not easily parseable by other languages. As other languages gain in popularity, we would like to meet developers where they're at and provide a way for them to make use of Win32 APIs in languages other than C/C++. Once we are able to describe the Win32 API surface in metadata, we can create language projections so that developers can call Win32 APIs from those languages.
+The public API surface area of Win32 is described with C/C++ headers. These are not easily parseable for those who want to make an interop layer from different languages to Win32 APIs. As other languages gain in popularity, we would like to meet developers where they're at and provide a way for them to make use of Win32 APIs in languages other than C/C++. Once we are able to describe the Win32 API surface in metadata, we can create language projections so developers can call Win32 APIs from those languages.
 
 ## Metadata Requirements
 ### Types
@@ -77,6 +77,7 @@ The emitter will take the output of the scraper and emit metadata. Currently the
 
 - Which functions call `SetLastError`.
 - Which parameters and fields that represent Win32 resources (e.g. handles and GDI objects) are logically grouped together and which Win32 function can be called to release them (e.g. file handles vs. registry handles vs. GDI objects).
+- Many functions use a non-enum type, like a DWORD, and then use many #define statements to describe the possible values that function can recognize for tht parameter.
 
 ### Language projections
 
