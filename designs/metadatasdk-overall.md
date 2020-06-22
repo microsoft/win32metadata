@@ -70,7 +70,7 @@ A tool that can accurately scrape Win32 C/C++ headers for the information needed
 - structs, including unions and embedded structs, packing information, and bit fields
 - Function pointers for APIs that use callback semantics
 - enums
-- In/out/optional semantics for each parameter
+- In/out/optional semantics (like SAL) for each parameter
 
 ### Metadata emitter
 The emitter will take the output of the scraper and emit metadata. Currently there is information we need emitted that isn't in the current Win32 headers. This could be added to the headers in the future, but for now the emitter will need additional input:
