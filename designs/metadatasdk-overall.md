@@ -46,7 +46,7 @@ The public API surface area of Win32 is described with C/C++ headers. These are 
 One proposal is to use [ECMA-335](http://www.ecma-international.org/publications/standards/Ecma-335.htm), which is the metadata format used for .NET binaries.
 
 #### Pros
- This format is currently used for WinRT metadata (.winmd files) and is already consumed by [C++/WinRT](https://github.com/Microsoft/cppwinrt) and [Rust WinRT](https://github.com/Microsoft/cppwinrt) in order to project WinRT APIs. These two projects already have tooling to parse and consume ECMA-335 binaries, so consuming ECMA-335 metadata for Win32 APIs should be less work than using a completely new format.
+- This format is currently used for WinRT metadata (.winmd files) and is already consumed by [C++/WinRT](https://github.com/Microsoft/cppwinrt) and [Rust WinRT](https://github.com/Microsoft/cppwinrt) in order to project WinRT APIs. These two projects already have tooling to parse and consume ECMA-335 binaries, so consuming ECMA-335 metadata for Win32 APIs should be less work than using a completely new format.
 - Managed code was originally designed to work well with Win32 interop, so most of the Win32 concepts we need expressed in metadata should already exist.
 - It is trivial to write C# code that uses reflection to examine the metadata from a C# binary.
 
