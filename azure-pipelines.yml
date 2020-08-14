@@ -1,0 +1,33 @@
+# Universal Windows Platform
+# Build a Universal Windows Platform project using Visual Studio.
+# Add steps that test and distribute an app, save build artifacts, and more:
+# https://aka.ms/yaml
+
+#trigger:
+#- master
+
+pool:
+  name: Package ES Lab E
+
+variables:
+  buildPlatform: 'x64'
+  buildConfiguration: 'Release'
+
+steps:
+- task: CmdLine@2
+  inputs:
+    script: |
+      call GenerateMetadataSource.cmd
+      
+#- task: NuGetToolInstaller@1
+
+#- task: NuGetCommand@2
+#  inputs:
+#    restoreSolution: '$(solution)'
+
+#- task: VSBuild@1
+#  inputs:
+#    platform: 'x86'
+#    solution: '$(solution)'
+#    configuration: '$(buildConfiguration)'
+#    msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload'
