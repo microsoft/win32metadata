@@ -3,11 +3,17 @@
 # Add steps that test and distribute an app, save build artifacts, and more:
 # https://aka.ms/yaml
 
-#trigger:
-#- master
+trigger: none
+pr: none
 
 pool:
   name: Package ES Lab E
+
+resources:
+  pipelines:
+    - pipeline: winsdk
+      source: WinSDK Nuget
+      version: 20195.1001.rs_onecore_dep.200815-1700
 
 variables:
   buildPlatform: 'x64'
@@ -22,7 +28,9 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
-      call GenerateMetadataSource.cmd
+      dir $(PIPELINE.WORKSPACE)/winsdk
+      
+#      call GenerateMetadataSource.cmd
       
 #- task: NuGetToolInstaller@1
 
