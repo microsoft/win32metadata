@@ -18,9 +18,11 @@ resources:
 variables:
   buildPlatform: 'x64'
   buildConfiguration: 'Release'
+  System.Debug: true
 
 steps:
 - download: winsdk
+  artifact: NuGetPackages
 
 - task: UseDotNet@2
   inputs:
@@ -28,20 +30,23 @@ steps:
     version: '3.x'
 
 - script: |
-    echo $(resources.pipeline.myresourcevars.pipelineID)
-    echo $(resources.pipeline.myresourcevars.runName)
-    echo $(resources.pipeline.myresourcevars.runID)
-    echo $(resources.pipeline.myresourcevars.runURI)
-    echo $(resources.pipeline.myresourcevars.sourceBranch)
-    echo $(resources.pipeline.myresourcevars.sourceCommit)
-    echo $(resources.pipeline.myresourcevars.sourceProvider)
-    echo $(resources.pipeline.myresourcevars.requestedFor)
-    echo $(resources.pipeline.myresourcevars.requestedForID)
+    echo $(resources.pipeline.winsdk.pipelineID)
+    echo $(resources.pipeline.winsdk.runName)
+    echo $(resources.pipeline.winsdk.runID)
+    echo $(resources.pipeline.winsdk.runURI)
+    echo $(resources.pipeline.winsdk.sourceBranch)
+    echo $(resources.pipeline.winsdk.sourceCommit)
+    echo $(resources.pipeline.winsdk.sourceProvider)
+    echo $(resources.pipeline.winsdk.requestedFor)
+    echo $(resources.pipeline.winsdk.requestedForID)
         
 - task: CmdLine@2
   inputs:
     script: |
-      dir $(PIPELINE.WORKSPACE)/winsdk
+      echo Build.SourcesDirectory - $(Build.SourcesDirectory)
+      dir $(Build.SourcesDirectory)
+      echo build.artifactstagingdirectory - $(build.artifactstagingdirectory)
+      dir $(build.artifactstagingdirectory)
       
 #      call GenerateMetadataSource.cmd
       
