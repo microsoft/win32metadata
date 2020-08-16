@@ -18,7 +18,7 @@ resources:
 variables:
   buildPlatform: 'x64'
   buildConfiguration: 'Release'
-  System.Debug: true
+  System.Debug: false
 
 steps:
 - download: winsdk
@@ -30,15 +30,15 @@ steps:
     version: '3.x'
 
 - script: |
-    echo $(resources.pipeline.winsdk.pipelineID)
-    echo $(resources.pipeline.winsdk.runName)
-    echo $(resources.pipeline.winsdk.runID)
-    echo $(resources.pipeline.winsdk.runURI)
-    echo $(resources.pipeline.winsdk.sourceBranch)
-    echo $(resources.pipeline.winsdk.sourceCommit)
-    echo $(resources.pipeline.winsdk.sourceProvider)
-    echo $(resources.pipeline.winsdk.requestedFor)
-    echo $(resources.pipeline.winsdk.requestedForID)
+    echo resources.pipeline.winsdk.pipelineID = $(resources.pipeline.winsdk.pipelineID)
+    echo resources.pipeline.winsdk.runName = $(resources.pipeline.winsdk.runName)
+    echo resources.pipeline.winsdk.runID = $(resources.pipeline.winsdk.runID)
+    echo resources.pipeline.winsdk.runURI = $(resources.pipeline.winsdk.runURI)
+    echo resources.pipeline.winsdk.sourceBranch = $(resources.pipeline.winsdk.sourceBranch)
+    echo resources.pipeline.winsdk.sourceCommit = $(resources.pipeline.winsdk.sourceCommit)
+    echo resources.pipeline.winsdk.sourceProvider = $(resources.pipeline.winsdk.sourceProvider)
+    echo resources.pipeline.winsdk.requestedFor = $(resources.pipeline.winsdk.requestedFor)
+    echo resources.pipeline.winsdk.requestedForID = $(resources.pipeline.winsdk.requestedForID)
         
 - task: CmdLine@2
   inputs:
@@ -47,6 +47,8 @@ steps:
       dir $(Build.SourcesDirectory)
       echo build.artifactstagingdirectory - $(build.artifactstagingdirectory)
       dir $(build.artifactstagingdirectory)
+      echo Agent.BuildDirectory - $(Agent.BuildDirectory)
+      dir $(Agent.BuildDirectory)
       
 #      call GenerateMetadataSource.cmd
       
