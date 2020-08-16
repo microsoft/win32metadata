@@ -43,12 +43,7 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
-      echo Build.SourcesDirectory - $(Build.SourcesDirectory)
-      dir $(Build.SourcesDirectory)
-      echo build.artifactstagingdirectory - $(build.artifactstagingdirectory)
-      dir $(build.artifactstagingdirectory)
-      echo Agent.BuildDirectory - $(Agent.BuildDirectory)
-      dir $(Agent.BuildDirectory)
+      dir $(Agent.BuildDirectory)\winsdk /s
       
 #      call GenerateMetadataSource.cmd
       
