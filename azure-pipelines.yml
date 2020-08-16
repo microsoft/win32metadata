@@ -20,11 +20,24 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+- download: winsdk
+
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
     version: '3.x'
-    
+
+- script: |
+    echo $(resources.pipeline.myresourcevars.pipelineID)
+    echo $(resources.pipeline.myresourcevars.runName)
+    echo $(resources.pipeline.myresourcevars.runID)
+    echo $(resources.pipeline.myresourcevars.runURI)
+    echo $(resources.pipeline.myresourcevars.sourceBranch)
+    echo $(resources.pipeline.myresourcevars.sourceCommit)
+    echo $(resources.pipeline.myresourcevars.sourceProvider)
+    echo $(resources.pipeline.myresourcevars.requestedFor)
+    echo $(resources.pipeline.myresourcevars.requestedForID)
+        
 - task: CmdLine@2
   inputs:
     script: |
