@@ -46,7 +46,7 @@ if (!$artifactsDir)
     Create-Directory $artifactsDir
 }
 
-$nugetSrcPackagesDir = Join-Path -Path $artifactsDir "SrcNuGetPackages"
+$nugetSrcPackagesDir = Join-Path -Path $artifactsDir "NuGetPackages"
 Create-Directory $nugetSrcPackagesDir
 
 $cppPkg = Get-ChildItem -path $nugetSrcPackagesDir -Include Microsoft.Windows.SDK.CPP.10.*.nupkg -recurse
