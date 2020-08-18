@@ -1,0 +1,61 @@
+# Universal Windows Platform
+# Build a Universal Windows Platform project using Visual Studio.
+# Add steps that test and distribute an app, save build artifacts, and more:
+# https://aka.ms/yaml
+
+trigger: none
+pr: none
+
+pool:
+  name: Package ES Lab E
+
+resources:
+  pipelines:
+    - pipeline: winsdk
+      source: WinSDK Nuget
+      version: 20195.1001.rs_onecore_dep.200815-1700
+
+variables:
+  buildPlatform: 'x64'
+  buildConfiguration: 'Release'
+  System.Debug: false
+
+steps:
+- download: winsdk
+  artifact: NuGetPackages
+
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '3.x'
+
+- script: |
+    echo resources.pipeline.winsdk.pipelineID = $(resources.pipeline.winsdk.pipelineID)
+    echo resources.pipeline.winsdk.runName = $(resources.pipeline.winsdk.runName)
+    echo resources.pipeline.winsdk.runID = $(resources.pipeline.winsdk.runID)
+    echo resources.pipeline.winsdk.runURI = $(resources.pipeline.winsdk.runURI)
+    echo resources.pipeline.winsdk.sourceBranch = $(resources.pipeline.winsdk.sourceBranch)
+    echo resources.pipeline.winsdk.sourceCommit = $(resources.pipeline.winsdk.sourceCommit)
+    echo resources.pipeline.winsdk.sourceProvider = $(resources.pipeline.winsdk.sourceProvider)
+    echo resources.pipeline.winsdk.requestedFor = $(resources.pipeline.winsdk.requestedFor)
+    echo resources.pipeline.winsdk.requestedForID = $(resources.pipeline.winsdk.requestedForID)
+        
+- task: CmdLine@2
+  inputs:
+    script: |
+      dir $(Agent.BuildDirectory)\winsdk /s
+      
+#      call GenerateMetadataSource.cmd
+      
+#- task: NuGetToolInstaller@1
+
+#- task: NuGetCommand@2
+#  inputs:
+#    restoreSolution: '$(solution)'
+
+#- task: VSBuild@1
+#  inputs:
+#    platform: 'x86'
+#    solution: '$(solution)'
+#    configuration: '$(buildConfiguration)'
+#    msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload'
