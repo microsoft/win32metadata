@@ -55,6 +55,8 @@ steps:
     PathtoPublish: '$(Agent.BuildDirectory)\winsdk\output'
     ArtifactName: 'GeneratorOutput'
     publishLocation: 'Container'
+  condition: succeededOrFailed()
+
 
 #      call GenerateMetadataSource.cmd
       
