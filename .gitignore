@@ -351,3 +351,4 @@ MigrationBackup/
 
 # Generation files
 !generation/*.rsp
+/scripts/sources/Win32MetadataLib/win32.cs

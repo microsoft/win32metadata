@@ -1,7 +1,7 @@
 --file
-generation\main.cpp
+D:\repos\win32metadata\generation\main.cpp
 --output
-sources\Win32MetadataLib\win32.cs
+D:\repos\win32metadata\sources\Win32MetadataLib\win32.cs
 --additional
 -m32
 -Wno-expansion-to-defined
@@ -9,14 +9,17 @@ sources\Win32MetadataLib\win32.cs
 -Wno-ignored-pragma-intrinsic
 -Wno-nonportable-include-path
 -Wno-pragma-pack
+-D_USE_DECLSPECS_FOR_SAL=1
+-D_PREFAST_=1
 --config
 exclude-funcs-without-lib-path
 explicit-vtbls
 compatible-codegen
 log-visited-funcs-with-lib-path
 --headerFile
-generation\header.txt
+D:\repos\win32metadata\generation\header.txt
 --include-directory
+D:\repos\win32metadata\generation
 C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/shared
 C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/um
 --traverse

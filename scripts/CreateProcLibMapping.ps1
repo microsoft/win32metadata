@@ -3,17 +3,16 @@ param
 (
     [Parameter(Mandatory=$true)]
     [string]
-    $sdkVer,
+    $onecoreLibPath,
 
     [Parameter(Mandatory=$true)]
     [string]
     $outputFileName
 )
 
-$onecoreLibPath = "C:\Program Files (x86)\Windows Kits\10\Lib\10.0.$sdkVer.0\um\x64\OneCore.Lib"
 if (!(Test-Path -path $onecoreLibPath))
 {
-    Write-Host "Error: Couldn't find $onecoreLibPath. Is the $sdkVer SDK installed?"
+    Write-Host "Error: Couldn't find $onecoreLibPath."
     exit -1
 }
 
