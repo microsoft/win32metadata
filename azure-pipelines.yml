@@ -40,11 +40,16 @@ steps:
     echo resources.pipeline.winsdk.requestedFor = $(resources.pipeline.winsdk.requestedFor)
     echo resources.pipeline.winsdk.requestedForID = $(resources.pipeline.winsdk.requestedForID)
         
-- task: CmdLine@2
+#- task: CmdLine@2
+#  inputs:
+#    script: |
+#      dir $(Agent.BuildDirectory)\winsdk /s
+
+- task: PowerShell@2
   inputs:
-    script: |
-      dir $(Agent.BuildDirectory)\winsdk /s
-      
+    filePath: 'scripts\GenerateMetadataSource.ps1'
+    arguments: '-artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0'
+
 #      call GenerateMetadataSource.cmd
       
 #- task: NuGetToolInstaller@1
