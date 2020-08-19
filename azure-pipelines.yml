@@ -42,38 +42,6 @@ steps:
     echo resources.pipeline.winsdk.requestedFor = $(resources.pipeline.winsdk.requestedFor)
     echo resources.pipeline.winsdk.requestedForID = $(resources.pipeline.winsdk.requestedForID)
         
-- task: CmdLine@2
-  displayName: Looking for tools and vcruntime
-  inputs:
-    script: |
-      dir tools
-      dir %windir%\system32\vcruntime*
-      dir %windir%\system32\MSVCP140*
-
-- task: CmdLine@2
-  displayName: Trying test app
-  inputs:
-    script: |
-      reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\ConsoleApplication3.exe" /v TracingFlags /t REG_SZ /d 0x00000004 /f
-      md $(Agent.BuildDirectory)\wpr
-      cd tools
-      wpr -start loader.wprp!Loader.Light -filemode
-      ConsoleApplication3.exe
-      wpr -stop $(Agent.BuildDirectory)\wpr\loader.etl
-
-- task: PublishBuildArtifacts@1
-  displayName: Publish etl
-  inputs:
-    PathtoPublish: '$(Agent.BuildDirectory)\wpr'
-    ArtifactName: 'wpr'
-    publishLocation: 'Container'
-
-- task: PowerShell@2
-  displayName: Processor arch
-  inputs:
-    targetType: 'inline'
-    script: '$env:PROCESSOR_ARCHITECTURE'
-
 - task: PowerShell@2
   displayName: Generate Win32 metadata C# source
   inputs:
@@ -81,24 +49,29 @@ steps:
     arguments: '-artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0'
     errorActionPreference: 'continue'
 
-- task: CmdLine@2
-  displayName: Failed to generate source, so falling back to old source
-  inputs:
-    script: 'call UseFallbackGeneratedSource.cmd'
-  condition: failed()
-
 - task: PublishBuildArtifacts@1
   displayName: Publish generator build artifacts
   inputs:
     PathtoPublish: '$(Agent.BuildDirectory)\winsdk\output'
     ArtifactName: 'GeneratorOutput'
     publishLocation: 'Container'
-  condition: succeededOrFailed()
 
 - task: PowerShell@2
   displayName: Build metadata binary
   inputs:
     filePath: 'scripts\BuildMetadataBin.ps1'
+
+- task: CmdLine@2
+  displayName: Failed to generate binary, so falling back to old source
+  inputs:
+    script: 'call UseFallbackGeneratedSource.cmd'
+  condition: failed()
+
+- task: PowerShell@2
+  displayName: Build metadata binary
+  inputs:
+    filePath: 'scripts\BuildMetadataBin.ps1'
+  condition: failed()
 
   # There's a problem on microsoft.visualstudio.com that requires the guid instead of NuGetCommand@2
 - task: 333b11bd-d341-40d9-afcf-b32d5ce6f23b@2
@@ -110,12 +83,14 @@ steps:
     versioningScheme: 'byEnvVar'
     versionEnvVar: 'PrepOutput.NugetVersion'
     basePath: 'sources'
+  condition: always()
 
 - task: PublishPipelineArtifact@1
   displayName: 'Publish NuGet packages to pipeline artifacts'
   inputs:
     targetPath: '$(OutputPackagesDir)'
     artifact: NuGetPackages
+  condition: always()
 
   # There's a problem on microsoft.visualstudio.com that requires the guid instead of NuGetCommand@2
 - task: 333b11bd-d341-40d9-afcf-b32d5ce6f23b@2
@@ -125,3 +100,4 @@ steps:
     packagesToPush: '$(OutputPackagesDir)/**/*.nupkg;!$(OutputPackagesDir)/**/*.symbols.nupkg'
     publishVstsFeed: 'c1408dcb-1833-4ae4-9af5-1a891a12cc3c'
     allowPackageConflicts: true
+  condition: always()
