@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<package>
+  <metadata>
+    <id>Microsoft.Windows.SDK.Win32Metadata</id>
+    <version>$version$</version>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <title>Win32 Metadata</title>
+    <copyright>© Microsoft Corporation. All rights reserved.</copyright>
+    <summary>This packages provides the Win32 API surface as a CLR assembly.</summary>
+    <description>This packages provides the Win32 API surface as a CLR assembly. It is intended to be used as the basis for generating language-specific projections.</description>
+    <projectUrl>https://aka.ms/WinSDKProjectURL</projectUrl>
+    <tags>Win32 Metadata</tags>
+    <licenseUrl>https://aka.ms/WinSDKPreviewLicenseURL</licenseUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <iconUrl>https://aka.ms/WinSDKIconURL</iconUrl>
+    <dependencies>
+      <group targetFramework="netstandard2.0" />
+    </dependencies>
+  </metadata>
+
+  <files>
+    <file src="Win32MetadataLib\bin\Release\netstandard2.0\Win32MetadataLib.dll" target="lib\netstandard2.0\Win32MetadataLib.dll"/>
+  </files>
+</package>

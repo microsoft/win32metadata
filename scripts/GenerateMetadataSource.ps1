@@ -75,6 +75,9 @@ else
     $version = $cppPkg.Name.Substring($prefix.Length, $cppPkg.Name.Length - $prefix.Length - $suffix.Length)
 }
 
+# Write variable in the Azure DevOps pipeline for use in subsequent tasks
+Write-Host "##vso[task.setvariable variable=PrepOutput.NugetVersion;]$version"
+
 $x64Pkg = Get-ChildItem -path "$nugetSrcPackagesDir\Microsoft.Windows.SDK.CPP.x64.$version.nupkg"
 if (!$x64Pkg)
 {
