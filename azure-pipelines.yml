@@ -71,7 +71,8 @@ steps:
   inputs:
     filePath: 'scripts\BuildMetadataBin.ps1'
 
-- task: NuGetCommand@2
+  # There's a problem on microsoft.visualstudio.com that requires the guid instead of NuGetCommand@2
+- task: 333b11bd-d341-40d9-afcf-b32d5ce6f23b@2
   displayName: Pack nuget package
   inputs:
     command: 'pack'
@@ -87,7 +88,8 @@ steps:
     targetPath: '$(OutputPackagesDir)'
     artifact: NuGetPackages
 
-- task: NuGetCommand@2
+  # There's a problem on microsoft.visualstudio.com that requires the guid instead of NuGetCommand@2
+- task: 333b11bd-d341-40d9-afcf-b32d5ce6f23b@2
   displayName: 'NuGet push'
   inputs:
     command: push
