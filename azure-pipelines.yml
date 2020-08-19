@@ -54,8 +54,19 @@ steps:
   displayName: Trying test app
   inputs:
     script: |
-      reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\ConsoleApplication3.exe" /v GlobalFlag /t REG_SZ /d 0x00000002 /f
-      tools\ConsoleApplication3.exe
+      reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\ConsoleApplication3.exe" /v TracingFlags /t REG_SZ /d 0x00000004 /f
+      md $(Agent.BuildDirectory)\wpr
+      cd tools
+      wpr -start loader.wprp!Loader.Light -filemode
+      ConsoleApplication3.exe
+      wpr -stop $(Agent.BuildDirectory)\wpr\loader.etl
+
+- task: PublishBuildArtifacts@1
+  displayName: Publish etl
+  inputs:
+    PathtoPublish: '$(Agent.BuildDirectory)\wpr'
+    ArtifactName: 'wpr'
+    publishLocation: 'Container'
 
 - task: PowerShell@2
   displayName: Processor arch
