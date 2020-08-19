@@ -47,10 +47,17 @@ steps:
 #      dir $(Agent.BuildDirectory)\winsdk /s
 
 - task: PowerShell@2
+  displayName: Processor arch
+  inputs:
+    targetType: 'inline'
+    script: '$env:PROCESSOR_ARCHITECTURE'
+
+- task: PowerShell@2
   displayName: Generate Win32 metadata C# source
   inputs:
     filePath: 'scripts\GenerateMetadataSource.ps1'
     arguments: '-artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0'
+    errorActionPreference: 'continue'
 
 - task: CmdLine@2
   displayName: Failed to generate source, so falling back to old source
