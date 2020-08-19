@@ -7,7 +7,7 @@ trigger: none
 pr: none
 
 pool:
-  name: Package ES Lab E
+  name: Package ES Standard Lab
 
 resources:
   pipelines:
