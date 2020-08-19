@@ -19,6 +19,7 @@ variables:
   buildPlatform: 'x64'
   buildConfiguration: 'Release'
   System.Debug: false
+  OutputPackagesDir: $(Build.ArtifactStagingDirectory)\CreatedNugetPackages
 
 steps:
 - download: winsdk
@@ -46,29 +47,50 @@ steps:
 #      dir $(Agent.BuildDirectory)\winsdk /s
 
 - task: PowerShell@2
+  displayName: Generate Win32 metadata C# source
   inputs:
     filePath: 'scripts\GenerateMetadataSource.ps1'
     arguments: '-artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0'
 
+- task: CmdLine@2
+  displayName: Failed to generate source, so falling back to old source
+  inputs:
+    script: 'call UseFallbackGeneratedSource.cmd'
+  condition: failed()
+
 - task: PublishBuildArtifacts@1
+  displayName: Publish generator build artifacts
   inputs:
     PathtoPublish: '$(Agent.BuildDirectory)\winsdk\output'
     ArtifactName: 'GeneratorOutput'
     publishLocation: 'Container'
   condition: succeededOrFailed()
 
+- task: PowerShell@2
+  displayName: Build metadata binary
+  inputs:
+    filePath: 'scripts\BuildMetadataBin.ps1'
 
-#      call GenerateMetadataSource.cmd
-      
-#- task: NuGetToolInstaller@1
+- task: NuGetCommand@2
+  displayName: Pack nuget package
+  inputs:
+    command: 'pack'
+    packagesToPack: 'sources\nuget\Microsoft.Windows.SDK.Win32Metadata\Microsoft.Windows.SDK.Win32Metadata.nuspec'
+    packDestination: '$(OutputPackagesDir)'
+    versioningScheme: 'byEnvVar'
+    versionEnvVar: 'PrepOutput.NugetVersion'
+    basePath: 'sources'
 
-#- task: NuGetCommand@2
-#  inputs:
-#    restoreSolution: '$(solution)'
+- task: PublishPipelineArtifact@1
+  displayName: 'Publish NuGet packages to pipeline artifacts'
+  inputs:
+    targetPath: '$(OutputPackagesDir)'
+    artifact: NuGetPackages
 
-#- task: VSBuild@1
-#  inputs:
-#    platform: 'x86'
-#    solution: '$(solution)'
-#    configuration: '$(buildConfiguration)'
-#    msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload'
+- task: NuGetCommand@2
+  displayName: 'NuGet push'
+  inputs:
+    command: push
+    packagesToPush: '$(OutputPackagesDir)/**/*.nupkg;!$(OutputPackagesDir)/**/*.symbols.nupkg'
+    publishVstsFeed: 'c1408dcb-1833-4ae4-9af5-1a891a12cc3c'
+    allowPackageConflicts: true
