@@ -18,7 +18,7 @@ resources:
 variables:
   buildPlatform: 'x64'
   buildConfiguration: 'Release'
-  System.Debug: false
+  System.Debug: true
   OutputPackagesDir: $(Build.ArtifactStagingDirectory)\CreatedNugetPackages
 
 steps:
