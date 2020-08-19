@@ -11,11 +11,15 @@ D:\repos\win32metadata\sources\Win32MetadataLib\win32.cs
 -Wno-pragma-pack
 -D_USE_DECLSPECS_FOR_SAL=1
 -D_PREFAST_=1
+-DWINAPI_FAMILY=WINAPI_FAMILY_DESKTOP_APP
 --config
 exclude-funcs-without-lib-path
 explicit-vtbls
 compatible-codegen
 log-visited-funcs-with-lib-path
+log-visited-files
+log-exclusions
+exclude-anonymous-field-helpers
 --headerFile
 D:\repos\win32metadata\generation\header.txt
 --include-directory
@@ -24,6 +28,7 @@ C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/shared
 C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/um
 --traverse
 C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/shared/*
+C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/shared/ndis/*
 C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/um/*
 C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/winrt/inspectable.h
 C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/winrt/roparameterizediid.h
@@ -78,3 +83,9 @@ IPrintDialogServices
 _PSAPI_WORKING_SET_BLOCK
 _PSAPI_WORKING_SET_EX_BLOCK
 WSAPOLLDATA
+_GUID
+_Lock_kind_mutex_
+_Lock_kind_event_
+_Lock_kind_semaphore_
+_Lock_kind_spin_lock_
+_Lock_kind_critical_section_

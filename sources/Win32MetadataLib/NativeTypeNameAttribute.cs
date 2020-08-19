@@ -7,7 +7,7 @@ namespace Microsoft.Windows.Sdk
 {
     /// <summary>Defines the type of a member as it was used in the native signature.</summary>
     [Conditional("DEBUG")]
-    [AttributeUsage(AttributeTargets.Enum | AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.ReturnValue, AllowMultiple = false, Inherited = true)]
+    [AttributeUsage(AttributeTargets.Enum | AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.ReturnValue | AttributeTargets.Struct, AllowMultiple = false, Inherited = true)]
     public sealed class NativeTypeNameAttribute : Attribute
     {
         /// <summary>Initializes a new instance of the <see cref="NativeTypeNameAttribute" /> class.</summary>
