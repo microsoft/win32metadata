@@ -47,10 +47,10 @@ steps:
 #      dir $(Agent.BuildDirectory)\winsdk /s
 
 - task: PowerShell@2
-  displayName: PS Version
+  displayName: Processor arch
   inputs:
     targetType: 'inline'
-    script: '$PSVersionTable.PSVersion'
+    script: '$env:PROCESSOR_ARCHITECTURE'
 
 - task: PowerShell@2
   displayName: Generate Win32 metadata C# source
