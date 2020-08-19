@@ -57,7 +57,7 @@ steps:
   inputs:
     filePath: 'scripts\GenerateMetadataSource.ps1'
     arguments: '-artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0'
-    pwsh: true
+    errorActionPreference: 'continue'
 
 - task: CmdLine@2
   displayName: Failed to generate source, so falling back to old source
