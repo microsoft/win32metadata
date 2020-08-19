@@ -54,6 +54,7 @@ steps:
   displayName: Trying test app
   inputs:
     script: |
+      reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\ConsoleApplication3.exe" /v GlobalFlag /t REG_SZ /d 0x00000002 /f
       tools\ConsoleApplication3.exe
 
 - task: PowerShell@2
