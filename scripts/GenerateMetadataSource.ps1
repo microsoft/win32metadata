@@ -113,7 +113,7 @@ $includePath = (Get-ChildItem -Path "$nugetDestPackagesDir\Microsoft.Windows.SDK
 Replace-Text $fixedSettingsRsp $textToReplaceTable
 
 Write-Host "Creating metdata .cs file. Log output: $generatorOutput"
-Write-Host "Calling: $PSScriptRoot\..\tools\ClangSharpPInvokeGenerator.exe @$generateDir\remap.rsp @$fixedSettingsRsp @$libMappingOutputFileName"
+Write-Host "Calling: $PSScriptRoot\..\tools\ClangSharpPInvokeGenerator.exe @$generateDir\remap.rsp @$fixedSettingsRsp @$libMappingOutputFileName 2>&1 > $generatorOutput"
 
 & $toolsDir\ClangSharpPInvokeGenerator.exe "@$generateDir\remap.rsp" "@$fixedSettingsRsp" "@$libMappingOutputFileName" 2>&1 > $generatorOutput
 
