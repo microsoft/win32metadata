@@ -50,6 +50,14 @@ steps:
     filePath: 'scripts\GenerateMetadataSource.ps1'
     arguments: '-artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0'
 
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Agent.BuildDirectory)\winsdk\output'
+    ArtifactName: 'GeneratorOutput'
+    publishLocation: 'Container'
+  condition: succeededOrFailed()
+
+
 #      call GenerateMetadataSource.cmd
       
 #- task: NuGetToolInstaller@1
