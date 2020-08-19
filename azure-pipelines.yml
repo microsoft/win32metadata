@@ -41,10 +41,13 @@ steps:
     echo resources.pipeline.winsdk.requestedFor = $(resources.pipeline.winsdk.requestedFor)
     echo resources.pipeline.winsdk.requestedForID = $(resources.pipeline.winsdk.requestedForID)
         
-#- task: CmdLine@2
-#  inputs:
-#    script: |
-#      dir $(Agent.BuildDirectory)\winsdk /s
+- task: CmdLine@2
+  displayName: Looking for tools and vcruntime
+  inputs:
+    script: |
+      dir tools
+      dir %windir%\system32\vcruntime*
+      dir %windir%\system32\MSVCP140*
 
 - task: PowerShell@2
   displayName: Processor arch
