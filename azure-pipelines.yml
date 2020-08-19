@@ -3,11 +3,12 @@
 # Add steps that test and distribute an app, save build artifacts, and more:
 # https://aka.ms/yaml
 
+# name: Package ES Standard Lab
 trigger: none
 pr: none
 
 pool:
-  name: Package ES Standard Lab
+  name: Package ES Lab E
 
 resources:
   pipelines:
@@ -48,6 +49,13 @@ steps:
       dir tools
       dir %windir%\system32\vcruntime*
       dir %windir%\system32\MSVCP140*
+
+- task: CmdLine@2
+  displayName: Trying test app
+  inputs:
+    script: |
+      reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\ConsoleApplication3.exe" /v GlobalFlag /t REG_SZ /d 0x00000002 /f
+      tools\ConsoleApplication3.exe
 
 - task: PowerShell@2
   displayName: Processor arch
