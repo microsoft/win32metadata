@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='utf-8' standalone='yes'?>
+<WindowsPerformanceRecorder Version="1.0">
+   <Profiles>
+     <EventProvider
+         Id="Microsoft-Windows-ImageLoad"
+         Name="2cb15d1d-5fc1-11d2-abe1-00a0c911f518">
+       <Keywords>
+         <Keyword Value="0x20" />
+       </Keywords>
+     </EventProvider>
+     <Profile
+         Id="Loader.Light.File"
+         Name="Loader"
+         DetailLevel="Light"
+         LoggingMode="File"
+         Description="Loader traces">
+       <Collectors>
+         <EventCollectorId Value="EventCollector_WPREventCollectorInFile">
+           <EventProviders>
+             <EventProviderId Value="Microsoft-Windows-ImageLoad" />
+           </EventProviders>
+         </EventCollectorId>
+       </Collectors>
+     </Profile>
+   </Profiles>
+</WindowsPerformanceRecorder>
