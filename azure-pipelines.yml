@@ -14,7 +14,10 @@ resources:
   pipelines:
     - pipeline: winsdk
       source: WinSDK Nuget
-      version: 20195.1001.rs_onecore_dep.200815-1700
+      #version: 20195.1001.rs_onecore_dep.200815-1700
+      trigger:
+        branches:
+        - master
 
 variables:
   buildPlatform: 'x64'
