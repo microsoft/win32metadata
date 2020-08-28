@@ -54,7 +54,7 @@ steps:
   displayName: Generate Win32 metadata C# source
   inputs:
     filePath: 'scripts\GenerateMetadataSource.ps1'
-    arguments: '-artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0'
+    arguments: '-artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0 -version $(resources.pipeline.winsdk.runName)'
     errorActionPreference: 'continue'
 
 - task: PublishBuildArtifacts@1
