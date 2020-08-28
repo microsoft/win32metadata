@@ -71,10 +71,13 @@ if (!$cppPkg)
 else
 {
     $pkgName = $cppPkg.Name
-    Write-Host "Found package: $cppPkg - Name = $pkgName"
+    Write-Host "Found package: $cppPkg - pkgName = $pkgName"
     $prefix = "Microsoft.Windows.SDK.CPP."
     $suffix = ".nupkg"
-    $version = $pkgName.Substring($prefix.Length, $cppPkg.Name.Length - $prefix.Length - $suffix.Length)
+    $prefixLength = $prefix.Length
+    $substrLength = $pkgName.Length - $prefix.Length - $suffix.Length
+    Write-Host "prefixLength = $prefixLength, substrLength = $substrLength"
+    $version = $pkgName.Substring($prefix.Length, $substrLength)
 }
 
 # Write variable in the Azure DevOps pipeline for use in subsequent tasks
