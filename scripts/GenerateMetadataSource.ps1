@@ -49,6 +49,9 @@ if (!$artifactsDir)
     Create-Directory $artifactsDir
 }
 
+$nugetSrcPackagesDir = Join-Path -Path $artifactsDir "NuGetPackages"
+Create-Directory $nugetSrcPackagesDir
+
 $parts = $pipelineRunName.Split("{.}")
 $build = $parts[0]
 $qfe = $parts[1]
