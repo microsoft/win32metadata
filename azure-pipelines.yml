@@ -49,6 +49,7 @@ steps:
           echo resources.pipeline.winsdk.sourceProvider = $(resources.pipeline.winsdk.sourceProvider)
           echo resources.pipeline.winsdk.requestedFor = $(resources.pipeline.winsdk.requestedFor)
           echo resources.pipeline.winsdk.requestedForID = $(resources.pipeline.winsdk.requestedForID)
+          dir /s $(Agent.BuildDirectory)\winsdk\NuGetPackages
 
 - task: PowerShell@2
   displayName: Generate Win32 metadata C# source
