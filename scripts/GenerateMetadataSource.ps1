@@ -5,7 +5,7 @@ param
     $artifactsDir,
 
     [string]
-    $pipelineRunName = "18362.3.preview.200826-1800",
+    $pipelineRunName = "18362.3.19h1_release.190318-1202",
 
     [bool]
     $downloadDefaultCppNugets = $true
@@ -53,14 +53,22 @@ $parts = $pipelineRunName.Split("{.}")
 $build = $parts[0]
 $qfe = $parts[1]
 $branch = $parts[2]
-$version = "10.0.$build.$qfe-$branch"
-Write-Host "NuGet package version: $version"
+$potentialVersions = "10.0.$build.$qfe-preview.$branch", "10.0.$build.$qfe-preview", "10.0.$build.$qfe"
+$version = $null
 
-$nugetSrcPackagesDir = Join-Path -Path $artifactsDir "NuGetPackages"
-Create-Directory $nugetSrcPackagesDir
+foreach ($ver in $potentialVersions)
+{
+    Write-Host "Looking for: $nugetSrcPackagesDir\Microsoft.Windows.SDK.CPP.$ver.nupkg..."
+    $cppPkg = Get-ChildItem -path $nugetSrcPackagesDir -Include Microsoft.Windows.SDK.CPP.$ver.nupkg -recurse
+    if ($cppPkg)
+    {
+        $version = $ver
+        Write-Host "Found NuGet package, version: $version"
+        break;
+    }
+}
 
-$cppPkg = Get-ChildItem -path $nugetSrcPackagesDir -Include Microsoft.Windows.SDK.CPP.$version.nupkg -recurse
-if (!$cppPkg)
+if (!$version)
 {
     if (!$downloadDefaultCppNugets)
     {
@@ -69,6 +77,7 @@ if (!$cppPkg)
     }
     else
     {
+        $version = "10.0.18362.3-preview"
         Write-Host "No cpp nuget packages found at $nugetSrcPackagesDir. Downloading $version from nuget.org..."
 
         Download-Nupkg "Microsoft.Windows.SDK.CPP" $version $nugetSrcPackagesDir
@@ -76,6 +85,9 @@ if (!$cppPkg)
         $cppPkg = Get-ChildItem -path $nugetSrcPackagesDir -Include Microsoft.Windows.SDK.CPP.10.*.nupkg -recurse
     }
 }
+
+$nugetSrcPackagesDir = Join-Path -Path $artifactsDir "NuGetPackages"
+Create-Directory $nugetSrcPackagesDir
 
 # Write variable in the Azure DevOps pipeline for use in subsequent tasks
 Write-Host "##vso[task.setvariable variable=PrepOutput.NugetVersion;]$version"
