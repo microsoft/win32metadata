@@ -14,7 +14,7 @@ resources:
   pipelines:
     - pipeline: winsdk
       source: WinSDK Nuget
-      #version: 20195.1001.rs_onecore_dep.200815-1700
+      #version: 20204.1001.rs_onecore_dep.200826-1800
       trigger:
         branches:
         - master
@@ -27,24 +27,29 @@ variables:
 
 steps:
 - download: winsdk
+  displayName: Download pipeline NuGet packages
   artifact: NuGetPackages
 
 - task: UseDotNet@2
+  displayName: Use DotNet 3.x
   inputs:
     packageType: 'sdk'
     version: '3.x'
 
-- script: |
-    echo resources.pipeline.winsdk.pipelineID = $(resources.pipeline.winsdk.pipelineID)
-    echo resources.pipeline.winsdk.runName = $(resources.pipeline.winsdk.runName)
-    echo resources.pipeline.winsdk.runID = $(resources.pipeline.winsdk.runID)
-    echo resources.pipeline.winsdk.runURI = $(resources.pipeline.winsdk.runURI)
-    echo resources.pipeline.winsdk.sourceBranch = $(resources.pipeline.winsdk.sourceBranch)
-    echo resources.pipeline.winsdk.sourceCommit = $(resources.pipeline.winsdk.sourceCommit)
-    echo resources.pipeline.winsdk.sourceProvider = $(resources.pipeline.winsdk.sourceProvider)
-    echo resources.pipeline.winsdk.requestedFor = $(resources.pipeline.winsdk.requestedFor)
-    echo resources.pipeline.winsdk.requestedForID = $(resources.pipeline.winsdk.requestedForID)
-        
+- task: CmdLine@2
+  displayName: Echo the pipeline variables
+  inputs:
+    script: |
+      echo resources.pipeline.winsdk.pipelineID = $(resources.pipeline.winsdk.pipelineID)
+          echo resources.pipeline.winsdk.runName = $(resources.pipeline.winsdk.runName)
+          echo resources.pipeline.winsdk.runID = $(resources.pipeline.winsdk.runID)
+          echo resources.pipeline.winsdk.runURI = $(resources.pipeline.winsdk.runURI)
+          echo resources.pipeline.winsdk.sourceBranch = $(resources.pipeline.winsdk.sourceBranch)
+          echo resources.pipeline.winsdk.sourceCommit = $(resources.pipeline.winsdk.sourceCommit)
+          echo resources.pipeline.winsdk.sourceProvider = $(resources.pipeline.winsdk.sourceProvider)
+          echo resources.pipeline.winsdk.requestedFor = $(resources.pipeline.winsdk.requestedFor)
+          echo resources.pipeline.winsdk.requestedForID = $(resources.pipeline.winsdk.requestedForID)
+
 - task: PowerShell@2
   displayName: Generate Win32 metadata C# source
   inputs:
