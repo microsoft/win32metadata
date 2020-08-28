@@ -55,7 +55,7 @@ Create-Directory $nugetSrcPackagesDir
 $parts = $pipelineRunName.Split("{.}")
 $build = $parts[0]
 $qfe = $parts[1]
-$branch = $parts[2]
+$branch = $parts[2].Replace("_", "-")
 $potentialVersions = "10.0.$build.$qfe-preview.$branch", "10.0.$build.$qfe-preview", "10.0.$build.$qfe"
 $version = $null
 
