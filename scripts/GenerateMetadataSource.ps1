@@ -4,6 +4,9 @@ param
     [string]
     $artifactsDir,
 
+    [string]
+    $version = "10.0.18362.3-preview",
+
     [bool]
     $downloadDefaultCppNugets = $true
 )
@@ -49,7 +52,7 @@ if (!$artifactsDir)
 $nugetSrcPackagesDir = Join-Path -Path $artifactsDir "NuGetPackages"
 Create-Directory $nugetSrcPackagesDir
 
-$cppPkg = Get-ChildItem -path $nugetSrcPackagesDir -Include Microsoft.Windows.SDK.CPP.10.*.nupkg -recurse
+$cppPkg = Get-ChildItem -path $nugetSrcPackagesDir -Include Microsoft.Windows.SDK.CPP.$version.nupkg -recurse
 if (!$cppPkg)
 {
     if (!$downloadDefaultCppNugets)
@@ -59,25 +62,12 @@ if (!$cppPkg)
     }
     else
     {
-        $version = "10.0.18362.3-preview"
-
         Write-Host "No cpp nuget packages found at $nugetSrcPackagesDir. Downloading $version from nuget.org..."
 
         Download-Nupkg "Microsoft.Windows.SDK.CPP" $version $nugetSrcPackagesDir
         Download-Nupkg "Microsoft.Windows.SDK.CPP.x64" $version $nugetSrcPackagesDir
         $cppPkg = Get-ChildItem -path $nugetSrcPackagesDir -Include Microsoft.Windows.SDK.CPP.10.*.nupkg -recurse
     }
-}
-else
-{
-    $pkgName = $cppPkg.Name
-    Write-Host "Found package: $cppPkg - pkgName = $pkgName"
-    $prefix = "Microsoft.Windows.SDK.CPP."
-    $suffix = ".nupkg"
-    $prefixLength = $prefix.Length
-    $substrLength = $pkgName.Length - $prefix.Length - $suffix.Length
-    Write-Host "prefixLength = $prefixLength, substrLength = $substrLength"
-    $version = $pkgName.Substring($prefix.Length, $substrLength)
 }
 
 # Write variable in the Azure DevOps pipeline for use in subsequent tasks
