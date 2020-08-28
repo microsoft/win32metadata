@@ -5,7 +5,7 @@ param
     $artifactsDir,
 
     [string]
-    $version = "10.0.18362.3-preview",
+    $pipelineRunName = "18362.3.preview.200826-1800",
 
     [bool]
     $downloadDefaultCppNugets = $true
@@ -48,6 +48,13 @@ if (!$artifactsDir)
     $artifactsDir = Join-Path -Path $env:TEMP "win32metdata_artifacts"
     Create-Directory $artifactsDir
 }
+
+$parts = $pipelineRunName.Split("{.}")
+$build = $parts[0]
+$qfe = $parts[1]
+$branch = $parts[2]
+$version = "10.0.$build.$qfe-$branch"
+Write-Host "NuGet package version: $version"
 
 $nugetSrcPackagesDir = Join-Path -Path $artifactsDir "NuGetPackages"
 Create-Directory $nugetSrcPackagesDir
