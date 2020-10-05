@@ -14,12 +14,9 @@
     <licenseUrl>https://aka.ms/WinSDKPreviewLicenseURL</licenseUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <iconUrl>https://aka.ms/WinSDKIconURL</iconUrl>
-    <dependencies>
-      <group targetFramework="netstandard2.0" />
-    </dependencies>
   </metadata>
 
   <files>
-    <file src="Win32MetadataLib\bin\Release\netstandard2.0\Win32MetadataLib.dll" target="lib\netstandard2.0\Win32MetadataLib.dll"/>
+    <file src="Win32MetadataLib\bin\Release\netstandard2.0\Win32MetadataLib.dll" target="content\Win32MetadataLib.dll"/>
   </files>
 </package>

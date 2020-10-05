@@ -616,7 +616,7 @@ namespace Microsoft.Windows.Sdk
     public partial struct _DEV_QUERY_RESULT_ACTION_DATA
     {
         [NativeTypeName("DEV_QUERY_RESULT_ACTION")]
-        public _DEV_QUERY_RESULT_ACTION Action;
+        public DEV_QUERY_RESULT_ACTION Action;
 
         [NativeTypeName("union _DEV_QUERY_RESULT_UPDATE_PAYLOAD")]
         public _DEV_QUERY_RESULT_UPDATE_PAYLOAD Data;
@@ -626,81 +626,19 @@ namespace Microsoft.Windows.Sdk
         {
             [FieldOffset(0)]
             [NativeTypeName("DEV_QUERY_STATE")]
-            public _DEV_QUERY_STATE State;
+            public DEV_QUERY_STATE State;
 
             [FieldOffset(0)]
             [NativeTypeName("DEV_OBJECT")]
-            public _DEV_OBJECT DeviceObject;
+            public DEV_OBJECT DeviceObject;
         }
     }
 
-    public unsafe partial struct _DNS_CONNECTION_PROXY_INFO
-    {
-        [NativeTypeName("DWORD")]
-        public uint Version;
-
-        [NativeTypeName("WCHAR *")]
-        public ushort* pwszFriendlyName;
-
-        [NativeTypeName("DWORD")]
-        public uint Flags;
-
-        [NativeTypeName("DNS_CONNECTION_PROXY_INFO_SWITCH")]
-        public _DNS_CONNECTION_PROXY_INFO_SWITCH Switch;
-
-        [NativeTypeName("_DNS_CONNECTION_PROXY_INFO::(anonymous union at C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/um/windns.h:2556:5)")]
-        public _Anonymous_e__Union Anonymous;
-
-        [StructLayout(LayoutKind.Explicit)]
-        public partial struct _Anonymous_e__Union
-        {
-            [FieldOffset(0)]
-            [NativeTypeName("struct _DNS_CONNECTION_PROXY_INFO_CONFIG")]
-            public _DNS_CONNECTION_PROXY_INFO_CONFIG Config;
-
-            [FieldOffset(0)]
-            [NativeTypeName("struct _DNS_CONNECTION_PROXY_INFO_SCRIPT")]
-            public _DNS_CONNECTION_PROXY_INFO_SCRIPT Script;
-
-            public unsafe partial struct _DNS_CONNECTION_PROXY_INFO_CONFIG
-            {
-                [NativeTypeName("WCHAR *")]
-                public ushort* pwszServer;
-
-                [NativeTypeName("WCHAR *")]
-                public ushort* pwszUsername;
-
-                [NativeTypeName("WCHAR *")]
-                public ushort* pwszPassword;
-
-                [NativeTypeName("WCHAR *")]
-                public ushort* pwszException;
-
-                [NativeTypeName("WCHAR *")]
-                public ushort* pwszExtraInfo;
-
-                [NativeTypeName("WORD")]
-                public ushort Port;
-            }
-
-            public unsafe partial struct _DNS_CONNECTION_PROXY_INFO_SCRIPT
-            {
-                [NativeTypeName("WCHAR *")]
-                public ushort* pwszScript;
-
-                [NativeTypeName("WCHAR *")]
-                public ushort* pwszUsername;
-
-                [NativeTypeName("WCHAR *")]
-                public ushort* pwszPassword;
-            }
-        }
-    }
-
+    
     public partial struct EVENT_PROPERTY_INFO
     {
         [NativeTypeName("PROPERTY_FLAGS")]
-        public _PROPERTY_FLAGS Flags;
+        public PROPERTY_FLAGS Flags;
 
         [NativeTypeName("ULONG")]
         public uint NameOffset;
@@ -828,7 +766,7 @@ namespace Microsoft.Windows.Sdk
     public unsafe partial struct MIDL_STUB_MESSAGE
     {
         [NativeTypeName("PRPC_MESSAGE")]
-        public _RPC_MESSAGE* RpcMsg;
+        public RPC_MESSAGE* RpcMsg;
 
         [NativeTypeName("unsigned char *")]
         public byte* Buffer;
@@ -910,10 +848,10 @@ namespace Microsoft.Windows.Sdk
         public void* SavedHandle;
 
         [NativeTypeName("const struct _MIDL_STUB_DESC *")]
-        public _MIDL_STUB_DESC* StubDesc;
+        public MIDL_STUB_DESC* StubDesc;
 
         [NativeTypeName("struct _FULL_PTR_XLAT_TABLES *")]
-        public _FULL_PTR_XLAT_TABLES* FullPtrXlatTables;
+        public FULL_PTR_XLAT_TABLES* FullPtrXlatTables;
 
         [NativeTypeName("unsigned long")]
         public uint FullPtrRefId;

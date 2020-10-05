@@ -20,6 +20,7 @@ log-visited-funcs-with-lib-path
 log-visited-files
 log-exclusions
 exclude-anonymous-field-helpers
+log-potential-typedef-remappings
 --headerFile
 D:\repos\win32metadata\generation\header.txt
 --include-directory
@@ -54,8 +55,6 @@ _SCONTEXT_QUEUE
 CABINETSTATE
 SHELLFLAGSTATE
 _ImageArchitectureHeader
-_DEV_QUERY_RESULT_ACTION_DATA
-_DNS_CONNECTION_PROXY_INFO
 _EVENT_PROPERTY_INFO
 RoGetServerActivatableClasses
 _MIDL_STUB_MESSAGE

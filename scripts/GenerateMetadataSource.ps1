@@ -137,4 +137,7 @@ Write-Host "Calling: $toolsDir\ClangSharpPInvokeGenerator.exe @$generateDir\rema
 $missedFuncsOutput = Join-Path -Path $generationOutArtifactsDir -ChildPath "missedfuncs.output.txt"
 & $PSScriptRoot\CheckMissedFuncs.ps1 -generatorResults $generatorOutput -mappingFile $libMappingOutputFileName -missedFuncsFile $missedFuncsOutput
 
+$possibleRemapsOutput = Join-Path -Path $generationOutArtifactsDir -ChildPath "possibleremaps.output.txt"
+& $PSScriptRoot\DisplayPossibleMappings.ps1 -generatorResults $generatorOutput -remapsFile $possibleRemapsOutput
+
 exit 0
