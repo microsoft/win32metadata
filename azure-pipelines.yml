@@ -8,13 +8,17 @@ trigger: none
 pr: none
 
 pool:
-  name: Package ES Lab E
-
+  name: Package ES Standard Build
+  demands:
+  - msbuild
+  - visualstudio
+  - visualstudio -equals C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\
+  
 resources:
   pipelines:
     - pipeline: winsdk
       source: WinSDK Nuget
-      #version: 20205.1000.rs_onecore_dep.200827-1730
+      version: 20241.1003.rs_onecore_dep.201018-1750
       trigger:
         branches:
         - master
@@ -69,14 +73,34 @@ steps:
   displayName: Build metadata binary
   inputs:
     filePath: 'scripts\BuildMetadataBin.ps1'
-    arguments: '-version $(resources.pipeline.winsdk.runID)'
+
+- task: PowerShell@2
+  displayName: Build csWin32 projected binary
+  inputs:
+    filePath: 'scripts\BuildCsWin32Projection.ps1'
+
+- task: PowerShell@2
+  displayName: Build sample C# app that uses Win32 projection
+  inputs:
+    filePath: 'scripts\BuildSampleCsWin32App.ps1'
 
   # There's a problem on microsoft.visualstudio.com that requires the guid instead of NuGetCommand@2
 - task: 333b11bd-d341-40d9-afcf-b32d5ce6f23b@2
-  displayName: Pack nuget package
+  displayName: Pack metadata nuget package
   inputs:
     command: 'pack'
     packagesToPack: 'sources\nuget\Microsoft.Windows.SDK.Win32Metadata\Microsoft.Windows.SDK.Win32Metadata.nuspec'
+    packDestination: '$(OutputPackagesDir)'
+    versioningScheme: 'byEnvVar'
+    versionEnvVar: 'PrepOutput.NugetVersion'
+    basePath: 'sources'
+
+  # There's a problem on microsoft.visualstudio.com that requires the guid instead of NuGetCommand@2
+- task: 333b11bd-d341-40d9-afcf-b32d5ce6f23b@2
+  displayName: Pack CsWin32 nuget package
+  inputs:
+    command: 'pack'
+    packagesToPack: 'sources\nuget\Microsoft.Windows.SDK.Win32\Microsoft.Windows.SDK.Win32.nuspec'
     packDestination: '$(OutputPackagesDir)'
     versioningScheme: 'byEnvVar'
     versionEnvVar: 'PrepOutput.NugetVersion'
