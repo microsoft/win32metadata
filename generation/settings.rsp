@@ -101,3 +101,5 @@ _MF_Plugin_Type
 Windows::Foundation::Diagnostics::RoErrorReportingFlags
 ABI::Windows::Foundation::Diagnostics::RoErrorReportingFlags
 JS_SOURCE_CONTEXT_NONE
+PerceptionDeviceSetCreateFactoryOverride
+_ARM64EC_NT_CONTEXT
