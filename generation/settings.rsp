@@ -27,6 +27,7 @@ D:\repos\win32metadata\generation\header.txt
 D:\repos\win32metadata\generation
 C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/shared
 C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/um
+C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/winrt
 --traverse
 C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/shared/*
 C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/shared/ndis/*
@@ -34,6 +35,10 @@ C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/um/*
 C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/winrt/inspectable.h
 C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/winrt/roparameterizediid.h
 C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/winrt/roapi.h
+C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/winrt/robuffer.h
+C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/winrt/roerrorapi.h
+C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/winrt/rometadataresolution.h
+C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/winrt/roparameterizediid.h
 C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/winrt/hstring.h
 C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/winrt/winstring.h
 C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/winrt/activation.h
@@ -88,3 +93,11 @@ _Lock_kind_event_
 _Lock_kind_semaphore_
 _Lock_kind_spin_lock_
 _Lock_kind_critical_section_
+PfnRecoCallback
+_DHCP_ALL_OPTIONS
+_DHCP_ALL_OPTION_VALUES_PB
+_DHCP_ALL_OPTION_VALUES
+_MF_Plugin_Type
+Windows::Foundation::Diagnostics::RoErrorReportingFlags
+ABI::Windows::Foundation::Diagnostics::RoErrorReportingFlags
+JS_SOURCE_CONTEXT_NONE

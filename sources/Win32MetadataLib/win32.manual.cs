@@ -3288,4 +3288,134 @@ namespace Microsoft.Windows.Sdk
             }
         }
     }
+
+    // Because this gets emitted twice from recapis.h
+    [UnmanagedFunctionPointer(CallingConvention.Winapi)]
+    [return: NativeTypeName("HRESULT")]
+    public unsafe delegate int PfnRecoCallback([NativeTypeName("DWORD")] uint param0, [NativeTypeName("LPBYTE")] byte* param1, [NativeTypeName("HRECOCONTEXT")] HRECOCONTEXT__* param2);
+
+    // Because emitted type for _Anonymous_e__Struct was wrong
+    public unsafe partial struct DHCP_ALL_OPTIONS
+    {
+        [NativeTypeName("DWORD")]
+        public uint Flags;
+
+        [NativeTypeName("LPDHCP_OPTION_ARRAY")]
+        public DHCP_OPTION_ARRAY* NonVendorOptions;
+
+        [NativeTypeName("DWORD")]
+        public uint NumVendorOptions;
+
+        [NativeTypeName("struct (anonymous struct at C:/Users/sotte/AppData/Local/Temp/win32metdata_artifacts/InstalledPackages/Microsoft.Windows.SDK.CPP.10.0.18362.3-preview/c/Include/10.0.18362.0/um/dhcpsapi.h:1229:5) *")]
+        public _Anonymous_e__Struct* VendorOptions;
+
+        public unsafe partial struct _Anonymous_e__Struct
+        {
+            public DHCP_OPTION Option;
+
+            [NativeTypeName("LPWSTR")]
+            public ushort* VendorName;
+
+            [NativeTypeName("LPWSTR")]
+            public ushort* ClassName;
+        }
+    }
+
+    // Because emitted type for _Anonymous_e__Struct was wrong
+    public unsafe partial struct DHCP_ALL_OPTION_VALUES_PB
+    {
+        [NativeTypeName("DWORD")]
+        public uint Flags;
+
+        [NativeTypeName("DWORD")]
+        public uint NumElements;
+
+        [NativeTypeName("struct (anonymous struct at C:/Users/sotte/AppData/Local/Temp/win32metdata_artifacts/InstalledPackages/Microsoft.Windows.SDK.CPP.10.0.18362.3-preview/c/Include/10.0.18362.0/um/dhcpsapi.h:1260:5) *")]
+        public _Anonymous_e__Struct* Options;
+
+        public unsafe partial struct _Anonymous_e__Struct
+        {
+            [NativeTypeName("LPWSTR")]
+            public ushort* PolicyName;
+
+            [NativeTypeName("LPWSTR")]
+            public ushort* VendorName;
+
+            [NativeTypeName("BOOL")]
+            public int IsVendor;
+
+            [NativeTypeName("LPDHCP_OPTION_VALUE_ARRAY")]
+            public DHCP_OPTION_VALUE_ARRAY* OptionsArray;
+        }
+    }
+
+    // Because emitted type for _Anonymous_e__Struct was wrong
+    public unsafe partial struct DHCP_ALL_OPTION_VALUES
+    {
+        [NativeTypeName("DWORD")]
+        public uint Flags;
+
+        [NativeTypeName("DWORD")]
+        public uint NumElements;
+
+        [NativeTypeName("struct (anonymous struct at C:/Users/sotte/AppData/Local/Temp/win32metdata_artifacts/InstalledPackages/Microsoft.Windows.SDK.CPP.10.0.18362.3-preview/c/Include/10.0.18362.0/um/dhcpsapi.h:1243:5) *")]
+        public _Anonymous_e__Struct* Options;
+
+        public unsafe partial struct _Anonymous_e__Struct
+        {
+            [NativeTypeName("LPWSTR")]
+            public ushort* ClassName;
+
+            [NativeTypeName("LPWSTR")]
+            public ushort* VendorName;
+
+            [NativeTypeName("BOOL")]
+            public int IsVendor;
+
+            [NativeTypeName("LPDHCP_OPTION_VALUE_ARRAY")]
+            public DHCP_OPTION_VALUE_ARRAY* OptionsArray;
+        }
+    }
+
+    // Because emits this: MF_Plugin_Type_Other = unchecked((uint)(-1)), and enum is int
+    public enum MF_Plugin_Type
+    {
+        MF_Plugin_Type_MFT = 0,
+        MF_Plugin_Type_MediaSource = 1,
+        MF_Plugin_Type_MFT_MatchOutputType = 2,
+        MF_Plugin_Type_Other = -1,
+    }
+
+    [Flags]
+    public enum ProcessAccessRights : uint
+    {
+        Terminate = (0x0001),
+        CreateThread = (0x0002),
+        SetSessionid = (0x0004),
+        VmOperation = (0x0008),
+        VmRead = (0x0010),
+        VmWrite = (0x0020),
+        DupHandle = (0x0040),
+        CreateProcess = (0x0080),
+        SetQuota = (0x0100),
+        SetInformation = (0x0200),
+        QueryInformation = (0x0400),
+        SuspendResume = (0x0800),
+        QueryLimitedInformation = (0x1000),
+        SetLimitedInformation = (0x2000),
+        AllAccess = (StandardRightsRequired | Synchronize | 0xFFFF),
+        Delete = (0x00010000),
+        ReadControl = (0x00020000),
+        WriteDac = (0x00040000),
+        WriteOwner = (0x00080000),
+        Synchronize = (0x00100000),
+        StandardRightsRequired = (0x000F0000)
+    }
+
+    public static unsafe partial class Apis
+    {
+        // Not allowed because UIntPtr can't be const
+        //[NativeTypeName("const JsSourceContext")]
+        //public const UIntPtr JS_SOURCE_CONTEXT_NONE = new UIntPtr(-1);
+    }
 }

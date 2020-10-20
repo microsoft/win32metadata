@@ -353,3 +353,6 @@ MigrationBackup/
 !generation/*.rsp
 /scripts/sources/Win32MetadataLib/win32.cs
 /sources/Win32MetadataLib/win32.cs
+/sources/CsWin32ProjectionLib/RiaaSafeHandles.cs
+/sources/CsWin32ProjectionLib/ProjectedWin32.cs
+/sources/CsWin32/Properties/launchSettings.json

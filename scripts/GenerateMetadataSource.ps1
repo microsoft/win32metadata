@@ -114,7 +114,7 @@ Create-Directory $generationOutArtifactsDir
 $libMappingOutputFileName = Join-Path -Path $generationOutArtifactsDir -ChildPath "libMappings.rsp"
 
 Write-Host "Creating lib mapping file: $libMappingOutputFileName"
-$onecoreLibPath = "$nugetDestPackagesDir\Microsoft.Windows.SDK.CPP.x64.$version\c\um\x64\OneCore.lib"
+$onecoreLibPath = "$nugetDestPackagesDir\Microsoft.Windows.SDK.CPP.x64.$version\c\um\x64\OneCoreUap.lib"
 & $PSScriptRoot\CreateProcLibMapping.ps1 -onecoreLibPath $onecoreLibPath -outputFileName $libMappingOutputFileName
 
 $repoRoot = [System.IO.Path]::GetFullPath("$PSScriptRoot\..")
@@ -135,7 +135,8 @@ Write-Host "Calling: $toolsDir\ClangSharpPInvokeGenerator.exe @$generateDir\rema
 & $toolsDir\ClangSharpPInvokeGenerator.exe "@$generateDir\remap.rsp" "@$fixedSettingsRsp" "@$libMappingOutputFileName" 2>&1 > $generatorOutput
 
 $missedFuncsOutput = Join-Path -Path $generationOutArtifactsDir -ChildPath "missedfuncs.output.txt"
-& $PSScriptRoot\CheckMissedFuncs.ps1 -generatorResults $generatorOutput -mappingFile $libMappingOutputFileName -missedFuncsFile $missedFuncsOutput
+$visitedFuncsOutput = Join-Path -Path $generationOutArtifactsDir -ChildPath "visitedfuncs.output.txt"
+& $PSScriptRoot\CheckMissedFuncs.ps1 -generatorResults $generatorOutput -mappingFile $libMappingOutputFileName -visitedFuncsFile $visitedFuncsOutput -missedFuncsFile $missedFuncsOutput
 
 $possibleRemapsOutput = Join-Path -Path $generationOutArtifactsDir -ChildPath "possibleremaps.output.txt"
 & $PSScriptRoot\DisplayPossibleMappings.ps1 -generatorResults $generatorOutput -remapsFile $possibleRemapsOutput

@@ -11,6 +11,10 @@ param
 
     [Parameter(Mandatory=$true)]
     [string]
+    $visitedFuncsFile,
+
+    [Parameter(Mandatory=$true)]
+    [string]
     $missedFuncsFile
 )
 
@@ -29,10 +33,14 @@ $onecoreFuncsCount = $onecoreFuncs.Count
 $txtGenResults = Get-Content -path $generatorResults -Raw
 $patternFuncVisited = [Regex]::new('Func with lib path visited: ([^\s]+)')
 $funcVisitedMatches = $patternFuncVisited.Matches($txtGenResults)
+
+$stream = [System.IO.StreamWriter] $visitedFuncsFile
 foreach ($match in $funcVisitedMatches)
 {
-    $ret = $onecoreFuncs.Remove($match.Groups[1].Value)
+    $funcName = $match.Groups[1].Value
+    $ret = $onecoreFuncs.Remove($funcName)
 }
+$stream.Close()
 
 $onecoreFuncsNotVisitedCount = $onecoreFuncs.Count
 $onecoreFuncsVisitedCount = $onecoreFuncsCount - $onecoreFuncsNotVisitedCount

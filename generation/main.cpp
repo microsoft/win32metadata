@@ -1,6 +1,8 @@
 #define _WINSOCKAPI_
 #define SECURITY_WIN32
 
+#define QCC_OS_GROUP_WINDOWS
+
 #include <windows.h>
 #include <sdkddkver.h>
 
@@ -129,6 +131,89 @@
 #include <rpcssl.h>
 #include <ShObjIdl_core.h>
 #include <statehelpers.h>
+#include <webservices.h>
+//#include <minidumpapiset.h>
+#include <rtlsupportapi.h>
+#include <expandedresources.h>
+#include <gamingtcui.h>
+#include <jsrt.h>
+#include <jsrt9.h>
+//#include <DispatcherQueue.h>
+#include <DhcpCSdk.h>
+#include <dhcpsapi.h>
+#include <madcapcl.h>
+#include <Dhcpv6cSdk.h>
+#include <DirectML.h>
+#include <WinDNS.h>
+#include <DSRole.h>
+#include <esent.h>
+#include <wlanapi.h>
+#include <UIAutomationClient.h>
+#include <UIAutomationCoreApi.h>
+#include <hidsdi.h>
+#include <hidpi.h>
+#include <xapo.h>
+#include <hrtfapoapi.h>
+#include <icu.h>
+#include <icucommon.h>
+#include <icui18n.h>
+#include <recapis.h>
+#include <iphlpapi.h>
+#include <errhandlingapi.h>
+#include <mfidl.h>
+#include <wmcontainer.h>
+#include <functiondiscoveryprovider.h>
+#include <mfapi.h>
+#include <mfidl.h>
+#include <mfobjects.h>
+#include <mfreadwrite.h>
+#include <mmdeviceapi.h>
+#include <alljoyn_c\AboutData.h>
+#include <alljoyn_c\AboutObj.h>
+#include <alljoyn_c\AboutObjectDescription.h>
+#include <alljoyn_c\AboutProxy.h>
+#include <alljoyn_c\ApplicationStateListener.h>
+#include <alljoyn_c\AuthListener.h>
+#include <alljoyn_c\AutoPinger.h>
+#include <alljoyn_c\BusAttachment.h>
+#include <alljoyn_c\BusListener.h>
+#include <alljoyn_c\BusObject.h>
+#include <alljoyn_c\version.h>
+#include <alljoyn_c\Init.h>
+#include <alljoyn_c\InterfaceDescription.h>
+#include <alljoyn_c\KeyStoreListener.h>
+#include <alljoyn_c\Message.h>
+#include <alljoyn_c\MsgArg.h>
+#include <alljoyn_c\Observer.h>
+#include <alljoyn_c\PermissionConfigurationListener.h>
+#include <alljoyn_c\PermissionConfigurator.h>
+#include <alljoyn_c\AutoPinger.h>
+#include <alljoyn_c\ProxyBusObject.h>
+#include <alljoyn_c\SecurityApplicationProxy.h>
+#include <alljoyn_c\SessionListener.h>
+#include <alljoyn_c\Session.h>
+
+#include <alljoyn_c\AjAPI.h>
+#include <MSAJTransport.h>
+#include <Icm.h>
+#include <compstui.h>
+#include <winddiui.h>
+#include <printoem.h>
+//#include <RpcProxy.h>
+#include <PerceptionDevice.h>
+#include <propvarutil.h>
+#include <DbgHelp.h>
+#include <UIAutomationCoreApi.h>
+#include <webauthn.h>
+#include <MLOperatorAuthor.h>
+#include <socketapi.h>
+#include <wincodec.h>
+#include <wincodecsdk.h>
+#include <winsafer.h>
+#include <wlanapi.h>
+#include <WS2spi.h>
+#include <xaudio2fx.h>
+#include <xaudio2.h>
 
 #if 0
 typedef struct IRpcStubBufferVtbl
@@ -225,39 +310,3 @@ typedef struct IPSFactoryBufferVtbl
 #include <RpcProxy.h>
 #endif
 
-//typedef struct _IO_STATUS_BLOCK {
-//#pragma warning(push)
-//#pragma warning(disable: 4201) // we'll always use the Microsoft compiler
-//    union {
-//        NTSTATUS Status;
-//        PVOID Pointer;
-//    } DUMMYUNIONNAME;
-//#pragma warning(pop)
-//
-//    ULONG_PTR Information;
-//} IO_STATUS_BLOCK, * PIO_STATUS_BLOCK;
-
-//#include <rimext.h>
-
-// This file won't compile! Has a mismatched brace
-//#include <minidumpapiset.h>
-
-/*
-typedef
-int
-FOO_ROUTINE(
-    int x,
-    int y);
-
-int Foo(int x, int y)
-{
-    return x + y;
-}
-
-int main()
-{
-    FOO_ROUTINE *pFn = &Foo;
-    int ret = (*pFn)(3, 4);
-    return ret;
-}
-*/
