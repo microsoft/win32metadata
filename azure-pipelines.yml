@@ -8,8 +8,12 @@ trigger: none
 pr: none
 
 pool:
-  name: Package ES Lab E
-
+  name: Package ES Custom Demands Lab A
+  demands:
+  - msbuild
+  - visualstudio
+  - visualstudio -equals C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\
+  
 resources:
   pipelines:
     - pipeline: winsdk
