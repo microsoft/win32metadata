@@ -3,7 +3,6 @@
 # Add steps that test and distribute an app, save build artifacts, and more:
 # https://aka.ms/yaml
 
-# name: Package ES Standard Lab
 trigger: none
 pr: none
 
@@ -18,7 +17,7 @@ resources:
   pipelines:
     - pipeline: winsdk
       source: WinSDK Nuget
-      version: 20241.1003.rs_onecore_dep.201018-1750
+      #version: 20241.1003.rs_onecore_dep.201018-1750
       trigger:
         branches:
         - master
