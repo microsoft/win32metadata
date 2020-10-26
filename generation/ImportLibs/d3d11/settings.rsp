@@ -18,7 +18,6 @@ C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/um/d3d11sdklayers.h
 C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/um/d3d11shader.h
 C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/um/d3d11shadertracing.h
 C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/um/d3dcommon.h
-C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/shared/d3dkmthk.h
 --exclude
 DWRITE_MAKE_FONT_AXIS_TAG
 DWRITE_FONT_AXIS_TAG
