@@ -73,6 +73,12 @@ steps:
   inputs:
     filePath: 'scripts\BuildMetadataBin.ps1'
 
+- task: PublishPipelineArtifact@1
+  displayName: 'Publish generated .cs files'
+  inputs:
+    targetPath: '$(Agent.BuildDirectory)\sources\Win32MetadataLib\generated'
+    artifact: GeneratedMetadataSource
+
 - task: PowerShell@2
   displayName: Build csWin32 projected binary
   inputs:
