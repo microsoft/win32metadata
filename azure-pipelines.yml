@@ -71,7 +71,7 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: Publish generated .cs files
   inputs:
-    PathtoPublish: '$(Agent.BuildDirectory)\sources\Win32MetadataLib\generated'
+    PathtoPublish: 'sources\Win32MetadataLib\generated'
     ArtifactName: GeneratedMetadataSource
     publishLocation: 'Container'
 
