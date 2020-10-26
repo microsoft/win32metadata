@@ -8,7 +8,10 @@ param
     $pipelineRunName = "18362.3.19h1_release.190318-1202",
 
     [bool]
-    $downloadDefaultCppNugets = $true
+    $downloadDefaultCppNugets = $true,
+
+    [string]
+    $qfeOverride = ""
 )
 
 . "$PSScriptRoot\CommonUtils.ps1"
@@ -90,8 +93,27 @@ if (!$version)
 $nugetSrcPackagesDir = Join-Path -Path $artifactsDir "NuGetPackages"
 Create-Directory $nugetSrcPackagesDir
 
+$publishNugetVersion = $version
+
+if ($qfeOverride -ne "")
+{
+    $buildParts = $version.Split("{.}")
+    $qfePart = $buildParts[3]
+    $qfeParts = $qfePart.Split("{-}")
+    $qfe = $qfeOverride
+    if ($qfeParts.Length -eq 2)
+    {
+        $qfeExtra = $qfeParts[1]
+        $qfe = "$qfe-$qfeExtra"
+    }
+    
+    $buildParts[3] = $qfe
+
+    $publishNugetVersion = [string]::Join(".", $buildParts)
+}
+
 # Write variable in the Azure DevOps pipeline for use in subsequent tasks
-Write-Host "##vso[task.setvariable variable=PrepOutput.NugetVersion;]$version"
+Write-Host "##vso[task.setvariable variable=PrepOutput.NugetVersion;]$publishNugetVersion"
 
 $x64Pkg = Get-ChildItem -path "$nugetSrcPackagesDir\Microsoft.Windows.SDK.CPP.x64.$version.nupkg"
 if (!$x64Pkg)
