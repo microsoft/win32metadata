@@ -15,12 +15,6 @@ param
 
 $toolsDir = [System.IO.Path]::GetFullPath("$PSScriptRoot\..\tools")
 
-if (!$artifactsDir)
-{
-    $artifactsDir = [System.IO.Path]::GetFullPath("$PSScriptRoot\..\artifacts")
-    Create-Directory $artifactsDir
-}
-
 $generationOutArtifactsDir = "$artifactsDir\output"
 Create-Directory $generationOutArtifactsDir
 
