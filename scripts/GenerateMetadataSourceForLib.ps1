@@ -22,6 +22,8 @@ $nugetDestPackagesDir = Join-Path -Path $artifactsDir "InstalledPackages"
 
 $libMappingOutputFileName = Join-Path -Path $generationOutArtifactsDir -ChildPath "$libName.libMappings.rsp"
 
+$stopwatch =  [system.diagnostics.stopwatch]::StartNew()
+
 Write-Host "Creating metadata source for $libName.lib..."
 if (!(Test-Path -Path $libMappingOutputFileName))
 {
@@ -61,3 +63,7 @@ $visitedFuncsOutput = Join-Path -Path $generationOutArtifactsDir -ChildPath "$li
 
 $possibleRemapsOutput = Join-Path -Path $generationOutArtifactsDir -ChildPath "$libName.possibleremaps.output.txt"
 & $PSScriptRoot\DisplayPossibleMappings.ps1 -generatorResults $generatorOutput -remapsFile $possibleRemapsOutput
+
+$stopwatch.Stop()
+$totalTime = $stopwatch.Elapsed.ToString("c")
+Write-Host "Took $totalTime"
