@@ -11,13 +11,7 @@ param
     $downloadDefaultCppNugets = $true
 )
 
-function Create-Directory([string[]] $Path) 
-{
-    if (!(Test-Path -Path $Path)) 
-    {
-        New-Item -Path $Path -Force -ItemType "Directory" | Out-Null
-    }
-}
+. "$PSScriptRoot\CommonUtils.ps1"
 
 function Download-Nupkg
 {
@@ -43,11 +37,15 @@ function Replace-Text
     Set-Content -path $path -Encoding UTF8 -value $content
 }
 
+$toolsDir = [System.IO.Path]::GetFullPath("$PSScriptRoot\..\tools")
+
 if (!$artifactsDir)
 {
-    $artifactsDir = Join-Path -Path $env:TEMP "win32metdata_artifacts"
+    $artifactsDir = [System.IO.Path]::GetFullPath("$PSScriptRoot\..\artifacts")
     Create-Directory $artifactsDir
 }
+
+Write-Host "Making sure cpp NuGet packages are installed..."
 
 $nugetSrcPackagesDir = Join-Path -Path $artifactsDir "NuGetPackages"
 Create-Directory $nugetSrcPackagesDir
@@ -102,43 +100,17 @@ if (!$x64Pkg)
     exit -1
 }
 
-$toolsDir = [System.IO.Path]::GetFullPath("$PSScriptRoot\..\tools")
-
 $nugetDestPackagesDir = Join-Path -Path $artifactsDir "InstalledPackages"
 Create-Directory $nugetDestPackagesDir
 & $toolsDir\nuget.exe install Microsoft.Windows.SDK.CPP.x64 -version $version -source $nugetSrcPackagesDir -OutputDirectory $nugetDestPackagesDir
 
-$generationOutArtifactsDir = "$artifactsDir\output"
-Create-Directory $generationOutArtifactsDir
+Write-Host "`n`nProcessing each supported lib name...`n"
 
-$libMappingOutputFileName = Join-Path -Path $generationOutArtifactsDir -ChildPath "libMappings.rsp"
-
-Write-Host "Creating lib mapping file: $libMappingOutputFileName"
-$onecoreLibPath = "$nugetDestPackagesDir\Microsoft.Windows.SDK.CPP.x64.$version\c\um\x64\OneCoreUap.lib"
-& $PSScriptRoot\CreateProcLibMapping.ps1 -onecoreLibPath $onecoreLibPath -outputFileName $libMappingOutputFileName
-
-$repoRoot = [System.IO.Path]::GetFullPath("$PSScriptRoot\..")
-
-$generateDir = "$repoRoot\generation"
-$generatorOutput = Join-Path -Path $generationOutArtifactsDir -ChildPath "generation.output.txt"
-
-Copy-Item "$generateDir\settings.rsp" -Destination $generationOutArtifactsDir
-$fixedSettingsRsp = Join-Path -Path $generationOutArtifactsDir -ChildPath "settings.rsp"
-
-$includePath = (Get-ChildItem -Path "$nugetDestPackagesDir\Microsoft.Windows.SDK.CPP.$version\c\Include").FullName.Replace('\', '/')
-[hashtable]$textToReplaceTable = @{ "C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0" = $includePath; "D:\repos\win32metadata" = $repoRoot }
-Replace-Text $fixedSettingsRsp $textToReplaceTable
-
-Write-Host "Creating metdata .cs file. Log output: $generatorOutput"
-Write-Host "Calling: $toolsDir\ClangSharpPInvokeGenerator.exe @$generateDir\remap.rsp @$fixedSettingsRsp @$libMappingOutputFileName 2>&1 > $generatorOutput"
-
-& $toolsDir\ClangSharpPInvokeGenerator.exe "@$generateDir\remap.rsp" "@$fixedSettingsRsp" "@$libMappingOutputFileName" 2>&1 > $generatorOutput
-
-$missedFuncsOutput = Join-Path -Path $generationOutArtifactsDir -ChildPath "missedfuncs.output.txt"
-$visitedFuncsOutput = Join-Path -Path $generationOutArtifactsDir -ChildPath "visitedfuncs.output.txt"
-& $PSScriptRoot\CheckMissedFuncs.ps1 -generatorResults $generatorOutput -mappingFile $libMappingOutputFileName -visitedFuncsFile $visitedFuncsOutput -missedFuncsFile $missedFuncsOutput
-
-$possibleRemapsOutput = Join-Path -Path $generationOutArtifactsDir -ChildPath "possibleremaps.output.txt"
-& $PSScriptRoot\DisplayPossibleMappings.ps1 -generatorResults $generatorOutput -remapsFile $possibleRemapsOutput
+$libNames = @("onecoreuap", "d3d11", "d3d12", "d3dcompiler")
+foreach ($libName in $libNames)
+{
+    & $PSScriptRoot\GenerateMetadataSourceForLib.ps1 -version $version -libName $libName -artfactsDir $artifactsDir
+    Write-Host
+}
 
 exit 0

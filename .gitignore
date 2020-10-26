@@ -77,7 +77,7 @@ StyleCopReport.xml
 *.ipdb
 *.pgc
 *.pgd
-*.rsp
+#*.rsp
 *.sbr
 *.tlb
 *.tli
@@ -358,3 +358,4 @@ MigrationBackup/
 /sources/CsWin32/Properties/launchSettings.json
 /winsdk/InstalledPackages
 /winsdk/output
+/sources/Win32MetadataLib/Generated

@@ -1,0 +1,19 @@
+--file
+generation\ImportLibs\d3d12\main.cpp
+--output
+D:\repos\win32metadata\sources\Win32MetadataLib\generated\d3d12.cs
+--include-directory
+generation
+generation\onecoreuap
+C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/shared
+C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/um
+C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/winrt
+--traverse
+C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/um/d3d12.h
+C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/um/d3d11on12.h
+C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/um/d3d12sdklayers.h
+C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/um/d3d12shader.h
+C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/um/d3d12video.h
+--exclude
+DWRITE_MAKE_FONT_AXIS_TAG
+DWRITE_FONT_AXIS_TAG

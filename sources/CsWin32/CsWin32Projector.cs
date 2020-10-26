@@ -5,10 +5,35 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace Microsoft.Windows.Sdk.CsWin32
 {
-    public class CsWin32Projector
+    public static class TypeExtensions
+    {
+        public static IEnumerable<FieldInfo> GetConstants(this Type type)
+        {
+            var fieldInfos = type.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy);
+
+            return fieldInfos.Where(fi => fi.IsLiteral && !fi.IsInitOnly);
+        }
+
+        public static IEnumerable<FieldInfo> GetReadonlyStatics(this Type type)
+        {
+            var fieldInfos = type.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy);
+
+            return fieldInfos.Where(fi => !fi.IsLiteral && fi.IsInitOnly);
+        }
+
+        //public static IEnumerable<T> GetConstantsValues<T>(this Type type) where T : class
+        //{
+        //    var fieldInfos = GetConstants(type);
+
+        //    return fieldInfos.Select(fi => fi.GetRawConstantValue() as T);
+        //}
+    }
+
+    public unsafe class CsWin32Projector
     {
         private StreamWriter writer;
         private Dictionary<string, string> riaaMappings = new Dictionary<string, string>();
@@ -42,7 +67,7 @@ namespace Microsoft.Windows.Sdk.CsWin32
         private static void GetMarshalAsInfo(IEnumerable<CustomAttributeData> customAttributes, bool forStruct, ref string typeName, out string marshalAsAttrText)
         {
             var marshalAsAttr = customAttributes.FirstOrDefault(c => c.AttributeType == typeof(MarshalAsAttribute));
-            marshalAsAttrText = null;
+            marshalAsAttrText = string.Empty;
             if (marshalAsAttr != null)
             {
                 var unmanagedTypeArg = marshalAsAttr.ConstructorArguments.FirstOrDefault(a => a.ArgumentType.Name == "UnmanagedType");
@@ -153,7 +178,7 @@ namespace Microsoft.Windows.Sdk.CsWin32
             }
         }
 
-        private void VisitType(Type type, int indent = 0)
+        private void VisitType(Type type, Type context, int indent = 0)
         {
             if (type.IsEnum)
             {
@@ -165,7 +190,7 @@ namespace Microsoft.Windows.Sdk.CsWin32
             }
             else if (type.BaseType == typeof(System.MulticastDelegate))
             {
-                this.VisitDelegate(type, indent);
+                this.VisitDelegate(type, context, indent);
             }
             else if (type.BaseType == typeof(System.Attribute))
             {
@@ -181,6 +206,148 @@ namespace Microsoft.Windows.Sdk.CsWin32
             }
         }
 
+        private void VisitConstant(FieldInfo fieldInfo, int indent)
+        {
+            string indentText = GetIndent(indent);
+
+            this.writer.WriteLine();
+
+            var value = fieldInfo.GetRawConstantValue();
+            this.writer.Write($"{indentText}public const {fieldInfo.FieldType.Name} {fieldInfo.Name} = ");
+            this.VisitStaticOrConstValue(value, fieldInfo);
+
+            this.writer.WriteLine($";");
+        }
+
+        private void VisitStaticOrConstValue(object valueObject, FieldInfo fieldInfo)
+        {
+            string fieldTypeName = FixTypeName(null, fieldInfo.FieldType.Name);
+
+            if (fieldInfo.FieldType == typeof(Guid))
+            {
+                this.writer.Write($"new Guid(\"{valueObject}\")");
+            }
+            else if (fieldInfo.FieldType == typeof(string))
+            {
+                this.writer.Write($"\"{valueObject}\"");
+            }
+            else
+            {
+                if (valueObject is System.Reflection.Pointer)
+                {
+                    void* pValue = System.Reflection.Pointer.Unbox(valueObject);
+                    if (pValue == null)
+                    {
+                        this.writer.Write("null");
+                    }
+                    else
+                    {
+                        IntPtr temp = new IntPtr(pValue);
+                        this.writer.Write(temp.ToString());
+                    }
+                }
+                else
+                {
+                    var fields = valueObject.GetType().GetFields().Where(f => !f.IsStatic).ToArray();
+                    if (fields.Length != 0)
+                    {
+                        this.writer.Write($" new {fieldTypeName} {{ ");
+                        bool first = true;
+                        foreach (var field in fields)
+                        {
+                            if (!first)
+                            {
+                                this.writer.Write(", ");
+                            }
+
+                            var fieldValue = field.GetValue(valueObject);
+                            this.writer.Write($"{field.Name} = ");
+                            this.VisitStaticOrConstValue(fieldValue, field);
+                            first = false;
+                        }
+
+                        this.writer.Write(" }");
+                    }
+                    else
+                    {
+                        var fieldType = fieldInfo.FieldType;
+                        if (fieldType.IsEnum)
+                        {
+                            this.writer.Write($"({fieldTypeName})({valueObject})");
+                        }
+                        else if (fieldType.IsValueType && !fieldType.IsPrimitive)
+                        {
+                            this.writer.Write($"new {fieldTypeName}()");
+                        }
+                        else
+                        {
+                            this.writer.Write(valueObject.ToString());
+                            if (fieldTypeName == "Single")
+                            {
+                                this.writer.Write("F");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void VisitReadonlyStatic(FieldInfo fieldInfo, int indent)
+        {
+            string indentText = GetIndent(indent);
+            string fieldType = FixTypeName(null, fieldInfo.FieldType.Name);
+            this.writer.WriteLine();
+            this.writer.Write($"{indentText}public static readonly {fieldType} {fieldInfo.Name} = ");
+
+            var value = fieldInfo.GetValue(null);
+            this.VisitStaticOrConstValue(value, fieldInfo);
+
+            this.writer.WriteLine($";");
+            //if (fieldInfo.FieldType == typeof(Guid))
+            //{
+            //    this.writer.WriteLine($"new Guid(\"{fieldInfo.GetValue(null)}\");");
+            //}
+            //else if (fieldInfo.FieldType == typeof(string))
+            //{
+            //    this.writer.WriteLine($"\"{fieldInfo.GetValue(null)}\";");
+            //}
+            //else
+            //{
+            //    string textValue = string.Empty;
+            //    if (value is System.Reflection.Pointer)
+            //    {
+            //        void* pValue = System.Reflection.Pointer.Unbox(value);
+            //        if (pValue == null)
+            //        {
+            //            textValue = "null";
+            //        }
+            //        else
+            //        {
+            //            IntPtr temp = new IntPtr(pValue);
+            //            textValue = temp.ToString();
+            //        }
+            //    }
+            //    else
+            //    {
+            //        var fields = value.GetType().GetFields();
+            //        if (fields.Length != 0)
+            //        {
+            //            this.writer.Write(" new {fieldType} { ");
+            //            foreach (var field in fields)
+            //            {
+            //                var fieldValue = field.GetValue(value);
+            //            }
+            //        }
+            //        else
+            //        {
+            //            textValue = value.ToString();
+            //        }
+            //    }
+
+            //    this.writer.WriteLine($"{textValue};");
+            //}
+        }
+
         private void VisitClass(Type type, int indent)
         {
             string indentText = GetIndent(indent);
@@ -192,6 +359,16 @@ namespace Microsoft.Windows.Sdk.CsWin32
             foreach (var method in type.GetMethods())
             {
                 this.VisitClassMethod(method, indent + 1);
+            }
+
+            foreach (var constant in type.GetConstants())
+            {
+                this.VisitConstant(constant, indent + 1);
+            }
+
+            foreach (var item in type.GetReadonlyStatics())
+            {
+                this.VisitReadonlyStatic(item, indent + 1);
             }
 
             this.writer.WriteLine(
@@ -219,7 +396,7 @@ namespace Microsoft.Windows.Win32
 
                 foreach (var type in this.metadataAssembly.GetExportedTypes())
                 {
-                    this.VisitType(type, 0);
+                    this.VisitType(type, null, 0);
                 }
 
                 this.writer.Write(
@@ -376,14 +553,85 @@ $@"
             }
         }
 
-        private void VisitMethod(string name, MethodInfo methodInfo, string intro, int indent)
+        private void EmitVtblCall(string name, MethodInfo methodInfo, int indent)
+        {
+            string fixedName = name.Substring(1);
+
+            if (fixedName == "GetCPUDescriptorHandleForHeapStart")
+            {
+            }
+
+            this.writer.WriteLine();
+            this.VisitMethod(fixedName, methodInfo, "public", indent, true);
+        }
+
+        private static bool IsReturnFixupNeeded(MethodInfo methodInfo)
+        {
+            var lastParam = methodInfo.GetParameters().LastOrDefault();
+            if (lastParam != null)
+            {
+                return lastParam.Name == "_result" && lastParam.ParameterType.Name == methodInfo.ReturnType.Name && lastParam.ParameterType.Name.EndsWith("*");
+            }
+
+            return false;
+        }
+
+        private void VisitMethod(string name, MethodInfo methodInfo, string intro, int indent, bool callDelegate = false)
         {
             string indentText = GetIndent(indent);
+            string indentText1 = GetIndent(indent + 1);
+            string indentText2 = GetIndent(indent + 2);
 
+            StringBuilder ending = new StringBuilder();
+            
             var retParam = methodInfo.ReturnParameter;
             var retType = FixTypeName(retParam.CustomAttributes, retParam.ParameterType.Name);
+            bool returnFixupNeeded = false;
+
+            if (callDelegate)
+            {
+                returnFixupNeeded = IsReturnFixupNeeded(methodInfo);
+                
+                // Get rid of the * at the end if we're doing a return fixup
+                if (returnFixupNeeded)
+                {
+                    retType = retType.Substring(0, retType.Length - 1);
+                }
+
+                Type interfaceType = methodInfo.DeclaringType.DeclaringType;
+                string interfaceName = interfaceType.Name;
+                string retText = retType == "void" ? string.Empty : "return ";
+
+                if (returnFixupNeeded)
+                {
+                    retText += "*";
+                }
+
+                ending = new StringBuilder(
+@$"{indentText}{{
+{indentText1}fixed ({interfaceName}* pThis = &this)
+{indentText1}{{
+");
+                if (returnFixupNeeded)
+                {
+                    ending.AppendLine(
+$"{indentText2}{retType} result;");
+                }
+
+                ending.Append(
+$"{indentText2}{retText}Marshal.GetDelegateForFunctionPointer<_{name}>(lpVtbl->{name})(");
+            }
+
+            // Needs to match GetType() but Length == 1 to account for pThis on the delegate
+            if (name == "GetType" && methodInfo.GetParameters().Length == 1)
+            {
+                intro = $"{intro} new";
+            }
+
             this.writer.Write($"{indentText}{intro} {retType} {name}(");
             var parameters = methodInfo.GetParameters();
+            bool firstParam = true;
+            bool firstDelegateCallParam = true;
             for (int i = 0; i < parameters.Length; i++)
             {
                 var param = parameters[i];
@@ -392,47 +640,105 @@ $@"
 
                 GetMarshalAsInfo(param.CustomAttributes, false, ref paramType, out string marshalAsAttrText);
 
-                if (marshalAsAttrText != null)
-                {
-                    this.writer.Write(marshalAsAttrText);
-                }
-
                 bool canUseRefOrOut = true;
                 if (paramType.StartsWith("void*") || paramType == "IntPtr" || paramType.Contains("[]"))
                 {
                     canUseRefOrOut = false;
                 }
 
+                string refOrOut = string.Empty;
                 if (canUseRefOrOut)
                 {
-                    string refOrOut = null;
                     if (!param.IsIn && param.IsOut && !param.IsOptional)
                     {
-                        refOrOut = "out";
+                        refOrOut = "out ";
                     }
                     else if (param.IsIn && param.IsOut && !param.IsOptional)
                     {
-                        refOrOut = "ref";
+                        refOrOut = "ref ";
                     }
 
-                    if (refOrOut != null)
+                    if (!string.IsNullOrEmpty(refOrOut))
                     {
                         paramType = RemovePointer(paramType);
-                        this.writer.Write($"{refOrOut} ");
+                        //prefix += $"{refOrOut} ";
+                        //this.writer.Write($"{refOrOut} ");
+
+                        //if (callDelegate)
+                        //{
+                        //    ending.Append($"{refOrOut} ");
+                        //}
                     }
                 }
 
-                this.writer.Write($"{paramType} {paramName}");
-                if (i != parameters.Length - 1)
+                // Pointer types can't have marshal as
+                if (paramType.Contains("*"))
                 {
-                    this.writer.Write(", ");
+                    marshalAsAttrText = string.Empty;
+                }
+
+                if (!(callDelegate && i == 0))
+                {
+                    if (!(returnFixupNeeded && i == parameters.Length - 1))
+                    {
+                        if (!firstParam)
+                        {
+                            this.writer.Write(", ");
+                        }
+
+                        this.writer.Write($"{marshalAsAttrText}{refOrOut}{paramType} {paramName}");
+                        firstParam = false;
+                    }
+                }
+
+                if (callDelegate)
+                {
+                    if (!firstDelegateCallParam)
+                    {
+                        ending.Append(", ");
+                    }
+
+                    if (returnFixupNeeded && i == parameters.Length - 1)
+                    {
+                        ending.Append("&result");
+                    }
+                    else
+                    {
+                        ending.Append($"{refOrOut}{paramName}");
+                    }
+
+                    firstDelegateCallParam = false;
                 }
             }
 
-            this.writer.WriteLine(");");
+            this.writer.Write(")");
+            if (callDelegate)
+            {
+                this.writer.WriteLine();
+                ending.Append(
+$@");
+{indentText1}}}
+{indentText}}}");
+
+                this.writer.WriteLine(ending.ToString());
+            }
+            else
+            {
+                this.writer.WriteLine(";");
+            }
         }
 
-        private void VisitDelegate(Type type, int indent)
+        private static bool HasVtbl(Type type)
+        {
+            if (type == null)
+            {
+                return false;
+            }
+
+            return type.GetField("lpVtbl") != null;
+        }
+
+        private void VisitDelegate(Type type, Type context, int indent)
         {
             if (indent == 0 && type.IsNested)
             {
@@ -456,8 +762,13 @@ $@"
             }
 
             var invokeMethod = type.GetMethod("Invoke");
-            string intro = $"public unsafe delegate";
+            string intro = context == null ? $"public unsafe delegate" : "public delegate";
             this.VisitMethod(type.Name, invokeMethod, intro, indent);
+
+            if (HasVtbl(context))
+            {
+                this.EmitVtblCall(type.Name, invokeMethod, indent);
+            }
         }
 
         private string FixTypeName(IEnumerable<CustomAttributeData> attributes, string name)
@@ -483,17 +794,20 @@ $@"
                 baseName = "void";
             }
 
-            var riaaFreeAttrData = attributes.FirstOrDefault(data => data.AttributeType == this.riaaFreeAttributeType);
-            if (riaaFreeAttrData != null)
+            if (attributes != null)
             {
-                var riaaFunction = riaaFreeAttrData.ConstructorArguments[0].Value.ToString();
-                if (!this.riaaMappings.TryGetValue(riaaFunction, out string safeHandleClassName))
+                var riaaFreeAttrData = attributes.FirstOrDefault(data => data.AttributeType == this.riaaFreeAttributeType);
+                if (riaaFreeAttrData != null)
                 {
-                    System.Console.WriteLine($"Error: no mapping found for RIAA fuction {riaaFunction}.");
-                }
-                else
-                {
-                    baseName = safeHandleClassName;
+                    var riaaFunction = riaaFreeAttrData.ConstructorArguments[0].Value.ToString();
+                    if (!this.riaaMappings.TryGetValue(riaaFunction, out string safeHandleClassName))
+                    {
+                        System.Console.WriteLine($"Error: no mapping found for RIAA fuction {riaaFunction}.");
+                    }
+                    else
+                    {
+                        baseName = safeHandleClassName;
+                    }
                 }
             }
 
@@ -528,9 +842,14 @@ $@"
             }
 
             GetMarshalAsInfo(field.CustomAttributes, true, ref typeName, out string marshalAsAttrText);
-            if (marshalAsAttrText != null)
+            if (!string.IsNullOrEmpty(marshalAsAttrText))
             {
                 this.writer.WriteLine($"{indentText}{marshalAsAttrText}");
+            }
+
+            if (fieldName == "GetType")
+            {
+                typeName = $"new {typeName}";
             }
 
             this.writer.WriteLine(
@@ -559,14 +878,18 @@ $@"{indentText}public {typeName} {fieldName};");
 $"{indentText}[StructLayout(LayoutKind.Explicit)]");
             }
 
-            var name = type.Name;
-            if (name == "LDT_ENTRY")
+            var guidAttrData = type.CustomAttributes.FirstOrDefault(c => c.AttributeType == typeof(GuidAttribute));
+            if (guidAttrData != null)
             {
-                name = "LDT_ENTRY";
+                var guid = guidAttrData.ConstructorArguments[0].Value.ToString();
+                this.writer.WriteLine(
+$"{indentText}[Guid(\"{guid}\")]");
             }
 
+            var name = type.Name;
+
             this.writer.Write(
-$@"{indentText}public unsafe struct {name}
+$@"{indentText}public unsafe partial struct {name}
 {indentText}{{
 ");
 
@@ -578,7 +901,7 @@ $@"{indentText}public unsafe struct {name}
 
             foreach (var nestedType in type.GetNestedTypes())
             {
-                this.VisitType(nestedType, indent + 1);
+                this.VisitType(nestedType, type, indent + 1);
             }
 
             this.writer.WriteLine(

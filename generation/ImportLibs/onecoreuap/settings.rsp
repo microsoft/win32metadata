@@ -1,30 +1,10 @@
 --file
-D:\repos\win32metadata\generation\main.cpp
+generation\ImportLibs\onecoreuap\main.cpp
 --output
-D:\repos\win32metadata\sources\Win32MetadataLib\win32.cs
---additional
--m32
--Wno-expansion-to-defined
--Wno-ignored-attributes
--Wno-ignored-pragma-intrinsic
--Wno-nonportable-include-path
--Wno-pragma-pack
--D_USE_DECLSPECS_FOR_SAL=1
--D_PREFAST_=1
--DWINAPI_FAMILY=WINAPI_FAMILY_DESKTOP_APP
---config
-exclude-funcs-without-lib-path
-explicit-vtbls
-compatible-codegen
-log-visited-funcs-with-lib-path
-log-visited-files
-log-exclusions
-exclude-anonymous-field-helpers
-log-potential-typedef-remappings
---headerFile
-D:\repos\win32metadata\generation\header.txt
+D:\repos\win32metadata\sources\Win32MetadataLib\generated\onecoreuap.cs
 --include-directory
-D:\repos\win32metadata\generation
+generation
+generation\onecoreuap
 C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/shared
 C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/um
 C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/winrt
@@ -43,14 +23,10 @@ C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/winrt/hstring.h
 C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/winrt/winstring.h
 C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/winrt/activation.h
 C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/winrt/shcore.h
-D:\repos\win32metadata\generation\main.cpp
---methodClassName
-Apis
---namespace
-Microsoft.Windows.Sdk
---with-callconv
-*=Winapi
+generation\ImportLibs\onecoreuap\main.cpp
 --exclude
+DWRITE_MAKE_FONT_AXIS_TAG
+DWRITE_FONT_AXIS_TAG
 _STORAGE_MEDIA_SERIAL_NUMBER_DATA
 _PERSISTENT_RESERVE_COMMAND
 _STREAM_INFORMATION_ENTRY

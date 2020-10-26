@@ -1,0 +1,2 @@
+--remap
+ID3D12Device2::GetCopyableFootprints:pLayouts=[IgnoreMarshalAs]

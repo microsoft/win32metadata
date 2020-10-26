@@ -3,16 +3,16 @@ param
 (
     [Parameter(Mandatory=$true)]
     [string]
-    $onecoreLibPath,
+    $libPath,
 
     [Parameter(Mandatory=$true)]
     [string]
     $outputFileName
 )
 
-if (!(Test-Path -path $onecoreLibPath))
+if (!(Test-Path -path $libPath))
 {
-    Write-Host "Error: Couldn't find $onecoreLibPath."
+    Write-Host "Error: Couldn't find $libPath."
     exit -1
 }
 
@@ -24,7 +24,7 @@ if (Test-Path -path $outputFileName)
 $headersFromDumpBinFileName = New-TemporaryFile
 
 $dumpbinPath = Join-Path -Path $PSScriptRoot -ChildPath "..\tools\dumpbin.exe"
-& $dumpbinPath -headers $onecoreLibPath > $headersFromDumpBinFileName
+& $dumpbinPath -headers $libPath > $headersFromDumpBinFileName
 
 $txtContent = Get-Content -path $headersFromDumpBinFileName -Raw
 

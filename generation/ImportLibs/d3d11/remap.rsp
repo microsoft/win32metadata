@@ -1,0 +1,2 @@
+--remap
+SetHandleInformation:dwFlags=HANDLE_FLAG_OPTIONS
