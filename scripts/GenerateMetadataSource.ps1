@@ -109,7 +109,7 @@ Write-Host "`n`nProcessing each supported lib name...`n"
 $libNames = @("onecoreuap", "d3d11", "d3d12", "d3dcompiler")
 foreach ($libName in $libNames)
 {
-    & $PSScriptRoot\GenerateMetadataSourceForLib.ps1 -version $version -libName $libName -artfactsDir $artifactsDir
+    & $PSScriptRoot\GenerateMetadataSourceForLib.ps1 -version $version -libName $libName -artifactsDir $artifactsDir
     Write-Host
 }
 
