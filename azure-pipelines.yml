@@ -58,7 +58,7 @@ steps:
   displayName: Generate Win32 metadata C# source
   inputs:
     filePath: 'scripts\GenerateMetadataSource.ps1'
-    arguments: '-artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0 -pipelineRunName $(resources.pipeline.winsdk.runName)'
+    arguments: '-artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0 -pipelineRunName $(resources.pipeline.winsdk.runName) -qfeOverride "$(QFEOverride)"'
     errorActionPreference: 'continue'
 
 - task: PublishBuildArtifacts@1
