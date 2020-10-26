@@ -435,7 +435,7 @@ namespace Microsoft.Windows.Win32
                     var methodInfo = apis.GetMethod(closeFunc);
                     if (methodInfo == null)
                     {
-                        System.Console.WriteLine("Error: could not find RIAA close function: {closeFunc}");
+                        System.Console.WriteLine($"Error: could not find RIAA close function: {closeFunc}");
                         continue;
                     }
 
