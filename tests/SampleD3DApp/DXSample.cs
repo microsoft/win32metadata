@@ -88,14 +88,14 @@ namespace SampleD3DApp
 
         // Helper function for acquiring the first available hardware adapter that supports the required Direct3D version.
         // If no such adapter can be found, returns null.
-        protected IDXGIAdapter* GetHardwareAdapter(IDXGIFactory1* pFactory)
+        protected ComPtr<IUnknown> GetHardwareAdapter(IDXGIFactory1* pFactory)
         {
-            IDXGIAdapter1* adapter;
+            ComPtr<IDXGIAdapter1> adapter;
 
             for (var adapterIndex = 0u; DXGI_ERROR_NOT_FOUND != pFactory->EnumAdapters1(adapterIndex, out adapter); ++adapterIndex)
             {
                 DXGI_ADAPTER_DESC1 desc;
-                _ = adapter->GetDesc1(out desc);
+                _ = adapter.Get()->GetDesc1(out desc);
 
                 if ((desc.Flags & (uint)DXGI_ADAPTER_FLAG.DXGI_ADAPTER_FLAG_SOFTWARE) != 0)
                 {
@@ -111,10 +111,10 @@ namespace SampleD3DApp
                     break;
                 }
 
-                adapter->Release();
+                adapter.Dispose();
             }
 
-            return (IDXGIAdapter*)adapter;
+            return new ComPtr<IUnknown>(adapter.Detach());
         }
 
         protected abstract bool SupportsRequiredDirect3DVersion(IDXGIAdapter1* adapter);

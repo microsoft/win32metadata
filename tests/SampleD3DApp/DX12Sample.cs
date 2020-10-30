@@ -15,7 +15,7 @@ namespace SampleD3DApp
         protected override unsafe bool SupportsRequiredDirect3DVersion(IDXGIAdapter1* adapter)
         {
             var iid = IID_ID3D12Device;
-            return SUCCEEDED(D3D12CreateDevice((IUnknown*)adapter, D3D_FEATURE_LEVEL_11_0, &iid, null));
+            return SUCCEEDED(D3D12CreateDevice((IUnknown*)adapter, D3D_FEATURE_LEVEL_11_0, &iid, out void* _));
         }
     }
 }

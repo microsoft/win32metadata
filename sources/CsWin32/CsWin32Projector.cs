@@ -24,13 +24,6 @@ namespace Microsoft.Windows.Sdk.CsWin32
 
             return fieldInfos.Where(fi => !fi.IsLiteral && fi.IsInitOnly);
         }
-
-        //public static IEnumerable<T> GetConstantsValues<T>(this Type type) where T : class
-        //{
-        //    var fieldInfos = GetConstants(type);
-
-        //    return fieldInfos.Select(fi => fi.GetRawConstantValue() as T);
-        //}
     }
 
     public unsafe class CsWin32Projector
@@ -121,7 +114,6 @@ namespace Microsoft.Windows.Sdk.CsWin32
                                 arraySubTypeText = $"UnmanagedType.{arraySubType}";
                             }
 
-                            //marshalAsAttrText = $"[MarshalAsAttribute(UnmanagedType.{unmanaged}, ArraySubType = {arraySubTypeText}, SizeParamIndex = {sizeParamIndex})]";
                             marshalAsAttrText = $"[MarshalAsAttribute(UnmanagedType.{unmanaged}, SizeParamIndex = {sizeParamIndex})]";
                         }
                     }
@@ -148,6 +140,29 @@ namespace Microsoft.Windows.Sdk.CsWin32
             }
 
             return type;
+        }
+
+        private static bool HasComOutPtrs(MethodInfo methodInfo)
+        {
+            foreach (var param in methodInfo.GetParameters())
+            {
+                if (param.CustomAttributes.Any(c => c.AttributeType.Name == "ComOutPtrAttribute"))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private static bool HasVtbl(Type type)
+        {
+            if (type == null)
+            {
+                return false;
+            }
+
+            return type.GetField("lpVtbl") != null;
         }
 
         private string FixParamOrFieldName(string name)
@@ -303,49 +318,6 @@ namespace Microsoft.Windows.Sdk.CsWin32
             this.VisitStaticOrConstValue(value, fieldInfo);
 
             this.writer.WriteLine($";");
-            //if (fieldInfo.FieldType == typeof(Guid))
-            //{
-            //    this.writer.WriteLine($"new Guid(\"{fieldInfo.GetValue(null)}\");");
-            //}
-            //else if (fieldInfo.FieldType == typeof(string))
-            //{
-            //    this.writer.WriteLine($"\"{fieldInfo.GetValue(null)}\";");
-            //}
-            //else
-            //{
-            //    string textValue = string.Empty;
-            //    if (value is System.Reflection.Pointer)
-            //    {
-            //        void* pValue = System.Reflection.Pointer.Unbox(value);
-            //        if (pValue == null)
-            //        {
-            //            textValue = "null";
-            //        }
-            //        else
-            //        {
-            //            IntPtr temp = new IntPtr(pValue);
-            //            textValue = temp.ToString();
-            //        }
-            //    }
-            //    else
-            //    {
-            //        var fields = value.GetType().GetFields();
-            //        if (fields.Length != 0)
-            //        {
-            //            this.writer.Write(" new {fieldType} { ");
-            //            foreach (var field in fields)
-            //            {
-            //                var fieldValue = field.GetValue(value);
-            //            }
-            //        }
-            //        else
-            //        {
-            //            textValue = value.ToString();
-            //        }
-            //    }
-
-            //    this.writer.WriteLine($"{textValue};");
-            //}
         }
 
         private void VisitClass(Type type, int indent)
@@ -549,11 +521,98 @@ $@"
                 this.writer.WriteLine($"{indentText}{dllImportAttrText}");
 
                 string intro = $"public static extern";
-                this.VisitMethod(methodInfo.Name, methodInfo, intro, indent);
+                this.VisitMethod(methodInfo.Name, methodInfo, intro, indent, out var functionEmitInfo);
+
+                if (HasComOutPtrs(methodInfo))
+                {
+                    this.writer.WriteLine();
+                    this.EmitFunctionCall(methodInfo.Name, functionEmitInfo, "public static", indent, null);
+                }
             }
         }
 
-        private void EmitVtblCall(string name, MethodInfo methodInfo, int indent)
+        private void EmitFunctionCall(string name, FunctionEmitInfo functionEmitInfo, string intro, int indent, string vtblInterfaceName)
+        {
+            bool usesGenericType = functionEmitInfo.Params.Any(p => p.FriendlyType.Contains("<T>"));
+            bool fixupNeeded = functionEmitInfo.FixupNeeded;
+
+            string indentText = GetIndent(indent);
+            string paramsTxt = functionEmitInfo.EmitParamsForSignature(true, true);
+            if (name == "GetType" && (vtblInterfaceName != null && functionEmitInfo.Params.Count == 1))
+            {
+                intro = $"{intro} new";
+            }
+
+            string returnType = functionEmitInfo.ReturnType;
+            if (fixupNeeded)
+            {
+                returnType = RemovePointer(returnType);
+            }
+
+            this.writer.Write($"{indentText}{intro} {returnType} {name}");
+            if (usesGenericType)
+            {
+                this.writer.Write("<T>");
+            }
+
+            this.writer.Write($"({paramsTxt})");
+            if (usesGenericType)
+            {
+                this.writer.Write("  where T : unmanaged");
+            }
+            this.writer.WriteLine();
+
+            this.writer.WriteLine($"{indentText}{{");
+
+            string indentText1 = GetIndent(indent + 1);
+            bool returnNeeded = functionEmitInfo.ReturnType != "void";
+            string retEQ = string.Empty;
+            if (returnNeeded)
+            {
+                this.writer.WriteLine($"{indentText1}{returnType} __result__;");
+                retEQ = "__result__ = ";
+                if (fixupNeeded)
+                {
+                    retEQ += "*";
+                }
+            }
+
+            var comParams = functionEmitInfo.Params.Where(p => p.IsComPtr);
+            foreach (var comParam in comParams)
+            {
+                this.writer.WriteLine($"{indentText1}{comParam.Type} {comParam.Name}Raw;");
+            }
+
+            if (vtblInterfaceName != null)
+            {
+                this.writer.WriteLine($"{indentText1}fixed ({vtblInterfaceName}* pThis = &this)");
+                this.writer.WriteLine($"{indentText1}{{");
+
+                string indentText2 = GetIndent(indent + 2);
+                string paramText = functionEmitInfo.EmitParamsForCall(true);
+                this.writer.WriteLine($"{indentText2}{retEQ}Marshal.GetDelegateForFunctionPointer<_{name}>(lpVtbl->{name})({paramText});");
+                this.writer.WriteLine($"{indentText1}}}");
+            }
+            else
+            {
+                string paramText = functionEmitInfo.EmitParamsForCall(true);
+                this.writer.WriteLine($"{indentText1}{retEQ}{name}({paramText});");
+            }
+
+            foreach (var comParam in comParams)
+            {
+                this.writer.WriteLine($"{indentText1}{comParam.Name} = new {comParam.FriendlyType}({comParam.Name}Raw);");
+            }
+
+            if (returnNeeded)
+            {
+                this.writer.WriteLine($"{indentText1}return __result__;");
+            }
+
+            this.writer.WriteLine($"{indentText}}}");
+        }
+
+        private void EmitVtblCall(string name, FunctionEmitInfo functionEmitInfo, int indent)
         {
             string fixedName = name.Substring(1);
 
@@ -561,181 +620,209 @@ $@"
             {
             }
 
+            string interfaceName = RemovePointer(functionEmitInfo.Params[0].Type);
+
             this.writer.WriteLine();
-            this.VisitMethod(fixedName, methodInfo, "public", indent, true);
+            this.EmitFunctionCall(fixedName, functionEmitInfo, "public", indent, interfaceName);
         }
 
-        private static bool IsReturnFixupNeeded(MethodInfo methodInfo)
+        private class FunctionEmitInfo
         {
-            var lastParam = methodInfo.GetParameters().LastOrDefault();
-            if (lastParam != null)
+            public string ReturnType { get; set; }
+
+            public List<ParameterEmitInfo> Params { get; set; }
+
+            public string EmitParamsForSignature(bool useFriendlyTypes, bool skipThis)
             {
-                return lastParam.Name == "_result" && lastParam.ParameterType.Name == methodInfo.ReturnType.Name && lastParam.ParameterType.Name.EndsWith("*");
+                StringBuilder ret = new StringBuilder();
+                bool first = true;
+                int paramCount = this.Params.Count;
+                if (useFriendlyTypes && this.FixupNeeded)
+                {
+                    paramCount--;
+                }
+
+                for (int i = 0; i < paramCount; i++)
+                {
+                    var param = this.Params[i];
+
+                    if (!first)
+                    {
+                        ret.Append(", ");
+                    }
+
+                    if (skipThis && param.Name == "pThis")
+                    {
+                        continue;
+                    }
+
+                    string paramType = useFriendlyTypes ? param.FriendlyType : param.Type;
+                    ret.Append($"{param.Attributes}{param.RefOrOut}{paramType} {param.Name}");
+                    first = false;
+                }
+
+                return ret.ToString();
             }
 
-            return false;
+            public string EmitParamsForCall(bool useFriendlyTypes)
+            {
+                StringBuilder ret = new StringBuilder();
+                bool first = true;
+                bool fixupNeeded = this.FixupNeeded;
+                for (int i = 0; i < this.Params.Count; i++)
+                {
+                    var param = this.Params[i];
+                    if (!first)
+                    {
+                        ret.Append(", ");
+                    }
+
+                    string suffix = string.Empty;
+                    if (param.IsComPtr)
+                    {
+                        suffix = "Raw";
+                    }
+
+                    string paramName = param.Name;
+                    if (fixupNeeded && i == this.Params.Count - 1)
+                    {
+                        paramName = "&__result__";
+                    }
+
+                    ret.Append($"{param.RefOrOut}{paramName}{suffix}");
+                    first = false;
+                }
+
+                return ret.ToString();
+            }
+
+            public bool FixupNeeded
+            {
+                get
+                {
+                    bool fixupNeeded = false;
+                    var lastParam = this.Params.LastOrDefault();
+                    if (lastParam != null)
+                    {
+                        fixupNeeded = lastParam.Name == "_result" && lastParam.Type == this.ReturnType && lastParam.Type.EndsWith("*");
+                    }
+
+                    if (fixupNeeded)
+                    {
+                    }
+
+                    return fixupNeeded;
+                }
+            }
         }
 
-        private void VisitMethod(string name, MethodInfo methodInfo, string intro, int indent, bool callDelegate = false)
+        private class ParameterEmitInfo
         {
-            string indentText = GetIndent(indent);
-            string indentText1 = GetIndent(indent + 1);
-            string indentText2 = GetIndent(indent + 2);
+            public string Name { get; set; }
+            public string Attributes { get; set; }
+            public string RefOrOut { get; set; }
+            public string Type { get; set; }
+            public string FriendlyType
+            {
+                get
+                {
+                    if (!this.IsComPtr)
+                    {
+                        return this.Type;
+                    }
 
-            StringBuilder ending = new StringBuilder();
-            
+                    if (this.Type == "void*")
+                    {
+                        return "ComPtr<T>";
+                    }
+                    else
+                    {
+                        string interfaceType = RemovePointer(this.Type);
+                        return $"ComPtr<{interfaceType}>";
+                    }
+                }
+            }
+
+            public bool IsComPtr { get; set; }
+        }
+
+        private ParameterEmitInfo GetParameterEmitInfo(ParameterInfo param)
+        {
+            var paramType = FixTypeName(param.CustomAttributes, param.ParameterType.Name);
+            var paramName = FixParamOrFieldName(param.Name);
+
+            GetMarshalAsInfo(param.CustomAttributes, false, ref paramType, out string marshalAsAttrText);
+
+            bool canUseRefOrOut = true;
+            bool isComOutPtr = param.CustomAttributes.Any(c => c.AttributeType.Name == "ComOutPtrAttribute");
+
+            if (paramType == "void*" ||
+                paramType == "IntPtr" ||
+                paramType.Contains("[]"))
+            {
+                canUseRefOrOut = false;
+            }
+
+            string refOrOut = string.Empty;
+            if (canUseRefOrOut)
+            {
+                if ((!param.IsIn && param.IsOut && !param.IsOptional) || isComOutPtr)
+                {
+                    refOrOut = "out ";
+                }
+                else if (param.IsIn && param.IsOut && !param.IsOptional)
+                {
+                    refOrOut = "ref ";
+                }
+
+                if (!string.IsNullOrEmpty(refOrOut))
+                {
+                    paramType = RemovePointer(paramType);
+                }
+            }
+
+            // Pointer types can't have marshal as
+            if (paramType.Contains("*"))
+            {
+                marshalAsAttrText = string.Empty;
+            }
+
+            return new ParameterEmitInfo() { Attributes = marshalAsAttrText, IsComPtr = isComOutPtr, Name = paramName, Type = paramType, RefOrOut = refOrOut };
+        }
+
+        private List<ParameterEmitInfo> GetMethodParamEmitInfos(MethodInfo methodInfo)
+        {
+            List<ParameterEmitInfo> paramInfos = new List<ParameterEmitInfo>();
+            foreach (var param in methodInfo.GetParameters())
+            {
+                paramInfos.Add(GetParameterEmitInfo(param));
+            }
+
+            return paramInfos;
+        }
+
+        private FunctionEmitInfo GetMethodEmitInfo(MethodInfo methodInfo)
+        {
             var retParam = methodInfo.ReturnParameter;
             var retType = FixTypeName(retParam.CustomAttributes, retParam.ParameterType.Name);
-            bool returnFixupNeeded = false;
+            FunctionEmitInfo ret = new FunctionEmitInfo() { ReturnType = retType };
+            ret.Params = GetMethodParamEmitInfos(methodInfo);
 
-            if (callDelegate)
-            {
-                returnFixupNeeded = IsReturnFixupNeeded(methodInfo);
-                
-                // Get rid of the * at the end if we're doing a return fixup
-                if (returnFixupNeeded)
-                {
-                    retType = retType.Substring(0, retType.Length - 1);
-                }
+            return ret;
+        }
 
-                Type interfaceType = methodInfo.DeclaringType.DeclaringType;
-                string interfaceName = interfaceType.Name;
-                string retText = retType == "void" ? string.Empty : "return ";
+        private void VisitMethod(string name, MethodInfo methodInfo, string intro, int indent, out FunctionEmitInfo emitInfo)
+        {
+            emitInfo = GetMethodEmitInfo(methodInfo);
 
-                if (returnFixupNeeded)
-                {
-                    retText += "*";
-                }
-
-                ending = new StringBuilder(
-@$"{indentText}{{
-{indentText1}fixed ({interfaceName}* pThis = &this)
-{indentText1}{{
-");
-                if (returnFixupNeeded)
-                {
-                    ending.AppendLine(
-$"{indentText2}{retType} result;");
-                }
-
-                ending.Append(
-$"{indentText2}{retText}Marshal.GetDelegateForFunctionPointer<_{name}>(lpVtbl->{name})(");
-            }
-
-            // Needs to match GetType() but Length == 1 to account for pThis on the delegate
-            if (name == "GetType" && methodInfo.GetParameters().Length == 1)
+            if (name == "GetType" && methodInfo.GetParameters().Length == 0)
             {
                 intro = $"{intro} new";
             }
 
-            this.writer.Write($"{indentText}{intro} {retType} {name}(");
-            var parameters = methodInfo.GetParameters();
-            bool firstParam = true;
-            bool firstDelegateCallParam = true;
-            for (int i = 0; i < parameters.Length; i++)
-            {
-                var param = parameters[i];
-                var paramType = FixTypeName(param.CustomAttributes, param.ParameterType.Name);
-                var paramName = FixParamOrFieldName(param.Name);
-
-                GetMarshalAsInfo(param.CustomAttributes, false, ref paramType, out string marshalAsAttrText);
-
-                bool canUseRefOrOut = true;
-                if (paramType.StartsWith("void*") || paramType == "IntPtr" || paramType.Contains("[]"))
-                {
-                    canUseRefOrOut = false;
-                }
-
-                string refOrOut = string.Empty;
-                if (canUseRefOrOut)
-                {
-                    if (!param.IsIn && param.IsOut && !param.IsOptional)
-                    {
-                        refOrOut = "out ";
-                    }
-                    else if (param.IsIn && param.IsOut && !param.IsOptional)
-                    {
-                        refOrOut = "ref ";
-                    }
-
-                    if (!string.IsNullOrEmpty(refOrOut))
-                    {
-                        paramType = RemovePointer(paramType);
-                        //prefix += $"{refOrOut} ";
-                        //this.writer.Write($"{refOrOut} ");
-
-                        //if (callDelegate)
-                        //{
-                        //    ending.Append($"{refOrOut} ");
-                        //}
-                    }
-                }
-
-                // Pointer types can't have marshal as
-                if (paramType.Contains("*"))
-                {
-                    marshalAsAttrText = string.Empty;
-                }
-
-                if (!(callDelegate && i == 0))
-                {
-                    if (!(returnFixupNeeded && i == parameters.Length - 1))
-                    {
-                        if (!firstParam)
-                        {
-                            this.writer.Write(", ");
-                        }
-
-                        this.writer.Write($"{marshalAsAttrText}{refOrOut}{paramType} {paramName}");
-                        firstParam = false;
-                    }
-                }
-
-                if (callDelegate)
-                {
-                    if (!firstDelegateCallParam)
-                    {
-                        ending.Append(", ");
-                    }
-
-                    if (returnFixupNeeded && i == parameters.Length - 1)
-                    {
-                        ending.Append("&result");
-                    }
-                    else
-                    {
-                        ending.Append($"{refOrOut}{paramName}");
-                    }
-
-                    firstDelegateCallParam = false;
-                }
-            }
-
-            this.writer.Write(")");
-            if (callDelegate)
-            {
-                this.writer.WriteLine();
-                ending.Append(
-$@");
-{indentText1}}}
-{indentText}}}");
-
-                this.writer.WriteLine(ending.ToString());
-            }
-            else
-            {
-                this.writer.WriteLine(";");
-            }
-        }
-
-        private static bool HasVtbl(Type type)
-        {
-            if (type == null)
-            {
-                return false;
-            }
-
-            return type.GetField("lpVtbl") != null;
+            string indentText = GetIndent(indent);
+            string paramsTxt = emitInfo.EmitParamsForSignature(false, false);
+            this.writer.WriteLine($"{indentText}{intro} {emitInfo.ReturnType} {name}({paramsTxt});");
         }
 
         private void VisitDelegate(Type type, Type context, int indent)
@@ -763,11 +850,11 @@ $@");
 
             var invokeMethod = type.GetMethod("Invoke");
             string intro = context == null ? $"public unsafe delegate" : "public delegate";
-            this.VisitMethod(type.Name, invokeMethod, intro, indent);
+            this.VisitMethod(type.Name, invokeMethod, intro, indent, out var functionEmitInfo);
 
             if (HasVtbl(context))
             {
-                this.EmitVtblCall(type.Name, invokeMethod, indent);
+                this.EmitVtblCall(type.Name, functionEmitInfo, indent);
             }
         }
 

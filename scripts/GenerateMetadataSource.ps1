@@ -81,7 +81,7 @@ if (!$version)
     }
     else
     {
-        $version = "10.0.18362.3-preview"
+        $version = "10.0.19041.4"
         Write-Host "No cpp nuget packages found at $nugetSrcPackagesDir. Downloading $version from nuget.org..."
 
         Download-Nupkg "Microsoft.Windows.SDK.CPP" $version $nugetSrcPackagesDir

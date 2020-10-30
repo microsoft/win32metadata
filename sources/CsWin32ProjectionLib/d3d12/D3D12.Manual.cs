@@ -75,13 +75,12 @@ namespace Microsoft.Windows.Win32
             var Desc = pDestinationResource->GetDesc();
             ulong RequiredSize = 0;
 
-            ID3D12Device* pDevice = null;
+            ComPtr<ID3D12Device> pDevice;
             var iid = IID_ID3D12Device;
 
-            pDestinationResource->GetDevice(&iid, (void**)&pDevice);
-            pDevice->GetCopyableFootprints(&Desc, FirstSubresource, NumSubresources, 0, null, null, null, &RequiredSize);
-            pDevice->Release();
-
+            pDestinationResource->GetDevice(&iid, out pDevice);
+            pDevice.Get()->GetCopyableFootprints(&Desc, FirstSubresource, NumSubresources, 0, null, null, null, &RequiredSize);
+            pDevice.Dispose();
             return RequiredSize;
         }
 
