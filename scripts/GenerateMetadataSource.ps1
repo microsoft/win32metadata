@@ -5,7 +5,7 @@ param
     $artifactsDir,
 
     [string]
-    $pipelineRunName = "18362.3.19h1_release.190318-1202",
+    $pipelineRunName = "19041.4.vb_release.190318-1202",
 
     [bool]
     $downloadDefaultCppNugets = $true,
