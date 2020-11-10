@@ -43,6 +43,8 @@ $baseGenerateDir = "$repoRoot\generation"
 $libGenerateDir = "$repoRoot\generation\ImportLibs\$libName"
 $generatorOutput = Join-Path -Path $generationOutArtifactsDir -ChildPath "$libName.generation.output.txt"
 
+$withSetLastErrorRsp = "$baseGenerateDir\WithSetLastError.rsp"
+
 $baseSettingsRsp = "$baseGenerateDir\baseSettings.rsp"
 $libSettingsRsp = "$libGenerateDir\settings.rsp"
 
@@ -58,9 +60,9 @@ $includePath = (Get-ChildItem -Path "$nugetDestPackagesDir\Microsoft.Windows.SDK
 Replace-Text $fixedSettingsRsp $textToReplaceTable
 
 Write-Host "Creating metdata .cs file. Log output: $generatorOutput"
-Write-Host "Calling: $toolsDir\ClangSharpPInvokeGenerator.exe @$baseSettingsRsp @$fixedSettingsRsp @$baseRemapRsp @$libRemapRsp @$libMappingOutputFileName 2>&1 > $generatorOutput"
+Write-Host "Calling: $toolsDir\ClangSharpPInvokeGenerator.exe @$baseSettingsRsp "@$withSetLastErrorRsp" @$fixedSettingsRsp @$baseRemapRsp @$libRemapRsp @$libMappingOutputFileName 2>&1 > $generatorOutput"
 
-& $toolsDir\ClangSharpPInvokeGenerator.exe "@$baseSettingsRsp" "@$fixedSettingsRsp" "@$baseRemapRsp" "@$libRemapRsp" "@$libMappingOutputFileName" 2>&1 > $generatorOutput
+& $toolsDir\ClangSharpPInvokeGenerator.exe "@$baseSettingsRsp" "@$withSetLastErrorRsp" "@$fixedSettingsRsp" "@$baseRemapRsp" "@$libRemapRsp" "@$libMappingOutputFileName" 2>&1 > $generatorOutput
 
 $missedFuncsOutput = Join-Path -Path $generationOutArtifactsDir -ChildPath "$libName.missedfuncs.output.txt"
 $visitedFuncsOutput = Join-Path -Path $generationOutArtifactsDir -ChildPath "$libName.visitedfuncs.output.txt"
