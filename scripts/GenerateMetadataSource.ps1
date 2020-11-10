@@ -5,7 +5,7 @@ param
     $artifactsDir,
 
     [string]
-    $pipelineRunName = "19041.4.vb_release.190318-1202",
+    $pipelineRunName,
 
     [bool]
     $downloadDefaultCppNugets = $true,
@@ -15,6 +15,11 @@ param
 )
 
 . "$PSScriptRoot\CommonUtils.ps1"
+
+if (!$pipelineRunName)
+{
+    $pipelineRunName = $defaultWinSDKNugetVersion.Substring("10.0.".Length) + ".branchname.date-time"
+}
 
 function Download-Nupkg
 {
@@ -81,7 +86,7 @@ if (!$version)
     }
     else
     {
-        $version = "10.0.19041.4"
+        $version = $defaultWinSDKNugetVersion
         Write-Host "No cpp nuget packages found at $nugetSrcPackagesDir. Downloading $version from nuget.org..."
 
         Download-Nupkg "Microsoft.Windows.SDK.CPP" $version $nugetSrcPackagesDir

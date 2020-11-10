@@ -5,13 +5,18 @@ param
     $artifactsDir = [System.IO.Path]::GetFullPath("$PSScriptRoot\..\artifacts"),
 
     [string]
-    $version = "10.0.18362.3-preview",
+    $version,
 
     [string]
     $libName
 )
 
 . "$PSScriptRoot\CommonUtils.ps1"
+
+if (!$version)
+{
+    $version = $defaultWinSDKNugetVersion
+}
 
 $toolsDir = [System.IO.Path]::GetFullPath("$PSScriptRoot\..\tools")
 

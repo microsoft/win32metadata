@@ -32,6 +32,7 @@ namespace Microsoft.Windows.Sdk.CsWin32
         private Dictionary<string, string> riaaMappings = new Dictionary<string, string>();
         private HashSet<string> csKeywords = new HashSet<string>();
         private Type riaaFreeAttributeType;
+        private Type nativeTypeInfoAttributeType;
         private Assembly metadataAssembly;
 
         private CsWin32Projector()
@@ -55,81 +56,6 @@ namespace Microsoft.Windows.Sdk.CsWin32
             }
 
             return ret;
-        }
-
-        private static void GetMarshalAsInfo(IEnumerable<CustomAttributeData> customAttributes, bool forStruct, ref string typeName, out string marshalAsAttrText)
-        {
-            var marshalAsAttr = customAttributes.FirstOrDefault(c => c.AttributeType == typeof(MarshalAsAttribute));
-            marshalAsAttrText = string.Empty;
-            if (marshalAsAttr != null)
-            {
-                var unmanagedTypeArg = marshalAsAttr.ConstructorArguments.FirstOrDefault(a => a.ArgumentType.Name == "UnmanagedType");
-                if (unmanagedTypeArg != null)
-                {
-                    UnmanagedType unmanaged = (UnmanagedType)unmanagedTypeArg.Value;
-
-                    if (!forStruct)
-                    {
-                        if (unmanaged == UnmanagedType.LPStr || unmanaged == UnmanagedType.LPWStr)
-                        {
-                            typeName = "string";
-                            marshalAsAttrText = $"[MarshalAsAttribute(UnmanagedType.{unmanaged})]";
-                        }
-                        else if (unmanaged == UnmanagedType.LPArray)
-                        {
-                            var arraySubType = (UnmanagedType)marshalAsAttr.NamedArguments.Where(arg => arg.MemberName == "ArraySubType").First().TypedValue.Value;
-                            short sizeParamIndex = (short)marshalAsAttr.NamedArguments.Where(arg => arg.MemberName == "SizeParamIndex").First().TypedValue.Value;
-                            if (arraySubType == UnmanagedType.LPWStr)
-                            {
-                                typeName = typeName.Replace("UInt16", "char");
-                                arraySubType = 0;
-                            }
-                            else if (arraySubType == UnmanagedType.LPStr)
-                            {
-                                arraySubType = 0;
-                            }
-
-                            if (!typeName.StartsWith("void") && !typeName.Contains("**"))
-                            {
-                                int starIndex = typeName.IndexOf('*');
-                                if (starIndex != -1)
-                                {
-                                    var fixedName = typeName.Substring(0, starIndex) + "[]";
-                                    if (starIndex != typeName.Length - 1)
-                                    {
-                                        fixedName += typeName.Substring(starIndex + 1);
-                                    }
-
-                                    typeName = fixedName;
-                                }
-                            }
-
-                            string arraySubTypeText;
-                            if (int.TryParse(arraySubType.ToString(), out _))
-                            {
-                                arraySubTypeText = $"(UnmanagedType){arraySubType}";
-                            }
-                            else
-                            {
-                                arraySubTypeText = $"UnmanagedType.{arraySubType}";
-                            }
-
-                            marshalAsAttrText = $"[MarshalAsAttribute(UnmanagedType.{unmanaged}, SizeParamIndex = {sizeParamIndex})]";
-                        }
-                    }
-                    else
-                    {
-                        if (unmanaged == UnmanagedType.LPWStr)
-                        {
-                            typeName = "char*";
-                        }
-                        else if (unmanaged == UnmanagedType.LPStr)
-                        {
-                            typeName = "sbyte*";
-                        }
-                    }
-                }
-            }
         }
 
         private static string RemovePointer(string type)
@@ -173,6 +99,72 @@ namespace Microsoft.Windows.Sdk.CsWin32
             }
 
             return name;
+        }
+
+        private void GetMarshalAsInfo(IEnumerable<CustomAttributeData> customAttributes, bool forStruct, ref string typeName, out string marshalAsAttrText)
+        {
+            var marshalAsAttr = customAttributes.FirstOrDefault(c => c.AttributeType == this.nativeTypeInfoAttributeType);
+            marshalAsAttrText = string.Empty;
+            if (marshalAsAttr != null)
+            {
+                var unmanagedTypeArg = marshalAsAttr.ConstructorArguments.FirstOrDefault(a => a.ArgumentType.Name == "UnmanagedType");
+                if (unmanagedTypeArg != null)
+                {
+                    UnmanagedType unmanaged = (UnmanagedType)unmanagedTypeArg.Value;
+
+                    if (!forStruct)
+                    {
+                        var isOut = customAttributes.Any(a => a.AttributeType.Name == "OutAttribute");
+                        bool isString = unmanaged == UnmanagedType.LPStr || unmanaged == UnmanagedType.LPWStr;
+
+                        if (isString)
+                        {
+                            if (!isOut)
+                            {
+                                typeName = "string";
+                                marshalAsAttrText = $"[MarshalAsAttribute(UnmanagedType.{unmanaged})]";
+                            }
+                            else
+                            {
+                                typeName = unmanaged == UnmanagedType.LPWStr ? "char[]" : "sbyte[]";
+                            }
+                        }
+                        else if (unmanaged == UnmanagedType.LPArray)
+                        {
+                            var sizeParamIndexArg = marshalAsAttr.NamedArguments.FirstOrDefault(arg => arg.MemberName == "SizeParamIndex");
+                            string sizeParamIndexText = sizeParamIndexArg.TypedValue.Value != null ? $", SizeParamIndex = {sizeParamIndexArg.TypedValue.Value}" : string.Empty;
+
+                            if (!typeName.StartsWith("void") && !typeName.Contains("**"))
+                            {
+                                int starIndex = typeName.IndexOf('*');
+                                if (starIndex != -1)
+                                {
+                                    var fixedName = typeName.Substring(0, starIndex) + "[]";
+                                    if (starIndex != typeName.Length - 1)
+                                    {
+                                        fixedName += typeName.Substring(starIndex + 1);
+                                    }
+
+                                    typeName = fixedName;
+                                }
+                            }
+
+                            marshalAsAttrText = $"[MarshalAsAttribute(UnmanagedType.{unmanaged}{sizeParamIndexText})]";
+                        }
+                    }
+                    else
+                    {
+                        if (unmanaged == UnmanagedType.LPWStr)
+                        {
+                            typeName = "char*";
+                        }
+                        else if (unmanaged == UnmanagedType.LPStr)
+                        {
+                            typeName = "sbyte*";
+                        }
+                    }
+                }
+            }
         }
 
         private void LoadKeywords()
@@ -365,6 +357,7 @@ namespace Microsoft.Windows.Win32
 
                 this.metadataAssembly = Assembly.LoadFile(metadata);
                 this.riaaFreeAttributeType = this.metadataAssembly.GetType("Microsoft.Windows.Sdk.RIAAFreeAttribute");
+                this.nativeTypeInfoAttributeType = this.metadataAssembly.GetType("Microsoft.Windows.Sdk.NativeTypeInfoAttribute");
 
                 foreach (var type in this.metadataAssembly.GetExportedTypes())
                 {
@@ -464,10 +457,10 @@ $@"
         {
             foreach (var param in methodInfo.GetParameters())
             {
-                var marshalAsAttr = param.CustomAttributes.FirstOrDefault(c => c.AttributeType == typeof(MarshalAsAttribute));
-                if (marshalAsAttr != null)
+                var nativeTypeInfoAttr = param.CustomAttributes.FirstOrDefault(c => c.AttributeType == this.nativeTypeInfoAttributeType);
+                if (nativeTypeInfoAttr != null)
                 {
-                    var unmanagedTypeArg = marshalAsAttr.ConstructorArguments.FirstOrDefault(a => a.ArgumentType.Name == "UnmanagedType");
+                    var unmanagedTypeArg = nativeTypeInfoAttr.ConstructorArguments.FirstOrDefault(a => a.ArgumentType.Name == "UnmanagedType");
                     if (unmanagedTypeArg != null)
                     {
                         UnmanagedType unmanagedType = (UnmanagedType)unmanagedTypeArg.Value;
@@ -478,18 +471,6 @@ $@"
                         else if (unmanagedType == UnmanagedType.LPWStr)
                         {
                             return CharSet.Unicode;
-                        }
-                        else if (unmanagedType == UnmanagedType.LPArray)
-                        {
-                            var arraySubType = (UnmanagedType)marshalAsAttr.NamedArguments.Where(arg => arg.MemberName == "ArraySubType").First().TypedValue.Value;
-                            if (arraySubType == UnmanagedType.LPStr)
-                            {
-                                return CharSet.Ansi;
-                            }
-                            else if (arraySubType == UnmanagedType.LPWStr)
-                            {
-                                return CharSet.Unicode;
-                            }
                         }
                     }
                 }

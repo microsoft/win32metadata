@@ -19,3 +19,4 @@ function Replace-Text
     Set-Content -path $path -Encoding UTF8 -value $content
 }
 
+$defaultWinSDKNugetVersion = "10.0.19041.5"
