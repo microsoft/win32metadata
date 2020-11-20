@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Microsoft.Windows.Sdk
+namespace Microsoft.Windows.Sdk.Win32Metadata.Interop
 {
     public class NativeTypeInfoAttribute : Attribute
     {

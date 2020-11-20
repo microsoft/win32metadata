@@ -1,1 +1,2 @@
 // Copyright © Microsoft
+using Microsoft.Windows.Sdk.Win32Metadata.Interop;

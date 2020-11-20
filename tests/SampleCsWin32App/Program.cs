@@ -5,6 +5,20 @@ using static Microsoft.Windows.Win32.Apis;
 
 namespace SampleCsWin32App
 {
+    public enum MuhEnum
+    {
+        A = 100,
+        B = A + 200,
+        C = A + B * 3
+    }
+
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    public interface IFoobar
+    {
+        int HiThere(int x, int z);
+        void BazMe();
+    }
+
     public unsafe class Program
     {
         public static void Main(string[] args)
@@ -14,6 +28,15 @@ namespace SampleCsWin32App
 
             ShowProcessNames();
             Console.WriteLine();
+
+            int result;
+            var hkeyUser = new IntPtr(0x80000001);
+            result = RegCreateKeyW(hkeyUser, @"SOFTWARE\Microsoft\Clipboard", out var openedKey);
+            uint value = 0;
+            uint size = sizeof(int);
+            uint* pValue = &value;
+            uint* pSize = &size;            
+            result = RegGetValueW(openedKey.DangerousGetHandle(), null, "ShellHotKeyUsed", 0x0000ffff, null, pValue, pSize);
         }
 
         private static void ShowWindowTitles()

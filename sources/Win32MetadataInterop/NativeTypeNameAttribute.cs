@@ -3,16 +3,17 @@
 using System;
 using System.Diagnostics;
 
-namespace Microsoft.Windows.Sdk
+namespace Microsoft.Windows.Sdk.Win32Metadata.Interop
 {
     /// <summary>Defines the type of a member as it was used in the native signature.</summary>
-    [Conditional("DEBUG")]
-    [AttributeUsage(AttributeTargets.Enum | AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.ReturnValue | AttributeTargets.Struct, AllowMultiple = false, Inherited = true)]
+    //[Conditional("DEBUG")]
+    [AttributeUsage(AttributeTargets.Enum | AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.ReturnValue | AttributeTargets.Struct, AllowMultiple = false, Inherited = false)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class NativeTypeNameAttribute : Attribute
     {
         /// <summary>Initializes a new instance of the <see cref="NativeTypeNameAttribute" /> class.</summary>
         /// <param name="name">The name of the type that was used in the native signature.</param>
-        public NativeTypeNameAttribute(string name)
+        public NativeTypeNameAttribute(String name)
         {
             this.Name = name;
         }

@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics;
 
-namespace Microsoft.Windows.Sdk
+namespace Microsoft.Windows.Sdk.Win32Metadata.Interop
 {
     [AttributeUsage(AttributeTargets.Struct, AllowMultiple = false, Inherited = true)]
     public sealed class NativeInheritanceAttribute : Attribute

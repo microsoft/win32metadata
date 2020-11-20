@@ -7,8 +7,8 @@
     <owners>Microsoft</owners>
     <title>Win32 Metadata</title>
     <copyright>© Microsoft Corporation. All rights reserved.</copyright>
-    <summary>This packages provides the Win32 API surface as a CLR assembly.</summary>
-    <description>This packages provides the Win32 API surface as a CLR assembly. It is intended to be used as the basis for generating language-specific projections.</description>
+    <summary>This packages provides the Win32 API surface as winmd (Windows metadata) file.</summary>
+    <description>This packages provides the Win32 API surface as winmd (Windows metadata). It is intended to be used as the basis for generating language-specific projections. It is not loadable is a CLR assembly.</description>
     <projectUrl>https://aka.ms/WinSDKProjectURL</projectUrl>
     <tags>Win32 Metadata</tags>
     <licenseUrl>https://aka.ms/WinSDKPreviewLicenseURL</licenseUrl>
@@ -17,6 +17,7 @@
   </metadata>
 
   <files>
-    <file src="Win32MetadataLib\bin\Release\netstandard2.0\Win32MetadataLib.dll" target="content\Win32MetadataLib.dll"/>
+      <file src="bin\Microsoft.Windows.Sdk.Win32Metadata.dll" target="content\Microsoft.Windows.Sdk.Win32Metadata.dll"/>
+      <file src="sources\Win32MetadataLib\bin\Release\netstandard2.1\Microsoft.Windows.Sdk.Win32Metadata.Interop.dll" target="content\Microsoft.Windows.Sdk.Win32Metadata.Interop.dll"/>
   </files>
 </package>

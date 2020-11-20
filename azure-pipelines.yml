@@ -28,6 +28,7 @@ variables:
   buildPlatform: 'x64'
   buildConfiguration: 'Release'
   System.Debug: true
+  IncludeCsProjection: false
   OutputPackagesDir: $(Build.ArtifactStagingDirectory)\CreatedNugetPackages
 
 steps:
@@ -46,15 +47,15 @@ steps:
   inputs:
     script: |
       echo resources.pipeline.winsdk.pipelineID = $(resources.pipeline.winsdk.pipelineID)
-          echo resources.pipeline.winsdk.runName = $(resources.pipeline.winsdk.runName)
-          echo resources.pipeline.winsdk.runID = $(resources.pipeline.winsdk.runID)
-          echo resources.pipeline.winsdk.runURI = $(resources.pipeline.winsdk.runURI)
-          echo resources.pipeline.winsdk.sourceBranch = $(resources.pipeline.winsdk.sourceBranch)
-          echo resources.pipeline.winsdk.sourceCommit = $(resources.pipeline.winsdk.sourceCommit)
-          echo resources.pipeline.winsdk.sourceProvider = $(resources.pipeline.winsdk.sourceProvider)
-          echo resources.pipeline.winsdk.requestedFor = $(resources.pipeline.winsdk.requestedFor)
-          echo resources.pipeline.winsdk.requestedForID = $(resources.pipeline.winsdk.requestedForID)
-          dir /s $(Agent.BuildDirectory)\winsdk\NuGetPackages
+      echo resources.pipeline.winsdk.runName = $(resources.pipeline.winsdk.runName)
+      echo resources.pipeline.winsdk.runID = $(resources.pipeline.winsdk.runID)
+      echo resources.pipeline.winsdk.runURI = $(resources.pipeline.winsdk.runURI)
+      echo resources.pipeline.winsdk.sourceBranch = $(resources.pipeline.winsdk.sourceBranch)
+      echo resources.pipeline.winsdk.sourceCommit = $(resources.pipeline.winsdk.sourceCommit)
+      echo resources.pipeline.winsdk.sourceProvider = $(resources.pipeline.winsdk.sourceProvider)
+      echo resources.pipeline.winsdk.requestedFor = $(resources.pipeline.winsdk.requestedFor)
+      echo resources.pipeline.winsdk.requestedForID = $(resources.pipeline.winsdk.requestedForID)
+      dir /s $(Agent.BuildDirectory)\winsdk\NuGetPackages
 
 - task: PowerShell@2
   displayName: Generate Win32 metadata C# source
@@ -81,16 +82,19 @@ steps:
   displayName: Build metadata binary
   inputs:
     filePath: 'scripts\BuildMetadataBin.ps1'
+    arguments: '-assemblyVersion $(PrepOutput.NugetVersion)'
 
 - task: PowerShell@2
   displayName: Build csWin32 projected binary
   inputs:
     filePath: 'scripts\BuildCsWin32Projection.ps1'
+  condition: and(succedeed(), eq(variables.IncludeCsProjection, true))
 
 - task: PowerShell@2
   displayName: Build C# samples that use C# Win32 projection
   inputs:
     filePath: 'scripts\BuildSamples.ps1'
+  condition: and(succedeed(), eq(variables.IncludeCsProjection, true))
 
   # There's a problem on microsoft.visualstudio.com that requires the guid instead of NuGetCommand@2
 - task: 333b11bd-d341-40d9-afcf-b32d5ce6f23b@2
@@ -101,18 +105,7 @@ steps:
     packDestination: '$(OutputPackagesDir)'
     versioningScheme: 'byEnvVar'
     versionEnvVar: 'PrepOutput.NugetVersion'
-    basePath: 'sources'
-
-  # There's a problem on microsoft.visualstudio.com that requires the guid instead of NuGetCommand@2
-- task: 333b11bd-d341-40d9-afcf-b32d5ce6f23b@2
-  displayName: Pack CsWin32 nuget package
-  inputs:
-    command: 'pack'
-    packagesToPack: 'sources\nuget\Microsoft.Windows.SDK.Win32\Microsoft.Windows.SDK.Win32.nuspec'
-    packDestination: '$(OutputPackagesDir)'
-    versioningScheme: 'byEnvVar'
-    versionEnvVar: 'PrepOutput.NugetVersion'
-    basePath: 'sources'
+    basePath: '.'
 
 - task: PublishPipelineArtifact@1
   displayName: 'Publish NuGet packages to pipeline artifacts'

@@ -1,17 +1,19 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <AssemblyName>Microsoft.Windows.SDK.Win32</AssemblyName>
-    <RootNamespace>Microsoft.Windows.SDK.Win32</RootNamespace>
+    <RootNamespace>Microsoft.Windows.Sdk.Win32Metadata.Interop</RootNamespace>
+    <AssemblyName>Microsoft.Windows.Sdk.Win32Metadata.Interop</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoWarn>1701;1702;0649</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoWarn>1701;1702;0649</NoWarn>
   </PropertyGroup>
 
 </Project>

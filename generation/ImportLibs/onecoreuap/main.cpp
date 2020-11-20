@@ -7,6 +7,8 @@
 #define D3D12_NO_HELPERS
 #define D2D_USE_C_DEFINITIONS
 
+#include "intrinfix.h"
+
 #include <windows.h>
 #include <sdkddkver.h>
 

@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using System.Text;
+using Microsoft.Windows.Sdk.Win32Metadata.Interop;
 
-namespace Microsoft.Windows.Sdk
+namespace Microsoft.Windows.Sdk.Win32Metadata
 {
     [Flags]
     public enum PROCESS_CREATION_FLAGS : uint

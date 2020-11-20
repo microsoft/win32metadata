@@ -5,7 +5,7 @@
 
 using System;
 
-namespace Microsoft.Windows.Sdk
+namespace Microsoft.Windows.Sdk.Win32Metadata
 {
     public static unsafe partial class Apis
     {

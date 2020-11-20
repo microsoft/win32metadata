@@ -191,6 +191,10 @@ namespace Microsoft.Windows.Sdk.CsWin32
             {
                 this.VisitEnum(type);
             }
+            else if (type.IsInterface)
+            {
+                this.VisitInterface(type);
+            }
             else if (type.BaseType == typeof(System.ValueType))
             {
                 this.VisitStruct(type, indent);
@@ -504,11 +508,11 @@ $@"
                 string intro = $"public static extern";
                 this.VisitMethod(methodInfo.Name, methodInfo, intro, indent, out var functionEmitInfo);
 
-                if (HasComOutPtrs(methodInfo))
-                {
-                    this.writer.WriteLine();
-                    this.EmitFunctionCall(methodInfo.Name, functionEmitInfo, "public static", indent, null);
-                }
+                //if (HasComOutPtrs(methodInfo))
+                //{
+                //    this.writer.WriteLine();
+                //    this.EmitFunctionCall(methodInfo.Name, functionEmitInfo, "public static", indent, null);
+                //}
             }
         }
 
@@ -833,10 +837,10 @@ $@"
             string intro = context == null ? $"public unsafe delegate" : "public delegate";
             this.VisitMethod(type.Name, invokeMethod, intro, indent, out var functionEmitInfo);
 
-            if (HasVtbl(context))
-            {
-                this.EmitVtblCall(type.Name, functionEmitInfo, indent);
-            }
+            //if (HasVtbl(context))
+            //{
+            //    this.EmitVtblCall(type.Name, functionEmitInfo, indent);
+            //}
         }
 
         private string FixTypeName(IEnumerable<CustomAttributeData> attributes, string name)
@@ -924,6 +928,36 @@ $@"
 $@"{indentText}public {typeName} {fieldName};");
         }
 
+        private void VisitInterface(Type type, int indent = 0)
+        {
+            this.writer.WriteLine();
+
+            string indentText = GetIndent(indent);
+
+            var guidAttrData = type.CustomAttributes.FirstOrDefault(c => c.AttributeType == typeof(GuidAttribute));
+            if (guidAttrData != null)
+            {
+                var guid = guidAttrData.ConstructorArguments[0].Value.ToString();
+                this.writer.WriteLine(
+$"{indentText}[Guid(\"{guid}\")]");
+            }
+
+            var name = type.Name;
+
+            this.writer.Write(
+$@"{indentText}public interface {name}
+{indentText}{{
+");
+
+            foreach (var method in type.GetMethods())
+            {
+                this.VisitMethod(method.Name, method, string.Empty, indent + 1, out _);
+            }
+
+            this.writer.WriteLine(
+$"{indentText}}}");
+        }
+
         private void VisitStruct(Type type, int indent = 0)
         {
             if (indent == 0 && type.IsNested)
@@ -946,13 +980,13 @@ $@"{indentText}public {typeName} {fieldName};");
 $"{indentText}[StructLayout(LayoutKind.Explicit)]");
             }
 
-            var guidAttrData = type.CustomAttributes.FirstOrDefault(c => c.AttributeType == typeof(GuidAttribute));
-            if (guidAttrData != null)
-            {
-                var guid = guidAttrData.ConstructorArguments[0].Value.ToString();
-                this.writer.WriteLine(
-$"{indentText}[Guid(\"{guid}\")]");
-            }
+//            var guidAttrData = type.CustomAttributes.FirstOrDefault(c => c.AttributeType == typeof(GuidAttribute));
+//            if (guidAttrData != null)
+//            {
+//                var guid = guidAttrData.ConstructorArguments[0].Value.ToString();
+//                this.writer.WriteLine(
+//$"{indentText}[Guid(\"{guid}\")]");
+//            }
 
             var name = type.Name;
 
