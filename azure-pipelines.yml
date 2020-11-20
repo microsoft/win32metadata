@@ -119,7 +119,7 @@ steps:
     packDestination: '$(OutputPackagesDir)'
     versioningScheme: 'byEnvVar'
     versionEnvVar: 'PrepOutput.NugetVersion'
-    basePath: '.'
+    basePath: '$(Build.SourcesDirectory)'
 
 - task: PublishPipelineArtifact@1
   displayName: 'Publish NuGet packages to pipeline artifacts'
