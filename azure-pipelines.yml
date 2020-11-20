@@ -59,6 +59,7 @@ steps:
       echo resources.pipeline.winsdk.requestedFor = $(resources.pipeline.winsdk.requestedFor)
       echo resources.pipeline.winsdk.requestedForID = $(resources.pipeline.winsdk.requestedForID)
       dir /s $(Agent.BuildDirectory)\winsdk\NuGetPackages
+  condition: eq(variables.UsePreGeneratedSource, false)
 
 - task: CmdLine@2
   displayName: Update job variables from incoming variables
