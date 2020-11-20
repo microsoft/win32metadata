@@ -29,6 +29,8 @@ variables:
   buildConfiguration: 'Release'
   System.Debug: true
   IncludeCsProjection: false
+  UsePreGeneratedSource: true
+  WinMetadataSourceDir: $(Build.SourcesDirectory)\sources\Win32MetadataLib
   OutputPackagesDir: $(Build.ArtifactStagingDirectory)\CreatedNugetPackages
 
 steps:
@@ -57,12 +59,20 @@ steps:
       echo resources.pipeline.winsdk.requestedForID = $(resources.pipeline.winsdk.requestedForID)
       dir /s $(Agent.BuildDirectory)\winsdk\NuGetPackages
 
+- task: CmdLine@2
+  displayName: Update job variables from incoming variables
+  inputs:
+    script: |
+      echo '##vso[task.setvariable variable=WinMetadataSourceDir]$(Build.SourcesDirectory)\tests\TestScraperSource'
+  condition: eq(variables.UsePreGeneratedSource, true)
+
 - task: PowerShell@2
   displayName: Generate Win32 metadata C# source
   inputs:
     filePath: 'scripts\GenerateMetadataSource.ps1'
     arguments: '-artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0 -pipelineRunName $(resources.pipeline.winsdk.runName) -qfeOverride "$(QFEOverride)"'
     errorActionPreference: 'continue'
+  condition: and(succedeed(), eq(variables.UsePreGeneratedSource, false))
 
 - task: PublishBuildArtifacts@1
   displayName: Publish generator build artifacts
@@ -70,6 +80,7 @@ steps:
     PathtoPublish: '$(Agent.BuildDirectory)\winsdk\output'
     ArtifactName: 'GeneratorOutput'
     publishLocation: 'Container'
+  condition: and(succedeed(), eq(variables.UsePreGeneratedSource, false))
 
 - task: PublishBuildArtifacts@1
   displayName: Publish generated .cs files
@@ -77,12 +88,13 @@ steps:
     PathtoPublish: 'sources\Win32MetadataLib\generated'
     ArtifactName: GeneratedMetadataSource
     publishLocation: 'Container'
+  condition: and(succedeed(), eq(variables.UsePreGeneratedSource, false))
 
 - task: PowerShell@2
   displayName: Build metadata binary
   inputs:
     filePath: 'scripts\BuildMetadataBin.ps1'
-    arguments: '-assemblyVersion $(PrepOutput.NugetVersion)'
+    arguments: '-assemblyVersion $(PrepOutput.NugetVersion) -metadataSourcePath $(WinMetadataSourceDir)'
 
 - task: PowerShell@2
   displayName: Build csWin32 projected binary

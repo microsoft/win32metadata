@@ -1,7 +1,10 @@
 param
 (
     [string]
-    $assemblyVersion
+    $assemblyVersion,
+
+    [string]
+    $metadataSourcePath
 )
 
 . "$PSScriptRoot\CommonUtils.ps1"
@@ -9,6 +12,11 @@ param
 if (!$assemblyVersion)
 {
     $assemblyVersion = $defaultWinSDKNugetVersion
+}
+
+if (!$metadataSourcePath)
+{
+    $metadataSourcePath = "$PSScriptRoot\..\sources\Win32MetadataLib"
 }
 
 $clangSharpSourceToWinmdPath = "$PSScriptRoot\..\sources\ClangSharpSourceToWinmd"
@@ -21,7 +29,6 @@ $metadataInteropProj = "$metadataInteropPath\Win32MetadataInterop.csproj"
 $metadataInteropBin = "$metadataInteropPath\bin\Release\netstandard2.1\Microsoft.Windows.Sdk.Win32Metadata.Interop.dll"
 & dotnet build $metadataInteropProj -c Release
 
-$metadataSourcePath = "$PSScriptRoot\..\sources\Win32MetadataLib"
 $outputWinmdFileName = "$PSScriptRoot\..\bin\Microsoft.Windows.SdK.Win32Metadata.winmd"
 
 Write-Host

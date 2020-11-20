@@ -20,7 +20,14 @@ namespace ClangSharpSourceToWinmd
             string sourceDirectory = args[0];
             string interopFileName = args[1];
             string outputFileName = args[2];
-            Version assemblyVersion = args.Length >= 4 ? Version.Parse(args[3]) : new Version(1, 0, 0, 0);
+
+            Version assemblyVersion = new Version(1, 0, 0, 0);
+            if (args.Length >= 4)
+            {
+                // Get rid of any trailing sem ver data
+                string version = args[3].Split('-')[0];
+                assemblyVersion = Version.Parse(version);
+            }
 
             var netstandardPath = FindNetstandardDllPath();
 
