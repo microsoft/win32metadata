@@ -15,7 +15,7 @@ namespace ClangSharpSourceToWinmd
             return Path.Combine(progFiles, @"dotnet\packs\NETStandard.Library.Ref\2.1.0\ref\netstandard2.1\netstandard.dll");
         }
 
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
             string sourceDirectory = args[0];
             string interopFileName = args[1];
@@ -30,6 +30,11 @@ namespace ClangSharpSourceToWinmd
             }
 
             var netstandardPath = FindNetstandardDllPath();
+            if (!File.Exists(netstandardPath))
+            {
+                Console.WriteLine($"Error: Failed to find {netstandardPath}.");
+                return 1;
+            }
 
             List<MetadataReference> refs = new List<MetadataReference>();
             refs.Add(MetadataReference.CreateFromFile(interopFileName));
@@ -54,6 +59,8 @@ namespace ClangSharpSourceToWinmd
 
             Console.WriteLine($"Emitting {outputFileName}...");
             ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(comp, assemblyVersion, outputFileName);
+
+            return 0;
         }
     }
 }

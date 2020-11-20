@@ -37,6 +37,7 @@ steps:
 - download: winsdk
   displayName: Download pipeline NuGet packages
   artifact: NuGetPackages
+  condition: eq(variables.UsePreGeneratedSource, false)
 
 - task: UseDotNet@2
   displayName: Use DotNet 3.x
