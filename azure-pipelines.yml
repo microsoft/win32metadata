@@ -29,7 +29,6 @@ variables:
   buildConfiguration: 'Release'
   System.Debug: true
   IncludeCsProjection: false
-  UsePreGeneratedSource: true
   WinMetadataSourceDir: $(Build.SourcesDirectory)\sources\Win32MetadataSource
   OutputPackagesDir: $(Build.ArtifactStagingDirectory)\CreatedNugetPackages
 
