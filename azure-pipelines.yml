@@ -88,13 +88,13 @@ steps:
   displayName: Build csWin32 projected binary
   inputs:
     filePath: 'scripts\BuildCsWin32Projection.ps1'
-  condition: and(succedeed(), eq(variables.IncludeCsProjection, true))
+  condition: and(succeeded(), eq(variables.IncludeCsProjection, true))
 
 - task: PowerShell@2
   displayName: Build C# samples that use C# Win32 projection
   inputs:
     filePath: 'scripts\BuildSamples.ps1'
-  condition: and(succedeed(), eq(variables.IncludeCsProjection, true))
+  condition: and(succeeded(), eq(variables.IncludeCsProjection, true))
 
   # There's a problem on microsoft.visualstudio.com that requires the guid instead of NuGetCommand@2
 - task: 333b11bd-d341-40d9-afcf-b32d5ce6f23b@2
