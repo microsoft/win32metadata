@@ -64,6 +64,7 @@ steps:
   inputs:
     script: |
       echo '##vso[task.setvariable variable=WinMetadataSourceDir]$(Build.SourcesDirectory)\tests\TestScraperSource'
+      echo '##vso[task.setvariable variable=PrepOutput.NugetVersion]10.0.2000.0
   condition: eq(variables.UsePreGeneratedSource, true)
 
 - task: PowerShell@2
@@ -126,6 +127,7 @@ steps:
     artifact: NuGetPackages
 
   # There's a problem on microsoft.visualstudio.com that requires the guid instead of NuGetCommand@2
+  # Don't publish if we're using pre-generated source
 - task: 333b11bd-d341-40d9-afcf-b32d5ce6f23b@2
   displayName: 'NuGet push'
   inputs:
@@ -133,3 +135,4 @@ steps:
     packagesToPush: '$(OutputPackagesDir)/**/*.nupkg;!$(OutputPackagesDir)/**/*.symbols.nupkg'
     publishVstsFeed: 'c1408dcb-1833-4ae4-9af5-1a891a12cc3c'
     allowPackageConflicts: true
+  condition: and(succeeded(), eq(variables.UsePreGeneratedSource, false))
