@@ -18,8 +18,6 @@ if (!$version)
     $version = $defaultWinSDKNugetVersion
 }
 
-$toolsDir = [System.IO.Path]::GetFullPath("$PSScriptRoot\..\tools")
-
 $generationOutArtifactsDir = "$artifactsDir\output"
 Create-Directory $generationOutArtifactsDir
 
@@ -37,10 +35,8 @@ if (!(Test-Path -Path $libMappingOutputFileName))
     & $PSScriptRoot\CreateProcLibMapping.ps1 -libPath $libPath -outputFileName $libMappingOutputFileName
 }
 
-$repoRoot = [System.IO.Path]::GetFullPath("$PSScriptRoot\..")
-
-$baseGenerateDir = "$repoRoot\generation"
-$libGenerateDir = "$repoRoot\generation\ImportLibs\$libName"
+$baseGenerateDir = "$rootDir\generation"
+$libGenerateDir = "$rootDir\generation\ImportLibs\$libName"
 $generatorOutput = Join-Path -Path $generationOutArtifactsDir -ChildPath "$libName.generation.output.txt"
 
 $withSetLastErrorRsp = "$baseGenerateDir\WithSetLastError.rsp"
@@ -56,7 +52,7 @@ $fixedSettingsRsp = "$generationOutArtifactsDir\$libName.fixedSettings.rsp"
 Copy-Item $libSettingsRsp -Destination $fixedSettingsRsp
 
 $includePath = (Get-ChildItem -Path "$nugetDestPackagesDir\Microsoft.Windows.SDK.CPP.$version\c\Include").FullName.Replace('\', '/')
-[hashtable]$textToReplaceTable = @{ "C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0" = $includePath; "D:\repos\win32metadata" = $repoRoot }
+[hashtable]$textToReplaceTable = @{ "C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0" = $includePath; "D:\repos\win32metadata" = $rootDir }
 Replace-Text $fixedSettingsRsp $textToReplaceTable
 
 Write-Host "Creating metdata .cs file. Log output: $generatorOutput"

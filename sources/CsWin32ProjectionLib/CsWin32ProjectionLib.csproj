@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <AssemblyName>Microsoft.Windows.SDK.Win32</AssemblyName>
+    <AssemblyName>Microsoft.Windows.SDK.Win32.TestCLR</AssemblyName>
     <RootNamespace>Microsoft.Windows.SDK.Win32</RootNamespace>
   </PropertyGroup>
 

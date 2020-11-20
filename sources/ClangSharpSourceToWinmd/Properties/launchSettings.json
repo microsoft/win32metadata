@@ -2,11 +2,11 @@
   "profiles": {
     "ClangSharpSourceToWinmd": {
       "commandName": "Project",
-      "commandLineArgs": "$(ProjectDir)..\\Win32MetadataSource $(ProjectDir)..\\Win32MetadataInterop\\bin\\Debug\\netstandard2.1\\Microsoft.Windows.Sdk.Win32Metadata.Interop.dll $(ProjectDir)..\\bin\\Microsoft.Windows.SdK.Win32Metadata.winmd 10.0.19041.5 "
+      "commandLineArgs": "$(ProjectDir)..\\Win32MetadataSource $(ProjectDir)..\\Win32MetadataInterop\\bin\\Debug\\netstandard2.1\\Microsoft.Windows.Sdk.Win32.Interop.dll $(ProjectDir)..\\bin\\Microsoft.Windows.SdK.Win32.winmd 10.0.19041.5 "
     },
     "TestSource": {
       "commandName": "Project",
-      "commandLineArgs": "$(ProjectDir)..\\..\\tests\\TestScraperSource $(ProjectDir)..\\Win32MetadataInterop\\bin\\Debug\\netstandard2.1\\Microsoft.Windows.Sdk.Win32Metadata.Interop.dll $(ProjectDir)..\\..\\bin\\test.winmd 10.0.15000.3-preview"
+      "commandLineArgs": "$(ProjectDir)..\\..\\tests\\TestScraperSource $(ProjectDir)..\\Win32MetadataInterop\\bin\\Debug\\netstandard2.1\\Microsoft.Windows.Sdk.Win32.Interop.dll $(ProjectDir)..\\..\\bin\\test.winmd 10.0.15000.3-preview"
     }
   }
 }

@@ -45,11 +45,9 @@ function Replace-Text
     Set-Content -path $path -Encoding UTF8 -value $content
 }
 
-$toolsDir = [System.IO.Path]::GetFullPath("$PSScriptRoot\..\tools")
-
 if (!$artifactsDir)
 {
-    $artifactsDir = [System.IO.Path]::GetFullPath("$PSScriptRoot\..\artifacts")
+    $artifactsDir = "$rootDir\artifacts"
     Create-Directory $artifactsDir
 }
 

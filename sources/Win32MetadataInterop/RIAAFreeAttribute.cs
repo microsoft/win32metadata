@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Microsoft.Windows.Sdk.Win32Metadata.Interop
+namespace Microsoft.Windows.Sdk.Win32.Interop
 {
     public class RIAAFreeAttribute : Attribute
     {

@@ -20,3 +20,10 @@ function Replace-Text
 }
 
 $defaultWinSDKNugetVersion = "10.0.19041.5"
+
+$rootDir = [System.IO.Path]::GetFullPath("$PSScriptRoot\..")
+$toolsDir = "$rootDir\tools"
+$binDir = "$rootDir\bin"
+$sourcesDir = "$rootDir\sources"
+
+

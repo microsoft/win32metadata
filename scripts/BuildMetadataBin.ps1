@@ -16,20 +16,22 @@ if (!$assemblyVersion)
 
 if (!$metadataSourcePath)
 {
-    $metadataSourcePath = "$PSScriptRoot\..\sources\Win32MetadataSource"
+    $metadataSourcePath = "$sourcesDir\Win32MetadataSource"
 }
 
-$clangSharpSourceToWinmdPath = "$PSScriptRoot\..\sources\ClangSharpSourceToWinmd"
+$clangSharpSourceToWinmdPath = "$sourcesDir\ClangSharpSourceToWinmd"
 $clangSharpSourceToWinmdProj = "$clangSharpSourceToWinmdPath\ClangSharpSourceToWinmd.csproj"
 $clangSharpSourceToWinmdBin = "$clangSharpSourceToWinmdPath\bin\Release\netcoreapp3.1\ClangSharpSourceToWinmd.dll"
 & dotnet build $clangSharpSourceToWinmdProj -c Release
 
-$metadataInteropPath = "$PSScriptRoot\..\sources\Win32MetadataInterop"
+$metadataInteropPath = "$sourcesDir\Win32MetadataInterop"
 $metadataInteropProj = "$metadataInteropPath\Win32MetadataInterop.csproj"
-$metadataInteropBin = "$metadataInteropPath\bin\Release\netstandard2.1\Microsoft.Windows.Sdk.Win32Metadata.Interop.dll"
+$metadataInteropBin = "$metadataInteropPath\bin\Release\netstandard2.1\Microsoft.Windows.Sdk.Win32.Interop.dll"
 & dotnet build $metadataInteropProj -c Release
 
-$outputWinmdFileName = "$PSScriptRoot\..\bin\Microsoft.Windows.SdK.Win32Metadata.winmd"
+Copy-Item $metadataInteropBin $binDir
+
+$outputWinmdFileName = "$binDir\Microsoft.Windows.SdK.Win32.winmd"
 
 Write-Host
 Write-Host "Creating $outputWinmdFileName..."

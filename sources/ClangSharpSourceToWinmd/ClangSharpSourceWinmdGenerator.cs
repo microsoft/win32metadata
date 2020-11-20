@@ -46,14 +46,14 @@ namespace ClangSharpSourceToWinmd
 
             void VerifySymbolsLoadedByCompiler()
             {
-                string[] standardSymbolNames = new string[] { "System.Object", "System.Attribute", "Microsoft.Windows.Sdk.Win32Metadata.Interop.NativeTypeInfoAttribute" };
+                string[] standardSymbolNames = new string[] { "System.Object", "System.Attribute", "Microsoft.Windows.Sdk.Win32.Interop.NativeTypeInfoAttribute" };
 
                 foreach (var name in standardSymbolNames)
                 {
                     var type = this.compilation.GetTypeByMetadataName(name);
                     if (type == null)
                     {
-                        throw new InvalidOperationException($"The compiler failed to find {type}. Make sure the references are correct.");
+                        throw new InvalidOperationException($"The compiler failed to find the '{name}' type. Make sure the references are correct.");
                     }
                 }
             }

@@ -17,7 +17,7 @@
   </metadata>
 
   <files>
-      <file src="bin\Microsoft.Windows.Sdk.Win32Metadata.winmd" target="content\Microsoft.Windows.Sdk.Win32Metadata.winmd"/>
-      <file src="sources\Win32MetadataInterop\bin\Release\netstandard2.1\Microsoft.Windows.Sdk.Win32Metadata.Interop.dll" target="content\Microsoft.Windows.Sdk.Win32Metadata.Interop.dll"/>
+      <file src="bin\Microsoft.Windows.Sdk.Win32.winmd" target="content\Microsoft.Windows.Sdk.Win32.winmd"/>
+      <file src="sources\Win32MetadataInterop\bin\Release\netstandard2.1\Microsoft.Windows.Sdk.Win32.Interop.dll" target="content\Microsoft.Windows.Sdk.Win32.Interop.dll"/>
   </files>
 </package>
