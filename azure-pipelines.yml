@@ -30,7 +30,7 @@ variables:
   System.Debug: true
   IncludeCsProjection: false
   UsePreGeneratedSource: true
-  WinMetadataSourceDir: $(Build.SourcesDirectory)\sources\Win32MetadataLib
+  WinMetadataSourceDir: $(Build.SourcesDirectory)\sources\Win32MetadataSource
   OutputPackagesDir: $(Build.ArtifactStagingDirectory)\CreatedNugetPackages
 
 steps:
@@ -88,7 +88,7 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: Publish generated .cs files
   inputs:
-    PathtoPublish: 'sources\Win32MetadataLib\generated'
+    PathtoPublish: 'sources\Win32MetadataSource\generated'
     ArtifactName: GeneratedMetadataSource
     publishLocation: 'Container'
   condition: and(succeeded(), eq(variables.UsePreGeneratedSource, false))

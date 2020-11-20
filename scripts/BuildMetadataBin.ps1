@@ -16,7 +16,7 @@ if (!$assemblyVersion)
 
 if (!$metadataSourcePath)
 {
-    $metadataSourcePath = "$PSScriptRoot\..\sources\Win32MetadataLib"
+    $metadataSourcePath = "$PSScriptRoot\..\sources\Win32MetadataSource"
 }
 
 $clangSharpSourceToWinmdPath = "$PSScriptRoot\..\sources\ClangSharpSourceToWinmd"

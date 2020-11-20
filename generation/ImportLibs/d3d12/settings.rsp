@@ -1,7 +1,7 @@
 --file
 generation\ImportLibs\d3d12\main.cpp
 --output
-D:\repos\win32metadata\sources\Win32MetadataLib\generated\d3d12.cs
+D:\repos\win32metadata\sources\Win32MetadataSource\generated\d3d12.cs
 --include-directory
 generation
 generation\onecoreuap
