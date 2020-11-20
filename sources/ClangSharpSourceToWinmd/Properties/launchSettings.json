@@ -6,7 +6,7 @@
     },
     "TestSource": {
       "commandName": "Project",
-      "commandLineArgs": "$(ProjectDir)..\\..\\tests\\TestSourceForSourceToWinmd $(ProjectDir)..\\Win32MetadataInterop\\bin\\Debug\\netstandard2.1\\Microsoft.Windows.Sdk.Win32Metadata.Interop.dll $(ProjectDir)..\\..\\bin\\test.winmd 10.0.15000.3-preview"
+      "commandLineArgs": "$(ProjectDir)..\\..\\tests\\TestScraperSource $(ProjectDir)..\\Win32MetadataInterop\\bin\\Debug\\netstandard2.1\\Microsoft.Windows.Sdk.Win32Metadata.Interop.dll $(ProjectDir)..\\..\\bin\\test.winmd 10.0.15000.3-preview"
     }
   }
 }

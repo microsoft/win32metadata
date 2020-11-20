@@ -64,8 +64,8 @@ steps:
   displayName: Update job variables from incoming variables
   inputs:
     script: |
-      echo '##vso[task.setvariable variable=WinMetadataSourceDir]$(Build.SourcesDirectory)\tests\TestScraperSource'
-      echo '##vso[task.setvariable variable=PrepOutput.NugetVersion]10.0.2000.0'
+      echo ##vso[task.setvariable variable=WinMetadataSourceDir]$(Build.SourcesDirectory)\tests\TestScraperSource
+      echo ##vso[task.setvariable variable=PrepOutput.NugetVersion]10.0.2000.0
   condition: eq(variables.UsePreGeneratedSource, true)
 
 - task: PowerShell@2
