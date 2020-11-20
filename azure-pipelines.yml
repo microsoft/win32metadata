@@ -72,7 +72,7 @@ steps:
     filePath: 'scripts\GenerateMetadataSource.ps1'
     arguments: '-artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0 -pipelineRunName $(resources.pipeline.winsdk.runName) -qfeOverride "$(QFEOverride)"'
     errorActionPreference: 'continue'
-  condition: and(succedeed(), eq(variables.UsePreGeneratedSource, false))
+  condition: and(succeeded(), eq(variables.UsePreGeneratedSource, false))
 
 - task: PublishBuildArtifacts@1
   displayName: Publish generator build artifacts
@@ -80,7 +80,7 @@ steps:
     PathtoPublish: '$(Agent.BuildDirectory)\winsdk\output'
     ArtifactName: 'GeneratorOutput'
     publishLocation: 'Container'
-  condition: and(succedeed(), eq(variables.UsePreGeneratedSource, false))
+  condition: and(succeeded(), eq(variables.UsePreGeneratedSource, false))
 
 - task: PublishBuildArtifacts@1
   displayName: Publish generated .cs files
@@ -88,7 +88,7 @@ steps:
     PathtoPublish: 'sources\Win32MetadataLib\generated'
     ArtifactName: GeneratedMetadataSource
     publishLocation: 'Container'
-  condition: and(succedeed(), eq(variables.UsePreGeneratedSource, false))
+  condition: and(succeeded(), eq(variables.UsePreGeneratedSource, false))
 
 - task: PowerShell@2
   displayName: Build metadata binary
