@@ -26,4 +26,12 @@ $toolsDir = "$rootDir\tools"
 $binDir = "$rootDir\bin"
 $sourcesDir = "$rootDir\sources"
 
+if (Test-Path -Path $binDir -PathType leaf)
+{
+    Remove-Item $binDir
+}
 
+if (!(Test-Path -Path $binDir))
+{
+    New-Item -ItemType Directory -Force -Path $binDir | Out-Null
+}
