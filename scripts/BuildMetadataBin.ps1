@@ -31,10 +31,11 @@ $metadataInteropBin = "$metadataInteropPath\bin\Release\netstandard2.1\Microsoft
 
 Copy-Item $metadataInteropBin $binDir
 
-$outputWinmdFileName = "$binDir\Microsoft.Windows.SdK.Win32.winmd"
+$outputWinmdFileName = "$binDir\Microsoft.Windows.Sdk.Win32.winmd"
+$remapFileName = "$metadataSourcePath\remap.rsp"
 
 Write-Host
 Write-Host "Creating $outputWinmdFileName..."
-Write-Host "Calling: dotnet $clangSharpSourceToWinmdBin $metadataSourcePath $metadataInteropBin $outputWinmdFileName $assemblyVersion"
+Write-Host "Calling: dotnet $clangSharpSourceToWinmdBin --sourceDir $metadataSourcePath --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName"
 
-& dotnet $clangSharpSourceToWinmdBin $metadataSourcePath $metadataInteropBin $outputWinmdFileName $assemblyVersion
+& dotnet $clangSharpSourceToWinmdBin --sourceDir $metadataSourcePath --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName

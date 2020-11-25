@@ -4,6 +4,7 @@ using Microsoft.Windows.Sdk.Win32.Interop;
 
 namespace Foobar
 {
+/*
     public unsafe partial struct EXCEPTION_REGISTRATION_RECORD
     {
         [NativeTypeName("struct _EXCEPTION_REGISTRATION_RECORD *")]
@@ -85,6 +86,7 @@ namespace Foobar
 
         }
     }
+*/
 
     public enum Enum1
     {
@@ -98,6 +100,9 @@ namespace Foobar
         int x;
         Sub sub;
 
+        [NativeTypeName("LPCWSTR")]
+        public ushort* lpSource;
+
         public struct Sub
         {
             int z;
@@ -107,6 +112,8 @@ namespace Foobar
     public struct S1
     {
         S2 s2;
+        IntPtr addRIAAToMe;
+        int changeToEnum;
     }
 
 /*

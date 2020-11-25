@@ -56,13 +56,18 @@ $includePath = (Get-ChildItem -Path "$nugetDestPackagesDir\Microsoft.Windows.SDK
 Replace-Text $fixedSettingsRsp $textToReplaceTable
 
 Write-Host "Creating metdata .cs file. Log output: $generatorOutput"
-Write-Host "Calling: $toolsDir\ClangSharpPInvokeGenerator.exe @$baseSettingsRsp "@$withSetLastErrorRsp" @$fixedSettingsRsp @$baseRemapRsp @$libRemapRsp @$libMappingOutputFileName 2>&1 > $generatorOutput"
+Write-Host "Calling: $toolsDir\ClangSharpPInvokeGenerator.exe @$baseSettingsRsp "@$withSetLastErrorRsp" @$fixedSettingsRsp @$baseRemapRsp @$libRemapRsp @$libMappingOutputFileName > $generatorOutput"
 
-& $toolsDir\ClangSharpPInvokeGenerator.exe "@$baseSettingsRsp" "@$withSetLastErrorRsp" "@$fixedSettingsRsp" "@$baseRemapRsp" "@$libRemapRsp" "@$libMappingOutputFileName" 2>&1 > $generatorOutput
+& $toolsDir\ClangSharpPInvokeGenerator.exe "@$baseSettingsRsp" "@$withSetLastErrorRsp" "@$fixedSettingsRsp" "@$baseRemapRsp" "@$libRemapRsp" "@$libMappingOutputFileName" > $generatorOutput
+if ($LASTEXITCODE -lt 0)
+{
+    Write-Error "ClangSharpPInvokeGenerator.exe failed:"
+    Get-ChildItem $generatorOutput | select-string "Error: "
+}
 
-$missedFuncsOutput = Join-Path -Path $generationOutArtifactsDir -ChildPath "$libName.missedfuncs.output.txt"
-$visitedFuncsOutput = Join-Path -Path $generationOutArtifactsDir -ChildPath "$libName.visitedfuncs.output.txt"
-& $PSScriptRoot\CheckMissedFuncs.ps1 -generatorResults $generatorOutput -mappingFile $libMappingOutputFileName -visitedFuncsFile $visitedFuncsOutput -missedFuncsFile $missedFuncsOutput
+#$missedFuncsOutput = Join-Path -Path $generationOutArtifactsDir -ChildPath "$libName.missedfuncs.output.txt"
+#$visitedFuncsOutput = Join-Path -Path $generationOutArtifactsDir -ChildPath "$libName.visitedfuncs.output.txt"
+#& $PSScriptRoot\CheckMissedFuncs.ps1 -generatorResults $generatorOutput -mappingFile $libMappingOutputFileName -visitedFuncsFile $visitedFuncsOutput -missedFuncsFile $missedFuncsOutput
 
 $possibleRemapsOutput = Join-Path -Path $generationOutArtifactsDir -ChildPath "$libName.possibleremaps.output.txt"
 & $PSScriptRoot\DisplayPossibleMappings.ps1 -generatorResults $generatorOutput -remapsFile $possibleRemapsOutput

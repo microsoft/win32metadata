@@ -1,4 +1,3 @@
-#define _WINSOCKAPI_
 #define SECURITY_WIN32
 
 #define QCC_OS_GROUP_WINDOWS
@@ -12,7 +11,6 @@
 #include <windows.h>
 #include <sdkddkver.h>
 
-#include <WinSock2.h>
 #include <lmcons.h>
 #include <dde.h>
 #include <winscard.h>
@@ -86,9 +84,7 @@
 #include <websocket.h>
 #include <winver.h>
 #include <winhttp.h>
-//#include <WinBer.h>
 #include <Winldap.h>
-#include <Ws2spi.h>
 #include <WtsApi32.h>
 #include <XmlLite.h>
 #include <wincred.h>
@@ -115,8 +111,6 @@
 #include <fltdefs.h>
 #include <oobenotification.h>
 #include <DsGetDC.h>
-#include <MSWSock.h>
-#include <WS2tcpip.h>
 #include <iphlpapi.h>
 #include <netioapi.h>
 #include <IcmpAPI.h>
@@ -220,13 +214,3 @@
 //#include <wincodecsdk.h>
 #include <winsafer.h>
 #include <wlanapi.h>
-#include <WS2spi.h>
-
-#include <dxgi.h>
-#include <dxgi1_5.h>
-#include <dxgicommon.h>
-#include <dxgiformat.h>
-#include <dxgitype.h>
-
-
-

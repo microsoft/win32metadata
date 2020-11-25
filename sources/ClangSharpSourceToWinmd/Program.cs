@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.CommandLine;
+using System.CommandLine.Invocation;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace ClangSharpSourceToWinmd
 {
-    class Program
+    public static class Program
     {
         private static string FindNetstandardDllPath()
         {
@@ -15,19 +20,87 @@ namespace ClangSharpSourceToWinmd
             return Path.Combine(progFiles, @"dotnet\packs\NETStandard.Library.Ref\2.1.0\ref\netstandard2.1\netstandard.dll");
         }
 
+        //ISourceGenerator
+        //AnalyzerReference
+
+        //private static void AddRemapOption(RootCommand rootCommand)
+        //{
+        //    var option = ;
+        //    option.Argument.SetDefaultValue(Array.Empty<string>());
+
+        //    rootCommand.AddOption(option);
+        //}
+
+        private static Command WithHandler(this RootCommand command, string name)
+        {
+            var flags = BindingFlags.NonPublic | BindingFlags.Static;
+            var method = typeof(Program).GetMethod(name, flags);
+
+            var handler = CommandHandler.Create(method!);
+            command.Handler = handler;
+            return command;
+        }
+
         static int Main(string[] args)
         {
-            string sourceDirectory = args[0];
-            string interopFileName = args[1];
-            string outputFileName = args[2];
+            var rootCommand = new RootCommand("Convert ClangSharp-generated code into metadata")
+            {
+                new Option<string>(new[] { "--sourceDir", "-s" }, "The location of the source files."),
+                new Option<string>(new[] { "--interopFileName", "-i" }, "The path to Microsoft.Windows.Sdk.Win32.Interop.dll"),
+                new Option<string>(new[] { "--outputFileName", "-o" }, "The path to the .winmd to create"),
+                new Option<string>(new[] { "--version", "-v"}, description: "The version to use on the .winmd", getDefaultValue: () => "1.0.0.0"),
+                new Option(new string[] { "--remap", "-r" }, "A declaration name to be remapped to another name during binding generation.")
+                {
+                    Argument = new Argument("<name>=<value>")
+                    {
+                        ArgumentType = typeof(string),
+                        Arity = ArgumentArity.OneOrMore,
+                    }
+                }
+            }; //.WithHandler(nameof(Run));
+
+            foreach (var opt in rootCommand.Options.Where(o => o.Name != "version" && o.Name != "remap"))
+            {
+                opt.IsRequired = true;
+            }
+
+            rootCommand.Handler = CommandHandler.Create(typeof(Program).GetMethod(nameof(Run)));
+
+            //AddRemapOption(rootCommand);
+
+            return rootCommand.Invoke(args);
+        }
+
+        private static Dictionary<string, string> ConvertValuePairsToDictionary(string[] items)
+        {
+            Dictionary<string, string> ret = new Dictionary<string, string>();
+            foreach (var item in items)
+            {
+                if (string.IsNullOrEmpty(item))
+                {
+                    continue;
+                }
+
+                string[] parts = item.Split('=');
+                ret[parts[0]] = parts[1];
+            }
+
+            return ret;
+        }
+
+        public static int Run(InvocationContext context) //string sourceDirectory, string interopFileName, string outputFileName, string version, string[] remaps, IConsole console)
+        {
+            string sourceDirectory = context.ParseResult.ValueForOption<string>("sourceDir");
+            string interopFileName = context.ParseResult.ValueForOption<string>("interopFileName");
+            string outputFileName = context.ParseResult.ValueForOption<string>("outputFileName");
+            string version = context.ParseResult.ValueForOption<string>("version");
+            var remappedNameValuePairs = context.ParseResult.ValueForOption<string[]>("remap");
+
+            var remaps = ConvertValuePairsToDictionary(remappedNameValuePairs);
 
             Version assemblyVersion = new Version(1, 0, 0, 0);
-            if (args.Length >= 4)
-            {
-                // Get rid of any trailing sem ver data
-                string version = args[3].Split('-')[0];
-                assemblyVersion = Version.Parse(version);
-            }
+            string rawVersion = version.Split('-')[0];
+            assemblyVersion = Version.Parse(rawVersion);
 
             var netstandardPath = FindNetstandardDllPath();
             if (!File.Exists(netstandardPath))
@@ -49,16 +122,19 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 Console.WriteLine($"Compiling {sourceFile}...");
-                syntaxTrees.Add(CSharpSyntaxTree.ParseText(File.ReadAllText(sourceFile)));
+                var tree = CSharpSyntaxTree.ParseText(File.ReadAllText(sourceFile));
+                tree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree);
+                syntaxTrees.Add(tree);
             }
 
             var comp =
-                CSharpCompilation.Create(Path.GetFileName(outputFileName)).
-                    AddReferences(refs).
-                    AddSyntaxTrees(syntaxTrees);
+                CSharpCompilation.Create(
+                    Path.GetFileName(outputFileName),
+                    syntaxTrees,
+                    refs);
 
             Console.WriteLine($"Emitting {outputFileName}...");
-            ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(comp, assemblyVersion, outputFileName);
+            ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(comp, assemblyVersion, outputFileName, remaps);
 
             return 0;
         }

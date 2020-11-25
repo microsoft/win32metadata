@@ -1,10 +1,6 @@
 
 param
 (
-    [Parameter(Mandatory=$true)]
-    [string]
-    $sdkApiPath,
-
     [string]
     $outputFileName
 )
@@ -13,6 +9,8 @@ if (!$outputFileName)
 {
     $outputFileName = "$PSScriptRoot\..\generation\WithSetLastError.rsp"
 }
+
+. "$PSScriptRoot\CommonUtils.ps1"
 
 $stream = [System.IO.StreamWriter] $outputFileName
 $stream.WriteLine("--with-setlasterror")

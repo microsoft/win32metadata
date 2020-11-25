@@ -25,6 +25,8 @@ $rootDir = [System.IO.Path]::GetFullPath("$PSScriptRoot\..")
 $toolsDir = "$rootDir\tools"
 $binDir = "$rootDir\bin"
 $sourcesDir = "$rootDir\sources"
+$importLibsDir = "$rootDir\generation\ImportLibs"
+$sdkApiPath = "$rootDir\ext\sdk-api"
 
 if (Test-Path -Path $binDir -PathType leaf)
 {

@@ -1,0 +1,3 @@
+--remap
+VerSetConditionMask:TypeMask=VER_FLAGS
+

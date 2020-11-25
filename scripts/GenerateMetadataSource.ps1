@@ -131,9 +131,12 @@ Create-Directory $nugetDestPackagesDir
 
 Write-Host "`n`nProcessing each supported lib name...`n"
 
-$libNames = @("onecoreuap", "d3d11", "d3d12", "d3dcompiler")
+$libNames = Get-ChildItem $importLibsDir | select -ExpandProperty Name
+# $libNames = @("ole32", "onecoreuap", "d3d11", "d3d12", "d3dcompiler")
+
 foreach ($libName in $libNames)
 {
+    Write-Host "Calling $PSScriptRoot\GenerateMetadataSourceForLib.ps1 -version $version -libName $libName -artifactsDir $artifactsDir..."
     & $PSScriptRoot\GenerateMetadataSourceForLib.ps1 -version $version -libName $libName -artifactsDir $artifactsDir
     Write-Host
 }
