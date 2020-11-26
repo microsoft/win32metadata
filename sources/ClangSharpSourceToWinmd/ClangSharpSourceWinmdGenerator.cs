@@ -34,6 +34,7 @@ namespace ClangSharpSourceToWinmd
         private Dictionary<ITypeSymbol, FixedBufferInfo> fixedBufferTypeToInfo = new Dictionary<ITypeSymbol, FixedBufferInfo>();
         private Dictionary<SyntaxTree, SemanticModel> treeToModels = new Dictionary<SyntaxTree, SemanticModel>();
         private HashSet<StructDeclarationSyntax> interfaceStructs = new HashSet<StructDeclarationSyntax>();
+        private Dictionary<string, int> interfaceMethodCount = new Dictionary<string, int>();
         private Dictionary<string, EntityHandle> ctorNamesToRefs = new Dictionary<string, EntityHandle>();
         private Dictionary<string, ModuleReferenceHandle> moduleRefHandles = new Dictionary<string, ModuleReferenceHandle>();
         private Dictionary<string, string> remaps;
@@ -133,6 +134,11 @@ namespace ClangSharpSourceToWinmd
         private void AddDiagnostic(string text)
         {
             Console.WriteLine(text);
+        }
+
+        private static string RemoveQuotes(string text)
+        {
+            return text.Substring(1, text.Length - 2);
         }
 
         private static string GetQualifiedName(string @namespace, string name)
@@ -296,9 +302,16 @@ namespace ClangSharpSourceToWinmd
             if (ret)
             {
                 this.interfaceStructs.Add(node);
+                this.interfaceMethodCount[node.Identifier.Text] = node.Members.Count(m => m is MethodDeclarationSyntax);
             }
 
             return ret;
+        }
+
+        private bool IsInterfaceIUknown(StructDeclarationSyntax node)
+        {
+            var firstMethod = (MethodDeclarationSyntax)node.Members.FirstOrDefault(m => m is MethodDeclarationSyntax);
+            return firstMethod != null && firstMethod.Identifier.Text == "QueryInterface";
         }
 
         private void WriteInterfaceDef(StructDeclarationSyntax node)
@@ -327,11 +340,22 @@ namespace ClangSharpSourceToWinmd
 
             this.namesToTypeDefHandles[fullName] = destTypeDefHandle;
 
-            this.AddCustomAttribute(
-                "System.Runtime.InteropServices.InterfaceTypeAttribute",
-                new string[] { "System.Runtime.InteropServices.ComInterfaceType" },
-                new object[] { System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown },
-                destTypeDefHandle);
+            var inheritsFrom = this.GetInheritedInterfaceName(node);
+            if (inheritsFrom != null && inheritsFrom != "IUnknown")
+            {
+                var inheritsFromTypeDef = this.GetTypeReference(symbol.ContainingNamespace.ToString(), inheritsFrom);
+                metadataBuilder.AddInterfaceImplementation(destTypeDefHandle, inheritsFromTypeDef);
+            }
+
+            if (this.IsInterfaceIUknown(node))
+            {
+                this.AddCustomAttribute(
+                    "System.Runtime.InteropServices.InterfaceTypeAttribute",
+                    new string[] { "System.Runtime.InteropServices.ComInterfaceType" },
+                    new object[] { System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown },
+                    destTypeDefHandle);
+            }
+
             this.AddCustomAttributes(node, destTypeDefHandle);
         }
 
@@ -1101,7 +1125,7 @@ namespace ClangSharpSourceToWinmd
                         if (value[0] == '\"')
                         {
                             ctorTypes = new string[] { "System.String" };
-                            ctorObjs = new object[] { value.Substring(1, value.Length - 2) };
+                            ctorObjs = new object[] { RemoveQuotes(value) };
                         }
                         else
                         {
@@ -1161,6 +1185,7 @@ namespace ClangSharpSourceToWinmd
                     case "OutAttribute":
                     case "OptionalAttribute":
                     case "DllImportAttribute":
+                    case "NativeInheritanceAttribute":
                         continue;
                 }
 
@@ -1176,22 +1201,57 @@ namespace ClangSharpSourceToWinmd
             this.AddCustomAttributes(symbol.GetAttributes(), entityHandle);
         }
 
+        private string GetInheritedInterfaceName(StructDeclarationSyntax node)
+        {
+            foreach (var attrList in node.AttributeLists)
+            {
+                foreach (var attr in attrList.Attributes)
+                {
+                    if (attr.Name.ToString() == "NativeInheritance")
+                    {
+                        return RemoveQuotes(attr.ArgumentList.Arguments[0].ToString());
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        private int GetInheritedMethodCount(StructDeclarationSyntax node)
+        {
+            var inheritedFrom = this.GetInheritedInterfaceName(node);
+            if (inheritedFrom == null)
+            {
+                return this.IsInterfaceIUknown(node) ? 3 : 0;
+            }
+            else if (inheritedFrom == "IUnknown")
+            {
+                return 3;
+            }
+            else
+            {
+                return this.interfaceMethodCount[inheritedFrom];
+            }
+        }
+
         private MethodDefinitionHandle WriteInterfaceMethods(StructDeclarationSyntax node)
         {
             MethodDefinitionHandle firstMethod = default;
 
-            int before = metadataBuilder.GetRowCount(TableIndex.MethodDef) + 1;
             var model = this.GetModel(node);
             var symbol = model.GetDeclaredSymbol(node);
-            foreach (MethodDeclarationSyntax method in node.Members.Where(m => m is MethodDeclarationSyntax))
+
+            var inheritedMethodCount = this.GetInheritedMethodCount(node);
+            
+            foreach (MethodDeclarationSyntax method in node.Members.Where(m => m is MethodDeclarationSyntax).Skip(inheritedMethodCount))
             {
                 var methodSymbol = model.GetDeclaredSymbol(method);
                 var methodName = methodSymbol.Name;
 
-                if (symbol.Name != "IUnknown" && (methodName == "QueryInterface" || methodName == "AddRef" || methodName == "Release"))
-                {
-                    continue;
-                }
+                //if (symbol.Name != "IUnknown" && (methodName == "QueryInterface" || methodName == "AddRef" || methodName == "Release"))
+                //{
+                //    continue;
+                //}
 
                 var methodDef =
                     this.AddMethodViaSymbol(

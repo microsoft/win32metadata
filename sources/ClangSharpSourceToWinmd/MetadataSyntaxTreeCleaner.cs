@@ -396,6 +396,7 @@ namespace ClangSharpSourceToWinmd
 
             public override SyntaxNode VisitMethodDeclaration(MethodDeclarationSyntax node)
             {
+                // Skip methods where we weren't given a import lib name. Should we warn the user?
                 if (node.AttributeLists.ToString().Contains("[DllImport(\"\""))
                 {
                     return null;
