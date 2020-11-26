@@ -28,6 +28,7 @@ namespace ClangSharpSourceToWinmd
         private ModuleDefinitionHandle moduleRef;
         private Dictionary<string, TypeReferenceHandle> namesToTypeRefHandles = new Dictionary<string, TypeReferenceHandle>();
         private Dictionary<string, TypeDefinitionHandle> namesToTypeDefHandles = new Dictionary<string, TypeDefinitionHandle>();
+        private Dictionary<string, MethodDefinitionHandle> namesToMethodDefHandles = new Dictionary<string, MethodDefinitionHandle>();
         private HashSet<TypeDeclarationSyntax> visitedPartialDefs = new HashSet<TypeDeclarationSyntax>();
         private HashSet<ISymbol> interfaceSymbols = new HashSet<ISymbol>();
         private Dictionary<ITypeSymbol, FixedBufferInfo> fixedBufferTypeToInfo = new Dictionary<ITypeSymbol, FixedBufferInfo>();
@@ -249,6 +250,12 @@ namespace ClangSharpSourceToWinmd
         {
             var model = this.GetModel(node);
             var symbol = model.GetDeclaredSymbol(node);
+            string fullName = this.GetFullNameForSymbol(symbol);
+
+            if (this.namesToTypeDefHandles.ContainsKey(fullName))
+            {
+                return;
+            }
 
             // Add special value__ field for enums
             FieldAttributes valueFieldAttrs = FieldAttributes.Public | FieldAttributes.SpecialName | FieldAttributes.RTSpecialName;
@@ -275,7 +282,6 @@ namespace ClangSharpSourceToWinmd
                     fieldList: valueFieldDef,
                     methodList: MetadataTokens.MethodDefinitionHandle(metadataBuilder.GetRowCount(TableIndex.MethodDef) + 1));
 
-            string fullName = symbol.ConstructedFrom.ToString();
             this.namesToTypeDefHandles[fullName] = destTypeDefHandle;
         }
 
@@ -659,11 +665,18 @@ namespace ClangSharpSourceToWinmd
             var model = this.GetModel(node);
             var classSymbol = model.GetDeclaredSymbol(node);
             MethodDefinitionHandle firstMethod = default;
+            string classFullName = this.GetFullNameForSymbol(classSymbol);
 
             foreach (MethodDeclarationSyntax method in node.Members.Where(m => m is MethodDeclarationSyntax))
             {
                 var symbol = model.GetDeclaredSymbol(method);
                 var methodName = method.Identifier.ValueText;
+                string fullName = $"{classFullName}+{methodName}";
+
+                if (this.namesToMethodDefHandles.ContainsKey(fullName))
+                {
+                    continue;
+                }
 
                 if (!symbol.IsExtern)
                 {
@@ -680,6 +693,8 @@ namespace ClangSharpSourceToWinmd
                 {
                     firstMethod = methodDef;
                 }
+
+                this.namesToMethodDefHandles[fullName] = methodDef;
 
                 MethodImportAttributes methodImportAttributes = MethodImportAttributes.CallingConventionWinApi;
                 var dllImportAttr = symbol.GetAttributes().First(a => a.AttributeClass.Name == "DllImportAttribute");
