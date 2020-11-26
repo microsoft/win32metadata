@@ -1,5 +1,5 @@
 --file
-generation\ImportLibs\d3d12\main.cpp
+generation\ImportLibs\ntdll\main.cpp
 --output
 D:\repos\win32metadata\sources\Win32MetadataSource\generated\ntdll.cs
 --include-directory
