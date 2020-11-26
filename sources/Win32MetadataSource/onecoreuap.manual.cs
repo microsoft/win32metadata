@@ -2057,6 +2057,7 @@ namespace Microsoft.Windows.Sdk.Win32
         COINIT_SPEED_OVER_MEMORY = 0x8,
     }
 
+    [NativeInheritance("IUnknown")]
     public unsafe partial struct IActiveDesktopP
     {
         public Vtbl* lpVtbl;
@@ -2177,6 +2178,7 @@ namespace Microsoft.Windows.Sdk.Win32
         }
     }
 
+    [NativeInheritance("IUnknown")]
     public unsafe partial struct IADesktopP2
     {
         public Vtbl* lpVtbl;
