@@ -6,6 +6,98 @@ Historically, this has required manually [redefining the APIs](http://pinvoke.ne
 
 This project aims to provide metadata for Win32 APIs such that idiomatic projections and projects like above can be generated for all languages and frameworks in a more automated way and with more complete API coverage.
 
+# Architecture
+
+This project uses [ClangSharp](https://github.com/Microsoft/ClangSharp) to scrape Windows SDK headers into C# files. It uses libraries from the Windows SDK to figure out what the DLL imports are for each API function. The project is partioned by lib names, so that ClangSharp creates a .cs file for each lib that it processes.
+
+Once the C# files are written by ClangSharp, the emitter turns these files into a Window Metadata (.winmd) file. Although this is an ECMA-335 binary, it is not usuable directly by the CLR.
+
+The resulting .winmd is packaged as a NuGet package which can be used to create language projections for other languages such as C#, modern C++, and Rust.
+
+# ClangSharp Overview
+
+ClangSharp emits C# as it encounters types found in C/C++ headers. It will only emit types for headers included in its "traverse" list. Example for dxgi.lib:
+
+[main.cpp](generation/ImportLibs/dxgi/main.cpp):
+
+    #include <dxgi.h>
+    #include <dxgi1_5.h>
+    #include <dxgicommon.h>
+    #include <dxgiformat.h>
+    #include <dxgitype.h>
+
+[settings.rsp](generation/ImportLibs/dxgi/settings.rsp): (Note: The paths get updated by the build script to point at the correct WinSDK NuGet files)
+
+    --traverse
+    C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/shared/dxgiformat.h
+    C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/shared/dxgi.h
+    C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/shared/dxgicommon.h
+    C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/shared/dxgitype.h
+    C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/shared/dxgi1_5.h
+    C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/shared/dxgi1_4.h
+    C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/shared/dxgi1_3.h
+    C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/shared/dxgi1_2.h
+
+## ClangSharp and Remaps
+
+This means ClangSharp will emit types from the above list of files when running for dxgi.
+
+ClangSharp emits as it goes. For example, when it sees this type:
+
+    typedef struct tagRECT
+    {
+        LONG    left;
+        LONG    top;
+        LONG    right;
+        LONG    bottom;
+    } RECT, *PRECT, NEAR *NPRECT, FAR *LPRECT;
+
+It starts emitting:
+
+    public partial struct tagRect
+    {
+        public int left;
+
+It has no way of knowing a typedef is coming (RECT). But, we can find in data to ClangSharp that tells it to rename tagRECT to RECT:
+[baseRemap](generation/baseRemap.rsp)
+    tagRECT=RECT
+
+Now when ClangSharp encounters tagRECT it will automatically change the name it uses to RECT.
+
+# Winmd Emitter Overview
+
+ClangSharp was designed to create C#-compilable code from Win32 headers. Because its goal is to create C#-compilable code while also preserving pointers, it can't always express things in the way we would like for metadata that should be language-agnostic. For example, the CLR will not allow managed types such as "interface" or "delegate" to be on an unsafe struct (a struct that gets pointed to or includes pointers). This means ClangSharp emits COM objects as structs instead of interfaces, so that a COM object can exist on an unsafe struct.
+
+The winmd emitter takes the C#-compilable source created by ClangSharp and emits it into a .winmd. In a .winmd, you can define an interface, put it on a struct, and have a function point at the struct. However, the CLR will not be able to load it because such a thing is invalid in the CLR.
+
+The emitter also looks at SAL attributes that ClangSharp outputs for parameters and adds metadata attributes for const, in/out, COM out pointers, etc. It will also mark fields and parameters via attributes as null-terminated strings while preserving the original pointer type. It is up to consumers of the fields and parameters to interpret the metadata and, for example, turn them into a string type appropriate for a particular language.
+
+## Changing field/parameter types
+
+The emitter allows for changing a parameter type from what was found in the ClangSharp C# to something else. For example, the Win32 API [CreateFileW](https://docs.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilew) includes some variables that are of type DWORD. It would be nice if the metadata could provide a nicer type, such as a flags enum, that would help users know what values to use. This is how we change it from a DWORD to an enum:
+
+* Added a new enum type to one of the manually-created C# files:
+
+* Tell the emitter to change the type of the parameters in CreateFileW when it sees them:
+
+    (sources/Win32MetadataSource/remap.rsp)[sources/Win32MetadataSource/remap.rsp]
+
+    CreateFileW:dwShareMode=FILE_SHARE_FLAGS
+    CreateFileW:dwDesiredAccess=FILE_ACCESS_FLAGS
+    CreateFileW:dwCreationDisposition=FILE_CREATE_FLAGS
+    CreateFileW:dwFlagsAndAttributes=FILE_FLAGS_AND_ATTRIBUTES
+
+# Organization
+
+This project drives ClangSharp by giving it response files (.rsp). The scraping is partitioned by WinSDK libs. Each lib defines what headers it's looking at, and can also add manual .cs code it wants included in the final metadata.
+
+# How to Generate the .winmd
+The .winmd is generated in two steps:
+
+1) GenerateMetadataSource.cmd: This loops over the directories under generation\ImportLibs and treats each directory as a lib name, running ClangSharp for each one. There are base settings for all libs: name remaps are found in [generation/baseRemap.rsp](generation/baseRemap.rsp) and other settings are found in [generation/baseSettings.rsp](generation/baseSettings.rsp). Each lib folder contains a main.cpp, remap.rsp, and settings.rsp. ClangSharp writes C# files to sources/Win32MetadataSource/generated (these files are not checked in).
+2) BuildMetadataBin.cmd: This builds the emitter and points it at the [sources/Win32MetadataSource](sources/Win32MetadataSource) directory. Again, in the "generated" subdirectory are the files that ClangSharp created in step 1. The emitter will also use manually-created files in 
+
+
 # Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
