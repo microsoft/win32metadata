@@ -859,9 +859,14 @@ namespace ClangSharpSourceToWinmd
 
             var model = this.GetModel(node);
             var symbol = model.GetDeclaredSymbol(node);
+            string fullName = symbol.ConstructedFrom.ToString();
+            if (this.namesToTypeDefHandles.ContainsKey(fullName))
+            {
+                return;
+            }
+
             var nsHandle = metadataBuilder.GetOrAddString(symbol.ContainingNamespace.ToString());
             var name = node.Identifier.ValueText;
-            string fullName = symbol.ConstructedFrom.ToString();
 
             TypeAttributes delegateTypeAttributes = TypeAttributes.Public | TypeAttributes.AutoClass | TypeAttributes.Sealed | TypeAttributes.BeforeFieldInit;
 
