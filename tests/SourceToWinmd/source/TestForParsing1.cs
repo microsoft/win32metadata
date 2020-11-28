@@ -4,89 +4,106 @@ using Microsoft.Windows.Sdk.Win32.Interop;
 
 namespace Foobar
 {
-/*
-    public unsafe partial struct EXCEPTION_REGISTRATION_RECORD
-    {
-        [NativeTypeName("struct _EXCEPTION_REGISTRATION_RECORD *")]
-        public EXCEPTION_REGISTRATION_RECORD* Next;
+    [UnmanagedFunctionPointer(CallingConvention.Winapi)]
+    [return: NativeTypeName("BOOL")]
+    public unsafe delegate int MYCALLBACK();
 
-        [NativeTypeName("PEXCEPTION_ROUTINE")]
-        public IntPtr* Handler;
+    public unsafe partial struct MyCallbackStruct
+    {
+        [NativeTypeName("MYCALLBACK")]
+        public IntPtr MyCallback;
     }
 
-    public unsafe partial struct NT_TIB
+    public static unsafe partial class Apis
     {
-        [NativeTypeName("struct _EXCEPTION_REGISTRATION_RECORD *")]
-        public EXCEPTION_REGISTRATION_RECORD* ExceptionList;
+        [DllImport("KERNEL32", ExactSpelling = true, SetLastError = true)]
+        [return: NativeTypeName("BOOL")]
+        public static extern int FuncUsingCallback([NativeTypeName("MYCALLBACK")] IntPtr myCallBack);
+    }
 
-        [NativeTypeName("PVOID")]
-        public void* StackBase;
-
-        [NativeTypeName("PVOID")]
-        public void* StackLimit;
-
-        [NativeTypeName("PVOID")]
-        public void* SubSystemTib;
-
-        [NativeTypeName("_NT_TIB::(anonymous union at D:/repos/win32metadata/artifacts/InstalledPackages/Microsoft.Windows.SDK.CPP.10.0.19041.5/c/Include/10.0.19041.0/um/winnt.h:11490:5)")]
-        public _Anonymous_e__Union Anonymous;
-
-        [NativeTypeName("PVOID")]
-        public void* ArbitraryUserPointer;
-
-        [NativeTypeName("struct _NT_TIB *")]
-        public NT_TIB* Self;
-
-        [StructLayout(LayoutKind.Explicit)]
-        public unsafe partial struct _Anonymous_e__Union
+    /*
+        public unsafe partial struct EXCEPTION_REGISTRATION_RECORD
         {
-            [FieldOffset(0)]
-            [NativeTypeName("PVOID")]
-            public void* FiberData;
+            [NativeTypeName("struct _EXCEPTION_REGISTRATION_RECORD *")]
+            public EXCEPTION_REGISTRATION_RECORD* Next;
 
-            [FieldOffset(0)]
-            [NativeTypeName("DWORD")]
-            public uint Version;
+            [NativeTypeName("PEXCEPTION_ROUTINE")]
+            public IntPtr* Handler;
         }
-    }
 
-    public partial struct D3D11_BLEND_DESC
-    {
-        [NativeTypeName("BOOL")]
-        [NativeTypeInfo(UnmanagedType.Bool)]
-        public int AlphaToCoverageEnable;
+        public unsafe partial struct NT_TIB
+        {
+            [NativeTypeName("struct _EXCEPTION_REGISTRATION_RECORD *")]
+            public EXCEPTION_REGISTRATION_RECORD* ExceptionList;
 
-        [NativeTypeName("BOOL")]
-        [NativeTypeInfo(UnmanagedType.Bool)]
-        public int IndependentBlendEnable;
+            [NativeTypeName("PVOID")]
+            public void* StackBase;
 
-        [NativeTypeName("D3D11_RENDER_TARGET_BLEND_DESC [8]")]
-        public _RenderTarget_e__FixedBuffer RenderTarget;
+            [NativeTypeName("PVOID")]
+            public void* StackLimit;
 
-        public partial struct D3D11_RENDER_TARGET_BLEND_DESC
+            [NativeTypeName("PVOID")]
+            public void* SubSystemTib;
+
+            [NativeTypeName("_NT_TIB::(anonymous union at D:/repos/win32metadata/artifacts/InstalledPackages/Microsoft.Windows.SDK.CPP.10.0.19041.5/c/Include/10.0.19041.0/um/winnt.h:11490:5)")]
+            public _Anonymous_e__Union Anonymous;
+
+            [NativeTypeName("PVOID")]
+            public void* ArbitraryUserPointer;
+
+            [NativeTypeName("struct _NT_TIB *")]
+            public NT_TIB* Self;
+
+            [StructLayout(LayoutKind.Explicit)]
+            public unsafe partial struct _Anonymous_e__Union
+            {
+                [FieldOffset(0)]
+                [NativeTypeName("PVOID")]
+                public void* FiberData;
+
+                [FieldOffset(0)]
+                [NativeTypeName("DWORD")]
+                public uint Version;
+            }
+        }
+
+        public partial struct D3D11_BLEND_DESC
         {
             [NativeTypeName("BOOL")]
             [NativeTypeInfo(UnmanagedType.Bool)]
-            public int BlendEnable;
+            public int AlphaToCoverageEnable;
 
-            [NativeTypeName("UINT8")]
-            public byte RenderTargetWriteMask;
+            [NativeTypeName("BOOL")]
+            [NativeTypeInfo(UnmanagedType.Bool)]
+            public int IndependentBlendEnable;
+
+            [NativeTypeName("D3D11_RENDER_TARGET_BLEND_DESC [8]")]
+            public _RenderTarget_e__FixedBuffer RenderTarget;
+
+            public partial struct D3D11_RENDER_TARGET_BLEND_DESC
+            {
+                [NativeTypeName("BOOL")]
+                [NativeTypeInfo(UnmanagedType.Bool)]
+                public int BlendEnable;
+
+                [NativeTypeName("UINT8")]
+                public byte RenderTargetWriteMask;
+            }
+
+            public partial struct _RenderTarget_e__FixedBuffer
+            {
+                public D3D11_RENDER_TARGET_BLEND_DESC e0;
+                public D3D11_RENDER_TARGET_BLEND_DESC e1;
+                public D3D11_RENDER_TARGET_BLEND_DESC e2;
+                public D3D11_RENDER_TARGET_BLEND_DESC e3;
+                public D3D11_RENDER_TARGET_BLEND_DESC e4;
+                public D3D11_RENDER_TARGET_BLEND_DESC e5;
+                public D3D11_RENDER_TARGET_BLEND_DESC e6;
+                public D3D11_RENDER_TARGET_BLEND_DESC e7;
+
+            }
         }
-
-        public partial struct _RenderTarget_e__FixedBuffer
-        {
-            public D3D11_RENDER_TARGET_BLEND_DESC e0;
-            public D3D11_RENDER_TARGET_BLEND_DESC e1;
-            public D3D11_RENDER_TARGET_BLEND_DESC e2;
-            public D3D11_RENDER_TARGET_BLEND_DESC e3;
-            public D3D11_RENDER_TARGET_BLEND_DESC e4;
-            public D3D11_RENDER_TARGET_BLEND_DESC e5;
-            public D3D11_RENDER_TARGET_BLEND_DESC e6;
-            public D3D11_RENDER_TARGET_BLEND_DESC e7;
-
-        }
-    }
-*/
+    */
 
     public enum Enum1
     {

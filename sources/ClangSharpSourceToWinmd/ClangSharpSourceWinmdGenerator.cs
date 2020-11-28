@@ -517,8 +517,23 @@ namespace ClangSharpSourceToWinmd
             }
         }
 
-        private void RemapIfNecessary(string parent, ref ITypeSymbol typeSymbol, ref string name, out string attributes)
+        private void RemapIfNecessary(string parent, ImmutableArray<AttributeData> ownerAttributes, ref ITypeSymbol typeSymbol, ref string name, out string attributes)
         {
+            // See if we can map from an IntPtr to a more specific type
+            if (typeSymbol.SpecialType == SpecialType.System_IntPtr)
+            {
+                var attr = ownerAttributes.FirstOrDefault(a => a.AttributeClass.Name == "NativeTypeNameAttribute");
+                if (attr != null)
+                {
+                    var originalTypeName = attr.ConstructorArguments[0].Value.ToString();
+                    var newTypeSymbol = this.GetTypeFromShortName(originalTypeName);
+                    if (newTypeSymbol != null)
+                    {
+                        typeSymbol = newTypeSymbol;
+                    }
+                }
+            }
+
             string remapKeyName = $"{parent}:{name}";
             attributes = null;
             if (this.remaps.TryGetValue(remapKeyName, out string remappedTo))
@@ -615,7 +630,7 @@ namespace ClangSharpSourceToWinmd
         {
             var returnType = methodSymbol.ReturnType;
             string returnName = "return";
-            this.RemapIfNecessary(methodSymbol.Name, ref returnType, ref returnName, out string remapReturnAttrs);
+            this.RemapIfNecessary(methodSymbol.Name, methodSymbol.GetReturnTypeAttributes(), ref returnType, ref returnName, out string remapReturnAttrs);
 
             List<Parameter> parameters = new List<Parameter>();
             foreach (var p in methodSymbol.Parameters)
@@ -1286,7 +1301,7 @@ namespace ClangSharpSourceToWinmd
             var encoder = new BlobEncoder(fieldSignature);
             var signatureEncoder = encoder.FieldSignature();
 
-            this.RemapIfNecessary(structName, ref type, ref name, out extraAttr);
+            this.RemapIfNecessary(structName, fieldSymbol.GetAttributes(), ref type, ref name, out extraAttr);
 
             if (type.Name.EndsWith("_e__FixedBuffer"))
             {
@@ -1495,7 +1510,7 @@ namespace ClangSharpSourceToWinmd
                 var paramType = parameterSymbol.Type;
                 var paramName = parameterSymbol.Name;
                 string additionalAttrs = null;
-                generator.RemapIfNecessary(methodSymbol.Name, ref paramType, ref paramName, out additionalAttrs);
+                generator.RemapIfNecessary(methodSymbol.Name, parameterSymbol.GetAttributes(), ref paramType, ref paramName, out additionalAttrs);
 
                 ParameterAttributes parameterAttributes = ParameterAttributes.None;
                 var symbolAttrs = parameterSymbol.GetAttributes();
