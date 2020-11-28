@@ -190,6 +190,7 @@ namespace ClangSharpSourceToWinmd
                 string nativeType = nativeTypeNameAttr.ArgumentList.Arguments[0].ToString();
                 nativeType = nativeType.Substring(1, nativeType.Length - 2);
                 List<AttributeSyntax> attributeNodes = new List<AttributeSyntax>();
+
                 marshalAs = this.AddNativeTypeInfoAttribute(nativeType, attributeNodes);
                 if (attributeNodes.Count == 0)
                 {
@@ -197,6 +198,15 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 var ret = SyntaxFactory.AttributeList(SyntaxFactory.SeparatedList(attributeNodes));
+                if (((AttributeListSyntax)nativeTypeNameAttr.Parent).Target is AttributeTargetSpecifierSyntax target
+                    && target.Identifier.ValueText == "return")
+                {
+                    ret =
+                        ret.WithTarget(
+                            SyntaxFactory.AttributeTargetSpecifier(
+                                SyntaxFactory.Token(SyntaxKind.ReturnKeyword)));
+                }
+
                 return ret;
             }
 
