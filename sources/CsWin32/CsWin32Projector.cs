@@ -31,7 +31,7 @@ namespace Microsoft.Windows.Sdk.CsWin32
         private StreamWriter writer;
         private Dictionary<string, string> riaaMappings = new Dictionary<string, string>();
         private HashSet<string> csKeywords = new HashSet<string>();
-        private Type riaaFreeAttributeType;
+        private Type raiiFreeAttributeType;
         private Type nativeTypeInfoAttributeType;
         private Assembly metadataAssembly;
 
@@ -360,7 +360,7 @@ namespace Microsoft.Windows.Win32
 ");
 
                 this.metadataAssembly = Assembly.LoadFile(metadata);
-                this.riaaFreeAttributeType = this.metadataAssembly.GetType("Microsoft.Windows.Sdk.RIAAFreeAttribute");
+                this.raiiFreeAttributeType = this.metadataAssembly.GetType("Microsoft.Windows.Sdk.RAIIFreeAttribute");
                 this.nativeTypeInfoAttributeType = this.metadataAssembly.GetType("Microsoft.Windows.Sdk.NativeTypeInfoAttribute");
 
                 foreach (var type in this.metadataAssembly.GetExportedTypes())
@@ -868,7 +868,7 @@ $@"
 
             if (attributes != null)
             {
-                var riaaFreeAttrData = attributes.FirstOrDefault(data => data.AttributeType == this.riaaFreeAttributeType);
+                var riaaFreeAttrData = attributes.FirstOrDefault(data => data.AttributeType == this.raiiFreeAttributeType);
                 if (riaaFreeAttrData != null)
                 {
                     var riaaFunction = riaaFreeAttrData.ConstructorArguments[0].Value.ToString();

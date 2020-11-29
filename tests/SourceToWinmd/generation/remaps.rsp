@@ -1,5 +1,5 @@
 --remap
 TestFunc:dwRetypeMe=[Const]Enum1 enum1
-TestFunc:return=[RIAAFree("CloseHandle")]
-S1:addRIAAToMe=[RIAAFree("CloseHandle")]IntPtr addedRIAA
+TestFunc:return=[RAIIFree("CloseHandle")]
+S1:addRIAAToMe=[RAIIFree("CloseHandle")]IntPtr addedRAII
 S1:changeToEnum=Enum2
