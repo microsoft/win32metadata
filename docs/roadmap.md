@@ -22,7 +22,7 @@ DISCLAIMER: The roadmap is subject to change.
         <ul>
             <li>Win32 metadata package published to NuGet.org with versioning metadata for all supported Windows SDK versions</li>
             <li>C#, C++, and Rust projections published</li>
-            <li>.NET 5 TFM integration of the C# projection
+            <li>.NET 5 TFM integration of the C# projection</li>
          </ul>
      </td>
     <td>
