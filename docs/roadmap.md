@@ -2,6 +2,8 @@
 
 For a general overview, see the [README](https://github.com/microsoft/win32metadata/tree/master) and [FAQ](https://github.com/microsoft/win32metadata/blob/master/docs/faq.md).
 
+DISCLAIMER: The roadmap is subject to change.
+
 <table>
   <tbody>
     <tr>
