@@ -341,19 +341,10 @@ namespace ClangSharpSourceToWinmd
             this.namesToTypeDefHandles[fullName] = destTypeDefHandle;
 
             var inheritsFrom = this.GetInheritedInterfaceName(node);
-            if (inheritsFrom != null && inheritsFrom != "IUnknown")
+            if (inheritsFrom != null)
             {
                 var inheritsFromTypeDef = this.GetTypeReference(symbol.ContainingNamespace.ToString(), inheritsFrom);
                 metadataBuilder.AddInterfaceImplementation(destTypeDefHandle, inheritsFromTypeDef);
-            }
-
-            if (this.IsInterfaceIUknown(node))
-            {
-                this.AddCustomAttribute(
-                    "System.Runtime.InteropServices.InterfaceTypeAttribute",
-                    new string[] { "System.Runtime.InteropServices.ComInterfaceType" },
-                    new object[] { System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown },
-                    destTypeDefHandle);
             }
 
             this.AddCustomAttributes(node, destTypeDefHandle);
@@ -1242,16 +1233,10 @@ namespace ClangSharpSourceToWinmd
             var inheritedFrom = this.GetInheritedInterfaceName(node);
             if (inheritedFrom == null)
             {
-                return this.IsInterfaceIUknown(node) ? 3 : 0;
+                return 0;
             }
-            else if (inheritedFrom == "IUnknown")
-            {
-                return 3;
-            }
-            else
-            {
-                return this.interfaceMethodCount[inheritedFrom];
-            }
+
+            return this.interfaceMethodCount[inheritedFrom];
         }
 
         private MethodDefinitionHandle WriteInterfaceMethods(StructDeclarationSyntax node)
