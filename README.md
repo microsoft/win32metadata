@@ -6,6 +6,8 @@ Historically, this has required manually [redefining the APIs](http://pinvoke.ne
 
 This project aims to provide metadata for Win32 APIs such that idiomatic projections and projects like the ones above can be generated for all languages and frameworks in a more automated way and with more complete API coverage.
 
+See the [roadmap](./docs/roadmap.md) and [FAQ](./docs/faq.md) for more details.
+
 # Architecture
 
 This project uses [ClangSharp](https://github.com/Microsoft/ClangSharp) to scrape Windows SDK headers into C# files. It uses libraries from the Windows SDK to figure out what the DLL imports are for each API function. The project is partioned by lib names, so that ClangSharp creates a .cs file for each lib that it processes.
