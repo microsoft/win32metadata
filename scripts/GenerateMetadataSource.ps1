@@ -11,7 +11,7 @@ param
     $downloadDefaultCppNugets = $true,
 
     [string]
-    $qfeOverride = ""
+    $patch = ""
 )
 
 . "$PSScriptRoot\CommonUtils.ps1"
@@ -98,21 +98,32 @@ Create-Directory $nugetSrcPackagesDir
 
 $publishNugetVersion = $version
 
-if ($qfeOverride -ne "")
+# patch is an auto-increment counter specific to the pipeline name.
+# If it's set...
+if ($patch -ne "")
 {
-    $buildParts = $version.Split("{.}")
-    $qfePart = $buildParts[3]
-    $qfeParts = $qfePart.Split("{-}")
-    $qfe = $qfeOverride
-    if ($qfeParts.Length -eq 2)
+    # If this is a preview build, just append the patch to the end of the version
+    if ($version.Contains("-preview"))
     {
-        $qfeExtra = $qfeParts[1]
-        $qfe = "$qfe-$qfeExtra"
+        $publishNugetVersion = "$version.$patch"
     }
+    # If this isn't a preview build, we want to replace the build QFE with the patch
+    else
+    {
+        $buildParts = $version.Split("{.}")
+        $qfePart = $buildParts[3]
+        $qfeParts = $qfePart.Split("{-}")
+        $qfe = $qfeOverride
+        if ($qfeParts.Length -eq 2)
+        {
+            $qfeExtra = $qfeParts[1]
+            $qfe = "$qfe-$qfeExtra"
+        }
     
-    $buildParts[3] = $qfe
+        $buildParts[3] = $patch
 
-    $publishNugetVersion = [string]::Join(".", $buildParts)
+        $publishNugetVersion = [string]::Join(".", $buildParts)
+    }
 }
 
 # Write variable in the Azure DevOps pipeline for use in subsequent tasks

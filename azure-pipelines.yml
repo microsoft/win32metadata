@@ -31,6 +31,7 @@ variables:
   IncludeCsProjection: false
   WinMetadataSourceDir: $(Build.SourcesDirectory)\sources\Win32MetadataSource
   OutputPackagesDir: $(Build.ArtifactStagingDirectory)\CreatedNugetPackages
+  Patch: $[counter(variables['resources.pipeline.winsdk.runName'], 1)]
 
 steps:
 - download: winsdk
@@ -72,7 +73,7 @@ steps:
   displayName: Generate Win32 metadata C# source
   inputs:
     filePath: 'scripts\GenerateMetadataSource.ps1'
-    arguments: '-artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0 -pipelineRunName $(resources.pipeline.winsdk.runName) -qfeOverride "$(QFEOverride)"'
+    arguments: '-artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0 -pipelineRunName $(resources.pipeline.winsdk.runName) -patch "$(Patch)"'
     errorActionPreference: 'continue'
   condition: and(succeeded(), eq(variables.UsePreGeneratedSource, false))
 
