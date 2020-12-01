@@ -105,7 +105,7 @@ if ($patch -ne "")
     # If this is a preview build, just append the patch to the end of the version
     if ($version.Contains("-preview"))
     {
-        $version = "$version.$patch"
+        $publishNugetVersion = "$version.$patch"
     }
     # If this isn't a preview build, we want to replace the build QFE with the patch
     else
