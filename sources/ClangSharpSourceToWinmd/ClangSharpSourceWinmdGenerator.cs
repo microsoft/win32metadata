@@ -254,6 +254,11 @@ namespace ClangSharpSourceToWinmd
 
         private void WriteEnumDef(EnumDeclarationSyntax node)
         {
+            this.WriteEnumDef(node, default);
+        }
+
+        private void WriteEnumDef(EnumDeclarationSyntax node, TypeDefinitionHandle enclosingType)
+        {
             var model = this.GetModel(node);
             var symbol = model.GetDeclaredSymbol(node);
             string fullName = this.GetFullNameForSymbol(symbol);
@@ -287,6 +292,11 @@ namespace ClangSharpSourceToWinmd
                     this.GetTypeReference("System", "Enum"),
                     fieldList: valueFieldDef,
                     methodList: MetadataTokens.MethodDefinitionHandle(metadataBuilder.GetRowCount(TableIndex.MethodDef) + 1));
+
+            if (enclosingType != default)
+            {
+                this.metadataBuilder.AddNestedType(destTypeDefHandle, enclosingType);
+            }
 
             this.namesToTypeDefHandles[fullName] = destTypeDefHandle;
         }
@@ -443,6 +453,8 @@ namespace ClangSharpSourceToWinmd
                     methodList: MetadataTokens.MethodDefinitionHandle(metadataBuilder.GetRowCount(TableIndex.MethodDef) + 1));
 
             this.namesToTypeDefHandles[fullName] = destTypeDefHandle;
+
+            this.WriteStructEnums(node, destTypeDefHandle);
 
             if (packSize.HasValue)
             {
@@ -1325,6 +1337,14 @@ namespace ClangSharpSourceToWinmd
             }
 
             return fieldSignature;
+        }
+
+        private void WriteStructEnums(StructDeclarationSyntax node, TypeDefinitionHandle structTypeDefHandle)
+        {
+            foreach (EnumDeclarationSyntax enumNode in node.Members.Where(m => m is EnumDeclarationSyntax))
+            {
+                this.WriteEnumDef(enumNode, structTypeDefHandle);
+            }
         }
 
         private FieldDefinitionHandle WriteStructFields(StructDeclarationSyntax node)

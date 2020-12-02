@@ -13,35 +13,7 @@ namespace ClangSharpSourceToWinmd
 {
     public static class Program
     {
-        private static string FindNetstandardDllPath()
-        {
-            // Is there a better way to find this?
-            string progFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
-            return Path.Combine(progFiles, @"dotnet\packs\NETStandard.Library.Ref\2.1.0\ref\netstandard2.1\netstandard.dll");
-        }
-
-        //ISourceGenerator
-        //AnalyzerReference
-
-        //private static void AddRemapOption(RootCommand rootCommand)
-        //{
-        //    var option = ;
-        //    option.Argument.SetDefaultValue(Array.Empty<string>());
-
-        //    rootCommand.AddOption(option);
-        //}
-
-        private static Command WithHandler(this RootCommand command, string name)
-        {
-            var flags = BindingFlags.NonPublic | BindingFlags.Static;
-            var method = typeof(Program).GetMethod(name, flags);
-
-            var handler = CommandHandler.Create(method!);
-            command.Handler = handler;
-            return command;
-        }
-
-        static int Main(string[] args)
+        public static int Main(string[] args)
         {
             var rootCommand = new RootCommand("Convert ClangSharp-generated code into metadata")
             {
@@ -57,7 +29,7 @@ namespace ClangSharpSourceToWinmd
                         Arity = ArgumentArity.OneOrMore,
                     }
                 }
-            }; //.WithHandler(nameof(Run));
+            };
 
             foreach (var opt in rootCommand.Options.Where(o => o.Name != "version" && o.Name != "remap"))
             {
@@ -66,29 +38,11 @@ namespace ClangSharpSourceToWinmd
 
             rootCommand.Handler = CommandHandler.Create(typeof(Program).GetMethod(nameof(Run)));
 
-            //AddRemapOption(rootCommand);
-
             return rootCommand.Invoke(args);
         }
 
-        private static Dictionary<string, string> ConvertValuePairsToDictionary(string[] items)
-        {
-            Dictionary<string, string> ret = new Dictionary<string, string>();
-            foreach (var item in items)
-            {
-                if (string.IsNullOrEmpty(item))
-                {
-                    continue;
-                }
 
-                string[] parts = item.Split('=');
-                ret[parts[0]] = parts[1];
-            }
-
-            return ret;
-        }
-
-        public static int Run(InvocationContext context) //string sourceDirectory, string interopFileName, string outputFileName, string version, string[] remaps, IConsole console)
+        public static int Run(InvocationContext context)
         {
             string sourceDirectory = context.ParseResult.ValueForOption<string>("sourceDir");
             string interopFileName = context.ParseResult.ValueForOption<string>("interopFileName");
@@ -137,6 +91,40 @@ namespace ClangSharpSourceToWinmd
             ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(comp, assemblyVersion, outputFileName, remaps);
 
             return 0;
+        }
+
+        private static string FindNetstandardDllPath()
+        {
+            // Is there a better way to find this?
+            string progFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+            return Path.Combine(progFiles, @"dotnet\packs\NETStandard.Library.Ref\2.1.0\ref\netstandard2.1\netstandard.dll");
+        }
+
+        private static Command WithHandler(this RootCommand command, string name)
+        {
+            var flags = BindingFlags.NonPublic | BindingFlags.Static;
+            var method = typeof(Program).GetMethod(name, flags);
+
+            var handler = CommandHandler.Create(method!);
+            command.Handler = handler;
+            return command;
+        }
+
+        private static Dictionary<string, string> ConvertValuePairsToDictionary(string[] items)
+        {
+            Dictionary<string, string> ret = new Dictionary<string, string>();
+            foreach (var item in items)
+            {
+                if (string.IsNullOrEmpty(item))
+                {
+                    continue;
+                }
+
+                string[] parts = item.Split('=');
+                ret[parts[0]] = parts[1];
+            }
+
+            return ret;
         }
     }
 }
