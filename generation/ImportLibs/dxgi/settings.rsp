@@ -17,4 +17,6 @@ C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/shared/dxgi1_5.h
 C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/shared/dxgi1_4.h
 C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/shared/dxgi1_3.h
 C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/shared/dxgi1_2.h
+--exclude
+DXGI_ADAPTER_FLAG
 

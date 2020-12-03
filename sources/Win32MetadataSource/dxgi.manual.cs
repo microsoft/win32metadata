@@ -7,6 +7,13 @@ using System;
 
 namespace Microsoft.Windows.Sdk.Win32
 {
+    public enum DXGI_ADAPTER_FLAG : uint
+    {
+        DXGI_ADAPTER_FLAG_NONE = 0u,
+        DXGI_ADAPTER_FLAG_REMOTE = 1u,
+        DXGI_ADAPTER_FLAG_SOFTWARE = 2u,
+    }
+
     public static unsafe partial class Apis
     {
         public const uint DXGI_USAGE_SHADER_INPUT = 0x00000010;
