@@ -29,6 +29,7 @@ variables:
   buildConfiguration: 'Release'
   System.Debug: true
   IncludeCsProjection: false
+  UsePreGeneratedSource: false
   WinMetadataSourceDir: $(Build.SourcesDirectory)\sources\Win32MetadataSource
   OutputPackagesDir: $(Build.ArtifactStagingDirectory)\CreatedNugetPackages
   Patch: $[counter(variables['resources.pipeline.winsdk.runName'], 1)]
