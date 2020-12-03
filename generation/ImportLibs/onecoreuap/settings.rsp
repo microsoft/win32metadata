@@ -437,3 +437,5 @@ IPerceptionDevicePropertyListenerAbortedEventArgs
 IPerceptionDevicePropertyChangedHandler
 IPerceptionDevicePropertyListener
 MLOperatorEdgeTypeConstrant
+JsRuntimeVersionEdge
+JsRuntimeVersion

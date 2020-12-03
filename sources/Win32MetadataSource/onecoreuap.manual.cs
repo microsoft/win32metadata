@@ -9156,4 +9156,11 @@ namespace Microsoft.Windows.Sdk.Win32
         DWRITE_FONT_AXIS_TAG_OPTICAL_SIZE = (((uint)((byte)('z')) << 24) | ((uint)((byte)('s')) << 16) | ((uint)((byte)('p')) << 8) | (uint)((byte)('o'))),
         DWRITE_FONT_AXIS_TAG_ITALIC = (((uint)((byte)('l')) << 24) | ((uint)((byte)('a')) << 16) | ((uint)((byte)('t')) << 8) | (uint)((byte)('i'))),
     }
+
+    public enum JsRuntimeVersion
+    {
+        JsRuntimeVersion10 = 0,
+        JsRuntimeVersion11 = 1,
+        JsRuntimeVersionEdge = -1,
+    }
 }
