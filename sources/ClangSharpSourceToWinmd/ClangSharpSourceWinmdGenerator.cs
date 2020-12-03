@@ -869,7 +869,13 @@ namespace ClangSharpSourceToWinmd
 
             return $"{this.GetShortNameForSymbol(typeSymbol.ContainingType)}_{typeSymbol.Name}";
 #else
-            return typeSymbol.Name;
+            string ret = typeSymbol.Name;
+            if (typeSymbol.ContainingSymbol is ITypeSymbol containingType && this.GetShortNameForSymbol(containingType) == ret)
+            {
+                ret += "_1";
+            }
+
+            return ret;
 #endif
         }
 

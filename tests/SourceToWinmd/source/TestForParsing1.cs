@@ -115,6 +115,24 @@ namespace Test
         }
 
         NestedEnum n1;
+        Anonymous a1;
+
+        public struct Anonymous
+        {
+            int a;
+            Anonymous a2;
+
+            public struct Anonymous
+            {
+                int b;
+                Anonymous a3;
+
+                public struct Anonymous
+                {
+                    int c;
+                }
+            }
+        }
     }
 
     public unsafe partial struct MyCallbackStruct
