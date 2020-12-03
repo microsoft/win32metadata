@@ -9,9 +9,9 @@ namespace ClangSharpSourceToWinmd
 {
     public static class MetadataSyntaxTreeCleaner
     {
-        public static SyntaxTree CleanSyntaxTree(SyntaxTree tree)
+        public static SyntaxTree CleanSyntaxTree(SyntaxTree tree, Dictionary<string, string> remaps)
         {
-            TreeRewriter treeRewriter = new TreeRewriter();
+            TreeRewriter treeRewriter = new TreeRewriter(remaps);
             var newRoot = (CSharpSyntaxNode)treeRewriter.Visit(tree.GetRoot());
             return CSharpSyntaxTree.Create(newRoot);
         }
@@ -21,6 +21,84 @@ namespace ClangSharpSourceToWinmd
             private static readonly System.Text.RegularExpressions.Regex elementCountRegex = new System.Text.RegularExpressions.Regex(@"(?:elementCount|byteCount)\(([^\)]+)\)");
 
             private HashSet<SyntaxNode> nodesWithMarshalAs = new HashSet<SyntaxNode>();
+            private Dictionary<string, string> remaps;
+
+            public TreeRewriter(Dictionary<string, string> remaps)
+            {
+                this.remaps = remaps;
+            }
+
+            public override SyntaxNode VisitParameter(ParameterSyntax node)
+            {
+                string fullName = GetFullName(node);
+
+                if (this.GetRemapInfo(fullName, out List<AttributeSyntax> listAttributes, out string newType, out string newName))
+                {
+                    node = (ParameterSyntax)base.VisitParameter(node);
+                    if (listAttributes != null)
+                    {
+                        foreach (var attrNode in listAttributes)
+                        {
+                            var attrListNode =
+                                SyntaxFactory.AttributeList(
+                                    SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(attrNode));
+                            node = node.WithAttributeLists(node.AttributeLists.Add(attrListNode));
+                        }
+                    }
+                        
+                    if (newName != null)
+                    {
+                        node = node.WithIdentifier(SyntaxFactory.Identifier(newName));
+                    }
+
+                    if (newType != null)
+                    {
+                        node = node.WithType(SyntaxFactory.ParseTypeName(newType));
+                    }
+
+                    return node;
+                }
+
+                return base.VisitParameter(node);
+            }
+
+            public override SyntaxNode VisitFieldDeclaration(FieldDeclarationSyntax node)
+            {
+                string fullName = GetFullName(node);
+
+                if (this.GetRemapInfo(fullName, out var listAttributes, out string newType, out string newName))
+                {
+                    node = (FieldDeclarationSyntax)base.VisitFieldDeclaration(node);
+                    if (listAttributes != null)
+                    {
+                        foreach (var attrNode in listAttributes)
+                        {
+                            var attrListNode =
+                                SyntaxFactory.AttributeList(
+                                    SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(attrNode));
+                            node = node.WithAttributeLists(node.AttributeLists.Add(attrListNode));
+                        }
+                    }
+
+                    var firstVar = node.Declaration.Variables.First();
+
+                    if (newName != null)
+                    {
+                        var newVar = SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(newName));
+                        node = node.ReplaceNode(firstVar, newVar);
+                    }
+
+                    if (newType != null)
+                    {
+                        var newDeclaration = node.Declaration.WithType(SyntaxFactory.ParseTypeName(newType));
+                        node = node.ReplaceNode(node.Declaration, newDeclaration);
+                    }
+
+                    return node;
+                }
+
+                return base.VisitFieldDeclaration(node);
+            }
 
             public override SyntaxNode VisitAttributeList(AttributeListSyntax node)
             {
@@ -47,6 +125,70 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 return base.VisitAttributeList(node);
+            }
+
+            public override SyntaxNode VisitDelegateDeclaration(DelegateDeclarationSyntax node)
+            {
+                string fullName = GetFullName(node);
+                string returnFullName = $"{GetFullName(node)}::return";
+
+                if (this.GetRemapInfo(returnFullName, out List<AttributeSyntax> listAttributes, out _, out _))
+                {
+                    node = (DelegateDeclarationSyntax)base.VisitDelegateDeclaration(node);
+                    if (listAttributes != null)
+                    {
+                        foreach (var attrNode in listAttributes)
+                        {
+                            var attrListNode =
+                                SyntaxFactory.AttributeList(
+                                    SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(attrNode))
+                                    .WithTarget(
+                                        SyntaxFactory.AttributeTargetSpecifier(
+                                            SyntaxFactory.Token(SyntaxKind.ReturnKeyword)));
+
+                            node = node.WithAttributeLists(node.AttributeLists.Add(attrListNode));
+                        }
+                    }
+
+                    return node;
+                }
+
+                return base.VisitDelegateDeclaration(node);
+            }
+
+            public override SyntaxNode VisitMethodDeclaration(MethodDeclarationSyntax node)
+            {
+                // Skip methods where we weren't given a import lib name. Should we warn the caller?
+                if (node.AttributeLists.ToString().Contains("[DllImport(\"\""))
+                {
+                    return null;
+                }
+
+                string fullName = GetFullName(node);
+                string returnFullName = $"{fullName}::return";
+
+                if (this.GetRemapInfo(returnFullName, out List<AttributeSyntax> listAttributes, out _, out _))
+                {
+                    node = (MethodDeclarationSyntax)base.VisitMethodDeclaration(node);
+                    if (listAttributes != null)
+                    {
+                        foreach (var attrNode in listAttributes)
+                        {
+                            var attrListNode =
+                                SyntaxFactory.AttributeList(
+                                    SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(attrNode))
+                                    .WithTarget(
+                                        SyntaxFactory.AttributeTargetSpecifier(
+                                            SyntaxFactory.Token(SyntaxKind.ReturnKeyword)));
+
+                            node = node.WithAttributeLists(node.AttributeLists.Add(attrListNode));
+                        }
+                    }
+
+                    return node;
+                }
+
+                return base.VisitMethodDeclaration(node);
             }
 
             private string ConvertTypeToMarshalAsType(string nativeTypeName, out bool isConst, out bool isNullTerminated, out bool isNullNullTerminated)
@@ -185,6 +327,56 @@ namespace ClangSharpSourceToWinmd
                 return false;
             }
 
+            private string GetFullName(SyntaxNode node)
+            {
+                string parentName = null;
+                string ret = null;
+                if (node is DelegateDeclarationSyntax delNode)
+                {
+                    parentName = GetFullName(delNode.Parent);
+                    ret = delNode.Identifier.Text;
+                }
+                else if (node is ClassDeclarationSyntax)
+                {
+                    return string.Empty;
+                }
+                else if (node is StructDeclarationSyntax structNode)
+                {
+                    parentName = GetFullName(structNode.Parent);
+                    ret = structNode.Identifier.Text;
+                }
+                else if (node is MethodDeclarationSyntax methodNode)
+                {
+                    parentName = GetFullName(methodNode.Parent);
+                    ret = methodNode.Identifier.Text;
+                }
+                else if (node is ParameterSyntax paramNode)
+                {
+                    parentName = GetFullName(paramNode.Parent.Parent);
+                    ret = paramNode.Identifier.Text;
+                }
+                else if (node is VariableDeclaratorSyntax varNode)
+                {
+                    parentName = GetFullName(varNode.Parent.Parent.Parent);
+                    ret = varNode.Identifier.Text;
+                }
+                else if (node is FieldDeclarationSyntax fieldNode)
+                {
+                    ret = GetFullName(fieldNode.Declaration.Variables.First());
+                }
+                else
+                {
+                    // Do nothing for everything else
+                }
+
+                if (!string.IsNullOrEmpty(parentName) && !string.IsNullOrEmpty(ret))
+                {
+                    ret = $"{parentName}::{ret}";
+                }
+
+                return ret;
+            }
+
             private SyntaxNode ProcessNativeTypeNameAttr(AttributeSyntax nativeTypeNameAttr, out bool marshalAs)
             {
                 string nativeType = nativeTypeNameAttr.ArgumentList.Arguments[0].ToString();
@@ -210,7 +402,6 @@ namespace ClangSharpSourceToWinmd
 
                 return ret;
             }
-
 
             private SyntaxNode CreateAttributeListForSal(AttributeListSyntax cppAttrList)
             {
@@ -454,22 +645,23 @@ namespace ClangSharpSourceToWinmd
                 }
             }
 
-            public override SyntaxNode VisitMethodDeclaration(MethodDeclarationSyntax node)
+            private bool GetRemapInfo(string fullName, out List<AttributeSyntax> listAttributes, out string newType, out string newName)
             {
-                // Skip methods where we weren't given a import lib name. Should we warn the user?
-                if (node.AttributeLists.ToString().Contains("[DllImport(\"\""))
+                if (!string.IsNullOrEmpty(fullName) && this.remaps.TryGetValue(fullName, out string remapData))
                 {
-                    return null;
+                    return EncodeHelpers.DecodeRemap(remapData, out listAttributes, out newType, out newName);
                 }
 
-                return base.VisitMethodDeclaration(node);
+                listAttributes = null;
+                newType = null;
+                newName = null;
+
+                return false;
             }
         }
 
         private class SalAttribute
         {
-            private static readonly System.Text.RegularExpressions.Regex _salRegex = new System.Text.RegularExpressions.Regex("Name=([^\\s;]+)(?:; p1=\\\"?([^\\\";]*)\\\"?)?(?:; p2=\\\"?([^\\\";]*)\\\"?)?(?:; p3=\\\"?([^\\\";]*)\\\"?)?");
-
             public static SalAttribute CreateFromCppAttribute(string attr)
             {
                 SalAttribute ret = new SalAttribute();
@@ -507,6 +699,5 @@ namespace ClangSharpSourceToWinmd
             public string P2 { get; private set; }
             public string P3 { get; private set; }
         }
-
     }
 }

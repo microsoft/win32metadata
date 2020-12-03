@@ -7,7 +7,6 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace ClangSharpSourceToWinmd
 {
@@ -40,7 +39,6 @@ namespace ClangSharpSourceToWinmd
 
             return rootCommand.Invoke(args);
         }
-
 
         public static int Run(InvocationContext context)
         {
@@ -77,7 +75,7 @@ namespace ClangSharpSourceToWinmd
 
                 Console.WriteLine($"Compiling {sourceFile}...");
                 var tree = CSharpSyntaxTree.ParseText(File.ReadAllText(sourceFile));
-                tree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree);
+                tree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, remaps);
                 syntaxTrees.Add(tree);
             }
 
@@ -88,7 +86,7 @@ namespace ClangSharpSourceToWinmd
                     refs);
 
             Console.WriteLine($"Emitting {outputFileName}...");
-            ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(comp, assemblyVersion, outputFileName, remaps);
+            ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(comp, assemblyVersion, outputFileName);
 
             return 0;
         }
@@ -120,8 +118,13 @@ namespace ClangSharpSourceToWinmd
                     continue;
                 }
 
-                string[] parts = item.Split('=');
-                ret[parts[0]] = parts[1];
+                int firstEqual = item.IndexOf('=');
+                if (firstEqual != -1)
+                {
+                    string name = item.Substring(0, firstEqual);
+                    string value = item.Substring(firstEqual + 1);
+                    ret[name] = value;
+                }
             }
 
             return ret;

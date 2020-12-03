@@ -1,5 +1,10 @@
 --remap
-TestFunc:dwRetypeMe=[Const]Enum1 enum1
-TestFunc:return=[RAIIFree("CloseHandle")]
-S1:addRIAAToMe=[RAIIFree("CloseHandle")]IntPtr addedRAII
-S1:changeToEnum=Enum2
+TestFunc::dwRetypeMe=[Const][In]Enum1 enum1
+MYCALLBACK::dwRetypeMeToo=[Const]Enum1 enum1
+MyOtherCallback::dwRetypeMeToo=[Const]Enum1 enum1
+MyOtherCallback::return=[RAIIFree("CloseHandle")]
+CreateFileW::return=[RAIIFree("CloseHandle")]
+TestFunc::return=[RAIIFree("CloseHandle")]
+S1::addRIAAToMeMakeMeIntPtrAndChangeMyName=[RAIIFree("CloseHandle")]IntPtr didAllTheStuff
+S1::changeToEnum=[Const]Enum2
+IEnumTest::Next::pi=[NativeTypeInfo(UnmanagedType.LPArray, SizeParamIndex = 0)][In][Optional]

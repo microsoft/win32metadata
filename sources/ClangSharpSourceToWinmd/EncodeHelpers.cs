@@ -3,11 +3,59 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace ClangSharpSourceToWinmd
 {
     public static class EncodeHelpers
     {
+        private static readonly System.Text.RegularExpressions.Regex RemappedParmRegex = new System.Text.RegularExpressions.Regex(@"(?:\[([^\]]*)\])?(?:\s*(\w+)(?:\s+(\w+))?)?");
+        private static readonly System.Text.RegularExpressions.Regex AttributeRegex = new System.Text.RegularExpressions.Regex(@"(\w+)(\([^\)]+\))?");
+
+        public static bool DecodeRemap(string remappedTo, out List<AttributeSyntax> listAttributes, out string newType, out string newName)
+        {
+            listAttributes = null;
+            newType = newName = null;
+
+            foreach (System.Text.RegularExpressions.Match match in RemappedParmRegex.Matches(remappedTo))
+            {
+                if (match.Groups[1].Success)
+                {
+                    var attributeText = match.Groups[1].Value;
+                    var parseAttrMatch = AttributeRegex.Match(attributeText);
+                    if (parseAttrMatch.Success)
+                    {
+                        var attrName = parseAttrMatch.Groups[1].Value;
+                        var attrArgs = parseAttrMatch.Groups[2].Value;
+
+                        var attrNameNode = SyntaxFactory.ParseName(attrName);
+                        var argsNode = !string.IsNullOrEmpty(attrArgs) ? SyntaxFactory.ParseAttributeArgumentList(attrArgs) : null;
+                        var finalAttrNode = SyntaxFactory.Attribute(attrNameNode, argsNode);
+
+                        if (listAttributes == null)
+                        {
+                            listAttributes = new List<AttributeSyntax>();
+                        }
+
+                        listAttributes.Add(finalAttrNode);
+                    }
+                }
+
+                if (match.Groups[2].Success)
+                {
+                    newType = match.Groups[2].Value;
+                }
+
+                if (match.Groups[3].Success)
+                {
+                    newName = match.Groups[3].Value;
+                }
+            }
+
+            return listAttributes != null || newType != null || newName != null;
+        }
+
         public static void EncodeConstant(this LiteralEncoder encoder, object constant)
         {
             encoder.Scalar().Constant(constant);
