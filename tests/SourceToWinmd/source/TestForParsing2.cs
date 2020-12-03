@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using Microsoft.Windows.Sdk.Win32.Interop;
 
-namespace Foobar
+namespace Test
 {
     public static unsafe partial class Apis
     {
@@ -18,12 +18,6 @@ namespace Foobar
         [return: NativeTypeName("HANDLE")]
         public static extern IntPtr CreateFileW([NativeTypeName("LPCWSTR")][CppAttributeList("Name=SAL_name; p1=\"_In_\"; p2=\"\"; p3=\"2\"|Name=SAL_begin|Name=SAL_pre|Name=SAL_notref|Name=SAL_null; p1=__no|Name=SAL_valid|Name=SAL_deref|Name=SAL_access; p1=0x1|Name=SAL_end")] ushort* lpFileName, [NativeTypeName("DWORD")][CppAttributeList("Name=SAL_name; p1=\"_In_\"; p2=\"\"; p3=\"2\"|Name=SAL_begin|Name=SAL_pre|Name=SAL_notref|Name=SAL_null; p1=__no|Name=SAL_valid|Name=SAL_deref|Name=SAL_access; p1=0x1|Name=SAL_end")] uint dwDesiredAccess, [NativeTypeName("DWORD")][CppAttributeList("Name=SAL_name; p1=\"_In_\"; p2=\"\"; p3=\"2\"|Name=SAL_begin|Name=SAL_pre|Name=SAL_notref|Name=SAL_null; p1=__no|Name=SAL_valid|Name=SAL_deref|Name=SAL_access; p1=0x1|Name=SAL_end")] uint dwShareMode, [NativeTypeName("Enum1 *")][CppAttributeList("Name=SAL_name; p1=\"_In_opt_\"; p2=\"\"; p3=\"2\"|Name=SAL_begin|Name=SAL_pre|Name=SAL_notref|Name=SAL_null; p1=__maybe|Name=SAL_valid|Name=SAL_name; p1=\"_Deref_pre_readonly_\"; p2=\"\"; p3=\"1.1\"|Name=SAL_deref|Name=SAL_access; p1=0x1|Name=SAL_end")] Enum1* lpSecurityAttributes, [NativeTypeName("DWORD")][CppAttributeList("Name=SAL_name; p1=\"_In_\"; p2=\"\"; p3=\"2\"|Name=SAL_begin|Name=SAL_pre|Name=SAL_notref|Name=SAL_null; p1=__no|Name=SAL_valid|Name=SAL_deref|Name=SAL_access; p1=0x1|Name=SAL_end")] uint dwCreationDisposition, [NativeTypeName("DWORD")][CppAttributeList("Name=SAL_name; p1=\"_In_\"; p2=\"\"; p3=\"2\"|Name=SAL_begin|Name=SAL_pre|Name=SAL_notref|Name=SAL_null; p1=__no|Name=SAL_valid|Name=SAL_deref|Name=SAL_access; p1=0x1|Name=SAL_end")] uint dwFlagsAndAttributes, [NativeTypeName("HANDLE")][CppAttributeList("Name=SAL_name; p1=\"_In_opt_\"; p2=\"\"; p3=\"2\"|Name=SAL_begin|Name=SAL_pre|Name=SAL_notref|Name=SAL_null; p1=__maybe|Name=SAL_valid|Name=SAL_name; p1=\"_Deref_pre_readonly_\"; p2=\"\"; p3=\"1.1\"|Name=SAL_deref|Name=SAL_access; p1=0x1|Name=SAL_end")] IntPtr hTemplateFile);
     }
-
-    //[Guid("00000000-0000-0000-C000-000000000046")]
-    //public unsafe partial struct UsesEnum1
-    //{
-    //    public Enum1 MyVar;
-    //}
 
     public enum Enum2
     {

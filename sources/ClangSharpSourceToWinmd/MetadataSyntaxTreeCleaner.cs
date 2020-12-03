@@ -188,7 +188,8 @@ namespace ClangSharpSourceToWinmd
             private SyntaxNode ProcessNativeTypeNameAttr(AttributeSyntax nativeTypeNameAttr, out bool marshalAs)
             {
                 string nativeType = nativeTypeNameAttr.ArgumentList.Arguments[0].ToString();
-                nativeType = nativeType.Substring(1, nativeType.Length - 2);
+                nativeType = EncodeHelpers.RemoveQuotes(nativeType);
+
                 List<AttributeSyntax> attributeNodes = new List<AttributeSyntax>();
 
                 marshalAs = this.AddNativeTypeInfoAttribute(nativeType, attributeNodes);
@@ -354,7 +355,19 @@ namespace ClangSharpSourceToWinmd
                 {
                     ParameterListSyntax parameterListNode = (ParameterListSyntax)paramNode.Parent;
                     var match = elementCountRegex.Match(p1Text);
-                    string nullnullTerminated = isNullNullTerminated ? ", IsNullNullTerminated = true" : string.Empty;
+                    string arraySubType = GetParameterArraySubtype(paramNode);
+                    StringBuilder ret = new StringBuilder("(UnmanagedType.LPArray");
+
+                    if (arraySubType != null)
+                    {
+                        ret.Append($", ArraySubType = UnmanagedType.{arraySubType}");
+                    }
+
+                    if (isNullNullTerminated)
+                    {
+                        ret.Append(", IsNullNullTerminated = true");
+                    }
+
                     if (match.Success)
                     {
                         string sizeOrParamName = match.Groups[1].Value;
@@ -366,7 +379,7 @@ namespace ClangSharpSourceToWinmd
                                 return string.Empty;
                             }
 
-                            return $"(UnmanagedType.LPArray, SizeConst = {size})";
+                            ret.Append($", SizeConst = {size}");
                         }
                         else
                         {
@@ -375,20 +388,57 @@ namespace ClangSharpSourceToWinmd
                             {
                                 if (parameterListNode.Parameters[i].Identifier.ValueText == sizeOrParamName)
                                 {
-                                    return $"(UnmanagedType.LPArray, SizeParamIndex = {i}{nullnullTerminated})";
+                                    ret.Append($", SizeParamIndex = {i}");
+                                    break;
                                 }
                             }
                         }
                     }
                     else
                     {
-                        if (p1Text.StartsWith("inexpressibleCount"))
+                        // If it didn't match the regex and we don't see inexpressibleCount, we can't do 
+                        // anything but return an empty string, because we don't know how to interpret it
+                        if (!p1Text.StartsWith("inexpressibleCount"))
                         {
-                            return $"(UnmanagedType.LPArray{nullnullTerminated})";
+                            ret = new StringBuilder();
                         }
                     }
 
-                    return string.Empty;
+                    if (ret.Length != 0)
+                    {
+                        ret.Append(')');
+                    }
+
+                    return ret.ToString();
+
+                    string GetParameterArraySubtype(ParameterSyntax paramNode)
+                    {
+                        foreach (var attrList in paramNode.AttributeLists)
+                        {
+                            foreach (var attr in attrList.Attributes)
+                            {
+                                if (attr.Name.ToString() == "NativeTypeName")
+                                {
+                                    string nativeType = attr.ArgumentList.Arguments[0].ToString();
+                                    nativeType = EncodeHelpers.RemoveQuotes(nativeType);
+                                    if (nativeType.StartsWith("const "))
+                                    {
+                                        nativeType = nativeType.Substring("const ".Length);
+                                    }
+
+                                    if (nativeType.EndsWith(" *"))
+                                    {
+                                        nativeType = nativeType.Substring(0, nativeType.Length - 2);
+                                    }
+
+                                    string arraySubType = ConvertTypeToMarshalAsType(nativeType, out _, out _, out _);
+                                    return arraySubType;
+                                }
+                            }
+                        }
+
+                        return null;
+                    }
                 }
 
                 IEnumerable<SalAttribute> GetSalAttributes(string salArgsText)

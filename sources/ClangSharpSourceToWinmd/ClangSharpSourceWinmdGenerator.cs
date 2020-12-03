@@ -136,11 +136,6 @@ namespace ClangSharpSourceToWinmd
             Console.WriteLine(text);
         }
 
-        private static string RemoveQuotes(string text)
-        {
-            return text.Substring(1, text.Length - 2);
-        }
-
         private static string GetQualifiedName(string @namespace, string name)
         {
             return $"{@namespace}.{name}";
@@ -1148,7 +1143,7 @@ namespace ClangSharpSourceToWinmd
                         if (value[0] == '\"')
                         {
                             ctorTypes = new string[] { "System.String" };
-                            ctorObjs = new object[] { RemoveQuotes(value) };
+                            ctorObjs = new object[] { EncodeHelpers.RemoveQuotes(value) };
                         }
                         else
                         {
@@ -1232,7 +1227,7 @@ namespace ClangSharpSourceToWinmd
                 {
                     if (attr.Name.ToString() == "NativeInheritance")
                     {
-                        return RemoveQuotes(attr.ArgumentList.Arguments[0].ToString());
+                        return EncodeHelpers.RemoveQuotes(attr.ArgumentList.Arguments[0].ToString());
                     }
                 }
             }

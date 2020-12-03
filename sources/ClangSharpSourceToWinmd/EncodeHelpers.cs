@@ -13,6 +13,16 @@ namespace ClangSharpSourceToWinmd
             encoder.Scalar().Constant(constant);
         }
 
+        public static string RemoveQuotes(string text)
+        {
+            if (text.Length >= 2 && text[0] == '\"' && text[text.Length - 1] == '\"')
+            {
+                return text.Substring(1, text.Length - 2);
+            }
+
+            return text;
+        }
+
         public static void TypedConstant(this LiteralEncoder encoder, TypedConstant constant)
         {
             switch (constant.Kind)
@@ -118,6 +128,10 @@ namespace ClangSharpSourceToWinmd
             {
                 // TODO array type encoder
                 encoder.SZArray();
+            }
+            else if (fieldSymbol.Type.TypeKind == TypeKind.Enum)
+            {
+                encoder.ScalarType().Enum(fieldSymbol.Type.ToString());
             }
             else
             {
