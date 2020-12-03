@@ -19,7 +19,7 @@ namespace ClangSharpSourceToWinmd
 {
     public class ClangSharpSourceWinmdGenerator
     {
-        private const string InteropNamespace = "Microsoft.Windows.Sdk.Win32.Interop";
+        private const string InteropNamespace = "Windows.Win32.Interop";
 
         private MetadataBuilder metadataBuilder = new MetadataBuilder();
         private CSharpCompilation compilation;

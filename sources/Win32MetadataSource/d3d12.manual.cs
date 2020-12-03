@@ -4,10 +4,10 @@
 // Original source is Copyright © Microsoft. All rights reserved.
 
 using System;
-using static Microsoft.Windows.Sdk.Win32.D3D12_FILTER_REDUCTION_TYPE;
-using static Microsoft.Windows.Sdk.Win32.D3D12_FILTER_TYPE;
+using static Windows.Win32.D3D12_FILTER_REDUCTION_TYPE;
+using static Windows.Win32.D3D12_FILTER_TYPE;
 
-namespace Microsoft.Windows.Sdk.Win32
+namespace Windows.Win32
 {
     public static unsafe partial class Apis
     {

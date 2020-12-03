@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using Microsoft.Windows.Sdk.Win32.Interop;
+using Windows.Win32.Interop;
 
-namespace Microsoft.Windows.Sdk.Win32
+namespace Windows.Win32
 {
     [Flags]
     public enum VER_FLAGS : uint

@@ -17,7 +17,7 @@ namespace ClangSharpSourceToWinmd
             var rootCommand = new RootCommand("Convert ClangSharp-generated code into metadata")
             {
                 new Option<string>(new[] { "--sourceDir", "-s" }, "The location of the source files."),
-                new Option<string>(new[] { "--interopFileName", "-i" }, "The path to Microsoft.Windows.Sdk.Win32.Interop.dll"),
+                new Option<string>(new[] { "--interopFileName", "-i" }, "The path to Windows.Win32.Interop.dll"),
                 new Option<string>(new[] { "--outputFileName", "-o" }, "The path to the .winmd to create"),
                 new Option<string>(new[] { "--version", "-v"}, description: "The version to use on the .winmd", getDefaultValue: () => "1.0.0.0"),
                 new Option(new string[] { "--remap", "-r" }, "A declaration name to be remapped to another name during binding generation.")

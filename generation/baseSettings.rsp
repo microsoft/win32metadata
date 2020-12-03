@@ -26,7 +26,7 @@ generation\header.txt
 --methodClassName
 Apis
 --namespace
-Microsoft.Windows.Sdk.Win32
+Windows.Win32
 --with-type
 DWRITE_FONT_FEATURE_TAG=uint
 DWRITE_FONT_AXIS_TAG=uint

@@ -3,7 +3,7 @@ $projectionProj = Join-Path -Path $PSScriptRoot -ChildPath "..\sources\CsWin32\C
 & dotnet build $projectionProj -c Release
 
 $csWin32exe = Join-Path -Path $PSScriptRoot -ChildPath "..\sources\CsWin32\bin\Release\netcoreapp3.1\CsWin32.exe"
-$metadataWinmd = Join-Path -Path $PSScriptRoot -ChildPath "..\bin\Microsoft.Windows.SdK.Win32Metadata.winmd"
+$metadataWinmd = Join-Path -Path $PSScriptRoot -ChildPath "..\bin\Windows.Win32.winmd"
 $riaaMappings = Join-Path -Path $PSScriptRoot -ChildPath "..\generation\CsWin32\RIAAMappings.txt"
 $projectedOutputDir = Join-Path -Path $PSScriptRoot -ChildPath "..\sources\CsWin32ProjectionLib"
 

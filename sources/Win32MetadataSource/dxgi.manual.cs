@@ -5,7 +5,7 @@
 
 using System;
 
-namespace Microsoft.Windows.Sdk.Win32
+namespace Windows.Win32
 {
     public enum DXGI_ADAPTER_FLAG : uint
     {

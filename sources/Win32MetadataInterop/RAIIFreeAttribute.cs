@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Microsoft.Windows.Sdk.Win32.Interop
+namespace Windows.Win32.Interop
 {
     public class RAIIFreeAttribute : Attribute
     {

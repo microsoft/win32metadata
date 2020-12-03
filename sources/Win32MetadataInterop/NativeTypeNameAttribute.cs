@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics;
 
-namespace Microsoft.Windows.Sdk.Win32.Interop
+namespace Windows.Win32.Interop
 {
     /// <summary>Defines the type of a member as it was used in the native signature.</summary>
     //[Conditional("DEBUG")]

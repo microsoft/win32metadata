@@ -1,6 +1,6 @@
 using System;
 
-namespace Microsoft.Windows.Sdk.Win32.Interop
+namespace Windows.Win32.Interop
 {
     [AttributeUsage(AttributeTargets.Enum | AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.ReturnValue | AttributeTargets.Struct, AllowMultiple = false, Inherited = false)]
     [System.Runtime.InteropServices.ComVisible(true)]

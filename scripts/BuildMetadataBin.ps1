@@ -26,12 +26,12 @@ $clangSharpSourceToWinmdBin = "$clangSharpSourceToWinmdPath\bin\Release\netcorea
 
 $metadataInteropPath = "$sourcesDir\Win32MetadataInterop"
 $metadataInteropProj = "$metadataInteropPath\Win32MetadataInterop.csproj"
-$metadataInteropBin = "$metadataInteropPath\bin\Release\netstandard2.1\Microsoft.Windows.Sdk.Win32.Interop.dll"
+$metadataInteropBin = "$metadataInteropPath\bin\Release\netstandard2.1\Windows.Win32.Interop.dll"
 & dotnet build $metadataInteropProj -c Release
 
 Copy-Item $metadataInteropBin $binDir
 
-$outputWinmdFileName = "$binDir\Microsoft.Windows.Sdk.Win32.winmd"
+$outputWinmdFileName = "$binDir\Windows.Win32.winmd"
 $remapFileName = "$metadataSourcePath\remap.rsp"
 
 Write-Host

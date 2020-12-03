@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using Microsoft.Windows.Sdk.Win32.Interop;
+using Windows.Win32.Interop;
 
 namespace Test
 {

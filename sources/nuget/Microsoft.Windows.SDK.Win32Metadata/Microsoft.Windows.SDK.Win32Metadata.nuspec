@@ -17,7 +17,7 @@
   </metadata>
 
   <files>
-      <file src="bin\Microsoft.Windows.Sdk.Win32.winmd" target="content"/>
-      <file src="bin\Microsoft.Windows.Sdk.Win32.Interop.dll" target="content"/>
+      <file src="bin\Windows.Win32.winmd" target="content"/>
+      <file src="bin\Windows.Win32.Interop.dll" target="content"/>
   </files>
 </package>
