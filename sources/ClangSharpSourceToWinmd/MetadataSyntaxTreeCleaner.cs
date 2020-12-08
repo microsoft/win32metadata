@@ -107,6 +107,24 @@ namespace ClangSharpSourceToWinmd
 
                 switch (attrName)
                 {
+                    case "UnmanagedFunctionPointer":
+                    {
+                        // ClangSharp is emitting this attribute with no arguments.
+                        // The typedef we're using of this attribute has no such ctor,
+                        // so emit one that does, using WinApi as the default calling convention
+                        if (firstAttr.ArgumentList == null)
+                        {
+                            return
+                                SyntaxFactory.AttributeList(
+                                    SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
+                                        SyntaxFactory.Attribute(
+                                            SyntaxFactory.ParseName("UnmanagedFunctionPointer"),
+                                            SyntaxFactory.ParseAttributeArgumentList("(CallingConvention.Winapi)"))));
+                        }
+
+                        break;
+                    }
+
                     case "NativeTypeName":
                     {
                         var ret = this.ProcessNativeTypeNameAttr(firstAttr, out bool marshalAs);

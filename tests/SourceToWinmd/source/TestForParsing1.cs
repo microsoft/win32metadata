@@ -4,7 +4,7 @@ using Windows.Win32.Interop;
 
 namespace Test
 {
-    [UnmanagedFunctionPointer(CallingConvention.Winapi)]
+    [UnmanagedFunctionPointer]
     [return: NativeTypeName("HANDLE")]
     public unsafe delegate IntPtr MyOtherCallback([NativeTypeName("DWORD")] uint dwRetypeMeToo);
 

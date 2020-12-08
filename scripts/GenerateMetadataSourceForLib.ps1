@@ -28,12 +28,9 @@ $libMappingOutputFileName = Join-Path -Path $generationOutArtifactsDir -ChildPat
 $stopwatch =  [system.diagnostics.stopwatch]::StartNew()
 
 Write-Host "Creating metadata source for $libName.lib..."
-if (!(Test-Path -Path $libMappingOutputFileName))
-{
-    Write-Host "Creating lib mapping file: $libMappingOutputFileName"
-    $libPath = "$nugetDestPackagesDir\Microsoft.Windows.SDK.CPP.x64.$version\c\um\x64\$libName.lib"
-    & $PSScriptRoot\CreateProcLibMapping.ps1 -libPath $libPath -outputFileName $libMappingOutputFileName
-}
+Write-Host "Creating lib mapping file: $libMappingOutputFileName"
+$libPath = "$nugetDestPackagesDir\Microsoft.Windows.SDK.CPP.x64.$version\c\um\x64\$libName.lib"
+& $PSScriptRoot\CreateProcLibMapping.ps1 -libPath $libPath -outputFileName $libMappingOutputFileName
 
 $baseGenerateDir = "$rootDir\generation"
 $libGenerateDir = "$rootDir\generation\ImportLibs\$libName"
@@ -56,7 +53,7 @@ $includePath = (Get-ChildItem -Path "$nugetDestPackagesDir\Microsoft.Windows.SDK
 Replace-Text $fixedSettingsRsp $textToReplaceTable
 
 Write-Host "Creating metdata .cs file. Log output: $generatorOutput"
-Write-Host "Calling: $toolsDir\ClangSharpPInvokeGenerator.exe @$baseSettingsRsp "@$withSetLastErrorRsp" @$fixedSettingsRsp @$baseRemapRsp @$libRemapRsp @$libMappingOutputFileName > $generatorOutput"
+Write-Host "Calling: $toolsDir\ClangSharpPInvokeGenerator.exe "@$baseSettingsRsp" "@$withSetLastErrorRsp" "@$fixedSettingsRsp" "@$baseRemapRsp" "@$libRemapRsp" "@$libMappingOutputFileName" > $generatorOutput"
 
 & $toolsDir\ClangSharpPInvokeGenerator.exe "@$baseSettingsRsp" "@$withSetLastErrorRsp" "@$fixedSettingsRsp" "@$baseRemapRsp" "@$libRemapRsp" "@$libMappingOutputFileName" > $generatorOutput
 if ($LASTEXITCODE -lt 0)
@@ -64,10 +61,6 @@ if ($LASTEXITCODE -lt 0)
     Write-Error "ClangSharpPInvokeGenerator.exe failed:"
     Get-ChildItem $generatorOutput | select-string "Error: "
 }
-
-#$missedFuncsOutput = Join-Path -Path $generationOutArtifactsDir -ChildPath "$libName.missedfuncs.output.txt"
-#$visitedFuncsOutput = Join-Path -Path $generationOutArtifactsDir -ChildPath "$libName.visitedfuncs.output.txt"
-#& $PSScriptRoot\CheckMissedFuncs.ps1 -generatorResults $generatorOutput -mappingFile $libMappingOutputFileName -visitedFuncsFile $visitedFuncsOutput -missedFuncsFile $missedFuncsOutput
 
 $possibleRemapsOutput = Join-Path -Path $generationOutArtifactsDir -ChildPath "$libName.possibleremaps.output.txt"
 & $PSScriptRoot\DisplayPossibleMappings.ps1 -generatorResults $generatorOutput -remapsFile $possibleRemapsOutput

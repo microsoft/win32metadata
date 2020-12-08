@@ -1268,10 +1268,17 @@ namespace ClangSharpSourceToWinmd
             {
                 var fieldSignature = this.EncodeFieldSignature(structName, model, field, out string name);
                 var fieldVariable = field.Declaration.Variables.First();
+                var fieldAttributes = FieldAttributes.Public;
+                IFieldSymbol fieldSymbol = (IFieldSymbol)model.GetDeclaredSymbol(fieldVariable);
+                bool isConst = fieldSymbol.IsStatic && fieldSymbol.HasConstantValue;
+                if (isConst)
+                {
+                    fieldAttributes |= FieldAttributes.Static | FieldAttributes.Literal | FieldAttributes.HasDefault;
+                }
 
                 var fieldDefinitionHandle = 
                     metadataBuilder.AddFieldDefinition(
-                        FieldAttributes.Public,
+                        fieldAttributes,
                         metadataBuilder.GetOrAddString(name),
                         metadataBuilder.GetOrAddBlob(fieldSignature));
                 if (firstField.IsNil)
@@ -1279,7 +1286,11 @@ namespace ClangSharpSourceToWinmd
                     firstField = fieldDefinitionHandle;
                 }
 
-                var fieldSymbol = model.GetDeclaredSymbol(fieldVariable);
+                if (isConst)
+                {
+                    metadataBuilder.AddConstant(fieldDefinitionHandle, fieldSymbol.ConstantValue);
+                }
+
                 var fieldOffsetAttr = fieldSymbol.GetAttributes().FirstOrDefault(a => a.AttributeClass.Name == "FieldOffsetAttribute");
                 if (fieldOffsetAttr != null)
                 {

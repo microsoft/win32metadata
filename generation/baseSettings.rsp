@@ -21,6 +21,8 @@ log-visited-files
 log-exclusions
 log-potential-typedef-remappings
 exclude-funcs-with-body
+generate-cpp-attributes
+generate-native-inheritance-attribute
 --headerFile
 generation\header.txt
 --methodClassName
