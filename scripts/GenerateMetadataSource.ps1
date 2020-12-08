@@ -56,7 +56,7 @@ Write-Host "Making sure cpp NuGet packages are installed..."
 $nugetSrcPackagesDir = Join-Path -Path $artifactsDir "NuGetPackages"
 Create-Directory $nugetSrcPackagesDir
 
-$parts = $pipelineRunName.Split("{.}")
+$parts = $pipelineRunName.Split(".")
 $build = $parts[0]
 $qfe = $parts[1]
 $branch = $parts[2].Replace("_", "-")
