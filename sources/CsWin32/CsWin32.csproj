@@ -1,16 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoWarn>$(NoWarn);NU3027</NoWarn>
+    <LangVersion>9.0</LangVersion>
+
+    <!-- Override metadata source winmd to one built locally. -->
+    <MicrosoftWindowsSdkWin32MetadataBasePath>$(MSBuildProjectDirectory)..\..\..\bin</MicrosoftWindowsSdkWin32MetadataBasePath>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="NativeMethods.txt" />
+    <AdditionalFiles Include="NativeMethods.json" />
+  </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.Sdk.PInvoke.CSharp" Version="0.1.269-beta-gf60650620c" PrivateAssets="all" />
+  </ItemGroup>
 </Project>

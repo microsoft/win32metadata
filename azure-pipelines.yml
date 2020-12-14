@@ -15,7 +15,7 @@ pool:
   - msbuild
   - visualstudio
   - visualstudio -equals C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\
-  
+
 resources:
   pipelines:
     - pipeline: winsdk
@@ -100,10 +100,9 @@ steps:
     filePath: 'scripts\BuildMetadataBin.ps1'
     arguments: '-assemblyVersion $(PrepOutput.NugetVersion) -metadataSourcePath $(WinMetadataSourceDir)'
 
-- task: PowerShell@2
+- script: dotnet build -c $(BuildConfiguration) /bl:"$(Build.ArtifactStagingDirectory)/build_logs/cs_projection.binlog"
   displayName: Build csWin32 projected binary
-  inputs:
-    filePath: 'scripts\BuildCsWin32Projection.ps1'
+  workingDirectory: sources\CsWin32
   condition: and(succeeded(), eq(variables.IncludeCsProjection, true))
 
 - task: PowerShell@2

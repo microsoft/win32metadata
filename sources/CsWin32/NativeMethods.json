@@ -1,0 +1,4 @@
+﻿{
+  "$schema": "./settings.schema.json",
+  "emitSingleFile": true
+}
