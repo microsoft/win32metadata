@@ -1,0 +1,9 @@
+<Project>
+  <PropertyGroup>
+    <MicrosoftWindowsSdkWin32MetadataBasePath>$(MSBuildThisFileDirectory)..\content\</MicrosoftWindowsSdkWin32MetadataBasePath>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Provide the path to the winmd as input into the analyzer. -->
+    <CompilerVisibleProperty Include="MicrosoftWindowsSdkWin32MetadataBasePath" />
+  </ItemGroup>
+</Project>
