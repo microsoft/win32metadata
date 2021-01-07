@@ -351,6 +351,8 @@ MigrationBackup/
 
 # Generation files
 !generation/*.rsp
+!generation/partitions/backup
+!generation/partitions/debug
 /sources/CsWin32ProjectionLib/RiaaSafeHandles.cs
 /sources/CsWin32ProjectionLib/ProjectedWin32.cs
 /sources/CsWin32/Properties/launchSettings.json
