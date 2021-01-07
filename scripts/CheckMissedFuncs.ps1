@@ -46,7 +46,7 @@ $onecoreFuncsNotVisitedCount = $onecoreFuncs.Count
 $onecoreFuncsVisitedCount = $onecoreFuncsCount - $onecoreFuncsNotVisitedCount
 $percentVisited = $onecoreFuncsVisitedCount * 100 / $onecoreFuncsCount
 
-Write-Host "$onecoreFuncsVisitedCount out of $onecoreFuncsCount APIs emitted ($percentVisited)"
+Write-Output "$onecoreFuncsVisitedCount out of $onecoreFuncsCount APIs emitted ($percentVisited)"
 
 if (Test-Path -path $missedFuncsFile)
 {
@@ -60,4 +60,4 @@ foreach ($name in $onecoreFuncs)
 }
 $stream.Close()
 
-Write-Host "Funcs not emitted at: $missedFuncsFile"
+Write-Output "Funcs not emitted at: $missedFuncsFile"

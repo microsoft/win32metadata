@@ -1,0 +1,57 @@
+#define SECURITY_WIN32 // For sspi.h
+#define QCC_OS_GROUP_WINDOWS
+
+#include "intrinfix.h"
+
+#include <windows.h>
+#include <sdkddkver.h>
+
+#include <ntquery.h>
+#include <winnt.h>
+#include <oleidl.h>
+#include <urlmon.h>
+#include <combaseapi.h>
+#include <shobjidl.h>
+#include <commctrl.h>
+#include <winuser.h>
+#include <shlobj.h>
+#include <exdisp.h>
+#include <dskquota.h>
+#include <shellscalingapi.h>
+#include <iphlpapi.h>
+#include <shlobj_core.h>
+#include <reconcil.h>
+#include <shldisp.h>
+#include <propsys.h>
+#include <shobjidl_core.h>
+#include <propidl.h>
+#include <shellapi.h>
+#include <knownfolders.h>
+#include <shidfact.h>
+#include <shappmgr.h>
+#include <credentialprovider.h>
+#include <syncmgr.h>
+#include <inputpanelconfiguration.h>
+#include <objectarray.h>
+#include <shlwapi.h>
+#include <thumbcache.h>
+#include <shimgdata.h>
+#include <storageprovider.h>
+#include <mobsync.h>
+#include <thumbnailstreamcache.h>
+#include <shdeprecated.h>
+#include <imagetranscode.h>
+#include <intsafe.h>
+#include <pathcch.h>
+#include <cpl.h>
+#include <userenv.h>
+#include <scrnsave.h>
+#include <intshcut.h>
+#include <appnotify.h>
+#include <shtypes.h>
+#include <shlguid.h>
+#include <propkeydef.h>
+#include <appmgmt.h>
+#include <dimm.h>
+#include <profinfo.h>
+#include <tlogstg.h>

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PartitionUtils": {
+      "commandName": "Project",
+      "commandLineArgs": "ensurePartitionsUseNamespace --repoRoot $(ProjectDir)..\\.."
+    }
+  }
+}

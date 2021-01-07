@@ -1,0 +1,74 @@
+#define SECURITY_WIN32 // For sspi.h
+#define QCC_OS_GROUP_WINDOWS
+
+#include "intrinfix.h"
+
+#include <windows.h>
+#include <sdkddkver.h>
+
+#include <uuids.h>
+#include <ks.h>
+#include <ksmedia.h>
+//#include <ksuuids.h>
+
+#include <d3d9helper.h>
+#include <vptype.h>
+
+#include <gdipluseffects.h>
+#include <segment.h>
+#include <bdatypes.h>
+#include <bdaiface.h>
+#include <mpeg2psiparser.h>
+#include <strmif.h>
+#include <ocidl.h>
+#include <wingdi.h>
+#include <camerauicontrol.h>
+#include <ddraw.h>
+#include <wmcodecdsp.h>
+#include <windows.devices.midi.h>
+#include <qnetwork.h>
+#include <amaudio.h>
+#include <il21dec.h>
+#include <amparse.h>
+#include <control.h>
+#include <videoacc.h>
+#include <iwstdec.h>
+#include <vidcap.h>
+#include <dshowasf.h>
+#include <amstream.h>
+#include <amvideo.h>
+#include <dmodshow.h>
+#include <ksproxy.h>
+#include <ks.h>
+#include <mixerocx.h>
+#include <mpconfig.h>
+#include <mpegtype.h>
+#include <vmr9.h>
+#include <vpconfig.h>
+#include <vpnotify.h>
+#include <amxmlgraphbuilder.h>
+#include <amva.h>
+#include <vptype.h>
+#include <aviriff.h>
+#include <avifmt.h>
+#include <dxva9typ.h>
+#include <mmreg.h>
+#include <dvdmedia.h>
+#include <dvdevcod.h>
+#include <dshow.h>
+#include <audevcod.h>
+#include <dxva.h>
+#include <vfwmsgs.h>
+#include <evcode.h>
+#include <errors.h>
+#include <codecapi.h>
+#include <mediaobj.h>
+#include <medparam.h>
+#include <dmoreg.h>
+#include <dmort.h>
+#include <mediaerr.h>
+#include <dmoimpl.h>
+#include <wmp.h>
+#include <austream.h>
+#include <ddstream.h>
+#include <mmstream.h>

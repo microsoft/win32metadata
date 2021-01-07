@@ -40,13 +40,13 @@ $onecoreFuncs = Get-ExportedFuncFromLib -libFileName "$libPath\onecoreuap.lib"
 $libs = get-childitem -path "$libPath\*.lib" -Exclude onecore*.lib
 foreach ($lib in $libs)
 {
-    Write-Host "Looking at $lib..."
+    Write-Output "Looking at $lib..."
     $libFuncs = Get-ExportedFuncFromLib -libFileName $lib.FullName
     foreach ($key in $libFuncs.Keys)
     {
         if (!$onecoreFuncs.ContainsKey($key))
         {
-            Write-Host "$key = $($libFuncs[$key])"
+            Write-Output "$key = $($libFuncs[$key])"
         }
     }
 }

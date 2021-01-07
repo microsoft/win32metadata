@@ -1,0 +1,15 @@
+--file
+<RepoRoot>\generation\Partitions\<PartitionName>\main.cpp
+--output
+<RepoRoot>\sources\Win32MetadataSource\generated\<PartitionName>.cs
+--include-directory
+<RepoRoot>\generation
+<IncludeRoot>/shared
+<IncludeRoot>/um
+<IncludeRoot>/winrt
+--traverse
+<IncludeRoot>/um/NTQuery.h
+<IncludeRoot>/um/Filter.h
+<IncludeRoot>/um/cmdtree.h
+--namespace
+Windows.Win32.IndexSrv

@@ -1,0 +1,20 @@
+#define SECURITY_WIN32 // For sspi.h
+#define QCC_OS_GROUP_WINDOWS
+
+#include "intrinfix.h"
+
+#include <windows.h>
+#include <sdkddkver.h>
+
+#include <commctrl.h>
+#include <winuser.h>
+#include <windowsx.h>
+#include <commoncontrols.h>
+#include <shlobj.h>
+#include <prsht.h>
+#include <richedit.h>
+#include <tom.h>
+#include <richole.h>
+#include <textserv.h>
+#include <dpa_dsa.h>
+#include <uxtheme.h>

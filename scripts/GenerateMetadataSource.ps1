@@ -51,7 +51,7 @@ if (!$artifactsDir)
     Create-Directory $artifactsDir
 }
 
-Write-Host "Making sure cpp NuGet packages are installed..."
+Write-Output "Making sure cpp NuGet packages are installed..."
 
 $nugetSrcPackagesDir = Join-Path -Path $artifactsDir "NuGetPackages"
 Create-Directory $nugetSrcPackagesDir
@@ -65,12 +65,12 @@ $version = $null
 
 foreach ($ver in $potentialVersions)
 {
-    Write-Host "Looking for: $nugetSrcPackagesDir\Microsoft.Windows.SDK.CPP.$ver.nupkg..."
+    Write-Output "Looking for: $nugetSrcPackagesDir\Microsoft.Windows.SDK.CPP.$ver.nupkg..."
     $cppPkg = Get-ChildItem -path $nugetSrcPackagesDir -Include Microsoft.Windows.SDK.CPP.$ver.nupkg -recurse
     if ($cppPkg)
     {
         $version = $cppPkg.BaseName.Substring("Microsoft.Windows.SDK.CPP.".Length)
-        Write-Host "Found NuGet package, version: $version"
+        Write-Output "Found NuGet package, version: $version"
         break;
     }
 }
@@ -79,13 +79,13 @@ if (!$version)
 {
     if (!$downloadDefaultCppNugets)
     {
-        Write-Host "Error: Couldn't find cpp package in $nugetSrcPackagesDir. Call script with downloadDefaultCppNugets = 1 to download default packages."
+        Write-Output "Error: Couldn't find cpp package in $nugetSrcPackagesDir. Call script with downloadDefaultCppNugets = 1 to download default packages."
         exit -1
     }
     else
     {
         $version = $defaultWinSDKNugetVersion
-        Write-Host "No cpp nuget packages found at $nugetSrcPackagesDir. Downloading $version from nuget.org..."
+        Write-Output "No cpp nuget packages found at $nugetSrcPackagesDir. Downloading $version from nuget.org..."
 
         Download-Nupkg "Microsoft.Windows.SDK.CPP" $version $nugetSrcPackagesDir
         Download-Nupkg "Microsoft.Windows.SDK.CPP.x64" $version $nugetSrcPackagesDir
@@ -127,12 +127,12 @@ if ($patch -ne "")
 }
 
 # Write variable in the Azure DevOps pipeline for use in subsequent tasks
-Write-Host "##vso[task.setvariable variable=PrepOutput.NugetVersion;]$publishNugetVersion"
+Write-Output "##vso[task.setvariable variable=PrepOutput.NugetVersion;]$publishNugetVersion"
 
 $x64Pkg = Get-ChildItem -path "$nugetSrcPackagesDir\Microsoft.Windows.SDK.CPP.x64.$version.nupkg"
 if (!$x64Pkg)
 {
-    Write-Host "Error: Couldn't find cpp x64 package: $x64Pkg."
+    Write-Output "Error: Couldn't find cpp x64 package: $x64Pkg."
     exit -1
 }
 
@@ -140,16 +140,18 @@ $nugetDestPackagesDir = Join-Path -Path $artifactsDir "InstalledPackages"
 Create-Directory $nugetDestPackagesDir
 & $toolsDir\nuget.exe install Microsoft.Windows.SDK.CPP.x64 -version $version -source $nugetSrcPackagesDir -OutputDirectory $nugetDestPackagesDir
 
-Write-Host "`n`nProcessing each supported lib name...`n"
+# Clean up directory where generated source files go
+Create-Directory $sdkGeneratedSourceDir
+Remove-Item "$sdkGeneratedSourceDir\*.cs"
 
-$libNames = Get-ChildItem $importLibsDir | select -ExpandProperty Name
-# $libNames = @("ole32", "onecoreuap", "d3d11", "d3d12", "d3dcompiler")
+Write-Output "`nProcessing each partition..."
 
-foreach ($libName in $libNames)
+$partitionNames = Get-ChildItem $partitionsDir | Select-Object -ExpandProperty Name
+
+foreach ($partitionName in $partitionNames)
 {
-    Write-Host "Calling $PSScriptRoot\GenerateMetadataSourceForLib.ps1 -version $version -libName $libName -artifactsDir $artifactsDir..."
-    & $PSScriptRoot\GenerateMetadataSourceForLib.ps1 -version $version -libName $libName -artifactsDir $artifactsDir
-    Write-Host
+    Write-Output "`nCalling $PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -version $version -partitionName $partitionName -artifactsDir $artifactsDir..."
+    & $PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -version $version -partitionName $partitionName -artifactsDir $artifactsDir
 }
 
 exit 0

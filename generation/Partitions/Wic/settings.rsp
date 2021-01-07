@@ -1,0 +1,14 @@
+--file
+<RepoRoot>\generation\Partitions\<PartitionName>\main.cpp
+--output
+<RepoRoot>\sources\Win32MetadataSource\generated\<PartitionName>.cs
+--include-directory
+<RepoRoot>\generation
+<IncludeRoot>/shared
+<IncludeRoot>/um
+<IncludeRoot>/winrt
+--traverse
+<IncludeRoot>/um/wincodec.h
+<IncludeRoot>/um/wincodecsdk.h
+--namespace
+Windows.Win32.Wic

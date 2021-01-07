@@ -16,9 +16,9 @@ namespace ClangSharpSourceToWinmd
         {
             var rootCommand = new RootCommand("Convert ClangSharp-generated code into metadata")
             {
-                new Option<string>(new[] { "--sourceDir", "-s" }, "The location of the source files."),
-                new Option<string>(new[] { "--interopFileName", "-i" }, "The path to Windows.Win32.Interop.dll"),
-                new Option<string>(new[] { "--outputFileName", "-o" }, "The path to the .winmd to create"),
+                new Option<string>(new[] { "--sourceDir", "-s" }, "The location of the source files.") { IsRequired = true },
+                new Option<string>(new[] { "--interopFileName", "-i" }, "The path to Windows.Win32.Interop.dll") { IsRequired = true },
+                new Option<string>(new[] { "--outputFileName", "-o" }, "The path to the .winmd to create") { IsRequired = true },
                 new Option<string>(new[] { "--version", "-v"}, description: "The version to use on the .winmd", getDefaultValue: () => "1.0.0.0"),
                 new Option(new string[] { "--remap", "-r" }, "A declaration name to be remapped to another name during binding generation.")
                 {
@@ -27,13 +27,16 @@ namespace ClangSharpSourceToWinmd
                         ArgumentType = typeof(string),
                         Arity = ArgumentArity.OneOrMore,
                     }
+                },
+                new Option(new string[] { "--typeImport", "-t" }, "A type to be imported from another assembly.")
+                {
+                    Argument = new Argument("<name>=<value>")
+                    {
+                        ArgumentType = typeof(string),
+                        Arity = ArgumentArity.OneOrMore,
+                    }
                 }
             };
-
-            foreach (var opt in rootCommand.Options.Where(o => o.Name != "version" && o.Name != "remap"))
-            {
-                opt.IsRequired = true;
-            }
 
             rootCommand.Handler = CommandHandler.Create(typeof(Program).GetMethod(nameof(Run)));
 
@@ -47,12 +50,13 @@ namespace ClangSharpSourceToWinmd
             string outputFileName = context.ParseResult.ValueForOption<string>("outputFileName");
             string version = context.ParseResult.ValueForOption<string>("version");
             var remappedNameValuePairs = context.ParseResult.ValueForOption<string[]>("remap");
+            var typeImportValuePairs = context.ParseResult.ValueForOption<string[]>("typeImport");
 
             var remaps = ConvertValuePairsToDictionary(remappedNameValuePairs);
+            var typeImports = ConvertValuePairsToDictionary(typeImportValuePairs);
 
-            Version assemblyVersion = new Version(1, 0, 0, 0);
             string rawVersion = version.Split('-')[0];
-            assemblyVersion = Version.Parse(rawVersion);
+            Version assemblyVersion = Version.Parse(rawVersion);
 
             var netstandardPath = FindNetstandardDllPath();
             if (!File.Exists(netstandardPath))
@@ -65,19 +69,28 @@ namespace ClangSharpSourceToWinmd
             refs.Add(MetadataReference.CreateFromFile(interopFileName));
             refs.Add(MetadataReference.CreateFromFile(netstandardPath));
 
-            List<SyntaxTree> syntaxTrees = new List<SyntaxTree>();
-            foreach (var sourceFile in Directory.GetFiles(sourceDirectory, "*.cs", SearchOption.AllDirectories))
-            {
-                if (sourceFile.Contains("\\obj\\") || sourceFile.Contains("\\bin\\"))
-                {
-                    continue;
-                }
+            Console.Write($"Compiling source files...");
+            System.Diagnostics.Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
 
-                Console.WriteLine($"Compiling {sourceFile}...");
-                var tree = CSharpSyntaxTree.ParseText(File.ReadAllText(sourceFile));
-                tree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, remaps);
-                syntaxTrees.Add(tree);
-            }
+            List<SyntaxTree> syntaxTrees = new List<SyntaxTree>();
+            var sourceFiles = Directory.GetFiles(sourceDirectory, "*.cs", SearchOption.AllDirectories);
+            System.Threading.Tasks.ParallelOptions opt = new System.Threading.Tasks.ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount * 2 };
+            System.Threading.Tasks.Parallel.ForEach(sourceFiles, opt, (sourceFile) =>
+                {
+                    string fileToRead = Path.GetFullPath(sourceFile);
+                    var tree = CSharpSyntaxTree.ParseText(File.ReadAllText(fileToRead), null, fileToRead);
+                    tree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, remaps);
+
+                    lock (syntaxTrees)
+                    {
+                        syntaxTrees.Add(tree);
+                    }
+                });
+
+            watch.Stop();
+
+            string timeTaken = watch.Elapsed.ToString("c");
+            Console.WriteLine($"took {timeTaken}");
 
             var comp =
                 CSharpCompilation.Create(
@@ -86,9 +99,14 @@ namespace ClangSharpSourceToWinmd
                     refs);
 
             Console.WriteLine($"Emitting {outputFileName}...");
-            ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(comp, assemblyVersion, outputFileName);
+            var generator = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(comp, typeImports, assemblyVersion, outputFileName);
 
-            return 0;
+            foreach (var diag in generator.GetDiagnostics())
+            {
+                Console.WriteLine($"{diag.Severity}: {diag.Message}");
+            }
+
+            return generator.WroteWinmd ? 0 : -1;
         }
 
         private static string FindNetstandardDllPath()

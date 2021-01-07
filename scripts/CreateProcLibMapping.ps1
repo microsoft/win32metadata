@@ -12,7 +12,7 @@ param
 
 if (!(Test-Path -path $libPath))
 {
-    Write-Host "Error: Couldn't find $libPath."
+    Write-Output "Error: Couldn't find $libPath."
     exit -1
 }
 

@@ -1,0 +1,15 @@
+--file
+<RepoRoot>\generation\Partitions\<PartitionName>\main.cpp
+--output
+<RepoRoot>\sources\Win32MetadataSource\generated\<PartitionName>.cs
+--include-directory
+<RepoRoot>\generation
+<IncludeRoot>/shared
+<IncludeRoot>/um
+<IncludeRoot>/winrt
+--traverse
+<IncludeRoot>/shared/ntddscsi.h
+<IncludeRoot>/um/iscsidsc.h
+<IncludeRoot>/shared/iscsierr.h
+--namespace
+Windows.Win32.IScsiDisc

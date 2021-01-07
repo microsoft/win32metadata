@@ -357,3 +357,4 @@ MigrationBackup/
 /winsdk/InstalledPackages
 /winsdk/output
 /sources/Win32MetadataSource/Generated
+/.vscode/settings.json

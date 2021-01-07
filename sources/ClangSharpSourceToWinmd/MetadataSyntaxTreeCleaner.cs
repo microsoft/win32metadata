@@ -13,7 +13,7 @@ namespace ClangSharpSourceToWinmd
         {
             TreeRewriter treeRewriter = new TreeRewriter(remaps);
             var newRoot = (CSharpSyntaxNode)treeRewriter.Visit(tree.GetRoot());
-            return CSharpSyntaxTree.Create(newRoot);
+            return CSharpSyntaxTree.Create(newRoot, null, tree.FilePath);
         }
 
         private class TreeRewriter : CSharpSyntaxRewriter

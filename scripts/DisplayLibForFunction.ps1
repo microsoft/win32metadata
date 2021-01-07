@@ -12,7 +12,7 @@ param
 
 if (!(Test-Path -path $libDir))
 {
-    Write-Host "Error: Couldn't find $libDir."
+    Write-Output "Error: Couldn't find $libDir."
     exit -1
 }
 
@@ -28,7 +28,7 @@ foreach ($libPath in Get-ChildItem "$libDir\*.lib" | select -ExpandProperty Full
     $obj = Get-ChildItem $headersFromDumpBinFileName | sls "Symbol name  : $funcName"
     if ($obj)
     {
-        Write-Host "Function found in $libPath"
+        Write-Output "Function found in $libPath"
         break
     }
 }

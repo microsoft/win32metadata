@@ -1,0 +1,16 @@
+--file
+<RepoRoot>\generation\Partitions\<PartitionName>\main.cpp
+--output
+<RepoRoot>\sources\Win32MetadataSource\generated\<PartitionName>.cs
+--include-directory
+<RepoRoot>\generation
+<IncludeRoot>/shared
+<IncludeRoot>/um
+<IncludeRoot>/winrt
+--traverse
+<IncludeRoot>/shared/d3d9types.h
+<IncludeRoot>/shared/d3d9caps.h
+<IncludeRoot>/um/d3d9helper.h
+<IncludeRoot>/shared/d3d9.h
+--namespace
+Windows.Win32.Direct3D9

@@ -1,0 +1,15 @@
+--file
+<RepoRoot>\generation\Partitions\<PartitionName>\main.cpp
+--output
+<RepoRoot>\sources\Win32MetadataSource\generated\<PartitionName>.cs
+--include-directory
+<RepoRoot>\generation
+<IncludeRoot>/shared
+<IncludeRoot>/um
+<IncludeRoot>/winrt
+--traverse
+<IncludeRoot>/um/efswrtinterop.h
+<IncludeRoot>/um/srpapi.h
+<IncludeRoot>/um/edpwin32.h
+--namespace
+Windows.Win32.Edp

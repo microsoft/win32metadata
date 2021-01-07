@@ -29,4 +29,7 @@ foreach ($match in $remapMatches)
 
 $stream.Close()
 
-Write-Host "$count remaps emitted at: $remapsFile"
+if ($count -ne 0)
+{
+    Write-Output "$count remaps emitted at: $remapsFile"
+}

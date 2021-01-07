@@ -1,3 +1,10 @@
+--typeImport
+IPropertyValue(interface)=<Windows.Foundation.FoundationContract, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.Foundation.IPropertyValue
+ICompositionSurface(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.UI.Composition.ICompositionSurface
+ICompositionCapabilities(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.UI.Composition.ICompositionCapabilities
+ICompositionGraphicsDevice(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.UI.Composition.ICompositionGraphicsDevice
+ICompositor(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.UI.Composition.ICompositor
+IGraphicsEffectSource(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.Graphics.Effects.IGraphicsEffectSource
 --remap
 SetHandleInformation::dwFlags=HANDLE_FLAG_OPTIONS
 DuplicateHandle::dwOptions=DUPLICATE_HANDLE_OPTIONS

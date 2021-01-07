@@ -1,0 +1,15 @@
+#define SECURITY_WIN32 // For sspi.h
+#define QCC_OS_GROUP_WINDOWS
+
+#include "intrinfix.h"
+
+#include <windows.h>
+#include <sdkddkver.h>
+
+#include <d3d10_1.h>
+#include <d3d10.h>
+#include <d3d10sdklayers.h>
+#include <d3d10shader.h>
+#include <d3d10effect.h>
+#include <d3d10misc.h>
+#include <d3d10_1shader.h>
