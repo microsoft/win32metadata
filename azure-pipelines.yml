@@ -76,6 +76,7 @@ steps:
     filePath: 'scripts\GenerateMetadataSource.ps1'
     arguments: '-artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0 -pipelineRunName $(resources.pipeline.winsdk.runName) -patch "$(Patch)"'
     errorActionPreference: 'continue'
+    pwsh: true
   condition: and(succeeded(), eq(variables.UsePreGeneratedSource, false))
 
 - task: PublishBuildArtifacts@1
@@ -99,23 +100,27 @@ steps:
   inputs:
     filePath: 'scripts\BuildMetadataBin.ps1'
     arguments: '-assemblyVersion $(PrepOutput.NugetVersion) -metadataSourcePath $(WinMetadataSourceDir)'
+    pwsh: true
 
 - task: PowerShell@2
   displayName: Test metadata binary against baseline
   inputs:
     filePath: 'scripts\CompareBinaryAgainstBaseline.ps1'
     arguments: '-assemblyVersion $(PrepOutput.NugetVersion)'
+    pwsh: true
 
 - task: PowerShell@2
   displayName: Build csWin32 projected binary
   inputs:
     filePath: 'scripts\BuildCsWin32Projection.ps1'
+    pwsh: true
   condition: and(succeeded(), eq(variables.IncludeCsProjection, true))
 
 - task: PowerShell@2
   displayName: Build C# samples that use C# Win32 projection
   inputs:
     filePath: 'scripts\BuildSamples.ps1'
+    pwsh: true
   condition: and(succeeded(), eq(variables.IncludeCsProjection, true))
 
   # There's a problem on microsoft.visualstudio.com that requires the guid instead of NuGetCommand@2
