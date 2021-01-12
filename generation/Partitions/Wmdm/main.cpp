@@ -8,6 +8,8 @@
 
 #include <scclient.h>
 #include <mswmdm.h>
-#include <scserver.h>
+// #include <scserver.h> Only contains C++ implementation code
 #include <wmdmlog.h>
 #include <mtpext.h>
+
+// Purposely not traversing scclient.h in settings.rsp. Only contains C++ implementation code

@@ -7,6 +7,9 @@
 <IncludeRoot>/shared
 <IncludeRoot>/um
 <IncludeRoot>/winrt
+--exclude
+_SOCKET_ADDRESS_LIST
+SOCKET_ADDRESS_LIST
 --traverse
 <IncludeRoot>/um/ndattrib.h
 <IncludeRoot>/um/ndhelper.h

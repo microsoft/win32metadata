@@ -7,6 +7,11 @@
 <IncludeRoot>/shared
 <IncludeRoot>/um
 <IncludeRoot>/winrt
+--exclude
+_LIST_ENTRY
+_PROCESSOR_NUMBER
+_GROUP_AFFINITY
+_ARM64EC_NT_CONTEXT
 --traverse
 <IncludeRoot>/um/synchapi.h
 <IncludeRoot>/um/avrt.h

@@ -7,6 +7,9 @@
 <IncludeRoot>/shared
 <IncludeRoot>/um
 <IncludeRoot>/winrt
+--with-type
+_tagSLDATATYPE=uint
+SLDATATYPE=uint
 --traverse
 <IncludeRoot>/um/diagnosticdataquerytypes.h
 <IncludeRoot>/um/celib.h
@@ -72,5 +75,7 @@
 <IncludeRoot>/um/winsafer.h
 <IncludeRoot>/um/slpublic.h
 <IncludeRoot>/um/DiagnosticDataQuery.h
+<IncludeRoot>/shared/security.h
+<IncludeRoot>/shared/secext.h
 --namespace
 Windows.Win32.Security

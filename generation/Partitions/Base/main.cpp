@@ -85,8 +85,6 @@
 #include <threadpoollegacyapiset.h>
 #include <handleapi.h>
 #include <windowsceip.h>
-#include <sspi.h> // For secext.h
-#include <secext.h>
 #include <versionhelpers.h>
 #include <realtimeapiset.h>
 #include <timezoneapi.h>

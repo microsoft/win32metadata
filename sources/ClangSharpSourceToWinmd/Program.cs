@@ -5,6 +5,7 @@ using System.CommandLine.Invocation;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
@@ -77,9 +78,16 @@ namespace ClangSharpSourceToWinmd
             System.Threading.Tasks.ParallelOptions opt = new System.Threading.Tasks.ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount * 2 };
             System.Threading.Tasks.Parallel.ForEach(sourceFiles, opt, (sourceFile) =>
                 {
+                    if (sourceFile.EndsWith("modified.cs"))
+                    {
+                        return;
+                    }
+
                     string fileToRead = Path.GetFullPath(sourceFile);
-                    var tree = CSharpSyntaxTree.ParseText(File.ReadAllText(fileToRead), null, fileToRead);
+                    string modifiedFile = Path.ChangeExtension(fileToRead, ".modified.cs");
+                    var tree = CSharpSyntaxTree.ParseText(File.ReadAllText(fileToRead), null, modifiedFile);
                     tree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, remaps);
+                    File.WriteAllText(modifiedFile, tree.GetText().ToString());
 
                     lock (syntaxTrees)
                     {
@@ -87,16 +95,88 @@ namespace ClangSharpSourceToWinmd
                     }
                 });
 
-            watch.Stop();
-
-            string timeTaken = watch.Elapsed.ToString("c");
-            Console.WriteLine($"took {timeTaken}");
-
+            CSharpCompilationOptions compilationOptions = new CSharpCompilationOptions(OutputKind.WindowsRuntimeMetadata, allowUnsafe: true);
             var comp =
                 CSharpCompilation.Create(
                     Path.GetFileName(outputFileName),
                     syntaxTrees,
-                    refs);
+                    refs,
+                    compilationOptions);
+
+            Console.Write("looking for errors...");
+            var diags = comp.GetDeclarationDiagnostics();
+
+            watch.Stop();
+
+            int errors = 0;
+            const int MaxErrorsToShow = 10000;
+            foreach (var diag in diags)
+            {
+                if (diag.Severity == DiagnosticSeverity.Warning)
+                {
+                    continue;
+                }
+
+                // CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type
+                // We can do this in metadata, so it's OK
+                // CS0558: Operator, which we don't emit
+                // CS0562: Operator, which we don't emit
+                // CS0590: Operator, which we don't emit
+                // CS0568: Ctor on structs, which we don't emit
+                // CS0592: FieldOffset on a property which we don't emit
+                // CS1745: Cannot specify default parameter value in conjunction with DefaultParameterAttribute or OptionalAttribute
+                // CS0111: Operator
+                if (diag.Id == "CS0208" || diag.Id == "CS0558" || diag.Id == "CS0562" || diag.Id == "CS0590" || diag.Id == "CS0568" || diag.Id == "CS0592" || diag.Id == "CS1745" ||
+                    diag.Id == "CS0111")
+                {
+                    continue;
+                }
+
+                // CS0029: Cannot implicitly convert type 'string' to 'string[]'
+                // Problem with ClangSharp that emits WCHAR Bar[] = "foo" into string[] Bar = "foo"
+                // We work around this in the emitter
+                if (diag.Id == "CS0029" && diag.ToString().Contains("'string' to 'string[]'"))
+                {
+                    continue;
+                }
+
+                // Symbol not found. See if it's in the type import list
+                if (diag.Id == "CS0246")
+                {
+                    var symbolNameRegx = new System.Text.RegularExpressions.Regex(@"The type or namespace name '(\w+)'");
+                    var match = symbolNameRegx.Match(diag.GetMessage());
+                    if (match.Success)
+                    {
+                        var symbolName = match.Groups[1].Value;
+                        if (typeImports.ContainsKey(symbolName) || typeImports.ContainsKey($"{symbolName}(interface)"))
+                        {
+                            continue;
+                        }
+                    }
+                }
+
+                if (errors == 0)
+                {
+                    Console.WriteLine("errors were found.");
+                }
+
+                errors++;
+                Console.WriteLine(diag.ToString());
+                if (errors >= MaxErrorsToShow)
+                {
+                    Console.WriteLine($"Only showing the first {MaxErrorsToShow} errors.");
+                    break;
+                }
+            }
+
+            if (errors > 0)
+            {
+                return -1;
+            }
+
+            string timeTaken = watch.Elapsed.ToString("c");
+
+            Console.WriteLine($"took {timeTaken}");
 
             Console.WriteLine($"Emitting {outputFileName}...");
             var generator = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(comp, typeImports, assemblyVersion, outputFileName);

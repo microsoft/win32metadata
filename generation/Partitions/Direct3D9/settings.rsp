@@ -7,6 +7,10 @@
 <IncludeRoot>/shared
 <IncludeRoot>/um
 <IncludeRoot>/winrt
+--exclude
+_D3DCOLORVALUE
+--with-type
+D3DFORMAT=uint
 --traverse
 <IncludeRoot>/shared/d3d9types.h
 <IncludeRoot>/shared/d3d9caps.h

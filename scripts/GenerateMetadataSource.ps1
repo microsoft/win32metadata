@@ -144,14 +144,29 @@ Create-Directory $nugetDestPackagesDir
 Create-Directory $sdkGeneratedSourceDir
 Remove-Item "$sdkGeneratedSourceDir\*.cs"
 
-Write-Output "`nProcessing each partition..."
+Invoke-PrepLibMappingsFile $artifactsDir $version
+
+$throttleCount = [System.Environment]::ProcessorCount / 2
+if ($throttleCount -eq 0)
+{
+    $throttleCount = 1
+}
 
 $partitionNames = Get-ChildItem $partitionsDir | Select-Object -ExpandProperty Name
 
-foreach ($partitionName in $partitionNames)
-{
-    Write-Output "`nCalling $PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -version $version -partitionName $partitionName -artifactsDir $artifactsDir..."
-    & $PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -version $version -partitionName $partitionName -artifactsDir $artifactsDir
-}
+$stopwatch =  [system.diagnostics.stopwatch]::StartNew()
+
+Write-Output "`nProcessing each partition...using $throttleCount parralel script(s)"
+
+$partitionNames | ForEach-Object -Parallel {
+    $out1 = "`n$using:PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -version $using:version -partitionName $_ -artifactsDir $using:artifactsDir..."
+    $out2 = & $using:PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -version $using:version -partitionName $_ -artifactsDir $using:artifactsDir -indent "`n  "
+    Write-Output "$out1$out2"
+} -ThrottleLimit $throttleCount
+
+$stopwatch.Stop()
+$totalTime = $stopwatch.Elapsed.ToString("c")
+
+Write-Output "Total time taken for all partitions: $totalTime"
 
 exit 0

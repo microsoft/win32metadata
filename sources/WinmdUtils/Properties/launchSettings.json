@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "WinmdUtils": {
+      "commandName": "Project",
+      "commandLineArgs": "showMissingImports --first $(ProjectDir)..\\..\\scripts\\BaselineWinmd\\10.0.19041.5\\Windows.Win32.winmd --second $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd"
+    }
+  }
+}

@@ -7,9 +7,10 @@
 <IncludeRoot>/shared
 <IncludeRoot>/um
 <IncludeRoot>/winrt
+--exclude
+CXAPOBase
 --traverse
 <IncludeRoot>/shared/basetyps.h
-<IncludeRoot>/um/xapobase.h
 <IncludeRoot>/um/xapofx.h
 <IncludeRoot>/um/xaudio2.h
 <IncludeRoot>/um/xaudio2fx.h

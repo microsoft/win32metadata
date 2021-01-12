@@ -13,5 +13,5 @@
 #include <propsys.h>
 #include <dmusics.h>
 #include <audiomediatype.h>
-#include <baseaudioprocessingobject.h>
+//#include <baseaudioprocessingobject.h> contains only C++ class implementation
 #include <msapofxproxy.h>

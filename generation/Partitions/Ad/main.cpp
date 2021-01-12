@@ -5,6 +5,12 @@
 #include <windows.h>
 #include <sdkddkver.h>
 
+#include <winternl.h>
+
+#define _NTDEF_
+#define SECURITY_WIN32
+#include <ntsecapi.h>
+
 #include <shlobj_core.h>
 #include <cmnquery.h>
 #include <dsclient.h>
@@ -17,3 +23,4 @@
 #include <dsgetdc.h>
 #include <dsrole.h>
 #include <dsparse.h>
+#include <DsGetDC.h>

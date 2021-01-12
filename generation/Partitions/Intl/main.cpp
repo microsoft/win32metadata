@@ -25,3 +25,4 @@
 #include <usp10.h>
 #include <muiload.h>
 #include <gb18030.h>
+#include <icu.h>

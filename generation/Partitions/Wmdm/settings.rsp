@@ -10,9 +10,7 @@
 --traverse
 <IncludeRoot>/um/mtpext.h
 <IncludeRoot>/um/sac.h
-<IncludeRoot>/um/scclient.h
 <IncludeRoot>/um/mswmdm.h
-<IncludeRoot>/um/scserver.h
 <IncludeRoot>/um/wmdmlog.h
 --namespace
 Windows.Win32.Wmdm

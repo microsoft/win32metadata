@@ -7,6 +7,9 @@
 <IncludeRoot>/shared
 <IncludeRoot>/um
 <IncludeRoot>/winrt
+--exclude
+IWICBitmapSource
+IWICBitmap
 --traverse
 <IncludeRoot>/um/d2d1_2helper.h
 <IncludeRoot>/um/d2d1_3helper.h

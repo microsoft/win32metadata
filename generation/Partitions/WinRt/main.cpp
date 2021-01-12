@@ -35,6 +35,19 @@
 #include <windows.ui.xaml.interop.h>
 //#include <Windows.Web.UI.Interop.h> The interfaces make use of templates which ClangSharp can't yet correctly emit
 
+#include <hstring.h>
+#include <winstring.h>
+#include <restrictederrorinfo.h>
+#include <roapi.h>
+#include <robuffer.h>
+#include <roerrorapi.h>
+#include <rometadata.h>
+//#include <rometadataapi.h>
+//#include <rometadataresolution.h>
+#include <roparameterizediid.h>
+#include <roregistrationapi.h>
+#include <shcore.h>
+
 /*
 #include <winnt.h>
 #include <winstring.h>

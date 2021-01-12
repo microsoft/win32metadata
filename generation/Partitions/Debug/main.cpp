@@ -6,6 +6,8 @@
 #include <windows.h>
 #include <sdkddkver.h>
 
+#include <wct.h>
+#include <minidumpapiset.h>
 #include <activdbg.h>
 #include <activprof.h>
 #include <webapplication.h>

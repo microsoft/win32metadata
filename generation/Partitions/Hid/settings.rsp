@@ -12,5 +12,7 @@
 <IncludeRoot>/shared/ntddkbd.h
 <IncludeRoot>/um/dinput.h
 <IncludeRoot>/shared/dinputd.h
+<IncludeRoot>/shared/hidpi.h
+<IncludeRoot>/shared/hidsdi.h
 --namespace
 Windows.Win32.Hid

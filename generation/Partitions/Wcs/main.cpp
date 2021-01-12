@@ -8,3 +8,4 @@
 
 #include <wingdi.h>
 #include <wcsplugin.h>
+#include <Icm.h>

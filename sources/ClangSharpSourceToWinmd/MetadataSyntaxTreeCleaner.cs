@@ -22,6 +22,8 @@ namespace ClangSharpSourceToWinmd
 
             private HashSet<SyntaxNode> nodesWithMarshalAs = new HashSet<SyntaxNode>();
             private Dictionary<string, string> remaps;
+            private HashSet<string> visitedDelegateNames = new HashSet<string>();
+            private HashSet<string> visitedMethodNames = new HashSet<string>();
 
             public TreeRewriter(Dictionary<string, string> remaps)
             {
@@ -59,45 +61,57 @@ namespace ClangSharpSourceToWinmd
                     return node;
                 }
 
-                return base.VisitParameter(node);
+                var ret = (ParameterSyntax)base.VisitParameter(node);
+
+                // Get rid of default parameter values
+                if (ret.Default != null)
+                {
+                    ret = ret.WithDefault(null);
+                }
+
+                return ret;
             }
 
             public override SyntaxNode VisitFieldDeclaration(FieldDeclarationSyntax node)
             {
                 string fullName = GetFullName(node);
 
-                if (this.GetRemapInfo(fullName, out var listAttributes, out string newType, out string newName))
+                this.GetRemapInfo(fullName, out var listAttributes, out string newType, out string newName);
+
+                // ClangSharp mistakenly emits string[] for WCHAR[] Foo = "Bar".
+                // Change it to string
+                if (newType == null && node.Declaration.Type.ToString() == "string[]")
                 {
-                    node = (FieldDeclarationSyntax)base.VisitFieldDeclaration(node);
-                    if (listAttributes != null)
-                    {
-                        foreach (var attrNode in listAttributes)
-                        {
-                            var attrListNode =
-                                SyntaxFactory.AttributeList(
-                                    SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(attrNode));
-                            node = node.WithAttributeLists(node.AttributeLists.Add(attrListNode));
-                        }
-                    }
-
-                    var firstVar = node.Declaration.Variables.First();
-
-                    if (newName != null)
-                    {
-                        var newVar = SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(newName));
-                        node = node.ReplaceNode(firstVar, newVar);
-                    }
-
-                    if (newType != null)
-                    {
-                        var newDeclaration = node.Declaration.WithType(SyntaxFactory.ParseTypeName(newType));
-                        node = node.ReplaceNode(node.Declaration, newDeclaration);
-                    }
-
-                    return node;
+                    newType = "string";
                 }
 
-                return base.VisitFieldDeclaration(node);
+                node = (FieldDeclarationSyntax)base.VisitFieldDeclaration(node);
+                if (listAttributes != null)
+                {
+                    foreach (var attrNode in listAttributes)
+                    {
+                        var attrListNode =
+                            SyntaxFactory.AttributeList(
+                                SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(attrNode));
+                        node = node.WithAttributeLists(node.AttributeLists.Add(attrListNode));
+                    }
+                }
+
+                var firstVar = node.Declaration.Variables.First();
+
+                if (newName != null)
+                {
+                    var newVar = SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(newName));
+                    node = node.ReplaceNode(firstVar, newVar);
+                }
+
+                if (newType != null)
+                {
+                    var newDeclaration = node.Declaration.WithType(SyntaxFactory.ParseTypeName(newType));
+                    node = node.ReplaceNode(node.Declaration, newDeclaration);
+                }
+
+                return node;
             }
 
             public override SyntaxNode VisitAttributeList(AttributeListSyntax node)
@@ -148,7 +162,16 @@ namespace ClangSharpSourceToWinmd
             public override SyntaxNode VisitDelegateDeclaration(DelegateDeclarationSyntax node)
             {
                 string fullName = GetFullName(node);
-                string returnFullName = $"{GetFullName(node)}::return";
+
+                // Remove duplicate delegates in this tree
+                if (this.visitedDelegateNames.Contains(fullName))
+                {
+                    return null;
+                }
+
+                this.visitedDelegateNames.Add(fullName);
+
+                string returnFullName = $"{fullName}::return";
 
                 if (this.GetRemapInfo(returnFullName, out List<AttributeSyntax> listAttributes, out _, out _))
                 {
@@ -183,8 +206,18 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 string fullName = GetFullName(node);
+
+                // Remove duplicate methods in this tree
+                if (this.visitedMethodNames.Contains(fullName))
+                {
+                    return null;
+                }
+
+                this.visitedMethodNames.Add(fullName);
+
                 string returnFullName = $"{fullName}::return";
 
+                // Find remap info for the return parameter for this method and apply any that we find
                 if (this.GetRemapInfo(returnFullName, out List<AttributeSyntax> listAttributes, out _, out _))
                 {
                     node = (MethodDeclarationSyntax)base.VisitMethodDeclaration(node);

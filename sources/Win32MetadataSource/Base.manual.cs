@@ -10,12 +10,6 @@ namespace Windows.Win32.Base
 
         public const int FALSE = 0;
 
-        // Not allowed because UIntPtr can't be const
-        //[NativeTypeName("const JsSourceContext")]
-        //public const UIntPtr JS_SOURCE_CONTEXT_NONE = new UIntPtr(-1);
-        public static uint DWRITE_MAKE_OPENTYPE_TAG(byte a, byte b, byte c, byte d) => ((uint)d << 24) | ((uint)c << 16) | ((uint)b << 8) | a;
-
-        public static DWRITE_FONT_AXIS_TAG DWRITE_MAKE_FONT_AXIS_TAG(byte a, byte b, byte c, byte d) => (DWRITE_FONT_AXIS_TAG)DWRITE_MAKE_OPENTYPE_TAG(a, b, c, d);
 
         public const ushort RT_CURSOR = 1;
 
@@ -5899,15 +5893,4 @@ namespace Windows.Win32.Base
 
         public const uint INFINITE = 0xFFFFFFFF;
     }
-
-/*
-    public enum DWRITE_FONT_AXIS_TAG : uint
-    {
-        DWRITE_FONT_AXIS_TAG_WEIGHT = (((uint)((byte)('t')) << 24) | ((uint)((byte)('h')) << 16) | ((uint)((byte)('g')) << 8) | (uint)((byte)('w'))),
-        DWRITE_FONT_AXIS_TAG_WIDTH = (((uint)((byte)('h')) << 24) | ((uint)((byte)('t')) << 16) | ((uint)((byte)('d')) << 8) | (uint)((byte)('w'))),
-        DWRITE_FONT_AXIS_TAG_SLANT = (((uint)((byte)('t')) << 24) | ((uint)((byte)('n')) << 16) | ((uint)((byte)('l')) << 8) | (uint)((byte)('s'))),
-        DWRITE_FONT_AXIS_TAG_OPTICAL_SIZE = (((uint)((byte)('z')) << 24) | ((uint)((byte)('s')) << 16) | ((uint)((byte)('p')) << 8) | (uint)((byte)('o'))),
-        DWRITE_FONT_AXIS_TAG_ITALIC = (((uint)((byte)('l')) << 24) | ((uint)((byte)('a')) << 16) | ((uint)((byte)('t')) << 8) | (uint)((byte)('i'))),
-    }
-*/
 }

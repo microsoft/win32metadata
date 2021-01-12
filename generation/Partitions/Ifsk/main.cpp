@@ -7,3 +7,4 @@
 #include <sdkddkver.h>
 
 #include <fltuser.h>
+//#include <ntifs.h>

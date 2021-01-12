@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Windows.Win32.WinRt
+namespace Windows.Win32.WinRT
 {
     public struct EventRegistrationToken
     {

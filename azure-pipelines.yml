@@ -101,6 +101,12 @@ steps:
     arguments: '-assemblyVersion $(PrepOutput.NugetVersion) -metadataSourcePath $(WinMetadataSourceDir)'
 
 - task: PowerShell@2
+  displayName: Test metadata binary against baseline
+  inputs:
+    filePath: 'scripts\CompareBinaryAgainstBaseline.ps1'
+    arguments: '-assemblyVersion $(PrepOutput.NugetVersion)'
+
+- task: PowerShell@2
   displayName: Build csWin32 projected binary
   inputs:
     filePath: 'scripts\BuildCsWin32Projection.ps1'

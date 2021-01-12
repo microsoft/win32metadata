@@ -17,6 +17,5 @@
 <IncludeRoot>/um/audioenginebaseapo.h
 <IncludeRoot>/um/dmusics.h
 <IncludeRoot>/um/audiomediatype.h
-<IncludeRoot>/um/baseaudioprocessingobject.h
 --namespace
 Windows.Win32.Audio

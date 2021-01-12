@@ -13,5 +13,6 @@
 <IncludeRoot>/um/PropIdlBase.h
 <IncludeRoot>/um/coml2api.h
 <IncludeRoot>/um/propapi.h
+<IncludeRoot>/um/esent.h
 --namespace
 Windows.Win32.Stg

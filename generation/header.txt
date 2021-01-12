@@ -3,6 +3,7 @@ using Windows.Win32.Interop
 
 using Windows.Win32.Ad
 using Windows.Win32.Adsi
+using Windows.Win32.AllJoyn
 using Windows.Win32.Amsi
 using Windows.Win32.AppxPkg
 using Windows.Win32.Audio
@@ -108,7 +109,7 @@ using Windows.Win32.Pla
 using Windows.Win32.Policy
 using Windows.Win32.ProcSnap
 using Windows.Win32.ProjFs
-using Windows.Win32.roperties
+using Windows.Win32.Properties
 using Windows.Win32.PsApi
 using Windows.Win32.Qos
 using Windows.Win32.Rdc
@@ -164,7 +165,7 @@ using Windows.Win32.WinInet
 using Windows.Win32.WinLocation
 using Windows.Win32.WinProg
 using Windows.Win32.WinRm
-using Windows.Win32.WinRt
+using Windows.Win32.WinRT
 using Windows.Win32.WinSat
 using Windows.Win32.WinSensors
 using Windows.Win32.WinSock
@@ -187,3 +188,4 @@ using Windows.Win32.XAudio2
 using Windows.Win32.Xblidp
 using Windows.Win32.XInput
 using Windows.Win32.Xps
+using IServiceProvider = Windows.Win32.Base.IServiceProvider;

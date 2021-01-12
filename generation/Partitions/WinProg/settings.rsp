@@ -7,6 +7,9 @@
 <IncludeRoot>/shared
 <IncludeRoot>/um
 <IncludeRoot>/winrt
+--exclude
+_UNICODE_STRING
+_STRING
 --traverse
 <IncludeRoot>/um/wldp.h
 <IncludeRoot>/shared/tdiinfo.h
@@ -17,7 +20,6 @@
 <IncludeRoot>/shared/dciddi.h
 <IncludeRoot>/um/realtimeapiset.h
 <IncludeRoot>/um/timeprov.h
-<IncludeRoot>/shared/secext.h
 <IncludeRoot>/um/windowsceip.h
 <IncludeRoot>/um/profileapi.h
 <IncludeRoot>/um/WinBase.h
@@ -60,5 +62,11 @@
 <IncludeRoot>/um/waasapi.h
 <IncludeRoot>/um/dmemmgr.h
 <IncludeRoot>/um/ddkernel.h
+<IncludeRoot>/um/xmllite.h
+<IncludeRoot>/um/devquery.h
+<IncludeRoot>/um/devquerydef.h
+<IncludeRoot>/um/fltdefs.h
+<IncludeRoot>/um/devfiltertypes.h
+<IncludeRoot>/um/statehelpers.h
 --namespace
 Windows.Win32.WinProg

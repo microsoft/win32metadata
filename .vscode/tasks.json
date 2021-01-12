@@ -1,0 +1,102 @@
+// A task runner that invokes Pester to run all Pester tests under the
+// current workspace folder.
+// NOTE: This Test task runner requires an updated version of Pester (>=4.0.3)
+// in order for the problemMatcher to find failed test information (message, line, file).
+// If you don't have that version, you can update Pester from the PowerShell Gallery
+// with this command:
+//
+// PS C:\> Update-Module Pester
+//
+// If that gives an error like:
+// "Module 'Pester' was not installed by using Install-Module, so it cannot be updated."
+// then execute:
+//
+// PS C:\> Install-Module Pester -Scope CurrentUser -Force
+//
+// NOTE: The Clean, Build and Publish tasks require PSake. PSake can be installed
+// from the PowerShell Gallery with this command:
+//
+// PS C:\> Install-Module PSake -Scope CurrentUser -Force
+//
+// Available variables which can be used inside of strings:
+// ${workspaceFolder} the path of the workspace folder that contains the tasks.json file
+// ${workspaceFolderBasename} the name of the workspace folder that contains the tasks.json file without any slashes (/)
+// ${file} the current opened file
+// ${relativeFile} the current opened file relative to the workspace folder containing the file
+// ${fileBasename} the current opened file's basename
+// ${fileBasenameNoExtension} the current opened file's basename without the extension
+// ${fileDirname} the current opened file's dirname
+// ${fileExtname} the current opened file's extension
+// ${cwd} the task runner's current working directory on startup
+// ${lineNumber} the current selected line number in the active file
+{
+    "version": "2.0.0",
+    "windows": {
+        "options": {
+            "shell": {
+                "executable": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                "args": [
+                    "-NoProfile",
+                    "-ExecutionPolicy",
+                    "Bypass",
+                    "-Command"
+                ]
+            }
+        }
+    },
+    "linux": {
+        "options": {
+            "shell": {
+                "executable": "/usr/bin/pwsh",
+                "args": [
+                    "-NoProfile",
+                    "-Command"
+                ]
+            }
+        }
+    },
+    "osx": {
+        "options": {
+            "shell": {
+                "executable": "/usr/local/bin/pwsh",
+                "args": [
+                    "-NoProfile",
+                    "-Command"
+                ]
+            }
+        }
+    },
+    "tasks": [
+        {
+            "label": "Clean",
+            "type": "shell",
+            "command": "Invoke-PSake build.ps1 -taskList Clean"
+        },
+        {
+            "label": "Build",
+            "type": "shell",
+            "command": "Invoke-PSake build.ps1 -taskList Build",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Test",
+            "type": "shell",
+            "command": "Invoke-Pester -PesterOption @{IncludeVSCodeMarker=$true}",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$pester"
+            ]
+        },
+        {
+            "label": "Publish",
+            "type": "shell",
+            "command": "Invoke-PSake build.ps1 -taskList Publish"
+        }
+    ]
+}

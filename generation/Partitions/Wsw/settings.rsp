@@ -7,8 +7,11 @@
 <IncludeRoot>/shared
 <IncludeRoot>/um
 <IncludeRoot>/winrt
+--exclude
+_SecPkgContext_IssuerListInfoEx
 --traverse
 <IncludeRoot>/um/WebServices.h
 <IncludeRoot>/um/IContentPrefetcherTaskTrigger.h
+<IncludeRoot>/um/webauthn.h
 --namespace
 Windows.Win32.Wsw

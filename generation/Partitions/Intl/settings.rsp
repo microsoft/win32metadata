@@ -22,5 +22,6 @@
 <IncludeRoot>/um/usp10.h
 <IncludeRoot>/um/muiload.h
 <IncludeRoot>/um/gb18030.h
+<IncludeRoot>/um/icu.h
 --namespace
 Windows.Win32.Intl

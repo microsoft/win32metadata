@@ -23,6 +23,7 @@ log-potential-typedef-remappings
 exclude-funcs-with-body
 generate-cpp-attributes
 generate-native-inheritance-attribute
+dont-use-using-statics-for-enums
 --headerFile
 generation\header.txt
 --methodClassName

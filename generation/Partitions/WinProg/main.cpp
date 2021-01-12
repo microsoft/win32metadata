@@ -65,5 +65,10 @@
 #include <appcompatapi.h>
 #include <dsound.h>
 #include <wldp.h>
+#include <windowsceip.h>
+#include <xmllite.h>
+#include <devquery.h>
+#include <fltdefs.h>
+#include <statehelpers.h>
 
 //#include <basetsd.h>

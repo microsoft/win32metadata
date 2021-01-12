@@ -11,11 +11,11 @@
 #include <rpcdce.h>
 #include <winerror.h>
 //#include <unknwnbase.h>
-//#include <rpcndr.h>
+#include <rpcndr.h>
 #include <rpcasync.h>
 #include <rpcdcep.h>
 #include <rpcnsi.h>
-//#include <midles.h>
+#include <midles.h>
 #include <rpc.h>
 #include <rpcssl.h>
 //#include <rpcproxy.h> Leaving out on purpose. Requires C-only interfaces and we don't think we need proxy metadata

@@ -7,6 +7,9 @@
 <IncludeRoot>/shared
 <IncludeRoot>/um
 <IncludeRoot>/winrt
+--with-type
+XHR_CERT_IGNORE_FLAG=uint
+XHR_CERT_ERROR_FLAG=uint
 --traverse
 <IncludeRoot>/um/MsXml6.h
 --namespace

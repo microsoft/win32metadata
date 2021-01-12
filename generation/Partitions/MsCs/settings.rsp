@@ -7,6 +7,8 @@
 <IncludeRoot>/shared
 <IncludeRoot>/um
 <IncludeRoot>/winrt
+--with-type
+CLUSTER_PROPERTY_SYNTAX=uint
 --traverse
 <IncludeRoot>/um/msclus.h
 <IncludeRoot>/um/ClusApi.h

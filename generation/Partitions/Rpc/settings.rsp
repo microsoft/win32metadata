@@ -7,6 +7,8 @@
 <IncludeRoot>/shared
 <IncludeRoot>/um
 <IncludeRoot>/winrt
+--exclude
+NDR_SCONTEXT
 --traverse
 <IncludeRoot>/shared/rpcdce.h
 <IncludeRoot>/shared/rpcasync.h
@@ -15,5 +17,6 @@
 <IncludeRoot>/um/Midles.h
 <IncludeRoot>/shared/rpc.h
 <IncludeRoot>/um/rpcssl.h
+<IncludeRoot>/shared/rpcndr.h
 --namespace
 Windows.Win32.Rpc

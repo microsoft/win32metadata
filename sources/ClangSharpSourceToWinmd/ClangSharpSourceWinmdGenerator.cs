@@ -1408,6 +1408,7 @@ namespace ClangSharpSourceToWinmd
                 var fieldAttributes = FieldAttributes.Public;
                 IFieldSymbol fieldSymbol = (IFieldSymbol)model.GetDeclaredSymbol(fieldVariable);
                 bool isConst = fieldSymbol.IsStatic && fieldSymbol.HasConstantValue;
+
                 if (isConst)
                 {
                     fieldAttributes |= FieldAttributes.Static | FieldAttributes.Literal | FieldAttributes.HasDefault;

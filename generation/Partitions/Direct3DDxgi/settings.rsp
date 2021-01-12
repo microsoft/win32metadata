@@ -7,6 +7,8 @@
 <IncludeRoot>/shared
 <IncludeRoot>/um
 <IncludeRoot>/winrt
+--exclude
+DXGI_ADAPTER_FLAG_FORCE_DWORD
 --traverse
 <IncludeRoot>/shared/dxgitype.h
 <IncludeRoot>/shared/dxgiformat.h

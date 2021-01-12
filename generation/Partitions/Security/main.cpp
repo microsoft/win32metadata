@@ -12,6 +12,7 @@
 #define SECURITY_WIN32
 #include <NTSecAPI.h>
 #include <sspi.h>
+#include <wincred.h>
 #include <NTSecPKG.h>
 #include <schannel.h>
 
@@ -90,3 +91,4 @@ typedef struct _OLD_LARGE_INTEGER {
 #include <slpublic.h>
 #include <diagnosticdataquery.h>
 #include <diagnosticdataquerytypes.h>
+#include <security.h>

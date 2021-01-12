@@ -7,6 +7,8 @@
 <IncludeRoot>/shared
 <IncludeRoot>/um
 <IncludeRoot>/winrt
+--with-type
+ATTRIBUTEID=uint
 --traverse
 <IncludeRoot>/um/authif.h
 <IncludeRoot>/um/sdoias.h

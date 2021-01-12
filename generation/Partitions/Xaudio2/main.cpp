@@ -6,7 +6,8 @@
 #include <windows.h>
 #include <sdkddkver.h>
 
-#include <xapobase.h>
+#include <xapo.h>
+//#include <xapobase.h> Class implementations we don't want emitted
 #include <xapofx.h>
 #include <xaudio2.h>
 #include <xaudio2fx.h>

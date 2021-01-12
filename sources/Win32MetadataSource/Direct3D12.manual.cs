@@ -4,8 +4,8 @@
 // Original source is Copyright © Microsoft. All rights reserved.
 
 using System;
-using static Windows.Win32.D3D12_FILTER_REDUCTION_TYPE;
-using static Windows.Win32.D3D12_FILTER_TYPE;
+using static Windows.Win32.Direct3D12.D3D12_FILTER_REDUCTION_TYPE;
+using static Windows.Win32.Direct3D12.D3D12_FILTER_TYPE;
 
 namespace Windows.Win32.Direct3D12
 {

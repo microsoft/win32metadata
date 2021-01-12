@@ -31,7 +31,6 @@ $metadataInteropBin = "$metadataInteropPath\bin\Release\netstandard2.1\Windows.W
 
 Copy-Item $metadataInteropBin $binDir
 
-$outputWinmdFileName = "$binDir\Windows.Win32.winmd"
 $remapFileName = "$metadataSourcePath\remap.rsp"
 
 Write-Output "`n"

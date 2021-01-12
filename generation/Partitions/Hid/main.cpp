@@ -11,3 +11,5 @@
 #include <dinputd.h>
 #include <ntddkbd.h>
 #include <ntddmou.h>
+#include <hidsdi.h>
+#include <hidpi.h>

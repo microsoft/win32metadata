@@ -9,5 +9,6 @@
 <IncludeRoot>/winrt
 --traverse
 <IncludeRoot>/um/http.h
+<IncludeRoot>/um/winhttp.h
 --namespace
 Windows.Win32.Http

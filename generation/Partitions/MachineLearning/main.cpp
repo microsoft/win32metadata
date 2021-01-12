@@ -7,3 +7,4 @@
 #include <sdkddkver.h>
 
 #include <winml.h>
+#include <MLOperatorAuthor.h>

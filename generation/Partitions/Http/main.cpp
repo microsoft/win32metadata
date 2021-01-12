@@ -8,3 +8,4 @@
 
 #include <WinSock2.h>
 #include <http.h>
+#include <winhttp.h>
