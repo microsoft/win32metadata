@@ -13,6 +13,10 @@ RO_REGISTRATION_COOKIE
 RoGetActivatableClassRegistration
 Windows::Foundation::Diagnostics::RoErrorReportingFlags
 ABI::Windows::Foundation::Diagnostics::RoErrorReportingFlags
+IDesktopWindowTarget
+ID2D1DeviceContext
+ID2D1Geometry
+ID2D1Factory
 --traverse
 <RepoRoot>\generation\Partitions\<PartitionName>\main.cpp
 <IncludeRoot>/um/accountssettingspaneinterop.h

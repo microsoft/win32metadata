@@ -5,6 +5,7 @@ ICompositionCapabilities(interface)=<Windows.Foundation.UniversalApiContract, Ve
 ICompositionGraphicsDevice(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.UI.Composition.ICompositionGraphicsDevice
 ICompositor(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.UI.Composition.ICompositor
 IGraphicsEffectSource(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.Graphics.Effects.IGraphicsEffectSource
+IDesktopWindowTarget(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.UI.Composition.Desktop.IDesktopWindowTarget
 --remap
 SetHandleInformation::dwFlags=HANDLE_FLAG_OPTIONS
 DuplicateHandle::dwOptions=DUPLICATE_HANDLE_OPTIONS
