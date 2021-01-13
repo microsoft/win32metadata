@@ -26,8 +26,6 @@ function AddLibToMappings([string] $libName)
         return
     }
 
-    Write-Output "Dumping $libName..."
-
     $libsVisited[$libName] = 1
 
     $libPath = "$libDirectory\$libName"
@@ -54,7 +52,7 @@ function AddLibToMappings([string] $libName)
         }
     }
 
-    Write-Output "$count item(s) added"
+    Write-Output "$($libName): $count item(s) found"
 }
 
 # Do these first as other libs may claim funcs in them, but we want to prioritize these first

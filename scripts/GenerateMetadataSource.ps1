@@ -147,16 +147,16 @@ Remove-Item "$sdkGeneratedSourceDir\*.cs"
 Invoke-PrepLibMappingsFile $artifactsDir $version
 
 $throttleCount = [System.Environment]::ProcessorCount / 2
-if ($throttleCount -eq 0)
+if ($throttleCount -lt 2)
 {
-    $throttleCount = 1
+    $throttleCount = 2
 }
 
 $partitionNames = Get-ChildItem $partitionsDir | Select-Object -ExpandProperty Name
 
 $stopwatch =  [system.diagnostics.stopwatch]::StartNew()
 
-Write-Output "`nProcessing each partition...using $throttleCount parralel script(s)"
+Write-Output "`nProcessing each partition...using $throttleCount parallel script(s)"
 
 $partitionNames | ForEach-Object -Parallel {
     $out1 = "`n$using:PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -version $using:version -partitionName $_ -artifactsDir $using:artifactsDir..."
