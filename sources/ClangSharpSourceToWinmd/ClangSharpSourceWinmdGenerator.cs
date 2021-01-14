@@ -348,14 +348,16 @@ namespace ClangSharpSourceToWinmd
                 return true;
             }
             
-            bool ret = node.Members.Any(m => m.Kind() == SyntaxKind.FieldDeclaration && ((FieldDeclarationSyntax)m).Declaration.Variables.First().Identifier.Text == "lpVtbl");
-            if (ret)
+            bool hasVtbl = node.Members.Any(m => m.Kind() == SyntaxKind.FieldDeclaration && ((FieldDeclarationSyntax)m).Declaration.Variables.First().Identifier.Text == "lpVtbl");
+            bool hasDelegate = node.Members.Any(m => m.Kind() == SyntaxKind.DelegateDeclaration);
+            if (hasVtbl && hasDelegate)
             {
                 this.interfaceStructs.Add(node);
                 this.interfaceMethodCount[node.Identifier.Text] = node.Members.Count(m => m is MethodDeclarationSyntax);
+                return true;
             }
 
-            return ret;
+            return false;
         }
 
         private bool IsInterfaceIUknown(StructDeclarationSyntax node)
