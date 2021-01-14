@@ -56,10 +56,14 @@ $winmdUtilsPathBin = "$winmdUtilsPath\bin\Release\netcoreapp3.1\WinmdUtils.dll"
 
 Write-Output "`n"
 Write-Output "Comparing $outputWinmdFileName against baseline $baselineWinmd..."
-Write-Output "Calling: dotnet $winmdUtilsPathBin showMissingImports --first $baselineWinmd --second $outputWinmdFileName"
-& dotnet $winmdUtilsPathBin showMissingImports --first $baselineWinmd --second $outputWinmdFileName
+Write-Output "Calling: dotnet $winmdUtilsPathBin showMissingImports --first $baselineWinmd --second $winmdPath"
+& dotnet $winmdUtilsPathBin showMissingImports --first $baselineWinmd --second $winmdPath
+
+Write-Output "`nLooking for duplicate imports in $outputWinmdFileName..."
+Write-Output "Calling: dotnet $winmdUtilsPathBin showDuplicateImports --winmd $winmdPath"
+& dotnet $winmdUtilsPathBin showDuplicateImports --winmd $winmdPath
 
 Write-Output "`nLooking for duplicate types in $outputWinmdFileName..."
-Write-Output "Calling: dotnet $winmdUtilsPathBin showDuplicateTypes --winmd $baselineWinmd"
-& dotnet $winmdUtilsPathBin showDuplicateImports --winmd $outputWinmdFileName
+Write-Output "Calling: dotnet $winmdUtilsPathBin showDuplicateTypes --winmd $winmdPath"
+& dotnet $winmdUtilsPathBin showDuplicateTypes --winmd $winmdPath
 

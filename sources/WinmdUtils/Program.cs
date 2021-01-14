@@ -125,7 +125,7 @@ namespace WinmdUtils
 
             if (!dupsFound)
             {
-                console.Out.Write("No duplicate types found.\r\n");
+                console.Out.Write("No duplicate imports found.\r\n");
             }
 
             return dupsFound ? -1 : 0;

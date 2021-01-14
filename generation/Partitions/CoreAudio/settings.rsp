@@ -9,6 +9,7 @@
 <IncludeRoot>/winrt
 --exclude
 _DDPIXELFORMAT
+IKsControl
 --traverse
 <IncludeRoot>/um/audiosessiontypes.h
 <IncludeRoot>/um/AudioAPOTypes.h

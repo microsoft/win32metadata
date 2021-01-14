@@ -33,3 +33,5 @@ DWRITE_FONT_FEATURE_TAG=uint
 DWRITE_FONT_AXIS_TAG=uint
 --with-callconv
 *=Winapi
+--exclude
+PEXCEPTION_ROUTINE

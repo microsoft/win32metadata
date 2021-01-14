@@ -19,6 +19,7 @@ _OBJECTID
 VerSetConditionMask
 SignalObjectAndWait
 LoadPackagedLibrary
+EXCEPTION_ROUTINE
 --traverse
 <IncludeRoot>/um/synchapi.h
 <IncludeRoot>/um/avrt.h

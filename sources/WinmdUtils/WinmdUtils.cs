@@ -63,6 +63,29 @@ namespace WinmdUtils
                     continue;
                 }
 
+                // Some interfaces have the same name so use method names to determine uniqueness
+                if (typeDef.Attributes.HasFlag(System.Reflection.TypeAttributes.Interface))
+                {
+                    name += "(";
+                    var handles = typeDef.GetMethods();
+                    bool first = true;
+                    foreach (var handle in handles)
+                    {
+                        if (!first)
+                        {
+                            name += ",";
+                        }
+                        else
+                        {
+                            first = false;
+                        }
+
+                        var methodDef = this.metadataReader.GetMethodDefinition(handle);
+                        name += metadataReader.GetString(methodDef.Name);
+                    }
+                    name += ")";
+                }
+
                 if (typeDef.IsNested)
                 {
                     continue;

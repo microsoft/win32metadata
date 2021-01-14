@@ -10,6 +10,8 @@
 --exclude
 GetDeviceID
 _D3DVECTOR
+IReferenceClock
+IKsPropertySet
 --traverse
 <IncludeRoot>/shared/msapofxproxy.h
 <IncludeRoot>/um/dmusicc.h
