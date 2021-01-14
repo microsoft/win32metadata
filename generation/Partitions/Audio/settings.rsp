@@ -7,6 +7,9 @@
 <IncludeRoot>/shared
 <IncludeRoot>/um
 <IncludeRoot>/winrt
+--exclude
+GetDeviceID
+_D3DVECTOR
 --traverse
 <IncludeRoot>/shared/msapofxproxy.h
 <IncludeRoot>/um/dmusicc.h

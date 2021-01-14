@@ -7,6 +7,8 @@
 <IncludeRoot>/shared
 <IncludeRoot>/um
 <IncludeRoot>/winrt
+--exclude
+_DL_EUI48
 --traverse
 <IncludeRoot>/um/nsemail.h
 <IncludeRoot>/um/ws2atm.h

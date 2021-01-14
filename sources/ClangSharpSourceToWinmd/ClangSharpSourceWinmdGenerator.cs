@@ -46,9 +46,9 @@ namespace ClangSharpSourceToWinmd
         private HashSet<string> typeImportInterfaces = new HashSet<string>();
         private Dictionary<string, string> typeImports = new Dictionary<string, string>();
         private Dictionary<string, AssemblyReferenceHandle> assemblyNamesToRefHandles = new Dictionary<string, AssemblyReferenceHandle>();
-        private string mainNamespace;
-        
-        private ClangSharpSourceWinmdGenerator(CSharpCompilation compilation, Dictionary<string, string> typeImports, Version assemblyVersion)
+        private Dictionary<string, ITypeSymbol> nameToSymbols = new Dictionary<string, ITypeSymbol>();
+
+        private ClangSharpSourceWinmdGenerator(CSharpCompilation compilation, Dictionary<string, string> typeImports, Version assemblyVersion, string assemblyName)
         {
             this.compilation = compilation;
 
@@ -66,8 +66,8 @@ namespace ClangSharpSourceToWinmd
 
             VerifySymbolsLoadedByCompiler();
             InitReferences();
-            InitAssembly(assemblyVersion);
-            InitModule();
+            InitAssembly(assemblyVersion, assemblyName);
+            InitModule(assemblyName);
 
             void VerifySymbolsLoadedByCompiler()
             {
@@ -83,25 +83,23 @@ namespace ClangSharpSourceToWinmd
                 }
             }
 
-            void InitAssembly(Version version)
+            void InitAssembly(Version version, string assemblyName)
             {
                 this.metadataBuilder.AddAssembly(
-                    metadataBuilder.GetOrAddString(this.compilation.AssemblyName),
+                    metadataBuilder.GetOrAddString(assemblyName),
                     version,
                     default,
                     default,
                     default,
                     hashAlgorithm: AssemblyHashAlgorithm.None);
-
-                this.mainNamespace = Path.GetFileNameWithoutExtension(this.compilation.AssemblyName);
             }
 
-            void InitModule()
+            void InitModule(string assemblyName)
             {
                 this.moduleRef =
                     this.metadataBuilder.AddModule(
                         0,
-                        metadataBuilder.GetOrAddString(this.compilation.AssemblyName),
+                        metadataBuilder.GetOrAddString(assemblyName),
                         metadataBuilder.GetOrAddGuid(Guid.NewGuid()),
                         default,
                         default);
@@ -144,9 +142,9 @@ namespace ClangSharpSourceToWinmd
 
         public bool WroteWinmd { get; private set; }
 
-        public static ClangSharpSourceWinmdGenerator GenerateWindmdForCompilation(CSharpCompilation compilation, Dictionary<string, string> typeImports, Version version, string outputFileName)
+        public static ClangSharpSourceWinmdGenerator GenerateWindmdForCompilation(ClangSharpSourceCompilation compilation, Dictionary<string, string> typeImports, Version version, string outputFileName)
         {
-            ClangSharpSourceWinmdGenerator generator = new ClangSharpSourceWinmdGenerator(compilation, typeImports, version);
+            ClangSharpSourceWinmdGenerator generator = new ClangSharpSourceWinmdGenerator(compilation.CSharpCompilation, typeImports, version, Path.GetFileName(outputFileName));
 
             generator.PopulateMetadataBuilder();
 
@@ -545,25 +543,34 @@ namespace ClangSharpSourceToWinmd
 
         private ITypeSymbol GetTypeFromShortName(string name)
         {
-            if (!name.Contains("."))
+            if (!this.nameToSymbols.TryGetValue(name, out var ret))
             {
-                foreach (string @namespace in new string[] { this.mainNamespace, InteropNamespace, "System" })
+                if (!name.Contains("."))
                 {
-                    var fullNameToCheck = GetQualifiedName(@namespace, name);
-                    ITypeSymbol ret = this.compilation.GetTypeByMetadataName(fullNameToCheck);
-                    if (ret != null)
+                    foreach (string @namespace in new string[] { InteropNamespace, "System" })
                     {
-                        name = fullNameToCheck;
-                        return ret;
+                        var fullNameToCheck = GetQualifiedName(@namespace, name);
+                        ret = this.compilation.GetTypeByMetadataName(fullNameToCheck);
+                        if (ret != null)
+                        {
+                            break;
+                        }
+                    }
+
+                    if (ret == null)
+                    {
+                        ret = this.compilation.GetSymbolsWithName(name, SymbolFilter.Type).FirstOrDefault() as ITypeSymbol;
                     }
                 }
+                else
+                {
+                    ret = this.compilation.GetTypeByMetadataName(name);
+                }
 
-                return null;
+                this.nameToSymbols[name] = ret;
             }
-            else
-            {
-                return this.compilation.GetTypeByMetadataName(name);
-            }
+
+            return ret;
         }
 
         private void RemapToMoreSpecificTypeIfPossible(string parent, ImmutableArray<AttributeData> ownerAttributes, ref ITypeSymbol typeSymbol)

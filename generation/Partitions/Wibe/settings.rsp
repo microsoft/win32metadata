@@ -7,6 +7,8 @@
 <IncludeRoot>/shared
 <IncludeRoot>/um
 <IncludeRoot>/winrt
+--exclude
+MilMatrix3x2D
 --traverse
 <IncludeRoot>/um/mileffects.h
 --namespace

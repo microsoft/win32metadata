@@ -9,6 +9,10 @@
 <IncludeRoot>/winrt
 --exclude
 _MF_Plugin_Type
+tagVIDEOINFOHEADER
+tagMPEG1VIDEOINFO
+tagVIDEOINFOHEADER2
+tagMPEG2VIDEOINFO
 --traverse
 <IncludeRoot>/um/mfspatialaudio.h
 <IncludeRoot>/um/dxva9typ.h

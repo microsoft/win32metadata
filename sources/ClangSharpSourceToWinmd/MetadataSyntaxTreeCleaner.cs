@@ -9,11 +9,11 @@ namespace ClangSharpSourceToWinmd
 {
     public static class MetadataSyntaxTreeCleaner
     {
-        public static SyntaxTree CleanSyntaxTree(SyntaxTree tree, Dictionary<string, string> remaps)
+        public static SyntaxTree CleanSyntaxTree(SyntaxTree tree, Dictionary<string, string> remaps, Dictionary<string, string> requiredNamespaces, HashSet<string> nonEmptyStructs, string filePath)
         {
-            TreeRewriter treeRewriter = new TreeRewriter(remaps);
+            TreeRewriter treeRewriter = new TreeRewriter(remaps, requiredNamespaces, nonEmptyStructs);
             var newRoot = (CSharpSyntaxNode)treeRewriter.Visit(tree.GetRoot());
-            return CSharpSyntaxTree.Create(newRoot, null, tree.FilePath);
+            return CSharpSyntaxTree.Create(newRoot, null, filePath);
         }
 
         private class TreeRewriter : CSharpSyntaxRewriter
@@ -22,12 +22,16 @@ namespace ClangSharpSourceToWinmd
 
             private HashSet<SyntaxNode> nodesWithMarshalAs = new HashSet<SyntaxNode>();
             private Dictionary<string, string> remaps;
+            private Dictionary<string, string> requiredNamespaces;
             private HashSet<string> visitedDelegateNames = new HashSet<string>();
             private HashSet<string> visitedMethodNames = new HashSet<string>();
+            private HashSet<string> nonEmptyStructs;
 
-            public TreeRewriter(Dictionary<string, string> remaps)
+            public TreeRewriter(Dictionary<string, string> remaps, Dictionary<string, string> requiredNamespaces, HashSet<string> nonEmptyStructs)
             {
                 this.remaps = remaps;
+                this.requiredNamespaces = requiredNamespaces;
+                this.nonEmptyStructs = nonEmptyStructs;
             }
 
             public override SyntaxNode VisitParameter(ParameterSyntax node)
@@ -70,6 +74,17 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 return ret;
+            }
+
+            public override SyntaxNode VisitStructDeclaration(StructDeclarationSyntax node)
+            {
+                // If the struct is empty and we found a non-empty struct in all the source files, delete it
+                if (node.Members.Count == 0 && node.AttributeLists.Count == 0 && this.nonEmptyStructs.Contains(node.Identifier.ValueText))
+                {
+                    return null;
+                }
+
+                return base.VisitStructDeclaration(node);
             }
 
             public override SyntaxNode VisitFieldDeclaration(FieldDeclarationSyntax node)
@@ -206,6 +221,14 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 string fullName = GetFullName(node);
+                if (this.requiredNamespaces.TryGetValue(fullName, out var requiredNamespace))
+                {
+                    var ns = GetEnclosingNamespace(node);
+                    if (ns != requiredNamespace)
+                    {
+                        return null;
+                    }
+                }
 
                 // Remove duplicate methods in this tree
                 if (this.visitedMethodNames.Contains(fullName))
@@ -240,6 +263,19 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 return base.VisitMethodDeclaration(node);
+            }
+
+            private static string GetEnclosingNamespace(SyntaxNode node)
+            {
+                for (SyntaxNode currentNode = node; node != null; node = node.Parent)
+                {
+                    if (node is NamespaceDeclarationSyntax nsNode)
+                    {
+                        return nsNode.Name.ToString();
+                    }
+                }
+
+                return null;
             }
 
             private string ConvertTypeToMarshalAsType(string nativeTypeName, out bool isConst, out bool isNullTerminated, out bool isNullNullTerminated)

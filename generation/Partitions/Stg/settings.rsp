@@ -7,6 +7,13 @@
 <IncludeRoot>/shared
 <IncludeRoot>/um
 <IncludeRoot>/winrt
+--exclude
+PropVariantCopy
+PropVariantClear
+FreePropVariantArray
+CoFileTimeNow
+CLSIDFromProgIDEx
+CreateDataAdviseHolder
 --traverse
 <IncludeRoot>/um/objbase.h
 <IncludeRoot>/um/PropIdl.h

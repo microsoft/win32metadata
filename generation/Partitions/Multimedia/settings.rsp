@@ -7,6 +7,12 @@
 <IncludeRoot>/shared
 <IncludeRoot>/um
 <IncludeRoot>/winrt
+--exclude
+joyConfigChanged
+MainAVIHeader
+AVIStreamHeader
+AVIINDEXENTRY
+AVIPALCHANGE
 --traverse
 <IncludeRoot>/um/digitalv.h
 <IncludeRoot>/shared/mmreg.h

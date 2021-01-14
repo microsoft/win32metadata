@@ -7,6 +7,9 @@
 <IncludeRoot>/shared
 <IncludeRoot>/um
 <IncludeRoot>/winrt
+--exclude
+PFNFILLTEXTBUFFER
+tagTEXT_SOURCE
 --traverse
 <IncludeRoot>/um/HtmlHelp.h
 <IncludeRoot>/um/infotech.h

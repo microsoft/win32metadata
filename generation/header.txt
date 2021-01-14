@@ -7,7 +7,7 @@ using Windows.Win32.AllJoyn
 using Windows.Win32.Amsi
 using Windows.Win32.AppxPkg
 using Windows.Win32.Audio
-using Windows.Win32.Automat
+using Windows.Win32.Automation
 using Windows.Win32.Backup
 using Windows.Win32.Base
 using Windows.Win32.Bits

@@ -1,8 +1,16 @@
 {
   "profiles": {
-    "WinmdUtils": {
+    "showMissingImports": {
       "commandName": "Project",
       "commandLineArgs": "showMissingImports --first $(ProjectDir)..\\..\\scripts\\BaselineWinmd\\10.0.19041.5\\Windows.Win32.winmd --second $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd"
+    },
+    "showDuplicateImports": {
+      "commandName": "Project",
+      "commandLineArgs": "showDuplicateImports --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd"
+    },
+    "showDuplicateTypes": {
+      "commandName": "Project",
+      "commandLineArgs": "showDuplicateTypes --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd"
     }
   }
 }

@@ -7,6 +7,9 @@
 <IncludeRoot>/shared
 <IncludeRoot>/um
 <IncludeRoot>/winrt
+--exclude
+HTTP_VERSION_INFO
+tagTEXT_SOURCE
 --traverse
 <IncludeRoot>/um/iedial.h
 <IncludeRoot>/um/WinInet.h

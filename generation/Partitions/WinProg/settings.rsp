@@ -10,6 +10,15 @@
 --exclude
 _UNICODE_STRING
 _STRING
+RtlCaptureStackBackTrace
+RtlCaptureContext
+RtlUnwind
+RtlRaiseException
+RtlPcToFileHeader
+RtlCompareMemory
+_DD_GETHEAPALIGNMENTDATA
+UiaRect
+_TEB
 --traverse
 <IncludeRoot>/um/wldp.h
 <IncludeRoot>/shared/tdiinfo.h

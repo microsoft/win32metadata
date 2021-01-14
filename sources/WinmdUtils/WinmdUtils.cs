@@ -41,19 +41,61 @@ namespace WinmdUtils
                     var import = method.GetImport();
                     var moduleRef = this.metadataReader.GetModuleReference(import.Module);
                     var dllName = this.metadataReader.GetString(moduleRef.Name);
-                    yield return new DllImport(name, dllName);
+                    var declaringType = this.metadataReader.GetTypeDefinition(method.GetDeclaringType());
+                    var declaringTypeName = this.metadataReader.GetString(declaringType.Name);
+                    var declaringTypeNamespace = this.metadataReader.GetString(declaringType.Namespace);
+
+                    yield return new DllImport(name, dllName, $"{declaringTypeNamespace}.{declaringTypeName}");
                 }
+            }
+        }
+
+        public IEnumerable<TypeInfo> GetTypes()
+        {
+            foreach (var typeDefHandle in this.metadataReader.TypeDefinitions)
+            {
+                var typeDef = this.metadataReader.GetTypeDefinition(typeDefHandle);
+                var name = this.metadataReader.GetString(typeDef.Name);
+                var ns = this.metadataReader.GetString(typeDef.Namespace);
+
+                if (name == "Apis")
+                {
+                    continue;
+                }
+
+                if (typeDef.IsNested)
+                {
+                    continue;
+                }
+
+                yield return new TypeInfo(ns, name);
             }
         }
     }
 
+    public class TypeInfo
+    {
+        public TypeInfo(string @namespace, string name)
+        {
+            this.Namespace = @namespace;
+            this.Name = name;
+        }
+
+        public string Namespace { get; private set; }
+
+        public string Name { get; private set; }
+    }
+
     public class DllImport
     {
-        public DllImport(string name, string dll)
+        public DllImport(string name, string dll, string declaringType)
         {
             this.Name = name;
             this.Dll = dll;
+            this.DeclaringType = declaringType;
         }
+
+        public string DeclaringType { get; private set; }
 
         public string Name { get; private set; }
 

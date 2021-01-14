@@ -10,6 +10,9 @@
 --with-type
 _tagSLDATATYPE=uint
 SLDATATYPE=uint
+--exclude
+_CYPHER_BLOCK
+_LM_OWF_PASSWORD
 --traverse
 <IncludeRoot>/um/diagnosticdataquerytypes.h
 <IncludeRoot>/um/celib.h

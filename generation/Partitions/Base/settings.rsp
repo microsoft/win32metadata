@@ -20,6 +20,7 @@ CreateWriter
 CVssWriterEx
 CreateWriterEx
 CVssWriterEx2
+LoadPackagedLibrary
 --traverse
 <IncludeRoot>/shared/devpkey.h
 <IncludeRoot>/um/codecapi.h
