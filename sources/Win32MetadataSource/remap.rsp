@@ -182,6 +182,7 @@ Windows.Win32.Ifsk,FilterInstanceFindHandle,IntPtr,FilterInstanceFindClose
 Windows.Win32.Ifsk,FilterVolumeInstanceFindHandle,IntPtr,FilterVolumeInstanceFindClose
 Windows.Win32.Ad,GetDcContextHandle,IntPtr,DsGetDcCloseW
 Windows.Win32.Etw,TDH_HANDLE,IntPtr,TdhCloseDecodingHandle
+Windows.Win32.Automation,BSTR,IntPtr,SysFreeString
 --remap
 SetHandleInformation::dwFlags=HANDLE_FLAG_OPTIONS
 DuplicateHandle::dwOptions=DUPLICATE_HANDLE_OPTIONS

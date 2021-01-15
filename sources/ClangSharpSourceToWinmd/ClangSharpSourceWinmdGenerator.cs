@@ -577,11 +577,14 @@ namespace ClangSharpSourceToWinmd
 
         private void RemapToMoreSpecificTypeIfPossible(string parent, ImmutableArray<AttributeData> ownerAttributes, ref ITypeSymbol typeSymbol)
         {
-            // See if we can map from an IntPtr to a more specific type
+            var typeName = typeSymbol.ToString();
+
+            // See if we can map from some generic types to a more specific type
             if (typeSymbol.SpecialType == SpecialType.System_IntPtr ||
                 typeSymbol.SpecialType == SpecialType.System_Int32 ||
                 typeSymbol.SpecialType == SpecialType.System_UIntPtr ||
-                typeSymbol.ToString() == "System.IntPtr*")
+                typeName.StartsWith("System.IntPtr*") ||
+                typeName.StartsWith("ushort*"))
             {
                 var attr = ownerAttributes.FirstOrDefault(a => a.AttributeClass.Name == "NativeTypeNameAttribute");
                 if (attr != null)
