@@ -9,7 +9,6 @@
 #include <winbase.h>
 #include <winnt.h>
 #include <winuser.h>
-#include <libloaderapi.h>
 #include <resourceindexer.h>
 #include <strsafe.h>
 #include <winver.h> // Also includes verrsrc.h

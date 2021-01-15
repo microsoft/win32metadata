@@ -65,7 +65,7 @@ namespace ClangSharpSourceToWinmd
             {
                 string modifiedFile = Path.ChangeExtension(tree.FilePath, ".modified.cs");
                 var cleanedTree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, remaps, requiredNamespaces, foundNonEmptyStructs, modifiedFile);
-                File.WriteAllText(modifiedFile, tree.GetText().ToString());
+                File.WriteAllText(modifiedFile, cleanedTree.GetText().ToString());
 
                 lock (cleanedTrees)
                 {

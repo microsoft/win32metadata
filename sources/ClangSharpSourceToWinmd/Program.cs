@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.CommandLine;
 using System.CommandLine.Invocation;
+using System.IO;
 
 namespace ClangSharpSourceToWinmd
 {
@@ -38,6 +39,14 @@ namespace ClangSharpSourceToWinmd
                         ArgumentType = typeof(string),
                         Arity = ArgumentArity.OneOrMore,
                     }
+                },
+                new Option(new string[] { "--autoTypes", "-a" }, "An auto-type to add to the metadata.")
+                {
+                    Argument = new Argument("<value>")
+                    {
+                        ArgumentType = typeof(string),
+                        Arity = ArgumentArity.OneOrMore,
+                    }
                 }
             };
 
@@ -55,6 +64,7 @@ namespace ClangSharpSourceToWinmd
             var remappedNameValuePairs = context.ParseResult.ValueForOption<string[]>("remap");
             var typeImportValuePairs = context.ParseResult.ValueForOption<string[]>("typeImport");
             var requriedNamespaceValuePairs = context.ParseResult.ValueForOption<string[]>("requiredNamespace");
+            var autoTypes = context.ParseResult.ValueForOption<string[]>("autoTypes");
 
             var remaps = ConvertValuePairsToDictionary(remappedNameValuePairs);
             var typeImports = ConvertValuePairsToDictionary(typeImportValuePairs);
@@ -62,6 +72,8 @@ namespace ClangSharpSourceToWinmd
 
             string rawVersion = version.Split('-')[0];
             Version assemblyVersion = Version.Parse(rawVersion);
+
+            NativeTypedefStructsCreator.CreateNativeTypedefsSourceFile(autoTypes, Path.Combine(sourceDirectory, "generated\\autotypes.cs"));
 
             Console.Write($"Compiling source files...");
             System.Diagnostics.Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();

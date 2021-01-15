@@ -23,7 +23,6 @@ EXCEPTION_ROUTINE
 --traverse
 <IncludeRoot>/um/synchapi.h
 <IncludeRoot>/um/avrt.h
-<IncludeRoot>/um/dispatcherqueue.h
 <IncludeRoot>/um/rtworkq.h
 <IncludeRoot>/um/processtopologyapi.h
 <IncludeRoot>/um/systemtopologyapi.h

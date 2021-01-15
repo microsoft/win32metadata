@@ -188,7 +188,7 @@ namespace ClangSharpSourceToWinmd
 
                 string returnFullName = $"{fullName}::return";
 
-                if (this.GetRemapInfo(returnFullName, out List<AttributeSyntax> listAttributes, out _, out _))
+                if (this.GetRemapInfo(returnFullName, out List<AttributeSyntax> listAttributes, out var newType, out _))
                 {
                     node = (DelegateDeclarationSyntax)base.VisitDelegateDeclaration(node);
                     if (listAttributes != null)
@@ -203,6 +203,11 @@ namespace ClangSharpSourceToWinmd
                                             SyntaxFactory.Token(SyntaxKind.ReturnKeyword)));
 
                             node = node.WithAttributeLists(node.AttributeLists.Add(attrListNode));
+                        }
+
+                        if (newType != null)
+                        {
+                            node = node.WithReturnType(SyntaxFactory.ParseTypeName(newType));
                         }
                     }
 
@@ -241,7 +246,7 @@ namespace ClangSharpSourceToWinmd
                 string returnFullName = $"{fullName}::return";
 
                 // Find remap info for the return parameter for this method and apply any that we find
-                if (this.GetRemapInfo(returnFullName, out List<AttributeSyntax> listAttributes, out _, out _))
+                if (this.GetRemapInfo(returnFullName, out List<AttributeSyntax> listAttributes, out var newType, out _))
                 {
                     node = (MethodDeclarationSyntax)base.VisitMethodDeclaration(node);
                     if (listAttributes != null)
@@ -257,6 +262,11 @@ namespace ClangSharpSourceToWinmd
 
                             node = node.WithAttributeLists(node.AttributeLists.Add(attrListNode));
                         }
+                    }
+
+                    if (newType != null)
+                    {
+                        node = node.WithReturnType(SyntaxFactory.ParseTypeName(newType));
                     }
 
                     return node;
@@ -287,9 +297,10 @@ namespace ClangSharpSourceToWinmd
 
                 switch (nativeTypeName)
                 {
-                    case "BOOL":
-                        marshalAsType = "Bool";
-                        break;
+                    // Not using this for BOOL. We'll use a native typedef struct instead
+                    //case "BOOL":
+                    //    marshalAsType = "Bool";
+                    //    break;
 
                     case "PCHAR":
                     case "LPCH":

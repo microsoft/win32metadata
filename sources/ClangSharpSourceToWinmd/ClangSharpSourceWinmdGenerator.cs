@@ -578,15 +578,38 @@ namespace ClangSharpSourceToWinmd
         private void RemapToMoreSpecificTypeIfPossible(string parent, ImmutableArray<AttributeData> ownerAttributes, ref ITypeSymbol typeSymbol)
         {
             // See if we can map from an IntPtr to a more specific type
-            if (typeSymbol.SpecialType == SpecialType.System_IntPtr)
+            if (typeSymbol.SpecialType == SpecialType.System_IntPtr ||
+                typeSymbol.SpecialType == SpecialType.System_Int32 ||
+                typeSymbol.SpecialType == SpecialType.System_UIntPtr ||
+                typeSymbol.ToString() == "System.IntPtr*")
             {
                 var attr = ownerAttributes.FirstOrDefault(a => a.AttributeClass.Name == "NativeTypeNameAttribute");
                 if (attr != null)
                 {
                     var originalTypeName = attr.ConstructorArguments[0].Value.ToString();
-                    var newTypeSymbol = this.GetTypeFromShortName(originalTypeName);
+                    var parts = originalTypeName.Split(' ');
+                    var nameOnly = parts[0];
+                    var star = parts.Length > 1 ? parts[1] : null;
+                    var newTypeSymbol = this.GetTypeFromShortName(nameOnly);
                     if (newTypeSymbol != null)
                     {
+                        if (star != null)
+                        {
+                            var currentName = nameOnly;
+                            for (int i = 0; i < star.Length; i++)
+                            {
+                                currentName += "*";
+                                var pointerSymbol = this.GetTypeFromShortName(currentName);
+                                if (pointerSymbol == null)
+                                {
+                                    pointerSymbol = this.compilation.CreatePointerTypeSymbol(newTypeSymbol);
+                                    this.nameToSymbols[currentName] = pointerSymbol;
+                                }
+
+                                newTypeSymbol = pointerSymbol;
+                            }
+                        }
+
                         typeSymbol = newTypeSymbol;
                     }
                 }

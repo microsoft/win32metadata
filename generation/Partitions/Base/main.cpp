@@ -98,3 +98,5 @@
 #include <fibersapi.h>
 
 #include <devpkey.h>
+
+#include <libloaderapi.h>

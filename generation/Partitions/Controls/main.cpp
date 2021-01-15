@@ -18,3 +18,4 @@
 #include <textserv.h>
 #include <dpa_dsa.h>
 #include <uxtheme.h>
+#include <commctrl.h>

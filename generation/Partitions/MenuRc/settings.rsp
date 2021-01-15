@@ -10,7 +10,6 @@
 --traverse
 <IncludeRoot>/um/mrmresourceindexer.h
 <IncludeRoot>/um/WinUser.h
-<IncludeRoot>/um/libloaderapi.h
 <IncludeRoot>/um/ResourceIndexer.h
 <IncludeRoot>/shared/strsafe.h
 <IncludeRoot>/um/winver.h

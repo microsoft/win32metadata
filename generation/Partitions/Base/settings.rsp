@@ -76,5 +76,7 @@ LoadPackagedLibrary
 <IncludeRoot>/um/vsprov.h
 <IncludeRoot>/um/devpkey.h
 <IncludeRoot>/um/devpropdef.h
+<IncludeRoot>/um/dispatcherqueue.h
+<IncludeRoot>/um/libloaderapi.h
 --namespace
 Windows.Win32.Base

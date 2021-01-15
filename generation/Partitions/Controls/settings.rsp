@@ -20,5 +20,6 @@ UiaRect
 <IncludeRoot>/um/TextServ.h
 <IncludeRoot>/um/dpa_dsa.h
 <IncludeRoot>/um/Uxtheme.h
+<IncludeRoot>/um/CommCtrl.h
 --namespace
 Windows.Win32.Controls

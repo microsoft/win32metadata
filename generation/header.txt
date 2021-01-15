@@ -64,7 +64,6 @@ using Windows.Win32.Ifsk
 using Windows.Win32.IMapi
 using Windows.Win32.IndexSrv
 using Windows.Win32.InputRadial
-using Windows.Win32.InputDev
 using Windows.Win32.InputInk
 using Windows.Win32.InputIntContext
 using Windows.Win32.Intl

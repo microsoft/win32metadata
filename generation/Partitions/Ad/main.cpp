@@ -2,8 +2,7 @@
 
 #include "intrinfix.h"
 
-#include <windows.h>
-#include <sdkddkver.h>
+#include <winsock2.h>
 
 #include <winternl.h>
 
@@ -20,7 +19,6 @@
 #include <adsprop.h>
 #include <ntdsapi.h>
 #include <schedule.h>
-#include <dsgetdc.h>
 #include <dsrole.h>
 #include <dsparse.h>
 #include <DsGetDC.h>
