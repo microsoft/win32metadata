@@ -71,7 +71,6 @@ LoadPackagedLibrary
 <IncludeRoot>/um/vswriter.h
 <IncludeRoot>/um/vss.h
 <IncludeRoot>/um/vsmgmt.h
-<IncludeRoot>/um/vsbackup.h
 <IncludeRoot>/um/vsadmin.h
 <IncludeRoot>/um/vsprov.h
 <IncludeRoot>/um/devpkey.h
