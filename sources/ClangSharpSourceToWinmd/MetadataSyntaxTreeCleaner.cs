@@ -24,7 +24,7 @@ namespace ClangSharpSourceToWinmd
             private Dictionary<string, string> remaps;
             private Dictionary<string, string> requiredNamespaces;
             private HashSet<string> visitedDelegateNames = new HashSet<string>();
-            private HashSet<string> visitedMethodNames = new HashSet<string>();
+            private HashSet<string> visitedStaticMethodNames = new HashSet<string>();
             private HashSet<string> nonEmptyStructs;
 
             public TreeRewriter(Dictionary<string, string> remaps, Dictionary<string, string> requiredNamespaces, HashSet<string> nonEmptyStructs)
@@ -226,22 +226,35 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 string fullName = GetFullName(node);
-                if (this.requiredNamespaces.TryGetValue(fullName, out var requiredNamespace))
+
+                // Remove duplicate static methods
+                if (node.Body == null)
                 {
-                    var ns = GetEnclosingNamespace(node);
-                    if (ns != requiredNamespace)
+                    // If this function is supposed to be in a certain namespace, remove it if it's not.
+                    // We only respect this for static methods
+                    if (this.requiredNamespaces.TryGetValue(fullName, out var requiredNamespace))
+                    {
+                        var ns = GetEnclosingNamespace(node);
+                        if (ns != requiredNamespace)
+                        {
+                            return null;
+                        }
+                    }
+
+                    // Remove duplicate methods in this tree
+                    if (this.visitedStaticMethodNames.Contains(fullName))
                     {
                         return null;
                     }
-                }
 
-                // Remove duplicate methods in this tree
-                if (this.visitedMethodNames.Contains(fullName))
+                    this.visitedStaticMethodNames.Add(fullName);
+                }
+                // Any method with a body has to be part of a call to a vtable for an interface.
+                // If it's not, get rid of it
+                else if (!node.Body.ToString().Contains("GetDelegateForFunctionPointer"))
                 {
                     return null;
                 }
-
-                this.visitedMethodNames.Add(fullName);
 
                 string returnFullName = $"{fullName}::return";
 
