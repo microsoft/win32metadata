@@ -12,3 +12,6 @@ A. No. While the metadata binary is compiled based on the ECMA-335 standard, it 
 **Q. How does this relate to existing community projects in the space like [PInvoke](https://github.com/dotnet/pinvoke) or [winapi-rs](https://github.com/retep998/winapi-rs)?**<br />
 A. New and existing community projects can build on this metadata to maximize their API coverage, improve their developer experience, and reduce their maintenance overhead. We worked closely with the [PInvoke](https://github.com/dotnet/pinvoke) project during development to validate the design and ensure projects like it can build world-class experiences on par or better than what they currently provide and with less effort.
 
+**Q. How much of the Win32 API surface is included in the metadata?**<br />
+A. We aspire to include as much of the Win32 API surface as possible, though while we develop the tooling, we expect there will be gaps which will improve over time. If you discover APIs that are not supported, please [file issues](https://github.com/microsoft/win32metadata/issues) in our repo.
+
