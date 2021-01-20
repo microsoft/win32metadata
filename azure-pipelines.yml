@@ -28,17 +28,18 @@ variables:
   buildPlatform: 'x64'
   buildConfiguration: 'Release'
   System.Debug: true
-  IncludeCsProjection: false
-  UsePreGeneratedSource: false
+  SignFiles: false
   WinMetadataSourceDir: $(Build.SourcesDirectory)\sources\Win32MetadataSource
   OutputPackagesDir: $(Build.ArtifactStagingDirectory)\CreatedNugetPackages
+  PipelineRunName: $(resources.pipeline.winsdk.runName)
+  UseNugetOrgWinSdk: 0
   Patch: $[counter(variables['resources.pipeline.winsdk.runName'], 1)]
 
 steps:
 - download: winsdk
   displayName: Download pipeline NuGet packages
   artifact: NuGetPackages
-  condition: eq(variables.UsePreGeneratedSource, false)
+  condition: eq(variables.UseNugetOrgWinSdk, false)
 
 - task: UseDotNet@2
   displayName: Use DotNet 3.x
@@ -50,34 +51,35 @@ steps:
   displayName: Echo the pipeline variables
   inputs:
     script: |
-      echo resources.pipeline.winsdk.pipelineID = $(resources.pipeline.winsdk.pipelineID)
       echo resources.pipeline.winsdk.runName = $(resources.pipeline.winsdk.runName)
-      echo resources.pipeline.winsdk.runID = $(resources.pipeline.winsdk.runID)
-      echo resources.pipeline.winsdk.runURI = $(resources.pipeline.winsdk.runURI)
-      echo resources.pipeline.winsdk.sourceBranch = $(resources.pipeline.winsdk.sourceBranch)
-      echo resources.pipeline.winsdk.sourceCommit = $(resources.pipeline.winsdk.sourceCommit)
-      echo resources.pipeline.winsdk.sourceProvider = $(resources.pipeline.winsdk.sourceProvider)
-      echo resources.pipeline.winsdk.requestedFor = $(resources.pipeline.winsdk.requestedFor)
-      echo resources.pipeline.winsdk.requestedForID = $(resources.pipeline.winsdk.requestedForID)
       dir /s $(Agent.BuildDirectory)\winsdk\NuGetPackages
-  condition: eq(variables.UsePreGeneratedSource, false)
+  condition: eq(variables.UseNugetOrgWinSdk, false)
 
 - task: CmdLine@2
   displayName: Update job variables from incoming variables
   inputs:
     script: |
       echo ##vso[task.setvariable variable=WinMetadataSourceDir]$(Build.SourcesDirectory)\tests\TestScraperSource
-      echo ##vso[task.setvariable variable=PrepOutput.NugetVersion]10.0.2000.0
-  condition: eq(variables.UsePreGeneratedSource, true)
+      echo ##vso[task.setvariable variable=PrepOutput.NugetVersion]$(variables.OutputNugetVersion)
+  condition: eq(variables.UseNugetOrgWinSdk, true)
 
 - task: PowerShell@2
-  displayName: Generate Win32 metadata C# source
+  displayName: Generate Win32 metadata C# source using pipeline asssets
   inputs:
     filePath: 'scripts\GenerateMetadataSource.ps1'
     arguments: '-artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0 -pipelineRunName $(resources.pipeline.winsdk.runName) -patch "$(Patch)"'
     errorActionPreference: 'continue'
     pwsh: true
-  condition: and(succeeded(), eq(variables.UsePreGeneratedSource, false))
+  condition: and(succeeded(), eq(variables.UseNugetOrgWinSdk, false))
+
+- task: PowerShell@2
+  displayName: Generate Win32 metadata C# source using NuGet packages
+  inputs:
+    filePath: 'scripts\GenerateMetadataSource.ps1'
+    arguments: '-artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0 -downloadNugetVersion $(downloadNugetVersion) -publishNugetVersion $(publishNugetVersion)'
+    errorActionPreference: 'continue'
+    pwsh: true
+  condition: and(succeeded(), eq(variables.UseNugetOrgWinSdk, true))
 
 - task: PublishBuildArtifacts@1
   displayName: Publish generator build artifacts
@@ -85,7 +87,6 @@ steps:
     PathtoPublish: '$(Agent.BuildDirectory)\winsdk\output'
     ArtifactName: 'GeneratorOutput'
     publishLocation: 'Container'
-  condition: and(succeeded(), eq(variables.UsePreGeneratedSource, false))
 
 - task: PublishBuildArtifacts@1
   displayName: Publish generated .cs files
@@ -93,7 +94,6 @@ steps:
     PathtoPublish: 'sources\Win32MetadataSource\generated'
     ArtifactName: GeneratedMetadataSource
     publishLocation: 'Container'
-  condition: and(succeeded(), eq(variables.UsePreGeneratedSource, false))
 
 - task: PowerShell@2
   displayName: Build metadata binary
@@ -109,6 +109,50 @@ steps:
     arguments: '-assemblyVersion $(PrepOutput.NugetVersion)'
     pwsh: true
 
+  # ESRP Authenticode sign package DLLs
+- task: EsrpCodeSigning@1
+  displayName: 'Authenticode Sign Packaged Dlls'
+  inputs:
+    ConnectedServiceName: 'Undocked RegFree Signing Connection'
+    FolderPath: '$(Build.SourcesDirectory)\bin'
+    Pattern: '*.dll,*.winmd'
+    signConfigType: 'inlineSignParams'
+    inlineOperation: |
+      [
+        {
+          "keyCode": "CP-230012",
+          "operationSetCode": "SigntoolSign",
+          "parameters": [
+            {
+              "parameterName": "OpusName",
+              "parameterValue": "Microsoft"
+            },
+            {
+              "parameterName": "OpusInfo",
+              "parameterValue": "http://www.microsoft.com"
+            },
+            {
+              "parameterName": "PageHash",
+              "parameterValue": "/NPH"
+            },
+            {
+              "parameterName": "FileDigest",
+              "parameterValue": "/fd sha256"
+            },
+            {
+              "parameterName": "TimeStamp",
+              "parameterValue": "/tr \"http://rfc3161.gtm.corp.microsoft.com/TSS/HttpTspServer\" /td sha256"
+            }
+          ],
+          "toolName": "signtool.exe",
+          "toolVersion": "6.2.9304.0"
+        }
+      ]
+    SessionTimeout: '60'
+    MaxConcurrency: '50'
+    MaxRetryAttempts: '2'
+    condition: eq(variables['SignFiles'], 'true')
+
   # There's a problem on microsoft.visualstudio.com that requires the guid instead of NuGetCommand@2
 - task: 333b11bd-d341-40d9-afcf-b32d5ce6f23b@2
   displayName: Pack metadata nuget package
@@ -119,6 +163,35 @@ steps:
     versioningScheme: 'byEnvVar'
     versionEnvVar: 'PrepOutput.NugetVersion'
     basePath: '$(Build.SourcesDirectory)'
+
+- task: EsrpCodeSigning@1
+  displayName: 'Sign NuGet Package'
+  inputs:
+    ConnectedServiceName: 'Undocked RegFree Signing Connection'
+    FolderPath: '$(OutputPackagesDir)'
+    Pattern: '*.nupkg'
+    signConfigType: 'inlineSignParams'
+    inlineOperation: |
+      [
+        {
+          "KeyCode" : "CP-401405",
+          "OperationCode" : "NuGetSign",
+          "Parameters" : {},
+          "ToolName" : "sign",
+          "ToolVersion" : "1.0"
+        },
+        {
+            "KeyCode" : "CP-401405",
+            "OperationCode" : "NuGetVerify",
+            "Parameters" : {},
+            "ToolName" : "sign",
+            "ToolVersion" : "1.0"
+        }
+      ]
+    SessionTimeout: '60'
+    MaxConcurrency: '50'
+    MaxRetryAttempts: '2'
+    condition: eq(variables['SignFiles'], 'true')
 
 - task: PublishPipelineArtifact@1
   displayName: 'Publish NuGet packages to pipeline artifacts'

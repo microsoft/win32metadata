@@ -11,6 +11,15 @@ param
     $downloadDefaultCppNugets = $true,
 
     [string]
+    $downloadNugetVersion,
+
+    [string]
+    $publishNugetVersion,
+
+    [bool]
+    $exitAfterFindVersion = $false,
+
+    [string]
     $patch = ""
 )
 
@@ -63,6 +72,11 @@ $branch = $parts[2].Replace("_", "-")
 $potentialVersions = "10.0.$build.$qfe-preview.$branch", "10.0.$build.$qfe-preview", "10.0.$build.*"
 $version = $null
 
+if ($null -ne $downloadNugetVersion)
+{
+    $potentialVersions = $downloadNugetVersion
+}
+
 foreach ($ver in $potentialVersions)
 {
     Write-Output "Looking for: $nugetSrcPackagesDir\Microsoft.Windows.SDK.CPP.$ver.nupkg..."
@@ -77,57 +91,70 @@ foreach ($ver in $potentialVersions)
 
 if (!$version)
 {
-    if (!$downloadDefaultCppNugets)
+    if ($downloadNugetVersion)
     {
-        Write-Output "Error: Couldn't find cpp package in $nugetSrcPackagesDir. Call script with downloadDefaultCppNugets = 1 to download default packages."
-        exit -1
+        $version = $downloadNugetVersion
     }
-    else
+    else 
     {
-        $version = $defaultWinSDKNugetVersion
-        Write-Output "No cpp nuget packages found at $nugetSrcPackagesDir. Downloading $version from nuget.org..."
+        if (!$downloadDefaultCppNugets)
+        {
+            Write-Output "Error: Couldn't find cpp package in $nugetSrcPackagesDir. Call script with downloadDefaultCppNugets = 1 to download default packages."
+            exit -1
+        }
 
-        Download-Nupkg "Microsoft.Windows.SDK.CPP" $version $nugetSrcPackagesDir
-        Download-Nupkg "Microsoft.Windows.SDK.CPP.x64" $version $nugetSrcPackagesDir
-        $cppPkg = Get-ChildItem -path $nugetSrcPackagesDir -Include Microsoft.Windows.SDK.CPP.10.*.nupkg -recurse
+        $version = $defaultWinSDKNugetVersion
     }
+
+    Write-Output "No cpp nuget packages found at $nugetSrcPackagesDir. Downloading $version from nuget.org..."
+
+    Download-Nupkg "Microsoft.Windows.SDK.CPP" $version $nugetSrcPackagesDir
+    Download-Nupkg "Microsoft.Windows.SDK.CPP.x64" $version $nugetSrcPackagesDir
 }
 
 $nugetSrcPackagesDir = Join-Path -Path $artifactsDir "NuGetPackages"
 Create-Directory $nugetSrcPackagesDir
 
-$publishNugetVersion = $version
-
-# patch is an auto-increment counter specific to the pipeline name.
-# If it's set...
-if ($patch -ne "")
+if (!$publishNugetVersion)
 {
-    # If this is a preview build, just append the patch to the end of the version
-    if ($version.Contains("-preview"))
-    {
-        $publishNugetVersion = "$version.$patch"
-    }
-    # If this isn't a preview build, we want to replace the build QFE with the patch
-    else
-    {
-        $buildParts = $version.Split("{.}")
-        $qfePart = $buildParts[3]
-        $qfeParts = $qfePart.Split("{-}")
-        $qfe = $qfeOverride
-        if ($qfeParts.Length -eq 2)
-        {
-            $qfeExtra = $qfeParts[1]
-            $qfe = "$qfe-$qfeExtra"
-        }
-    
-        $buildParts[3] = $patch
+    $publishNugetVersion = $version
 
-        $publishNugetVersion = [string]::Join(".", $buildParts)
+    # patch is an auto-increment counter specific to the pipeline name.
+    # If it's set...
+    if ($patch -ne "")
+    {
+        # If this is a preview build, just append the patch to the end of the version
+        if ($version.Contains("-preview"))
+        {
+            $publishNugetVersion = "$version.$patch"
+        }
+        # If this isn't a preview build, we want to replace the build QFE with the patch
+        else
+        {
+            $buildParts = $version.Split("{.}")
+            $qfePart = $buildParts[3]
+            $qfeParts = $qfePart.Split("{-}")
+            $qfe = $qfeOverride
+            if ($qfeParts.Length -eq 2)
+            {
+                $qfeExtra = $qfeParts[1]
+                $qfe = "$qfe-$qfeExtra"
+            }
+        
+            $buildParts[3] = $patch
+    
+            $publishNugetVersion = [string]::Join(".", $buildParts)
+        }
     }
 }
 
 # Write variable in the Azure DevOps pipeline for use in subsequent tasks
 Write-Output "##vso[task.setvariable variable=PrepOutput.NugetVersion;]$publishNugetVersion"
+
+if ($exitAfterFindVersion)
+{
+    exit 0
+}
 
 $x64Pkg = Get-ChildItem -path "$nugetSrcPackagesDir\Microsoft.Windows.SDK.CPP.x64.$version.nupkg"
 if (!$x64Pkg)
