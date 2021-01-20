@@ -28,11 +28,9 @@ variables:
   buildPlatform: 'x64'
   buildConfiguration: 'Release'
   System.Debug: true
-  SignFiles: false
   WinMetadataSourceDir: $(Build.SourcesDirectory)\sources\Win32MetadataSource
   OutputPackagesDir: $(Build.ArtifactStagingDirectory)\CreatedNugetPackages
   PipelineRunName: $(resources.pipeline.winsdk.runName)
-  UseNugetOrgWinSdk: 0
   Patch: $[counter(variables['resources.pipeline.winsdk.runName'], 1)]
 
 steps:
@@ -76,7 +74,7 @@ steps:
   displayName: Generate Win32 metadata C# source using NuGet packages
   inputs:
     filePath: 'scripts\GenerateMetadataSource.ps1'
-    arguments: '-artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0 -downloadNugetVersion $(downloadNugetVersion) -publishNugetVersion $(publishNugetVersion)'
+    arguments: '-artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0 -downloadNugetVersion $(DownloadNugetVersion) -publishNugetVersion $(PublishNugetVersion)'
     errorActionPreference: 'continue'
     pwsh: true
   condition: and(succeeded(), eq(variables.UseNugetOrgWinSdk, true))
