@@ -124,6 +124,7 @@ FindFirstChangeNotificationA::return=FindChangeNotifcationHandle
 FindFirstChangeNotificationW::return=FindChangeNotifcationHandle
 FindNextChangeNotification::hChangeHandle=FindChangeNotifcationHandle
 FindCloseChangeNotification::hChangeHandle=FindChangeNotifcationHandle
+DsGetDcCloseW::GetDcContextHandle=GetDcContextHandle
 FindFirstFileA::return=FindFileHandle
 FindFirstFileW::return=FindFileHandle
 FindFirstFileExA::return=FindFileHandle
