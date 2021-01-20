@@ -72,7 +72,7 @@ $branch = $parts[2].Replace("_", "-")
 $potentialVersions = "10.0.$build.$qfe-preview.$branch", "10.0.$build.$qfe-preview", "10.0.$build.*"
 $version = $null
 
-if ($null -ne $downloadNugetVersion)
+if ($downloadNugetVersion)
 {
     $potentialVersions = $downloadNugetVersion
 }
