@@ -14,4 +14,5 @@ Below are some principles that all language projections should follow:
 
 ## Projections
 * C# - https://github.com/microsoft/cswin32
+* C++ - https://github.com/microsoft/cppwin32
 * Rust - https://github.com/microsoft/windows-rs
