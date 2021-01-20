@@ -21,4 +21,4 @@ DXGI_ADAPTER_FLAG_FORCE_DWORD
 <IncludeRoot>/shared/dxgi1_3.h
 <IncludeRoot>/shared/dxgi1_5.h
 --namespace
-Windows.Win32.Direct3DDxgi
+Windows.Win32.Dxgi

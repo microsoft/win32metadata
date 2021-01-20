@@ -78,4 +78,4 @@ LoadPackagedLibrary
 <IncludeRoot>/um/dispatcherqueue.h
 <IncludeRoot>/um/libloaderapi.h
 --namespace
-Windows.Win32.Base
+Windows.Win32.SystemServices

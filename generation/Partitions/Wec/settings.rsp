@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/EvColl.h
 --namespace
-Windows.Win32.Wec
+Windows.Win32.WindowsEventCollector

@@ -18,4 +18,4 @@ IResourceManagerXXX
 <IncludeRoot>/um/ComAdmin.h
 <IncludeRoot>/um/Mtxdm.h
 --namespace
-Windows.Win32.Cos
+Windows.Win32.ComponentServices

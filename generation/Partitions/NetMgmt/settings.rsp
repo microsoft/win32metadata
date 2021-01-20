@@ -24,4 +24,4 @@
 <IncludeRoot>/um/LMUse.h
 <IncludeRoot>/um/lmwksta.h
 --namespace
-Windows.Win32.NetMgmt
+Windows.Win32.NetManagement

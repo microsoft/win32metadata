@@ -16,4 +16,4 @@
 <IncludeRoot>/um/winsxs.h
 <IncludeRoot>/um/Sfc.h
 --namespace
-Windows.Win32.Setup
+Windows.Win32.ApplicationInstallationAndServicing

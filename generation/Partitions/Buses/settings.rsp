@@ -16,4 +16,4 @@
 <IncludeRoot>/um/usb.h
 <IncludeRoot>/um/winusb.h
 --namespace
-Windows.Win32.Buses
+Windows.Win32.UsbDrivers

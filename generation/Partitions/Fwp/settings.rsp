@@ -15,5 +15,6 @@
 <IncludeRoot>/um/fwpmu.h
 <IncludeRoot>/um/fwptypes.h
 <IncludeRoot>/um/fwpmtypes.h
+<IncludeRoot>/shared/netiodef.h
 --namespace
-Windows.Win32.Fwp
+Windows.Win32.WindowsFiltering

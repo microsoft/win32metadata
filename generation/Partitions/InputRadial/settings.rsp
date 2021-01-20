@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/RadialControllerInterop.h
 --namespace
-Windows.Win32.InputRadial
+Windows.Win32.RadialInput

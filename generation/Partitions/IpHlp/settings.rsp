@@ -28,6 +28,7 @@ RtlIpv6StringToAddressW
 RtlEthernetStringToAddressW
 RtlIpv4StringToAddressExW
 RtlIpv6StringToAddressExW
+_DL_EUI48
 --traverse
 <IncludeRoot>/shared/tcpestats.h
 <IncludeRoot>/um/iptypes.h
@@ -44,4 +45,4 @@ RtlIpv6StringToAddressExW
 <IncludeRoot>/shared/ip2string.h
 <IncludeRoot>/um/IPExport.h
 --namespace
-Windows.Win32.IpHlp
+Windows.Win32.IpHelper

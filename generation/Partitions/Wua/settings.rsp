@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/wuapi.h
 --namespace
-Windows.Win32.Wua
+Windows.Win32.WindowsUpdateAgent

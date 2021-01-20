@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/RestartManager.h
 --namespace
-Windows.Win32.RstMgr
+Windows.Win32.RestartManager

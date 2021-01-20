@@ -2,7 +2,7 @@
   "profiles": {
     "ClangSharpSourceToWinmd": {
       "commandName": "Project",
-      "commandLineArgs": "-s $(ProjectDir)..\\Win32MetadataSource -i $(ProjectDir)..\\Win32MetadataInterop\\bin\\Debug\\netstandard2.1\\Windows.Win32.Interop.dll -o $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd -v 10.0.19041.5 @$(ProjectDir)..\\Win32MetadataSource\\remap.rsp"
+      "commandLineArgs": "-s $(ProjectDir)..\\Win32MetadataSource -i $(ProjectDir)..\\Win32MetadataInterop\\bin\\Debug\\netstandard2.1\\Windows.Win32.Interop.dll -o $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd -v 10.0.19041.5 @$(ProjectDir)..\\Win32MetadataSource\\remap.rsp @$(ProjectDir)..\\Win32MetadataSource\\requiredNamespacesForNames.rsp"
     },
     "TestSource": {
       "commandName": "Project",

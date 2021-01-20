@@ -1,4 +1,4 @@
-namespace Windows.Win32.Base
+namespace Windows.Win32.SystemServices
 {
     public static partial class Apis
     {

@@ -11,4 +11,4 @@
 <IncludeRoot>/um/swdevicedef.h
 <IncludeRoot>/um/swdevice.h
 --namespace
-Windows.Win32.SwDevice
+Windows.Win32.SoftwareDevice

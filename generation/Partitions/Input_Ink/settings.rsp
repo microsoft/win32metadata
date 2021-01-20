@@ -11,4 +11,4 @@
 <IncludeRoot>/um/InkPresenterDesktop.h
 <IncludeRoot>/um/inkrenderer.h
 --namespace
-Windows.Win32.InputInk
+Windows.Win32.InkInput

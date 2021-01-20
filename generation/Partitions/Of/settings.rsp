@@ -11,4 +11,4 @@
 <IncludeRoot>/um/cscobj.h
 <IncludeRoot>/um/cscapi.h
 --namespace
-Windows.Win32.Of
+Windows.Win32.OfflineFiles

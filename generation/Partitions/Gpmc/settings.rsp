@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/gpmgmt.h
 --namespace
-Windows.Win32.Gpmc
+Windows.Win32.GroupPolicyManagementConsole

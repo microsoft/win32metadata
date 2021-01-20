@@ -14,4 +14,4 @@
 <IncludeRoot>/um/drt.h
 <IncludeRoot>/um/PeerDist.h
 --namespace
-Windows.Win32.P2p
+Windows.Win32.P2P

@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/wslapi.h
 --namespace
-Windows.Win32.Wsl
+Windows.Win32.WindowsSubsystemForLinux

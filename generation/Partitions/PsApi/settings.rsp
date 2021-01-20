@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/Psapi.h
 --namespace
-Windows.Win32.PsApi
+Windows.Win32.ProcessStatus

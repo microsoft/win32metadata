@@ -3,9 +3,10 @@
 
 #include "intrinfix.h"
 
-#include <windows.h>
+#include <winsock2.h>
 #include <sdkddkver.h>
 
 #include <fwpmu.h>
 #include <fwptypes.h>
 #include <fwpmtypes.h>
+#include <netiodef.h>

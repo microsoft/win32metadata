@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/virtdisk.h
 --namespace
-Windows.Win32.Vstor
+Windows.Win32.VirtualStorage

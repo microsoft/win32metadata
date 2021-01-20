@@ -13,4 +13,4 @@
 <IncludeRoot>/um/cfgmgr32.h
 <IncludeRoot>/um/newdev.h
 --namespace
-Windows.Win32.DevInst
+Windows.Win32.DeviceAndDriverInstallation

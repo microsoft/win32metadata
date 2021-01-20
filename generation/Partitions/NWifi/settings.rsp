@@ -19,4 +19,4 @@
 <IncludeRoot>/um/wlanapi.h
 <IncludeRoot>/um/adhoc.h
 --namespace
-Windows.Win32.NWifi
+Windows.Win32.NativeWiFi

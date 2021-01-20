@@ -12,4 +12,4 @@
 <IncludeRoot>/um/WinBio.h
 <IncludeRoot>/um/winbio_adapter.h
 --namespace
-Windows.Win32.SecBitomet
+Windows.Win32.WindowsBiometricFramework

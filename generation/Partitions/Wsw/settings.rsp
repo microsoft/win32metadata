@@ -14,4 +14,4 @@ _SecPkgContext_IssuerListInfoEx
 <IncludeRoot>/um/IContentPrefetcherTaskTrigger.h
 <IncludeRoot>/um/webauthn.h
 --namespace
-Windows.Win32.Wsw
+Windows.Win32.WindowsWebServices

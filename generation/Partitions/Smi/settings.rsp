@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/wcmconfig.h
 --namespace
-Windows.Win32.Smi
+Windows.Win32.SettingsManagementInfrastructure

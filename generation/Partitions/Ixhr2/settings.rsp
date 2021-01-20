@@ -13,4 +13,4 @@ XHR_CERT_ERROR_FLAG=uint
 --traverse
 <IncludeRoot>/um/MsXml6.h
 --namespace
-Windows.Win32.Ixhr2
+Windows.Win32.XmlHttpExtendedRequest

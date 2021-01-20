@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/wcmapi.h
 --namespace
-Windows.Win32.Wcm
+Windows.Win32.WindowsConnectionManager

@@ -1,6 +1,6 @@
 using System;
 
-namespace Windows.Win32.Direct3DDxgi
+namespace Windows.Win32.Dxgi
 {
     public static unsafe partial class Apis
     {

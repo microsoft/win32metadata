@@ -11,4 +11,4 @@
 <IncludeRoot>/um/SensAPI.h
 <IncludeRoot>/um/SensEvts.h
 --namespace
-Windows.Win32.Sens
+Windows.Win32.SystemEventNotificationService

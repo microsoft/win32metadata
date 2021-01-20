@@ -11,4 +11,4 @@
 <IncludeRoot>/um/MAPI.h
 <IncludeRoot>/um/MapiUnicodeHelp.h
 --namespace
-Windows.Win32.Mapi
+Windows.Win32.MobileBroadband

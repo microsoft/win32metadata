@@ -7,7 +7,9 @@
 <IncludeRoot>/shared
 <IncludeRoot>/um
 <IncludeRoot>/winrt
+--exclude
+COMPRESSOR_HANDLE__
 --traverse
 <IncludeRoot>/um/compressapi.h
 --namespace
-Windows.Win32.CmpApi
+Windows.Win32.Compression

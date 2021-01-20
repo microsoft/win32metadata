@@ -49,4 +49,4 @@
 <IncludeRoot>/um/ddstream.h
 <IncludeRoot>/um/mmstream.h
 --namespace
-Windows.Win32.DShow
+Windows.Win32.DirectShow

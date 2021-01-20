@@ -32,4 +32,4 @@ DumpLogRecords
 <IncludeRoot>/um/wow64apiset.h
 <IncludeRoot>/shared/ktmtypes.h
 --namespace
-Windows.Win32.Fs
+Windows.Win32.FileSystem

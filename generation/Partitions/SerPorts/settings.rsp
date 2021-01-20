@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/msports.h
 --namespace
-Windows.Win32.SerPorts
+Windows.Win32.SerialController

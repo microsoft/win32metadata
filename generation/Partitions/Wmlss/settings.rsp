@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/wmlss.h
 --namespace
-Windows.Win32.Wmlss
+Windows.Win32.WindowsMediaLibrarySharingServices

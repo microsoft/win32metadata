@@ -11,4 +11,4 @@
 <IncludeRoot>/um/wsman.h
 <IncludeRoot>/um/wsmandisp.h
 --namespace
-Windows.Win32.WinRm
+Windows.Win32.WindowsRemoteManagement

@@ -16,4 +16,4 @@ CLUSTER_PROPERTY_SYNTAX=uint
 <IncludeRoot>/um/smbclnt.h
 <IncludeRoot>/um/CluAdmEx.h
 --namespace
-Windows.Win32.MsCs
+Windows.Win32.WindowsClustering

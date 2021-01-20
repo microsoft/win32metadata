@@ -11,4 +11,4 @@
 <IncludeRoot>/um/netlistmgr.h
 <IncludeRoot>/um/ondemandconnroutehelper.h
 --namespace
-Windows.Win32.Nla
+Windows.Win32.NetworkListManager

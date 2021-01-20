@@ -32,7 +32,7 @@ namespace ClangSharpSourceToWinmd
                         Arity = ArgumentArity.OneOrMore,
                     }
                 },
-                new Option(new string[] { "--requiredNamespace", "-n" }, "The required namespace to emit an item.")
+                new Option(new string[] { "--requiredNamespaceForName", "-n" }, "The required namespace for a named item.")
                 {
                     Argument = new Argument("<name>=<value>")
                     {
@@ -63,12 +63,12 @@ namespace ClangSharpSourceToWinmd
             string version = context.ParseResult.ValueForOption<string>("version");
             var remappedNameValuePairs = context.ParseResult.ValueForOption<string[]>("remap");
             var typeImportValuePairs = context.ParseResult.ValueForOption<string[]>("typeImport");
-            var requriedNamespaceValuePairs = context.ParseResult.ValueForOption<string[]>("requiredNamespace");
+            var requiredNamespaceValuePairs = context.ParseResult.ValueForOption<string[]>("requiredNamespaceForName");
             var autoTypes = context.ParseResult.ValueForOption<string[]>("autoTypes");
 
             var remaps = ConvertValuePairsToDictionary(remappedNameValuePairs);
             var typeImports = ConvertValuePairsToDictionary(typeImportValuePairs);
-            var requiredNamespaces = ConvertValuePairsToDictionary(requriedNamespaceValuePairs);
+            var requiredNamespaces = ConvertValuePairsToDictionary(requiredNamespaceValuePairs);
 
             string rawVersion = version.Split('-')[0];
             Version assemblyVersion = Version.Parse(rawVersion);

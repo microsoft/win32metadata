@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
 using System.IO;
+using System.Linq;
 
 namespace WinmdUtils
 {
@@ -84,6 +85,28 @@ namespace WinmdUtils
                         name += metadataReader.GetString(methodDef.Name);
                     }
                     name += ")";
+                }
+                else
+                {
+                    var fields = typeDef.GetFields();
+                    bool first = true;
+                    foreach (var handle in fields.Take(10))
+                    {
+                        name += "(";
+                        name += ")";
+
+                        if (!first)
+                        {
+                            name += ",";
+                        }
+                        else
+                        {
+                            first = false;
+                        }
+
+                        var fieldDef = this.metadataReader.GetFieldDefinition(handle);
+                        name += metadataReader.GetString(fieldDef.Name);
+                    }
                 }
 
                 if (typeDef.IsNested)

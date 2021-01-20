@@ -21,4 +21,4 @@ _NgcTicketContext
 <IncludeRoot>/um/eapmethodpeerapis.h
 <IncludeRoot>/um/eapmethodauthenticatorapis.h
 --namespace
-Windows.Win32.EapHost
+Windows.Win32.ExtensibleAuthenticationProtocol

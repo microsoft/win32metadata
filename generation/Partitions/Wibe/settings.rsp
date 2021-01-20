@@ -12,4 +12,4 @@ MilMatrix3x2D
 --traverse
 <IncludeRoot>/um/mileffects.h
 --namespace
-Windows.Win32.Wibe
+Windows.Win32.WpfBitmapEffects

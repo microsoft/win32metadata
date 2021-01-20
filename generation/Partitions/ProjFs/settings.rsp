@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/projectedfslib.h
 --namespace
-Windows.Win32.ProjFs
+Windows.Win32.ProjectedFileSystem

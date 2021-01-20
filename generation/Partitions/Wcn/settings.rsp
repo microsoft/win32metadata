@@ -11,4 +11,4 @@
 <IncludeRoot>/um/WcnTypes.h
 <IncludeRoot>/um/WcnDevice.h
 --namespace
-Windows.Win32.Wcn
+Windows.Win32.WindowsConnectNow

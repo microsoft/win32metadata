@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using Windows.Win32.Interop;
 
-namespace Windows.Win32.WinProg
+namespace Windows.Win32.WindowsProgramming
 {
     [Flags]
     public enum PROCESS_CREATION_FLAGS : uint

@@ -58,6 +58,8 @@ namespace ClangSharpSourceToWinmd
                 }
             });
 
+            syntaxTrees = NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(syntaxTrees, requiredNamespaces);
+
             HashSet<string> foundNonEmptyStructs = GetNonEmptyStructs(syntaxTrees);
 
             List<SyntaxTree> cleanedTrees = new List<SyntaxTree>();

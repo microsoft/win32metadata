@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/cfapi.h
 --namespace
-Windows.Win32.Cloudapi
+Windows.Win32.CloudFilters

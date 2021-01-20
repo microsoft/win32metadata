@@ -13,4 +13,4 @@
 <IncludeRoot>/um/portabledevicetypes.h
 <IncludeRoot>/um/portabledeviceapi.h
 --namespace
-Windows.Win32.WpdSdk
+Windows.Win32.WindowsPortableDevices

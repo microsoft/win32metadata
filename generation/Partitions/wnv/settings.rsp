@@ -10,7 +10,6 @@
 --exclude
 _DL_EUI48
 --traverse
-<IncludeRoot>/shared/netiodef.h
 <IncludeRoot>/um/wnvapi.h
 --namespace
-Windows.Win32.Wnv
+Windows.Win32.WindowsNetworkVirtualization

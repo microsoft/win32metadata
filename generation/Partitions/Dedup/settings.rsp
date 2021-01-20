@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/ddpbackup.h
 --namespace
-Windows.Win32.Dedup
+Windows.Win32.DataDeduplication

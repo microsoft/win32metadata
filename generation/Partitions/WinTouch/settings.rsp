@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/manipulations.h
 --namespace
-Windows.Win32.WinTouch
+Windows.Win32.TouchInput

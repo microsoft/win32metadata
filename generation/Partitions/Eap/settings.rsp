@@ -11,4 +11,4 @@
 <IncludeRoot>/um/Raseapif.h
 <IncludeRoot>/um/RrasCfg.h
 --namespace
-Windows.Win32.Eap
+Windows.Win32.ExtensibleAuthenticationProtocol

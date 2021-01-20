@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/SrRestorePtApi.h
 --namespace
-Windows.Win32.Sr
+Windows.Win32.SystemRestore

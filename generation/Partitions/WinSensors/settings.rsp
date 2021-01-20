@@ -11,4 +11,4 @@
 <IncludeRoot>/um/sensors.h
 <IncludeRoot>/um/SensorsApi.h
 --namespace
-Windows.Win32.WinSensors
+Windows.Win32.Sensors

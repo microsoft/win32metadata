@@ -11,4 +11,4 @@
 <IncludeRoot>/um/WerApi.h
 <IncludeRoot>/um/ErrorRep.h
 --namespace
-Windows.Win32.Wer
+Windows.Win32.WindowsErrorReporting

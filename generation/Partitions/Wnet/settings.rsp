@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/winnetwk.h
 --namespace
-Windows.Win32.Wnet
+Windows.Win32.WindowsNetworking

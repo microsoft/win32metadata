@@ -14,4 +14,4 @@
 <IncludeRoot>/shared/strsafe.h
 <IncludeRoot>/um/winver.h
 --namespace
-Windows.Win32.MenuRc
+Windows.Win32.MenusAndResources

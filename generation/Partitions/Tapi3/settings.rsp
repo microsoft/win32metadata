@@ -21,4 +21,4 @@
 <IncludeRoot>/um/MspCall.h
 <IncludeRoot>/um/MspStrm.h
 --namespace
-Windows.Win32.Tapi3
+Windows.Win32.Tapi

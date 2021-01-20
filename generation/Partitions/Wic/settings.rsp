@@ -11,4 +11,4 @@
 <IncludeRoot>/um/wincodec.h
 <IncludeRoot>/um/wincodecsdk.h
 --namespace
-Windows.Win32.Wic
+Windows.Win32.WindowsImagingComponent

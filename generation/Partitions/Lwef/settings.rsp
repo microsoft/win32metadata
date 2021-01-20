@@ -12,4 +12,4 @@
 <IncludeRoot>/um/Reconcil.h
 <IncludeRoot>/um/WindowsDefender.h
 --namespace
-Windows.Win32.Lwef
+Windows.Win32.LegacyWindowsEnvironmentFeatures
