@@ -4,11 +4,17 @@ Win32 APIs provide functionality that not all languages and frameworks support t
 
 Historically, this has required manually [redefining the APIs](http://pinvoke.net/) to make them accessible, which is fragile and error-prone. Community projects like https://github.com/dotnet/pinvoke (.NET) and https://github.com/retep998/winapi-rs (Rust) have taken on the burden of providing strongly-typed and validated API signatures for their frameworks, but the projects are manually maintained, which is hard to sustain and makes it challenging to provide thorough API coverage.
 
-This project aims to provide metadata for Win32 APIs such that idiomatic projections and projects like the ones above can be generated for all languages and frameworks in a more automated way and with more complete API coverage.
+This project aims to provide metadata for Win32 APIs such that idiomatic [projections](./docs/projections.md) and projects like the ones above can be generated for all languages and frameworks in a more automated way and with more complete API coverage.
 
-See the [roadmap](./docs/roadmap.md) and [FAQ](./docs/faq.md) for more details and [projections](./docs/projections.md) for how to consume Win32 APIs from various languages.
+To call Win32 APIs from the language of your choice based off of this metadata, use the following [language projections](./docs/projections.md):
 
-Want to see what we're scraping and emitting? [Download the NuGet package](https://www.nuget.org/api/v2/package/Microsoft.Windows.SDK.Win32Metadata/10.0.19041.5-preview) and use [ILSpy](https://github.com/icsharpcode/ILSpy) to browse around the winmd included in the NuGet package.
+* C# - https://github.com/microsoft/cswin32
+* C++ - https://github.com/microsoft/cppwin32
+* Rust - https://github.com/microsoft/windows-rs
+
+See the [roadmap](./docs/roadmap.md) and [FAQ](./docs/faq.md) for more details.
+
+If you'd like to browse the metadata to see what we're emitting, [download the NuGet package](https://www.nuget.org/api/v2/package/Microsoft.Windows.SDK.Win32Metadata/10.0.19041.5-preview) and load the included winmd file in [ILSpy](https://github.com/icsharpcode/ILSpy).
 
 ![ILSpy with winmd](./images/ILSpyWithWinmd.png)
 
