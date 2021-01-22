@@ -184,3 +184,7 @@ FilterVolumeInstanceFindFirst::lpVolumeInstanceFind=FilterVolumeInstanceFindHand
 DsGetDcOpenA::RetGetDcContext=GetDcContextHandle*
 DsGetDcOpenW::RetGetDcContext=GetDcContextHandle*
 TdhOpenDecodingHandle::Handle=TDH_HANDLE*
+SHGetFileInfoA::dwFileAttributes=FILE_FLAGS_AND_ATTRIBUTES
+SHGetFileInfoA::uFlags=SHGFI_FLAGS
+SHGetFileInfoW::dwFileAttributes=FILE_FLAGS_AND_ATTRIBUTES
+SHGetFileInfoW::uFlags=SHGFI_FLAGS
