@@ -188,5 +188,5 @@ CredUICmdLinePromptForCredentialsA::dwFlags=CREDUI_FLAGS
 CredUICmdLinePromptForCredentialsW::dwFlags=CREDUI_FLAGS
 CredUIPromptForCredentialsA::dwFlags=CREDUI_FLAGS
 CredUIPromptForCredentialsW::dwFlags=CREDUI_FLAGS
-CredUIPromptForWindowsCredentialsA::dwFlags=CREDUIWIN_FLAGS
-CredUIPromptForWindowsCredentialsW::dwFlags=CREDUIWIN_FLAGS
+CredUIPromptForWindowsCredentialsA::dwFlags=CREDUIWIN
+CredUIPromptForWindowsCredentialsW::dwFlags=CREDUIWIN
