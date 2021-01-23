@@ -184,3 +184,5 @@ FilterVolumeInstanceFindFirst::lpVolumeInstanceFind=FilterVolumeInstanceFindHand
 DsGetDcOpenA::RetGetDcContext=GetDcContextHandle*
 DsGetDcOpenW::RetGetDcContext=GetDcContextHandle*
 TdhOpenDecodingHandle::Handle=TDH_HANDLE*
+GetConsoleMode::lpMode=ConsoleMode*
+SetConsoleMode::dwMode=ConsoleMode
