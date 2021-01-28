@@ -191,4 +191,4 @@ VirtualAllocEx::flProtect=PAGE_TYPE
 VirtualProtect::flNewProtect=PAGE_TYPE
 VirtualProtect::lpflOldProtect=PAGE_TYPE*
 VirtualProtectEx::flNewProtect=PAGE_TYPE
-VirtualProtectEx::flNewProtect=PAGE_TYPE*
+VirtualProtectEx::lpflOldProtect=PAGE_TYPE*
