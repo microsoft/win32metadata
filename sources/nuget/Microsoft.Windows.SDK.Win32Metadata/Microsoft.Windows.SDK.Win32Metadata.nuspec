@@ -19,6 +19,7 @@
   <files>
       <file src="bin\Windows.Win32.winmd" target="content"/>
       <file src="bin\Windows.Win32.Interop.dll" target="content"/>
-      <file src="build\Microsoft.Windows.SDK.Win32Metadata.props" target="build\"/>
+      <file src="buildTransitive\**" target="buildTransitive\"/>
+      <file src="buildTransitive\**" target="build\"/>
   </files>
 </package>
