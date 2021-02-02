@@ -5894,7 +5894,7 @@ namespace Windows.Win32.SystemServices
     }
 
     [Flags]
-    enum ConsoleMode
+    public enum ConsoleMode
     {
         ENABLE_ECHO_INPUT = 0x0004,
         ENABLE_INSERT_MODE = 0x0020,
