@@ -584,7 +584,8 @@ namespace ClangSharpSourceToWinmd
                 typeSymbol.SpecialType == SpecialType.System_Int32 ||
                 typeSymbol.SpecialType == SpecialType.System_UIntPtr ||
                 typeName.StartsWith("System.IntPtr*") ||
-                typeName.StartsWith("ushort*"))
+                typeName.StartsWith("ushort*") ||
+                typeName.StartsWith("int*"))
             {
                 var attr = ownerAttributes.FirstOrDefault(a => a.AttributeClass.Name == "NativeTypeNameAttribute");
                 if (attr != null)
