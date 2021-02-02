@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/xamlOM.h
 --namespace
-Windows.Win32.XamlDiganostics
+Windows.Win32.XamlDiagnostics
