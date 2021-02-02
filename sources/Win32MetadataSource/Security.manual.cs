@@ -27,7 +27,7 @@ namespace Windows.Win32.Security
     }
 
     [Flags]
-    enum CREDUIWIN
+    public enum CREDUIWIN
     {
         CREDUIWIN_GENERIC = 0x00000001,
         CREDUIWIN_CHECKBOX = 0x00000002,
