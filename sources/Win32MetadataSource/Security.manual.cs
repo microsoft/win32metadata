@@ -5,7 +5,7 @@ using Windows.Win32.Interop;
 namespace Windows.Win32.Security
 {
     [Flags]
-    enum CREDUI_FLAGS
+    public enum CREDUI_FLAGS
     {
         CREDUI_FLAGS_ALWAYS_SHOW_UI = 0x00080,
         CREDUI_FLAGS_COMPLETE_USERNAME = 0x00800,
