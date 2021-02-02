@@ -200,3 +200,7 @@ VirtualProtectEx::flNewProtect=PAGE_TYPE
 VirtualProtectEx::lpflOldProtect=PAGE_TYPE*
 GetConsoleMode::lpMode=ConsoleMode*
 SetConsoleMode::dwMode=ConsoleMode
+SHGetFileInfoA::dwFileAttributes=FILE_FLAGS_AND_ATTRIBUTES
+SHGetFileInfoA::uFlags=SHGFI_FLAGS
+SHGetFileInfoW::dwFileAttributes=FILE_FLAGS_AND_ATTRIBUTES
+SHGetFileInfoW::uFlags=SHGFI_FLAGS
