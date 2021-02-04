@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis;
@@ -59,7 +60,7 @@ namespace ClangSharpSourceToWinmd
 
                     if (newType != null)
                     {
-                        node = node.WithType(SyntaxFactory.ParseTypeName(newType));
+                        node = node.WithType(SyntaxFactory.ParseTypeName(newType).WithTrailingTrivia(SyntaxFactory.Space));
                     }
 
                     return node;
@@ -100,6 +101,66 @@ namespace ClangSharpSourceToWinmd
                     newType = "string";
                 }
 
+                // Turn public static readonly Guids into string constants with an attribute
+                // to signal language projections to turn them into Guid constants. Guid constants 
+                // aren't allowed in metadata, requiring us to surface them this way
+                if (node.Modifiers.ToString() == "public static readonly" && node.Declaration.Type.ToString() == "Guid")
+                {
+                    // We're ignoring all the IID_ constants, assuming projections can get them from the interfaces
+                    // directly
+                    if (fullName.StartsWith("IID_"))
+                    {
+                        return null;
+                    }
+
+                    string guidVal = null;
+                    if (node.Declaration.Variables.First().Initializer.Value is ObjectCreationExpressionSyntax objCreationSyntax)
+                    {
+                        var args = objCreationSyntax.ArgumentList.Arguments;
+                        if (args.Count == 11)
+                        {
+                            uint p0 = EncodeHelpers.ParseHex(args[0].ToString());
+                            ushort p1 = (ushort)EncodeHelpers.ParseHex(args[1].ToString());
+                            ushort p2 = (ushort)EncodeHelpers.ParseHex(args[2].ToString());
+                            byte p3 = (byte)EncodeHelpers.ParseHex(args[3].ToString());
+                            byte p4 = (byte)EncodeHelpers.ParseHex(args[4].ToString());
+                            byte p5 = (byte)EncodeHelpers.ParseHex(args[5].ToString());
+                            byte p6 = (byte)EncodeHelpers.ParseHex(args[6].ToString());
+                            byte p7 = (byte)EncodeHelpers.ParseHex(args[7].ToString());
+                            byte p8 = (byte)EncodeHelpers.ParseHex(args[8].ToString());
+                            byte p9 = (byte)EncodeHelpers.ParseHex(args[9].ToString());
+                            byte p10 = (byte)EncodeHelpers.ParseHex(args[10].ToString());
+
+                            guidVal = new Guid(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10).ToString();
+                        }
+                        else if (objCreationSyntax.ArgumentList.Arguments.Count == 1)
+                        {
+                            guidVal = EncodeHelpers.RemoveQuotes(objCreationSyntax.ArgumentList.Arguments[0].ToString());
+                        }
+                    }
+
+                    if (guidVal == null)
+                    {
+                        return node;
+                    }
+
+                    var variableDeclaration =
+                        SyntaxFactory.VariableDeclaration(SyntaxFactory.ParseTypeName("string")
+                            .WithTrailingTrivia(SyntaxFactory.Space))
+                            .AddVariables(
+                                SyntaxFactory.VariableDeclarator(fullName)
+                                .WithInitializer(SyntaxFactory.EqualsValueClause(SyntaxFactory.ParseExpression($"\"{guidVal}\""))));
+                    var attrListSyntax = SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(SyntaxFactory.Attribute(SyntaxFactory.ParseName("Windows.Win32.Interop.GuidConst")));
+                    var fieldDeclaration =
+                        SyntaxFactory.FieldDeclaration(variableDeclaration)
+                            .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword).WithTrailingTrivia(SyntaxFactory.Space), SyntaxFactory.Token(SyntaxKind.ConstKeyword).WithTrailingTrivia(SyntaxFactory.Space))
+                            .AddAttributeLists(SyntaxFactory.AttributeList(attrListSyntax))
+                            .WithLeadingTrivia(SyntaxFactory.CarriageReturnLineFeed)
+                            .WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed);
+
+                    return fieldDeclaration;
+                }
+
                 node = (FieldDeclarationSyntax)base.VisitFieldDeclaration(node);
                 if (listAttributes != null)
                 {
@@ -122,8 +183,7 @@ namespace ClangSharpSourceToWinmd
 
                 if (newType != null)
                 {
-                    var newDeclaration = node.Declaration.WithType(SyntaxFactory.ParseTypeName(newType));
-                    node = node.ReplaceNode(node.Declaration, newDeclaration);
+                    node = node.WithDeclaration(node.Declaration.WithType(SyntaxFactory.ParseTypeName(newType).WithTrailingTrivia(SyntaxFactory.Space)));
                 }
 
                 return node;
@@ -207,7 +267,7 @@ namespace ClangSharpSourceToWinmd
 
                         if (newType != null)
                         {
-                            node = node.WithReturnType(SyntaxFactory.ParseTypeName(newType));
+                            node = node.WithReturnType(SyntaxFactory.ParseTypeName(newType).WithTrailingTrivia(SyntaxFactory.Space));
                         }
                     }
 
@@ -279,7 +339,7 @@ namespace ClangSharpSourceToWinmd
 
                     if (newType != null)
                     {
-                        node = node.WithReturnType(SyntaxFactory.ParseTypeName(newType));
+                        node = node.WithReturnType(SyntaxFactory.ParseTypeName(newType).WithTrailingTrivia(SyntaxFactory.Space));
                     }
 
                     return node;

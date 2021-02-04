@@ -7,8 +7,18 @@ namespace ClangSharpSourceToWinmd
     {
         public static void CreateNativeTypedefsSourceFile(IEnumerable<string> items, string outputFile)
         {
+            if (items == null)
+            {
+                return;
+            }
+
             List<string> sortedItems = new List<string>(items);
             sortedItems.Sort();
+            
+            if (!Directory.Exists(Path.GetDirectoryName(outputFile)))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(outputFile));
+            }
 
             using (StreamWriter writer = new StreamWriter(outputFile))
             {

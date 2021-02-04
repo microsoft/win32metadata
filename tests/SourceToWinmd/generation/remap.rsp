@@ -1,0 +1,3 @@
+--remap
+MyStruct::X=MyEnum XX
+MyFunc::x=[In]MyEnum xx

@@ -71,6 +71,16 @@ namespace ClangSharpSourceToWinmd
             return text;
         }
 
+        public static uint ParseHex(string text)
+        {
+            if (text.StartsWith("0x", StringComparison.OrdinalIgnoreCase))
+            {
+                text = text.Substring(2);
+            }
+
+            return uint.Parse(text, System.Globalization.NumberStyles.HexNumber);
+        }
+
         public static void TypedConstant(this LiteralEncoder encoder, TypedConstant constant)
         {
             switch (constant.Kind)
