@@ -375,6 +375,10 @@ namespace ClangSharpSourceToWinmd
                     //    marshalAsType = "Bool";
                     //    break;
 
+                    case "LPCVOID":
+                        isConst = true;
+                        break;
+
                     case "PCHAR":
                     case "LPCH":
                     case "PCH":
