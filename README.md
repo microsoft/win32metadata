@@ -14,7 +14,7 @@ To call Win32 APIs from the language of your choice based off of this metadata, 
 
 See the [roadmap](./docs/roadmap.md) and [FAQ](./docs/faq.md) for more details.
 
-If you'd like to browse the metadata to see what we're emitting, [download the NuGet package](https://www.nuget.org/api/v2/package/Microsoft.Windows.SDK.Win32Metadata/10.0.19041.5-preview) and load the included winmd file in [ILSpy](https://github.com/icsharpcode/ILSpy).
+If you'd like to browse the metadata to see what we're emitting, [download the NuGet package](https://www.nuget.org/packages/Microsoft.Windows.SDK.Win32Metadata/) and load the included winmd file in [ILSpy](https://github.com/icsharpcode/ILSpy).
 
 ![ILSpy with winmd](./images/ILSpyWithWinmd.png)
 
