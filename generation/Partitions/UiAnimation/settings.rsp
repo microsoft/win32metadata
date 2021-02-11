@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/UIAnimation.h
 --namespace
-Windows.Win32.UPnp
+Windows.Win32.UIAnimation
