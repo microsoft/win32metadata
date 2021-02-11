@@ -40,6 +40,12 @@ steps:
   condition: eq(variables.UseNugetOrgWinSdk, false)
 
 - task: UseDotNet@2
+  displayName: Install DotNet 2.1.x for signing tasks
+  inputs:
+    packageType: 'sdk'
+    version: '2.1.x'
+
+- task: UseDotNet@2
   displayName: Use DotNet 3.x
   inputs:
     packageType: 'sdk'
