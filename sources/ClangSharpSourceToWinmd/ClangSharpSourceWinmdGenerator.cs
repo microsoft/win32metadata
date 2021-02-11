@@ -591,6 +591,11 @@ namespace ClangSharpSourceToWinmd
                 if (attr != null)
                 {
                     var originalTypeName = attr.ConstructorArguments[0].Value.ToString();
+                    if (originalTypeName.StartsWith("const "))
+                    {
+                        originalTypeName = originalTypeName.Substring("const ".Length);
+                    }
+
                     var parts = originalTypeName.Split(' ');
                     var nameOnly = parts[0];
                     var star = parts.Length > 1 ? parts[1] : null;

@@ -1,11 +1,12 @@
-﻿using Microsoft.CodeAnalysis;
+﻿//#define MakeSingleThreaded
+
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Text;
 
 namespace ClangSharpSourceToWinmd
 {
@@ -61,6 +62,10 @@ namespace ClangSharpSourceToWinmd
             syntaxTrees = NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(syntaxTrees, requiredNamespaces);
 
             HashSet<string> foundNonEmptyStructs = GetNonEmptyStructs(syntaxTrees);
+
+#if MakeSingleThreaded
+            opt.MaxDegreeOfParallelism = 1;
+#endif
 
             List<SyntaxTree> cleanedTrees = new List<SyntaxTree>();
             System.Threading.Tasks.Parallel.ForEach(syntaxTrees, opt, (tree) =>

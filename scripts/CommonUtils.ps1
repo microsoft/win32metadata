@@ -37,13 +37,54 @@ function Invoke-PrepLibMappingsFile
 
     $libMappingOutputFileName = Get-LibMappingsFile $artifactsDir $version
     
-    Write-Output "Creating metadata source for $partitionName..."
     if (!(Test-Path $libMappingOutputFileName))
     {
         Write-Output "Creating lib mapping file: $libMappingOutputFileName"
         $libDirectory = "$nugetDestPackagesDir\Microsoft.Windows.SDK.CPP.x64.$version\c\um\x64"
         & $PSScriptRoot\CreateProcLibMappingForAllLibs.ps1 -libDirectory $libDirectory -outputFileName $libMappingOutputFileName
     }
+}
+
+function Invoke-RecompileMidlHeaders
+{
+    param ([string]$artifactsDir, [string]$version)
+
+    $headersDir = "$artifactsDir\output\$version\headers"
+
+    if (!(Test-Path $headersDir))
+    {
+        Write-Output "Recompiling midl headers with SAL annotations to $headersDir"
+        
+        $sdkParts = $version.Split('.')
+        $sdkVersion = "$($sdkParts[0]).$($sdkParts[1]).$($sdkParts[2]).0"
+        $sdkIncludeDir = "$nugetDestPackagesDir\Microsoft.Windows.SDK.CPP.$version\c\include\$sdkVersion"
+        $sdkBinDir = "$nugetDestPackagesDir\Microsoft.Windows.SDK.CPP.$version\c\bin\$sdkVersion\x86"
+        & $PSScriptRoot\RecompileIdlFilesForScraping.ps1 -sdkBinDir $sdkBinDir -includeDir $sdkIncludeDir -outputDir $headersDir
+    }
+}
+
+function Get-VcDirPath
+{
+    param ($Arch = 'x64', $HostArch = 'x64')
+
+    $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+    $installDir = & $vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
+    if ($installDir) 
+    {
+        $path = join-path $installDir 'VC\Auxiliary\Build\Microsoft.VCToolsVersion.default.txt'
+        if (test-path $path) 
+        {
+            $version = Get-Content -raw $path
+            if ($version) 
+            {
+                $version = $version.Trim()
+                $path = join-path $installDir "VC\Tools\MSVC\$version\bin\Host$HostArch\$Arch"
+                return $path
+            }
+        }
+    }
+
+    return null
 }
     
 $defaultWinSDKNugetVersion = "10.0.19041.5"

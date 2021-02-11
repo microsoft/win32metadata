@@ -563,6 +563,13 @@ namespace ClangSharpSourceToWinmd
                     return null;
                 }
 
+                // If we didn't use MarshalAs keep the native type around in case we can match
+                // it with a more specific type when we're writing metadata
+                if (!marshalAs)
+                {
+                    attributeNodes.Insert(0, nativeTypeNameAttr);
+                }
+
                 var ret = SyntaxFactory.AttributeList(SyntaxFactory.SeparatedList(attributeNodes));
                 if (((AttributeListSyntax)nativeTypeNameAttr.Parent).Target is AttributeTargetSpecifierSyntax target
                     && target.Identifier.ValueText == "return")
@@ -592,6 +599,7 @@ namespace ClangSharpSourceToWinmd
                 bool isOut = false;
                 bool isOpt = false;
                 bool isComOutPtr = false;
+                bool isRetVal = false;
                 bool isNullNullTerminated;
                 bool? pre = null;
                 bool? post = null;
@@ -601,15 +609,29 @@ namespace ClangSharpSourceToWinmd
 
                 foreach (var salAttr in salAttrs)
                 {
-                    if (salAttr.Name == "SAL_name" && salAttr.P1.StartsWith("_COM_Outptr"))
+                    if (salAttr.Name == "SAL_name")
                     {
-                        isComOutPtr = true;
-                        continue;
+                        if (salAttr.P1.StartsWith("_COM_Outptr"))
+                        {
+                            isComOutPtr = true;
+                            continue;
+                        }
+                        else if (salAttr.P1.StartsWith("_Outptr_") && !isComOutPtr)
+                        {
+                            isOut = true;
+                            continue;
+                        }
                     }
 
                     if (salAttr.Name == "SAL_null" && salAttr.P1 == "__maybe")
                     {
                         isOpt = true;
+                        continue;
+                    }
+
+                    if (salAttr.Name == "SAL_retval")
+                    {
+                        isRetVal = true;
                         continue;
                     }
 
@@ -706,6 +728,11 @@ namespace ClangSharpSourceToWinmd
                 if (isOpt)
                 {
                     attributesList.Add(SyntaxFactory.Attribute(SyntaxFactory.ParseName("Optional")));
+                }
+
+                if (isRetVal)
+                {
+                    attributesList.Add(SyntaxFactory.Attribute(SyntaxFactory.ParseName("RetVal")));
                 }
 
                 if (attributesList.Count == 0)

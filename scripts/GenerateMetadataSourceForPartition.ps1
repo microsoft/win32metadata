@@ -65,8 +65,9 @@ Write-Output "$($indent)$toolsDir\ClangSharpPInvokeGenerator.exe @$baseSettingsR
 & $toolsDir\ClangSharpPInvokeGenerator.exe "@$baseSettingsRsp" "@$withSetLastErrorRsp" "@$fixedSettingsRsp" "@$baseRemapRsp" "@$libMappingOutputFileName" > $generatorOutput
 if ($LASTEXITCODE -lt 0)
 {
-    Write-Error "$($indent)ClangSharpPInvokeGenerator.exe failed:"
-    Get-ChildItem $generatorOutput | select-string "Error: "
+    Write-Error "$($indent)ClangSharpPInvokeGenerator.exe failed, full output at $generatorOutput`:"
+    $errText = (Get-ChildItem $generatorOutput | select-string "Error: ") -join "`r`n"
+    Write-Error $errText
 }
 
 $possibleRemapsOutput = Join-Path -Path $generationOutArtifactsDir -ChildPath "$partitionName.possibleremaps.output.txt"

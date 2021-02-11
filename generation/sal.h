@@ -342,6 +342,9 @@ enum __SAL_YesNo {_SAL_notpresent, _SAL_no, _SAL_maybe, _SAL_yes, _SAL_default};
 #define _Out_                                  _SAL2_Source_(_Out_, (),     _Out_impl_)
 #define _Out_opt_                              _SAL2_Source_(_Out_opt_, (), _Out_opt_impl_)
 
+// So we can get the retval attribute out of midl-generated headers
+#define _Out_retval_                           _SAL2_Source_(_Out_revtval, (), _Out_retval_impl_)
+
 #define _Out_writes_(size)                     _SAL2_Source_(_Out_writes_, (size), _Pre_cap_(size)            _Post_valid_impl_)
 #define _Out_writes_opt_(size)                 _SAL2_Source_(_Out_writes_opt_, (size), _Pre_opt_cap_(size)        _Post_valid_impl_)
 #define _Out_writes_bytes_(size)               _SAL2_Source_(_Out_writes_bytes_, (size), _Pre_bytecap_(size)        _Post_valid_impl_)
@@ -1514,6 +1517,7 @@ enum __SAL_YesNo {_SAL_notpresent, _SAL_no, _SAL_maybe, _SAL_yes, _SAL_default};
 #define _Null_impl_                     _SA_annotes1(SAL_null, __yes)
 #define _Null_terminated_impl_          _SA_annotes1(SAL_nullTerminated, __yes)
 #define _Out_impl_                      _Pre1_impl_(__notnull_impl_notref) _Pre1_impl_(__cap_c_one_notref_impl) _Post_valid_impl_
+#define _Out_retval_impl_               _Pre1_impl_(__notnull_impl_notref) _Pre1_impl_(__cap_c_one_notref_impl) _Post_valid_impl_ __retval
 #define _Out_opt_impl_                  _Pre1_impl_(__maybenull_impl_notref) _Pre1_impl_(__cap_c_one_notref_impl) _Post_valid_impl_
 #define _Points_to_data_impl_           _At_(*_Curr_, _SA_annotes1(SAL_mayBePointer, __no))
 #define _Post_satisfies_impl_(cond)     _Post_impl_ _Satisfies_impl_(cond)
@@ -1547,6 +1551,9 @@ enum __SAL_YesNo {_SAL_notpresent, _SAL_no, _SAL_maybe, _SAL_yes, _SAL_default};
 // Normally the parser does some simple type checking of annotation params,
 // defer that check to the plugin.
 #define __deferTypecheck                _SA_annotes0(SAL_deferTypecheck)
+
+// Used so we can get the retval attribute out of midl-generated headers
+#define __retval                        _SA_annotes0(SAL_retval)
 
 #define _SA_SPECSTRIZE( x ) #x
 #define _SAL_nop_impl_       /* nothing */

@@ -6,7 +6,6 @@
 #include <windows.h>
 #include <sdkddkver.h>
 
-//#include <winnt.h>
 #include <wmiutils.h>
 #include <wbemcli.h>
 #include <wbemprov.h>
