@@ -32,8 +32,6 @@
 #include <windows.graphics.effects.interop.h>
 #include <windows.graphics.interop.h>
 #include <windows.ui.composition.interop.h>
-#include <windows.ui.xaml.interop.h>
-//#include <Windows.Web.UI.Interop.h> The interfaces make use of templates which ClangSharp can't yet correctly emit
 
 #include <hstring.h>
 #include <winstring.h>

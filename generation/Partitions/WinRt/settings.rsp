@@ -42,8 +42,6 @@ ID2D1Factory
 <IncludeRoot>/winrt/windows.graphics.effects.interop.h
 <IncludeRoot>/winrt/windows.graphics.interop.h
 <IncludeRoot>/winrt/windows.ui.composition.interop.h
-<IncludeRoot>/winrt/windows.ui.xaml.interop.h
-<IncludeRoot>/winrt/Windows.Web.UI.Interop.h
 <IncludeRoot>/winrt/inspectable.h
 <IncludeRoot>/winrt/roapi.h
 <IncludeRoot>/winrt/robuffer.h
