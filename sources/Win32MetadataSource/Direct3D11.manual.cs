@@ -7,7 +7,7 @@ namespace Windows.Win32.Direct3D11
 {
     public static unsafe partial class Apis
     {
-        public const int D3D11_SDK_VERSION = 7;
+        public const uint D3D11_SDK_VERSION = 7;
 
         public const int D3D_FL9_1_REQ_TEXTURE1D_U_DIMENSION = 2048;
 
