@@ -25,6 +25,7 @@ Windows.Win32.Gdi,HRGN,IntPtr,DeleteObject
 Windows.Win32.Gdi,HPEN,IntPtr,DeleteObject
 Windows.Win32.Gdi,HBRUSH,IntPtr,DeleteObject
 Windows.Win32.Gdi,HFONT,IntPtr,DeleteObject
+Windows.Win32.WindowsAndMessaging,HHOOK,IntPtr,UnhookWindowsHookEx
 Windows.Win32.Gdi,HICON,IntPtr,DestroyIcon
 Windows.Win32.Gdi,HPALETTE,IntPtr,DeleteObject
 Windows.Win32.MenusAndResources,HMENU,IntPtr,DestroyMenu
