@@ -16,6 +16,7 @@ Windows.Win32.SystemServices,LSTATUS,int
 Windows.Win32.SystemServices,NTSTATUS,int
 Windows.Win32.SystemServices,LRESULT,int
 Windows.Win32.SystemServices,BOOL,int
+Windows.Win32.WinRT,HSTRING,IntPtr,WindowsDeleteString
 Windows.Win32.SystemServices,HANDLE,IntPtr,CloseHandle
 Windows.Win32.SystemServices,HINSTANCE,IntPtr,FreeLibrary
 Windows.Win32.Gdi,HDC,IntPtr,DeleteDC
