@@ -206,3 +206,4 @@ SHGetFileInfoA::dwFileAttributes=FILE_FLAGS_AND_ATTRIBUTES
 SHGetFileInfoA::uFlags=SHGFI_FLAGS
 SHGetFileInfoW::dwFileAttributes=FILE_FLAGS_AND_ATTRIBUTES
 SHGetFileInfoW::uFlags=SHGFI_FLAGS
+OpenProcess::dwDesiredAccess=PROCESS_ACCESS_RIGHTS
