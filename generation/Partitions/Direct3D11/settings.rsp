@@ -20,3 +20,5 @@
 <IncludeRoot>/um/d3dcsx.h
 --namespace
 Windows.Win32.Direct3D11
+--with-type
+D3D11_CREATE_DEVICE_FLAG=uint
