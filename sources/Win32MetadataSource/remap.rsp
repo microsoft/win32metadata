@@ -73,6 +73,7 @@ Windows.Win32.ActiveDirectory,GetDcContextHandle,IntPtr,DsGetDcCloseW
 Windows.Win32.Etw,TDH_HANDLE,IntPtr,TdhCloseDecodingHandle
 Windows.Win32.Automation,BSTR,IntPtr,SysFreeString
 Windows.Win32.Compression,COMPRESSOR_HANDLE,IntPtr,CloseDecompressor
+Windows.Win32.ApplicationInstallationAndServicing,MSIHANDLE,uint,MsiCloseHandle
 --remap
 SetHandleInformation::dwFlags=HANDLE_FLAG_OPTIONS
 DuplicateHandle::dwOptions=DUPLICATE_HANDLE_OPTIONS
