@@ -239,4 +239,4 @@ IShellFolderView::Select::dwFlags=SFVS_SELECT
 SHGetSetSettings::dwMask=SSF_MASK
 FormatMessageA::dwFlags=FORMAT_MESSAGE_OPTIONS
 FormatMessageW::dwFlags=FORMAT_MESSAGE_OPTIONS
-
+IStream::Seek::dwOrigin=STREAM_SEEK

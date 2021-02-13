@@ -38,3 +38,5 @@ _GUID
 <IncludeRoot>/shared/guiddef.h
 --namespace
 Windows.Win32.Com
+--with-type
+STREAM_SEEK=uint
