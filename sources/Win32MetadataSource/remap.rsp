@@ -236,3 +236,6 @@ SHValidateUNC::fConnect=VALIDATEUNC_OPTION
 IShellFolderViewCB::MessageSFVCB::uMsg=SFVM_MESSAGE_ID
 IShellFolderView::Select::dwFlags=SFVS_SELECT
 SHGetSetSettings::dwMask=SSF_MASK
+FormatMessageA::dwFlags=FORMAT_MESSAGE_OPTIONS
+FormatMessageW::dwFlags=FORMAT_MESSAGE_OPTIONS
+
