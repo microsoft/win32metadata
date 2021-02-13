@@ -333,6 +333,8 @@ namespace ClangSharpSourceToWinmd
                     fieldList: valueFieldDef,
                     methodList: MetadataTokens.MethodDefinitionHandle(metadataBuilder.GetRowCount(TableIndex.MethodDef) + 1));
 
+            this.AddCustomAttributes(node, destTypeDefHandle);
+
             if (enclosingType != default)
             {
                 this.metadataBuilder.AddNestedType(destTypeDefHandle, enclosingType);
@@ -358,12 +360,6 @@ namespace ClangSharpSourceToWinmd
             }
 
             return false;
-        }
-
-        private bool IsInterfaceIUknown(StructDeclarationSyntax node)
-        {
-            var firstMethod = (MethodDeclarationSyntax)node.Members.FirstOrDefault(m => m is MethodDeclarationSyntax);
-            return firstMethod != null && firstMethod.Identifier.Text == "QueryInterface";
         }
 
         private void WriteInterfaceDef(StructDeclarationSyntax node)

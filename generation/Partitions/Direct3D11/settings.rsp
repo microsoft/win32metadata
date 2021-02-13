@@ -22,3 +22,5 @@
 Windows.Win32.Direct3D11
 --with-type
 D3D11_CREATE_DEVICE_FLAG=uint
+--with-attribute
+D3D11_CREATE_DEVICE_FLAG=Flags

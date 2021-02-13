@@ -207,3 +207,6 @@ SHGetFileInfoA::uFlags=SHGFI_FLAGS
 SHGetFileInfoW::dwFileAttributes=FILE_FLAGS_AND_ATTRIBUTES
 SHGetFileInfoW::uFlags=SHGFI_FLAGS
 OpenProcess::dwDesiredAccess=PROCESS_ACCESS_RIGHTS
+D3D11CreateDevice::Flags=D3D11_CREATE_DEVICE_FLAG
+D3D11CreateDeviceAndSwapChain::Flags=D3D11_CREATE_DEVICE_FLAG
+
