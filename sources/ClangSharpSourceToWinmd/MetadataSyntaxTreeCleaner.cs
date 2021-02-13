@@ -426,6 +426,8 @@ namespace ClangSharpSourceToWinmd
                     case "LPWSTR":
                     case "PWSTR":
                     case "LPOLESTR":
+                    case "WCHAR *":
+                    case "wchar_t *":
                         marshalAsType = "LPWStr";
                         isNullTerminated = true;
                         break;
@@ -433,8 +435,9 @@ namespace ClangSharpSourceToWinmd
                     case "LPCWSTR":
                     case "PCWSTR":
                     case "LPCWCH":
-                    case "const WCHAR *":
                     case "LPCOLESTR":
+                    case "const WCHAR *":
+                    case "const wchar_t *":
                         marshalAsType = "LPWStr";
                         isNullTerminated = true;
                         isConst = true;
