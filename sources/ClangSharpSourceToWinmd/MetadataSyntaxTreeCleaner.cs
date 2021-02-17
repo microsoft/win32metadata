@@ -418,6 +418,7 @@ namespace ClangSharpSourceToWinmd
                     case "PWSTR":
                     case "LPOLESTR":
                     case "WCHAR *":
+                    case "OLECHAR *":
                     case "wchar_t *":
                         metadataType = ClangSharpSourceWinmdGenerator.Win32WideStringType;
                         isNullTerminated = true;
@@ -427,6 +428,7 @@ namespace ClangSharpSourceToWinmd
                     case "PCWSTR":
                     case "LPCWCH":
                     case "LPCOLESTR":
+                    case "const OLECHAR *":
                     case "const WCHAR *":
                     case "const wchar_t *":
                         metadataType = ClangSharpSourceWinmdGenerator.Win32WideStringType;
@@ -457,7 +459,7 @@ namespace ClangSharpSourceToWinmd
                 return metadataType;
             }
 
-            private void AddNativeTypeInfoAttribute(string nativeTypeName, List<AttributeSyntax> attrsList)
+            private void AddNativeArrayInfoAttribute(string nativeTypeName, List<AttributeSyntax> attrsList)
             {
                 if (string.IsNullOrWhiteSpace(nativeTypeName))
                 {
@@ -542,7 +544,7 @@ namespace ClangSharpSourceToWinmd
 
                 List<AttributeSyntax> attributeNodes = new List<AttributeSyntax>();
 
-                this.AddNativeTypeInfoAttribute(nativeType, attributeNodes);
+                this.AddNativeArrayInfoAttribute(nativeType, attributeNodes);
                 attributeNodes.Insert(0, nativeTypeNameAttr);
 
                 var ret = SyntaxFactory.AttributeList(SyntaxFactory.SeparatedList(attributeNodes));
@@ -569,7 +571,7 @@ namespace ClangSharpSourceToWinmd
                 string salText = cppAttr.ArgumentList.Arguments[0].ToString();
                 salText = salText.Substring(1, salText.Length - 2);
 
-                string marshalAsParams = null;
+                string nativeArrayInfoParams = null;
                 bool isIn = false;
                 bool isOut = false;
                 bool isOpt = false;
@@ -654,8 +656,8 @@ namespace ClangSharpSourceToWinmd
 
                     if (!marshalAsAdded && (salAttr.Name == "SAL_writableTo" || salAttr.Name == "SAL_readableTo") && pre.HasValue && pre.Value)
                     {
-                        marshalAsParams = GetArrayMarshalAsFromP1(paramNode, salAttr.P1);
-                        if (!string.IsNullOrEmpty(marshalAsParams))
+                        nativeArrayInfoParams = GetArrayMarshalAsFromP1(paramNode, salAttr.P1);
+                        if (!string.IsNullOrEmpty(nativeArrayInfoParams))
                         {
                             marshalAsAdded = true;
                         }
@@ -670,18 +672,18 @@ namespace ClangSharpSourceToWinmd
                     var salAttr = salAttrs.FirstOrDefault(attr => attr.Name == "SAL_readableTo" || attr.Name == "SAL_writeableTo");
                     if (salAttr != null)
                     {
-                        marshalAsParams = GetArrayMarshalAsFromP1(paramNode, salAttr.P1);
-                        if (!string.IsNullOrEmpty(marshalAsParams))
+                        nativeArrayInfoParams = GetArrayMarshalAsFromP1(paramNode, salAttr.P1);
+                        if (!string.IsNullOrEmpty(nativeArrayInfoParams))
                         {
                             marshalAsAdded = true;
                         }
                     }
                 }
 
-                if (!string.IsNullOrEmpty(marshalAsParams))
+                if (!string.IsNullOrEmpty(nativeArrayInfoParams))
                 {
-                    var attrName = SyntaxFactory.ParseName("NativeTypeInfo");
-                    var args = SyntaxFactory.ParseAttributeArgumentList(marshalAsParams.ToString());
+                    var attrName = SyntaxFactory.ParseName("NativeArrayInfo");
+                    var args = SyntaxFactory.ParseAttributeArgumentList(nativeArrayInfoParams.ToString());
                     var finalAttr = SyntaxFactory.Attribute(attrName, args);
                     attributesList.Add(finalAttr);
                 }
@@ -758,7 +760,8 @@ namespace ClangSharpSourceToWinmd
                                         ret.Append(", ");
                                     }
 
-                                    ret.Append($"SizeParamIndex = {i}");
+                                    string propName = p1Text.StartsWith("elementCount") ? "SizeParamIndex" : "BytesParamIndex";
+                                    ret.Append($"{propName} = {i}");
                                     break;
                                 }
                             }

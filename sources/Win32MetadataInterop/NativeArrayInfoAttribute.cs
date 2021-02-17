@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace Windows.Win32.Interop
 {
-    public class NativeTypeInfoAttribute : Attribute
+    public class NativeArrayInfoAttribute : Attribute
     {
         //
         // Summary:
@@ -15,7 +15,9 @@ namespace Windows.Win32.Interop
         //     Indicates the zero-based parameter that contains the count of array elements,
         //     similar to size_is in COM.
         public short SizeParamIndex;
-        public NativeTypeInfoAttribute()
+
+        public short BytesParamIndex; 
+        public NativeArrayInfoAttribute()
         {
         }
     }

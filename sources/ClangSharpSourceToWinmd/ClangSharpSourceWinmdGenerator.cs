@@ -21,8 +21,8 @@ namespace ClangSharpSourceToWinmd
 {
     public class ClangSharpSourceWinmdGenerator
     {
-        public const string Win32WideStringType = "Windows.Win32.SystemServices.WSTR";
-        public const string Win32StringType = "Windows.Win32.SystemServices.STR";
+        public const string Win32WideStringType = "Windows.Win32.SystemServices.PWSTR";
+        public const string Win32StringType = "Windows.Win32.SystemServices.PSTR";
 
         private const string InteropNamespace = "Windows.Win32.Interop";
 
@@ -578,6 +578,7 @@ namespace ClangSharpSourceToWinmd
                     case "PCWSTR":
                     case "LPCWCH":
                     case "LPCOLESTR":
+                    case "OLECHAR *":
                     case "const WCHAR *":
                     case "const wchar_t *":
                     case "PZZWSTR":
@@ -644,10 +645,17 @@ namespace ClangSharpSourceToWinmd
                     originalTypeName = originalTypeName.Substring("const ".Length);
                 }
 
+                var newTypeSymbol = this.GetTypeFromShortName(originalTypeName);
+                if (newTypeSymbol != null)
+                {
+                    typeSymbol = newTypeSymbol;
+                    return;
+                }
+
                 var parts = originalTypeName.Split(' ');
                 var nameOnly = parts[0];
                 var star = parts.Length > 1 ? parts[1] : null;
-                var newTypeSymbol = this.GetTypeFromShortName(nameOnly);
+                newTypeSymbol = this.GetTypeFromShortName(nameOnly);
                 if (newTypeSymbol != null)
                 {
                     if (star != null)
