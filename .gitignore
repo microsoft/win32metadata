@@ -361,3 +361,4 @@ MigrationBackup/
 /winsdk/output
 /sources/Win32MetadataSource/Generated
 /.vscode/settings.json
+/tests/SourceToWinmd/source/generated

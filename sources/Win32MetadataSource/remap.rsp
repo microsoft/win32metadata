@@ -16,6 +16,8 @@ Windows.Win32.SystemServices,LSTATUS,int
 Windows.Win32.SystemServices,NTSTATUS,int
 Windows.Win32.SystemServices,LRESULT,int
 Windows.Win32.SystemServices,BOOL,int
+Windows.Win32.SystemServices,WSTR,char*
+Windows.Win32.SystemServices,STR,byte*
 Windows.Win32.WinRT,HSTRING,IntPtr,WindowsDeleteString
 Windows.Win32.SystemServices,HANDLE,IntPtr,CloseHandle
 Windows.Win32.SystemServices,HINSTANCE,IntPtr,FreeLibrary
@@ -101,7 +103,7 @@ CreateFileW::dwFlagsAndAttributes=FILE_FLAGS_AND_ATTRIBUTES
 CreateFile2::dwShareMode=FILE_SHARE_FLAGS
 CreateFile2::dwDesiredAccess=FILE_ACCESS_FLAGS
 CreateFile2::dwCreationDisposition=FILE_CREATE_FLAGS
-IEnumDebugPropertyInfo::Next::pi=[NativeTypeInfo(UnmanagedType.LPArray, SizeParamIndex = 0)]
+IEnumDebugPropertyInfo::Next::pi=[NativeTypeInfo(SizeParamIndex = 0)]
 CreatePrivateNamespaceA::return=NamespaceHandle
 CreatePrivateNamespaceW::return=NamespaceHandle
 ClosePrivateNamespace::Handle=NamespaceHandle
@@ -241,3 +243,4 @@ SHGetSetSettings::dwMask=SSF_MASK
 FormatMessageA::dwFlags=FORMAT_MESSAGE_OPTIONS
 FormatMessageW::dwFlags=FORMAT_MESSAGE_OPTIONS
 IStream::Seek::dwOrigin=STREAM_SEEK
+SHGetKnownFolderPath::ppszPath=[FreeWith("CoTaskMemFree")]

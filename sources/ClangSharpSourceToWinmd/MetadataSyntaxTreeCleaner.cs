@@ -216,11 +216,7 @@ namespace ClangSharpSourceToWinmd
 
                     case "NativeTypeName":
                     {
-                        var ret = this.ProcessNativeTypeNameAttr(firstAttr, out bool marshalAs);
-                        if (marshalAs)
-                        {
-                            this.nodesWithMarshalAs.Add(node.Parent);
-                        }
+                        var ret = this.ProcessNativeTypeNameAttr(firstAttr);
 
                         return ret == null ? node : ret;
                     }
@@ -361,20 +357,15 @@ namespace ClangSharpSourceToWinmd
                 return null;
             }
 
-            private string ConvertTypeToMarshalAsType(string nativeTypeName, out bool isConst, out bool isNullTerminated, out bool isNullNullTerminated)
+            private string GetInfoForNativeType(string nativeTypeName, out bool isConst, out bool isNullTerminated, out bool isNullNullTerminated)
             {
-                string marshalAsType = null;
+                string metadataType = null;
                 isConst = false;
                 isNullTerminated = false;
                 isNullNullTerminated = false;
 
                 switch (nativeTypeName)
                 {
-                    // Not using this for BOOL. We'll use a native typedef struct instead
-                    //case "BOOL":
-                    //    marshalAsType = "Bool";
-                    //    break;
-
                     case "LPCVOID":
                         isConst = true;
                         break;
@@ -382,36 +373,36 @@ namespace ClangSharpSourceToWinmd
                     case "PCHAR":
                     case "LPCH":
                     case "PCH":
-                        marshalAsType = "LPStr";
+                        metadataType = ClangSharpSourceWinmdGenerator.Win32StringType;
                         break;
 
                     case "LPCCH":
                     case "PCCH":
-                        marshalAsType = "LPStr";
+                        metadataType = ClangSharpSourceWinmdGenerator.Win32StringType;
                         isConst = true;
                         break;
 
                     case "NPSTR":
                     case "LPSTR":
                     case "PSTR":
-                        marshalAsType = "LPStr";
+                        metadataType = ClangSharpSourceWinmdGenerator.Win32StringType;
                         isNullTerminated = true;
                         break;
 
                     case "LPCSTR":
                     case "PCSTR":
-                        marshalAsType = "LPStr";
+                        metadataType = ClangSharpSourceWinmdGenerator.Win32StringType;
                         isConst = true;
                         isNullTerminated = true;
                         break;
 
                     case "PZZSTR":
-                        marshalAsType = "LPStr";
+                        metadataType = ClangSharpSourceWinmdGenerator.Win32StringType;
                         isNullNullTerminated = true;
                         break;
 
                     case "CPZZSTR":
-                        marshalAsType = "LPStr";
+                        metadataType = ClangSharpSourceWinmdGenerator.Win32StringType;
                         isConst = true;
                         isNullNullTerminated = true;
                         break;
@@ -419,7 +410,7 @@ namespace ClangSharpSourceToWinmd
                     case "PWCHAR":
                     case "LPWCH":
                     case "PWCH":
-                        marshalAsType = "LPWStr";
+                        metadataType = ClangSharpSourceWinmdGenerator.Win32StringType;
                         break;
 
                     case "NWPSTR":
@@ -428,7 +419,7 @@ namespace ClangSharpSourceToWinmd
                     case "LPOLESTR":
                     case "WCHAR *":
                     case "wchar_t *":
-                        marshalAsType = "LPWStr";
+                        metadataType = ClangSharpSourceWinmdGenerator.Win32WideStringType;
                         isNullTerminated = true;
                         break;
 
@@ -438,18 +429,18 @@ namespace ClangSharpSourceToWinmd
                     case "LPCOLESTR":
                     case "const WCHAR *":
                     case "const wchar_t *":
-                        marshalAsType = "LPWStr";
+                        metadataType = ClangSharpSourceWinmdGenerator.Win32WideStringType;
                         isNullTerminated = true;
                         isConst = true;
                         break;
 
                     case "PZZWSTR":
-                        marshalAsType = "LPWStr";
+                        metadataType = ClangSharpSourceWinmdGenerator.Win32WideStringType;
                         isNullNullTerminated = true;
                         break;
 
                     case "PCZZWSTR":
-                        marshalAsType = "LPWStr";
+                        metadataType = ClangSharpSourceWinmdGenerator.Win32WideStringType;
                         isConst = true;
                         isNullNullTerminated = true;
                         break;
@@ -463,48 +454,35 @@ namespace ClangSharpSourceToWinmd
                         break;
                 }
 
-                return marshalAsType;
+                return metadataType;
             }
 
-            private bool AddNativeTypeInfoAttribute(string nativeTypeName, List<AttributeSyntax> attrsList)
+            private void AddNativeTypeInfoAttribute(string nativeTypeName, List<AttributeSyntax> attrsList)
             {
                 if (string.IsNullOrWhiteSpace(nativeTypeName))
                 {
-                    return false;
+                    return;
                 }
 
-                var marshalAsType = ConvertTypeToMarshalAsType(nativeTypeName, out bool isConst, out bool isNullTerminated, out bool isNullNullTerminated);
+                var metadataType = GetInfoForNativeType(nativeTypeName, out bool isConst, out bool isNullTerminated, out bool isNullNullTerminated);
 
                 if (isConst)
                 {
                     attrsList.Add(SyntaxFactory.Attribute(SyntaxFactory.ParseName("Const")));
                 }
 
-                if (marshalAsType != null)
+                if (metadataType == ClangSharpSourceWinmdGenerator.Win32StringType || metadataType == ClangSharpSourceWinmdGenerator.Win32WideStringType)
                 {
-                    StringBuilder attrArgs = new StringBuilder($"(UnmanagedType.{marshalAsType}");
-
-                    if (isNullTerminated)
+                    if (!isNullTerminated)
                     {
-                        attrArgs.Append(", IsNullTerminated = true");
+                        attrsList.Add(SyntaxFactory.Attribute(SyntaxFactory.ParseName("NotNullTerminated")));
                     }
 
                     if (isNullNullTerminated)
                     {
-                        attrArgs.Append(", IsNullNullTerminated = true");
+                        attrsList.Add(SyntaxFactory.Attribute(SyntaxFactory.ParseName("NullNullTerminated")));
                     }
-
-                    attrArgs.Append(")");
-
-                    var attrName = SyntaxFactory.ParseName("NativeTypeInfo");
-                    var args = SyntaxFactory.ParseAttributeArgumentList(attrArgs.ToString());
-                    var finalAttr = SyntaxFactory.Attribute(attrName, args);
-                    attrsList.Add(finalAttr);
-
-                    return true;
                 }
-
-                return false;
             }
 
             private string GetFullName(SyntaxNode node)
@@ -557,25 +535,15 @@ namespace ClangSharpSourceToWinmd
                 return ret;
             }
 
-            private SyntaxNode ProcessNativeTypeNameAttr(AttributeSyntax nativeTypeNameAttr, out bool marshalAs)
+            private SyntaxNode ProcessNativeTypeNameAttr(AttributeSyntax nativeTypeNameAttr)
             {
                 string nativeType = nativeTypeNameAttr.ArgumentList.Arguments[0].ToString();
                 nativeType = EncodeHelpers.RemoveQuotes(nativeType);
 
                 List<AttributeSyntax> attributeNodes = new List<AttributeSyntax>();
 
-                marshalAs = this.AddNativeTypeInfoAttribute(nativeType, attributeNodes);
-                if (attributeNodes.Count == 0)
-                {
-                    return null;
-                }
-
-                // If we didn't use MarshalAs keep the native type around in case we can match
-                // it with a more specific type when we're writing metadata
-                if (!marshalAs)
-                {
-                    attributeNodes.Insert(0, nativeTypeNameAttr);
-                }
+                this.AddNativeTypeInfoAttribute(nativeType, attributeNodes);
+                attributeNodes.Insert(0, nativeTypeNameAttr);
 
                 var ret = SyntaxFactory.AttributeList(SyntaxFactory.SeparatedList(attributeNodes));
                 if (((AttributeListSyntax)nativeTypeNameAttr.Parent).Target is AttributeTargetSpecifierSyntax target
@@ -686,7 +654,7 @@ namespace ClangSharpSourceToWinmd
 
                     if (!marshalAsAdded && (salAttr.Name == "SAL_writableTo" || salAttr.Name == "SAL_readableTo") && pre.HasValue && pre.Value)
                     {
-                        marshalAsParams = GetArrayMarshalAsFromP1(paramNode, salAttr.P1, isNullNullTerminated);
+                        marshalAsParams = GetArrayMarshalAsFromP1(paramNode, salAttr.P1);
                         if (!string.IsNullOrEmpty(marshalAsParams))
                         {
                             marshalAsAdded = true;
@@ -702,7 +670,7 @@ namespace ClangSharpSourceToWinmd
                     var salAttr = salAttrs.FirstOrDefault(attr => attr.Name == "SAL_readableTo" || attr.Name == "SAL_writeableTo");
                     if (salAttr != null)
                     {
-                        marshalAsParams = GetArrayMarshalAsFromP1(paramNode, salAttr.P1, isNullNullTerminated);
+                        marshalAsParams = GetArrayMarshalAsFromP1(paramNode, salAttr.P1);
                         if (!string.IsNullOrEmpty(marshalAsParams))
                         {
                             marshalAsAdded = true;
@@ -737,6 +705,11 @@ namespace ClangSharpSourceToWinmd
                     attributesList.Add(SyntaxFactory.Attribute(SyntaxFactory.ParseName("Optional")));
                 }
 
+                if (isNullNullTerminated)
+                {
+                    attributesList.Add(SyntaxFactory.Attribute(SyntaxFactory.ParseName("NullNullTerminated")));
+                }
+
                 if (isRetVal)
                 {
                     attributesList.Add(SyntaxFactory.Attribute(SyntaxFactory.ParseName("RetVal")));
@@ -749,22 +722,11 @@ namespace ClangSharpSourceToWinmd
 
                 return SyntaxFactory.AttributeList(SyntaxFactory.SeparatedList(attributesList));
 
-                string GetArrayMarshalAsFromP1(ParameterSyntax paramNode, string p1Text, bool isNullNullTerminated)
+                string GetArrayMarshalAsFromP1(ParameterSyntax paramNode, string p1Text)
                 {
                     ParameterListSyntax parameterListNode = (ParameterListSyntax)paramNode.Parent;
                     var match = elementCountRegex.Match(p1Text);
-                    string arraySubType = GetParameterArraySubtype(paramNode);
-                    StringBuilder ret = new StringBuilder("(UnmanagedType.LPArray");
-
-                    if (arraySubType != null)
-                    {
-                        ret.Append($", ArraySubType = UnmanagedType.{arraySubType}");
-                    }
-
-                    if (isNullNullTerminated)
-                    {
-                        ret.Append(", IsNullNullTerminated = true");
-                    }
+                    StringBuilder ret = new StringBuilder("(");
 
                     if (match.Success)
                     {
@@ -777,7 +739,12 @@ namespace ClangSharpSourceToWinmd
                                 return string.Empty;
                             }
 
-                            ret.Append($", SizeConst = {size}");
+                            if (ret.Length != 1)
+                            {
+                                ret.Append(", ");
+                            }
+
+                            ret.Append($"SizeConst = {size}");
                         }
                         else
                         {
@@ -786,7 +753,12 @@ namespace ClangSharpSourceToWinmd
                             {
                                 if (parameterListNode.Parameters[i].Identifier.ValueText == sizeOrParamName)
                                 {
-                                    ret.Append($", SizeParamIndex = {i}");
+                                    if (ret.Length != 1)
+                                    {
+                                        ret.Append(", ");
+                                    }
+
+                                    ret.Append($"SizeParamIndex = {i}");
                                     break;
                                 }
                             }
@@ -802,41 +774,14 @@ namespace ClangSharpSourceToWinmd
                         }
                     }
 
-                    if (ret.Length != 0)
+                    if (ret.Length > 1)
                     {
                         ret.Append(')');
+                        return ret.ToString();
                     }
 
-                    return ret.ToString();
+                    return string.Empty;
 
-                    string GetParameterArraySubtype(ParameterSyntax paramNode)
-                    {
-                        foreach (var attrList in paramNode.AttributeLists)
-                        {
-                            foreach (var attr in attrList.Attributes)
-                            {
-                                if (attr.Name.ToString() == "NativeTypeName")
-                                {
-                                    string nativeType = attr.ArgumentList.Arguments[0].ToString();
-                                    nativeType = EncodeHelpers.RemoveQuotes(nativeType);
-                                    if (nativeType.StartsWith("const "))
-                                    {
-                                        nativeType = nativeType.Substring("const ".Length);
-                                    }
-
-                                    if (nativeType.EndsWith(" *"))
-                                    {
-                                        nativeType = nativeType.Substring(0, nativeType.Length - 2);
-                                    }
-
-                                    string arraySubType = ConvertTypeToMarshalAsType(nativeType, out _, out _, out _);
-                                    return arraySubType;
-                                }
-                            }
-                        }
-
-                        return null;
-                    }
                 }
 
                 IEnumerable<SalAttribute> GetSalAttributes(string salArgsText)

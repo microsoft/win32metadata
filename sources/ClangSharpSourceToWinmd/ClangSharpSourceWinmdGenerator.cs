@@ -21,6 +21,9 @@ namespace ClangSharpSourceToWinmd
 {
     public class ClangSharpSourceWinmdGenerator
     {
+        public const string Win32WideStringType = "Windows.Win32.SystemServices.WSTR";
+        public const string Win32StringType = "Windows.Win32.SystemServices.STR";
+
         private const string InteropNamespace = "Windows.Win32.Interop";
 
         private static readonly Regex TypeImportRegex = new Regex(@"<(([^,]+),\s*Version=(\d+\.\d+\.\d+\.\d+),\s*Culture=([^,]+),\s*PublicKeyToken=([^>]+))>(\S+)");
@@ -71,7 +74,7 @@ namespace ClangSharpSourceToWinmd
 
             void VerifySymbolsLoadedByCompiler()
             {
-                string[] standardSymbolNames = new string[] { "System.Object", "System.Attribute", $"{InteropNamespace}.NativeTypeInfoAttribute" };
+                string[] standardSymbolNames = new string[] { "System.Object", "System.Attribute", $"{InteropNamespace}.ConstAttribute" };
 
                 foreach (var name in standardSymbolNames)
                 {
@@ -543,11 +546,54 @@ namespace ClangSharpSourceToWinmd
         {
             if (!this.nameToSymbols.TryGetValue(name, out var ret))
             {
-                if (!name.Contains("."))
+                string fixedName = name;
+
+                switch (name)
+                {
+                    case "PCHAR":
+                    case "LPCH":
+                    case "PCH":
+                    case "LPCCH":
+                    case "PCCH":
+                    case "NPSTR":
+                    case "LPSTR":
+                    case "PSTR":
+                    case "LPCSTR":
+                    case "PCSTR":
+                    case "PZZSTR":
+                    case "CPZZSTR":
+                        fixedName = Win32StringType;
+                        break;
+
+                    case "PWCHAR":
+                    case "LPWCH":
+                    case "PWCH":
+                    case "NWPSTR":
+                    case "LPWSTR":
+                    case "PWSTR":
+                    case "LPOLESTR":
+                    case "WCHAR *":
+                    case "wchar_t *":
+                    case "LPCWSTR":
+                    case "PCWSTR":
+                    case "LPCWCH":
+                    case "LPCOLESTR":
+                    case "const WCHAR *":
+                    case "const wchar_t *":
+                    case "PZZWSTR":
+                    case "PCZZWSTR":
+                        fixedName = Win32WideStringType;
+                        break;
+
+                    default:
+                        break;
+                }
+
+                if (!fixedName.Contains("."))
                 {
                     foreach (string @namespace in new string[] { InteropNamespace, "System" })
                     {
-                        var fullNameToCheck = GetQualifiedName(@namespace, name);
+                        var fullNameToCheck = GetQualifiedName(@namespace, fixedName);
                         ret = this.compilation.GetTypeByMetadataName(fullNameToCheck);
                         if (ret != null)
                         {
@@ -557,14 +603,15 @@ namespace ClangSharpSourceToWinmd
 
                     if (ret == null)
                     {
-                        ret = this.compilation.GetSymbolsWithName(name, SymbolFilter.Type).FirstOrDefault() as ITypeSymbol;
+                        ret = this.compilation.GetSymbolsWithName(fixedName, SymbolFilter.Type).FirstOrDefault() as ITypeSymbol;
                     }
                 }
                 else
                 {
-                    ret = this.compilation.GetTypeByMetadataName(name);
+                    ret = this.compilation.GetTypeByMetadataName(fixedName);
                 }
 
+                // Use the original name and not the fixed name to cache it
                 this.nameToSymbols[name] = ret;
             }
 
@@ -582,42 +629,45 @@ namespace ClangSharpSourceToWinmd
                 typeSymbol.SpecialType == SpecialType.System_UIntPtr ||
                 typeName.StartsWith("System.IntPtr*") ||
                 typeName.StartsWith("ushort*") ||
+                typeName.StartsWith("sbyte*") ||
                 typeName.StartsWith("int*"))
             {
                 var attr = ownerAttributes.FirstOrDefault(a => a.AttributeClass.Name == "NativeTypeNameAttribute");
-                if (attr != null)
+                if (attr == null)
                 {
-                    var originalTypeName = attr.ConstructorArguments[0].Value.ToString();
-                    if (originalTypeName.StartsWith("const "))
-                    {
-                        originalTypeName = originalTypeName.Substring("const ".Length);
-                    }
+                    return;
+                }
 
-                    var parts = originalTypeName.Split(' ');
-                    var nameOnly = parts[0];
-                    var star = parts.Length > 1 ? parts[1] : null;
-                    var newTypeSymbol = this.GetTypeFromShortName(nameOnly);
-                    if (newTypeSymbol != null)
+                var originalTypeName = attr.ConstructorArguments[0].Value.ToString();
+                if (originalTypeName.StartsWith("const "))
+                {
+                    originalTypeName = originalTypeName.Substring("const ".Length);
+                }
+
+                var parts = originalTypeName.Split(' ');
+                var nameOnly = parts[0];
+                var star = parts.Length > 1 ? parts[1] : null;
+                var newTypeSymbol = this.GetTypeFromShortName(nameOnly);
+                if (newTypeSymbol != null)
+                {
+                    if (star != null)
                     {
-                        if (star != null)
+                        var currentName = nameOnly;
+                        for (int i = 0; i < star.Length; i++)
                         {
-                            var currentName = nameOnly;
-                            for (int i = 0; i < star.Length; i++)
+                            currentName += "*";
+                            var pointerSymbol = this.GetTypeFromShortName(currentName);
+                            if (pointerSymbol == null)
                             {
-                                currentName += "*";
-                                var pointerSymbol = this.GetTypeFromShortName(currentName);
-                                if (pointerSymbol == null)
-                                {
-                                    pointerSymbol = this.compilation.CreatePointerTypeSymbol(newTypeSymbol);
-                                    this.nameToSymbols[currentName] = pointerSymbol;
-                                }
-
-                                newTypeSymbol = pointerSymbol;
+                                pointerSymbol = this.compilation.CreatePointerTypeSymbol(newTypeSymbol);
+                                this.nameToSymbols[currentName] = pointerSymbol;
                             }
-                        }
 
-                        typeSymbol = newTypeSymbol;
+                            newTypeSymbol = pointerSymbol;
+                        }
                     }
+
+                    typeSymbol = newTypeSymbol;
                 }
             }
         }

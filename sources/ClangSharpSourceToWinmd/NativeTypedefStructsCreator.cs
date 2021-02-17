@@ -35,6 +35,7 @@ using Windows.Win32.Interop;
                     string itemName = parts[1];
                     string valueType = parts[2];
                     string closeApi = parts.Length > 3 ? parts[3] : null;
+                    string safety = valueType.Contains("*") ? "unsafe " : string.Empty;
 
                     if (itemNamespace != currentNamespace)
                     {
@@ -56,7 +57,7 @@ $@"namespace {currentNamespace}
 
                     writer.WriteLine(
 $@"    [NativeTypedef]    
-    public struct {itemName}
+    public {safety}struct {itemName}
     {{
         public {valueType} Value;
     }}
