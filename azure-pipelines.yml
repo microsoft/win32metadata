@@ -39,7 +39,7 @@ steps:
           Write-Output "##vso[task.setvariable variable=PublishNugetVersion]$nugetVer"
       }
 
-      Write-Host "##vso[build.updatebuildnumber]$(nugetVer)_${env:BuildNumberSuffix}"
+      Write-Host "##vso[build.updatebuildnumber]$($nugetVer)_${env:BuildNumberSuffix}"
 
 - task: UseDotNet@2
   displayName: Install DotNet 2.1.x for signing tasks
