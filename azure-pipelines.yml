@@ -16,14 +16,6 @@ pool:
   - visualstudio
   - visualstudio -equals C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\
   
-resources:
-  pipelines:
-    - pipeline: winsdk
-      source: WinSDK Nuget
-      trigger:
-        branches:
-        - master
-
 variables:
   buildPlatform: 'x64'
   buildConfiguration: 'Release'
@@ -31,13 +23,20 @@ variables:
   WinMetadataSourceDir: $(Build.SourcesDirectory)\sources\Win32MetadataSource
   OutputPackagesDir: $(Build.ArtifactStagingDirectory)\CreatedNugetPackages
   PipelineRunName: $(resources.pipeline.winsdk.runName)
-  Patch: $[counter(variables['resources.pipeline.winsdk.runName'], 1)]
+  Patch: $[counter(variables['DownloadNugetVersion'], 10)]
 
 steps:
-- download: winsdk
-  displayName: Download pipeline NuGet packages
-  artifact: NuGetPackages
-  condition: eq(variables.UseNugetOrgWinSdk, false)
+- task: PowerShell@2
+  displayName: Update PublishNugetVersion, set build number
+  inputs:
+    targetType: 'inline'
+    script: |
+      if (!${env:PublishNugetVersion})
+      {
+          Write-Output "##vso[task.setvariable variable=PublishNugetVersion]${env:DownloadNugetVersion}-preview.${env:Patch}"
+      }
+
+      Write-Host "##vso[build.updatebuildnumber]$(PublishNugetVersion)_$(date:yyyyMMdd)$(rev:.r)"
 
 - task: UseDotNet@2
   displayName: Install DotNet 2.1.x for signing tasks
@@ -51,23 +50,6 @@ steps:
     packageType: 'sdk'
     version: '3.x'
 
-- task: CmdLine@2
-  displayName: Echo the pipeline variables
-  inputs:
-    script: |
-      echo resources.pipeline.winsdk.runName = $(resources.pipeline.winsdk.runName)
-      dir /s $(Agent.BuildDirectory)\winsdk\NuGetPackages
-  condition: eq(variables.UseNugetOrgWinSdk, false)
-
-- task: PowerShell@2
-  displayName: Generate Win32 metadata C# source using pipeline asssets
-  inputs:
-    filePath: 'scripts\GenerateMetadataSource.ps1'
-    arguments: '-artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0 -pipelineRunName $(resources.pipeline.winsdk.runName) -patch "$(Patch)"'
-    errorActionPreference: 'continue'
-    pwsh: true
-  condition: and(succeeded(), eq(variables.UseNugetOrgWinSdk, false))
-
 - task: PowerShell@2
   displayName: Generate Win32 metadata C# source using NuGet packages
   inputs:
@@ -75,7 +57,6 @@ steps:
     arguments: '-artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0 -downloadNugetVersion $(DownloadNugetVersion) -publishNugetVersion $(PublishNugetVersion)'
     errorActionPreference: 'continue'
     pwsh: true
-  condition: and(succeeded(), eq(variables.UseNugetOrgWinSdk, true))
 
 - task: PublishBuildArtifacts@1
   displayName: Publish generator build artifacts
