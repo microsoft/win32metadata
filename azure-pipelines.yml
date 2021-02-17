@@ -35,7 +35,7 @@ steps:
       $nugetVer = ${env:PublishNugetVersion}
       if (!$nugetVer)
       {
-          $nugtVer = "${env:DownloadNugetVersion}-preview.${env:Patch}"
+          $nugetVer = "${env:DownloadNugetVersion}-preview.${env:Patch}"
           Write-Output "##vso[task.setvariable variable=PublishNugetVersion]$nugetVer"
       }
 
