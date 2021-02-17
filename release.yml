@@ -16,7 +16,7 @@ stages:
   - deployment: create
     pool:
       vmImage: ubuntu-latest
-    environment: No-Approval
+    environment: No-Approval 2
     strategy:
       runOnce:
         deploy:
@@ -52,7 +52,7 @@ stages:
   - deployment: push
     pool:
       vmImage: ubuntu-latest
-    environment: No-Approval
+    environment: No-Approval 2
     strategy:
       runOnce:
         deploy:
