@@ -24,6 +24,7 @@ variables:
   OutputPackagesDir: $(Build.ArtifactStagingDirectory)\CreatedNugetPackages
   PipelineRunName: $(resources.pipeline.winsdk.runName)
   Patch: $[counter(variables['DownloadNugetVersion'], 10)]
+  BuildNumberSuffix: $(date:yyyyMMdd)$(rev:.r)
 
 steps:
 - task: PowerShell@2
@@ -31,12 +32,14 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      if (!${env:PublishNugetVersion})
+      $nugetVer = ${env:PublishNugetVersion}
+      if (!$nugetVer)
       {
-          Write-Output "##vso[task.setvariable variable=PublishNugetVersion]${env:DownloadNugetVersion}-preview.${env:Patch}"
+          $nugtVer = "${env:DownloadNugetVersion}-preview.${env:Patch}"
+          Write-Output "##vso[task.setvariable variable=PublishNugetVersion]$nugetVer"
       }
 
-      Write-Host "##vso[build.updatebuildnumber]$(PublishNugetVersion)_$(date:yyyyMMdd)$(rev:.r)"
+      Write-Host "##vso[build.updatebuildnumber]$(nugetVer)_${env:BuildNumberSuffix}"
 
 - task: UseDotNet@2
   displayName: Install DotNet 2.1.x for signing tasks
