@@ -13,6 +13,9 @@ Below are some principles that all language projections should follow:
 * Language projections should enable developers to target a specific set of APIs and link or include only the artifacts necessary to provide support for those APIs
 
 ## Projections
-* C# - https://github.com/microsoft/cswin32
-* C++ - https://github.com/microsoft/cppwin32
-* Rust - https://github.com/microsoft/windows-rs
+* C# - https://github.com/microsoft/cswin32 (Microsoft)
+* C++ - https://github.com/microsoft/cppwin32 (Microsoft)
+* Rust - https://github.com/microsoft/windows-rs (Microsoft)
+* D - https://github.com/rumbu13/windows-d (Community)
+
+Note: Community projects are listed here to help with discovery but are not officially validated by Microsoft.
