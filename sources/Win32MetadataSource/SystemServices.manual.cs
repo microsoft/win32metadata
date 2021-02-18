@@ -3494,18 +3494,6 @@ namespace Windows.Win32.SystemServices
 
         public const int LR_SHARED = 0x00008000;
 
-        public const int DI_MASK = 0x0001;
-
-        public const int DI_IMAGE = 0x0002;
-
-        public const int DI_NORMAL = 0x0003;
-
-        public const int DI_COMPAT = 0x0004;
-
-        public const int DI_DEFAULTSIZE = 0x0008;
-
-        public const int DI_NOMIRROR = 0x0010;
-
         public const int RES_ICON = 1;
 
         public const int RES_CURSOR = 2;

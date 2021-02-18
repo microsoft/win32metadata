@@ -1,0 +1,95 @@
+using System;
+
+namespace Windows.Win32.Gdi
+{
+    public enum R2_MODE
+    {
+        R2_BLACK = 1,
+        R2_NOTMERGEPEN = 2,
+        R2_MASKNOTPEN = 3,
+        R2_NOTCOPYPEN = 4,
+        R2_MASKPENNOT = 5,
+        R2_NOT = 6,
+        R2_XORPEN = 7,
+        R2_NOTMASKPEN = 8,
+        R2_MASKPEN = 9,
+        R2_NOTXORPEN = 10,
+        R2_NOP = 11,
+        R2_MERGENOTPEN = 12,
+        R2_COPYPEN = 13,
+        R2_MERGEPENNOT = 14,
+        R2_MERGEPEN = 15,
+        R2_WHITE = 16,
+        R2_LAST = 16
+    }
+
+    public enum RGN_COMBINE_MODE
+    {
+        RGN_AND = 1,
+        RGN_OR = 2,
+        RGN_XOR = 3,
+        RGN_DIFF = 4,
+        RGN_COPY = 5,
+        RGN_MIN = RGN_AND,
+        RGN_MAX = RGN_COPY
+    }
+
+    [Flags]
+    public enum ETO_OPTIONS : uint
+    {
+        ETO_OPAQUE = 0x0002,
+        ETO_CLIPPED = 0x0004,
+        ETO_GLYPH_INDEX = 0x0010,
+        ETO_RTLREADING = 0x0080,
+        ETO_NUMERICSLOCAL = 0x0400,
+        ETO_NUMERICSLATIN = 0x0800,
+        ETO_IGNORELANGUAGE = 0x1000,
+        ETO_PDY = 0x2000,
+        ETO_REVERSE_INDEX_MAP = 0x10000,
+    }
+
+    public enum OBJ_TYPE
+    {
+        OBJ_PEN = 1,
+        OBJ_BRUSH = 2,
+        OBJ_DC = 3,
+        OBJ_METADC = 4,
+        OBJ_PAL = 5,
+        OBJ_FONT = 6,
+        OBJ_BITMAP = 7,
+        OBJ_REGION = 8,
+        OBJ_METAFILE = 9,
+        OBJ_MEMDC = 10,
+        OBJ_EXTPEN = 11,
+        OBJ_ENHMETADC = 12,
+        OBJ_ENHMETAFILE = 13,
+        OBJ_COLORSPACE = 14
+    }
+
+    public enum ROP_CODE : uint
+    {
+        SRCCOPY = 0x00CC0020,
+        SRCPAINT = 0x00EE0086,
+        SRCAND = 0x008800C6,
+        SRCINVERT = 0x00660046,
+        SRCERASE = 0x00440328,
+        NOTSRCCOPY = 0x00330008,
+        NOTSRCERASE = 0x001100A6,
+        MERGECOPY = 0x00C000CA,
+        MERGEPAINT = 0x00BB0226,
+        PATCOPY = 0x00F00021,
+        PATPAINT = 0x00FB0A09,
+        PATINVERT = 0x005A0049,
+        DSTINVERT = 0x00550009,
+        BLACKNESS = 0x00000042,
+        WHITENESS = 0x00FF0062,
+        NOMIRRORBITMAP = 0x80000000,
+        CAPTUREBLT = 0x40000000
+    }
+
+    public enum DIB_USAGE : uint
+    {
+        DIB_RGB_COLORS = 0,
+        DIB_PAL_COLORS = 1
+    }
+}
