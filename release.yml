@@ -60,7 +60,6 @@ stages:
           - download: win32metadata
             artifact: NuGetPackages
             displayName: Download NuGet packages artifacts
-            patterns: 'NuGetPackages/*'
           - task: NuGetToolInstaller@1
             displayName: Use NuGet 5.x
             inputs:
