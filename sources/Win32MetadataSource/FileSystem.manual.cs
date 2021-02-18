@@ -5,7 +5,7 @@ using Windows.Win32.Interop;
 namespace Windows.Win32.FileSystem
 {
     [Flags]
-    public enum FIND_FIRST_EX_FLAGS
+    public enum FIND_FIRST_EX_FLAGS : uint
     {
         FIND_FIRST_EX_CASE_SENSITIVE = 0x00000001,
         FIND_FIRST_EX_LARGE_FETCH = 0x00000002,
@@ -13,7 +13,7 @@ namespace Windows.Win32.FileSystem
     }
 
     [Flags]
-    public enum FILE_NOTIFY_CHANGE
+    public enum FILE_NOTIFY_CHANGE : uint
     {
         FILE_NOTIFY_CHANGE_FILE_NAME = 0x00000001,
         FILE_NOTIFY_CHANGE_DIR_NAME = 0x00000002,
@@ -26,7 +26,7 @@ namespace Windows.Win32.FileSystem
     }
 
     [Flags]
-    public enum DEFINE_DOS_DEVICE_FLAGS
+    public enum DEFINE_DOS_DEVICE_FLAGS : uint
     {
         DDD_RAW_TARGET_PATH = 0x00000001,
         DDD_REMOVE_DEFINITION = 0x00000002,
@@ -35,7 +35,7 @@ namespace Windows.Win32.FileSystem
         DDD_LUID_BROADCAST_DRIVE = 0x00000010,
     }
 
-    public enum FILE_CREATE_FLAGS
+    public enum FILE_CREATE_FLAGS : uint
     {
         CREATE_NEW = 1,
         CREATE_ALWAYS = 2,
@@ -45,7 +45,7 @@ namespace Windows.Win32.FileSystem
     }
 
     [Flags]
-    public enum FILE_SHARE_FLAGS
+    public enum FILE_SHARE_FLAGS : uint
     {
         FILE_SHARE_NONE = 0,
         FILE_SHARE_DELETE = 4,
@@ -54,7 +54,7 @@ namespace Windows.Win32.FileSystem
     }
 
     [Flags]
-    public enum FILE_FLAGS_AND_ATTRIBUTES
+    public enum FILE_FLAGS_AND_ATTRIBUTES : uint
     {
         FILE_ATTRIBUTE_READONLY = 0x00000001,
         FILE_ATTRIBUTE_HIDDEN = 0x00000002,
@@ -81,7 +81,7 @@ namespace Windows.Win32.FileSystem
     }
 
     [Flags]
-    public enum FILE_ACCESS_FLAGS
+    public enum FILE_ACCESS_FLAGS : uint
     {
         FILE_READ_DATA = 0x0001,
         FILE_LIST_DIRECTORY = 0x0001,
