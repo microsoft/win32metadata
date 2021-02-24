@@ -38,11 +38,11 @@ namespace ClangSharpSourceToWinmd
         private Dictionary<string, MethodDefinitionHandle> namesToMethodDefHandles = new Dictionary<string, MethodDefinitionHandle>();
         private HashSet<TypeDeclarationSyntax> visitedPartialDefs = new HashSet<TypeDeclarationSyntax>();
         private HashSet<ISymbol> interfaceSymbols = new HashSet<ISymbol>();
-        private Dictionary<string, ISymbol> namesToInterfaceSymbols = new Dictionary<string, ISymbol>();
+        private Dictionary<string, List<ISymbol>> namesToInterfaceSymbols = new Dictionary<string, List<ISymbol>>();
         private Dictionary<ITypeSymbol, FixedBufferInfo> fixedBufferTypeToInfo = new Dictionary<ITypeSymbol, FixedBufferInfo>();
         private Dictionary<SyntaxTree, SemanticModel> treeToModels = new Dictionary<SyntaxTree, SemanticModel>();
         private HashSet<StructDeclarationSyntax> interfaceStructs = new HashSet<StructDeclarationSyntax>();
-        private Dictionary<string, int> interfaceMethodCount = new Dictionary<string, int>();
+        private Dictionary<ISymbol, int> interfaceMethodCount = new Dictionary<ISymbol, int>();
         private Dictionary<string, EntityHandle> ctorNamesToRefs = new Dictionary<string, EntityHandle>();
         private Dictionary<string, ModuleReferenceHandle> moduleRefHandles = new Dictionary<string, ModuleReferenceHandle>();
         private List<GeneratorDiagnostic> diagnostics = new List<GeneratorDiagnostic>();
@@ -50,6 +50,7 @@ namespace ClangSharpSourceToWinmd
         private Dictionary<string, string> typeImports = new Dictionary<string, string>();
         private Dictionary<string, AssemblyReferenceHandle> assemblyNamesToRefHandles = new Dictionary<string, AssemblyReferenceHandle>();
         private Dictionary<string, ITypeSymbol> nameToSymbols = new Dictionary<string, ITypeSymbol>();
+        private Dictionary<StructDeclarationSyntax, ISymbol> structNodesToInheritedSymbols = new Dictionary<StructDeclarationSyntax, ISymbol>();
 
         private ClangSharpSourceWinmdGenerator(CSharpCompilation compilation, Dictionary<string, string> typeImports, Version assemblyVersion, string assemblyName)
         {
@@ -188,10 +189,20 @@ namespace ClangSharpSourceToWinmd
 
         private void CacheInterfaceType(StructDeclarationSyntax interfaceNode)
         {
+            this.interfaceStructs.Add(interfaceNode);
+
             var model = this.GetModel(interfaceNode);
             var symbol = model.GetDeclaredSymbol(interfaceNode);
             this.interfaceSymbols.Add(symbol);
-            this.namesToInterfaceSymbols[symbol.Name] = symbol;
+            this.interfaceMethodCount[symbol] = interfaceNode.Members.Count(m => m is MethodDeclarationSyntax);
+
+            if (!this.namesToInterfaceSymbols.TryGetValue(symbol.Name, out var symbols))
+            {
+                symbols = new List<ISymbol>();
+                this.namesToInterfaceSymbols[symbol.Name] = symbols;
+            }
+
+            symbols.Add(symbol);
         }
 
         private void WriteWinmd(string outputFileName)
@@ -355,14 +366,7 @@ namespace ClangSharpSourceToWinmd
             
             bool hasVtbl = node.Members.Any(m => m.Kind() == SyntaxKind.FieldDeclaration && ((FieldDeclarationSyntax)m).Declaration.Variables.First().Identifier.Text == "lpVtbl");
             bool hasDelegate = node.Members.Any(m => m.Kind() == SyntaxKind.DelegateDeclaration);
-            if (hasVtbl && hasDelegate)
-            {
-                this.interfaceStructs.Add(node);
-                this.interfaceMethodCount[node.Identifier.Text] = node.Members.Count(m => m is MethodDeclarationSyntax);
-                return true;
-            }
-
-            return false;
+            return hasVtbl && hasDelegate;
         }
 
         private void WriteInterfaceDef(StructDeclarationSyntax node)
@@ -391,16 +395,11 @@ namespace ClangSharpSourceToWinmd
 
             this.namesToTypeDefHandles[fullName] = destTypeDefHandle;
 
-            var inheritsFromName = this.GetInheritedInterfaceName(node);
+            var inheritsFromSymbol = this.GetInheritedInterfaceSymbol(node);
 
             // Can be null if it's a non-IUnknown interface
-            if (inheritsFromName != null)
+            if (inheritsFromSymbol != null)
             {
-                if (!this.namesToInterfaceSymbols.TryGetValue(inheritsFromName, out var inheritsFromSymbol))
-                {
-                    throw new InvalidOperationException($"Failed to find symbol for interface {inheritsFromName}. Make sure this definition is included in the sources files.");
-                }
-
                 var inheritsFromTypeDef = this.GetTypeReference(inheritsFromSymbol.ContainingNamespace.ToString(), inheritsFromSymbol.Name);
                 metadataBuilder.AddInterfaceImplementation(destTypeDefHandle, inheritsFromTypeDef);
             }
@@ -1360,15 +1359,63 @@ namespace ClangSharpSourceToWinmd
             this.AddCustomAttributes(symbol.GetAttributes(), entityHandle);
         }
 
-        private string GetInheritedInterfaceName(StructDeclarationSyntax node)
+        private ISymbol GetInheritedInterfaceSymbol(StructDeclarationSyntax node)
         {
+            if (this.structNodesToInheritedSymbols.TryGetValue(node, out var retSymbol))
+            {
+                return retSymbol;
+            }
+
             foreach (var attrList in node.AttributeLists)
             {
                 foreach (var attr in attrList.Attributes)
                 {
                     if (attr.Name.ToString() == "NativeInheritance")
                     {
-                        return EncodeHelpers.RemoveQuotes(attr.ArgumentList.Arguments[0].ToString());
+                        var name = EncodeHelpers.RemoveQuotes(attr.ArgumentList.Arguments[0].ToString());
+                        if (this.namesToInterfaceSymbols.TryGetValue(name, out var symbols))
+                        {
+                            // Could short circuit if there's only one, but this ensures the methods
+                            // truly match up
+
+                            // Get a map of all methods on this interface
+                            var model = this.GetModel(node);
+                            HashSet<string> methodNames = new HashSet<string>();
+                            foreach (var method in node.Members.Where(m => m is MethodDeclarationSyntax))
+                            {
+                                var methodSymbol = model.GetDeclaredSymbol(method);
+                                var methodName = methodSymbol.Name;
+
+                                methodNames.Add(methodName);
+                            }
+
+                            // See if all the methods of the candidate symbol are also
+                            // in the node's methods
+                            foreach (INamedTypeSymbol symbol in symbols)
+                            {
+                                bool allFound = true;
+                                foreach (var member in symbol.GetMembers().Where(m => m is IMethodSymbol && m.Name != ".ctor"))
+                                {
+                                    if (!methodNames.Contains(member.Name))
+                                    {
+                                        allFound = false;
+                                        break;
+                                    }
+                                }
+
+                                if (allFound)
+                                {
+                                    this.structNodesToInheritedSymbols[node] = symbol;
+                                    return symbol;
+                                }
+                            }
+
+                            throw new InvalidOperationException($"Failed to find suitable inhertited interface {name} for interace {node.Identifier.ValueText}");
+                        }
+                        else
+                        {
+                            throw new InvalidOperationException($"Failed to find inhertited interface {name} for interace {node.Identifier.ValueText}");
+                        }
                     }
                 }
             }
@@ -1378,7 +1425,7 @@ namespace ClangSharpSourceToWinmd
 
         private int GetInheritedMethodCount(StructDeclarationSyntax node)
         {
-            var inheritedFrom = this.GetInheritedInterfaceName(node);
+            var inheritedFrom = this.GetInheritedInterfaceSymbol(node);
             if (inheritedFrom == null)
             {
                 return 0;
