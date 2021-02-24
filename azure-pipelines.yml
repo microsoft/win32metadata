@@ -15,7 +15,10 @@ pool:
   - msbuild
   - visualstudio
   - visualstudio -equals C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\
-  
+ 
+workspace:
+  clean: all
+
 variables:
   buildPlatform: 'x64'
   buildConfiguration: 'Release'

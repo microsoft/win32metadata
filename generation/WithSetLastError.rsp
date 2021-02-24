@@ -390,6 +390,7 @@ CreateDialogIndirectParamA
 CreateDialogIndirectParamW
 CreateDialogParamA
 CreateDialogParamW
+CreateDIBSection
 CreateDirectory
 CreateDirectoryA
 CreateDirectoryExA

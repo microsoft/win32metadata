@@ -1,4 +1,7 @@
 using System;
+using System.Runtime.InteropServices;
+
+using Windows.Win32.Interop;
 
 namespace Windows.Win32.Gdi
 {
@@ -91,5 +94,13 @@ namespace Windows.Win32.Gdi
     {
         DIB_RGB_COLORS = 0,
         DIB_PAL_COLORS = 1
+    }
+
+    public static unsafe partial class Apis
+    {
+        // We need to add this manually because in baseRemap.rsp we are fixing GetObjectA to go back to GetObject.
+        // Otherwise lots of other COM functions that are defined as GetObject turn into GetObjectA
+        [DllImport("GDI32", ExactSpelling = true)]
+        public static extern int GetObjectA([NativeTypeName("HANDLE")][CppAttributeList("Name=SAL_name; p1=\"_In_\"; p2=\"\"; p3=\"2\"^Name=SAL_begin^Name=SAL_pre^Name=SAL_notref^Name=SAL_null; p1=__no^Name=SAL_valid^Name=SAL_deref^Name=SAL_access; p1=0x1^Name=SAL_end")] IntPtr h, [CppAttributeList("Name=SAL_name; p1=\"_In_\"; p2=\"\"; p3=\"2\"^Name=SAL_begin^Name=SAL_pre^Name=SAL_notref^Name=SAL_null; p1=__no^Name=SAL_valid^Name=SAL_deref^Name=SAL_access; p1=0x1^Name=SAL_end")] int c, [NativeTypeName("LPVOID")][CppAttributeList("Name=SAL_name; p1=\"_Out_writes_bytes_opt_\"; p2=\"\"; p3=\"2\"^Name=SAL_begin^Name=SAL_name; p1=\"_Pre_opt_bytecap_\"; p2=\"\"; p3=\"1.1\"^Name=SAL_pre^Name=SAL_notref^Name=SAL_null; p1=__maybe^Name=SAL_writableTo; p1=byteCount(c)^Name=SAL_end^Name=SAL_post^Name=SAL_valid")] void* pv);
     }
 }

@@ -38,18 +38,35 @@ function AddLibToMappings([string] $libName)
 
     Remove-Item $headersFromDumpBinFileName
 
-    $pattern = [Regex]::new('DLL name     : ([^.]+)[^\n]+\n  Symbol name  : ([^\s]+)')
+    $pattern = [Regex]::new('DLL name     : (\S+)\s+Symbol name  : (\S+)')
     $matches = $pattern.Matches($txtContent)
     $count = 0
     foreach ($match in $matches)
     {
         $dll = $match.Groups[1].Value
+        $dll = [System.IO.Path]::GetFileNameWithoutExtension($dll)
+
         $procName = $match.Groups[2].Value
+
+        if ($funcLibMappings.Contains($procName))
+        {
+            $oldValue = $funcLibMappings[$procName]
+            if ($oldValue.StartsWith("api-ms") -and !$dll.StartsWith("api-ms"))
+            {
+                $funcLibMappings.Remove($procName)
+            }
+            else
+            {
+                continue
+            }
+        }
+
         if (!$funcLibMappings.Contains($procName))
         {
-            $funcLibMappings[$procName] = $dll
             $count++
         }
+
+        $funcLibMappings[$procName] = $dll
     }
 
     Write-Output "$($libName): $count item(s) found"

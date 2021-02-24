@@ -10,6 +10,10 @@ IDispatcherQueueController(interface)=<Windows.Foundation.UniversalApiContract, 
 --autoTypes
 Windows.Win32.Com,HRESULT,int,
 Windows.Win32.DisplayDevices,HSEMAPHORE,IntPtr,EngDeleteSemaphore
+Windows.Win32.DataExchange,HSZ,IntPtr
+Windows.Win32.DataExchange,HCONV,IntPtr
+Windows.Win32.DataExchange,HCONVLIST,IntPtr
+Windows.Win32.DataExchange,HDDEDATA,IntPtr
 Windows.Win32.TouchInput,HGESTUREINFO,IntPtr,
 Windows.Win32.OpenGL,HGLRC,IntPtr,wglDeleteContext
 Windows.Win32.TextServices,HKL,IntPtr,
@@ -51,10 +55,10 @@ Windows.Win32.Gdi,HMETAFILE,IntPtr,DeleteMetaFile
 Windows.Win32.Gdi,HENHMETAFILE,IntPtr,DeleteEnhMetaFile
 Windows.Win32.Gdi,HMONITOR,IntPtr,
 Windows.Win32.WindowsAndMessaging,HHOOK,IntPtr,UnhookWindowsHookEx
-Windows.Win32.Gdi,HICON,IntPtr,DestroyIcon
+Windows.Win32.MenusAndResources,HICON,IntPtr,DestroyIcon
 Windows.Win32.Gdi,HPALETTE,IntPtr,DeleteObject
 Windows.Win32.MenusAndResources,HMENU,IntPtr,DestroyMenu
-Windows.Win32.Gdi,HCURSOR,IntPtr,DestroyCursor
+Windows.Win32.MenusAndResources,HCURSOR,IntPtr,DestroyCursor
 Windows.Win32.SystemServices,TimerQueueHandle,IntPtr,DeleteTimerQueueEx
 Windows.Win32.SystemServices,PTP_POOL,IntPtr,CloseThreadpool
 Windows.Win32.SystemServices,NamespaceHandle,IntPtr,ClosePrivateNamespace
@@ -65,8 +69,8 @@ Windows.Win32.FileSystem,FindStreamHandle,IntPtr,FindClose
 Windows.Win32.FileSystem,FindChangeNotifcationHandle,IntPtr,FindCloseChangeNotification
 Windows.Win32.FileSystem,FindVolumeHandle,IntPtr,FindVolumeClose
 Windows.Win32.FileSystem,FindVolumeMointPointHandle,IntPtr,FindVolumeMountPointClose
-Windows.Win32.WindowsProgramming,EventLogHandle,IntPtr,CloseEventLog
-Windows.Win32.WindowsProgramming,EventSourceHandle,IntPtr,DeregisterEventSource
+Windows.Win32.SystemServices,EventLogHandle,IntPtr,CloseEventLog
+Windows.Win32.SystemServices,EventSourceHandle,IntPtr,DeregisterEventSource
 Windows.Win32.WinSock,HWSAEVENT,IntPtr,WSACloseEvent
 Windows.Win32.InstallableFileSystems,HFILTER,IntPtr,FilterClose
 Windows.Win32.Shell,ShFindChangeNotifcationHandle,IntPtr,SHChangeNotification_Unlock
@@ -75,8 +79,8 @@ Windows.Win32.RemoteDesktopServices,HwtsVirtualChannelHandle,IntPtr,WTSVirtualCh
 Windows.Win32.IpHelper,IcmpHandle,IntPtr,IcmpCloseHandle
 Windows.Win32.Gdi,HdcMetdataFileHandle,IntPtr,DeleteMetaFile
 Windows.Win32.Gdi,HdcMetdataEnhFileHandle,IntPtr,DeleteEnhMetaFile
-Windows.Win32.WindowsProgramming,HeapHandle,IntPtr,HeapDestroy
-Windows.Win32.Gdi,HCOLORSPACE,IntPtr,DeleteColorSpace
+Windows.Win32.SystemServices,HeapHandle,IntPtr,HeapDestroy
+Windows.Win32.WindowsColorSystem,HCOLORSPACE,IntPtr,DeleteColorSpace
 Windows.Win32.WindowsStationsAndDesktops,HDESK,IntPtr,CloseDesktop
 Windows.Win32.MenusAndResources,HACCEL,IntPtr,DestroyAcceleratorTable
 Windows.Win32.Controls,HPROPSHEETPAGE,IntPtr,DestroyPropertySheetPage
@@ -282,3 +286,6 @@ CreateDIBSection::usage=DIB_USAGE
 SetDIBits::ColorUse=DIB_USAGE
 SetDIBitsToDevice::ColorUse=DIB_USAGE
 ISpellingError::get_Replacement::value=[FreeWith("CoTaskMemFree")]
+CloseEventLog::hEventLog=EventLogHandle
+DeregisterEventSource::hEventLog=EventSourceHandle
+LsaDeregisterLogonProcess::LsaHandle=LsaHandle
