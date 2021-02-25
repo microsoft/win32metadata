@@ -196,6 +196,11 @@ namespace ClangSharpSourceToWinmd
 
                 switch (attrName)
                 {
+                    case "Guid":
+                    {
+                        return this.ProcessGuidAttr(firstAttr);
+                    }
+
                     case "UnmanagedFunctionPointer":
                     {
                         // ClangSharp is emitting this attribute with no arguments.
@@ -535,6 +540,29 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 return ret;
+            }
+
+            private SyntaxNode ProcessGuidAttr(AttributeSyntax guidAttr)
+            {
+                string guidStr = guidAttr.ArgumentList.Arguments[0].ToString();
+                guidStr = EncodeHelpers.RemoveQuotes(guidStr);
+
+                Guid guid = Guid.Parse(guidStr);
+
+                // Outputs in format: {0x00000000,0x0000,0x0000,{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}}
+                string formattedGuid = guid.ToString("x");
+
+                // Get rid of leading { and trailing }}
+                formattedGuid = formattedGuid.Substring(1, formattedGuid.Length - 3);
+                // There's one more { we need to get rid of
+                formattedGuid = formattedGuid.Replace("{", string.Empty);
+                string args = $"({formattedGuid})";
+                return
+                    SyntaxFactory.AttributeList(
+                        SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
+                            SyntaxFactory.Attribute(
+                                SyntaxFactory.ParseName("Windows.Win32.Interop.Guid"),
+                                SyntaxFactory.ParseAttributeArgumentList(args))));
             }
 
             private SyntaxNode ProcessNativeTypeNameAttr(AttributeSyntax nativeTypeNameAttr)
