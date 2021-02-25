@@ -104,6 +104,11 @@ Windows.Win32.Automation,BSTR,IntPtr,SysFreeString
 Windows.Win32.Compression,COMPRESSOR_HANDLE,IntPtr,CloseDecompressor
 Windows.Win32.ApplicationInstallationAndServicing,MSIHANDLE,uint,MsiCloseHandle
 Windows.Win32.UIAnimation,UI_ANIMATION_KEYFRAME,IntPtr
+Windows.Win32.TabletPC,HRECOALT,IntPtr
+Windows.Win32.TabletPC,HRECOCONTEXT,IntPtr
+Windows.Win32.TabletPC,HRECOGNIZER,IntPtr
+Windows.Win32.TabletPC,HRECOLATTICE,IntPtr
+Windows.Win32.TabletPC,HRECOWORDLIST,IntPtr
 --remap
 SetHandleInformation::dwFlags=HANDLE_FLAG_OPTIONS
 DuplicateHandle::dwOptions=DUPLICATE_HANDLE_OPTIONS

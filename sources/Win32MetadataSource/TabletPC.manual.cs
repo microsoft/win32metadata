@@ -7,7 +7,7 @@ namespace Windows.Win32.TabletPC
     // Because this gets emitted twice from recapis.h
     [UnmanagedFunctionPointer(CallingConvention.Winapi)]
     [return: NativeTypeName("HRESULT")]
-    public unsafe delegate int PfnRecoCallback([NativeTypeName("DWORD")] uint param0, [NativeTypeName("LPBYTE")] byte* param1, [NativeTypeName("HRECOCONTEXT")] HRECOCONTEXT__* param2);
+    public unsafe delegate int PfnRecoCallback([NativeTypeName("DWORD")] uint param0, [NativeTypeName("LPBYTE")] byte* param1, [NativeTypeName("HRECOCONTEXT")] IntPtr param2);
 
     public static unsafe partial class Apis
     {
