@@ -626,6 +626,35 @@ namespace ClangSharpSourceToWinmd
                             isOut = true;
                             continue;
                         }
+                        else if (salAttr.P1.StartsWith("__RPC__"))
+                        {
+                            // TODO: Handle ecount, xcount and others that deal with counts
+
+                            string[] parts = salAttr.P1.Split('_');
+                            foreach (var part in parts)
+                            {
+                                switch (part)
+                                {
+                                    case "in":
+                                        isIn = true;
+                                        break;
+
+                                    case "out":
+                                        isOut = true;
+                                        break;
+
+                                    case "inout":
+                                        isIn = isOut = true;
+                                        break;
+
+                                    case "opt":
+                                        isOpt = true;
+                                        break;
+                                }
+                            }
+
+                            break;
+                        }
                     }
 
                     if (salAttr.Name == "SAL_null" && salAttr.P1 == "__maybe")

@@ -1754,6 +1754,40 @@ namespace ClangSharpSourceToWinmd
                     parameterAttributes |= ParameterAttributes.Optional;
                 }
 
+                // If we don't have any in/out attributes, figure out some sensible values
+                if (parameterAttributes == ParameterAttributes.None)
+                {
+                    // https://github.com/microsoft/win32metadata/issues/63
+                    // * If it's a primitive or a COM pointer, it's In.
+                    // * If it's a pointer it's In, Out, unless it's marked Const, then only In.
+                    // * If it's a COM double pointer (e.g. IUnknown**), it's Out.
+                    parameterAttributes |= ParameterAttributes.In;
+                    if (paramType is IPointerTypeSymbol pointerTypeSymbol)
+                    {
+                        // If we're not pointing at an interface...
+                        if (!generator.IsSymbolInterface(pointerTypeSymbol.PointedAtType))
+                        {
+                            bool isConst = symbolAttrs.Any(a => a.AttributeClass.Name == "ConstAttribute");
+
+                            // Only add Out if it's not const
+                            if (!isConst)
+                            {
+                                parameterAttributes |= ParameterAttributes.Out;
+                            }
+                        }
+
+                        // If it's a double pointer...
+                        if (pointerTypeSymbol.PointedAtType is IPointerTypeSymbol doublePointedAtType)
+                        {
+                            // Only use "Out" if it's a double COM pointer
+                            if (generator.IsSymbolInterface(doublePointedAtType.PointedAtType))
+                            {
+                                parameterAttributes = ParameterAttributes.Out;
+                            }
+                        }
+                    }
+                }
+
                 this.Name = paramName;
                 this.Attrs = parameterAttributes;
                 this.Type = paramType;
