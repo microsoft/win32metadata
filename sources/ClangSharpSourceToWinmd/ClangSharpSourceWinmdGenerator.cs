@@ -1744,7 +1744,7 @@ namespace ClangSharpSourceToWinmd
                     parameterAttributes |= ParameterAttributes.In;
                 }
 
-                if (symbolAttrs.Any(a => a.AttributeClass.Name == "OutAttribute"))
+                if (symbolAttrs.Any(a => a.AttributeClass.Name == "OutAttribute" || a.AttributeClass.Name == "ComOutPtrAttribute"))
                 {
                     parameterAttributes |= ParameterAttributes.Out;
                 }
