@@ -26,3 +26,6 @@
 #include <muiload.h>
 #include <gb18030.h>
 #include <icu.h>
+
+#define _DDKIMM_H_ // Keeps INPUTCONTEXT and IMEINFO from coming in again
+#include <dimm.h>

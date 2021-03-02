@@ -14,7 +14,6 @@ _NavigateToPidl=_NavigateToPidl2
 <IncludeRoot>/um/hlink.h
 <IncludeRoot>/um/tlogstg.h
 <IncludeRoot>/um/profinfo.h
-<IncludeRoot>/um/dimm.h
 <IncludeRoot>/um/shtypes.h
 <IncludeRoot>/um/knownfolders.h
 <IncludeRoot>/um/isguids.h

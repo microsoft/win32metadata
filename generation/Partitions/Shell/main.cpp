@@ -52,6 +52,5 @@
 #include <shlguid.h>
 #include <propkeydef.h>
 #include <appmgmt.h>
-#include <dimm.h>
 #include <profinfo.h>
 #include <tlogstg.h>

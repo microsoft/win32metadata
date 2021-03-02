@@ -23,5 +23,6 @@
 <IncludeRoot>/um/muiload.h
 <IncludeRoot>/um/gb18030.h
 <IncludeRoot>/um/icu.h
+<IncludeRoot>/um/dimm.h
 --namespace
 Windows.Win32.Intl
