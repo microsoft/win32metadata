@@ -1,0 +1,15 @@
+--file
+<PartitionDir>\main.cpp
+--output
+<GeneratedSourceDir>\<PartitionName>.cs
+--include-directory
+<RepoRoot>\generation\scraper
+<IncludeRoot>/shared
+<IncludeRoot>/um
+<IncludeRoot>/winrt
+--exclude
+MilMatrix3x2D
+--traverse
+<IncludeRoot>/um/mileffects.h
+--namespace
+Windows.Win32.WpfBitmapEffects

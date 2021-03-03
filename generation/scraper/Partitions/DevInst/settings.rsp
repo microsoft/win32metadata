@@ -1,0 +1,16 @@
+--file
+<PartitionDir>\main.cpp
+--output
+<GeneratedSourceDir>\<PartitionName>.cs
+--include-directory
+<RepoRoot>\generation\scraper
+<IncludeRoot>/shared
+<IncludeRoot>/um
+<IncludeRoot>/winrt
+--traverse
+<IncludeRoot>/shared/cfg.h
+<IncludeRoot>/um/SetupAPI.h
+<IncludeRoot>/um/cfgmgr32.h
+<IncludeRoot>/um/newdev.h
+--namespace
+Windows.Win32.DeviceAndDriverInstallation

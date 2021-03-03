@@ -1,0 +1,15 @@
+--file
+<PartitionDir>\main.cpp
+--output
+<GeneratedSourceDir>\<PartitionName>.cs
+--include-directory
+<RepoRoot>\generation\scraper
+<IncludeRoot>/shared
+<IncludeRoot>/um
+<IncludeRoot>/winrt
+--traverse
+<IncludeRoot>/um/ehstorextensions.h
+<IncludeRoot>/um/propkey.h
+<IncludeRoot>/um/ehstorapi.h
+--namespace
+Windows.Win32.EnhancedStorage

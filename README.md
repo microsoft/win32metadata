@@ -43,7 +43,7 @@ ClangSharp emits C# as it encounters types found in C/C++ headers. It will only 
 
 Example for Direct3DDxgi:
 
-[generation/Partitions/Direct3DDxgi/main.cpp](generation/Partitions/Direct3DDxgi/main.cpp):
+[generation/scraper/Partitions/Direct3DDxgi/main.cpp](generation/scraper/Partitions/Direct3DDxgi/main.cpp):
 
     #include <winnt.h>
     #include <winerror.h>
@@ -58,7 +58,7 @@ Example for Direct3DDxgi:
     #include <dxgicommon.h>
     #include <dxgiformat.h>
 
-[generation/Partitions/Direct3DDxgi/settings.rsp](generation/Partitions/Direct3DDxgi//settings.rsp):
+[generation/scraper/Partitions/Direct3DDxgi/settings.rsp](generation/scraper/Partitions/Direct3DDxgi/settings.rsp):
 
     --traverse
     <IncludeRoot>/shared/dxgitype.h
@@ -97,7 +97,7 @@ It starts emitting:
 
 It has no way of knowing a typedef is coming (RECT). But, we can feed data into ClangSharp that tells it to rename tagRECT to RECT:
 
-[generation/baseRemap](generation/baseRemap.rsp)
+[generation/scraper/baseRemap.rsp](generation/scraper/baseRemap.rsp)
 
     tagRECT=RECT
 
@@ -117,7 +117,7 @@ The emitter allows for changing parameter or field types from what was found in 
 
 * Add enum types to one of the manually-created C# files, or create a new C# file to be included by the emitter:
 
-    [sources/Win32MetadataSource/FileSystem.manual.cs](sources/Win32MetadataSource/FileSystem.manual.cs)
+    [generation/emitter/manual/FileSystem.manual.cs](generation/emitter/manual/FileSystem.manual.cs)
 
         [Flags]
         public enum FILE_SHARE_FLAGS
@@ -131,7 +131,7 @@ The emitter allows for changing parameter or field types from what was found in 
 
 * Tell the emitter to change the type of the parameters in CreateFileW when it sees them:
 
-    [sources/Win32MetadataSource/remap.rsp](sources/Win32MetadataSource/remap.rsp)
+    [generation/emitter/remap.rsp](generation/emitter/remap.rsp)
 
         CreateFileW:dwShareMode=FILE_SHARE_FLAGS
         CreateFileW:dwDesiredAccess=FILE_ACCESS_FLAGS
@@ -141,7 +141,7 @@ The emitter allows for changing parameter or field types from what was found in 
 ## Forcing APIs and types into a particular namespace
 The partitions are meant to break up headers into namespaces. However, some headers like winuser.h have APIs and types that belong in multiple namespaces. The emitter takes a .rsp file that specifies namespaces for APIs and types and then puts them in the correct namespaces. These entries are only needed if a header needs to emit into multiple namespaces.
 
-[sources/Win32MetadataSource/requiredNamespacesForNames.rsp](sources/Win32MetadataSource/requiredNamespacesForNames.rsp)
+[generation/emitter/requiredNamespacesForNames.rsp](generation/emitter/requiredNamespacesForNames.rsp)
 
 (Both functions come from winuser.h)
 
@@ -151,8 +151,8 @@ The partitions are meant to break up headers into namespaces. However, some head
 # How to Generate the .winmd
 PowerShell Core is required to run the generation scripts. Open a PowerShell Core window and:
 
-1) GenerateMetadataSource.cmd: This loops over the directories under generation\Partitions, running ClangSharp for each one. There are base settings for all partitions: name remaps are found in [generation/baseRemap.rsp](generation/baseRemap.rsp) and other settings are found in [generation/baseSettings.rsp](generation/baseSettings.rsp). Each partitions folder contains a main.cpp, remap.rsp, and settings.rsp. ClangSharp writes C# files to sources\Win32MetadataSource\generated (these files are not checked in).
-2) BuildMetadataBin.cmd: This builds the emitter and points it at the [sources/Win32MetadataSource](sources/Win32MetadataSource) directory. Again, the "generated" subdirectory contains the files that ClangSharp created in step 1.
+1) GenerateMetadataSource.cmd: This loops over the directories under generation\Partitions, running ClangSharp for each one. There are base settings for all partitions: name remaps are found in [generation/scraper/baseRemap.rsp](generation/scraper/baseRemap.rsp) and other settings are found in [generation/scraper/baseSettings.rsp](generation/scraper/baseSettings.rsp). Each partitions folder contains a main.cpp, remap.rsp, and settings.rsp. ClangSharp writes C# files to generation\emitter\manual\generated (these files are not checked in).
+2) BuildMetadataBin.cmd: This builds the emitter and points it at the [generation/emitter](generation/emitter) directory. Again, the "generated" subdirectory contains the files that ClangSharp created in step 1.
 3) Once the .winmd is built, run TestMetadataBin.cmd which checks for regressions.
 
 &nbsp;
@@ -185,7 +185,7 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
     But a developer would need to look up the API to figure out what values to use. To improve this, changes were added to replace the uints with enums:
 
     1) Find the possible constants in the [CreateFileW docs](https://docs.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilea).
-    2) Create enums with these values and add them to a *.manual.cs file, or create a new one at [sources/Win32MetadataSource](sources/Win32MetadataSource). **Please keep the original value names of the Win32 contants.** This will allow developers to search for them and find information about them online.
+    2) Create enums with these values and add them to a *.manual.cs file, or create a new one at [generation/emitter/manual](generation/emitter/manual). **Please keep the original value names of the Win32 contants.** This will allow developers to search for them and find information about them online.
 
         Here's one for the first parameter:
 
@@ -198,7 +198,7 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
                 FILE_SHARE_WRITE = 2,
             }
 
-    3) Now tell the emitter to change the type of dwShareMode to be FILE_SHARE_FLAGS in [sources/Win32MetadataSource/remap.rsp](sources/Win32MetadataSource/remap.rsp):
+    3) Now tell the emitter to change the type of dwShareMode to be FILE_SHARE_FLAGS in [generation/emitter/remap.rsp](generation/emitter/remap.rsp):
     
     
             CreateFileW::dwShareMode=FILE_SHARE_FLAGS

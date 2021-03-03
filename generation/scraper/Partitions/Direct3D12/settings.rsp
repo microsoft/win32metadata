@@ -1,0 +1,17 @@
+--file
+<PartitionDir>\main.cpp
+--output
+<GeneratedSourceDir>\<PartitionName>.cs
+--include-directory
+<RepoRoot>\generation\scraper
+<IncludeRoot>/shared
+<IncludeRoot>/um
+<IncludeRoot>/winrt
+--traverse
+<IncludeRoot>/um/d3d11on12.h
+<IncludeRoot>/um/d3d12.h
+<IncludeRoot>/um/d3d12sdklayers.h
+<IncludeRoot>/um/d3d12shader.h
+<IncludeRoot>/um/Windows.Graphics.Holographic.Interop.h
+--namespace
+Windows.Win32.Direct3D12

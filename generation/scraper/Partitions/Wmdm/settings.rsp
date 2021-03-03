@@ -1,0 +1,16 @@
+--file
+<PartitionDir>\main.cpp
+--output
+<GeneratedSourceDir>\<PartitionName>.cs
+--include-directory
+<RepoRoot>\generation\scraper
+<IncludeRoot>/shared
+<IncludeRoot>/um
+<IncludeRoot>/winrt
+--traverse
+<IncludeRoot>/um/mtpext.h
+<IncludeRoot>/um/sac.h
+<IncludeRoot>/um/mswmdm.h
+<IncludeRoot>/um/wmdmlog.h
+--namespace
+Windows.Win32.WindowsMediaDeviceManager

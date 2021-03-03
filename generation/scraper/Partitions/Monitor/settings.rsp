@@ -1,0 +1,15 @@
+--file
+<PartitionDir>\main.cpp
+--output
+<GeneratedSourceDir>\<PartitionName>.cs
+--include-directory
+<RepoRoot>\generation\scraper
+<IncludeRoot>/shared
+<IncludeRoot>/um
+<IncludeRoot>/winrt
+--traverse
+<IncludeRoot>/um/lowlevelmonitorconfigurationapi.h
+<IncludeRoot>/um/highlevelmonitorconfigurationapi.h
+<IncludeRoot>/um/physicalmonitorenumerationapi.h
+--namespace
+Windows.Win32.Monitor

@@ -1,0 +1,17 @@
+--file
+<PartitionDir>\main.cpp
+--output
+<GeneratedSourceDir>\<PartitionName>.cs
+--include-directory
+<RepoRoot>\generation\scraper
+<IncludeRoot>/shared
+<IncludeRoot>/um
+<IncludeRoot>/winrt
+--traverse
+<IncludeRoot>/um/wiadef.h
+<IncludeRoot>/um/OAIdl.h
+<IncludeRoot>/um/OleAuto.h
+<IncludeRoot>/um/wia_xp.h
+<IncludeRoot>/um/DispEx.h
+--namespace
+Windows.Win32.Automation

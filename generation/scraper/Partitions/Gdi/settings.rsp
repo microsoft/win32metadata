@@ -1,0 +1,17 @@
+--file
+<PartitionDir>\main.cpp
+--output
+<GeneratedSourceDir>\<PartitionName>.cs
+--include-directory
+<RepoRoot>\generation\scraper
+<IncludeRoot>/shared
+<IncludeRoot>/um
+<IncludeRoot>/winrt
+--traverse
+<IncludeRoot>/um/mxdc.h
+<IncludeRoot>/um/wingdi.h
+<IncludeRoot>/um/mmsystem.h
+<IncludeRoot>/um/fontsub.h
+<IncludeRoot>/um/t2embapi.h
+--namespace
+Windows.Win32.Gdi
