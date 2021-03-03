@@ -51,6 +51,7 @@ if (!(Test-Path $partitionSettingsRsp))
 }
 
 $baseRemapRsp = "$baseGenerateDir\baseRemap.rsp"
+$autoTypesRemapRsp = "$baseGenerateDir\autoTypes.generated.rsp"
 
 $fixedSettingsRsp = "$generationOutArtifactsDir\$partitionName.fixedSettings.rsp"
 
@@ -62,9 +63,9 @@ $generatedSourceDir = "$rootDir\generation\emitter\generated"
 Replace-Text $fixedSettingsRsp $textToReplaceTable
 
 Write-Output "$($indent)$partitionName..."
-Write-Output "$($indent)$toolsDir\ClangSharpPInvokeGenerator.exe @$baseSettingsRsp @$withSetLastErrorRsp @$fixedSettingsRsp @$baseRemapRsp @$libMappingOutputFileName > $generatorOutput"
+Write-Output "$($indent)$toolsDir\ClangSharpPInvokeGenerator.exe @$baseSettingsRsp @$withSetLastErrorRsp @$fixedSettingsRsp @$baseRemapRsp @$autoTypesRemapRsp @$libMappingOutputFileName > $generatorOutput"
 
-& $toolsDir\ClangSharpPInvokeGenerator.exe "@$baseSettingsRsp" "@$withSetLastErrorRsp" "@$fixedSettingsRsp" "@$baseRemapRsp" "@$libMappingOutputFileName" > $generatorOutput
+& $toolsDir\ClangSharpPInvokeGenerator.exe "@$baseSettingsRsp" "@$withSetLastErrorRsp" "@$fixedSettingsRsp" "@$baseRemapRsp" "@$autoTypesRemapRsp" "@$libMappingOutputFileName" > $generatorOutput
 if ($LASTEXITCODE -lt 0)
 {
     Write-Error "$($indent)ClangSharpPInvokeGenerator.exe failed, full output at $generatorOutput`:"

@@ -24,10 +24,11 @@ $metadataInteropBin = "$metadataInteropPath\bin\Release\netstandard2.1\Windows.W
 Copy-Item $metadataInteropBin $binDir
 
 $remapFileName = "$emitterDir\remap.rsp"
+$autoTypesFileName = "$emitterDir\autoTypes.rsp"
 $requiredNamespacesForNames = "$emitterDir\requiredNamespacesForNames.rsp"
 
 Write-Output "`n"
 Write-Output "Creating $outputWinmdFileName..."
-Write-Output "Calling: dotnet $clangSharpSourceToWinmdBin --sourceDir $emitterDir --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName @$requiredNamespacesForNames"
+Write-Output "Calling: dotnet $clangSharpSourceToWinmdBin --sourceDir $emitterDir --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName @$requiredNamespacesForNames @$autoTypesFileName"
 
-& dotnet $clangSharpSourceToWinmdBin --sourceDir $emitterDir --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName @$requiredNamespacesForNames
+& dotnet $clangSharpSourceToWinmdBin --sourceDir $emitterDir --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName @$requiredNamespacesForNames @$autoTypesFileName

@@ -361,3 +361,4 @@ MigrationBackup/
 /tests/SourceToWinmd/source/generated
 /generation/emitter/generated
 /winsdk
+/generation/scraper/autoTypes.generated.rsp
