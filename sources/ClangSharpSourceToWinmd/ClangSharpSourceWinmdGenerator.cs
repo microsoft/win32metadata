@@ -630,7 +630,8 @@ namespace ClangSharpSourceToWinmd
                 typeName.StartsWith("System.IntPtr*") ||
                 typeName.StartsWith("ushort*") ||
                 typeName.StartsWith("sbyte*") ||
-                typeName.StartsWith("int*"))
+                typeName.StartsWith("int*") ||
+                typeName.StartsWith("void*"))
             {
                 var attr = ownerAttributes.FirstOrDefault(a => a.AttributeClass.Name == "NativeTypeNameAttribute");
                 if (attr == null)
