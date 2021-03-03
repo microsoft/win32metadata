@@ -37,6 +37,11 @@ using Windows.Win32.Interop;
                     string closeApi = parts.Length > 3 ? parts[3] : null;
                     string safety = valueType.Contains("*") ? "unsafe " : string.Empty;
 
+                    if (valueType == "DECLARE_HANDLE" || valueType == "AllJoynHandle")
+                    {
+                        valueType = "IntPtr";
+                    }
+
                     if (itemNamespace != currentNamespace)
                     {
                         if (currentNamespace != null)

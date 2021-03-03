@@ -174,6 +174,8 @@ Remove-Item "$sdkGeneratedSourceDir\*.cs"
 Invoke-PrepLibMappingsFile $artifactsDir $version
 Invoke-RecompileMidlHeaders $artifactsDir $version
 
+& $PSScriptRoot\CreateScraperRspForAutoTypes.ps1
+
 $throttleCount = [System.Environment]::ProcessorCount / 2
 if ($throttleCount -lt 2)
 {
