@@ -1,0 +1,15 @@
+--file
+<PartitionDir>\main.cpp
+--output
+<GeneratedSourceDir>\<PartitionName>.cs
+--include-directory
+<RepoRoot>\generation\scraper
+<IncludeRoot>/shared
+<IncludeRoot>/um
+<IncludeRoot>/winrt
+--traverse
+<IncludeRoot>/um/NTQuery.h
+<IncludeRoot>/um/Filter.h
+<IncludeRoot>/um/cmdtree.h
+--namespace
+Windows.Win32.IndexServer

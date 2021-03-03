@@ -1,0 +1,15 @@
+--file
+<PartitionDir>\main.cpp
+--output
+<GeneratedSourceDir>\<PartitionName>.cs
+--include-directory
+<RepoRoot>\generation\scraper
+<IncludeRoot>/shared
+<IncludeRoot>/um
+<IncludeRoot>/winrt
+--traverse
+<IncludeRoot>/um/UIAnimation.h
+--namespace
+Windows.Win32.UIAnimation
+--exclude
+__MIDL___MIDL_itf_uianimation_0000_0002_0003

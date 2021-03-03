@@ -27,15 +27,16 @@ $libMappingOutputFileName = Get-LibMappingsFile $artifactsDir $version
 
 $stopwatch =  [system.diagnostics.stopwatch]::StartNew()
 
-$baseGenerateDir = "$rootDir\generation"
-$partitionGenerateDir = "$rootDir\generation\Partitions\$partitionName"
+$baseGenerateDir = "$rootDir\generation\scraper"
+$partitionGenerateDir = "$baseGenerateDir\partitions\$partitionName"
 if (!(Test-Path $partitionGenerateDir))
 {
     Write-Error "Partition dir $partitionGenerateDir not found."
     exit -1
 }
 
-$generationOutArtifactsDir = "$artifactsDir\output"
+$generationOutArtifactsDir = "$baseGenerateDir\obj"
+Create-Directory $generationOutArtifactsDir
 
 $generatorOutput = Join-Path -Path $generationOutArtifactsDir -ChildPath "$partitionName.generation.output.txt"
 
@@ -56,7 +57,8 @@ $fixedSettingsRsp = "$generationOutArtifactsDir\$partitionName.fixedSettings.rsp
 Copy-Item $partitionSettingsRsp -Destination $fixedSettingsRsp
 
 $includePath = (Get-ChildItem -Path "$nugetDestPackagesDir\Microsoft.Windows.SDK.CPP.$version\c\Include").FullName.Replace('\', '/')
-[hashtable]$textToReplaceTable = @{ "<IncludeRoot>" = $includePath; "<RepoRoot>" = $rootDir; "<PartitionName>" = $partitionName }
+$generatedSourceDir = "$rootDir\generation\emitter\generated"
+[hashtable]$textToReplaceTable = @{ "<IncludeRoot>" = $includePath; "<RepoRoot>" = $rootDir; "<PartitionName>" = $partitionName; "<PartitionDir>" = $partitionGenerateDir; "<GeneratedSourceDir>" = $generatedSourceDir}
 Replace-Text $fixedSettingsRsp $textToReplaceTable
 
 Write-Output "$($indent)$partitionName..."

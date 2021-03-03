@@ -1,0 +1,15 @@
+--file
+<PartitionDir>\main.cpp
+--output
+<GeneratedSourceDir>\<PartitionName>.cs
+--include-directory
+<RepoRoot>\generation\scraper
+<IncludeRoot>/shared
+<IncludeRoot>/um
+<IncludeRoot>/winrt
+--traverse
+<IncludeRoot>/um/LoadPerf.h
+<IncludeRoot>/um/perflib.h
+<IncludeRoot>/um/Pdh.h
+--namespace
+Windows.Win32.Perf

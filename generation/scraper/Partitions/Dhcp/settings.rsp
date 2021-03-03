@@ -1,0 +1,16 @@
+--file
+<PartitionDir>\main.cpp
+--output
+<GeneratedSourceDir>\<PartitionName>.cs
+--include-directory
+<RepoRoot>\generation\scraper
+<IncludeRoot>/shared
+<IncludeRoot>/um
+<IncludeRoot>/winrt
+--traverse
+<IncludeRoot>/um/dhcpssdk.h
+<IncludeRoot>/um/Dhcpv6cSdk.h
+<IncludeRoot>/um/DhcpCSdk.h
+<IncludeRoot>/um/dhcpsapi.h
+--namespace
+Windows.Win32.Dhcp

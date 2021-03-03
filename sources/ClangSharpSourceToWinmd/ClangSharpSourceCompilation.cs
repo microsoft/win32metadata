@@ -30,6 +30,8 @@ namespace ClangSharpSourceToWinmd
             Dictionary<string, string> typeImports,
             Dictionary<string, string> requiredNamespaces)
         {
+            sourceDirectory = Path.GetFullPath(sourceDirectory);
+
             var netstandardPath = FindNetstandardDllPath();
             if (!File.Exists(netstandardPath))
             {
@@ -67,10 +69,30 @@ namespace ClangSharpSourceToWinmd
             opt.MaxDegreeOfParallelism = 1;
 #endif
 
+            string objDir = Path.Combine(sourceDirectory, "obj");
+            Directory.CreateDirectory(objDir);
+
             List<SyntaxTree> cleanedTrees = new List<SyntaxTree>();
             System.Threading.Tasks.Parallel.ForEach(syntaxTrees, opt, (tree) =>
             {
+                // Turn c:\dir\generated\foo.cs into c:\dir\generated\obj\foo.modified.cs
+
                 string modifiedFile = Path.ChangeExtension(tree.FilePath, ".modified.cs");
+                string fileWithSubDir = modifiedFile.Substring(sourceDirectory.Length);
+                if (fileWithSubDir.StartsWith('\\'))
+                {
+                    fileWithSubDir = fileWithSubDir.Substring(1);
+                }
+
+                modifiedFile = Path.Combine(objDir, fileWithSubDir);
+
+                // e.g. c:\dir\generated\obj
+                string newSubDir = Path.GetDirectoryName(modifiedFile);
+                if (!Directory.Exists(newSubDir))
+                {
+                    Directory.CreateDirectory(newSubDir);
+                }
+
                 var cleanedTree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, remaps, requiredNamespaces, foundNonEmptyStructs, modifiedFile);
                 File.WriteAllText(modifiedFile, cleanedTree.GetText().ToString());
 
@@ -83,7 +105,6 @@ namespace ClangSharpSourceToWinmd
             CSharpCompilationOptions compilationOptions = new CSharpCompilationOptions(OutputKind.WindowsRuntimeMetadata, allowUnsafe: true);
             var comp =
                 CSharpCompilation.Create(
-                    //Path.GetFileName(outputFileName),
                     null,
                     cleanedTrees,
                     refs,

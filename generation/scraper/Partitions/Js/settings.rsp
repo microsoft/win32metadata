@@ -1,0 +1,17 @@
+--file
+<PartitionDir>\main.cpp
+--output
+<GeneratedSourceDir>\<PartitionName>.cs
+--include-directory
+<RepoRoot>\generation\scraper
+<IncludeRoot>/shared
+<IncludeRoot>/um
+<IncludeRoot>/winrt
+--traverse
+<IncludeRoot>/um/jsrt.h
+<IncludeRoot>/um/jsrt9.h
+--exclude
+JsRuntimeVersion
+JS_SOURCE_CONTEXT_NONE
+--namespace
+Windows.Win32.Js

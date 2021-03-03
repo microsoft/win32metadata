@@ -1,0 +1,17 @@
+--file
+<PartitionDir>\main.cpp
+--output
+<GeneratedSourceDir>\<PartitionName>.cs
+--include-directory
+<RepoRoot>\generation\scraper
+<IncludeRoot>/shared
+<IncludeRoot>/um
+<IncludeRoot>/winrt
+--traverse
+<IncludeRoot>/um/MSAAText.h
+<IncludeRoot>/um/oleacc.h
+<IncludeRoot>/um/UIAutomationCore.h
+<IncludeRoot>/um/UIAutomationCoreApi.h
+<IncludeRoot>/um/UIAutomationClient.h
+--namespace
+Windows.Win32.WindowsAccessibility

@@ -1,10 +1,7 @@
 param
 (
     [string]
-    $assemblyVersion,
-
-    [string]
-    $metadataSourcePath
+    $assemblyVersion
 )
 
 . "$PSScriptRoot\CommonUtils.ps1"
@@ -12,11 +9,6 @@ param
 if (!$assemblyVersion)
 {
     $assemblyVersion = $defaultWinSDKNugetVersion
-}
-
-if (!$metadataSourcePath)
-{
-    $metadataSourcePath = "$sourcesDir\Win32MetadataSource"
 }
 
 $clangSharpSourceToWinmdPath = "$sourcesDir\ClangSharpSourceToWinmd"
@@ -31,11 +23,11 @@ $metadataInteropBin = "$metadataInteropPath\bin\Release\netstandard2.1\Windows.W
 
 Copy-Item $metadataInteropBin $binDir
 
-$remapFileName = "$metadataSourcePath\remap.rsp"
-$requiredNamespacesForNames = "$metadataSourcePath\requiredNamespacesForNames.rsp"
+$remapFileName = "$emitterDir\remap.rsp"
+$requiredNamespacesForNames = "$emitterDir\requiredNamespacesForNames.rsp"
 
 Write-Output "`n"
 Write-Output "Creating $outputWinmdFileName..."
-Write-Output "Calling: dotnet $clangSharpSourceToWinmdBin --sourceDir $metadataSourcePath --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName @$requiredNamespacesForNames"
+Write-Output "Calling: dotnet $clangSharpSourceToWinmdBin --sourceDir $emitterDir --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName @$requiredNamespacesForNames"
 
-& dotnet $clangSharpSourceToWinmdBin --sourceDir $metadataSourcePath --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName @$requiredNamespacesForNames
+& dotnet $clangSharpSourceToWinmdBin --sourceDir $emitterDir --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName @$requiredNamespacesForNames

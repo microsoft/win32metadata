@@ -1,0 +1,14 @@
+--file
+<PartitionDir>\main.cpp
+--output
+<GeneratedSourceDir>\<PartitionName>.cs
+--include-directory
+<RepoRoot>\generation\scraper
+<IncludeRoot>/shared
+<IncludeRoot>/um
+<IncludeRoot>/winrt
+--traverse
+<IncludeRoot>/um/WerApi.h
+<IncludeRoot>/um/ErrorRep.h
+--namespace
+Windows.Win32.WindowsErrorReporting

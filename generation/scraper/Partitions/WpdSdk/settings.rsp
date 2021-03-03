@@ -1,0 +1,16 @@
+--file
+<PartitionDir>\main.cpp
+--output
+<GeneratedSourceDir>\<PartitionName>.cs
+--include-directory
+<RepoRoot>\generation\scraper
+<IncludeRoot>/shared
+<IncludeRoot>/um
+<IncludeRoot>/winrt
+--traverse
+<IncludeRoot>/um/PortableDeviceConnectApi.h
+<IncludeRoot>/um/portabledevice.h
+<IncludeRoot>/um/portabledevicetypes.h
+<IncludeRoot>/um/portabledeviceapi.h
+--namespace
+Windows.Win32.WindowsPortableDevices

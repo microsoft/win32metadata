@@ -1,0 +1,15 @@
+--file
+<PartitionDir>\main.cpp
+--output
+<GeneratedSourceDir>\<PartitionName>.cs
+--include-directory
+<RepoRoot>\generation\scraper
+<IncludeRoot>/shared
+<IncludeRoot>/um
+<IncludeRoot>/winrt
+--traverse
+<IncludeRoot>/um/EmptyVC.h
+<IncludeRoot>/um/Reconcil.h
+<IncludeRoot>/um/WindowsDefender.h
+--namespace
+Windows.Win32.LegacyWindowsEnvironmentFeatures

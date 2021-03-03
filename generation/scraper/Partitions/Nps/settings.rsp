@@ -1,0 +1,16 @@
+--file
+<PartitionDir>\main.cpp
+--output
+<GeneratedSourceDir>\<PartitionName>.cs
+--include-directory
+<RepoRoot>\generation\scraper
+<IncludeRoot>/shared
+<IncludeRoot>/um
+<IncludeRoot>/winrt
+--with-type
+ATTRIBUTEID=uint
+--traverse
+<IncludeRoot>/um/authif.h
+<IncludeRoot>/um/sdoias.h
+--namespace
+Windows.Win32.NetworkPolicyServer

@@ -1,0 +1,16 @@
+--file
+<PartitionDir>\main.cpp
+--output
+<GeneratedSourceDir>\<PartitionName>.cs
+--include-directory
+<RepoRoot>\generation\scraper
+<IncludeRoot>/shared
+<IncludeRoot>/um
+<IncludeRoot>/winrt
+--traverse
+<IncludeRoot>/um/WMIUtils.h
+<IncludeRoot>/um/WbemCli.h
+<IncludeRoot>/um/WbemProv.h
+<IncludeRoot>/um/WbemDisp.h
+--namespace
+Windows.Win32.Wmi

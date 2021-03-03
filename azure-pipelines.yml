@@ -23,7 +23,6 @@ variables:
   buildPlatform: 'x64'
   buildConfiguration: 'Release'
   System.Debug: true
-  WinMetadataSourceDir: $(Build.SourcesDirectory)\sources\Win32MetadataSource
   OutputPackagesDir: $(Build.ArtifactStagingDirectory)\CreatedNugetPackages
   PipelineRunName: $(resources.pipeline.winsdk.runName)
   Patch: $[counter(variables['DownloadNugetVersion'], 10)]
@@ -58,32 +57,18 @@ steps:
     version: '3.x'
 
 - task: PowerShell@2
-  displayName: Generate Win32 metadata C# source using NuGet packages
+  displayName: Generate Win32 metadata C# source using WinSDK NuGet packages
   inputs:
     filePath: 'scripts\GenerateMetadataSource.ps1'
     arguments: '-artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0 -downloadNugetVersion $(DownloadNugetVersion) -publishNugetVersion $(PublishNugetVersion)'
     errorActionPreference: 'continue'
     pwsh: true
 
-- task: PublishBuildArtifacts@1
-  displayName: Publish generator build artifacts
-  inputs:
-    PathtoPublish: '$(Agent.BuildDirectory)\winsdk\output'
-    ArtifactName: 'GeneratorOutput'
-    publishLocation: 'Container'
-
-- task: PublishBuildArtifacts@1
-  displayName: Publish generated .cs files
-  inputs:
-    PathtoPublish: 'sources\Win32MetadataSource\generated'
-    ArtifactName: GeneratedMetadataSource
-    publishLocation: 'Container'
-
 - task: PowerShell@2
   displayName: Build metadata binary
   inputs:
     filePath: 'scripts\BuildMetadataBin.ps1'
-    arguments: '-assemblyVersion $(PrepOutput.NugetVersion) -metadataSourcePath $(WinMetadataSourceDir)'
+    arguments: '-assemblyVersion $(PrepOutput.NugetVersion)'
     pwsh: true
 
 - task: PowerShell@2

@@ -94,9 +94,12 @@ $toolsDir = "$rootDir\tools"
 $binDir = "$rootDir\bin"
 $outputWinmdFileName = "$binDir\Windows.Win32.winmd"
 $sourcesDir = "$rootDir\sources"
-$partitionsDir = "$rootDir\generation\Partitions"
+$generationDir = "$rootDir\generation"
+$scraperDir = "$generationDir\scraper"
+$emitterDir = "$generationDir\emitter"
+$partitionsDir = "$scraperDir\Partitions"
 $sdkApiPath = "$rootDir\ext\sdk-api"
-$sdkGeneratedSourceDir = "$sourcesDir\Win32MetadataSource\generated"
+$sdkGeneratedSourceDir = "$emitterDir\generated"
 
 if (Test-Path -Path $binDir -PathType leaf)
 {
