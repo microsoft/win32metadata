@@ -5998,4 +5998,1235 @@ namespace Windows.Win32.SystemServices
         JOB_OBJECT_SECURITY_FILTER_TOKENS = 0x00000008,
         JOB_OBJECT_SECURITY_VALID_FLAGS = 0x0000000f
     }
+
+    public enum IMAGE
+    {
+        IMAGE_BITMAP = 0,
+        IMAGE_CURSOR = 2,
+        IMAGE_ICON = 1
+    }
+
+    public enum OnSetSoftwareRadioStateComplete_statusFlags
+    {
+        S_OK = 0
+    }
+
+    public enum SSGF
+    {
+        SSGF_DISPLAY = 3,
+        SSGF_NONE = 0
+    }
+
+    public enum GWL
+    {
+        GWL_EXSTYLE = -20,
+        GWL_HINSTANCE = -6,
+        GWL_ID = -12,
+        GWL_STYLE = -16,
+        GWL_USERDATA = -21,
+        GWL_WNDPROC = -4
+    }
+
+    [Flags]
+    public enum AnonymousEnum5 : uint
+    {
+        XBUTTON1 = 0x00000001,
+        XBUTTON2 = 0x00000002
+    }
+
+    [Flags]
+    public enum SPIF : uint
+    {
+        SPIF_UPDATEINIFILE = 0x00000001,
+        SPIF_SENDCHANGE = 0x00000002,
+        SPIF_SENDWININICHANGE = 0x00000002
+    }
+
+    [Flags]
+    public enum DT : uint
+    {
+        DT_BOTTOM = 0x00000008,
+        DT_CALCRECT = 0x00000400,
+        DT_CENTER = 0x00000001,
+        DT_EDITCONTROL = 0x00002000,
+        DT_END_ELLIPSIS = 0x00008000,
+        DT_EXPANDTABS = 0x00000040,
+        DT_EXTERNALLEADING = 0x00000200,
+        DT_HIDEPREFIX = 0x00100000,
+        DT_INTERNAL = 0x00001000,
+        DT_LEFT = 0x00000000,
+        DT_MODIFYSTRING = 0x00010000,
+        DT_NOCLIP = 0x00000100,
+        DT_NOFULLWIDTHCHARBREAK = 0x00080000,
+        DT_NOPREFIX = 0x00000800,
+        DT_PATH_ELLIPSIS = 0x00004000,
+        DT_PREFIXONLY = 0x00200000,
+        DT_RIGHT = 0x00000002,
+        DT_RTLREADING = 0x00020000,
+        DT_SINGLELINE = 0x00000020,
+        DT_TABSTOP = 0x00000080,
+        DT_TOP = 0x00000000,
+        DT_VCENTER = 0x00000004,
+        DT_WORDBREAK = 0x00000010,
+        DT_WORD_ELLIPSIS = 0x00040000
+    }
+
+    public enum DELETEITEMSTRUCT_CtlTypeFlags
+    {
+        ODT_LISTBOX = 2,
+        ODT_COMBOBOX = 3
+    }
+
+    public enum RIDI
+    {
+        RIDI_PREPARSEDDATA = 536870917,
+        RIDI_DEVICENAME = 536870919,
+        RIDI_DEVICEINFO = 536870923
+    }
+
+    public enum COMBOBOXINFO_stateButtonFlags
+    {
+        STATE_SYSTEM_INVISIBLE = 32768,
+        STATE_SYSTEM_PRESSED = 8
+    }
+
+    public enum SSTF
+    {
+        SSTF_BORDER = 2,
+        SSTF_CHARS = 1,
+        SSTF_DISPLAY = 3,
+        SSTF_NONE = 0
+    }
+
+    public enum ChangeWindowMessageFilterEx_actionFlags
+    {
+        MSGFLT_ALLOW = 1,
+        MSGFLT_DISALLOW = 2,
+        MSGFLT_RESET = 0
+    }
+
+    public enum BST
+    {
+        BST_CHECKED = 1,
+        BST_INDETERMINATE = 2,
+        BST_UNCHECKED = 0
+    }
+
+    [Flags]
+    public enum DrawEdgeFlags : uint
+    {
+        BF_ADJUST = 0x00002000,
+        BF_BOTTOM = 0x00000008,
+        BF_BOTTOMLEFT = 0x00000009,
+        BF_BOTTOMRIGHT = 0x0000000C,
+        BF_DIAGONAL = 0x00000010,
+        BF_DIAGONAL_ENDBOTTOMLEFT = 0x00000019,
+        BF_DIAGONAL_ENDBOTTOMRIGHT = 0x0000001C,
+        BF_DIAGONAL_ENDTOPLEFT = 0x00000013,
+        BF_DIAGONAL_ENDTOPRIGHT = 0x00000016,
+        BF_FLAT = 0x00004000,
+        BF_LEFT = 0x00000001,
+        BF_MIDDLE = 0x00000800,
+        BF_MONO = 0x00008000,
+        BF_RECT = 0x0000000F,
+        BF_RIGHT = 0x00000004,
+        BF_SOFT = 0x00001000,
+        BF_TOP = 0x00000002,
+        BF_TOPLEFT = 0x00000003,
+        BF_TOPRIGHT = 0x00000006
+    }
+
+    [Flags]
+    public enum AnonymousEnum17 : uint
+    {
+        BSM_ALLCOMPONENTS = 0x00000000,
+        BSM_ALLDESKTOPS = 0x00000010,
+        BSM_APPLICATIONS = 0x00000008
+    }
+
+    public enum GetWindow_uCmdFlags
+    {
+        GW_CHILD = 5,
+        GW_ENABLEDPOPUP = 6,
+        GW_HWNDFIRST = 0,
+        GW_HWNDLAST = 1,
+        GW_HWNDNEXT = 2,
+        GW_HWNDPREV = 3,
+        GW_OWNER = 4
+    }
+
+    public enum GetScrollBarInfo_idObjectFlags
+    {
+        OBJID_CLIENT = -4,
+        OBJID_HSCROLL = -6,
+        OBJID_VSCROLL = -5
+    }
+
+    public enum MENUGETOBJECTINFOFlags
+    {
+        MNGOF_BOTTOMGAP = 2,
+        MNGOF_TOPGAP = 1
+    }
+
+    [Flags]
+    public enum SCROLLINFO_fMaskFlags : uint
+    {
+        SIF_ALL = 0x00000017,
+        SIF_DISABLENOSCROLL = 0x00000008,
+        SIF_PAGE = 0x00000002,
+        SIF_POS = 0x00000004,
+        SIF_RANGE = 0x00000001,
+        SIF_TRACKPOS = 0x00000010
+    }
+
+    public enum GetAncestorFlags
+    {
+        GA_PARENT = 1,
+        GA_ROOT = 2,
+        GA_ROOTOWNER = 3
+    }
+
+    public enum AnonymousEnum27
+    {
+        MF_BYCOMMAND = 0,
+        MF_BYPOSITION = 1024
+    }
+
+    [Flags]
+    public enum LookupIconIdFromDirectoryExFlags : uint
+    {
+        LR_DEFAULTCOLOR = 0x00000000,
+        LR_MONOCHROME = 0x00000001
+    }
+
+    [Flags]
+    public enum keybd_eventFlags : uint
+    {
+        KEYEVENTF_EXTENDEDKEY = 0x00000001,
+        KEYEVENTF_KEYUP = 0x00000002
+    }
+
+    public enum ENUM : uint
+    {
+        ENUM_CURRENT_SETTINGS = 4294967295U,
+        ENUM_REGISTRY_SETTINGS = 4294967294U
+    }
+
+    [Flags]
+    public enum WINDOWPLACEMENTFlags : uint
+    {
+        WPF_ASYNCWINDOWPLACEMENT = 0x00000004,
+        WPF_RESTORETOMAXIMIZED = 0x00000002,
+        WPF_SETMINPOSITION = 0x00000001
+    }
+
+    [Flags]
+    public enum SetWindowPosFlags : uint
+    {
+        SWP_ASYNCWINDOWPOS = 0x00004000,
+        SWP_DEFERERASE = 0x00002000,
+        SWP_DRAWFRAME = 0x00000020,
+        SWP_FRAMECHANGED = 0x00000020,
+        SWP_HIDEWINDOW = 0x00000080,
+        SWP_NOACTIVATE = 0x00000010,
+        SWP_NOCOPYBITS = 0x00000100,
+        SWP_NOMOVE = 0x00000002,
+        SWP_NOOWNERZORDER = 0x00000200,
+        SWP_NOREDRAW = 0x00000008,
+        SWP_NOREPOSITION = 0x00000200,
+        SWP_NOSENDCHANGING = 0x00000400,
+        SWP_NOSIZE = 0x00000001,
+        SWP_NOZORDER = 0x00000004,
+        SWP_SHOWWINDOW = 0x00000040
+    }
+
+    public enum SB
+    {
+        SB_BOTH = 3,
+        SB_HORZ = 0,
+        SB_VERT = 1
+    }
+
+    public enum AnonymousEnum42
+    {
+        GCW_ATOM = -32,
+        GCL_CBCLSEXTRA = -20,
+        GCL_CBWNDEXTRA = -18,
+        GCLP_HBRBACKGROUND = -10,
+        GCLP_HCURSOR = -12,
+        GCLP_HICON = -14,
+        GCLP_HICONSM = -34,
+        GCLP_HMODULE = -16,
+        GCLP_MENUNAME = -8,
+        GCL_STYLE = -26,
+        GCLP_WNDPROC = -24
+    }
+
+    public enum AnonymousEnum43
+    {
+        MONITOR_DEFAULTTONEAREST = 2,
+        MONITOR_DEFAULTTONULL = 0,
+        MONITOR_DEFAULTTOPRIMARY = 1
+    }
+
+    [Flags]
+    public enum SMTO : uint
+    {
+        SMTO_ABORTIFHUNG = 0x00000002,
+        SMTO_BLOCK = 0x00000001,
+        SMTO_NORMAL = 0x00000000,
+        SMTO_NOTIMEOUTIFNOTHUNG = 0x00000008,
+        SMTO_ERRORONEXIT = 0x00000020
+    }
+
+    [Flags]
+    public enum DDL : uint
+    {
+        DDL_ARCHIVE = 0x00000020,
+        DDL_DIRECTORY = 0x00000010,
+        DDL_DRIVES = 0x00004000,
+        DDL_EXCLUSIVE = 0x00008000,
+        DDL_HIDDEN = 0x00000002,
+        DDL_READONLY = 0x00000001,
+        DDL_READWRITE = 0x00000000,
+        DDL_SYSTEM = 0x00000004,
+        DDL_POSTMSGS = 0x00002000
+    }
+
+    [Flags]
+    public enum LR : uint
+    {
+        LR_CREATEDIBSECTION = 0x00002000,
+        LR_DEFAULTCOLOR = 0x00000000,
+        LR_DEFAULTSIZE = 0x00000040,
+        LR_LOADFROMFILE = 0x00000010,
+        LR_LOADMAP3DCOLORS = 0x00001000,
+        LR_LOADTRANSPARENT = 0x00000020,
+        LR_MONOCHROME = 0x00000001,
+        LR_SHARED = 0x00008000
+    }
+
+    public enum ShowWindow_nCmdShowFlags
+    {
+        SW_FORCEMINIMIZE = 11,
+        SW_HIDE = 0,
+        SW_MAXIMIZE = 3,
+        SW_MINIMIZE = 6,
+        SW_RESTORE = 9,
+        SW_SHOW = 5,
+        SW_SHOWDEFAULT = 10,
+        SW_SHOWMAXIMIZED = 3,
+        SW_SHOWMINIMIZED = 2,
+        SW_SHOWMINNOACTIVE = 7,
+        SW_SHOWNA = 8,
+        SW_SHOWNOACTIVATE = 4,
+        SW_SHOWNORMAL = 1
+    }
+
+    [Flags]
+    public enum LR : uint
+    {
+        LR_CREATEDIBSECTION = 0x00002000,
+        LR_DEFAULTCOLOR = 0x00000000,
+        LR_DEFAULTSIZE = 0x00000040,
+        LR_LOADFROMFILE = 0x00000010,
+        LR_LOADMAP3DCOLORS = 0x00001000,
+        LR_LOADTRANSPARENT = 0x00000020,
+        LR_MONOCHROME = 0x00000001,
+        LR_SHARED = 0x00008000,
+        LR_VGACOLOR = 0x00000080
+    }
+
+    [Flags]
+    public enum QS : uint
+    {
+        QS_ALLEVENTS = 0x00001CBF,
+        QS_ALLINPUT = 0x00001CFF,
+        QS_ALLPOSTMESSAGE = 0x00000100,
+        QS_HOTKEY = 0x00000080,
+        QS_INPUT = 0x00001C07,
+        QS_KEY = 0x00000001,
+        QS_MOUSE = 0x00000006,
+        QS_MOUSEBUTTON = 0x00000004,
+        QS_MOUSEMOVE = 0x00000002,
+        QS_PAINT = 0x00000020,
+        QS_POSTMESSAGE = 0x00000008,
+        QS_RAWINPUT = 0x00000400,
+        QS_SENDMESSAGE = 0x00000040,
+        QS_TIMER = 0x00000010
+    }
+
+    public enum UOI
+    {
+        UOI_FLAGS = 1,
+        UOI_HEAPSIZE = 5,
+        UOI_IO = 6,
+        UOI_NAME = 2,
+        UOI_TYPE = 3,
+        UOI_USER_SID = 4
+    }
+
+    public enum LockSetForegroundWindow_uLockCodeFlags
+    {
+        LSFW_LOCK = 1,
+        LSFW_UNLOCK = 2
+    }
+
+    [Flags]
+    public enum FlatSB_SetScrollInfo_psiFlags : uint
+    {
+        SIF_DISABLENOSCROLL = 0x00000008,
+        SIF_PAGE = 0x00000002,
+        SIF_POS = 0x00000004,
+        SIF_RANGE = 0x00000001,
+        SIF_ALL = 0x00000017
+    }
+
+    [Flags]
+    public enum EnableMenuItem_uEnableFlags : uint
+    {
+        MF_BYCOMMAND = 0x00000000,
+        MF_BYPOSITION = 0x00000400,
+        MF_DISABLED = 0x00000002,
+        MF_ENABLED = 0x00000000,
+        MF_GRAYED = 0x00000001
+    }
+
+    public enum SB
+    {
+        SB_HORZ = 0,
+        SB_VERT = 1
+    }
+
+    [Flags]
+    public enum SERKF : uint
+    {
+        SERKF_AVAILABLE = 0x00000002,
+        SERKF_INDICATOR = 0x00000004,
+        SERKF_SERIALKEYSON = 0x00000001
+    }
+
+    public enum WINDOWPLACEMENT_showCmdFlags
+    {
+        SW_HIDE = 0,
+        SW_MAXIMIZE = 3,
+        SW_MINIMIZE = 6,
+        SW_RESTORE = 9,
+        SW_SHOW = 5,
+        SW_SHOWMAXIMIZED = 3,
+        SW_SHOWMINIMIZED = 2,
+        SW_SHOWMINNOACTIVE = 7,
+        SW_SHOWNA = 8,
+        SW_SHOWNOACTIVATE = 4,
+        SW_SHOWNORMAL = 1
+    }
+
+    public enum AnonymousEnum54
+    {
+        GWL_EXSTYLE = -20,
+        GWLP_HINSTANCE = -6,
+        GWLP_HWNDPARENT = -8,
+        GWLP_ID = -12,
+        GWL_STYLE = -16,
+        GWLP_USERDATA = -21,
+        GWLP_WNDPROC = -4
+    }
+
+    public enum SB
+    {
+        SB_CTL = 2,
+        SB_HORZ = 0,
+        SB_VERT = 1
+    }
+
+    [Flags]
+    public enum BSF : uint
+    {
+        BSF_ALLOWSFW = 0x00000080,
+        BSF_FLUSHDISK = 0x00000004,
+        BSF_FORCEIFHUNG = 0x00000020,
+        BSF_IGNORECURRENTTASK = 0x00000002,
+        BSF_NOHANG = 0x00000008,
+        BSF_NOTIMEOUTIFNOTHUNG = 0x00000040,
+        BSF_POSTMESSAGE = 0x00000010,
+        BSF_QUERY = 0x00000001,
+        BSF_SENDNOTIFYMESSAGE = 0x00000100
+    }
+
+    [Flags]
+    public enum MIIM : uint
+    {
+        MIIM_BITMAP = 0x00000080,
+        MIIM_CHECKMARKS = 0x00000008,
+        MIIM_DATA = 0x00000020,
+        MIIM_FTYPE = 0x00000100,
+        MIIM_ID = 0x00000002,
+        MIIM_STATE = 0x00000001,
+        MIIM_STRING = 0x00000040,
+        MIIM_SUBMENU = 0x00000004,
+        MIIM_TYPE = 0x00000010
+    }
+
+    [Flags]
+    public enum TRACKMOUSEEVENTFlags : uint
+    {
+        TME_CANCEL = 0x80000000,
+        TME_HOVER = 0x00000001,
+        TME_LEAVE = 0x00000002,
+        TME_NONCLIENT = 0x00000010,
+        TME_QUERY = 0x40000000
+    }
+
+    public enum ESB
+    {
+        ESB_DISABLE_BOTH = 3,
+        ESB_DISABLE_DOWN = 2,
+        ESB_DISABLE_LEFT = 1,
+        ESB_DISABLE_LTUP = 1,
+        ESB_DISABLE_RIGHT = 2,
+        ESB_DISABLE_RTDN = 2,
+        ESB_DISABLE_UP = 1,
+        ESB_ENABLE_BOTH = 0
+    }
+
+    public enum CDS
+    {
+        CDS_FULLSCREEN = 4,
+        CDS_GLOBAL = 8,
+        CDS_NORESET = 268435456,
+        CDS_RESET = 1073741824,
+        CDS_SET_PRIMARY = 16,
+        CDS_TEST = 2,
+        CDS_UPDATEREGISTRY = 1,
+        CDS_VIDEOPARAMETERS = 32,
+        CDS_ENABLE_UNSAFE_MODES = 256,
+        CDS_DISABLE_UNSAFE_MODES = 512
+    }
+
+    public enum ULW
+    {
+        ULW_ALPHA = 2,
+        ULW_COLORKEY = 1,
+        ULW_OPAQUE = 4,
+        ULW_EX_NORESIZE = 8
+    }
+
+    public enum MINIMIZEDMETRICS_iArrangeFlags
+    {
+        ARW_BOTTOMLEFT = 0,
+        ARW_BOTTOMRIGHT = 1,
+        ARW_TOPLEFT = 2,
+        ARW_TOPRIGHT = 3
+    }
+
+    public enum GCL
+    {
+        GCL_CBCLSEXTRA = -20,
+        GCL_CBWNDEXTRA = -18,
+        GCL_HBRBACKGROUND = -10,
+        GCL_HCURSOR = -12,
+        GCL_HICON = -14,
+        GCL_HICONSM = -34,
+        GCL_HMODULE = -16,
+        GCL_MENUNAME = -8,
+        GCL_STYLE = -26,
+        GCL_WNDPROC = -24
+    }
+
+    public enum SetWindowDisplayAffinity_dwAffinityFlags
+    {
+        WDA_NONE = 0,
+        WDA_MONITOR = 1,
+        WDA_EXCLUDEFROMCAPTURE = 17
+    }
+
+    public enum mouse_eventFlags
+    {
+        MOUSEEVENTF_ABSOLUTE = 32768,
+        MOUSEEVENTF_LEFTDOWN = 2,
+        MOUSEEVENTF_LEFTUP = 4,
+        MOUSEEVENTF_MIDDLEDOWN = 32,
+        MOUSEEVENTF_MIDDLEUP = 64,
+        MOUSEEVENTF_MOVE = 1,
+        MOUSEEVENTF_RIGHTDOWN = 8,
+        MOUSEEVENTF_RIGHTUP = 16,
+        MOUSEEVENTF_WHEEL = 2048,
+        MOUSEEVENTF_XDOWN = 128,
+        MOUSEEVENTF_XUP = 256,
+        MOUSEEVENTF_HWHEEL = 4096
+    }
+
+    public enum HWND
+    {
+        HWND_BOTTOM = 1,
+        HWND_NOTOPMOST = -2,
+        HWND_TOP = 0,
+        HWND_TOPMOST = -1
+    }
+
+    [Flags]
+    public enum PM : uint
+    {
+        PM_NOREMOVE = 0x00000000,
+        PM_REMOVE = 0x00000001,
+        PM_NOYIELD = 0x00000002
+    }
+
+    [Flags]
+    public enum AnimateWindowFlags : uint
+    {
+        AW_ACTIVATE = 0x00020000,
+        AW_BLEND = 0x00080000,
+        AW_CENTER = 0x00000010,
+        AW_HIDE = 0x00010000,
+        AW_HOR_POSITIVE = 0x00000001,
+        AW_HOR_NEGATIVE = 0x00000002,
+        AW_SLIDE = 0x00040000,
+        AW_VER_POSITIVE = 0x00000004,
+        AW_VER_NEGATIVE = 0x00000008
+    }
+
+    public enum RAWINPUTDEVICEFlags
+    {
+        RIDEV_REMOVE = 1,
+        RIDEV_EXCLUDE = 16,
+        RIDEV_PAGEONLY = 32,
+        RIDEV_NOLEGACY = 48,
+        RIDEV_INPUTSINK = 256,
+        RIDEV_CAPTUREMOUSE = 512,
+        RIDEV_NOHOTKEYS = 512,
+        RIDEV_APPKEYS = 1024,
+        RIDEV_EXINPUTSINK = 4096,
+        RIDEV_DEVNOTIFY = 8192
+    }
+
+    public enum WH
+    {
+        WH_CALLWNDPROC = 4,
+        WH_CALLWNDPROCRET = 12,
+        WH_CBT = 5,
+        WH_DEBUG = 9,
+        WH_FOREGROUNDIDLE = 11,
+        WH_GETMESSAGE = 3,
+        WH_JOURNALPLAYBACK = 1,
+        WH_JOURNALRECORD = 0,
+        WH_KEYBOARD = 2,
+        WH_KEYBOARD_LL = 13,
+        WH_MOUSE = 7,
+        WH_MOUSE_LL = 14,
+        WH_MSGFILTER = -1,
+        WH_SHELL = 10,
+        WH_SYSMSGFILTER = 6
+    }
+
+    [Flags]
+    public enum LWA : uint
+    {
+        LWA_ALPHA = 0x00000002,
+        LWA_COLORKEY = 0x00000001
+    }
+
+    public enum AnonymousEnum70
+    {
+        GWL_EXSTYLE = -20,
+        GWLP_HINSTANCE = -6,
+        GWLP_ID = -12,
+        GWL_STYLE = -16,
+        GWLP_USERDATA = -21,
+        GWLP_WNDPROC = -4
+    }
+
+    [Flags]
+    public enum GetQueueStatusFlags : uint
+    {
+        QS_ALLEVENTS = 0x00001CBF,
+        QS_ALLINPUT = 0x00001CFF,
+        QS_ALLPOSTMESSAGE = 0x00000100,
+        QS_HOTKEY = 0x00000080,
+        QS_INPUT = 0x00001C07,
+        QS_KEY = 0x00000001,
+        QS_MOUSE = 0x00000006,
+        QS_MOUSEBUTTON = 0x00000004,
+        QS_MOUSEMOVE = 0x00000002,
+        QS_PAINT = 0x00000020,
+        QS_POSTMESSAGE = 0x00000008,
+        QS_RAWINPUT = 0x00000400,
+        QS_SENDMESSAGE = 0x00000040,
+        QS_TIMER = 0x00000010
+    }
+
+    public enum AnonymousEnum75
+    {
+        IDC_APPSTARTING = 32650,
+        IDC_ARROW = 32512,
+        IDC_CROSS = 32515,
+        IDC_HAND = 32649,
+        IDC_HELP = 32651,
+        IDC_IBEAM = 32513,
+        IDC_NO = 32648,
+        IDC_SIZEALL = 32646,
+        IDC_SIZENESW = 32643,
+        IDC_SIZENS = 32645,
+        IDC_SIZENWSE = 32642,
+        IDC_SIZEWE = 32644,
+        IDC_UPARROW = 32516,
+        IDC_WAIT = 32514,
+        IDI_APPLICATION = 32512,
+        IDI_ASTERISK = 32516,
+        IDI_EXCLAMATION = 32515,
+        IDI_HAND = 32513,
+        IDI_QUESTION = 32514,
+        IDI_WINLOGO = 32517
+    }
+
+    public enum SB
+    {
+        SB_BOTH = 3,
+        SB_CTL = 2,
+        SB_HORZ = 0,
+        SB_VERT = 1
+    }
+
+    [Flags]
+    public enum RegisterHotKey_fsModifiersFlags : uint
+    {
+        MOD_ALT = 0x00000001,
+        MOD_CONTROL = 0x00000002,
+        MOD_NOREPEAT = 0x00004000,
+        MOD_SHIFT = 0x00000004,
+        MOD_WIN = 0x00000008
+    }
+
+    public enum AnonymousEnum77
+    {
+        GCW_ATOM = -32,
+        GCL_CBCLSEXTRA = -20,
+        GCL_CBWNDEXTRA = -18,
+        GCL_HBRBACKGROUND = -10,
+        GCL_HCURSOR = -12,
+        GCL_HICON = -14,
+        GCL_HICONSM = -34,
+        GCL_HMODULE = -16,
+        GCL_MENUNAME = -8,
+        GCL_STYLE = -26,
+        GCL_WNDPROC = -24
+    }
+
+    [Flags]
+    public enum CascadeWindows_wHowFlags : uint
+    {
+        MDITILE_SKIPDISABLED = 0x00000002,
+        MDITILE_ZORDER = 0x00000004
+    }
+
+    public enum MF
+    {
+        MF_BITMAP = 4,
+        MF_CHECKED = 8,
+        MF_DISABLED = 2,
+        MF_ENABLED = 0,
+        MF_GRAYED = 1,
+        MF_MENUBARBREAK = 32,
+        MF_MENUBREAK = 64,
+        MF_OWNERDRAW = 256,
+        MF_POPUP = 16,
+        MF_SEPARATOR = 2048,
+        MF_STRING = 0,
+        MF_UNCHECKED = 0
+    }
+
+    [Flags]
+    public enum HCF : uint
+    {
+        HCF_HIGHCONTRASTON = 0x00000001,
+        HCF_AVAILABLE = 0x00000002,
+        HCF_HOTKEYACTIVE = 0x00000004,
+        HCF_CONFIRMHOTKEY = 0x00000008,
+        HCF_HOTKEYSOUND = 0x00000010,
+        HCF_INDICATOR = 0x00000020,
+        HCF_HOTKEYAVAILABLE = 0x00000040,
+        HCF_OPTION_NOTHEMECHANGE = 0x00001000
+    }
+
+    public enum ChangeWindowMessageFilter_dwFlagFlags
+    {
+        MSGFLT_ADD = 1,
+        MSGFLT_REMOVE = 2
+    }
+
+    [Flags]
+    public enum WS : uint
+    {
+        WS_MINIMIZE = 0x20000000,
+        WS_MAXIMIZE = 0x01000000,
+        WS_HSCROLL = 0x00100000,
+        WS_VSCROLL = 0x00200000
+    }
+
+    public enum PWAITCHAINCALLBACK_CallbackStatusFlags
+    {
+        ERROR_ACCESS_DENIED = 5,
+        ERROR_CANCELLED = 1223,
+        ERROR_MORE_DATA = 234,
+        ERROR_OBJECT_NOT_FOUND = 4312,
+        ERROR_SUCCESS = 0,
+        ERROR_TOO_MANY_THREADS = 565
+    }
+
+    public enum GetRawInputData_uiCommandFlags
+    {
+        RID_HEADER = 268435461,
+        RID_INPUT = 268435459
+    }
+
+    [Flags]
+    public enum BSF : uint
+    {
+        BSF_ALLOWSFW = 0x00000080,
+        BSF_FLUSHDISK = 0x00000004,
+        BSF_FORCEIFHUNG = 0x00000020,
+        BSF_IGNORECURRENTTASK = 0x00000002,
+        BSF_LUID = 0x00000400,
+        BSF_NOHANG = 0x00000008,
+        BSF_NOTIMEOUTIFNOTHUNG = 0x00000040,
+        BSF_POSTMESSAGE = 0x00000010,
+        BSF_RETURNHDESK = 0x00000200,
+        BSF_QUERY = 0x00000001,
+        BSF_SENDNOTIFYMESSAGE = 0x00000100
+    }
+
+    [Flags]
+    public enum GetDCExFlags : uint
+    {
+        DCX_WINDOW = 0x00000001,
+        DCX_CACHE = 0x00000002,
+        DCX_PARENTCLIP = 0x00000020,
+        DCX_CLIPSIBLINGS = 0x00000010,
+        DCX_CLIPCHILDREN = 0x00000008,
+        DCX_NORESETATTRS = 0x00000004,
+        DCX_LOCKWINDOWUPDATE = 0x00000400,
+        DCX_EXCLUDERGN = 0x00000040,
+        DCX_INTERSECTRGN = 0x00000080,
+        DCX_INTERSECTUPDATE = 0x00000200,
+        DCX_VALIDATE = 0x00200000
+    }
+
+    public enum KEYBDINPUTFlags
+    {
+        KEYEVENTF_EXTENDEDKEY = 1,
+        KEYEVENTF_KEYUP = 2,
+        KEYEVENTF_SCANCODE = 8,
+        KEYEVENTF_UNICODE = 4
+    }
+
+    [Flags]
+    public enum ScrollWindowExFlags : uint
+    {
+        SW_ERASE = 0x00000004,
+        SW_INVALIDATE = 0x00000002,
+        SW_SCROLLCHILDREN = 0x00000001,
+        SW_SMOOTHSCROLL = 0x00000010
+    }
+
+    public enum ExitWindowsExFlags
+    {
+        EWX_HYBRID_SHUTDOWN = 4194304,
+        EWX_LOGOFF = 0,
+        EWX_POWEROFF = 8,
+        EWX_REBOOT = 2,
+        EWX_RESTARTAPPS = 64,
+        EWX_SHUTDOWN = 1
+    }
+
+    public enum INPUT_typeFlags
+    {
+        INPUT_MOUSE = 0,
+        INPUT_KEYBOARD = 1,
+        INPUT_HARDWARE = 2
+    }
+
+    [Flags]
+    public enum STATE_SYSTEM : uint
+    {
+        STATE_SYSTEM_FOCUSABLE = 0x00100000,
+        STATE_SYSTEM_INVISIBLE = 0x00008000,
+        STATE_SYSTEM_OFFSCREEN = 0x00010000,
+        STATE_SYSTEM_UNAVAILABLE = 0x00000001,
+        STATE_SYSTEM_PRESSED = 0x00000008
+    }
+
+    public enum SSWF
+    {
+        SSWF_CUSTOM = 4,
+        SSWF_DISPLAY = 3,
+        SSWF_NONE = 0,
+        SSWF_TITLE = 1,
+        SSWF_WINDOW = 2
+    }
+
+    [Flags]
+    public enum ACCEL_fVirtFlags : uint
+    {
+        FALT = 0x00000010,
+        FCONTROL = 0x00000008,
+        FNOINVERT = 0x00000002,
+        FSHIFT = 0x00000004,
+        FVIRTKEY = 0x00000001
+    }
+
+    public enum GetMenuBarInfo_idObjectFlags
+    {
+        OBJID_CLIENT = -4,
+        OBJID_MENU = -3,
+        OBJID_SYSMENU = -1
+    }
+
+    public enum CHANGEFILTERSTRUCT_ExtStatusFlags
+    {
+        MSGFLTINFO_NONE = 0,
+        MSGFLTINFO_ALLOWED_HIGHER = 3,
+        MSGFLTINFO_ALREADYALLOWED_FORWND = 1,
+        MSGFLTINFO_ALREADYDISALLOWED_FORWND = 2
+    }
+
+    public enum DrawFrameControl_arg4Flags
+    {
+        DFCS_BUTTON3STATE = 8,
+        DFCS_BUTTONCHECK = 0,
+        DFCS_BUTTONPUSH = 16,
+        DFCS_BUTTONRADIO = 4,
+        DFCS_BUTTONRADIOIMAGE = 1,
+        DFCS_BUTTONRADIOMASK = 2
+    }
+
+    [Flags]
+    public enum MFT : uint
+    {
+        MFT_BITMAP = 0x00000004,
+        MFT_MENUBARBREAK = 0x00000020,
+        MFT_MENUBREAK = 0x00000040,
+        MFT_OWNERDRAW = 0x00000100,
+        MFT_RADIOCHECK = 0x00000200,
+        MFT_RIGHTJUSTIFY = 0x00004000,
+        MFT_RIGHTORDER = 0x00002000,
+        MFT_SEPARATOR = 0x00000800,
+        MFT_STRING = 0x00000000
+    }
+
+    [Flags]
+    public enum DrawCaptionFlags : uint
+    {
+        DC_ACTIVE = 0x00000001,
+        DC_BUTTONS = 0x00001000,
+        DC_GRADIENT = 0x00000020,
+        DC_ICON = 0x00000004,
+        DC_INBUTTON = 0x00000010,
+        DC_SMALLCAP = 0x00000002,
+        DC_TEXT = 0x00000008
+    }
+
+    [Flags]
+    public enum RAWMOUSEFlags : uint
+    {
+        RI_MOUSE_LEFT_BUTTON_DOWN = 0x00000001,
+        RI_MOUSE_LEFT_BUTTON_UP = 0x00000002,
+        RI_MOUSE_MIDDLE_BUTTON_DOWN = 0x00000010,
+        RI_MOUSE_MIDDLE_BUTTON_UP = 0x00000020,
+        RI_MOUSE_RIGHT_BUTTON_DOWN = 0x00000004,
+        RI_MOUSE_RIGHT_BUTTON_UP = 0x00000008,
+        RI_MOUSE_BUTTON_1_DOWN = 0x00000001,
+        RI_MOUSE_BUTTON_1_UP = 0x00000002,
+        RI_MOUSE_BUTTON_2_DOWN = 0x00000004,
+        RI_MOUSE_BUTTON_2_UP = 0x00000008,
+        RI_MOUSE_BUTTON_3_DOWN = 0x00000010,
+        RI_MOUSE_BUTTON_3_UP = 0x00000020,
+        RI_MOUSE_BUTTON_4_DOWN = 0x00000040,
+        RI_MOUSE_BUTTON_4_UP = 0x00000080,
+        RI_MOUSE_BUTTON_5_DOWN = 0x00000100,
+        RI_MOUSE_BUTTON_5_UP = 0x00000200,
+        RI_MOUSE_WHEEL = 0x00000400,
+        RI_MOUSE_HWHEEL = 0x00000800
+    }
+
+    [Flags]
+    public enum GetScrollInfo_lpsiFlags : uint
+    {
+        SIF_PAGE = 0x00000002,
+        SIF_POS = 0x00000004,
+        SIF_RANGE = 0x00000001,
+        SIF_TRACKPOS = 0x00000010
+    }
+
+    [Flags]
+    public enum MsgWaitForMultipleObjectsExFlags : uint
+    {
+        MWMO_ALERTABLE = 0x00000002,
+        MWMO_INPUTAVAILABLE = 0x00000004,
+        MWMO_WAITALL = 0x00000001
+    }
+
+    public enum GetMouseMovePointsEx_resolutionFlags
+    {
+        GMMP_USE_DISPLAY_POINTS = 1,
+        GMMP_USE_HIGH_RESOLUTION_POINTS = 2
+    }
+
+    [Flags]
+    public enum FlatSB_GetScrollInfo_arg3Flags : uint
+    {
+        SIF_PAGE = 0x00000002,
+        SIF_POS = 0x00000004,
+        SIF_RANGE = 0x00000001,
+        SIF_ALL = 0x00000017
+    }
+
+    [Flags]
+    public enum GUITHREADINFOFlags : uint
+    {
+        GUI_CARETBLINKING = 0x00000001,
+        GUI_INMENUMODE = 0x00000004,
+        GUI_INMOVESIZE = 0x00000002,
+        GUI_POPUPMENUMODE = 0x00000010,
+        GUI_SYSTEMMENUMODE = 0x00000008
+    }
+
+    [Flags]
+    public enum MF : uint
+    {
+        MF_BITMAP = 0x00000004,
+        MF_CHECKED = 0x00000008,
+        MF_DISABLED = 0x00000002,
+        MF_ENABLED = 0x00000000,
+        MF_GRAYED = 0x00000001,
+        MF_MENUBARBREAK = 0x00000020,
+        MF_MENUBREAK = 0x00000040,
+        MF_OWNERDRAW = 0x00000100,
+        MF_POPUP = 0x00000010,
+        MF_SEPARATOR = 0x00000800,
+        MF_STRING = 0x00000000,
+        MF_UNCHECKED = 0x00000000
+    }
+
+    public enum CURSORINFOFlags
+    {
+        CURSOR_SHOWING = 1,
+        CURSOR_SUPPRESSED = 2
+    }
+
+    public enum TxScrollWindowEx_fuScrollFlags
+    {
+        SW_ERASE = 4,
+        SW_INVALIDATE = 2,
+        SW_SCROLLCHILDREN = 1,
+        SW_SMOOTHSCROLL = 16
+    }
+
+    public enum RIP_INFO_dwTypeFlags
+    {
+        SLE_ERROR = 1,
+        SLE_MINORERROR = 2,
+        SLE_WARNING = 3
+    }
+
+    public enum PrintWindowFlags
+    {
+        PW_CLIENTONLY = 1
+    }
+
+    [Flags]
+    public enum MENUINFO_dwStyleFlags : uint
+    {
+        MNS_AUTODISMISS = 0x10000000,
+        MNS_CHECKORBMP = 0x04000000,
+        MNS_DRAGDROP = 0x20000000,
+        MNS_MODELESS = 0x40000000,
+        MNS_NOCHECK = 0x80000000,
+        MNS_NOTIFYBYPOS = 0x08000000
+    }
+
+    public enum DEVICE_NOTIFY
+    {
+        DEVICE_NOTIFY_WINDOW_HANDLE = 0,
+        DEVICE_NOTIFY_SERVICE_HANDLE = 1
+    }
+
+    [Flags]
+    public enum MENUINFO_fMaskFlags : uint
+    {
+        MIM_APPLYTOSUBMENUS = 0x80000000,
+        MIM_BACKGROUND = 0x00000002,
+        MIM_HELPID = 0x00000004,
+        MIM_MAXHEIGHT = 0x00000001,
+        MIM_MENUDATA = 0x00000008,
+        MIM_STYLE = 0x00000010
+    }
+
+    public enum DrawFrameControl_arg3Flags
+    {
+        DFC_BUTTON = 4,
+        DFC_CAPTION = 1,
+        DFC_MENU = 2,
+        DFC_POPUPMENU = 5,
+        DFC_SCROLL = 3
+    }
+
+    [Flags]
+    public enum SetScrollInfo_lpsiFlags : uint
+    {
+        SIF_DISABLENOSCROLL = 0x00000008,
+        SIF_PAGE = 0x00000002,
+        SIF_POS = 0x00000004,
+        SIF_RANGE = 0x00000001
+    }
+
+    public enum GetGuiResourcesFlags
+    {
+        GR_GDIOBJECTS = 0,
+        GR_GDIOBJECTS_PEAK = 2,
+        GR_USEROBJECTS = 1,
+        GR_USEROBJECTS_PEAK = 4
+    }
+
+    [Flags]
+    public enum MOUSEINPUTFlags : uint
+    {
+        MOUSEEVENTF_ABSOLUTE = 0x00008000,
+        MOUSEEVENTF_HWHEEL = 0x00001000,
+        MOUSEEVENTF_MOVE = 0x00000001,
+        MOUSEEVENTF_MOVE_NOCOALESCE = 0x00002000,
+        MOUSEEVENTF_LEFTDOWN = 0x00000002,
+        MOUSEEVENTF_LEFTUP = 0x00000004,
+        MOUSEEVENTF_RIGHTDOWN = 0x00000008,
+        MOUSEEVENTF_RIGHTUP = 0x00000010,
+        MOUSEEVENTF_MIDDLEDOWN = 0x00000020,
+        MOUSEEVENTF_MIDDLEUP = 0x00000040,
+        MOUSEEVENTF_VIRTUALDESK = 0x00004000,
+        MOUSEEVENTF_WHEEL = 0x00000800,
+        MOUSEEVENTF_XDOWN = 0x00000080,
+        MOUSEEVENTF_XUP = 0x00000100
+    }
+
+    [Flags]
+    public enum FLASHWINFOFlags : uint
+    {
+        FLASHW_ALL = 0x00000003,
+        FLASHW_CAPTION = 0x00000001,
+        FLASHW_STOP = 0x00000000,
+        FLASHW_TIMER = 0x00000004,
+        FLASHW_TIMERNOFG = 0x0000000C,
+        FLASHW_TRAY = 0x00000002
+    }
+
+    [Flags]
+    public enum CreateIconFromResourceExFlags : uint
+    {
+        LR_DEFAULTCOLOR = 0x00000000,
+        LR_DEFAULTSIZE = 0x00000040,
+        LR_MONOCHROME = 0x00000001,
+        LR_SHARED = 0x00008000
+    }
+
+    public enum NETINFOSTRUCT_dwStatusFlags
+    {
+        NO_ERROR = 0,
+        ERROR_NO_NETWORK = 1222,
+        ERROR_BUSY = 170
+    }
+
+    public enum IDI : ushort
+    {
+        IDI_APPLICATION = 32512,
+        IDI_ASTERISK = 32516,
+        IDI_ERROR = 32513,
+        IDI_EXCLAMATION = 32515,
+        IDI_HAND = 32513,
+        IDI_INFORMATION = 32516,
+        IDI_QUESTION = 32514,
+        IDI_SHIELD = 32518,
+        IDI_WARNING = 32515,
+        IDI_WINLOGO = 32517
+    }
+
+    public enum ActivateKeyboardLayout_hklFlags
+    {
+        HKL_NEXT = 1,
+        HKL_PREV = 0
+    }
+
+    public enum GWL
+    {
+        GWL_EXSTYLE = -20,
+        GWL_HINSTANCE = -6,
+        GWL_HWNDPARENT = -8,
+        GWL_ID = -12,
+        GWL_STYLE = -16,
+        GWL_USERDATA = -21,
+        GWL_WNDPROC = -4
+    }
+
+    public enum AnonymousEnum106
+    {
+        RIM_TYPEHID = 2,
+        RIM_TYPEKEYBOARD = 1,
+        RIM_TYPEMOUSE = 0
+    }
+
+    public enum RegisterTouchWindowFlags
+    {
+        TWF_FINETOUCH = 1,
+        TWF_WANTPALM = 2
+    }
+
+    public enum GetNextWindow_wCmdFlags
+    {
+        GW_HWNDNEXT = 2,
+        GW_HWNDPREV = 3
+    }
+
+    public enum MB
+    {
+        MB_ABORTRETRYIGNORE = 2,
+        MB_CANCELTRYCONTINUE = 6,
+        MB_HELP = 16384,
+        MB_OK = 0,
+        MB_OKCANCEL = 1,
+        MB_RETRYCANCEL = 5,
+        MB_YESNO = 4,
+        MB_YESNOCANCEL = 3
+    }
+
+    [Flags]
+    public enum DeferWindowPosFlags : uint
+    {
+        SWP_DRAWFRAME = 0x00000020,
+        SWP_FRAMECHANGED = 0x00000020,
+        SWP_HIDEWINDOW = 0x00000080,
+        SWP_NOACTIVATE = 0x00000010,
+        SWP_NOCOPYBITS = 0x00000100,
+        SWP_NOMOVE = 0x00000002,
+        SWP_NOOWNERZORDER = 0x00000200,
+        SWP_NOREDRAW = 0x00000008,
+        SWP_NOREPOSITION = 0x00000200,
+        SWP_NOSENDCHANGING = 0x00000400,
+        SWP_NOSIZE = 0x00000001,
+        SWP_NOZORDER = 0x00000004,
+        SWP_SHOWWINDOW = 0x00000040
+    }
+
+    [Flags]
+    public enum CopyImageFlags : uint
+    {
+        LR_COPYDELETEORG = 0x00000008,
+        LR_COPYFROMRESOURCE = 0x00004000,
+        LR_COPYRETURNORG = 0x00000004,
+        LR_CREATEDIBSECTION = 0x00002000,
+        LR_DEFAULTSIZE = 0x00000040,
+        LR_MONOCHROME = 0x00000001
+    }
+
+    public enum TileWindows_wHowFlags
+    {
+        MDITILE_HORIZONTAL = 1,
+        MDITILE_VERTICAL = 0
+    }
 }
