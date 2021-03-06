@@ -5879,6 +5879,8 @@ namespace Windows.Win32.SystemServices
         public const uint DXGI_CREATE_FACTORY_DEBUG = 0x1;
 
         public const uint INFINITE = 0xFFFFFFFF;
+
+        public const uint MAXIMUM_WAIT_OBJECTS = 64;
     }
 
     [Flags]
@@ -5997,5 +5999,15 @@ namespace Windows.Win32.SystemServices
         JOB_OBJECT_SECURITY_ONLY_TOKEN = 0x00000004,
         JOB_OBJECT_SECURITY_FILTER_TOKENS = 0x00000008,
         JOB_OBJECT_SECURITY_VALID_FLAGS = 0x0000000f
+    }
+
+    public enum WAIT_RETURN_CAUSE : uint
+    {
+        WAIT_OBJECT_0 = 0x00000000,
+        WAIT_ABANDONED = 0x00000080,
+        WAIT_ABANDONED_0 = 0x00000080,
+        WAIT_IO_COMPLETION = 0x000000C0,
+        WAIT_TIMEOUT = 0x00000102,
+        WAIT_FAILED = 0xFFFFFFFF
     }
 }
