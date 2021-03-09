@@ -1,0 +1,1507 @@
+[
+    {
+      "name": "ALERT_SYSTEM_SEV",
+      "flags": false,
+      "autoPopulate":
+        {
+            "filter": "ALERT_SYSTEM_",
+            "header": "WinUser.h"
+        }
+    },
+    {
+        "name": "APPCOMMAND_ID",
+        "flags": false,
+        "autoPopulate":
+          {
+              "filter": "APPCOMMAND_",
+              "header": "WinUser.h"
+          }
+    },
+    {
+        "name": "ATF_FLAGS",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "ATF_",
+              "header": "WinUser.h"
+          }
+    },
+    {
+        "name": "DRAWEDGE_FLAGS",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "BDR_|EDGE_",
+              "header": "WinUser.h"
+          },
+        "uses": [
+            {
+              "method": "DrawEdge",
+              "parameter": "edge"
+            }
+        ]
+    },
+    {
+        "name": "BUTTON_STYLE",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "BS_",
+              "header": "WinUser.h"
+          }
+    },
+    {
+        "name": "COMBOBOX_STYLE",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "CBS_",
+              "header": "WinUser.h"
+          }
+    },
+    {
+        "name": "CHOOSECOLOR_FLAGS",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "CC_",
+              "header": "commdlg.h"
+          }
+    },
+    {
+        "name": "CLIPBOARD_FORMATS",
+        "flags": false,
+        "autoPopulate":
+          {
+              "filter": "CF_",
+              "header": "WinUser.h"
+          }
+    },
+    {
+        "name": "WINDOWSCLASS_STYLES",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "CS_",
+              "header": "WinUser.h"
+          }
+    },
+    {
+        "name": "CWP_FLAGS",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "CWP_",
+              "header": "WinUser.h"
+          },
+        "uses": [
+            {
+              "method": "ChildWindowFromPointEx",
+              "parameter": "flags"
+            }
+        ]
+    },
+    {
+        "name": "DFC_TYPE",
+        "flags": false,
+        "autoPopulate":
+          {
+              "filter": "DFC_",
+              "header": "WinUser.h"
+          },
+        "uses": [
+            {
+              "method": "DrawFrameControl",
+              "parameter": "param2"
+            }
+        ]
+    },
+    {
+        "name": "DFCS_STATE",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "DFCS_",
+              "header": "WinUser.h"
+          },
+        "uses": [
+            {
+              "method": "DrawFrameControl",
+              "parameter": "param3"
+            }
+        ]
+    },
+    {
+        "name": "CDS_TYPE",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "CDS_",
+              "header": "WinUser.h"
+          },
+        "uses": [
+            {
+              "method": "ChangeDisplaySettingsA",
+              "parameter": "dwflags"
+            },
+            {
+              "method": "ChangeDisplaySettingsW",
+              "parameter": "dwflags"
+            },
+            {
+              "method": "ChangeDisplaySettingsExW",
+              "parameter": "dwflags"
+            },
+            {
+              "method": "ChangeDisplaySettingsExA",
+              "parameter": "dwflags"
+            }
+        ]
+    },
+    {
+        "name": "DISP_CHANGE",
+        "flags": false,
+        "autoPopulate":
+          {
+              "filter": "DISP_CHANGE",
+              "header": "WinUser.h"
+          },
+        "uses": [
+            {
+              "method": "ChangeDisplaySettingsA",
+              "parameter": "return"
+            },
+            {
+              "method": "ChangeDisplaySettingsW",
+              "parameter": "return"
+            },
+            {
+              "method": "ChangeDisplaySettingsExW",
+              "parameter": "return"
+            },
+            {
+              "method": "ChangeDisplaySettingsExA",
+              "parameter": "return"
+            }
+        ]
+    },
+    {
+        "name": "DIALOGBOX_STYLE",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "DS_",
+              "header": "WinUser.h"
+          }
+    },
+    {
+        "name": "DRAWSTATE_FLAGS",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "DST_|DSS_",
+              "header": "WinUser.h"
+          },
+        "uses": [
+            {
+              "method": "DrawStateA",
+              "parameter": "uFlags"
+            },
+            {
+              "method": "DrawStateW",
+              "parameter": "uFlags"
+            }
+        ]
+    },
+    {
+        "name": "EDITCONTROL_STYLE",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "ES_",
+              "header": "WinUser.h"
+          }
+    },
+    {
+        "name": "GESTURECONFIG_ID",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "GID_",
+              "header": "WinUser.h"
+          },
+        "uses": [
+            {
+              "struct": "GESTURECONFIG",
+              "field": "dwID"
+            }
+        ]
+    },
+    {
+        "name": "GESTURECONFIG_FLAGS",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "GC_",
+              "header": "WinUser.h"
+          }
+    },
+    {
+        "name": "LISTBOX_STYLE",
+        "flags": true,
+        "members": [
+            {
+              "name": "LBS_STANDARD",
+              "value": "(LBS_NOTIFY | LBS_SORT | Windows.Win32.WindowsAndMessaging.WINDOWS_STYLE.WS_VSCROLL | Windows.Win32.WindowsAndMessaging.WINDOWS_STYLE.WS_BORDER)"
+            }
+        ],
+        "autoPopulate":
+          {
+              "filter": "LBS_",
+              "header": "WinUser.h"
+          }
+    },
+    {
+        "name": "MB_FLAGS",
+        "flags": false,
+        "autoPopulate":
+          {
+              "filter": "MB_",
+              "header": "WinUser.h"
+          },
+        "uses": [
+          {
+            "method": "MessageBoxW",
+            "parameter": "uType"
+          },
+          {
+            "method": "MessageBoxA",
+            "parameter": "uType"
+          },
+          {
+            "method": "MessageBoxExW",
+            "parameter": "uType"
+          },
+          {
+            "method": "MessageBoxExA",
+            "parameter": "uType"
+          },
+          {
+            "method": "MSGBOXPARAMSA",
+            "parameter": "dwStyle"
+          },
+          {
+            "method": "MSGBOXPARAMSW",
+            "parameter": "dwStyle"
+          }
+        ]
+    },
+    {
+        "name": "MENU_FLAGS",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "MF_",
+              "header": "WinUser.h"
+          },
+        "uses": [
+          {
+            "method": "EnableMenuItem",
+            "parameter": "uEnable"
+          },
+          {
+            "method": "DeleteMenu",
+            "parameter": "uFlags"
+          },
+          {
+            "method": "RemoveMenu",
+            "parameter": "uFlags"
+          },
+          {
+            "method": "GetMenuStringA",
+            "parameter": "flags"
+          },
+          {
+            "method": "GetMenuState",
+            "parameter": "uFlags"
+          },
+          {
+            "method": "GetMenuStringW",
+            "parameter": "flags"
+          },
+          {
+            "method": "SetMenuItemBitmaps",
+            "parameter": "uFlags"
+          }
+        ]
+    },
+    {
+        "name": "POINTER_FLAGS",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "POINTER_FLAG_",
+              "header": "WinUser.h"
+          },
+        "uses": [
+          {
+            "struct": "POINTER_INFO",
+            "field": "pointerFlags"
+          }
+        ]
+    },
+    {
+        "name": "REDRAW_WINDOW_FLAGS",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "RDW_",
+              "header": "WinUser.h"
+          },
+        "uses": [
+          {
+            "method": "RedrawWindow",
+            "parameter": "flags"
+          }
+        ]
+    },
+    {
+        "name": "SCROLLBAR_CONSTANTS",
+        "flags": true,
+        "members": [
+            {
+              "name": "SB_BOTH"
+            },
+            {
+              "name": "SB_CTL"
+            },
+            {
+              "name": "SB_HORZ"
+            },
+            {
+              "name": "SB_VERT"
+            }
+        ],
+        "uses": [
+            {
+              "method": "ShowScrollBar",
+              "parameter": "wBar"
+            },
+            {
+              "method": "EnableScrollBar",
+              "parameter": "wSBflags"
+            }
+        ]
+    },
+    {
+        "name": "SCROLLBAR_STYLE",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "SBS_",
+              "header": "WinUser.h"
+          }
+    },
+    {
+        "name": "SHOW_WINDOW_CMD",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "SW_",
+              "header": "WinUser.h"
+          },
+        "uses": [
+          {
+            "method": "ShowWindow",
+            "parameter": "nCmdShow"
+          }
+        ]
+    },
+    {
+        "name": "STICKYKEYS_FLAGS",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "SKF_",
+              "header": "WinUser.h"
+          },
+        "uses": [
+          {
+            "struct": "STICKYKEYS",
+            "field": "dwFlags"
+          }
+        ]
+    },
+    {
+        "name": "SYSTEM_PARAMETERS_INFO_ACTION",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "SPI_",
+              "header": "WinUser.h"
+          },
+        "uses": [
+          {
+            "method": "SystemParametersInfoA",
+            "parameter": "uiAction"
+          },
+          {
+            "method": "SystemParametersInfoW",
+            "parameter": "uiAction"
+          }
+        ]
+    },
+    {
+        "name": "STATIC_CONTROL_STYLE",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "SS_",
+              "header": "WinUser.h"
+          }
+    },
+    {
+        "name": "SOUNDSENTRY_FLAGS",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "SSF_",
+              "header": "WinUser.h"
+          },
+        "uses": [
+          {
+            "struct": "SOUNDSENTRYA",
+            "field": "dwFlags"
+          },
+          {
+            "struct": "SOUNDSENTRYW",
+            "field": "dwFlags"
+          }
+        ]
+    },
+    {
+        "name": "TOUCH_FEEDBACK_MODE",
+        "flags": false,
+        "autoPopulate":
+          {
+              "filter": "TOUCH_FEEDBACK_",
+              "header": "WinUser.h"
+          },
+        "uses": [
+          {
+            "method": "InitializeTouchInjection",
+            "parameter": "dwMode"
+          }
+        ]
+    },
+    {
+        "name": "TOUCHEVENTF_FLAGS",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "TOUCHEVENTF_",
+              "header": "WinUser.h"
+          },
+        "uses": [
+          {
+            "struct": "TOUCHINPUT",
+            "field": "dwFlags"
+          }
+        ]
+    },
+    {
+        "name": "TOUCHINPUTMASKF_MASK",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "TOUCHINPUTMASKF_",
+              "header": "WinUser.h"
+          },
+        "uses": [
+          {
+            "struct": "TOUCHINPUT",
+            "field": "dwMask"
+          }
+        ]
+    },
+    {
+        "name": "TRACK_POPUP_MENU_FLAGS",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "TPM_",
+              "header": "WinUser.h"
+          },
+        "uses": [
+          {
+            "method": "TrackPopupMenu",
+            "parameter": "uFlags"
+          }
+        ]
+    },
+    {
+        "name": "WINDOWS_EX_STYLE",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "WS_EX_",
+              "header": "WinUser.h"
+          },
+        "uses": [
+          {
+            "method": "CreateWindowExA",
+            "parameter": "dwExStyle"
+          },
+          {
+            "method": "CreateWindowExW",
+            "parameter": "dwExStyle"
+          }
+        ]
+    },
+    {
+        "name": "WINDOWS_STYLE",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "WS_",
+              "header": "WinUser.h"
+          },
+        "uses": [
+          {
+            "method": "CreateWindowExA",
+            "parameter": "dwStyle"
+          },
+          {
+            "method": "CreateWindowExW",
+            "parameter": "dwStyle"
+          }
+        ]
+    },
+    {
+        "name": "SP_COPY_STYLE",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "SP_COPY_",
+              "header": "SetupAPI.h"
+          },
+        "uses": [
+            {
+              "method": "SetupInstallFileExW",
+              "parameter": "CopyStyle"
+            },
+            {
+              "method": "SetupInstallFileExA",
+              "parameter": "CopyStyle"
+            },
+            {
+              "struct": "sp_file_copy_params_a",
+              "field": "CopyStyle"
+            },
+            {
+              "struct": "sp_file_copy_params_w",
+              "field": "CopyStyle"
+            }
+          ]
+    },
+    {
+        "name": "SCROLLBAR_OBJID",
+        "flags": false,
+        "finished": true,
+        "type": "int",
+        "members": [
+          {
+            "name": "OBJID_CLIENT",
+            "value": "unchecked((int)0xFFFFFFFC)"
+          },
+          {
+            "name": "OBJID_HSCROLL",
+            "value": "unchecked((int)0xFFFFFFFA)"
+          },
+          {
+            "name": "OBJID_VSCROLL",
+            "value": "unchecked((int)0xFFFFFFFB)"
+          }
+        ],
+        "uses": [
+          {
+            "method": "GetScrollBarInfo",
+            "parameter": "idObject"
+          }
+        ]
+    },
+    {
+        "name": "ENUM_DISPLAY_SETTINGS_MODE",
+        "flags": false,
+        "finished": true,
+        "members": [
+          {
+            "name": "ENUM_CURRENT_SETTINGS",
+            "value": "unchecked((uint)-1)"
+          },
+          {
+            "name": "ENUM_REGISTRY_SETTINGS",
+            "value": "unchecked((uint)-2)"
+          }
+        ],
+        "uses": [
+          {
+            "method": "EnumDisplaySettingsExW",
+            "parameter": "iModeNum"
+          },
+          {
+            "method": "EnumDisplaySettingsW",
+            "parameter": "iModeNum"
+          },
+          {
+            "method": "EnumDisplaySettingsA",
+            "parameter": "iModeNum"
+          },
+          {
+            "method": "EnumDisplaySettingsExA",
+            "parameter": "iModeNum"
+          }
+        ]
+    },
+    {
+        "name": "WINBIO_SETTING_SOURCE",
+        "flags": false,
+        "finished": true,
+        "members": [
+          {
+            "name": "WINBIO_SETTING_SOURCE_INVALID",
+            "value": "0"
+          },
+          {
+            "name": "WINBIO_SETTING_SOURCE_DEFAULT",
+            "value": "1"
+          },
+          {
+            "name": "WINBIO_SETTING_SOURCE_LOCAL",
+            "value": "3"
+          },
+          {
+            "name": "WINBIO_SETTING_SOURCE_POLICY",
+            "value": "2"
+          }
+        ],
+        "uses": [
+          {
+            "method": "WinBioGetEnabledSetting",
+            "parameter": "Source"
+          },
+          {
+            "method": "WinBioGetLogonSetting",
+            "parameter": "Source"
+          },
+          {
+            "method": "WinBioGetDomainLogonSetting",
+            "parameter": "Source"
+          }
+        ]
+    },
+    {
+        "name": "WINBIO_COMPONENT",
+        "flags": false,
+        "finished": true,
+        "members": [
+          {
+            "name": "WINBIO_COMPONENT_SENSOR",
+            "value": "1"
+          },
+          {
+            "name": "WINBIO_COMPONENT_ENGINE",
+            "value": "2"
+          },
+          {
+            "name": "WINBIO_COMPONENT_STORAGE",
+            "value": "3"
+          }
+        ],
+        "uses": [
+          {
+            "method": "WinBioControlUnit",
+            "parameter": "Component"
+          },
+          {
+            "method": "WinBioControlUnitPrivileged",
+            "parameter": "Component"
+          }
+        ]
+    },
+    {
+        "name": "WINBIO_POOL",
+        "flags": false,
+        "finished": true,
+        "members": [
+          {
+            "name": "WINBIO_POOL_SYSTEM",
+            "value": "1"
+          },
+          {
+            "name": "WINBIO_POOL_PRIVATE",
+            "value": "2"
+          }
+        ],
+        "uses": [
+          {
+            "method": "WinBioOpenSession",
+            "parameter": "PoolType"
+          },
+          {
+            "method": "WinBioAsyncOpenSession",
+            "parameter": "PoolType"
+          }
+        ]
+    },
+    {
+        "name": "SNMP_PDU_TYPE",
+        "flags": false,
+        "members": [
+          {
+            "name": "SNMP_PDU_GET"
+          },
+          {
+            "name": "SNMP_PDU_GETNEXT"
+          },
+          {
+            "name": "SNMP_PDU_RESPONSE"
+          },
+          {
+            "name": "SNMP_PDU_SET"
+          },
+          {
+            "name": "SNMP_PDU_GETBULK"
+          },
+          {
+            "name": "SNMP_PDU_TRAP"
+          }
+        ]
+    },
+    {
+        "name": "SNMP_EXTENSION_REQUEST_TYPE",
+        "flags": false,
+        "finished": true,
+        "members": [
+            {
+                "name": "SNMP_EXTENSION_GET",
+                "value": "SNMP_PDU_TYPE.SNMP_PDU_GET"
+            },
+            {
+                "name": "SNMP_EXTENSION_GET_NEXT",
+                "value": "SNMP_PDU_TYPE.SNMP_PDU_GETNEXT"
+            },
+            {
+                "name": "SNMP_EXTENSION_SET_TEST",
+                "value": "(ASN_PRIVATE | ASN_CONSTRUCTOR | 0x0)"
+            },
+            {
+                "name": "SNMP_EXTENSION_SET_COMMIT",
+                "value": "SNMP_PDU_TYPE.SNMP_PDU_SET"
+            },
+            {
+                "name": "SNMP_EXTENSION_SET_UNDO",
+                "value": "(ASN_PRIVATE | ASN_CONSTRUCTOR | 0x1)"
+            },
+            {
+                "name": "SNMP_EXTENSION_SET_CLEANUP",
+                "value": "(ASN_PRIVATE | ASN_CONSTRUCTOR | 0x2)"
+            }
+        ],
+        "uses": [
+            {
+                "method": "SnmpExtensionQueryEx",
+                "parameter": "nRequestType"
+            }
+        ]
+    },
+    {
+        "name": "AS_ANY_TYPE",
+        "flags": false,
+        "finished": true,
+        "members": [
+          {
+            "name": "ASN_INTEGER",
+            "value": "(ASN_UNIVERSAL | ASN_PRIMITIVE | 0x02)"
+          },
+          {
+            "name": "ASN_INTEGER32",
+            "value": "ASN_INTEGER"
+          },
+          {
+            "name": "ASN_UNSIGNED32",
+            "value": "(ASN_APPLICATION | ASN_PRIMITIVE | 0x07)"
+          },
+          {
+            "name": "ASN_COUNTER64",
+            "value": "(ASN_APPLICATION | ASN_PRIMITIVE | 0x06)"
+          },
+          {
+            "name": "ASN_OCTETSTRING",
+            "value": "(ASN_UNIVERSAL | ASN_PRIMITIVE | 0x04)"
+          },
+          {
+            "name": "ASN_BITS",
+            "value": "(ASN_UNIVERSAL | ASN_PRIMITIVE | 0x03)"
+          },
+          {
+            "name": "ASN_OBJECTIDENTIFIER",
+            "value": "(ASN_UNIVERSAL | ASN_PRIMITIVE | 0x06)"
+          },
+          {
+            "name": "ASN_SEQUENCE",
+            "value": "(ASN_UNIVERSAL | ASN_CONSTRUCTOR | 0x10);"
+          },
+          {
+            "name": "ASN_IPADDRESS",
+            "value": "(ASN_APPLICATION | ASN_PRIMITIVE | 0x00)"
+          },
+          {
+            "name": "ASN_COUNTER32",
+            "value": "(ASN_APPLICATION | ASN_PRIMITIVE | 0x01)"
+          },
+          {
+            "name": "ASN_GAUGE32",
+            "value": "(ASN_APPLICATION | ASN_PRIMITIVE | 0x02)"
+          },
+          {
+            "name": "ASN_TIMETICKS",
+            "value": "(ASN_APPLICATION | ASN_PRIMITIVE | 0x03)"
+          },
+          {
+            "name": "ASN_OPAQUE",
+            "value": "(ASN_APPLICATION | ASN_PRIMITIVE | 0x04)"
+          },
+          {
+            "name": "SNMP_EXCEPTION_NOSUCHOBJECT",
+            "value": "(ASN_CONTEXT | ASN_PRIMITIVE | 0x00)"
+          },
+          {
+            "name": "SNMP_EXCEPTION_NOSUCHINSTANCE",
+            "value": "(ASN_CONTEXT | ASN_PRIMITIVE | 0x01)"
+          },
+          {
+            "name": "SNMP_EXCEPTION_ENDOFMIBVIEW",
+            "value": "(ASN_CONTEXT | ASN_PRIMITIVE | 0x02)"
+          }
+        ],
+        "uses": [
+          {
+            "struct": "AsnAny",
+            "field": "asnType"
+          }
+        ]
+    },
+    {
+        "name": "HDI_MASK",
+        "flags": true,
+        "autoPopulate":
+        {
+            "filter": "HDI_",
+            "header": "CommCtrl.h"
+        }
+    },
+    {
+        "name": "CFM_MASK",
+        "flags": true,
+        "members": [
+            {
+              "name": "CFM_SUBSCRIPT",
+              "value": "(CFE_EFFECTS.CFE_SUBSCRIPT | CFE_EFFECTS.CFE_SUPERSCRIPT)"
+            },
+            {
+                "name": "CFM_EFFECTS",
+                "value": "(CFM_BOLD | CFM_ITALIC | CFM_UNDERLINE | CFM_COLOR | CFM_STRIKEOUT | CFE_EFFECTS.CFE_PROTECTED | CFM_LINK)"
+            }
+        ],
+        "autoPopulate":
+        {
+            "filter": "CFM_",
+            "header": "Richedit.h"
+        }
+    },
+    {
+        "name": "CFE_EFFECTS",
+        "flags": true,
+        "members": [
+            {
+              "name": "CFE_ALLCAPS",
+              "value": "CFM_MASK.CFM_ALLCAPS"
+            },
+            {
+              "name": "CFE_AUTOBACKCOLOR",
+              "value": "CFM_MASK.CFM_BACKCOLOR"
+            },
+            {
+              "name": "CFE_DISABLED",
+              "value": "CFM_MASK.CFM_DISABLED"
+            },
+            {
+                "name": "CFE_EMBOSS",
+                "value": "CFM_MASK.CFM_EMBOSS"
+            },
+            {
+                "name": "CFE_HIDDEN",
+                "value": "CFM_MASK.CFM_HIDDEN"
+            },
+            {
+                "name": "CFE_IMPRINT",
+                "value": "CFM_MASK.CFM_IMPRINT"
+            },
+            {
+                "name": "CFE_OUTLINE",
+                "value": "CFM_MASK.CFM_OUTLINE"
+            },
+            {
+                "name": "CFE_REVISED",
+                "value": "CFM_MASK.CFM_REVISED"
+            },
+            {
+                "name": "CFE_SHADOW",
+                "value": "CFM_MASK.CFM_SHADOW"
+            },
+            {
+              "name": "CFE_SMALLCAPS",
+              "value": "CFM_MASK.CFM_SMALLCAPS"
+            }
+        ],
+        "autoPopulate":
+        {
+            "filter": "CFE_",
+            "header": "Richedit.h"
+        }
+    },
+    {
+        "name": "CFE_UNDERLINE",
+        "flags": true,
+        "autoPopulate":
+        {
+            "filter": "CFU_",
+            "header": "Richedit.h"
+        }
+    },
+    {
+        "name": "BCRYPT_OPERATION",
+        "flags": true,
+        "members": [
+            {
+                "name": "BCRYPT_CIPHER_OPERATION",
+                "value": 1
+            },
+            {
+                "name": "BCRYPT_HASH_OPERATION",
+                "value": 2
+            },
+            {
+                "name": "BCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION",
+                "value": 4
+            },
+            {
+                "name": "BCRYPT_SECRET_AGREEMENT_OPERATION",
+                "value": 8
+            },
+            {
+                "name": "BCRYPT_SIGNATURE_OPERATION",
+                "value": 16
+            },
+            {
+                "name": "BCRYPT_RNG_OPERATION",
+                "value": 32
+            }
+        ],
+        "uses": [
+            {
+                "method": "BCryptEnumAlgorithms",
+                "parameter": "dwAlgOperations"
+            }
+        ]
+    },
+    {
+        "name": "NCRYPT_OPERATION",
+        "flags": true,
+        "finished": true,
+        "members": [
+          {
+            "name": "NCRYPT_CIPHER_OPERATION",
+            "value": 1
+          },
+          {
+            "name": "NCRYPT_HASH_OPERATION",
+            "value": 2
+          },
+          {
+            "name": "NCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION",
+            "value": 4
+          },
+          {
+            "name": "NCRYPT_SECRET_AGREEMENT_OPERATION",
+            "value": 8
+          },
+          {
+            "name": "NCRYPT_SIGNATURE_OPERATION",
+            "value": 16
+          }
+        ],
+        "uses": [
+          {
+            "method": "NCryptEnumAlgorithms",
+            "parameter": "dwAlgOperations"
+          }
+        ]
+    },
+    {
+        "name": "IGP_ID",
+        "flags": false,
+        "members": [
+          {
+            "name": "IGP_GETIMEVERSION",
+            "value": "unchecked((uint)-4)"
+          }
+        ],
+        "autoPopulate":
+          {
+              "filter": "IGP_",
+              "header": "imm.h"
+          }
+    },
+    {
+        "name": "MENU_ITEM_TYPE",
+        "flags": true,
+        "finished": true,
+        "members": [
+            {
+              "name": "MFT_BITMAP",
+              "value": "MENU_FLAGS.MF_BITMAP"
+            },
+            {
+              "name": "MFT_MENUBARBREAK",
+              "value": "MENU_FLAGS.MF_MENUBARBREAK"
+            },
+            {
+              "name": "MFT_MENUBREAK",
+              "value": "MENU_FLAGS.MF_MENUBREAK"
+            },
+            {
+              "name": "MFT_OWNERDRAW",
+              "value": "MENU_FLAGS.MF_OWNERDRAW"
+            },
+            {
+              "name": "MFT_RADIOCHECK",
+              "value": "0x00000200"
+            },
+            {
+              "name": "MFT_RIGHTJUSTIFY",
+              "value": "MENU_FLAGS.MF_RIGHTJUSTIFY"
+            },
+            {
+              "name": "MFT_RIGHTORDER",
+              "value": "0x00002000"
+            },
+            {
+              "name": "MFT_SEPARATOR",
+              "value": "MENU_FLAGS.MF_SEPARATOR"
+            },
+            {
+              "name": "MFT_STRING",
+              "value": "MENU_FLAGS.MF_STRING"
+            }
+          ]
+    },
+    {
+        "name": "DDE_ENABLE_CALLBACK_CMD",
+        "flags": false,
+        "members": [
+          {
+            "name": "EC_ENABLEALL",
+            "value": 0
+          },
+          {
+            "name": "EC_ENABLEONE",
+            "value": 128
+          },
+          {
+            "name": "EC_DISABLE",
+            "value": 8
+          },
+          {
+            "name": "EC_QUERYWAITING",
+            "value": 2
+          }
+        ],
+        "uses": [
+          {
+            "method": "DdeEnableCallback",
+            "parameter": "wCmd"
+          }
+        ]
+    },
+    {
+        "name": "PFM_FLAGS",
+        "flags": true,
+        "members": [
+          {
+            "name": "IGP_GETIMEVERSION",
+            "value": "unchecked((uint)-4)"
+          }
+        ],
+        "autoPopulate":
+          {
+              "filter": "PFM_",
+              "header": "imm.h"
+          }
+    },
+    {
+        "name": "PARAFORMAT_MASK",
+        "flags": true,
+        "members": [
+          {
+            "name": "PFM_ALIGNMENT"
+          },
+          {
+            "name": "PFM_NUMBERING"
+          },
+          {
+            "name": "PFM_OFFSET"
+          },
+          {
+            "name": "PFM_OFFSETINDENT"
+          },
+          {
+            "name": "PFM_RIGHTINDENT"
+          },
+          {
+            "name": "PFM_RTLPARA"
+          },
+          {
+            "name": "PFM_STARTINDENT"
+          },
+          {
+            "name": "PFM_TABSTOPS"
+          }
+        ],
+        "uses": [
+          {
+            "struct": "PARAFORMAT",
+            "field": "dwMask"
+          }
+        ]
+    },
+    {
+        "name": "PARAFORMAT2_MASK",
+        "flags": true,
+        "members": [
+          {
+            "name": "PFM_DONOTHYPHEN"
+          },
+          {
+            "name": "PFM_EFFECTS"
+          },
+          {
+            "name": "PFM_KEEP"
+          },
+          {
+            "name": "PFM_KEEPNEXT"
+          },
+          {
+            "name": "PFM_NOLINENUMBER"
+          },
+          {
+            "name": "PFM_NOWIDOWCONTROL"
+          },
+          {
+            "name": "PFM_PAGEBREAKBEFORE"
+          },
+          {
+            "name": "PFM_RTLPARA"
+          },
+          {
+            "name": "PFM_SIDEBYSIDE"
+          },
+          {
+            "name": "PFM_TABLE"
+          },
+          {
+            "name": "PFM_TABLEROWDELIMITER"
+          }
+        ],
+        "uses": [
+          {
+            "struct": "PARAFORMAT2",
+            "field": "dwMask"
+          }
+        ]
+    },
+    {
+        "name": "DRAGLISTINFO_NOTIFICATION_FLAGS",
+        "flags": false,
+        "members": [
+          {
+            "name": "DL_BEGINDRAG",
+            "value": "Windows.Win32.WindowsAndMessaging.Apis.WM_USER + 133"
+          },
+          {
+            "name": "DL_CANCELDRAG",
+            "value": "Windows.Win32.WindowsAndMessaging.Apis.WM_USER + 136"
+          },
+          {
+            "name": "DL_DRAGGING",
+            "value": "Windows.Win32.WindowsAndMessaging.Apis.WM_USER + 134"
+          },
+          {
+            "name": "DL_DROPPED",
+            "value": "Windows.Win32.WindowsAndMessaging.Apis.WM_USER + 135"
+          }
+        ],
+        "uses": [
+          {
+            "struct": "DRAGLISTINFO",
+            "field": "uNotification"
+          }
+        ]
+    },
+    {
+        "name": "PARAFORMAT2_EFFECTS",
+        "flags": true,
+        "members": [
+          {
+            "name": "PFE_DONOTHYPHEN",
+            "value": "(PARAFORMAT_MASK.PFM_DONOTHYPHEN >> 16)"
+          },
+          {
+            "name": "PFE_KEEP",
+            "value": "(PARAFORMAT_MASK.PFM_KEEP >> 16)"
+          },
+          {
+            "name": "PFE_KEEPNEXT",
+            "value": "(PARAFORMAT_MASK.PFM_KEEPNEXT >> 16)"
+          },
+          {
+            "name": "PFE_NOLINENUMBER",
+            "value": "(PARAFORMAT_MASK.PFM_NOLINENUMBER >> 16)"
+          },
+          {
+            "name": "PFE_NOWIDOWCONTROL",
+            "value": "(PARAFORMAT_MASK.PFM_NOWIDOWCONTROL >> 16)"
+          },
+          {
+            "name": "PFE_PAGEBREAKBEFORE",
+            "value": "(PARAFORMAT_MASK.PFM_PAGEBREAKBEFORE >> 16)"
+          },
+          {
+            "name": "PFE_RTLPARA",
+            "value": "(PARAFORMAT_MASK.PFM_RTLPARA >> 16)"
+          },
+          {
+            "name": "PFE_SIDEBYSIDE",
+            "value": "(PARAFORMAT_MASK.PFM_SIDEBYSIDE >> 16)"
+          },
+          {
+            "name": "PFE_TABLE",
+            "value": "(PARAFORMAT_MASK.PFM_TABLE >> 16)"
+          },
+          {
+            "name": "PFE_TABLEROWDELIMITER",
+            "value": "(PARAFORMAT_MASK.PFM_TABLEROWDELIMITER >> 16)"
+          }
+        ],
+        "uses": [
+          {
+            "struct": "PARAFORMAT2",
+            "field": "wEffects"
+          }
+        ]
+    },
+    {
+        "name": "SECTION_FLAGS",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "SECTION_",
+              "header": "winnt.h"
+          }
+    },
+    {
+        "name": "FILE_MAP",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "FILE_MAP_",
+              "header": "memoryapi.h"
+          },
+        "members": [
+          {
+             "name": "FILE_MAP_WRITE",
+             "value": "SECTION_FLAGS.SECTION_MAP_WRITE"
+          },
+          {
+            "name": "FILE_MAP_READ",
+            "value": "SECTION_FLAGS.SECTION_MAP_READ"
+         },
+         {
+            "name": "FILE_MAP_ALL_ACCESS",
+            "value": "SECTION_FLAGS.SECTION_ALL_ACCESS"
+         },
+         {
+            "name": "FILE_MAP_EXECUTE",
+            "value": "SECTION_FLAGS.SECTION_MAP_EXECUTE_EXPLICIT"
+         }
+        ]
+    },
+    {
+        "name": "UPDFCACHE_FLAGS",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "UPDFCACHE_",
+              "header": "oleidl.h"
+          },
+        "members": [
+          {
+             "name": "UPDFCACHE_ALL",
+             "value": "~UPDFCACHE_ONLYIFBLANK"
+          },
+          {
+            "name": "UPDFCACHE_ALLBUTNODATACACHE",
+            "value": "UPDFCACHE_ALL & ~UPDFCACHE_NODATACACHE"
+          }
+       ]
+    },
+    {
+        "name": "THREAD_PRIORITY",
+        "flags": false,
+        "type": "int",
+        "members": [
+          {
+            "name": "THREAD_MODE_BACKGROUND_BEGIN",
+            "value": 65536
+          }
+        ]
+    },
+    {
+        "name": "GPT_ATTRIBUTES",
+        "flags": true,
+        "type": "ulong",
+        "autoPopulate":
+          {
+              "filter": "GPT_ATTRIBUTE_|GPT_BASIC_DATA_ATTRIBUTE_",
+              "header": "ntdisk.h"
+          },
+        "members": [
+          {
+            "name": "GPT_ATTRIBUTE_PLATFORM_REQUIRED",
+            "value": 1
+          }
+        ]
+    },
+    {
+        "name": "CERT_FIND_FLAGS",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "CERT_FIND_",
+              "header": "wincrypt.h"
+          },
+        "members": [
+          {
+            "name": "CERT_FIND_ANY"
+          }
+        ]
+    },
+    {
+        "name": "CERT_QUERY_FLAGS",
+        "flags": true,
+        "type": "int",
+        "autoPopulate":
+          {
+              "filter": "CERT_QUERY_CONTENT_",
+              "header": "wincrypt.h"
+          },
+        "members": [
+          {
+            "name": "CERT_QUERY_CONTENT_FLAG_ALL"
+          }
+        ]
+    },
+    {
+        "name": "CERT_QUERY_FORMAT_TYPE",
+        "flags": false,
+        "members": [
+          {
+            "name": "CERT_QUERY_FORMAT_ASN_ASCII_HEX_ENCODED"
+          },
+          {
+            "name": "CERT_QUERY_FORMAT_BASE64_ENCODED"
+          },
+          {
+            "name": "CERT_QUERY_FORMAT_BINARY"
+          }
+        ]
+    },
+    {
+        "name": "VER_MASK",
+        "flags": true,
+        "members": [
+            {
+              "name": "VER_BUILDNUMBER",
+              "value": 4
+            },
+            {
+              "name": "VER_MAJORVERSION",
+              "value": 2
+            },
+            {
+              "name": "VER_MINORVERSION",
+              "value": 1
+            },
+            {
+              "name": "VER_PLATFORMID",
+              "value": 8
+            },
+            {
+              "name": "VER_PRODUCT_TYPE",
+              "value": 128
+            },
+            {
+              "name": "VER_SERVICEPACKMAJOR",
+              "value": 32
+            },
+            {
+              "name": "VER_SERVICEPACKMINOR",
+              "value": 16
+            },
+            {
+              "name": "VER_SUITENAME",
+              "value": 64
+            }
+          ],
+          "uses": [
+            {
+              "method": "VerSetConditionMask",
+              "parameter": "TypeMask"
+            }
+        ]
+    },
+    {
+        "name": "CERT_QUERY_FORMAT_FLAGS",
+        "flags": true,
+        "autoPopulate":
+          {
+              "filter": "CERT_QUERY_FORMAT_FLAG_",
+              "header": "wincrypt.h"
+          },
+        "members": [
+          {
+            "name": "CERT_QUERY_FORMAT_FLAG_ASN_ASCII_HEX_ENCODED",
+            "value": "( 1 << (int)CERT_QUERY_FORMAT_TYPE.CERT_QUERY_FORMAT_ASN_ASCII_HEX_ENCODED)"
+          },
+          {
+            "name": "CERT_QUERY_FORMAT_FLAG_BASE64_ENCODED",
+            "value": "( 1 << (int)CERT_QUERY_FORMAT_TYPE.CERT_QUERY_FORMAT_BASE64_ENCODED)"
+          },
+          {
+            "name": "CERT_QUERY_FORMAT_FLAG_BINARY",
+            "value": "( 1 << (int)CERT_QUERY_FORMAT_TYPE.CERT_QUERY_FORMAT_BINARY)"
+          }
+        ]
+    }
+]

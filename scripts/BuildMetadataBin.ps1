@@ -11,6 +11,11 @@ if (!$assemblyVersion)
     $assemblyVersion = $defaultWinSDKNugetVersion
 }
 
+$constantsScraperPath = "$sourcesDir\ConstantsScraper"
+$constantsScraperProj = "$constantsScraperPath\ConstantsScraper.csproj"
+$constantsScraperPathBin = "$constantsScraperPath\bin\Release\netcoreapp3.1\ConstantsScraper.dll"
+& dotnet build $constantsScraperProj -c Release
+
 $clangSharpSourceToWinmdPath = "$sourcesDir\ClangSharpSourceToWinmd"
 $clangSharpSourceToWinmdProj = "$clangSharpSourceToWinmdPath\ClangSharpSourceToWinmd.csproj"
 $clangSharpSourceToWinmdBin = "$clangSharpSourceToWinmdPath\bin\Release\netcoreapp3.1\ClangSharpSourceToWinmd.dll"
@@ -24,11 +29,22 @@ $metadataInteropBin = "$metadataInteropPath\bin\Release\netstandard2.1\Windows.W
 Copy-Item $metadataInteropBin $binDir
 
 $remapFileName = "$emitterDir\remap.rsp"
+$enumsRemapFileName = "$emitterDir\generated\enumsRemap.rsp"
 $autoTypesFileName = "$emitterDir\autoTypes.rsp"
 $requiredNamespacesForNames = "$emitterDir\requiredNamespacesForNames.rsp"
 
+$constantsScraperRsp = "$scraperDir\ConstantsScraper.rsp"
+$manualEnumsJson = "$scraperDir\manualEnums.json"
+$enumsJson = "$scraperDir\enums.json"
+
+Write-Output "`n"
+Write-Output "Scraping constants and enums..."
+Write-Output "Calling: dotnet $constantsScraperPathBin --repoRoot rootDir --enumsJson $manualEnumsJson --enumsJson $enumsJson @$constantsScraperRsp @$requiredNamespacesForNames @$remapFileName"
+
+& dotnet $constantsScraperPathBin --repoRoot $rootDir --enumsJson $manualEnumsJson --enumsJson $enumsJson @$constantsScraperRsp @$requiredNamespacesForNames @$remapFileName
+
 Write-Output "`n"
 Write-Output "Creating $outputWinmdFileName..."
-Write-Output "Calling: dotnet $clangSharpSourceToWinmdBin --sourceDir $emitterDir --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName @$requiredNamespacesForNames @$autoTypesFileName"
+Write-Output "Calling: dotnet $clangSharpSourceToWinmdBin --sourceDir $emitterDir --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName @$requiredNamespacesForNames @$autoTypesFileName @$enumsRemapFileName"
 
-& dotnet $clangSharpSourceToWinmdBin --sourceDir $emitterDir --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName @$requiredNamespacesForNames @$autoTypesFileName
+& dotnet $clangSharpSourceToWinmdBin --sourceDir $emitterDir --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName @$requiredNamespacesForNames @$autoTypesFileName @$enumsRemapFileName

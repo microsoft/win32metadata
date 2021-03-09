@@ -10,7 +10,7 @@
     },
     "showDuplicateTypes": {
       "commandName": "Project",
-      "commandLineArgs": "showDuplicateTypes --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd"
+      "commandLineArgs": "showDuplicateConstants --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd"
     }
   }
 }

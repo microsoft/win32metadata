@@ -28,7 +28,6 @@ _DL_EUI48
 <IncludeRoot>/um/winsock.h
 <IncludeRoot>/um/NspAPI.h
 <IncludeRoot>/um/WS2tcpip.h
-<IncludeRoot>/um/wsipv6ok.h
 <IncludeRoot>/um/socketapi.h
 <IncludeRoot>/um/SpOrder.h
 --namespace

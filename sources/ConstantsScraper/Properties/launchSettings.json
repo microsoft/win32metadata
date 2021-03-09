@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ConstantScraper": {
+      "commandName": "Project",
+      "commandLineArgs": "--repoRoot $(ProjectDir)..\\.. --enumsJson $(ProjectDir)..\\..\\generation\\scraper\\manualEnums.json --enumsJson $(ProjectDir)..\\..\\generation\\scraper\\enums.json @$(ProjectDir)..\\..\\generation\\scraper\\ConstantScraper.rsp @$(ProjectDir)..\\..\\generation\\emitter\\requiredNamespacesForNames.rsp @$(ProjectDir)..\\..\\generation\\emitter\\remap.rsp"
+    }
+  }
+}

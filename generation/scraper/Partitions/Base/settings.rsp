@@ -73,9 +73,9 @@ LoadPackagedLibrary
 <IncludeRoot>/um/vsmgmt.h
 <IncludeRoot>/um/vsadmin.h
 <IncludeRoot>/um/vsprov.h
-<IncludeRoot>/um/devpkey.h
 <IncludeRoot>/um/devpropdef.h
 <IncludeRoot>/um/dispatcherqueue.h
 <IncludeRoot>/um/libloaderapi.h
+<IncludeRoot>/shared/winerror.h
 --namespace
 Windows.Win32.SystemServices
