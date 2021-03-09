@@ -33071,3 +33071,4 @@ STGMEDIUM_UserSize64=Windows.Win32.Automation
 STGMEDIUM_UserMarshal64=Windows.Win32.Automation
 STGMEDIUM_UserUnmarshal64=Windows.Win32.Automation
 STGMEDIUM_UserFree64=Windows.Win32.Automation
+DXGI_ERROR_*=Windows.Win32.Dxgi

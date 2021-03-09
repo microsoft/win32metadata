@@ -34,7 +34,7 @@ namespace PartitionUtilsLib
 
             private Dictionary<string, EnumWriter> namespacesToEnumWriters = new Dictionary<string, EnumWriter>();
             private Dictionary<string, ConstantWriter> namespacesToConstantWriters = new Dictionary<string, ConstantWriter>();
-            private Dictionary<string, string> requiredNamespaces;
+            private WildcardDictionary requiredNamespaces;
             private Dictionary<string, string> writtenConstants = new Dictionary<string, string>();
             private string repoRoot;
 
@@ -56,7 +56,7 @@ namespace PartitionUtilsLib
                 Dictionary<string, string> withTypes,
                 Dictionary<string, string> renames)
             {
-                this.requiredNamespaces = requiredNamespaces;
+                this.requiredNamespaces = new WildcardDictionary(requiredNamespaces);
                 this.withTypes = withTypes;
 
                 this.repoRoot = Path.GetFullPath(repoRoot);

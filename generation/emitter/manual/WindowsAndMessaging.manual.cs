@@ -4,6 +4,42 @@ using Windows.Win32.Interop;
 
 namespace Windows.Win32.WindowsAndMessaging
 {
+    public static unsafe partial class Apis
+    {
+        [NativeTypeName("HBITMAP")]
+        public const int HBMMENU_CALLBACK = -1;
+
+        [NativeTypeName("HBITMAP")]
+        public const int HBMMENU_SYSTEM = 1;
+
+        [NativeTypeName("HBITMAP")]
+        public const int HBMMENU_MBAR_RESTORE    = 2;
+
+        [NativeTypeName("HBITMAP")]
+        public const int HBMMENU_MBAR_MINIMIZE   = 3;
+
+        [NativeTypeName("HBITMAP")]
+        public const int HBMMENU_MBAR_CLOSE      = 5;
+
+        [NativeTypeName("HBITMAP")]
+        public const int HBMMENU_MBAR_CLOSE_D    = 6;
+
+        [NativeTypeName("HBITMAP")]
+        public const int HBMMENU_MBAR_MINIMIZE_D = 7;
+
+        [NativeTypeName("HBITMAP")]
+        public const int HBMMENU_POPUP_CLOSE     = 8;
+
+        [NativeTypeName("HBITMAP")]
+        public const int HBMMENU_POPUP_RESTORE   = 9;
+
+        [NativeTypeName("HBITMAP")]
+        public const int HBMMENU_POPUP_MAXIMIZE  = 10;
+
+        [NativeTypeName("HBITMAP")]
+        public const int HBMMENU_POPUP_MINIMIZE = 11;
+    }
+
     [UnmanagedFunctionPointer]
     [return: NativeTypeName("BOOL")]
     public unsafe delegate int WINSTAENUMPROCA([NativeTypeName("LPSTR")] sbyte* param0, [NativeTypeName("LPARAM")] IntPtr param1);

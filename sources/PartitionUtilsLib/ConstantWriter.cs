@@ -20,16 +20,27 @@ namespace PartitionUtilsLib
             this.namesToValues["FALSE"] = "0";
         }
 
+        private StreamWriter Writer
+        {
+            get
+            {
+                if (this.writer == null)
+                {
+                    this.EnsureStarted();
+                }
+
+                return this.writer;
+            }
+        }
+
         public void AddValue(string type, string name, string valueText)
         {
-            this.EnsureStarted();
-
             this.namesToValues[name] = valueText;
 
-            this.writer.WriteLine(
+            this.Writer.WriteLine(
 $"        public const {type} {name} = {valueText};");
 
-            this.writer.WriteLine();
+            this.Writer.WriteLine();
         }
 
         public static string FixIntValueText(bool forceUnsigned, ref string type, string valueText)
@@ -115,7 +126,7 @@ $"        public const {type} {name} = {valueText};");
 
             if (nativeTypeName != null)
             {
-                this.writer.WriteLine(
+                this.Writer.WriteLine(
 $"        [NativeTypeName(\"{nativeTypeName}\")]");
             }
 
