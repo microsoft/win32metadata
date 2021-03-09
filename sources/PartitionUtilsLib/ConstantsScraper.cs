@@ -39,6 +39,7 @@ namespace PartitionUtilsLib
             private string repoRoot;
 
             private List<EnumObject> enumObjectsFromJsons;
+            private Dictionary<string, string> withTypes;
 
             private Dictionary<string, List<EnumObject>> enumMemberNameToEnumObj;
 
@@ -56,12 +57,13 @@ namespace PartitionUtilsLib
                 Dictionary<string, string> renames)
             {
                 this.requiredNamespaces = requiredNamespaces;
+                this.withTypes = withTypes;
 
                 this.repoRoot = Path.GetFullPath(repoRoot);
 
                 this.LoadEnumObjectsFromJsonFiles(enumJsonFiles);
 
-                this.ScrapeConstantsFromTraversedFiles(exclusionNamesToPartitions, withTypes);
+                this.ScrapeConstantsFromTraversedFiles(exclusionNamesToPartitions);
 
                 this.WriteEnumsAndRemaps(remaps, renames);
             }
@@ -200,6 +202,20 @@ namespace PartitionUtilsLib
                 return rawValue;
             }
 
+            private string GetForcedTypeForName(string name)
+            {
+                // Make all error codes uint to match GetLastError even though they're defined as signed
+                // in winerror.h
+                if (name.StartsWith("ERROR_"))
+                {
+                    return "uint";
+                }
+
+                this.withTypes.TryGetValue(name, out string forceType);
+
+                return forceType;
+            }
+
             private void AddConstantValue(string originalNamespace, string type, string name, string valueText)
             {
                 if (this.writtenConstants.ContainsKey(name))
@@ -213,15 +229,17 @@ namespace PartitionUtilsLib
                 this.writtenConstants[name] = valueText;
             }
 
-            private void AddConstantInteger(string originalNamespace, string forceType, string nativeTypeName, string name, string valueText)
+            private void AddConstantInteger(string originalNamespace, string nativeTypeName, string name, string valueText)
             {
                 if (this.writtenConstants.ContainsKey(name))
                 {
                     return;
                 }
 
+                string forcedType = nativeTypeName != null ? null : this.GetForcedTypeForName(name);
+
                 var writer = this.GetConstantWriter(originalNamespace, name);
-                writer.AddInt(forceType, nativeTypeName, name, valueText);
+                writer.AddInt(forcedType, nativeTypeName, name, valueText);
 
                 this.writtenConstants[name] = valueText;
             }
@@ -273,8 +291,7 @@ namespace PartitionUtilsLib
             }
 
             private void ScrapeConstantsFromTraversedFiles(
-                Dictionary<string, string> exclusionNamesToPartitions,
-                Dictionary<string, string> withTypes)
+                Dictionary<string, string> exclusionNamesToPartitions)
             {
                 var autoReplacements = GetAutoValueReplacements();
 
@@ -430,7 +447,7 @@ namespace PartitionUtilsLib
                                 {
                                     nativeTypeName = "LPCWSTR";
                                     valueText = match.Groups[12].Value;
-                                    this.AddConstantInteger(currentNamespace, null, nativeTypeName, name, valueText);
+                                    this.AddConstantInteger(currentNamespace, nativeTypeName, name, valueText);
                                     continue;
                                 }
                                 // (HWND)-4
@@ -438,7 +455,7 @@ namespace PartitionUtilsLib
                                 {
                                     nativeTypeName = "HWND";
                                     valueText = match.Groups[14].Value;
-                                    this.AddConstantInteger(currentNamespace, null, nativeTypeName, name, valueText);
+                                    this.AddConstantInteger(currentNamespace, nativeTypeName, name, valueText);
                                     continue;
                                 }
                                 else
@@ -511,9 +528,7 @@ namespace PartitionUtilsLib
                             // ...unless it's an HRESULT or error code. Always emit them as constants too
                             if (match.Success && (!updatedEnum || nativeTypeName != null || name.StartsWith("ERROR_")))
                             {
-                                withTypes.TryGetValue(name, out var forceType);
-
-                                this.AddConstantInteger(currentNamespace, forceType, nativeTypeName, name, valueText);
+                                this.AddConstantInteger(currentNamespace, nativeTypeName, name, valueText);
                             }
                         }
                     }
