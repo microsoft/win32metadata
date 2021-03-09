@@ -223,3 +223,5 @@ RegOpenKeyTransactedA::dwOptions=REG_OPEN_CREATE_OPTIONS
 RegOpenKeyTransactedA::samDesired=REG_SAM_FLAGS
 RegOpenKeyTransactedW::dwOptions=REG_OPEN_CREATE_OPTIONS
 RegOpenKeyTransactedW::samDesired=REG_SAM_FLAGS
+VALENTA::ve_type=REG_VALUE_TYPE
+VALENTW::ve_type=REG_VALUE_TYPE
