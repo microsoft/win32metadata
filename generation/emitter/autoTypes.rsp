@@ -82,7 +82,7 @@ Windows.Win32.Controls,HIMAGELIST,IntPtr,ImageList_Destroy
 Windows.Win32.WindowsNetworking,NetEnumHandle,IntPtr,WNetCloseEnum
 Windows.Win32.Security,HCRYPTASYNC,IntPtr,CryptCloseAsyncHandle
 Windows.Win32.Security,HCERTCHAINENGINE,IntPtr,CertFreeCertificateChainEngine
-Windows.Win32.SystemServices, HPOWERNOTIFY, IntPtr, UnregisterPowerSettingNotification
+Windows.Win32.SystemServices,HPOWERNOTIFY,IntPtr,UnregisterPowerSettingNotification
 Windows.Win32.Security,LsaHandle,IntPtr,LsaDeregisterLogonProcess
 Windows.Win32.Perf,PerfProviderHandle,IntPtr,PerfStopProvider
 Windows.Win32.Perf,PerfQueryHandle,IntPtr,PerfCloseQueryHandle
