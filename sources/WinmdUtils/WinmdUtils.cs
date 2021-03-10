@@ -51,6 +51,40 @@ namespace WinmdUtils
             }
         }
 
+        public IEnumerable<ConstInfo> GetConstants()
+        {
+            foreach (var typeDefHandle in this.metadataReader.TypeDefinitions)
+            {
+                var typeDef = this.metadataReader.GetTypeDefinition(typeDefHandle);
+
+                if (typeDef.IsNested)
+                {
+                    continue;
+                }
+
+                var name = this.metadataReader.GetString(typeDef.Name);
+
+                if (name != "Apis")
+                {
+                    continue;
+                }
+
+                var ns = this.metadataReader.GetString(typeDef.Namespace);
+                var fields = typeDef.GetFields();
+                foreach (var handle in fields)
+                {
+                    var fieldDef = this.metadataReader.GetFieldDefinition(handle);
+                    if (fieldDef.Attributes.HasFlag(System.Reflection.FieldAttributes.Static | System.Reflection.FieldAttributes.Literal))
+                    {
+                        var constantHandle = fieldDef.GetDefaultValue();
+                        var constant = this.metadataReader.GetConstant(constantHandle);
+                        string fieldName = metadataReader.GetString(fieldDef.Name);
+                        yield return new ConstInfo(ns, fieldName, constant.TypeCode);
+                    }
+                }
+            }
+        }
+
         public IEnumerable<TypeInfo> GetTypes()
         {
             foreach (var typeDefHandle in this.metadataReader.TypeDefinitions)
@@ -58,6 +92,11 @@ namespace WinmdUtils
                 var typeDef = this.metadataReader.GetTypeDefinition(typeDefHandle);
                 var name = this.metadataReader.GetString(typeDef.Name);
                 var ns = this.metadataReader.GetString(typeDef.Namespace);
+
+                if (typeDef.IsNested)
+                {
+                    continue;
+                }
 
                 if (name == "Apis")
                 {
@@ -109,11 +148,6 @@ namespace WinmdUtils
                     }
                 }
 
-                if (typeDef.IsNested)
-                {
-                    continue;
-                }
-
                 yield return new TypeInfo(ns, name);
             }
         }
@@ -130,6 +164,22 @@ namespace WinmdUtils
         public string Namespace { get; private set; }
 
         public string Name { get; private set; }
+    }
+
+    public class ConstInfo
+    {
+        public ConstInfo(string @namespace, string name, ConstantTypeCode typeCode)
+        {
+            this.Namespace = @namespace;
+            this.Name = name;
+            this.ConstantTypeCode = typeCode;
+        }
+
+        public string Namespace { get; private set; }
+
+        public string Name { get; private set; }
+
+        public ConstantTypeCode ConstantTypeCode { get; private set; }
     }
 
     public class DllImport

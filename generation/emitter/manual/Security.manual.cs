@@ -39,4 +39,10 @@ namespace Windows.Win32.Security
         CREDUIWIN_PREPROMPTING = 0X00002000,
         CREDUIWIN_PACK_32_WOW = 0x10000000
     }
+
+    public static unsafe partial class Apis
+    {
+        // Has to be int so it can be used in a shift
+        public const int CERT_COMPARE_SHIFT = 16;
+    }
 }

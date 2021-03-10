@@ -21,7 +21,6 @@ _GUID
 <IncludeRoot>/um/ole2.h
 <IncludeRoot>/um/OleDlg.h
 <IncludeRoot>/um/urlmon.h
-<IncludeRoot>/shared/winerror.h
 <IncludeRoot>/um/combaseapi.h
 <IncludeRoot>/um/ObjIdlbase.h
 <IncludeRoot>/um/callobj.h
