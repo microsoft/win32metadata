@@ -13,9 +13,14 @@ namespace PartitionUtilsLib
             Dictionary<string, int> names = new Dictionary<string, int>();
             foreach (var obj in objects)
             {
-                if (obj.members.Count > 0 && obj.members[0].name == "TRUE")
+                // Weed out enums that are based on error codes
+                if (obj.members.Count > 0)
                 {
-                    continue;
+                    string firstName = obj.members[0].name;
+                    if (firstName == "TRUE" || firstName == "S_OK" || firstName.StartsWith("ERROR_"))
+                    {
+                        continue;
+                    }
                 }
 
                 var fixedObj = Normalize(obj);
