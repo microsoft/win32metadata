@@ -33,14 +33,66 @@ namespace WinmdUtils
 
             showDuplicateTypes.Handler = CommandHandler.Create<FileInfo, IConsole>(ShowDuplicateTypes);
 
+            var showDuplicateConstants = new Command("showDuplicateConstants", "Show duplicate constants in a single winmd files.")
+            {
+                new Option(new[] { "--winmd" }, "The winmd to inspect.") { Argument = new Argument<FileInfo>().ExistingOnly(), IsRequired = true },
+            };
+
+            showDuplicateConstants.Handler = CommandHandler.Create<FileInfo, IConsole>(ShowDuplicateConstants);
+
             var rootCommand = new RootCommand("Win32metadata winmd utils")
             {
                 showMissingImportsCommand,
                 showDuplicateImports,
-                showDuplicateTypes
+                showDuplicateTypes,
+                showDuplicateConstants
             };
 
             return rootCommand.Invoke(args);
+        }
+
+        public static int ShowDuplicateConstants(FileInfo winmd, IConsole console)
+        {
+            using WinmdUtils w1 = WinmdUtils.LoadFromFile(winmd.FullName);
+            Dictionary<string, List<string>> nameToNamespace = new Dictionary<string, List<string>>();
+            foreach (var constant in w1.GetConstants())
+            {
+                if (!nameToNamespace.TryGetValue(constant.Name, out var namespaces))
+                {
+                    namespaces = new List<string>();
+                    nameToNamespace[constant.Name] = namespaces;
+                }
+
+                namespaces.Add(constant.Namespace);
+            }
+
+            bool dupsFound = false;
+            foreach (var pair in nameToNamespace)
+            {
+                if (pair.Value.Count > 1)
+                {
+                    if (dupsFound == false)
+                    {
+                        dupsFound = true;
+                        console.Out.Write("Duplicate constants detected:\r\n");
+                    }
+
+                    pair.Value.Sort();
+
+                    console.Out.Write($"{pair.Key}\r\n");
+                    foreach (var @namespace in pair.Value)
+                    {
+                        console.Out.Write($"  {@namespace}\r\n");
+                    }
+                }
+            }
+
+            if (!dupsFound)
+            {
+                console.Out.Write("No duplicate constants found.\r\n");
+            }
+
+            return dupsFound ? -1 : 0;
         }
 
         public static int ShowDuplicateTypes(FileInfo winmd, IConsole console)

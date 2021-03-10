@@ -1,8 +1,8 @@
 {
   "profiles": {
     "ClangSharpSourceToWinmd": {
-        "commandName": "Project",
-        "commandLineArgs": "-s $(ProjectDir)..\\..\\generation\\emitter -i $(ProjectDir)..\\Win32MetadataInterop\\bin\\Debug\\netstandard2.1\\Windows.Win32.Interop.dll -o $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd -v 10.0.19041.5 @$(ProjectDir)..\\..\\generation\\emitter\\remap.rsp @$(ProjectDir)..\\..\\generation\\emitter\\requiredNamespacesForNames.rsp"
+      "commandName": "Project",
+      "commandLineArgs": "-s $(ProjectDir)..\\..\\generation\\emitter -i $(ProjectDir)..\\Win32MetadataInterop\\bin\\Debug\\netstandard2.1\\Windows.Win32.Interop.dll -o $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd -v 10.0.19041.5 @$(ProjectDir)..\\..\\generation\\emitter\\remap.rsp @$(ProjectDir)..\\..\\generation\\emitter\\requiredNamespacesForNames.rsp @$(ProjectDir)..\\..\\generation\\emitter\\generated\\enumRemaps.rsp"
     },
     "TestSource": {
       "commandName": "Project",

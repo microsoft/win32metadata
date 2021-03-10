@@ -177,4 +177,4 @@ steps:
     packagesToPush: '$(OutputPackagesDir)/**/*.nupkg;!$(OutputPackagesDir)/**/*.symbols.nupkg'
     publishVstsFeed: 'c1408dcb-1833-4ae4-9af5-1a891a12cc3c'
     allowPackageConflicts: true
-  condition: and(succeeded(), eq(variables.UsePreGeneratedSource, false))
+  

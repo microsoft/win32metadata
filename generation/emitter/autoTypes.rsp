@@ -203,3 +203,4 @@ Windows.Win32.AllJoyn,alljoyn_sessionlistener,AllJoynHandle
 Windows.Win32.AllJoyn,alljoyn_sessionopts,AllJoynHandle
 Windows.Win32.AllJoyn,alljoyn_sessionportlistener,AllJoynHandle
 Windows.Win32.SystemServices,HPCON,IntPtr,ClosePseudoConsole
+Windows.Win32.Controls,HTREEITEM,IntPtr
