@@ -1318,7 +1318,13 @@
           {
               "filter": "SECTION_",
               "header": "winnt.h"
+          },
+        "members": [
+          {
+             "name": "SECTION_ALL_ACCESS",
+             "value": "(Windows.Win32.FileSystem.FILE_ACCESS_FLAGS.STANDARD_RIGHTS_REQUIRED|SECTION_QUERY|SECTION_MAP_WRITE|SECTION_MAP_READ|SECTION_MAP_EXECUTE|SECTION_EXTEND_SIZE)"
           }
+        ]
     },
     {
         "name": "FILE_MAP",

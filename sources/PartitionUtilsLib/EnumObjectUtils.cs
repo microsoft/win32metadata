@@ -8,11 +8,16 @@ namespace PartitionUtilsLib
     {
         private static readonly Regex CamelCaseWordsRegex = new Regex(@"[A-Z][a-z]*");
 
-        public static IEnumerable<EnumObject> NormalizeEnumObjects(IEnumerable<EnumObject> objects)
+        public static IEnumerable<EnumObject> NormalizeEnumObjects(IEnumerable<EnumObject> objects, Dictionary<string, string> renames)
         {
             Dictionary<string, int> names = new Dictionary<string, int>();
             foreach (var obj in objects)
             {
+                if (obj.name != null && renames.TryGetValue(obj.name, out var newName))
+                {
+                    obj.name = newName;
+                }
+
                 // Weed out enums that are based on error codes
                 if (obj.members.Count > 0)
                 {

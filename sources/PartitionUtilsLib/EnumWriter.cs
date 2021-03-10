@@ -43,7 +43,7 @@ $"    [Flags]");
                 string valueText = ConstantWriter.FixIntValueText(forceUnsigned, ref currentType, member.value);
 
                 enumBodyWriter.Write(
-$@"        {member.name} = {valueText};
+$@"        {member.name} = {valueText},
 ");
                 // Make the type more specific if it's signed
                 if (currentType != type && (type != "int" && type != "long"))

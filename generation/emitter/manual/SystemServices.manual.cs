@@ -13,10 +13,6 @@ namespace Windows.Win32.SystemServices
         [NativeTypeName("HANDLE")]
         public const int INVALID_HANDLE_VALUE = -1;
 
-        public const uint STANDARD_RIGHTS_READ = READ_CONTROL;
-        public const uint STANDARD_RIGHTS_WRITE = READ_CONTROL;
-        public const uint STANDARD_RIGHTS_EXECUTE = READ_CONTROL;
-
         public const uint _MM_HINT_T0  = 1;
         public const uint _MM_HINT_T1  = 2;
         public const uint _MM_HINT_T2  = 3;

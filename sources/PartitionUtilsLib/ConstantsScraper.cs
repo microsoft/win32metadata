@@ -61,11 +61,11 @@ namespace PartitionUtilsLib
 
                 this.repoRoot = Path.GetFullPath(repoRoot);
 
-                this.LoadEnumObjectsFromJsonFiles(enumJsonFiles);
+                this.LoadEnumObjectsFromJsonFiles(enumJsonFiles, renames);
 
                 this.ScrapeConstantsFromTraversedFiles(exclusionNamesToPartitions);
 
-                this.WriteEnumsAndRemaps(remaps, renames);
+                this.WriteEnumsAndRemaps(remaps);
             }
 
             public void Dispose()
@@ -159,7 +159,7 @@ namespace PartitionUtilsLib
                 return enumMemberNameToEnumObj;
             }
 
-            private static List<EnumObject> LoadEnumsFromJsonFiles(string[] enumJsonFiles)
+            private static List<EnumObject> LoadEnumsFromJsonFiles(string[] enumJsonFiles, Dictionary<string, string> renames)
             {
                 List<EnumObject> enumObjects = new List<EnumObject>();
 
@@ -167,7 +167,7 @@ namespace PartitionUtilsLib
                 {
                     foreach (var enumJsonFile in enumJsonFiles)
                     {
-                        enumObjects.AddRange(EnumObjectUtils.NormalizeEnumObjects(EnumObject.LoadFromFile(enumJsonFile)));
+                        enumObjects.AddRange(EnumObjectUtils.NormalizeEnumObjects(EnumObject.LoadFromFile(enumJsonFile), renames));
                     }
                 }
 
@@ -267,6 +267,22 @@ namespace PartitionUtilsLib
                 return constantWriter;
             }
 
+            private HashSet<string> GetManualEnumMemberNames()
+            {
+                string manualSourceFiles = Path.Combine(repoRoot, $@"generation\emitter\manual");
+                List<EnumObject> enumObjectsFromManualSources = LoadEnumsFromSourceFiles(manualSourceFiles);
+                HashSet<string> manualEnumMemberNames = new HashSet<string>();
+                foreach (var obj in enumObjectsFromManualSources)
+                {
+                    foreach (var member in obj.members)
+                    {
+                        manualEnumMemberNames.Add(member.name);
+                    }
+                }
+
+                return manualEnumMemberNames;
+            }
+
             private HashSet<string> GetManualEnumNames()
             {
                 string manualSourceFiles = Path.Combine(repoRoot, $@"generation\emitter\manual");
@@ -280,10 +296,10 @@ namespace PartitionUtilsLib
                 return manualEnumNames;
             }
 
-            private void LoadEnumObjectsFromJsonFiles(string[] enumJsonFiles)
+            private void LoadEnumObjectsFromJsonFiles(string[] enumJsonFiles, Dictionary<string, string> renames)
             {
                 // Load the enums scraped from the docs
-                this.enumObjectsFromJsons = LoadEnumsFromJsonFiles(enumJsonFiles);
+                this.enumObjectsFromJsons = LoadEnumsFromJsonFiles(enumJsonFiles, renames);
 
                 // Load a map from member names to enum obj
                 // This will merge up and objects that share the same members
@@ -297,16 +313,11 @@ namespace PartitionUtilsLib
 
                 RepoInfo repoInfo = new RepoInfo(repoRoot);
 
+                HashSet<string> manualEnumMemberNames = GetManualEnumMemberNames();
+
                 // For each partition, scrape the constants
                 foreach (var partInfo in repoInfo.GetPartitionInfos())
                 {
-                    // File path to constants for the partition
-                    string partConstantsFile = Path.Combine(repoRoot, $@"generation\emitter\generated\{partInfo.Name}.constants.cs");
-                    if (File.Exists(partConstantsFile))
-                    {
-                        File.Delete(partConstantsFile);
-                    }
-
                     string currentNamespace = partInfo.Namespace;
 
                     // For each traversed header, scrape the constants
@@ -360,6 +371,11 @@ namespace PartitionUtilsLib
                             }
 
                             string name = defineMatch.Groups[1].Value;
+
+                            if (name == "REG_DWORD_BIG_ENDIAN")
+                            {
+
+                            }
 
                             // If it's in the exclusion list see if we should ignore it based on the
                             // current partition
@@ -528,7 +544,15 @@ namespace PartitionUtilsLib
                             // ...unless it's an HRESULT or error code. Always emit them as constants too
                             if (match.Success && (!updatedEnum || nativeTypeName != null || name.StartsWith("ERROR_")))
                             {
-                                this.AddConstantInteger(currentNamespace, nativeTypeName, name, valueText);
+                                // Only add the constant if it's not part of a manual enum
+                                if (!manualEnumMemberNames.Contains(name))
+                                {
+                                    this.AddConstantInteger(currentNamespace, nativeTypeName, name, valueText);
+                                }
+                                else
+                                {
+
+                                }
                             }
                         }
                     }
@@ -536,8 +560,7 @@ namespace PartitionUtilsLib
             }
 
             private void WriteEnumsAndRemaps(
-                Dictionary<string, string> remaps,
-                Dictionary<string, string> renames)
+                Dictionary<string, string> remaps)
             {
                 // Output the enums and the rsp entries that map parameters and fields to use
                 // enum names
@@ -551,9 +574,9 @@ namespace PartitionUtilsLib
                 // For each enum object...
                 foreach (var obj in enumObjectsFromJsons)
                 {
-                    if (renames.TryGetValue(obj.name, out var newName))
+                    if (obj.name.StartsWith("CREDUIWIN"))
                     {
-                        obj.name = newName;
+
                     }
 
                     // Skip if no members
@@ -604,61 +627,68 @@ namespace PartitionUtilsLib
                         foundNamespace = "Windows.Win32.SystemServices";
                     }
 
-                    // If the enum name didn't already exist in the manual enums, and (if the enum has uses or 
-                    // is an auto-populate), write the enum
-                    bool shouldWriteEnum =
-                        !manualEnumNames.Contains(obj.name) && (remapsToAdd.Count != 0 || obj.autoPopulate != null);
+                    bool existsAsManualEnum = manualEnumNames.TryGetValue(obj.name, out var objectForRemapName);
+                    bool addedEnum = false;
+                    var objectForRemap = obj;
 
-                    if (!shouldWriteEnum)
+                    // This assumes that the manual version is more reliable.
+                    if (!existsAsManualEnum)
                     {
-                        continue;
-                    }
+                        // If the enum doesn't have any remaps and isn't
+                        // an auto-poopulate, go to next object
+                        bool shouldWriteEnum = (remapsToAdd.Count != 0 || obj.autoPopulate != null);
 
-                    // Lookup the enum writer in the cache or add it if we can't find it
-                    if (!namespacesToEnumWriters.TryGetValue(foundNamespace, out var enumWriter))
-                    {
-                        string fixedNamespaceName = foundNamespace.Replace("Windows.Win32.", string.Empty);
-                        string enumFile = Path.Combine(repoRoot, $@"generation\emitter\generated\{fixedNamespaceName}.enums.cs");
-                        if (File.Exists(enumFile))
+                        if (!shouldWriteEnum)
                         {
-                            File.Delete(enumFile);
+                            continue;
                         }
 
-                        enumWriter = new EnumWriter(enumFile, foundNamespace);
-                        namespacesToEnumWriters.Add(foundNamespace, enumWriter);
-                    }
-
-                    EnumObject objectForRemap = obj;
-                    if (obj.autoPopulate == null)
-                    {
-                        foreach (var member in obj.members)
+                        // Lookup the enum writer in the cache or add it if we can't find it
+                        if (!namespacesToEnumWriters.TryGetValue(foundNamespace, out var enumWriter))
                         {
-                            if (enumMemberNameToEnumObj.TryGetValue(member.name, out var list))
+                            string fixedNamespaceName = foundNamespace.Replace("Windows.Win32.", string.Empty);
+                            string enumFile = Path.Combine(repoRoot, $@"generation\emitter\generated\{fixedNamespaceName}.enums.cs");
+                            if (File.Exists(enumFile))
                             {
-                                objectForRemap = list.Where(e => e.autoPopulate != null).FirstOrDefault();
-                                if (objectForRemap == null)
+                                File.Delete(enumFile);
+                            }
+
+                            enumWriter = new EnumWriter(enumFile, foundNamespace);
+                            namespacesToEnumWriters.Add(foundNamespace, enumWriter);
+                        }
+
+                        if (obj.autoPopulate == null)
+                        {
+                            foreach (var member in obj.members)
+                            {
+                                if (enumMemberNameToEnumObj.TryGetValue(member.name, out var list))
                                 {
-                                    objectForRemap = list.Where(e => e.members.Any(m => m.value != null)).FirstOrDefault();
+                                    objectForRemap = list.Where(e => e.autoPopulate != null).FirstOrDefault();
                                     if (objectForRemap == null)
                                     {
-                                        objectForRemap = obj;
+                                        objectForRemap = list.Where(e => e.members.Any(m => m.value != null)).FirstOrDefault();
+                                        if (objectForRemap == null)
+                                        {
+                                            objectForRemap = obj;
+                                        }
                                     }
-                                }
 
-                                break;
+                                    break;
+                                }
                             }
                         }
+
+                        if (obj == objectForRemap)
+                        {
+                            addedEnum = enumWriter.AddEnum(obj);
+                        }
                     }
-
-                    bool addedEnum = false;
-                    bool convergedToOtherObj = obj != objectForRemap;
-
-                    if (!convergedToOtherObj)
+                    else
                     {
-                        addedEnum = enumWriter.AddEnum(obj);
+
                     }
 
-                    if (addedEnum || convergedToOtherObj)
+                    if (addedEnum || existsAsManualEnum || obj != objectForRemap)
                     {
                         foreach (var remap in remapsToAdd)
                         {
