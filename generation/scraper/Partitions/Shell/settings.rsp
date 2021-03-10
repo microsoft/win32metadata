@@ -39,7 +39,6 @@ _NavigateToPidl=_NavigateToPidl2
 <IncludeRoot>/um/thumbnailstreamcache.h
 <IncludeRoot>/um/shdeprecated.h
 <IncludeRoot>/um/ImageTranscode.h
-<IncludeRoot>/shared/intsafe.h
 <IncludeRoot>/um/PathCch.h
 <IncludeRoot>/um/ScrnSave.h
 <IncludeRoot>/um/IntShCut.h

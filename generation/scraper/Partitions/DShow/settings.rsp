@@ -48,5 +48,6 @@
 <IncludeRoot>/um/austream.h
 <IncludeRoot>/um/ddstream.h
 <IncludeRoot>/um/mmstream.h
+<IncludeRoot>/um/vfwmsgs.h
 --namespace
 Windows.Win32.DirectShow

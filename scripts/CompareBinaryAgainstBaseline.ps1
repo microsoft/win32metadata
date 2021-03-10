@@ -67,3 +67,6 @@ Write-Output "`nLooking for duplicate types in $outputWinmdFileName..."
 Write-Output "Calling: dotnet $winmdUtilsPathBin showDuplicateTypes --winmd $winmdPath"
 & dotnet $winmdUtilsPathBin showDuplicateTypes --winmd $winmdPath
 
+Write-Output "`nLooking for duplicate constants in $outputWinmdFileName..."
+Write-Output "Calling: dotnet $winmdUtilsPathBin showDuplicateConstants --winmd $winmdPath"
+& dotnet $winmdUtilsPathBin showDuplicateConstants --winmd $winmdPath
