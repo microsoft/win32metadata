@@ -155,6 +155,12 @@ PowerShell Core is required to run the generation scripts. Open a PowerShell Cor
 2) BuildMetadataBin.cmd: This builds the emitter and points it at the [generation/emitter](generation/emitter) directory. Again, the "generated" subdirectory contains the files that ClangSharp created in step 1.
 3) Once the .winmd is built, run TestMetadataBin.cmd which checks for regressions.
 
+...or if you can do it all in one shot with:
+
+```winbatch
+DoAll.cmd
+```
+
 &nbsp;
 # Contributing
 
