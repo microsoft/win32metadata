@@ -72,9 +72,9 @@ steps:
     pwsh: true
 
 - task: PowerShell@2
-  displayName: Test metadata binary against baseline
+  displayName: Test metadata binary
   inputs:
-    filePath: 'scripts\CompareBinaryAgainstBaseline.ps1'
+    filePath: 'scripts\TestWinmdBinary.ps1'
     arguments: '-assemblyVersion $(PrepOutput.NugetVersion)'
     pwsh: true
 

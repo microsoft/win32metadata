@@ -6,6 +6,14 @@ function Create-Directory([string[]] $Path)
     }
 }
 
+function Remove-Directory([string[]] $Path) 
+{
+    if ((Test-Path -Path $Path)) 
+    {
+        Remove-Item $Path -Recurse
+    }
+}
+
 function Replace-Text
 {
     Param ([string] $path, [hashtable] $items)
@@ -100,6 +108,7 @@ $emitterDir = "$generationDir\emitter"
 $partitionsDir = "$scraperDir\Partitions"
 $sdkApiPath = "$rootDir\ext\sdk-api"
 $sdkGeneratedSourceDir = "$emitterDir\generated"
+$defaultArtifactsDir = "$rootDir\artifacts"
 
 if (Test-Path -Path $binDir -PathType leaf)
 {

@@ -151,9 +151,15 @@ The partitions are meant to break up headers into namespaces. However, some head
 # How to Generate the .winmd
 PowerShell Core is required to run the generation scripts. Open a PowerShell Core window and:
 
-1) GenerateMetadataSource.cmd: This loops over the directories under generation\Partitions, running ClangSharp for each one. There are base settings for all partitions: name remaps are found in [generation/scraper/baseRemap.rsp](generation/scraper/baseRemap.rsp) and other settings are found in [generation/scraper/baseSettings.rsp](generation/scraper/baseSettings.rsp). Each partitions folder contains a main.cpp, remap.rsp, and settings.rsp. ClangSharp writes C# files to generation\emitter\manual\generated (these files are not checked in).
-2) BuildMetadataBin.cmd: This builds the emitter and points it at the [generation/emitter](generation/emitter) directory. Again, the "generated" subdirectory contains the files that ClangSharp created in step 1.
-3) Once the .winmd is built, run TestMetadataBin.cmd which checks for regressions.
+1) [.\scripts\GenerateMetadataSource.ps1](.\scripts\GenerateMetadataSource.ps1): This loops over the directories under generation\Partitions, running ClangSharp for each one. There are base settings for all partitions: name remaps are found in [generation/scraper/baseRemap.rsp](generation/scraper/baseRemap.rsp) and other settings are found in [generation/scraper/baseSettings.rsp](generation/scraper/baseSettings.rsp). Each partitions folder contains a main.cpp, remap.rsp, and settings.rsp. ClangSharp writes C# files to generation\emitter\manual\generated (these files are not checked in).
+2) [.\scripts\BuildMetadataBin.ps1](.\scripts\BuildMetadataBin.ps1): This builds the emitter and points it at the [generation/emitter](generation/emitter) directory. Again, the "generated" subdirectory contains the files that ClangSharp created in step 1.
+3) Once the .winmd is built, run [.\scripts\TestMetadataBin.ps1](.\scripts\TestMetadataBin.ps1) which checks for regressions.
+
+...or if you can do it all in one shot in a PowerShell Core window:
+
+```winbatch
+.\DoAll.ps1
+```
 
 &nbsp;
 # Contributing

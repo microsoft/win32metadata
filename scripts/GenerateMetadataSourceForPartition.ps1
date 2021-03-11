@@ -71,6 +71,8 @@ if ($LASTEXITCODE -lt 0)
     Write-Error "$($indent)ClangSharpPInvokeGenerator.exe failed, full output at $generatorOutput`:"
     $errText = (Get-ChildItem $generatorOutput | select-string "Error: ") -join "`r`n"
     Write-Error $errText
+
+    exit $LastExitCode
 }
 
 $possibleRemapsOutput = Join-Path -Path $generationOutArtifactsDir -ChildPath "$partitionName.possibleremaps.output.txt"

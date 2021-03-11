@@ -56,9 +56,12 @@ function Replace-Text
 
 if (!$artifactsDir)
 {
-    $artifactsDir = "$rootDir\artifacts"
-    Create-Directory $artifactsDir
+    $artifactsDir = $defaultArtifactsDir
 }
+
+Create-Directory $artifactsDir
+
+Write-Output "`e[36m*** Generating source files`e[0m"
 
 Write-Output "Making sure cpp NuGet packages are installed..."
 
@@ -188,15 +191,39 @@ $stopwatch =  [system.diagnostics.stopwatch]::StartNew()
 
 Write-Output "`nProcessing each partition...using $throttleCount parallel script(s)"
 
+$errObj = new-object psobject
+Add-Member -InputObject $errObj -MemberType NoteProperty -Name ErrorCode -Value 0
+
 $partitionNames | ForEach-Object -Parallel {
+    $localObj = $using:errObj
+    if ($localObj.ErrorCode -ne 0)
+    {
+        continue
+    }
+
     $out1 = "`n$using:PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -version $using:version -partitionName $_ -artifactsDir $using:artifactsDir..."
     $out2 = & $using:PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -version $using:version -partitionName $_ -artifactsDir $using:artifactsDir -indent "`n  "
     Write-Output "$out1$out2"
+
+    if ($LastExitCode -lt 0)
+    {
+        Write-Error "Partition $_ failed."
+        $localObj.ErrorCode = $LastExitCode
+    }
+    
 } -ThrottleLimit $throttleCount
+
+if ($errObj.ErrorCode -ne 0)
+{
+    Write-Error "Failed to scrape one or more partitions."
+    exit $errObj.ErrorCode
+}
 
 $stopwatch.Stop()
 $totalTime = $stopwatch.Elapsed.ToString("c")
 
 Write-Output "Total time taken for all partitions: $totalTime"
+
+Write-Output "`n`e[32mGenerating source files succeeded`e[0m"
 
 exit 0
