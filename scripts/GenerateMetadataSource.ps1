@@ -60,6 +60,8 @@ if (!$artifactsDir)
     Create-Directory $artifactsDir
 }
 
+Write-Output "`e[36m*** Generating source files`e[0m"
+
 Write-Output "Making sure cpp NuGet packages are installed..."
 
 $nugetSrcPackagesDir = Join-Path -Path $artifactsDir "NuGetPackages"
@@ -220,5 +222,7 @@ $stopwatch.Stop()
 $totalTime = $stopwatch.Elapsed.ToString("c")
 
 Write-Output "Total time taken for all partitions: $totalTime"
+
+Write-Output "`n`e[32mGenerating source files succeeded`e[0m"
 
 exit 0

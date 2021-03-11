@@ -9,6 +9,8 @@ param
 
 . "$PSScriptRoot\CommonUtils.ps1"
 
+Write-Output "`e[36m*** Running tests on .winmd`e[0m"
+
 if (!$assemblyVersion)
 {
     $assemblyVersion = $defaultWinSDKNugetVersion
@@ -97,3 +99,5 @@ if ($failed)
 {
     exit -1
 }
+
+Write-Output "`n`e[32mTesting .winmd succeeded`e[0m"

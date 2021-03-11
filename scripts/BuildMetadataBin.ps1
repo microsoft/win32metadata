@@ -6,6 +6,8 @@ param
 
 . "$PSScriptRoot\CommonUtils.ps1"
 
+Write-Output "`e[36m*** Building .winmd`e[0m"
+
 if (!$assemblyVersion)
 {
     $assemblyVersion = $defaultWinSDKNugetVersion
@@ -71,3 +73,4 @@ if ($LastExitCode -ne 0)
     exit $LastExitCode
 }
 
+Write-Output "`n`e[32mGenerating .winmd succeeded`e[0m"
