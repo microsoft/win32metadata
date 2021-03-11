@@ -56,9 +56,10 @@ function Replace-Text
 
 if (!$artifactsDir)
 {
-    $artifactsDir = "$rootDir\artifacts"
-    Create-Directory $artifactsDir
+    $artifactsDir = $defaultArtifactsDir
 }
+
+Create-Directory $artifactsDir
 
 Write-Output "`e[36m*** Generating source files`e[0m"
 
