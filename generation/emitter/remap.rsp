@@ -7,6 +7,33 @@ ICompositor(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.
 IGraphicsEffectSource(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.Graphics.Effects.IGraphicsEffectSource
 IDesktopWindowTarget(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.UI.Composition.Desktop.DesktopWindowTarget
 IDispatcherQueueController(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.System.DispatcherQueueController
+--reducePointerLevel
+QUERYFORCONNECTION
+NOTIFYOFNEWCONNECTION
+DEREFERENCECONNECTION
+UCharIteratorGetIndex
+UCharIteratorMove
+UCharIteratorHasNext
+UCharIteratorHasPrevious
+UCharIteratorCurrent
+UCharIteratorNext
+UCharIteratorPrevious
+UCharIteratorReserved
+UCharIteratorGetState
+UCharIteratorSetState
+VBS_BASIC_ENCLAVE_BASIC_CALL_RETURN_FROM_ENCLAVE
+VBS_BASIC_ENCLAVE_BASIC_CALL_RETURN_FROM_EXCEPTION
+VBS_BASIC_ENCLAVE_BASIC_CALL_TERMINATE_THREAD
+VBS_BASIC_ENCLAVE_BASIC_CALL_INTERRUPT_THREAD
+VBS_BASIC_ENCLAVE_BASIC_CALL_COMMIT_PAGES
+VBS_BASIC_ENCLAVE_BASIC_CALL_DECOMMIT_PAGES
+VBS_BASIC_ENCLAVE_BASIC_CALL_PROTECT_PAGES
+VBS_BASIC_ENCLAVE_BASIC_CALL_CREATE_THREAD
+VBS_BASIC_ENCLAVE_BASIC_CALL_GET_ENCLAVE_INFORMATION
+VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_KEY
+VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_REPORT
+VBS_BASIC_ENCLAVE_BASIC_CALL_VERIFY_REPORT
+VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_RANDOM_DATA
 --remap
 SetHandleInformation::dwFlags=HANDLE_FLAG_OPTIONS
 DuplicateHandle::dwOptions=DUPLICATE_HANDLE_OPTIONS

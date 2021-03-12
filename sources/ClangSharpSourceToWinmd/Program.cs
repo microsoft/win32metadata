@@ -24,6 +24,14 @@ namespace ClangSharpSourceToWinmd
                         Arity = ArgumentArity.OneOrMore,
                     }
                 },
+                new Option(new string[] { "--reducePointerLevel", "-p" }, "Reduce pointer level by one.")
+                {
+                    Argument = new Argument("<name>")
+                    {
+                        ArgumentType = typeof(string),
+                        Arity = ArgumentArity.OneOrMore,
+                    }
+                },
                 new Option(new string[] { "--typeImport", "-t" }, "A type to be imported from another assembly.")
                 {
                     Argument = new Argument("<name>=<value>")
@@ -62,11 +70,13 @@ namespace ClangSharpSourceToWinmd
             string outputFileName = context.ParseResult.ValueForOption<string>("outputFileName");
             string version = context.ParseResult.ValueForOption<string>("version");
             var remappedNameValuePairs = context.ParseResult.ValueForOption<string[]>("remap");
+            var reducePointerLevelPairs = context.ParseResult.ValueForOption<string[]>("reducePointerLevel");
             var typeImportValuePairs = context.ParseResult.ValueForOption<string[]>("typeImport");
             var requiredNamespaceValuePairs = context.ParseResult.ValueForOption<string[]>("requiredNamespaceForName");
             var autoTypes = context.ParseResult.ValueForOption<string[]>("autoTypes");
 
             var remaps = ConvertValuePairsToDictionary(remappedNameValuePairs);
+            var reducePointerLevels = new HashSet<string>(reducePointerLevelPairs);
             var typeImports = ConvertValuePairsToDictionary(typeImportValuePairs);
             var requiredNamespaces = ConvertValuePairsToDictionary(requiredNamespaceValuePairs);
 
@@ -80,7 +90,7 @@ namespace ClangSharpSourceToWinmd
 
             ClangSharpSourceCompilation clangSharpCompliation = 
                 ClangSharpSourceCompilation.Create(
-                    sourceDirectory, interopFileName, remaps, typeImports, requiredNamespaces);
+                    sourceDirectory, interopFileName, remaps, typeImports, requiredNamespaces, reducePointerLevels);
 
             Console.Write("looking for errors...");
             var diags = clangSharpCompliation.GetDiagnostics();
@@ -115,7 +125,13 @@ namespace ClangSharpSourceToWinmd
             Console.WriteLine($"took {timeTaken}");
 
             Console.WriteLine($"Emitting {outputFileName}...");
-            var generator = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(clangSharpCompliation, typeImports, assemblyVersion, outputFileName);
+            var generator = 
+                ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
+                    clangSharpCompliation, 
+                    typeImports,
+                    reducePointerLevels,
+                    assemblyVersion, 
+                    outputFileName);
 
             foreach (var diag in generator.GetDiagnostics())
             {

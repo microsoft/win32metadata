@@ -48,13 +48,20 @@ namespace ClangSharpSourceToWinmd
         private List<GeneratorDiagnostic> diagnostics = new List<GeneratorDiagnostic>();
         private HashSet<string> typeImportInterfaces = new HashSet<string>();
         private Dictionary<string, string> typeImports = new Dictionary<string, string>();
+        private HashSet<string> reducePointerLevels;
         private Dictionary<string, AssemblyReferenceHandle> assemblyNamesToRefHandles = new Dictionary<string, AssemblyReferenceHandle>();
         private Dictionary<string, ITypeSymbol> nameToSymbols = new Dictionary<string, ITypeSymbol>();
         private Dictionary<StructDeclarationSyntax, ISymbol> structNodesToInheritedSymbols = new Dictionary<StructDeclarationSyntax, ISymbol>();
 
-        private ClangSharpSourceWinmdGenerator(CSharpCompilation compilation, Dictionary<string, string> typeImports, Version assemblyVersion, string assemblyName)
+        private ClangSharpSourceWinmdGenerator(
+            CSharpCompilation compilation, 
+            Dictionary<string, string> typeImports,
+            HashSet<string> reducePointerLevels, 
+            Version assemblyVersion, 
+            string assemblyName)
         {
             this.compilation = compilation;
+            this.reducePointerLevels = reducePointerLevels;
 
             foreach (var pair in typeImports)
             {
@@ -146,9 +153,20 @@ namespace ClangSharpSourceToWinmd
 
         public bool WroteWinmd { get; private set; }
 
-        public static ClangSharpSourceWinmdGenerator GenerateWindmdForCompilation(ClangSharpSourceCompilation compilation, Dictionary<string, string> typeImports, Version version, string outputFileName)
+        public static ClangSharpSourceWinmdGenerator GenerateWindmdForCompilation(
+            ClangSharpSourceCompilation compilation, 
+            Dictionary<string, string> typeImports,
+            HashSet<string> reducePointerLevels,
+            Version version, 
+            string outputFileName)
         {
-            ClangSharpSourceWinmdGenerator generator = new ClangSharpSourceWinmdGenerator(compilation.CSharpCompilation, typeImports, version, Path.GetFileName(outputFileName));
+            ClangSharpSourceWinmdGenerator generator = 
+                new ClangSharpSourceWinmdGenerator(
+                    compilation.CSharpCompilation, 
+                    typeImports, 
+                    reducePointerLevels, 
+                    version, 
+                    Path.GetFileName(outputFileName));
 
             generator.PopulateMetadataBuilder();
 
@@ -657,12 +675,19 @@ namespace ClangSharpSourceToWinmd
                 var nameOnly = parts[0];
                 var star = parts.Length > 1 ? parts[1] : null;
                 newTypeSymbol = this.GetTypeFromShortName(nameOnly);
+
                 if (newTypeSymbol != null)
                 {
-                    if (star != null)
+                    if (!string.IsNullOrEmpty(star))
                     {
+                        int starIndex = 0;
+                        if (this.reducePointerLevels.Contains(nameOnly))
+                        {
+                            starIndex++;
+                        }
+
                         var currentName = nameOnly;
-                        for (int i = 0; i < star.Length; i++)
+                        for (int i = starIndex; i < star.Length; i++)
                         {
                             currentName += "*";
                             var pointerSymbol = this.GetTypeFromShortName(currentName);

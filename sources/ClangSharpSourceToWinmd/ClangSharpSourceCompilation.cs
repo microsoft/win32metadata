@@ -28,7 +28,8 @@ namespace ClangSharpSourceToWinmd
             string interopFileName,
             Dictionary<string, string> remaps,
             Dictionary<string, string> typeImports,
-            Dictionary<string, string> requiredNamespaces)
+            Dictionary<string, string> requiredNamespaces,
+            HashSet<string> reducePointerLevels)
         {
             sourceDirectory = Path.GetFullPath(sourceDirectory);
 
