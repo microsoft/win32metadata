@@ -26,11 +26,15 @@ namespace PartitionUtilsLib
         {
             private static readonly Regex DefineRegex =
                 new Regex(
-                    @"^#define\s+([A-Z][\dA-Z_]+)\s+(.+)");
+                    @"^#define\s+([A-Z][\dA-Za-z_]+)\s+(.+)");
 
             private static readonly Regex DefineConstantRegex =
                 new Regex(
                     @"^((_HRESULT_TYPEDEF_|_NDIS_ERROR_TYPEDEF_)\(((?:0x)?[\da-f]+L?)\)|(\(HRESULT\)((?:0x)?[\da-f]+L?))|(-?\d+\.\d+(?:e\+\d+)?f?)|((?:0x[\da-f]+|\-?\d+)(?:UL|L)?)|((\d+)\s*(<<\s*\d+))|(MAKEINTRESOURCE\(\s*(\-?\d+)\s*\))|(\(HWND\)(-?\d+)))$", RegexOptions.IgnoreCase);
+
+            private static readonly Regex DefineGuidConstRegex =
+                new Regex(
+                    @"^\s*(DEFINE_GUID|DEFINE_DEVPROPKEY|DEFINE_KNOWN_FOLDER)\s*\((.*)");
 
             private Dictionary<string, EnumWriter> namespacesToEnumWriters = new Dictionary<string, EnumWriter>();
             private Dictionary<string, ConstantWriter> namespacesToConstantWriters = new Dictionary<string, ConstantWriter>();
@@ -228,6 +232,31 @@ namespace PartitionUtilsLib
 
                 this.writtenConstants[name] = valueText;
             }
+            
+            private void AddConstantGuid(string defineGuidKeyword, string originalNamespace, string line)
+            {
+                int firstComma = line.IndexOf(',');
+                string name = line.Substring(0, firstComma).Trim();
+                if (this.writtenConstants.ContainsKey(name))
+                {
+                    return;
+                }
+
+                string args = line.Substring(firstComma + 1).Trim();
+                int closeParen = args.IndexOf(')');
+                args = args.Substring(0, closeParen);
+
+                var writer = this.GetConstantWriter(originalNamespace, name);
+
+                if (defineGuidKeyword == "DEFINE_DEVPROPKEY")
+                {
+                    writer.AddPropKey(name, args);
+                }
+                else
+                {
+                    writer.AddGuid(name, args);
+                }
+            }
 
             private void AddConstantInteger(string originalNamespace, string nativeTypeName, string name, string valueText)
             {
@@ -351,6 +380,8 @@ namespace PartitionUtilsLib
                         }
 
                         string continuation = null;
+                        bool processingGuidMultiLine = false;
+                        string defineGuidKeyword = null;
                         foreach (string currentLine in File.ReadAllLines(header))
                         {
                             string line = continuation == null ? currentLine : continuation + currentLine;
@@ -360,7 +391,39 @@ namespace PartitionUtilsLib
                                 continue;
                             }
 
+                            if (processingGuidMultiLine)
+                            {
+                                continuation = StripComments(line).Trim();
+                                if (continuation.EndsWith(';'))
+                                {
+                                    processingGuidMultiLine = false;
+                                    this.AddConstantGuid(defineGuidKeyword, currentNamespace, continuation);
+                                    continuation = null;
+                                }
+
+                                continue;
+                            }
+
                             continuation = null;
+
+                            var defineGuidMatch = DefineGuidConstRegex.Match(line);
+                            if (defineGuidMatch.Success)
+                            {
+                                defineGuidKeyword = defineGuidMatch.Groups[1].Value;
+                                line = defineGuidMatch.Groups[2].Value;
+                                line = StripComments(line).Trim();
+                                if (line.EndsWith(';'))
+                                {
+                                    this.AddConstantGuid(defineGuidKeyword, currentNamespace, line);
+                                }
+                                else
+                                {
+                                    continuation = line;
+                                    processingGuidMultiLine = true;
+                                }
+
+                                continue;
+                            }
 
                             var defineMatch = DefineRegex.Match(line);
 
@@ -371,11 +434,6 @@ namespace PartitionUtilsLib
                             }
 
                             string name = defineMatch.Groups[1].Value;
-
-                            if (name == "REG_DWORD_BIG_ENDIAN")
-                            {
-
-                            }
 
                             // If it's in the exclusion list see if we should ignore it based on the
                             // current partition
@@ -549,10 +607,6 @@ namespace PartitionUtilsLib
                                 {
                                     this.AddConstantInteger(currentNamespace, nativeTypeName, name, valueText);
                                 }
-                                else
-                                {
-
-                                }
                             }
                         }
                     }
@@ -574,11 +628,6 @@ namespace PartitionUtilsLib
                 // For each enum object...
                 foreach (var obj in enumObjectsFromJsons)
                 {
-                    if (obj.name.StartsWith("CREDUIWIN"))
-                    {
-
-                    }
-
                     // Skip if no members
                     if (obj.members.Count == 0)
                     {
@@ -682,10 +731,6 @@ namespace PartitionUtilsLib
                         {
                             addedEnum = enumWriter.AddEnum(obj);
                         }
-                    }
-                    else
-                    {
-
                     }
 
                     if (addedEnum || existsAsManualEnum || obj != objectForRemap)

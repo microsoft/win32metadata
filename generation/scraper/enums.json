@@ -31121,6 +31121,7 @@
   {
     "name": "MPR_ET",
     "flags": false,
+    "type": "uint",
     "members": [
       {
         "name": "MPR_ET_None"

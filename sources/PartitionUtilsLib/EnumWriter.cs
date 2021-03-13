@@ -79,6 +79,7 @@ $@"    }}
                 this.writer.WriteLine(
 @$"using System;
 using Windows.Win32.Interop;
+using Windows.Win32.SystemServices;
 using static {this.@namespace}.Apis;
 
 namespace {this.@namespace}

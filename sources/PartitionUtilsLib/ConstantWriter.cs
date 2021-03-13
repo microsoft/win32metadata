@@ -33,6 +33,37 @@ namespace PartitionUtilsLib
             }
         }
 
+        public void AddPropKey(string name, string args)
+        {
+            if (this.namesToValues.ContainsKey(name))
+            {
+                return;
+            }
+
+            this.namesToValues[name] = args;
+
+            this.Writer.WriteLine(
+$@"        [PropertyKey({args})]
+        public static readonly PROPERTYKEY {name};");
+
+            this.Writer.WriteLine();
+        }
+
+        public void AddGuid(string name, string args)
+        {
+            if (this.namesToValues.ContainsKey(name))
+            {
+                return;
+            }
+
+            this.namesToValues[name] = args;
+
+            this.Writer.WriteLine(
+$@"        public static readonly Guid {name}__scanned__ = new Guid({args});");
+
+            this.Writer.WriteLine();
+        }
+
         public void AddValue(string type, string name, string valueText)
         {
             this.namesToValues[name] = valueText;
@@ -45,6 +76,17 @@ $"        public const {type} {name} = {valueText};");
 
         public static string FixIntValueText(bool forceUnsigned, ref string type, string valueText)
         {
+            if (valueText.Length > 0 && char.IsLetter(valueText[0]))
+            {
+                // This means our value is probably using an enum or some other expresssion,
+                // to don't mess with the valueText
+
+                // Set the type to something
+                type = "uint";
+                
+                return valueText;
+            }
+
             bool signed = false;
             bool is64Bit = false;
 
@@ -141,7 +183,9 @@ $"        [NativeTypeName(\"{nativeTypeName}\")]");
             {
                 this.writer = new StreamWriter(this.path);
                 this.writer.WriteLine(
-@$"using Windows.Win32.Interop;
+@$"using System;
+using Windows.Win32.Interop;
+using Windows.Win32.WindowsPropertiesSystem; // For PROPERTYKEY
 
 namespace {this.@namespace}
 {{
