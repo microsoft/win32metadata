@@ -1509,5 +1509,74 @@
             "value": "( 1 << (int)CERT_QUERY_FORMAT_TYPE.CERT_QUERY_FORMAT_BINARY)"
           }
         ]
+    },
+    {
+      "name": "Uri_CREATE_FLAGS",
+      "flags": true,
+      "autoPopulate":
+        {
+            "filter": "Uri_CREATE_",
+            "header": "urlmon.h"
+        },
+      "uses": [
+        {
+          "method": "CreateUri",
+          "parameter": "dwFlags"
+        }
+      ]
+    },
+    {
+      "name": "MPR_INTERFACE_DIAL_MODE",
+      "flags": false,
+      "type": "uint",
+      "members": [
+        {
+          "name": "MPRDM_DialFirst",
+          "value": "0"
+        },
+        {
+          "name": "MPRDM_DialAll",
+          "value": "RASENTRY_DIAL_MODE.RASEDM_DialAll"
+        },
+        {
+          "name": "MPRDM_DialAsNeeded",
+          "value": "RASENTRY_DIAL_MODE.RASEDM_DialAsNeeded"
+        }
+      ],
+      "uses": [
+        {
+          "struct": "MPR_INTERFACE_3",
+          "field": "dwDialMode"
+        },
+        {
+          "struct": "MPR_INTERFACE_2",
+          "field": "dwDialMode"
+        }
+      ]
+    },
+    {
+      "name": "RASENTRY_DIAL_MODE",
+      "flags": false,
+      "type": "uint",
+      "members": [
+        {
+          "name": "RASEDM_DialAll",
+          "value": "1"
+        },
+        {
+          "name": "RASEDM_DialAsNeeded",
+          "value": "2"
+        }
+      ],
+      "uses": [
+        {
+          "struct": "RASENTRYA",
+          "field": "dwDialMode"
+        },
+        {
+          "struct": "RASENTRYW",
+          "field": "dwDialMode"
+        }
+      ]
     }
 ]

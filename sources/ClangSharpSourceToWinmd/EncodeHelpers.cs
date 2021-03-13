@@ -78,6 +78,11 @@ namespace ClangSharpSourceToWinmd
                 text = text.Substring(2);
             }
 
+            if (char.ToUpperInvariant(text[text.Length - 1]) == 'L')
+            {
+                text = text.Substring(0, text.Length - 1);
+            }
+
             return uint.Parse(text, System.Globalization.NumberStyles.HexNumber);
         }
 
@@ -279,6 +284,24 @@ namespace ClangSharpSourceToWinmd
             {
                 argumentsEncoder.AddArgument().TypedConstant(argument);
             }
+        }
+
+        public static AttributeListSyntax ConvertGuidToAttributeList(Guid guid)
+        {
+            // Outputs in format: {0x00000000,0x0000,0x0000,{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}}
+            string formattedGuid = guid.ToString("x");
+
+            // Get rid of leading { and trailing }}
+            formattedGuid = formattedGuid.Substring(1, formattedGuid.Length - 3);
+            // There's one more { we need to get rid of
+            formattedGuid = formattedGuid.Replace("{", string.Empty);
+            string args = $"({formattedGuid})";
+            return
+                SyntaxFactory.AttributeList(
+                    SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
+                        SyntaxFactory.Attribute(
+                            SyntaxFactory.ParseName("Windows.Win32.Interop.Guid"),
+                            SyntaxFactory.ParseAttributeArgumentList(args))));
         }
     }
 }

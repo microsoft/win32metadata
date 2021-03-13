@@ -25,6 +25,7 @@ namespace ClangSharpSourceToWinmd
         public const string Win32StringType = "Windows.Win32.SystemServices.PSTR";
 
         private const string InteropNamespace = "Windows.Win32.Interop";
+        private const string ScannedSuffix = "__scanned__";
 
         private static readonly Regex TypeImportRegex = new Regex(@"<(([^,]+),\s*Version=(\d+\.\d+\.\d+\.\d+),\s*Culture=([^,]+),\s*PublicKeyToken=([^>]+))>(\S+)");
 
@@ -52,6 +53,8 @@ namespace ClangSharpSourceToWinmd
         private Dictionary<string, AssemblyReferenceHandle> assemblyNamesToRefHandles = new Dictionary<string, AssemblyReferenceHandle>();
         private Dictionary<string, ITypeSymbol> nameToSymbols = new Dictionary<string, ITypeSymbol>();
         private Dictionary<StructDeclarationSyntax, ISymbol> structNodesToInheritedSymbols = new Dictionary<StructDeclarationSyntax, ISymbol>();
+        private Dictionary<string, FieldDeclarationSyntax> nameToGuidConstFields = new Dictionary<string, FieldDeclarationSyntax>();
+        private HashSet<string> structNameWithGuids = new HashSet<string>();
 
         private ClangSharpSourceWinmdGenerator(
             CSharpCompilation compilation, 
@@ -195,14 +198,26 @@ namespace ClangSharpSourceToWinmd
             return ret;
         }
 
-        private void AddDiagnostic(string text)
-        {
-            Console.WriteLine(text);
-        }
-
         private static string GetQualifiedName(string @namespace, string name)
         {
             return $"{@namespace}.{name}";
+        }
+
+        private static bool HasGuidAttribute(SyntaxList<AttributeListSyntax> attributeLists)
+        {
+            bool ret = attributeLists.Any(list => list.Attributes.Any(attr => attr.Name.ToString() == "Windows.Win32.Interop.Guid"));
+            return ret;
+        }
+
+        private static bool HasPropertyKeyAttribute(SyntaxList<AttributeListSyntax> attributeLists)
+        {
+            bool ret = attributeLists.Any(list => list.Attributes.Any(attr => attr.Name.ToString() == "PropertyKey"));
+            return ret;
+        }
+
+        private void CacheGuidConst(FieldDeclarationSyntax guidFieldNode)
+        {
+            this.nameToGuidConstFields[guidFieldNode.Declaration.Variables.First().Identifier.ValueText] = guidFieldNode;
         }
 
         private void CacheInterfaceType(StructDeclarationSyntax interfaceNode)
@@ -420,6 +435,28 @@ namespace ClangSharpSourceToWinmd
             {
                 var inheritsFromTypeDef = this.GetTypeReference(inheritsFromSymbol.ContainingNamespace.ToString(), inheritsFromSymbol.Name);
                 metadataBuilder.AddInterfaceImplementation(destTypeDefHandle, inheritsFromTypeDef);
+            }
+
+            // If this interface node doesn't have a Guid attribute, see if we can 
+            // match it to a Guid constant
+            if (!HasGuidAttribute(node.AttributeLists))
+            {
+                string iidGuidConstName = $"IID_{name}";
+                if (!this.nameToGuidConstFields.TryGetValue(iidGuidConstName, out var fieldDeclNode))
+                {
+                    iidGuidConstName += ScannedSuffix;
+                    this.nameToGuidConstFields.TryGetValue(iidGuidConstName, out fieldDeclNode);
+                }
+
+                if (fieldDeclNode != null)
+                {
+                    ISymbol fieldSymbol = this.compilation.GetSymbolsWithName(iidGuidConstName).FirstOrDefault();
+
+                    if (fieldSymbol != null)
+                    {
+                        this.AddCustomAttributes(fieldSymbol, destTypeDefHandle);
+                    }
+                }
             }
 
             this.AddCustomAttributes(node, destTypeDefHandle);
@@ -798,22 +835,52 @@ namespace ClangSharpSourceToWinmd
             var model = this.GetModel(node);
             var classSymbol = model.GetDeclaredSymbol(node);
             FieldDefinitionHandle firstField = default;
-
             foreach (FieldDeclarationSyntax field in node.Members.Where(m => m is FieldDeclarationSyntax))
             {
                 var fieldVariable = field.Declaration.Variables.First();
                 IFieldSymbol fieldSymbol = (IFieldSymbol)model.GetDeclaredSymbol(fieldVariable);
+                string name = fieldSymbol.Name;
+
+                FieldAttributes fieldAttributes;
 
                 if (!fieldSymbol.IsConst)
                 {
-                    continue;
+                    fieldAttributes = FieldAttributes.Public | FieldAttributes.Static;
+
+                    if (!HasGuidAttribute(field.AttributeLists) && !HasPropertyKeyAttribute(field.AttributeLists))
+                    {
+                        continue;
+                    }
+
+                    if (fieldSymbol.Name.StartsWith("IID_"))
+                    {
+                        continue;
+                    }
+
+                    if (name.EndsWith(ScannedSuffix))
+                    {
+                        name = name.Substring(0, name.Length - ScannedSuffix.Length);
+                    }
+
+                    if (name.StartsWith("CLSID_"))
+                    {
+                        string testClassName = name.Substring("CLSID_".Length);
+                        if (this.structNameWithGuids.Contains(testClassName))
+                        {
+                            continue;
+                        }
+                    }
+                }
+                else
+                {
+                    fieldAttributes = FieldAttributes.Public | FieldAttributes.Static | FieldAttributes.Literal | FieldAttributes.HasDefault;
                 }
 
-                var fieldSignature = this.EncodeFieldSignature(className, model, field, out string name);
+                var fieldSignature = this.EncodeFieldSignature(className, model, field, out _);
 
                 var fieldDefinitionHandle =
                     metadataBuilder.AddFieldDefinition(
-                        FieldAttributes.Public | FieldAttributes.Static | FieldAttributes.Literal | FieldAttributes.HasDefault,
+                        fieldAttributes,
                         metadataBuilder.GetOrAddString(name),
                         metadataBuilder.GetOrAddBlob(fieldSignature));
                 if (fieldSymbol.HasConstantValue)
@@ -1378,12 +1445,17 @@ namespace ClangSharpSourceToWinmd
             }
         }
 
+        private void AddCustomAttributes(ISymbol symbol, EntityHandle entityHandle)
+        {
+            this.AddCustomAttributes(symbol.GetAttributes(), entityHandle);
+        }
+
         private void AddCustomAttributes(SyntaxNode node, EntityHandle entityHandle)
         {
             var model = this.GetModel(node);
             var symbol = model.GetDeclaredSymbol(node);
 
-            this.AddCustomAttributes(symbol.GetAttributes(), entityHandle);
+            this.AddCustomAttributes(symbol, entityHandle);
         }
 
         private ISymbol GetInheritedInterfaceSymbol(StructDeclarationSyntax node)
@@ -1728,9 +1800,24 @@ namespace ClangSharpSourceToWinmd
 
             public override void VisitStructDeclaration(StructDeclarationSyntax node)
             {
+                base.VisitStructDeclaration(node);
+
                 if (this.parent.IsInterfaceDef(node))
                 {
                     this.parent.CacheInterfaceType(node);
+                }
+                
+                if (HasGuidAttribute(node.AttributeLists))
+                {
+                    this.parent.structNameWithGuids.Add(node.Identifier.ValueText);
+                }
+            }
+
+            public override void VisitFieldDeclaration(FieldDeclarationSyntax node)
+            {
+                if (node.Modifiers.ToString() == "public static readonly" && node.Declaration.Type.ToString() == "Guid")
+                {
+                    this.parent.CacheGuidConst(node);
                 }
             }
         }

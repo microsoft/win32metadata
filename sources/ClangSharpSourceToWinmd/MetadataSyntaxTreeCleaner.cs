@@ -39,7 +39,7 @@ namespace ClangSharpSourceToWinmd
             {
                 string fullName = GetFullName(node);
 
-                if (this.GetRemapInfo(fullName, out List<AttributeSyntax> listAttributes, out string newType, out string newName))
+                if (this.GetRemapInfo(fullName, out List<AttributeSyntax> listAttributes, node.Type.ToString(), out string newType, out string newName))
                 {
                     node = (ParameterSyntax)base.VisitParameter(node);
                     if (listAttributes != null)
@@ -92,7 +92,7 @@ namespace ClangSharpSourceToWinmd
             {
                 string fullName = GetFullName(node);
 
-                this.GetRemapInfo(fullName, out var listAttributes, out string newType, out string newName);
+                this.GetRemapInfo(fullName, out var listAttributes, node.Declaration.Type.ToString(), out string newType, out string newName);
 
                 // ClangSharp mistakenly emits string[] for WCHAR[] Foo = "Bar".
                 // Change it to string
@@ -106,15 +106,9 @@ namespace ClangSharpSourceToWinmd
                 // aren't allowed in metadata, requiring us to surface them this way
                 if (node.Modifiers.ToString() == "public static readonly" && node.Declaration.Type.ToString() == "Guid")
                 {
-                    // We're ignoring all the IID_ constants, assuming projections can get them from the interfaces
-                    // directly
-                    if (fullName.StartsWith("IID_"))
-                    {
-                        return null;
-                    }
-
-                    string guidVal = null;
-                    if (node.Declaration.Variables.First().Initializer.Value is ObjectCreationExpressionSyntax objCreationSyntax)
+                    Guid guidVal = Guid.Empty;
+                    var varInitializer = node.Declaration.Variables.First().Initializer;
+                    if (varInitializer.Value is ObjectCreationExpressionSyntax objCreationSyntax)
                     {
                         var args = objCreationSyntax.ArgumentList.Arguments;
                         if (args.Count == 11)
@@ -131,34 +125,27 @@ namespace ClangSharpSourceToWinmd
                             byte p9 = (byte)EncodeHelpers.ParseHex(args[9].ToString());
                             byte p10 = (byte)EncodeHelpers.ParseHex(args[10].ToString());
 
-                            guidVal = new Guid(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10).ToString();
+                            guidVal = new Guid(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10);
                         }
                         else if (objCreationSyntax.ArgumentList.Arguments.Count == 1)
                         {
-                            guidVal = EncodeHelpers.RemoveQuotes(objCreationSyntax.ArgumentList.Arguments[0].ToString());
+                            // If this is an invalid format, remove the node
+                            if (!Guid.TryParse(objCreationSyntax.ArgumentList.Arguments[0].ToString(), out guidVal))
+                            {
+                                return null;
+                            }
                         }
                     }
 
-                    if (guidVal == null)
+                    if (guidVal == Guid.Empty)
                     {
                         return node;
                     }
 
-                    var variableDeclaration =
-                        SyntaxFactory.VariableDeclaration(SyntaxFactory.ParseTypeName("string")
-                            .WithTrailingTrivia(SyntaxFactory.Space))
-                            .AddVariables(
-                                SyntaxFactory.VariableDeclarator(fullName)
-                                .WithInitializer(SyntaxFactory.EqualsValueClause(SyntaxFactory.ParseExpression($"\"{guidVal}\""))));
-                    var attrListSyntax = SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(SyntaxFactory.Attribute(SyntaxFactory.ParseName("Windows.Win32.Interop.GuidConst")));
-                    var fieldDeclaration =
-                        SyntaxFactory.FieldDeclaration(variableDeclaration)
-                            .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword).WithTrailingTrivia(SyntaxFactory.Space), SyntaxFactory.Token(SyntaxKind.ConstKeyword).WithTrailingTrivia(SyntaxFactory.Space))
-                            .AddAttributeLists(SyntaxFactory.AttributeList(attrListSyntax))
-                            .WithLeadingTrivia(SyntaxFactory.CarriageReturnLineFeed)
-                            .WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed);
+                    node = node.RemoveNode(varInitializer, SyntaxRemoveOptions.KeepExteriorTrivia | SyntaxRemoveOptions.KeepEndOfLine);
+                    node = node.AddAttributeLists(EncodeHelpers.ConvertGuidToAttributeList(guidVal).WithLeadingTrivia(node.GetLeadingTrivia()));
 
-                    return fieldDeclaration;
+                    return node;
                 }
 
                 node = (FieldDeclarationSyntax)base.VisitFieldDeclaration(node);
@@ -249,7 +236,7 @@ namespace ClangSharpSourceToWinmd
 
                 string returnFullName = $"{fullName}::return";
 
-                if (this.GetRemapInfo(returnFullName, out List<AttributeSyntax> listAttributes, out var newType, out _))
+                if (this.GetRemapInfo(returnFullName, out List<AttributeSyntax> listAttributes, null, out var newType, out _))
                 {
                     node = (DelegateDeclarationSyntax)base.VisitDelegateDeclaration(node);
                     if (listAttributes != null)
@@ -320,7 +307,7 @@ namespace ClangSharpSourceToWinmd
                 string returnFullName = $"{fullName}::return";
 
                 // Find remap info for the return parameter for this method and apply any that we find
-                if (this.GetRemapInfo(returnFullName, out List<AttributeSyntax> listAttributes, out var newType, out _))
+                if (this.GetRemapInfo(returnFullName, out List<AttributeSyntax> listAttributes, null, out var newType, out _))
                 {
                     node = (MethodDeclarationSyntax)base.VisitMethodDeclaration(node);
                     if (listAttributes != null)
@@ -549,20 +536,7 @@ namespace ClangSharpSourceToWinmd
 
                 Guid guid = Guid.Parse(guidStr);
 
-                // Outputs in format: {0x00000000,0x0000,0x0000,{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}}
-                string formattedGuid = guid.ToString("x");
-
-                // Get rid of leading { and trailing }}
-                formattedGuid = formattedGuid.Substring(1, formattedGuid.Length - 3);
-                // There's one more { we need to get rid of
-                formattedGuid = formattedGuid.Replace("{", string.Empty);
-                string args = $"({formattedGuid})";
-                return
-                    SyntaxFactory.AttributeList(
-                        SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
-                            SyntaxFactory.Attribute(
-                                SyntaxFactory.ParseName("Windows.Win32.Interop.Guid"),
-                                SyntaxFactory.ParseAttributeArgumentList(args))));
+                return EncodeHelpers.ConvertGuidToAttributeList(guid);
             }
 
             private SyntaxNode ProcessNativeTypeNameAttr(AttributeSyntax nativeTypeNameAttr)
@@ -857,11 +831,28 @@ namespace ClangSharpSourceToWinmd
                 }
             }
 
-            private bool GetRemapInfo(string fullName, out List<AttributeSyntax> listAttributes, out string newType, out string newName)
+            private bool GetRemapInfo(string fullName, out List<AttributeSyntax> listAttributes, string currentType, out string newType, out string newName)
             {
                 if (!string.IsNullOrEmpty(fullName) && this.remaps.TryGetValue(fullName, out string remapData))
                 {
-                    return EncodeHelpers.DecodeRemap(remapData, out listAttributes, out newType, out newName);
+                    var ret = EncodeHelpers.DecodeRemap(remapData, out listAttributes, out newType, out newName);
+                    if (currentType != null)
+                    {
+                        // Try to keep the pointers at the same level if we're replacing
+                        // a uint or int. The mismatch can happen in the auto-generated
+                        // enum remaps which don't know if the params/fields getting replaced
+                        // are pointers or not
+                        if (currentType.StartsWith("uint") || currentType.StartsWith("int"))
+                        {
+                            int starIndex = currentType.IndexOf('*');
+                            if (starIndex != -1 && newType.IndexOf('*') == -1)
+                            {
+                                newType += currentType.Substring(starIndex);
+                            }
+                        }
+                    }
+
+                    return ret;
                 }
 
                 listAttributes = null;
