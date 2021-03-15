@@ -78,13 +78,31 @@
           }
     },
     {
-        "name": "WINDOWSCLASS_STYLES",
+        "name": "WNDCLASS_STYLES",
         "flags": true,
         "autoPopulate":
           {
               "filter": "CS_",
               "header": "WinUser.h"
-          }
+          },
+        "uses": [
+            {
+              "struct": "WNDCLASSA",
+              "field": "style"
+            },
+            {
+              "struct": "WNDCLASSW",
+              "field": "style"
+            },
+            {
+              "struct": "WNDCLASSEXA",
+              "field": "style"
+            },
+            {
+              "struct": "WNDCLASSEXW",
+              "field": "style"
+            }
+        ]
     },
     {
         "name": "CWP_FLAGS",
