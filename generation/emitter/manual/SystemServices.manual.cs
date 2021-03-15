@@ -10,8 +10,10 @@ namespace Windows.Win32.SystemServices
 
     public static unsafe partial class Apis
     {
+        [NativeTypeName("BOOL")]
         public const int TRUE = 1;
 
+        [NativeTypeName("BOOL")]
         public const int FALSE = 0;
 
         [NativeTypeName("HANDLE")]
