@@ -13,6 +13,8 @@ if (!$assemblyVersion)
     $assemblyVersion = $defaultWinSDKNugetVersion
 }
 
+& $PSScriptRoot\CreateRspsForFunctionPointerFixups.ps1
+
 $constantsScraperPath = "$sourcesDir\ConstantsScraper"
 $constantsScraperProj = "$constantsScraperPath\ConstantsScraper.csproj"
 $constantsScraperPathBin = "$constantsScraperPath\bin\Release\netcoreapp3.1\ConstantsScraper.dll"
@@ -46,6 +48,7 @@ $remapFileName = "$emitterDir\remap.rsp"
 $enumsRemapFileName = "$emitterDir\generated\enumsRemap.rsp"
 $autoTypesFileName = "$emitterDir\autoTypes.rsp"
 $requiredNamespacesForNames = "$emitterDir\requiredNamespacesForNames.rsp"
+$functionPointerFixupsRsp = "$emitterDir\functionPointerFixups.generated.rsp"
 
 $constantsScraperRsp = "$scraperDir\ConstantsScraper.rsp"
 $manualEnumsJson = "$scraperDir\manualEnums.json"
@@ -64,9 +67,9 @@ if ($LastExitCode -ne 0)
 
 Write-Output "`n"
 Write-Output "Creating $outputWinmdFileName..."
-Write-Output "Calling: dotnet $clangSharpSourceToWinmdBin --sourceDir $emitterDir --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName @$requiredNamespacesForNames @$autoTypesFileName @$enumsRemapFileName"
+Write-Output "Calling: dotnet $clangSharpSourceToWinmdBin --sourceDir $emitterDir --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName @$requiredNamespacesForNames @$autoTypesFileName @$enumsRemapFileName @$functionPointerFixupsRsp"
 
-& dotnet $clangSharpSourceToWinmdBin --sourceDir $emitterDir --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName @$requiredNamespacesForNames @$autoTypesFileName @$enumsRemapFileName
+& dotnet $clangSharpSourceToWinmdBin --sourceDir $emitterDir --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName @$requiredNamespacesForNames @$autoTypesFileName @$enumsRemapFileName @$functionPointerFixupsRsp
 if ($LastExitCode -ne 0)
 {
     Write-Error "Failed to build .winmd."

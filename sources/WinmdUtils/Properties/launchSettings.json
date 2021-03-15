@@ -9,8 +9,20 @@
       "commandLineArgs": "showDuplicateImports --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd"
     },
     "showDuplicateTypes": {
-      "commandName": "Project",
-      "commandLineArgs": "showDuplicateConstants --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd"
+        "commandName": "Project",
+        "commandLineArgs": "showDuplicateTypes --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd"
+    },
+    "showDuplicateConstants": {
+        "commandName": "Project",
+        "commandLineArgs": "showDuplicateConstants --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd"
+    },
+    "showEmptyDelegates": {
+        "commandName": "Project",
+        "commandLineArgs": "showEmptyDelegates --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd @$(ProjectDir)..\\..\\tests\\emptyDelegatesAllowList.rsp"
+    },
+    "showPointersToDelegates": {
+        "commandName": "Project",
+        "commandLineArgs": "showPointersToDelegates --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd @$(ProjectDir)..\\..\\tests\\pointersToDelegatesAllowList.rsp"
     }
   }
 }
