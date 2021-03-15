@@ -4,6 +4,8 @@ using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Reflection;
 
 namespace WinmdUtils
 {
@@ -12,6 +14,7 @@ namespace WinmdUtils
         private FileStream stream;
         private PEReader peReader;
         private MetadataReader metadataReader;
+        private GenericSignatureTypeProvider provider = new GenericSignatureTypeProvider();
 
         private WinmdUtils(string fileName)
         {
@@ -45,8 +48,9 @@ namespace WinmdUtils
                     var declaringType = this.metadataReader.GetTypeDefinition(method.GetDeclaringType());
                     var declaringTypeName = this.metadataReader.GetString(declaringType.Name);
                     var declaringTypeNamespace = this.metadataReader.GetString(declaringType.Namespace);
+                    var methodSignature = method.DecodeSignature<string, GenericContext>(this.provider, null);
 
-                    yield return new DllImport(name, dllName, $"{declaringTypeNamespace}.{declaringTypeName}");
+                    yield return new DllImport(name, dllName, $"{declaringTypeNamespace}.{declaringTypeName}", methodSignature);
                 }
             }
         }
@@ -85,6 +89,48 @@ namespace WinmdUtils
             }
         }
 
+        private IEnumerable<FieldInfo> GetFieldInfos(FieldDefinitionHandleCollection fieldDefinitionHandles)
+        {
+            foreach (var fieldHandle in fieldDefinitionHandles)
+            {
+                var fieldDef = this.metadataReader.GetFieldDefinition(fieldHandle);
+                var fieldName = metadataReader.GetString(fieldDef.Name);
+                var fieldType = fieldDef.DecodeSignature<string, GenericContext>(this.provider, null);
+
+                yield return new FieldInfo(fieldType, fieldName);
+            }
+        }
+
+        private IEnumerable<ParameterInfo> GetParams(ParameterHandleCollection parameterHandles)
+        {
+            foreach (var pH in parameterHandles)
+            {
+                var p = this.metadataReader.GetParameter(pH);
+                string pName = this.metadataReader.GetString(p.Name);
+                if (!string.IsNullOrEmpty(pName))
+                {
+                    yield return new ParameterInfo(pName, p.Attributes);
+                }
+            }
+        }
+
+        private MethodInfo GetMethod(MethodDefinitionHandle methodDefinitionHandle)
+        {
+            var methodDef = this.metadataReader.GetMethodDefinition(methodDefinitionHandle);
+            var methodSignature = methodDef.DecodeSignature<string, GenericContext>(provider, null);
+            var paramHandles = methodDef.GetParameters();
+
+            return new MethodInfo(this.metadataReader.GetString(methodDef.Name), methodSignature, GetParams(paramHandles));
+        }
+
+        private IEnumerable<MethodInfo> GetMethodInfos(MethodDefinitionHandleCollection methodDefinitionHandles)
+        {
+            foreach (var methodHandle in methodDefinitionHandles)
+            {
+                yield return GetMethod(methodHandle);
+            }
+        }
+
         public IEnumerable<TypeInfo> GetTypes()
         {
             foreach (var typeDefHandle in this.metadataReader.TypeDefinitions)
@@ -98,57 +144,65 @@ namespace WinmdUtils
                     continue;
                 }
 
-                if (name == "Apis")
+                if (name == "<Module>")
                 {
                     continue;
                 }
 
-                // Some interfaces have the same name so use method names to determine uniqueness
-                if (typeDef.Attributes.HasFlag(System.Reflection.TypeAttributes.Interface))
+                var baseTypeDefHandle = typeDef.BaseType;
+                string baseTypeName = null;
+                if (baseTypeDefHandle.Kind == HandleKind.TypeReference)
                 {
-                    name += "(";
-                    var handles = typeDef.GetMethods();
-                    bool first = true;
-                    foreach (var handle in handles)
-                    {
-                        if (!first)
-                        {
-                            name += ",";
-                        }
-                        else
-                        {
-                            first = false;
-                        }
+                    var declaringTypeRef = this.metadataReader.GetTypeReference((TypeReferenceHandle)baseTypeDefHandle);
+                    baseTypeName = this.metadataReader.GetString(declaringTypeRef.Name);
+                }
 
+                if (baseTypeName == "MulticastDelegate")
+                {
+                    var methodHandles = typeDef.GetMethods();
+                    foreach (var handle in methodHandles)
+                    {
                         var methodDef = this.metadataReader.GetMethodDefinition(handle);
-                        name += metadataReader.GetString(methodDef.Name);
+                        var methodName = metadataReader.GetString(methodDef.Name);
+                        if (methodName == "Invoke")
+                        {
+                            var invokeMethodInfo = GetMethod(handle);
+
+                            yield return new DelegateTypeInfo(ns, name, invokeMethodInfo.MethodSignature, invokeMethodInfo.Parameters);
+                        }
                     }
-                    name += ")";
+                }
+                else if (baseTypeName == "Enum")
+                {
+                    var fieldInfos = GetFieldInfos(typeDef.GetFields()).ToList();
+                    var valueFieldInfo = fieldInfos.FirstOrDefault(f => f.Name == "value__");
+                    if (valueFieldInfo != null)
+                    {
+                        string type = valueFieldInfo.Type;
+                        var finalFields = fieldInfos.Where(f => f != valueFieldInfo);
+                        yield return new EnumInfo(ns, name, type, finalFields);
+                    }
+                }
+                else if (typeDef.Attributes.HasFlag(System.Reflection.TypeAttributes.Interface))
+                {
+                    var methodInfos = GetMethodInfos(typeDef.GetMethods());
+                    yield return new InterfaceInfo(ns, name, methodInfos);
+                }
+                else if (baseTypeName == "ValueType")
+                {
+                    var fieldInfos = GetFieldInfos(typeDef.GetFields());
+                    yield return new StructInfo(ns, name, fieldInfos);
+                }
+                else if (baseTypeName == "Object")
+                {
+                    var fieldInfos = GetFieldInfos(typeDef.GetFields());
+                    var methodInfos = GetMethodInfos(typeDef.GetMethods());
+                    yield return new ClassInfo(ns, name, methodInfos, fieldInfos);
                 }
                 else
                 {
-                    var fields = typeDef.GetFields();
-                    bool first = true;
-                    foreach (var handle in fields.Take(10))
-                    {
-                        name += "(";
-                        name += ")";
-
-                        if (!first)
-                        {
-                            name += ",";
-                        }
-                        else
-                        {
-                            first = false;
-                        }
-
-                        var fieldDef = this.metadataReader.GetFieldDefinition(handle);
-                        name += metadataReader.GetString(fieldDef.Name);
-                    }
+                    throw new InvalidOperationException();
                 }
-
-                yield return new TypeInfo(ns, name);
             }
         }
     }
@@ -164,6 +218,129 @@ namespace WinmdUtils
         public string Namespace { get; private set; }
 
         public string Name { get; private set; }
+    }
+
+    public class EnumInfo : TypeInfo
+    {
+        public EnumInfo(string @namespace, string name, string type, IEnumerable<FieldInfo> fieldInfos) :
+            base(@namespace, name)
+        {
+            this.Type = type;
+            this.Fields = fieldInfos;
+        }
+
+        public string Type { get; }
+
+        public IEnumerable<FieldInfo> Fields { get; }
+
+        public override string ToString()
+        {
+            StringBuilder ret = new StringBuilder($"{this.Name}(");
+            var paramNames = string.Join(",", this.Fields.Select(f => f.Name).OrderBy(s => s));
+            ret.Append(paramNames);
+            ret.Append(")");
+            return ret.ToString();
+        }
+    }
+
+    public class ClassInfo : TypeInfo
+    {
+        public ClassInfo(string @namespace, string name, IEnumerable<MethodInfo> methodInfos, IEnumerable<FieldInfo> fieldInfos) :
+            base(@namespace, name)
+        {
+            this.Methods = methodInfos;
+            this.Fields = fieldInfos;
+        }
+
+        public IEnumerable<MethodInfo> Methods { get; }
+        public IEnumerable<FieldInfo> Fields { get; }
+        public override string ToString()
+        {
+            return $"{this.Namespace}.{this.Name}";
+        }
+    }
+
+    public class InterfaceInfo : TypeInfo
+    {
+        public InterfaceInfo(string @namespace, string name, IEnumerable<MethodInfo> methodInfos) :
+            base(@namespace, name)
+        {
+            this.Methods = methodInfos;
+        }
+
+        public IEnumerable<MethodInfo> Methods { get; }
+
+        public override string ToString()
+        {
+            StringBuilder ret = new StringBuilder($"{this.Name}(");
+            var methodNames = string.Join(",", this.Methods.Select(m => m.Name).OrderBy(s => s));
+            ret.Append(methodNames);
+            ret.Append(")");
+            return ret.ToString();
+        }
+    }
+
+    public class StructInfo : TypeInfo
+    {
+        public StructInfo(string @namespace, string name, IEnumerable<FieldInfo> fieldInfos) :
+            base(@namespace, name)
+        {
+            this.Fields = fieldInfos;
+        }
+
+        public IEnumerable<FieldInfo> Fields { get; }
+
+        public override string ToString()
+        {
+            StringBuilder ret = new StringBuilder($"{this.Name}(");
+            var fieldNames = string.Join(",", this.Fields.Select(f => f.Name).OrderBy(s => s));
+            ret.Append(fieldNames);
+            ret.Append(")");
+            return ret.ToString();
+        }
+
+        public override int GetHashCode()
+        {
+            return this.ToString().GetHashCode();
+        }
+    }
+
+    public class FieldInfo
+    {
+        public FieldInfo(string type, string name)
+        {
+            this.Type = type;
+            this.Name = name;
+        }
+
+        public string Type { get; }
+        public string Name { get; }
+    }
+
+    public class DelegateTypeInfo : TypeInfo
+    {
+        public DelegateTypeInfo(string @namespace, string name, MethodSignature<string> methodSignature, IEnumerable<ParameterInfo> parameters) : base(@namespace, name)
+        {
+            this.Parameters = parameters;
+            this.MethodSignature = methodSignature;
+        }
+
+        public MethodSignature<string> MethodSignature { get; }
+        public IEnumerable<ParameterInfo> Parameters { get; private set; }
+
+        public override string ToString()
+        {
+            StringBuilder ret = new StringBuilder($"{this.Name}(");
+            var paramNames = string.Join(",", this.Parameters.Select(p => p.Name).OrderBy(s => s));
+            ret.Append(paramNames);
+            ret.Append(")");
+            return ret.ToString();
+        }
+
+        public override int GetHashCode()
+        {
+            return this.ToString().GetHashCode();
+        }
     }
 
     public class ConstInfo
@@ -182,13 +359,61 @@ namespace WinmdUtils
         public ConstantTypeCode ConstantTypeCode { get; private set; }
     }
 
+    public class ParameterInfo
+    {
+        public ParameterInfo(string name, ParameterAttributes parameterAttributes)
+        {
+            this.Name = name;
+            this.Attributes = parameterAttributes;
+        }
+
+        public string Name
+        {
+            get;
+        }
+
+        public ParameterAttributes Attributes
+        {
+            get;
+        }
+    }
+
+    public class MethodInfo
+    {
+        public MethodInfo(string name, MethodSignature<string> methodSignature, IEnumerable<ParameterInfo> parameters)
+        {
+            this.Name = name;
+            this.MethodSignature = methodSignature;
+            this.Parameters = parameters;
+        }
+
+        public string Name { get; }
+        public MethodSignature<string> MethodSignature { get; }
+        public IEnumerable<ParameterInfo> Parameters { get; }
+
+        public override string ToString()
+        {
+            StringBuilder ret = new StringBuilder($"{this.Name}(");
+            var paramNames = string.Join(",", this.Parameters.Select(p => p.Name).OrderBy(s => s));
+            ret.Append(paramNames);
+            ret.Append(")");
+            return ret.ToString();
+        }
+
+        public override int GetHashCode()
+        {
+            return this.ToString().GetHashCode();
+        }
+    }
+
     public class DllImport
     {
-        public DllImport(string name, string dll, string declaringType)
+        public DllImport(string name, string dll, string declaringType, MethodSignature<string> methodSignature)
         {
             this.Name = name;
             this.Dll = dll;
             this.DeclaringType = declaringType;
+            this.MethodSignature = methodSignature;
         }
 
         public string DeclaringType { get; private set; }
@@ -196,6 +421,8 @@ namespace WinmdUtils
         public string Name { get; private set; }
 
         public string Dll { get; private set; }
+
+        public MethodSignature<string> MethodSignature { get; }
 
         public override string ToString()
         {

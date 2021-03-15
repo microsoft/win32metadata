@@ -95,6 +95,24 @@ if (!$failed -and $LastExitCode -lt 0)
     $failed = $true
 }
 
+$allowedEmptyDelegatesFileName = "$rootDir\tests\emptyDelegatesAllowList.rsp"
+Write-Output "`nLooking for empty delegates in $outputWinmdFileName..."
+Write-Output "Calling: dotnet $winmdUtilsPathBin showDuplicateConstants --winmd $winmdPath @$allowedEmptyDelegatesFileName"
+& dotnet $winmdUtilsPathBin showEmptyDelegates --winmd $winmdPath @$allowedEmptyDelegatesFileName
+if (!$failed -and $LastExitCode -lt 0)
+{
+    $failed = $true
+}
+
+$pointersToDelegatesAllowListFileName = "$rootDir\tests\pointersToDelegatesAllowList.rsp"
+Write-Output "`nLooking for pointers to delegates in $outputWinmdFileName..."
+Write-Output "Calling: dotnet $winmdUtilsPathBin showPointersToDelegates --winmd $winmdPath @$pointersToDelegatesAllowListFileName"
+& dotnet $winmdUtilsPathBin showPointersToDelegates --winmd $winmdPath @$pointersToDelegatesAllowListFileName
+if (!$failed -and $LastExitCode -lt 0)
+{
+    $failed = $true
+}
+
 if ($failed)
 {
     exit -1

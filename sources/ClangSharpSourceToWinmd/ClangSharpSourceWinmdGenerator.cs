@@ -717,14 +717,8 @@ namespace ClangSharpSourceToWinmd
                 {
                     if (!string.IsNullOrEmpty(star))
                     {
-                        int starIndex = 0;
-                        if (this.reducePointerLevels.Contains(nameOnly))
-                        {
-                            starIndex++;
-                        }
-
                         var currentName = nameOnly;
-                        for (int i = starIndex; i < star.Length; i++)
+                        for (int i = 0; i < star.Length; i++)
                         {
                             currentName += "*";
                             var pointerSymbol = this.GetTypeFromShortName(currentName);
@@ -1226,6 +1220,16 @@ namespace ClangSharpSourceToWinmd
             return this.interfaceSymbols.Contains(symbol) || this.typeImportInterfaces.Contains(symbol.Name);
         }
 
+        private bool NeedsPointerReduction(ISymbol symbol)
+        {
+            if (this.IsSymbolInterface(symbol))
+            {
+                return true;
+            }
+
+            return this.reducePointerLevels.Contains(symbol.Name);
+        }
+
         private void EncodeTypeSymbol(ITypeSymbol typeSymbol, SignatureTypeEncoder typeEncoder)
         {
             if (typeSymbol.SpecialType != SpecialType.None)
@@ -1249,7 +1253,7 @@ namespace ClangSharpSourceToWinmd
 
                 if (typeSymbol is IPointerTypeSymbol pointer)
                 {
-                    if (this.IsSymbolInterface(pointer.PointedAtType))
+                    if (this.NeedsPointerReduction(pointer.PointedAtType))
                     {
                         EncodeTypeSymbol(pointer.PointedAtType, typeEncoder);
                     }
