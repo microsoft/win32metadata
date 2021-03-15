@@ -38,6 +38,8 @@ namespace Windows.Win32.WindowsAndMessaging
 
         [NativeTypeName("HBITMAP")]
         public const int HBMMENU_POPUP_MINIMIZE = 11;
+
+        public const int CW_USEDEFAULT = unchecked((int)0x80000000);
     }
 
     [UnmanagedFunctionPointer]
