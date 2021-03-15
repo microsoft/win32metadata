@@ -117,6 +117,7 @@ namespace ClangSharpSourceToWinmd
         public ReadOnlyCollection<Diagnostic> GetDiagnostics()
         {
             List<Diagnostic> diags = new List<Diagnostic>();
+            var culture = new System.Globalization.CultureInfo("en-US");
 
             foreach (var diag in this.compilation.GetDeclarationDiagnostics())
             {
@@ -152,7 +153,7 @@ namespace ClangSharpSourceToWinmd
                 if (diag.Id == "CS0246")
                 {
                     var symbolNameRegx = new System.Text.RegularExpressions.Regex(@"The type or namespace name '(\w+)'");
-                    var match = symbolNameRegx.Match(diag.GetMessage());
+                    var match = symbolNameRegx.Match(diag.GetMessage(culture));
                     if (match.Success)
                     {
                         var symbolName = match.Groups[1].Value;
