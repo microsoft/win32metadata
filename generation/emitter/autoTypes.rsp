@@ -59,14 +59,14 @@ Windows.Win32.SystemServices,BoundaryDescriptorHandle,IntPtr,DeleteBoundaryDescr
 Windows.Win32.FileSystem,FindFileHandle,IntPtr,FindClose
 Windows.Win32.FileSystem,FindFileNameHandle,IntPtr,FindClose
 Windows.Win32.FileSystem,FindStreamHandle,IntPtr,FindClose
-Windows.Win32.FileSystem,FindChangeNotifcationHandle,IntPtr,FindCloseChangeNotification
+Windows.Win32.FileSystem,FindChangeNotificationHandle,IntPtr,FindCloseChangeNotification
 Windows.Win32.FileSystem,FindVolumeHandle,IntPtr,FindVolumeClose
 Windows.Win32.FileSystem,FindVolumeMointPointHandle,IntPtr,FindVolumeMountPointClose
 Windows.Win32.SystemServices,EventLogHandle,IntPtr,CloseEventLog
 Windows.Win32.SystemServices,EventSourceHandle,IntPtr,DeregisterEventSource
 Windows.Win32.WinSock,HWSAEVENT,IntPtr,WSACloseEvent
 Windows.Win32.InstallableFileSystems,HFILTER,IntPtr,FilterClose
-Windows.Win32.Shell,ShFindChangeNotifcationHandle,IntPtr,SHChangeNotification_Unlock
+Windows.Win32.Shell,ShFindChangeNotificationHandle,IntPtr,SHChangeNotification_Unlock
 Windows.Win32.Policy,CriticalPolicySectionHandle,IntPtr,LeaveCriticalPolicySection
 Windows.Win32.RemoteDesktopServices,HwtsVirtualChannelHandle,IntPtr,WTSVirtualChannelClose
 Windows.Win32.IpHelper,IcmpHandle,IntPtr,IcmpCloseHandle
