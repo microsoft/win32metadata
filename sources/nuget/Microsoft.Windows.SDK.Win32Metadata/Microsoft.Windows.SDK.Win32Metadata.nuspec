@@ -10,7 +10,7 @@
     <summary>This packages provides the Win32 API surface as a winmd (Windows metadata) file.</summary>
     <description>This packages provides the Win32 API surface as a winmd (Windows metadata) file. It is intended to be used as the basis for generating language-specific projections. It is not loadable as a CLR assembly.</description>
     <releaseNotes>https://github.com/microsoft/win32metadata/releases/tag/v$version$</releaseNotes>
-    <projectUrl>https://aka.ms/WinSDKProjectURL</projectUrl>
+    <projectUrl>https://github.com/microsoft/win32metadata</projectUrl>
     <tags>Win32 Metadata</tags>
     <licenseUrl>https://aka.ms/WinSDKPreviewLicenseURL</licenseUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
