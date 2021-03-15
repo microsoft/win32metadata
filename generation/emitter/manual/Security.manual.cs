@@ -13,6 +13,26 @@ namespace Windows.Win32.Security
     [return: NativeTypeName("DWORD")]
     public unsafe delegate uint SEC_THREAD_START([NativeTypeName("LPVOID")] void* lpThreadParameter);
 
+    [Flags]
+    public enum TOKEN_ACCESS_MASK : uint
+    {
+        DELETE = (0x00010000),
+        READ_CONTROL = (0x00020000),
+        WRITE_DAC = (0x00040000),
+        WRITE_OWNER = (0x00080000),
+        ACCESS_SYSTEM_SECURITY = (0x01000000),
+        TOKEN_ASSIGN_PRIMARY = (0x0001),
+        TOKEN_DUPLICATE = (0x0002),
+        TOKEN_IMPERSONATE = (0x0004),
+        TOKEN_QUERY = (0x0008),
+        TOKEN_QUERY_SOURCE = (0x0010),
+        TOKEN_ADJUST_PRIVILEGES = (0x0020),
+        TOKEN_ADJUST_GROUPS = (0x0040),
+        TOKEN_ADJUST_DEFAULT = (0x0080),
+        TOKEN_ADJUST_SESSIONID = (0x0100),
+        TOKEN_ALL_ACCESS = (Windows.Win32.FileSystem.FILE_ACCESS_FLAGS.STANDARD_RIGHTS_REQUIRED | TOKEN_ASSIGN_PRIMARY | TOKEN_DUPLICATE | TOKEN_IMPERSONATE | TOKEN_QUERY | TOKEN_QUERY_SOURCE | TOKEN_ADJUST_PRIVILEGES | TOKEN_ADJUST_GROUPS |TOKEN_ADJUST_DEFAULT)
+    }
+
     public static unsafe partial class Apis
     {
         // Has to be int so it can be used in a shift
