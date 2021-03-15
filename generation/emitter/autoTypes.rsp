@@ -94,7 +94,7 @@ Windows.Win32.InstallableFileSystems,FilterInstanceFindHandle,IntPtr,FilterInsta
 Windows.Win32.InstallableFileSystems,FilterVolumeInstanceFindHandle,IntPtr,FilterVolumeInstanceFindClose
 Windows.Win32.ActiveDirectory,GetDcContextHandle,IntPtr,DsGetDcCloseW
 Windows.Win32.Etw,TDH_HANDLE,IntPtr,TdhCloseDecodingHandle
-Windows.Win32.Automation,BSTR,IntPtr,SysFreeString
+Windows.Win32.Automation,BSTR,char*,SysFreeString
 Windows.Win32.Compression,COMPRESSOR_HANDLE,DECLARE_HANDLE,CloseDecompressor
 Windows.Win32.ApplicationInstallationAndServicing,MSIHANDLE,uint,MsiCloseHandle
 Windows.Win32.UIAnimation,UI_ANIMATION_KEYFRAME,IntPtr
