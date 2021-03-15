@@ -128,6 +128,9 @@ CreateFileW::dwFlagsAndAttributes=FILE_FLAGS_AND_ATTRIBUTES
 CreateFile2::dwShareMode=FILE_SHARE_FLAGS
 CreateFile2::dwDesiredAccess=FILE_ACCESS_FLAGS
 CreateFile2::dwCreationDisposition=FILE_CREATE_FLAGS
+ReOpenFile::dwShareMode=FILE_SHARE_FLAGS
+ReOpenFile::dwFlagsAndAttributes=FILE_FLAGS_AND_ATTRIBUTES
+ReOpenFile::dwDesiredAccess=FILE_ACCESS_FLAGS
 IEnumDebugPropertyInfo::Next::pi=[NativeArrayInfo(SizeParamIndex = 0)]
 CreatePrivateNamespaceA::return=NamespaceHandle
 CreatePrivateNamespaceW::return=NamespaceHandle
