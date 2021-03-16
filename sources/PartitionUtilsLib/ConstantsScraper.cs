@@ -46,6 +46,7 @@ namespace PartitionUtilsLib
             private Dictionary<string, string> withTypes;
 
             private Dictionary<string, List<EnumObject>> enumMemberNameToEnumObj;
+            private Dictionary<string, string> exclusionNamesToPartitions;
 
             public ConstantsScraperImpl()
             {
@@ -62,12 +63,13 @@ namespace PartitionUtilsLib
             {
                 this.requiredNamespaces = new WildcardDictionary(requiredNamespaces);
                 this.withTypes = withTypes;
+                this.exclusionNamesToPartitions = exclusionNamesToPartitions;
 
                 this.repoRoot = Path.GetFullPath(repoRoot);
 
                 this.LoadEnumObjectsFromJsonFiles(enumJsonFiles, renames);
 
-                this.ScrapeConstantsFromTraversedFiles(exclusionNamesToPartitions);
+                this.ScrapeConstantsFromTraversedFiles();
 
                 this.WriteEnumsAndRemaps(remaps);
             }
@@ -233,11 +235,16 @@ namespace PartitionUtilsLib
                 this.writtenConstants[name] = valueText;
             }
             
-            private void AddConstantGuid(string defineGuidKeyword, string originalNamespace, string line)
+            private void AddConstantGuid(string defineGuidKeyword, string originalNamespace, string line, string partitionName)
             {
                 int firstComma = line.IndexOf(',');
                 string name = line.Substring(0, firstComma).Trim();
                 if (this.writtenConstants.ContainsKey(name))
+                {
+                    return;
+                }
+
+                if (this.ShouldExclude(name, partitionName))
                 {
                     return;
                 }
@@ -256,6 +263,8 @@ namespace PartitionUtilsLib
                 {
                     writer.AddGuid(name, args);
                 }
+
+                this.writtenConstants[name] = args;
             }
 
             private void AddConstantInteger(string originalNamespace, string nativeTypeName, string name, string valueText)
@@ -335,8 +344,31 @@ namespace PartitionUtilsLib
                 this.enumMemberNameToEnumObj = LoadMemberNameToEnumObjMap(enumObjectsFromJsons);
             }
 
-            private void ScrapeConstantsFromTraversedFiles(
-                Dictionary<string, string> exclusionNamesToPartitions)
+            private bool ShouldExclude(string constName, string currentPartitionName)
+            {
+                // If it's in the exclusion list see if we should ignore it based on the
+                // current partition
+                if (exclusionNamesToPartitions.TryGetValue(constName, out var partitions))
+                {
+                    if (partitions == null)
+                    {
+                        return true;
+                    }
+
+                    string[] parts = partitions.Split(';');
+                    foreach (var part in parts)
+                    {
+                        if (StringComparer.OrdinalIgnoreCase.Equals(part, currentPartitionName))
+                        {
+                            return true;
+                        }
+                    }
+                }
+
+                return false;
+            }
+
+            private void ScrapeConstantsFromTraversedFiles()
             {
                 var autoReplacements = GetAutoValueReplacements();
 
@@ -397,7 +429,7 @@ namespace PartitionUtilsLib
                                 if (continuation.EndsWith(';'))
                                 {
                                     processingGuidMultiLine = false;
-                                    this.AddConstantGuid(defineGuidKeyword, currentNamespace, continuation);
+                                    this.AddConstantGuid(defineGuidKeyword, currentNamespace, continuation, partInfo.Name);
                                     continuation = null;
                                 }
 
@@ -414,7 +446,7 @@ namespace PartitionUtilsLib
                                 line = StripComments(line).Trim();
                                 if (line.EndsWith(';'))
                                 {
-                                    this.AddConstantGuid(defineGuidKeyword, currentNamespace, line);
+                                    this.AddConstantGuid(defineGuidKeyword, currentNamespace, line, partInfo.Name);
                                 }
                                 else
                                 {
@@ -435,27 +467,9 @@ namespace PartitionUtilsLib
 
                             string name = defineMatch.Groups[1].Value;
 
-                            // If it's in the exclusion list see if we should ignore it based on the
-                            // current partition
-                            if (exclusionNamesToPartitions.TryGetValue(name, out var partitions))
+                            if (this.ShouldExclude(name, partInfo.Name))
                             {
-                                bool shouldIgnore = partitions == null;
-                                if (!shouldIgnore)
-                                {
-                                    string[] parts = partitions.Split(';');
-                                    foreach (var part in parts)
-                                    {
-                                        if (StringComparer.OrdinalIgnoreCase.Equals(part, partInfo.Name))
-                                        {
-                                            shouldIgnore = true;
-                                        }
-                                    }
-                                }
-
-                                if (shouldIgnore)
-                                {
-                                    continue;
-                                }
+                                continue;
                             }
 
                             // Get rid of trailing comments

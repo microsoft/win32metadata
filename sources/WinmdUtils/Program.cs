@@ -219,15 +219,18 @@ namespace WinmdUtils
         {
             using WinmdUtils w1 = WinmdUtils.LoadFromFile(winmd.FullName);
             Dictionary<string, List<string>> nameToNamespace = new Dictionary<string, List<string>>();
-            foreach (var constant in w1.GetConstants())
+            foreach (ClassInfo apiClass in w1.GetTypes().Where(t => t is ClassInfo && t.Name == "Apis"))
             {
-                if (!nameToNamespace.TryGetValue(constant.Name, out var namespaces))
+                foreach (var field in apiClass.Fields)
                 {
-                    namespaces = new List<string>();
-                    nameToNamespace[constant.Name] = namespaces;
-                }
+                    if (!nameToNamespace.TryGetValue(field.Name, out var namespaces))
+                    {
+                        namespaces = new List<string>();
+                        nameToNamespace[field.Name] = namespaces;
+                    }
 
-                namespaces.Add(constant.Namespace);
+                    namespaces.Add(apiClass.Namespace);
+                }
             }
 
             bool dupsFound = false;
