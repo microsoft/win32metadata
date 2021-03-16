@@ -1297,9 +1297,15 @@ namespace ClangSharpSourceToWinmd
 
                 EncodeTypeSymbol(type, signatureEncoder);
 
+                var memberName = member.Identifier.Text;
+                if (string.IsNullOrEmpty(memberName))
+                {
+                    throw new InvalidOperationException($"Enum {node.Identifier.Text} has a member with no name.");
+                }
+
                 var fieldDefinitionHandle = metadataBuilder.AddFieldDefinition(
                     enumFieldAttributes,
-                    metadataBuilder.GetOrAddString(member.Identifier.Text),
+                    metadataBuilder.GetOrAddString(memberName),
                     metadataBuilder.GetOrAddBlob(fieldSignature));
 
                 if (symbol.HasConstantValue)

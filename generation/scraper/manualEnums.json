@@ -868,7 +868,7 @@
           },
           {
             "name": "ASN_SEQUENCE",
-            "value": "(ASN_UNIVERSAL | ASN_CONSTRUCTOR | 0x10);"
+            "value": "(ASN_UNIVERSAL | ASN_CONSTRUCTOR | 0x10)"
           },
           {
             "name": "ASN_IPADDRESS",
