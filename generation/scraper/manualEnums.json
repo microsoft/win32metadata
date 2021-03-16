@@ -1596,5 +1596,23 @@
           "field": "dwDialMode"
         }
       ]
+    },
+    {
+      "name": "PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_VALUE",
+      "flags": false,
+      "members": [
+        {
+          "name": "PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_1",
+          "value": 1
+        },
+        {
+          "name": "PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_2",
+          "value": 2
+        },
+        {
+          "name": "PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION",
+          "value": "PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_2"
+        }
+      ]
     }
-]
+  ]

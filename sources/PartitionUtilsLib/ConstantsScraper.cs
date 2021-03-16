@@ -743,6 +743,11 @@ namespace PartitionUtilsLib
 
                         if (obj == objectForRemap)
                         {
+                            if (this.writtenConstants.ContainsKey(obj.name))
+                            {
+                                throw new InvalidOperationException($"Tried to add enum {obj.name} but a constant with the same name already exists.");
+                            }
+
                             addedEnum = enumWriter.AddEnum(obj);
                         }
                     }

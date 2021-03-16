@@ -82,7 +82,15 @@ namespace ConstantsScraperApp
             var renames = ConvertValuePairsToDictionary(renamedNameValuePairs);
             var withTypes = ConvertValuePairsToDictionary(withTypeValuePairs);
 
-            PartitionUtilsLib.ConstantsScraper.ScrapeConstants(repoRoot, enumJsonFiles, exclusionNamesToPartitions, requiredNamespaces, remaps, withTypes, renames);
+            try
+            {
+                PartitionUtilsLib.ConstantsScraper.ScrapeConstants(repoRoot, enumJsonFiles, exclusionNamesToPartitions, requiredNamespaces, remaps, withTypes, renames);
+            }
+            catch (System.Exception e)
+            {
+                context.Console.Out.Write($"Failed to scrape constants:\r\n{e.Message}\r\n");
+                return -1;
+            }
 
             return 0;
         }
