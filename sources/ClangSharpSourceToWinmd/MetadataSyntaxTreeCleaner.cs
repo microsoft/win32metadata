@@ -183,6 +183,22 @@ namespace ClangSharpSourceToWinmd
 
                 switch (attrName)
                 {
+                    // We don't want more than one of these on an interface. Get rid of it if the 
+                    // struct doesn't have a NativeTypeName, which means it's a forward declaration.
+                    // The real declaration will have the SupportedOSPlatform that we'll keep 
+                    case "SupportedOSPlatform":
+                    {
+                        if (node.Parent is StructDeclarationSyntax structDeclaration)
+                        {
+                            if (!structDeclaration.AttributeLists.Any(list => list.Attributes.Any(attr => attr.Name.ToString() == "NativeTypeName")))
+                            {
+                                return null;
+                            }
+                        }
+
+                        break;
+                    }
+
                     case "Guid":
                     {
                         return this.ProcessGuidAttr(firstAttr);
