@@ -37426,30 +37426,6 @@
     ]
   },
   {
-    "name": "TOKEN_PRIVILEGES_PrivilegesFlags",
-    "flags": true,
-    "members": [
-      {
-        "name": "SE_PRIVILEGE_ENABLED"
-      },
-      {
-        "name": "SE_PRIVILEGE_ENABLED_BY_DEFAULT"
-      },
-      {
-        "name": "SE_PRIVILEGE_REMOVED"
-      },
-      {
-        "name": "SE_PRIVILEGE_USED_FOR_ACCESS"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "TOKEN_PRIVILEGES",
-        "field": "Privileges"
-      }
-    ]
-  },
-  {
     "name": "DCB_StopBitsFlags",
     "flags": false,
     "members": [

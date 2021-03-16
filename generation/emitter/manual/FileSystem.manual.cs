@@ -22,24 +22,6 @@ namespace Windows.Win32.FileSystem
         DDD_LUID_BROADCAST_DRIVE = 0x00000010,
     }
 
-    public enum FILE_CREATE_FLAGS : uint
-    {
-        CREATE_NEW = 1,
-        CREATE_ALWAYS = 2,
-        OPEN_EXISTING = 3,
-        OPEN_ALWAYS = 4,
-        TRUNCATE_EXISTING = 5
-    }
-
-    [Flags]
-    public enum FILE_SHARE_FLAGS : uint
-    {
-        FILE_SHARE_NONE = 0,
-        FILE_SHARE_DELETE = 4,
-        FILE_SHARE_READ = 1,
-        FILE_SHARE_WRITE = 2,
-    }
-
     [Flags]
     public enum FILE_FLAGS_AND_ATTRIBUTES : uint
     {

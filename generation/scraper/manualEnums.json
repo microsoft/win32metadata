@@ -1614,5 +1614,113 @@
           "value": "PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_2"
         }
       ]
+    },
+    {
+      "name": "FILE_CREATION_DISPOSITION",
+      "flags": false,
+      "members": [
+        {
+          "name": "CREATE_NEW"
+        },
+        {
+          "name": "CREATE_ALWAYS"
+        },
+        {
+          "name": "OPEN_EXISTING"
+        },
+        {
+          "name": "OPEN_ALWAYS"
+        },
+        {
+          "name": "TRUNCATE_EXISTING"
+        }
+      ],
+      "uses": [
+        {
+          "method": "CreateFileA",
+          "parameter": "dwCreationDisposition"
+        },
+        {
+          "method": "CreateFileW",
+          "parameter": "dwCreationDisposition"
+        },
+        {
+          "method": "CreateFile2",
+          "parameter": "dwCreationDisposition"
+        },
+        {
+          "method": "CreateLogFile",
+          "parameter": "fCreateDisposition"
+        }
+      ]
+    },
+    {
+      "name": "FILE_SHARE_MODE",
+      "flags": true,
+      "members": [
+        {
+          "name": "FILE_SHARE_NONE",
+          "value": 0
+        },
+        {
+          "name": "FILE_SHARE_DELETE",
+          "value": 4
+        },
+        {
+          "name": "FILE_SHARE_READ",
+          "value": 1
+        },
+        {
+          "name": "FILE_SHARE_WRITE",
+          "value": 2
+        }
+      ],
+      "uses": [
+        {
+          "method": "CreateFileW",
+          "parameter": "dwShareMode"
+        },
+        {
+          "method": "CreateFile2",
+          "parameter": "dwShareMode"
+        },
+        {
+          "method": "CreateFileA",
+          "parameter": "dwShareMode"
+        },
+        {
+          "method": "ReopenFile",
+          "parameter": "dwShareMode"
+        },
+        {
+          "method": "CreateLogFile",
+          "parameter": "dwShareMode"
+        }
+      ]
+    },
+    {
+      "name": "TOKEN_PRIVILEGES_ATTRIBUTES",
+      "flags": true,
+      "type": "uint",
+      "members": [
+        {
+          "name": "SE_PRIVILEGE_ENABLED"
+        },
+        {
+          "name": "SE_PRIVILEGE_ENABLED_BY_DEFAULT"
+        },
+        {
+          "name": "SE_PRIVILEGE_REMOVED"
+        },
+        {
+          "name": "SE_PRIVILEGE_USED_FOR_ACCESS"
+        }
+      ],
+      "uses": [
+        {
+          "struct": "LUID_AND_ATTRIBUTES",
+          "field": "Attributes"
+        }
+      ]
     }
-  ]
+]
