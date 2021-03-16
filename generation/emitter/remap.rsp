@@ -329,3 +329,7 @@ PRTM_ENTITY_EXPORT_METHOD,RTM_ENTITY_EXPORT_METHOD*
 OpenProcessToken::DesiredAccess=TOKEN_ACCESS_MASK
 OpenThreadToken::DesiredAccess=TOKEN_ACCESS_MASK
 DuplicateTokenEx::dwDesiredAccess=TOKEN_ACCESS_MASK
+CreateDCW::return=CreatedHDC
+CreateDCA::return=CreatedHDC
+CreateCompatibleDC::return=CreatedHDC
+DeleteDC::hdc=CreatedHDC

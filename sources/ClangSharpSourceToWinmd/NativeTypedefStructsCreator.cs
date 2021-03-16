@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
+using System.Linq;
+using CsvHelper.Configuration;
 
 namespace ClangSharpSourceToWinmd
 {
@@ -12,14 +15,14 @@ namespace ClangSharpSourceToWinmd
                 return;
             }
 
-            List<string> sortedItems = new List<string>(items);
-            sortedItems.Sort();
-            
             if (!Directory.Exists(Path.GetDirectoryName(outputFile)))
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(outputFile));
             }
 
+            CsvConfiguration config = new CsvConfiguration(CultureInfo.InvariantCulture) { MissingFieldFound = null };
+            using (StringReader stringReader = new StringReader(ConvertLinesToCsvString(items)))
+            using (CsvHelper.CsvReader reader = new CsvHelper.CsvReader(stringReader, config))
             using (StreamWriter writer = new StreamWriter(outputFile))
             {
                 writer.Write(
@@ -28,41 +31,41 @@ using Windows.Win32.Interop;
 
 ");
                 string currentNamespace = null;
-                foreach (var item in sortedItems)
+                foreach (var item in reader.GetRecords<AutoType>().OrderBy(a => a.Namespace))
                 {
-                    string[] parts = item.Split(',');
-                    string itemNamespace = parts[0];
-                    string itemName = parts[1];
-                    string valueType = parts[2];
-                    string closeApi = parts.Length > 3 ? parts[3] : null;
-                    string safety = valueType.Contains("*") ? "unsafe " : string.Empty;
-
+                    string safety = item.ValueType.Contains("*") ? "unsafe " : string.Empty;
+                    var valueType = item.ValueType;
                     if (valueType == "DECLARE_HANDLE" || valueType == "AllJoynHandle")
                     {
                         valueType = "IntPtr";
                     }
 
-                    if (itemNamespace != currentNamespace)
+                    if (item.Namespace != currentNamespace)
                     {
                         if (currentNamespace != null)
                         {
                             writer.WriteLine("}");
                         }
 
-                        currentNamespace = itemNamespace;
+                        currentNamespace = item.Namespace;
                         writer.WriteLine(
 $@"namespace {currentNamespace}
 {{");
                     }
 
-                    if (!string.IsNullOrEmpty(closeApi))
+                    if (!string.IsNullOrEmpty(item.CloseApi))
                     {
-                        writer.WriteLine($"    [RAIIFree(\"{closeApi}\")]");
+                        writer.WriteLine($"    [RAIIFree(\"{item.CloseApi}\")]");
+                    }
+
+                    if (!string.IsNullOrEmpty(item.AlsoUsableFor))
+                    {
+                        writer.WriteLine($"    [AlsoUsableFor(\"{item.AlsoUsableFor}\")]");
                     }
 
                     writer.WriteLine(
 $@"    [NativeTypedef]    
-    public {safety}struct {itemName}
+    public {safety}struct {item.Name}
     {{
         public {valueType} Value;
     }}
@@ -74,6 +77,27 @@ $@"    [NativeTypedef]
                     writer.WriteLine("}");
                 }
             }
+        }
+
+        private static string ConvertLinesToCsvString(IEnumerable<string> items)
+        {
+            StringWriter writer = new StringWriter();
+            writer.WriteLine("Namespace,Name,ValueType,CloseApi,AlsoUsableFor");
+            foreach (var line in items)
+            {
+                writer.WriteLine(line);
+            }
+
+            return writer.ToString();
+        }
+
+        private class AutoType
+        {
+            public string Namespace { get; set; }
+            public string Name { get; set; }
+            public string ValueType { get; set; }
+            public string CloseApi { get; set; }
+            public string AlsoUsableFor { get; set; }
         }
     }
 }
