@@ -17,5 +17,6 @@ Below are some principles that all language projections should follow:
 * C++ - https://github.com/microsoft/cppwin32 (Microsoft)
 * Rust - https://github.com/microsoft/windows-rs (Microsoft)
 * D - https://github.com/rumbu13/windows-d (Community)
+* Dart - https://github.com/timsneath/win32 (Community)
 
 Note: Community projects are listed here to help with discovery but are not officially validated by Microsoft.
