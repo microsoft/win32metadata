@@ -11,8 +11,7 @@
 PFNGETACTIVATIONFACTORY
 RO_REGISTRATION_COOKIE
 RoGetActivatableClassRegistration
-Windows::Foundation::Diagnostics::RoErrorReportingFlags
-ABI::Windows::Foundation::Diagnostics::RoErrorReportingFlags
+RoErrorReportingFlags
 IDesktopWindowTarget
 ID2D1DeviceContext
 ID2D1Geometry
