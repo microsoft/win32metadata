@@ -8,7 +8,7 @@ namespace PartitionUtilsLib
     {
         private static readonly Regex CamelCaseWordsRegex = new Regex(@"[A-Z][a-z]*");
 
-        public static IEnumerable<EnumObject> NormalizeEnumObjects(IEnumerable<EnumObject> objects, Dictionary<string, string> renames)
+        public static IEnumerable<EnumObject> NormalizeEnumObjects(Dictionary<string, string> namesToTypes, IEnumerable<EnumObject> objects, Dictionary<string, string> renames)
         {
             Dictionary<string, int> names = new Dictionary<string, int>();
             foreach (var obj in objects)
@@ -26,6 +26,25 @@ namespace PartitionUtilsLib
                     {
                         continue;
                     }
+                }
+
+                bool hadUses = obj.uses.Count != 0;
+
+                // Weed out uses that aren't in our list of uses that reference members 
+                // that don't exist or use types that can't be enums
+                foreach (var use in obj.uses.ToArray())
+                {
+                    string useName = use.ToString();
+                    if (!namesToTypes.ContainsKey(useName))
+                    {
+                        obj.uses.Remove(use);
+                    }
+                }
+
+                // If there are no more uses, get rid of the enum
+                if (hadUses && obj.uses.Count == 0)
+                {
+                    continue;
                 }
 
                 var fixedObj = Normalize(obj);

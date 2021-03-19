@@ -160,11 +160,11 @@
         "uses": [
             {
               "method": "ChangeDisplaySettingsA",
-              "parameter": "dwflags"
+              "parameter": "dwFlags"
             },
             {
               "method": "ChangeDisplaySettingsW",
-              "parameter": "dwflags"
+              "parameter": "dwFlags"
             },
             {
               "method": "ChangeDisplaySettingsExW",

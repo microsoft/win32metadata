@@ -43,7 +43,14 @@ namespace PartitionUtilsLib
             }
             else
             {
-                return this.name;
+                if (this.name != null)
+                {
+                    return this.name;
+                }
+                else
+                {
+                    return $"first member : {this.members[0]}";
+                }
             }
         }
 

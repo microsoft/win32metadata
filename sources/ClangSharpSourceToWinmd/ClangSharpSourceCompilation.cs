@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
+using PartitionUtilsLib;
 
 namespace ClangSharpSourceToWinmd
 {
@@ -44,15 +46,10 @@ namespace ClangSharpSourceToWinmd
             refs.Add(MetadataReference.CreateFromFile(netstandardPath));
 
             List<SyntaxTree> syntaxTrees = new List<SyntaxTree>();
-            var sourceFiles = Directory.GetFiles(sourceDirectory, "*.cs", SearchOption.AllDirectories);
+            var sourceFiles = Directory.GetFiles(sourceDirectory, "*.cs", SearchOption.AllDirectories).Where(f => !f.EndsWith("modified.cs"));
             System.Threading.Tasks.ParallelOptions opt = new System.Threading.Tasks.ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount * 2 };
             System.Threading.Tasks.Parallel.ForEach(sourceFiles, opt, (sourceFile) =>
             {
-                if (sourceFile.EndsWith("modified.cs"))
-                {
-                    return;
-                }
-
                 string fileToRead = Path.GetFullPath(sourceFile);
                 var tree = CSharpSyntaxTree.ParseText(File.ReadAllText(fileToRead), null, fileToRead);
 
@@ -200,7 +197,7 @@ namespace ClangSharpSourceToWinmd
 
             public override void VisitStructDeclaration(StructDeclarationSyntax node)
             {
-                if (node.Members.Count != 0 || node.AttributeLists.Count != 0)
+                if (!SyntaxUtils.IsEmptyStruct(node))
                 {
                     this.foundStructs.Add(node.Identifier.ValueText);
                 }

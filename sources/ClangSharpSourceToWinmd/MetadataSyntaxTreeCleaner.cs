@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using PartitionUtilsLib;
 
 namespace ClangSharpSourceToWinmd
 {
@@ -37,7 +38,7 @@ namespace ClangSharpSourceToWinmd
 
             public override SyntaxNode VisitParameter(ParameterSyntax node)
             {
-                string fullName = GetFullName(node);
+                string fullName = SyntaxUtils.GetFullName(node);
 
                 if (this.GetRemapInfo(fullName, out List<AttributeSyntax> listAttributes, node.Type.ToString(), out string newType, out string newName))
                 {
@@ -80,7 +81,7 @@ namespace ClangSharpSourceToWinmd
             public override SyntaxNode VisitStructDeclaration(StructDeclarationSyntax node)
             {
                 // If the struct is empty and we found a non-empty struct in all the source files, delete it
-                if (node.Members.Count == 0 && node.AttributeLists.Count == 0 && this.nonEmptyStructs.Contains(node.Identifier.ValueText))
+                if (SyntaxUtils.IsEmptyStruct(node) && this.nonEmptyStructs.Contains(node.Identifier.ValueText))
                 {
                     return null;
                 }
@@ -90,7 +91,7 @@ namespace ClangSharpSourceToWinmd
 
             public override SyntaxNode VisitFieldDeclaration(FieldDeclarationSyntax node)
             {
-                string fullName = GetFullName(node);
+                string fullName = SyntaxUtils.GetFullName(node);
 
                 this.GetRemapInfo(fullName, out var listAttributes, node.Declaration.Type.ToString(), out string newType, out string newName);
 
@@ -240,7 +241,7 @@ namespace ClangSharpSourceToWinmd
 
             public override SyntaxNode VisitDelegateDeclaration(DelegateDeclarationSyntax node)
             {
-                string fullName = GetFullName(node);
+                string fullName = SyntaxUtils.GetFullName(node);
 
                 // Remove duplicate delegates in this tree
                 if (this.visitedDelegateNames.Contains(fullName))
@@ -252,7 +253,7 @@ namespace ClangSharpSourceToWinmd
 
                 string returnFullName = $"{fullName}::return";
 
-                if (this.GetRemapInfo(returnFullName, out List<AttributeSyntax> listAttributes, null, out var newType, out _))
+                if (this.GetRemapInfo(returnFullName, out List<AttributeSyntax> listAttributes, node.ReturnType.ToString(), out var newType, out _))
                 {
                     node = (DelegateDeclarationSyntax)base.VisitDelegateDeclaration(node);
                     if (listAttributes != null)
@@ -289,7 +290,7 @@ namespace ClangSharpSourceToWinmd
                     return null;
                 }
 
-                string fullName = GetFullName(node);
+                string fullName = SyntaxUtils.GetFullName(node);
 
                 // Remove duplicate static methods
                 if (node.Body == null)
@@ -323,7 +324,7 @@ namespace ClangSharpSourceToWinmd
                 string returnFullName = $"{fullName}::return";
 
                 // Find remap info for the return parameter for this method and apply any that we find
-                if (this.GetRemapInfo(returnFullName, out List<AttributeSyntax> listAttributes, null, out var newType, out _))
+                if (this.GetRemapInfo(returnFullName, out List<AttributeSyntax> listAttributes, node.ReturnType.ToString(), out var newType, out _))
                 {
                     node = (MethodDeclarationSyntax)base.VisitMethodDeclaration(node);
                     if (listAttributes != null)
@@ -493,56 +494,6 @@ namespace ClangSharpSourceToWinmd
                         attrsList.Add(SyntaxFactory.Attribute(SyntaxFactory.ParseName("NullNullTerminated")));
                     }
                 }
-            }
-
-            private string GetFullName(SyntaxNode node)
-            {
-                string parentName = null;
-                string ret = null;
-                if (node is DelegateDeclarationSyntax delNode)
-                {
-                    parentName = GetFullName(delNode.Parent);
-                    ret = delNode.Identifier.Text;
-                }
-                else if (node is ClassDeclarationSyntax)
-                {
-                    return string.Empty;
-                }
-                else if (node is StructDeclarationSyntax structNode)
-                {
-                    parentName = GetFullName(structNode.Parent);
-                    ret = structNode.Identifier.Text;
-                }
-                else if (node is MethodDeclarationSyntax methodNode)
-                {
-                    parentName = GetFullName(methodNode.Parent);
-                    ret = methodNode.Identifier.Text;
-                }
-                else if (node is ParameterSyntax paramNode)
-                {
-                    parentName = GetFullName(paramNode.Parent.Parent);
-                    ret = paramNode.Identifier.Text;
-                }
-                else if (node is VariableDeclaratorSyntax varNode)
-                {
-                    parentName = GetFullName(varNode.Parent.Parent.Parent);
-                    ret = varNode.Identifier.Text;
-                }
-                else if (node is FieldDeclarationSyntax fieldNode)
-                {
-                    ret = GetFullName(fieldNode.Declaration.Variables.First());
-                }
-                else
-                {
-                    // Do nothing for everything else
-                }
-
-                if (!string.IsNullOrEmpty(parentName) && !string.IsNullOrEmpty(ret))
-                {
-                    ret = $"{parentName}::{ret}";
-                }
-
-                return ret;
             }
 
             private SyntaxNode ProcessGuidAttr(AttributeSyntax guidAttr)
@@ -852,19 +803,23 @@ namespace ClangSharpSourceToWinmd
                 if (!string.IsNullOrEmpty(fullName) && this.remaps.TryGetValue(fullName, out string remapData))
                 {
                     var ret = EncodeHelpers.DecodeRemap(remapData, out listAttributes, out newType, out newName);
-                    if (currentType != null)
+                    if (newType != null)
                     {
                         // Try to keep the pointers at the same level if we're replacing
                         // a uint or int. The mismatch can happen in the auto-generated
                         // enum remaps which don't know if the params/fields getting replaced
                         // are pointers or not
-                        if (currentType.StartsWith("uint") || currentType.StartsWith("int"))
+                        if (currentType.StartsWith("uint") || currentType.StartsWith("int") || currentType.StartsWith("short") || currentType.StartsWith("ushort"))
                         {
                             int starIndex = currentType.IndexOf('*');
                             if (starIndex != -1 && newType.IndexOf('*') == -1)
                             {
                                 newType += currentType.Substring(starIndex);
                             }
+                        }
+                        else
+                        {
+                            newType = null;
                         }
                     }
 

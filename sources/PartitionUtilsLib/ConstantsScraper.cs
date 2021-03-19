@@ -4,6 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace PartitionUtilsLib
 {
@@ -165,21 +168,6 @@ namespace PartitionUtilsLib
                 return enumMemberNameToEnumObj;
             }
 
-            private static List<EnumObject> LoadEnumsFromJsonFiles(string[] enumJsonFiles, Dictionary<string, string> renames)
-            {
-                List<EnumObject> enumObjects = new List<EnumObject>();
-
-                if (enumJsonFiles != null)
-                {
-                    foreach (var enumJsonFile in enumJsonFiles)
-                    {
-                        enumObjects.AddRange(EnumObjectUtils.NormalizeEnumObjects(EnumObject.LoadFromFile(enumJsonFile), renames));
-                    }
-                }
-
-                return enumObjects;
-            }
-
             private static List<EnumObject> LoadEnumsFromSourceFiles(string sourcesDir)
             {
                 List<EnumObject> enumObjects = new List<EnumObject>();
@@ -206,6 +194,23 @@ namespace PartitionUtilsLib
                 }
 
                 return rawValue;
+            }
+
+            private List<EnumObject> LoadEnumsFromJsonFiles(string[] enumJsonFiles, Dictionary<string, string> renames)
+            {
+                List<EnumObject> enumObjects = new List<EnumObject>();
+
+                if (enumJsonFiles != null)
+                {
+                    var namesToTypes = GetFullNamesToTypes($@"{this.repoRoot}\generation\emitter");
+
+                    foreach (var enumJsonFile in enumJsonFiles)
+                    {
+                        enumObjects.AddRange(EnumObjectUtils.NormalizeEnumObjects(namesToTypes, EnumObject.LoadFromFile(enumJsonFile), renames));
+                    }
+                }
+
+                return enumObjects;
             }
 
             private string GetForcedTypeForName(string name)
@@ -650,7 +655,7 @@ namespace PartitionUtilsLib
 
                     string foundNamespace = null;
                     List<string> remapsToAdd = new List<string>();
-
+                    int remapCount = 0;
                     // For each use in an enum...
                     foreach (var use in obj.uses)
                     {
@@ -683,6 +688,8 @@ namespace PartitionUtilsLib
                         {
                             remapsToAdd.Add(remapName);
                         }
+
+                        remapCount++;
                     }
 
                     if (foundNamespace == null)
@@ -699,7 +706,7 @@ namespace PartitionUtilsLib
                     {
                         // If the enum doesn't have any remaps and isn't
                         // an auto-poopulate, go to next object
-                        bool shouldWriteEnum = (remapsToAdd.Count != 0 || obj.autoPopulate != null);
+                        bool shouldWriteEnum = (remapCount != 0 || obj.autoPopulate != null);
 
                         if (!shouldWriteEnum)
                         {
@@ -761,6 +768,95 @@ namespace PartitionUtilsLib
                             remaps.TryAdd(remap, objectForRemap.name);
                         }
                     }
+                }
+            }
+
+            private Dictionary<string, string> GetFullNamesToTypes(string sourcesDir)
+            {
+                string sourceDirectory = Path.Combine(this.repoRoot, $@"generation\emitter");
+                var sourceFiles = Directory.GetFiles(sourceDirectory, "*.cs", SearchOption.AllDirectories).Where(f => !f.EndsWith("modified.cs"));
+
+                Dictionary<string, string> ret = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+                foreach (var fileName in sourceFiles)
+                {
+                    var tree = CSharpSyntaxTree.ParseText(File.ReadAllText(fileName), null, fileName);
+                    SyntaxWalkerForFullNamesAndTypes syntaxWalkerForFullNamesAndTypes = new SyntaxWalkerForFullNamesAndTypes(ret);
+                    syntaxWalkerForFullNamesAndTypes.ProcessTree(tree);
+                }
+
+                return ret;
+            }
+
+            private class SyntaxWalkerForFullNamesAndTypes : CSharpSyntaxWalker
+            {
+                private static readonly Regex ValidTypeRegex = new Regex(@"^(uint|int|byte|ulong|long|short|ushort)\**$");
+
+                private Dictionary<string, string> map;
+
+                public SyntaxWalkerForFullNamesAndTypes(Dictionary<string, string> map)
+                {
+                    this.map = map;
+                }
+
+                public void ProcessTree(SyntaxTree tree)
+                {
+                    this.Visit(tree.GetRoot());
+                }
+
+                public override void VisitParameter(ParameterSyntax node)
+                {
+                    base.VisitParameter(node);
+
+                    string fullName = SyntaxUtils.GetFullName(node);
+                    string type = node.Type.ToString();
+
+                    this.CacheInfo(fullName, type);
+                }
+
+                private void CacheInfo(string fullName, string type)
+                {
+                    if (ValidTypeRegex.IsMatch(type))
+                    {
+                        this.map[fullName] = type;
+                    }
+                }
+
+                public override void VisitDelegateDeclaration(DelegateDeclarationSyntax node)
+                {
+                    base.VisitDelegateDeclaration(node);
+
+                    string fullName = SyntaxUtils.GetFullName(node) + "::return";
+                    string type = node.ReturnType.ToString();
+
+                    this.CacheInfo(fullName, type);
+                }
+
+                public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
+                {
+                    base.VisitMethodDeclaration(node);
+
+                    string fullName = SyntaxUtils.GetFullName(node) + "::return";
+                    string type = node.ReturnType.ToString();
+
+                    this.CacheInfo(fullName, type);
+                }
+
+                public override void VisitFieldDeclaration(FieldDeclarationSyntax node)
+                {
+                    if (!(node.Parent is StructDeclarationSyntax))
+                    {
+                        return;
+                    }
+
+                    base.VisitFieldDeclaration(node);
+
+                    var variable = node.Declaration.Variables.First();
+                    string type = node.Declaration.Type.ToString();
+
+                    string fullName = SyntaxUtils.GetFullName(variable);
+
+                    this.CacheInfo(fullName, type);
                 }
             }
         }
