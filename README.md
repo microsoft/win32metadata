@@ -12,6 +12,7 @@ To call Win32 APIs from the language of your choice based off of this metadata, 
 * C++ - https://github.com/microsoft/cppwin32 (Microsoft)
 * Rust - https://github.com/microsoft/windows-rs (Microsoft)
 * D - https://github.com/rumbu13/windows-d (Community)
+* Dart - https://github.com/timsneath/win32 (Community)
 
 Note: Community projects are listed here to help with discovery but are not officially validated by Microsoft.
 
