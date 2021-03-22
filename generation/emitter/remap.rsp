@@ -126,6 +126,8 @@ ReOpenFile::dwDesiredAccess=FILE_ACCESS_FLAGS
 ReOpenFile::dwFlagsAndAttributes=FILE_FLAGS_AND_ATTRIBUTES
 CreateLogFile::fDesiredAccess=FILE_ACCESS_FLAGS
 CreateLogFile::fFlagsAndAttributes=FILE_FLAGS_AND_ATTRIBUTES
+OpenFileById::dwDesiredAccess=FILE_ACCESS_FLAGS
+OpenFileById::dwFlagsAndAttributes=FILE_FLAGS_AND_ATTRIBUTES
 IEnumDebugPropertyInfo::Next::pi=[NativeArrayInfo(SizeParamIndex = 0)]
 CreatePrivateNamespaceA::return=NamespaceHandle
 CreatePrivateNamespaceW::return=NamespaceHandle
@@ -328,3 +330,5 @@ CreateDCW::return=CreatedHDC
 CreateDCA::return=CreatedHDC
 CreateCompatibleDC::return=CreatedHDC
 DeleteDC::hdc=CreatedHDC
+DXVAHD_STREAM_DATA::ppPastSurfaces=[NativeArrayInfo(SizeParamIndex=3)]
+DXVAHD_STREAM_DATA::ppFutureSurfaces=[NativeArrayInfo(SizeParamIndex=4)]

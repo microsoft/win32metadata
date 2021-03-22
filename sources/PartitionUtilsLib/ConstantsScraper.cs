@@ -684,12 +684,20 @@ namespace PartitionUtilsLib
                         }
 
                         // If we don't already have a remap entry for this param or field, add one
-                        if (!remaps.ContainsKey(remapName))
+                        if (!remaps.TryGetValue(remapName, out string remapValue))
                         {
                             remapsToAdd.Add(remapName);
+                            remapCount++;
                         }
-
-                        remapCount++;
+                        else
+                        {
+                            // If the existing remap wants to use this enum, keep track
+                            // so that we write the enum
+                            if (remapValue == obj.name)
+                            {
+                                remapCount++;
+                            }
+                        }
                     }
 
                     if (foundNamespace == null)
