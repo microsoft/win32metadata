@@ -270,7 +270,7 @@
         "members": [
             {
               "name": "LBS_STANDARD",
-              "value": "(LBS_NOTIFY | LBS_SORT | Windows.Win32.WindowsAndMessaging.WINDOWS_STYLE.WS_VSCROLL | Windows.Win32.WindowsAndMessaging.WINDOWS_STYLE.WS_BORDER)"
+              "value": "(LBS_NOTIFY | LBS_SORT | Windows.Win32.WindowsAndMessaging.WINDOW_STYLE.WS_VSCROLL | Windows.Win32.WindowsAndMessaging.WINDOW_STYLE.WS_BORDER)"
             }
         ],
         "autoPopulate":
@@ -558,7 +558,7 @@
         ]
     },
     {
-        "name": "WINDOWS_EX_STYLE",
+        "name": "WINDOW_EX_STYLE",
         "flags": true,
         "autoPopulate":
           {
@@ -577,7 +577,7 @@
         ]
     },
     {
-        "name": "WINDOWS_STYLE",
+        "name": "WINDOW_STYLE",
         "flags": true,
         "autoPopulate":
           {
