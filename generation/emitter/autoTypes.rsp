@@ -52,7 +52,7 @@ Windows.Win32.WindowsAndMessaging,HHOOK,DECLARE_HANDLE,UnhookWindowsHookEx
 Windows.Win32.MenusAndResources,HICON,DECLARE_HANDLE,DestroyIcon
 Windows.Win32.Gdi,HPALETTE,DECLARE_HANDLE,DeleteObject
 Windows.Win32.MenusAndResources,HMENU,DECLARE_HANDLE,DestroyMenu
-Windows.Win32.MenusAndResources,HCURSOR,DECLARE_HANDLE,DestroyCursor
+Windows.Win32.MenusAndResources,HCURSOR,DECLARE_HANDLE,DestroyCursor,HICON
 Windows.Win32.SystemServices,TimerQueueHandle,IntPtr,DeleteTimerQueueEx
 Windows.Win32.SystemServices,PTP_POOL,IntPtr,CloseThreadpool
 Windows.Win32.SystemServices,NamespaceHandle,IntPtr,ClosePrivateNamespace
