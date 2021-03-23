@@ -798,7 +798,7 @@ namespace PartitionUtilsLib
 
             private class SyntaxWalkerForFullNamesAndTypes : CSharpSyntaxWalker
             {
-                private static readonly Regex ValidTypeRegex = new Regex(@"^(uint|int|byte|ulong|long|short|ushort)\**$");
+                private static readonly Regex ValidTypeRegex = new Regex(@"^(uint|int|ulong|long|short|ushort)\**$");
 
                 private Dictionary<string, string> map;
 
@@ -819,7 +819,27 @@ namespace PartitionUtilsLib
                     string fullName = SyntaxUtils.GetFullName(node);
                     string type = node.Type.ToString();
 
+                    this.CacheInfo(node.AttributeLists, fullName, type);
+                }
+
+                private void CacheInfo(SyntaxList<AttributeListSyntax> attributeLists, string fullName, string type)
+                {
+                    string nativeType = SyntaxUtils.GetNativeTypeNameFromAttributesLists(attributeLists);
+
+                    // Don't ever map enums onto strings.
+                    // We may need to make this more intelligent if we find we're stomping on types
+                    // we don't want to change
+                    if (nativeType != null && nativeType.Contains("STR"))
+                    {
+                        return;
+                    }
+
                     this.CacheInfo(fullName, type);
+
+                    if (ValidTypeRegex.IsMatch(type))
+                    {
+                        this.map[fullName] = type;
+                    }
                 }
 
                 private void CacheInfo(string fullName, string type)
@@ -864,7 +884,7 @@ namespace PartitionUtilsLib
 
                     string fullName = SyntaxUtils.GetFullName(variable);
 
-                    this.CacheInfo(fullName, type);
+                    this.CacheInfo(node.AttributeLists, fullName, type);
                 }
             }
         }

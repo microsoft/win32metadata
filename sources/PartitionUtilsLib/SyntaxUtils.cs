@@ -14,6 +14,23 @@ namespace PartitionUtilsLib
             return node.Members.Count == 0 && hasNoImportantAttributes;
         }
 
+        public static string GetNativeTypeNameFromAttributesLists(SyntaxList<AttributeListSyntax> attributeLists)
+        {
+            foreach (var attrList in attributeLists)
+            {
+                foreach (var attr in attrList.Attributes)
+                {
+                    if (attr.Name.ToString() == "NativeTypeName")
+                    {
+                        string nativeType = attr.ArgumentList.Arguments[0].ToString();
+                        return EncodeHelpers.RemoveQuotes(nativeType);
+                    }
+                }
+            }
+
+            return null;
+        }
+
         public static string GetFullName(SyntaxNode node)
         {
             string parentName = null;
