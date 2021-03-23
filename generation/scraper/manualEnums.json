@@ -280,8 +280,9 @@
           }
     },
     {
-        "name": "MB_FLAGS",
-        "flags": false,
+        "name": "MESSAGEBOX_FLAGS",
+        "flags": true,
+        "type": "uint",
         "autoPopulate":
           {
               "filter": "MB_",
@@ -1776,10 +1777,6 @@
         {
           "name": "IDCONTINUE",
           "value": "11"
-        },
-        {
-          "name": "IDTIMEOUT",
-          "value": "32000"
         }
       ],
       "uses": [
@@ -1789,6 +1786,22 @@
         },
         {
           "method": "MessageBoxW",
+          "parameter": "return"
+        },
+        {
+          "method": "MessageBoxExA",
+          "parameter": "return"
+        },
+        {
+          "method": "MessageBoxExW",
+          "parameter": "return"
+        },
+        {
+          "method": "MessageBoxIndirectA",
+          "parameter": "return"
+        },
+        {
+          "method": "MessageBoxIndirectW",
           "parameter": "return"
         }
       ]
