@@ -201,6 +201,7 @@ namespace PartitionUtilsLib
             }
         }
 
+        [Newtonsoft.Json.JsonIgnore]
         public bool CanOverrideValue => this.autoPopulate == null;
 
         public bool UpdateMember(string name, string valueText)

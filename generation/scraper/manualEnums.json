@@ -1695,6 +1695,10 @@
         {
           "method": "CreateLogFile",
           "parameter": "dwShareMode"
+        },
+        {
+          "method": "OpenFileById",
+          "parameter": "dwShareMode"
         }
       ]
     },
@@ -1720,6 +1724,72 @@
         {
           "struct": "LUID_AND_ATTRIBUTES",
           "field": "Attributes"
+        }
+      ]
+    },
+    {
+      "type": "int",
+      "finished": true,
+      "name": "MESSAGEBOX_RESULT",
+      "flags": false,
+      "members": [
+        {
+          "name": "IDOK",
+          "value": "1"
+        },
+        {
+          "name": "IDCANCEL",
+          "value": "2"
+        },
+        {
+          "name": "IDABORT",
+          "value": "3"
+        },
+        {
+          "name": "IDRETRY",
+          "value": "4"
+        },
+        {
+          "name": "IDIGNORE",
+          "value": "5"
+        },
+        {
+          "name": "IDYES",
+          "value": "6"
+        },
+        {
+          "name": "IDNO",
+          "value": "7"
+        },
+        {
+          "name": "IDCLOSE",
+          "value": "8"
+        },
+        {
+          "name": "IDHELP",
+          "value": "9"
+        },
+        {
+          "name": "IDTRYAGAIN",
+          "value": "10"
+        },
+        {
+          "name": "IDCONTINUE",
+          "value": "11"
+        },
+        {
+          "name": "IDTIMEOUT",
+          "value": "32000"
+        }
+      ],
+      "uses": [
+        {
+          "method": "MessageBoxA",
+          "parameter": "return"
+        },
+        {
+          "method": "MessageBoxW",
+          "parameter": "return"
         }
       ]
     }
