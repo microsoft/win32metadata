@@ -19,6 +19,7 @@ VER_SET_CONDITION__c_=VER_CONDITION_MASK
 CryptSetOIDFunctionValue_dwValueTypeFlags=REG_VALUE_TYPE
 PowerSettingAccessCheckEx_AccessTypeFlags=REG_SAM_FLAGS
 CREDUIWIN=CREDUIWIN_FLAGS
+GetWindowLongPtr_nIndex=WINDOW_LONG_PTR_INDEX
 --exclude
 TRUE
 FALSE

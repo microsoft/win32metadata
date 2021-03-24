@@ -49,6 +49,12 @@ namespace PartitionUtilsLib
 
                 var fixedObj = Normalize(obj);
                 string currentName = fixedObj.name;
+                if (renames.TryGetValue(currentName, out newName))
+                {
+                    fixedObj.name = newName;
+                    currentName = newName;
+                }
+
                 if (names.TryGetValue(currentName, out int nameCount))
                 {
                     nameCount++;
