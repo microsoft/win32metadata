@@ -280,7 +280,7 @@
           }
     },
     {
-        "name": "MESSAGEBOX_FLAGS",
+        "name": "MESSAGEBOX_STYLE",
         "flags": true,
         "type": "uint",
         "autoPopulate":
@@ -312,6 +312,14 @@
           {
             "method": "MSGBOXPARAMSW",
             "parameter": "dwStyle"
+          },
+          {
+            "method": "WTSSendMessageA",
+            "parameter": "Style"
+          },
+          {
+            "method": "WTSSendMessageW",
+            "parameter": "Style"
           }
         ]
     },
@@ -1777,6 +1785,14 @@
         {
           "name": "IDCONTINUE",
           "value": "11"
+        },
+        {
+          "name": "IDASYNC",
+          "value": "32001"
+        },
+        {
+          "name": "IDTIMEOUT",
+          "value": "32000"
         }
       ],
       "uses": [
@@ -1803,6 +1819,14 @@
         {
           "method": "MessageBoxIndirectW",
           "parameter": "return"
+        },
+        {
+          "method": "WTSSendMessageA",
+          "parameter": "pResponse"
+        },
+        {
+          "method": "WTSSendMessageW",
+          "parameter": "pResponse"
         }
       ]
     }
