@@ -106,6 +106,12 @@ namespace PartitionUtilsLib
 
             private static void MergeObjIntoOther(EnumObject src, EnumObject dest, Dictionary<string, List<EnumObject>> memberMap)
             {
+                // Don't mess with an object that was declared to be finished in the json
+                if (src.finished)
+                {
+                    return;
+                }
+
                 foreach (var m in src.members)
                 {
                     if (StringComparer.OrdinalIgnoreCase.Equals(m.name, "None"))
@@ -604,7 +610,7 @@ namespace PartitionUtilsLib
                                                 var needMerging = list.Where(o => o != foundObjEnum).ToArray();
                                                 foreach (var src in needMerging)
                                                 {
-                                                    MergeObjIntoOther(src, foundObjEnum, enumMemberNameToEnumObj);
+                                                    MergeObjIntoOther(src, foundObjEnum, this.enumMemberNameToEnumObj);
                                                 }
 
                                                 list.Clear();
@@ -647,6 +653,11 @@ namespace PartitionUtilsLib
                 // For each enum object...
                 foreach (var obj in enumObjectsFromJsons)
                 {
+                    if (obj.name == "WAVE_OPEN_TYPE")
+                    {
+
+                    }
+
                     // Skip if no members
                     if (obj.members.Count == 0)
                     {
@@ -735,7 +746,9 @@ namespace PartitionUtilsLib
                             namespacesToEnumWriters.Add(foundNamespace, enumWriter);
                         }
 
-                        if (obj.autoPopulate == null)
+                        // Don't remap to another object if it's not an auto-populate
+                        // and it's not marked as already finished
+                        if (obj.autoPopulate == null && !obj.finished)
                         {
                             foreach (var member in obj.members)
                             {

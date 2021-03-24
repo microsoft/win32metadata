@@ -2027,5 +2027,125 @@
           "parameter": "fState"
         }
       ]
+    },
+    {
+      "type": "uint",
+      "finished": true,
+      "name": "MIDI_OPEN_TYPE",
+      "flags": true,
+      "members": [
+        {
+          "name": "CALLBACK_TYPEMASK",
+          "value": "0x00070000"
+        },
+        {
+          "name": "CALLBACK_NULL",
+          "value": "0x00000000"
+        },
+        {
+          "name": "CALLBACK_WINDOW",
+          "value": "0x00010000"
+        },
+        {
+          "name": "CALLBACK_TASK",
+          "value": "0x00020000"
+        },
+        {
+          "name": "CALLBACK_FUNCTION",
+          "value": "0x00030000"
+        },
+        {
+          "name": "CALLBACK_THREAD",
+          "value": "(CALLBACK_TASK)"
+        },
+        {
+          "name": "CALLBACK_EVENT",
+          "value": "0x00050000"
+        },
+        {
+          "name": "MIDI_IO_STATUS",
+          "value": "0x00000020L"
+        }
+      ],
+      "uses": [
+        {
+          "method": "midiInOpen",
+          "parameter": "fdwOpen"
+        },
+        {
+          "method": "midiOutOpen",
+          "parameter": "fdwOpen"
+        }
+      ]
+    },
+    {
+      "type": "uint",
+      "finished": true,
+      "name": "WAVE_OPEN_TYPE",
+      "flags": true,
+      "members": [
+        {
+          "name": "CALLBACK_TYPEMASK",
+          "value": "0x00070000"
+        },
+        {
+          "name": "CALLBACK_NULL",
+          "value": "0x00000000"
+        },
+        {
+          "name": "CALLBACK_WINDOW",
+          "value": "0x00010000"
+        },
+        {
+          "name": "CALLBACK_TASK",
+          "value": "0x00020000"
+        },
+        {
+          "name": "CALLBACK_FUNCTION",
+          "value": "0x00030000"
+        },
+        {
+          "name": "CALLBACK_THREAD",
+          "value": "(CALLBACK_TASK)"
+        },
+        {
+          "name": "CALLBACK_EVENT",
+          "value": "0x00050000"
+        },
+        {
+          "name": "WAVE_FORMAT_QUERY",
+          "value": "0x0001"
+        },
+        {
+          "name": "WAVE_ALLOWSYNC",
+          "value": "0x0002"
+        },
+        {
+          "name": "WAVE_MAPPED",
+          "value": "0x0004"
+        },
+        {
+          "name": "WAVE_FORMAT_DIRECT",
+          "value": "0x0008"
+        },
+        {
+          "name": "WAVE_FORMAT_DIRECT_QUERY",
+          "value": "(WAVE_FORMAT_QUERY | WAVE_FORMAT_DIRECT)"
+        },
+        {
+          "name": "WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE",
+          "value": "0x0010"
+        }
+      ],
+      "uses": [
+        {
+          "method": "waveOutOpen",
+          "parameter": "fdwOpen"
+        },
+        {
+          "method": "waveInOpen",
+          "parameter": "fdwOpen"
+        }
+      ]
     }
 ]
