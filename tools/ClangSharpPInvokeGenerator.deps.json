@@ -7,9 +7,9 @@
   "targets": {
     ".NETCoreApp,Version=v3.1": {},
     ".NETCoreApp,Version=v3.1/win-x64": {
-      "ClangSharpPInvokeGenerator/11.0.0-beta2": {
+      "ClangSharpPInvokeGenerator/11.0.0-beta3": {
         "dependencies": {
-          "ClangSharp.PInvokeGenerator": "11.0.0-beta2",
+          "ClangSharp.PInvokeGenerator": "11.0.0-beta3",
           "Microsoft.SourceLink.GitHub": "1.0.0",
           "System.CommandLine": "2.0.0-beta1.20574.7"
         },
@@ -29,12 +29,12 @@
           }
         }
       },
-      "libClangSharp/11.0.0-beta1": {
+      "libClangSharp/11.0.0-beta2": {
         "dependencies": {
-          "libClangSharp.runtime.win-x64": "11.0.0-beta1"
+          "libClangSharp.runtime.win-x64": "11.0.0-beta2"
         }
       },
-      "libClangSharp.runtime.win-x64/11.0.0-beta1": {
+      "libClangSharp.runtime.win-x64/11.0.0-beta2": {
         "native": {
           "runtimes/win-x64/native/libClangSharp.dll": {
             "fileVersion": "0.0.0.0"
@@ -63,18 +63,18 @@
         }
       },
       "System.Memory/4.5.4": {},
-      "ClangSharp/11.0.0-beta2": {
+      "ClangSharp/11.0.0-beta3": {
         "dependencies": {
           "libclang": "11.0.0",
-          "libClangSharp": "11.0.0-beta1"
+          "libClangSharp": "11.0.0-beta2"
         },
         "runtime": {
           "ClangSharp.dll": {}
         }
       },
-      "ClangSharp.PInvokeGenerator/11.0.0-beta2": {
+      "ClangSharp.PInvokeGenerator/11.0.0-beta3": {
         "dependencies": {
-          "ClangSharp": "11.0.0-beta2"
+          "ClangSharp": "11.0.0-beta3"
         },
         "runtime": {
           "ClangSharp.PInvokeGenerator.dll": {}
@@ -83,7 +83,7 @@
     }
   },
   "libraries": {
-    "ClangSharpPInvokeGenerator/11.0.0-beta2": {
+    "ClangSharpPInvokeGenerator/11.0.0-beta3": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -102,19 +102,19 @@
       "path": "libclang.runtime.win-x64/11.0.0",
       "hashPath": "libclang.runtime.win-x64.11.0.0.nupkg.sha512"
     },
-    "libClangSharp/11.0.0-beta1": {
+    "libClangSharp/11.0.0-beta2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-i9+wyVnVj75BHJ1zI7LCQ4pWDwQpiSl5/0OUqSX8kUH3H1KvRbgPE7sUOSXB48e2NSE2v5nmNoCZxZjMpfWQ6Q==",
-      "path": "libclangsharp/11.0.0-beta1",
-      "hashPath": "libclangsharp.11.0.0-beta1.nupkg.sha512"
+      "sha512": "sha512-MZgJN3LBZpQnKjEKw/MZ2OYfd+YnblVtySaYfA9SN6Al3G2fZAA3hU5ktWDLrJvOk3miv/2ysLpo9ETQOgGjvQ==",
+      "path": "libclangsharp/11.0.0-beta2",
+      "hashPath": "libclangsharp.11.0.0-beta2.nupkg.sha512"
     },
-    "libClangSharp.runtime.win-x64/11.0.0-beta1": {
+    "libClangSharp.runtime.win-x64/11.0.0-beta2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-zhFUeF/p7SA03IxxHMEdCabppn7nq7iw+pLLxiWJqJqLMb54LrvkUt4zGJc8YdL7X0Luc3HDWZF6sMkgBZSiCQ==",
-      "path": "libclangsharp.runtime.win-x64/11.0.0-beta1",
-      "hashPath": "libclangsharp.runtime.win-x64.11.0.0-beta1.nupkg.sha512"
+      "sha512": "sha512-mjsu8502VlR4bGLyC2Bqk4CdL++CFSxnBdqSUbtyyS88QVZQvoUSB6e+g0KUPc/ksPo57/r1voYyejIjlQCHog==",
+      "path": "libclangsharp.runtime.win-x64/11.0.0-beta2",
+      "hashPath": "libclangsharp.runtime.win-x64.11.0.0-beta2.nupkg.sha512"
     },
     "Microsoft.Build.Tasks.Git/1.0.0": {
       "type": "package",
@@ -158,12 +158,12 @@
       "path": "system.memory/4.5.4",
       "hashPath": "system.memory.4.5.4.nupkg.sha512"
     },
-    "ClangSharp/11.0.0-beta2": {
+    "ClangSharp/11.0.0-beta3": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "ClangSharp.PInvokeGenerator/11.0.0-beta2": {
+    "ClangSharp.PInvokeGenerator/11.0.0-beta3": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -1,5 +1,5 @@
 --additional
--m32
+-m64
 -Wno-expansion-to-defined
 -Wno-ignored-attributes
 -Wno-ignored-pragma-intrinsic
@@ -24,6 +24,7 @@ exclude-funcs-with-body
 generate-cpp-attributes
 generate-native-inheritance-attribute
 dont-use-using-statics-for-enums
+exclude-anonymous-field-helpers
 --headerFile
 generation\scraper\header.txt
 --methodClassName
