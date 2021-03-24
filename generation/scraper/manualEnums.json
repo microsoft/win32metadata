@@ -1829,5 +1829,153 @@
           "parameter": "pResponse"
         }
       ]
+    },
+    {
+      "type": "uint",
+      "finished": false,
+      "name": "OPEN_FILENAME_FLAGS",
+      "flags": true,
+      "members": [
+        {
+          "name": "OFN_READONLY",
+          "value": "0x00000001"
+        },
+        {
+          "name": "OFN_OVERWRITEPROMPT",
+          "value": "0x00000002"
+        },
+        {
+          "name": "OFN_HIDEREADONLY",
+          "value": "0x00000004"
+        },
+        {
+          "name": "OFN_NOCHANGEDIR",
+          "value": "0x00000008"
+        },
+        {
+          "name": "OFN_SHOWHELP",
+          "value": "0x00000010"
+        },
+        {
+          "name": "OFN_ENABLEHOOK",
+          "value": "0x00000020"
+        },
+        {
+          "name": "OFN_ENABLETEMPLATE",
+          "value": "0x00000040"
+        },
+        {
+          "name": "OFN_ENABLETEMPLATEHANDLE",
+          "value": "0x00000080"
+        },
+        {
+          "name": "OFN_NOVALIDATE",
+          "value": "0x00000100"
+        },
+        {
+          "name": "OFN_ALLOWMULTISELECT",
+          "value": "0x00000200"
+        },
+        {
+          "name": "OFN_EXTENSIONDIFFERENT",
+          "value": "0x00000400"
+        },
+        {
+          "name": "OFN_PATHMUSTEXIST",
+          "value": "0x00000800"
+        },
+        {
+          "name": "OFN_FILEMUSTEXIST",
+          "value": "0x00001000"
+        },
+        {
+          "name": "OFN_CREATEPROMPT",
+          "value": "0x00002000"
+        },
+        {
+          "name": "OFN_SHAREAWARE",
+          "value": "0x00004000"
+        },
+        {
+          "name": "OFN_NOREADONLYRETURN",
+          "value": "0x00008000"
+        },
+        {
+          "name": "OFN_NOTESTFILECREATE",
+          "value": "0x00010000"
+        },
+        {
+          "name": "OFN_NONETWORKBUTTON",
+          "value": "0x00020000"
+        },
+        {
+          "name": "OFN_NOLONGNAMES",
+          "value": "0x00040000"
+        },
+        {
+          "name": "OFN_EXPLORER",
+          "value": "0x00080000"
+        },
+        {
+          "name": "OFN_NODEREFERENCELINKS",
+          "value": "0x00100000"
+        },
+        {
+          "name": "OFN_LONGNAMES",
+          "value": "0x00200000"
+        },
+        {
+          "name": "OFN_ENABLEINCLUDENOTIFY",
+          "value": "0x00400000"
+        },
+        {
+          "name": "OFN_ENABLESIZING",
+          "value": "0x00800000"
+        },
+        {
+          "name": "OFN_DONTADDTORECENT",
+          "value": "0x02000000"
+        },
+        {
+          "name": "OFN_FORCESHOWHIDDEN",
+          "value": "0x10000000"
+        }
+      ],
+      "uses": [
+        {
+          "method": "OPENFILENAMEA",
+          "parameter": "Flags"
+        },
+        {
+          "method": "OPENFILENAMEW",
+          "parameter": "Flags"
+        }
+      ]
+    },
+    {
+      "type": "uint",
+      "finished": false,
+      "name": "OPEN_FILENAME_FLAGS_EX",
+      "flags": true,
+      "members": [
+        {
+          "name": "OFN_EX_NONE",
+          "value": "0x00000000"
+        },
+        {
+          "name": "OFN_EX_NOPLACESBAR",
+          "value": "0x00000001"
+        }
+      ],
+      "uses": [
+        {
+          "method": "OPENFILENAMEA",
+          "parameter": "FlagsEx"
+        },
+        {
+          "method": "OPENFILENAMEW",
+          "parameter": "FlagsEx"
+        }
+      ]
     }
 ]
