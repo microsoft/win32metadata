@@ -53,6 +53,7 @@ ID2D1Factory
 <IncludeRoot>/winrt/shcore.h
 <IncludeRoot>/winrt/winstring.h
 <IncludeRoot>/winrt/hstring.h
+<IncludeRoot>/winrt/memorybuffer.h
 <IncludeRoot>/um/restrictederrorinfo.h
 --namespace
 Windows.Win32.WinRT
