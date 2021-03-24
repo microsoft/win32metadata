@@ -20,6 +20,7 @@ CryptSetOIDFunctionValue_dwValueTypeFlags=REG_VALUE_TYPE
 PowerSettingAccessCheckEx_AccessTypeFlags=REG_SAM_FLAGS
 CREDUIWIN=CREDUIWIN_FLAGS
 GetWindowLongPtr_nIndex=WINDOW_LONG_PTR_INDEX
+MIIM=MENU_ITEM_MASK
 --exclude
 TRUE
 FALSE

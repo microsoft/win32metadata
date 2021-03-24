@@ -324,7 +324,7 @@
         ]
     },
     {
-        "name": "MENU_FLAGS",
+        "name": "MENU_ITEM_FLAGS",
         "flags": true,
         "autoPopulate":
           {
@@ -1098,19 +1098,19 @@
         "members": [
             {
               "name": "MFT_BITMAP",
-              "value": "MENU_FLAGS.MF_BITMAP"
+              "value": "MENU_ITEM_FLAGS.MF_BITMAP"
             },
             {
               "name": "MFT_MENUBARBREAK",
-              "value": "MENU_FLAGS.MF_MENUBARBREAK"
+              "value": "MENU_ITEM_FLAGS.MF_MENUBARBREAK"
             },
             {
               "name": "MFT_MENUBREAK",
-              "value": "MENU_FLAGS.MF_MENUBREAK"
+              "value": "MENU_ITEM_FLAGS.MF_MENUBREAK"
             },
             {
               "name": "MFT_OWNERDRAW",
-              "value": "MENU_FLAGS.MF_OWNERDRAW"
+              "value": "MENU_ITEM_FLAGS.MF_OWNERDRAW"
             },
             {
               "name": "MFT_RADIOCHECK",
@@ -1118,7 +1118,7 @@
             },
             {
               "name": "MFT_RIGHTJUSTIFY",
-              "value": "MENU_FLAGS.MF_RIGHTJUSTIFY"
+              "value": "MENU_ITEM_FLAGS.MF_RIGHTJUSTIFY"
             },
             {
               "name": "MFT_RIGHTORDER",
@@ -1126,11 +1126,11 @@
             },
             {
               "name": "MFT_SEPARATOR",
-              "value": "MENU_FLAGS.MF_SEPARATOR"
+              "value": "MENU_ITEM_FLAGS.MF_SEPARATOR"
             },
             {
               "name": "MFT_STRING",
-              "value": "MENU_FLAGS.MF_STRING"
+              "value": "MENU_ITEM_FLAGS.MF_STRING"
             }
           ]
     },
@@ -1975,6 +1975,56 @@
         {
           "method": "OPENFILENAMEW",
           "parameter": "FlagsEx"
+        }
+      ]
+    },
+    {
+      "type": "uint",
+      "finished": false,
+      "name": "MENU_ITEM_STATE",
+      "flags": true,
+      "members": [
+        {
+          "name": "MFS_GRAYED",
+          "value": "0x00000003"
+        },
+        {
+          "name": "MFS_DISABLED",
+          "value": "MFS_GRAYED"
+        },
+        {
+          "name": "MFS_CHECKED",
+          "value": "MENU_ITEM_FLAGS.MF_CHECKED"
+        },
+        {
+          "name": "MFS_HILITE",
+          "value": "MENU_ITEM_FLAGS.MF_HILITE"
+        },
+        {
+          "name": "MFS_ENABLED",
+          "value": "MENU_ITEM_FLAGS.MF_ENABLED"
+        },
+        {
+          "name": "MFS_UNCHECKED",
+          "value": "MENU_ITEM_FLAGS.MF_UNCHECKED"
+        },
+        {
+          "name": "MFS_UNHILITE",
+          "value": "MENU_ITEM_FLAGS.MF_UNHILITE"
+        },
+        {
+          "name": "MFS_DEFAULT",
+          "value": "MENU_ITEM_FLAGS.MF_DEFAULT"
+        }
+      ],
+      "uses": [
+        {
+          "method": "MENUITEMINFOA",
+          "parameter": "fState"
+        },
+        {
+          "method": "MENUITEMINFOW",
+          "parameter": "fState"
         }
       ]
     }
