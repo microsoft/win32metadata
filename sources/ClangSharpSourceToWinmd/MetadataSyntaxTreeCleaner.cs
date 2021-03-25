@@ -686,7 +686,7 @@ namespace ClangSharpSourceToWinmd
 
                 if (!string.IsNullOrEmpty(nativeArrayInfoParams))
                 {
-                    var attrName = SyntaxFactory.ParseName("NativeArrayInfo");
+                    var attrName = SyntaxFactory.ParseName(nativeArrayInfoParams.Contains("BytesParamIndex") ? "MemorySize" : "NativeArrayInfo");
                     var args = SyntaxFactory.ParseAttributeArgumentList(nativeArrayInfoParams.ToString());
                     var finalAttr = SyntaxFactory.Attribute(attrName, args);
                     attributesList.Add(finalAttr);
