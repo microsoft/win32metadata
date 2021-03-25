@@ -2221,5 +2221,39 @@
           "parameter": "dwFlags"
         }
       ]
+    },
+    {
+      "type": "uint",
+      "finished": true,
+      "name": "SYM_LOAD_FLAGS",
+      "flags": true,
+      "members": [
+        {
+          "name": "SLMFLAG_NONE",
+          "value": "0"
+        },
+        {
+          "name": "SLMFLAG_VIRTUAL",
+          "value": "0x1"
+        },
+        {
+          "name": "SLMFLAG_ALT_INDEX",
+          "value": "0x2"
+        },
+        {
+          "name": "SLMFLAG_NO_SYMBOLS",
+          "value": "0x4"
+        }
+      ],
+      "uses": [
+        {
+          "method": "SymLoadModuleEx",
+          "parameter": "Flags"
+        },
+        {
+          "method": "SymLoadModuleExW",
+          "parameter": "Flags"
+        }
+      ]
     }
 ]

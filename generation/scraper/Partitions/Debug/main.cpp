@@ -11,3 +11,4 @@
 #include <activdbg.h>
 #include <activprof.h>
 #include <webapplication.h>
+#include <dbghelp.h>

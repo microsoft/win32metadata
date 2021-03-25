@@ -45,7 +45,6 @@
 #include <memoryapi.h>
 #include <minwinbase.h>
 #include <wct.h>
-#include <dbghelp.h>
 #include <minidumpapiset.h>
 //#include <imagehlp.h> // Can't use with dbghelp.h
 #include <winioctl.h>
