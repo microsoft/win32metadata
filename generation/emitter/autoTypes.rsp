@@ -36,6 +36,7 @@ Windows.Win32.SystemServices,PSTR,byte*
 Windows.Win32.WinRT,HSTRING,DECLARE_HANDLE,WindowsDeleteString
 Windows.Win32.WinRT,HSTRING_BUFFER,DECLARE_HANDLE
 Windows.Win32.SystemServices,HANDLE,DECLARE_HANDLE,CloseHandle
+Windows.Win32.SystemServices,NonClosableHandle,IntPtr,,HANDLE
 Windows.Win32.SystemServices,HINSTANCE,DECLARE_HANDLE,FreeLibrary
 Windows.Win32.Gdi,HDC,DECLARE_HANDLE,ReleaseDC
 Windows.Win32.Gdi,CreatedHDC,IntPtr,DeleteDC,HDC

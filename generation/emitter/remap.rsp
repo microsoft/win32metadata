@@ -341,3 +341,5 @@ DXVAHD_STREAM_DATA::ppPastSurfaces=[NativeArrayInfo(SizeParamIndex=3)]
 DXVAHD_STREAM_DATA::ppFutureSurfaces=[NativeArrayInfo(SizeParamIndex=4)]
 CreateIcon::lpbANDbits=[NativeArrayInfo]
 CreateIcon::lpbXORbits=[NativeArrayInfo]
+GetCurrentProcess::return=NonClosableHandle
+GetStdHandle::return=NonClosableHandle
