@@ -426,6 +426,7 @@ namespace ClangSharpSourceToWinmd
                     case "LPWSTR":
                     case "PWSTR":
                     case "LPOLESTR":
+                    case "PNZWCH":
                     case "WCHAR *":
                     case "OLECHAR *":
                     case "wchar_t *":
@@ -436,6 +437,7 @@ namespace ClangSharpSourceToWinmd
                     case "LPCWSTR":
                     case "PCWSTR":
                     case "LPCWCH":
+                    case "PCNZWCH":
                     case "LPCOLESTR":
                     case "const OLECHAR *":
                     case "const WCHAR *":
@@ -510,6 +512,10 @@ namespace ClangSharpSourceToWinmd
             {
                 string nativeType = nativeTypeNameAttr.ArgumentList.Arguments[0].ToString();
                 nativeType = EncodeHelpers.RemoveQuotes(nativeType);
+                if (nativeType == "PCNZWCH")
+                {
+
+                }
 
                 List<AttributeSyntax> attributeNodes = new List<AttributeSyntax>();
 
