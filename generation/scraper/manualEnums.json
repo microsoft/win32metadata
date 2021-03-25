@@ -2147,5 +2147,79 @@
           "parameter": "fdwOpen"
         }
       ]
+    },
+    {
+      "type": "uint",
+      "finished": false,
+      "name": "LOAD_LIBRARY_FLAGS",
+      "flags": true,
+      "members": [
+        {
+          "name": "DONT_RESOLVE_DLL_REFERENCES",
+          "value": "0x00000001"
+        },
+        {
+          "name": "LOAD_LIBRARY_AS_DATAFILE",
+          "value": "0x00000002"
+        },
+        {
+          "name": "LOAD_WITH_ALTERED_SEARCH_PATH",
+          "value": "0x00000008"
+        },
+        {
+          "name": "LOAD_IGNORE_CODE_AUTHZ_LEVEL",
+          "value": "0x00000010"
+        },
+        {
+          "name": "LOAD_LIBRARY_AS_IMAGE_RESOURCE",
+          "value": "0x00000020"
+        },
+        {
+          "name": "LOAD_LIBRARY_AS_DATAFILE_EXCLUSIVE",
+          "value": "0x00000040"
+        },
+        {
+          "name": "LOAD_LIBRARY_REQUIRE_SIGNED_TARGET",
+          "value": "0x00000080"
+        },
+        {
+          "name": "LOAD_LIBRARY_SEARCH_DLL_LOAD_DIR",
+          "value": "0x00000100"
+        },
+        {
+          "name": "LOAD_LIBRARY_SEARCH_APPLICATION_DIR",
+          "value": "0x00000200"
+        },
+        {
+          "name": "LOAD_LIBRARY_SEARCH_USER_DIRS",
+          "value": "0x00000400"
+        },
+        {
+          "name": "LOAD_LIBRARY_SEARCH_SYSTEM32",
+          "value": "0x00000800"
+        },
+        {
+          "name": "LOAD_LIBRARY_SEARCH_DEFAULT_DIRS",
+          "value": "0x00001000"
+        },
+        {
+          "name": "LOAD_LIBRARY_SAFE_CURRENT_DIRS",
+          "value": "0x00002000"
+        },
+        {
+          "name": "LOAD_LIBRARY_SEARCH_SYSTEM32_NO_FORWARDER",
+          "value": "0x00004000"
+        }
+      ],
+      "uses": [
+        {
+          "method": "LoadLibraryExA",
+          "parameter": "dwFlags"
+        },
+        {
+          "method": "LoadLibraryExW",
+          "parameter": "dwFlags"
+        }
+      ]
     }
 ]
