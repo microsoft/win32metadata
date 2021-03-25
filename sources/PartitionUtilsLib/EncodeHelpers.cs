@@ -61,6 +61,21 @@ namespace PartitionUtilsLib
             encoder.Scalar().Constant(constant);
         }
 
+        public static void SplitType(string fullType, out string typeOnly, out string pointers)
+        {
+            int starIndex = fullType.IndexOf('*');
+            if (starIndex != -1)
+            {
+                typeOnly = fullType.Substring(0, starIndex);
+                pointers = fullType.Substring(starIndex);
+            }
+            else
+            {
+                typeOnly = fullType;
+                pointers = string.Empty;
+            }
+        }
+
         public static string RemoveQuotes(string text)
         {
             if (text.Length >= 2 && text[0] == '\"' && text[text.Length - 1] == '\"')

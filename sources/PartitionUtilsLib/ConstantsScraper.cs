@@ -15,6 +15,7 @@ namespace PartitionUtilsLib
         public static void ScrapeConstants(
             string repoRoot,
             string[] enumJsonFiles,
+            string constantsHeaderText,
             Dictionary<string, string> exclusionNamesToPartitions,
             Dictionary<string, string> requiredNamespaces,
             Dictionary<string, string> remaps,
@@ -22,7 +23,7 @@ namespace PartitionUtilsLib
             Dictionary<string, string> renames)
         {
             using ConstantsScraperImpl imp = new ConstantsScraperImpl();
-            imp.ScrapeConstants(repoRoot, enumJsonFiles, exclusionNamesToPartitions, requiredNamespaces, remaps, withTypes, renames);
+            imp.ScrapeConstants(repoRoot, enumJsonFiles, constantsHeaderText, exclusionNamesToPartitions, requiredNamespaces, remaps, withTypes, renames);
         }
 
         private class ConstantsScraperImpl : IDisposable
@@ -33,7 +34,7 @@ namespace PartitionUtilsLib
 
             private static readonly Regex DefineConstantRegex =
                 new Regex(
-                    @"^((_HRESULT_TYPEDEF_|_NDIS_ERROR_TYPEDEF_)\(((?:0x)?[\da-f]+L?)\)|(\(HRESULT\)((?:0x)?[\da-f]+L?))|(-?\d+\.\d+(?:e\+\d+)?f?)|((?:0x[\da-f]+|\-?\d+)(?:UL|L)?)|((\d+)\s*(<<\s*\d+))|(MAKEINTRESOURCE\(\s*(\-?\d+)\s*\))|(\(HWND\)(-?\d+)))$", RegexOptions.IgnoreCase);
+                    @"^((_HRESULT_TYPEDEF_|_NDIS_ERROR_TYPEDEF_)\(((?:0x)?[\da-f]+L?)\)|(\(HRESULT\)((?:0x)?[\da-f]+L?))|(-?\d+\.\d+(?:e\+\d+)?f?)|((?:0x[\da-f]+|\-?\d+)(?:UL|L)?)|((\d+)\s*(<<\s*\d+))|(MAKEINTRESOURCE\(\s*(\-?\d+)\s*\))|(\(HWND\)(-?\d+))|([a-z0-9_]+\s*\+\s*(\d+|0x[0-de-f]+)))$", RegexOptions.IgnoreCase);
 
             private static readonly Regex DefineGuidConstRegex =
                 new Regex(
@@ -51,6 +52,8 @@ namespace PartitionUtilsLib
             private Dictionary<string, List<EnumObject>> enumMemberNameToEnumObj;
             private Dictionary<string, string> exclusionNamesToPartitions;
 
+            private string constantsHeaderText;
+
             public ConstantsScraperImpl()
             {
             }
@@ -58,6 +61,7 @@ namespace PartitionUtilsLib
             public void ScrapeConstants(
                 string repoRoot,
                 string[] enumJsonFiles,
+                string constantsHeaderText,
                 Dictionary<string, string> exclusionNamesToPartitions,
                 Dictionary<string, string> requiredNamespaces,
                 Dictionary<string, string> remaps,
@@ -67,6 +71,7 @@ namespace PartitionUtilsLib
                 this.requiredNamespaces = new WildcardDictionary(requiredNamespaces);
                 this.withTypes = withTypes;
                 this.exclusionNamesToPartitions = exclusionNamesToPartitions;
+                this.constantsHeaderText = constantsHeaderText;
 
                 this.repoRoot = Path.GetFullPath(repoRoot);
 
@@ -309,7 +314,7 @@ namespace PartitionUtilsLib
                         File.Delete(partConstantsFile);
                     }
 
-                    constantWriter = new ConstantWriter(partConstantsFile, foundNamespace);
+                    constantWriter = new ConstantWriter(partConstantsFile, foundNamespace, this.constantsHeaderText);
                     this.namespacesToConstantWriters.Add(foundNamespace, constantWriter);
                 }
 
@@ -557,6 +562,11 @@ namespace PartitionUtilsLib
                                     this.AddConstantInteger(currentNamespace, nativeTypeName, name, valueText);
                                     continue;
                                 }
+                                // (IDENT_FOO + 4)
+                                else if (match.Groups[15].Success)
+                                {
+                                    valueText = match.Groups[15].Value;
+                                }
                                 else
                                 {
                                     continue;
@@ -653,11 +663,6 @@ namespace PartitionUtilsLib
                 // For each enum object...
                 foreach (var obj in enumObjectsFromJsons)
                 {
-                    if (obj.name == "WAVE_OPEN_TYPE")
-                    {
-
-                    }
-
                     // Skip if no members
                     if (obj.members.Count == 0)
                     {

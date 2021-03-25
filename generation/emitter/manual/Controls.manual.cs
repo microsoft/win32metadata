@@ -17,5 +17,7 @@ namespace Windows.Win32.Controls
 
         [NativeTypeName("HTREEITEM")]
         public const int TVI_SORT = -0x0FFFD;
+
+        public const uint BCN_FIRST = unchecked((uint)-1250);
     }
 }

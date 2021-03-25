@@ -63,19 +63,19 @@ namespace ClangSharpSourceToWinmd
                     {
                         node = node.WithType(SyntaxFactory.ParseTypeName(newType).WithTrailingTrivia(SyntaxFactory.Space));
                     }
-
-                    return node;
                 }
-
-                var ret = (ParameterSyntax)base.VisitParameter(node);
+                else
+                {
+                    node = (ParameterSyntax)base.VisitParameter(node);
+                }
 
                 // Get rid of default parameter values
-                if (ret.Default != null)
+                if (node.Default != null)
                 {
-                    ret = ret.WithDefault(null);
+                    node = node.WithDefault(null);
                 }
 
-                return ret;
+                return node;
             }
 
             public override SyntaxNode VisitStructDeclaration(StructDeclarationSyntax node)
@@ -269,11 +269,11 @@ namespace ClangSharpSourceToWinmd
 
                             node = node.WithAttributeLists(node.AttributeLists.Add(attrListNode));
                         }
+                    }
 
-                        if (newType != null)
-                        {
-                            node = node.WithReturnType(SyntaxFactory.ParseTypeName(newType).WithTrailingTrivia(SyntaxFactory.Space));
-                        }
+                    if (newType != null)
+                    {
+                        node = node.WithReturnType(SyntaxFactory.ParseTypeName(newType).WithTrailingTrivia(SyntaxFactory.Space));
                     }
 
                     return node;
@@ -284,7 +284,7 @@ namespace ClangSharpSourceToWinmd
 
             public override SyntaxNode VisitMethodDeclaration(MethodDeclarationSyntax node)
             {
-                // Skip methods where we weren't given a import lib name. Should we warn the caller?
+                // Skip methods where we weren't given an import lib name. Should we warn the caller?
                 if (node.AttributeLists.ToString().Contains("[DllImport(\"\""))
                 {
                     return null;
@@ -800,6 +800,9 @@ namespace ClangSharpSourceToWinmd
 
             private bool GetRemapInfo(string fullName, out List<AttributeSyntax> listAttributes, string currentType, out string newType, out string newName)
             {
+                listAttributes = null;
+                newName = null;
+
                 if (!string.IsNullOrEmpty(fullName) && this.remaps.TryGetValue(fullName, out string remapData))
                 {
                     var ret = EncodeHelpers.DecodeRemap(remapData, out listAttributes, out newType, out newName);
@@ -825,8 +828,20 @@ namespace ClangSharpSourceToWinmd
 
                     return ret;
                 }
+                else
+                {
+                    // See if the type ends in the magic suffix. We use a remap fed to clangsharp 
+                    // to keep some typedefs from following down to their original type
+                    const string RevertToTypeSuffix = "___";
 
-                listAttributes = null;
+                    EncodeHelpers.SplitType(currentType, out var typeOnly, out var pointers);
+                    if (typeOnly.EndsWith(RevertToTypeSuffix))
+                    {
+                        newType = typeOnly.Substring(0, typeOnly.Length - RevertToTypeSuffix.Length) + pointers;
+                        return true;
+                    }
+                }
+
                 newType = null;
                 newName = null;
 

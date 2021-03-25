@@ -8,13 +8,15 @@ namespace PartitionUtilsLib
     {
         private string path;
         private string @namespace;
+        private string headerText;
         private StreamWriter writer;
         private Dictionary<string, string> namesToValues = new Dictionary<string, string>();
 
-        public ConstantWriter(string path, string @namespace)
+        public ConstantWriter(string path, string @namespace, string sourceHeaderText)
         {
             this.path = path;
             this.@namespace = @namespace;
+            this.headerText = sourceHeaderText;
 
             this.namesToValues["TRUE"] = "1";
             this.namesToValues["FALSE"] = "0";
@@ -183,9 +185,7 @@ $"        [NativeTypeName(\"{nativeTypeName}\")]");
             {
                 this.writer = new StreamWriter(this.path);
                 this.writer.WriteLine(
-@$"using System;
-using Windows.Win32.Interop;
-using Windows.Win32.WindowsPropertiesSystem; // For PROPERTYKEY
+@$"{this.headerText}
 
 namespace {this.@namespace}
 {{

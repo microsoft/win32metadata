@@ -1,0 +1,9 @@
+using System;
+using Windows.Win32.Interop;
+using Windows.Win32.WindowsPropertiesSystem; // For PROPERTYKEY
+using static Windows.Win32.SystemServices.Apis; // Various constants
+using static Windows.Win32.Multimedia.Apis; // Various constants
+using static Windows.Win32.CoreAudio.Apis; // Various constants
+using static Windows.Win32.DirectShow.Apis; // Various constants
+using static Windows.Win32.WindowsAndMessaging.Apis; // For WM_USER
+

@@ -1,7 +1,19 @@
 using System;
+using Windows.Win32.Interop;
+using static Windows.Win32.SystemServices.Apis;
 
 namespace Windows.Win32.Shell
 {
+
+    public static unsafe partial class Apis
+    {
+        [NativeTypeName("HRESULT")]
+        public const int HLINK_E_FIRST = OLE_E_LAST + 1;
+
+        [NativeTypeName("HRESULT")]
+        public const int HLINK_S_FIRST = OLE_S_LAST + 1;
+    }
+
     [Flags]
     public enum SHGFI_FLAGS
     {

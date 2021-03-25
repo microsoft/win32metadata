@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using Windows.Win32.Interop;
+using static Windows.Win32.SystemServices.Apis;
 
 namespace Windows.Win32.DirectWrite
 {
@@ -18,5 +19,16 @@ namespace Windows.Win32.DirectWrite
         DWRITE_FONT_AXIS_TAG_SLANT = (((uint)((byte)('t')) << 24) | ((uint)((byte)('n')) << 16) | ((uint)((byte)('l')) << 8) | (uint)((byte)('s'))),
         DWRITE_FONT_AXIS_TAG_OPTICAL_SIZE = (((uint)((byte)('z')) << 24) | ((uint)((byte)('s')) << 16) | ((uint)((byte)('p')) << 8) | (uint)((byte)('o'))),
         DWRITE_FONT_AXIS_TAG_ITALIC = (((uint)((byte)('l')) << 24) | ((uint)((byte)('a')) << 16) | ((uint)((byte)('t')) << 8) | (uint)((byte)('i'))),
+    }
+
+    public partial struct DWRITE_COLOR_F
+    {
+        public float r;
+
+        public float g;
+
+        public float b;
+
+        public float a;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.CommandLine;
 using System.CommandLine.Invocation;
+using System.IO;
 
 namespace ConstantsScraperApp
 {
@@ -11,6 +12,7 @@ namespace ConstantsScraperApp
             var rootCommand = new RootCommand("Scrape traversed headers for constants.")
             {
                 new Option<string>(new[] { "--repoRoot" }, "The location of the repo.") { IsRequired = true },
+                new Option<string>(new[] { "--headerTextFile" }, "The text file to use as the intro text for written constants source files."),
                 new Option(new string[] { "--exclude" }, "A constant to exclude.")
                 {
                     Argument = new Argument("<value>")
@@ -71,6 +73,7 @@ namespace ConstantsScraperApp
             string repoRoot = context.ParseResult.ValueForOption<string>("repoRoot");
             var excludeItems = context.ParseResult.ValueForOption<string[]>("exclude");
             var enumJsonFiles = context.ParseResult.ValueForOption<string[]>("enumsJson");
+            var headerTextFile = context.ParseResult.ValueForOption<string>("headerTextFile");
             var requiredNamespaceValuePairs = context.ParseResult.ValueForOption<string[]>("requiredNamespaceForName");
             var renamedNameValuePairs = context.ParseResult.ValueForOption<string[]>("rename");
             var remappedNameValuePairs = context.ParseResult.ValueForOption<string[]>("remap");
@@ -82,9 +85,11 @@ namespace ConstantsScraperApp
             var renames = ConvertValuePairsToDictionary(renamedNameValuePairs);
             var withTypes = ConvertValuePairsToDictionary(withTypeValuePairs);
 
+            var headerText = !string.IsNullOrEmpty(headerTextFile) ? File.ReadAllText(headerTextFile) : string.Empty;
+
             try
             {
-                PartitionUtilsLib.ConstantsScraper.ScrapeConstants(repoRoot, enumJsonFiles, exclusionNamesToPartitions, requiredNamespaces, remaps, withTypes, renames);
+                PartitionUtilsLib.ConstantsScraper.ScrapeConstants(repoRoot, enumJsonFiles, headerText, exclusionNamesToPartitions, requiredNamespaces, remaps, withTypes, renames);
             }
             catch (System.Exception e)
             {
