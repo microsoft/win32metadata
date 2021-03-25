@@ -2255,5 +2255,111 @@
           "parameter": "Flags"
         }
       ]
+    },
+    {
+      "type": "uint",
+      "finished": true,
+      "name": "HEAP_FLAGS",
+      "flags": true,
+      "members": [
+        {
+          "name": "HEAP_NONE",
+          "value": "0x00000000"
+        },
+        {
+          "name": "HEAP_NO_SERIALIZE",
+          "value": "0x00000001"
+        },
+        {
+          "name": "HEAP_GROWABLE",
+          "value": "0x00000002"
+        },
+        {
+          "name": "HEAP_GENERATE_EXCEPTIONS",
+          "value": "0x00000004"
+        },
+        {
+          "name": "HEAP_ZERO_MEMORY",
+          "value": "0x00000008"
+        },
+        {
+          "name": "HEAP_REALLOC_IN_PLACE_ONLY",
+          "value": "0x00000010"
+        },
+        {
+          "name": "HEAP_TAIL_CHECKING_ENABLED",
+          "value": "0x00000020"
+        },
+        {
+          "name": "HEAP_FREE_CHECKING_ENABLED",
+          "value": "0x00000040"
+        },
+        {
+          "name": "HEAP_DISABLE_COALESCE_ON_FREE",
+          "value": "0x00000080"
+        },
+        {
+          "name": "HEAP_CREATE_ALIGN_16",
+          "value": "0x00010000"
+        },
+        {
+          "name": "HEAP_CREATE_ENABLE_TRACING",
+          "value": "0x00020000"
+        },
+        {
+          "name": "HEAP_CREATE_ENABLE_EXECUTE",
+          "value": "0x00040000"
+        },
+        {
+          "name": "HEAP_MAXIMUM_TAG",
+          "value": "0x0FFF"
+        },
+        {
+          "name": "HEAP_PSEUDO_TAG_FLAG",
+          "value": "0x8000"
+        },
+        {
+          "name": "HEAP_TAG_SHIFT",
+          "value": "18"
+        },
+        {
+          "name": "HEAP_CREATE_SEGMENT_HEAP",
+          "value": "0x00000100"
+        },
+        {
+          "name": "HEAP_CREATE_HARDENED",
+          "value": "0x00000200"
+        }
+      ],
+      "uses": [
+        {
+          "method": "HeapAlloc",
+          "parameter": "dwFlags"
+        },
+        {
+          "method": "HeapCompact",
+          "parameter": "dwFlags"
+        },
+        {
+          "method": "HeapCreate",
+          "parameter": "flFlags"
+        },
+        {
+          "method": "HeapFree",
+          "parameter": "dwFlags"
+        },
+        {
+          "method": "HeapReAlloc",
+          "parameter": "dwFlags"
+        },
+        {
+          "method": "HeapSize",
+          "parameter": "dwFlags"
+        },
+        {
+          "method": "HeapValidate",
+          "parameter": "dwFlags"
+        }
+      ]
     }
 ]

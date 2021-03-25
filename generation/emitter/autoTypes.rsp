@@ -74,6 +74,7 @@ Windows.Win32.IpHelper,IcmpHandle,IntPtr,IcmpCloseHandle
 Windows.Win32.Gdi,HdcMetdataFileHandle,IntPtr,DeleteMetaFile
 Windows.Win32.Gdi,HdcMetdataEnhFileHandle,IntPtr,DeleteEnhMetaFile
 Windows.Win32.SystemServices,HeapHandle,IntPtr,HeapDestroy
+Windows.Win32.SystemServices,ProcessHeapHandle,IntPtr,,HeapHandle
 Windows.Win32.WindowsColorSystem,HCOLORSPACE,DECLARE_HANDLE,DeleteColorSpace
 Windows.Win32.WindowsStationsAndDesktops,HDESK,DECLARE_HANDLE,CloseDesktop
 Windows.Win32.MenusAndResources,HACCEL,DECLARE_HANDLE,DestroyAcceleratorTable

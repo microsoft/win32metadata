@@ -826,10 +826,6 @@ namespace ClangSharpSourceToWinmd
                                 newType += currentType.Substring(starIndex);
                             }
                         }
-                        else
-                        {
-                            newType = null;
-                        }
                     }
 
                     return ret;
