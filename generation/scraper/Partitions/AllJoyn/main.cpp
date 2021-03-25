@@ -2,7 +2,7 @@
 
 #include "intrinfix.h"
 
-#include <windows.h>
+#include "windows.fixed.h"
 #include <stdint.h>
 #include <MSAJTransport.h>
 #include <alljoyn_c\AjAPI.h>

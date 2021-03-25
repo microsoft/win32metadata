@@ -3,10 +3,13 @@
 
 #include "intrinfix.h"
 
-#include <windows.h>
+#include "windows.fixed.h"
 #include <sdkddkver.h>
 
 #include <winternl.h>
+
+// Usually brought in by windows.h
+typedef NTSTATUS* PNTSTATUS;
 
 #define _NTDEF_
 #define SECURITY_WIN32

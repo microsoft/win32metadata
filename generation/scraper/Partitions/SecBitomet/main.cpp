@@ -3,7 +3,7 @@
 
 #include "intrinfix.h"
 
-#include <windows.h>
+#include "windows.fixed.h"
 
 // From ntdef.h, but using ntdef.h doesn't get us all the types we need. Same for winminbase.h
 #define ARGUMENT_PRESENT(ArgumentPointer)    (\

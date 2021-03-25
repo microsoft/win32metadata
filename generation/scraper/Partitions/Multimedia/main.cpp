@@ -3,8 +3,9 @@
 
 #include "intrinfix.h"
 
-#include <windows.h>
+#include "windows.fixed.h"
 #include <sdkddkver.h>
+#include <commdlg.h>
 
 #include <combaseapi.h>
 #include <mmreg.h>

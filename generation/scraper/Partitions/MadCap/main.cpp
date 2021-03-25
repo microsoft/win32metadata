@@ -3,7 +3,7 @@
 
 #include "intrinfix.h"
 
-#include <windows.h>
+#include "windows.fixed.h"
 #include <winternl.h>
 
 #include <madcapcl.h>

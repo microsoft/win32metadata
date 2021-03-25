@@ -3,7 +3,7 @@
 
 #include "intrinfix.h"
 
-#include <windows.h>
+#include "windows.fixed.h"
 #include <sdkddkver.h>
 
 //#define RO_NO_TEMPLATE_NAME

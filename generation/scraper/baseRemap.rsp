@@ -78,6 +78,7 @@ PRTM_ENTITY_EXPORT_METHOD
 LPDIRECTDRAWENUMERATEEX
 PDRVCALLBACK
 WAITORTIMERCALLBACK
+_PSP
 --remap
 ABI::Windows::Foundation::IActivatableClassRegistration=IActivatableClassRegistration
 adpcmcoef_tag=ADPCMCOEFSET

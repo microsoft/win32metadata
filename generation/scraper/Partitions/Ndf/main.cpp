@@ -3,8 +3,11 @@
 
 #include "intrinfix.h"
 
-#include <windows.h>
+#include "windows.fixed.h"
 #include <sdkddkver.h>
+
+// Usually brought in by windows.h
+typedef UINT_PTR SOCKET;
 
 #include <ndattrib.h>
 #include <ndhelper.h>

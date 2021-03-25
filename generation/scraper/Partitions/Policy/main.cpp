@@ -3,8 +3,10 @@
 
 #include "intrinfix.h"
 
-#include <windows.h>
+#include "windows.fixed.h"
 #include <sdkddkver.h>
+
+#include <CommCtrl.h>
 
 #include <userenv.h>
 #include <appmgmt.h>

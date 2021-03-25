@@ -97,7 +97,7 @@ function WritePartionFilesForConfig($techConfigFile)
 
 #include "intrinfix.h"
 
-#include <windows.h>
+#include "windows.fixed.h"
 #include <sdkddkver.h>
 
 "@

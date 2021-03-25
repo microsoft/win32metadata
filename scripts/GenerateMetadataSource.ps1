@@ -19,6 +19,9 @@ param
     [bool]
     $exitAfterFindVersion = $false,
 
+    [bool]
+    $keepProcessingOnFailure = $false,
+
     [string]
     $patch = ""
 )
@@ -197,7 +200,7 @@ Add-Member -InputObject $errObj -MemberType NoteProperty -Name ErrorCode -Value 
 
 $partitionNames | ForEach-Object -Parallel {
     $localObj = $using:errObj
-    if ($localObj.ErrorCode -ne 0)
+    if (($keepProcessingOnFailure -eq $false) -and ($localObj.ErrorCode -ne 0))
     {
         continue
     }

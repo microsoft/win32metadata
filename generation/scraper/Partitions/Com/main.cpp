@@ -2,8 +2,8 @@
 #define QCC_OS_GROUP_WINDOWS
 
 #include "intrinfix.h"
+#include "windows.fixed.h"
 
-#include <windows.h>
 #include <sdkddkver.h>
 
 #include <wtypes.h>
@@ -16,25 +16,29 @@
 #include <oledlg.h>
 #include <ole2.h>
 #include <objbase.h>
+
+#include <comcat.h>
+#include <callobj.h>
+#include <messagedispatcherapi.h>
+
+/*
 #include <urlmon.h>
 #include <accctrl.h>
 #include <rpcdce.h>
 #include <winerror.h>
 #include <combaseapi.h>
 #include <objidlbase.h>
-#include <callobj.h>
 #include <wtypesbase.h>
 #include <eventsys.h>
 #include <txlogpub.h>
 #include <shobjidl.h>
 #include <iaccess.h>
-#include <comcat.h>
 //#include <unknwnbase.h>
 //#include <unknwn.h>
 #include <ctxtcall.h>
 #include <imessagedispatcher.h>
 #include <dmerror.h>
-#include <messagedispatcherapi.h>
 #include <roapi.h>
 #include <guiddef.h>
 #include <winddi.h>
+*/
