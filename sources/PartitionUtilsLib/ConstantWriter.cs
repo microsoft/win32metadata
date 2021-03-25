@@ -11,12 +11,14 @@ namespace PartitionUtilsLib
         private string headerText;
         private StreamWriter writer;
         private Dictionary<string, string> namesToValues = new Dictionary<string, string>();
+        private Dictionary<string, string> withAttributes;
 
-        public ConstantWriter(string path, string @namespace, string sourceHeaderText)
+        public ConstantWriter(string path, string @namespace, string sourceHeaderText, Dictionary<string, string> withAttributes)
         {
             this.path = path;
             this.@namespace = @namespace;
             this.headerText = sourceHeaderText;
+            this.withAttributes = withAttributes;
 
             this.namesToValues["TRUE"] = "1";
             this.namesToValues["FALSE"] = "0";
@@ -69,6 +71,12 @@ $@"        public static readonly Guid {name}__scanned__ = new Guid({args});");
         public void AddValue(string type, string name, string valueText)
         {
             this.namesToValues[name] = valueText;
+
+            if (this.withAttributes.TryGetValue(name, out var extraAttributes))
+            {
+                this.Writer.WriteLine(
+$"        [{extraAttributes}]");
+            }
 
             this.Writer.WriteLine(
 $"        public const {type} {name} = {valueText};");

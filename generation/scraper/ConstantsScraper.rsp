@@ -1,3 +1,11 @@
+--with-attribute
+IDI_APPLICATION=NativeTypeName("LPCWSTR")
+IDI_HAND=NativeTypeName("LPCWSTR")
+IDI_QUESTION=NativeTypeName("LPCWSTR")
+IDI_EXCLAMATION=NativeTypeName("LPCWSTR")
+IDI_ASTERISK=NativeTypeName("LPCWSTR")
+IDI_WINLOGO=NativeTypeName("LPCWSTR")
+IDI_SHIELD=NativeTypeName("LPCWSTR")
 --with-type
 DELETE=uint
 READ_CONTROL=uint

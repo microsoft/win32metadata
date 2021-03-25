@@ -20,10 +20,11 @@ namespace PartitionUtilsLib
             Dictionary<string, string> requiredNamespaces,
             Dictionary<string, string> remaps,
             Dictionary<string, string> withTypes,
-            Dictionary<string, string> renames)
+            Dictionary<string, string> renames,
+            Dictionary<string, string> withAttributes)
         {
             using ConstantsScraperImpl imp = new ConstantsScraperImpl();
-            imp.ScrapeConstants(repoRoot, enumJsonFiles, constantsHeaderText, exclusionNamesToPartitions, requiredNamespaces, remaps, withTypes, renames);
+            imp.ScrapeConstants(repoRoot, enumJsonFiles, constantsHeaderText, exclusionNamesToPartitions, requiredNamespaces, remaps, withTypes, renames, withAttributes);
         }
 
         private class ConstantsScraperImpl : IDisposable
@@ -48,6 +49,7 @@ namespace PartitionUtilsLib
 
             private List<EnumObject> enumObjectsFromJsons;
             private Dictionary<string, string> withTypes;
+            private Dictionary<string, string> withAttributes;
 
             private Dictionary<string, List<EnumObject>> enumMemberNameToEnumObj;
             private Dictionary<string, string> exclusionNamesToPartitions;
@@ -66,12 +68,14 @@ namespace PartitionUtilsLib
                 Dictionary<string, string> requiredNamespaces,
                 Dictionary<string, string> remaps,
                 Dictionary<string, string> withTypes,
-                Dictionary<string, string> renames)
+                Dictionary<string, string> renames,
+                Dictionary<string, string> withAttributes)
             {
                 this.requiredNamespaces = new WildcardDictionary(requiredNamespaces);
                 this.withTypes = withTypes;
                 this.exclusionNamesToPartitions = exclusionNamesToPartitions;
                 this.constantsHeaderText = constantsHeaderText;
+                this.withAttributes = withAttributes;
 
                 this.repoRoot = Path.GetFullPath(repoRoot);
 
@@ -314,7 +318,7 @@ namespace PartitionUtilsLib
                         File.Delete(partConstantsFile);
                     }
 
-                    constantWriter = new ConstantWriter(partConstantsFile, foundNamespace, this.constantsHeaderText);
+                    constantWriter = new ConstantWriter(partConstantsFile, foundNamespace, this.constantsHeaderText, this.withAttributes);
                     this.namespacesToConstantWriters.Add(foundNamespace, constantWriter);
                 }
 

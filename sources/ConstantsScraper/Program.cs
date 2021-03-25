@@ -37,6 +37,14 @@ namespace ConstantsScraperApp
                         Arity = ArgumentArity.OneOrMore,
                     }
                 },
+                new Option(new string[] { "--with-attribute" }, "Add an attribute to a constant.")
+                {
+                    Argument = new Argument("<name>=<value>")
+                    {
+                        ArgumentType = typeof(string),
+                        Arity = ArgumentArity.OneOrMore,
+                    }
+                },
                 new Option(new string[] { "--remap", "-r" }, "A field or parameter that should get remapped to a certain type.")
                 {
                     Argument = new Argument("<name>=<value>")
@@ -78,18 +86,20 @@ namespace ConstantsScraperApp
             var renamedNameValuePairs = context.ParseResult.ValueForOption<string[]>("rename");
             var remappedNameValuePairs = context.ParseResult.ValueForOption<string[]>("remap");
             var withTypeValuePairs = context.ParseResult.ValueForOption<string[]>("with-type");
+            var withAttributeValuePairs = context.ParseResult.ValueForOption<string[]>("with-attribute");
 
             var exclusionNamesToPartitions = ConvertExclusionsToDictionary(excludeItems);
             var requiredNamespaces = ConvertValuePairsToDictionary(requiredNamespaceValuePairs);
             var remaps = ConvertValuePairsToDictionary(remappedNameValuePairs);
             var renames = ConvertValuePairsToDictionary(renamedNameValuePairs);
             var withTypes = ConvertValuePairsToDictionary(withTypeValuePairs);
+            var withAttributes = ConvertValuePairsToDictionary(withAttributeValuePairs);
 
             var headerText = !string.IsNullOrEmpty(headerTextFile) ? File.ReadAllText(headerTextFile) : string.Empty;
 
             try
             {
-                PartitionUtilsLib.ConstantsScraper.ScrapeConstants(repoRoot, enumJsonFiles, headerText, exclusionNamesToPartitions, requiredNamespaces, remaps, withTypes, renames);
+                PartitionUtilsLib.ConstantsScraper.ScrapeConstants(repoRoot, enumJsonFiles, headerText, exclusionNamesToPartitions, requiredNamespaces, remaps, withTypes, renames, withAttributes);
             }
             catch (System.Exception e)
             {
