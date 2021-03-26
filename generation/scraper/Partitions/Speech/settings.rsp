@@ -1,0 +1,16 @@
+--file
+<PartitionDir>\main.cpp
+--output
+<GeneratedSourceDir>\<PartitionName>.cs
+--include-directory
+<RepoRoot>\generation\scraper
+<IncludeRoot>/shared
+<IncludeRoot>/um
+<IncludeRoot>/winrt
+--with-type
+SpeechStreamSeekPositionType=uint
+--traverse
+<IncludeRoot>/um/sapi.h
+<IncludeRoot>/um/sapi53.h
+--namespace
+Windows.Win32.Speech
