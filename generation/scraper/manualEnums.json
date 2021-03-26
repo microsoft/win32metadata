@@ -1441,36 +1441,6 @@
         ]
     },
     {
-        "name": "CERT_QUERY_FLAGS",
-        "flags": true,
-        "type": "int",
-        "autoPopulate":
-          {
-              "filter": "CERT_QUERY_CONTENT_",
-              "header": "wincrypt.h"
-          },
-        "members": [
-          {
-            "name": "CERT_QUERY_CONTENT_FLAG_ALL"
-          }
-        ]
-    },
-    {
-        "name": "CERT_QUERY_FORMAT_TYPE",
-        "flags": false,
-        "members": [
-          {
-            "name": "CERT_QUERY_FORMAT_ASN_ASCII_HEX_ENCODED"
-          },
-          {
-            "name": "CERT_QUERY_FORMAT_BASE64_ENCODED"
-          },
-          {
-            "name": "CERT_QUERY_FORMAT_BINARY"
-          }
-        ]
-    },
-    {
         "name": "VER_MASK",
         "flags": true,
         "members": [
@@ -1512,29 +1482,6 @@
               "method": "VerSetConditionMask",
               "parameter": "TypeMask"
             }
-        ]
-    },
-    {
-        "name": "CERT_QUERY_FORMAT_FLAGS",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "CERT_QUERY_FORMAT_FLAG_",
-              "header": "wincrypt.h"
-          },
-        "members": [
-          {
-            "name": "CERT_QUERY_FORMAT_FLAG_ASN_ASCII_HEX_ENCODED",
-            "value": "( 1 << (int)CERT_QUERY_FORMAT_TYPE.CERT_QUERY_FORMAT_ASN_ASCII_HEX_ENCODED)"
-          },
-          {
-            "name": "CERT_QUERY_FORMAT_FLAG_BASE64_ENCODED",
-            "value": "( 1 << (int)CERT_QUERY_FORMAT_TYPE.CERT_QUERY_FORMAT_BASE64_ENCODED)"
-          },
-          {
-            "name": "CERT_QUERY_FORMAT_FLAG_BINARY",
-            "value": "( 1 << (int)CERT_QUERY_FORMAT_TYPE.CERT_QUERY_FORMAT_BINARY)"
-          }
         ]
     },
     {
@@ -2359,6 +2306,254 @@
         {
           "method": "HeapValidate",
           "parameter": "dwFlags"
+        }
+      ]
+    },
+    {
+      "type": "uint",
+      "finished": true,
+      "name": "CERT_QUERY_OBJECT_TYPE",
+      "flags": false,
+      "members": [
+        {
+          "name": "CERT_QUERY_OBJECT_FILE",
+          "value": "0x00000001"
+        },
+        {
+          "name": "CERT_QUERY_OBJECT_BLOB",
+          "value": "0x00000002"
+        }
+      ],
+      "uses": [
+        {
+          "method": "CryptQueryObject",
+          "parameter": "dwObjectType"
+        }
+      ]
+    },
+    {
+      "type": "uint",
+      "finished": true,
+      "name": "CERT_QUERY_CONTENT_TYPE",
+      "flags": false,
+      "members": [
+        {
+          "name": "CERT_QUERY_CONTENT_CERT",
+          "value": "1"
+        },
+        {
+          "name": "CERT_QUERY_CONTENT_CTL",
+          "value": "2"
+        },
+        {
+          "name": "CERT_QUERY_CONTENT_CRL",
+          "value": "3"
+        },
+        {
+          "name": "CERT_QUERY_CONTENT_SERIALIZED_STORE",
+          "value": "4"
+        },
+        {
+          "name": "CERT_QUERY_CONTENT_SERIALIZED_CERT",
+          "value": "5"
+        },
+        {
+          "name": "CERT_QUERY_CONTENT_SERIALIZED_CTL",
+          "value": "6"
+        },
+        {
+          "name": "CERT_QUERY_CONTENT_SERIALIZED_CRL",
+          "value": "7"
+        },
+        {
+          "name": "CERT_QUERY_CONTENT_PKCS7_SIGNED",
+          "value": "8"
+        },
+        {
+          "name": "CERT_QUERY_CONTENT_PKCS7_UNSIGNED",
+          "value": "9"
+        },
+        {
+          "name": "CERT_QUERY_CONTENT_PKCS7_SIGNED_EMBED",
+          "value": "10"
+        },
+        {
+          "name": "CERT_QUERY_CONTENT_PKCS10",
+          "value": "11"
+        },
+        {
+          "name": "CERT_QUERY_CONTENT_PFX",
+          "value": "12"
+        },
+        {
+          "name": "CERT_QUERY_CONTENT_CERT_PAIR",
+          "value": "13"
+        },
+        {
+          "name": "CERT_QUERY_CONTENT_PFX_AND_LOAD",
+          "value": "14"
+        }
+      ],
+      "uses": [
+        {
+          "method": "CryptQueryObject",
+          "parameter": "pdwContentType"
+        }
+      ]
+    },
+    {
+      "type": "uint",
+      "finished": true,
+      "name": "CERT_QUERY_CONTENT_TYPE_FLAGS",
+      "flags": false,
+      "members": [
+        {
+          "name": "CERT_QUERY_CONTENT_FLAG_CERT",
+          "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_CERT)"
+        },
+        {
+          "name": "CERT_QUERY_CONTENT_FLAG_CTL",
+          "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_CTL)"
+        },
+        {
+          "name": "CERT_QUERY_CONTENT_FLAG_CRL",
+          "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_CRL)"
+        },
+        {
+          "name": "CERT_QUERY_CONTENT_FLAG_SERIALIZED_STORE",
+          "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_SERIALIZED_STORE)"
+        },
+        {
+          "name": "CERT_QUERY_CONTENT_FLAG_SERIALIZED_CERT",
+          "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_SERIALIZED_CERT)"
+        },
+        {
+          "name": "CERT_QUERY_CONTENT_FLAG_SERIALIZED_CTL",
+          "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_SERIALIZED_CTL)"
+        },
+        {
+          "name": "CERT_QUERY_CONTENT_FLAG_SERIALIZED_CRL",
+          "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_SERIALIZED_CRL)"
+        },
+        {
+          "name": "CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED",
+          "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_PKCS7_SIGNED)"
+        },
+        {
+          "name": "CERT_QUERY_CONTENT_FLAG_PKCS7_UNSIGNED",
+          "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_PKCS7_UNSIGNED)"
+        },
+        {
+          "name": "CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED_EMBED",
+          "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_PKCS7_SIGNED_EMBED)"
+        },
+        {
+          "name": "CERT_QUERY_CONTENT_FLAG_PKCS10",
+          "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_PKCS10)"
+        },
+        {
+          "name": "CERT_QUERY_CONTENT_FLAG_PFX",
+          "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_PFX)"
+        },
+        {
+          "name": "CERT_QUERY_CONTENT_FLAG_CERT_PAIR",
+          "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_CERT_PAIR)"
+        },
+        {
+          "name": "CERT_QUERY_CONTENT_FLAG_PFX_AND_LOAD",
+          "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_PFX_AND_LOAD)"
+        },
+        {
+          "name": "CERT_QUERY_CONTENT_FLAG_ALL",
+          "value": "(CERT_QUERY_CONTENT_FLAG_CERT | CERT_QUERY_CONTENT_FLAG_CTL | CERT_QUERY_CONTENT_FLAG_CRL | CERT_QUERY_CONTENT_FLAG_SERIALIZED_STORE | CERT_QUERY_CONTENT_FLAG_SERIALIZED_CERT | CERT_QUERY_CONTENT_FLAG_SERIALIZED_CTL | CERT_QUERY_CONTENT_FLAG_SERIALIZED_CRL | CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED | CERT_QUERY_CONTENT_FLAG_PKCS7_UNSIGNED | CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED_EMBED | CERT_QUERY_CONTENT_FLAG_PKCS10 | CERT_QUERY_CONTENT_FLAG_PFX | CERT_QUERY_CONTENT_FLAG_CERT_PAIR)"
+        },
+        {
+          "name": "CERT_QUERY_CONTENT_FLAG_ALL_ISSUER_CERT",
+          "value": "(CERT_QUERY_CONTENT_FLAG_CERT | CERT_QUERY_CONTENT_FLAG_SERIALIZED_STORE | CERT_QUERY_CONTENT_FLAG_SERIALIZED_CERT | CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED | CERT_QUERY_CONTENT_FLAG_PKCS7_UNSIGNED)"
+        }
+      ],
+      "uses": [
+        {
+          "method": "CryptQueryObject",
+          "parameter": "dwExpectedContentTypeFlags"
+        }
+      ]
+    },
+    {
+      "type": "uint",
+      "finished": true,
+      "name": "CERT_QUERY_FORMAT_TYPE",
+      "flags": false,
+      "members": [
+        {
+          "name": "CERT_QUERY_FORMAT_BINARY",
+          "value": "1"
+        },
+        {
+          "name": "CERT_QUERY_FORMAT_BASE64_ENCODED",
+          "value": "2"
+        },
+        {
+          "name": "CERT_QUERY_FORMAT_ASN_ASCII_HEX_ENCODED",
+          "value": "3"
+        }
+      ],
+      "uses": [
+        {
+          "method": "CryptQueryObject",
+          "parameter": "pdwFormatType"
+        }
+      ]
+    },
+    {
+      "type": "uint",
+      "finished": true,
+      "name": "CERT_QUERY_FORMAT_TYPE_FLAGS",
+      "flags": false,
+      "members": [
+        {
+          "name": "CERT_QUERY_FORMAT_FLAG_BINARY",
+          "value": "( 1 << (int)CERT_QUERY_FORMAT_TYPE.CERT_QUERY_FORMAT_BINARY)"
+        },
+        {
+          "name": "CERT_QUERY_FORMAT_FLAG_BASE64_ENCODED",
+          "value": "( 1 << (int)CERT_QUERY_FORMAT_TYPE.CERT_QUERY_FORMAT_BASE64_ENCODED)"
+        },
+        {
+          "name": "CERT_QUERY_FORMAT_FLAG_ASN_ASCII_HEX_ENCODED",
+          "value": "( 1 << (int)CERT_QUERY_FORMAT_TYPE.CERT_QUERY_FORMAT_ASN_ASCII_HEX_ENCODED)"
+        },
+        {
+          "name": "CERT_QUERY_FORMAT_FLAG_ALL",
+          "value": "(CERT_QUERY_FORMAT_FLAG_BINARY | CERT_QUERY_FORMAT_FLAG_BASE64_ENCODED | CERT_QUERY_FORMAT_FLAG_ASN_ASCII_HEX_ENCODED)"
+        }
+      ],
+      "uses": [
+        {
+          "method": "CryptQueryObject",
+          "parameter": "dwExpectedFormatTypeFlags"
+        }
+      ]
+    },
+    {
+      "type": "uint",
+      "finished": false,
+      "name": "CERT_QUERY_ENCODING_TYPE",
+      "flags": false,
+      "members": [
+        {
+          "name": "X509_ASN_ENCODING",
+          "value": "0x00000001"
+        },
+        {
+          "name": "PKCS_7_ASN_ENCODING",
+          "value": "0x00010000"
+        }
+      ],
+      "uses": [
+        {
+          "method": "CryptQueryObject",
+          "parameter": "pdwMsgAndCertEncodingType"
         }
       ]
     }
