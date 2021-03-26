@@ -73,4 +73,5 @@
 #include <fltdefs.h>
 #include <statehelpers.h>
 
-//#include <basetsd.h>
+#include <reason.h>
+

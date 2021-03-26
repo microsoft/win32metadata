@@ -77,5 +77,6 @@ _TEB
 <IncludeRoot>/um/fltdefs.h
 <IncludeRoot>/um/devfiltertypes.h
 <IncludeRoot>/um/statehelpers.h
+<IncludeRoot>/um/reason.h
 --namespace
 Windows.Win32.WindowsProgramming

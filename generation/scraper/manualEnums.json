@@ -2556,5 +2556,61 @@
           "parameter": "pdwMsgAndCertEncodingType"
         }
       ]
+    },
+    {
+      "name": "SHUTDOWN_REASON",
+      "type": "uint",
+      "finished": false,
+      "flags": true,
+      "autoPopulate":
+        {
+            "filter": "SHTDN_REASON_",
+            "header": "reason.h"
+        },
+      "members": [
+        {
+          "name": "SHTDN_REASON_NONE",
+          "value": "0"
+        }
+      ],
+      "uses": [
+        {
+            "method": "InitiateShutdownA",
+            "parameter": "dwReason"
+        },
+        {
+            "method": "InitiateShutdownW",
+            "parameter": "dwReason"
+        },
+        {
+            "method": "InitiateSystemShutdownExA",
+            "parameter": "dwReason"
+        },
+        {
+            "method": "InitiateSystemShutdownExW",
+            "parameter": "dwReason"
+        }
+      ]
+    },
+    {
+      "name": "SHUTDOWN_FLAGS",
+      "type": "uint",
+      "finished": false,
+      "flags": true,
+      "autoPopulate":
+        {
+            "filter": "SHUTDOWN_",
+            "header": "winreg.h"
+        },
+        "uses": [
+          {
+            "method": "InitiateShutdownA",
+            "parameter": "dwShutdownFlags"
+          },
+          {
+            "method": "InitiateShutdownW",
+            "parameter": "dwShutdownFlags"
+          }
+        ]
     }
 ]
