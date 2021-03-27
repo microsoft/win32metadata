@@ -350,3 +350,4 @@ CoInitializeSecurity::dwCapabilities=EOLE_AUTHENTICATION_CAPABILITIES
 CoSetProxyBlanket::dwCapabilities=EOLE_AUTHENTICATION_CAPABILITIES
 IClientSecurity::SetBlanket::dwCapabilities=EOLE_AUTHENTICATION_CAPABILITIES
 IClientSecurity::QueryBlanket::pCapabilites=EOLE_AUTHENTICATION_CAPABILITIES*
+CoInitializeEx::dwCoInit=COINIT

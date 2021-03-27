@@ -31,6 +31,7 @@ HLFNAMEF=uint
 OBJECT_ATTRIB_FLAG=uint
 OPEN_AS_INFO_FLAGS=uint
 IdentityUpdateEvent=uint
+COINIT=uint
 --with-attribute
 AMMSF_MMS_INIT_FLAGS=Flags
 AMMSF_MS_FLAGS=Flags
@@ -58,6 +59,7 @@ OBJECT_ATTRIB_FLAG=Flags
 OPEN_AS_INFO_FLAGS=Flags
 IdentityUpdateEvent=Flags
 MINIDUMP_TYPE=Flags
+COINIT=Flags
 --exclude
 tag_s_RIFFWAVE_INST
 PENCLAVE_TARGET_FUNCTION
