@@ -1,2616 +1,2879 @@
 [
-    {
-      "name": "ALERT_SYSTEM_SEV",
-      "flags": false,
-      "autoPopulate":
-        {
-            "filter": "ALERT_SYSTEM_",
-            "header": "WinUser.h"
-        }
-    },
-    {
-        "name": "APPCOMMAND_ID",
-        "flags": false,
-        "autoPopulate":
-          {
-              "filter": "APPCOMMAND_",
-              "header": "WinUser.h"
-          }
-    },
-    {
-        "name": "ATF_FLAGS",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "ATF_",
-              "header": "WinUser.h"
-          }
-    },
-    {
-        "name": "DRAWEDGE_FLAGS",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "BDR_|EDGE_",
-              "header": "WinUser.h"
-          },
-        "uses": [
-            {
-              "method": "DrawEdge",
-              "parameter": "edge"
-            }
-        ]
-    },
-    {
-        "name": "BUTTON_STYLE",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "BS_",
-              "header": "WinUser.h"
-          }
-    },
-    {
-        "name": "COMBOBOX_STYLE",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "CBS_",
-              "header": "WinUser.h"
-          }
-    },
-    {
-        "name": "CHOOSECOLOR_FLAGS",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "CC_",
-              "header": "commdlg.h"
-          }
-    },
-    {
-        "name": "CLIPBOARD_FORMATS",
-        "flags": false,
-        "autoPopulate":
-          {
-              "filter": "CF_",
-              "header": "WinUser.h"
-          }
-    },
-    {
-        "name": "WNDCLASS_STYLES",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "CS_",
-              "header": "WinUser.h"
-          },
-        "uses": [
-            {
-              "struct": "WNDCLASSA",
-              "field": "style"
-            },
-            {
-              "struct": "WNDCLASSW",
-              "field": "style"
-            },
-            {
-              "struct": "WNDCLASSEXA",
-              "field": "style"
-            },
-            {
-              "struct": "WNDCLASSEXW",
-              "field": "style"
-            }
-        ]
-    },
-    {
-        "name": "CWP_FLAGS",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "CWP_",
-              "header": "WinUser.h"
-          },
-        "uses": [
-            {
-              "method": "ChildWindowFromPointEx",
-              "parameter": "flags"
-            }
-        ]
-    },
-    {
-        "name": "DFC_TYPE",
-        "flags": false,
-        "autoPopulate":
-          {
-              "filter": "DFC_",
-              "header": "WinUser.h"
-          },
-        "uses": [
-            {
-              "method": "DrawFrameControl",
-              "parameter": "param2"
-            }
-        ]
-    },
-    {
-        "name": "DFCS_STATE",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "DFCS_",
-              "header": "WinUser.h"
-          },
-        "uses": [
-            {
-              "method": "DrawFrameControl",
-              "parameter": "param3"
-            }
-        ]
-    },
-    {
-        "name": "CDS_TYPE",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "CDS_",
-              "header": "WinUser.h"
-          },
-        "uses": [
-            {
-              "method": "ChangeDisplaySettingsA",
-              "parameter": "dwFlags"
-            },
-            {
-              "method": "ChangeDisplaySettingsW",
-              "parameter": "dwFlags"
-            },
-            {
-              "method": "ChangeDisplaySettingsExW",
-              "parameter": "dwflags"
-            },
-            {
-              "method": "ChangeDisplaySettingsExA",
-              "parameter": "dwflags"
-            }
-        ]
-    },
-    {
-        "name": "DISP_CHANGE",
-        "flags": false,
-        "autoPopulate":
-          {
-              "filter": "DISP_CHANGE",
-              "header": "WinUser.h"
-          },
-        "uses": [
-            {
-              "method": "ChangeDisplaySettingsA",
-              "parameter": "return"
-            },
-            {
-              "method": "ChangeDisplaySettingsW",
-              "parameter": "return"
-            },
-            {
-              "method": "ChangeDisplaySettingsExW",
-              "parameter": "return"
-            },
-            {
-              "method": "ChangeDisplaySettingsExA",
-              "parameter": "return"
-            }
-        ]
-    },
-    {
-        "name": "DIALOGBOX_STYLE",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "DS_",
-              "header": "WinUser.h"
-          }
-    },
-    {
-        "name": "DRAWSTATE_FLAGS",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "DST_|DSS_",
-              "header": "WinUser.h"
-          },
-        "uses": [
-            {
-              "method": "DrawStateA",
-              "parameter": "uFlags"
-            },
-            {
-              "method": "DrawStateW",
-              "parameter": "uFlags"
-            }
-        ]
-    },
-    {
-        "name": "EDITCONTROL_STYLE",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "ES_",
-              "header": "WinUser.h"
-          }
-    },
-    {
-        "name": "GESTURECONFIG_ID",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "GID_",
-              "header": "WinUser.h"
-          },
-        "uses": [
-            {
-              "struct": "GESTURECONFIG",
-              "field": "dwID"
-            }
-        ]
-    },
-    {
-        "name": "GESTURECONFIG_FLAGS",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "GC_",
-              "header": "WinUser.h"
-          }
-    },
-    {
-        "name": "LISTBOX_STYLE",
-        "flags": true,
-        "members": [
-            {
-              "name": "LBS_STANDARD",
-              "value": "(LBS_NOTIFY | LBS_SORT | Windows.Win32.WindowsAndMessaging.WINDOW_STYLE.WS_VSCROLL | Windows.Win32.WindowsAndMessaging.WINDOW_STYLE.WS_BORDER)"
-            }
-        ],
-        "autoPopulate":
-          {
-              "filter": "LBS_",
-              "header": "WinUser.h"
-          }
-    },
-    {
-        "name": "MESSAGEBOX_STYLE",
-        "flags": true,
-        "type": "uint",
-        "autoPopulate":
-          {
-              "filter": "MB_",
-              "header": "WinUser.h"
-          },
-        "uses": [
-          {
-            "method": "MessageBoxW",
-            "parameter": "uType"
-          },
-          {
-            "method": "MessageBoxA",
-            "parameter": "uType"
-          },
-          {
-            "method": "MessageBoxExW",
-            "parameter": "uType"
-          },
-          {
-            "method": "MessageBoxExA",
-            "parameter": "uType"
-          },
-          {
-            "method": "MSGBOXPARAMSA",
-            "parameter": "dwStyle"
-          },
-          {
-            "method": "MSGBOXPARAMSW",
-            "parameter": "dwStyle"
-          },
-          {
-            "method": "WTSSendMessageA",
-            "parameter": "Style"
-          },
-          {
-            "method": "WTSSendMessageW",
-            "parameter": "Style"
-          }
-        ]
-    },
-    {
-        "name": "MENU_ITEM_FLAGS",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "MF_",
-              "header": "WinUser.h"
-          },
-        "uses": [
-          {
-            "method": "EnableMenuItem",
-            "parameter": "uEnable"
-          },
-          {
-            "method": "DeleteMenu",
-            "parameter": "uFlags"
-          },
-          {
-            "method": "RemoveMenu",
-            "parameter": "uFlags"
-          },
-          {
-            "method": "GetMenuStringA",
-            "parameter": "flags"
-          },
-          {
-            "method": "GetMenuState",
-            "parameter": "uFlags"
-          },
-          {
-            "method": "GetMenuStringW",
-            "parameter": "flags"
-          },
-          {
-            "method": "SetMenuItemBitmaps",
-            "parameter": "uFlags"
-          }
-        ]
-    },
-    {
-        "name": "POINTER_FLAGS",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "POINTER_FLAG_",
-              "header": "WinUser.h"
-          },
-        "uses": [
-          {
-            "struct": "POINTER_INFO",
-            "field": "pointerFlags"
-          }
-        ]
-    },
-    {
-        "name": "REDRAW_WINDOW_FLAGS",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "RDW_",
-              "header": "WinUser.h"
-          },
-        "uses": [
-          {
-            "method": "RedrawWindow",
-            "parameter": "flags"
-          }
-        ]
-    },
-    {
-        "name": "SCROLLBAR_CONSTANTS",
-        "flags": true,
-        "members": [
-            {
-              "name": "SB_BOTH"
-            },
-            {
-              "name": "SB_CTL"
-            },
-            {
-              "name": "SB_HORZ"
-            },
-            {
-              "name": "SB_VERT"
-            }
-        ],
-        "uses": [
-            {
-              "method": "ShowScrollBar",
-              "parameter": "wBar"
-            },
-            {
-              "method": "EnableScrollBar",
-              "parameter": "wSBflags"
-            }
-        ]
-    },
-    {
-        "name": "SCROLLBAR_STYLE",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "SBS_",
-              "header": "WinUser.h"
-          }
-    },
-    {
-        "name": "SHOW_WINDOW_CMD",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "SW_",
-              "header": "WinUser.h"
-          },
-        "uses": [
-          {
-            "method": "ShowWindow",
-            "parameter": "nCmdShow"
-          }
-        ]
-    },
-    {
-        "name": "STICKYKEYS_FLAGS",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "SKF_",
-              "header": "WinUser.h"
-          },
-        "uses": [
-          {
-            "struct": "STICKYKEYS",
-            "field": "dwFlags"
-          }
-        ]
-    },
-    {
-        "name": "SYSTEM_PARAMETERS_INFO_ACTION",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "SPI_",
-              "header": "WinUser.h"
-          },
-        "uses": [
-          {
-            "method": "SystemParametersInfoA",
-            "parameter": "uiAction"
-          },
-          {
-            "method": "SystemParametersInfoW",
-            "parameter": "uiAction"
-          }
-        ]
-    },
-    {
-        "name": "STATIC_CONTROL_STYLE",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "SS_",
-              "header": "WinUser.h"
-          }
-    },
-    {
-        "name": "SOUNDSENTRY_FLAGS",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "SSF_",
-              "header": "WinUser.h"
-          },
-        "uses": [
-          {
-            "struct": "SOUNDSENTRYA",
-            "field": "dwFlags"
-          },
-          {
-            "struct": "SOUNDSENTRYW",
-            "field": "dwFlags"
-          }
-        ]
-    },
-    {
-        "name": "TOUCH_FEEDBACK_MODE",
-        "flags": false,
-        "autoPopulate":
-          {
-              "filter": "TOUCH_FEEDBACK_",
-              "header": "WinUser.h"
-          },
-        "uses": [
-          {
-            "method": "InitializeTouchInjection",
-            "parameter": "dwMode"
-          }
-        ]
-    },
-    {
-        "name": "TOUCHEVENTF_FLAGS",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "TOUCHEVENTF_",
-              "header": "WinUser.h"
-          },
-        "uses": [
-          {
-            "struct": "TOUCHINPUT",
-            "field": "dwFlags"
-          }
-        ]
-    },
-    {
-        "name": "TOUCHINPUTMASKF_MASK",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "TOUCHINPUTMASKF_",
-              "header": "WinUser.h"
-          },
-        "uses": [
-          {
-            "struct": "TOUCHINPUT",
-            "field": "dwMask"
-          }
-        ]
-    },
-    {
-        "name": "TRACK_POPUP_MENU_FLAGS",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "TPM_",
-              "header": "WinUser.h"
-          },
-        "uses": [
-          {
-            "method": "TrackPopupMenu",
-            "parameter": "uFlags"
-          }
-        ]
-    },
-    {
-        "name": "WINDOW_EX_STYLE",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "WS_EX_",
-              "header": "WinUser.h"
-          },
-        "uses": [
-          {
-            "method": "CreateWindowExA",
-            "parameter": "dwExStyle"
-          },
-          {
-            "method": "CreateWindowExW",
-            "parameter": "dwExStyle"
-          }
-        ]
-    },
-    {
-        "name": "WINDOW_STYLE",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "WS_",
-              "header": "WinUser.h"
-          },
-        "uses": [
-          {
-            "method": "CreateWindowExA",
-            "parameter": "dwStyle"
-          },
-          {
-            "method": "CreateWindowExW",
-            "parameter": "dwStyle"
-          }
-        ]
-    },
-    {
-        "name": "SP_COPY_STYLE",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "SP_COPY_",
-              "header": "SetupAPI.h"
-          },
-        "uses": [
-            {
-              "method": "SetupInstallFileExW",
-              "parameter": "CopyStyle"
-            },
-            {
-              "method": "SetupInstallFileExA",
-              "parameter": "CopyStyle"
-            },
-            {
-              "struct": "sp_file_copy_params_a",
-              "field": "CopyStyle"
-            },
-            {
-              "struct": "sp_file_copy_params_w",
-              "field": "CopyStyle"
-            }
-          ]
-    },
-    {
-        "name": "SCROLLBAR_OBJID",
-        "flags": false,
-        "finished": true,
-        "type": "int",
-        "members": [
-          {
-            "name": "OBJID_CLIENT",
-            "value": "unchecked((int)0xFFFFFFFC)"
-          },
-          {
-            "name": "OBJID_HSCROLL",
-            "value": "unchecked((int)0xFFFFFFFA)"
-          },
-          {
-            "name": "OBJID_VSCROLL",
-            "value": "unchecked((int)0xFFFFFFFB)"
-          }
-        ],
-        "uses": [
-          {
-            "method": "GetScrollBarInfo",
-            "parameter": "idObject"
-          }
-        ]
-    },
-    {
-        "name": "ENUM_DISPLAY_SETTINGS_MODE",
-        "flags": false,
-        "finished": true,
-        "members": [
-          {
-            "name": "ENUM_CURRENT_SETTINGS",
-            "value": "unchecked((uint)-1)"
-          },
-          {
-            "name": "ENUM_REGISTRY_SETTINGS",
-            "value": "unchecked((uint)-2)"
-          }
-        ],
-        "uses": [
-          {
-            "method": "EnumDisplaySettingsExW",
-            "parameter": "iModeNum"
-          },
-          {
-            "method": "EnumDisplaySettingsW",
-            "parameter": "iModeNum"
-          },
-          {
-            "method": "EnumDisplaySettingsA",
-            "parameter": "iModeNum"
-          },
-          {
-            "method": "EnumDisplaySettingsExA",
-            "parameter": "iModeNum"
-          }
-        ]
-    },
-    {
-        "name": "WINBIO_SETTING_SOURCE",
-        "flags": false,
-        "finished": true,
-        "members": [
-          {
-            "name": "WINBIO_SETTING_SOURCE_INVALID",
-            "value": "0"
-          },
-          {
-            "name": "WINBIO_SETTING_SOURCE_DEFAULT",
-            "value": "1"
-          },
-          {
-            "name": "WINBIO_SETTING_SOURCE_LOCAL",
-            "value": "3"
-          },
-          {
-            "name": "WINBIO_SETTING_SOURCE_POLICY",
-            "value": "2"
-          }
-        ],
-        "uses": [
-          {
-            "method": "WinBioGetEnabledSetting",
-            "parameter": "Source"
-          },
-          {
-            "method": "WinBioGetLogonSetting",
-            "parameter": "Source"
-          },
-          {
-            "method": "WinBioGetDomainLogonSetting",
-            "parameter": "Source"
-          }
-        ]
-    },
-    {
-        "name": "WINBIO_COMPONENT",
-        "flags": false,
-        "finished": true,
-        "members": [
-          {
-            "name": "WINBIO_COMPONENT_SENSOR",
-            "value": "1"
-          },
-          {
-            "name": "WINBIO_COMPONENT_ENGINE",
-            "value": "2"
-          },
-          {
-            "name": "WINBIO_COMPONENT_STORAGE",
-            "value": "3"
-          }
-        ],
-        "uses": [
-          {
-            "method": "WinBioControlUnit",
-            "parameter": "Component"
-          },
-          {
-            "method": "WinBioControlUnitPrivileged",
-            "parameter": "Component"
-          }
-        ]
-    },
-    {
-        "name": "WINBIO_POOL",
-        "flags": false,
-        "finished": true,
-        "members": [
-          {
-            "name": "WINBIO_POOL_SYSTEM",
-            "value": "1"
-          },
-          {
-            "name": "WINBIO_POOL_PRIVATE",
-            "value": "2"
-          }
-        ],
-        "uses": [
-          {
-            "method": "WinBioOpenSession",
-            "parameter": "PoolType"
-          },
-          {
-            "method": "WinBioAsyncOpenSession",
-            "parameter": "PoolType"
-          }
-        ]
-    },
-    {
-        "name": "SNMP_PDU_TYPE",
-        "flags": false,
-        "members": [
-          {
-            "name": "SNMP_PDU_GET"
-          },
-          {
-            "name": "SNMP_PDU_GETNEXT"
-          },
-          {
-            "name": "SNMP_PDU_RESPONSE"
-          },
-          {
-            "name": "SNMP_PDU_SET"
-          },
-          {
-            "name": "SNMP_PDU_GETBULK"
-          },
-          {
-            "name": "SNMP_PDU_TRAP"
-          }
-        ]
-    },
-    {
-        "name": "SNMP_EXTENSION_REQUEST_TYPE",
-        "flags": false,
-        "finished": true,
-        "members": [
-            {
-                "name": "SNMP_EXTENSION_GET",
-                "value": "SNMP_PDU_TYPE.SNMP_PDU_GET"
-            },
-            {
-                "name": "SNMP_EXTENSION_GET_NEXT",
-                "value": "SNMP_PDU_TYPE.SNMP_PDU_GETNEXT"
-            },
-            {
-                "name": "SNMP_EXTENSION_SET_TEST",
-                "value": "(ASN_PRIVATE | ASN_CONSTRUCTOR | 0x0)"
-            },
-            {
-                "name": "SNMP_EXTENSION_SET_COMMIT",
-                "value": "SNMP_PDU_TYPE.SNMP_PDU_SET"
-            },
-            {
-                "name": "SNMP_EXTENSION_SET_UNDO",
-                "value": "(ASN_PRIVATE | ASN_CONSTRUCTOR | 0x1)"
-            },
-            {
-                "name": "SNMP_EXTENSION_SET_CLEANUP",
-                "value": "(ASN_PRIVATE | ASN_CONSTRUCTOR | 0x2)"
-            }
-        ],
-        "uses": [
-            {
-                "method": "SnmpExtensionQueryEx",
-                "parameter": "nRequestType"
-            }
-        ]
-    },
-    {
-        "name": "AS_ANY_TYPE",
-        "flags": false,
-        "finished": true,
-        "members": [
-          {
-            "name": "ASN_INTEGER",
-            "value": "(ASN_UNIVERSAL | ASN_PRIMITIVE | 0x02)"
-          },
-          {
-            "name": "ASN_INTEGER32",
-            "value": "ASN_INTEGER"
-          },
-          {
-            "name": "ASN_UNSIGNED32",
-            "value": "(ASN_APPLICATION | ASN_PRIMITIVE | 0x07)"
-          },
-          {
-            "name": "ASN_COUNTER64",
-            "value": "(ASN_APPLICATION | ASN_PRIMITIVE | 0x06)"
-          },
-          {
-            "name": "ASN_OCTETSTRING",
-            "value": "(ASN_UNIVERSAL | ASN_PRIMITIVE | 0x04)"
-          },
-          {
-            "name": "ASN_BITS",
-            "value": "(ASN_UNIVERSAL | ASN_PRIMITIVE | 0x03)"
-          },
-          {
-            "name": "ASN_OBJECTIDENTIFIER",
-            "value": "(ASN_UNIVERSAL | ASN_PRIMITIVE | 0x06)"
-          },
-          {
-            "name": "ASN_SEQUENCE",
-            "value": "(ASN_UNIVERSAL | ASN_CONSTRUCTOR | 0x10)"
-          },
-          {
-            "name": "ASN_IPADDRESS",
-            "value": "(ASN_APPLICATION | ASN_PRIMITIVE | 0x00)"
-          },
-          {
-            "name": "ASN_COUNTER32",
-            "value": "(ASN_APPLICATION | ASN_PRIMITIVE | 0x01)"
-          },
-          {
-            "name": "ASN_GAUGE32",
-            "value": "(ASN_APPLICATION | ASN_PRIMITIVE | 0x02)"
-          },
-          {
-            "name": "ASN_TIMETICKS",
-            "value": "(ASN_APPLICATION | ASN_PRIMITIVE | 0x03)"
-          },
-          {
-            "name": "ASN_OPAQUE",
-            "value": "(ASN_APPLICATION | ASN_PRIMITIVE | 0x04)"
-          },
-          {
-            "name": "SNMP_EXCEPTION_NOSUCHOBJECT",
-            "value": "(ASN_CONTEXT | ASN_PRIMITIVE | 0x00)"
-          },
-          {
-            "name": "SNMP_EXCEPTION_NOSUCHINSTANCE",
-            "value": "(ASN_CONTEXT | ASN_PRIMITIVE | 0x01)"
-          },
-          {
-            "name": "SNMP_EXCEPTION_ENDOFMIBVIEW",
-            "value": "(ASN_CONTEXT | ASN_PRIMITIVE | 0x02)"
-          }
-        ],
-        "uses": [
-          {
-            "struct": "AsnAny",
-            "field": "asnType"
-          }
-        ]
-    },
-    {
-        "name": "HDI_MASK",
-        "flags": true,
-        "autoPopulate":
-        {
-            "filter": "HDI_",
-            "header": "CommCtrl.h"
-        }
-    },
-    {
-        "name": "CFM_MASK",
-        "flags": true,
-        "members": [
-            {
-              "name": "CFM_SUBSCRIPT",
-              "value": "(CFE_EFFECTS.CFE_SUBSCRIPT | CFE_EFFECTS.CFE_SUPERSCRIPT)"
-            },
-            {
-                "name": "CFM_EFFECTS",
-                "value": "(CFM_BOLD | CFM_ITALIC | CFM_UNDERLINE | CFM_COLOR | CFM_STRIKEOUT | CFE_EFFECTS.CFE_PROTECTED | CFM_LINK)"
-            }
-        ],
-        "autoPopulate":
-        {
-            "filter": "CFM_",
-            "header": "Richedit.h"
-        }
-    },
-    {
-        "name": "CFE_EFFECTS",
-        "flags": true,
-        "members": [
-            {
-              "name": "CFE_ALLCAPS",
-              "value": "CFM_MASK.CFM_ALLCAPS"
-            },
-            {
-              "name": "CFE_AUTOBACKCOLOR",
-              "value": "CFM_MASK.CFM_BACKCOLOR"
-            },
-            {
-              "name": "CFE_DISABLED",
-              "value": "CFM_MASK.CFM_DISABLED"
-            },
-            {
-                "name": "CFE_EMBOSS",
-                "value": "CFM_MASK.CFM_EMBOSS"
-            },
-            {
-                "name": "CFE_HIDDEN",
-                "value": "CFM_MASK.CFM_HIDDEN"
-            },
-            {
-                "name": "CFE_IMPRINT",
-                "value": "CFM_MASK.CFM_IMPRINT"
-            },
-            {
-                "name": "CFE_OUTLINE",
-                "value": "CFM_MASK.CFM_OUTLINE"
-            },
-            {
-                "name": "CFE_REVISED",
-                "value": "CFM_MASK.CFM_REVISED"
-            },
-            {
-                "name": "CFE_SHADOW",
-                "value": "CFM_MASK.CFM_SHADOW"
-            },
-            {
-              "name": "CFE_SMALLCAPS",
-              "value": "CFM_MASK.CFM_SMALLCAPS"
-            }
-        ],
-        "autoPopulate":
-        {
-            "filter": "CFE_",
-            "header": "Richedit.h"
-        }
-    },
-    {
-        "name": "CFE_UNDERLINE",
-        "flags": true,
-        "autoPopulate":
-        {
-            "filter": "CFU_",
-            "header": "Richedit.h"
-        }
-    },
-    {
-        "name": "BCRYPT_OPERATION",
-        "flags": true,
-        "members": [
-            {
-                "name": "BCRYPT_CIPHER_OPERATION",
-                "value": 1
-            },
-            {
-                "name": "BCRYPT_HASH_OPERATION",
-                "value": 2
-            },
-            {
-                "name": "BCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION",
-                "value": 4
-            },
-            {
-                "name": "BCRYPT_SECRET_AGREEMENT_OPERATION",
-                "value": 8
-            },
-            {
-                "name": "BCRYPT_SIGNATURE_OPERATION",
-                "value": 16
-            },
-            {
-                "name": "BCRYPT_RNG_OPERATION",
-                "value": 32
-            }
-        ],
-        "uses": [
-            {
-                "method": "BCryptEnumAlgorithms",
-                "parameter": "dwAlgOperations"
-            }
-        ]
-    },
-    {
-        "name": "NCRYPT_OPERATION",
-        "flags": true,
-        "finished": true,
-        "members": [
-          {
-            "name": "NCRYPT_CIPHER_OPERATION",
-            "value": 1
-          },
-          {
-            "name": "NCRYPT_HASH_OPERATION",
-            "value": 2
-          },
-          {
-            "name": "NCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION",
-            "value": 4
-          },
-          {
-            "name": "NCRYPT_SECRET_AGREEMENT_OPERATION",
-            "value": 8
-          },
-          {
-            "name": "NCRYPT_SIGNATURE_OPERATION",
-            "value": 16
-          }
-        ],
-        "uses": [
-          {
-            "method": "NCryptEnumAlgorithms",
-            "parameter": "dwAlgOperations"
-          }
-        ]
-    },
-    {
-        "name": "IGP_ID",
-        "flags": false,
-        "members": [
-          {
-            "name": "IGP_GETIMEVERSION",
-            "value": "unchecked((uint)-4)"
-          }
-        ],
-        "autoPopulate":
-          {
-              "filter": "IGP_",
-              "header": "imm.h"
-          }
-    },
-    {
-        "name": "MENU_ITEM_TYPE",
-        "flags": true,
-        "finished": true,
-        "members": [
-            {
-              "name": "MFT_BITMAP",
-              "value": "MENU_ITEM_FLAGS.MF_BITMAP"
-            },
-            {
-              "name": "MFT_MENUBARBREAK",
-              "value": "MENU_ITEM_FLAGS.MF_MENUBARBREAK"
-            },
-            {
-              "name": "MFT_MENUBREAK",
-              "value": "MENU_ITEM_FLAGS.MF_MENUBREAK"
-            },
-            {
-              "name": "MFT_OWNERDRAW",
-              "value": "MENU_ITEM_FLAGS.MF_OWNERDRAW"
-            },
-            {
-              "name": "MFT_RADIOCHECK",
-              "value": "0x00000200"
-            },
-            {
-              "name": "MFT_RIGHTJUSTIFY",
-              "value": "MENU_ITEM_FLAGS.MF_RIGHTJUSTIFY"
-            },
-            {
-              "name": "MFT_RIGHTORDER",
-              "value": "0x00002000"
-            },
-            {
-              "name": "MFT_SEPARATOR",
-              "value": "MENU_ITEM_FLAGS.MF_SEPARATOR"
-            },
-            {
-              "name": "MFT_STRING",
-              "value": "MENU_ITEM_FLAGS.MF_STRING"
-            }
-          ]
-    },
-    {
-        "name": "DDE_ENABLE_CALLBACK_CMD",
-        "flags": false,
-        "members": [
-          {
-            "name": "EC_ENABLEALL",
-            "value": 0
-          },
-          {
-            "name": "EC_ENABLEONE",
-            "value": 128
-          },
-          {
-            "name": "EC_DISABLE",
-            "value": 8
-          },
-          {
-            "name": "EC_QUERYWAITING",
-            "value": 2
-          }
-        ],
-        "uses": [
-          {
-            "method": "DdeEnableCallback",
-            "parameter": "wCmd"
-          }
-        ]
-    },
-    {
-        "name": "PFM_FLAGS",
-        "flags": true,
-        "members": [
-          {
-            "name": "IGP_GETIMEVERSION",
-            "value": "unchecked((uint)-4)"
-          }
-        ],
-        "autoPopulate":
-          {
-              "filter": "PFM_",
-              "header": "imm.h"
-          }
-    },
-    {
-        "name": "PARAFORMAT_MASK",
-        "flags": true,
-        "members": [
-          {
-            "name": "PFM_ALIGNMENT"
-          },
-          {
-            "name": "PFM_NUMBERING"
-          },
-          {
-            "name": "PFM_OFFSET"
-          },
-          {
-            "name": "PFM_OFFSETINDENT"
-          },
-          {
-            "name": "PFM_RIGHTINDENT"
-          },
-          {
-            "name": "PFM_RTLPARA"
-          },
-          {
-            "name": "PFM_STARTINDENT"
-          },
-          {
-            "name": "PFM_TABSTOPS"
-          }
-        ],
-        "uses": [
-          {
-            "struct": "PARAFORMAT",
-            "field": "dwMask"
-          }
-        ]
-    },
-    {
-        "name": "PARAFORMAT2_MASK",
-        "flags": true,
-        "members": [
-          {
-            "name": "PFM_DONOTHYPHEN"
-          },
-          {
-            "name": "PFM_EFFECTS"
-          },
-          {
-            "name": "PFM_KEEP"
-          },
-          {
-            "name": "PFM_KEEPNEXT"
-          },
-          {
-            "name": "PFM_NOLINENUMBER"
-          },
-          {
-            "name": "PFM_NOWIDOWCONTROL"
-          },
-          {
-            "name": "PFM_PAGEBREAKBEFORE"
-          },
-          {
-            "name": "PFM_RTLPARA"
-          },
-          {
-            "name": "PFM_SIDEBYSIDE"
-          },
-          {
-            "name": "PFM_TABLE"
-          },
-          {
-            "name": "PFM_TABLEROWDELIMITER"
-          }
-        ],
-        "uses": [
-          {
-            "struct": "PARAFORMAT2",
-            "field": "dwMask"
-          }
-        ]
-    },
-    {
-        "name": "DRAGLISTINFO_NOTIFICATION_FLAGS",
-        "flags": false,
-        "members": [
-          {
-            "name": "DL_BEGINDRAG",
-            "value": "Windows.Win32.WindowsAndMessaging.Apis.WM_USER + 133"
-          },
-          {
-            "name": "DL_CANCELDRAG",
-            "value": "Windows.Win32.WindowsAndMessaging.Apis.WM_USER + 136"
-          },
-          {
-            "name": "DL_DRAGGING",
-            "value": "Windows.Win32.WindowsAndMessaging.Apis.WM_USER + 134"
-          },
-          {
-            "name": "DL_DROPPED",
-            "value": "Windows.Win32.WindowsAndMessaging.Apis.WM_USER + 135"
-          }
-        ],
-        "uses": [
-          {
-            "struct": "DRAGLISTINFO",
-            "field": "uNotification"
-          }
-        ]
-    },
-    {
-        "name": "PARAFORMAT2_EFFECTS",
-        "flags": true,
-        "members": [
-          {
-            "name": "PFE_DONOTHYPHEN",
-            "value": "(PARAFORMAT_MASK.PFM_DONOTHYPHEN >> 16)"
-          },
-          {
-            "name": "PFE_KEEP",
-            "value": "(PARAFORMAT_MASK.PFM_KEEP >> 16)"
-          },
-          {
-            "name": "PFE_KEEPNEXT",
-            "value": "(PARAFORMAT_MASK.PFM_KEEPNEXT >> 16)"
-          },
-          {
-            "name": "PFE_NOLINENUMBER",
-            "value": "(PARAFORMAT_MASK.PFM_NOLINENUMBER >> 16)"
-          },
-          {
-            "name": "PFE_NOWIDOWCONTROL",
-            "value": "(PARAFORMAT_MASK.PFM_NOWIDOWCONTROL >> 16)"
-          },
-          {
-            "name": "PFE_PAGEBREAKBEFORE",
-            "value": "(PARAFORMAT_MASK.PFM_PAGEBREAKBEFORE >> 16)"
-          },
-          {
-            "name": "PFE_RTLPARA",
-            "value": "(PARAFORMAT_MASK.PFM_RTLPARA >> 16)"
-          },
-          {
-            "name": "PFE_SIDEBYSIDE",
-            "value": "(PARAFORMAT_MASK.PFM_SIDEBYSIDE >> 16)"
-          },
-          {
-            "name": "PFE_TABLE",
-            "value": "(PARAFORMAT_MASK.PFM_TABLE >> 16)"
-          },
-          {
-            "name": "PFE_TABLEROWDELIMITER",
-            "value": "(PARAFORMAT_MASK.PFM_TABLEROWDELIMITER >> 16)"
-          }
-        ],
-        "uses": [
-          {
-            "struct": "PARAFORMAT2",
-            "field": "wEffects"
-          }
-        ]
-    },
-    {
-        "name": "SECTION_FLAGS",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "SECTION_",
-              "header": "winnt.h"
-          },
-        "members": [
-          {
-             "name": "SECTION_ALL_ACCESS",
-             "value": "(Windows.Win32.FileSystem.FILE_ACCESS_FLAGS.STANDARD_RIGHTS_REQUIRED|SECTION_QUERY|SECTION_MAP_WRITE|SECTION_MAP_READ|SECTION_MAP_EXECUTE|SECTION_EXTEND_SIZE)"
-          }
-        ]
-    },
-    {
-        "name": "FILE_MAP",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "FILE_MAP_",
-              "header": "memoryapi.h"
-          },
-        "members": [
-          {
-             "name": "FILE_MAP_WRITE",
-             "value": "SECTION_FLAGS.SECTION_MAP_WRITE"
-          },
-          {
-            "name": "FILE_MAP_READ",
-            "value": "SECTION_FLAGS.SECTION_MAP_READ"
-         },
-         {
-            "name": "FILE_MAP_ALL_ACCESS",
-            "value": "SECTION_FLAGS.SECTION_ALL_ACCESS"
-         },
-         {
-            "name": "FILE_MAP_EXECUTE",
-            "value": "SECTION_FLAGS.SECTION_MAP_EXECUTE_EXPLICIT"
-         }
-        ]
-    },
-    {
-        "name": "UPDFCACHE_FLAGS",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "UPDFCACHE_",
-              "header": "oleidl.h"
-          },
-        "members": [
-          {
-             "name": "UPDFCACHE_ALL",
-             "value": "~UPDFCACHE_ONLYIFBLANK"
-          },
-          {
-            "name": "UPDFCACHE_ALLBUTNODATACACHE",
-            "value": "UPDFCACHE_ALL & ~UPDFCACHE_NODATACACHE"
-          }
-       ]
-    },
-    {
-        "name": "THREAD_PRIORITY",
-        "flags": false,
-        "type": "int",
-        "members": [
-          {
-            "name": "THREAD_MODE_BACKGROUND_BEGIN",
-            "value": 65536
-          }
-        ]
-    },
-    {
-        "name": "GPT_ATTRIBUTES",
-        "flags": true,
-        "type": "ulong",
-        "autoPopulate":
-          {
-              "filter": "GPT_ATTRIBUTE_|GPT_BASIC_DATA_ATTRIBUTE_",
-              "header": "ntdisk.h"
-          },
-        "members": [
-          {
-            "name": "GPT_ATTRIBUTE_PLATFORM_REQUIRED",
-            "value": 1
-          }
-        ]
-    },
-    {
-        "name": "CERT_FIND_FLAGS",
-        "flags": true,
-        "autoPopulate":
-          {
-              "filter": "CERT_FIND_",
-              "header": "wincrypt.h"
-          },
-        "members": [
-          {
-            "name": "CERT_FIND_ANY"
-          }
-        ]
-    },
-    {
-        "name": "VER_MASK",
-        "flags": true,
-        "members": [
-            {
-              "name": "VER_BUILDNUMBER",
-              "value": 4
-            },
-            {
-              "name": "VER_MAJORVERSION",
-              "value": 2
-            },
-            {
-              "name": "VER_MINORVERSION",
-              "value": 1
-            },
-            {
-              "name": "VER_PLATFORMID",
-              "value": 8
-            },
-            {
-              "name": "VER_PRODUCT_TYPE",
-              "value": 128
-            },
-            {
-              "name": "VER_SERVICEPACKMAJOR",
-              "value": 32
-            },
-            {
-              "name": "VER_SERVICEPACKMINOR",
-              "value": 16
-            },
-            {
-              "name": "VER_SUITENAME",
-              "value": 64
-            }
-          ],
-          "uses": [
-            {
-              "method": "VerSetConditionMask",
-              "parameter": "TypeMask"
-            }
-        ]
-    },
-    {
-      "name": "Uri_CREATE_FLAGS",
-      "flags": true,
-      "autoPopulate":
-        {
-            "filter": "Uri_CREATE_",
-            "header": "urlmon.h"
-        },
-      "uses": [
-        {
-          "method": "CreateUri",
-          "parameter": "dwFlags"
-        }
-      ]
-    },
-    {
-      "name": "MPR_INTERFACE_DIAL_MODE",
-      "flags": false,
-      "type": "uint",
-      "members": [
-        {
-          "name": "MPRDM_DialFirst",
-          "value": "0"
-        },
-        {
-          "name": "MPRDM_DialAll",
-          "value": "RASENTRY_DIAL_MODE.RASEDM_DialAll"
-        },
-        {
-          "name": "MPRDM_DialAsNeeded",
-          "value": "RASENTRY_DIAL_MODE.RASEDM_DialAsNeeded"
-        }
-      ],
-      "uses": [
-        {
-          "struct": "MPR_INTERFACE_3",
-          "field": "dwDialMode"
-        },
-        {
-          "struct": "MPR_INTERFACE_2",
-          "field": "dwDialMode"
-        }
-      ]
-    },
-    {
-      "name": "RASENTRY_DIAL_MODE",
-      "flags": false,
-      "type": "uint",
-      "members": [
-        {
-          "name": "RASEDM_DialAll",
-          "value": "1"
-        },
-        {
-          "name": "RASEDM_DialAsNeeded",
-          "value": "2"
-        }
-      ],
-      "uses": [
-        {
-          "struct": "RASENTRYA",
-          "field": "dwDialMode"
-        },
-        {
-          "struct": "RASENTRYW",
-          "field": "dwDialMode"
-        }
-      ]
-    },
-    {
-      "name": "PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_VALUE",
-      "flags": false,
-      "members": [
-        {
-          "name": "PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_1",
-          "value": 1
-        },
-        {
-          "name": "PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_2",
-          "value": 2
-        },
-        {
-          "name": "PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION",
-          "value": "PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_2"
-        }
-      ]
-    },
-    {
-      "name": "FILE_CREATION_DISPOSITION",
-      "flags": false,
-      "members": [
-        {
-          "name": "CREATE_NEW"
-        },
-        {
-          "name": "CREATE_ALWAYS"
-        },
-        {
-          "name": "OPEN_EXISTING"
-        },
-        {
-          "name": "OPEN_ALWAYS"
-        },
-        {
-          "name": "TRUNCATE_EXISTING"
-        }
-      ],
-      "uses": [
-        {
-          "method": "CreateFileA",
-          "parameter": "dwCreationDisposition"
-        },
-        {
-          "method": "CreateFileW",
-          "parameter": "dwCreationDisposition"
-        },
-        {
-          "method": "CreateFile2",
-          "parameter": "dwCreationDisposition"
-        },
-        {
-          "method": "CreateLogFile",
-          "parameter": "fCreateDisposition"
-        }
-      ]
-    },
-    {
-      "name": "FILE_SHARE_MODE",
-      "flags": true,
-      "members": [
-        {
-          "name": "FILE_SHARE_NONE",
-          "value": 0
-        },
-        {
-          "name": "FILE_SHARE_DELETE",
-          "value": 4
-        },
-        {
-          "name": "FILE_SHARE_READ",
-          "value": 1
-        },
-        {
-          "name": "FILE_SHARE_WRITE",
-          "value": 2
-        }
-      ],
-      "uses": [
-        {
-          "method": "CreateFileW",
-          "parameter": "dwShareMode"
-        },
-        {
-          "method": "CreateFile2",
-          "parameter": "dwShareMode"
-        },
-        {
-          "method": "CreateFileA",
-          "parameter": "dwShareMode"
-        },
-        {
-          "method": "ReopenFile",
-          "parameter": "dwShareMode"
-        },
-        {
-          "method": "CreateLogFile",
-          "parameter": "dwShareMode"
-        },
-        {
-          "method": "OpenFileById",
-          "parameter": "dwShareMode"
-        }
-      ]
-    },
-    {
-      "name": "TOKEN_PRIVILEGES_ATTRIBUTES",
-      "flags": true,
-      "type": "uint",
-      "members": [
-        {
-          "name": "SE_PRIVILEGE_ENABLED"
-        },
-        {
-          "name": "SE_PRIVILEGE_ENABLED_BY_DEFAULT"
-        },
-        {
-          "name": "SE_PRIVILEGE_REMOVED"
-        },
-        {
-          "name": "SE_PRIVILEGE_USED_FOR_ACCESS"
-        }
-      ],
-      "uses": [
-        {
-          "struct": "LUID_AND_ATTRIBUTES",
-          "field": "Attributes"
-        }
-      ]
-    },
-    {
-      "type": "int",
-      "finished": true,
-      "name": "MESSAGEBOX_RESULT",
-      "flags": false,
-      "members": [
-        {
-          "name": "IDOK",
-          "value": "1"
-        },
-        {
-          "name": "IDCANCEL",
-          "value": "2"
-        },
-        {
-          "name": "IDABORT",
-          "value": "3"
-        },
-        {
-          "name": "IDRETRY",
-          "value": "4"
-        },
-        {
-          "name": "IDIGNORE",
-          "value": "5"
-        },
-        {
-          "name": "IDYES",
-          "value": "6"
-        },
-        {
-          "name": "IDNO",
-          "value": "7"
-        },
-        {
-          "name": "IDCLOSE",
-          "value": "8"
-        },
-        {
-          "name": "IDHELP",
-          "value": "9"
-        },
-        {
-          "name": "IDTRYAGAIN",
-          "value": "10"
-        },
-        {
-          "name": "IDCONTINUE",
-          "value": "11"
-        },
-        {
-          "name": "IDASYNC",
-          "value": "32001"
-        },
-        {
-          "name": "IDTIMEOUT",
-          "value": "32000"
-        }
-      ],
-      "uses": [
-        {
-          "method": "MessageBoxA",
-          "parameter": "return"
-        },
-        {
-          "method": "MessageBoxW",
-          "parameter": "return"
-        },
-        {
-          "method": "MessageBoxExA",
-          "parameter": "return"
-        },
-        {
-          "method": "MessageBoxExW",
-          "parameter": "return"
-        },
-        {
-          "method": "MessageBoxIndirectA",
-          "parameter": "return"
-        },
-        {
-          "method": "MessageBoxIndirectW",
-          "parameter": "return"
-        },
-        {
-          "method": "WTSSendMessageA",
-          "parameter": "pResponse"
-        },
-        {
-          "method": "WTSSendMessageW",
-          "parameter": "pResponse"
-        }
-      ]
-    },
-    {
-      "type": "uint",
-      "finished": false,
-      "name": "OPEN_FILENAME_FLAGS",
-      "flags": true,
-      "members": [
-        {
-          "name": "OFN_READONLY",
-          "value": "0x00000001"
-        },
-        {
-          "name": "OFN_OVERWRITEPROMPT",
-          "value": "0x00000002"
-        },
-        {
-          "name": "OFN_HIDEREADONLY",
-          "value": "0x00000004"
-        },
-        {
-          "name": "OFN_NOCHANGEDIR",
-          "value": "0x00000008"
-        },
-        {
-          "name": "OFN_SHOWHELP",
-          "value": "0x00000010"
-        },
-        {
-          "name": "OFN_ENABLEHOOK",
-          "value": "0x00000020"
-        },
-        {
-          "name": "OFN_ENABLETEMPLATE",
-          "value": "0x00000040"
-        },
-        {
-          "name": "OFN_ENABLETEMPLATEHANDLE",
-          "value": "0x00000080"
-        },
-        {
-          "name": "OFN_NOVALIDATE",
-          "value": "0x00000100"
-        },
-        {
-          "name": "OFN_ALLOWMULTISELECT",
-          "value": "0x00000200"
-        },
-        {
-          "name": "OFN_EXTENSIONDIFFERENT",
-          "value": "0x00000400"
-        },
-        {
-          "name": "OFN_PATHMUSTEXIST",
-          "value": "0x00000800"
-        },
-        {
-          "name": "OFN_FILEMUSTEXIST",
-          "value": "0x00001000"
-        },
-        {
-          "name": "OFN_CREATEPROMPT",
-          "value": "0x00002000"
-        },
-        {
-          "name": "OFN_SHAREAWARE",
-          "value": "0x00004000"
-        },
-        {
-          "name": "OFN_NOREADONLYRETURN",
-          "value": "0x00008000"
-        },
-        {
-          "name": "OFN_NOTESTFILECREATE",
-          "value": "0x00010000"
-        },
-        {
-          "name": "OFN_NONETWORKBUTTON",
-          "value": "0x00020000"
-        },
-        {
-          "name": "OFN_NOLONGNAMES",
-          "value": "0x00040000"
-        },
-        {
-          "name": "OFN_EXPLORER",
-          "value": "0x00080000"
-        },
-        {
-          "name": "OFN_NODEREFERENCELINKS",
-          "value": "0x00100000"
-        },
-        {
-          "name": "OFN_LONGNAMES",
-          "value": "0x00200000"
-        },
-        {
-          "name": "OFN_ENABLEINCLUDENOTIFY",
-          "value": "0x00400000"
-        },
-        {
-          "name": "OFN_ENABLESIZING",
-          "value": "0x00800000"
-        },
-        {
-          "name": "OFN_DONTADDTORECENT",
-          "value": "0x02000000"
-        },
-        {
-          "name": "OFN_FORCESHOWHIDDEN",
-          "value": "0x10000000"
-        }
-      ],
-      "uses": [
-        {
-          "method": "OPENFILENAMEA",
-          "parameter": "Flags"
-        },
-        {
-          "method": "OPENFILENAMEW",
-          "parameter": "Flags"
-        }
-      ]
-    },
-    {
-      "type": "uint",
-      "finished": false,
-      "name": "OPEN_FILENAME_FLAGS_EX",
-      "flags": true,
-      "members": [
-        {
-          "name": "OFN_EX_NONE",
-          "value": "0x00000000"
-        },
-        {
-          "name": "OFN_EX_NOPLACESBAR",
-          "value": "0x00000001"
-        }
-      ],
-      "uses": [
-        {
-          "method": "OPENFILENAMEA",
-          "parameter": "FlagsEx"
-        },
-        {
-          "method": "OPENFILENAMEW",
-          "parameter": "FlagsEx"
-        }
-      ]
-    },
-    {
-      "type": "uint",
-      "finished": false,
-      "name": "MENU_ITEM_STATE",
-      "flags": true,
-      "members": [
-        {
-          "name": "MFS_GRAYED",
-          "value": "0x00000003"
-        },
-        {
-          "name": "MFS_DISABLED",
-          "value": "MFS_GRAYED"
-        },
-        {
-          "name": "MFS_CHECKED",
-          "value": "MENU_ITEM_FLAGS.MF_CHECKED"
-        },
-        {
-          "name": "MFS_HILITE",
-          "value": "MENU_ITEM_FLAGS.MF_HILITE"
-        },
-        {
-          "name": "MFS_ENABLED",
-          "value": "MENU_ITEM_FLAGS.MF_ENABLED"
-        },
-        {
-          "name": "MFS_UNCHECKED",
-          "value": "MENU_ITEM_FLAGS.MF_UNCHECKED"
-        },
-        {
-          "name": "MFS_UNHILITE",
-          "value": "MENU_ITEM_FLAGS.MF_UNHILITE"
-        },
-        {
-          "name": "MFS_DEFAULT",
-          "value": "MENU_ITEM_FLAGS.MF_DEFAULT"
-        }
-      ],
-      "uses": [
-        {
-          "method": "MENUITEMINFOA",
-          "parameter": "fState"
-        },
-        {
-          "method": "MENUITEMINFOW",
-          "parameter": "fState"
-        }
-      ]
-    },
-    {
-      "type": "uint",
-      "finished": true,
-      "name": "MIDI_OPEN_TYPE",
-      "flags": true,
-      "members": [
-        {
-          "name": "CALLBACK_TYPEMASK",
-          "value": "0x00070000"
-        },
-        {
-          "name": "CALLBACK_NULL",
-          "value": "0x00000000"
-        },
-        {
-          "name": "CALLBACK_WINDOW",
-          "value": "0x00010000"
-        },
-        {
-          "name": "CALLBACK_TASK",
-          "value": "0x00020000"
-        },
-        {
-          "name": "CALLBACK_FUNCTION",
-          "value": "0x00030000"
-        },
-        {
-          "name": "CALLBACK_THREAD",
-          "value": "(CALLBACK_TASK)"
-        },
-        {
-          "name": "CALLBACK_EVENT",
-          "value": "0x00050000"
-        },
-        {
-          "name": "MIDI_IO_STATUS",
-          "value": "0x00000020L"
-        }
-      ],
-      "uses": [
-        {
-          "method": "midiInOpen",
-          "parameter": "fdwOpen"
-        },
-        {
-          "method": "midiOutOpen",
-          "parameter": "fdwOpen"
-        }
-      ]
-    },
-    {
-      "type": "uint",
-      "finished": true,
-      "name": "WAVE_OPEN_TYPE",
-      "flags": true,
-      "members": [
-        {
-          "name": "CALLBACK_TYPEMASK",
-          "value": "0x00070000"
-        },
-        {
-          "name": "CALLBACK_NULL",
-          "value": "0x00000000"
-        },
-        {
-          "name": "CALLBACK_WINDOW",
-          "value": "0x00010000"
-        },
-        {
-          "name": "CALLBACK_TASK",
-          "value": "0x00020000"
-        },
-        {
-          "name": "CALLBACK_FUNCTION",
-          "value": "0x00030000"
-        },
-        {
-          "name": "CALLBACK_THREAD",
-          "value": "(CALLBACK_TASK)"
-        },
-        {
-          "name": "CALLBACK_EVENT",
-          "value": "0x00050000"
-        },
-        {
-          "name": "WAVE_FORMAT_QUERY",
-          "value": "0x0001"
-        },
-        {
-          "name": "WAVE_ALLOWSYNC",
-          "value": "0x0002"
-        },
-        {
-          "name": "WAVE_MAPPED",
-          "value": "0x0004"
-        },
-        {
-          "name": "WAVE_FORMAT_DIRECT",
-          "value": "0x0008"
-        },
-        {
-          "name": "WAVE_FORMAT_DIRECT_QUERY",
-          "value": "(WAVE_FORMAT_QUERY | WAVE_FORMAT_DIRECT)"
-        },
-        {
-          "name": "WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE",
-          "value": "0x0010"
-        }
-      ],
-      "uses": [
-        {
-          "method": "waveOutOpen",
-          "parameter": "fdwOpen"
-        },
-        {
-          "method": "waveInOpen",
-          "parameter": "fdwOpen"
-        }
-      ]
-    },
-    {
-      "type": "uint",
-      "finished": false,
-      "name": "LOAD_LIBRARY_FLAGS",
-      "flags": true,
-      "members": [
-        {
-          "name": "DONT_RESOLVE_DLL_REFERENCES",
-          "value": "0x00000001"
-        },
-        {
-          "name": "LOAD_LIBRARY_AS_DATAFILE",
-          "value": "0x00000002"
-        },
-        {
-          "name": "LOAD_WITH_ALTERED_SEARCH_PATH",
-          "value": "0x00000008"
-        },
-        {
-          "name": "LOAD_IGNORE_CODE_AUTHZ_LEVEL",
-          "value": "0x00000010"
-        },
-        {
-          "name": "LOAD_LIBRARY_AS_IMAGE_RESOURCE",
-          "value": "0x00000020"
-        },
-        {
-          "name": "LOAD_LIBRARY_AS_DATAFILE_EXCLUSIVE",
-          "value": "0x00000040"
-        },
-        {
-          "name": "LOAD_LIBRARY_REQUIRE_SIGNED_TARGET",
-          "value": "0x00000080"
-        },
-        {
-          "name": "LOAD_LIBRARY_SEARCH_DLL_LOAD_DIR",
-          "value": "0x00000100"
-        },
-        {
-          "name": "LOAD_LIBRARY_SEARCH_APPLICATION_DIR",
-          "value": "0x00000200"
-        },
-        {
-          "name": "LOAD_LIBRARY_SEARCH_USER_DIRS",
-          "value": "0x00000400"
-        },
-        {
-          "name": "LOAD_LIBRARY_SEARCH_SYSTEM32",
-          "value": "0x00000800"
-        },
-        {
-          "name": "LOAD_LIBRARY_SEARCH_DEFAULT_DIRS",
-          "value": "0x00001000"
-        },
-        {
-          "name": "LOAD_LIBRARY_SAFE_CURRENT_DIRS",
-          "value": "0x00002000"
-        },
-        {
-          "name": "LOAD_LIBRARY_SEARCH_SYSTEM32_NO_FORWARDER",
-          "value": "0x00004000"
-        }
-      ],
-      "uses": [
-        {
-          "method": "LoadLibraryExA",
-          "parameter": "dwFlags"
-        },
-        {
-          "method": "LoadLibraryExW",
-          "parameter": "dwFlags"
-        }
-      ]
-    },
-    {
-      "type": "uint",
-      "finished": true,
-      "name": "SYM_LOAD_FLAGS",
-      "flags": true,
-      "members": [
-        {
-          "name": "SLMFLAG_NONE",
-          "value": "0"
-        },
-        {
-          "name": "SLMFLAG_VIRTUAL",
-          "value": "0x1"
-        },
-        {
-          "name": "SLMFLAG_ALT_INDEX",
-          "value": "0x2"
-        },
-        {
-          "name": "SLMFLAG_NO_SYMBOLS",
-          "value": "0x4"
-        }
-      ],
-      "uses": [
-        {
-          "method": "SymLoadModuleEx",
-          "parameter": "Flags"
-        },
-        {
-          "method": "SymLoadModuleExW",
-          "parameter": "Flags"
-        }
-      ]
-    },
-    {
-      "type": "uint",
-      "finished": true,
-      "name": "HEAP_FLAGS",
-      "flags": true,
-      "members": [
-        {
-          "name": "HEAP_NONE",
-          "value": "0x00000000"
-        },
-        {
-          "name": "HEAP_NO_SERIALIZE",
-          "value": "0x00000001"
-        },
-        {
-          "name": "HEAP_GROWABLE",
-          "value": "0x00000002"
-        },
-        {
-          "name": "HEAP_GENERATE_EXCEPTIONS",
-          "value": "0x00000004"
-        },
-        {
-          "name": "HEAP_ZERO_MEMORY",
-          "value": "0x00000008"
-        },
-        {
-          "name": "HEAP_REALLOC_IN_PLACE_ONLY",
-          "value": "0x00000010"
-        },
-        {
-          "name": "HEAP_TAIL_CHECKING_ENABLED",
-          "value": "0x00000020"
-        },
-        {
-          "name": "HEAP_FREE_CHECKING_ENABLED",
-          "value": "0x00000040"
-        },
-        {
-          "name": "HEAP_DISABLE_COALESCE_ON_FREE",
-          "value": "0x00000080"
-        },
-        {
-          "name": "HEAP_CREATE_ALIGN_16",
-          "value": "0x00010000"
-        },
-        {
-          "name": "HEAP_CREATE_ENABLE_TRACING",
-          "value": "0x00020000"
-        },
-        {
-          "name": "HEAP_CREATE_ENABLE_EXECUTE",
-          "value": "0x00040000"
-        },
-        {
-          "name": "HEAP_MAXIMUM_TAG",
-          "value": "0x0FFF"
-        },
-        {
-          "name": "HEAP_PSEUDO_TAG_FLAG",
-          "value": "0x8000"
-        },
-        {
-          "name": "HEAP_TAG_SHIFT",
-          "value": "18"
-        },
-        {
-          "name": "HEAP_CREATE_SEGMENT_HEAP",
-          "value": "0x00000100"
-        },
-        {
-          "name": "HEAP_CREATE_HARDENED",
-          "value": "0x00000200"
-        }
-      ],
-      "uses": [
-        {
-          "method": "HeapAlloc",
-          "parameter": "dwFlags"
-        },
-        {
-          "method": "HeapCompact",
-          "parameter": "dwFlags"
-        },
-        {
-          "method": "HeapCreate",
-          "parameter": "flFlags"
-        },
-        {
-          "method": "HeapFree",
-          "parameter": "dwFlags"
-        },
-        {
-          "method": "HeapReAlloc",
-          "parameter": "dwFlags"
-        },
-        {
-          "method": "HeapSize",
-          "parameter": "dwFlags"
-        },
-        {
-          "method": "HeapValidate",
-          "parameter": "dwFlags"
-        }
-      ]
-    },
-    {
-      "type": "uint",
-      "finished": true,
-      "name": "CERT_QUERY_OBJECT_TYPE",
-      "flags": false,
-      "members": [
-        {
-          "name": "CERT_QUERY_OBJECT_FILE",
-          "value": "0x00000001"
-        },
-        {
-          "name": "CERT_QUERY_OBJECT_BLOB",
-          "value": "0x00000002"
-        }
-      ],
-      "uses": [
-        {
-          "method": "CryptQueryObject",
-          "parameter": "dwObjectType"
-        }
-      ]
-    },
-    {
-      "type": "uint",
-      "finished": true,
-      "name": "CERT_QUERY_CONTENT_TYPE",
-      "flags": false,
-      "members": [
-        {
-          "name": "CERT_QUERY_CONTENT_CERT",
-          "value": "1"
-        },
-        {
-          "name": "CERT_QUERY_CONTENT_CTL",
-          "value": "2"
-        },
-        {
-          "name": "CERT_QUERY_CONTENT_CRL",
-          "value": "3"
-        },
-        {
-          "name": "CERT_QUERY_CONTENT_SERIALIZED_STORE",
-          "value": "4"
-        },
-        {
-          "name": "CERT_QUERY_CONTENT_SERIALIZED_CERT",
-          "value": "5"
-        },
-        {
-          "name": "CERT_QUERY_CONTENT_SERIALIZED_CTL",
-          "value": "6"
-        },
-        {
-          "name": "CERT_QUERY_CONTENT_SERIALIZED_CRL",
-          "value": "7"
-        },
-        {
-          "name": "CERT_QUERY_CONTENT_PKCS7_SIGNED",
-          "value": "8"
-        },
-        {
-          "name": "CERT_QUERY_CONTENT_PKCS7_UNSIGNED",
-          "value": "9"
-        },
-        {
-          "name": "CERT_QUERY_CONTENT_PKCS7_SIGNED_EMBED",
-          "value": "10"
-        },
-        {
-          "name": "CERT_QUERY_CONTENT_PKCS10",
-          "value": "11"
-        },
-        {
-          "name": "CERT_QUERY_CONTENT_PFX",
-          "value": "12"
-        },
-        {
-          "name": "CERT_QUERY_CONTENT_CERT_PAIR",
-          "value": "13"
-        },
-        {
-          "name": "CERT_QUERY_CONTENT_PFX_AND_LOAD",
-          "value": "14"
-        }
-      ],
-      "uses": [
-        {
-          "method": "CryptQueryObject",
-          "parameter": "pdwContentType"
-        }
-      ]
-    },
-    {
-      "type": "uint",
-      "finished": true,
-      "name": "CERT_QUERY_CONTENT_TYPE_FLAGS",
-      "flags": false,
-      "members": [
-        {
-          "name": "CERT_QUERY_CONTENT_FLAG_CERT",
-          "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_CERT)"
-        },
-        {
-          "name": "CERT_QUERY_CONTENT_FLAG_CTL",
-          "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_CTL)"
-        },
-        {
-          "name": "CERT_QUERY_CONTENT_FLAG_CRL",
-          "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_CRL)"
-        },
-        {
-          "name": "CERT_QUERY_CONTENT_FLAG_SERIALIZED_STORE",
-          "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_SERIALIZED_STORE)"
-        },
-        {
-          "name": "CERT_QUERY_CONTENT_FLAG_SERIALIZED_CERT",
-          "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_SERIALIZED_CERT)"
-        },
-        {
-          "name": "CERT_QUERY_CONTENT_FLAG_SERIALIZED_CTL",
-          "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_SERIALIZED_CTL)"
-        },
-        {
-          "name": "CERT_QUERY_CONTENT_FLAG_SERIALIZED_CRL",
-          "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_SERIALIZED_CRL)"
-        },
-        {
-          "name": "CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED",
-          "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_PKCS7_SIGNED)"
-        },
-        {
-          "name": "CERT_QUERY_CONTENT_FLAG_PKCS7_UNSIGNED",
-          "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_PKCS7_UNSIGNED)"
-        },
-        {
-          "name": "CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED_EMBED",
-          "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_PKCS7_SIGNED_EMBED)"
-        },
-        {
-          "name": "CERT_QUERY_CONTENT_FLAG_PKCS10",
-          "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_PKCS10)"
-        },
-        {
-          "name": "CERT_QUERY_CONTENT_FLAG_PFX",
-          "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_PFX)"
-        },
-        {
-          "name": "CERT_QUERY_CONTENT_FLAG_CERT_PAIR",
-          "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_CERT_PAIR)"
-        },
-        {
-          "name": "CERT_QUERY_CONTENT_FLAG_PFX_AND_LOAD",
-          "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_PFX_AND_LOAD)"
-        },
-        {
-          "name": "CERT_QUERY_CONTENT_FLAG_ALL",
-          "value": "(CERT_QUERY_CONTENT_FLAG_CERT | CERT_QUERY_CONTENT_FLAG_CTL | CERT_QUERY_CONTENT_FLAG_CRL | CERT_QUERY_CONTENT_FLAG_SERIALIZED_STORE | CERT_QUERY_CONTENT_FLAG_SERIALIZED_CERT | CERT_QUERY_CONTENT_FLAG_SERIALIZED_CTL | CERT_QUERY_CONTENT_FLAG_SERIALIZED_CRL | CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED | CERT_QUERY_CONTENT_FLAG_PKCS7_UNSIGNED | CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED_EMBED | CERT_QUERY_CONTENT_FLAG_PKCS10 | CERT_QUERY_CONTENT_FLAG_PFX | CERT_QUERY_CONTENT_FLAG_CERT_PAIR)"
-        },
-        {
-          "name": "CERT_QUERY_CONTENT_FLAG_ALL_ISSUER_CERT",
-          "value": "(CERT_QUERY_CONTENT_FLAG_CERT | CERT_QUERY_CONTENT_FLAG_SERIALIZED_STORE | CERT_QUERY_CONTENT_FLAG_SERIALIZED_CERT | CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED | CERT_QUERY_CONTENT_FLAG_PKCS7_UNSIGNED)"
-        }
-      ],
-      "uses": [
-        {
-          "method": "CryptQueryObject",
-          "parameter": "dwExpectedContentTypeFlags"
-        }
-      ]
-    },
-    {
-      "type": "uint",
-      "finished": true,
-      "name": "CERT_QUERY_FORMAT_TYPE",
-      "flags": false,
-      "members": [
-        {
-          "name": "CERT_QUERY_FORMAT_BINARY",
-          "value": "1"
-        },
-        {
-          "name": "CERT_QUERY_FORMAT_BASE64_ENCODED",
-          "value": "2"
-        },
-        {
-          "name": "CERT_QUERY_FORMAT_ASN_ASCII_HEX_ENCODED",
-          "value": "3"
-        }
-      ],
-      "uses": [
-        {
-          "method": "CryptQueryObject",
-          "parameter": "pdwFormatType"
-        }
-      ]
-    },
-    {
-      "type": "uint",
-      "finished": true,
-      "name": "CERT_QUERY_FORMAT_TYPE_FLAGS",
-      "flags": false,
-      "members": [
-        {
-          "name": "CERT_QUERY_FORMAT_FLAG_BINARY",
-          "value": "( 1 << (int)CERT_QUERY_FORMAT_TYPE.CERT_QUERY_FORMAT_BINARY)"
-        },
-        {
-          "name": "CERT_QUERY_FORMAT_FLAG_BASE64_ENCODED",
-          "value": "( 1 << (int)CERT_QUERY_FORMAT_TYPE.CERT_QUERY_FORMAT_BASE64_ENCODED)"
-        },
-        {
-          "name": "CERT_QUERY_FORMAT_FLAG_ASN_ASCII_HEX_ENCODED",
-          "value": "( 1 << (int)CERT_QUERY_FORMAT_TYPE.CERT_QUERY_FORMAT_ASN_ASCII_HEX_ENCODED)"
-        },
-        {
-          "name": "CERT_QUERY_FORMAT_FLAG_ALL",
-          "value": "(CERT_QUERY_FORMAT_FLAG_BINARY | CERT_QUERY_FORMAT_FLAG_BASE64_ENCODED | CERT_QUERY_FORMAT_FLAG_ASN_ASCII_HEX_ENCODED)"
-        }
-      ],
-      "uses": [
-        {
-          "method": "CryptQueryObject",
-          "parameter": "dwExpectedFormatTypeFlags"
-        }
-      ]
-    },
-    {
-      "type": "uint",
-      "finished": false,
-      "name": "CERT_QUERY_ENCODING_TYPE",
-      "flags": false,
-      "members": [
-        {
-          "name": "X509_ASN_ENCODING",
-          "value": "0x00000001"
-        },
-        {
-          "name": "PKCS_7_ASN_ENCODING",
-          "value": "0x00010000"
-        }
-      ],
-      "uses": [
-        {
-          "method": "CryptQueryObject",
-          "parameter": "pdwMsgAndCertEncodingType"
-        }
-      ]
-    },
-    {
-      "name": "SHUTDOWN_REASON",
-      "type": "uint",
-      "finished": false,
-      "flags": true,
-      "autoPopulate":
-        {
-            "filter": "SHTDN_REASON_",
-            "header": "reason.h"
-        },
-      "members": [
-        {
-          "name": "SHTDN_REASON_NONE",
-          "value": "0"
-        }
-      ],
-      "uses": [
-        {
-            "method": "InitiateShutdownA",
-            "parameter": "dwReason"
-        },
-        {
-            "method": "InitiateShutdownW",
-            "parameter": "dwReason"
-        },
-        {
-            "method": "InitiateSystemShutdownExA",
-            "parameter": "dwReason"
-        },
-        {
-            "method": "InitiateSystemShutdownExW",
-            "parameter": "dwReason"
-        }
-      ]
-    },
-    {
-      "name": "SHUTDOWN_FLAGS",
-      "type": "uint",
-      "finished": false,
-      "flags": true,
-      "autoPopulate":
-        {
-            "filter": "SHUTDOWN_",
-            "header": "winreg.h"
-        },
-        "uses": [
-          {
-            "method": "InitiateShutdownA",
-            "parameter": "dwShutdownFlags"
-          },
-          {
-            "method": "InitiateShutdownW",
-            "parameter": "dwShutdownFlags"
-          }
-        ]
+  {
+    "name": "ALERT_SYSTEM_SEV",
+    "flags": false,
+    "autoPopulate": {
+      "filter": "ALERT_SYSTEM_",
+      "header": "WinUser.h"
     }
+  },
+  {
+    "name": "APPCOMMAND_ID",
+    "flags": false,
+    "autoPopulate": {
+      "filter": "APPCOMMAND_",
+      "header": "WinUser.h"
+    }
+  },
+  {
+    "name": "ATF_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "ATF_",
+      "header": "WinUser.h"
+    }
+  },
+  {
+    "name": "DRAWEDGE_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "BDR_|EDGE_",
+      "header": "WinUser.h"
+    },
+    "uses": [
+      {
+        "method": "DrawEdge",
+        "parameter": "edge"
+      }
+    ]
+  },
+  {
+    "name": "BUTTON_STYLE",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "BS_",
+      "header": "WinUser.h"
+    }
+  },
+  {
+    "name": "COMBOBOX_STYLE",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "CBS_",
+      "header": "WinUser.h"
+    }
+  },
+  {
+    "name": "CHOOSECOLOR_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "CC_",
+      "header": "commdlg.h"
+    }
+  },
+  {
+    "name": "CLIPBOARD_FORMATS",
+    "flags": false,
+    "autoPopulate": {
+      "filter": "CF_",
+      "header": "WinUser.h"
+    }
+  },
+  {
+    "name": "WNDCLASS_STYLES",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "CS_",
+      "header": "WinUser.h"
+    },
+    "uses": [
+      {
+        "struct": "WNDCLASSA",
+        "field": "style"
+      },
+      {
+        "struct": "WNDCLASSW",
+        "field": "style"
+      },
+      {
+        "struct": "WNDCLASSEXA",
+        "field": "style"
+      },
+      {
+        "struct": "WNDCLASSEXW",
+        "field": "style"
+      }
+    ]
+  },
+  {
+    "name": "CWP_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "CWP_",
+      "header": "WinUser.h"
+    },
+    "uses": [
+      {
+        "method": "ChildWindowFromPointEx",
+        "parameter": "flags"
+      }
+    ]
+  },
+  {
+    "name": "DFC_TYPE",
+    "flags": false,
+    "autoPopulate": {
+      "filter": "DFC_",
+      "header": "WinUser.h"
+    },
+    "uses": [
+      {
+        "method": "DrawFrameControl",
+        "parameter": "param2"
+      }
+    ]
+  },
+  {
+    "name": "DFCS_STATE",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "DFCS_",
+      "header": "WinUser.h"
+    },
+    "uses": [
+      {
+        "method": "DrawFrameControl",
+        "parameter": "param3"
+      }
+    ]
+  },
+  {
+    "name": "CDS_TYPE",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "CDS_",
+      "header": "WinUser.h"
+    },
+    "uses": [
+      {
+        "method": "ChangeDisplaySettingsA",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "ChangeDisplaySettingsW",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "ChangeDisplaySettingsExW",
+        "parameter": "dwflags"
+      },
+      {
+        "method": "ChangeDisplaySettingsExA",
+        "parameter": "dwflags"
+      }
+    ]
+  },
+  {
+    "name": "DISP_CHANGE",
+    "flags": false,
+    "autoPopulate": {
+      "filter": "DISP_CHANGE",
+      "header": "WinUser.h"
+    },
+    "uses": [
+      {
+        "method": "ChangeDisplaySettingsA",
+        "parameter": "return"
+      },
+      {
+        "method": "ChangeDisplaySettingsW",
+        "parameter": "return"
+      },
+      {
+        "method": "ChangeDisplaySettingsExW",
+        "parameter": "return"
+      },
+      {
+        "method": "ChangeDisplaySettingsExA",
+        "parameter": "return"
+      }
+    ]
+  },
+  {
+    "name": "DIALOGBOX_STYLE",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "DS_",
+      "header": "WinUser.h"
+    }
+  },
+  {
+    "name": "DRAWSTATE_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "DST_|DSS_",
+      "header": "WinUser.h"
+    },
+    "uses": [
+      {
+        "method": "DrawStateA",
+        "parameter": "uFlags"
+      },
+      {
+        "method": "DrawStateW",
+        "parameter": "uFlags"
+      }
+    ]
+  },
+  {
+    "name": "EDITCONTROL_STYLE",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "ES_",
+      "header": "WinUser.h"
+    }
+  },
+  {
+    "name": "GESTURECONFIG_ID",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "GID_",
+      "header": "WinUser.h"
+    },
+    "uses": [
+      {
+        "struct": "GESTURECONFIG",
+        "field": "dwID"
+      }
+    ]
+  },
+  {
+    "name": "GESTURECONFIG_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "GC_",
+      "header": "WinUser.h"
+    }
+  },
+  {
+    "name": "LISTBOX_STYLE",
+    "flags": true,
+    "members": [
+      {
+        "name": "LBS_STANDARD",
+        "value": "(LBS_NOTIFY | LBS_SORT | Windows.Win32.WindowsAndMessaging.WINDOW_STYLE.WS_VSCROLL | Windows.Win32.WindowsAndMessaging.WINDOW_STYLE.WS_BORDER)"
+      }
+    ],
+    "autoPopulate": {
+      "filter": "LBS_",
+      "header": "WinUser.h"
+    }
+  },
+  {
+    "name": "MESSAGEBOX_STYLE",
+    "flags": true,
+    "type": "uint",
+    "autoPopulate": {
+      "filter": "MB_",
+      "header": "WinUser.h"
+    },
+    "uses": [
+      {
+        "method": "MessageBoxW",
+        "parameter": "uType"
+      },
+      {
+        "method": "MessageBoxA",
+        "parameter": "uType"
+      },
+      {
+        "method": "MessageBoxExW",
+        "parameter": "uType"
+      },
+      {
+        "method": "MessageBoxExA",
+        "parameter": "uType"
+      },
+      {
+        "method": "MSGBOXPARAMSA",
+        "parameter": "dwStyle"
+      },
+      {
+        "method": "MSGBOXPARAMSW",
+        "parameter": "dwStyle"
+      },
+      {
+        "method": "WTSSendMessageA",
+        "parameter": "Style"
+      },
+      {
+        "method": "WTSSendMessageW",
+        "parameter": "Style"
+      }
+    ]
+  },
+  {
+    "name": "MENU_ITEM_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "MF_",
+      "header": "WinUser.h"
+    },
+    "uses": [
+      {
+        "method": "EnableMenuItem",
+        "parameter": "uEnable"
+      },
+      {
+        "method": "DeleteMenu",
+        "parameter": "uFlags"
+      },
+      {
+        "method": "RemoveMenu",
+        "parameter": "uFlags"
+      },
+      {
+        "method": "GetMenuStringA",
+        "parameter": "flags"
+      },
+      {
+        "method": "GetMenuState",
+        "parameter": "uFlags"
+      },
+      {
+        "method": "GetMenuStringW",
+        "parameter": "flags"
+      },
+      {
+        "method": "SetMenuItemBitmaps",
+        "parameter": "uFlags"
+      }
+    ]
+  },
+  {
+    "name": "POINTER_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "POINTER_FLAG_",
+      "header": "WinUser.h"
+    },
+    "uses": [
+      {
+        "struct": "POINTER_INFO",
+        "field": "pointerFlags"
+      }
+    ]
+  },
+  {
+    "name": "REDRAW_WINDOW_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "RDW_",
+      "header": "WinUser.h"
+    },
+    "uses": [
+      {
+        "method": "RedrawWindow",
+        "parameter": "flags"
+      }
+    ]
+  },
+  {
+    "name": "SCROLLBAR_CONSTANTS",
+    "flags": true,
+    "members": [
+      {
+        "name": "SB_BOTH"
+      },
+      {
+        "name": "SB_CTL"
+      },
+      {
+        "name": "SB_HORZ"
+      },
+      {
+        "name": "SB_VERT"
+      }
+    ],
+    "uses": [
+      {
+        "method": "ShowScrollBar",
+        "parameter": "wBar"
+      },
+      {
+        "method": "EnableScrollBar",
+        "parameter": "wSBflags"
+      }
+    ]
+  },
+  {
+    "name": "SCROLLBAR_STYLE",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "SBS_",
+      "header": "WinUser.h"
+    }
+  },
+  {
+    "name": "SHOW_WINDOW_CMD",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "SW_",
+      "header": "WinUser.h"
+    },
+    "uses": [
+      {
+        "method": "ShowWindow",
+        "parameter": "nCmdShow"
+      }
+    ]
+  },
+  {
+    "name": "STICKYKEYS_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "SKF_",
+      "header": "WinUser.h"
+    },
+    "uses": [
+      {
+        "struct": "STICKYKEYS",
+        "field": "dwFlags"
+      }
+    ]
+  },
+  {
+    "name": "SYSTEM_PARAMETERS_INFO_ACTION",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "SPI_",
+      "header": "WinUser.h"
+    },
+    "uses": [
+      {
+        "method": "SystemParametersInfoA",
+        "parameter": "uiAction"
+      },
+      {
+        "method": "SystemParametersInfoW",
+        "parameter": "uiAction"
+      }
+    ]
+  },
+  {
+    "name": "STATIC_CONTROL_STYLE",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "SS_",
+      "header": "WinUser.h"
+    }
+  },
+  {
+    "name": "SOUNDSENTRY_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "SSF_",
+      "header": "WinUser.h"
+    },
+    "uses": [
+      {
+        "struct": "SOUNDSENTRYA",
+        "field": "dwFlags"
+      },
+      {
+        "struct": "SOUNDSENTRYW",
+        "field": "dwFlags"
+      }
+    ]
+  },
+  {
+    "name": "TOUCH_FEEDBACK_MODE",
+    "flags": false,
+    "autoPopulate": {
+      "filter": "TOUCH_FEEDBACK_",
+      "header": "WinUser.h"
+    },
+    "uses": [
+      {
+        "method": "InitializeTouchInjection",
+        "parameter": "dwMode"
+      }
+    ]
+  },
+  {
+    "name": "TOUCHEVENTF_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "TOUCHEVENTF_",
+      "header": "WinUser.h"
+    },
+    "uses": [
+      {
+        "struct": "TOUCHINPUT",
+        "field": "dwFlags"
+      }
+    ]
+  },
+  {
+    "name": "TOUCHINPUTMASKF_MASK",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "TOUCHINPUTMASKF_",
+      "header": "WinUser.h"
+    },
+    "uses": [
+      {
+        "struct": "TOUCHINPUT",
+        "field": "dwMask"
+      }
+    ]
+  },
+  {
+    "name": "TRACK_POPUP_MENU_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "TPM_",
+      "header": "WinUser.h"
+    },
+    "uses": [
+      {
+        "method": "TrackPopupMenu",
+        "parameter": "uFlags"
+      }
+    ]
+  },
+  {
+    "name": "WINDOW_EX_STYLE",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "WS_EX_",
+      "header": "WinUser.h"
+    },
+    "uses": [
+      {
+        "method": "CreateWindowExA",
+        "parameter": "dwExStyle"
+      },
+      {
+        "method": "CreateWindowExW",
+        "parameter": "dwExStyle"
+      }
+    ]
+  },
+  {
+    "name": "WINDOW_STYLE",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "WS_",
+      "header": "WinUser.h"
+    },
+    "uses": [
+      {
+        "method": "CreateWindowExA",
+        "parameter": "dwStyle"
+      },
+      {
+        "method": "CreateWindowExW",
+        "parameter": "dwStyle"
+      }
+    ]
+  },
+  {
+    "name": "SP_COPY_STYLE",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "SP_COPY_",
+      "header": "SetupAPI.h"
+    },
+    "uses": [
+      {
+        "method": "SetupInstallFileExW",
+        "parameter": "CopyStyle"
+      },
+      {
+        "method": "SetupInstallFileExA",
+        "parameter": "CopyStyle"
+      },
+      {
+        "struct": "sp_file_copy_params_a",
+        "field": "CopyStyle"
+      },
+      {
+        "struct": "sp_file_copy_params_w",
+        "field": "CopyStyle"
+      }
+    ]
+  },
+  {
+    "name": "SCROLLBAR_OBJID",
+    "flags": false,
+    "finished": true,
+    "type": "int",
+    "members": [
+      {
+        "name": "OBJID_CLIENT",
+        "value": "unchecked((int)0xFFFFFFFC)"
+      },
+      {
+        "name": "OBJID_HSCROLL",
+        "value": "unchecked((int)0xFFFFFFFA)"
+      },
+      {
+        "name": "OBJID_VSCROLL",
+        "value": "unchecked((int)0xFFFFFFFB)"
+      }
+    ],
+    "uses": [
+      {
+        "method": "GetScrollBarInfo",
+        "parameter": "idObject"
+      }
+    ]
+  },
+  {
+    "name": "ENUM_DISPLAY_SETTINGS_MODE",
+    "flags": false,
+    "finished": true,
+    "members": [
+      {
+        "name": "ENUM_CURRENT_SETTINGS",
+        "value": "unchecked((uint)-1)"
+      },
+      {
+        "name": "ENUM_REGISTRY_SETTINGS",
+        "value": "unchecked((uint)-2)"
+      }
+    ],
+    "uses": [
+      {
+        "method": "EnumDisplaySettingsExW",
+        "parameter": "iModeNum"
+      },
+      {
+        "method": "EnumDisplaySettingsW",
+        "parameter": "iModeNum"
+      },
+      {
+        "method": "EnumDisplaySettingsA",
+        "parameter": "iModeNum"
+      },
+      {
+        "method": "EnumDisplaySettingsExA",
+        "parameter": "iModeNum"
+      }
+    ]
+  },
+  {
+    "name": "WINBIO_SETTING_SOURCE",
+    "flags": false,
+    "finished": true,
+    "members": [
+      {
+        "name": "WINBIO_SETTING_SOURCE_INVALID",
+        "value": "0"
+      },
+      {
+        "name": "WINBIO_SETTING_SOURCE_DEFAULT",
+        "value": "1"
+      },
+      {
+        "name": "WINBIO_SETTING_SOURCE_LOCAL",
+        "value": "3"
+      },
+      {
+        "name": "WINBIO_SETTING_SOURCE_POLICY",
+        "value": "2"
+      }
+    ],
+    "uses": [
+      {
+        "method": "WinBioGetEnabledSetting",
+        "parameter": "Source"
+      },
+      {
+        "method": "WinBioGetLogonSetting",
+        "parameter": "Source"
+      },
+      {
+        "method": "WinBioGetDomainLogonSetting",
+        "parameter": "Source"
+      }
+    ]
+  },
+  {
+    "name": "WINBIO_COMPONENT",
+    "flags": false,
+    "finished": true,
+    "members": [
+      {
+        "name": "WINBIO_COMPONENT_SENSOR",
+        "value": "1"
+      },
+      {
+        "name": "WINBIO_COMPONENT_ENGINE",
+        "value": "2"
+      },
+      {
+        "name": "WINBIO_COMPONENT_STORAGE",
+        "value": "3"
+      }
+    ],
+    "uses": [
+      {
+        "method": "WinBioControlUnit",
+        "parameter": "Component"
+      },
+      {
+        "method": "WinBioControlUnitPrivileged",
+        "parameter": "Component"
+      }
+    ]
+  },
+  {
+    "name": "WINBIO_POOL",
+    "flags": false,
+    "finished": true,
+    "members": [
+      {
+        "name": "WINBIO_POOL_SYSTEM",
+        "value": "1"
+      },
+      {
+        "name": "WINBIO_POOL_PRIVATE",
+        "value": "2"
+      }
+    ],
+    "uses": [
+      {
+        "method": "WinBioOpenSession",
+        "parameter": "PoolType"
+      },
+      {
+        "method": "WinBioAsyncOpenSession",
+        "parameter": "PoolType"
+      }
+    ]
+  },
+  {
+    "name": "SNMP_PDU_TYPE",
+    "flags": false,
+    "members": [
+      {
+        "name": "SNMP_PDU_GET"
+      },
+      {
+        "name": "SNMP_PDU_GETNEXT"
+      },
+      {
+        "name": "SNMP_PDU_RESPONSE"
+      },
+      {
+        "name": "SNMP_PDU_SET"
+      },
+      {
+        "name": "SNMP_PDU_GETBULK"
+      },
+      {
+        "name": "SNMP_PDU_TRAP"
+      }
+    ]
+  },
+  {
+    "name": "SNMP_EXTENSION_REQUEST_TYPE",
+    "flags": false,
+    "finished": true,
+    "members": [
+      {
+        "name": "SNMP_EXTENSION_GET",
+        "value": "SNMP_PDU_TYPE.SNMP_PDU_GET"
+      },
+      {
+        "name": "SNMP_EXTENSION_GET_NEXT",
+        "value": "SNMP_PDU_TYPE.SNMP_PDU_GETNEXT"
+      },
+      {
+        "name": "SNMP_EXTENSION_SET_TEST",
+        "value": "(ASN_PRIVATE | ASN_CONSTRUCTOR | 0x0)"
+      },
+      {
+        "name": "SNMP_EXTENSION_SET_COMMIT",
+        "value": "SNMP_PDU_TYPE.SNMP_PDU_SET"
+      },
+      {
+        "name": "SNMP_EXTENSION_SET_UNDO",
+        "value": "(ASN_PRIVATE | ASN_CONSTRUCTOR | 0x1)"
+      },
+      {
+        "name": "SNMP_EXTENSION_SET_CLEANUP",
+        "value": "(ASN_PRIVATE | ASN_CONSTRUCTOR | 0x2)"
+      }
+    ],
+    "uses": [
+      {
+        "method": "SnmpExtensionQueryEx",
+        "parameter": "nRequestType"
+      }
+    ]
+  },
+  {
+    "name": "AS_ANY_TYPE",
+    "flags": false,
+    "finished": true,
+    "members": [
+      {
+        "name": "ASN_INTEGER",
+        "value": "(ASN_UNIVERSAL | ASN_PRIMITIVE | 0x02)"
+      },
+      {
+        "name": "ASN_INTEGER32",
+        "value": "ASN_INTEGER"
+      },
+      {
+        "name": "ASN_UNSIGNED32",
+        "value": "(ASN_APPLICATION | ASN_PRIMITIVE | 0x07)"
+      },
+      {
+        "name": "ASN_COUNTER64",
+        "value": "(ASN_APPLICATION | ASN_PRIMITIVE | 0x06)"
+      },
+      {
+        "name": "ASN_OCTETSTRING",
+        "value": "(ASN_UNIVERSAL | ASN_PRIMITIVE | 0x04)"
+      },
+      {
+        "name": "ASN_BITS",
+        "value": "(ASN_UNIVERSAL | ASN_PRIMITIVE | 0x03)"
+      },
+      {
+        "name": "ASN_OBJECTIDENTIFIER",
+        "value": "(ASN_UNIVERSAL | ASN_PRIMITIVE | 0x06)"
+      },
+      {
+        "name": "ASN_SEQUENCE",
+        "value": "(ASN_UNIVERSAL | ASN_CONSTRUCTOR | 0x10)"
+      },
+      {
+        "name": "ASN_IPADDRESS",
+        "value": "(ASN_APPLICATION | ASN_PRIMITIVE | 0x00)"
+      },
+      {
+        "name": "ASN_COUNTER32",
+        "value": "(ASN_APPLICATION | ASN_PRIMITIVE | 0x01)"
+      },
+      {
+        "name": "ASN_GAUGE32",
+        "value": "(ASN_APPLICATION | ASN_PRIMITIVE | 0x02)"
+      },
+      {
+        "name": "ASN_TIMETICKS",
+        "value": "(ASN_APPLICATION | ASN_PRIMITIVE | 0x03)"
+      },
+      {
+        "name": "ASN_OPAQUE",
+        "value": "(ASN_APPLICATION | ASN_PRIMITIVE | 0x04)"
+      },
+      {
+        "name": "SNMP_EXCEPTION_NOSUCHOBJECT",
+        "value": "(ASN_CONTEXT | ASN_PRIMITIVE | 0x00)"
+      },
+      {
+        "name": "SNMP_EXCEPTION_NOSUCHINSTANCE",
+        "value": "(ASN_CONTEXT | ASN_PRIMITIVE | 0x01)"
+      },
+      {
+        "name": "SNMP_EXCEPTION_ENDOFMIBVIEW",
+        "value": "(ASN_CONTEXT | ASN_PRIMITIVE | 0x02)"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "AsnAny",
+        "field": "asnType"
+      }
+    ]
+  },
+  {
+    "name": "HDI_MASK",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "HDI_",
+      "header": "CommCtrl.h"
+    }
+  },
+  {
+    "name": "CFM_MASK",
+    "flags": true,
+    "members": [
+      {
+        "name": "CFM_SUBSCRIPT",
+        "value": "(CFE_EFFECTS.CFE_SUBSCRIPT | CFE_EFFECTS.CFE_SUPERSCRIPT)"
+      },
+      {
+        "name": "CFM_EFFECTS",
+        "value": "(CFM_BOLD | CFM_ITALIC | CFM_UNDERLINE | CFM_COLOR | CFM_STRIKEOUT | CFE_EFFECTS.CFE_PROTECTED | CFM_LINK)"
+      }
+    ],
+    "autoPopulate": {
+      "filter": "CFM_",
+      "header": "Richedit.h"
+    }
+  },
+  {
+    "name": "CFE_EFFECTS",
+    "flags": true,
+    "members": [
+      {
+        "name": "CFE_ALLCAPS",
+        "value": "CFM_MASK.CFM_ALLCAPS"
+      },
+      {
+        "name": "CFE_AUTOBACKCOLOR",
+        "value": "CFM_MASK.CFM_BACKCOLOR"
+      },
+      {
+        "name": "CFE_DISABLED",
+        "value": "CFM_MASK.CFM_DISABLED"
+      },
+      {
+        "name": "CFE_EMBOSS",
+        "value": "CFM_MASK.CFM_EMBOSS"
+      },
+      {
+        "name": "CFE_HIDDEN",
+        "value": "CFM_MASK.CFM_HIDDEN"
+      },
+      {
+        "name": "CFE_IMPRINT",
+        "value": "CFM_MASK.CFM_IMPRINT"
+      },
+      {
+        "name": "CFE_OUTLINE",
+        "value": "CFM_MASK.CFM_OUTLINE"
+      },
+      {
+        "name": "CFE_REVISED",
+        "value": "CFM_MASK.CFM_REVISED"
+      },
+      {
+        "name": "CFE_SHADOW",
+        "value": "CFM_MASK.CFM_SHADOW"
+      },
+      {
+        "name": "CFE_SMALLCAPS",
+        "value": "CFM_MASK.CFM_SMALLCAPS"
+      }
+    ],
+    "autoPopulate": {
+      "filter": "CFE_",
+      "header": "Richedit.h"
+    }
+  },
+  {
+    "name": "CFE_UNDERLINE",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "CFU_",
+      "header": "Richedit.h"
+    }
+  },
+  {
+    "name": "BCRYPT_OPERATION",
+    "flags": true,
+    "members": [
+      {
+        "name": "BCRYPT_CIPHER_OPERATION",
+        "value": 1
+      },
+      {
+        "name": "BCRYPT_HASH_OPERATION",
+        "value": 2
+      },
+      {
+        "name": "BCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION",
+        "value": 4
+      },
+      {
+        "name": "BCRYPT_SECRET_AGREEMENT_OPERATION",
+        "value": 8
+      },
+      {
+        "name": "BCRYPT_SIGNATURE_OPERATION",
+        "value": 16
+      },
+      {
+        "name": "BCRYPT_RNG_OPERATION",
+        "value": 32
+      }
+    ],
+    "uses": [
+      {
+        "method": "BCryptEnumAlgorithms",
+        "parameter": "dwAlgOperations"
+      }
+    ]
+  },
+  {
+    "name": "NCRYPT_OPERATION",
+    "flags": true,
+    "finished": true,
+    "members": [
+      {
+        "name": "NCRYPT_CIPHER_OPERATION",
+        "value": 1
+      },
+      {
+        "name": "NCRYPT_HASH_OPERATION",
+        "value": 2
+      },
+      {
+        "name": "NCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION",
+        "value": 4
+      },
+      {
+        "name": "NCRYPT_SECRET_AGREEMENT_OPERATION",
+        "value": 8
+      },
+      {
+        "name": "NCRYPT_SIGNATURE_OPERATION",
+        "value": 16
+      }
+    ],
+    "uses": [
+      {
+        "method": "NCryptEnumAlgorithms",
+        "parameter": "dwAlgOperations"
+      }
+    ]
+  },
+  {
+    "name": "IGP_ID",
+    "flags": false,
+    "members": [
+      {
+        "name": "IGP_GETIMEVERSION",
+        "value": "unchecked((uint)-4)"
+      }
+    ],
+    "autoPopulate": {
+      "filter": "IGP_",
+      "header": "imm.h"
+    }
+  },
+  {
+    "name": "MENU_ITEM_TYPE",
+    "flags": true,
+    "finished": true,
+    "members": [
+      {
+        "name": "MFT_BITMAP",
+        "value": "MENU_ITEM_FLAGS.MF_BITMAP"
+      },
+      {
+        "name": "MFT_MENUBARBREAK",
+        "value": "MENU_ITEM_FLAGS.MF_MENUBARBREAK"
+      },
+      {
+        "name": "MFT_MENUBREAK",
+        "value": "MENU_ITEM_FLAGS.MF_MENUBREAK"
+      },
+      {
+        "name": "MFT_OWNERDRAW",
+        "value": "MENU_ITEM_FLAGS.MF_OWNERDRAW"
+      },
+      {
+        "name": "MFT_RADIOCHECK",
+        "value": "0x00000200"
+      },
+      {
+        "name": "MFT_RIGHTJUSTIFY",
+        "value": "MENU_ITEM_FLAGS.MF_RIGHTJUSTIFY"
+      },
+      {
+        "name": "MFT_RIGHTORDER",
+        "value": "0x00002000"
+      },
+      {
+        "name": "MFT_SEPARATOR",
+        "value": "MENU_ITEM_FLAGS.MF_SEPARATOR"
+      },
+      {
+        "name": "MFT_STRING",
+        "value": "MENU_ITEM_FLAGS.MF_STRING"
+      }
+    ]
+  },
+  {
+    "name": "DDE_ENABLE_CALLBACK_CMD",
+    "flags": false,
+    "members": [
+      {
+        "name": "EC_ENABLEALL",
+        "value": 0
+      },
+      {
+        "name": "EC_ENABLEONE",
+        "value": 128
+      },
+      {
+        "name": "EC_DISABLE",
+        "value": 8
+      },
+      {
+        "name": "EC_QUERYWAITING",
+        "value": 2
+      }
+    ],
+    "uses": [
+      {
+        "method": "DdeEnableCallback",
+        "parameter": "wCmd"
+      }
+    ]
+  },
+  {
+    "name": "PFM_FLAGS",
+    "flags": true,
+    "members": [
+      {
+        "name": "IGP_GETIMEVERSION",
+        "value": "unchecked((uint)-4)"
+      }
+    ],
+    "autoPopulate": {
+      "filter": "PFM_",
+      "header": "imm.h"
+    }
+  },
+  {
+    "name": "PARAFORMAT_MASK",
+    "flags": true,
+    "members": [
+      {
+        "name": "PFM_ALIGNMENT"
+      },
+      {
+        "name": "PFM_NUMBERING"
+      },
+      {
+        "name": "PFM_OFFSET"
+      },
+      {
+        "name": "PFM_OFFSETINDENT"
+      },
+      {
+        "name": "PFM_RIGHTINDENT"
+      },
+      {
+        "name": "PFM_RTLPARA"
+      },
+      {
+        "name": "PFM_STARTINDENT"
+      },
+      {
+        "name": "PFM_TABSTOPS"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "PARAFORMAT",
+        "field": "dwMask"
+      }
+    ]
+  },
+  {
+    "name": "PARAFORMAT2_MASK",
+    "flags": true,
+    "members": [
+      {
+        "name": "PFM_DONOTHYPHEN"
+      },
+      {
+        "name": "PFM_EFFECTS"
+      },
+      {
+        "name": "PFM_KEEP"
+      },
+      {
+        "name": "PFM_KEEPNEXT"
+      },
+      {
+        "name": "PFM_NOLINENUMBER"
+      },
+      {
+        "name": "PFM_NOWIDOWCONTROL"
+      },
+      {
+        "name": "PFM_PAGEBREAKBEFORE"
+      },
+      {
+        "name": "PFM_RTLPARA"
+      },
+      {
+        "name": "PFM_SIDEBYSIDE"
+      },
+      {
+        "name": "PFM_TABLE"
+      },
+      {
+        "name": "PFM_TABLEROWDELIMITER"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "PARAFORMAT2",
+        "field": "dwMask"
+      }
+    ]
+  },
+  {
+    "name": "DRAGLISTINFO_NOTIFICATION_FLAGS",
+    "flags": false,
+    "members": [
+      {
+        "name": "DL_BEGINDRAG",
+        "value": "Windows.Win32.WindowsAndMessaging.Apis.WM_USER + 133"
+      },
+      {
+        "name": "DL_CANCELDRAG",
+        "value": "Windows.Win32.WindowsAndMessaging.Apis.WM_USER + 136"
+      },
+      {
+        "name": "DL_DRAGGING",
+        "value": "Windows.Win32.WindowsAndMessaging.Apis.WM_USER + 134"
+      },
+      {
+        "name": "DL_DROPPED",
+        "value": "Windows.Win32.WindowsAndMessaging.Apis.WM_USER + 135"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "DRAGLISTINFO",
+        "field": "uNotification"
+      }
+    ]
+  },
+  {
+    "name": "PARAFORMAT2_EFFECTS",
+    "flags": true,
+    "members": [
+      {
+        "name": "PFE_DONOTHYPHEN",
+        "value": "(PARAFORMAT_MASK.PFM_DONOTHYPHEN >> 16)"
+      },
+      {
+        "name": "PFE_KEEP",
+        "value": "(PARAFORMAT_MASK.PFM_KEEP >> 16)"
+      },
+      {
+        "name": "PFE_KEEPNEXT",
+        "value": "(PARAFORMAT_MASK.PFM_KEEPNEXT >> 16)"
+      },
+      {
+        "name": "PFE_NOLINENUMBER",
+        "value": "(PARAFORMAT_MASK.PFM_NOLINENUMBER >> 16)"
+      },
+      {
+        "name": "PFE_NOWIDOWCONTROL",
+        "value": "(PARAFORMAT_MASK.PFM_NOWIDOWCONTROL >> 16)"
+      },
+      {
+        "name": "PFE_PAGEBREAKBEFORE",
+        "value": "(PARAFORMAT_MASK.PFM_PAGEBREAKBEFORE >> 16)"
+      },
+      {
+        "name": "PFE_RTLPARA",
+        "value": "(PARAFORMAT_MASK.PFM_RTLPARA >> 16)"
+      },
+      {
+        "name": "PFE_SIDEBYSIDE",
+        "value": "(PARAFORMAT_MASK.PFM_SIDEBYSIDE >> 16)"
+      },
+      {
+        "name": "PFE_TABLE",
+        "value": "(PARAFORMAT_MASK.PFM_TABLE >> 16)"
+      },
+      {
+        "name": "PFE_TABLEROWDELIMITER",
+        "value": "(PARAFORMAT_MASK.PFM_TABLEROWDELIMITER >> 16)"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "PARAFORMAT2",
+        "field": "wEffects"
+      }
+    ]
+  },
+  {
+    "name": "SECTION_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "SECTION_",
+      "header": "winnt.h"
+    },
+    "members": [
+      {
+        "name": "SECTION_ALL_ACCESS",
+        "value": "(Windows.Win32.FileSystem.FILE_ACCESS_FLAGS.STANDARD_RIGHTS_REQUIRED|SECTION_QUERY|SECTION_MAP_WRITE|SECTION_MAP_READ|SECTION_MAP_EXECUTE|SECTION_EXTEND_SIZE)"
+      }
+    ]
+  },
+  {
+    "name": "FILE_MAP",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "FILE_MAP_",
+      "header": "memoryapi.h"
+    },
+    "members": [
+      {
+        "name": "FILE_MAP_WRITE",
+        "value": "SECTION_FLAGS.SECTION_MAP_WRITE"
+      },
+      {
+        "name": "FILE_MAP_READ",
+        "value": "SECTION_FLAGS.SECTION_MAP_READ"
+      },
+      {
+        "name": "FILE_MAP_ALL_ACCESS",
+        "value": "SECTION_FLAGS.SECTION_ALL_ACCESS"
+      },
+      {
+        "name": "FILE_MAP_EXECUTE",
+        "value": "SECTION_FLAGS.SECTION_MAP_EXECUTE_EXPLICIT"
+      }
+    ]
+  },
+  {
+    "name": "UPDFCACHE_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "UPDFCACHE_",
+      "header": "oleidl.h"
+    },
+    "members": [
+      {
+        "name": "UPDFCACHE_ALL",
+        "value": "~UPDFCACHE_ONLYIFBLANK"
+      },
+      {
+        "name": "UPDFCACHE_ALLBUTNODATACACHE",
+        "value": "UPDFCACHE_ALL & ~UPDFCACHE_NODATACACHE"
+      }
+    ]
+  },
+  {
+    "name": "THREAD_PRIORITY",
+    "flags": false,
+    "type": "int",
+    "members": [
+      {
+        "name": "THREAD_MODE_BACKGROUND_BEGIN",
+        "value": 65536
+      }
+    ]
+  },
+  {
+    "name": "GPT_ATTRIBUTES",
+    "flags": true,
+    "type": "ulong",
+    "autoPopulate": {
+      "filter": "GPT_ATTRIBUTE_|GPT_BASIC_DATA_ATTRIBUTE_",
+      "header": "ntdisk.h"
+    },
+    "members": [
+      {
+        "name": "GPT_ATTRIBUTE_PLATFORM_REQUIRED",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "name": "CERT_FIND_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "CERT_FIND_",
+      "header": "wincrypt.h"
+    },
+    "members": [
+      {
+        "name": "CERT_FIND_ANY"
+      }
+    ]
+  },
+  {
+    "name": "VER_MASK",
+    "flags": true,
+    "members": [
+      {
+        "name": "VER_BUILDNUMBER",
+        "value": 4
+      },
+      {
+        "name": "VER_MAJORVERSION",
+        "value": 2
+      },
+      {
+        "name": "VER_MINORVERSION",
+        "value": 1
+      },
+      {
+        "name": "VER_PLATFORMID",
+        "value": 8
+      },
+      {
+        "name": "VER_PRODUCT_TYPE",
+        "value": 128
+      },
+      {
+        "name": "VER_SERVICEPACKMAJOR",
+        "value": 32
+      },
+      {
+        "name": "VER_SERVICEPACKMINOR",
+        "value": 16
+      },
+      {
+        "name": "VER_SUITENAME",
+        "value": 64
+      }
+    ],
+    "uses": [
+      {
+        "method": "VerSetConditionMask",
+        "parameter": "TypeMask"
+      }
+    ]
+  },
+  {
+    "name": "Uri_CREATE_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "Uri_CREATE_",
+      "header": "urlmon.h"
+    },
+    "uses": [
+      {
+        "method": "CreateUri",
+        "parameter": "dwFlags"
+      }
+    ]
+  },
+  {
+    "name": "MPR_INTERFACE_DIAL_MODE",
+    "flags": false,
+    "type": "uint",
+    "members": [
+      {
+        "name": "MPRDM_DialFirst",
+        "value": "0"
+      },
+      {
+        "name": "MPRDM_DialAll",
+        "value": "RASENTRY_DIAL_MODE.RASEDM_DialAll"
+      },
+      {
+        "name": "MPRDM_DialAsNeeded",
+        "value": "RASENTRY_DIAL_MODE.RASEDM_DialAsNeeded"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "MPR_INTERFACE_3",
+        "field": "dwDialMode"
+      },
+      {
+        "struct": "MPR_INTERFACE_2",
+        "field": "dwDialMode"
+      }
+    ]
+  },
+  {
+    "name": "RASENTRY_DIAL_MODE",
+    "flags": false,
+    "type": "uint",
+    "members": [
+      {
+        "name": "RASEDM_DialAll",
+        "value": "1"
+      },
+      {
+        "name": "RASEDM_DialAsNeeded",
+        "value": "2"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "RASENTRYA",
+        "field": "dwDialMode"
+      },
+      {
+        "struct": "RASENTRYW",
+        "field": "dwDialMode"
+      }
+    ]
+  },
+  {
+    "name": "PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_VALUE",
+    "flags": false,
+    "members": [
+      {
+        "name": "PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_1",
+        "value": 1
+      },
+      {
+        "name": "PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_2",
+        "value": 2
+      },
+      {
+        "name": "PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION",
+        "value": "PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_2"
+      }
+    ]
+  },
+  {
+    "name": "FILE_CREATION_DISPOSITION",
+    "flags": false,
+    "members": [
+      {
+        "name": "CREATE_NEW"
+      },
+      {
+        "name": "CREATE_ALWAYS"
+      },
+      {
+        "name": "OPEN_EXISTING"
+      },
+      {
+        "name": "OPEN_ALWAYS"
+      },
+      {
+        "name": "TRUNCATE_EXISTING"
+      }
+    ],
+    "uses": [
+      {
+        "method": "CreateFileA",
+        "parameter": "dwCreationDisposition"
+      },
+      {
+        "method": "CreateFileW",
+        "parameter": "dwCreationDisposition"
+      },
+      {
+        "method": "CreateFile2",
+        "parameter": "dwCreationDisposition"
+      },
+      {
+        "method": "CreateLogFile",
+        "parameter": "fCreateDisposition"
+      }
+    ]
+  },
+  {
+    "name": "FILE_SHARE_MODE",
+    "flags": true,
+    "members": [
+      {
+        "name": "FILE_SHARE_NONE",
+        "value": 0
+      },
+      {
+        "name": "FILE_SHARE_DELETE",
+        "value": 4
+      },
+      {
+        "name": "FILE_SHARE_READ",
+        "value": 1
+      },
+      {
+        "name": "FILE_SHARE_WRITE",
+        "value": 2
+      }
+    ],
+    "uses": [
+      {
+        "method": "CreateFileW",
+        "parameter": "dwShareMode"
+      },
+      {
+        "method": "CreateFile2",
+        "parameter": "dwShareMode"
+      },
+      {
+        "method": "CreateFileA",
+        "parameter": "dwShareMode"
+      },
+      {
+        "method": "ReopenFile",
+        "parameter": "dwShareMode"
+      },
+      {
+        "method": "CreateLogFile",
+        "parameter": "dwShareMode"
+      },
+      {
+        "method": "OpenFileById",
+        "parameter": "dwShareMode"
+      }
+    ]
+  },
+  {
+    "name": "TOKEN_PRIVILEGES_ATTRIBUTES",
+    "flags": true,
+    "type": "uint",
+    "members": [
+      {
+        "name": "SE_PRIVILEGE_ENABLED"
+      },
+      {
+        "name": "SE_PRIVILEGE_ENABLED_BY_DEFAULT"
+      },
+      {
+        "name": "SE_PRIVILEGE_REMOVED"
+      },
+      {
+        "name": "SE_PRIVILEGE_USED_FOR_ACCESS"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "LUID_AND_ATTRIBUTES",
+        "field": "Attributes"
+      }
+    ]
+  },
+  {
+    "type": "int",
+    "finished": true,
+    "name": "MESSAGEBOX_RESULT",
+    "flags": false,
+    "members": [
+      {
+        "name": "IDOK",
+        "value": "1"
+      },
+      {
+        "name": "IDCANCEL",
+        "value": "2"
+      },
+      {
+        "name": "IDABORT",
+        "value": "3"
+      },
+      {
+        "name": "IDRETRY",
+        "value": "4"
+      },
+      {
+        "name": "IDIGNORE",
+        "value": "5"
+      },
+      {
+        "name": "IDYES",
+        "value": "6"
+      },
+      {
+        "name": "IDNO",
+        "value": "7"
+      },
+      {
+        "name": "IDCLOSE",
+        "value": "8"
+      },
+      {
+        "name": "IDHELP",
+        "value": "9"
+      },
+      {
+        "name": "IDTRYAGAIN",
+        "value": "10"
+      },
+      {
+        "name": "IDCONTINUE",
+        "value": "11"
+      },
+      {
+        "name": "IDASYNC",
+        "value": "32001"
+      },
+      {
+        "name": "IDTIMEOUT",
+        "value": "32000"
+      }
+    ],
+    "uses": [
+      {
+        "method": "MessageBoxA",
+        "parameter": "return"
+      },
+      {
+        "method": "MessageBoxW",
+        "parameter": "return"
+      },
+      {
+        "method": "MessageBoxExA",
+        "parameter": "return"
+      },
+      {
+        "method": "MessageBoxExW",
+        "parameter": "return"
+      },
+      {
+        "method": "MessageBoxIndirectA",
+        "parameter": "return"
+      },
+      {
+        "method": "MessageBoxIndirectW",
+        "parameter": "return"
+      },
+      {
+        "method": "WTSSendMessageA",
+        "parameter": "pResponse"
+      },
+      {
+        "method": "WTSSendMessageW",
+        "parameter": "pResponse"
+      }
+    ]
+  },
+  {
+    "type": "uint",
+    "finished": false,
+    "name": "OPEN_FILENAME_FLAGS",
+    "flags": true,
+    "members": [
+      {
+        "name": "OFN_READONLY",
+        "value": "0x00000001"
+      },
+      {
+        "name": "OFN_OVERWRITEPROMPT",
+        "value": "0x00000002"
+      },
+      {
+        "name": "OFN_HIDEREADONLY",
+        "value": "0x00000004"
+      },
+      {
+        "name": "OFN_NOCHANGEDIR",
+        "value": "0x00000008"
+      },
+      {
+        "name": "OFN_SHOWHELP",
+        "value": "0x00000010"
+      },
+      {
+        "name": "OFN_ENABLEHOOK",
+        "value": "0x00000020"
+      },
+      {
+        "name": "OFN_ENABLETEMPLATE",
+        "value": "0x00000040"
+      },
+      {
+        "name": "OFN_ENABLETEMPLATEHANDLE",
+        "value": "0x00000080"
+      },
+      {
+        "name": "OFN_NOVALIDATE",
+        "value": "0x00000100"
+      },
+      {
+        "name": "OFN_ALLOWMULTISELECT",
+        "value": "0x00000200"
+      },
+      {
+        "name": "OFN_EXTENSIONDIFFERENT",
+        "value": "0x00000400"
+      },
+      {
+        "name": "OFN_PATHMUSTEXIST",
+        "value": "0x00000800"
+      },
+      {
+        "name": "OFN_FILEMUSTEXIST",
+        "value": "0x00001000"
+      },
+      {
+        "name": "OFN_CREATEPROMPT",
+        "value": "0x00002000"
+      },
+      {
+        "name": "OFN_SHAREAWARE",
+        "value": "0x00004000"
+      },
+      {
+        "name": "OFN_NOREADONLYRETURN",
+        "value": "0x00008000"
+      },
+      {
+        "name": "OFN_NOTESTFILECREATE",
+        "value": "0x00010000"
+      },
+      {
+        "name": "OFN_NONETWORKBUTTON",
+        "value": "0x00020000"
+      },
+      {
+        "name": "OFN_NOLONGNAMES",
+        "value": "0x00040000"
+      },
+      {
+        "name": "OFN_EXPLORER",
+        "value": "0x00080000"
+      },
+      {
+        "name": "OFN_NODEREFERENCELINKS",
+        "value": "0x00100000"
+      },
+      {
+        "name": "OFN_LONGNAMES",
+        "value": "0x00200000"
+      },
+      {
+        "name": "OFN_ENABLEINCLUDENOTIFY",
+        "value": "0x00400000"
+      },
+      {
+        "name": "OFN_ENABLESIZING",
+        "value": "0x00800000"
+      },
+      {
+        "name": "OFN_DONTADDTORECENT",
+        "value": "0x02000000"
+      },
+      {
+        "name": "OFN_FORCESHOWHIDDEN",
+        "value": "0x10000000"
+      }
+    ],
+    "uses": [
+      {
+        "method": "OPENFILENAMEA",
+        "parameter": "Flags"
+      },
+      {
+        "method": "OPENFILENAMEW",
+        "parameter": "Flags"
+      }
+    ]
+  },
+  {
+    "type": "uint",
+    "finished": false,
+    "name": "OPEN_FILENAME_FLAGS_EX",
+    "flags": true,
+    "members": [
+      {
+        "name": "OFN_EX_NONE",
+        "value": "0x00000000"
+      },
+      {
+        "name": "OFN_EX_NOPLACESBAR",
+        "value": "0x00000001"
+      }
+    ],
+    "uses": [
+      {
+        "method": "OPENFILENAMEA",
+        "parameter": "FlagsEx"
+      },
+      {
+        "method": "OPENFILENAMEW",
+        "parameter": "FlagsEx"
+      }
+    ]
+  },
+  {
+    "type": "uint",
+    "finished": false,
+    "name": "MENU_ITEM_STATE",
+    "flags": true,
+    "members": [
+      {
+        "name": "MFS_GRAYED",
+        "value": "0x00000003"
+      },
+      {
+        "name": "MFS_DISABLED",
+        "value": "MFS_GRAYED"
+      },
+      {
+        "name": "MFS_CHECKED",
+        "value": "MENU_ITEM_FLAGS.MF_CHECKED"
+      },
+      {
+        "name": "MFS_HILITE",
+        "value": "MENU_ITEM_FLAGS.MF_HILITE"
+      },
+      {
+        "name": "MFS_ENABLED",
+        "value": "MENU_ITEM_FLAGS.MF_ENABLED"
+      },
+      {
+        "name": "MFS_UNCHECKED",
+        "value": "MENU_ITEM_FLAGS.MF_UNCHECKED"
+      },
+      {
+        "name": "MFS_UNHILITE",
+        "value": "MENU_ITEM_FLAGS.MF_UNHILITE"
+      },
+      {
+        "name": "MFS_DEFAULT",
+        "value": "MENU_ITEM_FLAGS.MF_DEFAULT"
+      }
+    ],
+    "uses": [
+      {
+        "method": "MENUITEMINFOA",
+        "parameter": "fState"
+      },
+      {
+        "method": "MENUITEMINFOW",
+        "parameter": "fState"
+      }
+    ]
+  },
+  {
+    "type": "uint",
+    "finished": true,
+    "name": "MIDI_OPEN_TYPE",
+    "flags": true,
+    "members": [
+      {
+        "name": "CALLBACK_TYPEMASK",
+        "value": "0x00070000"
+      },
+      {
+        "name": "CALLBACK_NULL",
+        "value": "0x00000000"
+      },
+      {
+        "name": "CALLBACK_WINDOW",
+        "value": "0x00010000"
+      },
+      {
+        "name": "CALLBACK_TASK",
+        "value": "0x00020000"
+      },
+      {
+        "name": "CALLBACK_FUNCTION",
+        "value": "0x00030000"
+      },
+      {
+        "name": "CALLBACK_THREAD",
+        "value": "(CALLBACK_TASK)"
+      },
+      {
+        "name": "CALLBACK_EVENT",
+        "value": "0x00050000"
+      },
+      {
+        "name": "MIDI_IO_STATUS",
+        "value": "0x00000020L"
+      }
+    ],
+    "uses": [
+      {
+        "method": "midiInOpen",
+        "parameter": "fdwOpen"
+      },
+      {
+        "method": "midiOutOpen",
+        "parameter": "fdwOpen"
+      }
+    ]
+  },
+  {
+    "type": "uint",
+    "finished": true,
+    "name": "WAVE_OPEN_TYPE",
+    "flags": true,
+    "members": [
+      {
+        "name": "CALLBACK_TYPEMASK",
+        "value": "0x00070000"
+      },
+      {
+        "name": "CALLBACK_NULL",
+        "value": "0x00000000"
+      },
+      {
+        "name": "CALLBACK_WINDOW",
+        "value": "0x00010000"
+      },
+      {
+        "name": "CALLBACK_TASK",
+        "value": "0x00020000"
+      },
+      {
+        "name": "CALLBACK_FUNCTION",
+        "value": "0x00030000"
+      },
+      {
+        "name": "CALLBACK_THREAD",
+        "value": "(CALLBACK_TASK)"
+      },
+      {
+        "name": "CALLBACK_EVENT",
+        "value": "0x00050000"
+      },
+      {
+        "name": "WAVE_FORMAT_QUERY",
+        "value": "0x0001"
+      },
+      {
+        "name": "WAVE_ALLOWSYNC",
+        "value": "0x0002"
+      },
+      {
+        "name": "WAVE_MAPPED",
+        "value": "0x0004"
+      },
+      {
+        "name": "WAVE_FORMAT_DIRECT",
+        "value": "0x0008"
+      },
+      {
+        "name": "WAVE_FORMAT_DIRECT_QUERY",
+        "value": "(WAVE_FORMAT_QUERY | WAVE_FORMAT_DIRECT)"
+      },
+      {
+        "name": "WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE",
+        "value": "0x0010"
+      }
+    ],
+    "uses": [
+      {
+        "method": "waveOutOpen",
+        "parameter": "fdwOpen"
+      },
+      {
+        "method": "waveInOpen",
+        "parameter": "fdwOpen"
+      }
+    ]
+  },
+  {
+    "type": "uint",
+    "finished": false,
+    "name": "LOAD_LIBRARY_FLAGS",
+    "flags": true,
+    "members": [
+      {
+        "name": "DONT_RESOLVE_DLL_REFERENCES",
+        "value": "0x00000001"
+      },
+      {
+        "name": "LOAD_LIBRARY_AS_DATAFILE",
+        "value": "0x00000002"
+      },
+      {
+        "name": "LOAD_WITH_ALTERED_SEARCH_PATH",
+        "value": "0x00000008"
+      },
+      {
+        "name": "LOAD_IGNORE_CODE_AUTHZ_LEVEL",
+        "value": "0x00000010"
+      },
+      {
+        "name": "LOAD_LIBRARY_AS_IMAGE_RESOURCE",
+        "value": "0x00000020"
+      },
+      {
+        "name": "LOAD_LIBRARY_AS_DATAFILE_EXCLUSIVE",
+        "value": "0x00000040"
+      },
+      {
+        "name": "LOAD_LIBRARY_REQUIRE_SIGNED_TARGET",
+        "value": "0x00000080"
+      },
+      {
+        "name": "LOAD_LIBRARY_SEARCH_DLL_LOAD_DIR",
+        "value": "0x00000100"
+      },
+      {
+        "name": "LOAD_LIBRARY_SEARCH_APPLICATION_DIR",
+        "value": "0x00000200"
+      },
+      {
+        "name": "LOAD_LIBRARY_SEARCH_USER_DIRS",
+        "value": "0x00000400"
+      },
+      {
+        "name": "LOAD_LIBRARY_SEARCH_SYSTEM32",
+        "value": "0x00000800"
+      },
+      {
+        "name": "LOAD_LIBRARY_SEARCH_DEFAULT_DIRS",
+        "value": "0x00001000"
+      },
+      {
+        "name": "LOAD_LIBRARY_SAFE_CURRENT_DIRS",
+        "value": "0x00002000"
+      },
+      {
+        "name": "LOAD_LIBRARY_SEARCH_SYSTEM32_NO_FORWARDER",
+        "value": "0x00004000"
+      }
+    ],
+    "uses": [
+      {
+        "method": "LoadLibraryExA",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "LoadLibraryExW",
+        "parameter": "dwFlags"
+      }
+    ]
+  },
+  {
+    "type": "uint",
+    "finished": true,
+    "name": "SYM_LOAD_FLAGS",
+    "flags": true,
+    "members": [
+      {
+        "name": "SLMFLAG_NONE",
+        "value": "0"
+      },
+      {
+        "name": "SLMFLAG_VIRTUAL",
+        "value": "0x1"
+      },
+      {
+        "name": "SLMFLAG_ALT_INDEX",
+        "value": "0x2"
+      },
+      {
+        "name": "SLMFLAG_NO_SYMBOLS",
+        "value": "0x4"
+      }
+    ],
+    "uses": [
+      {
+        "method": "SymLoadModuleEx",
+        "parameter": "Flags"
+      },
+      {
+        "method": "SymLoadModuleExW",
+        "parameter": "Flags"
+      }
+    ]
+  },
+  {
+    "type": "uint",
+    "finished": true,
+    "name": "HEAP_FLAGS",
+    "flags": true,
+    "members": [
+      {
+        "name": "HEAP_NONE",
+        "value": "0x00000000"
+      },
+      {
+        "name": "HEAP_NO_SERIALIZE",
+        "value": "0x00000001"
+      },
+      {
+        "name": "HEAP_GROWABLE",
+        "value": "0x00000002"
+      },
+      {
+        "name": "HEAP_GENERATE_EXCEPTIONS",
+        "value": "0x00000004"
+      },
+      {
+        "name": "HEAP_ZERO_MEMORY",
+        "value": "0x00000008"
+      },
+      {
+        "name": "HEAP_REALLOC_IN_PLACE_ONLY",
+        "value": "0x00000010"
+      },
+      {
+        "name": "HEAP_TAIL_CHECKING_ENABLED",
+        "value": "0x00000020"
+      },
+      {
+        "name": "HEAP_FREE_CHECKING_ENABLED",
+        "value": "0x00000040"
+      },
+      {
+        "name": "HEAP_DISABLE_COALESCE_ON_FREE",
+        "value": "0x00000080"
+      },
+      {
+        "name": "HEAP_CREATE_ALIGN_16",
+        "value": "0x00010000"
+      },
+      {
+        "name": "HEAP_CREATE_ENABLE_TRACING",
+        "value": "0x00020000"
+      },
+      {
+        "name": "HEAP_CREATE_ENABLE_EXECUTE",
+        "value": "0x00040000"
+      },
+      {
+        "name": "HEAP_MAXIMUM_TAG",
+        "value": "0x0FFF"
+      },
+      {
+        "name": "HEAP_PSEUDO_TAG_FLAG",
+        "value": "0x8000"
+      },
+      {
+        "name": "HEAP_TAG_SHIFT",
+        "value": "18"
+      },
+      {
+        "name": "HEAP_CREATE_SEGMENT_HEAP",
+        "value": "0x00000100"
+      },
+      {
+        "name": "HEAP_CREATE_HARDENED",
+        "value": "0x00000200"
+      }
+    ],
+    "uses": [
+      {
+        "method": "HeapAlloc",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "HeapCompact",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "HeapCreate",
+        "parameter": "flFlags"
+      },
+      {
+        "method": "HeapFree",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "HeapReAlloc",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "HeapSize",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "HeapValidate",
+        "parameter": "dwFlags"
+      }
+    ]
+  },
+  {
+    "type": "uint",
+    "finished": true,
+    "name": "CERT_QUERY_OBJECT_TYPE",
+    "flags": false,
+    "members": [
+      {
+        "name": "CERT_QUERY_OBJECT_FILE",
+        "value": "0x00000001"
+      },
+      {
+        "name": "CERT_QUERY_OBJECT_BLOB",
+        "value": "0x00000002"
+      }
+    ],
+    "uses": [
+      {
+        "method": "CryptQueryObject",
+        "parameter": "dwObjectType"
+      }
+    ]
+  },
+  {
+    "type": "uint",
+    "finished": true,
+    "name": "CERT_QUERY_CONTENT_TYPE",
+    "flags": false,
+    "members": [
+      {
+        "name": "CERT_QUERY_CONTENT_CERT",
+        "value": "1"
+      },
+      {
+        "name": "CERT_QUERY_CONTENT_CTL",
+        "value": "2"
+      },
+      {
+        "name": "CERT_QUERY_CONTENT_CRL",
+        "value": "3"
+      },
+      {
+        "name": "CERT_QUERY_CONTENT_SERIALIZED_STORE",
+        "value": "4"
+      },
+      {
+        "name": "CERT_QUERY_CONTENT_SERIALIZED_CERT",
+        "value": "5"
+      },
+      {
+        "name": "CERT_QUERY_CONTENT_SERIALIZED_CTL",
+        "value": "6"
+      },
+      {
+        "name": "CERT_QUERY_CONTENT_SERIALIZED_CRL",
+        "value": "7"
+      },
+      {
+        "name": "CERT_QUERY_CONTENT_PKCS7_SIGNED",
+        "value": "8"
+      },
+      {
+        "name": "CERT_QUERY_CONTENT_PKCS7_UNSIGNED",
+        "value": "9"
+      },
+      {
+        "name": "CERT_QUERY_CONTENT_PKCS7_SIGNED_EMBED",
+        "value": "10"
+      },
+      {
+        "name": "CERT_QUERY_CONTENT_PKCS10",
+        "value": "11"
+      },
+      {
+        "name": "CERT_QUERY_CONTENT_PFX",
+        "value": "12"
+      },
+      {
+        "name": "CERT_QUERY_CONTENT_CERT_PAIR",
+        "value": "13"
+      },
+      {
+        "name": "CERT_QUERY_CONTENT_PFX_AND_LOAD",
+        "value": "14"
+      }
+    ],
+    "uses": [
+      {
+        "method": "CryptQueryObject",
+        "parameter": "pdwContentType"
+      }
+    ]
+  },
+  {
+    "type": "uint",
+    "finished": true,
+    "name": "CERT_QUERY_CONTENT_TYPE_FLAGS",
+    "flags": false,
+    "members": [
+      {
+        "name": "CERT_QUERY_CONTENT_FLAG_CERT",
+        "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_CERT)"
+      },
+      {
+        "name": "CERT_QUERY_CONTENT_FLAG_CTL",
+        "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_CTL)"
+      },
+      {
+        "name": "CERT_QUERY_CONTENT_FLAG_CRL",
+        "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_CRL)"
+      },
+      {
+        "name": "CERT_QUERY_CONTENT_FLAG_SERIALIZED_STORE",
+        "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_SERIALIZED_STORE)"
+      },
+      {
+        "name": "CERT_QUERY_CONTENT_FLAG_SERIALIZED_CERT",
+        "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_SERIALIZED_CERT)"
+      },
+      {
+        "name": "CERT_QUERY_CONTENT_FLAG_SERIALIZED_CTL",
+        "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_SERIALIZED_CTL)"
+      },
+      {
+        "name": "CERT_QUERY_CONTENT_FLAG_SERIALIZED_CRL",
+        "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_SERIALIZED_CRL)"
+      },
+      {
+        "name": "CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED",
+        "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_PKCS7_SIGNED)"
+      },
+      {
+        "name": "CERT_QUERY_CONTENT_FLAG_PKCS7_UNSIGNED",
+        "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_PKCS7_UNSIGNED)"
+      },
+      {
+        "name": "CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED_EMBED",
+        "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_PKCS7_SIGNED_EMBED)"
+      },
+      {
+        "name": "CERT_QUERY_CONTENT_FLAG_PKCS10",
+        "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_PKCS10)"
+      },
+      {
+        "name": "CERT_QUERY_CONTENT_FLAG_PFX",
+        "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_PFX)"
+      },
+      {
+        "name": "CERT_QUERY_CONTENT_FLAG_CERT_PAIR",
+        "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_CERT_PAIR)"
+      },
+      {
+        "name": "CERT_QUERY_CONTENT_FLAG_PFX_AND_LOAD",
+        "value": "( 1 << (int)CERT_QUERY_CONTENT_TYPE.CERT_QUERY_CONTENT_PFX_AND_LOAD)"
+      },
+      {
+        "name": "CERT_QUERY_CONTENT_FLAG_ALL",
+        "value": "(CERT_QUERY_CONTENT_FLAG_CERT | CERT_QUERY_CONTENT_FLAG_CTL | CERT_QUERY_CONTENT_FLAG_CRL | CERT_QUERY_CONTENT_FLAG_SERIALIZED_STORE | CERT_QUERY_CONTENT_FLAG_SERIALIZED_CERT | CERT_QUERY_CONTENT_FLAG_SERIALIZED_CTL | CERT_QUERY_CONTENT_FLAG_SERIALIZED_CRL | CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED | CERT_QUERY_CONTENT_FLAG_PKCS7_UNSIGNED | CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED_EMBED | CERT_QUERY_CONTENT_FLAG_PKCS10 | CERT_QUERY_CONTENT_FLAG_PFX | CERT_QUERY_CONTENT_FLAG_CERT_PAIR)"
+      },
+      {
+        "name": "CERT_QUERY_CONTENT_FLAG_ALL_ISSUER_CERT",
+        "value": "(CERT_QUERY_CONTENT_FLAG_CERT | CERT_QUERY_CONTENT_FLAG_SERIALIZED_STORE | CERT_QUERY_CONTENT_FLAG_SERIALIZED_CERT | CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED | CERT_QUERY_CONTENT_FLAG_PKCS7_UNSIGNED)"
+      }
+    ],
+    "uses": [
+      {
+        "method": "CryptQueryObject",
+        "parameter": "dwExpectedContentTypeFlags"
+      }
+    ]
+  },
+  {
+    "type": "uint",
+    "finished": true,
+    "name": "CERT_QUERY_FORMAT_TYPE",
+    "flags": false,
+    "members": [
+      {
+        "name": "CERT_QUERY_FORMAT_BINARY",
+        "value": "1"
+      },
+      {
+        "name": "CERT_QUERY_FORMAT_BASE64_ENCODED",
+        "value": "2"
+      },
+      {
+        "name": "CERT_QUERY_FORMAT_ASN_ASCII_HEX_ENCODED",
+        "value": "3"
+      }
+    ],
+    "uses": [
+      {
+        "method": "CryptQueryObject",
+        "parameter": "pdwFormatType"
+      }
+    ]
+  },
+  {
+    "type": "uint",
+    "finished": true,
+    "name": "CERT_QUERY_FORMAT_TYPE_FLAGS",
+    "flags": false,
+    "members": [
+      {
+        "name": "CERT_QUERY_FORMAT_FLAG_BINARY",
+        "value": "( 1 << (int)CERT_QUERY_FORMAT_TYPE.CERT_QUERY_FORMAT_BINARY)"
+      },
+      {
+        "name": "CERT_QUERY_FORMAT_FLAG_BASE64_ENCODED",
+        "value": "( 1 << (int)CERT_QUERY_FORMAT_TYPE.CERT_QUERY_FORMAT_BASE64_ENCODED)"
+      },
+      {
+        "name": "CERT_QUERY_FORMAT_FLAG_ASN_ASCII_HEX_ENCODED",
+        "value": "( 1 << (int)CERT_QUERY_FORMAT_TYPE.CERT_QUERY_FORMAT_ASN_ASCII_HEX_ENCODED)"
+      },
+      {
+        "name": "CERT_QUERY_FORMAT_FLAG_ALL",
+        "value": "(CERT_QUERY_FORMAT_FLAG_BINARY | CERT_QUERY_FORMAT_FLAG_BASE64_ENCODED | CERT_QUERY_FORMAT_FLAG_ASN_ASCII_HEX_ENCODED)"
+      }
+    ],
+    "uses": [
+      {
+        "method": "CryptQueryObject",
+        "parameter": "dwExpectedFormatTypeFlags"
+      }
+    ]
+  },
+  {
+    "type": "uint",
+    "finished": false,
+    "name": "CERT_QUERY_ENCODING_TYPE",
+    "flags": false,
+    "members": [
+      {
+        "name": "X509_ASN_ENCODING",
+        "value": "0x00000001"
+      },
+      {
+        "name": "PKCS_7_ASN_ENCODING",
+        "value": "0x00010000"
+      }
+    ],
+    "uses": [
+      {
+        "method": "CryptQueryObject",
+        "parameter": "pdwMsgAndCertEncodingType"
+      }
+    ]
+  },
+  {
+    "name": "SHUTDOWN_REASON",
+    "type": "uint",
+    "finished": false,
+    "flags": true,
+    "autoPopulate": {
+      "filter": "SHTDN_REASON_",
+      "header": "reason.h"
+    },
+    "members": [
+      {
+        "name": "SHTDN_REASON_NONE",
+        "value": "0"
+      }
+    ],
+    "uses": [
+      {
+        "method": "InitiateShutdownA",
+        "parameter": "dwReason"
+      },
+      {
+        "method": "InitiateShutdownW",
+        "parameter": "dwReason"
+      },
+      {
+        "method": "InitiateSystemShutdownExA",
+        "parameter": "dwReason"
+      },
+      {
+        "method": "InitiateSystemShutdownExW",
+        "parameter": "dwReason"
+      }
+    ]
+  },
+  {
+    "name": "SHUTDOWN_FLAGS",
+    "type": "uint",
+    "finished": false,
+    "flags": true,
+    "autoPopulate": {
+      "filter": "SHUTDOWN_",
+      "header": "winreg.h"
+    },
+    "uses": [
+      {
+        "method": "InitiateShutdownA",
+        "parameter": "dwShutdownFlags"
+      },
+      {
+        "method": "InitiateShutdownW",
+        "parameter": "dwShutdownFlags"
+      }
+    ]
+  },
+  {
+    "name": "RPC_C_AUTHN_LEVEL",
+    "type": "uint",
+    "finished": false,
+    "flags": false,
+    "autoPopulate": {
+      "filter": "RPC_C_AUTHN_LEVEL_",
+      "header": "rpcdce.h"
+    },
+    "uses": [
+      {
+        "method": "CoInitializeSecurity",
+        "parameter": "dwAuthnLevel"
+      },
+      {
+        "method": "CoSetProxyBlanket",
+        "parameter": "dwAuthnLevel"
+      },
+      {
+        "interface": "IClientSecurity",
+        "method": "SetBlanket",
+        "parameter": "dwAuthnLevel"
+      },
+      {
+        "interface": "IClientSecurity",
+        "method": "QueryBlanket",
+        "parameter": "pAuthnLevel"
+      }
+    ]
+  },
+  {
+    "name": "RPC_C_IMP_LEVEL",
+    "type": "uint",
+    "finished": false,
+    "flags": false,
+    "autoPopulate": {
+      "filter": "RPC_C_IMP_LEVEL_",
+      "header": "rpcdce.h"
+    },
+    "uses": [
+      {
+        "method": "CoInitializeSecurity",
+        "parameter": "dwImpLevel"
+      },
+      {
+        "method": "CoSetProxyBlanket",
+        "parameter": "dwImpLevel"
+      },
+      {
+        "interface": "IClientSecurity",
+        "method": "SetBlanket",
+        "parameter": "dwImpLevel"
+      },
+      {
+        "interface": "IClientSecurity",
+        "method": "QueryBlanket",
+        "parameter": "pImpLevel"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS",
+        "field": "ImpersonationType"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS_V2_A",
+        "field": "ImpersonationType"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS_V2_W",
+        "field": "ImpersonationType"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS_V3_A",
+        "field": "ImpersonationType"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS_V3_W",
+        "field": "ImpersonationType"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS_V4_A",
+        "field": "ImpersonationType"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS_V4_W",
+        "field": "ImpersonationType"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS_V5_A",
+        "field": "ImpersonationType"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS_V5_W",
+        "field": "ImpersonationType"
+      }
+    ]
+  },
+  {
+    "name": "RPC_C_QOS_CAPABILITIES",
+    "type": "uint",
+    "finished": false,
+    "flags": true,
+    "autoPopulate": {
+      "filter": "RPC_C_QOS_CAPABILITIES_",
+      "header": "rpcdce.h"
+    },
+    "uses": [
+      {
+        "struct": "RPC_SECURITY_QOS",
+        "field": "Capabilities"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS_V2_A",
+        "field": "Capabilities"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS_V2_W",
+        "field": "Capabilities"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS_V3_A",
+        "field": "Capabilities"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS_V3_W",
+        "field": "Capabilities"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS_V4_A",
+        "field": "Capabilities"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS_V4_W",
+        "field": "Capabilities"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS_V5_A",
+        "field": "Capabilities"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS_V5_W",
+        "field": "Capabilities"
+      }
+    ]
+  },
+  {
+    "name": "RPC_C_QOS_IDENTITY",
+    "type": "uint",
+    "finished": false,
+    "flags": false,
+    "autoPopulate": {
+      "filter": "RPC_C_QOS_IDENTITY_",
+      "header": "rpcdce.h"
+    },
+    "uses": [
+      {
+        "struct": "RPC_SECURITY_QOS",
+        "field": "IdentityTracking"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS_V2_A",
+        "field": "IdentityTracking"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS_V2_W",
+        "field": "IdentityTracking"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS_V3_A",
+        "field": "IdentityTracking"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS_V3_W",
+        "field": "IdentityTracking"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS_V4_A",
+        "field": "IdentityTracking"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS_V4_W",
+        "field": "IdentityTracking"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS_V5_A",
+        "field": "IdentityTracking"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS_V5_W",
+        "field": "IdentityTracking"
+      }
+    ]
+  },
+  {
+    "name": "RPC_C_AUTHN_INFO_TYPE",
+    "type": "uint",
+    "finished": false,
+    "flags": false,
+    "members": [
+      {
+        "name": "RPC_C_AUTHN_INFO_NONE",
+        "value": "0"
+      }
+    ],
+    "autoPopulate": {
+      "filter": "RPC_C_AUTHN_INFO_TYPE_",
+      "header": "rpcdce.h"
+    },
+    "uses": [
+      {
+        "struct": "RPC_SECURITY_QOS_V2_A",
+        "field": "AdditionalSecurityInfoType"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS_V2_W",
+        "field": "AdditionalSecurityInfoType"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS_V3_A",
+        "field": "AdditionalSecurityInfoType"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS_V3_W",
+        "field": "AdditionalSecurityInfoType"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS_V4_A",
+        "field": "AdditionalSecurityInfoType"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS_V4_W",
+        "field": "AdditionalSecurityInfoType"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS_V5_A",
+        "field": "AdditionalSecurityInfoType"
+      },
+      {
+        "struct": "RPC_SECURITY_QOS_V5_W",
+        "field": "AdditionalSecurityInfoType"
+      }
+    ]
+  },
+  {
+    "name": "RPC_C_HTTP_FLAGS",
+    "type": "uint",
+    "finished": false,
+    "flags": true,
+    "autoPopulate": {
+      "filter": "RPC_C_HTTP_FLAG_",
+      "header": "rpcdce.h"
+    },
+    "uses": [
+      {
+        "struct": "RPC_HTTP_TRANSPORT_CREDENTIALS_A",
+        "field": "Flags"
+      },
+      {
+        "struct": "RPC_HTTP_TRANSPORT_CREDENTIALS_W",
+        "field": "Flags"
+      },
+      {
+        "struct": "RPC_HTTP_TRANSPORT_CREDENTIALS_V2_A",
+        "field": "Flags"
+      },
+      {
+        "struct": "RPC_HTTP_TRANSPORT_CREDENTIALS_V2_W",
+        "field": "Flags"
+      },
+      {
+        "struct": "RPC_HTTP_TRANSPORT_CREDENTIALS_V3_A",
+        "field": "Flags"
+      },
+      {
+        "struct": "RPC_HTTP_TRANSPORT_CREDENTIALS_V3_W",
+        "field": "Flags"
+      }
+    ]
+  },
+  {
+    "name": "RPC_C_HTTP_AUTHN_TARGET",
+    "type": "uint",
+    "finished": false,
+    "flags": true,
+    "autoPopulate": {
+      "filter": "RPC_C_HTTP_AUTHN_TARGET_",
+      "header": "rpcdce.h"
+    },
+    "uses": [
+      {
+        "struct": "RPC_HTTP_TRANSPORT_CREDENTIALS_A",
+        "field": "AuthenticationTarget"
+      },
+      {
+        "struct": "RPC_HTTP_TRANSPORT_CREDENTIALS_W",
+        "field": "AuthenticationTarget"
+      },
+      {
+        "struct": "RPC_HTTP_TRANSPORT_CREDENTIALS_V2_A",
+        "field": "AuthenticationTarget"
+      },
+      {
+        "struct": "RPC_HTTP_TRANSPORT_CREDENTIALS_V2_W",
+        "field": "AuthenticationTarget"
+      },
+      {
+        "struct": "RPC_HTTP_TRANSPORT_CREDENTIALS_V3_A",
+        "field": "AuthenticationTarget"
+      },
+      {
+        "struct": "RPC_HTTP_TRANSPORT_CREDENTIALS_V3_W",
+        "field": "AuthenticationTarget"
+      }
+    ]
+  }
 ]

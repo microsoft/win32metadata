@@ -343,3 +343,7 @@ CreateIcon::lpbANDbits=[NativeArrayInfo]
 CreateIcon::lpbXORbits=[NativeArrayInfo]
 GetCurrentProcess::return=NonClosableHandle
 GetStdHandle::return=NonClosableHandle
+CoInitializeSecurity::dwCapabilities=EOLE_AUTHENTICATION_CAPABILITIES
+CoSetProxyBlanket::dwCapabilities=EOLE_AUTHENTICATION_CAPABILITIES
+IClientSecurity::SetBlanket::dwCapabilities=EOLE_AUTHENTICATION_CAPABILITIES
+IClientSecurity::QueryBlanket::pCapabilites=EOLE_AUTHENTICATION_CAPABILITIES*
