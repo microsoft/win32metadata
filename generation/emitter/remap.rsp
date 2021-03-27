@@ -7,6 +7,9 @@ ICompositor(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.
 IGraphicsEffectSource(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.Graphics.Effects.IGraphicsEffectSource
 IDesktopWindowTarget(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.UI.Composition.Desktop.DesktopWindowTarget
 IDispatcherQueueController(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.System.DispatcherQueueController
+--enum-Addition
+CLSCTX::CLSCTX_ALL=CLSCTX_INPROC_SERVER|CLSCTX_INPROC_HANDLER|CLSCTX_LOCAL_SERVER|CLSCTX_REMOTE_SERVER
+CLSCTX::CLSCTX_SERVER=CLSCTX_INPROC_SERVER|CLSCTX_LOCAL_SERVER|CLSCTX_REMOTE_SERVER
 --reducePointerLevel
 RPC_OBJECT_INQ_FN
 RPC_IF_CALLBACK_FN
