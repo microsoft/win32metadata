@@ -29,6 +29,7 @@ namespace ClangSharpSourceToWinmd
             string sourceDirectory,
             string interopFileName,
             Dictionary<string, string> remaps,
+            Dictionary<string, Dictionary<string, string>> enumAdditions,
             Dictionary<string, string> typeImports,
             Dictionary<string, string> requiredNamespaces,
             HashSet<string> reducePointerLevels)
@@ -91,7 +92,7 @@ namespace ClangSharpSourceToWinmd
                     Directory.CreateDirectory(newSubDir);
                 }
 
-                var cleanedTree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, remaps, requiredNamespaces, foundNonEmptyStructs, modifiedFile);
+                var cleanedTree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, remaps, enumAdditions, requiredNamespaces, foundNonEmptyStructs, modifiedFile);
                 File.WriteAllText(modifiedFile, cleanedTree.GetText().ToString());
 
                 lock (cleanedTrees)

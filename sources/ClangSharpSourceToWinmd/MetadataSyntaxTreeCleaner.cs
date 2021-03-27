@@ -11,9 +11,9 @@ namespace ClangSharpSourceToWinmd
 {
     public static class MetadataSyntaxTreeCleaner
     {
-        public static SyntaxTree CleanSyntaxTree(SyntaxTree tree, Dictionary<string, string> remaps, Dictionary<string, string> requiredNamespaces, HashSet<string> nonEmptyStructs, string filePath)
+        public static SyntaxTree CleanSyntaxTree(SyntaxTree tree, Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, Dictionary<string, string> requiredNamespaces, HashSet<string> nonEmptyStructs, string filePath)
         {
-            TreeRewriter treeRewriter = new TreeRewriter(remaps, requiredNamespaces, nonEmptyStructs);
+            TreeRewriter treeRewriter = new TreeRewriter(remaps, enumAdditions, requiredNamespaces, nonEmptyStructs);
             var newRoot = (CSharpSyntaxNode)treeRewriter.Visit(tree.GetRoot());
             return CSharpSyntaxTree.Create(newRoot, null, filePath);
         }
@@ -24,14 +24,16 @@ namespace ClangSharpSourceToWinmd
 
             private HashSet<SyntaxNode> nodesWithMarshalAs = new HashSet<SyntaxNode>();
             private Dictionary<string, string> remaps;
+            private Dictionary<string, Dictionary<string, string>> enumAdditions;
             private Dictionary<string, string> requiredNamespaces;
             private HashSet<string> visitedDelegateNames = new HashSet<string>();
             private HashSet<string> visitedStaticMethodNames = new HashSet<string>();
             private HashSet<string> nonEmptyStructs;
 
-            public TreeRewriter(Dictionary<string, string> remaps, Dictionary<string, string> requiredNamespaces, HashSet<string> nonEmptyStructs)
+            public TreeRewriter(Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, Dictionary<string, string> requiredNamespaces, HashSet<string> nonEmptyStructs)
             {
                 this.remaps = remaps;
+                this.enumAdditions = enumAdditions;
                 this.requiredNamespaces = requiredNamespaces;
                 this.nonEmptyStructs = nonEmptyStructs;
             }
@@ -237,6 +239,29 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 return base.VisitAttributeList(node);
+            }
+
+            public override SyntaxNode VisitEnumDeclaration(EnumDeclarationSyntax node)
+            {
+                node = (EnumDeclarationSyntax)base.VisitEnumDeclaration(node);
+
+                if (this.enumAdditions.TryGetValue(node.Identifier.ValueText, out var additionsList))
+                {
+                    List<EnumMemberDeclarationSyntax> newMembers = new List<EnumMemberDeclarationSyntax>();
+                    foreach (var additionPair in additionsList)
+                    {
+                        var member =
+                            SyntaxFactory.EnumMemberDeclaration(additionPair.Key)
+                                .WithEqualsValue(
+                                    SyntaxFactory.EqualsValueClause(
+                                        SyntaxFactory.ParseExpression(additionPair.Value)));
+                        newMembers.Add(member);
+                    }
+
+                    node = node.AddMembers(newMembers.ToArray());
+                }
+
+                return node;
             }
 
             public override SyntaxNode VisitDelegateDeclaration(DelegateDeclarationSyntax node)

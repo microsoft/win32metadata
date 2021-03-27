@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace ClangSharpSourceToWinmd
 {
@@ -17,6 +18,14 @@ namespace ClangSharpSourceToWinmd
                 new Option<string>(new[] { "--outputFileName", "-o" }, "The path to the .winmd to create") { IsRequired = true },
                 new Option<string>(new[] { "--version", "-v"}, description: "The version to use on the .winmd", getDefaultValue: () => "1.0.0.0"),
                 new Option(new string[] { "--remap", "-r" }, "A declaration name to be remapped to another name during binding generation.")
+                {
+                    Argument = new Argument("<name>=<value>")
+                    {
+                        ArgumentType = typeof(string),
+                        Arity = ArgumentArity.OneOrMore,
+                    }
+                },
+                new Option(new string[] { "--enum-Addition" }, "Add a member to an enum.")
                 {
                     Argument = new Argument("<name>=<value>")
                     {
@@ -70,12 +79,14 @@ namespace ClangSharpSourceToWinmd
             string outputFileName = context.ParseResult.ValueForOption<string>("outputFileName");
             string version = context.ParseResult.ValueForOption<string>("version");
             var remappedNameValuePairs = context.ParseResult.ValueForOption<string[]>("remap");
+            var enumAdditionsNameValuePairs = context.ParseResult.ValueForOption<string[]>("enum-Addition");
             var reducePointerLevelPairs = context.ParseResult.ValueForOption<string[]>("reducePointerLevel");
             var typeImportValuePairs = context.ParseResult.ValueForOption<string[]>("typeImport");
             var requiredNamespaceValuePairs = context.ParseResult.ValueForOption<string[]>("requiredNamespaceForName");
             var autoTypes = context.ParseResult.ValueForOption<string[]>("autoTypes");
 
             var remaps = ConvertValuePairsToDictionary(remappedNameValuePairs);
+            var enumAdditions = ConvertValuePairsToEnumAdditions(enumAdditionsNameValuePairs);
             var reducePointerLevels = new HashSet<string>(reducePointerLevelPairs);
             var typeImports = ConvertValuePairsToDictionary(typeImportValuePairs);
             var requiredNamespaces = ConvertValuePairsToDictionary(requiredNamespaceValuePairs);
@@ -90,7 +101,7 @@ namespace ClangSharpSourceToWinmd
 
             ClangSharpSourceCompilation clangSharpCompliation = 
                 ClangSharpSourceCompilation.Create(
-                    sourceDirectory, interopFileName, remaps, typeImports, requiredNamespaces, reducePointerLevels);
+                    sourceDirectory, interopFileName, remaps, enumAdditions, typeImports, requiredNamespaces, reducePointerLevels);
 
             Console.Write("looking for errors...");
             var diags = clangSharpCompliation.GetDiagnostics();
@@ -139,6 +150,42 @@ namespace ClangSharpSourceToWinmd
             }
 
             return generator.WroteWinmd ? 0 : -1;
+        }
+
+        private static readonly Regex EnumAddtionRegex = new Regex(@"([^\:]+)::([^\:]+)=(.+)");
+
+        private static Dictionary<string, Dictionary<string, string>> ConvertValuePairsToEnumAdditions(string[] items)
+        {
+            Dictionary<string, Dictionary<string, string>> ret = new Dictionary<string, Dictionary<string, string>>();
+
+            if (items != null)
+            {
+                foreach (var item in items)
+                {
+                    if (string.IsNullOrEmpty(item))
+                    {
+                        continue;
+                    }
+
+                    var match = EnumAddtionRegex.Match(item);
+                    if (match.Success)
+                    {
+                        var enumName = match.Groups[1].Value;
+                        var memberName = match.Groups[2].Value;
+                        var value = match.Groups[3].Value;
+
+                        if (!ret.TryGetValue(enumName, out var enumList))
+                        {
+                            enumList = new Dictionary<string, string>();
+                            ret[enumName] = enumList;
+                        }
+
+                        enumList[memberName] = value;
+                    }
+                }
+            }
+
+            return ret;
         }
 
         private static Dictionary<string, string> ConvertValuePairsToDictionary(string[] items)
