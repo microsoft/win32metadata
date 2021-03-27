@@ -12,7 +12,7 @@
     <releaseNotes>https://github.com/microsoft/win32metadata/releases/tag/v$version$</releaseNotes>
     <projectUrl>https://github.com/microsoft/win32metadata</projectUrl>
     <tags>Win32 Metadata</tags>
-    <licenseUrl>https://aka.ms/WinSDKPreviewLicenseURL</licenseUrl>
+    <licenseUrl>https://aka.ms/WinSDKLicenseURL</licenseUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <iconUrl>https://aka.ms/WinSDKIconURL</iconUrl>
     <repository type="git" url="https://github.com/microsoft/win32metadata.git" />
