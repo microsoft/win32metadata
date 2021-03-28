@@ -41,6 +41,10 @@ namespace PartitionUtilsLib
                 new Regex(
                     @"^\s*(DEFINE_GUID|DEFINE_DEVPROPKEY|DEFINE_KNOWN_FOLDER)\s*\((.*)");
 
+            private static readonly Regex DefineEnumFlagsRegex =
+                new Regex(
+                    @"^\s*DEFINE_ENUM_FLAG_OPERATORS\(\s*(\S+)\s*\)\s*\;\s*$");
+
             private Dictionary<string, EnumWriter> namespacesToEnumWriters = new Dictionary<string, EnumWriter>();
             private Dictionary<string, ConstantWriter> namespacesToConstantWriters = new Dictionary<string, ConstantWriter>();
             private WildcardDictionary requiredNamespaces;
@@ -55,6 +59,7 @@ namespace PartitionUtilsLib
             private Dictionary<string, string> exclusionNamesToPartitions;
 
             private string constantsHeaderText;
+            private string enumFlagsFixupFileName;
 
             public ConstantsScraperImpl()
             {
@@ -78,6 +83,8 @@ namespace PartitionUtilsLib
                 this.withAttributes = withAttributes;
 
                 this.repoRoot = Path.GetFullPath(repoRoot);
+
+                this.InitEnumFlagsFixupFile();
 
                 this.LoadEnumObjectsFromJsonFiles(enumJsonFiles, renames);
 
@@ -209,6 +216,17 @@ namespace PartitionUtilsLib
                 }
 
                 return rawValue;
+            }
+
+            private void InitEnumFlagsFixupFile()
+            {
+                this.enumFlagsFixupFileName = Path.Combine(repoRoot, $@"generation\emitter\enumsMakeFlags.generated.rsp");
+                if (File.Exists(this.enumFlagsFixupFileName))
+                {
+                    File.Delete(this.enumFlagsFixupFileName);
+                }
+
+                File.AppendAllText(this.enumFlagsFixupFileName, "--enum-Make-Flags\r\n");
             }
 
             private List<EnumObject> LoadEnumsFromJsonFiles(string[] enumJsonFiles, Dictionary<string, string> renames)
@@ -482,6 +500,7 @@ namespace PartitionUtilsLib
                             // Skip if not #define ...
                             if (!defineMatch.Success)
                             {
+                                this.TryScrapingEnumFlags(line);
                                 continue;
                             }
 
@@ -649,6 +668,16 @@ namespace PartitionUtilsLib
                             }
                         }
                     }
+                }
+            }
+
+            private void TryScrapingEnumFlags(string line)
+            {
+                var match = DefineEnumFlagsRegex.Match(line);
+                if (match.Success)
+                {
+                    var enumName = match.Groups[1].Value;
+                    File.AppendAllText(this.enumFlagsFixupFileName, $"{enumName}\r\n");
                 }
             }
 

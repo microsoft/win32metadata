@@ -14,18 +14,29 @@ namespace PartitionUtilsLib
             return node.Members.Count == 0 && hasNoImportantAttributes;
         }
 
-        public static string GetNativeTypeNameFromAttributesLists(SyntaxList<AttributeListSyntax> attributeLists)
+        public static AttributeSyntax GetAttribute(SyntaxList<AttributeListSyntax> attributeLists, string name)
         {
             foreach (var attrList in attributeLists)
             {
                 foreach (var attr in attrList.Attributes)
                 {
-                    if (attr.Name.ToString() == "NativeTypeName")
+                    if (attr.Name.ToString() == name)
                     {
-                        string nativeType = attr.ArgumentList.Arguments[0].ToString();
-                        return EncodeHelpers.RemoveQuotes(nativeType);
+                        return attr;
                     }
                 }
+            }
+
+            return null;
+        }
+
+        public static string GetNativeTypeNameFromAttributesLists(SyntaxList<AttributeListSyntax> attributeLists)
+        {
+            var attr = GetAttribute(attributeLists, "NativeTypeName");
+            if (attr != null)
+            {
+                string nativeType = attr.ArgumentList.Arguments[0].ToString();
+                return EncodeHelpers.RemoveQuotes(nativeType);
             }
 
             return null;

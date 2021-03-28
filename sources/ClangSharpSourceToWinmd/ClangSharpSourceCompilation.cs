@@ -1,13 +1,13 @@
 ﻿//#define MakeSingleThreaded
 
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using PartitionUtilsLib;
 
 namespace ClangSharpSourceToWinmd
@@ -30,6 +30,7 @@ namespace ClangSharpSourceToWinmd
             string interopFileName,
             Dictionary<string, string> remaps,
             Dictionary<string, Dictionary<string, string>> enumAdditions,
+            IEnumerable<string> enumsMakeFlags,
             Dictionary<string, string> typeImports,
             Dictionary<string, string> requiredNamespaces,
             HashSet<string> reducePointerLevels)
@@ -71,6 +72,7 @@ namespace ClangSharpSourceToWinmd
             string objDir = Path.Combine(sourceDirectory, "obj");
             Directory.CreateDirectory(objDir);
 
+            HashSet<string> enumsMakeFlagsHashSet = enumsMakeFlags != null ? new HashSet<string>(enumsMakeFlags) : new HashSet<string>();
             List<SyntaxTree> cleanedTrees = new List<SyntaxTree>();
             System.Threading.Tasks.Parallel.ForEach(syntaxTrees, opt, (tree) =>
             {
@@ -92,7 +94,7 @@ namespace ClangSharpSourceToWinmd
                     Directory.CreateDirectory(newSubDir);
                 }
 
-                var cleanedTree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, remaps, enumAdditions, requiredNamespaces, foundNonEmptyStructs, modifiedFile);
+                var cleanedTree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, remaps, enumAdditions, enumsMakeFlagsHashSet, requiredNamespaces, foundNonEmptyStructs, modifiedFile);
                 File.WriteAllText(modifiedFile, cleanedTree.GetText().ToString());
 
                 lock (cleanedTrees)

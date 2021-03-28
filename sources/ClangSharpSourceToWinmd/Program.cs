@@ -33,6 +33,14 @@ namespace ClangSharpSourceToWinmd
                         Arity = ArgumentArity.OneOrMore,
                     }
                 },
+                new Option(new string[] { "--enum-Make-Flags" }, "Make an enum a Flags enum.")
+                {
+                    Argument = new Argument("<name>")
+                    {
+                        ArgumentType = typeof(string),
+                        Arity = ArgumentArity.OneOrMore,
+                    }
+                },
                 new Option(new string[] { "--reducePointerLevel", "-p" }, "Reduce pointer level by one.")
                 {
                     Argument = new Argument("<name>")
@@ -80,6 +88,7 @@ namespace ClangSharpSourceToWinmd
             string version = context.ParseResult.ValueForOption<string>("version");
             var remappedNameValuePairs = context.ParseResult.ValueForOption<string[]>("remap");
             var enumAdditionsNameValuePairs = context.ParseResult.ValueForOption<string[]>("enum-Addition");
+            var enumMakeFlags = context.ParseResult.ValueForOption<string[]>("enum-Make-Flags");
             var reducePointerLevelPairs = context.ParseResult.ValueForOption<string[]>("reducePointerLevel");
             var typeImportValuePairs = context.ParseResult.ValueForOption<string[]>("typeImport");
             var requiredNamespaceValuePairs = context.ParseResult.ValueForOption<string[]>("requiredNamespaceForName");
@@ -101,7 +110,7 @@ namespace ClangSharpSourceToWinmd
 
             ClangSharpSourceCompilation clangSharpCompliation = 
                 ClangSharpSourceCompilation.Create(
-                    sourceDirectory, interopFileName, remaps, enumAdditions, typeImports, requiredNamespaces, reducePointerLevels);
+                    sourceDirectory, interopFileName, remaps, enumAdditions, enumMakeFlags, typeImports, requiredNamespaces, reducePointerLevels);
 
             Console.Write("looking for errors...");
             var diags = clangSharpCompliation.GetDiagnostics();

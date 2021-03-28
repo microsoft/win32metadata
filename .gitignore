@@ -364,3 +364,4 @@ MigrationBackup/
 /generation/scraper/autoTypes.generated.rsp
 /generation/emitter/functionPointerFixups.generated.rsp
 /generation/scraper/functionPointerFixups.generated.rsp
+/generation/emitter/enumsMakeFlags.generated.rsp

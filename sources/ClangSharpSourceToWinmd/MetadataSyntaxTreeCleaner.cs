@@ -11,9 +11,9 @@ namespace ClangSharpSourceToWinmd
 {
     public static class MetadataSyntaxTreeCleaner
     {
-        public static SyntaxTree CleanSyntaxTree(SyntaxTree tree, Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, Dictionary<string, string> requiredNamespaces, HashSet<string> nonEmptyStructs, string filePath)
+        public static SyntaxTree CleanSyntaxTree(SyntaxTree tree, Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsMakeFlags, Dictionary<string, string> requiredNamespaces, HashSet<string> nonEmptyStructs, string filePath)
         {
-            TreeRewriter treeRewriter = new TreeRewriter(remaps, enumAdditions, requiredNamespaces, nonEmptyStructs);
+            TreeRewriter treeRewriter = new TreeRewriter(remaps, enumAdditions, enumsMakeFlags, requiredNamespaces, nonEmptyStructs);
             var newRoot = (CSharpSyntaxNode)treeRewriter.Visit(tree.GetRoot());
             return CSharpSyntaxTree.Create(newRoot, null, filePath);
         }
@@ -29,13 +29,15 @@ namespace ClangSharpSourceToWinmd
             private HashSet<string> visitedDelegateNames = new HashSet<string>();
             private HashSet<string> visitedStaticMethodNames = new HashSet<string>();
             private HashSet<string> nonEmptyStructs;
+            private HashSet<string> enumsToMakeFlags;
 
-            public TreeRewriter(Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, Dictionary<string, string> requiredNamespaces, HashSet<string> nonEmptyStructs)
+            public TreeRewriter(Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsToMakeFlags, Dictionary<string, string> requiredNamespaces, HashSet<string> nonEmptyStructs)
             {
                 this.remaps = remaps;
                 this.enumAdditions = enumAdditions;
                 this.requiredNamespaces = requiredNamespaces;
                 this.nonEmptyStructs = nonEmptyStructs;
+                this.enumsToMakeFlags = enumsToMakeFlags;
             }
 
             public override SyntaxNode VisitParameter(ParameterSyntax node)
@@ -245,7 +247,8 @@ namespace ClangSharpSourceToWinmd
             {
                 node = (EnumDeclarationSyntax)base.VisitEnumDeclaration(node);
 
-                if (this.enumAdditions.TryGetValue(node.Identifier.ValueText, out var additionsList))
+                var enumName = node.Identifier.ValueText;
+                if (this.enumAdditions.TryGetValue(enumName, out var additionsList))
                 {
                     List<EnumMemberDeclarationSyntax> newMembers = new List<EnumMemberDeclarationSyntax>();
                     foreach (var additionPair in additionsList)
@@ -259,6 +262,30 @@ namespace ClangSharpSourceToWinmd
                     }
 
                     node = node.AddMembers(newMembers.ToArray());
+                }
+
+                if (this.enumsToMakeFlags.Contains(enumName))
+                {
+                    bool hasFlags = SyntaxUtils.GetAttribute(node.AttributeLists, "Flags") != null;
+                    if (!hasFlags)
+                    {
+                        node =
+                            node.AddAttributeLists(
+                                SyntaxFactory.AttributeList(
+                                    SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
+                                        SyntaxFactory.Attribute(SyntaxFactory.ParseName("Flags")))).WithLeadingTrivia(node.GetLeadingTrivia()));
+                    }
+
+                    if (node.BaseList == null)
+                    {
+                        var baseList =
+                            SyntaxFactory.BaseList(
+                                SyntaxFactory.SingletonSeparatedList<BaseTypeSyntax>(
+                                    SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName("uint").WithLeadingTrivia(SyntaxFactory.Space))))
+                                    .WithTrailingTrivia(SyntaxFactory.Whitespace("\r\n"));
+                        node = node.WithIdentifier(node.Identifier.WithTrailingTrivia(SyntaxFactory.Space));
+                        node = node.WithBaseList(baseList);
+                    }
                 }
 
                 return node;
