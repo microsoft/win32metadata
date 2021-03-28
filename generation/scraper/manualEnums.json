@@ -2875,5 +2875,21 @@
         "field": "AuthenticationTarget"
       }
     ]
+  },
+  {
+    "name": "IMAGE_CHARACTERISITCS",
+    "type": "uint",
+    "finished": false,
+    "flags": true,
+    "autoPopulate": {
+      "filter": "IMAGE_SCN_",
+      "header": "winnt.h"
+    },
+    "uses": [
+      {
+        "struct": "IMAGE_SECTION_HEADER",
+        "field": "Characteristics"
+      }
+    ]
   }
 ]
