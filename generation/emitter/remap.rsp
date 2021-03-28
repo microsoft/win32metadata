@@ -40,6 +40,7 @@ OBJECT_ATTRIB_FLAG
 OPEN_AS_INFO_FLAGS
 IdentityUpdateEvent
 MINIDUMP_TYPE
+CLSCTX
 --reducePointerLevel
 RPC_OBJECT_INQ_FN
 RPC_IF_CALLBACK_FN
@@ -381,3 +382,11 @@ CoSetProxyBlanket::dwCapabilities=EOLE_AUTHENTICATION_CAPABILITIES
 IClientSecurity::SetBlanket::dwCapabilities=EOLE_AUTHENTICATION_CAPABILITIES
 IClientSecurity::QueryBlanket::pCapabilites=EOLE_AUTHENTICATION_CAPABILITIES*
 CoInitializeEx::dwCoInit=COINIT
+CoCreateInstance::dwClsContext=CLSCTX
+CoCreateInstanceEx::dwClsCtx=CLSCTX
+CoCreateInstanceFromApp::dwClsCtx=CLSCTX
+CoRegisterClassObject::dwClsContext=CLSCTX
+CoGetClassObject::dwClsContext=CLSCTX
+CoGetClassObjectFromURL::dwClsContext=CLSCTX
+CoGetInstanceFromFile::dwClsCtx=CLSCTX
+CoGetInstanceFromIStorage::dwClsCtx=CLSCTX
