@@ -157,7 +157,7 @@ using Windows.Win32.TpmBaseServices;
 using Windows.Win32.UPnp;
 using Windows.Win32.UsbDrivers;
 using Windows.Win32.UserAccessLogging;
-using Windows.Win32.VirtualStorage;
+using Windows.Win32.Vhd;
 using Windows.Win32.WebDav;
 using Windows.Win32.WebSock;
 using Windows.Win32.Wia;
