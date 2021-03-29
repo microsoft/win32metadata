@@ -802,7 +802,7 @@ namespace ClangSharpSourceToWinmd
                                 ret.Append(", ");
                             }
 
-                            ret.Append($"SizeConst = {size}");
+                            ret.Append($"CountConst = {size}");
                         }
                         else
                         {
@@ -816,7 +816,7 @@ namespace ClangSharpSourceToWinmd
                                         ret.Append(", ");
                                     }
 
-                                    string propName = p1Text.StartsWith("elementCount") ? "SizeParamIndex" : "BytesParamIndex";
+                                    string propName = p1Text.StartsWith("elementCount") ? "CountParamIndex" : "BytesParamIndex";
                                     ret.Append($"{propName} = {i}");
                                     break;
                                 }
