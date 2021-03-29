@@ -2917,5 +2917,85 @@
         "field": "ReservedMachine"
       }
     ]
+  },
+  {
+    "name": "IMAGE_SUBSYSTEM",
+    "type": "uint",
+    "finished": false,
+    "flags": false,
+    "autoPopulate": {
+      "filter": "IMAGE_SUBSYSTEM_",
+      "header": "winnt.h"
+    },
+    "uses": [
+      {
+        "struct": "IMAGE_OPTIONAL_HEADER32",
+        "field": "Subsystem"
+      },
+      {
+        "struct": "IMAGE_OPTIONAL_HEADER64",
+        "field": "Subsystem"
+      }
+    ]
+  },
+  {
+    "name": "IMAGE_DLL_CHARACTERISTICS",
+    "type": "uint",
+    "finished": false,
+    "flags": true,
+    "autoPopulate": {
+      "filter": "IMAGE_DLLCHARACTERISTICS_",
+      "header": "winnt.h"
+    },
+    "uses": [
+      {
+        "struct": "IMAGE_OPTIONAL_HEADER32",
+        "field": "DllCharacteristics"
+      },
+      {
+        "struct": "IMAGE_OPTIONAL_HEADER64",
+        "field": "DllCharacteristics"
+      }
+    ]
+  },
+  {
+    "name": "IMAGE_SUBSYSTEM",
+    "type": "uint",
+    "finished": false,
+    "flags": false,
+    "autoPopulate": {
+      "filter": "IMAGE_SUBSYSTEM_",
+      "header": "winnt.h"
+    },
+    "uses": [
+      {
+        "struct": "IMAGE_OPTIONAL_HEADER32",
+        "field": "Subsystem"
+      },
+      {
+        "struct": "IMAGE_OPTIONAL_HEADER64",
+        "field": "Subsystem"
+      }
+    ]
+  },
+  {
+    "name": "IMAGE_OPTIONAL_HEADER_MAGIC",
+    "type": "uint",
+    "finished": false,
+    "flags": false,
+    "autoPopulate": {
+      "filter": "IMAGE_NT_OPTIONAL_HDR32_MAGIC|IMAGE_NT_OPTIONAL_HDR64_MAGIC|IMAGE_ROM_OPTIONAL_HDR_MAGIC",
+      "header": "winnt.h"
+    },
+    "uses": [
+      {
+        "struct": "IMAGE_OPTIONAL_HEADER32",
+        "field": "Magic"
+      },
+      {
+        "struct": "IMAGE_OPTIONAL_HEADER64",
+        "field": "Magic"
+      }
+    ]
   }
 ]
