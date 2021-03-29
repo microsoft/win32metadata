@@ -4,6 +4,39 @@ using Windows.Win32.Interop;
 
 namespace Windows.Win32.WindowsProgramming
 {
+    public static unsafe partial class Apis
+    {
+        [NativeTypeName("HKEY")]
+        public const int HKEY_CLASSES_ROOT = unchecked((int)0x80000000);
+
+        [NativeTypeName("HKEY")]
+        public const int HKEY_CURRENT_USER = unchecked((int)0x80000001);
+
+        [NativeTypeName("HKEY")]
+        public const int HKEY_LOCAL_MACHINE = unchecked((int)0x80000002);
+
+        [NativeTypeName("HKEY")]
+        public const int HKEY_USERS = unchecked((int)0x80000003);
+
+        [NativeTypeName("HKEY")]
+        public const int HKEY_PERFORMANCE_DATA = unchecked((int)0x80000004);
+
+        [NativeTypeName("HKEY")]
+        public const int HKEY_PERFORMANCE_TEXT = unchecked((int)0x80000050);
+
+        [NativeTypeName("HKEY")]
+        public const int HKEY_PERFORMANCE_NLSTEXT = unchecked((int)0x80000060);
+
+        [NativeTypeName("HKEY")]
+        public const int HKEY_CURRENT_CONFIG = unchecked((int)0x80000005);
+
+        [NativeTypeName("HKEY")]
+        public const int HKEY_DYN_DATA = unchecked((int)0x80000006);
+
+        [NativeTypeName("HKEY")]
+        public const int HKEY_CURRENT_USER_LOCAL_SETTINGS = unchecked((int)0x80000007);
+    }
+
     [Flags]
     public enum PROCESS_CREATION_FLAGS : uint
     {
