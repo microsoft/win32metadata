@@ -44,6 +44,7 @@ PDRVCALLBACK
 WAITORTIMERCALLBACK
 _PSP
 _PROC_THREAD_ATTRIBUTE_LIST
+CFunctionDiscoveryNotificationWrapper
 --remap
 ABI::Windows::Foundation::IActivatableClassRegistration=IActivatableClassRegistration
 adpcmcoef_tag=ADPCMCOEFSET
