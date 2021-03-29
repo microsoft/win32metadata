@@ -29,6 +29,7 @@ namespace ClangSharpSourceToWinmd
         private const string ScannedSuffix = "__scanned__";
 
         private static readonly Regex TypeImportRegex = new Regex(@"<(([^,]+),\s*Version=(\d+\.\d+\.\d+\.\d+),\s*Culture=([^,]+),\s*PublicKeyToken=([^>]+))>(\S+)");
+        private static readonly Regex IsSpecialNameRegex = new Regex(@"^(?:get_|put_|add_|remove_|invoke_)");
 
         private MetadataBuilder metadataBuilder = new MetadataBuilder();
         private CSharpCompilation compilation;
@@ -1554,16 +1555,22 @@ namespace ClangSharpSourceToWinmd
             var symbol = model.GetDeclaredSymbol(node);
 
             var inheritedMethodCount = this.GetInheritedMethodCount(node);
-            
+
             foreach (MethodDeclarationSyntax method in node.Members.Where(m => m is MethodDeclarationSyntax).Skip(inheritedMethodCount))
             {
                 var methodSymbol = model.GetDeclaredSymbol(method);
                 var methodName = methodSymbol.Name;
+                MethodAttributes methodAttributes = MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.NewSlot | MethodAttributes.Abstract | MethodAttributes.Virtual;
+
+                if (IsSpecialNameRegex.IsMatch(methodName))
+                {
+                    methodAttributes |= MethodAttributes.SpecialName;
+                }
 
                 var methodDef =
                     this.AddMethodViaSymbol(
                         methodSymbol,
-                        MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.NewSlot | MethodAttributes.Abstract | MethodAttributes.Virtual,
+                        methodAttributes,
                         MethodImplAttributes.Managed,
                         true);
 
