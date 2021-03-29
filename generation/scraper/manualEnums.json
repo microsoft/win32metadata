@@ -2891,5 +2891,31 @@
         "field": "Characteristics"
       }
     ]
+  },
+  {
+    "name": "IMAGE_FILE_MACHINE",
+    "type": "uint",
+    "finished": false,
+    "flags": false,
+    "autoPopulate": {
+      "filter": "IMAGE_FILE_MACHINE_",
+      "header": "winnt.h"
+    },
+    "members": [
+      {
+        "name": "IMAGE_FILE_MACHINE_AXP64",
+        "value": "IMAGE_FILE_MACHINE_ALPHA64"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "IMAGE_FILE_HEADER",
+        "field": "Machine"
+      },
+      {
+        "struct": "IMAGE_DEBUG_INFORMATION",
+        "field": "ReservedMachine"
+      }
+    ]
   }
 ]
