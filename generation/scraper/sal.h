@@ -344,6 +344,7 @@ enum __SAL_YesNo {_SAL_notpresent, _SAL_no, _SAL_maybe, _SAL_yes, _SAL_default};
 
 // So we can get the retval attribute out of midl-generated headers
 #define _Out_retval_                           _SAL2_Source_(_Out_revtval, (), _Out_retval_impl_)
+#define _COM_Outptr_retval_                    _SAL2_Source_(_COM_Outptr_retval_, (), _Outptr_ _On_failure_(_Deref_post_null_) __retval)
 
 #define _Out_writes_(size)                     _SAL2_Source_(_Out_writes_, (size), _Pre_cap_(size)            _Post_valid_impl_)
 #define _Out_writes_opt_(size)                 _SAL2_Source_(_Out_writes_opt_, (size), _Pre_opt_cap_(size)        _Post_valid_impl_)

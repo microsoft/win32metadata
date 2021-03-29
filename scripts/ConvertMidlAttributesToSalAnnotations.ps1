@@ -22,8 +22,8 @@ if (Test-Path -path $outputFileName)
 }
 
 $srcLines = Get-Content -path $inputFileName
-$attrListFinderPattern = [Regex]::new('\[(((?:,\s*)?(in|out|string|retval|unique|defaultvalue\([^\)]+\)|size_is\([^\)]+\)|length_is\([^\)]+\)))+)\]')
-$attrItemPattern = [Regex]::new('(in|out|string|retval|unique|defaultvalue\([^\)]+\)|size_is\([^\)]+\)|length_is\([^\)]+\))')
+$attrListFinderPattern = [Regex]::new('\[(((?:,\s*)?(in|out|string|retval|unique|defaultvalue\([^\)]+\)|size_is\([^\)]+\)|iid_is\([^\)]+\)|length_is\([^\)]+\)))+)\]')
+$attrItemPattern = [Regex]::new('(in|out|string|retval|unique|defaultvalue\([^\)]+\)|size_is\([^\)]+\)|length_is\([^\)]+\)|iid_is\([^\)]+\))')
 $stream = [System.IO.StreamWriter] $outputFileName
 foreach ($line in $srcLines)
 {
@@ -41,6 +41,7 @@ foreach ($line in $srcLines)
             $attrList = $match.Groups[1].Value
             $in = $false
             $out = $false
+            $outComPtr = $false
             $retval = $false
             $optional = $false
             $size_is = $null
@@ -58,6 +59,10 @@ foreach ($line in $srcLines)
                 elseif ($part -eq "out")
                 {
                     $out = $true
+                }
+                elseif ($part.StartsWith("iid_is"))
+                {
+                    $outComPtr = $true
                 }
                 elseif ($part -eq "retval")
                 {
@@ -132,8 +137,17 @@ foreach ($line in $srcLines)
                 $annotation += $params
             }
 
-            # Overwrite everything with just _Out_retval_ if we have both of those
-            if ($out -and $retval)
+            # Overwrite everything with just _COM_Outptr_ or _Out_retval_ if we can
+            if ($outComPtr)
+            {
+                $annotation = "_COM_Outptr_";
+
+                if ($retval)
+                {
+                    $annotation += "retval_";
+                }
+            }
+            elseif ($out -and $retval)
             {
                 $annotation = "_Out_retval_"
             }
