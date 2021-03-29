@@ -10,6 +10,6 @@
 #include <windef.h>
 #include <msaatext.h>
 #include <oleacc.h>
+#include <uiautomationclient.h>
 #include <uiautomationcore.h>
 #include <uiautomationcoreapi.h>
-#include <uiautomationclient.h>
