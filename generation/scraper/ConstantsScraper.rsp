@@ -34,6 +34,7 @@ SetTapePosition_dwPositionMethod=TAPE_POSITION_METHOD
 SetTapeParameters_dwOperationFlags=TAPE_INFORMATION_TYPE
 SetProcessDEPPolicy_dwFlags=PROCESS_DEP_FLAGS
 SetPriorityClass_dwPriorityClassFlags=PROCESS_PRIORITY_CLASS
+IMAGE_FILE_HEADER_CharacteristicsFlags=IMAGE_FILE_CHARACTERISTICS
 --exclude
 TRUE
 FALSE

@@ -2877,7 +2877,7 @@
     ]
   },
   {
-    "name": "IMAGE_CHARACTERISITCS",
+    "name": "IMAGE_SECTION_CHARACTERISTICS",
     "type": "uint",
     "finished": false,
     "flags": true,
