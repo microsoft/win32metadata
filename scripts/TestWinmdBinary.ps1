@@ -62,15 +62,6 @@ if ($LastExitCode -lt 0)
 
 $failed = $false
 
-Write-Output "`n"
-Write-Output "Comparing $outputWinmdFileName against baseline $baselineWinmd..."
-Write-Output "Calling: dotnet $winmdUtilsPathBin showMissingImports --first $baselineWinmd --second $winmdPath"
-& dotnet $winmdUtilsPathBin showMissingImports --first $baselineWinmd --second $winmdPath
-if (!$failed -and $LastExitCode -lt 0)
-{
-    $failed = $true
-}
-
 Write-Output "`nLooking for duplicate imports in $outputWinmdFileName..."
 Write-Output "Calling: dotnet $winmdUtilsPathBin showDuplicateImports --winmd $winmdPath"
 & dotnet $winmdUtilsPathBin showDuplicateImports --winmd $winmdPath
@@ -110,6 +101,16 @@ Write-Output "Calling: dotnet $winmdUtilsPathBin showPointersToDelegates --winmd
 & dotnet $winmdUtilsPathBin showPointersToDelegates --winmd $winmdPath @$pointersToDelegatesAllowListFileName
 if (!$failed -and $LastExitCode -lt 0)
 {
+    $failed = $true
+}
+
+Write-Output "`n"
+Write-Output "Comparing $outputWinmdFileName against baseline $baselineWinmd..."
+Write-Output "Calling: dotnet $winmdUtilsPathBin compare --first $baselineWinmd --second $winmdPath"
+& dotnet $winmdUtilsPathBin compare --first $baselineWinmd --second $winmdPath
+if (!$failed -and $LastExitCode -lt 0)
+{
+    Write-Output "If all the differences are expected, please update the baseline by doing this:`ncopy $winmdPath $baselineWinmd"
     $failed = $true
 }
 

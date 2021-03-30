@@ -211,3 +211,4 @@ Windows.Win32.SystemServices,HPCON,IntPtr,ClosePseudoConsole
 Windows.Win32.Controls,HTREEITEM,IntPtr
 Windows.Win32.SystemServices,LPPROC_THREAD_ATTRIBUTE_LIST,void*
 Windows.Win32.Hypervisor,WHV_PARTITION_HANDLE,IntPtr,WHvDeletePartition
+Windows.Win32.SystemServices,CHAR,byte

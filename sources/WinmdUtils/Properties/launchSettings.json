@@ -4,25 +4,29 @@
       "commandName": "Project",
       "commandLineArgs": "showMissingImports --first $(ProjectDir)..\\..\\scripts\\BaselineWinmd\\10.0.19041.5\\Windows.Win32.winmd --second $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd"
     },
+    "compare": {
+      "commandName": "Project",
+      "commandLineArgs": "compare --first $(ProjectDir)..\\..\\scripts\\BaselineWinmd\\10.0.19041.5\\Windows.Win32.winmd --second $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd"
+    },
     "showDuplicateImports": {
       "commandName": "Project",
       "commandLineArgs": "showDuplicateImports --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd"
     },
     "showDuplicateTypes": {
-        "commandName": "Project",
-        "commandLineArgs": "showDuplicateTypes --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd"
+      "commandName": "Project",
+      "commandLineArgs": "showDuplicateTypes --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd"
     },
     "showDuplicateConstants": {
-        "commandName": "Project",
-        "commandLineArgs": "showDuplicateConstants --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd"
+      "commandName": "Project",
+      "commandLineArgs": "showDuplicateConstants --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd"
     },
     "showEmptyDelegates": {
-        "commandName": "Project",
-        "commandLineArgs": "showEmptyDelegates --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd @$(ProjectDir)..\\..\\tests\\emptyDelegatesAllowList.rsp"
+      "commandName": "Project",
+      "commandLineArgs": "showEmptyDelegates --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd @$(ProjectDir)..\\..\\tests\\emptyDelegatesAllowList.rsp"
     },
     "showPointersToDelegates": {
-        "commandName": "Project",
-        "commandLineArgs": "showPointersToDelegates --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd @$(ProjectDir)..\\..\\tests\\pointersToDelegatesAllowList.rsp"
+      "commandName": "Project",
+      "commandLineArgs": "showPointersToDelegates --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd @$(ProjectDir)..\\..\\tests\\pointersToDelegatesAllowList.rsp"
     }
   }
 }
