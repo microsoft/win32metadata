@@ -75,6 +75,7 @@ function AddLibToMappings([string] $libName)
 # Do these first as other libs may claim funcs in them, but we want to prioritize these first
 AddLibToMappings("onecoreuap.lib")
 AddLibToMappings("kernel32.lib")
+AddLibToMappings("d3d10.lib")
 
 foreach ($lib in Get-ChildItem "$libDirectory\*.lib")
 {
