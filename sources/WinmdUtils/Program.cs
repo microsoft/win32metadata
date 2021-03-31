@@ -450,6 +450,8 @@ namespace WinmdUtils
                     continue;
                 }
 
+                ret &= CompareAttributes(field1.FullName, field1.GetAttributes(), field2.GetAttributes(), console);
+
                 if (field1.IsConst)
                 {
                     if (!field2.IsConst)

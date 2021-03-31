@@ -229,7 +229,11 @@ namespace ClangSharpSourceToWinmd
 
                     case "NativeTypeName":
                     {
-                        var ret = this.ProcessNativeTypeNameAttr(firstAttr);
+                        bool alreadyConst = 
+                            node.Parent is FieldDeclarationSyntax parentField &&
+                            parentField.Modifiers.Any(m => m.ToString() == "const");
+
+                        var ret = this.ProcessNativeTypeNameAttr(alreadyConst, firstAttr);
 
                         return ret == null ? node : ret;
                     }
@@ -522,7 +526,7 @@ namespace ClangSharpSourceToWinmd
                 return metadataType;
             }
 
-            private void AddNativeArrayInfoAttribute(string nativeTypeName, List<AttributeSyntax> attrsList)
+            private void AddNativeArrayInfoAttribute(bool alreadyConst, string nativeTypeName, List<AttributeSyntax> attrsList)
             {
                 if (string.IsNullOrWhiteSpace(nativeTypeName))
                 {
@@ -531,7 +535,7 @@ namespace ClangSharpSourceToWinmd
 
                 var metadataType = GetInfoForNativeType(nativeTypeName, out bool isConst, out bool isNullTerminated, out bool isNullNullTerminated);
 
-                if (isConst)
+                if (isConst && !alreadyConst)
                 {
                     attrsList.Add(SyntaxFactory.Attribute(SyntaxFactory.ParseName("Const")));
                 }
@@ -560,18 +564,14 @@ namespace ClangSharpSourceToWinmd
                 return EncodeHelpers.ConvertGuidToAttributeList(guid);
             }
 
-            private SyntaxNode ProcessNativeTypeNameAttr(AttributeSyntax nativeTypeNameAttr)
+            private SyntaxNode ProcessNativeTypeNameAttr(bool alreadyConst, AttributeSyntax nativeTypeNameAttr)
             {
                 string nativeType = nativeTypeNameAttr.ArgumentList.Arguments[0].ToString();
                 nativeType = EncodeHelpers.RemoveQuotes(nativeType);
-                if (nativeType == "PCNZWCH")
-                {
-
-                }
 
                 List<AttributeSyntax> attributeNodes = new List<AttributeSyntax>();
 
-                this.AddNativeArrayInfoAttribute(nativeType, attributeNodes);
+                this.AddNativeArrayInfoAttribute(alreadyConst, nativeType, attributeNodes);
                 attributeNodes.Insert(0, nativeTypeNameAttr);
 
                 var ret = SyntaxFactory.AttributeList(SyntaxFactory.SeparatedList(attributeNodes));
