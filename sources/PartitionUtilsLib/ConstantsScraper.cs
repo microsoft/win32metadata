@@ -620,7 +620,7 @@ namespace PartitionUtilsLib
                                 }
                             }
 
-                            if (autoPopulateReg != null)
+                            if (autoPopulateReg != null && nativeTypeName == null)
                             {
                                 Match autoPopulate = autoPopulateReg.Match(name);
                                 if (autoPopulate.Success)
@@ -657,8 +657,8 @@ namespace PartitionUtilsLib
                             }
 
                             // If we haven't used the member to update an enum, skip it...
-                            // ...unless it's an HRESULT or error code. Always emit them as constants too
-                            if (match.Success && (!updatedEnum || nativeTypeName != null || name.StartsWith("ERROR_")))
+                            // ...unless it's an HRESULT. Always emit them as constants too
+                            if (match.Success && (!updatedEnum || nativeTypeName != null))
                             {
                                 // Only add the constant if it's not part of a manual enum
                                 if (!manualEnumMemberNames.Contains(name))
@@ -702,7 +702,7 @@ namespace PartitionUtilsLib
                         continue;
                     }
 
-                    string foundNamespace = null;
+                    string foundNamespace = obj.@namespace;
                     List<string> remapsToAdd = new List<string>();
                     int remapCount = 0;
                     // For each use in an enum...
@@ -727,7 +727,7 @@ namespace PartitionUtilsLib
                         }
 
                         // If we haven't found a namespace yet, try to look it up
-                        if (foundNamespace == null)
+                        if (string.IsNullOrEmpty(foundNamespace))
                         {
                             requiredNamespaces.TryGetValue(lookupNameForNamespace, out foundNamespace);
                         }
@@ -780,7 +780,7 @@ namespace PartitionUtilsLib
                                 File.Delete(enumFile);
                             }
 
-                            enumWriter = new EnumWriter(enumFile, foundNamespace);
+                            enumWriter = new EnumWriter(enumFile, foundNamespace, this.constantsHeaderText);
                             namespacesToEnumWriters.Add(foundNamespace, enumWriter);
                         }
 

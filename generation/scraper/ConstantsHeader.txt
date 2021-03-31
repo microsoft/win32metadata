@@ -1,6 +1,7 @@
 using System;
 using Windows.Win32.Interop;
 using Windows.Win32.WindowsPropertiesSystem; // For PROPERTYKEY
+using static Windows.Win32.Debug.WIN32_ERROR;
 using static Windows.Win32.SystemServices.Apis; // Various constants
 using static Windows.Win32.Multimedia.Apis; // Various constants
 using static Windows.Win32.CoreAudio.Apis; // Various constants

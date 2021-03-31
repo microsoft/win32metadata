@@ -2997,5 +2997,85 @@
         "field": "Magic"
       }
     ]
+  },
+  {
+    "name": "WIN32_ERROR",
+    "type": "uint",
+    "finished": false,
+    "flags": false,
+    "autoPopulate": {
+      "filter": "ERROR_|DNS_ERROR_",
+      "header": "winerror.h"
+    },
+    "uses": [
+      {
+        "Method": "GetLastError",
+        "parameter": "return"
+      }
+    ]
+  },
+  {
+    "namespace": "Windows.Win32.Rpc",
+    "name": "RPC_STATUS",
+    "type": "int",
+    "finished": false,
+    "flags": false,
+    "autoPopulate": {
+      "filter": "RPC_S_|EPT_S_",
+      "header": "winerror.h"
+    }
+  },
+  {
+    "namespace": "Windows.Win32.Debug",
+    "name": "FACILITY_CODE",
+    "type": "uint",
+    "finished": false,
+    "flags": false,
+    "autoPopulate": {
+      "filter": "FACILITY_",
+      "header": "winerror.h"
+    }
+  },
+  {
+    "type": "int",
+    "finished": false,
+    "name": "WSA_ERROR",
+    "flags": false,
+    "autoPopulate": {
+      "filter": "WSA",
+      "header": "winerror.h"
+    },
+    "members": [
+      {
+        "name": "WSA_IO_PENDING",
+        "value": "(int)(ERROR_IO_PENDING)"
+      },
+      {
+        "name": "WSA_IO_INCOMPLETE",
+        "value": "(int)(ERROR_IO_INCOMPLETE)"
+      },
+      {
+        "name": "WSA_INVALID_HANDLE",
+        "value": "(int)(ERROR_INVALID_HANDLE)"
+      },
+      {
+        "name": "WSA_INVALID_PARAMETER",
+        "value": "(int)(ERROR_INVALID_PARAMETER)"
+      },
+      {
+        "name": "WSA_NOT_ENOUGH_MEMORY",
+        "value": "(int)(ERROR_NOT_ENOUGH_MEMORY)"
+      },
+      {
+        "name": "WSA_OPERATION_ABORTED",
+        "value": "(int)(ERROR_OPERATION_ABORTED)"
+      }
+    ],
+    "uses": [
+      {
+        "method": "WSAGetLastError",
+        "parameter": "return"
+      }
+    ]
   }
 ]

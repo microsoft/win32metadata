@@ -9,13 +9,15 @@ namespace PartitionUtilsLib
     {
         private string path;
         private string @namespace;
+        private string sourceHeaderText;
         private StreamWriter writer;
         private Dictionary<string, string> namesToValues = new Dictionary<string, string>();
 
-        public EnumWriter(string path, string @namespace)
+        public EnumWriter(string path, string @namespace, string sourceHeaderText)
         {
             this.path = path;
             this.@namespace = @namespace;
+            this.sourceHeaderText = sourceHeaderText;
         }
 
         public bool AddEnum(EnumObject enumObject)
@@ -33,8 +35,8 @@ namespace PartitionUtilsLib
 $"    [Flags]");
             }
 
-            string type = "uint";
-            bool forceUnsigned = enumObject.flags;
+            string type = enumObject.type ?? "uint";
+            bool forceUnsigned = enumObject.flags || (enumObject.type != null && (enumObject.type == "uint" || enumObject.type == "ulong" || enumObject.type == "ushort"));
 
             StringWriter enumBodyWriter = new StringWriter();
             foreach (var member in enumObject.members.Where(m => m.value != null))
@@ -77,9 +79,8 @@ $@"    }}
             {
                 this.writer = new StreamWriter(this.path);
                 this.writer.WriteLine(
-@$"using System;
-using Windows.Win32.Interop;
-using Windows.Win32.SystemServices;
+@$"{this.sourceHeaderText}
+
 using static {this.@namespace}.Apis;
 
 namespace {this.@namespace}
