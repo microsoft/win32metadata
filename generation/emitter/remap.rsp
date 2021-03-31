@@ -413,3 +413,5 @@ CoGetInstanceFromFile::dwClsCtx=CLSCTX
 CoGetInstanceFromIStorage::dwClsCtx=CLSCTX
 mouse_event::dx=int
 mouse_event::dy=int
+IMAGE_OPTIONAL_HEADER32::LoaderFlags=[Obsolete]
+IMAGE_OPTIONAL_HEADER64::LoaderFlags=[Obsolete]
