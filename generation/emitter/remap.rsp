@@ -61,6 +61,7 @@ MODIFY_VHDSET_FLAG
 APPLY_SNAPSHOT_VHDSET_FLAG
 RAW_SCSI_VIRTUAL_DISK_FLAG
 FORK_VIRTUAL_DISK_FLAG
+MOUSE_EVENT_FLAGS
 --reducePointerLevel
 RPC_OBJECT_INQ_FN
 RPC_IF_CALLBACK_FN
@@ -410,3 +411,5 @@ CoGetClassObject::dwClsContext=CLSCTX
 CoGetClassObjectFromURL::dwClsContext=CLSCTX
 CoGetInstanceFromFile::dwClsCtx=CLSCTX
 CoGetInstanceFromIStorage::dwClsCtx=CLSCTX
+mouse_event::dx=int
+mouse_event::dy=int
