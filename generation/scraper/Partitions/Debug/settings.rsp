@@ -9,7 +9,6 @@
 <IncludeRoot>/winrt
 --traverse
 <IncludeRoot>/um/activscp.h
-<IncludeRoot>/um/Mshtml.h
 <IncludeRoot>/um/minidumpapiset.h
 <IncludeRoot>/um/dbghelp.h
 <IncludeRoot>/um/wct.h

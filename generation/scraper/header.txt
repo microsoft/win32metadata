@@ -65,6 +65,7 @@ using Windows.Win32.IndexServer;
 using Windows.Win32.InkInput;
 using Windows.Win32.InstallableFileSystems;
 using Windows.Win32.InteractionContext;
+using Windows.Win32.InternetExplorer;
 using Windows.Win32.Intl;
 //using Windows.Win32.Ipc;
 using Windows.Win32.IpHelper;
