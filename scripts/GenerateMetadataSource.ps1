@@ -173,6 +173,9 @@ $nugetDestPackagesDir = Join-Path -Path $artifactsDir "InstalledPackages"
 Create-Directory $nugetDestPackagesDir
 & $toolsDir\nuget.exe install Microsoft.Windows.SDK.CPP.x64 -version $version -source $nugetSrcPackagesDir -OutputDirectory $nugetDestPackagesDir
 
+# Restore all of the external NuGet packages
+& $toolsDir\nuget.exe restore "$rootDir\external\scraper\packages.config" -PackagesDirectory $nugetDestPackagesDir
+
 # Clean up directory where generated source files go
 Create-Directory $sdkGeneratedSourceDir
 Remove-Item "$sdkGeneratedSourceDir\*.cs"
@@ -207,6 +210,51 @@ $partitionNames | ForEach-Object -Parallel {
 
     $out1 = "`n$using:PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -version $using:version -partitionName $_ -artifactsDir $using:artifactsDir..."
     $out2 = & $using:PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -version $using:version -partitionName $_ -artifactsDir $using:artifactsDir -indent "`n  "
+    Write-Output "$out1$out2"
+
+    if ($LastExitCode -lt 0)
+    {
+        Write-Error "Partition $_ failed."
+        $localObj.ErrorCode = $LastExitCode
+    }
+    
+} -ThrottleLimit $throttleCount
+
+if ($errObj.ErrorCode -ne 0)
+{
+    Write-Error "Failed to scrape one or more partitions."
+    exit $errObj.ErrorCode
+}
+
+$stopwatch.Stop()
+$totalTime = $stopwatch.Elapsed.ToString("c")
+
+Write-Output "Total time taken for all partitions: $totalTime"
+
+Write-Output "`n`e[32mGenerating source files succeeded`e[0m"
+
+$generationDir = "$rootDir\external"
+$scraperDir = "$generationDir\scraper"
+$partitionsDir = "$scraperDir\Partitions"
+
+$partitionNames = Get-ChildItem $partitionsDir | Select-Object -ExpandProperty Name
+
+$stopwatch =  [system.diagnostics.stopwatch]::StartNew()
+
+Write-Output "`nProcessing each partition...using $throttleCount parallel script(s)"
+
+$errObj = new-object psobject
+Add-Member -InputObject $errObj -MemberType NoteProperty -Name ErrorCode -Value 0
+
+$partitionNames | ForEach-Object -Parallel {
+    $localObj = $using:errObj
+    if (($keepProcessingOnFailure -eq $false) -and ($localObj.ErrorCode -ne 0))
+    {
+        continue
+    }
+
+    $out1 = "`n$using:PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -version $using:version -partitionName $_ -artifactsDir $using:artifactsDir -isExternal..."
+    $out2 = & $using:PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -version $using:version -partitionName $_ -artifactsDir $using:artifactsDir -indent "`n  " -isExternal
     Write-Output "$out1$out2"
 
     if ($LastExitCode -lt 0)

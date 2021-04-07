@@ -11,7 +11,10 @@ param
     $partitionName,
 
     [string]
-    $indent = ""
+    $indent = "",
+
+    [switch]
+    $isExternal
 )
 
 . "$PSScriptRoot\CommonUtils.ps1"
@@ -21,6 +24,14 @@ if (!$version)
     $version = $defaultWinSDKNugetVersion
 }
 
+if ($isExternal)
+{
+    $generationDir = "$rootDir\external"
+    $scraperDir = "$generationDir\scraper"
+    $emitterDir = "$generationDir\emitter"
+    $partitionsDir = "$scraperDir\Partitions"
+}
+
 $nugetDestPackagesDir = Join-Path -Path $artifactsDir "InstalledPackages"
 
 $libMappingOutputFileName = Get-LibMappingsFile $artifactsDir $version
@@ -28,14 +39,14 @@ $libMappingOutputFileName = Get-LibMappingsFile $artifactsDir $version
 $stopwatch =  [system.diagnostics.stopwatch]::StartNew()
 
 $baseGenerateDir = "$rootDir\generation\scraper"
-$partitionGenerateDir = "$baseGenerateDir\partitions\$partitionName"
+$partitionGenerateDir = "$partitionsDir\$partitionName"
 if (!(Test-Path $partitionGenerateDir))
 {
     Write-Error "Partition dir $partitionGenerateDir not found."
     exit -1
 }
 
-$generationOutArtifactsDir = "$baseGenerateDir\obj"
+$generationOutArtifactsDir = "$scraperDir\obj"
 Create-Directory $generationOutArtifactsDir
 
 $generatorOutput = Join-Path -Path $generationOutArtifactsDir -ChildPath "$partitionName.generation.output.txt"
@@ -60,8 +71,26 @@ $fixedSettingsRsp = "$generationOutArtifactsDir\$partitionName.fixedSettings.rsp
 Copy-Item $partitionSettingsRsp -Destination $fixedSettingsRsp
 
 $includePath = (Get-ChildItem -Path "$nugetDestPackagesDir\Microsoft.Windows.SDK.CPP.$version\c\Include").FullName.Replace('\', '/')
-$generatedSourceDir = "$rootDir\generation\emitter\generated"
+$generatedSourceDir = "$emitterDir\generated"
 [hashtable]$textToReplaceTable = @{ "<IncludeRoot>" = $includePath; "<RepoRoot>" = $rootDir; "<PartitionName>" = $partitionName; "<PartitionDir>" = $partitionGenerateDir; "<GeneratedSourceDir>" = $generatedSourceDir}
+
+if ($isExternal)
+{
+    $packagePaths = Get-ChildItem -Directory -Path "$nugetDestPackagesDir\$partitionName.*"
+    Write-Host $packagePaths
+    $installedVersions = $packagePaths | ForEach-Object {
+        if ($_.Name -match "\.((?:[0-9]+\.)*[0-9]+)$") {
+            [version]$matches[1]
+        } else {
+            $null
+        }
+    }
+    [string]$latestVersion = $installedVersions | Sort-Object -Bottom 1
+    Write-Host "Selected $latestVersion from $installedVersions"
+    $externalPackagePath = "$nugetDestPackagesDir\$partitionName.$latestVersion".Replace('\', '/')
+    $textToReplaceTable["<ExternalPackageDir>"] = $externalPackagePath
+}
+
 Replace-Text $fixedSettingsRsp $textToReplaceTable
 
 Write-Output "$($indent)$partitionName..."

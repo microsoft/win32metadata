@@ -58,7 +58,7 @@ $enumsJson = "$scraperDir\enums.json"
 
 Write-Output "`n"
 Write-Output "Scraping constants and enums..."
-Write-Output "Calling: dotnet $constantsScraperPathBin --repoRoot rootDir --enumsJson $manualEnumsJson --enumsJson $enumsJson --headerTextFile $constantsHeaderTxt @$constantsScraperRsp @$requiredNamespacesForNames @$remapFileName"
+Write-Output "Calling: dotnet $constantsScraperPathBin --repoRoot $rootDir --enumsJson $manualEnumsJson --enumsJson $enumsJson --headerTextFile $constantsHeaderTxt @$constantsScraperRsp @$requiredNamespacesForNames @$remapFileName"
 
 & dotnet $constantsScraperPathBin --repoRoot $rootDir --enumsJson $manualEnumsJson --enumsJson $enumsJson --headerTextFile $constantsHeaderTxt @$constantsScraperRsp @$requiredNamespacesForNames @$remapFileName
 if ($LastExitCode -ne 0)
