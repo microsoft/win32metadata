@@ -1,4 +1,18 @@
+
+param
+(
+    [switch]
+    $isExternal
+)
+
 . "$PSScriptRoot\CommonUtils.ps1"
+
+if ($isExternal)
+{
+    $generationDir = "$rootDir\external"
+    $scraperDir = "$generationDir\scraper"
+    $emitterDir = "$generationDir\emitter"
+}
 
 $autoTypesRsp = "$emitterDir\functionPointerFixups.csv"
 $outputScraperRspFileName = "$scraperDir\functionPointerFixups.generated.rsp"
@@ -33,8 +47,27 @@ foreach ($functionFixup in $functionFixups)
     }
 }
 
-$outputScraperRspText = "--exclude`r`n$($scraperRspExcludeSection.ToString())--remap`r`n$($scraperRspRemapSection.ToString())"
-[System.IO.File]::WriteAllText($outputScraperRspFileName, $outputScraperRspText)
+$outputScraperRsp = [System.IO.StreamWriter] $outputScraperRspFileName
+$scraperRspExcludeSection = $scraperRspExcludeSection.ToString()
+if (![string]::IsNullOrEmpty($scraperRspExcludeSection))
+{
+    $outputScraperRsp.WriteLine("--exclude")
+    $outputScraperRsp.Write($scraperRspExcludeSection)
+}
 
-$outputEmitterRspText = "--reducePointerLevel`r`n$($emitterRspReducePointerLevelSection.ToString())"
-[System.IO.File]::WriteAllText($outputEmitterRspFileName, $outputEmitterRspText)
+$scraperRspRemapSection = $scraperRspRemapSection.ToString()
+if (![string]::IsNullOrEmpty($scraperRspRemapSection))
+{
+    $outputScraperRsp.WriteLine("--remap")
+    $outputScraperRsp.Write($scraperRspRemapSection)
+}
+$outputScraperRsp.Close();
+
+$outputEmitterRsp = [System.IO.StreamWriter] $outputEmitterRspFileName
+$emitterRspReducePointerLevelSection = $emitterRspReducePointerLevelSection.ToString()
+if (![string]::IsNullOrEmpty($emitterRspReducePointerLevelSection))
+{
+    $outputEmitterRsp.WriteLine("--reducePointerLevel")
+    $outputEmitterRsp.Write($emitterRspReducePointerLevelSection)
+}
+$outputEmitterRsp.Close();

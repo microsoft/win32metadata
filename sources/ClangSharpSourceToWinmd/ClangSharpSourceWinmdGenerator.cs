@@ -25,8 +25,8 @@ namespace ClangSharpSourceToWinmd
         public const string Win32WideStringType = "Windows.Win32.SystemServices.PWSTR";
         public const string Win32StringType = "Windows.Win32.SystemServices.PSTR";
 
+        private const string Win32Namespace = "Windows.Win32";
         private const string InteropNamespace = "Windows.Win32.Interop";
-        private const string ComNamespace = "Windows.Win32.Com";
         private const string ScannedSuffix = "__scanned__";
 
         private static readonly Regex TypeImportRegex = new Regex(@"<(([^,]+),\s*Version=(\d+\.\d+\.\d+\.\d+),\s*Culture=([^,]+),\s*PublicKeyToken=([^>]+))>(\S+)");
@@ -39,6 +39,7 @@ namespace ClangSharpSourceToWinmd
         private CSharpCompilation compilation;
         private AssemblyReferenceHandle systemAssemblyRef;
         private AssemblyReferenceHandle interopAssemblyRef;
+        private AssemblyReferenceHandle baseAssemblyRef;
         private ModuleDefinitionHandle moduleRef;
         private Dictionary<string, TypeReferenceHandle> namesToTypeRefHandles = new Dictionary<string, TypeReferenceHandle>();
         private Dictionary<string, TypeDefinitionHandle> namesToTypeDefHandles = new Dictionary<string, TypeDefinitionHandle>();
@@ -61,6 +62,7 @@ namespace ClangSharpSourceToWinmd
         private Dictionary<StructDeclarationSyntax, ISymbol> structNodesToInheritedSymbols = new Dictionary<StructDeclarationSyntax, ISymbol>();
         private Dictionary<string, FieldDeclarationSyntax> nameToGuidConstFields = new Dictionary<string, FieldDeclarationSyntax>();
         private HashSet<string> structNameWithGuids = new HashSet<string>();
+        private HashSet<string> usingDirectives = new HashSet<string>();
 
         private ClangSharpSourceWinmdGenerator(
             CSharpCompilation compilation,
@@ -157,6 +159,20 @@ namespace ClangSharpSourceToWinmd
                         this.metadataBuilder.GetOrAddBlob(interopAssembly.PublicKeyToken),
                         default,
                         default);
+
+                const string BaseAssemblyName = Win32Namespace + ".winmd";
+                var baseAssembly = this.compilation.ReferencedAssemblyNames.ToList().Find(a => a.Name == BaseAssemblyName);
+                if (baseAssembly != null)
+                {
+                    this.baseAssemblyRef =
+                        metadataBuilder.AddAssemblyReference(
+                            this.metadataBuilder.GetOrAddString(baseAssembly.Name),
+                            baseAssembly.Version,
+                            default,
+                            this.metadataBuilder.GetOrAddBlob(baseAssembly.PublicKeyToken),
+                            default,
+                            default);
+                }
             }
         }
 
@@ -306,6 +322,10 @@ namespace ClangSharpSourceToWinmd
                 else if (@namespace.StartsWith(InteropNamespace))
                 {
                     scopeRef = this.interopAssemblyRef;
+                }
+                else if (this.baseAssemblyRef != null && @namespace.StartsWith(Win32Namespace))
+                {
+                    scopeRef = this.baseAssemblyRef;
                 }
                 else
                 {
@@ -667,7 +687,7 @@ namespace ClangSharpSourceToWinmd
 
                 if (!fixedName.Contains("."))
                 {
-                    foreach (string @namespace in new string[] { InteropNamespace, ComNamespace, "System" })
+                    foreach (string @namespace in new string[] { InteropNamespace, "System" })
                     {
                         var fullNameToCheck = GetQualifiedName(@namespace, fixedName);
                         ret = this.compilation.GetTypeByMetadataName(fullNameToCheck);
@@ -679,7 +699,16 @@ namespace ClangSharpSourceToWinmd
 
                     if (ret == null)
                     {
-                        ret = this.compilation.GetSymbolsWithName(fixedName, SymbolFilter.Type).FirstOrDefault() as ITypeSymbol;
+                        // Try each of the namespaces with using declarations
+                        foreach (string @namespace in this.usingDirectives)
+                        {
+                            var fullNameToCheck = GetQualifiedName(@namespace, fixedName);
+                            ret = this.compilation.GetTypeByMetadataName(fullNameToCheck);
+                            if (ret != null)
+                            {
+                                break;
+                            }
+                        }
                     }
                 }
                 else
@@ -1816,6 +1845,11 @@ namespace ClangSharpSourceToWinmd
             public SyntaxWalker(ClangSharpSourceWinmdGenerator parent)
             {
                 this.parent = parent;
+            }
+
+            public override void VisitUsingDirective(UsingDirectiveSyntax node)
+            {
+                this.parent.usingDirectives.Add(node.Name.ToString());
             }
 
             public override void VisitEnumDeclaration(EnumDeclarationSyntax node)

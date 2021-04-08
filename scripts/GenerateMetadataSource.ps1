@@ -23,7 +23,10 @@ param
     $keepProcessingOnFailure = $false,
 
     [string]
-    $patch = ""
+    $patch = "",
+
+    [switch]
+    $externalOnly
 )
 
 . "$PSScriptRoot\CommonUtils.ps1"
@@ -192,56 +195,68 @@ if ($throttleCount -lt 2)
     $throttleCount = 2
 }
 
-$partitionNames = Get-ChildItem $partitionsDir | Select-Object -ExpandProperty Name
-
-$stopwatch =  [system.diagnostics.stopwatch]::StartNew()
-
-Write-Output "`nProcessing each partition...using $throttleCount parallel script(s)"
-
-$errObj = new-object psobject
-Add-Member -InputObject $errObj -MemberType NoteProperty -Name ErrorCode -Value 0
-
-$partitionNames | ForEach-Object -Parallel {
-    $localObj = $using:errObj
-    if (($keepProcessingOnFailure -eq $false) -and ($localObj.ErrorCode -ne 0))
-    {
-        continue
-    }
-
-    $out1 = "`n$using:PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -version $using:version -partitionName $_ -artifactsDir $using:artifactsDir..."
-    $out2 = & $using:PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -version $using:version -partitionName $_ -artifactsDir $using:artifactsDir -indent "`n  "
-    Write-Output "$out1$out2"
-
-    if ($LastExitCode -lt 0)
-    {
-        Write-Error "Partition $_ failed."
-        $localObj.ErrorCode = $LastExitCode
-    }
-    
-} -ThrottleLimit $throttleCount
-
-if ($errObj.ErrorCode -ne 0)
+if (!$externalOnly)
 {
-    Write-Error "Failed to scrape one or more partitions."
-    exit $errObj.ErrorCode
+    $partitionNames = Get-ChildItem $partitionsDir | Select-Object -ExpandProperty Name
+
+    $stopwatch =  [system.diagnostics.stopwatch]::StartNew()
+
+    Write-Output "`nProcessing each partition...using $throttleCount parallel script(s)"
+
+    $errObj = new-object psobject
+    Add-Member -InputObject $errObj -MemberType NoteProperty -Name ErrorCode -Value 0
+
+    $partitionNames | ForEach-Object -Parallel {
+        $localObj = $using:errObj
+        if (($keepProcessingOnFailure -eq $false) -and ($localObj.ErrorCode -ne 0))
+        {
+            continue
+        }
+
+        $out1 = "`n$using:PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -version $using:version -partitionName $_ -artifactsDir $using:artifactsDir..."
+        $out2 = & $using:PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -version $using:version -partitionName $_ -artifactsDir $using:artifactsDir -indent "`n  "
+        Write-Output "$out1$out2"
+
+        if ($LastExitCode -lt 0)
+        {
+            Write-Error "Partition $_ failed."
+            $localObj.ErrorCode = $LastExitCode
+        }
+    
+    } -ThrottleLimit $throttleCount
+
+    if ($errObj.ErrorCode -ne 0)
+    {
+        Write-Error "Failed to scrape one or more partitions."
+        exit $errObj.ErrorCode
+    }
+
+    $stopwatch.Stop()
+    $totalTime = $stopwatch.Elapsed.ToString("c")
+
+    Write-Output "Total time taken for all partitions: $totalTime"
+
+    Write-Output "`n`e[32mGenerating source files succeeded`e[0m"
 }
-
-$stopwatch.Stop()
-$totalTime = $stopwatch.Elapsed.ToString("c")
-
-Write-Output "Total time taken for all partitions: $totalTime"
-
-Write-Output "`n`e[32mGenerating source files succeeded`e[0m"
 
 $generationDir = "$rootDir\external"
 $scraperDir = "$generationDir\scraper"
+$emitterDir = "$generationDir\emitter"
 $partitionsDir = "$scraperDir\Partitions"
+
+# Clean up directory where generated source files go
+$externalGeneratedSourceDir = "$emitterDir\generated"
+Create-Directory $externalGeneratedSourceDir
+Remove-Item "$externalGeneratedSourceDir\*.cs"
+
+& $PSScriptRoot\CreateScraperRspForAutoTypes.ps1 -isExternal
+& $PSScriptRoot\CreateRspsForFunctionPointerFixups.ps1 -isExternal
 
 $partitionNames = Get-ChildItem $partitionsDir | Select-Object -ExpandProperty Name
 
 $stopwatch =  [system.diagnostics.stopwatch]::StartNew()
 
-Write-Output "`nProcessing each partition...using $throttleCount parallel script(s)"
+Write-Output "`nProcessing each external partition...using $throttleCount parallel script(s)"
 
 $errObj = new-object psobject
 Add-Member -InputObject $errObj -MemberType NoteProperty -Name ErrorCode -Value 0
@@ -267,15 +282,15 @@ $partitionNames | ForEach-Object -Parallel {
 
 if ($errObj.ErrorCode -ne 0)
 {
-    Write-Error "Failed to scrape one or more partitions."
+    Write-Error "Failed to scrape one or more external partitions."
     exit $errObj.ErrorCode
 }
 
 $stopwatch.Stop()
 $totalTime = $stopwatch.Elapsed.ToString("c")
 
-Write-Output "Total time taken for all partitions: $totalTime"
+Write-Output "Total time taken for all external partitions: $totalTime"
 
-Write-Output "`n`e[32mGenerating source files succeeded`e[0m"
+Write-Output "`n`e[32mGenerating external source files succeeded`e[0m"
 
 exit 0

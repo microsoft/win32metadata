@@ -1,0 +1,7 @@
+--remap
+_GUID=Guid
+HWND=IntPtr
+HWND__*=HWND
+tagPOINT=POINT
+tagRECT=RECT
+tagVARIANT=VARIANT

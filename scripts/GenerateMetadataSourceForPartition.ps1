@@ -38,7 +38,7 @@ $libMappingOutputFileName = Get-LibMappingsFile $artifactsDir $version
 
 $stopwatch =  [system.diagnostics.stopwatch]::StartNew()
 
-$baseGenerateDir = "$rootDir\generation\scraper"
+$baseGenerateDir = "$scraperDir"
 $partitionGenerateDir = "$partitionsDir\$partitionName"
 if (!(Test-Path $partitionGenerateDir))
 {
@@ -76,17 +76,7 @@ $generatedSourceDir = "$emitterDir\generated"
 
 if ($isExternal)
 {
-    $packagePaths = Get-ChildItem -Directory -Path "$nugetDestPackagesDir\$partitionName.*"
-    Write-Host $packagePaths
-    $installedVersions = $packagePaths | ForEach-Object {
-        if ($_.Name -match "\.((?:[0-9]+\.)*[0-9]+)$") {
-            [version]$matches[1]
-        } else {
-            $null
-        }
-    }
-    [string]$latestVersion = $installedVersions | Sort-Object -Bottom 1
-    Write-Host "Selected $latestVersion from $installedVersions"
+    $latestVersion = Get-ExternalPackageVersion $artifactsDir $partitionName
     $externalPackagePath = "$nugetDestPackagesDir\$partitionName.$latestVersion".Replace('\', '/')
     $textToReplaceTable["<ExternalPackageDir>"] = $externalPackagePath
 }

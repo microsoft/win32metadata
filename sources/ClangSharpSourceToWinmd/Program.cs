@@ -98,7 +98,7 @@ namespace ClangSharpSourceToWinmd
 
             var remaps = ConvertValuePairsToDictionary(remappedNameValuePairs);
             var enumAdditions = ConvertValuePairsToEnumAdditions(enumAdditionsNameValuePairs);
-            var reducePointerLevels = new HashSet<string>(reducePointerLevelPairs);
+            var reducePointerLevels = reducePointerLevelPairs != null ? new HashSet<string>(reducePointerLevelPairs) : new HashSet<string>();
             var typeImports = ConvertValuePairsToDictionary(typeImportValuePairs);
             var requiredNamespaces = ConvertValuePairsToDictionary(requiredNamespaceValuePairs);
 
@@ -110,7 +110,7 @@ namespace ClangSharpSourceToWinmd
             Console.Write($"Compiling source files...");
             System.Diagnostics.Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
 
-            ClangSharpSourceCompilation clangSharpCompliation = 
+            ClangSharpSourceCompilation clangSharpCompliation =
                 ClangSharpSourceCompilation.Create(
                     sourceDirectory, interopFileName, baseMetadataFileName, remaps, enumAdditions, enumMakeFlags, typeImports, requiredNamespaces, reducePointerLevels);
 
@@ -147,12 +147,12 @@ namespace ClangSharpSourceToWinmd
             Console.WriteLine($"took {timeTaken}");
 
             Console.WriteLine($"Emitting {outputFileName}...");
-            var generator = 
+            var generator =
                 ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
-                    clangSharpCompliation, 
+                    clangSharpCompliation,
                     typeImports,
                     reducePointerLevels,
-                    assemblyVersion, 
+                    assemblyVersion,
                     outputFileName);
 
             foreach (var diag in generator.GetDiagnostics())

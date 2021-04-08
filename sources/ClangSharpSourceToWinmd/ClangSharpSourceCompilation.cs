@@ -50,7 +50,7 @@ namespace ClangSharpSourceToWinmd
 
             if (!String.IsNullOrEmpty(baseMetadataFileName))
             {
-                refs.Add(MetadataReference.CreateFromFile(baseMetadataFileName));
+                refs.Add(MetadataReference.CreateFromFile(baseMetadataFileName, new MetadataReferenceProperties(MetadataImageKind.Assembly, default, true)));
             }
 
             List<SyntaxTree> syntaxTrees = new List<SyntaxTree>();
