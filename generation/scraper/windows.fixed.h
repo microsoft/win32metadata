@@ -55,5 +55,9 @@
 #undef SetLocaleInfo
 #undef SetEnvironmentVariable
 #undef SetPort
+#undef StartService
+#undef ReportEvent
+#undef TranslateAccelerator
+#undef CreateDirectory
 
 #include <combaseapi.h>
