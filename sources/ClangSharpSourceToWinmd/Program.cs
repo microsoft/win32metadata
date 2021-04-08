@@ -15,6 +15,7 @@ namespace ClangSharpSourceToWinmd
             {
                 new Option<string>(new[] { "--sourceDir", "-s" }, "The location of the source files.") { IsRequired = true },
                 new Option<string>(new[] { "--interopFileName", "-i" }, "The path to Windows.Win32.Interop.dll") { IsRequired = true },
+                new Option<string>(new[] { "--baseMetadataFileName", "-b" }, "The path to Windows.Win32.winmd") { IsRequired = false },
                 new Option<string>(new[] { "--outputFileName", "-o" }, "The path to the .winmd to create") { IsRequired = true },
                 new Option<string>(new[] { "--version", "-v"}, description: "The version to use on the .winmd", getDefaultValue: () => "1.0.0.0"),
                 new Option(new string[] { "--remap", "-r" }, "A declaration name to be remapped to another name during binding generation.")
@@ -84,6 +85,7 @@ namespace ClangSharpSourceToWinmd
         {
             string sourceDirectory = context.ParseResult.ValueForOption<string>("sourceDir");
             string interopFileName = context.ParseResult.ValueForOption<string>("interopFileName");
+            string baseMetadataFileName = context.ParseResult.ValueForOption<string>("baseMetadataFileName");
             string outputFileName = context.ParseResult.ValueForOption<string>("outputFileName");
             string version = context.ParseResult.ValueForOption<string>("version");
             var remappedNameValuePairs = context.ParseResult.ValueForOption<string[]>("remap");
@@ -110,7 +112,7 @@ namespace ClangSharpSourceToWinmd
 
             ClangSharpSourceCompilation clangSharpCompliation = 
                 ClangSharpSourceCompilation.Create(
-                    sourceDirectory, interopFileName, remaps, enumAdditions, enumMakeFlags, typeImports, requiredNamespaces, reducePointerLevels);
+                    sourceDirectory, interopFileName, baseMetadataFileName, remaps, enumAdditions, enumMakeFlags, typeImports, requiredNamespaces, reducePointerLevels);
 
             Console.Write("looking for errors...");
             var diags = clangSharpCompliation.GetDiagnostics();

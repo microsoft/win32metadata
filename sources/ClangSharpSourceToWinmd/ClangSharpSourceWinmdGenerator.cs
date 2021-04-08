@@ -26,6 +26,7 @@ namespace ClangSharpSourceToWinmd
         public const string Win32StringType = "Windows.Win32.SystemServices.PSTR";
 
         private const string InteropNamespace = "Windows.Win32.Interop";
+        private const string ComNamespace = "Windows.Win32.Com";
         private const string ScannedSuffix = "__scanned__";
 
         private static readonly Regex TypeImportRegex = new Regex(@"<(([^,]+),\s*Version=(\d+\.\d+\.\d+\.\d+),\s*Culture=([^,]+),\s*PublicKeyToken=([^>]+))>(\S+)");
@@ -62,10 +63,10 @@ namespace ClangSharpSourceToWinmd
         private HashSet<string> structNameWithGuids = new HashSet<string>();
 
         private ClangSharpSourceWinmdGenerator(
-            CSharpCompilation compilation, 
+            CSharpCompilation compilation,
             Dictionary<string, string> typeImports,
-            HashSet<string> reducePointerLevels, 
-            Version assemblyVersion, 
+            HashSet<string> reducePointerLevels,
+            Version assemblyVersion,
             string assemblyName)
         {
             this.compilation = compilation;
@@ -162,18 +163,18 @@ namespace ClangSharpSourceToWinmd
         public bool WroteWinmd { get; private set; }
 
         public static ClangSharpSourceWinmdGenerator GenerateWindmdForCompilation(
-            ClangSharpSourceCompilation compilation, 
+            ClangSharpSourceCompilation compilation,
             Dictionary<string, string> typeImports,
             HashSet<string> reducePointerLevels,
-            Version version, 
+            Version version,
             string outputFileName)
         {
-            ClangSharpSourceWinmdGenerator generator = 
+            ClangSharpSourceWinmdGenerator generator =
                 new ClangSharpSourceWinmdGenerator(
-                    compilation.CSharpCompilation, 
-                    typeImports, 
-                    reducePointerLevels, 
-                    version, 
+                    compilation.CSharpCompilation,
+                    typeImports,
+                    reducePointerLevels,
+                    version,
                     Path.GetFileName(outputFileName));
 
             generator.PopulateMetadataBuilder();
@@ -401,7 +402,7 @@ namespace ClangSharpSourceToWinmd
             {
                 return true;
             }
-            
+
             bool hasVtbl = node.Members.Any(m => m.Kind() == SyntaxKind.FieldDeclaration && ((FieldDeclarationSyntax)m).Declaration.Variables.First().Identifier.Text == "lpVtbl");
             bool hasDelegate = node.Members.Any(m => m.Kind() == SyntaxKind.DelegateDeclaration);
             return hasVtbl && hasDelegate;
@@ -666,7 +667,7 @@ namespace ClangSharpSourceToWinmd
 
                 if (!fixedName.Contains("."))
                 {
-                    foreach (string @namespace in new string[] { InteropNamespace, "System" })
+                    foreach (string @namespace in new string[] { InteropNamespace, ComNamespace, "System" })
                     {
                         var fullNameToCheck = GetQualifiedName(@namespace, fixedName);
                         ret = this.compilation.GetTypeByMetadataName(fullNameToCheck);
@@ -1197,7 +1198,7 @@ namespace ClangSharpSourceToWinmd
                 {
                     return typeRef;
                 }
-                
+
                 throw new InvalidOperationException(
                     $"\"{fullName}\" could not be resolved. Make sure this symbol is defined in the metadata source files or in a referenced assembly.");
             }
@@ -1380,7 +1381,7 @@ namespace ClangSharpSourceToWinmd
                     parameters.Add(p);
                 }
 
-                var ctorFound = 
+                var ctorFound =
                     interfaceTypeAttr
                         .Constructors
                         .First(c => c.Parameters.Length == argTypes.Length && c.Parameters.Select(param => param.Type)
@@ -1531,49 +1532,60 @@ namespace ClangSharpSourceToWinmd
                     if (attr.Name.ToString() == "NativeInheritance")
                     {
                         var name = EncodeHelpers.RemoveQuotes(attr.ArgumentList.Arguments[0].ToString());
-                        if (this.namesToInterfaceSymbols.TryGetValue(name, out var symbols))
+                        List<ISymbol> symbols = null;
+
+                        if (!this.namesToInterfaceSymbols.TryGetValue(name, out symbols))
                         {
-                            // Could short circuit if there's only one, but this ensures the methods
-                            // truly match up
+                            // Try looking it up in the references
+                            var type = this.GetTypeFromShortName(name);
 
-                            // Get a map of all methods on this interface
-                            var model = this.GetModel(node);
-                            HashSet<string> methodNames = new HashSet<string>();
-                            foreach (var method in node.Members.Where(m => m is MethodDeclarationSyntax))
+                            if (type == null)
                             {
-                                var methodSymbol = model.GetDeclaredSymbol(method);
-                                var methodName = methodSymbol.Name;
-
-                                methodNames.Add(methodName);
+                                throw new InvalidOperationException($"Failed to find suitable inherited interface {name} for interface {node.Identifier.ValueText}");
                             }
 
-                            // See if all the methods of the candidate symbol are also
-                            // in the node's methods
-                            foreach (INamedTypeSymbol symbol in symbols)
-                            {
-                                bool allFound = true;
-                                foreach (var member in symbol.GetMembers().Where(m => m is IMethodSymbol && m.Name != ".ctor"))
-                                {
-                                    if (!methodNames.Contains(member.Name))
-                                    {
-                                        allFound = false;
-                                        break;
-                                    }
-                                }
+                            symbols = new List<ISymbol> { type };
 
-                                if (allFound)
+                            // Cache the lookup by the short name in the header (e.g. "IUnknown")
+                            this.namesToInterfaceSymbols.Add(name, symbols);
+                        }
+
+                        // Could short circuit if there's only one, but this ensures the methods
+                        // truly match up
+
+                        // Get a map of all methods on this interface
+                        var model = this.GetModel(node);
+                        HashSet<string> methodNames = new HashSet<string>();
+                        foreach (var method in node.Members.Where(m => m is MethodDeclarationSyntax))
+                        {
+                            var methodSymbol = model.GetDeclaredSymbol(method);
+                            var methodName = methodSymbol.Name;
+
+                            methodNames.Add(methodName);
+                        }
+
+                        // See if all the methods of the candidate symbol are also
+                        // in the node's methods
+                        foreach (INamedTypeSymbol symbol in symbols)
+                        {
+                            bool allFound = true;
+                            foreach (var member in symbol.GetMembers().Where(m => m is IMethodSymbol && m.Name != ".ctor"))
+                            {
+                                if (!methodNames.Contains(member.Name))
                                 {
-                                    this.structNodesToInheritedSymbols[node] = symbol;
-                                    return symbol;
+                                    allFound = false;
+                                    break;
                                 }
                             }
 
-                            throw new InvalidOperationException($"Failed to find suitable inhertited interface {name} for interace {node.Identifier.ValueText}");
+                            if (allFound)
+                            {
+                                this.structNodesToInheritedSymbols[node] = symbol;
+                                return symbol;
+                            }
                         }
-                        else
-                        {
-                            throw new InvalidOperationException($"Failed to find inhertited interface {name} for interace {node.Identifier.ValueText}");
-                        }
+
+                        throw new InvalidOperationException($"Failed to find suitable inherited interface {name} for interface {node.Identifier.ValueText}");
                     }
                 }
             }
@@ -1589,7 +1601,12 @@ namespace ClangSharpSourceToWinmd
                 return 0;
             }
 
-            return this.interfaceMethodCount[inheritedFrom];
+            if (this.interfaceMethodCount.TryGetValue(inheritedFrom, out var count))
+            {
+                return count;
+            }
+
+            return (inheritedFrom as INamedTypeSymbol).GetMembers().Where(m => m is IMethodSymbol && m.Name != ".ctor").Count();
         }
 
         private MethodDefinitionHandle WriteInterfaceMethods(StructDeclarationSyntax node)
@@ -1721,7 +1738,7 @@ namespace ClangSharpSourceToWinmd
                     fieldAttributes |= FieldAttributes.Static | FieldAttributes.Literal | FieldAttributes.HasDefault;
                 }
 
-                var fieldDefinitionHandle = 
+                var fieldDefinitionHandle =
                     metadataBuilder.AddFieldDefinition(
                         fieldAttributes,
                         metadataBuilder.GetOrAddString(name),
@@ -1871,7 +1888,7 @@ namespace ClangSharpSourceToWinmd
                 {
                     this.parent.CacheInterfaceType(node);
                 }
-                
+
                 if (HasGuidAttribute(node.AttributeLists))
                 {
                     this.parent.structNameWithGuids.Add(node.Identifier.ValueText);

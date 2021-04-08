@@ -28,6 +28,7 @@ namespace ClangSharpSourceToWinmd
         public static ClangSharpSourceCompilation Create(
             string sourceDirectory,
             string interopFileName,
+            string baseMetadataFileName,
             Dictionary<string, string> remaps,
             Dictionary<string, Dictionary<string, string>> enumAdditions,
             IEnumerable<string> enumsMakeFlags,
@@ -46,6 +47,11 @@ namespace ClangSharpSourceToWinmd
             List<MetadataReference> refs = new List<MetadataReference>();
             refs.Add(MetadataReference.CreateFromFile(interopFileName));
             refs.Add(MetadataReference.CreateFromFile(netstandardPath));
+
+            if (!String.IsNullOrEmpty(baseMetadataFileName))
+            {
+                refs.Add(MetadataReference.CreateFromFile(baseMetadataFileName));
+            }
 
             List<SyntaxTree> syntaxTrees = new List<SyntaxTree>();
             var sourceFiles = Directory.GetFiles(sourceDirectory, "*.cs", SearchOption.AllDirectories).Where(f => !f.EndsWith("modified.cs"));

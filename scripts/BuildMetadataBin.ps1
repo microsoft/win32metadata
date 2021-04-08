@@ -79,3 +79,34 @@ if ($LastExitCode -ne 0)
 }
 
 Write-Output "`n`e[32mGenerating .winmd succeeded`e[0m"
+
+# Generate external winmd binaries in parallel
+$throttleCount = [System.Environment]::ProcessorCount / 2
+if ($throttleCount -lt 2)
+{
+    $throttleCount = 2
+}
+
+Write-Output "`nProcessing each partition...using $throttleCount parallel script(s)"
+
+$generationDir = "$rootDir\external"
+$scraperDir = "$generationDir\scraper"
+$emitterDir = "$generationDir\emitter"
+$partitionsDir = "$scraperDir\Partitions"
+
+$partitionNames = Get-ChildItem $partitionsDir | Select-Object -ExpandProperty Name
+
+$partitionNames | ForEach-Object -Parallel {
+    Write-Output "`n"
+    Write-Output "Creating "$binDir\$_.winmd"..."
+    Write-Output "Calling: dotnet $using:clangSharpSourceToWinmdBin --sourceDir $using:emitterDir --interopFileName $using:metadataInteropBin --baseMetadataFileName $using:outputWinmdFileName --outputFileName "$using:binDir\$_.winmd" --version $using:assemblyVersion @$using:remapFileName @$using:requiredNamespacesForNames @$using:autoTypesFileName @$using:enumsRemapFileName @$using:functionPointerFixupsRsp @$using:enumsMakeFlagsRsp"
+
+    & dotnet $using:clangSharpSourceToWinmdBin --sourceDir $using:emitterDir --interopFileName $using:metadataInteropBin --baseMetadataFileName $using:outputWinmdFileName --outputFileName "$using:binDir\$_.winmd" --version $using:assemblyVersion @$using:remapFileName @$using:requiredNamespacesForNames @$using:autoTypesFileName @$using:enumsRemapFileName @$using:functionPointerFixupsRsp @$using:enumsMakeFlagsRsp
+    if ($LastExitCode -ne 0)
+    {
+        Write-Error "Failed to build .winmd."
+        exit $LastExitCode
+    }
+
+    Write-Output "`n`e[32mGenerating .winmd succeeded`e[0m"
+} -ThrottleLimit $throttleCount
