@@ -114,9 +114,9 @@ $partitionNames | ForEach-Object -Parallel {
 
     Write-Output "`n"
     Write-Output "Creating "$binDir\$_.winmd"..."
-    Write-Output "Calling: dotnet $using:clangSharpSourceToWinmdBin --sourceDir $using:emitterDir --interopFileName $using:metadataInteropBin --baseMetadataFileName $using:outputWinmdFileName --outputFileName "$using:binDir\$_.winmd" --version "$assemblyVersion" @$using:remapFileName @$using:requiredNamespacesForNames @$using:autoTypesFileName @$using:enumsRemapFileName @$using:functionPointerFixupsRsp @$using:enumsMakeFlagsRsp"
+    Write-Output "Calling: dotnet $using:clangSharpSourceToWinmdBin --sourceDir $using:emitterDir --interopFileName $using:metadataInteropBin --baseMetadataFileName $using:outputWinmdFileName --outputNamespace "$_" --outputFileName "$using:binDir\$_.winmd" --version "$assemblyVersion" @$using:remapFileName @$using:requiredNamespacesForNames @$using:autoTypesFileName @$using:enumsRemapFileName @$using:functionPointerFixupsRsp @$using:enumsMakeFlagsRsp"
 
-    & dotnet $using:clangSharpSourceToWinmdBin --sourceDir $using:emitterDir --interopFileName $using:metadataInteropBin --baseMetadataFileName $using:outputWinmdFileName --outputFileName "$using:binDir\$_.winmd" --version "$assemblyVersion" @$using:remapFileName @$using:requiredNamespacesForNames @$using:autoTypesFileName @$using:enumsRemapFileName @$using:functionPointerFixupsRsp @$using:enumsMakeFlagsRsp
+    & dotnet $using:clangSharpSourceToWinmdBin --sourceDir $using:emitterDir --interopFileName $using:metadataInteropBin --baseMetadataFileName $using:outputWinmdFileName --outputNamespace "$_" --outputFileName "$using:binDir\$_.winmd" --version "$assemblyVersion" @$using:remapFileName @$using:requiredNamespacesForNames @$using:autoTypesFileName @$using:enumsRemapFileName @$using:functionPointerFixupsRsp @$using:enumsMakeFlagsRsp
     if ($LastExitCode -ne 0)
     {
         Write-Error "Failed to build .winmd."

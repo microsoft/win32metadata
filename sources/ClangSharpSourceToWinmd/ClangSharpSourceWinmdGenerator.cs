@@ -62,6 +62,7 @@ namespace ClangSharpSourceToWinmd
         private Dictionary<StructDeclarationSyntax, ISymbol> structNodesToInheritedSymbols = new Dictionary<StructDeclarationSyntax, ISymbol>();
         private Dictionary<string, FieldDeclarationSyntax> nameToGuidConstFields = new Dictionary<string, FieldDeclarationSyntax>();
         private HashSet<string> structNameWithGuids = new HashSet<string>();
+        private string outputNamespace = null;
         private HashSet<string> usingDirectives = new HashSet<string>();
 
         private ClangSharpSourceWinmdGenerator(
@@ -69,10 +70,12 @@ namespace ClangSharpSourceToWinmd
             Dictionary<string, string> typeImports,
             HashSet<string> reducePointerLevels,
             Version assemblyVersion,
+            string assemblyNamespace,
             string assemblyName)
         {
             this.compilation = compilation;
             this.reducePointerLevels = reducePointerLevels;
+            this.outputNamespace = assemblyNamespace;
 
             foreach (var pair in typeImports)
             {
@@ -183,6 +186,7 @@ namespace ClangSharpSourceToWinmd
             Dictionary<string, string> typeImports,
             HashSet<string> reducePointerLevels,
             Version version,
+            string outputNamespace,
             string outputFileName)
         {
             ClangSharpSourceWinmdGenerator generator =
@@ -191,6 +195,7 @@ namespace ClangSharpSourceToWinmd
                     typeImports,
                     reducePointerLevels,
                     version,
+                    outputNamespace,
                     Path.GetFileName(outputFileName));
 
             generator.PopulateMetadataBuilder();
@@ -695,6 +700,13 @@ namespace ClangSharpSourceToWinmd
                         {
                             break;
                         }
+                    }
+
+                    if (ret == null && !String.IsNullOrEmpty(this.outputNamespace))
+                    {
+                        // Try the target namespace if it was specified
+                        var fullNameToCheck = GetQualifiedName(this.outputNamespace, fixedName);
+                        ret = this.compilation.GetTypeByMetadataName(fullNameToCheck);
                     }
 
                     if (ret == null)
