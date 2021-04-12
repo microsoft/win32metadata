@@ -29,6 +29,7 @@ namespace ClangSharpSourceToWinmd
             string sourceDirectory,
             string interopFileName,
             string baseMetadataFileName,
+            string outputNamespace,
             Dictionary<string, string> remaps,
             Dictionary<string, Dictionary<string, string>> enumAdditions,
             IEnumerable<string> enumsMakeFlags,
@@ -55,6 +56,15 @@ namespace ClangSharpSourceToWinmd
 
             List<SyntaxTree> syntaxTrees = new List<SyntaxTree>();
             var sourceFiles = Directory.GetFiles(sourceDirectory, "*.cs", SearchOption.AllDirectories).Where(f => !f.EndsWith("modified.cs"));
+            if (!String.IsNullOrEmpty(outputNamespace))
+            {
+                var matchingFilenames = new[] {
+                    $"\\{outputNamespace}.cs",
+                    "\\autotypes.cs",
+                };
+
+                sourceFiles = sourceFiles.Where(f => matchingFilenames.Any(m => f.EndsWith(m, StringComparison.OrdinalIgnoreCase)));
+            }
             System.Threading.Tasks.ParallelOptions opt = new System.Threading.Tasks.ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount * 2 };
             System.Threading.Tasks.Parallel.ForEach(sourceFiles, opt, (sourceFile) =>
             {

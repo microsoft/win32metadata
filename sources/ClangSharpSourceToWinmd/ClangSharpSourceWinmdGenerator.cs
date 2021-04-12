@@ -692,17 +692,7 @@ namespace ClangSharpSourceToWinmd
 
                 if (!fixedName.Contains("."))
                 {
-                    foreach (string @namespace in new string[] { InteropNamespace, "System" })
-                    {
-                        var fullNameToCheck = GetQualifiedName(@namespace, fixedName);
-                        ret = this.compilation.GetTypeByMetadataName(fullNameToCheck);
-                        if (ret != null)
-                        {
-                            break;
-                        }
-                    }
-
-                    if (ret == null && !String.IsNullOrEmpty(this.outputNamespace))
+                    if (!String.IsNullOrEmpty(this.outputNamespace))
                     {
                         // Try the target namespace if it was specified
                         var fullNameToCheck = GetQualifiedName(this.outputNamespace, fixedName);
