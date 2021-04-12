@@ -49,14 +49,14 @@ namespace ClangSharpSourceToWinmd
             refs.Add(MetadataReference.CreateFromFile(interopFileName));
             refs.Add(MetadataReference.CreateFromFile(netstandardPath));
 
-            if (!String.IsNullOrEmpty(baseMetadataFileName))
+            if (!string.IsNullOrEmpty(baseMetadataFileName))
             {
                 refs.Add(MetadataReference.CreateFromFile(baseMetadataFileName));
             }
 
             List<SyntaxTree> syntaxTrees = new List<SyntaxTree>();
             var sourceFiles = Directory.GetFiles(sourceDirectory, "*.cs", SearchOption.AllDirectories).Where(f => !f.EndsWith("modified.cs"));
-            if (!String.IsNullOrEmpty(outputNamespace))
+            if (!string.IsNullOrEmpty(outputNamespace))
             {
                 var matchingFilenames = new[] {
                     $"\\{outputNamespace}.cs",

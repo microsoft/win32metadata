@@ -164,7 +164,6 @@ namespace ClangSharpSourceToWinmd
                     typeImports,
                     reducePointerLevels,
                     assemblyVersion,
-                    outputNamespace,
                     outputFileName);
 
             foreach (var diag in generator.GetDiagnostics())
