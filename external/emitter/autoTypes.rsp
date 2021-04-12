@@ -1,0 +1,2 @@
+--autoTypes
+Windows.Win32.Automation,DUMMY_VARIANT,IntPtr,
