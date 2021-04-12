@@ -13,4 +13,4 @@
 --namespace
 Microsoft.Web.WebView2
 --libraryPath
-WebView2LoaderStatic
+WebView2Loader.dll
