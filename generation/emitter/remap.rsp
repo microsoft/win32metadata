@@ -428,3 +428,5 @@ MsiCreateTransformSummaryInfoA::iErrorConditions=MSITRANSFORM_ERROR
 MsiCreateTransformSummaryInfoW::iErrorConditions=MSITRANSFORM_ERROR
 MsiEndTransaction::dwTransactionState=MSITRANSACTIONSTATE
 ADsOpenObject::dwReserved=ADS_AUTHENTICATION_ENUM
+GetObjectA::h=HGDIOBJ
+GetObjectW::h=HGDIOBJ
