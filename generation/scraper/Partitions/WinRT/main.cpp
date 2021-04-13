@@ -46,11 +46,11 @@
 #include <roregistrationapi.h>
 #include <shcore.h>
 #include <memorybuffer.h>
+#include <activation.h>
 
 /*
 #include <winnt.h>
 #include <winstring.h>
-//#include <activation.h>
 //#include <activationregistration.h>
 //#include <asyncinfo.h>
 //#include <combaseapi.h>
