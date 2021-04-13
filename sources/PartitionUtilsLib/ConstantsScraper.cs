@@ -12,7 +12,7 @@ namespace PartitionUtilsLib
 {
     public static class ConstantsScraper
     {
-        public static void ScrapeConstants(
+        public static ScraperResults ScrapeConstants(
             string repoRoot,
             string[] enumJsonFiles,
             string constantsHeaderText,
@@ -24,7 +24,7 @@ namespace PartitionUtilsLib
             Dictionary<string, string> withAttributes)
         {
             using ConstantsScraperImpl imp = new ConstantsScraperImpl();
-            imp.ScrapeConstants(repoRoot, enumJsonFiles, constantsHeaderText, exclusionNamesToPartitions, requiredNamespaces, remaps, withTypes, renames, withAttributes);
+            return imp.ScrapeConstants(repoRoot, enumJsonFiles, constantsHeaderText, exclusionNamesToPartitions, requiredNamespaces, remaps, withTypes, renames, withAttributes);
         }
 
         private class ConstantsScraperImpl : IDisposable
@@ -45,6 +45,10 @@ namespace PartitionUtilsLib
                 new Regex(
                     @"^\s*DEFINE_ENUM_FLAG_OPERATORS\(\s*(\S+)\s*\)\s*\;\s*$");
 
+            private static readonly Regex NamePartsRegex = new Regex(@"[A-Z]+[a-z]*");
+
+            private static readonly Regex ContainsLowerCase = new Regex(@"[a-z]+");
+
             private Dictionary<string, EnumWriter> namespacesToEnumWriters = new Dictionary<string, EnumWriter>();
             private Dictionary<string, ConstantWriter> namespacesToConstantWriters = new Dictionary<string, ConstantWriter>();
             private WildcardDictionary requiredNamespaces;
@@ -61,11 +65,14 @@ namespace PartitionUtilsLib
             private string constantsHeaderText;
             private string enumFlagsFixupFileName;
 
+            private List<string> output = new List<string>();
+            private List<string> suggestedEnumRenames = new List<string>();
+
             public ConstantsScraperImpl()
             {
             }
 
-            public void ScrapeConstants(
+            public ScraperResults ScrapeConstants(
                 string repoRoot,
                 string[] enumJsonFiles,
                 string constantsHeaderText,
@@ -86,11 +93,13 @@ namespace PartitionUtilsLib
 
                 this.InitEnumFlagsFixupFile();
 
-                this.LoadEnumObjectsFromJsonFiles(enumJsonFiles, renames);
+                this.LoadEnumObjectsFromJsonFiles(enumJsonFiles);
 
                 this.ScrapeConstantsFromTraversedFiles();
 
                 this.WriteEnumsAndRemaps(remaps);
+
+                return new ScraperResults(this.output);
             }
 
             public void Dispose()
@@ -118,76 +127,6 @@ namespace PartitionUtilsLib
                 ret["( (DWORD) (-1) )"] = "0xFFFFFFFF";
 
                 return ret;
-            }
-
-            private static void MergeObjIntoOther(EnumObject src, EnumObject dest, Dictionary<string, List<EnumObject>> memberMap)
-            {
-                // Don't mess with an object that was declared to be finished in the json
-                if (src.finished)
-                {
-                    return;
-                }
-
-                foreach (var m in src.members)
-                {
-                    if (StringComparer.OrdinalIgnoreCase.Equals(m.name, "None"))
-                    {
-                        continue;
-                    }
-
-                    dest.AddIfNotSet(m.name, m.value);
-                    if (!memberMap.TryGetValue(m.name, out var oList))
-                    {
-                        oList = new List<EnumObject>();
-                        oList.Add(dest);
-                    }
-                    else
-                    {
-                        if (oList.Contains(src))
-                        {
-                            oList.Remove(src);
-                        }
-
-                        if (!oList.Contains(dest))
-                        {
-                            oList.Add(dest);
-                        }
-                    }
-                }
-
-                foreach (var u in src.uses)
-                {
-                    dest.AddUse(u);
-                }
-            }
-
-            private static Dictionary<string, List<EnumObject>> LoadMemberNameToEnumObjMap(List<EnumObject> enumObjects)
-            {
-                Dictionary<string, List<EnumObject>> enumMemberNameToEnumObj = new Dictionary<string, List<EnumObject>>();
-                foreach (var obj in enumObjects)
-                {
-                    foreach (var member in obj.members)
-                    {
-                        if (StringComparer.OrdinalIgnoreCase.Equals(member.name, "None"))
-                        {
-                            continue;
-                        }
-
-                        if (!enumMemberNameToEnumObj.TryGetValue(member.name, out var objList))
-                        {
-                            objList = new List<EnumObject>();
-                            enumMemberNameToEnumObj[member.name] = objList;
-                            objList.Add(obj);
-                        }
-                        else
-                        {
-                            var mergingTo = objList[0];
-                            MergeObjIntoOther(obj, mergingTo, enumMemberNameToEnumObj);
-                        }
-                    }
-                }
-
-                return enumMemberNameToEnumObj;
             }
 
             private static List<EnumObject> LoadEnumsFromSourceFiles(string sourcesDir)
@@ -229,17 +168,38 @@ namespace PartitionUtilsLib
                 File.AppendAllText(this.enumFlagsFixupFileName, "--enum-Make-Flags\r\n");
             }
 
-            private List<EnumObject> LoadEnumsFromJsonFiles(string[] enumJsonFiles, Dictionary<string, string> renames)
+            private void LoadMemberNameToEnumObjMap(List<EnumObject> enumObjects)
+            {
+                this.enumMemberNameToEnumObj = new Dictionary<string, List<EnumObject>>();
+                foreach (var obj in enumObjects)
+                {
+                    foreach (var member in obj.members)
+                    {
+                        if (StringComparer.OrdinalIgnoreCase.Equals(member.name, "None"))
+                        {
+                            continue;
+                        }
+
+                        if (!this.enumMemberNameToEnumObj.TryGetValue(member.name, out var objList))
+                        {
+                            objList = new List<EnumObject>();
+                            this.enumMemberNameToEnumObj[member.name] = objList;
+                        }
+
+                        objList.Add(obj);
+                    }
+                }
+            }
+
+            private List<EnumObject> LoadEnumsFromJsonFiles(string[] enumJsonFiles)
             {
                 List<EnumObject> enumObjects = new List<EnumObject>();
 
                 if (enumJsonFiles != null)
                 {
-                    var namesToTypes = GetFullNamesToTypes($@"{this.repoRoot}\generation\emitter");
-
                     foreach (var enumJsonFile in enumJsonFiles)
                     {
-                        enumObjects.AddRange(EnumObjectUtils.NormalizeEnumObjects(namesToTypes, EnumObject.LoadFromFile(enumJsonFile), renames));
+                        enumObjects.AddRange(EnumObject.LoadFromFile(enumJsonFile));
                     }
                 }
 
@@ -359,34 +319,20 @@ namespace PartitionUtilsLib
                 return manualEnumMemberNames;
             }
 
-            private HashSet<string> GetManualEnumNames()
-            {
-                string manualSourceFiles = Path.Combine(repoRoot, $@"generation\emitter\manual");
-                List<EnumObject> enumObjectsFromManualSources = LoadEnumsFromSourceFiles(manualSourceFiles);
-                HashSet<string> manualEnumNames = new HashSet<string>();
-                foreach (var obj in enumObjectsFromManualSources)
-                {
-                    manualEnumNames.Add(obj.name);
-                }
-
-                return manualEnumNames;
-            }
-
-            private void LoadEnumObjectsFromJsonFiles(string[] enumJsonFiles, Dictionary<string, string> renames)
+            private void LoadEnumObjectsFromJsonFiles(string[] enumJsonFiles)
             {
                 // Load the enums scraped from the docs
-                this.enumObjectsFromJsons = LoadEnumsFromJsonFiles(enumJsonFiles, renames);
+                this.enumObjectsFromJsons = LoadEnumsFromJsonFiles(enumJsonFiles);
 
                 // Load a map from member names to enum obj
-                // This will merge up and objects that share the same members
-                this.enumMemberNameToEnumObj = LoadMemberNameToEnumObjMap(enumObjectsFromJsons);
+                LoadMemberNameToEnumObjMap(enumObjectsFromJsons);
             }
 
             private bool ShouldExclude(string constName, string currentPartitionName)
             {
                 // If it's in the exclusion list see if we should ignore it based on the
                 // current partition
-                if (exclusionNamesToPartitions.TryGetValue(constName, out var partitions))
+                if (this.exclusionNamesToPartitions.TryGetValue(constName, out var partitions))
                 {
                     if (partitions == null)
                     {
@@ -611,7 +557,7 @@ namespace PartitionUtilsLib
                             bool updatedEnum = false;
 
                             // If we see the member is part of an enum, update the member value
-                            if (enumMemberNameToEnumObj.TryGetValue(name, out var enumObjList))
+                            if (this.enumMemberNameToEnumObj.TryGetValue(name, out var enumObjList))
                             {
                                 foreach (var enumObj in enumObjList)
                                 {
@@ -632,23 +578,13 @@ namespace PartitionUtilsLib
                                             var foundObjEnum = autoEnumObjsForCurrentHeader[i - 1];
                                             foundObjEnum.AddIfNotSet(name, valueText);
                                             updatedEnum = true;
-                                            if (!enumMemberNameToEnumObj.TryGetValue(name, out var list))
+                                            if (!this.enumMemberNameToEnumObj.TryGetValue(name, out var list))
                                             {
                                                 list = new List<EnumObject>();
-                                                enumMemberNameToEnumObj.Add(name, list);
-                                                list.Add(foundObjEnum);
+                                                this.enumMemberNameToEnumObj.Add(name, list);
                                             }
-                                            else
-                                            {
-                                                var needMerging = list.Where(o => o != foundObjEnum).ToArray();
-                                                foreach (var src in needMerging)
-                                                {
-                                                    MergeObjIntoOther(src, foundObjEnum, this.enumMemberNameToEnumObj);
-                                                }
 
-                                                list.Clear();
-                                                list.Add(foundObjEnum);
-                                            }
+                                            list.Add(foundObjEnum);
 
                                             break;
                                         }
@@ -681,6 +617,26 @@ namespace PartitionUtilsLib
                 }
             }
 
+            private void AddEnumWarningAndSuggestedMapping(string message, EnumObject enumObject)
+            {
+                this.output.Add(message);
+                StringBuilder suggestedName = new StringBuilder();
+                foreach (var match in NamePartsRegex.Matches(enumObject.name))
+                {
+                    if (suggestedName.Length != 0)
+                    {
+                        suggestedName.Append('_');
+                    }
+
+                    suggestedName.Append(match.ToString().ToUpperInvariant());
+                }
+
+                if (suggestedName.Length != 0)
+                {
+                    this.suggestedEnumRenames.Add($"{enumObject.name}={suggestedName}");
+                }
+            }
+
             private void WriteEnumsAndRemaps(
                 Dictionary<string, string> remaps)
             {
@@ -691,17 +647,9 @@ namespace PartitionUtilsLib
                 using StreamWriter enumRemapsWriter = new StreamWriter(enumRemapsFileName);
                 enumRemapsWriter.WriteLine("--remap");
 
-                HashSet<string> manualEnumNames = GetManualEnumNames();
-
                 // For each enum object...
-                foreach (var obj in enumObjectsFromJsons)
+                foreach (var obj in this.enumObjectsFromJsons)
                 {
-                    // Skip if no members
-                    if (obj.members.Count == 0)
-                    {
-                        continue;
-                    }
-
                     string foundNamespace = obj.@namespace;
                     List<string> remapsToAdd = new List<string>();
                     int remapCount = 0;
@@ -754,190 +702,79 @@ namespace PartitionUtilsLib
                         foundNamespace = "Windows.Win32.SystemServices";
                     }
 
-                    bool existsAsManualEnum = manualEnumNames.TryGetValue(obj.name, out var objectForRemapName);
                     bool addedEnum = false;
-                    var objectForRemap = obj;
 
-                    // This assumes that the manual version is more reliable.
-                    if (!existsAsManualEnum)
+                    // If the enum doesn't have any remaps and isn't
+                    // an auto-populate, go to next object
+                    bool shouldWriteEnum = (remapCount != 0 || obj.autoPopulate != null);
+
+                    if (!shouldWriteEnum)
                     {
-                        // If the enum doesn't have any remaps and isn't
-                        // an auto-poopulate, go to next object
-                        bool shouldWriteEnum = (remapCount != 0 || obj.autoPopulate != null);
+                        continue;
+                    }
 
-                        if (!shouldWriteEnum)
+                    // Lookup the enum writer in the cache or add it if we can't find it
+                    if (!namespacesToEnumWriters.TryGetValue(foundNamespace, out var enumWriter))
+                    {
+                        string fixedNamespaceName = foundNamespace.Replace("Windows.Win32.", string.Empty);
+                        string enumFile = Path.Combine(repoRoot, $@"generation\emitter\generated\{fixedNamespaceName}.enums.cs");
+                        if (File.Exists(enumFile))
                         {
-                            continue;
+                            File.Delete(enumFile);
                         }
 
-                        // Lookup the enum writer in the cache or add it if we can't find it
-                        if (!namespacesToEnumWriters.TryGetValue(foundNamespace, out var enumWriter))
-                        {
-                            string fixedNamespaceName = foundNamespace.Replace("Windows.Win32.", string.Empty);
-                            string enumFile = Path.Combine(repoRoot, $@"generation\emitter\generated\{fixedNamespaceName}.enums.cs");
-                            if (File.Exists(enumFile))
-                            {
-                                File.Delete(enumFile);
-                            }
+                        enumWriter = new EnumWriter(enumFile, foundNamespace, this.constantsHeaderText);
+                        namespacesToEnumWriters.Add(foundNamespace, enumWriter);
+                    }
 
-                            enumWriter = new EnumWriter(enumFile, foundNamespace, this.constantsHeaderText);
-                            namespacesToEnumWriters.Add(foundNamespace, enumWriter);
+                    if (obj.name != null)
+                    {
+                        if (this.writtenConstants.ContainsKey(obj.name))
+                        {
+                            throw new InvalidOperationException($"Tried to add enum {obj.name} but a constant with the same name already exists.");
                         }
 
-                        // Don't remap to another object if it's not an auto-populate
-                        // and it's not marked as already finished
-                        if (obj.autoPopulate == null && !obj.finished)
+                        addedEnum = enumWriter.AddEnum(obj);
+                        if (addedEnum)
                         {
-                            foreach (var member in obj.members)
+                            if (ContainsLowerCase.IsMatch(obj.name))
                             {
-                                if (enumMemberNameToEnumObj.TryGetValue(member.name, out var list))
-                                {
-                                    objectForRemap = list.Where(e => e.autoPopulate != null).FirstOrDefault();
-                                    if (objectForRemap == null)
-                                    {
-                                        objectForRemap = list.Where(e => e.members.Any(m => m.value != null)).FirstOrDefault();
-                                        if (objectForRemap == null)
-                                        {
-                                            objectForRemap = obj;
-                                        }
-                                    }
-
-                                    break;
-                                }
+                                this.AddEnumWarningAndSuggestedMapping(
+                                    $"Warning: {obj.name} enum contains lower case. Consider giving it an intentional name in the enums json file.",
+                                    obj);
                             }
-                        }
-
-                        if (obj == objectForRemap)
-                        {
-                            if (this.writtenConstants.ContainsKey(obj.name))
-                            {
-                                throw new InvalidOperationException($"Tried to add enum {obj.name} but a constant with the same name already exists.");
-                            }
-
-                            addedEnum = enumWriter.AddEnum(obj);
                         }
                     }
 
-                    if (addedEnum || existsAsManualEnum || obj != objectForRemap)
+                    if (addedEnum || obj.addUsesTo != null)
                     {
+                        var enumName = obj.name ?? obj.addUsesTo;
                         foreach (var remap in remapsToAdd)
                         {
-                            enumRemapsWriter.WriteLine($"{remap}={objectForRemap.name}");
+                            enumRemapsWriter.WriteLine($"{remap}={enumName}");
 
-                            remaps.TryAdd(remap, objectForRemap.name);
+                            remaps.TryAdd(remap, enumName);
                         }
                     }
                 }
-            }
 
-            private Dictionary<string, string> GetFullNamesToTypes(string sourcesDir)
-            {
-                string sourceDirectory = Path.Combine(this.repoRoot, $@"generation\emitter");
-                var sourceFiles = Directory.GetFiles(sourceDirectory, "*.cs", SearchOption.AllDirectories).Where(f => !f.EndsWith("modified.cs"));
-
-                Dictionary<string, string> ret = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-
-                foreach (var fileName in sourceFiles)
+                if (this.suggestedEnumRenames.Count != 0)
                 {
-                    var tree = CSharpSyntaxTree.ParseText(File.ReadAllText(fileName), null, fileName);
-                    SyntaxWalkerForFullNamesAndTypes syntaxWalkerForFullNamesAndTypes = new SyntaxWalkerForFullNamesAndTypes(ret);
-                    syntaxWalkerForFullNamesAndTypes.ProcessTree(tree);
-                }
-
-                return ret;
-            }
-
-            private class SyntaxWalkerForFullNamesAndTypes : CSharpSyntaxWalker
-            {
-                private static readonly Regex ValidTypeRegex = new Regex(@"^(uint|int|ulong|long|short|ushort)\**$");
-
-                private Dictionary<string, string> map;
-
-                public SyntaxWalkerForFullNamesAndTypes(Dictionary<string, string> map)
-                {
-                    this.map = map;
-                }
-
-                public void ProcessTree(SyntaxTree tree)
-                {
-                    this.Visit(tree.GetRoot());
-                }
-
-                public override void VisitParameter(ParameterSyntax node)
-                {
-                    base.VisitParameter(node);
-
-                    string fullName = SyntaxUtils.GetFullName(node);
-                    string type = node.Type.ToString();
-
-                    this.CacheInfo(node.AttributeLists, fullName, type);
-                }
-
-                private void CacheInfo(SyntaxList<AttributeListSyntax> attributeLists, string fullName, string type)
-                {
-                    string nativeType = SyntaxUtils.GetNativeTypeNameFromAttributesLists(attributeLists);
-
-                    // Don't ever map enums onto strings.
-                    // We may need to make this more intelligent if we find we're stomping on types
-                    // we don't want to change
-                    if (nativeType != null && nativeType.Contains("STR"))
-                    {
-                        return;
-                    }
-
-                    this.CacheInfo(fullName, type);
-
-                    if (ValidTypeRegex.IsMatch(type))
-                    {
-                        this.map[fullName] = type;
-                    }
-                }
-
-                private void CacheInfo(string fullName, string type)
-                {
-                    if (ValidTypeRegex.IsMatch(type))
-                    {
-                        this.map[fullName] = type;
-                    }
-                }
-
-                public override void VisitDelegateDeclaration(DelegateDeclarationSyntax node)
-                {
-                    base.VisitDelegateDeclaration(node);
-
-                    string fullName = SyntaxUtils.GetFullName(node) + "::return";
-                    string type = node.ReturnType.ToString();
-
-                    this.CacheInfo(fullName, type);
-                }
-
-                public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
-                {
-                    base.VisitMethodDeclaration(node);
-
-                    string fullName = SyntaxUtils.GetFullName(node) + "::return";
-                    string type = node.ReturnType.ToString();
-
-                    this.CacheInfo(fullName, type);
-                }
-
-                public override void VisitFieldDeclaration(FieldDeclarationSyntax node)
-                {
-                    if (!(node.Parent is StructDeclarationSyntax))
-                    {
-                        return;
-                    }
-
-                    base.VisitFieldDeclaration(node);
-
-                    var variable = node.Declaration.Variables.First();
-                    string type = node.Declaration.Type.ToString();
-
-                    string fullName = SyntaxUtils.GetFullName(variable);
-
-                    this.CacheInfo(node.AttributeLists, fullName, type);
+                    this.output.Add("Suggested enum names:");
+                    this.output.AddRange(this.suggestedEnumRenames);
+                    this.suggestedEnumRenames.Clear();
                 }
             }
         }
+    }
+
+    public class ScraperResults
+    {
+        public ScraperResults(IEnumerable<string> results)
+        {
+            this.Output = results;
+        }
+
+        public IEnumerable<string> Output { get; }
     }
 }

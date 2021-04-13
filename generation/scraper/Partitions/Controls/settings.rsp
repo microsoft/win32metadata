@@ -21,5 +21,6 @@ UiaRect
 <IncludeRoot>/um/dpa_dsa.h
 <IncludeRoot>/um/Uxtheme.h
 <IncludeRoot>/um/CommCtrl.h
+<IncludeRoot>/um/vssym32.h
 --namespace
 Windows.Win32.Controls

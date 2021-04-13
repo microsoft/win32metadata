@@ -5,8 +5,11 @@ using System.CommandLine.Invocation;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using CsvHelper;
 using CsvHelper.Configuration;
+using Newtonsoft.Json;
+using PartitionUtilsLib;
 
 namespace PartitionUtils
 {
@@ -17,44 +20,72 @@ namespace PartitionUtils
             var showErrorsCommand = new Command("showErrors", "Show partitioning errors.")
             {
                 new Option<string>(new[] { "--repoRoot" }, "The location of the repo.") { IsRequired = true },
-                new Option<string>(new[] { "--artifactsDir" }, "The location of the output artifacts."),
             };
 
-            showErrorsCommand.Handler = CommandHandler.Create<string, string>(ShowErrors);
+            showErrorsCommand.Handler = CommandHandler.Create<string>(ShowErrors);
 
             var showNonTraversedCommand = new Command("showNonTraversed", "Show headers that were visited but not part of any partition traverse list.")
             {
                 new Option<string>(new[] { "--repoRoot" }, "The location of the repo.") { IsRequired = true },
-                new Option<string>(new[] { "--artifactsDir" }, "The location of the output artifacts."),
-                //new Option<string>(new[] { "--version" }, getDefaultValue: () => "10.0.19041.5", "The WinSDK NuGet package version to use."),
             };
 
-            showNonTraversedCommand.Handler = CommandHandler.Create<string, string>(ShowNonTraversedHeaders);
+            showNonTraversedCommand.Handler = CommandHandler.Create<string>(ShowNonTraversedHeaders);
 
             var addTraverseHeadersWithCsvCommand = new Command("addTraverseHeadersWithCsv", "Use CSV to add headers to partition traverse lists.")
             {
                 new Option<string>(new[] { "--repoRoot" }, "The location of the repo.") { IsRequired = true },
-                new Option<string>(new[] { "--artifactsDir" }, "The location of the output artifacts."),
                 new Option<string>(new[] { "--csv" }, "The path to the input CSV.") { IsRequired = true },
                 new Option<string>(new[] { "--outputCsv" }, "The path to the output CSV."),
             };
 
-            addTraverseHeadersWithCsvCommand.Handler = CommandHandler.Create<string, string, string, string>(AddTraverseHeadersWithCsv);
+            addTraverseHeadersWithCsvCommand.Handler = CommandHandler.Create<string, string, string>(AddTraverseHeadersWithCsv);
 
             var ensurePartitionsUseNamespaceCommand = new Command("ensurePartitionsUseNamespace", "Update any partition settings that don't use a namespace.")
             {
                 new Option<string>(new[] { "--repoRoot" }, "The location of the repo.") { IsRequired = true },
-                new Option<string>(new[] { "--artifactsDir" }, "The location of the output artifacts."),
             };
 
-            ensurePartitionsUseNamespaceCommand.Handler = CommandHandler.Create<string, string>(EnsurePartitionsUseNamespace);
+            ensurePartitionsUseNamespaceCommand.Handler = CommandHandler.Create<string>(EnsurePartitionsUseNamespace);
+
+            var normalizeEnumJsonCommand = new Command("normalizeEnumJson", "Normalize json enum files.")
+            {
+                new Option<string>(new[] { "--repoRoot" }, "The location of the repo.") { IsRequired = true },
+                new Option(new[] { "--jsonInputFile" }, "The location of the json input file.") 
+                {
+                    Argument = new Argument("<file>")
+                    {
+                        ArgumentType = typeof(string),
+                        Arity = ArgumentArity.OneOrMore,
+                    }
+                },
+                new Option<string>(new[] { "--jsonOutputFile" }, "The location of the json output file.") { IsRequired = true },
+                new Option(new string[] { "--rename" }, "Rename an enum.")
+                {
+                    Argument = new Argument("<name>=<value>")
+                    {
+                        ArgumentType = typeof(string),
+                        Arity = ArgumentArity.OneOrMore,
+                    }
+                },
+                new Option(new string[] { "--exclude" }, "Exclude an enum.")
+                {
+                    Argument = new Argument("<name>")
+                    {
+                        ArgumentType = typeof(string),
+                        Arity = ArgumentArity.OneOrMore,
+                    }
+                },
+            };
+
+            normalizeEnumJsonCommand.Handler = CommandHandler.Create<string, string[], string, string[], string[]>(NormalizeEnumJson);
 
             var rootCommand = new RootCommand("Win32metadata partitioning utils")
             {
                 showErrorsCommand,
                 showNonTraversedCommand,
                 addTraverseHeadersWithCsvCommand,
-                ensurePartitionsUseNamespaceCommand
+                ensurePartitionsUseNamespaceCommand,
+                normalizeEnumJsonCommand
             };
 
             return rootCommand.Invoke(args);
@@ -91,7 +122,7 @@ namespace PartitionUtils
                     yield break;
                 }
 
-                foreach (var header in partInfo.TraverseHeaders)
+                foreach (var header in partInfo.GetTraverseHeaders(true))
                 {
                     traverseHeaders.Add(header);
                 }
@@ -124,7 +155,49 @@ namespace PartitionUtils
             }
         }
 
-        public static int AddTraverseHeadersWithCsv(string repoRoot, string artifactsDir, string csv, string outputCsv)
+        public static int NormalizeEnumJson(string repoRoot, string[] jsonInputFile, string jsonOutputFile, string[] rename, string[] exclude)
+        {
+            var renames = CommandLineUtils.ConvertValuePairsToDictionary(rename);
+
+            HashSet<string> excludes = new HashSet<string>(exclude);
+            List<EnumObject> enumObjects = new List<EnumObject>();
+
+            foreach (var inputFile in jsonInputFile)
+            {
+                enumObjects.AddRange(EnumObject.LoadFromFile(inputFile));
+            }
+
+            var newObjects = EnumObjectUtils.NormalizeEnumObjects(repoRoot, enumObjects, renames, excludes).ToArray();
+
+            JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings();
+            jsonSerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+            jsonSerializerSettings.DefaultValueHandling = DefaultValueHandling.Ignore;
+
+            var jsonText = JsonConvert.SerializeObject(newObjects, Formatting.Indented, jsonSerializerSettings);
+            File.WriteAllText(jsonOutputFile, jsonText);
+
+            Regex containsLowerCase = new Regex(@"[a-z]+");
+
+            foreach (var obj in newObjects)
+            {
+                if (obj.name != null && containsLowerCase.IsMatch(obj.name))
+                {
+                    Console.WriteLine($"Warning: {obj.name} enum contains lower case. Add a better name or exclude it.");
+                    Console.Write("  Members: ");
+                    foreach (var member in obj.members.Take(3))
+                    {
+                        Console.Write(member.name);
+                        Console.Write(' ');
+                    }
+
+                    Console.WriteLine();
+                }
+            }
+
+            return 0;
+        }
+
+        public static int AddTraverseHeadersWithCsv(string repoRoot, string csv, string outputCsv)
         {
             Dictionary<string, HashSet<string>> headersToTechRoots = new Dictionary<string, HashSet<string>>(StringComparer.OrdinalIgnoreCase);
             CsvConfiguration config = new CsvConfiguration(CultureInfo.InvariantCulture);
@@ -163,7 +236,7 @@ namespace PartitionUtils
                 }
             }
 
-            RepoInfo repoInfo = new RepoInfo(repoRoot, artifactsDir);
+            RepoInfo repoInfo = new RepoInfo(repoRoot);
             using StreamWriter streamWriter = outputCsv != null ? new StreamWriter(outputCsv) : null;
             streamWriter?.WriteLine("Name,Header,Include,Lib,TechRoot");
 
@@ -216,9 +289,9 @@ namespace PartitionUtils
             return 0;
         }
 
-        public static void EnsurePartitionsUseNamespace(string repoRoot, string artifactsDir)
+        public static void EnsurePartitionsUseNamespace(string repoRoot)
         {
-            RepoInfo repoInfo = new RepoInfo(repoRoot, artifactsDir);
+            RepoInfo repoInfo = new RepoInfo(repoRoot);
 
             Console.WriteLine("Ensuring all partition settings files specify a namespace.");
             foreach (var partInfo in repoInfo.GetPartitionInfos())
@@ -230,9 +303,9 @@ namespace PartitionUtils
             repoInfo.UpdateGeneratedSourceHeader();
         }
 
-        public static void ShowNonTraversedHeaders(string repoRoot, string artifactsDir)
+        public static void ShowNonTraversedHeaders(string repoRoot)
         {
-            RepoInfo repoInfo = new RepoInfo(repoRoot, artifactsDir);
+            RepoInfo repoInfo = new RepoInfo(repoRoot);
 
             Console.WriteLine("Visited headers that are not in any partition's traverse list:");
             foreach (var header in GetVisitedHeadersNotInTraverseList(repoInfo))
@@ -241,21 +314,16 @@ namespace PartitionUtils
             }
         }
 
-        public static void ShowErrors(string repoRoot, string artifactsDir)
+        public static void ShowErrors(string repoRoot)
         {
             repoRoot = Path.GetFullPath(repoRoot);
 
-            if (artifactsDir == null)
-            {
-                artifactsDir = Path.Combine(repoRoot, "artifacts");
-            }
-
-            RepoInfo repoInfo = new RepoInfo(repoRoot, artifactsDir);
+            RepoInfo repoInfo = new RepoInfo(repoRoot);
             Dictionary<string, List<PartitionInfo>> traverseHeadersToParts = new Dictionary<string, List<PartitionInfo>>(StringComparer.OrdinalIgnoreCase);
 
             foreach (var partInfo in repoInfo.GetPartitionInfos())
             {
-                foreach (var header in partInfo.TraverseHeaders)
+                foreach (var header in partInfo.GetTraverseHeaders(true))
                 {
                     if (!traverseHeadersToParts.TryGetValue(header, out var partitionInfos))
                     {

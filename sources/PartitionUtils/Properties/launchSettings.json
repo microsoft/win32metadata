@@ -3,6 +3,10 @@
     "PartitionUtils": {
       "commandName": "Project",
       "commandLineArgs": "ensurePartitionsUseNamespace --repoRoot $(ProjectDir)..\\.."
+    },
+    "normalizeEnumJson": {
+      "commandName": "Project",
+      "commandLineArgs": "normalizeEnumJson --jsonInputFile --repoRoot $(ProjectDir)..\\.. --jsonInputFile $(ProjectDir)..\\..\\generation\\scraper\\manualEnums.json --jsonInputFile $(ProjectDir)..\\..\\generation\\scraper\\enums.json --jsonOutputFile $(ProjectDir)..\\..\\generation\\scraper\\enumsNormalized.json @$(ProjectDir)..\\..\\generation\\scraper\\EnumNormalize.rsp"
     }
   }
 }
