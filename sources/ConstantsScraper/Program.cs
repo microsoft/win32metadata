@@ -11,14 +11,15 @@ namespace ConstantsScraperApp
         {
             var rootCommand = new RootCommand("Scrape traversed headers for constants.")
             {
-                new Option<string>(new[] { "--repoRoot" }, "The location of the repo.") { IsRequired = true },
+                new Option<string>(new[] { "--generationDir" }, "The location of the generation/external directory.") { IsRequired = true },
+                new Option<string>(new[] { "--outputNamespace" }, "The namespace for an external .winmd.") { IsRequired = false },
                 new Option<string>(new[] { "--headerTextFile" }, "The text file to use as the intro text for written constants source files."),
                 new Option(new string[] { "--exclude" }, "A constant to exclude.")
                 {
                     Argument = new Argument("<value>")
                     {
                         ArgumentType = typeof(string),
-                        Arity = ArgumentArity.OneOrMore,
+                        Arity = ArgumentArity.ZeroOrMore,
                     }
                 },
                 new Option(new string[] { "--requiredNamespaceForName", "-n" }, "The required namespace for a named item.")
@@ -34,7 +35,7 @@ namespace ConstantsScraperApp
                     Argument = new Argument("<name>=<value>")
                     {
                         ArgumentType = typeof(string),
-                        Arity = ArgumentArity.OneOrMore,
+                        Arity = ArgumentArity.ZeroOrMore,
                     }
                 },
                 new Option(new string[] { "--with-attribute" }, "Add an attribute to a constant.")
@@ -42,7 +43,7 @@ namespace ConstantsScraperApp
                     Argument = new Argument("<name>=<value>")
                     {
                         ArgumentType = typeof(string),
-                        Arity = ArgumentArity.OneOrMore,
+                        Arity = ArgumentArity.ZeroOrMore,
                     }
                 },
                 new Option(new string[] { "--remap", "-r" }, "A field or parameter that should get remapped to a certain type.")
@@ -50,7 +51,7 @@ namespace ConstantsScraperApp
                     Argument = new Argument("<name>=<value>")
                     {
                         ArgumentType = typeof(string),
-                        Arity = ArgumentArity.OneOrMore,
+                        Arity = ArgumentArity.ZeroOrMore,
                     }
                 },
                 new Option(new string[] { "--with-type", "-t" }, "For a type for a constant.")
@@ -58,7 +59,7 @@ namespace ConstantsScraperApp
                     Argument = new Argument("<name>=<value>")
                     {
                         ArgumentType = typeof(string),
-                        Arity = ArgumentArity.OneOrMore,
+                        Arity = ArgumentArity.ZeroOrMore,
                     }
                 },
                 new Option(new string[] { "--enumsJson" }, "A json file with enum information.")
@@ -78,7 +79,8 @@ namespace ConstantsScraperApp
 
         public static int Run(InvocationContext context)
         {
-            string repoRoot = context.ParseResult.ValueForOption<string>("repoRoot");
+            string generationDir = context.ParseResult.ValueForOption<string>("generationDir");
+            string outputNamespace = context.ParseResult.ValueForOption<string>("outputNamespace");
             var excludeItems = context.ParseResult.ValueForOption<string[]>("exclude");
             var enumJsonFiles = context.ParseResult.ValueForOption<string[]>("enumsJson");
             var headerTextFile = context.ParseResult.ValueForOption<string>("headerTextFile");
@@ -99,7 +101,7 @@ namespace ConstantsScraperApp
 
             try
             {
-                PartitionUtilsLib.ConstantsScraper.ScrapeConstants(repoRoot, enumJsonFiles, headerText, exclusionNamesToPartitions, requiredNamespaces, remaps, withTypes, renames, withAttributes);
+                PartitionUtilsLib.ConstantsScraper.ScrapeConstants(generationDir, outputNamespace, enumJsonFiles, headerText, exclusionNamesToPartitions, requiredNamespaces, remaps, withTypes, renames, withAttributes);
             }
             catch (System.Exception e)
             {

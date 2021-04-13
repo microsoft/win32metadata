@@ -63,9 +63,9 @@ if (!$externalOnly)
 {
     Write-Output "`n"
     Write-Output "Scraping constants and enums..."
-    Write-Output "Calling: dotnet $constantsScraperPathBin --repoRoot $rootDir --enumsJson $manualEnumsJson --enumsJson $enumsJson --headerTextFile $constantsHeaderTxt @$constantsScraperRsp @$requiredNamespacesForNames @$remapFileName"
+    Write-Output "Calling: dotnet $constantsScraperPathBin --generationDir $generationDir --enumsJson $manualEnumsJson --enumsJson $enumsJson --headerTextFile $constantsHeaderTxt @$constantsScraperRsp @$requiredNamespacesForNames @$remapFileName"
 
-    & dotnet $constantsScraperPathBin --repoRoot $rootDir --enumsJson $manualEnumsJson --enumsJson $enumsJson --headerTextFile $constantsHeaderTxt @$constantsScraperRsp @$requiredNamespacesForNames @$remapFileName
+    & dotnet $constantsScraperPathBin --generationDir $generationDir --enumsJson $manualEnumsJson --enumsJson $enumsJson --headerTextFile $constantsHeaderTxt @$constantsScraperRsp @$requiredNamespacesForNames @$remapFileName
     if ($LastExitCode -ne 0)
     {
         Write-Error "Failed to scrape constants."
@@ -101,8 +101,14 @@ $emitterDir = "$generationDir\emitter"
 $partitionsDir = "$scraperDir\Partitions"
 
 $remapFileName = "$emitterDir\remap.rsp"
+$enumsRemapFileName = "$emitterDir\generated\enumsRemap.rsp"
 $autoTypesFileName = "$emitterDir\autoTypes.rsp"
 $functionPointerFixupsRsp = "$emitterDir\functionPointerFixups.generated.rsp"
+$enumsMakeFlagsRsp = "$emitterDir\enumsMakeFlags.generated.rsp"
+
+$constantsScraperRsp = "$scraperDir\ConstantsScraper.rsp"
+$manualEnumsJson = "$scraperDir\manualEnums.json"
+$enumsJson = "$scraperDir\enums.json"
 
 $partitionNames = Get-ChildItem -Directory $partitionsDir | Select-Object -ExpandProperty Name
 
@@ -111,6 +117,17 @@ $partitionNames | ForEach-Object -Parallel {
     . "$using:PSScriptRoot\CommonUtils.ps1"
 
     $assemblyVersion = Get-ExternalPackageVersion $defaultArtifactsDir $_
+
+    Write-Output "`n"
+    Write-Output "Scraping constants and enums..."
+    Write-Output "Calling: dotnet $using:constantsScraperPathBin --generationDir $using:generationDir --enumsJson $using:manualEnumsJson --enumsJson $using:enumsJson --headerTextFile $using:constantsHeaderTxt @$using:constantsScraperRsp @$using:requiredNamespacesForNames @$using:remapFileName"
+
+    & dotnet $using:constantsScraperPathBin --generationDir $using:generationDir --enumsJson $using:manualEnumsJson --enumsJson $using:enumsJson --headerTextFile $using:constantsHeaderTxt @$using:constantsScraperRsp @$using:requiredNamespacesForNames @$using:remapFileName
+    if ($LastExitCode -ne 0)
+    {
+        Write-Error "Failed to scrape constants."
+        exit $LastExitCode
+    }
 
     Write-Output "`n"
     Write-Output "Creating "$binDir\$_.winmd"..."

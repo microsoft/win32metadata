@@ -24,7 +24,7 @@ namespace ClangSharpSourceToWinmd
                     Argument = new Argument("<name>=<value>")
                     {
                         ArgumentType = typeof(string),
-                        Arity = ArgumentArity.OneOrMore,
+                        Arity = ArgumentArity.ZeroOrMore,
                     }
                 },
                 new Option(new string[] { "--enum-Addition" }, "Add a member to an enum.")
@@ -40,7 +40,7 @@ namespace ClangSharpSourceToWinmd
                     Argument = new Argument("<name>")
                     {
                         ArgumentType = typeof(string),
-                        Arity = ArgumentArity.OneOrMore,
+                        Arity = ArgumentArity.ZeroOrMore,
                     }
                 },
                 new Option(new string[] { "--reducePointerLevel", "-p" }, "Reduce pointer level by one.")

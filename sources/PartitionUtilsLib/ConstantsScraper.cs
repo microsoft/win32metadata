@@ -13,7 +13,8 @@ namespace PartitionUtilsLib
     public static class ConstantsScraper
     {
         public static void ScrapeConstants(
-            string repoRoot,
+            string generationDir,
+            string outputNamespace,
             string[] enumJsonFiles,
             string constantsHeaderText,
             Dictionary<string, string> exclusionNamesToPartitions,
@@ -24,7 +25,7 @@ namespace PartitionUtilsLib
             Dictionary<string, string> withAttributes)
         {
             using ConstantsScraperImpl imp = new ConstantsScraperImpl();
-            imp.ScrapeConstants(repoRoot, enumJsonFiles, constantsHeaderText, exclusionNamesToPartitions, requiredNamespaces, remaps, withTypes, renames, withAttributes);
+            imp.ScrapeConstants(generationDir, outputNamespace, enumJsonFiles, constantsHeaderText, exclusionNamesToPartitions, requiredNamespaces, remaps, withTypes, renames, withAttributes);
         }
 
         private class ConstantsScraperImpl : IDisposable
@@ -49,7 +50,8 @@ namespace PartitionUtilsLib
             private Dictionary<string, ConstantWriter> namespacesToConstantWriters = new Dictionary<string, ConstantWriter>();
             private WildcardDictionary requiredNamespaces;
             private Dictionary<string, string> writtenConstants = new Dictionary<string, string>();
-            private string repoRoot;
+            private string generationDir;
+            private string outputNamespace;
 
             private List<EnumObject> enumObjectsFromJsons;
             private Dictionary<string, string> withTypes;
@@ -66,7 +68,8 @@ namespace PartitionUtilsLib
             }
 
             public void ScrapeConstants(
-                string repoRoot,
+                string generationDir,
+                string outputNamespace,
                 string[] enumJsonFiles,
                 string constantsHeaderText,
                 Dictionary<string, string> exclusionNamesToPartitions,
@@ -82,7 +85,8 @@ namespace PartitionUtilsLib
                 this.constantsHeaderText = constantsHeaderText;
                 this.withAttributes = withAttributes;
 
-                this.repoRoot = Path.GetFullPath(repoRoot);
+                this.generationDir = Path.GetFullPath(generationDir);
+                this.outputNamespace = outputNamespace;
 
                 this.InitEnumFlagsFixupFile();
 
@@ -193,9 +197,13 @@ namespace PartitionUtilsLib
             private static List<EnumObject> LoadEnumsFromSourceFiles(string sourcesDir)
             {
                 List<EnumObject> enumObjects = new List<EnumObject>();
-                foreach (var file in Directory.GetFiles(sourcesDir, "*.cs"))
+
+                if (Directory.Exists(sourcesDir))
                 {
-                    enumObjects.AddRange(EnumObject.LoadFromFile(file));
+                    foreach (var file in Directory.GetFiles(sourcesDir, "*.cs"))
+                    {
+                        enumObjects.AddRange(EnumObject.LoadFromFile(file));
+                    }
                 }
 
                 return enumObjects;
@@ -220,7 +228,7 @@ namespace PartitionUtilsLib
 
             private void InitEnumFlagsFixupFile()
             {
-                this.enumFlagsFixupFileName = Path.Combine(repoRoot, $@"generation\emitter\enumsMakeFlags.generated.rsp");
+                this.enumFlagsFixupFileName = Path.Combine(generationDir, $@"emitter\enumsMakeFlags.generated.rsp");
                 if (File.Exists(this.enumFlagsFixupFileName))
                 {
                     File.Delete(this.enumFlagsFixupFileName);
@@ -235,7 +243,7 @@ namespace PartitionUtilsLib
 
                 if (enumJsonFiles != null)
                 {
-                    var namesToTypes = GetFullNamesToTypes($@"{this.repoRoot}\generation\emitter");
+                    var namesToTypes = GetFullNamesToTypes($@"{this.generationDir}\emitter");
 
                     foreach (var enumJsonFile in enumJsonFiles)
                     {
@@ -330,7 +338,7 @@ namespace PartitionUtilsLib
 
                 if (!this.namespacesToConstantWriters.TryGetValue(foundNamespace, out var constantWriter))
                 {
-                    string partConstantsFile = Path.Combine(repoRoot, $@"generation\emitter\generated\{foundNamespace}.constants.cs");
+                    string partConstantsFile = Path.Combine(generationDir, $@"emitter\generated\{foundNamespace}.constants.cs");
                     if (File.Exists(partConstantsFile))
                     {
                         File.Delete(partConstantsFile);
@@ -345,7 +353,7 @@ namespace PartitionUtilsLib
 
             private HashSet<string> GetManualEnumMemberNames()
             {
-                string manualSourceFiles = Path.Combine(repoRoot, $@"generation\emitter\manual");
+                string manualSourceFiles = Path.Combine(generationDir, $@"emitter\manual");
                 List<EnumObject> enumObjectsFromManualSources = LoadEnumsFromSourceFiles(manualSourceFiles);
                 HashSet<string> manualEnumMemberNames = new HashSet<string>();
                 foreach (var obj in enumObjectsFromManualSources)
@@ -361,7 +369,7 @@ namespace PartitionUtilsLib
 
             private HashSet<string> GetManualEnumNames()
             {
-                string manualSourceFiles = Path.Combine(repoRoot, $@"generation\emitter\manual");
+                string manualSourceFiles = Path.Combine(generationDir, $@"emitter\manual");
                 List<EnumObject> enumObjectsFromManualSources = LoadEnumsFromSourceFiles(manualSourceFiles);
                 HashSet<string> manualEnumNames = new HashSet<string>();
                 foreach (var obj in enumObjectsFromManualSources)
@@ -410,7 +418,7 @@ namespace PartitionUtilsLib
             {
                 var autoReplacements = GetAutoValueReplacements();
 
-                RepoInfo repoInfo = new RepoInfo(repoRoot);
+                RepoInfo repoInfo = new RepoInfo(generationDir);
 
                 HashSet<string> manualEnumMemberNames = GetManualEnumMemberNames();
 
@@ -686,7 +694,7 @@ namespace PartitionUtilsLib
             {
                 // Output the enums and the rsp entries that map parameters and fields to use
                 // enum names
-                var enumRemapsFileName = Path.Combine(repoRoot, $@"generation\emitter\generated\enumsRemap.rsp");
+                var enumRemapsFileName = Path.Combine(generationDir, $@"emitter\generated\enumsRemap.rsp");
 
                 using StreamWriter enumRemapsWriter = new StreamWriter(enumRemapsFileName);
                 enumRemapsWriter.WriteLine("--remap");
@@ -774,7 +782,7 @@ namespace PartitionUtilsLib
                         if (!namespacesToEnumWriters.TryGetValue(foundNamespace, out var enumWriter))
                         {
                             string fixedNamespaceName = foundNamespace.Replace("Windows.Win32.", string.Empty);
-                            string enumFile = Path.Combine(repoRoot, $@"generation\emitter\generated\{fixedNamespaceName}.enums.cs");
+                            string enumFile = Path.Combine(generationDir, $@"emitter\generated\{fixedNamespaceName}.enums.cs");
                             if (File.Exists(enumFile))
                             {
                                 File.Delete(enumFile);
@@ -832,8 +840,17 @@ namespace PartitionUtilsLib
 
             private Dictionary<string, string> GetFullNamesToTypes(string sourcesDir)
             {
-                string sourceDirectory = Path.Combine(this.repoRoot, $@"generation\emitter");
+                string sourceDirectory = Path.Combine(this.generationDir, $@"emitter");
                 var sourceFiles = Directory.GetFiles(sourceDirectory, "*.cs", SearchOption.AllDirectories).Where(f => !f.EndsWith("modified.cs"));
+                if (!string.IsNullOrEmpty(outputNamespace))
+                {
+                    var matchingFilenames = new[] {
+                        $@"\{this.outputNamespace}.",
+                        @"\autotypes.cs",
+                    };
+
+                    sourceFiles = sourceFiles.Where(f => matchingFilenames.Any(m => f.Contains(m, StringComparison.OrdinalIgnoreCase)));
+                }
 
                 Dictionary<string, string> ret = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 

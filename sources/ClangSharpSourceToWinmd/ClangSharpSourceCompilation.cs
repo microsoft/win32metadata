@@ -59,11 +59,11 @@ namespace ClangSharpSourceToWinmd
             if (!string.IsNullOrEmpty(outputNamespace))
             {
                 var matchingFilenames = new[] {
-                    $"\\{outputNamespace}.cs",
-                    "\\autotypes.cs",
+                    $@"\{outputNamespace}.",
+                    @"\autotypes.cs",
                 };
 
-                sourceFiles = sourceFiles.Where(f => matchingFilenames.Any(m => f.EndsWith(m, StringComparison.OrdinalIgnoreCase)));
+                sourceFiles = sourceFiles.Where(f => matchingFilenames.Any(m => f.Contains(m, StringComparison.OrdinalIgnoreCase)));
             }
             System.Threading.Tasks.ParallelOptions opt = new System.Threading.Tasks.ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount * 2 };
             System.Threading.Tasks.Parallel.ForEach(sourceFiles, opt, (sourceFile) =>

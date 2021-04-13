@@ -5,16 +5,16 @@ namespace PartitionUtilsLib
 {
     public class RepoInfo
     {
-        private string repoRoot;
+        private string generationDir;
 
-        public RepoInfo(string repoRoot)
+        public RepoInfo(string generationDir)
         {
-            this.repoRoot = Path.GetFullPath(repoRoot);
+            this.generationDir = Path.GetFullPath(generationDir);
         }
 
-        public string ParitionDir => Path.Combine(this.repoRoot, "generation\\scraper\\partitions");
+        public string ParitionDir => Path.Combine(this.generationDir, "scraper\\Partitions");
 
-        public string ScraperOutputDir => Path.Combine(this.repoRoot, "generation\\scraper\\obj");
+        public string ScraperOutputDir => Path.Combine(this.generationDir, "scraper\\obj");
 
         public IEnumerable<PartitionInfo> GetPartitionInfos()
         {
@@ -27,7 +27,7 @@ namespace PartitionUtilsLib
 
         public void UpdateGeneratedSourceHeader()
         {
-            string headerPath = Path.Combine(this.repoRoot, "generation\\header.txt");
+            string headerPath = Path.Combine(this.generationDir, "scraper\\header.txt");
             using (StreamWriter streamWriter = new StreamWriter(headerPath))
             {
                 streamWriter.WriteLine("// Copyright © Microsoft");
