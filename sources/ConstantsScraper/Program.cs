@@ -2,6 +2,7 @@
 using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.IO;
+using PartitionUtilsLib;
 
 namespace ConstantsScraperApp
 {
@@ -99,14 +100,23 @@ namespace ConstantsScraperApp
 
             var headerText = !string.IsNullOrEmpty(headerTextFile) ? File.ReadAllText(headerTextFile) : string.Empty;
 
+            ScraperResults results;
             try
             {
-                PartitionUtilsLib.ConstantsScraper.ScrapeConstants(generationDir, outputNamespace, enumJsonFiles, headerText, exclusionNamesToPartitions, requiredNamespaces, remaps, withTypes, renames, withAttributes);
+                results =
+                    ConstantsScraper.ScrapeConstants(
+                        generationDir, outputNamespace, enumJsonFiles, headerText, exclusionNamesToPartitions, requiredNamespaces, remaps, withTypes, renames, withAttributes);
             }
             catch (System.Exception e)
             {
                 context.Console.Out.Write($"Failed to scrape constants:\r\n{e.Message}\r\n");
                 return -1;
+            }
+
+            foreach (var item in results.Output)
+            {
+                context.Console.Out.Write(item);
+                context.Console.Out.Write("\r\n");
             }
 
             return 0;

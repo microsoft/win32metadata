@@ -22,9 +22,9 @@ namespace PartitionUtilsLib
 
         public bool AddEnum(EnumObject enumObject)
         {
-            if (!enumObject.members.Any(m => m.value != null))
+            if (enumObject.name == null || !enumObject.members.Any(m => m.value != null))
             {
-                // Skip if we have no values to write
+                // Skip if we have no name or values to write
                 return false;
             }
 

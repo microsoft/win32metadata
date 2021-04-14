@@ -30,6 +30,7 @@ namespace PartitionUtilsLib
         public string type { get; set; }
         public bool finished { get; set; }
         public string name { get; set; }
+        public string addUsesTo { get; set; }
         public bool flags { get; set; }
         public AutoPopulate autoPopulate { get; set; }
         public List<Member> members { get; } = new List<Member>();
@@ -143,6 +144,7 @@ namespace PartitionUtilsLib
                     enumObject.@namespace = this.currentNamespace;
                     enumObject.name = node.Identifier.ValueText;
                     enumObject.flags = node.AttributeLists.Any(list => list.Attributes.Any(attr => attr.Name.ToString().StartsWith("Flags")));
+                    enumObject.FromCSharp = true;
 
                     foreach (EnumMemberDeclarationSyntax member in node.Members)
                     {
@@ -203,6 +205,9 @@ namespace PartitionUtilsLib
 
         [Newtonsoft.Json.JsonIgnore]
         public bool CanOverrideValue => this.autoPopulate == null;
+
+        [Newtonsoft.Json.JsonIgnore]
+        public bool FromCSharp { get; set; }
 
         public bool UpdateMember(string name, string valueText)
         {

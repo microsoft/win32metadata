@@ -49,9 +49,9 @@ Windows.Win32.Gdi,HFONT,DECLARE_HANDLE,DeleteObject,HGDIOBJ
 Windows.Win32.Gdi,HMETAFILE,DECLARE_HANDLE,DeleteMetaFile
 Windows.Win32.Gdi,HENHMETAFILE,DECLARE_HANDLE,DeleteEnhMetaFile
 Windows.Win32.Gdi,HMONITOR,DECLARE_HANDLE
+Windows.Win32.Gdi,HPALETTE,DECLARE_HANDLE,DeleteObject,HGDIOBJ
 Windows.Win32.WindowsAndMessaging,HHOOK,DECLARE_HANDLE,UnhookWindowsHookEx
 Windows.Win32.MenusAndResources,HICON,DECLARE_HANDLE,DestroyIcon
-Windows.Win32.Gdi,HPALETTE,DECLARE_HANDLE,DeleteObject
 Windows.Win32.MenusAndResources,HMENU,DECLARE_HANDLE,DestroyMenu
 Windows.Win32.MenusAndResources,HCURSOR,DECLARE_HANDLE,DestroyCursor,HICON
 Windows.Win32.SystemServices,TimerQueueHandle,IntPtr,DeleteTimerQueueEx
