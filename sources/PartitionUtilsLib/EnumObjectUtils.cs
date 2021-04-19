@@ -20,10 +20,10 @@ namespace PartitionUtilsLib
         }
 
         public static IEnumerable<EnumObject> NormalizeEnumObjects(
-            string repoRoot, IEnumerable<EnumObject> objects, Dictionary<string, string> renames, HashSet<string> excludes, Dictionary<string, EnumObject> newToOldEnumObjMap)
+            string generationDir, IEnumerable<EnumObject> objects, Dictionary<string, string> renames, HashSet<string> excludes, Dictionary<string, EnumObject> newToOldEnumObjMap)
         {
             EnumObjectNormalizer normalizer = new EnumObjectNormalizer();
-            return normalizer.NormalizeEnumObjects(repoRoot, objects, renames, excludes, newToOldEnumObjMap);
+            return normalizer.NormalizeEnumObjects(generationDir, objects, renames, excludes, newToOldEnumObjMap);
         }
 
         private class EnumObjectNormalizer
@@ -112,10 +112,10 @@ namespace PartitionUtilsLib
             }
 
             public IEnumerable<EnumObject> NormalizeEnumObjects(
-                string repoRoot, IEnumerable<EnumObject> objects, Dictionary<string, string> renames, HashSet<string> excludes, Dictionary<string, EnumObject> newToOldEnumObjMap)
+                string generationDir, IEnumerable<EnumObject> objects, Dictionary<string, string> renames, HashSet<string> excludes, Dictionary<string, EnumObject> newToOldEnumObjMap)
             {
-                string generatedSourcesDir = Path.Combine(repoRoot, "generation\\emitter\\generated");
-                string manualSourcesDir = Path.Combine(repoRoot, "generation\\emitter\\manual");
+                string generatedSourcesDir = Path.Combine(generationDir, "emitter\\generated");
+                string manualSourcesDir = Path.Combine(generationDir, "emitter\\manual");
 
                 this.LoadEnumsFromSourcesFiles(generatedSourcesDir);
                 this.LoadEnumsFromSourcesFiles(manualSourcesDir);
@@ -356,7 +356,7 @@ namespace PartitionUtilsLib
 
         private static Dictionary<string, string> GetFullNamesToTypes(string generatedSourcesDir)
         {
-            //string sourceDirectory = Path.Combine(repoRoot, $@"generation\emitter");
+            //string sourceDirectory = Path.Combine(generationDir, $@"emitter");
             var sourceFiles = Directory.GetFiles(generatedSourcesDir, "*.cs", SearchOption.AllDirectories).Where(f => !f.EndsWith("modified.cs"));
 
             Dictionary<string, string> ret = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);

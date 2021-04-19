@@ -371,5 +371,5 @@ MigrationBackup/
 /external/scraper/autoTypes.generated.rsp
 /external/emitter/functionPointerFixups.generated.rsp
 /external/scraper/functionPointerFixups.generated.rsp
-/external/emitter/enumsMakeFlags.generated.rsp
+/external/emitter/enumsMakeFlags.*.rsp
 /winsdk

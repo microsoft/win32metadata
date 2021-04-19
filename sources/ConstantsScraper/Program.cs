@@ -13,6 +13,7 @@ namespace ConstantsScraperApp
             var rootCommand = new RootCommand("Scrape traversed headers for constants.")
             {
                 new Option<string>(new[] { "--generationDir" }, "The location of the generation/external directory.") { IsRequired = true },
+                new Option<string>(new[] { "--externalPackageDir" }, "The location of the external NuGet package installation.") { IsRequired = false },
                 new Option<string>(new[] { "--outputNamespace" }, "The namespace for an external .winmd.") { IsRequired = false },
                 new Option<string>(new[] { "--headerTextFile" }, "The text file to use as the intro text for written constants source files."),
                 new Option(new string[] { "--exclude" }, "A constant to exclude.")
@@ -81,6 +82,7 @@ namespace ConstantsScraperApp
         public static int Run(InvocationContext context)
         {
             string generationDir = context.ParseResult.ValueForOption<string>("generationDir");
+            string externalPackageDir = context.ParseResult.ValueForOption<string>("externalPackageDir");
             string outputNamespace = context.ParseResult.ValueForOption<string>("outputNamespace");
             var excludeItems = context.ParseResult.ValueForOption<string[]>("exclude");
             var enumJsonFiles = context.ParseResult.ValueForOption<string[]>("enumsJson");
@@ -105,7 +107,17 @@ namespace ConstantsScraperApp
             {
                 results =
                     ConstantsScraper.ScrapeConstants(
-                        generationDir, outputNamespace, enumJsonFiles, headerText, exclusionNamesToPartitions, requiredNamespaces, remaps, withTypes, renames, withAttributes);
+                        generationDir,
+                        externalPackageDir,
+                        outputNamespace,
+                        enumJsonFiles,
+                        headerText,
+                        exclusionNamesToPartitions,
+                        requiredNamespaces,
+                        remaps,
+                        withTypes,
+                        renames,
+                        withAttributes);
             }
             catch (System.Exception e)
             {

@@ -14,6 +14,7 @@ namespace PartitionUtilsLib
     {
         public static ScraperResults ScrapeConstants(
             string generationDir,
+            string externalPackageDir,
             string outputNamespace,
             string[] enumJsonFiles,
             string constantsHeaderText,
@@ -25,7 +26,18 @@ namespace PartitionUtilsLib
             Dictionary<string, string> withAttributes)
         {
             using ConstantsScraperImpl imp = new ConstantsScraperImpl();
-            return imp.ScrapeConstants(generationDir, outputNamespace, enumJsonFiles, constantsHeaderText, exclusionNamesToPartitions, requiredNamespaces, remaps, withTypes, renames, withAttributes);
+            return imp.ScrapeConstants(
+                generationDir,
+                externalPackageDir,
+                outputNamespace,
+                enumJsonFiles,
+                constantsHeaderText,
+                exclusionNamesToPartitions,
+                requiredNamespaces,
+                remaps,
+                withTypes,
+                renames,
+                withAttributes);
         }
 
         private class ConstantsScraperImpl : IDisposable
@@ -55,6 +67,7 @@ namespace PartitionUtilsLib
             private WildcardDictionary requiredNamespaces;
             private Dictionary<string, string> writtenConstants = new Dictionary<string, string>();
             private string generationDir;
+            private string externalPackageDir;
             private string outputNamespace;
 
             private List<EnumObject> enumObjectsFromJsons;
@@ -76,6 +89,7 @@ namespace PartitionUtilsLib
 
             public ScraperResults ScrapeConstants(
                 string generationDir,
+                string externalPackageDir,
                 string outputNamespace,
                 string[] enumJsonFiles,
                 string constantsHeaderText,
@@ -93,6 +107,7 @@ namespace PartitionUtilsLib
                 this.withAttributes = withAttributes;
 
                 this.generationDir = Path.GetFullPath(generationDir);
+                this.externalPackageDir = Path.GetFullPath(externalPackageDir);
                 this.outputNamespace = outputNamespace;
 
                 this.InitEnumFlagsFixupFile();
@@ -174,7 +189,8 @@ namespace PartitionUtilsLib
 
             private void InitEnumFlagsFixupFile()
             {
-                this.enumFlagsFixupFileName = Path.Combine(generationDir, $@"emitter\enumsMakeFlags.generated.rsp");
+                string generatedToken = this.outputNamespace ?? "generated";
+                this.enumFlagsFixupFileName = Path.Combine(generationDir, $@"emitter\enumsMakeFlags.{generatedToken}.rsp");
                 if (File.Exists(this.enumFlagsFixupFileName))
                 {
                     File.Delete(this.enumFlagsFixupFileName);
@@ -381,7 +397,7 @@ namespace PartitionUtilsLib
                     string currentNamespace = partInfo.Namespace;
 
                     // For each traversed header, scrape the constants
-                    foreach (var header in partInfo.GetTraverseHeaders(true))
+                    foreach (var header in partInfo.GetTraverseHeaders(true, this.externalPackageDir))
                     {
                         if (!File.Exists(header))
                         {

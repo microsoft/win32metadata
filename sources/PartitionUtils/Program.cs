@@ -19,37 +19,40 @@ namespace PartitionUtils
         {
             var showErrorsCommand = new Command("showErrors", "Show partitioning errors.")
             {
-                new Option<string>(new[] { "--repoRoot" }, "The location of the repo.") { IsRequired = true },
+                new Option<string>(new[] { "--generationDir" }, "The location of the generation/external directory.") { IsRequired = true },
+                new Option<string>(new[] { "--externalPackageDir" }, "The location of the external NuGet package installation.") { IsRequired = false },
             };
 
-            showErrorsCommand.Handler = CommandHandler.Create<string>(ShowErrors);
+            showErrorsCommand.Handler = CommandHandler.Create<string, string>(ShowErrors);
 
             var showNonTraversedCommand = new Command("showNonTraversed", "Show headers that were visited but not part of any partition traverse list.")
             {
-                new Option<string>(new[] { "--repoRoot" }, "The location of the repo.") { IsRequired = true },
+                new Option<string>(new[] { "--generationDir" }, "The location of the generation/external directory.") { IsRequired = true },
+                new Option<string>(new[] { "--externalPackageDir" }, "The location of the external NuGet package installation.") { IsRequired = false },
             };
 
-            showNonTraversedCommand.Handler = CommandHandler.Create<string>(ShowNonTraversedHeaders);
+            showNonTraversedCommand.Handler = CommandHandler.Create<string, string>(ShowNonTraversedHeaders);
 
             var addTraverseHeadersWithCsvCommand = new Command("addTraverseHeadersWithCsv", "Use CSV to add headers to partition traverse lists.")
             {
-                new Option<string>(new[] { "--repoRoot" }, "The location of the repo.") { IsRequired = true },
+                new Option<string>(new[] { "--generationDir" }, "The location of the generation/external directory.") { IsRequired = true },
+                new Option<string>(new[] { "--externalPackageDir" }, "The location of the external NuGet package installation.") { IsRequired = false },
                 new Option<string>(new[] { "--csv" }, "The path to the input CSV.") { IsRequired = true },
                 new Option<string>(new[] { "--outputCsv" }, "The path to the output CSV."),
             };
 
-            addTraverseHeadersWithCsvCommand.Handler = CommandHandler.Create<string, string, string>(AddTraverseHeadersWithCsv);
+            addTraverseHeadersWithCsvCommand.Handler = CommandHandler.Create<string, string, string, string>(AddTraverseHeadersWithCsv);
 
             var ensurePartitionsUseNamespaceCommand = new Command("ensurePartitionsUseNamespace", "Update any partition settings that don't use a namespace.")
             {
-                new Option<string>(new[] { "--repoRoot" }, "The location of the repo.") { IsRequired = true },
+                new Option<string>(new[] { "--generationDir" }, "The location of the generation/external directory.") { IsRequired = true },
             };
 
             ensurePartitionsUseNamespaceCommand.Handler = CommandHandler.Create<string>(EnsurePartitionsUseNamespace);
 
             var normalizeEnumJsonCommand = new Command("normalizeEnumJson", "Normalize json enum files.")
             {
-                new Option<string>(new[] { "--repoRoot" }, "The location of the repo.") { IsRequired = true },
+                new Option<string>(new[] { "--generationDir" }, "The location of the generation/external directory.") { IsRequired = true },
                 new Option(new[] { "--jsonInputFile" }, "The location of the json input file.") 
                 {
                     Argument = new Argument("<file>")
@@ -103,7 +106,7 @@ namespace PartitionUtils
             public string Header { get;  }
         }
 
-        private static IEnumerable<PartitionAndHeader> GetVisitedHeadersWithPartNamesNotInTraverseList(RepoInfo repoInfo)
+        private static IEnumerable<PartitionAndHeader> GetVisitedHeadersWithPartNamesNotInTraverseList(RepoInfo repoInfo, string externalPackageDir)
         {
             string[] headersToIgnore = new string[]
             {
@@ -122,7 +125,7 @@ namespace PartitionUtils
                     yield break;
                 }
 
-                foreach (var header in partInfo.GetTraverseHeaders(true))
+                foreach (var header in partInfo.GetTraverseHeaders(true, externalPackageDir))
                 {
                     traverseHeaders.Add(header);
                 }
@@ -142,10 +145,10 @@ namespace PartitionUtils
             }
         }
 
-        private static IEnumerable<string> GetVisitedHeadersNotInTraverseList(RepoInfo repoInfo)
+        private static IEnumerable<string> GetVisitedHeadersNotInTraverseList(RepoInfo repoInfo, string externalPackageDir)
         {
             HashSet<string> outputtedHeaders = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-            foreach (var partAndHeader in GetVisitedHeadersWithPartNamesNotInTraverseList(repoInfo))
+            foreach (var partAndHeader in GetVisitedHeadersWithPartNamesNotInTraverseList(repoInfo, externalPackageDir))
             {
                 if (!outputtedHeaders.Contains(partAndHeader.Header))
                 {
@@ -155,7 +158,7 @@ namespace PartitionUtils
             }
         }
 
-        public static int NormalizeEnumJson(string repoRoot, string[] jsonInputFile, string jsonOutputFile, string[] rename, string[] exclude)
+        public static int NormalizeEnumJson(string generationDir, string[] jsonInputFile, string jsonOutputFile, string[] rename, string[] exclude)
         {
             var renames = CommandLineUtils.ConvertValuePairsToDictionary(rename);
 
@@ -167,7 +170,7 @@ namespace PartitionUtils
                 enumObjects.AddRange(EnumObject.LoadFromFile(inputFile));
             }
 
-            var newObjects = EnumObjectUtils.NormalizeEnumObjects(repoRoot, enumObjects, renames, excludes).ToArray();
+            var newObjects = EnumObjectUtils.NormalizeEnumObjects(generationDir, enumObjects, renames, excludes).ToArray();
 
             JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings();
             jsonSerializerSettings.NullValueHandling = NullValueHandling.Ignore;
@@ -197,7 +200,7 @@ namespace PartitionUtils
             return 0;
         }
 
-        public static int AddTraverseHeadersWithCsv(string repoRoot, string csv, string outputCsv)
+        public static int AddTraverseHeadersWithCsv(string generationDir, string externalPackageDir, string csv, string outputCsv)
         {
             Dictionary<string, HashSet<string>> headersToTechRoots = new Dictionary<string, HashSet<string>>(StringComparer.OrdinalIgnoreCase);
             CsvConfiguration config = new CsvConfiguration(CultureInfo.InvariantCulture);
@@ -236,12 +239,12 @@ namespace PartitionUtils
                 }
             }
 
-            RepoInfo repoInfo = new RepoInfo(repoRoot);
+            RepoInfo repoInfo = new RepoInfo(generationDir);
             using StreamWriter streamWriter = outputCsv != null ? new StreamWriter(outputCsv) : null;
             streamWriter?.WriteLine("Name,Header,Include,Lib,TechRoot");
 
             HashSet<string> fixedHeaders = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-            foreach (var partitionAndHeader in GetVisitedHeadersWithPartNamesNotInTraverseList(repoInfo))
+            foreach (var partitionAndHeader in GetVisitedHeadersWithPartNamesNotInTraverseList(repoInfo, externalPackageDir))
             {
                 var headerName = Path.GetFileName(partitionAndHeader.Header);
                 if (fixedHeaders.Contains(headerName))
@@ -289,9 +292,9 @@ namespace PartitionUtils
             return 0;
         }
 
-        public static void EnsurePartitionsUseNamespace(string repoRoot)
+        public static void EnsurePartitionsUseNamespace(string generationDir)
         {
-            RepoInfo repoInfo = new RepoInfo(repoRoot);
+            RepoInfo repoInfo = new RepoInfo(generationDir);
 
             Console.WriteLine("Ensuring all partition settings files specify a namespace.");
             foreach (var partInfo in repoInfo.GetPartitionInfos())
@@ -303,27 +306,27 @@ namespace PartitionUtils
             repoInfo.UpdateGeneratedSourceHeader();
         }
 
-        public static void ShowNonTraversedHeaders(string repoRoot)
+        public static void ShowNonTraversedHeaders(string generationDir, string externalPackageDir)
         {
-            RepoInfo repoInfo = new RepoInfo(repoRoot);
+            RepoInfo repoInfo = new RepoInfo(generationDir);
 
             Console.WriteLine("Visited headers that are not in any partition's traverse list:");
-            foreach (var header in GetVisitedHeadersNotInTraverseList(repoInfo))
+            foreach (var header in GetVisitedHeadersNotInTraverseList(repoInfo, externalPackageDir))
             {
                 Console.WriteLine($"  {header}");
             }
         }
 
-        public static void ShowErrors(string repoRoot)
+        public static void ShowErrors(string generationDir, string externalPackageDir)
         {
-            repoRoot = Path.GetFullPath(repoRoot);
+            generationDir = Path.GetFullPath(generationDir);
 
-            RepoInfo repoInfo = new RepoInfo(repoRoot);
+            RepoInfo repoInfo = new RepoInfo(generationDir);
             Dictionary<string, List<PartitionInfo>> traverseHeadersToParts = new Dictionary<string, List<PartitionInfo>>(StringComparer.OrdinalIgnoreCase);
 
             foreach (var partInfo in repoInfo.GetPartitionInfos())
             {
-                foreach (var header in partInfo.GetTraverseHeaders(true))
+                foreach (var header in partInfo.GetTraverseHeaders(true, externalPackageDir))
                 {
                     if (!traverseHeadersToParts.TryGetValue(header, out var partitionInfos))
                     {

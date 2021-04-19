@@ -73,8 +73,9 @@ namespace PartitionUtilsLib
             }
         }
 
-        private static readonly Regex VisitingHeaderRegex = new Regex(@"Info: Visiting (.+)(\/(?:um|shared|winrt)\/[^\r\n]+)");
-        private static readonly Regex FilesInSettingsRspRegex = new Regex(@".+(\/(?:um|shared|winrt)\/.+)");
+        private static readonly Regex VisitingHeaderRegex = new Regex(@"Info: Visiting (.+)(\/(?:um|shared|winrt|artifacts)\/[^\r\n]+)");
+        private static readonly Regex FilesInSettingsRspRegex = new Regex(@"((?:.+\/(?:um|shared|winrt)|<ExternalPackageDir>)\/.+)");
+        private static readonly Regex ExternalPackageDirRegex = new Regex(@"<ExternalPackageDir>(\/.+)");
 
         public string Name => this.partitionName;
 
@@ -94,11 +95,11 @@ namespace PartitionUtilsLib
             }
         }
 
-        public ReadOnlyCollection<string> GetTraverseHeaders(bool fullPath)
+        public ReadOnlyCollection<string> GetTraverseHeaders(bool fullPath, string externalPackageDir)
         {
             if (this.traverseHeaders == null)
             {
-                this.LoadVisitedHeaders();   
+                this.LoadVisitedHeaders();
                 this.traverseHeaders = new List<string>();
                 bool inTraverse = false;
                 foreach (string line in File.ReadAllLines(this.SettingsFile))
@@ -128,9 +129,26 @@ namespace PartitionUtilsLib
             List<string> longPaths = new List<string>();
             foreach (var shortPath in this.traverseHeaders)
             {
-                string longPath = this.incRoot + shortPath;
-                longPath = longPath.Replace('/', '\\');
-                longPaths.Add(longPath);
+                string longPath = null;
+                var match = ExternalPackageDirRegex.Match(shortPath);
+
+                if (match.Success)
+                {
+                    if (!string.IsNullOrEmpty(externalPackageDir))
+                    {
+                        longPath = $"{externalPackageDir}{match.Groups[1].Value}";
+                    }
+                }
+                else
+                {
+                    longPath = this.incRoot + shortPath;
+                }
+
+                if (!string.IsNullOrEmpty(longPath))
+                {
+                    longPath = longPath.Replace('/', '\\');
+                    longPaths.Add(longPath);
+                }
             }
 
             return longPaths.AsReadOnly();
