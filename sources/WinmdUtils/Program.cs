@@ -196,7 +196,7 @@ namespace WinmdUtils
 
         public static int ShowPointersToDelegates(FileInfo winmd, string[] allowItem, IConsole console)
         {
-            HashSet<string> allowTable = new HashSet<string>(allowItem);
+            HashSet<string> allowTable = allowItem != null ? new HashSet<string>(allowItem) : new HashSet<string>();
             using WinmdUtils w1 = WinmdUtils.LoadFromFile(winmd.FullName);
             bool pointersFound = false;
 
@@ -328,7 +328,7 @@ namespace WinmdUtils
 
         public static int ShowEmptyDelegates(FileInfo winmd, string[] allowItem, IConsole console)
         {
-            HashSet<string> allowTable = new HashSet<string>(allowItem);
+            HashSet<string> allowTable = allowItem != null ? new HashSet<string>(allowItem) : new HashSet<string>();
             using WinmdUtils w1 = WinmdUtils.LoadFromFile(winmd.FullName);
             bool emptyFound = false;
             foreach (DelegateTypeInfo type in w1.GetTypes().Where(t => t is DelegateTypeInfo))
