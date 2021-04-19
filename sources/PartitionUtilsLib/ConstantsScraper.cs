@@ -107,7 +107,7 @@ namespace PartitionUtilsLib
                 this.withAttributes = withAttributes;
 
                 this.generationDir = Path.GetFullPath(generationDir);
-                this.externalPackageDir = Path.GetFullPath(externalPackageDir);
+                this.externalPackageDir = string.IsNullOrEmpty(externalPackageDir) ? null : Path.GetFullPath(externalPackageDir);
                 this.outputNamespace = outputNamespace;
 
                 this.InitEnumFlagsFixupFile();
