@@ -74,7 +74,7 @@ namespace PartitionUtilsLib
         }
 
         private static readonly Regex VisitingHeaderRegex = new Regex(@"Info: Visiting (.+)(\/(?:um|shared|winrt|artifacts)\/[^\r\n]+)");
-        private static readonly Regex FilesInSettingsRspRegex = new Regex(@"((?:.+\/(?:um|shared|winrt)|<ExternalPackageDir>)\/.+)");
+        private static readonly Regex FilesInSettingsRspRegex = new Regex(@"(?:.+(\/(?:um|shared|winrt))|(<ExternalPackageDir>))(\/.+)");
         private static readonly Regex ExternalPackageDirRegex = new Regex(@"<ExternalPackageDir>(\/.+)");
 
         public string Name => this.partitionName;
@@ -115,7 +115,7 @@ namespace PartitionUtilsLib
                         var match = FilesInSettingsRspRegex.Match(line);
                         if (match.Success)
                         {
-                            this.traverseHeaders.Add(match.Groups[1].Value);
+                            this.traverseHeaders.Add($"{match.Groups[1].Value}{match.Groups[2].Value}{match.Groups[3].Value}");
                         }
                     }
                 }
