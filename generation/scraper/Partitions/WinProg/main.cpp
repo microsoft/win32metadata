@@ -59,7 +59,6 @@
 #include <wscapi.h>
 #include <filehc.h>
 #include <aux_ulib.h>
-#include <winreg.h>
 //#include <rtlsupportapi.h>
 #include <stralign.h>
 //#include <tcpioctl.h>
