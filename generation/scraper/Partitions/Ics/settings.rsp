@@ -14,4 +14,4 @@
 <IncludeRoot>/um/netfw.h
 <IncludeRoot>/um/networkisolation.h
 --namespace
-Windows.Win32.WindowsFirewall
+Windows.Win32.NetworkManagement.WindowsFirewall

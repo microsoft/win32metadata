@@ -31,4 +31,4 @@ _DL_EUI48
 <IncludeRoot>/um/socketapi.h
 <IncludeRoot>/um/SpOrder.h
 --namespace
-Windows.Win32.WinSock
+Windows.Win32.Networking.WinSock

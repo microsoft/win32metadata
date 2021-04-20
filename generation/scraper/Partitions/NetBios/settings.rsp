@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/nb30.h
 --namespace
-Windows.Win32.NetBios
+Windows.Win32.NetworkManagement.NetBios

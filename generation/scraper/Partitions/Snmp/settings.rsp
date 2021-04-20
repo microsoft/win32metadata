@@ -12,4 +12,4 @@
 <IncludeRoot>/um/MgmtAPI.h
 <IncludeRoot>/um/WinSnmp.h
 --namespace
-Windows.Win32.Snmp
+Windows.Win32.NetworkManagement.Snmp

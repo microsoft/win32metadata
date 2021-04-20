@@ -17,4 +17,4 @@
 <IncludeRoot>/um/fwpmtypes.h
 <IncludeRoot>/shared/netiodef.h
 --namespace
-Windows.Win32.WindowsFiltering
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform
