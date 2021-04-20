@@ -13,6 +13,7 @@ You can contribute to this project in multiple ways:
 * Contribute to [issues](https://github.com/microsoft/win32metadata/issues)
 * Contribute to [discussions](https://github.com/microsoft/win32metadata/discussions)
 * Contribute to [namespaces](#Namespaces)
+* Contribute to [projections](docs\projections.md)
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
