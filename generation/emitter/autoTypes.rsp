@@ -66,12 +66,12 @@ Windows.Win32.FileSystem,FindVolumeHandle,IntPtr,FindVolumeClose
 Windows.Win32.FileSystem,FindVolumeMointPointHandle,IntPtr,FindVolumeMountPointClose
 Windows.Win32.SystemServices,EventLogHandle,IntPtr,CloseEventLog
 Windows.Win32.SystemServices,EventSourceHandle,IntPtr,DeregisterEventSource
-Windows.Win32.WinSock,HWSAEVENT,IntPtr,WSACloseEvent
+Windows.Win32.Networking.WinSock,HWSAEVENT,IntPtr,WSACloseEvent
 Windows.Win32.InstallableFileSystems,HFILTER,IntPtr,FilterClose
 Windows.Win32.Shell,ShFindChangeNotificationHandle,IntPtr,SHChangeNotification_Unlock
 Windows.Win32.Policy,CriticalPolicySectionHandle,IntPtr,LeaveCriticalPolicySection
 Windows.Win32.RemoteDesktopServices,HwtsVirtualChannelHandle,IntPtr,WTSVirtualChannelClose
-Windows.Win32.IpHelper,IcmpHandle,IntPtr,IcmpCloseHandle
+Windows.Win32.NetworkManagement.IpHelper,IcmpHandle,IntPtr,IcmpCloseHandle
 Windows.Win32.Gdi,HdcMetdataFileHandle,IntPtr,DeleteMetaFile
 Windows.Win32.Gdi,HdcMetdataEnhFileHandle,IntPtr,DeleteEnhMetaFile
 Windows.Win32.SystemServices,HeapHandle,IntPtr,HeapDestroy
@@ -82,7 +82,7 @@ Windows.Win32.MenusAndResources,HACCEL,DECLARE_HANDLE,DestroyAcceleratorTable
 Windows.Win32.Controls,HPROPSHEETPAGE,DECLARE_HANDLE,DestroyPropertySheetPage
 Windows.Win32.WindowsProgramming,HKEY,DECLARE_HANDLE,RegCloseKey
 Windows.Win32.Controls,HIMAGELIST,IntPtr,ImageList_Destroy
-Windows.Win32.WindowsNetworking,NetEnumHandle,IntPtr,WNetCloseEnum
+Windows.Win32.NetworkManagement.WNet,NetEnumHandle,IntPtr,WNetCloseEnum
 Windows.Win32.Security,HCRYPTASYNC,IntPtr,CryptCloseAsyncHandle
 Windows.Win32.Security,HCERTCHAINENGINE,IntPtr,CertFreeCertificateChainEngine
 Windows.Win32.SystemServices,HPOWERNOTIFY,IntPtr,UnregisterPowerSettingNotification
@@ -90,7 +90,7 @@ Windows.Win32.Security,LsaHandle,IntPtr,LsaDeregisterLogonProcess
 Windows.Win32.Security,PSID,IntPtr,
 Windows.Win32.Perf,PerfProviderHandle,IntPtr,PerfStopProvider
 Windows.Win32.Perf,PerfQueryHandle,IntPtr,PerfCloseQueryHandle
-Windows.Win32.Dns,DnsContextHandle,IntPtr,DnsReleaseContextHandle
+Windows.Win32.NetworkManagement.Dns,DnsContextHandle,IntPtr,DnsReleaseContextHandle
 Windows.Win32.InstallableFileSystems,HFILTER_INSTANCE,IntPtr,FilterInstanceClose
 Windows.Win32.InstallableFileSystems,FilterFindHandle,IntPtr,FilterFindClose
 Windows.Win32.InstallableFileSystems,FilterVolumeFindHandle,IntPtr,FilterVolumeFindClose
@@ -130,9 +130,9 @@ Windows.Win32.WindowsProgramming,FH_SERVICE_PIPE_HANDLE,DECLARE_HANDLE
 Windows.Win32.Intl,HIMC,DECLARE_HANDLE
 Windows.Win32.Intl,HIMCC,DECLARE_HANDLE
 Windows.Win32.InteractionContext,HINTERACTIONCONTEXT,DECLARE_HANDLE
-Windows.Win32.IpHelper,HIFTIMESTAMPCHANGE,DECLARE_HANDLE
-Windows.Win32.QualityOfService,LPM_HANDLE,DECLARE_HANDLE
-Windows.Win32.QualityOfService,RHANDLE,DECLARE_HANDLE
+Windows.Win32.NetworkManagement.IpHelper,HIFTIMESTAMPCHANGE,DECLARE_HANDLE
+Windows.Win32.NetworkManagement.QoS,LPM_HANDLE,DECLARE_HANDLE
+Windows.Win32.NetworkManagement.QoS,RHANDLE,DECLARE_HANDLE
 Windows.Win32.Multimedia,HMMIO,DECLARE_HANDLE
 Windows.Win32.Multimedia,HDRVR,DECLARE_HANDLE
 Windows.Win32.Multimedia,HACMDRIVERID,DECLARE_HANDLE
@@ -146,7 +146,7 @@ Windows.Win32.Xps,HPTPROVIDER,DECLARE_HANDLE
 Windows.Win32.ProcessSnapshotting,HPSS,DECLARE_HANDLE
 Windows.Win32.ProcessSnapshotting,HPSSWALK,DECLARE_HANDLE
 Windows.Win32.ProjectedFileSystem,PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT,DECLARE_HANDLE
-Windows.Win32.RoutingAndRemoteAccessService,HRASCONN,DECLARE_HANDLE
+Windows.Win32.NetworkManagement.RRAS,HRASCONN,DECLARE_HANDLE
 Windows.Win32.Shell,HDROP,DECLARE_HANDLE
 Windows.Win32.Shell,HPSXA,DECLARE_HANDLE
 Windows.Win32.SoftwareDevice,HSWDEVICE,DECLARE_HANDLE
@@ -156,8 +156,8 @@ Windows.Win32.WindowsAccessibility,HUIATEXTRANGE,DECLARE_HANDLE
 Windows.Win32.WindowsAccessibility,HUIAEVENT,DECLARE_HANDLE
 Windows.Win32.Multimedia,HIC,DECLARE_HANDLE
 Windows.Win32.Multimedia,HVIDEO,DECLARE_HANDLE
-Windows.Win32.WebSock,WEB_SOCKET_HANDLE,DECLARE_HANDLE
-Windows.Win32.WinInet,HTTP_PUSH_WAIT_HANDLE,DECLARE_HANDLE
+Windows.Win32.Networking.WebSocket,WEB_SOCKET_HANDLE,DECLARE_HANDLE
+Windows.Win32.Networking.WinInet,HTTP_PUSH_WAIT_HANDLE,DECLARE_HANDLE
 Windows.Win32.Intl,HSAVEDUILANGUAGES,DECLARE_HANDLE
 Windows.Win32.Security,SAFER_LEVEL_HANDLE,DECLARE_HANDLE
 Windows.Win32.Security,SC_HANDLE,DECLARE_HANDLE

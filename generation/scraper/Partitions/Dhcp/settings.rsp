@@ -13,4 +13,4 @@
 <IncludeRoot>/um/DhcpCSdk.h
 <IncludeRoot>/um/dhcpsapi.h
 --namespace
-Windows.Win32.Dhcp
+Windows.Win32.NetworkManagement.Dhcp

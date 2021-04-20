@@ -21,4 +21,4 @@
 <IncludeRoot>/um/bitscfg.h
 <IncludeRoot>/um/qmgr.h
 --namespace
-Windows.Win32.BackgroundIntelligentTransferService
+Windows.Win32.Networking.BackgroundIntelligentTransferService

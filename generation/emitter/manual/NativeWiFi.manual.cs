@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using Windows.Win32.Interop;
 
-namespace Windows.Win32.NativeWiFi
+namespace Windows.Win32.NetworkManagement.WiFi
 {
     public static unsafe partial class Apis
     {
