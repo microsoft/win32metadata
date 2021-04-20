@@ -13,7 +13,7 @@ You can contribute to this project in multiple ways:
 * Contribute to [issues](https://github.com/microsoft/win32metadata/issues)
 * Contribute to [discussions](https://github.com/microsoft/win32metadata/discussions)
 * Contribute to [namespaces](#Namespaces)
-* Contribute to [projections](docs\projections.md)
+* Contribute to [projections](docs/projections.md)
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
@@ -23,12 +23,12 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 
 Our tooling organizes Win32 APIs into namespaces. This provides an alternative way for developers to easily include large areas of functionality and also provides an opportunity to bring more consistency across Win32 and WinRT to help with usability and discoverability.
 
-The simplest way to assign an API to a namespace is to associate the API's header file with a [partition](generation\scraper\Partitions). A header file can only be associated with one partition, and by default all APIs included in the header file will be added to the partition's target namespace.
+The simplest way to assign an API to a namespace is to associate the API's header file with a [partition](generation/scraper/Partitions). A header file can only be associated with one partition, and by default all APIs included in the header file will be added to the partition's target namespace.
 
-Partitions are defined as [folders](generation\scraper\Partitions) with [main.cpp](generation\scraper\Partitions\Registry\main.cpp) and [settings.rsp](generation\scraper\Partitions\Registry\settings.rsp) files.
-* [main.cpp](generation\scraper\Partitions\Registry\main.cpp) contains `#include` statements like you would use to call the APIs directly. This typically includes the header files to be associated with the partition as well as any other dependent headers, included in the proper order.
-* [settings.rsp](generation\scraper\Partitions\Registry\settings.rsp) associates a list of header files to a namespace. Reference existing [partitions](generation\scraper\Partitions) to understand the template for this file. The important sections are `--traverse`, which lists the header files to include, and `--namespace` which lists the namespace to associate with the content of those header files.
+Partitions are defined as [folders](generation/scraper/Partitions) with [main.cpp](generation/scraper/Partitions/Registry/main.cpp) and [settings.rsp](generation/scraper/Partitions/Registry/settings.rsp) files.
+* [main.cpp](generation/scraper/Partitions/Registry/main.cpp) contains `#include` statements like you would use to call the APIs directly. This typically includes the header files to be associated with the partition as well as any other dependent headers, included in the proper order.
+* [settings.rsp](generation/scraper/Partitions/Registry/settings.rsp) associates a list of header files to a namespace. Reference existing [partitions](generation/scraper/Partitions) to understand the template for this file. The important sections are `--traverse`, which lists the header files to include, and `--namespace` which lists the namespace to associate with the content of those header files.
 
-You can test localized changes to a partition by running `.\scripts\GenerateMetadataSourceForPartition.ps1 -partitionName <PARTITION> -artifactsDir .\artifacts` from the repo root. If it compiles, the changes are likely correct. A common reason for failure is main.cpp either doesn't include all the necessary dependent headers needed to use the target headers or doesn't include them in the proper order.
+You can test localized changes to a partition by running `./scripts/GenerateMetadataSourceForPartition.ps1 -partitionName <PARTITION> -artifactsDir ./artifacts` from the repo root. If it compiles, the changes are likely correct. A common reason for failure is main.cpp either doesn't include all the necessary dependent headers needed to use the target headers or doesn't include them in the proper order.
 
-If a header file doesn't cleanly map to one namespace, it should be associated with a partition and namespace that makes sense for the majority of its APIs, and then the rest of the APIs should be manually remapped using [requiredNamespacesForNames.rsp](generation\emitter\requiredNamespacesForNames.rsp). This file contains one line per API and follows the format `<API>=<NAMESPACE>`. It is a single file that is shared across all partitions.
+If a header file doesn't cleanly map to one namespace, it should be associated with a partition and namespace that makes sense for the majority of its APIs, and then the rest of the APIs should be manually remapped using [requiredNamespacesForNames.rsp](generation/emitter/requiredNamespacesForNames.rsp). This file contains one line per API and follows the format `<API>=<NAMESPACE>`. It is a single file that is shared across all partitions.
