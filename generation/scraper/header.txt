@@ -94,7 +94,7 @@ using Windows.Win32.NetworkManagement.NetworkDiagnosticsFramework;
 using Windows.Win32.NetworkManagement.NetworkPolicyServer;
 using Windows.Win32.NetworkManagement.P2P;
 using Windows.Win32.NetworkManagement.QoS;
-using Windows.Win32.NetworkManagement.RRAS;
+using Windows.Win32.NetworkManagement.Rras;
 using Windows.Win32.NetworkManagement.Snmp;
 using Windows.Win32.NetworkManagement.WebDav;
 using Windows.Win32.NetworkManagement.WiFi;
