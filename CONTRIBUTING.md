@@ -23,6 +23,8 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 
 Our tooling organizes Win32 APIs into namespaces. This provides an alternative way for developers to easily include large areas of functionality and also provides an opportunity to bring more consistency across Win32 and WinRT to help with usability and discoverability.
 
+### Assign a header file to a single namespace
+
 The simplest way to assign an API to a namespace is to associate the API's header file with a [partition](generation/scraper/Partitions). A header file can only be associated with one partition, and by default all APIs included in the header file will be added to the partition's target namespace.
 
 Partitions are defined as [folders](generation/scraper/Partitions) with [main.cpp](generation/scraper/Partitions/Registry/main.cpp) and [settings.rsp](generation/scraper/Partitions/Registry/settings.rsp) files.
@@ -31,6 +33,12 @@ Partitions are defined as [folders](generation/scraper/Partitions) with [main.cp
 
 You can test localized changes to a partition by running `./scripts/GenerateMetadataSourceForPartition.ps1 -partitionName <PARTITION> -artifactsDir ./artifacts` from the repo root. If it compiles, the changes are likely correct. A common reason for failure is main.cpp either doesn't include all the necessary dependent headers needed to use the target headers or doesn't include them in the proper order.
 
-If a header file doesn't cleanly map to one namespace, it should be associated with a partition and namespace that makes sense for the majority of its APIs, and then the rest of the APIs should be manually remapped using [requiredNamespacesForNames.rsp](generation/emitter/requiredNamespacesForNames.rsp). This file contains one line per API and follows the format `<API>=<NAMESPACE>`. It is a single file that is shared across all partitions.
+### Split a header file among multiple namespaces
+
+If a header file doesn't cleanly map to one namespace, it should be associated with a partition and namespace that makes sense for the majority of its APIs (using the steps above for a single namespace), and then the rest of the APIs should be manually remapped using [requiredNamespacesForNames.rsp](generation/emitter/requiredNamespacesForNames.rsp). This file contains one line per API and follows the format `<API>=<NAMESPACE>`. It is a single file that is shared across all partitions.
+
+### Refactoring namespaces
 
 Note that when refactoring namespaces, [requiredNamespacesForNames.rsp](generation/emitter/requiredNamespacesForNames.rsp) will take precedence over any namespaces declared in the partitions, so make sure it doesn't contain remappings that will conflict with the expected factoring from the partitions. For example, if you create a new Registry partition to assign everything in winreg.h to Windows.Win32.System.Registry, but [requiredNamespacesForNames.rsp](generation/emitter/requiredNamespacesForNames.rsp) was previously updated to map Reg* APIs to a different namespace, you won't achieve the desired result unless you remove the Reg* entries from [requiredNamespacesForNames.rsp](generation/emitter/requiredNamespacesForNames.rsp).
+
+Other files that need to be kept in sync when refactoring namespaces include any manually defined APIs in [manual](generation/emitter/manual) as well as [header.txt](generation/scraper/header.txt) which adds using statements to generated .cs files during the build process.
