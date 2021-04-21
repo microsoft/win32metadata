@@ -1,4 +1,5 @@
 . "$PSScriptRoot\CommonUtils.ps1"
+
 function SearchHeaderFile([string]$name) {
     Get-ChildItem -Recurse -Filter settings.rsp $partitionsDir | Select-String $name
 }
