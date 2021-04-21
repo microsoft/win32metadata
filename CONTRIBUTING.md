@@ -21,7 +21,11 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 
 ## Namespaces
 
-Our tooling organizes Win32 APIs into namespaces. This provides an alternative way for developers to easily include large areas of functionality and also provides an opportunity to bring more consistency across Win32 and WinRT to help with usability and discoverability.
+Our tooling organizes Win32 APIs into namespaces. This provides an alternative way for developers to easily include large areas of functionality and improves consistency and discoverability across Win32 and WinRT.
+
+* [Assign a header file to a single namespace](#assign-a-header-file-to-a-single-namespace)
+* [Split a header file among multiple namespaces](#split-a-header-file-among-multiple-namespaces)
+* [Refactoring namespaces](#refactoring-namespaces)
 
 ### Assign a header file to a single namespace
 
