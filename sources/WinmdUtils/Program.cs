@@ -893,6 +893,11 @@ namespace WinmdUtils
             Dictionary<string, ITypeDefinition> winmd1NamesToTypes = GetNamesToTypeDefinitions(winmd1);
             foreach (var type2 in winmd2.GetTopLevelTypeDefinitions())
             {
+                if (type2.FullName == "<Module>")
+                {
+                    continue;
+                }
+
                 var type2FullName = GetFullTypeName(type2);
                 if (type2.ParentModule != winmd2.MainModule)
                 {
