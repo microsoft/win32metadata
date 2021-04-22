@@ -10,7 +10,7 @@
 --traverse
 <includeroot>/um/icftypes.h
 <includeroot>/um/natupnp.h
-<includeroot>/um/netcon.h
+<includeroot>/um/NetCon.h
 <includeroot>/um/netfw.h
 <includeroot>/um/networkisolation.h
 --namespace
