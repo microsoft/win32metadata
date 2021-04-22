@@ -23,4 +23,4 @@ IKsPropertySet
 <IncludeRoot>/um/dmusics.h
 <IncludeRoot>/um/audiomediatype.h
 --namespace
-Windows.Win32.Audio
+Windows.Win32.Media.Audio.DirectMusic

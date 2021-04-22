@@ -3544,7 +3544,7 @@
     "uses": []
   },
   {
-    "namespace": "Windows.Win32.Debug",
+    "namespace": "Windows.Win32.System.Diagnostics.Debug",
     "type": "uint",
     "name": "FACILITY_CODE",
     "autoPopulate": {
