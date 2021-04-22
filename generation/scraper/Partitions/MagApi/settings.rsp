@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/magnification.h
 --namespace
-Windows.Win32.Magnification
+Windows.Win32.UI.Magnification

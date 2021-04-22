@@ -25,4 +25,4 @@
 <IncludeRoot>/um/Wsdattachment.h
 <IncludeRoot>/um/Wsdxml.h
 --namespace
-Windows.Win32.OtherDeviceTechnologies
+Windows.Win32.Devices.OtherDeviceTechnologies
