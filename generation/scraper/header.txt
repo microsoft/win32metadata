@@ -1,7 +1,6 @@
 // Copyright © Microsoft
 using Windows.Win32.Interop;
 
-using Windows.Win32.ActiveDirectory;
 using Windows.Win32.AllJoyn;
 using Windows.Win32.Antimalware;
 using Windows.Win32.ApplicationInstallationAndServicing;
@@ -58,7 +57,6 @@ using Windows.Win32.InternetExplorer;
 using Windows.Win32.Intl;
 using Windows.Win32.IScsiDisc;
 using Windows.Win32.Kernel;
-using Windows.Win32.Ldap;
 using Windows.Win32.LegacyWindowsEnvironmentFeatures;
 using Windows.Win32.Location;
 using Windows.Win32.MachineLearning;
@@ -71,9 +69,12 @@ using Windows.Win32.Mmc;
 using Windows.Win32.MobileDeviceManagementRegistration;
 using Windows.Win32.Monitor;
 using Windows.Win32.Multimedia;
+using Windows.Win32.Networking.ActiveDirectory;
 using Windows.Win32.Networking.BackgroundIntelligentTransferService;
 using Windows.Win32.Networking.HttpServer;
+using Windows.Win32.Networking.Ldap;
 using Windows.Win32.Networking.NetworkListManager;
+using Windows.Win32.Networking.RemoteDifferentialCompression;
 using Windows.Win32.Networking.WebSocket;
 using Windows.Win32.Networking.WindowsWebServices;
 using Windows.Win32.Networking.WinHttp;
@@ -120,7 +121,6 @@ using Windows.Win32.ProjectedFileSystem;
 using Windows.Win32.RadialInput;
 using Windows.Win32.RemoteAssistance;
 using Windows.Win32.RemoteDesktopServices;
-using Windows.Win32.RemoteDifferentialCompression;
 using Windows.Win32.RestartManager;
 using Windows.Win32.RightsManagement;
 using Windows.Win32.Rpc;
