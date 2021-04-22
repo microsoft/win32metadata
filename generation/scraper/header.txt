@@ -82,8 +82,6 @@ using Windows.Win32.Networking.WinSock;
 using Windows.Win32.NetworkManagement.Dhcp;
 using Windows.Win32.NetworkManagement.Dns;
 using Windows.Win32.NetworkManagement.IpHelper;
-using Windows.Win32.NetworkManagement.IpHelper;
-using Windows.Win32.NetworkManagement.IpHelper;
 using Windows.Win32.NetworkManagement.MobileBroadband;
 using Windows.Win32.NetworkManagement.Multicast;
 using Windows.Win32.NetworkManagement.Ndis;
