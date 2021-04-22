@@ -8,14 +8,14 @@
 <IncludeRoot>/um
 <IncludeRoot>/winrt
 --traverse
-<includeroot>/um/bits.h
+<includeroot>/um/Bits.h
 <includeroot>/um/bits1_5.h
 <includeroot>/um/bits10_1.h
 <includeroot>/um/bits10_2.h
 <includeroot>/um/bits10_3.h
 <includeroot>/um/bits2_0.h
 <includeroot>/um/bits2_5.h
-<includeroot>/um/bits3_0.h
+<includeroot>/um/Bits3_0.h
 <includeroot>/um/bits4_0.h
 <includeroot>/um/bits5_0.h
 <includeroot>/um/bitscfg.h
