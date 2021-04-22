@@ -16,4 +16,4 @@
 <IncludeRoot>/um/d3d10misc.h
 <IncludeRoot>/um/d3d10_1shader.h
 --namespace
-Windows.Win32.Direct3D10
+Windows.Win32.Graphics.Direct3D10

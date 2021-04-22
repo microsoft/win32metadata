@@ -6,6 +6,6 @@ using static Windows.Win32.System.Diagnostics.Debug.WIN32_ERROR;
 using static Windows.Win32.SystemServices.Apis; // Various constants
 using static Windows.Win32.Multimedia.Apis; // Various constants
 using static Windows.Win32.Media.Audio.CoreAudio.Apis; // Various constants
-using static Windows.Win32.DirectShow.Apis; // Various constants
+using static Windows.Win32.Graphics.DirectShow.Apis; // Various constants
 using static Windows.Win32.WindowsAndMessaging.Apis; // For WM_USER
 
