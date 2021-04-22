@@ -40,4 +40,4 @@
 <IncludeRoot>/um/alljoyn_c/SecurityApplicationProxy.h
 <IncludeRoot>/um/MSAJTransport.h
 --namespace
-Windows.Win32.AllJoyn
+Windows.Win32.Devices.Alljoyn

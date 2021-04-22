@@ -11,4 +11,4 @@
 <IncludeRoot>/um/AppxPackaging.h
 <IncludeRoot>/um/appmodel.h
 --namespace
-Windows.Win32.AppxPackaging
+Windows.Win32.Storage.Packaging.Appx

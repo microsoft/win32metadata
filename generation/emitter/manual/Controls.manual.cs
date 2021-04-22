@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using Windows.Win32.Interop;
 
-namespace Windows.Win32.Controls
+namespace Windows.Win32.UI.Controls
 {
     public static unsafe partial class Apis
     {
