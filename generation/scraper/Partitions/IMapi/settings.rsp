@@ -13,4 +13,4 @@
 <IncludeRoot>/um/imapi2fs.h
 <IncludeRoot>/um/imapi.h
 --namespace
-Windows.Win32.IMapi
+Windows.Win32.Storage.Imapi

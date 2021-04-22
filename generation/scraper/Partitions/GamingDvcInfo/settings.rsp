@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/gamingdeviceinformation.h
 --namespace
-Windows.Win32.GamingDeviceInfo
+Windows.Win32.Gaming

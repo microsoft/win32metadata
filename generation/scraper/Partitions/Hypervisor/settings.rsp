@@ -12,4 +12,4 @@
 <IncludeRoot>/um/WinHvPlatform.h
 <IncludeRoot>/um/WinHvEmulation.h
 --namespace
-Windows.Win32.Hypervisor
+Windows.Win32.System.Hypervisor
