@@ -15,4 +15,4 @@
 <IncludeRoot>/shared/hidpi.h
 <IncludeRoot>/shared/hidsdi.h
 --namespace
-Windows.Win32.Hid
+Windows.Win32.Devices.HumanInterfaceDevice

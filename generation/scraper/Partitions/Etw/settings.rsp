@@ -15,4 +15,4 @@
 <IncludeRoot>/um/evntcons.h
 <IncludeRoot>/um/relogger.h
 --namespace
-Windows.Win32.Etw
+Windows.Win32.System.Diagnostics.Etw

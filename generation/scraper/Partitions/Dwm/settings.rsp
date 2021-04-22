@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/dwmapi.h
 --namespace
-Windows.Win32.Dwm
+Windows.Win32.Graphics.Dwm

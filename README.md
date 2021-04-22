@@ -73,7 +73,7 @@ Example for Direct3DDxgi:
     <IncludeRoot>/shared/dxgi1_3.h
     <IncludeRoot>/shared/dxgi1_5.h
     --namespace
-    Windows.Win32.Dxgi
+    Windows.Win32.Graphics.Dxgi
 
 
 This means ClangSharp will emit types from the above list of headers when scraping for dxgi.lib. The compiler will see lots of other headers, like what windows.h brings in, but it will only emit types seen in the list above.
@@ -146,7 +146,7 @@ The partitions are meant to break up headers into namespaces. However, some head
 
 (Both functions come from winuser.h)
 
-    BeginPaint=Windows.Win32.Gdi
+    BeginPaint=Windows.Win32.Graphics.Gdi
     CreateWindowExW=Windows.Win32.WindowsAndMessaging
 
 # How to Generate the .winmd

@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 using Windows.Win32.Interop;
 
-namespace Windows.Win32.Gdi
+namespace Windows.Win32.Graphics.Gdi
 {
     public enum R2_MODE
     {

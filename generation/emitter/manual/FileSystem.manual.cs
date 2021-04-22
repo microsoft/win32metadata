@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using Windows.Win32.Interop;
 
-namespace Windows.Win32.FileSystem
+namespace Windows.Win32.Storage.FileSystem
 {
     [Flags]
     public enum FIND_FIRST_EX_FLAGS : uint
