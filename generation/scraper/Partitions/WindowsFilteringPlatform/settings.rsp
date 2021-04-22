@@ -9,12 +9,15 @@
 <IncludeRoot>/winrt
 --traverse
 <IncludeRoot>/shared/fwpmtypes.h
+<IncludeRoot>/shared/fwpstypes.h
 <IncludeRoot>/shared/fwptypes.h
+<IncludeRoot>/shared/fwpvi.h.h
 <IncludeRoot>/shared/iketypes.h
 <IncludeRoot>/shared/ipsectypes.h
 <IncludeRoot>/shared/netiodef.h
 <IncludeRoot>/um/fwpmtypes.h
 <IncludeRoot>/um/fwpmu.h
+<IncludeRoot>/um/fwpsu.h
 <IncludeRoot>/um/fwptypes.h
 --namespace
 Windows.Win32.NetworkManagement.WindowsFilteringPlatform
