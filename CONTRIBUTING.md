@@ -35,7 +35,7 @@ Partitions are defined as [folders](generation/scraper/Partitions) with [main.cp
 * [main.cpp](generation/scraper/Partitions/Registry/main.cpp) contains `#include` statements like you would use to call the APIs directly. This typically includes the header files to be associated with the partition as well as any other dependent headers, included in the proper order.
 * [settings.rsp](generation/scraper/Partitions/Registry/settings.rsp) associates a list of header files to a namespace. Reference existing [partitions](generation/scraper/Partitions) to understand the template for this file. The important sections are `--traverse`, which lists the header files to include, and `--namespace` which lists the namespace to associate with the content of those header files.
 
-You can test localized changes to a partition by running `./scripts/GenerateMetadataSourceForPartition.ps1 -partitionName <PARTITION> -artifactsDir ./artifacts` from the repo root. If it compiles, the changes are likely correct. A common reason for failure is main.cpp either doesn't include all the necessary dependent headers needed to use the target headers or doesn't include them in the proper order.
+You can test localized changes to a partition by running `./scripts/GenerateMetadataSourceForPartition.ps1 -artifactsDir ./artifacts -partitionName <PARTITION>` from the repo root. If it compiles, the changes are likely correct. A common reason for failure is main.cpp either doesn't include all the necessary dependent headers needed to use the target headers or doesn't include them in the proper order.
 
 ### Split a header file among multiple namespaces
 
