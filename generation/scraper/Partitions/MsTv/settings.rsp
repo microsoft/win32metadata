@@ -28,4 +28,4 @@ _SetAllocator=_SetAllocator2
 <IncludeRoot>/um/mpeg2psiparser.h
 <IncludeRoot>/um/DvbSiParser.h
 --namespace
-Windows.Win32.DirectShow
+Windows.Win32.Graphics.DirectShow
