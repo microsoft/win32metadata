@@ -14,7 +14,10 @@ namespace PartitionUtilsLib
 
         public string ParitionDir => Path.Combine(this.repoRoot, "generation\\scraper\\partitions");
 
-        public string ScraperOutputDir => Path.Combine(this.repoRoot, "generation\\scraper\\obj");
+        public string GetScraperOutputDir(string arch) 
+        { 
+            return Path.Combine(this.repoRoot, $"generation\\scraper\\obj\\{arch}"); 
+        }
 
         public IEnumerable<PartitionInfo> GetPartitionInfos()
         {

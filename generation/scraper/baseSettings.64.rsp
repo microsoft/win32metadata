@@ -1,0 +1,6 @@
+--exclude
+_SINGLE_LIST_ENTRY
+--remap
+_SINGLE_LIST_ENTRY=SINGLE_LIST_ENTRY
+--additional
+-m64

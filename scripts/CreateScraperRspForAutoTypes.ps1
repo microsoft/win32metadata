@@ -1,7 +1,17 @@
+param
+(
+    [ValidateSet("x64", "x86", "arm64")]
+    [string]
+    $arch = "x64"
+)
+
 . "$PSScriptRoot\CommonUtils.ps1"
 
 $autoTypesRsp = "$emitterDir\autoTypes.rsp"
-$outputFileName = "$scraperDir\autoTypes.generated.rsp"
+
+$scraperObjDir = "$scraperDir\obj\$arch"
+Create-Directory $scraperObjDir
+$outputFileName = "$scraperObjDir\autoTypes.generated.rsp"
 
 $autoTypes = Import-Csv $autoTypesRsp -Delimiter ',' -Header @('Namespace', 'TypeName', 'RawType', 'CloseApi')
 

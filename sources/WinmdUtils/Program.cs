@@ -11,6 +11,7 @@ using System.Text;
 using ICSharpCode.Decompiler;
 using ICSharpCode.Decompiler.Metadata;
 using ICSharpCode.Decompiler.TypeSystem;
+using Windows.Win32.Interop;
 
 namespace WinmdUtils
 {
@@ -278,27 +279,72 @@ namespace WinmdUtils
 
         public static int ShowDuplicateTypes(FileInfo winmd, IConsole console)
         {
-            using WinmdUtils w1 = WinmdUtils.LoadFromFile(winmd.FullName);
-            Dictionary<string, List<string>> nameToTypes = new Dictionary<string, List<string>>();
-            foreach (var type in w1.GetTypes())
+            DecompilerSettings settings = new DecompilerSettings() { ThrowOnAssemblyResolveErrors = false };
+            DecompilerTypeSystem winmd1 = CreateTypeSystemFromFile(winmd.FullName, settings);
+
+            Dictionary<string, List<string>> nameToNamespaces = new Dictionary<string, List<string>>();
+
+            foreach (var type1 in winmd1.GetTopLevelTypeDefinitions())
             {
-                if (type is ClassInfo && type.Name == "Apis")
+                if (type1.FullName == "<Module>")
                 {
                     continue;
                 }
 
-                var toString = type.ToString();
-                if (!nameToTypes.TryGetValue(toString, out var structs))
+                if (type1.ParentModule != winmd1.MainModule)
                 {
-                    structs = new List<string>();
-                    nameToTypes[toString] = structs;
+                    continue;
                 }
 
-                structs.Add(type.Namespace);
+                var typeName = type1.Name;
+                if (type1.Kind == TypeKind.Class && typeName == "Apis")
+                {
+                    continue;
+                }
+
+                StringBuilder members = new StringBuilder();
+                foreach (var m in type1.Members)
+                {
+                    if (type1.Kind == TypeKind.Enum && m.Name == "value__")
+                    {
+                        continue;
+                    }
+
+                    if (m.Name == ".ctor")
+                    {
+                        continue;
+                    }
+
+                    if (members.Length != 0)
+                    {
+                        members.Append(',');
+                    }
+
+                    members.Append(m.Name);
+                }
+
+                if (members.Length != 0)
+                {
+                    typeName += $"({members})";
+                }
+
+                string archInfo = GetArchInfo(type1.GetAttributes());
+                if (!string.IsNullOrEmpty(archInfo))
+                {
+                    typeName += $"({archInfo})";
+                }
+
+                if (!nameToNamespaces.TryGetValue(typeName, out var namespaces))
+                {
+                    namespaces = new List<string>();
+                    nameToNamespaces[typeName] = namespaces;
+                }
+
+                namespaces.Add(type1.Namespace);
             }
 
             bool dupsFound = false;
-            foreach (var pair in nameToTypes)
+            foreach (var pair in nameToNamespaces)
             {
                 if (pair.Value.Count > 1)
                 {
@@ -311,9 +357,9 @@ namespace WinmdUtils
                     pair.Value.Sort();
 
                     console.Out.Write($"{pair.Key}\r\n");
-                    foreach (var type in pair.Value)
+                    foreach (var ns in pair.Value)
                     {
-                        console.Out.Write($"  {type}\r\n");
+                        console.Out.Write($"  {ns}\r\n");
                     }
                 }
             }
@@ -359,23 +405,80 @@ namespace WinmdUtils
             return emptyFound ? -1 : 0;
         }
 
+        private static string GetArchInfo(IEnumerable<IAttribute> attributes)
+        {
+            var archAttr = attributes.FirstOrDefault(a => a.AttributeType.FullName == "Windows.Win32.Interop.SupportedArchitectureAttribute");
+            if (archAttr != null)
+            {
+                Architecture arch = (Architecture)archAttr.FixedArguments[0].Value;
+                return arch.ToString();
+            }
+
+            return string.Empty;
+        }
+
         public static int ShowDuplicateImports(FileInfo winmd, IConsole console)
         {
-            using WinmdUtils w1 = WinmdUtils.LoadFromFile(winmd.FullName);
-            Dictionary<string, List<string>> nameToImports = new Dictionary<string, List<string>>();
-            foreach (var imp in w1.GetDllImports())
+            DecompilerSettings settings = new DecompilerSettings() { ThrowOnAssemblyResolveErrors = false };
+            DecompilerTypeSystem winmd1 = CreateTypeSystemFromFile(winmd.FullName, settings);
+
+            Dictionary<string, List<string>> dllImportsToClassNames = new Dictionary<string, List<string>>();
+
+            foreach (var type1 in winmd1.GetTopLevelTypeDefinitions())
             {
-                if (!nameToImports.TryGetValue(imp.Name, out var imports))
+                if (type1.FullName == "<Module>")
                 {
-                    imports = new List<string>();
-                    nameToImports[imp.Name] = imports;
+                    continue;
                 }
 
-                imports.Add(imp.DeclaringType);
+                if (type1.ParentModule != winmd1.MainModule)
+                {
+                    continue;
+                }
+
+                if (type1.Kind != TypeKind.Class)
+                {
+                    continue;
+                }
+
+                foreach (var method in type1.GetMethods())
+                {
+                    if (!method.IsStatic)
+                    {
+                        continue;
+                    }
+
+                    var dllImportAttr = method.GetAttribute(KnownAttribute.DllImport);
+                    if (dllImportAttr != null)
+                    {
+                        string entryPoint = method.Name;
+                        var dllName = (string)(dllImportAttr.FixedArguments[0].Value);
+                        var entryPointVar = dllImportAttr.NamedArguments.FirstOrDefault(a => a.Name == "EntryPoint");
+                        if (entryPointVar.Name != null)
+                        {
+                            entryPoint = (string)entryPointVar.Value;
+                        }
+
+                        string fullImport = $"{dllName}:{entryPoint}";
+                        string archInfo = GetArchInfo(method.GetAttributes());
+                        if (!string.IsNullOrEmpty(archInfo))
+                        {
+                            fullImport += $"({archInfo})";
+                        }
+
+                        if (!dllImportsToClassNames.TryGetValue(fullImport, out var classNames))
+                        {
+                            classNames = new List<string>();
+                            dllImportsToClassNames[fullImport] = classNames;
+                        }
+
+                        classNames.Add(type1.FullName);
+                    }
+                }
             }
 
             bool dupsFound = false;
-            foreach (var pair in nameToImports)
+            foreach (var pair in dllImportsToClassNames)
             {
                 if (pair.Value.Count > 1)
                 {
@@ -717,6 +820,40 @@ namespace WinmdUtils
             return ret;
         }
 
+        private static string GetFullTypeName(ITypeDefinition typeDefinition)
+        {
+            string name = typeDefinition.FullName;
+            string archInfo = GetArchInfo(typeDefinition.GetAttributes());
+            if (!string.IsNullOrEmpty(archInfo))
+            {
+                name += $"({archInfo})";
+            }
+
+            return name;
+        }
+
+        private static Dictionary<string, ITypeDefinition> GetNamesToTypeDefinitions(DecompilerTypeSystem winmd)
+        {
+            Dictionary<string, ITypeDefinition> ret = new Dictionary<string, ITypeDefinition>();
+            foreach (var type1 in winmd.GetTopLevelTypeDefinitions())
+            {
+                if (type1.FullName == "<Module>")
+                {
+                    continue;
+                }
+
+                if (type1.ParentModule != winmd.MainModule)
+                {
+                    continue;
+                }
+
+                string name = GetFullTypeName(type1);
+                ret[name] = type1;
+            }
+
+            return ret;
+        }
+
         public static int CompareWinmds(FileInfo first, FileInfo second, string exclusions, IConsole console)
         {
             bool same = true;
@@ -724,6 +861,7 @@ namespace WinmdUtils
             DecompilerSettings settings = new DecompilerSettings() { ThrowOnAssemblyResolveErrors = false };
             DecompilerTypeSystem winmd1 = CreateTypeSystemFromFile(first.FullName, settings);
             DecompilerTypeSystem winmd2 = CreateTypeSystemFromFile(second.FullName, settings);
+            Dictionary<string, ITypeDefinition> winmd2NamesToTypes = GetNamesToTypeDefinitions(winmd2);
 
             HashSet<string> visitedNames = new HashSet<string>();
             foreach (var type1 in winmd1.GetTopLevelTypeDefinitions())
@@ -738,12 +876,13 @@ namespace WinmdUtils
                     continue;
                 }
 
-                visitedNames.Add(type1.FullName);
+                var type1Name = GetFullTypeName(type1);
+                visitedNames.Add(type1Name);
 
-                var type2 = winmd2.FindType(type1.FullTypeName) as ITypeDefinition;
+                winmd2NamesToTypes.TryGetValue(type1Name, out var type2);
                 if (type2 == null)
                 {
-                    console.Out.Write($"{type1.FullName} not found in 2nd winmd\r\n");
+                    console.Out.Write($"{type1Name} not found in 2nd winmd\r\n");
                     same = false;
                     continue;
                 }
@@ -751,22 +890,24 @@ namespace WinmdUtils
                 same &= CompareTypes(type1, type2, console);
             }
 
+            Dictionary<string, ITypeDefinition> winmd1NamesToTypes = GetNamesToTypeDefinitions(winmd1);
             foreach (var type2 in winmd2.GetTopLevelTypeDefinitions())
             {
+                var type2FullName = GetFullTypeName(type2);
                 if (type2.ParentModule != winmd2.MainModule)
                 {
                     continue;
                 }
 
-                if (visitedNames.Contains(type2.FullName))
+                if (visitedNames.Contains(type2FullName))
                 {
                     continue;
                 }
 
-                var type1 = winmd1.FindType(type2.FullTypeName) as ITypeDefinition;
+                winmd1NamesToTypes.TryGetValue(type2FullName, out var type1);
                 if (type1 == null)
                 {
-                    console.Out.Write($"{type2.FullName} not found in 1st winmd\r\n");
+                    console.Out.Write($"{type2FullName} not found in 1st winmd\r\n");
                     same = false;
                 }
             }

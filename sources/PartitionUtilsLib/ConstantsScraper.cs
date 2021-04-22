@@ -14,17 +14,17 @@ namespace PartitionUtilsLib
     {
         public static ScraperResults ScrapeConstants(
             string repoRoot,
+            string arch,
             string[] enumJsonFiles,
             string constantsHeaderText,
             Dictionary<string, string> exclusionNamesToPartitions,
             Dictionary<string, string> requiredNamespaces,
             Dictionary<string, string> remaps,
             Dictionary<string, string> withTypes,
-            Dictionary<string, string> renames,
             Dictionary<string, string> withAttributes)
         {
             using ConstantsScraperImpl imp = new ConstantsScraperImpl();
-            return imp.ScrapeConstants(repoRoot, enumJsonFiles, constantsHeaderText, exclusionNamesToPartitions, requiredNamespaces, remaps, withTypes, renames, withAttributes);
+            return imp.ScrapeConstants(repoRoot, arch, enumJsonFiles, constantsHeaderText, exclusionNamesToPartitions, requiredNamespaces, remaps, withTypes, withAttributes);
         }
 
         private class ConstantsScraperImpl : IDisposable
@@ -35,7 +35,7 @@ namespace PartitionUtilsLib
 
             private static readonly Regex DefineConstantRegex =
                 new Regex(
-                    @"^((_HRESULT_TYPEDEF_|_NDIS_ERROR_TYPEDEF_)\(((?:0x)?[\da-f]+L?)\)|(\(HRESULT\)((?:0x)?[\da-f]+L?))|(-?\d+\.\d+(?:e\+\d+)?f?)|((?:0x[\da-f]+|\-?\d+)(?:UL|L)?)|((\d+)\s*(<<\s*\d+))|(MAKEINTRESOURCE\(\s*(\-?\d+)\s*\))|(\(HWND\)(-?\d+))|([a-z0-9_]+\s*\+\s*(\d+|0x[0-de-f]+)))$", RegexOptions.IgnoreCase);
+                    @"^((_HRESULT_TYPEDEF_|_NDIS_ERROR_TYPEDEF_)\(((?:0x)?[\da-f]+L?)\)|(\(HRESULT\)((?:0x)?[\da-f]+L?))|(-?\d+\.\d+(?:e\+\d+)?f?)|((?:0x[\da-f]+|\-?\d+)(?:UL|L)?)|((\d+)\s*(<<\s*\d+))|(MAKEINTRESOURCE\(\s*(\-?\d+)\s*\))|(\(HWND\)(-?\d+))|([a-z0-9_]+\s*\+\s*(\d+|0x[0-de-f]+))|(\(NTSTATUS\)((?:0x)?[\da-f]+L?)))$", RegexOptions.IgnoreCase);
 
             private static readonly Regex DefineGuidConstRegex =
                 new Regex(
@@ -54,6 +54,7 @@ namespace PartitionUtilsLib
             private WildcardDictionary requiredNamespaces;
             private Dictionary<string, string> writtenConstants = new Dictionary<string, string>();
             private string repoRoot;
+            private string arch;
 
             private List<EnumObject> enumObjectsFromJsons;
             private Dictionary<string, string> withTypes;
@@ -74,13 +75,13 @@ namespace PartitionUtilsLib
 
             public ScraperResults ScrapeConstants(
                 string repoRoot,
+                string arch,
                 string[] enumJsonFiles,
                 string constantsHeaderText,
                 Dictionary<string, string> exclusionNamesToPartitions,
                 Dictionary<string, string> requiredNamespaces,
                 Dictionary<string, string> remaps,
                 Dictionary<string, string> withTypes,
-                Dictionary<string, string> renames,
                 Dictionary<string, string> withAttributes)
             {
                 this.requiredNamespaces = new WildcardDictionary(requiredNamespaces);
@@ -90,6 +91,7 @@ namespace PartitionUtilsLib
                 this.withAttributes = withAttributes;
 
                 this.repoRoot = Path.GetFullPath(repoRoot);
+                this.arch = arch;
 
                 this.InitEnumFlagsFixupFile();
 
@@ -118,6 +120,8 @@ namespace PartitionUtilsLib
 
                 namespacesToConstantWriters.Clear();
             }
+
+            private string EmitterGeneratedDir => Path.Combine(this.repoRoot, $@"generation\emitter\generated\{this.arch}");
 
             private static Dictionary<string, string> GetAutoValueReplacements()
             {
@@ -159,7 +163,7 @@ namespace PartitionUtilsLib
 
             private void InitEnumFlagsFixupFile()
             {
-                this.enumFlagsFixupFileName = Path.Combine(repoRoot, $@"generation\emitter\enumsMakeFlags.generated.rsp");
+                this.enumFlagsFixupFileName = Path.Combine(this.EmitterGeneratedDir, "enumsMakeFlags.generated.rsp");
                 if (File.Exists(this.enumFlagsFixupFileName))
                 {
                     File.Delete(this.enumFlagsFixupFileName);
@@ -290,7 +294,7 @@ namespace PartitionUtilsLib
 
                 if (!this.namespacesToConstantWriters.TryGetValue(foundNamespace, out var constantWriter))
                 {
-                    string partConstantsFile = Path.Combine(repoRoot, $@"generation\emitter\generated\{foundNamespace}.constants.cs");
+                    string partConstantsFile = Path.Combine(EmitterGeneratedDir, $@"{foundNamespace}.constants.cs");
                     if (File.Exists(partConstantsFile))
                     {
                         File.Delete(partConstantsFile);
@@ -366,7 +370,7 @@ namespace PartitionUtilsLib
                     string currentNamespace = partInfo.Namespace;
 
                     // For each traversed header, scrape the constants
-                    foreach (var header in partInfo.GetTraverseHeaders(true))
+                    foreach (var header in partInfo.GetTraverseHeaders(true, this.arch))
                     {
                         if (!File.Exists(header))
                         {
@@ -536,6 +540,12 @@ namespace PartitionUtilsLib
                                 {
                                     valueText = match.Groups[15].Value;
                                 }
+                                // (NTSTATUS)0x00000000L
+                                else if (match.Groups[17].Success)
+                                {
+                                    nativeTypeName = "NTSTATUS";
+                                    valueText = match.Groups[18].Value;
+                                }
                                 else
                                 {
                                     continue;
@@ -642,7 +652,7 @@ namespace PartitionUtilsLib
             {
                 // Output the enums and the rsp entries that map parameters and fields to use
                 // enum names
-                var enumRemapsFileName = Path.Combine(repoRoot, $@"generation\emitter\generated\enumsRemap.rsp");
+                var enumRemapsFileName = Path.Combine(this.EmitterGeneratedDir, "enumsRemap.rsp");
 
                 using StreamWriter enumRemapsWriter = new StreamWriter(enumRemapsFileName);
                 enumRemapsWriter.WriteLine("--remap");
@@ -717,7 +727,7 @@ namespace PartitionUtilsLib
                     if (!namespacesToEnumWriters.TryGetValue(foundNamespace, out var enumWriter))
                     {
                         string fixedNamespaceName = foundNamespace.Replace("Windows.Win32.", string.Empty);
-                        string enumFile = Path.Combine(repoRoot, $@"generation\emitter\generated\{fixedNamespaceName}.enums.cs");
+                        string enumFile = Path.Combine(this.EmitterGeneratedDir, $"{fixedNamespaceName}.enums.cs");
                         if (File.Exists(enumFile))
                         {
                             File.Delete(enumFile);

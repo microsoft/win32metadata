@@ -57,10 +57,26 @@ steps:
     version: '3.x'
 
 - task: PowerShell@2
-  displayName: Generate Win32 metadata C# source using WinSDK NuGet packages
+  displayName: Scrape Win32 headers - x64
   inputs:
     filePath: 'scripts\GenerateMetadataSource.ps1'
-    arguments: '-artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0 -downloadNugetVersion $(DownloadNugetVersion) -publishNugetVersion $(PublishNugetVersion)'
+    arguments: '-arch x64 -artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0 -downloadNugetVersion $(DownloadNugetVersion) -publishNugetVersion $(PublishNugetVersion)'
+    errorActionPreference: 'continue'
+    pwsh: true
+
+- task: PowerShell@2
+  displayName: Scrape Win32 headers - x64
+  inputs:
+    filePath: 'scripts\GenerateMetadataSource.ps1'
+    arguments: '-arch x86 -artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0 -downloadNugetVersion $(DownloadNugetVersion) -publishNugetVersion $(PublishNugetVersion)'
+    errorActionPreference: 'continue'
+    pwsh: true
+
+- task: PowerShell@2
+  displayName: Scrape Win32 headers - x64
+  inputs:
+    filePath: 'scripts\GenerateMetadataSource.ps1'
+    arguments: '-arch arm64 -artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0 -downloadNugetVersion $(DownloadNugetVersion) -publishNugetVersion $(PublishNugetVersion)'
     errorActionPreference: 'continue'
     pwsh: true
 
@@ -68,7 +84,7 @@ steps:
   displayName: Build metadata binary
   inputs:
     filePath: 'scripts\BuildMetadataBin.ps1'
-    arguments: '-assemblyVersion $(PrepOutput.NugetVersion)'
+    arguments: '-assemblyVersion $(PrepOutput.NugetVersion) -arch crossarch'
     pwsh: true
 
 - task: PowerShell@2
