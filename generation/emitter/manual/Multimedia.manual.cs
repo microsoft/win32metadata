@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using Windows.Win32.Interop;
 using static Windows.Win32.WindowsAndMessaging.Apis;
 
-namespace Windows.Win32.Multimedia
+namespace Windows.Win32.Media.Multimedia
 {
     // We need to define this manually because of how it's defined with duplicate typedefs
     [UnmanagedFunctionPointer]

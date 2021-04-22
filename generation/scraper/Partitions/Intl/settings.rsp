@@ -25,4 +25,4 @@
 <IncludeRoot>/um/icu.h
 <IncludeRoot>/um/dimm.h
 --namespace
-Windows.Win32.Intl
+Windows.Win32.Globalization

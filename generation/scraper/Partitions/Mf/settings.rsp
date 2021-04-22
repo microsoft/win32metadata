@@ -40,4 +40,4 @@ tagMPEG2VIDEOINFO
 <IncludeRoot>/um/mfcontentdecryptionmodule.h
 <IncludeRoot>/um/mediaobj.h
 --namespace
-Windows.Win32.MediaFoundation
+Windows.Win32.Media.MediaFoundation
