@@ -620,6 +620,12 @@ namespace WinmdUtils
 
             methodName.Append(')');
 
+            string archInfo = GetArchInfo(method.GetAttributes());
+            if (!string.IsNullOrEmpty(archInfo))
+            {
+                methodName.Append($"({archInfo})");
+            }
+
             return methodName.ToString();
         }
 
