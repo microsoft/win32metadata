@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using Windows.Win32.Interop;
 
-namespace Windows.Win32.Rpc
+namespace Windows.Win32.System.Rpc
 {
     // Because this emits with an anonymous name
     public unsafe partial struct NDR_SCONTEXT_1

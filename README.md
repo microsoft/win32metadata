@@ -147,7 +147,7 @@ The partitions are meant to break up headers into namespaces. However, some head
 (Both functions come from winuser.h)
 
     BeginPaint=Windows.Win32.Graphics.Gdi
-    CreateWindowExW=Windows.Win32.WindowsAndMessaging
+    CreateWindowExW=Windows.Win32.UI.WindowsAndMessaging
 
 # How to Generate the .winmd
 PowerShell Core is required to run the generation scripts. Open a PowerShell Core window and:

@@ -16,4 +16,4 @@
 <IncludeRoot>/um/wmdxva.h
 <IncludeRoot>/um/wmsinternaladminnetsource.h
 --namespace
-Windows.Win32.WindowsMediaFormat
+Windows.Win32.Media.WindowsMediaFormat

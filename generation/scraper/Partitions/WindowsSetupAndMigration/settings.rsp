@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/oobenotification.h
 --namespace
-Windows.Win32.WindowsSetupAndMigration
+Windows.Win32.System.SetupAndMigration

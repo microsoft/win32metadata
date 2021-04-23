@@ -2,7 +2,7 @@ using System;
 using System.Runtime.InteropServices;
 using Windows.Win32.Interop;
 
-namespace Windows.Win32.WindowsAndMessaging
+namespace Windows.Win32.UI.WindowsAndMessaging
 {
     public static unsafe partial class Apis
     {

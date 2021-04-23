@@ -10,7 +10,7 @@
 --traverse
 <IncludeRoot>/um/xamlOM.h
 --namespace
-Windows.Win32.XamlDiagnostics
+Windows.Win32.UI.Xaml.Diagnostics
 --with-librarypath
 InitializeXamlDiagnostic=Windows.UI.Xaml
 InitializeXamlDiagnosticsEx=Windows.UI.Xaml

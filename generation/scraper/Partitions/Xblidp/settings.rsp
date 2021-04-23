@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/XblIdpAuthManager.h
 --namespace
-Windows.Win32.Xblidp
+Windows.Win32.Gaming

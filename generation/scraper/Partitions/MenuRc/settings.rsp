@@ -14,7 +14,7 @@
 <IncludeRoot>/shared/strsafe.h
 <IncludeRoot>/um/winver.h
 --namespace
-Windows.Win32.WindowsAndMessaging
+Windows.Win32.UI.WindowsAndMessaging
 --exclude
 WINSTAENUMPROC
 WINSTAENUMPROCA

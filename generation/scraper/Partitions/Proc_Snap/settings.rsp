@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/ProcessSnapshot.h
 --namespace
-Windows.Win32.ProcessSnapshotting
+Windows.Win32.System.Diagnostics.ProcessSnapshotting

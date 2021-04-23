@@ -57,4 +57,4 @@ ID2D1Factory
 <IncludeRoot>/winrt/activation.h
 <IncludeRoot>/um/restrictederrorinfo.h
 --namespace
-Windows.Win32.WinRT
+Windows.Win32.System.WinRT

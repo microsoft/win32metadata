@@ -17,4 +17,4 @@
 <IncludeRoot>/um/DocumentTarget.h
 <IncludeRoot>/um/prntvpt.h
 --namespace
-Windows.Win32.Xps
+Windows.Win32.Storage.Xps

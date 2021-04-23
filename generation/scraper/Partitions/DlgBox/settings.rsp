@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/commdlg.h
 --namespace
-Windows.Win32.WindowsAndMessaging
+Windows.Win32.UI.WindowsAndMessaging

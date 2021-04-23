@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 using Windows.Win32.Interop;
-using static Windows.Win32.WindowsAndMessaging.Apis;
+using static Windows.Win32.UI.WindowsAndMessaging.Apis;
 
 namespace Windows.Win32.Media.Multimedia
 {

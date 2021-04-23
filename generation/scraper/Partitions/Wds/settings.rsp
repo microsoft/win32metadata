@@ -15,4 +15,4 @@
 <IncludeRoot>/um/WdsTptMgmt.h
 <IncludeRoot>/um/WdsBp.h
 --namespace
-Windows.Win32.WindowsDeploymentServices
+Windows.Win32.System.DeploymentServices

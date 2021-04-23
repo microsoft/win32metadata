@@ -45,4 +45,4 @@ _NavigateToPidl=_NavigateToPidl2
 <IncludeRoot>/um/appnotify.h
 <IncludeRoot>/um/propkeydef.h
 --namespace
-Windows.Win32.Shell
+Windows.Win32.UI.Shell

@@ -1,5 +1,5 @@
 --autoTypes
-Windows.Win32.WindowsAndMessaging,HWND,IntPtr
+Windows.Win32.UI.WindowsAndMessaging,HWND,IntPtr
 Windows.Win32.SystemServices,BOOL,int
 Windows.Win32.SystemServices,WSTR,char*
 Windows.Win32.SystemServices,STR,byte*
