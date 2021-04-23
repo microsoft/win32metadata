@@ -6,6 +6,8 @@
 //#include <windows.h>
 //#include <sdkddkver.h>
 
+#include "intrinfix.h"
+
 #include <winsock2.h>
 #include <in6addr.h>
 #include <IPTypes.h>

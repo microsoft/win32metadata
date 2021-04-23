@@ -431,3 +431,8 @@ MsiEndTransaction::dwTransactionState=MSITRANSACTIONSTATE
 ADsOpenObject::dwReserved=ADS_AUTHENTICATION_ENUM
 GetObjectA::h=HGDIOBJ
 GetObjectW::h=HGDIOBJ
+EapHostPeerGetDataToUnplumbCredentials::phCredentialImpersonationToken=IntPtr*
+FARPROC::return=IntPtr
+NEARPROC::return=IntPtr
+PROC::return=IntPtr
+

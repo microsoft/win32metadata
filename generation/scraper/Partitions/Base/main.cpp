@@ -38,7 +38,12 @@
 #include <winbase.h>
 #include <winnt.h>
 #include <winerror.h>
+#include <ntstatus.h>
+
+#define USERMODE_DRIVER
 #include <winddi.h>
+#undef USERMODE_DRIVER
+
 #include <winuser.h>
 
 #include <utilapiset.h>
