@@ -144,10 +144,10 @@ jobs:
     artifact: 'generated_arm64'
 
 - job: build_winmd
-  displayName: Build winmd
+  displayName: Build and test winmd
   dependsOn: ['job_calc_nuget_version','scrape_x64','scrape_x86','scrape_arm64']
   variables:
-    PublishNugetVersion: $[ dependencies.job_calc_nuget_version.outputs['PublishNugetVersion']]
+    PublishNugetVersion: $[ dependencies.job_calc_nuget_version.outputs['echoVersion.PublishNugetVersion']]
   pool:
     name: Package ES Standard Build
     demands:
@@ -191,6 +191,7 @@ jobs:
       pwsh: true
 
 - job: sign_and_pack_nuget
+  displayName: Sign and pack NuGet
   dependsOn: ['job_calc_nuget_version','build_winmd']
   variables:
     System.Debug: true
