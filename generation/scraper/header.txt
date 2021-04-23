@@ -170,7 +170,7 @@ using Windows.Win32.Media.WindowsMediaFormat;
 using Windows.Win32.Media.LibrarySharingServices;
 using Windows.Win32.Media.MediaPlayer;
 using Windows.Win32.Devices.PortableDevices;
-using Windows.Win32.WindowsProgramming;
+using Windows.Win32.System.WindowsProgramming;
 using Windows.Win32.System.PropertiesSystem;
 using Windows.Win32.System.RemoteManagement;
 using Windows.Win32.UI.Ribbon;
