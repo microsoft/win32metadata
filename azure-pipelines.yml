@@ -13,6 +13,9 @@ jobs:
 - job: job_calc_nuget_version
   displayName: Calculate published NuGet version
  
+  pool:
+    name: Package ES Standard Build
+
   variables:
     System.Debug: true
     OutputPackagesDir: $(Build.ArtifactStagingDirectory)\CreatedNugetPackages
@@ -20,9 +23,11 @@ jobs:
     BuildNumberSuffix: $(Build.BuildNumber)
   
   steps:
+  - checkout: none
   - task: PowerShell@2
     displayName: Update PublishNugetVersion, set build number
     inputs:
+      pwsh: true
       targetType: 'inline'
       script: |
         $nugetVer = ${env:PublishNugetVersion}
