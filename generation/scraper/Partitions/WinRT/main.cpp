@@ -22,6 +22,7 @@
 #include <UserConsentVerifierInterop.h>
 #include <WebAuthenticationCoreManagerInterop.h>
 #include <windows.data.pdf.interop.h>
+#include <windows.devices.alljoyn.interop.h>
 #include <Windows.Devices.Display.Core.Interop.h>
 #include <Windows.Graphics.Capture.Interop.h>
 #include <windows.graphics.directx.direct3d11.interop.h>
