@@ -9,5 +9,8 @@
 <IncludeRoot>/winrt
 --traverse
 <IncludeRoot>/um/ddpbackup.h
+<IncludeRoot>/um/ddpchunk.h
+<IncludeRoot>/um/ddpcommon.h
+<IncludeRoot>/um/ddpdataport.h
 --namespace
 Windows.Win32.DataDeduplication
