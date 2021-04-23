@@ -146,7 +146,6 @@ namespace ClangSharpSourceToWinmd
 
                         var firstVar = field.Declaration.Variables.First();
                         var nativeType = GetNativeTypeForSignature(field.AttributeLists);
-
                         ret.Append(nativeType ?? field.Declaration.Type.ToString());
                         ret.Append(' ');
                         ret.Append(firstVar.ToString());
