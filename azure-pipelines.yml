@@ -79,7 +79,7 @@ jobs:
       pwsh: true
 
   - publish: 'generation\emitter\generated\x64'
-    artifact: 'generated_x64'
+    artifact: 'x64'
 
 - job: scrape_x86
   displayName: Scrape headers for x86
@@ -110,7 +110,7 @@ jobs:
       pwsh: true
   
   - publish: 'generation\emitter\generated\x86'
-    artifact: 'generated_x86'
+    artifact: 'x86'
 
 - job: scrape_arm64
   displayName: Scrape headers for arm64
@@ -141,7 +141,7 @@ jobs:
       pwsh: true
   
   - publish: 'generation\emitter\generated\arm64'
-    artifact: 'generated_arm64'
+    artifact: 'arm64'
 
 - job: build_winmd
   displayName: Build and test winmd
@@ -163,18 +163,21 @@ jobs:
 
   - task: DownloadPipelineArtifact@2
     inputs:
-      artifact: 'generated_x64'
-      path: 'generation\emitter\generated\x64'
+      artifact: 'x64'
+      path: 'generation\emitter\generated'
 
   - task: DownloadPipelineArtifact@2
     inputs:
-      artifact: 'generated_x86'
-      path: 'generation\emitter\generated\x86'
+      artifact: 'x86'
+      path: 'generation\emitter\generated'
 
   - task: DownloadPipelineArtifact@2
     inputs:
-      artifact: 'generated_arm64'
-      path: 'generation\emitter\generated\arm64'
+      artifact: 'arm64'
+      path: 'generation\emitter\generated'
+
+  - script: dir generation\emitter\generated /s
+    displayName: Show generated dir contents
 
   - task: PowerShell@2
     displayName: Build metadata binary
