@@ -548,7 +548,7 @@ namespace WinmdUtils
 
                 if (field1.Type.FullName != field2.Type.FullName)
                 {
-                    console.Out.Write($"{type1.FullTypeName}.{field1.Name}...{field1.Type.Name} => {field2.Type.Name}\r\n");
+                    console.Out.Write($"{type1.FullTypeName}.{field1.Name}...{field1.Type.FullName} => {field2.Type.FullName}\r\n");
                     ret = false;
                     continue;
                 }

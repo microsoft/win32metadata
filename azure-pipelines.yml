@@ -10,25 +10,12 @@ trigger:
 pr: none
 
 jobs:
-- job: Build_metadata
-  timeoutInMinutes: "120"
-
-  pool:
-    name: Package ES Standard Build
-    demands:
-    - msbuild
-    - visualstudio
-    - visualstudio -equals C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\
+- job: job_calc_nuget_version
+  displayName: Calculate published NuGet version
  
-  workspace:
-    clean: all
-  
   variables:
-    buildPlatform: 'x64'
-    buildConfiguration: 'Release'
     System.Debug: true
     OutputPackagesDir: $(Build.ArtifactStagingDirectory)\CreatedNugetPackages
-    PipelineRunName: $(resources.pipeline.winsdk.runName)
     Patch: $[counter(variables['DownloadNugetVersion'], 10)]
     BuildNumberSuffix: $(Build.BuildNumber)
   
@@ -42,18 +29,27 @@ jobs:
         if (!$nugetVer)
         {
             $nugetVer = "${env:DownloadNugetVersion}-preview.${env:Patch}"
-            Write-Output "##vso[task.setvariable variable=PublishNugetVersion]$nugetVer"
+            Write-Output "##vso[task.setvariable variable=PublishNugetVersion;isOutput=true;]$nugetVer"
         }
   
         $verSuffix = ${env:BuildNumberSuffix}
         Write-Host "##vso[build.updatebuildnumber]$($nugetVer)_$($verSuffix)"
-  
-  - task: UseDotNet@2
-    displayName: Install DotNet 2.1.x for signing tasks
-    inputs:
-      packageType: 'sdk'
-      version: '2.1.x'
-  
+
+- job: scrape_x64
+  displayName: Scrape headers for x64
+  pool:
+    name: Package ES Standard Build
+    demands:
+    - msbuild
+    - visualstudio
+    - visualstudio -equals C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\
+  workspace:
+    clean: all
+  dependsOn: ['job_calc_nuget_version']
+  variables:
+    PublishNugetVersion: $[ dependencies.job_calc_nuget_version.outputs['PublishNugetVersion']]
+
+  steps:
   - task: UseDotNet@2
     displayName: Use DotNet 3.x
     inputs:
@@ -61,7 +57,7 @@ jobs:
       version: '3.x'
   
   - task: PowerShell@2
-    displayName: Scrape Win32 headers - x64
+    displayName: GenerateMetadataSource.ps1 - x64
     inputs:
       filePath: 'scripts\GenerateMetadataSource.ps1'
       arguments: '-arch x64 -artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0 -downloadNugetVersion $(DownloadNugetVersion) -publishNugetVersion $(PublishNugetVersion)'
@@ -69,36 +65,139 @@ jobs:
       pwsh: true
   
   - task: PowerShell@2
-    displayName: Scrape Win32 headers - x86
+    displayName: Scrape constants
+    inputs:
+      filePath: 'scripts\BuildMetadataBin.ps1'
+      arguments: '-assemblyVersion $(PublishNugetVersion) -arch crossarch -SkipBinary'
+      pwsh: true
+
+  - publish: 'generation\emitter\generated\x64'
+    artifact: 'generated_x64'
+
+- job: scrape_x86
+  displayName: Scrape headers for x86
+  pool:
+    name: Package ES Standard Build
+    demands:
+    - msbuild
+    - visualstudio
+    - visualstudio -equals C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\
+  workspace:
+    clean: all
+  dependsOn: ['job_calc_nuget_version']
+  variables:
+    PublishNugetVersion: $[ dependencies.job_calc_nuget_version.outputs['PublishNugetVersion']]
+  steps:
+  - task: UseDotNet@2
+    displayName: Use DotNet 3.x
+    inputs:
+      packageType: 'sdk'
+      version: '3.x'
+  
+  - task: PowerShell@2
+    displayName: GenerateMetadataSource.ps1 - x86
     inputs:
       filePath: 'scripts\GenerateMetadataSource.ps1'
       arguments: '-arch x86 -artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0 -downloadNugetVersion $(DownloadNugetVersion) -publishNugetVersion $(PublishNugetVersion)'
       errorActionPreference: 'continue'
       pwsh: true
   
+  - publish: 'generation\emitter\generated\x86'
+    artifact: 'generated_x86'
+
+- job: scrape_arm64
+  displayName: Scrape headers for arm64
+  pool:
+    name: Package ES Standard Build
+    demands:
+    - msbuild
+    - visualstudio
+    - visualstudio -equals C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\
+  workspace:
+    clean: all
+  dependsOn: ['job_calc_nuget_version']
+  variables:
+    PublishNugetVersion: $[ dependencies.job_calc_nuget_version.outputs['PublishNugetVersion']]
+  steps:
+  - task: UseDotNet@2
+    displayName: Use DotNet 3.x
+    inputs:
+      packageType: 'sdk'
+      version: '3.x'
+  
   - task: PowerShell@2
-    displayName: Scrape Win32 headers - arm64
+    displayName: GenerateMetadataSource.ps1 - arm64
     inputs:
       filePath: 'scripts\GenerateMetadataSource.ps1'
       arguments: '-arch arm64 -artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0 -downloadNugetVersion $(DownloadNugetVersion) -publishNugetVersion $(PublishNugetVersion)'
       errorActionPreference: 'continue'
       pwsh: true
   
+  - publish: 'generation\emitter\generated\arm64'
+    artifact: 'generated_arm64'
+
+- job: build_winmd
+  displayName: Build winmd
+  dependsOn: ['job_calc_nuget_version','scrape_x64','scrape_x86','scrape_arm64']
+  variables:
+    PublishNugetVersion: $[ dependencies.job_calc_nuget_version.outputs['PublishNugetVersion']]
+  pool:
+    name: Package ES Standard Build
+    demands:
+    - msbuild
+    - visualstudio
+    - visualstudio -equals C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\
+  steps:
+  - task: UseDotNet@2
+    displayName: Use DotNet 3.x
+    inputs:
+      packageType: 'sdk'
+      version: '3.x'
+
+  - task: DownloadPipelineArtifact@2
+    inputs:
+      artifact: 'generated_x64'
+      path: 'generation\emitter\generated\x64'
+
+  - task: DownloadPipelineArtifact@2
+    inputs:
+      artifact: 'generated_x86'
+      path: 'generation\emitter\generated\x86'
+
+  - task: DownloadPipelineArtifact@2
+    inputs:
+      artifact: 'generated_arm64'
+      path: 'generation\emitter\generated\arm64'
+
   - task: PowerShell@2
     displayName: Build metadata binary
     inputs:
       filePath: 'scripts\BuildMetadataBin.ps1'
-      arguments: '-assemblyVersion $(PrepOutput.NugetVersion) -arch crossarch'
+      arguments: '-assemblyVersion $(PublishNugetVersion) -arch crossarch -SkipConstants'
       pwsh: true
   
   - task: PowerShell@2
     displayName: Test metadata binary
     inputs:
       filePath: 'scripts\TestWinmdBinary.ps1'
-      arguments: '-assemblyVersion $(PrepOutput.NugetVersion)'
+      arguments: '-assemblyVersion $(PublishNugetVersion)'
       pwsh: true
-  
+
+- job: sign_and_pack_nuget
+  dependsOn: ['job_calc_nuget_version','build_winmd']
+  variables:
+    System.Debug: true
+    OutputPackagesDir: $(Build.ArtifactStagingDirectory)\CreatedNugetPackages
+    PublishNugetVersion: $[ dependencies.job_calc_nuget_version.outputs['PublishNugetVersion']]
+
+  steps:
     # ESRP Authenticode sign package DLLs
+  - task: UseDotNet@2
+    displayName: Install DotNet 2.1.x for signing tasks
+    inputs:
+      packageType: 'sdk'
+      version: '2.1.x'
+
   - task: EsrpCodeSigning@1
     displayName: 'Authenticode Sign Packaged Dlls'
     inputs:
@@ -150,7 +249,7 @@ jobs:
       packagesToPack: 'sources\nuget\Microsoft.Windows.SDK.Win32Metadata\Microsoft.Windows.SDK.Win32Metadata.nuspec'
       packDestination: '$(OutputPackagesDir)'
       versioningScheme: 'byEnvVar'
-      versionEnvVar: 'PrepOutput.NugetVersion'
+      versionEnvVar: 'PublishNugetVersion'
       basePath: '$(Build.SourcesDirectory)'
   
   - task: EsrpCodeSigning@1

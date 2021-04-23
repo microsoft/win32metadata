@@ -5,7 +5,11 @@ param
 
     [ValidateSet("crossarch", "x64", "x86", "arm64")]
     [string]
-    $arch = "x64"
+    $arch = "crossarch",
+
+    [switch]$SkipConstants = $false,
+
+    [switch]$SkipBinary = $false
 )
 
 $scraperArch = $arch
@@ -15,8 +19,6 @@ if ($arch -eq "crossarch")
 }
 
 . "$PSScriptRoot\CommonUtils.ps1"
-
-Write-Output "`e[36m*** Building .winmd`e[0m"
 
 if (!$assemblyVersion)
 {
@@ -67,28 +69,34 @@ $constantsHeaderTxt = "$scraperDir\ConstantsHeader.txt"
 $enumsJson = "$scraperDir\enums.json"
 
 
-Write-Output "`n"
-Write-Output "Scraping constants and enums..."
-Write-Output "Calling: dotnet $constantsScraperPathBin --repoRoot $rootDir --arch $scraperArch --enumsJson $enumsJson --headerTextFile $constantsHeaderTxt @$constantsScraperRsp @$requiredNamespacesForNames @$remapFileName"
-
-& dotnet $constantsScraperPathBin --repoRoot $rootDir --arch $scraperArch --enumsJson $enumsJson --headerTextFile $constantsHeaderTxt @$constantsScraperRsp @$requiredNamespacesForNames @$remapFileName
-if ($LastExitCode -ne 0)
+if (!$SkipConstants)
 {
-    Write-Error "Failed to scrape constants."
-    exit $LastExitCode
+    Write-Output "`n"
+    Write-Output "e[36m*** Scraping constants and enums...`e[0m"
+    Write-Output "Calling: dotnet $constantsScraperPathBin --repoRoot $rootDir --arch $scraperArch --enumsJson $enumsJson --headerTextFile $constantsHeaderTxt @$constantsScraperRsp @$requiredNamespacesForNames @$remapFileName"
+
+    & dotnet $constantsScraperPathBin --repoRoot $rootDir --arch $scraperArch --enumsJson $enumsJson --headerTextFile $constantsHeaderTxt @$constantsScraperRsp @$requiredNamespacesForNames @$remapFileName
+    if ($LastExitCode -ne 0)
+    {
+        Write-Error "Failed to scrape constants."
+        exit $LastExitCode
+    }
 }
 
-$outputWinmdFileName = Get-OutputWinmdFileName -Arch $arch
-
-Write-Output "`n"
-Write-Output "Creating $outputWinmdFileName..."
-Write-Output "Calling: dotnet $clangSharpSourceToWinmdBin --sourceDir $emitterDir --arch $arch --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName @$requiredNamespacesForNames @$autoTypesFileName @$enumsRemapFileName @$functionPointerFixupsRsp @$enumsMakeFlagsRsp"
-
-& dotnet $clangSharpSourceToWinmdBin --sourceDir $emitterDir --arch $arch --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName @$requiredNamespacesForNames @$autoTypesFileName @$enumsRemapFileName @$functionPointerFixupsRsp @$enumsMakeFlagsRsp
-if ($LastExitCode -ne 0)
+if (!$SkipBinary)
 {
-    Write-Error "Failed to build .winmd."
-    exit $LastExitCode
-}
+    $outputWinmdFileName = Get-OutputWinmdFileName -Arch $arch
 
-Write-Output "`n`e[32mGenerating .winmd succeeded`e[0m"
+    Write-Output "`n"
+    Write-Output "`e[36m*** Creating $outputWinmdFileName...`e[0m"
+    Write-Output "Calling: dotnet $clangSharpSourceToWinmdBin --sourceDir $emitterDir --arch $arch --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName @$requiredNamespacesForNames @$autoTypesFileName @$enumsRemapFileName @$functionPointerFixupsRsp @$enumsMakeFlagsRsp"
+
+    & dotnet $clangSharpSourceToWinmdBin --sourceDir $emitterDir --arch $arch --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName @$requiredNamespacesForNames @$autoTypesFileName @$enumsRemapFileName @$functionPointerFixupsRsp @$enumsMakeFlagsRsp
+    if ($LastExitCode -ne 0)
+    {
+        Write-Error "Failed to build .winmd."
+        exit $LastExitCode
+    }
+
+    Write-Output "`n`e[32mGenerating .winmd succeeded`e[0m"
+}
