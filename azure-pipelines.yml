@@ -29,7 +29,8 @@ jobs:
         $nugetVer = ${env:PublishNugetVersion}
         if (!$nugetVer)
         {
-            $parts = $nugetVer.Split(".")
+            $downloadVer = "${env:DownloadNugetVersion}"
+            $parts = $downloadVer.Split(".")
             $parts[3] = ${env:Patch}
             $nugetVer = [string]::Join(".", $parts) + "-preview"
             Write-Output "##vso[task.setvariable variable=PublishNugetVersion;isOutput=true;]$nugetVer"
