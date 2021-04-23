@@ -4,7 +4,7 @@ using Windows.Win32.Interop;
 using static Windows.Win32.System.Diagnostics.Debug.FACILITY_CODE;
 using static Windows.Win32.SystemServices.Apis;
 
-namespace Windows.Win32.Com
+namespace Windows.Win32.System.Com
 {
     public static unsafe partial class Apis
     {

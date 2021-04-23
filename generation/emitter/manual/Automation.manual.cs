@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-using Windows.Win32.Com;
+using Windows.Win32.System.Com;
 
 namespace Windows.Win32.System.OleAutomation
 {
