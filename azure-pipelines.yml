@@ -190,6 +190,9 @@ jobs:
       arguments: '-assemblyVersion $(PublishNugetVersion) -arch crossarch -SkipConstants'
       pwsh: true
   
+  - publish: 'bin'
+    artifact: 'bin'
+
   - task: PowerShell@2
     displayName: Test metadata binary
     inputs:
