@@ -164,17 +164,17 @@ jobs:
   - task: DownloadPipelineArtifact@2
     inputs:
       artifact: 'x64'
-      path: 'generation\emitter\generated'
+      path: 'generation\emitter\generated\x64'
 
   - task: DownloadPipelineArtifact@2
     inputs:
       artifact: 'x86'
-      path: 'generation\emitter\generated'
+      path: 'generation\emitter\generated\x86'
 
   - task: DownloadPipelineArtifact@2
     inputs:
       artifact: 'arm64'
-      path: 'generation\emitter\generated'
+      path: 'generation\emitter\generated\arm64'
 
   - script: dir generation\emitter\generated /s
     displayName: Show generated dir contents
