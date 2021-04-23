@@ -11,4 +11,4 @@
 <IncludeRoot>/um/propsys.h
 <IncludeRoot>/um/propvarutil.h
 --namespace
-Windows.Win32.WindowsPropertiesSystem
+Windows.Win32.System.PropertiesSystem

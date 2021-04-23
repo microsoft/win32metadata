@@ -16,4 +16,4 @@
 <IncludeRoot>/um/ctfspui.h
 <IncludeRoot>/um/MsCtfMonitorApi.h
 --namespace
-Windows.Win32.UserAccessLogging
+Windows.Win32.System.UserAccessLogging

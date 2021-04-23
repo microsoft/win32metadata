@@ -1,8 +1,8 @@
 --allowItem
-Windows.Win32.Rpc.NDR_CS_ROUTINES.pTagGettingRoutines
-Windows.Win32.Rpc.MIDL_STUB_DESC.apfnNdrRundownRoutines
-Windows.Win32.Rpc.MIDL_STUB_DESC.apfnExprEval
-Windows.Win32.Rpc.MIDL_STUB_DESC.NotifyRoutineTable
-Windows.Win32.Rpc.MIDL_SERVER_INFO.DispatchTable
-Windows.Win32.Rpc.MIDL_SERVER_INFO.ThunkTable
+Windows.Win32.System.Rpc.NDR_CS_ROUTINES.pTagGettingRoutines
+Windows.Win32.System.Rpc.MIDL_STUB_DESC.apfnNdrRundownRoutines
+Windows.Win32.System.Rpc.MIDL_STUB_DESC.apfnExprEval
+Windows.Win32.System.Rpc.MIDL_STUB_DESC.NotifyRoutineTable
+Windows.Win32.System.Rpc.MIDL_SERVER_INFO.DispatchTable
+Windows.Win32.System.Rpc.MIDL_SERVER_INFO.ThunkTable
 Windows.Win32.Globalization.Apis.utrace_getFunctions

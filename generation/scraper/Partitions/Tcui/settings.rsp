@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/gamingtcui.h
 --namespace
-Windows.Win32.TitleCallableUI
+Windows.Win32.Gaming
