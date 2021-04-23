@@ -144,7 +144,7 @@ jobs:
     artifact: 'arm64'
 
 - job: build_winmd
-  displayName: Build and test winmd
+  displayName: Build, test, sign, package winmd
   workspace:
     clean: all
   dependsOn: ['job_calc_nuget_version','scrape_x64','scrape_x86','scrape_arm64']
@@ -162,6 +162,13 @@ jobs:
     inputs:
       packageType: 'sdk'
       version: '3.x'
+
+    # ESRP Authenticode sign package DLLs
+  - task: UseDotNet@2
+    displayName: Install DotNet 2.1.x for signing tasks
+    inputs:
+      packageType: 'sdk'
+      version: '2.1.x'
 
   - task: DownloadPipelineArtifact@2
     inputs:
@@ -195,15 +202,6 @@ jobs:
       arguments: '-assemblyVersion $(PublishNugetVersion)'
       pwsh: true
 
-- job: sign_and_pack_nuget
-  displayName: Sign and pack NuGet
-  dependsOn: ['job_calc_nuget_version','build_winmd']
-  variables:
-    System.Debug: true
-    OutputPackagesDir: $(Build.ArtifactStagingDirectory)\CreatedNugetPackages
-    PublishNugetVersion: $[ dependencies.job_calc_nuget_version.outputs['echoVersion.PublishNugetVersion']]
-
-  steps:
     # ESRP Authenticode sign package DLLs
   - task: UseDotNet@2
     displayName: Install DotNet 2.1.x for signing tasks
@@ -309,4 +307,3 @@ jobs:
       packagesToPush: '$(OutputPackagesDir)/**/*.nupkg;!$(OutputPackagesDir)/**/*.symbols.nupkg'
       publishVstsFeed: 'c1408dcb-1833-4ae4-9af5-1a891a12cc3c'
       allowPackageConflicts: true
-    
