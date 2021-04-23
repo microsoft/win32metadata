@@ -25,6 +25,7 @@ jobs:
   steps:
   - checkout: none
   - task: PowerShell@2
+    name: updateVersion
     displayName: Update PublishNugetVersion, set build number
     inputs:
       pwsh: true
@@ -37,7 +38,7 @@ jobs:
             Write-Output "##vso[task.setvariable variable=PublishNugetVersion;isOutput=true;]$nugetVer"
         }
 
-        Write-Output "PublishNugetVersion = $PublishNugetVersion"
+        Write-Output "PublishNugetVersion = $(updateVersion.PublishNugetVersion)"
   
         $verSuffix = ${env:BuildNumberSuffix}
         Write-Host "##vso[build.updatebuildnumber]$($nugetVer)_$($verSuffix)"
@@ -54,7 +55,7 @@ jobs:
     clean: all
   dependsOn: ['job_calc_nuget_version']
   variables:
-    PublishNugetVersion: $[ dependencies.job_calc_nuget_version.outputs['PublishNugetVersion'] ]
+    PublishNugetVersion: $[ dependencies.job_calc_nuget_version.outputs['updateVersion.PublishNugetVersion'] ]
 
   steps:
   - task: UseDotNet@2
