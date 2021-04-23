@@ -80,6 +80,38 @@ namespace ClangSharpSourceToWinmd
             return map;
         }
 
+        public IEnumerable<Architecture> GetSignatureArchGroupings(string name)
+        {
+            if (this.namesToInfos.TryGetValue(name, out var crossArchInfos))
+            {
+                foreach (var info in crossArchInfos)
+                {
+                    yield return info.Arch;
+                }
+            }
+        }
+
+        public IEnumerable<Architecture> GetSignatureArchGroupings(SyntaxNode node)
+        {
+            string name = SyntaxUtils.GetFullName(node, true);
+            return this.GetSignatureArchGroupings(name);
+        }
+
+        private static string GetNativeTypeForSignature(SyntaxList<AttributeListSyntax> attributeLists)
+        {
+            var nativeType = SyntaxUtils.GetNativeTypeNameFromAttributesLists(attributeLists);
+
+            // If the native type has a '/' it means it contains a path, which won't compare well
+            // in a cloud build when different architectures are built on different agents. Just
+            // return null in that case
+            if (nativeType != null && nativeType.Contains('/'))
+            {
+                nativeType = null;
+            }
+
+            return nativeType;
+        }
+
         private static string GetFullSignature(SyntaxNode node)
         {
             if (node is StructDeclarationSyntax s)
@@ -113,7 +145,8 @@ namespace ClangSharpSourceToWinmd
                         }
 
                         var firstVar = field.Declaration.Variables.First();
-                        var nativeType = SyntaxUtils.GetNativeTypeNameFromAttributesLists(field.AttributeLists);
+                        var nativeType = GetNativeTypeForSignature(field.AttributeLists);
+
                         ret.Append(nativeType ?? field.Declaration.Type.ToString());
                         ret.Append(' ');
                         ret.Append(firstVar.ToString());
@@ -147,7 +180,7 @@ namespace ClangSharpSourceToWinmd
                         ret.Append(',');
                     }
 
-                    var nativeType = SyntaxUtils.GetNativeTypeNameFromAttributesLists(param.AttributeLists);
+                    var nativeType = GetNativeTypeForSignature(param.AttributeLists);
                     ret.Append(nativeType ?? param.Type.ToString());
                     ret.Append(' ');
                     ret.Append(param.Identifier.ValueText);
@@ -159,23 +192,6 @@ namespace ClangSharpSourceToWinmd
             }
 
             return node.ToString();
-        }
-
-        public IEnumerable<Architecture> GetSignatureArchGroupings(string name)
-        {
-            if (this.namesToInfos.TryGetValue(name, out var crossArchInfos))
-            {
-                foreach (var info in crossArchInfos)
-                {
-                    yield return info.Arch;
-                }
-            }
-        }
-
-        public IEnumerable<Architecture> GetSignatureArchGroupings(SyntaxNode node)
-        {
-            string name = SyntaxUtils.GetFullName(node, true);
-            return this.GetSignatureArchGroupings(name);
         }
 
         private void AddNode(Architecture arch, SyntaxNode node)

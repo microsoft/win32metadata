@@ -145,6 +145,8 @@ jobs:
 
 - job: build_winmd
   displayName: Build and test winmd
+  workspace:
+    clean: all
   dependsOn: ['job_calc_nuget_version','scrape_x64','scrape_x86','scrape_arm64']
   variables:
     PublishNugetVersion: $[ dependencies.job_calc_nuget_version.outputs['echoVersion.PublishNugetVersion']]
