@@ -59,7 +59,7 @@ using Windows.Win32.Storage.IscsiDisc;
 using Windows.Win32.System.Kernel;
 using Windows.Win32.UI.LegacyWindowsEnvironmentFeatures;
 using Windows.Win32.Devices.Geolocation;
-using Windows.Win32.AI.MachineLearning;
+using Windows.Win32.AI.MachineLearning.WinML;
 using Windows.Win32.UI.Magnification;
 using Windows.Win32.Media.MediaFoundation;
 using Windows.Win32.Media.MediaTransport;

@@ -13,4 +13,4 @@ MLOperatorEdgeTypeConstrant
 <IncludeRoot>/um/winml.h
 <IncludeRoot>/um/MLOperatorAuthor.h
 --namespace
-Windows.Win32.AI.MachineLearning
+Windows.Win32.AI.MachineLearning.WinML
