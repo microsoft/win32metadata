@@ -27,6 +27,7 @@ namespace ClangSharpSourceToWinmd
 
         public static ClangSharpSourceCompilation Create(
             string sourceDirectory,
+            string arch,
             string interopFileName,
             Dictionary<string, string> remaps,
             Dictionary<string, Dictionary<string, string>> enumAdditions,
@@ -48,7 +49,7 @@ namespace ClangSharpSourceToWinmd
             refs.Add(MetadataReference.CreateFromFile(netstandardPath));
 
             List<SyntaxTree> syntaxTrees = new List<SyntaxTree>();
-            var sourceFiles = Directory.GetFiles(sourceDirectory, "*.cs", SearchOption.AllDirectories).Where(f => !f.EndsWith("modified.cs"));
+            var sourceFiles = Directory.GetFiles(sourceDirectory, "*.cs", SearchOption.AllDirectories).Where(f => IsValidCsSourceFile(f, arch));
             System.Threading.Tasks.ParallelOptions opt = new System.Threading.Tasks.ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount * 2 };
             System.Threading.Tasks.Parallel.ForEach(sourceFiles, opt, (sourceFile) =>
             {
@@ -63,13 +64,19 @@ namespace ClangSharpSourceToWinmd
 
             syntaxTrees = NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(syntaxTrees, requiredNamespaces);
 
+            if (arch == "crossarch")
+            {
+                CrossArchSyntaxMap crossArchSyntaxMap = CrossArchSyntaxMap.LoadFromTrees(syntaxTrees);
+                syntaxTrees = CrossArchTreeMerger.MergeTrees(crossArchSyntaxMap, syntaxTrees);
+            }
+
             HashSet<string> foundNonEmptyStructs = GetNonEmptyStructs(syntaxTrees);
 
 #if MakeSingleThreaded
             opt.MaxDegreeOfParallelism = 1;
 #endif
 
-            string objDir = Path.Combine(sourceDirectory, "obj");
+            string objDir = Path.Combine(sourceDirectory, $"obj\\{arch}");
             Directory.CreateDirectory(objDir);
 
             HashSet<string> enumsMakeFlagsHashSet = enumsMakeFlags != null ? new HashSet<string>(enumsMakeFlags) : new HashSet<string>();
@@ -168,6 +175,34 @@ namespace ClangSharpSourceToWinmd
             }
 
             return diags.AsReadOnly();
+        }
+
+        private static bool IsValidCsSourceFile(string fileName, string arch)
+        {
+            if (fileName.EndsWith("modified.cs"))
+            {
+                return false;
+            }
+
+            string potentialArch = Path.GetFileName(Path.GetDirectoryName(fileName));
+            if (potentialArch == "x86" || potentialArch == "x64" || potentialArch == "arm64")
+            {
+                if (arch == "crossarch")
+                {
+                    if (potentialArch != "x64" && (fileName.EndsWith("autotypes.cs") || fileName.EndsWith(".enums.cs") || fileName.EndsWith(".constants.cs")))
+                    {
+                        return false;
+                    }
+
+                    return true;
+                }
+                else
+                {
+                    return arch == potentialArch;
+                }
+            }
+
+            return true;
         }
 
         private static string FindNetstandardDllPath()

@@ -3555,6 +3555,17 @@
     "uses": []
   },
   {
+    "namespace": "Windows.Win32.SystemServices",
+    "type": "uint",
+    "name": "NTSTATUS_FACILITY_CODE",
+    "autoPopulate": {
+      "filter": "FACILITY_",
+      "header": "ntstatus.h"
+    },
+    "members": [],
+    "uses": []
+  },
+  {
     "type": "int",
     "name": "WSA_ERROR",
     "autoPopulate": {
