@@ -42,13 +42,18 @@ namespace PartitionUtilsLib
             return null;
         }
 
-        public static string GetFullName(SyntaxNode node)
+        public static string GetFullSignature(SyntaxNode node)
+        {
+            return node.ToString();
+        }
+
+        public static string GetFullName(SyntaxNode node, bool includeNamespace)
         {
             string parentName = null;
             string ret = null;
             if (node is DelegateDeclarationSyntax delNode)
             {
-                parentName = GetFullName(delNode.Parent);
+                parentName = GetFullName(delNode.Parent, includeNamespace);
                 ret = delNode.Identifier.Text;
             }
             else if (node is ClassDeclarationSyntax)
@@ -57,27 +62,39 @@ namespace PartitionUtilsLib
             }
             else if (node is StructDeclarationSyntax structNode)
             {
-                parentName = GetFullName(structNode.Parent);
+                parentName = GetFullName(structNode.Parent, includeNamespace);
                 ret = structNode.Identifier.Text;
             }
             else if (node is MethodDeclarationSyntax methodNode)
             {
-                parentName = GetFullName(methodNode.Parent);
+                if (methodNode.Parent.Parent is NamespaceDeclarationSyntax && includeNamespace)
+                {
+                    parentName = GetFullName(methodNode.Parent.Parent, includeNamespace);
+                }
+                else
+                {
+                    parentName = GetFullName(methodNode.Parent, includeNamespace);
+                }
+
                 ret = methodNode.Identifier.Text;
             }
             else if (node is ParameterSyntax paramNode)
             {
-                parentName = GetFullName(paramNode.Parent.Parent);
+                parentName = GetFullName(paramNode.Parent.Parent, includeNamespace);
                 ret = paramNode.Identifier.Text;
             }
             else if (node is VariableDeclaratorSyntax varNode)
             {
-                parentName = GetFullName(varNode.Parent.Parent.Parent);
+                parentName = GetFullName(varNode.Parent.Parent.Parent, includeNamespace);
                 ret = varNode.Identifier.Text;
             }
             else if (node is FieldDeclarationSyntax fieldNode)
             {
-                ret = GetFullName(fieldNode.Declaration.Variables.First());
+                ret = GetFullName(fieldNode.Declaration.Variables.First(), includeNamespace);
+            }
+            else if (node is NamespaceDeclarationSyntax namespaceNode && includeNamespace)
+            {
+                ret = namespaceNode.Name.ToString();
             }
             else
             {
@@ -90,6 +107,11 @@ namespace PartitionUtilsLib
             }
 
             return ret;
+        }
+
+        public static string GetFullName(SyntaxNode node)
+        {
+            return GetFullName(node, false);
         }
     }
 }

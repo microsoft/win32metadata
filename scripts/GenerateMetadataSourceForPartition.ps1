@@ -10,9 +10,22 @@ param
     [string]
     $partitionName,
 
+    [ValidateSet("x64", "x86", "arm64")]
+    [string]
+    $arch = "x64",
+
     [string]
     $indent = ""
 )
+
+if (($arch -eq "x64") -or ($arch -eq "arm64"))
+{
+    $bitness = 64
+}
+else
+{
+    $bitness = 32
+}
 
 . "$PSScriptRoot\CommonUtils.ps1"
 
@@ -35,7 +48,7 @@ if (!(Test-Path $partitionGenerateDir))
     exit -1
 }
 
-$generationOutArtifactsDir = "$baseGenerateDir\obj"
+$generationOutArtifactsDir = "$baseGenerateDir\obj\$arch"
 Create-Directory $generationOutArtifactsDir
 
 $generatorOutput = Join-Path -Path $generationOutArtifactsDir -ChildPath "$partitionName.generation.output.txt"
@@ -44,6 +57,8 @@ $withSetLastErrorRsp = "$baseGenerateDir\WithSetLastError.rsp"
 $supportedOSRsp = "$baseGenerateDir\supportedOS.rsp"
 
 $baseSettingsRsp = "$baseGenerateDir\baseSettings.rsp"
+$baseSettingsBitnessRsp = "$baseGenerateDir\baseSettings.$bitness.rsp"
+$baseSettingsArchRsp = "$baseGenerateDir\baseSettings.$arch.rsp"
 $partitionSettingsRsp = "$partitionGenerateDir\settings.rsp"
 if (!(Test-Path $partitionSettingsRsp))
 {
@@ -52,22 +67,22 @@ if (!(Test-Path $partitionSettingsRsp))
 }
 
 $baseRemapRsp = "$baseGenerateDir\baseRemap.rsp"
-$autoTypesRemapRsp = "$baseGenerateDir\autoTypes.generated.rsp"
-$functionPointerFixupsRsp = "$baseGenerateDir\functionPointerFixups.generated.rsp"
+$autoTypesRemapRsp = "$baseGenerateDir\obj\$arch\autoTypes.generated.rsp"
+$functionPointerFixupsRsp = "$baseGenerateDir\obj\$arch\functionPointerFixups.generated.rsp"
 
 $fixedSettingsRsp = "$generationOutArtifactsDir\$partitionName.fixedSettings.rsp"
 
 Copy-Item $partitionSettingsRsp -Destination $fixedSettingsRsp
 
 $includePath = (Get-ChildItem -Path "$nugetDestPackagesDir\Microsoft.Windows.SDK.CPP.$version\c\Include").FullName.Replace('\', '/')
-$generatedSourceDir = "$rootDir\generation\emitter\generated"
+$generatedSourceDir = "$rootDir\generation\emitter\generated\$arch"
 [hashtable]$textToReplaceTable = @{ "<IncludeRoot>" = $includePath; "<RepoRoot>" = $rootDir; "<PartitionName>" = $partitionName; "<PartitionDir>" = $partitionGenerateDir; "<GeneratedSourceDir>" = $generatedSourceDir}
 Replace-Text $fixedSettingsRsp $textToReplaceTable
 
 Write-Output "$($indent)$partitionName..."
-Write-Output "$($indent)$toolsDir\ClangSharpPInvokeGenerator.exe @$baseSettingsRsp @$withSetLastErrorRsp @$supportedOSRsp @$fixedSettingsRsp @$baseRemapRsp @$autoTypesRemapRsp @$functionPointerFixupsRsp @$libMappingOutputFileName > $generatorOutput"
+Write-Output "$($indent)$toolsDir\ClangSharpPInvokeGenerator.exe @$baseSettingsRsp @$baseSettingsBitnessRsp @$baseSettingsArchRsp @$withSetLastErrorRsp @$supportedOSRsp @$fixedSettingsRsp @$baseRemapRsp @$autoTypesRemapRsp @$functionPointerFixupsRsp @$libMappingOutputFileName > $generatorOutput"
 
-& $toolsDir\ClangSharpPInvokeGenerator.exe "@$baseSettingsRsp" "@$withSetLastErrorRsp" "@$supportedOSRsp" "@$fixedSettingsRsp" "@$baseRemapRsp" "@$autoTypesRemapRsp" "@$functionPointerFixupsRsp" "@$libMappingOutputFileName" > $generatorOutput
+& $toolsDir\ClangSharpPInvokeGenerator.exe "@$baseSettingsRsp" "@$baseSettingsBitnessRsp" "@$baseSettingsArchRsp" "@$withSetLastErrorRsp" "@$supportedOSRsp" "@$fixedSettingsRsp" "@$baseRemapRsp" "@$autoTypesRemapRsp" "@$functionPointerFixupsRsp" "@$libMappingOutputFileName" > $generatorOutput
 if ($LASTEXITCODE -lt 0)
 {
     Write-Error "$($indent)ClangSharpPInvokeGenerator.exe failed, full output at $generatorOutput`:"

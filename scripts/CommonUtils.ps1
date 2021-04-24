@@ -94,13 +94,28 @@ function Get-VcDirPath
 
     return null
 }
+
+function Get-OutputWinmdFileName
+{
+    param ($Arch = 'x64')
+
+    if ($Arch -ne "crossarch")
+    {
+        $path = "$binDir\Windows.Win32.$Arch.winmd"
+    }
+    else
+    {
+        $path = "$binDir\Windows.Win32.winmd"
+    }
+
+    return $path
+}
     
 $defaultWinSDKNugetVersion = "10.0.19041.5"
 
 $rootDir = [System.IO.Path]::GetFullPath("$PSScriptRoot\..")
 $toolsDir = "$rootDir\tools"
 $binDir = "$rootDir\bin"
-$outputWinmdFileName = "$binDir\Windows.Win32.winmd"
 $sourcesDir = "$rootDir\sources"
 $generationDir = "$rootDir\generation"
 $scraperDir = "$generationDir\scraper"

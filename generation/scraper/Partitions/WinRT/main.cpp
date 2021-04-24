@@ -47,6 +47,7 @@
 #include <shcore.h>
 #include <memorybuffer.h>
 #include <activation.h>
+#include <weakreference.h>
 
 /*
 #include <winnt.h>
@@ -75,7 +76,6 @@
 //#include <roregistrationapi.h>
 #include <shcore.h>
 #include <shobjidl_core.h>
-//#include <weakreference.h>
 //#include <webauthenticationcoremanagerinterop.h>
 //#include <windows.applicationmodel.core.h>
 //#include <windows.applicationmodel.h>
