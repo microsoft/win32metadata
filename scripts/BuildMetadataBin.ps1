@@ -72,7 +72,7 @@ $enumsJson = "$scraperDir\enums.json"
 if (!$SkipConstants)
 {
     Write-Output "`n"
-    Write-Output "e[36m*** Scraping constants and enums...`e[0m"
+    Write-Output "`e[36m*** Scraping constants and enums...`e[0m"
     Write-Output "Calling: dotnet $constantsScraperPathBin --repoRoot $rootDir --arch $scraperArch --enumsJson $enumsJson --headerTextFile $constantsHeaderTxt @$constantsScraperRsp @$requiredNamespacesForNames @$remapFileName"
 
     & dotnet $constantsScraperPathBin --repoRoot $rootDir --arch $scraperArch --enumsJson $enumsJson --headerTextFile $constantsHeaderTxt @$constantsScraperRsp @$requiredNamespacesForNames @$remapFileName
