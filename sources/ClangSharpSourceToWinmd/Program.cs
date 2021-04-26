@@ -14,6 +14,7 @@ namespace ClangSharpSourceToWinmd
             var rootCommand = new RootCommand("Convert ClangSharp-generated code into metadata")
             {
                 new Option<string>(new[] { "--sourceDir", "-s" }, "The location of the source files.") { IsRequired = true },
+                new Option<string>(new[] { "--arch" }, () => { return "x64"; }, "The CPU architecture."),
                 new Option<string>(new[] { "--interopFileName", "-i" }, "The path to Windows.Win32.Interop.dll") { IsRequired = true },
                 new Option<string>(new[] { "--baseMetadataFileName", "-b" }, "The path to Windows.Win32.winmd") { IsRequired = false },
                 new Option<string>(new[] { "--outputNamespace" }, "The namespace for an external .winmd") { IsRequired = false },
@@ -85,6 +86,7 @@ namespace ClangSharpSourceToWinmd
         public static int Run(InvocationContext context)
         {
             string sourceDirectory = context.ParseResult.ValueForOption<string>("sourceDir");
+            string arch = context.ParseResult.ValueForOption<string>("arch");
             string interopFileName = context.ParseResult.ValueForOption<string>("interopFileName");
             string baseMetadataFileName = context.ParseResult.ValueForOption<string>("baseMetadataFileName");
             string outputNamespace = context.ParseResult.ValueForOption<string>("outputNamespace");
@@ -107,7 +109,8 @@ namespace ClangSharpSourceToWinmd
             string rawVersion = version.Split('-')[0];
             Version assemblyVersion = Version.Parse(rawVersion);
 
-            NativeTypedefStructsCreator.CreateNativeTypedefsSourceFile(autoTypes, Path.Combine(sourceDirectory, "generated\\autotypes.cs"));
+            string archForAutoTypes = arch == "crossarch" ? "x64" : arch;
+            NativeTypedefStructsCreator.CreateNativeTypedefsSourceFile(autoTypes, Path.Combine(sourceDirectory, $"generated\\{archForAutoTypes}\\autotypes.cs"));
 
             Console.Write($"Compiling source files...");
             System.Diagnostics.Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
@@ -115,6 +118,7 @@ namespace ClangSharpSourceToWinmd
             ClangSharpSourceCompilation clangSharpCompliation =
                 ClangSharpSourceCompilation.Create(
                     sourceDirectory,
+                    arch,
                     interopFileName,
                     baseMetadataFileName,
                     outputNamespace,

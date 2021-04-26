@@ -15,6 +15,7 @@ namespace ConstantsScraperApp
                 new Option<string>(new[] { "--generationDir" }, "The location of the generation/external directory.") { IsRequired = true },
                 new Option<string>(new[] { "--externalPackageDir" }, "The location of the external NuGet package installation.") { IsRequired = false },
                 new Option<string>(new[] { "--outputNamespace" }, "The namespace for an external .winmd.") { IsRequired = false },
+                new Option<string>(new[] { "--arch" }, () => { return "x64"; }, "The CPU architecture."),
                 new Option<string>(new[] { "--headerTextFile" }, "The text file to use as the intro text for written constants source files."),
                 new Option(new string[] { "--exclude" }, "A constant to exclude.")
                 {
@@ -84,11 +85,11 @@ namespace ConstantsScraperApp
             string generationDir = context.ParseResult.ValueForOption<string>("generationDir");
             string externalPackageDir = context.ParseResult.ValueForOption<string>("externalPackageDir");
             string outputNamespace = context.ParseResult.ValueForOption<string>("outputNamespace");
+            string arch = context.ParseResult.ValueForOption<string>("arch");
             var excludeItems = context.ParseResult.ValueForOption<string[]>("exclude");
             var enumJsonFiles = context.ParseResult.ValueForOption<string[]>("enumsJson");
             var headerTextFile = context.ParseResult.ValueForOption<string>("headerTextFile");
             var requiredNamespaceValuePairs = context.ParseResult.ValueForOption<string[]>("requiredNamespaceForName");
-            var renamedNameValuePairs = context.ParseResult.ValueForOption<string[]>("rename");
             var remappedNameValuePairs = context.ParseResult.ValueForOption<string[]>("remap");
             var withTypeValuePairs = context.ParseResult.ValueForOption<string[]>("with-type");
             var withAttributeValuePairs = context.ParseResult.ValueForOption<string[]>("with-attribute");
@@ -96,7 +97,6 @@ namespace ConstantsScraperApp
             var exclusionNamesToPartitions = ConvertExclusionsToDictionary(excludeItems);
             var requiredNamespaces = ConvertValuePairsToDictionary(requiredNamespaceValuePairs);
             var remaps = ConvertValuePairsToDictionary(remappedNameValuePairs);
-            var renames = ConvertValuePairsToDictionary(renamedNameValuePairs);
             var withTypes = ConvertValuePairsToDictionary(withTypeValuePairs);
             var withAttributes = ConvertValuePairsToDictionary(withAttributeValuePairs);
 
@@ -110,13 +110,13 @@ namespace ConstantsScraperApp
                         generationDir,
                         externalPackageDir,
                         outputNamespace,
+                        arch,
                         enumJsonFiles,
                         headerText,
                         exclusionNamesToPartitions,
                         requiredNamespaces,
                         remaps,
                         withTypes,
-                        renames,
                         withAttributes);
             }
             catch (System.Exception e)

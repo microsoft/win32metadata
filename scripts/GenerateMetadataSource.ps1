@@ -4,6 +4,10 @@ param
     [string]
     $artifactsDir,
 
+    [ValidateSet("x64", "x86", "arm64")]
+    [string]
+    $arch = "x64",
+
     [string]
     $pipelineRunName,
 
@@ -186,8 +190,8 @@ Remove-Item "$sdkGeneratedSourceDir\*.cs"
 Invoke-PrepLibMappingsFile $artifactsDir $version
 Invoke-RecompileMidlHeaders $artifactsDir $version
 
-& $PSScriptRoot\CreateScraperRspForAutoTypes.ps1
-& $PSScriptRoot\CreateRspsForFunctionPointerFixups.ps1
+& $PSScriptRoot\CreateScraperRspForAutoTypes.ps1 -arch $arch
+& $PSScriptRoot\CreateRspsForFunctionPointerFixups.ps1 -arch $arch
 
 $throttleCount = [System.Environment]::ProcessorCount / 2
 if ($throttleCount -lt 2)
@@ -213,8 +217,8 @@ if (!$externalOnly)
             continue
         }
 
-        $out1 = "`n$using:PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -version $using:version -partitionName $_ -artifactsDir $using:artifactsDir..."
-        $out2 = & $using:PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -version $using:version -partitionName $_ -artifactsDir $using:artifactsDir -indent "`n  "
+        $out1 = "`n$using:PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -arch $using:arch -version $using:version -partitionName $_ -artifactsDir $using:artifactsDir..."
+        $out2 = & $using:PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -arch $using:arch -version $using:version -partitionName $_ -artifactsDir $using:artifactsDir -indent "`n  "
         Write-Output "$out1$out2"
 
         if ($LastExitCode -lt 0)
@@ -249,8 +253,8 @@ $externalGeneratedSourceDir = "$emitterDir\generated"
 Create-Directory $externalGeneratedSourceDir
 Remove-Item "$externalGeneratedSourceDir\*.cs"
 
-& $PSScriptRoot\CreateScraperRspForAutoTypes.ps1 -isExternal
-& $PSScriptRoot\CreateRspsForFunctionPointerFixups.ps1 -isExternal
+& $PSScriptRoot\CreateScraperRspForAutoTypes.ps1 -arch $arch -isExternal
+& $PSScriptRoot\CreateRspsForFunctionPointerFixups.ps1 -arch $arch -isExternal
 
 $partitionNames = Get-ChildItem $partitionsDir | Select-Object -ExpandProperty Name
 
@@ -268,8 +272,8 @@ $partitionNames | ForEach-Object -Parallel {
         continue
     }
 
-    $out1 = "`n$using:PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -version $using:version -partitionName $_ -artifactsDir $using:artifactsDir -isExternal..."
-    $out2 = & $using:PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -version $using:version -partitionName $_ -artifactsDir $using:artifactsDir -indent "`n  " -isExternal
+    $out1 = "`n$using:PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -arch $using:arch -version $using:version -partitionName $_ -artifactsDir $using:artifactsDir -isExternal..."
+    $out2 = & $using:PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -arch $using:arch -version $using:version -partitionName $_ -artifactsDir $using:artifactsDir -indent "`n  " -isExternal
     Write-Output "$out1$out2"
 
     if ($LastExitCode -lt 0)

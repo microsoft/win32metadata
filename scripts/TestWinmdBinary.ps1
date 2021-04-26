@@ -18,7 +18,7 @@ if (!$assemblyVersion)
 
 if (!$winmdPath)
 {
-    $winmdPath = $outputWinmdFileName
+    $winmdPath = Get-OutputWinmdFileName -arch "crossarch"
 }
 
 function FindBestBaselineWinmd

@@ -1,180 +1,300 @@
-# Universal Windows Platform
-# Build a Universal Windows Platform project using Visual Studio.
-# Add steps that test and distribute an app, save build artifacts, and more:
-# https://aka.ms/yaml
-
 trigger:
   branches:
     include:
     - master
 pr: none
 
-pool:
-  name: Package ES Standard Build
-  demands:
-  - msbuild
-  - visualstudio
-  - visualstudio -equals C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\
+jobs:
+- job: job_calc_nuget_version
+  displayName: Calculate published NuGet version
  
-workspace:
-  clean: all
+  pool:
+    name: Package ES Standard Build
 
-variables:
-  buildPlatform: 'x64'
-  buildConfiguration: 'Release'
-  System.Debug: true
-  OutputPackagesDir: $(Build.ArtifactStagingDirectory)\CreatedNugetPackages
-  PipelineRunName: $(resources.pipeline.winsdk.runName)
-  Patch: $[counter(variables['DownloadNugetVersion'], 10)]
-  BuildNumberSuffix: $(Build.BuildNumber)
-
-steps:
-- task: PowerShell@2
-  displayName: Update PublishNugetVersion, set build number
-  inputs:
-    targetType: 'inline'
-    script: |
-      $nugetVer = ${env:PublishNugetVersion}
-      if (!$nugetVer)
-      {
-          $nugetVer = "${env:DownloadNugetVersion}-preview.${env:Patch}"
-          Write-Output "##vso[task.setvariable variable=PublishNugetVersion]$nugetVer"
-      }
-
-      $verSuffix = ${env:BuildNumberSuffix}
-      Write-Host "##vso[build.updatebuildnumber]$($nugetVer)_$($verSuffix)"
-
-- task: UseDotNet@2
-  displayName: Install DotNet 2.1.x for signing tasks
-  inputs:
-    packageType: 'sdk'
-    version: '2.1.x'
-
-- task: UseDotNet@2
-  displayName: Use DotNet 3.x
-  inputs:
-    packageType: 'sdk'
-    version: '3.x'
-
-- task: PowerShell@2
-  displayName: Generate Win32 metadata C# source using WinSDK NuGet packages
-  inputs:
-    filePath: 'scripts\GenerateMetadataSource.ps1'
-    arguments: '-artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0 -downloadNugetVersion $(DownloadNugetVersion) -publishNugetVersion $(PublishNugetVersion)'
-    errorActionPreference: 'continue'
-    pwsh: true
-
-- task: PowerShell@2
-  displayName: Build metadata binary
-  inputs:
-    filePath: 'scripts\BuildMetadataBin.ps1'
-    arguments: '-assemblyVersion $(PrepOutput.NugetVersion)'
-    pwsh: true
-
-- task: PowerShell@2
-  displayName: Test metadata binary
-  inputs:
-    filePath: 'scripts\TestWinmdBinary.ps1'
-    arguments: '-assemblyVersion $(PrepOutput.NugetVersion)'
-    pwsh: true
-
-  # ESRP Authenticode sign package DLLs
-- task: EsrpCodeSigning@1
-  displayName: 'Authenticode Sign Packaged Dlls'
-  inputs:
-    ConnectedServiceName: 'Undocked RegFree Signing Connection'
-    FolderPath: '$(Build.SourcesDirectory)\bin'
-    Pattern: '*.dll,*.winmd'
-    signConfigType: 'inlineSignParams'
-    inlineOperation: |
-      [
+  variables:
+    System.Debug: true
+    OutputPackagesDir: $(Build.ArtifactStagingDirectory)\CreatedNugetPackages
+    Patch: $[counter(variables['DownloadNugetVersion'], 10)]
+    BuildNumberSuffix: $(Build.BuildNumber)
+  
+  steps:
+  - checkout: none
+  - task: PowerShell@2
+    name: echoVersion
+    displayName: Update PublishNugetVersion, set build number
+    inputs:
+      pwsh: true
+      targetType: 'inline'
+      script: |
+        $nugetVer = ${env:PublishNugetVersion}
+        if (!$nugetVer)
         {
-          "keyCode": "CP-230012",
-          "operationSetCode": "SigntoolSign",
-          "parameters": [
-            {
-              "parameterName": "OpusName",
-              "parameterValue": "Microsoft"
-            },
-            {
-              "parameterName": "OpusInfo",
-              "parameterValue": "http://www.microsoft.com"
-            },
-            {
-              "parameterName": "PageHash",
-              "parameterValue": "/NPH"
-            },
-            {
-              "parameterName": "FileDigest",
-              "parameterValue": "/fd sha256"
-            },
-            {
-              "parameterName": "TimeStamp",
-              "parameterValue": "/tr \"http://rfc3161.gtm.corp.microsoft.com/TSS/HttpTspServer\" /td sha256"
-            }
-          ],
-          "toolName": "signtool.exe",
-          "toolVersion": "6.2.9304.0"
+            $downloadVer = "${env:DownloadNugetVersion}"
+            $parts = $downloadVer.Split(".")
+            $parts[3] = ${env:Patch}
+            $nugetVer = [string]::Join(".", $parts) + "-preview"
+            Write-Output "##vso[task.setvariable variable=PublishNugetVersion;isOutput=true;]$nugetVer"
         }
-      ]
-    SessionTimeout: '60'
-    MaxConcurrency: '50'
-    MaxRetryAttempts: '2'
-    condition: eq(variables['SignFiles'], 'true')
 
-  # There's a problem on microsoft.visualstudio.com that requires the guid instead of NuGetCommand@2
-- task: 333b11bd-d341-40d9-afcf-b32d5ce6f23b@2
-  displayName: Pack metadata nuget package
-  inputs:
-    command: 'pack'
-    packagesToPack: 'sources\nuget\Microsoft.Windows.SDK.Win32Metadata\Microsoft.Windows.SDK.Win32Metadata.nuspec'
-    packDestination: '$(OutputPackagesDir)'
-    versioningScheme: 'byEnvVar'
-    versionEnvVar: 'PrepOutput.NugetVersion'
-    basePath: '$(Build.SourcesDirectory)'
+        $verSuffix = ${env:BuildNumberSuffix}
+        Write-Host "##vso[build.updatebuildnumber]$($nugetVer)_$($verSuffix)"
+  - script: echo var = $(echoVersion.PublishNugetVersion)
+    displayName: Echo publish nuget version
+- job: scrape_x64
+  displayName: "Scrape headers: x64"
+  pool:
+    name: Package ES Standard Build
+    demands:
+    - msbuild
+    - visualstudio
+    - visualstudio -equals C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\
+  workspace:
+    clean: all
+  dependsOn: ['job_calc_nuget_version']
+  variables:
+    PublishNugetVersion: $[ dependencies.job_calc_nuget_version.outputs['echoVersion.PublishNugetVersion'] ]
 
-- task: EsrpCodeSigning@1
-  displayName: 'Sign NuGet Package'
-  inputs:
-    ConnectedServiceName: 'Undocked RegFree Signing Connection'
-    FolderPath: '$(OutputPackagesDir)'
-    Pattern: '*.nupkg'
-    signConfigType: 'inlineSignParams'
-    inlineOperation: |
-      [
-        {
-          "KeyCode" : "CP-401405",
-          "OperationCode" : "NuGetSign",
-          "Parameters" : {},
-          "ToolName" : "sign",
-          "ToolVersion" : "1.0"
-        },
-        {
+  steps:
+  - task: UseDotNet@2
+    displayName: Use DotNet 3.x
+    inputs:
+      packageType: 'sdk'
+      version: '3.x'
+  
+  - task: PowerShell@2
+    displayName: GenerateMetadataSource.ps1 - x64
+    inputs:
+      filePath: 'scripts\GenerateMetadataSource.ps1'
+      arguments: '-arch x64 -artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0 -downloadNugetVersion $(DownloadNugetVersion) -publishNugetVersion $(PublishNugetVersion)'
+      errorActionPreference: 'continue'
+      pwsh: true
+  
+  - task: PowerShell@2
+    displayName: Scrape constants
+    inputs:
+      filePath: 'scripts\BuildMetadataBin.ps1'
+      arguments: '-assemblyVersion $(PublishNugetVersion) -arch crossarch -SkipBinary'
+      pwsh: true
+
+  - publish: 'generation\emitter\generated\x64'
+    artifact: 'x64'
+
+- job: scrape_x86
+  displayName: "Scrape headers: x86"
+  pool:
+    name: Package ES Standard Build
+    demands:
+    - msbuild
+    - visualstudio
+    - visualstudio -equals C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\
+  workspace:
+    clean: all
+  dependsOn: ['job_calc_nuget_version']
+  variables:
+    PublishNugetVersion: $[ dependencies.job_calc_nuget_version.outputs['echoVersion.PublishNugetVersion']]
+  steps:
+  - task: UseDotNet@2
+    displayName: Use DotNet 3.x
+    inputs:
+      packageType: 'sdk'
+      version: '3.x'
+  
+  - task: PowerShell@2
+    displayName: GenerateMetadataSource.ps1 - x86
+    inputs:
+      filePath: 'scripts\GenerateMetadataSource.ps1'
+      arguments: '-arch x86 -artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0 -downloadNugetVersion $(DownloadNugetVersion) -publishNugetVersion $(PublishNugetVersion)'
+      errorActionPreference: 'continue'
+      pwsh: true
+  
+  - publish: 'generation\emitter\generated\x86'
+    artifact: 'x86'
+
+- job: scrape_arm64
+  displayName: "Scrape headers: arm64"
+  pool:
+    name: Package ES Standard Build
+    demands:
+    - msbuild
+    - visualstudio
+    - visualstudio -equals C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\
+  workspace:
+    clean: all
+  dependsOn: ['job_calc_nuget_version']
+  variables:
+    PublishNugetVersion: $[ dependencies.job_calc_nuget_version.outputs['echoVersion.PublishNugetVersion']]
+  steps:
+  - task: UseDotNet@2
+    displayName: Use DotNet 3.x
+    inputs:
+      packageType: 'sdk'
+      version: '3.x'
+  
+  - task: PowerShell@2
+    displayName: GenerateMetadataSource.ps1 - arm64
+    inputs:
+      filePath: 'scripts\GenerateMetadataSource.ps1'
+      arguments: '-arch arm64 -artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0 -downloadNugetVersion $(DownloadNugetVersion) -publishNugetVersion $(PublishNugetVersion)'
+      errorActionPreference: 'continue'
+      pwsh: true
+  
+  - publish: 'generation\emitter\generated\arm64'
+    artifact: 'arm64'
+
+- job: build_winmd
+  displayName: Build, test, sign, package winmd
+  workspace:
+    clean: all
+  dependsOn: ['job_calc_nuget_version','scrape_x64','scrape_x86','scrape_arm64']
+  variables:
+    PublishNugetVersion: $[ dependencies.job_calc_nuget_version.outputs['echoVersion.PublishNugetVersion']]
+  pool:
+    name: Package ES Standard Build
+    demands:
+    - msbuild
+    - visualstudio
+    - visualstudio -equals C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\
+  steps:
+  - task: UseDotNet@2
+    displayName: Use DotNet 3.x
+    inputs:
+      packageType: 'sdk'
+      version: '3.x'
+
+    # ESRP Authenticode sign package DLLs
+  - task: UseDotNet@2
+    displayName: Install DotNet 2.1.x for signing tasks
+    inputs:
+      packageType: 'sdk'
+      version: '2.1.x'
+
+  - task: DownloadPipelineArtifact@2
+    inputs:
+      artifact: 'x64'
+      path: 'generation\emitter\generated\x64'
+
+  - task: DownloadPipelineArtifact@2
+    inputs:
+      artifact: 'x86'
+      path: 'generation\emitter\generated\x86'
+
+  - task: DownloadPipelineArtifact@2
+    inputs:
+      artifact: 'arm64'
+      path: 'generation\emitter\generated\arm64'
+
+  - task: PowerShell@2
+    displayName: Build metadata binary
+    inputs:
+      filePath: 'scripts\BuildMetadataBin.ps1'
+      arguments: '-assemblyVersion $(PublishNugetVersion) -arch crossarch -SkipConstants'
+      pwsh: true
+  
+  - publish: 'bin'
+    artifact: 'bin'
+
+  - task: PowerShell@2
+    displayName: Test metadata binary
+    inputs:
+      filePath: 'scripts\TestWinmdBinary.ps1'
+      arguments: '-assemblyVersion $(PublishNugetVersion)'
+      pwsh: true
+
+  - task: EsrpCodeSigning@1
+    displayName: 'Authenticode Sign Packaged Dlls'
+    inputs:
+      ConnectedServiceName: 'Undocked RegFree Signing Connection'
+      FolderPath: '$(Build.SourcesDirectory)\bin'
+      Pattern: '*.dll,*.winmd'
+      signConfigType: 'inlineSignParams'
+      inlineOperation: |
+        [
+          {
+            "keyCode": "CP-230012",
+            "operationSetCode": "SigntoolSign",
+            "parameters": [
+              {
+                "parameterName": "OpusName",
+                "parameterValue": "Microsoft"
+              },
+              {
+                "parameterName": "OpusInfo",
+                "parameterValue": "http://www.microsoft.com"
+              },
+              {
+                "parameterName": "PageHash",
+                "parameterValue": "/NPH"
+              },
+              {
+                "parameterName": "FileDigest",
+                "parameterValue": "/fd sha256"
+              },
+              {
+                "parameterName": "TimeStamp",
+                "parameterValue": "/tr \"http://rfc3161.gtm.corp.microsoft.com/TSS/HttpTspServer\" /td sha256"
+              }
+            ],
+            "toolName": "signtool.exe",
+            "toolVersion": "6.2.9304.0"
+          }
+        ]
+      SessionTimeout: '60'
+      MaxConcurrency: '50'
+      MaxRetryAttempts: '2'
+      condition: eq(variables['SignFiles'], 'true')
+  
+    # There's a problem on microsoft.visualstudio.com that requires the guid instead of NuGetCommand@2
+  - task: 333b11bd-d341-40d9-afcf-b32d5ce6f23b@2
+    displayName: Pack metadata nuget package
+    inputs:
+      command: 'pack'
+      packagesToPack: 'sources\nuget\Microsoft.Windows.SDK.Win32Metadata\Microsoft.Windows.SDK.Win32Metadata.nuspec'
+      packDestination: '$(OutputPackagesDir)'
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'PublishNugetVersion'
+      basePath: '$(Build.SourcesDirectory)'
+  
+  - task: EsrpCodeSigning@1
+    displayName: 'Sign NuGet Package'
+    inputs:
+      ConnectedServiceName: 'Undocked RegFree Signing Connection'
+      FolderPath: '$(OutputPackagesDir)'
+      Pattern: '*.nupkg'
+      signConfigType: 'inlineSignParams'
+      inlineOperation: |
+        [
+          {
             "KeyCode" : "CP-401405",
-            "OperationCode" : "NuGetVerify",
+            "OperationCode" : "NuGetSign",
             "Parameters" : {},
             "ToolName" : "sign",
             "ToolVersion" : "1.0"
-        }
-      ]
-    SessionTimeout: '60'
-    MaxConcurrency: '50'
-    MaxRetryAttempts: '2'
-    condition: eq(variables['SignFiles'], 'true')
-
-- task: PublishPipelineArtifact@1
-  displayName: 'Publish NuGet packages to pipeline artifacts'
-  inputs:
-    targetPath: '$(OutputPackagesDir)'
-    artifact: NuGetPackages
-
-  # There's a problem on microsoft.visualstudio.com that requires the guid instead of NuGetCommand@2
-  # Don't publish if we're using pre-generated source
-- task: 333b11bd-d341-40d9-afcf-b32d5ce6f23b@2
-  displayName: 'NuGet push'
-  inputs:
-    command: push
-    packagesToPush: '$(OutputPackagesDir)/**/*.nupkg;!$(OutputPackagesDir)/**/*.symbols.nupkg'
-    publishVstsFeed: 'c1408dcb-1833-4ae4-9af5-1a891a12cc3c'
-    allowPackageConflicts: true
+          },
+          {
+              "KeyCode" : "CP-401405",
+              "OperationCode" : "NuGetVerify",
+              "Parameters" : {},
+              "ToolName" : "sign",
+              "ToolVersion" : "1.0"
+          }
+        ]
+      SessionTimeout: '60'
+      MaxConcurrency: '50'
+      MaxRetryAttempts: '2'
+      condition: eq(variables['SignFiles'], 'true')
   
+  - task: PublishPipelineArtifact@1
+    displayName: 'Publish NuGet packages to pipeline artifacts'
+    inputs:
+      targetPath: '$(OutputPackagesDir)'
+      artifact: NuGetPackages
+  
+    # There's a problem on microsoft.visualstudio.com that requires the guid instead of NuGetCommand@2
+    # Don't publish if we're using pre-generated source
+  - task: 333b11bd-d341-40d9-afcf-b32d5ce6f23b@2
+    displayName: 'NuGet push'
+    inputs:
+      command: push
+      packagesToPush: '$(OutputPackagesDir)/**/*.nupkg;!$(OutputPackagesDir)/**/*.symbols.nupkg'
+      publishVstsFeed: 'c1408dcb-1833-4ae4-9af5-1a891a12cc3c'
+      allowPackageConflicts: true

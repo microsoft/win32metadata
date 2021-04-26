@@ -3,20 +3,31 @@ param
     [string]
     $assemblyVersion,
 
-    [switch]
-    $externalOnly
+    [ValidateSet("crossarch", "x64", "x86", "arm64")]
+    [string]
+    $arch = "crossarch",
+
+    [switch]$SkipConstants = $false,
+
+    [switch]$SkipBinary = $false,
+
+    [switch]$externalOnly = $false
 )
 
-. "$PSScriptRoot\CommonUtils.ps1"
+$scraperArch = $arch
+if ($arch -eq "crossarch")
+{
+    $scraperArch = "x64"
+}
 
-Write-Output "`e[36m*** Building .winmd`e[0m"
+. "$PSScriptRoot\CommonUtils.ps1"
 
 if (!$assemblyVersion)
 {
     $assemblyVersion = $defaultWinSDKNugetVersion
 }
 
-& $PSScriptRoot\CreateRspsForFunctionPointerFixups.ps1
+& $PSScriptRoot\CreateRspsForFunctionPointerFixups.ps1 -arch $scraperArch
 
 $constantsScraperPath = "$sourcesDir\ConstantsScraper"
 $constantsScraperProj = "$constantsScraperPath\ConstantsScraper.csproj"
@@ -48,11 +59,12 @@ if ($LastExitCode -ne 0)
 Copy-Item $metadataInteropBin $binDir
 
 $remapFileName = "$emitterDir\remap.rsp"
-$enumsRemapFileName = "$emitterDir\generated\enumsRemap.rsp"
+$emitterGeneratedDir = "$emitterDir\generated\$scraperArch"
+$enumsRemapFileName = "$emitterGeneratedDir\enumsRemap.rsp"
 $autoTypesFileName = "$emitterDir\autoTypes.rsp"
 $requiredNamespacesForNames = "$emitterDir\requiredNamespacesForNames.rsp"
-$functionPointerFixupsRsp = "$emitterDir\functionPointerFixups.generated.rsp"
-$enumsMakeFlagsRsp = "$emitterDir\enumsMakeFlags.generated.rsp"
+$functionPointerFixupsRsp = "$emitterGeneratedDir\functionPointerFixups.generated.rsp"
+$enumsMakeFlagsRsp = "$emitterGeneratedDir\enumsMakeFlags.generated.rsp"
 
 $constantsScraperRsp = "$scraperDir\ConstantsScraper.rsp"
 $constantsHeaderTxt = "$scraperDir\ConstantsHeader.txt"
@@ -60,29 +72,37 @@ $enumsJson = "$scraperDir\enums.json"
 
 if (!$externalOnly)
 {
-    Write-Output "`n"
-    Write-Output "Scraping constants and enums..."
-    Write-Output "Calling: dotnet $constantsScraperPathBin --generationDir $generationDir --enumsJson $enumsJson --headerTextFile $constantsHeaderTxt @$constantsScraperRsp @$requiredNamespacesForNames @$remapFileName"
-
-    & dotnet $constantsScraperPathBin --generationDir $generationDir --enumsJson $enumsJson --headerTextFile $constantsHeaderTxt @$constantsScraperRsp @$requiredNamespacesForNames @$remapFileName
-    if ($LastExitCode -ne 0)
+    if (!$SkipConstants)
     {
-        Write-Error "Failed to scrape constants."
-        exit $LastExitCode
+        Write-Output "`n"
+        Write-Output "Scraping constants and enums..."
+        Write-Output "Calling: dotnet $constantsScraperPathBin --generationDir $generationDir --arch $scraperArch --enumsJson $enumsJson --headerTextFile $constantsHeaderTxt @$constantsScraperRsp @$requiredNamespacesForNames @$remapFileName"
+
+        & dotnet $constantsScraperPathBin --generationDir $generationDir --arch $scraperArch --enumsJson $enumsJson --headerTextFile $constantsHeaderTxt @$constantsScraperRsp @$requiredNamespacesForNames @$remapFileName
+        if ($LastExitCode -ne 0)
+        {
+            Write-Error "Failed to scrape constants."
+            exit $LastExitCode
+        }
     }
 
-    Write-Output "`n"
-    Write-Output "Creating $outputWinmdFileName..."
-    Write-Output "Calling: dotnet $clangSharpSourceToWinmdBin --sourceDir $emitterDir --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName @$requiredNamespacesForNames @$autoTypesFileName @$enumsRemapFileName @$functionPointerFixupsRsp @$enumsMakeFlagsRsp"
-
-    & dotnet $clangSharpSourceToWinmdBin --sourceDir $emitterDir --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName @$requiredNamespacesForNames @$autoTypesFileName @$enumsRemapFileName @$functionPointerFixupsRsp @$enumsMakeFlagsRsp
-    if ($LastExitCode -ne 0)
+    if (!$SkipBinary)
     {
-        Write-Error "Failed to build .winmd."
-        exit $LastExitCode
-    }
+        $outputWinmdFileName = Get-OutputWinmdFileName -Arch $arch
 
-    Write-Output "`n`e[32mGenerating .winmd succeeded`e[0m"
+        Write-Output "`n"
+        Write-Output "Creating $outputWinmdFileName..."
+        Write-Output "Calling: dotnet $clangSharpSourceToWinmdBin --sourceDir $emitterDir --arch $arch --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName @$requiredNamespacesForNames @$autoTypesFileName @$enumsRemapFileName @$functionPointerFixupsRsp @$enumsMakeFlagsRsp"
+
+        & dotnet $clangSharpSourceToWinmdBin --sourceDir $emitterDir --arch $arch --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName @$requiredNamespacesForNames @$autoTypesFileName @$enumsRemapFileName @$functionPointerFixupsRsp @$enumsMakeFlagsRsp
+        if ($LastExitCode -ne 0)
+        {
+            Write-Error "Failed to build .winmd."
+            exit $LastExitCode
+        }
+
+        Write-Output "`n`e[32mGenerating .winmd succeeded`e[0m"
+    }
 }
 
 # Generate external winmd binaries in parallel
@@ -118,27 +138,33 @@ $partitionNames | ForEach-Object -Parallel {
     $externalPackageDir = "$defaultArtifactsDir\InstalledPackages\$_.$assemblyVersion"
     $enumsMakeFlagsRsp = "$using:emitterDir\enumsMakeFlags.$_.rsp"
 
-    Write-Output "`n"
-    Write-Output "Scraping constants and enums..."
-    Write-Output "Calling: dotnet $using:constantsScraperPathBin --generationDir $using:generationDir --externalPackageDir $externalPackageDir --outputNamespace "$_" --enumsJson $using:enumsJson --headerTextFile $using:constantsHeaderTxt @$using:constantsScraperRsp @$using:requiredNamespacesForNames @$using:remapFileName"
-
-    & dotnet $using:constantsScraperPathBin --generationDir $using:generationDir --externalPackageDir $externalPackageDir --outputNamespace "$_" --enumsJson $using:enumsJson --headerTextFile $using:constantsHeaderTxt @$using:constantsScraperRsp @$using:requiredNamespacesForNames @$using:remapFileName
-    if ($LastExitCode -ne 0)
+    if (!$using:SkipConstants)
     {
-        Write-Error "Failed to scrape constants."
-        exit $LastExitCode
+        Write-Output "`n"
+        Write-Output "Scraping constants and enums..."
+        Write-Output "Calling: dotnet $using:constantsScraperPathBin --generationDir $using:generationDir --externalPackageDir $externalPackageDir --outputNamespace "$_" --arch $using:scraperArch --enumsJson $using:enumsJson --headerTextFile $using:constantsHeaderTxt @$using:constantsScraperRsp @$using:requiredNamespacesForNames @$using:remapFileName"
+
+        & dotnet $using:constantsScraperPathBin --generationDir $using:generationDir --externalPackageDir $externalPackageDir --outputNamespace "$_" --arch $using:scraperArch --enumsJson $using:enumsJson --headerTextFile $using:constantsHeaderTxt @$using:constantsScraperRsp @$using:requiredNamespacesForNames @$using:remapFileName
+        if ($LastExitCode -ne 0)
+        {
+            Write-Error "Failed to scrape constants."
+            exit $LastExitCode
+        }
     }
 
-    Write-Output "`n"
-    Write-Output "Creating "$binDir\$_.winmd"..."
-    Write-Output "Calling: dotnet $using:clangSharpSourceToWinmdBin --sourceDir $using:emitterDir --interopFileName $using:metadataInteropBin --baseMetadataFileName $using:outputWinmdFileName --outputNamespace "$_" --outputFileName "$using:binDir\$_.winmd" --version "$assemblyVersion" @$using:remapFileName @$using:requiredNamespacesForNames @$using:autoTypesFileName @$using:enumsRemapFileName @$using:functionPointerFixupsRsp @$enumsMakeFlagsRsp"
-
-    & dotnet $using:clangSharpSourceToWinmdBin --sourceDir $using:emitterDir --interopFileName $using:metadataInteropBin --baseMetadataFileName $using:outputWinmdFileName --outputNamespace "$_" --outputFileName "$using:binDir\$_.winmd" --version "$assemblyVersion" @$using:remapFileName @$using:requiredNamespacesForNames @$using:autoTypesFileName @$using:enumsRemapFileName @$using:functionPointerFixupsRsp @$enumsMakeFlagsRsp
-    if ($LastExitCode -ne 0)
+    if (!$using:SkipBinary)
     {
-        Write-Error "Failed to build .winmd."
-        exit $LastExitCode
-    }
+        Write-Output "`n"
+        Write-Output "Creating "$binDir\$_.winmd"..."
+        Write-Output "Calling: dotnet $using:clangSharpSourceToWinmdBin --sourceDir $using:emitterDir --arch $using:arch --interopFileName $using:metadataInteropBin --baseMetadataFileName $using:outputWinmdFileName --outputNamespace "$_" --outputFileName "$using:binDir\$_.winmd" --version "$assemblyVersion" @$using:remapFileName @$using:requiredNamespacesForNames @$using:autoTypesFileName @$using:enumsRemapFileName @$using:functionPointerFixupsRsp @$enumsMakeFlagsRsp"
 
-    Write-Output "`n`e[32mGenerating .winmd succeeded`e[0m"
+        & dotnet $using:clangSharpSourceToWinmdBin --sourceDir $using:emitterDir --arch $using:arch --interopFileName $using:metadataInteropBin --baseMetadataFileName $using:outputWinmdFileName --outputNamespace "$_" --outputFileName "$using:binDir\$_.winmd" --version "$assemblyVersion" @$using:remapFileName @$using:requiredNamespacesForNames @$using:autoTypesFileName @$using:enumsRemapFileName @$using:functionPointerFixupsRsp @$enumsMakeFlagsRsp
+        if ($LastExitCode -ne 0)
+        {
+            Write-Error "Failed to build .winmd."
+            exit $LastExitCode
+        }
+
+        Write-Output "`n`e[32mGenerating .winmd succeeded`e[0m"
+    }
 } -ThrottleLimit $throttleCount

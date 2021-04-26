@@ -10,7 +10,7 @@ namespace PartitionUtilsLib
     {
         private RepoInfo repoInfo;
         private string partitionName;
-        private List<string> visitedHeaders;
+        private Dictionary<string, List<string>> visitedHeaders = new Dictionary<string, List<string>>();
         private List<string> traverseHeaders;
         private string incRoot;
 
@@ -83,23 +83,23 @@ namespace PartitionUtilsLib
 
         public string SettingsFile => Path.Combine(this.repoInfo.ParitionDir, $"{this.partitionName}\\settings.rsp");
 
-        public string GenerationOutputFile => Path.Combine(this.repoInfo.ScraperOutputDir, $"{this.partitionName}.generation.output.txt");
-
-        public ReadOnlyCollection<string> VisitedHeaders
+        public string GetGenerationOutputFile(string arch)
         {
-            get
-            {
-                this.LoadVisitedHeaders();
-
-                return this.visitedHeaders.AsReadOnly();
-            }
+            return Path.Combine(this.repoInfo.GetScraperOutputDir(arch), $"{this.partitionName}.generation.output.txt");
         }
 
-        public ReadOnlyCollection<string> GetTraverseHeaders(bool fullPath, string externalPackageDir)
+        public ReadOnlyCollection<string> GetVisitedHeaders(string arch)
+        {
+            this.LoadVisitedHeaders(arch);
+
+            return this.visitedHeaders[arch].AsReadOnly();
+        }
+
+        public ReadOnlyCollection<string> GetTraverseHeaders(bool fullPath, string arch, string externalPackageDir)
         {
             if (this.traverseHeaders == null)
             {
-                this.LoadVisitedHeaders();
+                this.LoadVisitedHeaders(arch);
                 this.traverseHeaders = new List<string>();
                 bool inTraverse = false;
                 foreach (string line in File.ReadAllLines(this.SettingsFile))
@@ -154,14 +154,13 @@ namespace PartitionUtilsLib
             return longPaths.AsReadOnly();
         }
 
-        private void LoadVisitedHeaders()
+        private void LoadVisitedHeaders(string arch)
         {
-            if (this.visitedHeaders == null)
+            if (!this.visitedHeaders.ContainsKey(arch))
             {
-                this.visitedHeaders = new List<string>();
-                //this.shortPathToLongPath = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+                List<string> headers = new List<string>();
 
-                string text = File.ReadAllText(this.GenerationOutputFile);
+                string text = File.ReadAllText(this.GetGenerationOutputFile(arch));
                 foreach (Match match in VisitingHeaderRegex.Matches(text))
                 {
                     string rootDir = match.Groups[1].Value;
@@ -172,9 +171,10 @@ namespace PartitionUtilsLib
 
                     string shortName = match.Groups[2].Value;
                     string fullPath = rootDir + shortName;
-                    this.visitedHeaders.Add(fullPath);
-                    //this.shortPathToLongPath[shortName] = fullPath;
+                    headers.Add(fullPath);
                 }
+
+                this.visitedHeaders[arch] = headers;
             }
         }
 
@@ -187,6 +187,5 @@ namespace PartitionUtilsLib
         {
             return this.ToString().GetHashCode();
         }
-
     }
 }

@@ -237,6 +237,16 @@ namespace ClangSharpSourceToWinmd
             return ret;
         }
 
+        private static string FixArchSpecificName(string name)
+        {
+            if (name.EndsWith("____1") || name.EndsWith("____2"))
+            {
+                name = name.Substring(0, name.Length - "____1".Length);
+            }
+
+            return name;
+        }
+
         private void CacheGuidConst(FieldDeclarationSyntax guidFieldNode)
         {
             this.nameToGuidConstFields[guidFieldNode.Declaration.Variables.First().Identifier.ValueText] = guidFieldNode;
@@ -571,6 +581,8 @@ namespace ClangSharpSourceToWinmd
             var nsHandle = enclosingType == default ? metadataBuilder.GetOrAddString(symbol.ContainingNamespace.ToString()) : default;
             var name = this.GetShortNameForSymbol(symbol);
 
+            name = FixArchSpecificName(name);
+
             var destTypeDefHandle =
                 metadataBuilder.AddTypeDefinition(
                     typeAttributes,
@@ -756,14 +768,18 @@ namespace ClangSharpSourceToWinmd
 
             // See if we can map from some generic types to a more specific type
             if (typeSymbol.SpecialType == SpecialType.System_IntPtr ||
+                typeSymbol.SpecialType == SpecialType.System_UIntPtr ||
                 typeSymbol.SpecialType == SpecialType.System_Int32 ||
                 typeSymbol.SpecialType == SpecialType.System_UInt32 ||
-                typeSymbol.SpecialType == SpecialType.System_UIntPtr ||
+                typeSymbol.SpecialType == SpecialType.System_Int64 ||
+                typeSymbol.SpecialType == SpecialType.System_UInt64 ||
                 typeName.StartsWith("System.IntPtr*") ||
                 typeName.StartsWith("ushort*") ||
                 typeName.StartsWith("sbyte*") ||
                 typeName.StartsWith("int*") ||
                 typeName.StartsWith("uint*") ||
+                typeName.StartsWith("long*") ||
+                typeName.StartsWith("ulong*") ||
                 typeName.StartsWith("void*"))
             {
                 if (originalTypeName.StartsWith("const "))
@@ -831,6 +847,8 @@ namespace ClangSharpSourceToWinmd
             MethodImplAttributes methodImplAttributes,
             bool instanceMethod)
         {
+            methodName = FixArchSpecificName(methodName);
+
             var methodSignature = new BlobBuilder();
             new BlobEncoder(methodSignature)
                 .MethodSignature(
@@ -1002,6 +1020,8 @@ namespace ClangSharpSourceToWinmd
                     continue;
                 }
 
+                methodName = FixArchSpecificName(methodName);
+
                 var methodDef =
                     this.AddMethodViaSymbol(
                         symbol,
@@ -1161,6 +1181,8 @@ namespace ClangSharpSourceToWinmd
 
             var nsHandle = metadataBuilder.GetOrAddString(symbol.ContainingNamespace.ToString());
             var name = node.Identifier.ValueText;
+
+            name = FixArchSpecificName(name);
 
             TypeAttributes delegateTypeAttributes = TypeAttributes.Public | TypeAttributes.AutoClass | TypeAttributes.Sealed | TypeAttributes.BeforeFieldInit;
 

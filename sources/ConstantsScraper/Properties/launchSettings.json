@@ -2,11 +2,11 @@
   "profiles": {
     "ConstantScraper": {
       "commandName": "Project",
-      "commandLineArgs": "--generationDir $(ProjectDir)..\\..\\generation --enumsJson $(ProjectDir)..\\..\\generation\\scraper\\enums.json @$(ProjectDir)..\\..\\generation\\scraper\\ConstantsScraper.rsp @$(ProjectDir)..\\..\\generation\\emitter\\requiredNamespacesForNames.rsp @$(ProjectDir)..\\..\\generation\\emitter\\remap.rsp"
+      "commandLineArgs": "--generationDir $(ProjectDir)..\\..\\generation --enumsJson $(ProjectDir)..\\..\\generation\\scraper\\enums.json --headerTextFile $(ProjectDir)..\\..\\generation\\scraper\\ConstantsHeader.txt @$(ProjectDir)..\\..\\generation\\scraper\\ConstantsScraper.rsp @$(ProjectDir)..\\..\\generation\\emitter\\requiredNamespacesForNames.rsp @$(ProjectDir)..\\..\\generation\\emitter\\remap.rsp"
     },
     "ExternalConstants": {
       "commandName": "Project",
-      "commandLineArgs": "--generationDir $(ProjectDir)..\\..\\external --externalPackageDir $(ProjectDir)..\\..\\artifacts\\\\InstalledPackages\\Microsoft.Web.WebView2.1.0.774.44 --outputNamespace Microsoft.Web.WebView2 --enumsJson $(ProjectDir)..\\..\\external\\scraper\\enums.json @$(ProjectDir)..\\..\\external\\scraper\\ConstantsScraper.rsp @$(ProjectDir)..\\..\\generation\\emitter\\requiredNamespacesForNames.rsp @$(ProjectDir)..\\..\\external\\emitter\\remap.rsp"
+      "commandLineArgs": "--generationDir $(ProjectDir)..\\..\\external --externalPackageDir $(ProjectDir)..\\..\\artifacts\\\\InstalledPackages\\Microsoft.Web.WebView2.1.0.774.44 --outputNamespace Microsoft.Web.WebView2 --enumsJson $(ProjectDir)..\\..\\external\\scraper\\enums.json --headerTextFile $(ProjectDir)..\\..\\generation\\scraper\\ConstantsHeader.txt @$(ProjectDir)..\\..\\external\\scraper\\ConstantsScraper.rsp @$(ProjectDir)..\\..\\generation\\emitter\\requiredNamespacesForNames.rsp @$(ProjectDir)..\\..\\external\\emitter\\remap.rsp"
     }
   }
 }

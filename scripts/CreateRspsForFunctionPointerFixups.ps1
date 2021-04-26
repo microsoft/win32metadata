@@ -1,8 +1,10 @@
-
 param
 (
-    [switch]
-    $isExternal
+    [ValidateSet("x64", "x86", "arm64")]
+    [string]
+    $arch = "x64",
+
+    [switch] $isExternal = $false
 )
 
 . "$PSScriptRoot\CommonUtils.ps1"
@@ -15,8 +17,15 @@ if ($isExternal)
 }
 
 $autoTypesRsp = "$emitterDir\functionPointerFixups.csv"
-$outputScraperRspFileName = "$scraperDir\functionPointerFixups.generated.rsp"
-$outputEmitterRspFileName = "$emitterDir\functionPointerFixups.generated.rsp"
+
+$scraperObjDir = "$scraperDir\obj\$arch"
+Create-Directory $scraperObjDir
+
+$emitterGeneratedDir = "$emitterDir\generated\$arch"
+Create-Directory $emitterGeneratedDir
+
+$outputScraperRspFileName = "$scraperObjDir\functionPointerFixups.generated.rsp"
+$outputEmitterRspFileName = "$emitterGeneratedDir\functionPointerFixups.generated.rsp"
 
 $functionFixups = Import-Csv $autoTypesRsp -Delimiter ',' -Header @('DeclaredCallback', 'CallbackPointerTypedef', 'OrigDeclIsPointer')
 

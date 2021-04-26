@@ -1,5 +1,4 @@
 --additional
--m64
 -Wno-expansion-to-defined
 -Wno-ignored-attributes
 -Wno-ignored-pragma-intrinsic
@@ -15,6 +14,7 @@
 -D_USE_DECLSPECS_FOR_SAL=1
 -D_PREFAST_=1
 -DWINAPI_FAMILY=WINAPI_FAMILY_DESKTOP_APP
+-DMICROSOFT_WINDOWS_WINBASE_H_DEFINE_INTERLOCKED_CPLUSPLUS_OVERLOADS=0
 --config
 compatible-codegen
 log-visited-files

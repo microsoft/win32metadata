@@ -100,5 +100,6 @@ _D3DTEXTURETRANSFORMFLAGS
 <IncludeRoot>/um/dispatcherqueue.h
 <IncludeRoot>/um/libloaderapi.h
 <IncludeRoot>/shared/winerror.h
+<IncludeRoot>/shared/ntstatus.h
 --namespace
 Windows.Win32.SystemServices

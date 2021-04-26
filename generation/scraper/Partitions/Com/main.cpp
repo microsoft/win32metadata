@@ -20,6 +20,7 @@
 #include <comcat.h>
 #include <callobj.h>
 #include <messagedispatcherapi.h>
+#include <ctxtcall.h>
 
 /*
 #include <urlmon.h>
@@ -35,7 +36,6 @@
 #include <iaccess.h>
 //#include <unknwnbase.h>
 //#include <unknwn.h>
-#include <ctxtcall.h>
 #include <imessagedispatcher.h>
 #include <dmerror.h>
 #include <roapi.h>

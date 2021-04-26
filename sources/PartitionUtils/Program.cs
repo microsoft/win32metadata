@@ -119,13 +119,14 @@ namespace PartitionUtils
             var partInfos = repoInfo.GetPartitionInfos().ToList();
             foreach (var partInfo in partInfos)
             {
-                if (!File.Exists(partInfo.GenerationOutputFile))
+                string genOutputFile = partInfo.GetGenerationOutputFile("x64");
+                if (!File.Exists(genOutputFile))
                 {
-                    Console.WriteLine($"Error: {partInfo.GenerationOutputFile} does not exist. Make sure to run:\r\n.\\scripts\\GenerateMetadataSourceForPartition.ps1 -partitionName {partInfo.Name}");
+                    Console.WriteLine($"Error: {genOutputFile} does not exist. Make sure to run:\r\n.\\scripts\\GenerateMetadataSourceForPartition.ps1 -partitionName {partInfo.Name}");
                     yield break;
                 }
 
-                foreach (var header in partInfo.GetTraverseHeaders(true, externalPackageDir))
+                foreach (var header in partInfo.GetTraverseHeaders(true, "x64", externalPackageDir))
                 {
                     traverseHeaders.Add(header);
                 }
@@ -133,7 +134,7 @@ namespace PartitionUtils
 
             foreach (var partInfo in partInfos)
             {
-                foreach (var header in partInfo.VisitedHeaders)
+                foreach (var header in partInfo.GetVisitedHeaders("x64"))
                 {
                     if (header.StartsWith("/winrt/") || ignoreHeaders.Contains(header) || traverseHeaders.Contains(header))
                     {
@@ -326,7 +327,7 @@ namespace PartitionUtils
 
             foreach (var partInfo in repoInfo.GetPartitionInfos())
             {
-                foreach (var header in partInfo.GetTraverseHeaders(true, externalPackageDir))
+                foreach (var header in partInfo.GetTraverseHeaders(true, "x64", externalPackageDir))
                 {
                     if (!traverseHeadersToParts.TryGetValue(header, out var partitionInfos))
                     {
