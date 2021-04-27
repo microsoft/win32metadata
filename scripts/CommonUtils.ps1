@@ -1,3 +1,27 @@
+$defaultWinSDKNugetVersion = "10.0.19041.5"
+
+$rootDir = [System.IO.Path]::GetFullPath("$PSScriptRoot\..")
+$toolsDir = "$rootDir\tools"
+$binDir = "$rootDir\bin"
+$sourcesDir = "$rootDir\sources"
+$generationDir = "$rootDir\generation"
+$scraperDir = "$generationDir\scraper"
+$emitterDir = "$generationDir\emitter"
+$partitionsDir = "$scraperDir\Partitions"
+$sdkApiPath = "$rootDir\ext\sdk-api"
+$sdkGeneratedSourceDir = "$emitterDir\generated"
+$defaultArtifactsDir = "$rootDir\artifacts"
+
+if (Test-Path -Path $binDir -PathType leaf)
+{
+    Remove-Item $binDir
+}
+
+if (!(Test-Path -Path $binDir))
+{
+    New-Item -ItemType Directory -Force -Path $binDir | Out-Null
+}
+
 function Create-Directory([string[]] $Path) 
 {
     if (!(Test-Path -Path $Path)) 
@@ -29,28 +53,22 @@ function Replace-Text
 
 function Get-LibMappingsFile
 {
-    param ([string]$artifactsDir, [string]$version)
+    param ([string]$version)
 
-    $generationOutArtifactsDir = "$artifactsDir\output"
-    Create-Directory $generationOutArtifactsDir
-
-    $libMappingOutputFileName = Join-Path -Path $generationOutArtifactsDir -ChildPath "$version.libMappings.rsp"
+    $libMappingOutputFileName = Join-Path -Path $scraperDir -ChildPath "$version.libMappings.rsp"
 
     return $libMappingOutputFileName
 }
 
 function Invoke-PrepLibMappingsFile
 {
-    param ([string]$artifactsDir, [string]$version)
+    param ([string]$version)
 
-    $libMappingOutputFileName = Get-LibMappingsFile $artifactsDir $version
+    $libMappingOutputFileName = Get-LibMappingsFile $version
     
-    if (!(Test-Path $libMappingOutputFileName))
-    {
-        Write-Output "Creating lib mapping file: $libMappingOutputFileName"
-        $libDirectory = "$nugetDestPackagesDir\Microsoft.Windows.SDK.CPP.x64.$version\c\um\x64"
-        & $PSScriptRoot\CreateProcLibMappingForAllLibs.ps1 -libDirectory $libDirectory -outputFileName $libMappingOutputFileName
-    }
+    Write-Output "Creating lib mapping file: $libMappingOutputFileName"
+    $libDirectory = "$nugetDestPackagesDir\Microsoft.Windows.SDK.CPP.x64.$version\c\um\x64"
+    & $PSScriptRoot\CreateProcLibMappingForAllLibs.ps1 -libDirectory $libDirectory -outputFileName $libMappingOutputFileName
 }
 
 function Invoke-RecompileMidlHeaders
@@ -111,26 +129,14 @@ function Get-OutputWinmdFileName
     return $path
 }
     
-$defaultWinSDKNugetVersion = "10.0.19041.5"
-
-$rootDir = [System.IO.Path]::GetFullPath("$PSScriptRoot\..")
-$toolsDir = "$rootDir\tools"
-$binDir = "$rootDir\bin"
-$sourcesDir = "$rootDir\sources"
-$generationDir = "$rootDir\generation"
-$scraperDir = "$generationDir\scraper"
-$emitterDir = "$generationDir\emitter"
-$partitionsDir = "$scraperDir\Partitions"
-$sdkApiPath = "$rootDir\ext\sdk-api"
-$sdkGeneratedSourceDir = "$emitterDir\generated"
-$defaultArtifactsDir = "$rootDir\artifacts"
-
-if (Test-Path -Path $binDir -PathType leaf)
+function Download-Nupkg
 {
-    Remove-Item $binDir
+    Param ([string] $name, [string] $version, [string] $outputDir)
+
+    $url = "https://www.nuget.org/api/v2/package/$name/$version"
+    $output = "$outputDir\$name.$version.nupkg"
+
+    $wc = New-Object System.Net.WebClient
+    $wc.DownloadFile($url, $output)
 }
 
-if (!(Test-Path -Path $binDir))
-{
-    New-Item -ItemType Directory -Force -Path $binDir | Out-Null
-}
