@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/WiaVideo.h
 --namespace
-Windows.Win32.Wia
+Windows.Win32.Devices.ImageAcquisition

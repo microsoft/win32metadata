@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/MSChapp.h
 --namespace
-Windows.Win32.PasswordManagement
+Windows.Win32.System.PasswordManagement

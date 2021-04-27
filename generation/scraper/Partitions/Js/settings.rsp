@@ -14,4 +14,4 @@
 JsRuntimeVersion
 JS_SOURCE_CONTEXT_NONE
 --namespace
-Windows.Win32.Js
+Windows.Win32.System.Js

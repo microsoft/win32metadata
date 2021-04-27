@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/mbnapi.h
 --namespace
-Windows.Win32.Mbn
+Windows.Win32.NetworkManagement.MobileBroadband

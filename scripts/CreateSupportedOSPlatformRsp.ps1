@@ -36,7 +36,7 @@ $versionMap = @{
 
 $writtenItems = @{}
 
-$windowsVersionPattern = [Regex]::new('^Windows(?:\s|\xA0)(XP with SP1|XP with SP2(?:, Windows(?:\s|\xA0)Vista)?|XP|Vista|7|8|8.1|2000|10)(?:(?:,?\sversion)?\s(\d+)?)?')
+$windowsVersionPattern = [Regex]::new('^Windows(?:\s|\xA0)(XP with SP1|XP with SP2(?:, Windows(?:\s|\xA0)Vista)?|XP|Vista|7|8.1|8|2000|10)(?:(?:,?\sversion)?\s(\d+)?)?')
 $windowsServerVersionPattern = [Regex]::new('^Windows(?:\s|\xA0)Server(?:\s|\xA0)(\d+)|^Windows(?:\s|\xA0)(\d+)(?:\s|\xA0)Server')
 $versionPrefixStripPattern = [Regex]::new('^(?:Windows Installer 5\.0 on |Available in Microsoft |Available in starting with |Available in |Available starting with Microsoft |Available starting with |Supported in |Microsoft |This function is available in |starting with )(.+)')
 $lastChancePattern = [Regex]::new('(Windows(?:\s|\xA0)7)|(Windows(?:\s|\xA0)2000)|(Windows(?:\s|\xA0)Vista)|(Windows(?:\s|\xA0)8)')

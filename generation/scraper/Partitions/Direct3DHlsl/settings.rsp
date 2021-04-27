@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/d3dcompiler.h
 --namespace
-Windows.Win32.Direct3DHlsl
+Windows.Win32.Graphics.Hlsl

@@ -70,6 +70,11 @@ $constantsScraperRsp = "$scraperDir\ConstantsScraper.rsp"
 $constantsHeaderTxt = "$scraperDir\ConstantsHeader.txt"
 $enumsJson = "$scraperDir\enums.json"
 
+if (!$SkipBinary)
+{
+    $outputWinmdFileName = Get-OutputWinmdFileName -Arch $arch
+}
+
 if (!$externalOnly)
 {
     if (!$SkipConstants)
@@ -88,8 +93,6 @@ if (!$externalOnly)
 
     if (!$SkipBinary)
     {
-        $outputWinmdFileName = Get-OutputWinmdFileName -Arch $arch
-
         Write-Output "`n"
         Write-Output "Creating $outputWinmdFileName..."
         Write-Output "Calling: dotnet $clangSharpSourceToWinmdBin --sourceDir $emitterDir --arch $arch --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName @$requiredNamespacesForNames @$autoTypesFileName @$enumsRemapFileName @$functionPointerFixupsRsp @$enumsMakeFlagsRsp"

@@ -11,4 +11,4 @@
 <IncludeRoot>/um/wsbapp.h
 <IncludeRoot>/um/wsbonline.h
 --namespace
-Windows.Win32.WindowsServerBackup
+Windows.Win32.System.ServerBackup

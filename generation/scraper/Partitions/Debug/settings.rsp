@@ -20,4 +20,4 @@
 <IncludeRoot>/um/activprof.h
 <IncludeRoot>/winrt/webapplication.h
 --namespace
-Windows.Win32.Debug
+Windows.Win32.System.Diagnostics.Debug

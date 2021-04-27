@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/ual.h
 --namespace
-Windows.Win32.UserAccessLogging
+Windows.Win32.System.UserAccessLogging

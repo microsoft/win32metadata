@@ -11,4 +11,4 @@
 <IncludeRoot>/shared/fltUserStructures.h
 <IncludeRoot>/um/fltUser.h
 --namespace
-Windows.Win32.InstallableFileSystems
+Windows.Win32.Storage.InstallableFileSystems

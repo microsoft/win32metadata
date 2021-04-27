@@ -12,4 +12,4 @@ COMPRESSOR_HANDLE__
 --traverse
 <IncludeRoot>/um/compressapi.h
 --namespace
-Windows.Win32.Compression
+Windows.Win32.Storage.Compression

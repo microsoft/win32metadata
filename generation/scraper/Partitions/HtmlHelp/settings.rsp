@@ -16,4 +16,4 @@ IWordBreaker
 <IncludeRoot>/um/HtmlHelp.h
 <IncludeRoot>/um/infotech.h
 --namespace
-Windows.Win32.HtmlHelp
+Windows.Win32.Data.HtmlHelp

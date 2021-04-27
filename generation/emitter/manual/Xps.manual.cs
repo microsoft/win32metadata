@@ -1,6 +1,6 @@
 using System;
 
-namespace Windows.Win32.Xps
+namespace Windows.Win32.Storage.Xps
 {
     [Flags]
     public enum PSINJECT_POINT : ushort

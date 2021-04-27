@@ -74,4 +74,4 @@ UI_PKEY_GlobalBackgroundColor
 UI_PKEY_GlobalHighlightColor
 UI_PKEY_GlobalTextColor
 --namespace
-Windows.Win32.WindowsRibbon
+Windows.Win32.UI.Ribbon

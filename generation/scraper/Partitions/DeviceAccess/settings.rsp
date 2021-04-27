@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/deviceaccess.h
 --namespace
-Windows.Win32.DeviceAccess
+Windows.Win32.Devices.DeviceAccess

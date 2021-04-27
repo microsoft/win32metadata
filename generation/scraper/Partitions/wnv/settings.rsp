@@ -12,4 +12,4 @@ _DL_EUI48
 --traverse
 <IncludeRoot>/um/wnvapi.h
 --namespace
-Windows.Win32.WindowsNetworkVirtualization
+Windows.Win32.NetworkManagement.WindowsNetworkVirtualization

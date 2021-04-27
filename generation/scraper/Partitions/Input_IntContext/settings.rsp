@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/InteractionContext.h
 --namespace
-Windows.Win32.InteractionContext
+Windows.Win32.UI.InteractionContext

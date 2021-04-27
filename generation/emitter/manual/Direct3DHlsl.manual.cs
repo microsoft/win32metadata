@@ -5,7 +5,7 @@
 
 using System;
 
-namespace Windows.Win32.Direct3DHlsl
+namespace Windows.Win32.Graphics.Hlsl
 {
     public static unsafe partial class Apis
     {

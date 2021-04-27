@@ -11,4 +11,4 @@
 <IncludeRoot>/um/dde.h
 <IncludeRoot>/um/ddeml.h
 --namespace
-Windows.Win32.DataExchange
+Windows.Win32.System.DataExchange

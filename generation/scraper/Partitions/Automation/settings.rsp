@@ -14,4 +14,4 @@
 <IncludeRoot>/um/wia_xp.h
 <IncludeRoot>/um/DispEx.h
 --namespace
-Windows.Win32.Automation
+Windows.Win32.System.OleAutomation

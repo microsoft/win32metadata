@@ -16,4 +16,4 @@ tagTEXT_SOURCE
 <IncludeRoot>/um/Winineti.h
 <IncludeRoot>/um/ProofOfPossessionCookieInfo.h
 --namespace
-Windows.Win32.WinInet
+Windows.Win32.Networking.WinInet

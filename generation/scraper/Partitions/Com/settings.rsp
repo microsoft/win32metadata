@@ -36,6 +36,6 @@ _GUID
 <IncludeRoot>/winrt/MessageDispatcherApi.h
 <IncludeRoot>/shared/guiddef.h
 --namespace
-Windows.Win32.Com
+Windows.Win32.System.Com
 --with-type
 STREAM_SEEK=uint

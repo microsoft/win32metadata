@@ -8,9 +8,9 @@
 <IncludeRoot>/um
 <IncludeRoot>/winrt
 --traverse
-<IncludeRoot>/um/dhcpssdk.h
-<IncludeRoot>/um/Dhcpv6cSdk.h
 <IncludeRoot>/um/DhcpCSdk.h
 <IncludeRoot>/um/dhcpsapi.h
+<IncludeRoot>/um/dhcpssdk.h
+<IncludeRoot>/um/Dhcpv6cSdk.h
 --namespace
-Windows.Win32.Dhcp
+Windows.Win32.NetworkManagement.Dhcp

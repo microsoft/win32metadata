@@ -12,4 +12,4 @@
 <IncludeRoot>/um/dcomp.h
 <IncludeRoot>/um/dcompanimation.h
 --namespace
-Windows.Win32.DirectComposition
+Windows.Win32.Graphics.DirectComposition
