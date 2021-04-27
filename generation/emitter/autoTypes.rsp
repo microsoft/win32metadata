@@ -36,7 +36,6 @@ Windows.Win32.SystemServices,PSTR,byte*
 Windows.Win32.WinRT,HSTRING,DECLARE_HANDLE,WindowsDeleteString
 Windows.Win32.WinRT,HSTRING_BUFFER,DECLARE_HANDLE
 Windows.Win32.SystemServices,HANDLE,DECLARE_HANDLE,CloseHandle
-Windows.Win32.SystemServices,NonClosableHandle,IntPtr,,HANDLE
 Windows.Win32.SystemServices,HINSTANCE,DECLARE_HANDLE,FreeLibrary
 Windows.Win32.Gdi,HDC,DECLARE_HANDLE,ReleaseDC
 Windows.Win32.Gdi,CreatedHDC,IntPtr,DeleteDC,HDC
@@ -75,7 +74,6 @@ Windows.Win32.IpHelper,IcmpHandle,IntPtr,IcmpCloseHandle
 Windows.Win32.Gdi,HdcMetdataFileHandle,IntPtr,DeleteMetaFile
 Windows.Win32.Gdi,HdcMetdataEnhFileHandle,IntPtr,DeleteEnhMetaFile
 Windows.Win32.SystemServices,HeapHandle,IntPtr,HeapDestroy
-Windows.Win32.SystemServices,ProcessHeapHandle,IntPtr,,HeapHandle
 Windows.Win32.WindowsColorSystem,HCOLORSPACE,DECLARE_HANDLE,DeleteColorSpace
 Windows.Win32.WindowsStationsAndDesktops,HDESK,DECLARE_HANDLE,CloseDesktop
 Windows.Win32.MenusAndResources,HACCEL,DECLARE_HANDLE,DestroyAcceleratorTable
