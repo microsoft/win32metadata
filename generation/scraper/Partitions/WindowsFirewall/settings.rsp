@@ -8,10 +8,10 @@
 <IncludeRoot>/um
 <IncludeRoot>/winrt
 --traverse
-<includeroot>/um/icftypes.h
-<includeroot>/um/natupnp.h
-<includeroot>/um/NetCon.h
-<includeroot>/um/netfw.h
-<includeroot>/um/networkisolation.h
+<IncludeRoot>/um/icftypes.h
+<IncludeRoot>/um/natupnp.h
+<IncludeRoot>/um/NetCon.h
+<IncludeRoot>/um/netfw.h
+<IncludeRoot>/um/networkisolation.h
 --namespace
 Windows.Win32.NetworkManagement.WindowsFirewall

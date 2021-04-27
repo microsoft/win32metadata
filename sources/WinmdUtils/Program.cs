@@ -218,7 +218,7 @@ namespace WinmdUtils
                         pointersFound = true;
                     }
 
-                    console.Out.Write($"{pointerInUse.Type},{pointerInUse.Name}\r\n");
+                    console?.Out.Write($"{pointerInUse.Type},{pointerInUse.Name}\r\n");
                 }
             }
 
@@ -261,10 +261,10 @@ namespace WinmdUtils
 
                     pair.Value.Sort();
 
-                    console.Out.Write($"{pair.Key}\r\n");
+                    console?.Out.Write($"{pair.Key}\r\n");
                     foreach (var @namespace in pair.Value)
                     {
-                        console.Out.Write($"  {@namespace}\r\n");
+                        console?.Out.Write($"  {@namespace}\r\n");
                     }
                 }
             }
@@ -356,10 +356,10 @@ namespace WinmdUtils
 
                     pair.Value.Sort();
 
-                    console.Out.Write($"{pair.Key}\r\n");
+                    console?.Out.Write($"{pair.Key}\r\n");
                     foreach (var ns in pair.Value)
                     {
-                        console.Out.Write($"  {ns}\r\n");
+                        console?.Out.Write($"  {ns}\r\n");
                     }
                 }
             }
@@ -392,7 +392,7 @@ namespace WinmdUtils
                         console.Out.Write("Empty delegates detected:\r\n");
                     }
 
-                    console.Out.Write($"{type.Name}\r\n");
+                    console?.Out.Write($"{type.Name}\r\n");
                 }
             }
 
@@ -490,10 +490,10 @@ namespace WinmdUtils
 
                     pair.Value.Sort();
 
-                    console.Out.Write($"{pair.Key}\r\n");
+                    console?.Out.Write($"{pair.Key}\r\n");
                     foreach (var imp in pair.Value)
                     {
-                        console.Out.Write($"  {imp}\r\n");
+                        console?.Out.Write($"  {imp}\r\n");
                     }
                 }
             }
@@ -532,34 +532,34 @@ namespace WinmdUtils
             Dictionary<string, IField> type2Fields = new Dictionary<string, IField>();
             foreach (var field2 in type2.Fields)
             {
-                type2Fields[field2.FullName] = field2;
+                type2Fields[field2.Name] = field2;
             }
 
             foreach (var field1 in type1.Fields)
             {
-                if (!type2Fields.TryGetValue(field1.FullName, out var field2))
+                if (!type2Fields.TryGetValue(field1.Name, out var field2))
                 {
                     ret = false;
-                    console.Out.Write($"{field1.FullName} not found in 2nd winmd\r\n");
+                    console?.Out.Write($"{field1.Name} not found in 2nd winmd\r\n");
                     continue;
                 }
 
-                type2Fields.Remove(field2.FullName);
+                type2Fields.Remove(field2.Name);
 
-                if (field1.Type.FullName != field2.Type.FullName)
+                if (field1.Type.Name != field2.Type.Name)
                 {
-                    console.Out.Write($"{type1.FullTypeName}.{field1.Name}...{field1.Type.FullName} => {field2.Type.FullName}\r\n");
+                    console?.Out.Write($"{type1.FullTypeName}.{field1.Name}...{field1.Type.Name} => {field2.Type.Name}\r\n");
                     ret = false;
                     continue;
                 }
 
-                ret &= CompareAttributes(field1.FullName, field1.GetAttributes(), field2.GetAttributes(), console);
+                ret &= CompareAttributes(field1.Name, field1.GetAttributes(), field2.GetAttributes(), console);
 
                 if (field1.IsConst)
                 {
                     if (!field2.IsConst)
                     {
-                        console.Out.Write($"winmd1: {field1.FullName} const, winmd2: not\r\n");
+                        console?.Out.Write($"winmd1: {field1.Name} const, winmd2: not\r\n");
                         ret = false;
                     }
                     else
@@ -569,7 +569,7 @@ namespace WinmdUtils
 
                         if (fieldVal1.ToString() != fieldVal2.ToString())
                         {
-                            console.Out.Write($"winmd1: {field1.FullName} = {fieldVal1}, winmd2 = {fieldVal2}\r\n");
+                            console?.Out.Write($"winmd1: {field1.Name} = {fieldVal1}, winmd2 = {fieldVal2}\r\n");
                             ret = false;
                         }
                     }
@@ -578,7 +578,7 @@ namespace WinmdUtils
                 {
                     if (!field2.IsConst)
                     {
-                        console.Out.Write($"winmd1: {field1.FullName} not const, winmd2: const\r\n");
+                        console?.Out.Write($"winmd1: {field1.Name} not const, winmd2: const\r\n");
                         ret = false;
                     }
                 }
@@ -586,7 +586,7 @@ namespace WinmdUtils
 
             foreach (var field2 in type2Fields.Values)
             {
-                console.Out.Write($"{field2.FullName} not found in 1st winmd\r\n");
+                console?.Out.Write($"{field2.Name} not found in 1st winmd\r\n");
                 ret = false;
             }
 
@@ -595,7 +595,7 @@ namespace WinmdUtils
 
         private static string GetMethodNameWithParams(IMethod method)
         {
-            string name = method.FullName;
+            string name = method.Name;
             if (method.DeclaringType.Kind == TypeKind.Delegate && name.EndsWith(".Invoke"))
             {
                 name = name.Substring(0, name.Length - ".Invoke".Length);
@@ -741,7 +741,7 @@ namespace WinmdUtils
 
             if (attrText1 != attrText2)
             {
-                console.Out.Write($"{fullName} : {attrText1} => {attrText2}\r\n");
+                console?.Out.Write($"{fullName} : {attrText1} => {attrText2}\r\n");
                 ret = false;
             }
 
@@ -765,7 +765,7 @@ namespace WinmdUtils
                 string methodFullName = methodPair.Key;
                 if (!type2Methods.TryGetValue(methodFullName, out var method2))
                 {
-                    console.Out.Write($"{methodFullName} not found in 2nd winmd\r\n");
+                    console?.Out.Write($"{methodFullName} not found in 2nd winmd\r\n");
                     ret = false;
                     continue;
                 }
@@ -778,9 +778,9 @@ namespace WinmdUtils
                 // Return param
                 string returnFullName = $"{methodFullName} : return";
                 ret &= CompareAttributes(returnFullName, method1.GetReturnTypeAttributes(), method2.GetReturnTypeAttributes(), console);
-                if (method1.ReturnType.FullName != method2.ReturnType.FullName)
+                if (method1.ReturnType.Name != method2.ReturnType.Name)
                 {
-                    console.Out.Write($"{returnFullName}...{method1.ReturnType.Name} => {method2.ReturnType.Name}\r\n");
+                    console?.Out.Write($"{returnFullName}...{method1.ReturnType.Name} => {method2.ReturnType.Name}\r\n");
                     ret = false;
                 }
 
@@ -790,15 +790,15 @@ namespace WinmdUtils
                     var param2 = method2.Parameters.FirstOrDefault(p => p.Name == param1.Name);
                     if (param2 == null)
                     {
-                        console.Out.Write($"{methodFullName}, param {param1.Name} not found in 2nd winmd\r\n");
+                        console?.Out.Write($"{methodFullName}, param {param1.Name} not found in 2nd winmd\r\n");
                         ret = false;
                         continue;
                     }
 
                     string paramFullName = $"{methodFullName} : {param1.Name}";
-                    if (param1.Type.FullName != param2.Type.FullName)
+                    if (param1.Type.Name != param2.Type.Name)
                     {
-                        console.Out.Write($"{paramFullName}...{param1.Type.Name} => {param2.Type.Name}\r\n");
+                        console?.Out.Write($"{paramFullName}...{param1.Type.Name} => {param2.Type.Name}\r\n");
                         ret = false;
                     }
 
@@ -808,7 +808,7 @@ namespace WinmdUtils
 
             foreach (var method2 in type2Methods.Values)
             {
-                console.Out.Write($"{method2.FullName} not found in 1st winmd\r\n");
+                console?.Out.Write($"{method2.FullName} not found in 1st winmd\r\n");
                 ret = false;
             }
 
@@ -836,6 +836,34 @@ namespace WinmdUtils
             }
 
             return name;
+        }
+
+        private static Dictionary<string, List<ITypeDefinition>> GetShortNamesToTypeDefinitions(DecompilerTypeSystem winmd)
+        {
+            Dictionary<string, List<ITypeDefinition>> ret = new Dictionary<string, List<ITypeDefinition>>();
+            foreach (var type1 in winmd.GetTopLevelTypeDefinitions())
+            {
+                if (type1.FullName == "<Module>")
+                {
+                    continue;
+                }
+
+                if (type1.ParentModule != winmd.MainModule)
+                {
+                    continue;
+                }
+
+                string name = type1.Name;
+                if (!ret.TryGetValue(name, out var list))
+                {
+                    list = new List<ITypeDefinition>();
+                    ret[name] = list;
+                }
+
+                list.Add(type1);
+            }
+
+            return ret;
         }
 
         private static Dictionary<string, ITypeDefinition> GetNamesToTypeDefinitions(DecompilerTypeSystem winmd)
@@ -868,6 +896,7 @@ namespace WinmdUtils
             DecompilerTypeSystem winmd1 = CreateTypeSystemFromFile(first.FullName, settings);
             DecompilerTypeSystem winmd2 = CreateTypeSystemFromFile(second.FullName, settings);
             Dictionary<string, ITypeDefinition> winmd2NamesToTypes = GetNamesToTypeDefinitions(winmd2);
+            Dictionary<string, List<ITypeDefinition>> winmd2ShortNamesToTypes = GetShortNamesToTypeDefinitions(winmd2);
 
             HashSet<string> visitedNames = new HashSet<string>();
             foreach (var type1 in winmd1.GetTopLevelTypeDefinitions())
@@ -882,14 +911,39 @@ namespace WinmdUtils
                     continue;
                 }
 
+                if (type1.Name == "LPEXCEPFINO_DEFERRED_FILLIN")
+                {
+
+                }
+
                 var type1Name = GetFullTypeName(type1);
                 visitedNames.Add(type1Name);
 
                 winmd2NamesToTypes.TryGetValue(type1Name, out var type2);
                 if (type2 == null)
                 {
-                    console.Out.Write($"{type1Name} not found in 2nd winmd\r\n");
-                    same = false;
+                    if (winmd2ShortNamesToTypes.TryGetValue(type1.Name, out var list))
+                    {
+                        foreach (var t2 in list)
+                        {
+                            if (CompareTypes(type1, t2, null))
+                            {
+                                var type2Name = GetFullTypeName(t2);
+                                console?.Out.Write($"{type1Name} => {type2Name}\r\n");
+                                visitedNames.Add(type2Name);
+                                same = false;
+                                type2 = t2;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (type2 == null)
+                    {
+                        console?.Out.Write($"{type1Name} not found in 2nd winmd\r\n");
+                        same = false;
+                    }
+
                     continue;
                 }
 
@@ -918,7 +972,7 @@ namespace WinmdUtils
                 winmd1NamesToTypes.TryGetValue(type2FullName, out var type1);
                 if (type1 == null)
                 {
-                    console.Out.Write($"{type2FullName} not found in 1st winmd\r\n");
+                    console?.Out.Write($"{type2FullName} not found in 1st winmd\r\n");
                     same = false;
                 }
             }
@@ -960,7 +1014,7 @@ namespace WinmdUtils
                     ret = -1;
                 }
 
-                console.Out.Write($"{imp}\r\n");
+                console?.Out.Write($"{imp}\r\n");
             }
             
             if (ret == 0)
