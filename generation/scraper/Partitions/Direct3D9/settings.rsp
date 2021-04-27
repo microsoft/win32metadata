@@ -15,4 +15,4 @@ D3DFORMAT=uint
 <IncludeRoot>/um/d3d9helper.h
 <IncludeRoot>/shared/d3d9.h
 --namespace
-Windows.Win32.Direct3D9
+Windows.Win32.Graphics.Direct3D9

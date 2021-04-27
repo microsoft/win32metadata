@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using Windows.Win32.Interop;
 
-namespace Windows.Win32.Dxgi
+namespace Windows.Win32.Graphics.Dxgi
 {
     public partial struct DXGI_RGBA
     {

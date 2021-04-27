@@ -11,4 +11,4 @@
 <IncludeRoot>/um/UPnP.h
 <IncludeRoot>/um/upnphost.h
 --namespace
-Windows.Win32.UPnp
+Windows.Win32.Devices.Enumeration.Pnp

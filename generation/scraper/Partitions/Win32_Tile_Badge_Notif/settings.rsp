@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/NotificationActivationCallback.h
 --namespace
-Windows.Win32.TilesBadgesNotifications
+Windows.Win32.UI.Notifications

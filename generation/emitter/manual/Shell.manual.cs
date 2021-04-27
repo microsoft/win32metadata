@@ -2,7 +2,7 @@ using System;
 using Windows.Win32.Interop;
 using static Windows.Win32.SystemServices.Apis;
 
-namespace Windows.Win32.Shell
+namespace Windows.Win32.UI.Shell
 {
 
     public static unsafe partial class Apis

@@ -14,4 +14,4 @@
 <IncludeRoot>/um/fontsub.h
 <IncludeRoot>/um/t2embapi.h
 --namespace
-Windows.Win32.Gdi
+Windows.Win32.Graphics.Gdi

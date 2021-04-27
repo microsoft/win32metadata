@@ -49,6 +49,10 @@
 #include <activation.h>
 #include <weakreference.h>
 
+#include <msajtransport.h>
+#include <alljoyn_c\AjAPI.h>
+#include <windows.devices.alljoyn.interop.h>
+
 /*
 #include <winnt.h>
 #include <winstring.h>

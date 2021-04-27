@@ -16,4 +16,4 @@
 <IncludeRoot>/um/structuredquery.h
 <IncludeRoot>/um/filtereg.h
 --namespace
-Windows.Win32.Search
+Windows.Win32.System.Search

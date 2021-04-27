@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using Windows.Win32.Interop;
 
-namespace Windows.Win32.MediaFoundation
+namespace Windows.Win32.Media.MediaFoundation
 {
     // Because emits this: MF_Plugin_Type_Other = unchecked((uint)(-1)), and enum is int
     public enum MF_Plugin_Type

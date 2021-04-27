@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/shared/tbs.h
 --namespace
-Windows.Win32.TpmBaseServices
+Windows.Win32.System.TpmBaseServices

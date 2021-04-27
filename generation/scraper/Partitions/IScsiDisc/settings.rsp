@@ -12,4 +12,4 @@
 <IncludeRoot>/um/iscsidsc.h
 <IncludeRoot>/shared/iscsierr.h
 --namespace
-Windows.Win32.IScsiDisc
+Windows.Win32.Storage.IscsiDisc

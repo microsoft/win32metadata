@@ -12,4 +12,4 @@
 <IncludeRoot>/um/appmgmt.h
 <IncludeRoot>/um/GPEdit.h
 --namespace
-Windows.Win32.Policy
+Windows.Win32.System.GroupPolicy

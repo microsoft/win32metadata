@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/ddraw.h
 --namespace
-Windows.Win32.DirectDraw
+Windows.Win32.Graphics.DirectDraw

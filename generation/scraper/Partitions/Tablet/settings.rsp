@@ -26,4 +26,4 @@ PfnRecoCallback
 <IncludeRoot>/um/RTSCOM.h
 <IncludeRoot>/um/recapis.h
 --namespace
-Windows.Win32.TabletPC
+Windows.Win32.UI.TabletPC

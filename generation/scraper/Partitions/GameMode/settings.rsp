@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/expandedresources.h
 --namespace
-Windows.Win32.GameMode
+Windows.Win32.Gaming

@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/SystemMediaTransportControlsInterop.h
 --namespace
-Windows.Win32.MediaTransport
+Windows.Win32.Media.MediaTransport

@@ -14,4 +14,4 @@
 <IncludeRoot>/shared/traffic.h
 <IncludeRoot>/um/qos2.h
 --namespace
-Windows.Win32.QualityOfService
+Windows.Win32.NetworkManagement.QoS

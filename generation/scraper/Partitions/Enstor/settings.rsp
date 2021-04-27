@@ -12,4 +12,4 @@
 <IncludeRoot>/um/propkey.h
 <IncludeRoot>/um/ehstorapi.h
 --namespace
-Windows.Win32.EnhancedStorage
+Windows.Win32.Storage.EnhancedStorage

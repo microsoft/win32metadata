@@ -15,4 +15,4 @@
 <IncludeRoot>/shared/bthsdpdef.h
 <IncludeRoot>/um/bluetoothleapis.h
 --namespace
-Windows.Win32.Bluetooth
+Windows.Win32.Devices.Bluetooth

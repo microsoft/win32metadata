@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using Windows.Win32.Interop;
 using static Windows.Win32.SystemServices.Apis;
 
-namespace Windows.Win32.DirectWrite
+namespace Windows.Win32.Graphics.DirectWrite
 {
     public static unsafe partial class Apis
     {

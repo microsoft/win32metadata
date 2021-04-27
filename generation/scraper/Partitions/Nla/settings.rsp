@@ -9,6 +9,5 @@
 <IncludeRoot>/winrt
 --traverse
 <IncludeRoot>/um/netlistmgr.h
-<IncludeRoot>/um/ondemandconnroutehelper.h
 --namespace
-Windows.Win32.NetworkListManager
+Windows.Win32.Networking.NetworkListManager

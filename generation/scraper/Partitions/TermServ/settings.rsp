@@ -29,4 +29,4 @@
 <IncludeRoot>/um/wtsprotocol.h
 <IncludeRoot>/winrt/rdpappcontainerclient.h
 --namespace
-Windows.Win32.RemoteDesktopServices
+Windows.Win32.System.RemoteDesktop

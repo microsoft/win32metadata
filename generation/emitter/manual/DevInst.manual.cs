@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using Windows.Win32.Interop;
 
-namespace Windows.Win32.DeviceAndDriverInstallation
+namespace Windows.Win32.Devices.DeviceAndDriverInstallation
 {
     public enum CONFIGRET : uint
     {

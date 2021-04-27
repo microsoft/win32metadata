@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/msopc.h
 --namespace
-Windows.Win32.Packaging
+Windows.Win32.Storage.Packaging.Opc

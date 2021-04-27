@@ -15,4 +15,4 @@
 <IncludeRoot>/um/Mgm.h
 <IncludeRoot>/um/RtmV2.h
 --namespace
-Windows.Win32.RoutingAndRemoteAccessService
+Windows.Win32.NetworkManagement.Rras

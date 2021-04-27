@@ -13,4 +13,4 @@
 <IncludeRoot>/um/WbemProv.h
 <IncludeRoot>/um/WbemDisp.h
 --namespace
-Windows.Win32.Wmi
+Windows.Win32.System.Wmi

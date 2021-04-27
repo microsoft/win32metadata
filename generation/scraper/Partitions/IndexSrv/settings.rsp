@@ -12,4 +12,4 @@
 <IncludeRoot>/um/Filter.h
 <IncludeRoot>/um/cmdtree.h
 --namespace
-Windows.Win32.IndexServer
+Windows.Win32.Storage.IndexServer

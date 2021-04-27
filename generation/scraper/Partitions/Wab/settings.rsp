@@ -13,4 +13,4 @@
 <IncludeRoot>/um/wabdefs.h
 <IncludeRoot>/um/WabApi.h
 --namespace
-Windows.Win32.WindowsAddressBook
+Windows.Win32.System.AddressBook

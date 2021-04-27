@@ -16,4 +16,4 @@
 <IncludeRoot>/um/WinFax.h
 <IncludeRoot>/um/FaxCom.h
 --namespace
-Windows.Win32.Fax
+Windows.Win32.Devices.Fax

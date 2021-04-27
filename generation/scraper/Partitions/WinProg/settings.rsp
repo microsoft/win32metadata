@@ -58,7 +58,6 @@ _TEB
 <IncludeRoot>/um/Wscapi.h
 <IncludeRoot>/um/FileHC.h
 <IncludeRoot>/um/aux_ulib.h
-<IncludeRoot>/um/winreg.h
 <IncludeRoot>/um/rtlsupportapi.h
 <IncludeRoot>/shared/stralign.h
 <IncludeRoot>/um/appcompatapi.h
@@ -79,4 +78,4 @@ _TEB
 <IncludeRoot>/um/statehelpers.h
 <IncludeRoot>/um/reason.h
 --namespace
-Windows.Win32.WindowsProgramming
+Windows.Win32.System.WindowsProgramming
