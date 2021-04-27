@@ -251,8 +251,8 @@ HeapSummary:hHeap=HeapHandle
 HeapUnlock::hHeap=HeapHandle
 HeapValidate::hHeap=HeapHandle
 HeapWalk::hHeap=HeapHandle
-GetProcessHeaps::ProcessHeaps=ProcessHeapHandle*
-GetProcessHeap::return=ProcessHeapHandle
+GetProcessHeaps::ProcessHeaps=[DoNotRelease]HeapHandle*
+GetProcessHeap::return=[DoNotRelease]HeapHandle
 WNetOpenEnumA::lphEnum=NetEnumHandle*
 WNetOpenEnumW::lphEnum=NetEnumHandle*
 CryptCreateAsyncHandle::phAsync=HCRYPTASYNC*
@@ -390,8 +390,8 @@ DXVAHD_STREAM_DATA::ppPastSurfaces=[NativeArrayInfo(CountParamIndex=3)]
 DXVAHD_STREAM_DATA::ppFutureSurfaces=[NativeArrayInfo(CountParamIndex=4)]
 CreateIcon::lpbANDbits=[NativeArrayInfo]
 CreateIcon::lpbXORbits=[NativeArrayInfo]
-GetCurrentProcess::return=NonClosableHandle
-GetStdHandle::return=NonClosableHandle
+GetCurrentProcess::return=[DoNotRelease]
+GetStdHandle::return=[DoNotRelease]
 CoInitializeSecurity::dwCapabilities=EOLE_AUTHENTICATION_CAPABILITIES
 CoSetProxyBlanket::dwCapabilities=EOLE_AUTHENTICATION_CAPABILITIES
 IClientSecurity::SetBlanket::dwCapabilities=EOLE_AUTHENTICATION_CAPABILITIES
@@ -435,4 +435,7 @@ EapHostPeerGetDataToUnplumbCredentials::phCredentialImpersonationToken=IntPtr*
 FARPROC::return=IntPtr
 NEARPROC::return=IntPtr
 PROC::return=IntPtr
-
+LoadCursorA::return=[DoNotRelease]
+LoadCursorW::return=[DoNotRelease]
+GetModuleHandleA::return=[DoNotRelease]
+GetModuleHandleW::return=[DoNotRelease]

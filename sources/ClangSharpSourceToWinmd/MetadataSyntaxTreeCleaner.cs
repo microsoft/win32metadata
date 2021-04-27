@@ -347,6 +347,10 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 string fullName = SyntaxUtils.GetFullName(node);
+                if (fullName == "GetModuleHandleA")
+                {
+
+                }
 
                 // Remove duplicate static methods
                 if (node.Body == null)
@@ -859,11 +863,14 @@ namespace ClangSharpSourceToWinmd
             private bool GetRemapInfo(string fullName, out List<AttributeSyntax> listAttributes, string currentType, out string newType, out string newName)
             {
                 listAttributes = null;
+                newType = null;
                 newName = null;
+
+                bool ret = false;
 
                 if (!string.IsNullOrEmpty(fullName) && this.remaps.TryGetValue(fullName, out string remapData))
                 {
-                    var ret = EncodeHelpers.DecodeRemap(remapData, out listAttributes, out newType, out newName);
+                    ret = EncodeHelpers.DecodeRemap(remapData, out listAttributes, out newType, out newName);
                     if (newType != null)
                     {
                         // Try to keep the pointers at the same level if we're replacing
@@ -879,10 +886,9 @@ namespace ClangSharpSourceToWinmd
                             }
                         }
                     }
-
-                    return ret;
                 }
-                else
+
+                if (newType == null)
                 {
                     // See if the type ends in the magic suffix. We use a remap fed to clangsharp 
                     // to keep some typedefs from following down to their original type
@@ -892,14 +898,11 @@ namespace ClangSharpSourceToWinmd
                     if (typeOnly.EndsWith(RevertToTypeSuffix))
                     {
                         newType = typeOnly.Substring(0, typeOnly.Length - RevertToTypeSuffix.Length) + pointers;
-                        return true;
+                        ret = true;
                     }
                 }
 
-                newType = null;
-                newName = null;
-
-                return false;
+                return ret;
             }
         }
 
