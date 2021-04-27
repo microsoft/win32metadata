@@ -45,4 +45,4 @@
 <IncludeRoot>/um/alljoyn_c/version.h
 <IncludeRoot>/um/MSAJTransport.h
 --namespace
-Windows.Win32.Devices.Alljoyn
+Windows.Win32.Devices.AllJoyn

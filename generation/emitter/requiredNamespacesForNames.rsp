@@ -1,11 +1,11 @@
 --requiredNamespaceForName
 DFS_TARGET_PRIORITY_CLASS=Windows.Win32.Storage.DistributedFileSystem
-AllJoynCloseBusHandle=Windows.Win32.Devices.Alljoyn
-AllJoynConnectToBus=Windows.Win32.Devices.Alljoyn
-AllJoynEnumEvents=Windows.Win32.Devices.Alljoyn
-AllJoynEventSelect=Windows.Win32.Devices.Alljoyn
-AllJoynReceiveFromBus=Windows.Win32.Devices.Alljoyn
-AllJoynSendToBus=Windows.Win32.Devices.Alljoyn
+AllJoynCloseBusHandle=Windows.Win32.Devices.AllJoyn
+AllJoynConnectToBus=Windows.Win32.Devices.AllJoyn
+AllJoynEnumEvents=Windows.Win32.Devices.AllJoyn
+AllJoynEventSelect=Windows.Win32.Devices.AllJoyn
+AllJoynReceiveFromBus=Windows.Win32.Devices.AllJoyn
+AllJoynSendToBus=Windows.Win32.Devices.AllJoyn
 AMSI_ATTRIBUTE=Windows.Win32.System.Antimalware
 AMSI_RESULT=Windows.Win32.System.Antimalware
 AmsiCloseSession=Windows.Win32.System.Antimalware

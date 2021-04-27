@@ -1,7 +1,7 @@
 // Copyright © Microsoft
 using Windows.Win32.Interop;
 
-using Windows.Win32.Devices.Alljoyn;
+using Windows.Win32.Devices.AllJoyn;
 using Windows.Win32.System.Antimalware;
 using Windows.Win32.System.ApplicationInstallationAndServicing;
 using Windows.Win32.Storage.Packaging.Appx;
