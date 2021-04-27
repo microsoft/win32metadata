@@ -911,11 +911,6 @@ namespace WinmdUtils
                     continue;
                 }
 
-                if (type1.Name == "LPEXCEPFINO_DEFERRED_FILLIN")
-                {
-
-                }
-
                 var type1Name = GetFullTypeName(type1);
                 visitedNames.Add(type1Name);
 
