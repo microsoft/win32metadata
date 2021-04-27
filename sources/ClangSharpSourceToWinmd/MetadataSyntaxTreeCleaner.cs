@@ -347,10 +347,6 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 string fullName = SyntaxUtils.GetFullName(node);
-                if (fullName == "GetModuleHandleA")
-                {
-
-                }
 
                 // Remove duplicate static methods
                 if (node.Body == null)
