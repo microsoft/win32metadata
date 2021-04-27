@@ -123,10 +123,10 @@ $emitterDir = "$generationDir\emitter"
 $partitionsDir = "$scraperDir\Partitions"
 
 $remapFileName = "$emitterDir\remap.rsp"
-$enumsRemapFileName = "$emitterDir\generated\enumsRemap.rsp"
+$emitterGeneratedDir = "$emitterDir\generated\$scraperArch"
+$enumsRemapFileName = "$emitterGeneratedDir\enumsRemap.rsp"
 $autoTypesFileName = "$emitterDir\autoTypes.rsp"
-$functionPointerFixupsRsp = "$emitterDir\functionPointerFixups.generated.rsp"
-$enumsMakeFlagsRsp = "$emitterDir\enumsMakeFlags.generated.rsp"
+$functionPointerFixupsRsp = "$emitterGeneratedDir\functionPointerFixups.generated.rsp"
 
 $constantsScraperRsp = "$scraperDir\ConstantsScraper.rsp"
 $enumsJson = "$scraperDir\enums.json"
@@ -139,7 +139,7 @@ $partitionNames | ForEach-Object -Parallel {
 
     $assemblyVersion = Get-ExternalPackageVersion $defaultArtifactsDir $_
     $externalPackageDir = "$defaultArtifactsDir\InstalledPackages\$_.$assemblyVersion"
-    $enumsMakeFlagsRsp = "$using:emitterDir\enumsMakeFlags.$_.rsp"
+    $enumsMakeFlagsRsp = "$using:emitterGeneratedDir\enumsMakeFlags.$_.rsp"
 
     if (!$using:SkipConstants)
     {
