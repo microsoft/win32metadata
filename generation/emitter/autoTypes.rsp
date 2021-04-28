@@ -219,3 +219,4 @@ Windows.Win32.StructuredStorage,JET_OSSNAPID,UIntPtr
 Windows.Win32.StructuredStorage,JET_LS,UIntPtr
 Windows.Win32.SystemServices,SHANDLE_PTR,IntPtr
 Windows.Win32.SystemServices,HANDLE_PTR,UIntPtr
+Windows.Win32.Networking.WinSock,SOCKET,UIntPtr,closesocket
