@@ -12,11 +12,10 @@
 <IncludeRoot>/um/l2cmn.h
 <IncludeRoot>/shared/windot11.h
 <IncludeRoot>/shared/WlanTypes.h
-<IncludeRoot>/shared/ntddndis.h
 <IncludeRoot>/shared/ndis/objectheader.h
 <IncludeRoot>/shared/ndis/ndisport.h
 <IncludeRoot>/shared/pciprop.h
 <IncludeRoot>/um/wlanapi.h
 <IncludeRoot>/um/adhoc.h
 --namespace
-Windows.Win32.NativeWiFi
+Windows.Win32.NetworkManagement.WiFi

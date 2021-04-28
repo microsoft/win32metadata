@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/pla.h
 --namespace
-Windows.Win32.PerformanceLogAndAlerts
+Windows.Win32.System.Performance

@@ -27,4 +27,4 @@ AVIPALCHANGE
 <IncludeRoot>/um/mmiscapi.h
 <IncludeRoot>/um/timeapi.h
 --namespace
-Windows.Win32.Multimedia
+Windows.Win32.Media.Multimedia

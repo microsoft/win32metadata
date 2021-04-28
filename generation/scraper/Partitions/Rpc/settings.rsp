@@ -19,4 +19,4 @@ NDR_SCONTEXT
 <IncludeRoot>/um/rpcssl.h
 <IncludeRoot>/shared/rpcndr.h
 --namespace
-Windows.Win32.Rpc
+Windows.Win32.System.Rpc

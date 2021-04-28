@@ -13,6 +13,7 @@ To call Win32 APIs from the language of your choice based off of this metadata, 
 * Rust - https://github.com/microsoft/windows-rs (Microsoft)
 * D - https://github.com/rumbu13/windows-d (Community)
 * Dart - https://github.com/timsneath/win32 (Community)
+* Zig - https://github.com/marlersoft/zigwin32 (Community)
 
 Note: Community projects are listed here to help with discovery but are not officially validated by Microsoft.
 
@@ -73,7 +74,7 @@ Example for Direct3DDxgi:
     <IncludeRoot>/shared/dxgi1_3.h
     <IncludeRoot>/shared/dxgi1_5.h
     --namespace
-    Windows.Win32.Dxgi
+    Windows.Win32.Graphics.Dxgi
 
 
 This means ClangSharp will emit types from the above list of headers when scraping for dxgi.lib. The compiler will see lots of other headers, like what windows.h brings in, but it will only emit types seen in the list above.
@@ -146,8 +147,8 @@ The partitions are meant to break up headers into namespaces. However, some head
 
 (Both functions come from winuser.h)
 
-    BeginPaint=Windows.Win32.Gdi
-    CreateWindowExW=Windows.Win32.WindowsAndMessaging
+    BeginPaint=Windows.Win32.Graphics.Gdi
+    CreateWindowExW=Windows.Win32.UI.WindowsAndMessaging
 
 # How to Generate the .winmd
 PowerShell Core is required to run the generation scripts. Open a PowerShell Core window and:

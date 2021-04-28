@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using Windows.Win32.Interop;
 
-namespace Windows.Win32.Js
+namespace Windows.Win32.System.Js
 {
     public enum JsRuntimeVersion
     {

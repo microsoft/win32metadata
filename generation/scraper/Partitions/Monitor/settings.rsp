@@ -12,4 +12,4 @@
 <IncludeRoot>/um/highlevelmonitorconfigurationapi.h
 <IncludeRoot>/um/physicalmonitorenumerationapi.h
 --namespace
-Windows.Win32.Monitor
+Windows.Win32.Devices.Display

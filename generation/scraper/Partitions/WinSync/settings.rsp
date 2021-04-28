@@ -11,4 +11,4 @@
 <IncludeRoot>/um/winsync.h
 <IncludeRoot>/um/syncregistration.h
 --namespace
-Windows.Win32.WindowsSync
+Windows.Win32.System.WindowsSync

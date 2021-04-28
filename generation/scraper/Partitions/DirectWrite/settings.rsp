@@ -16,4 +16,4 @@ DWRITE_FONT_AXIS_TAG
 <IncludeRoot>/um/dwrite_3.h
 <IncludeRoot>/um/dwrite_2.h
 --namespace
-Windows.Win32.DirectWrite
+Windows.Win32.Graphics.DirectWrite

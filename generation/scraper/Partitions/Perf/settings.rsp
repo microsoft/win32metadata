@@ -12,4 +12,4 @@
 <IncludeRoot>/um/perflib.h
 <IncludeRoot>/um/Pdh.h
 --namespace
-Windows.Win32.Perf
+Windows.Win32.System.Performance

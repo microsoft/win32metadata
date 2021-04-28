@@ -11,4 +11,4 @@
 <IncludeRoot>/um/msdrmdefs.h
 <IncludeRoot>/um/msdrm.h
 --namespace
-Windows.Win32.RightsManagement
+Windows.Win32.Data.RightsManagement

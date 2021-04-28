@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/IContact.h
 --namespace
-Windows.Win32.WindowsContacts
+Windows.Win32.System.Contacts

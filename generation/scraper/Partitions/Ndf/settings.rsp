@@ -15,4 +15,4 @@ SOCKET_ADDRESS_LIST
 <IncludeRoot>/um/ndhelper.h
 <IncludeRoot>/um/ndfapi.h
 --namespace
-Windows.Win32.NetworkDiagnosticsFramework
+Windows.Win32.NetworkManagement.NetworkDiagnosticsFramework

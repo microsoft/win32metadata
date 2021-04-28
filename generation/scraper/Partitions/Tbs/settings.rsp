@@ -7,7 +7,9 @@
 <IncludeRoot>/shared
 <IncludeRoot>/um
 <IncludeRoot>/winrt
+--with-librarypath
+GetDeviceID=tbs
 --traverse
 <IncludeRoot>/shared/tbs.h
 --namespace
-Windows.Win32.TpmBaseServices
+Windows.Win32.System.TpmBaseServices

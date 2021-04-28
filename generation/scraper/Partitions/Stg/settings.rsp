@@ -22,4 +22,4 @@ CreateDataAdviseHolder
 <IncludeRoot>/um/propapi.h
 <IncludeRoot>/um/esent.h
 --namespace
-Windows.Win32.StructuredStorage
+Windows.Win32.Storage.StructuredStorage

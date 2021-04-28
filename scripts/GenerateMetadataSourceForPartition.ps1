@@ -36,7 +36,12 @@ if (!$version)
 
 $nugetDestPackagesDir = Join-Path -Path $artifactsDir "InstalledPackages"
 
-$libMappingOutputFileName = Get-LibMappingsFile $artifactsDir $version
+$libMappingOutputFileName = Get-LibMappingsFile $version
+if (!(Test-Path $libMappingOutputFileName))
+{
+    Write-Error "$libMappingOutputFileName not found. Please create it using CreateProcLibMappings.ps1."
+    exit -1
+}
 
 $stopwatch =  [system.diagnostics.stopwatch]::StartNew()
 

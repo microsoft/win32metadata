@@ -11,4 +11,4 @@
 <IncludeRoot>/um/wpcevent.h
 <IncludeRoot>/um/wpcapi.h
 --namespace
-Windows.Win32.ParentalControls
+Windows.Win32.System.ParentalControls

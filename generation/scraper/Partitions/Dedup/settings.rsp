@@ -13,4 +13,4 @@
 <IncludeRoot>/um/ddpcommon.h
 <IncludeRoot>/um/ddpdataport.h
 --namespace
-Windows.Win32.DataDeduplication
+Windows.Win32.Storage.DataDeduplication

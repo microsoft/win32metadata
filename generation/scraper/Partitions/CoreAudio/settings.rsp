@@ -27,4 +27,4 @@ IKsControl
 <IncludeRoot>/um/audiopolicy.h
 <IncludeRoot>/um/SpatialAudioMetadata.h
 --namespace
-Windows.Win32.CoreAudio
+Windows.Win32.Media.Audio.CoreAudio

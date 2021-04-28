@@ -14,4 +14,4 @@
 <IncludeRoot>/um/UIAutomationCoreApi.h
 <IncludeRoot>/um/UIAutomationClient.h
 --namespace
-Windows.Win32.WindowsAccessibility
+Windows.Win32.UI.Accessibility

@@ -2,7 +2,7 @@ using System;
 using System.Runtime.InteropServices;
 using Windows.Win32.Interop;
 
-namespace Windows.Win32.TabletPC
+namespace Windows.Win32.UI.TabletPC
 {
     // Because this gets emitted twice from recapis.h
     [UnmanagedFunctionPointer(CallingConvention.Winapi)]

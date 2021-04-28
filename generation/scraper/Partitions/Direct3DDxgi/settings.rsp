@@ -22,4 +22,4 @@ _D3DCOLORVALUE
 <IncludeRoot>/shared/dxgi1_3.h
 <IncludeRoot>/shared/dxgi1_5.h
 --namespace
-Windows.Win32.Dxgi
+Windows.Win32.Graphics.Dxgi

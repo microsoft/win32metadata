@@ -18,4 +18,4 @@ CXAPOBase
 <IncludeRoot>/um/xapo.h
 <IncludeRoot>/um/x3daudio.h
 --namespace
-Windows.Win32.XAudio2
+Windows.Win32.Media.Audio.XAudio2

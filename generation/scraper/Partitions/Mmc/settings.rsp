@@ -11,4 +11,4 @@
 <IncludeRoot>/um/MMCObj.h
 <IncludeRoot>/um/MMC.h
 --namespace
-Windows.Win32.Mmc
+Windows.Win32.System.Mmc

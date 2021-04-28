@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/Mshtml.h
 --namespace
-Windows.Win32.InternetExplorer
+Windows.Win32.Web.MsHtml

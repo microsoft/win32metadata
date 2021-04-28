@@ -66,6 +66,13 @@ namespace ClangSharpSourceToWinmd
                     if (newType != null)
                     {
                         node = node.WithType(SyntaxFactory.ParseTypeName(newType).WithTrailingTrivia(SyntaxFactory.Space));
+
+                        // Get rid of the NativeTypeName attribute so the type we just changed to doesn't get overridden
+                        var attr = SyntaxUtils.GetAttribute(node.AttributeLists, "NativeTypeName");
+                        if (attr != null)
+                        {
+                            node = node.RemoveNode(attr, SyntaxRemoveOptions.KeepLeadingTrivia);
+                        }
                     }
                 }
                 else
@@ -429,8 +436,17 @@ namespace ClangSharpSourceToWinmd
                 isNullTerminated = false;
                 isNullNullTerminated = false;
 
+                if (this.remaps.TryGetValue(nativeTypeName, out var attrs))
+                {
+                    if (attrs.Contains("[Const]"))
+                    {
+                        isConst = true;
+                    }
+                }
+
                 switch (nativeTypeName)
                 {
+                    case "LPCGUID":
                     case "LPCVOID":
                         isConst = true;
                         break;

@@ -16,4 +16,4 @@
 <IncludeRoot>/um/fsrmreports.h
 <IncludeRoot>/um/fsrmscreen.h
 --namespace
-Windows.Win32.FileSeverResourceManager
+Windows.Win32.Storage.FileServerResourceManager

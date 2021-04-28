@@ -50,4 +50,4 @@
 <IncludeRoot>/um/mmstream.h
 <IncludeRoot>/um/vfwmsgs.h
 --namespace
-Windows.Win32.DirectShow
+Windows.Win32.Graphics.DirectShow

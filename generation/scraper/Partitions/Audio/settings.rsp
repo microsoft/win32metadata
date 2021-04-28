@@ -7,8 +7,9 @@
 <IncludeRoot>/shared
 <IncludeRoot>/um
 <IncludeRoot>/winrt
+--with-librarypath
+GetDeviceID=DSOUND
 --exclude
-GetDeviceID
 _D3DVECTOR
 IReferenceClock
 IKsPropertySet
@@ -23,4 +24,4 @@ IKsPropertySet
 <IncludeRoot>/um/dmusics.h
 <IncludeRoot>/um/audiomediatype.h
 --namespace
-Windows.Win32.Audio
+Windows.Win32.Media.Audio.DirectMusic

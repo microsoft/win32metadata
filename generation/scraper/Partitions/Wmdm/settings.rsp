@@ -13,4 +13,4 @@
 <IncludeRoot>/um/mswmdm.h
 <IncludeRoot>/um/wmdmlog.h
 --namespace
-Windows.Win32.WindowsMediaDeviceManager
+Windows.Win32.Media.DeviceManager

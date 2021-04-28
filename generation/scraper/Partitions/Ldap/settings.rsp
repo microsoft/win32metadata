@@ -8,7 +8,7 @@
 <IncludeRoot>/um
 <IncludeRoot>/winrt
 --traverse
-<IncludeRoot>/um/Winldap.h
 <IncludeRoot>/um/WinBer.h
+<IncludeRoot>/um/Winldap.h
 --namespace
-Windows.Win32.Ldap
+Windows.Win32.Networking.Ldap

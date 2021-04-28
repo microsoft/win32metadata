@@ -423,7 +423,7 @@
     "members": [
       {
         "name": "LBS_STANDARD",
-        "value": "(LBS_NOTIFY | LBS_SORT | Windows.Win32.WindowsAndMessaging.WINDOW_STYLE.WS_VSCROLL | Windows.Win32.WindowsAndMessaging.WINDOW_STYLE.WS_BORDER)"
+        "value": "(LBS_NOTIFY | LBS_SORT | Windows.Win32.UI.WindowsAndMessaging.WINDOW_STYLE.WS_VSCROLL | Windows.Win32.UI.WindowsAndMessaging.WINDOW_STYLE.WS_BORDER)"
       }
     ],
     "uses": []
@@ -1571,19 +1571,19 @@
     "members": [
       {
         "name": "DL_BEGINDRAG",
-        "value": "Windows.Win32.WindowsAndMessaging.Apis.WM_USER + 133"
+        "value": "Windows.Win32.UI.WindowsAndMessaging.Apis.WM_USER + 133"
       },
       {
         "name": "DL_CANCELDRAG",
-        "value": "Windows.Win32.WindowsAndMessaging.Apis.WM_USER + 136"
+        "value": "Windows.Win32.UI.WindowsAndMessaging.Apis.WM_USER + 136"
       },
       {
         "name": "DL_DRAGGING",
-        "value": "Windows.Win32.WindowsAndMessaging.Apis.WM_USER + 134"
+        "value": "Windows.Win32.UI.WindowsAndMessaging.Apis.WM_USER + 134"
       },
       {
         "name": "DL_DROPPED",
-        "value": "Windows.Win32.WindowsAndMessaging.Apis.WM_USER + 135"
+        "value": "Windows.Win32.UI.WindowsAndMessaging.Apis.WM_USER + 135"
       }
     ],
     "uses": [
@@ -1603,7 +1603,7 @@
     "members": [
       {
         "name": "SECTION_ALL_ACCESS",
-        "value": "(Windows.Win32.FileSystem.FILE_ACCESS_FLAGS.STANDARD_RIGHTS_REQUIRED|SECTION_QUERY|SECTION_MAP_WRITE|SECTION_MAP_READ|SECTION_MAP_EXECUTE|SECTION_EXTEND_SIZE)"
+        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.STANDARD_RIGHTS_REQUIRED|SECTION_QUERY|SECTION_MAP_WRITE|SECTION_MAP_READ|SECTION_MAP_EXECUTE|SECTION_EXTEND_SIZE)"
       }
     ],
     "uses": []
@@ -3533,7 +3533,7 @@
     ]
   },
   {
-    "namespace": "Windows.Win32.Rpc",
+    "namespace": "Windows.Win32.System.Rpc",
     "type": "int",
     "name": "RPC_STATUS",
     "autoPopulate": {
@@ -3544,7 +3544,7 @@
     "uses": []
   },
   {
-    "namespace": "Windows.Win32.Debug",
+    "namespace": "Windows.Win32.System.Diagnostics.Debug",
     "type": "uint",
     "name": "FACILITY_CODE",
     "autoPopulate": {
@@ -3555,7 +3555,7 @@
     "uses": []
   },
   {
-    "namespace": "Windows.Win32.SystemServices",
+    "namespace": "Windows.Win32.System.SystemServices",
     "type": "uint",
     "name": "NTSTATUS_FACILITY_CODE",
     "autoPopulate": {
@@ -13672,6 +13672,22 @@
       {
         "name": "PM_NOYIELD",
         "value": "2"
+      },
+      {
+        "name": "PM_QS_INPUT",
+        "value": "(QUEUE_STATUS_FLAGS.QS_INPUT << 16)"
+      },
+      {
+        "name": "PM_QS_POSTMESSAGE",
+        "value": "((QUEUE_STATUS_FLAGS.QS_POSTMESSAGE | QUEUE_STATUS_FLAGS.QS_HOTKEY | QUEUE_STATUS_FLAGS.QS_TIMER) << 16)"
+      },
+      {
+        "name": "PM_QS_PAINT",
+        "value": "(QUEUE_STATUS_FLAGS.QS_PAINT << 16)"
+      },
+      {
+        "name": "PM_QS_SENDMESSAGE",
+        "value": "(QUEUE_STATUS_FLAGS.QS_SENDMESSAGE << 16)"
       }
     ],
     "uses": [

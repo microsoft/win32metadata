@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using Windows.Win32.Interop;
 
-namespace Windows.Win32.Direct2D
+namespace Windows.Win32.Graphics.Direct2D
 {
     public partial struct D2D_COLOR_F
     {

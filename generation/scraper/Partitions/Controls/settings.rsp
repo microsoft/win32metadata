@@ -23,4 +23,4 @@ UiaRect
 <IncludeRoot>/um/CommCtrl.h
 <IncludeRoot>/um/vssym32.h
 --namespace
-Windows.Win32.Controls
+Windows.Win32.UI.Controls

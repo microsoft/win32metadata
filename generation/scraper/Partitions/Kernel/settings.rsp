@@ -17,4 +17,4 @@ _OBJECT_ATTRIBUTES
 --traverse
 <IncludeRoot>/shared/ntdef.h
 --namespace
-Windows.Win32.Kernel
+Windows.Win32.System.Kernel

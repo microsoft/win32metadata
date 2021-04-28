@@ -30,4 +30,4 @@ DWRITE_GLYPH_RUN_DESCRIPTION
 <IncludeRoot>/um/d2d1effectauthor.h
 <IncludeRoot>/um/d2d1effectauthor_1.h
 --namespace
-Windows.Win32.Direct2D
+Windows.Win32.Graphics.Direct2D

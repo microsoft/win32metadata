@@ -11,4 +11,4 @@
 <IncludeRoot>/um/MSTask.h
 <IncludeRoot>/um/taskschd.h
 --namespace
-Windows.Win32.TaskScheduler
+Windows.Win32.System.TaskScheduler

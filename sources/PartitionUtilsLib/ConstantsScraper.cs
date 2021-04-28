@@ -709,7 +709,7 @@ namespace PartitionUtilsLib
 
                     if (foundNamespace == null)
                     {
-                        foundNamespace = "Windows.Win32.SystemServices";
+                        foundNamespace = "Windows.Win32.System.SystemServices";
                     }
 
                     bool addedEnum = false;
