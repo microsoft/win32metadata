@@ -66,6 +66,13 @@ namespace ClangSharpSourceToWinmd
                     if (newType != null)
                     {
                         node = node.WithType(SyntaxFactory.ParseTypeName(newType).WithTrailingTrivia(SyntaxFactory.Space));
+
+                        // Get rid of the NativeTypeName attribute so the type we just changed to doesn't get overridden
+                        var attr = SyntaxUtils.GetAttribute(node.AttributeLists, "NativeTypeName");
+                        if (attr != null)
+                        {
+                            node = node.RemoveNode(attr, SyntaxRemoveOptions.KeepLeadingTrivia);
+                        }
                     }
                 }
                 else
