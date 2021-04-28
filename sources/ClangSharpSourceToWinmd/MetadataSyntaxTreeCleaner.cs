@@ -436,8 +436,17 @@ namespace ClangSharpSourceToWinmd
                 isNullTerminated = false;
                 isNullNullTerminated = false;
 
+                if (this.remaps.TryGetValue(nativeTypeName, out var attrs))
+                {
+                    if (attrs.Contains("[Const]"))
+                    {
+                        isConst = true;
+                    }
+                }
+
                 switch (nativeTypeName)
                 {
+                    case "LPCGUID":
                     case "LPCVOID":
                         isConst = true;
                         break;
