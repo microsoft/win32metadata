@@ -1,8 +1,8 @@
 --autoTypes
 Windows.Win32.UI.WindowsAndMessaging,HWND,IntPtr
-Windows.Win32.SystemServices,BOOL,int
-Windows.Win32.SystemServices,WSTR,char*
-Windows.Win32.SystemServices,STR,byte*
+Windows.Win32.System.SystemServices,BOOL,int
+Windows.Win32.System.SystemServices,WSTR,char*
+Windows.Win32.System.SystemServices,STR,byte*
 Windows.Win32.System.OleAutomation,BSTR,IntPtr,SysFreeString
 --remap
 MyStruct::X=MyEnum XX

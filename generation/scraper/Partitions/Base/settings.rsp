@@ -102,4 +102,4 @@ _D3DTEXTURETRANSFORMFLAGS
 <IncludeRoot>/shared/winerror.h
 <IncludeRoot>/shared/ntstatus.h
 --namespace
-Windows.Win32.SystemServices
+Windows.Win32.System.SystemServices

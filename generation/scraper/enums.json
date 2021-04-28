@@ -3555,7 +3555,7 @@
     "uses": []
   },
   {
-    "namespace": "Windows.Win32.SystemServices",
+    "namespace": "Windows.Win32.System.SystemServices",
     "type": "uint",
     "name": "NTSTATUS_FACILITY_CODE",
     "autoPopulate": {
