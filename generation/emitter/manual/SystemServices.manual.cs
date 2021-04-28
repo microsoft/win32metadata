@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using Windows.Win32.Interop;
 
-namespace Windows.Win32.SystemServices
+namespace Windows.Win32.System.SystemServices
 {
     // Have to manually define this because of the way it's brought it using two typedefs
     [UnmanagedFunctionPointer]

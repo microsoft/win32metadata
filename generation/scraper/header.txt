@@ -137,7 +137,7 @@ using Windows.Win32.Storage.StructuredStorage;
 using Windows.Win32.System.Registry;
 using Windows.Win32.System.EventNotificationService;
 using Windows.Win32.System.Restore;
-using Windows.Win32.SystemServices;
+using Windows.Win32.System.SystemServices;
 using Windows.Win32.UI.TabletPC;
 using Windows.Win32.Devices.Tapi;
 using Windows.Win32.System.TaskScheduler;
@@ -191,4 +191,4 @@ using Windows.Win32.UI.XInput;
 using Windows.Win32.Networking.XmlHttpExtendedRequest;
 using Windows.Win32.Storage.Xps;
 
-using IServiceProvider = Windows.Win32.SystemServices.IServiceProvider;
+using IServiceProvider = Windows.Win32.System.SystemServices.IServiceProvider;
