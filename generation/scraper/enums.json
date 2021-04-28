@@ -13672,6 +13672,22 @@
       {
         "name": "PM_NOYIELD",
         "value": "2"
+      },
+      {
+        "name": "PM_QS_INPUT",
+        "value": "(QUEUE_STATUS_FLAGS.QS_INPUT << 16)"
+      },
+      {
+        "name": "PM_QS_POSTMESSAGE",
+        "value": "((QUEUE_STATUS_FLAGS.QS_POSTMESSAGE | QUEUE_STATUS_FLAGS.QS_HOTKEY | QUEUE_STATUS_FLAGS.QS_TIMER) << 16)"
+      },
+      {
+        "name": "PM_QS_PAINT",
+        "value": "(QUEUE_STATUS_FLAGS.QS_PAINT << 16)"
+      },
+      {
+        "name": "PM_QS_SENDMESSAGE",
+        "value": "(QUEUE_STATUS_FLAGS.QS_SENDMESSAGE << 16)"
       }
     ],
     "uses": [
