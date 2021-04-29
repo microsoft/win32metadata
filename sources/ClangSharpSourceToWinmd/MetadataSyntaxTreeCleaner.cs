@@ -11,9 +11,9 @@ namespace ClangSharpSourceToWinmd
 {
     public static class MetadataSyntaxTreeCleaner
     {
-        public static SyntaxTree CleanSyntaxTree(SyntaxTree tree, Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsMakeFlags, Dictionary<string, string> requiredNamespaces, HashSet<string> nonEmptyStructs, string filePath)
+        public static SyntaxTree CleanSyntaxTree(SyntaxTree tree, Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsMakeFlags, Dictionary<string, string> requiredNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames, string filePath)
         {
-            TreeRewriter treeRewriter = new TreeRewriter(remaps, enumAdditions, enumsMakeFlags, requiredNamespaces, nonEmptyStructs);
+            TreeRewriter treeRewriter = new TreeRewriter(remaps, enumAdditions, enumsMakeFlags, requiredNamespaces, nonEmptyStructs, enumMemberNames);
             var newRoot = (CSharpSyntaxNode)treeRewriter.Visit(tree.GetRoot());
             return CSharpSyntaxTree.Create(newRoot, null, filePath);
         }
@@ -29,14 +29,16 @@ namespace ClangSharpSourceToWinmd
             private HashSet<string> visitedDelegateNames = new HashSet<string>();
             private HashSet<string> visitedStaticMethodNames = new HashSet<string>();
             private HashSet<string> nonEmptyStructs;
+            private HashSet<string> enumMemberNames;
             private HashSet<string> enumsToMakeFlags;
 
-            public TreeRewriter(Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsToMakeFlags, Dictionary<string, string> requiredNamespaces, HashSet<string> nonEmptyStructs)
+            public TreeRewriter(Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsToMakeFlags, Dictionary<string, string> requiredNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames)
             {
                 this.remaps = remaps;
                 this.enumAdditions = enumAdditions;
                 this.requiredNamespaces = requiredNamespaces;
                 this.nonEmptyStructs = nonEmptyStructs;
+                this.enumMemberNames = enumMemberNames;
                 this.enumsToMakeFlags = enumsToMakeFlags;
             }
 
@@ -103,6 +105,16 @@ namespace ClangSharpSourceToWinmd
             public override SyntaxNode VisitFieldDeclaration(FieldDeclarationSyntax node)
             {
                 string fullName = SyntaxUtils.GetFullName(node);
+
+                // If it's a constant, ignore it if it's already part of an enum
+                if (node.Modifiers.ToString() == "public const")
+                {
+                    string name = node.Declaration.Variables.First().Identifier.ValueText;
+                    if (this.enumMemberNames.Contains(name))
+                    {
+                        return null;
+                    }
+                }
 
                 this.GetRemapInfo(fullName, out var listAttributes, node.Declaration.Type.ToString(), out string newType, out string newName);
 
@@ -259,6 +271,20 @@ namespace ClangSharpSourceToWinmd
                 node = (EnumDeclarationSyntax)base.VisitEnumDeclaration(node);
 
                 var enumName = node.Identifier.ValueText;
+                if (this.GetRemapInfo(enumName, out var listAttributes, null, out _, out _))
+                {
+                    if (listAttributes != null)
+                    {
+                        foreach (var attrNode in listAttributes)
+                        {
+                            var attrListNode =
+                                SyntaxFactory.AttributeList(
+                                    SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(attrNode));
+                            node = node.WithAttributeLists(node.AttributeLists.Add(attrListNode));
+                        }
+                    }
+                }
+
                 if (this.enumAdditions.TryGetValue(enumName, out var additionsList))
                 {
                     List<EnumMemberDeclarationSyntax> newMembers = new List<EnumMemberDeclarationSyntax>();
@@ -889,7 +915,7 @@ namespace ClangSharpSourceToWinmd
                         // a uint or int. The mismatch can happen in the auto-generated
                         // enum remaps which don't know if the params/fields getting replaced
                         // are pointers or not
-                        if (currentType.StartsWith("uint") || currentType.StartsWith("int") || currentType.StartsWith("short") || currentType.StartsWith("ushort"))
+                        if (currentType != null && (currentType.StartsWith("uint") || currentType.StartsWith("int") || currentType.StartsWith("short") || currentType.StartsWith("ushort")))
                         {
                             int starIndex = currentType.IndexOf('*');
                             if (starIndex != -1 && newType.IndexOf('*') == -1)
@@ -900,7 +926,7 @@ namespace ClangSharpSourceToWinmd
                     }
                 }
 
-                if (newType == null)
+                if (newType == null && currentType != null)
                 {
                     // See if the type ends in the magic suffix. We use a remap fed to clangsharp 
                     // to keep some typedefs from following down to their original type
