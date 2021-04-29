@@ -13,6 +13,7 @@ To call Win32 APIs from the language of your choice based off of this metadata, 
 * Rust - https://github.com/microsoft/windows-rs (Microsoft)
 * D - https://github.com/rumbu13/windows-d (Community)
 * Dart - https://github.com/timsneath/win32 (Community)
+* Zig - https://github.com/marlersoft/zigwin32 (Community)
 
 Note: Community projects are listed here to help with discovery but are not officially validated by Microsoft.
 
