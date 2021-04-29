@@ -135,8 +135,8 @@ $partitionNames = Get-ChildItem -Directory $partitionsDir | Select-Object -Expan
 
 $partitionNames | ForEach-Object -Parallel {
     . "$using:PSScriptRoot\ExternalPackageUtils.ps1"
-    $assemblyVersion = Get-ExternalPackageVersion $defaultArtifactsDir $_
-    $externalPackageDir = "$defaultArtifactsDir\InstalledPackages\$_.$assemblyVersion"
+    $assemblyVersion = Get-ExternalPackageVersion $using:defaultArtifactsDir $_
+    $externalPackageDir = "$using:defaultArtifactsDir\InstalledPackages\$_.$assemblyVersion"
     $enumsMakeFlagsRsp = "$using:emitterGeneratedDir\enumsMakeFlags.$_.rsp"
 
     if (!$using:SkipConstants)
