@@ -70,7 +70,7 @@ namespace ClangSharpSourceToWinmd
                 syntaxTrees = CrossArchTreeMerger.MergeTrees(crossArchSyntaxMap, syntaxTrees);
             }
 
-            HashSet<string> foundNonEmptyStructs = GetNonEmptyStructs(syntaxTrees);
+            GetTreeInfo(syntaxTrees, out var emptyStucts, out var enumMemberNames);
 
 #if MakeSingleThreaded
             opt.MaxDegreeOfParallelism = 1;
@@ -101,7 +101,7 @@ namespace ClangSharpSourceToWinmd
                     Directory.CreateDirectory(newSubDir);
                 }
 
-                var cleanedTree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, remaps, enumAdditions, enumsMakeFlagsHashSet, requiredNamespaces, foundNonEmptyStructs, modifiedFile);
+                var cleanedTree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, remaps, enumAdditions, enumsMakeFlagsHashSet, requiredNamespaces, emptyStucts, enumMemberNames, modifiedFile);
                 File.WriteAllText(modifiedFile, cleanedTree.GetText().ToString());
 
                 lock (cleanedTrees)
@@ -212,32 +212,39 @@ namespace ClangSharpSourceToWinmd
             return Path.Combine(progFiles, @"dotnet\packs\NETStandard.Library.Ref\2.1.0\ref\netstandard2.1\netstandard.dll");
         }
 
-        private static HashSet<string> GetNonEmptyStructs(List<SyntaxTree> trees)
+        private static void GetTreeInfo(List<SyntaxTree> trees, out HashSet<string> emptyStructs, out HashSet<string> enumMemberNames)
         {
-            HashSet<string> foundStructs = new HashSet<string>();
+            emptyStructs = new HashSet<string>();
+            enumMemberNames = new HashSet<string>();
             foreach (var tree in trees)
             {
-                NonEmptyStructFinder finder = new NonEmptyStructFinder(foundStructs, tree);
+                TreeInfoFinder finder = new TreeInfoFinder(emptyStructs, enumMemberNames, tree);
             }
-
-            return foundStructs;
         }
 
-        private class NonEmptyStructFinder : CSharpSyntaxWalker
+        private class TreeInfoFinder : CSharpSyntaxWalker
         {
-            private HashSet<string> foundStructs;
+            private HashSet<string> emptyStructs;
+            private HashSet<string> enumMemberNames;
 
-            public NonEmptyStructFinder(HashSet<string> foundStructs, SyntaxTree tree)
+            public TreeInfoFinder(HashSet<string> emptyStructs, HashSet<string> enumMemberNames, SyntaxTree tree)
             {
-                this.foundStructs = foundStructs;
+                this.emptyStructs = emptyStructs;
+                this.enumMemberNames = enumMemberNames;
                 this.Visit(tree.GetRoot());
+            }
+
+            public override void VisitEnumMemberDeclaration(EnumMemberDeclarationSyntax node)
+            {
+                this.enumMemberNames.Add(node.Identifier.ValueText);
+                base.VisitEnumMemberDeclaration(node);
             }
 
             public override void VisitStructDeclaration(StructDeclarationSyntax node)
             {
                 if (!SyntaxUtils.IsEmptyStruct(node))
                 {
-                    this.foundStructs.Add(node.Identifier.ValueText);
+                    this.emptyStructs.Add(node.Identifier.ValueText);
                 }
             }
         }
