@@ -134,9 +134,7 @@ $enumsJson = "$scraperDir\enums.json"
 $partitionNames = Get-ChildItem -Directory $partitionsDir | Select-Object -ExpandProperty Name
 
 $partitionNames | ForEach-Object -Parallel {
-    # Reimport CommonUtils.ps1 to get access to Get-ExternalPackageVersion in this scope
-    . "$using:PSScriptRoot\CommonUtils.ps1"
-
+    . "$using:PSScriptRoot\ExternalPackageUtils.ps1"
     $assemblyVersion = Get-ExternalPackageVersion $defaultArtifactsDir $_
     $externalPackageDir = "$defaultArtifactsDir\InstalledPackages\$_.$assemblyVersion"
     $enumsMakeFlagsRsp = "$using:emitterGeneratedDir\enumsMakeFlags.$_.rsp"

@@ -232,46 +232,76 @@ namespace WinmdUtils
 
         public static int ShowDuplicateConstants(FileInfo winmd, IConsole console)
         {
-            using WinmdUtils w1 = WinmdUtils.LoadFromFile(winmd.FullName);
-            Dictionary<string, List<string>> nameToNamespace = new Dictionary<string, List<string>>();
-            foreach (ClassInfo apiClass in w1.GetTypes().Where(t => t is ClassInfo && t.Name == "Apis"))
-            {
-                foreach (var field in apiClass.Fields)
-                {
-                    if (!nameToNamespace.TryGetValue(field.Name, out var namespaces))
-                    {
-                        namespaces = new List<string>();
-                        nameToNamespace[field.Name] = namespaces;
-                    }
+            DecompilerSettings settings = new DecompilerSettings() { ThrowOnAssemblyResolveErrors = false };
+            DecompilerTypeSystem winmd1 = CreateTypeSystemFromFile(winmd.FullName, settings);
+            Dictionary<string, List<string>> nameToOwner = new Dictionary<string, List<string>>();
 
-                    namespaces.Add(apiClass.Namespace);
+            foreach (var type in winmd1.GetTopLevelTypeDefinitions())
+            {
+                if (type.FullName == "<Module>")
+                {
+                    continue;
+                }
+
+                if (type.ParentModule != winmd1.MainModule)
+                {
+                    continue;
+                }
+
+                // Skip enums marked as a scoped enum (like a C++ class enum).
+                // We don't count these in the duplicated constants
+                if (type.Kind == TypeKind.Enum)
+                {
+                    if (type.GetAttributes().Any(a => a.AttributeType.Name == "ScopedEnumAttribute"))
+                    {
+                        continue;
+                    }
+                }
+
+                if (type.Kind == TypeKind.Enum || (type.Kind == TypeKind.Class && type.Name == "Apis"))
+                {
+                    foreach (var field in type.GetFields())
+                    {
+                        if (field.Name == "value__")
+                        {
+                            continue;
+                        }
+
+                        if (!nameToOwner.TryGetValue(field.Name, out var owners))
+                        {
+                            owners = new List<string>();
+                            nameToOwner[field.Name] = owners;
+                        }
+
+                        owners.Add(type.FullName);
+                    }
                 }
             }
 
             bool dupsFound = false;
-            foreach (var pair in nameToNamespace)
+            foreach (var pair in nameToOwner)
             {
                 if (pair.Value.Count > 1)
                 {
                     if (dupsFound == false)
                     {
                         dupsFound = true;
-                        console.Out.Write("Duplicate constants detected:\r\n");
+                        console.Out.Write("Duplicate constants/enum names detected:\r\n");
                     }
 
                     pair.Value.Sort();
 
                     console?.Out.Write($"{pair.Key}\r\n");
-                    foreach (var @namespace in pair.Value)
+                    foreach (var owner in pair.Value)
                     {
-                        console?.Out.Write($"  {@namespace}\r\n");
+                        console?.Out.Write($"  {owner}\r\n");
                     }
                 }
             }
 
             if (!dupsFound)
             {
-                console.Out.Write("No duplicate constants found.\r\n");
+                console.Out.Write("No duplicate constants/enum names found.\r\n");
             }
 
             return dupsFound ? -1 : 0;

@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using Windows.Win32.Interop;
 
-namespace Windows.Win32.SystemServices
+namespace Windows.Win32.System.SystemServices
 {
     // Have to manually define this because of the way it's brought it using two typedefs
     [UnmanagedFunctionPointer]
@@ -60,13 +60,13 @@ namespace Windows.Win32.SystemServices
         PROCESS_SUSPEND_RESUME = (0x0800),
         PROCESS_QUERY_LIMITED_INFORMATION = (0x1000),
         PROCESS_SET_LIMITED_INFORMATION = (0x2000),
-        PROCESS_ALL_ACCESS = (STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | 0xFFFF),
-        DELETE = (0x00010000),
-        READ_CONTROL = (0x00020000),
-        WRITE_DAC = (0x00040000),
-        WRITE_OWNER = (0x00080000),
-        SYNCHRONIZE = (0x00100000),
-        STANDARD_RIGHTS_REQUIRED = (0x000F0000)
+        PROCESS_ALL_ACCESS = (PROCESS_STANDARD_RIGHTS_REQUIRED | PROCESS_SYNCHRONIZE | 0xFFFF),
+        PROCESS_DELETE = (0x00010000),
+        PROCESS_READ_CONTROL = (0x00020000),
+        PROCESS_WRITE_DAC = (0x00040000),
+        PROCESS_WRITE_OWNER = (0x00080000),
+        PROCESS_SYNCHRONIZE = (0x00100000),
+        PROCESS_STANDARD_RIGHTS_REQUIRED = (0x000F0000)
     }
 
     [Flags]

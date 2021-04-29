@@ -16,11 +16,11 @@ namespace Windows.Win32.Security
     [Flags]
     public enum TOKEN_ACCESS_MASK : uint
     {
-        DELETE = (0x00010000),
-        READ_CONTROL = (0x00020000),
-        WRITE_DAC = (0x00040000),
-        WRITE_OWNER = (0x00080000),
-        ACCESS_SYSTEM_SECURITY = (0x01000000),
+        TOKEN_DELETE = (0x00010000),
+        TOKEN_READ_CONTROL = (0x00020000),
+        TOKEN_WRITE_DAC = (0x00040000),
+        TOKEN_WRITE_OWNER = (0x00080000),
+        TOKEN_ACCESS_SYSTEM_SECURITY = (0x01000000),
         TOKEN_ASSIGN_PRIMARY = (0x0001),
         TOKEN_DUPLICATE = (0x0002),
         TOKEN_IMPERSONATE = (0x0004),

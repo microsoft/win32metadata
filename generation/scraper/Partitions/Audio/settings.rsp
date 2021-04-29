@@ -7,8 +7,9 @@
 <IncludeRoot>/shared
 <IncludeRoot>/um
 <IncludeRoot>/winrt
+--with-librarypath
+GetDeviceID=DSOUND
 --exclude
-GetDeviceID
 _D3DVECTOR
 IReferenceClock
 IKsPropertySet

@@ -50,14 +50,26 @@ function AddLibToMappings([string] $libName)
 
         if ($funcLibMappings.Contains($procName))
         {
-            $oldValue = $funcLibMappings[$procName]
-            if ($oldValue.StartsWith("api-ms") -and !$dll.StartsWith("api-ms"))
-            {
-                $funcLibMappings.Remove($procName)
-            }
-            else
+            # Don't overwrite a value with an API set
+            if ($dll.StartsWith("api-ms") -or $dll.StartsWith("ext-ms"))
             {
                 continue
+            }
+
+            $oldValue = $funcLibMappings[$procName]
+
+            # If the new is in the old list, continue
+            if ($dll -in $oldValue.Split(','))
+            {
+                continue
+            }
+
+            # If the old value doesn't start with api-set...
+            if (!$oldValue.StartsWith("api-ms") -and !$oldValue.StartsWith("ext-ms"))
+            {
+                # We have multiple libs claiming the same function
+                $funcLibMappings.Remove($procName)
+                $dll = $oldValue + "," + $dll
             }
         }
 

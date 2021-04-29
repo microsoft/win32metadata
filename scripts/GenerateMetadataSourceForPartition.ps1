@@ -47,7 +47,12 @@ if ($isExternal)
 
 $nugetDestPackagesDir = Join-Path -Path $artifactsDir "InstalledPackages"
 
-$libMappingOutputFileName = Get-LibMappingsFile $artifactsDir $version
+$libMappingOutputFileName = Get-LibMappingsFile $version
+if (!(Test-Path $libMappingOutputFileName))
+{
+    Write-Error "$libMappingOutputFileName not found. Please create it using CreateProcLibMappings.ps1."
+    exit -1
+}
 
 $stopwatch =  [system.diagnostics.stopwatch]::StartNew()
 
@@ -91,6 +96,7 @@ $generatedSourceDir = "$emitterDir\generated\$arch"
 
 if ($isExternal)
 {
+    . "$PSScriptRoot\ExternalPackageUtils.ps1"
     $latestVersion = Get-ExternalPackageVersion $artifactsDir $partitionName
     $externalPackagePath = "$nugetDestPackagesDir\$partitionName.$latestVersion".Replace('\', '/')
     $textToReplaceTable["<ExternalPackageDir>"] = $externalPackagePath

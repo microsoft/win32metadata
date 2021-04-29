@@ -22,8 +22,8 @@ namespace ClangSharpSourceToWinmd
 {
     public class ClangSharpSourceWinmdGenerator
     {
-        public const string Win32WideStringType = "Windows.Win32.SystemServices.PWSTR";
-        public const string Win32StringType = "Windows.Win32.SystemServices.PSTR";
+        public const string Win32WideStringType = "Windows.Win32.System.SystemServices.PWSTR";
+        public const string Win32StringType = "Windows.Win32.System.SystemServices.PSTR";
 
         private const string Win32Namespace = "Windows.Win32";
         private const string InteropNamespace = "Windows.Win32.Interop";

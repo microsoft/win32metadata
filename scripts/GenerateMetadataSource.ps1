@@ -40,17 +40,6 @@ if (!$pipelineRunName)
     $pipelineRunName = $defaultWinSDKNugetVersion.Substring("10.0.".Length) + ".branchname.date-time"
 }
 
-function Download-Nupkg
-{
-    Param ([string] $name, [string] $version, [string] $outputDir)
-
-    $url = "https://www.nuget.org/api/v2/package/$name/$version"
-    $output = "$outputDir\$name.$version.nupkg"
-
-    $wc = New-Object System.Net.WebClient
-    $wc.DownloadFile($url, $output)
-}
-
 function Replace-Text
 {
     Param ([string] $path, [hashtable] $items)
@@ -71,7 +60,7 @@ if (!$artifactsDir)
 
 Create-Directory $artifactsDir
 
-Write-Output "`e[36m*** Generating source files`e[0m"
+Write-Output "`e[36m*** Generating source files: $arch`e[0m"
 
 Write-Output "Making sure cpp NuGet packages are installed..."
 
@@ -119,10 +108,9 @@ if (!$version)
         $version = $defaultWinSDKNugetVersion
     }
 
-    Write-Output "No cpp nuget packages found at $nugetSrcPackagesDir. Downloading $version from nuget.org..."
+    Write-Output "No cpp nuget package found at $nugetSrcPackagesDir. Downloading $version from nuget.org..."
 
     Download-Nupkg "Microsoft.Windows.SDK.CPP" $version $nugetSrcPackagesDir
-    Download-Nupkg "Microsoft.Windows.SDK.CPP.x64" $version $nugetSrcPackagesDir
 }
 
 $nugetSrcPackagesDir = Join-Path -Path $artifactsDir "NuGetPackages"
@@ -169,16 +157,9 @@ if ($exitAfterFindVersion)
     exit 0
 }
 
-$x64Pkg = Get-ChildItem -path "$nugetSrcPackagesDir\Microsoft.Windows.SDK.CPP.x64.$version.nupkg"
-if (!$x64Pkg)
-{
-    Write-Output "Error: Couldn't find cpp x64 package: $x64Pkg."
-    exit -1
-}
-
 $nugetDestPackagesDir = Join-Path -Path $artifactsDir "InstalledPackages"
 Create-Directory $nugetDestPackagesDir
-& $toolsDir\nuget.exe install Microsoft.Windows.SDK.CPP.x64 -version $version -source $nugetSrcPackagesDir -OutputDirectory $nugetDestPackagesDir
+& $toolsDir\nuget.exe install Microsoft.Windows.SDK.CPP -version $version -source $nugetSrcPackagesDir -OutputDirectory $nugetDestPackagesDir
 
 # Restore all of the external NuGet packages
 & $toolsDir\nuget.exe restore "$rootDir\external\scraper\packages.config" -PackagesDirectory $nugetDestPackagesDir
@@ -187,7 +168,6 @@ Create-Directory $nugetDestPackagesDir
 Create-Directory $sdkGeneratedSourceDir
 Remove-Item "$sdkGeneratedSourceDir\*.cs"
 
-Invoke-PrepLibMappingsFile $artifactsDir $version
 Invoke-RecompileMidlHeaders $artifactsDir $version
 
 & $PSScriptRoot\CreateScraperRspForAutoTypes.ps1 -arch $arch
