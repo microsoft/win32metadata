@@ -37,14 +37,6 @@ if (!$version)
     $version = $defaultWinSDKNugetVersion
 }
 
-if ($isExternal)
-{
-    $generationDir = "$rootDir\external"
-    $scraperDir = "$generationDir\scraper"
-    $emitterDir = "$generationDir\emitter"
-    $partitionsDir = "$scraperDir\Partitions"
-}
-
 $nugetDestPackagesDir = Join-Path -Path $artifactsDir "InstalledPackages"
 
 $libMappingOutputFileName = Get-LibMappingsFile $version
@@ -52,6 +44,14 @@ if (!(Test-Path $libMappingOutputFileName))
 {
     Write-Error "$libMappingOutputFileName not found. Please create it using CreateProcLibMappings.ps1."
     exit -1
+}
+
+if ($isExternal)
+{
+    $generationDir = "$rootDir\external"
+    $scraperDir = "$generationDir\scraper"
+    $emitterDir = "$generationDir\emitter"
+    $partitionsDir = "$scraperDir\Partitions"
 }
 
 $stopwatch =  [system.diagnostics.stopwatch]::StartNew()
