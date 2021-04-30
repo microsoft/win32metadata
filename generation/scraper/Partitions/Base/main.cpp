@@ -74,9 +74,6 @@
 #include <sysinfoapi.h>
 #include <heapapi.h>
 #include <atlthunk.h>
-#include <ntenclv.h>
-#include <enclaveapi.h>
-#include <winenclaveapi.h>
 #include <lmserver.h>
 #include <powrprof.h>
 #include <poclass.h>
