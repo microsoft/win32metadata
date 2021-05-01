@@ -110,7 +110,7 @@ function Get-VcDirPath
         }
     }
 
-    return null
+    return $null
 }
 
 function Get-OutputWinmdFileName
