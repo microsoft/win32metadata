@@ -38,11 +38,11 @@
     "flags": true,
     "members": [
       {
-        "name": "CREATE_RUN_IMMEDIATELY",
+        "name": "THREAD_CREATE_RUN_IMMEDIATELY",
         "value": "0"
       },
       {
-        "name": "CREATE_SUSPENDED",
+        "name": "THREAD_CREATE_SUSPENDED",
         "value": "4"
       },
       {
@@ -2407,57 +2407,7 @@
   {
     "type": "uint",
     "finished": true,
-    "name": "MIDI_OPEN_TYPE",
-    "flags": true,
-    "members": [
-      {
-        "name": "CALLBACK_TYPEMASK",
-        "value": "0x00070000"
-      },
-      {
-        "name": "CALLBACK_NULL",
-        "value": "0x00000000"
-      },
-      {
-        "name": "CALLBACK_WINDOW",
-        "value": "0x00010000"
-      },
-      {
-        "name": "CALLBACK_TASK",
-        "value": "0x00020000"
-      },
-      {
-        "name": "CALLBACK_FUNCTION",
-        "value": "0x00030000"
-      },
-      {
-        "name": "CALLBACK_THREAD",
-        "value": "(CALLBACK_TASK)"
-      },
-      {
-        "name": "CALLBACK_EVENT",
-        "value": "0x00050000"
-      },
-      {
-        "name": "MIDI_IO_STATUS",
-        "value": "0x00000020L"
-      }
-    ],
-    "uses": [
-      {
-        "method": "midiInOpen",
-        "parameter": "fdwOpen"
-      },
-      {
-        "method": "midiOutOpen",
-        "parameter": "fdwOpen"
-      }
-    ]
-  },
-  {
-    "type": "uint",
-    "finished": true,
-    "name": "WAVE_OPEN_TYPE",
+    "name": "MIDI_WAVE_OPEN_TYPE",
     "flags": true,
     "members": [
       {
@@ -2511,6 +2461,10 @@
       {
         "name": "WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE",
         "value": "0x0010"
+      },
+      {
+        "name": "MIDI_IO_STATUS",
+        "value": "0x00000020L"
       }
     ],
     "uses": [
@@ -2520,6 +2474,14 @@
       },
       {
         "method": "waveInOpen",
+        "parameter": "fdwOpen"
+      },
+      {
+        "method": "midiInOpen",
+        "parameter": "fdwOpen"
+      },
+      {
+        "method": "midiOutOpen",
         "parameter": "fdwOpen"
       }
     ]
@@ -6374,7 +6336,7 @@
         "name": "PDH_PATH_WBEM_INPUT"
       },
       {
-        "name": "None",
+        "name": "PDH_PATH_WBEM_NONE",
         "value": "0"
       }
     ],
@@ -8812,7 +8774,7 @@
     "flags": true,
     "members": [
       {
-        "name": "None",
+        "name": "RESOURCEUSAGE_NONE",
         "value": "0"
       },
       {
@@ -9213,7 +9175,7 @@
         "name": "PDH_FLAGS_FILE_BROWSER_ONLY"
       },
       {
-        "name": "None",
+        "name": "PDH_FLAGS_NONE",
         "value": "0"
       }
     ],
@@ -10351,7 +10313,7 @@
     "name": "LANG_BAR_ITEM_ICON_MODE_FLAGS",
     "members": [
       {
-        "name": "None",
+        "name": "TF_DTLBI_NONE",
         "value": "0"
       },
       {
@@ -10395,7 +10357,7 @@
     "flags": true,
     "members": [
       {
-        "name": "None",
+        "name": "TS_ST_NONE",
         "value": "0"
       },
       {
@@ -10744,7 +10706,7 @@
     "flags": true,
     "members": [
       {
-        "name": "None",
+        "name": "TS_TC_NONE",
         "value": "0"
       },
       {
@@ -13004,15 +12966,15 @@
     "name": "HEADER_CONTROL_NOTIFICATION_BUTTON",
     "members": [
       {
-        "name": "None",
+        "name": "HEADER_CONTROL_NOTIFICATION_BUTTON_LEFT",
         "value": "0"
       },
       {
-        "name": "iButton1",
+        "name": "HEADER_CONTROL_NOTIFICATION_BUTTON_RIGHT",
         "value": "1"
       },
       {
-        "name": "iButton2",
+        "name": "HEADER_CONTROL_NOTIFICATION_BUTTON_MIDDLE",
         "value": "2"
       }
     ],
@@ -13618,6 +13580,12 @@
       },
       {
         "name": "CRYPT_IPSEC_HMAC_KEY"
+      },
+      {
+        "name": "CERT_SET_KEY_PROV_HANDLE_PROP_ID"
+      },
+      {
+        "name": "CERT_SET_KEY_CONTEXT_PROP_ID"
       }
     ],
     "uses": [
@@ -13643,6 +13611,10 @@
       },
       {
         "struct": "CRYPTUI_WIZ_IMPORT_SRC_INFO",
+        "field": "dwFlags"
+      },
+      {
+        "struct": "CRYPT_KEY_PROV_INFO",
         "field": "dwFlags"
       }
     ]
@@ -13904,7 +13876,7 @@
     "flags": true,
     "members": [
       {
-        "name": "None",
+        "name": "TF_GTP_NONE",
         "value": "0"
       },
       {
@@ -16569,7 +16541,7 @@
     "name": "MEDIA_EVENT_GENERATOR_GET_EVENT_FLAGS",
     "members": [
       {
-        "name": "None",
+        "name": "MF_EVENT_FLAG_NONE",
         "value": "0"
       },
       {
@@ -19695,7 +19667,7 @@
     "flags": true,
     "members": [
       {
-        "name": "None",
+        "name": "PGK_NONE",
         "value": "0"
       },
       {
@@ -21947,9 +21919,6 @@
     "name": "NMCUSTOMDRAW_DRAW_STAGE",
     "members": [
       {
-        "name": "Global_Values_"
-      },
-      {
         "name": "CDDS_POSTPAINT"
       },
       {
@@ -21957,9 +21926,6 @@
       },
       {
         "name": "CDDS_PREPAINT"
-      },
-      {
-        "name": "Item-specific_Values_"
       },
       {
         "name": "CDDS_ITEMPOSTERASE"
@@ -22092,31 +22058,31 @@
     "flags": true,
     "members": [
       {
-        "name": "wBorders1",
+        "name": "PARAFORMAT_BORDERS_LEFT",
         "value": "1"
       },
       {
-        "name": "wBorders2",
+        "name": "PARAFORMAT_BORDERS_RIGHT",
         "value": "2"
       },
       {
-        "name": "wBorders4",
+        "name": "PARAFORMAT_BORDERS_TOP",
         "value": "4"
       },
       {
-        "name": "wBorders8",
+        "name": "PARAFORMAT_BORDERS_BOTTOM",
         "value": "8"
       },
       {
-        "name": "wBorders16",
+        "name": "PARAFORMAT_BORDERS_INSIDE",
         "value": "16"
       },
       {
-        "name": "wBorders32",
+        "name": "PARAFORMAT_BORDERS_OUTSIDE",
         "value": "32"
       },
       {
-        "name": "wBorders64",
+        "name": "PARAFORMAT_BORDERS_AUTOCOLOR",
         "value": "64"
       }
     ],
@@ -22825,36 +22791,6 @@
     ]
   },
   {
-    "name": "CRYPT_KEY_PROV_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "CERT_SET_KEY_PROV_HANDLE_PROP_ID"
-      },
-      {
-        "name": "CERT_SET_KEY_CONTEXT_PROP_ID"
-      },
-      {
-        "name": "CRYPT_MACHINE_KEYSET"
-      },
-      {
-        "name": "NCRYPT_MACHINE_KEY_FLAG"
-      },
-      {
-        "name": "CRYPT_SILENT"
-      },
-      {
-        "name": "NCRYPT_SILENT_FLAG"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "CRYPT_KEY_PROV_INFO",
-        "field": "dwFlags"
-      }
-    ]
-  },
-  {
     "name": "IKEEXT_POLICY_FLAG",
     "flags": true,
     "members": [
@@ -22979,7 +22915,7 @@
         "name": "CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_FILE"
       },
       {
-        "name": "None",
+        "name": "CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_NONE",
         "value": "0"
       }
     ],
@@ -23924,7 +23860,7 @@
         "name": "CRYPTUI_WIZ_DIGITAL_SIGN_PVK"
       },
       {
-        "name": "None",
+        "name": "CRYPTUI_WIZ_DIGITAL_SIGN_NONE",
         "value": "0"
       }
     ],
@@ -24017,55 +23953,55 @@
     "name": "PARAFORMAT_SHADING_STYLE",
     "members": [
       {
-        "name": "None",
+        "name": "PARAFORMAT_SHADING_STYLE_NONE",
         "value": "0"
       },
       {
-        "name": "wShadingStyle1",
+        "name": "PARAFORMAT_SHADING_STYLE_DARK_HORIZ",
         "value": "1"
       },
       {
-        "name": "wShadingStyle2",
+        "name": "PARAFORMAT_SHADING_STYLE_DARK_VERT",
         "value": "2"
       },
       {
-        "name": "wShadingStyle3",
+        "name": "PARAFORMAT_SHADING_STYLE_DARK_DOWN_DIAG",
         "value": "3"
       },
       {
-        "name": "wShadingStyle4",
+        "name": "PARAFORMAT_SHADING_STYLE_DARK_UP_DIAG",
         "value": "4"
       },
       {
-        "name": "wShadingStyle5",
+        "name": "PARAFORMAT_SHADING_STYLE_DARK_GRID",
         "value": "5"
       },
       {
-        "name": "wShadingStyle6",
+        "name": "PARAFORMAT_SHADING_STYLE_DARK_TRELLIS",
         "value": "6"
       },
       {
-        "name": "wShadingStyle7",
+        "name": "PARAFORMAT_SHADING_STYLE_LIGHT_HORZ",
         "value": "7"
       },
       {
-        "name": "wShadingStyle8",
+        "name": "PARAFORMAT_SHADING_STYLE_LIGHT_VERT",
         "value": "8"
       },
       {
-        "name": "wShadingStyle9",
+        "name": "PARAFORMAT_SHADING_STYLE_LIGHT_DOWN_DIAG",
         "value": "9"
       },
       {
-        "name": "wShadingStyle10",
+        "name": "PARAFORMAT_SHADING_STYLE_LIGHT_UP_DIAG",
         "value": "10"
       },
       {
-        "name": "wShadingStyle11",
+        "name": "PARAFORMAT_SHADING_STYLE_LIGHT_GRID",
         "value": "11"
       },
       {
-        "name": "wShadingStyle12",
+        "name": "PARAFORMAT_SHADING_STYLE_LIGHT_TRELLIS",
         "value": "12"
       }
     ],
@@ -24986,7 +24922,7 @@
     "name": "TBINSERTMARK_FLAGS",
     "members": [
       {
-        "name": "None",
+        "name": "TBIMHT_NONE",
         "value": "0"
       },
       {
@@ -25849,10 +25785,6 @@
     "name": "CONNECTDLGSTRUCT_FLAGS",
     "flags": true,
     "members": [
-      {
-        "name": "SidTypeUser",
-        "value": "Windows.Win32.Security.SID_NAME_USE.SidTypeUser"
-      },
       {
         "name": "CONNDLG_RO_PATH"
       },
@@ -27791,7 +27723,7 @@
         "name": "CRYPTUI_WIZ_DIGITAL_SIGN_ADD_CHAIN_NO_ROOT"
       },
       {
-        "name": "None",
+        "name": "CRYPTUI_WIZ_DIGITAL_SIGN_ADD_NONE",
         "value": "0"
       }
     ],

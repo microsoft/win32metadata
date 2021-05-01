@@ -44,13 +44,13 @@ _D3DTEXTUREOP
 _D3DSTATEBLOCKTYPE
 _D3DVERTEXBLENDFLAGS
 _D3DTEXTURETRANSFORMFLAGS
+LPENCLAVE_ROUTINE
 --traverse
 <IncludeRoot>/shared/devpkey.h
 <IncludeRoot>/um/codecapi.h
 <IncludeRoot>/shared/ntddvdeo.h
 <IncludeRoot>/shared/poclass.h
 <IncludeRoot>/um/powersetting.h
-<IncludeRoot>/um/ntenclv.h
 <IncludeRoot>/shared/pwm.h
 <IncludeRoot>/shared/ntddstor.h
 <IncludeRoot>/um/dbt.h
@@ -85,8 +85,6 @@ _D3DTEXTURETRANSFORMFLAGS
 <IncludeRoot>/um/namedpipeapi.h
 <IncludeRoot>/um/heapapi.h
 <IncludeRoot>/um/atlthunk.h
-<IncludeRoot>/um/enclaveapi.h
-<IncludeRoot>/um/winenclaveapi.h
 <IncludeRoot>/um/powrprof.h
 <IncludeRoot>/um/powerbase.h
 <IncludeRoot>/um/vds.h
