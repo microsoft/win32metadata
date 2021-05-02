@@ -7,3 +7,6 @@
 #include <sdkddkver.h>
 
 #include <ddpbackup.h>
+#include <ddpchunk.h>
+#include <ddpcommon.h>
+#include <ddpdataport.h>
