@@ -10,4 +10,4 @@
 --traverse
 <IncludeRoot>/um/mi.h
 --namespace
-Windows.Win32.ManagementInfrastructure
+Windows.Win32.System.Wmi
