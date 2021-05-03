@@ -1,0 +1,11 @@
+--file
+<PartitionDir>\main.cpp
+--output
+<GeneratedSourceDir>\<PartitionName>.cs
+--include-directory
+<RepoRoot>\generation\scraper
+<IncludeRoot>/um
+--traverse
+<IncludeRoot>/um/dxcapi.h
+--namespace
+Windows.Win32.Graphics.Hlsl
