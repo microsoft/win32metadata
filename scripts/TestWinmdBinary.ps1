@@ -105,7 +105,7 @@ if (!$failed -and $LastExitCode -lt 0)
 }
 
 Write-Output "`n"
-Write-Output "Comparing $outputWinmdFileName against baseline $baselineWinmd..."
+Write-Output "Comparing $winmdPath against baseline $baselineWinmd..."
 Write-Output "Calling: dotnet $winmdUtilsPathBin compare --first $baselineWinmd --second $winmdPath"
 & dotnet $winmdUtilsPathBin compare --first $baselineWinmd --second $winmdPath
 if (!$failed -and $LastExitCode -lt 0)
