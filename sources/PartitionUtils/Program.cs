@@ -79,13 +79,24 @@ namespace PartitionUtils
 
             normalizeEnumJsonCommand.Handler = CommandHandler.Create<string, string[], string, string[], string[]>(NormalizeEnumJson);
 
+            var simplifyRequiredNamespacesForNamesCommand = new Command("simplifyRequiredNamespacesForNames", "Simplify simplifyRequiredNamespacesForNames.rsp.")
+            {
+                new Option<string>(new[] { "--repoRoot" }, "The location of the repo.") { IsRequired = true },
+                new Option<string>(new[] { "--apiCsv" }, "The path to the api csv.") { IsRequired = true },
+                new Option<string>(new[] { "--input" }, "The path to the input requiredNamespacesForNames.rsp.") { IsRequired = true },
+                new Option<string>(new[] { "--output" }, "The path to the output requiredNamespacesForNames.rsp."),
+            };
+
+            simplifyRequiredNamespacesForNamesCommand.Handler = CommandHandler.Create<string, string, string, string>(SimplifyRequiredNamespacesForNames);
+
             var rootCommand = new RootCommand("Win32metadata partitioning utils")
             {
                 showErrorsCommand,
                 showNonTraversedCommand,
                 addTraverseHeadersWithCsvCommand,
                 ensurePartitionsUseNamespaceCommand,
-                normalizeEnumJsonCommand
+                normalizeEnumJsonCommand,
+                simplifyRequiredNamespacesForNamesCommand
             };
 
             return rootCommand.Invoke(args);
@@ -192,6 +203,99 @@ namespace PartitionUtils
                     }
 
                     Console.WriteLine();
+                }
+            }
+
+            return 0;
+        }
+
+        public static int SimplifyRequiredNamespacesForNames(string repoRoot, string apiCsv, string input, string output)
+        {
+            RepoInfo repoInfo = new RepoInfo(repoRoot);
+            Dictionary<string, string> headerToNamespace = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var part in repoInfo.GetPartitionInfos())
+            {
+                foreach (var header in part.GetTraverseHeaders(true, "x64"))
+                {
+                    string fileName = Path.GetFileName(header);
+                    headerToNamespace[fileName] = part.Namespace;
+                }
+            }
+
+            CsvConfiguration config = new CsvConfiguration(CultureInfo.InvariantCulture);
+            config.Delimiter = ",";
+            config.HasHeaderRecord = true;
+
+            Dictionary<string, string> nameToNamespace = new Dictionary<string, string>();
+
+            using (var reader = new StreamReader(apiCsv))
+            using (var csvReader = new CsvReader(reader, config))
+            {
+                var anonymousTypeDefinition = new
+                {
+                    Name = string.Empty,
+                    Title = string.Empty,
+                    Header = string.Empty,
+                    TechRoot = string.Empty
+                };
+
+                foreach (var record in csvReader.GetRecords(anonymousTypeDefinition))
+                {
+                    if (!string.IsNullOrEmpty(record.Header) && !string.IsNullOrEmpty(record.Title))
+                    {
+                        if (headerToNamespace.TryGetValue(record.Header, out var namespaceName))
+                        {
+                            nameToNamespace[record.Title] = namespaceName;
+                        }
+                    }
+                }
+            }
+
+            // Load up all the names along with their final value. This
+            // will get rid of duplicates and take the final one
+            Dictionary<string, string> namesAndValues = new Dictionary<string, string>();
+            foreach (var line in File.ReadAllLines(input))
+            {
+                string[] parts = line.Split('=');
+                if (parts.Length == 2)
+                {
+                    string name = parts[0];
+                    string ns = parts[1];
+                    namesAndValues[name] = ns;
+                }
+            }
+
+            using (StreamWriter writer = new StreamWriter(output))
+            {
+                writer.WriteLine("--requiredNamespaceForName");
+                foreach (var line in File.ReadAllLines(input))
+                {
+                    string[] parts = line.Split('=');
+                    if (parts.Length == 2)
+                    {
+                        string name = parts[0];
+                        string ns = parts[1];
+
+                        // If this isn't the one that has the final value, skip it
+                        if (namesAndValues[name] != ns)
+                        {
+                            continue;
+                        }
+
+                        // Skip if this line is redundant, because the name is in the correct namespace
+                        // based on the header
+                        if (nameToNamespace.TryGetValue(name, out var headerNamespace))
+                        {
+                            if (ns == headerNamespace)
+                            {
+                                continue;
+                            }
+
+                            Console.WriteLine($"Keeping override: {line} (header goes into {headerNamespace})");
+                        }
+
+                        writer.WriteLine(line);
+                    }
                 }
             }
 
