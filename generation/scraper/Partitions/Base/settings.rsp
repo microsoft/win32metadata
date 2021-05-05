@@ -74,10 +74,6 @@ LPENCLAVE_ROUTINE
 <IncludeRoot>/um/winperf.h
 <IncludeRoot>/um/mmiscapi2.h
 <IncludeRoot>/um/verrsrc.h
-<IncludeRoot>/um/consoleapi3.h
-<IncludeRoot>/um/consoleapi2.h
-<IncludeRoot>/um/consoleapi.h
-<IncludeRoot>/um/wincontypes.h
 <IncludeRoot>/um/memoryapi.h
 <IncludeRoot>/um/minwinbase.h
 <IncludeRoot>/um/storprop.h
