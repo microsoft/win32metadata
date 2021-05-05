@@ -555,7 +555,42 @@ namespace WinmdUtils
             return new DecompilerTypeSystem(file, resolver);
         }
 
-        public static bool CompareFields(ITypeDefinition type1, ITypeDefinition type2, IConsole console)
+        public static bool CompareFields(IField field1, IField field2, IConsole console)
+        {
+            bool ret = CompareAttributes(field1.Name, field1.GetAttributes(), field2.GetAttributes(), console);
+
+            if (field1.IsConst)
+            {
+                if (!field2.IsConst)
+                {
+                    console?.Out.Write($"winmd1: {field1.Name} const, winmd2: not\r\n");
+                    ret = false;
+                }
+                else
+                {
+                    var fieldVal1 = field1.GetConstantValue();
+                    var fieldVal2 = field2.GetConstantValue();
+
+                    if (fieldVal1.ToString() != fieldVal2.ToString())
+                    {
+                        console?.Out.Write($"winmd1: {field1.Name} = {fieldVal1}, winmd2 = {fieldVal2}\r\n");
+                        ret = false;
+                    }
+                }
+            }
+            else if (field2.IsConst)
+            {
+                if (!field2.IsConst)
+                {
+                    console?.Out.Write($"winmd1: {field1.Name} not const, winmd2: const\r\n");
+                    ret = false;
+                }
+            }
+
+            return ret;
+        }
+
+        public static bool CompareFieldsOnTypes(ITypeDefinition type1, ITypeDefinition type2, IConsole console)
         {
             bool ret = true;
 
@@ -583,35 +618,7 @@ namespace WinmdUtils
                     continue;
                 }
 
-                ret &= CompareAttributes(field1.Name, field1.GetAttributes(), field2.GetAttributes(), console);
-
-                if (field1.IsConst)
-                {
-                    if (!field2.IsConst)
-                    {
-                        console?.Out.Write($"winmd1: {field1.Name} const, winmd2: not\r\n");
-                        ret = false;
-                    }
-                    else
-                    {
-                        var fieldVal1 = field1.GetConstantValue();
-                        var fieldVal2 = field2.GetConstantValue();
-
-                        if (fieldVal1.ToString() != fieldVal2.ToString())
-                        {
-                            console?.Out.Write($"winmd1: {field1.Name} = {fieldVal1}, winmd2 = {fieldVal2}\r\n");
-                            ret = false;
-                        }
-                    }
-                }
-                else if (field2.IsConst)
-                {
-                    if (!field2.IsConst)
-                    {
-                        console?.Out.Write($"winmd1: {field1.Name} not const, winmd2: const\r\n");
-                        ret = false;
-                    }
-                }
+                ret &= CompareFields(field1, field2, console);
             }
 
             foreach (var field2 in type2Fields.Values)
@@ -778,7 +785,48 @@ namespace WinmdUtils
             return ret;
         }
 
-        public static bool CompareMethods(ITypeDefinition type1, ITypeDefinition type2, IConsole console)
+        public static bool CompareMethods(IMethod method1, IMethod method2, IConsole console)
+        {
+            bool ret = true;
+
+            string methodFullName = GetFullMemberName(method1);
+
+            ret &= CompareAttributes(methodFullName, method1.GetAttributes(), method2.GetAttributes(), console);
+
+            // Return param
+            string returnFullName = $"{methodFullName} : return";
+            ret &= CompareAttributes(returnFullName, method1.GetReturnTypeAttributes(), method2.GetReturnTypeAttributes(), console);
+            if (method1.ReturnType.Name != method2.ReturnType.Name)
+            {
+                console?.Out.Write($"{returnFullName}...{method1.ReturnType.Name} => {method2.ReturnType.Name}\r\n");
+                ret = false;
+            }
+
+            // Params
+            foreach (var param1 in method1.Parameters)
+            {
+                var param2 = method2.Parameters.FirstOrDefault(p => p.Name == param1.Name);
+                if (param2 == null)
+                {
+                    console?.Out.Write($"{methodFullName}, param {param1.Name} not found in 2nd winmd\r\n");
+                    ret = false;
+                    continue;
+                }
+
+                string paramFullName = $"{methodFullName} : {param1.Name}";
+                if (param1.Type.Name != param2.Type.Name)
+                {
+                    console?.Out.Write($"{paramFullName}...{param1.Type.Name} => {param2.Type.Name}\r\n");
+                    ret = false;
+                }
+
+                ret &= CompareAttributes(paramFullName, param1.GetAttributes(), param2.GetAttributes(), console);
+            }
+
+            return ret;
+        }
+
+        public static bool CompareMethodsOnType(ITypeDefinition type1, ITypeDefinition type2, IConsole console)
         {
             bool ret = true;
 
@@ -803,37 +851,7 @@ namespace WinmdUtils
                 var method1 = methodPair.Value;
                 type2Methods.Remove(methodFullName);
 
-                ret &= CompareAttributes(methodFullName, method1.GetAttributes(), method2.GetAttributes(), console);
-
-                // Return param
-                string returnFullName = $"{methodFullName} : return";
-                ret &= CompareAttributes(returnFullName, method1.GetReturnTypeAttributes(), method2.GetReturnTypeAttributes(), console);
-                if (method1.ReturnType.Name != method2.ReturnType.Name)
-                {
-                    console?.Out.Write($"{returnFullName}...{method1.ReturnType.Name} => {method2.ReturnType.Name}\r\n");
-                    ret = false;
-                }
-
-                // Params
-                foreach (var param1 in method1.Parameters)
-                {
-                    var param2 = method2.Parameters.FirstOrDefault(p => p.Name == param1.Name);
-                    if (param2 == null)
-                    {
-                        console?.Out.Write($"{methodFullName}, param {param1.Name} not found in 2nd winmd\r\n");
-                        ret = false;
-                        continue;
-                    }
-
-                    string paramFullName = $"{methodFullName} : {param1.Name}";
-                    if (param1.Type.Name != param2.Type.Name)
-                    {
-                        console?.Out.Write($"{paramFullName}...{param1.Type.Name} => {param2.Type.Name}\r\n");
-                        ret = false;
-                    }
-
-                    ret &= CompareAttributes(paramFullName, param1.GetAttributes(), param2.GetAttributes(), console);
-                }
+                ret &= CompareMethods(method1, method2, console);
             }
 
             foreach (var method2 in type2Methods.Values)
@@ -849,8 +867,8 @@ namespace WinmdUtils
         {
             bool ret = true;
 
-            ret &= CompareFields(type1, type2, console);
-            ret &= CompareMethods(type1, type2, console);
+            ret &= CompareFieldsOnTypes(type1, type2, console);
+            ret &= CompareMethodsOnType(type1, type2, console);
             ret &= CompareAttributes(type1.FullName, type1.GetAttributes(), type2.GetAttributes(), console);
 
             return ret;
@@ -866,6 +884,60 @@ namespace WinmdUtils
             }
 
             return name;
+        }
+
+        private static string GetFullMemberName(IMember member)
+        {
+            string name = member.FullName;
+            string archInfo = GetArchInfo(member.GetAttributes());
+            if (!string.IsNullOrEmpty(archInfo))
+            {
+                name += $"({archInfo})";
+            }
+
+            return name;
+        }
+
+        private static Dictionary<string, List<IMember>> GetApiMemberNamesToMethodDefinitions(DecompilerTypeSystem winmd)
+        {
+            Dictionary<string, List<IMember>> ret = new Dictionary<string, List<IMember>>();
+            foreach (var type1 in winmd.GetTopLevelTypeDefinitions())
+            {
+                if (type1.FullName == "<Module>")
+                {
+                    continue;
+                }
+
+                if (type1.ParentModule != winmd.MainModule)
+                {
+                    continue;
+                }
+
+                if (type1.Kind != TypeKind.Class || type1.Name != "Apis")
+                {
+                    continue;
+                }
+
+                foreach (var m in type1.Members)
+                {
+                    string name = m.Name;
+                    string archInfo = GetArchInfo(m.GetAttributes());
+                    if (!string.IsNullOrEmpty(archInfo))
+                    {
+                        name += $"({archInfo})";
+                    }
+
+                    if (!ret.TryGetValue(name, out var list))
+                    {
+                        list = new List<IMember>();
+                        ret[name] = list;
+                    }
+
+                    list.Add(m);
+                }
+            }
+
+            return ret;
         }
 
         private static Dictionary<string, List<ITypeDefinition>> GetShortNamesToTypeDefinitions(DecompilerTypeSystem winmd)
@@ -941,6 +1013,12 @@ namespace WinmdUtils
                     continue;
                 }
 
+                // We'll compare the members of Apis in their own way
+                if (type1.Name == "Apis")
+                {
+                    continue;
+                }
+
                 var type1Name = GetFullTypeName(type1);
                 visitedNames.Add(type1Name);
 
@@ -983,12 +1061,18 @@ namespace WinmdUtils
                     continue;
                 }
 
-                var type2FullName = GetFullTypeName(type2);
                 if (type2.ParentModule != winmd2.MainModule)
                 {
                     continue;
                 }
 
+                // We'll compare the members of Apis in their own way
+                if (type2.Name == "Apis")
+                {
+                    continue;
+                }
+
+                var type2FullName = GetFullTypeName(type2);
                 if (visitedNames.Contains(type2FullName))
                 {
                     continue;
@@ -999,6 +1083,85 @@ namespace WinmdUtils
                 {
                     console?.Out.Write($"{type2FullName} not found in 1st winmd\r\n");
                     same = false;
+                }
+            }
+
+            var apiNameToMembers1 = GetApiMemberNamesToMethodDefinitions(winmd1);
+            var apiNameToMembers2 = GetApiMemberNamesToMethodDefinitions(winmd2);
+
+            HashSet<string> visitedM2Names = new HashSet<string>();
+            foreach (var api1MemberInfo in apiNameToMembers1)
+            {
+                if (apiNameToMembers2.TryGetValue(api1MemberInfo.Key, out var api2Members))
+                {
+                    foreach (var m1 in api1MemberInfo.Value)
+                    {
+                        string m1FullName = GetFullMemberName(m1);
+                        bool found = false;
+
+                        foreach (var m2 in api2Members)
+                        {
+                            if (m1.GetType() == m2.GetType())
+                            {
+                                string m2FullName = GetFullMemberName(m2);
+
+                                bool membersSame;
+                                if (m1 is IField)
+                                {
+                                    membersSame = CompareFields((IField)m1, (IField)m2, console);
+                                }
+                                else
+                                {
+                                    membersSame = CompareMethods((IMethod)m1, (IMethod)m2, null);
+
+                                    // If the members aren't the same on the methods and the namespaces also aren't
+                                    // the same, then assume these aren't the same methods and keep going
+                                    if (!membersSame && (m1.Namespace != m2.Namespace))
+                                    {
+                                        continue;
+                                    }
+
+                                    if (!membersSame && console != null)
+                                    {
+                                        CompareMethods((IMethod)m1, (IMethod)m2, console);
+                                    }
+                                }
+
+                                if (membersSame)
+                                {
+                                    if (m1.Namespace != m2.Namespace)
+                                    {
+                                        console?.Out.Write($"{m1FullName} => {m2FullName}\r\n");
+                                        membersSame = false;
+                                    }
+                                }
+
+                                same &= membersSame;
+
+                                visitedM2Names.Add(m2FullName);
+                                found = true;
+                                break;
+                            }
+                        }
+
+                        if (!found)
+                        {
+                            console?.Out.Write($"{m1FullName} not found in 2nd winmd\r\n");
+                        }
+                    }
+                }
+            }
+
+            foreach (var api2MemberInfo in apiNameToMembers2)
+            {
+                foreach (var api2Member in api2MemberInfo.Value)
+                {
+                    string m2FullName = GetFullMemberName(api2Member);
+                    if (!visitedM2Names.Contains(m2FullName))
+                    {
+                        console?.Out.Write($"{m2FullName} not found in 1st winmd\r\n");
+                        same = false;
+                    }
                 }
             }
 

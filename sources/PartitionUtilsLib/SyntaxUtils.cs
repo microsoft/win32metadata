@@ -47,6 +47,19 @@ namespace PartitionUtilsLib
             return node.ToString();
         }
 
+        public static string GetEnclosingNamespace(SyntaxNode node)
+        {
+            for (SyntaxNode currentNode = node; currentNode != null; currentNode = currentNode.Parent)
+            {
+                if (currentNode is NamespaceDeclarationSyntax nsNode)
+                {
+                    return nsNode.Name.ToString();
+                }
+            }
+
+            return null;
+        }
+
         public static string GetFullName(SyntaxNode node, bool includeNamespace)
         {
             string parentName = null;
@@ -64,6 +77,11 @@ namespace PartitionUtilsLib
             {
                 parentName = GetFullName(structNode.Parent, includeNamespace);
                 ret = structNode.Identifier.Text;
+            }
+            else if (node is EnumDeclarationSyntax enumNode)
+            {
+                parentName = GetFullName(enumNode.Parent, includeNamespace);
+                ret = enumNode.Identifier.Text;
             }
             else if (node is MethodDeclarationSyntax methodNode)
             {

@@ -52,6 +52,7 @@ namespace PartitionUtilsLib
             private Dictionary<string, EnumWriter> namespacesToEnumWriters = new Dictionary<string, EnumWriter>();
             private Dictionary<string, ConstantWriter> namespacesToConstantWriters = new Dictionary<string, ConstantWriter>();
             private WildcardDictionary requiredNamespaces;
+            private Dictionary<string, string> scannedNamesToNamespaces;
             private Dictionary<string, string> writtenConstants = new Dictionary<string, string>();
             private string repoRoot;
             private string arch;
@@ -92,6 +93,8 @@ namespace PartitionUtilsLib
 
                 this.repoRoot = Path.GetFullPath(repoRoot);
                 this.arch = arch;
+
+                this.scannedNamesToNamespaces = ScraperUtils.GetNameToNamespaceMap(this.EmitterGeneratedDir);
 
                 this.InitEnumFlagsFixupFile();
 
@@ -287,9 +290,11 @@ namespace PartitionUtilsLib
             private ConstantWriter GetConstantWriter(string originalNamespace, string name)
             {
                 string foundNamespace = originalNamespace;
-                if (this.requiredNamespaces.TryGetValue(name, out var newNamspace))
+
+                string newNamespace = this.LookupNamespaceForName(name);
+                if (!string.IsNullOrEmpty(newNamespace))
                 {
-                    foundNamespace = newNamspace;
+                    foundNamespace = newNamespace;
                 }
 
                 if (!this.namespacesToConstantWriters.TryGetValue(foundNamespace, out var constantWriter))
@@ -647,6 +652,22 @@ namespace PartitionUtilsLib
                 }
             }
 
+            private string LookupNamespaceForName(string name)
+            {
+                if (!this.requiredNamespaces.TryGetValue(name, out var foundNamespace))
+                {
+                    this.scannedNamesToNamespaces.TryGetValue(name, out foundNamespace);
+                }
+
+                // If it contains more than one, just return null
+                if (foundNamespace != null && foundNamespace.Contains(';'))
+                {
+                    foundNamespace = null;
+                }
+
+                return foundNamespace;
+            }
+
             private void WriteEnumsAndRemaps(
                 Dictionary<string, string> remaps)
             {
@@ -687,7 +708,7 @@ namespace PartitionUtilsLib
                         // If we haven't found a namespace yet, try to look it up
                         if (string.IsNullOrEmpty(foundNamespace))
                         {
-                            requiredNamespaces.TryGetValue(lookupNameForNamespace, out foundNamespace);
+                            foundNamespace = this.LookupNamespaceForName(lookupNameForNamespace);
                         }
 
                         // If we don't already have a remap entry for this param or field, add one

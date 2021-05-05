@@ -18597,6 +18597,7 @@
   },
   {
     "name": "IMAGE_LIST_ITEM_FLAGS",
+    "namespace": "Windows.Win32.UI.Controls",
     "members": [
       {
         "name": "ILIF_ALPHA",

@@ -2,6 +2,7 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using PartitionUtilsLib;
 
 namespace ClangSharpSourceToWinmd
 {
@@ -70,19 +71,6 @@ namespace ClangSharpSourceToWinmd
                 return CSharpSyntaxTree.Create(newRoot, null);
             }
 
-            private static string GetEnclosingNamespace(SyntaxNode node)
-            {
-                for (SyntaxNode currentNode = node; node != null; node = node.Parent)
-                {
-                    if (node is NamespaceDeclarationSyntax nsNode)
-                    {
-                        return nsNode.Name.ToString();
-                    }
-                }
-
-                return null;
-            }
-
             private class TreeRewriterForAdding : CSharpSyntaxRewriter
             {
                 private NameFixer parent;
@@ -149,7 +137,7 @@ namespace ClangSharpSourceToWinmd
                 {
                     if (this.parent.namesToNamespaces.TryGetValue(name, out var requiredNamespace))
                     {
-                        var currentNamespace = GetEnclosingNamespace(node);
+                        var currentNamespace = SyntaxUtils.GetEnclosingNamespace(node);
                         if (requiredNamespace != currentNamespace)
                         {
                             if (!this.namespaceToMovedData.TryGetValue(requiredNamespace, out var movedData))
@@ -200,7 +188,7 @@ namespace ClangSharpSourceToWinmd
                         var methodName = node.Identifier.ValueText;
                         if (this.parent.namesToNamespaces.TryGetValue(methodName, out var requiredNamespace))
                         {
-                            var currentNamespace = GetEnclosingNamespace(node);
+                            var currentNamespace = SyntaxUtils.GetEnclosingNamespace(node);
                             if (requiredNamespace != currentNamespace)
                             {
                                 if (!this.namespaceToMovedData.TryGetValue(requiredNamespace, out var movedData))
