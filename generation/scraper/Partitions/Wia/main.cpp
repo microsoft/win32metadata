@@ -6,8 +6,8 @@
 #include "windows.fixed.h"
 #include <sdkddkver.h>
 
-//#include <wia_xp.h>
 //#include <wia.h>
 //#include <wiadevd.h>
+#include <wia_xp.h>
 #include <wiavideo.h>
-//#include <wiadef.h>
+#include <wiadef.h>

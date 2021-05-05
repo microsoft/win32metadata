@@ -8,6 +8,8 @@
 <IncludeRoot>/um
 <IncludeRoot>/winrt
 --traverse
+<IncludeRoot>/um/wia_xp.h
+<IncludeRoot>/um/wiadef.h
 <IncludeRoot>/um/WiaVideo.h
 --namespace
 Windows.Win32.Devices.ImageAcquisition
