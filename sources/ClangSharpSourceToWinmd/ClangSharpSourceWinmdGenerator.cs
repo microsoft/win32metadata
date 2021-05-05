@@ -304,6 +304,8 @@ namespace ClangSharpSourceToWinmd
 
         private EntityHandle GetTypeReference(string @namespace, string name)
         {
+            name = FixArchSpecificName(name);
+
             string fullname = GetQualifiedName(@namespace, name);
             if (!this.namesToTypeRefHandles.TryGetValue(fullname, out var typeRef))
             {
