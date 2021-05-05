@@ -265,6 +265,9 @@ namespace PartitionUtils
                 }
             }
 
+            string emitterGeneratedDir = Path.Combine(repoRoot, $@"generation\emitter\generated\x64");
+            var scrapedNamesToNamespaces = ScraperUtils.GetNameToNamespaceMap(emitterGeneratedDir);
+
             using (StreamWriter writer = new StreamWriter(output))
             {
                 writer.WriteLine("--requiredNamespaceForName");
@@ -275,6 +278,12 @@ namespace PartitionUtils
                     {
                         string name = parts[0];
                         string ns = parts[1];
+
+                        // Skip if we never scanned it
+                        if (!scrapedNamesToNamespaces.ContainsKey(name))
+                        {
+                            continue;
+                        }
 
                         // If this isn't the one that has the final value, skip it
                         if (namesAndValues[name] != ns)

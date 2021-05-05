@@ -605,7 +605,7 @@ namespace WinmdUtils
                 if (!type2Fields.TryGetValue(field1.Name, out var field2))
                 {
                     ret = false;
-                    console?.Out.Write($"{field1.Name} not found in 2nd winmd\r\n");
+                    console?.Out.Write($"{field1.FullName} not found in 2nd winmd\r\n");
                     continue;
                 }
 
@@ -623,7 +623,7 @@ namespace WinmdUtils
 
             foreach (var field2 in type2Fields.Values)
             {
-                console?.Out.Write($"{field2.Name} not found in 1st winmd\r\n");
+                console?.Out.Write($"{field2.FullName} not found in 1st winmd\r\n");
                 ret = false;
             }
 

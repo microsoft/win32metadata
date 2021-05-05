@@ -16,7 +16,6 @@ RtlUnwind
 RtlRaiseException
 RtlPcToFileHeader
 RtlCompareMemory
-_DD_GETHEAPALIGNMENTDATA
 UiaRect
 _TEB
 --traverse
