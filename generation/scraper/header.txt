@@ -190,5 +190,7 @@ using Windows.Win32.Gaming;
 using Windows.Win32.UI.XInput;
 using Windows.Win32.Networking.XmlHttpExtendedRequest;
 using Windows.Win32.Storage.Xps;
+using Windows.Win32.System.Console;
+using Windows.Win32.System.Memory;
 
 using IServiceProvider = Windows.Win32.System.SystemServices.IServiceProvider;

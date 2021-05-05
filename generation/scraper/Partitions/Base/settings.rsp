@@ -74,12 +74,10 @@ LPENCLAVE_ROUTINE
 <IncludeRoot>/um/winperf.h
 <IncludeRoot>/um/mmiscapi2.h
 <IncludeRoot>/um/verrsrc.h
-<IncludeRoot>/um/memoryapi.h
 <IncludeRoot>/um/minwinbase.h
 <IncludeRoot>/um/storprop.h
 <IncludeRoot>/um/libloaderapi2.h
 <IncludeRoot>/um/namedpipeapi.h
-<IncludeRoot>/um/heapapi.h
 <IncludeRoot>/um/atlthunk.h
 <IncludeRoot>/um/powrprof.h
 <IncludeRoot>/um/powerbase.h
