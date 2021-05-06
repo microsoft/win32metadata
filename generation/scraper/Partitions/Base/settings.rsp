@@ -63,7 +63,6 @@ LPENCLAVE_ROUTINE
 <IncludeRoot>/um/winioctl.h
 <IncludeRoot>/shared/wtypes.h
 <IncludeRoot>/um/rpcnsip.h
-<IncludeRoot>/um/winperf.h
 <IncludeRoot>/um/mmiscapi2.h
 <IncludeRoot>/um/verrsrc.h
 <IncludeRoot>/um/minwinbase.h
