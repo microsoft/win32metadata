@@ -64,7 +64,6 @@
 #include <heapapi.h>
 #include <atlthunk.h>
 #include <lmserver.h>
-#include <ntddvdeo.h>
 #include <jobapi2.h>
 #include <jobapi.h>
 #include <avrt.h>
