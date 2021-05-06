@@ -2873,3 +2873,6 @@ LPMAPIADDRESS=Windows.Win32.System.Mapi
 LPMAPIDETAILS=Windows.Win32.System.Mapi
 LPMAPIRESOLVENAME=Windows.Win32.System.Mapi
 FLOATING_SAVE_AREA=Windows.Win32.System.Kernel
+SLIST_ENTRY=Windows.Win32.System.Kernel
+SLIST_HEADER=Windows.Win32.System.Kernel
+SINGLE_LIST_ENTRY=Windows.Win32.System.Kernel
