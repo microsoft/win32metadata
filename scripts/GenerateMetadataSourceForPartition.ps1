@@ -10,13 +10,45 @@ param
     [string]
     $partitionName,
 
-    [ValidateSet("x64", "x86", "arm64")]
+    [ValidateSet("crossarch", "x64", "x86", "arm64")]
     [string]
-    $arch = "x64",
+    $arch = "crossarch",
 
     [string]
     $indent = ""
 )
+
+if ($arch -eq "crossarch")
+{
+    Write-Output "Scraping $($indent)$partitionName for all architectures..."
+
+    $throttleCount = [System.Environment]::ProcessorCount / 2
+    if ($throttleCount -lt 2)
+    {
+        $throttleCount = 2
+    }
+
+    $errObj = new-object psobject
+    Add-Member -InputObject $errObj -MemberType NoteProperty -Name ErrorCode -Value 0
+
+    "x64", "x86", "arm64" | ForEach-Object -Parallel { 
+        $out = & $using:PSCommandPath -artifactsDir $using:artifactsDir -version $using:version -partitionName $using:partitionName -arch $_ -indent "`n  "
+        Write-Output "$out"
+
+        if ($LastExitCode -lt 0)
+        {
+            Write-Error "Partition $_ failed for $_."
+            $localObj.ErrorCode = $LastExitCode
+        }
+    } -ThrottleLimit $throttleCount
+
+    if ($errObj.ErrorCode -ne 0)
+    {
+        exit $errObj.ErrorCode
+    }
+
+    exit 0
+}
 
 if (($arch -eq "x64") -or ($arch -eq "arm64"))
 {
@@ -84,7 +116,7 @@ $generatedSourceDir = "$rootDir\generation\emitter\generated\$arch"
 [hashtable]$textToReplaceTable = @{ "<IncludeRoot>" = $includePath; "<RepoRoot>" = $rootDir; "<PartitionName>" = $partitionName; "<PartitionDir>" = $partitionGenerateDir; "<GeneratedSourceDir>" = $generatedSourceDir}
 Replace-Text $fixedSettingsRsp $textToReplaceTable
 
-Write-Output "$($indent)$partitionName..."
+Write-Output "$($indent)$partitionName for $arch..."
 Write-Output "$($indent)$toolsDir\ClangSharpPInvokeGenerator.exe @$baseSettingsRsp @$baseSettingsBitnessRsp @$baseSettingsArchRsp @$withSetLastErrorRsp @$supportedOSRsp @$fixedSettingsRsp @$baseRemapRsp @$autoTypesRemapRsp @$functionPointerFixupsRsp @$libMappingOutputFileName > $generatorOutput"
 
 & $toolsDir\ClangSharpPInvokeGenerator.exe "@$baseSettingsRsp" "@$baseSettingsBitnessRsp" "@$baseSettingsArchRsp" "@$withSetLastErrorRsp" "@$supportedOSRsp" "@$fixedSettingsRsp" "@$baseRemapRsp" "@$autoTypesRemapRsp" "@$functionPointerFixupsRsp" "@$libMappingOutputFileName" > $generatorOutput
