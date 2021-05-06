@@ -64,8 +64,6 @@
 #include <heapapi.h>
 #include <atlthunk.h>
 #include <lmserver.h>
-#include <jobapi2.h>
-#include <jobapi.h>
 #include <avrt.h>
 #include <threadpoolapiset.h>
 #include <winsvc.h>

@@ -135,6 +135,7 @@ using Windows.Win32.System.EventCollector;
 using Windows.Win32.System.EventLog;
 using Windows.Win32.System.EventNotificationService;
 using Windows.Win32.System.GroupPolicy;
+using Windows.Win32.System.JobObjects;
 using Windows.Win32.System.Kernel;
 using Windows.Win32.System.Memory;
 using Windows.Win32.System.Mmc;

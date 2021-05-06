@@ -48,8 +48,6 @@ EXCEPTION_ROUTINE
 <IncludeRoot>/um/processtopologyapi.h
 <IncludeRoot>/um/systemtopologyapi.h
 <IncludeRoot>/um/namespaceapi.h
-<IncludeRoot>/um/jobapi2.h
-<IncludeRoot>/um/jobapi.h
 <IncludeRoot>/um/threadpoolapiset.h
 <IncludeRoot>/um/threadpoollegacyapiset.h
 <IncludeRoot>/um/interlockedapi.h
