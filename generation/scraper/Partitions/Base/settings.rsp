@@ -54,7 +54,6 @@ LPENCLAVE_ROUTINE
 <IncludeRoot>/um/dvp.h
 <IncludeRoot>/um/ddrawint.h
 <IncludeRoot>/um/winddi.h
-<IncludeRoot>/um/vdslun.h
 <IncludeRoot>/um/waasapitypes.h
 <IncludeRoot>/um/mcx.h
 <IncludeRoot>/um/servprov.h
@@ -70,8 +69,6 @@ LPENCLAVE_ROUTINE
 <IncludeRoot>/um/libloaderapi2.h
 <IncludeRoot>/um/namedpipeapi.h
 <IncludeRoot>/um/atlthunk.h
-<IncludeRoot>/um/vds.h
-<IncludeRoot>/um/vdshwprv.h
 <IncludeRoot>/um/devpropdef.h
 <IncludeRoot>/um/dispatcherqueue.h
 <IncludeRoot>/um/libloaderapi.h

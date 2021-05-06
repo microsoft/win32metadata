@@ -1,0 +1,15 @@
+--file
+<PartitionDir>\main.cpp
+--output
+<GeneratedSourceDir>\<PartitionName>.cs
+--include-directory
+<RepoRoot>\generation\scraper
+<IncludeRoot>/shared
+<IncludeRoot>/um
+<IncludeRoot>/winrt
+--traverse
+<IncludeRoot>/um/vds.h
+<IncludeRoot>/um/vdshwprv.h
+<IncludeRoot>/um/vdslun.h
+--namespace
+Windows.Win32.Storage.VirtualDiskService

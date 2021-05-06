@@ -13,7 +13,6 @@
 #include <objbase.h>
 #include <ObjIdl.h>
 #include <combaseapi.h>
-#include <vdssys.h>
 
 //
 // Begin of area needing to be close to COM headers
@@ -21,9 +20,6 @@
 #include <waasapi.h>
 #include <rtworkq.h>
 #include <dispatcherqueue.h>
-//#include <vds.h> Can't also use vdshwprv.h
-#include <vdshwprv.h>
-#include <vdslun.h>
 
 // End of area needing to be close to COM headers
 //
