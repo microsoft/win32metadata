@@ -25,13 +25,6 @@
 #include <vdshwprv.h>
 #include <vdslun.h>
 
-#include <vss.h>
-#include <vswriter.h>
-#include <vsmgmt.h>
-//#include <vsbackup.h> This contains C++ classes instead of COM interfaces
-#include <vsadmin.h>
-#include <vsprov.h>
-
 // End of area needing to be close to COM headers
 //
 
