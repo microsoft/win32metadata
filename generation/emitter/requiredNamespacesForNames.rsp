@@ -1,23 +1,5 @@
 --requiredNamespaceForName
-AbortSystemShutdownA=Windows.Win32.System.Shutdown
-AbortSystemShutdownW=Windows.Win32.System.Shutdown
-CheckForHiberboot=Windows.Win32.System.Shutdown
-InitiateShutdownA=Windows.Win32.System.Shutdown
-InitiateShutdownW=Windows.Win32.System.Shutdown
-InitiateSystemShutdownA=Windows.Win32.System.Shutdown
-InitiateSystemShutdownExA=Windows.Win32.System.Shutdown
-InitiateSystemShutdownExW=Windows.Win32.System.Shutdown
-InitiateSystemShutdownW=Windows.Win32.System.Shutdown
-ExitWindows=Windows.Win32.System.Shutdown
-ExitWindowsEx=Windows.Win32.System.Shutdown
-LockWorkStation=Windows.Win32.System.Shutdown
-RegisterDeviceNotificationA=Windows.Win32.System.SystemServices
-RegisterDeviceNotificationW=Windows.Win32.System.SystemServices
-RegisterPowerSettingNotification=Windows.Win32.System.SystemServices
-RegisterSuspendResumeNotification=Windows.Win32.System.SystemServices
-ShutdownBlockReasonCreate=Windows.Win32.System.Shutdown
-ShutdownBlockReasonDestroy=Windows.Win32.System.Shutdown
-ShutdownBlockReasonQuery=Windows.Win32.System.Shutdown
+# region consoleapi2.h (also defined in ntddvdeo.h)
 FOREGROUND_BLUE=Windows.Win32.System.Console
 FOREGROUND_GREEN=Windows.Win32.System.Console
 FOREGROUND_RED=Windows.Win32.System.Console
@@ -34,6 +16,30 @@ COMMON_LVB_GRID_RVERTICAL=Windows.Win32.System.Console
 COMMON_LVB_REVERSE_VIDEO=Windows.Win32.System.Console
 COMMON_LVB_UNDERSCORE=Windows.Win32.System.Console
 COMMON_LVB_SBCSDBCS=Windows.Win32.System.Console
+# endregion consoleapi2.h (also defined in ntddvdeo.h)
+# region winreg.h
+AbortSystemShutdownA=Windows.Win32.System.Shutdown
+AbortSystemShutdownW=Windows.Win32.System.Shutdown
+CheckForHiberboot=Windows.Win32.System.Shutdown
+InitiateShutdownA=Windows.Win32.System.Shutdown
+InitiateShutdownW=Windows.Win32.System.Shutdown
+InitiateSystemShutdownA=Windows.Win32.System.Shutdown
+InitiateSystemShutdownExA=Windows.Win32.System.Shutdown
+InitiateSystemShutdownExW=Windows.Win32.System.Shutdown
+InitiateSystemShutdownW=Windows.Win32.System.Shutdown
+# endregion winreg.h
+# region winuser.h
+ExitWindows=Windows.Win32.System.Shutdown
+ExitWindowsEx=Windows.Win32.System.Shutdown
+LockWorkStation=Windows.Win32.System.Shutdown
+RegisterDeviceNotificationA=Windows.Win32.System.SystemServices
+RegisterDeviceNotificationW=Windows.Win32.System.SystemServices
+RegisterPowerSettingNotification=Windows.Win32.System.SystemServices
+RegisterSuspendResumeNotification=Windows.Win32.System.SystemServices
+ShutdownBlockReasonCreate=Windows.Win32.System.Shutdown
+ShutdownBlockReasonDestroy=Windows.Win32.System.Shutdown
+ShutdownBlockReasonQuery=Windows.Win32.System.Shutdown
+# endregion winuser.h
 AERT_Allocate=Windows.Win32.Media.Audio.DirectMusic
 AERT_Free=Windows.Win32.Media.Audio.DirectMusic
 MDEVICECAPSEX=Windows.Win32.Media.Audio.DirectMusic
