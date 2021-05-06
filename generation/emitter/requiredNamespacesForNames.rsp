@@ -2462,3 +2462,6 @@ STGMEDIUM_UserUnmarshal64=Windows.Win32.System.OleAutomation
 STGMEDIUM_UserFree64=Windows.Win32.System.OleAutomation
 DXGI_ERROR_*=Windows.Win32.Graphics.Dxgi
 FLOATING_SAVE_AREA=Windows.Win32.System.Kernel
+SLIST_ENTRY=Windows.Win32.System.Kernel
+SLIST_HEADER=Windows.Win32.System.Kernel
+SINGLE_LIST_ENTRY=Windows.Win32.System.Kernel
