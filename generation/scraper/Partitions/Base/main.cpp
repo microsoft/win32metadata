@@ -68,11 +68,7 @@
 #include <heapapi.h>
 #include <atlthunk.h>
 #include <lmserver.h>
-#include <powrprof.h>
-#include <poclass.h>
 #include <ntddvdeo.h>
-#include <powersetting.h>
-#include <powerbase.h>
 #include <jobapi2.h>
 #include <jobapi.h>
 #include <avrt.h>

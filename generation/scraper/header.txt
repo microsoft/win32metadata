@@ -194,5 +194,6 @@ using Windows.Win32.System.Console;
 using Windows.Win32.System.Memory;
 using Windows.Win32.Devices.Pwm;
 using Windows.Win32.Storage.Vss;
+using Windows.Win32.System.Power;
 
 using IServiceProvider = Windows.Win32.System.SystemServices.IServiceProvider;
