@@ -67,7 +67,6 @@ _TEB
 <IncludeRoot>/um/timezoneapi.h
 <IncludeRoot>/um/VersionHelpers.h
 <IncludeRoot>/um/waasapi.h
-<IncludeRoot>/um/dmemmgr.h
 <IncludeRoot>/um/ddkernel.h
 <IncludeRoot>/um/xmllite.h
 <IncludeRoot>/um/devquery.h

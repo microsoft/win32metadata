@@ -7,8 +7,8 @@
 <IncludeRoot>/shared
 <IncludeRoot>/um
 <IncludeRoot>/winrt
---exclude
 --traverse
 <IncludeRoot>/shared/ntddvdeo.h
+<IncludeRoot>/um/dmemmgr.h
 --namespace
 Windows.Win32.Devices.Display
