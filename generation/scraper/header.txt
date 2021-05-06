@@ -192,5 +192,6 @@ using Windows.Win32.Networking.XmlHttpExtendedRequest;
 using Windows.Win32.Storage.Xps;
 using Windows.Win32.System.Console;
 using Windows.Win32.System.Memory;
+using Windows.Win32.Devices.Pwm;
 
 using IServiceProvider = Windows.Win32.System.SystemServices.IServiceProvider;

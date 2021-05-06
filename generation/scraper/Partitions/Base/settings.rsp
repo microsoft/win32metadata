@@ -51,7 +51,6 @@ LPENCLAVE_ROUTINE
 <IncludeRoot>/shared/ntddvdeo.h
 <IncludeRoot>/shared/poclass.h
 <IncludeRoot>/um/powersetting.h
-<IncludeRoot>/shared/pwm.h
 <IncludeRoot>/shared/ntddstor.h
 <IncludeRoot>/um/dbt.h
 <IncludeRoot>/shared/devpropdef.h
