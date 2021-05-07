@@ -15,17 +15,26 @@ param
     $arch = "crossarch",
 
     [string]
-    $indent = ""
+    $indent = "",
+
+    [switch]$parallel
 )
 
 if ($arch -eq "crossarch")
 {
     Write-Output "Scraping $($indent)$partitionName for all architectures..."
 
-    $throttleCount = [System.Environment]::ProcessorCount / 2
-    if ($throttleCount -lt 2)
+    if ($parallel)
     {
-        $throttleCount = 2
+        $throttleCount = [System.Environment]::ProcessorCount / 2
+        if ($throttleCount -lt 2)
+        {
+            $throttleCount = 2
+        }
+    }
+    else
+    {
+        $throttleCount = 1
     }
 
     $errObj = new-object psobject
