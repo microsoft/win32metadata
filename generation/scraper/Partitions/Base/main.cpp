@@ -13,7 +13,6 @@
 #include <objbase.h>
 #include <ObjIdl.h>
 #include <combaseapi.h>
-#include <vdssys.h>
 
 //
 // Begin of area needing to be close to COM headers
@@ -21,16 +20,6 @@
 #include <waasapi.h>
 #include <rtworkq.h>
 #include <dispatcherqueue.h>
-//#include <vds.h> Can't also use vdshwprv.h
-#include <vdshwprv.h>
-#include <vdslun.h>
-
-#include <vss.h>
-#include <vswriter.h>
-#include <vsmgmt.h>
-//#include <vsbackup.h> This contains C++ classes instead of COM interfaces
-#include <vsadmin.h>
-#include <vsprov.h>
 
 // End of area needing to be close to COM headers
 //
@@ -75,13 +64,6 @@
 #include <heapapi.h>
 #include <atlthunk.h>
 #include <lmserver.h>
-#include <powrprof.h>
-#include <poclass.h>
-#include <ntddvdeo.h>
-#include <powersetting.h>
-#include <powerbase.h>
-#include <jobapi2.h>
-#include <jobapi.h>
 #include <avrt.h>
 #include <threadpoolapiset.h>
 #include <winsvc.h>

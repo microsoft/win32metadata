@@ -15,5 +15,6 @@
 <IncludeRoot>/um/InputScope.h
 <IncludeRoot>/um/ctfspui.h
 <IncludeRoot>/um/MsCtfMonitorApi.h
+<IncludeRoot>/um/MSAAText.h
 --namespace
-Windows.Win32.System.UserAccessLogging
+Windows.Win32.UI.TextServices

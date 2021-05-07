@@ -6,6 +6,7 @@
 #define WIN32 1
 
 #include <tapi.h>
+#include <TSPI.h>
 #include <tapi3err.h>
 #include <tapi3.h>
 #include <tapi3if.h>

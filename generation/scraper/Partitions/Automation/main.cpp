@@ -8,7 +8,6 @@
 #include <wtypes.h>
 #include <oaidl.h>
 #include <oleauto.h>
-#include <wia_xp.h>
 #include <olectl.h>
 
 #include <DispEx.h>

@@ -1,0 +1,14 @@
+--file
+<PartitionDir>\main.cpp
+--output
+<GeneratedSourceDir>\<PartitionName>.cs
+--include-directory
+<RepoRoot>\generation\scraper
+<IncludeRoot>/shared
+<IncludeRoot>/um
+<IncludeRoot>/winrt
+--traverse
+<IncludeRoot>/shared/ntddvdeo.h
+<IncludeRoot>/um/dmemmgr.h
+--namespace
+Windows.Win32.Devices.Display

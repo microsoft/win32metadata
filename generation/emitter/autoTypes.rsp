@@ -205,7 +205,7 @@ Windows.Win32.Devices.AllJoyn,alljoyn_securityapplicationproxy,AllJoynHandle
 Windows.Win32.Devices.AllJoyn,alljoyn_sessionlistener,AllJoynHandle
 Windows.Win32.Devices.AllJoyn,alljoyn_sessionopts,AllJoynHandle
 Windows.Win32.Devices.AllJoyn,alljoyn_sessionportlistener,AllJoynHandle
-Windows.Win32.SystemServices,HPCON,IntPtr,ClosePseudoConsole
+Windows.Win32.System.SystemServices,HPCON,IntPtr,ClosePseudoConsole
 Windows.Win32.UI.Controls,HTREEITEM,IntPtr
 Windows.Win32.System.SystemServices,LPPROC_THREAD_ATTRIBUTE_LIST,void*
 Windows.Win32.System.Hypervisor,WHV_PARTITION_HANDLE,IntPtr,WHvDeletePartition
