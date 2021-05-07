@@ -17,6 +17,24 @@ COMMON_LVB_REVERSE_VIDEO=Windows.Win32.System.Console
 COMMON_LVB_UNDERSCORE=Windows.Win32.System.Console
 COMMON_LVB_SBCSDBCS=Windows.Win32.System.Console
 # endregion consoleapi2.h (also defined in ntddvdeo.h)
+# region winbase.h
+GlobalAlloc=Windows.Win32.System.Memory
+GlobalFlags=Windows.Win32.System.Memory
+GlobalFree=Windows.Win32.System.Memory
+GlobalHandle=Windows.Win32.System.Memory
+GlobalLock=Windows.Win32.System.Memory
+GlobalReAlloc=Windows.Win32.System.Memory
+GlobalSize=Windows.Win32.System.Memory
+GlobalUnlock=Windows.Win32.System.Memory
+LocalAlloc=Windows.Win32.System.Memory
+LocalFlags=Windows.Win32.System.Memory
+LocalFree=Windows.Win32.System.Memory
+LocalHandle=Windows.Win32.System.Memory
+LocalLock=Windows.Win32.System.Memory
+LocalReAlloc=Windows.Win32.System.Memory
+LocalSize=Windows.Win32.System.Memory
+LocalUnlock=Windows.Win32.System.Memory
+# endregion winbase.h
 # region winreg.h
 AbortSystemShutdownA=Windows.Win32.System.Shutdown
 AbortSystemShutdownW=Windows.Win32.System.Shutdown
@@ -28,6 +46,12 @@ InitiateSystemShutdownExA=Windows.Win32.System.Shutdown
 InitiateSystemShutdownExW=Windows.Win32.System.Shutdown
 InitiateSystemShutdownW=Windows.Win32.System.Shutdown
 # endregion winreg.h
+# region winnt.h (per-architecture design also defined in ntdef.h)
+FLOATING_SAVE_AREA=Windows.Win32.System.Kernel
+SLIST_ENTRY=Windows.Win32.System.Kernel
+SLIST_HEADER=Windows.Win32.System.Kernel
+SINGLE_LIST_ENTRY=Windows.Win32.System.Kernel
+# endregion winnt.h (per-architecture design also defined in ntdef.h)
 # region winuser.h
 ExitWindows=Windows.Win32.System.Shutdown
 ExitWindowsEx=Windows.Win32.System.Shutdown
@@ -191,15 +215,7 @@ GetOldestEventLogRecord=Windows.Win32.System.SystemServices
 GetProcessDEPPolicy=Windows.Win32.System.SystemServices
 GetSystemDEPPolicy=Windows.Win32.System.SystemServices
 GetSystemPowerStatus=Windows.Win32.System.SystemServices
-GlobalAlloc=Windows.Win32.System.Memory
-GlobalFlags=Windows.Win32.System.Memory
-GlobalFree=Windows.Win32.System.Memory
-GlobalHandle=Windows.Win32.System.Memory
-GlobalLock=Windows.Win32.System.Memory
 GlobalMemoryStatus=Windows.Win32.System.SystemServices
-GlobalReAlloc=Windows.Win32.System.Memory
-GlobalSize=Windows.Win32.System.Memory
-GlobalUnlock=Windows.Win32.System.Memory
 IsBadCodePtr=Windows.Win32.System.SystemServices
 IsBadReadPtr=Windows.Win32.System.SystemServices
 IsBadStringPtrA=Windows.Win32.System.SystemServices
@@ -208,14 +224,6 @@ IsBadWritePtr=Windows.Win32.System.SystemServices
 IsSystemResumeAutomatic=Windows.Win32.System.SystemServices
 LoadModule=Windows.Win32.System.SystemServices
 LoadPackagedLibrary=Windows.Win32.System.SystemServices
-LocalAlloc=Windows.Win32.System.Memory
-LocalFlags=Windows.Win32.System.Memory
-LocalFree=Windows.Win32.System.Memory
-LocalHandle=Windows.Win32.System.Memory
-LocalLock=Windows.Win32.System.Memory
-LocalReAlloc=Windows.Win32.System.Memory
-LocalSize=Windows.Win32.System.Memory
-LocalUnlock=Windows.Win32.System.Memory
 MapUserPhysicalPagesScatter=Windows.Win32.System.SystemServices
 MapViewOfFileExNuma=Windows.Win32.System.SystemServices
 NotifyChangeEventLog=Windows.Win32.System.SystemServices
@@ -2353,7 +2361,3 @@ STGMEDIUM_UserMarshal64=Windows.Win32.System.OleAutomation
 STGMEDIUM_UserUnmarshal64=Windows.Win32.System.OleAutomation
 STGMEDIUM_UserFree64=Windows.Win32.System.OleAutomation
 DXGI_ERROR_*=Windows.Win32.Graphics.Dxgi
-FLOATING_SAVE_AREA=Windows.Win32.System.Kernel
-SLIST_ENTRY=Windows.Win32.System.Kernel
-SLIST_HEADER=Windows.Win32.System.Kernel
-SINGLE_LIST_ENTRY=Windows.Win32.System.Kernel
