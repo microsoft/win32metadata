@@ -15,6 +15,11 @@ You can contribute to this project in multiple ways:
 * Contribute to [namespaces](#Namespaces)
 * Contribute to [projections](docs/projections.md)
 
+When contributing PRs, [validate](#Validating-changes) your changes by rebuilding the winmd and then inspecting the reported winmd diff to ensure all changes were intentional:
+
+* [Full builds](#full-builds)
+* [Incremental builds](#incremental-builds)
+
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
@@ -26,6 +31,9 @@ Our tooling organizes Win32 APIs into namespaces. This provides an alternative w
 * [Assign a header file to a single namespace](#assign-a-header-file-to-a-single-namespace)
 * [Split a header file among multiple namespaces](#split-a-header-file-among-multiple-namespaces)
 * [Refactoring namespaces](#refactoring-namespaces)
+* [Validating changes](#validating-changes)
+  * [Full builds](#full-builds)
+  * [Incremental builds](#incremental-builds)
 
 ### Assign a header file to a single namespace
 
@@ -35,7 +43,7 @@ Partitions are defined as [folders](generation/scraper/Partitions) with [main.cp
 * [main.cpp](generation/scraper/Partitions/Registry/main.cpp) contains `#include` statements like you would use to call the APIs directly. This typically includes the header files to be associated with the partition as well as any other dependent headers, included in the proper order.
 * [settings.rsp](generation/scraper/Partitions/Registry/settings.rsp) associates a list of header files to a namespace. Reference existing [partitions](generation/scraper/Partitions) to understand the template for this file. The important sections are `--traverse`, which lists the header files to include, and `--namespace` which lists the namespace to associate with the content of those header files. Note that headers should be listed alphabetically by convention, and the casing needs to match the casing of the filenames.
 
-You can test localized changes to a partition by running `./scripts/GenerateMetadataSourceForPartition.ps1 -artifactsDir ./artifacts -partitionName <PARTITION>` from the repo root. If it compiles, the changes are likely correct. A common reason for failure is main.cpp either doesn't include all the necessary dependent headers needed to use the target headers or doesn't include them in the proper order.
+You can test localized changes to a partition by running `./scripts/GenerateMetadataSourceForPartition.ps1 -partitionName <PARTITION>` from the repo root. If it compiles, the changes are likely correct. A common reason for failure is main.cpp either doesn't include all the necessary dependent headers needed to use the target headers or doesn't include them in the proper order.
 
 ### Split a header file among multiple namespaces
 
@@ -47,4 +55,14 @@ Note that when refactoring namespaces, [requiredNamespacesForNames.rsp](generati
 
 Other files that need to be kept in sync when refactoring namespaces include [manual](generation/emitter/manual) and [autotypes.rsp](generation/emitter/autoTypes.rsp), which manually define some types, as well as [header.txt](generation/scraper/header.txt), which adds using statements to generated .cs files during the build process.
 
-Note that when rebuilding the winmd, you may need to run a clean build with `./DoAll.ps1 -Clean` to avoid stale artifacts on your system conflicting with refactoring changes.
+## Validating changes
+
+### Full builds
+
+The simplest but slowest way to validate changes is to perform a full build with `./DoAll.ps1` and then inspect the reported winmd diff to ensure all changes were intentional. A full build can take 25-30 minutes. Add `-Clean` to perform a clean build.
+
+### Incremental builds
+
+If you have already performed a full build and are making incremental changes, you can effectively perform incremental builds by running `./scripts/GenerateMetadataSourceForPartition.ps1 -PartitionName <PARTITION>` for each impacted `<PARTITION>`, and then build and test the winmd by running `./scripts/BuildMetadataBin.ps1 && ./scripts/TestWinmdBinary.ps1`. If you are only making changes to the [emitter](./generation/emitter), then you don't need to regenerate the partitions and can just rebuild the winmd.
+
+Note that stale artifacts on your system may sometimes result in cryptic errors when attempting incremental builds. If you do encounter cryptic errors during incremental builds that you suspect are the result of previously built changes, reset your system state by running a clean build with `./DoAll.ps1 -Clean`.

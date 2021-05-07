@@ -163,53 +163,9 @@ PowerShell Core is required to run the generation scripts. Open a PowerShell Cor
 .\DoAll.ps1
 ```
 
-&nbsp;
 # Contributing
 
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
-
-When you submit a pull request, a CLA bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
-
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
-
-## How you can help
-* Help fix one of the existing issues.
-* Help make an API friendlier by converting a uint or other non-specific type in an API to use a more friendly flags enum. This helps make the API easier for developers to use.
-
-    Example for what was done with CreateFileW:
-    
-    This function contains multiple uint paramters:
-    
-      uint dwShareMode
-      uint dwDesiredAccess
-      uint dwCreationDisposition
-
-    But a developer would need to look up the API to figure out what values to use. To improve this, changes were added to replace the uints with enums:
-
-    1) Find the possible constants in the [CreateFileW docs](https://docs.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilea).
-    2) Create enums with these values and add them to a *.manual.cs file, or create a new one at [generation/emitter/manual](generation/emitter/manual). **Please keep the original value names of the Win32 contants.** This will allow developers to search for them and find information about them online.
-
-        Here's one for the first parameter:
-
-            [Flags]
-            public enum FILE_SHARE_FLAGS
-            {
-                FILE_SHARE_NONE = 0,
-                FILE_SHARE_DELETE = 4,
-                FILE_SHARE_READ = 1,
-                FILE_SHARE_WRITE = 2,
-            }
-
-    3) Now tell the emitter to change the type of dwShareMode to be FILE_SHARE_FLAGS in [generation/emitter/remap.rsp](generation/emitter/remap.rsp):
-    
-    
-            CreateFileW::dwShareMode=FILE_SHARE_FLAGS
+See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 
 # Trademarks
