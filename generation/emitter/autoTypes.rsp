@@ -53,8 +53,8 @@ Windows.Win32.UI.WindowsAndMessaging,HHOOK,DECLARE_HANDLE,UnhookWindowsHookEx
 Windows.Win32.UI.MenusAndResources,HICON,DECLARE_HANDLE,DestroyIcon
 Windows.Win32.UI.MenusAndResources,HMENU,DECLARE_HANDLE,DestroyMenu
 Windows.Win32.UI.MenusAndResources,HCURSOR,DECLARE_HANDLE,DestroyCursor,HICON
-Windows.Win32.System.SystemServices,TimerQueueHandle,IntPtr,DeleteTimerQueueEx
-Windows.Win32.System.SystemServices,PTP_POOL,IntPtr,CloseThreadpool
+Windows.Win32.System.Threading,TimerQueueHandle,IntPtr,DeleteTimerQueueEx
+Windows.Win32.System.Threading,PTP_POOL,IntPtr,CloseThreadpool
 Windows.Win32.System.SystemServices,NamespaceHandle,IntPtr,ClosePrivateNamespace
 Windows.Win32.System.SystemServices,BoundaryDescriptorHandle,IntPtr,DeleteBoundaryDescriptor
 Windows.Win32.Storage.FileSystem,FindFileHandle,IntPtr,FindClose
@@ -73,12 +73,12 @@ Windows.Win32.System.RemoteDesktop,HwtsVirtualChannelHandle,IntPtr,WTSVirtualCha
 Windows.Win32.NetworkManagement.IpHelper,IcmpHandle,IntPtr,IcmpCloseHandle
 Windows.Win32.Graphics.Gdi,HdcMetdataFileHandle,IntPtr,DeleteMetaFile
 Windows.Win32.Graphics.Gdi,HdcMetdataEnhFileHandle,IntPtr,DeleteEnhMetaFile
-Windows.Win32.System.SystemServices,HeapHandle,IntPtr,HeapDestroy
+Windows.Win32.System.Memory,HeapHandle,IntPtr,HeapDestroy
 Windows.Win32.UI.ColorSystem,HCOLORSPACE,DECLARE_HANDLE,DeleteColorSpace
 Windows.Win32.System.StationsAndDesktops,HDESK,DECLARE_HANDLE,CloseDesktop
 Windows.Win32.UI.MenusAndResources,HACCEL,DECLARE_HANDLE,DestroyAcceleratorTable
 Windows.Win32.UI.Controls,HPROPSHEETPAGE,DECLARE_HANDLE,DestroyPropertySheetPage
-Windows.Win32.System.WindowsProgramming,HKEY,DECLARE_HANDLE,RegCloseKey
+Windows.Win32.System.Registry,HKEY,DECLARE_HANDLE,RegCloseKey
 Windows.Win32.UI.Controls,HIMAGELIST,IntPtr,ImageList_Destroy
 Windows.Win32.NetworkManagement.WNet,NetEnumHandle,IntPtr,WNetCloseEnum
 Windows.Win32.Security,HCRYPTASYNC,IntPtr,CryptCloseAsyncHandle
@@ -207,7 +207,7 @@ Windows.Win32.Devices.AllJoyn,alljoyn_sessionopts,AllJoynHandle
 Windows.Win32.Devices.AllJoyn,alljoyn_sessionportlistener,AllJoynHandle
 Windows.Win32.System.SystemServices,HPCON,IntPtr,ClosePseudoConsole
 Windows.Win32.UI.Controls,HTREEITEM,IntPtr
-Windows.Win32.System.SystemServices,LPPROC_THREAD_ATTRIBUTE_LIST,void*
+Windows.Win32.System.Threading,LPPROC_THREAD_ATTRIBUTE_LIST,void*
 Windows.Win32.System.Hypervisor,WHV_PARTITION_HANDLE,IntPtr,WHvDeletePartition
 Windows.Win32.System.SystemServices,CHAR,byte
 Windows.Win32.Storage.StructuredStorage,JET_HANDLE,UIntPtr
