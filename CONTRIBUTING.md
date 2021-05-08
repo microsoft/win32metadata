@@ -8,12 +8,12 @@ When you submit a pull request, a CLA bot will automatically determine whether y
 a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
 provided by the bot. You will only need to do this once across all repos using our CLA.
 
-You can contribute to this project in multiple ways:
+You can contribute to this project by contributing to:
 
-* Contribute to [issues](https://github.com/microsoft/win32metadata/issues)
-* Contribute to [discussions](https://github.com/microsoft/win32metadata/discussions)
-* Contribute to [namespaces](#Namespaces)
-* Contribute to [projections](docs/projections.md)
+* [Issues](https://github.com/microsoft/win32metadata/issues)
+* [Discussions](https://github.com/microsoft/win32metadata/discussions)
+* [Namespaces](#Namespaces)
+* [Projections](docs/projections.md)
 
 When contributing PRs, [validate](#Validating-changes) your changes by rebuilding the winmd and then inspecting the reported winmd diff to ensure all changes were intentional:
 
@@ -31,9 +31,6 @@ Our tooling organizes Win32 APIs into namespaces. This provides an alternative w
 * [Assign a header file to a single namespace](#assign-a-header-file-to-a-single-namespace)
 * [Split a header file among multiple namespaces](#split-a-header-file-among-multiple-namespaces)
 * [Refactoring namespaces](#refactoring-namespaces)
-* [Validating changes](#validating-changes)
-  * [Full builds](#full-builds)
-  * [Incremental builds](#incremental-builds)
 
 ### Assign a header file to a single namespace
 
@@ -53,7 +50,7 @@ If a header file doesn't cleanly map to one namespace, it should be associated w
 
 Note that when refactoring namespaces, [requiredNamespacesForNames.rsp](generation/emitter/requiredNamespacesForNames.rsp) will take precedence over any namespaces declared in the partitions, so make sure it doesn't contain remappings that will conflict with the expected factoring from the partitions. For example, if you create a new Registry partition to assign everything in winreg.h to Windows.Win32.System.Registry, but [requiredNamespacesForNames.rsp](generation/emitter/requiredNamespacesForNames.rsp) was previously updated to map Reg* APIs to a different namespace, you won't achieve the desired result unless you remove the Reg* entries from [requiredNamespacesForNames.rsp](generation/emitter/requiredNamespacesForNames.rsp).
 
-Other files that need to be kept in sync when refactoring namespaces include [manual](generation/emitter/manual) and [autotypes.rsp](generation/emitter/autoTypes.rsp), which manually define some types, as well as [header.txt](generation/scraper/header.txt), which adds using statements to generated .cs files during the build process.
+Other files that need to be kept in sync when refactoring namespaces include [manual](generation/emitter/manual) and [autotypes.rsp](generation/emitter/autoTypes.rsp), which manually define some types, as well as [header.txt](generation/scraper/header.txt), which adds using statements to generated .cs files to resolve cross-namespace references.
 
 ## Validating changes
 
