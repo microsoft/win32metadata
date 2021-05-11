@@ -17,7 +17,7 @@ Windows.Win32.Media.Multimedia,HWAVE,DECLARE_HANDLE
 Windows.Win32.Media.Multimedia,HWAVEOUT,DECLARE_HANDLE
 Windows.Win32.Media.Multimedia,HWAVEIN,DECLARE_HANDLE
 Windows.Win32.UI.KeyboardAndMouseInput,HRAWINPUT,DECLARE_HANDLE
-Windows.Win32.System.SystemServices,HRSRC,DECLARE_HANDLE
+Windows.Win32.System.LibraryLoader,HRSRC,DECLARE_HANDLE
 Windows.Win32.System.SystemServices,HSURF,DECLARE_HANDLE
 Windows.Win32.UI.Controls,HSYNTHETICPOINTERDEVICE,DECLARE_HANDLE
 Windows.Win32.Media.Audio.CoreAudio,HTASK,DECLARE_HANDLE
