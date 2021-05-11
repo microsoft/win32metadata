@@ -49,7 +49,6 @@ _LM_OWF_PASSWORD
 <IncludeRoot>/shared/sddl.h
 <IncludeRoot>/um/dssec.h
 <IncludeRoot>/um/securityappcontainer.h
-<IncludeRoot>/um/winsvc.h
 <IncludeRoot>/um/certenroll.h
 <IncludeRoot>/um/CertPol.h
 <IncludeRoot>/shared/bcrypt.h

@@ -61,7 +61,6 @@ typedef struct _OLD_LARGE_INTEGER {
 #include <sddl.h>
 #include <dssec.h>
 #include <securityappcontainer.h>
-#include <winsvc.h>
 #include <certenroll.h>
 #include <certpol.h>
 #include <bcrypt.h>

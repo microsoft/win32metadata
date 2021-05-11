@@ -156,6 +156,7 @@ using Windows.Win32.System.Restore;
 using Windows.Win32.System.Rpc;
 using Windows.Win32.System.Search;
 using Windows.Win32.System.ServerBackup;
+using Windows.Win32.System.Services;
 using Windows.Win32.System.SettingsManagementInfrastructure;
 using Windows.Win32.System.SetupAndMigration;
 using Windows.Win32.System.StationsAndDesktops;
