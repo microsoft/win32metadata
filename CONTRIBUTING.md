@@ -18,8 +18,9 @@ You can contribute to this project by contributing to:
 
 When contributing PRs, [validate](#Validating-changes) your changes by rebuilding the winmd and then inspecting the reported winmd diff to ensure all changes were intentional:
 
-* [Full builds](#full-builds)
-* [Incremental builds](#incremental-builds)
+* [Full builds](#Full-builds)
+* [Incremental builds](#Incremental-builds)
+* [Comparing against the baseline](#Comparing-against-the-baseline)
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
@@ -121,3 +122,17 @@ The simplest but slowest way to validate changes is to perform a full build with
 If you have already performed a full build and are making incremental changes, you can effectively perform incremental builds by running `./scripts/GenerateMetadataSourceForPartition.ps1 -PartitionName <PARTITION>` for each impacted `<PARTITION>`, and then build and test the winmd by running `./scripts/BuildMetadataBin.ps1 && ./scripts/TestWinmdBinary.ps1`. If you are only making changes to the [emitter](./generation/emitter), then you don't need to regenerate the partitions and can just rebuild the winmd.
 
 Note that stale artifacts on your system may sometimes result in cryptic errors when attempting incremental builds. If you do encounter cryptic errors during incremental builds that you suspect are the result of previously built changes, reset your system state by running a clean build with `./DoAll.ps1 -Clean`.
+
+### Comparing against the baseline
+
+A baseline winmd is checked into the repo which is used to report diffs introduced by changes. These diffs are reported by `./scripts/TestWinmdBinary.ps1` which is called during both full and incremental builds if you follow the steps above.
+
+When validating changes, it's important to evaluate the diffs to ensure all changes are intentional. Common patterns to expect in the diffs include:
+
+* APIs were added to the baseline
+* APIs were removed from the baseline
+* APIs were moved to different namespaces
+
+Additionally, it is useful to load the winmd in [ILSpy](https://github.com/icsharpcode/ILSpy) and navigate through the APIs as another means to identify additional changes that may be required to achieve the desired end result. You may notice that two related APIs are in different namespaces or that a type that an API depends on was not moved as you would have expected. If that happens, search the repo for the API or its header file to identify where it may be being mapped to another namespace.
+
+Once all the changes are validated, update the baseline by following the steps reported in the build output.
