@@ -28263,5 +28263,74 @@
         "field": "TrustAttributes"
       }
     ]
+  },
+  {
+    "name": "DXC_CP",
+    "flags": false,
+    "autoPopulate": {
+      "filter": "DXC_CP_",
+      "header": "dxcapi.h"
+    },
+    "members": [
+      {
+        "name": "DXC_CP_ACP",
+        "value": "0"
+      },
+      {
+        "name": "DXC_CP_UTF16",
+        "value": "1200"
+      },
+      {
+        "name": "DXC_CP_UTF8",
+        "value": "65001"
+      }
+    ],
+    "uses": [
+      {
+        "interface": "IDxcBlobEncoding",
+        "method": "GetEncoding",
+        "parameter": "pCodePage"
+      },
+      {
+        "interface": "IDxcLibrary",
+        "method": "CreateBlobFromFile",
+        "parameter": "codePage"
+      },
+      {
+        "interface": "IDxcLibrary",
+        "method": "CreateBlobWithEncodingFromPinned",
+        "parameter": "codePage"
+      },
+      {
+        "interface": "IDxcLibrary",
+        "method": "CreateBlobWithEncodingOnHeapCopy",
+        "parameter": "codePage"
+      },
+      {
+        "interface": "IDxcLibrary",
+        "method": "CreateBlobWithEncodingOnMalloc",
+        "parameter": "codePage"
+      },
+      {
+        "interface": "IDxcUtils",
+        "method": "CreateBlobFromPinned",
+        "parameter": "codePage"
+      },
+      {
+        "interface": "IDxcUtils",
+        "method": "MoveToBlob",
+        "parameter": "codePage"
+      },
+      {
+        "interface": "IDxcUtils",
+        "method": "CreateBlob",
+        "parameter": "codePage"
+      },
+      {
+        "interface": "IDxcUtils",
+        "method": "LoadFile",
+        "parameter": "pCodePage"
+      }
+    ]
   }
 ]
