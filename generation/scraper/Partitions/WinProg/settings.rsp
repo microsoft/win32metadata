@@ -51,7 +51,6 @@ _TEB
 <IncludeRoot>/um/Ime.h
 <IncludeRoot>/um/WinNls32.h
 <IncludeRoot>/um/ExDisp.h
-<IncludeRoot>/um/msxml.h
 <IncludeRoot>/um/icwcfg.h
 <IncludeRoot>/um/iwscapi.h
 <IncludeRoot>/um/Wscapi.h
@@ -67,7 +66,6 @@ _TEB
 <IncludeRoot>/um/VersionHelpers.h
 <IncludeRoot>/um/waasapi.h
 <IncludeRoot>/um/ddkernel.h
-<IncludeRoot>/um/xmllite.h
 <IncludeRoot>/um/devquery.h
 <IncludeRoot>/um/devquerydef.h
 <IncludeRoot>/um/fltdefs.h
