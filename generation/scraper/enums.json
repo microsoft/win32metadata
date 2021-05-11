@@ -1635,7 +1635,11 @@
     ],
     "uses": [
       {
-        "method": "MapViewOfFileExNuma",
+        "method": "MapViewOfFile",
+        "parameter": "dwDesiredAccess"
+      },
+      {
+        "method": "MapViewOfFileEx",
         "parameter": "dwDesiredAccess"
       },
       {
@@ -1643,11 +1647,7 @@
         "parameter": "DesiredAccess"
       },
       {
-        "method": "MapViewOfFileEx",
-        "parameter": "dwDesiredAccess"
-      },
-      {
-        "method": "MapViewOfFile",
+        "method": "MapViewOfFileExNuma",
         "parameter": "dwDesiredAccess"
       }
     ]
