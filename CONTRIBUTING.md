@@ -13,6 +13,7 @@ You can contribute to this project by contributing to:
 * [Issues](https://github.com/microsoft/win32metadata/issues)
 * [Discussions](https://github.com/microsoft/win32metadata/discussions)
 * [Namespaces](#Namespaces)
+* [Enums](#Enums)
 * [Projections](docs/projections.md)
 
 When contributing PRs, [validate](#Validating-changes) your changes by rebuilding the winmd and then inspecting the reported winmd diff to ensure all changes were intentional:
@@ -51,6 +52,63 @@ If a header file doesn't cleanly map to one namespace, it should be associated w
 Note that when refactoring namespaces, [requiredNamespacesForNames.rsp](generation/emitter/requiredNamespacesForNames.rsp) will take precedence over any namespaces declared in the partitions, so make sure it doesn't contain remappings that will conflict with the expected factoring from the partitions. For example, if you create a new Registry partition to assign everything in winreg.h to Windows.Win32.System.Registry, but [requiredNamespacesForNames.rsp](generation/emitter/requiredNamespacesForNames.rsp) was previously updated to map Reg* APIs to a different namespace, you won't achieve the desired result unless you remove the Reg* entries from [requiredNamespacesForNames.rsp](generation/emitter/requiredNamespacesForNames.rsp).
 
 Other files that need to be kept in sync when refactoring namespaces include [manual](generation/emitter/manual) and [autotypes.rsp](generation/emitter/autoTypes.rsp), which manually define some types, as well as [header.txt](generation/scraper/header.txt), which adds using statements to generated .cs files to resolve cross-namespace references.
+
+## Enums
+
+Our tooling produces enums for loosely typed parameters and fields that expect a closed set of values. This improves discoverability and usability of the values in the projections.
+
+Enums are defined in [enums.json](generation/scraper/enums.json). This file provides a schema for extracting constants and macros from headers and emitting them in the winmd as an enum. Each object in the JSON array is an enum with the following properties:
+
+* `namespace` - Optional property indicating the namespace for the enum
+  * Note: If omitted, the enum will inherit the namespace of the first entry in `uses`
+* `type` - Optional property indicating the type for the enum
+  * Note: If omitted, the default value is `uint`
+* `name` -  The name of the enum
+* `flags` - Whether this is a flags enum
+* `autoPopulate` - For automatically defined enums, rules for how to populate them
+  * `header` - The header to scan
+  * `filter` - The constant or macro prefix to search for in `header`
+* `members` - For manually defined enums, a list of members
+  * `name` - The name of the enum member
+  * `value` - The value of the enum member
+* `uses` - A list of APIs where this enum is used
+  * `method` - The method name
+  * `parameter` - The parameter name of `method`
+  * `struct` - The struct name
+  * `field` - The field name of `struct`
+
+In the example below, a flags enum called `WNDCLASS_STYLES` is created with all of the `CS_` constants from `winuser.h`. This enum is then used by the style fields of all the `WNDCLASS` structs. Since no `namespace` or `type` are specified, the enum will live in the same namespace as `WNDCLASSA` and will be of type `uint`.
+
+```json
+{
+  "name": "WNDCLASS_STYLES",
+  "flags": true,
+  "autoPopulate": {
+    "filter": "CS_",
+    "header": "WinUser.h"
+  },
+  "members": [],
+  "uses": [
+    {
+      "struct": "WNDCLASSA",
+      "field": "style"
+    },
+    {
+      "struct": "WNDCLASSW",
+      "field": "style"
+    },
+    {
+      "struct": "WNDCLASSEXA",
+      "field": "style"
+    },
+    {
+      "struct": "WNDCLASSEXW",
+      "field": "style"
+    }
+  ]
+}
+```
+You can add new enums, modify existing enums, or apply enums to more APIs by modifying [enums.json](generation/scraper/enums.json).
 
 ## Validating changes
 
