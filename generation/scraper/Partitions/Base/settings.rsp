@@ -44,7 +44,6 @@ LPENCLAVE_ROUTINE
 _VIRTUAL_STORAGE_TYPE
 --traverse
 <IncludeRoot>/shared/devpkey.h
-<IncludeRoot>/um/codecapi.h
 <IncludeRoot>/shared/ntddstor.h
 <IncludeRoot>/um/dbt.h
 <IncludeRoot>/shared/devpropdef.h
