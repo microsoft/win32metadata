@@ -33,7 +33,6 @@ _LM_OWF_PASSWORD
 <IncludeRoot>/um/keycredmgr.h
 <IncludeRoot>/um/wincred.h
 <IncludeRoot>/um/NTSecAPI.h
-<IncludeRoot>/um/Npapi.h
 <IncludeRoot>/um/ntlsa.h
 <IncludeRoot>/um/winscard.h
 <IncludeRoot>/um/SubAuth.h

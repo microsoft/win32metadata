@@ -7,3 +7,4 @@
 #include <sdkddkver.h>
 
 #include <winnetwk.h>
+#include <Npapi.h>
