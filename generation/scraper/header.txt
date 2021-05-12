@@ -145,6 +145,7 @@ using Windows.Win32.System.OleAutomation;
 using Windows.Win32.System.ParentalControls;
 using Windows.Win32.System.PasswordManagement;
 using Windows.Win32.System.Performance;
+using Windows.Win32.System.Pipes;
 using Windows.Win32.System.Power;
 using Windows.Win32.System.ProcessStatus;
 using Windows.Win32.System.PropertiesSystem;

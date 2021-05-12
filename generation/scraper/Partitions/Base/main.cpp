@@ -59,7 +59,6 @@
 #include <process.h>
 #include <libloaderapi2.h>
 #include <fileapi.h>
-#include <namedpipeapi.h>
 #include <sysinfoapi.h>
 #include <heapapi.h>
 #include <atlthunk.h>

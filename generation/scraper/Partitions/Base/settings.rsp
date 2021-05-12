@@ -66,7 +66,6 @@ _VIRTUAL_STORAGE_TYPE
 <IncludeRoot>/um/verrsrc.h
 <IncludeRoot>/um/minwinbase.h
 <IncludeRoot>/um/storprop.h
-<IncludeRoot>/um/namedpipeapi.h
 <IncludeRoot>/um/atlthunk.h
 <IncludeRoot>/um/devpropdef.h
 <IncludeRoot>/um/dispatcherqueue.h
