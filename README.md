@@ -23,13 +23,14 @@ If you'd like to browse the metadata to see what we're emitting, [download the N
 
 ![ILSpy with winmd](./images/ILSpyWithWinmd.png)
 
-# General Strategy
+# Principles
 
-This project aims to expose as much of the Win32 API as possible. Some project goals include:
+Below are some principles that guide the metadata that we produce:
+
+* Provide the broadest API coverage possible
 * Keep the names of the original APIs, but express in metadata additional information that can make them easier to use. 
-* Convert non-specific types like uint that use constants into explicit enums to make calling APIs easier.
-* When pulling constants into new enums, avoid changing the original constant names. This allows developers to search online using the original constant names even though they are now part of an enum.
-* Express Win32 resources like HANDLEs and GDI objects as strongly-typed structs. The definition of these structs include how to dispose of the resources (like CloseHandle or DeleteObject). It is up to language projections to make use of this information in a language-specific way. For example, a C# projection could use SafeHandle objects for HANDLE and GDI objects.
+* Convert non-specific types like `uint` that use constants into explicit enums to improve usability and discoverability. Keep enum member names consistent with the original constant names to preserve SEO.
+* Express Win32 resources like `HANDLE` and `GDI` objects as strongly-typed structs. The definition of these structs include how to dispose of the resources (like `CloseHandle` or `DeleteObject`). It is up to language projections to make use of this information in a language-specific way. For example, a C# projection could use `SafeHandle` objects for `HANDLE` and `GDI` objects.
 
 # Architecture
 
@@ -113,60 +114,9 @@ The winmd emitter takes the C#-compilable source created by ClangSharp and emits
 
 The emitter also looks at SAL attributes that ClangSharp outputs for parameters and adds metadata attributes for const, in/out, COM out pointers, etc. It will also mark fields and parameters via attributes as null-terminated strings while preserving the original pointer type. It is up to consumers of the fields and parameters to interpret the metadata and turn them into language-appropriate types such as a string.
 
-## Changing field/parameter types
-
-The emitter allows for changing parameter or field types from what was found in the ClangSharp-created C#. For example, the Win32 API [CreateFileW](https://docs.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilew) includes some variables that are of type DWORD. It would be nice if the metadata could provide a more helpful type, such as a flags enum, that would help users know what values to use. This is how we change these parameters from DWORDs to an enums:
-
-* Add enum types to one of the manually-created C# files, or create a new C# file to be included by the emitter:
-
-    [generation/emitter/manual/FileSystem.manual.cs](generation/emitter/manual/FileSystem.manual.cs)
-
-        [Flags]
-        public enum FILE_SHARE_FLAGS
-        {
-            FILE_SHARE_NONE = 0,
-            FILE_SHARE_DELETE = 4,
-            FILE_SHARE_READ = 1,
-            FILE_SHARE_WRITE = 2,
-        }
-
-
-* Tell the emitter to change the type of the parameters in CreateFileW when it sees them:
-
-    [generation/emitter/remap.rsp](generation/emitter/remap.rsp)
-
-        CreateFileW:dwShareMode=FILE_SHARE_FLAGS
-        CreateFileW:dwDesiredAccess=FILE_ACCESS_FLAGS
-        CreateFileW:dwCreationDisposition=FILE_CREATE_FLAGS
-        CreateFileW:dwFlagsAndAttributes=FILE_FLAGS_AND_ATTRIBUTES
-
-## Forcing APIs and types into a particular namespace
-The partitions are meant to break up headers into namespaces. However, some headers like winuser.h have APIs and types that belong in multiple namespaces. The emitter takes a .rsp file that specifies namespaces for APIs and types and then puts them in the correct namespaces. These entries are only needed if a header needs to emit into multiple namespaces.
-
-[generation/emitter/requiredNamespacesForNames.rsp](generation/emitter/requiredNamespacesForNames.rsp)
-
-(Both functions come from winuser.h)
-
-    BeginPaint=Windows.Win32.Graphics.Gdi
-    CreateWindowExW=Windows.Win32.UI.WindowsAndMessaging
-
-# How to Generate the .winmd
-PowerShell Core is required to run the generation scripts. Open a PowerShell Core window and:
-
-1) [.\scripts\GenerateMetadataSource.ps1](.\scripts\GenerateMetadataSource.ps1): This loops over the directories under generation\Partitions, running ClangSharp for each one. There are base settings for all partitions: name remaps are found in [generation/scraper/baseRemap.rsp](generation/scraper/baseRemap.rsp) and other settings are found in [generation/scraper/baseSettings.rsp](generation/scraper/baseSettings.rsp). Each partitions folder contains a main.cpp, remap.rsp, and settings.rsp. ClangSharp writes C# files to generation\emitter\manual\generated (these files are not checked in).
-2) [.\scripts\BuildMetadataBin.ps1](.\scripts\BuildMetadataBin.ps1): This builds the emitter and points it at the [generation/emitter](generation/emitter) directory. Again, the "generated" subdirectory contains the files that ClangSharp created in step 1.
-3) Once the .winmd is built, run [.\scripts\TestMetadataBin.ps1](.\scripts\TestMetadataBin.ps1) which checks for regressions.
-
-...or if you can do it all in one shot in a PowerShell Core window:
-
-```winbatch
-.\DoAll.ps1
-```
-
 # Contributing
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md).
-
 
 # Trademarks
 
