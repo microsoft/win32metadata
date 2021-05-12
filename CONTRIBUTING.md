@@ -16,7 +16,9 @@ You can contribute to this project by contributing to:
 * [Enums](#Enums)
 * [Projections](docs/projections.md)
 
-When contributing PRs, [validate](#Validating-changes) your changes by rebuilding the winmd and then inspecting the reported winmd diff to ensure all changes were intentional:
+If you intend to contribute code changes, learn how to [set up your development environment](#Set-up-your-development-environment).
+
+When contributing code changes, [validate](#Validating-changes) your changes by rebuilding the winmd and then inspecting the reported winmd diff to ensure all changes were intentional:
 
 * [Full builds](#Full-builds)
 * [Incremental builds](#Incremental-builds)
@@ -25,6 +27,14 @@ When contributing PRs, [validate](#Validating-changes) your changes by rebuildin
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+## Set up your development environment
+
+* Install [Visual Studio Code](https://code.visualstudio.com/Download)
+* Install [PowerShell](https://aka.ms/powershell-release?tag=stable)
+* Install [ILSpy](https://github.com/icsharpcode/ILSpy/releases/latest)
+* Clone the [repo](https://github.com/microsoft/win32metadata.git)
+* Run a [full build](#Full-builds)
 
 ## Namespaces
 
