@@ -13,7 +13,6 @@ _D3DCOLORVALUE
 IDirectDraw
 IDirectDrawSurface
 IDirectDrawPalette
-_DDVIDEOPORTCONNECT
 _D3DMATRIX
 LoadPackagedLibrary
 --exclude
@@ -51,8 +50,6 @@ _VIRTUAL_STORAGE_TYPE
 <IncludeRoot>/um/d3dnthal.h
 <IncludeRoot>/um/d3dcaps.h
 <IncludeRoot>/um/d3dtypes.h
-<IncludeRoot>/um/dvp.h
-<IncludeRoot>/um/ddrawint.h
 <IncludeRoot>/um/winddi.h
 <IncludeRoot>/um/waasapitypes.h
 <IncludeRoot>/um/mcx.h

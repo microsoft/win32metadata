@@ -7,3 +7,5 @@
 #include <sdkddkver.h>
 
 #include <ddraw.h>
+#include <ddrawint.h>
+#include <dvp.h>

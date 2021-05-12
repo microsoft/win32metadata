@@ -9,5 +9,7 @@
 <IncludeRoot>/winrt
 --traverse
 <IncludeRoot>/um/ddraw.h
+<IncludeRoot>/um/ddrawint.h
+<IncludeRoot>/um/dvp.h
 --namespace
 Windows.Win32.Graphics.DirectDraw
