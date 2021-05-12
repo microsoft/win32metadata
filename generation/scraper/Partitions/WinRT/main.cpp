@@ -8,6 +8,7 @@
 
 //#define RO_NO_TEMPLATE_NAME
 
+#include <dispatcherqueue.h>
 #include <accountssettingspaneinterop.h>
 #include <appserviceinterop.h>
 #include <CastingInterop.h>
@@ -52,48 +53,3 @@
 #include <msajtransport.h>
 #include <alljoyn_c\AjAPI.h>
 #include <windows.devices.alljoyn.interop.h>
-
-/*
-#include <winnt.h>
-#include <winstring.h>
-//#include <activationregistration.h>
-//#include <asyncinfo.h>
-//#include <combaseapi.h>
-//#include <corewindow.h>
-//#include <eventtoken.h>
-//#include <hstring.h>
-#include <inputpaneinterop.h>
-//#include <inspectable.h>
-//#include <ivectorchangedeventargs.h>
-//#include <objidl.h>
-#include <playtomanagerinterop.h>
-#include <printmanagerinterop.h>
-#include <remotesystemadditionalinfo.h>
-//#include <restrictederrorinfo.h>
-//#include <roapi.h>
-//#include <robuffer.h>
-//#include <roerrorapi.h>
-//#include <rometadata.h>
-//#include <rometadataapi.h>
-//#include <rometadataresolution.h>
-//#include <roparameterizediid.h>
-//#include <roregistrationapi.h>
-#include <shcore.h>
-#include <shobjidl_core.h>
-//#include <webauthenticationcoremanagerinterop.h>
-//#include <windows.applicationmodel.core.h>
-//#include <windows.applicationmodel.h>
-//#include <windows.data.pdf.interop.h>
-//#include <windows.devices.display.core.interop.h>
-//#include <windows.foundation.collections.h>
-//#include <windows.foundation.h>
-#include <windows.graphics.capture.interop.h>
-#include <windows.graphics.directx.direct3d11.interop.h>
-#include <windows.graphics.effects.interop.h>
-#include <windows.graphics.imaging.interop.h>
-#include <windows.media.core.interop.h>
-#include <windows.ui.composition.interop.h>
-//#include <windows.ui.xaml.hosting.referencetracker.h>
-#include <windows.ui.xaml.media.dxinterop.h>
-//#include <windowsstoragecom.h>
-*/

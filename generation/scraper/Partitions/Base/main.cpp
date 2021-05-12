@@ -19,7 +19,6 @@
 
 #include <waasapi.h>
 #include <rtworkq.h>
-#include <dispatcherqueue.h>
 
 // End of area needing to be close to COM headers
 //

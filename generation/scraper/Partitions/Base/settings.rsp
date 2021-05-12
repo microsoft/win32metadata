@@ -65,7 +65,6 @@ _VIRTUAL_STORAGE_TYPE
 <IncludeRoot>/um/storprop.h
 <IncludeRoot>/um/atlthunk.h
 <IncludeRoot>/um/devpropdef.h
-<IncludeRoot>/um/dispatcherqueue.h
 <IncludeRoot>/shared/winerror.h
 <IncludeRoot>/shared/ntstatus.h
 --namespace

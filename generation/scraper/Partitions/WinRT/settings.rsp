@@ -21,6 +21,7 @@ ID2D1Factory
 <IncludeRoot>/um/accountssettingspaneinterop.h
 <IncludeRoot>/um/appserviceinterop.h
 <IncludeRoot>/um/CastingInterop.h
+<IncludeRoot>/um/dispatcherqueue.h
 <IncludeRoot>/um/dragdropinterop.h
 <IncludeRoot>/um/inputpaneinterop.h
 <IncludeRoot>/um/PlayToManagerInterop.h
@@ -53,10 +54,10 @@ ID2D1Factory
 <IncludeRoot>/winrt/roparameterizediid.h
 <IncludeRoot>/winrt/roregistrationapi.h
 <IncludeRoot>/winrt/shcore.h
+<IncludeRoot>/winrt/weakreference.h
 <IncludeRoot>/winrt/windows.graphics.effects.interop.h
 <IncludeRoot>/winrt/windows.graphics.interop.h
 <IncludeRoot>/winrt/windows.ui.composition.interop.h
 <IncludeRoot>/winrt/winstring.h
-<IncludeRoot>/winrt/weakreference.h
 --namespace
 Windows.Win32.System.WinRT
