@@ -129,6 +129,14 @@ function Invoke-RecompileMidlHeaders
 {
     if (!(Test-Path $recompiledIdlHeadersDir))
     {
+        $zipFile = "$scraperDir\RecompiledIdlHeaders.zip"
+        if (Test-Path $zipFile)
+        {
+            Write-Output "Unzipping recompiled headers from $zipFile..."
+            Expand-Archive $zipFile -DestinationPath $artifactsDir
+            return
+        }
+
         Create-Directory $recompiledIdlHeadersDir
 
         $cppPkgPath = Get-WinSdkCppPkgPath
@@ -147,6 +155,9 @@ function Invoke-RecompileMidlHeaders
 
         $sdkBinDir = "$cppPkgPath\c\bin\$sdkVersion\x86"
         & $PSScriptRoot\RecompileIdlFilesForScraping.ps1 -sdkBinDir $sdkBinDir -includeDir $recompiledIdlHeadersDir
+
+        Write-Output "Compressing headers to $zipFile..."
+        Compress-Archive -Path $recompiledIdlHeadersDir -DestinationPath $zipFile
     }
 }
 
