@@ -79,8 +79,13 @@ jobs:
       arguments: '-assemblyVersion $(MainNugetVersion) -arch crossarch -SkipBinary'
       pwsh: true
 
+  - publish: 'generation\scraper\obj\x64'
+    displayName: Publish x64 scraper obj assets
+    artifact: 'scraper_obj_x64'
+
   - publish: 'generation\emitter\generated\x64'
-    artifact: 'x64'
+    displayName: Publish x64 emitter assets
+    artifact: 'emitter_generated_x64'
 
 - job: scrape_x86
   displayName: "Scrape headers: x86"
@@ -109,7 +114,8 @@ jobs:
       pwsh: true
   
   - publish: 'generation\emitter\generated\x86'
-    artifact: 'x86'
+    displayName: Publish x86 emitter assets
+    artifact: 'emitter_generated_x86'
 
 - job: scrape_arm64
   displayName: "Scrape headers: arm64"
@@ -138,7 +144,8 @@ jobs:
       pwsh: true
   
   - publish: 'generation\emitter\generated\arm64'
-    artifact: 'arm64'
+    displayName: Publish arm64 emitter assets
+    artifact: 'emitter_generated_arm64'
 
 - job: build_winmd
   displayName: Build, test, sign, package winmd
@@ -170,18 +177,27 @@ jobs:
       version: '2.1.x'
 
   - task: DownloadPipelineArtifact@2
+    displayName: Download x64 scraper obj assets
     inputs:
-      artifact: 'x64'
+      artifact: 'scraper_obj_x64'
+      path: 'generation\scraper\obj\x64'
+
+  - task: DownloadPipelineArtifact@2
+    displayName: Download x64 emitter assets
+    inputs:
+      artifact: 'emitter_generated_x64'
       path: 'generation\emitter\generated\x64'
 
   - task: DownloadPipelineArtifact@2
+    displayName: Download x86 emitter assets
     inputs:
-      artifact: 'x86'
+      artifact: 'emitter_generated_x86'
       path: 'generation\emitter\generated\x86'
 
   - task: DownloadPipelineArtifact@2
+    displayName: Download arm64 emitter assets
     inputs:
-      artifact: 'arm64'
+      artifact: 'emitter_generated_arm64'
       path: 'generation\emitter\generated\arm64'
 
   - task: PowerShell@2
