@@ -62,14 +62,14 @@ namespace ClangSharpSourceToWinmd
             string archForAutoTypes = arch == "crossarch" ? "x64" : arch;
             NativeTypedefStructsCreator.CreateNativeTypedefsSourceFile(autoTypes, Path.Combine(sourceDirectory, $"generated\\{archForAutoTypes}\\autotypes.cs"));
 
-            Console.Write($"Compiling source files...");
+            Console.WriteLine($"Compiling source files...");
             System.Diagnostics.Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
 
             ClangSharpSourceCompilation clangSharpCompliation =
                 ClangSharpSourceCompilation.Create(
                     sourceDirectory, arch, interopFileName, remaps, enumAdditions, enumMakeFlags, typeImports, requiredNamespaces, reducePointerLevels, refs);
 
-            Console.Write("looking for errors...");
+            Console.WriteLine("Looking for compilation errors...");
             var diags = clangSharpCompliation.GetDiagnostics();
 
             watch.Stop();
@@ -99,9 +99,12 @@ namespace ClangSharpSourceToWinmd
 
             string timeTaken = watch.Elapsed.ToString("c");
 
-            Console.WriteLine($"took {timeTaken}");
+            watch.Reset();
+            watch.Start();
 
-            Console.WriteLine($"Emitting {outputFileName}...");
+            Console.WriteLine($"Compliation stage took {timeTaken}");
+
+            Console.WriteLine($"\r\nEmitting {outputFileName}...");
             var generator = 
                 ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
                     clangSharpCompliation, 
@@ -110,10 +113,15 @@ namespace ClangSharpSourceToWinmd
                     assemblyVersion, 
                     outputFileName);
 
+            watch.Stop();
+
             foreach (var diag in generator.GetDiagnostics())
             {
                 Console.WriteLine($"{diag.Severity}: {diag.Message}");
             }
+
+            timeTaken = watch.Elapsed.ToString("c");
+            Console.WriteLine($"Emit stage took {timeTaken}");
 
             return generator.WroteWinmd ? 0 : -1;
         }
