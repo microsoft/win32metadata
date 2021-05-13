@@ -4,9 +4,6 @@
     <UsingTask TaskName="MetadataTasks.ScrapeHeaders" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
     <UsingTask TaskName="MetadataTasks.EmitWinmd" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
 
-    <Target Name="Clean">
-    </Target>
-
     <Target Name="ScrapeAndEmit" AfterTargets="Build">
         <ScanLibs
             Libs="@(ImportLibs)"
