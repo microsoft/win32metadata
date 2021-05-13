@@ -168,6 +168,7 @@ using Windows.Win32.System.TaskScheduler;
 using Windows.Win32.System.Threading;
 using Windows.Win32.System.TpmBaseServices;
 using Windows.Win32.System.UpdateAgent;
+using Windows.Win32.System.UpdateAssessment;
 using Windows.Win32.System.UserAccessLogging;
 using Windows.Win32.System.WindowsProgramming;
 using Windows.Win32.System.WindowsSync;

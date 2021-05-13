@@ -34,7 +34,6 @@
 #include <sysinfoapi.h>
 #include <timezoneapi.h>
 #include <VersionHelpers.h>
-#include <waasapi.h>
 
 #include <ddrawi.h>
 #include <handleapi.h>

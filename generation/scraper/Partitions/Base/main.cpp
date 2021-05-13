@@ -17,7 +17,6 @@
 //
 // Begin of area needing to be close to COM headers
 
-#include <waasapi.h>
 #include <rtworkq.h>
 
 // End of area needing to be close to COM headers
@@ -75,7 +74,6 @@
 #include <realtimeapiset.h>
 #include <timezoneapi.h>
 #include <timeprov.h>
-#include <waasapitypes.h>
 
 #include <namespaceapi.h>
 #include <processtopologyapi.h>
