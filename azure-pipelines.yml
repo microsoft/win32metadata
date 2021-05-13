@@ -13,7 +13,6 @@ jobs:
 
   variables:
     System.Debug: true
-    OutputPackagesDir: $(Build.ArtifactStagingDirectory)\CreatedNugetPackages
     MainPatch: $[counter(variables['MainNugetVersion'], 0)]
     MSBuildSDKPatch: $[counter(variables['MSBuildSDKNugetVersion'], 0)]
     BuildNumberSuffix: $(Build.BuildNumber)
@@ -149,6 +148,7 @@ jobs:
   variables:
     MainNugetVersion: $[ dependencies.job_calc_nuget_version.outputs['echoVersion.MainNugetVersion']]
     MSBuildSDKNugetVersion: $[ dependencies.job_calc_nuget_version.outputs['echoVersion.MSBuildSDKNugetVersion']]
+    OutputPackagesDir: $(Build.ArtifactStagingDirectory)\CreatedNugetPackages
   pool:
     name: Package ES Standard Build
     demands:
