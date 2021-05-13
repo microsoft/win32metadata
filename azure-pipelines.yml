@@ -28,7 +28,7 @@ jobs:
       targetType: 'inline'
       script: |
         $ver = "${env:MainNugetVersion}"
-        $parts = ver.Split(".")
+        $parts = $ver.Split(".")
         $parts[2] = ${env:MainPatch}
         $nugetVer = [string]::Join(".", $parts) + "-preview"
         Write-Output "##vso[task.setvariable variable=MainNugetVersion;isOutput=true;]$nugetVer"
@@ -37,7 +37,7 @@ jobs:
         Write-Host "##vso[build.updatebuildnumber]$($nugetVer)_$($verSuffix)"
 
         $ver = "${env:MSBuildSDKNugetVersion}"
-        $parts = ver.Split(".")
+        $parts = $ver.Split(".")
         $parts[2] = ${env:MSBuildSDKPatch}
         $nugetVer = [string]::Join(".", $parts) + "-preview"
         Write-Output "##vso[task.setvariable variable=MSBuildSDKNugetVersion;isOutput=true;]$nugetVer"
