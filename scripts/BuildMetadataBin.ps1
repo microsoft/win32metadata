@@ -25,6 +25,8 @@ if (!$assemblyVersion)
     $assemblyVersion = $defaultWinSDKNugetVersion
 }
 
+$assemblyVersion = FixVersionForAssembly($assemblyVersion)
+
 Install-BuildTools
 
 & $PSScriptRoot\CreateRspsForFunctionPointerFixups.ps1 -arch $scraperArch
