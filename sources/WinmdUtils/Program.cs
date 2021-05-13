@@ -60,6 +60,7 @@ namespace WinmdUtilsProgram
 
             var showEmptyDelegates = new Command("showEmptyDelegates", "Show delegates that have no parameters.")
             {
+                new Option<FileInfo>("--winmd", "The winmd to inspect.") { IsRequired = true }.ExistingOnly(),
                 new Option<string>("--allowItem", "Item to allow and not flag as an error.", ArgumentArity.OneOrMore)
             };
 
