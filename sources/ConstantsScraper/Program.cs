@@ -107,7 +107,7 @@ namespace ConstantsScraperApp
             }
             catch (System.Exception e)
             {
-                context.Console.Out.Write($"Failed to scrape constants:\r\n{e.Message}\r\n");
+                context.Console.Out.Write($"Failed to scrape constants:\r\n{e.Message}\r\n{e.StackTrace}");
                 return -1;
             }
 
