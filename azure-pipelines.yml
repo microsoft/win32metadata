@@ -305,7 +305,7 @@ jobs:
       targetType: inline
       script: |
         cd $(Build.SourcesDirectory)\sources\msbuild\nuget
-        dotnet pack -p:NuspecProperties="$(MSBuildSDKNugetVersion)" -o "$(OutputPackagesDir)"
+        dotnet pack -p:NuspecProperties="version=$(MSBuildSDKNugetVersion)" -o "$(OutputPackagesDir)"
       errorActionPreference: 'continue'
       pwsh: true
 
