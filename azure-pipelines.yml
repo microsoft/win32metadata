@@ -14,8 +14,8 @@ jobs:
   variables:
     System.Debug: true
     OutputPackagesDir: $(Build.ArtifactStagingDirectory)\CreatedNugetPackages
-    MainPatch: $[counter(variables['MainNugetVersion'], 10)]
-    MSBuildSDKPatch: $[counter(variables['MSBuildSDKNugetVersion'], 10)]
+    MainPatch: $[counter(variables['MainNugetVersion'], 0)]
+    MSBuildSDKPatch: $[counter(variables['MSBuildSDKNugetVersion'], 0)]
     BuildNumberSuffix: $(Build.BuildNumber)
   
   steps:
@@ -29,7 +29,7 @@ jobs:
       script: |
         $ver = "${env:MainNugetVersion}"
         $parts = ver.Split(".")
-        $parts[3] = ${env:MainPatch}
+        $parts[2] = ${env:MainPatch}
         $nugetVer = [string]::Join(".", $parts) + "-preview"
         Write-Output "##vso[task.setvariable variable=MainNugetVersion;isOutput=true;]$nugetVer"
 
@@ -38,7 +38,7 @@ jobs:
 
         $ver = "${env:MSBuildSDKNugetVersion}"
         $parts = ver.Split(".")
-        $parts[3] = ${env:MSBuildSDKPatch}
+        $parts[2] = ${env:MSBuildSDKPatch}
         $nugetVer = [string]::Join(".", $parts) + "-preview"
         Write-Output "##vso[task.setvariable variable=MSBuildSDKNugetVersion;isOutput=true;]$nugetVer"
 
