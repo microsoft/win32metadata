@@ -69,7 +69,7 @@ jobs:
     displayName: GenerateMetadataSource.ps1 - x64
     inputs:
       filePath: 'scripts\GenerateMetadataSource.ps1'
-      arguments: '-arch x64 -publishNugetVersion $(MainNugetVersion)'
+      arguments: '-arch x64'
       errorActionPreference: 'continue'
       pwsh: true
   
@@ -77,7 +77,7 @@ jobs:
     displayName: Scrape constants
     inputs:
       filePath: 'scripts\BuildMetadataBin.ps1'
-      arguments: '-assemblyVersion $(PublishNugetVersion) -arch crossarch -SkipBinary'
+      arguments: '-assemblyVersion $(MainNugetVersion) -arch crossarch -SkipBinary'
       pwsh: true
 
   - publish: 'generation\emitter\generated\x64'
@@ -94,8 +94,6 @@ jobs:
   workspace:
     clean: all
   dependsOn: ['job_calc_nuget_version']
-  variables:
-    MainNugetVersion: $[ dependencies.job_calc_nuget_version.outputs['echoVersion.MainNugetVersion']]
   steps:
   - task: UseDotNet@2
     displayName: Use DotNet 3.x
@@ -107,7 +105,7 @@ jobs:
     displayName: GenerateMetadataSource.ps1 - x86
     inputs:
       filePath: 'scripts\GenerateMetadataSource.ps1'
-      arguments: '-arch x86 -publishNugetVersion $(MainNugetVersion)'
+      arguments: '-arch x86'
       errorActionPreference: 'continue'
       pwsh: true
   
@@ -125,8 +123,6 @@ jobs:
   workspace:
     clean: all
   dependsOn: ['job_calc_nuget_version']
-  variables:
-    PublishNugetVersion: $[ dependencies.job_calc_nuget_version.outputs['echoVersion.MainNugetVersion']]
   steps:
   - task: UseDotNet@2
     displayName: Use DotNet 3.x
@@ -138,7 +134,7 @@ jobs:
     displayName: GenerateMetadataSource.ps1 - arm64
     inputs:
       filePath: 'scripts\GenerateMetadataSource.ps1'
-      arguments: '-arch arm64 -publishNugetVersion $(MainNugetVersion)'
+      arguments: '-arch arm64'
       errorActionPreference: 'continue'
       pwsh: true
   
@@ -192,7 +188,7 @@ jobs:
     displayName: Build metadata binary
     inputs:
       filePath: 'scripts\BuildMetadataBin.ps1'
-      arguments: '-assemblyVersion $(PublishNugetVersion) -arch crossarch -SkipConstants'
+      arguments: '-assemblyVersion $(MainNugetVersion) -arch crossarch -SkipConstants'
       pwsh: true
   
   - publish: 'bin'
@@ -202,7 +198,7 @@ jobs:
     displayName: Test metadata binary
     inputs:
       filePath: 'scripts\TestWinmdBinary.ps1'
-      arguments: '-assemblyVersion $(PublishNugetVersion)'
+      arguments: '-assemblyVersion $(MainNugetVersion)'
       pwsh: true
 
   - task: EsrpCodeSigning@1

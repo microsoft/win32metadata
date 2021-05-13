@@ -2,9 +2,6 @@
 param
 (
     [string]
-    $version,
-
-    [string]
     $partitionName,
 
     [ValidateSet("crossarch", "x64", "x86", "arm64")]
@@ -38,7 +35,7 @@ if ($arch -eq "crossarch")
     Add-Member -InputObject $errObj -MemberType NoteProperty -Name ErrorCode -Value 0
 
     "x64", "x86", "arm64" | ForEach-Object -Parallel { 
-        $out = & $using:PSCommandPath -version $using:version -partitionName $using:partitionName -arch $_ -indent "`n  "
+        $out = & $using:PSCommandPath -partitionName $using:partitionName -arch $_ -indent "`n  "
         Write-Output "$out"
 
         if ($LastExitCode -lt 0)
@@ -67,12 +64,7 @@ else
 
 . "$PSScriptRoot\CommonUtils.ps1"
 
-if (!$version)
-{
-    $version = $defaultWinSDKNugetVersion
-}
-
-$libMappingOutputFileName = Get-LibMappingsFile $version
+$libMappingOutputFileName = Get-LibMappingsFile
 if (!(Test-Path $libMappingOutputFileName))
 {
     Write-Error "$libMappingOutputFileName not found. Please create it using Invoke-PrepLibMappingsFile in CommonUtils.ps1."
