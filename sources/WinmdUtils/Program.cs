@@ -22,68 +22,53 @@ namespace WinmdUtilsProgram
         {
             var showMissingImportsCommand = new Command("showMissingImports", "Show missing imports between two winmd files.")
             {
-                new Option(new[] { "--first" }, "The first winmd.") { Argument = new Argument<FileInfo>().ExistingOnly(), IsRequired = true },
-                new Option(new[] { "--second" }, "The second winmd.") { Argument = new Argument<FileInfo>().ExistingOnly(), IsRequired = true },
-                new Option(new[] { "--exclusions" }, "Exclusions files.") { Argument = new Argument<string>(), IsRequired = false },
+                new Option<FileInfo>("--first", "The first winmd.") { IsRequired = true }.ExistingOnly(),
+                new Option<FileInfo>("--second", "The second winmd.") { IsRequired = true }.ExistingOnly(),
+                new Option<string>("--exclusions", "Exclusions files."),
             };
 
             showMissingImportsCommand.Handler = CommandHandler.Create<FileInfo, FileInfo, string, IConsole>(ShowMissingImports);
 
             var compareCommand = new Command("compare", "Compare two winmd files.")
             {
-                new Option(new[] { "--first" }, "The first winmd.") { Argument = new Argument<FileInfo>().ExistingOnly(), IsRequired = true },
-                new Option(new[] { "--second" }, "The second winmd.") { Argument = new Argument<FileInfo>().ExistingOnly(), IsRequired = true },
+                new Option<FileInfo>("--first", "The first winmd.") { IsRequired = true }.ExistingOnly(),
+                new Option<FileInfo>("--second", "The second winmd.") { IsRequired = true }.ExistingOnly(),
             };
 
             compareCommand.Handler = CommandHandler.Create<FileInfo, FileInfo, string, IConsole>(CompareWinmds);
 
             var showDuplicateImports = new Command("showDuplicateImports", "Show duplicate imports in a single winmd files.")
             {
-                new Option(new[] { "--winmd" }, "The winmd to inspect.") { Argument = new Argument<FileInfo>().ExistingOnly(), IsRequired = true },
+                new Option<FileInfo>("--winmd", "The winmd to inspect.") { IsRequired = true }.ExistingOnly(),
             };
 
             showDuplicateImports.Handler = CommandHandler.Create<FileInfo, IConsole>(ShowDuplicateImports);
 
             var showDuplicateTypes = new Command("showDuplicateTypes", "Show duplicate types in a single winmd files.")
             {
-                new Option(new[] { "--winmd" }, "The winmd to inspect.") { Argument = new Argument<FileInfo>().ExistingOnly(), IsRequired = true },
+                new Option<FileInfo>("--winmd", "The winmd to inspect.") { IsRequired = true }.ExistingOnly(),
             };
 
             showDuplicateTypes.Handler = CommandHandler.Create<FileInfo, IConsole>(ShowDuplicateTypes);
 
             var showDuplicateConstants = new Command("showDuplicateConstants", "Show duplicate constants in a single winmd files.")
             {
-                new Option(new[] { "--winmd" }, "The winmd to inspect.") { Argument = new Argument<FileInfo>().ExistingOnly(), IsRequired = true },
+                new Option<FileInfo>("--winmd", "The winmd to inspect.") { IsRequired = true }.ExistingOnly(),
             };
 
             showDuplicateConstants.Handler = CommandHandler.Create<FileInfo, IConsole>(ShowDuplicateConstants);
 
             var showEmptyDelegates = new Command("showEmptyDelegates", "Show delegates that have no parameters.")
             {
-                new Option(new[] { "--winmd" }, "The winmd to inspect.") { Argument = new Argument<FileInfo>().ExistingOnly(), IsRequired = true },
-                new Option(new string[] { "--allowItem", "-i" }, "Item to allow and not flag as an error.")
-                {
-                    Argument = new Argument("<name>")
-                    {
-                        ArgumentType = typeof(string),
-                        Arity = ArgumentArity.OneOrMore,
-                    }
-                },
+                new Option<string>("--allowItem", "Item to allow and not flag as an error.", ArgumentArity.OneOrMore)
             };
 
             showEmptyDelegates.Handler = CommandHandler.Create<FileInfo, string[], IConsole>(ShowEmptyDelegates);
 
             var showPointersToDelegates = new Command("showPointersToDelegates", "Show pointers to delegates.")
             {
-                new Option(new[] { "--winmd" }, "The winmd to inspect.") { Argument = new Argument<FileInfo>().ExistingOnly(), IsRequired = true },
-                new Option(new string[] { "--allowItem", "-i" }, "Item to allow and not flag as an error.")
-                {
-                    Argument = new Argument("<name>")
-                    {
-                        ArgumentType = typeof(string),
-                        Arity = ArgumentArity.OneOrMore,
-                    }
-                },
+                new Option<FileInfo>("--winmd", "The winmd to inspect.") { IsRequired = true }.ExistingOnly(),
+                new Option<string>("--allowItem", "Item to allow and not flag as an error.", ArgumentArity.OneOrMore)
             };
 
             showPointersToDelegates.Handler = CommandHandler.Create<FileInfo, string[], IConsole>(ShowPointersToDelegates);
