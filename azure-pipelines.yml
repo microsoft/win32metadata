@@ -42,8 +42,8 @@ jobs:
         $nugetVer = [string]::Join(".", $parts) + "-preview"
         Write-Output "##vso[task.setvariable variable=MSBuildSDKNugetVersion;isOutput=true;]$nugetVer"
 
-  - script: echo var1 = $(echoVersion.MainNugetVersion), var2 = var1 = $(echoVersion.MSBuildSDKNugetVersion)
-    displayName: Echo publish nuget version
+  - script: echo MainNugetVersion = $(echoVersion.MainNugetVersion), MSBuildSDKNugetVersion = $(echoVersion.MSBuildSDKNugetVersion)
+    displayName: Echo publish nuget versions
 - job: scrape_x64
   displayName: "Scrape headers: x64"
   pool:
