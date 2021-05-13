@@ -73,8 +73,7 @@ namespace ConstantsScraperApp
                 }
             };
 
-            rootCommand.Handler = CommandHandler.Create(typeof(Program).GetMethod(nameof(Run)));
-
+            rootCommand.Handler = CommandHandler.Create<InvocationContext>(Run);
             return rootCommand.Invoke(args);
         }
 
@@ -97,7 +96,6 @@ namespace ConstantsScraperApp
             var withAttributes = ConvertValuePairsToDictionary(withAttributeValuePairs);
 
             var headerText = !string.IsNullOrEmpty(headerTextFile) ? File.ReadAllText(headerTextFile) : string.Empty;
-
             ScraperResults results;
             try
             {

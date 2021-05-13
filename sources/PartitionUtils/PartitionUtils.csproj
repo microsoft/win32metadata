@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PartitionUtilsLib\PartitionUtilsLib.csproj" />
+    <ProjectReference Include="..\MetadataUtils\MetadataUtils.csproj" />
   </ItemGroup>
 
 </Project>

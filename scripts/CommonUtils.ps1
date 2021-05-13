@@ -24,6 +24,22 @@ if (!(Test-Path -Path $binDir))
     New-Item -ItemType Directory -Force -Path $binDir | Out-Null
 }
 
+function FixVersionForAssembly([string] $version)
+{
+    $dash = $version.IndexOf('-')
+    if ($dash -ne -1)
+    {
+        $version = $version.Substring(0, $dash)
+    }
+
+    if ($version.Split('.').Length -eq 3)
+    {
+        $version += '.0'
+    }
+
+    return $version
+}
+
 function Create-Directory([string[]] $Path) 
 {
     if (!(Test-Path -Path $Path)) 
