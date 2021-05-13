@@ -198,7 +198,6 @@ jobs:
     displayName: Test metadata binary
     inputs:
       filePath: 'scripts\TestWinmdBinary.ps1'
-      arguments: '-assemblyVersion $(MainNugetVersion)'
       pwsh: true
 
   - task: EsrpCodeSigning@1

@@ -1,9 +1,6 @@
 param
 (
     [string]
-    $assemblyVersion,
-
-    [string]
     $winmdPath
 )
 
@@ -11,45 +8,12 @@ param
 
 Write-Output "`e[36m*** Running tests on .winmd`e[0m"
 
-if (!$assemblyVersion)
-{
-    $assemblyVersion = $defaultWinSDKNugetVersion
-}
-
 if (!$winmdPath)
 {
     $winmdPath = Get-OutputWinmdFileName -arch "crossarch"
 }
 
-function FindBestBaselineWinmd
-{
-    param([int] $buildNumber)
-
-    $bestDir = ""
-    $versionNames = get-childitem $PSScriptRoot\BaselineWinmd
-    foreach ($versionDir in $versionNames)
-    {
-        $baselineVersion = [int]($versionDir.Name.Split(".")[2])
-        if ($baselineVersion -gt $buildNumber)
-        {
-            break
-        }
-
-        $bestDir = $versionDir.Name
-    }
-
-    return $bestDir
-}
-
-$buildNumber = [int]($assemblyVersion.Split(".")[2])
-$baselineWinmdDir = FindBestBaselineWinmd $buildNumber
-if ($baselineWinmdDir -eq "")
-{
-    Write-Output "Failed to find a baseline winmd to compare against."
-    exit 0
-}
-
-$baselineWinmd = "$PSScriptRoot\BaselineWinmd\$baselineWinmdDir\Windows.Win32.winmd"
+$baselineWinmd = "$PSScriptRoot\BaselineWinmd\Windows.Win32.winmd"
 
 $winmdUtilsPath = "$sourcesDir\WinmdUtils"
 $winmdUtilsPathProj = "$winmdUtilsPath\WinmdUtils.csproj"
