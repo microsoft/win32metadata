@@ -16,7 +16,7 @@ using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using PartitionUtilsLib;
+using MetadataUtils;
 
 namespace ClangSharpSourceToWinmd
 {
@@ -28,6 +28,10 @@ namespace ClangSharpSourceToWinmd
         private const string InteropNamespace = "Windows.Win32.Interop";
         private const string ScannedSuffix = "__scanned__";
 
+        private const string SystemAssemblyName = "netstandard";
+        private const string Win32InteropAssemblyName = "Windows.Win32.Interop";
+        private const string Win32MetadataAssemblyName = "Windows.Win32.winmd";
+
         private static readonly Regex TypeImportRegex = new Regex(@"<(([^,]+),\s*Version=(\d+\.\d+\.\d+\.\d+),\s*Culture=([^,]+),\s*PublicKeyToken=([^>]+))>(\S+)");
         private static readonly Regex IsSpecialNameRegex = new Regex(@"^(?:get_|put_|add_|remove_|invoke_)");
         private static readonly Regex IsWcharRegex = new Regex(@"^(?:WCHAR|OLECHAR|wchar_t)");
@@ -36,8 +40,6 @@ namespace ClangSharpSourceToWinmd
 
         private MetadataBuilder metadataBuilder = new MetadataBuilder();
         private CSharpCompilation compilation;
-        private AssemblyReferenceHandle systemAssemblyRef;
-        private AssemblyReferenceHandle interopAssemblyRef;
         private ModuleDefinitionHandle moduleRef;
         private Dictionary<string, TypeReferenceHandle> namesToTypeRefHandles = new Dictionary<string, TypeReferenceHandle>();
         private Dictionary<string, TypeDefinitionHandle> namesToTypeDefHandles = new Dictionary<string, TypeDefinitionHandle>();
@@ -60,6 +62,7 @@ namespace ClangSharpSourceToWinmd
         private Dictionary<StructDeclarationSyntax, ISymbol> structNodesToInheritedSymbols = new Dictionary<StructDeclarationSyntax, ISymbol>();
         private Dictionary<string, FieldDeclarationSyntax> nameToGuidConstFields = new Dictionary<string, FieldDeclarationSyntax>();
         private HashSet<string> structNameWithGuids = new HashSet<string>();
+        private Dictionary<string, AssemblyReferenceHandle> assemblyNamesToRefs = new Dictionary<string, AssemblyReferenceHandle>();
 
         private ClangSharpSourceWinmdGenerator(
             CSharpCompilation compilation, 
@@ -135,10 +138,9 @@ namespace ClangSharpSourceToWinmd
 
             void InitReferences()
             {
-                const string SystemAssemblyName = "netstandard";
                 Version systemVersion = new Version(2, 1, 0, 0);
                 var netstandardAssembly = this.compilation.ReferencedAssemblyNames.ToList().Find(a => a.Name == SystemAssemblyName);
-                this.systemAssemblyRef =
+                var systemAssemblyRef =
                     metadataBuilder.AddAssemblyReference(
                         this.metadataBuilder.GetOrAddString(netstandardAssembly.Name),
                         netstandardAssembly.Version,
@@ -146,9 +148,10 @@ namespace ClangSharpSourceToWinmd
                         this.metadataBuilder.GetOrAddBlob(netstandardAssembly.PublicKeyToken),
                         default,
                         default);
+                this.assemblyNamesToRefHandles[SystemAssemblyName] = systemAssemblyRef;
 
-                var interopAssembly = this.compilation.ReferencedAssemblyNames.ToList().Find(a => a.Name.Contains("Interop"));
-                this.interopAssemblyRef =
+                var interopAssembly = this.compilation.ReferencedAssemblyNames.ToList().Find(a => a.Name == Win32InteropAssemblyName);
+                var interopAssemblyRef =
                     metadataBuilder.AddAssemblyReference(
                         this.metadataBuilder.GetOrAddString(InteropNamespace),
                         interopAssembly.Version,
@@ -156,6 +159,22 @@ namespace ClangSharpSourceToWinmd
                         this.metadataBuilder.GetOrAddBlob(interopAssembly.PublicKeyToken),
                         default,
                         default);
+                this.assemblyNamesToRefHandles[Win32InteropAssemblyName] = interopAssemblyRef;
+
+                var win32Assembly = this.compilation.ReferencedAssemblyNames.ToList().Find(a => a.Name == Win32MetadataAssemblyName);
+                if (win32Assembly != null)
+                {
+                    var win32MetadataAssemblyRef =
+                        metadataBuilder.AddAssemblyReference(
+                            this.metadataBuilder.GetOrAddString(win32Assembly.Name),
+                            win32Assembly.Version,
+                            default,
+                            this.metadataBuilder.GetOrAddBlob(win32Assembly.PublicKeyToken),
+                            default,
+                            default);
+
+                    this.assemblyNamesToRefHandles[Win32MetadataAssemblyName] = win32MetadataAssemblyRef;
+                }
             }
         }
 
@@ -235,6 +254,24 @@ namespace ClangSharpSourceToWinmd
             this.nameToGuidConstFields[guidFieldNode.Declaration.Variables.First().Identifier.ValueText] = guidFieldNode;
         }
 
+        private void CacheInterfaceInfo(InterfaceInfo interfaceInfo)
+        {
+            string fullName = $"{interfaceInfo.Namespace}.{interfaceInfo.Name}";
+            var symbol = this.compilation.GetTypeByMetadataName(fullName);
+            if (symbol != null)
+            {
+                this.interfaceSymbols.Add(symbol);
+                this.interfaceMethodCount[symbol] = interfaceInfo.Methods.Count();
+                if (!this.namesToInterfaceSymbols.TryGetValue(symbol.Name, out var symbols))
+                {
+                    symbols = new List<ISymbol>();
+                    this.namesToInterfaceSymbols[symbol.Name] = symbols;
+                }
+
+                symbols.Add(symbol);
+            }
+        }
+
         private void CacheInterfaceType(StructDeclarationSyntax interfaceNode)
         {
             this.interfaceStructs.Add(interfaceNode);
@@ -299,28 +336,82 @@ namespace ClangSharpSourceToWinmd
                 {
                     interfaceWalker.Visit(tree.GetRoot());
                 }
+
+                foreach (var r in this.compilation.References)
+                {
+                    if (r.Display.EndsWith("netstandard.dll"))
+                    {
+                        continue;
+                    }
+
+                    using (var winmd = MetadataUtils.WinmdUtils.LoadFromFile(r.Display))
+                    {
+                        foreach (var typeInfo in winmd.GetTypes())
+                        {
+                            if (typeInfo is MetadataUtils.InterfaceInfo interfaceInfo)
+                            {
+                                this.CacheInterfaceInfo(interfaceInfo);
+                            }
+                            else if (typeInfo is MetadataUtils.StructInfo)
+                            {
+                                var fullName = $"{typeInfo.Namespace}.{typeInfo.Name}";
+                                var typeSymbol = this.compilation.GetTypeByMetadataName(fullName);
+
+                                if (typeSymbol != null)
+                                {
+                                    this.nameToSymbols[typeInfo.Name] = typeSymbol;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
 
+        private EntityHandle GetTypeReference(ISymbol symbol)
+        {
+            EntityHandle scopeRef;
+
+            if (symbol.ContainingAssembly.Name == "?")
+            {
+                scopeRef = this.moduleRef;
+            }
+            else
+            {
+                this.assemblyNamesToRefHandles.TryGetValue(symbol.ContainingAssembly.Name, out var assemblyRef);
+
+                scopeRef = assemblyRef;
+            }
+
+            return GetTypeReference(symbol.ContainingNamespace.ToString(), symbol.Name, scopeRef);
+        }
+
         private EntityHandle GetTypeReference(string @namespace, string name)
+        {
+            return this.GetTypeReference(@namespace, name, default);
+        }
+
+        private EntityHandle GetTypeReference(string @namespace, string name, EntityHandle scopeRef)
         {
             name = FixArchSpecificName(name);
 
             string fullname = GetQualifiedName(@namespace, name);
             if (!this.namesToTypeRefHandles.TryGetValue(fullname, out var typeRef))
             {
-                EntityHandle scopeRef;
-                if (@namespace.StartsWith("System"))
+                if (scopeRef == default)
                 {
-                    scopeRef = this.systemAssemblyRef;
-                }
-                else if (@namespace.StartsWith(InteropNamespace))
-                {
-                    scopeRef = this.interopAssemblyRef;
-                }
-                else
-                {
-                    scopeRef = this.moduleRef;
+                    if (@namespace.StartsWith("System"))
+                    {
+                        scopeRef = this.assemblyNamesToRefHandles[SystemAssemblyName];
+                    }
+                    else if (@namespace.StartsWith(InteropNamespace))
+                    {
+                        scopeRef = this.assemblyNamesToRefHandles[Win32InteropAssemblyName];
+                    }
+                    else
+                    {
+                        scopeRef = this.moduleRef;
+                    }
                 }
 
                 int lastPlus = name.LastIndexOf('/');
@@ -450,7 +541,7 @@ namespace ClangSharpSourceToWinmd
             // Can be null if it's a non-IUnknown interface
             if (inheritsFromSymbol != null)
             {
-                var inheritsFromTypeDef = this.GetTypeReference(inheritsFromSymbol.ContainingNamespace.ToString(), inheritsFromSymbol.Name);
+                var inheritsFromTypeDef = this.GetTypeReference(inheritsFromSymbol);
                 metadataBuilder.AddInterfaceImplementation(destTypeDefHandle, inheritsFromTypeDef);
             }
 
@@ -1226,8 +1317,7 @@ namespace ClangSharpSourceToWinmd
                     $"\"{fullName}\" could not be resolved. Make sure this symbol is defined in the metadata source files or in a referenced assembly.");
             }
 
-            string nameWithoutNamespace = fullName.Substring(@namespace.Length + 1);
-            return this.GetTypeReference(@namespace, nameWithoutNamespace);
+            return this.GetTypeReference(typeSymbol);
         }
 
         /// <summary>

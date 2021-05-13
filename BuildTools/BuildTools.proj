@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.Build.Traversal/3.0.23">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\sources\msbuild\MetadataTasks\MetadataTasks.csproj"/>
+    <ProjectReference Include="..\sources\ConstantsScraper\ConstantsScraper.csproj"/>
+    <ProjectReference Include="..\sources\ClangSharpSourceToWinmd\ClangSharpSourceToWinmd.csproj"/>
+    <ProjectReference Include="..\sources\WinmdUtils\WinmdUtils.csproj"/>
+    <ProjectReference Include="..\sources\Win32MetadataInterop\Win32MetadataInterop.csproj"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.SDK.CPP" Version="10.0.19041.5" GeneratePathProperty="true"/>
+    <PackageReference Include="Microsoft.Windows.SDK.CPP.x64" Version="10.0.19041.5" GeneratePathProperty="true"/>
+  </ItemGroup>
+</Project>

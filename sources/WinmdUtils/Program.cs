@@ -12,8 +12,9 @@ using ICSharpCode.Decompiler;
 using ICSharpCode.Decompiler.Metadata;
 using ICSharpCode.Decompiler.TypeSystem;
 using Windows.Win32.Interop;
+using MetadataUtils;
 
-namespace WinmdUtils
+namespace WinmdUtilsProgram
 {
     class Program
     {
@@ -125,7 +126,7 @@ namespace WinmdUtils
             public string Type { get; }
         }
 
-        private static string GetPointerTypeToOneOfNamesInUseByParameter(HashSet<string> typeNames, MethodSignature<string> methodSignature, IEnumerable<ParameterInfo> parameterInfos)
+        private static string GetPointerTypeToOneOfNamesInUseByParameter(HashSet<string> typeNames, MethodSignature<string> methodSignature, IEnumerable<MetadataUtils.ParameterInfo> parameterInfos)
         {
             var parameters = parameterInfos.ToArray();
             for (int i = 0; i < methodSignature.ParameterTypes.Length; i++)
@@ -148,7 +149,7 @@ namespace WinmdUtils
             return null;
         }
 
-        private static IEnumerable<PointerInfo> PointerToOneOfNamesInUse(HashSet<string> typeNames, TypeInfo typeInfo)
+        private static IEnumerable<PointerInfo> PointerToOneOfNamesInUse(HashSet<string> typeNames, MetadataUtils.TypeInfo typeInfo)
         {
             if (typeInfo is StructInfo structInfo)
             {

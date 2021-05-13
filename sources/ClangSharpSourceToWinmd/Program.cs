@@ -34,6 +34,14 @@ namespace ClangSharpSourceToWinmd
                         Arity = ArgumentArity.OneOrMore,
                     }
                 },
+                new Option(new string[] { "--ref" }, "The path to a referenced binary.")
+                {
+                    Argument = new Argument("<name>")
+                    {
+                        ArgumentType = typeof(string),
+                        Arity = ArgumentArity.OneOrMore,
+                    }
+                },
                 new Option(new string[] { "--enum-Make-Flags" }, "Make an enum a Flags enum.")
                 {
                     Argument = new Argument("<name>")
@@ -95,10 +103,11 @@ namespace ClangSharpSourceToWinmd
             var typeImportValuePairs = context.ParseResult.ValueForOption<string[]>("typeImport");
             var requiredNamespaceValuePairs = context.ParseResult.ValueForOption<string[]>("requiredNamespaceForName");
             var autoTypes = context.ParseResult.ValueForOption<string[]>("autoTypes");
+            var refs = context.ParseResult.ValueForOption<string[]>("ref");
 
             var remaps = ConvertValuePairsToDictionary(remappedNameValuePairs);
             var enumAdditions = ConvertValuePairsToEnumAdditions(enumAdditionsNameValuePairs);
-            var reducePointerLevels = new HashSet<string>(reducePointerLevelPairs);
+            var reducePointerLevels = new HashSet<string>(reducePointerLevelPairs ?? (new string[0]));
             var typeImports = ConvertValuePairsToDictionary(typeImportValuePairs);
             var requiredNamespaces = ConvertValuePairsToDictionary(requiredNamespaceValuePairs);
 
@@ -113,7 +122,7 @@ namespace ClangSharpSourceToWinmd
 
             ClangSharpSourceCompilation clangSharpCompliation =
                 ClangSharpSourceCompilation.Create(
-                    sourceDirectory, arch, interopFileName, remaps, enumAdditions, enumMakeFlags, typeImports, requiredNamespaces, reducePointerLevels);
+                    sourceDirectory, arch, interopFileName, remaps, enumAdditions, enumMakeFlags, typeImports, requiredNamespaces, reducePointerLevels, refs);
 
             Console.Write("looking for errors...");
             var diags = clangSharpCompliation.GetDiagnostics();
