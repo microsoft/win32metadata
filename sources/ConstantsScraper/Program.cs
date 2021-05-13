@@ -15,62 +15,13 @@ namespace ConstantsScraperApp
                 new Option<string>(new[] { "--repoRoot" }, "The location of the repo.") { IsRequired = true },
                 new Option<string>(new[] { "--arch" }, () => { return "x64"; }, "The CPU architecture."),
                 new Option<string>(new[] { "--headerTextFile" }, "The text file to use as the intro text for written constants source files."),
-                new Option(new string[] { "--exclude" }, "A constant to exclude.")
-                {
-                    Argument = new Argument("<value>")
-                    {
-                        ArgumentType = typeof(string),
-                        Arity = ArgumentArity.OneOrMore,
-                    }
-                },
-                new Option(new string[] { "--requiredNamespaceForName", "-n" }, "The required namespace for a named item.")
-                {
-                    Argument = new Argument("<name>=<value>")
-                    {
-                        ArgumentType = typeof(string),
-                        Arity = ArgumentArity.OneOrMore,
-                    }
-                },
-                new Option(new string[] { "--rename", "-m" }, "Rename an enum.")
-                {
-                    Argument = new Argument("<name>=<value>")
-                    {
-                        ArgumentType = typeof(string),
-                        Arity = ArgumentArity.OneOrMore,
-                    }
-                },
-                new Option(new string[] { "--with-attribute" }, "Add an attribute to a constant.")
-                {
-                    Argument = new Argument("<name>=<value>")
-                    {
-                        ArgumentType = typeof(string),
-                        Arity = ArgumentArity.OneOrMore,
-                    }
-                },
-                new Option(new string[] { "--remap", "-r" }, "A field or parameter that should get remapped to a certain type.")
-                {
-                    Argument = new Argument("<name>=<value>")
-                    {
-                        ArgumentType = typeof(string),
-                        Arity = ArgumentArity.OneOrMore,
-                    }
-                },
-                new Option(new string[] { "--with-type", "-t" }, "For a type for a constant.")
-                {
-                    Argument = new Argument("<name>=<value>")
-                    {
-                        ArgumentType = typeof(string),
-                        Arity = ArgumentArity.OneOrMore,
-                    }
-                },
-                new Option(new string[] { "--enumsJson" }, "A json file with enum information.")
-                {
-                    Argument = new Argument("<value>")
-                    {
-                        ArgumentType = typeof(string),
-                        Arity = ArgumentArity.OneOrMore,
-                    }
-                }
+                new Option<string>("--exclude", "A constant to exclude.", ArgumentArity.OneOrMore),
+                new Option<string>("--requiredNamespaceForName", "The required namespace for a named item.", ArgumentArity.OneOrMore),
+                new Option<string>("--rename", "Rename an enum.", ArgumentArity.OneOrMore),
+                new Option<string>("--with-attribute", "Add an attribute to a constant.", ArgumentArity.OneOrMore),
+                new Option<string>("--remap", "A field or parameter that should get remapped to a certain type.", ArgumentArity.OneOrMore),
+                new Option<string>("--with-type", "For a type for a constant.", ArgumentArity.OneOrMore),
+                new Option<string>("--enumsJson", "A json file with enum information.", ArgumentArity.OneOrMore)
             };
 
             rootCommand.Handler = CommandHandler.Create<InvocationContext>(Run);
@@ -79,15 +30,15 @@ namespace ConstantsScraperApp
 
         public static int Run(InvocationContext context)
         {
-            string repoRoot = context.ParseResult.ValueForOption<string>("repoRoot");
-            string arch = context.ParseResult.ValueForOption<string>("arch");
-            var excludeItems = context.ParseResult.ValueForOption<string[]>("exclude");
-            var enumJsonFiles = context.ParseResult.ValueForOption<string[]>("enumsJson");
-            var headerTextFile = context.ParseResult.ValueForOption<string>("headerTextFile");
-            var requiredNamespaceValuePairs = context.ParseResult.ValueForOption<string[]>("requiredNamespaceForName");
-            var remappedNameValuePairs = context.ParseResult.ValueForOption<string[]>("remap");
-            var withTypeValuePairs = context.ParseResult.ValueForOption<string[]>("with-type");
-            var withAttributeValuePairs = context.ParseResult.ValueForOption<string[]>("with-attribute");
+            string repoRoot = context.ParseResult.ValueForOption<string>("--repoRoot");
+            string arch = context.ParseResult.ValueForOption<string>("--arch");
+            var excludeItems = context.ParseResult.ValueForOption<string[]>("--exclude");
+            var enumJsonFiles = context.ParseResult.ValueForOption<string[]>("--enumsJson");
+            var headerTextFile = context.ParseResult.ValueForOption<string>("--headerTextFile");
+            var requiredNamespaceValuePairs = context.ParseResult.ValueForOption<string[]>("--requiredNamespaceForName");
+            var remappedNameValuePairs = context.ParseResult.ValueForOption<string[]>("--remap");
+            var withTypeValuePairs = context.ParseResult.ValueForOption<string[]>("--with-type");
+            var withAttributeValuePairs = context.ParseResult.ValueForOption<string[]>("--with-attribute");
 
             var exclusionNames = new HashSet<string>(excludeItems ?? (new string[0]));
             var requiredNamespaces = ConvertValuePairsToDictionary(requiredNamespaceValuePairs);
