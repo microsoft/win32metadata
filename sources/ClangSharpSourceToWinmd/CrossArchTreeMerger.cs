@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Windows.Win32.Interop;
-using PartitionUtilsLib;
+using MetadataUtils;
 
 namespace ClangSharpSourceToWinmd
 {

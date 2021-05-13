@@ -2,9 +2,6 @@
 param
 (
     [string]
-    $artifactsDir = [System.IO.Path]::GetFullPath("$PSScriptRoot\..\artifacts"),
-
-    [string]
     $version,
 
     [string]
@@ -41,7 +38,7 @@ if ($arch -eq "crossarch")
     Add-Member -InputObject $errObj -MemberType NoteProperty -Name ErrorCode -Value 0
 
     "x64", "x86", "arm64" | ForEach-Object -Parallel { 
-        $out = & $using:PSCommandPath -artifactsDir $using:artifactsDir -version $using:version -partitionName $using:partitionName -arch $_ -indent "`n  "
+        $out = & $using:PSCommandPath -version $using:version -partitionName $using:partitionName -arch $_ -indent "`n  "
         Write-Output "$out"
 
         if ($LastExitCode -lt 0)
@@ -75,12 +72,10 @@ if (!$version)
     $version = $defaultWinSDKNugetVersion
 }
 
-$nugetDestPackagesDir = Join-Path -Path $artifactsDir "InstalledPackages"
-
 $libMappingOutputFileName = Get-LibMappingsFile $version
 if (!(Test-Path $libMappingOutputFileName))
 {
-    Write-Error "$libMappingOutputFileName not found. Please create it using CreateProcLibMappings.ps1."
+    Write-Error "$libMappingOutputFileName not found. Please create it using Invoke-PrepLibMappingsFile in CommonUtils.ps1."
     exit -1
 }
 
@@ -103,6 +98,7 @@ $withSetLastErrorRsp = "$baseGenerateDir\WithSetLastError.rsp"
 $supportedOSRsp = "$baseGenerateDir\supportedOS.rsp"
 
 $baseSettingsRsp = "$baseGenerateDir\baseSettings.rsp"
+$headerFile = "$baseGenerateDir\header.txt"
 $baseSettingsBitnessRsp = "$baseGenerateDir\baseSettings.$bitness.rsp"
 $baseSettingsArchRsp = "$baseGenerateDir\baseSettings.$arch.rsp"
 $partitionSettingsRsp = "$partitionGenerateDir\settings.rsp"
@@ -120,18 +116,18 @@ $fixedSettingsRsp = "$generationOutArtifactsDir\$partitionName.fixedSettings.rsp
 
 Copy-Item $partitionSettingsRsp -Destination $fixedSettingsRsp
 
-$includePath = (Get-ChildItem -Path "$nugetDestPackagesDir\Microsoft.Windows.SDK.CPP.$version\c\Include").FullName.Replace('\', '/')
+$includePath = $recompiledIdlHeadersDir
 $generatedSourceDir = "$rootDir\generation\emitter\generated\$arch"
 [hashtable]$textToReplaceTable = @{ "<IncludeRoot>" = $includePath; "<RepoRoot>" = $rootDir; "<PartitionName>" = $partitionName; "<PartitionDir>" = $partitionGenerateDir; "<GeneratedSourceDir>" = $generatedSourceDir}
 Replace-Text $fixedSettingsRsp $textToReplaceTable
 
 Write-Output "$($indent)$partitionName for $arch..."
-Write-Output "$($indent)$toolsDir\ClangSharpPInvokeGenerator.exe @$baseSettingsRsp @$baseSettingsBitnessRsp @$baseSettingsArchRsp @$withSetLastErrorRsp @$supportedOSRsp @$fixedSettingsRsp @$baseRemapRsp @$autoTypesRemapRsp @$functionPointerFixupsRsp @$libMappingOutputFileName > $generatorOutput"
+Write-Output "$($indent)ClangSharpPInvokeGenerator @$baseSettingsRsp --headerFile $headerFile @$baseSettingsBitnessRsp @$baseSettingsArchRsp @$withSetLastErrorRsp @$supportedOSRsp @$fixedSettingsRsp @$baseRemapRsp @$autoTypesRemapRsp @$functionPointerFixupsRsp @$libMappingOutputFileName > $generatorOutput"
 
-& $toolsDir\ClangSharpPInvokeGenerator.exe "@$baseSettingsRsp" "@$baseSettingsBitnessRsp" "@$baseSettingsArchRsp" "@$withSetLastErrorRsp" "@$supportedOSRsp" "@$fixedSettingsRsp" "@$baseRemapRsp" "@$autoTypesRemapRsp" "@$functionPointerFixupsRsp" "@$libMappingOutputFileName" > $generatorOutput
+& ClangSharpPInvokeGenerator "@$baseSettingsRsp" --headerFile "$headerFile" "@$baseSettingsBitnessRsp" "@$baseSettingsArchRsp" "@$withSetLastErrorRsp" "@$supportedOSRsp" "@$fixedSettingsRsp" "@$baseRemapRsp" "@$autoTypesRemapRsp" "@$functionPointerFixupsRsp" "@$libMappingOutputFileName" > $generatorOutput
 if ($LASTEXITCODE -lt 0)
 {
-    Write-Error "$($indent)ClangSharpPInvokeGenerator.exe failed, full output at $generatorOutput`:"
+    Write-Error "$($indent)ClangSharpPInvokeGenerator failed, full output at $generatorOutput`:"
     $errText = (Get-ChildItem $generatorOutput | select-string "Error: ") -join "`r`n"
     Write-Error $errText
 

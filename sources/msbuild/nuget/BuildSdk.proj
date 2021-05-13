@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <NoBuild>true</NoBuild>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <NuspecFile>BuildSdk.nuspec</NuspecFile>
+    <NuspecProperties></NuspecProperties>
+    <NuspecBasePath>..\..\..</NuspecBasePath>
+    <PackageType>MSBuildSdk</PackageType>
+  </PropertyGroup>
+</Project>

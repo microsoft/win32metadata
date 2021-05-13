@@ -8,7 +8,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using PartitionUtilsLib;
+using MetadataUtils;
 
 namespace ClangSharpSourceToWinmd
 {
@@ -34,7 +34,8 @@ namespace ClangSharpSourceToWinmd
             IEnumerable<string> enumsMakeFlags,
             Dictionary<string, string> typeImports,
             Dictionary<string, string> requiredNamespaces,
-            HashSet<string> reducePointerLevels)
+            HashSet<string> reducePointerLevels,
+            IEnumerable<string> addedRefs)
         {
             sourceDirectory = Path.GetFullPath(sourceDirectory);
 
@@ -47,6 +48,14 @@ namespace ClangSharpSourceToWinmd
             List<MetadataReference> refs = new List<MetadataReference>();
             refs.Add(MetadataReference.CreateFromFile(interopFileName));
             refs.Add(MetadataReference.CreateFromFile(netstandardPath));
+
+            if (addedRefs != null)
+            {
+                foreach (var r in addedRefs)
+                {
+                    refs.Add(MetadataReference.CreateFromFile(r));
+                }
+            }
 
             List<SyntaxTree> syntaxTrees = new List<SyntaxTree>();
             var sourceFiles = Directory.GetFiles(sourceDirectory, "*.cs", SearchOption.AllDirectories).Where(f => IsValidCsSourceFile(f, arch));

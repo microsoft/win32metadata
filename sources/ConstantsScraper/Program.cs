@@ -2,7 +2,7 @@
 using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.IO;
-using PartitionUtilsLib;
+using MetadataUtils;
 
 namespace ConstantsScraperApp
 {
@@ -90,7 +90,7 @@ namespace ConstantsScraperApp
             var withTypeValuePairs = context.ParseResult.ValueForOption<string[]>("with-type");
             var withAttributeValuePairs = context.ParseResult.ValueForOption<string[]>("with-attribute");
 
-            var exclusionNamesToPartitions = ConvertExclusionsToDictionary(excludeItems);
+            var exclusionNames = new HashSet<string>(excludeItems ?? (new string[0]));
             var requiredNamespaces = ConvertValuePairsToDictionary(requiredNamespaceValuePairs);
             var remaps = ConvertValuePairsToDictionary(remappedNameValuePairs);
             var withTypes = ConvertValuePairsToDictionary(withTypeValuePairs);
@@ -103,7 +103,7 @@ namespace ConstantsScraperApp
             {
                 results = 
                     ConstantsScraper.ScrapeConstants(
-                        repoRoot, arch, enumJsonFiles, headerText, exclusionNamesToPartitions, requiredNamespaces, remaps, withTypes, withAttributes);
+                        repoRoot, arch, enumJsonFiles, headerText, exclusionNames, requiredNamespaces, remaps, withTypes, withAttributes);
             }
             catch (System.Exception e)
             {
@@ -140,29 +140,6 @@ namespace ConstantsScraperApp
                         string value = item.Substring(firstEqual + 1);
                         ret[name] = value;
                     }
-                }
-            }
-
-            return ret;
-        }
-
-        private static Dictionary<string, string> ConvertExclusionsToDictionary(string[] items)
-        {
-            Dictionary<string, string> ret = new Dictionary<string, string>();
-
-            if (items != null)
-            {
-                foreach (var item in items)
-                {
-                    if (string.IsNullOrEmpty(item))
-                    {
-                        continue;
-                    }
-
-                    string[] parts = item.Split(',');
-                    string name = parts[0];
-                    string namespaces = parts.Length > 1 ? parts[1] : null;
-                    ret[name] = namespaces;
                 }
             }
 

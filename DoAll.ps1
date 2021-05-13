@@ -7,10 +7,18 @@ param
     $arch = "crossarch"
 )
 
+. .\scripts\CommonUtils.ps1
+
 if ($Clean.IsPresent)
 {
     .\scripts\CleanOutputs.ps1
 }
+
+Install-BuildTools
+
+# The libMapings.rsp is checked in as an optimization, but this
+# this will regenerate it if it's not there
+Invoke-PrepLibMappingsFile
 
 if ($arch -eq "crossarch")
 {

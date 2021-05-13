@@ -12,6 +12,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <OutputPath>..\..\bin\release</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PartitionUtilsLib\PartitionUtilsLib.csproj" />
+    <ProjectReference Include="..\MetadataUtils\MetadataUtils.csproj" />
     <ProjectReference Include="..\Win32MetadataInterop\Win32MetadataInterop.csproj" />
   </ItemGroup>
 

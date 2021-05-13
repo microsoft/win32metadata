@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "MetadataTasks": {
+      "commandName": "Executable",
+      "executablePath": "dotnet",
+      "commandLineArgs": "-d msbuild -t:Scrape -verbosity:n",
+      "workingDirectory": "D:\\repos\\win32metadata\\sources\\msbuild\\sample"
+    }
+  }
+}
