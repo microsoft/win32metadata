@@ -4,17 +4,11 @@ param
     [string]
     $arch = "x64",
 
-    [string]
-    $publishNugetVersion,
-
     [bool]
     $exitAfterFindVersion = $false,
 
     [bool]
-    $keepProcessingOnFailure = $false,
-
-    [string]
-    $patch = ""
+    $keepProcessingOnFailure = $false
 )
 
 . "$PSScriptRoot\CommonUtils.ps1"
@@ -22,44 +16,6 @@ param
 Write-Output "`e[36m*** Generating source files: $arch`e[0m"
 
 Install-BuildTools
-
-$version = $defaultWinSDKNugetVersion
-
-if (!$publishNugetVersion)
-{
-    $publishNugetVersion = $version
-
-    # patch is an auto-increment counter specific to the pipeline name.
-    # If it's set...
-    if ($patch -ne "")
-    {
-        # If this is a preview build, just append the patch to the end of the version
-        if ($version.Contains("-preview"))
-        {
-            $publishNugetVersion = "$version.$patch"
-        }
-        # If this isn't a preview build, we want to replace the build QFE with the patch
-        else
-        {
-            $buildParts = $version.Split("{.}")
-            $qfePart = $buildParts[3]
-            $qfeParts = $qfePart.Split("{-}")
-            $qfe = $qfeOverride
-            if ($qfeParts.Length -eq 2)
-            {
-                $qfeExtra = $qfeParts[1]
-                $qfe = "$qfe-$qfeExtra"
-            }
-        
-            $buildParts[3] = $patch
-    
-            $publishNugetVersion = [string]::Join(".", $buildParts)
-        }
-    }
-}
-
-# Write variable in the Azure DevOps pipeline for use in subsequent tasks
-Write-Output "##vso[task.setvariable variable=PrepOutput.NugetVersion;]$publishNugetVersion"
 
 if ($exitAfterFindVersion)
 {
@@ -97,8 +53,8 @@ $partitionNames | ForEach-Object -Parallel {
         continue
     }
 
-    $out1 = "`n$using:PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -arch $using:arch -version $using:version -partitionName $_..."
-    $out2 = & $using:PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -arch $using:arch -version $using:version -partitionName $_ -indent "`n  "
+    $out1 = "`n$using:PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -arch $using:arch -partitionName $_..."
+    $out2 = & $using:PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -arch $using:arch -partitionName $_ -indent "`n  "
     Write-Output "$out1$out2"
 
     if ($LastExitCode -lt 0)
