@@ -3365,7 +3365,7 @@
     ]
   },
   {
-    "type": "uint",
+    "type": "ushort",
     "name": "IMAGE_FILE_MACHINE",
     "autoPopulate": {
       "filter": "IMAGE_FILE_MACHINE_",
