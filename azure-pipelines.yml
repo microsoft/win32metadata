@@ -23,6 +23,16 @@ jobs:
       packageType: 'sdk'
       version: '3.x'
   
+  - task: DotNetCoreCLI@2  
+    inputs:
+      command: custom
+      custom: tool
+      arguments: install nbgv
+    displayName: Install NBGV tool
+
+  - script: nbgv cloud
+    displayName: Set build version
+
   - task: PowerShell@2
     displayName: GenerateMetadataSource.ps1 - x64
     inputs:
