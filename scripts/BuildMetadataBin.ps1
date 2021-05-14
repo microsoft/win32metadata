@@ -1,8 +1,5 @@
 param
 (
-    [string]
-    $assemblyVersion,
-
     [ValidateSet("crossarch", "x64", "x86", "arm64")]
     [string]
     $arch = "crossarch",
@@ -20,14 +17,9 @@ if ($arch -eq "crossarch")
 
 . "$PSScriptRoot\CommonUtils.ps1"
 
-if (!$assemblyVersion)
-{
-    $assemblyVersion = $defaultWinSDKNugetVersion
-}
-
-$assemblyVersion = FixVersionForAssembly($assemblyVersion)
-
 Install-BuildTools
+
+$assemblyVersion = nbgv get-version -v AssemblyVersion
 
 & $PSScriptRoot\CreateRspsForFunctionPointerFixups.ps1 -arch $scraperArch
 

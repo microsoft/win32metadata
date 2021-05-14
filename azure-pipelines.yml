@@ -5,44 +5,6 @@ trigger:
 pr: none
 
 jobs:
-- job: job_calc_nuget_version
-  displayName: Calculate published NuGet version
- 
-  pool:
-    name: Package ES Standard Build
-
-  variables:
-    System.Debug: true
-    MainPatch: $[counter(variables['MainNugetVersion'], 0)]
-    MSBuildSDKPatch: $[counter(variables['MSBuildSDKNugetVersion'], 0)]
-    BuildNumberSuffix: $(Build.BuildNumber)
-  
-  steps:
-  - checkout: none
-  - task: PowerShell@2
-    name: echoVersion
-    displayName: Update MainNugetVersion, set build number
-    inputs:
-      pwsh: true
-      targetType: 'inline'
-      script: |
-        $ver = "${env:MainNugetVersion}"
-        $parts = $ver.Split(".")
-        $parts[2] = ${env:MainPatch}
-        $nugetVer = [string]::Join(".", $parts) + "-preview"
-        Write-Output "##vso[task.setvariable variable=MainNugetVersion;isOutput=true;]$nugetVer"
-
-        $verSuffix = ${env:BuildNumberSuffix}
-        Write-Host "##vso[build.updatebuildnumber]$($nugetVer)_$($verSuffix)"
-
-        $ver = "${env:MSBuildSDKNugetVersion}"
-        $parts = $ver.Split(".")
-        $parts[2] = ${env:MSBuildSDKPatch}
-        $nugetVer = [string]::Join(".", $parts) + "-preview"
-        Write-Output "##vso[task.setvariable variable=MSBuildSDKNugetVersion;isOutput=true;]$nugetVer"
-
-  - script: echo MainNugetVersion = $(echoVersion.MainNugetVersion), MSBuildSDKNugetVersion = $(echoVersion.MSBuildSDKNugetVersion)
-    displayName: Echo publish nuget versions
 - job: scrape_x64
   displayName: "Scrape headers: x64"
   pool:
@@ -53,9 +15,6 @@ jobs:
     - visualstudio -equals C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\
   workspace:
     clean: all
-  dependsOn: ['job_calc_nuget_version']
-  variables:
-    MainNugetVersion: $[ dependencies.job_calc_nuget_version.outputs['echoVersion.MainNugetVersion'] ]
 
   steps:
   - task: UseDotNet@2
@@ -64,6 +23,17 @@ jobs:
       packageType: 'sdk'
       version: '3.x'
   
+  - task: PowerShell@2
+    displayName: Set build version
+    inputs:
+      targetType: inline
+      script: |
+        . .\scripts\CommonUtils.ps1
+        Install-DotNetTool nbgv
+        nbgv cloud
+      errorActionPreference: 'continue'
+      pwsh: true
+
   - task: PowerShell@2
     displayName: GenerateMetadataSource.ps1 - x64
     inputs:
@@ -76,7 +46,7 @@ jobs:
     displayName: Scrape constants
     inputs:
       filePath: 'scripts\BuildMetadataBin.ps1'
-      arguments: '-assemblyVersion $(MainNugetVersion) -arch crossarch -SkipBinary'
+      arguments: '-arch crossarch -SkipBinary'
       pwsh: true
 
   - publish: 'generation\scraper\obj\x64'
@@ -97,7 +67,6 @@ jobs:
     - visualstudio -equals C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\
   workspace:
     clean: all
-  dependsOn: ['job_calc_nuget_version']
   steps:
   - task: UseDotNet@2
     displayName: Use DotNet 3.x
@@ -127,7 +96,6 @@ jobs:
     - visualstudio -equals C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\
   workspace:
     clean: all
-  dependsOn: ['job_calc_nuget_version']
   steps:
   - task: UseDotNet@2
     displayName: Use DotNet 3.x
@@ -151,10 +119,8 @@ jobs:
   displayName: Build, test, sign, package winmd
   workspace:
     clean: all
-  dependsOn: ['job_calc_nuget_version','scrape_x64','scrape_x86','scrape_arm64']
+  dependsOn: ['scrape_x64','scrape_x86','scrape_arm64']
   variables:
-    MainNugetVersion: $[ dependencies.job_calc_nuget_version.outputs['echoVersion.MainNugetVersion']]
-    MSBuildSDKNugetVersion: $[ dependencies.job_calc_nuget_version.outputs['echoVersion.MSBuildSDKNugetVersion']]
     OutputPackagesDir: $(Build.ArtifactStagingDirectory)\CreatedNugetPackages
   pool:
     name: Package ES Standard Build
@@ -204,7 +170,7 @@ jobs:
     displayName: Build metadata binary
     inputs:
       filePath: 'scripts\BuildMetadataBin.ps1'
-      arguments: '-assemblyVersion $(MainNugetVersion) -arch crossarch -SkipConstants'
+      arguments: '-arch crossarch -SkipConstants'
       pwsh: true
   
   - publish: 'bin'
@@ -304,28 +270,23 @@ jobs:
       MaxRetryAttempts: '2'
       condition: eq(variables['SignFiles'], 'true')
   
-    # There's a problem on microsoft.visualstudio.com that requires the guid instead of NuGetCommand@2
-  - task: 333b11bd-d341-40d9-afcf-b32d5ce6f23b@2
-    displayName: Pack metadata nuget package
+  - task: PowerShell@2
+    displayName: Pack metadata package
     inputs:
-      command: 'pack'
-      packagesToPack: 'sources\nuget\Microsoft.Windows.SDK.Win32Metadata\Microsoft.Windows.SDK.Win32Metadata.nuspec'
-      packDestination: '$(OutputPackagesDir)'
-      versioningScheme: 'byEnvVar'
-      versionEnvVar: 'MainNugetVersion'
-      basePath: '$(Build.SourcesDirectory)'
-  
+      targetType: inline
+      script: |
+        cd $(Build.SourcesDirectory)\sources\nuget\Microsoft.Windows.SDK.Win32Metadata
+        dotnet pack -o "$(OutputPackagesDir)"
+      errorActionPreference: 'continue'
+      pwsh: true
+
   - task: PowerShell@2
     displayName: Pack MSBuildSDK package
     inputs:
       targetType: inline
       script: |
-        . $(Build.SourcesDirectory)\scripts\CommonUtils.ps1
-        [hashtable]$textToReplaceTable = @{ "10.0.19041.202-preview" = "$(MainNugetVersion)" }
-        Replace-Text "$(Build.SourcesDirectory)\sources\msbuild\sdk\sdk.props" $textToReplaceTable
-
         cd $(Build.SourcesDirectory)\sources\msbuild\nuget
-        dotnet pack -p:NuspecProperties="version=$(MSBuildSDKNugetVersion)" -o "$(OutputPackagesDir)"
+        dotnet pack -o "$(OutputPackagesDir)"
       errorActionPreference: 'continue'
       pwsh: true
 
