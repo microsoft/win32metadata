@@ -13,33 +13,36 @@ jobs:
 
   variables:
     System.Debug: true
-    OutputPackagesDir: $(Build.ArtifactStagingDirectory)\CreatedNugetPackages
-    Patch: $[counter(variables['DownloadNugetVersion'], 10)]
+    MainPatch: $[counter(variables['MainNugetVersion'], 0)]
+    MSBuildSDKPatch: $[counter(variables['MSBuildSDKNugetVersion'], 0)]
     BuildNumberSuffix: $(Build.BuildNumber)
   
   steps:
   - checkout: none
   - task: PowerShell@2
     name: echoVersion
-    displayName: Update PublishNugetVersion, set build number
+    displayName: Update MainNugetVersion, set build number
     inputs:
       pwsh: true
       targetType: 'inline'
       script: |
-        $nugetVer = ${env:PublishNugetVersion}
-        if (!$nugetVer)
-        {
-            $downloadVer = "${env:DownloadNugetVersion}"
-            $parts = $downloadVer.Split(".")
-            $parts[3] = ${env:Patch}
-            $nugetVer = [string]::Join(".", $parts) + "-preview"
-            Write-Output "##vso[task.setvariable variable=PublishNugetVersion;isOutput=true;]$nugetVer"
-        }
+        $ver = "${env:MainNugetVersion}"
+        $parts = $ver.Split(".")
+        $parts[2] = ${env:MainPatch}
+        $nugetVer = [string]::Join(".", $parts) + "-preview"
+        Write-Output "##vso[task.setvariable variable=MainNugetVersion;isOutput=true;]$nugetVer"
 
         $verSuffix = ${env:BuildNumberSuffix}
         Write-Host "##vso[build.updatebuildnumber]$($nugetVer)_$($verSuffix)"
-  - script: echo var = $(echoVersion.PublishNugetVersion)
-    displayName: Echo publish nuget version
+
+        $ver = "${env:MSBuildSDKNugetVersion}"
+        $parts = $ver.Split(".")
+        $parts[2] = ${env:MSBuildSDKPatch}
+        $nugetVer = [string]::Join(".", $parts) + "-preview"
+        Write-Output "##vso[task.setvariable variable=MSBuildSDKNugetVersion;isOutput=true;]$nugetVer"
+
+  - script: echo MainNugetVersion = $(echoVersion.MainNugetVersion), MSBuildSDKNugetVersion = $(echoVersion.MSBuildSDKNugetVersion)
+    displayName: Echo publish nuget versions
 - job: scrape_x64
   displayName: "Scrape headers: x64"
   pool:
@@ -52,7 +55,7 @@ jobs:
     clean: all
   dependsOn: ['job_calc_nuget_version']
   variables:
-    PublishNugetVersion: $[ dependencies.job_calc_nuget_version.outputs['echoVersion.PublishNugetVersion'] ]
+    MainNugetVersion: $[ dependencies.job_calc_nuget_version.outputs['echoVersion.MainNugetVersion'] ]
 
   steps:
   - task: UseDotNet@2
@@ -65,7 +68,7 @@ jobs:
     displayName: GenerateMetadataSource.ps1 - x64
     inputs:
       filePath: 'scripts\GenerateMetadataSource.ps1'
-      arguments: '-arch x64 -artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0 -downloadNugetVersion $(DownloadNugetVersion) -publishNugetVersion $(PublishNugetVersion)'
+      arguments: '-arch x64'
       errorActionPreference: 'continue'
       pwsh: true
   
@@ -73,11 +76,16 @@ jobs:
     displayName: Scrape constants
     inputs:
       filePath: 'scripts\BuildMetadataBin.ps1'
-      arguments: '-assemblyVersion $(PublishNugetVersion) -arch crossarch -SkipBinary'
+      arguments: '-assemblyVersion $(MainNugetVersion) -arch crossarch -SkipBinary'
       pwsh: true
 
+  - publish: 'generation\scraper\obj\x64'
+    displayName: Publish x64 scraper obj assets
+    artifact: 'scraper_obj_x64'
+
   - publish: 'generation\emitter\generated\x64'
-    artifact: 'x64'
+    displayName: Publish x64 emitter assets
+    artifact: 'emitter_generated_x64'
 
 - job: scrape_x86
   displayName: "Scrape headers: x86"
@@ -90,8 +98,6 @@ jobs:
   workspace:
     clean: all
   dependsOn: ['job_calc_nuget_version']
-  variables:
-    PublishNugetVersion: $[ dependencies.job_calc_nuget_version.outputs['echoVersion.PublishNugetVersion']]
   steps:
   - task: UseDotNet@2
     displayName: Use DotNet 3.x
@@ -103,12 +109,13 @@ jobs:
     displayName: GenerateMetadataSource.ps1 - x86
     inputs:
       filePath: 'scripts\GenerateMetadataSource.ps1'
-      arguments: '-arch x86 -artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0 -downloadNugetVersion $(DownloadNugetVersion) -publishNugetVersion $(PublishNugetVersion)'
+      arguments: '-arch x86'
       errorActionPreference: 'continue'
       pwsh: true
   
   - publish: 'generation\emitter\generated\x86'
-    artifact: 'x86'
+    displayName: Publish x86 emitter assets
+    artifact: 'emitter_generated_x86'
 
 - job: scrape_arm64
   displayName: "Scrape headers: arm64"
@@ -121,8 +128,6 @@ jobs:
   workspace:
     clean: all
   dependsOn: ['job_calc_nuget_version']
-  variables:
-    PublishNugetVersion: $[ dependencies.job_calc_nuget_version.outputs['echoVersion.PublishNugetVersion']]
   steps:
   - task: UseDotNet@2
     displayName: Use DotNet 3.x
@@ -134,12 +139,13 @@ jobs:
     displayName: GenerateMetadataSource.ps1 - arm64
     inputs:
       filePath: 'scripts\GenerateMetadataSource.ps1'
-      arguments: '-arch arm64 -artifactsDir $(Agent.BuildDirectory)\winsdk -downloadDefaultCppNugets 0 -downloadNugetVersion $(DownloadNugetVersion) -publishNugetVersion $(PublishNugetVersion)'
+      arguments: '-arch arm64'
       errorActionPreference: 'continue'
       pwsh: true
   
   - publish: 'generation\emitter\generated\arm64'
-    artifact: 'arm64'
+    displayName: Publish arm64 emitter assets
+    artifact: 'emitter_generated_arm64'
 
 - job: build_winmd
   displayName: Build, test, sign, package winmd
@@ -147,7 +153,9 @@ jobs:
     clean: all
   dependsOn: ['job_calc_nuget_version','scrape_x64','scrape_x86','scrape_arm64']
   variables:
-    PublishNugetVersion: $[ dependencies.job_calc_nuget_version.outputs['echoVersion.PublishNugetVersion']]
+    MainNugetVersion: $[ dependencies.job_calc_nuget_version.outputs['echoVersion.MainNugetVersion']]
+    MSBuildSDKNugetVersion: $[ dependencies.job_calc_nuget_version.outputs['echoVersion.MSBuildSDKNugetVersion']]
+    OutputPackagesDir: $(Build.ArtifactStagingDirectory)\CreatedNugetPackages
   pool:
     name: Package ES Standard Build
     demands:
@@ -169,25 +177,34 @@ jobs:
       version: '2.1.x'
 
   - task: DownloadPipelineArtifact@2
+    displayName: Download x64 scraper obj assets
     inputs:
-      artifact: 'x64'
+      artifact: 'scraper_obj_x64'
+      path: 'generation\scraper\obj\x64'
+
+  - task: DownloadPipelineArtifact@2
+    displayName: Download x64 emitter assets
+    inputs:
+      artifact: 'emitter_generated_x64'
       path: 'generation\emitter\generated\x64'
 
   - task: DownloadPipelineArtifact@2
+    displayName: Download x86 emitter assets
     inputs:
-      artifact: 'x86'
+      artifact: 'emitter_generated_x86'
       path: 'generation\emitter\generated\x86'
 
   - task: DownloadPipelineArtifact@2
+    displayName: Download arm64 emitter assets
     inputs:
-      artifact: 'arm64'
+      artifact: 'emitter_generated_arm64'
       path: 'generation\emitter\generated\arm64'
 
   - task: PowerShell@2
     displayName: Build metadata binary
     inputs:
       filePath: 'scripts\BuildMetadataBin.ps1'
-      arguments: '-assemblyVersion $(PublishNugetVersion) -arch crossarch -SkipConstants'
+      arguments: '-assemblyVersion $(MainNugetVersion) -arch crossarch -SkipConstants'
       pwsh: true
   
   - publish: 'bin'
@@ -197,15 +214,59 @@ jobs:
     displayName: Test metadata binary
     inputs:
       filePath: 'scripts\TestWinmdBinary.ps1'
-      arguments: '-assemblyVersion $(PublishNugetVersion)'
       pwsh: true
 
   - task: EsrpCodeSigning@1
-    displayName: 'Authenticode Sign Packaged Dlls'
+    displayName: 'Authenticode Sign Binaries in Metadata package'
     inputs:
       ConnectedServiceName: 'Undocked RegFree Signing Connection'
       FolderPath: '$(Build.SourcesDirectory)\bin'
       Pattern: '*.dll,*.winmd'
+      signConfigType: 'inlineSignParams'
+      inlineOperation: |
+        [
+          {
+            "keyCode": "CP-230012",
+            "operationSetCode": "SigntoolSign",
+            "parameters": [
+              {
+                "parameterName": "OpusName",
+                "parameterValue": "Microsoft"
+              },
+              {
+                "parameterName": "OpusInfo",
+                "parameterValue": "http://www.microsoft.com"
+              },
+              {
+                "parameterName": "PageHash",
+                "parameterValue": "/NPH"
+              },
+              {
+                "parameterName": "FileDigest",
+                "parameterValue": "/fd sha256"
+              },
+              {
+                "parameterName": "TimeStamp",
+                "parameterValue": "/tr \"http://rfc3161.gtm.corp.microsoft.com/TSS/HttpTspServer\" /td sha256"
+              }
+            ],
+            "toolName": "signtool.exe",
+            "toolVersion": "6.2.9304.0"
+          }
+        ]
+      SessionTimeout: '60'
+      MaxConcurrency: '50'
+      MaxRetryAttempts: '2'
+      condition: eq(variables['SignFiles'], 'true')
+  
+    # There's a problem on microsoft.visualstudio.com that requires the guid instead of NuGetCommand@2
+
+  - task: EsrpCodeSigning@1
+    displayName: 'Authenticode Sign Binaries in MSBuild SDK package'
+    inputs:
+      ConnectedServiceName: 'Undocked RegFree Signing Connection'
+      FolderPath: '$(Build.SourcesDirectory)\bin\release\netcoreapp3.1'
+      Pattern: 'ClangSharpSourceToWinmd.dll,ConstantsScraper.dll,MetadataTasks.dll,MetadataUtils.dll,WinmdUtils.dll'
       signConfigType: 'inlineSignParams'
       inlineOperation: |
         [
@@ -251,11 +312,25 @@ jobs:
       packagesToPack: 'sources\nuget\Microsoft.Windows.SDK.Win32Metadata\Microsoft.Windows.SDK.Win32Metadata.nuspec'
       packDestination: '$(OutputPackagesDir)'
       versioningScheme: 'byEnvVar'
-      versionEnvVar: 'PublishNugetVersion'
+      versionEnvVar: 'MainNugetVersion'
       basePath: '$(Build.SourcesDirectory)'
   
+  - task: PowerShell@2
+    displayName: Pack MSBuildSDK package
+    inputs:
+      targetType: inline
+      script: |
+        . $(Build.SourcesDirectory)\scripts\CommonUtils.ps1
+        [hashtable]$textToReplaceTable = @{ "10.0.19041.202-preview" = "$(MainNugetVersion)" }
+        Replace-Text "$(Build.SourcesDirectory)\sources\msbuild\sdk\sdk.props" $textToReplaceTable
+
+        cd $(Build.SourcesDirectory)\sources\msbuild\nuget
+        dotnet pack -p:NuspecProperties="version=$(MSBuildSDKNugetVersion)" -o "$(OutputPackagesDir)"
+      errorActionPreference: 'continue'
+      pwsh: true
+
   - task: EsrpCodeSigning@1
-    displayName: 'Sign NuGet Package'
+    displayName: 'Sign nuget packages'
     inputs:
       ConnectedServiceName: 'Undocked RegFree Signing Connection'
       FolderPath: '$(OutputPackagesDir)'

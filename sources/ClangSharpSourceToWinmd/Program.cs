@@ -13,67 +13,20 @@ namespace ClangSharpSourceToWinmd
         {
             var rootCommand = new RootCommand("Convert ClangSharp-generated code into metadata")
             {
-                new Option<string>(new[] { "--sourceDir", "-s" }, "The location of the source files.") { IsRequired = true },
-                new Option<string>(new[] { "--arch" }, () => { return "x64"; }, "The CPU architecture."),
-                new Option<string>(new[] { "--interopFileName", "-i" }, "The path to Windows.Win32.Interop.dll") { IsRequired = true },
-                new Option<string>(new[] { "--outputFileName", "-o" }, "The path to the .winmd to create") { IsRequired = true },
-                new Option<string>(new[] { "--version", "-v"}, description: "The version to use on the .winmd", getDefaultValue: () => "1.0.0.0"),
-                new Option(new string[] { "--remap", "-r" }, "A declaration name to be remapped to another name during binding generation.")
-                {
-                    Argument = new Argument("<name>=<value>")
-                    {
-                        ArgumentType = typeof(string),
-                        Arity = ArgumentArity.OneOrMore,
-                    }
-                },
-                new Option(new string[] { "--enum-Addition" }, "Add a member to an enum.")
-                {
-                    Argument = new Argument("<name>=<value>")
-                    {
-                        ArgumentType = typeof(string),
-                        Arity = ArgumentArity.OneOrMore,
-                    }
-                },
-                new Option(new string[] { "--enum-Make-Flags" }, "Make an enum a Flags enum.")
-                {
-                    Argument = new Argument("<name>")
-                    {
-                        ArgumentType = typeof(string),
-                        Arity = ArgumentArity.OneOrMore,
-                    }
-                },
-                new Option(new string[] { "--reducePointerLevel", "-p" }, "Reduce pointer level by one.")
-                {
-                    Argument = new Argument("<name>")
-                    {
-                        ArgumentType = typeof(string),
-                        Arity = ArgumentArity.OneOrMore,
-                    }
-                },
-                new Option(new string[] { "--typeImport", "-t" }, "A type to be imported from another assembly.")
-                {
-                    Argument = new Argument("<name>=<value>")
-                    {
-                        ArgumentType = typeof(string),
-                        Arity = ArgumentArity.OneOrMore,
-                    }
-                },
-                new Option(new string[] { "--requiredNamespaceForName", "-n" }, "The required namespace for a named item.")
-                {
-                    Argument = new Argument("<name>=<value>")
-                    {
-                        ArgumentType = typeof(string),
-                        Arity = ArgumentArity.OneOrMore,
-                    }
-                },
-                new Option(new string[] { "--autoTypes", "-a" }, "An auto-type to add to the metadata.")
-                {
-                    Argument = new Argument("<value>")
-                    {
-                        ArgumentType = typeof(string),
-                        Arity = ArgumentArity.OneOrMore,
-                    }
-                }
+                new Option<string>("--sourceDir", "The location of the source files.") { IsRequired = true },
+                new Option<string>("--arch", () => "x64", "The CPU architecture."),
+                new Option<string>("--interopFileName", "The path to Windows.Win32.Interop.dll") { IsRequired = true },
+                new Option<string>("--outputFileName", "The path to the .winmd to create") { IsRequired = true },
+                new Option<string>("--version", description: "The version to use on the .winmd", getDefaultValue: () => "1.0.0.0"),
+                new Option<string>("--remap", "A declaration name to be remapped to another name during binding generation.", ArgumentArity.OneOrMore),
+
+                new Option<string>("--enum-Addition", "Add a member to an enum.", ArgumentArity.OneOrMore),
+                new Option<string>("--ref", "The path to a referenced binary.", ArgumentArity.OneOrMore),
+                new Option<string>("--enum-Make-Flags", "Make an enum a Flags enum.", ArgumentArity.OneOrMore),
+                new Option<string>("--reducePointerLevel", "Reduce pointer level by one.", ArgumentArity.OneOrMore),
+                new Option<string>("--typeImport", "A type to be imported from another assembly.", ArgumentArity.OneOrMore),
+                new Option<string>("--requiredNamespaceForName", "The required namespace for a named item.", ArgumentArity.OneOrMore),
+                new Option<string>("--autoTypes", "An auto-type to add to the metadata.", ArgumentArity.OneOrMore)
             };
 
             rootCommand.Handler = CommandHandler.Create(typeof(Program).GetMethod(nameof(Run)));
@@ -83,22 +36,23 @@ namespace ClangSharpSourceToWinmd
 
         public static int Run(InvocationContext context)
         {
-            string sourceDirectory = context.ParseResult.ValueForOption<string>("sourceDir");
-            string arch = context.ParseResult.ValueForOption<string>("arch");
-            string interopFileName = context.ParseResult.ValueForOption<string>("interopFileName");
-            string outputFileName = context.ParseResult.ValueForOption<string>("outputFileName");
-            string version = context.ParseResult.ValueForOption<string>("version");
-            var remappedNameValuePairs = context.ParseResult.ValueForOption<string[]>("remap");
-            var enumAdditionsNameValuePairs = context.ParseResult.ValueForOption<string[]>("enum-Addition");
-            var enumMakeFlags = context.ParseResult.ValueForOption<string[]>("enum-Make-Flags");
-            var reducePointerLevelPairs = context.ParseResult.ValueForOption<string[]>("reducePointerLevel");
-            var typeImportValuePairs = context.ParseResult.ValueForOption<string[]>("typeImport");
-            var requiredNamespaceValuePairs = context.ParseResult.ValueForOption<string[]>("requiredNamespaceForName");
-            var autoTypes = context.ParseResult.ValueForOption<string[]>("autoTypes");
+            string sourceDirectory = context.ParseResult.ValueForOption<string>("--sourceDir");
+            string arch = context.ParseResult.ValueForOption<string>("--arch");
+            string interopFileName = context.ParseResult.ValueForOption<string>("--interopFileName");
+            string outputFileName = context.ParseResult.ValueForOption<string>("--outputFileName");
+            string version = context.ParseResult.ValueForOption<string>("--version");
+            var remappedNameValuePairs = context.ParseResult.ValueForOption<string[]>("--remap");
+            var enumAdditionsNameValuePairs = context.ParseResult.ValueForOption<string[]>("--enum-Addition");
+            var enumMakeFlags = context.ParseResult.ValueForOption<string[]>("--enum-Make-Flags");
+            var reducePointerLevelPairs = context.ParseResult.ValueForOption<string[]>("--reducePointerLevel");
+            var typeImportValuePairs = context.ParseResult.ValueForOption<string[]>("--typeImport");
+            var requiredNamespaceValuePairs = context.ParseResult.ValueForOption<string[]>("--requiredNamespaceForName");
+            var autoTypes = context.ParseResult.ValueForOption<string[]>("--autoTypes");
+            var refs = context.ParseResult.ValueForOption<string[]>("--ref");
 
             var remaps = ConvertValuePairsToDictionary(remappedNameValuePairs);
             var enumAdditions = ConvertValuePairsToEnumAdditions(enumAdditionsNameValuePairs);
-            var reducePointerLevels = new HashSet<string>(reducePointerLevelPairs);
+            var reducePointerLevels = new HashSet<string>(reducePointerLevelPairs ?? (new string[0]));
             var typeImports = ConvertValuePairsToDictionary(typeImportValuePairs);
             var requiredNamespaces = ConvertValuePairsToDictionary(requiredNamespaceValuePairs);
 
@@ -108,14 +62,14 @@ namespace ClangSharpSourceToWinmd
             string archForAutoTypes = arch == "crossarch" ? "x64" : arch;
             NativeTypedefStructsCreator.CreateNativeTypedefsSourceFile(autoTypes, Path.Combine(sourceDirectory, $"generated\\{archForAutoTypes}\\autotypes.cs"));
 
-            Console.Write($"Compiling source files...");
+            Console.WriteLine($"Compiling source files...");
             System.Diagnostics.Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
 
             ClangSharpSourceCompilation clangSharpCompliation =
                 ClangSharpSourceCompilation.Create(
-                    sourceDirectory, arch, interopFileName, remaps, enumAdditions, enumMakeFlags, typeImports, requiredNamespaces, reducePointerLevels);
+                    sourceDirectory, arch, interopFileName, remaps, enumAdditions, enumMakeFlags, typeImports, requiredNamespaces, reducePointerLevels, refs);
 
-            Console.Write("looking for errors...");
+            Console.WriteLine("Looking for compilation errors...");
             var diags = clangSharpCompliation.GetDiagnostics();
 
             watch.Stop();
@@ -145,9 +99,12 @@ namespace ClangSharpSourceToWinmd
 
             string timeTaken = watch.Elapsed.ToString("c");
 
-            Console.WriteLine($"took {timeTaken}");
+            watch.Reset();
+            watch.Start();
 
-            Console.WriteLine($"Emitting {outputFileName}...");
+            Console.WriteLine($"Compliation stage took {timeTaken}");
+
+            Console.WriteLine($"\r\nEmitting {outputFileName}...");
             var generator = 
                 ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
                     clangSharpCompliation, 
@@ -156,10 +113,15 @@ namespace ClangSharpSourceToWinmd
                     assemblyVersion, 
                     outputFileName);
 
+            watch.Stop();
+
             foreach (var diag in generator.GetDiagnostics())
             {
                 Console.WriteLine($"{diag.Severity}: {diag.Message}");
             }
+
+            timeTaken = watch.Elapsed.ToString("c");
+            Console.WriteLine($"Emit stage took {timeTaken}");
 
             return generator.WroteWinmd ? 0 : -1;
         }

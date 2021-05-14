@@ -10,7 +10,9 @@ $emitterDir = "$generationDir\emitter"
 $partitionsDir = "$scraperDir\Partitions"
 $sdkApiPath = "$rootDir\ext\sdk-api"
 $sdkGeneratedSourceDir = "$emitterDir\generated"
-$defaultArtifactsDir = "$rootDir\artifacts"
+$artifactsDir = "$scraperDir\obj"
+$recompiledIdlHeadersDir = "$artifactsDir\RecompiledIdlHeaders"
+$metadataToolsBin = "$binDir\release\netcoreapp3.1"
 
 if (Test-Path -Path $binDir -PathType leaf)
 {
@@ -20,6 +22,22 @@ if (Test-Path -Path $binDir -PathType leaf)
 if (!(Test-Path -Path $binDir))
 {
     New-Item -ItemType Directory -Force -Path $binDir | Out-Null
+}
+
+function FixVersionForAssembly([string] $version)
+{
+    $dash = $version.IndexOf('-')
+    if ($dash -ne -1)
+    {
+        $version = $version.Substring(0, $dash)
+    }
+
+    if ($version.Split('.').Length -eq 3)
+    {
+        $version += '.0'
+    }
+
+    return $version
 }
 
 function Create-Directory([string[]] $Path) 
@@ -38,6 +56,24 @@ function Remove-Directory([string[]] $Path)
     }
 }
 
+function Install-DotNetTool
+{
+    Param ([string] $Name, [string] $Version)
+
+    $installed = & dotnet tool list -g | select-string "$Name\s+$Version"
+    if (!$installed.Length)
+    {
+        & dotnet tool update --global $Name --version $Version
+    }
+}
+
+function Install-BuildTools
+{
+    Install-DotNetTool -Name ClangSharpPInvokeGenerator -Version 11.0.0-beta3
+
+    & dotnet build "$rootDir\BuildTools\BuildTools.proj" -c Release
+}
+
 function Replace-Text
 {
     Param ([string] $path, [hashtable] $items)
@@ -53,39 +89,75 @@ function Replace-Text
 
 function Get-LibMappingsFile
 {
-    param ([string]$version)
-
-    $libMappingOutputFileName = Join-Path -Path $scraperDir -ChildPath "$version.libMappings.rsp"
-
+    $libMappingOutputFileName = Join-Path -Path $scraperDir -ChildPath "libMappings.rsp"
+    
     return $libMappingOutputFileName
+}
+
+function Get-BuildToolsNugetProps
+{
+    [xml]$buildNugetProps = Get-Content -path "$rootDir\BuildTools\obj\BuildTools.proj.nuget.g.props"
+    return $buildNugetProps;
+}
+
+function Get-WinSdkCppPkgPath
+{
+    [xml]$buildNugetProps = Get-BuildToolsNugetProps
+    return $buildNugetProps.Project.PropertyGroup.PkgMicrosoft_Windows_SDK_CPP.InnerText;
+}
+
+function Get-WinSdkCppX64PkgPath
+{
+    [xml]$buildNugetProps = Get-BuildToolsNugetProps
+    return $buildNugetProps.Project.PropertyGroup.PkgMicrosoft_Windows_SDK_CPP_x64.InnerText;
 }
 
 function Invoke-PrepLibMappingsFile
 {
-    param ([string]$version)
+    $libMappingOutputFileName = Get-LibMappingsFile
+    if (!(Test-Path $libMappingOutputFileName))
+    {
+        Write-Output "Creating lib mapping file: $libMappingOutputFileName"
 
-    $libMappingOutputFileName = Get-LibMappingsFile $version
-    
-    Write-Output "Creating lib mapping file: $libMappingOutputFileName"
-    $libDirectory = "$nugetDestPackagesDir\Microsoft.Windows.SDK.CPP.x64.$version\c\um\x64"
-    & $PSScriptRoot\CreateProcLibMappingForAllLibs.ps1 -libDirectory $libDirectory -outputFileName $libMappingOutputFileName
+        $libPkgPath = Get-WinSdkCppX64PkgPath
+        $libDirectory = "$libPkgPath\c\um\x64"
+        & $PSScriptRoot\CreateProcLibMappingForAllLibs.ps1 -libDirectory $libDirectory -outputFileName $libMappingOutputFileName
+    }
 }
 
 function Invoke-RecompileMidlHeaders
 {
-    param ([string]$artifactsDir, [string]$version)
-
-    $headersDir = "$artifactsDir\output\$version\headers"
-
-    if (!(Test-Path $headersDir))
+    if (!(Test-Path $recompiledIdlHeadersDir))
     {
-        Write-Output "Recompiling midl headers with SAL annotations to $headersDir"
+        $zipFile = "$scraperDir\RecompiledIdlHeaders.zip"
+        if (Test-Path $zipFile)
+        {
+            Write-Output "Unzipping recompiled headers from $zipFile..."
+            Expand-Archive $zipFile -DestinationPath $artifactsDir
+            return
+        }
+
+        Create-Directory $recompiledIdlHeadersDir
+
+        $cppPkgPath = Get-WinSdkCppPkgPath
+        $sdkIncludeDir = (Get-ChildItem -Path "$cppPkgPath\c\include").FullName
+
+        Write-Output "Copying headers from Win SDK...$sdkIncludeDir to $recompiledIdlHeadersDir"
+        copy-item -Path "$sdkIncludeDir\um" -destination "$recompiledIdlHeadersDir" -recurse
+        copy-item -Path "$sdkIncludeDir\shared" -destination "$recompiledIdlHeadersDir" -recurse
+        copy-item -Path "$sdkIncludeDir\winrt" -destination "$recompiledIdlHeadersDir" -recurse
+
+        Write-Output "Recompiling midl headers with SAL annotations in $recompiledIdlHeadersDir"
         
+        $version = $defaultWinSDKNugetVersion
         $sdkParts = $version.Split('.')
         $sdkVersion = "$($sdkParts[0]).$($sdkParts[1]).$($sdkParts[2]).0"
-        $sdkIncludeDir = "$nugetDestPackagesDir\Microsoft.Windows.SDK.CPP.$version\c\include\$sdkVersion"
-        $sdkBinDir = "$nugetDestPackagesDir\Microsoft.Windows.SDK.CPP.$version\c\bin\$sdkVersion\x86"
-        & $PSScriptRoot\RecompileIdlFilesForScraping.ps1 -sdkBinDir $sdkBinDir -includeDir $sdkIncludeDir -outputDir $headersDir
+
+        $sdkBinDir = "$cppPkgPath\c\bin\$sdkVersion\x86"
+        & $PSScriptRoot\RecompileIdlFilesForScraping.ps1 -sdkBinDir $sdkBinDir -includeDir $recompiledIdlHeadersDir
+
+        Write-Output "Compressing headers to $zipFile..."
+        Compress-Archive -Path $recompiledIdlHeadersDir -DestinationPath $zipFile
     }
 }
 

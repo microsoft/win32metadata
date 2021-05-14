@@ -1,168 +1,32 @@
-
 param
 (
-    [string]
-    $artifactsDir,
-
     [ValidateSet("x64", "x86", "arm64")]
     [string]
     $arch = "x64",
-
-    [string]
-    $pipelineRunName,
-
-    [bool]
-    $downloadDefaultCppNugets = $true,
-
-    [string]
-    $downloadNugetVersion,
-
-    [string]
-    $publishNugetVersion,
 
     [bool]
     $exitAfterFindVersion = $false,
 
     [bool]
-    $keepProcessingOnFailure = $false,
-
-    [string]
-    $patch = ""
+    $keepProcessingOnFailure = $false
 )
 
 . "$PSScriptRoot\CommonUtils.ps1"
 
-if (!$pipelineRunName)
-{
-    $pipelineRunName = $defaultWinSDKNugetVersion.Substring("10.0.".Length) + ".branchname.date-time"
-}
-
-function Replace-Text
-{
-    Param ([string] $path, [hashtable] $items)
-
-    $content = Get-Content -path $path -Encoding UTF8
-    foreach ($key in $items.Keys)
-    {
-        $content = $content.Replace($key, $items[$key]);
-    }
-    
-    Set-Content -path $path -Encoding UTF8 -value $content
-}
-
-if (!$artifactsDir)
-{
-    $artifactsDir = $defaultArtifactsDir
-}
-
-Create-Directory $artifactsDir
-
 Write-Output "`e[36m*** Generating source files: $arch`e[0m"
 
-Write-Output "Making sure cpp NuGet packages are installed..."
-
-$nugetSrcPackagesDir = Join-Path -Path $artifactsDir "NuGetPackages"
-Create-Directory $nugetSrcPackagesDir
-
-$parts = $pipelineRunName.Split(".")
-$build = $parts[0]
-$qfe = $parts[1]
-$branch = $parts[2].Replace("_", "-")
-$potentialVersions = "10.0.$build.$qfe-preview.$branch", "10.0.$build.$qfe-preview", "10.0.$build.*"
-$version = $null
-
-if ($downloadNugetVersion)
-{
-    $potentialVersions = $downloadNugetVersion
-}
-
-foreach ($ver in $potentialVersions)
-{
-    Write-Output "Looking for: $nugetSrcPackagesDir\Microsoft.Windows.SDK.CPP.$ver.nupkg..."
-    $cppPkg = Get-ChildItem -path $nugetSrcPackagesDir -Include Microsoft.Windows.SDK.CPP.$ver.nupkg -recurse
-    if ($cppPkg)
-    {
-        $version = $cppPkg.BaseName.Substring("Microsoft.Windows.SDK.CPP.".Length)
-        Write-Output "Found NuGet package, version: $version"
-        break;
-    }
-}
-
-if (!$version)
-{
-    if ($downloadNugetVersion)
-    {
-        $version = $downloadNugetVersion
-    }
-    else 
-    {
-        if (!$downloadDefaultCppNugets)
-        {
-            Write-Output "Error: Couldn't find cpp package in $nugetSrcPackagesDir. Call script with downloadDefaultCppNugets = 1 to download default packages."
-            exit -1
-        }
-
-        $version = $defaultWinSDKNugetVersion
-    }
-
-    Write-Output "No cpp nuget package found at $nugetSrcPackagesDir. Downloading $version from nuget.org..."
-
-    Download-Nupkg "Microsoft.Windows.SDK.CPP" $version $nugetSrcPackagesDir
-}
-
-$nugetSrcPackagesDir = Join-Path -Path $artifactsDir "NuGetPackages"
-Create-Directory $nugetSrcPackagesDir
-
-if (!$publishNugetVersion)
-{
-    $publishNugetVersion = $version
-
-    # patch is an auto-increment counter specific to the pipeline name.
-    # If it's set...
-    if ($patch -ne "")
-    {
-        # If this is a preview build, just append the patch to the end of the version
-        if ($version.Contains("-preview"))
-        {
-            $publishNugetVersion = "$version.$patch"
-        }
-        # If this isn't a preview build, we want to replace the build QFE with the patch
-        else
-        {
-            $buildParts = $version.Split("{.}")
-            $qfePart = $buildParts[3]
-            $qfeParts = $qfePart.Split("{-}")
-            $qfe = $qfeOverride
-            if ($qfeParts.Length -eq 2)
-            {
-                $qfeExtra = $qfeParts[1]
-                $qfe = "$qfe-$qfeExtra"
-            }
-        
-            $buildParts[3] = $patch
-    
-            $publishNugetVersion = [string]::Join(".", $buildParts)
-        }
-    }
-}
-
-# Write variable in the Azure DevOps pipeline for use in subsequent tasks
-Write-Output "##vso[task.setvariable variable=PrepOutput.NugetVersion;]$publishNugetVersion"
+Install-BuildTools
 
 if ($exitAfterFindVersion)
 {
     exit 0
 }
 
-$nugetDestPackagesDir = Join-Path -Path $artifactsDir "InstalledPackages"
-Create-Directory $nugetDestPackagesDir
-& $toolsDir\nuget.exe install Microsoft.Windows.SDK.CPP -version $version -source $nugetSrcPackagesDir -OutputDirectory $nugetDestPackagesDir
-
 # Clean up directory where generated source files go
 Create-Directory $sdkGeneratedSourceDir
 Remove-Item "$sdkGeneratedSourceDir\*.cs"
 
-Invoke-RecompileMidlHeaders $artifactsDir $version
+Invoke-RecompileMidlHeaders
 
 & $PSScriptRoot\CreateScraperRspForAutoTypes.ps1 -arch $arch
 & $PSScriptRoot\CreateRspsForFunctionPointerFixups.ps1 -arch $arch
@@ -189,8 +53,8 @@ $partitionNames | ForEach-Object -Parallel {
         continue
     }
 
-    $out1 = "`n$using:PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -arch $using:arch -version $using:version -partitionName $_ -artifactsDir $using:artifactsDir..."
-    $out2 = & $using:PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -arch $using:arch -version $using:version -partitionName $_ -artifactsDir $using:artifactsDir -indent "`n  "
+    $out1 = "`n$using:PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -arch $using:arch -partitionName $_..."
+    $out2 = & $using:PSScriptRoot\GenerateMetadataSourceForPartition.ps1 -arch $using:arch -partitionName $_ -indent "`n  "
     Write-Output "$out1$out2"
 
     if ($LastExitCode -lt 0)

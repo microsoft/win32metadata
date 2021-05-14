@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.Build.NoTargets/3.0.4">
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Win32MetadataSdkRoot>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..'))</Win32MetadataSdkRoot>
+        <TaskBinDir Condition="'$(TaskBinDir)' == ''">$(Win32MetadataSdkRoot)\tools\netcoreapp3.1</TaskBinDir>
+        <ToolsBinDir Condition="'$(ToolsBinDir)' == ''">$(Win32MetadataSdkRoot)\tools\netcoreapp3.1</ToolsBinDir>
+        <LibToolsBinDir Condition="'$(LibToolsBinDir)' == ''">$(Win32MetadataSdkRoot)\tools</LibToolsBinDir>
+        <Win32MetadataScraperAssetsDir Condition="'$(Win32MetadataScraperAssetsDir)' == ''">$(Win32MetadataSdkRoot)\tools\assets</Win32MetadataScraperAssetsDir>
+        <Win32MetadataScraperGeneratedAssetsDir Condition="'$(Win32MetadataScraperGeneratedAssetsDir)' == ''">$(Win32MetadataSdkRoot)\tools\assets</Win32MetadataScraperGeneratedAssetsDir>
+        <Win32WinmdBinDir Condition="'$(Win32WinmdBinDir)' == ''">$(PkgMicrosoft_Windows_SDK_Win32Metadata)</Win32WinmdBinDir>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Windows.SDK.CPP" Version="10.0.19041.5" GeneratePathProperty="true"/>
+        <PackageReference Include="Microsoft.Windows.SDK.Win32Metadata" Version="10.0.19041.202-preview" GeneratePathProperty="true"/>
+    </ItemGroup>
+</Project>
