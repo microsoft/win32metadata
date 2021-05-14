@@ -1660,7 +1660,6 @@ OperationEnd=Windows.Win32.Storage.OperationRecorder
 OperationStart=Windows.Win32.Storage.OperationRecorder
 OPERATION_END_PARAMETERS=Windows.Win32.Storage.OperationRecorder
 OPERATION_START_PARAMETERS=Windows.Win32.Storage.OperationRecorder
-SetThreadPriority=Windows.Win32.System.SystemServices
 SHGetPropertyStoreForWindow=Windows.Win32.System.PropertiesSystem
 PifMgr_CloseProperties=Windows.Win32.System.PropertiesSystem
 PifMgr_GetProperties=Windows.Win32.System.PropertiesSystem
