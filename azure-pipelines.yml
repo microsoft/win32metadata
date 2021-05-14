@@ -321,11 +321,11 @@ jobs:
       targetType: inline
       script: |
         . $(Build.SourcesDirectory)\scripts\CommonUtils.ps1
-        [hashtable]$textToReplaceTable = @{ "10.0.19041.202-preview" = "$(MSBuildSDKNugetVersion)" }
+        [hashtable]$textToReplaceTable = @{ "10.0.19041.202-preview" = "$(MainNugetVersion)" }
         Replace-Text "$(Build.SourcesDirectory)\sources\msbuild\sdk\sdk.props" $textToReplaceTable
 
         cd $(Build.SourcesDirectory)\sources\msbuild\nuget
-        dotnet pack -p:NuspecProperties="version=$(MainNugetVersion)" -o "$(OutputPackagesDir)"
+        dotnet pack -p:NuspecProperties="version=$(MSBuildSDKNugetVersion)" -o "$(OutputPackagesDir)"
       errorActionPreference: 'continue'
       pwsh: true
 
