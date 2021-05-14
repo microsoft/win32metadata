@@ -9,5 +9,13 @@
 <IncludeRoot>/winrt
 --traverse
 <IncludeRoot>/um/wslapi.h
+--with-librarypath
+WslIsDistributionRegistered=Api-ms-win-wsl-api-l1-1-0
+WslRegisterDistribution=Api-ms-win-wsl-api-l1-1-0
+WslUnregisterDistribution=Api-ms-win-wsl-api-l1-1-0
+WslConfigureDistribution=Api-ms-win-wsl-api-l1-1-0
+WslGetDistributionConfiguration=Api-ms-win-wsl-api-l1-1-0
+WslLaunchInteractive=Api-ms-win-wsl-api-l1-1-0
+WslLaunch=Api-ms-win-wsl-api-l1-1-0
 --namespace
 Windows.Win32.System.SubsystemForLinux
