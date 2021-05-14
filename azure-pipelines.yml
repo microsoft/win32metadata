@@ -325,7 +325,7 @@ jobs:
         Replace-Text "$(Build.SourcesDirectory)\sources\msbuild\sdk\sdk.props" $textToReplaceTable
 
         cd $(Build.SourcesDirectory)\sources\msbuild\nuget
-        dotnet pack -p:NuspecProperties="version=$(MSBuildSDKNugetVersion)" -o "$(OutputPackagesDir)"
+        dotnet pack -p:NuspecProperties="version=$(MainNugetVersion)" -o "$(OutputPackagesDir)"
       errorActionPreference: 'continue'
       pwsh: true
 
