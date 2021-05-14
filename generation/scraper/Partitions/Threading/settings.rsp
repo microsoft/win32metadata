@@ -23,8 +23,10 @@ SignalObjectAndWait
 <IncludeRoot>/um/fibersapi.h
 <IncludeRoot>/um/interlockedapi.h
 <IncludeRoot>/um/processthreadsapi.h
+<IncludeRoot>/um/processtopologyapi.h
 <IncludeRoot>/um/rtworkq.h
 <IncludeRoot>/um/synchapi.h
+<IncludeRoot>/um/systemtopologyapi.h
 <IncludeRoot>/um/threadpoolapiset.h
 <IncludeRoot>/um/threadpoollegacyapiset.h
 --namespace
