@@ -15,3 +15,5 @@
 #include <ntddmou.h>
 #include <hidsdi.h>
 #include <hidpi.h>
+#include <hidclass.h>
+#include <hidusage.h>
