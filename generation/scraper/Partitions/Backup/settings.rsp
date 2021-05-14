@@ -43,7 +43,6 @@ EXCEPTION_ROUTINE
 ENCLAVE_TARGET_FUNCTION
 LPENCLAVE_TARGET_FUNCTION
 --traverse
-<IncludeRoot>/um/namespaceapi.h
 <IncludeRoot>/shared/windef.h
 <IncludeRoot>/shared/minwindef.h
 <IncludeRoot>/um/winnt.h

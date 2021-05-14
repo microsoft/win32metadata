@@ -22,6 +22,7 @@ SignalObjectAndWait
 <IncludeRoot>/um/avrt.h
 <IncludeRoot>/um/fibersapi.h
 <IncludeRoot>/um/interlockedapi.h
+<IncludeRoot>/um/namespaceapi.h
 <IncludeRoot>/um/processthreadsapi.h
 <IncludeRoot>/um/processtopologyapi.h
 <IncludeRoot>/um/rtworkq.h
