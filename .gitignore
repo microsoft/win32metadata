@@ -365,3 +365,4 @@ MigrationBackup/
 /generation/emitter/functionPointerFixups.generated.rsp
 /generation/scraper/functionPointerFixups.generated.rsp
 /generation/emitter/enumsMakeFlags.generated.rsp
+/sources/msbuild/sdk/sdk.stamped.props

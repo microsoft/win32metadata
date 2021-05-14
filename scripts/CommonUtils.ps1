@@ -24,22 +24,6 @@ if (!(Test-Path -Path $binDir))
     New-Item -ItemType Directory -Force -Path $binDir | Out-Null
 }
 
-function FixVersionForAssembly([string] $version)
-{
-    $dash = $version.IndexOf('-')
-    if ($dash -ne -1)
-    {
-        $version = $version.Substring(0, $dash)
-    }
-
-    if ($version.Split('.').Length -eq 3)
-    {
-        $version += '.0'
-    }
-
-    return $version
-}
-
 function Create-Directory([string[]] $Path) 
 {
     if (!(Test-Path -Path $Path)) 
@@ -58,18 +42,30 @@ function Remove-Directory([string[]] $Path)
 
 function Install-DotNetTool
 {
-    Param ([string] $Name, [string] $Version)
+    Param ([string] $Name, [string] $Version = '')
 
-    $installed = & dotnet tool list -g | select-string "$Name\s+$Version"
-    if (!$installed.Length)
+    if ($Version -ne '')
     {
-        & dotnet tool update --global $Name --version $Version
+        $installed = & dotnet tool list -g | select-string "$Name\s+$Version"
+        if (!$installed.Length)
+        {
+            & dotnet tool update --global $Name --version $Version
+        }
+    }
+    else
+    {
+        $installed = & dotnet tool list -g | select-string "$Name"
+        if (!$installed.Length)
+        {
+            & dotnet tool update --global $Name
+        }
     }
 }
 
 function Install-BuildTools
 {
     Install-DotNetTool -Name ClangSharpPInvokeGenerator -Version 11.0.0-beta3
+    Install-DotNetTool -Name nbgv
 
     & dotnet build "$rootDir\BuildTools\BuildTools.proj" -c Release
 }

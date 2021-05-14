@@ -14,11 +14,13 @@
     <tags>Win32 Metadata</tags>
     <licenseUrl>https://aka.ms/WinSDKLicenseURL</licenseUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
-    <iconUrl>https://aka.ms/WinSDKIconURL</iconUrl>
+    <icon>images\windows.png</icon>
     <repository type="git" url="https://github.com/microsoft/win32metadata.git" />
   </metadata>
 
   <files>
+      <file src="images\windows.png" target="images"/>
+
       <file src="bin\Windows.Win32.winmd" target=""/>
       <file src="bin\Windows.Win32.Interop.dll" target=""/>
       <file src="buildTransitive\**" target="buildTransitive\"/>

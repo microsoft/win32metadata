@@ -19,7 +19,7 @@
 
   <files>
       <file src="images\windows.png" target="images"/>
-      <file src="sources\msbuild\sdk\sdk.props" target="sdk"/>
+      <file src="sources\msbuild\sdk\sdk.stamped.props" target="sdk\sdk.props"/>
       <file src="sources\msbuild\sdk\sdk.targets" target="sdk"/>
 
       <file src="tools\dumpbin.exe" target="tools"/>
