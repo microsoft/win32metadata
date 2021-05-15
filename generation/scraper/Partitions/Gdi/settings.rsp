@@ -8,7 +8,6 @@
 <IncludeRoot>/um
 <IncludeRoot>/winrt
 --traverse
-<IncludeRoot>/um/mxdc.h
 <IncludeRoot>/um/wingdi.h
 <IncludeRoot>/um/mmsystem.h
 <IncludeRoot>/um/fontsub.h

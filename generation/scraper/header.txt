@@ -44,6 +44,7 @@ using Windows.Win32.Graphics.Gdi;
 using Windows.Win32.Graphics.Hlsl;
 using Windows.Win32.Graphics.Imaging;
 using Windows.Win32.Graphics.OpenGL;
+using Windows.Win32.Graphics.Printing;
 using Windows.Win32.Management.MobileDeviceManagementRegistration;
 using Windows.Win32.Media.Audio.CoreAudio;
 using Windows.Win32.Media.Audio.DirectMusic;
