@@ -8,12 +8,9 @@
 <IncludeRoot>/um
 <IncludeRoot>/winrt
 --traverse
-<IncludeRoot>/um/xpsprint.h
+<IncludeRoot>/um/xpsdigitalsignature.h
 <IncludeRoot>/um/xpsobjectmodel_1.h
 <IncludeRoot>/um/xpsobjectmodel_2.h
 <IncludeRoot>/um/xpsobjectmodel.h
-<IncludeRoot>/um/xpsdigitalsignature.h
-<IncludeRoot>/um/DocumentTarget.h
-<IncludeRoot>/um/prntvpt.h
 --namespace
 Windows.Win32.Storage.Xps

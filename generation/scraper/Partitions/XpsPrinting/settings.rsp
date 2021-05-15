@@ -1,0 +1,14 @@
+--file
+<PartitionDir>\main.cpp
+--output
+<GeneratedSourceDir>\<PartitionName>.cs
+--include-directory
+<RepoRoot>\generation\scraper
+<IncludeRoot>/shared
+<IncludeRoot>/um
+<IncludeRoot>/winrt
+--traverse
+<IncludeRoot>/um/DocumentTarget.h
+<IncludeRoot>/um/xpsprint.h
+--namespace
+Windows.Win32.Storage.Xps.Printing
