@@ -32,7 +32,10 @@ namespace Windows.Win32.Security
         TOKEN_ADJUST_SESSIONID = (0x0100),
         TOKEN_ALL_ACCESS = (Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.STANDARD_RIGHTS_REQUIRED | TOKEN_ASSIGN_PRIMARY | TOKEN_DUPLICATE | TOKEN_IMPERSONATE | TOKEN_QUERY | TOKEN_QUERY_SOURCE | TOKEN_ADJUST_PRIVILEGES | TOKEN_ADJUST_GROUPS |TOKEN_ADJUST_DEFAULT)
     }
+}
 
+namespace Windows.Win32.Security.Cryptography.Core
+{
     public static unsafe partial class Apis
     {
         // Has to be int so it can be used in a shift

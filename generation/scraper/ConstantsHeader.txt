@@ -2,6 +2,16 @@ using System;
 using Windows.Win32.Interop;
 using Windows.Win32.System.PropertiesSystem; // For PROPERTYKEY
 using Windows.Win32.System.SystemServices;
+using Windows.Win32.Security;
+using Windows.Win32.Security.Authentication.Identity.Core;
+using Windows.Win32.Security.Authentication.Identity.Provider;
+using Windows.Win32.Security.Authorization;
+using Windows.Win32.Security.Credentials;
+using Windows.Win32.Security.Cryptography.Certificates;
+using Windows.Win32.Security.Cryptography.Core;
+using Windows.Win32.Security.EnterpriseData;
+using Windows.Win32.Security.ExtensibleAuthenticationProtocol;
+using Windows.Win32.Security.Isolation;
 using static Windows.Win32.System.Diagnostics.Debug.WIN32_ERROR;
 using static Windows.Win32.System.SystemServices.Apis; // Various constants
 using static Windows.Win32.Media.Multimedia.Apis; // Various constants
