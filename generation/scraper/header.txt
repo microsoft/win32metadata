@@ -173,6 +173,7 @@ using Windows.Win32.System.SettingsManagementInfrastructure;
 using Windows.Win32.System.SetupAndMigration;
 using Windows.Win32.System.StationsAndDesktops;
 using Windows.Win32.System.SubsystemForLinux;
+using Windows.Win32.System.SystemInformation;
 using Windows.Win32.System.SystemServices;
 using Windows.Win32.System.TaskScheduler;
 using Windows.Win32.System.Threading;

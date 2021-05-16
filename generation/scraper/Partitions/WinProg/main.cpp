@@ -31,9 +31,7 @@
 #include <dciman.h>
 #include <processenv.h>
 #include <processthreadsapi.h>
-#include <sysinfoapi.h>
 #include <timezoneapi.h>
-#include <VersionHelpers.h>
 
 #include <ddrawi.h>
 #include <handleapi.h>

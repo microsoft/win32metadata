@@ -495,6 +495,7 @@ lstrcpynW=Windows.Win32.Globalization
 lstrcpyW=Windows.Win32.Globalization
 lstrlenA=Windows.Win32.Globalization
 lstrlenW=Windows.Win32.Globalization
+MEMORYSTATUS=Windows.Win32.System.SystemInformation
 MoveFileA=Windows.Win32.Storage.FileSystem
 MoveFileExA=Windows.Win32.Storage.FileSystem
 MoveFileExW=Windows.Win32.Storage.FileSystem
@@ -1126,10 +1127,17 @@ FILE_ID_128=Windows.Win32.Storage.FileSystem
 FILE_NOTIFY_EXTENDED_INFORMATION=Windows.Win32.Storage.FileSystem
 FILE_NOTIFY_INFORMATION=Windows.Win32.Storage.FileSystem
 FLOATING_SAVE_AREA=Windows.Win32.System.Kernel
+LOGICAL_PROCESSOR_RELATIONSHIP=Windows.Win32.System.SystemInformation
+OSVERSIONINFOA=Windows.Win32.System.SystemInformation
+OSVERSIONINFOEXA=Windows.Win32.System.SystemInformation
+OSVERSIONINFOEXW=Windows.Win32.System.SystemInformation
+OSVERSIONINFOW=Windows.Win32.System.SystemInformation
 REPARSE_GUID_DATA_BUFFER=Windows.Win32.Storage.FileSystem
 SINGLE_LIST_ENTRY=Windows.Win32.System.Kernel
 SLIST_ENTRY=Windows.Win32.System.Kernel
 SLIST_HEADER=Windows.Win32.System.Kernel
+SYSTEM_LOGICAL_PROCESSOR_INFORMATION=Windows.Win32.System.SystemInformation
+SYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION=Windows.Win32.System.SystemInformation
 TRANSACTION_OUTCOME=Windows.Win32.Storage.FileSystem
 # endregion winnt.h (SLIST per-architecture design also defined in ntdef.h)
 # region winsock2.h
