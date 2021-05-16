@@ -22,7 +22,7 @@ AgileReferenceOptions=Windows.Win32.System.WinRT
 CoDecodeProxy=Windows.Win32.System.WinRT
 RoGetAgileReference=Windows.Win32.System.WinRT
 ServerInformation=Windows.Win32.System.WinRT
-# region combaseapi.h
+# endregion combaseapi.h
 # region ddkernel.h
 DDKERNELCAPS=Windows.Win32.UI.DisplayDevices
 IDirectDrawKernel=Windows.Win32.UI.DisplayDevices
