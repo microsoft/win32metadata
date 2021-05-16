@@ -17,6 +17,12 @@ COMMON_LVB_REVERSE_VIDEO=Windows.Win32.System.Console
 COMMON_LVB_UNDERSCORE=Windows.Win32.System.Console
 COMMON_LVB_SBCSDBCS=Windows.Win32.System.Console
 # endregion consoleapi2.h (also defined in ntddvdeo.h)
+# region combaseapi.h
+AgileReferenceOptions=Windows.Win32.System.WinRT
+CoDecodeProxy=Windows.Win32.System.WinRT
+RoGetAgileReference=Windows.Win32.System.WinRT
+ServerInformation=Windows.Win32.System.WinRT
+# region combaseapi.h
 # region ddkernel.h
 DDKERNELCAPS=Windows.Win32.UI.DisplayDevices
 IDirectDrawKernel=Windows.Win32.UI.DisplayDevices
@@ -195,6 +201,7 @@ WIN32_FIND_DATAA=Windows.Win32.Storage.FileSystem
 WIN32_FIND_DATAW=Windows.Win32.Storage.FileSystem
 # endregion minwinbase.h
 # region o*idl.h (duplicate definitions in many headers)
+ACTIVATIONTYPE=Windows.Win32.System.WinRT
 BSTR_UserFree=Windows.Win32.System.OleAutomation
 BSTR_UserFree64=Windows.Win32.System.OleAutomation
 BSTR_UserMarshal=Windows.Win32.System.OleAutomation
@@ -275,6 +282,8 @@ HWND_UserSize=Windows.Win32.System.OleAutomation
 HWND_UserSize64=Windows.Win32.System.OleAutomation
 HWND_UserUnmarshal=Windows.Win32.System.OleAutomation
 HWND_UserUnmarshal64=Windows.Win32.System.OleAutomation
+IAgileReference=Windows.Win32.System.WinRT
+IApartmentShutdown=Windows.Win32.System.WinRT
 LPSAFEARRAY_UserFree=Windows.Win32.System.OleAutomation
 LPSAFEARRAY_UserFree64=Windows.Win32.System.OleAutomation
 LPSAFEARRAY_UserMarshal=Windows.Win32.System.OleAutomation
@@ -2204,13 +2213,6 @@ GetSystemWow64Directory2W=Windows.Win32.System.WindowsProgramming
 GetSystemWow64DirectoryA=Windows.Win32.System.WindowsProgramming
 GetSystemWow64DirectoryW=Windows.Win32.System.WindowsProgramming
 IsWow64GuestMachineSupported=Windows.Win32.System.WindowsProgramming
-AgileReferenceOptions=Windows.Win32.System.WinRT
-CoDecodeProxy=Windows.Win32.System.WinRT
-RoGetAgileReference=Windows.Win32.System.WinRT
-ServerInformation=Windows.Win32.System.WinRT
-ACTIVATIONTYPE=Windows.Win32.System.WinRT
-IAgileReference=Windows.Win32.System.WinRT
-IApartmentShutdown=Windows.Win32.System.WinRT
 CloseDesktop=Windows.Win32.System.StationsAndDesktops
 CloseWindowStation=Windows.Win32.System.StationsAndDesktops
 CreateDesktopA=Windows.Win32.System.StationsAndDesktops
