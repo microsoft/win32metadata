@@ -7,6 +7,15 @@ param
     [string]
     $version,
 
+    [ArgumentCompleter({
+        param($commandName,
+              $parameterName,
+              $wordToComplete,
+              $commandAst,
+              $fakeBoundParameters)
+        Get-ChildItem "$PSScriptRoot\..\generation\scraper\Partitions\$wordToComplete*" -Directory |
+        Foreach-Object Name
+    })]
     [string]
     $partitionName,
 
