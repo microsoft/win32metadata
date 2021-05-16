@@ -52,7 +52,7 @@ Partitions are defined as [folders](generation/scraper/Partitions) with [main.cp
 * [main.cpp](generation/scraper/Partitions/Registry/main.cpp) contains `#include` statements like you would use to call the APIs directly. This typically includes the header files to be associated with the partition as well as any other dependent headers, included in the proper order.
 * [settings.rsp](generation/scraper/Partitions/Registry/settings.rsp) associates a list of header files to a namespace. Reference existing [partitions](generation/scraper/Partitions) to understand the template for this file. The important sections are `--traverse`, which lists the header files to include, and `--namespace` which lists the namespace to associate with the content of those header files. Note that headers should be listed alphabetically by convention, and the casing needs to match the casing of the filenames.
 
-You can test localized changes to a partition by running `./scripts/GenerateMetadataSourceForPartition.ps1 -PartitionName <PARTITION>` from the repo root. If it compiles, the changes are likely correct. A common reason for failure is main.cpp either doesn't include all the necessary dependent headers needed to use the target headers or doesn't include them in the proper order.
+You can test localized changes to a partition by running `./scripts/GenerateMetadataSourceForPartition.ps1 <PARTITION>` from the repo root. If it compiles, the changes are likely correct. A common reason for failure is main.cpp either doesn't include all the necessary dependent headers needed to use the target headers or doesn't include them in the proper order.
 
 ### Split a header file among multiple namespaces
 
@@ -129,7 +129,7 @@ The simplest but slowest way to validate changes is to perform a full build with
 
 ### Incremental builds
 
-If you have already performed a full build and are making incremental changes, you can effectively perform incremental builds by running `./scripts/GenerateMetadataSourceForPartition.ps1 -PartitionName <PARTITION>` for each impacted `<PARTITION>`, and then build and test the winmd by running `./scripts/BuildMetadataBin.ps1 && ./scripts/TestWinmdBinary.ps1`. If you are only making changes to the [emitter](./generation/emitter), then you don't need to regenerate the partitions and can just rebuild the winmd.
+If you have already performed a full build and are making incremental changes, you can effectively perform incremental builds by running `./scripts/GenerateMetadataSourceForPartition.ps1 <PARTITION>` for each impacted `<PARTITION>`, and then build and test the winmd by running `./scripts/BuildMetadataBin.ps1 && ./scripts/TestWinmdBinary.ps1`. If you are only making changes to the [emitter](./generation/emitter), then you don't need to regenerate the partitions and can just rebuild the winmd.
 
 Note that stale artifacts on your system may sometimes result in cryptic errors when attempting incremental builds. If you do encounter cryptic errors during incremental builds that you suspect are the result of previously built changes, reset your system state by running a clean build with `./DoAll.ps1 -Clean`.
 
