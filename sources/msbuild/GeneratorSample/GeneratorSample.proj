@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.Windows.WinmdGenerator/0.0.2-preview">
+    
+    <PropertyGroup>
+        <OutputWinmd>bin\Windows.Win32.Graphics.DirectWriteCore.winmd</OutputWinmd>
+        <WinmdVersion>1.0.0.0</WinmdVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <DWriteHeaders Include="$(PkgMicrosoft_ProjectReunion_DWrite)\**\*.h"/>
+        <DWriteLibs Include="$(PkgMicrosoft_ProjectReunion_DWrite)\**\*.lib"/>
+
+        <ImportLibs Include="@(DWriteLibs)"/>
+        <Partition Include="main.cpp">
+            <TraverseFiles>@(DWriteHeaders)</TraverseFiles>
+            <Namespace>Windows.Win32.Graphics.DirectWriteCore</Namespace>
+            <Exclude>ID2D1SimplifiedGeometrySink;_D3DCOLORVALUE</Exclude>
+        </Partition>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.ProjectReunion.DWrite" Version="0.5.6" GeneratePathProperty="true"/>
+    </ItemGroup>
+
+</Project>

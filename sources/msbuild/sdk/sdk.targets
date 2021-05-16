@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+    <UsingTask TaskName="MetadataTasks.ScanLibs" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
+    <UsingTask TaskName="MetadataTasks.ScrapeHeaders" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
+    <UsingTask TaskName="MetadataTasks.EmitWinmd" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
+
+    <Target Name="ScrapeAndEmit" AfterTargets="Build">
+        <ScanLibs
+            Libs="@(ImportLibs)"
+            LibToolsBinDir="$(LibToolsBinDir)"
+            MSBuildProjectDirectory="$(MSBuildProjectDirectory)">
+            <Output
+                TaskParameter="OutputLibRsp"
+                ItemName="ScraperRsp"/>
+        </ScanLibs>
+        <ScrapeHeaders 
+            Partitions="@(Partition)"
+            Rsps="@(ScraperRsp)"
+            Win32MetadataScraperAssetsDir="$(Win32MetadataScraperAssetsDir)"
+            Win32MetadataScraperGeneratedAssetsDir="$(Win32MetadataScraperGeneratedAssetsDir)"
+            WinSdkRoot="$(TargetPlatformSdkRootOverride)"
+            ToolsBinDir="$(ToolsBinDir)"
+            MSBuildProjectDirectory="$(MSBuildProjectDirectory)">
+            <Output 
+                TaskParameter="GeneratedSourceDir"
+                PropertyName="EmitterSourceDir" />
+        </ScrapeHeaders>
+        <EmitWinmd
+            EmitterSourceDir="$(EmitterSourceDir)"
+            ToolsBinDir="$(ToolsBinDir)"
+            Win32WinmdBinDir="$(Win32WinmdBinDir)"
+            WinmdVersion="$(WinmdVersion)"
+            OutputWinmd="$(OutputWinmd)"
+            MSBuildProjectDirectory="$(MSBuildProjectDirectory)">
+        </EmitWinmd>
+    </Target>
+
+    <Target Name = "Clean">
+        <RemoveDir Directories="obj;bin" />
+    </Target>
+</Project>

@@ -6,7 +6,8 @@ function SearchHeaderFile([string]$name) {
 
 Write-Output "Scanning header files..."
 
-$sdkIncludePath = "$defaultArtifactsDir/InstalledPackages/Microsoft.Windows.SDK.CPP.$defaultWinSDKNugetVersion/c/Include/*/"
+$cppSdkRoot = $recompiledIdlHeadersDir
+$sdkIncludePath = "$cppSdkRoot/c/Include/*/"
 $headerFiles = Get-ChildItem -Recurse -Filter *.h "$sdkIncludePath/um", "$sdkIncludePath/shared"
 $missingHeaderFiles = $headerFiles | Where-Object { (SearchHeaderFile $_.Name).Matches.Count -eq 0 } | Sort-Object FullName
 

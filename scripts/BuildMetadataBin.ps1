@@ -1,8 +1,5 @@
 param
 (
-    [string]
-    $assemblyVersion,
-
     [ValidateSet("crossarch", "x64", "x86", "arm64")]
     [string]
     $arch = "crossarch",
@@ -20,39 +17,17 @@ if ($arch -eq "crossarch")
 
 . "$PSScriptRoot\CommonUtils.ps1"
 
-if (!$assemblyVersion)
-{
-    $assemblyVersion = $defaultWinSDKNugetVersion
-}
+Install-BuildTools
+
+$assemblyVersion = nbgv get-version -v AssemblyVersion
 
 & $PSScriptRoot\CreateRspsForFunctionPointerFixups.ps1 -arch $scraperArch
 
-$constantsScraperPath = "$sourcesDir\ConstantsScraper"
-$constantsScraperProj = "$constantsScraperPath\ConstantsScraper.csproj"
-$constantsScraperPathBin = "$constantsScraperPath\bin\Release\netcoreapp3.1\ConstantsScraper.dll"
-& dotnet build $constantsScraperProj -c Release
-if ($LastExitCode -ne 0)
-{
-    exit $LastExitCode
-}
-
-$clangSharpSourceToWinmdPath = "$sourcesDir\ClangSharpSourceToWinmd"
-$clangSharpSourceToWinmdProj = "$clangSharpSourceToWinmdPath\ClangSharpSourceToWinmd.csproj"
-$clangSharpSourceToWinmdBin = "$clangSharpSourceToWinmdPath\bin\Release\netcoreapp3.1\ClangSharpSourceToWinmd.dll"
-& dotnet build $clangSharpSourceToWinmdProj -c Release
-if ($LastExitCode -ne 0)
-{
-    exit $LastExitCode
-}
+$constantsScraperPathBin = "$metadataToolsBin\ConstantsScraper.dll"
+$clangSharpSourceToWinmdBin = "$metadataToolsBin\ClangSharpSourceToWinmd.dll"
 
 $metadataInteropPath = "$sourcesDir\Win32MetadataInterop"
-$metadataInteropProj = "$metadataInteropPath\Win32MetadataInterop.csproj"
 $metadataInteropBin = "$metadataInteropPath\bin\Release\netstandard2.1\Windows.Win32.Interop.dll"
-& dotnet build $metadataInteropProj -c Release
-if ($LastExitCode -ne 0)
-{
-    exit $LastExitCode
-}
 
 Copy-Item $metadataInteropBin $binDir
 

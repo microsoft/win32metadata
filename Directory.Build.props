@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
-
   <!--
     Directory.Build.props is automatically picked up and imported by
     Microsoft.Common.props. This file needs to exist, even if empty so that
@@ -9,5 +8,10 @@
     beforehand. We also don't need to add ourselves to MSBuildAllProjects, as
     that is done by the file that imports us.
   -->
-
+  <ItemGroup>
+    <PackageReference Include="Nerdbank.GitVersioning" Condition="!Exists('packages.config')">
+      <Version>3.4.194</Version>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
 </Project>

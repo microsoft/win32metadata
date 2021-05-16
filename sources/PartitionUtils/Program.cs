@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 using CsvHelper;
 using CsvHelper.Configuration;
 using Newtonsoft.Json;
-using PartitionUtilsLib;
+using MetadataUtils;
 
 namespace PartitionUtils
 {

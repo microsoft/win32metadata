@@ -12,6 +12,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <OutputPath>..\..\bin\release</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,11 +24,11 @@
     <PackageReference Include="CsvHelper" Version="26.0.1" />
     <PackageReference Include="Microsoft.CodeAnalysis" Version="3.8.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.8.0" />
-    <PackageReference Include="System.CommandLine" Version="2.0.0-beta1.20371.2" />
+    <PackageReference Include="System.CommandLine" Version="2.0.0-beta1.21216.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PartitionUtilsLib\PartitionUtilsLib.csproj" />
+    <ProjectReference Include="..\MetadataUtils\MetadataUtils.csproj" />
     <ProjectReference Include="..\Win32MetadataInterop\Win32MetadataInterop.csproj" />
   </ItemGroup>
 
