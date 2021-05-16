@@ -16,6 +16,7 @@ param
         Get-ChildItem "$PSScriptRoot\..\generation\scraper\Partitions\$wordToComplete*" -Directory |
         Foreach-Object Name
     })]
+    [Parameter(Position=0)]
     [string]
     $partitionName,
 
