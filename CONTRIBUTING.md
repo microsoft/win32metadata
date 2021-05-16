@@ -58,7 +58,7 @@ You can test localized changes to a partition by running `./scripts/GenerateMeta
 
 If a header file doesn't cleanly map to one namespace, it should be associated with a partition and namespace that makes sense for the majority of its APIs (using the steps above for a single namespace), and then the rest of the APIs should be manually remapped using [requiredNamespacesForNames.rsp](generation/emitter/requiredNamespacesForNames.rsp). This file contains one line per API and follows the format `<API>=<NAMESPACE>`. It is a single file that is shared across all partitions.
 
-For maintainability, it is important to keep [requiredNamespacesForNames.rsp](generation/emitter/requiredNamespacesForNames.rsp) organized with APIs grouped by header files. APIs should be added within `#region <HEADER>` sections based on the header files where they are defined. APIs within a `#region` should be  sorted alphabetically. You can select the APIs of a `#region` and use Visual Studio Code's `Sort Lines Ascending` command to sort them.
+For maintainability, it is important to keep [requiredNamespacesForNames.rsp](generation/emitter/requiredNamespacesForNames.rsp) organized with APIs grouped by header files. APIs should be added within `# region <HEADER>` sections based on the header files where they are defined. APIs within a `# region` should be  sorted alphabetically by selecting them and then using Visual Studio Code's `Sort Lines Ascending` command.
 
 ### Refactoring namespaces
 
