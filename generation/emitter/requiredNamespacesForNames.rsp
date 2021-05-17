@@ -1,12 +1,16 @@
 --requiredNamespaceForName
 # region combaseapi.h
+AgileReferenceOptions=Windows.Win32.System.WinRT
 CLSIDFromProgIDEx=Windows.Win32.System.Com
+CoDecodeProxy=Windows.Win32.System.WinRT
 CoFileTimeNow=Windows.Win32.System.Com
 CreateStreamOnHGlobal=Windows.Win32.Storage.StructuredStorage
 FreePropVariantArray=Windows.Win32.Storage.StructuredStorage
 GetHGlobalFromStream=Windows.Win32.Storage.StructuredStorage
 PropVariantClear=Windows.Win32.Storage.StructuredStorage
 PropVariantCopy=Windows.Win32.Storage.StructuredStorage
+RoGetAgileReference=Windows.Win32.System.WinRT
+ServerInformation=Windows.Win32.System.WinRT
 # endregion combaseapi.h
 # region consoleapi2.h (also defined in ntddvdeo.h)
 FOREGROUND_BLUE=Windows.Win32.System.Console
@@ -26,12 +30,6 @@ COMMON_LVB_REVERSE_VIDEO=Windows.Win32.System.Console
 COMMON_LVB_UNDERSCORE=Windows.Win32.System.Console
 COMMON_LVB_SBCSDBCS=Windows.Win32.System.Console
 # endregion consoleapi2.h (also defined in ntddvdeo.h)
-# region combaseapi.h
-AgileReferenceOptions=Windows.Win32.System.WinRT
-CoDecodeProxy=Windows.Win32.System.WinRT
-RoGetAgileReference=Windows.Win32.System.WinRT
-ServerInformation=Windows.Win32.System.WinRT
-# endregion combaseapi.h
 # region ddkernel.h
 DDKERNELCAPS=Windows.Win32.UI.DisplayDevices
 IDirectDrawKernel=Windows.Win32.UI.DisplayDevices
