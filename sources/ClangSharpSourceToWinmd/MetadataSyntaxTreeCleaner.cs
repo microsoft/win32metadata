@@ -153,8 +153,10 @@ namespace ClangSharpSourceToWinmd
                         }
                         else if (objCreationSyntax.ArgumentList.Arguments.Count == 1)
                         {
+                            var textValue = EncodeHelpers.RemoveQuotes(objCreationSyntax.ArgumentList.Arguments[0].ToString());
+
                             // If this is an invalid format, remove the node
-                            if (!Guid.TryParse(objCreationSyntax.ArgumentList.Arguments[0].ToString(), out guidVal))
+                            if (!Guid.TryParse(textValue, out guidVal))
                             {
                                 return null;
                             }

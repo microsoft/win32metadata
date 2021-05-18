@@ -61,6 +61,32 @@ namespace MetadataUtils
             return ret;
         }
 
+        public static HashSet<string> GetConstants(string sourceDirectory)
+        {
+            HashSet<string> names = new HashSet<string>();
+
+            var sourceFiles = Directory.GetFiles(sourceDirectory, "*.cs", SearchOption.AllDirectories).Where(f => IsValidCsSourceFile(f));
+            System.Threading.Tasks.ParallelOptions opt = new System.Threading.Tasks.ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount * 2 };
+
+#if MakeSingleThreaded
+            opt.MaxDegreeOfParallelism = 1;
+#endif
+
+            System.Threading.Tasks.Parallel.ForEach(sourceFiles, opt, (sourceFile) =>
+            {
+                string fileToRead = Path.GetFullPath(sourceFile);
+                var tree = CSharpSyntaxTree.ParseText(File.ReadAllText(fileToRead), null, fileToRead);
+                var currentNames = ConstantsFinder.GetConstantsNames(tree);
+
+                lock (names)
+                {
+                    names.UnionWith(currentNames);
+                }
+            });
+
+            return names;
+        }
+
         private static bool IsValidCsSourceFile(string fileName)
         {
             if (fileName.EndsWith("modified.cs") || fileName.EndsWith("enums.cs") || fileName.EndsWith("constants.cs"))
@@ -69,6 +95,60 @@ namespace MetadataUtils
             }
 
             return true;
+        }
+
+        private class ConstantsFinder
+        {
+            public static HashSet<string> GetConstantsNames(SyntaxTree tree)
+            {
+                HashSet<string> constantsNames = new HashSet<string>();
+
+                new TreeWalker(tree, constantsNames);
+
+                return constantsNames;
+            }
+
+            private class TreeWalker : CSharpSyntaxWalker
+            {
+                private HashSet<string> constantsNames;
+
+                public TreeWalker(SyntaxTree tree, HashSet<string> constantsNames)
+                {
+                    this.constantsNames = constantsNames;
+                    this.Visit(tree.GetRoot());
+                }
+
+                public override void VisitClassDeclaration(ClassDeclarationSyntax node)
+                {
+                    if (node.Identifier.Text == "Apis")
+                    {
+                        foreach (FieldDeclarationSyntax field in node.Members.Where(m => m is FieldDeclarationSyntax))
+                        {
+                            string mods = field.Modifiers.ToString();
+                            
+                            if (mods.Contains("const") || mods.Contains("static readonly"))
+                            {
+                                this.AddNameToMap(field);
+                            }
+                        }
+                    }
+
+                    // Don't process the node as we don't need anything else
+                }
+
+                private void AddNameToMap(SyntaxNode node)
+                {
+                    string name = SyntaxUtils.GetFullName(node, false);
+
+                    if (!string.IsNullOrEmpty(name))
+                    {
+                        if (!this.constantsNames.Contains(name))
+                        {
+                            this.constantsNames.Add(name);
+                        }
+                    }
+                }
+            }
         }
 
         private class NameToNamespaceFinder
