@@ -7,3 +7,4 @@
 #include <sdkddkver.h>
 
 #include <d3dcompiler.h>
+#include <dxcapi.h>

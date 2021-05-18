@@ -798,7 +798,7 @@ namespace ClangSharpSourceToWinmd
             return ret;
         }
 
-        private void RemapToMoreSpecificTypeIfPossible(string parent, ImmutableArray<AttributeData> ownerAttributes, ref ITypeSymbol typeSymbol)
+        private void RemapToMoreSpecificTypeIfPossible(ImmutableArray<AttributeData> ownerAttributes, ref ITypeSymbol typeSymbol)
         {
             // Can't do anything without a NativeTypeNameAttribute 
             var nativeTypeNameAttr = ownerAttributes.FirstOrDefault(a => a.AttributeClass.Name == "NativeTypeNameAttribute");
@@ -956,7 +956,7 @@ namespace ClangSharpSourceToWinmd
             bool instanceMethod)
         {
             var returnType = methodSymbol.ReturnType;
-            this.RemapToMoreSpecificTypeIfPossible(methodSymbol.Name, methodSymbol.GetReturnTypeAttributes(), ref returnType);
+            this.RemapToMoreSpecificTypeIfPossible(methodSymbol.GetReturnTypeAttributes(), ref returnType);
 
             List<Parameter> parameters = new List<Parameter>();
             foreach (var p in methodSymbol.Parameters)
@@ -1754,21 +1754,30 @@ namespace ClangSharpSourceToWinmd
             var encoder = new BlobEncoder(fieldSignature);
             var signatureEncoder = encoder.FieldSignature();
 
-            this.RemapToMoreSpecificTypeIfPossible(structName, fieldSymbol.GetAttributes(), ref type);
+            this.RemapToMoreSpecificTypeIfPossible(fieldSymbol.GetAttributes(), ref type);
 
             if (type.Name.EndsWith("_e__FixedBuffer"))
             {
                 // Convert fixed buffer type into an array
                 if (!fixedBufferTypeToInfo.TryGetValue(type, out FixedBufferInfo fixedBufferInfo))
                 {
-                    // If we haven't visited the node that defixes the fixed buffer type, do it now
+                    // If we haven't visited the node that defines the fixed buffer type, do it now
                     StructDeclarationSyntax structNode = (StructDeclarationSyntax)type.DeclaringSyntaxReferences[0].GetSyntax();
                     this.AddFixedBufferTypeInfoForStructNode(structNode);
                     fixedBufferInfo = fixedBufferTypeToInfo[type];
                 }
 
+                var fieldType = fixedBufferInfo.Type;
+                this.RemapToMoreSpecificTypeIfPossible(fieldSymbol.GetAttributes(), ref fieldType);
+
+                bool symbolsChanged = !SymbolEqualityComparer.Default.Equals(fieldType, fixedBufferInfo.Type);
+                if (symbolsChanged && fieldType is IPointerTypeSymbol pointer)
+                {
+                    fieldType = pointer.PointedAtType;
+                }
+
                 signatureEncoder.Array(
-                    s => EncodeTypeSymbol(fixedBufferInfo.Type, signatureEncoder),
+                    s => EncodeTypeSymbol(fieldType, signatureEncoder),
                     h => h.Shape(1, new int[1] { fixedBufferInfo.Count }.ToImmutableArray(), new int[1] { 0 }.ToImmutableArray()));
             }
             // Arrays
@@ -2028,7 +2037,7 @@ namespace ClangSharpSourceToWinmd
 
                 var paramType = parameterSymbol.Type;
                 var paramName = parameterSymbol.Name;
-                generator.RemapToMoreSpecificTypeIfPossible(methodSymbol.Name, parameterSymbol.GetAttributes(), ref paramType);
+                generator.RemapToMoreSpecificTypeIfPossible(parameterSymbol.GetAttributes(), ref paramType);
 
                 ParameterAttributes parameterAttributes = ParameterAttributes.None;
                 var symbolAttrs = parameterSymbol.GetAttributes();
