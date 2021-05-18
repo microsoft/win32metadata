@@ -8,6 +8,18 @@ namespace Windows.Win32.System.SystemServices
     [UnmanagedFunctionPointer]
     public unsafe delegate void PUMS_SCHEDULER_ENTRY_POINT([CppAttributeList("Name=SAL_name; p1=\"_In_\"; p2=\"\"; p3=\"2\"^Name=SAL_begin^Name=SAL_pre^Name=SAL_notref^Name=SAL_null; p1=__no^Name=SAL_valid^Name=SAL_deref^Name=SAL_access; p1=0x1^Name=SAL_end")] RTL_UMS_SCHEDULER_REASON Reason, [NativeTypeName("ULONG_PTR")][CppAttributeList("Name=SAL_name; p1=\"_In_\"; p2=\"\"; p3=\"2\"^Name=SAL_begin^Name=SAL_pre^Name=SAL_notref^Name=SAL_null; p1=__no^Name=SAL_valid^Name=SAL_deref^Name=SAL_access; p1=0x1^Name=SAL_end")] UIntPtr ActivationPayload, [NativeTypeName("PVOID")][CppAttributeList("Name=SAL_name; p1=\"_In_\"; p2=\"\"; p3=\"2\"^Name=SAL_begin^Name=SAL_pre^Name=SAL_notref^Name=SAL_null; p1=__no^Name=SAL_valid^Name=SAL_deref^Name=SAL_access; p1=0x1^Name=SAL_end")] void* SchedulerParam);
 
+    // Because we want all versions to use IntPtr
+    [UnmanagedFunctionPointer]
+    public delegate IntPtr FARPROC();
+
+    // Because we want all versions to use IntPtr
+    [UnmanagedFunctionPointer]
+    public delegate IntPtr NEARPROC();
+
+    // Because we want all versions to use IntPtr
+    [UnmanagedFunctionPointer]
+    public delegate IntPtr PROC();
+
     public static unsafe partial class Apis
     {
         [NativeTypeName("BOOL")]
