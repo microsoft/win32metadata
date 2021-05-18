@@ -1,12 +1,6 @@
 
 param
 (
-    [string]
-    $artifactsDir = [System.IO.Path]::GetFullPath("$PSScriptRoot\..\artifacts"),
-
-    [string]
-    $version,
-
     [ArgumentCompleter({
         param($commandName,
               $parameterName,
@@ -16,9 +10,14 @@ param
         Get-ChildItem "$PSScriptRoot\..\generation\scraper\Partitions\$wordToComplete*" -Directory |
         Foreach-Object Name
     })]
-    [Parameter(Position=0)]
     [string]
     $partitionName,
+
+    [string]
+    $artifactsDir = [System.IO.Path]::GetFullPath("$PSScriptRoot\..\artifacts"),
+
+    [string]
+    $version,
 
     [ValidateSet("crossarch", "x64", "x86", "arm64")]
     [string]
