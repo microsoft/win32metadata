@@ -6,7 +6,7 @@
     },
     "compare": {
       "commandName": "Project",
-      "commandLineArgs": "compare --first $(ProjectDir)..\\..\\scripts\\BaselineWinmd\\10.0.19041.5\\Windows.Win32.winmd --second $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd"
+      "commandLineArgs": "compare --first $(ProjectDir)..\\..\\scripts\\BaselineWinmd\\Windows.Win32.winmd --second $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd"
     },
     "showDuplicateImports": {
       "commandName": "Project",
