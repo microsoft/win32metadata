@@ -7,6 +7,10 @@
 <IncludeRoot>/shared
 <IncludeRoot>/um
 <IncludeRoot>/winrt
+--exclude
+POSITIVE_INFINITY
+NEGATIVE_INFINITY
+NaN
 --traverse
 <IncludeRoot>/um/manipulations.h
 --namespace
