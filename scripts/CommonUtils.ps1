@@ -208,3 +208,29 @@ function Download-Nupkg
     $wc.DownloadFile($url, $output)
 }
 
+function Get-ExcludedItems
+{
+    param ([string[]]$rspFiles)
+    [hashtable]$excludedItems = @{}
+    
+    $inExcluded = $false
+    foreach ($rsp in $rspFiles)
+    {
+        foreach ($line in Get-Content $rsp)
+        {
+            if ($line.StartsWith('--'))
+            {
+                $inExcluded = $line -eq "--exclude"
+            }
+            else
+            {
+                if ($inExcluded)
+                {
+                    $excludedItems[$line] = $true
+                }
+            }
+        }
+    }
+
+    return $excludedItems
+}

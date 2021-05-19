@@ -52,11 +52,13 @@ Partitions are defined as [folders](generation/scraper/Partitions) with [main.cp
 * [main.cpp](generation/scraper/Partitions/Registry/main.cpp) contains `#include` statements like you would use to call the APIs directly. This typically includes the header files to be associated with the partition as well as any other dependent headers, included in the proper order.
 * [settings.rsp](generation/scraper/Partitions/Registry/settings.rsp) associates a list of header files to a namespace. Reference existing [partitions](generation/scraper/Partitions) to understand the template for this file. The important sections are `--traverse`, which lists the header files to include, and `--namespace` which lists the namespace to associate with the content of those header files. Note that headers should be listed alphabetically by convention, and the casing needs to match the casing of the filenames.
 
-You can test localized changes to a partition by running `./scripts/GenerateMetadataSourceForPartition.ps1 -PartitionName <PARTITION>` from the repo root. If it compiles, the changes are likely correct. A common reason for failure is main.cpp either doesn't include all the necessary dependent headers needed to use the target headers or doesn't include them in the proper order.
+You can test localized changes to a partition by running `./scripts/GenerateMetadataSourceForPartition.ps1 <PARTITION>` from the repo root. If it compiles, the changes are likely correct. A common reason for failure is main.cpp either doesn't include all the necessary dependent headers needed to use the target headers or doesn't include them in the proper order.
 
 ### Split a header file among multiple namespaces
 
 If a header file doesn't cleanly map to one namespace, it should be associated with a partition and namespace that makes sense for the majority of its APIs (using the steps above for a single namespace), and then the rest of the APIs should be manually remapped using [requiredNamespacesForNames.rsp](generation/emitter/requiredNamespacesForNames.rsp). This file contains one line per API and follows the format `<API>=<NAMESPACE>`. It is a single file that is shared across all partitions.
+
+For maintainability, it is important to keep [requiredNamespacesForNames.rsp](generation/emitter/requiredNamespacesForNames.rsp) organized with APIs grouped by header files. APIs should be added within `# region <HEADER>` sections based on the header files where they are defined. APIs within a `# region` should be  sorted alphabetically by selecting them and then using Visual Studio Code's `Sort Lines Ascending` command.
 
 ### Refactoring namespaces
 
@@ -129,7 +131,7 @@ The simplest but slowest way to validate changes is to perform a full build with
 
 ### Incremental builds
 
-If you have already performed a full build and are making incremental changes, you can effectively perform incremental builds by running `./scripts/GenerateMetadataSourceForPartition.ps1 -PartitionName <PARTITION>` for each impacted `<PARTITION>`, and then build and test the winmd by running `./scripts/BuildMetadataBin.ps1 && ./scripts/TestWinmdBinary.ps1`. If you are only making changes to the [emitter](./generation/emitter), then you don't need to regenerate the partitions and can just rebuild the winmd.
+If you have already performed a full build and are making incremental changes, you can effectively perform incremental builds by running `./scripts/GenerateMetadataSourceForPartition.ps1 <PARTITION>` for each impacted `<PARTITION>`, and then build and test the winmd by running `./scripts/BuildMetadataBin.ps1 && ./scripts/TestWinmdBinary.ps1`. If you are only making changes to the [emitter](./generation/emitter), then you don't need to regenerate the partitions and can just rebuild the winmd.
 
 Note that stale artifacts on your system may sometimes result in cryptic errors when attempting incremental builds. If you do encounter cryptic errors during incremental builds that you suspect are the result of previously built changes, reset your system state by running a clean build with `./DoAll.ps1 -Clean`.
 

@@ -61,9 +61,7 @@ _TEB
 <IncludeRoot>/um/appcompatapi.h
 <IncludeRoot>/um/handleapi.h
 <IncludeRoot>/um/processenv.h
-<IncludeRoot>/um/sysinfoapi.h
 <IncludeRoot>/um/timezoneapi.h
-<IncludeRoot>/um/VersionHelpers.h
 <IncludeRoot>/um/ddkernel.h
 <IncludeRoot>/um/devquery.h
 <IncludeRoot>/um/devquerydef.h

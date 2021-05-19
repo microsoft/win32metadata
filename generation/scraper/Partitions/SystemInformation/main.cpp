@@ -6,5 +6,5 @@
 #include "windows.fixed.h"
 #include <sdkddkver.h>
 
-#include <dxcapi.h>
-// #include <dxcisense.h>
+#include <sysinfoapi.h>
+#include <VersionHelpers.h>

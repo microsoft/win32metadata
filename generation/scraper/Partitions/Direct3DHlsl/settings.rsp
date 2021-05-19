@@ -9,5 +9,6 @@
 <IncludeRoot>/winrt
 --traverse
 <IncludeRoot>/um/d3dcompiler.h
+<IncludeRoot>/um/dxcapi.h
 --namespace
 Windows.Win32.Graphics.Hlsl

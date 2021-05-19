@@ -42,10 +42,10 @@ _IMAGE_ENCLAVE_IMPORT
 EXCEPTION_ROUTINE
 ENCLAVE_TARGET_FUNCTION
 LPENCLAVE_TARGET_FUNCTION
+FARPROC
+NEARPROC
+PROC
 --traverse
-<IncludeRoot>/um/processtopologyapi.h
-<IncludeRoot>/um/systemtopologyapi.h
-<IncludeRoot>/um/namespaceapi.h
 <IncludeRoot>/shared/windef.h
 <IncludeRoot>/shared/minwindef.h
 <IncludeRoot>/um/winnt.h

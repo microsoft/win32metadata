@@ -1137,6 +1137,15 @@ namespace WinmdUtilsProgram
                         }
                     }
                 }
+                else
+                {
+                    foreach (var m1 in api1MemberInfo.Value)
+                    {
+                        string m1FullName = GetFullMemberName(m1);
+                        console?.Out.Write($"{m1FullName} not found in 2nd winmd\r\n");
+                        same = false;
+                    }
+                }
             }
 
             foreach (var api2MemberInfo in apiNameToMembers2)

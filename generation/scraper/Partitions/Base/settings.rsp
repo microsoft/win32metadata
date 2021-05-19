@@ -53,7 +53,6 @@ _VIRTUAL_STORAGE_TYPE
 <IncludeRoot>/um/winddi.h
 <IncludeRoot>/um/mcx.h
 <IncludeRoot>/um/servprov.h
-<IncludeRoot>/um/winspool.h
 <IncludeRoot>/shared/winsmcrd.h
 <IncludeRoot>/um/winioctl.h
 <IncludeRoot>/shared/wtypes.h

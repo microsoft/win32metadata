@@ -7,7 +7,11 @@ param
 
     [Parameter(Mandatory=$true)]
     [string]
-    $remapsFile
+    $remapsFile,
+
+    [Parameter(Mandatory=$true)]
+    [hashtable]
+    $excludedItems
 )
 
 if (Test-Path -path $remapsFile)
@@ -21,8 +25,15 @@ $txtGenResults = Get-Content -path $generatorResults -Raw
 $patternPotentialRemap = [Regex]::new('Potential remap: ([^\s]+)')
 $remapMatches = $patternPotentialRemap.Matches($txtGenResults)
 $count = 0
+
 foreach ($match in $remapMatches)
 {
+    $name = $match.Groups[1].Value.Split('=')[0]
+    if ($excludedItems.ContainsKey($name))
+    {
+        continue
+    }
+
     $stream.WriteLine($match.Groups[1].Value)    
     $count++
 }

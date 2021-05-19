@@ -4,8 +4,10 @@
 <GeneratedSourceDir>\<PartitionName>.cs
 --include-directory
 <RepoRoot>\generation\scraper
+<IncludeRoot>/shared
 <IncludeRoot>/um
+<IncludeRoot>/winrt
 --traverse
-<IncludeRoot>/um/dxcapi.h
+<IncludeRoot>/um/prntvpt.h
 --namespace
-Windows.Win32.Graphics.Hlsl
+Windows.Win32.Graphics.Printing.PrintTicket

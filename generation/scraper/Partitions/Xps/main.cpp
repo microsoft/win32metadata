@@ -10,5 +10,3 @@
 #include <xpsobjectmodel_2.h>
 #include <xpsobjectmodel.h>
 #include <xpsdigitalsignature.h>
-#include <documenttarget.h>
-#include <prntvpt.h>

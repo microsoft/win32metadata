@@ -4,9 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace MetadataUtils
 {
@@ -53,7 +50,7 @@ namespace MetadataUtils
             private Dictionary<string, ConstantWriter> namespacesToConstantWriters = new Dictionary<string, ConstantWriter>();
             private WildcardDictionary requiredNamespaces;
             private Dictionary<string, string> scannedNamesToNamespaces;
-            private Dictionary<string, string> writtenConstants = new Dictionary<string, string>();
+            private HashSet<string> writtenConstants;
             private string repoRoot;
             private string arch;
 
@@ -96,6 +93,8 @@ namespace MetadataUtils
 
                 this.scannedNamesToNamespaces = ScraperUtils.GetNameToNamespaceMap(this.EmitterGeneratedDir);
 
+                this.writtenConstants = ScraperUtils.GetConstants(this.EmitterDir);
+
                 this.LoadEnumObjectsFromJsonFiles(enumJsonFiles);
 
                 this.ScrapeConstantsFromTraversedFiles();
@@ -123,6 +122,7 @@ namespace MetadataUtils
             }
 
             private string EmitterGeneratedDir => Path.Combine(this.repoRoot, $@"generation\emitter\generated\{this.arch}");
+            private string EmitterDir => Path.Combine(this.repoRoot, $@"generation\emitter");
 
             private static Dictionary<string, string> GetAutoValueReplacements()
             {
@@ -234,7 +234,7 @@ namespace MetadataUtils
 
             private void AddConstantValue(string originalNamespace, string type, string name, string valueText)
             {
-                if (this.writtenConstants.ContainsKey(name))
+                if (this.writtenConstants.Contains(name))
                 {
                     return;
                 }
@@ -242,14 +242,14 @@ namespace MetadataUtils
                 var writer = this.GetConstantWriter(originalNamespace, name);
                 writer.AddValue(type, name, valueText);
 
-                this.writtenConstants[name] = valueText;
+                this.writtenConstants.Add(name);
             }
             
             private void AddConstantGuid(string defineGuidKeyword, string originalNamespace, string line)
             {
                 int firstComma = line.IndexOf(',');
                 string name = line.Substring(0, firstComma).Trim();
-                if (this.writtenConstants.ContainsKey(name))
+                if (this.writtenConstants.Contains(name))
                 {
                     return;
                 }
@@ -274,12 +274,12 @@ namespace MetadataUtils
                     writer.AddGuid(name, args);
                 }
 
-                this.writtenConstants[name] = args;
+                this.writtenConstants.Add(name);
             }
 
             private void AddConstantInteger(string originalNamespace, string nativeTypeName, string name, string valueText)
             {
-                if (this.writtenConstants.ContainsKey(name))
+                if (this.writtenConstants.Contains(name))
                 {
                     return;
                 }
@@ -289,7 +289,7 @@ namespace MetadataUtils
                 var writer = this.GetConstantWriter(originalNamespace, name);
                 writer.AddInt(forcedType, nativeTypeName, name, valueText);
 
-                this.writtenConstants[name] = valueText;
+                this.writtenConstants.Add(name);
             }
 
             private ConstantWriter GetConstantWriter(string originalNamespace, string name)
@@ -750,7 +750,7 @@ namespace MetadataUtils
 
                         if (obj.name != null)
                         {
-                            if (this.writtenConstants.ContainsKey(obj.name))
+                            if (this.writtenConstants.Contains(obj.name))
                             {
                                 throw new InvalidOperationException($"Tried to add enum {obj.name} but a constant with the same name already exists.");
                             }

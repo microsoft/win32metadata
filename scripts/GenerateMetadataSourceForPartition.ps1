@@ -1,8 +1,23 @@
 
 param
 (
+    [ArgumentCompleter({
+        param($commandName,
+              $parameterName,
+              $wordToComplete,
+              $commandAst,
+              $fakeBoundParameters)
+        Get-ChildItem "$PSScriptRoot\..\generation\scraper\Partitions\$wordToComplete*" -Directory |
+        Foreach-Object Name
+    })]
     [string]
     $partitionName,
+
+    [string]
+    $artifactsDir = [System.IO.Path]::GetFullPath("$PSScriptRoot\..\artifacts"),
+
+    [string]
+    $version,
 
     [ValidateSet("crossarch", "x64", "x86", "arm64")]
     [string]
@@ -11,7 +26,9 @@ param
     [string]
     $indent = "",
 
-    [switch]$parallel
+    [switch]$parallel,
+
+    [switch]$ignoreSuggestedMappings
 )
 
 if ($arch -eq "crossarch")
@@ -35,12 +52,16 @@ if ($arch -eq "crossarch")
     Add-Member -InputObject $errObj -MemberType NoteProperty -Name ErrorCode -Value 0
 
     "x64", "x86", "arm64" | ForEach-Object -Parallel { 
-        $out = & $using:PSCommandPath -partitionName $using:partitionName -arch $_ -indent "`n  "
+        $localObj = $using:errObj
+
+        $shouldIgnoreMappingSuggestions = $ignoreSuggestedMappings -or ($arch -ne "x64")
+
+        $out = & $using:PSCommandPath -partitionName $using:partitionName -arch $_ -ignoreSuggestedMappings $shouldIgnoreMappingSuggestions -indent "`n  "
         Write-Output "$out"
 
         if ($LastExitCode -lt 0)
         {
-            Write-Error "Partition $_ failed for $_."
+            Write-Error "Partition $using:partitionName failed for $_."
             $localObj.ErrorCode = $LastExitCode
         }
     } -ThrottleLimit $throttleCount
@@ -126,14 +147,19 @@ if ($LASTEXITCODE -lt 0)
     exit $LastExitCode
 }
 
-$possibleRemapsOutput = Join-Path -Path $generationOutArtifactsDir -ChildPath "$partitionName.possibleremaps.output.txt"
-& $PSScriptRoot\DisplayPossibleMappings.ps1 -generatorResults $generatorOutput -remapsFile $possibleRemapsOutput
-
-$from = Get-Content -Path $possibleRemapsOutput
-if (![string]::IsNullOrEmpty($from))
+if (!$ignoreSuggestedMappings)
 {
-    Add-Content -Path $baseRemapRsp -Value $from
-    Write-Output "$($indent)Added remaps to $baseRemapRsp"
+    $excludedItems = Get-ExcludedItems $baseRemapRsp,$baseSettingsArchRsp
+
+    $possibleRemapsOutput = Join-Path -Path $generationOutArtifactsDir -ChildPath "$partitionName.possibleremaps.output.txt"
+    & $PSScriptRoot\DisplayPossibleMappings.ps1 -generatorResults $generatorOutput -remapsFile $possibleRemapsOutput -excludedItems $excludedItems
+
+    $from = Get-Content -Path $possibleRemapsOutput
+    if (![string]::IsNullOrEmpty($from))
+    {
+        Add-Content -Path $baseRemapRsp -Value $from
+        Write-Output "$($indent)Added remaps to $baseRemapRsp"
+    }
 }
 
 $stopwatch.Stop()

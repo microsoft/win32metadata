@@ -14,14 +14,6 @@
 #include <ObjIdl.h>
 #include <combaseapi.h>
 
-//
-// Begin of area needing to be close to COM headers
-
-#include <rtworkq.h>
-
-// End of area needing to be close to COM headers
-//
-
 #include <winbase.h>
 #include <winnt.h>
 #include <winerror.h>
@@ -38,8 +30,6 @@
 #include <winternl.h>
 #include <debugapi.h>
 #include <processenv.h>
-#include <processthreadsapi.h>
-#include <memoryapi.h>
 #include <minwinbase.h>
 #include <wct.h>
 #include <minidumpapiset.h>
@@ -51,23 +41,11 @@
 #include <ioapiset.h>
 #include <dbt.h>
 #include <ntddstor.h>
-#include <pwm.h>
-#include <winreg.h>
-#include <libloaderapi.h>
 #include <process.h>
-#include <libloaderapi2.h>
 #include <fileapi.h>
 #include <sysinfoapi.h>
-#include <heapapi.h>
 #include <atlthunk.h>
 #include <lmserver.h>
-#include <avrt.h>
-#include <threadpoolapiset.h>
-#include <winsvc.h>
-#include <reason.h>
-#include <synchapi.h>
-#include <interlockedapi.h>
-#include <threadpoollegacyapiset.h>
 #include <handleapi.h>
 #include <windowsceip.h>
 #include <versionhelpers.h>
@@ -79,8 +57,5 @@
 #include <processtopologyapi.h>
 #include <systemtopologyapi.h>
 #include <profileapi.h>
-#include <fibersapi.h>
 
 #include <devpkey.h>
-
-#include <libloaderapi.h>

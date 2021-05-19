@@ -102,7 +102,7 @@ namespace ClangSharpSourceToWinmd
             watch.Reset();
             watch.Start();
 
-            Console.WriteLine($"Compliation stage took {timeTaken}");
+            Console.WriteLine($"Compilation stage took {timeTaken}");
 
             Console.WriteLine($"\r\nEmitting {outputFileName}...");
             var generator = 
