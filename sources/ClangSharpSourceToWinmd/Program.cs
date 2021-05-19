@@ -60,7 +60,22 @@ namespace ClangSharpSourceToWinmd
             Version assemblyVersion = Version.Parse(rawVersion);
 
             string archForAutoTypes = arch == "crossarch" ? "x64" : arch;
-            NativeTypedefStructsCreator.CreateNativeTypedefsSourceFile(autoTypes, Path.Combine(sourceDirectory, $"generated\\{archForAutoTypes}\\autotypes.cs"));
+            string archSourceDir = Path.Combine(sourceDirectory, $"generated\\{archForAutoTypes}");
+            var methodNamesToNamespaces = MetadataUtils.ScraperUtils.GetNameToNamespaceMap(archSourceDir, MetadataUtils.ScraperUtils.NameOptions.Methods);
+
+            if (requiredNamespaceValuePairs != null)
+            {
+                // Merge the requiredNamespaceForName entries into what we found the scraped source files
+                foreach (var requiredItem in requiredNamespaces)
+                {
+                    if (methodNamesToNamespaces.ContainsKey(requiredItem.Key))
+                    {
+                        methodNamesToNamespaces[requiredItem.Key] = requiredItem.Value;
+                    }
+                }
+            }
+
+            NativeTypedefStructsCreator.CreateNativeTypedefsSourceFile(methodNamesToNamespaces, autoTypes, Path.Combine(archSourceDir, "autotypes.cs"));
 
             Console.WriteLine($"Compiling source files...");
             System.Diagnostics.Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();

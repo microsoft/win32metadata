@@ -8,7 +8,7 @@ namespace ClangSharpSourceToWinmd
 {
     public static class NativeTypedefStructsCreator
     {
-        public static void CreateNativeTypedefsSourceFile(IEnumerable<string> items, string outputFile)
+        public static void CreateNativeTypedefsSourceFile(Dictionary<string, string> methodNamesToNamespaces, IEnumerable<string> items, string outputFile)
         {
             if (items == null)
             {
@@ -38,6 +38,26 @@ using Windows.Win32.Interop;
                     if (valueType == "DECLARE_HANDLE" || valueType == "AllJoynHandle")
                     {
                         valueType = "IntPtr";
+                    }
+
+                    if (!string.IsNullOrEmpty(item.CloseApi))
+                    {
+                        if (!methodNamesToNamespaces.TryGetValue(item.CloseApi, out var apiNamespace))
+                        {
+                            throw new System.InvalidOperationException($"The API {item.CloseApi} was not found in the .cs files. The auto type {item.Name} needs to be given an explicit namespace.");
+                        }
+
+                        if (string.IsNullOrEmpty(item.Namespace))
+                        {
+                            if (apiNamespace.Contains(';'))
+                            {
+                                throw new System.InvalidOperationException($"The API {item.CloseApi} has multiple namespaces: {apiNamespace}. The auto type {item.Name} needs to be given an explicit namespace.");
+                            }
+                            else
+                            {
+                                item.Namespace = apiNamespace;
+                            }
+                        }
                     }
 
                     if (item.Namespace != currentNamespace)

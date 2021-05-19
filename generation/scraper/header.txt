@@ -193,7 +193,6 @@ using Windows.Win32.UI.InkInput;
 using Windows.Win32.UI.InteractionContext;
 using Windows.Win32.UI.LegacyWindowsEnvironmentFeatures;
 using Windows.Win32.UI.Magnification;
-using Windows.Win32.UI.MenusAndResources;
 using Windows.Win32.UI.Notifications;
 using Windows.Win32.UI.PointerInput;
 using Windows.Win32.UI.RadialInput;

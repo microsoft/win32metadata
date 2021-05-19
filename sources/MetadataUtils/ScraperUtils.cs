@@ -13,7 +13,23 @@ namespace MetadataUtils
 {
     public static class ScraperUtils
     {
+        [Flags]
+        public enum NameOptions
+        {
+            None = 0,
+            Structs = 1,
+            Enums = 2,
+            Delegates = 4,
+            Methods = 8,
+            All = Structs | Enums | Delegates | Methods
+        }
+
         public static Dictionary<string, string> GetNameToNamespaceMap(string sourceDirectory)
+        {
+            return GetNameToNamespaceMap(sourceDirectory, NameOptions.All);
+        }
+
+        public static Dictionary<string, string> GetNameToNamespaceMap(string sourceDirectory, NameOptions nameOptions)
         {
             List<Dictionary<string, string>> maps = new List<Dictionary<string, string>>();
 
@@ -28,7 +44,7 @@ namespace MetadataUtils
             {
                 string fileToRead = Path.GetFullPath(sourceFile);
                 var tree = CSharpSyntaxTree.ParseText(File.ReadAllText(fileToRead), null, fileToRead);
-                var map = NameToNamespaceFinder.GetNamesToNamespaces(tree);
+                var map = NameToNamespaceFinder.GetNamesToNamespaces(tree, nameOptions);
 
                 lock (maps)
                 {
@@ -153,11 +169,11 @@ namespace MetadataUtils
 
         private class NameToNamespaceFinder
         {
-            public static Dictionary<string, string> GetNamesToNamespaces(SyntaxTree tree)
+            public static Dictionary<string, string> GetNamesToNamespaces(SyntaxTree tree, NameOptions nameOptions)
             {
                 Dictionary<string, string> namesToNamespaces = new Dictionary<string, string>();
 
-                new TreeWalker(tree, namesToNamespaces);
+                new TreeWalker(tree, namesToNamespaces, nameOptions);
 
                 return namesToNamespaces;
             }
@@ -165,27 +181,35 @@ namespace MetadataUtils
             private class TreeWalker : CSharpSyntaxWalker
             {
                 private Dictionary<string, string> namesToNamespaces;
+                private NameOptions nameOptions;
 
-                public TreeWalker(SyntaxTree tree, Dictionary<string, string> namesToNamespaces)
+                public TreeWalker(SyntaxTree tree, Dictionary<string, string> namesToNamespaces, NameOptions nameOptions)
                 {
+                    this.nameOptions = nameOptions;
                     this.namesToNamespaces = namesToNamespaces;
                     this.Visit(tree.GetRoot());
                 }
 
                 public override void VisitEnumDeclaration(EnumDeclarationSyntax node)
                 {
-                    this.AddNameToMap(node);
+                    if (this.nameOptions.HasFlag(NameOptions.Enums))
+                    {
+                        this.AddNameToMap(node);
+                    }
 
                     // Don't process the node as we don't need anything else
                 }
 
                 public override void VisitClassDeclaration(ClassDeclarationSyntax node)
                 {
-                    if (node.Identifier.Text == "Apis")
+                    if (this.nameOptions.HasFlag(NameOptions.Methods))
                     {
-                        foreach (MethodDeclarationSyntax method in node.Members.Where(m => m is MethodDeclarationSyntax))
+                        if (node.Identifier.Text == "Apis")
                         {
-                            this.AddNameToMap(method);
+                            foreach (MethodDeclarationSyntax method in node.Members.Where(m => m is MethodDeclarationSyntax))
+                            {
+                                this.AddNameToMap(method);
+                            }
                         }
                     }
 
@@ -194,16 +218,22 @@ namespace MetadataUtils
 
                 public override void VisitDelegateDeclaration(DelegateDeclarationSyntax node)
                 {
-                    this.AddNameToMap(node);
+                    if (this.nameOptions.HasFlag(NameOptions.Delegates))
+                    {
+                        this.AddNameToMap(node);
+                    }
 
                     // Don't process the node as we don't need anything else
                 }
 
                 public override void VisitStructDeclaration(StructDeclarationSyntax node)
                 {
-                    if (!SyntaxUtils.IsEmptyStruct(node))
+                    if (this.nameOptions.HasFlag(NameOptions.Structs))
                     {
-                        this.AddNameToMap(node);
+                        if (!SyntaxUtils.IsEmptyStruct(node))
+                        {
+                            this.AddNameToMap(node);
+                        }
                     }
 
                     // Don't process the node as we don't want nested structs
