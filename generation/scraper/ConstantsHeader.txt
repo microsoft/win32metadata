@@ -8,4 +8,4 @@ using static Windows.Win32.Media.Multimedia.Apis; // Various constants
 using static Windows.Win32.Media.Audio.CoreAudio.Apis; // Various constants
 using static Windows.Win32.Graphics.DirectShow.Apis; // Various constants
 using static Windows.Win32.UI.WindowsAndMessaging.Apis; // For WM_USER
-
+using static Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS; // For FILE_* constants

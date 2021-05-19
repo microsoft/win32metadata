@@ -42,6 +42,10 @@ namespace MetadataUtils
                 new Regex(
                     @"^\s*DEFINE_ENUM_FLAG_OPERATORS\(\s*(\S+)\s*\)\s*\;\s*$");
 
+            private static readonly Regex CtlCodeRegex =
+                new Regex(
+                    @"^\s*CTL_CODE\((.+)\)");
+
             private static readonly Regex NamePartsRegex = new Regex(@"[A-Z]+[a-z]*");
 
             private static readonly Regex ContainsLowerCase = new Regex(@"[a-z]+");
@@ -230,6 +234,24 @@ namespace MetadataUtils
                 this.withTypes.TryGetValue(name, out string forceType);
 
                 return forceType;
+            }
+
+            private void AddCtlCodeConstant(string originalNamespace, string name, string deviceType, string function, string method, string access)
+            {
+                if (this.writtenConstants.Contains(name))
+                {
+                    return;
+                }
+
+                var writer = this.GetConstantWriter(originalNamespace, name);
+
+                function = function.Replace("SCMBUS_FUNCTION(", "(IOCTL_SCMBUS_DEVICE_FUNCTION_BASE + ");
+                function = function.Replace("SCM_LOGICAL_DEVICE_FUNCTION(", "(IOCTL_SCM_LOGICAL_DEVICE_FUNCTION_BASE + ");
+                function = function.Replace("SCM_PHYSICAL_DEVICE_FUNCTION(", "(IOCTL_SCM_PHYSICAL_DEVICE_FUNCTION_BASE + ");
+
+                writer.AddValue("uint", name, $"(({deviceType}) << 16) | (uint)(((int)({access})) << 14) | (({function}) << 2) | ({method})");
+
+                this.writtenConstants.Add(name);
             }
 
             private void AddConstantValue(string originalNamespace, string type, string name, string valueText)
@@ -436,6 +458,11 @@ namespace MetadataUtils
                                 continue;
                             }
 
+                            if (line.Contains("#define CTL_CODE"))
+                            {
+
+                            }
+
                             var defineMatch = DefineRegex.Match(line);
 
                             // Skip if not #define ...
@@ -465,6 +492,17 @@ namespace MetadataUtils
                             if (fixedRawValue.StartsWith('(') && fixedRawValue.EndsWith(')'))
                             {
                                 fixedRawValue = fixedRawValue.Substring(1, rawValue.Length - 2).Trim();
+                            }
+
+                            var ctlCodeMatch = CtlCodeRegex.Match(fixedRawValue);
+                            if (ctlCodeMatch.Success)
+                            {
+                                var parts = ctlCodeMatch.Groups[1].Value.Split(',');
+                                if (parts.Length == 4)
+                                {
+                                    this.AddCtlCodeConstant(currentNamespace, name, parts[0].Trim(), parts[1].Trim(), parts[2].Trim(), parts[3].Trim());
+                                    continue;
+                                }
                             }
 
                             // See if matches one of our well known constants formats
