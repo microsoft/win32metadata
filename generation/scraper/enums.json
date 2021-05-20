@@ -28332,5 +28332,41 @@
         "parameter": "pCodePage"
       }
     ]
+  },
+  {
+    "name": "NOTIFY_ICON_MESSAGE",
+    "flags": false,
+    "autoPopulate": {
+      "filter": "NIM_",
+      "header": "shellapi.h"
+    },
+    "uses": [
+      {
+        "method": "Shell_NotifyIconA",
+        "parameter": "dwMessage"
+      },
+      {
+        "method": "Shell_NotifyIconW",
+        "parameter": "dwMessage"
+      }
+    ]
+  },
+  {
+    "name": "NOTIFY_ICON_DATA_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "NIF_",
+      "header": "shellapi.h"
+    },
+    "uses": [
+      {
+        "method": "NOTIFYICONDATAA",
+        "parameter": "uFlags"
+      },
+      {
+        "method": "NOTIFYICONDATAW",
+        "parameter": "uFlags"
+      }
+    ]
   }
 ]
