@@ -47,6 +47,10 @@ namespace ConstantsScraperApp
             var withAttributes = ConvertValuePairsToDictionary(withAttributeValuePairs);
 
             var headerText = !string.IsNullOrEmpty(headerTextFile) ? File.ReadAllText(headerTextFile) : string.Empty;
+
+            // Always exclude this
+            exclusionNames.Add("__cplusplus");
+
             ScraperResults results;
             try
             {

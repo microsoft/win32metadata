@@ -28,7 +28,7 @@ namespace MetadataUtils
         {
             private static readonly Regex DefineRegex =
                 new Regex(
-                    @"^#define\s+([A-Z][\dA-Za-z_]+)\s+(.+)");
+                    @"^#define\s+([_A-Z][\dA-Za-z_]+)\s+(.+)");
 
             private static readonly Regex DefineConstantRegex =
                 new Regex(
@@ -45,6 +45,10 @@ namespace MetadataUtils
             private static readonly Regex CtlCodeRegex =
                 new Regex(
                     @"^\s*CTL_CODE\((.+)\)");
+
+            private static readonly Regex MakeHresultRegex =
+                new Regex(
+                    @"^\s*(?:MAKE_HRESULT|MAKE_SCODE)\((.+)\)");
 
             private static readonly Regex NamePartsRegex = new Regex(@"[A-Z]+[a-z]*");
 
@@ -234,6 +238,12 @@ namespace MetadataUtils
                 this.withTypes.TryGetValue(name, out string forceType);
 
                 return forceType;
+            }
+
+            private void AddMakeHresultConstant(string originalNamespace, string name, string severity, string facility, string code)
+            {
+                string valueText = $"unchecked((int)(({severity}) << 31) | (((int)({facility})) << 16) | (int)({code}))";
+                this.AddConstantInteger(originalNamespace, "HRESULT", name, valueText);
             }
 
             private void AddCtlCodeConstant(string originalNamespace, string name, string deviceType, string function, string method, string access)
@@ -458,11 +468,6 @@ namespace MetadataUtils
                                 continue;
                             }
 
-                            if (line.Contains("#define CTL_CODE"))
-                            {
-
-                            }
-
                             var defineMatch = DefineRegex.Match(line);
 
                             // Skip if not #define ...
@@ -501,6 +506,26 @@ namespace MetadataUtils
                                 if (parts.Length == 4)
                                 {
                                     this.AddCtlCodeConstant(currentNamespace, name, parts[0].Trim(), parts[1].Trim(), parts[2].Trim(), parts[3].Trim());
+                                    continue;
+                                }
+                            }
+
+                            if (fixedRawValue.StartsWith("AUDCLNT_ERR("))
+                            {
+                                fixedRawValue = fixedRawValue.Replace("AUDCLNT_ERR(", "MAKE_HRESULT(SEVERITY_ERROR, FACILITY_AUDCLNT, ");
+                            }
+                            else if (fixedRawValue.StartsWith("AUDCLNT_SUCCESS("))
+                            {
+                                fixedRawValue = fixedRawValue.Replace("AUDCLNT_SUCCESS(", "MAKE_HRESULT(SEVERITY_SUCCESS, FACILITY_AUDCLNT, ");
+                            }
+
+                            var makeHresultMatch = MakeHresultRegex.Match(fixedRawValue);
+                            if (makeHresultMatch.Success)
+                            {
+                                var parts = makeHresultMatch.Groups[1].Value.Split(',');
+                                if (parts.Length == 3)
+                                {
+                                    this.AddMakeHresultConstant(currentNamespace, name, parts[0].Trim(), parts[1].Trim(), parts[2].Trim());
                                     continue;
                                 }
                             }

@@ -89,11 +89,14 @@ $"        public const {type} {name} = {valueText};");
             if (valueText.Length > 0 && char.IsLetter(valueText[0]))
             {
                 // This means our value is probably using an enum or some other expresssion,
-                // to don't mess with the valueText
+                // so don't mess with the valueText
 
                 // Set the type to something
-                type = "uint";
-                
+                if (type != "int")
+                {
+                    type = "uint";
+                }
+
                 return valueText;
             }
 
