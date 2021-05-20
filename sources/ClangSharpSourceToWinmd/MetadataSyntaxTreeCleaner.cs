@@ -44,7 +44,7 @@ namespace ClangSharpSourceToWinmd
 
             public override SyntaxNode VisitParameter(ParameterSyntax node)
             {
-                string fullName = SyntaxUtils.GetFullName(node);
+                string fullName = GetFullNameWithoutArchSuffix(node);
 
                 if (this.GetRemapInfo(fullName, out List<AttributeSyntax> listAttributes, node.Type.ToString(), out string newType, out string newName))
                 {
@@ -104,8 +104,6 @@ namespace ClangSharpSourceToWinmd
 
             public override SyntaxNode VisitFieldDeclaration(FieldDeclarationSyntax node)
             {
-                string fullName = SyntaxUtils.GetFullName(node);
-
                 // If it's a constant, ignore it if it's already part of an enum
                 if (node.Modifiers.ToString() == "public const")
                 {
@@ -115,6 +113,8 @@ namespace ClangSharpSourceToWinmd
                         return null;
                     }
                 }
+
+                string fullName = GetFullNameWithoutArchSuffix(node);
 
                 this.GetRemapInfo(fullName, out var listAttributes, node.Declaration.Type.ToString(), out string newType, out string newName);
 
@@ -342,7 +342,8 @@ namespace ClangSharpSourceToWinmd
 
                 this.visitedDelegateNames.Add(fullName);
 
-                string returnFullName = $"{fullName}::return";
+                string fixedName = GetFullNameWithoutArchSuffix(node);
+                string returnFullName = $"{fixedName}::return";
 
                 if (this.GetRemapInfo(returnFullName, out List<AttributeSyntax> listAttributes, node.ReturnType.ToString(), out var newType, out _))
                 {
@@ -382,13 +383,14 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 string fullName = SyntaxUtils.GetFullName(node);
+                string fixedFullName = GetFullNameWithoutArchSuffix(node);
 
                 // Remove duplicate static methods
                 if (node.Body == null)
                 {
                     // If this function is supposed to be in a certain namespace, remove it if it's not.
                     // We only respect this for static methods
-                    if (this.requiredNamespaces.TryGetValue(fullName, out var requiredNamespace))
+                    if (this.requiredNamespaces.TryGetValue(fixedFullName, out var requiredNamespace))
                     {
                         var ns = GetEnclosingNamespace(node);
                         if (ns != requiredNamespace)
@@ -412,7 +414,7 @@ namespace ClangSharpSourceToWinmd
                     return null;
                 }
 
-                string returnFullName = $"{fullName}::return";
+                string returnFullName = $"{fixedFullName}::return";
 
                 // Find remap info for the return parameter for this method and apply any that we find
                 if (this.GetRemapInfo(returnFullName, out List<AttributeSyntax> listAttributes, node.ReturnType.ToString(), out var newType, out _))
@@ -455,6 +457,16 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 return null;
+            }
+
+            private static string GetFullNameWithoutArchSuffix(SyntaxNode node)
+            {
+                string ret = SyntaxUtils.GetFullName(node);
+
+                ret = ret.Replace("____1", string.Empty);
+                ret = ret.Replace("____2", string.Empty);
+
+                return ret;
             }
 
             private string GetInfoForNativeType(string nativeTypeName, out bool isConst, out bool isNullTerminated, out bool isNullNullTerminated)
