@@ -2173,7 +2173,6 @@ ShellWindowTypeConstants=Windows.Win32.UI.Shell
 IShellWindows=Windows.Win32.UI.Shell
 SERIALIZEDPROPERTYVALUE=Windows.Win32.UI.Shell
 ICreateObject=Windows.Win32.UI.Shell
-IDelayedPropertyStoreFactory=Windows.Win32.UI.Shell
 IInitializeWithFile=Windows.Win32.UI.Shell
 IInitializeWithStream=Windows.Win32.UI.Shell
 INamedPropertyStore=Windows.Win32.UI.Shell
