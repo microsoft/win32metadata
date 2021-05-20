@@ -389,6 +389,15 @@ WriteFmtUserTypeStg=Windows.Win32.Storage.StructuredStorage
 SearchPathA=Windows.Win32.Storage.FileSystem
 SearchPathW=Windows.Win32.Storage.FileSystem
 # endregion processenv.h
+# region propsys.h
+ICreateObject=Windows.Win32.UI.Shell
+IInitializeWithFile=Windows.Win32.UI.Shell
+IInitializeWithStream=Windows.Win32.UI.Shell
+INamedPropertyStore=Windows.Win32.UI.Shell
+IObjectWithPropertyKey=Windows.Win32.UI.Shell
+IPersistSerializedPropStorage=Windows.Win32.UI.Shell
+IPersistSerializedPropStorage2=Windows.Win32.UI.Shell
+# endregion propsys.h
 # region propvarutil.h
 StgDeserializePropVariant=Windows.Win32.Storage.StructuredStorage
 StgSerializePropVariant=Windows.Win32.Storage.StructuredStorage
@@ -2172,13 +2181,6 @@ ShellWindowFindWindowOptions=Windows.Win32.UI.Shell
 ShellWindowTypeConstants=Windows.Win32.UI.Shell
 IShellWindows=Windows.Win32.UI.Shell
 SERIALIZEDPROPERTYVALUE=Windows.Win32.UI.Shell
-ICreateObject=Windows.Win32.UI.Shell
-IInitializeWithFile=Windows.Win32.UI.Shell
-IInitializeWithStream=Windows.Win32.UI.Shell
-INamedPropertyStore=Windows.Win32.UI.Shell
-IObjectWithPropertyKey=Windows.Win32.UI.Shell
-IPersistSerializedPropStorage=Windows.Win32.UI.Shell
-IPersistSerializedPropStorage2=Windows.Win32.UI.Shell
 INotifyReplica=Windows.Win32.UI.Shell
 SOFTDISTINFO=Windows.Win32.UI.Shell
 GetMenuContextHelpId=Windows.Win32.UI.Shell
