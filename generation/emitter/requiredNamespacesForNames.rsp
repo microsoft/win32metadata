@@ -1,4 +1,12 @@
 --requiredNamespaceForName
+# region appmgmt.h
+APPCATEGORYINFO=Windows.Win32.UI.Shell
+APPCATEGORYINFOLIST=Windows.Win32.UI.Shell
+# endregion appmgmt.h
+# region audioapotypes.h
+APO_BUFFER_FLAGS=Windows.Win32.System.RemoteDesktop
+APO_CONNECTION_PROPERTY=Windows.Win32.System.RemoteDesktop
+# endregion audioapotypes.h
 # region audioengineendpoint.h
 AE_CURRENT_POSITION=Windows.Win32.System.RemoteDesktop
 AE_POSITION_FLAGS=Windows.Win32.System.RemoteDesktop
@@ -477,6 +485,7 @@ SearchPathA=Windows.Win32.Storage.FileSystem
 SearchPathW=Windows.Win32.Storage.FileSystem
 # endregion processenv.h
 # region processthreadsapi.h
+FlushInstructionCache=Windows.Win32.System.Diagnostics.Debug
 ProcessIdToSessionId=Windows.Win32.System.RemoteDesktop
 # endregion processthreadsapi.h
 # region propvarutil.h
@@ -1915,6 +1924,7 @@ GetUpdateRect=Windows.Win32.Graphics.Gdi
 GetUpdateRgn=Windows.Win32.Graphics.Gdi
 GetUserObjectInformationA=Windows.Win32.System.StationsAndDesktops
 GetUserObjectInformationW=Windows.Win32.System.StationsAndDesktops
+GetUserObjectSecurity=Windows.Win32.Security
 GetWindowContextHelpId=Windows.Win32.UI.Shell
 GetWindowDC=Windows.Win32.Graphics.Gdi
 GetWindowDpiAwarenessContext=Windows.Win32.UI.HiDpi
@@ -2084,6 +2094,7 @@ SetThreadDpiAwarenessContext=Windows.Win32.UI.HiDpi
 SetThreadDpiHostingBehavior=Windows.Win32.UI.HiDpi
 SetUserObjectInformationA=Windows.Win32.System.StationsAndDesktops
 SetUserObjectInformationW=Windows.Win32.System.StationsAndDesktops
+SetUserObjectSecurity=Windows.Win32.Security
 SetWindowContextHelpId=Windows.Win32.UI.Shell
 SetWindowFeedbackSetting=Windows.Win32.UI.Controls
 SetWindowRgn=Windows.Win32.Graphics.Gdi
@@ -2134,6 +2145,7 @@ WindowFromDC=Windows.Win32.Graphics.Gdi
 WINEVENTPROC=Windows.Win32.UI.Accessibility
 WinHelpA=Windows.Win32.UI.Shell
 WinHelpW=Windows.Win32.UI.Shell
+WTSSESSION_NOTIFICATION=Windows.Win32.System.RemoteDesktop
 # endregion winuser.h
 # region wtypes.h
 CSPLATFORM=Windows.Win32.System.Com
@@ -2162,7 +2174,6 @@ UnregisterPowerSettingNotification=Windows.Win32.System.SystemServices
 UnregisterSuspendResumeNotification=Windows.Win32.System.SystemServices
 POWERBROADCAST_SETTING=Windows.Win32.System.SystemServices
 CoGetDefaultContext=Windows.Win32.System.ComponentServices
-FlushInstructionCache=Windows.Win32.System.Diagnostics.Debug
 InitializeContext=Windows.Win32.System.Diagnostics.Debug
 LocateXStateFeature=Windows.Win32.System.Diagnostics.Debug
 SetXStateFeaturesMask=Windows.Win32.System.Diagnostics.Debug
@@ -2224,10 +2235,6 @@ SetServiceBits=Windows.Win32.Security
 ImpersonateNamedPipeClient=Windows.Win32.Security
 InstallELAMCertificateInfo=Windows.Win32.Security
 RtlConvertSidToUnicodeString=Windows.Win32.Security
-GetUserObjectSecurity=Windows.Win32.Security
-SetUserObjectSecurity=Windows.Win32.Security
-APPCATEGORYINFO=Windows.Win32.UI.Shell
-APPCATEGORYINFOLIST=Windows.Win32.UI.Shell
 ShellWindowFindWindowOptions=Windows.Win32.UI.Shell
 ShellWindowTypeConstants=Windows.Win32.UI.Shell
 IShellWindows=Windows.Win32.UI.Shell
@@ -2237,9 +2244,6 @@ MF_MEDIASOURCE_STATUS_INFO=Windows.Win32.Media.Streaming
 MF_TRANSFER_VIDEO_FRAME_FLAGS=Windows.Win32.Media.Streaming
 IMFDeviceTransform=Windows.Win32.Media.Streaming
 IMFDeviceTransformCallback=Windows.Win32.Media.Streaming
-APO_BUFFER_FLAGS=Windows.Win32.System.RemoteDesktop
-APO_CONNECTION_PROPERTY=Windows.Win32.System.RemoteDesktop
-WTSSESSION_NOTIFICATION=Windows.Win32.System.RemoteDesktop
 WinMain=Windows.Win32.UI.WindowsAndMessaging
 PSYMBOLSERVERCALLBACKPROC=Windows.Win32.System.WindowsProgramming
 FILETIME=Windows.Win32.System.WindowsProgramming
