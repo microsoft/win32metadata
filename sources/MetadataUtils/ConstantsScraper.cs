@@ -46,6 +46,10 @@ namespace MetadataUtils
                 new Regex(
                     @"^\s*CTL_CODE\((.+)\)");
 
+            private static readonly Regex HidUsageRegex =
+                new Regex(
+                    @"^\s*\(USAGE\)\s*(0x[\da-f]+)", RegexOptions.IgnoreCase);
+
             private static readonly Regex MakeHresultRegex =
                 new Regex(
                     @"^\s*(?:MAKE_HRESULT|MAKE_SCODE)\((.+)\)");
@@ -508,6 +512,13 @@ namespace MetadataUtils
                                     this.AddCtlCodeConstant(currentNamespace, name, parts[0].Trim(), parts[1].Trim(), parts[2].Trim(), parts[3].Trim());
                                     continue;
                                 }
+                            }
+
+                            var usageMatch = HidUsageRegex.Match(fixedRawValue);
+                            if (usageMatch.Success)
+                            {
+                                this.AddConstantValue(currentNamespace, "ushort", name, usageMatch.Groups[1].Value);
+                                continue;
                             }
 
                             if (fixedRawValue.StartsWith("AUDCLNT_ERR("))
