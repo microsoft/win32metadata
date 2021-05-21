@@ -22,6 +22,13 @@ PropVariantCopy=Windows.Win32.Storage.StructuredStorage
 RoGetAgileReference=Windows.Win32.System.WinRT
 ServerInformation=Windows.Win32.System.WinRT
 # endregion combaseapi.h
+# region commctrl.h
+DefSubclassProc=Windows.Win32.UI.Shell
+GetWindowSubclass=Windows.Win32.UI.Shell
+RemoveWindowSubclass=Windows.Win32.UI.Shell
+SetWindowSubclass=Windows.Win32.UI.Shell
+SUBCLASSPROC=Windows.Win32.UI.Shell
+# endregion commctrl.h
 # region consoleapi2.h (also defined in ntddvdeo.h)
 FOREGROUND_BLUE=Windows.Win32.System.Console
 FOREGROUND_GREEN=Windows.Win32.System.Console
@@ -197,6 +204,11 @@ PDD_WAITFORVERTICALBLANK=Windows.Win32.UI.DisplayDevices
 VIDEOMEMORY=Windows.Win32.UI.DisplayDevices
 VIDEOMEMORYINFO=Windows.Win32.UI.DisplayDevices
 # endregion ddrawint.h
+# region dshowasf.h
+_AM_ASFWRITERCONFIG_PARAM=Windows.Win32.Media.WindowsMediaFormat
+IAMWMBufferPass=Windows.Win32.Media.WindowsMediaFormat
+IAMWMBufferPassCallback=Windows.Win32.Media.WindowsMediaFormat
+# endregion dshowasf.h
 # region dvp.h
 DDVIDEOPORTBANDWIDTH=Windows.Win32.UI.DisplayDevices
 DDVIDEOPORTCAPS=Windows.Win32.UI.DisplayDevices
@@ -220,6 +232,9 @@ DXVA_COPPStatusDisplayData=Windows.Win32.Graphics.DirectShow
 DXVA_COPPStatusHDCPKeyData=Windows.Win32.Graphics.DirectShow
 DXVA_COPPStatusSignalingCmdData=Windows.Win32.Graphics.DirectShow
 # endregion dxva9typ.h
+# region evcode.h
+AM_WMT_EVENT_DATA=Windows.Win32.Media.WindowsMediaFormat
+# endregion evcode.h
 # region eventsys.h
 EOC_ChangeType=Windows.Win32.System.Com
 IEventProperty=Windows.Win32.System.Com
@@ -233,6 +248,10 @@ GetOverlappedResultEx=Windows.Win32.System.SystemServices
 # region libloaderapi.h
 FindStringOrdinal=Windows.Win32.Globalization
 # endregion libloaderapi.h
+# region memoryapi.h
+ReadProcessMemory=Windows.Win32.System.Diagnostics.Debug
+WriteProcessMemory=Windows.Win32.System.Diagnostics.Debug
+# endregion memoryapi.h
 # region mfapi.h
 CapturedMetadataExposureCompensation=Windows.Win32.Media.Streaming
 CapturedMetadataISOGains=Windows.Win32.Media.Streaming
@@ -269,6 +288,12 @@ UNLOAD_DLL_DEBUG_INFO=Windows.Win32.System.Diagnostics.Debug
 WIN32_FIND_DATAA=Windows.Win32.Storage.FileSystem
 WIN32_FIND_DATAW=Windows.Win32.Storage.FileSystem
 # endregion minwinbase.h
+# region mmreg.h
+HEAACWAVEFORMAT=Windows.Win32.Graphics.DirectShow
+HEAACWAVEINFO=Windows.Win32.Graphics.DirectShow
+MPEG1WAVEFORMAT=Windows.Win32.Graphics.DirectShow
+MPEGLAYER3WAVEFORMAT=Windows.Win32.Graphics.DirectShow
+# endregion mmreg.h
 # region o*idl.h (duplicate definitions in many headers)
 ACTIVATIONTYPE=Windows.Win32.System.WinRT
 BSTR_UserFree=Windows.Win32.System.OleAutomation
@@ -451,6 +476,9 @@ OleSavePictureFile=Windows.Win32.System.OleAutomation
 SearchPathA=Windows.Win32.Storage.FileSystem
 SearchPathW=Windows.Win32.Storage.FileSystem
 # endregion processenv.h
+# region processthreadsapi.h
+ProcessIdToSessionId=Windows.Win32.System.RemoteDesktop
+# endregion processthreadsapi.h
 # region propvarutil.h
 StgDeserializePropVariant=Windows.Win32.Storage.StructuredStorage
 StgSerializePropVariant=Windows.Win32.Storage.StructuredStorage
@@ -466,14 +494,21 @@ PROCESS_DPI_AWARENESS=Windows.Win32.UI.HiDpi
 SetProcessDpiAwareness=Windows.Win32.UI.HiDpi
 # endregion shellscalingapi.h
 # region shlobj_core.h
+_PROPERTYUI_FLAGS=Windows.Win32.System.PropertiesSystem
+IPropertyUI=Windows.Win32.System.PropertiesSystem
+PDOPSTATUS=Windows.Win32.System.PropertiesSystem
 PifMgr_CloseProperties=Windows.Win32.System.PropertiesSystem
 PifMgr_GetProperties=Windows.Win32.System.PropertiesSystem
 PifMgr_OpenProperties=Windows.Win32.System.PropertiesSystem
 PifMgr_SetProperties=Windows.Win32.System.PropertiesSystem
+PLACEHOLDER_STATES=Windows.Win32.System.PropertiesSystem
 PROPPRG=Windows.Win32.System.PropertiesSystem
+SHGetPropertyStoreFromIDList=Windows.Win32.System.PropertiesSystem
+SHGetPropertyStoreFromParsingName=Windows.Win32.System.PropertiesSystem
 SHPropStgCreate=Windows.Win32.System.PropertiesSystem
 SHPropStgReadMultiple=Windows.Win32.System.PropertiesSystem
 SHPropStgWriteMultiple=Windows.Win32.System.PropertiesSystem
+SYNC_TRANSFER_STATUS=Windows.Win32.System.PropertiesSystem
 # endregion shlobj_core.h
 # region shobjidl.h
 IAccessibilityDockingService=Windows.Win32.System.Com
@@ -937,12 +972,15 @@ UnregisterApplicationRestart=Windows.Win32.System.Recovery
 UnregisterWait=Windows.Win32.System.Threading
 UpdateResourceA=Windows.Win32.System.LibraryLoader
 UpdateResourceW=Windows.Win32.System.LibraryLoader
+VerifyVersionInfoA=Windows.Win32.System.SystemInformation
+VerifyVersionInfoW=Windows.Win32.System.SystemInformation
 WaitCommEvent=Windows.Win32.System.SystemServices
 WaitNamedPipeA=Windows.Win32.System.Pipes
 WinExec=Windows.Win32.System.SystemServices
 Wow64EnableWow64FsRedirection=Windows.Win32.Storage.FileSystem
 WriteEncryptedFileRaw=Windows.Win32.Storage.FileSystem
 WriteTapemark=Windows.Win32.Storage.FileSystem
+WTSGetActiveConsoleSessionId=Windows.Win32.System.RemoteDesktop
 ZombifyActCtx=Windows.Win32.System.ApplicationInstallationAndServicing
 # endregion winbase.h
 # region winddi.h
@@ -1581,10 +1619,17 @@ LDT_ENTRY=Windows.Win32.System.Diagnostics.Debug
 LOGICAL_PROCESSOR_RELATIONSHIP=Windows.Win32.System.SystemInformation
 LUID_AND_ATTRIBUTES=Windows.Win32.Security
 MANDATORY_LEVEL=Windows.Win32.Security
+MESSAGE_RESOURCE_BLOCK=Windows.Win32.UI.WindowsAndMessaging
+MESSAGE_RESOURCE_DATA=Windows.Win32.UI.WindowsAndMessaging
+MESSAGE_RESOURCE_ENTRY=Windows.Win32.UI.WindowsAndMessaging
 OBJECT_TYPE_LIST=Windows.Win32.Security
 OSVERSIONINFOA=Windows.Win32.System.SystemInformation
+OSVERSIONINFOA=Windows.Win32.System.SystemInformation
+OSVERSIONINFOEXA=Windows.Win32.System.SystemInformation
 OSVERSIONINFOEXA=Windows.Win32.System.SystemInformation
 OSVERSIONINFOEXW=Windows.Win32.System.SystemInformation
+OSVERSIONINFOEXW=Windows.Win32.System.SystemInformation
+OSVERSIONINFOW=Windows.Win32.System.SystemInformation
 OSVERSIONINFOW=Windows.Win32.System.SystemInformation
 PERFORMANCE_DATA=Windows.Win32.System.Performance.HardwareCounterProfiling
 PRIVILEGE_SET=Windows.Win32.Security
@@ -1653,6 +1698,7 @@ TOKEN_TYPE=Windows.Win32.Security
 TOKEN_USER_CLAIMS=Windows.Win32.Security
 TOKEN_USER=Windows.Win32.Security
 TRANSACTION_OUTCOME=Windows.Win32.Storage.FileSystem
+VerSetConditionMask=Windows.Win32.System.SystemInformation
 WELL_KNOWN_SID_TYPE=Windows.Win32.Security
 WOW64_CONTEXT=Windows.Win32.System.Diagnostics.Debug
 WOW64_FLOATING_SAVE_AREA=Windows.Win32.System.Diagnostics.Debug
@@ -1767,6 +1813,9 @@ ExitWindowsEx=Windows.Win32.System.Shutdown
 FEEDBACK_TYPE=Windows.Win32.UI.Controls
 FillRect=Windows.Win32.Graphics.Gdi
 FILTERKEYS=Windows.Win32.UI.Accessibility
+FlashWindow=Windows.Win32.System.Diagnostics.Debug
+FlashWindowEx=Windows.Win32.System.Diagnostics.Debug
+FLASHWINFO=Windows.Win32.System.Diagnostics.Debug
 FrameRect=Windows.Win32.Graphics.Gdi
 GESTURECONFIG=Windows.Win32.UI.TouchInput
 GESTUREINFO=Windows.Win32.UI.TouchInput
@@ -1914,6 +1963,8 @@ LoadBitmapA=Windows.Win32.Graphics.Gdi
 LoadBitmapW=Windows.Win32.Graphics.Gdi
 LoadKeyboardLayoutA=Windows.Win32.UI.KeyboardAndMouseInput
 LoadKeyboardLayoutW=Windows.Win32.UI.KeyboardAndMouseInput
+LoadStringA=Windows.Win32.UI.WindowsAndMessaging
+LoadStringW=Windows.Win32.UI.WindowsAndMessaging
 LockWindowUpdate=Windows.Win32.Graphics.Gdi
 LockWorkStation=Windows.Win32.System.Shutdown
 LogicalToPhysicalPointForPerMonitorDPI=Windows.Win32.UI.HiDpi
@@ -1923,6 +1974,7 @@ MapVirtualKeyExW=Windows.Win32.UI.KeyboardAndMouseInput
 MapVirtualKeyW=Windows.Win32.UI.KeyboardAndMouseInput
 MapWindowPoints=Windows.Win32.Graphics.Gdi
 MEASUREITEMSTRUCT=Windows.Win32.UI.Controls
+MessageBeep=Windows.Win32.System.Diagnostics.Debug
 MONITORENUMPROC=Windows.Win32.Graphics.Gdi
 MonitorFromPoint=Windows.Win32.Graphics.Gdi
 MonitorFromRect=Windows.Win32.Graphics.Gdi
@@ -2017,6 +2069,7 @@ SetDoubleClickTime=Windows.Win32.UI.KeyboardAndMouseInput
 SetFocus=Windows.Win32.UI.KeyboardAndMouseInput
 SetGestureConfig=Windows.Win32.UI.TouchInput
 SetKeyboardState=Windows.Win32.UI.KeyboardAndMouseInput
+SetLastErrorEx=Windows.Win32.System.Diagnostics.Debug
 SetMenuContextHelpId=Windows.Win32.UI.Shell
 SetProcessDpiAwarenessContext=Windows.Win32.UI.HiDpi
 SetProcessRestrictionExemption=Windows.Win32.System.SystemServices
@@ -2109,8 +2162,6 @@ UnregisterPowerSettingNotification=Windows.Win32.System.SystemServices
 UnregisterSuspendResumeNotification=Windows.Win32.System.SystemServices
 POWERBROADCAST_SETTING=Windows.Win32.System.SystemServices
 CoGetDefaultContext=Windows.Win32.System.ComponentServices
-ReadProcessMemory=Windows.Win32.System.Diagnostics.Debug
-WriteProcessMemory=Windows.Win32.System.Diagnostics.Debug
 FlushInstructionCache=Windows.Win32.System.Diagnostics.Debug
 InitializeContext=Windows.Win32.System.Diagnostics.Debug
 LocateXStateFeature=Windows.Win32.System.Diagnostics.Debug
@@ -2119,11 +2170,6 @@ Wow64GetThreadContext=Windows.Win32.System.Diagnostics.Debug
 Wow64GetThreadSelectorEntry=Windows.Win32.System.Diagnostics.Debug
 Wow64SetThreadContext=Windows.Win32.System.Diagnostics.Debug
 RtlNtStatusToDosError=Windows.Win32.System.Diagnostics.Debug
-FlashWindow=Windows.Win32.System.Diagnostics.Debug
-FlashWindowEx=Windows.Win32.System.Diagnostics.Debug
-MessageBeep=Windows.Win32.System.Diagnostics.Debug
-SetLastErrorEx=Windows.Win32.System.Diagnostics.Debug
-FLASHWINFO=Windows.Win32.System.Diagnostics.Debug
 DWRITE_GLYPH_IMAGE_FORMATS=Windows.Win32.Graphics.DirectWrite
 DWRITE_MEASURING_MODE=Windows.Win32.Graphics.DirectWrite
 IDMOQualityControl=Windows.Win32.Graphics.DirectShow
@@ -2134,10 +2180,6 @@ IMediaObject=Windows.Win32.Graphics.DirectShow
 IMediaObjectInPlace=Windows.Win32.Graphics.DirectShow
 DMO_MEDIA_TYPE=Windows.Win32.Graphics.DirectShow
 DMO_OUTPUT_DATA_BUFFER=Windows.Win32.Graphics.DirectShow
-HEAACWAVEFORMAT=Windows.Win32.Graphics.DirectShow
-HEAACWAVEINFO=Windows.Win32.Graphics.DirectShow
-MPEG1WAVEFORMAT=Windows.Win32.Graphics.DirectShow
-MPEGLAYER3WAVEFORMAT=Windows.Win32.Graphics.DirectShow
 READYSTATE=Windows.Win32.Graphics.DirectShow
 VIDEOENCODER_BITRATE_MODE=Windows.Win32.Graphics.DirectShow
 TIMECODE=Windows.Win32.Graphics.DirectShow
@@ -2155,11 +2197,6 @@ _ColumnSortOrder=Windows.Win32.UI.LegacyWindowsEnvironmentFeatures
 IActiveDesktopP=Windows.Win32.UI.LegacyWindowsEnvironmentFeatures
 IADesktopP2=Windows.Win32.UI.LegacyWindowsEnvironmentFeatures
 VS_FIXEDFILEINFO=Windows.Win32.UI.WindowsAndMessaging
-MESSAGE_RESOURCE_BLOCK=Windows.Win32.UI.WindowsAndMessaging
-MESSAGE_RESOURCE_DATA=Windows.Win32.UI.WindowsAndMessaging
-MESSAGE_RESOURCE_ENTRY=Windows.Win32.UI.WindowsAndMessaging
-LoadStringA=Windows.Win32.UI.WindowsAndMessaging
-LoadStringW=Windows.Win32.UI.WindowsAndMessaging
 IDirect3D9ExOverlayExtension=Windows.Win32.Media.MediaFoundation
 IDirect3DAuthenticatedChannel9=Windows.Win32.Media.MediaFoundation
 IDirect3DCryptoSession9=Windows.Win32.Media.MediaFoundation
@@ -2171,13 +2208,6 @@ CodecAPIEventData=Windows.Win32.Media.MediaFoundation
 SHGetPropertyStoreForWindow=Windows.Win32.System.PropertiesSystem
 SYNC_ENGINE_STATE_FLAGS=Windows.Win32.System.PropertiesSystem
 SHAddDefaultPropertiesByExt=Windows.Win32.System.PropertiesSystem
-_PROPERTYUI_FLAGS=Windows.Win32.System.PropertiesSystem
-PDOPSTATUS=Windows.Win32.System.PropertiesSystem
-PLACEHOLDER_STATES=Windows.Win32.System.PropertiesSystem
-SYNC_TRANSFER_STATUS=Windows.Win32.System.PropertiesSystem
-SHGetPropertyStoreFromIDList=Windows.Win32.System.PropertiesSystem
-SHGetPropertyStoreFromParsingName=Windows.Win32.System.PropertiesSystem
-IPropertyUI=Windows.Win32.System.PropertiesSystem
 PROPERTYKEY=Windows.Win32.System.PropertiesSystem
 IUnknown_AddRef_Proxy=Windows.Win32.System.Rpc
 IUnknown_QueryInterface_Proxy=Windows.Win32.System.Rpc
@@ -2198,11 +2228,6 @@ GetUserObjectSecurity=Windows.Win32.Security
 SetUserObjectSecurity=Windows.Win32.Security
 APPCATEGORYINFO=Windows.Win32.UI.Shell
 APPCATEGORYINFOLIST=Windows.Win32.UI.Shell
-SUBCLASSPROC=Windows.Win32.UI.Shell
-DefSubclassProc=Windows.Win32.UI.Shell
-GetWindowSubclass=Windows.Win32.UI.Shell
-RemoveWindowSubclass=Windows.Win32.UI.Shell
-SetWindowSubclass=Windows.Win32.UI.Shell
 ShellWindowFindWindowOptions=Windows.Win32.UI.Shell
 ShellWindowTypeConstants=Windows.Win32.UI.Shell
 IShellWindows=Windows.Win32.UI.Shell
@@ -2214,32 +2239,19 @@ IMFDeviceTransform=Windows.Win32.Media.Streaming
 IMFDeviceTransformCallback=Windows.Win32.Media.Streaming
 APO_BUFFER_FLAGS=Windows.Win32.System.RemoteDesktop
 APO_CONNECTION_PROPERTY=Windows.Win32.System.RemoteDesktop
-ProcessIdToSessionId=Windows.Win32.System.RemoteDesktop
-WTSGetActiveConsoleSessionId=Windows.Win32.System.RemoteDesktop
 WTSSESSION_NOTIFICATION=Windows.Win32.System.RemoteDesktop
 WinMain=Windows.Win32.UI.WindowsAndMessaging
 PSYMBOLSERVERCALLBACKPROC=Windows.Win32.System.WindowsProgramming
-InstallPerfDllA=Windows.Win32.System.WindowsProgramming
-InstallPerfDllW=Windows.Win32.System.WindowsProgramming
 FILETIME=Windows.Win32.System.WindowsProgramming
 SYSTEMTIME=Windows.Win32.System.WindowsProgramming
 CoInstall=Windows.Win32.System.WindowsProgramming
 FIRMWARE_TYPE=Windows.Win32.System.WindowsProgramming
-VerSetConditionMask=Windows.Win32.System.WindowsProgramming
-OSVERSIONINFOA=Windows.Win32.System.WindowsProgramming
-OSVERSIONINFOEXA=Windows.Win32.System.WindowsProgramming
-OSVERSIONINFOEXW=Windows.Win32.System.WindowsProgramming
-OSVERSIONINFOW=Windows.Win32.System.WindowsProgramming
 DisableProcessWindowsGhosting=Windows.Win32.System.WindowsProgramming
 GetSystemWow64Directory2A=Windows.Win32.System.WindowsProgramming
 GetSystemWow64Directory2W=Windows.Win32.System.WindowsProgramming
 GetSystemWow64DirectoryA=Windows.Win32.System.WindowsProgramming
 GetSystemWow64DirectoryW=Windows.Win32.System.WindowsProgramming
 IsWow64GuestMachineSupported=Windows.Win32.System.WindowsProgramming
-_AM_ASFWRITERCONFIG_PARAM=Windows.Win32.Media.WindowsMediaFormat
-IAMWMBufferPass=Windows.Win32.Media.WindowsMediaFormat
-IAMWMBufferPassCallback=Windows.Win32.Media.WindowsMediaFormat
-AM_WMT_EVENT_DATA=Windows.Win32.Media.WindowsMediaFormat
 ServerSelection=Windows.Win32.System.UpdateAgent
 DXGI_ERROR_*=Windows.Win32.Graphics.Dxgi
 WM_DEVICECHANGE=Windows.Win32.UI.WindowsAndMessaging
