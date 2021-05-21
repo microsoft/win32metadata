@@ -36,7 +36,13 @@ namespace MetadataUtils
             if (attr != null)
             {
                 string nativeType = attr.ArgumentList.Arguments[0].ToString();
-                return EncodeHelpers.RemoveQuotes(nativeType);
+                string ret = EncodeHelpers.RemoveQuotes(nativeType);
+                if (ret == "INT_PTR")
+                {
+                    ret = "IntPtr";
+                }
+
+                return ret;
             }
 
             return null;

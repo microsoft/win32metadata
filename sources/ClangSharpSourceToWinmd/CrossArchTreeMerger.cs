@@ -45,11 +45,6 @@ namespace ClangSharpSourceToWinmd
             {
                 this.currentArch = CrossArchSyntaxMap.GetArchForTree(tree);
 
-                if (Path.GetFileName(tree.FilePath) == "autotypes.cs" && this.currentArch != Architecture.X64)
-                {
-                    return null;
-                }
-
                 if (!CrossArchSyntaxMap.IsCrossArchTree(tree))
                 {
                     return tree;

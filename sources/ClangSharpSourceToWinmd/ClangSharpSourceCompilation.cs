@@ -73,12 +73,6 @@ namespace ClangSharpSourceToWinmd
 
             syntaxTrees = NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(syntaxTrees, requiredNamespaces);
 
-            if (arch == "crossarch")
-            {
-                CrossArchSyntaxMap crossArchSyntaxMap = CrossArchSyntaxMap.LoadFromTrees(syntaxTrees);
-                syntaxTrees = CrossArchTreeMerger.MergeTrees(crossArchSyntaxMap, syntaxTrees);
-            }
-
             GetTreeInfo(syntaxTrees, out var emptyStucts, out var enumMemberNames);
 
 #if MakeSingleThreaded
@@ -111,13 +105,23 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 var cleanedTree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, remaps, enumAdditions, enumsMakeFlagsHashSet, requiredNamespaces, emptyStucts, enumMemberNames, modifiedFile);
-                File.WriteAllText(modifiedFile, cleanedTree.GetText().ToString());
 
                 lock (cleanedTrees)
                 {
                     cleanedTrees.Add(cleanedTree);
                 }
             });
+
+            if (arch == "crossarch")
+            {
+                CrossArchSyntaxMap crossArchSyntaxMap = CrossArchSyntaxMap.LoadFromTrees(cleanedTrees);
+                cleanedTrees = CrossArchTreeMerger.MergeTrees(crossArchSyntaxMap, cleanedTrees);
+            }
+
+            foreach (var cleanedTree in cleanedTrees)
+            {
+                File.WriteAllText(cleanedTree.FilePath, cleanedTree.GetText().ToString());
+            }
 
             CSharpCompilationOptions compilationOptions = new CSharpCompilationOptions(OutputKind.WindowsRuntimeMetadata, allowUnsafe: true);
             var comp =

@@ -35,8 +35,8 @@ namespace ClangSharpSourceToWinmd
 
         public static bool IsCrossArchTree(SyntaxTree tree)
         {
-            string treeFileName = tree.FilePath;
-            if (treeFileName.EndsWith("autotypes.cs") || 
+            string treeFileName = Path.GetFileName(tree.FilePath).ToLowerInvariant();
+            if (treeFileName.StartsWith("autotypes.") || 
                 treeFileName.EndsWith(".enums.cs") || 
                 treeFileName.EndsWith(".constants.cs") ||
                 treeFileName.EndsWith(".manual.cs"))
@@ -112,6 +112,85 @@ namespace ClangSharpSourceToWinmd
             return nativeType;
         }
 
+        private static string GetMethodSignature(
+            string name, SyntaxList<AttributeListSyntax> attributeLists, TypeSyntax returnType, ParameterListSyntax parameterList)
+        {
+            StringBuilder ret = new StringBuilder();
+            if (attributeLists != null)
+            {
+                foreach (var list in attributeLists)
+                {
+                    if (list.Target != null && list.Target.Identifier.Text == "return")
+                    {
+                        continue;
+                    }
+
+                    foreach (var attr in list.Attributes)
+                    {
+                        if (attr.ToString().StartsWith("return:"))
+                        {
+                            continue;
+                        }
+
+                        ret.Append($"[{attr}]");
+                    }
+                }
+            }
+
+            var retType = GetTypeName(returnType.ToString(), attributeLists);
+            if (retType == null)
+            {
+                retType = returnType.ToString();
+            }
+
+            ret.Append(retType);
+            ret.Append(' ');
+            ret.Append(name);
+            ret.Append('(');
+
+            bool firstParam = true;
+            foreach (var param in parameterList.Parameters)
+            {
+                if (firstParam)
+                {
+                    firstParam = false;
+                }
+                else
+                {
+                    ret.Append(',');
+                }
+
+                var typeName = GetTypeName(param.Type.ToString(), param.AttributeLists);
+                ret.Append(typeName);
+                ret.Append(' ');
+                ret.Append(param.Identifier.ValueText);
+            }
+
+            ret.Append(')');
+
+            return ret.ToString();
+        }
+
+        private static string GetTypeName(string type, SyntaxList<AttributeListSyntax> attributeList)
+        {
+            var ret = type;
+            if (type.StartsWith("IntPtr") ||
+                type.StartsWith("UIntPtr") ||
+                type.StartsWith("int") ||
+                type.StartsWith("uint") ||
+                type.StartsWith("long") ||
+                type.StartsWith("ulong"))
+            {
+                var nativeType = SyntaxUtils.GetNativeTypeNameFromAttributesLists(attributeList);
+                if (nativeType != null)
+                {
+                    ret = nativeType;
+                }
+            }
+
+            return ret;
+        }
+
         private static string GetFullSignature(SyntaxNode node)
         {
             if (node is StructDeclarationSyntax s)
@@ -145,8 +224,8 @@ namespace ClangSharpSourceToWinmd
                         }
 
                         var firstVar = field.Declaration.Variables.First();
-                        var nativeType = GetNativeTypeForSignature(field.AttributeLists);
-                        ret.Append(nativeType ?? field.Declaration.Type.ToString());
+                        var typeName = GetTypeName(field.Declaration.Type.ToString(), field.AttributeLists);
+                        ret.Append(typeName);
                         ret.Append(' ');
                         ret.Append(firstVar.ToString());
                     }
@@ -156,38 +235,11 @@ namespace ClangSharpSourceToWinmd
             }
             else if (node is MethodDeclarationSyntax m)
             {
-                StringBuilder ret = new StringBuilder();
-                if (m.AttributeLists != null)
-                {
-                    ret.Append(m.AttributeLists.ToString());
-                }
-
-                ret.Append(m.ReturnType.ToString());
-                ret.Append(' ');
-                ret.Append(m.Identifier.ValueText);
-                ret.Append('(');
-
-                bool firstParam = true;
-                foreach (var param in m.ParameterList.Parameters)
-                {
-                    if (firstParam)
-                    {
-                        firstParam = false;
-                    }
-                    else
-                    {
-                        ret.Append(',');
-                    }
-
-                    var nativeType = GetNativeTypeForSignature(param.AttributeLists);
-                    ret.Append(nativeType ?? param.Type.ToString());
-                    ret.Append(' ');
-                    ret.Append(param.Identifier.ValueText);
-                }
-
-                ret.Append(')');
-
-                return ret.ToString();
+                return GetMethodSignature(m.Identifier.ValueText, m.AttributeLists, m.ReturnType, m.ParameterList);
+            }
+            else if (node is DelegateDeclarationSyntax d)
+            {
+                return GetMethodSignature(d.Identifier.ValueText, d.AttributeLists, d.ReturnType, d.ParameterList);
             }
 
             return node.ToString();
