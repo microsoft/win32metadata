@@ -1269,12 +1269,12 @@ XLATEOBJ=Windows.Win32.UI.DisplayDevices
 # region windef.h
 DPI_AWARENESS=Windows.Win32.UI.HiDpi
 DPI_HOSTING_BEHAVIOR=Windows.Win32.UI.HiDpi
-POINT=Windows.Win32.UI.DisplayDevices
-POINTL=Windows.Win32.UI.DisplayDevices
-POINTS=Windows.Win32.UI.DisplayDevices
-RECT=Windows.Win32.UI.DisplayDevices
-RECTL=Windows.Win32.UI.DisplayDevices
-SIZE=Windows.Win32.UI.DisplayDevices
+POINT=Windows.Win32.Foundation
+POINTL=Windows.Win32.Foundation
+POINTS=Windows.Win32.Foundation
+RECT=Windows.Win32.Foundation
+RECTL=Windows.Win32.Foundation
+SIZE=Windows.Win32.Foundation
 # endregion windef.h
 # region wingdi.h
 AbortDoc=Windows.Win32.Storage.Xps
