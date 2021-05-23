@@ -17,11 +17,16 @@ IAudioEndpointRT=Windows.Win32.System.RemoteDesktop
 IAudioInputEndpointRT=Windows.Win32.System.RemoteDesktop
 IAudioOutputEndpointRT=Windows.Win32.System.RemoteDesktop
 # endregion audioengineendpoint.h
+# region baseaudioprocessingobject.h
+AERT_Allocate=Windows.Win32.Media.Audio.DirectMusic
+AERT_Free=Windows.Win32.Media.Audio.DirectMusic
+# endregion baseaudioprocessingobject.h
 # region combaseapi.h
 AgileReferenceOptions=Windows.Win32.System.WinRT
 CLSIDFromProgIDEx=Windows.Win32.System.Com
 CoDecodeProxy=Windows.Win32.System.WinRT
 CoFileTimeNow=Windows.Win32.System.Com
+CoGetDefaultContext=Windows.Win32.System.ComponentServices
 CreateStreamOnHGlobal=Windows.Win32.Storage.StructuredStorage
 FreePropVariantArray=Windows.Win32.Storage.StructuredStorage
 GetHGlobalFromStream=Windows.Win32.Storage.StructuredStorage
@@ -305,6 +310,10 @@ HistogramGrid=Windows.Win32.Media.Streaming
 HistogramHeader=Windows.Win32.Media.Streaming
 MetadataTimeStamps=Windows.Win32.Media.Streaming
 # endregion mfapi.h
+# region mfidl.h
+MF_MEDIASOURCE_STATUS_INFO=Windows.Win32.Media.Streaming
+MF_TRANSFER_VIDEO_FRAME_FLAGS=Windows.Win32.Media.Streaming
+# endregion mfidl.h
 # region minwinbase.h
 CREATE_PROCESS_DEBUG_INFO=Windows.Win32.System.Diagnostics.Debug
 CREATE_THREAD_DEBUG_INFO=Windows.Win32.System.Diagnostics.Debug
@@ -313,6 +322,7 @@ EXCEPTION_DEBUG_INFO=Windows.Win32.System.Diagnostics.Debug
 EXIT_PROCESS_DEBUG_INFO=Windows.Win32.System.Diagnostics.Debug
 EXIT_THREAD_DEBUG_INFO=Windows.Win32.System.Diagnostics.Debug
 FILE_INFO_BY_HANDLE_CLASS=Windows.Win32.Storage.FileSystem
+FILETIME=Windows.Win32.Foundation
 FINDEX_INFO_LEVELS=Windows.Win32.Storage.FileSystem
 FINDEX_SEARCH_OPS=Windows.Win32.Storage.FileSystem
 GET_FILEEX_INFO_LEVELS=Windows.Win32.Storage.FileSystem
@@ -323,6 +333,7 @@ OVERLAPPED_ENTRY=Windows.Win32.Storage.FileSystem
 OVERLAPPED=Windows.Win32.System.SystemServices
 READ_DIRECTORY_NOTIFY_INFORMATION_CLASS=Windows.Win32.Storage.FileSystem
 RIP_INFO=Windows.Win32.System.Diagnostics.Debug
+SYSTEMTIME=Windows.Win32.Foundation
 UNLOAD_DLL_DEBUG_INFO=Windows.Win32.System.Diagnostics.Debug
 WIN32_FIND_DATAA=Windows.Win32.Storage.FileSystem
 WIN32_FIND_DATAW=Windows.Win32.Storage.FileSystem
@@ -336,6 +347,9 @@ HEAACWAVEINFO=Windows.Win32.Graphics.DirectShow
 MPEG1WAVEFORMAT=Windows.Win32.Graphics.DirectShow
 MPEGLAYER3WAVEFORMAT=Windows.Win32.Graphics.DirectShow
 # endregion mmreg.h
+# region ntifs.h
+RtlConvertSidToUnicodeString=Windows.Win32.Security
+# endregion ntifs.h
 # region o*idl.h (duplicate definitions in many headers)
 ACTIVATIONTYPE=Windows.Win32.System.WinRT
 BSTR_UserFree=Windows.Win32.System.OleAutomation
@@ -529,6 +543,9 @@ StgSerializePropVariant=Windows.Win32.Storage.StructuredStorage
 # region securitybaseapi.h
 CveEventWrite=Windows.Win32.System.Diagnostics.Etw
 # endregion securitybaseapi.h
+# region shellapi.h
+SHGetPropertyStoreForWindow=Windows.Win32.System.PropertiesSystem
+# endregion shellapi.h
 # region shellscalingapi.h
 GetDpiForMonitor=Windows.Win32.UI.HiDpi
 GetProcessDpiAwareness=Windows.Win32.UI.HiDpi
@@ -536,6 +553,10 @@ MONITOR_DPI_TYPE=Windows.Win32.UI.HiDpi
 PROCESS_DPI_AWARENESS=Windows.Win32.UI.HiDpi
 SetProcessDpiAwareness=Windows.Win32.UI.HiDpi
 # endregion shellscalingapi.h
+# region shlobj.h
+IActiveDesktopP=Windows.Win32.UI.LegacyWindowsEnvironmentFeatures
+IADesktopP2=Windows.Win32.UI.LegacyWindowsEnvironmentFeatures
+# endregion shlobj.h
 # region shlobj_core.h
 _PROPERTYUI_FLAGS=Windows.Win32.System.PropertiesSystem
 IPropertyUI=Windows.Win32.System.PropertiesSystem
@@ -556,6 +577,8 @@ SYNC_TRANSFER_STATUS=Windows.Win32.System.PropertiesSystem
 # region shobjidl.h
 IAccessibilityDockingService=Windows.Win32.System.Com
 IAccessibilityDockingServiceCallback=Windows.Win32.System.Com
+SHAddDefaultPropertiesByExt=Windows.Win32.System.PropertiesSystem
+SYNC_ENGINE_STATE_FLAGS=Windows.Win32.System.PropertiesSystem
 # endregion shobjidl.h
 # region strmif.h
 TIMECODE_SAMPLE=Windows.Win32.Graphics.DirectShow
@@ -801,6 +824,7 @@ GetFileAttributesTransactedW=Windows.Win32.Storage.FileSystem
 GetFileBandwidthReservation=Windows.Win32.Storage.FileSystem
 GetFileInformationByHandleEx=Windows.Win32.Storage.FileSystem
 GetFileSecurityA=Windows.Win32.Security
+GetFirmwareType=Windows.Win32.System.SystemInformation
 GetFullPathNameTransactedA=Windows.Win32.Storage.FileSystem
 GetFullPathNameTransactedW=Windows.Win32.Storage.FileSystem
 GetLogicalDriveStringsA=Windows.Win32.Storage.FileSystem
@@ -878,6 +902,7 @@ LocalLock=Windows.Win32.System.Memory
 LocalReAlloc=Windows.Win32.System.Memory
 LocalSize=Windows.Win32.System.Memory
 LocalUnlock=Windows.Win32.System.Memory
+LocateXStateFeature=Windows.Win32.System.Diagnostics.Debug
 LogonUserA=Windows.Win32.Security
 LogonUserExA=Windows.Win32.Security
 LogonUserExW=Windows.Win32.Security
@@ -1014,6 +1039,7 @@ SetVolumeLabelA=Windows.Win32.Storage.FileSystem
 SetVolumeLabelW=Windows.Win32.Storage.FileSystem
 SetVolumeMountPointA=Windows.Win32.Storage.FileSystem
 SetVolumeMountPointW=Windows.Win32.Storage.FileSystem
+SetXStateFeaturesMask=Windows.Win32.System.Diagnostics.Debug
 STARTUPINFOEXA=Windows.Win32.System.Threading
 STARTUPINFOEXW=Windows.Win32.System.Threading
 SwitchToFiber=Windows.Win32.System.Threading
@@ -1656,6 +1682,7 @@ EXCEPTION_RECORD64=Windows.Win32.System.Diagnostics.Debug
 FILE_ID_128=Windows.Win32.Storage.FileSystem
 FILE_NOTIFY_EXTENDED_INFORMATION=Windows.Win32.Storage.FileSystem
 FILE_NOTIFY_INFORMATION=Windows.Win32.Storage.FileSystem
+FIRMWARE_TYPE=Windows.Win32.System.SystemInformation
 FLOATING_SAVE_AREA=Windows.Win32.System.Kernel
 FPO_DATA=Windows.Win32.System.Diagnostics.Debug
 GENERIC_MAPPING=Windows.Win32.Security
@@ -1781,6 +1808,16 @@ HSTRING_UserSize64=Windows.Win32.System.WinRT
 HSTRING_UserUnmarshal=Windows.Win32.System.WinRT
 HSTRING_UserUnmarshal64=Windows.Win32.System.WinRT
 # endregion winstring.h (duplicate definitions in many headers)
+# region winternl.h
+NtQueryInformationProcess=Windows.Win32.System.Threading
+NtQueryInformationThread=Windows.Win32.System.Threading
+PEB_LDR_DATA=Windows.Win32.System.Threading
+PEB=Windows.Win32.System.Threading
+PROCESS_BASIC_INFORMATION=Windows.Win32.System.Threading
+PROCESSINFOCLASS=Windows.Win32.System.Threading
+RTL_USER_PROCESS_PARAMETERS=Windows.Win32.System.Threading
+THREADINFOCLASS=Windows.Win32.System.Threading
+# endregion winternl.h
 # region winuser.h
 _TrackMouseEvent=Windows.Win32.UI.KeyboardAndMouseInput
 ACCESSTIMEOUT=Windows.Win32.UI.Accessibility
@@ -1825,6 +1862,7 @@ DELETEITEMSTRUCT=Windows.Win32.UI.Controls
 DestroySyntheticPointerDevice=Windows.Win32.UI.Controls
 DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS=Windows.Win32.UI.HiDpi
 DIALOG_DPI_CHANGE_BEHAVIORS=Windows.Win32.UI.HiDpi
+DisableProcessWindowsGhosting=Windows.Win32.UI.WindowsAndMessaging
 DisplayConfigGetDeviceInfo=Windows.Win32.UI.DisplayDevices
 DisplayConfigSetDeviceInfo=Windows.Win32.UI.DisplayDevices
 DlgDirListA=Windows.Win32.UI.Controls
@@ -2222,6 +2260,7 @@ Wow64RevertWow64FsRedirection=Windows.Win32.Storage.FileSystem
 # region wtypes.h
 CSPLATFORM=Windows.Win32.System.Com
 DVASPECT=Windows.Win32.System.Com
+PROPERTYKEY=Windows.Win32.System.PropertiesSystem
 QUERYCONTEXT=Windows.Win32.System.Com
 STATFLAG=Windows.Win32.Storage.StructuredStorage
 STGC=Windows.Win32.Storage.StructuredStorage
@@ -2229,20 +2268,10 @@ STGMOVE=Windows.Win32.Storage.StructuredStorage
 TYSPEC=Windows.Win32.System.Com
 VARENUM=Windows.Win32.System.OleAutomation
 # endregion wtypes.h
-AERT_Allocate=Windows.Win32.Media.Audio.DirectMusic
-AERT_Free=Windows.Win32.Media.Audio.DirectMusic
 MDEVICECAPSEX=Windows.Win32.Media.Audio.DirectMusic
 MIDIOPENDESC=Windows.Win32.Media.Audio.DirectMusic
 WIN32_STREAM_ID=Windows.Win32.System.SystemServices
-NtQueryInformationProcess=Windows.Win32.System.SystemServices
-NtQueryInformationThread=Windows.Win32.System.SystemServices
-PEB_LDR_DATA=Windows.Win32.System.SystemServices
-PEB=Windows.Win32.System.SystemServices
-RTL_USER_PROCESS_PARAMETERS=Windows.Win32.System.SystemServices
-CoGetDefaultContext=Windows.Win32.System.ComponentServices
 InitializeContext=Windows.Win32.System.Diagnostics.Debug
-LocateXStateFeature=Windows.Win32.System.Diagnostics.Debug
-SetXStateFeaturesMask=Windows.Win32.System.Diagnostics.Debug
 RtlNtStatusToDosError=Windows.Win32.System.Diagnostics.Debug
 IDMOQualityControl=Windows.Win32.Graphics.DirectShow
 IDMOVideoOutputOptimizations=Windows.Win32.Graphics.DirectShow
@@ -2258,36 +2287,14 @@ DBKINDENUM=Windows.Win32.Storage.IndexServer
 DBID=Windows.Win32.Storage.IndexServer
 COMPARTMENT_ID=Windows.Win32.System.Kernel
 _ColumnSortOrder=Windows.Win32.UI.LegacyWindowsEnvironmentFeatures
-IActiveDesktopP=Windows.Win32.UI.LegacyWindowsEnvironmentFeatures
-IADesktopP2=Windows.Win32.UI.LegacyWindowsEnvironmentFeatures
 VS_FIXEDFILEINFO=Windows.Win32.UI.WindowsAndMessaging
-SHGetPropertyStoreForWindow=Windows.Win32.System.PropertiesSystem
-SYNC_ENGINE_STATE_FLAGS=Windows.Win32.System.PropertiesSystem
-SHAddDefaultPropertiesByExt=Windows.Win32.System.PropertiesSystem
-PROPERTYKEY=Windows.Win32.System.PropertiesSystem
-MSA_INFO_LEVEL=Windows.Win32.Security
-MSA_INFO_STATE=Windows.Win32.Security
-NetAddServiceAccount=Windows.Win32.Security
-NetEnumerateServiceAccounts=Windows.Win32.Security
-NetIsServiceAccount=Windows.Win32.Security
-NetQueryServiceAccount=Windows.Win32.Security
-NetRemoveServiceAccount=Windows.Win32.Security
-MSA_INFO_0=Windows.Win32.Security
-ImpersonateNamedPipeClient=Windows.Win32.Security
 InstallELAMCertificateInfo=Windows.Win32.Security
-RtlConvertSidToUnicodeString=Windows.Win32.Security
 INotifyReplica=Windows.Win32.UI.Shell
 SOFTDISTINFO=Windows.Win32.UI.Shell
-MF_MEDIASOURCE_STATUS_INFO=Windows.Win32.Media.Streaming
-MF_TRANSFER_VIDEO_FRAME_FLAGS=Windows.Win32.Media.Streaming
 IMFDeviceTransform=Windows.Win32.Media.Streaming
 IMFDeviceTransformCallback=Windows.Win32.Media.Streaming
 WinMain=Windows.Win32.UI.WindowsAndMessaging
 PSYMBOLSERVERCALLBACKPROC=Windows.Win32.System.WindowsProgramming
-FILETIME=Windows.Win32.System.WindowsProgramming
-SYSTEMTIME=Windows.Win32.System.WindowsProgramming
 CoInstall=Windows.Win32.System.WindowsProgramming
-FIRMWARE_TYPE=Windows.Win32.System.WindowsProgramming
-DisableProcessWindowsGhosting=Windows.Win32.System.WindowsProgramming
 ServerSelection=Windows.Win32.System.UpdateAgent
 NETWORK_APP_INSTANCE_CSV_FLAGS_VALID_ONLY_IF_CSV_COORDINATOR=Windows.Win32.System.SystemServices
