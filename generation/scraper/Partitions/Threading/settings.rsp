@@ -30,5 +30,6 @@ SignalObjectAndWait
 <IncludeRoot>/um/systemtopologyapi.h
 <IncludeRoot>/um/threadpoolapiset.h
 <IncludeRoot>/um/threadpoollegacyapiset.h
+<IncludeRoot>/um/wow64apiset.h
 --namespace
 Windows.Win32.System.Threading

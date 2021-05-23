@@ -30,4 +30,3 @@
 #include <ktmtypes.h>
 #include <lmshare.h>
 #include <lmstats.h>
-#include <wow64apiset.h>

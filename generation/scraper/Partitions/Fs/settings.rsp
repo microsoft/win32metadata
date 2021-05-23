@@ -29,7 +29,6 @@ DumpLogRecords
 <IncludeRoot>/um/ktmw32.h
 <IncludeRoot>/um/LMShare.h
 <IncludeRoot>/um/lmstats.h
-<IncludeRoot>/um/wow64apiset.h
 <IncludeRoot>/shared/ktmtypes.h
 --namespace
 Windows.Win32.Storage.FileSystem
