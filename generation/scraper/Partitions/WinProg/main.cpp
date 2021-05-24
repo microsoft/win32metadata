@@ -19,14 +19,9 @@
 #include <exposeenums2managed.h>
 #include <avrfsdk.h>
 #include <camerauicontrol.h>
-#include <fci.h>
-#include <fdi.h>
-#include <fdi_fci_types.h>
 #include <vdmdbg.h>
 #include <editionupgradehelper.h>
 #include <featurestagingapi.h>
-#include <fhcfg.h>
-#include <fhsvcctl.h>
 #include <apiquery2.h>
 #include <dciman.h>
 #include <processenv.h>
