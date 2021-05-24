@@ -181,7 +181,7 @@ namespace ClangSharpSourceToWinmd
                 type.StartsWith("long") ||
                 type.StartsWith("ulong"))
             {
-                var nativeType = SyntaxUtils.GetNativeTypeNameFromAttributesLists(attributeList);
+                var nativeType = GetNativeTypeForSignature(attributeList);
                 if (nativeType != null)
                 {
                     ret = nativeType;
