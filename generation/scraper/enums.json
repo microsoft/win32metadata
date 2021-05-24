@@ -1924,6 +1924,169 @@
     ]
   },
   {
+    "name": "GET_FILE_VERSION_INFO_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "header": "verrsrc.h",
+      "filter": "FILE_VER_GET_"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "GetFileVersionInfoExA",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "GetFileVersionInfoExW",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "GetFileVersionInfoSizeExA",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "GetFileVersionInfoSizeExW",
+        "parameter": "dwFlags"
+      }
+    ]
+  },
+  {
+    "name": "VER_FIND_FILE_FLAGS",
+    "flags": false,
+    "autoPopulate": {
+      "header": "verrsrc.h",
+      "filter": "VFFF_"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "VerFindFileA",
+        "parameter": "uFlags"
+      },
+      {
+        "method": "VerFindFileW",
+        "parameter": "uFlags"
+      }
+    ]
+  },
+  {
+    "name": "VER_FIND_FILE_STATUS",
+    "flags": true,
+    "autoPopulate": {
+      "header": "verrsrc.h",
+      "filter": "VFF_"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "VerFindFileA",
+        "parameter": "return"
+      },
+      {
+        "method": "VerFindFileW",
+        "parameter": "return"
+      }
+    ]
+  },
+  {
+    "name": "VER_INSTALL_FILE_FLAGS",
+    "flags": false,
+    "autoPopulate": {
+      "header": "verrsrc.h",
+      "filter": "VIFF_"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "VerInstallFileA",
+        "parameter": "uFlags"
+      },
+      {
+        "method": "VerInstallFileW",
+        "parameter": "uFlags"
+      }
+    ]
+  },
+  {
+    "name": "VER_INSTALL_FILE_STATUS",
+    "flags": true,
+    "autoPopulate": {
+      "header": "verrsrc.h",
+      "filter": "VIF_"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "VerInstallFileA",
+        "parameter": "return"
+      },
+      {
+        "method": "VerInstallFileW",
+        "parameter": "return"
+      }
+    ]
+  },
+  {
+    "name": "VS_FIXEDFILEINFO_FILE_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "header": "verrsrc.h",
+      "filter": "VS_FF_"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "VS_FIXEDFILEINFO",
+        "field": "dwFileFlags"
+      }
+    ]
+  },
+  {
+    "name": "VS_FIXEDFILEINFO_FILE_OS",
+    "flags": false,
+    "autoPopulate": {
+      "header": "verrsrc.h",
+      "filter": "VOS_"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "VS_FIXEDFILEINFO",
+        "field": "dwFileOS"
+      }
+    ]
+  },
+  {
+    "name": "VS_FIXEDFILEINFO_FILE_TYPE",
+    "flags": false,
+    "autoPopulate": {
+      "header": "verrsrc.h",
+      "filter": "VFT_"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "VS_FIXEDFILEINFO",
+        "field": "dwFileType"
+      }
+    ]
+  },
+  {
+    "name": "VS_FIXEDFILEINFO_FILE_SUBTYPE",
+    "flags": false,
+    "autoPopulate": {
+      "header": "verrsrc.h",
+      "filter": "VFT2_"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "VS_FIXEDFILEINFO",
+        "field": "dwFileSubtype"
+      }
+    ]
+  },
+  {
     "name": "URI_CREATE_FLAGS",
     "flags": true,
     "autoPopulate": {
@@ -7787,29 +7950,6 @@
       {
         "method": "CreateDIBPatternBrush",
         "parameter": "iUsage"
-      }
-    ]
-  },
-  {
-    "name": "VER_INSTALL_FILE_FLAGS",
-    "members": [
-      {
-        "name": "VIFF_FORCEINSTALL",
-        "value": "1"
-      },
-      {
-        "name": "VIFF_DONTDELETEOLD",
-        "value": "2"
-      }
-    ],
-    "uses": [
-      {
-        "method": "VerInstallFileW",
-        "parameter": "uFlags"
-      },
-      {
-        "method": "VerInstallFileA",
-        "parameter": "uFlags"
       }
     ]
   },
@@ -22712,38 +22852,6 @@
     ]
   },
   {
-    "name": "VS_FIXEDFILEINFO_FILE_TYPE",
-    "members": [
-      {
-        "name": "VFT_APP"
-      },
-      {
-        "name": "VFT_DLL"
-      },
-      {
-        "name": "VFT_DRV"
-      },
-      {
-        "name": "VFT_FONT"
-      },
-      {
-        "name": "VFT_STATIC_LIB"
-      },
-      {
-        "name": "VFT_UNKNOWN"
-      },
-      {
-        "name": "VFT_VXD"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "VS_FIXEDFILEINFO",
-        "field": "dwFileType"
-      }
-    ]
-  },
-  {
     "name": "CLAIM_SECURITY_ATTRIBUTE_VALUE_TYPE",
     "members": [
       {
@@ -23450,44 +23558,6 @@
       {
         "struct": "RESTOREPOINTINFOW",
         "field": "dwEventType"
-      }
-    ]
-  },
-  {
-    "name": "VS_FIXEDFILEINFO_FILE_OS",
-    "members": [
-      {
-        "name": "VOS_DOS"
-      },
-      {
-        "name": "VOS_NT"
-      },
-      {
-        "name": "VOS__WINDOWS16"
-      },
-      {
-        "name": "VOS__WINDOWS32"
-      },
-      {
-        "name": "VOS_OS216"
-      },
-      {
-        "name": "VOS_OS232"
-      },
-      {
-        "name": "VOS__PM16"
-      },
-      {
-        "name": "VOS__PM32"
-      },
-      {
-        "name": "VOS_UNKNOWN"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "VS_FIXEDFILEINFO",
-        "field": "dwFileOS"
       }
     ]
   },
@@ -27912,53 +27982,6 @@
       {
         "struct": "LVFOOTERITEM",
         "field": "mask"
-      }
-    ]
-  },
-  {
-    "name": "VS_FIXEDFILEINFO_FILE_SUBTYPE",
-    "members": [
-      {
-        "name": "VFT2_DRV_COMM"
-      },
-      {
-        "name": "VFT2_DRV_DISPLAY"
-      },
-      {
-        "name": "VFT2_DRV_INSTALLABLE"
-      },
-      {
-        "name": "VFT2_DRV_KEYBOARD"
-      },
-      {
-        "name": "VFT2_DRV_LANGUAGE"
-      },
-      {
-        "name": "VFT2_DRV_MOUSE"
-      },
-      {
-        "name": "VFT2_DRV_NETWORK"
-      },
-      {
-        "name": "VFT2_DRV_PRINTER"
-      },
-      {
-        "name": "VFT2_DRV_SOUND"
-      },
-      {
-        "name": "VFT2_DRV_SYSTEM"
-      },
-      {
-        "name": "VFT2_DRV_VERSIONED_PRINTER"
-      },
-      {
-        "name": "VFT2_UNKNOWN"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "VS_FIXEDFILEINFO",
-        "field": "dwFileSubtype"
       }
     ]
   },

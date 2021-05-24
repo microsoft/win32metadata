@@ -86,7 +86,7 @@ Enums are defined in [enums.json](generation/scraper/enums.json). This file prov
   * `value` - The value of the enum member
 * `uses` - A list of APIs where this enum is used
   * `method` - The method name
-  * `parameter` - The parameter name of `method`
+  * `parameter` - The parameter name of `method` or `"return"` for the return value
   * `struct` - The struct name
   * `field` - The field name of `struct`
 
