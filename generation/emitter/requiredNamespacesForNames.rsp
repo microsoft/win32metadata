@@ -555,8 +555,11 @@ DBID=Windows.Win32.Storage.IndexServer
 DBKINDENUM=Windows.Win32.Storage.IndexServer
 # endregion oledb.h
 # region processenv.h
+GetStdHandle=Windows.Win32.System.Console
 SearchPathA=Windows.Win32.Storage.FileSystem
 SearchPathW=Windows.Win32.Storage.FileSystem
+SetStdHandle=Windows.Win32.System.Console
+SetStdHandleEx=Windows.Win32.System.Console
 # endregion processenv.h
 # region processthreadsapi.h
 FlushInstructionCache=Windows.Win32.System.Diagnostics.Debug

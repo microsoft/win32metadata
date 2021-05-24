@@ -144,6 +144,7 @@ using Windows.Win32.System.Diagnostics.Debug;
 using Windows.Win32.System.Diagnostics.Etw;
 using Windows.Win32.System.Diagnostics.ProcessSnapshotting;
 using Windows.Win32.System.Diagnostics.ToolHelp;
+using Windows.Win32.System.Environment;
 using Windows.Win32.System.ErrorReporting;
 using Windows.Win32.System.EventCollector;
 using Windows.Win32.System.EventLog;

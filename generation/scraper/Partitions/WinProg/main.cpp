@@ -24,8 +24,6 @@
 #include <featurestagingapi.h>
 #include <apiquery2.h>
 #include <dciman.h>
-#include <processenv.h>
-#include <processthreadsapi.h>
 #include <timezoneapi.h>
 
 #include <ddrawi.h>

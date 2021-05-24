@@ -21,4 +21,11 @@ namespace Windows.Win32.System.Console
         DISABLE_NEWLINE_AUTO_RETURN = 0x0008,
         ENABLE_LVB_GRID_WORLDWIDE = 0x0010
     }
+    
+    public enum STD_HANDLE : uint
+    {
+        STD_INPUT_HANDLE = unchecked((uint)-10),
+        STD_OUTPUT_HANDLE = unchecked((uint)-11),
+        STD_ERROR_HANDLE = unchecked((uint)-12),
+    }
 }
