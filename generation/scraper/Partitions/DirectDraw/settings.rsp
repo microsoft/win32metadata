@@ -9,6 +9,7 @@
 <IncludeRoot>/winrt
 --traverse
 <IncludeRoot>/um/ddraw.h
+<IncludeRoot>/um/ddrawi.h
 <IncludeRoot>/um/ddrawint.h
 <IncludeRoot>/um/dvp.h
 --namespace

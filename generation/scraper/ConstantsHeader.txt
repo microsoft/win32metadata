@@ -1,7 +1,9 @@
 using System;
+using Windows.Win32.Foundation;
 using Windows.Win32.Interop;
 using Windows.Win32.System.PropertiesSystem; // For PROPERTYKEY
 using Windows.Win32.System.SystemServices;
+using static Windows.Win32.Foundation.Apis; // Various constants
 using static Windows.Win32.System.Diagnostics.Debug.WIN32_ERROR;
 using static Windows.Win32.System.SystemServices.Apis; // Various constants
 using static Windows.Win32.Media.Multimedia.Apis; // Various constants

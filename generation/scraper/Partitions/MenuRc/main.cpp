@@ -11,6 +11,4 @@
 #include <winuser.h>
 #include <resourceindexer.h>
 #include <strsafe.h>
-#include <winver.h> // Also includes verrsrc.h
-//#include <verrsrc.h>
 #include <mrmresourceindexer.h>

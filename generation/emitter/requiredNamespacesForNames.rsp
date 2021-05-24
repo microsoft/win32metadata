@@ -17,11 +17,16 @@ IAudioEndpointRT=Windows.Win32.System.RemoteDesktop
 IAudioInputEndpointRT=Windows.Win32.System.RemoteDesktop
 IAudioOutputEndpointRT=Windows.Win32.System.RemoteDesktop
 # endregion audioengineendpoint.h
+# region baseaudioprocessingobject.h
+AERT_Allocate=Windows.Win32.Media.Audio.DirectMusic
+AERT_Free=Windows.Win32.Media.Audio.DirectMusic
+# endregion baseaudioprocessingobject.h
 # region combaseapi.h
 AgileReferenceOptions=Windows.Win32.System.WinRT
 CLSIDFromProgIDEx=Windows.Win32.System.Com
 CoDecodeProxy=Windows.Win32.System.WinRT
 CoFileTimeNow=Windows.Win32.System.Com
+CoGetDefaultContext=Windows.Win32.System.ComponentServices
 CreateStreamOnHGlobal=Windows.Win32.Storage.StructuredStorage
 FreePropVariantArray=Windows.Win32.Storage.StructuredStorage
 GetHGlobalFromStream=Windows.Win32.Storage.StructuredStorage
@@ -55,6 +60,23 @@ COMMON_LVB_REVERSE_VIDEO=Windows.Win32.System.Console
 COMMON_LVB_UNDERSCORE=Windows.Win32.System.Console
 COMMON_LVB_SBCSDBCS=Windows.Win32.System.Console
 # endregion consoleapi2.h (also defined in ntddvdeo.h)
+# region d3d9.h
+IDirect3D9ExOverlayExtension=Windows.Win32.Media.MediaFoundation
+IDirect3DAuthenticatedChannel9=Windows.Win32.Media.MediaFoundation
+IDirect3DCryptoSession9=Windows.Win32.Media.MediaFoundation
+IDirect3DDevice9Video=Windows.Win32.Media.MediaFoundation
+# endregion d3d9.h
+# region d3d9caps.h
+D3DCONTENTPROTECTIONCAPS=Windows.Win32.Media.MediaFoundation
+D3DOVERLAYCAPS=Windows.Win32.Media.MediaFoundation
+# endregion d3d9caps.h
+# region dbghelp.h (also defined in imagehlp.h)
+PSYMBOLSERVERCALLBACKPROC=Windows.Win32.System.Diagnostics.Debug
+# endregion dbghelp.h
+# region dcommon.h
+DWRITE_GLYPH_IMAGE_FORMATS=Windows.Win32.Graphics.DirectWrite
+DWRITE_MEASURING_MODE=Windows.Win32.Graphics.DirectWrite
+# endregion dcommon.h
 # region ddkernel.h
 DDKERNELCAPS=Windows.Win32.UI.DisplayDevices
 IDirectDrawKernel=Windows.Win32.UI.DisplayDevices
@@ -248,14 +270,43 @@ EOC_ChangeType=Windows.Win32.System.Com
 IEventProperty=Windows.Win32.System.Com
 IEventPublisher=Windows.Win32.System.Com
 # region eventsys.h
+# region exdisp.h
+IShellWindows=Windows.Win32.UI.Shell
+ShellWindowFindWindowOptions=Windows.Win32.UI.Shell
+ShellWindowTypeConstants=Windows.Win32.UI.Shell
+# endregion exdisp.h
+# region icodecapi.h
+CodecAPIEventData=Windows.Win32.Media.MediaFoundation
+ICodecAPI=Windows.Win32.Media.MediaFoundation
+# endregion icodecapi.h
+# region indexsrv.h
+IPhraseSink=Windows.Win32.Storage.IndexServer
+WORDREP_BREAK_TYPE=Windows.Win32.Storage.IndexServer
+# endregion indexsrv.h
 # region ioapiset.h
 DeviceIoControl=Windows.Win32.System.SystemServices
 GetOverlappedResult=Windows.Win32.System.SystemServices
 GetOverlappedResultEx=Windows.Win32.System.SystemServices
 # endregion ioapiset.h
+# region ks.h
+KSTOPOLOGY_CONNECTION=Windows.Win32.Graphics.DirectShow
+# endregion ks.h
 # region libloaderapi.h
 FindStringOrdinal=Windows.Win32.Globalization
 # endregion libloaderapi.h
+# region lmserver.h
+SetServiceBits=Windows.Win32.System.Services
+# endregion lmserver.h
+# region mediaobj.h
+DMO_MEDIA_TYPE=Windows.Win32.Graphics.DirectShow
+DMO_OUTPUT_DATA_BUFFER=Windows.Win32.Graphics.DirectShow
+IDMOQualityControl=Windows.Win32.Graphics.DirectShow
+IDMOVideoOutputOptimizations=Windows.Win32.Graphics.DirectShow
+IEnumDMO=Windows.Win32.Graphics.DirectShow
+IMediaBuffer=Windows.Win32.Graphics.DirectShow
+IMediaObject=Windows.Win32.Graphics.DirectShow
+IMediaObjectInPlace=Windows.Win32.Graphics.DirectShow
+# endregion mediaobj.h
 # region memoryapi.h
 ReadProcessMemory=Windows.Win32.System.Diagnostics.Debug
 WriteProcessMemory=Windows.Win32.System.Diagnostics.Debug
@@ -274,6 +325,14 @@ HistogramGrid=Windows.Win32.Media.Streaming
 HistogramHeader=Windows.Win32.Media.Streaming
 MetadataTimeStamps=Windows.Win32.Media.Streaming
 # endregion mfapi.h
+# region mfidl.h
+MF_MEDIASOURCE_STATUS_INFO=Windows.Win32.Media.Streaming
+MF_TRANSFER_VIDEO_FRAME_FLAGS=Windows.Win32.Media.Streaming
+# endregion mfidl.h
+# region mftransform.h
+IMFDeviceTransform=Windows.Win32.Media.Streaming
+IMFDeviceTransformCallback=Windows.Win32.Media.Streaming
+# endregion mftransform.h
 # region minwinbase.h
 CREATE_PROCESS_DEBUG_INFO=Windows.Win32.System.Diagnostics.Debug
 CREATE_THREAD_DEBUG_INFO=Windows.Win32.System.Diagnostics.Debug
@@ -282,6 +341,7 @@ EXCEPTION_DEBUG_INFO=Windows.Win32.System.Diagnostics.Debug
 EXIT_PROCESS_DEBUG_INFO=Windows.Win32.System.Diagnostics.Debug
 EXIT_THREAD_DEBUG_INFO=Windows.Win32.System.Diagnostics.Debug
 FILE_INFO_BY_HANDLE_CLASS=Windows.Win32.Storage.FileSystem
+FILETIME=Windows.Win32.Foundation
 FINDEX_INFO_LEVELS=Windows.Win32.Storage.FileSystem
 FINDEX_SEARCH_OPS=Windows.Win32.Storage.FileSystem
 GET_FILEEX_INFO_LEVELS=Windows.Win32.Storage.FileSystem
@@ -292,16 +352,25 @@ OVERLAPPED_ENTRY=Windows.Win32.Storage.FileSystem
 OVERLAPPED=Windows.Win32.System.SystemServices
 READ_DIRECTORY_NOTIFY_INFORMATION_CLASS=Windows.Win32.Storage.FileSystem
 RIP_INFO=Windows.Win32.System.Diagnostics.Debug
+SYSTEMTIME=Windows.Win32.Foundation
 UNLOAD_DLL_DEBUG_INFO=Windows.Win32.System.Diagnostics.Debug
 WIN32_FIND_DATAA=Windows.Win32.Storage.FileSystem
 WIN32_FIND_DATAW=Windows.Win32.Storage.FileSystem
 # endregion minwinbase.h
+# region mmddk.h
+JOYREGHWVALUES=Windows.Win32.Devices.HumanInterfaceDevice
+MDEVICECAPSEX=Windows.Win32.Media.Audio.DirectMusic
+MIDIOPENDESC=Windows.Win32.Media.Audio.DirectMusic
+# endregion mmddk.h
 # region mmreg.h
 HEAACWAVEFORMAT=Windows.Win32.Graphics.DirectShow
 HEAACWAVEINFO=Windows.Win32.Graphics.DirectShow
 MPEG1WAVEFORMAT=Windows.Win32.Graphics.DirectShow
 MPEGLAYER3WAVEFORMAT=Windows.Win32.Graphics.DirectShow
 # endregion mmreg.h
+# region ntifs.h
+RtlConvertSidToUnicodeString=Windows.Win32.Security
+# endregion ntifs.h
 # region o*idl.h (duplicate definitions in many headers)
 ACTIVATIONTYPE=Windows.Win32.System.WinRT
 BSTR_UserFree=Windows.Win32.System.OleAutomation
@@ -441,6 +510,7 @@ CoGetObject=Windows.Win32.System.Com
 CoGetSystemSecurityPermissions=Windows.Win32.System.Com
 COINIT=Windows.Win32.System.Com
 CoInitialize=Windows.Win32.System.Com
+CoInstall=Windows.Win32.System.Com
 CoIsOle1Class=Windows.Win32.System.Com
 CoLoadLibrary=Windows.Win32.System.Com
 COMSD=Windows.Win32.System.Com
@@ -480,21 +550,36 @@ OleLoadPictureFile=Windows.Win32.System.OleAutomation
 OleLoadPictureFileEx=Windows.Win32.System.OleAutomation
 OleSavePictureFile=Windows.Win32.System.OleAutomation
 # endregion olectl.h
+# region oledb.h
+DBID=Windows.Win32.Storage.IndexServer
+DBKINDENUM=Windows.Win32.Storage.IndexServer
+# endregion oledb.h
 # region processenv.h
+GetStdHandle=Windows.Win32.System.Console
 SearchPathA=Windows.Win32.Storage.FileSystem
 SearchPathW=Windows.Win32.Storage.FileSystem
+SetStdHandle=Windows.Win32.System.Console
+SetStdHandleEx=Windows.Win32.System.Console
 # endregion processenv.h
 # region processthreadsapi.h
 FlushInstructionCache=Windows.Win32.System.Diagnostics.Debug
+GetThreadContext=Windows.Win32.System.Diagnostics.Debug
+SetThreadContext=Windows.Win32.System.Diagnostics.Debug
 ProcessIdToSessionId=Windows.Win32.System.RemoteDesktop
 # endregion processthreadsapi.h
 # region propvarutil.h
 StgDeserializePropVariant=Windows.Win32.Storage.StructuredStorage
 StgSerializePropVariant=Windows.Win32.Storage.StructuredStorage
 # endregion propvarutil.h
+# region reconcil.h
+INotifyReplica=Windows.Win32.UI.Shell
+# endregion reconcil.h
 # region securitybaseapi.h
 CveEventWrite=Windows.Win32.System.Diagnostics.Etw
 # endregion securitybaseapi.h
+# region shellapi.h
+SHGetPropertyStoreForWindow=Windows.Win32.System.PropertiesSystem
+# endregion shellapi.h
 # region shellscalingapi.h
 GetDpiForMonitor=Windows.Win32.UI.HiDpi
 GetProcessDpiAwareness=Windows.Win32.UI.HiDpi
@@ -502,6 +587,10 @@ MONITOR_DPI_TYPE=Windows.Win32.UI.HiDpi
 PROCESS_DPI_AWARENESS=Windows.Win32.UI.HiDpi
 SetProcessDpiAwareness=Windows.Win32.UI.HiDpi
 # endregion shellscalingapi.h
+# region shlobj.h
+IActiveDesktopP=Windows.Win32.UI.LegacyWindowsEnvironmentFeatures
+IADesktopP2=Windows.Win32.UI.LegacyWindowsEnvironmentFeatures
+# endregion shlobj.h
 # region shlobj_core.h
 _PROPERTYUI_FLAGS=Windows.Win32.System.PropertiesSystem
 IPropertyUI=Windows.Win32.System.PropertiesSystem
@@ -522,10 +611,28 @@ SYNC_TRANSFER_STATUS=Windows.Win32.System.PropertiesSystem
 # region shobjidl.h
 IAccessibilityDockingService=Windows.Win32.System.Com
 IAccessibilityDockingServiceCallback=Windows.Win32.System.Com
+SHAddDefaultPropertiesByExt=Windows.Win32.System.PropertiesSystem
+SYNC_ENGINE_STATE_FLAGS=Windows.Win32.System.PropertiesSystem
 # endregion shobjidl.h
+# region strmif.h
+TIMECODE_SAMPLE=Windows.Win32.Graphics.DirectShow
+TIMECODE=Windows.Win32.Graphics.DirectShow
+VIDEOENCODER_BITRATE_MODE=Windows.Win32.Graphics.DirectShow
+# endregion strmif.h
+# region sysinfoapi.h
+InstallELAMCertificateInfo=Windows.Win32.System.Antimalware
+# endregion sysinfoapi.h
 # region tvout.h
 VIDEOPARAMETERS=Windows.Win32.UI.DisplayDevices
 # endregion tvout.h
+# region unknwnbase.h
+IUnknown_AddRef_Proxy=Windows.Win32.System.Rpc
+IUnknown_QueryInterface_Proxy=Windows.Win32.System.Rpc
+IUnknown_Release_Proxy=Windows.Win32.System.Rpc
+# endregion unknwnbase.h
+# region urlmon.h
+SOFTDISTINFO=Windows.Win32.UI.Shell
+# endregion urlmon.h
 # region userenv.h
 CreateAppContainerProfile=Windows.Win32.UI.Shell
 CreateEnvironmentBlock=Windows.Win32.UI.Shell
@@ -757,6 +864,7 @@ GetFileAttributesTransactedW=Windows.Win32.Storage.FileSystem
 GetFileBandwidthReservation=Windows.Win32.Storage.FileSystem
 GetFileInformationByHandleEx=Windows.Win32.Storage.FileSystem
 GetFileSecurityA=Windows.Win32.Security
+GetFirmwareType=Windows.Win32.System.SystemInformation
 GetFullPathNameTransactedA=Windows.Win32.Storage.FileSystem
 GetFullPathNameTransactedW=Windows.Win32.Storage.FileSystem
 GetLogicalDriveStringsA=Windows.Win32.Storage.FileSystem
@@ -817,6 +925,7 @@ GlobalReAlloc=Windows.Win32.System.Memory
 GlobalSize=Windows.Win32.System.Memory
 GlobalUnlock=Windows.Win32.System.Memory
 InitAtomTable=Windows.Win32.System.DataExchange
+InitializeContext=Windows.Win32.System.Diagnostics.Debug
 IsBadCodePtr=Windows.Win32.System.SystemServices
 IsBadReadPtr=Windows.Win32.System.SystemServices
 IsBadStringPtrA=Windows.Win32.System.SystemServices
@@ -834,6 +943,7 @@ LocalLock=Windows.Win32.System.Memory
 LocalReAlloc=Windows.Win32.System.Memory
 LocalSize=Windows.Win32.System.Memory
 LocalUnlock=Windows.Win32.System.Memory
+LocateXStateFeature=Windows.Win32.System.Diagnostics.Debug
 LogonUserA=Windows.Win32.Security
 LogonUserExA=Windows.Win32.Security
 LogonUserExW=Windows.Win32.Security
@@ -900,6 +1010,8 @@ OperationStart=Windows.Win32.Storage.OperationRecorder
 PCOPYFILE2_PROGRESS_ROUTINE=Windows.Win32.Storage.FileSystem
 PFE_EXPORT_FUNC=Windows.Win32.Storage.FileSystem
 PFE_IMPORT_FUNC=Windows.Win32.Storage.FileSystem
+PGET_SYSTEM_WOW64_DIRECTORY_A=Windows.Win32.System.SystemInformation
+PGET_SYSTEM_WOW64_DIRECTORY_W=Windows.Win32.System.SystemInformation
 PowerClearRequest=Windows.Win32.System.Power
 PowerCreateRequest=Windows.Win32.System.Power
 PowerSetRequest=Windows.Win32.System.Power
@@ -968,6 +1080,7 @@ SetVolumeLabelA=Windows.Win32.Storage.FileSystem
 SetVolumeLabelW=Windows.Win32.Storage.FileSystem
 SetVolumeMountPointA=Windows.Win32.Storage.FileSystem
 SetVolumeMountPointW=Windows.Win32.Storage.FileSystem
+SetXStateFeaturesMask=Windows.Win32.System.Diagnostics.Debug
 STARTUPINFOEXA=Windows.Win32.System.Threading
 STARTUPINFOEXW=Windows.Win32.System.Threading
 SwitchToFiber=Windows.Win32.System.Threading
@@ -985,8 +1098,10 @@ VerifyVersionInfoA=Windows.Win32.System.SystemInformation
 VerifyVersionInfoW=Windows.Win32.System.SystemInformation
 WaitCommEvent=Windows.Win32.System.SystemServices
 WaitNamedPipeA=Windows.Win32.System.Pipes
+WIN32_STREAM_ID=Windows.Win32.Storage.FileSystem
 WinExec=Windows.Win32.System.SystemServices
 Wow64EnableWow64FsRedirection=Windows.Win32.Storage.FileSystem
+Wow64GetThreadSelectorEntry=Windows.Win32.System.Diagnostics.Debug
 WriteEncryptedFileRaw=Windows.Win32.Storage.FileSystem
 WriteTapemark=Windows.Win32.Storage.FileSystem
 WTSGetActiveConsoleSessionId=Windows.Win32.System.RemoteDesktop
@@ -1269,13 +1384,16 @@ XLATEOBJ=Windows.Win32.UI.DisplayDevices
 # region windef.h
 DPI_AWARENESS=Windows.Win32.UI.HiDpi
 DPI_HOSTING_BEHAVIOR=Windows.Win32.UI.HiDpi
-POINT=Windows.Win32.UI.DisplayDevices
-POINTL=Windows.Win32.UI.DisplayDevices
-POINTS=Windows.Win32.UI.DisplayDevices
-RECT=Windows.Win32.UI.DisplayDevices
-RECTL=Windows.Win32.UI.DisplayDevices
-SIZE=Windows.Win32.UI.DisplayDevices
+POINT=Windows.Win32.Foundation
+POINTL=Windows.Win32.Foundation
+POINTS=Windows.Win32.Foundation
+RECT=Windows.Win32.Foundation
+RECTL=Windows.Win32.Foundation
+SIZE=Windows.Win32.Foundation
 # endregion windef.h
+# region winerror.h
+DXGI_ERROR_*=Windows.Win32.Graphics.Dxgi
+# endregion winerror.h
 # region wingdi.h
 AbortDoc=Windows.Win32.Storage.Xps
 ABORTPROC=Windows.Win32.Storage.Xps
@@ -1598,6 +1716,7 @@ CLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE=Windows.Win32.Security
 CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1=Windows.Win32.Security
 CLAIM_SECURITY_ATTRIBUTE_V1=Windows.Win32.Security
 CLAIM_SECURITY_ATTRIBUTES_INFORMATION=Windows.Win32.Security
+COMPARTMENT_ID=Windows.Win32.System.Kernel
 COMPATIBILITY_CONTEXT_ELEMENT=Windows.Win32.System.ApplicationInstallationAndServicing
 CONTEXT=Windows.Win32.System.Diagnostics.Debug
 EXCEPTION_POINTERS=Windows.Win32.System.Diagnostics.Debug
@@ -1606,6 +1725,7 @@ EXCEPTION_RECORD64=Windows.Win32.System.Diagnostics.Debug
 FILE_ID_128=Windows.Win32.Storage.FileSystem
 FILE_NOTIFY_EXTENDED_INFORMATION=Windows.Win32.Storage.FileSystem
 FILE_NOTIFY_INFORMATION=Windows.Win32.Storage.FileSystem
+FIRMWARE_TYPE=Windows.Win32.System.SystemInformation
 FLOATING_SAVE_AREA=Windows.Win32.System.Kernel
 FPO_DATA=Windows.Win32.System.Diagnostics.Debug
 GENERIC_MAPPING=Windows.Win32.Security
@@ -1648,6 +1768,7 @@ REPARSE_GUID_DATA_BUFFER=Windows.Win32.Storage.FileSystem
 RtlAddFunctionTable=Windows.Win32.System.Diagnostics.Debug
 RtlAddGrowableFunctionTable=Windows.Win32.System.Diagnostics.Debug
 RtlCaptureContext=Windows.Win32.System.Diagnostics.Debug
+RtlCaptureStackBackTrace=Windows.Win32.System.Diagnostics.Debug
 RtlDeleteFunctionTable=Windows.Win32.System.Diagnostics.Debug
 RtlDeleteGrowableFunctionTable=Windows.Win32.System.Diagnostics.Debug
 RtlGrowFunctionTable=Windows.Win32.System.Diagnostics.Debug
@@ -1709,9 +1830,14 @@ TOKEN_USER=Windows.Win32.Security
 TRANSACTION_OUTCOME=Windows.Win32.Storage.FileSystem
 VerSetConditionMask=Windows.Win32.System.SystemInformation
 WELL_KNOWN_SID_TYPE=Windows.Win32.Security
+WOW64_ARCHITECTURE_INFORMATION=Windows.Win32.System.SystemInformation
+WOW64_CONTEXT_*=Windows.Win32.System.Diagnostics.Debug
 WOW64_CONTEXT=Windows.Win32.System.Diagnostics.Debug
+WOW64_DESCRIPTOR_TABLE_ENTRY=Windows.Win32.System.Diagnostics.Debug
 WOW64_FLOATING_SAVE_AREA=Windows.Win32.System.Diagnostics.Debug
 WOW64_LDT_ENTRY=Windows.Win32.System.Diagnostics.Debug
+WOW64_MAXIMUM_SUPPORTED_EXTENSION=Windows.Win32.System.Diagnostics.Debug
+WOW64_SIZE_OF_80387_REGISTERS=Windows.Win32.System.Diagnostics.Debug
 # endregion winnt.h (SLIST per-architecture design also defined in ntdef.h)
 # region winsock2.h
 QOS=Windows.Win32.NetworkManagement.QoS
@@ -1726,6 +1852,17 @@ HSTRING_UserSize64=Windows.Win32.System.WinRT
 HSTRING_UserUnmarshal=Windows.Win32.System.WinRT
 HSTRING_UserUnmarshal64=Windows.Win32.System.WinRT
 # endregion winstring.h (duplicate definitions in many headers)
+# region winternl.h
+NtQueryInformationProcess=Windows.Win32.System.Threading
+NtQueryInformationThread=Windows.Win32.System.Threading
+PEB_LDR_DATA=Windows.Win32.System.Threading
+PEB=Windows.Win32.System.Threading
+PROCESS_BASIC_INFORMATION=Windows.Win32.System.Threading
+PROCESSINFOCLASS=Windows.Win32.System.Threading
+RTL_USER_PROCESS_PARAMETERS=Windows.Win32.System.Threading
+RtlNtStatusToDosError=Windows.Win32.Foundation
+THREADINFOCLASS=Windows.Win32.System.Threading
+# endregion winternl.h
 # region winuser.h
 _TrackMouseEvent=Windows.Win32.UI.KeyboardAndMouseInput
 ACCESSTIMEOUT=Windows.Win32.UI.Accessibility
@@ -1737,6 +1874,9 @@ AreDpiAwarenessContextsEqual=Windows.Win32.UI.HiDpi
 AttachThreadInput=Windows.Win32.System.SystemServices
 BeginPaint=Windows.Win32.Graphics.Gdi
 BlockInput=Windows.Win32.UI.KeyboardAndMouseInput
+BSM_INSTALLABLEDRIVERS=Windows.Win32.UI.WindowsAndMessaging
+BSM_NETDRIVER=Windows.Win32.UI.WindowsAndMessaging
+BSM_VXDS=Windows.Win32.UI.WindowsAndMessaging
 ChangeClipboardChain=Windows.Win32.System.DataExchange
 ChangeDisplaySettingsA=Windows.Win32.Graphics.Gdi
 ChangeDisplaySettingsExA=Windows.Win32.Graphics.Gdi
@@ -1767,6 +1907,7 @@ DELETEITEMSTRUCT=Windows.Win32.UI.Controls
 DestroySyntheticPointerDevice=Windows.Win32.UI.Controls
 DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS=Windows.Win32.UI.HiDpi
 DIALOG_DPI_CHANGE_BEHAVIORS=Windows.Win32.UI.HiDpi
+DisableProcessWindowsGhosting=Windows.Win32.UI.WindowsAndMessaging
 DisplayConfigGetDeviceInfo=Windows.Win32.UI.DisplayDevices
 DisplayConfigSetDeviceInfo=Windows.Win32.UI.DisplayDevices
 DlgDirListA=Windows.Win32.UI.Controls
@@ -1965,7 +2106,7 @@ IsTouchWindow=Windows.Win32.UI.TouchInput
 IsValidDpiAwarenessContext=Windows.Win32.UI.HiDpi
 IsWindowEnabled=Windows.Win32.UI.KeyboardAndMouseInput
 IsWinEventHookInstalled=Windows.Win32.UI.Accessibility
-IsWow64Message=Windows.Win32.System.SystemServices
+IsWow64Message=Windows.Win32.UI.WindowsAndMessaging
 keybd_event=Windows.Win32.UI.KeyboardAndMouseInput
 KEYBDINPUT=Windows.Win32.UI.KeyboardAndMouseInput
 LASTINPUTINFO=Windows.Win32.UI.KeyboardAndMouseInput
@@ -2027,6 +2168,7 @@ POINTER_INFO=Windows.Win32.UI.PointerInput
 POINTER_PEN_INFO=Windows.Win32.UI.PointerInput
 POINTER_TOUCH_INFO=Windows.Win32.UI.PointerInput
 POINTER_TYPE_INFO=Windows.Win32.UI.Controls
+POWERBROADCAST_SETTING=Windows.Win32.System.SystemServices
 PrintWindow=Windows.Win32.Storage.Xps
 PtInRect=Windows.Win32.Graphics.Gdi
 QueryDisplayConfig=Windows.Win32.UI.DisplayDevices
@@ -2126,9 +2268,12 @@ TRACKMOUSEEVENT=Windows.Win32.UI.KeyboardAndMouseInput
 UnhookWinEvent=Windows.Win32.UI.Accessibility
 UnionRect=Windows.Win32.Graphics.Gdi
 UnloadKeyboardLayout=Windows.Win32.UI.KeyboardAndMouseInput
+UnregisterDeviceNotification=Windows.Win32.System.SystemServices
 UnregisterHotKey=Windows.Win32.UI.KeyboardAndMouseInput
 UnregisterPointerInputTarget=Windows.Win32.UI.Accessibility
 UnregisterPointerInputTargetEx=Windows.Win32.UI.Accessibility
+UnregisterPowerSettingNotification=Windows.Win32.System.SystemServices
+UnregisterSuspendResumeNotification=Windows.Win32.System.SystemServices
 UnregisterTouchWindow=Windows.Win32.UI.TouchInput
 UpdateWindow=Windows.Win32.Graphics.Gdi
 USAGE_PROPERTIES=Windows.Win32.UI.Controls
@@ -2145,11 +2290,24 @@ WindowFromDC=Windows.Win32.Graphics.Gdi
 WINEVENTPROC=Windows.Win32.UI.Accessibility
 WinHelpA=Windows.Win32.UI.Shell
 WinHelpW=Windows.Win32.UI.Shell
+WM_DEVICECHANGE=Windows.Win32.UI.WindowsAndMessaging
 WTSSESSION_NOTIFICATION=Windows.Win32.System.RemoteDesktop
 # endregion winuser.h
+# region wow64apiset.h
+GetSystemWow64Directory2A=Windows.Win32.System.SystemInformation
+GetSystemWow64Directory2W=Windows.Win32.System.SystemInformation
+GetSystemWow64DirectoryA=Windows.Win32.System.SystemInformation
+GetSystemWow64DirectoryW=Windows.Win32.System.SystemInformation
+IsWow64GuestMachineSupported=Windows.Win32.System.SystemInformation
+Wow64DisableWow64FsRedirection=Windows.Win32.Storage.FileSystem
+Wow64GetThreadContext=Windows.Win32.System.Diagnostics.Debug
+Wow64RevertWow64FsRedirection=Windows.Win32.Storage.FileSystem
+Wow64SetThreadContext=Windows.Win32.System.Diagnostics.Debug
+# endregion wow64apiset.h
 # region wtypes.h
 CSPLATFORM=Windows.Win32.System.Com
 DVASPECT=Windows.Win32.System.Com
+PROPERTYKEY=Windows.Win32.System.PropertiesSystem
 QUERYCONTEXT=Windows.Win32.System.Com
 STATFLAG=Windows.Win32.Storage.StructuredStorage
 STGC=Windows.Win32.Storage.StructuredStorage
@@ -2157,109 +2315,3 @@ STGMOVE=Windows.Win32.Storage.StructuredStorage
 TYSPEC=Windows.Win32.System.Com
 VARENUM=Windows.Win32.System.OleAutomation
 # endregion wtypes.h
-AERT_Allocate=Windows.Win32.Media.Audio.DirectMusic
-AERT_Free=Windows.Win32.Media.Audio.DirectMusic
-MDEVICECAPSEX=Windows.Win32.Media.Audio.DirectMusic
-MIDIOPENDESC=Windows.Win32.Media.Audio.DirectMusic
-WIN32_STREAM_ID=Windows.Win32.System.SystemServices
-NtQueryInformationProcess=Windows.Win32.System.SystemServices
-NtQueryInformationThread=Windows.Win32.System.SystemServices
-PEB_LDR_DATA=Windows.Win32.System.SystemServices
-PEB=Windows.Win32.System.SystemServices
-RTL_USER_PROCESS_PARAMETERS=Windows.Win32.System.SystemServices
-IsWow64Process=Windows.Win32.System.SystemServices
-IsWow64Process2=Windows.Win32.System.SystemServices
-UnregisterDeviceNotification=Windows.Win32.System.SystemServices
-UnregisterPowerSettingNotification=Windows.Win32.System.SystemServices
-UnregisterSuspendResumeNotification=Windows.Win32.System.SystemServices
-POWERBROADCAST_SETTING=Windows.Win32.System.SystemServices
-CoGetDefaultContext=Windows.Win32.System.ComponentServices
-InitializeContext=Windows.Win32.System.Diagnostics.Debug
-LocateXStateFeature=Windows.Win32.System.Diagnostics.Debug
-SetXStateFeaturesMask=Windows.Win32.System.Diagnostics.Debug
-Wow64GetThreadContext=Windows.Win32.System.Diagnostics.Debug
-Wow64GetThreadSelectorEntry=Windows.Win32.System.Diagnostics.Debug
-Wow64SetThreadContext=Windows.Win32.System.Diagnostics.Debug
-RtlNtStatusToDosError=Windows.Win32.System.Diagnostics.Debug
-DWRITE_GLYPH_IMAGE_FORMATS=Windows.Win32.Graphics.DirectWrite
-DWRITE_MEASURING_MODE=Windows.Win32.Graphics.DirectWrite
-IDMOQualityControl=Windows.Win32.Graphics.DirectShow
-IDMOVideoOutputOptimizations=Windows.Win32.Graphics.DirectShow
-IEnumDMO=Windows.Win32.Graphics.DirectShow
-IMediaBuffer=Windows.Win32.Graphics.DirectShow
-IMediaObject=Windows.Win32.Graphics.DirectShow
-IMediaObjectInPlace=Windows.Win32.Graphics.DirectShow
-DMO_MEDIA_TYPE=Windows.Win32.Graphics.DirectShow
-DMO_OUTPUT_DATA_BUFFER=Windows.Win32.Graphics.DirectShow
-READYSTATE=Windows.Win32.Graphics.DirectShow
-VIDEOENCODER_BITRATE_MODE=Windows.Win32.Graphics.DirectShow
-TIMECODE=Windows.Win32.Graphics.DirectShow
-TIMECODE_SAMPLE=Windows.Win32.Graphics.DirectShow
-KSTOPOLOGY_CONNECTION=Windows.Win32.Graphics.DirectShow
-JOYREGHWVALUES=Windows.Win32.Devices.HumanInterfaceDevice
-JOYREGHWVALUES=Windows.Win32.Devices.HumanInterfaceDevice
-RtlCaptureStackBackTrace=Windows.Win32.Storage.InstallableFileSystems
-WORDREP_BREAK_TYPE=Windows.Win32.Storage.IndexServer
-IPhraseSink=Windows.Win32.Storage.IndexServer
-DBKINDENUM=Windows.Win32.Storage.IndexServer
-DBID=Windows.Win32.Storage.IndexServer
-COMPARTMENT_ID=Windows.Win32.System.Kernel
-_ColumnSortOrder=Windows.Win32.UI.LegacyWindowsEnvironmentFeatures
-IActiveDesktopP=Windows.Win32.UI.LegacyWindowsEnvironmentFeatures
-IADesktopP2=Windows.Win32.UI.LegacyWindowsEnvironmentFeatures
-VS_FIXEDFILEINFO=Windows.Win32.UI.WindowsAndMessaging
-IDirect3D9ExOverlayExtension=Windows.Win32.Media.MediaFoundation
-IDirect3DAuthenticatedChannel9=Windows.Win32.Media.MediaFoundation
-IDirect3DCryptoSession9=Windows.Win32.Media.MediaFoundation
-IDirect3DDevice9Video=Windows.Win32.Media.MediaFoundation
-D3DCONTENTPROTECTIONCAPS=Windows.Win32.Media.MediaFoundation
-D3DOVERLAYCAPS=Windows.Win32.Media.MediaFoundation
-ICodecAPI=Windows.Win32.Media.MediaFoundation
-CodecAPIEventData=Windows.Win32.Media.MediaFoundation
-SHGetPropertyStoreForWindow=Windows.Win32.System.PropertiesSystem
-SYNC_ENGINE_STATE_FLAGS=Windows.Win32.System.PropertiesSystem
-SHAddDefaultPropertiesByExt=Windows.Win32.System.PropertiesSystem
-PROPERTYKEY=Windows.Win32.System.PropertiesSystem
-IUnknown_AddRef_Proxy=Windows.Win32.System.Rpc
-IUnknown_QueryInterface_Proxy=Windows.Win32.System.Rpc
-IUnknown_Release_Proxy=Windows.Win32.System.Rpc
-MSA_INFO_LEVEL=Windows.Win32.Security
-MSA_INFO_STATE=Windows.Win32.Security
-NetAddServiceAccount=Windows.Win32.Security
-NetEnumerateServiceAccounts=Windows.Win32.Security
-NetIsServiceAccount=Windows.Win32.Security
-NetQueryServiceAccount=Windows.Win32.Security
-NetRemoveServiceAccount=Windows.Win32.Security
-MSA_INFO_0=Windows.Win32.Security
-SetServiceBits=Windows.Win32.Security
-ImpersonateNamedPipeClient=Windows.Win32.Security
-InstallELAMCertificateInfo=Windows.Win32.Security
-RtlConvertSidToUnicodeString=Windows.Win32.Security
-ShellWindowFindWindowOptions=Windows.Win32.UI.Shell
-ShellWindowTypeConstants=Windows.Win32.UI.Shell
-IShellWindows=Windows.Win32.UI.Shell
-INotifyReplica=Windows.Win32.UI.Shell
-SOFTDISTINFO=Windows.Win32.UI.Shell
-MF_MEDIASOURCE_STATUS_INFO=Windows.Win32.Media.Streaming
-MF_TRANSFER_VIDEO_FRAME_FLAGS=Windows.Win32.Media.Streaming
-IMFDeviceTransform=Windows.Win32.Media.Streaming
-IMFDeviceTransformCallback=Windows.Win32.Media.Streaming
-WinMain=Windows.Win32.UI.WindowsAndMessaging
-PSYMBOLSERVERCALLBACKPROC=Windows.Win32.System.WindowsProgramming
-FILETIME=Windows.Win32.System.WindowsProgramming
-SYSTEMTIME=Windows.Win32.System.WindowsProgramming
-CoInstall=Windows.Win32.System.WindowsProgramming
-FIRMWARE_TYPE=Windows.Win32.System.WindowsProgramming
-DisableProcessWindowsGhosting=Windows.Win32.System.WindowsProgramming
-GetSystemWow64Directory2A=Windows.Win32.System.WindowsProgramming
-GetSystemWow64Directory2W=Windows.Win32.System.WindowsProgramming
-GetSystemWow64DirectoryA=Windows.Win32.System.WindowsProgramming
-GetSystemWow64DirectoryW=Windows.Win32.System.WindowsProgramming
-IsWow64GuestMachineSupported=Windows.Win32.System.WindowsProgramming
-ServerSelection=Windows.Win32.System.UpdateAgent
-DXGI_ERROR_*=Windows.Win32.Graphics.Dxgi
-WM_DEVICECHANGE=Windows.Win32.UI.WindowsAndMessaging
-BSM_VXDS=Windows.Win32.UI.WindowsAndMessaging
-BSM_NETDRIVER=Windows.Win32.UI.WindowsAndMessaging
-BSM_INSTALLABLEDRIVERS=Windows.Win32.UI.WindowsAndMessaging
-NETWORK_APP_INSTANCE_CSV_FLAGS_VALID_ONLY_IF_CSV_COORDINATOR=Windows.Win32.System.SystemServices

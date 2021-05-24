@@ -19,22 +19,14 @@
 #include <exposeenums2managed.h>
 #include <avrfsdk.h>
 #include <camerauicontrol.h>
-#include <fci.h>
-#include <fdi.h>
-#include <fdi_fci_types.h>
 #include <vdmdbg.h>
 #include <editionupgradehelper.h>
 #include <featurestagingapi.h>
-#include <fhcfg.h>
-#include <fhsvcctl.h>
 #include <apiquery2.h>
 #include <dciman.h>
-#include <processenv.h>
-#include <processthreadsapi.h>
 #include <timezoneapi.h>
 
 #include <ddrawi.h>
-#include <handleapi.h>
 #include <icwcfg.h>
 
 #include <ddrawgdi.h>
@@ -52,8 +44,6 @@
 #include <rpcndr.h>
 #include <isolatedapplauncher.h>
 //#include <ntsecpkg.h>
-#include <iwscapi.h>
-#include <wscapi.h>
 #include <filehc.h>
 #include <aux_ulib.h>
 //#include <rtlsupportapi.h>

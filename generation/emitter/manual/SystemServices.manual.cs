@@ -16,9 +16,6 @@ namespace Windows.Win32.System.SystemServices
         [NativeTypeName("BOOL")]
         public const int FALSE = 0;
 
-        [NativeTypeName("HANDLE")]
-        public const int INVALID_HANDLE_VALUE = -1;
-
         public const uint _MM_HINT_T0  = 1;
         public const uint _MM_HINT_T1  = 2;
         public const uint _MM_HINT_T2  = 3;

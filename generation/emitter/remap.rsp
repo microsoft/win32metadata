@@ -163,8 +163,6 @@ SpImportSecurityContextFn
 KspSetPagingModeFn
 KspSerializeAuthDataFn
 --remap
-SetHandleInformation::dwFlags=HANDLE_FLAG_OPTIONS
-DuplicateHandle::dwOptions=DUPLICATE_HANDLE_OPTIONS
 SetFileAttributesA::dwFileAttributes=FILE_FLAGS_AND_ATTRIBUTES
 SetFileAttributesW::dwFileAttributes=FILE_FLAGS_AND_ATTRIBUTES
 FindFirstFileExA::dwAdditionalFlags=FIND_FIRST_EX_FLAGS
@@ -174,9 +172,9 @@ CreateProcessW::dwCreationFlags=PROCESS_CREATION_FLAGS
 DefineDosDeviceW::dwFlags=DEFINE_DOS_DEVICE_FLAGS
 FindFirstChangeNotificationA::dwNotifyFilter=FILE_NOTIFY_CHANGE
 FindFirstChangeNotificationw::dwNotifyFilter=FILE_NOTIFY_CHANGE
-GetStdHandle::nStdHandle=STD_HANDLE_TYPE
-SetStdHandle::nStdHandle=STD_HANDLE_TYPE
-SetStdHandleEx::nStdHandle=STD_HANDLE_TYPE
+GetStdHandle::nStdHandle=STD_HANDLE
+SetStdHandle::nStdHandle=STD_HANDLE
+SetStdHandleEx::nStdHandle=STD_HANDLE
 CreateFileA::dwDesiredAccess=FILE_ACCESS_FLAGS
 CreateFileA::dwFlagsAndAttributes=FILE_FLAGS_AND_ATTRIBUTES
 CreateFileW::dwDesiredAccess=FILE_ACCESS_FLAGS

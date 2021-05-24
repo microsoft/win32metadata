@@ -12,7 +12,6 @@
 <IncludeRoot>/um/WinUser.h
 <IncludeRoot>/um/ResourceIndexer.h
 <IncludeRoot>/shared/strsafe.h
-<IncludeRoot>/um/winver.h
 --namespace
 Windows.Win32.UI.WindowsAndMessaging
 --exclude

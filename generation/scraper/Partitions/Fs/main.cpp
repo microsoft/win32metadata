@@ -30,4 +30,5 @@
 #include <ktmtypes.h>
 #include <lmshare.h>
 #include <lmstats.h>
-#include <wow64apiset.h>
+#include <winver.h> // Also includes verrsrc.h
+//#include <verrsrc.h>
