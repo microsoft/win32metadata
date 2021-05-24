@@ -5,5 +5,6 @@
 #include "windows.fixed.h"
 #include <sdkddkver.h>
 
+#include <handleapi.h>
 #include <winerror.h>
 #include <ntstatus.h>

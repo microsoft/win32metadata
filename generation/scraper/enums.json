@@ -9880,8 +9880,12 @@
     ]
   },
   {
-    "addUsesTo": "DUPLICATE_HANDLE_OPTIONS",
+    "name": "DUPLICATE_HANDLE_OPTIONS",
     "flags": true,
+    "autoPopulate": {
+      "header": "winnt.h",
+      "filter": "DUPLICATE_"
+    },
     "members": [],
     "uses": [
       {
@@ -16276,8 +16280,12 @@
     ]
   },
   {
-    "addUsesTo": "HANDLE_FLAG_OPTIONS",
+    "name": "HANDLE_FLAGS",
     "flags": true,
+    "autoPopulate": {
+      "header": "winbase.h",
+      "filter": "HANDLE_FLAG_"
+    },
     "members": [],
     "uses": [
       {

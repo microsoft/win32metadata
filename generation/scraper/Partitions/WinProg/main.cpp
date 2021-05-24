@@ -29,7 +29,6 @@
 #include <timezoneapi.h>
 
 #include <ddrawi.h>
-#include <handleapi.h>
 #include <icwcfg.h>
 
 #include <ddrawgdi.h>

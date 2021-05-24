@@ -10,5 +10,6 @@
 --traverse
 <IncludeRoot>/shared/ntstatus.h
 <IncludeRoot>/shared/winerror.h
+<IncludeRoot>/um/handleapi.h
 --namespace
 Windows.Win32.Foundation

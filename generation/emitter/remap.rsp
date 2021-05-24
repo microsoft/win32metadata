@@ -163,8 +163,6 @@ SpImportSecurityContextFn
 KspSetPagingModeFn
 KspSerializeAuthDataFn
 --remap
-SetHandleInformation::dwFlags=HANDLE_FLAG_OPTIONS
-DuplicateHandle::dwOptions=DUPLICATE_HANDLE_OPTIONS
 SetFileAttributesA::dwFileAttributes=FILE_FLAGS_AND_ATTRIBUTES
 SetFileAttributesW::dwFileAttributes=FILE_FLAGS_AND_ATTRIBUTES
 FindFirstFileExA::dwAdditionalFlags=FIND_FIRST_EX_FLAGS

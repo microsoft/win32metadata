@@ -51,7 +51,6 @@ _TEB
 <IncludeRoot>/um/rtlsupportapi.h
 <IncludeRoot>/shared/stralign.h
 <IncludeRoot>/um/appcompatapi.h
-<IncludeRoot>/um/handleapi.h
 <IncludeRoot>/um/processenv.h
 <IncludeRoot>/um/timezoneapi.h
 <IncludeRoot>/um/ddkernel.h
