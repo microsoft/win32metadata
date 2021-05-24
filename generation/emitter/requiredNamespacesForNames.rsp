@@ -2312,6 +2312,4 @@ STGMOVE=Windows.Win32.Storage.StructuredStorage
 TYSPEC=Windows.Win32.System.Com
 VARENUM=Windows.Win32.System.OleAutomation
 # endregion wtypes.h
-READYSTATE=Windows.Win32.Graphics.DirectShow
-VS_FIXEDFILEINFO=Windows.Win32.UI.WindowsAndMessaging
 NETWORK_APP_INSTANCE_CSV_FLAGS_VALID_ONLY_IF_CSV_COORDINATOR=Windows.Win32.System.SystemServices

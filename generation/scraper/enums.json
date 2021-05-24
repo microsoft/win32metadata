@@ -1872,10 +1872,51 @@
     ]
   },
   {
-    "addUsesTo": "VER_FLAGS",
+    "name": "VER_FLAGS",
     "flags": true,
-    "members": [],
+    "members": [
+      {
+        "name": "VER_MINORVERSION",
+        "value": "0x0000001"
+      },
+      {
+        "name": "VER_MAJORVERSION",
+        "value": "0x0000002"
+      },
+      {
+        "name": "VER_BUILDNUMBER",
+        "value": "0x0000004"
+      },
+      {
+        "name": "VER_PLATFORMID",
+        "value": "0x0000008"
+      },
+      {
+        "name": "VER_SERVICEPACKMINOR",
+        "value": "0x0000010"
+      },
+      {
+        "name": "VER_SERVICEPACKMAJOR",
+        "value": "0x0000020"
+      },
+      {
+        "name": "VER_SUITENAME",
+        "value": "0x0000040"
+      },
+      {
+        "name": "VER_PRODUCT_TYPE",
+        "value": "0x0000080"
+      }
+    ],
     "uses": [
+      {
+        "method": "VerifyVersionInfoA",
+        "parameter": "dwTypeMask"
+      },
+      {
+        "method": "VerifyVersionInfoW",
+        "parameter": "dwTypeMask"
+      },
       {
         "method": "VerSetConditionMask",
         "parameter": "TypeMask"
@@ -5740,16 +5781,6 @@
       {
         "method": "NetRequestOfflineDomainJoin",
         "parameter": "dwOptions"
-      }
-    ]
-  },
-  {
-    "addUsesTo": "VER_FLAGS",
-    "members": [],
-    "uses": [
-      {
-        "method": "VerSetConditionMask",
-        "parameter": "TypeMask"
       }
     ]
   },
@@ -9646,21 +9677,6 @@
       {
         "method": "NCryptGetProperty",
         "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
-    "addUsesTo": "VER_FLAGS",
-    "flags": true,
-    "members": [],
-    "uses": [
-      {
-        "method": "VerifyVersionInfoA",
-        "parameter": "dwTypeMask"
-      },
-      {
-        "method": "VerifyVersionInfoW",
-        "parameter": "dwTypeMask"
       }
     ]
   },
