@@ -170,6 +170,7 @@ using Windows.Win32.System.RestartManager;
 using Windows.Win32.System.Restore;
 using Windows.Win32.System.Rpc;
 using Windows.Win32.System.Search;
+using Windows.Win32.System.SecurityCenter;
 using Windows.Win32.System.ServerBackup;
 using Windows.Win32.System.Services;
 using Windows.Win32.System.SettingsManagementInfrastructure;

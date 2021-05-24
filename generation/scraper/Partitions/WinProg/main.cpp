@@ -47,8 +47,6 @@
 #include <rpcndr.h>
 #include <isolatedapplauncher.h>
 //#include <ntsecpkg.h>
-#include <iwscapi.h>
-#include <wscapi.h>
 #include <filehc.h>
 #include <aux_ulib.h>
 //#include <rtlsupportapi.h>
