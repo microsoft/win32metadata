@@ -51,7 +51,6 @@ _VIRTUAL_STORAGE_TYPE
 <IncludeRoot>/um/d3dcaps.h
 <IncludeRoot>/um/d3dtypes.h
 <IncludeRoot>/um/winddi.h
-<IncludeRoot>/um/mcx.h
 <IncludeRoot>/um/servprov.h
 <IncludeRoot>/shared/winsmcrd.h
 <IncludeRoot>/um/winioctl.h

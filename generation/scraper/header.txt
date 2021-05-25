@@ -10,6 +10,7 @@ using Windows.Win32.Data.Xml.XmlLite;
 using Windows.Win32.Devices.AllJoyn;
 using Windows.Win32.Devices.BiometricFramework;
 using Windows.Win32.Devices.Bluetooth;
+using Windows.Win32.Devices.Communication;
 using Windows.Win32.Devices.DeviceAccess;
 using Windows.Win32.Devices.DeviceAndDriverInstallation;
 using Windows.Win32.Devices.Display;

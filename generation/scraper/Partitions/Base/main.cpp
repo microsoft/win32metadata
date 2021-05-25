@@ -33,7 +33,6 @@
 #include <minidumpapiset.h>
 //#include <imagehlp.h> // Can't use with dbghelp.h
 #include <winioctl.h>
-#include <mcx.h>
 #include <ioevent.h>
 #include <storprop.h>
 #include <ioapiset.h>
