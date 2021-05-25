@@ -13,6 +13,7 @@ using Windows.Win32.Devices.Bluetooth;
 using Windows.Win32.Devices.Communication;
 using Windows.Win32.Devices.DeviceAccess;
 using Windows.Win32.Devices.DeviceAndDriverInstallation;
+using Windows.Win32.Devices.DeviceQuery;
 using Windows.Win32.Devices.Display;
 using Windows.Win32.Devices.Enumeration.Pnp;
 using Windows.Win32.Devices.Fax;

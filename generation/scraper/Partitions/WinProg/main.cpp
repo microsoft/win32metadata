@@ -55,7 +55,6 @@
 #include <wldp.h>
 #include <windowsceip.h>
 #include <xmllite.h>
-#include <devquery.h>
 #include <fltdefs.h>
 #include <statehelpers.h>
 

@@ -53,10 +53,7 @@ _TEB
 <IncludeRoot>/um/appcompatapi.h
 <IncludeRoot>/um/timezoneapi.h
 <IncludeRoot>/um/ddkernel.h
-<IncludeRoot>/um/devquery.h
-<IncludeRoot>/um/devquerydef.h
 <IncludeRoot>/um/fltdefs.h
-<IncludeRoot>/um/devfiltertypes.h
 <IncludeRoot>/um/statehelpers.h
 --namespace
 Windows.Win32.System.WindowsProgramming
