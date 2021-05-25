@@ -352,6 +352,7 @@ OVERLAPPED_ENTRY=Windows.Win32.Storage.FileSystem
 OVERLAPPED=Windows.Win32.System.SystemServices
 READ_DIRECTORY_NOTIFY_INFORMATION_CLASS=Windows.Win32.Storage.FileSystem
 RIP_INFO=Windows.Win32.System.Diagnostics.Debug
+SECURITY_ATTRIBUTES=Windows.Win32.Security
 SYSTEMTIME=Windows.Win32.Foundation
 UNLOAD_DLL_DEBUG_INFO=Windows.Win32.System.Diagnostics.Debug
 WIN32_FIND_DATAA=Windows.Win32.Storage.FileSystem
