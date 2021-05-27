@@ -24,7 +24,6 @@
 #include <featurestagingapi.h>
 #include <apiquery2.h>
 #include <dciman.h>
-#include <timezoneapi.h>
 
 #include <ddrawi.h>
 #include <icwcfg.h>

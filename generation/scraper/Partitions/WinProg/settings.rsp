@@ -26,7 +26,6 @@ _TEB
 <IncludeRoot>/um/vdmctxt.h
 <IncludeRoot>/shared/dciddi.h
 <IncludeRoot>/um/realtimeapiset.h
-<IncludeRoot>/um/timeprov.h
 <IncludeRoot>/um/windowsceip.h
 <IncludeRoot>/um/profileapi.h
 <IncludeRoot>/um/WinBase.h
@@ -51,7 +50,6 @@ _TEB
 <IncludeRoot>/um/rtlsupportapi.h
 <IncludeRoot>/shared/stralign.h
 <IncludeRoot>/um/appcompatapi.h
-<IncludeRoot>/um/timezoneapi.h
 <IncludeRoot>/um/ddkernel.h
 <IncludeRoot>/um/fltdefs.h
 <IncludeRoot>/um/statehelpers.h
