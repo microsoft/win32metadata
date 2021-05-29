@@ -43,8 +43,6 @@ EXCEPTION_ROUTINE
 ENCLAVE_TARGET_FUNCTION
 LPENCLAVE_TARGET_FUNCTION
 --traverse
-<IncludeRoot>/shared/windef.h
-<IncludeRoot>/shared/minwindef.h
 <IncludeRoot>/um/winnt.h
 --namespace
 Windows.Win32.System.SystemServices

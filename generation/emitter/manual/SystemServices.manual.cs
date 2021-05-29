@@ -10,12 +10,6 @@ namespace Windows.Win32.System.SystemServices
 
     public static unsafe partial class Apis
     {
-        [NativeTypeName("BOOL")]
-        public const int TRUE = 1;
-
-        [NativeTypeName("BOOL")]
-        public const int FALSE = 0;
-
         public const uint _MM_HINT_T0  = 1;
         public const uint _MM_HINT_T1  = 2;
         public const uint _MM_HINT_T2  = 3;

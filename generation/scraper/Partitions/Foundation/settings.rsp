@@ -8,7 +8,9 @@
 <IncludeRoot>/um
 <IncludeRoot>/winrt
 --traverse
+<IncludeRoot>/shared/minwindef.h
 <IncludeRoot>/shared/ntstatus.h
+<IncludeRoot>/shared/windef.h
 <IncludeRoot>/shared/winerror.h
 <IncludeRoot>/um/handleapi.h
 --namespace
