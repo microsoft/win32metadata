@@ -6,8 +6,6 @@
 #include <sdkddkver.h>
 
 #include <mmsystem.h>
-#include <winsmcrd.h>
-#include <winspool.h>
 
 // Headers needed for COM
 #include <objbase.h>
