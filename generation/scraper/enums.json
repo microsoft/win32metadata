@@ -28439,7 +28439,33 @@
       {
         "method": "CreateSymbolicLinkTransactedW",
         "parameter": "dwFlags"
+      }
+    ]
+  },
+  {
+    "name": "CRED_PACK_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "CRED_PACK_",
+      "header": "wincred.h"
+    },
+    "uses": [
+      {
+        "method": "CredPackAuthenticationBufferA",
+        "parameter": "dwFlags"
       },
+      {
+        "method": "CredPackAuthenticationBufferW",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "CredUnPackAuthenticationBufferA",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "CredUnPackAuthenticationBufferW",
+        "parameter": "dwFlags"
+      }
     ]
   }
 ]
