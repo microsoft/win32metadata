@@ -28415,5 +28415,31 @@
         "parameter": "uFlags"
       }
     ]
+  },
+  {
+    "name": "SYMBOLIC_LINK_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "SYMBOLIC_LINK_FLAG_",
+      "header": "winbase.h"
+    },
+    "uses": [
+      {
+        "method": "CreateSymbolicLinkA",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "CreateSymbolicLinkW",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "CreateSymbolicLinkTransactedA",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "CreateSymbolicLinkTransactedW",
+        "parameter": "dwFlags"
+      },
+    ]
   }
 ]
