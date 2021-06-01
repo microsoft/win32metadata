@@ -6,8 +6,6 @@
 #include <sdkddkver.h>
 
 #include <mmsystem.h>
-#include <winsmcrd.h>
-#include <winspool.h>
 
 // Headers needed for COM
 #include <objbase.h>
@@ -27,7 +25,6 @@
 #include <errhandlingapi.h>
 #include <winternl.h>
 #include <debugapi.h>
-#include <processenv.h>
 #include <minwinbase.h>
 #include <wct.h>
 #include <minidumpapiset.h>
@@ -38,21 +35,9 @@
 #include <ioapiset.h>
 #include <dbt.h>
 #include <ntddstor.h>
-#include <process.h>
-#include <fileapi.h>
-#include <sysinfoapi.h>
 #include <atlthunk.h>
 #include <lmserver.h>
-#include <handleapi.h>
 #include <windowsceip.h>
-#include <versionhelpers.h>
 #include <realtimeapiset.h>
-#include <timezoneapi.h>
-#include <timeprov.h>
-
-#include <namespaceapi.h>
-#include <processtopologyapi.h>
-#include <systemtopologyapi.h>
-#include <profileapi.h>
 
 #include <devpkey.h>

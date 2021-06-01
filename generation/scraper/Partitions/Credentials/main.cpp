@@ -8,4 +8,5 @@
 
 #include <keycredmgr.h>
 #include <wincred.h>
+#include <winsmcrd.h>
 #include <winscard.h>
