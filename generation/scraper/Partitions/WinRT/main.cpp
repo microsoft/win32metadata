@@ -53,3 +53,9 @@
 #include <msajtransport.h>
 #include <alljoyn_c\AjAPI.h>
 #include <windows.devices.alljoyn.interop.h>
+#include <windows.ai.machinelearning.native.h>
+#include <Windows.Graphics.Holographic.Interop.h>
+#include <windows.graphics.printing.workflow.native.h>
+#include <windows.security.isolation.isolatedenvironmentinterop.h>
+#include <windows.ui.xaml.hosting.desktopwindowxamlsource.h>
+#include <windows.ui.xaml.hosting.referencetracker.h>
