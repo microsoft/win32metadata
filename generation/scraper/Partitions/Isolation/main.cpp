@@ -7,3 +7,4 @@
 #include <sdkddkver.h>
 
 #include <securityappcontainer.h>
+#include <isolatedapplauncher.h>

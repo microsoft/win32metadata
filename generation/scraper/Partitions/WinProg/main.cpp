@@ -41,7 +41,6 @@
 #include <lmaccess.h>
 #include <wininet.h>
 #include <rpcndr.h>
-#include <isolatedapplauncher.h>
 //#include <ntsecpkg.h>
 #include <filehc.h>
 #include <aux_ulib.h>

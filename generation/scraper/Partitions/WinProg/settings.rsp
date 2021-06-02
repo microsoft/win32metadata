@@ -21,7 +21,6 @@ _TEB
 --traverse
 <IncludeRoot>/um/wldp.h
 <IncludeRoot>/shared/tdiinfo.h
-<IncludeRoot>/um/isolatedapplauncher.h
 <IncludeRoot>/um/capi.h
 <IncludeRoot>/um/vdmctxt.h
 <IncludeRoot>/shared/dciddi.h
