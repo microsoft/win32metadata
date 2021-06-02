@@ -19,7 +19,6 @@
 #include <exposeenums2managed.h>
 #include <avrfsdk.h>
 #include <camerauicontrol.h>
-#include <vdmdbg.h>
 #include <editionupgradehelper.h>
 #include <featurestagingapi.h>
 #include <apiquery2.h>

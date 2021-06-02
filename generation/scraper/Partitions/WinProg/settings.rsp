@@ -22,7 +22,6 @@ _TEB
 <IncludeRoot>/um/wldp.h
 <IncludeRoot>/shared/tdiinfo.h
 <IncludeRoot>/um/capi.h
-<IncludeRoot>/um/vdmctxt.h
 <IncludeRoot>/shared/dciddi.h
 <IncludeRoot>/um/realtimeapiset.h
 <IncludeRoot>/um/windowsceip.h
@@ -31,7 +30,6 @@ _TEB
 <IncludeRoot>/shared/exposeenums2managed.h
 <IncludeRoot>/um/avrfsdk.h
 <IncludeRoot>/um/CameraUIControl.h
-<IncludeRoot>/um/VdmDbg.h
 <IncludeRoot>/um/EditionUpgradeHelper.h
 <IncludeRoot>/um/featurestagingapi.h
 <IncludeRoot>/um/apiquery2.h
