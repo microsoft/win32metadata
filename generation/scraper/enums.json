@@ -11256,6 +11256,7 @@
   },
   {
     "name": "VIRTUAL_ALLOCATION_TYPE",
+    "flags": true,
     "members": [
       {
         "name": "MEM_COMMIT",
