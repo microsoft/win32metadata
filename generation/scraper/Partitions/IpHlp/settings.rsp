@@ -40,6 +40,7 @@ _DL_EUI48
 <IncludeRoot>/shared/tcpestats.h
 <IncludeRoot>/shared/tcpmib.h
 <IncludeRoot>/shared/udpmib.h
+<IncludeRoot>/um/fltdefs.h
 <IncludeRoot>/um/IcmpAPI.h
 <IncludeRoot>/um/IPExport.h
 <IncludeRoot>/um/iphlpapi.h

@@ -47,7 +47,6 @@ _TEB
 <IncludeRoot>/shared/stralign.h
 <IncludeRoot>/um/appcompatapi.h
 <IncludeRoot>/um/ddkernel.h
-<IncludeRoot>/um/fltdefs.h
 <IncludeRoot>/um/statehelpers.h
 --namespace
 Windows.Win32.System.WindowsProgramming
