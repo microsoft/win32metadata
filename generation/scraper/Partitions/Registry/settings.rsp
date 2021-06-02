@@ -8,6 +8,7 @@
 <IncludeRoot>/um
 <IncludeRoot>/winrt
 --traverse
+<IncludeRoot>/um/statehelpers.h
 <IncludeRoot>/um/winreg.h
 --namespace
 Windows.Win32.System.Registry

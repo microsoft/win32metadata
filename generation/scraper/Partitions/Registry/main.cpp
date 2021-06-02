@@ -5,3 +5,4 @@
 #include <winbase.h>
 #include <winnt.h>
 #include <winreg.h>
+#include <statehelpers.h>
