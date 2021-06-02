@@ -10,3 +10,4 @@
 #include <perflib.h>
 #include <pdh.h>
 #include <winperf.h>
+#include <profileapi.h>

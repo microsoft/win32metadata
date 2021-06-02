@@ -11,6 +11,7 @@
 <IncludeRoot>/um/LoadPerf.h
 <IncludeRoot>/um/Pdh.h
 <IncludeRoot>/um/perflib.h
+<IncludeRoot>/um/profileapi.h
 <IncludeRoot>/um/winperf.h
 --namespace
 Windows.Win32.System.Performance
