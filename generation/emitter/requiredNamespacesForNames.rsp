@@ -1779,6 +1779,7 @@ REPARSE_GUID_DATA_BUFFER=Windows.Win32.Storage.FileSystem
 RtlAddFunctionTable=Windows.Win32.System.Diagnostics.Debug
 RtlAddGrowableFunctionTable=Windows.Win32.System.Diagnostics.Debug
 RtlCaptureContext=Windows.Win32.System.Diagnostics.Debug
+RtlCaptureContext2=Windows.Win32.System.Diagnostics.Debug
 RtlCaptureStackBackTrace=Windows.Win32.System.Diagnostics.Debug
 RtlDeleteFunctionTable=Windows.Win32.System.Diagnostics.Debug
 RtlDeleteGrowableFunctionTable=Windows.Win32.System.Diagnostics.Debug
