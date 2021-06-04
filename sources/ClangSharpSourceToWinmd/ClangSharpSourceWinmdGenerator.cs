@@ -1833,11 +1833,6 @@ namespace ClangSharpSourceToWinmd
             var model = this.GetModel(node);
             var structSymbol = model.GetDeclaredSymbol(node);
 
-            if (structName == "OVERLAPPED")
-            {
-
-            }
-
             // Write fields
             foreach (FieldDeclarationSyntax field in node.Members.Where(m => m is FieldDeclarationSyntax))
             {
