@@ -383,7 +383,10 @@ namespace ClangSharpSourceToWinmd
                 scopeRef = assemblyRef;
             }
 
-            return GetTypeReference(symbol.ContainingNamespace.ToString(), symbol.Name, scopeRef);
+            // Change from namepace.parent.self => parent/self
+            string name = symbol.ToString().Substring(symbol.ContainingNamespace.ToString().Length + 1).Replace('.', '/');
+
+            return GetTypeReference(symbol.ContainingNamespace.ToString(), name, scopeRef);
         }
 
         private EntityHandle GetTypeReference(string @namespace, string name)
@@ -1829,6 +1832,11 @@ namespace ClangSharpSourceToWinmd
 
             var model = this.GetModel(node);
             var structSymbol = model.GetDeclaredSymbol(node);
+
+            if (structName == "OVERLAPPED")
+            {
+
+            }
 
             // Write fields
             foreach (FieldDeclarationSyntax field in node.Members.Where(m => m is FieldDeclarationSyntax))
