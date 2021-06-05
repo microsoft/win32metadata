@@ -28,9 +28,7 @@
 
       <file src="bin\release\netcoreapp3.1\*.deps.json" target="tools\netcoreapp3.1"/>
       <file src="bin\release\netcoreapp3.1\*.runtimeconfig.json" target="tools\netcoreapp3.1"/>
-      <file src="bin\release\netcoreapp3.1\*.dll" target="tools\netcoreapp3.1" exclude="**\MetadataTasks.*"/>
-      <file src="bin\release\netcoreapp3.1\MetadataTasks.deps.json" target="tools\netcoreapp3.1"/>
-      <file src="bin\release\netcoreapp3.1\MetadataTasks.dll" target="tools\netcoreapp3.1"/>
+      <file src="bin\release\netcoreapp3.1\*.dll" target="tools\netcoreapp3.1" />
 
       <file src="generation\scraper\intrinfix.h" target="tools\assets"/>
       <file src="generation\scraper\sal.h" target="tools\assets"/>

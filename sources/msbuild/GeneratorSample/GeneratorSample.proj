@@ -4,6 +4,7 @@
     <PropertyGroup>
         <OutputWinmd>bin\Windows.Win32.Graphics.DirectWriteCore.winmd</OutputWinmd>
         <WinmdVersion>1.0.0.0</WinmdVersion>
+        <GenerateAssemblyVersionInfo>false</GenerateAssemblyVersionInfo>
     </PropertyGroup>
 
     <ItemGroup>
