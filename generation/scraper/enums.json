@@ -28468,5 +28468,25 @@
         "parameter": "dwFlags"
       }
     ]
+  },
+  {
+    "name": "ENUM_PROCESS_MODULES_EX_FLAGS",
+    "flags": false,
+    "autoPopulate": {
+      "filter": "LIST_MODULES_",
+      "header": "psapi.h"
+    },
+    "members": [
+      {
+        "name": "LIST_MODULES_ALL",
+        "value": "3"
+      }
+    ],
+    "uses": [
+      {
+        "method": "K32EnumProcessModulesEx",
+        "parameter": "dwFilterFlag"
+      }
+    ]
   }
 ]
