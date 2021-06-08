@@ -546,6 +546,18 @@ ReadFmtUserTypeStg=Windows.Win32.Storage.StructuredStorage
 SetConvertStg=Windows.Win32.Storage.StructuredStorage
 WriteFmtUserTypeStg=Windows.Win32.Storage.StructuredStorage
 # endregion ole2.h
+# region oleauto.h
+SysAddRefString=Windows.Win32.Foundation
+SysAllocString=Windows.Win32.Foundation
+SysAllocStringByteLen=Windows.Win32.Foundation
+SysAllocStringLen=Windows.Win32.Foundation
+SysFreeString=Windows.Win32.Foundation
+SysReAllocString=Windows.Win32.Foundation
+SysReAllocStringLen=Windows.Win32.Foundation
+SysReleaseString=Windows.Win32.Foundation
+SysStringByteLen=Windows.Win32.Foundation
+SysStringLen=Windows.Win32.Foundation
+# endregion oleauto.h
 # region olectl.h
 OleLoadPictureFile=Windows.Win32.System.OleAutomation
 OleLoadPictureFileEx=Windows.Win32.System.OleAutomation
