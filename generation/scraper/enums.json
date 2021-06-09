@@ -5446,7 +5446,7 @@
     ]
   },
   {
-    "name": "INTERNET_DEFAULT_PORT",
+    "name": "INTERNET_PORT",
     "members": [
       {
         "name": "INTERNET_DEFAULT_HTTP_PORT"
@@ -10609,7 +10609,7 @@
     "name": "POWER_PLATFORM_ROLE_VERSION",
     "members": [
       {
-        "name": "POWER_PLATFORM_ROLE_VERSION"
+        "name": "POWER_PLATFORM_ROLE_CURRENT_VERSION"
       },
       {
         "name": "POWER_PLATFORM_ROLE_V1"
@@ -12681,7 +12681,7 @@
     ]
   },
   {
-    "name": "PDH_VERSION",
+    "name": "PDH_DLL_VERSION",
     "members": [
       {
         "name": "PDH_CVERSION_WIN50"
