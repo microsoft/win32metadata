@@ -546,31 +546,42 @@ namespace WinmdUtilsProgram
         {
             bool ret = CompareAttributes(field1.Name, field1.GetAttributes(), field2.GetAttributes(), console);
 
-            if (field1.IsConst)
+            // Using the ReflectionName gets us the name of the type in
+            // metadata. The FullName might not be fully resolvable by the
+            // library because it doesn't know how to resolve arch-specific types
+            if (field1.Type.ReflectionName != field2.Type.ReflectionName)
             {
-                if (!field2.IsConst)
+                console?.Out.Write($"{field1.DeclaringType.FullName}.{field1.Name}...{field1.Type.ReflectionName} => {field2.Type.ReflectionName}\r\n");
+                ret = false;
+            }
+            else
+            {
+                if (field1.IsConst)
                 {
-                    console?.Out.Write($"winmd1: {field1.Name} const, winmd2: not\r\n");
-                    ret = false;
-                }
-                else
-                {
-                    var fieldVal1 = field1.GetConstantValue();
-                    var fieldVal2 = field2.GetConstantValue();
-
-                    if (fieldVal1.ToString() != fieldVal2.ToString())
+                    if (!field2.IsConst)
                     {
-                        console?.Out.Write($"winmd1: {field1.Name} = {fieldVal1}, winmd2 = {fieldVal2}\r\n");
+                        console?.Out.Write($"winmd1: {field1.Name} const, winmd2: not\r\n");
                         ret = false;
                     }
+                    else
+                    {
+                        var fieldVal1 = field1.GetConstantValue();
+                        var fieldVal2 = field2.GetConstantValue();
+
+                        if (fieldVal1.ToString() != fieldVal2.ToString())
+                        {
+                            console?.Out.Write($"winmd1: {field1.Name} = {fieldVal1}, winmd2 = {fieldVal2}\r\n");
+                            ret = false;
+                        }
+                    }
                 }
-            }
-            else if (field2.IsConst)
-            {
-                if (!field2.IsConst)
+                else if (field2.IsConst)
                 {
-                    console?.Out.Write($"winmd1: {field1.Name} not const, winmd2: const\r\n");
-                    ret = false;
+                    if (!field2.IsConst)
+                    {
+                        console?.Out.Write($"winmd1: {field1.Name} not const, winmd2: const\r\n");
+                        ret = false;
+                    }
                 }
             }
 
@@ -597,16 +608,6 @@ namespace WinmdUtilsProgram
                 }
 
                 type2Fields.Remove(field2.Name);
-
-                // Using the ReflectionName gets us the name of the type in
-                // metadata. The FullName might not be fully resolvable by the
-                // library because it doesn't know how to resolve arch-specific types
-                if (field1.Type.ReflectionName != field2.Type.ReflectionName)
-                {
-                    console?.Out.Write($"{type1.FullTypeName}.{field1.Name}...{field1.Type.ReflectionName} => {field2.Type.ReflectionName}\r\n");
-                    ret = false;
-                    continue;
-                }
 
                 ret &= CompareFields(field1, field2, console);
             }
@@ -888,7 +889,7 @@ namespace WinmdUtilsProgram
             return name;
         }
 
-        private static Dictionary<string, List<IMember>> GetApiMemberNamesToMethodDefinitions(DecompilerTypeSystem winmd)
+        private static Dictionary<string, List<IMember>> GetApiMemberNamesToMemberDefinitions(DecompilerTypeSystem winmd)
         {
             Dictionary<string, List<IMember>> ret = new Dictionary<string, List<IMember>>();
             foreach (var type1 in winmd.GetTopLevelTypeDefinitions())
@@ -1076,8 +1077,8 @@ namespace WinmdUtilsProgram
                 }
             }
 
-            var apiNameToMembers1 = GetApiMemberNamesToMethodDefinitions(winmd1);
-            var apiNameToMembers2 = GetApiMemberNamesToMethodDefinitions(winmd2);
+            var apiNameToMembers1 = GetApiMemberNamesToMemberDefinitions(winmd1);
+            var apiNameToMembers2 = GetApiMemberNamesToMemberDefinitions(winmd2);
 
             HashSet<string> visitedM2Names = new HashSet<string>();
             foreach (var api1MemberInfo in apiNameToMembers1)
