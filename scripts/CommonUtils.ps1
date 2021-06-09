@@ -46,16 +46,16 @@ function Install-DotNetTool
 
     if ($Version -ne '')
     {
-        $installed = & dotnet tool list -g | select-string "$Name\s+$Version"
-        if (!$installed.Length)
+        $installed = & dotnet tool list -g | select-string -Pattern "$Name\s+$Version" -Raw
+        if (($installed -eq $null) -or !$installed.Length)
         {
             & dotnet tool update --global $Name --version $Version
         }
     }
     else
     {
-        $installed = & dotnet tool list -g | select-string "$Name"
-        if (!$installed.Length)
+        $installed = & dotnet tool list -g | select-string -Pattern "$Name" -Raw
+        if (($installed -eq $null) -or !$installed.Length)
         {
             & dotnet tool update --global $Name
         }

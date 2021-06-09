@@ -42,6 +42,7 @@ $partitionNames = Get-ChildItem $partitionsDir | Select-Object -ExpandProperty N
 $stopwatch =  [system.diagnostics.stopwatch]::StartNew()
 
 Write-Output "`nProcessing each partition...using $throttleCount parallel script(s)"
+Write-Output "ClangSharpPInvokeGenerator resolved to $((Get-Command ClangSharpPInvokeGenerator).Path)"
 
 $errObj = new-object psobject
 Add-Member -InputObject $errObj -MemberType NoteProperty -Name ErrorCode -Value 0
