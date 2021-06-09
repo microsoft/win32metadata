@@ -598,9 +598,12 @@ namespace WinmdUtilsProgram
 
                 type2Fields.Remove(field2.Name);
 
-                if (field1.Type.FullName != field2.Type.FullName)
+                // Using the ReflectionName gets us the name of the type in
+                // metadata. The FullName might not be fully resolvable by the
+                // library because it doesn't know how to resolve arch-specific types
+                if (field1.Type.ReflectionName != field2.Type.ReflectionName)
                 {
-                    console?.Out.Write($"{type1.FullTypeName}.{field1.Name}...{field1.Type.FullName} => {field2.Type.FullName}\r\n");
+                    console?.Out.Write($"{type1.FullTypeName}.{field1.Name}...{field1.Type.ReflectionName} => {field2.Type.ReflectionName}\r\n");
                     ret = false;
                     continue;
                 }
