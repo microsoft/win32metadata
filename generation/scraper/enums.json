@@ -4086,6 +4086,30 @@
       {
         "method": "CreateFileMappingFromApp",
         "parameter": "PageProtection"
+      },
+      {
+        "struct": "MEMORY_BASIC_INFORMATION",
+        "field": "AllocationProtect"
+      },
+      {
+        "struct": "MEMORY_BASIC_INFORMATION",
+        "field": "Protect"
+      },
+      {
+        "struct": "MEMORY_BASIC_INFORMATION32",
+        "field": "AllocationProtect"
+      },
+      {
+        "struct": "MEMORY_BASIC_INFORMATION32",
+        "field": "Protect"
+      },
+      {
+        "struct": "MEMORY_BASIC_INFORMATION64",
+        "field": "AllocationProtect"
+      },
+      {
+        "struct": "MEMORY_BASIC_INFORMATION64",
+        "field": "Protect"
       }
     ]
   },
