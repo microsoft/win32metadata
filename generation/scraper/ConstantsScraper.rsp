@@ -1,4 +1,5 @@
 --with-attribute
+E_NOTIMPL=NativeTypeName("HRESULT")
 IDI_APPLICATION=NativeTypeName("LPCWSTR")
 IDI_HAND=NativeTypeName("LPCWSTR")
 IDI_QUESTION=NativeTypeName("LPCWSTR")

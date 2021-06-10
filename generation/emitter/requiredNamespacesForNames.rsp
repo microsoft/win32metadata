@@ -1407,6 +1407,7 @@ SIZE=Windows.Win32.Foundation
 # endregion windef.h
 # region winerror.h
 DXGI_ERROR_*=Windows.Win32.Graphics.Dxgi
+E_NOTIMPL=Windows.Win32.Foundation
 # endregion winerror.h
 # region wingdi.h
 AbortDoc=Windows.Win32.Storage.Xps
