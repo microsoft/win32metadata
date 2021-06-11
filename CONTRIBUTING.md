@@ -14,6 +14,7 @@ You can contribute to this project by contributing to:
 * [Discussions](https://github.com/microsoft/win32metadata/discussions)
 * [Namespaces](#Namespaces)
 * [Enums](#Enums)
+* [Constants](#Constants)
 * [Projections](docs/projections.md)
 
 If you intend to contribute code changes, learn how to [set up your development environment](#Set-up-your-development-environment).
@@ -122,6 +123,20 @@ In the example below, a flags enum called `WNDCLASS_STYLES` is created with all 
 }
 ```
 You can add new enums, modify existing enums, or apply enums to more APIs by modifying [enums.json](generation/scraper/enums.json).
+
+## Constants
+
+Our tooling scans header files for constants and emits them into the namespace of the containing header file. The tool that handles this responsibility is called the [ConstantsScraper](sources/ConstantsScraper).
+
+The behavior of the ConstantsScraper can be adjusted by modifying [generation/scraper/ConstantsScraper.rsp](ConstantsScraper.rsp):
+
+* The `--with-attribute` section declares attributes to add to constants (e.g. `E_NOTIMPL=NativeTypeName("HRESULT")`)
+* The `--with-type` section declares constant types that cannot be detected automatically (e.g. `SOCK_STREAM=ushort`)
+* The `--exclude` section declares constants to exclude from the metadata
+
+Constants can be assigned to different namespaces than their header files by adding them to [requiredNamespacesForNames.rsp](generation/emitter/requiredNamespacesForNames.rsp) as described in [Split a header file among multiple namespaces](#Split-a-header-file-among-multiple-namespaces). Wildcards can be used (e.g. `DXGI_ERROR_*=Windows.Win32.Graphics.Dxgi`).
+
+Constants are removed from the metadata when they are detected as members of an enum.
 
 ## Validating changes
 
