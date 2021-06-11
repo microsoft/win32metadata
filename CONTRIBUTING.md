@@ -128,7 +128,7 @@ You can add new enums, modify existing enums, or apply enums to more APIs by mod
 
 Our tooling scans header files for constants and emits them into the namespace of the containing header file. The tool that handles this responsibility is called the [ConstantsScraper](sources/ConstantsScraper).
 
-The behavior of the ConstantsScraper can be adjusted by modifying [generation/scraper/ConstantsScraper.rsp](ConstantsScraper.rsp):
+The behavior of the ConstantsScraper can be adjusted by modifying [ConstantsScraper.rsp](generation/scraper/ConstantsScraper.rsp):
 
 * The `--with-attribute` section declares attributes to add to constants (e.g. `E_NOTIMPL=NativeTypeName("HRESULT")`)
 * The `--with-type` section declares constant types that cannot be detected automatically (e.g. `SOCK_STREAM=ushort`)
