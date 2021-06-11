@@ -3878,7 +3878,7 @@
   },
   {
     "type": "uint",
-    "name": "PAGE_TYPE",
+    "name": "PAGE_PROTECTION_FLAGS",
     "flags": true,
     "members": [
       {
@@ -28510,6 +28510,38 @@
       {
         "method": "K32EnumProcessModulesEx",
         "parameter": "dwFilterFlag"
+      }
+    ]
+  },
+  {
+    "name": "PAGE_TYPE",
+    "flags": true,
+    "members": [
+      {
+        "name": "MEM_PRIVATE",
+        "value": "0x00020000"
+      },
+      {
+        "name": "MEM_MAPPED",
+        "value": "0x00040000"
+      },
+      {
+        "name": "MEM_IMAGE",
+        "value": "0x01000000"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "MEMORY_BASIC_INFORMATION",
+        "field": "Type"
+      },
+      {
+        "struct": "MEMORY_BASIC_INFORMATION32",
+        "field": "Type"
+      },
+      {
+        "struct": "MEMORY_BASIC_INFORMATION64",
+        "field": "Type"
       }
     ]
   }
