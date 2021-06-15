@@ -33,6 +33,7 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 
 * Install [Visual Studio Code](https://code.visualstudio.com/Download)
 * Install [PowerShell](https://aka.ms/powershell-release?tag=stable)
+* Install [.NET (SDK)](https://dotnet.microsoft.com/download/dotnet)
 * Install [ILSpy](https://github.com/icsharpcode/ILSpy/releases/latest)
 * Clone the [repo](https://github.com/microsoft/win32metadata.git)
 * Run a [full build](#Full-builds)
