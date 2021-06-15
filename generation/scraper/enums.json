@@ -156,26 +156,6 @@
     ]
   },
   {
-    "name": "BUTTON_STYLE",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "BS_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": []
-  },
-  {
-    "name": "COMBOBOX_STYLE",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "CBS_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": []
-  },
-  {
     "name": "CHOOSECOLOR_FLAGS",
     "flags": true,
     "autoPopulate": {
@@ -350,16 +330,6 @@
     ]
   },
   {
-    "name": "DIALOGBOX_STYLE",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "DS_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": []
-  },
-  {
     "name": "DRAWSTATE_FLAGS",
     "flags": true,
     "autoPopulate": {
@@ -377,16 +347,6 @@
         "parameter": "uFlags"
       }
     ]
-  },
-  {
-    "name": "EDITCONTROL_STYLE",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "ES_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": []
   },
   {
     "name": "GESTURECONFIG_ID",
@@ -411,21 +371,6 @@
       "header": "WinUser.h"
     },
     "members": [],
-    "uses": []
-  },
-  {
-    "name": "LISTBOX_STYLE",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "LBS_",
-      "header": "WinUser.h"
-    },
-    "members": [
-      {
-        "name": "LBS_STANDARD",
-        "value": "(LBS_NOTIFY | LBS_SORT | Windows.Win32.UI.WindowsAndMessaging.WINDOW_STYLE.WS_VSCROLL | Windows.Win32.UI.WindowsAndMessaging.WINDOW_STYLE.WS_BORDER)"
-      }
-    ],
     "uses": []
   },
   {
@@ -634,16 +579,6 @@
     ]
   },
   {
-    "name": "SCROLLBAR_STYLE",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "SBS_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": []
-  },
-  {
     "name": "SHOW_WINDOW_CMD",
     "flags": true,
     "autoPopulate": {
@@ -757,16 +692,6 @@
         "parameter": "uiAction"
       }
     ]
-  },
-  {
-    "name": "STATIC_CONTROL_STYLE",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "SS_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": []
   },
   {
     "name": "SOUNDSENTRY_FLAGS",

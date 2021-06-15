@@ -40,6 +40,8 @@ namespace Windows.Win32.UI.WindowsAndMessaging
         public const int HBMMENU_POPUP_MINIMIZE = 11;
 
         public const int CW_USEDEFAULT = unchecked((int)0x80000000);
+
+        public const int LBS_STANDARD = (LBS_NOTIFY | LBS_SORT | (int)WINDOW_STYLE.WS_VSCROLL | (int)WINDOW_STYLE.WS_BORDER);
     }
 
     [UnmanagedFunctionPointer]
