@@ -11355,6 +11355,14 @@
       {
         "struct": "MEMORY_BASIC_INFORMATION",
         "field": "State"
+      },
+      {
+        "struct": "MEMORY_BASIC_INFORMATION32",
+        "field": "State"
+      },
+      {
+        "struct": "MEMORY_BASIC_INFORMATION64",
+        "field": "State"
       }
     ]
   },
