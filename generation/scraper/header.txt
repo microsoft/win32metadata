@@ -143,6 +143,7 @@ using Windows.Win32.System.DataExchange;
 using Windows.Win32.System.DeploymentServices;
 using Windows.Win32.System.DesktopSharing;
 using Windows.Win32.System.DeveloperLicensing;
+using Windows.Win32.System.Diagnostics.Ceip;
 using Windows.Win32.System.Diagnostics.Debug;
 using Windows.Win32.System.Diagnostics.Etw;
 using Windows.Win32.System.Diagnostics.ProcessSnapshotting;

@@ -24,7 +24,6 @@ _TEB
 <IncludeRoot>/um/capi.h
 <IncludeRoot>/shared/dciddi.h
 <IncludeRoot>/um/realtimeapiset.h
-<IncludeRoot>/um/windowsceip.h
 <IncludeRoot>/um/WinBase.h
 <IncludeRoot>/um/winternl.h
 <IncludeRoot>/shared/exposeenums2managed.h

@@ -49,5 +49,4 @@
 #include <appcompatapi.h>
 #include <dsound.h>
 #include <wldp.h>
-#include <windowsceip.h>
 
