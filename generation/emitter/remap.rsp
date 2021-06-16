@@ -385,6 +385,8 @@ OpenThreadToken::DesiredAccess=TOKEN_ACCESS_MASK
 DuplicateTokenEx::dwDesiredAccess=TOKEN_ACCESS_MASK
 CreateDCW::return=CreatedHDC
 CreateDCA::return=CreatedHDC
+CreateICW::return=CreatedHDC
+CreateICA::return=CreatedHDC
 CreateCompatibleDC::return=CreatedHDC
 DeleteDC::hdc=CreatedHDC
 DXVAHD_STREAM_DATA::ppPastSurfaces=[NativeArrayInfo(CountParamIndex=3)]
