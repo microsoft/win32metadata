@@ -17,7 +17,6 @@
 #include <winternl.h>
 #include <dbghelp.h>
 #include <exposeenums2managed.h>
-#include <avrfsdk.h>
 #include <camerauicontrol.h>
 #include <editionupgradehelper.h>
 #include <featurestagingapi.h>

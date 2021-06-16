@@ -133,6 +133,7 @@ using Windows.Win32.Storage.Xps.Printing;
 using Windows.Win32.System.AddressBook;
 using Windows.Win32.System.Antimalware;
 using Windows.Win32.System.ApplicationInstallationAndServicing;
+using Windows.Win32.System.ApplicationVerifier;
 using Windows.Win32.System.AssessmentTool;
 using Windows.Win32.System.Com;
 using Windows.Win32.System.ComponentServices;
