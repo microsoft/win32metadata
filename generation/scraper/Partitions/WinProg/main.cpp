@@ -24,7 +24,6 @@
 #include <dciman.h>
 
 #include <ddrawi.h>
-#include <icwcfg.h>
 
 #include <ddrawgdi.h>
 #include <advpub.h>
