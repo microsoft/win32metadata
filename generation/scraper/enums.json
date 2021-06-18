@@ -787,6 +787,10 @@
       {
         "method": "CreateWindowExW",
         "parameter": "dwExStyle"
+      },
+      {
+        "method": "AdjustWindowRectEx",
+        "parameter": "dwExStyle"
       }
     ]
   },
@@ -822,6 +826,14 @@
       {
         "struct": "MDICREATESTRUCTA",
         "field": "style"
+      },
+      {
+        "method": "AdjustWindowRect",
+        "parameter": "dwStyle"
+      },
+      {
+        "method": "AdjustWindowRectEx",
+        "parameter": "dwStyle"
       }
     ]
   },
