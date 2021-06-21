@@ -59,3 +59,4 @@
 #include <windows.security.isolation.isolatedenvironmentinterop.h>
 #include <windows.ui.xaml.hosting.desktopwindowxamlsource.h>
 #include <windows.ui.xaml.hosting.referencetracker.h>
+#include <systemmediatransportcontrolsinterop.h>

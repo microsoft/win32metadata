@@ -57,7 +57,6 @@ using Windows.Win32.Media.DeviceManager;
 using Windows.Win32.Media.LibrarySharingServices;
 using Windows.Win32.Media.MediaFoundation;
 using Windows.Win32.Media.MediaPlayer;
-using Windows.Win32.Media.MediaTransport;
 using Windows.Win32.Media.Multimedia;
 using Windows.Win32.Media.PictureAcquisition;
 using Windows.Win32.Media.Streaming;
