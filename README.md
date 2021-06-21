@@ -19,7 +19,7 @@ Note: Community projects are listed here to help with discovery but are not offi
 
 See the [roadmap](./docs/roadmap.md) and [FAQ](./docs/faq.md) for more details.
 
-If you'd like to browse the metadata to see what we're emitting, [download the winmd file](https://github.com/microsoft/win32metadata/raw/master/scripts/BaselineWinmd/Windows.Win32.winmd) and load it in [ILSpy](https://github.com/icsharpcode/ILSpy/releases/latest).
+If you'd like to browse the metadata to see what we're emitting, download [Windows.Win32.winmd](https://github.com/microsoft/win32metadata/raw/master/scripts/BaselineWinmd/Windows.Win32.winmd) and [Windows.Win32.Interop.dll](https://github.com/microsoft/win32metadata/raw/master/scripts/BaselineWinmd/Windows.Win32.Interop.dll) into the same folder and load Windows.Win32.winmd in [ILSpy](https://github.com/icsharpcode/ILSpy/releases/latest).
 
 ![ILSpy with winmd](./images/ILSpyWithWinmd.png)
 
