@@ -10,9 +10,11 @@
         <TaskBinDir Condition="'$(TaskBinDir)' == ''">$(Win32MetadataSdkRoot)\tools\netcoreapp3.1</TaskBinDir>
         <ToolsBinDir Condition="'$(ToolsBinDir)' == ''">$(Win32MetadataSdkRoot)\tools\netcoreapp3.1</ToolsBinDir>
         <LibToolsBinDir Condition="'$(LibToolsBinDir)' == ''">$(Win32MetadataSdkRoot)\tools</LibToolsBinDir>
+        <ScriptsDir Condition="'$(ScriptsDir)' == ''">$(Win32MetadataSdkRoot)\scripts</ScriptsDir>
         <Win32MetadataScraperAssetsDir Condition="'$(Win32MetadataScraperAssetsDir)' == ''">$(Win32MetadataSdkRoot)\tools\assets</Win32MetadataScraperAssetsDir>
         <Win32MetadataScraperGeneratedAssetsDir Condition="'$(Win32MetadataScraperGeneratedAssetsDir)' == ''">$(Win32MetadataSdkRoot)\tools\assets</Win32MetadataScraperGeneratedAssetsDir>
         <Win32WinmdBinDir Condition="'$(Win32WinmdBinDir)' == ''">$(PkgMicrosoft_Windows_SDK_Win32Metadata)</Win32WinmdBinDir>
+        <PowerShell># 2>nul || type %~df0|find /v "setlocal"|find /v "errorlevel"|powershell.exe -noninteractive -&amp; exit %errorlevel% || #</PowerShell>
     </PropertyGroup>
 
     <ItemGroup>

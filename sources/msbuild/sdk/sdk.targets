@@ -5,6 +5,16 @@
     <UsingTask TaskName="MetadataTasks.EmitWinmd" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
 
     <Target Name="ScrapeAndEmit" AfterTargets="Build">
+        <PropertyGroup>
+            <InstallToolsScript>
+                $(PowerShell)
+
+                $(ScriptsDir)\InstallTools.ps1
+            </InstallToolsScript>
+        </PropertyGroup>
+
+        <Exec Command="$(InstallToolsScript)" EchoOff="false" />
+
         <ScanLibs
             Libs="@(ImportLibs)"
             LibToolsBinDir="$(LibToolsBinDir)"

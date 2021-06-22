@@ -24,6 +24,7 @@
   <Target Name="SetNuSpecProperties" BeforeTargets="GenerateNuspec" DependsOnTargets="GetBuildVersion">
     <PropertyGroup>
       <NuspecProperties>$(NuspecProperties);Version=$(Version)</NuspecProperties>
+      <NoWarn>NU5110,NU5111</NoWarn>
     </PropertyGroup>
   </Target>
 
