@@ -1,0 +1,20 @@
+<Project>
+
+  <Target Name="PrepareReleaseNotes" BeforeTargets="GenerateNuspec" DependsOnTargets="GetBuildVersion">
+    <PropertyGroup>
+       <PackageReleaseNotes>https://github.com/microsoft/win32metadata/releases/tag/v$(Version)</PackageReleaseNotes>
+    </PropertyGroup>
+  </Target>
+
+  <Target Name="GenerateAndConsumeDocs"
+          DependsOnTargets="ResolveProjectReferences"
+          BeforeTargets="GenerateNuspec"
+          Inputs="@(ScraperTool)"
+          Outputs="@(DocOutputPath)"
+          Condition=" '$(DesignTimeBuild)' != 'true' ">
+    <Message Importance="high" Text="Generating @(DocOutputPath->'%(FullPath)'). This may take a few minutes..." />
+    <Exec Command="dotnet @(ScraperTool) ../../ext/sdk-api/sdk-api-src/content @(DocOutputPath)"
+          StandardOutputImportance="high"/>
+  </Target>
+
+</Project>
