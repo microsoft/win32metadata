@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrapeDocs", "ScrapeDocs\ScrapeDocs.csproj", "{099C7E51-5176-4BA9-86D0-16307ED0D7D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Windows.SDK.Win32Docs", "Microsoft.Windows.SDK.Win32Docs\Microsoft.Windows.SDK.Win32Docs.csproj", "{E213ED4C-2A2A-40C5-A43B-4A922802B200}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{099C7E51-5176-4BA9-86D0-16307ED0D7D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{099C7E51-5176-4BA9-86D0-16307ED0D7D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{099C7E51-5176-4BA9-86D0-16307ED0D7D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{099C7E51-5176-4BA9-86D0-16307ED0D7D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E213ED4C-2A2A-40C5-A43B-4A922802B200}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E213ED4C-2A2A-40C5-A43B-4A922802B200}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E213ED4C-2A2A-40C5-A43B-4A922802B200}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E213ED4C-2A2A-40C5-A43B-4A922802B200}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

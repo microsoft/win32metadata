@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <NoWarn>$(NoWarn);NU5128;NU5125</NoWarn>
+
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+    <Description>Microsoft Windows API documentation</Description>
+    <PackageTags>Win32 Metadata</PackageTags>
+    <PackageProjectUrl>https://github.com/microsoft/win32metadata</PackageProjectUrl>
+    <PackageLicenseUrl>https://aka.ms/WinSDKLicenseURL</PackageLicenseUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageIcon>images/windows.png</PackageIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <DocOutputPath Include="$(OutputPath)apidocs.msgpack" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="@(DocOutputPath)" Pack="true" PackagePath="" />
+    <None Include="buildTransitive/**" Pack="true" PackagePath="buildTransitive" />
+    <None Include="../../images/windows.png" Pack="true" PackagePath="images/" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MessagePack" Version="2.2.85" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ScrapeDocs\ScrapeDocs.csproj" ReferenceOutputAssembly="false" OutputItemType="ScraperTool" SetTargetFramework="TargetFramework=net5.0" />
+  </ItemGroup>
+
+  <Import Project="Microsoft.Windows.SDK.Win32Docs.targets" />
+</Project>
