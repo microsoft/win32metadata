@@ -39,6 +39,9 @@ $requiredNamespacesForNames = "$emitterDir\requiredNamespacesForNames.rsp"
 $functionPointerFixupsRsp = "$emitterGeneratedDir\functionPointerFixups.generated.rsp"
 $enumsMakeFlagsRsp = "$emitterGeneratedDir\enumsMakeFlags.generated.rsp"
 
+$scraperGeneratedDir = "$scraperDir\obj\$scraperArch"
+$autoTypesRemapRsp = "$scraperGeneratedDir\autoTypes.generated.rsp"
+$baseRemapRsp = "$scraperDir\baseRemap.rsp"
 $constantsScraperRsp = "$scraperDir\ConstantsScraper.rsp"
 $constantsHeaderTxt = "$scraperDir\ConstantsHeader.txt"
 $enumsJson = "$scraperDir\enums.json"
@@ -64,9 +67,9 @@ if (!$SkipBinary)
 
     Write-Output "`n"
     Write-Output "`e[36m*** Creating $outputWinmdFileName...`e[0m"
-    Write-Output "Calling: dotnet $clangSharpSourceToWinmdBin --sourceDir $emitterDir --arch $arch --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName @$requiredNamespacesForNames @$autoTypesFileName @$enumsRemapFileName @$functionPointerFixupsRsp @$enumsMakeFlagsRsp"
+    Write-Output "Calling: dotnet $clangSharpSourceToWinmdBin --sourceDir $emitterDir --arch $arch --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName @$requiredNamespacesForNames @$autoTypesFileName @$enumsRemapFileName @$functionPointerFixupsRsp @$enumsMakeFlagsRsp @$autoTypesRemapRsp @$baseRemapRsp"
 
-    & dotnet $clangSharpSourceToWinmdBin --sourceDir $emitterDir --arch $arch --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName @$requiredNamespacesForNames @$autoTypesFileName @$enumsRemapFileName @$functionPointerFixupsRsp @$enumsMakeFlagsRsp
+    & dotnet $clangSharpSourceToWinmdBin --sourceDir $emitterDir --arch $arch --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName @$requiredNamespacesForNames @$autoTypesFileName @$enumsRemapFileName @$functionPointerFixupsRsp @$enumsMakeFlagsRsp @$autoTypesRemapRsp @$baseRemapRsp
     if ($LastExitCode -ne 0)
     {
         Write-Error "Failed to build .winmd."

@@ -24,6 +24,7 @@ namespace ClangSharpSourceToWinmd
 
             private HashSet<SyntaxNode> nodesWithMarshalAs = new HashSet<SyntaxNode>();
             private Dictionary<string, string> remaps;
+            private Dictionary<string, string> remapFrom;
             private Dictionary<string, Dictionary<string, string>> enumAdditions;
             private Dictionary<string, string> requiredNamespaces;
             private HashSet<string> visitedDelegateNames = new HashSet<string>();
@@ -35,6 +36,14 @@ namespace ClangSharpSourceToWinmd
             public TreeRewriter(Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsToMakeFlags, Dictionary<string, string> requiredNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames)
             {
                 this.remaps = remaps;
+
+                this.remapFrom = new Dictionary<string, string>();
+
+                foreach (var kvp in this.remaps)
+                {
+                    this.remapFrom.TryAdd(kvp.Value, kvp.Key);
+                }
+
                 this.enumAdditions = enumAdditions;
                 this.requiredNamespaces = requiredNamespaces;
                 this.nonEmptyStructs = nonEmptyStructs;
@@ -97,6 +106,24 @@ namespace ClangSharpSourceToWinmd
                 if (SyntaxUtils.IsEmptyStruct(node) && this.nonEmptyStructs.Contains(node.Identifier.ValueText))
                 {
                     return null;
+                }
+
+                // If the struct doesn't have a NativeTypeName attribute and it was remapped from another type,
+                // add a NativeTypeName attribute pointing to the original type.
+                if (!node.AttributeLists.Any(list => list.Attributes.Any(attr => attr.Name.ToString() == "NativeTypeName")))
+                {
+                    string fullName = GetFullNameWithoutArchSuffix(node);
+
+                    if (this.remapFrom.TryGetValue(fullName, out string nativeType))
+                    {
+                        node =
+                            node.AddAttributeLists(
+                                SyntaxFactory.AttributeList(
+                                    SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
+                                        SyntaxFactory.Attribute(
+                                            SyntaxFactory.ParseName("NativeTypeName"),
+                                            SyntaxFactory.ParseAttributeArgumentList($"(\"{ nativeType }\")")))));
+                    }
                 }
 
                 return base.VisitStructDeclaration(node);
