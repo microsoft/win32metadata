@@ -1,8 +1,15 @@
 <Project>
 
-  <Target Name="PrepareReleaseNotes" BeforeTargets="GenerateNuspec" DependsOnTargets="GetBuildVersion">
+  <Target Name="PrepareReleaseNotes" BeforeTargets="GenerateNuspec">
+    <!-- The tag for the release built from this commit is based on the cloud build number, as calculated from the repo root.
+         See release.yml for more on that. -->
+    <Exec Command="nbgv get-version -v CloudBuildNumber -p ../.."
+          ConsoleToMSBuild="true"
+          StandardOutputImportance="low">
+      <Output TaskParameter="ConsoleOutput" PropertyName="ExpectedTagVersion" />
+    </Exec>
     <PropertyGroup>
-       <PackageReleaseNotes>https://github.com/microsoft/win32metadata/releases/tag/v$(Version)</PackageReleaseNotes>
+       <PackageReleaseNotes>https://github.com/microsoft/win32metadata/releases/tag/v$(ExpectedTagVersion)</PackageReleaseNotes>
     </PropertyGroup>
   </Target>
 
