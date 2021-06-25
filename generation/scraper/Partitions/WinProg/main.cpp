@@ -39,7 +39,6 @@
 #include <wininet.h>
 #include <rpcndr.h>
 //#include <ntsecpkg.h>
-#include <filehc.h>
 #include <aux_ulib.h>
 //#include <rtlsupportapi.h>
 #include <stralign.h>

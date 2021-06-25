@@ -30,5 +30,6 @@
 #include <ktmtypes.h>
 #include <lmshare.h>
 #include <lmstats.h>
+#include <filehc.h>
 #include <winver.h> // Also includes verrsrc.h
 //#include <verrsrc.h>

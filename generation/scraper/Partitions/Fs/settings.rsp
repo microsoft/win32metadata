@@ -20,6 +20,7 @@ DumpLogRecords
 <IncludeRoot>/um/DskQuota.h
 <IncludeRoot>/um/fileapi.h
 <IncludeRoot>/um/fileapifromapp.h
+<IncludeRoot>/um/FileHC.h
 <IncludeRoot>/um/ioapiset.h
 <IncludeRoot>/um/ktmw32.h
 <IncludeRoot>/um/LMShare.h
