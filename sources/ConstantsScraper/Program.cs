@@ -19,7 +19,7 @@ namespace ConstantsScraperApp
                 new Option<string>("--requiredNamespaceForName", "The required namespace for a named item.", ArgumentArity.OneOrMore),
                 new Option<string>("--rename", "Rename an enum.", ArgumentArity.OneOrMore),
                 new Option<string>("--with-attribute", "Add an attribute to a constant.", ArgumentArity.OneOrMore),
-                new Option<string>("--remap", "A field or parameter that should get remapped to a certain type.", ArgumentArity.OneOrMore),
+                new Option<string>("--remapWinmd", "A field or parameter that should get remapped to a certain type.", ArgumentArity.OneOrMore),
                 new Option<string>("--with-type", "For a type for a constant.", ArgumentArity.OneOrMore),
                 new Option<string>("--enumsJson", "A json file with enum information.", ArgumentArity.OneOrMore)
             };
@@ -36,7 +36,7 @@ namespace ConstantsScraperApp
             var enumJsonFiles = context.ParseResult.ValueForOption<string[]>("--enumsJson");
             var headerTextFile = context.ParseResult.ValueForOption<string>("--headerTextFile");
             var requiredNamespaceValuePairs = context.ParseResult.ValueForOption<string[]>("--requiredNamespaceForName");
-            var remappedNameValuePairs = context.ParseResult.ValueForOption<string[]>("--remap");
+            var remappedNameValuePairs = context.ParseResult.ValueForOption<string[]>("--remapWinmd");
             var withTypeValuePairs = context.ParseResult.ValueForOption<string[]>("--with-type");
             var withAttributeValuePairs = context.ParseResult.ValueForOption<string[]>("--with-attribute");
 

@@ -67,9 +67,9 @@ if (!$SkipBinary)
 
     Write-Output "`n"
     Write-Output "`e[36m*** Creating $outputWinmdFileName...`e[0m"
-    Write-Output "Calling: dotnet $clangSharpSourceToWinmdBin --sourceDir $emitterDir --arch $arch --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName @$requiredNamespacesForNames @$autoTypesFileName @$enumsRemapFileName @$functionPointerFixupsRsp @$enumsMakeFlagsRsp @$autoTypesRemapRsp @$baseRemapRsp"
+    Write-Output "Calling: dotnet $clangSharpSourceToWinmdBin --sourceDir $emitterDir --arch $arch --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$baseRemapRsp @$autoTypesRemapRsp @$remapFileName @$requiredNamespacesForNames @$autoTypesFileName @$enumsRemapFileName @$functionPointerFixupsRsp @$enumsMakeFlagsRsp"
 
-    & dotnet $clangSharpSourceToWinmdBin --sourceDir $emitterDir --arch $arch --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$remapFileName @$requiredNamespacesForNames @$autoTypesFileName @$enumsRemapFileName @$functionPointerFixupsRsp @$enumsMakeFlagsRsp @$autoTypesRemapRsp @$baseRemapRsp
+    & dotnet $clangSharpSourceToWinmdBin --sourceDir $emitterDir --arch $arch --interopFileName $metadataInteropBin --outputFileName $outputWinmdFileName --version $assemblyVersion @$baseRemapRsp @$autoTypesRemapRsp @$remapFileName @$requiredNamespacesForNames @$autoTypesFileName @$enumsRemapFileName @$functionPointerFixupsRsp @$enumsMakeFlagsRsp
     if ($LastExitCode -ne 0)
     {
         Write-Error "Failed to build .winmd."

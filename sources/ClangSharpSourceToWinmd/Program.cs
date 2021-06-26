@@ -18,15 +18,20 @@ namespace ClangSharpSourceToWinmd
                 new Option<string>("--interopFileName", "The path to Windows.Win32.Interop.dll") { IsRequired = true },
                 new Option<string>("--outputFileName", "The path to the .winmd to create") { IsRequired = true },
                 new Option<string>("--version", description: "The version to use on the .winmd", getDefaultValue: () => "1.0.0.0"),
-                new Option<string>("--remap", "A declaration name to be remapped to another name during binding generation.", ArgumentArity.OneOrMore),
-
+                new Option<string>("--remap", "ClangSharpPInvokeGenerator: A declaration name to be remapped to another name during binding generation.", ArgumentArity.ZeroOrMore),
+                new Option<string>("--remapWinmd", "A field, parameter, or return type to be remapped to another name during winmd generation.", ArgumentArity.OneOrMore),
                 new Option<string>("--enum-Addition", "Add a member to an enum.", ArgumentArity.OneOrMore),
                 new Option<string>("--ref", "The path to a referenced binary.", ArgumentArity.OneOrMore),
                 new Option<string>("--enum-Make-Flags", "Make an enum a Flags enum.", ArgumentArity.OneOrMore),
                 new Option<string>("--reducePointerLevel", "Reduce pointer level by one.", ArgumentArity.OneOrMore),
                 new Option<string>("--typeImport", "A type to be imported from another assembly.", ArgumentArity.OneOrMore),
                 new Option<string>("--requiredNamespaceForName", "The required namespace for a named item.", ArgumentArity.OneOrMore),
-                new Option<string>("--autoTypes", "An auto-type to add to the metadata.", ArgumentArity.OneOrMore)
+                new Option<string>("--autoTypes", "An auto-type to add to the metadata.", ArgumentArity.OneOrMore),
+
+                // ClangSharpPInvokeGenerator options which should be skipped when reading a shared response file:
+                new Option<string>("--with-librarypath", "ClangSharpPInvokeGenerator: (ignored)", ArgumentArity.OneOrMore),
+                new Option<string>("--with-type", "ClangSharpPInvokeGenerator: (ignored)", ArgumentArity.OneOrMore),
+                new Option<string>("--exclude", "ClangSharpPInvokeGenerator: (ignored)", ArgumentArity.ZeroOrMore),
             };
 
             rootCommand.Handler = CommandHandler.Create(typeof(Program).GetMethod(nameof(Run)));
@@ -41,7 +46,8 @@ namespace ClangSharpSourceToWinmd
             string interopFileName = context.ParseResult.ValueForOption<string>("--interopFileName");
             string outputFileName = context.ParseResult.ValueForOption<string>("--outputFileName");
             string version = context.ParseResult.ValueForOption<string>("--version");
-            var remappedNameValuePairs = context.ParseResult.ValueForOption<string[]>("--remap");
+            var nativeTypeNameValuePairs = context.ParseResult.ValueForOption<string[]>("--remap");
+            var remappedNameValuePairs = context.ParseResult.ValueForOption<string[]>("--remapWinmd");
             var enumAdditionsNameValuePairs = context.ParseResult.ValueForOption<string[]>("--enum-Addition");
             var enumMakeFlags = context.ParseResult.ValueForOption<string[]>("--enum-Make-Flags");
             var reducePointerLevelPairs = context.ParseResult.ValueForOption<string[]>("--reducePointerLevel");
@@ -50,6 +56,7 @@ namespace ClangSharpSourceToWinmd
             var autoTypes = context.ParseResult.ValueForOption<string[]>("--autoTypes");
             var refs = context.ParseResult.ValueForOption<string[]>("--ref");
 
+            var nativeTypes = ConvertValuePairsToNativeTypes(nativeTypeNameValuePairs);
             var remaps = ConvertValuePairsToDictionary(remappedNameValuePairs);
             var enumAdditions = ConvertValuePairsToEnumAdditions(enumAdditionsNameValuePairs);
             var reducePointerLevels = new HashSet<string>(reducePointerLevelPairs ?? (new string[0]));
@@ -82,7 +89,7 @@ namespace ClangSharpSourceToWinmd
 
             ClangSharpSourceCompilation clangSharpCompliation =
                 ClangSharpSourceCompilation.Create(
-                    sourceDirectory, arch, interopFileName, remaps, enumAdditions, enumMakeFlags, typeImports, requiredNamespaces, reducePointerLevels, refs);
+                    sourceDirectory, arch, interopFileName, nativeTypes, remaps, enumAdditions, enumMakeFlags, typeImports, requiredNamespaces, reducePointerLevels, refs);
 
             Console.WriteLine("Looking for compilation errors...");
             var diags = clangSharpCompliation.GetDiagnostics();
@@ -170,6 +177,35 @@ namespace ClangSharpSourceToWinmd
                         }
 
                         enumList[memberName] = value;
+                    }
+                }
+            }
+
+            return ret;
+        }
+
+        private static Dictionary<string, string> ConvertValuePairsToNativeTypes(string[] items)
+        {
+            Dictionary<string, string> ret = new Dictionary<string, string>();
+
+            if (items != null)
+            {
+                foreach (var item in items)
+                {
+                    if (string.IsNullOrEmpty(item))
+                    {
+                        continue;
+                    }
+
+                    int firstEqual = item.IndexOf('=');
+                    if (firstEqual != -1)
+                    {
+                        string name = item.Substring(firstEqual + 1);
+                        string value = item.Substring(0, firstEqual);
+
+                        // Use TryAdd to keep the first occurrence if multiple types have been remapped to the same
+                        // type.
+                        ret.TryAdd(name, value);
                     }
                 }
             }

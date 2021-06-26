@@ -740,7 +740,7 @@ namespace MetadataUtils
                 bool linesAdded = false;
                 using (StreamWriter enumRemapsWriter = new StreamWriter(enumRemapsFileName))
                 {
-                    enumRemapsWriter.WriteLine("--remap");
+                    enumRemapsWriter.WriteLine("--remapWinmd");
 
                     // For each enum object...
                     foreach (var obj in this.enumObjectsFromJsons)

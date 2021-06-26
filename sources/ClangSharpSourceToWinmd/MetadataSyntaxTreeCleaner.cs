@@ -11,9 +11,9 @@ namespace ClangSharpSourceToWinmd
 {
     public static class MetadataSyntaxTreeCleaner
     {
-        public static SyntaxTree CleanSyntaxTree(SyntaxTree tree, Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsMakeFlags, Dictionary<string, string> requiredNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames, string filePath)
+        public static SyntaxTree CleanSyntaxTree(SyntaxTree tree, Dictionary<string, string> nativeTypes, Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsMakeFlags, Dictionary<string, string> requiredNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames, string filePath)
         {
-            TreeRewriter treeRewriter = new TreeRewriter(remaps, enumAdditions, enumsMakeFlags, requiredNamespaces, nonEmptyStructs, enumMemberNames);
+            TreeRewriter treeRewriter = new TreeRewriter(nativeTypes, remaps, enumAdditions, enumsMakeFlags, requiredNamespaces, nonEmptyStructs, enumMemberNames);
             var newRoot = (CSharpSyntaxNode)treeRewriter.Visit(tree.GetRoot());
             return CSharpSyntaxTree.Create(newRoot, null, filePath);
         }
@@ -23,8 +23,8 @@ namespace ClangSharpSourceToWinmd
             private static readonly System.Text.RegularExpressions.Regex elementCountRegex = new System.Text.RegularExpressions.Regex(@"(?:elementCount|byteCount)\(([^\)]+)\)");
 
             private HashSet<SyntaxNode> nodesWithMarshalAs = new HashSet<SyntaxNode>();
+            private Dictionary<string, string> nativeTypes;
             private Dictionary<string, string> remaps;
-            private Dictionary<string, string> remapFrom;
             private Dictionary<string, Dictionary<string, string>> enumAdditions;
             private Dictionary<string, string> requiredNamespaces;
             private HashSet<string> visitedDelegateNames = new HashSet<string>();
@@ -33,17 +33,10 @@ namespace ClangSharpSourceToWinmd
             private HashSet<string> enumMemberNames;
             private HashSet<string> enumsToMakeFlags;
 
-            public TreeRewriter(Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsToMakeFlags, Dictionary<string, string> requiredNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames)
+            public TreeRewriter(Dictionary<string, string> nativeTypes, Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsToMakeFlags, Dictionary<string, string> requiredNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames)
             {
+                this.nativeTypes = nativeTypes;
                 this.remaps = remaps;
-
-                this.remapFrom = new Dictionary<string, string>();
-
-                foreach (var kvp in this.remaps)
-                {
-                    this.remapFrom.TryAdd(kvp.Value, kvp.Key);
-                }
-
                 this.enumAdditions = enumAdditions;
                 this.requiredNamespaces = requiredNamespaces;
                 this.nonEmptyStructs = nonEmptyStructs;
@@ -114,7 +107,7 @@ namespace ClangSharpSourceToWinmd
                 {
                     string fullName = GetFullNameWithoutArchSuffix(node);
 
-                    if (this.remapFrom.TryGetValue(fullName, out string nativeType))
+                    if (this.nativeTypes.TryGetValue(fullName, out string nativeType))
                     {
                         node =
                             node.AddAttributeLists(

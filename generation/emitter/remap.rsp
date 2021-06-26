@@ -162,7 +162,7 @@ SpExportSecurityContextFn
 SpImportSecurityContextFn
 KspSetPagingModeFn
 KspSerializeAuthDataFn
---remap
+--remapWinmd
 SetFileAttributesA::dwFileAttributes=FILE_FLAGS_AND_ATTRIBUTES
 SetFileAttributesW::dwFileAttributes=FILE_FLAGS_AND_ATTRIBUTES
 FindFirstFileExA::dwAdditionalFlags=FIND_FIRST_EX_FLAGS

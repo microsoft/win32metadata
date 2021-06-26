@@ -29,6 +29,7 @@ namespace ClangSharpSourceToWinmd
             string sourceDirectory,
             string arch,
             string interopFileName,
+            Dictionary<string, string> nativeTypes,
             Dictionary<string, string> remaps,
             Dictionary<string, Dictionary<string, string>> enumAdditions,
             IEnumerable<string> enumsMakeFlags,
@@ -104,7 +105,7 @@ namespace ClangSharpSourceToWinmd
                     Directory.CreateDirectory(newSubDir);
                 }
 
-                var cleanedTree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, remaps, enumAdditions, enumsMakeFlagsHashSet, requiredNamespaces, emptyStucts, enumMemberNames, modifiedFile);
+                var cleanedTree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, nativeTypes, remaps, enumAdditions, enumsMakeFlagsHashSet, requiredNamespaces, emptyStucts, enumMemberNames, modifiedFile);
 
                 lock (cleanedTrees)
                 {
