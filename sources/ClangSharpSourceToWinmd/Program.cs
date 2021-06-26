@@ -26,7 +26,8 @@ namespace ClangSharpSourceToWinmd
                 new Option<string>("--reducePointerLevel", "Reduce pointer level by one.", ArgumentArity.OneOrMore),
                 new Option<string>("--typeImport", "A type to be imported from another assembly.", ArgumentArity.OneOrMore),
                 new Option<string>("--requiredNamespaceForName", "The required namespace for a named item.", ArgumentArity.OneOrMore),
-                new Option<string>("--autoTypes", "An auto-type to add to the metadata.", ArgumentArity.OneOrMore)
+                new Option<string>("--autoTypes", "An auto-type to add to the metadata.", ArgumentArity.OneOrMore),
+                new Option<string>("--staticLibs", "Mapping from DLL names to alternative static libraries.", ArgumentArity.OneOrMore)
             };
 
             rootCommand.Handler = CommandHandler.Create(typeof(Program).GetMethod(nameof(Run)));
@@ -49,12 +50,14 @@ namespace ClangSharpSourceToWinmd
             var requiredNamespaceValuePairs = context.ParseResult.ValueForOption<string[]>("--requiredNamespaceForName");
             var autoTypes = context.ParseResult.ValueForOption<string[]>("--autoTypes");
             var refs = context.ParseResult.ValueForOption<string[]>("--ref");
+            var staticLibValuePairs = context.ParseResult.ValueForOption<string[]>("--staticLibs");
 
             var remaps = ConvertValuePairsToDictionary(remappedNameValuePairs);
             var enumAdditions = ConvertValuePairsToEnumAdditions(enumAdditionsNameValuePairs);
             var reducePointerLevels = new HashSet<string>(reducePointerLevelPairs ?? (new string[0]));
             var typeImports = ConvertValuePairsToDictionary(typeImportValuePairs);
             var requiredNamespaces = ConvertValuePairsToDictionary(requiredNamespaceValuePairs);
+            var staticLibs = ConvertValuePairsToDictionary(staticLibValuePairs);
 
             string rawVersion = version.Split('-')[0];
             Version assemblyVersion = Version.Parse(rawVersion);
@@ -82,7 +85,7 @@ namespace ClangSharpSourceToWinmd
 
             ClangSharpSourceCompilation clangSharpCompliation =
                 ClangSharpSourceCompilation.Create(
-                    sourceDirectory, arch, interopFileName, remaps, enumAdditions, enumMakeFlags, typeImports, requiredNamespaces, reducePointerLevels, refs);
+                    sourceDirectory, arch, interopFileName, remaps, enumAdditions, enumMakeFlags, typeImports, requiredNamespaces, reducePointerLevels, refs, staticLibs);
 
             Console.WriteLine("Looking for compilation errors...");
             var diags = clangSharpCompliation.GetDiagnostics();
