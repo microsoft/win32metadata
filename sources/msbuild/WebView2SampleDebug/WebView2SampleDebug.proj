@@ -12,7 +12,7 @@
     <Import Project="..\sdk\sdk.props" />
 
     <PropertyGroup>
-        <OutputWinmd>bin\Windows.Web.WebView2.Win32.winmd</OutputWinmd>
+        <OutputWinmd>bin\Microsoft.Web.WebView2.winmd</OutputWinmd>
         <WinmdVersion>1.0.864.35</WinmdVersion>
         <GenerateAssemblyVersionInfo>false</GenerateAssemblyVersionInfo>
     </PropertyGroup>
