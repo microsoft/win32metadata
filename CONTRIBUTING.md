@@ -32,9 +32,10 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 ## Set up your development environment
 
 * Install [Visual Studio Code](https://code.visualstudio.com/Download)
-* Install [PowerShell](https://aka.ms/powershell-release?tag=stable)
+* Install [PowerShell 7](https://aka.ms/powershell-release?tag=stable)
 * Install [.NET (SDK)](https://dotnet.microsoft.com/download/dotnet)
 * Install [ILSpy](https://github.com/icsharpcode/ILSpy/releases/latest)
+* Add [NuGet.org](https://api.nuget.org/v3/index.json) as a [package source](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-nuget-add-source#examples)
 * Clone the [repo](https://github.com/microsoft/win32metadata.git)
 * Run a [full build](#Full-builds)
 
