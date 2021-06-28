@@ -645,6 +645,10 @@
         "parameter": "nCmdShow"
       },
       {
+        "method": "ShowWindowAsync",
+        "parameter": "nCmdShow"
+      },
+      {
         "struct": "WINDOWPLACEMENT",
         "field": "showCmd"
       },
