@@ -28581,5 +28581,37 @@
         "parameter": "dwDesiredAccess"
       }
     ]
+  },
+  {
+    "name": "VIRTUAL_KEY",
+    "type": "ushort",
+    "flags": false,
+    "autoPopulate": {
+      "filter": "VK_",
+      "header": "winuser.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "KEYBDINPUT",
+        "field": "wVk"
+      }
+    ]
+  },
+  {
+    "name": "XINPUT_VIRTUAL_KEY",
+    "type": "ushort",
+    "flags": false,
+    "autoPopulate": {
+      "filter": "VK_",
+      "header": "xinput.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "XINPUT_KEYSTROKE",
+        "field": "VirtualKey"
+      }
+    ]
   }
 ]
