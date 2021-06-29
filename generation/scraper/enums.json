@@ -21041,16 +21041,6 @@
     ]
   },
   {
-    "addUsesTo": "INTERNET_SCHEME",
-    "members": [],
-    "uses": [
-      {
-        "struct": "URL_COMPONENTS",
-        "field": "nScheme"
-      }
-    ]
-  },
-  {
     "name": "SHARE_INFO_PERMISSIONS",
     "members": [
       {
@@ -28756,6 +28746,34 @@
       {
         "struct": "XINPUT_KEYSTROKE",
         "field": "VirtualKey"
+      }
+    ]
+  },
+  {
+    "name": "WINHTTP_INTERNET_SCHEME",
+    "flags": false,
+    "members": [
+      {
+        "name": "WINHTTP_INTERNET_SCHEME_HTTP",
+        "value": "(1)"
+      },
+      {
+        "name": "WINHTTP_INTERNET_SCHEME_HTTPS",
+        "value": "(2)"
+      },
+      {
+        "name": "WINHTTP_INTERNET_SCHEME_FTP",
+        "value": "(3)"
+      },
+      {
+        "name": "WINHTTP_INTERNET_SCHEME_SOCKS",
+        "value": "(4)"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "URL_COMPONENTS",
+        "field": "nScheme"
       }
     ]
   }
