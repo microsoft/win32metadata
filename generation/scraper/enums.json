@@ -28774,7 +28774,11 @@
       {
         "struct": "URL_COMPONENTS",
         "field": "nScheme"
-      }
+      },
+      {
+        "struct": "WINHTTP_PROXY_RESULT_ENTRY",
+        "field": "ProxyScheme"
+      }      
     ]
   }
 ]
