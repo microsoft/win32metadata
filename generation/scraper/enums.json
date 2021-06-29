@@ -28590,7 +28590,152 @@
       "filter": "VK_",
       "header": "winuser.h"
     },
-    "members": [],
+    "members": [
+      {
+        "name": "VK_0",
+        "value": "0x30"
+      },
+      {
+        "name": "VK_1",
+        "value": "0x31"
+      },
+      {
+        "name": "VK_2",
+        "value": "0x32"
+      },
+      {
+        "name": "VK_3",
+        "value": "0x33"
+      },
+      {
+        "name": "VK_4",
+        "value": "0x34"
+      },
+      {
+        "name": "VK_5",
+        "value": "0x35"
+      },
+      {
+        "name": "VK_6",
+        "value": "0x36"
+      },
+      {
+        "name": "VK_7",
+        "value": "0x37"
+      },
+      {
+        "name": "VK_8",
+        "value": "0x38"
+      },
+      {
+        "name": "VK_9",
+        "value": "0x39"
+      },
+      {
+        "name": "VK_A",
+        "value": "0x41"
+      },
+      {
+        "name": "VK_B",
+        "value": "0x42"
+      },
+      {
+        "name": "VK_C",
+        "value": "0x43"
+      },
+      {
+        "name": "VK_D",
+        "value": "0x44"
+      },
+      {
+        "name": "VK_E",
+        "value": "0x45"
+      },
+      {
+        "name": "VK_F",
+        "value": "0x46"
+      },
+      {
+        "name": "VK_G",
+        "value": "0x47"
+      },
+      {
+        "name": "VK_H",
+        "value": "0x48"
+      },
+      {
+        "name": "VK_I",
+        "value": "0x49"
+      },
+      {
+        "name": "VK_J",
+        "value": "0x4A"
+      },
+      {
+        "name": "VK_K",
+        "value": "0x4B"
+      },
+      {
+        "name": "VK_L",
+        "value": "0x4C"
+      },
+      {
+        "name": "VK_M",
+        "value": "0x4D"
+      },
+      {
+        "name": "VK_N",
+        "value": "0x4E"
+      },
+      {
+        "name": "VK_O",
+        "value": "0x4F"
+      },
+      {
+        "name": "VK_P",
+        "value": "0x50"
+      },
+      {
+        "name": "VK_Q",
+        "value": "0x51"
+      },
+      {
+        "name": "VK_R",
+        "value": "0x52"
+      },
+      {
+        "name": "VK_S",
+        "value": "0x53"
+      },
+      {
+        "name": "VK_T",
+        "value": "0x54"
+      },
+      {
+        "name": "VK_U",
+        "value": "0x55"
+      },
+      {
+        "name": "VK_V",
+        "value": "0x56"
+      },
+      {
+        "name": "VK_W",
+        "value": "0x57"
+      },
+      {
+        "name": "VK_X",
+        "value": "0x58"
+      },
+      {
+        "name": "VK_Y",
+        "value": "0x59"
+      },
+      {
+        "name": "VK_Z",
+        "value": "0x5A"
+      }
+    ],
     "uses": [
       {
         "struct": "KEYBDINPUT",
