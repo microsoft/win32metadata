@@ -21,6 +21,8 @@ See the [roadmap](./docs/roadmap.md) and [FAQ](./docs/faq.md) for more details.
 
 If you'd like to browse the metadata to see what we're emitting, download [Windows.Win32.winmd](https://github.com/microsoft/win32metadata/raw/master/scripts/BaselineWinmd/Windows.Win32.winmd) and [Windows.Win32.Interop.dll](https://github.com/microsoft/win32metadata/raw/master/scripts/BaselineWinmd/Windows.Win32.Interop.dll) into the same folder and load Windows.Win32.winmd in [ILSpy](https://github.com/icsharpcode/ILSpy/releases/latest).
 
+We also publish the metadata via the [Microsoft.Windows.SDK.Win32Metadata](https://www.nuget.org/packages/Microsoft.Windows.SDK.Win32Metadata/) NuGet package.
+
 ![ILSpy with winmd](./images/ILSpyWithWinmd.png)
 
 # Principles
