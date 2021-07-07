@@ -65,6 +65,7 @@ Windows.Win32.Graphics.Gdi,HMONITOR,DECLARE_HANDLE
 ,FindChangeNotificationHandle,IntPtr,FindCloseChangeNotification
 ,FindVolumeHandle,IntPtr,FindVolumeClose
 ,FindVolumeMointPointHandle,IntPtr,FindVolumeMountPointClose
+,MemoryMappedViewHandle,DECLARE_HANDLE,UnmapViewOfFile
 ,EventLogHandle,IntPtr,CloseEventLog
 ,EventSourceHandle,IntPtr,DeregisterEventSource
 ,HWSAEVENT,IntPtr,WSACloseEvent
