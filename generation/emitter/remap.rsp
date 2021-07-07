@@ -198,6 +198,7 @@ DeleteBoundaryDescriptor::BoundaryDescriptor=BoundaryDescriptorHandle
 OpenEventLogA::return=EventLogHandle
 OpenEventLogW::return=EventLogHandle
 RegisterEventSourceA::return=EventSourceHandle
+RegisterEventSourceW::return=EventSourceHandle
 OpenBackupEventLogA::return=EventLogHandle
 OpenBackupEventLogW::return=EventLogHandle
 SHChangeNotification_Lock::return=ShFindChangeNotificationHandle
