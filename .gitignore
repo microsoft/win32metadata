@@ -358,7 +358,7 @@ MigrationBackup/
 /sources/CsWin32ProjectionLib/ProjectedWin32.cs
 /sources/CsWin32/Properties/launchSettings.json
 /.vscode/settings.json
-/tests/SourceToWinmd/source/generated
+/tests/SourceToWinmd/source/generated/fake/autotypes.cs
 /generation/emitter/generated
 /winsdk
 /generation/scraper/autoTypes.generated.rsp

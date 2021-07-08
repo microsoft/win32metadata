@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using System.Text;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
@@ -43,6 +44,12 @@ namespace MetadataTasks
             get; set;
         }
 
+        [Required]
+        public ITaskItem[] Libs
+        {
+            get; set;
+        }
+
         [Output]
         public ITaskItem[] FileWrites
         {
@@ -64,6 +71,24 @@ namespace MetadataTasks
             }
 
             var args = new StringBuilder($"{dllPath} --sourceDir \"{this.EmitterSourceDir}\" --arch x64 --interopFileName \"{interopPath}\" --ref \"{win32WinmdPath}\" --version {this.WinmdVersion} --outputFileName \"{outputWinmd}\"");
+
+            var staticLibs = GetStaticLibs();
+
+            if (staticLibs.Length > 0)
+            {
+                string rspFile = Path.Combine(this.EmitterSourceDir, @"staticLibs.generated.rsp");
+                var rspArgs = new StringBuilder();
+
+                rspArgs.AppendLine(@"--staticLibs");
+                foreach (string staticLib in staticLibs)
+                {
+                    rspArgs.AppendLine(staticLib);
+                }
+
+                File.WriteAllText(rspFile, rspArgs.ToString());
+                args.AppendFormat($" @{rspFile}");
+            }
+
             int exitCode = TaskUtils.ExecuteCmd("dotnet", args.ToString(), out var output, this.Log);
             if (exitCode < 0)
             {
@@ -75,6 +100,16 @@ namespace MetadataTasks
             this.FileWrites = new ITaskItem[] { new TaskItem(outputWinmd) };
 
             return true;
+        }
+
+        private string[] GetStaticLibs()
+        {
+            return this.Libs
+                .Select(importLib => importLib.GetMetadata("StaticLibs"))
+                .Where(staticLibs => !string.IsNullOrWhiteSpace(staticLibs))
+                .SelectMany(staticLibs => staticLibs.Split(';'))
+                .Distinct()
+                .ToArray();
         }
     }
 }

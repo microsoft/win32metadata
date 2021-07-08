@@ -1,9 +1,14 @@
 --autoTypes
-Windows.Win32.UI.WindowsAndMessaging,HWND,IntPtr
-Windows.Win32.System.SystemServices,BOOL,int
-Windows.Win32.System.SystemServices,WSTR,char*
-Windows.Win32.System.SystemServices,STR,byte*
-Windows.Win32.System.OleAutomation,BSTR,IntPtr,SysFreeString
+Windows.Win32.Foundation,HWND,DECLARE_HANDLE
+Windows.Win32.Foundation,BOOL,int
+Windows.Win32.Foundation,PWSTR,char*
+Windows.Win32.Foundation,PSTR,byte*
+Windows.Win32.Foundation,BSTR,char*,SysFreeString
+Windows.Win32.System.Memory,MEMORY_BASIC_INFORMATION,void*
 --remap
 MyStruct::X=MyEnum XX
 MyFunc::x=[In]MyEnum xx
+--requiredNamespaceForName
+SysFreeString=Windows.Win32.Test
+--staticLibs
+MyDll=MyStaticLib
