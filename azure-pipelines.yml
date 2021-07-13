@@ -21,6 +21,8 @@ jobs:
     clean: all
 
   steps:
+  - checkout: self
+    lfs: true
   - task: UseDotNet@2
     displayName: Use DotNet 3.x
     inputs:
@@ -72,6 +74,8 @@ jobs:
   workspace:
     clean: all
   steps:
+  - checkout: self
+    lfs: true
   - task: UseDotNet@2
     displayName: Use DotNet 3.x
     inputs:
@@ -101,6 +105,8 @@ jobs:
   workspace:
     clean: all
   steps:
+  - checkout: self
+    lfs: true
   - task: UseDotNet@2
     displayName: Use DotNet 3.x
     inputs:
@@ -133,6 +139,8 @@ jobs:
     - visualstudio
     - visualstudio -equals C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\
   steps:
+  - checkout: self
+    lfs: true
   - task: UseDotNet@2
     displayName: Use DotNet 3.x
     inputs:
