@@ -36,6 +36,7 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 * Install [.NET (SDK)](https://dotnet.microsoft.com/download/dotnet)
 * Install [ILSpy](https://github.com/icsharpcode/ILSpy/releases/latest)
 * Add [NuGet.org](https://api.nuget.org/v3/index.json) as a [package source](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-nuget-add-source#examples)
+* If you haven't installed git lfs before, check out ["Getting Started"](https://git-lfs.github.com/) for git lfs.
 * Clone the [repo](https://github.com/microsoft/win32metadata.git)
 * Run a [full build](#Full-builds)
 
@@ -147,6 +148,8 @@ Constants are removed from the metadata when they are detected as members of an 
 ### Full builds
 
 The simplest but slowest way to validate changes is to perform a full build with `./DoAll.ps1` and then inspect the reported winmd diff to ensure all changes were intentional. A full build can take 25-30 minutes. Add `-Clean` to perform a clean build.
+
+If you get an error dealing with a .zip file, you may need to run ````git lfs pull```` to pull down the large files needed for building.
 
 ### Incremental builds
 
