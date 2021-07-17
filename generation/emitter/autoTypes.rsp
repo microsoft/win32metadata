@@ -1,5 +1,6 @@
 --autoTypes
 Windows.Win32.Foundation,BOOL,int
+Windows.Win32.Foundation,BOOLEAN,byte
 Windows.Win32.Foundation,BSTR,char*,SysFreeString
 Windows.Win32.Foundation,HANDLE,DECLARE_HANDLE,CloseHandle
 Windows.Win32.Foundation,HINSTANCE,DECLARE_HANDLE,FreeLibrary

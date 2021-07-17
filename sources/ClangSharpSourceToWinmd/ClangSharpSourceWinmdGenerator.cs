@@ -833,6 +833,7 @@ namespace ClangSharpSourceToWinmd
                 typeSymbol.SpecialType == SpecialType.System_UInt32 ||
                 typeSymbol.SpecialType == SpecialType.System_Int64 ||
                 typeSymbol.SpecialType == SpecialType.System_UInt64 ||
+                typeSymbol.SpecialType == SpecialType.System_Byte ||
                 typeName.StartsWith("System.IntPtr*") ||
                 typeName.StartsWith("ushort*") ||
                 typeName.StartsWith("sbyte*") ||
@@ -860,10 +861,20 @@ namespace ClangSharpSourceToWinmd
 
                 if (star != null)
                 {
-                    // If this is an array, treat it like a pointer
+                    // If this is an array...
                     if (star[0] == '[')
                     {
-                        star = "*";
+                        // Treat it like a pointer if the array doesn't have a size
+                        if (star == "[]")
+                        {
+                            star = "*";
+                        }
+                        // Otherwise don't treat it like an array. The encoder will encode
+                        // the array size
+                        else
+                        {
+                            star = null;
+                        }
                     }
                     // Make sure it's actually a pointer. If it's not, we can't do anything more
                     else if (star[0] != '*')
