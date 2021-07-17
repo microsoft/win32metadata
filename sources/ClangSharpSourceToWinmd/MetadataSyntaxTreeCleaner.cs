@@ -658,6 +658,7 @@ namespace ClangSharpSourceToWinmd
                 bool isIn = false;
                 bool isOut = false;
                 bool isOpt = false;
+                bool isReserved = false;
                 bool isComOutPtr = false;
                 bool isRetVal = false;
                 bool isNullNullTerminated;
@@ -709,6 +710,11 @@ namespace ClangSharpSourceToWinmd
                             }
 
                             break;
+                        }
+                        else if (salAttr.P1 == "_Reserved_")
+                        {
+                            isReserved = true;
+                            continue;
                         }
                     }
 
@@ -812,6 +818,11 @@ namespace ClangSharpSourceToWinmd
                 else if (isOut)
                 {
                     attributesList.Add(SyntaxFactory.Attribute(SyntaxFactory.ParseName("Out")));
+                }
+
+                if (isReserved)
+                {
+                    attributesList.Add(SyntaxFactory.Attribute(SyntaxFactory.ParseName("Reserved")));
                 }
 
                 if (isOpt)
