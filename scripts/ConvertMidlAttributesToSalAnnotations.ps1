@@ -41,7 +41,7 @@ foreach ($line in $srcLines)
             $attrList = $match.Groups[1].Value
             $in = $false
             $out = $false
-            $outComPtr = $false
+            $isComPtr = $false
             $retval = $false
             $optional = $false
             $size_is = $null
@@ -62,7 +62,7 @@ foreach ($line in $srcLines)
                 }
                 elseif ($part.StartsWith("iid_is"))
                 {
-                    $outComPtr = $true
+                    $isComPtr = $true
                 }
                 elseif ($part -eq "retval")
                 {
@@ -137,14 +137,16 @@ foreach ($line in $srcLines)
                 $annotation += $params
             }
 
+            $outComPtr = $out -and $isComPtr
+
             # Overwrite everything with just _COM_Outptr_ or _Out_retval_ if we can
             if ($outComPtr)
             {
-                $annotation = "_COM_Outptr_";
+                $annotation = "_COM_Outptr_"
 
                 if ($retval)
                 {
-                    $annotation += "retval_";
+                    $annotation += "retval_"
                 }
             }
             elseif ($out -and $retval)
