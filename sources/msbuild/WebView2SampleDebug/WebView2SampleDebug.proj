@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+
+    <PropertyGroup>
+        <TaskBinDir>$(MSBuildThisFileDirectory)..\..\..\bin\release\netcoreapp3.1</TaskBinDir>
+        <ToolsBinDir>$(MSBuildThisFileDirectory)..\..\..\bin\release\netcoreapp3.1</ToolsBinDir>
+        <LibToolsBinDir>$(MSBuildThisFileDirectory)..\..\..\tools</LibToolsBinDir>
+        <Win32MetadataScraperAssetsDir>$(MSBuildThisFileDirectory)..\..\..\generation\scraper</Win32MetadataScraperAssetsDir>
+        <Win32MetadataScraperGeneratedAssetsDir>$(MSBuildThisFileDirectory)..\..\..\generation\scraper\obj\x64</Win32MetadataScraperGeneratedAssetsDir>
+    </PropertyGroup>
+
+    <Import Project="..\sdk\sdk.props" />
+
+    <PropertyGroup>
+        <OutputWinmd>bin\Microsoft.Web.WebView2.winmd</OutputWinmd>
+        <WinmdVersion>1.0.864.35</WinmdVersion>
+        <GenerateAssemblyVersionInfo>false</GenerateAssemblyVersionInfo>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <WebView2Headers Include="$(PkgMicrosoft_Web_WebView2)\**\*.h"/>
+        <WebView2Libs Include="$(PkgMicrosoft_Web_WebView2)\**\*.dll.lib"/>
+
+        <ImportLibs Include="@(WebView2Libs)">
+            <StaticLibs>WebView2Loader=WebView2LoaderStatic</StaticLibs>
+        </ImportLibs>
+
+        <Partition Include="main.cpp">
+            <TraverseFiles>@(WebView2Headers)</TraverseFiles>
+            <Namespace>Microsoft.Web.WebView2.Win32</Namespace>
+            <Exclude>CoreWebView2EnvironmentOptions</Exclude>
+        </Partition>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Web.WebView2" Version="$(WinmdVersion)" GeneratePathProperty="true"/>
+    </ItemGroup>
+
+    <Import Project="..\sdk\sdk.targets" />
+</Project>

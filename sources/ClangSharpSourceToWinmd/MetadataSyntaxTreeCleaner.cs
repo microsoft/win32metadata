@@ -11,9 +11,9 @@ namespace ClangSharpSourceToWinmd
 {
     public static class MetadataSyntaxTreeCleaner
     {
-        public static SyntaxTree CleanSyntaxTree(SyntaxTree tree, Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsMakeFlags, Dictionary<string, string> requiredNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames, string filePath)
+        public static SyntaxTree CleanSyntaxTree(SyntaxTree tree, Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames, string filePath)
         {
-            TreeRewriter treeRewriter = new TreeRewriter(remaps, enumAdditions, enumsMakeFlags, requiredNamespaces, nonEmptyStructs, enumMemberNames);
+            TreeRewriter treeRewriter = new TreeRewriter(remaps, enumAdditions, enumsMakeFlags, requiredNamespaces, staticLibs, nonEmptyStructs, enumMemberNames);
             var newRoot = (CSharpSyntaxNode)treeRewriter.Visit(tree.GetRoot());
             return CSharpSyntaxTree.Create(newRoot, null, filePath);
         }
@@ -26,17 +26,19 @@ namespace ClangSharpSourceToWinmd
             private Dictionary<string, string> remaps;
             private Dictionary<string, Dictionary<string, string>> enumAdditions;
             private Dictionary<string, string> requiredNamespaces;
+            private Dictionary<string, string> staticLibs;
             private HashSet<string> visitedDelegateNames = new HashSet<string>();
             private HashSet<string> visitedStaticMethodNames = new HashSet<string>();
             private HashSet<string> nonEmptyStructs;
             private HashSet<string> enumMemberNames;
             private HashSet<string> enumsToMakeFlags;
 
-            public TreeRewriter(Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsToMakeFlags, Dictionary<string, string> requiredNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames)
+            public TreeRewriter(Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsToMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames)
             {
                 this.remaps = remaps;
                 this.enumAdditions = enumAdditions;
                 this.requiredNamespaces = requiredNamespaces;
+                this.staticLibs = staticLibs;
                 this.nonEmptyStructs = nonEmptyStructs;
                 this.enumMemberNames = enumMemberNames;
                 this.enumsToMakeFlags = enumsToMakeFlags;
@@ -376,8 +378,14 @@ namespace ClangSharpSourceToWinmd
 
             public override SyntaxNode VisitMethodDeclaration(MethodDeclarationSyntax node)
             {
+                var dllImportAttr = SyntaxUtils.GetAttribute(node.AttributeLists, "DllImport");
+                string dllName = dllImportAttr?.ArgumentList.Arguments[0].ToString();
+
+                // Trim the leading and trailing quotes.
+                dllName = dllName?.Substring(1, dllName.Length - 2);
+
                 // Skip methods where we weren't given an import lib name. Should we warn the caller?
-                if (node.AttributeLists.ToString().Contains("[DllImport(\"\""))
+                if (dllImportAttr != null && string.IsNullOrEmpty(dllName))
                 {
                     return null;
                 }
@@ -415,11 +423,24 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 string returnFullName = $"{fixedFullName}::return";
+                string nodeReturnType = node.ReturnType.ToString();
+
+                node = (MethodDeclarationSyntax)base.VisitMethodDeclaration(node);
+
+                // Add the StaticLibrary attribute if one was specified for this DLL.
+                if (!string.IsNullOrEmpty(dllName) && this.staticLibs.TryGetValue(dllName, out string staticLib))
+                {
+                    var attrListNode = SyntaxFactory.AttributeList(
+                        SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
+                            SyntaxFactory.Attribute(SyntaxFactory.ParseName("StaticLibrary"),
+                            SyntaxFactory.ParseAttributeArgumentList($"(\"{staticLib}\")"))));
+
+                    node = node.WithAttributeLists(node.AttributeLists.Add(attrListNode));
+                }
 
                 // Find remap info for the return parameter for this method and apply any that we find
-                if (this.GetRemapInfo(returnFullName, out List<AttributeSyntax> listAttributes, node.ReturnType.ToString(), out var newType, out _))
+                if (this.GetRemapInfo(returnFullName, out List<AttributeSyntax> listAttributes, nodeReturnType, out var newType, out _))
                 {
-                    node = (MethodDeclarationSyntax)base.VisitMethodDeclaration(node);
                     if (listAttributes != null)
                     {
                         foreach (var attrNode in listAttributes)
@@ -439,11 +460,9 @@ namespace ClangSharpSourceToWinmd
                     {
                         node = node.WithReturnType(SyntaxFactory.ParseTypeName(newType).WithTrailingTrivia(SyntaxFactory.Space));
                     }
-
-                    return node;
                 }
 
-                return base.VisitMethodDeclaration(node);
+                return node;
             }
 
             private static string GetEnclosingNamespace(SyntaxNode node)

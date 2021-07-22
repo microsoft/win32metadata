@@ -36,6 +36,7 @@
                 PropertyName="EmitterSourceDir" />
         </ScrapeHeaders>
         <EmitWinmd
+            Libs="@(ImportLibs)"
             EmitterSourceDir="$(EmitterSourceDir)"
             ToolsBinDir="$(ToolsBinDir)"
             Win32WinmdBinDir="$(Win32WinmdBinDir)"

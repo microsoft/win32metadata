@@ -2,6 +2,9 @@
 using System;
 using System.Runtime.InteropServices;
 
+using Windows.Win32.Foundation;
+using Windows.Win32.System.Memory;
+
 using Windows.Win32.Interop;
 
 namespace Windows.Win32.Test
@@ -31,6 +34,9 @@ namespace Windows.Win32.Test
         [DllImport("OLEAUT32", ExactSpelling = true)]
         [return: NativeTypeName("BSTR")]
         public static extern ushort* SysAllocString([NativeTypeName("const OLECHAR *")][CppAttributeList("Name=SAL_name; p1=\"_In_opt_z_\"; p2=\"\"; p3=\"2\"^Name=SAL_begin^Name=SAL_name; p1=\"_In_opt_\"; p2=\"\"; p3=\"2\"^Name=SAL_pre^Name=SAL_notref^Name=SAL_null; p1=__maybe^Name=SAL_valid^Name=SAL_name; p1=\"_Deref_pre_readonly_\"; p2=\"\"; p3=\"1.1\"^Name=SAL_deref^Name=SAL_access; p1=0x1^Name=SAL_end^Name=SAL_nullTerminated; p1=__yes")] ushort* psz);
+
+        [DllImport("OLEAUT32", ExactSpelling = true)]
+        public static extern void SysFreeString([NativeTypeName("BSTR")] [CppAttributeList("Name=SAL_name; p1=\"_In_opt_\"; p2=\"\"; p3=\"2\"^Name=SAL_begin^Name=SAL_pre^Name=SAL_notref^Name=SAL_null; p1=__maybe^Name=SAL_valid^Name=SAL_name; p1=\"_Deref_pre_readonly_\"; p2=\"\"; p3=\"1.1\"^Name=SAL_deref^Name=SAL_access; p1=0x1^Name=SAL_end")] ushort* bstrString);
 
         [DllImport("MyDll", ExactSpelling = true, SetLastError = true)]
         public static extern int StringFunc([NativeTypeName("LPCWSTR")][CppAttributeList("Name=SAL_name; p1=\"_In_\"; p2=\"\"; p3=\"2\"^Name=SAL_begin^Name=SAL_pre^Name=SAL_notref^Name=SAL_null; p1=__no^Name=SAL_valid^Name=SAL_deref^Name=SAL_access; p1=0x1^Name=SAL_end")] ushort* szName, [NativeTypeName("LPWSTR")] sbyte* szFillMe, [NativeTypeName("DWORD")] uint dwLen);
