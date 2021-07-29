@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.Windows.WinmdGenerator/0.0.2-preview">
+<Project Sdk="Microsoft.Windows.WinmdGenerator/0.2.118-preview">
     
     <PropertyGroup>
         <OutputWinmd>bin\Windows.Win32.Graphics.DirectWriteCore.winmd</OutputWinmd>
