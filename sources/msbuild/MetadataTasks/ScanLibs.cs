@@ -85,15 +85,18 @@ namespace MetadataTasks
         private string[] GetLibs()
         {
             List<string> ret = new List<string>();
-            foreach (var libItem in this.Libs)
+            if (this.Libs != null)
             {
-                var libPath = libItem.ItemSpec;
-                if (!Path.IsPathRooted(libPath))
+                foreach (var libItem in this.Libs)
                 {
-                    libPath = Path.Combine(this.MSBuildProjectDirectory, libPath);
-                }
+                    var libPath = libItem.ItemSpec;
+                    if (!Path.IsPathRooted(libPath))
+                    {
+                        libPath = Path.Combine(this.MSBuildProjectDirectory, libPath);
+                    }
 
-                ret.Add(libPath);
+                    ret.Add(libPath);
+                }
             }
 
             return ret.ToArray();
