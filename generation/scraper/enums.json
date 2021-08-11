@@ -9748,19 +9748,59 @@
     "flags": true,
     "members": [
       {
+        "name": "ATTRIBUTE_SECURITY_INFORMATION"
+      },
+      {
+        "name": "BACKUP_SECURITY_INFORMATION"
+      },
+      {
         "name": "DACL_SECURITY_INFORMATION"
       },
       {
         "name": "GROUP_SECURITY_INFORMATION"
       },
       {
+        "name": "LABEL_SECURITY_INFORMATION"
+      },
+      {
         "name": "OWNER_SECURITY_INFORMATION"
       },
       {
+        "name": "PROTECTED_DACL_SECURITY_INFORMATION"
+      },
+      {
+        "name": "PROTECTED_SACL_SECURITY_INFORMATION"
+      },
+      {
         "name": "SACL_SECURITY_INFORMATION"
+      },
+      {
+        "name": "SCOPE_SECURITY_INFORMATION"
+      },
+      {
+        "name": "UNPROTECTED_DACL_SECURITY_INFORMATION"
+      },
+      {
+        "name": "UNPROTECTED_SACL_SECURITY_INFORMATION"
       }
     ],
     "uses": [
+      {
+        "method": "GetNamedSecurityInfoA",
+        "parameter": "SecurityInfo"
+      },
+      {
+        "method": "GetNamedSecurityInfoW",
+        "parameter": "SecurityInfo"
+      },
+      {
+        "method": "SetNamedSecurityInfoA",
+        "parameter": "SecurityInfo"
+      },
+      {
+        "method": "SetNamedSecurityInfoW",
+        "parameter": "SecurityInfo"
+      },
       {
         "method": "SetServiceObjectSecurity",
         "parameter": "dwSecurityInformation"
