@@ -23,7 +23,7 @@ namespace ClangSharpSourceToWinmd
                 else
                 {
                     var newTree = nameFixer.FixNames(tree);
-                    newTree = CSharpSyntaxTree.ParseText(newTree.GetText().ToString(), null, tree.FilePath);
+                    newTree = CSharpSyntaxTree.ParseText(newTree.GetText(), null, tree.FilePath);
                     ret.Add(newTree);
                 }
             }
