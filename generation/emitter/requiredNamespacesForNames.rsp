@@ -1682,6 +1682,7 @@ USN_JOURNAL_DATA_V2=Windows.Win32.Storage.FileSystem
 USN_RANGE_TRACK_OUTPUT=Windows.Win32.Storage.FileSystem
 USN_RECORD_COMMON_HEADER=Windows.Win32.Storage.FileSystem
 USN_RECORD_EXTENT=Windows.Win32.Storage.FileSystem
+USN_RECORD_UNION=Windows.Win32.Storage.FileSystem
 USN_RECORD_V2=Windows.Win32.Storage.FileSystem
 USN_RECORD_V3=Windows.Win32.Storage.FileSystem
 USN_RECORD_V4=Windows.Win32.Storage.FileSystem
