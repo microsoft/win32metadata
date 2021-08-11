@@ -28780,5 +28780,25 @@
         "field": "ProxyScheme"
       }      
     ]
+  },
+  {
+    "name": "IMAGELIST_CREATION_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "ILC_",
+      "header": "CommCtrl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "ImageList_Create",
+        "parameter": "flags"
+      },
+      {
+        "interface": "IImageList2",
+        "method": "Initialize",
+        "parameter": "flags"
+      }
+    ]
   }
 ]

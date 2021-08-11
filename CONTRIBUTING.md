@@ -91,10 +91,12 @@ Enums are defined in [enums.json](generation/scraper/enums.json). This file prov
   * `name` - The name of the enum member
   * `value` - The value of the enum member
 * `uses` - A list of APIs where this enum is used
+  * `interface` - The COM interface name
   * `method` - The method name
   * `parameter` - The parameter name of `method` or `"return"` for the return value
   * `struct` - The struct name
   * `field` - The field name of `struct`
+  * Note: Define only the subset of properties relevant to an API
 
 In the example below, a flags enum called `WNDCLASS_STYLES` is created with all of the `CS_` constants from `winuser.h`. This enum is then used by the style fields of all the `WNDCLASS` structs. Since no `namespace` or `type` are specified, the enum will live in the same namespace as `WNDCLASSA` and will be of type `uint`.
 
