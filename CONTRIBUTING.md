@@ -34,10 +34,12 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 * Install [Visual Studio Code](https://code.visualstudio.com/Download)
 * Install [PowerShell 7](https://aka.ms/powershell-release?tag=stable)
 * Install [.NET (SDK)](https://dotnet.microsoft.com/download/dotnet)
+* Install [Git LFS](https://git-lfs.github.com/)
 * Install [ILSpy](https://github.com/icsharpcode/ILSpy/releases/latest)
 * Add [NuGet.org](https://api.nuget.org/v3/index.json) as a [package source](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-nuget-add-source#examples)
-* If you haven't installed git lfs before, check out ["Getting Started"](https://git-lfs.github.com/) for git lfs.
 * Clone the [repo](https://github.com/microsoft/win32metadata.git)
+* Run `git lfs install` from the repo root
+* Run `git lfs pull` from the repo root
 * Run a [full build](#Full-builds)
 
 ## Namespaces
@@ -149,7 +151,7 @@ Constants are removed from the metadata when they are detected as members of an 
 
 The simplest but slowest way to validate changes is to perform a full build with `./DoAll.ps1` and then inspect the reported winmd diff to ensure all changes were intentional. A full build can take 25-30 minutes. Add `-Clean` to perform a clean build.
 
-If you get an error dealing with a .zip file, you may need to run ````git lfs pull```` to pull down the large files needed for building.
+If you encounter errors processing .zip or .winmd files, make sure that Git LFS is installed and configured properly per [set up your development environment](#Set-up-your-development-environment).
 
 ### Incremental builds
 
