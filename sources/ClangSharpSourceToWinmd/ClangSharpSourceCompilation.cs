@@ -23,6 +23,12 @@ namespace ClangSharpSourceToWinmd
             this.typeImports = typeImports;
         }
 
+        internal static void ShowMemory()
+        {
+            double mem = (double)GC.GetTotalMemory(true) / (1024 * 1024 * 1024);
+            Console.WriteLine($"Current memory: {mem}");
+        }
+
         public CSharpCompilation CSharpCompilation => this.compilation;
 
         public static ClangSharpSourceCompilation Create(
@@ -72,6 +78,9 @@ namespace ClangSharpSourceToWinmd
                 }
             });
 
+            Console.WriteLine($"Moving names to correct namespaces...");
+            ShowMemory();
+
             syntaxTrees = NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(syntaxTrees, requiredNamespaces);
 
             GetTreeInfo(syntaxTrees, out var emptyStucts, out var enumMemberNames);
@@ -82,6 +91,9 @@ namespace ClangSharpSourceToWinmd
 
             string objDir = Path.Combine(sourceDirectory, $"obj\\{arch}");
             Directory.CreateDirectory(objDir);
+
+            Console.WriteLine($"Cleaning trees with {opt.MaxDegreeOfParallelism} threads...");
+            ShowMemory();
 
             HashSet<string> enumsMakeFlagsHashSet = enumsMakeFlags != null ? new HashSet<string>(enumsMakeFlags) : new HashSet<string>();
             List<SyntaxTree> cleanedTrees = new List<SyntaxTree>();
@@ -113,6 +125,9 @@ namespace ClangSharpSourceToWinmd
                 }
             });
 
+            Console.WriteLine($"Merging trees...");
+            ShowMemory();
+
             if (arch == "crossarch")
             {
                 CrossArchSyntaxMap crossArchSyntaxMap = CrossArchSyntaxMap.LoadFromTrees(cleanedTrees);
@@ -124,6 +139,9 @@ namespace ClangSharpSourceToWinmd
                 File.WriteAllText(cleanedTree.FilePath, cleanedTree.GetText().ToString());
             }
 
+            Console.WriteLine($"Calling C# compiler on processed trees...");
+            ShowMemory();
+
             CSharpCompilationOptions compilationOptions = new CSharpCompilationOptions(OutputKind.WindowsRuntimeMetadata, allowUnsafe: true);
             var comp =
                 CSharpCompilation.Create(
@@ -131,6 +149,9 @@ namespace ClangSharpSourceToWinmd
                     cleanedTrees,
                     refs,
                     compilationOptions);
+
+            Console.WriteLine($"C# compiler done");
+            ShowMemory();
 
             return new ClangSharpSourceCompilation(comp, typeImports);
         }
