@@ -80,17 +80,16 @@ namespace ClangSharpSourceToWinmd
 
             NativeTypedefStructsCreator.CreateNativeTypedefsSourceFile(methodNamesToNamespaces, autoTypes, Path.Combine(archSourceDir, "autotypes.cs"));
 
-            Console.WriteLine($"Compiling source files...");
-            System.Diagnostics.Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
+            Console.WriteLine($"Preparing and compiling source files...");
+            System.Diagnostics.Stopwatch mainWatch = System.Diagnostics.Stopwatch.StartNew();
 
             ClangSharpSourceCompilation clangSharpCompliation =
                 ClangSharpSourceCompilation.Create(
                     sourceDirectory, arch, interopFileName, remaps, enumAdditions, enumMakeFlags, typeImports, requiredNamespaces, reducePointerLevels, refs, staticLibs);
 
-            Console.WriteLine("Looking for compilation errors...");
+            System.Diagnostics.Stopwatch errorsWatch = System.Diagnostics.Stopwatch.StartNew();
+            Console.Write("  Looking for compilation errors...");
             var diags = clangSharpCompliation.GetDiagnostics();
-
-            watch.Stop();
 
             int errors = 0;
             const int MaxErrorsToShow = 10000;
@@ -115,13 +114,12 @@ namespace ClangSharpSourceToWinmd
                 return -1;
             }
 
-            string timeTaken = watch.Elapsed.ToString("c");
+            Console.WriteLine($"{errorsWatch.Elapsed:c}");
 
-            watch.Reset();
-            watch.Start();
-
-            Console.WriteLine($"Compilation stage took {timeTaken}");
+            Console.WriteLine($"{mainWatch.Elapsed:c}");
             ClangSharpSourceCompilation.ShowMemory();
+
+            mainWatch.Restart();
 
             Console.WriteLine($"\r\nEmitting {outputFileName}...");
             var generator = 
@@ -132,15 +130,14 @@ namespace ClangSharpSourceToWinmd
                     assemblyVersion, 
                     outputFileName);
 
-            watch.Stop();
+            mainWatch.Stop();
 
             foreach (var diag in generator.GetDiagnostics())
             {
                 Console.WriteLine($"{diag.Severity}: {diag.Message}");
             }
 
-            timeTaken = watch.Elapsed.ToString("c");
-            Console.WriteLine($"Emit stage took {timeTaken}");
+            Console.WriteLine($"{mainWatch.Elapsed:c}");
             ClangSharpSourceCompilation.ShowMemory();
 
             return generator.WroteWinmd ? 0 : -1;

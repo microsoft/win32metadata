@@ -1,10 +1,12 @@
 ﻿//#define MakeSingleThreaded
+//#define ShowMemoryInfo
 
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -23,14 +25,29 @@ namespace ClangSharpSourceToWinmd
             this.typeImports = typeImports;
         }
 
+        public CSharpCompilation CSharpCompilation => this.compilation;
+
         internal static void ShowMemory()
         {
-            double beforeMem = (double)GC.GetTotalMemory(false) / (1024 * 1024 * 1024);
-            double afterMem = (double)GC.GetTotalMemory(true) / (1024 * 1024 * 1024);
-            Console.WriteLine($"Current memory: before GC {beforeMem}, after GC {afterMem}");
-        }
+#if ShowMemoryInfo
+            MEMORYSTATUSEX mem = new MEMORYSTATUSEX();
+            if (GlobalMemoryStatusEx(mem))
+            {
+                double max = ConvertToGB(mem.ullTotalPhys);
+                double avail = ConvertToGB(mem.ullAvailPhys);
+                Console.WriteLine($"RAM avail = {avail}, load = {mem.dwMemoryLoad}");
+            }
 
-        public CSharpCompilation CSharpCompilation => this.compilation;
+            //double beforeMem = ConvertToGB((ulong)GC.GetTotalMemory(false));
+            //double afterMem = ConvertToGB((ulong)GC.GetTotalMemory(true));
+            //Console.WriteLine($"Current process memory: before GC {beforeMem}, after GC {afterMem}");
+
+            static double ConvertToGB(ulong val)
+            {
+                return (double)val / (1024 * 1024 * 1024);
+            }
+#endif
+        }
 
         private static void WriteTree(SyntaxTree tree, string fileName)
         {
@@ -97,20 +114,19 @@ namespace ClangSharpSourceToWinmd
 
             TreeInfoFinder infoFinder = new TreeInfoFinder();
 
-            //List<SyntaxTree> syntaxTrees = new List<SyntaxTree>();
-            List<string> treeFiles = new List<string>();
+            List<string> modifiedFiles = new List<string>();
             var sourceFiles = Directory.GetFiles(sourceDirectory, "*.cs", SearchOption.AllDirectories).Where(f => IsValidCsSourceFile(f, arch));
-            System.Threading.Tasks.ParallelOptions opt = new System.Threading.Tasks.ParallelOptions(); // { MaxDegreeOfParallelism = Environment.ProcessorCount * 2 };
+            System.Threading.Tasks.ParallelOptions opt = new System.Threading.Tasks.ParallelOptions();
 
 #if MakeSingleThreaded
             opt.MaxDegreeOfParallelism = 1;
 #endif
 
-            System.Threading.Tasks.Parallel.ForEach(sourceFiles, opt, (sourceFile) =>
+            foreach (string file in sourceFiles)
             {
-                string treeFile = Path.GetFullPath(sourceFile);
+                // Turn c:\dir\generated\foo.cs into c:\dir\generated\obj\foo.modified.cs
 
-                string modifiedFile = Path.ChangeExtension(treeFile, ".modified.cs");
+                string modifiedFile = Path.ChangeExtension(file, ".modified.cs");
                 string fileWithSubDir = modifiedFile.Substring(sourceDirectory.Length);
                 if (fileWithSubDir.StartsWith('\\'))
                 {
@@ -119,111 +135,86 @@ namespace ClangSharpSourceToWinmd
 
                 modifiedFile = Path.Combine(objDir, fileWithSubDir);
 
+                var dir = Path.GetDirectoryName(modifiedFile);
+                if (!Directory.Exists(dir))
+                {
+                    Directory.CreateDirectory(dir);
+                }
+
+                File.Copy(file, modifiedFile, true);
+                modifiedFiles.Add(modifiedFile);
+            }
+
+            System.Diagnostics.Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
+
+            CrossArchSyntaxMap crossArchSyntaxMap = new CrossArchSyntaxMap();
+
+            Console.Write($"  Moving names to correct namespaces...");
+            System.Threading.Tasks.Parallel.ForEach(modifiedFiles, opt, (treeFile) =>
+            {
                 if (!treeFile.EndsWith("manual.cs"))
                 {
                     var tree = ReadTree(treeFile);
                     tree = NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(tree, requiredNamespaces);
 
                     infoFinder.AnalyzeTree(tree);
-                    // Turn c:\dir\generated\foo.cs into c:\dir\generated\obj\foo.modified.cs
 
-                    WriteTree(tree, modifiedFile);
-                }
-                else
-                {
-                    var dir = Path.GetDirectoryName(modifiedFile);
-                    if (!Directory.Exists(dir))
-                    {
-                        Directory.CreateDirectory(dir);
-                    }
-
-                    File.Copy(treeFile, modifiedFile, true);
-                }
-
-                lock (treeFiles)
-                {
-                    treeFiles.Add(modifiedFile);
+                    WriteTree(tree, treeFile);
                 }
             });
 
+            var elapsed = watch.Elapsed;
+            Console.WriteLine($"{elapsed:c}");
+
             ShowMemory();
-            //Console.WriteLine($"Moving names to correct namespaces...");
 
-            //syntaxTrees = NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(syntaxTrees, requiredNamespaces);
+            Console.Write($"  Cleaning syntax trees...");
 
-            //GetTreeInfo(syntaxTrees, out var emptyStucts, out var enumMemberNames);
-
-            //Console.WriteLine($"Done moving names to correct namespaces.");
-            //ShowMemory();
-
-            Console.WriteLine($"Cleaning trees with {opt.MaxDegreeOfParallelism} threads...");
+            watch.Restart();
 
             HashSet<string> enumsMakeFlagsHashSet = enumsMakeFlags != null ? new HashSet<string>(enumsMakeFlags) : new HashSet<string>();
-            //List<SyntaxTree> cleanedTrees = new List<SyntaxTree>();
-            System.Threading.Tasks.Parallel.ForEach(FilesToTrees(treeFiles), opt, (tree) =>
+            System.Threading.Tasks.Parallel.ForEach(FilesToTrees(modifiedFiles), opt, (tree) =>
             {
-                // Turn c:\dir\generated\foo.cs into c:\dir\generated\obj\foo.modified.cs
-
-                //string modifiedFile = Path.ChangeExtension(tree.FilePath, ".modified.cs");
-                //string fileWithSubDir = modifiedFile.Substring(sourceDirectory.Length);
-                //if (fileWithSubDir.StartsWith('\\'))
-                //{
-                //    fileWithSubDir = fileWithSubDir.Substring(1);
-                //}
-
-                //modifiedFile = Path.Combine(objDir, fileWithSubDir);
-
-                //// e.g. c:\dir\generated\obj
-                //string newSubDir = Path.GetDirectoryName(modifiedFile);
-                //if (!Directory.Exists(newSubDir))
-                //{
-                //    Directory.CreateDirectory(newSubDir);
-                //}
-
                 var cleanedTree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, remaps, enumAdditions, enumsMakeFlagsHashSet, requiredNamespaces, staticLibs, infoFinder.EmptyStructs, infoFinder.EnumMemberNames, tree.FilePath);
+                crossArchSyntaxMap.AddTree(cleanedTree);
                 WriteTree(cleanedTree, cleanedTree.FilePath);
-
-                //lock (cleanedTrees)
-                //{
-                //    cleanedTrees.Add(cleanedTree);
-                //}
             });
 
-            Console.WriteLine($"Done cleaning trees.");
+            Console.WriteLine($"{watch.Elapsed:c}");
             ShowMemory();
-
-            Console.WriteLine($"Merging trees...");
 
             if (arch == "crossarch")
             {
-                CrossArchSyntaxMap crossArchSyntaxMap = CrossArchSyntaxMap.LoadFromTrees(FilesToTrees(treeFiles));
-                CrossArchTreeMerger.CrossArchTreeRewriter crossArchTreeRewriter = new CrossArchTreeMerger.CrossArchTreeRewriter(crossArchSyntaxMap);
-                foreach (var tree in FilesToTrees(treeFiles))
+                Console.Write($"  Merging cross-arch items...");
+                watch.Restart();
+
+                CrossArchTreeMerger crossArchTreeMerger = new CrossArchTreeMerger(crossArchSyntaxMap);
+                System.Threading.Tasks.Parallel.ForEach(FilesToTrees(modifiedFiles), opt, (tree) =>
                 {
-                    var fixedTree = crossArchTreeRewriter.ProcessTree(tree);
-                    WriteTree(fixedTree, fixedTree.FilePath);
-                }
+                    var fixedTree = crossArchTreeMerger.ProcessTree(tree);
+
+                    if (fixedTree != tree)
+                    {
+                        WriteTree(fixedTree, fixedTree.FilePath);
+                    }
+                });
+
+                Console.WriteLine($"{watch.Elapsed:c}");
+                ShowMemory();
             }
-             
-            //foreach (var cleanedTree in cleanedTrees)
-            //{
-            //    File.WriteAllText(cleanedTree.FilePath, cleanedTree.GetText().ToString());
-            //}
 
-            Console.WriteLine($"Done merging trees.");
-            ShowMemory();
-
-            Console.WriteLine($"Calling C# compiler on processed trees...");
+            Console.Write($"  Creating C# compilation on processed syntax trees...");
+            watch.Restart();
 
             CSharpCompilationOptions compilationOptions = new CSharpCompilationOptions(OutputKind.WindowsRuntimeMetadata, allowUnsafe: true);
             var comp =
                 CSharpCompilation.Create(
                     null,
-                    FilesToTrees(treeFiles),
+                    FilesToTrees(modifiedFiles),
                     refs,
                     compilationOptions);
 
-            Console.WriteLine($"C# compiler done");
+            Console.WriteLine($"{watch.Elapsed:c}");
             ShowMemory();
 
             return new ClangSharpSourceCompilation(comp, typeImports);
@@ -320,15 +311,29 @@ namespace ClangSharpSourceToWinmd
             return Path.Combine(progFiles, @"dotnet\packs\NETStandard.Library.Ref\2.1.0\ref\netstandard2.1\netstandard.dll");
         }
 
-        //private static void GetTreeInfo(List<SyntaxTree> trees, out HashSet<string> emptyStructs, out HashSet<string> enumMemberNames)
-        //{
-        //    emptyStructs = new HashSet<string>();
-        //    enumMemberNames = new HashSet<string>();
-        //    foreach (var tree in trees)
-        //    {
-        //        _ = new TreeInfoFinder(emptyStructs, enumMemberNames, tree);
-        //    }
-        //}
+#if ShowMemoryInfo
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+        private class MEMORYSTATUSEX
+        {
+            public uint dwLength;
+            public uint dwMemoryLoad;
+            public ulong ullTotalPhys;
+            public ulong ullAvailPhys;
+            public ulong ullTotalPageFile;
+            public ulong ullAvailPageFile;
+            public ulong ullTotalVirtual;
+            public ulong ullAvailVirtual;
+            public ulong ullAvailExtendedVirtual;
+            public MEMORYSTATUSEX()
+            {
+                this.dwLength = (uint)Marshal.SizeOf(typeof(MEMORYSTATUSEX));
+            }
+        }
+
+        [return: MarshalAs(UnmanagedType.Bool)]
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        static extern bool GlobalMemoryStatusEx([In, Out] MEMORYSTATUSEX lpBuffer);
+#endif
 
         private class TreeInfoFinder : CSharpSyntaxWalker
         {
