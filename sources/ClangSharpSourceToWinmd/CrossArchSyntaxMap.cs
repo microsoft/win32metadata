@@ -13,6 +13,10 @@ namespace ClangSharpSourceToWinmd
     {
         private Dictionary<string, List<CrossArchInfo>> namesToInfos = new Dictionary<string, List<CrossArchInfo>>();
 
+        public CrossArchSyntaxMap()
+        {
+        }
+
         public static Architecture GetArchForTree(SyntaxTree tree)
         {
             string potentialArch = Path.GetFileName(Path.GetDirectoryName(tree.FilePath));
@@ -68,16 +72,10 @@ namespace ClangSharpSourceToWinmd
             return false;
         }
 
-        public static CrossArchSyntaxMap LoadFromTrees(List<SyntaxTree> trees)
+        public void AddTree(SyntaxTree tree)
         {
-            CrossArchSyntaxMap map = new CrossArchSyntaxMap();
-            CrossArchSyntaxWalker walker = new CrossArchSyntaxWalker(map);
-            foreach (var tree in trees)
-            {
-                walker.WalkTree(tree);
-            }
-
-            return map;
+            CrossArchSyntaxWalker walker = new CrossArchSyntaxWalker(this);
+            walker.WalkTree(tree);
         }
 
         public IEnumerable<Architecture> GetSignatureArchGroupings(string name)
@@ -249,23 +247,27 @@ namespace ClangSharpSourceToWinmd
         {
             string name = SyntaxUtils.GetFullName(node, true);
             string fullSignature = GetFullSignature(node);
-            if (!this.namesToInfos.TryGetValue(name, out var crossArchInfos))
-            {
-                crossArchInfos = new List<CrossArchInfo>();
-                this.namesToInfos[name] = crossArchInfos;
-            }
 
-            foreach (var info in crossArchInfos)
+            lock (this.namesToInfos)
             {
-                if (info.FullSignature == fullSignature)
+                if (!this.namesToInfos.TryGetValue(name, out var crossArchInfos))
                 {
-                    info.Arch |= arch;
-                    return;
+                    crossArchInfos = new List<CrossArchInfo>();
+                    this.namesToInfos[name] = crossArchInfos;
                 }
-            }
 
-            var newInfo = new CrossArchInfo() { Arch = arch, FullSignature = fullSignature };
-            crossArchInfos.Add(newInfo);
+                foreach (var info in crossArchInfos)
+                {
+                    if (info.FullSignature == fullSignature)
+                    {
+                        info.Arch |= arch;
+                        return;
+                    }
+                }
+
+                var newInfo = new CrossArchInfo() { Arch = arch, FullSignature = fullSignature };
+                crossArchInfos.Add(newInfo);
+            }
         }
 
         private class CrossArchSyntaxWalker : CSharpSyntaxWalker

@@ -12,11 +12,7 @@ jobs:
 - job: scrape_x64
   displayName: "Scrape headers: x64"
   pool:
-    name: Package ES Standard Build
-    demands:
-    - msbuild
-    - visualstudio
-    - visualstudio -equals C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\
+    vmImage: windows-2019
   workspace:
     clean: all
 
@@ -66,11 +62,7 @@ jobs:
 - job: scrape_x86
   displayName: "Scrape headers: x86"
   pool:
-    name: Package ES Standard Build
-    demands:
-    - msbuild
-    - visualstudio
-    - visualstudio -equals C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\
+    vmImage: windows-2019
   workspace:
     clean: all
   steps:
@@ -97,11 +89,7 @@ jobs:
 - job: scrape_arm64
   displayName: "Scrape headers: arm64"
   pool:
-    name: Package ES Standard Build
-    demands:
-    - msbuild
-    - visualstudio
-    - visualstudio -equals C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\
+    vmImage: windows-2019
   workspace:
     clean: all
   steps:
@@ -133,11 +121,7 @@ jobs:
   variables:
     OutputPackagesDir: $(Build.ArtifactStagingDirectory)\CreatedNugetPackages
   pool:
-    name: Package ES Standard Build
-    demands:
-    - msbuild
-    - visualstudio
-    - visualstudio -equals C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\
+    vmImage: windows-2019
   steps:
   - checkout: self
     lfs: true
