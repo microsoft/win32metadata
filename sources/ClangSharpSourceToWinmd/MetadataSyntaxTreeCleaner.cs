@@ -76,10 +76,14 @@ namespace ClangSharpSourceToWinmd
                         if (attr != null)
                         {
                             var attrList = (AttributeListSyntax)attr.Parent;
+
+                            // We want to delete the attribute, but if it's the last one in the list,
+                            // remove the list
                             if (attrList.Attributes.Count == 1)
                             {
                                 node = node.RemoveNode(attrList, SyntaxRemoveOptions.KeepLeadingTrivia);
                             }
+                            // If it's not the last attribute, just remove the attribute
                             else
                             {
                                 node = node.RemoveNode(attr, SyntaxRemoveOptions.KeepLeadingTrivia);
