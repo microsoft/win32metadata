@@ -38,10 +38,6 @@ namespace ClangSharpSourceToWinmd
                 Console.WriteLine($"RAM avail = {avail}, load = {mem.dwMemoryLoad}");
             }
 
-            //double beforeMem = ConvertToGB((ulong)GC.GetTotalMemory(false));
-            //double afterMem = ConvertToGB((ulong)GC.GetTotalMemory(true));
-            //Console.WriteLine($"Current process memory: before GC {beforeMem}, after GC {afterMem}");
-
             static double ConvertToGB(ulong val)
             {
                 return (double)val / (1024 * 1024 * 1024);
