@@ -75,7 +75,15 @@ namespace ClangSharpSourceToWinmd
                         var attr = SyntaxUtils.GetAttribute(node.AttributeLists, "NativeTypeName");
                         if (attr != null)
                         {
-                            node = node.RemoveNode(attr, SyntaxRemoveOptions.KeepLeadingTrivia);
+                            var attrList = (AttributeListSyntax)attr.Parent;
+                            if (attrList.Attributes.Count == 1)
+                            {
+                                node = node.RemoveNode(attrList, SyntaxRemoveOptions.KeepLeadingTrivia);
+                            }
+                            else
+                            {
+                                node = node.RemoveNode(attr, SyntaxRemoveOptions.KeepLeadingTrivia);
+                            }
                         }
                     }
                 }

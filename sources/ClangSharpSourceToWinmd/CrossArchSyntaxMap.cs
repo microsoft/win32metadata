@@ -68,7 +68,7 @@ namespace ClangSharpSourceToWinmd
             return false;
         }
 
-        public static CrossArchSyntaxMap LoadFromTrees(List<SyntaxTree> trees)
+        public static CrossArchSyntaxMap LoadFromTrees(IEnumerable<SyntaxTree> trees)
         {
             CrossArchSyntaxMap map = new CrossArchSyntaxMap();
             CrossArchSyntaxWalker walker = new CrossArchSyntaxWalker(map);

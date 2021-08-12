@@ -13,24 +13,24 @@ namespace ClangSharpSourceToWinmd
 {
     public class CrossArchTreeMerger
     {
-        public static List<SyntaxTree> MergeTrees(CrossArchSyntaxMap map, List<SyntaxTree> trees)
-        {
-            List<SyntaxTree> ret = new List<SyntaxTree>();
-            CrossArchTreeRewriter archTreeRewriter = new CrossArchTreeRewriter(map);
-            foreach (var tree in trees)
-            {
-                var fixedTree = archTreeRewriter.ProcessTree(tree);
+        //public static List<SyntaxTree> MergeTrees(CrossArchSyntaxMap map, List<SyntaxTree> trees)
+        //{
+        //    List<SyntaxTree> ret = new List<SyntaxTree>();
+        //    CrossArchTreeRewriter archTreeRewriter = new CrossArchTreeRewriter(map);
+        //    foreach (var tree in trees)
+        //    {
+        //        var fixedTree = archTreeRewriter.ProcessTree(tree);
 
-                if (fixedTree != null)
-                {
-                    ret.Add(fixedTree);
-                }
-            }
+        //        if (fixedTree != null)
+        //        {
+        //            ret.Add(fixedTree);
+        //        }
+        //    }
 
-            return ret;
-        }
+        //    return ret;
+        //}
 
-        private class CrossArchTreeRewriter : CSharpSyntaxRewriter
+        public class CrossArchTreeRewriter : CSharpSyntaxRewriter
         {
             private CrossArchSyntaxMap map;
             private Architecture currentArch;

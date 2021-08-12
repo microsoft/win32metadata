@@ -121,6 +121,7 @@ namespace ClangSharpSourceToWinmd
             watch.Start();
 
             Console.WriteLine($"Compilation stage took {timeTaken}");
+            ClangSharpSourceCompilation.ShowMemory();
 
             Console.WriteLine($"\r\nEmitting {outputFileName}...");
             var generator = 
@@ -140,6 +141,7 @@ namespace ClangSharpSourceToWinmd
 
             timeTaken = watch.Elapsed.ToString("c");
             Console.WriteLine($"Emit stage took {timeTaken}");
+            ClangSharpSourceCompilation.ShowMemory();
 
             return generator.WroteWinmd ? 0 : -1;
         }

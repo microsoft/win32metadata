@@ -8,6 +8,18 @@ namespace ClangSharpSourceToWinmd
 {
     public class NamesToCorrectNamespacesMover
     {
+        public static SyntaxTree MoveNamesToCorrectNamespaces(SyntaxTree tree, Dictionary<string, string> namesToNamespaces)
+        {
+            if (tree.FilePath.EndsWith("manual.cs"))
+            {
+                return tree;
+            }
+
+            var nameFixer = new NameFixer(namesToNamespaces);
+            var newTree = nameFixer.FixNames(tree);
+            return CSharpSyntaxTree.ParseText(newTree.GetText(), null, tree.FilePath);
+        }
+
         public static List<SyntaxTree> MoveNamesToCorrectNamespaces(List<SyntaxTree> trees, Dictionary<string, string> namesToNamespaces)
         {
             List<SyntaxTree> ret = new List<SyntaxTree>();
@@ -53,8 +65,10 @@ namespace ClangSharpSourceToWinmd
                 Dictionary<string, MovedData> namespaceToMovedData = new Dictionary<string, MovedData>();
                 tree = this.RemoveNames(tree, namespaceToMovedData);
                 tree = this.AddNames(tree, namespaceToMovedData);
-
-                return tree.WithFilePath(filePath);
+                
+                var ret = tree.WithFilePath(filePath);
+                //System.GC.Collect();
+                return ret;
             }
 
             private SyntaxTree RemoveNames(SyntaxTree tree, Dictionary<string, MovedData> namespaceToMovedData)
