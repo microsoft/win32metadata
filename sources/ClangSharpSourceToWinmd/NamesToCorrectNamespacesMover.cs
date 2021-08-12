@@ -20,29 +20,6 @@ namespace ClangSharpSourceToWinmd
             return CSharpSyntaxTree.ParseText(newTree.GetText(), null, tree.FilePath);
         }
 
-        public static List<SyntaxTree> MoveNamesToCorrectNamespaces(List<SyntaxTree> trees, Dictionary<string, string> namesToNamespaces)
-        {
-            List<SyntaxTree> ret = new List<SyntaxTree>();
-
-            var nameFixer = new NameFixer(namesToNamespaces);
-
-            foreach (SyntaxTree tree in trees)
-            {
-                if (tree.FilePath.EndsWith("manual.cs"))
-                {
-                    ret.Add(tree);
-                }
-                else
-                {
-                    var newTree = nameFixer.FixNames(tree);
-                    newTree = CSharpSyntaxTree.ParseText(newTree.GetText(), null, tree.FilePath);
-                    ret.Add(newTree);
-                }
-            }
-
-            return ret;
-        }
-
         private class MovedData
         {
             public List<MemberDeclarationSyntax> Methods { get; } = new List<MemberDeclarationSyntax>();
