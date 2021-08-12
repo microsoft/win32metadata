@@ -34,6 +34,12 @@ namespace ClangSharpSourceToWinmd
 
         private static void WriteTree(SyntaxTree tree, string fileName)
         {
+            var dir = Path.GetDirectoryName(fileName);
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
+
             using (StreamWriter writer = File.CreateText(fileName))
             {
                 tree.GetText().Write(writer);
@@ -94,7 +100,7 @@ namespace ClangSharpSourceToWinmd
             //List<SyntaxTree> syntaxTrees = new List<SyntaxTree>();
             List<string> treeFiles = new List<string>();
             var sourceFiles = Directory.GetFiles(sourceDirectory, "*.cs", SearchOption.AllDirectories).Where(f => IsValidCsSourceFile(f, arch));
-            System.Threading.Tasks.ParallelOptions opt = new System.Threading.Tasks.ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount * 2 };
+            System.Threading.Tasks.ParallelOptions opt = new System.Threading.Tasks.ParallelOptions(); // { MaxDegreeOfParallelism = Environment.ProcessorCount * 2 };
 
 #if MakeSingleThreaded
             opt.MaxDegreeOfParallelism = 1;
@@ -125,6 +131,12 @@ namespace ClangSharpSourceToWinmd
                 }
                 else
                 {
+                    var dir = Path.GetDirectoryName(modifiedFile);
+                    if (!Directory.Exists(dir))
+                    {
+                        Directory.CreateDirectory(dir);
+                    }
+
                     File.Copy(treeFile, modifiedFile, true);
                 }
 
