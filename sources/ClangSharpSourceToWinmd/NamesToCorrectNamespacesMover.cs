@@ -44,7 +44,6 @@ namespace ClangSharpSourceToWinmd
                 tree = this.AddNames(tree, namespaceToMovedData);
                 
                 var ret = tree.WithFilePath(filePath);
-                //System.GC.Collect();
                 return ret;
             }
 
