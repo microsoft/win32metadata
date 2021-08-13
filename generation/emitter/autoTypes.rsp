@@ -221,3 +221,5 @@ Windows.Win32.Storage.StructuredStorage,JET_LS,UIntPtr
 Windows.Win32.System.SystemServices,SHANDLE_PTR,IntPtr
 Windows.Win32.System.SystemServices,HANDLE_PTR,UIntPtr
 ,SOCKET,UIntPtr,closesocket
+,BCRYPT_ALG_HANDLE,DECLARE_HANDLE,BCryptCloseAlgorithmProvider
+,BCRYPT_KEY_HANDLE,DECLARE_HANDLE,BCryptDestroyKey

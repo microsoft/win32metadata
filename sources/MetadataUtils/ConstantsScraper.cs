@@ -32,7 +32,7 @@ namespace MetadataUtils
 
             private static readonly Regex DefineConstantRegex =
                 new Regex(
-                    @"^((_HRESULT_TYPEDEF_|_NDIS_ERROR_TYPEDEF_)\(((?:0x)?[\da-f]+L?)\)|(\(HRESULT\)((?:0x)?[\da-f]+L?))|(-?\d+\.\d+(?:e\+\d+)?f?)|((?:0x[\da-f]+|\-?\d+)(?:UL|L)?)|((\d+)\s*(<<\s*\d+))|(MAKEINTRESOURCE\(\s*(\-?\d+)\s*\))|(\(HWND\)(-?\d+))|([a-z0-9_]+\s*\+\s*(\d+|0x[0-de-f]+))|(\(NTSTATUS\)((?:0x)?[\da-f]+L?))|(\s*\(DWORD\)\s*\(?\s*-1(L|\b)\s*\)?))$", RegexOptions.IgnoreCase);
+                    @"^((_HRESULT_TYPEDEF_|_NDIS_ERROR_TYPEDEF_)\(((?:0x)?[\da-f]+L?)\)|(\(HRESULT\)((?:0x)?[\da-f]+L?))|(-?\d+\.\d+(?:e\+\d+)?f?)|((?:0x[\da-f]+|\-?\d+)(?:UL|L)?)|((\d+)\s*(<<\s*\d+))|(MAKEINTRESOURCE\(\s*(\-?\d+)\s*\))|(\(HWND\)(-?\d+))|([a-z0-9_]+\s*\+\s*(\d+|0x[0-de-f]+))|(\(NTSTATUS\)((?:0x)?[\da-f]+L?))|(\s*\(DWORD\)\s*\(?\s*-1(L|\b)\s*\)?)|(\(BCRYPT_ALG_HANDLE\)\s*((?:0x)?[\da-f]+L?)))$", RegexOptions.IgnoreCase);
 
             private static readonly Regex DefineGuidConstRegex =
                 new Regex(
@@ -614,6 +614,12 @@ namespace MetadataUtils
                                 else if (match.Groups[20].Success)
                                 {
                                     valueText = "0xFFFFFFFF";
+                                }
+                                // (BCRYPT_ALG_HANDLE) 0x000001a1
+                                else if (match.Groups[21].Success)
+                                {
+                                    nativeTypeName = "BCRYPT_ALG_HANDLE";
+                                    valueText = match.Groups[22].Value;
                                 }
                                 else
                                 {
