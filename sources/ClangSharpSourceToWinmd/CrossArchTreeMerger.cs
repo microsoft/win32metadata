@@ -13,32 +13,28 @@ namespace ClangSharpSourceToWinmd
 {
     public class CrossArchTreeMerger
     {
-        public static List<SyntaxTree> MergeTrees(CrossArchSyntaxMap map, List<SyntaxTree> trees)
+        private readonly CrossArchSyntaxMap map;
+        private readonly HashSet<string> crossArchVisitedNames = new HashSet<string>();
+
+        public CrossArchTreeMerger(CrossArchSyntaxMap map)
         {
-            List<SyntaxTree> ret = new List<SyntaxTree>();
-            CrossArchTreeRewriter archTreeRewriter = new CrossArchTreeRewriter(map);
-            foreach (var tree in trees)
-            {
-                var fixedTree = archTreeRewriter.ProcessTree(tree);
-
-                if (fixedTree != null)
-                {
-                    ret.Add(fixedTree);
-                }
-            }
-
-            return ret;
+            this.map = map;
         }
 
-        private class CrossArchTreeRewriter : CSharpSyntaxRewriter
+        public SyntaxTree ProcessTree(SyntaxTree tree)
         {
-            private CrossArchSyntaxMap map;
-            private Architecture currentArch;
-            private HashSet<string> crossArchVisitedNames = new HashSet<string>();
+            CrossArchTreeRewriter treeWriter = new CrossArchTreeRewriter(this);
+            return treeWriter.ProcessTree(tree);
+        }
 
-            public CrossArchTreeRewriter(CrossArchSyntaxMap map)
+        public class CrossArchTreeRewriter : CSharpSyntaxRewriter
+        {
+            private Architecture currentArch;
+            private CrossArchTreeMerger owner;
+
+            public CrossArchTreeRewriter(CrossArchTreeMerger owner)
             {
-                this.map = map;
+                this.owner = owner;
             }
 
             public SyntaxTree ProcessTree(SyntaxTree tree)
@@ -235,7 +231,7 @@ namespace ClangSharpSourceToWinmd
 
             private void HandleArchSpecific(SyntaxNode node, out bool removeNode, out AttributeListSyntax attributeList, ref string name)
             {
-                var archGroupings = this.map.GetSignatureArchGroupings(node).ToArray();
+                var archGroupings = this.owner.map.GetSignatureArchGroupings(node).ToArray();
 
                 attributeList = null;
                 removeNode = false;
@@ -257,11 +253,16 @@ namespace ClangSharpSourceToWinmd
                     {
                         var fullNameWithArch = GetFullNameWithArch(node, archGroup);
 
-                        // If we've already visited it via another arch, get rid of this one
-                        if (this.crossArchVisitedNames.Contains(fullNameWithArch))
+                        lock (this.owner)
                         {
-                            removeNode = true;
-                            return;
+                            // If we've already visited it via another arch, get rid of this one
+                            if (this.owner.crossArchVisitedNames.Contains(fullNameWithArch))
+                            {
+                                removeNode = true;
+                                return;
+                            }
+
+                            this.owner.crossArchVisitedNames.Add(fullNameWithArch);
                         }
 
                         if (i != 0)
@@ -277,8 +278,6 @@ namespace ClangSharpSourceToWinmd
                                     SyntaxFactory.Attribute(
                                         SyntaxFactory.ParseName("SupportedArchitecture"),
                                         SyntaxFactory.ParseAttributeArgumentList(attributeArgs))));
-
-                        this.crossArchVisitedNames.Add(fullNameWithArch);
 
                         return;
                     }

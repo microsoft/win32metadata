@@ -12,6 +12,7 @@
 <IncludeRoot>/um/jsrt9.h
 --exclude
 JsRuntimeVersion
+JsRuntimeVersionEdge
 JS_SOURCE_CONTEXT_NONE
 --namespace
 Windows.Win32.System.Js

@@ -366,3 +366,4 @@ MigrationBackup/
 /generation/scraper/functionPointerFixups.generated.rsp
 /generation/emitter/enumsMakeFlags.generated.rsp
 /sources/msbuild/sdk/sdk.stamped.props
+/tests/SourceToWinmd/source/generated/autotypes.cs
