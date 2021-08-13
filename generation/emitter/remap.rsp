@@ -484,3 +484,4 @@ IUIAutomationElement::get_CachedNativeWindowHandle::retVal=HWND
 IUIAutomationProxyFactory::CreateProvider::hwnd=HWND
 IUIAutomation::ElementFromHandle::hwnd=HWND
 IUIAutomation::ElementFromHandleBuildCache::hwnd=HWND
+GetNetworkParams::return=WIN32_ERROR
