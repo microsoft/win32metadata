@@ -294,6 +294,10 @@ KSTOPOLOGY_CONNECTION=Windows.Win32.Graphics.DirectShow
 # region libloaderapi.h
 FindStringOrdinal=Windows.Win32.Globalization
 # endregion libloaderapi.h
+# region lmerr.h (also defined in wincred.h)
+NERR_BASE=Windows.Win32.NetworkManagement.NetManagement
+NERR_PasswordExpired=Windows.Win32.NetworkManagement.NetManagement
+# endregion lmerr.h
 # region lmserver.h
 SetServiceBits=Windows.Win32.System.Services
 # endregion lmserver.h
