@@ -38,6 +38,10 @@ namespace MetadataUtils
                 new Regex(
                     @"^\s*(DEFINE_GUID|DEFINE_DEVPROPKEY|DEFINE_KNOWN_FOLDER)\s*\((.*)");
 
+            private static readonly Regex DefineAviGuidConstRegex =
+                new Regex(
+                    @"^\s*(DEFINE_AVIGUID)\s*\(\s*(.*),\s*(.*),\s*(.*),\s*(.*)\s*\);");
+
             private static readonly Regex DefineEnumFlagsRegex =
                 new Regex(
                     @"^\s*DEFINE_ENUM_FLAG_OPERATORS\(\s*(\S+)\s*\)\s*\;\s*$");
@@ -468,6 +472,19 @@ namespace MetadataUtils
                                     processingGuidMultiLine = true;
                                 }
 
+                                continue;
+                            }
+                            
+                            var defineAviGuidMatch = DefineAviGuidConstRegex.Match(line);
+                            if (defineAviGuidMatch.Success)
+                            {
+                                defineGuidKeyword = defineAviGuidMatch.Groups[1].Value;
+                                var guidName = defineAviGuidMatch.Groups[2].Value;
+                                var l = defineAviGuidMatch.Groups[3].Value;
+                                var w1 = defineAviGuidMatch.Groups[4].Value;
+                                var w2 = defineAviGuidMatch.Groups[5].Value;
+                                var defineGuidLine = $"{guidName}, {l}, {w1}, {w2}, 0xC0,0,0,0,0,0,0,0x46)";
+                                this.AddConstantGuid(defineGuidKeyword, currentNamespace, defineGuidLine);
                                 continue;
                             }
 
