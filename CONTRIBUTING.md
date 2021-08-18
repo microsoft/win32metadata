@@ -161,6 +161,8 @@ To apply an attribute to an API, update the `--remap` section of [remap.rsp](htt
 * `<API>::return=[<Attribute>]`
   * Applies an attribute to the return value of an API (e.g. `DoDragDrop::return=[AlternateSuccessCodes]`)
 
+You can apply multiple attributes to an API (e.g. `[DoNotRelease][AlternateSuccessCodes]`) and also combine attributes with type remappings as shown in the `GetProcessHeaps` example above.
+
 Language projections can use the context provided by attributes to improve the developer experience for APIs decorated with them.
 
 ## Validating changes
