@@ -15,6 +15,7 @@ You can contribute to this project by contributing to:
 * [Namespaces](#Namespaces)
 * [Enums](#Enums)
 * [Constants](#Constants)
+* [Attributes](#Attributes)
 * [Projections](docs/projections.md)
 
 If you intend to contribute code changes, learn how to [set up your development environment](#Set-up-your-development-environment).
@@ -146,6 +147,21 @@ Constants can be assigned to different namespaces than their header files by add
 The ConstantsScraper uses [regular expression matching](sources/MetadataUtils/ConstantsScraper.cs) on the header files to automatically extract constants. If a constant is not being detected, either a regular expression needs to be added or a regular expression would be insufficient. For cases where regular expressions would be insufficient, you can manually define constants in `.cs` files within [manual](generation/emitter/manual) (e.g. [RestartManager.manual.cs](generation/emitter/manual/RestartManager.manual.cs)).
 
 Constants are removed from the metadata when they are detected as members of an enum.
+
+## Attributes
+
+Our tooling defines several [attributes](https://github.com/microsoft/win32metadata/tree/master/sources/Win32MetadataInterop) that can be applied to APIs to provide useful context to language projections.
+
+To apply an attribute to an API, update the `--remap` section of [remap.rsp](https://github.com/microsoft/win32metadata/blob/master/generation/emitter/remap.rsp) in one of the following ways:
+
+* `<API>=[<Attribute>]`
+  * Applies an attribute directly to an API (e.g. `MLOperatorAttributeType=[ScopedEnum]`)
+* `<API>::<Parameter>=[<Attribute>]`
+  * Applies an attribute to a parameter of an API (e.g. `GetProcessHeaps::ProcessHeaps=[DoNotRelease]HeapHandle*`)
+* `<API>::return=[<Attribute>]`
+  * Applies an attribute to the return value of an API (e.g. `DoDragDrop::return=[AlternateSuccessCodes]`)
+
+Language projections can use the context provided by attributes to improve the developer experience for APIs decorated with them.
 
 ## Validating changes
 
