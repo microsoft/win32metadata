@@ -486,3 +486,4 @@ IUIAutomation::ElementFromHandle::hwnd=HWND
 IUIAutomation::ElementFromHandleBuildCache::hwnd=HWND
 GetNetworkParams::return=WIN32_ERROR
 DoDragDrop::return=[AlternateSuccessCodes]
+IShellFolder::EnumObjects::return=[AlternateSuccessCodes]
