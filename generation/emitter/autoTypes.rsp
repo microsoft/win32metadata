@@ -7,7 +7,7 @@ Windows.Win32.Foundation,HINSTANCE,DECLARE_HANDLE,FreeLibrary
 Windows.Win32.Foundation,HRESULT,int
 Windows.Win32.Foundation,HWND,DECLARE_HANDLE
 Windows.Win32.Foundation,LPARAM,IntPtr
-Windows.Win32.Foundation,LRESULT,int
+Windows.Win32.Foundation,LRESULT,IntPtr
 Windows.Win32.Foundation,LSTATUS,int
 Windows.Win32.Foundation,NTSTATUS,int
 Windows.Win32.Foundation,PSID,IntPtr
