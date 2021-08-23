@@ -962,6 +962,11 @@ namespace ClangSharpSourceToWinmd
 
                 bool ret = false;
 
+                if (fullName == "DoDragDrop::return")
+                {
+
+                }
+
                 if (!string.IsNullOrEmpty(fullName) && this.remaps.TryGetValue(fullName, out string remapData))
                 {
                     ret = EncodeHelpers.DecodeRemap(remapData, out listAttributes, out newType, out newName);
