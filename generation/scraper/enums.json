@@ -11188,6 +11188,10 @@
       {
         "struct": "MINIDUMP_SYSTEM_INFO",
         "field": "ProcessorArchitecture"
+      },
+      {
+        "struct": "SYSTEM_INFO::_Anonymous_e__Union::_Anonymous_e__Struct",
+        "field": "wProcessorArchitecture"
       }
     ]
   },
