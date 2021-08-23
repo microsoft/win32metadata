@@ -488,3 +488,4 @@ GetNetworkParams::return=WIN32_ERROR
 DoDragDrop::return=[AlternateSuccessCodes]
 DwmGetWindowAttribute::dwAttribute=DWMWINDOWATTRIBUTE
 DwmSetWindowAttribute::dwAttribute=DWMWINDOWATTRIBUTE
+IShellFolder::EnumObjects::return=[AlternateSuccessCodes]
