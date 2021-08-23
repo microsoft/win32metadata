@@ -3542,8 +3542,8 @@
     ]
   },
   {
-    "type": "uint",
     "name": "IMAGE_SUBSYSTEM",
+    "type": "ushort",
     "autoPopulate": {
       "filter": "IMAGE_SUBSYSTEM_",
       "header": "winnt.h"
@@ -3561,8 +3561,8 @@
     ]
   },
   {
-    "type": "uint",
     "name": "IMAGE_DLL_CHARACTERISTICS",
+    "type": "ushort",
     "flags": true,
     "autoPopulate": {
       "filter": "IMAGE_DLLCHARACTERISTICS_",
@@ -3581,8 +3581,8 @@
     ]
   },
   {
-    "type": "uint",
     "name": "IMAGE_OPTIONAL_HEADER_MAGIC",
+    "type": "ushort",
     "autoPopulate": {
       "filter": "IMAGE_NT_OPTIONAL_HDR32_MAGIC|IMAGE_NT_OPTIONAL_HDR64_MAGIC|IMAGE_ROM_OPTIONAL_HDR_MAGIC",
       "header": "winnt.h"
@@ -5059,6 +5059,7 @@
   },
   {
     "name": "REPORT_EVENT_TYPE",
+    "type": "ushort",
     "members": [
       {
         "name": "EVENTLOG_SUCCESS",
@@ -11160,6 +11161,7 @@
   },
   {
     "name": "PROCESSOR_ARCHITECTURE",
+    "type": "ushort",
     "members": [
       {
         "name": "PROCESSOR_ARCHITECTURE_AMD64",
@@ -11184,16 +11186,35 @@
     ],
     "uses": [
       {
+        "struct": "MINIDUMP_SYSTEM_INFO",
+        "field": "ProcessorArchitecture"
+      }
+    ]
+  },
+  {
+    "name": "CPU_ARCHITECTURE",
+    "members": [
+      {
+        "name": "CPU_ARCHITECTURE_AMD64",
+        "value": "9"
+      },
+      {
+        "name": "CPU_ARCHITECTURE_IA64",
+        "value": "6"
+      },
+      {
+        "name": "CPU_ARCHITECTURE_INTEL",
+        "value": "0"
+      }
+    ],
+    "uses": [
+      {
         "method": "WdsCliGetImageArchitecture",
         "parameter": "pdwValue"
       },
       {
         "method": "WdsCliInitializeLog",
         "parameter": "ulClientArchitecture"
-      },
-      {
-        "struct": "MINIDUMP_SYSTEM_INFO",
-        "field": "ProcessorArchitecture"
       }
     ]
   },
@@ -18080,6 +18101,7 @@
   },
   {
     "name": "RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE",
+    "type": "ushort",
     "flags": true,
     "members": [
       {
@@ -19843,6 +19865,7 @@
   },
   {
     "name": "NMPGSCROLL_KEYS",
+    "type": "ushort",
     "flags": true,
     "members": [
       {
@@ -19942,6 +19965,7 @@
   },
   {
     "name": "IMAGE_FILE_CHARACTERISTICS",
+    "type": "ushort",
     "flags": true,
     "members": [
       {
@@ -20009,7 +20033,75 @@
       {
         "struct": "IMAGE_FILE_HEADER",
         "field": "Characteristics"
+      }
+    ]
+  },
+  {
+    "name": "IMAGE_FILE_CHARACTERISTICS2",
+    "flags": true,
+    "members": [
+      {
+        "name": "IMAGE_FILE_RELOCS_STRIPPED2",
+        "value": "1"
       },
+      {
+        "name": "IMAGE_FILE_EXECUTABLE_IMAGE2",
+        "value": "2"
+      },
+      {
+        "name": "IMAGE_FILE_LINE_NUMS_STRIPPED2",
+        "value": "4"
+      },
+      {
+        "name": "IMAGE_FILE_LOCAL_SYMS_STRIPPED2",
+        "value": "8"
+      },
+      {
+        "name": "IMAGE_FILE_AGGRESIVE_WS_TRIM2",
+        "value": "16"
+      },
+      {
+        "name": "IMAGE_FILE_LARGE_ADDRESS_AWARE2",
+        "value": "32"
+      },
+      {
+        "name": "IMAGE_FILE_BYTES_REVERSED_LO2",
+        "value": "128"
+      },
+      {
+        "name": "IMAGE_FILE_32BIT_MACHINE2",
+        "value": "256"
+      },
+      {
+        "name": "IMAGE_FILE_DEBUG_STRIPPED2",
+        "value": "512"
+      },
+      {
+        "name": "IMAGE_FILE_REMOVABLE_RUN_FROM_SWAP2",
+        "value": "1024"
+      },
+      {
+        "name": "IMAGE_FILE_NET_RUN_FROM_SWAP2",
+        "value": "2048"
+      },
+      {
+        "name": "IMAGE_FILE_SYSTEM_2",
+        "value": "4096"
+      },
+      {
+        "name": "IMAGE_FILE_DLL_2",
+        "value": "8192"
+      },
+      {
+        "name": "IMAGE_FILE_UP_SYSTEM_ONLY_2",
+        "value": "16384"
+      },
+      {
+        "name": "IMAGE_FILE_BYTES_REVERSED_HI_2",
+        "value": "32768"
+      }
+    ],
+    "uses": [
       {
         "struct": "LOADED_IMAGE",
         "field": "Characteristics"
@@ -22224,6 +22316,7 @@
   },
   {
     "name": "PARAFORMAT_BORDERS",
+    "type": "ushort",
     "flags": true,
     "members": [
       {
@@ -22865,6 +22958,7 @@
   },
   {
     "name": "CLAIM_SECURITY_ATTRIBUTE_VALUE_TYPE",
+    "type": "ushort",
     "members": [
       {
         "name": "CLAIM_SECURITY_ATTRIBUTE_TYPE_INT64",
@@ -23083,6 +23177,7 @@
   },
   {
     "name": "FILESYSTEM_STATISTICS_TYPE",
+    "type": "ushort",
     "members": [
       {
         "name": "FILESYSTEM_STATISTICS_TYPE_EXFAT",
@@ -24050,6 +24145,7 @@
   },
   {
     "name": "PARAFORMAT_SHADING_STYLE",
+    "type": "ushort",
     "members": [
       {
         "name": "PARAFORMAT_SHADING_STYLE_NONE",
@@ -24230,6 +24326,7 @@
   },
   {
     "name": "COMMPROP_STOP_PARITY",
+    "type": "ushort",
     "flags": true,
     "members": [
       {
@@ -25634,6 +25731,7 @@
   },
   {
     "name": "CHOOSEFONT_FONT_TYPE",
+    "type": "ushort",
     "flags": true,
     "members": [
       {
@@ -27046,6 +27144,7 @@
   },
   {
     "name": "TXF_LOG_RECORD_TYPE",
+    "type": "ushort",
     "members": [
       {
         "name": "TXF_LOG_RECORD_TYPE_AFFECTED_FILE",
@@ -27412,6 +27511,7 @@
   },
   {
     "name": "DEV_BROADCAST_VOLUME_FLAGS",
+    "type": "ushort",
     "members": [
       {
         "name": "DBTF_MEDIA",
@@ -27883,6 +27983,7 @@
   },
   {
     "name": "PARAFORMAT_NUMBERING_STYLE",
+    "type": "ushort",
     "members": [
       {
         "name": "PFNS_PAREN"
@@ -28010,6 +28111,7 @@
   },
   {
     "name": "PARAFORMAT_ALIGNMENT",
+    "type": "ushort",
     "members": [
       {
         "name": "PFA_CENTER"
@@ -28818,7 +28920,7 @@
       {
         "struct": "WINHTTP_PROXY_RESULT_ENTRY",
         "field": "ProxyScheme"
-      }      
+      }
     ]
   },
   {
