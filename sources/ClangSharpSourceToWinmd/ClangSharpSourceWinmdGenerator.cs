@@ -1878,7 +1878,19 @@ namespace ClangSharpSourceToWinmd
             }
             else
             {
-                EncodeTypeSymbol(type, signatureEncoder);
+                var nativeType =
+                    SyntaxUtils.GetNativeTypeNameFromAttributesLists(field.AttributeLists);
+
+                // See if this is a type that ends with an array that needs to be emitted as a 1-length array
+                // which means a variable-length array
+                if (nativeType != null && nativeType.EndsWith("[]") && !(type is IPointerTypeSymbol))
+                {
+                    signatureEncoder.Array(s => EncodeTypeSymbol(type, signatureEncoder), h => h.Shape(1, new int[1] { 1 }.ToImmutableArray(), new int[1] { 0 }.ToImmutableArray()));
+                }
+                else
+                {
+                    EncodeTypeSymbol(type, signatureEncoder);
+                }
             }
 
             return fieldSignature;
