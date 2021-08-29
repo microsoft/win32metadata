@@ -221,3 +221,6 @@ Windows.Win32.Storage.StructuredStorage,JET_LS,UIntPtr
 Windows.Win32.System.SystemServices,SHANDLE_PTR,IntPtr
 Windows.Win32.System.SystemServices,HANDLE_PTR,UIntPtr
 ,SOCKET,UIntPtr,closesocket
+,HCS_OPERATION,DECLARE_HANDLE,HcsCloseOperation
+,HCS_SYSTEM,DECLARE_HANDLE,HcsCloseComputeSystem
+,HCS_PROCESS,DECLARE_HANDLE,HcsCloseProcess

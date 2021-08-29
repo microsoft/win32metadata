@@ -1,6 +1,8 @@
 #define SECURITY_WIN32 // For sspi.h
 #define QCC_OS_GROUP_WINDOWS
 
+#define char16_t wchar_t
+
 #include "intrinfix.h"
 
 #include "windows.fixed.h"

@@ -64,7 +64,7 @@ function Install-DotNetTool
 
 function Install-BuildTools
 {
-    Install-DotNetTool -Name ClangSharpPInvokeGenerator -Version 11.0.0-beta3
+    Install-DotNetTool -Name ClangSharpPInvokeGenerator -Version 12.0.0-beta2
     Install-DotNetTool -Name nbgv
 
     & dotnet build "$rootDir\BuildTools\BuildTools.proj" -c Release
