@@ -7,7 +7,7 @@ Windows.Win32.Foundation,HINSTANCE,DECLARE_HANDLE,FreeLibrary
 Windows.Win32.Foundation,HRESULT,int
 Windows.Win32.Foundation,HWND,DECLARE_HANDLE
 Windows.Win32.Foundation,LPARAM,IntPtr
-Windows.Win32.Foundation,LRESULT,int
+Windows.Win32.Foundation,LRESULT,IntPtr
 Windows.Win32.Foundation,LSTATUS,int
 Windows.Win32.Foundation,NTSTATUS,int
 Windows.Win32.Foundation,PSID,IntPtr
@@ -221,6 +221,8 @@ Windows.Win32.Storage.StructuredStorage,JET_LS,UIntPtr
 Windows.Win32.System.SystemServices,SHANDLE_PTR,IntPtr
 Windows.Win32.System.SystemServices,HANDLE_PTR,UIntPtr
 ,SOCKET,UIntPtr,closesocket
+,BCRYPT_ALG_HANDLE,DECLARE_HANDLE,BCryptCloseAlgorithmProvider
+,BCRYPT_KEY_HANDLE,DECLARE_HANDLE,BCryptDestroyKey
 ,HCS_OPERATION,DECLARE_HANDLE,HcsCloseOperation
 ,HCS_SYSTEM,DECLARE_HANDLE,HcsCloseComputeSystem
 ,HCS_PROCESS,DECLARE_HANDLE,HcsCloseProcess

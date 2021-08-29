@@ -21,3 +21,5 @@
 #include <lmsvc.h>
 #include <lmuse.h>
 #include <lmwksta.h>
+#include <lmerr.h>
+#include <lmcons.h>

@@ -271,15 +271,18 @@ $@"--file
             AddWin32GeneratedRsp(args, "autoTypes.generated.rsp");
             AddWin32GeneratedRsp(args, "functionPointerFixups.generated.rsp");
 
-            foreach (var rspItem in this.Rsps)
+            if (this.Rsps != null)
             {
-                var rspPath = rspItem.ItemSpec;
-                if (!Path.IsPathRooted(rspPath))
+                foreach (var rspItem in this.Rsps)
                 {
-                    rspPath = Path.Combine(this.MSBuildProjectDirectory, rspPath);
-                }
+                    var rspPath = rspItem.ItemSpec;
+                    if (!Path.IsPathRooted(rspPath))
+                    {
+                        rspPath = Path.Combine(this.MSBuildProjectDirectory, rspPath);
+                    }
 
-                args.Append($" \"@{rspPath}\"");
+                    args.Append($" \"@{rspPath}\"");
+                }
             }
 
             int exitCode = TaskUtils.ExecuteCmd("ClangSharpPInvokeGenerator", args.ToString(), out var output, this.Log);

@@ -15,6 +15,7 @@ You can contribute to this project by contributing to:
 * [Namespaces](#Namespaces)
 * [Enums](#Enums)
 * [Constants](#Constants)
+* [Attributes](#Attributes)
 * [Projections](docs/projections.md)
 
 If you intend to contribute code changes, learn how to [set up your development environment](#Set-up-your-development-environment).
@@ -34,10 +35,12 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 * Install [Visual Studio Code](https://code.visualstudio.com/Download)
 * Install [PowerShell 7](https://aka.ms/powershell-release?tag=stable)
 * Install [.NET (SDK)](https://dotnet.microsoft.com/download/dotnet)
+* Install [Git LFS](https://git-lfs.github.com/)
 * Install [ILSpy](https://github.com/icsharpcode/ILSpy/releases/latest)
 * Add [NuGet.org](https://api.nuget.org/v3/index.json) as a [package source](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-nuget-add-source#examples)
-* If you haven't installed git lfs before, check out ["Getting Started"](https://git-lfs.github.com/) for git lfs.
 * Clone the [repo](https://github.com/microsoft/win32metadata.git)
+* Run `git lfs install` from the repo root
+* Run `git lfs pull` from the repo root
 * Run a [full build](#Full-builds)
 
 ## Namespaces
@@ -89,10 +92,12 @@ Enums are defined in [enums.json](generation/scraper/enums.json). This file prov
   * `name` - The name of the enum member
   * `value` - The value of the enum member
 * `uses` - A list of APIs where this enum is used
+  * `interface` - The COM interface name
   * `method` - The method name
   * `parameter` - The parameter name of `method` or `"return"` for the return value
   * `struct` - The struct name
   * `field` - The field name of `struct`
+  * Note: Define only the subset of properties relevant to an API
 
 In the example below, a flags enum called `WNDCLASS_STYLES` is created with all of the `CS_` constants from `winuser.h`. This enum is then used by the style fields of all the `WNDCLASS` structs. Since no `namespace` or `type` are specified, the enum will live in the same namespace as `WNDCLASSA` and will be of type `uint`.
 
@@ -143,13 +148,30 @@ The ConstantsScraper uses [regular expression matching](sources/MetadataUtils/Co
 
 Constants are removed from the metadata when they are detected as members of an enum.
 
+## Attributes
+
+Our tooling defines several [attributes](https://github.com/microsoft/win32metadata/tree/master/sources/Win32MetadataInterop) that can be applied to APIs to provide useful context to language projections.
+
+To apply an attribute to an API, update the `--remap` section of [remap.rsp](https://github.com/microsoft/win32metadata/blob/master/generation/emitter/remap.rsp) in one of the following ways:
+
+* `<API>=[<Attribute>]`
+  * Applies an attribute directly to an API (e.g. `MLOperatorAttributeType=[ScopedEnum]`)
+* `<API>::<Parameter>=[<Attribute>]`
+  * Applies an attribute to a parameter of an API (e.g. `GetProcessHeaps::ProcessHeaps=[DoNotRelease]HeapHandle*`)
+* `<API>::return=[<Attribute>]`
+  * Applies an attribute to the return value of an API (e.g. `DoDragDrop::return=[AlternateSuccessCodes]`)
+
+You can apply multiple attributes to an API (e.g. `[DoNotRelease][AlternateSuccessCodes]`) and also combine attributes with type remappings as shown in the `GetProcessHeaps` example above.
+
+Language projections can use the context provided by attributes to improve the developer experience for APIs decorated with them.
+
 ## Validating changes
 
 ### Full builds
 
 The simplest but slowest way to validate changes is to perform a full build with `./DoAll.ps1` and then inspect the reported winmd diff to ensure all changes were intentional. A full build can take 25-30 minutes. Add `-Clean` to perform a clean build.
 
-If you get an error dealing with a .zip file, you may need to run ````git lfs pull```` to pull down the large files needed for building.
+If you encounter errors processing .zip or .winmd files, make sure that Git LFS is installed and configured properly per [set up your development environment](#Set-up-your-development-environment).
 
 ### Incremental builds
 

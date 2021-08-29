@@ -249,6 +249,66 @@ namespace ClangSharpSourceToWinmd
             return name;
         }
 
+        private static void EnsureEnumSizeMatchesOriginalSize(string parent, string name, ITypeSymbol type, string nativeType)
+        {
+            if (type is INamedTypeSymbol namedType)
+            {
+                var underlyingType = namedType.EnumUnderlyingType;
+                if (underlyingType != null)
+                {
+                    if (nativeType != null)
+                    {
+                        int nativeSize = 0;
+
+                        switch (nativeType)
+                        {
+                            case "SHORT":
+                            case "USHORT":
+                            case "WORD":
+                                nativeSize = 2;
+                                break;
+
+                            case "LONG":
+                            case "ULONG":
+                            case "DWORD":
+                            case "UINT":
+                            case "UINT32":
+                            case "BOOL":
+                                nativeSize = 4;
+                                break;
+
+                            default:
+                                System.Diagnostics.Debug.WriteLine($"{parent}.{name} is using an enum {underlyingType} but its native type {nativeType} not handled.");
+                                return;
+                        }
+
+                        int enumSize = 0;
+
+                        switch (underlyingType.SpecialType)
+                        {
+                            case SpecialType.System_UInt32:
+                            case SpecialType.System_Int32:
+                                enumSize = 4;
+                                break;
+
+                            case SpecialType.System_UInt16:
+                            case SpecialType.System_Int16:
+                                enumSize = 2;
+                                break;
+
+                            default:
+                                throw new InvalidOperationException($"Enum type {underlyingType} not handled.");
+                        }
+
+                        if (enumSize != nativeSize)
+                        {
+                            throw new InvalidOperationException(
+                                $"{parent}.{name} was remapped to enum {namedType} (type {underlyingType}, size {enumSize}) but the original field was of type {nativeType} (size {nativeSize}). Either don't use an enum or make sure the enum is of the same size.");
+                        }
+                    }
+                }
+            }
+        }
         private void CacheGuidConst(FieldDeclarationSyntax guidFieldNode)
         {
             this.nameToGuidConstFields[guidFieldNode.Declaration.Variables.First().Identifier.ValueText] = guidFieldNode;
@@ -801,7 +861,11 @@ namespace ClangSharpSourceToWinmd
             return ret;
         }
 
-        private void RemapToMoreSpecificTypeIfPossible(ImmutableArray<AttributeData> ownerAttributes, ref ITypeSymbol typeSymbol)
+        private void RemapToMoreSpecificTypeIfPossible(
+            string owner,
+            string name,
+            ImmutableArray<AttributeData> ownerAttributes, 
+            ref ITypeSymbol typeSymbol)
         {
             // Can't do anything without a NativeTypeNameAttribute 
             var nativeTypeNameAttr = ownerAttributes.FirstOrDefault(a => a.AttributeClass.Name == "NativeTypeNameAttribute");
@@ -810,15 +874,16 @@ namespace ClangSharpSourceToWinmd
                 return;
             }
 
-            var originalTypeName = nativeTypeNameAttr.ConstructorArguments[0].Value.ToString();
+            var nativeType = nativeTypeNameAttr.ConstructorArguments[0].Value.ToString();
+            EnsureEnumSizeMatchesOriginalSize(owner, name, typeSymbol, nativeType);
 
-            if (typeSymbol.SpecialType == SpecialType.System_SByte && IsCharRegex.IsMatch(originalTypeName))
+            if (typeSymbol.SpecialType == SpecialType.System_SByte && IsCharRegex.IsMatch(nativeType))
             {
                 typeSymbol = this.GetTypeFromShortName("CHAR");
                 return;
             }
 
-            if (typeSymbol.SpecialType == SpecialType.System_UInt16 && IsWcharRegex.IsMatch(originalTypeName))
+            if (typeSymbol.SpecialType == SpecialType.System_UInt16 && IsWcharRegex.IsMatch(nativeType))
             {
                 typeSymbol = this.GetTypeFromShortName("System.Char");
                 return;
@@ -843,19 +908,19 @@ namespace ClangSharpSourceToWinmd
                 typeName.StartsWith("ulong*") ||
                 typeName.StartsWith("void*"))
             {
-                if (originalTypeName.StartsWith("const "))
+                if (nativeType.StartsWith("const "))
                 {
-                    originalTypeName = originalTypeName.Substring("const ".Length);
+                    nativeType = nativeType.Substring("const ".Length);
                 }
 
-                var newTypeSymbol = this.GetTypeFromShortName(originalTypeName);
+                var newTypeSymbol = this.GetTypeFromShortName(nativeType);
                 if (newTypeSymbol != null)
                 {
                     typeSymbol = newTypeSymbol;
                     return;
                 }
 
-                var parts = originalTypeName.Split(' ');
+                var parts = nativeType.Split(' ');
                 var nameOnly = parts[0];
                 var star = parts.Length > 1 ? parts[1] : null;
 
@@ -970,7 +1035,7 @@ namespace ClangSharpSourceToWinmd
             bool instanceMethod)
         {
             var returnType = methodSymbol.ReturnType;
-            this.RemapToMoreSpecificTypeIfPossible(methodSymbol.GetReturnTypeAttributes(), ref returnType);
+            this.RemapToMoreSpecificTypeIfPossible(methodSymbol.Name, "return", methodSymbol.GetReturnTypeAttributes(), ref returnType);
 
             List<Parameter> parameters = new List<Parameter>();
             foreach (var p in methodSymbol.Parameters)
@@ -1762,13 +1827,14 @@ namespace ClangSharpSourceToWinmd
         {
             var fieldVariable = field.Declaration.Variables.First();
             IFieldSymbol fieldSymbol = (IFieldSymbol)model.GetDeclaredSymbol(fieldVariable);
-            name = fieldSymbol.Name;
             var type = model.GetTypeInfo(field.Declaration.Type).Type;
             var fieldSignature = new BlobBuilder();
             var encoder = new BlobEncoder(fieldSignature);
             var signatureEncoder = encoder.FieldSignature();
 
-            this.RemapToMoreSpecificTypeIfPossible(fieldSymbol.GetAttributes(), ref type);
+            name = fieldSymbol.Name;
+
+            this.RemapToMoreSpecificTypeIfPossible(structName, name, fieldSymbol.GetAttributes(), ref type);
 
             if (type.Name.EndsWith("_e__FixedBuffer"))
             {
@@ -1782,7 +1848,7 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 var fieldType = fixedBufferInfo.Type;
-                this.RemapToMoreSpecificTypeIfPossible(fieldSymbol.GetAttributes(), ref fieldType);
+                this.RemapToMoreSpecificTypeIfPossible(structName, name, fieldSymbol.GetAttributes(), ref fieldType);
 
                 bool symbolsChanged = !SymbolEqualityComparer.Default.Equals(fieldType, fixedBufferInfo.Type);
                 if (symbolsChanged && fieldType is IPointerTypeSymbol pointer)
@@ -1812,7 +1878,19 @@ namespace ClangSharpSourceToWinmd
             }
             else
             {
-                EncodeTypeSymbol(type, signatureEncoder);
+                var nativeType =
+                    SyntaxUtils.GetNativeTypeNameFromAttributesLists(field.AttributeLists);
+
+                // See if this is a type that ends with an array that needs to be emitted as a 1-length array
+                // which means a variable-length array
+                if (nativeType != null && nativeType.EndsWith("[]") && !(type is IPointerTypeSymbol))
+                {
+                    signatureEncoder.Array(s => EncodeTypeSymbol(type, signatureEncoder), h => h.Shape(1, new int[1] { 1 }.ToImmutableArray(), new int[1] { 0 }.ToImmutableArray()));
+                }
+                else
+                {
+                    EncodeTypeSymbol(type, signatureEncoder);
+                }
             }
 
             return fieldSignature;
@@ -2051,7 +2129,7 @@ namespace ClangSharpSourceToWinmd
 
                 var paramType = parameterSymbol.Type;
                 var paramName = parameterSymbol.Name;
-                generator.RemapToMoreSpecificTypeIfPossible(parameterSymbol.GetAttributes(), ref paramType);
+                generator.RemapToMoreSpecificTypeIfPossible(methodSymbol.Name, paramName, parameterSymbol.GetAttributes(), ref paramType);
 
                 ParameterAttributes parameterAttributes = ParameterAttributes.None;
                 var symbolAttrs = parameterSymbol.GetAttributes();

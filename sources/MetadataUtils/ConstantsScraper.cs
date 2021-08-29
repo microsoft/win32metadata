@@ -32,11 +32,15 @@ namespace MetadataUtils
 
             private static readonly Regex DefineConstantRegex =
                 new Regex(
-                    @"^((_HRESULT_TYPEDEF_|_NDIS_ERROR_TYPEDEF_)\(((?:0x)?[\da-f]+L?)\)|(\(HRESULT\)((?:0x)?[\da-f]+L?))|(-?\d+\.\d+(?:e\+\d+)?f?)|((?:0x[\da-f]+|\-?\d+)(?:UL|L)?)|((\d+)\s*(<<\s*\d+))|(MAKEINTRESOURCE\(\s*(\-?\d+)\s*\))|(\(HWND\)(-?\d+))|([a-z0-9_]+\s*\+\s*(\d+|0x[0-de-f]+))|(\(NTSTATUS\)((?:0x)?[\da-f]+L?)))$", RegexOptions.IgnoreCase);
+                    @"^((_HRESULT_TYPEDEF_|_NDIS_ERROR_TYPEDEF_)\(((?:0x)?[\da-f]+L?)\)|(\(HRESULT\)((?:0x)?[\da-f]+L?))|(-?\d+\.\d+(?:e\+\d+)?f?)|((?:0x[\da-f]+|\-?\d+)(?:UL|L)?)|((\d+)\s*(<<\s*\d+))|(MAKEINTRESOURCE\(\s*(\-?\d+)\s*\))|(\(HWND\)(-?\d+))|([a-z0-9_]+\s*\+\s*(\d+|0x[0-de-f]+))|(\(NTSTATUS\)((?:0x)?[\da-f]+L?))|(\s*\(DWORD\)\s*\(?\s*-1(L|\b)\s*\)?)|(\(BCRYPT_ALG_HANDLE\)\s*((?:0x)?[\da-f]+L?)))$", RegexOptions.IgnoreCase);
 
             private static readonly Regex DefineGuidConstRegex =
                 new Regex(
                     @"^\s*(DEFINE_GUID|DEFINE_DEVPROPKEY|DEFINE_KNOWN_FOLDER)\s*\((.*)");
+
+            private static readonly Regex DefineAviGuidConstRegex =
+                new Regex(
+                    @"^\s*(DEFINE_AVIGUID)\s*\(\s*(.*),\s*(.*),\s*(.*),\s*(.*)\s*\);");
 
             private static readonly Regex DefineEnumFlagsRegex =
                 new Regex(
@@ -141,7 +145,6 @@ namespace MetadataUtils
                 Dictionary<string, string> ret = new Dictionary<string, string>();
                 ret["TRUE"] = "1";
                 ret["FALSE"] = "0";
-                ret["( (DWORD) (-1) )"] = "0xFFFFFFFF";
 
                 return ret;
             }
@@ -471,6 +474,19 @@ namespace MetadataUtils
 
                                 continue;
                             }
+                            
+                            var defineAviGuidMatch = DefineAviGuidConstRegex.Match(line);
+                            if (defineAviGuidMatch.Success)
+                            {
+                                defineGuidKeyword = defineAviGuidMatch.Groups[1].Value;
+                                var guidName = defineAviGuidMatch.Groups[2].Value;
+                                var l = defineAviGuidMatch.Groups[3].Value;
+                                var w1 = defineAviGuidMatch.Groups[4].Value;
+                                var w2 = defineAviGuidMatch.Groups[5].Value;
+                                var defineGuidLine = $"{guidName}, {l}, {w1}, {w2}, 0xC0,0,0,0,0,0,0,0x46)";
+                                this.AddConstantGuid(defineGuidKeyword, currentNamespace, defineGuidLine);
+                                continue;
+                            }
 
                             var defineMatch = DefineRegex.Match(line);
 
@@ -610,6 +626,17 @@ namespace MetadataUtils
                                 {
                                     nativeTypeName = "NTSTATUS";
                                     valueText = match.Groups[18].Value;
+                                }
+                                // (DWORD)-1
+                                else if (match.Groups[20].Success)
+                                {
+                                    valueText = "0xFFFFFFFF";
+                                }
+                                // (BCRYPT_ALG_HANDLE) 0x000001a1
+                                else if (match.Groups[21].Success)
+                                {
+                                    nativeTypeName = "BCRYPT_ALG_HANDLE";
+                                    valueText = match.Groups[22].Value;
                                 }
                                 else
                                 {

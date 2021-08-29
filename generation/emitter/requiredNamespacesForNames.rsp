@@ -294,6 +294,10 @@ KSTOPOLOGY_CONNECTION=Windows.Win32.Graphics.DirectShow
 # region libloaderapi.h
 FindStringOrdinal=Windows.Win32.Globalization
 # endregion libloaderapi.h
+# region lmerr.h (also defined in wincred.h)
+NERR_BASE=Windows.Win32.NetworkManagement.NetManagement
+NERR_PasswordExpired=Windows.Win32.NetworkManagement.NetManagement
+# endregion lmerr.h
 # region lmserver.h
 SetServiceBits=Windows.Win32.System.Services
 # endregion lmserver.h
@@ -1682,6 +1686,7 @@ USN_JOURNAL_DATA_V2=Windows.Win32.Storage.FileSystem
 USN_RANGE_TRACK_OUTPUT=Windows.Win32.Storage.FileSystem
 USN_RECORD_COMMON_HEADER=Windows.Win32.Storage.FileSystem
 USN_RECORD_EXTENT=Windows.Win32.Storage.FileSystem
+USN_RECORD_UNION=Windows.Win32.Storage.FileSystem
 USN_RECORD_V2=Windows.Win32.Storage.FileSystem
 USN_RECORD_V3=Windows.Win32.Storage.FileSystem
 USN_RECORD_V4=Windows.Win32.Storage.FileSystem

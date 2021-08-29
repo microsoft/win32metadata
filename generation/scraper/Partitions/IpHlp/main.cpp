@@ -7,7 +7,12 @@
 #include <IPExport.h>
 
 #include <netioapi.h>
+
+#define PIO_APC_ROUTINE_DEFINED
+#include <winternl.h>
 #include <icmpapi.h>
+#undef PIO_APC_ROUTINE_DEFINED
+
 #include <ip2string.h>
 #include <iphlpapi.h>
 #include <fltdefs.h>
