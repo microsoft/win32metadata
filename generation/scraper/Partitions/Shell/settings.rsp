@@ -44,5 +44,7 @@ _NavigateToPidl=_NavigateToPidl2
 <IncludeRoot>/um/IntShCut.h
 <IncludeRoot>/um/appnotify.h
 <IncludeRoot>/um/propkeydef.h
+--with-attribute
+SIIGBF=Flags
 --namespace
 Windows.Win32.UI.Shell
