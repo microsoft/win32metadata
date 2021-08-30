@@ -65,7 +65,6 @@ AppendMenuW
 ArrangeIconicWindows
 AssignProcessToJobObject
 AssociateContextWithName
-AttachThreadInput
 AuditComputeEffectivePolicyBySid
 AuditComputeEffectivePolicyByToken
 AuditEnumerateCategories
@@ -1597,7 +1596,6 @@ HeapReAlloc
 HeapSetInformation
 HeapSize
 HeapUnlock
-HeapValidate
 HeapWalk
 HideCaret
 HttpAddRequestHeadersA
@@ -1757,9 +1755,6 @@ IsNormalizedString
 IsProcessCritical
 IsProcessInJob
 IsTokenRestricted
-IsValidAcl
-IsValidSecurityDescriptor
-IsValidSid
 IsWow64GuestMachineSupported
 IsWow64Process
 IsWow64Process2
@@ -1838,12 +1833,6 @@ LookupPrivilegeNameA
 LookupPrivilegeNameW
 LookupPrivilegeValueA
 LookupPrivilegeValueW
-LZCopy
-LZInit
-LZOpenFileA
-LZOpenFileW
-LZRead
-LZSeek
 MagSetInputTransform
 MakeAbsoluteSD
 MakeSelfRelativeSD

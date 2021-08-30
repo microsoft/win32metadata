@@ -861,6 +861,7 @@ namespace WinmdUtilsProgram
             ret &= CompareFieldsOnTypes(type1, type2, console);
             ret &= CompareMethodsOnType(type1, type2, console);
             ret &= CompareAttributes(type1.FullName, type1.GetAttributes(), type2.GetAttributes(), console);
+            ret &= CompareTypes(type1.NestedTypes, type2.NestedTypes, console);
 
             return ret;
         }
@@ -931,21 +932,11 @@ namespace WinmdUtilsProgram
             return ret;
         }
 
-        private static Dictionary<string, List<ITypeDefinition>> GetShortNamesToTypeDefinitions(DecompilerTypeSystem winmd)
+        private static Dictionary<string, List<ITypeDefinition>> GetShortNamesToTypeDefinitions(IEnumerable<ITypeDefinition> types)
         {
             Dictionary<string, List<ITypeDefinition>> ret = new Dictionary<string, List<ITypeDefinition>>();
-            foreach (var type1 in winmd.GetTopLevelTypeDefinitions())
+            foreach (var type1 in types)
             {
-                if (type1.FullName == "<Module>")
-                {
-                    continue;
-                }
-
-                if (type1.ParentModule != winmd.MainModule)
-                {
-                    continue;
-                }
-
                 string name = type1.Name;
                 if (!ret.TryGetValue(name, out var list))
                 {
@@ -959,21 +950,11 @@ namespace WinmdUtilsProgram
             return ret;
         }
 
-        private static Dictionary<string, ITypeDefinition> GetNamesToTypeDefinitions(DecompilerTypeSystem winmd)
+        private static Dictionary<string, ITypeDefinition> GetNamesToTypeDefinitions(IEnumerable<ITypeDefinition> types)
         {
             Dictionary<string, ITypeDefinition> ret = new Dictionary<string, ITypeDefinition>();
-            foreach (var type1 in winmd.GetTopLevelTypeDefinitions())
+            foreach (var type1 in types)
             {
-                if (type1.FullName == "<Module>")
-                {
-                    continue;
-                }
-
-                if (type1.ParentModule != winmd.MainModule)
-                {
-                    continue;
-                }
-
                 string name = GetFullTypeName(type1);
                 ret[name] = type1;
             }
@@ -981,29 +962,21 @@ namespace WinmdUtilsProgram
             return ret;
         }
 
-        public static int CompareWinmds(FileInfo first, FileInfo second, string exclusions, IConsole console)
+        private static IEnumerable<ITypeDefinition> GetSelfDefinedWinmdToplevelTypes(DecompilerTypeSystem winmd)
         {
+            return winmd.GetTopLevelTypeDefinitions().Where(
+                type => type.ParentModule == winmd.MainModule && type.FullName != "<Module>");
+        }
+
+        private static bool CompareTypes(IEnumerable<ITypeDefinition> types1, IEnumerable<ITypeDefinition> types2, IConsole console)
+        {
+            Dictionary<string, ITypeDefinition> winmd2NamesToTypes = GetNamesToTypeDefinitions(types2);
+            Dictionary<string, List<ITypeDefinition>> winmd2ShortNamesToTypes = GetShortNamesToTypeDefinitions(types2);
             bool same = true;
 
-            DecompilerSettings settings = new DecompilerSettings() { ThrowOnAssemblyResolveErrors = false };
-            DecompilerTypeSystem winmd1 = CreateTypeSystemFromFile(first.FullName, settings);
-            DecompilerTypeSystem winmd2 = CreateTypeSystemFromFile(second.FullName, settings);
-            Dictionary<string, ITypeDefinition> winmd2NamesToTypes = GetNamesToTypeDefinitions(winmd2);
-            Dictionary<string, List<ITypeDefinition>> winmd2ShortNamesToTypes = GetShortNamesToTypeDefinitions(winmd2);
-
             HashSet<string> visitedNames = new HashSet<string>();
-            foreach (var type1 in winmd1.GetTopLevelTypeDefinitions())
+            foreach (var type1 in types1)
             {
-                if (type1.FullName == "<Module>")
-                {
-                    continue;
-                }
-
-                if (type1.ParentModule != winmd1.MainModule)
-                {
-                    continue;
-                }
-
                 // We'll compare the members of Apis in their own way
                 if (type1.Name == "Apis")
                 {
@@ -1044,19 +1017,9 @@ namespace WinmdUtilsProgram
                 same &= CompareTypes(type1, type2, console);
             }
 
-            Dictionary<string, ITypeDefinition> winmd1NamesToTypes = GetNamesToTypeDefinitions(winmd1);
-            foreach (var type2 in winmd2.GetTopLevelTypeDefinitions())
+            Dictionary<string, ITypeDefinition> winmd1NamesToTypes = GetNamesToTypeDefinitions(types1);
+            foreach (var type2 in types2)
             {
-                if (type2.FullName == "<Module>")
-                {
-                    continue;
-                }
-
-                if (type2.ParentModule != winmd2.MainModule)
-                {
-                    continue;
-                }
-
                 // We'll compare the members of Apis in their own way
                 if (type2.Name == "Apis")
                 {
@@ -1076,6 +1039,22 @@ namespace WinmdUtilsProgram
                     same = false;
                 }
             }
+
+            return same;
+        }
+
+        public static int CompareWinmds(FileInfo first, FileInfo second, string exclusions, IConsole console)
+        {
+            bool same = true;
+
+            DecompilerSettings settings = new DecompilerSettings() { ThrowOnAssemblyResolveErrors = false };
+            DecompilerTypeSystem winmd1 = CreateTypeSystemFromFile(first.FullName, settings);
+            DecompilerTypeSystem winmd2 = CreateTypeSystemFromFile(second.FullName, settings);
+
+            var winmd1Types = GetSelfDefinedWinmdToplevelTypes(winmd1);
+            var winmd2Types = GetSelfDefinedWinmdToplevelTypes(winmd2);
+
+            same &= CompareTypes(winmd1Types, winmd2Types, console);
 
             var apiNameToMembers1 = GetApiMemberNamesToMemberDefinitions(winmd1);
             var apiNameToMembers2 = GetApiMemberNamesToMemberDefinitions(winmd2);

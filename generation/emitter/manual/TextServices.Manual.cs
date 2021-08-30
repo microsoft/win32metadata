@@ -61,7 +61,7 @@ namespace Windows.Win32.UI.TextServices
         public static readonly Guid GUID_TFCAT_TIPCAP_SECUREMODE = new Guid("49d2f9ce-1f5e-11d7-a6d3-00065b84435c");
         public static readonly Guid GUID_TFCAT_TIPCAP_UIELEMENTENABLED = new Guid("49d2f9cf-1f5e-11d7-a6d3-00065b84435c");
         public static readonly Guid GUID_TFCAT_TIPCAP_INPUTMODECOMPARTMENT = new Guid("ccf05dd7-4a87-11d7-a6e2-00065b84435c");
-        public static readonly Guid GUID_TFCAT_TIPCAP_COMLESS = new Guid("64215d9-75bc-11d7-a6ef-00065b84435c");
+        public static readonly Guid GUID_TFCAT_TIPCAP_COMLESS = new Guid("364215d9-75bc-11d7-a6ef-00065b84435c");
         public static readonly Guid GUID_TFCAT_TIPCAP_WOW16 = new Guid("364215da-75bc-11d7-a6ef-00065b84435c");
         public static readonly Guid GUID_TFCAT_TIPCAP_IMMERSIVESUPPORT = new Guid("13a016df-560b-46cd-947a-4c3af1e0e35d");
         public static readonly Guid GUID_TFCAT_TIPCAP_IMMERSIVEONLY = new Guid("3a4259ac-640d-4ad4-89f7-1eb67e7c4ee8");
