@@ -28959,5 +28959,33 @@
         "parameter": "flags"
       }
     ]
+  },
+  {
+    "name": "KBDLLHOOKSTRUCT_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "header": "winuser.h",
+      "filter": "LLKHF_"
+    },
+    "members": [
+      {
+        "name": "LLKHF_EXTENDED",
+        "value": "0x00000001"
+      },
+      {
+        "name": "LLKHF_ALTDOWN",
+        "value": "0x00000020"
+      },
+      {
+        "name": "LLKHF_UP",
+        "value": "0x00000080"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "KBDLLHOOKSTRUCT",
+        "field": "flags"
+      }
+    ]
   }
 ]
