@@ -5389,11 +5389,20 @@
     ]
   },
   {
-    "name": "NAMED_PIPE_HANDLE_STATE",
+    "name": "NAMED_PIPE_MODE",
+    "flags": true,
     "members": [
+      {
+        "name": "PIPE_WAIT",
+        "value": "0"
+      },
       {
         "name": "PIPE_NOWAIT",
         "value": "1"
+      },
+      {
+        "name": "PIPE_READMODE_BYTE",
+        "value": "0"
       },
       {
         "name": "PIPE_READMODE_MESSAGE",
@@ -5408,6 +5417,10 @@
       {
         "method": "GetNamedPipeHandleStateW",
         "parameter": "lpState"
+      },
+      {
+        "method": "SetNamedPipeHandleState",
+        "parameter": "lpMode"
       }
     ]
   },
