@@ -11,6 +11,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <RepoRootPath>$(MSBuildThisFileDirectory)</RepoRootPath>
+    <PackageOutputPath>$(MSBuildThisFileDirectory)bin\Packages\$(Configuration)\NuGet\</PackageOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
