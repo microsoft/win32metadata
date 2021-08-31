@@ -1,9 +1,5 @@
 <Project>
-  <PropertyGroup>
-    <MicrosoftWindowsSdkApiDocsPath>$(MSBuildThisFileDirectory)..\apidocs.msgpack</MicrosoftWindowsSdkApiDocsPath>
-  </PropertyGroup>
   <ItemGroup>
-    <!-- Provide the path to the winmd as input into the analyzer. -->
-    <CompilerVisibleProperty Include="MicrosoftWindowsSdkApiDocsPath" />
+    <ProjectionDocs Include="$(MSBuildThisFileDirectory)..\apidocs.msgpack" />
   </ItemGroup>
 </Project>
