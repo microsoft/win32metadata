@@ -59,7 +59,10 @@ namespace MetadataTasks
         public override bool Execute()
         {
 #if DEBUG
-            System.Diagnostics.Debugger.Launch();
+            if (System.Environment.GetEnvironmentVariable("DEBUG_TASKS") == "1")
+            {
+                System.Diagnostics.Debugger.Launch();
+            }
 #endif
 
             string[] idls = GetIdls();
