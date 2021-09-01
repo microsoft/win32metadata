@@ -21,10 +21,10 @@ jobs:
     lfs: true
 
   - task: UseDotNet@2
-    displayName: Use DotNet 3.x
+    displayName: ⚙ Install .NET SDK
     inputs:
-      packageType: 'sdk'
-      version: '3.x'
+      packageType: sdk
+      useGlobalJson: true
 
   - task: PowerShell@2
     displayName: Set build version
@@ -70,10 +70,10 @@ jobs:
   - checkout: self
     lfs: true
   - task: UseDotNet@2
-    displayName: Use DotNet 3.x
+    displayName: ⚙ Install .NET SDK
     inputs:
-      packageType: 'sdk'
-      version: '3.x'
+      packageType: sdk
+      useGlobalJson: true
 
   - task: PowerShell@2
     displayName: GenerateMetadataSource.ps1 - x86
@@ -97,10 +97,10 @@ jobs:
   - checkout: self
     lfs: true
   - task: UseDotNet@2
-    displayName: Use DotNet 3.x
+    displayName: ⚙ Install .NET SDK
     inputs:
-      packageType: 'sdk'
-      version: '3.x'
+      packageType: sdk
+      useGlobalJson: true
 
   - task: PowerShell@2
     displayName: GenerateMetadataSource.ps1 - arm64
@@ -128,16 +128,10 @@ jobs:
     lfs: true
 
   - task: UseDotNet@2
-    displayName: Use DotNet 3.x
+    displayName: ⚙ Install .NET SDK
     inputs:
-      packageType: 'sdk'
-      version: '3.x'
-
-  - task: UseDotNet@2
-    displayName: Use DotNet 5.x
-    inputs:
-      packageType: 'sdk'
-      version: '5.x'
+      packageType: sdk
+      useGlobalJson: true
 
     # ESRP Authenticode sign package DLLs
   - task: UseDotNet@2
@@ -235,7 +229,7 @@ jobs:
     displayName: 'Authenticode Sign Binaries in MSBuild SDK package'
     inputs:
       ConnectedServiceName: 'Undocked RegFree Signing Connection'
-      FolderPath: '$(Build.SourcesDirectory)\bin\release\netcoreapp3.1'
+      FolderPath: '$(Build.SourcesDirectory)\bin\$(BuildConfiguration)\netcoreapp3.1'
       Pattern: 'ClangSharpSourceToWinmd.dll,ConstantsScraper.dll,MetadataTasks.dll,MetadataUtils.dll,WinmdUtils.dll'
       signConfigType: 'inlineSignParams'
       inlineOperation: |
@@ -362,7 +356,6 @@ jobs:
     inputs:
       packageType: sdk
       useGlobalJson: true
-      workingDirectory: apidocs
 
   # ESRP Authenticode sign package DLLs
   - task: UseDotNet@2

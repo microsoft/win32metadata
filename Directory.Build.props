@@ -11,13 +11,27 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <RepoRootPath>$(MSBuildThisFileDirectory)</RepoRootPath>
+    <BaseIntermediateOutputPath>$(RepoRootPath)obj\$(MSBuildProjectName)\</BaseIntermediateOutputPath>
+    <OutputPath>$(RepoRootPath)bin\$(Configuration)</OutputPath>
     <PackageOutputPath>$(MSBuildThisFileDirectory)bin\Packages\$(Configuration)\NuGet\</PackageOutputPath>
+
+    <TaskBinDir>$(RepoRootPath)bin\$(Configuration)\netstandard2.0\</TaskBinDir>
+
+    <LangVersion>9</LangVersion>
+
+    <Company>Microsoft</Company>
+    <Authors>Microsoft</Authors>
+    <Copyright>© Microsoft Corporation. All rights reserved.</Copyright>
+    <PackageProjectUrl>https://github.com/microsoft/win32metadata</PackageProjectUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageIcon>images/windows.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Nerdbank.GitVersioning" Condition="!Exists('packages.config')">
-      <Version>3.4.194</Version>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
+    <None Include="$(RepoRootPath)images/windows.png" Pack="true" PackagePath="images/" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.231" PrivateAssets="all" />
   </ItemGroup>
 </Project>

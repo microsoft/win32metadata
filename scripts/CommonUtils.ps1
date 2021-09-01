@@ -24,17 +24,17 @@ if (!(Test-Path -Path $binDir))
     New-Item -ItemType Directory -Force -Path $binDir | Out-Null
 }
 
-function Create-Directory([string[]] $Path) 
+function Create-Directory([string[]] $Path)
 {
-    if (!(Test-Path -Path $Path)) 
+    if (!(Test-Path -Path $Path))
     {
         New-Item -Path $Path -Force -ItemType "Directory" | Out-Null
     }
 }
 
-function Remove-Directory([string[]] $Path) 
+function Remove-Directory([string[]] $Path)
 {
-    if ((Test-Path -Path $Path)) 
+    if ((Test-Path -Path $Path))
     {
         Remove-Item $Path -Recurse
     }
@@ -67,7 +67,7 @@ function Install-BuildTools
     Install-DotNetTool -Name ClangSharpPInvokeGenerator -Version 11.0.0-beta3
     Install-DotNetTool -Name nbgv
 
-    & dotnet build "$rootDir\BuildTools\BuildTools.proj" -c Release
+    & dotnet build "$rootDir\buildtools" -c Release
 }
 
 function Replace-Text
@@ -79,20 +79,20 @@ function Replace-Text
     {
         $content = $content.Replace($key, $items[$key]);
     }
-    
+
     Set-Content -path $path -Encoding UTF8 -value $content
 }
 
 function Get-LibMappingsFile
 {
     $libMappingOutputFileName = Join-Path -Path $scraperDir -ChildPath "libMappings.rsp"
-    
+
     return $libMappingOutputFileName
 }
 
 function Get-BuildToolsNugetProps
 {
-    [xml]$buildNugetProps = Get-Content -path "$rootDir\BuildTools\obj\BuildTools.proj.nuget.g.props"
+    [xml]$buildNugetProps = Get-Content -path "$rootDir\obj\BuildTools\BuildTools.proj.nuget.g.props"
     return $buildNugetProps;
 }
 
@@ -144,7 +144,7 @@ function Invoke-RecompileMidlHeaders
         copy-item -Path "$sdkIncludeDir\winrt" -destination "$recompiledIdlHeadersDir" -recurse
 
         Write-Output "Recompiling midl headers with SAL annotations in $recompiledIdlHeadersDir"
-        
+
         $version = $defaultWinSDKNugetVersion
         $sdkParts = $version.Split('.')
         $sdkVersion = "$($sdkParts[0]).$($sdkParts[1]).$($sdkParts[2]).0"
@@ -163,13 +163,13 @@ function Get-VcDirPath
 
     $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
     $installDir = & $vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
-    if ($installDir) 
+    if ($installDir)
     {
         $path = join-path $installDir 'VC\Auxiliary\Build\Microsoft.VCToolsVersion.default.txt'
-        if (test-path $path) 
+        if (test-path $path)
         {
             $version = Get-Content -raw $path
-            if ($version) 
+            if ($version)
             {
                 $version = $version.Trim()
                 $path = join-path $installDir "VC\Tools\MSVC\$version\bin\Host$HostArch\$Arch"
@@ -196,7 +196,7 @@ function Get-OutputWinmdFileName
 
     return $path
 }
-    
+
 function Download-Nupkg
 {
     Param ([string] $name, [string] $version, [string] $outputDir)
@@ -212,7 +212,7 @@ function Get-ExcludedItems
 {
     param ([string[]]$rspFiles)
     [hashtable]$excludedItems = @{}
-    
+
     $inExcluded = $false
     foreach ($rsp in $rspFiles)
     {

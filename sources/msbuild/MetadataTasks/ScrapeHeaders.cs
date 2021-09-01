@@ -103,7 +103,7 @@ namespace MetadataTasks
             this.partitionsDir = Path.Combine(this.scraperDir, "Partitions");
 
             this.emitterDir = Path.Combine(this.generationDir, "emitter");
-            
+
             // Output parameter for the emitter
             this.GeneratedSourceDir = this.emitterDir;
 
@@ -214,7 +214,7 @@ namespace MetadataTasks
 
             HashSet<string> includeDirHash = new HashSet<string>();
             List<string> includeDirs = new List<string>();
-            
+
             // For sal.h, etc.
             includeDirs.Add(this.Win32MetadataScraperAssetsDir);
 
@@ -259,7 +259,7 @@ $@"--file
 --headerFile
 {headerTextFile}
 --include-directory");
-                
+
                 foreach (var include in includeDirs)
                 {
                     rspWriter.WriteLine(include);
@@ -353,7 +353,7 @@ $@"--file
 
         private string[] GetFilesFromMetadata(ITaskItem item, string name)
         {
-            string[] items = item.GetMetadata(name).Split(';', System.StringSplitOptions.RemoveEmptyEntries);
+            string[] items = item.GetMetadata(name).Split(new[] { ';' }, System.StringSplitOptions.RemoveEmptyEntries);
             for (int i = 0; i < items.Length; i++)
             {
                 if (!Path.IsPathRooted(items[i]))

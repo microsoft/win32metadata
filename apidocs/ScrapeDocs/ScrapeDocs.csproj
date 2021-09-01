@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
+    <!-- Use plural TargetFrameworks here because we set the singular as a global property in a referencing project. -->
     <TargetFrameworks>net5.0</TargetFrameworks>
     <IsPackable>false</IsPackable>
   </PropertyGroup>

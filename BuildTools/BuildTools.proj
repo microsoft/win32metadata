@@ -1,8 +1,4 @@
-<Project Sdk="Microsoft.Build.Traversal/3.0.23">
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
-  </PropertyGroup>
-
+<Project Sdk="Microsoft.Build.Traversal">
   <ItemGroup>
     <ProjectReference Include="..\sources\msbuild\MetadataTasks\MetadataTasks.csproj"/>
     <ProjectReference Include="..\sources\ConstantsScraper\ConstantsScraper.csproj"/>
@@ -11,6 +7,7 @@
     <ProjectReference Include="..\sources\Win32MetadataInterop\Win32MetadataInterop.csproj"/>
   </ItemGroup>
 
+  <!-- These are here to support CommonUtils.ps1, which parses the .props file that nuget restore generates based on these. -->
   <ItemGroup>
     <PackageReference Include="Microsoft.Windows.SDK.CPP" Version="10.0.19041.5" GeneratePathProperty="true"/>
     <PackageReference Include="Microsoft.Windows.SDK.CPP.x64" Version="10.0.19041.5" GeneratePathProperty="true"/>
