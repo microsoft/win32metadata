@@ -229,8 +229,50 @@ jobs:
     displayName: 'Authenticode Sign Binaries in MSBuild SDK package'
     inputs:
       ConnectedServiceName: 'Undocked RegFree Signing Connection'
-      FolderPath: '$(Build.SourcesDirectory)\bin\$(BuildConfiguration)\netcoreapp3.1'
-      Pattern: 'ClangSharpSourceToWinmd.dll,ConstantsScraper.dll,MetadataTasks.dll,MetadataUtils.dll,WinmdUtils.dll'
+      FolderPath: '$(Build.SourcesDirectory)\bin\$(BuildConfiguration)\net5.0'
+      Pattern: 'ClangSharpSourceToWinmd.dll,ConstantsScraper.dll,MetadataUtils.dll,WinmdUtils.dll'
+      signConfigType: 'inlineSignParams'
+      inlineOperation: |
+        [
+          {
+            "keyCode": "CP-230012",
+            "operationSetCode": "SigntoolSign",
+            "parameters": [
+              {
+                "parameterName": "OpusName",
+                "parameterValue": "Microsoft"
+              },
+              {
+                "parameterName": "OpusInfo",
+                "parameterValue": "http://www.microsoft.com"
+              },
+              {
+                "parameterName": "PageHash",
+                "parameterValue": "/NPH"
+              },
+              {
+                "parameterName": "FileDigest",
+                "parameterValue": "/fd sha256"
+              },
+              {
+                "parameterName": "TimeStamp",
+                "parameterValue": "/tr \"http://rfc3161.gtm.corp.microsoft.com/TSS/HttpTspServer\" /td sha256"
+              }
+            ],
+            "toolName": "signtool.exe",
+            "toolVersion": "6.2.9304.0"
+          }
+        ]
+      SessionTimeout: '60'
+      MaxConcurrency: '50'
+      MaxRetryAttempts: '2'
+    condition: and(succeeded(), eq(variables['SignFiles'], 'true'))
+  - task: EsrpCodeSigning@1
+    displayName: 'Authenticode Sign Binaries in MSBuild SDK package'
+    inputs:
+      ConnectedServiceName: 'Undocked RegFree Signing Connection'
+      FolderPath: '$(Build.SourcesDirectory)\bin\$(BuildConfiguration)\netstandard2.0'
+      Pattern: 'MetadataTasks.dll'
       signConfigType: 'inlineSignParams'
       inlineOperation: |
         [

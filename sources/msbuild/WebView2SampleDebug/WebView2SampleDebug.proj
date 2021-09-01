@@ -3,7 +3,7 @@
 
   <!-- These are for debugging purposes only. A normal project wouldn't set these -->
   <PropertyGroup>
-    <ToolsBinDir>$(RepoRootPath)bin\$(Configuration)\netcoreapp3.1</ToolsBinDir>
+    <ToolsBinDir>$(RepoRootPath)bin\$(Configuration)\net5.0</ToolsBinDir>
     <LibToolsBinDir>$(RepoRootPath)tools</LibToolsBinDir>
     <ScriptsDir>$(RepoRootPath)scripts</ScriptsDir>
     <Win32MetadataScraperAssetsDir>$(RepoRootPath)generation\scraper</Win32MetadataScraperAssetsDir>

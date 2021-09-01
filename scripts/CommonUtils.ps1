@@ -12,7 +12,7 @@ $sdkApiPath = "$rootDir\ext\sdk-api"
 $sdkGeneratedSourceDir = "$emitterDir\generated"
 $artifactsDir = "$scraperDir\obj"
 $recompiledIdlHeadersDir = "$artifactsDir\RecompiledIdlHeaders"
-$metadataToolsBin = "$binDir\release\netcoreapp3.1"
+$metadataToolsBin = "$binDir\release\net5.0"
 
 if (Test-Path -Path $binDir -PathType leaf)
 {
