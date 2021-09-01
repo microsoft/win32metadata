@@ -24,12 +24,13 @@
 		<AdditionalIncludes>$(CompiledHeadersDir);$(DiaIncRoot)</AdditionalIncludes>
     </PropertyGroup>
 
-  <PropertyGroup>
-    <IncludeBuildOutput>false</IncludeBuildOutput>
-    <NuspecFile>Microsoft.Dia.Win32Metadata.nuspec</NuspecFile>
-    <NuspecProperties></NuspecProperties>
-    <NuspecBasePath>.</NuspecBasePath>
-  </PropertyGroup>
+    <PropertyGroup>
+        <IncludeBuildOutput>false</IncludeBuildOutput>
+        <NuspecFile>Microsoft.Dia.Win32Metadata.nuspec</NuspecFile>
+        <NuspecProperties></NuspecProperties>
+        <NuspecBasePath>.</NuspecBasePath>
+        <TargetFramework>netstandard2.0</TargetFramework>
+    </PropertyGroup>
 
     <ItemGroup>
         <Idls Include="$(DiaIdlRoot)\dia2.idl"/>
