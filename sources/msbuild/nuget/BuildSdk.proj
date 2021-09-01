@@ -5,17 +5,17 @@
 
   <Target Name="StampPropsFile" BeforeTargets="GenerateNuspec" DependsOnTargets="GetBuildVersion">
     <PropertyGroup>
-        <StampPropsScript>
-            $(PowerShell)
+      <StampPropsScript>
+        $(PowerShell)
 
-            $mainNugetVersion = nbgv get-version -v NuGetPackageVersion -p ..\..\..
-            . ..\..\..\scripts\CommonUtils.ps1
+        $mainNugetVersion = nbgv get-version -v NuGetPackageVersion -p ..\..\..
+        . ..\..\..\scripts\CommonUtils.ps1
 
-            copy ..\sdk\sdk.props ..\sdk\sdk.stamped.props
+        copy ..\sdk\sdk.props ..\sdk\sdk.stamped.props
 
-            [hashtable]$textToReplaceTable = @{ "10.0.19041.202-preview" = $mainNugetVersion }
-            Replace-Text "..\sdk\sdk.stamped.props" $textToReplaceTable
-        </StampPropsScript>
+        [hashtable]$textToReplaceTable = @{ "10.0.19041.202-preview" = $mainNugetVersion }
+        Replace-Text "..\sdk\sdk.stamped.props" $textToReplaceTable
+      </StampPropsScript>
     </PropertyGroup>
 
     <Exec Command="$(StampPropsScript)" EchoOff="false" />
