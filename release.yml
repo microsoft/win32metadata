@@ -69,6 +69,6 @@ stages:
             displayName: Push package to nuget.org
             inputs:
               command: push
-              packagesToPush: $(Pipeline.Workspace)/win32metadata/NuGetPackages/*.nupkg
+              packagesToPush: $(Pipeline.Workspace)/win32metadata/NuGetPackages/*.nupkg;!$(Pipeline.Workspace)/win32metadata/NuGetPackages/Microsoft.Dia.Win32Metadata.*.nupkg
               nuGetFeedType: external
               publishFeedCredentials: WindowsSDK NuGet

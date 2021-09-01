@@ -286,6 +286,16 @@ jobs:
       errorActionPreference: 'continue'
       pwsh: true
 
+  - task: PowerShell@2
+    displayName: Pack Dia SDK package
+    inputs:
+      targetType: inline
+      script: |
+        cd $(Build.SourcesDirectory)\sources\msbuild\DiaSdk
+        dotnet pack -o "$(OutputPackagesDir)"
+      errorActionPreference: 'continue'
+      pwsh: true
+
   - task: EsrpCodeSigning@1
     displayName: 'Sign nuget packages'
     inputs:
