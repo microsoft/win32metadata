@@ -229,8 +229,6 @@ jobs:
       MaxRetryAttempts: '2'
     condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
 
-    # There's a problem on microsoft.visualstudio.com that requires the guid instead of NuGetCommand@2
-
   - task: EsrpCodeSigning@1
     displayName: 'Authenticode Sign Binaries in MSBuild SDK package'
     inputs:
@@ -403,7 +401,7 @@ jobs:
       SessionTimeout: 60
       MaxConcurrency: 50
       MaxRetryAttempts: 5
-    condition: and(succeeded(), eq(variables['SignFiles'], 'true'))
+    condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
   - publish: bin/Packages/$(BuildConfiguration)/NuGet
     artifact: ApiDocsNuGetPackages
     displayName: 📢 Publish package
