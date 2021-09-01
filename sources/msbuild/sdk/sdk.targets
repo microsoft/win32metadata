@@ -3,6 +3,7 @@
     <UsingTask TaskName="MetadataTasks.ScanLibs" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
     <UsingTask TaskName="MetadataTasks.ScrapeHeaders" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
     <UsingTask TaskName="MetadataTasks.EmitWinmd" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
+    <UsingTask TaskName="MetadataTasks.CompileIdls" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
 
     <Target Name="ScrapeAndEmit" AfterTargets="Build">
         <PropertyGroup>
@@ -15,6 +16,15 @@
 
         <Exec Command="$(InstallToolsScript)" EchoOff="false" />
 
+        <CompileIdls
+            Idls="@(Idls)"
+            ObjDir="$(ObjDir)"
+            CompiledHeadersDir="$(CompiledHeadersDir)"
+            ScriptsDir="$(ScriptsDir)"
+            SdkIncRoot="$(SdkIncRoot)"
+            SdkBinDir="$(WindowsSDKVersionedBinRoot)"
+            AdditionalIncludes="$(AdditionalIncludes)"
+            MSBuildProjectDirectory="$(MSBuildProjectDirectory)"/>
         <ScanLibs
             Libs="@(ImportLibs)"
             LibToolsBinDir="$(LibToolsBinDir)"
@@ -26,10 +36,13 @@
         <ScrapeHeaders 
             Partitions="@(Partition)"
             Rsps="@(ScraperRsp)"
+            ObjDir="$(ObjDir)"
+            SdkIncRoot="$(SdkIncRoot)"
             Win32MetadataScraperAssetsDir="$(Win32MetadataScraperAssetsDir)"
             Win32MetadataScraperGeneratedAssetsDir="$(Win32MetadataScraperGeneratedAssetsDir)"
             WinSdkRoot="$(TargetPlatformSdkRootOverride)"
             ToolsBinDir="$(ToolsBinDir)"
+            AdditionalIncludes="$(AdditionalIncludes)"
             MSBuildProjectDirectory="$(MSBuildProjectDirectory)">
             <Output 
                 TaskParameter="GeneratedSourceDir"

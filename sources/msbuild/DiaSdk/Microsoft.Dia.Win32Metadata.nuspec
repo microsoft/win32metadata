@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<package>
+  <metadata>
+    <id>Microsoft.Dia.Win32Metadata</id>
+    <version>$version$</version>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <title>Debug Interface Access (DIA) Win32 Metadata</title>
+    <copyright>© Microsoft Corporation. All rights reserved.</copyright>
+    <summary>This packages provides the Win32 API surface of the Debug Interface Access (DIA) as a winmd (Windows metadata) file.</summary>
+    <description>This packages provides the Win32 API surface of the Debug Interface Access (DIA) as a winmd (Windows metadata) file. It is intended to be used as the basis for generating language-specific projections. It is not loadable as a CLR assembly.</description>
+    <releaseNotes>https://github.com/microsoft/win32metadata/releases/tag/v$version$</releaseNotes>
+    <projectUrl>https://github.com/microsoft/win32metadata</projectUrl>
+    <tags>Win32 Metadata DIA</tags>
+    <license type="expression">MIT</license>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <icon>images\windows.png</icon>
+    <repository type="git" url="https://github.com/microsoft/win32metadata.git" />
+  </metadata>
+
+  <files>
+      <file src="..\..\..\images\windows.png" target="images"/>
+
+      <file src="bin\Microsoft.Dia.winmd" target=""/>
+      <file src="buildTransitive\**" target="buildTransitive\"/>
+      <file src="buildTransitive\**" target="build\"/>
+  </files>
+</package>

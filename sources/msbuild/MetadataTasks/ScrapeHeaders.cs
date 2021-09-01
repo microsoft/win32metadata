@@ -9,8 +9,6 @@ namespace MetadataTasks
 {
     public class ScrapeHeaders : Task
     {
-        private string winSdkIncludeRoot;
-        private string objDir;
         private string generatedDir;
         private string generationDir;
         private string scraperDir;
@@ -60,6 +58,23 @@ namespace MetadataTasks
             get; set;
         }
 
+        [Required]
+        public string ObjDir
+        {
+            get; set;
+        }
+
+        [Required]
+        public string SdkIncRoot
+        {
+            get; set;
+        }
+
+        public string AdditionalIncludes
+        {
+            get; set;
+        }
+
         [Output]
         public string GeneratedSourceDir { get; set; }
 
@@ -83,10 +98,7 @@ namespace MetadataTasks
 
         private void InitDirs()
         {
-            this.objDir = Path.Combine(this.MSBuildProjectDirectory, "obj");
-            Directory.CreateDirectory(this.objDir);
-
-            this.generationDir = Path.Combine(this.objDir, "generation");
+            this.generationDir = Path.Combine(this.ObjDir, "generation");
             this.scraperDir = Path.Combine(this.generationDir, "scraper");
             this.partitionsDir = Path.Combine(this.scraperDir, "Partitions");
 
@@ -97,29 +109,8 @@ namespace MetadataTasks
 
             this.generatedDir = Path.Combine(this.emitterDir, "generated");
 
-            if (!Directory.Exists(this.partitionsDir))
-            {
-                Directory.CreateDirectory(this.partitionsDir);
-            }
-
-            if (!Directory.Exists(this.generatedDir))
-            {
-                Directory.CreateDirectory(this.generatedDir);
-            }
-        }
-
-        private string WinSDKIncludeRoot
-        {
-            get
-            {
-                if (this.winSdkIncludeRoot == null)
-                {
-                    string baseDir = Path.Combine(this.WinSdkRoot, "include");
-                    this.winSdkIncludeRoot = Directory.GetDirectories(baseDir)[0];
-                }
-
-                return this.winSdkIncludeRoot;
-            }
+            Directory.CreateDirectory(this.partitionsDir);
+            Directory.CreateDirectory(this.generatedDir);
         }
 
         private void AddWin32GeneratedRsp(StringBuilder args, string name)
@@ -150,7 +141,7 @@ namespace MetadataTasks
 
             string constantsScraperDll = Path.Combine(this.ToolsBinDir, "ConstantsScraper.dll");
             string constantsHeaderTxt = Path.Combine(this.Win32MetadataScraperAssetsDir, "ConstantsHeader.txt");
-            var args = new StringBuilder($"{constantsScraperDll} --repoRoot {this.objDir} --arch x64 --headerTextFile {constantsHeaderTxt}");
+            var args = new StringBuilder($"{constantsScraperDll} --repoRoot {this.ObjDir} --arch x64 --headerTextFile {constantsHeaderTxt}");
             int exitCode = TaskUtils.ExecuteCmd("dotnet", args.ToString(), out var output, this.Log);
             if (exitCode < 0)
             {
@@ -161,6 +152,28 @@ namespace MetadataTasks
             return true;
         }
 
+        private void CopyManualItems(ITaskItem partitionItem, string partitionName)
+        {
+            string[] manualFiles = GetManualFiles(partitionItem);
+
+            if (manualFiles != null && manualFiles.Length > 0)
+            {
+                Log.LogMessage($"Copying manual files for partition {partitionItem}...");
+
+                string manualDestDir = Path.Combine(this.generatedDir, "manual", partitionName);
+                if (!Directory.Exists(manualDestDir))
+                {
+                    Directory.CreateDirectory(manualDestDir);
+                }
+
+                foreach (var manualFile in manualFiles)
+                {
+                    string destFile = Path.Combine(manualDestDir, Path.GetFileName(manualFile));
+                    File.Copy(manualFile, destFile, true);
+                }
+            }
+        }
+
         private bool ProcessPartitionItem(ITaskItem partitionItem)
         {
             // TODO: Do we want to do this for all architectures?
@@ -169,16 +182,16 @@ namespace MetadataTasks
             string[] traverseFiles = GetTraverseFiles(partitionItem);
 
             string ns = partitionItem.GetMetadata("Namespace");
-            string name = partitionItem.GetMetadata("Name");
+            string partitionName = partitionItem.GetMetadata("Name");
 
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(partitionName))
             {
-                name = ns.Split('.').Last();
+                partitionName = ns.Split('.').Last();
             }
 
-            Log.LogMessage($"Scanning partition {name}...");
+            Log.LogMessage($"Scanning partition {partitionName}...");
 
-            string partitionDir = Path.Combine(this.partitionsDir, name);
+            string partitionDir = Path.Combine(this.partitionsDir, partitionName);
             if (!Directory.Exists(partitionDir))
             {
                 Directory.CreateDirectory(partitionDir);
@@ -193,7 +206,7 @@ namespace MetadataTasks
                 Directory.CreateDirectory(currentGeneratedDir);
             }
 
-            string outputFile = Path.Combine(currentGeneratedDir, $"{name}.cs");
+            string outputFile = Path.Combine(currentGeneratedDir, $"{partitionName}.cs");
             if (File.Exists(outputFile))
             {
                 File.Delete(outputFile);
@@ -205,6 +218,19 @@ namespace MetadataTasks
             // For sal.h, etc.
             includeDirs.Add(this.Win32MetadataScraperAssetsDir);
 
+            if (this.AdditionalIncludes != null)
+            {
+                string[] dirs = this.AdditionalIncludes.Split(';');
+                foreach (var dir in dirs)
+                {
+                    if (!includeDirHash.Contains(dir))
+                    {
+                        includeDirHash.Add(dir);
+                        includeDirs.Add(dir);
+                    }
+                }
+            }
+
             foreach (var traverseFile in traverseFiles)
             {
                 string dir = Path.GetDirectoryName(traverseFile);
@@ -215,9 +241,9 @@ namespace MetadataTasks
                 }
             }
 
-            includeDirs.Add($"{this.WinSDKIncludeRoot}/shared");
-            includeDirs.Add($"{this.WinSDKIncludeRoot}/um");
-            includeDirs.Add($"{this.WinSDKIncludeRoot}/winrt");
+            includeDirs.Add($"{this.SdkIncRoot}/shared");
+            includeDirs.Add($"{this.SdkIncRoot}/um");
+            includeDirs.Add($"{this.SdkIncRoot}/winrt");
 
             string headerTextFile = Path.Combine(this.Win32MetadataScraperAssetsDir, "header.txt");
 
@@ -255,6 +281,16 @@ $@"--file
                         rspWriter.WriteLine(exclude);
                     }
                 }
+
+                var remaps = this.GetRemaps(partitionItem);
+                if (remaps.Any())
+                {
+                    rspWriter.WriteLine("--remap");
+                    foreach (var remap in remaps)
+                    {
+                        rspWriter.WriteLine(remap);
+                    }
+                }
             }
 
             string currentScraperOutputDir = Path.Combine(this.scraperDir, $"obj\\{arch}");
@@ -263,7 +299,7 @@ $@"--file
                 Directory.CreateDirectory(currentScraperOutputDir);
             }
 
-            string scrapeToolOutput = Path.Combine(currentScraperOutputDir, $"{name}.generation.output.txt");
+            string scrapeToolOutput = Path.Combine(currentScraperOutputDir, $"{partitionName}.generation.output.txt");
             StringBuilder args = new StringBuilder($"\"@{settingsRsp}\"");
             AddWin32Rsp(args, "baseRemap.rsp");
             AddWin32Rsp(args, "baseSettings.64.rsp");
@@ -300,6 +336,8 @@ $@"--file
                 // TODO: Output errors
             }
 
+            CopyManualItems(partitionItem, partitionName);
+
             return true;
         }
 
@@ -308,18 +346,33 @@ $@"--file
             return item.GetMetadata("Exclude").Split(';');
         }
 
-        private string[] GetTraverseFiles(ITaskItem item)
+        private string[] GetRemaps(ITaskItem item)
         {
-            string[] traverseItems = item.GetMetadata("TraverseFiles").Split(';');
-            for (int i = 0; i < traverseItems.Length; i++)
+            return item.GetMetadata("Remap").Split(';');
+        }
+
+        private string[] GetFilesFromMetadata(ITaskItem item, string name)
+        {
+            string[] items = item.GetMetadata(name).Split(';', System.StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < items.Length; i++)
             {
-                if (!Path.IsPathRooted(traverseItems[i]))
+                if (!Path.IsPathRooted(items[i]))
                 {
-                    traverseItems[i] = Path.Combine(this.MSBuildProjectDirectory, traverseItems[i]);
+                    items[i] = Path.Combine(this.MSBuildProjectDirectory, items[i]);
                 }
             }
 
-            return traverseItems;
+            return items;
+        }
+
+        private string[] GetTraverseFiles(ITaskItem item)
+        {
+            return GetFilesFromMetadata(item, "TraverseFiles");
+        }
+
+        private string[] GetManualFiles(ITaskItem item)
+        {
+            return GetFilesFromMetadata(item, "ManualFiles");
         }
     }
 }

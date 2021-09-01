@@ -35,8 +35,6 @@ namespace MetadataTasks
 
         public override bool Execute()
         {
-            const string arch = "x64";
-
 #if DEBUG
             System.Diagnostics.Debugger.Launch();
 #endif
@@ -47,23 +45,25 @@ namespace MetadataTasks
             string dumpBinPath = Path.Combine(this.LibToolsBinDir, "dumpbin.exe");
             StringBuilder libLines = new StringBuilder();
             Regex libRegex = new Regex(@"DLL name     : (\S+)\s+Symbol name  : (\S+)");
+            HashSet<string> functionNames = new HashSet<string>(System.StringComparer.OrdinalIgnoreCase);
             foreach (var lib in libFiles)
             {
-                if (lib.Contains($"\\{arch}\\"))
+                string dbinArgs = $"/headers \"{lib}\"";
+                TaskUtils.ExecuteCmd(dumpBinPath, dbinArgs, out var dbinOutput, this.Log);
+                foreach (Match match in libRegex.Matches(dbinOutput))
                 {
-                    string dbinArgs = $"/headers \"{lib}\"";
-                    TaskUtils.ExecuteCmd(dumpBinPath, dbinArgs, out var dbinOutput, this.Log);
-                    foreach (Match match in libRegex.Matches(dbinOutput))
-                    {
-                        var dllName = Path.GetFileNameWithoutExtension(match.Groups[1].Value);
-                        var functionName = match.Groups[2].Value;
+                    var dllName = Path.GetFileNameWithoutExtension(match.Groups[1].Value);
+                    var functionName = match.Groups[2].Value;
 
+                    if (!functionNames.Contains(functionName))
+                    {
                         if (libLines.Length == 0)
                         {
                             libLines.AppendLine("--with-librarypath");
                         }
 
                         libLines.AppendLine($"{functionName}={dllName}");
+                        functionNames.Add(functionName);
                     }
                 }
             }
