@@ -247,7 +247,7 @@ namespace WinmdUtilsProgram
 
                 if (type.Kind == TypeKind.Enum || (type.Kind == TypeKind.Class && type.Name == "Apis"))
                 {
-                    foreach (var field in type.GetFields())
+                    foreach (var field in type.GetFields(options: GetMemberOptions.IgnoreInheritedMembers))
                     {
                         if (field.Name == "value__")
                         {
