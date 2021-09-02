@@ -90,10 +90,15 @@ namespace MetadataTasks
             }
 
             int exitCode = TaskUtils.ExecuteCmd("dotnet", args.ToString(), out var output, this.Log);
-            if (exitCode < 0)
+            if (exitCode != 0)
             {
-                Log.LogError($"ClangSharpSourceToWinmd.dll failed: {output}");
+                Log.LogError($"ClangSharpSourceToWinmd failed: {output}");
                 return false;
+            }
+
+            if (!File.Exists(outputWinmd))
+            {
+                Log.LogError($"{outputWinmd} doesn't exist. ClangSharpSourceToWinmd output: {output}");
             }
 
             Log.LogMessage(MessageImportance.High, $"Winmd emitted at: {outputWinmd}");
