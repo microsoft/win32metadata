@@ -224,9 +224,7 @@ jobs:
       SessionTimeout: '60'
       MaxConcurrency: '50'
       MaxRetryAttempts: '2'
-    condition: and(succeeded(), eq(variables['SignFiles'], 'true'))
-
-    # There's a problem on microsoft.visualstudio.com that requires the guid instead of NuGetCommand@2
+    condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
 
   - task: EsrpCodeSigning@1
     displayName: 'Authenticode Sign Binaries in MSBuild SDK package'
@@ -311,7 +309,7 @@ jobs:
       SessionTimeout: '60'
       MaxConcurrency: '50'
       MaxRetryAttempts: '2'
-    condition: and(succeeded(), eq(variables['SignFiles'], 'true'))
+    condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
 
   - task: PowerShell@2
     displayName: Pack metadata package
@@ -370,7 +368,7 @@ jobs:
       SessionTimeout: '60'
       MaxConcurrency: '50'
       MaxRetryAttempts: '2'
-    condition: and(succeeded(), eq(variables['SignFiles'], 'true'))
+    condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
 
   - task: PublishPipelineArtifact@1
     displayName: 'Publish NuGet packages to pipeline artifacts'
@@ -387,6 +385,7 @@ jobs:
       packagesToPush: '$(OutputPackagesDir)/**/*.nupkg;!$(OutputPackagesDir)/**/*.symbols.nupkg'
       publishVstsFeed: 'c1408dcb-1833-4ae4-9af5-1a891a12cc3c'
       allowPackageConflicts: true
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
 
 - job: build_docs
   displayName: Build API docs
@@ -440,7 +439,7 @@ jobs:
       SessionTimeout: 60
       MaxConcurrency: 50
       MaxRetryAttempts: 5
-    condition: and(succeeded(), eq(variables['SignFiles'], 'true'))
+    condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
   - publish: bin/Packages/$(BuildConfiguration)/NuGet
     artifact: ApiDocsNuGetPackages
     displayName: 📢 Publish package
