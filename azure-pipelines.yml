@@ -227,7 +227,7 @@ jobs:
     condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
 
   - task: EsrpCodeSigning@1
-    displayName: 'Authenticode Sign Binaries in MSBuild SDK package'
+    displayName: Authenticode sign net5.0 binaries in MSBuild SDK package
     inputs:
       ConnectedServiceName: 'Undocked RegFree Signing Connection'
       FolderPath: '$(Build.SourcesDirectory)\bin\$(BuildConfiguration)\net5.0'
@@ -267,9 +267,9 @@ jobs:
       SessionTimeout: '60'
       MaxConcurrency: '50'
       MaxRetryAttempts: '2'
-    condition: and(succeeded(), eq(variables['SignFiles'], 'true'))
+    condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
   - task: EsrpCodeSigning@1
-    displayName: 'Authenticode Sign Binaries in MSBuild SDK package'
+    displayName: Authenticode sign netstandard2.0 binaries in MSBuild SDK package
     inputs:
       ConnectedServiceName: 'Undocked RegFree Signing Connection'
       FolderPath: '$(Build.SourcesDirectory)\bin\$(BuildConfiguration)\netstandard2.0'
