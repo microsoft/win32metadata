@@ -140,6 +140,9 @@ jobs:
       packageType: runtime
       version: 2.1.x
 
+  - script: dotnet --info
+    displayName: Display .NET SDK/runtime info
+
   - task: DownloadPipelineArtifact@2
     displayName: Download x64 scraper obj assets
     inputs:
