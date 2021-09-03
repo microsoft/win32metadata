@@ -6,7 +6,7 @@ using Microsoft.Build.Utilities;
 
 namespace MetadataTasks
 {
-    public class EmitWinmd : Task
+    public class EmitWinmd : ToolTask
     {
         [Required]
         public string ToolsBinDir
@@ -56,55 +56,61 @@ namespace MetadataTasks
             get; set;
         }
 
-        public override bool Execute()
-        {
-            Log.LogMessage($"Emitting winmd...");
+        private string outputWinmdFullPath;
 
-            string dllPath = Path.Combine(this.ToolsBinDir, "ClangSharpSourceToWinmd.dll");
+        protected override string ToolName => "dotnet";
+
+        protected override string GenerateFullPathToTool() => this.ToolExe;
+
+        protected override string GenerateCommandLineCommands()
+        {
+            var builder = new CommandLineBuilder();
+            builder.AppendFileNameIfNotNull(Path.Combine(this.ToolsBinDir, "ClangSharpSourceToWinmd.dll"));
+
             string interopPath = Path.Combine(this.Win32WinmdBinDir, "Windows.Win32.Interop.dll");
             string win32WinmdPath = Path.Combine(this.Win32WinmdBinDir, "Windows.Win32.winmd");
 
-            string outputWinmd = this.OutputWinmd;
-            if (!Path.IsPathRooted(outputWinmd))
+            this.outputWinmdFullPath = this.OutputWinmd;
+            if (!Path.IsPathRooted(this.outputWinmdFullPath))
             {
-                outputWinmd = Path.Combine(this.MSBuildProjectDirectory, outputWinmd);
+                this.outputWinmdFullPath = Path.Combine(this.MSBuildProjectDirectory, this.outputWinmdFullPath);
             }
 
-            var args = new StringBuilder($"{dllPath} --sourceDir \"{this.EmitterSourceDir}\" --arch x64 --interopFileName \"{interopPath}\" --ref \"{win32WinmdPath}\" --version {this.WinmdVersion} --outputFileName \"{outputWinmd}\"");
+            builder.AppendSwitchIfNotNull("--sourceDir ", this.EmitterSourceDir);
+            builder.AppendSwitchIfNotNull("--arch ", "x64");
+            builder.AppendSwitchIfNotNull("--interopFileName ", interopPath);
+            builder.AppendSwitchIfNotNull("--ref ", win32WinmdPath);
+            builder.AppendSwitchIfNotNull("--version ", this.WinmdVersion);
+            builder.AppendSwitchIfNotNull("--outputFileName ", this.outputWinmdFullPath);
 
-            var staticLibs = GetStaticLibs();
+            return builder.ToString();
+        }
 
+        protected override string GenerateResponseFileCommands()
+        {
+            var builder = new CommandLineBuilder();
+            var staticLibs = this.GetStaticLibs();
             if (staticLibs.Length > 0)
             {
-                string rspFile = Path.Combine(this.EmitterSourceDir, @"staticLibs.generated.rsp");
-                var rspArgs = new StringBuilder();
-
-                rspArgs.AppendLine(@"--staticLibs");
-                foreach (string staticLib in staticLibs)
-                {
-                    rspArgs.AppendLine(staticLib);
-                }
-
-                File.WriteAllText(rspFile, rspArgs.ToString());
-                args.AppendFormat($" @{rspFile}");
+                builder.AppendSwitchIfNotNull("--staticLibs ", staticLibs," ");
             }
 
-            int exitCode = TaskUtils.ExecuteCmd("dotnet", args.ToString(), out var output, this.Log);
+            return builder.ToString();
+        }
+
+        protected override int ExecuteTool(string pathToTool, string responseFileCommands, string commandLineCommands)
+        {
+            this.Log.LogMessage($"Emitting winmd...");
+            int exitCode = base.ExecuteTool(pathToTool, responseFileCommands, commandLineCommands);
             if (exitCode != 0)
             {
-                Log.LogError($"ClangSharpSourceToWinmd failed: {output}");
-                return false;
+                this.Log.LogError($"ClangSharpSourceToWinmd.dll failed.");
+                return exitCode;
             }
 
-            if (!File.Exists(outputWinmd))
-            {
-                Log.LogError($"{outputWinmd} doesn't exist. ClangSharpSourceToWinmd output: {output}");
-            }
-
-            Log.LogMessage(MessageImportance.High, $"Winmd emitted at: {outputWinmd}");
-            this.FileWrites = new ITaskItem[] { new TaskItem(outputWinmd) };
-
-            return true;
+            this.Log.LogMessage(MessageImportance.High, $"Winmd emitted at: {this.outputWinmdFullPath}");
+            this.FileWrites = new ITaskItem[] { new TaskItem(this.outputWinmdFullPath) };
+            return exitCode;
         }
 
         private string[] GetStaticLibs()
