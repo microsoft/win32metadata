@@ -40,8 +40,8 @@ namespace ClangSharpSourceToWinmd
         public static bool IsCrossArchTree(SyntaxTree tree)
         {
             string treeFileName = Path.GetFileName(tree.FilePath).ToLowerInvariant();
-            if (treeFileName.StartsWith("autotypes.") || 
-                treeFileName.EndsWith(".enums.cs") || 
+            if (treeFileName.StartsWith("autotypes.") ||
+                treeFileName.EndsWith(".enums.cs") ||
                 treeFileName.EndsWith(".constants.cs") ||
                 treeFileName.EndsWith(".manual.cs"))
             {
@@ -114,24 +114,21 @@ namespace ClangSharpSourceToWinmd
             string name, SyntaxList<AttributeListSyntax> attributeLists, TypeSyntax returnType, ParameterListSyntax parameterList)
         {
             StringBuilder ret = new StringBuilder();
-            if (attributeLists != null)
+            foreach (var list in attributeLists)
             {
-                foreach (var list in attributeLists)
+                if (list.Target != null && list.Target.Identifier.Text == "return")
                 {
-                    if (list.Target != null && list.Target.Identifier.Text == "return")
+                    continue;
+                }
+
+                foreach (var attr in list.Attributes)
+                {
+                    if (attr.ToString().StartsWith("return:"))
                     {
                         continue;
                     }
 
-                    foreach (var attr in list.Attributes)
-                    {
-                        if (attr.ToString().StartsWith("return:"))
-                        {
-                            continue;
-                        }
-
-                        ret.Append($"[{attr}]");
-                    }
+                    ret.Append($"[{attr}]");
                 }
             }
 
@@ -194,11 +191,7 @@ namespace ClangSharpSourceToWinmd
             if (node is StructDeclarationSyntax s)
             {
                 StringBuilder ret = new StringBuilder();
-                if (s.AttributeLists != null)
-                {
-                    ret.Append(s.AttributeLists.ToString());
-                }
-
+                ret.Append(s.AttributeLists.ToString());
                 ret.Append(s.Identifier.ValueText);
                 ret.Append(':');
 
@@ -275,7 +268,7 @@ namespace ClangSharpSourceToWinmd
             private CrossArchSyntaxMap map;
             private Architecture currentArch;
 
-            public CrossArchSyntaxWalker(CrossArchSyntaxMap map) 
+            public CrossArchSyntaxWalker(CrossArchSyntaxMap map)
             {
                 this.map = map;
             }
@@ -301,7 +294,7 @@ namespace ClangSharpSourceToWinmd
                 {
                     this.map.AddNode(this.currentArch, node);
                 }
-                
+
                 base.VisitStructDeclaration(node);
             }
 
