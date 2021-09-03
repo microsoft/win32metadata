@@ -13,7 +13,7 @@
   <Import Project="..\sdk\sdk.props" />
 
   <PropertyGroup>
-    <OutputWinmd>bin\Microsoft.Dia.winmd</OutputWinmd>
+    <OutputWinmd>$(RepoRootPath)bin\Microsoft.Dia.winmd</OutputWinmd>
     <WinmdVersion>1.0.0.0</WinmdVersion>
     <GenerateAssemblyVersionInfo>false</GenerateAssemblyVersionInfo>
     <DiaSdkRoot>$(VSINSTALLDIR)\DIA SDK</DiaSdkRoot>
@@ -49,11 +49,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MetadataTasks\MetadataTasks.csproj" />
+    <ProjectReference Include="..\..\ClangSharpSourceToWinmd\ClangSharpSourceToWinmd.csproj" />
   </ItemGroup>
 
   <Target Name="SetNuSpecProperties" BeforeTargets="GenerateNuspec" DependsOnTargets="GetBuildVersion">
     <PropertyGroup>
-      <NuspecProperties>$(NuspecProperties);Version=$(Version)</NuspecProperties>
+      <NuspecProperties>$(NuspecProperties);OutputWinmd=$(OutputWinmd);Version=$(Version)</NuspecProperties>
     </PropertyGroup>
   </Target>
 
