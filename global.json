@@ -1,0 +1,12 @@
+{
+  "sdk": {
+    "version": "5.0.400",
+    "allowPrerelease": false,
+    "rollForward": "feature"
+  },
+  "msbuild-sdks": {
+    "Microsoft.Build.NoTargets": "3.0.4",
+    "Microsoft.Build.Traversal": "3.0.23",
+    "Microsoft.Windows.WinmdGenerator": "0.2.118-preview"
+  }
+}

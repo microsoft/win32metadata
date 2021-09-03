@@ -1,43 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project>
+<Project Sdk="Microsoft.Build.NoTargets">
 
-    <!-- These are for debugging purposes only. A normal project wouldn't set these -->
-    <PropertyGroup>
-        <TaskBinDir>$(MSBuildThisFileDirectory)..\..\..\bin\release\netcoreapp3.1</TaskBinDir>
-        <ToolsBinDir>$(MSBuildThisFileDirectory)..\..\..\bin\release\netcoreapp3.1</ToolsBinDir>
-        <LibToolsBinDir>$(MSBuildThisFileDirectory)..\..\..\tools</LibToolsBinDir>
-        <ScriptsDir>$(MSBuildThisFileDirectory)..\..\..\scripts</ScriptsDir>
-        <Win32MetadataScraperAssetsDir>$(MSBuildThisFileDirectory)..\..\..\generation\scraper</Win32MetadataScraperAssetsDir>
-        <Win32MetadataScraperGeneratedAssetsDir>$(MSBuildThisFileDirectory)..\..\..\generation\scraper\obj\x64</Win32MetadataScraperGeneratedAssetsDir>
-		<Win32WinmdBinDir>$(MSBuildThisFileDirectory)..\..\..\bin</Win32WinmdBinDir>
-    </PropertyGroup>
+  <!-- These are for debugging purposes only. A normal project wouldn't set these -->
+  <PropertyGroup>
+    <ToolsBinDir>$(RepoRootPath)bin\$(Configuration)\net5.0</ToolsBinDir>
+    <LibToolsBinDir>$(RepoRootPath)tools</LibToolsBinDir>
+    <ScriptsDir>$(RepoRootPath)scripts</ScriptsDir>
+    <Win32MetadataScraperAssetsDir>$(RepoRootPath)generation\scraper</Win32MetadataScraperAssetsDir>
+    <Win32MetadataScraperGeneratedAssetsDir>$(RepoRootPath)generation\scraper\obj\x64</Win32MetadataScraperGeneratedAssetsDir>
+    <Win32WinmdBinDir>$(RepoRootPath)bin</Win32WinmdBinDir>
+  </PropertyGroup>
 
-    <Import Project="..\sdk\sdk.props" />
+  <Import Project="..\sdk\sdk.props" />
 
-    <PropertyGroup>
-        <OutputWinmd>bin\Microsoft.Web.WebView2.winmd</OutputWinmd>
-        <WinmdVersion>1.0.864.35</WinmdVersion>
-        <GenerateAssemblyVersionInfo>false</GenerateAssemblyVersionInfo>
-    </PropertyGroup>
+  <PropertyGroup>
+    <OutputWinmd>bin\Microsoft.Web.WebView2.winmd</OutputWinmd>
+    <WinmdVersion>1.0.864.35</WinmdVersion>
+    <GenerateAssemblyVersionInfo>false</GenerateAssemblyVersionInfo>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <WebView2Headers Include="$(PkgMicrosoft_Web_WebView2)\**\*.h"/>
-        <WebView2Libs Include="$(PkgMicrosoft_Web_WebView2)\**\*.dll.lib"/>
+  <ItemGroup>
+    <WebView2Headers Include="$(PkgMicrosoft_Web_WebView2)\**\*.h"/>
+    <WebView2Libs Include="$(PkgMicrosoft_Web_WebView2)\**\*.dll.lib"/>
 
-        <ImportLibs Include="@(WebView2Libs)">
-            <StaticLibs>WebView2Loader=WebView2LoaderStatic</StaticLibs>
-        </ImportLibs>
+    <ImportLibs Include="@(WebView2Libs)">
+      <StaticLibs>WebView2Loader=WebView2LoaderStatic</StaticLibs>
+    </ImportLibs>
 
-        <Partition Include="main.cpp">
-            <TraverseFiles>@(WebView2Headers)</TraverseFiles>
-            <Namespace>Microsoft.Web.WebView2.Win32</Namespace>
-            <Exclude>CoreWebView2EnvironmentOptions</Exclude>
-        </Partition>
-    </ItemGroup>
+    <Partition Include="main.cpp">
+      <TraverseFiles>@(WebView2Headers)</TraverseFiles>
+      <Namespace>Microsoft.Web.WebView2.Win32</Namespace>
+      <Exclude>CoreWebView2EnvironmentOptions</Exclude>
+    </Partition>
+  </ItemGroup>
 
-    <ItemGroup>
-        <PackageReference Include="Microsoft.Web.WebView2" Version="$(WinmdVersion)" GeneratePathProperty="true"/>
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Web.WebView2" Version="$(WinmdVersion)" GeneratePathProperty="true"/>
+  </ItemGroup>
 
-    <Import Project="..\sdk\sdk.targets" />
+  <Import Project="..\sdk\sdk.targets" />
 </Project>

@@ -26,8 +26,7 @@ $assemblyVersion = nbgv get-version -v AssemblyVersion
 $constantsScraperPathBin = "$metadataToolsBin\ConstantsScraper.dll"
 $clangSharpSourceToWinmdBin = "$metadataToolsBin\ClangSharpSourceToWinmd.dll"
 
-$metadataInteropPath = "$sourcesDir\Win32MetadataInterop"
-$metadataInteropBin = "$metadataInteropPath\bin\Release\netstandard2.1\Windows.Win32.Interop.dll"
+$metadataInteropBin = "$PSScriptRoot\..\bin\Release\netstandard2.1\Windows.Win32.Interop.dll"
 
 Copy-Item $metadataInteropBin $binDir
 

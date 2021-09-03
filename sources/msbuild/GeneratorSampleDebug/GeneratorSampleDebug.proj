@@ -1,40 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project>
-    
-    <!-- These are for debugging purposes only. A normal project wouldn't set these -->
-    <PropertyGroup>
-        <TaskBinDir>$(MSBuildThisFileDirectory)..\..\..\bin\release\netcoreapp3.1</TaskBinDir>
-        <ToolsBinDir>$(MSBuildThisFileDirectory)..\..\..\bin\release\netcoreapp3.1</ToolsBinDir>
-        <LibToolsBinDir>$(MSBuildThisFileDirectory)..\..\..\tools</LibToolsBinDir>
-        <ScriptsDir>$(MSBuildThisFileDirectory)..\..\..\scripts</ScriptsDir>
-        <Win32MetadataScraperAssetsDir>$(MSBuildThisFileDirectory)..\..\..\generation\scraper</Win32MetadataScraperAssetsDir>
-        <Win32MetadataScraperGeneratedAssetsDir>$(MSBuildThisFileDirectory)..\..\..\generation\scraper\obj\x64</Win32MetadataScraperGeneratedAssetsDir>
-		<Win32WinmdBinDir>$(MSBuildThisFileDirectory)..\..\..\bin</Win32WinmdBinDir>
-    </PropertyGroup>
+<Project Sdk="Microsoft.Build.NoTargets">
 
-    <Import Project="..\sdk\sdk.props" />
+  <!-- These are for debugging purposes only. A normal project wouldn't set these -->
+  <PropertyGroup>
+    <ToolsBinDir>$(RepoRootPath)bin\$(Configuration)\net5.0</ToolsBinDir>
+    <LibToolsBinDir>$(RepoRootPath)tools</LibToolsBinDir>
+    <ScriptsDir>$(RepoRootPath)scripts</ScriptsDir>
+    <Win32MetadataScraperAssetsDir>$(RepoRootPath)generation\scraper</Win32MetadataScraperAssetsDir>
+    <Win32MetadataScraperGeneratedAssetsDir>$(RepoRootPath)generation\scraper\obj\x64</Win32MetadataScraperGeneratedAssetsDir>
+    <Win32WinmdBinDir>$(RepoRootPath)bin</Win32WinmdBinDir>
+  </PropertyGroup>
 
-    <PropertyGroup>
-        <OutputWinmd>bin\Windows.Win32.Graphics.DirectWriteCore.winmd</OutputWinmd>
-        <WinmdVersion>1.0.0.0</WinmdVersion>
-        <GenerateAssemblyVersionInfo>false</GenerateAssemblyVersionInfo>
-    </PropertyGroup>
+  <Import Project="..\sdk\sdk.props" />
 
-    <ItemGroup>
-        <DWriteHeaders Include="$(PkgMicrosoft_ProjectReunion_DWrite)\**\*.h"/>
-        <DWriteLibs Include="$(PkgMicrosoft_ProjectReunion_DWrite)\**\*.lib"/>
+  <PropertyGroup>
+    <OutputWinmd>bin\Windows.Win32.Graphics.DirectWriteCore.winmd</OutputWinmd>
+    <WinmdVersion>1.0.0.0</WinmdVersion>
+    <GenerateAssemblyVersionInfo>false</GenerateAssemblyVersionInfo>
+  </PropertyGroup>
 
-        <ImportLibs Include="@(DWriteLibs)"/>
-        <Partition Include="main.cpp">
-            <TraverseFiles>@(DWriteHeaders)</TraverseFiles>
-            <Namespace>Windows.Win32.Graphics.DirectWriteCore</Namespace>
-            <Exclude>ID2D1SimplifiedGeometrySink;_D3DCOLORVALUE</Exclude>
-        </Partition>
-    </ItemGroup>
+  <ItemGroup>
+    <DWriteHeaders Include="$(PkgMicrosoft_ProjectReunion_DWrite)\**\*.h"/>
+    <DWriteLibs Include="$(PkgMicrosoft_ProjectReunion_DWrite)\**\*.lib"/>
 
-    <ItemGroup>
-        <PackageReference Include="Microsoft.ProjectReunion.DWrite" Version="0.5.6" GeneratePathProperty="true"/>
-    </ItemGroup>
+    <ImportLibs Include="@(DWriteLibs)"/>
+    <Partition Include="main.cpp">
+      <TraverseFiles>@(DWriteHeaders)</TraverseFiles>
+      <Namespace>Windows.Win32.Graphics.DirectWriteCore</Namespace>
+      <Exclude>ID2D1SimplifiedGeometrySink;_D3DCOLORVALUE</Exclude>
+    </Partition>
+  </ItemGroup>
 
-    <Import Project="..\sdk\sdk.targets" />
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ProjectReunion.DWrite" Version="0.5.6" GeneratePathProperty="true"/>
+  </ItemGroup>
+
+  <Import Project="..\sdk\sdk.targets" />
 </Project>

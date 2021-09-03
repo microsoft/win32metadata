@@ -21,7 +21,7 @@
   <files>
       <file src="..\..\..\images\windows.png" target="images"/>
 
-      <file src="bin\Microsoft.Dia.winmd" target=""/>
+      <file src="$OutputWinmd$" target=""/>
       <file src="buildTransitive\**" target="buildTransitive\"/>
       <file src="buildTransitive\**" target="build\"/>
   </files>

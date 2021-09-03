@@ -30,6 +30,7 @@ indent_size = 2
 # JSON files
 [*.json]
 indent_size = 2
+indent_style = space
 
 # Dotnet code style settings:
 [*.{cs,vb}]
@@ -128,9 +129,9 @@ csharp_indent_switch_labels = true
 csharp_indent_labels = flush_left
 
 # Prefer "var" everywhere
-csharp_style_var_for_built_in_types = true:suggestion
+csharp_style_var_for_built_in_types = false
 csharp_style_var_when_type_is_apparent = true:suggestion
-csharp_style_var_elsewhere = false:suggestion
+csharp_style_var_elsewhere = false:warning
 
 # Prefer method-like constructs to have a block body
 csharp_style_expression_bodied_methods = false:none
@@ -160,10 +161,14 @@ csharp_new_line_before_members_in_anonymous_types = true
 # Blocks are allowed
 csharp_prefer_braces = true:silent
 
-[*.cs]
-
 # SA1130: Use lambda syntax
 dotnet_diagnostic.SA1130.severity = silent
+
+# CA1508: Avoid dead conditional code
+dotnet_diagnostic.CA1508.severity = warning
+
+# IDE1006: Naming Styles - StyleCop handles these for us
+dotnet_diagnostic.IDE1006.severity = none
 
 [*.sln]
 indent_style = tab

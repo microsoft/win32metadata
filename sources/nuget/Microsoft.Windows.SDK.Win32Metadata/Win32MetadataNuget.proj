@@ -12,5 +12,6 @@
     <NuspecFile>Microsoft.Windows.SDK.Win32Metadata.nuspec</NuspecFile>
     <NuspecProperties></NuspecProperties>
     <NuspecBasePath>..\..\..</NuspecBasePath>
+    <NoWarn>$(NoWarn);NU5100;NU5127</NoWarn>
   </PropertyGroup>
 </Project>

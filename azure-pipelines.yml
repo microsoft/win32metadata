@@ -21,10 +21,10 @@ jobs:
     lfs: true
 
   - task: UseDotNet@2
-    displayName: Use DotNet 3.x
+    displayName: ⚙ Install .NET SDK
     inputs:
-      packageType: 'sdk'
-      version: '3.x'
+      packageType: sdk
+      useGlobalJson: true
 
   - task: PowerShell@2
     displayName: Set build version
@@ -70,10 +70,10 @@ jobs:
   - checkout: self
     lfs: true
   - task: UseDotNet@2
-    displayName: Use DotNet 3.x
+    displayName: ⚙ Install .NET SDK
     inputs:
-      packageType: 'sdk'
-      version: '3.x'
+      packageType: sdk
+      useGlobalJson: true
 
   - task: PowerShell@2
     displayName: GenerateMetadataSource.ps1 - x86
@@ -97,10 +97,10 @@ jobs:
   - checkout: self
     lfs: true
   - task: UseDotNet@2
-    displayName: Use DotNet 3.x
+    displayName: ⚙ Install .NET SDK
     inputs:
-      packageType: 'sdk'
-      version: '3.x'
+      packageType: sdk
+      useGlobalJson: true
 
   - task: PowerShell@2
     displayName: GenerateMetadataSource.ps1 - arm64
@@ -127,17 +127,17 @@ jobs:
   - checkout: self
     lfs: true
 
-  - task: UseDotNet@2
-    displayName: Use DotNet 3.x
+  - task: BatchScript@1
+    displayName: Set up VS environment
     inputs:
-      packageType: 'sdk'
-      version: '3.x'
+      filename: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsDevCmd.bat'
+      modifyEnvironment: true
 
   - task: UseDotNet@2
-    displayName: Use DotNet 5.x
+    displayName: ⚙ Install .NET SDK
     inputs:
-      packageType: 'sdk'
-      version: '5.x'
+      packageType: sdk
+      useGlobalJson: true
 
     # ESRP Authenticode sign package DLLs
   - task: UseDotNet@2
@@ -145,6 +145,9 @@ jobs:
     inputs:
       packageType: runtime
       version: 2.1.x
+
+  - script: dotnet --info
+    displayName: Display .NET SDK/runtime info
 
   - task: DownloadPipelineArtifact@2
     displayName: Download x64 scraper obj assets
@@ -230,11 +233,53 @@ jobs:
     condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
 
   - task: EsrpCodeSigning@1
-    displayName: 'Authenticode Sign Binaries in MSBuild SDK package'
+    displayName: Authenticode sign net5.0 binaries in MSBuild SDK package
     inputs:
       ConnectedServiceName: 'Undocked RegFree Signing Connection'
-      FolderPath: '$(Build.SourcesDirectory)\bin\release\netcoreapp3.1'
-      Pattern: 'ClangSharpSourceToWinmd.dll,ConstantsScraper.dll,MetadataTasks.dll,MetadataUtils.dll,WinmdUtils.dll'
+      FolderPath: '$(Build.SourcesDirectory)\bin\$(BuildConfiguration)\net5.0'
+      Pattern: 'ClangSharpSourceToWinmd.dll,ConstantsScraper.dll,MetadataUtils.dll,WinmdUtils.dll'
+      signConfigType: 'inlineSignParams'
+      inlineOperation: |
+        [
+          {
+            "keyCode": "CP-230012",
+            "operationSetCode": "SigntoolSign",
+            "parameters": [
+              {
+                "parameterName": "OpusName",
+                "parameterValue": "Microsoft"
+              },
+              {
+                "parameterName": "OpusInfo",
+                "parameterValue": "http://www.microsoft.com"
+              },
+              {
+                "parameterName": "PageHash",
+                "parameterValue": "/NPH"
+              },
+              {
+                "parameterName": "FileDigest",
+                "parameterValue": "/fd sha256"
+              },
+              {
+                "parameterName": "TimeStamp",
+                "parameterValue": "/tr \"http://rfc3161.gtm.corp.microsoft.com/TSS/HttpTspServer\" /td sha256"
+              }
+            ],
+            "toolName": "signtool.exe",
+            "toolVersion": "6.2.9304.0"
+          }
+        ]
+      SessionTimeout: '60'
+      MaxConcurrency: '50'
+      MaxRetryAttempts: '2'
+    condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
+  - task: EsrpCodeSigning@1
+    displayName: Authenticode sign netstandard2.0 binaries in MSBuild SDK package
+    inputs:
+      ConnectedServiceName: 'Undocked RegFree Signing Connection'
+      FolderPath: '$(Build.SourcesDirectory)\bin\$(BuildConfiguration)\netstandard2.0'
+      Pattern: 'MetadataTasks.dll'
       signConfigType: 'inlineSignParams'
       inlineOperation: |
         [
@@ -361,7 +406,6 @@ jobs:
     inputs:
       packageType: sdk
       useGlobalJson: true
-      workingDirectory: apidocs
 
   # ESRP Authenticode sign package DLLs
   - task: UseDotNet@2
