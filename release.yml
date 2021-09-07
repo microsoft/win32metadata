@@ -59,16 +59,17 @@ stages:
           steps:
           - download: win32metadata
             artifact: NuGetPackages
-            displayName: Download NuGet packages artifacts
+            displayName: Download metadata and generators
+          - download: win32metadata
+            artifact: ApiDocsNuGetPackages
+            displayName: Download API docs
           - task: NuGetToolInstaller@1
             displayName: Use NuGet 5.x
             inputs:
               versionSpec: 5.x
-          - task: 333b11bd-d341-40d9-afcf-b32d5ce6f23b@2
-            # There's a problem on microsoft.visualstudio.com that requires the guid instead of NuGetCommand@2
-            displayName: Push package to nuget.org
-            inputs:
-              command: push
-              packagesToPush: $(Pipeline.Workspace)/win32metadata/NuGetPackages/*.nupkg;!$(Pipeline.Workspace)/win32metadata/NuGetPackages/Microsoft.Dia.Win32Metadata.*.nupkg
-              nuGetFeedType: external
-              publishFeedCredentials: WindowsSDK NuGet
+          - powershell: |
+              Get-ChildItem .\NuGetPackages\*.nupkg,.\ApiDocsNuGetPackages\*.nupkg -Exclude Microsoft.Dia.Win32Metadata.*.nupkg |% {
+                nuget push $_ -Source https://api.nuget.org/v3/index.json -SkipDuplicate -ApiKey $(NuGetOrgApiKey)
+              }
+            displayName: Push packages to nuget.org
+            workingDirectory: $(Pipeline.Workspace)/win32metadata
