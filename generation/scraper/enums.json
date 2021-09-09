@@ -936,27 +936,63 @@
   {
     "type": "int",
     "finished": true,
-    "name": "SCROLLBAR_OBJID",
+    "name": "OBJECT_IDENTIFIER",
     "members": [
       {
-        "name": "OBJID_CLIENT",
-        "value": "unchecked((int)0xFFFFFFFC)"
+        "name": "OBJID_WINDOW",
+        "value": "unchecked((int)0x00000000)"
       },
       {
-        "name": "OBJID_HSCROLL",
-        "value": "unchecked((int)0xFFFFFFFA)"
+        "name": "OBJID_SYSMENU",
+        "value": "unchecked((int)0xFFFFFFFF)"
       },
       {
-        "name": "OBJID_VSCROLL",
-        "value": "unchecked((int)0xFFFFFFFB)"
+        "name": "OBJID_TITLEBAR",
+        "value": "unchecked((int)0xFFFFFFFE)"
       },
       {
         "name": "OBJID_MENU",
         "value": "unchecked((int)0xFFFFFFFD)"
       },
       {
-        "name": "OBJID_SYSMENU",
-        "value": "unchecked((int)0xFFFFFFFF)"
+        "name": "OBJID_CLIENT",
+        "value": "unchecked((int)0xFFFFFFFC)"
+      },
+      {
+        "name": "OBJID_VSCROLL",
+        "value": "unchecked((int)0xFFFFFFFB)"
+      },
+      {
+        "name": "OBJID_HSCROLL",
+        "value": "unchecked((int)0xFFFFFFFA)"
+      },
+      {
+        "name": "OBJID_SIZEGRIP",
+        "value": "unchecked((int)0xFFFFFFF9)"
+      },
+      {
+        "name": "OBJID_CARET",
+        "value": "unchecked((int)0xFFFFFFF8)"
+      },
+      {
+        "name": "OBJID_CURSOR",
+        "value": "unchecked((int)0xFFFFFFF7)"
+      },
+      {
+        "name": "OBJID_ALERT",
+        "value": "unchecked((int)0xFFFFFFF6)"
+      },
+      {
+        "name": "OBJID_SOUND",
+        "value": "unchecked((int)0xFFFFFFF5)"
+      },
+      {
+        "name": "OBJID_QUERYCLASSNAMEIDX",
+        "value": "unchecked((int)0xFFFFFFF4)"
+      },
+      {
+        "name": "OBJID_NATIVEOM",
+        "value": "unchecked((int)0xFFFFFFF0)"
       }
     ],
     "uses": [
