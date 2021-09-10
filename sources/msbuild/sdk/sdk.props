@@ -7,7 +7,7 @@
 
   <PropertyGroup>
     <Win32MetadataSdkRoot>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..'))</Win32MetadataSdkRoot>
-    <TaskBinDir Condition="'$(TaskBinDir)' == ''">$(Win32MetadataSdkRoot)\tools\net5.0</TaskBinDir>
+    <TaskBinDir Condition="'$(TaskBinDir)' == ''">$(Win32MetadataSdkRoot)\tools\netstandard2.0</TaskBinDir>
     <ToolsBinDir Condition="'$(ToolsBinDir)' == ''">$(Win32MetadataSdkRoot)\tools\net5.0</ToolsBinDir>
     <LibToolsBinDir Condition="'$(LibToolsBinDir)' == ''">$(Win32MetadataSdkRoot)\tools</LibToolsBinDir>
     <ScriptsDir Condition="'$(ScriptsDir)' == ''">$(Win32MetadataSdkRoot)\scripts</ScriptsDir>
