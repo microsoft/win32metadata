@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <DWriteHeaders Include="$(PkgMicrosoft_ProjectReunion_DWrite)\**\*.h"/>
-    <DWriteLibs Include="$(PkgMicrosoft_ProjectReunion_DWrite)\**\*.lib"/>
+    <DWriteHeaders Condition=" '$(PkgMicrosoft_ProjectReunion_DWrite)' != '' " Include="$(PkgMicrosoft_ProjectReunion_DWrite)\**\*.h"/>
+    <DWriteLibs Condition=" '$(PkgMicrosoft_ProjectReunion_DWrite)' != '' " Include="$(PkgMicrosoft_ProjectReunion_DWrite)\**\*.lib"/>
 
     <ImportLibs Include="@(DWriteLibs)"/>
     <Partition Include="main.cpp">
