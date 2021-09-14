@@ -233,7 +233,7 @@ jobs:
     condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
 
   - task: EsrpCodeSigning@1
-    displayName: Authenticode sign net5.0 binaries in MSBuild SDK package
+    displayName: Authenticode sign net5.0 binaries in Generator SDK package
     inputs:
       ConnectedServiceName: 'Undocked RegFree Signing Connection'
       FolderPath: '$(Build.SourcesDirectory)\bin\$(BuildConfiguration)\net5.0'
@@ -274,8 +274,9 @@ jobs:
       MaxConcurrency: '50'
       MaxRetryAttempts: '2'
     condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
+
   - task: EsrpCodeSigning@1
-    displayName: Authenticode sign netstandard2.0 binaries in MSBuild SDK package
+    displayName: Authenticode sign netstandard2.0 binaries in Generator SDK package
     inputs:
       ConnectedServiceName: 'Undocked RegFree Signing Connection'
       FolderPath: '$(Build.SourcesDirectory)\bin\$(BuildConfiguration)\netstandard2.0'
@@ -317,39 +318,20 @@ jobs:
       MaxRetryAttempts: '2'
     condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
 
-  - task: PowerShell@2
+  - script: dotnet pack $(Build.SourcesDirectory)\sources\packages.proj -c Release
     displayName: Pack NuGet packages
-    inputs:
-      targetType: inline
-      script: |
-        dotnet pack $(Build.SourcesDirectory)\sources\packages.proj -c Release
-      errorActionPreference: 'continue'
-      pwsh: true
 
   - task: PowerShell@2
-    displayName: Update global.json with MSBuildSDK version
+    displayName: Update global.json with Generator SDK version
     inputs:
-      targetType: inline
-      script: |
-        $(Build.SourcesDirectory)\scripts\UpdateGlobalJsonWinmdGeneratorVersion.ps1
+      filePath: $(Build.SourcesDirectory)\scripts\UpdateGlobalJsonWinmdGeneratorVersion.ps1
       pwsh: true
 
-  - task: PowerShell@2
+  - script: dotnet pack $(Build.SourcesDirectory)\sources\GeneratorSdk\samples\DiaSdk -c Release
     displayName: Pack Dia SDK package
-    inputs:
-      targetType: inline
-      script: |
-        dotnet pack $(Build.SourcesDirectory)\sources\msbuild\samples\DiaSdk -c Release
-      errorActionPreference: 'continue'
-      pwsh: true
 
-  - task: PowerShell@2
-    displayName: Test MSBuildSDK with samples
-    inputs:
-      targetType: inline
-      script: |
-        dotnet build $(Build.SourcesDirectory)\sources\msbuild\samples -c Release
-      pwsh: true
+  - script: dotnet build $(Build.SourcesDirectory)\sources\GeneratorSdk\samples -c Release
+    displayName: Test Generator SDK with samples
 
   - task: EsrpCodeSigning@1
     displayName: 'Sign nuget packages'

@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.Build.Traversal">
   <ItemGroup>
-    <ProjectReference Include="..\sources\msbuild\MetadataTasks\MetadataTasks.csproj"/>
+    <ProjectReference Include="..\sources\GeneratorSdk\MetadataTasks\MetadataTasks.csproj"/>
     <ProjectReference Include="..\sources\ConstantsScraper\ConstantsScraper.csproj"/>
     <ProjectReference Include="..\sources\ClangSharpSourceToWinmd\ClangSharpSourceToWinmd.csproj"/>
     <ProjectReference Include="..\sources\WinmdUtils\WinmdUtils.csproj"/>

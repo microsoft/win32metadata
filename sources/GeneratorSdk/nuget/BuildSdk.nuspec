@@ -5,7 +5,7 @@
     <version>$version$</version>
     <authors>Microsoft</authors>
     <owners>Microsoft</owners>
-    <title>.NET Win32 Metadata MSBuild SDK Package</title>
+    <title>.NET Win32 Metadata Generator SDK Package</title>
     <copyright>© Microsoft Corporation. All rights reserved.</copyright>
     <summary>This packages provides a way to scrape C/C++ headers and create a winmd (Windows metadata) file.</summary>
     <description>This packages provides a way to scrape C/C++ headers and create a winmd (Windows metadata) file.</description>
@@ -19,8 +19,8 @@
 
   <files>
       <file src="images\windows.png" target="images"/>
-      <file src="sources\msbuild\sdk\sdk.stamped.props" target="sdk\sdk.props"/>
-      <file src="sources\msbuild\sdk\sdk.targets" target="sdk"/>
+      <file src="sources\GeneratorSdk\sdk\sdk.stamped.props" target="sdk\sdk.props"/>
+      <file src="sources\GeneratorSdk\sdk\sdk.targets" target="sdk"/>
 
       <file src="tools\dumpbin.exe" target="tools"/>
       <file src="tools\link.exe" target="tools"/>

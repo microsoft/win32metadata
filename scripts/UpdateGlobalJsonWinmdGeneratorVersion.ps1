@@ -1,5 +1,5 @@
 $rootDir = [System.IO.Path]::GetFullPath("$PSScriptRoot\..")
-$winmdGeneratorSdkDir = Join-Path $rootDir "sources\msbuild"
+$winmdGeneratorSdkDir = Join-Path $rootDir "sources\GeneratorSdk"
 $globalJson = Join-Path $rootDir "global.json"
 $winmdGeneratorSdkVersion = nbgv get-version -v NuGetPackageVersion -p $winmdGeneratorSdkDir
 $json = Get-Content $globalJson -raw | ConvertFrom-Json
