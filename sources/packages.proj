@@ -5,6 +5,6 @@
 
   <ItemGroup>
     <ProjectReference Include="nuget\Microsoft.Windows.SDK.Win32Metadata\Win32MetadataNuget.proj" />
-    <ProjectReference Include="msbuild\nuget\BuildSdk.proj" />
+    <ProjectReference Include="GeneratorSdk\nuget\BuildSdk.proj" />
   </ItemGroup>
 </Project>

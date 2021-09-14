@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31629.42
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "msbuild", "msbuild", "{D3E6399F-0983-4742-B07C-874B6ED80E51}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetadataTasks", "msbuild\MetadataTasks\MetadataTasks.csproj", "{5B6F6176-0031-4105-B9FF-B713499D8975}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetadataTasks", "GeneratorSdk\MetadataTasks\MetadataTasks.csproj", "{5B6F6176-0031-4105-B9FF-B713499D8975}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConstantsScraper", "ConstantsScraper\ConstantsScraper.csproj", "{8C0897A4-2BA6-40D5-AF41-130BE109C024}"
 EndProject

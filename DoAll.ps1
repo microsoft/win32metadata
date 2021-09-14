@@ -56,9 +56,9 @@ if (!$ExcludePackages)
 
     .\scripts\UpdateGlobalJsonWinmdGeneratorVersion.ps1
 
-    dotnet pack .\sources\msbuild\samples\diasdk -c Release
+    dotnet pack .\sources\GeneratorSdk\samples\diasdk -c Release
 
-    dotnet build .\sources\msbuild\samples -c Release
+    dotnet build .\sources\GeneratorSdk\samples -c Release
 }
 
 if ($arch -eq "crossarch")

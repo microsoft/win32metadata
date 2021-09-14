@@ -68,6 +68,8 @@ function Install-BuildTools
     Install-DotNetTool -Name nbgv
 
     & dotnet build "$rootDir\buildtools" -c Release
+
+    Update-VsInstallDir
 }
 
 function Replace-Text
@@ -179,6 +181,15 @@ function Get-VcDirPath
     }
 
     return $null
+}
+
+function Update-VsInstallDir
+{
+    if (!$env:VSINSTALLDIR)
+    {
+        $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+        $env:VSINSTALLDIR = & $vswhere -latest -property installationPath
+    }
 }
 
 function Get-OutputWinmdFileName
