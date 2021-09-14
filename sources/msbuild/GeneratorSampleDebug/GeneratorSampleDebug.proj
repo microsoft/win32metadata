@@ -9,6 +9,7 @@
     <Win32MetadataScraperAssetsDir>$(RepoRootPath)generation\scraper</Win32MetadataScraperAssetsDir>
     <Win32MetadataScraperGeneratedAssetsDir>$(RepoRootPath)generation\scraper\obj\x64</Win32MetadataScraperGeneratedAssetsDir>
     <Win32WinmdBinDir>$(RepoRootPath)bin</Win32WinmdBinDir>
+    <TaskBinDir>$(LocalTaskBinDir)</TaskBinDir>
   </PropertyGroup>
 
   <Import Project="..\sdk\sdk.props" />
@@ -20,8 +21,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <DWriteHeaders Include="$(PkgMicrosoft_ProjectReunion_DWrite)\**\*.h"/>
-    <DWriteLibs Include="$(PkgMicrosoft_ProjectReunion_DWrite)\**\*.lib"/>
+    <DWriteHeaders Condition=" '$(PkgMicrosoft_ProjectReunion_DWrite)' != '' " Include="$(PkgMicrosoft_ProjectReunion_DWrite)\**\*.h"/>
+    <DWriteLibs Condition=" '$(PkgMicrosoft_ProjectReunion_DWrite)' != '' " Include="$(PkgMicrosoft_ProjectReunion_DWrite)\**\*.lib"/>
 
     <ImportLibs Include="@(DWriteLibs)"/>
     <Partition Include="main.cpp">
