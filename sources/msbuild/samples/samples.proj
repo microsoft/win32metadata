@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.Build.Traversal">
+  <PropertyGroup>
+    <BuildInParallel>false</BuildInParallel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="DiaSdk\DiaSdk.proj" />
+    <ProjectReference Include="GeneratorSample\GeneratorSample.proj" />
+    <ProjectReference Include="GeneratorSampleDebug\GeneratorSampleDebug.proj" />
+    <ProjectReference Include="WebView2Sample\WebView2Sample.proj" />
+  </ItemGroup>
+</Project>

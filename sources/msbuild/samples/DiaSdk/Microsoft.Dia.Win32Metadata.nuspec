@@ -19,7 +19,7 @@
   </metadata>
 
   <files>
-      <file src="..\..\..\images\windows.png" target="images"/>
+      <file src="..\..\..\..\images\windows.png" target="images"/>
 
       <file src="$OutputWinmd$" target=""/>
       <file src="buildTransitive\**" target="buildTransitive\"/>

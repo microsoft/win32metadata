@@ -88,14 +88,19 @@ namespace MetadataTasks
 
         protected override string GenerateResponseFileCommands()
         {
-            var builder = new CommandLineBuilder();
             var staticLibs = this.GetStaticLibs();
             if (staticLibs.Length > 0)
             {
-                builder.AppendSwitchIfNotNull("--staticLibs ", staticLibs," ");
+                StringBuilder ret = new StringBuilder("--staticLibs\n");
+                foreach (var lib in staticLibs)
+                {
+                    ret.AppendLine(lib);
+                }
+
+                return ret.ToString();
             }
 
-            return builder.ToString();
+            return null;
         }
 
         protected override int ExecuteTool(string pathToTool, string responseFileCommands, string commandLineCommands)

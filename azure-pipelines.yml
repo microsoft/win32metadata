@@ -120,7 +120,7 @@ jobs:
     clean: all
   dependsOn: ['scrape_x64','scrape_x86','scrape_arm64']
   variables:
-    OutputPackagesDir: $(Build.ArtifactStagingDirectory)\CreatedNugetPackages
+    OutputPackagesDir: $(Build.SourcesDirectory)\bin\Packages\Release\NuGet
   pool:
     vmImage: windows-2019
   steps:
@@ -318,23 +318,20 @@ jobs:
     condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
 
   - task: PowerShell@2
-    displayName: Pack metadata package
+    displayName: Pack NuGet packages
     inputs:
       targetType: inline
       script: |
-        cd $(Build.SourcesDirectory)\sources\nuget\Microsoft.Windows.SDK.Win32Metadata
-        dotnet pack -o "$(OutputPackagesDir)"
+        dotnet pack $(Build.SourcesDirectory)\sources\packages.proj -c Release
       errorActionPreference: 'continue'
       pwsh: true
 
   - task: PowerShell@2
-    displayName: Pack MSBuildSDK package
+    displayName: Update global.json with MSBuildSDK version
     inputs:
       targetType: inline
       script: |
-        cd $(Build.SourcesDirectory)\sources\msbuild\nuget
-        dotnet pack -o "$(OutputPackagesDir)"
-      errorActionPreference: 'continue'
+        $(Build.SourcesDirectory)\scripts\UpdateGlobalJsonWinmdGeneratorVersion.ps1
       pwsh: true
 
   - task: PowerShell@2
@@ -342,9 +339,16 @@ jobs:
     inputs:
       targetType: inline
       script: |
-        cd $(Build.SourcesDirectory)\sources\msbuild\DiaSdk
-        dotnet pack -o "$(OutputPackagesDir)"
+        dotnet pack $(Build.SourcesDirectory)\sources\msbuild\samples\DiaSdk -c Release
       errorActionPreference: 'continue'
+      pwsh: true
+
+  - task: PowerShell@2
+    displayName: Test MSBuildSDK with samples
+    inputs:
+      targetType: inline
+      script: |
+        dotnet build $(Build.SourcesDirectory)\sources\msbuild\samples -c Release
       pwsh: true
 
   - task: EsrpCodeSigning@1

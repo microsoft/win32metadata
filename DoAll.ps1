@@ -2,6 +2,8 @@ param
 (
     [switch]$Clean,
 
+    [switch]$ExcludePackages,
+
     [ValidateSet("crossarch", "x64", "x86", "arm64")]
     [string]
     $arch = "crossarch"
@@ -46,6 +48,17 @@ else
 if ($LastExitCode -lt 0)
 {
     exit $LastExitCode
+}
+
+if (!$ExcludePackages)
+{
+    dotnet pack .\sources\packages.proj -c Release
+
+    .\scripts\UpdateGlobalJsonWinmdGeneratorVersion.ps1
+
+    dotnet pack .\sources\msbuild\samples\diasdk -c Release
+
+    dotnet build .\sources\msbuild\samples -c Release
 }
 
 if ($arch -eq "crossarch")

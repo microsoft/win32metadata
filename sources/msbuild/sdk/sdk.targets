@@ -62,4 +62,6 @@
   <Target Name = "Clean">
     <RemoveDir Directories="obj;bin" />
   </Target>
+
+  <Import Condition="'$(MicrosoftNoTargetsSdkImported)' == 'true'" Sdk="Microsoft.Build.NoTargets" Project="sdk.targets"/>
 </Project>
