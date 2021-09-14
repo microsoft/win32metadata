@@ -339,8 +339,7 @@ jobs:
     inputs:
       targetType: inline
       script: |
-        cd $(Build.SourcesDirectory)\sources\msbuild\DiaSdk
-        dotnet pack -c Release
+        dotnet pack $(Build.SourcesDirectory)\sources\msbuild\samples\DiaSdk -c Release
       errorActionPreference: 'continue'
       pwsh: true
 
@@ -349,7 +348,7 @@ jobs:
     inputs:
       targetType: inline
       script: |
-        dotnet build $(Build.SourcesDirectory)\sources\msbuild\samples.proj -c Release
+        dotnet build $(Build.SourcesDirectory)\sources\msbuild\samples -c Release
       pwsh: true
 
   - task: EsrpCodeSigning@1

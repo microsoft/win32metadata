@@ -36,11 +36,6 @@
     </Partition>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\MetadataTasks\MetadataTasks.csproj" />
-    <ProjectReference Include="..\..\ClangSharpSourceToWinmd\ClangSharpSourceToWinmd.csproj" />
-  </ItemGroup>
-
   <Target Name="SetNuSpecProperties" BeforeTargets="GenerateNuspec" DependsOnTargets="GetBuildVersion">
     <PropertyGroup>
       <NuspecProperties>$(NuspecProperties);OutputWinmd=$(OutputWinmd);Version=$(Version)</NuspecProperties>

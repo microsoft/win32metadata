@@ -12,7 +12,7 @@
     <TaskBinDir>$(LocalTaskBinDir)</TaskBinDir>
   </PropertyGroup>
 
-  <Import Project="..\sdk\sdk.props" />
+  <Import Project="..\..\sdk\sdk.props" />
 
   <PropertyGroup>
     <OutputWinmd>bin\Windows.Win32.Graphics.DirectWriteCore.winmd</OutputWinmd>
@@ -36,5 +36,5 @@
     <PackageReference Include="Microsoft.ProjectReunion.DWrite" Version="0.5.6" GeneratePathProperty="true"/>
   </ItemGroup>
 
-  <Import Project="..\sdk\sdk.targets" />
+  <Import Project="..\..\sdk\sdk.targets" />
 </Project>
