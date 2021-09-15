@@ -63,5 +63,5 @@
     <RemoveDir Directories="obj;bin" />
   </Target>
 
-  <Import Condition="'$(MicrosoftNoTargetsSdkImported)' == 'true'" Sdk="Microsoft.Build.NoTargets" Project="sdk.targets"/>
+  <Import Condition="'$(MicrosoftNoTargetsSdkImported)' == 'true'" Sdk="Microsoft.Build.NoTargets" Version="3.0.4" Project="sdk.targets"/>
 </Project>

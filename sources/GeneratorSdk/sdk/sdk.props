@@ -4,7 +4,7 @@
     <MicrosoftNoTargetsSdkImported Condition="'$(UsingMicrosoftNoTargetsSdk)' != 'true'">true</MicrosoftNoTargetsSdkImported>
   </PropertyGroup>
 
-  <Import Condition="'$(UsingMicrosoftNoTargetsSdk)' != 'true'" Sdk="Microsoft.Build.NoTargets" Project="sdk.props"/>
+  <Import Condition="'$(UsingMicrosoftNoTargetsSdk)' != 'true'" Sdk="Microsoft.Build.NoTargets" Version="3.0.4" Project="sdk.props"/>
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
