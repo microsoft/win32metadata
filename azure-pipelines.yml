@@ -45,7 +45,7 @@ jobs:
       errorActionPreference: 'continue'
       pwsh: true
 
-  - publish: 'generation\Windows.Win32\generated\obj'
+  - publish: 'generation\Windows.Win32\obj\generated'
     displayName: Publish x64 generated assets
     artifact: 'generated_x64'
 
