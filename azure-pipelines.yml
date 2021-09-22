@@ -160,6 +160,9 @@ jobs:
       artifact: 'generated_arm64'
       path: 'generation\Windows.Win32\obj\generated\arm64'
 
+  - publish: 'generation\Windows.Win32\obj'
+    artifact: 'assembled_obj'
+
   - task: PowerShell@2
     displayName: Build metadata binary
     inputs:
