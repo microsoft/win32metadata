@@ -178,6 +178,7 @@ Windows.Win32.System.SystemServices,HDEV,DECLARE_HANDLE
 Windows.Win32.System.SystemServices,HBM,DECLARE_HANDLE
 Windows.Win32.System.SystemServices,DHSURF,DECLARE_HANDLE
 Windows.Win32.System.SystemServices,DHPDEV,DECLARE_HANDLE
+Windows.Win32.System.SystemInformation,FIRMWARE_TABLE_ID,uint
 Windows.Win32.Storage.CloudFilters,CF_CONNECTION_KEY,DECLARE_HANDLE
 Windows.Win32.Devices.AllJoyn,alljoyn_aboutdata,AllJoynHandle
 Windows.Win32.Devices.AllJoyn,alljoyn_aboutdatalistener,AllJoynHandle
