@@ -26,6 +26,7 @@ if ($LastExitCode -lt 0)
 
 if (!$ExcludePackages)
 {
+    .\scripts\DoPackages.ps1
 }
 
 if ($arch -eq "crossarch")
