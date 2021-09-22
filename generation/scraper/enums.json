@@ -13238,6 +13238,33 @@
     ]
   },
   {
+    "name": "FIRMWARE_TABLE_PROVIDER",
+    "members": [
+      {
+        "name": "ACPI",
+        "value": 1094930505
+      },
+      {
+        "name": "FIRM",
+        "value": 1179210317
+      },
+      {
+        "name": "RSMB",
+        "value": 1381190978
+      }
+    ],
+    "uses": [
+      {
+        "method": "GetSystemFirmwareTable",
+        "parameter": "FirmwareTableProviderSignature"
+      },
+      {
+        "method": "EnumSystemFirmwareTables",
+        "parameter": "FirmwareTableProviderSignature"
+      }
+    ]
+  },
+  {
     "name": "CERT_STORE_SAVE_TO",
     "members": [
       {
