@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -29,11 +28,14 @@ namespace MetadataUtils
             return GetNameToNamespaceMap(sourceDirectory, NameOptions.All);
         }
 
-        public static Dictionary<string, string> GetNameToNamespaceMap(string sourceDirectory, NameOptions nameOptions)
+        public static Dictionary<string, string> GetNameToNamespaceMap(IEnumerable<string> sourceFiles)
         {
-            List<Dictionary<string, string>> maps = new List<Dictionary<string, string>>();
+            return GetNameToNamespaceMap(sourceFiles, NameOptions.All);
+        }
 
-            var sourceFiles = Directory.GetFiles(sourceDirectory, "*.cs", SearchOption.AllDirectories).Where(f => IsValidCsSourceFile(f));
+        public static Dictionary<string, string> GetNameToNamespaceMap(IEnumerable<string> sourceFiles, NameOptions nameOptions)
+        {
+            var maps = new List<Dictionary<string, string>>();
             System.Threading.Tasks.ParallelOptions opt = new System.Threading.Tasks.ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount * 2 };
 
 #if MakeSingleThreaded
@@ -43,8 +45,8 @@ namespace MetadataUtils
             System.Threading.Tasks.Parallel.ForEach(sourceFiles, opt, (sourceFile) =>
             {
                 string fileToRead = Path.GetFullPath(sourceFile);
-                var tree = CSharpSyntaxTree.ParseText(File.ReadAllText(fileToRead), null, fileToRead);
-                var map = NameToNamespaceFinder.GetNamesToNamespaces(tree, nameOptions);
+                SyntaxTree tree = CSharpSyntaxTree.ParseText(File.ReadAllText(fileToRead), null, fileToRead);
+                Dictionary<string, string> map = NameToNamespaceFinder.GetNamesToNamespaces(tree, nameOptions);
 
                 lock (maps)
                 {
@@ -54,9 +56,9 @@ namespace MetadataUtils
 
             Dictionary<string, string> ret = new Dictionary<string, string>();
 
-            foreach (var map in maps)
+            foreach (Dictionary<string, string> map in maps)
             {
-                foreach (var pair in map)
+                foreach (KeyValuePair<string, string> pair in map)
                 {
                     if (ret.TryGetValue(pair.Key, out var currentValue))
                     {
@@ -77,22 +79,29 @@ namespace MetadataUtils
             return ret;
         }
 
-        public static HashSet<string> GetConstants(string sourceDirectory)
+        public static Dictionary<string, string> GetNameToNamespaceMap(string sourceDirectory, NameOptions nameOptions)
+        {
+            IEnumerable<string> sourceFiles = Directory.GetFiles(sourceDirectory, "*.cs", SearchOption.AllDirectories).Where(f => IsValidCsSourceFile(f));
+            return GetNameToNamespaceMap(sourceFiles, nameOptions);
+        }
+
+        public static HashSet<string> GetConstants(string scraperOutputDir)
         {
             HashSet<string> names = new HashSet<string>();
 
-            var sourceFiles = Directory.GetFiles(sourceDirectory, "*.cs", SearchOption.AllDirectories).Where(f => IsValidCsSourceFile(f));
             System.Threading.Tasks.ParallelOptions opt = new System.Threading.Tasks.ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount * 2 };
+
+            IEnumerable<string> allFiles = Directory.GetFiles(scraperOutputDir, "*.cs", SearchOption.AllDirectories);
 
 #if MakeSingleThreaded
             opt.MaxDegreeOfParallelism = 1;
 #endif
 
-            System.Threading.Tasks.Parallel.ForEach(sourceFiles, opt, (sourceFile) =>
+            System.Threading.Tasks.Parallel.ForEach(allFiles.Where(f => IsValidCsSourceFile(f)), opt, (sourceFile) =>
             {
                 string fileToRead = Path.GetFullPath(sourceFile);
-                var tree = CSharpSyntaxTree.ParseText(File.ReadAllText(fileToRead), null, fileToRead);
-                var currentNames = ConstantsFinder.GetConstantsNames(tree);
+                SyntaxTree tree = CSharpSyntaxTree.ParseText(File.ReadAllText(fileToRead), null, fileToRead);
+                HashSet<string> currentNames = ConstantsFinder.GetConstantsNames(tree);
 
                 lock (names)
                 {
@@ -102,6 +111,12 @@ namespace MetadataUtils
 
             return names;
         }
+
+        //public static HashSet<string> GetConstants(string sourceDirectory)
+        //{
+        //    IEnumerable<string> sourceFiles = Directory.GetFiles(sourceDirectory, "*.cs", SearchOption.AllDirectories);
+        //    return GetConstants(sourceFiles);
+        //}
 
         private static bool IsValidCsSourceFile(string fileName)
         {

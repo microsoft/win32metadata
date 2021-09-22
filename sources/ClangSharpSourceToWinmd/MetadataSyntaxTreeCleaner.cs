@@ -6,6 +6,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using MetadataUtils;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ClangSharpSourceToWinmd
 {
@@ -15,7 +16,8 @@ namespace ClangSharpSourceToWinmd
         {
             TreeRewriter treeRewriter = new TreeRewriter(remaps, enumAdditions, enumsMakeFlags, requiredNamespaces, staticLibs, nonEmptyStructs, enumMemberNames);
             var newRoot = (CSharpSyntaxNode)treeRewriter.Visit(tree.GetRoot());
-            return CSharpSyntaxTree.Create(newRoot, null, filePath);
+            var ret = CSharpSyntaxTree.Create(newRoot, null, filePath);
+            return ret;
         }
 
         private class TreeRewriter : CSharpSyntaxRewriter
@@ -32,6 +34,7 @@ namespace ClangSharpSourceToWinmd
             private HashSet<string> nonEmptyStructs;
             private HashSet<string> enumMemberNames;
             private HashSet<string> enumsToMakeFlags;
+            private HashSet<string> usingNamespaces = new HashSet<string>();
 
             public TreeRewriter(Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsToMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames)
             {
@@ -42,6 +45,34 @@ namespace ClangSharpSourceToWinmd
                 this.nonEmptyStructs = nonEmptyStructs;
                 this.enumMemberNames = enumMemberNames;
                 this.enumsToMakeFlags = enumsToMakeFlags;
+            }
+
+            public override SyntaxNode VisitCompilationUnit(CompilationUnitSyntax node)
+            {
+                var ret = (CompilationUnitSyntax)base.VisitCompilationUnit(node);
+
+                // Add any namespaces we might need due to remappings
+                var newUsings = new List<UsingDirectiveSyntax>();
+                foreach (var remapNamespace in this.requiredNamespaces.Values.Distinct())
+                {
+                    if (!this.usingNamespaces.Contains(remapNamespace))
+                    {
+                        newUsings.Add(SyntaxFactory.UsingDirective(SyntaxFactory.ParseName(remapNamespace)).NormalizeWhitespace().WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed));
+                    }
+                }
+
+                if (newUsings.Count != 0)
+                {
+                    ret = ret.AddUsings(newUsings.ToArray());
+                }
+
+                return ret;
+            }
+
+            public override SyntaxNode VisitUsingDirective(UsingDirectiveSyntax node)
+            {
+                this.usingNamespaces.Add(node.Name.ToString());
+                return base.VisitUsingDirective(node);
             }
 
             public override SyntaxNode VisitParameter(ParameterSyntax node)
@@ -326,7 +357,7 @@ namespace ClangSharpSourceToWinmd
                             node.AddAttributeLists(
                                 SyntaxFactory.AttributeList(
                                     SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
-                                        SyntaxFactory.Attribute(SyntaxFactory.ParseName("Flags")))).WithLeadingTrivia(node.GetLeadingTrivia()));
+                                        SyntaxFactory.Attribute(SyntaxFactory.ParseName("global::System.Flags")))).WithLeadingTrivia(node.GetLeadingTrivia()));
                     }
 
                     if (node.BaseList == null)

@@ -1,0 +1,569 @@
+
+
+/* this ALWAYS GENERATED file contains the definitions for the interfaces */
+
+
+ /* File created by MIDL compiler version 8.01.0622 */
+/* @@MIDL_FILE_HEADING(  ) */
+
+
+
+/* verify that the <rpcndr.h> version is high enough to compile this file*/
+#ifndef __REQUIRED_RPCNDR_H_VERSION__
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#endif
+
+/* verify that the <rpcsal.h> version is high enough to compile this file*/
+#ifndef __REQUIRED_RPCSAL_H_VERSION__
+#define __REQUIRED_RPCSAL_H_VERSION__ 100
+#endif
+
+#include "rpc.h"
+#include "rpcndr.h"
+
+#ifndef __RPCNDR_H_VERSION__
+#error this stub requires an updated version of <rpcndr.h>
+#endif /* __RPCNDR_H_VERSION__ */
+
+#ifndef COM_NO_WINDOWS_H
+#include "windows.h"
+#include "ole2.h"
+#endif /*COM_NO_WINDOWS_H*/
+
+#ifndef __wmsecure_h__
+#define __wmsecure_h__
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1020)
+#pragma once
+#endif
+
+/* Forward Declarations */ 
+
+#ifndef __IWMAuthorizer_FWD_DEFINED__
+#define __IWMAuthorizer_FWD_DEFINED__
+typedef interface IWMAuthorizer IWMAuthorizer;
+
+#endif 	/* __IWMAuthorizer_FWD_DEFINED__ */
+
+
+#ifndef __IWMSecureChannel_FWD_DEFINED__
+#define __IWMSecureChannel_FWD_DEFINED__
+typedef interface IWMSecureChannel IWMSecureChannel;
+
+#endif 	/* __IWMSecureChannel_FWD_DEFINED__ */
+
+
+#ifndef __IWMGetSecureChannel_FWD_DEFINED__
+#define __IWMGetSecureChannel_FWD_DEFINED__
+typedef interface IWMGetSecureChannel IWMGetSecureChannel;
+
+#endif 	/* __IWMGetSecureChannel_FWD_DEFINED__ */
+
+
+/* header files for imported files */
+#include "oaidl.h"
+#include "ocidl.h"
+
+#ifdef __cplusplus
+extern "C"{
+#endif 
+
+
+/* interface __MIDL_itf_wmsecure_0000_0000 */
+/* [local] */ 
+
+//=========================================================================
+//
+//  THIS SOFTWARE HAS BEEN LICENSED FROM MICROSOFT CORPORATION PURSUANT 
+//  TO THE TERMS OF AN END USER LICENSE AGREEMENT ("EULA").  
+//  PLEASE REFER TO THE TEXT OF THE EULA TO DETERMINE THE RIGHTS TO USE THE SOFTWARE.  
+//
+// Copyright (C) Microsoft Corporation, 1999 - 1999  All Rights Reserved.
+//
+//=========================================================================
+#include <winapifamily.h>
+#pragma region Desktop Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+EXTERN_GUID( IID_IWMAuthorizer,     0xd9b67d36, 0xa9ad, 0x4eb4, 0xba, 0xef, 0xdb, 0x28, 0x4e, 0xf5, 0x50, 0x4c );
+EXTERN_GUID( IID_IWMSecureChannel,  0x2720598a, 0xd0f2, 0x4189, 0xbd, 0x10, 0x91, 0xc4, 0x6e, 0xf0, 0x93, 0x6f );
+EXTERN_GUID( IID_IWMGetSecureChannel, 0x94bc0598, 0xc3d2, 0x11d3, 0xbe, 0xdf, 0x00, 0xc0, 0x4f, 0x61, 0x29, 0x86 );
+
+
+extern RPC_IF_HANDLE __MIDL_itf_wmsecure_0000_0000_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_wmsecure_0000_0000_v0_0_s_ifspec;
+
+#ifndef __IWMAuthorizer_INTERFACE_DEFINED__
+#define __IWMAuthorizer_INTERFACE_DEFINED__
+
+/* interface IWMAuthorizer */
+/* [local][unique][helpstring][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IWMAuthorizer;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("D9B67D36-A9AD-4eb4-BAEF-DB284EF5504C")
+    IWMAuthorizer : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE GetCertCount( 
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcCerts) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetCert( 
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbCertData) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetSharedData( 
+            /* [annotation][in] */ 
+            _In_  DWORD dwCertIndex,
+            /* [annotation][in] */ 
+            _In_  const BYTE *pbSharedData,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbCert,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbSharedData) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IWMAuthorizerVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IWMAuthorizer * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IWMAuthorizer * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IWMAuthorizer * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetCertCount )( 
+            IWMAuthorizer * This,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcCerts);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetCert )( 
+            IWMAuthorizer * This,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbCertData);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetSharedData )( 
+            IWMAuthorizer * This,
+            /* [annotation][in] */ 
+            _In_  DWORD dwCertIndex,
+            /* [annotation][in] */ 
+            _In_  const BYTE *pbSharedData,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbCert,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbSharedData);
+        
+        END_INTERFACE
+    } IWMAuthorizerVtbl;
+
+    interface IWMAuthorizer
+    {
+        CONST_VTBL struct IWMAuthorizerVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IWMAuthorizer_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IWMAuthorizer_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IWMAuthorizer_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IWMAuthorizer_GetCertCount(This,pcCerts)	\
+    ( (This)->lpVtbl -> GetCertCount(This,pcCerts) ) 
+
+#define IWMAuthorizer_GetCert(This,dwIndex,ppbCertData)	\
+    ( (This)->lpVtbl -> GetCert(This,dwIndex,ppbCertData) ) 
+
+#define IWMAuthorizer_GetSharedData(This,dwCertIndex,pbSharedData,pbCert,ppbSharedData)	\
+    ( (This)->lpVtbl -> GetSharedData(This,dwCertIndex,pbSharedData,pbCert,ppbSharedData) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IWMAuthorizer_INTERFACE_DEFINED__ */
+
+
+#ifndef __IWMSecureChannel_INTERFACE_DEFINED__
+#define __IWMSecureChannel_INTERFACE_DEFINED__
+
+/* interface IWMSecureChannel */
+/* [local][unique][helpstring][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IWMSecureChannel;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("2720598A-D0F2-4189-BD10-91C46EF0936F")
+    IWMSecureChannel : public IWMAuthorizer
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE WMSC_AddCertificate( 
+            /* [annotation][in] */ 
+            _In_  IWMAuthorizer *pCert) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE WMSC_AddSignature( 
+            /* [annotation][in] */ 
+            _In_  BYTE *pbCertSig,
+            /* [annotation][in] */ 
+            _In_  DWORD cbCertSig) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE WMSC_Connect( 
+            /* [annotation][in] */ 
+            _In_  IWMSecureChannel *pOtherSide) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE WMSC_IsConnected( 
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfIsConnected) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE WMSC_Disconnect( void) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE WMSC_GetValidCertificate( 
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbCertificate,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSignature) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE WMSC_Encrypt( 
+            /* [annotation][in] */ 
+            _In_  BYTE *pbData,
+            /* [annotation][in] */ 
+            _In_  DWORD cbData) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE WMSC_Decrypt( 
+            /* [annotation][in] */ 
+            _In_  BYTE *pbData,
+            /* [annotation][in] */ 
+            _In_  DWORD cbData) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE WMSC_Lock( void) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE WMSC_Unlock( void) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE WMSC_SetSharedData( 
+            /* [annotation][in] */ 
+            _In_  DWORD dwCertIndex,
+            /* [annotation][in] */ 
+            _In_  const BYTE *pbSharedData) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IWMSecureChannelVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IWMSecureChannel * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IWMSecureChannel * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IWMSecureChannel * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetCertCount )( 
+            IWMSecureChannel * This,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcCerts);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetCert )( 
+            IWMSecureChannel * This,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbCertData);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetSharedData )( 
+            IWMSecureChannel * This,
+            /* [annotation][in] */ 
+            _In_  DWORD dwCertIndex,
+            /* [annotation][in] */ 
+            _In_  const BYTE *pbSharedData,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbCert,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbSharedData);
+        
+        HRESULT ( STDMETHODCALLTYPE *WMSC_AddCertificate )( 
+            IWMSecureChannel * This,
+            /* [annotation][in] */ 
+            _In_  IWMAuthorizer *pCert);
+        
+        HRESULT ( STDMETHODCALLTYPE *WMSC_AddSignature )( 
+            IWMSecureChannel * This,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbCertSig,
+            /* [annotation][in] */ 
+            _In_  DWORD cbCertSig);
+        
+        HRESULT ( STDMETHODCALLTYPE *WMSC_Connect )( 
+            IWMSecureChannel * This,
+            /* [annotation][in] */ 
+            _In_  IWMSecureChannel *pOtherSide);
+        
+        HRESULT ( STDMETHODCALLTYPE *WMSC_IsConnected )( 
+            IWMSecureChannel * This,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfIsConnected);
+        
+        HRESULT ( STDMETHODCALLTYPE *WMSC_Disconnect )( 
+            IWMSecureChannel * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *WMSC_GetValidCertificate )( 
+            IWMSecureChannel * This,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbCertificate,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSignature);
+        
+        HRESULT ( STDMETHODCALLTYPE *WMSC_Encrypt )( 
+            IWMSecureChannel * This,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbData,
+            /* [annotation][in] */ 
+            _In_  DWORD cbData);
+        
+        HRESULT ( STDMETHODCALLTYPE *WMSC_Decrypt )( 
+            IWMSecureChannel * This,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbData,
+            /* [annotation][in] */ 
+            _In_  DWORD cbData);
+        
+        HRESULT ( STDMETHODCALLTYPE *WMSC_Lock )( 
+            IWMSecureChannel * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *WMSC_Unlock )( 
+            IWMSecureChannel * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *WMSC_SetSharedData )( 
+            IWMSecureChannel * This,
+            /* [annotation][in] */ 
+            _In_  DWORD dwCertIndex,
+            /* [annotation][in] */ 
+            _In_  const BYTE *pbSharedData);
+        
+        END_INTERFACE
+    } IWMSecureChannelVtbl;
+
+    interface IWMSecureChannel
+    {
+        CONST_VTBL struct IWMSecureChannelVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IWMSecureChannel_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IWMSecureChannel_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IWMSecureChannel_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IWMSecureChannel_GetCertCount(This,pcCerts)	\
+    ( (This)->lpVtbl -> GetCertCount(This,pcCerts) ) 
+
+#define IWMSecureChannel_GetCert(This,dwIndex,ppbCertData)	\
+    ( (This)->lpVtbl -> GetCert(This,dwIndex,ppbCertData) ) 
+
+#define IWMSecureChannel_GetSharedData(This,dwCertIndex,pbSharedData,pbCert,ppbSharedData)	\
+    ( (This)->lpVtbl -> GetSharedData(This,dwCertIndex,pbSharedData,pbCert,ppbSharedData) ) 
+
+
+#define IWMSecureChannel_WMSC_AddCertificate(This,pCert)	\
+    ( (This)->lpVtbl -> WMSC_AddCertificate(This,pCert) ) 
+
+#define IWMSecureChannel_WMSC_AddSignature(This,pbCertSig,cbCertSig)	\
+    ( (This)->lpVtbl -> WMSC_AddSignature(This,pbCertSig,cbCertSig) ) 
+
+#define IWMSecureChannel_WMSC_Connect(This,pOtherSide)	\
+    ( (This)->lpVtbl -> WMSC_Connect(This,pOtherSide) ) 
+
+#define IWMSecureChannel_WMSC_IsConnected(This,pfIsConnected)	\
+    ( (This)->lpVtbl -> WMSC_IsConnected(This,pfIsConnected) ) 
+
+#define IWMSecureChannel_WMSC_Disconnect(This)	\
+    ( (This)->lpVtbl -> WMSC_Disconnect(This) ) 
+
+#define IWMSecureChannel_WMSC_GetValidCertificate(This,ppbCertificate,pdwSignature)	\
+    ( (This)->lpVtbl -> WMSC_GetValidCertificate(This,ppbCertificate,pdwSignature) ) 
+
+#define IWMSecureChannel_WMSC_Encrypt(This,pbData,cbData)	\
+    ( (This)->lpVtbl -> WMSC_Encrypt(This,pbData,cbData) ) 
+
+#define IWMSecureChannel_WMSC_Decrypt(This,pbData,cbData)	\
+    ( (This)->lpVtbl -> WMSC_Decrypt(This,pbData,cbData) ) 
+
+#define IWMSecureChannel_WMSC_Lock(This)	\
+    ( (This)->lpVtbl -> WMSC_Lock(This) ) 
+
+#define IWMSecureChannel_WMSC_Unlock(This)	\
+    ( (This)->lpVtbl -> WMSC_Unlock(This) ) 
+
+#define IWMSecureChannel_WMSC_SetSharedData(This,dwCertIndex,pbSharedData)	\
+    ( (This)->lpVtbl -> WMSC_SetSharedData(This,dwCertIndex,pbSharedData) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IWMSecureChannel_INTERFACE_DEFINED__ */
+
+
+#ifndef __IWMGetSecureChannel_INTERFACE_DEFINED__
+#define __IWMGetSecureChannel_INTERFACE_DEFINED__
+
+/* interface IWMGetSecureChannel */
+/* [local][unique][helpstring][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IWMGetSecureChannel;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("94bc0598-c3d2-11d3-bedf-00c04f612986")
+    IWMGetSecureChannel : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE GetPeerSecureChannelInterface( 
+            /* [annotation][out] */ 
+            _Out_  IWMSecureChannel **ppPeer) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IWMGetSecureChannelVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IWMGetSecureChannel * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IWMGetSecureChannel * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IWMGetSecureChannel * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetPeerSecureChannelInterface )( 
+            IWMGetSecureChannel * This,
+            /* [annotation][out] */ 
+            _Out_  IWMSecureChannel **ppPeer);
+        
+        END_INTERFACE
+    } IWMGetSecureChannelVtbl;
+
+    interface IWMGetSecureChannel
+    {
+        CONST_VTBL struct IWMGetSecureChannelVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IWMGetSecureChannel_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IWMGetSecureChannel_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IWMGetSecureChannel_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IWMGetSecureChannel_GetPeerSecureChannelInterface(This,ppPeer)	\
+    ( (This)->lpVtbl -> GetPeerSecureChannelInterface(This,ppPeer) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IWMGetSecureChannel_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_wmsecure_0000_0003 */
+/* [local] */ 
+
+HRESULT STDMETHODCALLTYPE WMCreateSecureChannel( IWMSecureChannel** ppChannel );
+HRESULT STDMETHODCALLTYPE WMCreateSecureChannel_Certified( IWMSecureChannel** ppChannel ); 
+HRESULT STDMETHODCALLTYPE WMCreateSecureChannel_DES( IWMSecureChannel** ppChannel );
+HRESULT STDMETHODCALLTYPE WMCreateSecureChannel_Certified_DES( IWMSecureChannel** ppChannel ); 
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+#pragma endregion
+
+
+extern RPC_IF_HANDLE __MIDL_itf_wmsecure_0000_0003_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_wmsecure_0000_0003_v0_0_s_ifspec;
+
+/* Additional Prototypes for ALL interfaces */
+
+/* end of Additional Prototypes */
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
+
+

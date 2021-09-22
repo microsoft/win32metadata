@@ -1,0 +1,51 @@
+//============================================================================
+// Copyright (C) Microsoft Corporation, All rights reserved. 
+//============================================================================
+//
+
+
+[ClassVersion( "1.0" ), Abstract, Description(
+    "Volume deduplication properties."
+    )]
+class MSFT_DedupProperties
+{
+    [Read, Description(
+        "The total logical size of all files on the volume, in bytes. This is an estimate of the volume used space if deduplication feature was disabled."
+        )]
+    UInt64 UnoptimizedSize;
+
+    [Read, Description(
+        "The difference between the logical size of the optimized files and the logical size of the store (the deduplicated user data plus deduplication metadata)."
+        )]
+    UInt64 SavingsSize;
+
+    [Read, Description(
+        "The ratio of deduplication savings to the logical size of all of the files on the volume, expressed as a percentage."
+        )]
+    UInt32 SavingsRate;
+
+    [Read, Description(
+        "The number of optimized files on the volume."
+        )]
+    UInt64 OptimizedFilesCount;
+
+    [Read, Description(
+        "The total logical size of all optimized files on the volume, in bytes."
+        )]
+    UInt64 OptimizedFilesSize;
+
+    [Read, Description(
+        "The ratio of deduplication savings to the logical size of all optimized files on the volume, expressed as a percentage."
+        )]
+    UInt32 OptimizedFilesSavingsRate;
+
+    [Read, Description(
+        "The number of files that currently qualify for optimization."
+        )]
+    UInt64 InPolicyFilesCount;
+
+    [Read, Description(
+        "The aggregate size of all files that currently qualify for optimization."
+        )]
+    UInt64 InPolicyFilesSize;
+};

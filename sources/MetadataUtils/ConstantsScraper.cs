@@ -10,18 +10,19 @@ namespace MetadataUtils
     public static class ConstantsScraper
     {
         public static ScraperResults ScrapeConstants(
-            string repoRoot,
-            string arch,
             string[] enumJsonFiles,
+            string defaultNamespace,
+            string scraperOutputDir,
             string constantsHeaderText,
             HashSet<string> exclusionNames,
+            Dictionary<string, string> traversedHeaderToNamespaceMap,
             Dictionary<string, string> requiredNamespaces,
             Dictionary<string, string> remaps,
             Dictionary<string, string> withTypes,
             Dictionary<string, string> withAttributes)
         {
             using ConstantsScraperImpl imp = new ConstantsScraperImpl();
-            return imp.ScrapeConstants(repoRoot, arch, enumJsonFiles, constantsHeaderText, exclusionNames, requiredNamespaces, remaps, withTypes, withAttributes);
+            return imp.ScrapeConstants(enumJsonFiles, defaultNamespace, scraperOutputDir, constantsHeaderText, exclusionNames, traversedHeaderToNamespaceMap, requiredNamespaces, remaps, withTypes, withAttributes);
         }
 
         private class ConstantsScraperImpl : IDisposable
@@ -67,8 +68,6 @@ namespace MetadataUtils
             private WildcardDictionary requiredNamespaces;
             private Dictionary<string, string> scannedNamesToNamespaces;
             private HashSet<string> writtenConstants;
-            private string repoRoot;
-            private string arch;
 
             private List<EnumObject> enumObjectsFromJsons;
             private Dictionary<string, string> withTypes;
@@ -77,8 +76,10 @@ namespace MetadataUtils
             private Dictionary<string, List<EnumObject>> enumMemberNameToEnumObj;
             private HashSet<string> exclusionNames;
 
+            private string scraperOutputDir;
             private string constantsHeaderText;
             private string enumFlagsFixupFileName;
+            private string defaultNamespace;
 
             private List<string> output = new List<string>();
             private List<string> suggestedEnumRenames = new List<string>();
@@ -88,11 +89,12 @@ namespace MetadataUtils
             }
 
             public ScraperResults ScrapeConstants(
-                string repoRoot,
-                string arch,
                 string[] enumJsonFiles,
+                string defaultNamespace,
+                string scraperOutputDir,
                 string constantsHeaderText,
                 HashSet<string> exclusionNames,
+                Dictionary<string, string> traversedHeaderToNamespaceMap,
                 Dictionary<string, string> requiredNamespaces,
                 Dictionary<string, string> remaps,
                 Dictionary<string, string> withTypes,
@@ -103,17 +105,16 @@ namespace MetadataUtils
                 this.exclusionNames = exclusionNames;
                 this.constantsHeaderText = constantsHeaderText;
                 this.withAttributes = withAttributes;
+                this.scraperOutputDir = scraperOutputDir;
+                this.defaultNamespace = defaultNamespace;
 
-                this.repoRoot = Path.GetFullPath(repoRoot);
-                this.arch = arch;
+                this.scannedNamesToNamespaces = ScraperUtils.GetNameToNamespaceMap(scraperOutputDir);
 
-                this.scannedNamesToNamespaces = ScraperUtils.GetNameToNamespaceMap(this.EmitterGeneratedDir);
-
-                this.writtenConstants = ScraperUtils.GetConstants(this.EmitterDir);
+                this.writtenConstants = ScraperUtils.GetConstants(scraperOutputDir);
 
                 this.LoadEnumObjectsFromJsonFiles(enumJsonFiles);
 
-                this.ScrapeConstantsFromTraversedFiles();
+                this.ScrapeConstantsFromTraversedFiles(traversedHeaderToNamespaceMap);
 
                 this.WriteEnumsAndRemaps(remaps);
 
@@ -122,23 +123,20 @@ namespace MetadataUtils
 
             public void Dispose()
             {
-                foreach (var enumWriter in namespacesToEnumWriters.Values)
+                foreach (EnumWriter enumWriter in this.namespacesToEnumWriters.Values)
                 {
                     enumWriter.Dispose();
                 }
 
-                namespacesToEnumWriters.Clear();
+                this.namespacesToEnumWriters.Clear();
 
-                foreach (var constantWriter in namespacesToConstantWriters.Values)
+                foreach (ConstantWriter constantWriter in this.namespacesToConstantWriters.Values)
                 {
                     constantWriter.Dispose();
                 }
 
-                namespacesToConstantWriters.Clear();
+                this.namespacesToConstantWriters.Clear();
             }
-
-            private string EmitterGeneratedDir => Path.Combine(this.repoRoot, $@"generation\emitter\generated\{this.arch}");
-            private string EmitterDir => Path.Combine(this.repoRoot, $@"generation\emitter");
 
             private static Dictionary<string, string> GetAutoValueReplacements()
             {
@@ -149,16 +147,13 @@ namespace MetadataUtils
                 return ret;
             }
 
-            private static List<EnumObject> LoadEnumsFromSourceFiles(string sourcesDir)
+            private static List<EnumObject> LoadEnumsFromSourceFiles(IEnumerable<string> fileNames)
             {
                 List<EnumObject> enumObjects = new List<EnumObject>();
 
-                if (Directory.Exists(sourcesDir))
+                foreach (var file in fileNames)
                 {
-                    foreach (var file in Directory.GetFiles(sourcesDir, "*.cs"))
-                    {
-                        enumObjects.AddRange(EnumObject.LoadFromFile(file));
-                    }
+                    enumObjects.AddRange(EnumObject.LoadFromFile(file));
                 }
 
                 return enumObjects;
@@ -185,22 +180,22 @@ namespace MetadataUtils
             {
                 if (this.enumFlagsFixupFileName == null)
                 {
-                    this.enumFlagsFixupFileName = Path.Combine(this.EmitterGeneratedDir, "enumsMakeFlags.generated.rsp");
+                    this.enumFlagsFixupFileName = Path.Combine(this.scraperOutputDir, "enumsMakeFlags.generated.rsp");
                     if (File.Exists(this.enumFlagsFixupFileName))
                     {
                         File.Delete(this.enumFlagsFixupFileName);
                     }
 
-                    File.AppendAllText(this.enumFlagsFixupFileName, "--enum-Make-Flags\r\n");
+                    File.AppendAllText(this.enumFlagsFixupFileName, "--enumMakeFlags\r\n");
                 }
             }
 
             private void LoadMemberNameToEnumObjMap(List<EnumObject> enumObjects)
             {
                 this.enumMemberNameToEnumObj = new Dictionary<string, List<EnumObject>>();
-                foreach (var obj in enumObjects)
+                foreach (EnumObject obj in enumObjects)
                 {
-                    foreach (var member in obj.members)
+                    foreach (EnumObject.Member member in obj.members)
                     {
                         if (StringComparer.OrdinalIgnoreCase.Equals(member.name, "None"))
                         {
@@ -341,9 +336,9 @@ namespace MetadataUtils
                     foundNamespace = newNamespace;
                 }
 
-                if (!this.namespacesToConstantWriters.TryGetValue(foundNamespace, out var constantWriter))
+                if (!this.namespacesToConstantWriters.TryGetValue(foundNamespace, out ConstantWriter constantWriter))
                 {
-                    string partConstantsFile = Path.Combine(EmitterGeneratedDir, $@"{foundNamespace}.constants.cs");
+                    string partConstantsFile = Path.Combine(this.scraperOutputDir, $@"{foundNamespace}.constants.cs");
                     if (File.Exists(partConstantsFile))
                     {
                         File.Delete(partConstantsFile);
@@ -358,12 +353,11 @@ namespace MetadataUtils
 
             private HashSet<string> GetManualEnumMemberNames()
             {
-                string manualSourceFiles = Path.Combine(repoRoot, $@"generation\emitter\manual");
-                List<EnumObject> enumObjectsFromManualSources = LoadEnumsFromSourceFiles(manualSourceFiles);
+                List<EnumObject> enumObjectsFromManualSources = LoadEnumsFromSourceFiles(Directory.GetFiles(this.scraperOutputDir, "*.manual.cs"));
                 HashSet<string> manualEnumMemberNames = new HashSet<string>();
-                foreach (var obj in enumObjectsFromManualSources)
+                foreach (EnumObject obj in enumObjectsFromManualSources)
                 {
-                    foreach (var member in obj.members)
+                    foreach (EnumObject.Member member in obj.members)
                     {
                         manualEnumMemberNames.Add(member.name);
                     }
@@ -375,10 +369,10 @@ namespace MetadataUtils
             private void LoadEnumObjectsFromJsonFiles(string[] enumJsonFiles)
             {
                 // Load the enums scraped from the docs
-                this.enumObjectsFromJsons = LoadEnumsFromJsonFiles(enumJsonFiles);
+                this.enumObjectsFromJsons = this.LoadEnumsFromJsonFiles(enumJsonFiles);
 
                 // Load a map from member names to enum obj
-                LoadMemberNameToEnumObjMap(enumObjectsFromJsons);
+                this.LoadMemberNameToEnumObjMap(this.enumObjectsFromJsons);
             }
 
             private bool ShouldExclude(string constName)
@@ -386,332 +380,327 @@ namespace MetadataUtils
                 return this.exclusionNames.Contains(constName);
             }
 
-            private void ScrapeConstantsFromTraversedFiles()
+            private void ScrapeConstantsFromTraversedFiles(Dictionary<string, string> traversedFileMap)
             {
-                var autoReplacements = GetAutoValueReplacements();
+                Dictionary<string, string> autoReplacements = GetAutoValueReplacements();
 
-                RepoInfo repoInfo = new RepoInfo(repoRoot);
+                HashSet<string> manualEnumMemberNames = this.GetManualEnumMemberNames();
 
-                HashSet<string> manualEnumMemberNames = GetManualEnumMemberNames();
-
-                // For each partition, scrape the constants
-                foreach (var partInfo in repoInfo.GetPartitionInfos())
+                // For each traversed header, scrape the constants
+                foreach (KeyValuePair<string, string> item in traversedFileMap)
                 {
-                    string currentNamespace = partInfo.Namespace;
+                    var header = item.Key;
+                    var currentNamespace = item.Value;
 
-                    // For each traversed header, scrape the constants
-                    foreach (var header in partInfo.GetTraverseHeaders(true, this.arch))
+                    if (!File.Exists(header))
                     {
-                        if (!File.Exists(header))
+                        continue;
+                    }
+
+                    string currentHeaderName = Path.GetFileName(header).ToLowerInvariant();
+
+                    List<EnumObject> autoEnumObjsForCurrentHeader =
+                        new List<EnumObject>(this.enumObjectsFromJsons.Where(e => e.autoPopulate != null && e.autoPopulate.header.ToLowerInvariant() == currentHeaderName));
+                    Regex autoPopulateReg = null;
+
+                    if (autoEnumObjsForCurrentHeader.Count != 0)
+                    {
+                        StringBuilder autoPopulateRegexPattern = new StringBuilder();
+                        foreach (EnumObject autoEnumObj in autoEnumObjsForCurrentHeader)
+                        {
+                            if (autoPopulateRegexPattern.Length != 0)
+                            {
+                                autoPopulateRegexPattern.Append('|');
+                            }
+
+                            autoPopulateRegexPattern.Append($"(^{autoEnumObj.autoPopulate.filter})");
+                        }
+
+                        autoPopulateReg = new Regex(autoPopulateRegexPattern.ToString());
+                    }
+
+                    string continuation = null;
+                    bool processingGuidMultiLine = false;
+                    string defineGuidKeyword = null;
+                    foreach (string currentLine in File.ReadAllLines(header))
+                    {
+                        string line = continuation == null ? currentLine : continuation + currentLine;
+                        if (line.EndsWith("\\"))
+                        {
+                            continuation = line.Substring(0, line.Length - 1);
+                            continue;
+                        }
+
+                        if (processingGuidMultiLine)
+                        {
+                            continuation = StripComments(line).Trim();
+                            if (continuation.EndsWith(';'))
+                            {
+                                processingGuidMultiLine = false;
+                                this.AddConstantGuid(defineGuidKeyword, currentNamespace, continuation);
+                                continuation = null;
+                            }
+
+                            continue;
+                        }
+
+                        continuation = null;
+
+                        Match defineGuidMatch = DefineGuidConstRegex.Match(line);
+                        if (defineGuidMatch.Success)
+                        {
+                            defineGuidKeyword = defineGuidMatch.Groups[1].Value;
+                            line = defineGuidMatch.Groups[2].Value;
+                            line = StripComments(line).Trim();
+                            if (line.EndsWith(';'))
+                            {
+                                this.AddConstantGuid(defineGuidKeyword, currentNamespace, line);
+                            }
+                            else
+                            {
+                                continuation = line;
+                                processingGuidMultiLine = true;
+                            }
+
+                            continue;
+                        }
+
+                        Match defineAviGuidMatch = DefineAviGuidConstRegex.Match(line);
+                        if (defineAviGuidMatch.Success)
+                        {
+                            defineGuidKeyword = defineAviGuidMatch.Groups[1].Value;
+                            var guidName = defineAviGuidMatch.Groups[2].Value;
+                            var l = defineAviGuidMatch.Groups[3].Value;
+                            var w1 = defineAviGuidMatch.Groups[4].Value;
+                            var w2 = defineAviGuidMatch.Groups[5].Value;
+                            var defineGuidLine = $"{guidName}, {l}, {w1}, {w2}, 0xC0,0,0,0,0,0,0,0x46)";
+                            this.AddConstantGuid(defineGuidKeyword, currentNamespace, defineGuidLine);
+                            continue;
+                        }
+
+                        Match defineMatch = DefineRegex.Match(line);
+
+                        // Skip if not #define ...
+                        if (!defineMatch.Success)
+                        {
+                            this.TryScrapingEnumFlags(line);
+                            continue;
+                        }
+
+                        string name = defineMatch.Groups[1].Value;
+
+                        if (this.ShouldExclude(name))
                         {
                             continue;
                         }
 
-                        string currentHeaderName = Path.GetFileName(header).ToLowerInvariant();
+                        // Get rid of trailing comments
+                        string rawValue = StripComments(defineMatch.Groups[2].Value.Trim());
 
-                        List<EnumObject> autoEnumObjsForCurrentHeader =
-                            new List<EnumObject>(enumObjectsFromJsons.Where(e => e.autoPopulate != null && e.autoPopulate.header.ToLowerInvariant() == currentHeaderName));
-                        Regex autoPopulateReg = null;
-
-                        if (autoEnumObjsForCurrentHeader.Count != 0)
+                        if (autoReplacements.TryGetValue(rawValue, out var updatedRawValue))
                         {
-                            StringBuilder autoPopulateRegexPattern = new StringBuilder();
-                            foreach (var autoEnumObj in autoEnumObjsForCurrentHeader)
-                            {
-                                if (autoPopulateRegexPattern.Length != 0)
-                                {
-                                    autoPopulateRegexPattern.Append('|');
-                                }
-
-                                autoPopulateRegexPattern.Append($"(^{autoEnumObj.autoPopulate.filter})");
-                            }
-
-                            autoPopulateReg = new Regex(autoPopulateRegexPattern.ToString());
+                            rawValue = updatedRawValue;
                         }
 
-                        string continuation = null;
-                        bool processingGuidMultiLine = false;
-                        string defineGuidKeyword = null;
-                        foreach (string currentLine in File.ReadAllLines(header))
+                        string fixedRawValue = rawValue;
+                        // Get rid of enclosing parens. Makes it easier to parse with regex
+                        if (fixedRawValue.StartsWith('(') && fixedRawValue.EndsWith(')'))
                         {
-                            string line = continuation == null ? currentLine : continuation + currentLine;
-                            if (line.EndsWith("\\"))
+                            fixedRawValue = fixedRawValue.Substring(1, rawValue.Length - 2).Trim();
+                        }
+
+                        Match ctlCodeMatch = CtlCodeRegex.Match(fixedRawValue);
+                        if (ctlCodeMatch.Success)
+                        {
+                            var parts = ctlCodeMatch.Groups[1].Value.Split(',');
+                            if (parts.Length == 4)
                             {
-                                continuation = line.Substring(0, line.Length - 1);
+                                this.AddCtlCodeConstant(currentNamespace, name, parts[0].Trim(), parts[1].Trim(), parts[2].Trim(), parts[3].Trim());
                                 continue;
                             }
+                        }
 
-                            if (processingGuidMultiLine)
+                        Match usageMatch = HidUsageRegex.Match(fixedRawValue);
+                        if (usageMatch.Success)
+                        {
+                            this.AddConstantValue(currentNamespace, "ushort", name, usageMatch.Groups[1].Value);
+                            continue;
+                        }
+
+                        if (fixedRawValue.StartsWith("AUDCLNT_ERR("))
+                        {
+                            fixedRawValue = fixedRawValue.Replace("AUDCLNT_ERR(", "MAKE_HRESULT(SEVERITY_ERROR, FACILITY_AUDCLNT, ");
+                        }
+                        else if (fixedRawValue.StartsWith("AUDCLNT_SUCCESS("))
+                        {
+                            fixedRawValue = fixedRawValue.Replace("AUDCLNT_SUCCESS(", "MAKE_HRESULT(SEVERITY_SUCCESS, FACILITY_AUDCLNT, ");
+                        }
+
+                        Match makeHresultMatch = MakeHresultRegex.Match(fixedRawValue);
+                        if (makeHresultMatch.Success)
+                        {
+                            var parts = makeHresultMatch.Groups[1].Value.Split(',');
+                            if (parts.Length == 3)
                             {
-                                continuation = StripComments(line).Trim();
-                                if (continuation.EndsWith(';'))
-                                {
-                                    processingGuidMultiLine = false;
-                                    this.AddConstantGuid(defineGuidKeyword, currentNamespace, continuation);
-                                    continuation = null;
-                                }
-
+                                this.AddMakeHresultConstant(currentNamespace, name, parts[0].Trim(), parts[1].Trim(), parts[2].Trim());
                                 continue;
                             }
+                        }
 
-                            continuation = null;
+                        // See if matches one of our well known constants formats
+                        Match match = DefineConstantRegex.Match(fixedRawValue);
+                        string valueText;
+                        string nativeTypeName = null;
 
-                            var defineGuidMatch = DefineGuidConstRegex.Match(line);
-                            if (defineGuidMatch.Success)
+                        if (match.Success)
+                        {
+                            // #define E_UNEXPECTED _HRESULT_TYPEDEF_(0x8000FFFF)
+                            if (!string.IsNullOrEmpty(match.Groups[2].Value))
                             {
-                                defineGuidKeyword = defineGuidMatch.Groups[1].Value;
-                                line = defineGuidMatch.Groups[2].Value;
-                                line = StripComments(line).Trim();
-                                if (line.EndsWith(';'))
-                                {
-                                    this.AddConstantGuid(defineGuidKeyword, currentNamespace, line);
-                                }
-                                else
-                                {
-                                    continuation = line;
-                                    processingGuidMultiLine = true;
-                                }
-
-                                continue;
-                            }
-                            
-                            var defineAviGuidMatch = DefineAviGuidConstRegex.Match(line);
-                            if (defineAviGuidMatch.Success)
-                            {
-                                defineGuidKeyword = defineAviGuidMatch.Groups[1].Value;
-                                var guidName = defineAviGuidMatch.Groups[2].Value;
-                                var l = defineAviGuidMatch.Groups[3].Value;
-                                var w1 = defineAviGuidMatch.Groups[4].Value;
-                                var w2 = defineAviGuidMatch.Groups[5].Value;
-                                var defineGuidLine = $"{guidName}, {l}, {w1}, {w2}, 0xC0,0,0,0,0,0,0,0x46)";
-                                this.AddConstantGuid(defineGuidKeyword, currentNamespace, defineGuidLine);
-                                continue;
-                            }
-
-                            var defineMatch = DefineRegex.Match(line);
-
-                            // Skip if not #define ...
-                            if (!defineMatch.Success)
-                            {
-                                this.TryScrapingEnumFlags(line);
-                                continue;
-                            }
-
-                            string name = defineMatch.Groups[1].Value;
-
-                            if (this.ShouldExclude(name))
-                            {
-                                continue;
-                            }
-
-                            // Get rid of trailing comments
-                            string rawValue = StripComments(defineMatch.Groups[2].Value.Trim());
-
-                            if (autoReplacements.TryGetValue(rawValue, out var updatedRawValue))
-                            {
-                                rawValue = updatedRawValue;
-                            }
-
-                            string fixedRawValue = rawValue;
-                            // Get rid of enclosing parens. Makes it easier to parse with regex
-                            if (fixedRawValue.StartsWith('(') && fixedRawValue.EndsWith(')'))
-                            {
-                                fixedRawValue = fixedRawValue.Substring(1, rawValue.Length - 2).Trim();
-                            }
-
-                            var ctlCodeMatch = CtlCodeRegex.Match(fixedRawValue);
-                            if (ctlCodeMatch.Success)
-                            {
-                                var parts = ctlCodeMatch.Groups[1].Value.Split(',');
-                                if (parts.Length == 4)
-                                {
-                                    this.AddCtlCodeConstant(currentNamespace, name, parts[0].Trim(), parts[1].Trim(), parts[2].Trim(), parts[3].Trim());
-                                    continue;
-                                }
-                            }
-
-                            var usageMatch = HidUsageRegex.Match(fixedRawValue);
-                            if (usageMatch.Success)
-                            {
-                                this.AddConstantValue(currentNamespace, "ushort", name, usageMatch.Groups[1].Value);
-                                continue;
-                            }
-
-                            if (fixedRawValue.StartsWith("AUDCLNT_ERR("))
-                            {
-                                fixedRawValue = fixedRawValue.Replace("AUDCLNT_ERR(", "MAKE_HRESULT(SEVERITY_ERROR, FACILITY_AUDCLNT, ");
-                            }
-                            else if (fixedRawValue.StartsWith("AUDCLNT_SUCCESS("))
-                            {
-                                fixedRawValue = fixedRawValue.Replace("AUDCLNT_SUCCESS(", "MAKE_HRESULT(SEVERITY_SUCCESS, FACILITY_AUDCLNT, ");
-                            }
-
-                            var makeHresultMatch = MakeHresultRegex.Match(fixedRawValue);
-                            if (makeHresultMatch.Success)
-                            {
-                                var parts = makeHresultMatch.Groups[1].Value.Split(',');
-                                if (parts.Length == 3)
-                                {
-                                    this.AddMakeHresultConstant(currentNamespace, name, parts[0].Trim(), parts[1].Trim(), parts[2].Trim());
-                                    continue;
-                                }
-                            }
-
-                            // See if matches one of our well known constants formats
-                            var match = DefineConstantRegex.Match(fixedRawValue);
-                            string valueText;
-                            string nativeTypeName = null;
-
-                            if (match.Success)
-                            {
-                                // #define E_UNEXPECTED _HRESULT_TYPEDEF_(0x8000FFFF)
-                                if (!string.IsNullOrEmpty(match.Groups[2].Value))
-                                {
-                                    if (match.Groups[2].Value == "_HRESULT_TYPEDEF_")
-                                    {
-                                        nativeTypeName = "HRESULT";
-                                    }
-
-                                    valueText = match.Groups[3].Value;
-                                }
-                                // #define E_UNEXPECTED ((HRESULT)0x8000FFFF)
-                                else if (!string.IsNullOrEmpty(match.Groups[5].Value))
+                                if (match.Groups[2].Value == "_HRESULT_TYPEDEF_")
                                 {
                                     nativeTypeName = "HRESULT";
-                                    valueText = match.Groups[5].Value;
                                 }
-                                // #define DXGI_RESOURCE_PRIORITY_MINIMUM	( 0x28000000 )
-                                else if (!string.IsNullOrEmpty(match.Groups[7].Value))
-                                {
-                                    valueText = match.Groups[7].Value;
-                                }
-                                // 1.0, -2.0f
-                                else if (!string.IsNullOrEmpty(match.Groups[6].Value))
-                                {
-                                    valueText = match.Groups[6].Value;
-                                    string type = valueText.EndsWith('f') ? "float" : "double";
-                                    this.AddConstantValue(currentNamespace, type, name, valueText);
-                                    continue;
-                                }
-                                // 1 << 5
-                                else if (!string.IsNullOrEmpty(match.Groups[8].Value))
-                                {
-                                    string part1 = match.Groups[9].Value + "u";
-                                    string part2 = match.Groups[10].Value;
-                                    valueText = part1 + part2;
-                                }
-                                // MAKEINTRESOURCE(-4)
-                                else if (!string.IsNullOrEmpty(match.Groups[11].Value))
-                                {
-                                    nativeTypeName = "LPCWSTR";
-                                    valueText = match.Groups[12].Value;
-                                    this.AddConstantInteger(currentNamespace, nativeTypeName, name, valueText);
-                                    continue;
-                                }
-                                // (HWND)-4
-                                else if (!string.IsNullOrEmpty(match.Groups[13].Value))
-                                {
-                                    nativeTypeName = "HWND";
-                                    valueText = match.Groups[14].Value;
-                                    this.AddConstantInteger(currentNamespace, nativeTypeName, name, valueText);
-                                    continue;
-                                }
-                                // (IDENT_FOO + 4)
-                                else if (match.Groups[15].Success)
-                                {
-                                    valueText = match.Groups[15].Value;
-                                }
-                                // (NTSTATUS)0x00000000L
-                                else if (match.Groups[17].Success)
-                                {
-                                    nativeTypeName = "NTSTATUS";
-                                    valueText = match.Groups[18].Value;
-                                }
-                                // (DWORD)-1
-                                else if (match.Groups[20].Success)
-                                {
-                                    valueText = "0xFFFFFFFF";
-                                }
-                                // (BCRYPT_ALG_HANDLE) 0x000001a1
-                                else if (match.Groups[21].Success)
-                                {
-                                    nativeTypeName = "BCRYPT_ALG_HANDLE";
-                                    valueText = match.Groups[22].Value;
-                                }
-                                else
-                                {
-                                    continue;
-                                }
+
+                                valueText = match.Groups[3].Value;
+                            }
+                            // #define E_UNEXPECTED ((HRESULT)0x8000FFFF)
+                            else if (!string.IsNullOrEmpty(match.Groups[5].Value))
+                            {
+                                nativeTypeName = "HRESULT";
+                                valueText = match.Groups[5].Value;
+                            }
+                            // #define DXGI_RESOURCE_PRIORITY_MINIMUM	( 0x28000000 )
+                            else if (!string.IsNullOrEmpty(match.Groups[7].Value))
+                            {
+                                valueText = match.Groups[7].Value;
+                            }
+                            // 1.0, -2.0f
+                            else if (!string.IsNullOrEmpty(match.Groups[6].Value))
+                            {
+                                valueText = match.Groups[6].Value;
+                                string type = valueText.EndsWith('f') ? "float" : "double";
+                                this.AddConstantValue(currentNamespace, type, name, valueText);
+                                continue;
+                            }
+                            // 1 << 5
+                            else if (!string.IsNullOrEmpty(match.Groups[8].Value))
+                            {
+                                string part1 = match.Groups[9].Value + "u";
+                                string part2 = match.Groups[10].Value;
+                                valueText = part1 + part2;
+                            }
+                            // MAKEINTRESOURCE(-4)
+                            else if (!string.IsNullOrEmpty(match.Groups[11].Value))
+                            {
+                                nativeTypeName = "LPCWSTR";
+                                valueText = match.Groups[12].Value;
+                                this.AddConstantInteger(currentNamespace, nativeTypeName, name, valueText);
+                                continue;
+                            }
+                            // (HWND)-4
+                            else if (!string.IsNullOrEmpty(match.Groups[13].Value))
+                            {
+                                nativeTypeName = "HWND";
+                                valueText = match.Groups[14].Value;
+                                this.AddConstantInteger(currentNamespace, nativeTypeName, name, valueText);
+                                continue;
+                            }
+                            // (IDENT_FOO + 4)
+                            else if (match.Groups[15].Success)
+                            {
+                                valueText = match.Groups[15].Value;
+                            }
+                            // (NTSTATUS)0x00000000L
+                            else if (match.Groups[17].Success)
+                            {
+                                nativeTypeName = "NTSTATUS";
+                                valueText = match.Groups[18].Value;
+                            }
+                            // (DWORD)-1
+                            else if (match.Groups[20].Success)
+                            {
+                                valueText = "0xFFFFFFFF";
+                            }
+                            // (BCRYPT_ALG_HANDLE) 0x000001a1
+                            else if (match.Groups[21].Success)
+                            {
+                                nativeTypeName = "BCRYPT_ALG_HANDLE";
+                                valueText = match.Groups[22].Value;
                             }
                             else
                             {
-                                valueText = rawValue;
+                                continue;
+                            }
+                        }
+                        else
+                        {
+                            valueText = rawValue;
 
-                                // Don't do anything with strings. They can't be part of enums
-                                if (valueText.StartsWith('"') || valueText.StartsWith("L\"") || valueText.StartsWith("__TEXT"))
-                                {
-                                    continue;
-                                }
-
-                                valueText = valueText.Replace("(DWORD)", "(uint)");
+                            // Don't do anything with strings. They can't be part of enums
+                            if (valueText.StartsWith('"') || valueText.StartsWith("L\"") || valueText.StartsWith("__TEXT"))
+                            {
+                                continue;
                             }
 
-                            bool updatedEnum = false;
+                            valueText = valueText.Replace("(DWORD)", "(uint)");
+                        }
 
-                            // If we see the member is part of an enum, update the member value
-                            if (this.enumMemberNameToEnumObj.TryGetValue(name, out var enumObjList))
+                        bool updatedEnum = false;
+
+                        // If we see the member is part of an enum, update the member value
+                        if (this.enumMemberNameToEnumObj.TryGetValue(name, out var enumObjList))
+                        {
+                            foreach (EnumObject enumObj in enumObjList)
                             {
-                                foreach (var enumObj in enumObjList)
-                                {
-                                    enumObj.AddIfNotSet(name, valueText);
-                                    updatedEnum = true;
-                                }
+                                enumObj.AddIfNotSet(name, valueText);
+                                updatedEnum = true;
                             }
+                        }
 
-                            if (autoPopulateReg != null && nativeTypeName == null)
+                        if (autoPopulateReg != null && nativeTypeName == null)
+                        {
+                            Match autoPopulate = autoPopulateReg.Match(name);
+                            if (autoPopulate.Success)
                             {
-                                Match autoPopulate = autoPopulateReg.Match(name);
-                                if (autoPopulate.Success)
+                                for (int i = 1; i < autoPopulate.Groups.Count; i++)
                                 {
-                                    for (int i = 1; i < autoPopulate.Groups.Count; i++)
+                                    if (!string.IsNullOrEmpty(autoPopulate.Groups[i].Value))
                                     {
-                                        if (!string.IsNullOrEmpty(autoPopulate.Groups[i].Value))
+                                        EnumObject foundObjEnum = autoEnumObjsForCurrentHeader[i - 1];
+                                        foundObjEnum.AddIfNotSet(name, valueText);
+                                        updatedEnum = true;
+                                        if (!this.enumMemberNameToEnumObj.TryGetValue(name, out var list))
                                         {
-                                            var foundObjEnum = autoEnumObjsForCurrentHeader[i - 1];
-                                            foundObjEnum.AddIfNotSet(name, valueText);
-                                            updatedEnum = true;
-                                            if (!this.enumMemberNameToEnumObj.TryGetValue(name, out var list))
-                                            {
-                                                list = new List<EnumObject>();
-                                                this.enumMemberNameToEnumObj.Add(name, list);
-                                            }
-
-                                            list.Add(foundObjEnum);
-
-                                            break;
+                                            list = new List<EnumObject>();
+                                            this.enumMemberNameToEnumObj.Add(name, list);
                                         }
+
+                                        list.Add(foundObjEnum);
+
+                                        break;
                                     }
                                 }
                             }
+                        }
 
-                            // If we haven't used the member to update an enum, skip it...
-                            // ...unless it's an HRESULT. Always emit them as constants too
-                            if (match.Success && (!updatedEnum || nativeTypeName != null))
+                        // If we haven't used the member to update an enum, skip it...
+                        // ...unless it's an HRESULT. Always emit them as constants too
+                        if (match.Success && (!updatedEnum || nativeTypeName != null))
+                        {
+                            // Only add the constant if it's not part of a manual enum
+                            if (!manualEnumMemberNames.Contains(name))
                             {
-                                // Only add the constant if it's not part of a manual enum
-                                if (!manualEnumMemberNames.Contains(name))
-                                {
-                                    this.AddConstantInteger(currentNamespace, nativeTypeName, name, valueText);
-                                }
+                                this.AddConstantInteger(currentNamespace, nativeTypeName, name, valueText);
                             }
                         }
                     }
-                }
+                    }
             }
 
             private void TryScrapingEnumFlags(string line)
             {
-                var match = DefineEnumFlagsRegex.Match(line);
+                Match match = DefineEnumFlagsRegex.Match(line);
                 if (match.Success)
                 {
                     var enumName = match.Groups[1].Value;
@@ -762,21 +751,21 @@ namespace MetadataUtils
             {
                 // Output the enums and the rsp entries that map parameters and fields to use
                 // enum names
-                var enumRemapsFileName = Path.Combine(this.EmitterGeneratedDir, "enumsRemap.rsp");
+                var enumRemapsFileName = Path.Combine(this.scraperOutputDir, "enumsRemap.rsp");
 
                 bool linesAdded = false;
                 using (StreamWriter enumRemapsWriter = new StreamWriter(enumRemapsFileName))
                 {
-                    enumRemapsWriter.WriteLine("--remap");
+                    enumRemapsWriter.WriteLine("--memberRemap");
 
                     // For each enum object...
-                    foreach (var obj in this.enumObjectsFromJsons)
+                    foreach (EnumObject obj in this.enumObjectsFromJsons)
                     {
                         string foundNamespace = obj.@namespace;
                         List<string> remapsToAdd = new List<string>();
                         int remapCount = 0;
                         // For each use in an enum...
-                        foreach (var use in obj.uses)
+                        foreach (EnumObject.Use use in obj.uses)
                         {
                             string lookupNameForNamespace;
                             string remapName = use.ToString();
@@ -836,17 +825,17 @@ namespace MetadataUtils
                         }
 
                         // Lookup the enum writer in the cache or add it if we can't find it
-                        if (!namespacesToEnumWriters.TryGetValue(foundNamespace, out var enumWriter))
+                        if (!this.namespacesToEnumWriters.TryGetValue(foundNamespace, out var enumWriter))
                         {
                             string fixedNamespaceName = foundNamespace.Replace("Windows.Win32.", string.Empty);
-                            string enumFile = Path.Combine(this.EmitterGeneratedDir, $"{fixedNamespaceName}.enums.cs");
+                            string enumFile = Path.Combine(this.scraperOutputDir, $"{fixedNamespaceName}.enums.cs");
                             if (File.Exists(enumFile))
                             {
                                 File.Delete(enumFile);
                             }
 
                             enumWriter = new EnumWriter(enumFile, foundNamespace, this.constantsHeaderText);
-                            namespacesToEnumWriters.Add(foundNamespace, enumWriter);
+                            this.namespacesToEnumWriters.Add(foundNamespace, enumWriter);
                         }
 
                         if (obj.name != null)

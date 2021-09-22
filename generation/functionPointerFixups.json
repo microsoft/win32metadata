@@ -1,0 +1,639 @@
+[
+  {
+    "name": "TIMECALLBACK",
+    "pointerType": "LPTIMECALLBACK"
+  },
+  {
+    "name": "INTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK",
+    "pointerType": "PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK"
+  },
+  {
+    "name": "RPCNOTIFICATION_ROUTINE",
+    "pointerType": "PFN_RPCNOTIFICATION_ROUTINE"
+  },
+  {
+    "name": "CHANNEL_INIT_EVENT_FN",
+    "pointerType": "PCHANNEL_INIT_EVENT_FN"
+  },
+  {
+    "name": "CHANNEL_OPEN_EVENT_FN",
+    "pointerType": "PCHANNEL_OPEN_EVENT_FN"
+  },
+  {
+    "name": "VIRTUALCHANNELINIT",
+    "pointerType": "PVIRTUALCHANNELINIT"
+  },
+  {
+    "name": "VIRTUALCHANNELOPEN",
+    "pointerType": "PVIRTUALCHANNELOPEN"
+  },
+  {
+    "name": "VIRTUALCHANNELCLOSE",
+    "pointerType": "PVIRTUALCHANNELCLOSE"
+  },
+  {
+    "name": "VIRTUALCHANNELWRITE",
+    "pointerType": "PVIRTUALCHANNELWRITE"
+  },
+  {
+    "name": "VIRTUALCHANNELENTRY",
+    "pointerType": "PVIRTUALCHANNELENTRY"
+  },
+  {
+    "name": "ALLOCATEBUFFER",
+    "pointerType": "LPALLOCATEBUFFER"
+  },
+  {
+    "name": "ALLOCATEMORE",
+    "pointerType": "LPALLOCATEMORE"
+  },
+  {
+    "name": "FREEBUFFER",
+    "pointerType": "LPFREEBUFFER"
+  },
+  {
+    "name": "NOTIFCALLBACK",
+    "pointerType": "LPNOTIFCALLBACK"
+  },
+  {
+    "name": "ACCELERATEABSDI",
+    "pointerType": "LPFNABSDI"
+  },
+  {
+    "name": "DISMISSMODELESS",
+    "pointerType": "LPFNDISMISS"
+  },
+  {
+    "name": "WABOPEN",
+    "pointerType": "LPWABOPEN"
+  },
+  {
+    "name": "WABOPENEX",
+    "pointerType": "LPWABOPENEX"
+  },
+  {
+    "name": "DNS_QUERY_COMPLETION_ROUTINE",
+    "pointerType": "PDNS_QUERY_COMPLETION_ROUTINE"
+  },
+  {
+    "name": "DNS_SERVICE_BROWSE_CALLBACK",
+    "pointerType": "PDNS_SERVICE_BROWSE_CALLBACK"
+  },
+  {
+    "name": "DNS_SERVICE_RESOLVE_COMPLETE",
+    "pointerType": "PDNS_SERVICE_RESOLVE_COMPLETE"
+  },
+  {
+    "name": "DNS_SERVICE_REGISTER_COMPLETE",
+    "pointerType": "PDNS_SERVICE_REGISTER_COMPLETE"
+  },
+  {
+    "name": "MDNS_QUERY_CALLBACK",
+    "pointerType": "PMDNS_QUERY_CALLBACK"
+  },
+  {
+    "name": "RTL_UMS_SCHEDULER_ENTRY_POINT",
+    "pointerType": "PRTL_UMS_SCHEDULER_ENTRY_POINT"
+  },
+  {
+    "name": "PFIBER_START_ROUTINE",
+    "pointerType": "LPFIBER_START_ROUTINE"
+  },
+  {
+    "name": "FEATURE_STATE_CHANGE_CALLBACK",
+    "pointerType": "PFEATURE_STATE_CHANGE_CALLBACK"
+  },
+  {
+    "name": "BAD_MEMORY_CALLBACK_ROUTINE",
+    "pointerType": "PBAD_MEMORY_CALLBACK_ROUTINE"
+  },
+  {
+    "name": "PWRSCHEMESENUMPROC_V2",
+    "pointerType": "PWRSCHEMESENUMPROC"
+  },
+  {
+    "name": "DEVICE_NOTIFY_CALLBACK_ROUTINE",
+    "pointerType": "PDEVICE_NOTIFY_CALLBACK_ROUTINE"
+  },
+  {
+    "name": "PBMCALLBACKFN",
+    "pointerType": "LPBMCALLBACKFN"
+  },
+  {
+    "name": "MAPILOGON",
+    "pointerType": "LPMAPILOGON"
+  },
+  {
+    "name": "MAPILOGOFF",
+    "pointerType": "LPMAPILOGOFF"
+  },
+  {
+    "name": "MAPISENDMAIL",
+    "pointerType": "LPMAPISENDMAIL"
+  },
+  {
+    "name": "MAPISENDMAILW",
+    "pointerType": "LPMAPISENDMAILW"
+  },
+  {
+    "name": "MAPIFINDNEXT",
+    "pointerType": "LPMAPIFINDNEXT"
+  },
+  {
+    "name": "MAPIREADMAIL",
+    "pointerType": "LPMAPIREADMAIL"
+  },
+  {
+    "name": "MAPISAVEMAIL",
+    "pointerType": "LPMAPISAVEMAIL"
+  },
+  {
+    "name": "MAPIDELETEMAIL",
+    "pointerType": "LPMAPIDELETEMAIL"
+  },
+  {
+    "name": "MAPIADDRESS",
+    "pointerType": "LPMAPIADDRESS"
+  },
+  {
+    "name": "MAPIDETAILS",
+    "pointerType": "LPMAPIDETAILS"
+  },
+  {
+    "name": "MAPIRESOLVENAME",
+    "pointerType": "LPMAPIRESOLVENAME"
+  },
+  {
+    "name": "GET_RESOURCE_STRING_FN",
+    "pointerType": "PGET_RESOURCE_STRING_FN"
+  },
+  {
+    "name": "NS_CONTEXT_COMMIT_FN",
+    "pointerType": "PNS_CONTEXT_COMMIT_FN"
+  },
+  {
+    "name": "NS_CONTEXT_CONNECT_FN",
+    "pointerType": "PNS_CONTEXT_CONNECT_FN"
+  },
+  {
+    "name": "NS_CONTEXT_DUMP_FN",
+    "pointerType": "PNS_CONTEXT_DUMP_FN"
+  },
+  {
+    "name": "NS_DLL_STOP_FN",
+    "pointerType": "PNS_DLL_STOP_FN"
+  },
+  {
+    "name": "NS_HELPER_START_FN",
+    "pointerType": "PNS_HELPER_START_FN"
+  },
+  {
+    "name": "NS_HELPER_STOP_FN",
+    "pointerType": "PNS_HELPER_STOP_FN"
+  },
+  {
+    "name": "FN_HANDLE_CMD",
+    "pointerType": "PFN_HANDLE_CMD"
+  },
+  {
+    "name": "NS_OSVERSIONCHECK",
+    "pointerType": "PNS_OSVERSIONCHECK"
+  },
+  {
+    "name": "NS_DLL_INIT_FN",
+    "pointerType": "PNS_DLL_INIT_FN"
+  },
+  {
+    "name": "DRVCALLBACK",
+    "pointerType": "LPDRVCALLBACK"
+  },
+  {
+    "name": "MMIOPROC",
+    "pointerType": "LPMMIOPROC"
+  },
+  {
+    "name": "ACMDRIVERPROC",
+    "pointerType": "LPACMDRIVERPROC"
+  },
+  {
+    "name": "JOYDEVMSGPROC",
+    "pointerType": "LPJOYDEVMSGPROC"
+  },
+  {
+    "name": "TASKCALLBACK",
+    "pointerType": "LPTASKCALLBACK"
+  },
+  {
+    "name": "INSTALLUI_HANDLER_RECORD",
+    "pointerType": "PINSTALLUI_HANDLER_RECORD"
+  },
+  {
+    "name": "LPFNADDPROPSHEETPAGE",
+    "pointerType": "LPFNSVADDPROPSHEETPAGE"
+  },
+  {
+    "name": "PTOP_LEVEL_EXCEPTION_FILTER",
+    "pointerType": "LPTOP_LEVEL_EXCEPTION_FILTER"
+  },
+  {
+    "name": "SC_NOTIFICATION_CALLBACK",
+    "pointerType": "PSC_NOTIFICATION_CALLBACK"
+  },
+  {
+    "name": "LSA_CREATE_LOGON_SESSION",
+    "pointerType": "PLSA_CREATE_LOGON_SESSION"
+  },
+  {
+    "name": "LSA_DELETE_LOGON_SESSION",
+    "pointerType": "PLSA_DELETE_LOGON_SESSION"
+  },
+  {
+    "name": "LSA_ADD_CREDENTIAL",
+    "pointerType": "PLSA_ADD_CREDENTIAL"
+  },
+  {
+    "name": "LSA_GET_CREDENTIALS",
+    "pointerType": "PLSA_GET_CREDENTIALS"
+  },
+  {
+    "name": "LSA_DELETE_CREDENTIAL",
+    "pointerType": "PLSA_DELETE_CREDENTIAL"
+  },
+  {
+    "name": "LSA_ALLOCATE_LSA_HEAP",
+    "pointerType": "PLSA_ALLOCATE_LSA_HEAP"
+  },
+  {
+    "name": "LSA_FREE_LSA_HEAP",
+    "pointerType": "PLSA_FREE_LSA_HEAP"
+  },
+  {
+    "name": "LSA_ALLOCATE_PRIVATE_HEAP",
+    "pointerType": "PLSA_ALLOCATE_PRIVATE_HEAP"
+  },
+  {
+    "name": "LSA_FREE_PRIVATE_HEAP",
+    "pointerType": "PLSA_FREE_PRIVATE_HEAP"
+  },
+  {
+    "name": "LSA_ALLOCATE_CLIENT_BUFFER",
+    "pointerType": "PLSA_ALLOCATE_CLIENT_BUFFER"
+  },
+  {
+    "name": "LSA_FREE_CLIENT_BUFFER",
+    "pointerType": "PLSA_FREE_CLIENT_BUFFER"
+  },
+  {
+    "name": "LSA_COPY_TO_CLIENT_BUFFER",
+    "pointerType": "PLSA_COPY_TO_CLIENT_BUFFER"
+  },
+  {
+    "name": "LSA_COPY_FROM_CLIENT_BUFFER",
+    "pointerType": "PLSA_COPY_FROM_CLIENT_BUFFER"
+  },
+  {
+    "name": "LSA_AP_INITIALIZE_PACKAGE",
+    "pointerType": "PLSA_AP_INITIALIZE_PACKAGE"
+  },
+  {
+    "name": "LSA_AP_LOGON_USER",
+    "pointerType": "PLSA_AP_LOGON_USER"
+  },
+  {
+    "name": "LSA_AP_LOGON_USER_EX",
+    "pointerType": "PLSA_AP_LOGON_USER_EX"
+  },
+  {
+    "name": "LSA_AP_CALL_PACKAGE",
+    "pointerType": "PLSA_AP_CALL_PACKAGE"
+  },
+  {
+    "name": "LSA_AP_CALL_PACKAGE_PASSTHROUGH",
+    "pointerType": "PLSA_AP_CALL_PACKAGE_PASSTHROUGH"
+  },
+  {
+    "name": "LSA_AP_LOGON_TERMINATED",
+    "pointerType": "PLSA_AP_LOGON_TERMINATED"
+  },
+  {
+    "name": "LSA_CALLBACK_FUNCTION",
+    "pointerType": "PLSA_CALLBACK_FUNCTION"
+  },
+  {
+    "name": "LSA_REDIRECTED_LOGON_INIT",
+    "pointerType": "PLSA_REDIRECTED_LOGON_INIT"
+  },
+  {
+    "name": "LSA_REDIRECTED_LOGON_CALLBACK",
+    "pointerType": "PLSA_REDIRECTED_LOGON_CALLBACK"
+  },
+  {
+    "name": "LSA_REDIRECTED_LOGON_GET_LOGON_CREDS",
+    "pointerType": "PLSA_REDIRECTED_LOGON_GET_LOGON_CREDS"
+  },
+  {
+    "name": "LSA_REDIRECTED_LOGON_GET_SUPP_CREDS",
+    "pointerType": "PLSA_REDIRECTED_LOGON_GET_SUPP_CREDS"
+  },
+  {
+    "name": "LSA_REDIRECTED_LOGON_CLEANUP_CALLBACK",
+    "pointerType": "PLSA_REDIRECTED_LOGON_CLEANUP_CALLBACK"
+  },
+  {
+    "name": "LSA_IMPERSONATE_CLIENT",
+    "pointerType": "PLSA_IMPERSONATE_CLIENT"
+  },
+  {
+    "name": "LSA_UNLOAD_PACKAGE",
+    "pointerType": "PLSA_UNLOAD_PACKAGE"
+  },
+  {
+    "name": "LSA_DUPLICATE_HANDLE",
+    "pointerType": "PLSA_DUPLICATE_HANDLE"
+  },
+  {
+    "name": "LSA_SAVE_SUPPLEMENTAL_CREDENTIALS",
+    "pointerType": "PLSA_SAVE_SUPPLEMENTAL_CREDENTIALS"
+  },
+  {
+    "name": "LSA_CREATE_THREAD",
+    "pointerType": "PLSA_CREATE_THREAD"
+  },
+  {
+    "name": "LSA_GET_CLIENT_INFO",
+    "pointerType": "PLSA_GET_CLIENT_INFO"
+  },
+  {
+    "name": "LSA_REGISTER_NOTIFICATION",
+    "pointerType": "PLSA_REGISTER_NOTIFICATION"
+  },
+  {
+    "name": "LSA_CANCEL_NOTIFICATION",
+    "pointerType": "PLSA_CANCEL_NOTIFICATION"
+  },
+  {
+    "name": "LSA_MAP_BUFFER",
+    "pointerType": "PLSA_MAP_BUFFER"
+  },
+  {
+    "name": "LSA_CREATE_TOKEN",
+    "pointerType": "PLSA_CREATE_TOKEN"
+  },
+  {
+    "name": "LSA_AUDIT_LOGON",
+    "pointerType": "PLSA_AUDIT_LOGON"
+  },
+  {
+    "name": "LSA_CALL_PACKAGE",
+    "pointerType": "PLSA_CALL_PACKAGE"
+  },
+  {
+    "name": "LSA_CALL_PACKAGEEX",
+    "pointerType": "PLSA_CALL_PACKAGEEX"
+  },
+  {
+    "name": "LSA_GET_CALL_INFO",
+    "pointerType": "PLSA_GET_CALL_INFO"
+  },
+  {
+    "name": "LSA_AP_LOGON_USER_EX2",
+    "pointerType": "PLSA_AP_LOGON_USER_EX2"
+  },
+  {
+    "name": "LSA_AP_LOGON_USER_EX3",
+    "pointerType": "PLSA_AP_LOGON_USER_EX3"
+  },
+  {
+    "name": "LSA_CREATE_SHARED_MEMORY",
+    "pointerType": "PLSA_CREATE_SHARED_MEMORY"
+  },
+  {
+    "name": "LSA_ALLOCATE_SHARED_MEMORY",
+    "pointerType": "PLSA_ALLOCATE_SHARED_MEMORY"
+  },
+  {
+    "name": "LSA_FREE_SHARED_MEMORY",
+    "pointerType": "PLSA_FREE_SHARED_MEMORY"
+  },
+  {
+    "name": "LSA_DELETE_SHARED_MEMORY",
+    "pointerType": "PLSA_DELETE_SHARED_MEMORY"
+  },
+  {
+    "name": "LSA_OPEN_SAM_USER",
+    "pointerType": "PLSA_OPEN_SAM_USER"
+  },
+  {
+    "name": "LSA_GET_USER_CREDENTIALS",
+    "pointerType": "PLSA_GET_USER_CREDENTIALS"
+  },
+  {
+    "name": "LSA_GET_USER_AUTH_DATA",
+    "pointerType": "PLSA_GET_USER_AUTH_DATA"
+  },
+  {
+    "name": "LSA_CLOSE_SAM_USER",
+    "pointerType": "PLSA_CLOSE_SAM_USER"
+  },
+  {
+    "name": "LSA_CONVERT_AUTH_DATA_TO_TOKEN",
+    "pointerType": "PLSA_CONVERT_AUTH_DATA_TO_TOKEN"
+  },
+  {
+    "name": "LSA_CLIENT_CALLBACK",
+    "pointerType": "PLSA_CLIENT_CALLBACK"
+  },
+  {
+    "name": "LSA_REGISTER_CALLBACK",
+    "pointerType": "PLSA_REGISTER_CALLBACK"
+  },
+  {
+    "name": "LSA_UPDATE_PRIMARY_CREDENTIALS",
+    "pointerType": "PLSA_UPDATE_PRIMARY_CREDENTIALS"
+  },
+  {
+    "name": "LSA_GET_AUTH_DATA_FOR_USER",
+    "pointerType": "PLSA_GET_AUTH_DATA_FOR_USER"
+  },
+  {
+    "name": "LSA_CRACK_SINGLE_NAME",
+    "pointerType": "PLSA_CRACK_SINGLE_NAME"
+  },
+  {
+    "name": "LSA_AUDIT_ACCOUNT_LOGON",
+    "pointerType": "PLSA_AUDIT_ACCOUNT_LOGON"
+  },
+  {
+    "name": "LSA_CALL_PACKAGE_PASSTHROUGH",
+    "pointerType": "PLSA_CALL_PACKAGE_PASSTHROUGH"
+  },
+  {
+    "name": "LSA_PROTECT_MEMORY",
+    "pointerType": "PLSA_PROTECT_MEMORY"
+  },
+  {
+    "name": "LSA_OPEN_TOKEN_BY_LOGON_ID",
+    "pointerType": "PLSA_OPEN_TOKEN_BY_LOGON_ID"
+  },
+  {
+    "name": "LSA_EXPAND_AUTH_DATA_FOR_DOMAIN",
+    "pointerType": "PLSA_EXPAND_AUTH_DATA_FOR_DOMAIN"
+  },
+  {
+    "name": "LSA_CREATE_TOKEN_EX",
+    "pointerType": "PLSA_CREATE_TOKEN_EX"
+  },
+  {
+    "name": "LSA_GET_EXTENDED_CALL_FLAGS ",
+    "pointerType": "PLSA_GET_EXTENDED_CALL_FLAGS"
+  },
+  {
+    "name": "LSA_GET_SERVICE_ACCOUNT_PASSWORD",
+    "pointerType": "PLSA_GET_SERVICE_ACCOUNT_PASSWORD"
+  },
+  {
+    "name": "LSA_AUDIT_LOGON_EX",
+    "pointerType": "PLSA_AUDIT_LOGON_EX"
+  },
+  {
+    "name": "LSA_CHECK_PROTECTED_USER_BY_TOKEN",
+    "pointerType": "PLSA_CHECK_PROTECTED_USER_BY_TOKEN"
+  },
+  {
+    "name": "LSA_QUERY_CLIENT_REQUEST",
+    "pointerType": "PLSA_QUERY_CLIENT_REQUEST"
+  },
+  {
+    "name": "LSA_GET_APP_MODE_INFO",
+    "pointerType": "PLSA_GET_APP_MODE_INFO"
+  },
+  {
+    "name": "LSA_SET_APP_MODE_INFO",
+    "pointerType": "PLSA_SET_APP_MODE_INFO"
+  },
+  {
+    "name": "KSEC_CREATE_CONTEXT_LIST",
+    "pointerType": "PKSEC_CREATE_CONTEXT_LIST"
+  },
+  {
+    "name": "KSEC_INSERT_LIST_ENTRY",
+    "pointerType": "PKSEC_INSERT_LIST_ENTRY"
+  },
+  {
+    "name": "KSEC_REFERENCE_LIST_ENTRY",
+    "pointerType": "PKSEC_REFERENCE_LIST_ENTRY"
+  },
+  {
+    "name": "KSEC_DEREFERENCE_LIST_ENTRY",
+    "pointerType": "PKSEC_DEREFERENCE_LIST_ENTRY"
+  },
+  {
+    "name": "KSEC_SERIALIZE_WINNT_AUTH_DATA",
+    "pointerType": "PKSEC_SERIALIZE_WINNT_AUTH_DATA"
+  },
+  {
+    "name": "KSEC_SERIALIZE_SCHANNEL_AUTH_DATA",
+    "pointerType": "PKSEC_SERIALIZE_SCHANNEL_AUTH_DATA"
+  },
+  {
+    "name": "KSEC_LOCATE_PKG_BY_ID",
+    "pointerType": "PKSEC_LOCATE_PKG_BY_ID"
+  },
+  {
+    "name": "MAPISENDDOCUMENTS",
+    "pointerType": "LPMAPISENDDOCUMENTS"
+  },
+  {
+    "name": "QUERYHANDLER",
+    "pointerType": "PQUERYHANDLER"
+  },
+  {
+    "name": "LSA_LOCATE_PKG_BY_ID",
+    "pointerType": "PLSA_LOCATE_PKG_BY_ID"
+  },
+  {
+    "name": "LSA_AP_PRE_LOGON_USER_SURROGATE",
+    "pointerType": "PLSA_AP_PRE_LOGON_USER_SURROGATE"
+  },
+  {
+    "name": "LSA_AP_POST_LOGON_USER_SURROGATE",
+    "pointerType": "PLSA_AP_POST_LOGON_USER_SURROGATE"
+  },
+  {
+    "name": "QUERYFORCONNECTION"
+  },
+  {
+    "name": "NOTIFYOFNEWCONNECTION"
+  },
+  {
+    "name": "DEREFERENCECONNECTION"
+  },
+  {
+    "name": "UCharIteratorGetIndex"
+  },
+  {
+    "name": "UCharIteratorMove"
+  },
+  {
+    "name": "UCharIteratorHasNext"
+  },
+  {
+    "name": "UCharIteratorHasPrevious"
+  },
+  {
+    "name": "UCharIteratorCurrent"
+  },
+  {
+    "name": "UCharIteratorNext"
+  },
+  {
+    "name": "UCharIteratorPrevious"
+  },
+  {
+    "name": "UCharIteratorReserved"
+  },
+  {
+    "name": "UCharIteratorGetState"
+  },
+  {
+    "name": "UCharIteratorSetState"
+  },
+  {
+    "name": "OLDFONTENUMPROCA",
+    "pointerType": "FONTENUMPROCA",
+    "alreadyPointer": true
+  },
+  {
+    "name": "OLDFONTENUMPROCW",
+    "pointerType": "FONTENUMPROCW",
+    "alreadyPointer": true
+  },
+  {
+    "name": "_EVENT_CALLBACK",
+    "pointerType": "RTM_EVENT_CALLBACK",
+    "alreadyPointer": true
+  },
+  {
+    "name": "_ENTITY_METHOD",
+    "pointerType": "RTM_ENTITY_EXPORT_METHOD",
+    "alreadyPointer": true
+  },
+  {
+    "name": "PTHREAD_START_ROUTINE",
+    "pointerType": "LPTHREAD_START_ROUTINE",
+    "alreadyPointer": true
+  },
+  {
+    "name": "INTERNET_STATUS_CALLBACK",
+    "pointerType": "LPINTERNET_STATUS_CALLBACK",
+    "alreadyPointer": true
+  },
+  {
+    "name": "GET_RUNTIME_FUNCTION_CALLBACK",
+    "pointerType": "PGET_RUNTIME_FUNCTION_CALLBACK"
+  },
+  {
+    "name": "OUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK",
+    "pointerType": "POUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK"
+  }
+]

@@ -1,0 +1,1103 @@
+using System;
+using Windows.Win32.Foundation;
+using Windows.Win32.Interop;
+using Windows.Win32.System.PropertiesSystem; // For PROPERTYKEY
+using Windows.Win32.System.SystemServices;
+using static Windows.Win32.Foundation.Apis; // Various constants
+using static Windows.Win32.System.Diagnostics.Debug.WIN32_ERROR;
+using static Windows.Win32.System.SystemServices.Apis; // Various constants
+using static Windows.Win32.Media.Multimedia.Apis; // Various constants
+using static Windows.Win32.Media.Audio.CoreAudio.Apis; // Various constants
+using static Windows.Win32.Graphics.DirectShow.Apis; // Various constants
+using static Windows.Win32.UI.WindowsAndMessaging.Apis; // For WM_USER
+using static Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS; // For FILE_* constants
+using static Windows.Win32.System.Diagnostics.Debug.FACILITY_CODE; // For MAKE_HRESULT constants
+
+
+using static Windows.Win32.UI.Controls.Apis;
+
+namespace Windows.Win32.UI.Controls
+{
+    public enum THEME_PROPERTY_SYMBOL_ID : uint
+    {
+        TMT_RESERVEDLOW = 0,
+        TMT_RESERVEDHIGH = 7999,
+        TMT_DIBDATA = 2,
+        TMT_GLYPHDIBDATA = 8,
+        TMT_ENUM = 200,
+        TMT_STRING = 201,
+        TMT_INT = 202,
+        TMT_BOOL = 203,
+        TMT_COLOR = 204,
+        TMT_MARGINS = 205,
+        TMT_FILENAME = 206,
+        TMT_SIZE = 207,
+        TMT_POSITION = 208,
+        TMT_RECT = 209,
+        TMT_FONT = 210,
+        TMT_INTLIST = 211,
+        TMT_HBITMAP = 212,
+        TMT_DISKSTREAM = 213,
+        TMT_STREAM = 214,
+        TMT_BITMAPREF = 215,
+        TMT_FLOAT = 216,
+        TMT_FLOATLIST = 217,
+        TMT_COLORSCHEMES = 401,
+        TMT_SIZES = 402,
+        TMT_CHARSET = 403,
+        TMT_NAME = 600,
+        TMT_DISPLAYNAME = 601,
+        TMT_TOOLTIP = 602,
+        TMT_COMPANY = 603,
+        TMT_AUTHOR = 604,
+        TMT_COPYRIGHT = 605,
+        TMT_URL = 606,
+        TMT_VERSION = 607,
+        TMT_DESCRIPTION = 608,
+        TMT_FIRST_RCSTRING_NAME = TMT_DISPLAYNAME,
+        TMT_LAST_RCSTRING_NAME = TMT_DESCRIPTION,
+        TMT_CAPTIONFONT = 801,
+        TMT_SMALLCAPTIONFONT = 802,
+        TMT_MENUFONT = 803,
+        TMT_STATUSFONT = 804,
+        TMT_MSGBOXFONT = 805,
+        TMT_ICONTITLEFONT = 806,
+        TMT_HEADING1FONT = 807,
+        TMT_HEADING2FONT = 808,
+        TMT_BODYFONT = 809,
+        TMT_FIRSTFONT = TMT_CAPTIONFONT,
+        TMT_LASTFONT = TMT_BODYFONT,
+        TMT_FLATMENUS = 1001,
+        TMT_FIRSTBOOL = TMT_FLATMENUS,
+        TMT_LASTBOOL = TMT_FLATMENUS,
+        TMT_SIZINGBORDERWIDTH = 1201,
+        TMT_SCROLLBARWIDTH = 1202,
+        TMT_SCROLLBARHEIGHT = 1203,
+        TMT_CAPTIONBARWIDTH = 1204,
+        TMT_CAPTIONBARHEIGHT = 1205,
+        TMT_SMCAPTIONBARWIDTH = 1206,
+        TMT_SMCAPTIONBARHEIGHT = 1207,
+        TMT_MENUBARWIDTH = 1208,
+        TMT_MENUBARHEIGHT = 1209,
+        TMT_PADDEDBORDERWIDTH = 1210,
+        TMT_FIRSTSIZE = TMT_SIZINGBORDERWIDTH,
+        TMT_LASTSIZE = TMT_PADDEDBORDERWIDTH,
+        TMT_MINCOLORDEPTH = 1301,
+        TMT_FIRSTINT = TMT_MINCOLORDEPTH,
+        TMT_LASTINT = TMT_MINCOLORDEPTH,
+        TMT_CSSNAME = 1401,
+        TMT_XMLNAME = 1402,
+        TMT_LASTUPDATED = 1403,
+        TMT_ALIAS = 1404,
+        TMT_FIRSTSTRING = TMT_CSSNAME,
+        TMT_LASTSTRING = TMT_ALIAS,
+        TMT_SCROLLBAR = 1601,
+        TMT_BACKGROUND = 1602,
+        TMT_ACTIVECAPTION = 1603,
+        TMT_INACTIVECAPTION = 1604,
+        TMT_MENU = 1605,
+        TMT_WINDOW = 1606,
+        TMT_WINDOWFRAME = 1607,
+        TMT_MENUTEXT = 1608,
+        TMT_WINDOWTEXT = 1609,
+        TMT_CAPTIONTEXT = 1610,
+        TMT_ACTIVEBORDER = 1611,
+        TMT_INACTIVEBORDER = 1612,
+        TMT_APPWORKSPACE = 1613,
+        TMT_HIGHLIGHT = 1614,
+        TMT_HIGHLIGHTTEXT = 1615,
+        TMT_BTNFACE = 1616,
+        TMT_BTNSHADOW = 1617,
+        TMT_GRAYTEXT = 1618,
+        TMT_BTNTEXT = 1619,
+        TMT_INACTIVECAPTIONTEXT = 1620,
+        TMT_BTNHIGHLIGHT = 1621,
+        TMT_DKSHADOW3D = 1622,
+        TMT_LIGHT3D = 1623,
+        TMT_INFOTEXT = 1624,
+        TMT_INFOBK = 1625,
+        TMT_BUTTONALTERNATEFACE = 1626,
+        TMT_HOTTRACKING = 1627,
+        TMT_GRADIENTACTIVECAPTION = 1628,
+        TMT_GRADIENTINACTIVECAPTION = 1629,
+        TMT_MENUHILIGHT = 1630,
+        TMT_MENUBAR = 1631,
+        TMT_FIRSTCOLOR = TMT_SCROLLBAR,
+        TMT_LASTCOLOR = TMT_MENUBAR,
+        TMT_FROMHUE1 = 1801,
+        TMT_FROMHUE2 = 1802,
+        TMT_FROMHUE3 = 1803,
+        TMT_FROMHUE4 = 1804,
+        TMT_FROMHUE5 = 1805,
+        TMT_TOHUE1 = 1806,
+        TMT_TOHUE2 = 1807,
+        TMT_TOHUE3 = 1808,
+        TMT_TOHUE4 = 1809,
+        TMT_TOHUE5 = 1810,
+        TMT_FROMCOLOR1 = 2001,
+        TMT_FROMCOLOR2 = 2002,
+        TMT_FROMCOLOR3 = 2003,
+        TMT_FROMCOLOR4 = 2004,
+        TMT_FROMCOLOR5 = 2005,
+        TMT_TOCOLOR1 = 2006,
+        TMT_TOCOLOR2 = 2007,
+        TMT_TOCOLOR3 = 2008,
+        TMT_TOCOLOR4 = 2009,
+        TMT_TOCOLOR5 = 2010,
+        TMT_TRANSPARENT = 2201,
+        TMT_AUTOSIZE = 2202,
+        TMT_BORDERONLY = 2203,
+        TMT_COMPOSITED = 2204,
+        TMT_BGFILL = 2205,
+        TMT_GLYPHTRANSPARENT = 2206,
+        TMT_GLYPHONLY = 2207,
+        TMT_ALWAYSSHOWSIZINGBAR = 2208,
+        TMT_MIRRORIMAGE = 2209,
+        TMT_UNIFORMSIZING = 2210,
+        TMT_INTEGRALSIZING = 2211,
+        TMT_SOURCEGROW = 2212,
+        TMT_SOURCESHRINK = 2213,
+        TMT_DRAWBORDERS = 2214,
+        TMT_NOETCHEDEFFECT = 2215,
+        TMT_TEXTAPPLYOVERLAY = 2216,
+        TMT_TEXTGLOW = 2217,
+        TMT_TEXTITALIC = 2218,
+        TMT_COMPOSITEDOPAQUE = 2219,
+        TMT_LOCALIZEDMIRRORIMAGE = 2220,
+        TMT_IMAGECOUNT = 2401,
+        TMT_ALPHALEVEL = 2402,
+        TMT_BORDERSIZE = 2403,
+        TMT_ROUNDCORNERWIDTH = 2404,
+        TMT_ROUNDCORNERHEIGHT = 2405,
+        TMT_GRADIENTRATIO1 = 2406,
+        TMT_GRADIENTRATIO2 = 2407,
+        TMT_GRADIENTRATIO3 = 2408,
+        TMT_GRADIENTRATIO4 = 2409,
+        TMT_GRADIENTRATIO5 = 2410,
+        TMT_PROGRESSCHUNKSIZE = 2411,
+        TMT_PROGRESSSPACESIZE = 2412,
+        TMT_SATURATION = 2413,
+        TMT_TEXTBORDERSIZE = 2414,
+        TMT_ALPHATHRESHOLD = 2415,
+        TMT_WIDTH = 2416,
+        TMT_HEIGHT = 2417,
+        TMT_GLYPHINDEX = 2418,
+        TMT_TRUESIZESTRETCHMARK = 2419,
+        TMT_MINDPI1 = 2420,
+        TMT_MINDPI2 = 2421,
+        TMT_MINDPI3 = 2422,
+        TMT_MINDPI4 = 2423,
+        TMT_MINDPI5 = 2424,
+        TMT_TEXTGLOWSIZE = 2425,
+        TMT_FRAMESPERSECOND = 2426,
+        TMT_PIXELSPERFRAME = 2427,
+        TMT_ANIMATIONDELAY = 2428,
+        TMT_GLOWINTENSITY = 2429,
+        TMT_OPACITY = 2430,
+        TMT_COLORIZATIONCOLOR = 2431,
+        TMT_COLORIZATIONOPACITY = 2432,
+        TMT_MINDPI6 = 2433,
+        TMT_MINDPI7 = 2434,
+        TMT_GLYPHFONT = 2601,
+        TMT_IMAGEFILE = 3001,
+        TMT_IMAGEFILE1 = 3002,
+        TMT_IMAGEFILE2 = 3003,
+        TMT_IMAGEFILE3 = 3004,
+        TMT_IMAGEFILE4 = 3005,
+        TMT_IMAGEFILE5 = 3006,
+        TMT_GLYPHIMAGEFILE = 3008,
+        TMT_IMAGEFILE6 = 3009,
+        TMT_IMAGEFILE7 = 3010,
+        TMT_TEXT = 3201,
+        TMT_CLASSICVALUE = 3202,
+        TMT_OFFSET = 3401,
+        TMT_TEXTSHADOWOFFSET = 3402,
+        TMT_MINSIZE = 3403,
+        TMT_MINSIZE1 = 3404,
+        TMT_MINSIZE2 = 3405,
+        TMT_MINSIZE3 = 3406,
+        TMT_MINSIZE4 = 3407,
+        TMT_MINSIZE5 = 3408,
+        TMT_NORMALSIZE = 3409,
+        TMT_MINSIZE6 = 3410,
+        TMT_MINSIZE7 = 3411,
+        TMT_SIZINGMARGINS = 3601,
+        TMT_CONTENTMARGINS = 3602,
+        TMT_CAPTIONMARGINS = 3603,
+        TMT_BORDERCOLOR = 3801,
+        TMT_FILLCOLOR = 3802,
+        TMT_TEXTCOLOR = 3803,
+        TMT_EDGELIGHTCOLOR = 3804,
+        TMT_EDGEHIGHLIGHTCOLOR = 3805,
+        TMT_EDGESHADOWCOLOR = 3806,
+        TMT_EDGEDKSHADOWCOLOR = 3807,
+        TMT_EDGEFILLCOLOR = 3808,
+        TMT_TRANSPARENTCOLOR = 3809,
+        TMT_GRADIENTCOLOR1 = 3810,
+        TMT_GRADIENTCOLOR2 = 3811,
+        TMT_GRADIENTCOLOR3 = 3812,
+        TMT_GRADIENTCOLOR4 = 3813,
+        TMT_GRADIENTCOLOR5 = 3814,
+        TMT_SHADOWCOLOR = 3815,
+        TMT_GLOWCOLOR = 3816,
+        TMT_TEXTBORDERCOLOR = 3817,
+        TMT_TEXTSHADOWCOLOR = 3818,
+        TMT_GLYPHTEXTCOLOR = 3819,
+        TMT_GLYPHTRANSPARENTCOLOR = 3820,
+        TMT_FILLCOLORHINT = 3821,
+        TMT_BORDERCOLORHINT = 3822,
+        TMT_ACCENTCOLORHINT = 3823,
+        TMT_TEXTCOLORHINT = 3824,
+        TMT_HEADING1TEXTCOLOR = 3825,
+        TMT_HEADING2TEXTCOLOR = 3826,
+        TMT_BODYTEXTCOLOR = 3827,
+        TMT_BGTYPE = 4001,
+        TMT_BORDERTYPE = 4002,
+        TMT_FILLTYPE = 4003,
+        TMT_SIZINGTYPE = 4004,
+        TMT_HALIGN = 4005,
+        TMT_CONTENTALIGNMENT = 4006,
+        TMT_VALIGN = 4007,
+        TMT_OFFSETTYPE = 4008,
+        TMT_ICONEFFECT = 4009,
+        TMT_TEXTSHADOWTYPE = 4010,
+        TMT_IMAGELAYOUT = 4011,
+        TMT_GLYPHTYPE = 4012,
+        TMT_IMAGESELECTTYPE = 4013,
+        TMT_GLYPHFONTSIZINGTYPE = 4014,
+        TMT_TRUESIZESCALINGTYPE = 4015,
+        TMT_USERPICTURE = 5001,
+        TMT_DEFAULTPANESIZE = 5002,
+        TMT_BLENDCOLOR = 5003,
+        TMT_CUSTOMSPLITRECT = 5004,
+        TMT_ANIMATIONBUTTONRECT = 5005,
+        TMT_ANIMATIONDURATION = 5006,
+        TMT_TRANSITIONDURATIONS = 6000,
+        TMT_SCALEDBACKGROUND = 7001,
+        TMT_ATLASIMAGE = 8000,
+        TMT_ATLASINPUTIMAGE = 8001,
+        TMT_ATLASRECT = 8002,
+    }
+
+    public enum TOUCH_FEEDBACK_MODE : uint
+    {
+        TOUCH_FEEDBACK_DEFAULT = 0x1,
+        TOUCH_FEEDBACK_INDIRECT = 0x2,
+        TOUCH_FEEDBACK_NONE = 0x3,
+    }
+
+    public enum OBJECT_IDENTIFIER
+    {
+        OBJID_WINDOW = unchecked((int)0x00000000),
+        OBJID_SYSMENU = unchecked((int)0xFFFFFFFF),
+        OBJID_TITLEBAR = unchecked((int)0xFFFFFFFE),
+        OBJID_MENU = unchecked((int)0xFFFFFFFD),
+        OBJID_CLIENT = unchecked((int)0xFFFFFFFC),
+        OBJID_VSCROLL = unchecked((int)0xFFFFFFFB),
+        OBJID_HSCROLL = unchecked((int)0xFFFFFFFA),
+        OBJID_SIZEGRIP = unchecked((int)0xFFFFFFF9),
+        OBJID_CARET = unchecked((int)0xFFFFFFF8),
+        OBJID_CURSOR = unchecked((int)0xFFFFFFF7),
+        OBJID_ALERT = unchecked((int)0xFFFFFFF6),
+        OBJID_SOUND = unchecked((int)0xFFFFFFF5),
+        OBJID_QUERYCLASSNAMEIDX = unchecked((int)0xFFFFFFF4),
+        OBJID_NATIVEOM = unchecked((int)0xFFFFFFF0),
+    }
+
+    [Flags]
+    public enum CFM_MASK : uint
+    {
+        CFM_SUBSCRIPT = (CFE_EFFECTS.CFE_SUBSCRIPT | CFE_EFFECTS.CFE_SUPERSCRIPT),
+        CFM_EFFECTS = (CFM_BOLD | CFM_ITALIC | CFM_UNDERLINE | CFM_COLOR | CFM_STRIKEOUT | CFE_EFFECTS.CFE_PROTECTED | CFM_LINK),
+        CFM_ALL = (CFM_EFFECTS | CFM_SIZE | CFM_FACE | CFM_OFFSET | CFM_CHARSET),
+        CFM_BOLD = 0x00000001,
+        CFM_CHARSET = 0x08000000,
+        CFM_COLOR = 0x40000000,
+        CFM_FACE = 0x20000000,
+        CFM_ITALIC = 0x00000002,
+        CFM_OFFSET = 0x10000000,
+        CFM_PROTECTED = 0x00000010,
+        CFM_SIZE = 0x80000000,
+        CFM_STRIKEOUT = 0x00000008,
+        CFM_UNDERLINE = 0x00000004,
+        CFM_LINK = 0x00000020,
+        CFM_SMALLCAPS = 0x00000040,
+        CFM_ALLCAPS = 0x00000080,
+        CFM_HIDDEN = 0x00000100,
+        CFM_OUTLINE = 0x00000200,
+        CFM_SHADOW = 0x00000400,
+        CFM_EMBOSS = 0x00000800,
+        CFM_IMPRINT = 0x00001000,
+        CFM_DISABLED = 0x00002000,
+        CFM_REVISED = 0x00004000,
+        CFM_REVAUTHOR = 0x00008000,
+        CFM_ANIMATION = 0x00040000,
+        CFM_STYLE = 0x00080000,
+        CFM_KERNING = 0x00100000,
+        CFM_SPACING = 0x00200000,
+        CFM_WEIGHT = 0x00400000,
+        CFM_UNDERLINETYPE = 0x00800000,
+        CFM_COOKIE = 0x01000000,
+        CFM_LCID = 0x02000000,
+        CFM_BACKCOLOR = 0x04000000,
+        CFM_SUPERSCRIPT = CFM_SUBSCRIPT,
+        CFM_EFFECTS2 = (CFM_EFFECTS | CFM_DISABLED | CFM_SMALLCAPS | CFM_ALLCAPS 					| CFM_HIDDEN  | CFM_OUTLINE | CFM_SHADOW | CFM_EMBOSS 					| CFM_IMPRINT | CFM_REVISED 					| CFM_SUBSCRIPT | CFM_SUPERSCRIPT | CFM_BACKCOLOR),
+        CFM_ALL2 = (CFM_ALL | CFM_EFFECTS2 | CFM_BACKCOLOR | CFM_LCID 					| CFM_UNDERLINETYPE | CFM_WEIGHT | CFM_REVAUTHOR 					| CFM_SPACING | CFM_KERNING | CFM_STYLE | CFM_ANIMATION 					| CFM_COOKIE),
+        CFM_FONTBOUND = 0x00100000,
+        CFM_LINKPROTECTED = 0x00800000,
+        CFM_EXTENDED = 0x02000000,
+        CFM_MATHNOBUILDUP = 0x08000000,
+        CFM_MATH = 0x10000000,
+        CFM_MATHORDINARY = 0x20000000,
+        CFM_ALLEFFECTS = (CFM_EFFECTS2 | CFM_FONTBOUND | CFM_EXTENDED | CFM_MATHNOBUILDUP | CFM_MATH | CFM_MATHORDINARY),
+    }
+
+    [Flags]
+    public enum CFE_EFFECTS : uint
+    {
+        CFE_ALLCAPS = CFM_MASK.CFM_ALLCAPS,
+        CFE_AUTOBACKCOLOR = CFM_MASK.CFM_BACKCOLOR,
+        CFE_DISABLED = CFM_MASK.CFM_DISABLED,
+        CFE_EMBOSS = CFM_MASK.CFM_EMBOSS,
+        CFE_HIDDEN = CFM_MASK.CFM_HIDDEN,
+        CFE_IMPRINT = CFM_MASK.CFM_IMPRINT,
+        CFE_OUTLINE = CFM_MASK.CFM_OUTLINE,
+        CFE_REVISED = CFM_MASK.CFM_REVISED,
+        CFE_SHADOW = CFM_MASK.CFM_SHADOW,
+        CFE_SMALLCAPS = CFM_MASK.CFM_SMALLCAPS,
+        CFE_AUTOCOLOR = 0x40000000,
+        CFE_BOLD = 0x00000001,
+        CFE_ITALIC = 0x00000002,
+        CFE_STRIKEOUT = 0x00000008,
+        CFE_UNDERLINE = 0x00000004,
+        CFE_PROTECTED = 0x00000010,
+        CFE_LINK = 0x00000020,
+        CFE_SUBSCRIPT = 0x00010000,
+        CFE_SUPERSCRIPT = 0x00020000,
+        CFE_FONTBOUND = 0x00100000,
+        CFE_LINKPROTECTED = 0x00800000,
+        CFE_EXTENDED = 0x02000000,
+        CFE_MATHNOBUILDUP = 0x08000000,
+        CFE_MATH = 0x10000000,
+        CFE_MATHORDINARY = 0x20000000,
+    }
+
+    [Flags]
+    public enum PARAFORMAT_MASK : uint
+    {
+        PFM_ALIGNMENT = 0x00000008,
+        PFM_NUMBERING = 0x00000020,
+        PFM_OFFSET = 0x00000004,
+        PFM_OFFSETINDENT = 0x80000000,
+        PFM_RIGHTINDENT = 0x00000002,
+        PFM_RTLPARA = 0x00010000,
+        PFM_STARTINDENT = 0x00000001,
+        PFM_TABSTOPS = 0x00000010,
+    }
+
+    public enum DRAGLISTINFO_NOTIFICATION_FLAGS : uint
+    {
+        DL_BEGINDRAG = Windows.Win32.UI.WindowsAndMessaging.Apis.WM_USER + 133,
+        DL_CANCELDRAG = Windows.Win32.UI.WindowsAndMessaging.Apis.WM_USER + 136,
+        DL_DRAGGING = Windows.Win32.UI.WindowsAndMessaging.Apis.WM_USER + 134,
+        DL_DROPPED = Windows.Win32.UI.WindowsAndMessaging.Apis.WM_USER + 135,
+    }
+
+    public enum TEXT_ALIGN_OPTIONS : uint
+    {
+        TA_NOUPDATECP = 0,
+        TA_UPDATECP = 1,
+        TA_LEFT = 0,
+        TA_RIGHT = 2,
+        TA_CENTER = 6,
+        TA_TOP = 0,
+        TA_BOTTOM = 8,
+        TA_BASELINE = 24,
+        TA_RTLREADING = 256,
+        TA_MASK = (TA_BASELINE+TA_CENTER+TA_UPDATECP+TA_RTLREADING),
+        VTA_BASELINE = TA_BASELINE,
+        VTA_LEFT = TA_BOTTOM,
+        VTA_RIGHT = TA_TOP,
+        VTA_CENTER = TA_CENTER,
+        VTA_BOTTOM = TA_RIGHT,
+        VTA_TOP = TA_LEFT,
+    }
+
+    [Flags]
+    public enum SCROLLBAR_CONSTANTS : uint
+    {
+        SB_CTL = 2,
+        SB_HORZ = 0,
+        SB_VERT = 1,
+        SB_BOTH = 3,
+    }
+
+    public enum WORD_BREAK_ACTION : uint
+    {
+        WB_CLASSIFY = 3,
+        WB_ISDELIMITER = 2,
+        WB_LEFT = 0,
+        WB_LEFTBREAK = 6,
+        WB_MOVEWORDLEFT = 4,
+        WB_MOVEWORDRIGHT = 5,
+        WB_RIGHT = 1,
+        WB_RIGHTBREAK = 7,
+    }
+
+    public enum DPAMM_MESSAGE : uint
+    {
+        DPAMM_MERGE = 1,
+        DPAMM_DELETE = 2,
+        DPAMM_INSERT = 3,
+    }
+
+    [Flags]
+    public enum IMAGE_FLAGS : uint
+    {
+        LR_CREATEDIBSECTION = 8192,
+        LR_DEFAULTCOLOR = 0,
+        LR_DEFAULTSIZE = 64,
+        LR_LOADFROMFILE = 16,
+        LR_LOADMAP3DCOLORS = 4096,
+        LR_LOADTRANSPARENT = 32,
+        LR_MONOCHROME = 1,
+        LR_SHARED = 32768,
+        LR_VGACOLOR = 128,
+        LR_COPYDELETEORG = 8,
+        LR_COPYFROMRESOURCE = 16384,
+        LR_COPYRETURNORG = 4,
+    }
+
+    [Flags]
+    public enum DLG_DIR_LIST_FILE_TYPE : uint
+    {
+        DDL_ARCHIVE = 0x0020,
+        DDL_DIRECTORY = 0x0010,
+        DDL_DRIVES = 0x4000,
+        DDL_EXCLUSIVE = 0x8000,
+        DDL_HIDDEN = 0x0002,
+        DDL_READONLY = 0x0001,
+        DDL_READWRITE = 0x0000,
+        DDL_SYSTEM = 0x0004,
+        DDL_POSTMSGS = 0x2000,
+    }
+
+    [Flags]
+    public enum OPEN_THEME_DATA_FLAGS : uint
+    {
+        OTD_FORCE_RECT_SIZING = 0x00000001,
+        OTD_NONCLIENT = 0x00000002,
+    }
+
+    public enum GET_THEME_BITMAP_FLAGS : uint
+    {
+        GBF_DIRECT = 0x00000001,
+        GBF_COPY = 0x00000002,
+        GBF_VALIDBITS = (GBF_DIRECT |                          GBF_COPY),
+    }
+
+    public enum ENABLE_SCROLL_BAR_ARROWS : uint
+    {
+        ESB_DISABLE_BOTH = 0x0003,
+        ESB_DISABLE_DOWN = 0x0002,
+        ESB_DISABLE_LEFT = 0x0001,
+        ESB_DISABLE_LTUP = ESB_DISABLE_LEFT,
+        ESB_DISABLE_RIGHT = 0x0002,
+        ESB_DISABLE_RTDN = ESB_DISABLE_RIGHT,
+        ESB_DISABLE_UP = 0x0001,
+        ESB_ENABLE_BOTH = 0x0000,
+    }
+
+    [Flags]
+    public enum IMAGE_LIST_DRAW_STYLE : uint
+    {
+        ILD_BLEND = ILD_BLEND50,
+        ILD_BLEND50 = 0x00000004,
+        ILD_FOCUS = ILD_BLEND25,
+        ILD_MASK = 0x00000010,
+        ILD_NORMAL = 0x00000000,
+        ILD_SELECTED = ILD_BLEND50,
+    }
+
+    public enum WSB_PROP
+    {
+        WSB_PROP_CXHSCROLL = 0x00000002,
+        WSB_PROP_CXHTHUMB = 0x00000010,
+        WSB_PROP_CXVSCROLL = 0x00000008,
+        WSB_PROP_CYHSCROLL = 0x00000004,
+        WSB_PROP_CYVSCROLL = 0x00000001,
+        WSB_PROP_CYVTHUMB = 0x00000020,
+        WSB_PROP_HBKGCOLOR = 0x00000080,
+        WSB_PROP_HSTYLE = 0x00000200,
+        WSB_PROP_PALETTE = 0x00000800,
+        WSB_PROP_VBKGCOLOR = 0x00000040,
+        WSB_PROP_VSTYLE = 0x00000100,
+        WSB_PROP_WINSTYLE = 0x00000400,
+    }
+
+    public enum PSPCB_MESSAGE : uint
+    {
+        PSPCB_ADDREF = 0,
+        PSPCB_CREATE = 2,
+        PSPCB_RELEASE = 1,
+        PSPCB_SI_INITDIALOG = WM_USER + 1,
+    }
+
+    public enum HEADER_CONTROL_NOTIFICATION_BUTTON : uint
+    {
+        HEADER_CONTROL_NOTIFICATION_BUTTON_LEFT = 0,
+        HEADER_CONTROL_NOTIFICATION_BUTTON_RIGHT = 1,
+        HEADER_CONTROL_NOTIFICATION_BUTTON_MIDDLE = 2,
+    }
+
+    public enum IMAGE_LIST_COPY_FLAGS : uint
+    {
+        ILCF_MOVE = 0x00000000,
+        ILCF_SWAP = 0x00000001,
+    }
+
+    public enum DLG_BUTTON_CHECK_STATE : uint
+    {
+        BST_CHECKED = 0x0001,
+        BST_INDETERMINATE = 0x0002,
+        BST_UNCHECKED = 0x0000,
+    }
+
+    [Flags]
+    public enum DRAW_THEME_PARENT_BACKGROUND_FLAGS : uint
+    {
+        DTPB_WINDOWDC = 0x00000001,
+        DTPB_USECTLCOLORSTATIC = 0x00000002,
+        DTPB_USEERASEBKGND = 0x00000004,
+    }
+
+    [Flags]
+    public enum RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE : ushort
+    {
+        SEL_EMPTY = 0x0000,
+        SEL_TEXT = 0x0001,
+        SEL_OBJECT = 0x0002,
+        SEL_MULTICHAR = 0x0004,
+        SEL_MULTIOBJECT = 0x0008,
+        GCM_RIGHTMOUSEDROP = 0x8000,
+    }
+
+    public enum IMAGE_LIST_ITEM_FLAGS : uint
+    {
+        ILIF_ALPHA = 1,
+        ILIF_LOWQUALITY = 2,
+    }
+
+    [Flags]
+    public enum RICH_EDIT_GET_OBJECT_FLAGS : uint
+    {
+        REO_GETOBJ_POLEOBJ = 0x00000001,
+        REO_GETOBJ_PSTG = 0x00000002,
+        REO_GETOBJ_POLESITE = 0x00000004,
+        REO_GETOBJ_NO_INTERFACES = 0x00000000,
+        REO_GETOBJ_ALL_INTERFACES = 0x00000007,
+    }
+
+    [Flags]
+    public enum HDI_MASK : uint
+    {
+        HDI_WIDTH = 0x0001,
+        HDI_HEIGHT = HDI_WIDTH,
+        HDI_TEXT = 0x0002,
+        HDI_FORMAT = 0x0004,
+        HDI_LPARAM = 0x0008,
+        HDI_BITMAP = 0x0010,
+        HDI_IMAGE = 0x0020,
+        HDI_DI_SETITEM = 0x0040,
+        HDI_ORDER = 0x0080,
+        HDI_FILTER = 0x0100,
+        HDI_STATE = 0x0200,
+    }
+
+    [Flags]
+    public enum NMREBAR_MASK_FLAGS : uint
+    {
+        RBNM_ID = 0x00000001,
+        RBNM_LPARAM = 0x00000004,
+        RBNM_STYLE = 0x00000002,
+    }
+
+    public enum EDITBALLOONTIP_ICON : uint
+    {
+        TTI_ERROR = 3,
+        TTI_INFO = 1,
+        TTI_NONE = 0,
+        TTI_WARNING = 2,
+        TTI_INFO_LARGE = 4,
+        TTI_WARNING_LARGE = 5,
+        TTI_ERROR_LARGE = 6,
+    }
+
+    [Flags]
+    public enum LVCOLUMNW_FORMAT : uint
+    {
+        LVCFMT_LEFT = 0x0000,
+        LVCFMT_RIGHT = 0x0001,
+        LVCFMT_CENTER = 0x0002,
+        LVCFMT_JUSTIFYMASK = 0x0003,
+        LVCFMT_IMAGE = 0x0800,
+        LVCFMT_BITMAP_ON_RIGHT = 0x1000,
+        LVCFMT_COL_HAS_IMAGES = 0x8000,
+        LVCFMT_FIXED_WIDTH = 0x00100,
+        LVCFMT_NO_DPI_SCALE = 0x40000,
+        LVCFMT_FIXED_RATIO = 0x80000,
+        LVCFMT_SPLITBUTTON = 0x1000000,
+    }
+
+    [Flags]
+    public enum NMPGSCROLL_KEYS : ushort
+    {
+        PGK_NONE = 0,
+        PGK_SHIFT = 1,
+        PGK_CONTROL = 2,
+        PGK_MENU = 4,
+    }
+
+    [Flags]
+    public enum COMBOBOX_EX_ITEM_FLAGS : uint
+    {
+        CBEIF_DI_SETITEM = 0x10000000,
+        CBEIF_IMAGE = 0x00000002,
+        CBEIF_INDENT = 0x00000010,
+        CBEIF_LPARAM = 0x00000020,
+        CBEIF_OVERLAY = 0x00000008,
+        CBEIF_SELECTEDIMAGE = 0x00000004,
+        CBEIF_TEXT = 0x00000001,
+    }
+
+    public enum TVITEMEXW_CHILDREN
+    {
+        I_ZERO = 0,
+        I_ONE_OR_MORE = 1,
+        I_CHILDRENCALLBACK = -1,
+        I_CHILDRENAUTO = -2,
+    }
+
+    [Flags]
+    public enum TVITEM_MASK : uint
+    {
+        TVIF_CHILDREN = 0x0040,
+        TVIF_DI_SETITEM = 0x1000,
+        TVIF_HANDLE = 0x0010,
+        TVIF_IMAGE = 0x0002,
+        TVIF_PARAM = 0x0004,
+        TVIF_SELECTEDIMAGE = 0x0020,
+        TVIF_STATE = 0x0008,
+        TVIF_TEXT = 0x0001,
+        TVIF_EXPANDEDIMAGE = 0x0200,
+        TVIF_INTEGRAL = 0x0080,
+        TVIF_STATEEX = 0x0100,
+    }
+
+    [Flags]
+    public enum TCITEMHEADERA_MASK : uint
+    {
+        TCIF_IMAGE = 0x0002,
+        TCIF_RTLREADING = 0x0004,
+        TCIF_TEXT = 0x0001,
+        TCIF_PARAM = 0x0008,
+        TCIF_STATE = 0x0010,
+    }
+
+    public enum TCHITTESTINFO_FLAGS : uint
+    {
+        TCHT_NOWHERE = 0x0001,
+        TCHT_ONITEM = (TCHT_ONITEMICON | TCHT_ONITEMLABEL),
+        TCHT_ONITEMICON = 0x0002,
+        TCHT_ONITEMLABEL = 0x0004,
+    }
+
+    public enum COMBOBOXINFO_BUTTON_STATE : uint
+    {
+        STATE_SYSTEM_INVISIBLE = 32768,
+        STATE_SYSTEM_PRESSED = 8,
+        STATE_SYSTEM_FOCUSABLE = 1048576,
+        STATE_SYSTEM_OFFSCREEN = 65536,
+        STATE_SYSTEM_UNAVAILABLE = 1,
+    }
+
+    public enum NMCUSTOMDRAW_DRAW_STAGE : uint
+    {
+        CDDS_POSTPAINT = 0x00000002,
+        CDDS_PREERASE = 0x00000003,
+        CDDS_PREPAINT = 0x00000001,
+        CDDS_ITEMPOSTERASE = (CDDS_ITEM | CDDS_POSTERASE),
+        CDDS_ITEMPOSTPAINT = (CDDS_ITEM | CDDS_POSTPAINT),
+        CDDS_ITEMPREERASE = (CDDS_ITEM | CDDS_PREERASE),
+        CDDS_ITEMPREPAINT = (CDDS_ITEM | CDDS_PREPAINT),
+        CDDS_SUBITEM = 0x00020000,
+    }
+
+    public enum MCGRIDINFO_PART : uint
+    {
+        MCGIP_CALENDARCONTROL = 0,
+        MCGIP_NEXT = 1,
+        MCGIP_PREV = 2,
+        MCGIP_FOOTER = 3,
+        MCGIP_CALENDAR = 4,
+        MCGIP_CALENDARHEADER = 5,
+        MCGIP_CALENDARBODY = 6,
+        MCGIP_CALENDARROW = 7,
+        MCGIP_CALENDARCELL = 8,
+    }
+
+    [Flags]
+    public enum PARAFORMAT_BORDERS : ushort
+    {
+        PARAFORMAT_BORDERS_LEFT = 1,
+        PARAFORMAT_BORDERS_RIGHT = 2,
+        PARAFORMAT_BORDERS_TOP = 4,
+        PARAFORMAT_BORDERS_BOTTOM = 8,
+        PARAFORMAT_BORDERS_INSIDE = 16,
+        PARAFORMAT_BORDERS_OUTSIDE = 32,
+        PARAFORMAT_BORDERS_AUTOCOLOR = 64,
+    }
+
+    public enum LVITEMA_GROUP_ID
+    {
+        I_GROUPIDCALLBACK = -1,
+        I_GROUPIDNONE = -2,
+    }
+
+    [Flags]
+    public enum NMTBHOTITEM_FLAGS : uint
+    {
+        HICF_ACCELERATOR = 0x00000004,
+        HICF_ARROWKEYS = 0x00000002,
+        HICF_DUPACCEL = 0x00000008,
+        HICF_ENTERING = 0x00000010,
+        HICF_LEAVING = 0x00000020,
+        HICF_LMOUSE = 0x00000080,
+        HICF_MOUSE = 0x00000001,
+        HICF_OTHER = 0x00000000,
+        HICF_RESELECT = 0x00000040,
+        HICF_TOGGLEDROPDOWN = 0x00000100,
+    }
+
+    public enum LVTILEVIEWINFO_FLAGS : uint
+    {
+        LVTVIF_EXTENDED = 0x00000004,
+    }
+
+    public enum NMPGSCROLL_DIR : uint
+    {
+        PGF_SCROLLDOWN = 2,
+        PGF_SCROLLLEFT = 4,
+        PGF_SCROLLRIGHT = 8,
+        PGF_SCROLLUP = 1,
+    }
+
+    public enum PARAFORMAT_SHADING_STYLE : ushort
+    {
+        PARAFORMAT_SHADING_STYLE_NONE = 0,
+        PARAFORMAT_SHADING_STYLE_DARK_HORIZ = 1,
+        PARAFORMAT_SHADING_STYLE_DARK_VERT = 2,
+        PARAFORMAT_SHADING_STYLE_DARK_DOWN_DIAG = 3,
+        PARAFORMAT_SHADING_STYLE_DARK_UP_DIAG = 4,
+        PARAFORMAT_SHADING_STYLE_DARK_GRID = 5,
+        PARAFORMAT_SHADING_STYLE_DARK_TRELLIS = 6,
+        PARAFORMAT_SHADING_STYLE_LIGHT_HORZ = 7,
+        PARAFORMAT_SHADING_STYLE_LIGHT_VERT = 8,
+        PARAFORMAT_SHADING_STYLE_LIGHT_DOWN_DIAG = 9,
+        PARAFORMAT_SHADING_STYLE_LIGHT_UP_DIAG = 10,
+        PARAFORMAT_SHADING_STYLE_LIGHT_GRID = 11,
+        PARAFORMAT_SHADING_STYLE_LIGHT_TRELLIS = 12,
+    }
+
+    [Flags]
+    public enum LVCOLUMNW_MASK : uint
+    {
+        LVCF_FMT = 0x0001,
+        LVCF_WIDTH = 0x0002,
+        LVCF_TEXT = 0x0004,
+        LVCF_SUBITEM = 0x0008,
+        LVCF_IMAGE = 0x0010,
+        LVCF_ORDER = 0x0020,
+        LVCF_MINWIDTH = 0x0040,
+        LVCF_DEFAULTWIDTH = 0x0080,
+        LVCF_IDEALWIDTH = 0x0100,
+    }
+
+    public enum GETTEXTEX_FLAGS : uint
+    {
+        GT_DEFAULT = 0,
+        GT_NOHIDDENTEXT = 8,
+        GT_RAWTEXT = 4,
+        GT_SELECTION = 2,
+        GT_USECRLF = 1,
+    }
+
+    [Flags]
+    public enum LVFINDINFOW_FLAGS : uint
+    {
+        LVFI_PARAM = 0x0001,
+        LVFI_PARTIAL = 0x0008,
+        LVFI_STRING = 0x0002,
+        LVFI_SUBSTRING = 0x0004,
+        LVFI_WRAP = 0x0020,
+        LVFI_NEARESTXY = 0x0040,
+    }
+
+    public enum BUTTON_IMAGELIST_ALIGN : uint
+    {
+        BUTTON_IMAGELIST_ALIGN_LEFT = 0,
+        BUTTON_IMAGELIST_ALIGN_RIGHT = 1,
+        BUTTON_IMAGELIST_ALIGN_TOP = 2,
+        BUTTON_IMAGELIST_ALIGN_BOTTOM = 3,
+        BUTTON_IMAGELIST_ALIGN_CENTER = 4,
+    }
+
+    [Flags]
+    public enum TBBUTTONINFOW_MASK : uint
+    {
+        TBIF_BYINDEX = 0x80000000,
+        TBIF_COMMAND = 0x00000020,
+        TBIF_IMAGE = 0x00000001,
+        TBIF_LPARAM = 0x00000010,
+        TBIF_SIZE = 0x00000040,
+        TBIF_STATE = 0x00000004,
+        TBIF_STYLE = 0x00000008,
+        TBIF_TEXT = 0x00000002,
+    }
+
+    public enum TBINSERTMARK_FLAGS : uint
+    {
+        TBIMHT_NONE = 0,
+        TBIMHT_AFTER = 0x00000001,
+        TBIMHT_BACKGROUND = 0x00000002,
+    }
+
+    [Flags]
+    public enum LVGROUP_MASK : uint
+    {
+        LVGF_NONE = 0x00000000,
+        LVGF_HEADER = 0x00000001,
+        LVGF_FOOTER = 0x00000002,
+        LVGF_STATE = 0x00000004,
+    }
+
+    [Flags]
+    public enum BP_PAINTPARAMS_FLAGS : uint
+    {
+        BPPF_ERASE = 1,
+        BPPF_NOCLIP = 2,
+        BPPF_NONCLIENT = 4,
+    }
+
+    [Flags]
+    public enum TVHITTESTINFO_FLAGS : uint
+    {
+        TVHT_ABOVE = 0x0100,
+        TVHT_BELOW = 0x0200,
+        TVHT_NOWHERE = 0x0001,
+        TVHT_ONITEM = (TVHT_ONITEMICON | TVHT_ONITEMLABEL | TVHT_ONITEMSTATEICON),
+        TVHT_ONITEMBUTTON = 0x0010,
+        TVHT_ONITEMICON = 0x0002,
+        TVHT_ONITEMINDENT = 0x0008,
+        TVHT_ONITEMLABEL = 0x0004,
+        TVHT_ONITEMRIGHT = 0x0020,
+        TVHT_ONITEMSTATEICON = 0x0040,
+        TVHT_TOLEFT = 0x0800,
+        TVHT_TORIGHT = 0x0400,
+    }
+
+    public enum DRAWITEMSTRUCT_CTL_TYPE : uint
+    {
+        ODT_BUTTON = 4,
+        ODT_COMBOBOX = 3,
+        ODT_LISTBOX = 2,
+        ODT_LISTVIEW = 102,
+        ODT_MENU = 1,
+        ODT_STATIC = 5,
+        ODT_TAB = 101,
+    }
+
+    public enum NMPGCALCSIZE_FLAGS : uint
+    {
+        PGF_CALCHEIGHT = 2,
+        PGF_CALCWIDTH = 1,
+    }
+
+    public enum ENDCOMPOSITIONNOTIFY_CODE : uint
+    {
+        ECN_ENDCOMPOSITION = 1,
+        ECN_NEWTEXT = 2,
+    }
+
+    public enum NMLVCUSTOMDRAW_ALIGN : uint
+    {
+        LVGA_HEADER_CENTER = 0x00000002,
+        LVGA_HEADER_LEFT = 0x00000001,
+        LVGA_HEADER_RIGHT = 0x00000004,
+    }
+
+    public enum IMECOMPTEXT_FLAGS : uint
+    {
+        ICT_RESULTREADSTR = 1,
+    }
+
+    [Flags]
+    public enum MCGRIDINFO_FLAGS : uint
+    {
+        MCGIF_DATE = 0x00000001,
+        MCGIF_RECT = 0x00000002,
+        MCGIF_NAME = 0x00000004,
+    }
+
+    [Flags]
+    public enum GETTEXTLENGTHEX_FLAGS : uint
+    {
+        GTL_DEFAULT = 0,
+        GTL_USECRLF = 1,
+        GTL_PRECISE = 2,
+        GTL_CLOSE = 4,
+        GTL_NUMCHARS = 8,
+        GTL_NUMBYTES = 16,
+    }
+
+    [Flags]
+    public enum LVHITTESTINFO_FLAGS : uint
+    {
+        LVHT_ABOVE = 0x00000008,
+        LVHT_BELOW = 0x00000010,
+        LVHT_NOWHERE = 0x00000001,
+        LVHT_ONITEMICON = 0x00000002,
+        LVHT_ONITEMLABEL = 0x00000004,
+        LVHT_ONITEMSTATEICON = 0x00000008,
+        LVHT_TOLEFT = 0x00000040,
+        LVHT_TORIGHT = 0x00000020,
+        LVHT_EX_GROUP_HEADER = 0x10000000,
+        LVHT_EX_GROUP_FOOTER = 0x20000000,
+        LVHT_EX_GROUP_COLLAPSE = 0x40000000,
+        LVHT_EX_GROUP_BACKGROUND = 0x80000000,
+        LVHT_EX_GROUP_STATEICON = 0x01000000,
+        LVHT_EX_GROUP_SUBSETLINK = 0x02000000,
+        LVHT_EX_GROUP = (LVHT_EX_GROUP_BACKGROUND | LVHT_EX_GROUP_COLLAPSE | LVHT_EX_GROUP_FOOTER | LVHT_EX_GROUP_HEADER | LVHT_EX_GROUP_STATEICON | LVHT_EX_GROUP_SUBSETLINK),
+        LVHT_EX_ONCONTENTS = 0x04000000,
+        LVHT_EX_FOOTER = 0x08000000,
+    }
+
+    [Flags]
+    public enum INITCOMMONCONTROLSEX_ICC : uint
+    {
+        ICC_ANIMATE_CLASS = 128,
+        ICC_BAR_CLASSES = 4,
+        ICC_COOL_CLASSES = 1024,
+        ICC_DATE_CLASSES = 256,
+        ICC_HOTKEY_CLASS = 64,
+        ICC_INTERNET_CLASSES = 2048,
+        ICC_LINK_CLASS = 32768,
+        ICC_LISTVIEW_CLASSES = 1,
+        ICC_NATIVEFNTCTL_CLASS = 8192,
+        ICC_PAGESCROLLER_CLASS = 4096,
+        ICC_PROGRESS_CLASS = 32,
+        ICC_STANDARD_CLASSES = 16384,
+        ICC_TAB_CLASSES = 8,
+        ICC_TREEVIEW_CLASSES = 2,
+        ICC_UPDOWN_CLASS = 16,
+        ICC_USEREX_CLASSES = 512,
+        ICC_WIN95_CLASSES = 255,
+    }
+
+    public enum NMLVCUSTOMDRAW_ITEM_TYPE : uint
+    {
+        LVCDI_ITEM = 0x00000000,
+        LVCDI_GROUP = 0x00000001,
+        LVCDI_ITEMSLIST = 0x00000002,
+    }
+
+    [Flags]
+    public enum NMTBDISPINFOW_MASK : uint
+    {
+        TBNF_IMAGE = 0x00000001,
+        TBNF_TEXT = 0x00000002,
+        TBNF_DI_SETITEM = 0x10000000,
+    }
+
+    [Flags]
+    public enum SCROLLINFO_MASK : uint
+    {
+        SIF_ALL = (SIF_RANGE | SIF_PAGE | SIF_POS | SIF_TRACKPOS),
+        SIF_DISABLENOSCROLL = 0x0008,
+        SIF_PAGE = 0x0002,
+        SIF_POS = 0x0004,
+        SIF_RANGE = 0x0001,
+        SIF_TRACKPOS = 0x0010,
+    }
+
+    [Flags]
+    public enum REOBJECT_FLAGS : uint
+    {
+        REO_ALIGNTORIGHT = 0x00000100,
+        REO_BELOWBASELINE = 0x00000002,
+        REO_BLANK = 0x00000010,
+        REO_CANROTATE = 0x00000080,
+        REO_DONTNEEDPALETTE = 0x00000020,
+        REO_DYNAMICSIZE = 0x00000008,
+        REO_GETMETAFILE = 0x00400000,
+        REO_HILITED = 0x01000000,
+        REO_INPLACEACTIVE = 0x02000000,
+        REO_INVERTEDSELECT = 0x00000004,
+        REO_LINK = 0x80000000,
+        REO_LINKAVAILABLE = 0x00800000,
+        REO_OPEN = 0x04000000,
+        REO_OWNERDRAWSELECT = 0x00000040,
+        REO_RESIZABLE = 0x00000001,
+        REO_SELECTED = 0x08000000,
+        REO_STATIC = 0x40000000,
+        REO_USEASBACKGROUND = 0x00000400,
+        REO_WRAPTEXTAROUND = 0x00000200,
+    }
+
+    public enum NMLVEMPTYMARKUP_FLAGS : uint
+    {
+        EMF_CENTERED = 0x00000001,
+    }
+
+    public enum PARAFORMAT_NUMBERING_STYLE : ushort
+    {
+        PFNS_PAREN = 0x000,
+        PFNS_PARENS = 0x100,
+        PFNS_PERIOD = 0x200,
+        PFNS_PLAIN = 0x300,
+        PFNS_NONUMBER = 0x400,
+        PFNS_NEWNUMBER = 0x8000,
+    }
+
+    public enum LVFOOTERITEM_MASK : uint
+    {
+        LVFIF_TEXT = 0x00000001,
+        LVFIF_STATE = 0x00000002,
+    }
+
+    public enum PARAFORMAT_ALIGNMENT : ushort
+    {
+        PFA_CENTER = 3,
+        PFA_LEFT = 1,
+        PFA_RIGHT = 2,
+    }
+
+    [Flags]
+    public enum IMAGELIST_CREATION_FLAGS : uint
+    {
+        ILC_MASK = 0x00000001,
+        ILC_COLOR = 0x00000000,
+        ILC_COLORDDB = 0x000000FE,
+        ILC_COLOR4 = 0x00000004,
+        ILC_COLOR8 = 0x00000008,
+        ILC_COLOR16 = 0x00000010,
+        ILC_COLOR24 = 0x00000018,
+        ILC_COLOR32 = 0x00000020,
+        ILC_PALETTE = 0x00000800,
+        ILC_MIRROR = 0x00002000,
+        ILC_PERITEMMIRROR = 0x00008000,
+        ILC_ORIGINALSIZE = 0x00010000,
+        ILC_HIGHQUALITYSCALE = 0x00020000,
+    }
+
+}

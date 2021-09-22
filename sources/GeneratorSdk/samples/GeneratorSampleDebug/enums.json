@@ -1,0 +1,16 @@
+[
+  {
+    "name": "SAMPLE_FUNC_OPTIONS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "SAMPLE_FUNC_OPTION_",
+      "header": "SampleHeader.h"
+    },
+    "uses": [
+      {
+        "method": "SampleFunction1",
+        "parameter": "dwOptions"
+      }
+    ]
+  }
+]

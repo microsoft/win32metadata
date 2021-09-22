@@ -9,7 +9,13 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
+    <ScanArch>crossarch</ScanArch>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ResponseFile Include="*.rsp"/>
+    <ManualCs Include="*.cs"/>
+  </ItemGroup>
 
   <PropertyGroup>
     <Win32MetadataSdkRoot>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..'))</Win32MetadataSdkRoot>
@@ -20,10 +26,18 @@
     <ObjDir Condition="'$(ObjDir)' == ''">$(MSBuildProjectDirectory)\obj</ObjDir>
     <CompiledHeadersDir Condition="'$(CompiledHeadersDir)' == ''">$(ObjDir)\CompiledHeaders</CompiledHeadersDir>
     <SdkIncRoot>$(TargetPlatformSdkRootOverride)\include\$(TargetPlatformVersion)</SdkIncRoot>
-    <Win32MetadataScraperAssetsDir Condition="'$(Win32MetadataScraperAssetsDir)' == ''">$(Win32MetadataSdkRoot)\tools\assets</Win32MetadataScraperAssetsDir>
-    <Win32MetadataScraperGeneratedAssetsDir Condition="'$(Win32MetadataScraperGeneratedAssetsDir)' == ''">$(Win32MetadataSdkRoot)\tools\assets</Win32MetadataScraperGeneratedAssetsDir>
+
+    <Win32MetadataAssetsDir Condition="'$(Win32MetadataAssetsDir)' == ''">$(Win32MetadataSdkRoot)\tools\assets</Win32MetadataAssetsDir>
+    <Win32MetadataScraperAssetsDir Condition="'$(Win32MetadataScraperAssetsDir)' == ''">$(Win32MetadataAssetsDir)\scraper</Win32MetadataScraperAssetsDir>
+    <Win32MetadataEmitterAssetsDir Condition="'$(Win32MetadataEmitterAssetsDir)' == ''">$(Win32MetadataAssetsDir)\emitter</Win32MetadataEmitterAssetsDir>
     <Win32WinmdBinDir Condition="'$(Win32WinmdBinDir)' == ''">$(PkgMicrosoft_Windows_SDK_Win32Metadata)</Win32WinmdBinDir>
     <PowerShell># 2>nul || type %~df0|find /v "setlocal"|find /v "errorlevel"|powershell.exe -noninteractive -&amp; exit %errorlevel% || #</PowerShell>
+
+    <FunctionPointerFixups>$(MSBuildProjectDirectory)\functionPointerFixups.json</FunctionPointerFixups>
+    <AutoTypesJson>$(MSBuildProjectDirectory)\autoTypes.json</AutoTypesJson>
+
+    <ShowEmitWinmdOutputDetails>false</ShowEmitWinmdOutputDetails>
+
   </PropertyGroup>
 
   <ItemGroup>

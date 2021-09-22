@@ -40,7 +40,7 @@ namespace MetadataUtils
         {
             if (this.@namespace != null)
             {
-                return $"{@namespace}.{name}";
+                return $"{this.@namespace}.{this.name}";
             }
             else
             {
@@ -71,11 +71,11 @@ namespace MetadataUtils
             {
                 if (this.value == null)
                 {
-                    return $"{name} = null";
+                    return $"{this.name} = null";
                 }
                 else
                 {
-                    return $"{name} = {value}";
+                    return $"{this.name} = {this.value}";
                 }
             }
         }
@@ -90,20 +90,20 @@ namespace MetadataUtils
 
             public override string ToString()
             {
-                if (method != null)
+                if (this.method != null)
                 {
-                    if (@interface != null)
+                    if (this.@interface != null)
                     {
-                        return $"{@interface}::{method}::{parameter}";
+                        return $"{this.@interface}::{this.method}::{this.parameter}";
                     }
                     else
                     {
-                        return $"{method}::{parameter}";
+                        return $"{this.method}::{this.parameter}";
                     }
                 }
                 else
                 {
-                    return $"{@struct}::{field}";
+                    return $"{this.@struct}::{this.field}";
                 }
             }
         }
@@ -126,7 +126,7 @@ namespace MetadataUtils
                     var tree = CSharpSyntaxTree.ParseText(File.ReadAllText(fileName), null, fileName);
                     this.Visit(tree.GetRoot());
 
-                    return enumObjects;
+                    return this.enumObjects;
                 }
 
                 public override void VisitNamespaceDeclaration(NamespaceDeclarationSyntax node)

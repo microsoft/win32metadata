@@ -1,0 +1,270 @@
+using System;
+using Windows.Win32.Foundation;
+using Windows.Win32.Interop;
+using Windows.Win32.System.PropertiesSystem; // For PROPERTYKEY
+using Windows.Win32.System.SystemServices;
+using static Windows.Win32.Foundation.Apis; // Various constants
+using static Windows.Win32.System.Diagnostics.Debug.WIN32_ERROR;
+using static Windows.Win32.System.SystemServices.Apis; // Various constants
+using static Windows.Win32.Media.Multimedia.Apis; // Various constants
+using static Windows.Win32.Media.Audio.CoreAudio.Apis; // Various constants
+using static Windows.Win32.Graphics.DirectShow.Apis; // Various constants
+using static Windows.Win32.UI.WindowsAndMessaging.Apis; // For WM_USER
+using static Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS; // For FILE_* constants
+using static Windows.Win32.System.Diagnostics.Debug.FACILITY_CODE; // For MAKE_HRESULT constants
+
+
+using static Windows.Win32.Security.Authentication.Identity.Core.Apis;
+
+namespace Windows.Win32.Security.Authentication.Identity.Core
+{
+    public enum SECPKG_ATTR : uint
+    {
+        SECPKG_ATTR_C_ACCESS_TOKEN = 2147483666,
+        SECPKG_ATTR_C_FULL_ACCESS_TOKEN = 2147483778,
+        SECPKG_ATTR_CERT_TRUST_STATUS = 2147483780,
+        SECPKG_ATTR_CREDS = 2147483776,
+        SECPKG_ATTR_CREDS_2 = 2147483782,
+        SECPKG_ATTR_NEGOTIATION_PACKAGE = 2147483777,
+        SECPKG_ATTR_PACKAGE_INFO = 10,
+        SECPKG_ATTR_SERVER_AUTH_FLAGS = 2147483779,
+        SECPKG_ATTR_SIZES = 0,
+        SECPKG_ATTR_SUBJECT_SECURITY_ATTRIBUTES = 124,
+        SECPKG_ATTR_APP_DATA = 94,
+        SECPKG_ATTR_EAP_PRF_INFO = 101,
+        SECPKG_ATTR_EARLY_START = 105,
+        SECPKG_ATTR_DTLS_MTU = 34,
+        SECPKG_ATTR_KEYING_MATERIAL_INFO = 106,
+        SECPKG_ATTR_ACCESS_TOKEN = 18,
+        SECPKG_ATTR_AUTHORITY = 6,
+        SECPKG_ATTR_CLIENT_SPECIFIED_TARGET = 27,
+        SECPKG_ATTR_CONNECTION_INFO = 90,
+        SECPKG_ATTR_DCE_INFO = 3,
+        SECPKG_ATTR_ENDPOINT_BINDINGS = 26,
+        SECPKG_ATTR_EAP_KEY_BLOCK = 91,
+        SECPKG_ATTR_FLAGS = 14,
+        SECPKG_ATTR_ISSUER_LIST_EX = 89,
+        SECPKG_ATTR_KEY_INFO = 5,
+        SECPKG_ATTR_LAST_CLIENT_TOKEN_STATUS = 30,
+        SECPKG_ATTR_LIFESPAN = 2,
+        SECPKG_ATTR_LOCAL_CERT_CONTEXT = 84,
+        SECPKG_ATTR_LOCAL_CRED = 0x52,
+        SECPKG_ATTR_NAMES = 1,
+        SECPKG_ATTR_NATIVE_NAMES = 13,
+        SECPKG_ATTR_NEGOTIATION_INFO = 12,
+        SECPKG_ATTR_PASSWORD_EXPIRY = 8,
+        SECPKG_ATTR_REMOTE_CERT_CONTEXT = 83,
+        SECPKG_ATTR_ROOT_STORE = 85,
+        SECPKG_ATTR_SESSION_KEY = 9,
+        SECPKG_ATTR_SESSION_INFO = 93,
+        SECPKG_ATTR_STREAM_SIZES = 4,
+        SECPKG_ATTR_SUPPORTED_SIGNATURES = 102,
+        SECPKG_ATTR_TARGET_INFORMATION = 17,
+        SECPKG_ATTR_UNIQUE_BINDINGS = 25,
+    }
+
+    public enum MSV1_0 : uint
+    {
+        MSV1_0_PASSTHRU = 0x01,
+        MSV1_0_GUEST_LOGON = 0x02,
+    }
+
+    public enum SECPKG_CRED : uint
+    {
+        SECPKG_CRED_INBOUND = 1,
+        SECPKG_CRED_OUTBOUND = 2,
+    }
+
+    public enum MSV_SUB_AUTHENTICATION_FILTER : uint
+    {
+        LOGON_GUEST = 0x01,
+        LOGON_NOENCRYPTION = 0x02,
+        LOGON_CACHED_ACCOUNT = 0x04,
+        LOGON_USED_LM_PASSWORD = 0x08,
+        LOGON_EXTRA_SIDS = 0x20,
+        LOGON_SUBAUTH_SESSION_KEY = 0x40,
+        LOGON_SERVER_TRUST_ACCOUNT = 0x80,
+        LOGON_PROFILE_PATH_RETURNED = 0x400,
+        LOGON_RESOURCE_GROUPS = 0x200,
+    }
+
+    [Flags]
+    public enum EXPORT_SECURITY_CONTEXT_FLAGS : uint
+    {
+        SECPKG_CONTEXT_EXPORT_RESET_NEW = 0x00000001,
+        SECPKG_CONTEXT_EXPORT_DELETE_OLD = 0x00000002,
+        SECPKG_CONTEXT_EXPORT_TO_KERNEL = 0x00000004,
+    }
+
+    [Flags]
+    public enum ACCEPT_SECURITY_CONTEXT_CONTEXT_REQ : uint
+    {
+        ASC_REQ_ALLOCATE_MEMORY = 0x00000100,
+        ASC_REQ_CONNECTION = 0x00000800,
+        ASC_REQ_DELEGATE = 0x00000001,
+        ASC_REQ_EXTENDED_ERROR = 0x00008000,
+        ASC_REQ_REPLAY_DETECT = 0x00000004,
+        ASC_REQ_SEQUENCE_DETECT = 0x00000008,
+        ASC_REQ_STREAM = 0x00010000,
+    }
+
+    [Flags]
+    public enum KERB_TICKET_FLAGS : uint
+    {
+        KERB_TICKET_FLAGS_forwardable = 1073741824,
+        KERB_TICKET_FLAGS_forwarded = 536870912,
+        KERB_TICKET_FLAGS_hw_authent = 1048576,
+        KERB_TICKET_FLAGS_initial = 4194304,
+        KERB_TICKET_FLAGS_invalid = 16777216,
+        KERB_TICKET_FLAGS_may_postdate = 67108864,
+        KERB_TICKET_FLAGS_ok_as_delegate = 262144,
+        KERB_TICKET_FLAGS_postdated = 33554432,
+        KERB_TICKET_FLAGS_pre_authent = 2097152,
+        KERB_TICKET_FLAGS_proxiable = 268435456,
+        KERB_TICKET_FLAGS_proxy = 134217728,
+        KERB_TICKET_FLAGS_renewable = 8388608,
+        KERB_TICKET_FLAGS_reserved = 2147483648,
+        KERB_TICKET_FLAGS_reserved1 = 1,
+    }
+
+    public enum KERB_ADDRESS_TYPE : uint
+    {
+        DS_INET_ADDRESS = 1,
+        DS_NETBIOS_ADDRESS = 2,
+    }
+
+    [Flags]
+    public enum SCHANNEL_CRED_FLAGS : uint
+    {
+        SCH_CRED_AUTO_CRED_VALIDATION = 32,
+        SCH_CRED_CACHE_ONLY_URL_RETRIEVAL_ON_CREATE = 131072,
+        SCH_DISABLE_RECONNECTS = 128,
+        SCH_CRED_IGNORE_NO_REVOCATION_CHECK = 2048,
+        SCH_CRED_IGNORE_REVOCATION_OFFLINE = 4096,
+        SCH_CRED_MANUAL_CRED_VALIDATION = 8,
+        SCH_CRED_NO_DEFAULT_CREDS = 16,
+        SCH_CRED_NO_SERVERNAME_CHECK = 4,
+        SCH_CRED_NO_SYSTEM_MAPPER = 2,
+        SCH_CRED_REVOCATION_CHECK_CHAIN = 512,
+        SCH_CRED_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT = 1024,
+        SCH_CRED_REVOCATION_CHECK_END_CERT = 256,
+        SCH_CRED_USE_DEFAULT_CREDS = 64,
+        SCH_SEND_AUX_RECORD = 2097152,
+        SCH_SEND_ROOT_CERT = 262144,
+        SCH_USE_STRONG_CRYPTO = 4194304,
+        SCH_USE_PRESHAREDKEY_ONLY = 8388608,
+    }
+
+    [Flags]
+    public enum DOMAIN_PASSWORD_PROPERTIES : uint
+    {
+        DOMAIN_PASSWORD_COMPLEX = 0x00000001,
+        DOMAIN_PASSWORD_NO_ANON_CHANGE = 0x00000002,
+        DOMAIN_PASSWORD_NO_CLEAR_CHANGE = 0x00000004,
+        DOMAIN_LOCKOUT_ADMINS = 0x00000008,
+        DOMAIN_PASSWORD_STORE_CLEARTEXT = 0x00000010,
+        DOMAIN_REFUSE_PASSWORD_CHANGE = 0x00000020,
+    }
+
+    public enum SCHANNEL_ALERT_TOKEN_ALERT_TYPE : uint
+    {
+        TLS1_ALERT_WARNING = 1,
+        TLS1_ALERT_FATAL = 2,
+    }
+
+    public enum TRUSTED_DOMAIN_TRUST_TYPE : uint
+    {
+        TRUST_TYPE_DOWNLEVEL = 0x00000001,
+        TRUST_TYPE_UPLEVEL = 0x00000002,
+        TRUST_TYPE_MIT = 0x00000003,
+        TRUST_TYPE_DCE = 0x00000004,
+    }
+
+    [Flags]
+    public enum MSV_SUBAUTH_LOGON_PARAMETER_CONTROL : uint
+    {
+        MSV1_0_CLEARTEXT_PASSWORD_ALLOWED = 0x02,
+        MSV1_0_UPDATE_LOGON_STATISTICS = 0x04,
+        MSV1_0_RETURN_USER_PARAMETERS = 0x08,
+        MSV1_0_DONT_TRY_GUEST_ACCOUNT = 0x10,
+        MSV1_0_ALLOW_SERVER_TRUST_ACCOUNT = 0x20,
+        MSV1_0_RETURN_PASSWORD_EXPIRY = 0x40,
+        MSV1_0_ALLOW_WORKSTATION_TRUST_ACCOUNT = 0x800,
+        MSV1_0_TRY_GUEST_ACCOUNT_ONLY = 0x100,
+        MSV1_0_RETURN_PROFILE_PATH = 0x200,
+        MSV1_0_TRY_SPECIFIED_DOMAIN_ONLY = 0x400,
+    }
+
+    public enum KERB_REQUEST_FLAGS : uint
+    {
+        KERB_REQUEST_ADD_CREDENTIAL = 1,
+        KERB_REQUEST_REPLACE_CREDENTIAL = 2,
+        KERB_REQUEST_REMOVE_CREDENTIAL = 4,
+    }
+
+    public enum TRUSTED_DOMAIN_TRUST_DIRECTION : uint
+    {
+        TRUST_DIRECTION_DISABLED = 0x00000000,
+        TRUST_DIRECTION_INBOUND = 0x00000001,
+        TRUST_DIRECTION_OUTBOUND = 0x00000002,
+        TRUST_DIRECTION_BIDIRECTIONAL = (TRUST_DIRECTION_INBOUND | TRUST_DIRECTION_OUTBOUND),
+    }
+
+    [Flags]
+    public enum MSV_SUPPLEMENTAL_CREDENTIAL_FLAGS : uint
+    {
+        MSV1_0_CRED_LM_PRESENT = 0x0001,
+        MSV1_0_CRED_NT_PRESENT = 0x0002,
+        MSV1_0_CRED_VERSION = 0,
+    }
+
+    public enum SECURITY_PACKAGE_OPTIONS_TYPE : uint
+    {
+        SECPKG_OPTIONS_TYPE_UNKNOWN = 0,
+        SECPKG_OPTIONS_TYPE_LSA = 1,
+        SECPKG_OPTIONS_TYPE_SSPI = 2,
+    }
+
+    public enum SCHANNEL_SESSION_TOKEN_FLAGS : uint
+    {
+        SSL_SESSION_ENABLE_RECONNECTS = 1,
+        SSL_SESSION_DISABLE_RECONNECTS = 2,
+    }
+
+    public enum KERB_CRYPTO_KEY_TYPE
+    {
+        KERB_ETYPE_DES_CBC_CRC = 1,
+        KERB_ETYPE_DES_CBC_MD4 = 2,
+        KERB_ETYPE_DES_CBC_MD5 = 3,
+        KERB_ETYPE_NULL = 0,
+        KERB_ETYPE_RC4_HMAC_NT = 23,
+        KERB_ETYPE_RC4_MD4 = -128,
+    }
+
+    public enum LSA_AUTH_INFORMATION_AUTH_TYPE : uint
+    {
+        TRUST_AUTH_TYPE_NONE = 0,
+        TRUST_AUTH_TYPE_NT4OWF = 1,
+        TRUST_AUTH_TYPE_CLEAR = 2,
+        TRUST_AUTH_TYPE_VERSION = 3,
+    }
+
+    public enum SECPKG_PACKAGE_CHANGE_TYPE : uint
+    {
+        SECPKG_PACKAGE_CHANGE_LOAD = 0,
+        SECPKG_PACKAGE_CHANGE_UNLOAD = 1,
+        SECPKG_PACKAGE_CHANGE_SELECT = 2,
+    }
+
+    public enum TRUSTED_DOMAIN_TRUST_ATTRIBUTES : uint
+    {
+        TRUST_ATTRIBUTE_NON_TRANSITIVE = 0x00000001,
+        TRUST_ATTRIBUTE_UPLEVEL_ONLY = 0x00000002,
+        TRUST_ATTRIBUTE_FILTER_SIDS = 0x00000004,
+        TRUST_ATTRIBUTE_FOREST_TRANSITIVE = 0x00000008,
+        TRUST_ATTRIBUTE_CROSS_ORGANIZATION = 0x00000010,
+        TRUST_ATTRIBUTE_TREAT_AS_EXTERNAL = 0x00000040,
+        TRUST_ATTRIBUTE_WITHIN_FOREST = 0x00000020,
+    }
+
+}

@@ -1,0 +1,2974 @@
+
+
+/* this ALWAYS GENERATED file contains the definitions for the interfaces */
+
+
+ /* File created by MIDL compiler version 8.01.0622 */
+/* @@MIDL_FILE_HEADING(  ) */
+
+
+
+/* verify that the <rpcndr.h> version is high enough to compile this file*/
+#ifndef __REQUIRED_RPCNDR_H_VERSION__
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#endif
+
+/* verify that the <rpcsal.h> version is high enough to compile this file*/
+#ifndef __REQUIRED_RPCSAL_H_VERSION__
+#define __REQUIRED_RPCSAL_H_VERSION__ 100
+#endif
+
+#include "rpc.h"
+#include "rpcndr.h"
+
+#ifndef __RPCNDR_H_VERSION__
+#error this stub requires an updated version of <rpcndr.h>
+#endif /* __RPCNDR_H_VERSION__ */
+
+#ifndef COM_NO_WINDOWS_H
+#include "windows.h"
+#include "ole2.h"
+#endif /*COM_NO_WINDOWS_H*/
+
+#ifndef __fsrmquota_h__
+#define __fsrmquota_h__
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1020)
+#pragma once
+#endif
+
+/* Forward Declarations */ 
+
+#ifndef __IFsrmQuotaBase_FWD_DEFINED__
+#define __IFsrmQuotaBase_FWD_DEFINED__
+typedef interface IFsrmQuotaBase IFsrmQuotaBase;
+
+#endif 	/* __IFsrmQuotaBase_FWD_DEFINED__ */
+
+
+#ifndef __IFsrmQuotaObject_FWD_DEFINED__
+#define __IFsrmQuotaObject_FWD_DEFINED__
+typedef interface IFsrmQuotaObject IFsrmQuotaObject;
+
+#endif 	/* __IFsrmQuotaObject_FWD_DEFINED__ */
+
+
+#ifndef __IFsrmQuota_FWD_DEFINED__
+#define __IFsrmQuota_FWD_DEFINED__
+typedef interface IFsrmQuota IFsrmQuota;
+
+#endif 	/* __IFsrmQuota_FWD_DEFINED__ */
+
+
+#ifndef __IFsrmAutoApplyQuota_FWD_DEFINED__
+#define __IFsrmAutoApplyQuota_FWD_DEFINED__
+typedef interface IFsrmAutoApplyQuota IFsrmAutoApplyQuota;
+
+#endif 	/* __IFsrmAutoApplyQuota_FWD_DEFINED__ */
+
+
+#ifndef __IFsrmQuotaManager_FWD_DEFINED__
+#define __IFsrmQuotaManager_FWD_DEFINED__
+typedef interface IFsrmQuotaManager IFsrmQuotaManager;
+
+#endif 	/* __IFsrmQuotaManager_FWD_DEFINED__ */
+
+
+#ifndef __IFsrmQuotaManagerEx_FWD_DEFINED__
+#define __IFsrmQuotaManagerEx_FWD_DEFINED__
+typedef interface IFsrmQuotaManagerEx IFsrmQuotaManagerEx;
+
+#endif 	/* __IFsrmQuotaManagerEx_FWD_DEFINED__ */
+
+
+#ifndef __IFsrmQuotaTemplate_FWD_DEFINED__
+#define __IFsrmQuotaTemplate_FWD_DEFINED__
+typedef interface IFsrmQuotaTemplate IFsrmQuotaTemplate;
+
+#endif 	/* __IFsrmQuotaTemplate_FWD_DEFINED__ */
+
+
+#ifndef __IFsrmQuotaTemplateImported_FWD_DEFINED__
+#define __IFsrmQuotaTemplateImported_FWD_DEFINED__
+typedef interface IFsrmQuotaTemplateImported IFsrmQuotaTemplateImported;
+
+#endif 	/* __IFsrmQuotaTemplateImported_FWD_DEFINED__ */
+
+
+#ifndef __IFsrmQuotaTemplateManager_FWD_DEFINED__
+#define __IFsrmQuotaTemplateManager_FWD_DEFINED__
+typedef interface IFsrmQuotaTemplateManager IFsrmQuotaTemplateManager;
+
+#endif 	/* __IFsrmQuotaTemplateManager_FWD_DEFINED__ */
+
+
+/* header files for imported files */
+#include "oaidl.h"
+#include "fsrmenums.h"
+#include "fsrm.h"
+
+#ifdef __cplusplus
+extern "C"{
+#endif 
+
+
+/* interface __MIDL_itf_fsrmquota_0000_0000 */
+/* [local] */ 
+
+#include <winapifamily.h>
+#pragma region Desktop Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+
+
+
+
+
+
+
+
+#define	FSRM_DISPID_QUOTA_BASE	( ( FSRM_DISPID_FEATURE_QUOTA | 0x100000 )  )
+
+#define	FSRM_DISPID_QUOTA_OBJECT	( ( FSRM_DISPID_QUOTA_BASE | 0x10000 )  )
+
+#define	FSRM_DISPID_QUOTA	( ( FSRM_DISPID_QUOTA_OBJECT | 0x1000 )  )
+
+#define	FSRM_DISPID_AUTOAPPLYQUOTA	( ( FSRM_DISPID_QUOTA_OBJECT | 0x2000 )  )
+
+#define	FSRM_DISPID_QUOTA_TEMPLATE	( ( FSRM_DISPID_QUOTA_BASE | 0x20000 )  )
+
+#define	FSRM_DISPID_QUOTA_TEMPLATE_IMPORTED	( ( FSRM_DISPID_QUOTA_TEMPLATE | 0x1000 )  )
+
+#define	FSRM_DISPID_QUOTA_MANAGER	( ( FSRM_DISPID_FEATURE_QUOTA | 0x200000 )  )
+
+#define	FSRM_DISPID_QUOTA_TEMPLATE_MANAGER	( ( FSRM_DISPID_FEATURE_QUOTA | 0x300000 )  )
+
+#define	FSRM_DISPID_QUOTA_MANAGER_EX	( ( FSRM_DISPID_FEATURE_QUOTA | 0x400000 )  )
+
+typedef long FSRM_QUOTA_THRESHOLD;
+
+#define	FsrmMaxNumberThresholds	( 16 )
+
+#define	FsrmMinThresholdValue	( 1 )
+
+#define	FsrmMaxThresholdValue	( 250 )
+
+#define	FsrmMinQuotaLimit	( 1024 )
+
+#define	FsrmMaxExcludeFolders	( 32 )
+
+
+
+extern RPC_IF_HANDLE __MIDL_itf_fsrmquota_0000_0000_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_fsrmquota_0000_0000_v0_0_s_ifspec;
+
+#ifndef __IFsrmQuotaBase_INTERFACE_DEFINED__
+#define __IFsrmQuotaBase_INTERFACE_DEFINED__
+
+/* interface IFsrmQuotaBase */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IFsrmQuotaBase;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("1568a795-3924-4118-b74b-68d8f0fa5daf")
+    IFsrmQuotaBase : public IFsrmObject
+    {
+    public:
+        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_QuotaLimit( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *quotaLimit) = 0;
+        
+        virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_QuotaLimit( 
+            /* [annotation][in] */ 
+            _In_  VARIANT quotaLimit) = 0;
+        
+        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_QuotaFlags( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *quotaFlags) = 0;
+        
+        virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_QuotaFlags( 
+            /* [annotation][in] */ 
+            _In_  long quotaFlags) = 0;
+        
+        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Thresholds( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *thresholds) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddThreshold( 
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DeleteThreshold( 
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ModifyThreshold( 
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD newThreshold) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateThresholdAction( 
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][in] */ 
+            _In_  FsrmActionType actionType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmAction **action) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnumThresholdActions( 
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCollection **actions) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IFsrmQuotaBaseVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in IFsrmQuotaBase * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in IFsrmQuotaBase * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in IFsrmQuotaBase * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            __RPC__in IFsrmQuotaBase * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            __RPC__in IFsrmQuotaBase * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            __RPC__in IFsrmQuotaBase * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IFsrmQuotaBase * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
+            __RPC__in IFsrmQuotaBase * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FSRM_OBJECT_ID *id);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
+            __RPC__in IFsrmQuotaBase * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *description);
+        
+        /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
+            __RPC__in IFsrmQuotaBase * This,
+            /* [annotation][in] */ 
+            _In_  BSTR description);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
+            __RPC__in IFsrmQuotaBase * This);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Commit )( 
+            __RPC__in IFsrmQuotaBase * This);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuotaLimit )( 
+            __RPC__in IFsrmQuotaBase * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *quotaLimit);
+        
+        /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_QuotaLimit )( 
+            __RPC__in IFsrmQuotaBase * This,
+            /* [annotation][in] */ 
+            _In_  VARIANT quotaLimit);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuotaFlags )( 
+            __RPC__in IFsrmQuotaBase * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *quotaFlags);
+        
+        /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_QuotaFlags )( 
+            __RPC__in IFsrmQuotaBase * This,
+            /* [annotation][in] */ 
+            _In_  long quotaFlags);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Thresholds )( 
+            __RPC__in IFsrmQuotaBase * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *thresholds);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddThreshold )( 
+            __RPC__in IFsrmQuotaBase * This,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteThreshold )( 
+            __RPC__in IFsrmQuotaBase * This,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ModifyThreshold )( 
+            __RPC__in IFsrmQuotaBase * This,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD newThreshold);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateThresholdAction )( 
+            __RPC__in IFsrmQuotaBase * This,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][in] */ 
+            _In_  FsrmActionType actionType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmAction **action);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumThresholdActions )( 
+            __RPC__in IFsrmQuotaBase * This,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCollection **actions);
+        
+        END_INTERFACE
+    } IFsrmQuotaBaseVtbl;
+
+    interface IFsrmQuotaBase
+    {
+        CONST_VTBL struct IFsrmQuotaBaseVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IFsrmQuotaBase_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IFsrmQuotaBase_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IFsrmQuotaBase_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IFsrmQuotaBase_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IFsrmQuotaBase_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IFsrmQuotaBase_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IFsrmQuotaBase_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IFsrmQuotaBase_get_Id(This,id)	\
+    ( (This)->lpVtbl -> get_Id(This,id) ) 
+
+#define IFsrmQuotaBase_get_Description(This,description)	\
+    ( (This)->lpVtbl -> get_Description(This,description) ) 
+
+#define IFsrmQuotaBase_put_Description(This,description)	\
+    ( (This)->lpVtbl -> put_Description(This,description) ) 
+
+#define IFsrmQuotaBase_Delete(This)	\
+    ( (This)->lpVtbl -> Delete(This) ) 
+
+#define IFsrmQuotaBase_Commit(This)	\
+    ( (This)->lpVtbl -> Commit(This) ) 
+
+
+#define IFsrmQuotaBase_get_QuotaLimit(This,quotaLimit)	\
+    ( (This)->lpVtbl -> get_QuotaLimit(This,quotaLimit) ) 
+
+#define IFsrmQuotaBase_put_QuotaLimit(This,quotaLimit)	\
+    ( (This)->lpVtbl -> put_QuotaLimit(This,quotaLimit) ) 
+
+#define IFsrmQuotaBase_get_QuotaFlags(This,quotaFlags)	\
+    ( (This)->lpVtbl -> get_QuotaFlags(This,quotaFlags) ) 
+
+#define IFsrmQuotaBase_put_QuotaFlags(This,quotaFlags)	\
+    ( (This)->lpVtbl -> put_QuotaFlags(This,quotaFlags) ) 
+
+#define IFsrmQuotaBase_get_Thresholds(This,thresholds)	\
+    ( (This)->lpVtbl -> get_Thresholds(This,thresholds) ) 
+
+#define IFsrmQuotaBase_AddThreshold(This,threshold)	\
+    ( (This)->lpVtbl -> AddThreshold(This,threshold) ) 
+
+#define IFsrmQuotaBase_DeleteThreshold(This,threshold)	\
+    ( (This)->lpVtbl -> DeleteThreshold(This,threshold) ) 
+
+#define IFsrmQuotaBase_ModifyThreshold(This,threshold,newThreshold)	\
+    ( (This)->lpVtbl -> ModifyThreshold(This,threshold,newThreshold) ) 
+
+#define IFsrmQuotaBase_CreateThresholdAction(This,threshold,actionType,action)	\
+    ( (This)->lpVtbl -> CreateThresholdAction(This,threshold,actionType,action) ) 
+
+#define IFsrmQuotaBase_EnumThresholdActions(This,threshold,actions)	\
+    ( (This)->lpVtbl -> EnumThresholdActions(This,threshold,actions) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IFsrmQuotaBase_INTERFACE_DEFINED__ */
+
+
+#ifndef __IFsrmQuotaObject_INTERFACE_DEFINED__
+#define __IFsrmQuotaObject_INTERFACE_DEFINED__
+
+/* interface IFsrmQuotaObject */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IFsrmQuotaObject;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("42dc3511-61d5-48ae-b6dc-59fc00c0a8d6")
+    IFsrmQuotaObject : public IFsrmQuotaBase
+    {
+    public:
+        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Path( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *path) = 0;
+        
+        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UserSid( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *userSid) = 0;
+        
+        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UserAccount( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *userAccount) = 0;
+        
+        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SourceTemplateName( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *quotaTemplateName) = 0;
+        
+        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MatchesSourceTemplate( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *matches) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ApplyTemplate( 
+            /* [annotation][in] */ 
+            _In_  BSTR quotaTemplateName) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IFsrmQuotaObjectVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in IFsrmQuotaObject * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in IFsrmQuotaObject * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in IFsrmQuotaObject * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            __RPC__in IFsrmQuotaObject * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            __RPC__in IFsrmQuotaObject * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            __RPC__in IFsrmQuotaObject * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IFsrmQuotaObject * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
+            __RPC__in IFsrmQuotaObject * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FSRM_OBJECT_ID *id);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
+            __RPC__in IFsrmQuotaObject * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *description);
+        
+        /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
+            __RPC__in IFsrmQuotaObject * This,
+            /* [annotation][in] */ 
+            _In_  BSTR description);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
+            __RPC__in IFsrmQuotaObject * This);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Commit )( 
+            __RPC__in IFsrmQuotaObject * This);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuotaLimit )( 
+            __RPC__in IFsrmQuotaObject * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *quotaLimit);
+        
+        /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_QuotaLimit )( 
+            __RPC__in IFsrmQuotaObject * This,
+            /* [annotation][in] */ 
+            _In_  VARIANT quotaLimit);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuotaFlags )( 
+            __RPC__in IFsrmQuotaObject * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *quotaFlags);
+        
+        /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_QuotaFlags )( 
+            __RPC__in IFsrmQuotaObject * This,
+            /* [annotation][in] */ 
+            _In_  long quotaFlags);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Thresholds )( 
+            __RPC__in IFsrmQuotaObject * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *thresholds);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddThreshold )( 
+            __RPC__in IFsrmQuotaObject * This,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteThreshold )( 
+            __RPC__in IFsrmQuotaObject * This,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ModifyThreshold )( 
+            __RPC__in IFsrmQuotaObject * This,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD newThreshold);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateThresholdAction )( 
+            __RPC__in IFsrmQuotaObject * This,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][in] */ 
+            _In_  FsrmActionType actionType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmAction **action);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumThresholdActions )( 
+            __RPC__in IFsrmQuotaObject * This,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCollection **actions);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Path )( 
+            __RPC__in IFsrmQuotaObject * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *path);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserSid )( 
+            __RPC__in IFsrmQuotaObject * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *userSid);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserAccount )( 
+            __RPC__in IFsrmQuotaObject * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *userAccount);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SourceTemplateName )( 
+            __RPC__in IFsrmQuotaObject * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *quotaTemplateName);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MatchesSourceTemplate )( 
+            __RPC__in IFsrmQuotaObject * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *matches);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ApplyTemplate )( 
+            __RPC__in IFsrmQuotaObject * This,
+            /* [annotation][in] */ 
+            _In_  BSTR quotaTemplateName);
+        
+        END_INTERFACE
+    } IFsrmQuotaObjectVtbl;
+
+    interface IFsrmQuotaObject
+    {
+        CONST_VTBL struct IFsrmQuotaObjectVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IFsrmQuotaObject_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IFsrmQuotaObject_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IFsrmQuotaObject_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IFsrmQuotaObject_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IFsrmQuotaObject_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IFsrmQuotaObject_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IFsrmQuotaObject_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IFsrmQuotaObject_get_Id(This,id)	\
+    ( (This)->lpVtbl -> get_Id(This,id) ) 
+
+#define IFsrmQuotaObject_get_Description(This,description)	\
+    ( (This)->lpVtbl -> get_Description(This,description) ) 
+
+#define IFsrmQuotaObject_put_Description(This,description)	\
+    ( (This)->lpVtbl -> put_Description(This,description) ) 
+
+#define IFsrmQuotaObject_Delete(This)	\
+    ( (This)->lpVtbl -> Delete(This) ) 
+
+#define IFsrmQuotaObject_Commit(This)	\
+    ( (This)->lpVtbl -> Commit(This) ) 
+
+
+#define IFsrmQuotaObject_get_QuotaLimit(This,quotaLimit)	\
+    ( (This)->lpVtbl -> get_QuotaLimit(This,quotaLimit) ) 
+
+#define IFsrmQuotaObject_put_QuotaLimit(This,quotaLimit)	\
+    ( (This)->lpVtbl -> put_QuotaLimit(This,quotaLimit) ) 
+
+#define IFsrmQuotaObject_get_QuotaFlags(This,quotaFlags)	\
+    ( (This)->lpVtbl -> get_QuotaFlags(This,quotaFlags) ) 
+
+#define IFsrmQuotaObject_put_QuotaFlags(This,quotaFlags)	\
+    ( (This)->lpVtbl -> put_QuotaFlags(This,quotaFlags) ) 
+
+#define IFsrmQuotaObject_get_Thresholds(This,thresholds)	\
+    ( (This)->lpVtbl -> get_Thresholds(This,thresholds) ) 
+
+#define IFsrmQuotaObject_AddThreshold(This,threshold)	\
+    ( (This)->lpVtbl -> AddThreshold(This,threshold) ) 
+
+#define IFsrmQuotaObject_DeleteThreshold(This,threshold)	\
+    ( (This)->lpVtbl -> DeleteThreshold(This,threshold) ) 
+
+#define IFsrmQuotaObject_ModifyThreshold(This,threshold,newThreshold)	\
+    ( (This)->lpVtbl -> ModifyThreshold(This,threshold,newThreshold) ) 
+
+#define IFsrmQuotaObject_CreateThresholdAction(This,threshold,actionType,action)	\
+    ( (This)->lpVtbl -> CreateThresholdAction(This,threshold,actionType,action) ) 
+
+#define IFsrmQuotaObject_EnumThresholdActions(This,threshold,actions)	\
+    ( (This)->lpVtbl -> EnumThresholdActions(This,threshold,actions) ) 
+
+
+#define IFsrmQuotaObject_get_Path(This,path)	\
+    ( (This)->lpVtbl -> get_Path(This,path) ) 
+
+#define IFsrmQuotaObject_get_UserSid(This,userSid)	\
+    ( (This)->lpVtbl -> get_UserSid(This,userSid) ) 
+
+#define IFsrmQuotaObject_get_UserAccount(This,userAccount)	\
+    ( (This)->lpVtbl -> get_UserAccount(This,userAccount) ) 
+
+#define IFsrmQuotaObject_get_SourceTemplateName(This,quotaTemplateName)	\
+    ( (This)->lpVtbl -> get_SourceTemplateName(This,quotaTemplateName) ) 
+
+#define IFsrmQuotaObject_get_MatchesSourceTemplate(This,matches)	\
+    ( (This)->lpVtbl -> get_MatchesSourceTemplate(This,matches) ) 
+
+#define IFsrmQuotaObject_ApplyTemplate(This,quotaTemplateName)	\
+    ( (This)->lpVtbl -> ApplyTemplate(This,quotaTemplateName) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IFsrmQuotaObject_INTERFACE_DEFINED__ */
+
+
+#ifndef __IFsrmQuota_INTERFACE_DEFINED__
+#define __IFsrmQuota_INTERFACE_DEFINED__
+
+/* interface IFsrmQuota */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IFsrmQuota;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("377f739d-9647-4b8e-97d2-5ffce6d759cd")
+    IFsrmQuota : public IFsrmQuotaObject
+    {
+    public:
+        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_QuotaUsed( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *used) = 0;
+        
+        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_QuotaPeakUsage( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *peakUsage) = 0;
+        
+        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_QuotaPeakUsageTime( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DATE *peakUsageDateTime) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ResetPeakUsage( void) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RefreshUsageProperties( void) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IFsrmQuotaVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in IFsrmQuota * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in IFsrmQuota * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in IFsrmQuota * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            __RPC__in IFsrmQuota * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            __RPC__in IFsrmQuota * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            __RPC__in IFsrmQuota * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IFsrmQuota * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
+            __RPC__in IFsrmQuota * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FSRM_OBJECT_ID *id);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
+            __RPC__in IFsrmQuota * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *description);
+        
+        /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
+            __RPC__in IFsrmQuota * This,
+            /* [annotation][in] */ 
+            _In_  BSTR description);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
+            __RPC__in IFsrmQuota * This);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Commit )( 
+            __RPC__in IFsrmQuota * This);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuotaLimit )( 
+            __RPC__in IFsrmQuota * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *quotaLimit);
+        
+        /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_QuotaLimit )( 
+            __RPC__in IFsrmQuota * This,
+            /* [annotation][in] */ 
+            _In_  VARIANT quotaLimit);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuotaFlags )( 
+            __RPC__in IFsrmQuota * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *quotaFlags);
+        
+        /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_QuotaFlags )( 
+            __RPC__in IFsrmQuota * This,
+            /* [annotation][in] */ 
+            _In_  long quotaFlags);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Thresholds )( 
+            __RPC__in IFsrmQuota * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *thresholds);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddThreshold )( 
+            __RPC__in IFsrmQuota * This,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteThreshold )( 
+            __RPC__in IFsrmQuota * This,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ModifyThreshold )( 
+            __RPC__in IFsrmQuota * This,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD newThreshold);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateThresholdAction )( 
+            __RPC__in IFsrmQuota * This,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][in] */ 
+            _In_  FsrmActionType actionType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmAction **action);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumThresholdActions )( 
+            __RPC__in IFsrmQuota * This,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCollection **actions);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Path )( 
+            __RPC__in IFsrmQuota * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *path);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserSid )( 
+            __RPC__in IFsrmQuota * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *userSid);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserAccount )( 
+            __RPC__in IFsrmQuota * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *userAccount);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SourceTemplateName )( 
+            __RPC__in IFsrmQuota * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *quotaTemplateName);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MatchesSourceTemplate )( 
+            __RPC__in IFsrmQuota * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *matches);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ApplyTemplate )( 
+            __RPC__in IFsrmQuota * This,
+            /* [annotation][in] */ 
+            _In_  BSTR quotaTemplateName);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuotaUsed )( 
+            __RPC__in IFsrmQuota * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *used);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuotaPeakUsage )( 
+            __RPC__in IFsrmQuota * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *peakUsage);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuotaPeakUsageTime )( 
+            __RPC__in IFsrmQuota * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DATE *peakUsageDateTime);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ResetPeakUsage )( 
+            __RPC__in IFsrmQuota * This);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RefreshUsageProperties )( 
+            __RPC__in IFsrmQuota * This);
+        
+        END_INTERFACE
+    } IFsrmQuotaVtbl;
+
+    interface IFsrmQuota
+    {
+        CONST_VTBL struct IFsrmQuotaVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IFsrmQuota_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IFsrmQuota_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IFsrmQuota_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IFsrmQuota_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IFsrmQuota_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IFsrmQuota_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IFsrmQuota_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IFsrmQuota_get_Id(This,id)	\
+    ( (This)->lpVtbl -> get_Id(This,id) ) 
+
+#define IFsrmQuota_get_Description(This,description)	\
+    ( (This)->lpVtbl -> get_Description(This,description) ) 
+
+#define IFsrmQuota_put_Description(This,description)	\
+    ( (This)->lpVtbl -> put_Description(This,description) ) 
+
+#define IFsrmQuota_Delete(This)	\
+    ( (This)->lpVtbl -> Delete(This) ) 
+
+#define IFsrmQuota_Commit(This)	\
+    ( (This)->lpVtbl -> Commit(This) ) 
+
+
+#define IFsrmQuota_get_QuotaLimit(This,quotaLimit)	\
+    ( (This)->lpVtbl -> get_QuotaLimit(This,quotaLimit) ) 
+
+#define IFsrmQuota_put_QuotaLimit(This,quotaLimit)	\
+    ( (This)->lpVtbl -> put_QuotaLimit(This,quotaLimit) ) 
+
+#define IFsrmQuota_get_QuotaFlags(This,quotaFlags)	\
+    ( (This)->lpVtbl -> get_QuotaFlags(This,quotaFlags) ) 
+
+#define IFsrmQuota_put_QuotaFlags(This,quotaFlags)	\
+    ( (This)->lpVtbl -> put_QuotaFlags(This,quotaFlags) ) 
+
+#define IFsrmQuota_get_Thresholds(This,thresholds)	\
+    ( (This)->lpVtbl -> get_Thresholds(This,thresholds) ) 
+
+#define IFsrmQuota_AddThreshold(This,threshold)	\
+    ( (This)->lpVtbl -> AddThreshold(This,threshold) ) 
+
+#define IFsrmQuota_DeleteThreshold(This,threshold)	\
+    ( (This)->lpVtbl -> DeleteThreshold(This,threshold) ) 
+
+#define IFsrmQuota_ModifyThreshold(This,threshold,newThreshold)	\
+    ( (This)->lpVtbl -> ModifyThreshold(This,threshold,newThreshold) ) 
+
+#define IFsrmQuota_CreateThresholdAction(This,threshold,actionType,action)	\
+    ( (This)->lpVtbl -> CreateThresholdAction(This,threshold,actionType,action) ) 
+
+#define IFsrmQuota_EnumThresholdActions(This,threshold,actions)	\
+    ( (This)->lpVtbl -> EnumThresholdActions(This,threshold,actions) ) 
+
+
+#define IFsrmQuota_get_Path(This,path)	\
+    ( (This)->lpVtbl -> get_Path(This,path) ) 
+
+#define IFsrmQuota_get_UserSid(This,userSid)	\
+    ( (This)->lpVtbl -> get_UserSid(This,userSid) ) 
+
+#define IFsrmQuota_get_UserAccount(This,userAccount)	\
+    ( (This)->lpVtbl -> get_UserAccount(This,userAccount) ) 
+
+#define IFsrmQuota_get_SourceTemplateName(This,quotaTemplateName)	\
+    ( (This)->lpVtbl -> get_SourceTemplateName(This,quotaTemplateName) ) 
+
+#define IFsrmQuota_get_MatchesSourceTemplate(This,matches)	\
+    ( (This)->lpVtbl -> get_MatchesSourceTemplate(This,matches) ) 
+
+#define IFsrmQuota_ApplyTemplate(This,quotaTemplateName)	\
+    ( (This)->lpVtbl -> ApplyTemplate(This,quotaTemplateName) ) 
+
+
+#define IFsrmQuota_get_QuotaUsed(This,used)	\
+    ( (This)->lpVtbl -> get_QuotaUsed(This,used) ) 
+
+#define IFsrmQuota_get_QuotaPeakUsage(This,peakUsage)	\
+    ( (This)->lpVtbl -> get_QuotaPeakUsage(This,peakUsage) ) 
+
+#define IFsrmQuota_get_QuotaPeakUsageTime(This,peakUsageDateTime)	\
+    ( (This)->lpVtbl -> get_QuotaPeakUsageTime(This,peakUsageDateTime) ) 
+
+#define IFsrmQuota_ResetPeakUsage(This)	\
+    ( (This)->lpVtbl -> ResetPeakUsage(This) ) 
+
+#define IFsrmQuota_RefreshUsageProperties(This)	\
+    ( (This)->lpVtbl -> RefreshUsageProperties(This) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IFsrmQuota_INTERFACE_DEFINED__ */
+
+
+#ifndef __IFsrmAutoApplyQuota_INTERFACE_DEFINED__
+#define __IFsrmAutoApplyQuota_INTERFACE_DEFINED__
+
+/* interface IFsrmAutoApplyQuota */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IFsrmAutoApplyQuota;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("f82e5729-6aba-4740-bfc7-c7f58f75fb7b")
+    IFsrmAutoApplyQuota : public IFsrmQuotaObject
+    {
+    public:
+        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ExcludeFolders( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *folders) = 0;
+        
+        virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ExcludeFolders( 
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * folders) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CommitAndUpdateDerived( 
+            /* [annotation][in] */ 
+            _In_  FsrmCommitOptions commitOptions,
+            /* [annotation][in] */ 
+            _In_  FsrmTemplateApplyOptions applyOptions,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmDerivedObjectsResult **derivedObjectsResult) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IFsrmAutoApplyQuotaVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in IFsrmAutoApplyQuota * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in IFsrmAutoApplyQuota * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in IFsrmAutoApplyQuota * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            __RPC__in IFsrmAutoApplyQuota * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            __RPC__in IFsrmAutoApplyQuota * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            __RPC__in IFsrmAutoApplyQuota * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IFsrmAutoApplyQuota * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
+            __RPC__in IFsrmAutoApplyQuota * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FSRM_OBJECT_ID *id);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
+            __RPC__in IFsrmAutoApplyQuota * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *description);
+        
+        /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
+            __RPC__in IFsrmAutoApplyQuota * This,
+            /* [annotation][in] */ 
+            _In_  BSTR description);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
+            __RPC__in IFsrmAutoApplyQuota * This);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Commit )( 
+            __RPC__in IFsrmAutoApplyQuota * This);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuotaLimit )( 
+            __RPC__in IFsrmAutoApplyQuota * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *quotaLimit);
+        
+        /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_QuotaLimit )( 
+            __RPC__in IFsrmAutoApplyQuota * This,
+            /* [annotation][in] */ 
+            _In_  VARIANT quotaLimit);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuotaFlags )( 
+            __RPC__in IFsrmAutoApplyQuota * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *quotaFlags);
+        
+        /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_QuotaFlags )( 
+            __RPC__in IFsrmAutoApplyQuota * This,
+            /* [annotation][in] */ 
+            _In_  long quotaFlags);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Thresholds )( 
+            __RPC__in IFsrmAutoApplyQuota * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *thresholds);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddThreshold )( 
+            __RPC__in IFsrmAutoApplyQuota * This,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteThreshold )( 
+            __RPC__in IFsrmAutoApplyQuota * This,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ModifyThreshold )( 
+            __RPC__in IFsrmAutoApplyQuota * This,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD newThreshold);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateThresholdAction )( 
+            __RPC__in IFsrmAutoApplyQuota * This,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][in] */ 
+            _In_  FsrmActionType actionType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmAction **action);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumThresholdActions )( 
+            __RPC__in IFsrmAutoApplyQuota * This,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCollection **actions);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Path )( 
+            __RPC__in IFsrmAutoApplyQuota * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *path);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserSid )( 
+            __RPC__in IFsrmAutoApplyQuota * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *userSid);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserAccount )( 
+            __RPC__in IFsrmAutoApplyQuota * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *userAccount);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SourceTemplateName )( 
+            __RPC__in IFsrmAutoApplyQuota * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *quotaTemplateName);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MatchesSourceTemplate )( 
+            __RPC__in IFsrmAutoApplyQuota * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *matches);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ApplyTemplate )( 
+            __RPC__in IFsrmAutoApplyQuota * This,
+            /* [annotation][in] */ 
+            _In_  BSTR quotaTemplateName);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ExcludeFolders )( 
+            __RPC__in IFsrmAutoApplyQuota * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *folders);
+        
+        /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ExcludeFolders )( 
+            __RPC__in IFsrmAutoApplyQuota * This,
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * folders);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CommitAndUpdateDerived )( 
+            __RPC__in IFsrmAutoApplyQuota * This,
+            /* [annotation][in] */ 
+            _In_  FsrmCommitOptions commitOptions,
+            /* [annotation][in] */ 
+            _In_  FsrmTemplateApplyOptions applyOptions,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmDerivedObjectsResult **derivedObjectsResult);
+        
+        END_INTERFACE
+    } IFsrmAutoApplyQuotaVtbl;
+
+    interface IFsrmAutoApplyQuota
+    {
+        CONST_VTBL struct IFsrmAutoApplyQuotaVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IFsrmAutoApplyQuota_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IFsrmAutoApplyQuota_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IFsrmAutoApplyQuota_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IFsrmAutoApplyQuota_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IFsrmAutoApplyQuota_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IFsrmAutoApplyQuota_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IFsrmAutoApplyQuota_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IFsrmAutoApplyQuota_get_Id(This,id)	\
+    ( (This)->lpVtbl -> get_Id(This,id) ) 
+
+#define IFsrmAutoApplyQuota_get_Description(This,description)	\
+    ( (This)->lpVtbl -> get_Description(This,description) ) 
+
+#define IFsrmAutoApplyQuota_put_Description(This,description)	\
+    ( (This)->lpVtbl -> put_Description(This,description) ) 
+
+#define IFsrmAutoApplyQuota_Delete(This)	\
+    ( (This)->lpVtbl -> Delete(This) ) 
+
+#define IFsrmAutoApplyQuota_Commit(This)	\
+    ( (This)->lpVtbl -> Commit(This) ) 
+
+
+#define IFsrmAutoApplyQuota_get_QuotaLimit(This,quotaLimit)	\
+    ( (This)->lpVtbl -> get_QuotaLimit(This,quotaLimit) ) 
+
+#define IFsrmAutoApplyQuota_put_QuotaLimit(This,quotaLimit)	\
+    ( (This)->lpVtbl -> put_QuotaLimit(This,quotaLimit) ) 
+
+#define IFsrmAutoApplyQuota_get_QuotaFlags(This,quotaFlags)	\
+    ( (This)->lpVtbl -> get_QuotaFlags(This,quotaFlags) ) 
+
+#define IFsrmAutoApplyQuota_put_QuotaFlags(This,quotaFlags)	\
+    ( (This)->lpVtbl -> put_QuotaFlags(This,quotaFlags) ) 
+
+#define IFsrmAutoApplyQuota_get_Thresholds(This,thresholds)	\
+    ( (This)->lpVtbl -> get_Thresholds(This,thresholds) ) 
+
+#define IFsrmAutoApplyQuota_AddThreshold(This,threshold)	\
+    ( (This)->lpVtbl -> AddThreshold(This,threshold) ) 
+
+#define IFsrmAutoApplyQuota_DeleteThreshold(This,threshold)	\
+    ( (This)->lpVtbl -> DeleteThreshold(This,threshold) ) 
+
+#define IFsrmAutoApplyQuota_ModifyThreshold(This,threshold,newThreshold)	\
+    ( (This)->lpVtbl -> ModifyThreshold(This,threshold,newThreshold) ) 
+
+#define IFsrmAutoApplyQuota_CreateThresholdAction(This,threshold,actionType,action)	\
+    ( (This)->lpVtbl -> CreateThresholdAction(This,threshold,actionType,action) ) 
+
+#define IFsrmAutoApplyQuota_EnumThresholdActions(This,threshold,actions)	\
+    ( (This)->lpVtbl -> EnumThresholdActions(This,threshold,actions) ) 
+
+
+#define IFsrmAutoApplyQuota_get_Path(This,path)	\
+    ( (This)->lpVtbl -> get_Path(This,path) ) 
+
+#define IFsrmAutoApplyQuota_get_UserSid(This,userSid)	\
+    ( (This)->lpVtbl -> get_UserSid(This,userSid) ) 
+
+#define IFsrmAutoApplyQuota_get_UserAccount(This,userAccount)	\
+    ( (This)->lpVtbl -> get_UserAccount(This,userAccount) ) 
+
+#define IFsrmAutoApplyQuota_get_SourceTemplateName(This,quotaTemplateName)	\
+    ( (This)->lpVtbl -> get_SourceTemplateName(This,quotaTemplateName) ) 
+
+#define IFsrmAutoApplyQuota_get_MatchesSourceTemplate(This,matches)	\
+    ( (This)->lpVtbl -> get_MatchesSourceTemplate(This,matches) ) 
+
+#define IFsrmAutoApplyQuota_ApplyTemplate(This,quotaTemplateName)	\
+    ( (This)->lpVtbl -> ApplyTemplate(This,quotaTemplateName) ) 
+
+
+#define IFsrmAutoApplyQuota_get_ExcludeFolders(This,folders)	\
+    ( (This)->lpVtbl -> get_ExcludeFolders(This,folders) ) 
+
+#define IFsrmAutoApplyQuota_put_ExcludeFolders(This,folders)	\
+    ( (This)->lpVtbl -> put_ExcludeFolders(This,folders) ) 
+
+#define IFsrmAutoApplyQuota_CommitAndUpdateDerived(This,commitOptions,applyOptions,derivedObjectsResult)	\
+    ( (This)->lpVtbl -> CommitAndUpdateDerived(This,commitOptions,applyOptions,derivedObjectsResult) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IFsrmAutoApplyQuota_INTERFACE_DEFINED__ */
+
+
+#ifndef __IFsrmQuotaManager_INTERFACE_DEFINED__
+#define __IFsrmQuotaManager_INTERFACE_DEFINED__
+
+/* interface IFsrmQuotaManager */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IFsrmQuotaManager;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("8bb68c7d-19d8-4ffb-809e-be4fc1734014")
+    IFsrmQuotaManager : public IDispatch
+    {
+    public:
+        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ActionVariables( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *variables) = 0;
+        
+        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ActionVariableDescriptions( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *descriptions) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateQuota( 
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmQuota **quota) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateAutoApplyQuota( 
+            /* [annotation][in] */ 
+            _In_  BSTR quotaTemplateName,
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmAutoApplyQuota **quota) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetQuota( 
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmQuota **quota) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetAutoApplyQuota( 
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmAutoApplyQuota **quota) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetRestrictiveQuota( 
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmQuota **quota) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnumQuotas( 
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR path,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  FsrmEnumOptions options,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **quotas) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnumAutoApplyQuotas( 
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR path,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  FsrmEnumOptions options,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **quotas) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnumEffectiveQuotas( 
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  FsrmEnumOptions options,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **quotas) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Scan( 
+            /* [annotation][in] */ 
+            _In_  BSTR strPath) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateQuotaCollection( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **collection) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IFsrmQuotaManagerVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in IFsrmQuotaManager * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in IFsrmQuotaManager * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in IFsrmQuotaManager * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            __RPC__in IFsrmQuotaManager * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            __RPC__in IFsrmQuotaManager * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            __RPC__in IFsrmQuotaManager * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IFsrmQuotaManager * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ActionVariables )( 
+            __RPC__in IFsrmQuotaManager * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *variables);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ActionVariableDescriptions )( 
+            __RPC__in IFsrmQuotaManager * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *descriptions);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateQuota )( 
+            __RPC__in IFsrmQuotaManager * This,
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmQuota **quota);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateAutoApplyQuota )( 
+            __RPC__in IFsrmQuotaManager * This,
+            /* [annotation][in] */ 
+            _In_  BSTR quotaTemplateName,
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmAutoApplyQuota **quota);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetQuota )( 
+            __RPC__in IFsrmQuotaManager * This,
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmQuota **quota);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetAutoApplyQuota )( 
+            __RPC__in IFsrmQuotaManager * This,
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmAutoApplyQuota **quota);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetRestrictiveQuota )( 
+            __RPC__in IFsrmQuotaManager * This,
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmQuota **quota);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumQuotas )( 
+            __RPC__in IFsrmQuotaManager * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR path,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  FsrmEnumOptions options,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **quotas);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumAutoApplyQuotas )( 
+            __RPC__in IFsrmQuotaManager * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR path,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  FsrmEnumOptions options,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **quotas);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumEffectiveQuotas )( 
+            __RPC__in IFsrmQuotaManager * This,
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  FsrmEnumOptions options,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **quotas);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Scan )( 
+            __RPC__in IFsrmQuotaManager * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strPath);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateQuotaCollection )( 
+            __RPC__in IFsrmQuotaManager * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **collection);
+        
+        END_INTERFACE
+    } IFsrmQuotaManagerVtbl;
+
+    interface IFsrmQuotaManager
+    {
+        CONST_VTBL struct IFsrmQuotaManagerVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IFsrmQuotaManager_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IFsrmQuotaManager_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IFsrmQuotaManager_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IFsrmQuotaManager_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IFsrmQuotaManager_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IFsrmQuotaManager_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IFsrmQuotaManager_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IFsrmQuotaManager_get_ActionVariables(This,variables)	\
+    ( (This)->lpVtbl -> get_ActionVariables(This,variables) ) 
+
+#define IFsrmQuotaManager_get_ActionVariableDescriptions(This,descriptions)	\
+    ( (This)->lpVtbl -> get_ActionVariableDescriptions(This,descriptions) ) 
+
+#define IFsrmQuotaManager_CreateQuota(This,path,quota)	\
+    ( (This)->lpVtbl -> CreateQuota(This,path,quota) ) 
+
+#define IFsrmQuotaManager_CreateAutoApplyQuota(This,quotaTemplateName,path,quota)	\
+    ( (This)->lpVtbl -> CreateAutoApplyQuota(This,quotaTemplateName,path,quota) ) 
+
+#define IFsrmQuotaManager_GetQuota(This,path,quota)	\
+    ( (This)->lpVtbl -> GetQuota(This,path,quota) ) 
+
+#define IFsrmQuotaManager_GetAutoApplyQuota(This,path,quota)	\
+    ( (This)->lpVtbl -> GetAutoApplyQuota(This,path,quota) ) 
+
+#define IFsrmQuotaManager_GetRestrictiveQuota(This,path,quota)	\
+    ( (This)->lpVtbl -> GetRestrictiveQuota(This,path,quota) ) 
+
+#define IFsrmQuotaManager_EnumQuotas(This,path,options,quotas)	\
+    ( (This)->lpVtbl -> EnumQuotas(This,path,options,quotas) ) 
+
+#define IFsrmQuotaManager_EnumAutoApplyQuotas(This,path,options,quotas)	\
+    ( (This)->lpVtbl -> EnumAutoApplyQuotas(This,path,options,quotas) ) 
+
+#define IFsrmQuotaManager_EnumEffectiveQuotas(This,path,options,quotas)	\
+    ( (This)->lpVtbl -> EnumEffectiveQuotas(This,path,options,quotas) ) 
+
+#define IFsrmQuotaManager_Scan(This,strPath)	\
+    ( (This)->lpVtbl -> Scan(This,strPath) ) 
+
+#define IFsrmQuotaManager_CreateQuotaCollection(This,collection)	\
+    ( (This)->lpVtbl -> CreateQuotaCollection(This,collection) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IFsrmQuotaManager_INTERFACE_DEFINED__ */
+
+
+#ifndef __IFsrmQuotaManagerEx_INTERFACE_DEFINED__
+#define __IFsrmQuotaManagerEx_INTERFACE_DEFINED__
+
+/* interface IFsrmQuotaManagerEx */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IFsrmQuotaManagerEx;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("4846cb01-d430-494f-abb4-b1054999fb09")
+    IFsrmQuotaManagerEx : public IFsrmQuotaManager
+    {
+    public:
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE IsAffectedByQuota( 
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  FsrmEnumOptions options,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *affected) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IFsrmQuotaManagerExVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in IFsrmQuotaManagerEx * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in IFsrmQuotaManagerEx * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in IFsrmQuotaManagerEx * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            __RPC__in IFsrmQuotaManagerEx * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            __RPC__in IFsrmQuotaManagerEx * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            __RPC__in IFsrmQuotaManagerEx * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IFsrmQuotaManagerEx * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ActionVariables )( 
+            __RPC__in IFsrmQuotaManagerEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *variables);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ActionVariableDescriptions )( 
+            __RPC__in IFsrmQuotaManagerEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *descriptions);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateQuota )( 
+            __RPC__in IFsrmQuotaManagerEx * This,
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmQuota **quota);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateAutoApplyQuota )( 
+            __RPC__in IFsrmQuotaManagerEx * This,
+            /* [annotation][in] */ 
+            _In_  BSTR quotaTemplateName,
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmAutoApplyQuota **quota);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetQuota )( 
+            __RPC__in IFsrmQuotaManagerEx * This,
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmQuota **quota);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetAutoApplyQuota )( 
+            __RPC__in IFsrmQuotaManagerEx * This,
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmAutoApplyQuota **quota);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetRestrictiveQuota )( 
+            __RPC__in IFsrmQuotaManagerEx * This,
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmQuota **quota);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumQuotas )( 
+            __RPC__in IFsrmQuotaManagerEx * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR path,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  FsrmEnumOptions options,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **quotas);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumAutoApplyQuotas )( 
+            __RPC__in IFsrmQuotaManagerEx * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR path,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  FsrmEnumOptions options,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **quotas);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumEffectiveQuotas )( 
+            __RPC__in IFsrmQuotaManagerEx * This,
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  FsrmEnumOptions options,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **quotas);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Scan )( 
+            __RPC__in IFsrmQuotaManagerEx * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strPath);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateQuotaCollection )( 
+            __RPC__in IFsrmQuotaManagerEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **collection);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsAffectedByQuota )( 
+            __RPC__in IFsrmQuotaManagerEx * This,
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  FsrmEnumOptions options,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *affected);
+        
+        END_INTERFACE
+    } IFsrmQuotaManagerExVtbl;
+
+    interface IFsrmQuotaManagerEx
+    {
+        CONST_VTBL struct IFsrmQuotaManagerExVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IFsrmQuotaManagerEx_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IFsrmQuotaManagerEx_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IFsrmQuotaManagerEx_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IFsrmQuotaManagerEx_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IFsrmQuotaManagerEx_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IFsrmQuotaManagerEx_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IFsrmQuotaManagerEx_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IFsrmQuotaManagerEx_get_ActionVariables(This,variables)	\
+    ( (This)->lpVtbl -> get_ActionVariables(This,variables) ) 
+
+#define IFsrmQuotaManagerEx_get_ActionVariableDescriptions(This,descriptions)	\
+    ( (This)->lpVtbl -> get_ActionVariableDescriptions(This,descriptions) ) 
+
+#define IFsrmQuotaManagerEx_CreateQuota(This,path,quota)	\
+    ( (This)->lpVtbl -> CreateQuota(This,path,quota) ) 
+
+#define IFsrmQuotaManagerEx_CreateAutoApplyQuota(This,quotaTemplateName,path,quota)	\
+    ( (This)->lpVtbl -> CreateAutoApplyQuota(This,quotaTemplateName,path,quota) ) 
+
+#define IFsrmQuotaManagerEx_GetQuota(This,path,quota)	\
+    ( (This)->lpVtbl -> GetQuota(This,path,quota) ) 
+
+#define IFsrmQuotaManagerEx_GetAutoApplyQuota(This,path,quota)	\
+    ( (This)->lpVtbl -> GetAutoApplyQuota(This,path,quota) ) 
+
+#define IFsrmQuotaManagerEx_GetRestrictiveQuota(This,path,quota)	\
+    ( (This)->lpVtbl -> GetRestrictiveQuota(This,path,quota) ) 
+
+#define IFsrmQuotaManagerEx_EnumQuotas(This,path,options,quotas)	\
+    ( (This)->lpVtbl -> EnumQuotas(This,path,options,quotas) ) 
+
+#define IFsrmQuotaManagerEx_EnumAutoApplyQuotas(This,path,options,quotas)	\
+    ( (This)->lpVtbl -> EnumAutoApplyQuotas(This,path,options,quotas) ) 
+
+#define IFsrmQuotaManagerEx_EnumEffectiveQuotas(This,path,options,quotas)	\
+    ( (This)->lpVtbl -> EnumEffectiveQuotas(This,path,options,quotas) ) 
+
+#define IFsrmQuotaManagerEx_Scan(This,strPath)	\
+    ( (This)->lpVtbl -> Scan(This,strPath) ) 
+
+#define IFsrmQuotaManagerEx_CreateQuotaCollection(This,collection)	\
+    ( (This)->lpVtbl -> CreateQuotaCollection(This,collection) ) 
+
+
+#define IFsrmQuotaManagerEx_IsAffectedByQuota(This,path,options,affected)	\
+    ( (This)->lpVtbl -> IsAffectedByQuota(This,path,options,affected) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IFsrmQuotaManagerEx_INTERFACE_DEFINED__ */
+
+
+#ifndef __IFsrmQuotaTemplate_INTERFACE_DEFINED__
+#define __IFsrmQuotaTemplate_INTERFACE_DEFINED__
+
+/* interface IFsrmQuotaTemplate */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IFsrmQuotaTemplate;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("a2efab31-295e-46bb-b976-e86d58b52e8b")
+    IFsrmQuotaTemplate : public IFsrmQuotaBase
+    {
+    public:
+        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name) = 0;
+        
+        virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Name( 
+            /* [annotation][in] */ 
+            _In_  BSTR name) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CopyTemplate( 
+            /* [annotation][in] */ 
+            _In_  BSTR quotaTemplateName) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CommitAndUpdateDerived( 
+            /* [annotation][in] */ 
+            _In_  FsrmCommitOptions commitOptions,
+            /* [annotation][in] */ 
+            _In_  FsrmTemplateApplyOptions applyOptions,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmDerivedObjectsResult **derivedObjectsResult) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IFsrmQuotaTemplateVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in IFsrmQuotaTemplate * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in IFsrmQuotaTemplate * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in IFsrmQuotaTemplate * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            __RPC__in IFsrmQuotaTemplate * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            __RPC__in IFsrmQuotaTemplate * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            __RPC__in IFsrmQuotaTemplate * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IFsrmQuotaTemplate * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
+            __RPC__in IFsrmQuotaTemplate * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FSRM_OBJECT_ID *id);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
+            __RPC__in IFsrmQuotaTemplate * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *description);
+        
+        /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
+            __RPC__in IFsrmQuotaTemplate * This,
+            /* [annotation][in] */ 
+            _In_  BSTR description);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
+            __RPC__in IFsrmQuotaTemplate * This);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Commit )( 
+            __RPC__in IFsrmQuotaTemplate * This);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuotaLimit )( 
+            __RPC__in IFsrmQuotaTemplate * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *quotaLimit);
+        
+        /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_QuotaLimit )( 
+            __RPC__in IFsrmQuotaTemplate * This,
+            /* [annotation][in] */ 
+            _In_  VARIANT quotaLimit);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuotaFlags )( 
+            __RPC__in IFsrmQuotaTemplate * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *quotaFlags);
+        
+        /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_QuotaFlags )( 
+            __RPC__in IFsrmQuotaTemplate * This,
+            /* [annotation][in] */ 
+            _In_  long quotaFlags);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Thresholds )( 
+            __RPC__in IFsrmQuotaTemplate * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *thresholds);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddThreshold )( 
+            __RPC__in IFsrmQuotaTemplate * This,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteThreshold )( 
+            __RPC__in IFsrmQuotaTemplate * This,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ModifyThreshold )( 
+            __RPC__in IFsrmQuotaTemplate * This,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD newThreshold);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateThresholdAction )( 
+            __RPC__in IFsrmQuotaTemplate * This,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][in] */ 
+            _In_  FsrmActionType actionType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmAction **action);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumThresholdActions )( 
+            __RPC__in IFsrmQuotaTemplate * This,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCollection **actions);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
+            __RPC__in IFsrmQuotaTemplate * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name);
+        
+        /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
+            __RPC__in IFsrmQuotaTemplate * This,
+            /* [annotation][in] */ 
+            _In_  BSTR name);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CopyTemplate )( 
+            __RPC__in IFsrmQuotaTemplate * This,
+            /* [annotation][in] */ 
+            _In_  BSTR quotaTemplateName);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CommitAndUpdateDerived )( 
+            __RPC__in IFsrmQuotaTemplate * This,
+            /* [annotation][in] */ 
+            _In_  FsrmCommitOptions commitOptions,
+            /* [annotation][in] */ 
+            _In_  FsrmTemplateApplyOptions applyOptions,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmDerivedObjectsResult **derivedObjectsResult);
+        
+        END_INTERFACE
+    } IFsrmQuotaTemplateVtbl;
+
+    interface IFsrmQuotaTemplate
+    {
+        CONST_VTBL struct IFsrmQuotaTemplateVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IFsrmQuotaTemplate_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IFsrmQuotaTemplate_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IFsrmQuotaTemplate_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IFsrmQuotaTemplate_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IFsrmQuotaTemplate_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IFsrmQuotaTemplate_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IFsrmQuotaTemplate_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IFsrmQuotaTemplate_get_Id(This,id)	\
+    ( (This)->lpVtbl -> get_Id(This,id) ) 
+
+#define IFsrmQuotaTemplate_get_Description(This,description)	\
+    ( (This)->lpVtbl -> get_Description(This,description) ) 
+
+#define IFsrmQuotaTemplate_put_Description(This,description)	\
+    ( (This)->lpVtbl -> put_Description(This,description) ) 
+
+#define IFsrmQuotaTemplate_Delete(This)	\
+    ( (This)->lpVtbl -> Delete(This) ) 
+
+#define IFsrmQuotaTemplate_Commit(This)	\
+    ( (This)->lpVtbl -> Commit(This) ) 
+
+
+#define IFsrmQuotaTemplate_get_QuotaLimit(This,quotaLimit)	\
+    ( (This)->lpVtbl -> get_QuotaLimit(This,quotaLimit) ) 
+
+#define IFsrmQuotaTemplate_put_QuotaLimit(This,quotaLimit)	\
+    ( (This)->lpVtbl -> put_QuotaLimit(This,quotaLimit) ) 
+
+#define IFsrmQuotaTemplate_get_QuotaFlags(This,quotaFlags)	\
+    ( (This)->lpVtbl -> get_QuotaFlags(This,quotaFlags) ) 
+
+#define IFsrmQuotaTemplate_put_QuotaFlags(This,quotaFlags)	\
+    ( (This)->lpVtbl -> put_QuotaFlags(This,quotaFlags) ) 
+
+#define IFsrmQuotaTemplate_get_Thresholds(This,thresholds)	\
+    ( (This)->lpVtbl -> get_Thresholds(This,thresholds) ) 
+
+#define IFsrmQuotaTemplate_AddThreshold(This,threshold)	\
+    ( (This)->lpVtbl -> AddThreshold(This,threshold) ) 
+
+#define IFsrmQuotaTemplate_DeleteThreshold(This,threshold)	\
+    ( (This)->lpVtbl -> DeleteThreshold(This,threshold) ) 
+
+#define IFsrmQuotaTemplate_ModifyThreshold(This,threshold,newThreshold)	\
+    ( (This)->lpVtbl -> ModifyThreshold(This,threshold,newThreshold) ) 
+
+#define IFsrmQuotaTemplate_CreateThresholdAction(This,threshold,actionType,action)	\
+    ( (This)->lpVtbl -> CreateThresholdAction(This,threshold,actionType,action) ) 
+
+#define IFsrmQuotaTemplate_EnumThresholdActions(This,threshold,actions)	\
+    ( (This)->lpVtbl -> EnumThresholdActions(This,threshold,actions) ) 
+
+
+#define IFsrmQuotaTemplate_get_Name(This,name)	\
+    ( (This)->lpVtbl -> get_Name(This,name) ) 
+
+#define IFsrmQuotaTemplate_put_Name(This,name)	\
+    ( (This)->lpVtbl -> put_Name(This,name) ) 
+
+#define IFsrmQuotaTemplate_CopyTemplate(This,quotaTemplateName)	\
+    ( (This)->lpVtbl -> CopyTemplate(This,quotaTemplateName) ) 
+
+#define IFsrmQuotaTemplate_CommitAndUpdateDerived(This,commitOptions,applyOptions,derivedObjectsResult)	\
+    ( (This)->lpVtbl -> CommitAndUpdateDerived(This,commitOptions,applyOptions,derivedObjectsResult) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IFsrmQuotaTemplate_INTERFACE_DEFINED__ */
+
+
+#ifndef __IFsrmQuotaTemplateImported_INTERFACE_DEFINED__
+#define __IFsrmQuotaTemplateImported_INTERFACE_DEFINED__
+
+/* interface IFsrmQuotaTemplateImported */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IFsrmQuotaTemplateImported;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("9a2bf113-a329-44cc-809a-5c00fce8da40")
+    IFsrmQuotaTemplateImported : public IFsrmQuotaTemplate
+    {
+    public:
+        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_OverwriteOnCommit( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *overwrite) = 0;
+        
+        virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_OverwriteOnCommit( 
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL overwrite) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IFsrmQuotaTemplateImportedVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in IFsrmQuotaTemplateImported * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in IFsrmQuotaTemplateImported * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in IFsrmQuotaTemplateImported * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            __RPC__in IFsrmQuotaTemplateImported * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            __RPC__in IFsrmQuotaTemplateImported * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            __RPC__in IFsrmQuotaTemplateImported * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IFsrmQuotaTemplateImported * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
+            __RPC__in IFsrmQuotaTemplateImported * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FSRM_OBJECT_ID *id);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
+            __RPC__in IFsrmQuotaTemplateImported * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *description);
+        
+        /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
+            __RPC__in IFsrmQuotaTemplateImported * This,
+            /* [annotation][in] */ 
+            _In_  BSTR description);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
+            __RPC__in IFsrmQuotaTemplateImported * This);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Commit )( 
+            __RPC__in IFsrmQuotaTemplateImported * This);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuotaLimit )( 
+            __RPC__in IFsrmQuotaTemplateImported * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *quotaLimit);
+        
+        /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_QuotaLimit )( 
+            __RPC__in IFsrmQuotaTemplateImported * This,
+            /* [annotation][in] */ 
+            _In_  VARIANT quotaLimit);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuotaFlags )( 
+            __RPC__in IFsrmQuotaTemplateImported * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *quotaFlags);
+        
+        /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_QuotaFlags )( 
+            __RPC__in IFsrmQuotaTemplateImported * This,
+            /* [annotation][in] */ 
+            _In_  long quotaFlags);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Thresholds )( 
+            __RPC__in IFsrmQuotaTemplateImported * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *thresholds);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddThreshold )( 
+            __RPC__in IFsrmQuotaTemplateImported * This,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteThreshold )( 
+            __RPC__in IFsrmQuotaTemplateImported * This,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ModifyThreshold )( 
+            __RPC__in IFsrmQuotaTemplateImported * This,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD newThreshold);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateThresholdAction )( 
+            __RPC__in IFsrmQuotaTemplateImported * This,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][in] */ 
+            _In_  FsrmActionType actionType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmAction **action);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumThresholdActions )( 
+            __RPC__in IFsrmQuotaTemplateImported * This,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCollection **actions);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
+            __RPC__in IFsrmQuotaTemplateImported * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name);
+        
+        /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
+            __RPC__in IFsrmQuotaTemplateImported * This,
+            /* [annotation][in] */ 
+            _In_  BSTR name);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CopyTemplate )( 
+            __RPC__in IFsrmQuotaTemplateImported * This,
+            /* [annotation][in] */ 
+            _In_  BSTR quotaTemplateName);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CommitAndUpdateDerived )( 
+            __RPC__in IFsrmQuotaTemplateImported * This,
+            /* [annotation][in] */ 
+            _In_  FsrmCommitOptions commitOptions,
+            /* [annotation][in] */ 
+            _In_  FsrmTemplateApplyOptions applyOptions,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmDerivedObjectsResult **derivedObjectsResult);
+        
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OverwriteOnCommit )( 
+            __RPC__in IFsrmQuotaTemplateImported * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *overwrite);
+        
+        /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OverwriteOnCommit )( 
+            __RPC__in IFsrmQuotaTemplateImported * This,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL overwrite);
+        
+        END_INTERFACE
+    } IFsrmQuotaTemplateImportedVtbl;
+
+    interface IFsrmQuotaTemplateImported
+    {
+        CONST_VTBL struct IFsrmQuotaTemplateImportedVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IFsrmQuotaTemplateImported_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IFsrmQuotaTemplateImported_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IFsrmQuotaTemplateImported_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IFsrmQuotaTemplateImported_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IFsrmQuotaTemplateImported_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IFsrmQuotaTemplateImported_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IFsrmQuotaTemplateImported_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IFsrmQuotaTemplateImported_get_Id(This,id)	\
+    ( (This)->lpVtbl -> get_Id(This,id) ) 
+
+#define IFsrmQuotaTemplateImported_get_Description(This,description)	\
+    ( (This)->lpVtbl -> get_Description(This,description) ) 
+
+#define IFsrmQuotaTemplateImported_put_Description(This,description)	\
+    ( (This)->lpVtbl -> put_Description(This,description) ) 
+
+#define IFsrmQuotaTemplateImported_Delete(This)	\
+    ( (This)->lpVtbl -> Delete(This) ) 
+
+#define IFsrmQuotaTemplateImported_Commit(This)	\
+    ( (This)->lpVtbl -> Commit(This) ) 
+
+
+#define IFsrmQuotaTemplateImported_get_QuotaLimit(This,quotaLimit)	\
+    ( (This)->lpVtbl -> get_QuotaLimit(This,quotaLimit) ) 
+
+#define IFsrmQuotaTemplateImported_put_QuotaLimit(This,quotaLimit)	\
+    ( (This)->lpVtbl -> put_QuotaLimit(This,quotaLimit) ) 
+
+#define IFsrmQuotaTemplateImported_get_QuotaFlags(This,quotaFlags)	\
+    ( (This)->lpVtbl -> get_QuotaFlags(This,quotaFlags) ) 
+
+#define IFsrmQuotaTemplateImported_put_QuotaFlags(This,quotaFlags)	\
+    ( (This)->lpVtbl -> put_QuotaFlags(This,quotaFlags) ) 
+
+#define IFsrmQuotaTemplateImported_get_Thresholds(This,thresholds)	\
+    ( (This)->lpVtbl -> get_Thresholds(This,thresholds) ) 
+
+#define IFsrmQuotaTemplateImported_AddThreshold(This,threshold)	\
+    ( (This)->lpVtbl -> AddThreshold(This,threshold) ) 
+
+#define IFsrmQuotaTemplateImported_DeleteThreshold(This,threshold)	\
+    ( (This)->lpVtbl -> DeleteThreshold(This,threshold) ) 
+
+#define IFsrmQuotaTemplateImported_ModifyThreshold(This,threshold,newThreshold)	\
+    ( (This)->lpVtbl -> ModifyThreshold(This,threshold,newThreshold) ) 
+
+#define IFsrmQuotaTemplateImported_CreateThresholdAction(This,threshold,actionType,action)	\
+    ( (This)->lpVtbl -> CreateThresholdAction(This,threshold,actionType,action) ) 
+
+#define IFsrmQuotaTemplateImported_EnumThresholdActions(This,threshold,actions)	\
+    ( (This)->lpVtbl -> EnumThresholdActions(This,threshold,actions) ) 
+
+
+#define IFsrmQuotaTemplateImported_get_Name(This,name)	\
+    ( (This)->lpVtbl -> get_Name(This,name) ) 
+
+#define IFsrmQuotaTemplateImported_put_Name(This,name)	\
+    ( (This)->lpVtbl -> put_Name(This,name) ) 
+
+#define IFsrmQuotaTemplateImported_CopyTemplate(This,quotaTemplateName)	\
+    ( (This)->lpVtbl -> CopyTemplate(This,quotaTemplateName) ) 
+
+#define IFsrmQuotaTemplateImported_CommitAndUpdateDerived(This,commitOptions,applyOptions,derivedObjectsResult)	\
+    ( (This)->lpVtbl -> CommitAndUpdateDerived(This,commitOptions,applyOptions,derivedObjectsResult) ) 
+
+
+#define IFsrmQuotaTemplateImported_get_OverwriteOnCommit(This,overwrite)	\
+    ( (This)->lpVtbl -> get_OverwriteOnCommit(This,overwrite) ) 
+
+#define IFsrmQuotaTemplateImported_put_OverwriteOnCommit(This,overwrite)	\
+    ( (This)->lpVtbl -> put_OverwriteOnCommit(This,overwrite) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IFsrmQuotaTemplateImported_INTERFACE_DEFINED__ */
+
+
+#ifndef __IFsrmQuotaTemplateManager_INTERFACE_DEFINED__
+#define __IFsrmQuotaTemplateManager_INTERFACE_DEFINED__
+
+/* interface IFsrmQuotaTemplateManager */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IFsrmQuotaTemplateManager;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("4173ac41-172d-4d52-963c-fdc7e415f717")
+    IFsrmQuotaTemplateManager : public IDispatch
+    {
+    public:
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateTemplate( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmQuotaTemplate **quotaTemplate) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetTemplate( 
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR name,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmQuotaTemplate **quotaTemplate) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnumTemplates( 
+            /* [annotation][defaultvalue][in] */ 
+            _In_  FsrmEnumOptions options,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **quotaTemplates) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ExportTemplates( 
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT *quotaTemplateNamesArray,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *serializedQuotaTemplates) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ImportTemplates( 
+            /* [annotation][in] */ 
+            _In_  BSTR serializedQuotaTemplates,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT *quotaTemplateNamesArray,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **quotaTemplates) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IFsrmQuotaTemplateManagerVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in IFsrmQuotaTemplateManager * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in IFsrmQuotaTemplateManager * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in IFsrmQuotaTemplateManager * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            __RPC__in IFsrmQuotaTemplateManager * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            __RPC__in IFsrmQuotaTemplateManager * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            __RPC__in IFsrmQuotaTemplateManager * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IFsrmQuotaTemplateManager * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateTemplate )( 
+            __RPC__in IFsrmQuotaTemplateManager * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmQuotaTemplate **quotaTemplate);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetTemplate )( 
+            __RPC__in IFsrmQuotaTemplateManager * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR name,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmQuotaTemplate **quotaTemplate);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumTemplates )( 
+            __RPC__in IFsrmQuotaTemplateManager * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  FsrmEnumOptions options,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **quotaTemplates);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExportTemplates )( 
+            __RPC__in IFsrmQuotaTemplateManager * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT *quotaTemplateNamesArray,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *serializedQuotaTemplates);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ImportTemplates )( 
+            __RPC__in IFsrmQuotaTemplateManager * This,
+            /* [annotation][in] */ 
+            _In_  BSTR serializedQuotaTemplates,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT *quotaTemplateNamesArray,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **quotaTemplates);
+        
+        END_INTERFACE
+    } IFsrmQuotaTemplateManagerVtbl;
+
+    interface IFsrmQuotaTemplateManager
+    {
+        CONST_VTBL struct IFsrmQuotaTemplateManagerVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IFsrmQuotaTemplateManager_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IFsrmQuotaTemplateManager_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IFsrmQuotaTemplateManager_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IFsrmQuotaTemplateManager_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IFsrmQuotaTemplateManager_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IFsrmQuotaTemplateManager_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IFsrmQuotaTemplateManager_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IFsrmQuotaTemplateManager_CreateTemplate(This,quotaTemplate)	\
+    ( (This)->lpVtbl -> CreateTemplate(This,quotaTemplate) ) 
+
+#define IFsrmQuotaTemplateManager_GetTemplate(This,name,quotaTemplate)	\
+    ( (This)->lpVtbl -> GetTemplate(This,name,quotaTemplate) ) 
+
+#define IFsrmQuotaTemplateManager_EnumTemplates(This,options,quotaTemplates)	\
+    ( (This)->lpVtbl -> EnumTemplates(This,options,quotaTemplates) ) 
+
+#define IFsrmQuotaTemplateManager_ExportTemplates(This,quotaTemplateNamesArray,serializedQuotaTemplates)	\
+    ( (This)->lpVtbl -> ExportTemplates(This,quotaTemplateNamesArray,serializedQuotaTemplates) ) 
+
+#define IFsrmQuotaTemplateManager_ImportTemplates(This,serializedQuotaTemplates,quotaTemplateNamesArray,quotaTemplates)	\
+    ( (This)->lpVtbl -> ImportTemplates(This,serializedQuotaTemplates,quotaTemplateNamesArray,quotaTemplates) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IFsrmQuotaTemplateManager_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_fsrmquota_0000_0009 */
+/* [local] */ 
+
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+#pragma endregion
+
+
+extern RPC_IF_HANDLE __MIDL_itf_fsrmquota_0000_0009_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_fsrmquota_0000_0009_v0_0_s_ifspec;
+
+/* Additional Prototypes for ALL interfaces */
+
+unsigned long             __RPC_USER  BSTR_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in BSTR * ); 
+unsigned char * __RPC_USER  BSTR_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in BSTR * ); 
+unsigned char * __RPC_USER  BSTR_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
+void                      __RPC_USER  BSTR_UserFree(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
+
+unsigned long             __RPC_USER  LPSAFEARRAY_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in LPSAFEARRAY * ); 
+unsigned char * __RPC_USER  LPSAFEARRAY_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in LPSAFEARRAY * ); 
+unsigned char * __RPC_USER  LPSAFEARRAY_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out LPSAFEARRAY * ); 
+void                      __RPC_USER  LPSAFEARRAY_UserFree(     __RPC__in unsigned long *, __RPC__in LPSAFEARRAY * ); 
+
+unsigned long             __RPC_USER  VARIANT_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in VARIANT * ); 
+unsigned char * __RPC_USER  VARIANT_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in VARIANT * ); 
+unsigned char * __RPC_USER  VARIANT_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out VARIANT * ); 
+void                      __RPC_USER  VARIANT_UserFree(     __RPC__in unsigned long *, __RPC__in VARIANT * ); 
+
+unsigned long             __RPC_USER  BSTR_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in BSTR * ); 
+unsigned char * __RPC_USER  BSTR_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in BSTR * ); 
+unsigned char * __RPC_USER  BSTR_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
+void                      __RPC_USER  BSTR_UserFree64(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
+
+unsigned long             __RPC_USER  LPSAFEARRAY_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in LPSAFEARRAY * ); 
+unsigned char * __RPC_USER  LPSAFEARRAY_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in LPSAFEARRAY * ); 
+unsigned char * __RPC_USER  LPSAFEARRAY_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out LPSAFEARRAY * ); 
+void                      __RPC_USER  LPSAFEARRAY_UserFree64(     __RPC__in unsigned long *, __RPC__in LPSAFEARRAY * ); 
+
+unsigned long             __RPC_USER  VARIANT_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in VARIANT * ); 
+unsigned char * __RPC_USER  VARIANT_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in VARIANT * ); 
+unsigned char * __RPC_USER  VARIANT_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out VARIANT * ); 
+void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned long *, __RPC__in VARIANT * ); 
+
+/* end of Additional Prototypes */
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
+
+

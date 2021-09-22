@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <WebView2Headers Condition=" '$(PkgMicrosoft_Web_WebView2)' != '' " Include="$(PkgMicrosoft_Web_WebView2)\**\*.h"/>
+    <WebView2Headers Condition=" '$(PkgMicrosoft_Web_WebView2)' != '' " Include="$(PkgMicrosoft_Web_WebView2)\**\WebView2.h"/>
     <WebView2Libs Condition=" '$(PkgMicrosoft_Web_WebView2)' != '' " Include="$(PkgMicrosoft_Web_WebView2)\**\*.dll.lib"/>
 
     <ImportLibs Include="@(WebView2Libs)">

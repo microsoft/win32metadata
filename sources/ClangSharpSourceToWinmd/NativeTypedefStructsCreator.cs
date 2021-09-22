@@ -8,9 +8,15 @@ namespace ClangSharpSourceToWinmd
 {
     public static class NativeTypedefStructsCreator
     {
-        public static void CreateNativeTypedefsSourceFile(Dictionary<string, string> methodNamesToNamespaces, IEnumerable<string> items, string outputFile)
+        public static void CreateNativeTypedefsSourceFile(Dictionary<string, string> methodNamesToNamespaces, IEnumerable<string> autoTypesFiles, string outputFile)
         {
-            if (items == null)
+            if (autoTypesFiles == null)
+            {
+                return;
+            }
+
+            IEnumerable<AutoType> items = GetAutoTypesFromFiles(autoTypesFiles);
+            if (!items.Any())
             {
                 return;
             }
@@ -20,10 +26,7 @@ namespace ClangSharpSourceToWinmd
                 Directory.CreateDirectory(Path.GetDirectoryName(outputFile));
             }
 
-            CsvConfiguration config = new CsvConfiguration(CultureInfo.InvariantCulture) { MissingFieldFound = null };
-            using (StringReader stringReader = new StringReader(ConvertLinesToCsvString(items)))
-            using (CsvHelper.CsvReader reader = new CsvHelper.CsvReader(stringReader, config))
-            using (StreamWriter writer = new StreamWriter(outputFile))
+            using (var writer = new StreamWriter(outputFile))
             {
                 writer.Write(
 @"using System;
@@ -31,7 +34,7 @@ using Windows.Win32.Interop;
 
 ");
                 string currentNamespace = null;
-                foreach (var item in reader.GetRecords<AutoType>().OrderBy(a => a.Namespace))
+                foreach (AutoType item in items.OrderBy(a => a.Namespace))
                 {
                     string safety = item.ValueType.Contains("*") ? "unsafe " : string.Empty;
                     var valueType = item.ValueType;
@@ -97,6 +100,17 @@ $@"    [NativeTypedef]
                     writer.WriteLine("}");
                 }
             }
+        }
+
+        private static IEnumerable<AutoType> GetAutoTypesFromFiles(IEnumerable<string> fileNames)
+        {
+            IEnumerable<AutoType> ret = System.Array.Empty<AutoType>();
+            foreach (var fileName in fileNames)
+            {
+                ret = ret.Concat(Newtonsoft.Json.JsonConvert.DeserializeObject<AutoType[]>(File.ReadAllText(fileName)));
+            }
+
+            return ret;
         }
 
         private static string ConvertLinesToCsvString(IEnumerable<string> items)

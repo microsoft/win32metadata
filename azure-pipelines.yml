@@ -41,24 +41,17 @@ jobs:
     displayName: GenerateMetadataSource.ps1 - x64
     inputs:
       filePath: 'scripts\GenerateMetadataSource.ps1'
-      arguments: '-arch x64'
+      arguments: '-arch x64 -scrapeConstants'
       errorActionPreference: 'continue'
       pwsh: true
 
-  - task: PowerShell@2
-    displayName: Scrape constants
-    inputs:
-      filePath: 'scripts\BuildMetadataBin.ps1'
-      arguments: '-arch crossarch -SkipBinary'
-      pwsh: true
+  - publish: 'generation\Windows.Win32\generated\obj'
+    displayName: Publish x64 generated assets
+    artifact: 'generated_x64'
 
-  - publish: 'generation\scraper\obj\x64'
-    displayName: Publish x64 scraper obj assets
-    artifact: 'scraper_obj_x64'
-
-  - publish: 'generation\emitter\generated\x64'
-    displayName: Publish x64 emitter assets
-    artifact: 'emitter_generated_x64'
+#  - publish: 'generation\emitter\generated\x64'
+#    displayName: Publish x64 emitter assets
+#    artifact: 'emitter_generated_x64'
 
 - job: scrape_x86
   displayName: "Scrape headers: x86"
@@ -83,9 +76,9 @@ jobs:
       errorActionPreference: 'continue'
       pwsh: true
 
-  - publish: 'generation\emitter\generated\x86'
-    displayName: Publish x86 emitter assets
-    artifact: 'emitter_generated_x86'
+  - publish: 'generation\Windows.Win32\obj\generated\x86'
+    displayName: Publish x86 generated assets
+    artifact: 'generated_x86'
 
 - job: scrape_arm64
   displayName: "Scrape headers: arm64"
@@ -110,9 +103,9 @@ jobs:
       errorActionPreference: 'continue'
       pwsh: true
 
-  - publish: 'generation\emitter\generated\arm64'
-    displayName: Publish arm64 emitter assets
-    artifact: 'emitter_generated_arm64'
+  - publish: 'generation\Windows.Win32\obj\generated\arm64'
+    displayName: Publish arm64 generated assets
+    artifact: 'generated_arm64'
 
 - job: build_winmd
   displayName: Build, test, sign, package winmd
@@ -150,34 +143,28 @@ jobs:
     displayName: Display .NET SDK/runtime info
 
   - task: DownloadPipelineArtifact@2
-    displayName: Download x64 scraper obj assets
+    displayName: Download x64 generated assets
     inputs:
-      artifact: 'scraper_obj_x64'
-      path: 'generation\scraper\obj\x64'
+      artifact: 'generated_x64'
+      path: 'generation\Windows.Win32\obj\generated'
 
   - task: DownloadPipelineArtifact@2
-    displayName: Download x64 emitter assets
+    displayName: Download x86 generated assets
     inputs:
-      artifact: 'emitter_generated_x64'
-      path: 'generation\emitter\generated\x64'
-
-  - task: DownloadPipelineArtifact@2
-    displayName: Download x86 emitter assets
-    inputs:
-      artifact: 'emitter_generated_x86'
-      path: 'generation\emitter\generated\x86'
+      artifact: 'generated_x86'
+      path: 'generation\Windows.Win32\obj\generated\x86'
 
   - task: DownloadPipelineArtifact@2
     displayName: Download arm64 emitter assets
     inputs:
-      artifact: 'emitter_generated_arm64'
-      path: 'generation\emitter\generated\arm64'
+      artifact: 'generated_arm64'
+      path: 'generation\Windows.Win32\obj\generated\arm64'
 
   - task: PowerShell@2
     displayName: Build metadata binary
     inputs:
       filePath: 'scripts\BuildMetadataBin.ps1'
-      arguments: '-arch crossarch -SkipConstants'
+      arguments: '-assetsScrapedSeparately'
       pwsh: true
 
   - publish: 'bin'

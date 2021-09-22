@@ -1,0 +1,149 @@
+using System;
+using Windows.Win32.Foundation;
+using Windows.Win32.Interop;
+using Windows.Win32.System.PropertiesSystem; // For PROPERTYKEY
+using Windows.Win32.System.SystemServices;
+using static Windows.Win32.Foundation.Apis; // Various constants
+using static Windows.Win32.System.Diagnostics.Debug.WIN32_ERROR;
+using static Windows.Win32.System.SystemServices.Apis; // Various constants
+using static Windows.Win32.Media.Multimedia.Apis; // Various constants
+using static Windows.Win32.Media.Audio.CoreAudio.Apis; // Various constants
+using static Windows.Win32.Graphics.DirectShow.Apis; // Various constants
+using static Windows.Win32.UI.WindowsAndMessaging.Apis; // For WM_USER
+using static Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS; // For FILE_* constants
+using static Windows.Win32.System.Diagnostics.Debug.FACILITY_CODE; // For MAKE_HRESULT constants
+
+
+using static Windows.Win32.Networking.WinSock.Apis;
+
+namespace Windows.Win32.Networking.WinSock
+{
+    public enum WSA_ERROR
+    {
+        WSA_IO_PENDING = (int)(ERROR_IO_PENDING),
+        WSA_IO_INCOMPLETE = (int)(ERROR_IO_INCOMPLETE),
+        WSA_INVALID_HANDLE = (int)(ERROR_INVALID_HANDLE),
+        WSA_INVALID_PARAMETER = (int)(ERROR_INVALID_PARAMETER),
+        WSA_NOT_ENOUGH_MEMORY = (int)(ERROR_NOT_ENOUGH_MEMORY),
+        WSA_OPERATION_ABORTED = (int)(ERROR_OPERATION_ABORTED),
+        WSABASEERR = 10000,
+        WSAEINTR = 10004,
+        WSAEBADF = 10009,
+        WSAEACCES = 10013,
+        WSAEFAULT = 10014,
+        WSAEINVAL = 10022,
+        WSAEMFILE = 10024,
+        WSAEWOULDBLOCK = 10035,
+        WSAEINPROGRESS = 10036,
+        WSAEALREADY = 10037,
+        WSAENOTSOCK = 10038,
+        WSAEDESTADDRREQ = 10039,
+        WSAEMSGSIZE = 10040,
+        WSAEPROTOTYPE = 10041,
+        WSAENOPROTOOPT = 10042,
+        WSAEPROTONOSUPPORT = 10043,
+        WSAESOCKTNOSUPPORT = 10044,
+        WSAEOPNOTSUPP = 10045,
+        WSAEPFNOSUPPORT = 10046,
+        WSAEAFNOSUPPORT = 10047,
+        WSAEADDRINUSE = 10048,
+        WSAEADDRNOTAVAIL = 10049,
+        WSAENETDOWN = 10050,
+        WSAENETUNREACH = 10051,
+        WSAENETRESET = 10052,
+        WSAECONNABORTED = 10053,
+        WSAECONNRESET = 10054,
+        WSAENOBUFS = 10055,
+        WSAEISCONN = 10056,
+        WSAENOTCONN = 10057,
+        WSAESHUTDOWN = 10058,
+        WSAETOOMANYREFS = 10059,
+        WSAETIMEDOUT = 10060,
+        WSAECONNREFUSED = 10061,
+        WSAELOOP = 10062,
+        WSAENAMETOOLONG = 10063,
+        WSAEHOSTDOWN = 10064,
+        WSAEHOSTUNREACH = 10065,
+        WSAENOTEMPTY = 10066,
+        WSAEPROCLIM = 10067,
+        WSAEUSERS = 10068,
+        WSAEDQUOT = 10069,
+        WSAESTALE = 10070,
+        WSAEREMOTE = 10071,
+        WSASYSNOTREADY = 10091,
+        WSAVERNOTSUPPORTED = 10092,
+        WSANOTINITIALISED = 10093,
+        WSAEDISCON = 10101,
+        WSAENOMORE = 10102,
+        WSAECANCELLED = 10103,
+        WSAEINVALIDPROCTABLE = 10104,
+        WSAEINVALIDPROVIDER = 10105,
+        WSAEPROVIDERFAILEDINIT = 10106,
+        WSASYSCALLFAILURE = 10107,
+        WSASERVICE_NOT_FOUND = 10108,
+        WSATYPE_NOT_FOUND = 10109,
+        WSA_E_NO_MORE = 10110,
+        WSA_E_CANCELLED = 10111,
+        WSAEREFUSED = 10112,
+        WSAHOST_NOT_FOUND = 11001,
+        WSATRY_AGAIN = 11002,
+        WSANO_RECOVERY = 11003,
+        WSANO_DATA = 11004,
+        WSA_QOS_RECEIVERS = 11005,
+        WSA_QOS_SENDERS = 11006,
+        WSA_QOS_NO_SENDERS = 11007,
+        WSA_QOS_NO_RECEIVERS = 11008,
+        WSA_QOS_REQUEST_CONFIRMED = 11009,
+        WSA_QOS_ADMISSION_FAILURE = 11010,
+        WSA_QOS_POLICY_FAILURE = 11011,
+        WSA_QOS_BAD_STYLE = 11012,
+        WSA_QOS_BAD_OBJECT = 11013,
+        WSA_QOS_TRAFFIC_CTRL_ERROR = 11014,
+        WSA_QOS_GENERIC_ERROR = 11015,
+        WSA_QOS_ESERVICETYPE = 11016,
+        WSA_QOS_EFLOWSPEC = 11017,
+        WSA_QOS_EPROVSPECBUF = 11018,
+        WSA_QOS_EFILTERSTYLE = 11019,
+        WSA_QOS_EFILTERTYPE = 11020,
+        WSA_QOS_EFILTERCOUNT = 11021,
+        WSA_QOS_EOBJLENGTH = 11022,
+        WSA_QOS_EFLOWCOUNT = 11023,
+        WSA_QOS_EUNKOWNPSOBJ = 11024,
+        WSA_QOS_EPOLICYOBJ = 11025,
+        WSA_QOS_EFLOWDESC = 11026,
+        WSA_QOS_EPSFLOWSPEC = 11027,
+        WSA_QOS_EPSFILTERSPEC = 11028,
+        WSA_QOS_ESDMODEOBJ = 11029,
+        WSA_QOS_ESHAPERATEOBJ = 11030,
+        WSA_QOS_RESERVED_PETYPE = 11031,
+        WSA_SECURE_HOST_NOT_FOUND = 11032,
+        WSA_IPSEC_NAME_POLICY_ERROR = 11033,
+    }
+
+    public enum SET_SERVICE_OPERATION : uint
+    {
+        SERVICE_REGISTER = 0x00000001,
+        SERVICE_DEREGISTER = 0x00000002,
+        SERVICE_FLUSH = 0x00000003,
+        SERVICE_ADD_TYPE = 0x00000004,
+        SERVICE_DELETE_TYPE = 0x00000005,
+    }
+
+    public enum SEND_FLAGS : uint
+    {
+        MSG_DONTROUTE = 0x4,
+        MSG_OOB = 0x1,
+    }
+
+    public enum RESOURCE_DISPLAY_TYPE : uint
+    {
+        RESOURCEDISPLAYTYPE_DOMAIN = 0x00000001,
+        RESOURCEDISPLAYTYPE_FILE = 0x00000004,
+        RESOURCEDISPLAYTYPE_GENERIC = 0x00000000,
+        RESOURCEDISPLAYTYPE_GROUP = 0x00000005,
+        RESOURCEDISPLAYTYPE_SERVER = 0x00000002,
+        RESOURCEDISPLAYTYPE_SHARE = 0x00000003,
+        RESOURCEDISPLAYTYPE_TREE = 0x0000000A,
+    }
+
+}

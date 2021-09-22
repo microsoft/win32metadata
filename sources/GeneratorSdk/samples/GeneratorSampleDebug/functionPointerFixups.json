@@ -1,0 +1,12 @@
+[
+  {
+    "name": "SAMPLECALLBACK",
+    "alreadyPointer": false,
+    "pointerType": "LPSAMPLECALLBACK"
+  },
+  {
+    "name": "ALREADYPTR_SAMPLECALLBACK",
+    "alreadyPointer": true,
+    "pointerType": "LPALREADYPTR_SAMPLECALLBACK"
+  }
+]

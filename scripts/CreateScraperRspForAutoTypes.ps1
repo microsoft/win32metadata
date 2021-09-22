@@ -2,18 +2,32 @@ param
 (
     [ValidateSet("x64", "x86", "arm64")]
     [string]
-    $arch = "x64"
+    $arch = "x64",
+
+    [string]
+    $autoTypesPath,
+
+    [string]
+    $scraperDir,
+
+    [string]
+    $outputFileName
 )
 
-. "$PSScriptRoot\CommonUtils.ps1"
+if (!$outputFileName)
+{
+    $changedFileName = [System.IO.Path]::GetFileNameWithoutExtension($autoTypesPath) + ".generated.rsp"
 
-$autoTypesRsp = "$emitterDir\autoTypes.rsp"
+    $scraperObjDir = "$scraperDir\obj\$arch"
+    $outputFileName = "$scraperObjDir\$changedFileName"
+}
 
-$scraperObjDir = "$scraperDir\obj\$arch"
-Create-Directory $scraperObjDir
-$outputFileName = "$scraperObjDir\autoTypes.generated.rsp"
+$dir = [System.IO.Path]::GetDirectoryName($outputFileName)
+New-Item -Path $dir -Force -ItemType "Directory" | Out-Null
 
-$autoTypes = Import-Csv $autoTypesRsp -Delimiter ',' -Header @('Namespace', 'TypeName', 'RawType', 'CloseApi')
+
+
+$autoTypes = Get-Content $autoTypesPath -raw | ConvertFrom-Json
 
 [hashtable]$typesToExclude = @{}
 
@@ -21,20 +35,20 @@ $stream = [System.IO.StreamWriter] $outputFileName
 $stream.WriteLine("--remap")
 foreach ($autoType in $autoTypes)
 {
-    [string]$rawType = $autoType.RawType
+    [string]$type = $autoType.ValueType
 
-    if ($rawType -eq "DECLARE_HANDLE")
+    if ($type -eq "DECLARE_HANDLE")
     {
-        [string]$typeName = $autoType.TypeName
+        [string]$typeName = $autoType.Name
         $handleStructName = $typeName + "__"
         $typesToExclude[$handleStructName] = 0
 
         $stream.WriteLine("$typeName=IntPtr")
         $stream.WriteLine("$handleStructName*=$typeName")
     }
-    elseif ($rawType -eq "AllJoynHandle")
+    elseif ($type -eq "AllJoynHandle")
     {
-        [string]$typeName = $autoType.TypeName
+        [string]$typeName = $autoType.Name
         $handleStructName = "_" + $typeName + "_handle"
         $typesToExclude[$handleStructName] = 0
 
@@ -50,3 +64,4 @@ foreach ($exclude in $typesToExclude.Keys)
 }
 $stream.Close()
 
+#Write-Host "Wrote $outputFileName"

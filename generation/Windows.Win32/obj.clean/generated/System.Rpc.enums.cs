@@ -1,0 +1,184 @@
+using System;
+using Windows.Win32.Foundation;
+using Windows.Win32.Interop;
+using Windows.Win32.System.PropertiesSystem; // For PROPERTYKEY
+using Windows.Win32.System.SystemServices;
+using static Windows.Win32.Foundation.Apis; // Various constants
+using static Windows.Win32.System.Diagnostics.Debug.WIN32_ERROR;
+using static Windows.Win32.System.SystemServices.Apis; // Various constants
+using static Windows.Win32.Media.Multimedia.Apis; // Various constants
+using static Windows.Win32.Media.Audio.CoreAudio.Apis; // Various constants
+using static Windows.Win32.Graphics.DirectShow.Apis; // Various constants
+using static Windows.Win32.UI.WindowsAndMessaging.Apis; // For WM_USER
+using static Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS; // For FILE_* constants
+using static Windows.Win32.System.Diagnostics.Debug.FACILITY_CODE; // For MAKE_HRESULT constants
+
+
+using static Windows.Win32.System.Rpc.Apis;
+
+namespace Windows.Win32.System.Rpc
+{
+    [Flags]
+    public enum RPC_C_QOS_CAPABILITIES : uint
+    {
+        RPC_C_QOS_CAPABILITIES_DEFAULT = 0x0,
+        RPC_C_QOS_CAPABILITIES_MUTUAL_AUTH = 0x1,
+        RPC_C_QOS_CAPABILITIES_MAKE_FULLSIC = 0x2,
+        RPC_C_QOS_CAPABILITIES_ANY_AUTHORITY = 0x4,
+        RPC_C_QOS_CAPABILITIES_IGNORE_DELEGATE_FAILURE = 0x8,
+        RPC_C_QOS_CAPABILITIES_LOCAL_MA_HINT = 0x10,
+        RPC_C_QOS_CAPABILITIES_SCHANNEL_FULL_AUTH_IDENTITY = 0x20,
+    }
+
+    public enum RPC_C_QOS_IDENTITY : uint
+    {
+        RPC_C_QOS_IDENTITY_STATIC = 0,
+        RPC_C_QOS_IDENTITY_DYNAMIC = 1,
+    }
+
+    public enum RPC_C_AUTHN_INFO_TYPE : uint
+    {
+        RPC_C_AUTHN_INFO_NONE = 0,
+        RPC_C_AUTHN_INFO_TYPE_HTTP = 1,
+    }
+
+    [Flags]
+    public enum RPC_C_HTTP_FLAGS : uint
+    {
+        RPC_C_HTTP_FLAG_USE_SSL = 1,
+        RPC_C_HTTP_FLAG_USE_FIRST_AUTH_SCHEME = 2,
+        RPC_C_HTTP_FLAG_IGNORE_CERT_CN_INVALID = 8,
+        RPC_C_HTTP_FLAG_ENABLE_CERT_REVOCATION_CHECK = 16,
+    }
+
+    [Flags]
+    public enum RPC_C_HTTP_AUTHN_TARGET : uint
+    {
+        RPC_C_HTTP_AUTHN_TARGET_SERVER = 1,
+        RPC_C_HTTP_AUTHN_TARGET_PROXY = 2,
+    }
+
+    public enum RPC_STATUS
+    {
+        RPC_S_INVALID_STRING_BINDING = 1700,
+        RPC_S_WRONG_KIND_OF_BINDING = 1701,
+        RPC_S_INVALID_BINDING = 1702,
+        RPC_S_PROTSEQ_NOT_SUPPORTED = 1703,
+        RPC_S_INVALID_RPC_PROTSEQ = 1704,
+        RPC_S_INVALID_STRING_UUID = 1705,
+        RPC_S_INVALID_ENDPOINT_FORMAT = 1706,
+        RPC_S_INVALID_NET_ADDR = 1707,
+        RPC_S_NO_ENDPOINT_FOUND = 1708,
+        RPC_S_INVALID_TIMEOUT = 1709,
+        RPC_S_OBJECT_NOT_FOUND = 1710,
+        RPC_S_ALREADY_REGISTERED = 1711,
+        RPC_S_TYPE_ALREADY_REGISTERED = 1712,
+        RPC_S_ALREADY_LISTENING = 1713,
+        RPC_S_NO_PROTSEQS_REGISTERED = 1714,
+        RPC_S_NOT_LISTENING = 1715,
+        RPC_S_UNKNOWN_MGR_TYPE = 1716,
+        RPC_S_UNKNOWN_IF = 1717,
+        RPC_S_NO_BINDINGS = 1718,
+        RPC_S_NO_PROTSEQS = 1719,
+        RPC_S_CANT_CREATE_ENDPOINT = 1720,
+        RPC_S_OUT_OF_RESOURCES = 1721,
+        RPC_S_SERVER_UNAVAILABLE = 1722,
+        RPC_S_SERVER_TOO_BUSY = 1723,
+        RPC_S_INVALID_NETWORK_OPTIONS = 1724,
+        RPC_S_NO_CALL_ACTIVE = 1725,
+        RPC_S_CALL_FAILED = 1726,
+        RPC_S_CALL_FAILED_DNE = 1727,
+        RPC_S_PROTOCOL_ERROR = 1728,
+        RPC_S_PROXY_ACCESS_DENIED = 1729,
+        RPC_S_UNSUPPORTED_TRANS_SYN = 1730,
+        RPC_S_UNSUPPORTED_TYPE = 1732,
+        RPC_S_INVALID_TAG = 1733,
+        RPC_S_INVALID_BOUND = 1734,
+        RPC_S_NO_ENTRY_NAME = 1735,
+        RPC_S_INVALID_NAME_SYNTAX = 1736,
+        RPC_S_UNSUPPORTED_NAME_SYNTAX = 1737,
+        RPC_S_UUID_NO_ADDRESS = 1739,
+        RPC_S_DUPLICATE_ENDPOINT = 1740,
+        RPC_S_UNKNOWN_AUTHN_TYPE = 1741,
+        RPC_S_MAX_CALLS_TOO_SMALL = 1742,
+        RPC_S_STRING_TOO_LONG = 1743,
+        RPC_S_PROTSEQ_NOT_FOUND = 1744,
+        RPC_S_PROCNUM_OUT_OF_RANGE = 1745,
+        RPC_S_BINDING_HAS_NO_AUTH = 1746,
+        RPC_S_UNKNOWN_AUTHN_SERVICE = 1747,
+        RPC_S_UNKNOWN_AUTHN_LEVEL = 1748,
+        RPC_S_INVALID_AUTH_IDENTITY = 1749,
+        RPC_S_UNKNOWN_AUTHZ_SERVICE = 1750,
+        EPT_S_INVALID_ENTRY = 1751,
+        EPT_S_CANT_PERFORM_OP = 1752,
+        EPT_S_NOT_REGISTERED = 1753,
+        RPC_S_NOTHING_TO_EXPORT = 1754,
+        RPC_S_INCOMPLETE_NAME = 1755,
+        RPC_S_INVALID_VERS_OPTION = 1756,
+        RPC_S_NO_MORE_MEMBERS = 1757,
+        RPC_S_NOT_ALL_OBJS_UNEXPORTED = 1758,
+        RPC_S_INTERFACE_NOT_FOUND = 1759,
+        RPC_S_ENTRY_ALREADY_EXISTS = 1760,
+        RPC_S_ENTRY_NOT_FOUND = 1761,
+        RPC_S_NAME_SERVICE_UNAVAILABLE = 1762,
+        RPC_S_INVALID_NAF_ID = 1763,
+        RPC_S_CANNOT_SUPPORT = 1764,
+        RPC_S_NO_CONTEXT_AVAILABLE = 1765,
+        RPC_S_INTERNAL_ERROR = 1766,
+        RPC_S_ZERO_DIVIDE = 1767,
+        RPC_S_ADDRESS_ERROR = 1768,
+        RPC_S_FP_DIV_ZERO = 1769,
+        RPC_S_FP_UNDERFLOW = 1770,
+        RPC_S_FP_OVERFLOW = 1771,
+        RPC_S_CALL_IN_PROGRESS = 1791,
+        RPC_S_NO_MORE_BINDINGS = 1806,
+        RPC_S_NO_INTERFACES = 1817,
+        RPC_S_CALL_CANCELLED = 1818,
+        RPC_S_BINDING_INCOMPLETE = 1819,
+        RPC_S_COMM_FAILURE = 1820,
+        RPC_S_UNSUPPORTED_AUTHN_LEVEL = 1821,
+        RPC_S_NO_PRINC_NAME = 1822,
+        RPC_S_NOT_RPC_ERROR = 1823,
+        RPC_S_UUID_LOCAL_ONLY = 1824,
+        RPC_S_SEC_PKG_ERROR = 1825,
+        RPC_S_NOT_CANCELLED = 1826,
+        RPC_S_COOKIE_AUTH_FAILED = 1833,
+        RPC_S_DO_NOT_DISTURB = 1834,
+        RPC_S_SYSTEM_HANDLE_COUNT_EXCEEDED = 1835,
+        RPC_S_SYSTEM_HANDLE_TYPE_MISMATCH = 1836,
+        RPC_S_GROUP_MEMBER_NOT_FOUND = 1898,
+        EPT_S_CANT_CREATE = 1899,
+        RPC_S_INVALID_OBJECT = 1900,
+        RPC_S_SEND_INCOMPLETE = 1913,
+        RPC_S_INVALID_ASYNC_HANDLE = 1914,
+        RPC_S_INVALID_ASYNC_CALL = 1915,
+        RPC_S_ENTRY_TYPE_MISMATCH = 1922,
+        RPC_S_NOT_ALL_OBJS_EXPORTED = 1923,
+        RPC_S_INTERFACE_NOT_EXPORTED = 1924,
+        RPC_S_PROFILE_NOT_ADDED = 1925,
+        RPC_S_PRF_ELT_NOT_ADDED = 1926,
+        RPC_S_PRF_ELT_NOT_REMOVED = 1927,
+        RPC_S_GRP_ELT_NOT_ADDED = 1928,
+        RPC_S_GRP_ELT_NOT_REMOVED = 1929,
+    }
+
+    public enum GROUP_NAME_SYNTAX : uint
+    {
+        RPC_C_NS_SYNTAX_DEFAULT = 0,
+        RPC_C_NS_SYNTAX_DCE = 3,
+    }
+
+    public enum SEC_WINNT_AUTH_IDENTITY : uint
+    {
+        SEC_WINNT_AUTH_IDENTITY_ANSI = 0x1,
+        SEC_WINNT_AUTH_IDENTITY_UNICODE = 0x2,
+    }
+
+    [Flags]
+    public enum RPC_BINDING_HANDLE_OPTIONS_FLAGS : uint
+    {
+        RPC_BHO_NONCAUSAL = 0x1,
+        RPC_BHO_DONTLINGER = 0x2,
+    }
+
+}

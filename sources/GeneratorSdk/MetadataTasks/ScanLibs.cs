@@ -4,6 +4,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
+using MetadataTasks;
 
 namespace MetadataTasks
 {
@@ -21,10 +22,11 @@ namespace MetadataTasks
             get; set;
         }
 
-        [Output]
-        public ITaskItem OutputLibRsp
+        [Required]
+        public string WithLibsRsp
         {
-            get;set;
+            get;
+            set;
         }
 
         [Required]
@@ -42,13 +44,11 @@ namespace MetadataTasks
             }
 #endif
 
-            Log.LogMessage($"Scanning libs...");
-
-            string[] libFiles = GetLibs();
+            string[] libFiles = this.GetLibs();
             string dumpBinPath = Path.Combine(this.LibToolsBinDir, "dumpbin.exe");
-            StringBuilder libLines = new StringBuilder();
-            Regex libRegex = new Regex(@"DLL name     : (\S+)\s+Symbol name  : (\S+)");
-            HashSet<string> functionNames = new HashSet<string>(System.StringComparer.OrdinalIgnoreCase);
+            var libLines = new StringBuilder();
+            var libRegex = new Regex(@"DLL name     : (\S+)\s+Symbol name  : (\S+)");
+            var functionNames = new HashSet<string>(System.StringComparer.OrdinalIgnoreCase);
             foreach (var lib in libFiles)
             {
                 string dbinArgs = $"/headers \"{lib}\"";
@@ -73,13 +73,17 @@ namespace MetadataTasks
 
             if (libLines.Length != 0)
             {
-                var objDir = Path.Combine(this.MSBuildProjectDirectory, "obj");
-                Directory.CreateDirectory(objDir);
+                var dir = Path.GetDirectoryName(this.WithLibsRsp);
+                Directory.CreateDirectory(dir);
 
-                string rspFile = Path.Combine(objDir, $"withLibs.generated.rsp");
-                File.WriteAllText(rspFile, libLines.ToString());
-
-                this.OutputLibRsp = new TaskItem(rspFile);
+                File.WriteAllText(this.WithLibsRsp, libLines.ToString());
+            }
+            else
+            {
+                if (File.Exists(this.WithLibsRsp))
+                {
+                    File.Delete(this.WithLibsRsp);
+                }
             }
 
             return true;
@@ -87,10 +91,10 @@ namespace MetadataTasks
 
         private string[] GetLibs()
         {
-            List<string> ret = new List<string>();
+            var ret = new List<string>();
             if (this.Libs != null)
             {
-                foreach (var libItem in this.Libs)
+                foreach (ITaskItem libItem in this.Libs)
                 {
                     var libPath = libItem.ItemSpec;
                     if (!Path.IsPathRooted(libPath))

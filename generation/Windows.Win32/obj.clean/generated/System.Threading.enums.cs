@@ -1,0 +1,202 @@
+using System;
+using Windows.Win32.Foundation;
+using Windows.Win32.Interop;
+using Windows.Win32.System.PropertiesSystem; // For PROPERTYKEY
+using Windows.Win32.System.SystemServices;
+using static Windows.Win32.Foundation.Apis; // Various constants
+using static Windows.Win32.System.Diagnostics.Debug.WIN32_ERROR;
+using static Windows.Win32.System.SystemServices.Apis; // Various constants
+using static Windows.Win32.Media.Multimedia.Apis; // Various constants
+using static Windows.Win32.Media.Audio.CoreAudio.Apis; // Various constants
+using static Windows.Win32.Graphics.DirectShow.Apis; // Various constants
+using static Windows.Win32.UI.WindowsAndMessaging.Apis; // For WM_USER
+using static Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS; // For FILE_* constants
+using static Windows.Win32.System.Diagnostics.Debug.FACILITY_CODE; // For MAKE_HRESULT constants
+
+
+using static Windows.Win32.System.Threading.Apis;
+
+namespace Windows.Win32.System.Threading
+{
+    [Flags]
+    public enum THREAD_CREATION_FLAGS : uint
+    {
+        THREAD_CREATE_RUN_IMMEDIATELY = 0,
+        THREAD_CREATE_SUSPENDED = 4,
+        STACK_SIZE_PARAM_IS_A_RESERVATION = 0x00010000,
+    }
+
+    public enum THREAD_PRIORITY
+    {
+        THREAD_MODE_BACKGROUND_BEGIN = 65536,
+        THREAD_MODE_BACKGROUND_END = 131072,
+        THREAD_PRIORITY_ABOVE_NORMAL = 1,
+        THREAD_PRIORITY_BELOW_NORMAL = THREAD_PRIORITY_LOWEST+1,
+        THREAD_PRIORITY_HIGHEST = 2,
+        THREAD_PRIORITY_IDLE = THREAD_BASE_PRIORITY_IDLE,
+        THREAD_PRIORITY_LOWEST = THREAD_BASE_PRIORITY_MIN,
+        THREAD_PRIORITY_NORMAL = 0,
+        THREAD_PRIORITY_TIME_CRITICAL = 15,
+    }
+
+    [Flags]
+    public enum WORKER_THREAD_FLAGS : uint
+    {
+        WT_EXECUTEDEFAULT = 0,
+        WT_EXECUTEINIOTHREAD = 1,
+        WT_EXECUTEINPERSISTENTTHREAD = 128,
+        WT_EXECUTEINWAITTHREAD = 4,
+        WT_EXECUTELONGFUNCTION = 16,
+        WT_EXECUTEONLYONCE = 8,
+        WT_TRANSFER_IMPERSONATION = 256,
+        WT_EXECUTEINTIMERTHREAD = 32,
+    }
+
+    [Flags]
+    public enum CREATE_EVENT : uint
+    {
+        CREATE_EVENT_INITIAL_SET = 2,
+        CREATE_EVENT_MANUAL_RESET = 1,
+    }
+
+    public enum CREATE_PROCESS_LOGON_FLAGS : uint
+    {
+        LOGON_WITH_PROFILE = 1,
+        LOGON_NETCREDENTIALS_ONLY = 2,
+    }
+
+    [Flags]
+    public enum MSG_WAIT_FOR_MULTIPLE_OBJECTS_EX_FLAGS : uint
+    {
+        MWMO_NONE = 0,
+        MWMO_ALERTABLE = 2,
+        MWMO_INPUTAVAILABLE = 4,
+        MWMO_WAITALL = 1,
+    }
+
+    public enum PROCESS_AFFINITY_AUTO_UPDATE_FLAGS : uint
+    {
+        PROCESS_AFFINITY_DISABLE_AUTO_UPDATE = 0,
+        PROCESS_AFFINITY_ENABLE_AUTO_UPDATE = 0x00000001,
+    }
+
+    [Flags]
+    public enum PROCESS_DEP_FLAGS : uint
+    {
+        PROCESS_DEP_ENABLE = 1,
+        PROCESS_DEP_DISABLE_ATL_THUNK_EMULATION = 2,
+    }
+
+    public enum PROCESS_NAME_FORMAT : uint
+    {
+        PROCESS_NAME_WIN32 = 0,
+        PROCESS_NAME_NATIVE = 1,
+    }
+
+    public enum PROCESSOR_FEATURE_ID : uint
+    {
+        PF_ARM_64BIT_LOADSTORE_ATOMIC = 25,
+        PF_ARM_DIVIDE_INSTRUCTION_AVAILABLE = 24,
+        PF_ARM_EXTERNAL_CACHE_AVAILABLE = 26,
+        PF_ARM_FMAC_INSTRUCTIONS_AVAILABLE = 27,
+        PF_ARM_VFP_32_REGISTERS_AVAILABLE = 18,
+        PF_3DNOW_INSTRUCTIONS_AVAILABLE = 7,
+        PF_CHANNELS_ENABLED = 16,
+        PF_COMPARE_EXCHANGE_DOUBLE = 2,
+        PF_COMPARE_EXCHANGE128 = 14,
+        PF_COMPARE64_EXCHANGE128 = 15,
+        PF_FASTFAIL_AVAILABLE = 23,
+        PF_FLOATING_POINT_EMULATED = 1,
+        PF_FLOATING_POINT_PRECISION_ERRATA = 0,
+        PF_MMX_INSTRUCTIONS_AVAILABLE = 3,
+        PF_NX_ENABLED = 12,
+        PF_PAE_ENABLED = 9,
+        PF_RDTSC_INSTRUCTION_AVAILABLE = 8,
+        PF_RDWRFSGSBASE_AVAILABLE = 22,
+        PF_SECOND_LEVEL_ADDRESS_TRANSLATION = 20,
+        PF_SSE3_INSTRUCTIONS_AVAILABLE = 13,
+        PF_VIRT_FIRMWARE_ENABLED = 21,
+        PF_XMMI_INSTRUCTIONS_AVAILABLE = 6,
+        PF_XMMI64_INSTRUCTIONS_AVAILABLE = 10,
+        PF_XSAVE_ENABLED = 17,
+        PF_ARM_V8_INSTRUCTIONS_AVAILABLE = 29,
+        PF_ARM_V8_CRYPTO_INSTRUCTIONS_AVAILABLE = 30,
+        PF_ARM_V8_CRC32_INSTRUCTIONS_AVAILABLE = 31,
+        PF_ARM_V81_ATOMIC_INSTRUCTIONS_AVAILABLE = 34,
+    }
+
+    public enum GET_GUI_RESOURCES_FLAGS : uint
+    {
+        GR_GDIOBJECTS = 0,
+        GR_GDIOBJECTS_PEAK = 2,
+        GR_USEROBJECTS = 1,
+        GR_USEROBJECTS_PEAK = 4,
+    }
+
+    [Flags]
+    public enum STARTUPINFOW_FLAGS : uint
+    {
+        STARTF_FORCEONFEEDBACK = 64,
+        STARTF_FORCEOFFFEEDBACK = 128,
+        STARTF_PREVENTPINNING = 8192,
+        STARTF_RUNFULLSCREEN = 32,
+        STARTF_TITLEISAPPID = 4096,
+        STARTF_TITLEISLINKNAME = 2048,
+        STARTF_UNTRUSTEDSOURCE = 32768,
+        STARTF_USECOUNTCHARS = 8,
+        STARTF_USEFILLATTRIBUTE = 16,
+        STARTF_USEHOTKEY = 512,
+        STARTF_USEPOSITION = 4,
+        STARTF_USESHOWWINDOW = 1,
+        STARTF_USESIZE = 2,
+        STARTF_USESTDHANDLES = 256,
+    }
+
+    public enum MEMORY_PRIORITY : uint
+    {
+        MEMORY_PRIORITY_VERY_LOW = 1,
+        MEMORY_PRIORITY_LOW = 2,
+        MEMORY_PRIORITY_MEDIUM = 3,
+        MEMORY_PRIORITY_BELOW_NORMAL = 4,
+        MEMORY_PRIORITY_NORMAL = 5,
+    }
+
+    public enum PROCESS_PROTECTION_LEVEL : uint
+    {
+        PROTECTION_LEVEL_WINTCB_LIGHT = 0x00000000,
+        PROTECTION_LEVEL_WINDOWS = 0x00000001,
+        PROTECTION_LEVEL_WINDOWS_LIGHT = 0x00000002,
+        PROTECTION_LEVEL_ANTIMALWARE_LIGHT = 0x00000003,
+        PROTECTION_LEVEL_LSA_LIGHT = 0x00000004,
+        PROTECTION_LEVEL_WINTCB = 0x00000005,
+        PROTECTION_LEVEL_CODEGEN_LIGHT = 0x00000006,
+        PROTECTION_LEVEL_AUTHENTICODE = 0x00000007,
+        PROTECTION_LEVEL_PPL_APP = 0x00000008,
+        PROTECTION_LEVEL_NONE = 0xFFFFFFFE,
+    }
+
+    [Flags]
+    public enum THREAD_ACCESS_RIGHTS : uint
+    {
+        THREAD_TERMINATE = (0x0001),
+        THREAD_SUSPEND_RESUME = (0x0002),
+        THREAD_GET_CONTEXT = (0x0008),
+        THREAD_SET_CONTEXT = (0x0010),
+        THREAD_SET_INFORMATION = (0x0020),
+        THREAD_QUERY_INFORMATION = (0x0040),
+        THREAD_SET_THREAD_TOKEN = (0x0080),
+        THREAD_IMPERSONATE = (0x0100),
+        THREAD_DIRECT_IMPERSONATION = (0x0200),
+        THREAD_SET_LIMITED_INFORMATION = (0x0400),
+        THREAD_QUERY_LIMITED_INFORMATION = (0x0800),
+        THREAD_RESUME = (0x1000),
+        THREAD_ALL_ACCESS = (THREAD_STANDARD_RIGHTS_REQUIRED | THREAD_SYNCHRONIZE | 0xFFFF),
+        THREAD_DELETE = (0x00010000),
+        THREAD_READ_CONTROL = (0x00020000),
+        THREAD_WRITE_DAC = (0x00040000),
+        THREAD_WRITE_OWNER = (0x00080000),
+        THREAD_SYNCHRONIZE = (0x00100000),
+        THREAD_STANDARD_RIGHTS_REQUIRED = (0x000F0000),
+    }
+
+}

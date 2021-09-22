@@ -6,8 +6,8 @@
     <ToolsBinDir>$(RepoRootPath)bin\$(Configuration)\net5.0</ToolsBinDir>
     <LibToolsBinDir>$(RepoRootPath)tools</LibToolsBinDir>
     <ScriptsDir>$(RepoRootPath)scripts</ScriptsDir>
-    <Win32MetadataScraperAssetsDir>$(RepoRootPath)generation\scraper</Win32MetadataScraperAssetsDir>
-    <Win32MetadataScraperGeneratedAssetsDir>$(RepoRootPath)generation\scraper\obj\x64</Win32MetadataScraperGeneratedAssetsDir>
+    <Win32MetadataAssetsDir>$(RepoRootPath)sources\GeneratorSdk\tools\assets</Win32MetadataAssetsDir>
+    <Win32MetadataScraperAssetsDir>$(Win32MetadataAssetsDir)\scraper</Win32MetadataScraperAssetsDir>
     <Win32WinmdBinDir>$(RepoRootPath)bin</Win32WinmdBinDir>
     <TaskBinDir>$(LocalTaskBinDir)</TaskBinDir>
   </PropertyGroup>
@@ -15,25 +15,21 @@
   <Import Project="..\..\sdk\sdk.props" />
 
   <PropertyGroup>
-    <OutputWinmd>bin\Windows.Win32.Graphics.DirectWriteCore.winmd</OutputWinmd>
+    <OutputWinmd>bin\GeneratorSample.winmd</OutputWinmd>
     <WinmdVersion>1.0.0.0</WinmdVersion>
     <GenerateAssemblyVersionInfo>false</GenerateAssemblyVersionInfo>
   </PropertyGroup>
 
   <ItemGroup>
-    <DWriteHeaders Condition=" '$(PkgMicrosoft_ProjectReunion_DWrite)' != '' " Include="$(PkgMicrosoft_ProjectReunion_DWrite)\**\*.h"/>
-    <DWriteLibs Condition=" '$(PkgMicrosoft_ProjectReunion_DWrite)' != '' " Include="$(PkgMicrosoft_ProjectReunion_DWrite)\**\*.lib"/>
+    <Idls Include="SampleCom.idl"/>
+    <LocalHeaders Include="$(CompiledHeadersDir)\SampleCom.h;SampleHeader.h"/>
+    <!--<LocalLibs Include="**\*.lib"/>-->
 
-    <ImportLibs Include="@(DWriteLibs)"/>
+    <!--<ImportLibs Include="@(LocalLibs)"/>-->
     <Partition Include="main.cpp">
-      <TraverseFiles>@(DWriteHeaders)</TraverseFiles>
-      <Namespace>Windows.Win32.Graphics.DirectWriteCore</Namespace>
-      <Exclude>ID2D1SimplifiedGeometrySink;_D3DCOLORVALUE</Exclude>
+      <TraverseFiles>@(LocalHeaders)</TraverseFiles>
+      <Namespace>GeneratorSampleDebug</Namespace>
     </Partition>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.ProjectReunion.DWrite" Version="0.5.6" GeneratePathProperty="true"/>
   </ItemGroup>
 
   <Import Project="..\..\sdk\sdk.targets" />

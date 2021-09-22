@@ -10,17 +10,23 @@ namespace ConstantsScraperApp
     {
         static int Main(string[] args)
         {
+#if DEBUG
+            if (System.Environment.GetEnvironmentVariable("DEBUG_CONSTANTS_SCRAPER") == "1")
+            {
+                System.Diagnostics.Debugger.Launch();
+            }
+#endif
             var rootCommand = new RootCommand("Scrape traversed headers for constants.")
             {
-                new Option<string>(new[] { "--repoRoot" }, "The location of the repo.") { IsRequired = true },
-                new Option<string>(new[] { "--arch" }, () => { return "x64"; }, "The CPU architecture."),
+                new Option<string>(new[] { "--defaultNamespace" }, "Default namespace to use for constants."),
+                new Option<string>(new[] { "--scraperOutputDir" }, "Output directory for scraping.") { IsRequired = true },
                 new Option<string>(new[] { "--headerTextFile" }, "The text file to use as the intro text for written constants source files."),
                 new Option<string>("--exclude", "A constant to exclude.", ArgumentArity.OneOrMore),
                 new Option<string>("--requiredNamespaceForName", "The required namespace for a named item.", ArgumentArity.OneOrMore),
-                new Option<string>("--rename", "Rename an enum.", ArgumentArity.OneOrMore),
+                new Option<string>("--traversedFileToNamespace", "A traversed file and its namespace.", ArgumentArity.OneOrMore),
                 new Option<string>("--with-attribute", "Add an attribute to a constant.", ArgumentArity.OneOrMore),
-                new Option<string>("--remap", "A field or parameter that should get remapped to a certain type.", ArgumentArity.OneOrMore),
-                new Option<string>("--with-type", "For a type for a constant.", ArgumentArity.OneOrMore),
+                new Option<string>("--memberRemap", "A field or parameter that should get remapped to a certain type.", ArgumentArity.OneOrMore),
+                new Option<string>("--with-type", "Use a type for a constant.", ArgumentArity.OneOrMore),
                 new Option<string>("--enumsJson", "A json file with enum information.", ArgumentArity.OneOrMore)
             };
 
@@ -30,21 +36,23 @@ namespace ConstantsScraperApp
 
         public static int Run(InvocationContext context)
         {
-            string repoRoot = context.ParseResult.ValueForOption<string>("--repoRoot");
-            string arch = context.ParseResult.ValueForOption<string>("--arch");
+            string defaultNamespace = context.ParseResult.ValueForOption<string>("--defaultNamespace");
+            string scraperOutputDir = context.ParseResult.ValueForOption<string>("--scraperOutputDir");
             var excludeItems = context.ParseResult.ValueForOption<string[]>("--exclude");
             var enumJsonFiles = context.ParseResult.ValueForOption<string[]>("--enumsJson");
             var headerTextFile = context.ParseResult.ValueForOption<string>("--headerTextFile");
             var requiredNamespaceValuePairs = context.ParseResult.ValueForOption<string[]>("--requiredNamespaceForName");
-            var remappedNameValuePairs = context.ParseResult.ValueForOption<string[]>("--remap");
+            var traversedHeaderToNamespaceValuePairs = context.ParseResult.ValueForOption<string[]>("--traversedFileToNamespace");
+            var remappedNameValuePairs = context.ParseResult.ValueForOption<string[]>("--memberRemap");
             var withTypeValuePairs = context.ParseResult.ValueForOption<string[]>("--with-type");
             var withAttributeValuePairs = context.ParseResult.ValueForOption<string[]>("--with-attribute");
 
             var exclusionNames = new HashSet<string>(excludeItems ?? (new string[0]));
-            var requiredNamespaces = ConvertValuePairsToDictionary(requiredNamespaceValuePairs);
-            var remaps = ConvertValuePairsToDictionary(remappedNameValuePairs);
-            var withTypes = ConvertValuePairsToDictionary(withTypeValuePairs);
-            var withAttributes = ConvertValuePairsToDictionary(withAttributeValuePairs);
+            Dictionary<string, string> traversedHeadersToNamespaces = ConvertValuePairsToDictionary(traversedHeaderToNamespaceValuePairs);
+            Dictionary<string, string> requiredNamespaces = ConvertValuePairsToDictionary(requiredNamespaceValuePairs);
+            Dictionary<string, string> remaps = ConvertValuePairsToDictionary(remappedNameValuePairs);
+            Dictionary<string, string> withTypes = ConvertValuePairsToDictionary(withTypeValuePairs);
+            Dictionary<string, string> withAttributes = ConvertValuePairsToDictionary(withAttributeValuePairs);
 
             var headerText = !string.IsNullOrEmpty(headerTextFile) ? File.ReadAllText(headerTextFile) : string.Empty;
 
@@ -56,7 +64,7 @@ namespace ConstantsScraperApp
             {
                 results = 
                     ConstantsScraper.ScrapeConstants(
-                        repoRoot, arch, enumJsonFiles, headerText, exclusionNames, requiredNamespaces, remaps, withTypes, withAttributes);
+                        enumJsonFiles, defaultNamespace, scraperOutputDir, headerText, exclusionNames, traversedHeadersToNamespaces, requiredNamespaces, remaps, withTypes, withAttributes);
             }
             catch (System.Exception e)
             {

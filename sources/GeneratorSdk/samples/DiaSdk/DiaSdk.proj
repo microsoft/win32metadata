@@ -30,9 +30,6 @@
     <Partition Include="main.cpp">
       <TraverseFiles>@(Headers)</TraverseFiles>
       <Namespace>Microsoft.Dia</Namespace>
-      <Exclude>__MIDL___MIDL_itf_dia2_0000_0033_0001;__MIDL___MIDL_itf_dia2_0000_0000_0001;PfnPDBDebugDirV</Exclude>
-      <Remap>__MIDL___MIDL_itf_dia2_0000_0042_0001=FPODATA</Remap>
-      <ManualFiles>dia.manual.cs</ManualFiles>
     </Partition>
   </ItemGroup>
 

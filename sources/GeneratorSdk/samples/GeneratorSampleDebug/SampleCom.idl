@@ -1,0 +1,18 @@
+//
+// Copyright (c) Microsoft Corporation.  All rights reserved.
+//
+
+import "oaidl.idl";
+
+[
+    object,
+    uuid("deadbeef-6600-4A81-9395-75CFFE746F94"),
+    pointer_default(ref)
+]
+interface ISample : IUnknown
+{
+    HRESULT GetValue(
+        [in, string] LPCWSTR id,
+        [out, retval, annotation("_COM_Outptr_")] IUnknown** pItem);
+};
+

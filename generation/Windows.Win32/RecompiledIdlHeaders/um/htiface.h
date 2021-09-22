@@ -1,0 +1,875 @@
+
+
+/* this ALWAYS GENERATED file contains the definitions for the interfaces */
+
+
+ /* File created by MIDL compiler version 8.01.0622 */
+/* @@MIDL_FILE_HEADING(  ) */
+
+
+
+/* verify that the <rpcndr.h> version is high enough to compile this file*/
+#ifndef __REQUIRED_RPCNDR_H_VERSION__
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#endif
+
+/* verify that the <rpcsal.h> version is high enough to compile this file*/
+#ifndef __REQUIRED_RPCSAL_H_VERSION__
+#define __REQUIRED_RPCSAL_H_VERSION__ 100
+#endif
+
+#include "rpc.h"
+#include "rpcndr.h"
+
+#ifndef __RPCNDR_H_VERSION__
+#error this stub requires an updated version of <rpcndr.h>
+#endif /* __RPCNDR_H_VERSION__ */
+
+#ifndef COM_NO_WINDOWS_H
+#include "windows.h"
+#include "ole2.h"
+#endif /*COM_NO_WINDOWS_H*/
+
+#ifndef __htiface_h__
+#define __htiface_h__
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1020)
+#pragma once
+#endif
+
+/* Forward Declarations */ 
+
+#ifndef __ITargetFrame_FWD_DEFINED__
+#define __ITargetFrame_FWD_DEFINED__
+typedef interface ITargetFrame ITargetFrame;
+
+#endif 	/* __ITargetFrame_FWD_DEFINED__ */
+
+
+#ifndef __ITargetEmbedding_FWD_DEFINED__
+#define __ITargetEmbedding_FWD_DEFINED__
+typedef interface ITargetEmbedding ITargetEmbedding;
+
+#endif 	/* __ITargetEmbedding_FWD_DEFINED__ */
+
+
+#ifndef __ITargetFramePriv_FWD_DEFINED__
+#define __ITargetFramePriv_FWD_DEFINED__
+typedef interface ITargetFramePriv ITargetFramePriv;
+
+#endif 	/* __ITargetFramePriv_FWD_DEFINED__ */
+
+
+#ifndef __ITargetFramePriv2_FWD_DEFINED__
+#define __ITargetFramePriv2_FWD_DEFINED__
+typedef interface ITargetFramePriv2 ITargetFramePriv2;
+
+#endif 	/* __ITargetFramePriv2_FWD_DEFINED__ */
+
+
+/* header files for imported files */
+#include "objidl.h"
+#include "oleidl.h"
+#include "urlmon.h"
+
+#ifdef __cplusplus
+extern "C"{
+#endif 
+
+
+/* interface __MIDL_itf_htiface_0000_0000 */
+/* [local] */ 
+
+//=--------------------------------------------------------------------------=
+// HTIface.h
+//=--------------------------------------------------------------------------=
+// (C) Copyright Microsoft Corporation.  All Rights Reserved.
+//
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//=--------------------------------------------------------------------------=
+
+#include <winapifamily.h>
+#pragma region Desktop Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+#pragma comment(lib,"uuid.lib")
+
+//--------------------------------------------------------------------------
+// OLE Hyperlinking ITargetFrame Interfaces.
+
+#ifndef _LPTARGETFRAME2_DEFINED														
+#include "htiframe.h"														
+#endif // _LPTARGETFRAME2_DEFINED														
+
+
+EXTERN_C const IID IID_ITargetFrame;
+EXTERN_C const IID IID_ITargetEmbedding;
+EXTERN_C const IID IID_ITargetFramePriv;
+EXTERN_C const IID IID_ITargetFramePriv2;
+#ifndef _LPTARGETFRAME_DEFINED
+#define _LPTARGETFRAME_DEFINED
+
+
+extern RPC_IF_HANDLE __MIDL_itf_htiface_0000_0000_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_htiface_0000_0000_v0_0_s_ifspec;
+
+#ifndef __ITargetFrame_INTERFACE_DEFINED__
+#define __ITargetFrame_INTERFACE_DEFINED__
+
+/* interface ITargetFrame */
+/* [unique][uuid][object] */ 
+
+typedef /* [unique] */  __RPC_unique_pointer ITargetFrame *LPTARGETFRAME;
+
+typedef /* [public] */ 
+enum __MIDL_ITargetFrame_0001
+    {
+        NAVIGATEFRAME_FL_RECORD	= 0x1,
+        NAVIGATEFRAME_FL_POST	= 0x2,
+        NAVIGATEFRAME_FL_NO_DOC_CACHE	= 0x4,
+        NAVIGATEFRAME_FL_NO_IMAGE_CACHE	= 0x8,
+        NAVIGATEFRAME_FL_AUTH_FAIL_CACHE_OK	= 0x10,
+        NAVIGATEFRAME_FL_SENDING_FROM_FORM	= 0x20,
+        NAVIGATEFRAME_FL_REALLY_SENDING_FROM_FORM	= 0x40
+    } 	NAVIGATEFRAME_FLAGS;
+
+typedef struct tagNavigateData
+    {
+    ULONG ulTarget;
+    ULONG ulURL;
+    ULONG ulRefURL;
+    ULONG ulPostData;
+    DWORD dwFlags;
+    } 	NAVIGATEDATA;
+
+
+EXTERN_C const IID IID_ITargetFrame;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("d5f78c80-5252-11cf-90fa-00AA0042106e")
+    ITargetFrame : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE SetFrameName( 
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszFrameName) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetFrameName( 
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppszFrameName) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetParentFrame( 
+            /* [annotation][out] */ 
+            _Out_  IUnknown **ppunkParent) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE FindFrame( 
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszTargetName,
+            /* [annotation][in] */ 
+            _In_  IUnknown *ppunkContextFrame,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **ppunkTargetFrame) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE SetFrameSrc( 
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszFrameSrc) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetFrameSrc( 
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppszFrameSrc) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetFramesContainer( 
+            /* [annotation][out] */ 
+            _Out_  IOleContainer **ppContainer) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE SetFrameOptions( 
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetFrameOptions( 
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwFlags) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE SetFrameMargins( 
+            /* [annotation][in] */ 
+            _In_  DWORD dwWidth,
+            /* [annotation][in] */ 
+            _In_  DWORD dwHeight) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetFrameMargins( 
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwWidth,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwHeight) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE RemoteNavigate( 
+            /* [annotation][in] */ 
+            _In_  ULONG cLength,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cLength)  ULONG *pulData) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE OnChildFrameActivate( 
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUnkChildFrame) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE OnChildFrameDeactivate( 
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUnkChildFrame) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ITargetFrameVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in ITargetFrame * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in ITargetFrame * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in ITargetFrame * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *SetFrameName )( 
+            __RPC__in ITargetFrame * This,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszFrameName);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetFrameName )( 
+            __RPC__in ITargetFrame * This,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppszFrameName);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetParentFrame )( 
+            __RPC__in ITargetFrame * This,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **ppunkParent);
+        
+        HRESULT ( STDMETHODCALLTYPE *FindFrame )( 
+            __RPC__in ITargetFrame * This,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszTargetName,
+            /* [annotation][in] */ 
+            _In_  IUnknown *ppunkContextFrame,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **ppunkTargetFrame);
+        
+        HRESULT ( STDMETHODCALLTYPE *SetFrameSrc )( 
+            __RPC__in ITargetFrame * This,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszFrameSrc);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetFrameSrc )( 
+            __RPC__in ITargetFrame * This,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppszFrameSrc);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetFramesContainer )( 
+            __RPC__in ITargetFrame * This,
+            /* [annotation][out] */ 
+            _Out_  IOleContainer **ppContainer);
+        
+        HRESULT ( STDMETHODCALLTYPE *SetFrameOptions )( 
+            __RPC__in ITargetFrame * This,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetFrameOptions )( 
+            __RPC__in ITargetFrame * This,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwFlags);
+        
+        HRESULT ( STDMETHODCALLTYPE *SetFrameMargins )( 
+            __RPC__in ITargetFrame * This,
+            /* [annotation][in] */ 
+            _In_  DWORD dwWidth,
+            /* [annotation][in] */ 
+            _In_  DWORD dwHeight);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetFrameMargins )( 
+            __RPC__in ITargetFrame * This,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwWidth,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwHeight);
+        
+        HRESULT ( STDMETHODCALLTYPE *RemoteNavigate )( 
+            __RPC__in ITargetFrame * This,
+            /* [annotation][in] */ 
+            _In_  ULONG cLength,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cLength)  ULONG *pulData);
+        
+        HRESULT ( STDMETHODCALLTYPE *OnChildFrameActivate )( 
+            __RPC__in ITargetFrame * This,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUnkChildFrame);
+        
+        HRESULT ( STDMETHODCALLTYPE *OnChildFrameDeactivate )( 
+            __RPC__in ITargetFrame * This,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUnkChildFrame);
+        
+        END_INTERFACE
+    } ITargetFrameVtbl;
+
+    interface ITargetFrame
+    {
+        CONST_VTBL struct ITargetFrameVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ITargetFrame_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ITargetFrame_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ITargetFrame_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ITargetFrame_SetFrameName(This,pszFrameName)	\
+    ( (This)->lpVtbl -> SetFrameName(This,pszFrameName) ) 
+
+#define ITargetFrame_GetFrameName(This,ppszFrameName)	\
+    ( (This)->lpVtbl -> GetFrameName(This,ppszFrameName) ) 
+
+#define ITargetFrame_GetParentFrame(This,ppunkParent)	\
+    ( (This)->lpVtbl -> GetParentFrame(This,ppunkParent) ) 
+
+#define ITargetFrame_FindFrame(This,pszTargetName,ppunkContextFrame,dwFlags,ppunkTargetFrame)	\
+    ( (This)->lpVtbl -> FindFrame(This,pszTargetName,ppunkContextFrame,dwFlags,ppunkTargetFrame) ) 
+
+#define ITargetFrame_SetFrameSrc(This,pszFrameSrc)	\
+    ( (This)->lpVtbl -> SetFrameSrc(This,pszFrameSrc) ) 
+
+#define ITargetFrame_GetFrameSrc(This,ppszFrameSrc)	\
+    ( (This)->lpVtbl -> GetFrameSrc(This,ppszFrameSrc) ) 
+
+#define ITargetFrame_GetFramesContainer(This,ppContainer)	\
+    ( (This)->lpVtbl -> GetFramesContainer(This,ppContainer) ) 
+
+#define ITargetFrame_SetFrameOptions(This,dwFlags)	\
+    ( (This)->lpVtbl -> SetFrameOptions(This,dwFlags) ) 
+
+#define ITargetFrame_GetFrameOptions(This,pdwFlags)	\
+    ( (This)->lpVtbl -> GetFrameOptions(This,pdwFlags) ) 
+
+#define ITargetFrame_SetFrameMargins(This,dwWidth,dwHeight)	\
+    ( (This)->lpVtbl -> SetFrameMargins(This,dwWidth,dwHeight) ) 
+
+#define ITargetFrame_GetFrameMargins(This,pdwWidth,pdwHeight)	\
+    ( (This)->lpVtbl -> GetFrameMargins(This,pdwWidth,pdwHeight) ) 
+
+#define ITargetFrame_RemoteNavigate(This,cLength,pulData)	\
+    ( (This)->lpVtbl -> RemoteNavigate(This,cLength,pulData) ) 
+
+#define ITargetFrame_OnChildFrameActivate(This,pUnkChildFrame)	\
+    ( (This)->lpVtbl -> OnChildFrameActivate(This,pUnkChildFrame) ) 
+
+#define ITargetFrame_OnChildFrameDeactivate(This,pUnkChildFrame)	\
+    ( (This)->lpVtbl -> OnChildFrameDeactivate(This,pUnkChildFrame) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ITargetFrame_INTERFACE_DEFINED__ */
+
+
+#ifndef __ITargetEmbedding_INTERFACE_DEFINED__
+#define __ITargetEmbedding_INTERFACE_DEFINED__
+
+/* interface ITargetEmbedding */
+/* [unique][uuid][object] */ 
+
+typedef /* [unique] */  __RPC_unique_pointer ITargetEmbedding *LPTARGETEMBEDDING;
+
+
+EXTERN_C const IID IID_ITargetEmbedding;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("548793C0-9E74-11cf-9655-00A0C9034923")
+    ITargetEmbedding : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE GetTargetFrame( 
+            /* [annotation][out] */ 
+            _Out_  ITargetFrame **ppTargetFrame) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ITargetEmbeddingVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in ITargetEmbedding * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in ITargetEmbedding * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in ITargetEmbedding * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTargetFrame )( 
+            __RPC__in ITargetEmbedding * This,
+            /* [annotation][out] */ 
+            _Out_  ITargetFrame **ppTargetFrame);
+        
+        END_INTERFACE
+    } ITargetEmbeddingVtbl;
+
+    interface ITargetEmbedding
+    {
+        CONST_VTBL struct ITargetEmbeddingVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ITargetEmbedding_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ITargetEmbedding_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ITargetEmbedding_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ITargetEmbedding_GetTargetFrame(This,ppTargetFrame)	\
+    ( (This)->lpVtbl -> GetTargetFrame(This,ppTargetFrame) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ITargetEmbedding_INTERFACE_DEFINED__ */
+
+
+#ifndef __ITargetFramePriv_INTERFACE_DEFINED__
+#define __ITargetFramePriv_INTERFACE_DEFINED__
+
+/* interface ITargetFramePriv */
+/* [unique][uuid][object] */ 
+
+typedef /* [unique] */  __RPC_unique_pointer ITargetFramePriv *LPTARGETFRAMEPRIV;
+
+
+EXTERN_C const IID IID_ITargetFramePriv;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("9216E421-2BF5-11d0-82B4-00A0C90C29C5")
+    ITargetFramePriv : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE FindFrameDownwards( 
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszTargetName,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **ppunkTargetFrame) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE FindFrameInContext( 
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszTargetName,
+            /* [annotation][in] */ 
+            _In_  IUnknown *punkContextFrame,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **ppunkTargetFrame) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE OnChildFrameActivate( 
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUnkChildFrame) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE OnChildFrameDeactivate( 
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUnkChildFrame) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE NavigateHack( 
+            /* [annotation][in] */ 
+            _In_  DWORD grfHLNF,
+            /* [annotation][unique][in] */ 
+            _In_  LPBC pbc,
+            /* [annotation][unique][in] */ 
+            _In_  IBindStatusCallback *pibsc,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pszTargetName,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszUrl,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pszLocation) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE FindBrowserByIndex( 
+            /* [annotation][in] */ 
+            _In_  DWORD dwID,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **ppunkBrowser) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ITargetFramePrivVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in ITargetFramePriv * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in ITargetFramePriv * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in ITargetFramePriv * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *FindFrameDownwards )( 
+            __RPC__in ITargetFramePriv * This,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszTargetName,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **ppunkTargetFrame);
+        
+        HRESULT ( STDMETHODCALLTYPE *FindFrameInContext )( 
+            __RPC__in ITargetFramePriv * This,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszTargetName,
+            /* [annotation][in] */ 
+            _In_  IUnknown *punkContextFrame,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **ppunkTargetFrame);
+        
+        HRESULT ( STDMETHODCALLTYPE *OnChildFrameActivate )( 
+            __RPC__in ITargetFramePriv * This,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUnkChildFrame);
+        
+        HRESULT ( STDMETHODCALLTYPE *OnChildFrameDeactivate )( 
+            __RPC__in ITargetFramePriv * This,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUnkChildFrame);
+        
+        HRESULT ( STDMETHODCALLTYPE *NavigateHack )( 
+            __RPC__in ITargetFramePriv * This,
+            /* [annotation][in] */ 
+            _In_  DWORD grfHLNF,
+            /* [annotation][unique][in] */ 
+            _In_  LPBC pbc,
+            /* [annotation][unique][in] */ 
+            _In_  IBindStatusCallback *pibsc,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pszTargetName,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszUrl,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pszLocation);
+        
+        HRESULT ( STDMETHODCALLTYPE *FindBrowserByIndex )( 
+            __RPC__in ITargetFramePriv * This,
+            /* [annotation][in] */ 
+            _In_  DWORD dwID,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **ppunkBrowser);
+        
+        END_INTERFACE
+    } ITargetFramePrivVtbl;
+
+    interface ITargetFramePriv
+    {
+        CONST_VTBL struct ITargetFramePrivVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ITargetFramePriv_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ITargetFramePriv_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ITargetFramePriv_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ITargetFramePriv_FindFrameDownwards(This,pszTargetName,dwFlags,ppunkTargetFrame)	\
+    ( (This)->lpVtbl -> FindFrameDownwards(This,pszTargetName,dwFlags,ppunkTargetFrame) ) 
+
+#define ITargetFramePriv_FindFrameInContext(This,pszTargetName,punkContextFrame,dwFlags,ppunkTargetFrame)	\
+    ( (This)->lpVtbl -> FindFrameInContext(This,pszTargetName,punkContextFrame,dwFlags,ppunkTargetFrame) ) 
+
+#define ITargetFramePriv_OnChildFrameActivate(This,pUnkChildFrame)	\
+    ( (This)->lpVtbl -> OnChildFrameActivate(This,pUnkChildFrame) ) 
+
+#define ITargetFramePriv_OnChildFrameDeactivate(This,pUnkChildFrame)	\
+    ( (This)->lpVtbl -> OnChildFrameDeactivate(This,pUnkChildFrame) ) 
+
+#define ITargetFramePriv_NavigateHack(This,grfHLNF,pbc,pibsc,pszTargetName,pszUrl,pszLocation)	\
+    ( (This)->lpVtbl -> NavigateHack(This,grfHLNF,pbc,pibsc,pszTargetName,pszUrl,pszLocation) ) 
+
+#define ITargetFramePriv_FindBrowserByIndex(This,dwID,ppunkBrowser)	\
+    ( (This)->lpVtbl -> FindBrowserByIndex(This,dwID,ppunkBrowser) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ITargetFramePriv_INTERFACE_DEFINED__ */
+
+
+#ifndef __ITargetFramePriv2_INTERFACE_DEFINED__
+#define __ITargetFramePriv2_INTERFACE_DEFINED__
+
+/* interface ITargetFramePriv2 */
+/* [unique][uuid][object] */ 
+
+typedef /* [unique] */  __RPC_unique_pointer ITargetFramePriv2 *LPTARGETFRAMEPRIV2;
+
+
+EXTERN_C const IID IID_ITargetFramePriv2;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("B2C867E6-69D6-46F2-A611-DED9A4BD7FEF")
+    ITargetFramePriv2 : public ITargetFramePriv
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE AggregatedNavigation2( 
+            /* [annotation][in] */ 
+            _In_  DWORD grfHLNF,
+            /* [annotation][unique][in] */ 
+            _In_  LPBC pbc,
+            /* [annotation][unique][in] */ 
+            _In_  IBindStatusCallback *pibsc,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pszTargetName,
+            /* [annotation][in] */ 
+            _In_  IUri *pUri,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pszLocation) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ITargetFramePriv2Vtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in ITargetFramePriv2 * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in ITargetFramePriv2 * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in ITargetFramePriv2 * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *FindFrameDownwards )( 
+            __RPC__in ITargetFramePriv2 * This,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszTargetName,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **ppunkTargetFrame);
+        
+        HRESULT ( STDMETHODCALLTYPE *FindFrameInContext )( 
+            __RPC__in ITargetFramePriv2 * This,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszTargetName,
+            /* [annotation][in] */ 
+            _In_  IUnknown *punkContextFrame,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **ppunkTargetFrame);
+        
+        HRESULT ( STDMETHODCALLTYPE *OnChildFrameActivate )( 
+            __RPC__in ITargetFramePriv2 * This,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUnkChildFrame);
+        
+        HRESULT ( STDMETHODCALLTYPE *OnChildFrameDeactivate )( 
+            __RPC__in ITargetFramePriv2 * This,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUnkChildFrame);
+        
+        HRESULT ( STDMETHODCALLTYPE *NavigateHack )( 
+            __RPC__in ITargetFramePriv2 * This,
+            /* [annotation][in] */ 
+            _In_  DWORD grfHLNF,
+            /* [annotation][unique][in] */ 
+            _In_  LPBC pbc,
+            /* [annotation][unique][in] */ 
+            _In_  IBindStatusCallback *pibsc,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pszTargetName,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszUrl,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pszLocation);
+        
+        HRESULT ( STDMETHODCALLTYPE *FindBrowserByIndex )( 
+            __RPC__in ITargetFramePriv2 * This,
+            /* [annotation][in] */ 
+            _In_  DWORD dwID,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **ppunkBrowser);
+        
+        HRESULT ( STDMETHODCALLTYPE *AggregatedNavigation2 )( 
+            __RPC__in ITargetFramePriv2 * This,
+            /* [annotation][in] */ 
+            _In_  DWORD grfHLNF,
+            /* [annotation][unique][in] */ 
+            _In_  LPBC pbc,
+            /* [annotation][unique][in] */ 
+            _In_  IBindStatusCallback *pibsc,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pszTargetName,
+            /* [annotation][in] */ 
+            _In_  IUri *pUri,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pszLocation);
+        
+        END_INTERFACE
+    } ITargetFramePriv2Vtbl;
+
+    interface ITargetFramePriv2
+    {
+        CONST_VTBL struct ITargetFramePriv2Vtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ITargetFramePriv2_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ITargetFramePriv2_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ITargetFramePriv2_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ITargetFramePriv2_FindFrameDownwards(This,pszTargetName,dwFlags,ppunkTargetFrame)	\
+    ( (This)->lpVtbl -> FindFrameDownwards(This,pszTargetName,dwFlags,ppunkTargetFrame) ) 
+
+#define ITargetFramePriv2_FindFrameInContext(This,pszTargetName,punkContextFrame,dwFlags,ppunkTargetFrame)	\
+    ( (This)->lpVtbl -> FindFrameInContext(This,pszTargetName,punkContextFrame,dwFlags,ppunkTargetFrame) ) 
+
+#define ITargetFramePriv2_OnChildFrameActivate(This,pUnkChildFrame)	\
+    ( (This)->lpVtbl -> OnChildFrameActivate(This,pUnkChildFrame) ) 
+
+#define ITargetFramePriv2_OnChildFrameDeactivate(This,pUnkChildFrame)	\
+    ( (This)->lpVtbl -> OnChildFrameDeactivate(This,pUnkChildFrame) ) 
+
+#define ITargetFramePriv2_NavigateHack(This,grfHLNF,pbc,pibsc,pszTargetName,pszUrl,pszLocation)	\
+    ( (This)->lpVtbl -> NavigateHack(This,grfHLNF,pbc,pibsc,pszTargetName,pszUrl,pszLocation) ) 
+
+#define ITargetFramePriv2_FindBrowserByIndex(This,dwID,ppunkBrowser)	\
+    ( (This)->lpVtbl -> FindBrowserByIndex(This,dwID,ppunkBrowser) ) 
+
+
+#define ITargetFramePriv2_AggregatedNavigation2(This,grfHLNF,pbc,pibsc,pszTargetName,pUri,pszLocation)	\
+    ( (This)->lpVtbl -> AggregatedNavigation2(This,grfHLNF,pbc,pibsc,pszTargetName,pUri,pszLocation) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ITargetFramePriv2_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_htiface_0000_0004 */
+/* [local] */ 
+
+#endif
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+#pragma endregion
+
+
+extern RPC_IF_HANDLE __MIDL_itf_htiface_0000_0004_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_htiface_0000_0004_v0_0_s_ifspec;
+
+/* Additional Prototypes for ALL interfaces */
+
+/* end of Additional Prototypes */
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
+
+

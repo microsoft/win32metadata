@@ -33,15 +33,9 @@
       <file src="scripts\InstallTools.ps1" target="scripts"/>
       <file src="scripts\ConvertMidlAttributesToSalAnnotations.ps1" target="scripts"/>
       <file src="scripts\GetVcDirPath.ps1" target="scripts"/>
+      <file src="scripts\CreateRspsForFunctionPointerFixups.ps1" target="scripts"/>
+      <file src="scripts\CreateScraperRspForAutoTypes.ps1" target="scripts"/>
 
-      <file src="generation\scraper\intrinfix.h" target="tools\assets"/>
-      <file src="generation\scraper\sal.h" target="tools\assets"/>
-      <file src="generation\scraper\windows.fixed.h" target="tools\assets"/>
-      <file src="generation\scraper\header.txt" target="tools\assets"/>
-      <file src="generation\scraper\baseRemap.rsp" target="tools\assets"/>
-      <file src="generation\scraper\baseSettings.*" target="tools\assets"/>
-      <file src="generation\scraper\obj\x64\autoTypes.generated.rsp" target="tools\assets"/>
-      <file src="generation\scraper\obj\x64\functionPointerFixups.generated.rsp" target="tools\assets"/>
-      <file src="generation\scraper\ConstantsHeader.txt" target="tools\assets"/>
+      <file src="sources\GeneratorSdk\tools\assets\**" target="tools\assets\"/>
   </files>
 </package>

@@ -1,0 +1,8850 @@
+
+
+/* this ALWAYS GENERATED file contains the definitions for the interfaces */
+
+
+ /* File created by MIDL compiler version 8.01.0622 */
+/* @@MIDL_FILE_HEADING(  ) */
+
+
+
+/* verify that the <rpcndr.h> version is high enough to compile this file*/
+#ifndef __REQUIRED_RPCNDR_H_VERSION__
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#endif
+
+/* verify that the <rpcsal.h> version is high enough to compile this file*/
+#ifndef __REQUIRED_RPCSAL_H_VERSION__
+#define __REQUIRED_RPCSAL_H_VERSION__ 100
+#endif
+
+#include "rpc.h"
+#include "rpcndr.h"
+
+#ifndef __RPCNDR_H_VERSION__
+#error this stub requires an updated version of <rpcndr.h>
+#endif /* __RPCNDR_H_VERSION__ */
+
+#ifndef COM_NO_WINDOWS_H
+#include "windows.h"
+#include "ole2.h"
+#endif /*COM_NO_WINDOWS_H*/
+
+#ifndef __wbemdisp_h__
+#define __wbemdisp_h__
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1020)
+#pragma once
+#endif
+
+/* Forward Declarations */ 
+
+#ifndef __ISWbemServices_FWD_DEFINED__
+#define __ISWbemServices_FWD_DEFINED__
+typedef interface ISWbemServices ISWbemServices;
+
+#endif 	/* __ISWbemServices_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemLocator_FWD_DEFINED__
+#define __ISWbemLocator_FWD_DEFINED__
+typedef interface ISWbemLocator ISWbemLocator;
+
+#endif 	/* __ISWbemLocator_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemObject_FWD_DEFINED__
+#define __ISWbemObject_FWD_DEFINED__
+typedef interface ISWbemObject ISWbemObject;
+
+#endif 	/* __ISWbemObject_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemObjectSet_FWD_DEFINED__
+#define __ISWbemObjectSet_FWD_DEFINED__
+typedef interface ISWbemObjectSet ISWbemObjectSet;
+
+#endif 	/* __ISWbemObjectSet_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemNamedValue_FWD_DEFINED__
+#define __ISWbemNamedValue_FWD_DEFINED__
+typedef interface ISWbemNamedValue ISWbemNamedValue;
+
+#endif 	/* __ISWbemNamedValue_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemNamedValueSet_FWD_DEFINED__
+#define __ISWbemNamedValueSet_FWD_DEFINED__
+typedef interface ISWbemNamedValueSet ISWbemNamedValueSet;
+
+#endif 	/* __ISWbemNamedValueSet_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemQualifier_FWD_DEFINED__
+#define __ISWbemQualifier_FWD_DEFINED__
+typedef interface ISWbemQualifier ISWbemQualifier;
+
+#endif 	/* __ISWbemQualifier_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemQualifierSet_FWD_DEFINED__
+#define __ISWbemQualifierSet_FWD_DEFINED__
+typedef interface ISWbemQualifierSet ISWbemQualifierSet;
+
+#endif 	/* __ISWbemQualifierSet_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemProperty_FWD_DEFINED__
+#define __ISWbemProperty_FWD_DEFINED__
+typedef interface ISWbemProperty ISWbemProperty;
+
+#endif 	/* __ISWbemProperty_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemPropertySet_FWD_DEFINED__
+#define __ISWbemPropertySet_FWD_DEFINED__
+typedef interface ISWbemPropertySet ISWbemPropertySet;
+
+#endif 	/* __ISWbemPropertySet_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemMethod_FWD_DEFINED__
+#define __ISWbemMethod_FWD_DEFINED__
+typedef interface ISWbemMethod ISWbemMethod;
+
+#endif 	/* __ISWbemMethod_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemMethodSet_FWD_DEFINED__
+#define __ISWbemMethodSet_FWD_DEFINED__
+typedef interface ISWbemMethodSet ISWbemMethodSet;
+
+#endif 	/* __ISWbemMethodSet_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemEventSource_FWD_DEFINED__
+#define __ISWbemEventSource_FWD_DEFINED__
+typedef interface ISWbemEventSource ISWbemEventSource;
+
+#endif 	/* __ISWbemEventSource_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemObjectPath_FWD_DEFINED__
+#define __ISWbemObjectPath_FWD_DEFINED__
+typedef interface ISWbemObjectPath ISWbemObjectPath;
+
+#endif 	/* __ISWbemObjectPath_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemLastError_FWD_DEFINED__
+#define __ISWbemLastError_FWD_DEFINED__
+typedef interface ISWbemLastError ISWbemLastError;
+
+#endif 	/* __ISWbemLastError_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemSinkEvents_FWD_DEFINED__
+#define __ISWbemSinkEvents_FWD_DEFINED__
+typedef interface ISWbemSinkEvents ISWbemSinkEvents;
+
+#endif 	/* __ISWbemSinkEvents_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemSink_FWD_DEFINED__
+#define __ISWbemSink_FWD_DEFINED__
+typedef interface ISWbemSink ISWbemSink;
+
+#endif 	/* __ISWbemSink_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemSecurity_FWD_DEFINED__
+#define __ISWbemSecurity_FWD_DEFINED__
+typedef interface ISWbemSecurity ISWbemSecurity;
+
+#endif 	/* __ISWbemSecurity_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemPrivilege_FWD_DEFINED__
+#define __ISWbemPrivilege_FWD_DEFINED__
+typedef interface ISWbemPrivilege ISWbemPrivilege;
+
+#endif 	/* __ISWbemPrivilege_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemPrivilegeSet_FWD_DEFINED__
+#define __ISWbemPrivilegeSet_FWD_DEFINED__
+typedef interface ISWbemPrivilegeSet ISWbemPrivilegeSet;
+
+#endif 	/* __ISWbemPrivilegeSet_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemServicesEx_FWD_DEFINED__
+#define __ISWbemServicesEx_FWD_DEFINED__
+typedef interface ISWbemServicesEx ISWbemServicesEx;
+
+#endif 	/* __ISWbemServicesEx_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemObjectEx_FWD_DEFINED__
+#define __ISWbemObjectEx_FWD_DEFINED__
+typedef interface ISWbemObjectEx ISWbemObjectEx;
+
+#endif 	/* __ISWbemObjectEx_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemDateTime_FWD_DEFINED__
+#define __ISWbemDateTime_FWD_DEFINED__
+typedef interface ISWbemDateTime ISWbemDateTime;
+
+#endif 	/* __ISWbemDateTime_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemRefresher_FWD_DEFINED__
+#define __ISWbemRefresher_FWD_DEFINED__
+typedef interface ISWbemRefresher ISWbemRefresher;
+
+#endif 	/* __ISWbemRefresher_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemRefreshableItem_FWD_DEFINED__
+#define __ISWbemRefreshableItem_FWD_DEFINED__
+typedef interface ISWbemRefreshableItem ISWbemRefreshableItem;
+
+#endif 	/* __ISWbemRefreshableItem_FWD_DEFINED__ */
+
+
+#ifndef __SWbemLocator_FWD_DEFINED__
+#define __SWbemLocator_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class SWbemLocator SWbemLocator;
+#else
+typedef struct SWbemLocator SWbemLocator;
+#endif /* __cplusplus */
+
+#endif 	/* __SWbemLocator_FWD_DEFINED__ */
+
+
+#ifndef __SWbemNamedValueSet_FWD_DEFINED__
+#define __SWbemNamedValueSet_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class SWbemNamedValueSet SWbemNamedValueSet;
+#else
+typedef struct SWbemNamedValueSet SWbemNamedValueSet;
+#endif /* __cplusplus */
+
+#endif 	/* __SWbemNamedValueSet_FWD_DEFINED__ */
+
+
+#ifndef __SWbemObjectPath_FWD_DEFINED__
+#define __SWbemObjectPath_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class SWbemObjectPath SWbemObjectPath;
+#else
+typedef struct SWbemObjectPath SWbemObjectPath;
+#endif /* __cplusplus */
+
+#endif 	/* __SWbemObjectPath_FWD_DEFINED__ */
+
+
+#ifndef __SWbemLastError_FWD_DEFINED__
+#define __SWbemLastError_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class SWbemLastError SWbemLastError;
+#else
+typedef struct SWbemLastError SWbemLastError;
+#endif /* __cplusplus */
+
+#endif 	/* __SWbemLastError_FWD_DEFINED__ */
+
+
+#ifndef __SWbemSink_FWD_DEFINED__
+#define __SWbemSink_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class SWbemSink SWbemSink;
+#else
+typedef struct SWbemSink SWbemSink;
+#endif /* __cplusplus */
+
+#endif 	/* __SWbemSink_FWD_DEFINED__ */
+
+
+#ifndef __SWbemDateTime_FWD_DEFINED__
+#define __SWbemDateTime_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class SWbemDateTime SWbemDateTime;
+#else
+typedef struct SWbemDateTime SWbemDateTime;
+#endif /* __cplusplus */
+
+#endif 	/* __SWbemDateTime_FWD_DEFINED__ */
+
+
+#ifndef __SWbemRefresher_FWD_DEFINED__
+#define __SWbemRefresher_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class SWbemRefresher SWbemRefresher;
+#else
+typedef struct SWbemRefresher SWbemRefresher;
+#endif /* __cplusplus */
+
+#endif 	/* __SWbemRefresher_FWD_DEFINED__ */
+
+
+#ifndef __SWbemServices_FWD_DEFINED__
+#define __SWbemServices_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class SWbemServices SWbemServices;
+#else
+typedef struct SWbemServices SWbemServices;
+#endif /* __cplusplus */
+
+#endif 	/* __SWbemServices_FWD_DEFINED__ */
+
+
+#ifndef __SWbemServicesEx_FWD_DEFINED__
+#define __SWbemServicesEx_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class SWbemServicesEx SWbemServicesEx;
+#else
+typedef struct SWbemServicesEx SWbemServicesEx;
+#endif /* __cplusplus */
+
+#endif 	/* __SWbemServicesEx_FWD_DEFINED__ */
+
+
+#ifndef __SWbemObject_FWD_DEFINED__
+#define __SWbemObject_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class SWbemObject SWbemObject;
+#else
+typedef struct SWbemObject SWbemObject;
+#endif /* __cplusplus */
+
+#endif 	/* __SWbemObject_FWD_DEFINED__ */
+
+
+#ifndef __SWbemObjectEx_FWD_DEFINED__
+#define __SWbemObjectEx_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class SWbemObjectEx SWbemObjectEx;
+#else
+typedef struct SWbemObjectEx SWbemObjectEx;
+#endif /* __cplusplus */
+
+#endif 	/* __SWbemObjectEx_FWD_DEFINED__ */
+
+
+#ifndef __SWbemObjectSet_FWD_DEFINED__
+#define __SWbemObjectSet_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class SWbemObjectSet SWbemObjectSet;
+#else
+typedef struct SWbemObjectSet SWbemObjectSet;
+#endif /* __cplusplus */
+
+#endif 	/* __SWbemObjectSet_FWD_DEFINED__ */
+
+
+#ifndef __SWbemNamedValue_FWD_DEFINED__
+#define __SWbemNamedValue_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class SWbemNamedValue SWbemNamedValue;
+#else
+typedef struct SWbemNamedValue SWbemNamedValue;
+#endif /* __cplusplus */
+
+#endif 	/* __SWbemNamedValue_FWD_DEFINED__ */
+
+
+#ifndef __SWbemQualifier_FWD_DEFINED__
+#define __SWbemQualifier_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class SWbemQualifier SWbemQualifier;
+#else
+typedef struct SWbemQualifier SWbemQualifier;
+#endif /* __cplusplus */
+
+#endif 	/* __SWbemQualifier_FWD_DEFINED__ */
+
+
+#ifndef __SWbemQualifierSet_FWD_DEFINED__
+#define __SWbemQualifierSet_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class SWbemQualifierSet SWbemQualifierSet;
+#else
+typedef struct SWbemQualifierSet SWbemQualifierSet;
+#endif /* __cplusplus */
+
+#endif 	/* __SWbemQualifierSet_FWD_DEFINED__ */
+
+
+#ifndef __SWbemProperty_FWD_DEFINED__
+#define __SWbemProperty_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class SWbemProperty SWbemProperty;
+#else
+typedef struct SWbemProperty SWbemProperty;
+#endif /* __cplusplus */
+
+#endif 	/* __SWbemProperty_FWD_DEFINED__ */
+
+
+#ifndef __SWbemPropertySet_FWD_DEFINED__
+#define __SWbemPropertySet_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class SWbemPropertySet SWbemPropertySet;
+#else
+typedef struct SWbemPropertySet SWbemPropertySet;
+#endif /* __cplusplus */
+
+#endif 	/* __SWbemPropertySet_FWD_DEFINED__ */
+
+
+#ifndef __SWbemMethod_FWD_DEFINED__
+#define __SWbemMethod_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class SWbemMethod SWbemMethod;
+#else
+typedef struct SWbemMethod SWbemMethod;
+#endif /* __cplusplus */
+
+#endif 	/* __SWbemMethod_FWD_DEFINED__ */
+
+
+#ifndef __SWbemMethodSet_FWD_DEFINED__
+#define __SWbemMethodSet_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class SWbemMethodSet SWbemMethodSet;
+#else
+typedef struct SWbemMethodSet SWbemMethodSet;
+#endif /* __cplusplus */
+
+#endif 	/* __SWbemMethodSet_FWD_DEFINED__ */
+
+
+#ifndef __SWbemEventSource_FWD_DEFINED__
+#define __SWbemEventSource_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class SWbemEventSource SWbemEventSource;
+#else
+typedef struct SWbemEventSource SWbemEventSource;
+#endif /* __cplusplus */
+
+#endif 	/* __SWbemEventSource_FWD_DEFINED__ */
+
+
+#ifndef __SWbemSecurity_FWD_DEFINED__
+#define __SWbemSecurity_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class SWbemSecurity SWbemSecurity;
+#else
+typedef struct SWbemSecurity SWbemSecurity;
+#endif /* __cplusplus */
+
+#endif 	/* __SWbemSecurity_FWD_DEFINED__ */
+
+
+#ifndef __SWbemPrivilege_FWD_DEFINED__
+#define __SWbemPrivilege_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class SWbemPrivilege SWbemPrivilege;
+#else
+typedef struct SWbemPrivilege SWbemPrivilege;
+#endif /* __cplusplus */
+
+#endif 	/* __SWbemPrivilege_FWD_DEFINED__ */
+
+
+#ifndef __SWbemPrivilegeSet_FWD_DEFINED__
+#define __SWbemPrivilegeSet_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class SWbemPrivilegeSet SWbemPrivilegeSet;
+#else
+typedef struct SWbemPrivilegeSet SWbemPrivilegeSet;
+#endif /* __cplusplus */
+
+#endif 	/* __SWbemPrivilegeSet_FWD_DEFINED__ */
+
+
+#ifndef __SWbemRefreshableItem_FWD_DEFINED__
+#define __SWbemRefreshableItem_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class SWbemRefreshableItem SWbemRefreshableItem;
+#else
+typedef struct SWbemRefreshableItem SWbemRefreshableItem;
+#endif /* __cplusplus */
+
+#endif 	/* __SWbemRefreshableItem_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemLocator_FWD_DEFINED__
+#define __ISWbemLocator_FWD_DEFINED__
+typedef interface ISWbemLocator ISWbemLocator;
+
+#endif 	/* __ISWbemLocator_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemServices_FWD_DEFINED__
+#define __ISWbemServices_FWD_DEFINED__
+typedef interface ISWbemServices ISWbemServices;
+
+#endif 	/* __ISWbemServices_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemServicesEx_FWD_DEFINED__
+#define __ISWbemServicesEx_FWD_DEFINED__
+typedef interface ISWbemServicesEx ISWbemServicesEx;
+
+#endif 	/* __ISWbemServicesEx_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemObject_FWD_DEFINED__
+#define __ISWbemObject_FWD_DEFINED__
+typedef interface ISWbemObject ISWbemObject;
+
+#endif 	/* __ISWbemObject_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemObjectEx_FWD_DEFINED__
+#define __ISWbemObjectEx_FWD_DEFINED__
+typedef interface ISWbemObjectEx ISWbemObjectEx;
+
+#endif 	/* __ISWbemObjectEx_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemLastError_FWD_DEFINED__
+#define __ISWbemLastError_FWD_DEFINED__
+typedef interface ISWbemLastError ISWbemLastError;
+
+#endif 	/* __ISWbemLastError_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemObjectSet_FWD_DEFINED__
+#define __ISWbemObjectSet_FWD_DEFINED__
+typedef interface ISWbemObjectSet ISWbemObjectSet;
+
+#endif 	/* __ISWbemObjectSet_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemNamedValueSet_FWD_DEFINED__
+#define __ISWbemNamedValueSet_FWD_DEFINED__
+typedef interface ISWbemNamedValueSet ISWbemNamedValueSet;
+
+#endif 	/* __ISWbemNamedValueSet_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemNamedValue_FWD_DEFINED__
+#define __ISWbemNamedValue_FWD_DEFINED__
+typedef interface ISWbemNamedValue ISWbemNamedValue;
+
+#endif 	/* __ISWbemNamedValue_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemObjectPath_FWD_DEFINED__
+#define __ISWbemObjectPath_FWD_DEFINED__
+typedef interface ISWbemObjectPath ISWbemObjectPath;
+
+#endif 	/* __ISWbemObjectPath_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemProperty_FWD_DEFINED__
+#define __ISWbemProperty_FWD_DEFINED__
+typedef interface ISWbemProperty ISWbemProperty;
+
+#endif 	/* __ISWbemProperty_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemPropertySet_FWD_DEFINED__
+#define __ISWbemPropertySet_FWD_DEFINED__
+typedef interface ISWbemPropertySet ISWbemPropertySet;
+
+#endif 	/* __ISWbemPropertySet_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemQualifier_FWD_DEFINED__
+#define __ISWbemQualifier_FWD_DEFINED__
+typedef interface ISWbemQualifier ISWbemQualifier;
+
+#endif 	/* __ISWbemQualifier_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemQualifierSet_FWD_DEFINED__
+#define __ISWbemQualifierSet_FWD_DEFINED__
+typedef interface ISWbemQualifierSet ISWbemQualifierSet;
+
+#endif 	/* __ISWbemQualifierSet_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemMethod_FWD_DEFINED__
+#define __ISWbemMethod_FWD_DEFINED__
+typedef interface ISWbemMethod ISWbemMethod;
+
+#endif 	/* __ISWbemMethod_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemMethodSet_FWD_DEFINED__
+#define __ISWbemMethodSet_FWD_DEFINED__
+typedef interface ISWbemMethodSet ISWbemMethodSet;
+
+#endif 	/* __ISWbemMethodSet_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemSink_FWD_DEFINED__
+#define __ISWbemSink_FWD_DEFINED__
+typedef interface ISWbemSink ISWbemSink;
+
+#endif 	/* __ISWbemSink_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemSinkEvents_FWD_DEFINED__
+#define __ISWbemSinkEvents_FWD_DEFINED__
+typedef interface ISWbemSinkEvents ISWbemSinkEvents;
+
+#endif 	/* __ISWbemSinkEvents_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemEventSource_FWD_DEFINED__
+#define __ISWbemEventSource_FWD_DEFINED__
+typedef interface ISWbemEventSource ISWbemEventSource;
+
+#endif 	/* __ISWbemEventSource_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemSecurity_FWD_DEFINED__
+#define __ISWbemSecurity_FWD_DEFINED__
+typedef interface ISWbemSecurity ISWbemSecurity;
+
+#endif 	/* __ISWbemSecurity_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemPrivilege_FWD_DEFINED__
+#define __ISWbemPrivilege_FWD_DEFINED__
+typedef interface ISWbemPrivilege ISWbemPrivilege;
+
+#endif 	/* __ISWbemPrivilege_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemPrivilegeSet_FWD_DEFINED__
+#define __ISWbemPrivilegeSet_FWD_DEFINED__
+typedef interface ISWbemPrivilegeSet ISWbemPrivilegeSet;
+
+#endif 	/* __ISWbemPrivilegeSet_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemDateTime_FWD_DEFINED__
+#define __ISWbemDateTime_FWD_DEFINED__
+typedef interface ISWbemDateTime ISWbemDateTime;
+
+#endif 	/* __ISWbemDateTime_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemRefreshableItem_FWD_DEFINED__
+#define __ISWbemRefreshableItem_FWD_DEFINED__
+typedef interface ISWbemRefreshableItem ISWbemRefreshableItem;
+
+#endif 	/* __ISWbemRefreshableItem_FWD_DEFINED__ */
+
+
+#ifndef __ISWbemRefresher_FWD_DEFINED__
+#define __ISWbemRefresher_FWD_DEFINED__
+typedef interface ISWbemRefresher ISWbemRefresher;
+
+#endif 	/* __ISWbemRefresher_FWD_DEFINED__ */
+
+
+/* header files for imported files */
+#include "dispex.h"
+
+#ifdef __cplusplus
+extern "C"{
+#endif 
+
+
+/* interface __MIDL_itf_wbemdisp_0000_0000 */
+/* [local] */ 
+
+/*******************************************************************************/
+/*                                                                             */
+/*    Copyright (c) Microsoft Corporation.  All rights reserved.               */
+/*                                                                             */
+/*    WBEM IDispatch Compatible Access for Automation                          */
+/*                                                                             */
+/*******************************************************************************/
+#include <winapifamily.h>
+#pragma region Desktop Family or WinMgmt Package
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_WINMGMT)
+
+
+extern RPC_IF_HANDLE __MIDL_itf_wbemdisp_0000_0000_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_wbemdisp_0000_0000_v0_0_s_ifspec;
+
+
+#ifndef __WbemScripting_LIBRARY_DEFINED__
+#define __WbemScripting_LIBRARY_DEFINED__
+
+/* library WbemScripting */
+/* [helpstring][version][lcid][uuid] */ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+typedef /* [helpstring][uuid][v1_enum] */  DECLSPEC_UUID("4A249B72-FC9A-11d1-8B1E-00600806D9B6") 
+enum WbemChangeFlagEnum
+    {
+        wbemChangeFlagCreateOrUpdate	= 0,
+        wbemChangeFlagUpdateOnly	= 0x1,
+        wbemChangeFlagCreateOnly	= 0x2,
+        wbemChangeFlagUpdateCompatible	= 0,
+        wbemChangeFlagUpdateSafeMode	= 0x20,
+        wbemChangeFlagUpdateForceMode	= 0x40,
+        wbemChangeFlagStrongValidation	= 0x80,
+        wbemChangeFlagAdvisory	= 0x10000
+    } 	WbemChangeFlagEnum;
+
+typedef /* [helpstring][uuid][v1_enum] */  DECLSPEC_UUID("4A249B73-FC9A-11d1-8B1E-00600806D9B6") 
+enum WbemFlagEnum
+    {
+        wbemFlagReturnImmediately	= 0x10,
+        wbemFlagReturnWhenComplete	= 0,
+        wbemFlagBidirectional	= 0,
+        wbemFlagForwardOnly	= 0x20,
+        wbemFlagNoErrorObject	= 0x40,
+        wbemFlagReturnErrorObject	= 0,
+        wbemFlagSendStatus	= 0x80,
+        wbemFlagDontSendStatus	= 0,
+        wbemFlagEnsureLocatable	= 0x100,
+        wbemFlagDirectRead	= 0x200,
+        wbemFlagSendOnlySelected	= 0,
+        wbemFlagUseAmendedQualifiers	= 0x20000,
+        wbemFlagGetDefault	= 0,
+        wbemFlagSpawnInstance	= 0x1,
+        wbemFlagUseCurrentTime	= 0x1
+    } 	WbemFlagEnum;
+
+typedef /* [helpstring][uuid][v1_enum] */  DECLSPEC_UUID("4A249B76-FC9A-11d1-8B1E-00600806D9B6") 
+enum WbemQueryFlagEnum
+    {
+        wbemQueryFlagDeep	= 0,
+        wbemQueryFlagShallow	= 1,
+        wbemQueryFlagPrototype	= 2
+    } 	WbemQueryFlagEnum;
+
+typedef /* [helpstring][uuid][v1_enum] */  DECLSPEC_UUID("4A249B78-FC9A-11d1-8B1E-00600806D9B6") 
+enum WbemTextFlagEnum
+    {
+        wbemTextFlagNoFlavors	= 0x1
+    } 	WbemTextFlagEnum;
+
+typedef /* [helpstring][uuid][v1_enum] */  DECLSPEC_UUID("BF078C2A-07D9-11d2-8B21-00600806D9B6") 
+enum WbemTimeout
+    {
+        wbemTimeoutInfinite	= 0xffffffff
+    } 	WbemTimeout;
+
+typedef /* [helpstring][uuid][v1_enum] */  DECLSPEC_UUID("4A249B79-FC9A-11d1-8B1E-00600806D9B6") 
+enum WbemComparisonFlagEnum
+    {
+        wbemComparisonFlagIncludeAll	= 0,
+        wbemComparisonFlagIgnoreQualifiers	= 0x1,
+        wbemComparisonFlagIgnoreObjectSource	= 0x2,
+        wbemComparisonFlagIgnoreDefaultValues	= 0x4,
+        wbemComparisonFlagIgnoreClass	= 0x8,
+        wbemComparisonFlagIgnoreCase	= 0x10,
+        wbemComparisonFlagIgnoreFlavor	= 0x20
+    } 	WbemComparisonFlagEnum;
+
+typedef /* [helpstring][uuid][v1_enum] */  DECLSPEC_UUID("4A249B7B-FC9A-11d1-8B1E-00600806D9B6") 
+enum WbemCimtypeEnum
+    {
+        wbemCimtypeSint8	= 16,
+        wbemCimtypeUint8	= 17,
+        wbemCimtypeSint16	= 2,
+        wbemCimtypeUint16	= 18,
+        wbemCimtypeSint32	= 3,
+        wbemCimtypeUint32	= 19,
+        wbemCimtypeSint64	= 20,
+        wbemCimtypeUint64	= 21,
+        wbemCimtypeReal32	= 4,
+        wbemCimtypeReal64	= 5,
+        wbemCimtypeBoolean	= 11,
+        wbemCimtypeString	= 8,
+        wbemCimtypeDatetime	= 101,
+        wbemCimtypeReference	= 102,
+        wbemCimtypeChar16	= 103,
+        wbemCimtypeObject	= 13
+    } 	WbemCimtypeEnum;
+
+typedef /* [helpstring][uuid][v1_enum] */  DECLSPEC_UUID("4A249B7C-FC9A-11d1-8B1E-00600806D9B6") 
+enum WbemErrorEnum
+    {
+        wbemNoErr	= 0,
+        wbemErrFailed	= 0x80041001,
+        wbemErrNotFound	= 0x80041002,
+        wbemErrAccessDenied	= 0x80041003,
+        wbemErrProviderFailure	= 0x80041004,
+        wbemErrTypeMismatch	= 0x80041005,
+        wbemErrOutOfMemory	= 0x80041006,
+        wbemErrInvalidContext	= 0x80041007,
+        wbemErrInvalidParameter	= 0x80041008,
+        wbemErrNotAvailable	= 0x80041009,
+        wbemErrCriticalError	= 0x8004100a,
+        wbemErrInvalidStream	= 0x8004100b,
+        wbemErrNotSupported	= 0x8004100c,
+        wbemErrInvalidSuperclass	= 0x8004100d,
+        wbemErrInvalidNamespace	= 0x8004100e,
+        wbemErrInvalidObject	= 0x8004100f,
+        wbemErrInvalidClass	= 0x80041010,
+        wbemErrProviderNotFound	= 0x80041011,
+        wbemErrInvalidProviderRegistration	= 0x80041012,
+        wbemErrProviderLoadFailure	= 0x80041013,
+        wbemErrInitializationFailure	= 0x80041014,
+        wbemErrTransportFailure	= 0x80041015,
+        wbemErrInvalidOperation	= 0x80041016,
+        wbemErrInvalidQuery	= 0x80041017,
+        wbemErrInvalidQueryType	= 0x80041018,
+        wbemErrAlreadyExists	= 0x80041019,
+        wbemErrOverrideNotAllowed	= 0x8004101a,
+        wbemErrPropagatedQualifier	= 0x8004101b,
+        wbemErrPropagatedProperty	= 0x8004101c,
+        wbemErrUnexpected	= 0x8004101d,
+        wbemErrIllegalOperation	= 0x8004101e,
+        wbemErrCannotBeKey	= 0x8004101f,
+        wbemErrIncompleteClass	= 0x80041020,
+        wbemErrInvalidSyntax	= 0x80041021,
+        wbemErrNondecoratedObject	= 0x80041022,
+        wbemErrReadOnly	= 0x80041023,
+        wbemErrProviderNotCapable	= 0x80041024,
+        wbemErrClassHasChildren	= 0x80041025,
+        wbemErrClassHasInstances	= 0x80041026,
+        wbemErrQueryNotImplemented	= 0x80041027,
+        wbemErrIllegalNull	= 0x80041028,
+        wbemErrInvalidQualifierType	= 0x80041029,
+        wbemErrInvalidPropertyType	= 0x8004102a,
+        wbemErrValueOutOfRange	= 0x8004102b,
+        wbemErrCannotBeSingleton	= 0x8004102c,
+        wbemErrInvalidCimType	= 0x8004102d,
+        wbemErrInvalidMethod	= 0x8004102e,
+        wbemErrInvalidMethodParameters	= 0x8004102f,
+        wbemErrSystemProperty	= 0x80041030,
+        wbemErrInvalidProperty	= 0x80041031,
+        wbemErrCallCancelled	= 0x80041032,
+        wbemErrShuttingDown	= 0x80041033,
+        wbemErrPropagatedMethod	= 0x80041034,
+        wbemErrUnsupportedParameter	= 0x80041035,
+        wbemErrMissingParameter	= 0x80041036,
+        wbemErrInvalidParameterId	= 0x80041037,
+        wbemErrNonConsecutiveParameterIds	= 0x80041038,
+        wbemErrParameterIdOnRetval	= 0x80041039,
+        wbemErrInvalidObjectPath	= 0x8004103a,
+        wbemErrOutOfDiskSpace	= 0x8004103b,
+        wbemErrBufferTooSmall	= 0x8004103c,
+        wbemErrUnsupportedPutExtension	= 0x8004103d,
+        wbemErrUnknownObjectType	= 0x8004103e,
+        wbemErrUnknownPacketType	= 0x8004103f,
+        wbemErrMarshalVersionMismatch	= 0x80041040,
+        wbemErrMarshalInvalidSignature	= 0x80041041,
+        wbemErrInvalidQualifier	= 0x80041042,
+        wbemErrInvalidDuplicateParameter	= 0x80041043,
+        wbemErrTooMuchData	= 0x80041044,
+        wbemErrServerTooBusy	= 0x80041045,
+        wbemErrInvalidFlavor	= 0x80041046,
+        wbemErrCircularReference	= 0x80041047,
+        wbemErrUnsupportedClassUpdate	= 0x80041048,
+        wbemErrCannotChangeKeyInheritance	= 0x80041049,
+        wbemErrCannotChangeIndexInheritance	= 0x80041050,
+        wbemErrTooManyProperties	= 0x80041051,
+        wbemErrUpdateTypeMismatch	= 0x80041052,
+        wbemErrUpdateOverrideNotAllowed	= 0x80041053,
+        wbemErrUpdatePropagatedMethod	= 0x80041054,
+        wbemErrMethodNotImplemented	= 0x80041055,
+        wbemErrMethodDisabled	= 0x80041056,
+        wbemErrRefresherBusy	= 0x80041057,
+        wbemErrUnparsableQuery	= 0x80041058,
+        wbemErrNotEventClass	= 0x80041059,
+        wbemErrMissingGroupWithin	= 0x8004105a,
+        wbemErrMissingAggregationList	= 0x8004105b,
+        wbemErrPropertyNotAnObject	= 0x8004105c,
+        wbemErrAggregatingByObject	= 0x8004105d,
+        wbemErrUninterpretableProviderQuery	= 0x8004105f,
+        wbemErrBackupRestoreWinmgmtRunning	= 0x80041060,
+        wbemErrQueueOverflow	= 0x80041061,
+        wbemErrPrivilegeNotHeld	= 0x80041062,
+        wbemErrInvalidOperator	= 0x80041063,
+        wbemErrLocalCredentials	= 0x80041064,
+        wbemErrCannotBeAbstract	= 0x80041065,
+        wbemErrAmendedObject	= 0x80041066,
+        wbemErrClientTooSlow	= 0x80041067,
+        wbemErrNullSecurityDescriptor	= 0x80041068,
+        wbemErrTimeout	= 0x80041069,
+        wbemErrInvalidAssociation	= 0x8004106a,
+        wbemErrAmbiguousOperation	= 0x8004106b,
+        wbemErrQuotaViolation	= 0x8004106c,
+        wbemErrTransactionConflict	= 0x8004106d,
+        wbemErrForcedRollback	= 0x8004106e,
+        wbemErrUnsupportedLocale	= 0x8004106f,
+        wbemErrHandleOutOfDate	= 0x80041070,
+        wbemErrConnectionFailed	= 0x80041071,
+        wbemErrInvalidHandleRequest	= 0x80041072,
+        wbemErrPropertyNameTooWide	= 0x80041073,
+        wbemErrClassNameTooWide	= 0x80041074,
+        wbemErrMethodNameTooWide	= 0x80041075,
+        wbemErrQualifierNameTooWide	= 0x80041076,
+        wbemErrRerunCommand	= 0x80041077,
+        wbemErrDatabaseVerMismatch	= 0x80041078,
+        wbemErrVetoPut	= 0x80041079,
+        wbemErrVetoDelete	= 0x8004107a,
+        wbemErrInvalidLocale	= 0x80041080,
+        wbemErrProviderSuspended	= 0x80041081,
+        wbemErrSynchronizationRequired	= 0x80041082,
+        wbemErrNoSchema	= 0x80041083,
+        wbemErrProviderAlreadyRegistered	= 0x80041084,
+        wbemErrProviderNotRegistered	= 0x80041085,
+        wbemErrFatalTransportError	= 0x80041086,
+        wbemErrEncryptedConnectionRequired	= 0x80041087,
+        wbemErrRegistrationTooBroad	= 0x80042001,
+        wbemErrRegistrationTooPrecise	= 0x80042002,
+        wbemErrTimedout	= 0x80043001,
+        wbemErrResetToDefault	= 0x80043002
+    } 	WbemErrorEnum;
+
+typedef /* [helpstring][uuid][v1_enum] */  DECLSPEC_UUID("B54D66E7-2287-11d2-8B33-00600806D9B6") 
+enum WbemAuthenticationLevelEnum
+    {
+        wbemAuthenticationLevelDefault	= 0,
+        wbemAuthenticationLevelNone	= 1,
+        wbemAuthenticationLevelConnect	= 2,
+        wbemAuthenticationLevelCall	= 3,
+        wbemAuthenticationLevelPkt	= 4,
+        wbemAuthenticationLevelPktIntegrity	= 5,
+        wbemAuthenticationLevelPktPrivacy	= 6
+    } 	WbemAuthenticationLevelEnum;
+
+typedef /* [helpstring][uuid][v1_enum] */  DECLSPEC_UUID("B54D66E8-2287-11d2-8B33-00600806D9B6") 
+enum WbemImpersonationLevelEnum
+    {
+        wbemImpersonationLevelAnonymous	= 1,
+        wbemImpersonationLevelIdentify	= 2,
+        wbemImpersonationLevelImpersonate	= 3,
+        wbemImpersonationLevelDelegate	= 4
+    } 	WbemImpersonationLevelEnum;
+
+typedef /* [helpstring][uuid][v1_enum] */  DECLSPEC_UUID("176D2F70-5AF3-11d2-8B4A-00600806D9B6") 
+enum WbemPrivilegeEnum
+    {
+        wbemPrivilegeCreateToken	= 1,
+        wbemPrivilegePrimaryToken	= 2,
+        wbemPrivilegeLockMemory	= 3,
+        wbemPrivilegeIncreaseQuota	= 4,
+        wbemPrivilegeMachineAccount	= 5,
+        wbemPrivilegeTcb	= 6,
+        wbemPrivilegeSecurity	= 7,
+        wbemPrivilegeTakeOwnership	= 8,
+        wbemPrivilegeLoadDriver	= 9,
+        wbemPrivilegeSystemProfile	= 10,
+        wbemPrivilegeSystemtime	= 11,
+        wbemPrivilegeProfileSingleProcess	= 12,
+        wbemPrivilegeIncreaseBasePriority	= 13,
+        wbemPrivilegeCreatePagefile	= 14,
+        wbemPrivilegeCreatePermanent	= 15,
+        wbemPrivilegeBackup	= 16,
+        wbemPrivilegeRestore	= 17,
+        wbemPrivilegeShutdown	= 18,
+        wbemPrivilegeDebug	= 19,
+        wbemPrivilegeAudit	= 20,
+        wbemPrivilegeSystemEnvironment	= 21,
+        wbemPrivilegeChangeNotify	= 22,
+        wbemPrivilegeRemoteShutdown	= 23,
+        wbemPrivilegeUndock	= 24,
+        wbemPrivilegeSyncAgent	= 25,
+        wbemPrivilegeEnableDelegation	= 26,
+        wbemPrivilegeManageVolume	= 27
+    } 	WbemPrivilegeEnum;
+
+typedef /* [helpstring][uuid][v1_enum] */  DECLSPEC_UUID("09FF1992-EA0E-11d3-B391-00105A1F473A") 
+enum WbemObjectTextFormatEnum
+    {
+        wbemObjectTextFormatCIMDTD20	= 1,
+        wbemObjectTextFormatWMIDTD20	= 2
+    } 	WbemObjectTextFormatEnum;
+
+typedef /* [helpstring][v1_enum] */ 
+enum WbemConnectOptionsEnum
+    {
+        wbemConnectFlagUseMaxWait	= 0x80
+    } 	WbemConnectOptionsEnum;
+
+
+EXTERN_C const IID LIBID_WbemScripting;
+
+#ifndef __ISWbemServices_INTERFACE_DEFINED__
+#define __ISWbemServices_INTERFACE_DEFINED__
+
+/* interface ISWbemServices */
+/* [helpstring][hidden][unique][dual][oleautomation][uuid][object][local] */ 
+
+
+EXTERN_C const IID IID_ISWbemServices;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("76A6415C-CB41-11d1-8B02-00600806D9B6")
+    ISWbemServices : public IDispatch
+    {
+    public:
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Get( 
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetAsync( 
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strObjectPath = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Delete( 
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DeleteAsync( 
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE InstancesOf( 
+            /* [annotation][in] */ 
+            _In_  BSTR strClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE InstancesOfAsync( 
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SubclassesOf( 
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strSuperclass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SubclassesOfAsync( 
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strSuperclass = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = wbemQueryFlagDeep,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ExecQuery( 
+            /* [annotation][in] */ 
+            _In_  BSTR strQuery,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strQueryLanguage,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ExecQueryAsync( 
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strQuery,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strQueryLanguage = (BSTR)L"WQL",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long lFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AssociatorsOf( 
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAssocClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredAssocQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AssociatorsOfAsync( 
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAssocClass = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultRole = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly = FALSE,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly = FALSE,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredAssocQualifier = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ReferencesTo( 
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ReferencesToAsync( 
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly = FALSE,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly = FALSE,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ExecNotificationQuery( 
+            /* [annotation][in] */ 
+            _In_  BSTR strQuery,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strQueryLanguage,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemEventSource **objWbemEventSource) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ExecNotificationQueryAsync( 
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strQuery,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strQueryLanguage = (BSTR)L"WQL",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ExecMethod( 
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][in] */ 
+            _In_  BSTR strMethodName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemInParameters,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemOutParameters) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ExecMethodAsync( 
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][in] */ 
+            _In_  BSTR strMethodName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemInParameters = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Security_( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemSecurity **objWbemSecurity) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ISWbemServicesVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISWbemServices * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISWbemServices * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISWbemServices * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISWbemServices * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISWbemServices * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISWbemServices * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISWbemServices * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Get )( 
+            ISWbemServices * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetAsync )( 
+            ISWbemServices * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
+            ISWbemServices * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteAsync )( 
+            ISWbemServices * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InstancesOf )( 
+            ISWbemServices * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InstancesOfAsync )( 
+            ISWbemServices * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SubclassesOf )( 
+            ISWbemServices * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strSuperclass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SubclassesOfAsync )( 
+            ISWbemServices * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strSuperclass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecQuery )( 
+            ISWbemServices * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strQuery,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strQueryLanguage,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecQueryAsync )( 
+            ISWbemServices * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strQuery,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strQueryLanguage,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long lFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AssociatorsOf )( 
+            ISWbemServices * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAssocClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredAssocQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AssociatorsOfAsync )( 
+            ISWbemServices * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAssocClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredAssocQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ReferencesTo )( 
+            ISWbemServices * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ReferencesToAsync )( 
+            ISWbemServices * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecNotificationQuery )( 
+            ISWbemServices * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strQuery,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strQueryLanguage,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemEventSource **objWbemEventSource);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecNotificationQueryAsync )( 
+            ISWbemServices * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strQuery,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strQueryLanguage,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecMethod )( 
+            ISWbemServices * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][in] */ 
+            _In_  BSTR strMethodName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemInParameters,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemOutParameters);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecMethodAsync )( 
+            ISWbemServices * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][in] */ 
+            _In_  BSTR strMethodName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemInParameters,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Security_ )( 
+            ISWbemServices * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemSecurity **objWbemSecurity);
+        
+        END_INTERFACE
+    } ISWbemServicesVtbl;
+
+    interface ISWbemServices
+    {
+        CONST_VTBL struct ISWbemServicesVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISWbemServices_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISWbemServices_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISWbemServices_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ISWbemServices_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define ISWbemServices_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define ISWbemServices_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define ISWbemServices_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define ISWbemServices_Get(This,strObjectPath,iFlags,objWbemNamedValueSet,objWbemObject)	\
+    ( (This)->lpVtbl -> Get(This,strObjectPath,iFlags,objWbemNamedValueSet,objWbemObject) ) 
+
+#define ISWbemServices_GetAsync(This,objWbemSink,strObjectPath,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> GetAsync(This,objWbemSink,strObjectPath,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemServices_Delete(This,strObjectPath,iFlags,objWbemNamedValueSet)	\
+    ( (This)->lpVtbl -> Delete(This,strObjectPath,iFlags,objWbemNamedValueSet) ) 
+
+#define ISWbemServices_DeleteAsync(This,objWbemSink,strObjectPath,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> DeleteAsync(This,objWbemSink,strObjectPath,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemServices_InstancesOf(This,strClass,iFlags,objWbemNamedValueSet,objWbemObjectSet)	\
+    ( (This)->lpVtbl -> InstancesOf(This,strClass,iFlags,objWbemNamedValueSet,objWbemObjectSet) ) 
+
+#define ISWbemServices_InstancesOfAsync(This,objWbemSink,strClass,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> InstancesOfAsync(This,objWbemSink,strClass,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemServices_SubclassesOf(This,strSuperclass,iFlags,objWbemNamedValueSet,objWbemObjectSet)	\
+    ( (This)->lpVtbl -> SubclassesOf(This,strSuperclass,iFlags,objWbemNamedValueSet,objWbemObjectSet) ) 
+
+#define ISWbemServices_SubclassesOfAsync(This,objWbemSink,strSuperclass,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> SubclassesOfAsync(This,objWbemSink,strSuperclass,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemServices_ExecQuery(This,strQuery,strQueryLanguage,iFlags,objWbemNamedValueSet,objWbemObjectSet)	\
+    ( (This)->lpVtbl -> ExecQuery(This,strQuery,strQueryLanguage,iFlags,objWbemNamedValueSet,objWbemObjectSet) ) 
+
+#define ISWbemServices_ExecQueryAsync(This,objWbemSink,strQuery,strQueryLanguage,lFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> ExecQueryAsync(This,objWbemSink,strQuery,strQueryLanguage,lFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemServices_AssociatorsOf(This,strObjectPath,strAssocClass,strResultClass,strResultRole,strRole,bClassesOnly,bSchemaOnly,strRequiredAssocQualifier,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemObjectSet)	\
+    ( (This)->lpVtbl -> AssociatorsOf(This,strObjectPath,strAssocClass,strResultClass,strResultRole,strRole,bClassesOnly,bSchemaOnly,strRequiredAssocQualifier,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemObjectSet) ) 
+
+#define ISWbemServices_AssociatorsOfAsync(This,objWbemSink,strObjectPath,strAssocClass,strResultClass,strResultRole,strRole,bClassesOnly,bSchemaOnly,strRequiredAssocQualifier,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> AssociatorsOfAsync(This,objWbemSink,strObjectPath,strAssocClass,strResultClass,strResultRole,strRole,bClassesOnly,bSchemaOnly,strRequiredAssocQualifier,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemServices_ReferencesTo(This,strObjectPath,strResultClass,strRole,bClassesOnly,bSchemaOnly,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemObjectSet)	\
+    ( (This)->lpVtbl -> ReferencesTo(This,strObjectPath,strResultClass,strRole,bClassesOnly,bSchemaOnly,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemObjectSet) ) 
+
+#define ISWbemServices_ReferencesToAsync(This,objWbemSink,strObjectPath,strResultClass,strRole,bClassesOnly,bSchemaOnly,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> ReferencesToAsync(This,objWbemSink,strObjectPath,strResultClass,strRole,bClassesOnly,bSchemaOnly,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemServices_ExecNotificationQuery(This,strQuery,strQueryLanguage,iFlags,objWbemNamedValueSet,objWbemEventSource)	\
+    ( (This)->lpVtbl -> ExecNotificationQuery(This,strQuery,strQueryLanguage,iFlags,objWbemNamedValueSet,objWbemEventSource) ) 
+
+#define ISWbemServices_ExecNotificationQueryAsync(This,objWbemSink,strQuery,strQueryLanguage,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> ExecNotificationQueryAsync(This,objWbemSink,strQuery,strQueryLanguage,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemServices_ExecMethod(This,strObjectPath,strMethodName,objWbemInParameters,iFlags,objWbemNamedValueSet,objWbemOutParameters)	\
+    ( (This)->lpVtbl -> ExecMethod(This,strObjectPath,strMethodName,objWbemInParameters,iFlags,objWbemNamedValueSet,objWbemOutParameters) ) 
+
+#define ISWbemServices_ExecMethodAsync(This,objWbemSink,strObjectPath,strMethodName,objWbemInParameters,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> ExecMethodAsync(This,objWbemSink,strObjectPath,strMethodName,objWbemInParameters,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemServices_get_Security_(This,objWbemSecurity)	\
+    ( (This)->lpVtbl -> get_Security_(This,objWbemSecurity) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISWbemServices_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISWbemLocator_INTERFACE_DEFINED__
+#define __ISWbemLocator_INTERFACE_DEFINED__
+
+/* interface ISWbemLocator */
+/* [helpstring][unique][oleautomation][hidden][dual][uuid][local][object] */ 
+
+
+EXTERN_C const IID IID_ISWbemLocator;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("76A6415B-CB41-11d1-8B02-00600806D9B6")
+    ISWbemLocator : public IDispatch
+    {
+    public:
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ConnectServer( 
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strServer,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strNamespace,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strUser,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strPassword,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strLocale,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAuthority,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iSecurityFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemServices **objWbemServices) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Security_( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemSecurity **objWbemSecurity) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ISWbemLocatorVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISWbemLocator * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISWbemLocator * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISWbemLocator * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISWbemLocator * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISWbemLocator * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISWbemLocator * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISWbemLocator * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ConnectServer )( 
+            ISWbemLocator * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strServer,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strNamespace,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strUser,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strPassword,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strLocale,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAuthority,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iSecurityFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemServices **objWbemServices);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Security_ )( 
+            ISWbemLocator * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemSecurity **objWbemSecurity);
+        
+        END_INTERFACE
+    } ISWbemLocatorVtbl;
+
+    interface ISWbemLocator
+    {
+        CONST_VTBL struct ISWbemLocatorVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISWbemLocator_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISWbemLocator_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISWbemLocator_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ISWbemLocator_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define ISWbemLocator_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define ISWbemLocator_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define ISWbemLocator_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define ISWbemLocator_ConnectServer(This,strServer,strNamespace,strUser,strPassword,strLocale,strAuthority,iSecurityFlags,objWbemNamedValueSet,objWbemServices)	\
+    ( (This)->lpVtbl -> ConnectServer(This,strServer,strNamespace,strUser,strPassword,strLocale,strAuthority,iSecurityFlags,objWbemNamedValueSet,objWbemServices) ) 
+
+#define ISWbemLocator_get_Security_(This,objWbemSecurity)	\
+    ( (This)->lpVtbl -> get_Security_(This,objWbemSecurity) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISWbemLocator_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISWbemObject_INTERFACE_DEFINED__
+#define __ISWbemObject_INTERFACE_DEFINED__
+
+/* interface ISWbemObject */
+/* [helpstring][hidden][oleautomation][dual][uuid][object][local] */ 
+
+#define	WBEMS_DISPID_DERIVATION	( 23 )
+
+
+EXTERN_C const IID IID_ISWbemObject;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("76A6415A-CB41-11d1-8B02-00600806D9B6")
+    ISWbemObject : public IDispatch
+    {
+    public:
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Put_( 
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectPath **objWbemObjectPath) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE PutAsync_( 
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = wbemChangeFlagCreateOrUpdate,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Delete_( 
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DeleteAsync_( 
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Instances_( 
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE InstancesAsync_( 
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Subclasses_( 
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SubclassesAsync_( 
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = wbemQueryFlagDeep,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Associators_( 
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAssocClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredAssocQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AssociatorsAsync_( 
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAssocClass = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultRole = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly = FALSE,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly = FALSE,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredAssocQualifier = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE References_( 
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ReferencesAsync_( 
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly = FALSE,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly = FALSE,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ExecMethod_( 
+            /* [annotation][in] */ 
+            _In_  BSTR strMethodName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemInParameters,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemOutParameters) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ExecMethodAsync_( 
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strMethodName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemInParameters = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Clone_( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetObjectText_( 
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strObjectText) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SpawnDerivedClass_( 
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SpawnInstance_( 
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CompareTo_( 
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemObject,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bResult) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Qualifiers_( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemQualifierSet **objWbemQualifierSet) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Properties_( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemPropertySet **objWbemPropertySet) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Methods_( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemMethodSet **objWbemMethodSet) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Derivation_( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *strClassNameArray) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Path_( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectPath **objWbemObjectPath) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Security_( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemSecurity **objWbemSecurity) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ISWbemObjectVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISWbemObject * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISWbemObject * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISWbemObject * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISWbemObject * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISWbemObject * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISWbemObject * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISWbemObject * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Put_ )( 
+            ISWbemObject * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectPath **objWbemObjectPath);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *PutAsync_ )( 
+            ISWbemObject * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete_ )( 
+            ISWbemObject * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteAsync_ )( 
+            ISWbemObject * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Instances_ )( 
+            ISWbemObject * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InstancesAsync_ )( 
+            ISWbemObject * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Subclasses_ )( 
+            ISWbemObject * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SubclassesAsync_ )( 
+            ISWbemObject * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Associators_ )( 
+            ISWbemObject * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAssocClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredAssocQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AssociatorsAsync_ )( 
+            ISWbemObject * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAssocClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredAssocQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *References_ )( 
+            ISWbemObject * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ReferencesAsync_ )( 
+            ISWbemObject * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecMethod_ )( 
+            ISWbemObject * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strMethodName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemInParameters,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemOutParameters);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecMethodAsync_ )( 
+            ISWbemObject * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strMethodName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemInParameters,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone_ )( 
+            ISWbemObject * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetObjectText_ )( 
+            ISWbemObject * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strObjectText);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SpawnDerivedClass_ )( 
+            ISWbemObject * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SpawnInstance_ )( 
+            ISWbemObject * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CompareTo_ )( 
+            ISWbemObject * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemObject,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bResult);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Qualifiers_ )( 
+            ISWbemObject * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemQualifierSet **objWbemQualifierSet);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Properties_ )( 
+            ISWbemObject * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemPropertySet **objWbemPropertySet);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Methods_ )( 
+            ISWbemObject * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemMethodSet **objWbemMethodSet);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Derivation_ )( 
+            ISWbemObject * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *strClassNameArray);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Path_ )( 
+            ISWbemObject * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectPath **objWbemObjectPath);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Security_ )( 
+            ISWbemObject * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemSecurity **objWbemSecurity);
+        
+        END_INTERFACE
+    } ISWbemObjectVtbl;
+
+    interface ISWbemObject
+    {
+        CONST_VTBL struct ISWbemObjectVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISWbemObject_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISWbemObject_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISWbemObject_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ISWbemObject_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define ISWbemObject_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define ISWbemObject_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define ISWbemObject_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define ISWbemObject_Put_(This,iFlags,objWbemNamedValueSet,objWbemObjectPath)	\
+    ( (This)->lpVtbl -> Put_(This,iFlags,objWbemNamedValueSet,objWbemObjectPath) ) 
+
+#define ISWbemObject_PutAsync_(This,objWbemSink,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> PutAsync_(This,objWbemSink,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemObject_Delete_(This,iFlags,objWbemNamedValueSet)	\
+    ( (This)->lpVtbl -> Delete_(This,iFlags,objWbemNamedValueSet) ) 
+
+#define ISWbemObject_DeleteAsync_(This,objWbemSink,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> DeleteAsync_(This,objWbemSink,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemObject_Instances_(This,iFlags,objWbemNamedValueSet,objWbemObjectSet)	\
+    ( (This)->lpVtbl -> Instances_(This,iFlags,objWbemNamedValueSet,objWbemObjectSet) ) 
+
+#define ISWbemObject_InstancesAsync_(This,objWbemSink,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> InstancesAsync_(This,objWbemSink,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemObject_Subclasses_(This,iFlags,objWbemNamedValueSet,objWbemObjectSet)	\
+    ( (This)->lpVtbl -> Subclasses_(This,iFlags,objWbemNamedValueSet,objWbemObjectSet) ) 
+
+#define ISWbemObject_SubclassesAsync_(This,objWbemSink,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> SubclassesAsync_(This,objWbemSink,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemObject_Associators_(This,strAssocClass,strResultClass,strResultRole,strRole,bClassesOnly,bSchemaOnly,strRequiredAssocQualifier,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemObjectSet)	\
+    ( (This)->lpVtbl -> Associators_(This,strAssocClass,strResultClass,strResultRole,strRole,bClassesOnly,bSchemaOnly,strRequiredAssocQualifier,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemObjectSet) ) 
+
+#define ISWbemObject_AssociatorsAsync_(This,objWbemSink,strAssocClass,strResultClass,strResultRole,strRole,bClassesOnly,bSchemaOnly,strRequiredAssocQualifier,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> AssociatorsAsync_(This,objWbemSink,strAssocClass,strResultClass,strResultRole,strRole,bClassesOnly,bSchemaOnly,strRequiredAssocQualifier,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemObject_References_(This,strResultClass,strRole,bClassesOnly,bSchemaOnly,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemObjectSet)	\
+    ( (This)->lpVtbl -> References_(This,strResultClass,strRole,bClassesOnly,bSchemaOnly,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemObjectSet) ) 
+
+#define ISWbemObject_ReferencesAsync_(This,objWbemSink,strResultClass,strRole,bClassesOnly,bSchemaOnly,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> ReferencesAsync_(This,objWbemSink,strResultClass,strRole,bClassesOnly,bSchemaOnly,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemObject_ExecMethod_(This,strMethodName,objWbemInParameters,iFlags,objWbemNamedValueSet,objWbemOutParameters)	\
+    ( (This)->lpVtbl -> ExecMethod_(This,strMethodName,objWbemInParameters,iFlags,objWbemNamedValueSet,objWbemOutParameters) ) 
+
+#define ISWbemObject_ExecMethodAsync_(This,objWbemSink,strMethodName,objWbemInParameters,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> ExecMethodAsync_(This,objWbemSink,strMethodName,objWbemInParameters,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemObject_Clone_(This,objWbemObject)	\
+    ( (This)->lpVtbl -> Clone_(This,objWbemObject) ) 
+
+#define ISWbemObject_GetObjectText_(This,iFlags,strObjectText)	\
+    ( (This)->lpVtbl -> GetObjectText_(This,iFlags,strObjectText) ) 
+
+#define ISWbemObject_SpawnDerivedClass_(This,iFlags,objWbemObject)	\
+    ( (This)->lpVtbl -> SpawnDerivedClass_(This,iFlags,objWbemObject) ) 
+
+#define ISWbemObject_SpawnInstance_(This,iFlags,objWbemObject)	\
+    ( (This)->lpVtbl -> SpawnInstance_(This,iFlags,objWbemObject) ) 
+
+#define ISWbemObject_CompareTo_(This,objWbemObject,iFlags,bResult)	\
+    ( (This)->lpVtbl -> CompareTo_(This,objWbemObject,iFlags,bResult) ) 
+
+#define ISWbemObject_get_Qualifiers_(This,objWbemQualifierSet)	\
+    ( (This)->lpVtbl -> get_Qualifiers_(This,objWbemQualifierSet) ) 
+
+#define ISWbemObject_get_Properties_(This,objWbemPropertySet)	\
+    ( (This)->lpVtbl -> get_Properties_(This,objWbemPropertySet) ) 
+
+#define ISWbemObject_get_Methods_(This,objWbemMethodSet)	\
+    ( (This)->lpVtbl -> get_Methods_(This,objWbemMethodSet) ) 
+
+#define ISWbemObject_get_Derivation_(This,strClassNameArray)	\
+    ( (This)->lpVtbl -> get_Derivation_(This,strClassNameArray) ) 
+
+#define ISWbemObject_get_Path_(This,objWbemObjectPath)	\
+    ( (This)->lpVtbl -> get_Path_(This,objWbemObjectPath) ) 
+
+#define ISWbemObject_get_Security_(This,objWbemSecurity)	\
+    ( (This)->lpVtbl -> get_Security_(This,objWbemSecurity) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISWbemObject_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISWbemObjectSet_INTERFACE_DEFINED__
+#define __ISWbemObjectSet_INTERFACE_DEFINED__
+
+/* interface ISWbemObjectSet */
+/* [helpstring][nonextensible][hidden][dual][oleautomation][uuid][object][local] */ 
+
+
+EXTERN_C const IID IID_ISWbemObjectSet;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("76A6415F-CB41-11d1-8B02-00600806D9B6")
+    ISWbemObjectSet : public IDispatch
+    {
+    public:
+        virtual /* [restricted][propget][id] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **pUnk) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Item( 
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Count( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iCount) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Security_( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemSecurity **objWbemSecurity) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ItemIndex( 
+            /* [annotation][in] */ 
+            _In_  long lIndex,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ISWbemObjectSetVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISWbemObjectSet * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISWbemObjectSet * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISWbemObjectSet * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISWbemObjectSet * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISWbemObjectSet * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISWbemObjectSet * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISWbemObjectSet * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [restricted][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
+            ISWbemObjectSet * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **pUnk);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
+            ISWbemObjectSet * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
+            ISWbemObjectSet * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iCount);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Security_ )( 
+            ISWbemObjectSet * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemSecurity **objWbemSecurity);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ItemIndex )( 
+            ISWbemObjectSet * This,
+            /* [annotation][in] */ 
+            _In_  long lIndex,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject);
+        
+        END_INTERFACE
+    } ISWbemObjectSetVtbl;
+
+    interface ISWbemObjectSet
+    {
+        CONST_VTBL struct ISWbemObjectSetVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISWbemObjectSet_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISWbemObjectSet_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISWbemObjectSet_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ISWbemObjectSet_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define ISWbemObjectSet_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define ISWbemObjectSet_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define ISWbemObjectSet_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define ISWbemObjectSet_get__NewEnum(This,pUnk)	\
+    ( (This)->lpVtbl -> get__NewEnum(This,pUnk) ) 
+
+#define ISWbemObjectSet_Item(This,strObjectPath,iFlags,objWbemObject)	\
+    ( (This)->lpVtbl -> Item(This,strObjectPath,iFlags,objWbemObject) ) 
+
+#define ISWbemObjectSet_get_Count(This,iCount)	\
+    ( (This)->lpVtbl -> get_Count(This,iCount) ) 
+
+#define ISWbemObjectSet_get_Security_(This,objWbemSecurity)	\
+    ( (This)->lpVtbl -> get_Security_(This,objWbemSecurity) ) 
+
+#define ISWbemObjectSet_ItemIndex(This,lIndex,objWbemObject)	\
+    ( (This)->lpVtbl -> ItemIndex(This,lIndex,objWbemObject) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISWbemObjectSet_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISWbemNamedValue_INTERFACE_DEFINED__
+#define __ISWbemNamedValue_INTERFACE_DEFINED__
+
+/* interface ISWbemNamedValue */
+/* [helpstring][hidden][oleautomation][dual][uuid][object][local] */ 
+
+
+EXTERN_C const IID IID_ISWbemNamedValue;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("76A64164-CB41-11d1-8B02-00600806D9B6")
+    ISWbemNamedValue : public IDispatch
+    {
+    public:
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Value( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *varValue) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Value( 
+            /* [annotation][in] */ 
+            _In_  VARIANT *varValue) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strName) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ISWbemNamedValueVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISWbemNamedValue * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISWbemNamedValue * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISWbemNamedValue * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISWbemNamedValue * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISWbemNamedValue * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISWbemNamedValue * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISWbemNamedValue * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
+            ISWbemNamedValue * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *varValue);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Value )( 
+            ISWbemNamedValue * This,
+            /* [annotation][in] */ 
+            _In_  VARIANT *varValue);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
+            ISWbemNamedValue * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strName);
+        
+        END_INTERFACE
+    } ISWbemNamedValueVtbl;
+
+    interface ISWbemNamedValue
+    {
+        CONST_VTBL struct ISWbemNamedValueVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISWbemNamedValue_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISWbemNamedValue_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISWbemNamedValue_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ISWbemNamedValue_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define ISWbemNamedValue_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define ISWbemNamedValue_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define ISWbemNamedValue_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define ISWbemNamedValue_get_Value(This,varValue)	\
+    ( (This)->lpVtbl -> get_Value(This,varValue) ) 
+
+#define ISWbemNamedValue_put_Value(This,varValue)	\
+    ( (This)->lpVtbl -> put_Value(This,varValue) ) 
+
+#define ISWbemNamedValue_get_Name(This,strName)	\
+    ( (This)->lpVtbl -> get_Name(This,strName) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISWbemNamedValue_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISWbemNamedValueSet_INTERFACE_DEFINED__
+#define __ISWbemNamedValueSet_INTERFACE_DEFINED__
+
+/* interface ISWbemNamedValueSet */
+/* [helpstring][hidden][dual][oleautomation][uuid][object][local] */ 
+
+
+EXTERN_C const IID IID_ISWbemNamedValueSet;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("CF2376EA-CE8C-11d1-8B05-00600806D9B6")
+    ISWbemNamedValueSet : public IDispatch
+    {
+    public:
+        virtual /* [restricted][propget][id] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **pUnk) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Item( 
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemNamedValue **objWbemNamedValue) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Count( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iCount) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Add( 
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *varValue,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemNamedValue **objWbemNamedValue) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Remove( 
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Clone( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemNamedValueSet **objWbemNamedValueSet) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DeleteAll( void) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ISWbemNamedValueSetVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISWbemNamedValueSet * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISWbemNamedValueSet * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISWbemNamedValueSet * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISWbemNamedValueSet * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISWbemNamedValueSet * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISWbemNamedValueSet * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISWbemNamedValueSet * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [restricted][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
+            ISWbemNamedValueSet * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **pUnk);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
+            ISWbemNamedValueSet * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemNamedValue **objWbemNamedValue);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
+            ISWbemNamedValueSet * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iCount);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
+            ISWbemNamedValueSet * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *varValue,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemNamedValue **objWbemNamedValue);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
+            ISWbemNamedValueSet * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
+            ISWbemNamedValueSet * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemNamedValueSet **objWbemNamedValueSet);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteAll )( 
+            ISWbemNamedValueSet * This);
+        
+        END_INTERFACE
+    } ISWbemNamedValueSetVtbl;
+
+    interface ISWbemNamedValueSet
+    {
+        CONST_VTBL struct ISWbemNamedValueSetVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISWbemNamedValueSet_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISWbemNamedValueSet_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISWbemNamedValueSet_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ISWbemNamedValueSet_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define ISWbemNamedValueSet_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define ISWbemNamedValueSet_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define ISWbemNamedValueSet_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define ISWbemNamedValueSet_get__NewEnum(This,pUnk)	\
+    ( (This)->lpVtbl -> get__NewEnum(This,pUnk) ) 
+
+#define ISWbemNamedValueSet_Item(This,strName,iFlags,objWbemNamedValue)	\
+    ( (This)->lpVtbl -> Item(This,strName,iFlags,objWbemNamedValue) ) 
+
+#define ISWbemNamedValueSet_get_Count(This,iCount)	\
+    ( (This)->lpVtbl -> get_Count(This,iCount) ) 
+
+#define ISWbemNamedValueSet_Add(This,strName,varValue,iFlags,objWbemNamedValue)	\
+    ( (This)->lpVtbl -> Add(This,strName,varValue,iFlags,objWbemNamedValue) ) 
+
+#define ISWbemNamedValueSet_Remove(This,strName,iFlags)	\
+    ( (This)->lpVtbl -> Remove(This,strName,iFlags) ) 
+
+#define ISWbemNamedValueSet_Clone(This,objWbemNamedValueSet)	\
+    ( (This)->lpVtbl -> Clone(This,objWbemNamedValueSet) ) 
+
+#define ISWbemNamedValueSet_DeleteAll(This)	\
+    ( (This)->lpVtbl -> DeleteAll(This) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISWbemNamedValueSet_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISWbemQualifier_INTERFACE_DEFINED__
+#define __ISWbemQualifier_INTERFACE_DEFINED__
+
+/* interface ISWbemQualifier */
+/* [helpstring][unique][nonextensible][hidden][oleautomation][dual][uuid][local][object] */ 
+
+
+EXTERN_C const IID IID_ISWbemQualifier;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("79B05932-D3B7-11d1-8B06-00600806D9B6")
+    ISWbemQualifier : public IDispatch
+    {
+    public:
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Value( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *varValue) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Value( 
+            /* [annotation][in] */ 
+            _In_  VARIANT *varValue) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strName) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_IsLocal( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsLocal) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_PropagatesToSubclass( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bPropagatesToSubclass) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_PropagatesToSubclass( 
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bPropagatesToSubclass) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_PropagatesToInstance( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bPropagatesToInstance) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_PropagatesToInstance( 
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bPropagatesToInstance) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_IsOverridable( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsOverridable) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_IsOverridable( 
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bIsOverridable) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_IsAmended( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsAmended) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ISWbemQualifierVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISWbemQualifier * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISWbemQualifier * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISWbemQualifier * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISWbemQualifier * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISWbemQualifier * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISWbemQualifier * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISWbemQualifier * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
+            ISWbemQualifier * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *varValue);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Value )( 
+            ISWbemQualifier * This,
+            /* [annotation][in] */ 
+            _In_  VARIANT *varValue);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
+            ISWbemQualifier * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strName);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IsLocal )( 
+            ISWbemQualifier * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsLocal);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_PropagatesToSubclass )( 
+            ISWbemQualifier * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bPropagatesToSubclass);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_PropagatesToSubclass )( 
+            ISWbemQualifier * This,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bPropagatesToSubclass);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_PropagatesToInstance )( 
+            ISWbemQualifier * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bPropagatesToInstance);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_PropagatesToInstance )( 
+            ISWbemQualifier * This,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bPropagatesToInstance);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IsOverridable )( 
+            ISWbemQualifier * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsOverridable);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_IsOverridable )( 
+            ISWbemQualifier * This,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bIsOverridable);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IsAmended )( 
+            ISWbemQualifier * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsAmended);
+        
+        END_INTERFACE
+    } ISWbemQualifierVtbl;
+
+    interface ISWbemQualifier
+    {
+        CONST_VTBL struct ISWbemQualifierVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISWbemQualifier_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISWbemQualifier_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISWbemQualifier_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ISWbemQualifier_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define ISWbemQualifier_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define ISWbemQualifier_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define ISWbemQualifier_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define ISWbemQualifier_get_Value(This,varValue)	\
+    ( (This)->lpVtbl -> get_Value(This,varValue) ) 
+
+#define ISWbemQualifier_put_Value(This,varValue)	\
+    ( (This)->lpVtbl -> put_Value(This,varValue) ) 
+
+#define ISWbemQualifier_get_Name(This,strName)	\
+    ( (This)->lpVtbl -> get_Name(This,strName) ) 
+
+#define ISWbemQualifier_get_IsLocal(This,bIsLocal)	\
+    ( (This)->lpVtbl -> get_IsLocal(This,bIsLocal) ) 
+
+#define ISWbemQualifier_get_PropagatesToSubclass(This,bPropagatesToSubclass)	\
+    ( (This)->lpVtbl -> get_PropagatesToSubclass(This,bPropagatesToSubclass) ) 
+
+#define ISWbemQualifier_put_PropagatesToSubclass(This,bPropagatesToSubclass)	\
+    ( (This)->lpVtbl -> put_PropagatesToSubclass(This,bPropagatesToSubclass) ) 
+
+#define ISWbemQualifier_get_PropagatesToInstance(This,bPropagatesToInstance)	\
+    ( (This)->lpVtbl -> get_PropagatesToInstance(This,bPropagatesToInstance) ) 
+
+#define ISWbemQualifier_put_PropagatesToInstance(This,bPropagatesToInstance)	\
+    ( (This)->lpVtbl -> put_PropagatesToInstance(This,bPropagatesToInstance) ) 
+
+#define ISWbemQualifier_get_IsOverridable(This,bIsOverridable)	\
+    ( (This)->lpVtbl -> get_IsOverridable(This,bIsOverridable) ) 
+
+#define ISWbemQualifier_put_IsOverridable(This,bIsOverridable)	\
+    ( (This)->lpVtbl -> put_IsOverridable(This,bIsOverridable) ) 
+
+#define ISWbemQualifier_get_IsAmended(This,bIsAmended)	\
+    ( (This)->lpVtbl -> get_IsAmended(This,bIsAmended) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISWbemQualifier_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISWbemQualifierSet_INTERFACE_DEFINED__
+#define __ISWbemQualifierSet_INTERFACE_DEFINED__
+
+/* interface ISWbemQualifierSet */
+/* [helpstring][nonextensible][hidden][dual][oleautomation][uuid][local][object] */ 
+
+
+EXTERN_C const IID IID_ISWbemQualifierSet;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("9B16ED16-D3DF-11d1-8B08-00600806D9B6")
+    ISWbemQualifierSet : public IDispatch
+    {
+    public:
+        virtual /* [restricted][propget][id] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **pUnk) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Item( 
+            /* [annotation][in] */ 
+            _In_  BSTR name,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemQualifier **objWbemQualifier) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Count( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iCount) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Add( 
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *varVal,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bPropagatesToSubclass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bPropagatesToInstance,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsOverridable,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemQualifier **objWbemQualifier) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Remove( 
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ISWbemQualifierSetVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISWbemQualifierSet * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISWbemQualifierSet * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISWbemQualifierSet * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISWbemQualifierSet * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISWbemQualifierSet * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISWbemQualifierSet * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISWbemQualifierSet * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [restricted][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
+            ISWbemQualifierSet * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **pUnk);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
+            ISWbemQualifierSet * This,
+            /* [annotation][in] */ 
+            _In_  BSTR name,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemQualifier **objWbemQualifier);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
+            ISWbemQualifierSet * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iCount);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
+            ISWbemQualifierSet * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *varVal,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bPropagatesToSubclass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bPropagatesToInstance,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsOverridable,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemQualifier **objWbemQualifier);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
+            ISWbemQualifierSet * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags);
+        
+        END_INTERFACE
+    } ISWbemQualifierSetVtbl;
+
+    interface ISWbemQualifierSet
+    {
+        CONST_VTBL struct ISWbemQualifierSetVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISWbemQualifierSet_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISWbemQualifierSet_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISWbemQualifierSet_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ISWbemQualifierSet_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define ISWbemQualifierSet_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define ISWbemQualifierSet_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define ISWbemQualifierSet_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define ISWbemQualifierSet_get__NewEnum(This,pUnk)	\
+    ( (This)->lpVtbl -> get__NewEnum(This,pUnk) ) 
+
+#define ISWbemQualifierSet_Item(This,name,iFlags,objWbemQualifier)	\
+    ( (This)->lpVtbl -> Item(This,name,iFlags,objWbemQualifier) ) 
+
+#define ISWbemQualifierSet_get_Count(This,iCount)	\
+    ( (This)->lpVtbl -> get_Count(This,iCount) ) 
+
+#define ISWbemQualifierSet_Add(This,strName,varVal,bPropagatesToSubclass,bPropagatesToInstance,bIsOverridable,iFlags,objWbemQualifier)	\
+    ( (This)->lpVtbl -> Add(This,strName,varVal,bPropagatesToSubclass,bPropagatesToInstance,bIsOverridable,iFlags,objWbemQualifier) ) 
+
+#define ISWbemQualifierSet_Remove(This,strName,iFlags)	\
+    ( (This)->lpVtbl -> Remove(This,strName,iFlags) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISWbemQualifierSet_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISWbemProperty_INTERFACE_DEFINED__
+#define __ISWbemProperty_INTERFACE_DEFINED__
+
+/* interface ISWbemProperty */
+/* [helpstring][unique][hidden][oleautomation][dual][uuid][local][object] */ 
+
+
+EXTERN_C const IID IID_ISWbemProperty;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("1A388F98-D4BA-11d1-8B09-00600806D9B6")
+    ISWbemProperty : public IDispatch
+    {
+    public:
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Value( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *varValue) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Value( 
+            /* [annotation][in] */ 
+            _In_  VARIANT *varValue) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strName) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_IsLocal( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsLocal) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Origin( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strOrigin) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_CIMType( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  WbemCimtypeEnum *iCimType) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Qualifiers_( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemQualifierSet **objWbemQualifierSet) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_IsArray( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsArray) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ISWbemPropertyVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISWbemProperty * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISWbemProperty * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISWbemProperty * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISWbemProperty * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISWbemProperty * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISWbemProperty * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISWbemProperty * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
+            ISWbemProperty * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *varValue);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Value )( 
+            ISWbemProperty * This,
+            /* [annotation][in] */ 
+            _In_  VARIANT *varValue);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
+            ISWbemProperty * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strName);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IsLocal )( 
+            ISWbemProperty * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsLocal);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Origin )( 
+            ISWbemProperty * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strOrigin);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_CIMType )( 
+            ISWbemProperty * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  WbemCimtypeEnum *iCimType);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Qualifiers_ )( 
+            ISWbemProperty * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemQualifierSet **objWbemQualifierSet);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IsArray )( 
+            ISWbemProperty * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsArray);
+        
+        END_INTERFACE
+    } ISWbemPropertyVtbl;
+
+    interface ISWbemProperty
+    {
+        CONST_VTBL struct ISWbemPropertyVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISWbemProperty_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISWbemProperty_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISWbemProperty_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ISWbemProperty_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define ISWbemProperty_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define ISWbemProperty_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define ISWbemProperty_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define ISWbemProperty_get_Value(This,varValue)	\
+    ( (This)->lpVtbl -> get_Value(This,varValue) ) 
+
+#define ISWbemProperty_put_Value(This,varValue)	\
+    ( (This)->lpVtbl -> put_Value(This,varValue) ) 
+
+#define ISWbemProperty_get_Name(This,strName)	\
+    ( (This)->lpVtbl -> get_Name(This,strName) ) 
+
+#define ISWbemProperty_get_IsLocal(This,bIsLocal)	\
+    ( (This)->lpVtbl -> get_IsLocal(This,bIsLocal) ) 
+
+#define ISWbemProperty_get_Origin(This,strOrigin)	\
+    ( (This)->lpVtbl -> get_Origin(This,strOrigin) ) 
+
+#define ISWbemProperty_get_CIMType(This,iCimType)	\
+    ( (This)->lpVtbl -> get_CIMType(This,iCimType) ) 
+
+#define ISWbemProperty_get_Qualifiers_(This,objWbemQualifierSet)	\
+    ( (This)->lpVtbl -> get_Qualifiers_(This,objWbemQualifierSet) ) 
+
+#define ISWbemProperty_get_IsArray(This,bIsArray)	\
+    ( (This)->lpVtbl -> get_IsArray(This,bIsArray) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISWbemProperty_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISWbemPropertySet_INTERFACE_DEFINED__
+#define __ISWbemPropertySet_INTERFACE_DEFINED__
+
+/* interface ISWbemPropertySet */
+/* [helpstring][hidden][dual][oleautomation][uuid][local][object] */ 
+
+
+EXTERN_C const IID IID_ISWbemPropertySet;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("DEA0A7B2-D4BA-11d1-8B09-00600806D9B6")
+    ISWbemPropertySet : public IDispatch
+    {
+    public:
+        virtual /* [restricted][propget][id] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **pUnk) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Item( 
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemProperty **objWbemProperty) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Count( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iCount) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Add( 
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][in] */ 
+            _In_  WbemCimtypeEnum iCIMType,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsArray,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemProperty **objWbemProperty) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Remove( 
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ISWbemPropertySetVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISWbemPropertySet * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISWbemPropertySet * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISWbemPropertySet * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISWbemPropertySet * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISWbemPropertySet * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISWbemPropertySet * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISWbemPropertySet * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [restricted][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
+            ISWbemPropertySet * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **pUnk);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
+            ISWbemPropertySet * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemProperty **objWbemProperty);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
+            ISWbemPropertySet * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iCount);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
+            ISWbemPropertySet * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][in] */ 
+            _In_  WbemCimtypeEnum iCIMType,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsArray,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemProperty **objWbemProperty);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
+            ISWbemPropertySet * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags);
+        
+        END_INTERFACE
+    } ISWbemPropertySetVtbl;
+
+    interface ISWbemPropertySet
+    {
+        CONST_VTBL struct ISWbemPropertySetVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISWbemPropertySet_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISWbemPropertySet_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISWbemPropertySet_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ISWbemPropertySet_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define ISWbemPropertySet_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define ISWbemPropertySet_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define ISWbemPropertySet_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define ISWbemPropertySet_get__NewEnum(This,pUnk)	\
+    ( (This)->lpVtbl -> get__NewEnum(This,pUnk) ) 
+
+#define ISWbemPropertySet_Item(This,strName,iFlags,objWbemProperty)	\
+    ( (This)->lpVtbl -> Item(This,strName,iFlags,objWbemProperty) ) 
+
+#define ISWbemPropertySet_get_Count(This,iCount)	\
+    ( (This)->lpVtbl -> get_Count(This,iCount) ) 
+
+#define ISWbemPropertySet_Add(This,strName,iCIMType,bIsArray,iFlags,objWbemProperty)	\
+    ( (This)->lpVtbl -> Add(This,strName,iCIMType,bIsArray,iFlags,objWbemProperty) ) 
+
+#define ISWbemPropertySet_Remove(This,strName,iFlags)	\
+    ( (This)->lpVtbl -> Remove(This,strName,iFlags) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISWbemPropertySet_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISWbemMethod_INTERFACE_DEFINED__
+#define __ISWbemMethod_INTERFACE_DEFINED__
+
+/* interface ISWbemMethod */
+/* [helpstring][hidden][nonextensible][unique][oleautomation][dual][uuid][local][object] */ 
+
+
+EXTERN_C const IID IID_ISWbemMethod;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("422E8E90-D955-11d1-8B09-00600806D9B6")
+    ISWbemMethod : public IDispatch
+    {
+    public:
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strName) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Origin( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strOrigin) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_InParameters( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemInParameters) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_OutParameters( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemOutParameters) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Qualifiers_( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemQualifierSet **objWbemQualifierSet) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ISWbemMethodVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISWbemMethod * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISWbemMethod * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISWbemMethod * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISWbemMethod * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISWbemMethod * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISWbemMethod * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISWbemMethod * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
+            ISWbemMethod * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strName);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Origin )( 
+            ISWbemMethod * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strOrigin);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_InParameters )( 
+            ISWbemMethod * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemInParameters);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_OutParameters )( 
+            ISWbemMethod * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemOutParameters);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Qualifiers_ )( 
+            ISWbemMethod * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemQualifierSet **objWbemQualifierSet);
+        
+        END_INTERFACE
+    } ISWbemMethodVtbl;
+
+    interface ISWbemMethod
+    {
+        CONST_VTBL struct ISWbemMethodVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISWbemMethod_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISWbemMethod_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISWbemMethod_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ISWbemMethod_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define ISWbemMethod_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define ISWbemMethod_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define ISWbemMethod_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define ISWbemMethod_get_Name(This,strName)	\
+    ( (This)->lpVtbl -> get_Name(This,strName) ) 
+
+#define ISWbemMethod_get_Origin(This,strOrigin)	\
+    ( (This)->lpVtbl -> get_Origin(This,strOrigin) ) 
+
+#define ISWbemMethod_get_InParameters(This,objWbemInParameters)	\
+    ( (This)->lpVtbl -> get_InParameters(This,objWbemInParameters) ) 
+
+#define ISWbemMethod_get_OutParameters(This,objWbemOutParameters)	\
+    ( (This)->lpVtbl -> get_OutParameters(This,objWbemOutParameters) ) 
+
+#define ISWbemMethod_get_Qualifiers_(This,objWbemQualifierSet)	\
+    ( (This)->lpVtbl -> get_Qualifiers_(This,objWbemQualifierSet) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISWbemMethod_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISWbemMethodSet_INTERFACE_DEFINED__
+#define __ISWbemMethodSet_INTERFACE_DEFINED__
+
+/* interface ISWbemMethodSet */
+/* [helpstring][hidden][nonextensible][dual][oleautomation][uuid][object][local] */ 
+
+
+EXTERN_C const IID IID_ISWbemMethodSet;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("C93BA292-D955-11d1-8B09-00600806D9B6")
+    ISWbemMethodSet : public IDispatch
+    {
+    public:
+        virtual /* [restricted][propget][id] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **pUnk) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Item( 
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemMethod **objWbemMethod) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Count( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iCount) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ISWbemMethodSetVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISWbemMethodSet * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISWbemMethodSet * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISWbemMethodSet * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISWbemMethodSet * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISWbemMethodSet * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISWbemMethodSet * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISWbemMethodSet * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [restricted][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
+            ISWbemMethodSet * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **pUnk);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
+            ISWbemMethodSet * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemMethod **objWbemMethod);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
+            ISWbemMethodSet * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iCount);
+        
+        END_INTERFACE
+    } ISWbemMethodSetVtbl;
+
+    interface ISWbemMethodSet
+    {
+        CONST_VTBL struct ISWbemMethodSetVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISWbemMethodSet_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISWbemMethodSet_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISWbemMethodSet_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ISWbemMethodSet_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define ISWbemMethodSet_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define ISWbemMethodSet_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define ISWbemMethodSet_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define ISWbemMethodSet_get__NewEnum(This,pUnk)	\
+    ( (This)->lpVtbl -> get__NewEnum(This,pUnk) ) 
+
+#define ISWbemMethodSet_Item(This,strName,iFlags,objWbemMethod)	\
+    ( (This)->lpVtbl -> Item(This,strName,iFlags,objWbemMethod) ) 
+
+#define ISWbemMethodSet_get_Count(This,iCount)	\
+    ( (This)->lpVtbl -> get_Count(This,iCount) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISWbemMethodSet_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISWbemEventSource_INTERFACE_DEFINED__
+#define __ISWbemEventSource_INTERFACE_DEFINED__
+
+/* interface ISWbemEventSource */
+/* [helpstring][hidden][nonextensible][dual][oleautomation][uuid][local][object] */ 
+
+
+EXTERN_C const IID IID_ISWbemEventSource;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("27D54D92-0EBE-11d2-8B22-00600806D9B6")
+    ISWbemEventSource : public IDispatch
+    {
+    public:
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE NextEvent( 
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iTimeoutMs,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Security_( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemSecurity **objWbemSecurity) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ISWbemEventSourceVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISWbemEventSource * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISWbemEventSource * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISWbemEventSource * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISWbemEventSource * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISWbemEventSource * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISWbemEventSource * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISWbemEventSource * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *NextEvent )( 
+            ISWbemEventSource * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iTimeoutMs,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Security_ )( 
+            ISWbemEventSource * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemSecurity **objWbemSecurity);
+        
+        END_INTERFACE
+    } ISWbemEventSourceVtbl;
+
+    interface ISWbemEventSource
+    {
+        CONST_VTBL struct ISWbemEventSourceVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISWbemEventSource_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISWbemEventSource_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISWbemEventSource_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ISWbemEventSource_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define ISWbemEventSource_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define ISWbemEventSource_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define ISWbemEventSource_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define ISWbemEventSource_NextEvent(This,iTimeoutMs,objWbemObject)	\
+    ( (This)->lpVtbl -> NextEvent(This,iTimeoutMs,objWbemObject) ) 
+
+#define ISWbemEventSource_get_Security_(This,objWbemSecurity)	\
+    ( (This)->lpVtbl -> get_Security_(This,objWbemSecurity) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISWbemEventSource_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISWbemObjectPath_INTERFACE_DEFINED__
+#define __ISWbemObjectPath_INTERFACE_DEFINED__
+
+/* interface ISWbemObjectPath */
+/* [helpstring][unique][hidden][oleautomation][dual][uuid][local][object] */ 
+
+
+EXTERN_C const IID IID_ISWbemObjectPath;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("5791BC27-CE9C-11d1-97BF-0000F81E849C")
+    ISWbemObjectPath : public IDispatch
+    {
+    public:
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Path( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strPath) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Path( 
+            /* [annotation][in] */ 
+            _In_  BSTR strPath) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_RelPath( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strRelPath) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_RelPath( 
+            /* [annotation][in] */ 
+            _In_  BSTR strRelPath) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Server( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strServer) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Server( 
+            /* [annotation][in] */ 
+            _In_  BSTR strServer) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Namespace( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strNamespace) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Namespace( 
+            /* [annotation][in] */ 
+            _In_  BSTR strNamespace) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_ParentNamespace( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strParentNamespace) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_DisplayName( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strDisplayName) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_DisplayName( 
+            /* [annotation][in] */ 
+            _In_  BSTR strDisplayName) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Class( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strClass) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Class( 
+            /* [annotation][in] */ 
+            _In_  BSTR strClass) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_IsClass( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsClass) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetAsClass( void) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_IsSingleton( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsSingleton) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetAsSingleton( void) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Keys( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemNamedValueSet **objWbemNamedValueSet) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Security_( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemSecurity **objWbemSecurity) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Locale( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strLocale) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Locale( 
+            /* [annotation][in] */ 
+            _In_  BSTR strLocale) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Authority( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strAuthority) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Authority( 
+            /* [annotation][in] */ 
+            _In_  BSTR strAuthority) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ISWbemObjectPathVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISWbemObjectPath * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISWbemObjectPath * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISWbemObjectPath * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISWbemObjectPath * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISWbemObjectPath * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISWbemObjectPath * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISWbemObjectPath * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Path )( 
+            ISWbemObjectPath * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strPath);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Path )( 
+            ISWbemObjectPath * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strPath);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RelPath )( 
+            ISWbemObjectPath * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strRelPath);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RelPath )( 
+            ISWbemObjectPath * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strRelPath);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Server )( 
+            ISWbemObjectPath * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strServer);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Server )( 
+            ISWbemObjectPath * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strServer);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Namespace )( 
+            ISWbemObjectPath * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strNamespace);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Namespace )( 
+            ISWbemObjectPath * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strNamespace);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ParentNamespace )( 
+            ISWbemObjectPath * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strParentNamespace);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DisplayName )( 
+            ISWbemObjectPath * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strDisplayName);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DisplayName )( 
+            ISWbemObjectPath * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strDisplayName);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Class )( 
+            ISWbemObjectPath * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strClass);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Class )( 
+            ISWbemObjectPath * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strClass);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IsClass )( 
+            ISWbemObjectPath * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsClass);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetAsClass )( 
+            ISWbemObjectPath * This);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IsSingleton )( 
+            ISWbemObjectPath * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsSingleton);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetAsSingleton )( 
+            ISWbemObjectPath * This);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Keys )( 
+            ISWbemObjectPath * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemNamedValueSet **objWbemNamedValueSet);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Security_ )( 
+            ISWbemObjectPath * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemSecurity **objWbemSecurity);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Locale )( 
+            ISWbemObjectPath * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strLocale);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Locale )( 
+            ISWbemObjectPath * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strLocale);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Authority )( 
+            ISWbemObjectPath * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strAuthority);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Authority )( 
+            ISWbemObjectPath * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strAuthority);
+        
+        END_INTERFACE
+    } ISWbemObjectPathVtbl;
+
+    interface ISWbemObjectPath
+    {
+        CONST_VTBL struct ISWbemObjectPathVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISWbemObjectPath_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISWbemObjectPath_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISWbemObjectPath_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ISWbemObjectPath_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define ISWbemObjectPath_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define ISWbemObjectPath_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define ISWbemObjectPath_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define ISWbemObjectPath_get_Path(This,strPath)	\
+    ( (This)->lpVtbl -> get_Path(This,strPath) ) 
+
+#define ISWbemObjectPath_put_Path(This,strPath)	\
+    ( (This)->lpVtbl -> put_Path(This,strPath) ) 
+
+#define ISWbemObjectPath_get_RelPath(This,strRelPath)	\
+    ( (This)->lpVtbl -> get_RelPath(This,strRelPath) ) 
+
+#define ISWbemObjectPath_put_RelPath(This,strRelPath)	\
+    ( (This)->lpVtbl -> put_RelPath(This,strRelPath) ) 
+
+#define ISWbemObjectPath_get_Server(This,strServer)	\
+    ( (This)->lpVtbl -> get_Server(This,strServer) ) 
+
+#define ISWbemObjectPath_put_Server(This,strServer)	\
+    ( (This)->lpVtbl -> put_Server(This,strServer) ) 
+
+#define ISWbemObjectPath_get_Namespace(This,strNamespace)	\
+    ( (This)->lpVtbl -> get_Namespace(This,strNamespace) ) 
+
+#define ISWbemObjectPath_put_Namespace(This,strNamespace)	\
+    ( (This)->lpVtbl -> put_Namespace(This,strNamespace) ) 
+
+#define ISWbemObjectPath_get_ParentNamespace(This,strParentNamespace)	\
+    ( (This)->lpVtbl -> get_ParentNamespace(This,strParentNamespace) ) 
+
+#define ISWbemObjectPath_get_DisplayName(This,strDisplayName)	\
+    ( (This)->lpVtbl -> get_DisplayName(This,strDisplayName) ) 
+
+#define ISWbemObjectPath_put_DisplayName(This,strDisplayName)	\
+    ( (This)->lpVtbl -> put_DisplayName(This,strDisplayName) ) 
+
+#define ISWbemObjectPath_get_Class(This,strClass)	\
+    ( (This)->lpVtbl -> get_Class(This,strClass) ) 
+
+#define ISWbemObjectPath_put_Class(This,strClass)	\
+    ( (This)->lpVtbl -> put_Class(This,strClass) ) 
+
+#define ISWbemObjectPath_get_IsClass(This,bIsClass)	\
+    ( (This)->lpVtbl -> get_IsClass(This,bIsClass) ) 
+
+#define ISWbemObjectPath_SetAsClass(This)	\
+    ( (This)->lpVtbl -> SetAsClass(This) ) 
+
+#define ISWbemObjectPath_get_IsSingleton(This,bIsSingleton)	\
+    ( (This)->lpVtbl -> get_IsSingleton(This,bIsSingleton) ) 
+
+#define ISWbemObjectPath_SetAsSingleton(This)	\
+    ( (This)->lpVtbl -> SetAsSingleton(This) ) 
+
+#define ISWbemObjectPath_get_Keys(This,objWbemNamedValueSet)	\
+    ( (This)->lpVtbl -> get_Keys(This,objWbemNamedValueSet) ) 
+
+#define ISWbemObjectPath_get_Security_(This,objWbemSecurity)	\
+    ( (This)->lpVtbl -> get_Security_(This,objWbemSecurity) ) 
+
+#define ISWbemObjectPath_get_Locale(This,strLocale)	\
+    ( (This)->lpVtbl -> get_Locale(This,strLocale) ) 
+
+#define ISWbemObjectPath_put_Locale(This,strLocale)	\
+    ( (This)->lpVtbl -> put_Locale(This,strLocale) ) 
+
+#define ISWbemObjectPath_get_Authority(This,strAuthority)	\
+    ( (This)->lpVtbl -> get_Authority(This,strAuthority) ) 
+
+#define ISWbemObjectPath_put_Authority(This,strAuthority)	\
+    ( (This)->lpVtbl -> put_Authority(This,strAuthority) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISWbemObjectPath_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISWbemLastError_INTERFACE_DEFINED__
+#define __ISWbemLastError_INTERFACE_DEFINED__
+
+/* interface ISWbemLastError */
+/* [helpstring][hidden][oleautomation][dual][uuid][object][local] */ 
+
+
+EXTERN_C const IID IID_ISWbemLastError;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("D962DB84-D4BB-11d1-8B09-00600806D9B6")
+    ISWbemLastError : public ISWbemObject
+    {
+    public:
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ISWbemLastErrorVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISWbemLastError * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISWbemLastError * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISWbemLastError * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISWbemLastError * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISWbemLastError * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISWbemLastError * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISWbemLastError * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Put_ )( 
+            ISWbemLastError * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectPath **objWbemObjectPath);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *PutAsync_ )( 
+            ISWbemLastError * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete_ )( 
+            ISWbemLastError * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteAsync_ )( 
+            ISWbemLastError * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Instances_ )( 
+            ISWbemLastError * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InstancesAsync_ )( 
+            ISWbemLastError * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Subclasses_ )( 
+            ISWbemLastError * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SubclassesAsync_ )( 
+            ISWbemLastError * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Associators_ )( 
+            ISWbemLastError * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAssocClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredAssocQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AssociatorsAsync_ )( 
+            ISWbemLastError * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAssocClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredAssocQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *References_ )( 
+            ISWbemLastError * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ReferencesAsync_ )( 
+            ISWbemLastError * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecMethod_ )( 
+            ISWbemLastError * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strMethodName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemInParameters,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemOutParameters);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecMethodAsync_ )( 
+            ISWbemLastError * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strMethodName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemInParameters,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone_ )( 
+            ISWbemLastError * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetObjectText_ )( 
+            ISWbemLastError * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strObjectText);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SpawnDerivedClass_ )( 
+            ISWbemLastError * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SpawnInstance_ )( 
+            ISWbemLastError * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CompareTo_ )( 
+            ISWbemLastError * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemObject,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bResult);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Qualifiers_ )( 
+            ISWbemLastError * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemQualifierSet **objWbemQualifierSet);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Properties_ )( 
+            ISWbemLastError * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemPropertySet **objWbemPropertySet);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Methods_ )( 
+            ISWbemLastError * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemMethodSet **objWbemMethodSet);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Derivation_ )( 
+            ISWbemLastError * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *strClassNameArray);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Path_ )( 
+            ISWbemLastError * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectPath **objWbemObjectPath);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Security_ )( 
+            ISWbemLastError * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemSecurity **objWbemSecurity);
+        
+        END_INTERFACE
+    } ISWbemLastErrorVtbl;
+
+    interface ISWbemLastError
+    {
+        CONST_VTBL struct ISWbemLastErrorVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISWbemLastError_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISWbemLastError_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISWbemLastError_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ISWbemLastError_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define ISWbemLastError_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define ISWbemLastError_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define ISWbemLastError_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define ISWbemLastError_Put_(This,iFlags,objWbemNamedValueSet,objWbemObjectPath)	\
+    ( (This)->lpVtbl -> Put_(This,iFlags,objWbemNamedValueSet,objWbemObjectPath) ) 
+
+#define ISWbemLastError_PutAsync_(This,objWbemSink,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> PutAsync_(This,objWbemSink,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemLastError_Delete_(This,iFlags,objWbemNamedValueSet)	\
+    ( (This)->lpVtbl -> Delete_(This,iFlags,objWbemNamedValueSet) ) 
+
+#define ISWbemLastError_DeleteAsync_(This,objWbemSink,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> DeleteAsync_(This,objWbemSink,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemLastError_Instances_(This,iFlags,objWbemNamedValueSet,objWbemObjectSet)	\
+    ( (This)->lpVtbl -> Instances_(This,iFlags,objWbemNamedValueSet,objWbemObjectSet) ) 
+
+#define ISWbemLastError_InstancesAsync_(This,objWbemSink,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> InstancesAsync_(This,objWbemSink,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemLastError_Subclasses_(This,iFlags,objWbemNamedValueSet,objWbemObjectSet)	\
+    ( (This)->lpVtbl -> Subclasses_(This,iFlags,objWbemNamedValueSet,objWbemObjectSet) ) 
+
+#define ISWbemLastError_SubclassesAsync_(This,objWbemSink,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> SubclassesAsync_(This,objWbemSink,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemLastError_Associators_(This,strAssocClass,strResultClass,strResultRole,strRole,bClassesOnly,bSchemaOnly,strRequiredAssocQualifier,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemObjectSet)	\
+    ( (This)->lpVtbl -> Associators_(This,strAssocClass,strResultClass,strResultRole,strRole,bClassesOnly,bSchemaOnly,strRequiredAssocQualifier,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemObjectSet) ) 
+
+#define ISWbemLastError_AssociatorsAsync_(This,objWbemSink,strAssocClass,strResultClass,strResultRole,strRole,bClassesOnly,bSchemaOnly,strRequiredAssocQualifier,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> AssociatorsAsync_(This,objWbemSink,strAssocClass,strResultClass,strResultRole,strRole,bClassesOnly,bSchemaOnly,strRequiredAssocQualifier,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemLastError_References_(This,strResultClass,strRole,bClassesOnly,bSchemaOnly,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemObjectSet)	\
+    ( (This)->lpVtbl -> References_(This,strResultClass,strRole,bClassesOnly,bSchemaOnly,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemObjectSet) ) 
+
+#define ISWbemLastError_ReferencesAsync_(This,objWbemSink,strResultClass,strRole,bClassesOnly,bSchemaOnly,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> ReferencesAsync_(This,objWbemSink,strResultClass,strRole,bClassesOnly,bSchemaOnly,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemLastError_ExecMethod_(This,strMethodName,objWbemInParameters,iFlags,objWbemNamedValueSet,objWbemOutParameters)	\
+    ( (This)->lpVtbl -> ExecMethod_(This,strMethodName,objWbemInParameters,iFlags,objWbemNamedValueSet,objWbemOutParameters) ) 
+
+#define ISWbemLastError_ExecMethodAsync_(This,objWbemSink,strMethodName,objWbemInParameters,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> ExecMethodAsync_(This,objWbemSink,strMethodName,objWbemInParameters,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemLastError_Clone_(This,objWbemObject)	\
+    ( (This)->lpVtbl -> Clone_(This,objWbemObject) ) 
+
+#define ISWbemLastError_GetObjectText_(This,iFlags,strObjectText)	\
+    ( (This)->lpVtbl -> GetObjectText_(This,iFlags,strObjectText) ) 
+
+#define ISWbemLastError_SpawnDerivedClass_(This,iFlags,objWbemObject)	\
+    ( (This)->lpVtbl -> SpawnDerivedClass_(This,iFlags,objWbemObject) ) 
+
+#define ISWbemLastError_SpawnInstance_(This,iFlags,objWbemObject)	\
+    ( (This)->lpVtbl -> SpawnInstance_(This,iFlags,objWbemObject) ) 
+
+#define ISWbemLastError_CompareTo_(This,objWbemObject,iFlags,bResult)	\
+    ( (This)->lpVtbl -> CompareTo_(This,objWbemObject,iFlags,bResult) ) 
+
+#define ISWbemLastError_get_Qualifiers_(This,objWbemQualifierSet)	\
+    ( (This)->lpVtbl -> get_Qualifiers_(This,objWbemQualifierSet) ) 
+
+#define ISWbemLastError_get_Properties_(This,objWbemPropertySet)	\
+    ( (This)->lpVtbl -> get_Properties_(This,objWbemPropertySet) ) 
+
+#define ISWbemLastError_get_Methods_(This,objWbemMethodSet)	\
+    ( (This)->lpVtbl -> get_Methods_(This,objWbemMethodSet) ) 
+
+#define ISWbemLastError_get_Derivation_(This,strClassNameArray)	\
+    ( (This)->lpVtbl -> get_Derivation_(This,strClassNameArray) ) 
+
+#define ISWbemLastError_get_Path_(This,objWbemObjectPath)	\
+    ( (This)->lpVtbl -> get_Path_(This,objWbemObjectPath) ) 
+
+#define ISWbemLastError_get_Security_(This,objWbemSecurity)	\
+    ( (This)->lpVtbl -> get_Security_(This,objWbemSecurity) ) 
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISWbemLastError_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISWbemSinkEvents_DISPINTERFACE_DEFINED__
+#define __ISWbemSinkEvents_DISPINTERFACE_DEFINED__
+
+/* dispinterface ISWbemSinkEvents */
+/* [hidden][nonextensible][helpstring][uuid] */ 
+
+
+EXTERN_C const IID DIID_ISWbemSinkEvents;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+
+    MIDL_INTERFACE("75718CA0-F029-11d1-A1AC-00C04FB6C223")
+    ISWbemSinkEvents : public IDispatch
+    {
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct ISWbemSinkEventsVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in ISWbemSinkEvents * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in ISWbemSinkEvents * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in ISWbemSinkEvents * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            __RPC__in ISWbemSinkEvents * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            __RPC__in ISWbemSinkEvents * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            __RPC__in ISWbemSinkEvents * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISWbemSinkEvents * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        END_INTERFACE
+    } ISWbemSinkEventsVtbl;
+
+    interface ISWbemSinkEvents
+    {
+        CONST_VTBL struct ISWbemSinkEventsVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISWbemSinkEvents_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISWbemSinkEvents_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISWbemSinkEvents_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ISWbemSinkEvents_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define ISWbemSinkEvents_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define ISWbemSinkEvents_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define ISWbemSinkEvents_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+#endif 	/* __ISWbemSinkEvents_DISPINTERFACE_DEFINED__ */
+
+
+#ifndef __ISWbemSink_INTERFACE_DEFINED__
+#define __ISWbemSink_INTERFACE_DEFINED__
+
+/* interface ISWbemSink */
+/* [helpstring][nonextensible][hidden][dual][oleautomation][uuid][object] */ 
+
+
+EXTERN_C const IID IID_ISWbemSink;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("75718C9F-F029-11d1-A1AC-00C04FB6C223")
+    ISWbemSink : public IDispatch
+    {
+    public:
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Cancel( void) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ISWbemSinkVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in ISWbemSink * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in ISWbemSink * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in ISWbemSink * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            __RPC__in ISWbemSink * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            __RPC__in ISWbemSink * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            __RPC__in ISWbemSink * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISWbemSink * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Cancel )( 
+            __RPC__in ISWbemSink * This);
+        
+        END_INTERFACE
+    } ISWbemSinkVtbl;
+
+    interface ISWbemSink
+    {
+        CONST_VTBL struct ISWbemSinkVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISWbemSink_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISWbemSink_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISWbemSink_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ISWbemSink_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define ISWbemSink_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define ISWbemSink_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define ISWbemSink_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define ISWbemSink_Cancel(This)	\
+    ( (This)->lpVtbl -> Cancel(This) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISWbemSink_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISWbemSecurity_INTERFACE_DEFINED__
+#define __ISWbemSecurity_INTERFACE_DEFINED__
+
+/* interface ISWbemSecurity */
+/* [helpstring][hidden][nonextensible][dual][oleautomation][uuid][local][object] */ 
+
+
+EXTERN_C const IID IID_ISWbemSecurity;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("B54D66E6-2287-11d2-8B33-00600806D9B6")
+    ISWbemSecurity : public IDispatch
+    {
+    public:
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_ImpersonationLevel( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  WbemImpersonationLevelEnum *iImpersonationLevel) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_ImpersonationLevel( 
+            /* [annotation][in] */ 
+            _In_  WbemImpersonationLevelEnum iImpersonationLevel) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_AuthenticationLevel( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  WbemAuthenticationLevelEnum *iAuthenticationLevel) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_AuthenticationLevel( 
+            /* [annotation][in] */ 
+            _In_  WbemAuthenticationLevelEnum iAuthenticationLevel) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Privileges( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemPrivilegeSet **objWbemPrivilegeSet) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ISWbemSecurityVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISWbemSecurity * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISWbemSecurity * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISWbemSecurity * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISWbemSecurity * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISWbemSecurity * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISWbemSecurity * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISWbemSecurity * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ImpersonationLevel )( 
+            ISWbemSecurity * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  WbemImpersonationLevelEnum *iImpersonationLevel);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ImpersonationLevel )( 
+            ISWbemSecurity * This,
+            /* [annotation][in] */ 
+            _In_  WbemImpersonationLevelEnum iImpersonationLevel);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AuthenticationLevel )( 
+            ISWbemSecurity * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  WbemAuthenticationLevelEnum *iAuthenticationLevel);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_AuthenticationLevel )( 
+            ISWbemSecurity * This,
+            /* [annotation][in] */ 
+            _In_  WbemAuthenticationLevelEnum iAuthenticationLevel);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Privileges )( 
+            ISWbemSecurity * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemPrivilegeSet **objWbemPrivilegeSet);
+        
+        END_INTERFACE
+    } ISWbemSecurityVtbl;
+
+    interface ISWbemSecurity
+    {
+        CONST_VTBL struct ISWbemSecurityVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISWbemSecurity_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISWbemSecurity_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISWbemSecurity_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ISWbemSecurity_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define ISWbemSecurity_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define ISWbemSecurity_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define ISWbemSecurity_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define ISWbemSecurity_get_ImpersonationLevel(This,iImpersonationLevel)	\
+    ( (This)->lpVtbl -> get_ImpersonationLevel(This,iImpersonationLevel) ) 
+
+#define ISWbemSecurity_put_ImpersonationLevel(This,iImpersonationLevel)	\
+    ( (This)->lpVtbl -> put_ImpersonationLevel(This,iImpersonationLevel) ) 
+
+#define ISWbemSecurity_get_AuthenticationLevel(This,iAuthenticationLevel)	\
+    ( (This)->lpVtbl -> get_AuthenticationLevel(This,iAuthenticationLevel) ) 
+
+#define ISWbemSecurity_put_AuthenticationLevel(This,iAuthenticationLevel)	\
+    ( (This)->lpVtbl -> put_AuthenticationLevel(This,iAuthenticationLevel) ) 
+
+#define ISWbemSecurity_get_Privileges(This,objWbemPrivilegeSet)	\
+    ( (This)->lpVtbl -> get_Privileges(This,objWbemPrivilegeSet) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISWbemSecurity_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISWbemPrivilege_INTERFACE_DEFINED__
+#define __ISWbemPrivilege_INTERFACE_DEFINED__
+
+/* interface ISWbemPrivilege */
+/* [helpstring][hidden][nonextensible][dual][oleautomation][uuid][local][object] */ 
+
+
+EXTERN_C const IID IID_ISWbemPrivilege;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("26EE67BD-5804-11d2-8B4A-00600806D9B6")
+    ISWbemPrivilege : public IDispatch
+    {
+    public:
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_IsEnabled( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsEnabled) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_IsEnabled( 
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bIsEnabled) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strDisplayName) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_DisplayName( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strDisplayName) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Identifier( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  WbemPrivilegeEnum *iPrivilege) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ISWbemPrivilegeVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISWbemPrivilege * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISWbemPrivilege * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISWbemPrivilege * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISWbemPrivilege * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISWbemPrivilege * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISWbemPrivilege * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISWbemPrivilege * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IsEnabled )( 
+            ISWbemPrivilege * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsEnabled);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_IsEnabled )( 
+            ISWbemPrivilege * This,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bIsEnabled);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
+            ISWbemPrivilege * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strDisplayName);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DisplayName )( 
+            ISWbemPrivilege * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strDisplayName);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Identifier )( 
+            ISWbemPrivilege * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  WbemPrivilegeEnum *iPrivilege);
+        
+        END_INTERFACE
+    } ISWbemPrivilegeVtbl;
+
+    interface ISWbemPrivilege
+    {
+        CONST_VTBL struct ISWbemPrivilegeVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISWbemPrivilege_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISWbemPrivilege_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISWbemPrivilege_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ISWbemPrivilege_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define ISWbemPrivilege_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define ISWbemPrivilege_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define ISWbemPrivilege_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define ISWbemPrivilege_get_IsEnabled(This,bIsEnabled)	\
+    ( (This)->lpVtbl -> get_IsEnabled(This,bIsEnabled) ) 
+
+#define ISWbemPrivilege_put_IsEnabled(This,bIsEnabled)	\
+    ( (This)->lpVtbl -> put_IsEnabled(This,bIsEnabled) ) 
+
+#define ISWbemPrivilege_get_Name(This,strDisplayName)	\
+    ( (This)->lpVtbl -> get_Name(This,strDisplayName) ) 
+
+#define ISWbemPrivilege_get_DisplayName(This,strDisplayName)	\
+    ( (This)->lpVtbl -> get_DisplayName(This,strDisplayName) ) 
+
+#define ISWbemPrivilege_get_Identifier(This,iPrivilege)	\
+    ( (This)->lpVtbl -> get_Identifier(This,iPrivilege) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISWbemPrivilege_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISWbemPrivilegeSet_INTERFACE_DEFINED__
+#define __ISWbemPrivilegeSet_INTERFACE_DEFINED__
+
+/* interface ISWbemPrivilegeSet */
+/* [helpstring][nonextensible][hidden][dual][oleautomation][uuid][local][object] */ 
+
+
+EXTERN_C const IID IID_ISWbemPrivilegeSet;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("26EE67BF-5804-11d2-8B4A-00600806D9B6")
+    ISWbemPrivilegeSet : public IDispatch
+    {
+    public:
+        virtual /* [restricted][propget][id] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **pUnk) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Item( 
+            /* [annotation][in] */ 
+            _In_  WbemPrivilegeEnum iPrivilege,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemPrivilege **objWbemPrivilege) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Count( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iCount) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Add( 
+            /* [annotation][in] */ 
+            _In_  WbemPrivilegeEnum iPrivilege,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsEnabled,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemPrivilege **objWbemPrivilege) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Remove( 
+            /* [annotation][in] */ 
+            _In_  WbemPrivilegeEnum iPrivilege) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DeleteAll( void) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddAsString( 
+            /* [annotation][in] */ 
+            _In_  BSTR strPrivilege,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsEnabled,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemPrivilege **objWbemPrivilege) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ISWbemPrivilegeSetVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISWbemPrivilegeSet * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISWbemPrivilegeSet * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISWbemPrivilegeSet * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISWbemPrivilegeSet * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISWbemPrivilegeSet * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISWbemPrivilegeSet * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISWbemPrivilegeSet * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [restricted][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
+            ISWbemPrivilegeSet * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **pUnk);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
+            ISWbemPrivilegeSet * This,
+            /* [annotation][in] */ 
+            _In_  WbemPrivilegeEnum iPrivilege,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemPrivilege **objWbemPrivilege);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
+            ISWbemPrivilegeSet * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iCount);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
+            ISWbemPrivilegeSet * This,
+            /* [annotation][in] */ 
+            _In_  WbemPrivilegeEnum iPrivilege,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsEnabled,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemPrivilege **objWbemPrivilege);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
+            ISWbemPrivilegeSet * This,
+            /* [annotation][in] */ 
+            _In_  WbemPrivilegeEnum iPrivilege);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteAll )( 
+            ISWbemPrivilegeSet * This);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddAsString )( 
+            ISWbemPrivilegeSet * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strPrivilege,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsEnabled,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemPrivilege **objWbemPrivilege);
+        
+        END_INTERFACE
+    } ISWbemPrivilegeSetVtbl;
+
+    interface ISWbemPrivilegeSet
+    {
+        CONST_VTBL struct ISWbemPrivilegeSetVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISWbemPrivilegeSet_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISWbemPrivilegeSet_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISWbemPrivilegeSet_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ISWbemPrivilegeSet_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define ISWbemPrivilegeSet_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define ISWbemPrivilegeSet_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define ISWbemPrivilegeSet_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define ISWbemPrivilegeSet_get__NewEnum(This,pUnk)	\
+    ( (This)->lpVtbl -> get__NewEnum(This,pUnk) ) 
+
+#define ISWbemPrivilegeSet_Item(This,iPrivilege,objWbemPrivilege)	\
+    ( (This)->lpVtbl -> Item(This,iPrivilege,objWbemPrivilege) ) 
+
+#define ISWbemPrivilegeSet_get_Count(This,iCount)	\
+    ( (This)->lpVtbl -> get_Count(This,iCount) ) 
+
+#define ISWbemPrivilegeSet_Add(This,iPrivilege,bIsEnabled,objWbemPrivilege)	\
+    ( (This)->lpVtbl -> Add(This,iPrivilege,bIsEnabled,objWbemPrivilege) ) 
+
+#define ISWbemPrivilegeSet_Remove(This,iPrivilege)	\
+    ( (This)->lpVtbl -> Remove(This,iPrivilege) ) 
+
+#define ISWbemPrivilegeSet_DeleteAll(This)	\
+    ( (This)->lpVtbl -> DeleteAll(This) ) 
+
+#define ISWbemPrivilegeSet_AddAsString(This,strPrivilege,bIsEnabled,objWbemPrivilege)	\
+    ( (This)->lpVtbl -> AddAsString(This,strPrivilege,bIsEnabled,objWbemPrivilege) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISWbemPrivilegeSet_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISWbemServicesEx_INTERFACE_DEFINED__
+#define __ISWbemServicesEx_INTERFACE_DEFINED__
+
+/* interface ISWbemServicesEx */
+/* [helpstring][hidden][unique][nonextensible][dual][oleautomation][uuid][object][local] */ 
+
+
+EXTERN_C const IID IID_ISWbemServicesEx;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("D2F68443-85DC-427e-91D8-366554CC754C")
+    ISWbemServicesEx : public ISWbemServices
+    {
+    public:
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Put( 
+            /* [annotation][in] */ 
+            _In_  ISWbemObjectEx *objWbemObject,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectPath **objWbemObjectPath) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE PutAsync( 
+            /* [annotation][in] */ 
+            _In_  ISWbemSink *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  ISWbemObjectEx *objWbemObject,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = wbemChangeFlagCreateOrUpdate,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ISWbemServicesExVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISWbemServicesEx * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISWbemServicesEx * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISWbemServicesEx * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISWbemServicesEx * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISWbemServicesEx * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISWbemServicesEx * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISWbemServicesEx * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Get )( 
+            ISWbemServicesEx * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetAsync )( 
+            ISWbemServicesEx * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
+            ISWbemServicesEx * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteAsync )( 
+            ISWbemServicesEx * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InstancesOf )( 
+            ISWbemServicesEx * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InstancesOfAsync )( 
+            ISWbemServicesEx * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SubclassesOf )( 
+            ISWbemServicesEx * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strSuperclass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SubclassesOfAsync )( 
+            ISWbemServicesEx * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strSuperclass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecQuery )( 
+            ISWbemServicesEx * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strQuery,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strQueryLanguage,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecQueryAsync )( 
+            ISWbemServicesEx * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strQuery,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strQueryLanguage,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long lFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AssociatorsOf )( 
+            ISWbemServicesEx * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAssocClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredAssocQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AssociatorsOfAsync )( 
+            ISWbemServicesEx * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAssocClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredAssocQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ReferencesTo )( 
+            ISWbemServicesEx * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ReferencesToAsync )( 
+            ISWbemServicesEx * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecNotificationQuery )( 
+            ISWbemServicesEx * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strQuery,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strQueryLanguage,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemEventSource **objWbemEventSource);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecNotificationQueryAsync )( 
+            ISWbemServicesEx * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strQuery,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strQueryLanguage,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecMethod )( 
+            ISWbemServicesEx * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][in] */ 
+            _In_  BSTR strMethodName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemInParameters,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemOutParameters);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecMethodAsync )( 
+            ISWbemServicesEx * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][in] */ 
+            _In_  BSTR strMethodName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemInParameters,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Security_ )( 
+            ISWbemServicesEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemSecurity **objWbemSecurity);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Put )( 
+            ISWbemServicesEx * This,
+            /* [annotation][in] */ 
+            _In_  ISWbemObjectEx *objWbemObject,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectPath **objWbemObjectPath);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *PutAsync )( 
+            ISWbemServicesEx * This,
+            /* [annotation][in] */ 
+            _In_  ISWbemSink *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  ISWbemObjectEx *objWbemObject,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        END_INTERFACE
+    } ISWbemServicesExVtbl;
+
+    interface ISWbemServicesEx
+    {
+        CONST_VTBL struct ISWbemServicesExVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISWbemServicesEx_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISWbemServicesEx_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISWbemServicesEx_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ISWbemServicesEx_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define ISWbemServicesEx_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define ISWbemServicesEx_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define ISWbemServicesEx_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define ISWbemServicesEx_Get(This,strObjectPath,iFlags,objWbemNamedValueSet,objWbemObject)	\
+    ( (This)->lpVtbl -> Get(This,strObjectPath,iFlags,objWbemNamedValueSet,objWbemObject) ) 
+
+#define ISWbemServicesEx_GetAsync(This,objWbemSink,strObjectPath,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> GetAsync(This,objWbemSink,strObjectPath,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemServicesEx_Delete(This,strObjectPath,iFlags,objWbemNamedValueSet)	\
+    ( (This)->lpVtbl -> Delete(This,strObjectPath,iFlags,objWbemNamedValueSet) ) 
+
+#define ISWbemServicesEx_DeleteAsync(This,objWbemSink,strObjectPath,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> DeleteAsync(This,objWbemSink,strObjectPath,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemServicesEx_InstancesOf(This,strClass,iFlags,objWbemNamedValueSet,objWbemObjectSet)	\
+    ( (This)->lpVtbl -> InstancesOf(This,strClass,iFlags,objWbemNamedValueSet,objWbemObjectSet) ) 
+
+#define ISWbemServicesEx_InstancesOfAsync(This,objWbemSink,strClass,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> InstancesOfAsync(This,objWbemSink,strClass,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemServicesEx_SubclassesOf(This,strSuperclass,iFlags,objWbemNamedValueSet,objWbemObjectSet)	\
+    ( (This)->lpVtbl -> SubclassesOf(This,strSuperclass,iFlags,objWbemNamedValueSet,objWbemObjectSet) ) 
+
+#define ISWbemServicesEx_SubclassesOfAsync(This,objWbemSink,strSuperclass,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> SubclassesOfAsync(This,objWbemSink,strSuperclass,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemServicesEx_ExecQuery(This,strQuery,strQueryLanguage,iFlags,objWbemNamedValueSet,objWbemObjectSet)	\
+    ( (This)->lpVtbl -> ExecQuery(This,strQuery,strQueryLanguage,iFlags,objWbemNamedValueSet,objWbemObjectSet) ) 
+
+#define ISWbemServicesEx_ExecQueryAsync(This,objWbemSink,strQuery,strQueryLanguage,lFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> ExecQueryAsync(This,objWbemSink,strQuery,strQueryLanguage,lFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemServicesEx_AssociatorsOf(This,strObjectPath,strAssocClass,strResultClass,strResultRole,strRole,bClassesOnly,bSchemaOnly,strRequiredAssocQualifier,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemObjectSet)	\
+    ( (This)->lpVtbl -> AssociatorsOf(This,strObjectPath,strAssocClass,strResultClass,strResultRole,strRole,bClassesOnly,bSchemaOnly,strRequiredAssocQualifier,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemObjectSet) ) 
+
+#define ISWbemServicesEx_AssociatorsOfAsync(This,objWbemSink,strObjectPath,strAssocClass,strResultClass,strResultRole,strRole,bClassesOnly,bSchemaOnly,strRequiredAssocQualifier,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> AssociatorsOfAsync(This,objWbemSink,strObjectPath,strAssocClass,strResultClass,strResultRole,strRole,bClassesOnly,bSchemaOnly,strRequiredAssocQualifier,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemServicesEx_ReferencesTo(This,strObjectPath,strResultClass,strRole,bClassesOnly,bSchemaOnly,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemObjectSet)	\
+    ( (This)->lpVtbl -> ReferencesTo(This,strObjectPath,strResultClass,strRole,bClassesOnly,bSchemaOnly,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemObjectSet) ) 
+
+#define ISWbemServicesEx_ReferencesToAsync(This,objWbemSink,strObjectPath,strResultClass,strRole,bClassesOnly,bSchemaOnly,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> ReferencesToAsync(This,objWbemSink,strObjectPath,strResultClass,strRole,bClassesOnly,bSchemaOnly,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemServicesEx_ExecNotificationQuery(This,strQuery,strQueryLanguage,iFlags,objWbemNamedValueSet,objWbemEventSource)	\
+    ( (This)->lpVtbl -> ExecNotificationQuery(This,strQuery,strQueryLanguage,iFlags,objWbemNamedValueSet,objWbemEventSource) ) 
+
+#define ISWbemServicesEx_ExecNotificationQueryAsync(This,objWbemSink,strQuery,strQueryLanguage,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> ExecNotificationQueryAsync(This,objWbemSink,strQuery,strQueryLanguage,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemServicesEx_ExecMethod(This,strObjectPath,strMethodName,objWbemInParameters,iFlags,objWbemNamedValueSet,objWbemOutParameters)	\
+    ( (This)->lpVtbl -> ExecMethod(This,strObjectPath,strMethodName,objWbemInParameters,iFlags,objWbemNamedValueSet,objWbemOutParameters) ) 
+
+#define ISWbemServicesEx_ExecMethodAsync(This,objWbemSink,strObjectPath,strMethodName,objWbemInParameters,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> ExecMethodAsync(This,objWbemSink,strObjectPath,strMethodName,objWbemInParameters,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemServicesEx_get_Security_(This,objWbemSecurity)	\
+    ( (This)->lpVtbl -> get_Security_(This,objWbemSecurity) ) 
+
+
+#define ISWbemServicesEx_Put(This,objWbemObject,iFlags,objWbemNamedValueSet,objWbemObjectPath)	\
+    ( (This)->lpVtbl -> Put(This,objWbemObject,iFlags,objWbemNamedValueSet,objWbemObjectPath) ) 
+
+#define ISWbemServicesEx_PutAsync(This,objWbemSink,objWbemObject,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> PutAsync(This,objWbemSink,objWbemObject,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISWbemServicesEx_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISWbemObjectEx_INTERFACE_DEFINED__
+#define __ISWbemObjectEx_INTERFACE_DEFINED__
+
+/* interface ISWbemObjectEx */
+/* [helpstring][hidden][oleautomation][dual][uuid][object][local] */ 
+
+
+EXTERN_C const IID IID_ISWbemObjectEx;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("269AD56A-8A67-4129-BC8C-0506DCFE9880")
+    ISWbemObjectEx : public ISWbemObject
+    {
+    public:
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Refresh_( 
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_SystemProperties_( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemPropertySet **objWbemPropertySet) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetText_( 
+            /* [annotation][in] */ 
+            _In_  WbemObjectTextFormatEnum iObjectTextFormat,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *bsText) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetFromText_( 
+            /* [annotation][in] */ 
+            _In_  BSTR bsText,
+            /* [annotation][in] */ 
+            _In_  WbemObjectTextFormatEnum iObjectTextFormat,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ISWbemObjectExVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISWbemObjectEx * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISWbemObjectEx * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISWbemObjectEx * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISWbemObjectEx * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISWbemObjectEx * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISWbemObjectEx * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISWbemObjectEx * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Put_ )( 
+            ISWbemObjectEx * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectPath **objWbemObjectPath);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *PutAsync_ )( 
+            ISWbemObjectEx * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete_ )( 
+            ISWbemObjectEx * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteAsync_ )( 
+            ISWbemObjectEx * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Instances_ )( 
+            ISWbemObjectEx * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InstancesAsync_ )( 
+            ISWbemObjectEx * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Subclasses_ )( 
+            ISWbemObjectEx * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SubclassesAsync_ )( 
+            ISWbemObjectEx * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Associators_ )( 
+            ISWbemObjectEx * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAssocClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredAssocQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AssociatorsAsync_ )( 
+            ISWbemObjectEx * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAssocClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredAssocQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *References_ )( 
+            ISWbemObjectEx * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ReferencesAsync_ )( 
+            ISWbemObjectEx * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecMethod_ )( 
+            ISWbemObjectEx * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strMethodName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemInParameters,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemOutParameters);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecMethodAsync_ )( 
+            ISWbemObjectEx * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strMethodName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemInParameters,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone_ )( 
+            ISWbemObjectEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetObjectText_ )( 
+            ISWbemObjectEx * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strObjectText);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SpawnDerivedClass_ )( 
+            ISWbemObjectEx * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SpawnInstance_ )( 
+            ISWbemObjectEx * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CompareTo_ )( 
+            ISWbemObjectEx * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemObject,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bResult);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Qualifiers_ )( 
+            ISWbemObjectEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemQualifierSet **objWbemQualifierSet);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Properties_ )( 
+            ISWbemObjectEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemPropertySet **objWbemPropertySet);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Methods_ )( 
+            ISWbemObjectEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemMethodSet **objWbemMethodSet);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Derivation_ )( 
+            ISWbemObjectEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *strClassNameArray);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Path_ )( 
+            ISWbemObjectEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectPath **objWbemObjectPath);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Security_ )( 
+            ISWbemObjectEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemSecurity **objWbemSecurity);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh_ )( 
+            ISWbemObjectEx * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SystemProperties_ )( 
+            ISWbemObjectEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemPropertySet **objWbemPropertySet);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetText_ )( 
+            ISWbemObjectEx * This,
+            /* [annotation][in] */ 
+            _In_  WbemObjectTextFormatEnum iObjectTextFormat,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *bsText);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetFromText_ )( 
+            ISWbemObjectEx * This,
+            /* [annotation][in] */ 
+            _In_  BSTR bsText,
+            /* [annotation][in] */ 
+            _In_  WbemObjectTextFormatEnum iObjectTextFormat,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet);
+        
+        END_INTERFACE
+    } ISWbemObjectExVtbl;
+
+    interface ISWbemObjectEx
+    {
+        CONST_VTBL struct ISWbemObjectExVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISWbemObjectEx_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISWbemObjectEx_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISWbemObjectEx_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ISWbemObjectEx_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define ISWbemObjectEx_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define ISWbemObjectEx_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define ISWbemObjectEx_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define ISWbemObjectEx_Put_(This,iFlags,objWbemNamedValueSet,objWbemObjectPath)	\
+    ( (This)->lpVtbl -> Put_(This,iFlags,objWbemNamedValueSet,objWbemObjectPath) ) 
+
+#define ISWbemObjectEx_PutAsync_(This,objWbemSink,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> PutAsync_(This,objWbemSink,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemObjectEx_Delete_(This,iFlags,objWbemNamedValueSet)	\
+    ( (This)->lpVtbl -> Delete_(This,iFlags,objWbemNamedValueSet) ) 
+
+#define ISWbemObjectEx_DeleteAsync_(This,objWbemSink,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> DeleteAsync_(This,objWbemSink,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemObjectEx_Instances_(This,iFlags,objWbemNamedValueSet,objWbemObjectSet)	\
+    ( (This)->lpVtbl -> Instances_(This,iFlags,objWbemNamedValueSet,objWbemObjectSet) ) 
+
+#define ISWbemObjectEx_InstancesAsync_(This,objWbemSink,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> InstancesAsync_(This,objWbemSink,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemObjectEx_Subclasses_(This,iFlags,objWbemNamedValueSet,objWbemObjectSet)	\
+    ( (This)->lpVtbl -> Subclasses_(This,iFlags,objWbemNamedValueSet,objWbemObjectSet) ) 
+
+#define ISWbemObjectEx_SubclassesAsync_(This,objWbemSink,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> SubclassesAsync_(This,objWbemSink,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemObjectEx_Associators_(This,strAssocClass,strResultClass,strResultRole,strRole,bClassesOnly,bSchemaOnly,strRequiredAssocQualifier,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemObjectSet)	\
+    ( (This)->lpVtbl -> Associators_(This,strAssocClass,strResultClass,strResultRole,strRole,bClassesOnly,bSchemaOnly,strRequiredAssocQualifier,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemObjectSet) ) 
+
+#define ISWbemObjectEx_AssociatorsAsync_(This,objWbemSink,strAssocClass,strResultClass,strResultRole,strRole,bClassesOnly,bSchemaOnly,strRequiredAssocQualifier,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> AssociatorsAsync_(This,objWbemSink,strAssocClass,strResultClass,strResultRole,strRole,bClassesOnly,bSchemaOnly,strRequiredAssocQualifier,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemObjectEx_References_(This,strResultClass,strRole,bClassesOnly,bSchemaOnly,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemObjectSet)	\
+    ( (This)->lpVtbl -> References_(This,strResultClass,strRole,bClassesOnly,bSchemaOnly,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemObjectSet) ) 
+
+#define ISWbemObjectEx_ReferencesAsync_(This,objWbemSink,strResultClass,strRole,bClassesOnly,bSchemaOnly,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> ReferencesAsync_(This,objWbemSink,strResultClass,strRole,bClassesOnly,bSchemaOnly,strRequiredQualifier,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemObjectEx_ExecMethod_(This,strMethodName,objWbemInParameters,iFlags,objWbemNamedValueSet,objWbemOutParameters)	\
+    ( (This)->lpVtbl -> ExecMethod_(This,strMethodName,objWbemInParameters,iFlags,objWbemNamedValueSet,objWbemOutParameters) ) 
+
+#define ISWbemObjectEx_ExecMethodAsync_(This,objWbemSink,strMethodName,objWbemInParameters,iFlags,objWbemNamedValueSet,objWbemAsyncContext)	\
+    ( (This)->lpVtbl -> ExecMethodAsync_(This,objWbemSink,strMethodName,objWbemInParameters,iFlags,objWbemNamedValueSet,objWbemAsyncContext) ) 
+
+#define ISWbemObjectEx_Clone_(This,objWbemObject)	\
+    ( (This)->lpVtbl -> Clone_(This,objWbemObject) ) 
+
+#define ISWbemObjectEx_GetObjectText_(This,iFlags,strObjectText)	\
+    ( (This)->lpVtbl -> GetObjectText_(This,iFlags,strObjectText) ) 
+
+#define ISWbemObjectEx_SpawnDerivedClass_(This,iFlags,objWbemObject)	\
+    ( (This)->lpVtbl -> SpawnDerivedClass_(This,iFlags,objWbemObject) ) 
+
+#define ISWbemObjectEx_SpawnInstance_(This,iFlags,objWbemObject)	\
+    ( (This)->lpVtbl -> SpawnInstance_(This,iFlags,objWbemObject) ) 
+
+#define ISWbemObjectEx_CompareTo_(This,objWbemObject,iFlags,bResult)	\
+    ( (This)->lpVtbl -> CompareTo_(This,objWbemObject,iFlags,bResult) ) 
+
+#define ISWbemObjectEx_get_Qualifiers_(This,objWbemQualifierSet)	\
+    ( (This)->lpVtbl -> get_Qualifiers_(This,objWbemQualifierSet) ) 
+
+#define ISWbemObjectEx_get_Properties_(This,objWbemPropertySet)	\
+    ( (This)->lpVtbl -> get_Properties_(This,objWbemPropertySet) ) 
+
+#define ISWbemObjectEx_get_Methods_(This,objWbemMethodSet)	\
+    ( (This)->lpVtbl -> get_Methods_(This,objWbemMethodSet) ) 
+
+#define ISWbemObjectEx_get_Derivation_(This,strClassNameArray)	\
+    ( (This)->lpVtbl -> get_Derivation_(This,strClassNameArray) ) 
+
+#define ISWbemObjectEx_get_Path_(This,objWbemObjectPath)	\
+    ( (This)->lpVtbl -> get_Path_(This,objWbemObjectPath) ) 
+
+#define ISWbemObjectEx_get_Security_(This,objWbemSecurity)	\
+    ( (This)->lpVtbl -> get_Security_(This,objWbemSecurity) ) 
+
+
+#define ISWbemObjectEx_Refresh_(This,iFlags,objWbemNamedValueSet)	\
+    ( (This)->lpVtbl -> Refresh_(This,iFlags,objWbemNamedValueSet) ) 
+
+#define ISWbemObjectEx_get_SystemProperties_(This,objWbemPropertySet)	\
+    ( (This)->lpVtbl -> get_SystemProperties_(This,objWbemPropertySet) ) 
+
+#define ISWbemObjectEx_GetText_(This,iObjectTextFormat,iFlags,objWbemNamedValueSet,bsText)	\
+    ( (This)->lpVtbl -> GetText_(This,iObjectTextFormat,iFlags,objWbemNamedValueSet,bsText) ) 
+
+#define ISWbemObjectEx_SetFromText_(This,bsText,iObjectTextFormat,iFlags,objWbemNamedValueSet)	\
+    ( (This)->lpVtbl -> SetFromText_(This,bsText,iObjectTextFormat,iFlags,objWbemNamedValueSet) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISWbemObjectEx_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISWbemDateTime_INTERFACE_DEFINED__
+#define __ISWbemDateTime_INTERFACE_DEFINED__
+
+/* interface ISWbemDateTime */
+/* [helpstring][nonextensible][dual][oleautomation][uuid][local][object] */ 
+
+
+EXTERN_C const IID IID_ISWbemDateTime;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("5E97458A-CF77-11d3-B38F-00105A1F473A")
+    ISWbemDateTime : public IDispatch
+    {
+    public:
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Value( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strValue) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Value( 
+            /* [annotation][in] */ 
+            _In_  BSTR strValue) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Year( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iYear) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Year( 
+            /* [annotation][in] */ 
+            _In_  long iYear) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_YearSpecified( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bYearSpecified) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_YearSpecified( 
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bYearSpecified) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Month( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iMonth) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Month( 
+            /* [annotation][in] */ 
+            _In_  long iMonth) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_MonthSpecified( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bMonthSpecified) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_MonthSpecified( 
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bMonthSpecified) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Day( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iDay) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Day( 
+            /* [annotation][in] */ 
+            _In_  long iDay) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_DaySpecified( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bDaySpecified) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_DaySpecified( 
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bDaySpecified) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Hours( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iHours) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Hours( 
+            /* [annotation][in] */ 
+            _In_  long iHours) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_HoursSpecified( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bHoursSpecified) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_HoursSpecified( 
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bHoursSpecified) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Minutes( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iMinutes) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Minutes( 
+            /* [annotation][in] */ 
+            _In_  long iMinutes) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_MinutesSpecified( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bMinutesSpecified) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_MinutesSpecified( 
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bMinutesSpecified) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Seconds( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iSeconds) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Seconds( 
+            /* [annotation][in] */ 
+            _In_  long iSeconds) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_SecondsSpecified( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bSecondsSpecified) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_SecondsSpecified( 
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bSecondsSpecified) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Microseconds( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iMicroseconds) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Microseconds( 
+            /* [annotation][in] */ 
+            _In_  long iMicroseconds) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_MicrosecondsSpecified( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bMicrosecondsSpecified) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_MicrosecondsSpecified( 
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bMicrosecondsSpecified) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_UTC( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iUTC) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_UTC( 
+            /* [annotation][in] */ 
+            _In_  long iUTC) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_UTCSpecified( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bUTCSpecified) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_UTCSpecified( 
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bUTCSpecified) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_IsInterval( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsInterval) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_IsInterval( 
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bIsInterval) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetVarDate( 
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsLocal,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DATE *dVarDate) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetVarDate( 
+            /* [annotation][in] */ 
+            _In_  DATE dVarDate,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsLocal = TRUE) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetFileTime( 
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsLocal,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strFileTime) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetFileTime( 
+            /* [annotation][in] */ 
+            _In_  BSTR strFileTime,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsLocal = TRUE) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ISWbemDateTimeVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISWbemDateTime * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISWbemDateTime * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISWbemDateTime * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISWbemDateTime * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISWbemDateTime * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISWbemDateTime * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISWbemDateTime * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
+            ISWbemDateTime * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strValue);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Value )( 
+            ISWbemDateTime * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strValue);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Year )( 
+            ISWbemDateTime * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iYear);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Year )( 
+            ISWbemDateTime * This,
+            /* [annotation][in] */ 
+            _In_  long iYear);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_YearSpecified )( 
+            ISWbemDateTime * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bYearSpecified);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_YearSpecified )( 
+            ISWbemDateTime * This,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bYearSpecified);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Month )( 
+            ISWbemDateTime * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iMonth);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Month )( 
+            ISWbemDateTime * This,
+            /* [annotation][in] */ 
+            _In_  long iMonth);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MonthSpecified )( 
+            ISWbemDateTime * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bMonthSpecified);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MonthSpecified )( 
+            ISWbemDateTime * This,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bMonthSpecified);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Day )( 
+            ISWbemDateTime * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iDay);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Day )( 
+            ISWbemDateTime * This,
+            /* [annotation][in] */ 
+            _In_  long iDay);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DaySpecified )( 
+            ISWbemDateTime * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bDaySpecified);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DaySpecified )( 
+            ISWbemDateTime * This,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bDaySpecified);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Hours )( 
+            ISWbemDateTime * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iHours);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Hours )( 
+            ISWbemDateTime * This,
+            /* [annotation][in] */ 
+            _In_  long iHours);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_HoursSpecified )( 
+            ISWbemDateTime * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bHoursSpecified);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_HoursSpecified )( 
+            ISWbemDateTime * This,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bHoursSpecified);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Minutes )( 
+            ISWbemDateTime * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iMinutes);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Minutes )( 
+            ISWbemDateTime * This,
+            /* [annotation][in] */ 
+            _In_  long iMinutes);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MinutesSpecified )( 
+            ISWbemDateTime * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bMinutesSpecified);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MinutesSpecified )( 
+            ISWbemDateTime * This,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bMinutesSpecified);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Seconds )( 
+            ISWbemDateTime * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iSeconds);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Seconds )( 
+            ISWbemDateTime * This,
+            /* [annotation][in] */ 
+            _In_  long iSeconds);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SecondsSpecified )( 
+            ISWbemDateTime * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bSecondsSpecified);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_SecondsSpecified )( 
+            ISWbemDateTime * This,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bSecondsSpecified);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Microseconds )( 
+            ISWbemDateTime * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iMicroseconds);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Microseconds )( 
+            ISWbemDateTime * This,
+            /* [annotation][in] */ 
+            _In_  long iMicroseconds);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MicrosecondsSpecified )( 
+            ISWbemDateTime * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bMicrosecondsSpecified);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MicrosecondsSpecified )( 
+            ISWbemDateTime * This,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bMicrosecondsSpecified);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_UTC )( 
+            ISWbemDateTime * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iUTC);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_UTC )( 
+            ISWbemDateTime * This,
+            /* [annotation][in] */ 
+            _In_  long iUTC);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_UTCSpecified )( 
+            ISWbemDateTime * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bUTCSpecified);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_UTCSpecified )( 
+            ISWbemDateTime * This,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bUTCSpecified);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IsInterval )( 
+            ISWbemDateTime * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsInterval);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_IsInterval )( 
+            ISWbemDateTime * This,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bIsInterval);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetVarDate )( 
+            ISWbemDateTime * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsLocal,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DATE *dVarDate);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetVarDate )( 
+            ISWbemDateTime * This,
+            /* [annotation][in] */ 
+            _In_  DATE dVarDate,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsLocal);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetFileTime )( 
+            ISWbemDateTime * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsLocal,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strFileTime);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetFileTime )( 
+            ISWbemDateTime * This,
+            /* [annotation][in] */ 
+            _In_  BSTR strFileTime,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsLocal);
+        
+        END_INTERFACE
+    } ISWbemDateTimeVtbl;
+
+    interface ISWbemDateTime
+    {
+        CONST_VTBL struct ISWbemDateTimeVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISWbemDateTime_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISWbemDateTime_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISWbemDateTime_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ISWbemDateTime_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define ISWbemDateTime_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define ISWbemDateTime_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define ISWbemDateTime_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define ISWbemDateTime_get_Value(This,strValue)	\
+    ( (This)->lpVtbl -> get_Value(This,strValue) ) 
+
+#define ISWbemDateTime_put_Value(This,strValue)	\
+    ( (This)->lpVtbl -> put_Value(This,strValue) ) 
+
+#define ISWbemDateTime_get_Year(This,iYear)	\
+    ( (This)->lpVtbl -> get_Year(This,iYear) ) 
+
+#define ISWbemDateTime_put_Year(This,iYear)	\
+    ( (This)->lpVtbl -> put_Year(This,iYear) ) 
+
+#define ISWbemDateTime_get_YearSpecified(This,bYearSpecified)	\
+    ( (This)->lpVtbl -> get_YearSpecified(This,bYearSpecified) ) 
+
+#define ISWbemDateTime_put_YearSpecified(This,bYearSpecified)	\
+    ( (This)->lpVtbl -> put_YearSpecified(This,bYearSpecified) ) 
+
+#define ISWbemDateTime_get_Month(This,iMonth)	\
+    ( (This)->lpVtbl -> get_Month(This,iMonth) ) 
+
+#define ISWbemDateTime_put_Month(This,iMonth)	\
+    ( (This)->lpVtbl -> put_Month(This,iMonth) ) 
+
+#define ISWbemDateTime_get_MonthSpecified(This,bMonthSpecified)	\
+    ( (This)->lpVtbl -> get_MonthSpecified(This,bMonthSpecified) ) 
+
+#define ISWbemDateTime_put_MonthSpecified(This,bMonthSpecified)	\
+    ( (This)->lpVtbl -> put_MonthSpecified(This,bMonthSpecified) ) 
+
+#define ISWbemDateTime_get_Day(This,iDay)	\
+    ( (This)->lpVtbl -> get_Day(This,iDay) ) 
+
+#define ISWbemDateTime_put_Day(This,iDay)	\
+    ( (This)->lpVtbl -> put_Day(This,iDay) ) 
+
+#define ISWbemDateTime_get_DaySpecified(This,bDaySpecified)	\
+    ( (This)->lpVtbl -> get_DaySpecified(This,bDaySpecified) ) 
+
+#define ISWbemDateTime_put_DaySpecified(This,bDaySpecified)	\
+    ( (This)->lpVtbl -> put_DaySpecified(This,bDaySpecified) ) 
+
+#define ISWbemDateTime_get_Hours(This,iHours)	\
+    ( (This)->lpVtbl -> get_Hours(This,iHours) ) 
+
+#define ISWbemDateTime_put_Hours(This,iHours)	\
+    ( (This)->lpVtbl -> put_Hours(This,iHours) ) 
+
+#define ISWbemDateTime_get_HoursSpecified(This,bHoursSpecified)	\
+    ( (This)->lpVtbl -> get_HoursSpecified(This,bHoursSpecified) ) 
+
+#define ISWbemDateTime_put_HoursSpecified(This,bHoursSpecified)	\
+    ( (This)->lpVtbl -> put_HoursSpecified(This,bHoursSpecified) ) 
+
+#define ISWbemDateTime_get_Minutes(This,iMinutes)	\
+    ( (This)->lpVtbl -> get_Minutes(This,iMinutes) ) 
+
+#define ISWbemDateTime_put_Minutes(This,iMinutes)	\
+    ( (This)->lpVtbl -> put_Minutes(This,iMinutes) ) 
+
+#define ISWbemDateTime_get_MinutesSpecified(This,bMinutesSpecified)	\
+    ( (This)->lpVtbl -> get_MinutesSpecified(This,bMinutesSpecified) ) 
+
+#define ISWbemDateTime_put_MinutesSpecified(This,bMinutesSpecified)	\
+    ( (This)->lpVtbl -> put_MinutesSpecified(This,bMinutesSpecified) ) 
+
+#define ISWbemDateTime_get_Seconds(This,iSeconds)	\
+    ( (This)->lpVtbl -> get_Seconds(This,iSeconds) ) 
+
+#define ISWbemDateTime_put_Seconds(This,iSeconds)	\
+    ( (This)->lpVtbl -> put_Seconds(This,iSeconds) ) 
+
+#define ISWbemDateTime_get_SecondsSpecified(This,bSecondsSpecified)	\
+    ( (This)->lpVtbl -> get_SecondsSpecified(This,bSecondsSpecified) ) 
+
+#define ISWbemDateTime_put_SecondsSpecified(This,bSecondsSpecified)	\
+    ( (This)->lpVtbl -> put_SecondsSpecified(This,bSecondsSpecified) ) 
+
+#define ISWbemDateTime_get_Microseconds(This,iMicroseconds)	\
+    ( (This)->lpVtbl -> get_Microseconds(This,iMicroseconds) ) 
+
+#define ISWbemDateTime_put_Microseconds(This,iMicroseconds)	\
+    ( (This)->lpVtbl -> put_Microseconds(This,iMicroseconds) ) 
+
+#define ISWbemDateTime_get_MicrosecondsSpecified(This,bMicrosecondsSpecified)	\
+    ( (This)->lpVtbl -> get_MicrosecondsSpecified(This,bMicrosecondsSpecified) ) 
+
+#define ISWbemDateTime_put_MicrosecondsSpecified(This,bMicrosecondsSpecified)	\
+    ( (This)->lpVtbl -> put_MicrosecondsSpecified(This,bMicrosecondsSpecified) ) 
+
+#define ISWbemDateTime_get_UTC(This,iUTC)	\
+    ( (This)->lpVtbl -> get_UTC(This,iUTC) ) 
+
+#define ISWbemDateTime_put_UTC(This,iUTC)	\
+    ( (This)->lpVtbl -> put_UTC(This,iUTC) ) 
+
+#define ISWbemDateTime_get_UTCSpecified(This,bUTCSpecified)	\
+    ( (This)->lpVtbl -> get_UTCSpecified(This,bUTCSpecified) ) 
+
+#define ISWbemDateTime_put_UTCSpecified(This,bUTCSpecified)	\
+    ( (This)->lpVtbl -> put_UTCSpecified(This,bUTCSpecified) ) 
+
+#define ISWbemDateTime_get_IsInterval(This,bIsInterval)	\
+    ( (This)->lpVtbl -> get_IsInterval(This,bIsInterval) ) 
+
+#define ISWbemDateTime_put_IsInterval(This,bIsInterval)	\
+    ( (This)->lpVtbl -> put_IsInterval(This,bIsInterval) ) 
+
+#define ISWbemDateTime_GetVarDate(This,bIsLocal,dVarDate)	\
+    ( (This)->lpVtbl -> GetVarDate(This,bIsLocal,dVarDate) ) 
+
+#define ISWbemDateTime_SetVarDate(This,dVarDate,bIsLocal)	\
+    ( (This)->lpVtbl -> SetVarDate(This,dVarDate,bIsLocal) ) 
+
+#define ISWbemDateTime_GetFileTime(This,bIsLocal,strFileTime)	\
+    ( (This)->lpVtbl -> GetFileTime(This,bIsLocal,strFileTime) ) 
+
+#define ISWbemDateTime_SetFileTime(This,strFileTime,bIsLocal)	\
+    ( (This)->lpVtbl -> SetFileTime(This,strFileTime,bIsLocal) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISWbemDateTime_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISWbemRefresher_INTERFACE_DEFINED__
+#define __ISWbemRefresher_INTERFACE_DEFINED__
+
+/* interface ISWbemRefresher */
+/* [helpstring][nonextensible][dual][oleautomation][uuid][local][object] */ 
+
+
+EXTERN_C const IID IID_ISWbemRefresher;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("14D8250E-D9C2-11d3-B38F-00105A1F473A")
+    ISWbemRefresher : public IDispatch
+    {
+    public:
+        virtual /* [restricted][propget][id] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **pUnk) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Item( 
+            /* [annotation][in] */ 
+            _In_  long iIndex,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemRefreshableItem **objWbemRefreshableItem) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Count( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iCount) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Add( 
+            /* [annotation][in] */ 
+            _In_  ISWbemServicesEx *objWbemServices,
+            /* [annotation][in] */ 
+            _In_  BSTR bsInstancePath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemRefreshableItem **objWbemRefreshableItem) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddEnum( 
+            /* [annotation][in] */ 
+            _In_  ISWbemServicesEx *objWbemServices,
+            /* [annotation][in] */ 
+            _In_  BSTR bsClassName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemRefreshableItem **objWbemRefreshableItem) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Remove( 
+            /* [annotation][in] */ 
+            _In_  long iIndex,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Refresh( 
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_AutoReconnect( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bCount) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_AutoReconnect( 
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bCount) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DeleteAll( void) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ISWbemRefresherVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISWbemRefresher * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISWbemRefresher * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISWbemRefresher * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISWbemRefresher * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISWbemRefresher * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISWbemRefresher * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISWbemRefresher * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [restricted][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
+            ISWbemRefresher * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **pUnk);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
+            ISWbemRefresher * This,
+            /* [annotation][in] */ 
+            _In_  long iIndex,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemRefreshableItem **objWbemRefreshableItem);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
+            ISWbemRefresher * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iCount);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
+            ISWbemRefresher * This,
+            /* [annotation][in] */ 
+            _In_  ISWbemServicesEx *objWbemServices,
+            /* [annotation][in] */ 
+            _In_  BSTR bsInstancePath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemRefreshableItem **objWbemRefreshableItem);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddEnum )( 
+            ISWbemRefresher * This,
+            /* [annotation][in] */ 
+            _In_  ISWbemServicesEx *objWbemServices,
+            /* [annotation][in] */ 
+            _In_  BSTR bsClassName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemRefreshableItem **objWbemRefreshableItem);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
+            ISWbemRefresher * This,
+            /* [annotation][in] */ 
+            _In_  long iIndex,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
+            ISWbemRefresher * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AutoReconnect )( 
+            ISWbemRefresher * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bCount);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_AutoReconnect )( 
+            ISWbemRefresher * This,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bCount);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteAll )( 
+            ISWbemRefresher * This);
+        
+        END_INTERFACE
+    } ISWbemRefresherVtbl;
+
+    interface ISWbemRefresher
+    {
+        CONST_VTBL struct ISWbemRefresherVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISWbemRefresher_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISWbemRefresher_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISWbemRefresher_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ISWbemRefresher_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define ISWbemRefresher_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define ISWbemRefresher_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define ISWbemRefresher_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define ISWbemRefresher_get__NewEnum(This,pUnk)	\
+    ( (This)->lpVtbl -> get__NewEnum(This,pUnk) ) 
+
+#define ISWbemRefresher_Item(This,iIndex,objWbemRefreshableItem)	\
+    ( (This)->lpVtbl -> Item(This,iIndex,objWbemRefreshableItem) ) 
+
+#define ISWbemRefresher_get_Count(This,iCount)	\
+    ( (This)->lpVtbl -> get_Count(This,iCount) ) 
+
+#define ISWbemRefresher_Add(This,objWbemServices,bsInstancePath,iFlags,objWbemNamedValueSet,objWbemRefreshableItem)	\
+    ( (This)->lpVtbl -> Add(This,objWbemServices,bsInstancePath,iFlags,objWbemNamedValueSet,objWbemRefreshableItem) ) 
+
+#define ISWbemRefresher_AddEnum(This,objWbemServices,bsClassName,iFlags,objWbemNamedValueSet,objWbemRefreshableItem)	\
+    ( (This)->lpVtbl -> AddEnum(This,objWbemServices,bsClassName,iFlags,objWbemNamedValueSet,objWbemRefreshableItem) ) 
+
+#define ISWbemRefresher_Remove(This,iIndex,iFlags)	\
+    ( (This)->lpVtbl -> Remove(This,iIndex,iFlags) ) 
+
+#define ISWbemRefresher_Refresh(This,iFlags)	\
+    ( (This)->lpVtbl -> Refresh(This,iFlags) ) 
+
+#define ISWbemRefresher_get_AutoReconnect(This,bCount)	\
+    ( (This)->lpVtbl -> get_AutoReconnect(This,bCount) ) 
+
+#define ISWbemRefresher_put_AutoReconnect(This,bCount)	\
+    ( (This)->lpVtbl -> put_AutoReconnect(This,bCount) ) 
+
+#define ISWbemRefresher_DeleteAll(This)	\
+    ( (This)->lpVtbl -> DeleteAll(This) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISWbemRefresher_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISWbemRefreshableItem_INTERFACE_DEFINED__
+#define __ISWbemRefreshableItem_INTERFACE_DEFINED__
+
+/* interface ISWbemRefreshableItem */
+/* [helpstring][nonextensible][dual][oleautomation][uuid][local][object] */ 
+
+
+EXTERN_C const IID IID_ISWbemRefreshableItem;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("5AD4BF92-DAAB-11d3-B38F-00105A1F473A")
+    ISWbemRefreshableItem : public IDispatch
+    {
+    public:
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Index( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iIndex) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Refresher( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemRefresher **objWbemRefresher) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_IsSet( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsSet) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Object( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectEx **objWbemObject) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_ObjectSet( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Remove( 
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ISWbemRefreshableItemVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISWbemRefreshableItem * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISWbemRefreshableItem * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISWbemRefreshableItem * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISWbemRefreshableItem * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISWbemRefreshableItem * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISWbemRefreshableItem * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISWbemRefreshableItem * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Index )( 
+            ISWbemRefreshableItem * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iIndex);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Refresher )( 
+            ISWbemRefreshableItem * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemRefresher **objWbemRefresher);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IsSet )( 
+            ISWbemRefreshableItem * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsSet);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Object )( 
+            ISWbemRefreshableItem * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectEx **objWbemObject);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ObjectSet )( 
+            ISWbemRefreshableItem * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
+            ISWbemRefreshableItem * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags);
+        
+        END_INTERFACE
+    } ISWbemRefreshableItemVtbl;
+
+    interface ISWbemRefreshableItem
+    {
+        CONST_VTBL struct ISWbemRefreshableItemVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISWbemRefreshableItem_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISWbemRefreshableItem_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISWbemRefreshableItem_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ISWbemRefreshableItem_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define ISWbemRefreshableItem_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define ISWbemRefreshableItem_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define ISWbemRefreshableItem_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define ISWbemRefreshableItem_get_Index(This,iIndex)	\
+    ( (This)->lpVtbl -> get_Index(This,iIndex) ) 
+
+#define ISWbemRefreshableItem_get_Refresher(This,objWbemRefresher)	\
+    ( (This)->lpVtbl -> get_Refresher(This,objWbemRefresher) ) 
+
+#define ISWbemRefreshableItem_get_IsSet(This,bIsSet)	\
+    ( (This)->lpVtbl -> get_IsSet(This,bIsSet) ) 
+
+#define ISWbemRefreshableItem_get_Object(This,objWbemObject)	\
+    ( (This)->lpVtbl -> get_Object(This,objWbemObject) ) 
+
+#define ISWbemRefreshableItem_get_ObjectSet(This,objWbemObjectSet)	\
+    ( (This)->lpVtbl -> get_ObjectSet(This,objWbemObjectSet) ) 
+
+#define ISWbemRefreshableItem_Remove(This,iFlags)	\
+    ( (This)->lpVtbl -> Remove(This,iFlags) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISWbemRefreshableItem_INTERFACE_DEFINED__ */
+
+
+EXTERN_C const CLSID CLSID_SWbemLocator;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("76A64158-CB41-11d1-8B02-00600806D9B6")
+SWbemLocator;
+#endif
+
+EXTERN_C const CLSID CLSID_SWbemNamedValueSet;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("9AED384E-CE8B-11d1-8B05-00600806D9B6")
+SWbemNamedValueSet;
+#endif
+
+EXTERN_C const CLSID CLSID_SWbemObjectPath;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("5791BC26-CE9C-11d1-97BF-0000F81E849C")
+SWbemObjectPath;
+#endif
+
+EXTERN_C const CLSID CLSID_SWbemLastError;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("C2FEEEAC-CFCD-11d1-8B05-00600806D9B6")
+SWbemLastError;
+#endif
+
+EXTERN_C const CLSID CLSID_SWbemSink;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("75718C9A-F029-11d1-A1AC-00C04FB6C223")
+SWbemSink;
+#endif
+
+EXTERN_C const CLSID CLSID_SWbemDateTime;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("47DFBE54-CF76-11d3-B38F-00105A1F473A")
+SWbemDateTime;
+#endif
+
+EXTERN_C const CLSID CLSID_SWbemRefresher;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("D269BF5C-D9C1-11d3-B38F-00105A1F473A")
+SWbemRefresher;
+#endif
+
+EXTERN_C const CLSID CLSID_SWbemServices;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("04B83D63-21AE-11d2-8B33-00600806D9B6")
+SWbemServices;
+#endif
+
+EXTERN_C const CLSID CLSID_SWbemServicesEx;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("62E522DC-8CF3-40a8-8B2E-37D595651E40")
+SWbemServicesEx;
+#endif
+
+EXTERN_C const CLSID CLSID_SWbemObject;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("04B83D62-21AE-11d2-8B33-00600806D9B6")
+SWbemObject;
+#endif
+
+EXTERN_C const CLSID CLSID_SWbemObjectEx;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("D6BDAFB2-9435-491f-BB87-6AA0F0BC31A2")
+SWbemObjectEx;
+#endif
+
+EXTERN_C const CLSID CLSID_SWbemObjectSet;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("04B83D61-21AE-11d2-8B33-00600806D9B6")
+SWbemObjectSet;
+#endif
+
+EXTERN_C const CLSID CLSID_SWbemNamedValue;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("04B83D60-21AE-11d2-8B33-00600806D9B6")
+SWbemNamedValue;
+#endif
+
+EXTERN_C const CLSID CLSID_SWbemQualifier;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("04B83D5F-21AE-11d2-8B33-00600806D9B6")
+SWbemQualifier;
+#endif
+
+EXTERN_C const CLSID CLSID_SWbemQualifierSet;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("04B83D5E-21AE-11d2-8B33-00600806D9B6")
+SWbemQualifierSet;
+#endif
+
+EXTERN_C const CLSID CLSID_SWbemProperty;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("04B83D5D-21AE-11d2-8B33-00600806D9B6")
+SWbemProperty;
+#endif
+
+EXTERN_C const CLSID CLSID_SWbemPropertySet;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("04B83D5C-21AE-11d2-8B33-00600806D9B6")
+SWbemPropertySet;
+#endif
+
+EXTERN_C const CLSID CLSID_SWbemMethod;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("04B83D5B-21AE-11d2-8B33-00600806D9B6")
+SWbemMethod;
+#endif
+
+EXTERN_C const CLSID CLSID_SWbemMethodSet;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("04B83D5A-21AE-11d2-8B33-00600806D9B6")
+SWbemMethodSet;
+#endif
+
+EXTERN_C const CLSID CLSID_SWbemEventSource;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("04B83D58-21AE-11d2-8B33-00600806D9B6")
+SWbemEventSource;
+#endif
+
+EXTERN_C const CLSID CLSID_SWbemSecurity;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("B54D66E9-2287-11d2-8B33-00600806D9B6")
+SWbemSecurity;
+#endif
+
+EXTERN_C const CLSID CLSID_SWbemPrivilege;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("26EE67BC-5804-11d2-8B4A-00600806D9B6")
+SWbemPrivilege;
+#endif
+
+EXTERN_C const CLSID CLSID_SWbemPrivilegeSet;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("26EE67BE-5804-11d2-8B4A-00600806D9B6")
+SWbemPrivilegeSet;
+#endif
+
+EXTERN_C const CLSID CLSID_SWbemRefreshableItem;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("8C6854BC-DE4B-11d3-B390-00105A1F473A")
+SWbemRefreshableItem;
+#endif
+#endif /* __WbemScripting_LIBRARY_DEFINED__ */
+
+/* interface __MIDL_itf_wbemdisp_0000_0018 */
+/* [local] */ 
+
+#define	WBEMS_DISPID_OBJECT_READY	( 1 )
+
+#define	WBEMS_DISPID_COMPLETED	( 2 )
+
+#define	WBEMS_DISPID_PROGRESS	( 3 )
+
+#define	WBEMS_DISPID_OBJECT_PUT	( 4 )
+
+#define	WBEMS_DISPID_CONNECTION_READY	( 5 )
+
+
+
+extern RPC_IF_HANDLE __MIDL_itf_wbemdisp_0000_0018_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_wbemdisp_0000_0018_v0_0_s_ifspec;
+
+/* interface __MIDL_itf_wbemdisp_0000_0026 */
+/* [local] */ 
+
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_WINMGMT) */
+#pragma endregion
+
+
+extern RPC_IF_HANDLE __MIDL_itf_wbemdisp_0000_0026_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_wbemdisp_0000_0026_v0_0_s_ifspec;
+
+/* Additional Prototypes for ALL interfaces */
+
+/* end of Additional Prototypes */
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
+
+

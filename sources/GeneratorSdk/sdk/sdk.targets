@@ -2,19 +2,123 @@
 <Project>
   <UsingTask TaskName="MetadataTasks.ScanLibs" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
   <UsingTask TaskName="MetadataTasks.ScrapeHeaders" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
+  <UsingTask TaskName="MetadataTasks.ScrapeConstants" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
   <UsingTask TaskName="MetadataTasks.EmitWinmd" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
   <UsingTask TaskName="MetadataTasks.CompileIdls" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
+  <UsingTask TaskName="MetadataTasks.FilterResponseFiles" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
+  <UsingTask TaskName="MetadataTasks.GetPartitionFiles" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
 
-  <Target Name="ScrapeAndEmit" AfterTargets="Build">
+  <UsingTask TaskName="GetFirstPartitionNamespace" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll">
+    <ParameterGroup>
+      <Items ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="true" />
+      <Namespace ParameterType="System.String" Output="true" Required="false" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System.Linq"/>
+      <Code Type="Fragment" Language="cs">Namespace = Items.First().GetMetadata("Namespace");</Code>
+    </Task>
+  </UsingTask>
+
+  <PropertyGroup>
+    <EnumsJson>$(MSBuildProjectDirectory)\enums.json</EnumsJson>
+    <GeneratedDir>$(ObjDir)\generated</GeneratedDir>
+    <ScratchOutputDir>$(ObjDir)\scratch</ScratchOutputDir>
+
+    <BaseScraperFunctionPointerFixupsRsp>$(GeneratedDir)\base.scraper.functionPointerFixups.generated.rsp</BaseScraperFunctionPointerFixupsRsp>
+    <BaseEmitterFunctionPointerFixupsRsp>$(GeneratedDir)\base.emitter.functionPointerFixups.generated.rsp</BaseEmitterFunctionPointerFixupsRsp>
+
+    <BaseFunctionPointerFixups>$(Win32MetadataAssetsDir)\functionPointerFixups.json</BaseFunctionPointerFixups>
+    <BaseAutoTypesJson>$(Win32MetadataAssetsDir)\autoTypes.json</BaseAutoTypesJson>
+
+    <ScraperFunctionPointerFixupsRsp>$(GeneratedDir)\scraper.functionPointerFixups.generated.rsp</ScraperFunctionPointerFixupsRsp>
+    <EmitterFunctionPointerFixupsRsp>$(GeneratedDir)\emitter.functionPointerFixups.generated.rsp</EmitterFunctionPointerFixupsRsp>
+
+    <WithLibsRsp>$(GeneratedDir)\withLibs.generated.rsp</WithLibsRsp>
+
+    <FilteredRspForHeaders>$(GeneratedDir)\filtered.headers.generated.rsp</FilteredRspForHeaders>
+    <FilteredRspForConstants>$(GeneratedDir)\filtered.constants.generated.rsp</FilteredRspForConstants>
+    <FilteredRspForEmitter>$(GeneratedDir)\filtered.emitter.generated.rsp</FilteredRspForEmitter>
+
+    <BaseScraperAutoTypesRsp>$(GeneratedDir)\base.scraper.autoTypes.generated.rsp</BaseScraperAutoTypesRsp>
+    <ScraperAutoTypesRsp>$(GeneratedDir)\scraper.autoTypes.generated.rsp</ScraperAutoTypesRsp>
+
+    <ScrapedConstantsMarker>$(GeneratedDir)\constants.scraped.txt</ScrapedConstantsMarker>
+    <ScrapedHeadersMarker>$(GeneratedDir)\scannedheaders.$(ScanArch).txt</ScrapedHeadersMarker>
+
+    <ScrapedConstantsHeaderFile>$(Win32MetadataScraperAssetsDir)\ConstantsHeader.txt</ScrapedConstantsHeaderFile>
+    <ScrapedHeadersHeaderFile>$(Win32MetadataScraperAssetsDir)\header.txt</ScrapedHeadersHeaderFile>
+
+  </PropertyGroup>
+
+  <Target Name="BasePrepFunctionPointerFixups" BeforeTargets="Build"
+    Condition="'$(BaseFunctionPointerFixups)' != $(FunctionPointerFixups)"
+    Inputs="$(BaseFunctionPointerFixups)"
+    Outputs="$(BaseScraperFunctionPointerFixupsRsp);$(BaseEmitterFunctionPointerFixupsRsp)">
+
     <PropertyGroup>
       <InstallToolsScript>
-          $(PowerShell)
+        $(PowerShell)
 
-          $(ScriptsDir)\InstallTools.ps1
+        $(ScriptsDir)\CreateRspsForFunctionPointerFixups.ps1 -functionPointerFixupsPath "$(BaseFunctionPointerFixups)" -outputScraperRspFileName "$(BaseScraperFunctionPointerFixupsRsp)" -outputEmitterRspFileName "$(BaseEmitterFunctionPointerFixupsRsp)"
       </InstallToolsScript>
     </PropertyGroup>
 
     <Exec Command="$(InstallToolsScript)" EchoOff="false" />
+  </Target>
+
+  <Target Name="BasePrepAutoTypes" BeforeTargets="Build"
+    Condition="'$(BaseAutoTypesJson)' != $(AutoTypesJson)"
+    Inputs="$(BaseAutoTypesJson)"
+    Outputs="$(BaseScraperAutoTypesRsp)">
+
+    <PropertyGroup>
+      <InstallToolsScript>
+        $(PowerShell)
+
+        $(ScriptsDir)\CreateScraperRspForAutoTypes.ps1 -autoTypesPath "$(BaseAutoTypesJson)" -outputFileName "$(BaseScraperAutoTypesRsp)"
+      </InstallToolsScript>
+    </PropertyGroup>
+
+    <Exec Command="$(InstallToolsScript)" EchoOff="false" />
+  </Target>
+
+  <Target Name="PrepFunctionPointerFixups" BeforeTargets="Build"
+    Inputs="$(FunctionPointerFixups)"
+    Outputs="$(ScraperFunctionPointerFixupsRsp);$(EmitterFunctionPointerFixupsRsp)">
+
+    <PropertyGroup>
+      <InstallToolsScript>
+        $(PowerShell)
+
+        $(ScriptsDir)\CreateRspsForFunctionPointerFixups.ps1 -functionPointerFixupsPath "$(FunctionPointerFixups)" -outputScraperRspFileName "$(ScraperFunctionPointerFixupsRsp)" -outputEmitterRspFileName "$(EmitterFunctionPointerFixupsRsp)"
+      </InstallToolsScript>
+    </PropertyGroup>
+
+    <Exec Condition="Exists($(FunctionPointerFixups))" Command="$(InstallToolsScript)" EchoOff="false" />
+    <Delete Condition="!Exists($(FunctionPointerFixups))" Files="$(ScraperFunctionPointerFixupsRsp);$(EmitterFunctionPointerFixupsRsp)"/>
+  </Target>
+
+  <Target Name="PrepAutoTypes" BeforeTargets="Build"
+    Inputs="$(AutoTypesJson)"
+    Outputs="$(ScraperAutoTypesRsp)">
+
+    <PropertyGroup>
+      <InstallToolsScript>
+        $(PowerShell)
+
+        $(ScriptsDir)\CreateScraperRspForAutoTypes.ps1 -autoTypesPath "$(AutoTypesJson)" -outputFileName "$(ScraperAutoTypesRsp)"
+      </InstallToolsScript>
+    </PropertyGroup>
+
+    <Exec Condition="Exists($(AutoTypesJson))" Command="$(InstallToolsScript)" EchoOff="false" />
+    <Delete Condition="!Exists($(AutoTypesJson))" Files="$(ScraperAutoTypesRsp)"/>
+  </Target>
+
+  <Target Name="CompileIdls" BeforeTargets="Build"
+    Inputs="@(Idls)"
+    Outputs="@(Idls -> '$(CompiledHeadersDir)\%(Filename).h')">
+
+    <Message Text="Compiling idl files..." Importance="high"/>
 
     <CompileIdls
       Idls="@(Idls)"
@@ -25,43 +129,154 @@
       SdkBinDir="$(WindowsSDKVersionedBinRoot)"
       AdditionalIncludes="$(AdditionalIncludes)"
       MSBuildProjectDirectory="$(MSBuildProjectDirectory)"/>
+  </Target>
+
+  <Target Name="PrepareWithLibsRsp" BeforeTargets="Build"
+    Inputs="@(ImportLibs)"
+    Outputs="$(ScraperDir)\withLibs.generated.rsp">
+
+    <Message Text="Scanning libs..." Importance="high"/>
+
     <ScanLibs
       Libs="@(ImportLibs)"
       LibToolsBinDir="$(LibToolsBinDir)"
+      WithLibsRsp="$(ScraperDir)\withLibs.generated.rsp"
       MSBuildProjectDirectory="$(MSBuildProjectDirectory)">
-      <Output
-        TaskParameter="OutputLibRsp"
-        ItemName="ScraperRsp"/>
     </ScanLibs>
+
+  </Target>
+
+  <Target Name="FilterRsps"
+    Inputs="@(ResponseFile)"
+    Outputs="$(FilteredRspForHeaders);$(FilteredRspForConstants)">
+
+    <FilterResponseFiles
+      ResponseFiles="@(ResponseFile)"
+      OutputFileName="$(FilteredRspForHeaders)"
+      ValidSwitches="--exclude;--remap;--with-attribute;--with-type;--with-librarypath"
+      MSBuildProjectDirectory="$(MSBuildProjectDirectory)"/>
+
+    <FilterResponseFiles
+      ResponseFiles="@(ResponseFile)"
+      OutputFileName="$(FilteredRspForConstants)"
+      ValidSwitches="--exclude;--requiredNamespaceForName;--with-attribute;--memberRemap;--with-type"
+      MSBuildProjectDirectory="$(MSBuildProjectDirectory)"/>
+
+    <FilterResponseFiles
+      ResponseFiles="@(ResponseFile)"
+      OutputFileName="$(FilteredRspForEmitter)"
+      ValidSwitches="--memberRemap;--enumMakeFlags;--reducePointerLevel;--requiredNamespaceForName;--autoTypes;--staticLibs;--enumAddition"
+      MSBuildProjectDirectory="$(MSBuildProjectDirectory)"/>
+
+  </Target>
+
+  <ItemGroup>
+    <Clean Include="obj\**"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ScraperRsp Include="$(BaseScraperFunctionPointerFixupsRsp);$(ScraperFunctionPointerFixupsRsp)"/>
+    <ScraperRsp Include="$(BaseScraperAutoTypesRsp);$(ScraperAutoTypesRsp)"/>
+    <ScraperRsp Include="$(FilteredRspForHeaders)"/>
+    <ScraperRsp Include="$(Win32MetadataScraperAssetsDir)\baseRemap.rsp"/>
+    <ScraperRsp Include="$(Win32MetadataScraperAssetsDir)\baseSettings.rsp"/>
+    <ScraperRsp Include="$(Win32MetadataScraperAssetsDir)\baseSettings.*.rsp"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <AllTraverseFiles Include="%(Partition.TraverseFiles)"/>
+  </ItemGroup>
+
+  <Target Name="ScrapeHeaders" BeforeTargets="Build"
+    DependsOnTargets="BasePrepFunctionPointerFixups;BasePrepAutoTypes;PrepFunctionPointerFixups;PrepAutoTypes;CompileIdls;PrepareWithLibsRsp;FilterRsps">
+
     <ScrapeHeaders
       Partitions="@(Partition)"
-      Rsps="@(ScraperRsp)"
-      ObjDir="$(ObjDir)"
+      ResponseFiles="@(ScraperRsp)"
+      HeaderTextFile="$(ScrapedHeadersHeaderFile)"
       SdkIncRoot="$(SdkIncRoot)"
-      Win32MetadataScraperAssetsDir="$(Win32MetadataScraperAssetsDir)"
-      Win32MetadataScraperGeneratedAssetsDir="$(Win32MetadataScraperGeneratedAssetsDir)"
       WinSdkRoot="$(TargetPlatformSdkRootOverride)"
       ToolsBinDir="$(ToolsBinDir)"
       AdditionalIncludes="$(AdditionalIncludes)"
-      MSBuildProjectDirectory="$(MSBuildProjectDirectory)">
-      <Output
-        TaskParameter="GeneratedSourceDir"
-        PropertyName="EmitterSourceDir" />
-    </ScrapeHeaders>
+      GeneratedDir="$(GeneratedDir)"
+      ScratchDir="$(ScratchOutputDir)"
+      MaxProcessors="$(MaxProcessors)"
+      ScanArch="$(ScanArch)"
+      MarkerFileName="$(ScrapedHeadersMarker)"
+      Win32MetadataScraperAssetsDir="$(Win32MetadataScraperAssetsDir)"
+      MSBuildProjectDirectory="$(MSBuildProjectDirectory)"/>
+
+    <WriteLinesToFile File="$(ScrapedHeadersMarker)" Lines="scanned" Overwrite="true"/>
+
+  </Target>
+
+  <Target Name="CopyManualFilesToScraped" BeforeTargets="Build">
+    <Copy SourceFiles="@(ManualCs)" DestinationFiles="@(ManualCs -> '$(GeneratedDir)\%(Filename).manual.cs')" />
+  </Target>
+
+  <ItemGroup>
+    <AllTraverseFiles Include="%(Partition.TraverseFiles)"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ConstantsScraperRsp Include="$(FilteredRspForConstants)"/>
+    <ConstantsScraperRsp Include="$(Win32MetadataScraperAssetsDir)\baseSettings.ConstantsScraper.rsp"/>
+  </ItemGroup>
+
+  <Target Name="ScrapeConstants" BeforeTargets="Build"
+    DependsOnTargets="ScrapeHeaders;CopyManualFilesToScraped">
+
+    <PropertyGroup>
+      <DefaultNamespace>DefaultNamespace</DefaultNamespace>
+    </PropertyGroup>
+
+    <ScrapeConstants
+      DefaultNamespace="$(DefaultNamespace)"
+      ScraperOutputDir="$(GeneratedDir)"
+      ResponseFiles="@(ConstantsScraperRsp)"
+      Partitions="@(Partition)"
+      EnumsJson="$(EnumsJson)"
+      ToolsBinDir="$(ToolsBinDir)"
+      HeaderTextFile="$(ScrapedConstantsHeaderFile)"
+      MarkerFileName="$(ScrapedConstantsMarker)"
+      SdkIncRoot="$(SdkIncRoot)"
+      MSBuildProjectDirectory="$(MSBuildProjectDirectory)"/>
+
+  </Target>
+
+  <Target Name="EmitWinmd" BeforeTargets="Build"
+    Inputs="$(ScrapedConstantsMarker)"
+    Outputs="$(OutputWinmd)"
+    DependsOnTargets="ScrapeConstants">
+
+    <ItemGroup>
+      <EmitterRsp Include="$(FilteredRspForEmitter);$(BaseEmitterFunctionPointerFixupsRsp);$(EmitterFunctionPointerFixupsRsp)"/>
+      <EmitterRsp Include="$(GeneratedDir)\enumsMakeFlags.generated.rsp"/>
+      <EmitterRsp Include="$(GeneratedDir)\enumsRemap.rsp"/>
+    </ItemGroup>
+
+    <Message Text="Writing winmd..." Importance="high"/>
+
     <EmitWinmd
       Libs="@(ImportLibs)"
-      EmitterSourceDir="$(EmitterSourceDir)"
+      AutoTypesJson="$(AutoTypesJson)"
+      EmitterSourceDir="$(GeneratedDir)"
       ToolsBinDir="$(ToolsBinDir)"
+      ResponseFiles="@(EmitterRsp)"
       Win32WinmdBinDir="$(Win32WinmdBinDir)"
       WinmdVersion="$(WinmdVersion)"
       OutputWinmd="$(OutputWinmd)"
+      ShowOutputDetails="$(ShowEmitWinmdOutputDetails)"
       MSBuildProjectDirectory="$(MSBuildProjectDirectory)">
     </EmitWinmd>
-  </Target>
 
-  <Target Name = "Clean">
-    <RemoveDir Directories="obj;bin" />
   </Target>
 
   <Import Condition="'$(MicrosoftNoTargetsSdkImported)' == 'true'" Sdk="Microsoft.Build.NoTargets" Version="3.0.4" Project="sdk.targets"/>
+
+  <Target Name="BeforeClean">
+    <RemoveDir Directories="obj" />
+    <Delete Files="$(OutputWinmd)"/>
+  </Target>
+
 </Project>

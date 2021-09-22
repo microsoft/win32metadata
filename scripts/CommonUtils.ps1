@@ -4,14 +4,10 @@ $rootDir = [System.IO.Path]::GetFullPath("$PSScriptRoot\..")
 $toolsDir = "$rootDir\tools"
 $binDir = "$rootDir\bin"
 $sourcesDir = "$rootDir\sources"
-$generationDir = "$rootDir\generation"
-$scraperDir = "$generationDir\scraper"
-$emitterDir = "$generationDir\emitter"
-$partitionsDir = "$scraperDir\Partitions"
 $sdkApiPath = "$rootDir\ext\sdk-api"
-$sdkGeneratedSourceDir = "$emitterDir\generated"
-$artifactsDir = "$scraperDir\obj"
-$recompiledIdlHeadersDir = "$artifactsDir\RecompiledIdlHeaders"
+$windowsWin32ProjectRoot = "$rootDir\generation\Windows.Win32"
+$sdkGeneratedSourceDir = "$windowsWin32ProjectRoot\obj\generated"
+$recompiledIdlHeadersDir = "$windowsWin32ProjectRoot\RecompiledIdlHeaders"
 $metadataToolsBin = "$binDir\release\net5.0"
 
 if (Test-Path -Path $binDir -PathType leaf)
