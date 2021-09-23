@@ -100,6 +100,8 @@ Windows.Win32.Graphics.Gdi,HMONITOR,DECLARE_HANDLE
 ,TDH_HANDLE,IntPtr,TdhCloseDecodingHandle
 ,COMPRESSOR_HANDLE,DECLARE_HANDLE,CloseDecompressor
 ,MSIHANDLE,uint,MsiCloseHandle
+,HREPORT,DECLARE_HANDLE,WerReportCloseHandle
+,HREPORTSTORE,DECLARE_HANDLE,WerStoreClose
 Windows.Win32.UI.Animation,UI_ANIMATION_KEYFRAME,IntPtr
 Windows.Win32.UI.TabletPC,HRECOALT,DECLARE_HANDLE
 Windows.Win32.UI.TabletPC,HRECOCONTEXT,DECLARE_HANDLE
@@ -176,6 +178,7 @@ Windows.Win32.System.SystemServices,HDEV,DECLARE_HANDLE
 Windows.Win32.System.SystemServices,HBM,DECLARE_HANDLE
 Windows.Win32.System.SystemServices,DHSURF,DECLARE_HANDLE
 Windows.Win32.System.SystemServices,DHPDEV,DECLARE_HANDLE
+Windows.Win32.System.SystemInformation,FIRMWARE_TABLE_ID,uint
 Windows.Win32.Storage.CloudFilters,CF_CONNECTION_KEY,DECLARE_HANDLE
 Windows.Win32.Devices.AllJoyn,alljoyn_aboutdata,AllJoynHandle
 Windows.Win32.Devices.AllJoyn,alljoyn_aboutdatalistener,AllJoynHandle
