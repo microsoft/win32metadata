@@ -21,15 +21,12 @@ $outputWinmdFileName = Get-OutputWinmdFileName -Arch $arch
 Write-Output "`n"
 Write-Output "`e[36m*** Creating $outputWinmdFileName...`e[0m"
 
+$skipScraping = "false"
+
 if ($assetsScrapedSeparately)
 {
-    $scannedHeadersMarker = "$windowsWin32ProjectRoot\obj\generated\scannedheaders.x64.txt"
-    $scannedHeadersMarkerCrossarch = "$windowsWin32ProjectRoot\obj\generated\scannedheaders.crossarch.txt"
-    if ((Test-Path $scannedHeadersMarker) -and !(Test-Path $scannedHeadersMarkerCrossarch))
-    {
-        Copy-Item $scannedHeadersMarker $scannedHeadersMarkerCrossarch
-    }
+    $skipScraping = "true"
 }
 
-dotnet build "$windowsWin32ProjectRoot" -c Release -t:EmitWinmd -p:WinmdVersion=$assemblyVersion -p:OutputWinmd=$outputWinmdFileName
+dotnet build "$windowsWin32ProjectRoot" -c Release -t:EmitWinmd -p:WinmdVersion=$assemblyVersion -p:OutputWinmd=$outputWinmdFileName -p:SkipScraping=$skipScraping
 

@@ -70,13 +70,7 @@ namespace MetadataTasks
 
             this.Log.LogMessage(MessageImportance.High, $"Scraping constants and enums...");
 
-            var ret = base.Execute();
-            if (ret)
-            {
-                File.WriteAllText(this.MarkerFileName, string.Empty);
-            }
-
-            return ret;
+            return base.Execute();
         }
 
         protected override string GenerateCommandLineCommands()

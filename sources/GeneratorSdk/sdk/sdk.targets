@@ -191,6 +191,7 @@
     DependsOnTargets="PrepScraperHeader;PrepSettingsForFunctionPointerFixups;PrepSettingsForAutoTypes;CompileIdls;PrepareWithLibsRsp;FilterRsps">
 
     <ScrapeHeaders
+      Condition="'$(SkipScraping)' != 'true'"
       Partitions="@(Partition)"
       ResponseFiles="@(ScraperRsp)"
       HeaderTextFile="$(FinalScraperHeaderFile)"
@@ -231,6 +232,7 @@
     </PropertyGroup>
 
     <ScrapeConstants
+      Condition="'$(SkipScraping)' != 'true'"
       DefaultNamespace="$(DefaultNamespace)"
       ScraperOutputDir="$(GeneratedDir)"
       ResponseFiles="@(ConstantsScraperRsp)"
@@ -241,6 +243,8 @@
       MarkerFileName="$(ScrapedConstantsMarker)"
       SdkIncRoot="$(SdkIncRoot)"
       MSBuildProjectDirectory="$(MSBuildProjectDirectory)"/>
+
+    <WriteLinesToFile File="$(ScrapedHeadersMarker)" Lines="scanned" Overwrite="true"/>
 
   </Target>
 
