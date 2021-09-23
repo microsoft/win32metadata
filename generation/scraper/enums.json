@@ -12502,6 +12502,123 @@
     "members": [
       {
         "name": "DRIVERVERSION"
+      },
+      {
+        "name": "TECHNOLOGY"
+      },
+      {
+        "name": "HORZSIZE"
+      },
+      {
+        "name": "VERTSIZE"
+      },
+      {
+        "name": "HORZRES"
+      },
+      {
+        "name": "VERTRES"
+      },
+      {
+        "name": "BITSPIXEL"
+      },
+      {
+        "name": "PLANES"
+      },
+      {
+        "name": "NUMBRUSHES"
+      },
+      {
+        "name": "NUMPENS"
+      },
+      {
+        "name": "NUMMARKERS"
+      },
+      {
+        "name": "NUMFONTS"
+      },
+      {
+        "name": "NUMCOLORS"
+      },
+      {
+        "name": "PDEVICESIZE"
+      },
+      {
+        "name": "CURVECAPS"
+      },
+      {
+        "name": "LINECAPS"
+      },
+      {
+        "name": "POLYGONALCAPS"
+      },
+      {
+        "name": "TEXTCAPS"
+      },
+      {
+        "name": "CLIPCAPS"
+      },
+      {
+        "name": "RASTERCAPS"
+      },
+      {
+        "name": "ASPECTX"
+      },
+      {
+        "name": "ASPECTY"
+      },
+      {
+        "name": "ASPECTXY"
+      },
+      {
+        "name": "LOGPIXELSX"
+      },
+      {
+        "name": "LOGPIXELSY"
+      },
+      {
+        "name": "SIZEPALETTE"
+      },
+      {
+        "name": "NUMRESERVED"
+      },
+      {
+        "name": "COLORRES"
+      },
+      {
+        "name": "PHYSICALWIDTH"
+      },
+      {
+        "name": "PHYSICALHEIGHT"
+      },
+      {
+        "name": "PHYSICALOFFSETX"
+      },
+      {
+        "name": "PHYSICALOFFSETY"
+      },
+      {
+        "name": "SCALINGFACTORX"
+      },
+      {
+        "name": "SCALINGFACTORY"
+      },
+      {
+        "name": "VREFRESH"
+      },
+      {
+        "name": "DESKTOPVERTRES"
+      },
+      {
+        "name": "DESKTOPHORZRES"
+      },
+      {
+        "name": "BLTALIGNMENT"
+      },
+      {
+        "name": "SHADEBLENDCAPS"
+      },
+      {
+        "name": "COLORMGMTCAPS"
       }
     ],
     "uses": [
