@@ -7,30 +7,16 @@ namespace MetadataTasks
     public class FilterResponseFiles : Task
     {
         [Required]
-        public ITaskItem[] ResponseFiles
-        {
-            get;
-            set;
-        }
+        public ITaskItem[] ResponseFiles { get; set; }
 
         [Required]
-        public string OutputFileName
-        {
-            get; set;
-        }
+        public string OutputFileName { get; set; }
 
         [Required]
-        public string ValidSwitches
-        {
-            get;
-            set;
-        }
+        public string ValidSwitches { get; set; }
 
         [Required]
-        public string MSBuildProjectDirectory
-        {
-            get; set;
-        }
+        public string MSBuildProjectDirectory { get; set; }
 
         public override bool Execute()
         {

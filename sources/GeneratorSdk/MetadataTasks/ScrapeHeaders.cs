@@ -194,15 +194,11 @@ namespace MetadataTasks
             }
 
             var includeDirHash = new HashSet<string>();
-            var includeDirs = new List<string>
-            {
-                // For sal.h, etc.
-                this.Win32MetadataScraperAssetsDir
-            };
+            var includeDirs = new List<string>();
 
             if (this.AdditionalIncludes != null)
             {
-                string[] dirs = this.AdditionalIncludes.Split(';');
+                string[] dirs = this.AdditionalIncludes.Split(';', System.StringSplitOptions.RemoveEmptyEntries);
                 foreach (var dir in dirs)
                 {
                     if (!includeDirHash.Contains(dir))
@@ -345,17 +341,17 @@ $@"--file
 
         private string[] GetExclusions(ITaskItem item)
         {
-            return item.GetMetadata("Exclude").Split(';');
+            return item.GetMetadata("Exclude").Split(';', System.StringSplitOptions.RemoveEmptyEntries);
         }
 
         private string[] GetRemaps(ITaskItem item)
         {
-            return item.GetMetadata("Remap").Split(';');
+            return item.GetMetadata("Remap").Split(';', System.StringSplitOptions.RemoveEmptyEntries);
         }
 
         private string[] GetFilesFromMetadata(ITaskItem item, string name)
         {
-            string[] items = item.GetMetadata(name).Split(new[] { ';' }, System.StringSplitOptions.RemoveEmptyEntries);
+            string[] items = item.GetMetadata(name).Split(';', System.StringSplitOptions.RemoveEmptyEntries);
             for (int i = 0; i < items.Length; i++)
             {
                 if (!Path.IsPathRooted(items[i]))
@@ -365,16 +361,6 @@ $@"--file
             }
 
             return items;
-        }
-
-        private string[] GetTraverseFiles(ITaskItem item)
-        {
-            return this.GetFilesFromMetadata(item, "TraverseFiles");
-        }
-
-        private string[] GetManualFiles(ITaskItem item)
-        {
-            return this.GetFilesFromMetadata(item, "ManualFiles");
         }
     }
 }

@@ -14,17 +14,6 @@ $metadataInteropBin = "$PSScriptRoot\..\bin\Release\netstandard2.1\Windows.Win32
 
 Copy-Item $metadataInteropBin $binDir
 
-$remapFileName = "$emitterDir\remap.rsp"
-$emitterGeneratedDir = "$emitterDir\generated\$scraperArch"
-$enumsRemapFileName = "$emitterGeneratedDir\enumsRemap.rsp"
-$autoTypesFileName = "$generationDir\autoTypes.json"
-$requiredNamespacesForNames = "$emitterDir\requiredNamespacesForNames.rsp"
-$functionPointerFixupsRsp = "$emitterGeneratedDir\functionPointerFixups.generated.rsp"
-$enumsMakeFlagsRsp = "$emitterGeneratedDir\enumsMakeFlags.generated.rsp"
-
-$constantsScraperRsp = "$scraperDir\ConstantsScraper.rsp"
-$constantsHeaderTxt = "$scraperDir\ConstantsHeader.txt"
-$enumsJson = "$scraperDir\enums.json"
 $arch = "crossarch"
 
 $outputWinmdFileName = Get-OutputWinmdFileName -Arch $arch

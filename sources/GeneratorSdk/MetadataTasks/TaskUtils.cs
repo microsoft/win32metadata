@@ -133,7 +133,7 @@ namespace MetadataTasks
 
         public static IEnumerable<string> GetFilesFromMetadata(this ITaskItem item, string name, string root)
         {
-            string[] items = item.GetMetadata(name).Split(new[] { ';' }, System.StringSplitOptions.RemoveEmptyEntries);
+            string[] items = item.GetMetadata(name).Split(';', System.StringSplitOptions.RemoveEmptyEntries);
             for (int i = 0; i < items.Length; i++)
             {
                 if (!Path.IsPathRooted(items[i]))

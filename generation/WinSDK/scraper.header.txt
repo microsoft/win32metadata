@@ -1,6 +1,3 @@
-// Copyright © Microsoft
-using Windows.Win32.Interop;
-
 using Windows.Win32.AI.MachineLearning.DirectML;
 using Windows.Win32.AI.MachineLearning.WinML;
 using Windows.Win32.Data.HtmlHelp;

@@ -7,6 +7,7 @@
     <LibToolsBinDir>$(RepoRootPath)tools</LibToolsBinDir>
     <ScriptsDir>$(RepoRootPath)scripts</ScriptsDir>
     <Win32MetadataAssetsDir>$(RepoRootPath)sources\GeneratorSdk\tools\assets</Win32MetadataAssetsDir>
+    <WinSDKAssets>$(RepoRootPath)generation\WinSDK</WinSDKAssets>
     <Win32MetadataScraperAssetsDir>$(Win32MetadataAssetsDir)\scraper</Win32MetadataScraperAssetsDir>
     <Win32WinmdBinDir>$(RepoRootPath)bin</Win32WinmdBinDir>
     <TaskBinDir>$(LocalTaskBinDir)</TaskBinDir>

@@ -1,75 +1,51 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
-using System;
 
 namespace MetadataTasks
 {
     public class EmitWinmd : ToolTask
     {
-        [Required]
-        public string ToolsBinDir
-        {
-            get; set;
-        }
+        private string outputWinmdFullPath;
 
         [Required]
-        public string EmitterSourceDir
-        {
-            get; set;
-        }
+        public string ToolsBinDir { get; set; }
 
         [Required]
-        public string WinmdVersion
-        {
-            get; set;
-        }
+        public string EmitterSourceDir { get; set; }
 
         [Required]
-        public string OutputWinmd
-        {
-            get; set;
-        }
+        public string WinmdVersion { get; set; }
 
         [Required]
-        public string Win32WinmdBinDir
-        {
-            get; set;
-        }
+        public string OutputWinmd { get; set; }
 
         [Required]
-        public string MSBuildProjectDirectory
-        {
-            get; set;
-        }
+        public string Win32WinmdBinDir { get; set; }
 
         [Required]
-        public ITaskItem[] Libs
-        {
-            get; set;
-        }
+        public string MSBuildProjectDirectory { get; set; }
 
-        public string ShowOutputDetails
-        {
-            get;set;
-        }
+        [Required]
+        public ITaskItem[] Libs { get; set; }
 
-        private bool ShouldShowOutputDetails => this.ShowOutputDetails != null && this.ShowOutputDetails == "true";
+        public string ShowOutputDetails { get; set; }
 
         public ITaskItem[] ResponseFiles { get; set; }
 
-        public string AutoTypesJson { get; set; }
-
-        private string outputWinmdFullPath;
+        public ITaskItem[] AutoTypes { get; set; }
 
         protected override string ToolName => "dotnet";
 
         protected override string GenerateFullPathToTool() => this.ToolExe;
 
         protected override MessageImportance StandardOutputLoggingImportance => this.ShouldShowOutputDetails ? MessageImportance.High : MessageImportance.Normal;
+
+        private bool ShouldShowOutputDetails => this.ShowOutputDetails != null && this.ShowOutputDetails == "true";
 
         protected override string GenerateCommandLineCommands()
         {
@@ -106,9 +82,12 @@ namespace MetadataTasks
             builder.AppendSwitchIfNotNull("--version ", this.WinmdVersion);
             builder.AppendSwitchIfNotNull("--outputFileName ", this.outputWinmdFullPath);
 
-            if (File.Exists(this.AutoTypesJson))
+            foreach (var autoTypeJson in TaskUtils.GetFullPaths(this.AutoTypes, this.MSBuildProjectDirectory))
             {
-                builder.AppendSwitchIfNotNull("--autoTypes ", this.AutoTypesJson);
+                if (File.Exists(autoTypeJson))
+                {
+                    builder.AppendSwitchIfNotNull("--autoTypes ", autoTypeJson);
+                }
             }
 
             IEnumerable<string> rspFiles = TaskUtils.GetFullPaths(this.ResponseFiles, this.MSBuildProjectDirectory);

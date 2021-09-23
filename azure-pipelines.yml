@@ -45,7 +45,7 @@ jobs:
       errorActionPreference: 'continue'
       pwsh: true
 
-  - publish: 'generation\Windows.Win32\obj\generated'
+  - publish: 'generation\WinSDK\obj\generated'
     displayName: Publish x64 generated assets
     artifact: 'generated_x64'
 
@@ -76,7 +76,7 @@ jobs:
       errorActionPreference: 'continue'
       pwsh: true
 
-  - publish: 'generation\Windows.Win32\obj\generated\x86'
+  - publish: 'generation\WinSDK\obj\generated\x86'
     displayName: Publish x86 generated assets
     artifact: 'generated_x86'
 
@@ -103,7 +103,7 @@ jobs:
       errorActionPreference: 'continue'
       pwsh: true
 
-  - publish: 'generation\Windows.Win32\obj\generated\arm64'
+  - publish: 'generation\WinSDK\obj\generated\arm64'
     displayName: Publish arm64 generated assets
     artifact: 'generated_arm64'
 
@@ -146,21 +146,21 @@ jobs:
     displayName: Download x64 generated assets
     inputs:
       artifact: 'generated_x64'
-      path: 'generation\Windows.Win32\obj\generated'
+      path: 'generation\WinSDK\obj\generated'
 
   - task: DownloadPipelineArtifact@2
     displayName: Download x86 generated assets
     inputs:
       artifact: 'generated_x86'
-      path: 'generation\Windows.Win32\obj\generated\x86'
+      path: 'generation\WinSDK\obj\generated\x86'
 
   - task: DownloadPipelineArtifact@2
     displayName: Download arm64 emitter assets
     inputs:
       artifact: 'generated_arm64'
-      path: 'generation\Windows.Win32\obj\generated\arm64'
+      path: 'generation\WinSDK\obj\generated\arm64'
 
-  - publish: 'generation\Windows.Win32\obj'
+  - publish: 'generation\WinSDK\obj'
     artifact: 'assembled_obj'
 
   - task: PowerShell@2
@@ -227,50 +227,7 @@ jobs:
     inputs:
       ConnectedServiceName: 'Undocked RegFree Signing Connection'
       FolderPath: '$(Build.SourcesDirectory)\bin\$(BuildConfiguration)\net5.0'
-      Pattern: 'ClangSharpSourceToWinmd.dll,ConstantsScraper.dll,MetadataUtils.dll,WinmdUtils.dll'
-      signConfigType: 'inlineSignParams'
-      inlineOperation: |
-        [
-          {
-            "keyCode": "CP-230012",
-            "operationSetCode": "SigntoolSign",
-            "parameters": [
-              {
-                "parameterName": "OpusName",
-                "parameterValue": "Microsoft"
-              },
-              {
-                "parameterName": "OpusInfo",
-                "parameterValue": "http://www.microsoft.com"
-              },
-              {
-                "parameterName": "PageHash",
-                "parameterValue": "/NPH"
-              },
-              {
-                "parameterName": "FileDigest",
-                "parameterValue": "/fd sha256"
-              },
-              {
-                "parameterName": "TimeStamp",
-                "parameterValue": "/tr \"http://rfc3161.gtm.corp.microsoft.com/TSS/HttpTspServer\" /td sha256"
-              }
-            ],
-            "toolName": "signtool.exe",
-            "toolVersion": "6.2.9304.0"
-          }
-        ]
-      SessionTimeout: '60'
-      MaxConcurrency: '50'
-      MaxRetryAttempts: '2'
-    condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
-
-  - task: EsrpCodeSigning@1
-    displayName: Authenticode sign netstandard2.0 binaries in Generator SDK package
-    inputs:
-      ConnectedServiceName: 'Undocked RegFree Signing Connection'
-      FolderPath: '$(Build.SourcesDirectory)\bin\$(BuildConfiguration)\netstandard2.0'
-      Pattern: 'MetadataTasks.dll'
+      Pattern: 'ClangSharpSourceToWinmd.dll,ConstantsScraper.dll,MetadataUtils.dll,WinmdUtils.dll,MetadataTasks.dll'
       signConfigType: 'inlineSignParams'
       inlineOperation: |
         [

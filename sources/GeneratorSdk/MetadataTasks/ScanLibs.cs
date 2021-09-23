@@ -4,36 +4,21 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
-using MetadataTasks;
 
 namespace MetadataTasks
 {
     public class ScanLibs : Task
     {
-        public ITaskItem[] Libs
-        {
-            get;
-            set;
-        }
+        public ITaskItem[] Libs { get; set; }
 
         [Required]
-        public string LibToolsBinDir
-        {
-            get; set;
-        }
+        public string LibToolsBinDir { get; set; }
 
         [Required]
-        public string WithLibsRsp
-        {
-            get;
-            set;
-        }
+        public string WithLibsRsp { get; set; }
 
         [Required]
-        public string MSBuildProjectDirectory
-        {
-            get; set;
-        }
+        public string MSBuildProjectDirectory { get; set; }
 
         public override bool Execute()
         {

@@ -9,6 +9,8 @@ namespace MetadataTasks
 {
     public class ScrapeConstants : ToolTask
     {
+        private Partition[] loadedPartitions;
+
         [Required]
         public string DefaultNamespace { get; set; }
 
@@ -36,7 +38,9 @@ namespace MetadataTasks
         [Required]
         public string MarkerFileName { get; set; }
 
-        private Partition[] loadedPartitions;
+        protected override string ToolName => "dotnet";
+
+        protected override string GenerateFullPathToTool() => this.ToolExe;
 
         public override bool Execute()
         {
@@ -74,10 +78,6 @@ namespace MetadataTasks
 
             return ret;
         }
-
-        protected override string ToolName => "dotnet";
-
-        protected override string GenerateFullPathToTool() => this.ToolExe;
 
         protected override string GenerateCommandLineCommands()
         {

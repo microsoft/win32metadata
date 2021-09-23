@@ -26,6 +26,8 @@ SpeechTokenContext=uint
 CLSCTX=uint
 ADS_AUTHENTICATION_ENUM=uint
 MSITRANSACTIONSTATE=uint
+DWRITE_FONT_FEATURE_TAG=uint
+DWRITE_FONT_AXIS_TAG=uint
 --exclude
 tag_s_RIFFWAVE_INST
 PENCLAVE_TARGET_FUNCTION
@@ -50,6 +52,9 @@ _PSP
 _PROC_THREAD_ATTRIBUTE_LIST
 CFunctionDiscoveryNotificationWrapper
 SOCKADDR_STORAGE
+PEXCEPTION_ROUTINE
+FNCALLBACK
+_OLD_LARGE_INTEGER
 --remap
 ABI::Windows::Foundation::IActivatableClassRegistration=IActivatableClassRegistration
 adpcmcoef_tag=ADPCMCOEFSET

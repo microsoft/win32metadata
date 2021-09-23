@@ -24,19 +24,6 @@ namespace MetadataTasks
             this.sdkIncRoot = sdkIncRoot;
         }
 
-        public static Partition FromTaskItem(ITaskItem item, string root, string sdkIncRoot)
-        {
-            return new Partition(item, root, sdkIncRoot);
-        }
-
-        public static IEnumerable<Partition> FromTaskItems(IEnumerable<ITaskItem> items, string root, string sdkIncRoot)
-        {
-            foreach (ITaskItem item in items)
-            {
-                yield return FromTaskItem(item, root, sdkIncRoot);
-            }
-        }
-
         public ITaskItem TaskItem => this.item;
 
         public string Name
@@ -134,6 +121,19 @@ namespace MetadataTasks
                 }
 
                 return this.traverseFiles;
+            }
+        }
+
+        public static Partition FromTaskItem(ITaskItem item, string root, string sdkIncRoot)
+        {
+            return new Partition(item, root, sdkIncRoot);
+        }
+
+        public static IEnumerable<Partition> FromTaskItems(IEnumerable<ITaskItem> items, string root, string sdkIncRoot)
+        {
+            foreach (ITaskItem item in items)
+            {
+                yield return FromTaskItem(item, root, sdkIncRoot);
             }
         }
 

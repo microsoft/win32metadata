@@ -46,17 +46,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{3E76
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "generation", "generation", "{B952F7CE-A7D8-4633-925D-FF1C95FA77AC}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "windows.win32", "windows.win32", "{E89A8112-E03B-4EF9-A803-0B135D8E1E42}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinSDK", "WinSDK", "{8ADADAAD-DC58-4080-870F-65FE47825343}"
 	ProjectSection(SolutionItems) = preProject
-		..\generation\Windows.Win32\ConstantsScraper.rsp = ..\generation\Windows.Win32\ConstantsScraper.rsp
-		..\generation\Windows.Win32\emitter.remap.rsp = ..\generation\Windows.Win32\emitter.remap.rsp
-		..\generation\Windows.Win32\enums.json = ..\generation\Windows.Win32\enums.json
-		..\generation\Windows.Win32\libMappings.rsp = ..\generation\Windows.Win32\libMappings.rsp
-		..\generation\Windows.Win32\out.binlog = ..\generation\Windows.Win32\out.binlog
-		..\generation\Windows.Win32\requiredNamespacesForNames.rsp = ..\generation\Windows.Win32\requiredNamespacesForNames.rsp
-		..\generation\Windows.Win32\supportedOS.rsp = ..\generation\Windows.Win32\supportedOS.rsp
-		..\generation\Windows.Win32\Windows.Win32.proj = ..\generation\Windows.Win32\Windows.Win32.proj
-		..\generation\Windows.Win32\WithSetLastError.rsp = ..\generation\Windows.Win32\WithSetLastError.rsp
+		..\generation\WinSDK\autoTypes.json = ..\generation\WinSDK\autoTypes.json
+		..\generation\WinSDK\ConstantsScraper.header.txt = ..\generation\WinSDK\ConstantsScraper.header.txt
+		..\generation\WinSDK\ConstantsScraper.settings.rsp = ..\generation\WinSDK\ConstantsScraper.settings.rsp
+		..\generation\WinSDK\emitter.settings.rsp = ..\generation\WinSDK\emitter.settings.rsp
+		..\generation\WinSDK\enums.json = ..\generation\WinSDK\enums.json
+		..\generation\WinSDK\functionPointerFixups.json = ..\generation\WinSDK\functionPointerFixups.json
+		..\generation\WinSDK\libMappings.rsp = ..\generation\WinSDK\libMappings.rsp
+		..\generation\WinSDK\requiredNamespacesForNames.rsp = ..\generation\WinSDK\requiredNamespacesForNames.rsp
+		..\generation\WinSDK\scraper.header.txt = ..\generation\WinSDK\scraper.header.txt
+		..\generation\WinSDK\scraper.settings.rsp = ..\generation\WinSDK\scraper.settings.rsp
+		..\generation\WinSDK\supportedOS.rsp = ..\generation\WinSDK\supportedOS.rsp
+		..\generation\WinSDK\Windows.Win32.proj = ..\generation\WinSDK\Windows.Win32.proj
+		..\generation\WinSDK\WithSetLastError.rsp = ..\generation\WinSDK\WithSetLastError.rsp
 	EndProjectSection
 EndProject
 Global
@@ -97,7 +101,7 @@ Global
 		{5B6F6176-0031-4105-B9FF-B713499D8975} = {D3E6399F-0983-4742-B07C-874B6ED80E51}
 		{6C9DCCF4-8580-478A-BB61-36ACCCADB16F} = {4D4F6043-CD81-4FD3-A6E5-0A2148281E78}
 		{65F906A0-83DF-435D-AE74-BE67CBC8CC9B} = {D3E6399F-0983-4742-B07C-874B6ED80E51}
-		{E89A8112-E03B-4EF9-A803-0B135D8E1E42} = {B952F7CE-A7D8-4633-925D-FF1C95FA77AC}
+		{8ADADAAD-DC58-4080-870F-65FE47825343} = {B952F7CE-A7D8-4633-925D-FF1C95FA77AC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {156D7600-E986-417B-9D16-E6FA1039AF42}

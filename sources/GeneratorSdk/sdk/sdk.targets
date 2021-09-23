@@ -7,7 +7,10 @@
   <UsingTask TaskName="MetadataTasks.CompileIdls" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
   <UsingTask TaskName="MetadataTasks.FilterResponseFiles" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
   <UsingTask TaskName="MetadataTasks.GetPartitionFiles" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
-
+  <UsingTask TaskName="MetadataTasks.MergeFilesIntoFile" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
+  <UsingTask TaskName="MetadataTasks.PrepSettingsForFunctionPointerFixups" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
+  <UsingTask TaskName="MetadataTasks.PrepSettingsForAutoTypes" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
+  
   <UsingTask TaskName="GetFirstPartitionNamespace" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll">
     <ParameterGroup>
       <Items ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="true" />
@@ -24,14 +27,19 @@
     <GeneratedDir>$(ObjDir)\generated</GeneratedDir>
     <ScratchOutputDir>$(ObjDir)\scratch</ScratchOutputDir>
 
-    <BaseScraperFunctionPointerFixupsRsp>$(GeneratedDir)\base.scraper.functionPointerFixups.generated.rsp</BaseScraperFunctionPointerFixupsRsp>
-    <BaseEmitterFunctionPointerFixupsRsp>$(GeneratedDir)\base.emitter.functionPointerFixups.generated.rsp</BaseEmitterFunctionPointerFixupsRsp>
-
-    <BaseFunctionPointerFixups>$(Win32MetadataAssetsDir)\functionPointerFixups.json</BaseFunctionPointerFixups>
-    <BaseAutoTypesJson>$(Win32MetadataAssetsDir)\autoTypes.json</BaseAutoTypesJson>
+    <Win32MetadataScraperAssetsDir>$(Win32MetadataAssetsDir)\scraper</Win32MetadataScraperAssetsDir>
 
     <ScraperFunctionPointerFixupsRsp>$(GeneratedDir)\scraper.functionPointerFixups.generated.rsp</ScraperFunctionPointerFixupsRsp>
     <EmitterFunctionPointerFixupsRsp>$(GeneratedDir)\emitter.functionPointerFixups.generated.rsp</EmitterFunctionPointerFixupsRsp>
+    <ScraperAutoTypesRsp>$(GeneratedDir)\scraper.autoTypes.generated.rsp</ScraperAutoTypesRsp>
+    <FinalConstantsScraperHeaderFile>$(GeneratedDir)\ConstantsScraper.header.generated.txt</FinalConstantsScraperHeaderFile>
+    <FinalScraperHeaderFile>$(GeneratedDir)\scraper.header.generated.txt</FinalScraperHeaderFile>
+
+    <BaseConstantsScraperHeaderFile>$(Win32MetadataScraperAssetsDir)\ConstantsScraper.header.txt</BaseConstantsScraperHeaderFile>
+    <BaseScraperHeaderFile>$(Win32MetadataScraperAssetsDir)\scraper.header.txt</BaseScraperHeaderFile>
+
+    <WinSDKConstantsScraperHeaderFile>$(WinSDKAssets)\ConstantsScraper.header.txt</WinSDKConstantsScraperHeaderFile>
+    <WinSDKScraperHeaderFile>$(WinSDKAssets)\scraper.header.txt</WinSDKScraperHeaderFile>
 
     <WithLibsRsp>$(GeneratedDir)\withLibs.generated.rsp</WithLibsRsp>
 
@@ -39,79 +47,72 @@
     <FilteredRspForConstants>$(GeneratedDir)\filtered.constants.generated.rsp</FilteredRspForConstants>
     <FilteredRspForEmitter>$(GeneratedDir)\filtered.emitter.generated.rsp</FilteredRspForEmitter>
 
-    <BaseScraperAutoTypesRsp>$(GeneratedDir)\base.scraper.autoTypes.generated.rsp</BaseScraperAutoTypesRsp>
-    <ScraperAutoTypesRsp>$(GeneratedDir)\scraper.autoTypes.generated.rsp</ScraperAutoTypesRsp>
-
     <ScrapedConstantsMarker>$(GeneratedDir)\constants.scraped.txt</ScrapedConstantsMarker>
     <ScrapedHeadersMarker>$(GeneratedDir)\scannedheaders.$(ScanArch).txt</ScrapedHeadersMarker>
 
-    <ScrapedConstantsHeaderFile>$(Win32MetadataScraperAssetsDir)\ConstantsHeader.txt</ScrapedConstantsHeaderFile>
-    <ScrapedHeadersHeaderFile>$(Win32MetadataScraperAssetsDir)\header.txt</ScrapedHeadersHeaderFile>
-
   </PropertyGroup>
 
-  <Target Name="BasePrepFunctionPointerFixups" BeforeTargets="Build"
-    Condition="'$(BaseFunctionPointerFixups)' != $(FunctionPointerFixups)"
-    Inputs="$(BaseFunctionPointerFixups)"
-    Outputs="$(BaseScraperFunctionPointerFixupsRsp);$(BaseEmitterFunctionPointerFixupsRsp)">
+  <ItemGroup Condition="'$(UseWinSDKAssets)' == 'true'">
+    <FunctionPointerFixup Include="$(WinSDKAssets)\functionPointerFixups.json"/>
+    <AutoTypesForSettingsOnly Include="$(WinSDKAssets)\autotypes.json"/>
+    <ScraperRsp Include="$(WinSDKAssets)\scraper.settings.rsp"/>
+  </ItemGroup>
 
-    <PropertyGroup>
-      <InstallToolsScript>
-        $(PowerShell)
+  <PropertyGroup Condition="'$(UseWinSDKAssets)' == 'true'">
+    <AdditionalIncludes>$(WinSDKAssets)\inc;$(AdditionalIncludes)</AdditionalIncludes>
+  </PropertyGroup>
 
-        $(ScriptsDir)\CreateRspsForFunctionPointerFixups.ps1 -functionPointerFixupsPath "$(BaseFunctionPointerFixups)" -outputScraperRspFileName "$(BaseScraperFunctionPointerFixupsRsp)" -outputEmitterRspFileName "$(BaseEmitterFunctionPointerFixupsRsp)"
-      </InstallToolsScript>
-    </PropertyGroup>
+  <Target Name="PrepScraperHeader"
+    Inputs="$(BaseScraperHeaderFile);$(ScraperHeader)"
+    Outputs="$(FinalScraperHeaderFile)">
 
-    <Exec Command="$(InstallToolsScript)" EchoOff="false" />
+    <ItemGroup>
+      <InputScraperFiles Include="$(BaseScraperHeaderFile)"/>
+      <InputScraperFiles Include="$(ScraperHeader)"/>
+      <InputScraperFiles Condition="'$(UseWinSDKAssets)' == 'true'" Include="$(WinSDKScraperHeaderFile)"/>
+    </ItemGroup>
+
+    <MergeFilesIntoFile
+      InputFiles="@(InputScraperFiles)"
+      OutputFile="$(FinalScraperHeaderFile)"/>
+
   </Target>
 
-  <Target Name="BasePrepAutoTypes" BeforeTargets="Build"
-    Condition="'$(BaseAutoTypesJson)' != $(AutoTypesJson)"
-    Inputs="$(BaseAutoTypesJson)"
-    Outputs="$(BaseScraperAutoTypesRsp)">
+  <Target Name="PrepConstantsScraperHeader"
+    Inputs="$(BaseConstantsScraperHeaderFile);$(ConstantsScraperHeader)"
+    Outputs="$(FinalConstantsScraperHeaderFile)">
 
-    <PropertyGroup>
-      <InstallToolsScript>
-        $(PowerShell)
+    <ItemGroup>
+      <InputScraperFiles Include="$(BaseConstantsScraperHeaderFile)"/>
+      <InputScraperFiles Include="$(ConstantsScraperHeader)"/>
+      <InputScraperFiles Condition="'$(UseWinSDKAssets)' == 'true'" Include="$(WinSDKConstantsScraperHeaderFile)"/>
+    </ItemGroup>
 
-        $(ScriptsDir)\CreateScraperRspForAutoTypes.ps1 -autoTypesPath "$(BaseAutoTypesJson)" -outputFileName "$(BaseScraperAutoTypesRsp)"
-      </InstallToolsScript>
-    </PropertyGroup>
+    <MergeFilesIntoFile
+      InputFiles="@(InputScraperFiles)"
+      OutputFile="$(FinalConstantsScraperHeaderFile)"/>
 
-    <Exec Command="$(InstallToolsScript)" EchoOff="false" />
   </Target>
 
-  <Target Name="PrepFunctionPointerFixups" BeforeTargets="Build"
-    Inputs="$(FunctionPointerFixups)"
+  <Target Name="PrepSettingsForFunctionPointerFixups" BeforeTargets="Build"
+    Inputs="@(FunctionPointerFixup)"
     Outputs="$(ScraperFunctionPointerFixupsRsp);$(EmitterFunctionPointerFixupsRsp)">
 
-    <PropertyGroup>
-      <InstallToolsScript>
-        $(PowerShell)
+    <PrepSettingsForFunctionPointerFixups
+      FunctionPointerFixups="@(FunctionPointerFixup)"
+      ScraperFunctionPointerFixupsRsp="$(ScraperFunctionPointerFixupsRsp)"
+      EmitterFunctionPointerFixupsRsp="$(EmitterFunctionPointerFixupsRsp)"/>
 
-        $(ScriptsDir)\CreateRspsForFunctionPointerFixups.ps1 -functionPointerFixupsPath "$(FunctionPointerFixups)" -outputScraperRspFileName "$(ScraperFunctionPointerFixupsRsp)" -outputEmitterRspFileName "$(EmitterFunctionPointerFixupsRsp)"
-      </InstallToolsScript>
-    </PropertyGroup>
-
-    <Exec Condition="Exists($(FunctionPointerFixups))" Command="$(InstallToolsScript)" EchoOff="false" />
-    <Delete Condition="!Exists($(FunctionPointerFixups))" Files="$(ScraperFunctionPointerFixupsRsp);$(EmitterFunctionPointerFixupsRsp)"/>
   </Target>
 
-  <Target Name="PrepAutoTypes" BeforeTargets="Build"
-    Inputs="$(AutoTypesJson)"
+  <Target Name="PrepSettingsForAutoTypes" BeforeTargets="Build"
+    Inputs="@(AutoType);@(AutoTypesForSettingsOnly)"
     Outputs="$(ScraperAutoTypesRsp)">
 
-    <PropertyGroup>
-      <InstallToolsScript>
-        $(PowerShell)
+    <PrepSettingsForAutoTypes
+      AutoTypes="@(AutoType);@(AutoTypesForSettingsOnly)"
+      ScraperAutoTypesRsp="$(ScraperAutoTypesRsp)"/>
 
-        $(ScriptsDir)\CreateScraperRspForAutoTypes.ps1 -autoTypesPath "$(AutoTypesJson)" -outputFileName "$(ScraperAutoTypesRsp)"
-      </InstallToolsScript>
-    </PropertyGroup>
-
-    <Exec Condition="Exists($(AutoTypesJson))" Command="$(InstallToolsScript)" EchoOff="false" />
-    <Delete Condition="!Exists($(AutoTypesJson))" Files="$(ScraperAutoTypesRsp)"/>
   </Target>
 
   <Target Name="CompileIdls" BeforeTargets="Build"
@@ -175,10 +176,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ScraperRsp Include="$(BaseScraperFunctionPointerFixupsRsp);$(ScraperFunctionPointerFixupsRsp)"/>
-    <ScraperRsp Include="$(BaseScraperAutoTypesRsp);$(ScraperAutoTypesRsp)"/>
+    <ScraperRsp Include="$(ScraperFunctionPointerFixupsRsp)"/>
+    <ScraperRsp Include="$(ScraperAutoTypesRsp)"/>
     <ScraperRsp Include="$(FilteredRspForHeaders)"/>
-    <ScraperRsp Include="$(Win32MetadataScraperAssetsDir)\baseRemap.rsp"/>
     <ScraperRsp Include="$(Win32MetadataScraperAssetsDir)\baseSettings.rsp"/>
     <ScraperRsp Include="$(Win32MetadataScraperAssetsDir)\baseSettings.*.rsp"/>
   </ItemGroup>
@@ -188,12 +188,12 @@
   </ItemGroup>
 
   <Target Name="ScrapeHeaders" BeforeTargets="Build"
-    DependsOnTargets="BasePrepFunctionPointerFixups;BasePrepAutoTypes;PrepFunctionPointerFixups;PrepAutoTypes;CompileIdls;PrepareWithLibsRsp;FilterRsps">
+    DependsOnTargets="PrepScraperHeader;PrepSettingsForFunctionPointerFixups;PrepSettingsForAutoTypes;CompileIdls;PrepareWithLibsRsp;FilterRsps">
 
     <ScrapeHeaders
       Partitions="@(Partition)"
       ResponseFiles="@(ScraperRsp)"
-      HeaderTextFile="$(ScrapedHeadersHeaderFile)"
+      HeaderTextFile="$(FinalScraperHeaderFile)"
       SdkIncRoot="$(SdkIncRoot)"
       WinSdkRoot="$(TargetPlatformSdkRootOverride)"
       ToolsBinDir="$(ToolsBinDir)"
@@ -224,7 +224,7 @@
   </ItemGroup>
 
   <Target Name="ScrapeConstants" BeforeTargets="Build"
-    DependsOnTargets="ScrapeHeaders;CopyManualFilesToScraped">
+    DependsOnTargets="PrepConstantsScraperHeader;ScrapeHeaders;CopyManualFilesToScraped">
 
     <PropertyGroup>
       <DefaultNamespace>DefaultNamespace</DefaultNamespace>
@@ -237,7 +237,7 @@
       Partitions="@(Partition)"
       EnumsJson="$(EnumsJson)"
       ToolsBinDir="$(ToolsBinDir)"
-      HeaderTextFile="$(ScrapedConstantsHeaderFile)"
+      HeaderTextFile="$(FinalConstantsScraperHeaderFile)"
       MarkerFileName="$(ScrapedConstantsMarker)"
       SdkIncRoot="$(SdkIncRoot)"
       MSBuildProjectDirectory="$(MSBuildProjectDirectory)"/>
@@ -245,12 +245,12 @@
   </Target>
 
   <Target Name="EmitWinmd" BeforeTargets="Build"
-    Inputs="$(ScrapedConstantsMarker)"
+    Inputs="$(ScrapedConstantsMarker);@(AutoType)"
     Outputs="$(OutputWinmd)"
     DependsOnTargets="ScrapeConstants">
 
     <ItemGroup>
-      <EmitterRsp Include="$(FilteredRspForEmitter);$(BaseEmitterFunctionPointerFixupsRsp);$(EmitterFunctionPointerFixupsRsp)"/>
+      <EmitterRsp Include="$(FilteredRspForEmitter);$(EmitterFunctionPointerFixupsRsp)"/>
       <EmitterRsp Include="$(GeneratedDir)\enumsMakeFlags.generated.rsp"/>
       <EmitterRsp Include="$(GeneratedDir)\enumsRemap.rsp"/>
     </ItemGroup>
@@ -259,7 +259,7 @@
 
     <EmitWinmd
       Libs="@(ImportLibs)"
-      AutoTypesJson="$(AutoTypesJson)"
+      AutoTypes="@(AutoType)"
       EmitterSourceDir="$(GeneratedDir)"
       ToolsBinDir="$(ToolsBinDir)"
       ResponseFiles="@(EmitterRsp)"

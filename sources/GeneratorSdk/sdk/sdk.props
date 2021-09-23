@@ -15,11 +15,14 @@
   <ItemGroup>
     <ResponseFile Include="*.rsp"/>
     <ManualCs Include="*.cs"/>
+    <FunctionPointerFixup Include="$(MSBuildProjectDirectory)\functionPointerFixups.json"/>
+    <AutoType Include="$(MSBuildProjectDirectory)\autoTypes.json"/>
+
   </ItemGroup>
 
   <PropertyGroup>
     <Win32MetadataSdkRoot>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..'))</Win32MetadataSdkRoot>
-    <TaskBinDir Condition="'$(TaskBinDir)' == ''">$(Win32MetadataSdkRoot)\tools\netstandard2.0</TaskBinDir>
+    <TaskBinDir Condition="'$(TaskBinDir)' == ''">$(Win32MetadataSdkRoot)\tools\net5.0</TaskBinDir>
     <ToolsBinDir Condition="'$(ToolsBinDir)' == ''">$(Win32MetadataSdkRoot)\tools\net5.0</ToolsBinDir>
     <LibToolsBinDir Condition="'$(LibToolsBinDir)' == ''">$(Win32MetadataSdkRoot)\tools</LibToolsBinDir>
     <ScriptsDir Condition="'$(ScriptsDir)' == ''">$(Win32MetadataSdkRoot)\scripts</ScriptsDir>
@@ -28,16 +31,18 @@
     <SdkIncRoot>$(TargetPlatformSdkRootOverride)\include\$(TargetPlatformVersion)</SdkIncRoot>
 
     <Win32MetadataAssetsDir Condition="'$(Win32MetadataAssetsDir)' == ''">$(Win32MetadataSdkRoot)\tools\assets</Win32MetadataAssetsDir>
-    <Win32MetadataScraperAssetsDir Condition="'$(Win32MetadataScraperAssetsDir)' == ''">$(Win32MetadataAssetsDir)\scraper</Win32MetadataScraperAssetsDir>
-    <Win32MetadataEmitterAssetsDir Condition="'$(Win32MetadataEmitterAssetsDir)' == ''">$(Win32MetadataAssetsDir)\emitter</Win32MetadataEmitterAssetsDir>
+    <WinSDKAssets Condition="'$(WinSDKAssets)' == ''">$(Win32MetadataAssetsDir)\WinSDK</WinSDKAssets>
+
     <Win32WinmdBinDir Condition="'$(Win32WinmdBinDir)' == ''">$(PkgMicrosoft_Windows_SDK_Win32Metadata)</Win32WinmdBinDir>
     <PowerShell># 2>nul || type %~df0|find /v "setlocal"|find /v "errorlevel"|powershell.exe -noninteractive -&amp; exit %errorlevel% || #</PowerShell>
 
-    <FunctionPointerFixups>$(MSBuildProjectDirectory)\functionPointerFixups.json</FunctionPointerFixups>
-    <AutoTypesJson>$(MSBuildProjectDirectory)\autoTypes.json</AutoTypesJson>
+    <ConstantsScraperHeader>$(MSBuildProjectDirectory)\ConstantsScraper.header.txt</ConstantsScraperHeader>
+    <ScraperHeader>$(MSBuildProjectDirectory)\scraper.header.txt</ScraperHeader>
 
     <ShowEmitWinmdOutputDetails>false</ShowEmitWinmdOutputDetails>
 
+    <!-- Set this to avoid depending on the WinSDK -->
+    <UseWinSDKAssets>true</UseWinSDKAssets>
   </PropertyGroup>
 
   <ItemGroup>
