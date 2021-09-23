@@ -9,9 +9,6 @@ $windowsWin32ProjectRoot = "$rootDir\generation\WinSDK"
 $sdkGeneratedSourceDir = "$windowsWin32ProjectRoot\obj\generated"
 $recompiledIdlHeadersDir = "$windowsWin32ProjectRoot\RecompiledIdlHeaders"
 $metadataToolsBin = "$binDir\release\net5.0"
-$logsDir = "$rootDir\logs"
-
-Create-Directory $logsDir
 
 if (Test-Path -Path $binDir -PathType leaf)
 {
