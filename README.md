@@ -48,7 +48,7 @@ ClangSharp emits C# as it encounters types found in C/C++ headers. It will only 
 
 Example for Direct3DDxgi:
 
-[generation/scraper/Partitions/Direct3DDxgi/main.cpp](generation/scraper/Partitions/Direct3DDxgi/main.cpp):
+[generation/WinSDK/Partitions/Direct3DDxgi/main.cpp](generation/WinSDK/Partitions/Direct3DDxgi/main.cpp):
 
     #include <winnt.h>
     #include <winerror.h>
@@ -63,7 +63,7 @@ Example for Direct3DDxgi:
     #include <dxgicommon.h>
     #include <dxgiformat.h>
 
-[generation/scraper/Partitions/Direct3DDxgi/settings.rsp](generation/scraper/Partitions/Direct3DDxgi/settings.rsp):
+[generation/WinSDK/Partitions/Direct3DDxgi/settings.rsp](generation/WinSDK/Partitions/Direct3DDxgi/settings.rsp):
 
     --traverse
     <IncludeRoot>/shared/dxgitype.h
@@ -102,7 +102,7 @@ It starts emitting:
 
 It has no way of knowing a typedef is coming (RECT). But, we can feed data into ClangSharp that tells it to rename tagRECT to RECT:
 
-[generation/scraper/baseRemap.rsp](generation/scraper/baseRemap.rsp)
+[generation/WinSDK/scraper.settings.rsp](generation/WinSDK/scraper.settings.rsp)
 
     tagRECT=RECT
 

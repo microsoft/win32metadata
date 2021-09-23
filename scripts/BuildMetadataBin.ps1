@@ -30,3 +30,7 @@ if ($assetsScrapedSeparately)
 
 dotnet build "$windowsWin32ProjectRoot" -c Release -t:EmitWinmd -p:WinmdVersion=$assemblyVersion -p:OutputWinmd=$outputWinmdFileName -p:SkipScraping=$skipScraping
 
+if ($LastExitCode -lt 0)
+{
+    exit $LastExitCode
+}

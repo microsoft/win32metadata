@@ -76,13 +76,7 @@ namespace MetadataTasks
                 return true;
             }
 
-            if (File.Exists(this.MarkerFileName))
-            {
-                File.Delete(this.MarkerFileName);
-            }
-
             this.Log.LogMessage(MessageImportance.High, $"Scraping headers for {this.ScanArch}...");
-
 
             System.Threading.Tasks.ParallelOptions opt = new System.Threading.Tasks.ParallelOptions();
 

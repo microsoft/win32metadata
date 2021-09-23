@@ -22135,14 +22135,6 @@
       {
         "struct": "COMBOBOXINFO",
         "field": "stateButton"
-      },
-      {
-        "struct": "TITLEBARINFO",
-        "field": "rgstate"
-      },
-      {
-        "struct": "TITLEBARINFOEX",
-        "field": "rgstate"
       }
     ]
   },
