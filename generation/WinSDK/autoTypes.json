@@ -516,6 +516,16 @@
     "CloseApi": "MsiCloseHandle"
   },
   {
+    "Name": "HREPORT",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "WerReportCloseHandle"
+  },
+  {
+    "Name": "HREPORTSTORE",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "WerStoreClose"
+  },
+  {
     "Namespace": "Windows.Win32.UI.Animation",
     "Name": "UI_ANIMATION_KEYFRAME",
     "ValueType": "IntPtr"
@@ -894,6 +904,11 @@
     "Namespace": "Windows.Win32.System.SystemServices",
     "Name": "DHPDEV",
     "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.SystemInformation",
+    "Name": "FIRMWARE_TABLE_ID",
+    "ValueType": "uint"
   },
   {
     "Namespace": "Windows.Win32.Storage.CloudFilters",
