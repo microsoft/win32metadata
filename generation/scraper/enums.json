@@ -29167,5 +29167,20 @@
         "field": "flags"
       }
     ]
+  },
+  {
+    "name": "OS",
+    "flags": false,
+    "autoPopulate": {
+      "header": "shlwapi.h",
+      "filter": "OS_"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "IsOS",
+        "parameter": "dwOS"
+      }
+    ]
   }
 ]
