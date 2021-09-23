@@ -352,8 +352,8 @@ MigrationBackup/
 
 # Generation files
 !generation/*.rsp
-!generation/Windows.Win32/Partitions/backup
-!generation/Windows.Win32/Partitions/debug
+!generation/WinSDK/Partitions/backup
+!generation/WinSDK/Partitions/debug
 /.vscode/settings.json
 /tests/SourceToWinmd/source/generated/fake/autotypes.cs
 /winsdk
