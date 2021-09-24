@@ -61,6 +61,10 @@ namespace Windows.Win32.Storage.FileSystem
         FILE_FLAG_OPEN_NO_RECALL = 0x00100000,
         FILE_FLAG_FIRST_PIPE_INSTANCE = 0x00080000,
 
+        PIPE_ACCESS_DUPLEX = 0x00000003,
+        PIPE_ACCESS_INBOUND = 0x00000001,
+        PIPE_ACCESS_OUTBOUND = 0x00000002,
+
         SECURITY_ANONYMOUS = (Windows.Win32.Security.SECURITY_IMPERSONATION_LEVEL.SecurityAnonymous << 16),
         SECURITY_IDENTIFICATION = (Windows.Win32.Security.SECURITY_IMPERSONATION_LEVEL.SecurityIdentification << 16),
         SECURITY_IMPERSONATION = (Windows.Win32.Security.SECURITY_IMPERSONATION_LEVEL.SecurityImpersonation << 16),

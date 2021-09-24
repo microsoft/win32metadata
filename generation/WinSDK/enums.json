@@ -5443,6 +5443,30 @@
       {
         "name": "PIPE_READMODE_MESSAGE",
         "value": "2"
+      },
+      {
+        "name": "PIPE_CLIENT_END",
+        "value": "0"
+      },
+      {
+        "name": "PIPE_SERVER_END",
+        "value": "1"
+      },
+      {
+        "name": "PIPE_TYPE_BYTE",
+        "value": "0"
+      },
+      {
+        "name": "PIPE_TYPE_MESSAGE",
+        "value": "4"
+      },
+      {
+        "name": "PIPE_ACCEPT_REMOTE_CLIENTS",
+        "value": "0"
+      },
+      {
+        "name": "PIPE_REJECT_REMOTE_CLIENTS",
+        "value": "8"
       }
     ],
     "uses": [
@@ -5457,6 +5481,38 @@
       {
         "method": "SetNamedPipeHandleState",
         "parameter": "lpMode"
+      },
+      {
+        "method": "GetNamedPipeInfo",
+        "parameter": "lpFlags"
+      },
+      {
+        "method": "GetNamedPipeHandleStateA",
+        "parameter": "lpState"
+      },
+      {
+        "method": "GetNamedPipeHandleStateW",
+        "parameter": "lpState"
+      },
+      {
+        "method": "SetNamedPipeHandleState",
+        "parameter": "lpMode"
+      },
+      {
+        "method": "SetNamedPipeHandleState",
+        "parameter": "lpMode"
+      },
+      {
+        "method": "SetNamedPipeHandleState",
+        "parameter": "dwPipeMode"
+      },
+      {
+        "method": "CreateNamedPipeA",
+        "parameter": "dwPipeMode"
+      },
+      {
+        "method": "CreateNamedPipeW",
+        "parameter": "dwPipeMode"
       }
     ]
   },
@@ -6105,6 +6161,14 @@
       {
         "method": "CreateFileTransactedW",
         "parameter": "dwFlagsAndAttributes"
+      },
+      {
+        "method": "CreateNamedPipeA",
+        "parameter": "dwOpenMode"
+      },
+      {
+        "method": "CreateNamedPipeW",
+        "parameter": "dwOpenMode"
       }
     ]
   },
@@ -15800,34 +15864,6 @@
       {
         "method": "GetAncestor",
         "parameter": "gaFlags"
-      }
-    ]
-  },
-  {
-    "name": "NAMED_PIPE_INFO_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "PIPE_CLIENT_END",
-        "value": "0"
-      },
-      {
-        "name": "PIPE_SERVER_END",
-        "value": "1"
-      },
-      {
-        "name": "PIPE_TYPE_BYTE",
-        "value": "0"
-      },
-      {
-        "name": "PIPE_TYPE_MESSAGE",
-        "value": "4"
-      }
-    ],
-    "uses": [
-      {
-        "method": "GetNamedPipeInfo",
-        "parameter": "lpFlags"
       }
     ]
   },
