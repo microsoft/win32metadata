@@ -23,7 +23,7 @@ namespace MetadataTasks
         public override bool Execute()
         {
 #if DEBUG
-            if (System.Environment.GetEnvironmentVariable("DEBUG_TASKS") == "1")
+            if (System.Environment.GetEnvironmentVariable("DEBUG_SCAN_LIBS_TASK") == "1")
             {
                 System.Diagnostics.Debugger.Launch();
             }

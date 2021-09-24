@@ -134,14 +134,14 @@
 
   <Target Name="PrepareWithLibsRsp" BeforeTargets="Build"
     Inputs="@(ImportLibs)"
-    Outputs="$(ScraperDir)\withLibs.generated.rsp">
+    Outputs="$(WithLibsRsp)">
 
     <Message Text="Scanning libs..." Importance="high"/>
 
     <ScanLibs
       Libs="@(ImportLibs)"
       LibToolsBinDir="$(LibToolsBinDir)"
-      WithLibsRsp="$(ScraperDir)\withLibs.generated.rsp"
+      WithLibsRsp="$(WithLibsRsp)"
       MSBuildProjectDirectory="$(MSBuildProjectDirectory)">
     </ScanLibs>
 
@@ -179,6 +179,7 @@
     <ScraperRsp Include="$(ScraperFunctionPointerFixupsRsp)"/>
     <ScraperRsp Include="$(ScraperAutoTypesRsp)"/>
     <ScraperRsp Include="$(FilteredRspForHeaders)"/>
+    <ScraperRsp Include="$(WithLibsRsp)"/>
     <ScraperRsp Include="$(Win32MetadataScraperAssetsDir)\baseSettings.rsp"/>
     <ScraperRsp Include="$(Win32MetadataScraperAssetsDir)\baseSettings.*.rsp"/>
   </ItemGroup>
