@@ -155,7 +155,7 @@ jobs:
       path: 'generation\WinSDK\obj\generated\x86'
 
   - task: DownloadPipelineArtifact@2
-    displayName: Download arm64 emitter assets
+    displayName: Download arm64 generated assets
     inputs:
       artifact: 'generated_arm64'
       path: 'generation\WinSDK\obj\generated\arm64'

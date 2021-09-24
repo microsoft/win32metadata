@@ -24,4 +24,4 @@ else
 }
 
 dotnet build "$windowsWin32ProjectRoot" -c Release -p:ScanArch=$arch -t:$target
-
+ThrowOnNativeProcessError

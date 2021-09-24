@@ -19,10 +19,6 @@ if ($Clean.IsPresent)
 Install-BuildTools
 
 .\scripts\BuildMetadataBin.ps1 -arch $arch
-if ($LastExitCode -lt 0)
-{
-    exit $LastExitCode
-}
 
 if (!$ExcludePackages)
 {
@@ -32,8 +28,4 @@ if (!$ExcludePackages)
 if ($arch -eq "crossarch")
 {
     .\scripts\TestWinmdBinary.ps1
-    if ($LastExitCode -lt 0)
-    {
-        exit $LastExitCode
-    }
 }

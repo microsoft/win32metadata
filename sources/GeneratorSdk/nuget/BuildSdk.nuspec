@@ -42,6 +42,5 @@
     <file src="generation\WinSDK\scraper.header.txt" target="tools\assets\WinSDK"/>
     <file src="generation\WinSDK\inc\*" target="tools\assets\WinSDK\inc"/>
 
-    
   </files>
 </package>

@@ -359,3 +359,6 @@ MigrationBackup/
 /winsdk
 /sources/GeneratorSdk/sdk/sdk.stamped.props
 /tests/SourceToWinmd/source/generated/autotypes.cs
+
+# This gets written when testing the packages, but we don't want to check it in
+/sources/GeneratorSdk/samples/global.json

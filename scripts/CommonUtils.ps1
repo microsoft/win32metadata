@@ -10,6 +10,18 @@ $sdkGeneratedSourceDir = "$windowsWin32ProjectRoot\obj\generated"
 $recompiledIdlHeadersDir = "$windowsWin32ProjectRoot\RecompiledIdlHeaders"
 $metadataToolsBin = "$binDir\release\net5.0"
 
+Set-StrictMode -Version Latest
+$ErrorActionPreference = "Stop"
+$PSDefaultParameterValues['*:ErrorAction']='Stop'
+function ThrowOnNativeProcessError
+{
+    if (-not $?)
+    {   
+        $var = $?
+        throw "Call to process exited with error"
+    }
+}
+
 if (Test-Path -Path $binDir -PathType leaf)
 {
     Remove-Item $binDir
@@ -64,6 +76,7 @@ function Install-BuildTools
     Install-DotNetTool -Name nbgv
 
     & dotnet build "$rootDir\buildtools" -c Release
+    ThrowOnNativeProcessError
 
     Update-VsInstallDir
 }
