@@ -83,7 +83,16 @@ namespace MetadataTasks
         {
             get
             {
-                return this.TraverseFiles.Concat(new string[] { this.FullPath });
+                List<string> files = new List<string>();
+                files.Add(this.FullPath);
+
+                var settingsFile = this.SettingsFile;
+                if (settingsFile != null)
+                {
+                    files.Add(settingsFile);
+                }
+
+                return files.Concat(this.TraverseFiles);
             }
         }
 
