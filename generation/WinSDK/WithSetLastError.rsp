@@ -1585,16 +1585,13 @@ Heap32First
 Heap32ListFirst
 Heap32ListNext
 Heap32Next
-HeapAlloc
 HeapCompact
 HeapCreate
 HeapDestroy
 HeapFree
 HeapLock
 HeapQueryInformation
-HeapReAlloc
 HeapSetInformation
-HeapSize
 HeapUnlock
 HeapWalk
 HideCaret
