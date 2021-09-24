@@ -1,0 +1,60 @@
+/*************************************************************
+*                                                            *
+*   Copyright (C) Microsoft Corporation. All rights reserved.*
+*                                                            *
+*************************************************************/
+
+cpp_quote("#include <winapifamily.h>")
+
+#pragma region Desktop Family
+cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+typedef struct _IsolatedAppLauncherTelemetryParameters
+{
+    BOOL EnableForLaunch;   // When set, call specific data will be used for telemetry.
+    GUID CorrelationGUID;   // Data for telemetry.
+} IsolatedAppLauncherTelemetryParameters;
+
+[
+    object,
+    uuid(F686878F-7B42-4CC4-96FB-F4F3B6E3D24D),
+]
+interface IIsolatedAppLauncher : IUnknown
+{
+    HRESULT Launch(
+        [in, string] LPCWSTR appUserModelId, 
+        [in, string] LPCWSTR arguments, 
+        [in] const IsolatedAppLauncherTelemetryParameters *telemetryParameters);
+}
+
+[
+    uuid(87CF5084-29D4-4C9B-9222-9A56E786EB99),
+    version(1.0),
+]
+library IsolatedAppLauncherLibrary
+{
+    [
+        uuid(BC812430-E75E-4FD1-9641-1F9F1E2D9A1F),
+    ]
+    coclass IsolatedAppLauncher
+    {
+        [default]
+        interface IIsolatedAppLauncher;
+    };
+}
+
+cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
+#pragma endregion
+
+#pragma region App Family
+cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+
+cpp_quote("STDAPI IsProcessInWDAGContainer(_In_ PVOID Reserved, _Out_ BOOL *isProcessInWDAGContainer);")
+
+cpp_quote("STDAPI IsProcessInIsolatedContainer(_Out_ BOOL *isProcessInIsolatedContainer);")
+
+cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
+#pragma endregion

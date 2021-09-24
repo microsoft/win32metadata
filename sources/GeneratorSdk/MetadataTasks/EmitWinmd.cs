@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Build.Framework;
@@ -8,62 +10,52 @@ namespace MetadataTasks
 {
     public class EmitWinmd : ToolTask
     {
-        [Required]
-        public string ToolsBinDir
-        {
-            get; set;
-        }
-
-        [Required]
-        public string EmitterSourceDir
-        {
-            get; set;
-        }
-
-        [Required]
-        public string WinmdVersion
-        {
-            get; set;
-        }
-
-        [Required]
-        public string OutputWinmd
-        {
-            get; set;
-        }
-
-        [Required]
-        public string Win32WinmdBinDir
-        {
-            get; set;
-        }
-
-        [Required]
-        public string MSBuildProjectDirectory
-        {
-            get; set;
-        }
-
-        [Required]
-        public ITaskItem[] Libs
-        {
-            get; set;
-        }
-
-        [Output]
-        public ITaskItem[] FileWrites
-        {
-            get; set;
-        }
-
         private string outputWinmdFullPath;
+
+        [Required]
+        public string ToolsBinDir { get; set; }
+
+        [Required]
+        public string EmitterSourceDir { get; set; }
+
+        [Required]
+        public string WinmdVersion { get; set; }
+
+        [Required]
+        public string OutputWinmd { get; set; }
+
+        [Required]
+        public string Win32WinmdBinDir { get; set; }
+
+        [Required]
+        public string MSBuildProjectDirectory { get; set; }
+
+        [Required]
+        public ITaskItem[] Libs { get; set; }
+
+        public string ShowOutputDetails { get; set; }
+
+        public ITaskItem[] ResponseFiles { get; set; }
+
+        public ITaskItem[] AutoTypes { get; set; }
 
         protected override string ToolName => "dotnet";
 
         protected override string GenerateFullPathToTool() => this.ToolExe;
 
+        protected override MessageImportance StandardOutputLoggingImportance => this.ShouldShowOutputDetails ? MessageImportance.High : MessageImportance.Normal;
+
+        private bool ShouldShowOutputDetails => this.ShowOutputDetails != null && this.ShowOutputDetails == "true";
+
         protected override string GenerateCommandLineCommands()
         {
+#if DEBUG
+            if (System.Environment.GetEnvironmentVariable("DEBUG_EMITTER_TASK") == "1")
+            {
+                System.Diagnostics.Debugger.Launch();
+            }
+#endif
+
             var builder = new CommandLineBuilder();
             builder.AppendFileNameIfNotNull(Path.Combine(this.ToolsBinDir, "ClangSharpSourceToWinmd.dll"));
 
@@ -73,39 +65,65 @@ namespace MetadataTasks
             this.outputWinmdFullPath = this.OutputWinmd;
             if (!Path.IsPathRooted(this.outputWinmdFullPath))
             {
-                this.outputWinmdFullPath = Path.Combine(this.MSBuildProjectDirectory, this.outputWinmdFullPath);
+                this.outputWinmdFullPath = Path.GetFullPath(Path.Combine(this.MSBuildProjectDirectory, this.outputWinmdFullPath));
             }
 
             builder.AppendSwitchIfNotNull("--sourceDir ", this.EmitterSourceDir);
-            builder.AppendSwitchIfNotNull("--arch ", "x64");
+            builder.AppendSwitchIfNotNull("--arch ", "crossarch");
             builder.AppendSwitchIfNotNull("--interopFileName ", interopPath);
-            builder.AppendSwitchIfNotNull("--ref ", win32WinmdPath);
+
+            if (!StringComparer.OrdinalIgnoreCase.Equals(
+                Path.GetFileName(this.outputWinmdFullPath),
+                Path.GetFileName(win32WinmdPath)))
+            {
+                builder.AppendSwitchIfNotNull("--ref ", win32WinmdPath);
+            }
+
             builder.AppendSwitchIfNotNull("--version ", this.WinmdVersion);
             builder.AppendSwitchIfNotNull("--outputFileName ", this.outputWinmdFullPath);
+
+            foreach (var autoTypeJson in TaskUtils.GetFullPaths(this.AutoTypes, this.MSBuildProjectDirectory))
+            {
+                if (File.Exists(autoTypeJson))
+                {
+                    builder.AppendSwitchIfNotNull("--autoTypes ", autoTypeJson);
+                }
+            }
+
+            IEnumerable<string> rspFiles = TaskUtils.GetFullPaths(this.ResponseFiles, this.MSBuildProjectDirectory);
+            foreach (var rspFile in rspFiles)
+            {
+                if (File.Exists(rspFile))
+                {
+                    builder.AppendRspFile(rspFile);
+                }
+            }
 
             return builder.ToString();
         }
 
         protected override string GenerateResponseFileCommands()
         {
+            var ret = new StringBuilder();
             var staticLibs = this.GetStaticLibs();
             if (staticLibs.Length > 0)
             {
-                StringBuilder ret = new StringBuilder("--staticLibs\n");
+                ret.AppendLine("--staticLibs");
                 foreach (var lib in staticLibs)
                 {
                     ret.AppendLine(lib);
                 }
-
-                return ret.ToString();
             }
 
-            return null;
+            return ret.ToString();
         }
 
         protected override int ExecuteTool(string pathToTool, string responseFileCommands, string commandLineCommands)
         {
             this.Log.LogMessage($"Emitting winmd...");
+
+            this.EchoOff = false;
+
             int exitCode = base.ExecuteTool(pathToTool, responseFileCommands, commandLineCommands);
             if (exitCode != 0)
             {
@@ -114,7 +132,6 @@ namespace MetadataTasks
             }
 
             this.Log.LogMessage(MessageImportance.High, $"Winmd emitted at: {this.outputWinmdFullPath}");
-            this.FileWrites = new ITaskItem[] { new TaskItem(this.outputWinmdFullPath) };
             return exitCode;
         }
 

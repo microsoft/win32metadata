@@ -18,30 +18,29 @@
   </metadata>
 
   <files>
-      <file src="images\windows.png" target="images"/>
-      <file src="sources\GeneratorSdk\sdk\sdk.stamped.props" target="sdk\sdk.props"/>
-      <file src="sources\GeneratorSdk\sdk\sdk.targets" target="sdk"/>
+    <file src="images\windows.png" target="images"/>
+    <file src="sources\GeneratorSdk\sdk\sdk.stamped.props" target="sdk\sdk.props"/>
+    <file src="sources\GeneratorSdk\sdk\sdk.targets" target="sdk"/>
 
-      <file src="tools\dumpbin.exe" target="tools"/>
-      <file src="tools\link.exe" target="tools"/>
-      <file src="tools\tbbmalloc.dll" target="tools"/>
+    <file src="tools\dumpbin.exe" target="tools"/>
+    <file src="tools\link.exe" target="tools"/>
+    <file src="tools\tbbmalloc.dll" target="tools"/>
 
-      <file src="bin\release\net5.0\*.deps.json" target="tools\net5.0"/>
-      <file src="bin\release\net5.0\*.runtimeconfig.json" target="tools\net5.0"/>
-      <file src="bin\release\net5.0\*.dll" target="tools\net5.0" />
-      <file src="bin\release\netstandard2.0\*.dll" target="tools\netstandard2.0" />
-      <file src="scripts\InstallTools.ps1" target="scripts"/>
-      <file src="scripts\ConvertMidlAttributesToSalAnnotations.ps1" target="scripts"/>
-      <file src="scripts\GetVcDirPath.ps1" target="scripts"/>
+    <file src="bin\release\net5.0\*.deps.json" target="tools\net5.0"/>
+    <file src="bin\release\net5.0\*.runtimeconfig.json" target="tools\net5.0"/>
+    <file src="bin\release\net5.0\*.dll" target="tools\net5.0" />
+    <file src="scripts\InstallTools.ps1" target="scripts"/>
+    <file src="scripts\ConvertMidlAttributesToSalAnnotations.ps1" target="scripts"/>
+    <file src="scripts\GetVcDirPath.ps1" target="scripts"/>
 
-      <file src="generation\scraper\intrinfix.h" target="tools\assets"/>
-      <file src="generation\scraper\sal.h" target="tools\assets"/>
-      <file src="generation\scraper\windows.fixed.h" target="tools\assets"/>
-      <file src="generation\scraper\header.txt" target="tools\assets"/>
-      <file src="generation\scraper\baseRemap.rsp" target="tools\assets"/>
-      <file src="generation\scraper\baseSettings.*" target="tools\assets"/>
-      <file src="generation\scraper\obj\x64\autoTypes.generated.rsp" target="tools\assets"/>
-      <file src="generation\scraper\obj\x64\functionPointerFixups.generated.rsp" target="tools\assets"/>
-      <file src="generation\scraper\ConstantsHeader.txt" target="tools\assets"/>
+    <file src="sources\GeneratorSdk\tools\assets\**" target="tools\assets\"/>
+
+    <file src="generation\WinSDK\autoTypes.json" target="tools\assets\WinSDK"/>
+    <file src="generation\WinSDK\functionPointerFixups.json" target="tools\assets\WinSDK"/>
+    <file src="generation\WinSDK\scraper.settings.rsp" target="tools\assets\WinSDK"/>
+    <file src="generation\WinSDK\ConstantsScraper.header.txt" target="tools\assets\WinSDK"/>
+    <file src="generation\WinSDK\scraper.header.txt" target="tools\assets\WinSDK"/>
+    <file src="generation\WinSDK\inc\*" target="tools\assets\WinSDK\inc"/>
+
   </files>
 </package>

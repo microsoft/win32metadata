@@ -259,7 +259,7 @@ namespace ClangSharpSourceToWinmd
                     if (match.Success)
                     {
                         var symbolName = match.Groups[1].Value;
-                        if (this.typeImports.ContainsKey(symbolName) || typeImports.ContainsKey($"{symbolName}(interface)"))
+                        if (this.typeImports.ContainsKey(symbolName) || this.typeImports.ContainsKey($"{symbolName}(interface)"))
                         {
                             continue;
                         }

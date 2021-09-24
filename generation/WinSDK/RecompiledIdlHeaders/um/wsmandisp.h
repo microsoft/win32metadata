@@ -1,0 +1,3393 @@
+
+
+/* this ALWAYS GENERATED file contains the definitions for the interfaces */
+
+
+ /* File created by MIDL compiler version 8.01.0622 */
+/* @@MIDL_FILE_HEADING(  ) */
+
+
+
+/* verify that the <rpcndr.h> version is high enough to compile this file*/
+#ifndef __REQUIRED_RPCNDR_H_VERSION__
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#endif
+
+/* verify that the <rpcsal.h> version is high enough to compile this file*/
+#ifndef __REQUIRED_RPCSAL_H_VERSION__
+#define __REQUIRED_RPCSAL_H_VERSION__ 100
+#endif
+
+#include "rpc.h"
+#include "rpcndr.h"
+
+#ifndef __RPCNDR_H_VERSION__
+#error this stub requires an updated version of <rpcndr.h>
+#endif /* __RPCNDR_H_VERSION__ */
+
+#ifndef COM_NO_WINDOWS_H
+#include "windows.h"
+#include "ole2.h"
+#endif /*COM_NO_WINDOWS_H*/
+
+#ifndef __wsmandisp_h__
+#define __wsmandisp_h__
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1020)
+#pragma once
+#endif
+
+/* Forward Declarations */ 
+
+#ifndef __IWSMan_FWD_DEFINED__
+#define __IWSMan_FWD_DEFINED__
+typedef interface IWSMan IWSMan;
+
+#endif 	/* __IWSMan_FWD_DEFINED__ */
+
+
+#ifndef __IWSManEx_FWD_DEFINED__
+#define __IWSManEx_FWD_DEFINED__
+typedef interface IWSManEx IWSManEx;
+
+#endif 	/* __IWSManEx_FWD_DEFINED__ */
+
+
+#ifndef __IWSManEx2_FWD_DEFINED__
+#define __IWSManEx2_FWD_DEFINED__
+typedef interface IWSManEx2 IWSManEx2;
+
+#endif 	/* __IWSManEx2_FWD_DEFINED__ */
+
+
+#ifndef __IWSManEx3_FWD_DEFINED__
+#define __IWSManEx3_FWD_DEFINED__
+typedef interface IWSManEx3 IWSManEx3;
+
+#endif 	/* __IWSManEx3_FWD_DEFINED__ */
+
+
+#ifndef __IWSManConnectionOptions_FWD_DEFINED__
+#define __IWSManConnectionOptions_FWD_DEFINED__
+typedef interface IWSManConnectionOptions IWSManConnectionOptions;
+
+#endif 	/* __IWSManConnectionOptions_FWD_DEFINED__ */
+
+
+#ifndef __IWSManConnectionOptionsEx_FWD_DEFINED__
+#define __IWSManConnectionOptionsEx_FWD_DEFINED__
+typedef interface IWSManConnectionOptionsEx IWSManConnectionOptionsEx;
+
+#endif 	/* __IWSManConnectionOptionsEx_FWD_DEFINED__ */
+
+
+#ifndef __IWSManConnectionOptionsEx2_FWD_DEFINED__
+#define __IWSManConnectionOptionsEx2_FWD_DEFINED__
+typedef interface IWSManConnectionOptionsEx2 IWSManConnectionOptionsEx2;
+
+#endif 	/* __IWSManConnectionOptionsEx2_FWD_DEFINED__ */
+
+
+#ifndef __IWSManSession_FWD_DEFINED__
+#define __IWSManSession_FWD_DEFINED__
+typedef interface IWSManSession IWSManSession;
+
+#endif 	/* __IWSManSession_FWD_DEFINED__ */
+
+
+#ifndef __IWSManEnumerator_FWD_DEFINED__
+#define __IWSManEnumerator_FWD_DEFINED__
+typedef interface IWSManEnumerator IWSManEnumerator;
+
+#endif 	/* __IWSManEnumerator_FWD_DEFINED__ */
+
+
+#ifndef __IWSManResourceLocator_FWD_DEFINED__
+#define __IWSManResourceLocator_FWD_DEFINED__
+typedef interface IWSManResourceLocator IWSManResourceLocator;
+
+#endif 	/* __IWSManResourceLocator_FWD_DEFINED__ */
+
+
+#ifndef __IWSManResourceLocatorInternal_FWD_DEFINED__
+#define __IWSManResourceLocatorInternal_FWD_DEFINED__
+typedef interface IWSManResourceLocatorInternal IWSManResourceLocatorInternal;
+
+#endif 	/* __IWSManResourceLocatorInternal_FWD_DEFINED__ */
+
+
+#ifndef __WSMan_FWD_DEFINED__
+#define __WSMan_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class WSMan WSMan;
+#else
+typedef struct WSMan WSMan;
+#endif /* __cplusplus */
+
+#endif 	/* __WSMan_FWD_DEFINED__ */
+
+
+#ifndef __IWSManInternal_FWD_DEFINED__
+#define __IWSManInternal_FWD_DEFINED__
+typedef interface IWSManInternal IWSManInternal;
+
+#endif 	/* __IWSManInternal_FWD_DEFINED__ */
+
+
+#ifndef __WSManInternal_FWD_DEFINED__
+#define __WSManInternal_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class WSManInternal WSManInternal;
+#else
+typedef struct WSManInternal WSManInternal;
+#endif /* __cplusplus */
+
+#endif 	/* __WSManInternal_FWD_DEFINED__ */
+
+
+#ifndef __IWSMan_FWD_DEFINED__
+#define __IWSMan_FWD_DEFINED__
+typedef interface IWSMan IWSMan;
+
+#endif 	/* __IWSMan_FWD_DEFINED__ */
+
+
+#ifndef __IWSManEx_FWD_DEFINED__
+#define __IWSManEx_FWD_DEFINED__
+typedef interface IWSManEx IWSManEx;
+
+#endif 	/* __IWSManEx_FWD_DEFINED__ */
+
+
+#ifndef __IWSManEx2_FWD_DEFINED__
+#define __IWSManEx2_FWD_DEFINED__
+typedef interface IWSManEx2 IWSManEx2;
+
+#endif 	/* __IWSManEx2_FWD_DEFINED__ */
+
+
+#ifndef __IWSManEx3_FWD_DEFINED__
+#define __IWSManEx3_FWD_DEFINED__
+typedef interface IWSManEx3 IWSManEx3;
+
+#endif 	/* __IWSManEx3_FWD_DEFINED__ */
+
+
+#ifndef __IWSManConnectionOptions_FWD_DEFINED__
+#define __IWSManConnectionOptions_FWD_DEFINED__
+typedef interface IWSManConnectionOptions IWSManConnectionOptions;
+
+#endif 	/* __IWSManConnectionOptions_FWD_DEFINED__ */
+
+
+#ifndef __IWSManConnectionOptionsEx_FWD_DEFINED__
+#define __IWSManConnectionOptionsEx_FWD_DEFINED__
+typedef interface IWSManConnectionOptionsEx IWSManConnectionOptionsEx;
+
+#endif 	/* __IWSManConnectionOptionsEx_FWD_DEFINED__ */
+
+
+#ifndef __IWSManConnectionOptionsEx2_FWD_DEFINED__
+#define __IWSManConnectionOptionsEx2_FWD_DEFINED__
+typedef interface IWSManConnectionOptionsEx2 IWSManConnectionOptionsEx2;
+
+#endif 	/* __IWSManConnectionOptionsEx2_FWD_DEFINED__ */
+
+
+#ifndef __IWSManSession_FWD_DEFINED__
+#define __IWSManSession_FWD_DEFINED__
+typedef interface IWSManSession IWSManSession;
+
+#endif 	/* __IWSManSession_FWD_DEFINED__ */
+
+
+#ifndef __IWSManEnumerator_FWD_DEFINED__
+#define __IWSManEnumerator_FWD_DEFINED__
+typedef interface IWSManEnumerator IWSManEnumerator;
+
+#endif 	/* __IWSManEnumerator_FWD_DEFINED__ */
+
+
+#ifndef __IWSManResourceLocator_FWD_DEFINED__
+#define __IWSManResourceLocator_FWD_DEFINED__
+typedef interface IWSManResourceLocator IWSManResourceLocator;
+
+#endif 	/* __IWSManResourceLocator_FWD_DEFINED__ */
+
+
+#ifndef __IWSManResourceLocatorInternal_FWD_DEFINED__
+#define __IWSManResourceLocatorInternal_FWD_DEFINED__
+typedef interface IWSManResourceLocatorInternal IWSManResourceLocatorInternal;
+
+#endif 	/* __IWSManResourceLocatorInternal_FWD_DEFINED__ */
+
+
+#ifndef __IWSManInternal_FWD_DEFINED__
+#define __IWSManInternal_FWD_DEFINED__
+typedef interface IWSManInternal IWSManInternal;
+
+#endif 	/* __IWSManInternal_FWD_DEFINED__ */
+
+
+#ifdef __cplusplus
+extern "C"{
+#endif 
+
+
+/* interface __MIDL_itf_wsmandisp_0000_0000 */
+/* [local] */ 
+
+/***************************************************************/
+/*                                                             */
+/*    Copyright (C) Microsoft Corporation.  All rights reserved. */
+/*                                                             */
+/*    wsmandisp.idl                                              */
+/*                                                             */
+/*    WSMAN IDispatch Compatible Access for Automation clients.  */
+/*                                                             */
+/***************************************************************/
+#include <winapifamily.h>
+#pragma region Desktop Family or WinMgmt Package
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_WINMGMT)
+
+
+extern RPC_IF_HANDLE __MIDL_itf_wsmandisp_0000_0000_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_wsmandisp_0000_0000_v0_0_s_ifspec;
+
+
+#ifndef __WSManAutomation_LIBRARY_DEFINED__
+#define __WSManAutomation_LIBRARY_DEFINED__
+
+/* library WSManAutomation */
+/* [helpstring][version][lcid][uuid] */ 
+
+typedef /* [v1_enum] */ 
+enum _WSManSessionFlags
+    {
+        WSManFlagUTF8	= 0x1,
+        WSManFlagCredUsernamePassword	= 0x1000,
+        WSManFlagSkipCACheck	= 0x2000,
+        WSManFlagSkipCNCheck	= 0x4000,
+        WSManFlagUseNoAuthentication	= 0x8000,
+        WSManFlagUseDigest	= 0x10000,
+        WSManFlagUseNegotiate	= 0x20000,
+        WSManFlagUseBasic	= 0x40000,
+        WSManFlagUseKerberos	= 0x80000,
+        WSManFlagNoEncryption	= 0x100000,
+        WSManFlagUseClientCertificate	= 0x200000,
+        WSManFlagEnableSPNServerPort	= 0x400000,
+        WSManFlagUTF16	= 0x800000,
+        WSManFlagUseCredSsp	= 0x1000000,
+        WSManFlagSkipRevocationCheck	= 0x2000000,
+        WSManFlagAllowNegotiateImplicitCredentials	= 0x4000000,
+        WSManFlagUseSsl	= 0x8000000
+    } 	WSManSessionFlags;
+
+typedef /* [v1_enum] */ 
+enum _WSManEnumFlags
+    {
+        WSManFlagNonXmlText	= 0x1,
+        WSManFlagReturnObject	= 0,
+        WSManFlagReturnEPR	= 0x2,
+        WSManFlagReturnObjectAndEPR	= 0x4,
+        WSManFlagHierarchyDeep	= 0,
+        WSManFlagHierarchyShallow	= 0x20,
+        WSManFlagHierarchyDeepBasePropsOnly	= 0x40,
+        WSManFlagAssociatedInstance	= 0,
+        WSManFlagAssociationInstance	= 0x80
+    } 	WSManEnumFlags;
+
+typedef /* [v1_enum] */ 
+enum _WSManProxyAccessTypeFlags
+    {
+        WSManProxyIEConfig	= 0x1,
+        WSManProxyWinHttpConfig	= 0x2,
+        WSManProxyAutoDetect	= 0x4,
+        WSManProxyNoProxyServer	= 0x8
+    } 	WSManProxyAccessTypeFlags;
+
+typedef /* [v1_enum] */ 
+enum _WSManProxyAuthenticationFlags
+    {
+        WSManFlagProxyAuthenticationUseNegotiate	= 0x1,
+        WSManFlagProxyAuthenticationUseBasic	= 0x2,
+        WSManFlagProxyAuthenticationUseDigest	= 0x4
+    } 	WSManProxyAuthenticationFlags;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+EXTERN_C const IID LIBID_WSManAutomation;
+
+#ifndef __IWSMan_INTERFACE_DEFINED__
+#define __IWSMan_INTERFACE_DEFINED__
+
+/* interface IWSMan */
+/* [hidden][nonextensible][local][oleautomation][uuid][object][dual] */ 
+
+
+EXTERN_C const IID IID_IWSMan;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("190D8637-5CD3-496d-AD24-69636BB5A3B5")
+    IWSMan : public IDispatch
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateSession( 
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR connection,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long flags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *connectionOptions,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IDispatch **session) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateConnectionOptions( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IDispatch **connectionOptions) = 0;
+        
+        virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_CommandLine( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *value) = 0;
+        
+        virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Error( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *value) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IWSManVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IWSMan * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IWSMan * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IWSMan * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IWSMan * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IWSMan * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IWSMan * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IWSMan * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateSession )( 
+            IWSMan * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR connection,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long flags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *connectionOptions,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IDispatch **session);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateConnectionOptions )( 
+            IWSMan * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IDispatch **connectionOptions);
+        
+        /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_CommandLine )( 
+            IWSMan * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *value);
+        
+        /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Error )( 
+            IWSMan * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *value);
+        
+        END_INTERFACE
+    } IWSManVtbl;
+
+    interface IWSMan
+    {
+        CONST_VTBL struct IWSManVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IWSMan_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IWSMan_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IWSMan_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IWSMan_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IWSMan_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IWSMan_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IWSMan_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IWSMan_CreateSession(This,connection,flags,connectionOptions,session)	\
+    ( (This)->lpVtbl -> CreateSession(This,connection,flags,connectionOptions,session) ) 
+
+#define IWSMan_CreateConnectionOptions(This,connectionOptions)	\
+    ( (This)->lpVtbl -> CreateConnectionOptions(This,connectionOptions) ) 
+
+#define IWSMan_get_CommandLine(This,value)	\
+    ( (This)->lpVtbl -> get_CommandLine(This,value) ) 
+
+#define IWSMan_get_Error(This,value)	\
+    ( (This)->lpVtbl -> get_Error(This,value) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IWSMan_INTERFACE_DEFINED__ */
+
+
+#ifndef __IWSManEx_INTERFACE_DEFINED__
+#define __IWSManEx_INTERFACE_DEFINED__
+
+/* interface IWSManEx */
+/* [hidden][nonextensible][local][oleautomation][uuid][object][dual] */ 
+
+
+EXTERN_C const IID IID_IWSManEx;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("2D53BDAA-798E-49e6-A1AA-74D01256F411")
+    IWSManEx : public IWSMan
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateResourceLocator( 
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResourceLocator,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IDispatch **newResourceLocator) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SessionFlagUTF8( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SessionFlagCredUsernamePassword( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SessionFlagSkipCACheck( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SessionFlagSkipCNCheck( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SessionFlagUseDigest( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SessionFlagUseNegotiate( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SessionFlagUseBasic( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SessionFlagUseKerberos( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SessionFlagNoEncryption( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SessionFlagEnableSPNServerPort( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SessionFlagUseNoAuthentication( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE EnumerationFlagNonXmlText( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE EnumerationFlagReturnEPR( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE EnumerationFlagReturnObjectAndEPR( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetErrorMessage( 
+            /* [annotation][in] */ 
+            _In_  DWORD errorNumber,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *errorMessage) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE EnumerationFlagHierarchyDeep( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE EnumerationFlagHierarchyShallow( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE EnumerationFlagHierarchyDeepBasePropsOnly( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE EnumerationFlagReturnObject( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IWSManExVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IWSManEx * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IWSManEx * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IWSManEx * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IWSManEx * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IWSManEx * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IWSManEx * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IWSManEx * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateSession )( 
+            IWSManEx * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR connection,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long flags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *connectionOptions,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IDispatch **session);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateConnectionOptions )( 
+            IWSManEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IDispatch **connectionOptions);
+        
+        /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_CommandLine )( 
+            IWSManEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *value);
+        
+        /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Error )( 
+            IWSManEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *value);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateResourceLocator )( 
+            IWSManEx * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResourceLocator,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IDispatch **newResourceLocator);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUTF8 )( 
+            IWSManEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagCredUsernamePassword )( 
+            IWSManEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagSkipCACheck )( 
+            IWSManEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagSkipCNCheck )( 
+            IWSManEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseDigest )( 
+            IWSManEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseNegotiate )( 
+            IWSManEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseBasic )( 
+            IWSManEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseKerberos )( 
+            IWSManEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagNoEncryption )( 
+            IWSManEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagEnableSPNServerPort )( 
+            IWSManEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseNoAuthentication )( 
+            IWSManEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagNonXmlText )( 
+            IWSManEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagReturnEPR )( 
+            IWSManEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagReturnObjectAndEPR )( 
+            IWSManEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetErrorMessage )( 
+            IWSManEx * This,
+            /* [annotation][in] */ 
+            _In_  DWORD errorNumber,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *errorMessage);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagHierarchyDeep )( 
+            IWSManEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagHierarchyShallow )( 
+            IWSManEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagHierarchyDeepBasePropsOnly )( 
+            IWSManEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagReturnObject )( 
+            IWSManEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        END_INTERFACE
+    } IWSManExVtbl;
+
+    interface IWSManEx
+    {
+        CONST_VTBL struct IWSManExVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IWSManEx_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IWSManEx_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IWSManEx_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IWSManEx_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IWSManEx_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IWSManEx_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IWSManEx_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IWSManEx_CreateSession(This,connection,flags,connectionOptions,session)	\
+    ( (This)->lpVtbl -> CreateSession(This,connection,flags,connectionOptions,session) ) 
+
+#define IWSManEx_CreateConnectionOptions(This,connectionOptions)	\
+    ( (This)->lpVtbl -> CreateConnectionOptions(This,connectionOptions) ) 
+
+#define IWSManEx_get_CommandLine(This,value)	\
+    ( (This)->lpVtbl -> get_CommandLine(This,value) ) 
+
+#define IWSManEx_get_Error(This,value)	\
+    ( (This)->lpVtbl -> get_Error(This,value) ) 
+
+
+#define IWSManEx_CreateResourceLocator(This,strResourceLocator,newResourceLocator)	\
+    ( (This)->lpVtbl -> CreateResourceLocator(This,strResourceLocator,newResourceLocator) ) 
+
+#define IWSManEx_SessionFlagUTF8(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagUTF8(This,flags) ) 
+
+#define IWSManEx_SessionFlagCredUsernamePassword(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagCredUsernamePassword(This,flags) ) 
+
+#define IWSManEx_SessionFlagSkipCACheck(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagSkipCACheck(This,flags) ) 
+
+#define IWSManEx_SessionFlagSkipCNCheck(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagSkipCNCheck(This,flags) ) 
+
+#define IWSManEx_SessionFlagUseDigest(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagUseDigest(This,flags) ) 
+
+#define IWSManEx_SessionFlagUseNegotiate(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagUseNegotiate(This,flags) ) 
+
+#define IWSManEx_SessionFlagUseBasic(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagUseBasic(This,flags) ) 
+
+#define IWSManEx_SessionFlagUseKerberos(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagUseKerberos(This,flags) ) 
+
+#define IWSManEx_SessionFlagNoEncryption(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagNoEncryption(This,flags) ) 
+
+#define IWSManEx_SessionFlagEnableSPNServerPort(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagEnableSPNServerPort(This,flags) ) 
+
+#define IWSManEx_SessionFlagUseNoAuthentication(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagUseNoAuthentication(This,flags) ) 
+
+#define IWSManEx_EnumerationFlagNonXmlText(This,flags)	\
+    ( (This)->lpVtbl -> EnumerationFlagNonXmlText(This,flags) ) 
+
+#define IWSManEx_EnumerationFlagReturnEPR(This,flags)	\
+    ( (This)->lpVtbl -> EnumerationFlagReturnEPR(This,flags) ) 
+
+#define IWSManEx_EnumerationFlagReturnObjectAndEPR(This,flags)	\
+    ( (This)->lpVtbl -> EnumerationFlagReturnObjectAndEPR(This,flags) ) 
+
+#define IWSManEx_GetErrorMessage(This,errorNumber,errorMessage)	\
+    ( (This)->lpVtbl -> GetErrorMessage(This,errorNumber,errorMessage) ) 
+
+#define IWSManEx_EnumerationFlagHierarchyDeep(This,flags)	\
+    ( (This)->lpVtbl -> EnumerationFlagHierarchyDeep(This,flags) ) 
+
+#define IWSManEx_EnumerationFlagHierarchyShallow(This,flags)	\
+    ( (This)->lpVtbl -> EnumerationFlagHierarchyShallow(This,flags) ) 
+
+#define IWSManEx_EnumerationFlagHierarchyDeepBasePropsOnly(This,flags)	\
+    ( (This)->lpVtbl -> EnumerationFlagHierarchyDeepBasePropsOnly(This,flags) ) 
+
+#define IWSManEx_EnumerationFlagReturnObject(This,flags)	\
+    ( (This)->lpVtbl -> EnumerationFlagReturnObject(This,flags) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IWSManEx_INTERFACE_DEFINED__ */
+
+
+#ifndef __IWSManEx2_INTERFACE_DEFINED__
+#define __IWSManEx2_INTERFACE_DEFINED__
+
+/* interface IWSManEx2 */
+/* [hidden][nonextensible][local][oleautomation][uuid][object][dual] */ 
+
+
+EXTERN_C const IID IID_IWSManEx2;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("1D1B5AE0-42D9-4021-8261-3987619512E9")
+    IWSManEx2 : public IWSManEx
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SessionFlagUseClientCertificate( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IWSManEx2Vtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IWSManEx2 * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IWSManEx2 * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IWSManEx2 * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IWSManEx2 * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IWSManEx2 * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IWSManEx2 * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IWSManEx2 * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateSession )( 
+            IWSManEx2 * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR connection,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long flags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *connectionOptions,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IDispatch **session);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateConnectionOptions )( 
+            IWSManEx2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IDispatch **connectionOptions);
+        
+        /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_CommandLine )( 
+            IWSManEx2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *value);
+        
+        /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Error )( 
+            IWSManEx2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *value);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateResourceLocator )( 
+            IWSManEx2 * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResourceLocator,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IDispatch **newResourceLocator);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUTF8 )( 
+            IWSManEx2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagCredUsernamePassword )( 
+            IWSManEx2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagSkipCACheck )( 
+            IWSManEx2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagSkipCNCheck )( 
+            IWSManEx2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseDigest )( 
+            IWSManEx2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseNegotiate )( 
+            IWSManEx2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseBasic )( 
+            IWSManEx2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseKerberos )( 
+            IWSManEx2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagNoEncryption )( 
+            IWSManEx2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagEnableSPNServerPort )( 
+            IWSManEx2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseNoAuthentication )( 
+            IWSManEx2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagNonXmlText )( 
+            IWSManEx2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagReturnEPR )( 
+            IWSManEx2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagReturnObjectAndEPR )( 
+            IWSManEx2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetErrorMessage )( 
+            IWSManEx2 * This,
+            /* [annotation][in] */ 
+            _In_  DWORD errorNumber,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *errorMessage);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagHierarchyDeep )( 
+            IWSManEx2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagHierarchyShallow )( 
+            IWSManEx2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagHierarchyDeepBasePropsOnly )( 
+            IWSManEx2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagReturnObject )( 
+            IWSManEx2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseClientCertificate )( 
+            IWSManEx2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        END_INTERFACE
+    } IWSManEx2Vtbl;
+
+    interface IWSManEx2
+    {
+        CONST_VTBL struct IWSManEx2Vtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IWSManEx2_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IWSManEx2_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IWSManEx2_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IWSManEx2_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IWSManEx2_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IWSManEx2_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IWSManEx2_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IWSManEx2_CreateSession(This,connection,flags,connectionOptions,session)	\
+    ( (This)->lpVtbl -> CreateSession(This,connection,flags,connectionOptions,session) ) 
+
+#define IWSManEx2_CreateConnectionOptions(This,connectionOptions)	\
+    ( (This)->lpVtbl -> CreateConnectionOptions(This,connectionOptions) ) 
+
+#define IWSManEx2_get_CommandLine(This,value)	\
+    ( (This)->lpVtbl -> get_CommandLine(This,value) ) 
+
+#define IWSManEx2_get_Error(This,value)	\
+    ( (This)->lpVtbl -> get_Error(This,value) ) 
+
+
+#define IWSManEx2_CreateResourceLocator(This,strResourceLocator,newResourceLocator)	\
+    ( (This)->lpVtbl -> CreateResourceLocator(This,strResourceLocator,newResourceLocator) ) 
+
+#define IWSManEx2_SessionFlagUTF8(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagUTF8(This,flags) ) 
+
+#define IWSManEx2_SessionFlagCredUsernamePassword(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagCredUsernamePassword(This,flags) ) 
+
+#define IWSManEx2_SessionFlagSkipCACheck(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagSkipCACheck(This,flags) ) 
+
+#define IWSManEx2_SessionFlagSkipCNCheck(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagSkipCNCheck(This,flags) ) 
+
+#define IWSManEx2_SessionFlagUseDigest(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagUseDigest(This,flags) ) 
+
+#define IWSManEx2_SessionFlagUseNegotiate(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagUseNegotiate(This,flags) ) 
+
+#define IWSManEx2_SessionFlagUseBasic(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagUseBasic(This,flags) ) 
+
+#define IWSManEx2_SessionFlagUseKerberos(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagUseKerberos(This,flags) ) 
+
+#define IWSManEx2_SessionFlagNoEncryption(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagNoEncryption(This,flags) ) 
+
+#define IWSManEx2_SessionFlagEnableSPNServerPort(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagEnableSPNServerPort(This,flags) ) 
+
+#define IWSManEx2_SessionFlagUseNoAuthentication(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagUseNoAuthentication(This,flags) ) 
+
+#define IWSManEx2_EnumerationFlagNonXmlText(This,flags)	\
+    ( (This)->lpVtbl -> EnumerationFlagNonXmlText(This,flags) ) 
+
+#define IWSManEx2_EnumerationFlagReturnEPR(This,flags)	\
+    ( (This)->lpVtbl -> EnumerationFlagReturnEPR(This,flags) ) 
+
+#define IWSManEx2_EnumerationFlagReturnObjectAndEPR(This,flags)	\
+    ( (This)->lpVtbl -> EnumerationFlagReturnObjectAndEPR(This,flags) ) 
+
+#define IWSManEx2_GetErrorMessage(This,errorNumber,errorMessage)	\
+    ( (This)->lpVtbl -> GetErrorMessage(This,errorNumber,errorMessage) ) 
+
+#define IWSManEx2_EnumerationFlagHierarchyDeep(This,flags)	\
+    ( (This)->lpVtbl -> EnumerationFlagHierarchyDeep(This,flags) ) 
+
+#define IWSManEx2_EnumerationFlagHierarchyShallow(This,flags)	\
+    ( (This)->lpVtbl -> EnumerationFlagHierarchyShallow(This,flags) ) 
+
+#define IWSManEx2_EnumerationFlagHierarchyDeepBasePropsOnly(This,flags)	\
+    ( (This)->lpVtbl -> EnumerationFlagHierarchyDeepBasePropsOnly(This,flags) ) 
+
+#define IWSManEx2_EnumerationFlagReturnObject(This,flags)	\
+    ( (This)->lpVtbl -> EnumerationFlagReturnObject(This,flags) ) 
+
+
+#define IWSManEx2_SessionFlagUseClientCertificate(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagUseClientCertificate(This,flags) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IWSManEx2_INTERFACE_DEFINED__ */
+
+
+#ifndef __IWSManEx3_INTERFACE_DEFINED__
+#define __IWSManEx3_INTERFACE_DEFINED__
+
+/* interface IWSManEx3 */
+/* [hidden][nonextensible][local][oleautomation][uuid][object][dual] */ 
+
+
+EXTERN_C const IID IID_IWSManEx3;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("6400E966-011D-4eac-8474-049E0848AFAD")
+    IWSManEx3 : public IWSManEx2
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SessionFlagUTF16( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SessionFlagUseCredSsp( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE EnumerationFlagAssociationInstance( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE EnumerationFlagAssociatedInstance( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SessionFlagSkipRevocationCheck( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SessionFlagAllowNegotiateImplicitCredentials( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SessionFlagUseSsl( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IWSManEx3Vtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IWSManEx3 * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IWSManEx3 * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IWSManEx3 * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IWSManEx3 * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IWSManEx3 * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IWSManEx3 * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IWSManEx3 * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateSession )( 
+            IWSManEx3 * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR connection,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long flags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *connectionOptions,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IDispatch **session);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateConnectionOptions )( 
+            IWSManEx3 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IDispatch **connectionOptions);
+        
+        /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_CommandLine )( 
+            IWSManEx3 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *value);
+        
+        /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Error )( 
+            IWSManEx3 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *value);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateResourceLocator )( 
+            IWSManEx3 * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResourceLocator,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IDispatch **newResourceLocator);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUTF8 )( 
+            IWSManEx3 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagCredUsernamePassword )( 
+            IWSManEx3 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagSkipCACheck )( 
+            IWSManEx3 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagSkipCNCheck )( 
+            IWSManEx3 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseDigest )( 
+            IWSManEx3 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseNegotiate )( 
+            IWSManEx3 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseBasic )( 
+            IWSManEx3 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseKerberos )( 
+            IWSManEx3 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagNoEncryption )( 
+            IWSManEx3 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagEnableSPNServerPort )( 
+            IWSManEx3 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseNoAuthentication )( 
+            IWSManEx3 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagNonXmlText )( 
+            IWSManEx3 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagReturnEPR )( 
+            IWSManEx3 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagReturnObjectAndEPR )( 
+            IWSManEx3 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetErrorMessage )( 
+            IWSManEx3 * This,
+            /* [annotation][in] */ 
+            _In_  DWORD errorNumber,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *errorMessage);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagHierarchyDeep )( 
+            IWSManEx3 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagHierarchyShallow )( 
+            IWSManEx3 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagHierarchyDeepBasePropsOnly )( 
+            IWSManEx3 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagReturnObject )( 
+            IWSManEx3 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseClientCertificate )( 
+            IWSManEx3 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUTF16 )( 
+            IWSManEx3 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseCredSsp )( 
+            IWSManEx3 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagAssociationInstance )( 
+            IWSManEx3 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagAssociatedInstance )( 
+            IWSManEx3 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagSkipRevocationCheck )( 
+            IWSManEx3 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagAllowNegotiateImplicitCredentials )( 
+            IWSManEx3 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseSsl )( 
+            IWSManEx3 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *flags);
+        
+        END_INTERFACE
+    } IWSManEx3Vtbl;
+
+    interface IWSManEx3
+    {
+        CONST_VTBL struct IWSManEx3Vtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IWSManEx3_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IWSManEx3_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IWSManEx3_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IWSManEx3_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IWSManEx3_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IWSManEx3_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IWSManEx3_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IWSManEx3_CreateSession(This,connection,flags,connectionOptions,session)	\
+    ( (This)->lpVtbl -> CreateSession(This,connection,flags,connectionOptions,session) ) 
+
+#define IWSManEx3_CreateConnectionOptions(This,connectionOptions)	\
+    ( (This)->lpVtbl -> CreateConnectionOptions(This,connectionOptions) ) 
+
+#define IWSManEx3_get_CommandLine(This,value)	\
+    ( (This)->lpVtbl -> get_CommandLine(This,value) ) 
+
+#define IWSManEx3_get_Error(This,value)	\
+    ( (This)->lpVtbl -> get_Error(This,value) ) 
+
+
+#define IWSManEx3_CreateResourceLocator(This,strResourceLocator,newResourceLocator)	\
+    ( (This)->lpVtbl -> CreateResourceLocator(This,strResourceLocator,newResourceLocator) ) 
+
+#define IWSManEx3_SessionFlagUTF8(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagUTF8(This,flags) ) 
+
+#define IWSManEx3_SessionFlagCredUsernamePassword(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagCredUsernamePassword(This,flags) ) 
+
+#define IWSManEx3_SessionFlagSkipCACheck(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagSkipCACheck(This,flags) ) 
+
+#define IWSManEx3_SessionFlagSkipCNCheck(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagSkipCNCheck(This,flags) ) 
+
+#define IWSManEx3_SessionFlagUseDigest(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagUseDigest(This,flags) ) 
+
+#define IWSManEx3_SessionFlagUseNegotiate(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagUseNegotiate(This,flags) ) 
+
+#define IWSManEx3_SessionFlagUseBasic(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagUseBasic(This,flags) ) 
+
+#define IWSManEx3_SessionFlagUseKerberos(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagUseKerberos(This,flags) ) 
+
+#define IWSManEx3_SessionFlagNoEncryption(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagNoEncryption(This,flags) ) 
+
+#define IWSManEx3_SessionFlagEnableSPNServerPort(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagEnableSPNServerPort(This,flags) ) 
+
+#define IWSManEx3_SessionFlagUseNoAuthentication(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagUseNoAuthentication(This,flags) ) 
+
+#define IWSManEx3_EnumerationFlagNonXmlText(This,flags)	\
+    ( (This)->lpVtbl -> EnumerationFlagNonXmlText(This,flags) ) 
+
+#define IWSManEx3_EnumerationFlagReturnEPR(This,flags)	\
+    ( (This)->lpVtbl -> EnumerationFlagReturnEPR(This,flags) ) 
+
+#define IWSManEx3_EnumerationFlagReturnObjectAndEPR(This,flags)	\
+    ( (This)->lpVtbl -> EnumerationFlagReturnObjectAndEPR(This,flags) ) 
+
+#define IWSManEx3_GetErrorMessage(This,errorNumber,errorMessage)	\
+    ( (This)->lpVtbl -> GetErrorMessage(This,errorNumber,errorMessage) ) 
+
+#define IWSManEx3_EnumerationFlagHierarchyDeep(This,flags)	\
+    ( (This)->lpVtbl -> EnumerationFlagHierarchyDeep(This,flags) ) 
+
+#define IWSManEx3_EnumerationFlagHierarchyShallow(This,flags)	\
+    ( (This)->lpVtbl -> EnumerationFlagHierarchyShallow(This,flags) ) 
+
+#define IWSManEx3_EnumerationFlagHierarchyDeepBasePropsOnly(This,flags)	\
+    ( (This)->lpVtbl -> EnumerationFlagHierarchyDeepBasePropsOnly(This,flags) ) 
+
+#define IWSManEx3_EnumerationFlagReturnObject(This,flags)	\
+    ( (This)->lpVtbl -> EnumerationFlagReturnObject(This,flags) ) 
+
+
+#define IWSManEx3_SessionFlagUseClientCertificate(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagUseClientCertificate(This,flags) ) 
+
+
+#define IWSManEx3_SessionFlagUTF16(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagUTF16(This,flags) ) 
+
+#define IWSManEx3_SessionFlagUseCredSsp(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagUseCredSsp(This,flags) ) 
+
+#define IWSManEx3_EnumerationFlagAssociationInstance(This,flags)	\
+    ( (This)->lpVtbl -> EnumerationFlagAssociationInstance(This,flags) ) 
+
+#define IWSManEx3_EnumerationFlagAssociatedInstance(This,flags)	\
+    ( (This)->lpVtbl -> EnumerationFlagAssociatedInstance(This,flags) ) 
+
+#define IWSManEx3_SessionFlagSkipRevocationCheck(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagSkipRevocationCheck(This,flags) ) 
+
+#define IWSManEx3_SessionFlagAllowNegotiateImplicitCredentials(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagAllowNegotiateImplicitCredentials(This,flags) ) 
+
+#define IWSManEx3_SessionFlagUseSsl(This,flags)	\
+    ( (This)->lpVtbl -> SessionFlagUseSsl(This,flags) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IWSManEx3_INTERFACE_DEFINED__ */
+
+
+#ifndef __IWSManConnectionOptions_INTERFACE_DEFINED__
+#define __IWSManConnectionOptions_INTERFACE_DEFINED__
+
+/* interface IWSManConnectionOptions */
+/* [nonextensible][local][oleautomation][uuid][object][dual] */ 
+
+
+EXTERN_C const IID IID_IWSManConnectionOptions;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("F704E861-9E52-464f-B786-DA5EB2320FDD")
+    IWSManConnectionOptions : public IDispatch
+    {
+    public:
+        virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_UserName( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_UserName( 
+            /* [annotation][in] */ 
+            _In_  BSTR name) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Password( 
+            /* [annotation][in] */ 
+            _In_  BSTR password) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IWSManConnectionOptionsVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IWSManConnectionOptions * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IWSManConnectionOptions * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IWSManConnectionOptions * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IWSManConnectionOptions * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IWSManConnectionOptions * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IWSManConnectionOptions * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IWSManConnectionOptions * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_UserName )( 
+            IWSManConnectionOptions * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_UserName )( 
+            IWSManConnectionOptions * This,
+            /* [annotation][in] */ 
+            _In_  BSTR name);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Password )( 
+            IWSManConnectionOptions * This,
+            /* [annotation][in] */ 
+            _In_  BSTR password);
+        
+        END_INTERFACE
+    } IWSManConnectionOptionsVtbl;
+
+    interface IWSManConnectionOptions
+    {
+        CONST_VTBL struct IWSManConnectionOptionsVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IWSManConnectionOptions_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IWSManConnectionOptions_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IWSManConnectionOptions_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IWSManConnectionOptions_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IWSManConnectionOptions_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IWSManConnectionOptions_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IWSManConnectionOptions_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IWSManConnectionOptions_get_UserName(This,name)	\
+    ( (This)->lpVtbl -> get_UserName(This,name) ) 
+
+#define IWSManConnectionOptions_put_UserName(This,name)	\
+    ( (This)->lpVtbl -> put_UserName(This,name) ) 
+
+#define IWSManConnectionOptions_put_Password(This,password)	\
+    ( (This)->lpVtbl -> put_Password(This,password) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IWSManConnectionOptions_INTERFACE_DEFINED__ */
+
+
+#ifndef __IWSManConnectionOptionsEx_INTERFACE_DEFINED__
+#define __IWSManConnectionOptionsEx_INTERFACE_DEFINED__
+
+/* interface IWSManConnectionOptionsEx */
+/* [nonextensible][local][oleautomation][uuid][object][dual] */ 
+
+
+EXTERN_C const IID IID_IWSManConnectionOptionsEx;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("EF43EDF7-2A48-4d93-9526-8BD6AB6D4A6B")
+    IWSManConnectionOptionsEx : public IWSManConnectionOptions
+    {
+    public:
+        virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_CertificateThumbprint( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *thumbprint) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_CertificateThumbprint( 
+            /* [annotation][in] */ 
+            _In_  BSTR thumbprint) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IWSManConnectionOptionsExVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IWSManConnectionOptionsEx * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IWSManConnectionOptionsEx * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IWSManConnectionOptionsEx * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IWSManConnectionOptionsEx * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IWSManConnectionOptionsEx * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IWSManConnectionOptionsEx * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IWSManConnectionOptionsEx * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_UserName )( 
+            IWSManConnectionOptionsEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_UserName )( 
+            IWSManConnectionOptionsEx * This,
+            /* [annotation][in] */ 
+            _In_  BSTR name);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Password )( 
+            IWSManConnectionOptionsEx * This,
+            /* [annotation][in] */ 
+            _In_  BSTR password);
+        
+        /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_CertificateThumbprint )( 
+            IWSManConnectionOptionsEx * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *thumbprint);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_CertificateThumbprint )( 
+            IWSManConnectionOptionsEx * This,
+            /* [annotation][in] */ 
+            _In_  BSTR thumbprint);
+        
+        END_INTERFACE
+    } IWSManConnectionOptionsExVtbl;
+
+    interface IWSManConnectionOptionsEx
+    {
+        CONST_VTBL struct IWSManConnectionOptionsExVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IWSManConnectionOptionsEx_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IWSManConnectionOptionsEx_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IWSManConnectionOptionsEx_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IWSManConnectionOptionsEx_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IWSManConnectionOptionsEx_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IWSManConnectionOptionsEx_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IWSManConnectionOptionsEx_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IWSManConnectionOptionsEx_get_UserName(This,name)	\
+    ( (This)->lpVtbl -> get_UserName(This,name) ) 
+
+#define IWSManConnectionOptionsEx_put_UserName(This,name)	\
+    ( (This)->lpVtbl -> put_UserName(This,name) ) 
+
+#define IWSManConnectionOptionsEx_put_Password(This,password)	\
+    ( (This)->lpVtbl -> put_Password(This,password) ) 
+
+
+#define IWSManConnectionOptionsEx_get_CertificateThumbprint(This,thumbprint)	\
+    ( (This)->lpVtbl -> get_CertificateThumbprint(This,thumbprint) ) 
+
+#define IWSManConnectionOptionsEx_put_CertificateThumbprint(This,thumbprint)	\
+    ( (This)->lpVtbl -> put_CertificateThumbprint(This,thumbprint) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IWSManConnectionOptionsEx_INTERFACE_DEFINED__ */
+
+
+#ifndef __IWSManConnectionOptionsEx2_INTERFACE_DEFINED__
+#define __IWSManConnectionOptionsEx2_INTERFACE_DEFINED__
+
+/* interface IWSManConnectionOptionsEx2 */
+/* [nonextensible][local][oleautomation][uuid][object][dual] */ 
+
+
+EXTERN_C const IID IID_IWSManConnectionOptionsEx2;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("F500C9EC-24EE-48ab-B38D-FC9A164C658E")
+    IWSManConnectionOptionsEx2 : public IWSManConnectionOptionsEx
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetProxy( 
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long accessType = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long authenticationMechanism = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR userName = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR password = (BSTR)L"") = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE ProxyIEConfig( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *value) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE ProxyWinHttpConfig( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *value) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE ProxyAutoDetect( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *value) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE ProxyNoProxyServer( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *value) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE ProxyAuthenticationUseNegotiate( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *value) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE ProxyAuthenticationUseBasic( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *value) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE ProxyAuthenticationUseDigest( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *value) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IWSManConnectionOptionsEx2Vtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IWSManConnectionOptionsEx2 * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IWSManConnectionOptionsEx2 * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IWSManConnectionOptionsEx2 * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IWSManConnectionOptionsEx2 * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IWSManConnectionOptionsEx2 * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IWSManConnectionOptionsEx2 * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IWSManConnectionOptionsEx2 * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_UserName )( 
+            IWSManConnectionOptionsEx2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_UserName )( 
+            IWSManConnectionOptionsEx2 * This,
+            /* [annotation][in] */ 
+            _In_  BSTR name);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Password )( 
+            IWSManConnectionOptionsEx2 * This,
+            /* [annotation][in] */ 
+            _In_  BSTR password);
+        
+        /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_CertificateThumbprint )( 
+            IWSManConnectionOptionsEx2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *thumbprint);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_CertificateThumbprint )( 
+            IWSManConnectionOptionsEx2 * This,
+            /* [annotation][in] */ 
+            _In_  BSTR thumbprint);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetProxy )( 
+            IWSManConnectionOptionsEx2 * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long accessType,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long authenticationMechanism,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR userName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR password);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *ProxyIEConfig )( 
+            IWSManConnectionOptionsEx2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *value);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *ProxyWinHttpConfig )( 
+            IWSManConnectionOptionsEx2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *value);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *ProxyAutoDetect )( 
+            IWSManConnectionOptionsEx2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *value);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *ProxyNoProxyServer )( 
+            IWSManConnectionOptionsEx2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *value);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *ProxyAuthenticationUseNegotiate )( 
+            IWSManConnectionOptionsEx2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *value);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *ProxyAuthenticationUseBasic )( 
+            IWSManConnectionOptionsEx2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *value);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *ProxyAuthenticationUseDigest )( 
+            IWSManConnectionOptionsEx2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *value);
+        
+        END_INTERFACE
+    } IWSManConnectionOptionsEx2Vtbl;
+
+    interface IWSManConnectionOptionsEx2
+    {
+        CONST_VTBL struct IWSManConnectionOptionsEx2Vtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IWSManConnectionOptionsEx2_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IWSManConnectionOptionsEx2_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IWSManConnectionOptionsEx2_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IWSManConnectionOptionsEx2_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IWSManConnectionOptionsEx2_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IWSManConnectionOptionsEx2_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IWSManConnectionOptionsEx2_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IWSManConnectionOptionsEx2_get_UserName(This,name)	\
+    ( (This)->lpVtbl -> get_UserName(This,name) ) 
+
+#define IWSManConnectionOptionsEx2_put_UserName(This,name)	\
+    ( (This)->lpVtbl -> put_UserName(This,name) ) 
+
+#define IWSManConnectionOptionsEx2_put_Password(This,password)	\
+    ( (This)->lpVtbl -> put_Password(This,password) ) 
+
+
+#define IWSManConnectionOptionsEx2_get_CertificateThumbprint(This,thumbprint)	\
+    ( (This)->lpVtbl -> get_CertificateThumbprint(This,thumbprint) ) 
+
+#define IWSManConnectionOptionsEx2_put_CertificateThumbprint(This,thumbprint)	\
+    ( (This)->lpVtbl -> put_CertificateThumbprint(This,thumbprint) ) 
+
+
+#define IWSManConnectionOptionsEx2_SetProxy(This,accessType,authenticationMechanism,userName,password)	\
+    ( (This)->lpVtbl -> SetProxy(This,accessType,authenticationMechanism,userName,password) ) 
+
+#define IWSManConnectionOptionsEx2_ProxyIEConfig(This,value)	\
+    ( (This)->lpVtbl -> ProxyIEConfig(This,value) ) 
+
+#define IWSManConnectionOptionsEx2_ProxyWinHttpConfig(This,value)	\
+    ( (This)->lpVtbl -> ProxyWinHttpConfig(This,value) ) 
+
+#define IWSManConnectionOptionsEx2_ProxyAutoDetect(This,value)	\
+    ( (This)->lpVtbl -> ProxyAutoDetect(This,value) ) 
+
+#define IWSManConnectionOptionsEx2_ProxyNoProxyServer(This,value)	\
+    ( (This)->lpVtbl -> ProxyNoProxyServer(This,value) ) 
+
+#define IWSManConnectionOptionsEx2_ProxyAuthenticationUseNegotiate(This,value)	\
+    ( (This)->lpVtbl -> ProxyAuthenticationUseNegotiate(This,value) ) 
+
+#define IWSManConnectionOptionsEx2_ProxyAuthenticationUseBasic(This,value)	\
+    ( (This)->lpVtbl -> ProxyAuthenticationUseBasic(This,value) ) 
+
+#define IWSManConnectionOptionsEx2_ProxyAuthenticationUseDigest(This,value)	\
+    ( (This)->lpVtbl -> ProxyAuthenticationUseDigest(This,value) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IWSManConnectionOptionsEx2_INTERFACE_DEFINED__ */
+
+
+#ifndef __IWSManSession_INTERFACE_DEFINED__
+#define __IWSManSession_INTERFACE_DEFINED__
+
+/* interface IWSManSession */
+/* [nonextensible][local][oleautomation][uuid][object][dual] */ 
+
+
+EXTERN_C const IID IID_IWSManSession;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("FC84FC58-1286-40c4-9DA0-C8EF6EC241E0")
+    IWSManSession : public IDispatch
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Get( 
+            /* [annotation][in] */ 
+            _In_  VARIANT resourceUri,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long flags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *resource) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Put( 
+            /* [annotation][in] */ 
+            _In_  VARIANT resourceUri,
+            /* [annotation][in] */ 
+            _In_  BSTR resource,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long flags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *resultResource) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Create( 
+            /* [annotation][in] */ 
+            _In_  VARIANT resourceUri,
+            /* [annotation][in] */ 
+            _In_  BSTR resource,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long flags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *newUri) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Delete( 
+            /* [annotation][in] */ 
+            _In_  VARIANT resourceUri,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long flags = 0) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Invoke( 
+            /* [annotation][in] */ 
+            _In_  BSTR actionUri,
+            /* [annotation][in] */ 
+            _In_  VARIANT resourceUri,
+            /* [annotation][in] */ 
+            _In_  BSTR parameters,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long flags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *result) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Enumerate( 
+            /* [annotation][in] */ 
+            _In_  VARIANT resourceUri,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR filter,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR dialect,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long flags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IDispatch **resultSet) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Identify( 
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long flags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *result) = 0;
+        
+        virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Error( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *value) = 0;
+        
+        virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_BatchItems( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *value) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_BatchItems( 
+            /* [annotation][in] */ 
+            _In_  long value) = 0;
+        
+        virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Timeout( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *value) = 0;
+        
+        virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Timeout( 
+            /* [annotation][in] */ 
+            _In_  long value) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IWSManSessionVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IWSManSession * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IWSManSession * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IWSManSession * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IWSManSession * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IWSManSession * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IWSManSession * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IWSManSession * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Get )( 
+            IWSManSession * This,
+            /* [annotation][in] */ 
+            _In_  VARIANT resourceUri,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long flags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *resource);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Put )( 
+            IWSManSession * This,
+            /* [annotation][in] */ 
+            _In_  VARIANT resourceUri,
+            /* [annotation][in] */ 
+            _In_  BSTR resource,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long flags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *resultResource);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Create )( 
+            IWSManSession * This,
+            /* [annotation][in] */ 
+            _In_  VARIANT resourceUri,
+            /* [annotation][in] */ 
+            _In_  BSTR resource,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long flags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *newUri);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
+            IWSManSession * This,
+            /* [annotation][in] */ 
+            _In_  VARIANT resourceUri,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long flags);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IWSManSession * This,
+            /* [annotation][in] */ 
+            _In_  BSTR actionUri,
+            /* [annotation][in] */ 
+            _In_  VARIANT resourceUri,
+            /* [annotation][in] */ 
+            _In_  BSTR parameters,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long flags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *result);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Enumerate )( 
+            IWSManSession * This,
+            /* [annotation][in] */ 
+            _In_  VARIANT resourceUri,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR filter,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR dialect,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long flags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IDispatch **resultSet);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Identify )( 
+            IWSManSession * This,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long flags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *result);
+        
+        /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Error )( 
+            IWSManSession * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *value);
+        
+        /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_BatchItems )( 
+            IWSManSession * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *value);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_BatchItems )( 
+            IWSManSession * This,
+            /* [annotation][in] */ 
+            _In_  long value);
+        
+        /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Timeout )( 
+            IWSManSession * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *value);
+        
+        /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Timeout )( 
+            IWSManSession * This,
+            /* [annotation][in] */ 
+            _In_  long value);
+        
+        END_INTERFACE
+    } IWSManSessionVtbl;
+
+    interface IWSManSession
+    {
+        CONST_VTBL struct IWSManSessionVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IWSManSession_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IWSManSession_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IWSManSession_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IWSManSession_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IWSManSession_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IWSManSession_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IWSManSession_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IWSManSession_Get(This,resourceUri,flags,resource)	\
+    ( (This)->lpVtbl -> Get(This,resourceUri,flags,resource) ) 
+
+#define IWSManSession_Put(This,resourceUri,resource,flags,resultResource)	\
+    ( (This)->lpVtbl -> Put(This,resourceUri,resource,flags,resultResource) ) 
+
+#define IWSManSession_Create(This,resourceUri,resource,flags,newUri)	\
+    ( (This)->lpVtbl -> Create(This,resourceUri,resource,flags,newUri) ) 
+
+#define IWSManSession_Delete(This,resourceUri,flags)	\
+    ( (This)->lpVtbl -> Delete(This,resourceUri,flags) ) 
+
+#define IWSManSession_Invoke(This,actionUri,resourceUri,parameters,flags,result)	\
+    ( (This)->lpVtbl -> Invoke(This,actionUri,resourceUri,parameters,flags,result) ) 
+
+#define IWSManSession_Enumerate(This,resourceUri,filter,dialect,flags,resultSet)	\
+    ( (This)->lpVtbl -> Enumerate(This,resourceUri,filter,dialect,flags,resultSet) ) 
+
+#define IWSManSession_Identify(This,flags,result)	\
+    ( (This)->lpVtbl -> Identify(This,flags,result) ) 
+
+#define IWSManSession_get_Error(This,value)	\
+    ( (This)->lpVtbl -> get_Error(This,value) ) 
+
+#define IWSManSession_get_BatchItems(This,value)	\
+    ( (This)->lpVtbl -> get_BatchItems(This,value) ) 
+
+#define IWSManSession_put_BatchItems(This,value)	\
+    ( (This)->lpVtbl -> put_BatchItems(This,value) ) 
+
+#define IWSManSession_get_Timeout(This,value)	\
+    ( (This)->lpVtbl -> get_Timeout(This,value) ) 
+
+#define IWSManSession_put_Timeout(This,value)	\
+    ( (This)->lpVtbl -> put_Timeout(This,value) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IWSManSession_INTERFACE_DEFINED__ */
+
+
+#ifndef __IWSManEnumerator_INTERFACE_DEFINED__
+#define __IWSManEnumerator_INTERFACE_DEFINED__
+
+/* interface IWSManEnumerator */
+/* [nonextensible][local][oleautomation][uuid][object][dual] */ 
+
+
+EXTERN_C const IID IID_IWSManEnumerator;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("F3457CA9-ABB9-4fa5-B850-90E8CA300E7F")
+    IWSManEnumerator : public IDispatch
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE ReadItem( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *resource) = 0;
+        
+        virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_AtEndOfStream( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *eos) = 0;
+        
+        virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Error( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *value) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IWSManEnumeratorVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IWSManEnumerator * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IWSManEnumerator * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IWSManEnumerator * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IWSManEnumerator * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IWSManEnumerator * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IWSManEnumerator * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IWSManEnumerator * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *ReadItem )( 
+            IWSManEnumerator * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *resource);
+        
+        /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AtEndOfStream )( 
+            IWSManEnumerator * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *eos);
+        
+        /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Error )( 
+            IWSManEnumerator * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *value);
+        
+        END_INTERFACE
+    } IWSManEnumeratorVtbl;
+
+    interface IWSManEnumerator
+    {
+        CONST_VTBL struct IWSManEnumeratorVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IWSManEnumerator_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IWSManEnumerator_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IWSManEnumerator_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IWSManEnumerator_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IWSManEnumerator_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IWSManEnumerator_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IWSManEnumerator_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IWSManEnumerator_ReadItem(This,resource)	\
+    ( (This)->lpVtbl -> ReadItem(This,resource) ) 
+
+#define IWSManEnumerator_get_AtEndOfStream(This,eos)	\
+    ( (This)->lpVtbl -> get_AtEndOfStream(This,eos) ) 
+
+#define IWSManEnumerator_get_Error(This,value)	\
+    ( (This)->lpVtbl -> get_Error(This,value) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IWSManEnumerator_INTERFACE_DEFINED__ */
+
+
+#ifndef __IWSManResourceLocator_INTERFACE_DEFINED__
+#define __IWSManResourceLocator_INTERFACE_DEFINED__
+
+/* interface IWSManResourceLocator */
+/* [nonextensible][local][oleautomation][uuid][object][dual] */ 
+
+
+EXTERN_C const IID IID_IWSManResourceLocator;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("A7A1BA28-DE41-466a-AD0A-C4059EAD7428")
+    IWSManResourceLocator : public IDispatch
+    {
+    public:
+        virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_ResourceURI( 
+            /* [annotation][in] */ 
+            _In_  BSTR uri) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_ResourceURI( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *uri) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddSelector( 
+            /* [annotation][in] */ 
+            _In_  BSTR resourceSelName,
+            /* [annotation][in] */ 
+            _In_  VARIANT selValue) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ClearSelectors( void) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_FragmentPath( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *text) = 0;
+        
+        virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_FragmentPath( 
+            /* [annotation][in] */ 
+            _In_  BSTR text) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_FragmentDialect( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *text) = 0;
+        
+        virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_FragmentDialect( 
+            /* [annotation][in] */ 
+            _In_  BSTR text) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddOption( 
+            /* [annotation][in] */ 
+            _In_  BSTR OptionName,
+            /* [annotation][in] */ 
+            _In_  VARIANT OptionValue,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BOOL mustComply = 0) = 0;
+        
+        virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_MustUnderstandOptions( 
+            /* [annotation][in] */ 
+            _In_  BOOL mustUnderstand) = 0;
+        
+        virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_MustUnderstandOptions( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *mustUnderstand) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ClearOptions( void) = 0;
+        
+        virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Error( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *value) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IWSManResourceLocatorVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IWSManResourceLocator * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IWSManResourceLocator * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IWSManResourceLocator * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IWSManResourceLocator * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IWSManResourceLocator * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IWSManResourceLocator * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IWSManResourceLocator * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ResourceURI )( 
+            IWSManResourceLocator * This,
+            /* [annotation][in] */ 
+            _In_  BSTR uri);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ResourceURI )( 
+            IWSManResourceLocator * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *uri);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddSelector )( 
+            IWSManResourceLocator * This,
+            /* [annotation][in] */ 
+            _In_  BSTR resourceSelName,
+            /* [annotation][in] */ 
+            _In_  VARIANT selValue);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ClearSelectors )( 
+            IWSManResourceLocator * This);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_FragmentPath )( 
+            IWSManResourceLocator * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *text);
+        
+        /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_FragmentPath )( 
+            IWSManResourceLocator * This,
+            /* [annotation][in] */ 
+            _In_  BSTR text);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_FragmentDialect )( 
+            IWSManResourceLocator * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *text);
+        
+        /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_FragmentDialect )( 
+            IWSManResourceLocator * This,
+            /* [annotation][in] */ 
+            _In_  BSTR text);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddOption )( 
+            IWSManResourceLocator * This,
+            /* [annotation][in] */ 
+            _In_  BSTR OptionName,
+            /* [annotation][in] */ 
+            _In_  VARIANT OptionValue,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BOOL mustComply);
+        
+        /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MustUnderstandOptions )( 
+            IWSManResourceLocator * This,
+            /* [annotation][in] */ 
+            _In_  BOOL mustUnderstand);
+        
+        /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MustUnderstandOptions )( 
+            IWSManResourceLocator * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *mustUnderstand);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ClearOptions )( 
+            IWSManResourceLocator * This);
+        
+        /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Error )( 
+            IWSManResourceLocator * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *value);
+        
+        END_INTERFACE
+    } IWSManResourceLocatorVtbl;
+
+    interface IWSManResourceLocator
+    {
+        CONST_VTBL struct IWSManResourceLocatorVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IWSManResourceLocator_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IWSManResourceLocator_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IWSManResourceLocator_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IWSManResourceLocator_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IWSManResourceLocator_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IWSManResourceLocator_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IWSManResourceLocator_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IWSManResourceLocator_put_ResourceURI(This,uri)	\
+    ( (This)->lpVtbl -> put_ResourceURI(This,uri) ) 
+
+#define IWSManResourceLocator_get_ResourceURI(This,uri)	\
+    ( (This)->lpVtbl -> get_ResourceURI(This,uri) ) 
+
+#define IWSManResourceLocator_AddSelector(This,resourceSelName,selValue)	\
+    ( (This)->lpVtbl -> AddSelector(This,resourceSelName,selValue) ) 
+
+#define IWSManResourceLocator_ClearSelectors(This)	\
+    ( (This)->lpVtbl -> ClearSelectors(This) ) 
+
+#define IWSManResourceLocator_get_FragmentPath(This,text)	\
+    ( (This)->lpVtbl -> get_FragmentPath(This,text) ) 
+
+#define IWSManResourceLocator_put_FragmentPath(This,text)	\
+    ( (This)->lpVtbl -> put_FragmentPath(This,text) ) 
+
+#define IWSManResourceLocator_get_FragmentDialect(This,text)	\
+    ( (This)->lpVtbl -> get_FragmentDialect(This,text) ) 
+
+#define IWSManResourceLocator_put_FragmentDialect(This,text)	\
+    ( (This)->lpVtbl -> put_FragmentDialect(This,text) ) 
+
+#define IWSManResourceLocator_AddOption(This,OptionName,OptionValue,mustComply)	\
+    ( (This)->lpVtbl -> AddOption(This,OptionName,OptionValue,mustComply) ) 
+
+#define IWSManResourceLocator_put_MustUnderstandOptions(This,mustUnderstand)	\
+    ( (This)->lpVtbl -> put_MustUnderstandOptions(This,mustUnderstand) ) 
+
+#define IWSManResourceLocator_get_MustUnderstandOptions(This,mustUnderstand)	\
+    ( (This)->lpVtbl -> get_MustUnderstandOptions(This,mustUnderstand) ) 
+
+#define IWSManResourceLocator_ClearOptions(This)	\
+    ( (This)->lpVtbl -> ClearOptions(This) ) 
+
+#define IWSManResourceLocator_get_Error(This,value)	\
+    ( (This)->lpVtbl -> get_Error(This,value) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IWSManResourceLocator_INTERFACE_DEFINED__ */
+
+
+#ifndef __IWSManResourceLocatorInternal_INTERFACE_DEFINED__
+#define __IWSManResourceLocatorInternal_INTERFACE_DEFINED__
+
+/* interface IWSManResourceLocatorInternal */
+/* [hidden][nonextensible][local][oleautomation][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IWSManResourceLocatorInternal;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("EFFAEAD7-7EC8-4716-B9BE-F2E7E9FB4ADB")
+    IWSManResourceLocatorInternal : public IUnknown
+    {
+    public:
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IWSManResourceLocatorInternalVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IWSManResourceLocatorInternal * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IWSManResourceLocatorInternal * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IWSManResourceLocatorInternal * This);
+        
+        END_INTERFACE
+    } IWSManResourceLocatorInternalVtbl;
+
+    interface IWSManResourceLocatorInternal
+    {
+        CONST_VTBL struct IWSManResourceLocatorInternalVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IWSManResourceLocatorInternal_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IWSManResourceLocatorInternal_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IWSManResourceLocatorInternal_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IWSManResourceLocatorInternal_INTERFACE_DEFINED__ */
+
+
+EXTERN_C const CLSID CLSID_WSMan;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("BCED617B-EC03-420b-8508-977DC7A686BD")
+WSMan;
+#endif
+
+#ifndef __IWSManInternal_INTERFACE_DEFINED__
+#define __IWSManInternal_INTERFACE_DEFINED__
+
+/* interface IWSManInternal */
+/* [hidden][nonextensible][local][oleautomation][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IWSManInternal;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("04AE2B1D-9954-4D99-94A9-A961E72C3A13")
+    IWSManInternal : public IDispatch
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE ConfigSDDL( 
+            /* [annotation][in] */ 
+            _In_  IDispatch *session,
+            /* [annotation][in] */ 
+            _In_  VARIANT resourceUri,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long flags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *resource) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IWSManInternalVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IWSManInternal * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IWSManInternal * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IWSManInternal * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IWSManInternal * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IWSManInternal * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IWSManInternal * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IWSManInternal * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *ConfigSDDL )( 
+            IWSManInternal * This,
+            /* [annotation][in] */ 
+            _In_  IDispatch *session,
+            /* [annotation][in] */ 
+            _In_  VARIANT resourceUri,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long flags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *resource);
+        
+        END_INTERFACE
+    } IWSManInternalVtbl;
+
+    interface IWSManInternal
+    {
+        CONST_VTBL struct IWSManInternalVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IWSManInternal_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IWSManInternal_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IWSManInternal_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IWSManInternal_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IWSManInternal_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IWSManInternal_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IWSManInternal_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IWSManInternal_ConfigSDDL(This,session,resourceUri,flags,resource)	\
+    ( (This)->lpVtbl -> ConfigSDDL(This,session,resourceUri,flags,resource) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IWSManInternal_INTERFACE_DEFINED__ */
+
+
+EXTERN_C const CLSID CLSID_WSManInternal;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("7DE087A5-5DCB-4df7-BB12-0924AD8FBD9A")
+WSManInternal;
+#endif
+#endif /* __WSManAutomation_LIBRARY_DEFINED__ */
+
+/* interface __MIDL_itf_wsmandisp_0000_0013 */
+/* [local] */ 
+
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_WINMGMT) */
+#pragma endregion
+
+
+extern RPC_IF_HANDLE __MIDL_itf_wsmandisp_0000_0013_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_wsmandisp_0000_0013_v0_0_s_ifspec;
+
+/* Additional Prototypes for ALL interfaces */
+
+/* end of Additional Prototypes */
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
+
+

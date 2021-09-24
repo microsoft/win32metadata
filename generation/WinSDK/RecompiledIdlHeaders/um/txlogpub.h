@@ -1,0 +1,450 @@
+
+
+/* this ALWAYS GENERATED file contains the definitions for the interfaces */
+
+
+ /* File created by MIDL compiler version 8.01.0622 */
+/* @@MIDL_FILE_HEADING(  ) */
+
+
+
+/* verify that the <rpcndr.h> version is high enough to compile this file*/
+#ifndef __REQUIRED_RPCNDR_H_VERSION__
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#endif
+
+/* verify that the <rpcsal.h> version is high enough to compile this file*/
+#ifndef __REQUIRED_RPCSAL_H_VERSION__
+#define __REQUIRED_RPCSAL_H_VERSION__ 100
+#endif
+
+#include "rpc.h"
+#include "rpcndr.h"
+
+#ifndef __RPCNDR_H_VERSION__
+#error this stub requires an updated version of <rpcndr.h>
+#endif /* __RPCNDR_H_VERSION__ */
+
+#ifndef COM_NO_WINDOWS_H
+#include "windows.h"
+#include "ole2.h"
+#endif /*COM_NO_WINDOWS_H*/
+
+#ifndef __txlogpub_h__
+#define __txlogpub_h__
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1020)
+#pragma once
+#endif
+
+/* Forward Declarations */ 
+
+#ifndef __ILog_FWD_DEFINED__
+#define __ILog_FWD_DEFINED__
+typedef interface ILog ILog;
+
+#endif 	/* __ILog_FWD_DEFINED__ */
+
+
+#ifndef __IFileBasedLogInit_FWD_DEFINED__
+#define __IFileBasedLogInit_FWD_DEFINED__
+typedef interface IFileBasedLogInit IFileBasedLogInit;
+
+#endif 	/* __IFileBasedLogInit_FWD_DEFINED__ */
+
+
+/* header files for imported files */
+#include "unknwn.h"
+
+#ifdef __cplusplus
+extern "C"{
+#endif 
+
+
+/* interface __MIDL_itf_txlogpub_0000_0000 */
+/* [local] */ 
+
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (c) Microsoft Corporation. All rights reserved.
+//
+//--------------------------------------------------------------------------
+#include <winapifamily.h>
+#pragma region Desktop Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+
+
+// LSN
+// LSN is the fundamental cookie returned from the log as the name of a
+// newly-written  log record. LSNs from successively written records to a
+// given log are always monotonically increasing. LSNs are directly
+// comparable: lsn2 is later in the log than lsn1 if and only if as integers
+// lsn2 > lsn1.
+//
+// Neither the value zero nor the value MAXLSN are ever used as the value of
+// an actual LSN.
+
+typedef LARGE_INTEGER LSN;
+
+#define MAXLSN (0x7FFFFFFFFFFFFFFF)
+
+
+// RECORD_READING_POLICY
+// The RECORD_READING_POLICY enumeration values specify a hint about the
+// order in which records will be read from a log.  It is used by
+// ILog::SetAccessPolicyHint.
+
+typedef 
+enum RECORD_READING_POLICY
+    {
+        RECORD_READING_POLICY_FORWARD	= 1,
+        RECORD_READING_POLICY_BACKWARD	= 2,
+        RECORD_READING_POLICY_RANDOM	= 3
+    } 	RECORD_READING_POLICY;
+
+
+
+// ILog
+// An interface to the lowest level of a log implementation. This level
+// takes care of writing the records to disk in a stable manner. Recovery
+// protocols, transaction awareness, and the like are provided by a higher
+// semantic level.
+
+
+extern RPC_IF_HANDLE __MIDL_itf_txlogpub_0000_0000_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_txlogpub_0000_0000_v0_0_s_ifspec;
+
+#ifndef __ILog_INTERFACE_DEFINED__
+#define __ILog_INTERFACE_DEFINED__
+
+/* interface ILog */
+/* [unique][uuid][object] */ 
+
+
+EXTERN_C const IID IID_ILog;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("FF222117-0C6C-11d2-B89A-00C04FB9618A")
+    ILog : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE Force( 
+            /* [annotation][in] */ 
+            _In_  LSN lsnMinToForce) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE AppendRecord( 
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cBlob)  BLOB *rgBlob,
+            /* [annotation][in] */ 
+            _In_  ULONG cBlob,
+            /* [annotation][in] */ 
+            _In_  BOOL fForceNow,
+            /* [annotation][unique][in][out] */ 
+            _Inout_  LSN *plsn) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE ReadRecord( 
+            /* [annotation][in] */ 
+            _In_  LSN lsnToRead,
+            /* [annotation][unique][in][out] */ 
+            _Inout_  LSN *plsnPrev,
+            /* [annotation][unique][in][out] */ 
+            _Inout_  LSN *plsnNext,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcbData)  BYTE **ppbData,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbData) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE ReadRecordPrefix( 
+            /* [annotation][in] */ 
+            _In_  LSN lsnToRead,
+            /* [annotation][unique][in][out] */ 
+            _Inout_  LSN *plsnPrev,
+            /* [annotation][unique][in][out] */ 
+            _Inout_  LSN *plsnNext,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(*pcbData)  BYTE *pbData,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *pcbData,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbRecord) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetLogLimits( 
+            /* [annotation][unique][in][out] */ 
+            _Inout_  LSN *plsnFirst,
+            /* [annotation][unique][in][out] */ 
+            _Inout_  LSN *plsnLast) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE TruncatePrefix( 
+            /* [annotation][in] */ 
+            _In_  LSN lsnFirstToKeep) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE SetAccessPolicyHint( 
+            /* [annotation][in] */ 
+            _In_  RECORD_READING_POLICY policy) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ILogVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in ILog * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in ILog * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in ILog * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *Force )( 
+            __RPC__in ILog * This,
+            /* [annotation][in] */ 
+            _In_  LSN lsnMinToForce);
+        
+        HRESULT ( STDMETHODCALLTYPE *AppendRecord )( 
+            __RPC__in ILog * This,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cBlob)  BLOB *rgBlob,
+            /* [annotation][in] */ 
+            _In_  ULONG cBlob,
+            /* [annotation][in] */ 
+            _In_  BOOL fForceNow,
+            /* [annotation][unique][in][out] */ 
+            _Inout_  LSN *plsn);
+        
+        HRESULT ( STDMETHODCALLTYPE *ReadRecord )( 
+            __RPC__in ILog * This,
+            /* [annotation][in] */ 
+            _In_  LSN lsnToRead,
+            /* [annotation][unique][in][out] */ 
+            _Inout_  LSN *plsnPrev,
+            /* [annotation][unique][in][out] */ 
+            _Inout_  LSN *plsnNext,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcbData)  BYTE **ppbData,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbData);
+        
+        HRESULT ( STDMETHODCALLTYPE *ReadRecordPrefix )( 
+            __RPC__in ILog * This,
+            /* [annotation][in] */ 
+            _In_  LSN lsnToRead,
+            /* [annotation][unique][in][out] */ 
+            _Inout_  LSN *plsnPrev,
+            /* [annotation][unique][in][out] */ 
+            _Inout_  LSN *plsnNext,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(*pcbData)  BYTE *pbData,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *pcbData,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbRecord);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetLogLimits )( 
+            __RPC__in ILog * This,
+            /* [annotation][unique][in][out] */ 
+            _Inout_  LSN *plsnFirst,
+            /* [annotation][unique][in][out] */ 
+            _Inout_  LSN *plsnLast);
+        
+        HRESULT ( STDMETHODCALLTYPE *TruncatePrefix )( 
+            __RPC__in ILog * This,
+            /* [annotation][in] */ 
+            _In_  LSN lsnFirstToKeep);
+        
+        HRESULT ( STDMETHODCALLTYPE *SetAccessPolicyHint )( 
+            __RPC__in ILog * This,
+            /* [annotation][in] */ 
+            _In_  RECORD_READING_POLICY policy);
+        
+        END_INTERFACE
+    } ILogVtbl;
+
+    interface ILog
+    {
+        CONST_VTBL struct ILogVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ILog_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ILog_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ILog_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ILog_Force(This,lsnMinToForce)	\
+    ( (This)->lpVtbl -> Force(This,lsnMinToForce) ) 
+
+#define ILog_AppendRecord(This,rgBlob,cBlob,fForceNow,plsn)	\
+    ( (This)->lpVtbl -> AppendRecord(This,rgBlob,cBlob,fForceNow,plsn) ) 
+
+#define ILog_ReadRecord(This,lsnToRead,plsnPrev,plsnNext,ppbData,pcbData)	\
+    ( (This)->lpVtbl -> ReadRecord(This,lsnToRead,plsnPrev,plsnNext,ppbData,pcbData) ) 
+
+#define ILog_ReadRecordPrefix(This,lsnToRead,plsnPrev,plsnNext,pbData,pcbData,pcbRecord)	\
+    ( (This)->lpVtbl -> ReadRecordPrefix(This,lsnToRead,plsnPrev,plsnNext,pbData,pcbData,pcbRecord) ) 
+
+#define ILog_GetLogLimits(This,plsnFirst,plsnLast)	\
+    ( (This)->lpVtbl -> GetLogLimits(This,plsnFirst,plsnLast) ) 
+
+#define ILog_TruncatePrefix(This,lsnFirstToKeep)	\
+    ( (This)->lpVtbl -> TruncatePrefix(This,lsnFirstToKeep) ) 
+
+#define ILog_SetAccessPolicyHint(This,policy)	\
+    ( (This)->lpVtbl -> SetAccessPolicyHint(This,policy) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ILog_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_txlogpub_0000_0001 */
+/* [local] */ 
+
+
+
+// IFileBasedLogInit
+// An interface used to initialize an instance of a file based implementation of
+// ILog.  This interface defines the single method InitNew, which is used to
+// create a log on a new log file.  Objects that implement IFileBasedLogInit
+// should also implement IPersistFile, to allow existing log files to be opened.
+
+
+extern RPC_IF_HANDLE __MIDL_itf_txlogpub_0000_0001_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_txlogpub_0000_0001_v0_0_s_ifspec;
+
+#ifndef __IFileBasedLogInit_INTERFACE_DEFINED__
+#define __IFileBasedLogInit_INTERFACE_DEFINED__
+
+/* interface IFileBasedLogInit */
+/* [unique][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IFileBasedLogInit;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("00951E8C-1294-11d1-97E4-00C04FB9618A")
+    IFileBasedLogInit : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE InitNew( 
+            /* [annotation][in] */ 
+            _In_  LPCWSTR filename,
+            /* [annotation][in] */ 
+            _In_  ULONG cbCapacityHint) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IFileBasedLogInitVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in IFileBasedLogInit * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in IFileBasedLogInit * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in IFileBasedLogInit * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *InitNew )( 
+            __RPC__in IFileBasedLogInit * This,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR filename,
+            /* [annotation][in] */ 
+            _In_  ULONG cbCapacityHint);
+        
+        END_INTERFACE
+    } IFileBasedLogInitVtbl;
+
+    interface IFileBasedLogInit
+    {
+        CONST_VTBL struct IFileBasedLogInitVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IFileBasedLogInit_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IFileBasedLogInit_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IFileBasedLogInit_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IFileBasedLogInit_InitNew(This,filename,cbCapacityHint)	\
+    ( (This)->lpVtbl -> InitNew(This,filename,cbCapacityHint) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IFileBasedLogInit_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_txlogpub_0000_0002 */
+/* [local] */ 
+
+
+
+EXTERN_C const CLSID CLSID_SimpleFileBasedLog;
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+#pragma endregion
+
+
+extern RPC_IF_HANDLE __MIDL_itf_txlogpub_0000_0002_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_txlogpub_0000_0002_v0_0_s_ifspec;
+
+/* Additional Prototypes for ALL interfaces */
+
+/* end of Additional Prototypes */
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
+
+

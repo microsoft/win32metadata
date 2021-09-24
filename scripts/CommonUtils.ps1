@@ -4,15 +4,23 @@ $rootDir = [System.IO.Path]::GetFullPath("$PSScriptRoot\..")
 $toolsDir = "$rootDir\tools"
 $binDir = "$rootDir\bin"
 $sourcesDir = "$rootDir\sources"
-$generationDir = "$rootDir\generation"
-$scraperDir = "$generationDir\scraper"
-$emitterDir = "$generationDir\emitter"
-$partitionsDir = "$scraperDir\Partitions"
 $sdkApiPath = "$rootDir\ext\sdk-api"
-$sdkGeneratedSourceDir = "$emitterDir\generated"
-$artifactsDir = "$scraperDir\obj"
-$recompiledIdlHeadersDir = "$artifactsDir\RecompiledIdlHeaders"
+$windowsWin32ProjectRoot = "$rootDir\generation\WinSDK"
+$sdkGeneratedSourceDir = "$windowsWin32ProjectRoot\obj\generated"
+$recompiledIdlHeadersDir = "$windowsWin32ProjectRoot\RecompiledIdlHeaders"
 $metadataToolsBin = "$binDir\release\net5.0"
+
+Set-StrictMode -Version Latest
+$ErrorActionPreference = "Stop"
+$PSDefaultParameterValues['*:ErrorAction']='Stop'
+function ThrowOnNativeProcessError
+{
+    if (-not $?)
+    {   
+        $var = $?
+        throw "Call to process exited with error"
+    }
+}
 
 if (Test-Path -Path $binDir -PathType leaf)
 {
@@ -68,6 +76,7 @@ function Install-BuildTools
     Install-DotNetTool -Name nbgv
 
     & dotnet build "$rootDir\buildtools" -c Release
+    ThrowOnNativeProcessError
 
     Update-VsInstallDir
 }

@@ -1,3 +1,4 @@
-#include <windows.h>
+#include "intrinfix.h"
+#include "windows.fixed.h"
+
 #include <WebView2.h>
-#include <WebView2EnvironmentOptions.h>

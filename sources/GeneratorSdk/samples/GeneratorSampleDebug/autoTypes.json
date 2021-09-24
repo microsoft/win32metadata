@@ -1,0 +1,13 @@
+[
+  {
+    "Namespace": "GeneratorSampleDebug.Handles.Cleanup",
+    "Name": "SAMPLE_HANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "CloseSampleHandle"
+  },
+  {
+    "Name": "OTHER_SAMPLE_HANDLE",
+    "ValueType": "IntPtr",
+    "CloseApi": "CloseSampleHandle"
+  }
+]

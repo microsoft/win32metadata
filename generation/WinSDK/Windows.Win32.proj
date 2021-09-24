@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+
+  <Import Project="..\..\sources\GeneratorSdk\sdk\sdk.props" />
+
+  <!-- These are for debugging purposes only. A normal project wouldn't set these -->
+  <PropertyGroup>
+    <ToolsBinDir>$(RepoRootPath)bin\$(Configuration)\net5.0</ToolsBinDir>
+    <LibToolsBinDir>$(RepoRootPath)tools</LibToolsBinDir>
+    <ScriptsDir>$(RepoRootPath)scripts</ScriptsDir>
+    <Win32MetadataAssetsDir>$(RepoRootPath)sources\GeneratorSdk\tools\assets</Win32MetadataAssetsDir>
+    <Win32WinmdBinDir>$(RepoRootPath)bin</Win32WinmdBinDir>
+    <TaskBinDir>$(LocalTaskBinDir)</TaskBinDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ResponseFile Remove="*.rsp"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ScraperRsp Include="scraper.settings.rsp"/>
+    <ScraperRsp Include="libMappings.rsp"/>
+    <ScraperRsp Include="supportedOS.rsp"/>
+    <ScraperRsp Include="WithSetLastError.rsp"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ConstantsScraperRsp Include="ConstantsScraper.settings.rsp"/>
+    <ConstantsScraperRsp Include="requiredNamespacesForNames.rsp"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmitterRsp Include="emitter.settings.rsp"/>
+    <EmitterRsp Include="requiredNamespacesForNames.rsp"/>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <OutputWinmd Condition="'$(OutputWinmd)' == ''">..\..\bin\Windows.Win32.winmd</OutputWinmd>
+    <WinmdVersion Condition="'$(WinmdVersion)' == ''">1.0.0.0</WinmdVersion>
+    <GenerateAssemblyVersionInfo>false</GenerateAssemblyVersionInfo>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <SdkIncRoot>$(MSBuildThisFileDirectory)RecompiledIdlHeaders</SdkIncRoot>
+    <AdditionalIncludes>$(MSBuildProjectDirectory)\inc</AdditionalIncludes>
+    <ShowEmitWinmdOutputDetails>true</ShowEmitWinmdOutputDetails>
+
+    <!-- Set to false because the WinSDK assets are already in this project -->
+    <UseWinSDKAssets>false</UseWinSDKAssets>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ManualCs Include="manual\*.cs"/>
+    <PartitionFiles Include="partitions\**\main.cpp"/>
+    <Partition Include="@(PartitionFiles)">
+      <Name>$([System.IO.Path]::GetFileName($([System.IO.Path]::GetDirectoryName($([System.String]::Copy('%(Directory)'))))))</Name>
+    </Partition>
+  </ItemGroup>
+
+  <Import Project="..\..\sources\GeneratorSdk\sdk\sdk.targets" />
+</Project>

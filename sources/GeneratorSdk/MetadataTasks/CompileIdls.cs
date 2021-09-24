@@ -59,13 +59,13 @@ namespace MetadataTasks
         public override bool Execute()
         {
 #if DEBUG
-            if (System.Environment.GetEnvironmentVariable("DEBUG_TASKS") == "1")
+            if (System.Environment.GetEnvironmentVariable("DEBUG_COMPILE_IDLS_TASK") == "1")
             {
                 System.Diagnostics.Debugger.Launch();
             }
 #endif
 
-            string[] idls = GetIdls();
+            string[] idls = this.GetIdls();
             if (idls.Length == 0)
             {
                 return true;
@@ -73,8 +73,6 @@ namespace MetadataTasks
 
             Directory.CreateDirectory(this.ObjDir);
             Directory.CreateDirectory(this.CompiledHeadersDir);
-
-            Log.LogMessage($"Compiling idls...");
 
             string vcPath = TaskUtils.GetVcDirPath(this.ScriptsDir, this.Log);
             if (string.IsNullOrEmpty(vcPath))
@@ -108,7 +106,7 @@ namespace MetadataTasks
                 int ret = TaskUtils.ExecuteCmd("powershell.exe", scriptArgs, out var scriptOutput, this.Log);
                 if (ret != 0)
                 {
-                    Log.LogError($"ClangSharpSourceToWinmd.dll failed: {scriptOutput}");
+                    this.Log.LogError($"powershell.exe {scriptArgs} failed: {scriptOutput}");
                     return false;
                 }
 
@@ -117,11 +115,11 @@ namespace MetadataTasks
                 ret = TaskUtils.ExecuteCmd(midlPath, midlArgs, out var midlOutput, this.Log, vcPath);
                 if (ret != 0)
                 {
-                    Log.LogError($"midl.exe failed: {midlOutput}");
+                    this.Log.LogError($"midl.exe failed: {midlOutput}");
                     return false;
                 }
 
-                Log.LogMessage(midlOutput);
+                this.Log.LogMessage(midlOutput);
             }
 
             return true;

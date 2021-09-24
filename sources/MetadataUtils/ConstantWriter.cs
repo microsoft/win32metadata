@@ -15,6 +15,11 @@ namespace MetadataUtils
 
         public ConstantWriter(string path, string @namespace, string sourceHeaderText, Dictionary<string, string> withAttributes)
         {
+            if (sourceHeaderText == null)
+            {
+                sourceHeaderText = string.Empty;
+            }
+
             this.path = path;
             this.@namespace = @namespace;
             this.headerText = sourceHeaderText;

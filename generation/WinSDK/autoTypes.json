@@ -1,0 +1,1148 @@
+[
+  {
+    "Namespace": "Windows.Win32.Foundation",
+    "Name": "BOOL",
+    "ValueType": "int"
+  },
+  {
+    "Namespace": "Windows.Win32.Foundation",
+    "Name": "BOOLEAN",
+    "ValueType": "byte"
+  },
+  {
+    "Namespace": "Windows.Win32.Foundation",
+    "Name": "BSTR",
+    "ValueType": "char*",
+    "CloseApi": "SysFreeString"
+  },
+  {
+    "Namespace": "Windows.Win32.Foundation",
+    "Name": "HANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "CloseHandle"
+  },
+  {
+    "Namespace": "Windows.Win32.Foundation",
+    "Name": "HINSTANCE",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "FreeLibrary"
+  },
+  {
+    "Namespace": "Windows.Win32.Foundation",
+    "Name": "HRESULT",
+    "ValueType": "int"
+  },
+  {
+    "Namespace": "Windows.Win32.Foundation",
+    "Name": "HWND",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Foundation",
+    "Name": "LPARAM",
+    "ValueType": "IntPtr"
+  },
+  {
+    "Namespace": "Windows.Win32.Foundation",
+    "Name": "LRESULT",
+    "ValueType": "IntPtr"
+  },
+  {
+    "Namespace": "Windows.Win32.Foundation",
+    "Name": "LSTATUS",
+    "ValueType": "int"
+  },
+  {
+    "Namespace": "Windows.Win32.Foundation",
+    "Name": "NTSTATUS",
+    "ValueType": "int"
+  },
+  {
+    "Namespace": "Windows.Win32.Foundation",
+    "Name": "PSID",
+    "ValueType": "IntPtr"
+  },
+  {
+    "Namespace": "Windows.Win32.Foundation",
+    "Name": "PSTR",
+    "ValueType": "byte*"
+  },
+  {
+    "Namespace": "Windows.Win32.Foundation",
+    "Name": "PWSTR",
+    "ValueType": "char*"
+  },
+  {
+    "Namespace": "Windows.Win32.Foundation",
+    "Name": "WPARAM",
+    "ValueType": "UIntPtr"
+  },
+  {
+    "Namespace": "Windows.Win32.System.DataExchange",
+    "Name": "HSZ",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.DataExchange",
+    "Name": "HCONV",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.DataExchange",
+    "Name": "HCONVLIST",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.DataExchange",
+    "Name": "HDDEDATA",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.UI.TouchInput",
+    "Name": "HGESTUREINFO",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Name": "HGLRC",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "wglDeleteContext"
+  },
+  {
+    "Namespace": "Windows.Win32.UI.TextServices",
+    "Name": "HKL",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Name": "HMIDI",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Name": "HMIDIIN",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Name": "HMIDIOUT",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Name": "HMIDISTRM",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Name": "HMIXER",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Name": "HMIXEROBJ",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Name": "HWAVE",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Name": "HWAVEOUT",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Name": "HWAVEIN",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.UI.KeyboardAndMouseInput",
+    "Name": "HRAWINPUT",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.LibraryLoader",
+    "Name": "HRSRC",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.SystemServices",
+    "Name": "HSURF",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.UI.Controls",
+    "Name": "HSYNTHETICPOINTERDEVICE",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Audio.CoreAudio",
+    "Name": "HTASK",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.UI.TouchInput",
+    "Name": "HTOUCHINPUT",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Name": "HWINEVENTHOOK",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "UnhookWinEvent"
+  },
+  {
+    "Name": "HWINSTA",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "CloseWindowStation"
+  },
+  {
+    "Name": "HSTRING",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "WindowsDeleteString"
+  },
+  {
+    "Namespace": "Windows.Win32.System.WinRT",
+    "Name": "HSTRING_BUFFER",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Name": "HDC",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "ReleaseDC"
+  },
+  {
+    "Name": "CreatedHDC",
+    "ValueType": "IntPtr",
+    "CloseApi": "DeleteDC",
+    "AlsoUsableFor": "HDC"
+  },
+  {
+    "Namespace": "Windows.Win32.Graphics.Gdi",
+    "Name": "HGDIOBJ",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Name": "HBITMAP",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "DeleteObject",
+    "AlsoUsableFor": "HGDIOBJ"
+  },
+  {
+    "Name": "HRGN",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "DeleteObject",
+    "AlsoUsableFor": "HGDIOBJ"
+  },
+  {
+    "Name": "HPEN",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "DeleteObject",
+    "AlsoUsableFor": "HGDIOBJ"
+  },
+  {
+    "Name": "HBRUSH",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "DeleteObject",
+    "AlsoUsableFor": "HGDIOBJ"
+  },
+  {
+    "Name": "HFONT",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "DeleteObject",
+    "AlsoUsableFor": "HGDIOBJ"
+  },
+  {
+    "Name": "HMETAFILE",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "DeleteMetaFile"
+  },
+  {
+    "Name": "HENHMETAFILE",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "DeleteEnhMetaFile"
+  },
+  {
+    "Namespace": "Windows.Win32.Graphics.Gdi",
+    "Name": "HMONITOR",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Name": "HPALETTE",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "DeleteObject",
+    "AlsoUsableFor": "HGDIOBJ"
+  },
+  {
+    "Name": "HHOOK",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "UnhookWindowsHookEx"
+  },
+  {
+    "Name": "HICON",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "DestroyIcon"
+  },
+  {
+    "Name": "HMENU",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "DestroyMenu"
+  },
+  {
+    "Name": "HCURSOR",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "DestroyCursor",
+    "AlsoUsableFor": "HICON"
+  },
+  {
+    "Name": "TimerQueueHandle",
+    "ValueType": "IntPtr",
+    "CloseApi": "DeleteTimerQueueEx"
+  },
+  {
+    "Name": "PTP_POOL",
+    "ValueType": "IntPtr",
+    "CloseApi": "CloseThreadpool"
+  },
+  {
+    "Name": "NamespaceHandle",
+    "ValueType": "IntPtr",
+    "CloseApi": "ClosePrivateNamespace"
+  },
+  {
+    "Name": "BoundaryDescriptorHandle",
+    "ValueType": "IntPtr",
+    "CloseApi": "DeleteBoundaryDescriptor"
+  },
+  {
+    "Name": "FindFileHandle",
+    "ValueType": "IntPtr",
+    "CloseApi": "FindClose"
+  },
+  {
+    "Name": "FindFileNameHandle",
+    "ValueType": "IntPtr",
+    "CloseApi": "FindClose"
+  },
+  {
+    "Name": "FindStreamHandle",
+    "ValueType": "IntPtr",
+    "CloseApi": "FindClose"
+  },
+  {
+    "Name": "FindChangeNotificationHandle",
+    "ValueType": "IntPtr",
+    "CloseApi": "FindCloseChangeNotification"
+  },
+  {
+    "Name": "FindVolumeHandle",
+    "ValueType": "IntPtr",
+    "CloseApi": "FindVolumeClose"
+  },
+  {
+    "Name": "FindVolumeMointPointHandle",
+    "ValueType": "IntPtr",
+    "CloseApi": "FindVolumeMountPointClose"
+  },
+  {
+    "Name": "EventLogHandle",
+    "ValueType": "IntPtr",
+    "CloseApi": "CloseEventLog"
+  },
+  {
+    "Name": "EventSourceHandle",
+    "ValueType": "IntPtr",
+    "CloseApi": "DeregisterEventSource"
+  },
+  {
+    "Name": "HWSAEVENT",
+    "ValueType": "IntPtr",
+    "CloseApi": "WSACloseEvent"
+  },
+  {
+    "Name": "HFILTER",
+    "ValueType": "IntPtr",
+    "CloseApi": "FilterClose"
+  },
+  {
+    "Name": "ShFindChangeNotificationHandle",
+    "ValueType": "IntPtr",
+    "CloseApi": "SHChangeNotification_Unlock"
+  },
+  {
+    "Name": "CriticalPolicySectionHandle",
+    "ValueType": "IntPtr",
+    "CloseApi": "LeaveCriticalPolicySection"
+  },
+  {
+    "Name": "HwtsVirtualChannelHandle",
+    "ValueType": "IntPtr",
+    "CloseApi": "WTSVirtualChannelClose"
+  },
+  {
+    "Name": "IcmpHandle",
+    "ValueType": "IntPtr",
+    "CloseApi": "IcmpCloseHandle"
+  },
+  {
+    "Name": "HdcMetdataFileHandle",
+    "ValueType": "IntPtr",
+    "CloseApi": "DeleteMetaFile"
+  },
+  {
+    "Name": "HdcMetdataEnhFileHandle",
+    "ValueType": "IntPtr",
+    "CloseApi": "DeleteEnhMetaFile"
+  },
+  {
+    "Name": "HeapHandle",
+    "ValueType": "IntPtr",
+    "CloseApi": "HeapDestroy"
+  },
+  {
+    "Name": "HCOLORSPACE",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "DeleteColorSpace"
+  },
+  {
+    "Name": "HDESK",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "CloseDesktop"
+  },
+  {
+    "Name": "HACCEL",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "DestroyAcceleratorTable"
+  },
+  {
+    "Name": "HPROPSHEETPAGE",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "DestroyPropertySheetPage"
+  },
+  {
+    "Name": "HKEY",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "RegCloseKey"
+  },
+  {
+    "Name": "HIMAGELIST",
+    "ValueType": "IntPtr",
+    "CloseApi": "ImageList_Destroy"
+  },
+  {
+    "Name": "NetEnumHandle",
+    "ValueType": "IntPtr",
+    "CloseApi": "WNetCloseEnum"
+  },
+  {
+    "Name": "HCRYPTASYNC",
+    "ValueType": "IntPtr",
+    "CloseApi": "CryptCloseAsyncHandle"
+  },
+  {
+    "Name": "HCERTCHAINENGINE",
+    "ValueType": "IntPtr",
+    "CloseApi": "CertFreeCertificateChainEngine"
+  },
+  {
+    "Name": "HPOWERNOTIFY",
+    "ValueType": "IntPtr",
+    "CloseApi": "UnregisterPowerSettingNotification"
+  },
+  {
+    "Name": "LsaHandle",
+    "ValueType": "IntPtr",
+    "CloseApi": "LsaDeregisterLogonProcess"
+  },
+  {
+    "Name": "PerfProviderHandle",
+    "ValueType": "IntPtr",
+    "CloseApi": "PerfStopProvider"
+  },
+  {
+    "Name": "PerfQueryHandle",
+    "ValueType": "IntPtr",
+    "CloseApi": "PerfCloseQueryHandle"
+  },
+  {
+    "Name": "DnsContextHandle",
+    "ValueType": "IntPtr",
+    "CloseApi": "DnsReleaseContextHandle"
+  },
+  {
+    "Name": "HFILTER_INSTANCE",
+    "ValueType": "IntPtr",
+    "CloseApi": "FilterInstanceClose"
+  },
+  {
+    "Name": "FilterFindHandle",
+    "ValueType": "IntPtr",
+    "CloseApi": "FilterFindClose"
+  },
+  {
+    "Name": "FilterVolumeFindHandle",
+    "ValueType": "IntPtr",
+    "CloseApi": "FilterVolumeFindClose"
+  },
+  {
+    "Name": "FilterInstanceFindHandle",
+    "ValueType": "IntPtr",
+    "CloseApi": "FilterInstanceFindClose"
+  },
+  {
+    "Name": "FilterVolumeInstanceFindHandle",
+    "ValueType": "IntPtr",
+    "CloseApi": "FilterVolumeInstanceFindClose"
+  },
+  {
+    "Name": "GetDcContextHandle",
+    "ValueType": "IntPtr",
+    "CloseApi": "DsGetDcCloseW"
+  },
+  {
+    "Name": "TDH_HANDLE",
+    "ValueType": "IntPtr",
+    "CloseApi": "TdhCloseDecodingHandle"
+  },
+  {
+    "Name": "COMPRESSOR_HANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "CloseDecompressor"
+  },
+  {
+    "Name": "MSIHANDLE",
+    "ValueType": "uint",
+    "CloseApi": "MsiCloseHandle"
+  },
+  {
+    "Name": "HREPORT",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "WerReportCloseHandle"
+  },
+  {
+    "Name": "HREPORTSTORE",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "WerStoreClose"
+  },
+  {
+    "Namespace": "Windows.Win32.UI.Animation",
+    "Name": "UI_ANIMATION_KEYFRAME",
+    "ValueType": "IntPtr"
+  },
+  {
+    "Namespace": "Windows.Win32.UI.TabletPC",
+    "Name": "HRECOALT",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.UI.TabletPC",
+    "Name": "HRECOCONTEXT",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.UI.TabletPC",
+    "Name": "HRECOGNIZER",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.UI.TabletPC",
+    "Name": "HRECOLATTICE",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.UI.TabletPC",
+    "Name": "HRECOWORDLIST",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.Antimalware",
+    "Name": "HAMSICONTEXT",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.Antimalware",
+    "Name": "HAMSISESSION",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Security.Authorization",
+    "Name": "AUTHZ_ACCESS_CHECK_RESULTS_HANDLE",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Security.Authorization",
+    "Name": "AUTHZ_CLIENT_CONTEXT_HANDLE",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Security.Authorization",
+    "Name": "AUTHZ_RESOURCE_MANAGER_HANDLE",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Security.Authorization",
+    "Name": "AUTHZ_AUDIT_EVENT_HANDLE",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Security.Authorization",
+    "Name": "AUTHZ_AUDIT_EVENT_TYPE_HANDLE",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Security.Authorization",
+    "Name": "AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.DeviceAndDriverInstallation",
+    "Name": "HCMNOTIFICATION",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.Com",
+    "Name": "CO_MTA_USAGE_COOKIE",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.Com",
+    "Name": "CO_DEVICE_CATALOG_COOKIE",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.WindowsProgramming",
+    "Name": "HWINWATCH",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Security",
+    "Name": "HDIAGNOSTIC_DATA_QUERY_SESSION",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Security",
+    "Name": "HDIAGNOSTIC_REPORT",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Security",
+    "Name": "HDIAGNOSTIC_EVENT_TAG_DESCRIPTION",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Security",
+    "Name": "HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Security",
+    "Name": "HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Security",
+    "Name": "HDIAGNOSTIC_RECORD",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.WindowsProgramming",
+    "Name": "FEATURE_STATE_CHANGE_SUBSCRIPTION",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.WindowsProgramming",
+    "Name": "FH_SERVICE_PIPE_HANDLE",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "HIMC",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "HIMCC",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.UI.InteractionContext",
+    "Name": "HINTERACTIONCONTEXT",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.NetworkManagement.IpHelper",
+    "Name": "HIFTIMESTAMPCHANGE",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.NetworkManagement.QoS",
+    "Name": "LPM_HANDLE",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.NetworkManagement.QoS",
+    "Name": "RHANDLE",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Name": "HMMIO",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Name": "HDRVR",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Name": "HACMDRIVERID",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Name": "HACMDRIVER",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Name": "HACMSTREAM",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Name": "HACMOBJ",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.SerialCommunication",
+    "Name": "HCOMDB",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Security",
+    "Name": "NCRYPT_DESCRIPTOR_HANDLE",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Security",
+    "Name": "NCRYPT_STREAM_HANDLE",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Storage.Xps",
+    "Name": "HPTPROVIDER",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.Diagnostics.ProcessSnapshotting",
+    "Name": "HPSS",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.Diagnostics.ProcessSnapshotting",
+    "Name": "HPSSWALK",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Storage.ProjectedFileSystem",
+    "Name": "PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.NetworkManagement.Rras",
+    "Name": "HRASCONN",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.UI.Shell",
+    "Name": "HDROP",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.UI.Shell",
+    "Name": "HPSXA",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.Enumeration.Pnp",
+    "Name": "HSWDEVICE",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.UI.Accessibility",
+    "Name": "HUIANODE",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.UI.Accessibility",
+    "Name": "HUIAPATTERNOBJECT",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.UI.Accessibility",
+    "Name": "HUIATEXTRANGE",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.UI.Accessibility",
+    "Name": "HUIAEVENT",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Name": "HIC",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Name": "HVIDEO",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WebSocket",
+    "Name": "WEB_SOCKET_HANDLE",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WinInet",
+    "Name": "HTTP_PUSH_WAIT_HANDLE",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "HSAVEDUILANGUAGES",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Security",
+    "Name": "SAFER_LEVEL_HANDLE",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Security",
+    "Name": "SC_HANDLE",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.Services",
+    "Name": "SERVICE_STATUS_HANDLE",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.SystemServices",
+    "Name": "DPI_AWARENESS_CONTEXT",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.WinRT",
+    "Name": "ROPARAMIIDHANDLE",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.WinRT",
+    "Name": "APARTMENT_SHUTDOWN_REGISTRATION_COOKIE",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Storage.ProjectedFileSystem",
+    "Name": "PRJ_DIR_ENTRY_BUFFER_HANDLE",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.SystemServices",
+    "Name": "HUMPD",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.SystemServices",
+    "Name": "HSTR",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.SystemServices",
+    "Name": "HSPRITE",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Name": "HSEMAPHORE",
+    "ValueType": "IntPtr",
+    "CloseApi": "EngDeleteSemaphore"
+  },
+  {
+    "Namespace": "Windows.Win32.System.SystemServices",
+    "Name": "HLSURF",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.SystemServices",
+    "Name": "HFASTMUTEX",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.SystemServices",
+    "Name": "HDRVOBJ",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.SystemServices",
+    "Name": "HDEV",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.SystemServices",
+    "Name": "HBM",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.SystemServices",
+    "Name": "DHSURF",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.SystemServices",
+    "Name": "DHPDEV",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.SystemInformation",
+    "Name": "FIRMWARE_TABLE_ID",
+    "ValueType": "uint"
+  },
+  {
+    "Namespace": "Windows.Win32.Storage.CloudFilters",
+    "Name": "CF_CONNECTION_KEY",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_aboutdata",
+    "ValueType": "AllJoynHandle"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_aboutdatalistener",
+    "ValueType": "AllJoynHandle"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_aboutlistener",
+    "ValueType": "AllJoynHandle"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_aboutobj",
+    "ValueType": "AllJoynHandle"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_aboutobjectdescription",
+    "ValueType": "AllJoynHandle"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_aboutproxy",
+    "ValueType": "AllJoynHandle"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_applicationstatelistener",
+    "ValueType": "AllJoynHandle"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_authlistener",
+    "ValueType": "AllJoynHandle"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_autopinger",
+    "ValueType": "AllJoynHandle"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_busattachment",
+    "ValueType": "AllJoynHandle"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_buslistener",
+    "ValueType": "AllJoynHandle"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_busobject",
+    "ValueType": "AllJoynHandle"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_credentials",
+    "ValueType": "AllJoynHandle"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_interfacedescription",
+    "ValueType": "AllJoynHandle"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_keystore",
+    "ValueType": "AllJoynHandle"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_keystorelistener",
+    "ValueType": "AllJoynHandle"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_message",
+    "ValueType": "AllJoynHandle"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_msgarg",
+    "ValueType": "AllJoynHandle"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_observer",
+    "ValueType": "AllJoynHandle"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_observerlistener",
+    "ValueType": "AllJoynHandle"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_permissionconfigurationlistener",
+    "ValueType": "AllJoynHandle"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_permissionconfigurator",
+    "ValueType": "AllJoynHandle"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_pinglistener",
+    "ValueType": "AllJoynHandle"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_proxybusobject",
+    "ValueType": "AllJoynHandle"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_proxybusobject_ref",
+    "ValueType": "AllJoynHandle"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_securityapplicationproxy",
+    "ValueType": "AllJoynHandle"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_sessionlistener",
+    "ValueType": "AllJoynHandle"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_sessionopts",
+    "ValueType": "AllJoynHandle"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_sessionportlistener",
+    "ValueType": "AllJoynHandle"
+  },
+  {
+    "Name": "HPCON",
+    "ValueType": "IntPtr",
+    "CloseApi": "ClosePseudoConsole"
+  },
+  {
+    "Namespace": "Windows.Win32.UI.Controls",
+    "Name": "HTREEITEM",
+    "ValueType": "IntPtr"
+  },
+  {
+    "Namespace": "Windows.Win32.System.Threading",
+    "Name": "LPPROC_THREAD_ATTRIBUTE_LIST",
+    "ValueType": "void*"
+  },
+  {
+    "Name": "WHV_PARTITION_HANDLE",
+    "ValueType": "IntPtr",
+    "CloseApi": "WHvDeletePartition"
+  },
+  {
+    "Namespace": "Windows.Win32.System.SystemServices",
+    "Name": "CHAR",
+    "ValueType": "byte"
+  },
+  {
+    "Namespace": "Windows.Win32.Storage.StructuredStorage",
+    "Name": "JET_HANDLE",
+    "ValueType": "UIntPtr"
+  },
+  {
+    "Namespace": "Windows.Win32.Storage.StructuredStorage",
+    "Name": "JET_INSTANCE",
+    "ValueType": "UIntPtr"
+  },
+  {
+    "Namespace": "Windows.Win32.Storage.StructuredStorage",
+    "Name": "JET_SESID",
+    "ValueType": "UIntPtr"
+  },
+  {
+    "Namespace": "Windows.Win32.Storage.StructuredStorage",
+    "Name": "JET_TABLEID",
+    "ValueType": "UIntPtr"
+  },
+  {
+    "Namespace": "Windows.Win32.Storage.StructuredStorage",
+    "Name": "JET_API_PTR",
+    "ValueType": "UIntPtr"
+  },
+  {
+    "Namespace": "Windows.Win32.Storage.StructuredStorage",
+    "Name": "JET_OSSNAPID",
+    "ValueType": "UIntPtr"
+  },
+  {
+    "Namespace": "Windows.Win32.Storage.StructuredStorage",
+    "Name": "JET_LS",
+    "ValueType": "UIntPtr"
+  },
+  {
+    "Namespace": "Windows.Win32.System.SystemServices",
+    "Name": "SHANDLE_PTR",
+    "ValueType": "IntPtr"
+  },
+  {
+    "Namespace": "Windows.Win32.System.SystemServices",
+    "Name": "HANDLE_PTR",
+    "ValueType": "UIntPtr"
+  },
+  {
+    "Name": "SOCKET",
+    "ValueType": "UIntPtr",
+    "CloseApi": "closesocket"
+  },
+  {
+    "Name": "BCRYPT_ALG_HANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "BCryptCloseAlgorithmProvider"
+  },
+  {
+    "Name": "BCRYPT_KEY_HANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "BCryptDestroyKey"
+  }
+]

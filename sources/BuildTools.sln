@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31629.42
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "msbuild", "msbuild", "{D3E6399F-0983-4742-B07C-874B6ED80E51}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GeneratorSdk", "GeneratorSdk", "{D3E6399F-0983-4742-B07C-874B6ED80E51}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetadataTasks", "GeneratorSdk\MetadataTasks\MetadataTasks.csproj", "{5B6F6176-0031-4105-B9FF-B713499D8975}"
 EndProject
@@ -14,6 +14,54 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinmdUtils", "WinmdUtils\WinmdUtils.csproj", "{D58855C2-F427-4C4D-990A-7F932A7B4CA3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Win32MetadataInterop", "Win32MetadataInterop\Win32MetadataInterop.csproj", "{C8AA8253-FF34-4963-9CD0-B7A4C28D33BB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{4D4F6043-CD81-4FD3-A6E5-0A2148281E78}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetadataUtils", "MetadataUtils\MetadataUtils.csproj", "{08297558-5DC0-4ACB-A67B-3E498638AD4B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GeneratorSampleDebug", "GeneratorSampleDebug", "{6C9DCCF4-8580-478A-BB61-36ACCCADB16F}"
+	ProjectSection(SolutionItems) = preProject
+		GeneratorSdk\samples\GeneratorSampleDebug\autoTypes.json = GeneratorSdk\samples\GeneratorSampleDebug\autoTypes.json
+		GeneratorSdk\samples\GeneratorSampleDebug\enums.json = GeneratorSdk\samples\GeneratorSampleDebug\enums.json
+		GeneratorSdk\samples\GeneratorSampleDebug\functionPointerFixups.json = GeneratorSdk\samples\GeneratorSampleDebug\functionPointerFixups.json
+		GeneratorSdk\samples\GeneratorSampleDebug\GeneratorSampleDebug.proj = GeneratorSdk\samples\GeneratorSampleDebug\GeneratorSampleDebug.proj
+		GeneratorSdk\samples\GeneratorSampleDebug\main.cpp = GeneratorSdk\samples\GeneratorSampleDebug\main.cpp
+		GeneratorSdk\samples\GeneratorSampleDebug\ManualStuff.cs = GeneratorSdk\samples\GeneratorSampleDebug\ManualStuff.cs
+		GeneratorSdk\samples\GeneratorSampleDebug\options.rsp = GeneratorSdk\samples\GeneratorSampleDebug\options.rsp
+		GeneratorSdk\samples\GeneratorSampleDebug\SampleCom.idl = GeneratorSdk\samples\GeneratorSampleDebug\SampleCom.idl
+		GeneratorSdk\samples\GeneratorSampleDebug\SampleHeader.h = GeneratorSdk\samples\GeneratorSampleDebug\SampleHeader.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sdk", "sdk", "{65F906A0-83DF-435D-AE74-BE67CBC8CC9B}"
+	ProjectSection(SolutionItems) = preProject
+		GeneratorSdk\sdk\sdk.props = GeneratorSdk\sdk\sdk.props
+		GeneratorSdk\sdk\sdk.targets = GeneratorSdk\sdk\sdk.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{3E76C95B-EAE8-4A07-A6AB-EC20499038C6}"
+	ProjectSection(SolutionItems) = preProject
+		..\scripts\CreateRspsForFunctionPointerFixups.ps1 = ..\scripts\CreateRspsForFunctionPointerFixups.ps1
+		..\scripts\CreateScraperRspForAutoTypes.ps1 = ..\scripts\CreateScraperRspForAutoTypes.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "generation", "generation", "{B952F7CE-A7D8-4633-925D-FF1C95FA77AC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinSDK", "WinSDK", "{8ADADAAD-DC58-4080-870F-65FE47825343}"
+	ProjectSection(SolutionItems) = preProject
+		..\generation\WinSDK\autoTypes.json = ..\generation\WinSDK\autoTypes.json
+		..\generation\WinSDK\ConstantsScraper.header.txt = ..\generation\WinSDK\ConstantsScraper.header.txt
+		..\generation\WinSDK\ConstantsScraper.settings.rsp = ..\generation\WinSDK\ConstantsScraper.settings.rsp
+		..\generation\WinSDK\emitter.settings.rsp = ..\generation\WinSDK\emitter.settings.rsp
+		..\generation\WinSDK\enums.json = ..\generation\WinSDK\enums.json
+		..\generation\WinSDK\functionPointerFixups.json = ..\generation\WinSDK\functionPointerFixups.json
+		..\generation\WinSDK\libMappings.rsp = ..\generation\WinSDK\libMappings.rsp
+		..\generation\WinSDK\requiredNamespacesForNames.rsp = ..\generation\WinSDK\requiredNamespacesForNames.rsp
+		..\generation\WinSDK\scraper.header.txt = ..\generation\WinSDK\scraper.header.txt
+		..\generation\WinSDK\scraper.settings.rsp = ..\generation\WinSDK\scraper.settings.rsp
+		..\generation\WinSDK\supportedOS.rsp = ..\generation\WinSDK\supportedOS.rsp
+		..\generation\WinSDK\Windows.Win32.proj = ..\generation\WinSDK\Windows.Win32.proj
+		..\generation\WinSDK\WithSetLastError.rsp = ..\generation\WinSDK\WithSetLastError.rsp
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,12 +89,19 @@ Global
 		{C8AA8253-FF34-4963-9CD0-B7A4C28D33BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8AA8253-FF34-4963-9CD0-B7A4C28D33BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8AA8253-FF34-4963-9CD0-B7A4C28D33BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08297558-5DC0-4ACB-A67B-3E498638AD4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08297558-5DC0-4ACB-A67B-3E498638AD4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08297558-5DC0-4ACB-A67B-3E498638AD4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08297558-5DC0-4ACB-A67B-3E498638AD4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5B6F6176-0031-4105-B9FF-B713499D8975} = {D3E6399F-0983-4742-B07C-874B6ED80E51}
+		{6C9DCCF4-8580-478A-BB61-36ACCCADB16F} = {4D4F6043-CD81-4FD3-A6E5-0A2148281E78}
+		{65F906A0-83DF-435D-AE74-BE67CBC8CC9B} = {D3E6399F-0983-4742-B07C-874B6ED80E51}
+		{8ADADAAD-DC58-4080-870F-65FE47825343} = {B952F7CE-A7D8-4633-925D-FF1C95FA77AC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {156D7600-E986-417B-9D16-E6FA1039AF42}

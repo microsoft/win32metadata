@@ -352,18 +352,13 @@ MigrationBackup/
 
 # Generation files
 !generation/*.rsp
-!generation/scraper/partitions/backup
-!generation/scraper/partitions/debug
-/sources/CsWin32ProjectionLib/RiaaSafeHandles.cs
-/sources/CsWin32ProjectionLib/ProjectedWin32.cs
-/sources/CsWin32/Properties/launchSettings.json
+!generation/WinSDK/Partitions/backup
+!generation/WinSDK/Partitions/debug
 /.vscode/settings.json
 /tests/SourceToWinmd/source/generated/fake/autotypes.cs
-/generation/emitter/generated
 /winsdk
-/generation/scraper/autoTypes.generated.rsp
-/generation/emitter/functionPointerFixups.generated.rsp
-/generation/scraper/functionPointerFixups.generated.rsp
-/generation/emitter/enumsMakeFlags.generated.rsp
 /sources/GeneratorSdk/sdk/sdk.stamped.props
 /tests/SourceToWinmd/source/generated/autotypes.cs
+
+# This gets written when testing the packages, but we don't want to check it in
+/sources/GeneratorSdk/samples/global.json
