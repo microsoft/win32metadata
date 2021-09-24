@@ -1,4 +1,3 @@
-$ErrorActionPreference = "Stop"
 . $PSScriptRoot\CommonUtils.ps1
 
 dotnet pack "$PSScriptRoot\..\sources\packages.proj" -c Release
