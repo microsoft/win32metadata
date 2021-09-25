@@ -212,7 +212,9 @@
 
   </Target>
 
-  <Target Name="CopyManualFilesToScraped" BeforeTargets="Build">
+  <Target Name="CopyManualFilesToScraped" BeforeTargets="Build"
+    Inputs="@(ManualCs)"
+    Outputs="@(ManualCs -> '$(GeneratedDir)\%(Filename).manual.cs')">
     <Copy SourceFiles="@(ManualCs)" DestinationFiles="@(ManualCs -> '$(GeneratedDir)\%(Filename).manual.cs')" />
   </Target>
 
@@ -245,7 +247,7 @@
       SdkIncRoot="$(SdkIncRoot)"
       MSBuildProjectDirectory="$(MSBuildProjectDirectory)"/>
 
-    <WriteLinesToFile File="$(ScrapedHeadersMarker)" Lines="scanned" Overwrite="true"/>
+    <WriteLinesToFile File="$(ScrapedConstantsMarker)" Lines="scanned" Overwrite="true"/>
 
   </Target>
 
