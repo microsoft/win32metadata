@@ -1,12 +1,18 @@
 param
 (
     [switch]
-    $assetsScrapedSeparately
+    $assetsScrapedSeparately,
+
+    [switch]
+    $skipInstallTools
 )
 
 . "$PSScriptRoot\CommonUtils.ps1"
-
-Install-BuildTools
+    
+if (!$skipInstallTools.IsPresent)
+{
+    Install-BuildTools
+}
 
 $assemblyVersion = nbgv get-version -v AssemblyVersion
 

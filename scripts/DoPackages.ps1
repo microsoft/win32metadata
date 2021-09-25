@@ -1,4 +1,14 @@
+param
+(
+    [switch]$skipInstallTools
+)
+
 . $PSScriptRoot\CommonUtils.ps1
+
+if (!$skipInstallTools)
+{
+    Install-BuildTools
+}
 
 dotnet pack "$PSScriptRoot\..\sources\packages.proj" -c Release
 ThrowOnNativeProcessError

@@ -1,12 +1,18 @@
 param
 (
     [string]
-    $winmdPath
+    $winmdPath,
+
+    [switch]
+    $skipInstallTools
 )
 
 . "$PSScriptRoot\CommonUtils.ps1"
 
-Install-BuildTools
+if (!$skipInstallTools.IsPresent)
+{
+    Install-BuildTools
+}
 
 Write-Output "`e[36m*** Running tests on .winmd`e[0m"
 
