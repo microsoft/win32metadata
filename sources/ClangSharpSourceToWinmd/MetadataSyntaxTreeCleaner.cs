@@ -175,46 +175,39 @@ namespace ClangSharpSourceToWinmd
                 // aren't allowed in metadata, requiring us to surface them this way
                 if (node.Modifiers.ToString() == "public static readonly" && node.Declaration.Type.ToString() == "Guid")
                 {
-                    Guid guidVal = Guid.Empty;
                     var varInitializer = node.Declaration.Variables.First().Initializer;
                     if (varInitializer.Value is ObjectCreationExpressionSyntax objCreationSyntax)
                     {
+                        node = node.RemoveNode(varInitializer, SyntaxRemoveOptions.KeepExteriorTrivia | SyntaxRemoveOptions.KeepEndOfLine);
+
                         var args = objCreationSyntax.ArgumentList.Arguments;
                         if (args.Count == 11)
                         {
-                            uint p0 = EncodeHelpers.ParseHex(args[0].ToString());
-                            ushort p1 = (ushort)EncodeHelpers.ParseHex(args[1].ToString());
-                            ushort p2 = (ushort)EncodeHelpers.ParseHex(args[2].ToString());
-                            byte p3 = (byte)EncodeHelpers.ParseHex(args[3].ToString());
-                            byte p4 = (byte)EncodeHelpers.ParseHex(args[4].ToString());
-                            byte p5 = (byte)EncodeHelpers.ParseHex(args[5].ToString());
-                            byte p6 = (byte)EncodeHelpers.ParseHex(args[6].ToString());
-                            byte p7 = (byte)EncodeHelpers.ParseHex(args[7].ToString());
-                            byte p8 = (byte)EncodeHelpers.ParseHex(args[8].ToString());
-                            byte p9 = (byte)EncodeHelpers.ParseHex(args[9].ToString());
-                            byte p10 = (byte)EncodeHelpers.ParseHex(args[10].ToString());
+                            var allArgs = $"(uint){args}";
 
-                            guidVal = new Guid(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10);
+                            string argsFormatted = $"({allArgs})";
+                            var attrsList =
+                                SyntaxFactory.AttributeList(
+                                    SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
+                                        SyntaxFactory.Attribute(
+                                            SyntaxFactory.ParseName("Windows.Win32.Interop.Guid"),
+                                            SyntaxFactory.ParseAttributeArgumentList(argsFormatted))));
+
+                            node = node.AddAttributeLists(attrsList).WithLeadingTrivia(node.GetLeadingTrivia());
                         }
                         else if (objCreationSyntax.ArgumentList.Arguments.Count == 1)
                         {
                             var textValue = EncodeHelpers.RemoveQuotes(objCreationSyntax.ArgumentList.Arguments[0].ToString());
 
                             // If this is an invalid format, remove the node
-                            if (!Guid.TryParse(textValue, out guidVal))
+                            if (!Guid.TryParse(textValue, out var guidVal))
                             {
                                 return null;
                             }
+
+                            node = node.AddAttributeLists(EncodeHelpers.ConvertGuidToAttributeList(guidVal).WithLeadingTrivia(node.GetLeadingTrivia()));
                         }
                     }
-
-                    if (guidVal == Guid.Empty)
-                    {
-                        return node;
-                    }
-
-                    node = node.RemoveNode(varInitializer, SyntaxRemoveOptions.KeepExteriorTrivia | SyntaxRemoveOptions.KeepEndOfLine);
-                    node = node.AddAttributeLists(EncodeHelpers.ConvertGuidToAttributeList(guidVal).WithLeadingTrivia(node.GetLeadingTrivia()));
 
                     return node;
                 }

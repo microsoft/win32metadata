@@ -43,6 +43,14 @@ namespace MetadataUtils
                 new Regex(
                     @"^\s*(DEFINE_AVIGUID)\s*\(\s*(.*),\s*(.*),\s*(.*),\s*(.*)\s*\);");
 
+            private static readonly Regex DefineMediaTypeGuidConstRegex =
+                new Regex(
+                    @"^\s*(DEFINE_MEDIATYPE_GUID)\s*\(\s*(\S+),\s*(\S+)\s*\);");
+
+            private static readonly Regex FccRegex =
+                new Regex(
+                    @"FCC\(\'(.{4})\'\)");
+
             private static readonly Regex DefineEnumFlagsRegex =
                 new Regex(
                     @"^\s*DEFINE_ENUM_FLAG_OPERATORS\(\s*(\S+)\s*\)\s*\;\s*$");
@@ -474,6 +482,29 @@ namespace MetadataUtils
                             var w1 = defineAviGuidMatch.Groups[4].Value;
                             var w2 = defineAviGuidMatch.Groups[5].Value;
                             var defineGuidLine = $"{guidName}, {l}, {w1}, {w2}, 0xC0,0,0,0,0,0,0,0x46)";
+                            this.AddConstantGuid(defineGuidKeyword, currentNamespace, defineGuidLine);
+                            continue;
+                        }
+
+                        Match defineMediaTypeGuidMatch = DefineMediaTypeGuidConstRegex.Match(line);
+                        if (defineMediaTypeGuidMatch.Success)
+                        {
+                            defineGuidKeyword = defineMediaTypeGuidMatch.Groups[1].Value;
+                            var guidName = defineMediaTypeGuidMatch.Groups[2].Value;
+                            var value = defineMediaTypeGuidMatch.Groups[3].Value;
+                            var fccMatch = FccRegex.Match(value);
+                            if (fccMatch.Success)
+                            {
+                                var fccValue = fccMatch.Groups[1].Value.ToArray();
+                                uint convertedValue =
+                                    (uint)(fccValue[0]) |
+                                    (uint)(fccValue[1] << 8) |
+                                    (uint)(fccValue[2] << 16) |
+                                    (uint)(fccValue[3] << 24);
+                                value = $"0x{convertedValue:x}";
+                            }
+
+                            var defineGuidLine = $"{guidName}, {value}, 0x0000, 0x0010, 0x80, 0x00, 0x00, 0xaa, 0x00, 0x38, 0x9b, 0x71)";
                             this.AddConstantGuid(defineGuidKeyword, currentNamespace, defineGuidLine);
                             continue;
                         }
