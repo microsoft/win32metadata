@@ -63,14 +63,16 @@ namespace MetadataTasks
                 return true;
             }
 
-            if (File.Exists(this.MarkerFileName))
-            {
-                File.Delete(this.MarkerFileName);
-            }
-
             this.Log.LogMessage(MessageImportance.High, $"Scraping constants and enums...");
 
-            return base.Execute();
+            bool ret = base.Execute();
+
+            if (ret)
+            {
+                File.WriteAllText(this.MarkerFileName, string.Empty);
+            }
+
+            return ret;
         }
 
         protected override string GenerateCommandLineCommands()

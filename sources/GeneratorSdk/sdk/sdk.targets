@@ -208,8 +208,6 @@
       Win32MetadataScraperAssetsDir="$(Win32MetadataScraperAssetsDir)"
       MSBuildProjectDirectory="$(MSBuildProjectDirectory)"/>
 
-    <WriteLinesToFile File="$(ScrapedHeadersMarker)" Lines="scanned" Overwrite="true"/>
-
   </Target>
 
   <Target Name="CopyManualFilesToScraped" BeforeTargets="Build"
@@ -247,12 +245,10 @@
       SdkIncRoot="$(SdkIncRoot)"
       MSBuildProjectDirectory="$(MSBuildProjectDirectory)"/>
 
-    <WriteLinesToFile File="$(ScrapedConstantsMarker)" Lines="scanned" Overwrite="true"/>
-
   </Target>
 
   <Target Name="EmitWinmd" BeforeTargets="Build"
-    Inputs="$(ScrapedConstantsMarker);@(AutoType)"
+    Inputs="$(ScrapedConstantsMarker);@(AutoType);@(EmitterRsp)"
     Outputs="$(OutputWinmd)"
     DependsOnTargets="ScrapeConstants">
 
