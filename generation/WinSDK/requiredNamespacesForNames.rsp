@@ -1003,6 +1003,7 @@ MoveFileTransactedW=Windows.Win32.Storage.FileSystem
 MoveFileW=Windows.Win32.Storage.FileSystem
 MoveFileWithProgressA=Windows.Win32.Storage.FileSystem
 MoveFileWithProgressW=Windows.Win32.Storage.FileSystem
+NMPWAIT_*=Windows.Win32.System.Pipes
 NotifyChangeEventLog=Windows.Win32.System.EventLog
 ObjectCloseAuditAlarmA=Windows.Win32.Security
 ObjectDeleteAuditAlarmA=Windows.Win32.Security

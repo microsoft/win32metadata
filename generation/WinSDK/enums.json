@@ -6506,29 +6506,6 @@
     ]
   },
   {
-    "name": "WAIT_NAMED_PIPE_TIME_OUT_FLAGS",
-    "members": [
-      {
-        "name": "NMPWAIT_USE_DEFAULT_WAIT",
-        "value": "0"
-      },
-      {
-        "name": "NMPWAIT_WAIT_FOREVER",
-        "value": "4294967295"
-      }
-    ],
-    "uses": [
-      {
-        "method": "WaitNamedPipeA",
-        "parameter": "nTimeOut"
-      },
-      {
-        "method": "WaitNamedPipeW",
-        "parameter": "nTimeOut"
-      }
-    ]
-  },
-  {
     "name": "GET_STOCK_OBJECT_FLAGS",
     "members": [
       {
