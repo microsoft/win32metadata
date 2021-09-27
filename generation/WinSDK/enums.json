@@ -3678,6 +3678,14 @@
         "parameter": "return"
       },
       {
+        "method": "SetLastError",
+        "parameter": "dwErrCode"
+      },
+      {
+        "method": "SetLastErrorEx",
+        "parameter": "dwErrCode"
+      },
+      {
         "struct": "NETINFOSTRUCT",
         "field": "dwStatus"
       }
