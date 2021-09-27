@@ -3662,6 +3662,14 @@
       {
         "name": "NO_ERROR",
         "value": 0
+      },
+      {
+        "name": "WAIT_TIMEOUT",
+        "value": "0x00000102"
+      },
+      {
+        "name": "WAIT_FAILED",
+        "value": "0xFFFFFFFF"
       }
     ],
     "uses": [
@@ -6502,29 +6510,6 @@
       {
         "method": "GetWindowLongW",
         "parameter": "nIndex"
-      }
-    ]
-  },
-  {
-    "name": "WAIT_NAMED_PIPE_TIME_OUT_FLAGS",
-    "members": [
-      {
-        "name": "NMPWAIT_USE_DEFAULT_WAIT",
-        "value": "0"
-      },
-      {
-        "name": "NMPWAIT_WAIT_FOREVER",
-        "value": "4294967295"
-      }
-    ],
-    "uses": [
-      {
-        "method": "WaitNamedPipeA",
-        "parameter": "nTimeOut"
-      },
-      {
-        "method": "WaitNamedPipeW",
-        "parameter": "nTimeOut"
       }
     ]
   },

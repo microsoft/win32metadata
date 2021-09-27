@@ -4,6 +4,14 @@ using Windows.Win32.Interop;
 
 namespace Windows.Win32.System.Threading
 {
+    public static unsafe partial class Apis
+    {
+        public const uint WAIT_OBJECT_0 = 0x00000000;
+        public const uint WAIT_ABANDONED = 0x00000080;
+        public const uint WAIT_ABANDONED_0 = 0x00000080;
+        public const uint WAIT_IO_COMPLETION = 0x000000C0;
+    }
+    
     [Flags]
     public enum PROCESS_CREATION_FLAGS : uint
     {
@@ -64,15 +72,5 @@ namespace Windows.Win32.System.Threading
         PROCESS_WRITE_OWNER = (0x00080000),
         PROCESS_SYNCHRONIZE = (0x00100000),
         PROCESS_STANDARD_RIGHTS_REQUIRED = (0x000F0000)
-    }
-
-    public enum WAIT_RETURN_CAUSE : uint
-    {
-        WAIT_OBJECT_0 = 0x00000000,
-        WAIT_ABANDONED = 0x00000080,
-        WAIT_ABANDONED_0 = 0x00000080,
-        WAIT_IO_COMPLETION = 0x000000C0,
-        WAIT_TIMEOUT = 0x00000102,
-        WAIT_FAILED = 0xFFFFFFFF
     }
 }
