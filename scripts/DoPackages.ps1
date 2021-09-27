@@ -15,6 +15,9 @@ ThrowOnNativeProcessError
 
 & "$PSScriptRoot\UpdateGlobalJsonWinmdGeneratorVersion.ps1"
 
+dotnet clean "$PSScriptRoot\..\sources\GeneratorSdk\samples"
+ThrowOnNativeProcessError
+
 dotnet pack "$PSScriptRoot\..\sources\GeneratorSdk\samples\diasdk" -c Release
 ThrowOnNativeProcessError
 

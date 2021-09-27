@@ -1,10 +1,14 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using System;
+using System.Text.RegularExpressions;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace MetadataUtils
 {
     public static class SyntaxUtils
     {
+        private static readonly Regex vtableSlotRegex = new Regex(@"\(IntPtr\)\(lpVtbl\[(\d+)\]\)");
+
         public static bool IsEmptyStruct(StructDeclarationSyntax node)
         {
             bool hasNoImportantAttributes =
@@ -136,6 +140,17 @@ namespace MetadataUtils
         public static string GetFullName(SyntaxNode node)
         {
             return GetFullName(node, false);
+        }
+
+        public static int GetVtableSlotFromMethodBody(MethodDeclarationSyntax method)
+        {
+            var match = vtableSlotRegex.Match(method.Body.ToString());
+            if (match.Success)
+            {
+                return int.Parse(match.Groups[1].Value);
+            }
+
+            throw new InvalidOperationException($"Could not find vtable entry for {method.Parent}.{method.Identifier.ValueText}");
         }
     }
 }

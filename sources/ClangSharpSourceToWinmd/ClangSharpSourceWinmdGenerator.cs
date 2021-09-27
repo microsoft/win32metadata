@@ -1794,7 +1794,9 @@ namespace ClangSharpSourceToWinmd
 
             var inheritedMethodCount = this.GetInheritedMethodCount(node);
 
-            foreach (MethodDeclarationSyntax method in node.Members.Where(m => m is MethodDeclarationSyntax).Skip(inheritedMethodCount))
+            foreach (MethodDeclarationSyntax method in node.Members.Where(m => m is MethodDeclarationSyntax)
+                .OrderBy(m => SyntaxUtils.GetVtableSlotFromMethodBody((MethodDeclarationSyntax)m))
+                .Skip(inheritedMethodCount))
             {
                 var methodSymbol = model.GetDeclaredSymbol(method);
                 var methodName = methodSymbol.Name;

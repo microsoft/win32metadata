@@ -1,0 +1,57 @@
+﻿[
+  {
+    "Name": "ID2D1SvgStrokeDashArray",
+    "Methods": [
+      "HRESULT RemoveDashesAtEnd(UInt32)",
+      "HRESULT UpdateDashes(D2D1_SVG_LENGTH*, UInt32, UInt32)",
+      "HRESULT UpdateDashes(Single*, UInt32, UInt32)",
+      "HRESULT GetDashes(D2D1_SVG_LENGTH*, UInt32, UInt32)",
+      "HRESULT GetDashes(Single*, UInt32, UInt32)",
+      "UInt32 GetDashesCount()"
+    ]
+  },
+  {
+    "Name": "IDCompositionVisual",
+    "Methods": [
+      "HRESULT SetOffsetX(IDCompositionAnimation)",
+      "HRESULT SetOffsetX(Single)",
+      "HRESULT SetOffsetY(IDCompositionAnimation)",
+      "HRESULT SetOffsetY(Single)",
+      "HRESULT SetTransform(IDCompositionTransform)",
+      "HRESULT SetTransform(D2D_MATRIX_3X2_F*)",
+      "HRESULT SetTransformParent(IDCompositionVisual)",
+      "HRESULT SetEffect(IDCompositionEffect)",
+      "HRESULT SetBitmapInterpolationMode(DCOMPOSITION_BITMAP_INTERPOLATION_MODE)",
+      "HRESULT SetBorderMode(DCOMPOSITION_BORDER_MODE)",
+      "HRESULT SetClip(IDCompositionClip)",
+      "HRESULT SetClip(D2D_RECT_F*)",
+      "HRESULT SetContent(IUnknown)",
+      "HRESULT AddVisual(IDCompositionVisual, BOOL, IDCompositionVisual)",
+      "HRESULT RemoveVisual(IDCompositionVisual)",
+      "HRESULT RemoveAllVisuals()",
+      "HRESULT SetCompositeMode(DCOMPOSITION_COMPOSITE_MODE)"
+    ]
+  },
+  {
+    "Name": "IDCompositionGaussianBlurEffect",
+    "Methods": [
+      "HRESULT SetStandardDeviation(IDCompositionAnimation)",
+      "HRESULT SetStandardDeviation(Single)",
+      "HRESULT SetBorderMode(D2D1_BORDER_MODE)"
+    ]
+  },
+  {
+    "Name": "IDWriteFactory3",
+    "Methods": [
+      "HRESULT CreateGlyphRunAnalysis(DWRITE_GLYPH_RUN*, DWRITE_MATRIX*, DWRITE_RENDERING_MODE1, DWRITE_MEASURING_MODE, DWRITE_GRID_FIT_MODE, DWRITE_TEXT_ANTIALIAS_MODE, Single, Single, IDWriteGlyphRunAnalysis*)",
+      "HRESULT CreateCustomRenderingParams(Single, Single, Single, Single, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE1, DWRITE_GRID_FIT_MODE, IDWriteRenderingParams3*)",
+      "HRESULT CreateFontFaceReference(IDWriteFontFile, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFaceReference*)",
+      "HRESULT CreateFontFaceReference(PWSTR, FILETIME*, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFaceReference*)",
+      "HRESULT GetSystemFontSet(IDWriteFontSet*)",
+      "HRESULT CreateFontSetBuilder(IDWriteFontSetBuilder*)",
+      "HRESULT CreateFontCollectionFromFontSet(IDWriteFontSet, IDWriteFontCollection1*)",
+      "HRESULT GetSystemFontCollection(BOOL, IDWriteFontCollection1*, BOOL)",
+      "HRESULT GetFontDownloadQueue(IDWriteFontDownloadQueue*)"
+    ]
+  }
+]
