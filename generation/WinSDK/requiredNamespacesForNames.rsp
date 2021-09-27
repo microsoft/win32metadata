@@ -1030,6 +1030,7 @@ PFE_EXPORT_FUNC=Windows.Win32.Storage.FileSystem
 PFE_IMPORT_FUNC=Windows.Win32.Storage.FileSystem
 PGET_SYSTEM_WOW64_DIRECTORY_A=Windows.Win32.System.SystemInformation
 PGET_SYSTEM_WOW64_DIRECTORY_W=Windows.Win32.System.SystemInformation
+PIPE_UNLIMITED_INSTANCES=Windows.Win32.System.Pipes
 PowerClearRequest=Windows.Win32.System.Power
 PowerCreateRequest=Windows.Win32.System.Power
 PowerSetRequest=Windows.Win32.System.Power
