@@ -23,8 +23,13 @@ namespace Windows.Win32.Tests
             var jsonText = Newtonsoft.Json.JsonConvert.SerializeObject(winmdInterface, formatting: Newtonsoft.Json.Formatting.Indented);
             System.Diagnostics.Debug.WriteLine($"Read {info.Name} from winmd as:\n{jsonText}");
 
-            Assert.Equal(winmdInterface.Name, info.Name);
-            Assert.Equal(winmdInterface.Methods, info.Methods);
+            Assert.Equal(info.Name, winmdInterface.Name);
+            Assert.Equal(info.Methods.Length, winmdInterface.Methods.Length);
+
+            for (int i = 0; i < winmdInterface.Methods.Length; i++)
+            {
+                Assert.Equal(info.Methods[i], winmdInterface.Methods[i]);
+            }
         }
 
         public static IEnumerable<object[]> GetInterfaceData()
