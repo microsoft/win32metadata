@@ -1144,5 +1144,25 @@
     "Name": "BCRYPT_KEY_HANDLE",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "BCryptDestroyKey"
+  },
+  {
+    "Name": "HCS_OPERATION",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "HcsCloseOperation"
+  },
+  {
+    "Name": "HCS_SYSTEM",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "HcsCloseComputeSystem"
+  },
+  {
+    "Name": "HCS_PROCESS",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "HcsCloseProcess"
+  },
+  {
+    "Namespace": "Windows.Win32.System.HostCompute",
+    "Name": "HCS_CALLBACK",
+    "ValueType": "DECLARE_HANDLE"
   }
 ]
