@@ -262,6 +262,10 @@ DXVA_COPPStatusDisplayData=Windows.Win32.Graphics.DirectShow
 DXVA_COPPStatusHDCPKeyData=Windows.Win32.Graphics.DirectShow
 DXVA_COPPStatusSignalingCmdData=Windows.Win32.Graphics.DirectShow
 # endregion dxva9typ.h
+# region errhandlingapi.h
+GetLastError=Windows.Win32.Foundation
+SetLastError=Windows.Win32.Foundation
+# endregion errhandlingapi.h
 # region evcode.h
 AM_WMT_EVENT_DATA=Windows.Win32.Media.WindowsMediaFormat
 # endregion evcode.h
@@ -2305,7 +2309,7 @@ SetDoubleClickTime=Windows.Win32.UI.KeyboardAndMouseInput
 SetFocus=Windows.Win32.UI.KeyboardAndMouseInput
 SetGestureConfig=Windows.Win32.UI.TouchInput
 SetKeyboardState=Windows.Win32.UI.KeyboardAndMouseInput
-SetLastErrorEx=Windows.Win32.System.Diagnostics.Debug
+SetLastErrorEx=Windows.Win32.Foundation
 SetMenuContextHelpId=Windows.Win32.UI.Shell
 SetProcessDpiAwarenessContext=Windows.Win32.UI.HiDpi
 SetProcessRestrictionExemption=Windows.Win32.System.Threading
