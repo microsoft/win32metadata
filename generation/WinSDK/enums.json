@@ -3662,6 +3662,14 @@
       {
         "name": "NO_ERROR",
         "value": 0
+      },
+      {
+        "name": "WAIT_TIMEOUT",
+        "value": "0x00000102"
+      },
+      {
+        "name": "WAIT_FAILED",
+        "value": "0xFFFFFFFF"
       }
     ],
     "uses": [

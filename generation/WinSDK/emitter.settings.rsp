@@ -379,10 +379,6 @@ RegOpenKeyTransactedW::dwOptions=REG_OPEN_CREATE_OPTIONS
 RegOpenKeyTransactedW::samDesired=REG_SAM_FLAGS
 VALENTA::ve_type=REG_VALUE_TYPE
 VALENTW::ve_type=REG_VALUE_TYPE
-WaitForMultipleObjects::return=WAIT_RETURN_CAUSE
-WaitForMultipleObjectsEx::return=WAIT_RETURN_CAUSE
-WaitForSingleObject::return=WAIT_RETURN_CAUSE
-WaitForSingleObjectEx::return=WAIT_RETURN_CAUSE
 PARAFORMAT::rgxTabs=uint
 EXCEPINFO::pfnDeferredFillIn=LPEXCEPFINO_DEFERRED_FILLIN
 PRTM_ENTITY_EXPORT_METHOD,RTM_ENTITY_EXPORT_METHOD*
