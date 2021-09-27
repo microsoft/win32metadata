@@ -49,10 +49,6 @@ jobs:
     displayName: Publish x64 generated assets
     artifact: 'generated_x64'
 
-#  - publish: 'generation\emitter\generated\x64'
-#    displayName: Publish x64 emitter assets
-#    artifact: 'emitter_generated_x64'
-
 - job: scrape_x86
   displayName: "Scrape headers: x86"
   pool:

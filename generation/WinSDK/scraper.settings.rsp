@@ -55,6 +55,7 @@ SOCKADDR_STORAGE
 PEXCEPTION_ROUTINE
 FNCALLBACK
 _OLD_LARGE_INTEGER
+IVssCreateWriterMetadataEx
 --remap
 ABI::Windows::Foundation::IActivatableClassRegistration=IActivatableClassRegistration
 adpcmcoef_tag=ADPCMCOEFSET

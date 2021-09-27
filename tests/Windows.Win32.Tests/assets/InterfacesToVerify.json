@@ -1,0 +1,13 @@
+﻿[
+  {
+    "Name": "ID2D1SvgStrokeDashArray",
+    "Methods": [
+      "HRESULT RemoveDashesAtEnd(UInt32)",
+      "HRESULT UpdateDashes(D2D1_SVG_LENGTH*, UInt32, UInt32)",
+      "HRESULT UpdateDashes(Single*, UInt32, UInt32)",
+      "HRESULT GetDashes(D2D1_SVG_LENGTH*, UInt32, UInt32)",
+      "HRESULT GetDashes(Single*, UInt32, UInt32)",
+      "UInt32 GetDashesCount()"
+    ]
+  }
+]
