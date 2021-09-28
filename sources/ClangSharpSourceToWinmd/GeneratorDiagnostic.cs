@@ -10,6 +10,8 @@ namespace ClangSharpSourceToWinmd
             this.Severity = severity;
         }
 
+        public override string ToString() => $"{this.Severity}: {this.Message}";
+
         public string Message { get; }
 
         public DiagnosticSeverity Severity { get; }
