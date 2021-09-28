@@ -11,6 +11,7 @@ variables:
 jobs:
 - job: scrape_x64
   displayName: "Scrape headers: x64"
+  timeoutInMinutes: 60
   pool:
     vmImage: windows-2019
   workspace:
@@ -51,6 +52,7 @@ jobs:
 
 - job: scrape_x86
   displayName: "Scrape headers: x86"
+  timeoutInMinutes: 60
   pool:
     vmImage: windows-2019
   workspace:
@@ -78,6 +80,7 @@ jobs:
 
 - job: scrape_arm64
   displayName: "Scrape headers: arm64"
+  timeoutInMinutes: 60
   pool:
     vmImage: windows-2019
   workspace:
