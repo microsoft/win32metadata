@@ -8,6 +8,7 @@
 <IncludeRoot>/um
 <IncludeRoot>/winrt
 --traverse
+<IncludeRoot>/shared/sdkddkver.h
 <IncludeRoot>/um/sysinfoapi.h
 <IncludeRoot>/um/VersionHelpers.h
 --namespace
