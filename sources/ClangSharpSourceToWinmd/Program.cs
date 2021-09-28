@@ -85,7 +85,17 @@ namespace ClangSharpSourceToWinmd
                 }
             }
 
-            NativeTypedefStructsCreator.CreateNativeTypedefsSourceFile(methodNamesToNamespaces, autoTypeFiles, Path.Combine(archSourceDir, "autotypes.cs"));
+            try
+            {
+                NativeTypedefStructsCreator.CreateNativeTypedefsSourceFile(methodNamesToNamespaces, autoTypeFiles, Path.Combine(archSourceDir, "autotypes.cs"));
+            }
+            catch (Exception e)
+            {
+                var error = new GeneratorDiagnostic($"Failed to create source for auto types: {e.Message}", Microsoft.CodeAnalysis.DiagnosticSeverity.Error);
+                Console.WriteLine(error.ToString());
+
+                return -1;
+            }
 
             Console.WriteLine($"Preparing and compiling source files...");
             System.Diagnostics.Stopwatch mainWatch = System.Diagnostics.Stopwatch.StartNew();
@@ -141,7 +151,7 @@ namespace ClangSharpSourceToWinmd
 
             foreach (GeneratorDiagnostic diag in generator.GetDiagnostics())
             {
-                Console.WriteLine($"{diag.Severity}: {diag.Message}");
+                Console.WriteLine(diag.ToString());
             }
 
             Console.WriteLine($"{mainWatch.Elapsed:c}");

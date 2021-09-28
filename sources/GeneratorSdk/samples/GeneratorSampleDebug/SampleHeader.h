@@ -62,3 +62,14 @@ DECLSPEC_IMPORT void WINAPI CloseSampleHandle(_In_ SAMPLE_HANDLE handle);
 
 DECLSPEC_IMPORT void WINAPI SampleCallMe1(_In_ LPSAMPLECALLBACK callback);
 DECLSPEC_IMPORT void WINAPI SampleCallMe2(_In_ LPALREADYPTR_SAMPLECALLBACK callback);
+
+interface IOverloads : public IUnknown
+{
+    virtual HRESULT A(int a);
+    virtual HRESULT B(int b);
+    virtual HRESULT C(int c);
+    virtual HRESULT C(int a, int c);
+    virtual HRESULT B(int a, int b);
+    virtual HRESULT B(int a, int b, int c);
+    virtual HRESULT A(int a, int b, int c);
+};

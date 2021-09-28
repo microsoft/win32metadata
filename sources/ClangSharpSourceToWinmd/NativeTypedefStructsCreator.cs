@@ -61,6 +61,11 @@ using Windows.Win32.Interop;
                         }
                     }
 
+                    if (string.IsNullOrEmpty(item.Namespace))
+                    {
+                        throw new System.InvalidOperationException($"Autotype {item.Name} needs a namespace to be specified.");
+                    }
+
                     if (item.Namespace != currentNamespace)
                     {
                         if (currentNamespace != null)
