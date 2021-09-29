@@ -96,7 +96,7 @@ APPCATEGORYINFOLIST=Windows.Win32.UI.Shell
 # endregion appmgmt.h
 ````
 
-Sometimes a header may contain types that you want in different namespaces. ClangSharp will put all types or APIs from a given header into a single namespace, but this option lets you move them to a different namespace. In the main project, these are kept in [generation/emitter/requiredNamespacesForNames.rsp](../generation/emitter/requiredNamespacesForNames.rsp).
+Sometimes a header may contain types that you want in different namespaces. ClangSharp will put all types or APIs from a given header into a single namespace, but this option lets you move them to a different namespace. In the main project, these are kept in [generation/WinSDK/requiredNamespacesForNames.rsp](../generation/WinSDK/requiredNamespacesForNames.rsp).
 
 (The regions are for organizational purposes only. The parser ignores them.)
 

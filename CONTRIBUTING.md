@@ -20,8 +20,6 @@ You can contribute to this project by contributing to:
 
 If you intend to contribute code changes, learn how to [set up your development environment](#Set-up-your-development-environment).
 
-[Learn more](docs/generationOptions) about the options and inputs available for turning headers into Win32 metadata.
-
 When contributing code changes, [validate](#Validating-changes) your changes by rebuilding the winmd and then inspecting the reported winmd diff to ensure all changes were intentional:
 
 * [Full builds](#Full-builds)
@@ -61,7 +59,7 @@ Partitions are defined as [folders](generation/WinSDK/Partitions) with [main.cpp
 * [main.cpp](generation/WinSDK/Partitions/Registry/main.cpp) contains `#include` statements like you would use to call the APIs directly. This typically includes the header files to be associated with the partition as well as any other dependent headers, included in the proper order.
 * [settings.rsp](generation/WinSDK/Partitions/Registry/settings.rsp) associates a list of header files to a namespace. Reference existing [partitions](generation/WinSDK/Partitions) to understand the template for this file. The important sections are `--traverse`, which lists the header files to include, and `--namespace` which lists the namespace to associate with the content of those header files. Note that headers should be listed alphabetically by convention, and the casing needs to match the casing of the filenames.
 
-You can test localized changes to a partition by running `./scripts/GenerateMetadataSourceForPartition.ps1 <PARTITION>` from the repo root. If it compiles, the changes are likely correct. A common reason for failure is main.cpp either doesn't include all the necessary dependent headers needed to use the target headers or doesn't include them in the proper order.
+You can test localized changes to partitions by running `./scripts/ScrapeHeaders.ps1` from the repo root. If it compiles, the changes are likely correct. A common reason for failure is main.cpp either doesn't include all the necessary dependent headers needed to use the target headers or doesn't include them in the proper order.
 
 ### Split a header file among multiple namespaces
 
@@ -87,12 +85,15 @@ Enums are defined in [enums.json](generation/WinSDK/enums.json). This file provi
   * Note: If omitted, the default value is `uint`
 * `name` -  The name of the enum
 * `flags` - Whether this is a flags enum
-* `autoPopulate` - For automatically defined enums, rules for how to populate them
+* `autoPopulate` - For automatically defined members, rules for how to populate them
   * `header` - The header to scan
   * `filter` - The constant or macro prefix to search for in `header`
-* `members` - For manually defined enums, a list of members
+  * Note: `filter` can be a regular expression to match more than a simple prefix (e.g. `ERROR_|DNS_ERROR_`)
+* `members` - For manually defined members, a list of members
   * `name` - The name of the enum member
   * `value` - The value of the enum member
+  * Note: If you omit `value`, it will be autopopulated if detected by the [ConstantsScraper](#Constants)
+  * Note: You can use `members` and `autoPopulate` in the same enum
 * `uses` - A list of APIs where this enum is used
   * `interface` - The COM interface name
   * `method` - The method name
@@ -171,13 +172,13 @@ Language projections can use the context provided by attributes to improve the d
 
 ### Full builds
 
-The simplest but slowest way to validate changes is to perform a full build with `./DoAll.ps1` and then inspect the reported winmd diff to ensure all changes were intentional. A full build can take 25-30 minutes. Add `-Clean` to perform a clean build.
+Run `./DoAll.ps1 -Clean` to run a full build, then inspect the reported winmd diff to ensure all changes were intentional. A full build can take 25-30 minutes.
 
 If you encounter errors processing .zip or .winmd files, make sure that Git LFS is installed and configured properly per [set up your development environment](#Set-up-your-development-environment).
 
 ### Incremental builds
 
-The build system supports incremental builds. If you're just working on a partition, you can change partition files and try just scraping the headers by running `./scripts/ScrapeHeaders.ps1`. If you want to build everything includig the .winmd, run `./DoAll.ps1`.
+Run `./DoAll.ps1` to run an incremental build, then inspect the reported winmd diff to ensure all changes were intentional. `./DoAll.ps1` without `-Clean` will recognize what files have changed and build only the necessary components required for those changes.
 
 Note that stale artifacts on your system may sometimes result in cryptic errors when attempting incremental builds. If you do encounter cryptic errors during incremental builds that you suspect are the result of previously built changes, reset your system state by running a clean build with `./DoAll.ps1 -Clean`.
 
