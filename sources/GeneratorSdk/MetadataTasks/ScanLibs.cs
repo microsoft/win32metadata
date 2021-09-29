@@ -32,7 +32,7 @@ namespace MetadataTasks
             string[] libFiles = this.GetLibs();
             string dumpBinPath = Path.Combine(this.LibToolsBinDir, "dumpbin.exe");
             var libLines = new StringBuilder();
-            var libRegex = new Regex(@"DLL name     : (\S+)\s+Symbol name  : (\S+)");
+            var libRegex = new Regex(@"DLL name     : (\S+)(?:\r|\n.*){6,}?\s+Name         : (\S+)");
             var functionNames = new HashSet<string>(System.StringComparer.OrdinalIgnoreCase);
             foreach (var lib in libFiles)
             {
