@@ -72,6 +72,49 @@ namespace ClangSharpSourceToWinmd
             }
         }
 
+        private static Windows.Win32.Interop.Architecture GetArchitectureForFileName(string fileName)
+        {
+            string potentialArch = Path.GetFileName(Path.GetDirectoryName(fileName));
+
+            switch (potentialArch)
+            {
+                case "x64":
+                    return Windows.Win32.Interop.Architecture.X64;
+
+                case "x86":
+                    return Windows.Win32.Interop.Architecture.X86;
+
+                case "arm64":
+                    return Windows.Win32.Interop.Architecture.Arm64;
+
+                default:
+                    return Windows.Win32.Interop.Architecture.None;
+            }
+        }
+
+        private static CrossArchSyntaxMap LoadCrossArchMapFromFiles(IEnumerable<string> files, System.Threading.Tasks.ParallelOptions parallelOptions)
+        {
+            CrossArchSyntaxMap crossArchSyntaxMap = new CrossArchSyntaxMap();
+
+            var nonx86Files = files.Where(f => GetArchitectureForFileName(f) == Windows.Win32.Interop.Architecture.X64 || GetArchitectureForFileName(f) == Windows.Win32.Interop.Architecture.Arm64);
+            var x86Files = files.Where(f => GetArchitectureForFileName(f) == Windows.Win32.Interop.Architecture.X86);
+
+            // Add non-x86 first so that x86 has a chance to see if it can merge structs not marked
+            // with 4-byte packing with 64-bit versions that are marked. The default packing is 4
+            // for x86 so we can merge these types of structs
+            System.Threading.Tasks.Parallel.ForEach(FilesToTrees(nonx86Files), parallelOptions, (tree) =>
+            {
+                crossArchSyntaxMap.AddTree(tree);
+            });
+
+            System.Threading.Tasks.Parallel.ForEach(FilesToTrees(x86Files), parallelOptions, (tree) =>
+            {
+                crossArchSyntaxMap.AddTree(tree);
+            });
+
+            return crossArchSyntaxMap;
+        }
+
         public static ClangSharpSourceCompilation Create(
             string sourceDirectory,
             string arch,
@@ -143,8 +186,6 @@ namespace ClangSharpSourceToWinmd
 
             System.Diagnostics.Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
 
-            CrossArchSyntaxMap crossArchSyntaxMap = new CrossArchSyntaxMap();
-
             Console.Write($"  Moving names to correct namespaces...");
             System.Threading.Tasks.Parallel.ForEach(modifiedFiles, opt, (treeFile) =>
             {
@@ -172,7 +213,6 @@ namespace ClangSharpSourceToWinmd
             System.Threading.Tasks.Parallel.ForEach(FilesToTrees(modifiedFiles), opt, (tree) =>
             {
                 var cleanedTree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, remaps, enumAdditions, enumsMakeFlagsHashSet, requiredNamespaces, staticLibs, infoFinder.EmptyStructs, infoFinder.EnumMemberNames, tree.FilePath);
-                crossArchSyntaxMap.AddTree(cleanedTree);
                 WriteTree(cleanedTree, cleanedTree.FilePath);
             });
 
@@ -184,8 +224,10 @@ namespace ClangSharpSourceToWinmd
                 Console.Write($"  Merging cross-arch items...");
                 watch.Restart();
 
+                CrossArchSyntaxMap crossArchSyntaxMap = LoadCrossArchMapFromFiles(modifiedFiles, opt);
+
                 CrossArchTreeMerger crossArchTreeMerger = new CrossArchTreeMerger(crossArchSyntaxMap);
-                System.Threading.Tasks.Parallel.ForEach(FilesToTrees(modifiedFiles), opt, (tree) =>
+                System.Threading.Tasks.Parallel.ForEach(FilesToTrees(modifiedFiles.Where(f => GetArchitectureForFileName(f) != Windows.Win32.Interop.Architecture.None)), opt, (tree) =>
                 {
                     var fixedTree = crossArchTreeMerger.ProcessTree(tree);
 

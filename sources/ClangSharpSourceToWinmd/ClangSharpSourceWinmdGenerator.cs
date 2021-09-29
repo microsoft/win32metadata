@@ -108,7 +108,7 @@ namespace ClangSharpSourceToWinmd
             void InitAssembly(Version version, string assemblyName)
             {
                 this.metadataBuilder.AddAssembly(
-                    metadataBuilder.GetOrAddString(assemblyName),
+                    this.metadataBuilder.GetOrAddString(assemblyName),
                     version,
                     default,
                     default,
@@ -121,15 +121,15 @@ namespace ClangSharpSourceToWinmd
                 this.moduleRef =
                     this.metadataBuilder.AddModule(
                         0,
-                        metadataBuilder.GetOrAddString(assemblyName),
-                        metadataBuilder.GetOrAddGuid(Guid.NewGuid()),
+                        this.metadataBuilder.GetOrAddString(assemblyName),
+                        this.metadataBuilder.GetOrAddGuid(Guid.NewGuid()),
                         default,
                         default);
 
                 this.metadataBuilder.AddTypeDefinition(
                     default,
                     default,
-                    metadataBuilder.GetOrAddString("<Module>"),
+                    this.metadataBuilder.GetOrAddString("<Module>"),
                     baseType: default(EntityHandle),
                     fieldList: MetadataTokens.FieldDefinitionHandle(1),
                     methodList: MetadataTokens.MethodDefinitionHandle(1));
@@ -141,7 +141,7 @@ namespace ClangSharpSourceToWinmd
                 Version systemVersion = new Version(2, 1, 0, 0);
                 var netstandardAssembly = this.compilation.ReferencedAssemblyNames.ToList().Find(a => a.Name == SystemAssemblyName);
                 var systemAssemblyRef =
-                    metadataBuilder.AddAssemblyReference(
+                    this.metadataBuilder.AddAssemblyReference(
                         this.metadataBuilder.GetOrAddString(netstandardAssembly.Name),
                         netstandardAssembly.Version,
                         default,
@@ -152,7 +152,7 @@ namespace ClangSharpSourceToWinmd
 
                 var interopAssembly = this.compilation.ReferencedAssemblyNames.ToList().Find(a => a.Name == Win32InteropAssemblyName);
                 var interopAssemblyRef =
-                    metadataBuilder.AddAssemblyReference(
+                    this.metadataBuilder.AddAssemblyReference(
                         this.metadataBuilder.GetOrAddString(InteropNamespace),
                         interopAssembly.Version,
                         default,
@@ -165,7 +165,7 @@ namespace ClangSharpSourceToWinmd
                 if (win32Assembly != null)
                 {
                     var win32MetadataAssemblyRef =
-                        metadataBuilder.AddAssemblyReference(
+                        this.metadataBuilder.AddAssemblyReference(
                             this.metadataBuilder.GetOrAddString(win32Assembly.Name),
                             win32Assembly.Version,
                             default,
@@ -446,7 +446,7 @@ namespace ClangSharpSourceToWinmd
             // Change from namepace.parent.self => parent/self
             string name = symbol.ToString().Substring(symbol.ContainingNamespace.ToString().Length + 1).Replace('.', '/');
 
-            return GetTypeReference(symbol.ContainingNamespace.ToString(), name, scopeRef);
+            return this.GetTypeReference(symbol.ContainingNamespace.ToString(), name, scopeRef);
         }
 
         private EntityHandle GetTypeReference(string @namespace, string name)
@@ -482,7 +482,7 @@ namespace ClangSharpSourceToWinmd
                 {
                     string parent = name.Substring(0, lastPlus);
                     name = name.Substring(lastPlus + 1);
-                    scopeRef = GetTypeReference(@namespace, parent);
+                    scopeRef = this.GetTypeReference(@namespace, parent);
 
                     // No longer using the namespace name when a dervied ref
                     @namespace = null;
@@ -504,7 +504,7 @@ namespace ClangSharpSourceToWinmd
             if (!this.treeToModels.TryGetValue(node.SyntaxTree, out SemanticModel model))
             {
                 model = this.compilation.GetSemanticModel(node.SyntaxTree, true);
-                treeToModels[node.SyntaxTree] = model;
+                this.treeToModels[node.SyntaxTree] = model;
             }
 
             return model;
@@ -533,7 +533,7 @@ namespace ClangSharpSourceToWinmd
             encoder.FieldSignature().EncodeSpecialType(symbol.EnumUnderlyingType.SpecialType);
 
             var valueFieldDef =
-                metadataBuilder.AddFieldDefinition(
+                this.metadataBuilder.AddFieldDefinition(
                     valueFieldAttrs,
                     this.metadataBuilder.GetOrAddString("value__"),
                     this.metadataBuilder.GetOrAddBlob(fieldSignature));
@@ -543,13 +543,13 @@ namespace ClangSharpSourceToWinmd
             // Write type def
             TypeAttributes typeAttributes = TypeAttributes.Public | TypeAttributes.AnsiClass | TypeAttributes.Sealed | TypeAttributes.AutoLayout;
             var destTypeDefHandle =
-                metadataBuilder.AddTypeDefinition(
+                this.metadataBuilder.AddTypeDefinition(
                     typeAttributes,
-                    metadataBuilder.GetOrAddString(symbol.ContainingNamespace.ToString()),
-                    metadataBuilder.GetOrAddString(node.Identifier.ValueText),
+                    this.metadataBuilder.GetOrAddString(symbol.ContainingNamespace.ToString()),
+                    this.metadataBuilder.GetOrAddString(node.Identifier.ValueText),
                     this.GetTypeReference("System", "Enum"),
                     fieldList: valueFieldDef,
-                    methodList: MetadataTokens.MethodDefinitionHandle(metadataBuilder.GetRowCount(TableIndex.MethodDef) + 1));
+                    methodList: MetadataTokens.MethodDefinitionHandle(this.metadataBuilder.GetRowCount(TableIndex.MethodDef) + 1));
 
             this.AddCustomAttributes(node, destTypeDefHandle);
 
@@ -577,24 +577,24 @@ namespace ClangSharpSourceToWinmd
         {
             var model = this.GetModel(node);
             var symbol = model.GetDeclaredSymbol(node);
-            var nsHandle = metadataBuilder.GetOrAddString(symbol.ContainingNamespace.ToString());
+            var nsHandle = this.metadataBuilder.GetOrAddString(symbol.ContainingNamespace.ToString());
             var name = node.Identifier.ValueText;
             string fullName = symbol.ConstructedFrom.ToString();
 
             MethodDefinitionHandle firstMethod = this.WriteInterfaceMethods(node);
             if (firstMethod.IsNil)
             {
-                firstMethod = MetadataTokens.MethodDefinitionHandle(metadataBuilder.GetRowCount(TableIndex.MethodDef) + 1);
+                firstMethod = MetadataTokens.MethodDefinitionHandle(this.metadataBuilder.GetRowCount(TableIndex.MethodDef) + 1);
             }
 
             TypeAttributes typeAttributes = TypeAttributes.Interface | TypeAttributes.Public | TypeAttributes.AnsiClass | TypeAttributes.Abstract;
             var destTypeDefHandle =
-                metadataBuilder.AddTypeDefinition(
+                this.metadataBuilder.AddTypeDefinition(
                     typeAttributes,
                     nsHandle,
-                    metadataBuilder.GetOrAddString(name),
+                    this.metadataBuilder.GetOrAddString(name),
                     default,
-                    fieldList: MetadataTokens.FieldDefinitionHandle(metadataBuilder.GetRowCount(TableIndex.Field) + 1),
+                    fieldList: MetadataTokens.FieldDefinitionHandle(this.metadataBuilder.GetRowCount(TableIndex.Field) + 1),
                     methodList: firstMethod);
 
             this.namesToTypeDefHandles[fullName] = destTypeDefHandle;
@@ -605,7 +605,7 @@ namespace ClangSharpSourceToWinmd
             if (inheritsFromSymbol != null)
             {
                 var inheritsFromTypeDef = this.GetTypeReference(inheritsFromSymbol);
-                metadataBuilder.AddInterfaceImplementation(destTypeDefHandle, inheritsFromTypeDef);
+                this.metadataBuilder.AddInterfaceImplementation(destTypeDefHandle, inheritsFromTypeDef);
             }
 
             // If this interface node doesn't have a Guid attribute, see if we can 
@@ -710,22 +710,22 @@ namespace ClangSharpSourceToWinmd
             var firstField = this.WriteStructFields(node);
             if (firstField.IsNil)
             {
-                firstField = MetadataTokens.FieldDefinitionHandle(metadataBuilder.GetRowCount(TableIndex.Field) + 1);
+                firstField = MetadataTokens.FieldDefinitionHandle(this.metadataBuilder.GetRowCount(TableIndex.Field) + 1);
             }
 
-            var nsHandle = enclosingType == default ? metadataBuilder.GetOrAddString(symbol.ContainingNamespace.ToString()) : default;
+            var nsHandle = enclosingType == default ? this.metadataBuilder.GetOrAddString(symbol.ContainingNamespace.ToString()) : default;
             var name = this.GetShortNameForSymbol(symbol);
 
             name = FixArchSpecificName(name);
 
             var destTypeDefHandle =
-                metadataBuilder.AddTypeDefinition(
+                this.metadataBuilder.AddTypeDefinition(
                     typeAttributes,
                     nsHandle,
-                    metadataBuilder.GetOrAddString(name),
+                    this.metadataBuilder.GetOrAddString(name),
                     this.GetTypeReference("System", "ValueType"),
                     fieldList: firstField,
-                    methodList: MetadataTokens.MethodDefinitionHandle(metadataBuilder.GetRowCount(TableIndex.MethodDef) + 1));
+                    methodList: MetadataTokens.MethodDefinitionHandle(this.metadataBuilder.GetRowCount(TableIndex.MethodDef) + 1));
 
             this.namesToTypeDefHandles[fullName] = destTypeDefHandle;
 
@@ -757,7 +757,7 @@ namespace ClangSharpSourceToWinmd
                 return;
             }
 
-            EncodeTypeSymbol(returnType, returnTypeEncoder.Type());
+            this.EncodeTypeSymbol(returnType, returnTypeEncoder.Type());
         }
 
         private void EncodeParameters(IEnumerable<Parameter> parameters, ParametersEncoder parametersEncoder)
@@ -765,7 +765,7 @@ namespace ClangSharpSourceToWinmd
             foreach (var parameter in parameters)
             {
                 var parameterTypeEncoder = parametersEncoder.AddParameter();
-                EncodeTypeSymbol(parameter.Type, parameterTypeEncoder.Type());
+                this.EncodeTypeSymbol(parameter.Type, parameterTypeEncoder.Type());
             }
         }
 
@@ -993,17 +993,17 @@ namespace ClangSharpSourceToWinmd
                     instanceMethod)
                 .Parameters(
                     parameters.Count(),
-                    returnTypeEncoder => EncodeReturnType(returnType, returnTypeEncoder),
-                    parametersEncoder => EncodeParameters(parameters, parametersEncoder)
+                    returnTypeEncoder => this.EncodeReturnType(returnType, returnTypeEncoder),
+                    parametersEncoder => this.EncodeParameters(parameters, parametersEncoder)
                 );
             var newMethod =
                 this.metadataBuilder.AddMethodDefinition(
                     methodAttrs,
                     methodImplAttributes,
-                    metadataBuilder.GetOrAddString(methodName),
-                    metadataBuilder.GetOrAddBlob(methodSignature),
+                    this.metadataBuilder.GetOrAddString(methodName),
+                    this.metadataBuilder.GetOrAddBlob(methodSignature),
                     -1,
-                    MetadataTokens.ParameterHandle(metadataBuilder.GetRowCount(TableIndex.Param) + 1));
+                    MetadataTokens.ParameterHandle(this.metadataBuilder.GetRowCount(TableIndex.Param) + 1));
 
             if (methodSymbol != null)
             {
@@ -1112,13 +1112,13 @@ namespace ClangSharpSourceToWinmd
                 var fieldSignature = this.EncodeFieldSignature(className, model, field, out _);
 
                 var fieldDefinitionHandle =
-                    metadataBuilder.AddFieldDefinition(
+                    this.metadataBuilder.AddFieldDefinition(
                         fieldAttributes,
-                        metadataBuilder.GetOrAddString(name),
-                        metadataBuilder.GetOrAddBlob(fieldSignature));
+                        this.metadataBuilder.GetOrAddString(name),
+                        this.metadataBuilder.GetOrAddBlob(fieldSignature));
                 if (fieldSymbol.HasConstantValue)
                 {
-                    metadataBuilder.AddConstant(fieldDefinitionHandle, fieldSymbol.ConstantValue);
+                    this.metadataBuilder.AddConstant(fieldDefinitionHandle, fieldSymbol.ConstantValue);
                 }
 
                 if (firstField.IsNil)
@@ -1232,7 +1232,7 @@ namespace ClangSharpSourceToWinmd
 
             var model = this.GetModel(node);
             var symbol = model.GetDeclaredSymbol(node);
-            var nsHandle = metadataBuilder.GetOrAddString(symbol.ContainingNamespace.ToString());
+            var nsHandle = this.metadataBuilder.GetOrAddString(symbol.ContainingNamespace.ToString());
             var name = node.Identifier.ValueText;
             string fullName = symbol.ConstructedFrom.ToString();
 
@@ -1240,19 +1240,19 @@ namespace ClangSharpSourceToWinmd
 
             if (methodDefinition.IsNil)
             {
-                methodDefinition = MetadataTokens.MethodDefinitionHandle(metadataBuilder.GetRowCount(TableIndex.MethodDef) + 1);
+                methodDefinition = MetadataTokens.MethodDefinitionHandle(this.metadataBuilder.GetRowCount(TableIndex.MethodDef) + 1);
             }
 
             if (fieldDefinition.IsNil)
             {
-                fieldDefinition = MetadataTokens.FieldDefinitionHandle(metadataBuilder.GetRowCount(TableIndex.Field) + 1);
+                fieldDefinition = MetadataTokens.FieldDefinitionHandle(this.metadataBuilder.GetRowCount(TableIndex.Field) + 1);
             }
 
             var destTypeDefHandle =
-                metadataBuilder.AddTypeDefinition(
+                this.metadataBuilder.AddTypeDefinition(
                     typeAttributes,
                     nsHandle,
-                    metadataBuilder.GetOrAddString(name),
+                    this.metadataBuilder.GetOrAddString(name),
                     this.GetTypeReference("System", "Object"),
                     fieldList: fieldDefinition,
                     methodList: methodDefinition);
@@ -1315,7 +1315,7 @@ namespace ClangSharpSourceToWinmd
                 return;
             }
 
-            var nsHandle = metadataBuilder.GetOrAddString(symbol.ContainingNamespace.ToString());
+            var nsHandle = this.metadataBuilder.GetOrAddString(symbol.ContainingNamespace.ToString());
             var name = node.Identifier.ValueText;
 
             name = FixArchSpecificName(name);
@@ -1325,16 +1325,16 @@ namespace ClangSharpSourceToWinmd
             MethodDefinitionHandle firstMethod = this.WriteDelegateMethods(node);
             if (firstMethod.IsNil)
             {
-                firstMethod = MetadataTokens.MethodDefinitionHandle(metadataBuilder.GetRowCount(TableIndex.MethodDef) + 1);
+                firstMethod = MetadataTokens.MethodDefinitionHandle(this.metadataBuilder.GetRowCount(TableIndex.MethodDef) + 1);
             }
 
             var delegateDefHandle =
-                metadataBuilder.AddTypeDefinition(
+                this.metadataBuilder.AddTypeDefinition(
                     delegateTypeAttributes,
                     nsHandle,
-                    metadataBuilder.GetOrAddString(name),
+                    this.metadataBuilder.GetOrAddString(name),
                     this.GetTypeReference("System", "MulticastDelegate"),
-                    fieldList: MetadataTokens.FieldDefinitionHandle(metadataBuilder.GetRowCount(TableIndex.Field) + 1),
+                    fieldList: MetadataTokens.FieldDefinitionHandle(this.metadataBuilder.GetRowCount(TableIndex.Field) + 1),
                     methodList: firstMethod);
             this.AddCustomAttributes(node, delegateDefHandle);
 
@@ -1428,7 +1428,7 @@ namespace ClangSharpSourceToWinmd
                     BlobHandle publicKeyTokenBlobHandle = publicKeyToken == "null" ? default : this.metadataBuilder.GetOrAddBlob(ConvertKeyToByteArray(publicKeyToken));
 
                     assemblyRef =
-                        metadataBuilder.AddAssemblyReference(
+                        this.metadataBuilder.AddAssemblyReference(
                             this.metadataBuilder.GetOrAddString(assemblyName),
                             assemblyVersion,
                             default,
@@ -1497,19 +1497,19 @@ namespace ClangSharpSourceToWinmd
                 {
                     if (this.NeedsPointerReduction(pointer.PointedAtType))
                     {
-                        EncodeTypeSymbol(pointer.PointedAtType, typeEncoder);
+                        this.EncodeTypeSymbol(pointer.PointedAtType, typeEncoder);
                     }
                     else
                     {
                         typeEncoder.Pointer();
-                        EncodeTypeSymbol(pointer.PointedAtType, typeEncoder);
+                        this.EncodeTypeSymbol(pointer.PointedAtType, typeEncoder);
                     }
 
                     return;
                 }
 
                 bool isTypeInterface = this.IsSymbolInterface(typeSymbol);
-                EntityHandle refHandle = GetTypeRefOrDef(typeSymbol);
+                EntityHandle refHandle = this.GetTypeRefOrDef(typeSymbol);
 
                 if (refHandle != default)
                 {
@@ -1537,7 +1537,7 @@ namespace ClangSharpSourceToWinmd
                 var encoder = new BlobEncoder(fieldSignature);
                 var signatureEncoder = encoder.FieldSignature();
 
-                EncodeTypeSymbol(type, signatureEncoder);
+                this.EncodeTypeSymbol(type, signatureEncoder);
 
                 var memberName = member.Identifier.Text;
                 if (string.IsNullOrEmpty(memberName))
@@ -1545,14 +1545,14 @@ namespace ClangSharpSourceToWinmd
                     throw new InvalidOperationException($"Enum {node.Identifier.Text} has a member with no name.");
                 }
 
-                var fieldDefinitionHandle = metadataBuilder.AddFieldDefinition(
+                var fieldDefinitionHandle = this.metadataBuilder.AddFieldDefinition(
                     enumFieldAttributes,
-                    metadataBuilder.GetOrAddString(memberName),
-                    metadataBuilder.GetOrAddBlob(fieldSignature));
+                    this.metadataBuilder.GetOrAddString(memberName),
+                    this.metadataBuilder.GetOrAddBlob(fieldSignature));
 
                 if (symbol.HasConstantValue)
                 {
-                    metadataBuilder.AddConstant(fieldDefinitionHandle, symbol.ConstantValue);
+                    this.metadataBuilder.AddConstant(fieldDefinitionHandle, symbol.ConstantValue);
                 }
             }
         }
@@ -1560,7 +1560,7 @@ namespace ClangSharpSourceToWinmd
         private EntityHandle GetCtorRef(string typeName, string[] argTypes)
         {
             string ctorKey = typeName + "::" + string.Join(',', argTypes);
-            if (!ctorNamesToRefs.TryGetValue(ctorKey, out var ctorRef))
+            if (!this.ctorNamesToRefs.TryGetValue(ctorKey, out var ctorRef))
             {
                 var interfaceTypeAttr = this.GetTypeByMetadataName(typeName);
                 List<ITypeSymbol> typeSymbols = new List<ITypeSymbol>();
@@ -1584,7 +1584,7 @@ namespace ClangSharpSourceToWinmd
 
                 var typeRef = this.GetTypeReference(@namespace, name);
 
-                ctorRef = CreateAndCacheCtorRefForTypeRef(typeRef, parameters, ctorKey);
+                ctorRef = this.CreateAndCacheCtorRefForTypeRef(typeRef, parameters, ctorKey);
             }
 
             return ctorRef;
@@ -1600,8 +1600,8 @@ namespace ClangSharpSourceToWinmd
                     true)
                 .Parameters(
                     parameters.Count(),
-                    returnTypeEncoder => EncodeReturnType(null, returnTypeEncoder),
-                    parametersEncoder => EncodeParameters(parameters, parametersEncoder)
+                    returnTypeEncoder => this.EncodeReturnType(null, returnTypeEncoder),
+                    parametersEncoder => this.EncodeParameters(parameters, parametersEncoder)
                 );
             var ctorRef =
                 this.metadataBuilder.AddMemberReference(
@@ -1634,7 +1634,7 @@ namespace ClangSharpSourceToWinmd
                     parameters.Add(p);
                 }
 
-                ctorRef = CreateAndCacheCtorRefForTypeRef(typeRef, parameters, ctorKey);
+                ctorRef = this.CreateAndCacheCtorRefForTypeRef(typeRef, parameters, ctorKey);
             }
 
             return ctorRef;
@@ -1650,10 +1650,10 @@ namespace ClangSharpSourceToWinmd
                     namedArguments => namedArguments.Count(0)
                 );
 
-            metadataBuilder.AddCustomAttribute(
+            this.metadataBuilder.AddCustomAttribute(
                 entityHandle,
                 ctorRef,
-                metadataBuilder.GetOrAddBlob(attributeSignature));
+                this.metadataBuilder.GetOrAddBlob(attributeSignature));
         }
 
         private void AddCustomAttribute(AttributeData attributeData, EntityHandle entityHandle)
@@ -1667,10 +1667,10 @@ namespace ClangSharpSourceToWinmd
                     namedArguments => namedArguments.NamedArguments(attributeData.AttributeClass, attributeData.NamedArguments)
                 );
 
-            metadataBuilder.AddCustomAttribute(
+            this.metadataBuilder.AddCustomAttribute(
                 entityHandle,
                 ctorRef,
-                metadataBuilder.GetOrAddBlob(attributeSignature));
+                this.metadataBuilder.GetOrAddBlob(attributeSignature));
         }
 
         private void AddCustomAttributes(IEnumerable<AttributeData> attrs, EntityHandle entityHandle)
@@ -1841,12 +1841,12 @@ namespace ClangSharpSourceToWinmd
             if (type.Name.EndsWith("_e__FixedBuffer"))
             {
                 // Convert fixed buffer type into an array
-                if (!fixedBufferTypeToInfo.TryGetValue(type, out FixedBufferInfo fixedBufferInfo))
+                if (!this.fixedBufferTypeToInfo.TryGetValue(type, out FixedBufferInfo fixedBufferInfo))
                 {
                     // If we haven't visited the node that defines the fixed buffer type, do it now
                     StructDeclarationSyntax structNode = (StructDeclarationSyntax)type.DeclaringSyntaxReferences[0].GetSyntax();
                     this.AddFixedBufferTypeInfoForStructNode(structNode);
-                    fixedBufferInfo = fixedBufferTypeToInfo[type];
+                    fixedBufferInfo = this.fixedBufferTypeToInfo[type];
                 }
 
                 var fieldType = fixedBufferInfo.Type;
@@ -1859,7 +1859,7 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 signatureEncoder.Array(
-                    s => EncodeTypeSymbol(fieldType, signatureEncoder),
+                    s => this.EncodeTypeSymbol(fieldType, signatureEncoder),
                     h => h.Shape(1, new int[1] { fixedBufferInfo.Count }.ToImmutableArray(), new int[1] { 0 }.ToImmutableArray()));
             }
             // Arrays
@@ -1868,14 +1868,14 @@ namespace ClangSharpSourceToWinmd
                 if (bracketedArgList.Arguments[0].Expression is LiteralExpressionSyntax literalExp)
                 {
                     int size = int.Parse(literalExp.Token.Text);
-                    signatureEncoder.Array(s => EncodeTypeSymbol(type, signatureEncoder), h => h.Shape(1, new int[1] { size }.ToImmutableArray(), new int[1] { 0 }.ToImmutableArray()));
+                    signatureEncoder.Array(s => this.EncodeTypeSymbol(type, signatureEncoder), h => h.Shape(1, new int[1] { size }.ToImmutableArray(), new int[1] { 0 }.ToImmutableArray()));
                 }
                 else if (bracketedArgList.Arguments[0].Expression is BinaryExpressionSyntax binaryExp)
                 {
                     var litLeft = (LiteralExpressionSyntax)binaryExp.Left;
                     var litRight = (LiteralExpressionSyntax)binaryExp.Right;
                     int size = int.Parse(litLeft.Token.Text) * int.Parse(litRight.Token.Text);
-                    signatureEncoder.Array(s => EncodeTypeSymbol(type, signatureEncoder), h => h.Shape(1, new int[1] { size }.ToImmutableArray(), new int[1] { 0 }.ToImmutableArray()));
+                    signatureEncoder.Array(s => this.EncodeTypeSymbol(type, signatureEncoder), h => h.Shape(1, new int[1] { size }.ToImmutableArray(), new int[1] { 0 }.ToImmutableArray()));
                 }
             }
             else
@@ -1887,11 +1887,11 @@ namespace ClangSharpSourceToWinmd
                 // which means a variable-length array
                 if (nativeType != null && nativeType.EndsWith("[]") && !(type is IPointerTypeSymbol))
                 {
-                    signatureEncoder.Array(s => EncodeTypeSymbol(type, signatureEncoder), h => h.Shape(1, new int[1] { 1 }.ToImmutableArray(), new int[1] { 0 }.ToImmutableArray()));
+                    signatureEncoder.Array(s => this.EncodeTypeSymbol(type, signatureEncoder), h => h.Shape(1, new int[1] { 1 }.ToImmutableArray(), new int[1] { 0 }.ToImmutableArray()));
                 }
                 else
                 {
-                    EncodeTypeSymbol(type, signatureEncoder);
+                    this.EncodeTypeSymbol(type, signatureEncoder);
                 }
             }
 
@@ -1938,11 +1938,11 @@ namespace ClangSharpSourceToWinmd
                     fieldAttributes |= FieldAttributes.Static | FieldAttributes.Literal | FieldAttributes.HasDefault;
                 }
 
-                var fieldDefinitionHandle = 
-                    metadataBuilder.AddFieldDefinition(
+                var fieldDefinitionHandle =
+                    this.metadataBuilder.AddFieldDefinition(
                         fieldAttributes,
-                        metadataBuilder.GetOrAddString(name),
-                        metadataBuilder.GetOrAddBlob(fieldSignature));
+                        this.metadataBuilder.GetOrAddString(name),
+                        this.metadataBuilder.GetOrAddBlob(fieldSignature));
                 if (firstField.IsNil)
                 {
                     firstField = fieldDefinitionHandle;
@@ -1950,7 +1950,7 @@ namespace ClangSharpSourceToWinmd
 
                 if (isConst)
                 {
-                    metadataBuilder.AddConstant(fieldDefinitionHandle, fieldSymbol.ConstantValue);
+                    this.metadataBuilder.AddConstant(fieldDefinitionHandle, fieldSymbol.ConstantValue);
                 }
 
                 var fieldOffsetAttr = fieldSymbol.GetAttributes().FirstOrDefault(a => a.AttributeClass.Name == "FieldOffsetAttribute");

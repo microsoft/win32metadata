@@ -105,7 +105,7 @@ namespace ClangSharpSourceToWinmd
                     var originalName = node.Identifier.ValueText;
                     var name = originalName;
 
-                    HandleArchSpecific(node, out var removeNode, out var attributeList, ref name);
+                    this.HandleArchSpecific(node, out var removeNode, out var attributeList, ref name);
                     
                     if (removeNode)
                     {
@@ -135,7 +135,7 @@ namespace ClangSharpSourceToWinmd
                 {
                     var originalName = node.Identifier.ValueText;
                     var name = originalName;
-                    HandleArchSpecific(node, out var removeNode, out var attributeList, ref name);
+                    this.HandleArchSpecific(node, out var removeNode, out var attributeList, ref name);
                     if (removeNode)
                     {
                         return null;
@@ -164,7 +164,7 @@ namespace ClangSharpSourceToWinmd
                 {
                     var originalName = node.Identifier.ValueText;
                     var name = originalName;
-                    HandleArchSpecific(node, out var removeNode, out var attributeList, ref name);
+                    this.HandleArchSpecific(node, out var removeNode, out var attributeList, ref name);
                     if (removeNode)
                     {
                         return null;
@@ -251,7 +251,7 @@ namespace ClangSharpSourceToWinmd
 
                     if (archGroup.HasFlag(this.currentArch))
                     {
-                        var fullNameWithArch = GetFullNameWithArch(node, archGroup);
+                        var fullNameWithArch = this.GetFullNameWithArch(node, archGroup);
 
                         lock (this.owner)
                         {
