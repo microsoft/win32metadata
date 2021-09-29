@@ -112,15 +112,9 @@ namespace MetadataUtils
             return names;
         }
 
-        //public static HashSet<string> GetConstants(string sourceDirectory)
-        //{
-        //    IEnumerable<string> sourceFiles = Directory.GetFiles(sourceDirectory, "*.cs", SearchOption.AllDirectories);
-        //    return GetConstants(sourceFiles);
-        //}
-
         private static bool IsValidCsSourceFile(string fileName)
         {
-            if (fileName.EndsWith("modified.cs") || fileName.EndsWith("enums.cs") || fileName.EndsWith("constants.cs"))
+            if (fileName.EndsWith(".modified.cs") || fileName.EndsWith(".enums.cs") || fileName.EndsWith(".constants.cs"))
             {
                 return false;
             }

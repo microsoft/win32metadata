@@ -240,6 +240,20 @@ namespace ClangSharpSourceToWinmd
         {
             string name = SyntaxUtils.GetFullName(node, true);
             string fullSignature = GetFullSignature(node);
+            string altSignature = string.Empty;
+
+            if (arch == Architecture.X86 && node is StructDeclarationSyntax structNode)
+            {
+                var packing4AttrList =
+                    SyntaxFactory.AttributeList(
+                        SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
+                            SyntaxFactory.Attribute(
+                                SyntaxFactory.ParseName("StructLayout"),
+                                SyntaxFactory.ParseAttributeArgumentList("(LayoutKind.Sequential, Pack = 4)"))));
+
+                var tempNode = structNode.AddAttributeLists(packing4AttrList);
+                altSignature = GetFullSignature(tempNode);
+            }
 
             lock (this.namesToInfos)
             {
@@ -251,7 +265,7 @@ namespace ClangSharpSourceToWinmd
 
                 foreach (var info in crossArchInfos)
                 {
-                    if (info.FullSignature == fullSignature)
+                    if (info.FullSignature == fullSignature || info.FullSignature == altSignature)
                     {
                         info.Arch |= arch;
                         return;

@@ -27,6 +27,7 @@
     <!--<LocalLibs Include="**\*.lib"/>-->
 
     <!--<ImportLibs Include="@(LocalLibs)"/>-->
+    <ManualCs Include="ManualStuff.cs"/>
     <Partition Include="main.cpp">
       <TraverseFiles>@(LocalHeaders)</TraverseFiles>
       <Namespace>GeneratorSampleDebug</Namespace>

@@ -73,3 +73,9 @@ interface IOverloads : public IUnknown
     virtual HRESULT B(int a, int b, int c);
     virtual HRESULT A(int a, int b, int c);
 };
+
+// This should get skipped in favor of the manual one
+#define MANUAL_CONST_1 101
+
+#define OTHER_CONST 202
+

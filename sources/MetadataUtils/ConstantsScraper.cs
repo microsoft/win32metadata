@@ -726,7 +726,7 @@ namespace MetadataUtils
                             }
                         }
                     }
-                    }
+                }
             }
 
             private void TryScrapingEnumFlags(string line)
