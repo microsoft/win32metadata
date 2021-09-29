@@ -147,7 +147,7 @@ The behavior of the ConstantsScraper can be adjusted by modifying [ConstantsScra
 
 Constants can be assigned to different namespaces than their header files by adding them to [requiredNamespacesForNames.rsp](generation/WinSDK/requiredNamespacesForNames.rsp) as described in [Split a header file among multiple namespaces](#Split-a-header-file-among-multiple-namespaces). Wildcards can be used (e.g. `DXGI_ERROR_*=Windows.Win32.Graphics.Dxgi`).
 
-The ConstantsScraper uses [regular expression matching](sources/MetadataUtils/ConstantsScraper.cs) on the header files to automatically extract constants. If a constant is not being detected, either a regular expression needs to be added or a regular expression would be insufficient. For cases where regular expressions would be insufficient, you can manually define constants in `.cs` files within [manual](generation/emitter/manual) (e.g. [RestartManager.manual.cs](generation/WinSDK/manual/RestartManager.manual.cs)).
+The ConstantsScraper uses [regular expression matching](sources/MetadataUtils/ConstantsScraper.cs) on the header files to automatically extract constants. If a constant is not being detected, either a regular expression needs to be added or a regular expression would be insufficient. For cases where regular expressions would be insufficient, you can manually define constants in `.cs` files within [manual](generation/WinSDK/manual) (e.g. [RestartManager.manual.cs](generation/WinSDK/manual/RestartManager.manual.cs)).
 
 Constants are removed from the metadata when they are detected as members of an enum.
 
