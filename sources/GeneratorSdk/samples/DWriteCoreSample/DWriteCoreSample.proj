@@ -16,6 +16,7 @@
       <TraverseFiles>@(DWriteHeaders)</TraverseFiles>
       <Namespace>Windows.Win32.Graphics.DirectWriteCore</Namespace>
       <Exclude>ID2D1SimplifiedGeometrySink;_D3DCOLORVALUE</Exclude>
+      <ExcludeFromCrossarch>true</ExcludeFromCrossarch>
     </Partition>
   </ItemGroup>
 

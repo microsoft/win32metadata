@@ -19,6 +19,7 @@
       <TraverseFiles>@(WebView2Headers)</TraverseFiles>
       <Namespace>Microsoft.Web.WebView2.Win32</Namespace>
       <Exclude>CoreWebView2EnvironmentOptions</Exclude>
+      <ExcludeFromCrossarch>true</ExcludeFromCrossarch>
     </Partition>
   </ItemGroup>
 

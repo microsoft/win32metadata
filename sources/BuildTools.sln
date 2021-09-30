@@ -25,11 +25,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GeneratorSampleDebug", "Gen
 		GeneratorSdk\samples\GeneratorSampleDebug\enums.json = GeneratorSdk\samples\GeneratorSampleDebug\enums.json
 		GeneratorSdk\samples\GeneratorSampleDebug\functionPointerFixups.json = GeneratorSdk\samples\GeneratorSampleDebug\functionPointerFixups.json
 		GeneratorSdk\samples\GeneratorSampleDebug\GeneratorSampleDebug.proj = GeneratorSdk\samples\GeneratorSampleDebug\GeneratorSampleDebug.proj
-		GeneratorSdk\samples\GeneratorSampleDebug\main.cpp = GeneratorSdk\samples\GeneratorSampleDebug\main.cpp
 		GeneratorSdk\samples\GeneratorSampleDebug\ManualStuff.cs = GeneratorSdk\samples\GeneratorSampleDebug\ManualStuff.cs
 		GeneratorSdk\samples\GeneratorSampleDebug\options.rsp = GeneratorSdk\samples\GeneratorSampleDebug\options.rsp
+		GeneratorSdk\samples\GeneratorSampleDebug\partition1.cpp = GeneratorSdk\samples\GeneratorSampleDebug\partition1.cpp
+		GeneratorSdk\samples\GeneratorSampleDebug\partition2.cpp = GeneratorSdk\samples\GeneratorSampleDebug\partition2.cpp
 		GeneratorSdk\samples\GeneratorSampleDebug\SampleCom.idl = GeneratorSdk\samples\GeneratorSampleDebug\SampleCom.idl
 		GeneratorSdk\samples\GeneratorSampleDebug\SampleHeader.h = GeneratorSdk\samples\GeneratorSampleDebug\SampleHeader.h
+		GeneratorSdk\samples\GeneratorSampleDebug\SampleHeader2.h = GeneratorSdk\samples\GeneratorSampleDebug\SampleHeader2.h
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sdk", "sdk", "{65F906A0-83DF-435D-AE74-BE67CBC8CC9B}"

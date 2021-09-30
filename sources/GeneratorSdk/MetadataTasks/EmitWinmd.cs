@@ -11,6 +11,7 @@ namespace MetadataTasks
     public class EmitWinmd : ToolTask
     {
         private string outputWinmdFullPath;
+        private string partitionsWithoutCrossarchDifferences;
 
         [Required]
         public string ToolsBinDir { get; set; }
@@ -131,8 +132,37 @@ namespace MetadataTasks
                 return exitCode;
             }
 
+            if (!string.IsNullOrEmpty(this.partitionsWithoutCrossarchDifferences))
+            {
+                this.Log.LogMessage(
+                    MessageImportance.High,
+                    "There are partitions that have no cross-arch differences. You can exclude them from cross-arch processing and speed up builds by adding this property to the project file:");
+                this.Log.LogMessage(
+                    MessageImportance.High,
+                    $"<ExcludeFromCrossarch>{this.partitionsWithoutCrossarchDifferences}</ExcludeFromCrossarch>");
+                this.Log.LogMessage(
+                    MessageImportance.High,
+                    $"Or, add this property to any partitions you want to exclude: <ExcludeFromCrossarch>true</ExcludeFromCrossarch>");
+            }
+
             this.Log.LogMessage(MessageImportance.High, $"Winmd emitted at: {this.outputWinmdFullPath}");
             return exitCode;
+        }
+
+        protected override void LogEventsFromTextOutput(string singleLine, MessageImportance messageImportance)
+        {
+            // See if the line contains the warning about partitions that don't need crossarch
+            if (singleLine.Contains("CSSW001"))
+            {
+                int lastColon = singleLine.LastIndexOf(':');
+                if (lastColon != -1)
+                {
+                    this.partitionsWithoutCrossarchDifferences =
+                        singleLine.Substring(lastColon + 1).Trim().Replace(',', ';');
+                }
+            }
+
+            base.LogEventsFromTextOutput(singleLine, messageImportance);
         }
 
         private string[] GetStaticLibs()

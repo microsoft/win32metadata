@@ -69,9 +69,10 @@ namespace ClangSharpSourceToWinmd
             string rawVersion = version.Split('-')[0];
             Version assemblyVersion = Version.Parse(rawVersion);
 
-            string archForAutoTypes = arch == "crossarch" ? "x64" : arch;
+            string archForAutoTypes = arch == "crossarch" ? "common" : arch;
             string archSourceDir = Path.Combine(sourceDirectory, archForAutoTypes);
-            Dictionary<string, string> methodNamesToNamespaces = MetadataUtils.ScraperUtils.GetNameToNamespaceMap(archSourceDir, MetadataUtils.ScraperUtils.NameOptions.Methods);
+
+            Dictionary<string, string> methodNamesToNamespaces = MetadataUtils.ScraperUtils.GetNameToNamespaceMap(sourceDirectory, MetadataUtils.ScraperUtils.NameOptions.Methods);
 
             if (requiredNamespaceValuePairs != null)
             {
@@ -105,7 +106,7 @@ namespace ClangSharpSourceToWinmd
                     sourceDirectory, arch, interopFileName, remaps, enumAdditions, enumMakeFlags, typeImports, requiredNamespaces, reducePointerLevels, refs, staticLibs);
 
             System.Diagnostics.Stopwatch errorsWatch = System.Diagnostics.Stopwatch.StartNew();
-            Console.Write("  Looking for compilation errors...");
+            Console.WriteLine("  Looking for compilation errors...");
             System.Collections.ObjectModel.ReadOnlyCollection<Microsoft.CodeAnalysis.Diagnostic> diags = clangSharpCompliation.GetDiagnostics();
 
             int errors = 0;
@@ -114,7 +115,7 @@ namespace ClangSharpSourceToWinmd
             {
                 if (errors == 0)
                 {
-                    Console.WriteLine("errors were found.");
+                    Console.WriteLine("  errors were found.");
                 }
 
                 errors++;
@@ -131,9 +132,9 @@ namespace ClangSharpSourceToWinmd
                 return -1;
             }
 
-            Console.WriteLine($"{errorsWatch.Elapsed:c}");
+            Console.WriteLine($"  {OutputUtils.FormatTimespan(errorsWatch.Elapsed)}");
 
-            Console.WriteLine($"{mainWatch.Elapsed:c}");
+            Console.WriteLine($"{OutputUtils.FormatTimespan(mainWatch.Elapsed)}");
             ClangSharpSourceCompilation.ShowMemory();
 
             mainWatch.Restart();
@@ -154,7 +155,7 @@ namespace ClangSharpSourceToWinmd
                 Console.WriteLine(diag.ToString());
             }
 
-            Console.WriteLine($"{mainWatch.Elapsed:c}");
+            Console.WriteLine($"{OutputUtils.FormatTimespan(mainWatch.Elapsed)}");
             ClangSharpSourceCompilation.ShowMemory();
 
             return generator.WroteWinmd ? 0 : -1;

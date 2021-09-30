@@ -10,9 +10,12 @@ namespace MetadataTasks
 {
     public class ScrapeHeaders : Task, ICancelableTask
     {
+        private static readonly string[] allArches = new string[] { "x64", "x86", "arm64" };
+
         private bool canceled;
         private string[] defaultIncDirs;
         private HashSet<string> partitionSettingsValidSwitches = new HashSet<string>(System.StringComparer.OrdinalIgnoreCase);
+        private HashSet<string> partitionsToExcludeFromCrossarch = new HashSet<string>(System.StringComparer.OrdinalIgnoreCase);
 
         [Required]
         public ITaskItem[] Partitions { get; set; }
@@ -56,6 +59,8 @@ namespace MetadataTasks
 
         public string MaxProcessors { get; set; }
 
+        public string ExcludeFromCrossarch { get; set; }
+
         public override bool Execute()
         {
 #if DEBUG
@@ -66,14 +71,22 @@ namespace MetadataTasks
 #endif
 
             bool needsBuild = !File.Exists(this.MarkerFileName);
-            string[] arches = this.ScanArch == "crossarch" ? new string[] { "x64", "x86", "arm64" } : new string[] { this.ScanArch };
-            var items = this.GetPartitionItems().Where(p => !p.IsUpToDate(this.MarkerFileName)).SelectMany(p => arches, (p, a) => new { Partition = p, Arch = a });
+            string[] arches = this.ScanArch == "crossarch" ? allArches : new string[] { this.ScanArch };
+            var items = this.GetPartitions().Where(p => !p.IsUpToDate(this.MarkerFileName)).SelectMany(p => arches, (p, a) => new { Partition = p, Arch = a });
             needsBuild |= items.Any();
             needsBuild |= !this.AreNonPartitionFilesUpToDate();
 
             if (!needsBuild)
             {
                 return true;
+            }
+
+            if (!string.IsNullOrEmpty(this.ExcludeFromCrossarch))
+            {
+                foreach (var part in this.ExcludeFromCrossarch.Split(';', System.StringSplitOptions.RemoveEmptyEntries))
+                {
+                    this.partitionsToExcludeFromCrossarch.Add(part);
+                }
             }
 
             this.Log.LogMessage(MessageImportance.High, $"Scraping headers for {this.ScanArch}...");
@@ -84,14 +97,13 @@ namespace MetadataTasks
             opt.MaxDegreeOfParallelism = 1;
 #else
             int throttleCount;
-            if (this.MaxProcessors != null)
+            if (this.MaxProcessors != null && int.TryParse(this.MaxProcessors, out throttleCount))
             {
-                int.TryParse(this.MaxProcessors, out throttleCount);
                 if (throttleCount > System.Environment.ProcessorCount)
                 {
                     throttleCount = System.Environment.ProcessorCount;
                 }
-                else if (throttleCount < 0)
+                else if (throttleCount <= 0)
                 {
                     throttleCount = -1;
                 }
@@ -148,7 +160,7 @@ namespace MetadataTasks
             return TaskUtils.IsUpToDate(files, this.MarkerFileName);
         }
 
-        private Partition[] GetPartitionItems()
+        private Partition[] GetPartitions()
         {
             List<Partition> ret = new List<Partition>();
             foreach (ITaskItem item in this.Partitions)
@@ -166,11 +178,26 @@ namespace MetadataTasks
                 return true;
             }
 
-            string ns = partition.Namespace;
             string partitionName = partition.Name;
-            string archDir = Path.Combine(this.GeneratedDir, arch);
+            string archDirName = arch;
+
+            bool excludeFromCrossarch = this.partitionsToExcludeFromCrossarch.Contains(partitionName) || partition.ExcludeFromCrossarch;
+            if (excludeFromCrossarch)
+            {
+                if (arch == "x86" || arch == "arm64")
+                {
+                    return true;
+                }
+
+                archDirName = "common";
+            }
+
+            string ns = partition.Namespace;
+            string archDir = Path.Combine(this.GeneratedDir, archDirName);
             string outputFileName = Path.Combine(archDir, $"{partitionName}.cs");
-            string scratchDir = Path.Combine(this.ScratchDir, arch);
+            string scratchDir = Path.Combine(this.ScratchDir, archDirName);
+
+            Directory.CreateDirectory(archDir);
             Directory.CreateDirectory(scratchDir);
 
             if (string.IsNullOrEmpty(ns))
@@ -305,7 +332,6 @@ $@"--file
                 if (File.Exists(rspFileName))
                 {
                     System.Diagnostics.Debug.WriteLine($"Adding {rspFileName}...");
-                    //System.Diagnostics.Debug.WriteLine(File.ReadAllText(rspFileName));
 
                     args.AppendRspFile(rspFileName);
                 }
