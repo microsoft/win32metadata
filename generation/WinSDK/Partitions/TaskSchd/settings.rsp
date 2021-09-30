@@ -1,12 +1,3 @@
---file
-<PartitionDir>\main.cpp
---output
-<GeneratedSourceDir>\<PartitionName>.cs
---include-directory
-<RepoRoot>\generation\scraper
-<IncludeRoot>/shared
-<IncludeRoot>/um
-<IncludeRoot>/winrt
 --traverse
 <IncludeRoot>/um/MSTask.h
 <IncludeRoot>/um/taskschd.h

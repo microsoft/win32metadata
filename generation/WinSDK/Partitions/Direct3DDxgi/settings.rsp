@@ -1,12 +1,3 @@
---file
-<PartitionDir>\main.cpp
---output
-<GeneratedSourceDir>\<PartitionName>.cs
---include-directory
-<RepoRoot>\generation\scraper
-<IncludeRoot>/shared
-<IncludeRoot>/um
-<IncludeRoot>/winrt
 --exclude
 DXGI_ADAPTER_FLAG_FORCE_DWORD
 _D3DCOLORVALUE
