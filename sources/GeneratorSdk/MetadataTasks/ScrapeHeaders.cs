@@ -125,6 +125,7 @@ namespace MetadataTasks
             {
                 Path.Combine(this.SdkIncRoot, "shared"),
                 Path.Combine(this.SdkIncRoot, "um"),
+                Path.Combine(this.SdkIncRoot, "ucrt"),
                 Path.Combine(this.SdkIncRoot, "winrt"),
             };
 
