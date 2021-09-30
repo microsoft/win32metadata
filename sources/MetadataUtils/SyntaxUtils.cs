@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -8,6 +9,34 @@ namespace MetadataUtils
     public static class SyntaxUtils
     {
         private static readonly Regex vtableSlotRegex = new Regex(@"\(IntPtr\)\(lpVtbl\[(\d+)\]\)");
+
+        public static bool IsTreeEmpty(SyntaxTree tree)
+        {
+            foreach (var node in tree.GetRoot().DescendantNodes())
+            {
+                if (node is StructDeclarationSyntax structNode && !IsEmptyStruct(structNode))
+                {
+                    return false;
+                }
+
+                if (node is ClassDeclarationSyntax classNode && !IsEmptyClass(classNode))
+                {
+                    return false;
+                }
+
+                if (node is DelegateDeclarationSyntax || node is EnumDeclarationSyntax)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public static bool IsEmptyClass(ClassDeclarationSyntax node)
+        {
+            return node.Members.Count == 0;
+        }
 
         public static bool IsEmptyStruct(StructDeclarationSyntax node)
         {

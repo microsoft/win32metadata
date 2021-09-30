@@ -11,4 +11,9 @@ namespace Windows.Win32.System.Kernel
         ExceptionNestedException,
         ExceptionCollidedUnwind
     }
+
+    public unsafe partial struct SLIST_ENTRY
+    {
+        public unsafe SLIST_ENTRY* Next;
+    }
 }

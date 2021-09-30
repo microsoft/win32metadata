@@ -40,6 +40,20 @@ namespace MetadataTasks
             }
         }
 
+        public bool ExcludeFromCrossarch
+        {
+            get
+            {
+                var propValue = this.item.GetMetadata("ExcludeFromCrossarch");
+                if (!string.IsNullOrEmpty(propValue))
+                {
+                    return propValue == "true" || propValue == "1";
+                }
+
+                return false;
+            }
+        }
+
         public string Namespace
         {
             get

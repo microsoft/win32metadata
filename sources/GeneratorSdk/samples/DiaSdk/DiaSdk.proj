@@ -30,6 +30,7 @@
     <Partition Include="main.cpp">
       <TraverseFiles>@(Headers)</TraverseFiles>
       <Namespace>Microsoft.Dia</Namespace>
+      <ExcludeFromCrossarch>true</ExcludeFromCrossarch>
     </Partition>
   </ItemGroup>
 

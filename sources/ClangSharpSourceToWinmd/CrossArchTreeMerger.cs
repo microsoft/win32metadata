@@ -21,23 +21,31 @@ namespace ClangSharpSourceToWinmd
             this.map = map;
         }
 
-        public SyntaxTree ProcessTree(SyntaxTree tree)
+        public SyntaxTree ProcessTree(SyntaxTree tree, out bool contributedToNonCommonTree)
         {
-            CrossArchTreeRewriter treeWriter = new CrossArchTreeRewriter(this);
-            return treeWriter.ProcessTree(tree);
+            return CrossArchTreeRewriter.ProcessTree(this, tree, out contributedToNonCommonTree);
         }
 
-        public class CrossArchTreeRewriter : CSharpSyntaxRewriter
+        private class CrossArchTreeRewriter : CSharpSyntaxRewriter
         {
             private Architecture currentArch;
             private CrossArchTreeMerger owner;
+            private bool contributedToNonCommonTree;
 
-            public CrossArchTreeRewriter(CrossArchTreeMerger owner)
+            private CrossArchTreeRewriter(CrossArchTreeMerger owner)
             {
                 this.owner = owner;
             }
 
-            public SyntaxTree ProcessTree(SyntaxTree tree)
+            public static SyntaxTree ProcessTree(CrossArchTreeMerger owner, SyntaxTree tree, out bool contributedToNonCommonTree)
+            {
+                CrossArchTreeRewriter treeWriter = new CrossArchTreeRewriter(owner);
+                tree = treeWriter.ProcessTree(tree);
+                contributedToNonCommonTree = treeWriter.contributedToNonCommonTree;
+                return tree;
+            }
+
+            private SyntaxTree ProcessTree(SyntaxTree tree)
             {
                 this.currentArch = CrossArchSyntaxMap.GetArchForTree(tree);
 
@@ -251,6 +259,8 @@ namespace ClangSharpSourceToWinmd
 
                     if (archGroup.HasFlag(this.currentArch))
                     {
+                        this.contributedToNonCommonTree = true;
+
                         var fullNameWithArch = this.GetFullNameWithArch(node, archGroup);
 
                         lock (this.owner)

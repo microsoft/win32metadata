@@ -206,6 +206,7 @@
       ScanArch="$(ScanArch)"
       MarkerFileName="$(ScrapedHeadersMarker)"
       Win32MetadataScraperAssetsDir="$(Win32MetadataScraperAssetsDir)"
+      ExcludeFromCrossarch="$(ExcludeFromCrossarch)"
       MSBuildProjectDirectory="$(MSBuildProjectDirectory)"/>
 
   </Target>

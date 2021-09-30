@@ -115,6 +115,11 @@ namespace ClangSharpSourceToWinmd
             return crossArchSyntaxMap;
         }
 
+        private static string GetPartitionNameFromFileName(string fileName)
+        {
+            return Path.GetFileName(fileName).Replace(".modified.cs", string.Empty);
+        }
+
         public static ClangSharpSourceCompilation Create(
             string sourceDirectory,
             string arch,
@@ -186,7 +191,7 @@ namespace ClangSharpSourceToWinmd
 
             System.Diagnostics.Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
 
-            Console.Write($"  Moving names to correct namespaces...");
+            Console.WriteLine($"  Moving names to correct namespaces...");
             System.Threading.Tasks.Parallel.ForEach(modifiedFiles, opt, (treeFile) =>
             {
                 if (!treeFile.EndsWith("manual.cs"))
@@ -201,11 +206,11 @@ namespace ClangSharpSourceToWinmd
             });
 
             var elapsed = watch.Elapsed;
-            Console.WriteLine($"{elapsed:c}");
+            Console.WriteLine($"  {OutputUtils.FormatTimespan(elapsed)}");
 
             ShowMemory();
 
-            Console.Write($"  Cleaning syntax trees...");
+            Console.WriteLine($"  Cleaning syntax trees...");
 
             watch.Restart();
 
@@ -216,43 +221,100 @@ namespace ClangSharpSourceToWinmd
                 WriteTree(cleanedTree, cleanedTree.FilePath);
             });
 
-            Console.WriteLine($"{watch.Elapsed:c}");
+            Console.WriteLine($"  {OutputUtils.FormatTimespan(watch.Elapsed)}");
             ShowMemory();
 
             if (arch == "crossarch")
             {
-                Console.Write($"  Merging cross-arch items...");
+                List<string> partitionsNotNeedingCrossarch = new List<string>();
+
+                Console.WriteLine($"  Merging cross-arch items...");
                 watch.Restart();
 
-                CrossArchSyntaxMap crossArchSyntaxMap = LoadCrossArchMapFromFiles(modifiedFiles, opt);
+                List<string> filesToMerge = new List<string>();
+                foreach (string x64FileName in modifiedFiles.Where(f => GetArchitectureForFileName(f) == Windows.Win32.Interop.Architecture.X64))
+                {
+                    string x86FileName = x64FileName.Replace(@"\x64\", @"\x86\", StringComparison.OrdinalIgnoreCase);
+                    string arm64FileName = x64FileName.Replace(@"\x64\", @"\arm64\", StringComparison.OrdinalIgnoreCase);
+
+                    if (File.Exists(x86FileName) && File.Exists(arm64FileName))
+                    {
+                        string x64Content = File.ReadAllText(x64FileName);
+                        if (x64Content == File.ReadAllText(x86FileName) && x64Content == File.ReadAllText(arm64FileName))
+                        {
+                            var parititionName = GetPartitionNameFromFileName(x64FileName);
+                            if (parititionName == "Dfs")
+                            {
+                            }
+
+                            File.Delete(x86FileName);
+                            File.Delete(arm64FileName);
+
+                            partitionsNotNeedingCrossarch.Add(GetPartitionNameFromFileName(x64FileName));
+                        }
+                        else
+                        {
+                            filesToMerge.Add(x64FileName);
+                            filesToMerge.Add(x86FileName);
+                            filesToMerge.Add(arm64FileName);
+                        }
+                    }
+                }
+
+                CrossArchSyntaxMap crossArchSyntaxMap = LoadCrossArchMapFromFiles(filesToMerge, opt);
 
                 CrossArchTreeMerger crossArchTreeMerger = new CrossArchTreeMerger(crossArchSyntaxMap);
-                System.Threading.Tasks.Parallel.ForEach(FilesToTrees(modifiedFiles.Where(f => GetArchitectureForFileName(f) != Windows.Win32.Interop.Architecture.None)), opt, (tree) =>
+                System.Threading.Tasks.Parallel.ForEach(FilesToTrees(filesToMerge.Where(f => GetArchitectureForFileName(f) == Windows.Win32.Interop.Architecture.X64)), opt, (x64Tree) =>
                 {
-                    var fixedTree = crossArchTreeMerger.ProcessTree(tree);
+                    string x86FileName = x64Tree.FilePath.Replace(@"\x64\", @"\x86\", StringComparison.OrdinalIgnoreCase);
+                    string arm64FileName = x64Tree.FilePath.Replace(@"\x64\", @"\arm64\", StringComparison.OrdinalIgnoreCase);
 
-                    if (fixedTree != tree)
+                    var parititionName = GetPartitionNameFromFileName(x64Tree.FilePath);
+
+                    var fixed64Tree = crossArchTreeMerger.ProcessTree(x64Tree, out _);
+                    var fixed86Tree = crossArchTreeMerger.ProcessTree(ReadTree(x86FileName), out bool x86Contributed);
+                    var fixedArm64Tree = crossArchTreeMerger.ProcessTree(ReadTree(arm64FileName), out bool arm64Contributed);
+
+                    if (!x86Contributed && SyntaxUtils.IsTreeEmpty(fixed86Tree) &&
+                         !arm64Contributed & SyntaxUtils.IsTreeEmpty(fixedArm64Tree))
                     {
-                        WriteTree(fixedTree, fixedTree.FilePath);
+                        File.Delete(x86FileName);
+                        File.Delete(arm64FileName);
+
+                        partitionsNotNeedingCrossarch.Add(GetPartitionNameFromFileName(parititionName));
                     }
+                    else
+                    {
+                        WriteTree(fixed86Tree, fixed86Tree.FilePath);
+                        WriteTree(fixedArm64Tree, fixedArm64Tree.FilePath);
+                    }
+
+                    WriteTree(fixed64Tree, fixed64Tree.FilePath);
                 });
 
-                Console.WriteLine($"{watch.Elapsed:c}");
+                if (partitionsNotNeedingCrossarch.Count != 0)
+                {
+                    string partInfo = string.Join(',', partitionsNotNeedingCrossarch.ToArray());
+
+                    Console.WriteLine($"ClangSharpSourceToWinmd : warning CSSW001: Partitions detected with no cross-arch differences: {partInfo}");
+                }
+
+                Console.WriteLine($"  {OutputUtils.FormatTimespan(watch.Elapsed)}");
                 ShowMemory();
             }
 
-            Console.Write($"  Creating C# compilation on processed syntax trees...");
+            Console.WriteLine($"  Creating C# compilation on processed syntax trees...");
             watch.Restart();
 
             CSharpCompilationOptions compilationOptions = new CSharpCompilationOptions(OutputKind.WindowsRuntimeMetadata, allowUnsafe: true);
             var comp =
                 CSharpCompilation.Create(
                     null,
-                    FilesToTrees(modifiedFiles),
+                    FilesToTrees(modifiedFiles.Where(f => File.Exists(f))),
                     refs,
                     compilationOptions);
 
-            Console.WriteLine($"{watch.Elapsed:c}");
+            Console.WriteLine($"  {OutputUtils.FormatTimespan(watch.Elapsed)}");
             ShowMemory();
 
             return new ClangSharpSourceCompilation(comp, typeImports);
@@ -316,7 +378,7 @@ namespace ClangSharpSourceToWinmd
 
         private static bool IsValidCsSourceFile(string fileName, string arch)
         {
-            if (fileName.EndsWith("modified.cs"))
+            if (fileName.EndsWith(".modified.cs"))
             {
                 return false;
             }
@@ -326,11 +388,6 @@ namespace ClangSharpSourceToWinmd
             {
                 if (arch == "crossarch")
                 {
-                    if (potentialArch != "x64" && (fileName.EndsWith("autotypes.cs") || fileName.EndsWith(".enums.cs") || fileName.EndsWith(".constants.cs")))
-                    {
-                        return false;
-                    }
-
                     return true;
                 }
                 else

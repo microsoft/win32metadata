@@ -23,14 +23,19 @@
 
   <ItemGroup>
     <Idls Include="SampleCom.idl"/>
-    <LocalHeaders Include="$(CompiledHeadersDir)\SampleCom.h;SampleHeader.h"/>
     <!--<LocalLibs Include="**\*.lib"/>-->
 
     <!--<ImportLibs Include="@(LocalLibs)"/>-->
     <ManualCs Include="ManualStuff.cs"/>
-    <Partition Include="main.cpp">
-      <TraverseFiles>@(LocalHeaders)</TraverseFiles>
+    <Partition Include="partition1.cpp">
+      <TraverseFiles>$(CompiledHeadersDir)\SampleCom.h;SampleHeader.h</TraverseFiles>
       <Namespace>GeneratorSampleDebug</Namespace>
+    </Partition>
+
+    <Partition Include="partition2.cpp">
+      <TraverseFiles>SampleHeader2.h</TraverseFiles>
+      <Namespace>GeneratorSampleDebug.Partition2</Namespace>
+      <ExcludeFromCrossarch>true</ExcludeFromCrossarch>
     </Partition>
   </ItemGroup>
 
