@@ -84,13 +84,14 @@ namespace WinmdUtilsProgram
 
             var createLibRsp = new Command("createLibRsp", "Create lib rsp.")
             {
-                new Option<string>("--lib", "Semi-colon delimited libs paths."),
-                new Option<string>("--libDir", "Semi-colon delimited directories containing libs."),
+                new Option<string>("--lib", "A lib path.", ArgumentArity.ZeroOrMore),
+                new Option<string>("--libDir", "A directory containing libs.", ArgumentArity.ZeroOrMore),
+                new Option<string>("--exclude", "A function to exclude.", ArgumentArity.ZeroOrMore),
                 new Option<FileInfo>("--outputRsp", "Output rsp file."),
                 new Option<FileInfo>("--inputRsp", "Input rsp file use to resolve duplicate libs for the same function."),
             };
 
-            createLibRsp.Handler = CommandHandler.Create<string, string, FileInfo, FileInfo, IConsole>(CreateLibRsp);
+            createLibRsp.Handler = CommandHandler.Create<string[], string[], string[], FileInfo, FileInfo, IConsole>(CreateLibRsp);
 
             var rootCommand = new RootCommand("Win32metadata winmd utils")
             {
@@ -202,23 +203,38 @@ namespace WinmdUtilsProgram
             }
         }
 
-        public static int CreateLibRsp(string lib, string libDir, FileInfo outputRsp, FileInfo inputRsp, IConsole console)
+        public static int CreateLibRsp(string[] lib, string[] libDir, string[] exclude, FileInfo outputRsp, FileInfo inputRsp, IConsole console)
         {
             List<string> libPaths = new List<string>();
             HashSet<string> visitedPaths = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            HashSet<string> excludes = new HashSet<string>();
+
+            if (exclude != null)
+            {
+                foreach (var item in exclude)
+                {
+                    excludes.Add(item);
+                }
+            }
 
             if (lib != null)
             {
-                foreach (var libInfo in lib.Split(';', StringSplitOptions.RemoveEmptyEntries))
+                foreach (var libPath in lib)
                 {
-                    libPaths.Add(libInfo);
-                    visitedPaths.Add(libInfo);
+                    if (!File.Exists(libPath))
+                    {
+                        console.Out.Write($"Error: {libPath} not found.");
+                        return -1;
+                    }
+
+                    libPaths.Add(libPath);
+                    visitedPaths.Add(libPath);
                 }
             }
 
             if (libDir != null)
             {
-                foreach (var dir in libDir.Split(';', StringSplitOptions.RemoveEmptyEntries))
+                foreach (var dir in libDir)
                 {
                     foreach (var libPath in Directory.GetFiles(dir, "*.lib"))
                     {
@@ -257,6 +273,12 @@ namespace WinmdUtilsProgram
 
                     // Skip mangled names
                     if (importInfo.ProcName.StartsWith('?'))
+                    {
+                        continue;
+                    }
+
+                    // Skip ones we are told to exclude
+                    if (excludes.Contains(importInfo.ProcName))
                     {
                         continue;
                     }

@@ -261,19 +261,22 @@ jobs:
   - task: PowerShell@2
     displayName: Do packages
     inputs:
-      filePath: $(Build.SourcesDirectory)\scripts\DoPackages.ps1 -SkipInstallTools
+      filePath: $(Build.SourcesDirectory)\scripts\DoPackages.ps1
+      arguments: -SkipInstallTools
       pwsh: true
 
   - task: PowerShell@2
     displayName: Do samples
     inputs:
-      filePath: $(Build.SourcesDirectory)\scripts\DoSamples.ps1 -SkipInstallTools
+      filePath: $(Build.SourcesDirectory)\scripts\DoSamples.ps1
+      arguments: -SkipInstallTools
       pwsh: true
 
   - task: PowerShell@2
     displayName: Do tests
     inputs:
-      filePath: $(Build.SourcesDirectory)\scripts\DoTests.ps1 -SkipInstallTools
+      filePath: $(Build.SourcesDirectory)\scripts\DoTests.ps1
+      arguments: -SkipInstallTools
       pwsh: true
 
   - task: EsrpCodeSigning@1
