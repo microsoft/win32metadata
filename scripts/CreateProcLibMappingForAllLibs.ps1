@@ -38,29 +38,61 @@ function AddLibToMappings([string] $libName)
 
     Remove-Item $headersFromDumpBinFileName
 
-    $pattern = [Regex]::new('DLL name     : (\S+)\s+Symbol name  : (\S+)')
+    $pattern = [Regex]::new('DLL name     : (\S+)\s+Symbol name  : (?:_([^\s@]+)@\d+|#?(\S+))')
     $matches = $pattern.Matches($txtContent)
     $count = 0
+
     foreach ($match in $matches)
     {
         $dll = $match.Groups[1].Value
         $dll = [System.IO.Path]::GetFileNameWithoutExtension($dll)
 
-        $procName = $match.Groups[2].Value
+        if ($match.Groups[2].Success)
+        {
+            $procName = $match.Groups[2].Value
+        }
+        elseif ($match.Groups[3].Success)
+        {
+            $procName = $match.Groups[3].Value
+        }
+        else
+        {
+            Write-Output "No proc name captured for $match"
+            continue
+        }
+
+        if ($procName -eq "RtlCompareMemory")
+        {
+            Write-Output "RtlCompareMemory in $libPath = $dll"
+        }
 
         if ($funcLibMappings.Contains($procName))
         {
             # Don't overwrite a value with an API set
             if ($dll.StartsWith("api-ms") -or $dll.StartsWith("ext-ms"))
             {
+                if ($procName -eq "RtlCompareMemory")
+                {
+                    Write-Output "RtlCompareMemory: dll 1 = $dll"
+                }
+
                 continue
             }
 
             $oldValue = $funcLibMappings[$procName]
+            if ($procName -eq "RtlCompareMemory")
+            {
+                Write-Output "RtlCompareMemory: oldValue = $oldValue"
+            }
 
             # If the new is in the old list, continue
             if ($dll -in $oldValue.Split(','))
             {
+                if ($procName -eq "RtlCompareMemory")
+                {
+                    Write-Output "RtlCompareMemory: dll 2 = $dll in $oldValue"
+                }
+
                 continue
             }
 
@@ -70,6 +102,11 @@ function AddLibToMappings([string] $libName)
                 # We have multiple libs claiming the same function
                 $funcLibMappings.Remove($procName)
                 $dll = $oldValue + "," + $dll
+
+                if ($procName -eq "RtlCompareMemory")
+                {
+                    Write-Output "RtlCompareMemory: new dll = $dll, oldValue = $oldValue"
+                }
             }
         }
 
@@ -79,6 +116,10 @@ function AddLibToMappings([string] $libName)
         }
 
         $funcLibMappings[$procName] = $dll
+        if ($procName -eq "RtlCompareMemory")
+        {
+            Write-Output "RtlCompareMemory now = $dll"
+        }
     }
 
     Write-Output "$($libName): $count item(s) found"

@@ -4,6 +4,10 @@ param
 
     [switch]$ExcludePackages,
 
+    [switch]$ExcludeSamples,
+
+    [switch]$ExcludeTests,
+
     [switch]$SkipInstallTools,
 
     [ValidateSet("crossarch", "x64", "x86", "arm64")]
@@ -30,7 +34,12 @@ if (!$ExcludePackages)
     .\scripts\DoPackages.ps1 -SkipInstallTools
 }
 
-if ($arch -eq "crossarch")
+if (!$ExcludeSamples)
 {
-    .\scripts\TestWinmdBinary.ps1 -SkipInstallTools
+    .\scripts\DoSamples.ps1 -SkipInstallTools
+}
+
+if (!$ExcludeTests)
+{
+    .\scripts\DoTests.ps1 -SkipInstallTools
 }

@@ -22,10 +22,6 @@
     <file src="sources\GeneratorSdk\sdk\sdk.stamped.props" target="sdk\sdk.props"/>
     <file src="sources\GeneratorSdk\sdk\sdk.targets" target="sdk"/>
 
-    <file src="tools\dumpbin.exe" target="tools"/>
-    <file src="tools\link.exe" target="tools"/>
-    <file src="tools\tbbmalloc.dll" target="tools"/>
-
     <file src="bin\release\net5.0\*.deps.json" target="tools\net5.0"/>
     <file src="bin\release\net5.0\*.runtimeconfig.json" target="tools\net5.0"/>
     <file src="bin\release\net5.0\*.dll" target="tools\net5.0" />

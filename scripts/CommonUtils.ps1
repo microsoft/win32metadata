@@ -96,27 +96,29 @@ function Replace-Text
 
 function Get-LibMappingsFile
 {
-    $libMappingOutputFileName = Join-Path -Path $scraperDir -ChildPath "libMappings.rsp"
+    $libMappingOutputFileName = Join-Path -Path $windowsWin32ProjectRoot -ChildPath "libMappings.rsp"
 
     return $libMappingOutputFileName
 }
 
-function Get-BuildToolsNugetProps
+function Get-BuildToolsNugetPropsProperty
 {
-    [xml]$buildNugetProps = Get-Content -path "$rootDir\obj\BuildTools\BuildTools.proj.nuget.g.props"
-    return $buildNugetProps;
+    Param ([string] $name)
+
+    $ns = @{xlmns = "http://schemas.microsoft.com/developer/msbuild/2003"}
+    $xpath = "//xlmns:$name"
+    $item = Select-Xml -Path "$rootDir\obj\BuildTools\BuildTools.proj.nuget.g.props" -XPath $xpath -Namespace $ns
+    return $item.node.InnerXml
 }
 
 function Get-WinSdkCppPkgPath
 {
-    [xml]$buildNugetProps = Get-BuildToolsNugetProps
-    return $buildNugetProps.Project.PropertyGroup.PkgMicrosoft_Windows_SDK_CPP.InnerText;
+    return Get-BuildToolsNugetPropsProperty("PkgMicrosoft_Windows_SDK_CPP")
 }
 
 function Get-WinSdkCppX64PkgPath
 {
-    [xml]$buildNugetProps = Get-BuildToolsNugetProps
-    return $buildNugetProps.Project.PropertyGroup.PkgMicrosoft_Windows_SDK_CPP_x64.InnerText;
+    return Get-BuildToolsNugetPropsProperty("PkgMicrosoft_Windows_SDK_CPP_x64")
 }
 
 function Invoke-PrepLibMappingsFile
@@ -124,10 +126,11 @@ function Invoke-PrepLibMappingsFile
     $libMappingOutputFileName = Get-LibMappingsFile
     if (!(Test-Path $libMappingOutputFileName))
     {
-        Write-Output "Creating lib mapping file: $libMappingOutputFileName"
-
         $libPkgPath = Get-WinSdkCppX64PkgPath
         $libDirectory = "$libPkgPath\c\um\x64"
+
+        Write-Output "Creating lib mapping file: $libMappingOutputFileName using $libDirectory"
+
         & $PSScriptRoot\CreateProcLibMappingForAllLibs.ps1 -libDirectory $libDirectory -outputFileName $libMappingOutputFileName
     }
 }
@@ -196,8 +199,29 @@ function Update-VsInstallDir
 {
     if (!$env:VSINSTALLDIR)
     {
+        Install-VsDevShell
+        #$vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+        #$dir = & $vswhere -latest -property installationPath
+
+        #$env:VSINSTALLDIR = $dir + "\"
+    }
+}
+
+function Install-VsDevShell
+{
+    #$env:VSINSTALLDIR = $null
+
+    if (!$env:VSINSTALLDIR)
+    {
+        $currentDir = Get-Location
         $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
-        $env:VSINSTALLDIR = & $vswhere -latest -property installationPath
+        $installDir = & $vswhere -latest -property installationPath
+    
+        $vsInstallScript = Join-Path $installDir "Common7\Tools\Launch-VsDevShell.ps1"
+    
+        & $vsInstallScript
+    
+        Set-Location $currentDir
     }
 }
 

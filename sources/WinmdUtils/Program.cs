@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.IO;
@@ -74,6 +75,23 @@ namespace WinmdUtilsProgram
 
             showPointersToDelegates.Handler = CommandHandler.Create<FileInfo, string[], IConsole>(ShowPointersToDelegates);
 
+            var showLibImports = new Command("dumpImports", "Show lib imports.")
+            {
+                new Option<FileInfo>("--lib", "The lib path.") { IsRequired = true }.ExistingOnly(),
+            };
+
+            showLibImports.Handler = CommandHandler.Create<FileInfo, IConsole>(ShowLibImports);
+
+            var createLibRsp = new Command("createLibRsp", "Create lib rsp.")
+            {
+                new Option<string>("--lib", "Semi-colon delimited libs paths."),
+                new Option<string>("--libDir", "Semi-colon delimited directories containing libs."),
+                new Option<FileInfo>("--outputRsp", "Output rsp file."),
+                new Option<FileInfo>("--inputRsp", "Input rsp file use to resolve duplicate libs for the same function."),
+            };
+
+            createLibRsp.Handler = CommandHandler.Create<string, string, FileInfo, FileInfo, IConsole>(CreateLibRsp);
+
             var rootCommand = new RootCommand("Win32metadata winmd utils")
             {
                 showMissingImportsCommand,
@@ -82,7 +100,9 @@ namespace WinmdUtilsProgram
                 showDuplicateConstants,
                 showEmptyDelegates,
                 showPointersToDelegates,
-                compareCommand
+                compareCommand,
+                showLibImports,
+                createLibRsp
             };
 
             return rootCommand.Invoke(args);
@@ -180,6 +200,152 @@ namespace WinmdUtilsProgram
                     }
                 }
             }
+        }
+
+        public static int CreateLibRsp(string lib, string libDir, FileInfo outputRsp, FileInfo inputRsp, IConsole console)
+        {
+            List<string> libPaths = new List<string>();
+            HashSet<string> visitedPaths = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+            if (lib != null)
+            {
+                foreach (var libInfo in lib.Split(';', StringSplitOptions.RemoveEmptyEntries))
+                {
+                    libPaths.Add(libInfo);
+                    visitedPaths.Add(libInfo);
+                }
+            }
+
+            if (libDir != null)
+            {
+                foreach (var dir in libDir.Split(';', StringSplitOptions.RemoveEmptyEntries))
+                {
+                    foreach (var libPath in Directory.GetFiles(dir, "*.lib"))
+                    {
+                        if (!visitedPaths.Contains(libPath))
+                        {
+                            libPaths.Add(libPath);
+                            visitedPaths.Add(libPath);
+                        }
+                    }
+                }
+            }
+
+            OrderedDictionary procNameToDll = new OrderedDictionary();
+            Dictionary<string, string> inputEntries = new Dictionary<string, string>();
+
+            if (inputRsp != null)
+            {
+                foreach (var line in File.ReadAllLines(inputRsp.FullName))
+                {
+                    int equal = line.IndexOf('=');
+                    if (equal != -1)
+                    {
+                        var procName = line.Substring(0, equal);
+                        var dllName = line.Substring(equal + 1);
+                        inputEntries[procName] = dllName;
+                    }
+                }
+            }
+
+            foreach (var libFile in libPaths)
+            {
+                foreach (var importInfo in LibScraper.GetImportInfos(libFile))
+                {
+                    List<string> dlls;
+                    string fixedDll = Path.GetFileNameWithoutExtension(importInfo.Dll);
+
+                    // Skip mangled names
+                    if (importInfo.ProcName.StartsWith('?'))
+                    {
+                        continue;
+                    }
+
+                    if (!procNameToDll.Contains(importInfo.ProcName))
+                    {
+                        dlls = new List<string>();
+                        procNameToDll[importInfo.ProcName] = dlls;
+                        dlls.Add(fixedDll);
+                    }
+                    else
+                    {
+                        dlls = (List<string>)procNameToDll[importInfo.ProcName];
+
+                        // Don't overwrite an existing value with an API set
+                        if (fixedDll.StartsWith("api-ms") || fixedDll.StartsWith("ext-ms"))
+                        {
+                            continue;
+                        }
+
+                        if (dlls.Contains(fixedDll))
+                        {
+                            continue;
+                        }
+
+                        // Only concat the new value to the old one if the old one is
+                        // not an api set. If the old one is an api set, override it.
+                        string oldValue = dlls[0];
+                        if (!oldValue.StartsWith("api-ms") && !oldValue.StartsWith("ext-ms"))
+                        {
+                            dlls.Add(fixedDll);
+                        }
+                        else
+                        {
+                            dlls[0] = fixedDll;
+                        }
+                    }
+                }
+            }
+
+            using StreamWriter streamWriter = new StreamWriter(outputRsp.FullName);
+
+            streamWriter.WriteLine("--with-librarypath");
+
+            List<string> linesToFix = new List<string>();
+            foreach (string procName in procNameToDll.Keys)
+            {
+                var dlls = (List<string>)procNameToDll[procName];
+                bool lineNeedsFixing = false;
+                if (!inputEntries.TryGetValue(procName, out string value))
+                {
+                    value = string.Join(',', dlls.ToArray());
+                    if (dlls.Count > 1)
+                    {
+                        lineNeedsFixing = true;
+                    }
+                }
+
+                string line = $"{procName}={value}";
+                streamWriter.WriteLine(line);
+
+                if (lineNeedsFixing)
+                {
+                    linesToFix.Add(line);
+                }
+            }
+
+            if (linesToFix.Count != 0)
+            {
+                console.Out.Write("One or more procedures map to multiple DLLs:\n");
+                foreach (var line in linesToFix)
+                {
+                    console.Out.Write(line + "\n");
+                }
+
+                return -1;
+            }
+
+            return 0;
+        }
+
+        public static int ShowLibImports(FileInfo lib, IConsole console)
+        {
+            foreach (var libInfo in LibScraper.GetImportInfos(lib.FullName))
+            {
+                console.Out.Write($"{libInfo.ProcName}={libInfo.Dll}\n");
+            }
+
+            return 0;
         }
 
         public static int ShowPointersToDelegates(FileInfo winmd, string[] allowItem, IConsole console)

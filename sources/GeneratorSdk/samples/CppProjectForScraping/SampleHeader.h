@@ -1,6 +1,6 @@
 #pragma once
 
-#include <windows.h>
+#include "framework.h"
 
 DECLARE_HANDLE(SAMPLE_HANDLE);
 typedef SAMPLE_HANDLE* PSAMPLE_HANDLE;
@@ -56,12 +56,12 @@ typedef ALREADYPTR_SAMPLECALLBACK LPALREADYPTR_SAMPLECALLBACK;
 
 #define MY_SHORT_CONST 0xffff
 
-DECLSPEC_IMPORT BOOL WINAPI SampleFunction1(_In_ SAMPLE_HANDLE handle1, _Inout_ PSAMPLE_HANDLE pHandle2, DWORD dwOptions);
-DECLSPEC_IMPORT SAMPLE_HANDLE WINAPI SampleFunction2(_In_ OTHER_SAMPLE_HANDLE handle1, _Inout_ PSAMPLE_HANDLE pHandle2, _In_ RENAME_ME* pRename1, _Inout_ PRENAME_ME pRename2);
-DECLSPEC_IMPORT void WINAPI CloseSampleHandle(_In_ SAMPLE_HANDLE handle);
+DLL_DECLSPEC BOOL WINAPI SampleFunction1(_In_ SAMPLE_HANDLE handle1, _Inout_ PSAMPLE_HANDLE pHandle2, DWORD dwOptions);
+DLL_DECLSPEC SAMPLE_HANDLE WINAPI SampleFunction2(_In_ OTHER_SAMPLE_HANDLE handle1, _Inout_ PSAMPLE_HANDLE pHandle2, _In_ RENAME_ME* pRename1, _Inout_ PRENAME_ME pRename2);
+DLL_DECLSPEC void WINAPI CloseSampleHandle(_In_ SAMPLE_HANDLE handle);
 
-DECLSPEC_IMPORT void WINAPI SampleCallMe1(_In_ LPSAMPLECALLBACK callback);
-DECLSPEC_IMPORT void WINAPI SampleCallMe2(_In_ LPALREADYPTR_SAMPLECALLBACK callback);
+DLL_DECLSPEC void WINAPI SampleCallMe1(_In_ LPSAMPLECALLBACK callback);
+DLL_DECLSPEC void WINAPI SampleCallMe2(_In_ LPALREADYPTR_SAMPLECALLBACK callback);
 
 interface IOverloads : public IUnknown
 {

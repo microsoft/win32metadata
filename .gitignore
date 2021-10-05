@@ -362,3 +362,8 @@ MigrationBackup/
 
 # This gets written when testing the packages, but we don't want to check it in
 /sources/GeneratorSdk/samples/global.json
+
+!/tests/MetadataUtils.Tests/assets/x64
+!/tests/MetadataUtils.Tests/assets/x86
+!/tests/MetadataUtils.Tests/assets/arm64
+
