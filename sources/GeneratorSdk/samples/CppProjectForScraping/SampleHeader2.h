@@ -1,6 +1,6 @@
 #pragma once
 
-#include <windows.h>
+#include "framework.h"
 
 #define PARTITION2_CONST_1 101
 

@@ -19,7 +19,7 @@ namespace MetadataUtils
         private WinmdUtils(string fileName)
         {
             this.stream = new System.IO.FileStream(fileName, System.IO.FileMode.Open, System.IO.FileAccess.Read);
-            this.peReader = new PEReader(stream);
+            this.peReader = new PEReader(this.stream);
             this.metadataReader = this.peReader.GetMetadataReader();
         }
 
@@ -82,7 +82,7 @@ namespace MetadataUtils
                     {
                         var constantHandle = fieldDef.GetDefaultValue();
                         var constant = this.metadataReader.GetConstant(constantHandle);
-                        string fieldName = metadataReader.GetString(fieldDef.Name);
+                        string fieldName = this.metadataReader.GetString(fieldDef.Name);
                         yield return new ConstInfo(ns, fieldName, constant.TypeCode);
                     }
                 }
@@ -94,7 +94,7 @@ namespace MetadataUtils
             foreach (var fieldHandle in fieldDefinitionHandles)
             {
                 var fieldDef = this.metadataReader.GetFieldDefinition(fieldHandle);
-                var fieldName = metadataReader.GetString(fieldDef.Name);
+                var fieldName = this.metadataReader.GetString(fieldDef.Name);
                 var fieldType = fieldDef.DecodeSignature<string, GenericContext>(this.provider, null);
 
                 yield return new FieldInfo(fieldType, fieldName);
@@ -117,17 +117,17 @@ namespace MetadataUtils
         private MethodInfo GetMethod(MethodDefinitionHandle methodDefinitionHandle)
         {
             var methodDef = this.metadataReader.GetMethodDefinition(methodDefinitionHandle);
-            var methodSignature = methodDef.DecodeSignature<string, GenericContext>(provider, null);
+            var methodSignature = methodDef.DecodeSignature<string, GenericContext>(this.provider, null);
             var paramHandles = methodDef.GetParameters();
 
-            return new MethodInfo(this.metadataReader.GetString(methodDef.Name), methodSignature, GetParams(paramHandles));
+            return new MethodInfo(this.metadataReader.GetString(methodDef.Name), methodSignature, this.GetParams(paramHandles));
         }
 
         private IEnumerable<MethodInfo> GetMethodInfos(MethodDefinitionHandleCollection methodDefinitionHandles)
         {
             foreach (var methodHandle in methodDefinitionHandles)
             {
-                yield return GetMethod(methodHandle);
+                yield return this.GetMethod(methodHandle);
             }
         }
 
@@ -163,10 +163,10 @@ namespace MetadataUtils
                     foreach (var handle in methodHandles)
                     {
                         var methodDef = this.metadataReader.GetMethodDefinition(handle);
-                        var methodName = metadataReader.GetString(methodDef.Name);
+                        var methodName = this.metadataReader.GetString(methodDef.Name);
                         if (methodName == "Invoke")
                         {
-                            var invokeMethodInfo = GetMethod(handle);
+                            var invokeMethodInfo = this.GetMethod(handle);
 
                             yield return new DelegateTypeInfo(ns, name, invokeMethodInfo.MethodSignature, invokeMethodInfo.Parameters);
                         }
@@ -174,7 +174,7 @@ namespace MetadataUtils
                 }
                 else if (baseTypeName == "Enum")
                 {
-                    var fieldInfos = GetFieldInfos(typeDef.GetFields()).ToList();
+                    var fieldInfos = this.GetFieldInfos(typeDef.GetFields()).ToList();
                     var valueFieldInfo = fieldInfos.FirstOrDefault(f => f.Name == "value__");
                     if (valueFieldInfo != null)
                     {
@@ -185,18 +185,18 @@ namespace MetadataUtils
                 }
                 else if (typeDef.Attributes.HasFlag(System.Reflection.TypeAttributes.Interface))
                 {
-                    var methodInfos = GetMethodInfos(typeDef.GetMethods());
+                    var methodInfos = this.GetMethodInfos(typeDef.GetMethods());
                     yield return new InterfaceInfo(ns, name, methodInfos);
                 }
                 else if (baseTypeName == "ValueType")
                 {
-                    var fieldInfos = GetFieldInfos(typeDef.GetFields());
+                    var fieldInfos = this.GetFieldInfos(typeDef.GetFields());
                     yield return new StructInfo(ns, name, fieldInfos);
                 }
                 else if (baseTypeName == "Object")
                 {
-                    var fieldInfos = GetFieldInfos(typeDef.GetFields());
-                    var methodInfos = GetMethodInfos(typeDef.GetMethods());
+                    var fieldInfos = this.GetFieldInfos(typeDef.GetFields());
+                    var methodInfos = this.GetMethodInfos(typeDef.GetMethods());
                     yield return new ClassInfo(ns, name, methodInfos, fieldInfos);
                 }
                 else

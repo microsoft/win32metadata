@@ -10,7 +10,12 @@ namespace TestCommon
     {
         public static string GetAssetFile(string fileName)
         {
-            return Path.Combine(BinPath, "assets", fileName);
+            return Path.Combine(GetAssetDir(), fileName);
+        }
+
+        public static string GetAssetDir()
+        {
+            return Path.Combine(BinPath, "assets");
         }
 
         public static string Win32WinmdPath => Path.GetFullPath(Path.Combine(BinPath, @"..\..\windows.win32.winmd"));

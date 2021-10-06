@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using System.Text.RegularExpressions;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
+using MetadataUtils;
 
 namespace MetadataTasks
 {
@@ -30,28 +30,25 @@ namespace MetadataTasks
 #endif
 
             string[] libFiles = this.GetLibs();
-            string dumpBinPath = Path.Combine(this.LibToolsBinDir, "dumpbin.exe");
-            var libLines = new StringBuilder();
-            var libRegex = new Regex(@"DLL name     : (\S+)\s+Symbol name  : (\S+)");
             var functionNames = new HashSet<string>(System.StringComparer.OrdinalIgnoreCase);
+            StringBuilder libLines = new StringBuilder();
             foreach (var lib in libFiles)
             {
-                string dbinArgs = $"/headers \"{lib}\"";
-                TaskUtils.ExecuteCmd(dumpBinPath, dbinArgs, out var dbinOutput, this.Log);
-                foreach (Match match in libRegex.Matches(dbinOutput))
+                var importInfos = LibScraper.GetImportInfos(lib);
+                foreach (var importInfo in importInfos)
                 {
-                    var dllName = Path.GetFileNameWithoutExtension(match.Groups[1].Value);
-                    var functionName = match.Groups[2].Value;
-
-                    if (!functionNames.Contains(functionName))
+                    string procName = importInfo.ProcName;
+                    if (!functionNames.Contains(procName))
                     {
                         if (libLines.Length == 0)
                         {
                             libLines.AppendLine("--with-librarypath");
                         }
 
-                        libLines.AppendLine($"{functionName}={dllName}");
-                        functionNames.Add(functionName);
+                        var dllName = Path.GetFileNameWithoutExtension(importInfo.Dll);
+
+                        libLines.AppendLine($"{procName}={dllName}");
+                        functionNames.Add(procName);
                     }
                 }
             }

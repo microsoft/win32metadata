@@ -21,9 +21,3 @@ PRENAME_ME=RENAME_ME*
 PSAMPLE_HANDLE=SAMPLE_HANDLE*
 --exclude
 IGNORE_ME
---with-librarypath
-SampleFunction1=MyLib
-SampleFunction2=MyLib
-CloseSampleHandle=MyLib
-SampleCallMe1=MyLib
-SampleCallMe2=MyLib

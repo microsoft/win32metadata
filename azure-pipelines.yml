@@ -172,12 +172,6 @@ jobs:
   - publish: 'bin'
     artifact: 'bin'
 
-  - task: PowerShell@2
-    displayName: Test metadata binary
-    inputs:
-      filePath: 'scripts\TestWinmdBinary.ps1'
-      pwsh: true
-
   - task: EsrpCodeSigning@1
     displayName: 'Authenticode Sign Binaries in Metadata package'
     inputs:
@@ -264,20 +258,26 @@ jobs:
       MaxRetryAttempts: '2'
     condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
 
-  - script: dotnet pack $(Build.SourcesDirectory)\sources\packages.proj -c Release
-    displayName: Pack NuGet packages
-
   - task: PowerShell@2
-    displayName: Update global.json with Generator SDK version
+    displayName: Do packages
     inputs:
-      filePath: $(Build.SourcesDirectory)\scripts\UpdateGlobalJsonWinmdGeneratorVersion.ps1
+      filePath: $(Build.SourcesDirectory)\scripts\DoPackages.ps1
+      arguments: -SkipInstallTools
       pwsh: true
 
-  - script: dotnet pack $(Build.SourcesDirectory)\sources\GeneratorSdk\samples\DiaSdk -c Release
-    displayName: Pack Dia SDK package
+  - task: PowerShell@2
+    displayName: Do samples
+    inputs:
+      filePath: $(Build.SourcesDirectory)\scripts\DoSamples.ps1
+      arguments: -SkipInstallTools
+      pwsh: true
 
-  - script: dotnet build $(Build.SourcesDirectory)\sources\GeneratorSdk\samples -c Release
-    displayName: Test Generator SDK with samples
+  - task: PowerShell@2
+    displayName: Do tests
+    inputs:
+      filePath: $(Build.SourcesDirectory)\scripts\DoTests.ps1
+      arguments: -SkipInstallTools
+      pwsh: true
 
   - task: EsrpCodeSigning@1
     displayName: 'Sign nuget packages'

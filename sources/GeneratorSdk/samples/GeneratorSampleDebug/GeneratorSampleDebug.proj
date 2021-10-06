@@ -19,21 +19,20 @@
     <OutputWinmd>bin\GeneratorSample.winmd</OutputWinmd>
     <WinmdVersion>1.0.0.0</WinmdVersion>
     <GenerateAssemblyVersionInfo>false</GenerateAssemblyVersionInfo>
+    <CppProjDir>$(MSBuildProjectDirectory)\..\CppProjectForScraping</CppProjDir>
   </PropertyGroup>
 
   <ItemGroup>
-    <Idls Include="SampleCom.idl"/>
-    <!--<LocalLibs Include="**\*.lib"/>-->
-
-    <!--<ImportLibs Include="@(LocalLibs)"/>-->
+    <Idls Include="$(CppProjDir)\SampleCom.idl"/>
+    <ImportLibs Include="$(CppProjDir)\**\*.lib"/>
     <ManualCs Include="ManualStuff.cs"/>
     <Partition Include="partition1.cpp">
-      <TraverseFiles>$(CompiledHeadersDir)\SampleCom.h;SampleHeader.h</TraverseFiles>
+      <TraverseFiles>$(CompiledHeadersDir)\SampleCom.h;$(CppProjDir)\SampleHeader.h</TraverseFiles>
       <Namespace>GeneratorSampleDebug</Namespace>
     </Partition>
 
     <Partition Include="partition2.cpp">
-      <TraverseFiles>SampleHeader2.h</TraverseFiles>
+      <TraverseFiles>$(CppProjDir)\SampleHeader2.h</TraverseFiles>
       <Namespace>GeneratorSampleDebug.Partition2</Namespace>
       <ExcludeFromCrossarch>true</ExcludeFromCrossarch>
     </Partition>
