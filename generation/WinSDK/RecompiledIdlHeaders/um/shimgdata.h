@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -155,32 +163,39 @@ EXTERN_C const IID IID_IShellImageDataFactory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IShellImageDataFactory * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IShellImageDataFactory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IShellImageDataFactory * This);
         
+        DECLSPEC_XFGVIRT(IShellImageDataFactory, CreateIShellImageData)
         HRESULT ( STDMETHODCALLTYPE *CreateIShellImageData )( 
             __RPC__in IShellImageDataFactory * This,
             /* [out] */ __RPC__deref_out_opt IShellImageData **ppshimg);
         
+        DECLSPEC_XFGVIRT(IShellImageDataFactory, CreateImageFromFile)
         HRESULT ( STDMETHODCALLTYPE *CreateImageFromFile )( 
             __RPC__in IShellImageDataFactory * This,
             /* [in] */ __RPC__in LPCWSTR pszPath,
             /* [out] */ __RPC__deref_out_opt IShellImageData **ppshimg);
         
+        DECLSPEC_XFGVIRT(IShellImageDataFactory, CreateImageFromStream)
         HRESULT ( STDMETHODCALLTYPE *CreateImageFromStream )( 
             __RPC__in IShellImageDataFactory * This,
             /* [in] */ __RPC__in_opt IStream *pStream,
             /* [out] */ __RPC__deref_out_opt IShellImageData **ppshimg);
         
+        DECLSPEC_XFGVIRT(IShellImageDataFactory, GetDataFormatFromPath)
         HRESULT ( STDMETHODCALLTYPE *GetDataFormatFromPath )( 
             __RPC__in IShellImageDataFactory * This,
             /* [in] */ __RPC__in LPCWSTR pszPath,
@@ -346,134 +361,167 @@ EXTERN_C const IID IID_IShellImageData;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IShellImageData * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IShellImageData * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IShellImageData * This);
         
+        DECLSPEC_XFGVIRT(IShellImageData, Decode)
         HRESULT ( STDMETHODCALLTYPE *Decode )( 
             IShellImageData * This,
             /* [in] */ DWORD dwFlags,
             /* [in] */ ULONG cxDesired,
             /* [in] */ ULONG cyDesired);
         
+        DECLSPEC_XFGVIRT(IShellImageData, Draw)
         HRESULT ( STDMETHODCALLTYPE *Draw )( 
             IShellImageData * This,
             /* [in] */ HDC hdc,
             /* [in] */ LPRECT prcDest,
             /* [in] */ LPRECT prcSrc);
         
+        DECLSPEC_XFGVIRT(IShellImageData, NextFrame)
         HRESULT ( STDMETHODCALLTYPE *NextFrame )( 
             IShellImageData * This);
         
+        DECLSPEC_XFGVIRT(IShellImageData, NextPage)
         HRESULT ( STDMETHODCALLTYPE *NextPage )( 
             IShellImageData * This);
         
+        DECLSPEC_XFGVIRT(IShellImageData, PrevPage)
         HRESULT ( STDMETHODCALLTYPE *PrevPage )( 
             IShellImageData * This);
         
+        DECLSPEC_XFGVIRT(IShellImageData, IsTransparent)
         HRESULT ( STDMETHODCALLTYPE *IsTransparent )( 
             IShellImageData * This);
         
+        DECLSPEC_XFGVIRT(IShellImageData, IsAnimated)
         HRESULT ( STDMETHODCALLTYPE *IsAnimated )( 
             IShellImageData * This);
         
+        DECLSPEC_XFGVIRT(IShellImageData, IsVector)
         HRESULT ( STDMETHODCALLTYPE *IsVector )( 
             IShellImageData * This);
         
+        DECLSPEC_XFGVIRT(IShellImageData, IsMultipage)
         HRESULT ( STDMETHODCALLTYPE *IsMultipage )( 
             IShellImageData * This);
         
+        DECLSPEC_XFGVIRT(IShellImageData, IsEditable)
         HRESULT ( STDMETHODCALLTYPE *IsEditable )( 
             IShellImageData * This);
         
+        DECLSPEC_XFGVIRT(IShellImageData, IsPrintable)
         HRESULT ( STDMETHODCALLTYPE *IsPrintable )( 
             IShellImageData * This);
         
+        DECLSPEC_XFGVIRT(IShellImageData, IsDecoded)
         HRESULT ( STDMETHODCALLTYPE *IsDecoded )( 
             IShellImageData * This);
         
+        DECLSPEC_XFGVIRT(IShellImageData, GetCurrentPage)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPage )( 
             IShellImageData * This,
             /* [out] */ ULONG *pnPage);
         
+        DECLSPEC_XFGVIRT(IShellImageData, GetPageCount)
         HRESULT ( STDMETHODCALLTYPE *GetPageCount )( 
             IShellImageData * This,
             /* [out] */ ULONG *pcPages);
         
+        DECLSPEC_XFGVIRT(IShellImageData, SelectPage)
         HRESULT ( STDMETHODCALLTYPE *SelectPage )( 
             IShellImageData * This,
             /* [in] */ ULONG iPage);
         
+        DECLSPEC_XFGVIRT(IShellImageData, GetSize)
         HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             IShellImageData * This,
             /* [out] */ SIZE *pSize);
         
+        DECLSPEC_XFGVIRT(IShellImageData, GetRawDataFormat)
         HRESULT ( STDMETHODCALLTYPE *GetRawDataFormat )( 
             IShellImageData * This,
             /* [out] */ GUID *pDataFormat);
         
+        DECLSPEC_XFGVIRT(IShellImageData, GetPixelFormat)
         HRESULT ( STDMETHODCALLTYPE *GetPixelFormat )( 
             IShellImageData * This,
             /* [out] */ PixelFormat *pFormat);
         
+        DECLSPEC_XFGVIRT(IShellImageData, GetDelay)
         HRESULT ( STDMETHODCALLTYPE *GetDelay )( 
             IShellImageData * This,
             /* [out] */ DWORD *pdwDelay);
         
+        DECLSPEC_XFGVIRT(IShellImageData, GetProperties)
         HRESULT ( STDMETHODCALLTYPE *GetProperties )( 
             IShellImageData * This,
             /* [in] */ DWORD dwMode,
             /* [out] */ IPropertySetStorage **ppPropSet);
         
+        DECLSPEC_XFGVIRT(IShellImageData, Rotate)
         HRESULT ( STDMETHODCALLTYPE *Rotate )( 
             IShellImageData * This,
             /* [in] */ DWORD dwAngle);
         
+        DECLSPEC_XFGVIRT(IShellImageData, Scale)
         HRESULT ( STDMETHODCALLTYPE *Scale )( 
             IShellImageData * This,
             /* [in] */ ULONG cx,
             /* [in] */ ULONG cy,
             /* [in] */ InterpolationMode hints);
         
+        DECLSPEC_XFGVIRT(IShellImageData, DiscardEdit)
         HRESULT ( STDMETHODCALLTYPE *DiscardEdit )( 
             IShellImageData * This);
         
+        DECLSPEC_XFGVIRT(IShellImageData, SetEncoderParams)
         HRESULT ( STDMETHODCALLTYPE *SetEncoderParams )( 
             IShellImageData * This,
             /* [in] */ IPropertyBag *pbagEnc);
         
+        DECLSPEC_XFGVIRT(IShellImageData, DisplayName)
         HRESULT ( STDMETHODCALLTYPE *DisplayName )( 
             IShellImageData * This,
             /* [size_is][out][in] */ LPWSTR wszName,
             /* [in] */ UINT cch);
         
+        DECLSPEC_XFGVIRT(IShellImageData, GetResolution)
         HRESULT ( STDMETHODCALLTYPE *GetResolution )( 
             IShellImageData * This,
             /* [out] */ ULONG *puResolutionX,
             /* [out] */ ULONG *puResolutionY);
         
+        DECLSPEC_XFGVIRT(IShellImageData, GetEncoderParams)
         HRESULT ( STDMETHODCALLTYPE *GetEncoderParams )( 
             IShellImageData * This,
             /* [in] */ GUID *pguidFmt,
             /* [out] */ EncoderParameters **ppEncParams);
         
+        DECLSPEC_XFGVIRT(IShellImageData, RegisterAbort)
         HRESULT ( STDMETHODCALLTYPE *RegisterAbort )( 
             IShellImageData * This,
             /* [in] */ IShellImageDataAbort *pAbort,
             /* [out] */ IShellImageDataAbort **ppAbortPrev);
         
+        DECLSPEC_XFGVIRT(IShellImageData, CloneFrame)
         HRESULT ( STDMETHODCALLTYPE *CloneFrame )( 
             IShellImageData * This,
             /* [out] */ Image **ppImg);
         
+        DECLSPEC_XFGVIRT(IShellImageData, ReplaceFrame)
         HRESULT ( STDMETHODCALLTYPE *ReplaceFrame )( 
             IShellImageData * This,
             /* [in] */ Image *pImg);
@@ -628,18 +676,22 @@ EXTERN_C const IID IID_IShellImageDataAbort;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IShellImageDataAbort * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IShellImageDataAbort * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IShellImageDataAbort * This);
         
+        DECLSPEC_XFGVIRT(IShellImageDataAbort, QueryAbort)
         HRESULT ( STDMETHODCALLTYPE *QueryAbort )( 
             __RPC__in IShellImageDataAbort * This);
         

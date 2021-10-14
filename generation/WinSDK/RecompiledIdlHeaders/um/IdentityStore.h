@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -164,33 +172,40 @@ EXTERN_C const IID IID_IIdentityStore;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IIdentityStore * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IIdentityStore * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IIdentityStore * This);
         
+        DECLSPEC_XFGVIRT(IIdentityStore, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IIdentityStore * This,
             /* [out] */ __RPC__out DWORD *pdwProviders);
         
+        DECLSPEC_XFGVIRT(IIdentityStore, GetAt)
         HRESULT ( STDMETHODCALLTYPE *GetAt )( 
             __RPC__in IIdentityStore * This,
             /* [in] */ const DWORD dwProvider,
             /* [unique][out][in] */ __RPC__inout_opt GUID *pProvGuid,
             /* [out] */ __RPC__deref_out_opt IUnknown **ppIdentityProvider);
         
+        DECLSPEC_XFGVIRT(IIdentityStore, AddToCache)
         HRESULT ( STDMETHODCALLTYPE *AddToCache )( 
             __RPC__in IIdentityStore * This,
             /* [in] */ __RPC__in LPCWSTR lpszUniqueID,
             /* [in] */ __RPC__in REFGUID ProviderGUID);
         
+        DECLSPEC_XFGVIRT(IIdentityStore, ConvertToSid)
         HRESULT ( STDMETHODCALLTYPE *ConvertToSid )( 
             __RPC__in IIdentityStore * This,
             /* [in] */ __RPC__in LPCWSTR lpszUniqueID,
@@ -199,6 +214,7 @@ EXTERN_C const IID IID_IIdentityStore;
             /* [size_is][unique][out][in] */ __RPC__inout_ecount_full_opt(cbSid) BYTE *pSid,
             /* [out] */ __RPC__out USHORT *pcbRequiredSid);
         
+        DECLSPEC_XFGVIRT(IIdentityStore, EnumerateIdentities)
         HRESULT ( STDMETHODCALLTYPE *EnumerateIdentities )( 
             __RPC__in IIdentityStore * This,
             /* [in] */ const IDENTITY_TYPE eIdentityType,
@@ -206,6 +222,7 @@ EXTERN_C const IID IID_IIdentityStore;
             /* [unique][in] */ __RPC__in_opt const PROPVARIANT *pFilterPropVarValue,
             /* [out] */ __RPC__deref_out_opt IEnumUnknown **ppIdentityEnum);
         
+        DECLSPEC_XFGVIRT(IIdentityStore, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IIdentityStore * This);
         
@@ -326,43 +343,53 @@ EXTERN_C const IID IID_AsyncIIdentityStore;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in AsyncIIdentityStore * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in AsyncIIdentityStore * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in AsyncIIdentityStore * This);
         
+        DECLSPEC_XFGVIRT(AsyncIIdentityStore, Begin_GetCount)
         HRESULT ( STDMETHODCALLTYPE *Begin_GetCount )( 
             __RPC__in AsyncIIdentityStore * This);
         
+        DECLSPEC_XFGVIRT(AsyncIIdentityStore, Finish_GetCount)
         HRESULT ( STDMETHODCALLTYPE *Finish_GetCount )( 
             __RPC__in AsyncIIdentityStore * This,
             /* [out] */ __RPC__out DWORD *pdwProviders);
         
+        DECLSPEC_XFGVIRT(AsyncIIdentityStore, Begin_GetAt)
         HRESULT ( STDMETHODCALLTYPE *Begin_GetAt )( 
             __RPC__in AsyncIIdentityStore * This,
             /* [in] */ const DWORD dwProvider,
             /* [unique][out][in] */ __RPC__inout_opt GUID *pProvGuid);
         
+        DECLSPEC_XFGVIRT(AsyncIIdentityStore, Finish_GetAt)
         HRESULT ( STDMETHODCALLTYPE *Finish_GetAt )( 
             __RPC__in AsyncIIdentityStore * This,
             /* [unique][out][in] */ __RPC__inout_opt GUID *pProvGuid,
             /* [out] */ __RPC__deref_out_opt IUnknown **ppIdentityProvider);
         
+        DECLSPEC_XFGVIRT(AsyncIIdentityStore, Begin_AddToCache)
         HRESULT ( STDMETHODCALLTYPE *Begin_AddToCache )( 
             __RPC__in AsyncIIdentityStore * This,
             /* [in] */ __RPC__in LPCWSTR lpszUniqueID,
             /* [in] */ __RPC__in REFGUID ProviderGUID);
         
+        DECLSPEC_XFGVIRT(AsyncIIdentityStore, Finish_AddToCache)
         HRESULT ( STDMETHODCALLTYPE *Finish_AddToCache )( 
             __RPC__in AsyncIIdentityStore * This);
         
+        DECLSPEC_XFGVIRT(AsyncIIdentityStore, Begin_ConvertToSid)
         HRESULT ( STDMETHODCALLTYPE *Begin_ConvertToSid )( 
             __RPC__in AsyncIIdentityStore * This,
             /* [in] */ __RPC__in LPCWSTR lpszUniqueID,
@@ -370,24 +397,29 @@ EXTERN_C const IID IID_AsyncIIdentityStore;
             /* [in] */ USHORT cbSid,
             /* [size_is][unique][out][in] */ __RPC__inout_xcount_full_opt(cbSid) BYTE *pSid);
         
+        DECLSPEC_XFGVIRT(AsyncIIdentityStore, Finish_ConvertToSid)
         HRESULT ( STDMETHODCALLTYPE *Finish_ConvertToSid )( 
             __RPC__in AsyncIIdentityStore * This,
             /* [size_is][unique][out][in] */ __RPC__inout_xcount_full_opt(cbSid) BYTE *pSid,
             /* [out] */ __RPC__out USHORT *pcbRequiredSid);
         
+        DECLSPEC_XFGVIRT(AsyncIIdentityStore, Begin_EnumerateIdentities)
         HRESULT ( STDMETHODCALLTYPE *Begin_EnumerateIdentities )( 
             __RPC__in AsyncIIdentityStore * This,
             /* [in] */ const IDENTITY_TYPE eIdentityType,
             /* [unique][in] */ __RPC__in_opt const PROPERTYKEY *pFilterkey,
             /* [unique][in] */ __RPC__in_opt const PROPVARIANT *pFilterPropVarValue);
         
+        DECLSPEC_XFGVIRT(AsyncIIdentityStore, Finish_EnumerateIdentities)
         HRESULT ( STDMETHODCALLTYPE *Finish_EnumerateIdentities )( 
             __RPC__in AsyncIIdentityStore * This,
             /* [out] */ __RPC__deref_out_opt IEnumUnknown **ppIdentityEnum);
         
+        DECLSPEC_XFGVIRT(AsyncIIdentityStore, Begin_Reset)
         HRESULT ( STDMETHODCALLTYPE *Begin_Reset )( 
             __RPC__in AsyncIIdentityStore * This);
         
+        DECLSPEC_XFGVIRT(AsyncIIdentityStore, Finish_Reset)
         HRESULT ( STDMETHODCALLTYPE *Finish_Reset )( 
             __RPC__in AsyncIIdentityStore * This);
         
@@ -494,24 +526,29 @@ EXTERN_C const IID IID_IIdentityStoreEx;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IIdentityStoreEx * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IIdentityStoreEx * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IIdentityStoreEx * This);
         
+        DECLSPEC_XFGVIRT(IIdentityStoreEx, CreateConnectedIdentity)
         HRESULT ( STDMETHODCALLTYPE *CreateConnectedIdentity )( 
             __RPC__in IIdentityStoreEx * This,
             /* [unique][in] */ __RPC__in_opt LPCWSTR LocalName,
             /* [in] */ __RPC__in LPCWSTR ConnectedName,
             /* [in] */ __RPC__in REFGUID ProviderGUID);
         
+        DECLSPEC_XFGVIRT(IIdentityStoreEx, DeleteConnectedIdentity)
         HRESULT ( STDMETHODCALLTYPE *DeleteConnectedIdentity )( 
             __RPC__in IIdentityStoreEx * This,
             /* [in] */ __RPC__in LPCWSTR ConnectedName,
@@ -594,32 +631,39 @@ EXTERN_C const IID IID_AsyncIIdentityStoreEx;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in AsyncIIdentityStoreEx * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in AsyncIIdentityStoreEx * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in AsyncIIdentityStoreEx * This);
         
+        DECLSPEC_XFGVIRT(AsyncIIdentityStoreEx, Begin_CreateConnectedIdentity)
         HRESULT ( STDMETHODCALLTYPE *Begin_CreateConnectedIdentity )( 
             __RPC__in AsyncIIdentityStoreEx * This,
             /* [unique][in] */ __RPC__in_opt LPCWSTR LocalName,
             /* [in] */ __RPC__in LPCWSTR ConnectedName,
             /* [in] */ __RPC__in REFGUID ProviderGUID);
         
+        DECLSPEC_XFGVIRT(AsyncIIdentityStoreEx, Finish_CreateConnectedIdentity)
         HRESULT ( STDMETHODCALLTYPE *Finish_CreateConnectedIdentity )( 
             __RPC__in AsyncIIdentityStoreEx * This);
         
+        DECLSPEC_XFGVIRT(AsyncIIdentityStoreEx, Begin_DeleteConnectedIdentity)
         HRESULT ( STDMETHODCALLTYPE *Begin_DeleteConnectedIdentity )( 
             __RPC__in AsyncIIdentityStoreEx * This,
             /* [in] */ __RPC__in LPCWSTR ConnectedName,
             /* [in] */ __RPC__in REFGUID ProviderGUID);
         
+        DECLSPEC_XFGVIRT(AsyncIIdentityStoreEx, Finish_DeleteConnectedIdentity)
         HRESULT ( STDMETHODCALLTYPE *Finish_DeleteConnectedIdentity )( 
             __RPC__in AsyncIIdentityStoreEx * This);
         

@@ -1172,26 +1172,6 @@ interface IRDPSRAPIViewer : IDispatch
 
 [
     object,
-    uuid(56bfce32-83e9-414d-82e8-f31d01c62cb5),
-    pointer_default(unique)
-]
-interface IRDPViewerRenderingSurface : IUnknown
-{
-    [
-        id(DISPID_RDPSRAPI_METHOD_SET_RENDERING_SURFACE)
-    ]
-    HRESULT 
-    SetRenderingSurface(
-        [in]          IUnknown*  pRenderingSurface,
-        [in]          long       surfaceWidth,
-        [in]          long       surfaceHeight            
-        );
-};  // IRDPViewerRenderingSurface
-
-cpp_quote("#pragma deprecated(IRDPViewerRenderingSurface)")
-
-[
-    object,
     uuid(BB590853-A6C5-4A7B-8DD4-76B69EEA12D5),
     pointer_default(unique)
 ]
@@ -1925,7 +1905,6 @@ library RDPCOMAPILib
     // Interfaces that are not referenced in other library interface methods and not coclass creatable
     // must be listed here in order to be included in the type library
     //
-    interface IRDPViewerRenderingSurface;
     interface IRDPViewerInputSink;
     interface IRDPSRAPIAudioStream;
     interface IRDPSRAPIPerfCounterLoggingManager;

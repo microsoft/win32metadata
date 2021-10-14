@@ -505,6 +505,7 @@ DEFINE_PCI_DEVICE_DEVPKEY(DEVPKEY_PciDevice_AriSupport, 30);
 #define DevProp_PciDevice_AcsCompatibleUpHierarchy_SingleFunctionSupported  0x1
 #define DevProp_PciDevice_AcsCompatibleUpHierarchy_NoP2PSupported           0x2
 #define DevProp_PciDevice_AcsCompatibleUpHierarchy_Supported                0x3
+#define DevProp_PciDevice_AcsCompatibleUpHierarchy_Enhanced                 0x4
 
 DEFINE_PCI_DEVICE_DEVPKEY(DEVPKEY_PciDevice_AcsCompatibleUpHierarchy, 31);
 
@@ -539,6 +540,18 @@ DEFINE_PCI_DEVICE_DEVPKEY(DEVPKEY_PciDevice_AtomicsSupported, 35);
 //
 
 DEFINE_PCI_DEVICE_DEVPKEY(DEVPKEY_PciDevice_SupportedLinkSubState, 36);
+
+//
+// This property indicates whether this device is on POST path.
+//
+
+DEFINE_PCI_DEVICE_DEVPKEY(DEVPKEY_PciDevice_OnPostPath, 37);
+
+//
+// This property contains bitmask of the D3.cold state and reason for that state.
+//
+
+DEFINE_PCI_DEVICE_DEVPKEY(DEVPKEY_PciDevice_D3ColdSupport, 38);
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion

@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xa0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_UI_CORE_COREWINDOWDIALOGSCONTRACT_VERSION)
@@ -173,6 +173,25 @@ namespace ABI {
 #define __x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource ABI::Windows::UI::Input::Inking::Core::ICoreInkIndependentInputSource
 
 #endif // ____x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Input {
+                namespace Inking {
+                    namespace Core {
+                        interface ICoreInkIndependentInputSource2;
+                    } /* Core */
+                } /* Inking */
+            } /* Input */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2 ABI::Windows::UI::Input::Inking::Core::ICoreInkIndependentInputSource2
+
+#endif // ____x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSourceStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSourceStatics_FWD_DEFINED__
@@ -580,6 +599,31 @@ namespace ABI {
 namespace ABI {
     namespace Windows {
         namespace UI {
+            namespace Core {
+                class CoreCursor;
+            } /* Core */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+#ifndef ____x_ABI_CWindows_CUI_CCore_CICoreCursor_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CCore_CICoreCursor_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Core {
+                interface ICoreCursor;
+            } /* Core */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CUI_CCore_CICoreCursor ABI::Windows::UI::Core::ICoreCursor
+
+#endif // ____x_ABI_CWindows_CUI_CCore_CICoreCursor_FWD_DEFINED__
+
+namespace ABI {
+    namespace Windows {
+        namespace UI {
             namespace Input {
                 namespace Inking {
                     class InkDrawingAttributes;
@@ -906,6 +950,49 @@ EXTERN_C const IID IID___x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndepe
 
 /*
  *
+ * Interface Windows.UI.Input.Inking.Core.ICoreInkIndependentInputSource2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.Input.Inking.Core.CoreInkIndependentInputSource
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_Input_Inking_Core_ICoreInkIndependentInputSource2[] = L"Windows.UI.Input.Inking.Core.ICoreInkIndependentInputSource2";
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Input {
+                namespace Inking {
+                    namespace Core {
+                        MIDL_INTERFACE("2846b012-0b59-5bb9-a3c5-becb7cf03a33")
+                        ICoreInkIndependentInputSource2 : public IInspectable
+                        {
+                        public:
+                            virtual HRESULT STDMETHODCALLTYPE get_PointerCursor(
+                                ABI::Windows::UI::Core::ICoreCursor** value
+                                ) = 0;
+                            virtual HRESULT STDMETHODCALLTYPE put_PointerCursor(
+                                ABI::Windows::UI::Core::ICoreCursor* value
+                                ) = 0;
+                        };
+
+                        extern MIDL_CONST_ID IID& IID_ICoreInkIndependentInputSource2 = _uuidof(ICoreInkIndependentInputSource2);
+                    } /* Core */
+                } /* Inking */
+            } /* Input */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2;
+#endif /* !defined(____x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
  * Interface Windows.UI.Input.Inking.Core.ICoreInkIndependentInputSourceStatics
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -1189,6 +1276,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.UI.Input.Inking.Core.ICoreInkIndependentInputSource ** Default Interface **
+ *    Windows.UI.Input.Inking.Core.ICoreInkIndependentInputSource2
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -1282,6 +1370,12 @@ typedef interface __x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreIncrementalInk
 typedef interface __x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource __x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource;
 
 #endif // ____x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2 __x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2;
+
+#endif // ____x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSourceStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSourceStatics_FWD_DEFINED__
@@ -1797,6 +1891,12 @@ typedef interface __x_ABI_CWindows_CUI_CComposition_CIContainerVisual __x_ABI_CW
 
 #endif // ____x_ABI_CWindows_CUI_CComposition_CIContainerVisual_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CUI_CCore_CICoreCursor_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CCore_CICoreCursor_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CUI_CCore_CICoreCursor __x_ABI_CWindows_CUI_CCore_CICoreCursor;
+
+#endif // ____x_ABI_CWindows_CUI_CCore_CICoreCursor_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CUI_CInput_CInking_CIInkDrawingAttributes_FWD_DEFINED__
 #define ____x_ABI_CWindows_CUI_CInput_CInking_CIInkDrawingAttributes_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CUI_CInput_CInking_CIInkDrawingAttributes __x_ABI_CWindows_CUI_CInput_CInking_CIInkDrawingAttributes;
@@ -2139,6 +2239,80 @@ interface __x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSou
 EXTERN_C const IID IID___x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource;
 #endif /* !defined(____x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.UI.Input.Inking.Core.ICoreInkIndependentInputSource2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.Input.Inking.Core.CoreInkIndependentInputSource
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_Input_Inking_Core_ICoreInkIndependentInputSource2[] = L"Windows.UI.Input.Inking.Core.ICoreInkIndependentInputSource2";
+typedef struct __x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_PointerCursor)(__x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2* This,
+        __x_ABI_CWindows_CUI_CCore_CICoreCursor** value);
+    HRESULT (STDMETHODCALLTYPE* put_PointerCursor)(__x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2* This,
+        __x_ABI_CWindows_CUI_CCore_CICoreCursor* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2Vtbl;
+
+interface __x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2_get_PointerCursor(This, value) \
+    ((This)->lpVtbl->get_PointerCursor(This, value))
+
+#define __x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2_put_PointerCursor(This, value) \
+    ((This)->lpVtbl->put_PointerCursor(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2;
+#endif /* !defined(____x_ABI_CWindows_CUI_CInput_CInking_CCore_CICoreInkIndependentInputSource2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *
@@ -2600,6 +2774,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.UI.Input.Inking.Core.ICoreInkIndependentInputSource ** Default Interface **
+ *    Windows.UI.Input.Inking.Core.ICoreInkIndependentInputSource2
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *

@@ -36,6 +36,7 @@ Revision History:
 #define NT10_MAJOR_VERSION          9
 #define NT11_MAJOR_VERSION          10
 #define NT12_MAJOR_VERSION          11
+#define NT13_MAJOR_VERSION          12
 
 // NT10 cluster upgrade versions (eg technical previews)
 #define WS2016_TP4_UPGRADE_VERSION  6
@@ -50,6 +51,13 @@ Revision History:
 // NT12 upgrade versions
 #define NINETEEN_H1_UPGRADE_VERSION  1
 #define NINETEEN_H2_UPGRADE_VERSION  2
+#define MN_UPGRADE_VERSION           3
+#define FE_UPGRADE_VERSION           4
+
+// NT13 upgrade versions
+#define CA_UPGRADE_VERSION           1
+
+#define HCI_UPGRADE_BIT 0x8000
 
 #define CLUSREG_NAME_MIXED_MODE                    L"MixedMode"
 
@@ -379,6 +387,7 @@ typedef enum {
     ClusGroupTypeVMReplicaCoordinator        = 120,
     ClusGroupTypeCrossClusterOrchestrator = 121,
     ClusGroupTypeInfrastructureFileServer = 122,
+    ClusGroupTypeCoreSddc           = 123,
     ClusGroupTypeUnknown            = 9999
 } CLUSGROUP_TYPE, *PCLUSGROUP_TYPE;
 
@@ -434,8 +443,7 @@ typedef enum
     CLUS_GROUP_START_ALLOWED = 2
 } CLUS_GROUP_START_SETTING;
 
-
-typedef enum 
+typedef enum
 {
     CLUS_AFFINITY_RULE_NONE = 0,
     CLUS_AFFINITY_RULE_SAME_FAULT_DOMAIN = 1,
@@ -446,6 +454,9 @@ typedef enum
     CLUS_AFFINITY_RULE_MIN = CLUS_AFFINITY_RULE_NONE,
     CLUS_AFFINITY_RULE_MAX = CLUS_AFFINITY_RULE_DIFFERENT_NODE,
 } CLUS_AFFINITY_RULE_TYPE;
+
+#define CLUS_GRP_MOVE_ALLOWED 0
+#define CLUS_GRP_MOVE_LOCKED  1
 
 #endif // CLUSAPI_VERSION_WINTHRESHOLD
 
@@ -2604,6 +2615,7 @@ typedef DWORD
 #define CLUSAPI_GROUP_ONLINE_IGNORE_RESOURCE_STATUS 0x00000001
 #define CLUSAPI_GROUP_ONLINE_SYNCHRONOUS            0x00000002
 #define CLUSAPI_GROUP_ONLINE_BEST_POSSIBLE_NODE     0x00000004
+#define CLUSAPI_GROUP_ONLINE_IGNORE_AFFINITY_RULE   0x00000008
 
 DWORD WINAPI OnlineClusterGroupEx(
   _In_       HGROUP hGroup,
@@ -2628,6 +2640,9 @@ DWORD WINAPI OfflineClusterGroupEx(
 #define CLUSAPI_RESOURCE_ONLINE_DO_NOT_UPDATE_PERSISTENT_STATE  0x00000002
 #define CLUSAPI_RESOURCE_ONLINE_NECESSARY_FOR_QUORUM            0x00000004
 #define CLUSAPI_RESOURCE_ONLINE_BEST_POSSIBLE_NODE              0x00000008
+
+
+#define CLUSAPI_RESOURCE_ONLINE_IGNORE_AFFINITY_RULE            0x00000020
 
 
 DWORD WINAPI OnlineClusterResourceEx(
@@ -3025,18 +3040,18 @@ CLUSTER_RESOURCE_STATE
 WINAPI
 GetClusterResourceState(
     _In_ HRESOURCE hResource,
-    _Out_writes_to_opt_(*lpcchNodeName, *lpcchNodeName + 1) LPWSTR lpszNodeName,
+    _Out_writes_to_opt_(*lpcchNodeName, *lpcchNodeName) LPWSTR lpszNodeName,
     _Inout_opt_ LPDWORD lpcchNodeName,
-    _Out_writes_to_opt_(*lpcchGroupName, *lpcchGroupName + 1) LPWSTR lpszGroupName,
+    _Out_writes_to_opt_(*lpcchGroupName, *lpcchGroupName) LPWSTR lpszGroupName,
     _Inout_opt_ LPDWORD lpcchGroupName
     );
 
 typedef CLUSTER_RESOURCE_STATE
 (WINAPI * PCLUSAPI_GET_CLUSTER_RESOURCE_STATE)(
     _In_ HRESOURCE hResource,
-    _Out_writes_to_opt_(*lpcchNodeName, *lpcchNodeName + 1) LPWSTR lpszNodeName,
+    _Out_writes_to_opt_(*lpcchNodeName, *lpcchNodeName) LPWSTR lpszNodeName,
     _Inout_opt_ LPDWORD lpcchNodeName,
-    _Out_writes_to_opt_(*lpcchGroupName, *lpcchGroupName + 1) LPWSTR lpszGroupName,
+    _Out_writes_to_opt_(*lpcchGroupName, *lpcchGroupName) LPWSTR lpszGroupName,
     _Inout_opt_ LPDWORD lpcchGroupName
     );
 
@@ -3823,7 +3838,7 @@ typedef enum CLCTL_CODES {
 
     CTCTL_GET_FAULT_DOMAIN_STATE            = CLCTL_EXTERNAL_CODE( 197, CLUS_ACCESS_READ, CLUS_NO_MODIFY ),
 
-    
+
     CLCTL_NETNAME_SET_PWD_INFOEX            = CLCTL_EXTERNAL_CODE( 198, CLUS_ACCESS_WRITE, CLUS_NO_MODIFY ),
 
     // Control codes 2000 to 2999 are reserved.
@@ -3854,6 +3869,7 @@ typedef enum CLCTL_CODES {
     //
     // Storage Replication
     //
+    CLCTL_REPLICATION_ADD_REPLICATION_GROUP           = CLCTL_EXTERNAL_CODE(2128, CLUS_ACCESS_WRITE, CLUS_NO_MODIFY),
     CLCTL_REPLICATION_GET_LOG_INFO                    = CLCTL_EXTERNAL_CODE(2129, CLUS_ACCESS_READ, CLUS_NO_MODIFY),
     CLCTL_REPLICATION_GET_ELIGIBLE_LOGDISKS           = CLCTL_EXTERNAL_CODE(2130, CLUS_ACCESS_READ, CLUS_NO_MODIFY),
     CLCTL_REPLICATION_GET_ELIGIBLE_TARGET_DATADISKS   = CLCTL_EXTERNAL_CODE(2131, CLUS_ACCESS_READ, CLUS_NO_MODIFY),
@@ -3890,6 +3906,9 @@ typedef enum CLCTL_CODES {
     CLCTL_STORAGE_RENAME_SHARED_VOLUME              = CLCTL_EXTERNAL_CODE( 2933, CLUS_ACCESS_WRITE, CLUS_NO_MODIFY ),
     CLCTL_STORAGE_RENAME_SHARED_VOLUME_GUID         = CLCTL_EXTERNAL_CODE( 2934, CLUS_ACCESS_WRITE, CLUS_NO_MODIFY ),
     CLCTL_ENUM_AFFINITY_RULE_NAMES                  = CLCTL_EXTERNAL_CODE( 2935, CLUS_ACCESS_READ, CLUS_NO_MODIFY ),
+    CLCTL_GET_NODES_IN_FD                           = CLCTL_EXTERNAL_CODE( 2936, CLUS_ACCESS_READ, CLUS_NO_MODIFY ),
+
+    CLCTL_FORCE_DB_FLUSH                            = CLCTL_EXTERNAL_CODE( 2937, CLUS_ACCESS_WRITE, CLUS_MODIFY ),
 
 //Internal codes:
 //A control code used by the Cluster service to notify a resource DLL of changes to the cluster environment. Applications cannot use internal control codes; they must use external control codes.
@@ -4343,11 +4362,15 @@ typedef enum CLUSCTL_RESOURCE_CODES {
         CLUSCTL_RESOURCE_CODE( CLCTL_SCALEOUT_GET_CLUSTERS ),
 
 
-        CLUSCTL_RESOURCE_CHECK_DRAIN_VETO =
-                CLUSCTL_RESOURCE_CODE( CLCTL_CHECK_DRAIN_VETO ),
-
-        CLUSCTL_RESOURCE_NOTIFY_DRAIN_COMPLETE = 
-                CLUSCTL_RESOURCE_CODE( CLCTL_NOTIFY_DRAIN_COMPLETE ),
+    CLUSCTL_RESOURCE_CHECK_DRAIN_VETO =
+        CLUSCTL_RESOURCE_CODE( CLCTL_CHECK_DRAIN_VETO ),
+    
+    CLUSCTL_RESOURCE_NOTIFY_DRAIN_COMPLETE =
+        CLUSCTL_RESOURCE_CODE( CLCTL_NOTIFY_DRAIN_COMPLETE ),
+    
+    CLUSCTL_RESOURCE_GET_NODES_IN_FD =
+        CLUSCTL_RESOURCE_CODE( CLCTL_GET_NODES_IN_FD ),
+                
 } CLUSCTL_RESOURCE_CODES;
 
 //
@@ -4527,6 +4550,9 @@ typedef enum CLUSCTL_RESOURCE_TYPE_CODES {
 
     CLUSCTL_RESOURCE_TYPE_REPLICATION_GET_LOG_INFO =
         CLUSCTL_RESOURCE_TYPE_CODE( CLCTL_REPLICATION_GET_LOG_INFO),
+
+    CLUSCTL_RESOURCE_TYPE_REPLICATION_ADD_REPLICATION_GROUP =
+        CLUSCTL_RESOURCE_TYPE_CODE( CLCTL_REPLICATION_ADD_REPLICATION_GROUP ),
 
 
     CLUSCTL_CLOUD_WITNESS_RESOURCE_TYPE_VALIDATE_CREDENTIALS = CLUSCTL_RESOURCE_TYPE_CODE( CLCTL_CLOUD_WITNESS_RESOURCE_TYPE_VALIDATE_CREDENTIALS ),
@@ -4947,7 +4973,16 @@ typedef enum CLUSCTL_CLUSTER_CODES {
         CLUSCTL_CLUSTER_CODE( CLCTL_RELOAD_AUTOLOGGER_CONFIG  ),
 
     CLUSCTL_CLUSTER_ENUM_AFFINITY_RULE_NAMES =
-	    CLUSCTL_CLUSTER_CODE( CLCTL_ENUM_AFFINITY_RULE_NAMES ),
+        CLUSCTL_CLUSTER_CODE( CLCTL_ENUM_AFFINITY_RULE_NAMES ),
+
+    CLUSCTL_CLUSTER_GET_NODES_IN_FD =
+            CLUSCTL_CLUSTER_CODE( CLCTL_GET_NODES_IN_FD ), 
+
+        CLUSCTL_CLUSTER_FORCE_FLUSH_DB = 
+            CLUSCTL_CLUSTER_CODE( CLCTL_FORCE_DB_FLUSH ),
+
+       CLUSCTL_CLUSTER_GET_CLMUSR_TOKEN =
+               CLUSCTL_CLUSTER_CODE( CLCTL_NETNAME_GET_VIRTUAL_SERVER_TOKEN ),
 
 } CLUSCTL_CLUSTER_CODES;
 
@@ -4985,21 +5020,21 @@ typedef enum CLUSCTL_GROUPSET_CODES {
 // Cluster control codes for Affinity Rules
 //
 typedef enum CLUSCTL_AFFINITYRULE_CODES {
-	CLUSCTL_AFFINITYRULE_GET_COMMON_PROPERTIES = 
-		CLUSCTL_AFFINITYRULE_CODE( CLCTL_GET_COMMON_PROPERTIES ),
+        CLUSCTL_AFFINITYRULE_GET_COMMON_PROPERTIES =
+                CLUSCTL_AFFINITYRULE_CODE( CLCTL_GET_COMMON_PROPERTIES ),
 
-	CLUSCTL_AFFINITYRULE_GET_RO_COMMON_PROPERTIES =
-		CLUSCTL_AFFINITYRULE_CODE( CLCTL_GET_RO_COMMON_PROPERTIES ),
+        CLUSCTL_AFFINITYRULE_GET_RO_COMMON_PROPERTIES =
+                CLUSCTL_AFFINITYRULE_CODE( CLCTL_GET_RO_COMMON_PROPERTIES ),
 
-	CLUSCTL_AFFINITYRULE_SET_COMMON_PROPERTIES =
-		CLUSCTL_AFFINITYRULE_CODE( CLCTL_SET_COMMON_PROPERTIES ),
+        CLUSCTL_AFFINITYRULE_SET_COMMON_PROPERTIES =
+                CLUSCTL_AFFINITYRULE_CODE( CLCTL_SET_COMMON_PROPERTIES ),
 
-	CLUSCTL_AFFINITYRULE_GET_ID = 
-		CLUSCTL_AFFINITYRULE_CODE( CLCTL_GET_ID ),
+        CLUSCTL_AFFINITYRULE_GET_ID =
+                CLUSCTL_AFFINITYRULE_CODE( CLCTL_GET_ID ),
 
-    CLUSCTL_AFFINITYRULE_GET_GROUPNAMES = 
-        CLUSCTL_AFFINITYRULE_CODE( CLCTL_GROUPSET_GET_GROUPS ),
-		
+        CLUSCTL_AFFINITYRULE_GET_GROUPNAMES =
+                CLUSCTL_AFFINITYRULE_CODE( CLCTL_GROUPSET_GET_GROUPS ),
+
 } CLUSCTL_AFFINITYRULE_CODES;
 
 
@@ -5055,7 +5090,9 @@ typedef enum CLUS_CHARACTERISTICS {
     CLUS_CHAR_NOTIFY_NEW_OWNER              = 0x00008000,
     CLUS_CHAR_SUPPORTS_UNMONITORED_STATE    = 0x00010000,
     CLUS_CHAR_INFRASTRUCTURE                = 0x00020000,       // The resource type is for infrastructure and is not for roles
-    CLUS_CHAR_VETO_DRAIN                    = 0x00040000
+    CLUS_CHAR_VETO_DRAIN                    = 0x00040000,
+    CLUS_CHAR_DRAIN_LOCAL_OFFLINE			= 0x00080000
+
 } CLUS_CHARACTERISTICS;
 
 //
@@ -6964,10 +7001,10 @@ DetermineClusterCloudTypeFromCluster(
     _Out_ PCLUSTER_CLOUD_TYPE   pCloudType
 );
 
-DWORD 
-WINAPI 
+DWORD
+WINAPI
 GetNodeCloudTypeDW(
-    _In_ PCWSTR  ppszNodeName, 
+    _In_ PCWSTR  ppszNodeName,
     __out DWORD* NodeCloudType);
 
 typedef DWORD (WINAPI *PCLUSAPI_REMOVE_CLUSTER_NAME_ACCOUNT)(
@@ -7004,6 +7041,16 @@ AddClusterStorageNode(
     _In_opt_ LPCWSTR lpszClusterStorageNodeLocation
     );
 
+HNODE
+WINAPI
+AddClusterNodeEx(
+    _In_ HCLUSTER    hCluster,
+    _In_ PCWSTR      lpszNodeName,
+    _In_ DWORD       dwFlags,
+    _In_opt_ PCLUSTER_SETUP_PROGRESS_CALLBACK   pfnProgressCallback,
+    _In_opt_ PVOID   pvCallbackArg
+    );
+
 DWORD
 WINAPI
 RemoveClusterStorageNode(
@@ -7017,6 +7064,15 @@ typedef HNODE
 (WINAPI * PCLUSAPI_ADD_CLUSTER_NODE)(
     _In_ HCLUSTER    hCluster,
     _In_ PCWSTR      lpszNodeName,
+    _In_opt_ PCLUSTER_SETUP_PROGRESS_CALLBACK   pfnProgressCallback,
+    _In_opt_ PVOID   pvCallbackArg
+    );
+
+typedef HNODE
+(WINAPI * PCLUSAPI_ADD_CLUSTER_NODE_EX)(
+    _In_ HCLUSTER    hCluster,
+    _In_ PCWSTR      lpszNodeName,
+    _In_ DWORD       dwFlags,
     _In_opt_ PCLUSTER_SETUP_PROGRESS_CALLBACK   pfnProgressCallback,
     _In_opt_ PVOID   pvCallbackArg
     );
@@ -7079,6 +7135,7 @@ typedef DWORD
 #define CLUS_RESTYPE_NAME_VMREPLICA_BROKER      L"Virtual Machine Replication Broker"
 #define CLUS_RESTYPE_NAME_VMREPLICA_COORDINATOR      L"Virtual Machine Replication Coordinator"
 #define CLUS_RESTYPE_NAME_NFS_V2                L"Network File System"
+#define CLUS_RESTYPE_NAME_NFS_MSNS              L"NFS Multi Server Namespace"
 #define CLUS_RESTYPE_NAME_CAU                   L"ClusterAwareUpdatingResource"
 #define CLUS_RESTYPE_NAME_NV_PROVIDER_ADDRESS   L"Provider Address"
 #define CLUS_RESTYPE_NAME_NAT                   L"Nat"
@@ -7087,6 +7144,7 @@ typedef DWORD
 #define CLUS_RESTYPE_NAME_HEALTH_SERVICE        L"Health Service"
 #define CLUS_RESTYPE_NAME_VM_WMI                L"Virtual Machine Cluster WMI"
 #define CLUS_RESTYPE_NAME_SDDC_MANAGEMENT       L"SDDC Management"
+#define CLUS_RESTYPE_NAME_HCSVM                 L"HCS Virtual Machine"
 
 #define CLUS_RESTYPE_NAME_VIRTUAL_IPV4          L"Disjoint IPv4 Address"
 #define CLUS_RESTYPE_NAME_VIRTUAL_IPV6          L"Disjoint IPv6 Address"
@@ -7227,7 +7285,7 @@ typedef DWORD
 #define CLUSREG_NAME_GRP_FAULT_DOMAIN                      L"FaultDomain"
 #define CLUSREG_NAME_GRP_UPDATE_DOMAIN                     L"UpdateDomain"
 #define CLUSREG_NAME_GRP_PLACEMENT_OPTIONS                 L"PlacementOptions"
-
+#define CLUSREG_NAME_GRP_LOCK_MOVE                         L"LockedFromMoving"
 
 //
 // Resource common property names
@@ -7273,6 +7331,8 @@ typedef DWORD
 #define CLUSREG_NAME_RESTYPE_DUMP_SERVICES      L"DumpServices"
 #define CLUSREG_NAME_RESTYPE_ENABLED_EVENT_LOGS L"EnabledEventLogs"
 #define CLUSREG_NAME_RESTYPE_MAX_MONITORS       L"MaximumMonitors"
+#define CLUSREG_NAME_RESTYPE_WPR_START_AFTER    L"WprStartAfter"
+#define CLUSREG_NAME_RESTYPE_WPR_PROFILES       L"WprProfiles"
 
 //
 // Network common property names
@@ -7327,7 +7387,7 @@ typedef DWORD
 
 //
 // Affinity rule property names
-// 
+//
 #define CLUSREG_NAME_AFFINITYRULE_NAME              L"Name"
 #define CLUSREG_NAME_AFFINITYRULE_TYPE              L"RuleType"
 #define CLUSREG_NAME_AFFINITYRULE_GROUPS            L"Groups"
@@ -7342,6 +7402,8 @@ typedef DWORD
 //
 #define CLUSREG_NAME_START_MEMORY               L"StartMemory"
 #define CLUSREG_NAME_VIRTUAL_NUMA_COUNT         L"VirtualNumaCount"
+#define CLUSREG_NAME_DDA_DEVICE_ALLOCATIONS     L"DdaDeviceAllocations"
+#define CLUSREG_NAME_GPUP_DEVICE_ALLOCATIONS    L"GpupDeviceAllocations"
 
 //
 // Physical Disk
@@ -7464,7 +7526,7 @@ typedef DWORD
 #define CLUSREG_NAME_NETNAME_IN_USE_NETWORKS        L"InUseNetworks"
 #define CLUSREG_NAME_NETNAME_DNS_SUFFIX             L"DnsSuffix"
 #define CLUSREG_NAME_NETNAME_AD_AWARE               L"ADAware"
-
+#define CLUSREG_NAME_NETNAME_DNN_DISABLE_CLONES     L"DisableClones"
 
 //
 // Print Spooler
@@ -7561,6 +7623,7 @@ typedef DWORD
 #define CLUSREG_NAME_CLOUDWITNESS_PRIMARY_KEY           L"PrimaryKey"
 #define CLUSREG_NAME_CLOUDWITNESS_ACCOUNT_NAME          L"AccountName"
 #define CLUSREG_NAME_CLOUDWITNESS_ENDPOINT_INFO         L"EndpointInfo"
+#define CLUSREG_NAME_CLOUDWITNESS_CONTAINER_NAME        L"ContainerName"
 #define CLOUD_WITNESS_CONTAINER_NAME                    L"msft-cloud-witness"
 
 // Storage Replica
@@ -7700,6 +7763,28 @@ typedef struct _SR_RESOURCE_TYPE_REPLICATED_DISKS_RESULT
     USHORT Count;                                        /**< Number of replicated disks in the result set.*/
     SR_RESOURCE_TYPE_REPLICATED_DISK ReplicatedDisks[1]; /**< Array of replicated disks.*/
 } SR_RESOURCE_TYPE_REPLICATED_DISKS_RESULT, *PSR_RESOURCE_TYPE_REPLICATED_DISKS_RESULT;
+
+typedef struct _SR_RESOURCE_TYPE_ADD_REPLICATION_GROUP
+{   
+    WCHAR       ReplicationGroupName[MAX_PATH];          /**< The name of the replication group to create*/
+    WCHAR       Description[MAX_PATH];                   /**< A text description of the group*/
+    WCHAR       LogPath[MAX_PATH];                       /**< Full path of the log container*/
+    ULONGLONG   MaxLogSizeInBytes;                       /**< The maximum size of the log file in Bytes*/
+    USHORT      LogType;                                 /**< Whether the log is file based CLFS log (1) or RAW SR log (2)*/
+    DWORD       ReplicationMode;                         /**< Whether the replication is performed synchronously(1) or asynchronously(2)*/
+    DWORD       MinimumPartnersInSync;                   /**< Minimum number of synchronous Replication Partners to be actively in sync before allowing data access by applications on the primary Replica*/
+    BOOLEAN     EnableWriteConsistency;                  /**< Set true to enable write consistency*/
+    BOOLEAN     EnableEncryption;                        /**< true to enable encryption; otherwise, false*/
+    WCHAR       CertificateThumbprint[MAX_PATH];         /**< The certificate thumbprint*/
+    ULONG       VolumeNameCount;                         /**< Count of number of volumes in \ref VolumeNames field*/
+    WCHAR       VolumeNames[ANYSIZE_ARRAY][MAX_PATH];    /**< A collection of volume names*/
+} SR_RESOURCE_TYPE_ADD_REPLICATION_GROUP, *PSR_RESOURCE_TYPE_ADD_REPLICATION_GROUP;
+
+typedef struct _SR_RESOURCE_TYPE_ADD_REPLICATION_GROUP_RESULT
+{
+    DWORD       Result;                                  /**< Result code*/
+    WCHAR       ErrorString[MAX_PATH];                   /**< Buffer that contains error string from remote CIM calls.*/
+} SR_RESOURCE_TYPE_ADD_REPLICATION_GROUP_RESULT, *PSR_RESOURCE_TYPE_ADD_REPLICATION_GROUP_RESULT;
 
 
 //

@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -394,28 +402,34 @@ EXTERN_C const IID IID_IWiaDevMgr;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWiaDevMgr * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWiaDevMgr * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWiaDevMgr * This);
         
+        DECLSPEC_XFGVIRT(IWiaDevMgr, EnumDeviceInfo)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *EnumDeviceInfo )( 
             __RPC__in IWiaDevMgr * This,
             /* [in] */ LONG lFlag,
             /* [retval][out] */ __RPC__deref_out_opt IEnumWIA_DEV_INFO **ppIEnum);
         
+        DECLSPEC_XFGVIRT(IWiaDevMgr, CreateDevice)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CreateDevice )( 
             IWiaDevMgr * This,
             /* [in] */ BSTR bstrDeviceID,
             /* [out] */ IWiaItem **ppWiaItemRoot);
         
+        DECLSPEC_XFGVIRT(IWiaDevMgr, SelectDeviceDlg)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SelectDeviceDlg )( 
             IWiaDevMgr * This,
             /* [in] */ HWND hwndParent,
@@ -424,6 +438,7 @@ EXTERN_C const IID IID_IWiaDevMgr;
             /* [out][in] */ BSTR *pbstrDeviceID,
             /* [retval][out] */ IWiaItem **ppItemRoot);
         
+        DECLSPEC_XFGVIRT(IWiaDevMgr, SelectDeviceDlgID)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SelectDeviceDlgID )( 
             IWiaDevMgr * This,
             /* [in] */ HWND hwndParent,
@@ -431,6 +446,7 @@ EXTERN_C const IID IID_IWiaDevMgr;
             /* [in] */ LONG lFlags,
             /* [retval][out] */ BSTR *pbstrDeviceID);
         
+        DECLSPEC_XFGVIRT(IWiaDevMgr, GetImageDlg)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetImageDlg )( 
             IWiaDevMgr * This,
             /* [in] */ HWND hwndParent,
@@ -441,6 +457,7 @@ EXTERN_C const IID IID_IWiaDevMgr;
             /* [in] */ BSTR bstrFilename,
             /* [out][in] */ GUID *pguidFormat);
         
+        DECLSPEC_XFGVIRT(IWiaDevMgr, RegisterEventCallbackProgram)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *RegisterEventCallbackProgram )( 
             IWiaDevMgr * This,
             /* [in] */ LONG lFlags,
@@ -451,6 +468,7 @@ EXTERN_C const IID IID_IWiaDevMgr;
             /* [in] */ BSTR bstrDescription,
             /* [in] */ BSTR bstrIcon);
         
+        DECLSPEC_XFGVIRT(IWiaDevMgr, RegisterEventCallbackInterface)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *RegisterEventCallbackInterface )( 
             IWiaDevMgr * This,
             /* [in] */ LONG lFlags,
@@ -459,6 +477,7 @@ EXTERN_C const IID IID_IWiaDevMgr;
             /* [unique][in] */ IWiaEventCallback *pIWiaEventCallback,
             /* [out] */ IUnknown **pEventObject);
         
+        DECLSPEC_XFGVIRT(IWiaDevMgr, RegisterEventCallbackCLSID)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *RegisterEventCallbackCLSID )( 
             IWiaDevMgr * This,
             /* [in] */ LONG lFlags,
@@ -469,6 +488,7 @@ EXTERN_C const IID IID_IWiaDevMgr;
             /* [in] */ BSTR bstrDescription,
             /* [in] */ BSTR bstrIcon);
         
+        DECLSPEC_XFGVIRT(IWiaDevMgr, AddDeviceDlg)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AddDeviceDlg )( 
             __RPC__in IWiaDevMgr * This,
             /* [in] */ __RPC__in HWND hwndParent,
@@ -689,35 +709,43 @@ EXTERN_C const IID IID_IEnumWIA_DEV_INFO;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumWIA_DEV_INFO * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumWIA_DEV_INFO * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumWIA_DEV_INFO * This);
         
+        DECLSPEC_XFGVIRT(IEnumWIA_DEV_INFO, Next)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumWIA_DEV_INFO * This,
             /* [in] */ ULONG celt,
             /* [length_is][size_is][out] */ IWiaPropertyStorage **rgelt,
             /* [unique][out][in] */ ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IEnumWIA_DEV_INFO, Skip)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumWIA_DEV_INFO * This,
             /* [in] */ ULONG celt);
         
+        DECLSPEC_XFGVIRT(IEnumWIA_DEV_INFO, Reset)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumWIA_DEV_INFO * This);
         
+        DECLSPEC_XFGVIRT(IEnumWIA_DEV_INFO, Clone)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumWIA_DEV_INFO * This,
             /* [out] */ __RPC__deref_out_opt IEnumWIA_DEV_INFO **ppIEnum);
         
+        DECLSPEC_XFGVIRT(IEnumWIA_DEV_INFO, GetCount)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IEnumWIA_DEV_INFO * This,
             /* [out] */ __RPC__out ULONG *celt);
@@ -819,18 +847,22 @@ EXTERN_C const IID IID_IWiaEventCallback;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWiaEventCallback * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWiaEventCallback * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWiaEventCallback * This);
         
+        DECLSPEC_XFGVIRT(IWiaEventCallback, ImageEventCallback)
         HRESULT ( STDMETHODCALLTYPE *ImageEventCallback )( 
             __RPC__in IWiaEventCallback * This,
             /* [in] */ __RPC__in const GUID *pEventGUID,
@@ -931,18 +963,22 @@ EXTERN_C const IID IID_IWiaDataCallback;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWiaDataCallback * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWiaDataCallback * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWiaDataCallback * This);
         
+        DECLSPEC_XFGVIRT(IWiaDataCallback, BandedDataCallback)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *BandedDataCallback )( 
             IWiaDataCallback * This,
             /* [in] */ LONG lMessage,
@@ -1083,36 +1119,44 @@ EXTERN_C const IID IID_IWiaDataTransfer;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWiaDataTransfer * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWiaDataTransfer * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWiaDataTransfer * This);
         
+        DECLSPEC_XFGVIRT(IWiaDataTransfer, idtGetData)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *idtGetData )( 
             IWiaDataTransfer * This,
             /* [out][in] */ LPSTGMEDIUM pMedium,
             /* [unique][in] */ IWiaDataCallback *pIWiaDataCallback);
         
+        DECLSPEC_XFGVIRT(IWiaDataTransfer, idtGetBandedData)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *idtGetBandedData )( 
             IWiaDataTransfer * This,
             /* [unique][in] */ PWIA_DATA_TRANSFER_INFO pWiaDataTransInfo,
             /* [unique][in] */ IWiaDataCallback *pIWiaDataCallback);
         
+        DECLSPEC_XFGVIRT(IWiaDataTransfer, idtQueryGetData)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *idtQueryGetData )( 
             __RPC__in IWiaDataTransfer * This,
             /* [unique][in] */ __RPC__in_opt WIA_FORMAT_INFO *pfe);
         
+        DECLSPEC_XFGVIRT(IWiaDataTransfer, idtEnumWIA_FORMAT_INFO)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *idtEnumWIA_FORMAT_INFO )( 
             __RPC__in IWiaDataTransfer * This,
             /* [out] */ __RPC__deref_out_opt IEnumWIA_FORMAT_INFO **ppEnum);
         
+        DECLSPEC_XFGVIRT(IWiaDataTransfer, idtGetExtendedTransferInfo)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *idtGetExtendedTransferInfo )( 
             __RPC__in IWiaDataTransfer * This,
             /* [out] */ __RPC__out PWIA_EXTENDED_TRANSFER_INFO pExtendedTransferInfo);
@@ -1276,34 +1320,42 @@ EXTERN_C const IID IID_IWiaItem;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWiaItem * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWiaItem * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWiaItem * This);
         
+        DECLSPEC_XFGVIRT(IWiaItem, GetItemType)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetItemType )( 
             __RPC__in IWiaItem * This,
             /* [out] */ __RPC__out LONG *pItemType);
         
+        DECLSPEC_XFGVIRT(IWiaItem, AnalyzeItem)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AnalyzeItem )( 
             __RPC__in IWiaItem * This,
             /* [in] */ LONG lFlags);
         
+        DECLSPEC_XFGVIRT(IWiaItem, EnumChildItems)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *EnumChildItems )( 
             __RPC__in IWiaItem * This,
             /* [out] */ __RPC__deref_out_opt IEnumWiaItem **ppIEnumWiaItem);
         
+        DECLSPEC_XFGVIRT(IWiaItem, DeleteItem)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *DeleteItem )( 
             __RPC__in IWiaItem * This,
             /* [in] */ LONG lFlags);
         
+        DECLSPEC_XFGVIRT(IWiaItem, CreateChildItem)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateChildItem )( 
             __RPC__in IWiaItem * This,
             /* [in] */ LONG lFlags,
@@ -1311,18 +1363,21 @@ EXTERN_C const IID IID_IWiaItem;
             /* [in] */ __RPC__in BSTR bstrFullItemName,
             /* [out] */ __RPC__deref_out_opt IWiaItem **ppIWiaItem);
         
+        DECLSPEC_XFGVIRT(IWiaItem, EnumRegisterEventInfo)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *EnumRegisterEventInfo )( 
             __RPC__in IWiaItem * This,
             /* [in] */ LONG lFlags,
             /* [in] */ __RPC__in const GUID *pEventGUID,
             /* [out] */ __RPC__deref_out_opt IEnumWIA_DEV_CAPS **ppIEnum);
         
+        DECLSPEC_XFGVIRT(IWiaItem, FindItemByName)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *FindItemByName )( 
             __RPC__in IWiaItem * This,
             /* [in] */ LONG lFlags,
             /* [in] */ __RPC__in BSTR bstrFullItemName,
             /* [out] */ __RPC__deref_out_opt IWiaItem **ppIWiaItem);
         
+        DECLSPEC_XFGVIRT(IWiaItem, DeviceDlg)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *DeviceDlg )( 
             IWiaItem * This,
             /* [in] */ HWND hwndParent,
@@ -1331,33 +1386,40 @@ EXTERN_C const IID IID_IWiaItem;
             /* [out] */ LONG *plItemCount,
             /* [out] */ IWiaItem ***ppIWiaItem);
         
+        DECLSPEC_XFGVIRT(IWiaItem, DeviceCommand)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *DeviceCommand )( 
             __RPC__in IWiaItem * This,
             /* [in] */ LONG lFlags,
             /* [in] */ __RPC__in const GUID *pCmdGUID,
             /* [out][in] */ __RPC__deref_inout_opt IWiaItem **pIWiaItem);
         
+        DECLSPEC_XFGVIRT(IWiaItem, GetRootItem)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetRootItem )( 
             __RPC__in IWiaItem * This,
             /* [out] */ __RPC__deref_out_opt IWiaItem **ppIWiaItem);
         
+        DECLSPEC_XFGVIRT(IWiaItem, EnumDeviceCapabilities)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *EnumDeviceCapabilities )( 
             __RPC__in IWiaItem * This,
             /* [in] */ LONG lFlags,
             /* [out] */ __RPC__deref_out_opt IEnumWIA_DEV_CAPS **ppIEnumWIA_DEV_CAPS);
         
+        DECLSPEC_XFGVIRT(IWiaItem, DumpItemData)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *DumpItemData )( 
             __RPC__in IWiaItem * This,
             /* [out] */ __RPC__deref_out_opt BSTR *bstrData);
         
+        DECLSPEC_XFGVIRT(IWiaItem, DumpDrvItemData)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *DumpDrvItemData )( 
             __RPC__in IWiaItem * This,
             /* [out] */ __RPC__deref_out_opt BSTR *bstrData);
         
+        DECLSPEC_XFGVIRT(IWiaItem, DumpTreeItemData)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *DumpTreeItemData )( 
             __RPC__in IWiaItem * This,
             /* [out] */ __RPC__deref_out_opt BSTR *bstrData);
         
+        DECLSPEC_XFGVIRT(IWiaItem, Diagnostic)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Diagnostic )( 
             __RPC__in IWiaItem * This,
             /* [in] */ ULONG ulSize,
@@ -1547,24 +1609,29 @@ EXTERN_C const IID IID_IWiaPropertyStorage;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWiaPropertyStorage * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWiaPropertyStorage * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWiaPropertyStorage * This);
         
+        DECLSPEC_XFGVIRT(IWiaPropertyStorage, ReadMultiple)
         HRESULT ( STDMETHODCALLTYPE *ReadMultiple )( 
             __RPC__in IWiaPropertyStorage * This,
             /* [in] */ ULONG cpspec,
             /* [size_is][in] */ __RPC__in_ecount_full(cpspec) const PROPSPEC rgpspec[  ],
             /* [size_is][out] */ __RPC__out_ecount_full(cpspec) PROPVARIANT rgpropvar[  ]);
         
+        DECLSPEC_XFGVIRT(IWiaPropertyStorage, WriteMultiple)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *WriteMultiple )( 
             IWiaPropertyStorage * This,
             /* [in] */ ULONG cpspec,
@@ -1572,53 +1639,64 @@ EXTERN_C const IID IID_IWiaPropertyStorage;
             /* [size_is][in] */ const PROPVARIANT rgpropvar[  ],
             /* [in] */ PROPID propidNameFirst);
         
+        DECLSPEC_XFGVIRT(IWiaPropertyStorage, DeleteMultiple)
         HRESULT ( STDMETHODCALLTYPE *DeleteMultiple )( 
             __RPC__in IWiaPropertyStorage * This,
             /* [in] */ ULONG cpspec,
             /* [size_is][in] */ __RPC__in_ecount_full(cpspec) const PROPSPEC rgpspec[  ]);
         
+        DECLSPEC_XFGVIRT(IWiaPropertyStorage, ReadPropertyNames)
         HRESULT ( STDMETHODCALLTYPE *ReadPropertyNames )( 
             __RPC__in IWiaPropertyStorage * This,
             /* [in] */ ULONG cpropid,
             /* [size_is][in] */ __RPC__in_ecount_full(cpropid) const PROPID rgpropid[  ],
             /* [size_is][out] */ __RPC__out_ecount_full(cpropid) LPOLESTR rglpwstrName[  ]);
         
+        DECLSPEC_XFGVIRT(IWiaPropertyStorage, WritePropertyNames)
         HRESULT ( STDMETHODCALLTYPE *WritePropertyNames )( 
             __RPC__in IWiaPropertyStorage * This,
             /* [in] */ ULONG cpropid,
             /* [size_is][in] */ __RPC__in_ecount_full(cpropid) const PROPID rgpropid[  ],
             /* [size_is][in] */ __RPC__in_ecount_full(cpropid) const LPOLESTR rglpwstrName[  ]);
         
+        DECLSPEC_XFGVIRT(IWiaPropertyStorage, DeletePropertyNames)
         HRESULT ( STDMETHODCALLTYPE *DeletePropertyNames )( 
             __RPC__in IWiaPropertyStorage * This,
             /* [in] */ ULONG cpropid,
             /* [size_is][in] */ __RPC__in_ecount_full(cpropid) const PROPID rgpropid[  ]);
         
+        DECLSPEC_XFGVIRT(IWiaPropertyStorage, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
             __RPC__in IWiaPropertyStorage * This,
             /* [in] */ DWORD grfCommitFlags);
         
+        DECLSPEC_XFGVIRT(IWiaPropertyStorage, Revert)
         HRESULT ( STDMETHODCALLTYPE *Revert )( 
             __RPC__in IWiaPropertyStorage * This);
         
+        DECLSPEC_XFGVIRT(IWiaPropertyStorage, Enum)
         HRESULT ( STDMETHODCALLTYPE *Enum )( 
             __RPC__in IWiaPropertyStorage * This,
             /* [out] */ __RPC__deref_out_opt IEnumSTATPROPSTG **ppenum);
         
+        DECLSPEC_XFGVIRT(IWiaPropertyStorage, SetTimes)
         HRESULT ( STDMETHODCALLTYPE *SetTimes )( 
             __RPC__in IWiaPropertyStorage * This,
             /* [in] */ __RPC__in const FILETIME *pctime,
             /* [in] */ __RPC__in const FILETIME *patime,
             /* [in] */ __RPC__in const FILETIME *pmtime);
         
+        DECLSPEC_XFGVIRT(IWiaPropertyStorage, SetClass)
         HRESULT ( STDMETHODCALLTYPE *SetClass )( 
             __RPC__in IWiaPropertyStorage * This,
             /* [in] */ __RPC__in REFCLSID clsid);
         
+        DECLSPEC_XFGVIRT(IWiaPropertyStorage, Stat)
         HRESULT ( STDMETHODCALLTYPE *Stat )( 
             __RPC__in IWiaPropertyStorage * This,
             /* [out] */ __RPC__out STATPROPSETSTG *pstatpsstg);
         
+        DECLSPEC_XFGVIRT(IWiaPropertyStorage, GetPropertyAttributes)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPropertyAttributes )( 
             __RPC__in IWiaPropertyStorage * This,
             /* [in] */ ULONG cpspec,
@@ -1626,15 +1704,18 @@ EXTERN_C const IID IID_IWiaPropertyStorage;
             /* [size_is][out] */ __RPC__out_ecount_full(cpspec) ULONG rgflags[  ],
             /* [size_is][out] */ __RPC__out_ecount_full(cpspec) PROPVARIANT rgpropvar[  ]);
         
+        DECLSPEC_XFGVIRT(IWiaPropertyStorage, GetCount)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IWiaPropertyStorage * This,
             /* [out] */ __RPC__out ULONG *pulNumProps);
         
+        DECLSPEC_XFGVIRT(IWiaPropertyStorage, GetPropertyStream)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPropertyStream )( 
             __RPC__in IWiaPropertyStorage * This,
             /* [out] */ __RPC__out GUID *pCompatibilityId,
             /* [out] */ __RPC__deref_out_opt IStream **ppIStream);
         
+        DECLSPEC_XFGVIRT(IWiaPropertyStorage, SetPropertyStream)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetPropertyStream )( 
             IWiaPropertyStorage * This,
             /* [in] */ GUID *pCompatibilityId,
@@ -1790,35 +1871,43 @@ EXTERN_C const IID IID_IEnumWiaItem;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumWiaItem * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumWiaItem * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumWiaItem * This);
         
+        DECLSPEC_XFGVIRT(IEnumWiaItem, Next)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumWiaItem * This,
             /* [in] */ ULONG celt,
             /* [length_is][size_is][out] */ IWiaItem **ppIWiaItem,
             /* [unique][out][in] */ ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IEnumWiaItem, Skip)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumWiaItem * This,
             /* [in] */ ULONG celt);
         
+        DECLSPEC_XFGVIRT(IEnumWiaItem, Reset)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumWiaItem * This);
         
+        DECLSPEC_XFGVIRT(IEnumWiaItem, Clone)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumWiaItem * This,
             /* [out] */ __RPC__deref_out_opt IEnumWiaItem **ppIEnum);
         
+        DECLSPEC_XFGVIRT(IEnumWiaItem, GetCount)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IEnumWiaItem * This,
             /* [out] */ __RPC__out ULONG *celt);
@@ -1950,35 +2039,43 @@ EXTERN_C const IID IID_IEnumWIA_DEV_CAPS;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumWIA_DEV_CAPS * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumWIA_DEV_CAPS * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumWIA_DEV_CAPS * This);
         
+        DECLSPEC_XFGVIRT(IEnumWIA_DEV_CAPS, Next)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumWIA_DEV_CAPS * This,
             /* [in] */ ULONG celt,
             /* [length_is][size_is][out] */ WIA_DEV_CAP *rgelt,
             /* [unique][out][in] */ ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IEnumWIA_DEV_CAPS, Skip)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumWIA_DEV_CAPS * This,
             /* [in] */ ULONG celt);
         
+        DECLSPEC_XFGVIRT(IEnumWIA_DEV_CAPS, Reset)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumWIA_DEV_CAPS * This);
         
+        DECLSPEC_XFGVIRT(IEnumWIA_DEV_CAPS, Clone)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumWIA_DEV_CAPS * This,
             /* [out] */ __RPC__deref_out_opt IEnumWIA_DEV_CAPS **ppIEnum);
         
+        DECLSPEC_XFGVIRT(IEnumWIA_DEV_CAPS, GetCount)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IEnumWIA_DEV_CAPS * This,
             /* [out] */ __RPC__out ULONG *pcelt);
@@ -2086,35 +2183,43 @@ EXTERN_C const IID IID_IEnumWIA_FORMAT_INFO;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumWIA_FORMAT_INFO * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumWIA_FORMAT_INFO * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumWIA_FORMAT_INFO * This);
         
+        DECLSPEC_XFGVIRT(IEnumWIA_FORMAT_INFO, Next)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumWIA_FORMAT_INFO * This,
             /* [in] */ ULONG celt,
             /* [length_is][size_is][out] */ WIA_FORMAT_INFO *rgelt,
             /* [unique][out][in] */ ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IEnumWIA_FORMAT_INFO, Skip)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumWIA_FORMAT_INFO * This,
             /* [in] */ ULONG celt);
         
+        DECLSPEC_XFGVIRT(IEnumWIA_FORMAT_INFO, Reset)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumWIA_FORMAT_INFO * This);
         
+        DECLSPEC_XFGVIRT(IEnumWIA_FORMAT_INFO, Clone)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumWIA_FORMAT_INFO * This,
             /* [out] */ __RPC__deref_out_opt IEnumWIA_FORMAT_INFO **ppIEnum);
         
+        DECLSPEC_XFGVIRT(IEnumWIA_FORMAT_INFO, GetCount)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IEnumWIA_FORMAT_INFO * This,
             /* [out] */ __RPC__out ULONG *pcelt);
@@ -2218,26 +2323,32 @@ EXTERN_C const IID IID_IWiaLog;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWiaLog * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWiaLog * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWiaLog * This);
         
+        DECLSPEC_XFGVIRT(IWiaLog, InitializeLog)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *InitializeLog )( 
             __RPC__in IWiaLog * This,
             /* [in] */ LONG hInstance);
         
+        DECLSPEC_XFGVIRT(IWiaLog, hResult)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *hResult )( 
             __RPC__in IWiaLog * This,
             /* [in] */ HRESULT hResult);
         
+        DECLSPEC_XFGVIRT(IWiaLog, Log)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Log )( 
             __RPC__in IWiaLog * This,
             /* [in] */ LONG lFlags,
@@ -2335,26 +2446,32 @@ EXTERN_C const IID IID_IWiaLogEx;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWiaLogEx * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWiaLogEx * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWiaLogEx * This);
         
+        DECLSPEC_XFGVIRT(IWiaLogEx, InitializeLogEx)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *InitializeLogEx )( 
             __RPC__in IWiaLogEx * This,
             /* [in] */ __RPC__in BYTE *hInstance);
         
+        DECLSPEC_XFGVIRT(IWiaLogEx, hResult)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *hResult )( 
             __RPC__in IWiaLogEx * This,
             /* [in] */ HRESULT hResult);
         
+        DECLSPEC_XFGVIRT(IWiaLogEx, Log)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Log )( 
             __RPC__in IWiaLogEx * This,
             /* [in] */ LONG lFlags,
@@ -2362,11 +2479,13 @@ EXTERN_C const IID IID_IWiaLogEx;
             /* [in] */ LONG lDetail,
             /* [in] */ __RPC__in BSTR bstrText);
         
+        DECLSPEC_XFGVIRT(IWiaLogEx, hResultEx)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *hResultEx )( 
             __RPC__in IWiaLogEx * This,
             /* [in] */ LONG lMethodId,
             /* [in] */ HRESULT hResult);
         
+        DECLSPEC_XFGVIRT(IWiaLogEx, LogEx)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *LogEx )( 
             __RPC__in IWiaLogEx * This,
             /* [in] */ LONG lMethodId,
@@ -2450,18 +2569,22 @@ EXTERN_C const IID IID_IWiaNotifyDevMgr;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWiaNotifyDevMgr * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWiaNotifyDevMgr * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWiaNotifyDevMgr * This);
         
+        DECLSPEC_XFGVIRT(IWiaNotifyDevMgr, NewDeviceArrival)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *NewDeviceArrival )( 
             __RPC__in IWiaNotifyDevMgr * This);
         
@@ -2539,22 +2662,27 @@ EXTERN_C const IID IID_IWiaItemExtras;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWiaItemExtras * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWiaItemExtras * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWiaItemExtras * This);
         
+        DECLSPEC_XFGVIRT(IWiaItemExtras, GetExtendedErrorInfo)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetExtendedErrorInfo )( 
             __RPC__in IWiaItemExtras * This,
             /* [out] */ __RPC__deref_out_opt BSTR *bstrErrorText);
         
+        DECLSPEC_XFGVIRT(IWiaItemExtras, Escape)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Escape )( 
             __RPC__in IWiaItemExtras * This,
             /* [in] */ DWORD dwEscapeCode,
@@ -2564,6 +2692,7 @@ EXTERN_C const IID IID_IWiaItemExtras;
             /* [in] */ DWORD dwOutDataSize,
             /* [out] */ __RPC__out DWORD *pdwActualDataSize);
         
+        DECLSPEC_XFGVIRT(IWiaItemExtras, CancelPendingIO)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CancelPendingIO )( 
             __RPC__in IWiaItemExtras * This);
         
@@ -2643,22 +2772,27 @@ EXTERN_C const IID IID_IWiaAppErrorHandler;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWiaAppErrorHandler * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWiaAppErrorHandler * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWiaAppErrorHandler * This);
         
+        DECLSPEC_XFGVIRT(IWiaAppErrorHandler, GetWindow)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetWindow )( 
             __RPC__in IWiaAppErrorHandler * This,
             /* [out] */ __RPC__deref_out_opt HWND *phwnd);
         
+        DECLSPEC_XFGVIRT(IWiaAppErrorHandler, ReportStatus)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ReportStatus )( 
             __RPC__in IWiaAppErrorHandler * This,
             /* [in] */ LONG lFlags,
@@ -2743,18 +2877,22 @@ EXTERN_C const IID IID_IWiaErrorHandler;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWiaErrorHandler * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWiaErrorHandler * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWiaErrorHandler * This);
         
+        DECLSPEC_XFGVIRT(IWiaErrorHandler, ReportStatus)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ReportStatus )( 
             __RPC__in IWiaErrorHandler * This,
             /* [in] */ LONG lFlags,
@@ -2763,6 +2901,7 @@ EXTERN_C const IID IID_IWiaErrorHandler;
             /* [in] */ HRESULT hrStatus,
             /* [in] */ LONG lPercentComplete);
         
+        DECLSPEC_XFGVIRT(IWiaErrorHandler, GetStatusDescription)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetStatusDescription )( 
             __RPC__in IWiaErrorHandler * This,
             /* [in] */ LONG lFlags,
@@ -2848,32 +2987,39 @@ EXTERN_C const IID IID_IWiaTransfer;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWiaTransfer * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWiaTransfer * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWiaTransfer * This);
         
+        DECLSPEC_XFGVIRT(IWiaTransfer, Download)
         /* [helpstring][local] */ HRESULT ( STDMETHODCALLTYPE *Download )( 
             IWiaTransfer * This,
             /* [in] */ LONG lFlags,
             /* [in] */ IWiaTransferCallback *pIWiaTransferCallback);
         
+        DECLSPEC_XFGVIRT(IWiaTransfer, Upload)
         /* [helpstring][local] */ HRESULT ( STDMETHODCALLTYPE *Upload )( 
             IWiaTransfer * This,
             /* [in] */ LONG lFlags,
             /* [in] */ IStream *pSource,
             /* [in] */ IWiaTransferCallback *pIWiaTransferCallback);
         
+        DECLSPEC_XFGVIRT(IWiaTransfer, Cancel)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Cancel )( 
             __RPC__in IWiaTransfer * This);
         
+        DECLSPEC_XFGVIRT(IWiaTransfer, EnumWIA_FORMAT_INFO)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *EnumWIA_FORMAT_INFO )( 
             __RPC__in IWiaTransfer * This,
             /* [out] */ __RPC__deref_out_opt IEnumWIA_FORMAT_INFO **ppEnum);
@@ -3002,23 +3148,28 @@ EXTERN_C const IID IID_IWiaTransferCallback;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWiaTransferCallback * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWiaTransferCallback * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWiaTransferCallback * This);
         
+        DECLSPEC_XFGVIRT(IWiaTransferCallback, TransferCallback)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *TransferCallback )( 
             __RPC__in IWiaTransferCallback * This,
             /* [in] */ LONG lFlags,
             /* [in] */ __RPC__in WiaTransferParams *pWiaTransferParams);
         
+        DECLSPEC_XFGVIRT(IWiaTransferCallback, GetNextStream)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetNextStream )( 
             __RPC__in IWiaTransferCallback * This,
             /* [in] */ LONG lFlags,
@@ -3096,18 +3247,22 @@ EXTERN_C const IID IID_IWiaSegmentationFilter;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWiaSegmentationFilter * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWiaSegmentationFilter * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWiaSegmentationFilter * This);
         
+        DECLSPEC_XFGVIRT(IWiaSegmentationFilter, DetectRegions)
         HRESULT ( STDMETHODCALLTYPE *DetectRegions )( 
             __RPC__in IWiaSegmentationFilter * This,
             /* [in] */ LONG lFlags,
@@ -3191,27 +3346,33 @@ EXTERN_C const IID IID_IWiaImageFilter;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWiaImageFilter * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWiaImageFilter * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWiaImageFilter * This);
         
+        DECLSPEC_XFGVIRT(IWiaImageFilter, InitializeFilter)
         HRESULT ( STDMETHODCALLTYPE *InitializeFilter )( 
             __RPC__in IWiaImageFilter * This,
             /* [in] */ __RPC__in_opt IWiaItem2 *pWiaItem2,
             /* [in] */ __RPC__in_opt IWiaTransferCallback *pWiaTransferCallback);
         
+        DECLSPEC_XFGVIRT(IWiaImageFilter, SetNewCallback)
         HRESULT ( STDMETHODCALLTYPE *SetNewCallback )( 
             __RPC__in IWiaImageFilter * This,
             /* [in] */ __RPC__in_opt IWiaTransferCallback *pWiaTransferCallback);
         
+        DECLSPEC_XFGVIRT(IWiaImageFilter, FilterPreviewImage)
         HRESULT ( STDMETHODCALLTYPE *FilterPreviewImage )( 
             __RPC__in IWiaImageFilter * This,
             /* [in] */ LONG lFlags,
@@ -3219,6 +3380,7 @@ EXTERN_C const IID IID_IWiaImageFilter;
             /* [in] */ RECT InputImageExtents,
             /* [in] */ __RPC__in_opt IStream *pInputStream);
         
+        DECLSPEC_XFGVIRT(IWiaImageFilter, ApplyProperties)
         HRESULT ( STDMETHODCALLTYPE *ApplyProperties )( 
             __RPC__in IWiaImageFilter * This,
             /* [in] */ __RPC__in_opt IWiaPropertyStorage *pWiaPropertyStorage);
@@ -3308,34 +3470,41 @@ EXTERN_C const IID IID_IWiaPreview;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWiaPreview * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWiaPreview * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWiaPreview * This);
         
+        DECLSPEC_XFGVIRT(IWiaPreview, GetNewPreview)
         HRESULT ( STDMETHODCALLTYPE *GetNewPreview )( 
             __RPC__in IWiaPreview * This,
             /* [in] */ LONG lFlags,
             /* [in] */ __RPC__in_opt IWiaItem2 *pWiaItem2,
             /* [in] */ __RPC__in_opt IWiaTransferCallback *pWiaTransferCallback);
         
+        DECLSPEC_XFGVIRT(IWiaPreview, UpdatePreview)
         HRESULT ( STDMETHODCALLTYPE *UpdatePreview )( 
             __RPC__in IWiaPreview * This,
             /* [in] */ LONG lFlags,
             /* [in] */ __RPC__in_opt IWiaItem2 *pChildWiaItem2,
             /* [in] */ __RPC__in_opt IWiaTransferCallback *pWiaTransferCallback);
         
+        DECLSPEC_XFGVIRT(IWiaPreview, DetectRegions)
         HRESULT ( STDMETHODCALLTYPE *DetectRegions )( 
             __RPC__in IWiaPreview * This,
             /* [in] */ LONG lFlags);
         
+        DECLSPEC_XFGVIRT(IWiaPreview, Clear)
         HRESULT ( STDMETHODCALLTYPE *Clear )( 
             __RPC__in IWiaPreview * This);
         
@@ -3425,35 +3594,43 @@ EXTERN_C const IID IID_IEnumWiaItem2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumWiaItem2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumWiaItem2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumWiaItem2 * This);
         
+        DECLSPEC_XFGVIRT(IEnumWiaItem2, Next)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumWiaItem2 * This,
             /* [in] */ ULONG cElt,
             /* [length_is][size_is][out] */ IWiaItem2 **ppIWiaItem2,
             /* [unique][out][in] */ ULONG *pcEltFetched);
         
+        DECLSPEC_XFGVIRT(IEnumWiaItem2, Skip)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumWiaItem2 * This,
             /* [in] */ ULONG cElt);
         
+        DECLSPEC_XFGVIRT(IEnumWiaItem2, Reset)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumWiaItem2 * This);
         
+        DECLSPEC_XFGVIRT(IEnumWiaItem2, Clone)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumWiaItem2 * This,
             /* [out] */ __RPC__deref_out_opt IEnumWiaItem2 **ppIEnum);
         
+        DECLSPEC_XFGVIRT(IEnumWiaItem2, GetCount)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IEnumWiaItem2 * This,
             /* [out] */ __RPC__out ULONG *cElt);
@@ -3625,18 +3802,22 @@ EXTERN_C const IID IID_IWiaItem2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWiaItem2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWiaItem2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWiaItem2 * This);
         
+        DECLSPEC_XFGVIRT(IWiaItem2, CreateChildItem)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateChildItem )( 
             __RPC__in IWiaItem2 * This,
             /* [in] */ LONG lItemFlags,
@@ -3644,29 +3825,35 @@ EXTERN_C const IID IID_IWiaItem2;
             /* [in] */ __RPC__in BSTR bstrItemName,
             /* [out] */ __RPC__deref_out_opt IWiaItem2 **ppIWiaItem2);
         
+        DECLSPEC_XFGVIRT(IWiaItem2, DeleteItem)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *DeleteItem )( 
             __RPC__in IWiaItem2 * This,
             /* [in] */ LONG lFlags);
         
+        DECLSPEC_XFGVIRT(IWiaItem2, EnumChildItems)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *EnumChildItems )( 
             __RPC__in IWiaItem2 * This,
             /* [unique][in] */ __RPC__in_opt const GUID *pCategoryGUID,
             /* [out] */ __RPC__deref_out_opt IEnumWiaItem2 **ppIEnumWiaItem2);
         
+        DECLSPEC_XFGVIRT(IWiaItem2, FindItemByName)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *FindItemByName )( 
             __RPC__in IWiaItem2 * This,
             /* [in] */ LONG lFlags,
             /* [in] */ __RPC__in BSTR bstrFullItemName,
             /* [out] */ __RPC__deref_out_opt IWiaItem2 **ppIWiaItem2);
         
+        DECLSPEC_XFGVIRT(IWiaItem2, GetItemCategory)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetItemCategory )( 
             __RPC__in IWiaItem2 * This,
             /* [out] */ __RPC__out GUID *pItemCategoryGUID);
         
+        DECLSPEC_XFGVIRT(IWiaItem2, GetItemType)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetItemType )( 
             __RPC__in IWiaItem2 * This,
             /* [out] */ __RPC__out LONG *pItemType);
         
+        DECLSPEC_XFGVIRT(IWiaItem2, DeviceDlg)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *DeviceDlg )( 
             IWiaItem2 * This,
             /* [annotation][in] */ 
@@ -3684,17 +3871,20 @@ EXTERN_C const IID IID_IWiaItem2;
             /* [annotation][out][in] */ 
             _Out_opt_  IWiaItem2 **ppItem);
         
+        DECLSPEC_XFGVIRT(IWiaItem2, DeviceCommand)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *DeviceCommand )( 
             __RPC__in IWiaItem2 * This,
             /* [in] */ LONG lFlags,
             /* [in] */ __RPC__in const GUID *pCmdGUID,
             /* [out][in] */ __RPC__deref_inout_opt IWiaItem2 **ppIWiaItem2);
         
+        DECLSPEC_XFGVIRT(IWiaItem2, EnumDeviceCapabilities)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *EnumDeviceCapabilities )( 
             __RPC__in IWiaItem2 * This,
             /* [in] */ LONG lFlags,
             /* [out] */ __RPC__deref_out_opt IEnumWIA_DEV_CAPS **ppIEnumWIA_DEV_CAPS);
         
+        DECLSPEC_XFGVIRT(IWiaItem2, CheckExtension)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CheckExtension )( 
             IWiaItem2 * This,
             /* [in] */ LONG lFlags,
@@ -3702,6 +3892,7 @@ EXTERN_C const IID IID_IWiaItem2;
             /* [in] */ REFIID riidExtensionInterface,
             /* [out] */ BOOL *pbExtensionExists);
         
+        DECLSPEC_XFGVIRT(IWiaItem2, GetExtension)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetExtension )( 
             IWiaItem2 * This,
             /* [in] */ LONG lFlags,
@@ -3709,25 +3900,30 @@ EXTERN_C const IID IID_IWiaItem2;
             /* [in] */ REFIID riidExtensionInterface,
             /* [iid_is][out] */ void **ppOut);
         
+        DECLSPEC_XFGVIRT(IWiaItem2, GetParentItem)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetParentItem )( 
             __RPC__in IWiaItem2 * This,
             /* [out] */ __RPC__deref_out_opt IWiaItem2 **ppIWiaItem2);
         
+        DECLSPEC_XFGVIRT(IWiaItem2, GetRootItem)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetRootItem )( 
             __RPC__in IWiaItem2 * This,
             /* [out] */ __RPC__deref_out_opt IWiaItem2 **ppIWiaItem2);
         
+        DECLSPEC_XFGVIRT(IWiaItem2, GetPreviewComponent)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetPreviewComponent )( 
             IWiaItem2 * This,
             /* [in] */ LONG lFlags,
             /* [out] */ IWiaPreview **ppWiaPreview);
         
+        DECLSPEC_XFGVIRT(IWiaItem2, EnumRegisterEventInfo)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *EnumRegisterEventInfo )( 
             __RPC__in IWiaItem2 * This,
             /* [in] */ LONG lFlags,
             /* [in] */ __RPC__in const GUID *pEventGUID,
             /* [out] */ __RPC__deref_out_opt IEnumWIA_DEV_CAPS **ppIEnum);
         
+        DECLSPEC_XFGVIRT(IWiaItem2, Diagnostic)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Diagnostic )( 
             __RPC__in IWiaItem2 * This,
             /* [in] */ ULONG ulSize,
@@ -3958,29 +4154,35 @@ EXTERN_C const IID IID_IWiaDevMgr2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWiaDevMgr2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWiaDevMgr2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWiaDevMgr2 * This);
         
+        DECLSPEC_XFGVIRT(IWiaDevMgr2, EnumDeviceInfo)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *EnumDeviceInfo )( 
             __RPC__in IWiaDevMgr2 * This,
             /* [in] */ LONG lFlags,
             /* [retval][out] */ __RPC__deref_out_opt IEnumWIA_DEV_INFO **ppIEnum);
         
+        DECLSPEC_XFGVIRT(IWiaDevMgr2, CreateDevice)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CreateDevice )( 
             IWiaDevMgr2 * This,
             /* [in] */ LONG lFlags,
             /* [in] */ BSTR bstrDeviceID,
             /* [out] */ IWiaItem2 **ppWiaItem2Root);
         
+        DECLSPEC_XFGVIRT(IWiaDevMgr2, SelectDeviceDlg)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SelectDeviceDlg )( 
             IWiaDevMgr2 * This,
             /* [in] */ HWND hwndParent,
@@ -3989,6 +4191,7 @@ EXTERN_C const IID IID_IWiaDevMgr2;
             /* [out][in] */ BSTR *pbstrDeviceID,
             /* [retval][out] */ IWiaItem2 **ppItemRoot);
         
+        DECLSPEC_XFGVIRT(IWiaDevMgr2, SelectDeviceDlgID)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SelectDeviceDlgID )( 
             IWiaDevMgr2 * This,
             /* [in] */ HWND hwndParent,
@@ -3996,6 +4199,7 @@ EXTERN_C const IID IID_IWiaDevMgr2;
             /* [in] */ LONG lFlags,
             /* [retval][out] */ BSTR *pbstrDeviceID);
         
+        DECLSPEC_XFGVIRT(IWiaDevMgr2, RegisterEventCallbackInterface)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *RegisterEventCallbackInterface )( 
             IWiaDevMgr2 * This,
             /* [in] */ LONG lFlags,
@@ -4004,6 +4208,7 @@ EXTERN_C const IID IID_IWiaDevMgr2;
             /* [unique][in] */ IWiaEventCallback *pIWiaEventCallback,
             /* [out] */ IUnknown **pEventObject);
         
+        DECLSPEC_XFGVIRT(IWiaDevMgr2, RegisterEventCallbackProgram)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *RegisterEventCallbackProgram )( 
             IWiaDevMgr2 * This,
             /* [in] */ LONG lFlags,
@@ -4015,6 +4220,7 @@ EXTERN_C const IID IID_IWiaDevMgr2;
             /* [in] */ BSTR bstrDescription,
             /* [in] */ BSTR bstrIcon);
         
+        DECLSPEC_XFGVIRT(IWiaDevMgr2, RegisterEventCallbackCLSID)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *RegisterEventCallbackCLSID )( 
             IWiaDevMgr2 * This,
             /* [in] */ LONG lFlags,
@@ -4025,6 +4231,7 @@ EXTERN_C const IID IID_IWiaDevMgr2;
             /* [in] */ BSTR bstrDescription,
             /* [in] */ BSTR bstrIcon);
         
+        DECLSPEC_XFGVIRT(IWiaDevMgr2, GetImageDlg)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetImageDlg )( 
             IWiaDevMgr2 * This,
             /* [in] */ LONG lFlags,

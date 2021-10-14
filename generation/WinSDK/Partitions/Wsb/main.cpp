@@ -8,3 +8,6 @@
 
 #include <wsbapp.h>
 #include <wsbonline.h>
+#include <wsbapperror.h>
+#include <wsbonlineerror.h>
+

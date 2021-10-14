@@ -33,6 +33,7 @@ PENCLAVE_ROUTINE
 LPENCLAVE_ROUTINE
 _VIRTUAL_STORAGE_TYPE
 --traverse
+<IncludeRoot>/shared/apdevpkey.h
 <IncludeRoot>/shared/devpkey.h
 <IncludeRoot>/shared/ntddstor.h
 <IncludeRoot>/um/dbt.h
@@ -51,5 +52,8 @@ _VIRTUAL_STORAGE_TYPE
 <IncludeRoot>/um/storprop.h
 <IncludeRoot>/um/atlthunk.h
 <IncludeRoot>/um/devpropdef.h
+<IncludeRoot>/shared/ntiologc.h
+<IncludeRoot>/um/dlnadeviceinterfaceids.h
+<IncludeRoot>/um/dlnametadataproviderproperties.h
 --namespace
 Windows.Win32.System.SystemServices

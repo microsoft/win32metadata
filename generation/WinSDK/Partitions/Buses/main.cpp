@@ -10,3 +10,7 @@
 #include <usbuser.h>
 #include <winusb.h>
 #include <winusbio.h>
+
+#include <usbfnbase.h>
+//#include <usbioctl.h> -- doesn't compile
+#include <usbscan.h>

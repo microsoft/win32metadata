@@ -15,3 +15,4 @@
 #include <faxroute.h>
 #include <faxext.h>
 #include <fxsutility.h>
+#include <faxmmc.h>

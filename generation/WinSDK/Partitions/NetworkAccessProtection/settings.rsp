@@ -1,0 +1,5 @@
+--traverse
+<IncludeRoot>/um/napmicrosoftvendorids.h
+<IncludeRoot>/um/naptypes.h
+--namespace
+Windows.Win32.Security.NetworkAccessProtection

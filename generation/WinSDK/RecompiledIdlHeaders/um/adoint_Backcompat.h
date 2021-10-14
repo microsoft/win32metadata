@@ -1154,7 +1154,7 @@ EXTERN_C const IID IID__ADO;
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in _ADO * This,
-            /* [retval][out] */ __RPC__deref_out_opt ADOProperties **ppvObject);
+            /* [retval][out] */ __RPC__deref_out_opt struct ADOProperties **ppvObject);
         
         END_INTERFACE
     } _ADOVtbl;
@@ -1223,29 +1223,29 @@ EXTERN_C const IID IID_Error;
         BEGIN_INTERFACE
         
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            __RPC__in ADOError * This,
+            __RPC__in struct ADOError * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            __RPC__in ADOError * This);
+            __RPC__in struct ADOError * This);
         
         ULONG ( STDMETHODCALLTYPE *Release )( 
-            __RPC__in ADOError * This);
+            __RPC__in struct ADOError * This);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            __RPC__in ADOError * This,
+            __RPC__in struct ADOError * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            __RPC__in ADOError * This,
+            __RPC__in struct ADOError * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            __RPC__in ADOError * This,
+            __RPC__in struct ADOError * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
@@ -1253,7 +1253,7 @@ EXTERN_C const IID IID_Error;
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            ADOError * This,
+            struct ADOError * This,
             /* [in] */ DISPID dispIdMember,
             /* [in] */ REFIID riid,
             /* [in] */ LCID lcid,
@@ -1264,31 +1264,31 @@ EXTERN_C const IID IID_Error;
             /* [out] */ UINT *puArgErr);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Number )( 
-            __RPC__in ADOError * This,
+            __RPC__in struct ADOError * This,
             /* [retval][out] */ __RPC__out long *pl);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Source )( 
-            __RPC__in ADOError * This,
+            __RPC__in struct ADOError * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
-            __RPC__in ADOError * This,
+            __RPC__in struct ADOError * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_HelpFile )( 
-            __RPC__in ADOError * This,
+            __RPC__in struct ADOError * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_HelpContext )( 
-            __RPC__in ADOError * This,
+            __RPC__in struct ADOError * This,
             /* [retval][out] */ __RPC__out long *pl);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SQLState )( 
-            __RPC__in ADOError * This,
+            __RPC__in struct ADOError * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_NativeError )( 
-            __RPC__in ADOError * This,
+            __RPC__in struct ADOError * This,
             /* [retval][out] */ __RPC__out long *pl);
         
         END_INTERFACE
@@ -1355,29 +1355,29 @@ EXTERN_C const IID IID_Errors;
         BEGIN_INTERFACE
         
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            __RPC__in ADOErrors * This,
+            __RPC__in struct ADOErrors * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            __RPC__in ADOErrors * This);
+            __RPC__in struct ADOErrors * This);
         
         ULONG ( STDMETHODCALLTYPE *Release )( 
-            __RPC__in ADOErrors * This);
+            __RPC__in struct ADOErrors * This);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            __RPC__in ADOErrors * This,
+            __RPC__in struct ADOErrors * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            __RPC__in ADOErrors * This,
+            __RPC__in struct ADOErrors * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            __RPC__in ADOErrors * This,
+            __RPC__in struct ADOErrors * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
@@ -1385,7 +1385,7 @@ EXTERN_C const IID IID_Errors;
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            ADOErrors * This,
+            struct ADOErrors * This,
             /* [in] */ DISPID dispIdMember,
             /* [in] */ REFIID riid,
             /* [in] */ LCID lcid,
@@ -1396,23 +1396,23 @@ EXTERN_C const IID IID_Errors;
             /* [out] */ UINT *puArgErr);
         
         /* [id][helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
-            __RPC__in ADOErrors * This,
+            __RPC__in struct ADOErrors * This,
             /* [retval][out] */ __RPC__out long *c);
         
         /* [id][restricted] */ HRESULT ( STDMETHODCALLTYPE *_NewEnum )( 
-            __RPC__in ADOErrors * This,
+            __RPC__in struct ADOErrors * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppvObject);
         
         /* [id][helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
-            __RPC__in ADOErrors * This);
+            __RPC__in struct ADOErrors * This);
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
-            __RPC__in ADOErrors * This,
+            __RPC__in struct ADOErrors * This,
             /* [in] */ VARIANT Index,
-            /* [retval][out] */ __RPC__deref_out_opt ADOError **ppvObject);
+            /* [retval][out] */ __RPC__deref_out_opt struct ADOError **ppvObject);
         
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Clear )( 
-            __RPC__in ADOErrors * This);
+            __RPC__in struct ADOErrors * This);
         
         END_INTERFACE
     } ErrorsVtbl;
@@ -1566,15 +1566,15 @@ EXTERN_C const IID IID_Command15;
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in Command15 * This,
-            /* [retval][out] */ __RPC__deref_out_opt ADOProperties **ppvObject);
+            /* [retval][out] */ __RPC__deref_out_opt struct ADOProperties **ppvObject);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ActiveConnection )( 
             __RPC__in Command15 * This,
-            /* [retval][out] */ __RPC__deref_out_opt _ADOConnection **ppvObject);
+            /* [retval][out] */ __RPC__deref_out_opt struct _ADOConnection **ppvObject);
         
         /* [helpcontext][propputref][id] */ HRESULT ( STDMETHODCALLTYPE *putref_ActiveADOConnection )( 
             __RPC__in Command15 * This,
-            /* [in] */ __RPC__in_opt _ADOConnection *pCon);
+            /* [in] */ __RPC__in_opt struct _ADOConnection *pCon);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ActiveConnection )( 
             __RPC__in Command15 * This,
@@ -1609,7 +1609,7 @@ EXTERN_C const IID IID_Command15;
             /* [optional][out] */ __RPC__out VARIANT *RecordsAffected,
             /* [optional][in] */ __RPC__in VARIANT *Parameters,
             /* [defaultvalue][in] */ long Options,
-            /* [retval][out] */ __RPC__deref_out_opt _ADORecordset **ppirs);
+            /* [retval][out] */ __RPC__deref_out_opt struct _ADORecordset **ppirs);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *CreateParameter )( 
             __RPC__in Command15 * This,
@@ -1618,11 +1618,11 @@ EXTERN_C const IID IID_Command15;
             /* [defaultvalue][in] */ ParameterDirectionEnum Direction,
             /* [defaultvalue][in] */ ADO_LONGPTR Size,
             /* [optional][in] */ VARIANT Value,
-            /* [retval][out] */ __RPC__deref_out_opt _ADOParameter **ppiprm);
+            /* [retval][out] */ __RPC__deref_out_opt struct _ADOParameter **ppiprm);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Parameters )( 
             __RPC__in Command15 * This,
-            /* [retval][out] */ __RPC__deref_out_opt ADOParameters **ppvObject);
+            /* [retval][out] */ __RPC__deref_out_opt struct ADOParameters **ppvObject);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_CommandType )( 
             __RPC__in Command15 * This,
@@ -1765,15 +1765,15 @@ EXTERN_C const IID IID_Command25;
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in Command25 * This,
-            /* [retval][out] */ __RPC__deref_out_opt ADOProperties **ppvObject);
+            /* [retval][out] */ __RPC__deref_out_opt struct ADOProperties **ppvObject);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ActiveConnection )( 
             __RPC__in Command25 * This,
-            /* [retval][out] */ __RPC__deref_out_opt _ADOConnection **ppvObject);
+            /* [retval][out] */ __RPC__deref_out_opt struct _ADOConnection **ppvObject);
         
         /* [helpcontext][propputref][id] */ HRESULT ( STDMETHODCALLTYPE *putref_ActiveADOConnection )( 
             __RPC__in Command25 * This,
-            /* [in] */ __RPC__in_opt _ADOConnection *pCon);
+            /* [in] */ __RPC__in_opt struct _ADOConnection *pCon);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ActiveConnection )( 
             __RPC__in Command25 * This,
@@ -1808,7 +1808,7 @@ EXTERN_C const IID IID_Command25;
             /* [optional][out] */ __RPC__out VARIANT *RecordsAffected,
             /* [optional][in] */ __RPC__in VARIANT *Parameters,
             /* [defaultvalue][in] */ long Options,
-            /* [retval][out] */ __RPC__deref_out_opt _ADORecordset **ppirs);
+            /* [retval][out] */ __RPC__deref_out_opt struct _ADORecordset **ppirs);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *CreateParameter )( 
             __RPC__in Command25 * This,
@@ -1817,11 +1817,11 @@ EXTERN_C const IID IID_Command25;
             /* [defaultvalue][in] */ ParameterDirectionEnum Direction,
             /* [defaultvalue][in] */ ADO_LONGPTR Size,
             /* [optional][in] */ VARIANT Value,
-            /* [retval][out] */ __RPC__deref_out_opt _ADOParameter **ppiprm);
+            /* [retval][out] */ __RPC__deref_out_opt struct _ADOParameter **ppiprm);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Parameters )( 
             __RPC__in Command25 * This,
-            /* [retval][out] */ __RPC__deref_out_opt ADOParameters **ppvObject);
+            /* [retval][out] */ __RPC__deref_out_opt struct ADOParameters **ppvObject);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_CommandType )( 
             __RPC__in Command25 * This,
@@ -1946,29 +1946,29 @@ EXTERN_C const IID IID__Command;
         BEGIN_INTERFACE
         
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            __RPC__in _ADOCommand * This,
+            __RPC__in struct _ADOCommand * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            __RPC__in _ADOCommand * This);
+            __RPC__in struct _ADOCommand * This);
         
         ULONG ( STDMETHODCALLTYPE *Release )( 
-            __RPC__in _ADOCommand * This);
+            __RPC__in struct _ADOCommand * This);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            __RPC__in _ADOCommand * This,
+            __RPC__in struct _ADOCommand * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            __RPC__in _ADOCommand * This,
+            __RPC__in struct _ADOCommand * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            __RPC__in _ADOCommand * This,
+            __RPC__in struct _ADOCommand * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
@@ -1976,7 +1976,7 @@ EXTERN_C const IID IID__Command;
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            _ADOCommand * This,
+            struct _ADOCommand * This,
             /* [in] */ DISPID dispIdMember,
             /* [in] */ REFIID riid,
             /* [in] */ LCID lcid,
@@ -1987,110 +1987,110 @@ EXTERN_C const IID IID__Command;
             /* [out] */ UINT *puArgErr);
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
-            __RPC__in _ADOCommand * This,
-            /* [retval][out] */ __RPC__deref_out_opt ADOProperties **ppvObject);
+            __RPC__in struct _ADOCommand * This,
+            /* [retval][out] */ __RPC__deref_out_opt struct ADOProperties **ppvObject);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ActiveConnection )( 
-            __RPC__in _ADOCommand * This,
-            /* [retval][out] */ __RPC__deref_out_opt _ADOConnection **ppvObject);
+            __RPC__in struct _ADOCommand * This,
+            /* [retval][out] */ __RPC__deref_out_opt struct _ADOConnection **ppvObject);
         
         /* [helpcontext][propputref][id] */ HRESULT ( STDMETHODCALLTYPE *putref_ActiveADOConnection )( 
-            __RPC__in _ADOCommand * This,
-            /* [in] */ __RPC__in_opt _ADOConnection *pCon);
+            __RPC__in struct _ADOCommand * This,
+            /* [in] */ __RPC__in_opt struct _ADOConnection *pCon);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ActiveConnection )( 
-            __RPC__in _ADOCommand * This,
+            __RPC__in struct _ADOCommand * This,
             /* [in] */ VARIANT vConn);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_CommandText )( 
-            __RPC__in _ADOCommand * This,
+            __RPC__in struct _ADOCommand * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_CommandText )( 
-            __RPC__in _ADOCommand * This,
+            __RPC__in struct _ADOCommand * This,
             /* [in] */ __RPC__in BSTR bstr);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_CommandTimeout )( 
-            __RPC__in _ADOCommand * This,
+            __RPC__in struct _ADOCommand * This,
             /* [retval][out] */ __RPC__out LONG *pl);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_CommandTimeout )( 
-            __RPC__in _ADOCommand * This,
+            __RPC__in struct _ADOCommand * This,
             /* [in] */ LONG Timeout);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Prepared )( 
-            __RPC__in _ADOCommand * This,
+            __RPC__in struct _ADOCommand * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pfPrepared);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Prepared )( 
-            __RPC__in _ADOCommand * This,
+            __RPC__in struct _ADOCommand * This,
             /* [in] */ VARIANT_BOOL fPrepared);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Execute )( 
-            __RPC__in _ADOCommand * This,
+            __RPC__in struct _ADOCommand * This,
             /* [optional][out] */ __RPC__out VARIANT *RecordsAffected,
             /* [optional][in] */ __RPC__in VARIANT *Parameters,
             /* [defaultvalue][in] */ long Options,
-            /* [retval][out] */ __RPC__deref_out_opt _ADORecordset **ppirs);
+            /* [retval][out] */ __RPC__deref_out_opt struct _ADORecordset **ppirs);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *CreateParameter )( 
-            __RPC__in _ADOCommand * This,
+            __RPC__in struct _ADOCommand * This,
             /* [defaultvalue][in] */ __RPC__in BSTR Name,
             /* [defaultvalue][in] */ DataTypeEnum Type,
             /* [defaultvalue][in] */ ParameterDirectionEnum Direction,
             /* [defaultvalue][in] */ ADO_LONGPTR Size,
             /* [optional][in] */ VARIANT Value,
-            /* [retval][out] */ __RPC__deref_out_opt _ADOParameter **ppiprm);
+            /* [retval][out] */ __RPC__deref_out_opt struct _ADOParameter **ppiprm);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Parameters )( 
-            __RPC__in _ADOCommand * This,
-            /* [retval][out] */ __RPC__deref_out_opt ADOParameters **ppvObject);
+            __RPC__in struct _ADOCommand * This,
+            /* [retval][out] */ __RPC__deref_out_opt struct ADOParameters **ppvObject);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_CommandType )( 
-            __RPC__in _ADOCommand * This,
+            __RPC__in struct _ADOCommand * This,
             /* [in] */ CommandTypeEnum lCmdType);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_CommandType )( 
-            __RPC__in _ADOCommand * This,
+            __RPC__in struct _ADOCommand * This,
             /* [retval][out] */ __RPC__out CommandTypeEnum *plCmdType);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
-            __RPC__in _ADOCommand * This,
+            __RPC__in struct _ADOCommand * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
-            __RPC__in _ADOCommand * This,
+            __RPC__in struct _ADOCommand * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
-            __RPC__in _ADOCommand * This,
+            __RPC__in struct _ADOCommand * This,
             /* [retval][out] */ __RPC__out LONG *plObjState);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Cancel )( 
-            __RPC__in _ADOCommand * This);
+            __RPC__in struct _ADOCommand * This);
         
         /* [helpcontext][propputref][id] */ HRESULT ( __stdcall *putref_CommandADOStream )( 
-            __RPC__in _ADOCommand * This,
+            __RPC__in struct _ADOCommand * This,
             /* [in] */ __RPC__in_opt IUnknown *pStream);
         
         /* [helpcontext][propget][id] */ HRESULT ( __stdcall *get_CommandStream )( 
-            __RPC__in _ADOCommand * This,
+            __RPC__in struct _ADOCommand * This,
             /* [retval][out] */ __RPC__out VARIANT *pvStream);
         
         /* [helpcontext][propput][id] */ HRESULT ( __stdcall *put_Dialect )( 
-            __RPC__in _ADOCommand * This,
+            __RPC__in struct _ADOCommand * This,
             /* [in] */ __RPC__in BSTR bstrDialect);
         
         /* [helpcontext][propget][id] */ HRESULT ( __stdcall *get_Dialect )( 
-            __RPC__in _ADOCommand * This,
+            __RPC__in struct _ADOCommand * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDialect);
         
         /* [helpcontext][propput][id] */ HRESULT ( __stdcall *put_NamedParameters )( 
-            __RPC__in _ADOCommand * This,
+            __RPC__in struct _ADOCommand * This,
             /* [in] */ VARIANT_BOOL fNamedParameters);
         
         /* [helpcontext][propget][id] */ HRESULT ( __stdcall *get_NamedParameters )( 
-            __RPC__in _ADOCommand * This,
+            __RPC__in struct _ADOCommand * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pfNamedParameters);
         
         END_INTERFACE
@@ -2256,28 +2256,28 @@ EXTERN_C const IID IID_ConnectionEventsVt;
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *InfoMessage )( 
             __RPC__in ConnectionEventsVt * This,
-            /* [in] */ __RPC__in_opt ADOError *pError,
+            /* [in] */ __RPC__in_opt struct ADOError *pError,
             /* [out][in] */ __RPC__inout EventStatusEnum *adStatus,
-            /* [in] */ __RPC__in_opt _ADOConnection *pConnection);
+            /* [in] */ __RPC__in_opt struct _ADOConnection *pConnection);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *BeginTransComplete )( 
             __RPC__in ConnectionEventsVt * This,
             /* [in] */ LONG TransactionLevel,
-            /* [in] */ __RPC__in_opt ADOError *pError,
+            /* [in] */ __RPC__in_opt struct ADOError *pError,
             /* [out][in] */ __RPC__inout EventStatusEnum *adStatus,
-            /* [in] */ __RPC__in_opt _ADOConnection *pConnection);
+            /* [in] */ __RPC__in_opt struct _ADOConnection *pConnection);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *CommitTransComplete )( 
             __RPC__in ConnectionEventsVt * This,
-            /* [in] */ __RPC__in_opt ADOError *pError,
+            /* [in] */ __RPC__in_opt struct ADOError *pError,
             /* [out][in] */ __RPC__inout EventStatusEnum *adStatus,
-            /* [in] */ __RPC__in_opt _ADOConnection *pConnection);
+            /* [in] */ __RPC__in_opt struct _ADOConnection *pConnection);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *RollbackTransComplete )( 
             __RPC__in ConnectionEventsVt * This,
-            /* [in] */ __RPC__in_opt ADOError *pError,
+            /* [in] */ __RPC__in_opt struct ADOError *pError,
             /* [out][in] */ __RPC__inout EventStatusEnum *adStatus,
-            /* [in] */ __RPC__in_opt _ADOConnection *pConnection);
+            /* [in] */ __RPC__in_opt struct _ADOConnection *pConnection);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *WillExecute )( 
             __RPC__in ConnectionEventsVt * This,
@@ -2286,18 +2286,18 @@ EXTERN_C const IID IID_ConnectionEventsVt;
             /* [out][in] */ __RPC__inout LockTypeEnum *LockType,
             /* [out][in] */ __RPC__inout long *Options,
             /* [out][in] */ __RPC__inout EventStatusEnum *adStatus,
-            /* [in] */ __RPC__in_opt _ADOCommand *pCommand,
-            /* [in] */ __RPC__in_opt _ADORecordset *pRecordset,
-            /* [in] */ __RPC__in_opt _ADOConnection *pConnection);
+            /* [in] */ __RPC__in_opt struct _ADOCommand *pCommand,
+            /* [in] */ __RPC__in_opt struct _ADORecordset *pRecordset,
+            /* [in] */ __RPC__in_opt struct _ADOConnection *pConnection);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *ExecuteComplete )( 
             __RPC__in ConnectionEventsVt * This,
             /* [in] */ LONG RecordsAffected,
-            /* [in] */ __RPC__in_opt ADOError *pError,
+            /* [in] */ __RPC__in_opt struct ADOError *pError,
             /* [out][in] */ __RPC__inout EventStatusEnum *adStatus,
-            /* [in] */ __RPC__in_opt _ADOCommand *pCommand,
-            /* [in] */ __RPC__in_opt _ADORecordset *pRecordset,
-            /* [in] */ __RPC__in_opt _ADOConnection *pConnection);
+            /* [in] */ __RPC__in_opt struct _ADOCommand *pCommand,
+            /* [in] */ __RPC__in_opt struct _ADORecordset *pRecordset,
+            /* [in] */ __RPC__in_opt struct _ADOConnection *pConnection);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *WillConnect )( 
             __RPC__in ConnectionEventsVt * This,
@@ -2306,18 +2306,18 @@ EXTERN_C const IID IID_ConnectionEventsVt;
             /* [out][in] */ __RPC__deref_inout_opt BSTR *Password,
             /* [out][in] */ __RPC__inout long *Options,
             /* [out][in] */ __RPC__inout EventStatusEnum *adStatus,
-            /* [in] */ __RPC__in_opt _ADOConnection *pConnection);
+            /* [in] */ __RPC__in_opt struct _ADOConnection *pConnection);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *ConnectComplete )( 
             __RPC__in ConnectionEventsVt * This,
-            /* [in] */ __RPC__in_opt ADOError *pError,
+            /* [in] */ __RPC__in_opt struct ADOError *pError,
             /* [out][in] */ __RPC__inout EventStatusEnum *adStatus,
-            /* [in] */ __RPC__in_opt _ADOConnection *pConnection);
+            /* [in] */ __RPC__in_opt struct _ADOConnection *pConnection);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Disconnect )( 
             __RPC__in ConnectionEventsVt * This,
             /* [out][in] */ __RPC__inout EventStatusEnum *adStatus,
-            /* [in] */ __RPC__in_opt _ADOConnection *pConnection);
+            /* [in] */ __RPC__in_opt struct _ADOConnection *pConnection);
         
         END_INTERFACE
     } ConnectionEventsVtVtbl;
@@ -2453,75 +2453,75 @@ EXTERN_C const IID IID_RecordsetEventsVt;
             /* [in] */ LONG cFields,
             /* [in] */ VARIANT Fields,
             /* [out][in] */ __RPC__inout EventStatusEnum *adStatus,
-            /* [in] */ __RPC__in_opt _ADORecordset *pRecordset);
+            /* [in] */ __RPC__in_opt struct _ADORecordset *pRecordset);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *FieldChangeComplete )( 
             __RPC__in RecordsetEventsVt * This,
             /* [in] */ LONG cFields,
             /* [in] */ VARIANT Fields,
-            /* [in] */ __RPC__in_opt ADOError *pError,
+            /* [in] */ __RPC__in_opt struct ADOError *pError,
             /* [out][in] */ __RPC__inout EventStatusEnum *adStatus,
-            /* [in] */ __RPC__in_opt _ADORecordset *pRecordset);
+            /* [in] */ __RPC__in_opt struct _ADORecordset *pRecordset);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *WillChangeADORecord )( 
             __RPC__in RecordsetEventsVt * This,
             /* [in] */ EventReasonEnum adReason,
             /* [in] */ LONG cRecords,
             /* [out][in] */ __RPC__inout EventStatusEnum *adStatus,
-            /* [in] */ __RPC__in_opt _ADORecordset *pRecordset);
+            /* [in] */ __RPC__in_opt struct _ADORecordset *pRecordset);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *RecordChangeComplete )( 
             __RPC__in RecordsetEventsVt * This,
             /* [in] */ EventReasonEnum adReason,
             /* [in] */ LONG cRecords,
-            /* [in] */ __RPC__in_opt ADOError *pError,
+            /* [in] */ __RPC__in_opt struct ADOError *pError,
             /* [out][in] */ __RPC__inout EventStatusEnum *adStatus,
-            /* [in] */ __RPC__in_opt _ADORecordset *pRecordset);
+            /* [in] */ __RPC__in_opt struct _ADORecordset *pRecordset);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *WillChangeADORecordset )( 
             __RPC__in RecordsetEventsVt * This,
             /* [in] */ EventReasonEnum adReason,
             /* [out][in] */ __RPC__inout EventStatusEnum *adStatus,
-            /* [in] */ __RPC__in_opt _ADORecordset *pRecordset);
+            /* [in] */ __RPC__in_opt struct _ADORecordset *pRecordset);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *RecordsetChangeComplete )( 
             __RPC__in RecordsetEventsVt * This,
             /* [in] */ EventReasonEnum adReason,
-            /* [in] */ __RPC__in_opt ADOError *pError,
+            /* [in] */ __RPC__in_opt struct ADOError *pError,
             /* [out][in] */ __RPC__inout EventStatusEnum *adStatus,
-            /* [in] */ __RPC__in_opt _ADORecordset *pRecordset);
+            /* [in] */ __RPC__in_opt struct _ADORecordset *pRecordset);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *WillMove )( 
             __RPC__in RecordsetEventsVt * This,
             /* [in] */ EventReasonEnum adReason,
             /* [out][in] */ __RPC__inout EventStatusEnum *adStatus,
-            /* [in] */ __RPC__in_opt _ADORecordset *pRecordset);
+            /* [in] */ __RPC__in_opt struct _ADORecordset *pRecordset);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *MoveComplete )( 
             __RPC__in RecordsetEventsVt * This,
             /* [in] */ EventReasonEnum adReason,
-            /* [in] */ __RPC__in_opt ADOError *pError,
+            /* [in] */ __RPC__in_opt struct ADOError *pError,
             /* [out][in] */ __RPC__inout EventStatusEnum *adStatus,
-            /* [in] */ __RPC__in_opt _ADORecordset *pRecordset);
+            /* [in] */ __RPC__in_opt struct _ADORecordset *pRecordset);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *EndOfADORecordset )( 
             __RPC__in RecordsetEventsVt * This,
             /* [out][in] */ __RPC__inout VARIANT_BOOL *fMoreData,
             /* [out][in] */ __RPC__inout EventStatusEnum *adStatus,
-            /* [in] */ __RPC__in_opt _ADORecordset *pRecordset);
+            /* [in] */ __RPC__in_opt struct _ADORecordset *pRecordset);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *FetchProgress )( 
             __RPC__in RecordsetEventsVt * This,
             /* [in] */ long Progress,
             /* [in] */ long MaxProgress,
             /* [out][in] */ __RPC__inout EventStatusEnum *adStatus,
-            /* [in] */ __RPC__in_opt _ADORecordset *pRecordset);
+            /* [in] */ __RPC__in_opt struct _ADORecordset *pRecordset);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *FetchComplete )( 
             __RPC__in RecordsetEventsVt * This,
-            /* [in] */ __RPC__in_opt ADOError *pError,
+            /* [in] */ __RPC__in_opt struct ADOError *pError,
             /* [out][in] */ __RPC__inout EventStatusEnum *adStatus,
-            /* [in] */ __RPC__in_opt _ADORecordset *pRecordset);
+            /* [in] */ __RPC__in_opt struct _ADORecordset *pRecordset);
         
         END_INTERFACE
     } RecordsetEventsVtVtbl;
@@ -2877,7 +2877,7 @@ EXTERN_C const IID IID_Connection15;
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in Connection15 * This,
-            /* [retval][out] */ __RPC__deref_out_opt ADOProperties **ppvObject);
+            /* [retval][out] */ __RPC__deref_out_opt struct ADOProperties **ppvObject);
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConnectionString )( 
             __RPC__in Connection15 * This,
@@ -2915,7 +2915,7 @@ EXTERN_C const IID IID_Connection15;
             /* [in] */ __RPC__in BSTR CommandText,
             /* [optional][out] */ __RPC__out VARIANT *RecordsAffected,
             /* [defaultvalue][in] */ long Options,
-            /* [retval][out] */ __RPC__deref_out_opt _ADORecordset **ppiRset);
+            /* [retval][out] */ __RPC__deref_out_opt struct _ADORecordset **ppiRset);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *BeginTrans )( 
             __RPC__in Connection15 * This,
@@ -2936,7 +2936,7 @@ EXTERN_C const IID IID_Connection15;
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Errors )( 
             __RPC__in Connection15 * This,
-            /* [retval][out] */ __RPC__deref_out_opt ADOErrors **ppvObject);
+            /* [retval][out] */ __RPC__deref_out_opt struct ADOErrors **ppvObject);
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultDatabase )( 
             __RPC__in Connection15 * This,
@@ -2995,7 +2995,7 @@ EXTERN_C const IID IID_Connection15;
             /* [in] */ SchemaEnum Schema,
             /* [optional][in] */ VARIANT Restrictions,
             /* [optional][in] */ VARIANT SchemaID,
-            /* [retval][out] */ __RPC__deref_out_opt _ADORecordset **pprset);
+            /* [retval][out] */ __RPC__deref_out_opt struct _ADORecordset **pprset);
         
         END_INTERFACE
     } Connection15Vtbl;
@@ -3101,29 +3101,29 @@ EXTERN_C const IID IID__Connection;
         BEGIN_INTERFACE
         
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            __RPC__in _ADOConnection * This,
+            __RPC__in struct _ADOConnection * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            __RPC__in _ADOConnection * This);
+            __RPC__in struct _ADOConnection * This);
         
         ULONG ( STDMETHODCALLTYPE *Release )( 
-            __RPC__in _ADOConnection * This);
+            __RPC__in struct _ADOConnection * This);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            __RPC__in _ADOConnection * This,
+            __RPC__in struct _ADOConnection * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            __RPC__in _ADOConnection * This,
+            __RPC__in struct _ADOConnection * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            __RPC__in _ADOConnection * This,
+            __RPC__in struct _ADOConnection * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
@@ -3131,7 +3131,7 @@ EXTERN_C const IID IID__Connection;
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            _ADOConnection * This,
+            struct _ADOConnection * This,
             /* [in] */ DISPID dispIdMember,
             /* [in] */ REFIID riid,
             /* [in] */ LCID lcid,
@@ -3142,129 +3142,129 @@ EXTERN_C const IID IID__Connection;
             /* [out] */ UINT *puArgErr);
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
-            __RPC__in _ADOConnection * This,
-            /* [retval][out] */ __RPC__deref_out_opt ADOProperties **ppvObject);
+            __RPC__in struct _ADOConnection * This,
+            /* [retval][out] */ __RPC__deref_out_opt struct ADOProperties **ppvObject);
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConnectionString )( 
-            __RPC__in _ADOConnection * This,
+            __RPC__in struct _ADOConnection * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ConnectionString )( 
-            __RPC__in _ADOConnection * This,
+            __RPC__in struct _ADOConnection * This,
             /* [in] */ __RPC__in BSTR bstr);
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CommandTimeout )( 
-            __RPC__in _ADOConnection * This,
+            __RPC__in struct _ADOConnection * This,
             /* [retval][out] */ __RPC__out LONG *plTimeout);
         
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CommandTimeout )( 
-            __RPC__in _ADOConnection * This,
+            __RPC__in struct _ADOConnection * This,
             /* [in] */ LONG lTimeout);
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConnectionTimeout )( 
-            __RPC__in _ADOConnection * This,
+            __RPC__in struct _ADOConnection * This,
             /* [retval][out] */ __RPC__out LONG *plTimeout);
         
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ConnectionTimeout )( 
-            __RPC__in _ADOConnection * This,
+            __RPC__in struct _ADOConnection * This,
             /* [in] */ LONG lTimeout);
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Version )( 
-            __RPC__in _ADOConnection * This,
+            __RPC__in struct _ADOConnection * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Close )( 
-            __RPC__in _ADOConnection * This);
+            __RPC__in struct _ADOConnection * This);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Execute )( 
-            __RPC__in _ADOConnection * This,
+            __RPC__in struct _ADOConnection * This,
             /* [in] */ __RPC__in BSTR CommandText,
             /* [optional][out] */ __RPC__out VARIANT *RecordsAffected,
             /* [defaultvalue][in] */ long Options,
-            /* [retval][out] */ __RPC__deref_out_opt _ADORecordset **ppiRset);
+            /* [retval][out] */ __RPC__deref_out_opt struct _ADORecordset **ppiRset);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *BeginTrans )( 
-            __RPC__in _ADOConnection * This,
+            __RPC__in struct _ADOConnection * This,
             /* [retval][out] */ __RPC__out long *TransactionLevel);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *CommitTrans )( 
-            __RPC__in _ADOConnection * This);
+            __RPC__in struct _ADOConnection * This);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *RollbackTrans )( 
-            __RPC__in _ADOConnection * This);
+            __RPC__in struct _ADOConnection * This);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Open )( 
-            __RPC__in _ADOConnection * This,
+            __RPC__in struct _ADOConnection * This,
             /* [defaultvalue][in] */ __RPC__in BSTR ConnectionString,
             /* [defaultvalue][in] */ __RPC__in BSTR UserID,
             /* [defaultvalue][in] */ __RPC__in BSTR Password,
             /* [defaultvalue][in] */ long Options);
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Errors )( 
-            __RPC__in _ADOConnection * This,
-            /* [retval][out] */ __RPC__deref_out_opt ADOErrors **ppvObject);
+            __RPC__in struct _ADOConnection * This,
+            /* [retval][out] */ __RPC__deref_out_opt struct ADOErrors **ppvObject);
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultDatabase )( 
-            __RPC__in _ADOConnection * This,
+            __RPC__in struct _ADOConnection * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DefaultDatabase )( 
-            __RPC__in _ADOConnection * This,
+            __RPC__in struct _ADOConnection * This,
             /* [in] */ __RPC__in BSTR bstr);
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsolationLevel )( 
-            __RPC__in _ADOConnection * This,
+            __RPC__in struct _ADOConnection * This,
             /* [retval][out] */ __RPC__out IsolationLevelEnum *Level);
         
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_IsolationLevel )( 
-            __RPC__in _ADOConnection * This,
+            __RPC__in struct _ADOConnection * This,
             /* [in] */ IsolationLevelEnum Level);
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Attributes )( 
-            __RPC__in _ADOConnection * This,
+            __RPC__in struct _ADOConnection * This,
             /* [retval][out] */ __RPC__out long *plAttr);
         
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Attributes )( 
-            __RPC__in _ADOConnection * This,
+            __RPC__in struct _ADOConnection * This,
             /* [in] */ long lAttr);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_CursorLocation )( 
-            __RPC__in _ADOConnection * This,
+            __RPC__in struct _ADOConnection * This,
             /* [retval][out] */ __RPC__out CursorLocationEnum *plCursorLoc);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_CursorLocation )( 
-            __RPC__in _ADOConnection * This,
+            __RPC__in struct _ADOConnection * This,
             /* [in] */ CursorLocationEnum lCursorLoc);
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Mode )( 
-            __RPC__in _ADOConnection * This,
+            __RPC__in struct _ADOConnection * This,
             /* [retval][out] */ __RPC__out ConnectModeEnum *plMode);
         
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Mode )( 
-            __RPC__in _ADOConnection * This,
+            __RPC__in struct _ADOConnection * This,
             /* [in] */ ConnectModeEnum lMode);
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Provider )( 
-            __RPC__in _ADOConnection * This,
+            __RPC__in struct _ADOConnection * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Provider )( 
-            __RPC__in _ADOConnection * This,
+            __RPC__in struct _ADOConnection * This,
             /* [in] */ __RPC__in BSTR Provider);
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
-            __RPC__in _ADOConnection * This,
+            __RPC__in struct _ADOConnection * This,
             /* [retval][out] */ __RPC__out LONG *plObjState);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *OpenSchema )( 
-            __RPC__in _ADOConnection * This,
+            __RPC__in struct _ADOConnection * This,
             /* [in] */ SchemaEnum Schema,
             /* [optional][in] */ VARIANT Restrictions,
             /* [optional][in] */ VARIANT SchemaID,
-            /* [retval][out] */ __RPC__deref_out_opt _ADORecordset **pprset);
+            /* [retval][out] */ __RPC__deref_out_opt struct _ADORecordset **pprset);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Cancel )( 
-            __RPC__in _ADOConnection * This);
+            __RPC__in struct _ADOConnection * This);
         
         END_INTERFACE
     } _ConnectionVtbl;
@@ -3590,29 +3590,29 @@ EXTERN_C const IID IID__Record;
         BEGIN_INTERFACE
         
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            __RPC__in _ADORecord * This,
+            __RPC__in struct _ADORecord * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            __RPC__in _ADORecord * This);
+            __RPC__in struct _ADORecord * This);
         
         ULONG ( STDMETHODCALLTYPE *Release )( 
-            __RPC__in _ADORecord * This);
+            __RPC__in struct _ADORecord * This);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            __RPC__in _ADORecord * This,
+            __RPC__in struct _ADORecord * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            __RPC__in _ADORecord * This,
+            __RPC__in struct _ADORecord * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            __RPC__in _ADORecord * This,
+            __RPC__in struct _ADORecord * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
@@ -3620,7 +3620,7 @@ EXTERN_C const IID IID__Record;
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            _ADORecord * This,
+            struct _ADORecord * This,
             /* [in] */ DISPID dispIdMember,
             /* [in] */ REFIID riid,
             /* [in] */ LCID lcid,
@@ -3631,51 +3631,51 @@ EXTERN_C const IID IID__Record;
             /* [out] */ UINT *puArgErr);
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
-            __RPC__in _ADORecord * This,
-            /* [retval][out] */ __RPC__deref_out_opt ADOProperties **ppvObject);
+            __RPC__in struct _ADORecord * This,
+            /* [retval][out] */ __RPC__deref_out_opt struct ADOProperties **ppvObject);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ActiveConnection )( 
-            __RPC__in _ADORecord * This,
+            __RPC__in struct _ADORecord * This,
             /* [retval][out] */ __RPC__out VARIANT *pvar);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ActiveConnection )( 
-            __RPC__in _ADORecord * This,
+            __RPC__in struct _ADORecord * This,
             /* [in] */ __RPC__in BSTR bstrConn);
         
         /* [helpcontext][propputref][id] */ HRESULT ( STDMETHODCALLTYPE *putref_ActiveADOConnection )( 
-            __RPC__in _ADORecord * This,
-            /* [in] */ __RPC__in_opt _ADOConnection *Con);
+            __RPC__in struct _ADORecord * This,
+            /* [in] */ __RPC__in_opt struct _ADOConnection *Con);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
-            __RPC__in _ADORecord * This,
+            __RPC__in struct _ADORecord * This,
             /* [retval][out] */ __RPC__out ObjectStateEnum *pState);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Source )( 
-            __RPC__in _ADORecord * This,
+            __RPC__in struct _ADORecord * This,
             /* [retval][out] */ __RPC__out VARIANT *pvar);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Source )( 
-            __RPC__in _ADORecord * This,
+            __RPC__in struct _ADORecord * This,
             /* [in] */ __RPC__in BSTR Source);
         
         /* [helpcontext][propputref][id] */ HRESULT ( STDMETHODCALLTYPE *putref_Source )( 
-            __RPC__in _ADORecord * This,
+            __RPC__in struct _ADORecord * This,
             /* [in] */ __RPC__in_opt IDispatch *Source);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Mode )( 
-            __RPC__in _ADORecord * This,
+            __RPC__in struct _ADORecord * This,
             /* [retval][out] */ __RPC__out ConnectModeEnum *pMode);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Mode )( 
-            __RPC__in _ADORecord * This,
+            __RPC__in struct _ADORecord * This,
             /* [in] */ ConnectModeEnum Mode);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ParentURL )( 
-            __RPC__in _ADORecord * This,
+            __RPC__in struct _ADORecord * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrParentURL);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *MoveADORecord )( 
-            __RPC__in _ADORecord * This,
+            __RPC__in struct _ADORecord * This,
             /* [defaultvalue][in] */ __RPC__in BSTR Source,
             /* [defaultvalue][in] */ __RPC__in BSTR Destination,
             /* [defaultvalue][in] */ __RPC__in BSTR UserName,
@@ -3685,7 +3685,7 @@ EXTERN_C const IID IID__Record;
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrNewURL);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *CopyADORecord )( 
-            __RPC__in _ADORecord * This,
+            __RPC__in struct _ADORecord * This,
             /* [defaultvalue][in] */ __RPC__in BSTR Source,
             /* [defaultvalue][in] */ __RPC__in BSTR Destination,
             /* [defaultvalue][in] */ __RPC__in BSTR UserName,
@@ -3695,12 +3695,12 @@ EXTERN_C const IID IID__Record;
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrNewURL);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteADORecord )( 
-            __RPC__in _ADORecord * This,
+            __RPC__in struct _ADORecord * This,
             /* [defaultvalue][in] */ __RPC__in BSTR Source,
             /* [defaultvalue][in] */ VARIANT_BOOL Async);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Open )( 
-            __RPC__in _ADORecord * This,
+            __RPC__in struct _ADORecord * This,
             /* [optional][in] */ VARIANT Source,
             /* [optional][in] */ VARIANT ActiveConnection,
             /* [defaultvalue][in] */ ConnectModeEnum Mode,
@@ -3710,22 +3710,22 @@ EXTERN_C const IID IID__Record;
             /* [defaultvalue][in] */ __RPC__in BSTR Password);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Close )( 
-            __RPC__in _ADORecord * This);
+            __RPC__in struct _ADORecord * This);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Fields )( 
-            __RPC__in _ADORecord * This,
-            /* [retval][out] */ __RPC__deref_out_opt ADOFields **ppFlds);
+            __RPC__in struct _ADORecord * This,
+            /* [retval][out] */ __RPC__deref_out_opt struct ADOFields **ppFlds);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RecordType )( 
-            __RPC__in _ADORecord * This,
+            __RPC__in struct _ADORecord * This,
             /* [retval][out] */ __RPC__out RecordTypeEnum *pType);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *GetChildren )( 
-            __RPC__in _ADORecord * This,
-            /* [retval][out] */ __RPC__deref_out_opt _ADORecordset **ppRSet);
+            __RPC__in struct _ADORecord * This,
+            /* [retval][out] */ __RPC__deref_out_opt struct _ADORecordset **ppRSet);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Cancel )( 
-            __RPC__in _ADORecord * This);
+            __RPC__in struct _ADORecord * This);
         
         END_INTERFACE
     } _RecordVtbl;
@@ -3897,29 +3897,29 @@ EXTERN_C const IID IID__Stream;
         BEGIN_INTERFACE
         
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            __RPC__in _ADOStream * This,
+            __RPC__in struct _ADOStream * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            __RPC__in _ADOStream * This);
+            __RPC__in struct _ADOStream * This);
         
         ULONG ( STDMETHODCALLTYPE *Release )( 
-            __RPC__in _ADOStream * This);
+            __RPC__in struct _ADOStream * This);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            __RPC__in _ADOStream * This,
+            __RPC__in struct _ADOStream * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            __RPC__in _ADOStream * This,
+            __RPC__in struct _ADOStream * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            __RPC__in _ADOStream * This,
+            __RPC__in struct _ADOStream * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
@@ -3927,7 +3927,7 @@ EXTERN_C const IID IID__Stream;
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            _ADOStream * This,
+            struct _ADOStream * This,
             /* [in] */ DISPID dispIdMember,
             /* [in] */ REFIID riid,
             /* [in] */ LCID lcid,
@@ -3938,64 +3938,64 @@ EXTERN_C const IID IID__Stream;
             /* [out] */ UINT *puArgErr);
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Size )( 
-            __RPC__in _ADOStream * This,
+            __RPC__in struct _ADOStream * This,
             /* [retval][out] */ __RPC__out ADO_LONGPTR *pSize);
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EOS )( 
-            __RPC__in _ADOStream * This,
+            __RPC__in struct _ADOStream * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pEOS);
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Position )( 
-            __RPC__in _ADOStream * This,
+            __RPC__in struct _ADOStream * This,
             /* [retval][out] */ __RPC__out ADO_LONGPTR *pPos);
         
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Position )( 
-            __RPC__in _ADOStream * This,
+            __RPC__in struct _ADOStream * This,
             /* [in] */ ADO_LONGPTR Position);
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
-            __RPC__in _ADOStream * This,
+            __RPC__in struct _ADOStream * This,
             /* [retval][out] */ __RPC__out StreamTypeEnum *pType);
         
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Type )( 
-            __RPC__in _ADOStream * This,
+            __RPC__in struct _ADOStream * This,
             /* [in] */ StreamTypeEnum Type);
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LineSeparator )( 
-            __RPC__in _ADOStream * This,
+            __RPC__in struct _ADOStream * This,
             /* [retval][out] */ __RPC__out LineSeparatorEnum *pLS);
         
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LineSeparator )( 
-            __RPC__in _ADOStream * This,
+            __RPC__in struct _ADOStream * This,
             /* [in] */ LineSeparatorEnum LineSeparator);
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
-            __RPC__in _ADOStream * This,
+            __RPC__in struct _ADOStream * This,
             /* [retval][out] */ __RPC__out ObjectStateEnum *pState);
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Mode )( 
-            __RPC__in _ADOStream * This,
+            __RPC__in struct _ADOStream * This,
             /* [retval][out] */ __RPC__out ConnectModeEnum *pMode);
         
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Mode )( 
-            __RPC__in _ADOStream * This,
+            __RPC__in struct _ADOStream * This,
             /* [in] */ ConnectModeEnum Mode);
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Charset )( 
-            __RPC__in _ADOStream * This,
+            __RPC__in struct _ADOStream * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCharset);
         
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Charset )( 
-            __RPC__in _ADOStream * This,
+            __RPC__in struct _ADOStream * This,
             /* [in] */ __RPC__in BSTR Charset);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Read )( 
-            __RPC__in _ADOStream * This,
+            __RPC__in struct _ADOStream * This,
             /* [defaultvalue][in] */ long NumBytes,
             /* [retval][out] */ __RPC__out VARIANT *pVal);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Open )( 
-            __RPC__in _ADOStream * This,
+            __RPC__in struct _ADOStream * This,
             /* [optional][in] */ VARIANT Source,
             /* [defaultvalue][in] */ ConnectModeEnum Mode,
             /* [defaultvalue][in] */ StreamOpenOptionsEnum Options,
@@ -4003,47 +4003,47 @@ EXTERN_C const IID IID__Stream;
             /* [defaultvalue][in] */ __RPC__in BSTR Password);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Close )( 
-            __RPC__in _ADOStream * This);
+            __RPC__in struct _ADOStream * This);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *SkipLine )( 
-            __RPC__in _ADOStream * This);
+            __RPC__in struct _ADOStream * This);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Write )( 
-            __RPC__in _ADOStream * This,
+            __RPC__in struct _ADOStream * This,
             /* [in] */ VARIANT Buffer);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *SetEOS )( 
-            __RPC__in _ADOStream * This);
+            __RPC__in struct _ADOStream * This);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *CopyTo )( 
-            __RPC__in _ADOStream * This,
-            /* [in] */ __RPC__in_opt _ADOStream *DestStream,
+            __RPC__in struct _ADOStream * This,
+            /* [in] */ __RPC__in_opt struct _ADOStream *DestStream,
             /* [defaultvalue][in] */ ADO_LONGPTR CharNumber);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Flush )( 
-            __RPC__in _ADOStream * This);
+            __RPC__in struct _ADOStream * This);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *SaveToFile )( 
-            __RPC__in _ADOStream * This,
+            __RPC__in struct _ADOStream * This,
             /* [in] */ __RPC__in BSTR FileName,
             /* [defaultvalue][in] */ SaveOptionsEnum Options);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *LoadFromFile )( 
-            __RPC__in _ADOStream * This,
+            __RPC__in struct _ADOStream * This,
             /* [in] */ __RPC__in BSTR FileName);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *ReadText )( 
-            __RPC__in _ADOStream * This,
+            __RPC__in struct _ADOStream * This,
             /* [defaultvalue][in] */ long NumChars,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *WriteText )( 
-            __RPC__in _ADOStream * This,
+            __RPC__in struct _ADOStream * This,
             /* [in] */ __RPC__in BSTR Data,
             /* [defaultvalue][in] */ StreamWriteEnum Options);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Cancel )( 
-            __RPC__in _ADOStream * This);
+            __RPC__in struct _ADOStream * This);
         
         END_INTERFACE
     } _StreamVtbl;
@@ -4664,7 +4664,7 @@ EXTERN_C const IID IID_Recordset15;
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in Recordset15 * This,
-            /* [retval][out] */ __RPC__deref_out_opt ADOProperties **ppvObject);
+            /* [retval][out] */ __RPC__deref_out_opt struct ADOProperties **ppvObject);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AbsolutePosition )( 
             __RPC__in Recordset15 * This,
@@ -4720,7 +4720,7 @@ EXTERN_C const IID IID_Recordset15;
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Fields )( 
             __RPC__in Recordset15 * This,
-            /* [retval][out] */ __RPC__deref_out_opt ADOFields **ppvObject);
+            /* [retval][out] */ __RPC__deref_out_opt struct ADOFields **ppvObject);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LockType )( 
             __RPC__in Recordset15 * This,
@@ -4864,7 +4864,7 @@ EXTERN_C const IID IID_Recordset15;
         
         /* [hidden] */ HRESULT ( STDMETHODCALLTYPE *_xClone )( 
             __RPC__in Recordset15 * This,
-            /* [retval][out] */ __RPC__deref_out_opt _ADORecordset **ppvObject);
+            /* [retval][out] */ __RPC__deref_out_opt struct _ADORecordset **ppvObject);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *UpdateBatch )( 
             __RPC__in Recordset15 * This,
@@ -4885,7 +4885,7 @@ EXTERN_C const IID IID_Recordset15;
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *NextADORecordset )( 
             __RPC__in Recordset15 * This,
             /* [optional][out] */ __RPC__out VARIANT *RecordsAffected,
-            /* [retval][out] */ __RPC__deref_out_opt _ADORecordset **ppiRs);
+            /* [retval][out] */ __RPC__deref_out_opt struct _ADORecordset **ppiRs);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Supports )( 
             __RPC__in Recordset15 * This,
@@ -5173,7 +5173,7 @@ EXTERN_C const IID IID_Recordset20;
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in Recordset20 * This,
-            /* [retval][out] */ __RPC__deref_out_opt ADOProperties **ppvObject);
+            /* [retval][out] */ __RPC__deref_out_opt struct ADOProperties **ppvObject);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AbsolutePosition )( 
             __RPC__in Recordset20 * This,
@@ -5229,7 +5229,7 @@ EXTERN_C const IID IID_Recordset20;
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Fields )( 
             __RPC__in Recordset20 * This,
-            /* [retval][out] */ __RPC__deref_out_opt ADOFields **ppvObject);
+            /* [retval][out] */ __RPC__deref_out_opt struct ADOFields **ppvObject);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LockType )( 
             __RPC__in Recordset20 * This,
@@ -5373,7 +5373,7 @@ EXTERN_C const IID IID_Recordset20;
         
         /* [hidden] */ HRESULT ( STDMETHODCALLTYPE *_xClone )( 
             __RPC__in Recordset20 * This,
-            /* [retval][out] */ __RPC__deref_out_opt _ADORecordset **ppvObject);
+            /* [retval][out] */ __RPC__deref_out_opt struct _ADORecordset **ppvObject);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *UpdateBatch )( 
             __RPC__in Recordset20 * This,
@@ -5394,7 +5394,7 @@ EXTERN_C const IID IID_Recordset20;
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *NextADORecordset )( 
             __RPC__in Recordset20 * This,
             /* [optional][out] */ __RPC__out VARIANT *RecordsAffected,
-            /* [retval][out] */ __RPC__deref_out_opt _ADORecordset **ppiRs);
+            /* [retval][out] */ __RPC__deref_out_opt struct _ADORecordset **ppiRs);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Supports )( 
             __RPC__in Recordset20 * This,
@@ -5480,7 +5480,7 @@ EXTERN_C const IID IID_Recordset20;
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in Recordset20 * This,
             /* [defaultvalue][in] */ LockTypeEnum LockType,
-            /* [retval][out] */ __RPC__deref_out_opt _ADORecordset **ppvObject);
+            /* [retval][out] */ __RPC__deref_out_opt struct _ADORecordset **ppvObject);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Resync )( 
             __RPC__in Recordset20 * This,
@@ -5731,7 +5731,7 @@ EXTERN_C const IID IID_Recordset21;
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in Recordset21 * This,
-            /* [retval][out] */ __RPC__deref_out_opt ADOProperties **ppvObject);
+            /* [retval][out] */ __RPC__deref_out_opt struct ADOProperties **ppvObject);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AbsolutePosition )( 
             __RPC__in Recordset21 * This,
@@ -5787,7 +5787,7 @@ EXTERN_C const IID IID_Recordset21;
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Fields )( 
             __RPC__in Recordset21 * This,
-            /* [retval][out] */ __RPC__deref_out_opt ADOFields **ppvObject);
+            /* [retval][out] */ __RPC__deref_out_opt struct ADOFields **ppvObject);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LockType )( 
             __RPC__in Recordset21 * This,
@@ -5931,7 +5931,7 @@ EXTERN_C const IID IID_Recordset21;
         
         /* [hidden] */ HRESULT ( STDMETHODCALLTYPE *_xClone )( 
             __RPC__in Recordset21 * This,
-            /* [retval][out] */ __RPC__deref_out_opt _ADORecordset **ppvObject);
+            /* [retval][out] */ __RPC__deref_out_opt struct _ADORecordset **ppvObject);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *UpdateBatch )( 
             __RPC__in Recordset21 * This,
@@ -5952,7 +5952,7 @@ EXTERN_C const IID IID_Recordset21;
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *NextADORecordset )( 
             __RPC__in Recordset21 * This,
             /* [optional][out] */ __RPC__out VARIANT *RecordsAffected,
-            /* [retval][out] */ __RPC__deref_out_opt _ADORecordset **ppiRs);
+            /* [retval][out] */ __RPC__deref_out_opt struct _ADORecordset **ppiRs);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Supports )( 
             __RPC__in Recordset21 * This,
@@ -6038,7 +6038,7 @@ EXTERN_C const IID IID_Recordset21;
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in Recordset21 * This,
             /* [defaultvalue][in] */ LockTypeEnum LockType,
-            /* [retval][out] */ __RPC__deref_out_opt _ADORecordset **ppvObject);
+            /* [retval][out] */ __RPC__deref_out_opt struct _ADORecordset **ppvObject);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Resync )( 
             __RPC__in Recordset21 * This,
@@ -6260,29 +6260,29 @@ EXTERN_C const IID IID__Recordset;
         BEGIN_INTERFACE
         
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            __RPC__in _ADORecordset * This);
+            __RPC__in struct _ADORecordset * This);
         
         ULONG ( STDMETHODCALLTYPE *Release )( 
-            __RPC__in _ADORecordset * This);
+            __RPC__in struct _ADORecordset * This);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
@@ -6290,7 +6290,7 @@ EXTERN_C const IID IID__Recordset;
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            _ADORecordset * This,
+            struct _ADORecordset * This,
             /* [in] */ DISPID dispIdMember,
             /* [in] */ REFIID riid,
             /* [in] */ LCID lcid,
@@ -6301,138 +6301,138 @@ EXTERN_C const IID IID__Recordset;
             /* [out] */ UINT *puArgErr);
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
-            __RPC__in _ADORecordset * This,
-            /* [retval][out] */ __RPC__deref_out_opt ADOProperties **ppvObject);
+            __RPC__in struct _ADORecordset * This,
+            /* [retval][out] */ __RPC__deref_out_opt struct ADOProperties **ppvObject);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AbsolutePosition )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [retval][out] */ __RPC__out PositionEnum_Param *pl);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_AbsolutePosition )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [in] */ PositionEnum_Param Position);
         
         /* [helpcontext][propputref][id] */ HRESULT ( STDMETHODCALLTYPE *putref_ActiveADOConnection )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [in] */ __RPC__in_opt IDispatch *pconn);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ActiveConnection )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [in] */ VARIANT vConn);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ActiveConnection )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [retval][out] */ __RPC__out VARIANT *pvar);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_BOF )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pb);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Bookmark )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [retval][out] */ __RPC__out VARIANT *pvBookmark);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Bookmark )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [in] */ VARIANT vBookmark);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_CacheSize )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [retval][out] */ __RPC__out long *pl);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_CacheSize )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [in] */ long CacheSize);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_CursorType )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [retval][out] */ __RPC__out CursorTypeEnum *plCursorType);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_CursorType )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [in] */ CursorTypeEnum lCursorType);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_EOF )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pb);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Fields )( 
-            __RPC__in _ADORecordset * This,
-            /* [retval][out] */ __RPC__deref_out_opt ADOFields **ppvObject);
+            __RPC__in struct _ADORecordset * This,
+            /* [retval][out] */ __RPC__deref_out_opt struct ADOFields **ppvObject);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LockType )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [retval][out] */ __RPC__out LockTypeEnum *plLockType);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_LockType )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [in] */ LockTypeEnum lLockType);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MaxRecords )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [retval][out] */ __RPC__out ADO_LONGPTR *plMaxRecords);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MaxRecords )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [in] */ ADO_LONGPTR lMaxRecords);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RecordCount )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [retval][out] */ __RPC__out ADO_LONGPTR *pl);
         
         /* [helpcontext][propputref][id] */ HRESULT ( STDMETHODCALLTYPE *putref_Source )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [in] */ __RPC__in_opt IDispatch *pcmd);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Source )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [in] */ __RPC__in BSTR bstrConn);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Source )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [retval][out] */ __RPC__out VARIANT *pvSource);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *AddNew )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [optional][in] */ VARIANT FieldList,
             /* [optional][in] */ VARIANT Values);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *CancelUpdate )( 
-            __RPC__in _ADORecordset * This);
+            __RPC__in struct _ADORecordset * This);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Close )( 
-            __RPC__in _ADORecordset * This);
+            __RPC__in struct _ADORecordset * This);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [defaultvalue][in] */ AffectEnum AffectRecords);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *GetRows )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [defaultvalue][in] */ long Rows,
             /* [optional][in] */ VARIANT Start,
             /* [optional][in] */ VARIANT Fields,
             /* [retval][out] */ __RPC__out VARIANT *pvar);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Move )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [in] */ ADO_LONGPTR NumRecords,
             /* [optional][in] */ VARIANT Start);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *MoveNext )( 
-            __RPC__in _ADORecordset * This);
+            __RPC__in struct _ADORecordset * This);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *MovePrevious )( 
-            __RPC__in _ADORecordset * This);
+            __RPC__in struct _ADORecordset * This);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *MoveFirst )( 
-            __RPC__in _ADORecordset * This);
+            __RPC__in struct _ADORecordset * This);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *MoveLast )( 
-            __RPC__in _ADORecordset * This);
+            __RPC__in struct _ADORecordset * This);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Open )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [optional][in] */ VARIANT Source,
             /* [optional][in] */ VARIANT ActiveConnection,
             /* [defaultvalue][in] */ CursorTypeEnum CursorType,
@@ -6440,151 +6440,151 @@ EXTERN_C const IID IID__Recordset;
             /* [defaultvalue][in] */ LONG Options);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Requery )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [defaultvalue][in] */ LONG Options);
         
         /* [hidden] */ HRESULT ( STDMETHODCALLTYPE *_xResync )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [defaultvalue][in] */ AffectEnum AffectRecords);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Update )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [optional][in] */ VARIANT Fields,
             /* [optional][in] */ VARIANT Values);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AbsolutePage )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [retval][out] */ __RPC__out PositionEnum_Param *pl);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_AbsolutePage )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [in] */ PositionEnum_Param Page);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_EditMode )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [retval][out] */ __RPC__out EditModeEnum *pl);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Filter )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [retval][out] */ __RPC__out VARIANT *Criteria);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Filter )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [in] */ VARIANT Criteria);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_PageCount )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [retval][out] */ __RPC__out ADO_LONGPTR *pl);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_PageSize )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [retval][out] */ __RPC__out long *pl);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_PageSize )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [in] */ long PageSize);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Sort )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Criteria);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Sort )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [in] */ __RPC__in BSTR Criteria);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [retval][out] */ __RPC__out long *pl);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [retval][out] */ __RPC__out LONG *plObjState);
         
         /* [hidden] */ HRESULT ( STDMETHODCALLTYPE *_xClone )( 
-            __RPC__in _ADORecordset * This,
-            /* [retval][out] */ __RPC__deref_out_opt _ADORecordset **ppvObject);
+            __RPC__in struct _ADORecordset * This,
+            /* [retval][out] */ __RPC__deref_out_opt struct _ADORecordset **ppvObject);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *UpdateBatch )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [defaultvalue][in] */ AffectEnum AffectRecords);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *CancelBatch )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [defaultvalue][in] */ AffectEnum AffectRecords);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_CursorLocation )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [retval][out] */ __RPC__out CursorLocationEnum *plCursorLoc);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_CursorLocation )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [in] */ CursorLocationEnum lCursorLoc);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *NextADORecordset )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [optional][out] */ __RPC__out VARIANT *RecordsAffected,
-            /* [retval][out] */ __RPC__deref_out_opt _ADORecordset **ppiRs);
+            /* [retval][out] */ __RPC__deref_out_opt struct _ADORecordset **ppiRs);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Supports )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [in] */ CursorOptionEnum CursorOptions,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pb);
         
         /* [hidden][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Collect )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [in] */ VARIANT Index,
             /* [retval][out] */ __RPC__out VARIANT *pvar);
         
         /* [hidden][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Collect )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [in] */ VARIANT Index,
             /* [in] */ VARIANT value);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MarshalOptions )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [retval][out] */ __RPC__out MarshalOptionsEnum *peMarshal);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MarshalOptions )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [in] */ MarshalOptionsEnum eMarshal);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Find )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [in] */ __RPC__in BSTR Criteria,
             /* [defaultvalue][in] */ ADO_LONGPTR SkipRecords,
             /* [defaultvalue][in] */ SearchDirectionEnum SearchDirection,
             /* [optional][in] */ VARIANT Start);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Cancel )( 
-            __RPC__in _ADORecordset * This);
+            __RPC__in struct _ADORecordset * This);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DataSource )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppunkDataSource);
         
         /* [helpcontext][propputref][id] */ HRESULT ( STDMETHODCALLTYPE *putref_DataSource )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [in] */ __RPC__in_opt IUnknown *punkDataSource);
         
         /* [hidden] */ HRESULT ( STDMETHODCALLTYPE *_xSave )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [defaultvalue][in] */ __RPC__in BSTR FileName,
             /* [defaultvalue][in] */ PersistFormatEnum PersistFormat);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ActiveCommand )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppCmd);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_StayInSync )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [in] */ VARIANT_BOOL bStayInSync);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_StayInSync )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbStayInSync);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *GetString )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [defaultvalue][in] */ StringFormatEnum StringFormat,
             /* [defaultvalue][in] */ long NumRows,
             /* [defaultvalue][in] */ __RPC__in BSTR ColumnDelimeter,
@@ -6593,44 +6593,44 @@ EXTERN_C const IID IID__Recordset;
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pRetString);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DataMember )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDataMember);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DataMember )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [in] */ __RPC__in BSTR bstrDataMember);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *CompareBookmarks )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [in] */ VARIANT Bookmark1,
             /* [in] */ VARIANT Bookmark2,
             /* [retval][out] */ __RPC__out CompareEnum *pCompare);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [defaultvalue][in] */ LockTypeEnum LockType,
-            /* [retval][out] */ __RPC__deref_out_opt _ADORecordset **ppvObject);
+            /* [retval][out] */ __RPC__deref_out_opt struct _ADORecordset **ppvObject);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Resync )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [defaultvalue][in] */ AffectEnum AffectRecords,
             /* [defaultvalue][in] */ ResyncEnum ResyncValues);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Seek )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [in] */ VARIANT KeyValues,
             /* [defaultvalue][in] */ SeekEnum SeekOption);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Index )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [in] */ __RPC__in BSTR Index);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Index )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrIndex);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Save )( 
-            __RPC__in _ADORecordset * This,
+            __RPC__in struct _ADORecordset * This,
             /* [optional][in] */ VARIANT Destination,
             /* [defaultvalue][in] */ PersistFormatEnum PersistFormat);
         
@@ -7054,7 +7054,7 @@ EXTERN_C const IID IID_Field15;
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in Field15 * This,
-            /* [retval][out] */ __RPC__deref_out_opt ADOProperties **ppvObject);
+            /* [retval][out] */ __RPC__deref_out_opt struct ADOProperties **ppvObject);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ActualSize )( 
             __RPC__in Field15 * This,
@@ -7284,7 +7284,7 @@ EXTERN_C const IID IID_Field20;
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in Field20 * This,
-            /* [retval][out] */ __RPC__deref_out_opt ADOProperties **ppvObject);
+            /* [retval][out] */ __RPC__deref_out_opt struct ADOProperties **ppvObject);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ActualSize )( 
             __RPC__in Field20 * This,
@@ -7456,29 +7456,29 @@ EXTERN_C const IID IID_Field;
         BEGIN_INTERFACE
         
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            __RPC__in ADOField * This,
+            __RPC__in struct ADOField * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            __RPC__in ADOField * This);
+            __RPC__in struct ADOField * This);
         
         ULONG ( STDMETHODCALLTYPE *Release )( 
-            __RPC__in ADOField * This);
+            __RPC__in struct ADOField * This);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            __RPC__in ADOField * This,
+            __RPC__in struct ADOField * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            __RPC__in ADOField * This,
+            __RPC__in struct ADOField * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            __RPC__in ADOField * This,
+            __RPC__in struct ADOField * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
@@ -7486,7 +7486,7 @@ EXTERN_C const IID IID_Field;
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            ADOField * This,
+            struct ADOField * This,
             /* [in] */ DISPID dispIdMember,
             /* [in] */ REFIID riid,
             /* [in] */ LCID lcid,
@@ -7497,92 +7497,92 @@ EXTERN_C const IID IID_Field;
             /* [out] */ UINT *puArgErr);
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
-            __RPC__in ADOField * This,
-            /* [retval][out] */ __RPC__deref_out_opt ADOProperties **ppvObject);
+            __RPC__in struct ADOField * This,
+            /* [retval][out] */ __RPC__deref_out_opt struct ADOProperties **ppvObject);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ActualSize )( 
-            __RPC__in ADOField * This,
+            __RPC__in struct ADOField * This,
             /* [retval][out] */ __RPC__out ADO_LONGPTR *pl);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Attributes )( 
-            __RPC__in ADOField * This,
+            __RPC__in struct ADOField * This,
             /* [retval][out] */ __RPC__out long *pl);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DefinedSize )( 
-            __RPC__in ADOField * This,
+            __RPC__in struct ADOField * This,
             /* [retval][out] */ __RPC__out ADO_LONGPTR *pl);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
-            __RPC__in ADOField * This,
+            __RPC__in struct ADOField * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
-            __RPC__in ADOField * This,
+            __RPC__in struct ADOField * This,
             /* [retval][out] */ __RPC__out DataTypeEnum *pDataType);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
-            __RPC__in ADOField * This,
+            __RPC__in struct ADOField * This,
             /* [retval][out] */ __RPC__out VARIANT *pvar);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Value )( 
-            __RPC__in ADOField * This,
+            __RPC__in struct ADOField * This,
             /* [in] */ VARIANT Val);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Precision )( 
-            __RPC__in ADOField * This,
+            __RPC__in struct ADOField * This,
             /* [retval][out] */ __RPC__out BYTE *pbPrecision);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_NumericScale )( 
-            __RPC__in ADOField * This,
+            __RPC__in struct ADOField * This,
             /* [retval][out] */ __RPC__out BYTE *pbNumericScale);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *AppendChunk )( 
-            __RPC__in ADOField * This,
+            __RPC__in struct ADOField * This,
             /* [in] */ VARIANT Data);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *GetChunk )( 
-            __RPC__in ADOField * This,
+            __RPC__in struct ADOField * This,
             /* [in] */ long Length,
             /* [retval][out] */ __RPC__out VARIANT *pvar);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_OriginalValue )( 
-            __RPC__in ADOField * This,
+            __RPC__in struct ADOField * This,
             /* [retval][out] */ __RPC__out VARIANT *pvar);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_UnderlyingValue )( 
-            __RPC__in ADOField * This,
+            __RPC__in struct ADOField * This,
             /* [retval][out] */ __RPC__out VARIANT *pvar);
         
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DataFormat )( 
-            __RPC__in ADOField * This,
+            __RPC__in struct ADOField * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppiDF);
         
         /* [propputref][id] */ HRESULT ( STDMETHODCALLTYPE *putref_DataFormat )( 
-            __RPC__in ADOField * This,
+            __RPC__in struct ADOField * This,
             /* [in] */ __RPC__in_opt IUnknown *piDF);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Precision )( 
-            __RPC__in ADOField * This,
+            __RPC__in struct ADOField * This,
             /* [in] */ BYTE bPrecision);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_NumericScale )( 
-            __RPC__in ADOField * This,
+            __RPC__in struct ADOField * This,
             /* [in] */ BYTE bScale);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Type )( 
-            __RPC__in ADOField * This,
+            __RPC__in struct ADOField * This,
             /* [in] */ DataTypeEnum DataType);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DefinedSize )( 
-            __RPC__in ADOField * This,
+            __RPC__in struct ADOField * This,
             /* [in] */ ADO_LONGPTR lSize);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Attributes )( 
-            __RPC__in ADOField * This,
+            __RPC__in struct ADOField * This,
             /* [in] */ long lAttributes);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
-            __RPC__in ADOField * This,
+            __RPC__in struct ADOField * This,
             /* [retval][out] */ __RPC__out long *pFStatus);
         
         END_INTERFACE
@@ -7731,7 +7731,7 @@ EXTERN_C const IID IID_Fields15;
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in Fields15 * This,
             /* [in] */ VARIANT Index,
-            /* [retval][out] */ __RPC__deref_out_opt ADOField **ppvObject);
+            /* [retval][out] */ __RPC__deref_out_opt struct ADOField **ppvObject);
         
         END_INTERFACE
     } Fields15Vtbl;
@@ -7848,7 +7848,7 @@ EXTERN_C const IID IID_Fields20;
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in Fields20 * This,
             /* [in] */ VARIANT Index,
-            /* [retval][out] */ __RPC__deref_out_opt ADOField **ppvObject);
+            /* [retval][out] */ __RPC__deref_out_opt struct ADOField **ppvObject);
         
         /* [hidden] */ HRESULT ( STDMETHODCALLTYPE *_Append )( 
             __RPC__in Fields20 * This,
@@ -7931,29 +7931,29 @@ EXTERN_C const IID IID_Fields;
         BEGIN_INTERFACE
         
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            __RPC__in ADOFields * This,
+            __RPC__in struct ADOFields * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            __RPC__in ADOFields * This);
+            __RPC__in struct ADOFields * This);
         
         ULONG ( STDMETHODCALLTYPE *Release )( 
-            __RPC__in ADOFields * This);
+            __RPC__in struct ADOFields * This);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            __RPC__in ADOFields * This,
+            __RPC__in struct ADOFields * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            __RPC__in ADOFields * This,
+            __RPC__in struct ADOFields * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            __RPC__in ADOFields * This,
+            __RPC__in struct ADOFields * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
@@ -7961,7 +7961,7 @@ EXTERN_C const IID IID_Fields;
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            ADOFields * This,
+            struct ADOFields * This,
             /* [in] */ DISPID dispIdMember,
             /* [in] */ REFIID riid,
             /* [in] */ LCID lcid,
@@ -7972,34 +7972,34 @@ EXTERN_C const IID IID_Fields;
             /* [out] */ UINT *puArgErr);
         
         /* [id][helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
-            __RPC__in ADOFields * This,
+            __RPC__in struct ADOFields * This,
             /* [retval][out] */ __RPC__out long *c);
         
         /* [id][restricted] */ HRESULT ( STDMETHODCALLTYPE *_NewEnum )( 
-            __RPC__in ADOFields * This,
+            __RPC__in struct ADOFields * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppvObject);
         
         /* [id][helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
-            __RPC__in ADOFields * This);
+            __RPC__in struct ADOFields * This);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
-            __RPC__in ADOFields * This,
+            __RPC__in struct ADOFields * This,
             /* [in] */ VARIANT Index,
-            /* [retval][out] */ __RPC__deref_out_opt ADOField **ppvObject);
+            /* [retval][out] */ __RPC__deref_out_opt struct ADOField **ppvObject);
         
         /* [hidden] */ HRESULT ( STDMETHODCALLTYPE *_Append )( 
-            __RPC__in ADOFields * This,
+            __RPC__in struct ADOFields * This,
             /* [in] */ __RPC__in BSTR Name,
             /* [in] */ DataTypeEnum Type,
             /* [defaultvalue][in] */ ADO_LONGPTR DefinedSize,
             /* [defaultvalue][in] */ FieldAttributeEnum Attrib);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
-            __RPC__in ADOFields * This,
+            __RPC__in struct ADOFields * This,
             /* [in] */ VARIANT Index);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Append )( 
-            __RPC__in ADOFields * This,
+            __RPC__in struct ADOFields * This,
             /* [in] */ __RPC__in BSTR Name,
             /* [in] */ DataTypeEnum Type,
             /* [defaultvalue][in] */ ADO_LONGPTR DefinedSize,
@@ -8007,14 +8007,14 @@ EXTERN_C const IID IID_Fields;
             /* [optional][in] */ VARIANT FieldValue);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Update )( 
-            __RPC__in ADOFields * This);
+            __RPC__in struct ADOFields * This);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Resync )( 
-            __RPC__in ADOFields * This,
+            __RPC__in struct ADOFields * This,
             /* [defaultvalue][in] */ ResyncEnum ResyncValues);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *CancelUpdate )( 
-            __RPC__in ADOFields * This);
+            __RPC__in struct ADOFields * This);
         
         END_INTERFACE
     } FieldsVtbl;
@@ -8131,29 +8131,29 @@ EXTERN_C const IID IID__Parameter;
         BEGIN_INTERFACE
         
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            __RPC__in _ADOParameter * This,
+            __RPC__in struct _ADOParameter * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            __RPC__in _ADOParameter * This);
+            __RPC__in struct _ADOParameter * This);
         
         ULONG ( STDMETHODCALLTYPE *Release )( 
-            __RPC__in _ADOParameter * This);
+            __RPC__in struct _ADOParameter * This);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            __RPC__in _ADOParameter * This,
+            __RPC__in struct _ADOParameter * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            __RPC__in _ADOParameter * This,
+            __RPC__in struct _ADOParameter * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            __RPC__in _ADOParameter * This,
+            __RPC__in struct _ADOParameter * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
@@ -8161,7 +8161,7 @@ EXTERN_C const IID IID__Parameter;
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            _ADOParameter * This,
+            struct _ADOParameter * This,
             /* [in] */ DISPID dispIdMember,
             /* [in] */ REFIID riid,
             /* [in] */ LCID lcid,
@@ -8172,75 +8172,75 @@ EXTERN_C const IID IID__Parameter;
             /* [out] */ UINT *puArgErr);
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
-            __RPC__in _ADOParameter * This,
-            /* [retval][out] */ __RPC__deref_out_opt ADOProperties **ppvObject);
+            __RPC__in struct _ADOParameter * This,
+            /* [retval][out] */ __RPC__deref_out_opt struct ADOProperties **ppvObject);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
-            __RPC__in _ADOParameter * This,
+            __RPC__in struct _ADOParameter * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
-            __RPC__in _ADOParameter * This,
+            __RPC__in struct _ADOParameter * This,
             /* [in] */ __RPC__in BSTR bstr);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
-            __RPC__in _ADOParameter * This,
+            __RPC__in struct _ADOParameter * This,
             /* [retval][out] */ __RPC__out VARIANT *pvar);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Value )( 
-            __RPC__in _ADOParameter * This,
+            __RPC__in struct _ADOParameter * This,
             /* [in] */ VARIANT val);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
-            __RPC__in _ADOParameter * This,
+            __RPC__in struct _ADOParameter * This,
             /* [retval][out] */ __RPC__out DataTypeEnum *psDataType);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Type )( 
-            __RPC__in _ADOParameter * This,
+            __RPC__in struct _ADOParameter * This,
             /* [in] */ DataTypeEnum sDataType);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Direction )( 
-            __RPC__in _ADOParameter * This,
+            __RPC__in struct _ADOParameter * This,
             /* [in] */ ParameterDirectionEnum lParmDirection);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Direction )( 
-            __RPC__in _ADOParameter * This,
+            __RPC__in struct _ADOParameter * This,
             /* [retval][out] */ __RPC__out ParameterDirectionEnum *plParmDirection);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Precision )( 
-            __RPC__in _ADOParameter * This,
+            __RPC__in struct _ADOParameter * This,
             /* [in] */ BYTE bPrecision);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Precision )( 
-            __RPC__in _ADOParameter * This,
+            __RPC__in struct _ADOParameter * This,
             /* [retval][out] */ __RPC__out BYTE *pbPrecision);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_NumericScale )( 
-            __RPC__in _ADOParameter * This,
+            __RPC__in struct _ADOParameter * This,
             /* [in] */ BYTE bScale);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_NumericScale )( 
-            __RPC__in _ADOParameter * This,
+            __RPC__in struct _ADOParameter * This,
             /* [retval][out] */ __RPC__out BYTE *pbScale);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Size )( 
-            __RPC__in _ADOParameter * This,
+            __RPC__in struct _ADOParameter * This,
             /* [in] */ ADO_LONGPTR l);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Size )( 
-            __RPC__in _ADOParameter * This,
+            __RPC__in struct _ADOParameter * This,
             /* [retval][out] */ __RPC__out ADO_LONGPTR *pl);
         
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *AppendChunk )( 
-            __RPC__in _ADOParameter * This,
+            __RPC__in struct _ADOParameter * This,
             /* [in] */ VARIANT Val);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Attributes )( 
-            __RPC__in _ADOParameter * This,
+            __RPC__in struct _ADOParameter * This,
             /* [retval][out] */ __RPC__out LONG *plParmAttribs);
         
         /* [helpcontext][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Attributes )( 
-            __RPC__in _ADOParameter * This,
+            __RPC__in struct _ADOParameter * This,
             /* [in] */ LONG lParmAttribs);
         
         END_INTERFACE
@@ -8331,29 +8331,29 @@ EXTERN_C const IID IID_Parameters;
         BEGIN_INTERFACE
         
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            __RPC__in ADOParameters * This,
+            __RPC__in struct ADOParameters * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            __RPC__in ADOParameters * This);
+            __RPC__in struct ADOParameters * This);
         
         ULONG ( STDMETHODCALLTYPE *Release )( 
-            __RPC__in ADOParameters * This);
+            __RPC__in struct ADOParameters * This);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            __RPC__in ADOParameters * This,
+            __RPC__in struct ADOParameters * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            __RPC__in ADOParameters * This,
+            __RPC__in struct ADOParameters * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            __RPC__in ADOParameters * This,
+            __RPC__in struct ADOParameters * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
@@ -8361,7 +8361,7 @@ EXTERN_C const IID IID_Parameters;
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            ADOParameters * This,
+            struct ADOParameters * This,
             /* [in] */ DISPID dispIdMember,
             /* [in] */ REFIID riid,
             /* [in] */ LCID lcid,
@@ -8372,28 +8372,28 @@ EXTERN_C const IID IID_Parameters;
             /* [out] */ UINT *puArgErr);
         
         /* [id][helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
-            __RPC__in ADOParameters * This,
+            __RPC__in struct ADOParameters * This,
             /* [retval][out] */ __RPC__out long *c);
         
         /* [id][restricted] */ HRESULT ( STDMETHODCALLTYPE *_NewEnum )( 
-            __RPC__in ADOParameters * This,
+            __RPC__in struct ADOParameters * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppvObject);
         
         /* [id][helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
-            __RPC__in ADOParameters * This);
+            __RPC__in struct ADOParameters * This);
         
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Append )( 
-            __RPC__in ADOParameters * This,
+            __RPC__in struct ADOParameters * This,
             /* [in] */ __RPC__in_opt IDispatch *Object);
         
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
-            __RPC__in ADOParameters * This,
+            __RPC__in struct ADOParameters * This,
             /* [in] */ VARIANT Index);
         
         /* [helpcontext][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
-            __RPC__in ADOParameters * This,
+            __RPC__in struct ADOParameters * This,
             /* [in] */ VARIANT Index,
-            /* [retval][out] */ __RPC__deref_out_opt _ADOParameter **ppvObject);
+            /* [retval][out] */ __RPC__deref_out_opt struct _ADOParameter **ppvObject);
         
         END_INTERFACE
     } ParametersVtbl;
@@ -8469,29 +8469,29 @@ EXTERN_C const IID IID_Property;
         BEGIN_INTERFACE
         
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            __RPC__in ADOProperty * This,
+            __RPC__in struct ADOProperty * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            __RPC__in ADOProperty * This);
+            __RPC__in struct ADOProperty * This);
         
         ULONG ( STDMETHODCALLTYPE *Release )( 
-            __RPC__in ADOProperty * This);
+            __RPC__in struct ADOProperty * This);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            __RPC__in ADOProperty * This,
+            __RPC__in struct ADOProperty * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            __RPC__in ADOProperty * This,
+            __RPC__in struct ADOProperty * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            __RPC__in ADOProperty * This,
+            __RPC__in struct ADOProperty * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
@@ -8499,7 +8499,7 @@ EXTERN_C const IID IID_Property;
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            ADOProperty * This,
+            struct ADOProperty * This,
             /* [in] */ DISPID dispIdMember,
             /* [in] */ REFIID riid,
             /* [in] */ LCID lcid,
@@ -8510,27 +8510,27 @@ EXTERN_C const IID IID_Property;
             /* [out] */ UINT *puArgErr);
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
-            __RPC__in ADOProperty * This,
+            __RPC__in struct ADOProperty * This,
             /* [retval][out] */ __RPC__out VARIANT *pval);
         
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Value )( 
-            __RPC__in ADOProperty * This,
+            __RPC__in struct ADOProperty * This,
             /* [in] */ VARIANT val);
         
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
-            __RPC__in ADOProperty * This,
+            __RPC__in struct ADOProperty * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
-            __RPC__in ADOProperty * This,
+            __RPC__in struct ADOProperty * This,
             /* [retval][out] */ __RPC__out DataTypeEnum *ptype);
         
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Attributes )( 
-            __RPC__in ADOProperty * This,
+            __RPC__in struct ADOProperty * This,
             /* [retval][out] */ __RPC__out long *plAttributes);
         
         /* [helpcontext][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Attributes )( 
-            __RPC__in ADOProperty * This,
+            __RPC__in struct ADOProperty * This,
             /* [in] */ long lAttributes);
         
         END_INTERFACE
@@ -8593,29 +8593,29 @@ EXTERN_C const IID IID_Properties;
         BEGIN_INTERFACE
         
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            __RPC__in ADOProperties * This,
+            __RPC__in struct ADOProperties * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            __RPC__in ADOProperties * This);
+            __RPC__in struct ADOProperties * This);
         
         ULONG ( STDMETHODCALLTYPE *Release )( 
-            __RPC__in ADOProperties * This);
+            __RPC__in struct ADOProperties * This);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            __RPC__in ADOProperties * This,
+            __RPC__in struct ADOProperties * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            __RPC__in ADOProperties * This,
+            __RPC__in struct ADOProperties * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            __RPC__in ADOProperties * This,
+            __RPC__in struct ADOProperties * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
@@ -8623,7 +8623,7 @@ EXTERN_C const IID IID_Properties;
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            ADOProperties * This,
+            struct ADOProperties * This,
             /* [in] */ DISPID dispIdMember,
             /* [in] */ REFIID riid,
             /* [in] */ LCID lcid,
@@ -8634,20 +8634,20 @@ EXTERN_C const IID IID_Properties;
             /* [out] */ UINT *puArgErr);
         
         /* [id][helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
-            __RPC__in ADOProperties * This,
+            __RPC__in struct ADOProperties * This,
             /* [retval][out] */ __RPC__out long *c);
         
         /* [id][restricted] */ HRESULT ( STDMETHODCALLTYPE *_NewEnum )( 
-            __RPC__in ADOProperties * This,
+            __RPC__in struct ADOProperties * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppvObject);
         
         /* [id][helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
-            __RPC__in ADOProperties * This);
+            __RPC__in struct ADOProperties * This);
         
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
-            __RPC__in ADOProperties * This,
+            __RPC__in struct ADOProperties * This,
             /* [in] */ VARIANT Index,
-            /* [retval][out] */ __RPC__deref_out_opt ADOProperty **ppvObject);
+            /* [retval][out] */ __RPC__deref_out_opt struct ADOProperty **ppvObject);
         
         END_INTERFACE
     } PropertiesVtbl;

@@ -11,6 +11,7 @@ import "EventToken.idl";
 import "windowscontracts.idl";
 import "Windows.Foundation.idl";
 import "Windows.ApplicationModel.Core.idl";
+import "Windows.UI.idl";
 import "Windows.UI.StartScreen.idl";
 
 // Forward Declare
@@ -47,6 +48,13 @@ namespace Windows
 {
     namespace UI
     {
+        typedef struct WindowId WindowId;
+    }
+}
+namespace Windows
+{
+    namespace UI
+    {
         namespace Shell
         {
             apicontract SecurityAppManagerContract;
@@ -57,11 +65,19 @@ namespace Windows
 
             typedef enum SecurityAppSubstatus SecurityAppSubstatus;
 
+            typedef enum ShareWindowCommand ShareWindowCommand;
+
             interface IAdaptiveCard;
 
             interface IAdaptiveCardBuilderStatics;
 
             interface ISecurityAppManager;
+
+            interface IShareWindowCommandEventArgs;
+
+            interface IShareWindowCommandSource;
+
+            interface IShareWindowCommandSourceStatics;
 
             interface ITaskbarManager;
 
@@ -73,12 +89,29 @@ namespace Windows
 
             runtimeclass SecurityAppManager;
 
+            runtimeclass ShareWindowCommandEventArgs;
+
+            runtimeclass ShareWindowCommandSource;
+
             runtimeclass TaskbarManager;
         }
     }
 }
 
 // Generic instantiations
+namespace Windows
+{
+    namespace UI
+    {
+        namespace Shell
+        {
+            declare
+            {
+                interface Windows.Foundation.TypedEventHandler<Windows.UI.Shell.ShareWindowCommandSource*, Windows.UI.Shell.ShareWindowCommandEventArgs*>;
+            }
+        }
+    }
+}
 
 // Type definition
 namespace Windows
@@ -114,6 +147,14 @@ namespace Windows
                 ActionNeeded      = 3
             };
 
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            enum ShareWindowCommand
+            {
+                None         = 0,
+                StartSharing = 1,
+                StopSharing  = 2
+            };
+
             [contract(Windows.Foundation.UniversalApiContract, 5.0)]
             [uuid(72D0568C-A274-41CD-82A8-989D40B9B05E)]
             interface IAdaptiveCard : IInspectable
@@ -136,6 +177,38 @@ namespace Windows
                 HRESULT Register([in] Windows.UI.Shell.SecurityAppKind kind, [in] HSTRING displayName, [in] Windows.Foundation.Uri* detailsUri, [in] boolean registerPerUser, [out] [retval] GUID* result);
                 HRESULT Unregister([in] Windows.UI.Shell.SecurityAppKind kind, [in] GUID guidRegistration);
                 HRESULT UpdateState([in] Windows.UI.Shell.SecurityAppKind kind, [in] GUID guidRegistration, [in] Windows.UI.Shell.SecurityAppState state, [in] Windows.UI.Shell.SecurityAppSubstatus substatus, [in] Windows.Foundation.Uri* detailsUri);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [exclusiveto(Windows.UI.Shell.ShareWindowCommandEventArgs)]
+            [uuid(4578DC09-A523-5756-A995-E4FEB991FFF0)]
+            interface IShareWindowCommandEventArgs : IInspectable
+            {
+                [propget] HRESULT WindowId([out] [retval] Windows.UI.WindowId* value);
+                [propget] HRESULT Command([out] [retval] Windows.UI.Shell.ShareWindowCommand* value);
+                [propput] HRESULT Command([in] Windows.UI.Shell.ShareWindowCommand value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [exclusiveto(Windows.UI.Shell.ShareWindowCommandSource)]
+            [uuid(CB3B7AE3-6B9C-561E-BCCC-61E68E0ABFEF)]
+            interface IShareWindowCommandSource : IInspectable
+            {
+                HRESULT Start();
+                HRESULT Stop();
+                HRESULT ReportCommandChanged();
+                [eventadd] HRESULT CommandRequested([in] Windows.Foundation.TypedEventHandler<Windows.UI.Shell.ShareWindowCommandSource*, Windows.UI.Shell.ShareWindowCommandEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT CommandRequested([in] EventRegistrationToken token);
+                [eventadd] HRESULT CommandInvoked([in] Windows.Foundation.TypedEventHandler<Windows.UI.Shell.ShareWindowCommandSource*, Windows.UI.Shell.ShareWindowCommandEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT CommandInvoked([in] EventRegistrationToken token);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [exclusiveto(Windows.UI.Shell.ShareWindowCommandSource)]
+            [uuid(B0EB6656-9CAC-517C-B6C7-8EF715084295)]
+            interface IShareWindowCommandSourceStatics : IInspectable
+            {
+                HRESULT GetForCurrentView([out] [retval] Windows.UI.Shell.ShareWindowCommandSource** result);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 5.0)]
@@ -186,6 +259,22 @@ namespace Windows
             runtimeclass SecurityAppManager
             {
                 [default] interface Windows.UI.Shell.ISecurityAppManager;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass ShareWindowCommandEventArgs
+            {
+                [default] interface Windows.UI.Shell.IShareWindowCommandEventArgs;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [marshaling_behavior(agile)]
+            [static(Windows.UI.Shell.IShareWindowCommandSourceStatics, Windows.Foundation.UniversalApiContract, 13.0)]
+            [threading(both)]
+            runtimeclass ShareWindowCommandSource
+            {
+                [default] interface Windows.UI.Shell.IShareWindowCommandSource;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 5.0)]

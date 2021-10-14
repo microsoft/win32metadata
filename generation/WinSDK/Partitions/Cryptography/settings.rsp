@@ -12,5 +12,7 @@ _LM_OWF_PASSWORD
 <IncludeRoot>/um/ncrypt.h
 <IncludeRoot>/um/ncryptprotect.h
 <IncludeRoot>/um/wincrypt.h
+<IncludeRoot>/um/i_cryptasn1tls.h
+<IncludeRoot>/um/infocard.h
 --namespace
 Windows.Win32.Security.Cryptography.Core

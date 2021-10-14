@@ -18,3 +18,5 @@
 #include <recapis.h>
 #include <rectypes.h>
 #include <tipautocomplete.h>
+#include <recdefs.h>
+#include <tpcerror.h>

@@ -1,0 +1,7 @@
+--traverse
+<IncludeRoot>/um/enclaveapi.h
+<IncludeRoot>/um/ntenclv.h
+<IncludeRoot>/um/winenclave.h
+<IncludeRoot>/um/winenclaveapi.h
+--namespace
+Windows.Win32.System.Environment

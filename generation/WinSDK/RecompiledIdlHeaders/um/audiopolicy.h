@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -192,6 +200,7 @@ EXTERN_C const IID IID_IAudioSessionEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioSessionEvents * This,
             /* [annotation][in] */ 
@@ -199,24 +208,29 @@ EXTERN_C const IID IID_IAudioSessionEvents;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAudioSessionEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IAudioSessionEvents * This);
         
+        DECLSPEC_XFGVIRT(IAudioSessionEvents, OnDisplayNameChanged)
         HRESULT ( STDMETHODCALLTYPE *OnDisplayNameChanged )( 
             IAudioSessionEvents * This,
             /* [annotation][string][in] */ 
             _In_  LPCWSTR NewDisplayName,
             /* [in] */ LPCGUID EventContext);
         
+        DECLSPEC_XFGVIRT(IAudioSessionEvents, OnIconPathChanged)
         HRESULT ( STDMETHODCALLTYPE *OnIconPathChanged )( 
             IAudioSessionEvents * This,
             /* [annotation][string][in] */ 
             _In_  LPCWSTR NewIconPath,
             /* [in] */ LPCGUID EventContext);
         
+        DECLSPEC_XFGVIRT(IAudioSessionEvents, OnSimpleVolumeChanged)
         HRESULT ( STDMETHODCALLTYPE *OnSimpleVolumeChanged )( 
             IAudioSessionEvents * This,
             /* [annotation][in] */ 
@@ -225,6 +239,7 @@ EXTERN_C const IID IID_IAudioSessionEvents;
             _In_  BOOL NewMute,
             /* [in] */ LPCGUID EventContext);
         
+        DECLSPEC_XFGVIRT(IAudioSessionEvents, OnChannelVolumeChanged)
         HRESULT ( STDMETHODCALLTYPE *OnChannelVolumeChanged )( 
             IAudioSessionEvents * This,
             /* [annotation][in] */ 
@@ -235,17 +250,20 @@ EXTERN_C const IID IID_IAudioSessionEvents;
             _In_  DWORD ChangedChannel,
             /* [in] */ LPCGUID EventContext);
         
+        DECLSPEC_XFGVIRT(IAudioSessionEvents, OnGroupingParamChanged)
         HRESULT ( STDMETHODCALLTYPE *OnGroupingParamChanged )( 
             IAudioSessionEvents * This,
             /* [annotation][in] */ 
             _In_  LPCGUID NewGroupingParam,
             /* [in] */ LPCGUID EventContext);
         
+        DECLSPEC_XFGVIRT(IAudioSessionEvents, OnStateChanged)
         HRESULT ( STDMETHODCALLTYPE *OnStateChanged )( 
             IAudioSessionEvents * This,
             /* [annotation][in] */ 
             _In_  AudioSessionState NewState);
         
+        DECLSPEC_XFGVIRT(IAudioSessionEvents, OnSessionDisconnected)
         HRESULT ( STDMETHODCALLTYPE *OnSessionDisconnected )( 
             IAudioSessionEvents * This,
             /* [annotation][in] */ 
@@ -369,6 +387,7 @@ EXTERN_C const IID IID_IAudioSessionControl;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioSessionControl * This,
             /* [annotation][in] */ 
@@ -376,55 +395,66 @@ EXTERN_C const IID IID_IAudioSessionControl;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAudioSessionControl * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IAudioSessionControl * This);
         
+        DECLSPEC_XFGVIRT(IAudioSessionControl, GetState)
         HRESULT ( STDMETHODCALLTYPE *GetState )( 
             IAudioSessionControl * This,
             /* [annotation][out] */ 
             _Out_  AudioSessionState *pRetVal);
         
+        DECLSPEC_XFGVIRT(IAudioSessionControl, GetDisplayName)
         HRESULT ( STDMETHODCALLTYPE *GetDisplayName )( 
             IAudioSessionControl * This,
             /* [annotation][string][out] */ 
             _Out_  LPWSTR *pRetVal);
         
+        DECLSPEC_XFGVIRT(IAudioSessionControl, SetDisplayName)
         HRESULT ( STDMETHODCALLTYPE *SetDisplayName )( 
             IAudioSessionControl * This,
             /* [annotation][string][in] */ 
             _In_  LPCWSTR Value,
             /* [unique][in] */ LPCGUID EventContext);
         
+        DECLSPEC_XFGVIRT(IAudioSessionControl, GetIconPath)
         HRESULT ( STDMETHODCALLTYPE *GetIconPath )( 
             IAudioSessionControl * This,
             /* [annotation][string][out] */ 
             _Out_  LPWSTR *pRetVal);
         
+        DECLSPEC_XFGVIRT(IAudioSessionControl, SetIconPath)
         HRESULT ( STDMETHODCALLTYPE *SetIconPath )( 
             IAudioSessionControl * This,
             /* [annotation][string][in] */ 
             _In_  LPCWSTR Value,
             /* [unique][in] */ LPCGUID EventContext);
         
+        DECLSPEC_XFGVIRT(IAudioSessionControl, GetGroupingParam)
         HRESULT ( STDMETHODCALLTYPE *GetGroupingParam )( 
             IAudioSessionControl * This,
             /* [annotation][out] */ 
             _Out_  GUID *pRetVal);
         
+        DECLSPEC_XFGVIRT(IAudioSessionControl, SetGroupingParam)
         HRESULT ( STDMETHODCALLTYPE *SetGroupingParam )( 
             IAudioSessionControl * This,
             /* [annotation][in] */ 
             _In_  LPCGUID Override,
             /* [unique][in] */ LPCGUID EventContext);
         
+        DECLSPEC_XFGVIRT(IAudioSessionControl, RegisterAudioSessionNotification)
         HRESULT ( STDMETHODCALLTYPE *RegisterAudioSessionNotification )( 
             IAudioSessionControl * This,
             /* [annotation][in] */ 
             _In_  IAudioSessionEvents *NewNotifications);
         
+        DECLSPEC_XFGVIRT(IAudioSessionControl, UnregisterAudioSessionNotification)
         HRESULT ( STDMETHODCALLTYPE *UnregisterAudioSessionNotification )( 
             IAudioSessionControl * This,
             /* [annotation][in] */ 
@@ -545,6 +575,7 @@ EXTERN_C const IID IID_IAudioSessionControl2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioSessionControl2 * This,
             /* [annotation][in] */ 
@@ -552,78 +583,94 @@ EXTERN_C const IID IID_IAudioSessionControl2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAudioSessionControl2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IAudioSessionControl2 * This);
         
+        DECLSPEC_XFGVIRT(IAudioSessionControl, GetState)
         HRESULT ( STDMETHODCALLTYPE *GetState )( 
             IAudioSessionControl2 * This,
             /* [annotation][out] */ 
             _Out_  AudioSessionState *pRetVal);
         
+        DECLSPEC_XFGVIRT(IAudioSessionControl, GetDisplayName)
         HRESULT ( STDMETHODCALLTYPE *GetDisplayName )( 
             IAudioSessionControl2 * This,
             /* [annotation][string][out] */ 
             _Out_  LPWSTR *pRetVal);
         
+        DECLSPEC_XFGVIRT(IAudioSessionControl, SetDisplayName)
         HRESULT ( STDMETHODCALLTYPE *SetDisplayName )( 
             IAudioSessionControl2 * This,
             /* [annotation][string][in] */ 
             _In_  LPCWSTR Value,
             /* [unique][in] */ LPCGUID EventContext);
         
+        DECLSPEC_XFGVIRT(IAudioSessionControl, GetIconPath)
         HRESULT ( STDMETHODCALLTYPE *GetIconPath )( 
             IAudioSessionControl2 * This,
             /* [annotation][string][out] */ 
             _Out_  LPWSTR *pRetVal);
         
+        DECLSPEC_XFGVIRT(IAudioSessionControl, SetIconPath)
         HRESULT ( STDMETHODCALLTYPE *SetIconPath )( 
             IAudioSessionControl2 * This,
             /* [annotation][string][in] */ 
             _In_  LPCWSTR Value,
             /* [unique][in] */ LPCGUID EventContext);
         
+        DECLSPEC_XFGVIRT(IAudioSessionControl, GetGroupingParam)
         HRESULT ( STDMETHODCALLTYPE *GetGroupingParam )( 
             IAudioSessionControl2 * This,
             /* [annotation][out] */ 
             _Out_  GUID *pRetVal);
         
+        DECLSPEC_XFGVIRT(IAudioSessionControl, SetGroupingParam)
         HRESULT ( STDMETHODCALLTYPE *SetGroupingParam )( 
             IAudioSessionControl2 * This,
             /* [annotation][in] */ 
             _In_  LPCGUID Override,
             /* [unique][in] */ LPCGUID EventContext);
         
+        DECLSPEC_XFGVIRT(IAudioSessionControl, RegisterAudioSessionNotification)
         HRESULT ( STDMETHODCALLTYPE *RegisterAudioSessionNotification )( 
             IAudioSessionControl2 * This,
             /* [annotation][in] */ 
             _In_  IAudioSessionEvents *NewNotifications);
         
+        DECLSPEC_XFGVIRT(IAudioSessionControl, UnregisterAudioSessionNotification)
         HRESULT ( STDMETHODCALLTYPE *UnregisterAudioSessionNotification )( 
             IAudioSessionControl2 * This,
             /* [annotation][in] */ 
             _In_  IAudioSessionEvents *NewNotifications);
         
+        DECLSPEC_XFGVIRT(IAudioSessionControl2, GetSessionIdentifier)
         HRESULT ( STDMETHODCALLTYPE *GetSessionIdentifier )( 
             IAudioSessionControl2 * This,
             /* [annotation][string][out] */ 
             _Out_  LPWSTR *pRetVal);
         
+        DECLSPEC_XFGVIRT(IAudioSessionControl2, GetSessionInstanceIdentifier)
         HRESULT ( STDMETHODCALLTYPE *GetSessionInstanceIdentifier )( 
             IAudioSessionControl2 * This,
             /* [annotation][string][out] */ 
             _Out_  LPWSTR *pRetVal);
         
+        DECLSPEC_XFGVIRT(IAudioSessionControl2, GetProcessId)
         HRESULT ( STDMETHODCALLTYPE *GetProcessId )( 
             IAudioSessionControl2 * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pRetVal);
         
+        DECLSPEC_XFGVIRT(IAudioSessionControl2, IsSystemSoundsSession)
         HRESULT ( STDMETHODCALLTYPE *IsSystemSoundsSession )( 
             IAudioSessionControl2 * This);
         
+        DECLSPEC_XFGVIRT(IAudioSessionControl2, SetDuckingPreference)
         HRESULT ( STDMETHODCALLTYPE *SetDuckingPreference )( 
             IAudioSessionControl2 * This,
             /* [annotation][in] */ 
@@ -746,6 +793,7 @@ EXTERN_C const IID IID_IAudioSessionManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioSessionManager * This,
             /* [annotation][in] */ 
@@ -753,12 +801,15 @@ EXTERN_C const IID IID_IAudioSessionManager;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAudioSessionManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IAudioSessionManager * This);
         
+        DECLSPEC_XFGVIRT(IAudioSessionManager, GetAudioSessionControl)
         HRESULT ( STDMETHODCALLTYPE *GetAudioSessionControl )( 
             IAudioSessionManager * This,
             /* [annotation][in] */ 
@@ -768,6 +819,7 @@ EXTERN_C const IID IID_IAudioSessionManager;
             /* [annotation][out] */ 
             _Outptr_  IAudioSessionControl **SessionControl);
         
+        DECLSPEC_XFGVIRT(IAudioSessionManager, GetSimpleAudioVolume)
         HRESULT ( STDMETHODCALLTYPE *GetSimpleAudioVolume )( 
             IAudioSessionManager * This,
             /* [annotation][in] */ 
@@ -851,6 +903,7 @@ EXTERN_C const IID IID_IAudioVolumeDuckNotification;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioVolumeDuckNotification * This,
             /* [annotation][in] */ 
@@ -858,12 +911,15 @@ EXTERN_C const IID IID_IAudioVolumeDuckNotification;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAudioVolumeDuckNotification * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IAudioVolumeDuckNotification * This);
         
+        DECLSPEC_XFGVIRT(IAudioVolumeDuckNotification, OnVolumeDuckNotification)
         HRESULT ( STDMETHODCALLTYPE *OnVolumeDuckNotification )( 
             IAudioVolumeDuckNotification * This,
             /* [annotation][in] */ 
@@ -871,6 +927,7 @@ EXTERN_C const IID IID_IAudioVolumeDuckNotification;
             /* [annotation][in] */ 
             _In_  UINT32 countCommunicationSessions);
         
+        DECLSPEC_XFGVIRT(IAudioVolumeDuckNotification, OnVolumeUnduckNotification)
         HRESULT ( STDMETHODCALLTYPE *OnVolumeUnduckNotification )( 
             IAudioVolumeDuckNotification * This,
             /* [annotation][in] */ 
@@ -944,6 +1001,7 @@ EXTERN_C const IID IID_IAudioSessionNotification;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioSessionNotification * This,
             /* [annotation][in] */ 
@@ -951,12 +1009,15 @@ EXTERN_C const IID IID_IAudioSessionNotification;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAudioSessionNotification * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IAudioSessionNotification * This);
         
+        DECLSPEC_XFGVIRT(IAudioSessionNotification, OnSessionCreated)
         HRESULT ( STDMETHODCALLTYPE *OnSessionCreated )( 
             IAudioSessionNotification * This,
             /* [annotation][in] */ 
@@ -1033,6 +1094,7 @@ EXTERN_C const IID IID_IAudioSessionEnumerator;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioSessionEnumerator * This,
             /* [annotation][in] */ 
@@ -1040,17 +1102,21 @@ EXTERN_C const IID IID_IAudioSessionEnumerator;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAudioSessionEnumerator * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IAudioSessionEnumerator * This);
         
+        DECLSPEC_XFGVIRT(IAudioSessionEnumerator, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             IAudioSessionEnumerator * This,
             /* [annotation][out] */ 
             _Out_  int *SessionCount);
         
+        DECLSPEC_XFGVIRT(IAudioSessionEnumerator, GetSession)
         HRESULT ( STDMETHODCALLTYPE *GetSession )( 
             IAudioSessionEnumerator * This,
             /* [annotation][in] */ 
@@ -1141,6 +1207,7 @@ EXTERN_C const IID IID_IAudioSessionManager2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioSessionManager2 * This,
             /* [annotation][in] */ 
@@ -1148,12 +1215,15 @@ EXTERN_C const IID IID_IAudioSessionManager2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAudioSessionManager2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IAudioSessionManager2 * This);
         
+        DECLSPEC_XFGVIRT(IAudioSessionManager, GetAudioSessionControl)
         HRESULT ( STDMETHODCALLTYPE *GetAudioSessionControl )( 
             IAudioSessionManager2 * This,
             /* [annotation][in] */ 
@@ -1163,6 +1233,7 @@ EXTERN_C const IID IID_IAudioSessionManager2;
             /* [annotation][out] */ 
             _Outptr_  IAudioSessionControl **SessionControl);
         
+        DECLSPEC_XFGVIRT(IAudioSessionManager, GetSimpleAudioVolume)
         HRESULT ( STDMETHODCALLTYPE *GetSimpleAudioVolume )( 
             IAudioSessionManager2 * This,
             /* [annotation][in] */ 
@@ -1172,25 +1243,30 @@ EXTERN_C const IID IID_IAudioSessionManager2;
             /* [annotation][out] */ 
             _Outptr_  ISimpleAudioVolume **AudioVolume);
         
+        DECLSPEC_XFGVIRT(IAudioSessionManager2, GetSessionEnumerator)
         HRESULT ( STDMETHODCALLTYPE *GetSessionEnumerator )( 
             IAudioSessionManager2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IAudioSessionEnumerator **SessionEnum);
         
+        DECLSPEC_XFGVIRT(IAudioSessionManager2, RegisterSessionNotification)
         HRESULT ( STDMETHODCALLTYPE *RegisterSessionNotification )( 
             IAudioSessionManager2 * This,
             IAudioSessionNotification *SessionNotification);
         
+        DECLSPEC_XFGVIRT(IAudioSessionManager2, UnregisterSessionNotification)
         HRESULT ( STDMETHODCALLTYPE *UnregisterSessionNotification )( 
             IAudioSessionManager2 * This,
             IAudioSessionNotification *SessionNotification);
         
+        DECLSPEC_XFGVIRT(IAudioSessionManager2, RegisterDuckNotification)
         HRESULT ( STDMETHODCALLTYPE *RegisterDuckNotification )( 
             IAudioSessionManager2 * This,
             /* [string][in] */ LPCWSTR sessionID,
             /* [annotation][in] */ 
             _In_  IAudioVolumeDuckNotification *duckNotification);
         
+        DECLSPEC_XFGVIRT(IAudioSessionManager2, UnregisterDuckNotification)
         HRESULT ( STDMETHODCALLTYPE *UnregisterDuckNotification )( 
             IAudioSessionManager2 * This,
             /* [annotation][in] */ 

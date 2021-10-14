@@ -13,14 +13,10 @@
 #include <winapifamily.h>
 
 // Current name of the DLL shipped in the same SDK as this header.
-
-
-
 #define D3DCOMPILER_DLL_W L"d3dcompiler_47.dll"
 #define D3DCOMPILER_DLL_A "d3dcompiler_47.dll"
 
 // Current HLSL compiler version.
-
 #define D3D_COMPILER_VERSION 47
 
 #ifdef UNICODE

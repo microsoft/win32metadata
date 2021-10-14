@@ -292,15 +292,15 @@ private:
     Matrix& operator=(const Matrix &);
 
 protected:
-    Matrix(GpMatrix *nativeMatrix)
+    Matrix(GpMatrix *nativeMatrixArg)
     {
         lastResult = Ok;
-        SetNativeMatrix(nativeMatrix);
+        SetNativeMatrix(nativeMatrixArg);
     }
     
-    VOID SetNativeMatrix(GpMatrix *nativeMatrix)
+    VOID SetNativeMatrix(GpMatrix * nativeMatrixArg)
     {
-        this->nativeMatrix = nativeMatrix;
+        this->nativeMatrix = nativeMatrixArg;
     }
 
     Status SetStatus(Status status) const

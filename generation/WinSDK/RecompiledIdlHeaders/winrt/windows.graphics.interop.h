@@ -7,10 +7,10 @@
 #pragma once
 #endif
 
-#ifndef __WINDOWS_GRAPHICS_INTEROP_H
-#define __WINDOWS_GRAPHICS_INTEROP_H
+#ifndef __Windows_GRAPHICS_INTEROP_H
+#define __Windows_GRAPHICS_INTEROP_H
 
-#include <windows.graphics.h>
+#include <Windows.graphics.h>
 #include <sdkddkver.h>
 
 // Forward declarations
@@ -50,4 +50,4 @@ DECLARE_INTERFACE_IID_(IGeometrySource2DInterop, IUnknown, "0657AF73-53FD-47CF-8
 } // namespace ABI 
 #endif
 
-#endif // __WINDOWS_GRAPHICS_INTEROP_H
+#endif // __Windows_GRAPHICS_INTEROP_H

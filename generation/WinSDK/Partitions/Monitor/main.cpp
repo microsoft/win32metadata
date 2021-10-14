@@ -9,3 +9,4 @@
 #include <lowlevelmonitorconfigurationapi.h>
 #include <highlevelmonitorconfigurationapi.h>
 #include <physicalmonitorenumerationapi.h>
+#include <cloneviewhelper.h>

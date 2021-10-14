@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xa0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -384,6 +384,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics ABI::Windows::System::Diagnostics::ISystemDiagnosticInfoStatics
 
 #endif // ____x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            namespace Diagnostics {
+                interface ISystemDiagnosticInfoStatics2;
+            } /* Diagnostics */
+        } /* System */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2 ABI::Windows::System::Diagnostics::ISystemDiagnosticInfoStatics2
+
+#endif // ____x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CSystem_CDiagnostics_CISystemMemoryUsage_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSystem_CDiagnostics_CISystemMemoryUsage_FWD_DEFINED__
@@ -814,6 +829,14 @@ namespace ABI {
 namespace ABI {
     namespace Windows {
         namespace System {
+            typedef enum ProcessorArchitecture : int ProcessorArchitecture;
+        } /* System */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace System {
             class User;
         } /* System */
     } /* Windows */
@@ -972,6 +995,9 @@ namespace ABI {
                     DiagnosticActionState_Detecting = 3,
                     DiagnosticActionState_Resolving = 4,
                     DiagnosticActionState_VerifyingResolution = 5,
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+                    DiagnosticActionState_Executing = 6,
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
                 };
             } /* Diagnostics */
         } /* System */
@@ -1726,6 +1752,46 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticI
 
 /*
  *
+ * Interface Windows.System.Diagnostics.ISystemDiagnosticInfoStatics2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 11.0
+ *
+ * Interface is a part of the implementation of type Windows.System.Diagnostics.SystemDiagnosticInfo
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+#if !defined(____x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_System_Diagnostics_ISystemDiagnosticInfoStatics2[] = L"Windows.System.Diagnostics.ISystemDiagnosticInfoStatics2";
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            namespace Diagnostics {
+                MIDL_INTERFACE("79ded189-6af9-4da9-a422-15f73255b3eb")
+                ISystemDiagnosticInfoStatics2 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE IsArchitectureSupported(
+                        ABI::Windows::System::ProcessorArchitecture type,
+                        boolean* result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_PreferredArchitecture(
+                        ABI::Windows::System::ProcessorArchitecture* value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_ISystemDiagnosticInfoStatics2 = _uuidof(ISystemDiagnosticInfoStatics2);
+            } /* Diagnostics */
+        } /* System */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2;
+#endif /* !defined(____x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+
+/*
+ *
  * Interface Windows.System.Diagnostics.ISystemMemoryUsage
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 4.0
@@ -2049,6 +2115,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 4.0
  *
  * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.System.Diagnostics.ISystemDiagnosticInfoStatics2 interface starting with version 11.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.Diagnostics.ISystemDiagnosticInfoStatics interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
@@ -2217,6 +2284,12 @@ typedef interface __x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfo _
 typedef interface __x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics __x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics;
 
 #endif // ____x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2 __x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2;
+
+#endif // ____x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CSystem_CDiagnostics_CISystemMemoryUsage_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSystem_CDiagnostics_CISystemMemoryUsage_FWD_DEFINED__
@@ -3036,6 +3109,8 @@ typedef struct __x_ABI_CWindows_CFoundation_CDateTime __x_ABI_CWindows_CFoundati
 
 typedef struct __x_ABI_CWindows_CFoundation_CTimeSpan __x_ABI_CWindows_CFoundation_CTimeSpan;
 
+typedef enum __x_ABI_CWindows_CSystem_CProcessorArchitecture __x_ABI_CWindows_CSystem_CProcessorArchitecture;
+
 #ifndef ____x_ABI_CWindows_CSystem_CIUser_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSystem_CIUser_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CSystem_CIUser __x_ABI_CWindows_CSystem_CIUser;
@@ -3058,6 +3133,9 @@ enum __x_ABI_CWindows_CSystem_CDiagnostics_CDiagnosticActionState
     DiagnosticActionState_Detecting = 3,
     DiagnosticActionState_Resolving = 4,
     DiagnosticActionState_VerifyingResolution = 5,
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+    DiagnosticActionState_Executing = 6,
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
 };
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x50000
 
@@ -4464,6 +4542,81 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticI
 
 /*
  *
+ * Interface Windows.System.Diagnostics.ISystemDiagnosticInfoStatics2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 11.0
+ *
+ * Interface is a part of the implementation of type Windows.System.Diagnostics.SystemDiagnosticInfo
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+#if !defined(____x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_System_Diagnostics_ISystemDiagnosticInfoStatics2[] = L"Windows.System.Diagnostics.ISystemDiagnosticInfoStatics2";
+typedef struct __x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* IsArchitectureSupported)(__x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2* This,
+        enum __x_ABI_CWindows_CSystem_CProcessorArchitecture type,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* get_PreferredArchitecture)(__x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2* This,
+        enum __x_ABI_CWindows_CSystem_CProcessorArchitecture* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2Vtbl;
+
+interface __x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2_IsArchitectureSupported(This, type, result) \
+    ((This)->lpVtbl->IsArchitectureSupported(This, type, result))
+
+#define __x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2_get_PreferredArchitecture(This, value) \
+    ((This)->lpVtbl->get_PreferredArchitecture(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2;
+#endif /* !defined(____x_ABI_CWindows_CSystem_CDiagnostics_CISystemDiagnosticInfoStatics2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+
+/*
+ *
  * Interface Windows.System.Diagnostics.ISystemMemoryUsage
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 4.0
@@ -4857,6 +5010,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 4.0
  *
  * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.System.Diagnostics.ISystemDiagnosticInfoStatics2 interface starting with version 11.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.Diagnostics.ISystemDiagnosticInfoStatics interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:

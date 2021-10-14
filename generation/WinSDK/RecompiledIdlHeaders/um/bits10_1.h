@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -138,6 +146,7 @@ EXTERN_C const IID IID_IBackgroundCopyCallback3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBackgroundCopyCallback3 * This,
             /* [annotation][in] */ 
@@ -145,17 +154,21 @@ EXTERN_C const IID IID_IBackgroundCopyCallback3;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IBackgroundCopyCallback3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IBackgroundCopyCallback3 * This);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyCallback, JobTransferred)
         HRESULT ( STDMETHODCALLTYPE *JobTransferred )( 
             __RPC__in IBackgroundCopyCallback3 * This,
             /* [annotation][in] */ 
             _In_  IBackgroundCopyJob *pJob);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyCallback, JobError)
         HRESULT ( STDMETHODCALLTYPE *JobError )( 
             __RPC__in IBackgroundCopyCallback3 * This,
             /* [annotation][in] */ 
@@ -163,6 +176,7 @@ EXTERN_C const IID IID_IBackgroundCopyCallback3;
             /* [annotation][in] */ 
             _In_  IBackgroundCopyError *pError);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyCallback, JobModification)
         HRESULT ( STDMETHODCALLTYPE *JobModification )( 
             __RPC__in IBackgroundCopyCallback3 * This,
             /* [annotation][in] */ 
@@ -170,6 +184,7 @@ EXTERN_C const IID IID_IBackgroundCopyCallback3;
             /* [annotation][in] */ 
             _In_  DWORD dwReserved);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyCallback2, FileTransferred)
         HRESULT ( STDMETHODCALLTYPE *FileTransferred )( 
             __RPC__in IBackgroundCopyCallback3 * This,
             /* [annotation][in] */ 
@@ -177,6 +192,7 @@ EXTERN_C const IID IID_IBackgroundCopyCallback3;
             /* [annotation][in] */ 
             _In_  IBackgroundCopyFile *pFile);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyCallback3, FileRangesTransferred)
         HRESULT ( STDMETHODCALLTYPE *FileRangesTransferred )( 
             __RPC__in IBackgroundCopyCallback3 * This,
             /* [annotation][in] */ 
@@ -278,6 +294,7 @@ EXTERN_C const IID IID_IBackgroundCopyFile6;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBackgroundCopyFile6 * This,
             /* [annotation][in] */ 
@@ -285,27 +302,33 @@ EXTERN_C const IID IID_IBackgroundCopyFile6;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IBackgroundCopyFile6 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IBackgroundCopyFile6 * This);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyFile, GetRemoteName)
         HRESULT ( STDMETHODCALLTYPE *GetRemoteName )( 
             __RPC__in IBackgroundCopyFile6 * This,
             /* [annotation][out] */ 
             _Out_  LPWSTR *pVal);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyFile, GetLocalName)
         HRESULT ( STDMETHODCALLTYPE *GetLocalName )( 
             __RPC__in IBackgroundCopyFile6 * This,
             /* [annotation][out] */ 
             _Out_  LPWSTR *pVal);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyFile, GetProgress)
         HRESULT ( STDMETHODCALLTYPE *GetProgress )( 
             __RPC__in IBackgroundCopyFile6 * This,
             /* [annotation][out] */ 
             _Out_  BG_FILE_PROGRESS *pVal);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyFile2, GetFileRanges)
         HRESULT ( STDMETHODCALLTYPE *GetFileRanges )( 
             __RPC__in IBackgroundCopyFile6 * This,
             /* [annotation][unique][out][in] */ 
@@ -313,30 +336,36 @@ EXTERN_C const IID IID_IBackgroundCopyFile6;
             /* [annotation][size_is][size_is][out] */ 
             _Out_writes_(*RangeCount)  BG_FILE_RANGE **Ranges);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyFile2, SetRemoteName)
         HRESULT ( STDMETHODCALLTYPE *SetRemoteName )( 
             __RPC__in IBackgroundCopyFile6 * This,
             __RPC__in LPCWSTR Val);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyFile3, GetTemporaryName)
         HRESULT ( STDMETHODCALLTYPE *GetTemporaryName )( 
             __RPC__in IBackgroundCopyFile6 * This,
             /* [annotation][out] */ 
             _Out_  LPWSTR *pFilename);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyFile3, SetValidationState)
         HRESULT ( STDMETHODCALLTYPE *SetValidationState )( 
             __RPC__in IBackgroundCopyFile6 * This,
             /* [annotation][in] */ 
             _In_  BOOL state);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyFile3, GetValidationState)
         HRESULT ( STDMETHODCALLTYPE *GetValidationState )( 
             __RPC__in IBackgroundCopyFile6 * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pState);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyFile3, IsDownloadedFromPeer)
         HRESULT ( STDMETHODCALLTYPE *IsDownloadedFromPeer )( 
             __RPC__in IBackgroundCopyFile6 * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pVal);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyFile4, GetPeerDownloadStats)
         HRESULT ( STDMETHODCALLTYPE *GetPeerDownloadStats )( 
             __RPC__in IBackgroundCopyFile6 * This,
             /* [annotation][out] */ 
@@ -344,23 +373,27 @@ EXTERN_C const IID IID_IBackgroundCopyFile6;
             /* [annotation][out] */ 
             _Out_  PUINT64 pFromPeers);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyFile5, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IBackgroundCopyFile6 * This,
             /* [annotation][in] */ 
             _In_  BITS_FILE_PROPERTY_ID PropertyId,
             /* [switch_is][in] */ BITS_FILE_PROPERTY_VALUE PropertyValue);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyFile5, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IBackgroundCopyFile6 * This,
             /* [annotation][in] */ 
             _In_  BITS_FILE_PROPERTY_ID PropertyId,
             /* [switch_is][out] */ __RPC__out BITS_FILE_PROPERTY_VALUE *PropertyValue);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyFile6, UpdateDownloadPosition)
         HRESULT ( STDMETHODCALLTYPE *UpdateDownloadPosition )( 
             __RPC__in IBackgroundCopyFile6 * This,
             /* [annotation][in] */ 
             _In_  UINT64 offset);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyFile6, RequestFileRanges)
         HRESULT ( STDMETHODCALLTYPE *RequestFileRanges )( 
             __RPC__in IBackgroundCopyFile6 * This,
             /* [annotation][in] */ 
@@ -368,6 +401,7 @@ EXTERN_C const IID IID_IBackgroundCopyFile6;
             /* [annotation][size_is][in] */ 
             _In_reads_(rangeCount)  const BG_FILE_RANGE ranges[  ]);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyFile6, GetFilledFileRanges)
         HRESULT ( STDMETHODCALLTYPE *GetFilledFileRanges )( 
             __RPC__in IBackgroundCopyFile6 * This,
             /* [ref][out] */ __RPC__out DWORD *rangeCount,

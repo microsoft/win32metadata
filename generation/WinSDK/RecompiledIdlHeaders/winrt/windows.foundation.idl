@@ -333,6 +333,8 @@ namespace Windows
 
             interface Windows.Foundation.Collections.IVector<Windows.Foundation.Uri*>;
 
+            interface Windows.Foundation.Collections.IVector<boolean>;
+
             interface Windows.Foundation.EventHandler<IInspectable*>;
 
             interface Windows.Foundation.IAsyncActionWithProgress<DOUBLE>;

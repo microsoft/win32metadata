@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -31,6 +31,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -557,28 +565,34 @@ EXTERN_C const IID IID_IInkEdit;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkEdit * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkEdit * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkEdit * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkEdit * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkEdit * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkEdit * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -587,6 +601,7 @@ EXTERN_C const IID IID_IInkEdit;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkEdit * This,
             /* [annotation][in] */ 
@@ -606,311 +621,388 @@ EXTERN_C const IID IID_IInkEdit;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_Status)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__out InkEditStatus *pStatus);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_UseMouseForInput)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_UseMouseForInput )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_UseMouseForInput)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_UseMouseForInput )( 
             __RPC__in IInkEdit * This,
             /* [defaultvalue][in] */ VARIANT_BOOL newVal);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_InkMode)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_InkMode )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__out InkMode *pVal);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_InkMode)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_InkMode )( 
             __RPC__in IInkEdit * This,
             /* [defaultvalue][in] */ InkMode newVal);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_InkInsertMode)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_InkInsertMode )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__out InkInsertMode *pVal);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_InkInsertMode)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_InkInsertMode )( 
             __RPC__in IInkEdit * This,
             /* [defaultvalue][in] */ InkInsertMode newVal);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_DrawingAttributes)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DrawingAttributes )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkDrawingAttributes **pVal);
         
+        DECLSPEC_XFGVIRT(IInkEdit, putref_DrawingAttributes)
         /* [helpcontext][helpstring][propputref][id] */ HRESULT ( STDMETHODCALLTYPE *putref_DrawingAttributes )( 
             __RPC__in IInkEdit * This,
             /* [in] */ __RPC__in_opt IInkDrawingAttributes *newVal);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_RecognitionTimeout)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RecognitionTimeout )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__out long *pVal);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_RecognitionTimeout)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RecognitionTimeout )( 
             __RPC__in IInkEdit * This,
             /* [in] */ long newVal);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_Recognizer)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Recognizer )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkRecognizer **pVal);
         
+        DECLSPEC_XFGVIRT(IInkEdit, putref_Recognizer)
         /* [helpcontext][helpstring][propputref][id] */ HRESULT ( STDMETHODCALLTYPE *putref_Recognizer )( 
             __RPC__in IInkEdit * This,
             /* [in] */ __RPC__in_opt IInkRecognizer *newVal);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_Factoid)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Factoid )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_Factoid)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Factoid )( 
             __RPC__in IInkEdit * This,
             /* [in] */ __RPC__in BSTR newVal);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_SelInks)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SelInks )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__out VARIANT *pSelInk);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_SelInks)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_SelInks )( 
             __RPC__in IInkEdit * This,
             /* [in] */ VARIANT SelInk);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_SelInksDisplayMode)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SelInksDisplayMode )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__out InkDisplayMode *pInkDisplayMode);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_SelInksDisplayMode)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_SelInksDisplayMode )( 
             __RPC__in IInkEdit * This,
             /* [in] */ InkDisplayMode InkDisplayMode);
         
+        DECLSPEC_XFGVIRT(IInkEdit, Recognize)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Recognize )( 
             __RPC__in IInkEdit * This);
         
+        DECLSPEC_XFGVIRT(IInkEdit, GetGestureStatus)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetGestureStatus )( 
             __RPC__in IInkEdit * This,
             /* [in] */ InkApplicationGesture Gesture,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pListen);
         
+        DECLSPEC_XFGVIRT(IInkEdit, SetGestureStatus)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetGestureStatus )( 
             __RPC__in IInkEdit * This,
             /* [in] */ InkApplicationGesture Gesture,
             /* [in] */ VARIANT_BOOL Listen);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_BackColor)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_BackColor )( 
             __RPC__in IInkEdit * This,
             /* [in] */ OLE_COLOR clr);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_BackColor)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_BackColor )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__out OLE_COLOR *pclr);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_Appearance)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Appearance )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__out AppearanceConstants *pAppearance);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_Appearance)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Appearance )( 
             __RPC__in IInkEdit * This,
             /* [in] */ AppearanceConstants pAppearance);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_BorderStyle)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_BorderStyle )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__out BorderStyleConstants *pBorderStyle);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_BorderStyle)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_BorderStyle )( 
             __RPC__in IInkEdit * This,
             /* [in] */ BorderStyleConstants pBorderStyle);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_Hwnd)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Hwnd )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__out OLE_HANDLE *pohHwnd);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_Font)
         /* [helpcontext][helpstring][bindable][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Font )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__deref_out_opt IFontDisp **ppFont);
         
+        DECLSPEC_XFGVIRT(IInkEdit, putref_Font)
         /* [helpcontext][helpstring][bindable][propputref][id] */ HRESULT ( STDMETHODCALLTYPE *putref_Font )( 
             __RPC__in IInkEdit * This,
             /* [in] */ __RPC__in_opt IFontDisp *ppFont);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_Text)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Text )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrText);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_Text)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Text )( 
             __RPC__in IInkEdit * This,
             /* [in] */ __RPC__in BSTR pbstrText);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_MouseIcon)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MouseIcon )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__deref_out_opt IPictureDisp **MouseIcon);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_MouseIcon)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MouseIcon )( 
             __RPC__in IInkEdit * This,
             /* [in] */ __RPC__in_opt IPictureDisp *MouseIcon);
         
+        DECLSPEC_XFGVIRT(IInkEdit, putref_MouseIcon)
         /* [helpcontext][helpstring][propputref][id] */ HRESULT ( STDMETHODCALLTYPE *putref_MouseIcon )( 
             __RPC__in IInkEdit * This,
             /* [in] */ __RPC__in_opt IPictureDisp *MouseIcon);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_MousePointer)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MousePointer )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__out InkMousePointer *MousePointer);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_MousePointer)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MousePointer )( 
             __RPC__in IInkEdit * This,
             /* [in] */ InkMousePointer MousePointer);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_Locked)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Locked )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_Locked)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Locked )( 
             __RPC__in IInkEdit * This,
             /* [in] */ VARIANT_BOOL newVal);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_Enabled)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_Enabled)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             __RPC__in IInkEdit * This,
             /* [in] */ VARIANT_BOOL newVal);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_MaxLength)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MaxLength )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__out long *plMaxLength);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_MaxLength)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MaxLength )( 
             __RPC__in IInkEdit * This,
             /* [in] */ long lMaxLength);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_MultiLine)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MultiLine )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_MultiLine)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MultiLine )( 
             __RPC__in IInkEdit * This,
             /* [in] */ VARIANT_BOOL newVal);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_ScrollBars)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ScrollBars )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__out ScrollBarsConstants *pVal);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_ScrollBars)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ScrollBars )( 
             __RPC__in IInkEdit * This,
             /* [in] */ ScrollBarsConstants newVal);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_DisableNoScroll)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DisableNoScroll )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_DisableNoScroll)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DisableNoScroll )( 
             __RPC__in IInkEdit * This,
             /* [in] */ VARIANT_BOOL newVal);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_SelAlignment)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SelAlignment )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarSelAlignment);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_SelAlignment)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_SelAlignment )( 
             __RPC__in IInkEdit * This,
             /* [in] */ VARIANT pvarSelAlignment);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_SelBold)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SelBold )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarSelBold);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_SelBold)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_SelBold )( 
             __RPC__in IInkEdit * This,
             /* [in] */ VARIANT pvarSelBold);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_SelItalic)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SelItalic )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarSelItalic);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_SelItalic)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_SelItalic )( 
             __RPC__in IInkEdit * This,
             /* [in] */ VARIANT pvarSelItalic);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_SelUnderline)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SelUnderline )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarSelUnderline);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_SelUnderline)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_SelUnderline )( 
             __RPC__in IInkEdit * This,
             /* [in] */ VARIANT pvarSelUnderline);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_SelColor)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SelColor )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarSelColor);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_SelColor)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_SelColor )( 
             __RPC__in IInkEdit * This,
             /* [in] */ VARIANT pvarSelColor);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_SelFontName)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SelFontName )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarSelFontName);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_SelFontName)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_SelFontName )( 
             __RPC__in IInkEdit * This,
             /* [in] */ VARIANT pvarSelFontName);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_SelFontSize)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SelFontSize )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarSelFontSize);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_SelFontSize)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_SelFontSize )( 
             __RPC__in IInkEdit * This,
             /* [in] */ VARIANT pvarSelFontSize);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_SelCharOffset)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SelCharOffset )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarSelCharOffset);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_SelCharOffset)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_SelCharOffset )( 
             __RPC__in IInkEdit * This,
             /* [in] */ VARIANT pvarSelCharOffset);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_TextRTF)
         /* [helpcontext][helpstring][defaultbind][displaybind][bindable][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_TextRTF )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTextRTF);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_TextRTF)
         /* [helpcontext][helpstring][displaybind][bindable][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_TextRTF )( 
             __RPC__in IInkEdit * This,
             /* [in] */ __RPC__in BSTR pbstrTextRTF);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_SelStart)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SelStart )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__out long *plSelStart);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_SelStart)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_SelStart )( 
             __RPC__in IInkEdit * This,
             /* [in] */ long plSelStart);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_SelLength)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SelLength )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__out long *plSelLength);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_SelLength)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_SelLength )( 
             __RPC__in IInkEdit * This,
             /* [in] */ long plSelLength);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_SelText)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SelText )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSelText);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_SelText)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_SelText )( 
             __RPC__in IInkEdit * This,
             /* [in] */ __RPC__in BSTR pbstrSelText);
         
+        DECLSPEC_XFGVIRT(IInkEdit, get_SelRTF)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SelRTF )( 
             __RPC__in IInkEdit * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSelRTF);
         
+        DECLSPEC_XFGVIRT(IInkEdit, put_SelRTF)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_SelRTF )( 
             __RPC__in IInkEdit * This,
             /* [in] */ __RPC__in BSTR pbstrSelRTF);
         
+        DECLSPEC_XFGVIRT(IInkEdit, Refresh)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IInkEdit * This);
         
@@ -1214,28 +1306,34 @@ EXTERN_C const IID DIID__IInkEditEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _IInkEditEvents * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in _IInkEditEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in _IInkEditEvents * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in _IInkEditEvents * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in _IInkEditEvents * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in _IInkEditEvents * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1244,6 +1342,7 @@ EXTERN_C const IID DIID__IInkEditEvents;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             _IInkEditEvents * This,
             /* [annotation][in] */ 

@@ -1,8 +1,11 @@
 ﻿//#define MakeSingleThreaded
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
@@ -16,6 +19,8 @@ namespace MetadataTasks
         private string[] defaultIncDirs;
         private HashSet<string> partitionSettingsValidSwitches = new HashSet<string>(System.StringComparer.OrdinalIgnoreCase);
         private HashSet<string> partitionsToExcludeFromCrossarch = new HashSet<string>(System.StringComparer.OrdinalIgnoreCase);
+        private Dictionary<string, string> suggestedRemaps = new();
+
 
         [Required]
         public ITaskItem[] Partitions { get; set; }
@@ -60,6 +65,8 @@ namespace MetadataTasks
         public string MaxProcessors { get; set; }
 
         public string ExcludeFromCrossarch { get; set; }
+
+        public string PartitionFilter { get; set; }
 
         public override bool Execute()
         {
@@ -141,7 +148,17 @@ namespace MetadataTasks
                 }
             });
 
-            if (ret)
+            if (this.suggestedRemaps.Count != 0)
+            {
+                this.Log.LogMessage(MessageImportance.High, "One or more potential remaps were detected. To use them, add these lines to an .rsp with the '--remap' option.");
+
+                foreach (var item in this.suggestedRemaps)
+                {
+                    this.Log.LogMessage(MessageImportance.High, $"{item.Key}={item.Value}");
+                }
+            }
+
+            if (ret && string.IsNullOrEmpty(this.PartitionFilter))
             {
                 File.WriteAllText(this.MarkerFileName, string.Empty);
             }
@@ -164,9 +181,26 @@ namespace MetadataTasks
         private Partition[] GetPartitions()
         {
             List<Partition> ret = new List<Partition>();
+            HashSet<string> partitionFilter = null;
+            if (!string.IsNullOrEmpty(this.PartitionFilter))
+            {
+                partitionFilter = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                foreach (var partName in this.PartitionFilter.Split(';', System.StringSplitOptions.RemoveEmptyEntries))
+                {
+                    partitionFilter.Add(partName);
+                }
+            }
+
             foreach (ITaskItem item in this.Partitions)
             {
-                ret.Add(Partition.FromTaskItem(item, this.MSBuildProjectDirectory, this.SdkIncRoot));
+                Partition partition = Partition.FromTaskItem(item, this.MSBuildProjectDirectory, this.SdkIncRoot);
+
+                if (partitionFilter != null && !partitionFilter.Contains(partition.Name))
+                {
+                    continue;
+                }
+
+                ret.Add(partition);
             }
 
             return ret.ToArray();
@@ -193,6 +227,8 @@ namespace MetadataTasks
                 archDirName = "common";
             }
 
+            string infoPrefix = $"{partitionName}:{archDirName}";
+
             string ns = partition.Namespace;
             string archDir = Path.Combine(this.GeneratedDir, archDirName);
             string outputFileName = Path.Combine(archDir, $"{partitionName}.cs");
@@ -206,7 +242,7 @@ namespace MetadataTasks
                 System.Diagnostics.Debugger.Launch();
             }
 
-            this.Log.LogMessage(MessageImportance.High, $"Scanning to {outputFileName}...");
+            this.Log.LogMessage(MessageImportance.High, $"{infoPrefix} - Scanning to {outputFileName}...");
 
             string settingsRsp = Path.Combine(scratchDir, $"{partitionName}.settings.rsp");
 
@@ -350,11 +386,56 @@ $@"--file
 
             File.WriteAllText(scrapeToolOutput, output);
 
+            Regex duplicateKeyRegex = new Regex(@"A key with the given name already exists: (\S+)\.");
+            Regex errorRegex = new Regex(@"(?:\s*Error: (.*)|(?:\s*(.+ error: .+|Error \(.+\).*)))");
+            Regex potentialRemapRegex = new Regex(@"\s*Info: Potential remap: (.+)");
+
+            char[] lineChars = new char[] { '\r', '\n' };
+
             if (exitCode < 0 || !File.Exists(outputFileName))
             {
-                this.Log.LogError($"ClangSharpPInvokeGenerator.exe failed for {outputFileName} - {arch}, full output at {scrapeToolOutput}.");
+                this.Log.LogError($"{infoPrefix} - ClangSharpPInvokeGenerator failed. Full output at {scrapeToolOutput}.");
+
+                foreach (var line in output.Split(lineChars, System.StringSplitOptions.RemoveEmptyEntries))
+                {
+                    var errorMatch = errorRegex.Match(line);
+                    if (errorMatch.Success)
+                    {
+                        if (errorMatch.Groups[1].Success)
+                        {
+                            var errorDetails = errorMatch.Groups[1].Value;
+                            var duplicateMatch = duplicateKeyRegex.Match(errorDetails);
+                            if (duplicateMatch.Success)
+                            {
+                                var dupeName = duplicateMatch.Groups[1].Value;
+                                errorDetails = $"A duplicate rsp entry was found using the name '{dupeName}'. Make sure there is only one entry per name.";
+                            }
+
+                            this.Log.LogError($"{infoPrefix} - {errorDetails}");
+                        }
+                        else
+                        {
+                            this.Log.LogError($"{infoPrefix} - {errorMatch.Groups[2].Value}");
+                        }
+                    }
+                }
+
                 return false;
-                // TODO: Output errors
+            }
+            else
+            {
+                foreach (var line in output.Split(lineChars, System.StringSplitOptions.RemoveEmptyEntries))
+                {
+                    var remapMatch = potentialRemapRegex.Match(line);
+                    if (remapMatch.Success)
+                    {
+                        string[] parts = remapMatch.Groups[1].Value.Split('=');
+                        lock (this.suggestedRemaps)
+                        {
+                            this.suggestedRemaps[parts[0]] = parts[1];
+                        }
+                    }
+                }
             }
 
             return true;

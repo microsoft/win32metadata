@@ -42,7 +42,7 @@ typedef enum RO_INIT_TYPE
 
 // RegisterActivationFactory/RevokeActivationFactory registration cookie
 #ifdef __cplusplus
-typedef struct {} *RO_REGISTRATION_COOKIE;
+typedef struct _RO_REGISTRATION_COOKIE {} *RO_REGISTRATION_COOKIE;
 #else
 typedef struct _RO_REGISTRATION_COOKIE *RO_REGISTRATION_COOKIE; /* make this header includable in C files */
 #endif
@@ -54,6 +54,7 @@ typedef HRESULT (STDAPICALLTYPE * PFNGETACTIVATIONFACTORY)(HSTRING, IActivationF
 
 // forward declarations of the dllexport'd versions
 ROAPI
+
 _Check_return_
 HRESULT
 WINAPI
@@ -61,15 +62,15 @@ RoInitialize(
     _In_ RO_INIT_TYPE initType
     );
 
-
 ROAPI
+
 void
 WINAPI
 RoUninitialize(
     );
 
-
 ROAPI
+
 _Check_return_
 HRESULT
 WINAPI
@@ -78,8 +79,8 @@ RoActivateInstance(
     _COM_Outptr_ IInspectable** instance
     );
 
-
 ROAPI
+
 _Check_return_
 HRESULT
 WINAPI
@@ -90,16 +91,16 @@ RoRegisterActivationFactories(
     _Out_ RO_REGISTRATION_COOKIE* cookie
     );
 
-
 ROAPI
+
 void
 WINAPI
 RoRevokeActivationFactories(
     _In_ RO_REGISTRATION_COOKIE cookie
     );
 
-
 ROAPI
+
 _Check_return_
 HRESULT
 WINAPI
@@ -109,11 +110,11 @@ RoGetActivationFactory(
     _COM_Outptr_ void** factory
     );
 
-
 typedef interface IApartmentShutdown IApartmentShutdown;
 DECLARE_HANDLE(APARTMENT_SHUTDOWN_REGISTRATION_COOKIE);
 
 ROAPI
+
 _Check_return_
 HRESULT
 WINAPI
@@ -123,8 +124,8 @@ RoRegisterForApartmentShutdown(
     _Out_ APARTMENT_SHUTDOWN_REGISTRATION_COOKIE* regCookie
     );
 
-
 ROAPI
+
 _Check_return_
 HRESULT
 WINAPI
@@ -132,15 +133,14 @@ RoUnregisterForApartmentShutdown(
     _In_ APARTMENT_SHUTDOWN_REGISTRATION_COOKIE regCookie
     );
 
-
 ROAPI
+
 _Check_return_
 HRESULT
 WINAPI
 RoGetApartmentIdentifier(
     _Out_ UINT64* apartmentIdentifier
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
@@ -214,11 +214,11 @@ namespace Windows
             RoRevokeActivationFactories(cookie);
         }
 
-        // get activation factory 
+        // get activation factory
         template<class T>
         _Check_return_
         __inline HRESULT GetActivationFactory(
-            _In_        HSTRING activatableClassId, 
+            _In_        HSTRING activatableClassId,
             _COM_Outptr_ T**     factory)
         {
             return RoGetActivationFactory(activatableClassId, IID_PPV_ARGS(factory));
@@ -226,7 +226,7 @@ namespace Windows
     }
 }
 
-namespace ABI 
+namespace ABI
 {
     namespace Windows
     {
@@ -272,11 +272,11 @@ namespace ABI
                 RoRevokeActivationFactories(cookie);
             }
 
-            // get activation factory 
+            // get activation factory
             template<class T>
             _Check_return_
             __inline HRESULT GetActivationFactory(
-                _In_        HSTRING activatableClassId, 
+                _In_        HSTRING activatableClassId,
                 _COM_Outptr_ T**     factory)
             {
                 return RoGetActivationFactory(activatableClassId, IID_PPV_ARGS(factory));

@@ -19,5 +19,6 @@ _LM_OWF_PASSWORD
 <IncludeRoot>/um/certsrv.h
 <IncludeRoot>/um/CertView.h
 <IncludeRoot>/um/xenroll.h
+<IncludeRoot>/um/certreqd.h
 --namespace
 Windows.Win32.Security.Cryptography.Certificates

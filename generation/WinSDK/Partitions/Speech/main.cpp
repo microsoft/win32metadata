@@ -7,3 +7,5 @@
 #include <sdkddkver.h>
 
 #include <sapi53.h>
+//#include <sapiddk.h> -- Can't compile with sapi53.h
+#include <sperror.h>

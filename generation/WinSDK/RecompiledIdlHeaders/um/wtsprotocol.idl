@@ -553,27 +553,6 @@ interface IWTSProtocolLogonErrorRedirector : IUnknown
         [out]        WTS_LOGON_ERROR_REDIRECTOR_RESPONSE* pResponse);
 };
 
-
-
-[
-    object,
-    uuid(0FAD5DCF-C6D3-423c-B097-163D6A676151),
-    pointer_default(unique)
-]
-interface IWRdsRemoteFXGraphicsConnection : IUnknown
-{
-    HRESULT
-    EnableRemoteFXGraphics(
-        [out] BOOL* pEnableRemoteFXGraphics
-        );
-
-    HRESULT
-    GetVirtualChannelTransport(
-        [out] IUnknown** ppTransport
-        );
-};
-cpp_quote("#pragma deprecated(IWRdsRemoteFXGraphicsConnection)")
-
 //
 // Following interfaces are for Windows 8
 //
@@ -1281,5 +1260,45 @@ interface IWRdsProtocolConnectionSettings : IUnknown
         );
 
 };
+
+//
+// Following interfaces are for Windows 10 20H2
+//
+interface IWRdsEnhancedFastReconnectArbitrator;
+
+[
+    object,
+    uuid(5718AE9B-47F2-499F-B634-D8175BD51131),
+    pointer_default(unique)
+]
+interface IWRdsEnhancedFastReconnectArbitrator : IUnknown
+{
+    //===============================================================================
+    //
+    // GetSessionForEnhancedFastReconnect()
+    //
+    // Purpose:
+    //      Protocol stack uses this method to return the session ID that is to be
+    //      reconnected to in the Enhanced Fast Reconnect sequence.
+    //
+    // Parameters:
+    //      pSessionIdArray  -  Array of Session IDs matching the 
+    //                          enhanced fast reconnect criteria
+    //      dwSessionCount   -  Size in elements of Session ID array
+    //      pResultSessionId -  Pointer to variable to receive the resultant Session ID
+    //
+    // Return values:
+    //      S_OK or error code
+    //
+    //===============================================================================
+    HRESULT 
+    GetSessionForEnhancedFastReconnect(
+        [in]    LONG*   pSessionIdArray,
+        [in]    DWORD   dwSessionCount,
+        [out]   LONG*   pResultSessionId
+        );
+
+};
+
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
 #pragma endregion

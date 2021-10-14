@@ -8,3 +8,4 @@
 
 #include <ehstorextensions.h>
 #include <ehstorapi.h>
+#include <ehstormsg.h>

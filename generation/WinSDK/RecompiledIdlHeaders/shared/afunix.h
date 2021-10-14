@@ -26,5 +26,8 @@ typedef struct sockaddr_un
 } SOCKADDR_UN, *PSOCKADDR_UN;
 
 #define SIO_AF_UNIX_GETPEERPID _WSAIOR(IOC_VENDOR, 256) // Returns ULONG PID of the connected peer process
+#define SIO_AF_UNIX_SETBINDPARENTPATH _WSAIOW(IOC_VENDOR, 257) // Set the parent path for bind calls
+#define SIO_AF_UNIX_SETCONNPARENTPATH _WSAIOW(IOC_VENDOR, 258) // Set the parent path for connect calls
+// NOTE: setting the parent path is not thread safe.
 
 #endif /* _AFUNIX_ */

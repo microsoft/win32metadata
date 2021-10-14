@@ -190,6 +190,10 @@ DEFINE_GUID(IID_IDataModelConcept, 0xfcb98d1d, 0x1114, 0x4fbf, 0xb2, 0x4c, 0xef,
 // {D28E8D70-6C00-4205-940D-501016601EA3}
 DEFINE_GUID(IID_IStringDisplayableConcept, 0xd28e8d70, 0x6c00, 0x4205, 0x94, 0xd, 0x50, 0x10, 0x16, 0x60, 0x1e, 0xa3);
 
+// {C7371568-5C78-4A00-A4AB-6EF8823184CB}
+DEFINE_GUID(IID_ICodeAddressConcept, 0xc7371568, 0x5c78, 0x4a00, 0xa4, 0xab, 0x6e, 0xf8, 0x82, 0x31,0x84, 0xcb);
+
+
 // {E4622136-927D-4490-874F-581F3E4E3688}
 DEFINE_GUID(IID_IModelIterator, 0xe4622136, 0x927d, 0x4490, 0x87, 0x4f, 0x58, 0x1f, 0x3e, 0x4e, 0x36, 0x88);
 
@@ -359,6 +363,7 @@ struct DECLSPEC_UUID("E13613F9-3A3C-40b5-8F48-1E5EBFB9B21B") IRawEnumerator;
 
 struct DECLSPEC_UUID("FCB98D1D-1114-4fbf-B24C-EFFCB5DEF0D3") IDataModelConcept;
 struct DECLSPEC_UUID("D28E8D70-6C00-4205-940D-501016601EA3") IStringDisplayableConcept;
+struct DECLSPEC_UUID("C7371568-5C78-4A00-A4AB-6EF8823184CB") ICodeAddressConcept;
 struct DECLSPEC_UUID("E4622136-927D-4490-874F-581F3E4E3688") IModelIterator;
 struct DECLSPEC_UUID("F5D49D0C-0B02-4301-9C9B-B3A6037628F3") IIterableConcept;
 struct DECLSPEC_UUID("D1FAD99F-3F53-4457-850C-8051DF2D3FB5") IIndexableConcept;
@@ -750,6 +755,43 @@ enum LocationKind
 //
 // "PreferredRadix"
 //     contains a value which indicates the preferred display radix for an integral value.  This is either 8, 10, or 16
+//
+// "PreferShow"
+//     contains a boolean value which contains an indication of whether the element should, by default, display.
+//     The default value of this metadata key is "true" for values which are not methods and "false" for values
+//     which are methods.
+//
+// "PreferredLength"
+//     contains a value which describes how many iterated elements to display by default.  
+//     The default value of this metadata key is "1" for pointers and the type system defined length of any array
+//     for array types.
+// 
+// "ActionName"
+//     applicable only to object methods which take no arguments and have ObjectNoValueReturns, the presence of this
+//     metadatakey indicates that the method is an action for the object which should be funneled to appropriate UI 
+//     under the name given in this string metadata key.  The UI here may be a DML link (in WinDbg), a context menu,
+//     or other affordance.  An example of an action is "Switch To" for a thread which changes the UI focus to
+//     the given thread.
+//
+// "ActionDescription"
+//     applicable only where the "ActionName" key is present, this is a string value which gives tooltip style
+//     help for an action.
+//
+// "ActionIsDefault"
+//     applicable only where the "ActionName" key is present, this is a boolean value which describes whether
+//     the action is a default action or not.  The default action for an object may be funneled to additional
+//     UI.  By default, the value of this key is "false".  Only a single action method on any given object may
+//     be marked as the default action.
+//
+// "PreferAutoExpand"
+//     contains an unsigned value which describes whether the element should be expanded automatically if
+//     it is a child of some other object and the recursion level is high enough.  The default value for this
+//     key is "true".  If this key is specified as "false", the object **WILL NOT** expand in a console view unless
+//     it is the root element being displayed.
+//
+// "PreferredExpansionDepth"
+//     contains an unsigned value which describes how far the element should be expanded if not otherwise specified
+//     by a host command or other UI affordance.
 //
 
 //
@@ -2222,6 +2264,44 @@ DECLARE_INTERFACE_(IStringDisplayableConcept, IUnknown)
         _In_ IModelObject* contextObject,
         _In_opt_ IKeyStore* metadata,
         _Out_ BSTR* displayString
+        ) PURE;
+};
+
+//
+// ICodeAddressConcept:
+//
+// ICodeAddressConcept Description
+#undef INTERFACE
+#define INTERFACE ICodeAddressConcept
+DECLARE_INTERFACE_(ICodeAddressConcept, IUnknown)
+{
+    //*************************************************
+    // IUnknown:
+
+    STDMETHOD(QueryInterface)(
+        THIS_
+        _In_ REFIID iid,
+        _COM_Outptr_ PVOID* iface
+        ) PURE;
+
+    STDMETHOD_(ULONG, AddRef)(
+        THIS
+        ) PURE;
+
+    STDMETHOD_(ULONG, Release)(
+        THIS
+        ) PURE;
+
+    //*************************************************
+    // Name:
+
+    // GetContainingFunctionSymbol():
+    //
+    // GetContainingFunctionSymbol Description
+    STDMETHOD(GetContainingSymbol)(
+        THIS_
+        _In_ IModelObject* pContextObject,
+        _Out_ IDebugHostSymbol **ppSymbol
         ) PURE;
 };
 
@@ -4227,7 +4307,10 @@ enum SymbolSearchOptions
 
     // SymbolSearchCompletion: Search for symbols starting with the specified name rather than
     // symbols of the exact specified name.
-    SymbolSearchCompletion = 0x00000001
+    SymbolSearchCompletion = 0x00000001,
+
+    // SymbolSearchCaseInsensitive: Search for symbols using case-insensitive rules.
+    SymbolSearchCaseInsensitive = 0x00000002
 };
 
 // SymbolSearchInfo:

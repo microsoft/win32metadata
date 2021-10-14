@@ -52,6 +52,14 @@ typedef[v1_enum] enum AudioObjectType
 
 cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(AudioObjectType);")
 
+typedef [v1_enum] enum SPATIAL_AUDIO_STREAM_OPTIONS
+{
+    SPATIAL_AUDIO_STREAM_OPTIONS_NONE = 0x00,
+    SPATIAL_AUDIO_STREAM_OPTIONS_OFFLOAD = 0x01
+} SPATIAL_AUDIO_STREAM_OPTIONS;
+
+cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(SPATIAL_AUDIO_STREAM_OPTIONS);")
+
 interface ISpatialAudioObjectRenderStreamNotify;
 
 #pragma pack(push, 1)
@@ -65,6 +73,18 @@ typedef struct SpatialAudioObjectRenderStreamActivationParams
     HANDLE EventHandle;                   // Event that will signal the need for more audio data. This handle will be duplicated internally before getting used. This handle must be unique across stream instances.
     ISpatialAudioObjectRenderStreamNotify* NotifyObject;
 } SpatialAudioObjectRenderStreamActivationParams;
+
+typedef struct SpatialAudioObjectRenderStreamActivationParams2
+{
+    WAVEFORMATEX const* ObjectFormat;     // Format descriptor for a single spatial audio objects. All objects must have the same format and must be of type WAVEFORMATEX or WAVEFORMATEXTENSIBLE. 
+    AudioObjectType StaticObjectTypeMask; // (static channel bed mask) mask of static audio object type that are allowed
+    UINT32 MinDynamicObjectCount;         // Minimum number of dynamic audio objects. If at least this count cannot be granted, stream activation will fail with SPTLAUDCLNT_E_NO_MORE_OBJECTS.
+    UINT32 MaxDynamicObjectCount;         // Maximum number of dynamic audio objects that can be activated via ISpatialAudioObjectRenderStream
+    AUDIO_STREAM_CATEGORY Category;       // Specifies the category of the audio stream and its spatial audio objects
+    HANDLE EventHandle;                   // Event that will signal the need for more audio data. This handle will be duplicated internally before getting used. This handle must be unique across stream instances.
+    ISpatialAudioObjectRenderStreamNotify* NotifyObject;
+    SPATIAL_AUDIO_STREAM_OPTIONS Options;
+} SpatialAudioObjectRenderStreamActivationParams2;
 #pragma pack(pop)
 
 [
@@ -374,6 +394,34 @@ interface ISpatialAudioClient : IUnknown
         [in, annotation("_In_")] PROPVARIANT const* activationParams, // activation parameters for the required streams for example SpatialAudioObjectRenderStreamForMetadataActivationParams
         [in, annotation("_In_")] REFIID riid,                   // spatial audio stream interface UUID for example ISpatialAudioObjectRenderStreamForMetadata
         [out, iid_is(riid), annotation("_COM_Outptr_")] void** stream);
+}
+
+[
+    object,
+    uuid(caabe452-a66a-4bee-a93e-e320463f6a53),
+    pointer_default(unique),
+    local
+]
+interface ISpatialAudioClient2 : ISpatialAudioClient
+{
+    // This method is called to find out if the audio rendering endpoint that the
+    // ISpatialAudioClient2 was created on supports hardware offloaded audio processing.
+    // The method also considers the capabilities of the AUDIO_STREAM_CATEGORY value that will
+    // be used, as use of offload is restricted to only certain AUDIO_STREAM_CATEGORY values.
+    HRESULT IsOffloadCapable(
+        [in] AUDIO_STREAM_CATEGORY category,
+        [out, annotation("_Out_")] BOOL* isOffloadCapable);
+
+    // Get max possible frame count per processing pass. This value will change if the endpoint cadence changes.
+    // The value returned by this method can be used to allocate source buffer.
+    // The caller must specify same AUDIO_STREAM_CATEGORY value and WAVEFORMATEX that will be used when creating the stream.
+    // The offloadEnabled parameter must be set to TRUE if the stream will be created with the
+    // SPATIAL_AUDIO_STREAM_OPTIONS_OFFLOAD flag.
+    HRESULT GetMaxFrameCountForCategory(
+        [in] AUDIO_STREAM_CATEGORY category,
+        [in] BOOL offloadEnabled,
+        [in, annotation("_In_")] WAVEFORMATEX const* objectFormat,
+        [out, annotation("_Out_")] UINT32* frameCountPerBuffer);
 }
 
 // SpatialAudioClientActivationParams

@@ -26,3 +26,5 @@
 #include <iads.h>
 #include <adssts.h>
 #include <adshlp.h>
+
+#include <ntdsbmsg.h>

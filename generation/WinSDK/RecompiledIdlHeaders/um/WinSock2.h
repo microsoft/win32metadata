@@ -56,7 +56,7 @@
 /*
  * Ensure structures are packed consistently.
  * Not necessary for WIN32, it is already packed >=4 and there are
- * no structures in this header that have alignment requirement 
+ * no structures in this header that have alignment requirement
  * higher than 4.
  * For WIN64 we do not have compatibility requirement because it is
  * not possible to mix 32/16 bit code with 64 bit code in the same
@@ -65,7 +65,7 @@
 
 #if (!defined(_WIN64) && !defined(WIN32))
 #include <pshpack4.h>
-/* WIN32 can be defined between here and the required poppack 
+/* WIN32 can be defined between here and the required poppack
    so define this special macro to ensure poppack */
 #define _NEED_POPPACK
 #endif
@@ -153,7 +153,7 @@ extern int PASCAL FAR __WSAFDIsSet(SOCKET fd, fd_set FAR *);
             break; \
         } \
     } \
-} while(0, 0)
+} while(0)
 
 #define FD_SET(fd, set) do { \
     u_int __i; \
@@ -168,7 +168,7 @@ extern int PASCAL FAR __WSAFDIsSet(SOCKET fd, fd_set FAR *);
             ((fd_set FAR *)(set))->fd_count++; \
         } \
     } \
-} while(0, 0)
+} while(0)
 
 #define FD_ZERO(set) (((fd_set FAR *)(set))->fd_count=0)
 
@@ -538,7 +538,6 @@ struct  linger {
 #define MSG_INTERRUPT   0x10            /* send/recv in the interrupt context */
 
 #define MSG_MAXIOVLEN   16
-
 
 /*
  * Define constant based on rfc883, used by gethostbyxxxx() calls.
@@ -1371,7 +1370,7 @@ typedef struct _WINSOCK_DEPRECATED_BY("WSAQUERYSET2W") _WSAQuerySet2A
     DWORD           dwNumberOfCsAddrs;
     LPCSADDR_INFO   lpcsaBuffer;
     DWORD           dwOutputFlags;
-    LPBLOB          lpBlob;   
+    LPBLOB          lpBlob;
 } WSAQUERYSET2A, *PWSAQUERYSET2A, *LPWSAQUERYSET2A;
 typedef struct _WSAQuerySet2W
 {
@@ -1388,7 +1387,7 @@ typedef struct _WSAQuerySet2W
     DWORD           dwNumberOfCsAddrs;
     _Field_size_(dwNumberOfCsAddrs) LPCSADDR_INFO   lpcsaBuffer;
     DWORD           dwOutputFlags;
-    LPBLOB          lpBlob;   
+    LPBLOB          lpBlob;
 } WSAQUERYSET2W, *PWSAQUERYSET2W, *LPWSAQUERYSET2W;
 
 #ifdef UNICODE
@@ -1410,36 +1409,43 @@ typedef LPWSAQUERYSET2A LPWSAQUERYSET2;
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
 
-#define LUP_DEEP                0x0001
-#define LUP_CONTAINERS          0x0002
-#define LUP_NOCONTAINERS        0x0004
-#define LUP_NEAREST             0x0008
-#define LUP_RETURN_NAME         0x0010
-#define LUP_RETURN_TYPE         0x0020
-#define LUP_RETURN_VERSION      0x0040
-#define LUP_RETURN_COMMENT      0x0080
-#define LUP_RETURN_ADDR         0x0100
-#define LUP_RETURN_BLOB         0x0200
-#define LUP_RETURN_ALIASES      0x0400
-#define LUP_RETURN_QUERY_STRING 0x0800
-#define LUP_RETURN_ALL          0x0FF0
-#define LUP_RES_SERVICE         0x8000
+#define LUP_DEEP                     0x00000001
+#define LUP_CONTAINERS               0x00000002
+#define LUP_NOCONTAINERS             0x00000004
+#define LUP_NEAREST                  0x00000008
+#define LUP_RETURN_NAME              0x00000010
+#define LUP_RETURN_TYPE              0x00000020
+#define LUP_RETURN_VERSION           0x00000040
+#define LUP_RETURN_COMMENT           0x00000080
+#define LUP_RETURN_ADDR              0x00000100
+#define LUP_RETURN_BLOB              0x00000200
+#define LUP_RETURN_ALIASES           0x00000400
+#define LUP_RETURN_QUERY_STRING      0x00000800
+#define LUP_RETURN_ALL               0x00000FF0
+#define LUP_RES_SERVICE              0x00008000
 
-#define LUP_FLUSHCACHE          0x1000
-#define LUP_FLUSHPREVIOUS       0x2000
+#define LUP_FLUSHCACHE               0x00001000
+#define LUP_FLUSHPREVIOUS            0x00002000
 
-#define LUP_NON_AUTHORITATIVE   0x4000
-#define LUP_SECURE              0x8000
-#define LUP_RETURN_PREFERRED_NAMES  0x10000
-#define LUP_DNS_ONLY            0x20000
+#define LUP_NON_AUTHORITATIVE        0x00004000
+#define LUP_SECURE                   0x00008000
+#define LUP_RETURN_PREFERRED_NAMES   0x00010000
+#define LUP_DNS_ONLY                 0x00020000
+#define LUP_RETURN_RESPONSE_FLAGS    0x00040000
 
-#define LUP_ADDRCONFIG          0x00100000
-#define LUP_DUAL_ADDR           0x00200000
-#define LUP_FILESERVER          0x00400000
-#define LUP_DISABLE_IDN_ENCODING    0x00800000
-#define LUP_API_ANSI            0x01000000
+#define LUP_ADDRCONFIG               0x00100000
+#define LUP_DUAL_ADDR                0x00200000
+#define LUP_FILESERVER               0x00400000
+#define LUP_DISABLE_IDN_ENCODING     0x00800000
+#define LUP_API_ANSI                 0x01000000
 
-#define LUP_RESOLUTION_HANDLE   0x80000000
+#define LUP_EXTENDED_QUERYSET        0x02000000
+#define LUP_SECURE_WITH_FALLBACK     0x04000000
+#define LUP_EXCLUSIVE_CUSTOM_SERVERS 0x08000000
+#define LUP_REQUIRE_SECURE           0x10000000
+#define LUP_RETURN_TTL               0x20000000
+#define LUP_FORCE_CLEAR_TEXT         0x40000000
+#define LUP_RESOLUTION_HANDLE        0x80000000
 
 /*
  * Return flags
@@ -1862,7 +1868,7 @@ char FAR *
 
 #if !defined(NO_EXTRA_HTON_FUNCTIONS) && !defined(__midl) && (defined(INCL_EXTRA_HTON_FUNCTIONS) || NTDDI_VERSION>=NTDDI_WIN8)
 /*
- * Byte order conversion functions for 64-bit integers and 32 + 64 bit 
+ * Byte order conversion functions for 64-bit integers and 32 + 64 bit
  * floating-point numbers.  IEEE big-endian format is used for the
  * network floating point format.
  */
@@ -1884,24 +1890,24 @@ char FAR *
 
 
 #ifndef htonll
-__inline unsigned __int64 htonll ( unsigned __int64 Value ) 
-{ 
+__inline unsigned __int64 htonll ( unsigned __int64 Value )
+{
 	const unsigned __int64 Retval = _WS2_32_WINSOCK_SWAP_LONGLONG (Value);
 	return Retval;
 }
 #endif /* htonll */
 
 #ifndef ntohll
-__inline unsigned __int64 ntohll ( unsigned __int64 Value ) 
-{ 
+__inline unsigned __int64 ntohll ( unsigned __int64 Value )
+{
 	const unsigned __int64 Retval = _WS2_32_WINSOCK_SWAP_LONGLONG (Value);
 	return Retval;
 }
 #endif /* ntohll */
 
 #ifndef htonf
-__inline unsigned __int32 htonf ( float Value ) 
-{ 
+__inline unsigned __int32 htonf ( float Value )
+{
 	unsigned __int32 Tempval;
 	unsigned __int32 Retval;
 	Tempval = *(unsigned __int32*)(&Value);
@@ -1911,8 +1917,8 @@ __inline unsigned __int32 htonf ( float Value )
 #endif /* htonf */
 
 #ifndef ntohf
-__inline float ntohf ( unsigned __int32 Value ) 
-{ 
+__inline float ntohf ( unsigned __int32 Value )
+{
 	const unsigned __int32 Tempval = _WS2_32_WINSOCK_SWAP_LONG (Value);
 	float Retval;
 	*((unsigned __int32*)&Retval) = Tempval;
@@ -1921,8 +1927,8 @@ __inline float ntohf ( unsigned __int32 Value )
 #endif /* ntohf */
 
 #ifndef htond
-__inline unsigned __int64 htond ( double Value ) 
-{ 
+__inline unsigned __int64 htond ( double Value )
+{
 	unsigned __int64 Tempval;
 	unsigned __int64 Retval;
 	Tempval = *(unsigned __int64*)(&Value);
@@ -1932,8 +1938,8 @@ __inline unsigned __int64 htond ( double Value )
 #endif /* htond */
 
 #ifndef ntohd
-__inline double ntohd ( unsigned __int64 Value ) 
-{ 
+__inline double ntohd ( unsigned __int64 Value )
+{
 	const unsigned __int64 Tempval = _WS2_32_WINSOCK_SWAP_LONGLONG (Value);
 	double Retval;
 	*((unsigned __int64*)&Retval) = Tempval;
@@ -3317,8 +3323,8 @@ int
 #if(_WIN32_WINNT >= 0x0600)
 #if INCL_WINSOCK_API_PROTOTYPES
 WINSOCK_API_LINKAGE
-int 
-WSAAPI 
+int
+WSAAPI
 WSASendMsg(
     _In_ SOCKET Handle,
     _In_ LPWSAMSG lpMsg,
@@ -4135,6 +4141,112 @@ WSAPoll(
 #endif /* INCL_WINSOCK_API_PROTOTYPES */
 #endif // (_WIN32_WINNT >= 0x0600)
 
+
+typedef struct SOCK_NOTIFY_REGISTRATION {
+    SOCKET socket;
+    PVOID completionKey;
+    UINT16 eventFilter;
+    UINT8 operation;
+    UINT8 triggerFlags;
+    DWORD registrationResult;
+} SOCK_NOTIFY_REGISTRATION;
+
+//
+// Socket notification registration events. Supplied during registration.
+// Indicates that a notification should be issued for the event if its
+// condition holds.
+//
+#define SOCK_NOTIFY_REGISTER_EVENT_NONE     0x00
+#define SOCK_NOTIFY_REGISTER_EVENT_IN       0x01 // Input is available from the socket without blocking.
+#define SOCK_NOTIFY_REGISTER_EVENT_OUT      0x02 // Output can be provided to the socket without blocking.
+#define SOCK_NOTIFY_REGISTER_EVENT_HANGUP   0x04 // The socket connection has been terminated.
+
+#define SOCK_NOTIFY_REGISTER_EVENTS_ALL \
+    (SOCK_NOTIFY_REGISTER_EVENT_IN | SOCK_NOTIFY_REGISTER_EVENT_OUT | SOCK_NOTIFY_REGISTER_EVENT_HANGUP)
+
+//
+// Socket notification events. These are the events possible when a notification
+// is received.
+//
+// The SOCK_NOTIFY_EVENT_ERR and SOCK_NOTIFY_EVENT_REMOVE events
+// may be indicated regardless of registration.
+//
+// If a SOCK_NOTIFY_EVENT_REMOVE event is indicated, no more notifications will
+// be provided.
+//
+#define SOCK_NOTIFY_EVENT_IN        SOCK_NOTIFY_REGISTER_EVENT_IN     // Input is available from the socket without blocking.
+#define SOCK_NOTIFY_EVENT_OUT       SOCK_NOTIFY_REGISTER_EVENT_OUT    // Output can be provided to the socket without blocking.
+#define SOCK_NOTIFY_EVENT_HANGUP    SOCK_NOTIFY_REGISTER_EVENT_HANGUP // The socket connection has been terminated.
+#define SOCK_NOTIFY_EVENT_ERR       0x40                              // The socket is in an error state.
+#define SOCK_NOTIFY_EVENT_REMOVE    0x80                              // The notification has been deregistered.
+
+#define SOCK_NOTIFY_EVENTS_ALL \
+    (SOCK_NOTIFY_REGISTER_EVENTS_ALL | SOCK_NOTIFY_EVENT_ERR | SOCK_NOTIFY_EVENT_REMOVE)
+
+//
+// Socket notification registration operations. One operation must be supplied at
+// a time.
+//
+// A SOCK_NOTIFY_OP_DISABLE operation will not destroy the underlying structures.
+//
+// A SOCK_NOTIFY_OP_REMOVE operation will cause a SOCK_NOTIFY_REMOVE notification
+// to be delivered when the operation completes successfully.
+//
+#define SOCK_NOTIFY_OP_NONE         0x00
+#define SOCK_NOTIFY_OP_ENABLE       0x01 // Enables the registration.
+#define SOCK_NOTIFY_OP_DISABLE      0x02 // Disables the registration.
+#define SOCK_NOTIFY_OP_REMOVE       0x04 // Removes the registration.
+
+//
+// Socket notification trigger behaviors.
+//
+// When operation is SOCK_NOTIFY_OP_ENABLE:
+//    - One of SOCK_NOTIFY_TRIGGER_PERSISTENT or SOCK_NOTIFY_TRIGGER_ONESHOT must be supplied
+//    - One of SOCK_NOTIFY_TRIGGER_LEVEL or SOCK_NOTIFY_TRIGGER_EDGE must be supplied
+//
+// SOCK_NOTIFY_TRIGGER_PERSISTENT is not compatible with SOCK_NOTIFY_TRIGGER_ONESHOT.
+// SOCK_NOTIFY_TRIGGER_LEVEL is not compatible with SOCK_NOTIFY_TRIGGER_EDGE.
+//
+#define SOCK_NOTIFY_TRIGGER_ONESHOT    0x01 // The registration will be disabled (not removed) upon delivery of the next notification.
+#define SOCK_NOTIFY_TRIGGER_PERSISTENT 0x02 // The registration will remain active until it is explicitly disabled or removed.
+#define SOCK_NOTIFY_TRIGGER_LEVEL      0x04 // The registration is for level-triggered notifications.
+#define SOCK_NOTIFY_TRIGGER_EDGE       0x08 // The registration is for edge-triggered notifications.
+
+#define SOCK_NOTIFY_TRIGGER_ALL \
+    (SOCK_NOTIFY_TRIGGER_ONESHOT | SOCK_NOTIFY_TRIGGER_PERSISTENT | SOCK_NOTIFY_TRIGGER_LEVEL | SOCK_NOTIFY_TRIGGER_EDGE)
+
+#if (NTDDI_VERSION >= NTDDI_WIN10_MN)
+#if INCL_WINSOCK_API_PROTOTYPES
+WINSOCK_API_LINKAGE
+DWORD
+WSAAPI
+ProcessSocketNotifications(
+    _In_ HANDLE completionPort,
+    _In_ UINT32 registrationCount,
+    _Inout_updates_opt_(registrationCount)
+        SOCK_NOTIFY_REGISTRATION* registrationInfos,
+    _In_ UINT32 timeoutMs,
+    _In_ ULONG completionCount,
+    _Out_writes_to_opt_(completionCount, *receivedEntryCount)
+        OVERLAPPED_ENTRY* completionPortEntries,
+    _Out_opt_ UINT32* receivedEntryCount
+    );
+
+#if !defined(__midl)
+
+inline
+UINT32
+SocketNotificationRetrieveEvents (
+    _In_ OVERLAPPED_ENTRY* notification
+    )
+{
+    return (UINT32)notification->dwNumberOfBytesTransferred;
+}
+
+#endif // __midl
+
+#endif // INCL_WINSOCK_API_PROTOTYPES
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_MN)
 
 
 /* Microsoft Windows Extended data types */

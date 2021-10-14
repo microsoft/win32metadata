@@ -224,16 +224,15 @@ The START and STOP events always use the activity's keyword and level.
             "Do not use TraceLoggingLevel in TraceLoggingWriteStart. The Level for START events is " \
             "specified in the activity type, e.g. TraceLoggingActivity<Provider,Keyword,Level>."); \
         _tlgActivityRef(activity).zInternalStart(); \
-        TraceLoggingWriteActivity( \
-            _tlgActivityRef(activity).Provider(), \
+        _tlgActivityWriteStartStop(_tlg_IS_EMPTY(__VA_ARGS__), ( \
+            activity, \
             (name), \
             _tlgActivityRef(activity).Id(), \
             _tlgActivityRef(activity).zInternalRelatedId(), \
-            TraceLoggingOpcode(1 /* WINEVENT_OPCODE_START */), \
-            TraceLoggingKeyword(_tlgActivity_Keyword), \
-            TraceLoggingLevel(_tlgActivity_Level), \
-            TraceLoggingDescription("~^" _tlg_LSTRINGIZE(activity) L"^~"), \
-            __VA_ARGS__); \
+            1 /* WINEVENT_OPCODE_START */, \
+            _tlgActivity_Keyword, \
+            _tlgActivity_Level, \
+            __VA_ARGS__)); \
     } while(0) \
     __pragma(warning(pop)) \
 
@@ -268,16 +267,15 @@ event will be logged from the destructor.
             "Do not use TraceLoggingLevel in TraceLoggingWriteStop. The Level for STOP events is " \
             "specified in the activity type, e.g. TraceLoggingActivity<Provider,Keyword,Level>."); \
         _tlgActivityRef(activity).zInternalStop(); \
-        TraceLoggingWriteActivity( \
-            _tlgActivityRef(activity).Provider(), \
+        _tlgActivityWriteStartStop(_tlg_IS_EMPTY(__VA_ARGS__), ( \
+            activity, \
             (name), \
             _tlgActivityRef(activity).Id(), \
             NULL, \
-            TraceLoggingOpcode(2 /* WINEVENT_OPCODE_STOP */),\
-            TraceLoggingKeyword(_tlgActivity_Keyword),\
-            TraceLoggingLevel(_tlgActivity_Level),\
-            TraceLoggingDescription("~^" _tlg_LSTRINGIZE(activity) L"^~"),\
-            __VA_ARGS__); \
+            2 /* WINEVENT_OPCODE_STOP */,\
+            _tlgActivity_Keyword,\
+            _tlgActivity_Level,\
+            __VA_ARGS__)); \
     } while(0) \
     __pragma(warning(pop)) \
 
@@ -391,6 +389,36 @@ parameter more than once.
 #define _tlgActivityDecl(activity)
 #define _tlgActivityRef(activity) (activity)
 #endif
+
+/*
+Private implementation macros. For internal use only.
+Avoid extra comma when invoking TraceLoggingWriteActivity.
+*/
+#define _tlgActivityWriteStartStop(is_empty, args) \
+    _tlg_PASTE2(_tlgActivityWriteStartStop_imp, is_empty) args
+#define _tlgActivityWriteStartStop_imp0(activity, eventName, pActivityId, pRelatedId, opcode, keyword, level, ...) \
+    TraceLoggingWriteActivity( \
+        _tlgActivityRef(activity).Provider(), \
+        eventName, \
+        pActivityId, \
+        pRelatedId, \
+        TraceLoggingOpcode(opcode), \
+        TraceLoggingKeyword(keyword), \
+        TraceLoggingLevel(level), \
+        TraceLoggingDescription("~^" _tlg_LSTRINGIZE(activity) L"^~") \
+        , __VA_ARGS__ \
+        )
+#define _tlgActivityWriteStartStop_imp1(activity, eventName, pActivityId, pRelatedId, opcode, keyword, level, ...) \
+    TraceLoggingWriteActivity( \
+        _tlgActivityRef(activity).Provider(), \
+        eventName, \
+        pActivityId, \
+        pRelatedId, \
+        TraceLoggingOpcode(opcode), \
+        TraceLoggingKeyword(keyword), \
+        TraceLoggingLevel(level), \
+        TraceLoggingDescription("~^" _tlg_LSTRINGIZE(activity) L"^~") \
+        )
 
 /*
 Private implementation function. For internal use only.

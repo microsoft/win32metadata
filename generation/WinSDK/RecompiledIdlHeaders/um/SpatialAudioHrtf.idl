@@ -11,8 +11,8 @@ import "hstring.idl";
 
 import "SpatialAudioClient.idl";
 
-#pragma region Application Family
-cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+#pragma region Application and Games Family
+cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
 
 
 typedef enum SpatialAudioHrtfDirectivityType
@@ -41,6 +41,7 @@ typedef enum SpatialAudioHrtfDistanceDecayType
 
 
 #pragma pack(push, 1)
+
 typedef struct SpatialAudioHrtfDirectivity
 {
     SpatialAudioHrtfDirectivityType     Type;       // Indicates the type of directivity.
@@ -93,6 +94,23 @@ typedef struct SpatialAudioHrtfActivationParams
     SpatialAudioHrtfEnvironmentType *Environment;           // Optional Environment - All dynamic objects from this stream will default to this value  (nullptr if unused)
     SpatialAudioHrtfOrientation *Orientation;               // Optional Orientation - All dynamic objects from this stream will default to this value  (nullptr if unused)
 } SpatialAudioHrtfActivationParams;
+
+typedef struct SpatialAudioHrtfActivationParams2
+{
+    WAVEFORMATEX const* ObjectFormat;                       // Format descriptor for a single spatial audio objects. All objects must have the same format and must be of type WAVEFORMATEX or WAVEFORMATEXTENSIBLE.
+    AudioObjectType StaticObjectTypeMask;                   // (static channel bed mask) mask of static audio object type that are allowed
+    UINT32 MinDynamicObjectCount;                           // Minimum number of dynamic audio objects. If at least this count cannot be granted, no dynamic objects will be granted.
+    UINT32 MaxDynamicObjectCount;                           // Maximum number of dynamic audio objects that can be activated via ISpatialAudioObjectRenderStreamForMetadata.
+    AUDIO_STREAM_CATEGORY Category;                         // Specifies the category of an audio stream and its spatial audio objects.
+    HANDLE EventHandle;                                     // event that will signal the need for more audio data. This handle will be duplicated internally before getting used
+    ISpatialAudioObjectRenderStreamNotify* NotifyObject;    // Notification sink (can be nullptr)
+    SpatialAudioHrtfDistanceDecay *DistanceDecay;           // Optional Distance Decay Settings - All dynamic objects from this stream will default to this setting  (nullptr if unused)
+    SpatialAudioHrtfDirectivityUnion *Directivity;          // Optional Directivity - All dynamic objects from this stream will default to this value   (nullptr if unused)
+    SpatialAudioHrtfEnvironmentType *Environment;           // Optional Environment - All dynamic objects from this stream will default to this value  (nullptr if unused)
+    SpatialAudioHrtfOrientation *Orientation;               // Optional Orientation - All dynamic objects from this stream will default to this value  (nullptr if unused)
+    SPATIAL_AUDIO_STREAM_OPTIONS Options;
+} SpatialAudioHrtfActivationParams2;
+
 #pragma pack(pop)
 
 
@@ -155,4 +173,4 @@ interface ISpatialAudioObjectRenderStreamForHrtf : ISpatialAudioObjectRenderStre
 };
 
 
-cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
+cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */")

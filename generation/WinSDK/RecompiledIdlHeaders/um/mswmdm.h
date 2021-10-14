@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -1072,18 +1080,22 @@ EXTERN_C const IID IID_IWMDMMetaData;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMDMMetaData * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMDMMetaData * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMDMMetaData * This);
         
+        DECLSPEC_XFGVIRT(IWMDMMetaData, AddItem)
         HRESULT ( STDMETHODCALLTYPE *AddItem )( 
             __RPC__in IWMDMMetaData * This,
             /* [in] */ WMDM_TAG_DATATYPE Type,
@@ -1091,6 +1103,7 @@ EXTERN_C const IID IID_IWMDMMetaData;
             /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(iLength) BYTE *pValue,
             /* [in] */ UINT iLength);
         
+        DECLSPEC_XFGVIRT(IWMDMMetaData, QueryByName)
         HRESULT ( STDMETHODCALLTYPE *QueryByName )( 
             __RPC__in IWMDMMetaData * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pwszTagName,
@@ -1098,6 +1111,7 @@ EXTERN_C const IID IID_IWMDMMetaData;
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcbLength) BYTE **pValue,
             /* [out] */ __RPC__out UINT *pcbLength);
         
+        DECLSPEC_XFGVIRT(IWMDMMetaData, QueryByIndex)
         HRESULT ( STDMETHODCALLTYPE *QueryByIndex )( 
             __RPC__in IWMDMMetaData * This,
             /* [in] */ UINT iIndex,
@@ -1106,6 +1120,7 @@ EXTERN_C const IID IID_IWMDMMetaData;
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcbLength) BYTE **ppValue,
             /* [out] */ __RPC__out UINT *pcbLength);
         
+        DECLSPEC_XFGVIRT(IWMDMMetaData, GetItemCount)
         HRESULT ( STDMETHODCALLTYPE *GetItemCount )( 
             __RPC__in IWMDMMetaData * This,
             /* [out] */ __RPC__out UINT *iCount);
@@ -1189,26 +1204,32 @@ EXTERN_C const IID IID_IWMDeviceManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMDeviceManager * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMDeviceManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMDeviceManager * This);
         
+        DECLSPEC_XFGVIRT(IWMDeviceManager, GetRevision)
         HRESULT ( STDMETHODCALLTYPE *GetRevision )( 
             __RPC__in IWMDeviceManager * This,
             /* [out] */ __RPC__out DWORD *pdwRevision);
         
+        DECLSPEC_XFGVIRT(IWMDeviceManager, GetDeviceCount)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceCount )( 
             __RPC__in IWMDeviceManager * This,
             /* [out] */ __RPC__out DWORD *pdwCount);
         
+        DECLSPEC_XFGVIRT(IWMDeviceManager, EnumDevices)
         HRESULT ( STDMETHODCALLTYPE *EnumDevices )( 
             __RPC__in IWMDeviceManager * This,
             /* [out] */ __RPC__deref_out_opt IWMDMEnumDevice **ppEnumDevice);
@@ -1289,39 +1310,48 @@ EXTERN_C const IID IID_IWMDeviceManager2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMDeviceManager2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMDeviceManager2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMDeviceManager2 * This);
         
+        DECLSPEC_XFGVIRT(IWMDeviceManager, GetRevision)
         HRESULT ( STDMETHODCALLTYPE *GetRevision )( 
             __RPC__in IWMDeviceManager2 * This,
             /* [out] */ __RPC__out DWORD *pdwRevision);
         
+        DECLSPEC_XFGVIRT(IWMDeviceManager, GetDeviceCount)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceCount )( 
             __RPC__in IWMDeviceManager2 * This,
             /* [out] */ __RPC__out DWORD *pdwCount);
         
+        DECLSPEC_XFGVIRT(IWMDeviceManager, EnumDevices)
         HRESULT ( STDMETHODCALLTYPE *EnumDevices )( 
             __RPC__in IWMDeviceManager2 * This,
             /* [out] */ __RPC__deref_out_opt IWMDMEnumDevice **ppEnumDevice);
         
+        DECLSPEC_XFGVIRT(IWMDeviceManager2, GetDeviceFromCanonicalName)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceFromCanonicalName )( 
             __RPC__in IWMDeviceManager2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pwszCanonicalName,
             /* [out] */ __RPC__deref_out_opt IWMDMDevice **ppDevice);
         
+        DECLSPEC_XFGVIRT(IWMDeviceManager2, EnumDevices2)
         HRESULT ( STDMETHODCALLTYPE *EnumDevices2 )( 
             __RPC__in IWMDeviceManager2 * This,
             /* [out] */ __RPC__deref_out_opt IWMDMEnumDevice **ppEnumDevice);
         
+        DECLSPEC_XFGVIRT(IWMDeviceManager2, Reinitialize)
         HRESULT ( STDMETHODCALLTYPE *Reinitialize )( 
             __RPC__in IWMDeviceManager2 * This);
         
@@ -1405,42 +1435,52 @@ EXTERN_C const IID IID_IWMDeviceManager3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMDeviceManager3 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMDeviceManager3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMDeviceManager3 * This);
         
+        DECLSPEC_XFGVIRT(IWMDeviceManager, GetRevision)
         HRESULT ( STDMETHODCALLTYPE *GetRevision )( 
             __RPC__in IWMDeviceManager3 * This,
             /* [out] */ __RPC__out DWORD *pdwRevision);
         
+        DECLSPEC_XFGVIRT(IWMDeviceManager, GetDeviceCount)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceCount )( 
             __RPC__in IWMDeviceManager3 * This,
             /* [out] */ __RPC__out DWORD *pdwCount);
         
+        DECLSPEC_XFGVIRT(IWMDeviceManager, EnumDevices)
         HRESULT ( STDMETHODCALLTYPE *EnumDevices )( 
             __RPC__in IWMDeviceManager3 * This,
             /* [out] */ __RPC__deref_out_opt IWMDMEnumDevice **ppEnumDevice);
         
+        DECLSPEC_XFGVIRT(IWMDeviceManager2, GetDeviceFromCanonicalName)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceFromCanonicalName )( 
             __RPC__in IWMDeviceManager3 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pwszCanonicalName,
             /* [out] */ __RPC__deref_out_opt IWMDMDevice **ppDevice);
         
+        DECLSPEC_XFGVIRT(IWMDeviceManager2, EnumDevices2)
         HRESULT ( STDMETHODCALLTYPE *EnumDevices2 )( 
             __RPC__in IWMDeviceManager3 * This,
             /* [out] */ __RPC__deref_out_opt IWMDMEnumDevice **ppEnumDevice);
         
+        DECLSPEC_XFGVIRT(IWMDeviceManager2, Reinitialize)
         HRESULT ( STDMETHODCALLTYPE *Reinitialize )( 
             __RPC__in IWMDeviceManager3 * This);
         
+        DECLSPEC_XFGVIRT(IWMDeviceManager3, SetDeviceEnumPreference)
         HRESULT ( STDMETHODCALLTYPE *SetDeviceEnumPreference )( 
             __RPC__in IWMDeviceManager3 * This,
             /* [in] */ DWORD dwEnumPref);
@@ -1552,46 +1592,56 @@ EXTERN_C const IID IID_IWMDMStorageGlobals;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMDMStorageGlobals * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMDMStorageGlobals * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMDMStorageGlobals * This);
         
+        DECLSPEC_XFGVIRT(IWMDMStorageGlobals, GetCapabilities)
         HRESULT ( STDMETHODCALLTYPE *GetCapabilities )( 
             __RPC__in IWMDMStorageGlobals * This,
             /* [out] */ __RPC__out DWORD *pdwCapabilities);
         
+        DECLSPEC_XFGVIRT(IWMDMStorageGlobals, GetSerialNumber)
         HRESULT ( STDMETHODCALLTYPE *GetSerialNumber )( 
             __RPC__in IWMDMStorageGlobals * This,
             /* [out] */ __RPC__out PWMDMID pSerialNum,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(IWMDMStorageGlobals, GetTotalSize)
         HRESULT ( STDMETHODCALLTYPE *GetTotalSize )( 
             __RPC__in IWMDMStorageGlobals * This,
             /* [out] */ __RPC__out DWORD *pdwTotalSizeLow,
             /* [out] */ __RPC__out DWORD *pdwTotalSizeHigh);
         
+        DECLSPEC_XFGVIRT(IWMDMStorageGlobals, GetTotalFree)
         HRESULT ( STDMETHODCALLTYPE *GetTotalFree )( 
             __RPC__in IWMDMStorageGlobals * This,
             /* [out] */ __RPC__out DWORD *pdwFreeLow,
             /* [out] */ __RPC__out DWORD *pdwFreeHigh);
         
+        DECLSPEC_XFGVIRT(IWMDMStorageGlobals, GetTotalBad)
         HRESULT ( STDMETHODCALLTYPE *GetTotalBad )( 
             __RPC__in IWMDMStorageGlobals * This,
             /* [out] */ __RPC__out DWORD *pdwBadLow,
             /* [out] */ __RPC__out DWORD *pdwBadHigh);
         
+        DECLSPEC_XFGVIRT(IWMDMStorageGlobals, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in IWMDMStorageGlobals * This,
             /* [out] */ __RPC__out DWORD *pdwStatus);
         
+        DECLSPEC_XFGVIRT(IWMDMStorageGlobals, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IWMDMStorageGlobals * This,
             /* [in] */ UINT fuMode,
@@ -1709,56 +1759,68 @@ EXTERN_C const IID IID_IWMDMStorage;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMDMStorage * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMDMStorage * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMDMStorage * This);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, SetAttributes)
         HRESULT ( STDMETHODCALLTYPE *SetAttributes )( 
             __RPC__in IWMDMStorage * This,
             /* [in] */ DWORD dwAttributes,
             /* [unique][in] */ __RPC__in_opt _WAVEFORMATEX *pFormat);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, GetStorageGlobals)
         HRESULT ( STDMETHODCALLTYPE *GetStorageGlobals )( 
             __RPC__in IWMDMStorage * This,
             /* [out] */ __RPC__deref_out_opt IWMDMStorageGlobals **ppStorageGlobals);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, GetAttributes)
         HRESULT ( STDMETHODCALLTYPE *GetAttributes )( 
             __RPC__in IWMDMStorage * This,
             /* [out] */ __RPC__out DWORD *pdwAttributes,
             /* [unique][out][in] */ __RPC__inout_opt _WAVEFORMATEX *pFormat);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in IWMDMStorage * This,
             /* [size_is][string][out] */ __RPC__out_ecount_full_string(nMaxChars) LPWSTR pwszName,
             /* [in] */ UINT nMaxChars);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, GetDate)
         HRESULT ( STDMETHODCALLTYPE *GetDate )( 
             __RPC__in IWMDMStorage * This,
             /* [out] */ __RPC__out PWMDMDATETIME pDateTimeUTC);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, GetSize)
         HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             __RPC__in IWMDMStorage * This,
             /* [out] */ __RPC__out DWORD *pdwSizeLow,
             /* [out] */ __RPC__out DWORD *pdwSizeHigh);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, GetRights)
         HRESULT ( STDMETHODCALLTYPE *GetRights )( 
             __RPC__in IWMDMStorage * This,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pnRightsCount) PWMDMRIGHTS *ppRights,
             /* [out] */ __RPC__out UINT *pnRightsCount,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, EnumStorage)
         HRESULT ( STDMETHODCALLTYPE *EnumStorage )( 
             __RPC__in IWMDMStorage * This,
             /* [out] */ __RPC__deref_out_opt IWMDMEnumStorage **pEnumStorage);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, SendOpaqueCommand)
         HRESULT ( STDMETHODCALLTYPE *SendOpaqueCommand )( 
             __RPC__in IWMDMStorage * This,
             /* [out][in] */ __RPC__inout OPAQUECOMMAND *pCommand);
@@ -1864,65 +1926,79 @@ EXTERN_C const IID IID_IWMDMStorage2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMDMStorage2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMDMStorage2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMDMStorage2 * This);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, SetAttributes)
         HRESULT ( STDMETHODCALLTYPE *SetAttributes )( 
             __RPC__in IWMDMStorage2 * This,
             /* [in] */ DWORD dwAttributes,
             /* [unique][in] */ __RPC__in_opt _WAVEFORMATEX *pFormat);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, GetStorageGlobals)
         HRESULT ( STDMETHODCALLTYPE *GetStorageGlobals )( 
             __RPC__in IWMDMStorage2 * This,
             /* [out] */ __RPC__deref_out_opt IWMDMStorageGlobals **ppStorageGlobals);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, GetAttributes)
         HRESULT ( STDMETHODCALLTYPE *GetAttributes )( 
             __RPC__in IWMDMStorage2 * This,
             /* [out] */ __RPC__out DWORD *pdwAttributes,
             /* [unique][out][in] */ __RPC__inout_opt _WAVEFORMATEX *pFormat);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in IWMDMStorage2 * This,
             /* [size_is][string][out] */ __RPC__out_ecount_full_string(nMaxChars) LPWSTR pwszName,
             /* [in] */ UINT nMaxChars);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, GetDate)
         HRESULT ( STDMETHODCALLTYPE *GetDate )( 
             __RPC__in IWMDMStorage2 * This,
             /* [out] */ __RPC__out PWMDMDATETIME pDateTimeUTC);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, GetSize)
         HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             __RPC__in IWMDMStorage2 * This,
             /* [out] */ __RPC__out DWORD *pdwSizeLow,
             /* [out] */ __RPC__out DWORD *pdwSizeHigh);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, GetRights)
         HRESULT ( STDMETHODCALLTYPE *GetRights )( 
             __RPC__in IWMDMStorage2 * This,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pnRightsCount) PWMDMRIGHTS *ppRights,
             /* [out] */ __RPC__out UINT *pnRightsCount,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, EnumStorage)
         HRESULT ( STDMETHODCALLTYPE *EnumStorage )( 
             __RPC__in IWMDMStorage2 * This,
             /* [out] */ __RPC__deref_out_opt IWMDMEnumStorage **pEnumStorage);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, SendOpaqueCommand)
         HRESULT ( STDMETHODCALLTYPE *SendOpaqueCommand )( 
             __RPC__in IWMDMStorage2 * This,
             /* [out][in] */ __RPC__inout OPAQUECOMMAND *pCommand);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage2, GetStorage)
         HRESULT ( STDMETHODCALLTYPE *GetStorage )( 
             __RPC__in IWMDMStorage2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszStorageName,
             /* [out] */ __RPC__deref_out_opt IWMDMStorage **ppStorage);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage2, SetAttributes2)
         HRESULT ( STDMETHODCALLTYPE *SetAttributes2 )( 
             __RPC__in IWMDMStorage2 * This,
             /* [in] */ DWORD dwAttributes,
@@ -1930,6 +2006,7 @@ EXTERN_C const IID IID_IWMDMStorage2;
             /* [unique][in] */ __RPC__in_opt _WAVEFORMATEX *pFormat,
             /* [unique][in] */ __RPC__in_opt _VIDEOINFOHEADER *pVideoFormat);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage2, GetAttributes2)
         HRESULT ( STDMETHODCALLTYPE *GetAttributes2 )( 
             __RPC__in IWMDMStorage2 * This,
             /* [out] */ __RPC__out DWORD *pdwAttributes,
@@ -2046,65 +2123,79 @@ EXTERN_C const IID IID_IWMDMStorage3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMDMStorage3 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMDMStorage3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMDMStorage3 * This);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, SetAttributes)
         HRESULT ( STDMETHODCALLTYPE *SetAttributes )( 
             __RPC__in IWMDMStorage3 * This,
             /* [in] */ DWORD dwAttributes,
             /* [unique][in] */ __RPC__in_opt _WAVEFORMATEX *pFormat);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, GetStorageGlobals)
         HRESULT ( STDMETHODCALLTYPE *GetStorageGlobals )( 
             __RPC__in IWMDMStorage3 * This,
             /* [out] */ __RPC__deref_out_opt IWMDMStorageGlobals **ppStorageGlobals);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, GetAttributes)
         HRESULT ( STDMETHODCALLTYPE *GetAttributes )( 
             __RPC__in IWMDMStorage3 * This,
             /* [out] */ __RPC__out DWORD *pdwAttributes,
             /* [unique][out][in] */ __RPC__inout_opt _WAVEFORMATEX *pFormat);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in IWMDMStorage3 * This,
             /* [size_is][string][out] */ __RPC__out_ecount_full_string(nMaxChars) LPWSTR pwszName,
             /* [in] */ UINT nMaxChars);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, GetDate)
         HRESULT ( STDMETHODCALLTYPE *GetDate )( 
             __RPC__in IWMDMStorage3 * This,
             /* [out] */ __RPC__out PWMDMDATETIME pDateTimeUTC);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, GetSize)
         HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             __RPC__in IWMDMStorage3 * This,
             /* [out] */ __RPC__out DWORD *pdwSizeLow,
             /* [out] */ __RPC__out DWORD *pdwSizeHigh);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, GetRights)
         HRESULT ( STDMETHODCALLTYPE *GetRights )( 
             __RPC__in IWMDMStorage3 * This,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pnRightsCount) PWMDMRIGHTS *ppRights,
             /* [out] */ __RPC__out UINT *pnRightsCount,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, EnumStorage)
         HRESULT ( STDMETHODCALLTYPE *EnumStorage )( 
             __RPC__in IWMDMStorage3 * This,
             /* [out] */ __RPC__deref_out_opt IWMDMEnumStorage **pEnumStorage);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, SendOpaqueCommand)
         HRESULT ( STDMETHODCALLTYPE *SendOpaqueCommand )( 
             __RPC__in IWMDMStorage3 * This,
             /* [out][in] */ __RPC__inout OPAQUECOMMAND *pCommand);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage2, GetStorage)
         HRESULT ( STDMETHODCALLTYPE *GetStorage )( 
             __RPC__in IWMDMStorage3 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszStorageName,
             /* [out] */ __RPC__deref_out_opt IWMDMStorage **ppStorage);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage2, SetAttributes2)
         HRESULT ( STDMETHODCALLTYPE *SetAttributes2 )( 
             __RPC__in IWMDMStorage3 * This,
             /* [in] */ DWORD dwAttributes,
@@ -2112,6 +2203,7 @@ EXTERN_C const IID IID_IWMDMStorage3;
             /* [unique][in] */ __RPC__in_opt _WAVEFORMATEX *pFormat,
             /* [unique][in] */ __RPC__in_opt _VIDEOINFOHEADER *pVideoFormat);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage2, GetAttributes2)
         HRESULT ( STDMETHODCALLTYPE *GetAttributes2 )( 
             __RPC__in IWMDMStorage3 * This,
             /* [out] */ __RPC__out DWORD *pdwAttributes,
@@ -2119,18 +2211,22 @@ EXTERN_C const IID IID_IWMDMStorage3;
             /* [unique][out][in] */ __RPC__inout_opt _WAVEFORMATEX *pAudioFormat,
             /* [unique][out][in] */ __RPC__inout_opt _VIDEOINFOHEADER *pVideoFormat);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage3, GetMetadata)
         HRESULT ( STDMETHODCALLTYPE *GetMetadata )( 
             __RPC__in IWMDMStorage3 * This,
             /* [out] */ __RPC__deref_out_opt IWMDMMetaData **ppMetadata);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage3, SetMetadata)
         HRESULT ( STDMETHODCALLTYPE *SetMetadata )( 
             __RPC__in IWMDMStorage3 * This,
             /* [in] */ __RPC__in_opt IWMDMMetaData *pMetadata);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage3, CreateEmptyMetadataObject)
         HRESULT ( STDMETHODCALLTYPE *CreateEmptyMetadataObject )( 
             __RPC__in IWMDMStorage3 * This,
             /* [out] */ __RPC__deref_out_opt IWMDMMetaData **ppMetadata);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage3, SetEnumPreference)
         HRESULT ( STDMETHODCALLTYPE *SetEnumPreference )( 
             __RPC__in IWMDMStorage3 * This,
             /* [out][in] */ __RPC__inout WMDM_STORAGE_ENUM_MODE *pMode,
@@ -2271,65 +2367,79 @@ EXTERN_C const IID IID_IWMDMStorage4;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMDMStorage4 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMDMStorage4 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMDMStorage4 * This);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, SetAttributes)
         HRESULT ( STDMETHODCALLTYPE *SetAttributes )( 
             __RPC__in IWMDMStorage4 * This,
             /* [in] */ DWORD dwAttributes,
             /* [unique][in] */ __RPC__in_opt _WAVEFORMATEX *pFormat);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, GetStorageGlobals)
         HRESULT ( STDMETHODCALLTYPE *GetStorageGlobals )( 
             __RPC__in IWMDMStorage4 * This,
             /* [out] */ __RPC__deref_out_opt IWMDMStorageGlobals **ppStorageGlobals);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, GetAttributes)
         HRESULT ( STDMETHODCALLTYPE *GetAttributes )( 
             __RPC__in IWMDMStorage4 * This,
             /* [out] */ __RPC__out DWORD *pdwAttributes,
             /* [unique][out][in] */ __RPC__inout_opt _WAVEFORMATEX *pFormat);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in IWMDMStorage4 * This,
             /* [size_is][string][out] */ __RPC__out_ecount_full_string(nMaxChars) LPWSTR pwszName,
             /* [in] */ UINT nMaxChars);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, GetDate)
         HRESULT ( STDMETHODCALLTYPE *GetDate )( 
             __RPC__in IWMDMStorage4 * This,
             /* [out] */ __RPC__out PWMDMDATETIME pDateTimeUTC);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, GetSize)
         HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             __RPC__in IWMDMStorage4 * This,
             /* [out] */ __RPC__out DWORD *pdwSizeLow,
             /* [out] */ __RPC__out DWORD *pdwSizeHigh);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, GetRights)
         HRESULT ( STDMETHODCALLTYPE *GetRights )( 
             __RPC__in IWMDMStorage4 * This,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pnRightsCount) PWMDMRIGHTS *ppRights,
             /* [out] */ __RPC__out UINT *pnRightsCount,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, EnumStorage)
         HRESULT ( STDMETHODCALLTYPE *EnumStorage )( 
             __RPC__in IWMDMStorage4 * This,
             /* [out] */ __RPC__deref_out_opt IWMDMEnumStorage **pEnumStorage);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage, SendOpaqueCommand)
         HRESULT ( STDMETHODCALLTYPE *SendOpaqueCommand )( 
             __RPC__in IWMDMStorage4 * This,
             /* [out][in] */ __RPC__inout OPAQUECOMMAND *pCommand);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage2, GetStorage)
         HRESULT ( STDMETHODCALLTYPE *GetStorage )( 
             __RPC__in IWMDMStorage4 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszStorageName,
             /* [out] */ __RPC__deref_out_opt IWMDMStorage **ppStorage);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage2, SetAttributes2)
         HRESULT ( STDMETHODCALLTYPE *SetAttributes2 )( 
             __RPC__in IWMDMStorage4 * This,
             /* [in] */ DWORD dwAttributes,
@@ -2337,6 +2447,7 @@ EXTERN_C const IID IID_IWMDMStorage4;
             /* [unique][in] */ __RPC__in_opt _WAVEFORMATEX *pFormat,
             /* [unique][in] */ __RPC__in_opt _VIDEOINFOHEADER *pVideoFormat);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage2, GetAttributes2)
         HRESULT ( STDMETHODCALLTYPE *GetAttributes2 )( 
             __RPC__in IWMDMStorage4 * This,
             /* [out] */ __RPC__out DWORD *pdwAttributes,
@@ -2344,52 +2455,62 @@ EXTERN_C const IID IID_IWMDMStorage4;
             /* [unique][out][in] */ __RPC__inout_opt _WAVEFORMATEX *pAudioFormat,
             /* [unique][out][in] */ __RPC__inout_opt _VIDEOINFOHEADER *pVideoFormat);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage3, GetMetadata)
         HRESULT ( STDMETHODCALLTYPE *GetMetadata )( 
             __RPC__in IWMDMStorage4 * This,
             /* [out] */ __RPC__deref_out_opt IWMDMMetaData **ppMetadata);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage3, SetMetadata)
         HRESULT ( STDMETHODCALLTYPE *SetMetadata )( 
             __RPC__in IWMDMStorage4 * This,
             /* [in] */ __RPC__in_opt IWMDMMetaData *pMetadata);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage3, CreateEmptyMetadataObject)
         HRESULT ( STDMETHODCALLTYPE *CreateEmptyMetadataObject )( 
             __RPC__in IWMDMStorage4 * This,
             /* [out] */ __RPC__deref_out_opt IWMDMMetaData **ppMetadata);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage3, SetEnumPreference)
         HRESULT ( STDMETHODCALLTYPE *SetEnumPreference )( 
             __RPC__in IWMDMStorage4 * This,
             /* [out][in] */ __RPC__inout WMDM_STORAGE_ENUM_MODE *pMode,
             /* [in] */ DWORD nViews,
             /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(nViews) WMDMMetadataView *pViews);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage4, SetReferences)
         HRESULT ( STDMETHODCALLTYPE *SetReferences )( 
             __RPC__in IWMDMStorage4 * This,
             /* [in] */ DWORD dwRefs,
             /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(dwRefs) IWMDMStorage **ppIWMDMStorage);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage4, GetReferences)
         HRESULT ( STDMETHODCALLTYPE *GetReferences )( 
             __RPC__in IWMDMStorage4 * This,
             /* [out] */ __RPC__out DWORD *pdwRefs,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pdwRefs) IWMDMStorage ***pppIWMDMStorage);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage4, GetRightsWithProgress)
         HRESULT ( STDMETHODCALLTYPE *GetRightsWithProgress )( 
             __RPC__in IWMDMStorage4 * This,
             /* [in] */ __RPC__in_opt IWMDMProgress3 *pIProgressCallback,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pnRightsCount) PWMDMRIGHTS *ppRights,
             /* [out] */ __RPC__out UINT *pnRightsCount);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage4, GetSpecifiedMetadata)
         HRESULT ( STDMETHODCALLTYPE *GetSpecifiedMetadata )( 
             __RPC__in IWMDMStorage4 * This,
             /* [in] */ DWORD cProperties,
             /* [size_is][in] */ __RPC__in_ecount_full(cProperties) LPCWSTR *ppwszPropNames,
             /* [out] */ __RPC__deref_out_opt IWMDMMetaData **ppMetadata);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage4, FindStorage)
         HRESULT ( STDMETHODCALLTYPE *FindStorage )( 
             __RPC__in IWMDMStorage4 * This,
             /* [in] */ WMDM_FIND_SCOPE findScope,
             /* [in] */ __RPC__in LPCWSTR pwszUniqueID,
             /* [out] */ __RPC__deref_out_opt IWMDMStorage **ppStorage);
         
+        DECLSPEC_XFGVIRT(IWMDMStorage4, GetParent)
         HRESULT ( STDMETHODCALLTYPE *GetParent )( 
             __RPC__in IWMDMStorage4 * This,
             /* [out] */ __RPC__deref_out_opt IWMDMStorage **ppStorage);
@@ -2558,60 +2679,73 @@ EXTERN_C const IID IID_IWMDMOperation;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMDMOperation * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMDMOperation * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMDMOperation * This);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation, BeginRead)
         HRESULT ( STDMETHODCALLTYPE *BeginRead )( 
             __RPC__in IWMDMOperation * This);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation, BeginWrite)
         HRESULT ( STDMETHODCALLTYPE *BeginWrite )( 
             __RPC__in IWMDMOperation * This);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation, GetObjectName)
         HRESULT ( STDMETHODCALLTYPE *GetObjectName )( 
             __RPC__in IWMDMOperation * This,
             /* [size_is][string][out] */ __RPC__out_ecount_full_string(nMaxChars) LPWSTR pwszName,
             /* [in] */ UINT nMaxChars);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation, SetObjectName)
         HRESULT ( STDMETHODCALLTYPE *SetObjectName )( 
             __RPC__in IWMDMOperation * This,
             /* [size_is][string][in] */ __RPC__in_ecount_full_string(nMaxChars) LPWSTR pwszName,
             /* [in] */ UINT nMaxChars);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation, GetObjectAttributes)
         HRESULT ( STDMETHODCALLTYPE *GetObjectAttributes )( 
             __RPC__in IWMDMOperation * This,
             /* [out] */ __RPC__out DWORD *pdwAttributes,
             /* [unique][out][in] */ __RPC__inout_opt _WAVEFORMATEX *pFormat);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation, SetObjectAttributes)
         HRESULT ( STDMETHODCALLTYPE *SetObjectAttributes )( 
             __RPC__in IWMDMOperation * This,
             /* [in] */ DWORD dwAttributes,
             /* [unique][in] */ __RPC__in_opt _WAVEFORMATEX *pFormat);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation, GetObjectTotalSize)
         HRESULT ( STDMETHODCALLTYPE *GetObjectTotalSize )( 
             __RPC__in IWMDMOperation * This,
             /* [out] */ __RPC__out DWORD *pdwSize,
             /* [out] */ __RPC__out DWORD *pdwSizeHigh);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation, SetObjectTotalSize)
         HRESULT ( STDMETHODCALLTYPE *SetObjectTotalSize )( 
             __RPC__in IWMDMOperation * This,
             /* [in] */ DWORD dwSize,
             /* [in] */ DWORD dwSizeHigh);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation, TransferObjectData)
         HRESULT ( STDMETHODCALLTYPE *TransferObjectData )( 
             __RPC__in IWMDMOperation * This,
             /* [size_is][out][in] */ __RPC__inout_ecount_full(*pdwSize) BYTE *pData,
             /* [out][in] */ __RPC__inout DWORD *pdwSize,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation, End)
         HRESULT ( STDMETHODCALLTYPE *End )( 
             __RPC__in IWMDMOperation * This,
             /* [in] */ __RPC__in HRESULT *phCompletionCode,
@@ -2717,65 +2851,79 @@ EXTERN_C const IID IID_IWMDMOperation2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMDMOperation2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMDMOperation2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMDMOperation2 * This);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation, BeginRead)
         HRESULT ( STDMETHODCALLTYPE *BeginRead )( 
             __RPC__in IWMDMOperation2 * This);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation, BeginWrite)
         HRESULT ( STDMETHODCALLTYPE *BeginWrite )( 
             __RPC__in IWMDMOperation2 * This);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation, GetObjectName)
         HRESULT ( STDMETHODCALLTYPE *GetObjectName )( 
             __RPC__in IWMDMOperation2 * This,
             /* [size_is][string][out] */ __RPC__out_ecount_full_string(nMaxChars) LPWSTR pwszName,
             /* [in] */ UINT nMaxChars);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation, SetObjectName)
         HRESULT ( STDMETHODCALLTYPE *SetObjectName )( 
             __RPC__in IWMDMOperation2 * This,
             /* [size_is][string][in] */ __RPC__in_ecount_full_string(nMaxChars) LPWSTR pwszName,
             /* [in] */ UINT nMaxChars);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation, GetObjectAttributes)
         HRESULT ( STDMETHODCALLTYPE *GetObjectAttributes )( 
             __RPC__in IWMDMOperation2 * This,
             /* [out] */ __RPC__out DWORD *pdwAttributes,
             /* [unique][out][in] */ __RPC__inout_opt _WAVEFORMATEX *pFormat);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation, SetObjectAttributes)
         HRESULT ( STDMETHODCALLTYPE *SetObjectAttributes )( 
             __RPC__in IWMDMOperation2 * This,
             /* [in] */ DWORD dwAttributes,
             /* [unique][in] */ __RPC__in_opt _WAVEFORMATEX *pFormat);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation, GetObjectTotalSize)
         HRESULT ( STDMETHODCALLTYPE *GetObjectTotalSize )( 
             __RPC__in IWMDMOperation2 * This,
             /* [out] */ __RPC__out DWORD *pdwSize,
             /* [out] */ __RPC__out DWORD *pdwSizeHigh);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation, SetObjectTotalSize)
         HRESULT ( STDMETHODCALLTYPE *SetObjectTotalSize )( 
             __RPC__in IWMDMOperation2 * This,
             /* [in] */ DWORD dwSize,
             /* [in] */ DWORD dwSizeHigh);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation, TransferObjectData)
         HRESULT ( STDMETHODCALLTYPE *TransferObjectData )( 
             __RPC__in IWMDMOperation2 * This,
             /* [size_is][out][in] */ __RPC__inout_ecount_full(*pdwSize) BYTE *pData,
             /* [out][in] */ __RPC__inout DWORD *pdwSize,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation, End)
         HRESULT ( STDMETHODCALLTYPE *End )( 
             __RPC__in IWMDMOperation2 * This,
             /* [in] */ __RPC__in HRESULT *phCompletionCode,
             /* [in] */ __RPC__in_opt IUnknown *pNewObject);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation2, SetObjectAttributes2)
         HRESULT ( STDMETHODCALLTYPE *SetObjectAttributes2 )( 
             __RPC__in IWMDMOperation2 * This,
             /* [in] */ DWORD dwAttributes,
@@ -2783,6 +2931,7 @@ EXTERN_C const IID IID_IWMDMOperation2;
             /* [unique][in] */ __RPC__in_opt _WAVEFORMATEX *pFormat,
             /* [unique][in] */ __RPC__in_opt _VIDEOINFOHEADER *pVideoFormat);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation2, GetObjectAttributes2)
         HRESULT ( STDMETHODCALLTYPE *GetObjectAttributes2 )( 
             __RPC__in IWMDMOperation2 * This,
             /* [out] */ __RPC__out DWORD *pdwAttributes,
@@ -2889,65 +3038,79 @@ EXTERN_C const IID IID_IWMDMOperation3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMDMOperation3 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMDMOperation3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMDMOperation3 * This);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation, BeginRead)
         HRESULT ( STDMETHODCALLTYPE *BeginRead )( 
             __RPC__in IWMDMOperation3 * This);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation, BeginWrite)
         HRESULT ( STDMETHODCALLTYPE *BeginWrite )( 
             __RPC__in IWMDMOperation3 * This);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation, GetObjectName)
         HRESULT ( STDMETHODCALLTYPE *GetObjectName )( 
             __RPC__in IWMDMOperation3 * This,
             /* [size_is][string][out] */ __RPC__out_ecount_full_string(nMaxChars) LPWSTR pwszName,
             /* [in] */ UINT nMaxChars);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation, SetObjectName)
         HRESULT ( STDMETHODCALLTYPE *SetObjectName )( 
             __RPC__in IWMDMOperation3 * This,
             /* [size_is][string][in] */ __RPC__in_ecount_full_string(nMaxChars) LPWSTR pwszName,
             /* [in] */ UINT nMaxChars);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation, GetObjectAttributes)
         HRESULT ( STDMETHODCALLTYPE *GetObjectAttributes )( 
             __RPC__in IWMDMOperation3 * This,
             /* [out] */ __RPC__out DWORD *pdwAttributes,
             /* [unique][out][in] */ __RPC__inout_opt _WAVEFORMATEX *pFormat);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation, SetObjectAttributes)
         HRESULT ( STDMETHODCALLTYPE *SetObjectAttributes )( 
             __RPC__in IWMDMOperation3 * This,
             /* [in] */ DWORD dwAttributes,
             /* [unique][in] */ __RPC__in_opt _WAVEFORMATEX *pFormat);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation, GetObjectTotalSize)
         HRESULT ( STDMETHODCALLTYPE *GetObjectTotalSize )( 
             __RPC__in IWMDMOperation3 * This,
             /* [out] */ __RPC__out DWORD *pdwSize,
             /* [out] */ __RPC__out DWORD *pdwSizeHigh);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation, SetObjectTotalSize)
         HRESULT ( STDMETHODCALLTYPE *SetObjectTotalSize )( 
             __RPC__in IWMDMOperation3 * This,
             /* [in] */ DWORD dwSize,
             /* [in] */ DWORD dwSizeHigh);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation, TransferObjectData)
         HRESULT ( STDMETHODCALLTYPE *TransferObjectData )( 
             __RPC__in IWMDMOperation3 * This,
             /* [size_is][out][in] */ __RPC__inout_ecount_full(*pdwSize) BYTE *pData,
             /* [out][in] */ __RPC__inout DWORD *pdwSize,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation, End)
         HRESULT ( STDMETHODCALLTYPE *End )( 
             __RPC__in IWMDMOperation3 * This,
             /* [in] */ __RPC__in HRESULT *phCompletionCode,
             /* [in] */ __RPC__in_opt IUnknown *pNewObject);
         
+        DECLSPEC_XFGVIRT(IWMDMOperation3, TransferObjectDataOnClearChannel)
         HRESULT ( STDMETHODCALLTYPE *TransferObjectDataOnClearChannel )( 
             __RPC__in IWMDMOperation3 * This,
             /* [size_is][out][in] */ __RPC__inout_ecount_full(*pdwSize) BYTE *pData,
@@ -3053,26 +3216,32 @@ EXTERN_C const IID IID_IWMDMProgress;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMDMProgress * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMDMProgress * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMDMProgress * This);
         
+        DECLSPEC_XFGVIRT(IWMDMProgress, Begin)
         HRESULT ( STDMETHODCALLTYPE *Begin )( 
             __RPC__in IWMDMProgress * This,
             /* [in] */ DWORD dwEstimatedTicks);
         
+        DECLSPEC_XFGVIRT(IWMDMProgress, Progress)
         HRESULT ( STDMETHODCALLTYPE *Progress )( 
             __RPC__in IWMDMProgress * This,
             /* [in] */ DWORD dwTranspiredTicks);
         
+        DECLSPEC_XFGVIRT(IWMDMProgress, End)
         HRESULT ( STDMETHODCALLTYPE *End )( 
             __RPC__in IWMDMProgress * This);
         
@@ -3146,29 +3315,36 @@ EXTERN_C const IID IID_IWMDMProgress2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMDMProgress2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMDMProgress2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMDMProgress2 * This);
         
+        DECLSPEC_XFGVIRT(IWMDMProgress, Begin)
         HRESULT ( STDMETHODCALLTYPE *Begin )( 
             __RPC__in IWMDMProgress2 * This,
             /* [in] */ DWORD dwEstimatedTicks);
         
+        DECLSPEC_XFGVIRT(IWMDMProgress, Progress)
         HRESULT ( STDMETHODCALLTYPE *Progress )( 
             __RPC__in IWMDMProgress2 * This,
             /* [in] */ DWORD dwTranspiredTicks);
         
+        DECLSPEC_XFGVIRT(IWMDMProgress, End)
         HRESULT ( STDMETHODCALLTYPE *End )( 
             __RPC__in IWMDMProgress2 * This);
         
+        DECLSPEC_XFGVIRT(IWMDMProgress2, End2)
         HRESULT ( STDMETHODCALLTYPE *End2 )( 
             __RPC__in IWMDMProgress2 * This,
             /* [in] */ HRESULT hrCompletionCode);
@@ -3259,45 +3435,55 @@ EXTERN_C const IID IID_IWMDMProgress3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMDMProgress3 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMDMProgress3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMDMProgress3 * This);
         
+        DECLSPEC_XFGVIRT(IWMDMProgress, Begin)
         HRESULT ( STDMETHODCALLTYPE *Begin )( 
             __RPC__in IWMDMProgress3 * This,
             /* [in] */ DWORD dwEstimatedTicks);
         
+        DECLSPEC_XFGVIRT(IWMDMProgress, Progress)
         HRESULT ( STDMETHODCALLTYPE *Progress )( 
             __RPC__in IWMDMProgress3 * This,
             /* [in] */ DWORD dwTranspiredTicks);
         
+        DECLSPEC_XFGVIRT(IWMDMProgress, End)
         HRESULT ( STDMETHODCALLTYPE *End )( 
             __RPC__in IWMDMProgress3 * This);
         
+        DECLSPEC_XFGVIRT(IWMDMProgress2, End2)
         HRESULT ( STDMETHODCALLTYPE *End2 )( 
             __RPC__in IWMDMProgress3 * This,
             /* [in] */ HRESULT hrCompletionCode);
         
+        DECLSPEC_XFGVIRT(IWMDMProgress3, Begin3)
         HRESULT ( STDMETHODCALLTYPE *Begin3 )( 
             __RPC__in IWMDMProgress3 * This,
             /* [in] */ GUID EventId,
             /* [in] */ DWORD dwEstimatedTicks,
             /* [unique][out][in] */ __RPC__inout_opt OPAQUECOMMAND *pContext);
         
+        DECLSPEC_XFGVIRT(IWMDMProgress3, Progress3)
         HRESULT ( STDMETHODCALLTYPE *Progress3 )( 
             __RPC__in IWMDMProgress3 * This,
             /* [in] */ GUID EventId,
             /* [in] */ DWORD dwTranspiredTicks,
             /* [unique][out][in] */ __RPC__inout_opt OPAQUECOMMAND *pContext);
         
+        DECLSPEC_XFGVIRT(IWMDMProgress3, End3)
         HRESULT ( STDMETHODCALLTYPE *End3 )( 
             __RPC__in IWMDMProgress3 * This,
             /* [in] */ GUID EventId,
@@ -3425,58 +3611,71 @@ EXTERN_C const IID IID_IWMDMDevice;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMDMDevice * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMDMDevice * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMDMDevice * This);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in IWMDMDevice * This,
             /* [size_is][string][out] */ __RPC__out_ecount_full_string(nMaxChars) LPWSTR pwszName,
             /* [in] */ UINT nMaxChars);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, GetManufacturer)
         HRESULT ( STDMETHODCALLTYPE *GetManufacturer )( 
             __RPC__in IWMDMDevice * This,
             /* [size_is][string][out] */ __RPC__out_ecount_full_string(nMaxChars) LPWSTR pwszName,
             /* [in] */ UINT nMaxChars);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, GetVersion)
         HRESULT ( STDMETHODCALLTYPE *GetVersion )( 
             __RPC__in IWMDMDevice * This,
             /* [out] */ __RPC__out DWORD *pdwVersion);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, GetType)
         HRESULT ( STDMETHODCALLTYPE *GetType )( 
             __RPC__in IWMDMDevice * This,
             /* [out] */ __RPC__out DWORD *pdwType);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, GetSerialNumber)
         HRESULT ( STDMETHODCALLTYPE *GetSerialNumber )( 
             __RPC__in IWMDMDevice * This,
             /* [out] */ __RPC__out PWMDMID pSerialNumber,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, GetPowerSource)
         HRESULT ( STDMETHODCALLTYPE *GetPowerSource )( 
             __RPC__in IWMDMDevice * This,
             /* [out] */ __RPC__out DWORD *pdwPowerSource,
             /* [out] */ __RPC__out DWORD *pdwPercentRemaining);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in IWMDMDevice * This,
             /* [out] */ __RPC__out DWORD *pdwStatus);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, GetDeviceIcon)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceIcon )( 
             __RPC__in IWMDMDevice * This,
             /* [out] */ __RPC__out ULONG *hIcon);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, EnumStorage)
         HRESULT ( STDMETHODCALLTYPE *EnumStorage )( 
             __RPC__in IWMDMDevice * This,
             /* [out] */ __RPC__deref_out_opt IWMDMEnumStorage **ppEnumStorage);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, GetFormatSupport)
         HRESULT ( STDMETHODCALLTYPE *GetFormatSupport )( 
             __RPC__in IWMDMDevice * This,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pnFormatCount) _WAVEFORMATEX **ppFormatEx,
@@ -3484,6 +3683,7 @@ EXTERN_C const IID IID_IWMDMDevice;
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pnMimeTypeCount) LPWSTR **pppwszMimeType,
             /* [out] */ __RPC__out UINT *pnMimeTypeCount);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, SendOpaqueCommand)
         HRESULT ( STDMETHODCALLTYPE *SendOpaqueCommand )( 
             __RPC__in IWMDMDevice * This,
             /* [out][in] */ __RPC__inout OPAQUECOMMAND *pCommand);
@@ -3601,58 +3801,71 @@ EXTERN_C const IID IID_IWMDMDevice2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMDMDevice2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMDMDevice2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMDMDevice2 * This);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in IWMDMDevice2 * This,
             /* [size_is][string][out] */ __RPC__out_ecount_full_string(nMaxChars) LPWSTR pwszName,
             /* [in] */ UINT nMaxChars);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, GetManufacturer)
         HRESULT ( STDMETHODCALLTYPE *GetManufacturer )( 
             __RPC__in IWMDMDevice2 * This,
             /* [size_is][string][out] */ __RPC__out_ecount_full_string(nMaxChars) LPWSTR pwszName,
             /* [in] */ UINT nMaxChars);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, GetVersion)
         HRESULT ( STDMETHODCALLTYPE *GetVersion )( 
             __RPC__in IWMDMDevice2 * This,
             /* [out] */ __RPC__out DWORD *pdwVersion);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, GetType)
         HRESULT ( STDMETHODCALLTYPE *GetType )( 
             __RPC__in IWMDMDevice2 * This,
             /* [out] */ __RPC__out DWORD *pdwType);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, GetSerialNumber)
         HRESULT ( STDMETHODCALLTYPE *GetSerialNumber )( 
             __RPC__in IWMDMDevice2 * This,
             /* [out] */ __RPC__out PWMDMID pSerialNumber,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, GetPowerSource)
         HRESULT ( STDMETHODCALLTYPE *GetPowerSource )( 
             __RPC__in IWMDMDevice2 * This,
             /* [out] */ __RPC__out DWORD *pdwPowerSource,
             /* [out] */ __RPC__out DWORD *pdwPercentRemaining);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in IWMDMDevice2 * This,
             /* [out] */ __RPC__out DWORD *pdwStatus);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, GetDeviceIcon)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceIcon )( 
             __RPC__in IWMDMDevice2 * This,
             /* [out] */ __RPC__out ULONG *hIcon);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, EnumStorage)
         HRESULT ( STDMETHODCALLTYPE *EnumStorage )( 
             __RPC__in IWMDMDevice2 * This,
             /* [out] */ __RPC__deref_out_opt IWMDMEnumStorage **ppEnumStorage);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, GetFormatSupport)
         HRESULT ( STDMETHODCALLTYPE *GetFormatSupport )( 
             __RPC__in IWMDMDevice2 * This,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pnFormatCount) _WAVEFORMATEX **ppFormatEx,
@@ -3660,15 +3873,18 @@ EXTERN_C const IID IID_IWMDMDevice2;
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pnMimeTypeCount) LPWSTR **pppwszMimeType,
             /* [out] */ __RPC__out UINT *pnMimeTypeCount);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, SendOpaqueCommand)
         HRESULT ( STDMETHODCALLTYPE *SendOpaqueCommand )( 
             __RPC__in IWMDMDevice2 * This,
             /* [out][in] */ __RPC__inout OPAQUECOMMAND *pCommand);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice2, GetStorage)
         HRESULT ( STDMETHODCALLTYPE *GetStorage )( 
             __RPC__in IWMDMDevice2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszStorageName,
             /* [out] */ __RPC__deref_out_opt IWMDMStorage **ppStorage);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice2, GetFormatSupport2)
         HRESULT ( STDMETHODCALLTYPE *GetFormatSupport2 )( 
             __RPC__in IWMDMDevice2 * This,
             /* [in] */ DWORD dwFlags,
@@ -3679,12 +3895,14 @@ EXTERN_C const IID IID_IWMDMDevice2;
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pnFileTypeCount) WMFILECAPABILITIES **ppFileType,
             /* [ref][out] */ __RPC__out UINT *pnFileTypeCount);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice2, GetSpecifyPropertyPages)
         HRESULT ( STDMETHODCALLTYPE *GetSpecifyPropertyPages )( 
             __RPC__in IWMDMDevice2 * This,
             /* [ref][out] */ __RPC__deref_out_opt ISpecifyPropertyPages **ppSpecifyPropPages,
             /* [size_is][size_is][ref][out] */ __RPC__deref_out_ecount_full_opt(*pcUnks) IUnknown ***pppUnknowns,
             /* [ref][out] */ __RPC__out ULONG *pcUnks);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice2, GetCanonicalName)
         HRESULT ( STDMETHODCALLTYPE *GetCanonicalName )( 
             __RPC__in IWMDMDevice2 * This,
             /* [size_is][out] */ __RPC__out_ecount_full(nMaxChars) LPWSTR pwszPnPName,
@@ -3818,58 +4036,71 @@ EXTERN_C const IID IID_IWMDMDevice3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMDMDevice3 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMDMDevice3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMDMDevice3 * This);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in IWMDMDevice3 * This,
             /* [size_is][string][out] */ __RPC__out_ecount_full_string(nMaxChars) LPWSTR pwszName,
             /* [in] */ UINT nMaxChars);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, GetManufacturer)
         HRESULT ( STDMETHODCALLTYPE *GetManufacturer )( 
             __RPC__in IWMDMDevice3 * This,
             /* [size_is][string][out] */ __RPC__out_ecount_full_string(nMaxChars) LPWSTR pwszName,
             /* [in] */ UINT nMaxChars);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, GetVersion)
         HRESULT ( STDMETHODCALLTYPE *GetVersion )( 
             __RPC__in IWMDMDevice3 * This,
             /* [out] */ __RPC__out DWORD *pdwVersion);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, GetType)
         HRESULT ( STDMETHODCALLTYPE *GetType )( 
             __RPC__in IWMDMDevice3 * This,
             /* [out] */ __RPC__out DWORD *pdwType);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, GetSerialNumber)
         HRESULT ( STDMETHODCALLTYPE *GetSerialNumber )( 
             __RPC__in IWMDMDevice3 * This,
             /* [out] */ __RPC__out PWMDMID pSerialNumber,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, GetPowerSource)
         HRESULT ( STDMETHODCALLTYPE *GetPowerSource )( 
             __RPC__in IWMDMDevice3 * This,
             /* [out] */ __RPC__out DWORD *pdwPowerSource,
             /* [out] */ __RPC__out DWORD *pdwPercentRemaining);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in IWMDMDevice3 * This,
             /* [out] */ __RPC__out DWORD *pdwStatus);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, GetDeviceIcon)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceIcon )( 
             __RPC__in IWMDMDevice3 * This,
             /* [out] */ __RPC__out ULONG *hIcon);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, EnumStorage)
         HRESULT ( STDMETHODCALLTYPE *EnumStorage )( 
             __RPC__in IWMDMDevice3 * This,
             /* [out] */ __RPC__deref_out_opt IWMDMEnumStorage **ppEnumStorage);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, GetFormatSupport)
         HRESULT ( STDMETHODCALLTYPE *GetFormatSupport )( 
             __RPC__in IWMDMDevice3 * This,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pnFormatCount) _WAVEFORMATEX **ppFormatEx,
@@ -3877,15 +4108,18 @@ EXTERN_C const IID IID_IWMDMDevice3;
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pnMimeTypeCount) LPWSTR **pppwszMimeType,
             /* [out] */ __RPC__out UINT *pnMimeTypeCount);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice, SendOpaqueCommand)
         HRESULT ( STDMETHODCALLTYPE *SendOpaqueCommand )( 
             __RPC__in IWMDMDevice3 * This,
             /* [out][in] */ __RPC__inout OPAQUECOMMAND *pCommand);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice2, GetStorage)
         HRESULT ( STDMETHODCALLTYPE *GetStorage )( 
             __RPC__in IWMDMDevice3 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszStorageName,
             /* [out] */ __RPC__deref_out_opt IWMDMStorage **ppStorage);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice2, GetFormatSupport2)
         HRESULT ( STDMETHODCALLTYPE *GetFormatSupport2 )( 
             __RPC__in IWMDMDevice3 * This,
             /* [in] */ DWORD dwFlags,
@@ -3896,32 +4130,38 @@ EXTERN_C const IID IID_IWMDMDevice3;
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pnFileTypeCount) WMFILECAPABILITIES **ppFileType,
             /* [ref][out] */ __RPC__out UINT *pnFileTypeCount);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice2, GetSpecifyPropertyPages)
         HRESULT ( STDMETHODCALLTYPE *GetSpecifyPropertyPages )( 
             __RPC__in IWMDMDevice3 * This,
             /* [ref][out] */ __RPC__deref_out_opt ISpecifyPropertyPages **ppSpecifyPropPages,
             /* [size_is][size_is][ref][out] */ __RPC__deref_out_ecount_full_opt(*pcUnks) IUnknown ***pppUnknowns,
             /* [ref][out] */ __RPC__out ULONG *pcUnks);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice2, GetCanonicalName)
         HRESULT ( STDMETHODCALLTYPE *GetCanonicalName )( 
             __RPC__in IWMDMDevice3 * This,
             /* [size_is][out] */ __RPC__out_ecount_full(nMaxChars) LPWSTR pwszPnPName,
             /* [in] */ UINT nMaxChars);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice3, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IWMDMDevice3 * This,
             /* [in] */ __RPC__in LPCWSTR pwszPropName,
             /* [out] */ __RPC__out PROPVARIANT *pValue);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice3, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IWMDMDevice3 * This,
             /* [in] */ __RPC__in LPCWSTR pwszPropName,
             /* [in] */ __RPC__in const PROPVARIANT *pValue);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice3, GetFormatCapability)
         HRESULT ( STDMETHODCALLTYPE *GetFormatCapability )( 
             __RPC__in IWMDMDevice3 * This,
             /* [in] */ WMDM_FORMATCODE format,
             /* [out] */ __RPC__out WMDM_FORMAT_CAPABILITY *pFormatSupport);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice3, DeviceIoControl)
         HRESULT ( STDMETHODCALLTYPE *DeviceIoControl )( 
             __RPC__in IWMDMDevice3 * This,
             /* [in] */ DWORD dwIoControlCode,
@@ -3930,6 +4170,7 @@ EXTERN_C const IID IID_IWMDMDevice3;
             /* [size_is][out] */ __RPC__out_ecount_full(*pnOutBufferSize) BYTE *lpOutBuffer,
             /* [out][in] */ __RPC__inout LPDWORD pnOutBufferSize);
         
+        DECLSPEC_XFGVIRT(IWMDMDevice3, FindStorage)
         HRESULT ( STDMETHODCALLTYPE *FindStorage )( 
             __RPC__in IWMDMDevice3 * This,
             /* [in] */ WMDM_FIND_SCOPE findScope,
@@ -4066,24 +4307,29 @@ EXTERN_C const IID IID_IWMDMDeviceSession;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMDMDeviceSession * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMDMDeviceSession * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMDMDeviceSession * This);
         
+        DECLSPEC_XFGVIRT(IWMDMDeviceSession, BeginSession)
         HRESULT ( STDMETHODCALLTYPE *BeginSession )( 
             __RPC__in IWMDMDeviceSession * This,
             /* [in] */ WMDM_SESSION_TYPE type,
             /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(dwSizeCtx) BYTE *pCtx,
             /* [in] */ DWORD dwSizeCtx);
         
+        DECLSPEC_XFGVIRT(IWMDMDeviceSession, EndSession)
         HRESULT ( STDMETHODCALLTYPE *EndSession )( 
             __RPC__in IWMDMDeviceSession * This,
             /* [in] */ WMDM_SESSION_TYPE type,
@@ -4168,32 +4414,39 @@ EXTERN_C const IID IID_IWMDMEnumDevice;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMDMEnumDevice * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMDMEnumDevice * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMDMEnumDevice * This);
         
+        DECLSPEC_XFGVIRT(IWMDMEnumDevice, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IWMDMEnumDevice * This,
             /* [in] */ ULONG celt,
             /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) IWMDMDevice **ppDevice,
             /* [out] */ __RPC__out ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IWMDMEnumDevice, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IWMDMEnumDevice * This,
             /* [in] */ ULONG celt,
             /* [out] */ __RPC__out ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IWMDMEnumDevice, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IWMDMEnumDevice * This);
         
+        DECLSPEC_XFGVIRT(IWMDMEnumDevice, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IWMDMEnumDevice * This,
             /* [out] */ __RPC__deref_out_opt IWMDMEnumDevice **ppEnumDevice);
@@ -4289,42 +4542,53 @@ EXTERN_C const IID IID_IWMDMDeviceControl;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMDMDeviceControl * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMDMDeviceControl * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMDMDeviceControl * This);
         
+        DECLSPEC_XFGVIRT(IWMDMDeviceControl, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in IWMDMDeviceControl * This,
             /* [out] */ __RPC__out DWORD *pdwStatus);
         
+        DECLSPEC_XFGVIRT(IWMDMDeviceControl, GetCapabilities)
         HRESULT ( STDMETHODCALLTYPE *GetCapabilities )( 
             __RPC__in IWMDMDeviceControl * This,
             /* [out] */ __RPC__out DWORD *pdwCapabilitiesMask);
         
+        DECLSPEC_XFGVIRT(IWMDMDeviceControl, Play)
         HRESULT ( STDMETHODCALLTYPE *Play )( 
             __RPC__in IWMDMDeviceControl * This);
         
+        DECLSPEC_XFGVIRT(IWMDMDeviceControl, Record)
         HRESULT ( STDMETHODCALLTYPE *Record )( 
             __RPC__in IWMDMDeviceControl * This,
             /* [in] */ __RPC__in _WAVEFORMATEX *pFormat);
         
+        DECLSPEC_XFGVIRT(IWMDMDeviceControl, Pause)
         HRESULT ( STDMETHODCALLTYPE *Pause )( 
             __RPC__in IWMDMDeviceControl * This);
         
+        DECLSPEC_XFGVIRT(IWMDMDeviceControl, Resume)
         HRESULT ( STDMETHODCALLTYPE *Resume )( 
             __RPC__in IWMDMDeviceControl * This);
         
+        DECLSPEC_XFGVIRT(IWMDMDeviceControl, Stop)
         HRESULT ( STDMETHODCALLTYPE *Stop )( 
             __RPC__in IWMDMDeviceControl * This);
         
+        DECLSPEC_XFGVIRT(IWMDMDeviceControl, Seek)
         HRESULT ( STDMETHODCALLTYPE *Seek )( 
             __RPC__in IWMDMDeviceControl * This,
             /* [in] */ UINT fuMode,
@@ -4426,32 +4690,39 @@ EXTERN_C const IID IID_IWMDMEnumStorage;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMDMEnumStorage * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMDMEnumStorage * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMDMEnumStorage * This);
         
+        DECLSPEC_XFGVIRT(IWMDMEnumStorage, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IWMDMEnumStorage * This,
             /* [in] */ ULONG celt,
             /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) IWMDMStorage **ppStorage,
             /* [out] */ __RPC__out ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IWMDMEnumStorage, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IWMDMEnumStorage * This,
             /* [in] */ ULONG celt,
             /* [out] */ __RPC__out ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IWMDMEnumStorage, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IWMDMEnumStorage * This);
         
+        DECLSPEC_XFGVIRT(IWMDMEnumStorage, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IWMDMEnumStorage * This,
             /* [out] */ __RPC__deref_out_opt IWMDMEnumStorage **ppEnumStorage);
@@ -4553,18 +4824,22 @@ EXTERN_C const IID IID_IWMDMStorageControl;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMDMStorageControl * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMDMStorageControl * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMDMStorageControl * This);
         
+        DECLSPEC_XFGVIRT(IWMDMStorageControl, Insert)
         HRESULT ( STDMETHODCALLTYPE *Insert )( 
             __RPC__in IWMDMStorageControl * This,
             /* [in] */ UINT fuMode,
@@ -4573,17 +4848,20 @@ EXTERN_C const IID IID_IWMDMStorageControl;
             /* [unique][in] */ __RPC__in_opt IWMDMProgress *pProgress,
             /* [out] */ __RPC__deref_out_opt IWMDMStorage **ppNewObject);
         
+        DECLSPEC_XFGVIRT(IWMDMStorageControl, Delete)
         HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in IWMDMStorageControl * This,
             /* [in] */ UINT fuMode,
             /* [in] */ __RPC__in_opt IWMDMProgress *pProgress);
         
+        DECLSPEC_XFGVIRT(IWMDMStorageControl, Rename)
         HRESULT ( STDMETHODCALLTYPE *Rename )( 
             __RPC__in IWMDMStorageControl * This,
             /* [in] */ UINT fuMode,
             /* [in] */ __RPC__in LPWSTR pwszNewName,
             /* [in] */ __RPC__in_opt IWMDMProgress *pProgress);
         
+        DECLSPEC_XFGVIRT(IWMDMStorageControl, Read)
         HRESULT ( STDMETHODCALLTYPE *Read )( 
             __RPC__in IWMDMStorageControl * This,
             /* [in] */ UINT fuMode,
@@ -4591,6 +4869,7 @@ EXTERN_C const IID IID_IWMDMStorageControl;
             /* [in] */ __RPC__in_opt IWMDMProgress *pProgress,
             /* [in] */ __RPC__in_opt IWMDMOperation *pOperation);
         
+        DECLSPEC_XFGVIRT(IWMDMStorageControl, Move)
         HRESULT ( STDMETHODCALLTYPE *Move )( 
             __RPC__in IWMDMStorageControl * This,
             /* [in] */ UINT fuMode,
@@ -4679,18 +4958,22 @@ EXTERN_C const IID IID_IWMDMStorageControl2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMDMStorageControl2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMDMStorageControl2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMDMStorageControl2 * This);
         
+        DECLSPEC_XFGVIRT(IWMDMStorageControl, Insert)
         HRESULT ( STDMETHODCALLTYPE *Insert )( 
             __RPC__in IWMDMStorageControl2 * This,
             /* [in] */ UINT fuMode,
@@ -4699,17 +4982,20 @@ EXTERN_C const IID IID_IWMDMStorageControl2;
             /* [unique][in] */ __RPC__in_opt IWMDMProgress *pProgress,
             /* [out] */ __RPC__deref_out_opt IWMDMStorage **ppNewObject);
         
+        DECLSPEC_XFGVIRT(IWMDMStorageControl, Delete)
         HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in IWMDMStorageControl2 * This,
             /* [in] */ UINT fuMode,
             /* [in] */ __RPC__in_opt IWMDMProgress *pProgress);
         
+        DECLSPEC_XFGVIRT(IWMDMStorageControl, Rename)
         HRESULT ( STDMETHODCALLTYPE *Rename )( 
             __RPC__in IWMDMStorageControl2 * This,
             /* [in] */ UINT fuMode,
             /* [in] */ __RPC__in LPWSTR pwszNewName,
             /* [in] */ __RPC__in_opt IWMDMProgress *pProgress);
         
+        DECLSPEC_XFGVIRT(IWMDMStorageControl, Read)
         HRESULT ( STDMETHODCALLTYPE *Read )( 
             __RPC__in IWMDMStorageControl2 * This,
             /* [in] */ UINT fuMode,
@@ -4717,12 +5003,14 @@ EXTERN_C const IID IID_IWMDMStorageControl2;
             /* [in] */ __RPC__in_opt IWMDMProgress *pProgress,
             /* [in] */ __RPC__in_opt IWMDMOperation *pOperation);
         
+        DECLSPEC_XFGVIRT(IWMDMStorageControl, Move)
         HRESULT ( STDMETHODCALLTYPE *Move )( 
             __RPC__in IWMDMStorageControl2 * This,
             /* [in] */ UINT fuMode,
             /* [in] */ __RPC__in_opt IWMDMStorage *pTargetObject,
             /* [in] */ __RPC__in_opt IWMDMProgress *pProgress);
         
+        DECLSPEC_XFGVIRT(IWMDMStorageControl2, Insert2)
         HRESULT ( STDMETHODCALLTYPE *Insert2 )( 
             __RPC__in IWMDMStorageControl2 * This,
             /* [in] */ UINT fuMode,
@@ -4821,18 +5109,22 @@ EXTERN_C const IID IID_IWMDMStorageControl3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMDMStorageControl3 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMDMStorageControl3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMDMStorageControl3 * This);
         
+        DECLSPEC_XFGVIRT(IWMDMStorageControl, Insert)
         HRESULT ( STDMETHODCALLTYPE *Insert )( 
             __RPC__in IWMDMStorageControl3 * This,
             /* [in] */ UINT fuMode,
@@ -4841,17 +5133,20 @@ EXTERN_C const IID IID_IWMDMStorageControl3;
             /* [unique][in] */ __RPC__in_opt IWMDMProgress *pProgress,
             /* [out] */ __RPC__deref_out_opt IWMDMStorage **ppNewObject);
         
+        DECLSPEC_XFGVIRT(IWMDMStorageControl, Delete)
         HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in IWMDMStorageControl3 * This,
             /* [in] */ UINT fuMode,
             /* [in] */ __RPC__in_opt IWMDMProgress *pProgress);
         
+        DECLSPEC_XFGVIRT(IWMDMStorageControl, Rename)
         HRESULT ( STDMETHODCALLTYPE *Rename )( 
             __RPC__in IWMDMStorageControl3 * This,
             /* [in] */ UINT fuMode,
             /* [in] */ __RPC__in LPWSTR pwszNewName,
             /* [in] */ __RPC__in_opt IWMDMProgress *pProgress);
         
+        DECLSPEC_XFGVIRT(IWMDMStorageControl, Read)
         HRESULT ( STDMETHODCALLTYPE *Read )( 
             __RPC__in IWMDMStorageControl3 * This,
             /* [in] */ UINT fuMode,
@@ -4859,12 +5154,14 @@ EXTERN_C const IID IID_IWMDMStorageControl3;
             /* [in] */ __RPC__in_opt IWMDMProgress *pProgress,
             /* [in] */ __RPC__in_opt IWMDMOperation *pOperation);
         
+        DECLSPEC_XFGVIRT(IWMDMStorageControl, Move)
         HRESULT ( STDMETHODCALLTYPE *Move )( 
             __RPC__in IWMDMStorageControl3 * This,
             /* [in] */ UINT fuMode,
             /* [in] */ __RPC__in_opt IWMDMStorage *pTargetObject,
             /* [in] */ __RPC__in_opt IWMDMProgress *pProgress);
         
+        DECLSPEC_XFGVIRT(IWMDMStorageControl2, Insert2)
         HRESULT ( STDMETHODCALLTYPE *Insert2 )( 
             __RPC__in IWMDMStorageControl3 * This,
             /* [in] */ UINT fuMode,
@@ -4875,6 +5172,7 @@ EXTERN_C const IID IID_IWMDMStorageControl3;
             /* [in] */ __RPC__in_opt IUnknown *pUnknown,
             /* [unique][out][in] */ __RPC__deref_opt_inout_opt IWMDMStorage **ppNewObject);
         
+        DECLSPEC_XFGVIRT(IWMDMStorageControl3, Insert3)
         HRESULT ( STDMETHODCALLTYPE *Insert3 )( 
             __RPC__in IWMDMStorageControl3 * This,
             /* [in] */ UINT fuMode,
@@ -4989,42 +5287,52 @@ EXTERN_C const IID IID_IWMDMObjectInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMDMObjectInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMDMObjectInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMDMObjectInfo * This);
         
+        DECLSPEC_XFGVIRT(IWMDMObjectInfo, GetPlayLength)
         HRESULT ( STDMETHODCALLTYPE *GetPlayLength )( 
             __RPC__in IWMDMObjectInfo * This,
             /* [out] */ __RPC__out DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(IWMDMObjectInfo, SetPlayLength)
         HRESULT ( STDMETHODCALLTYPE *SetPlayLength )( 
             __RPC__in IWMDMObjectInfo * This,
             /* [in] */ DWORD dwLength);
         
+        DECLSPEC_XFGVIRT(IWMDMObjectInfo, GetPlayOffset)
         HRESULT ( STDMETHODCALLTYPE *GetPlayOffset )( 
             __RPC__in IWMDMObjectInfo * This,
             /* [out] */ __RPC__out DWORD *pdwOffset);
         
+        DECLSPEC_XFGVIRT(IWMDMObjectInfo, SetPlayOffset)
         HRESULT ( STDMETHODCALLTYPE *SetPlayOffset )( 
             __RPC__in IWMDMObjectInfo * This,
             /* [in] */ DWORD dwOffset);
         
+        DECLSPEC_XFGVIRT(IWMDMObjectInfo, GetTotalLength)
         HRESULT ( STDMETHODCALLTYPE *GetTotalLength )( 
             __RPC__in IWMDMObjectInfo * This,
             /* [out] */ __RPC__out DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(IWMDMObjectInfo, GetLastPlayPosition)
         HRESULT ( STDMETHODCALLTYPE *GetLastPlayPosition )( 
             __RPC__in IWMDMObjectInfo * This,
             /* [out] */ __RPC__out DWORD *pdwLastPos);
         
+        DECLSPEC_XFGVIRT(IWMDMObjectInfo, GetLongestPlayPosition)
         HRESULT ( STDMETHODCALLTYPE *GetLongestPlayPosition )( 
             __RPC__in IWMDMObjectInfo * This,
             /* [out] */ __RPC__out DWORD *pdwLongestPos);
@@ -5113,18 +5421,22 @@ EXTERN_C const IID IID_IWMDMRevoked;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMDMRevoked * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMDMRevoked * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMDMRevoked * This);
         
+        DECLSPEC_XFGVIRT(IWMDMRevoked, GetRevocationURL)
         HRESULT ( STDMETHODCALLTYPE *GetRevocationURL )( 
             __RPC__in IWMDMRevoked * This,
             /* [size_is][size_is][string][out][in] */ __RPC__deref_inout_ecount_full_opt_string(*pdwBufferLen) LPWSTR *ppwszRevocationURL,
@@ -5196,18 +5508,22 @@ EXTERN_C const IID IID_IWMDMNotification;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMDMNotification * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMDMNotification * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMDMNotification * This);
         
+        DECLSPEC_XFGVIRT(IWMDMNotification, WMDMMessage)
         HRESULT ( STDMETHODCALLTYPE *WMDMMessage )( 
             __RPC__in IWMDMNotification * This,
             /* [in] */ DWORD dwMessageType,
@@ -5585,22 +5901,27 @@ EXTERN_C const IID IID_IMDServiceProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMDServiceProvider * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMDServiceProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMDServiceProvider * This);
         
+        DECLSPEC_XFGVIRT(IMDServiceProvider, GetDeviceCount)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceCount )( 
             __RPC__in IMDServiceProvider * This,
             /* [out] */ __RPC__out DWORD *pdwCount);
         
+        DECLSPEC_XFGVIRT(IMDServiceProvider, EnumDevices)
         HRESULT ( STDMETHODCALLTYPE *EnumDevices )( 
             __RPC__in IMDServiceProvider * This,
             /* [out] */ __RPC__deref_out_opt IMDSPEnumDevice **ppEnumDevice);
@@ -5674,26 +5995,32 @@ EXTERN_C const IID IID_IMDServiceProvider2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMDServiceProvider2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMDServiceProvider2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMDServiceProvider2 * This);
         
+        DECLSPEC_XFGVIRT(IMDServiceProvider, GetDeviceCount)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceCount )( 
             __RPC__in IMDServiceProvider2 * This,
             /* [out] */ __RPC__out DWORD *pdwCount);
         
+        DECLSPEC_XFGVIRT(IMDServiceProvider, EnumDevices)
         HRESULT ( STDMETHODCALLTYPE *EnumDevices )( 
             __RPC__in IMDServiceProvider2 * This,
             /* [out] */ __RPC__deref_out_opt IMDSPEnumDevice **ppEnumDevice);
         
+        DECLSPEC_XFGVIRT(IMDServiceProvider2, CreateDevice)
         HRESULT ( STDMETHODCALLTYPE *CreateDevice )( 
             __RPC__in IMDServiceProvider2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pwszDevicePath,
@@ -5771,32 +6098,39 @@ EXTERN_C const IID IID_IMDServiceProvider3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMDServiceProvider3 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMDServiceProvider3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMDServiceProvider3 * This);
         
+        DECLSPEC_XFGVIRT(IMDServiceProvider, GetDeviceCount)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceCount )( 
             __RPC__in IMDServiceProvider3 * This,
             /* [out] */ __RPC__out DWORD *pdwCount);
         
+        DECLSPEC_XFGVIRT(IMDServiceProvider, EnumDevices)
         HRESULT ( STDMETHODCALLTYPE *EnumDevices )( 
             __RPC__in IMDServiceProvider3 * This,
             /* [out] */ __RPC__deref_out_opt IMDSPEnumDevice **ppEnumDevice);
         
+        DECLSPEC_XFGVIRT(IMDServiceProvider2, CreateDevice)
         HRESULT ( STDMETHODCALLTYPE *CreateDevice )( 
             __RPC__in IMDServiceProvider3 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pwszDevicePath,
             /* [out] */ __RPC__out DWORD *pdwCount,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pdwCount) IMDSPDevice ***pppDeviceArray);
         
+        DECLSPEC_XFGVIRT(IMDServiceProvider3, SetDeviceEnumPreference)
         HRESULT ( STDMETHODCALLTYPE *SetDeviceEnumPreference )( 
             __RPC__in IMDServiceProvider3 * This,
             /* [in] */ DWORD dwEnumPref);
@@ -5887,32 +6221,39 @@ EXTERN_C const IID IID_IMDSPEnumDevice;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMDSPEnumDevice * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMDSPEnumDevice * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMDSPEnumDevice * This);
         
+        DECLSPEC_XFGVIRT(IMDSPEnumDevice, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IMDSPEnumDevice * This,
             /* [in] */ ULONG celt,
             /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) IMDSPDevice **ppDevice,
             /* [out] */ __RPC__out ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IMDSPEnumDevice, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IMDSPEnumDevice * This,
             /* [in] */ ULONG celt,
             /* [out] */ __RPC__out ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IMDSPEnumDevice, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IMDSPEnumDevice * This);
         
+        DECLSPEC_XFGVIRT(IMDSPEnumDevice, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IMDSPEnumDevice * This,
             /* [out] */ __RPC__deref_out_opt IMDSPEnumDevice **ppEnumDevice);
@@ -6027,58 +6368,71 @@ EXTERN_C const IID IID_IMDSPDevice;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMDSPDevice * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMDSPDevice * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMDSPDevice * This);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in IMDSPDevice * This,
             /* [size_is][string][out] */ __RPC__out_ecount_full_string(nMaxChars) LPWSTR pwszName,
             /* [in] */ UINT nMaxChars);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, GetManufacturer)
         HRESULT ( STDMETHODCALLTYPE *GetManufacturer )( 
             __RPC__in IMDSPDevice * This,
             /* [size_is][string][out] */ __RPC__out_ecount_full_string(nMaxChars) LPWSTR pwszName,
             /* [in] */ UINT nMaxChars);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, GetVersion)
         HRESULT ( STDMETHODCALLTYPE *GetVersion )( 
             __RPC__in IMDSPDevice * This,
             /* [out] */ __RPC__out DWORD *pdwVersion);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, GetType)
         HRESULT ( STDMETHODCALLTYPE *GetType )( 
             __RPC__in IMDSPDevice * This,
             /* [out] */ __RPC__out DWORD *pdwType);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, GetSerialNumber)
         HRESULT ( STDMETHODCALLTYPE *GetSerialNumber )( 
             __RPC__in IMDSPDevice * This,
             /* [out] */ __RPC__out PWMDMID pSerialNumber,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, GetPowerSource)
         HRESULT ( STDMETHODCALLTYPE *GetPowerSource )( 
             __RPC__in IMDSPDevice * This,
             /* [out] */ __RPC__out DWORD *pdwPowerSource,
             /* [out] */ __RPC__out DWORD *pdwPercentRemaining);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in IMDSPDevice * This,
             /* [out] */ __RPC__out DWORD *pdwStatus);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, GetDeviceIcon)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceIcon )( 
             __RPC__in IMDSPDevice * This,
             /* [out] */ __RPC__out ULONG *hIcon);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, EnumStorage)
         HRESULT ( STDMETHODCALLTYPE *EnumStorage )( 
             __RPC__in IMDSPDevice * This,
             /* [out] */ __RPC__deref_out_opt IMDSPEnumStorage **ppEnumStorage);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, GetFormatSupport)
         HRESULT ( STDMETHODCALLTYPE *GetFormatSupport )( 
             __RPC__in IMDSPDevice * This,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pnFormatCount) _WAVEFORMATEX **pFormatEx,
@@ -6086,6 +6440,7 @@ EXTERN_C const IID IID_IMDSPDevice;
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pnMimeTypeCount) LPWSTR **pppwszMimeType,
             /* [out] */ __RPC__out UINT *pnMimeTypeCount);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, SendOpaqueCommand)
         HRESULT ( STDMETHODCALLTYPE *SendOpaqueCommand )( 
             __RPC__in IMDSPDevice * This,
             /* [out][in] */ __RPC__inout OPAQUECOMMAND *pCommand);
@@ -6203,58 +6558,71 @@ EXTERN_C const IID IID_IMDSPDevice2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMDSPDevice2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMDSPDevice2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMDSPDevice2 * This);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in IMDSPDevice2 * This,
             /* [size_is][string][out] */ __RPC__out_ecount_full_string(nMaxChars) LPWSTR pwszName,
             /* [in] */ UINT nMaxChars);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, GetManufacturer)
         HRESULT ( STDMETHODCALLTYPE *GetManufacturer )( 
             __RPC__in IMDSPDevice2 * This,
             /* [size_is][string][out] */ __RPC__out_ecount_full_string(nMaxChars) LPWSTR pwszName,
             /* [in] */ UINT nMaxChars);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, GetVersion)
         HRESULT ( STDMETHODCALLTYPE *GetVersion )( 
             __RPC__in IMDSPDevice2 * This,
             /* [out] */ __RPC__out DWORD *pdwVersion);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, GetType)
         HRESULT ( STDMETHODCALLTYPE *GetType )( 
             __RPC__in IMDSPDevice2 * This,
             /* [out] */ __RPC__out DWORD *pdwType);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, GetSerialNumber)
         HRESULT ( STDMETHODCALLTYPE *GetSerialNumber )( 
             __RPC__in IMDSPDevice2 * This,
             /* [out] */ __RPC__out PWMDMID pSerialNumber,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, GetPowerSource)
         HRESULT ( STDMETHODCALLTYPE *GetPowerSource )( 
             __RPC__in IMDSPDevice2 * This,
             /* [out] */ __RPC__out DWORD *pdwPowerSource,
             /* [out] */ __RPC__out DWORD *pdwPercentRemaining);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in IMDSPDevice2 * This,
             /* [out] */ __RPC__out DWORD *pdwStatus);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, GetDeviceIcon)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceIcon )( 
             __RPC__in IMDSPDevice2 * This,
             /* [out] */ __RPC__out ULONG *hIcon);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, EnumStorage)
         HRESULT ( STDMETHODCALLTYPE *EnumStorage )( 
             __RPC__in IMDSPDevice2 * This,
             /* [out] */ __RPC__deref_out_opt IMDSPEnumStorage **ppEnumStorage);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, GetFormatSupport)
         HRESULT ( STDMETHODCALLTYPE *GetFormatSupport )( 
             __RPC__in IMDSPDevice2 * This,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pnFormatCount) _WAVEFORMATEX **pFormatEx,
@@ -6262,15 +6630,18 @@ EXTERN_C const IID IID_IMDSPDevice2;
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pnMimeTypeCount) LPWSTR **pppwszMimeType,
             /* [out] */ __RPC__out UINT *pnMimeTypeCount);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, SendOpaqueCommand)
         HRESULT ( STDMETHODCALLTYPE *SendOpaqueCommand )( 
             __RPC__in IMDSPDevice2 * This,
             /* [out][in] */ __RPC__inout OPAQUECOMMAND *pCommand);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice2, GetStorage)
         HRESULT ( STDMETHODCALLTYPE *GetStorage )( 
             __RPC__in IMDSPDevice2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszStorageName,
             /* [out] */ __RPC__deref_out_opt IMDSPStorage **ppStorage);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice2, GetFormatSupport2)
         HRESULT ( STDMETHODCALLTYPE *GetFormatSupport2 )( 
             __RPC__in IMDSPDevice2 * This,
             /* [in] */ DWORD dwFlags,
@@ -6281,12 +6652,14 @@ EXTERN_C const IID IID_IMDSPDevice2;
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pnFileTypeCount) WMFILECAPABILITIES **ppFileType,
             /* [ref][out] */ __RPC__out UINT *pnFileTypeCount);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice2, GetSpecifyPropertyPages)
         HRESULT ( STDMETHODCALLTYPE *GetSpecifyPropertyPages )( 
             __RPC__in IMDSPDevice2 * This,
             /* [ref][out] */ __RPC__deref_out_opt ISpecifyPropertyPages **ppSpecifyPropPages,
             /* [size_is][size_is][ref][out] */ __RPC__deref_out_ecount_full_opt(*pcUnks) IUnknown ***pppUnknowns,
             /* [ref][out] */ __RPC__out ULONG *pcUnks);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice2, GetCanonicalName)
         HRESULT ( STDMETHODCALLTYPE *GetCanonicalName )( 
             __RPC__in IMDSPDevice2 * This,
             /* [size_is][out] */ __RPC__out_ecount_full(nMaxChars) LPWSTR pwszPnPName,
@@ -6420,58 +6793,71 @@ EXTERN_C const IID IID_IMDSPDevice3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMDSPDevice3 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMDSPDevice3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMDSPDevice3 * This);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in IMDSPDevice3 * This,
             /* [size_is][string][out] */ __RPC__out_ecount_full_string(nMaxChars) LPWSTR pwszName,
             /* [in] */ UINT nMaxChars);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, GetManufacturer)
         HRESULT ( STDMETHODCALLTYPE *GetManufacturer )( 
             __RPC__in IMDSPDevice3 * This,
             /* [size_is][string][out] */ __RPC__out_ecount_full_string(nMaxChars) LPWSTR pwszName,
             /* [in] */ UINT nMaxChars);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, GetVersion)
         HRESULT ( STDMETHODCALLTYPE *GetVersion )( 
             __RPC__in IMDSPDevice3 * This,
             /* [out] */ __RPC__out DWORD *pdwVersion);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, GetType)
         HRESULT ( STDMETHODCALLTYPE *GetType )( 
             __RPC__in IMDSPDevice3 * This,
             /* [out] */ __RPC__out DWORD *pdwType);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, GetSerialNumber)
         HRESULT ( STDMETHODCALLTYPE *GetSerialNumber )( 
             __RPC__in IMDSPDevice3 * This,
             /* [out] */ __RPC__out PWMDMID pSerialNumber,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, GetPowerSource)
         HRESULT ( STDMETHODCALLTYPE *GetPowerSource )( 
             __RPC__in IMDSPDevice3 * This,
             /* [out] */ __RPC__out DWORD *pdwPowerSource,
             /* [out] */ __RPC__out DWORD *pdwPercentRemaining);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in IMDSPDevice3 * This,
             /* [out] */ __RPC__out DWORD *pdwStatus);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, GetDeviceIcon)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceIcon )( 
             __RPC__in IMDSPDevice3 * This,
             /* [out] */ __RPC__out ULONG *hIcon);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, EnumStorage)
         HRESULT ( STDMETHODCALLTYPE *EnumStorage )( 
             __RPC__in IMDSPDevice3 * This,
             /* [out] */ __RPC__deref_out_opt IMDSPEnumStorage **ppEnumStorage);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, GetFormatSupport)
         HRESULT ( STDMETHODCALLTYPE *GetFormatSupport )( 
             __RPC__in IMDSPDevice3 * This,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pnFormatCount) _WAVEFORMATEX **pFormatEx,
@@ -6479,15 +6865,18 @@ EXTERN_C const IID IID_IMDSPDevice3;
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pnMimeTypeCount) LPWSTR **pppwszMimeType,
             /* [out] */ __RPC__out UINT *pnMimeTypeCount);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice, SendOpaqueCommand)
         HRESULT ( STDMETHODCALLTYPE *SendOpaqueCommand )( 
             __RPC__in IMDSPDevice3 * This,
             /* [out][in] */ __RPC__inout OPAQUECOMMAND *pCommand);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice2, GetStorage)
         HRESULT ( STDMETHODCALLTYPE *GetStorage )( 
             __RPC__in IMDSPDevice3 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszStorageName,
             /* [out] */ __RPC__deref_out_opt IMDSPStorage **ppStorage);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice2, GetFormatSupport2)
         HRESULT ( STDMETHODCALLTYPE *GetFormatSupport2 )( 
             __RPC__in IMDSPDevice3 * This,
             /* [in] */ DWORD dwFlags,
@@ -6498,32 +6887,38 @@ EXTERN_C const IID IID_IMDSPDevice3;
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pnFileTypeCount) WMFILECAPABILITIES **ppFileType,
             /* [ref][out] */ __RPC__out UINT *pnFileTypeCount);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice2, GetSpecifyPropertyPages)
         HRESULT ( STDMETHODCALLTYPE *GetSpecifyPropertyPages )( 
             __RPC__in IMDSPDevice3 * This,
             /* [ref][out] */ __RPC__deref_out_opt ISpecifyPropertyPages **ppSpecifyPropPages,
             /* [size_is][size_is][ref][out] */ __RPC__deref_out_ecount_full_opt(*pcUnks) IUnknown ***pppUnknowns,
             /* [ref][out] */ __RPC__out ULONG *pcUnks);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice2, GetCanonicalName)
         HRESULT ( STDMETHODCALLTYPE *GetCanonicalName )( 
             __RPC__in IMDSPDevice3 * This,
             /* [size_is][out] */ __RPC__out_ecount_full(nMaxChars) LPWSTR pwszPnPName,
             /* [in] */ UINT nMaxChars);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice3, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IMDSPDevice3 * This,
             /* [in] */ __RPC__in LPCWSTR pwszPropName,
             /* [out] */ __RPC__out PROPVARIANT *pValue);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice3, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IMDSPDevice3 * This,
             /* [in] */ __RPC__in LPCWSTR pwszPropName,
             /* [in] */ __RPC__in const PROPVARIANT *pValue);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice3, GetFormatCapability)
         HRESULT ( STDMETHODCALLTYPE *GetFormatCapability )( 
             __RPC__in IMDSPDevice3 * This,
             /* [in] */ WMDM_FORMATCODE format,
             /* [out] */ __RPC__out WMDM_FORMAT_CAPABILITY *pFormatSupport);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice3, DeviceIoControl)
         HRESULT ( STDMETHODCALLTYPE *DeviceIoControl )( 
             __RPC__in IMDSPDevice3 * This,
             /* [in] */ DWORD dwIoControlCode,
@@ -6532,6 +6927,7 @@ EXTERN_C const IID IID_IMDSPDevice3;
             /* [size_is][out] */ __RPC__out_ecount_full(*pnOutBufferSize) BYTE *lpOutBuffer,
             /* [out][in] */ __RPC__inout LPDWORD pnOutBufferSize);
         
+        DECLSPEC_XFGVIRT(IMDSPDevice3, FindStorage)
         HRESULT ( STDMETHODCALLTYPE *FindStorage )( 
             __RPC__in IMDSPDevice3 * This,
             /* [in] */ WMDM_FIND_SCOPE findScope,
@@ -6679,42 +7075,53 @@ EXTERN_C const IID IID_IMDSPDeviceControl;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMDSPDeviceControl * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMDSPDeviceControl * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMDSPDeviceControl * This);
         
+        DECLSPEC_XFGVIRT(IMDSPDeviceControl, GetDCStatus)
         HRESULT ( STDMETHODCALLTYPE *GetDCStatus )( 
             __RPC__in IMDSPDeviceControl * This,
             /* [out] */ __RPC__out DWORD *pdwStatus);
         
+        DECLSPEC_XFGVIRT(IMDSPDeviceControl, GetCapabilities)
         HRESULT ( STDMETHODCALLTYPE *GetCapabilities )( 
             __RPC__in IMDSPDeviceControl * This,
             /* [out] */ __RPC__out DWORD *pdwCapabilitiesMask);
         
+        DECLSPEC_XFGVIRT(IMDSPDeviceControl, Play)
         HRESULT ( STDMETHODCALLTYPE *Play )( 
             __RPC__in IMDSPDeviceControl * This);
         
+        DECLSPEC_XFGVIRT(IMDSPDeviceControl, Record)
         HRESULT ( STDMETHODCALLTYPE *Record )( 
             __RPC__in IMDSPDeviceControl * This,
             /* [in] */ __RPC__in _WAVEFORMATEX *pFormat);
         
+        DECLSPEC_XFGVIRT(IMDSPDeviceControl, Pause)
         HRESULT ( STDMETHODCALLTYPE *Pause )( 
             __RPC__in IMDSPDeviceControl * This);
         
+        DECLSPEC_XFGVIRT(IMDSPDeviceControl, Resume)
         HRESULT ( STDMETHODCALLTYPE *Resume )( 
             __RPC__in IMDSPDeviceControl * This);
         
+        DECLSPEC_XFGVIRT(IMDSPDeviceControl, Stop)
         HRESULT ( STDMETHODCALLTYPE *Stop )( 
             __RPC__in IMDSPDeviceControl * This);
         
+        DECLSPEC_XFGVIRT(IMDSPDeviceControl, Seek)
         HRESULT ( STDMETHODCALLTYPE *Seek )( 
             __RPC__in IMDSPDeviceControl * This,
             /* [in] */ UINT fuMode,
@@ -6816,32 +7223,39 @@ EXTERN_C const IID IID_IMDSPEnumStorage;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMDSPEnumStorage * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMDSPEnumStorage * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMDSPEnumStorage * This);
         
+        DECLSPEC_XFGVIRT(IMDSPEnumStorage, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IMDSPEnumStorage * This,
             /* [in] */ ULONG celt,
             /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) IMDSPStorage **ppStorage,
             /* [out] */ __RPC__out ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IMDSPEnumStorage, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IMDSPEnumStorage * This,
             /* [in] */ ULONG celt,
             /* [out] */ __RPC__out ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IMDSPEnumStorage, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IMDSPEnumStorage * This);
         
+        DECLSPEC_XFGVIRT(IMDSPEnumStorage, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IMDSPEnumStorage * This,
             /* [out] */ __RPC__deref_out_opt IMDSPEnumStorage **ppEnumStorage);
@@ -6955,52 +7369,63 @@ EXTERN_C const IID IID_IMDSPStorage;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMDSPStorage * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMDSPStorage * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMDSPStorage * This);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, SetAttributes)
         HRESULT ( STDMETHODCALLTYPE *SetAttributes )( 
             __RPC__in IMDSPStorage * This,
             /* [in] */ DWORD dwAttributes,
             /* [unique][in] */ __RPC__in_opt _WAVEFORMATEX *pFormat);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, GetStorageGlobals)
         HRESULT ( STDMETHODCALLTYPE *GetStorageGlobals )( 
             __RPC__in IMDSPStorage * This,
             /* [out] */ __RPC__deref_out_opt IMDSPStorageGlobals **ppStorageGlobals);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, GetAttributes)
         HRESULT ( STDMETHODCALLTYPE *GetAttributes )( 
             __RPC__in IMDSPStorage * This,
             /* [out] */ __RPC__out DWORD *pdwAttributes,
             /* [unique][out][in] */ __RPC__inout_opt _WAVEFORMATEX *pFormat);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in IMDSPStorage * This,
             /* [size_is][string][out] */ __RPC__out_ecount_full_string(nMaxChars) LPWSTR pwszName,
             /* [in] */ UINT nMaxChars);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, GetDate)
         HRESULT ( STDMETHODCALLTYPE *GetDate )( 
             __RPC__in IMDSPStorage * This,
             /* [out] */ __RPC__out PWMDMDATETIME pDateTimeUTC);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, GetSize)
         HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             __RPC__in IMDSPStorage * This,
             /* [out] */ __RPC__out DWORD *pdwSizeLow,
             /* [out] */ __RPC__out DWORD *pdwSizeHigh);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, GetRights)
         HRESULT ( STDMETHODCALLTYPE *GetRights )( 
             __RPC__in IMDSPStorage * This,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pnRightsCount) PWMDMRIGHTS *ppRights,
             /* [out] */ __RPC__out UINT *pnRightsCount,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, CreateStorage)
         HRESULT ( STDMETHODCALLTYPE *CreateStorage )( 
             __RPC__in IMDSPStorage * This,
             /* [in] */ DWORD dwAttributes,
@@ -7008,10 +7433,12 @@ EXTERN_C const IID IID_IMDSPStorage;
             /* [in] */ __RPC__in LPWSTR pwszName,
             /* [out] */ __RPC__deref_out_opt IMDSPStorage **ppNewStorage);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, EnumStorage)
         HRESULT ( STDMETHODCALLTYPE *EnumStorage )( 
             __RPC__in IMDSPStorage * This,
             /* [out] */ __RPC__deref_out_opt IMDSPEnumStorage **ppEnumStorage);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, SendOpaqueCommand)
         HRESULT ( STDMETHODCALLTYPE *SendOpaqueCommand )( 
             __RPC__in IMDSPStorage * This,
             /* [out][in] */ __RPC__inout OPAQUECOMMAND *pCommand);
@@ -7129,52 +7556,63 @@ EXTERN_C const IID IID_IMDSPStorage2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMDSPStorage2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMDSPStorage2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMDSPStorage2 * This);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, SetAttributes)
         HRESULT ( STDMETHODCALLTYPE *SetAttributes )( 
             __RPC__in IMDSPStorage2 * This,
             /* [in] */ DWORD dwAttributes,
             /* [unique][in] */ __RPC__in_opt _WAVEFORMATEX *pFormat);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, GetStorageGlobals)
         HRESULT ( STDMETHODCALLTYPE *GetStorageGlobals )( 
             __RPC__in IMDSPStorage2 * This,
             /* [out] */ __RPC__deref_out_opt IMDSPStorageGlobals **ppStorageGlobals);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, GetAttributes)
         HRESULT ( STDMETHODCALLTYPE *GetAttributes )( 
             __RPC__in IMDSPStorage2 * This,
             /* [out] */ __RPC__out DWORD *pdwAttributes,
             /* [unique][out][in] */ __RPC__inout_opt _WAVEFORMATEX *pFormat);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in IMDSPStorage2 * This,
             /* [size_is][string][out] */ __RPC__out_ecount_full_string(nMaxChars) LPWSTR pwszName,
             /* [in] */ UINT nMaxChars);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, GetDate)
         HRESULT ( STDMETHODCALLTYPE *GetDate )( 
             __RPC__in IMDSPStorage2 * This,
             /* [out] */ __RPC__out PWMDMDATETIME pDateTimeUTC);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, GetSize)
         HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             __RPC__in IMDSPStorage2 * This,
             /* [out] */ __RPC__out DWORD *pdwSizeLow,
             /* [out] */ __RPC__out DWORD *pdwSizeHigh);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, GetRights)
         HRESULT ( STDMETHODCALLTYPE *GetRights )( 
             __RPC__in IMDSPStorage2 * This,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pnRightsCount) PWMDMRIGHTS *ppRights,
             /* [out] */ __RPC__out UINT *pnRightsCount,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, CreateStorage)
         HRESULT ( STDMETHODCALLTYPE *CreateStorage )( 
             __RPC__in IMDSPStorage2 * This,
             /* [in] */ DWORD dwAttributes,
@@ -7182,19 +7620,23 @@ EXTERN_C const IID IID_IMDSPStorage2;
             /* [in] */ __RPC__in LPWSTR pwszName,
             /* [out] */ __RPC__deref_out_opt IMDSPStorage **ppNewStorage);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, EnumStorage)
         HRESULT ( STDMETHODCALLTYPE *EnumStorage )( 
             __RPC__in IMDSPStorage2 * This,
             /* [out] */ __RPC__deref_out_opt IMDSPEnumStorage **ppEnumStorage);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, SendOpaqueCommand)
         HRESULT ( STDMETHODCALLTYPE *SendOpaqueCommand )( 
             __RPC__in IMDSPStorage2 * This,
             /* [out][in] */ __RPC__inout OPAQUECOMMAND *pCommand);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage2, GetStorage)
         HRESULT ( STDMETHODCALLTYPE *GetStorage )( 
             __RPC__in IMDSPStorage2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszStorageName,
             /* [out] */ __RPC__deref_out_opt IMDSPStorage **ppStorage);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage2, CreateStorage2)
         HRESULT ( STDMETHODCALLTYPE *CreateStorage2 )( 
             __RPC__in IMDSPStorage2 * This,
             /* [in] */ DWORD dwAttributes,
@@ -7205,6 +7647,7 @@ EXTERN_C const IID IID_IMDSPStorage2;
             /* [in] */ ULONGLONG qwFileSize,
             /* [out] */ __RPC__deref_out_opt IMDSPStorage **ppNewStorage);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage2, SetAttributes2)
         HRESULT ( STDMETHODCALLTYPE *SetAttributes2 )( 
             __RPC__in IMDSPStorage2 * This,
             /* [in] */ DWORD dwAttributes,
@@ -7212,6 +7655,7 @@ EXTERN_C const IID IID_IMDSPStorage2;
             /* [unique][in] */ __RPC__in_opt _WAVEFORMATEX *pAudioFormat,
             /* [unique][in] */ __RPC__in_opt _VIDEOINFOHEADER *pVideoFormat);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage2, GetAttributes2)
         HRESULT ( STDMETHODCALLTYPE *GetAttributes2 )( 
             __RPC__in IMDSPStorage2 * This,
             /* [out] */ __RPC__out DWORD *pdwAttributes,
@@ -7326,52 +7770,63 @@ EXTERN_C const IID IID_IMDSPStorage3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMDSPStorage3 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMDSPStorage3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMDSPStorage3 * This);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, SetAttributes)
         HRESULT ( STDMETHODCALLTYPE *SetAttributes )( 
             __RPC__in IMDSPStorage3 * This,
             /* [in] */ DWORD dwAttributes,
             /* [unique][in] */ __RPC__in_opt _WAVEFORMATEX *pFormat);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, GetStorageGlobals)
         HRESULT ( STDMETHODCALLTYPE *GetStorageGlobals )( 
             __RPC__in IMDSPStorage3 * This,
             /* [out] */ __RPC__deref_out_opt IMDSPStorageGlobals **ppStorageGlobals);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, GetAttributes)
         HRESULT ( STDMETHODCALLTYPE *GetAttributes )( 
             __RPC__in IMDSPStorage3 * This,
             /* [out] */ __RPC__out DWORD *pdwAttributes,
             /* [unique][out][in] */ __RPC__inout_opt _WAVEFORMATEX *pFormat);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in IMDSPStorage3 * This,
             /* [size_is][string][out] */ __RPC__out_ecount_full_string(nMaxChars) LPWSTR pwszName,
             /* [in] */ UINT nMaxChars);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, GetDate)
         HRESULT ( STDMETHODCALLTYPE *GetDate )( 
             __RPC__in IMDSPStorage3 * This,
             /* [out] */ __RPC__out PWMDMDATETIME pDateTimeUTC);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, GetSize)
         HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             __RPC__in IMDSPStorage3 * This,
             /* [out] */ __RPC__out DWORD *pdwSizeLow,
             /* [out] */ __RPC__out DWORD *pdwSizeHigh);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, GetRights)
         HRESULT ( STDMETHODCALLTYPE *GetRights )( 
             __RPC__in IMDSPStorage3 * This,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pnRightsCount) PWMDMRIGHTS *ppRights,
             /* [out] */ __RPC__out UINT *pnRightsCount,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, CreateStorage)
         HRESULT ( STDMETHODCALLTYPE *CreateStorage )( 
             __RPC__in IMDSPStorage3 * This,
             /* [in] */ DWORD dwAttributes,
@@ -7379,19 +7834,23 @@ EXTERN_C const IID IID_IMDSPStorage3;
             /* [in] */ __RPC__in LPWSTR pwszName,
             /* [out] */ __RPC__deref_out_opt IMDSPStorage **ppNewStorage);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, EnumStorage)
         HRESULT ( STDMETHODCALLTYPE *EnumStorage )( 
             __RPC__in IMDSPStorage3 * This,
             /* [out] */ __RPC__deref_out_opt IMDSPEnumStorage **ppEnumStorage);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, SendOpaqueCommand)
         HRESULT ( STDMETHODCALLTYPE *SendOpaqueCommand )( 
             __RPC__in IMDSPStorage3 * This,
             /* [out][in] */ __RPC__inout OPAQUECOMMAND *pCommand);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage2, GetStorage)
         HRESULT ( STDMETHODCALLTYPE *GetStorage )( 
             __RPC__in IMDSPStorage3 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszStorageName,
             /* [out] */ __RPC__deref_out_opt IMDSPStorage **ppStorage);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage2, CreateStorage2)
         HRESULT ( STDMETHODCALLTYPE *CreateStorage2 )( 
             __RPC__in IMDSPStorage3 * This,
             /* [in] */ DWORD dwAttributes,
@@ -7402,6 +7861,7 @@ EXTERN_C const IID IID_IMDSPStorage3;
             /* [in] */ ULONGLONG qwFileSize,
             /* [out] */ __RPC__deref_out_opt IMDSPStorage **ppNewStorage);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage2, SetAttributes2)
         HRESULT ( STDMETHODCALLTYPE *SetAttributes2 )( 
             __RPC__in IMDSPStorage3 * This,
             /* [in] */ DWORD dwAttributes,
@@ -7409,6 +7869,7 @@ EXTERN_C const IID IID_IMDSPStorage3;
             /* [unique][in] */ __RPC__in_opt _WAVEFORMATEX *pAudioFormat,
             /* [unique][in] */ __RPC__in_opt _VIDEOINFOHEADER *pVideoFormat);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage2, GetAttributes2)
         HRESULT ( STDMETHODCALLTYPE *GetAttributes2 )( 
             __RPC__in IMDSPStorage3 * This,
             /* [out] */ __RPC__out DWORD *pdwAttributes,
@@ -7416,10 +7877,12 @@ EXTERN_C const IID IID_IMDSPStorage3;
             /* [unique][out][in] */ __RPC__inout_opt _WAVEFORMATEX *pAudioFormat,
             /* [unique][out][in] */ __RPC__inout_opt _VIDEOINFOHEADER *pVideoFormat);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage3, GetMetadata)
         HRESULT ( STDMETHODCALLTYPE *GetMetadata )( 
             __RPC__in IMDSPStorage3 * This,
             /* [in] */ __RPC__in_opt IWMDMMetaData *pMetadata);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage3, SetMetadata)
         HRESULT ( STDMETHODCALLTYPE *SetMetadata )( 
             __RPC__in IMDSPStorage3 * This,
             /* [in] */ __RPC__in_opt IWMDMMetaData *pMetadata);
@@ -7560,52 +8023,63 @@ EXTERN_C const IID IID_IMDSPStorage4;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMDSPStorage4 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMDSPStorage4 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMDSPStorage4 * This);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, SetAttributes)
         HRESULT ( STDMETHODCALLTYPE *SetAttributes )( 
             __RPC__in IMDSPStorage4 * This,
             /* [in] */ DWORD dwAttributes,
             /* [unique][in] */ __RPC__in_opt _WAVEFORMATEX *pFormat);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, GetStorageGlobals)
         HRESULT ( STDMETHODCALLTYPE *GetStorageGlobals )( 
             __RPC__in IMDSPStorage4 * This,
             /* [out] */ __RPC__deref_out_opt IMDSPStorageGlobals **ppStorageGlobals);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, GetAttributes)
         HRESULT ( STDMETHODCALLTYPE *GetAttributes )( 
             __RPC__in IMDSPStorage4 * This,
             /* [out] */ __RPC__out DWORD *pdwAttributes,
             /* [unique][out][in] */ __RPC__inout_opt _WAVEFORMATEX *pFormat);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in IMDSPStorage4 * This,
             /* [size_is][string][out] */ __RPC__out_ecount_full_string(nMaxChars) LPWSTR pwszName,
             /* [in] */ UINT nMaxChars);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, GetDate)
         HRESULT ( STDMETHODCALLTYPE *GetDate )( 
             __RPC__in IMDSPStorage4 * This,
             /* [out] */ __RPC__out PWMDMDATETIME pDateTimeUTC);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, GetSize)
         HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             __RPC__in IMDSPStorage4 * This,
             /* [out] */ __RPC__out DWORD *pdwSizeLow,
             /* [out] */ __RPC__out DWORD *pdwSizeHigh);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, GetRights)
         HRESULT ( STDMETHODCALLTYPE *GetRights )( 
             __RPC__in IMDSPStorage4 * This,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pnRightsCount) PWMDMRIGHTS *ppRights,
             /* [out] */ __RPC__out UINT *pnRightsCount,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, CreateStorage)
         HRESULT ( STDMETHODCALLTYPE *CreateStorage )( 
             __RPC__in IMDSPStorage4 * This,
             /* [in] */ DWORD dwAttributes,
@@ -7613,19 +8087,23 @@ EXTERN_C const IID IID_IMDSPStorage4;
             /* [in] */ __RPC__in LPWSTR pwszName,
             /* [out] */ __RPC__deref_out_opt IMDSPStorage **ppNewStorage);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, EnumStorage)
         HRESULT ( STDMETHODCALLTYPE *EnumStorage )( 
             __RPC__in IMDSPStorage4 * This,
             /* [out] */ __RPC__deref_out_opt IMDSPEnumStorage **ppEnumStorage);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage, SendOpaqueCommand)
         HRESULT ( STDMETHODCALLTYPE *SendOpaqueCommand )( 
             __RPC__in IMDSPStorage4 * This,
             /* [out][in] */ __RPC__inout OPAQUECOMMAND *pCommand);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage2, GetStorage)
         HRESULT ( STDMETHODCALLTYPE *GetStorage )( 
             __RPC__in IMDSPStorage4 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszStorageName,
             /* [out] */ __RPC__deref_out_opt IMDSPStorage **ppStorage);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage2, CreateStorage2)
         HRESULT ( STDMETHODCALLTYPE *CreateStorage2 )( 
             __RPC__in IMDSPStorage4 * This,
             /* [in] */ DWORD dwAttributes,
@@ -7636,6 +8114,7 @@ EXTERN_C const IID IID_IMDSPStorage4;
             /* [in] */ ULONGLONG qwFileSize,
             /* [out] */ __RPC__deref_out_opt IMDSPStorage **ppNewStorage);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage2, SetAttributes2)
         HRESULT ( STDMETHODCALLTYPE *SetAttributes2 )( 
             __RPC__in IMDSPStorage4 * This,
             /* [in] */ DWORD dwAttributes,
@@ -7643,6 +8122,7 @@ EXTERN_C const IID IID_IMDSPStorage4;
             /* [unique][in] */ __RPC__in_opt _WAVEFORMATEX *pAudioFormat,
             /* [unique][in] */ __RPC__in_opt _VIDEOINFOHEADER *pVideoFormat);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage2, GetAttributes2)
         HRESULT ( STDMETHODCALLTYPE *GetAttributes2 )( 
             __RPC__in IMDSPStorage4 * This,
             /* [out] */ __RPC__out DWORD *pdwAttributes,
@@ -7650,24 +8130,29 @@ EXTERN_C const IID IID_IMDSPStorage4;
             /* [unique][out][in] */ __RPC__inout_opt _WAVEFORMATEX *pAudioFormat,
             /* [unique][out][in] */ __RPC__inout_opt _VIDEOINFOHEADER *pVideoFormat);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage3, GetMetadata)
         HRESULT ( STDMETHODCALLTYPE *GetMetadata )( 
             __RPC__in IMDSPStorage4 * This,
             /* [in] */ __RPC__in_opt IWMDMMetaData *pMetadata);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage3, SetMetadata)
         HRESULT ( STDMETHODCALLTYPE *SetMetadata )( 
             __RPC__in IMDSPStorage4 * This,
             /* [in] */ __RPC__in_opt IWMDMMetaData *pMetadata);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage4, SetReferences)
         HRESULT ( STDMETHODCALLTYPE *SetReferences )( 
             __RPC__in IMDSPStorage4 * This,
             /* [in] */ DWORD dwRefs,
             /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(dwRefs) IMDSPStorage **ppISPStorage);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage4, GetReferences)
         HRESULT ( STDMETHODCALLTYPE *GetReferences )( 
             __RPC__in IMDSPStorage4 * This,
             /* [out] */ __RPC__out DWORD *pdwRefs,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pdwRefs) IMDSPStorage ***pppISPStorage);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage4, CreateStorageWithMetadata)
         HRESULT ( STDMETHODCALLTYPE *CreateStorageWithMetadata )( 
             __RPC__in IMDSPStorage4 * This,
             /* [in] */ DWORD dwAttributes,
@@ -7676,18 +8161,21 @@ EXTERN_C const IID IID_IMDSPStorage4;
             /* [in] */ ULONGLONG qwFileSize,
             /* [out] */ __RPC__deref_out_opt IMDSPStorage **ppNewStorage);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage4, GetSpecifiedMetadata)
         HRESULT ( STDMETHODCALLTYPE *GetSpecifiedMetadata )( 
             __RPC__in IMDSPStorage4 * This,
             /* [in] */ DWORD cProperties,
             /* [size_is][in] */ __RPC__in_ecount_full(cProperties) LPCWSTR *ppwszPropNames,
             /* [in] */ __RPC__in_opt IWMDMMetaData *pMetadata);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage4, FindStorage)
         HRESULT ( STDMETHODCALLTYPE *FindStorage )( 
             __RPC__in IMDSPStorage4 * This,
             /* [in] */ WMDM_FIND_SCOPE findScope,
             /* [in] */ __RPC__in LPCWSTR pwszUniqueID,
             /* [out] */ __RPC__deref_out_opt IMDSPStorage **ppStorage);
         
+        DECLSPEC_XFGVIRT(IMDSPStorage4, GetParent)
         HRESULT ( STDMETHODCALLTYPE *GetParent )( 
             __RPC__in IMDSPStorage4 * This,
             /* [out] */ __RPC__deref_out_opt IMDSPStorage **ppStorage);
@@ -7851,55 +8339,67 @@ EXTERN_C const IID IID_IMDSPStorageGlobals;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMDSPStorageGlobals * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMDSPStorageGlobals * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMDSPStorageGlobals * This);
         
+        DECLSPEC_XFGVIRT(IMDSPStorageGlobals, GetCapabilities)
         HRESULT ( STDMETHODCALLTYPE *GetCapabilities )( 
             __RPC__in IMDSPStorageGlobals * This,
             /* [out] */ __RPC__out DWORD *pdwCapabilities);
         
+        DECLSPEC_XFGVIRT(IMDSPStorageGlobals, GetSerialNumber)
         HRESULT ( STDMETHODCALLTYPE *GetSerialNumber )( 
             __RPC__in IMDSPStorageGlobals * This,
             /* [out] */ __RPC__out PWMDMID pSerialNum,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(IMDSPStorageGlobals, GetTotalSize)
         HRESULT ( STDMETHODCALLTYPE *GetTotalSize )( 
             __RPC__in IMDSPStorageGlobals * This,
             /* [out] */ __RPC__out DWORD *pdwTotalSizeLow,
             /* [out] */ __RPC__out DWORD *pdwTotalSizeHigh);
         
+        DECLSPEC_XFGVIRT(IMDSPStorageGlobals, GetTotalFree)
         HRESULT ( STDMETHODCALLTYPE *GetTotalFree )( 
             __RPC__in IMDSPStorageGlobals * This,
             /* [out] */ __RPC__out DWORD *pdwFreeLow,
             /* [out] */ __RPC__out DWORD *pdwFreeHigh);
         
+        DECLSPEC_XFGVIRT(IMDSPStorageGlobals, GetTotalBad)
         HRESULT ( STDMETHODCALLTYPE *GetTotalBad )( 
             __RPC__in IMDSPStorageGlobals * This,
             /* [out] */ __RPC__out DWORD *pdwBadLow,
             /* [out] */ __RPC__out DWORD *pdwBadHigh);
         
+        DECLSPEC_XFGVIRT(IMDSPStorageGlobals, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in IMDSPStorageGlobals * This,
             /* [out] */ __RPC__out DWORD *pdwStatus);
         
+        DECLSPEC_XFGVIRT(IMDSPStorageGlobals, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IMDSPStorageGlobals * This,
             /* [in] */ UINT fuMode,
             /* [in] */ __RPC__in_opt IWMDMProgress *pProgress);
         
+        DECLSPEC_XFGVIRT(IMDSPStorageGlobals, GetDevice)
         HRESULT ( STDMETHODCALLTYPE *GetDevice )( 
             __RPC__in IMDSPStorageGlobals * This,
             /* [out] */ __RPC__deref_out_opt IMDSPDevice **ppDevice);
         
+        DECLSPEC_XFGVIRT(IMDSPStorageGlobals, GetRootStorage)
         HRESULT ( STDMETHODCALLTYPE *GetRootStorage )( 
             __RPC__in IMDSPStorageGlobals * This,
             /* [out] */ __RPC__deref_out_opt IMDSPStorage **ppRoot);
@@ -8010,42 +8510,52 @@ EXTERN_C const IID IID_IMDSPObjectInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMDSPObjectInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMDSPObjectInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMDSPObjectInfo * This);
         
+        DECLSPEC_XFGVIRT(IMDSPObjectInfo, GetPlayLength)
         HRESULT ( STDMETHODCALLTYPE *GetPlayLength )( 
             __RPC__in IMDSPObjectInfo * This,
             /* [out] */ __RPC__out DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(IMDSPObjectInfo, SetPlayLength)
         HRESULT ( STDMETHODCALLTYPE *SetPlayLength )( 
             __RPC__in IMDSPObjectInfo * This,
             /* [in] */ DWORD dwLength);
         
+        DECLSPEC_XFGVIRT(IMDSPObjectInfo, GetPlayOffset)
         HRESULT ( STDMETHODCALLTYPE *GetPlayOffset )( 
             __RPC__in IMDSPObjectInfo * This,
             /* [out] */ __RPC__out DWORD *pdwOffset);
         
+        DECLSPEC_XFGVIRT(IMDSPObjectInfo, SetPlayOffset)
         HRESULT ( STDMETHODCALLTYPE *SetPlayOffset )( 
             __RPC__in IMDSPObjectInfo * This,
             /* [in] */ DWORD dwOffset);
         
+        DECLSPEC_XFGVIRT(IMDSPObjectInfo, GetTotalLength)
         HRESULT ( STDMETHODCALLTYPE *GetTotalLength )( 
             __RPC__in IMDSPObjectInfo * This,
             /* [out] */ __RPC__out DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(IMDSPObjectInfo, GetLastPlayPosition)
         HRESULT ( STDMETHODCALLTYPE *GetLastPlayPosition )( 
             __RPC__in IMDSPObjectInfo * This,
             /* [out] */ __RPC__out DWORD *pdwLastPos);
         
+        DECLSPEC_XFGVIRT(IMDSPObjectInfo, GetLongestPlayPosition)
         HRESULT ( STDMETHODCALLTYPE *GetLongestPlayPosition )( 
             __RPC__in IMDSPObjectInfo * This,
             /* [out] */ __RPC__out DWORD *pdwLongestPos);
@@ -8161,55 +8671,66 @@ EXTERN_C const IID IID_IMDSPObject;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMDSPObject * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMDSPObject * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMDSPObject * This);
         
+        DECLSPEC_XFGVIRT(IMDSPObject, Open)
         HRESULT ( STDMETHODCALLTYPE *Open )( 
             __RPC__in IMDSPObject * This,
             /* [in] */ UINT fuMode);
         
+        DECLSPEC_XFGVIRT(IMDSPObject, Read)
         HRESULT ( STDMETHODCALLTYPE *Read )( 
             __RPC__in IMDSPObject * This,
             /* [size_is][out] */ __RPC__out_ecount_full(*pdwSize) BYTE *pData,
             /* [out][in] */ __RPC__inout DWORD *pdwSize,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(IMDSPObject, Write)
         HRESULT ( STDMETHODCALLTYPE *Write )( 
             __RPC__in IMDSPObject * This,
             /* [size_is][in] */ __RPC__in_ecount_full(*pdwSize) BYTE *pData,
             /* [out][in] */ __RPC__inout DWORD *pdwSize,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(IMDSPObject, Delete)
         HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in IMDSPObject * This,
             /* [in] */ UINT fuMode,
             /* [in] */ __RPC__in_opt IWMDMProgress *pProgress);
         
+        DECLSPEC_XFGVIRT(IMDSPObject, Seek)
         HRESULT ( STDMETHODCALLTYPE *Seek )( 
             __RPC__in IMDSPObject * This,
             /* [in] */ UINT fuFlags,
             /* [in] */ DWORD dwOffset);
         
+        DECLSPEC_XFGVIRT(IMDSPObject, Rename)
         HRESULT ( STDMETHODCALLTYPE *Rename )( 
             __RPC__in IMDSPObject * This,
             /* [in] */ __RPC__in LPWSTR pwszNewName,
             /* [in] */ __RPC__in_opt IWMDMProgress *pProgress);
         
+        DECLSPEC_XFGVIRT(IMDSPObject, Move)
         HRESULT ( STDMETHODCALLTYPE *Move )( 
             __RPC__in IMDSPObject * This,
             /* [in] */ UINT fuMode,
             /* [in] */ __RPC__in_opt IWMDMProgress *pProgress,
             /* [in] */ __RPC__in_opt IMDSPStorage *pTarget);
         
+        DECLSPEC_XFGVIRT(IMDSPObject, Close)
         HRESULT ( STDMETHODCALLTYPE *Close )( 
             __RPC__in IMDSPObject * This);
         
@@ -8303,63 +8824,76 @@ EXTERN_C const IID IID_IMDSPObject2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMDSPObject2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMDSPObject2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMDSPObject2 * This);
         
+        DECLSPEC_XFGVIRT(IMDSPObject, Open)
         HRESULT ( STDMETHODCALLTYPE *Open )( 
             __RPC__in IMDSPObject2 * This,
             /* [in] */ UINT fuMode);
         
+        DECLSPEC_XFGVIRT(IMDSPObject, Read)
         HRESULT ( STDMETHODCALLTYPE *Read )( 
             __RPC__in IMDSPObject2 * This,
             /* [size_is][out] */ __RPC__out_ecount_full(*pdwSize) BYTE *pData,
             /* [out][in] */ __RPC__inout DWORD *pdwSize,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(IMDSPObject, Write)
         HRESULT ( STDMETHODCALLTYPE *Write )( 
             __RPC__in IMDSPObject2 * This,
             /* [size_is][in] */ __RPC__in_ecount_full(*pdwSize) BYTE *pData,
             /* [out][in] */ __RPC__inout DWORD *pdwSize,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(IMDSPObject, Delete)
         HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in IMDSPObject2 * This,
             /* [in] */ UINT fuMode,
             /* [in] */ __RPC__in_opt IWMDMProgress *pProgress);
         
+        DECLSPEC_XFGVIRT(IMDSPObject, Seek)
         HRESULT ( STDMETHODCALLTYPE *Seek )( 
             __RPC__in IMDSPObject2 * This,
             /* [in] */ UINT fuFlags,
             /* [in] */ DWORD dwOffset);
         
+        DECLSPEC_XFGVIRT(IMDSPObject, Rename)
         HRESULT ( STDMETHODCALLTYPE *Rename )( 
             __RPC__in IMDSPObject2 * This,
             /* [in] */ __RPC__in LPWSTR pwszNewName,
             /* [in] */ __RPC__in_opt IWMDMProgress *pProgress);
         
+        DECLSPEC_XFGVIRT(IMDSPObject, Move)
         HRESULT ( STDMETHODCALLTYPE *Move )( 
             __RPC__in IMDSPObject2 * This,
             /* [in] */ UINT fuMode,
             /* [in] */ __RPC__in_opt IWMDMProgress *pProgress,
             /* [in] */ __RPC__in_opt IMDSPStorage *pTarget);
         
+        DECLSPEC_XFGVIRT(IMDSPObject, Close)
         HRESULT ( STDMETHODCALLTYPE *Close )( 
             __RPC__in IMDSPObject2 * This);
         
+        DECLSPEC_XFGVIRT(IMDSPObject2, ReadOnClearChannel)
         HRESULT ( STDMETHODCALLTYPE *ReadOnClearChannel )( 
             __RPC__in IMDSPObject2 * This,
             /* [size_is][out] */ __RPC__out_ecount_full(*pdwSize) BYTE *pData,
             /* [out][in] */ __RPC__inout DWORD *pdwSize);
         
+        DECLSPEC_XFGVIRT(IMDSPObject2, WriteOnClearChannel)
         HRESULT ( STDMETHODCALLTYPE *WriteOnClearChannel )( 
             __RPC__in IMDSPObject2 * This,
             /* [size_is][in] */ __RPC__in_ecount_full(*pdwSize) BYTE *pData,
@@ -8463,18 +8997,22 @@ EXTERN_C const IID IID_IMDSPDirectTransfer;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMDSPDirectTransfer * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMDSPDirectTransfer * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMDSPDirectTransfer * This);
         
+        DECLSPEC_XFGVIRT(IMDSPDirectTransfer, TransferToDevice)
         HRESULT ( STDMETHODCALLTYPE *TransferToDevice )( 
             __RPC__in IMDSPDirectTransfer * This,
             /* [string][unique][in] */ __RPC__in_opt_string LPCWSTR pwszSourceFilePath,
@@ -8550,18 +9088,22 @@ EXTERN_C const IID IID_IMDSPRevoked;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMDSPRevoked * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMDSPRevoked * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMDSPRevoked * This);
         
+        DECLSPEC_XFGVIRT(IMDSPRevoked, GetRevocationURL)
         HRESULT ( STDMETHODCALLTYPE *GetRevocationURL )( 
             __RPC__in IMDSPRevoked * This,
             /* [size_is][size_is][string][out][in] */ __RPC__deref_inout_ecount_full_opt_string(*pdwBufferLen) LPWSTR *ppwszRevocationURL,
@@ -8676,18 +9218,22 @@ EXTERN_C const IID IID_ISCPSecureAuthenticate;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISCPSecureAuthenticate * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISCPSecureAuthenticate * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISCPSecureAuthenticate * This);
         
+        DECLSPEC_XFGVIRT(ISCPSecureAuthenticate, GetSecureQuery)
         HRESULT ( STDMETHODCALLTYPE *GetSecureQuery )( 
             __RPC__in ISCPSecureAuthenticate * This,
             /* [out] */ __RPC__deref_out_opt ISCPSecureQuery **ppSecureQuery);
@@ -8756,22 +9302,27 @@ EXTERN_C const IID IID_ISCPSecureAuthenticate2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISCPSecureAuthenticate2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISCPSecureAuthenticate2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISCPSecureAuthenticate2 * This);
         
+        DECLSPEC_XFGVIRT(ISCPSecureAuthenticate, GetSecureQuery)
         HRESULT ( STDMETHODCALLTYPE *GetSecureQuery )( 
             __RPC__in ISCPSecureAuthenticate2 * This,
             /* [out] */ __RPC__deref_out_opt ISCPSecureQuery **ppSecureQuery);
         
+        DECLSPEC_XFGVIRT(ISCPSecureAuthenticate2, GetSCPSession)
         HRESULT ( STDMETHODCALLTYPE *GetSCPSession )( 
             __RPC__in ISCPSecureAuthenticate2 * This,
             /* [out] */ __RPC__deref_out_opt ISCPSession **ppSCPSession);
@@ -8876,18 +9427,22 @@ EXTERN_C const IID IID_ISCPSecureQuery;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISCPSecureQuery * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISCPSecureQuery * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISCPSecureQuery * This);
         
+        DECLSPEC_XFGVIRT(ISCPSecureQuery, GetDataDemands)
         HRESULT ( STDMETHODCALLTYPE *GetDataDemands )( 
             __RPC__in ISCPSecureQuery * This,
             /* [out] */ __RPC__out UINT *pfuFlags,
@@ -8896,6 +9451,7 @@ EXTERN_C const IID IID_ISCPSecureQuery;
             /* [out] */ __RPC__out DWORD *pdwMinDecideData,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(ISCPSecureQuery, ExamineData)
         HRESULT ( STDMETHODCALLTYPE *ExamineData )( 
             __RPC__in ISCPSecureQuery * This,
             /* [in] */ UINT fuFlags,
@@ -8904,6 +9460,7 @@ EXTERN_C const IID IID_ISCPSecureQuery;
             /* [in] */ DWORD dwSize,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(ISCPSecureQuery, MakeDecision)
         HRESULT ( STDMETHODCALLTYPE *MakeDecision )( 
             __RPC__in ISCPSecureQuery * This,
             /* [in] */ UINT fuFlags,
@@ -8916,6 +9473,7 @@ EXTERN_C const IID IID_ISCPSecureQuery;
             /* [out] */ __RPC__deref_out_opt ISCPSecureExchange **ppExchange,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(ISCPSecureQuery, GetRights)
         HRESULT ( STDMETHODCALLTYPE *GetRights )( 
             __RPC__in ISCPSecureQuery * This,
             /* [size_is][in] */ __RPC__in_ecount_full(dwSize) BYTE *pData,
@@ -9017,18 +9575,22 @@ EXTERN_C const IID IID_ISCPSecureQuery2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISCPSecureQuery2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISCPSecureQuery2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISCPSecureQuery2 * This);
         
+        DECLSPEC_XFGVIRT(ISCPSecureQuery, GetDataDemands)
         HRESULT ( STDMETHODCALLTYPE *GetDataDemands )( 
             __RPC__in ISCPSecureQuery2 * This,
             /* [out] */ __RPC__out UINT *pfuFlags,
@@ -9037,6 +9599,7 @@ EXTERN_C const IID IID_ISCPSecureQuery2;
             /* [out] */ __RPC__out DWORD *pdwMinDecideData,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(ISCPSecureQuery, ExamineData)
         HRESULT ( STDMETHODCALLTYPE *ExamineData )( 
             __RPC__in ISCPSecureQuery2 * This,
             /* [in] */ UINT fuFlags,
@@ -9045,6 +9608,7 @@ EXTERN_C const IID IID_ISCPSecureQuery2;
             /* [in] */ DWORD dwSize,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(ISCPSecureQuery, MakeDecision)
         HRESULT ( STDMETHODCALLTYPE *MakeDecision )( 
             __RPC__in ISCPSecureQuery2 * This,
             /* [in] */ UINT fuFlags,
@@ -9057,6 +9621,7 @@ EXTERN_C const IID IID_ISCPSecureQuery2;
             /* [out] */ __RPC__deref_out_opt ISCPSecureExchange **ppExchange,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(ISCPSecureQuery, GetRights)
         HRESULT ( STDMETHODCALLTYPE *GetRights )( 
             __RPC__in ISCPSecureQuery2 * This,
             /* [size_is][in] */ __RPC__in_ecount_full(dwSize) BYTE *pData,
@@ -9068,6 +9633,7 @@ EXTERN_C const IID IID_ISCPSecureQuery2;
             /* [out] */ __RPC__out UINT *pnRightsCount,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(ISCPSecureQuery2, MakeDecision2)
         HRESULT ( STDMETHODCALLTYPE *MakeDecision2 )( 
             __RPC__in ISCPSecureQuery2 * This,
             /* [in] */ UINT fuFlags,
@@ -9176,18 +9742,22 @@ EXTERN_C const IID IID_ISCPSecureExchange;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISCPSecureExchange * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISCPSecureExchange * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISCPSecureExchange * This);
         
+        DECLSPEC_XFGVIRT(ISCPSecureExchange, TransferContainerData)
         HRESULT ( STDMETHODCALLTYPE *TransferContainerData )( 
             __RPC__in ISCPSecureExchange * This,
             /* [size_is][in] */ __RPC__in_ecount_full(dwSize) BYTE *pData,
@@ -9195,12 +9765,14 @@ EXTERN_C const IID IID_ISCPSecureExchange;
             /* [out] */ __RPC__out UINT *pfuReadyFlags,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(ISCPSecureExchange, ObjectData)
         HRESULT ( STDMETHODCALLTYPE *ObjectData )( 
             __RPC__in ISCPSecureExchange * This,
             /* [size_is][out] */ __RPC__out_ecount_full(*pdwSize) BYTE *pData,
             /* [out][in] */ __RPC__inout DWORD *pdwSize,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(ISCPSecureExchange, TransferComplete)
         HRESULT ( STDMETHODCALLTYPE *TransferComplete )( 
             __RPC__in ISCPSecureExchange * This);
         
@@ -9278,18 +9850,22 @@ EXTERN_C const IID IID_ISCPSecureExchange2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISCPSecureExchange2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISCPSecureExchange2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISCPSecureExchange2 * This);
         
+        DECLSPEC_XFGVIRT(ISCPSecureExchange, TransferContainerData)
         HRESULT ( STDMETHODCALLTYPE *TransferContainerData )( 
             __RPC__in ISCPSecureExchange2 * This,
             /* [size_is][in] */ __RPC__in_ecount_full(dwSize) BYTE *pData,
@@ -9297,15 +9873,18 @@ EXTERN_C const IID IID_ISCPSecureExchange2;
             /* [out] */ __RPC__out UINT *pfuReadyFlags,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(ISCPSecureExchange, ObjectData)
         HRESULT ( STDMETHODCALLTYPE *ObjectData )( 
             __RPC__in ISCPSecureExchange2 * This,
             /* [size_is][out] */ __RPC__out_ecount_full(*pdwSize) BYTE *pData,
             /* [out][in] */ __RPC__inout DWORD *pdwSize,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(ISCPSecureExchange, TransferComplete)
         HRESULT ( STDMETHODCALLTYPE *TransferComplete )( 
             __RPC__in ISCPSecureExchange2 * This);
         
+        DECLSPEC_XFGVIRT(ISCPSecureExchange2, TransferContainerData2)
         HRESULT ( STDMETHODCALLTYPE *TransferContainerData2 )( 
             __RPC__in ISCPSecureExchange2 * This,
             /* [size_is][in] */ __RPC__in_ecount_full(dwSize) BYTE *pData,
@@ -9400,18 +9979,22 @@ EXTERN_C const IID IID_ISCPSecureExchange3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISCPSecureExchange3 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISCPSecureExchange3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISCPSecureExchange3 * This);
         
+        DECLSPEC_XFGVIRT(ISCPSecureExchange, TransferContainerData)
         HRESULT ( STDMETHODCALLTYPE *TransferContainerData )( 
             __RPC__in ISCPSecureExchange3 * This,
             /* [size_is][in] */ __RPC__in_ecount_full(dwSize) BYTE *pData,
@@ -9419,15 +10002,18 @@ EXTERN_C const IID IID_ISCPSecureExchange3;
             /* [out] */ __RPC__out UINT *pfuReadyFlags,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(ISCPSecureExchange, ObjectData)
         HRESULT ( STDMETHODCALLTYPE *ObjectData )( 
             __RPC__in ISCPSecureExchange3 * This,
             /* [size_is][out] */ __RPC__out_ecount_full(*pdwSize) BYTE *pData,
             /* [out][in] */ __RPC__inout DWORD *pdwSize,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(ISCPSecureExchange, TransferComplete)
         HRESULT ( STDMETHODCALLTYPE *TransferComplete )( 
             __RPC__in ISCPSecureExchange3 * This);
         
+        DECLSPEC_XFGVIRT(ISCPSecureExchange2, TransferContainerData2)
         HRESULT ( STDMETHODCALLTYPE *TransferContainerData2 )( 
             __RPC__in ISCPSecureExchange3 * This,
             /* [size_is][in] */ __RPC__in_ecount_full(dwSize) BYTE *pData,
@@ -9436,6 +10022,7 @@ EXTERN_C const IID IID_ISCPSecureExchange3;
             /* [out] */ __RPC__out UINT *pfuReadyFlags,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(ISCPSecureExchange3, TransferContainerDataOnClearChannel)
         HRESULT ( STDMETHODCALLTYPE *TransferContainerDataOnClearChannel )( 
             __RPC__in ISCPSecureExchange3 * This,
             /* [in] */ __RPC__in_opt IMDSPDevice *pDevice,
@@ -9444,12 +10031,14 @@ EXTERN_C const IID IID_ISCPSecureExchange3;
             /* [in] */ __RPC__in_opt IWMDMProgress3 *pProgressCallback,
             /* [out] */ __RPC__out UINT *pfuReadyFlags);
         
+        DECLSPEC_XFGVIRT(ISCPSecureExchange3, GetObjectDataOnClearChannel)
         HRESULT ( STDMETHODCALLTYPE *GetObjectDataOnClearChannel )( 
             __RPC__in ISCPSecureExchange3 * This,
             /* [in] */ __RPC__in_opt IMDSPDevice *pDevice,
             /* [size_is][out] */ __RPC__out_ecount_full(*pdwSize) BYTE *pData,
             /* [out][in] */ __RPC__inout DWORD *pdwSize);
         
+        DECLSPEC_XFGVIRT(ISCPSecureExchange3, TransferCompleteForDevice)
         HRESULT ( STDMETHODCALLTYPE *TransferCompleteForDevice )( 
             __RPC__in ISCPSecureExchange3 * This,
             /* [in] */ __RPC__in_opt IMDSPDevice *pDevice);
@@ -9547,29 +10136,35 @@ EXTERN_C const IID IID_ISCPSession;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISCPSession * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISCPSession * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISCPSession * This);
         
+        DECLSPEC_XFGVIRT(ISCPSession, BeginSession)
         HRESULT ( STDMETHODCALLTYPE *BeginSession )( 
             __RPC__in ISCPSession * This,
             /* [in] */ __RPC__in_opt IMDSPDevice *pIDevice,
             /* [size_is][in] */ __RPC__in_ecount_full(dwSizeCtx) BYTE *pCtx,
             /* [in] */ DWORD dwSizeCtx);
         
+        DECLSPEC_XFGVIRT(ISCPSession, EndSession)
         HRESULT ( STDMETHODCALLTYPE *EndSession )( 
             __RPC__in ISCPSession * This,
             /* [size_is][in] */ __RPC__in_ecount_full(dwSizeCtx) BYTE *pCtx,
             /* [in] */ DWORD dwSizeCtx);
         
+        DECLSPEC_XFGVIRT(ISCPSession, GetSecureQuery)
         HRESULT ( STDMETHODCALLTYPE *GetSecureQuery )( 
             __RPC__in ISCPSession * This,
             /* [out] */ __RPC__deref_out_opt ISCPSecureQuery **ppSecureQuery);
@@ -9671,18 +10266,22 @@ EXTERN_C const IID IID_ISCPSecureQuery3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISCPSecureQuery3 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISCPSecureQuery3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISCPSecureQuery3 * This);
         
+        DECLSPEC_XFGVIRT(ISCPSecureQuery, GetDataDemands)
         HRESULT ( STDMETHODCALLTYPE *GetDataDemands )( 
             __RPC__in ISCPSecureQuery3 * This,
             /* [out] */ __RPC__out UINT *pfuFlags,
@@ -9691,6 +10290,7 @@ EXTERN_C const IID IID_ISCPSecureQuery3;
             /* [out] */ __RPC__out DWORD *pdwMinDecideData,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(ISCPSecureQuery, ExamineData)
         HRESULT ( STDMETHODCALLTYPE *ExamineData )( 
             __RPC__in ISCPSecureQuery3 * This,
             /* [in] */ UINT fuFlags,
@@ -9699,6 +10299,7 @@ EXTERN_C const IID IID_ISCPSecureQuery3;
             /* [in] */ DWORD dwSize,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(ISCPSecureQuery, MakeDecision)
         HRESULT ( STDMETHODCALLTYPE *MakeDecision )( 
             __RPC__in ISCPSecureQuery3 * This,
             /* [in] */ UINT fuFlags,
@@ -9711,6 +10312,7 @@ EXTERN_C const IID IID_ISCPSecureQuery3;
             /* [out] */ __RPC__deref_out_opt ISCPSecureExchange **ppExchange,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(ISCPSecureQuery, GetRights)
         HRESULT ( STDMETHODCALLTYPE *GetRights )( 
             __RPC__in ISCPSecureQuery3 * This,
             /* [size_is][in] */ __RPC__in_ecount_full(dwSize) BYTE *pData,
@@ -9722,6 +10324,7 @@ EXTERN_C const IID IID_ISCPSecureQuery3;
             /* [out] */ __RPC__out UINT *pnRightsCount,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(ISCPSecureQuery2, MakeDecision2)
         HRESULT ( STDMETHODCALLTYPE *MakeDecision2 )( 
             __RPC__in ISCPSecureQuery3 * This,
             /* [in] */ UINT fuFlags,
@@ -9743,6 +10346,7 @@ EXTERN_C const IID IID_ISCPSecureQuery3;
             /* [out] */ __RPC__deref_out_opt ISCPSecureExchange **ppExchange,
             /* [out][in] */ __RPC__inout_ecount_full(WMDM_MAC_LENGTH) BYTE abMac[ 8 ]);
         
+        DECLSPEC_XFGVIRT(ISCPSecureQuery3, GetRightsOnClearChannel)
         HRESULT ( STDMETHODCALLTYPE *GetRightsOnClearChannel )( 
             __RPC__in ISCPSecureQuery3 * This,
             /* [size_is][in] */ __RPC__in_ecount_full(dwSize) BYTE *pData,
@@ -9754,6 +10358,7 @@ EXTERN_C const IID IID_ISCPSecureQuery3;
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pnRightsCount) PWMDMRIGHTS *ppRights,
             /* [out] */ __RPC__out UINT *pnRightsCount);
         
+        DECLSPEC_XFGVIRT(ISCPSecureQuery3, MakeDecisionOnClearChannel)
         HRESULT ( STDMETHODCALLTYPE *MakeDecisionOnClearChannel )( 
             __RPC__in ISCPSecureQuery3 * This,
             /* [in] */ UINT fuFlags,
@@ -9877,18 +10482,22 @@ EXTERN_C const IID IID_IComponentAuthenticate;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IComponentAuthenticate * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IComponentAuthenticate * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IComponentAuthenticate * This);
         
+        DECLSPEC_XFGVIRT(IComponentAuthenticate, SACAuth)
         HRESULT ( STDMETHODCALLTYPE *SACAuth )( 
             __RPC__in IComponentAuthenticate * This,
             /* [in] */ DWORD dwProtocolID,
@@ -9898,6 +10507,7 @@ EXTERN_C const IID IID_IComponentAuthenticate;
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pdwDataOutLen) BYTE **ppbDataOut,
             /* [out] */ __RPC__out DWORD *pdwDataOutLen);
         
+        DECLSPEC_XFGVIRT(IComponentAuthenticate, SACGetProtocols)
         HRESULT ( STDMETHODCALLTYPE *SACGetProtocols )( 
             __RPC__in IComponentAuthenticate * This,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pdwProtocolCount) DWORD **ppdwProtocols,

@@ -20,6 +20,20 @@ NetExtensionGetFragmentVirtualAddress(
     return (NET_FRAGMENT_VIRTUAL_ADDRESS *)NetExtensionGetData(Extension, Index);
 }
 
+inline
+void *
+NetExtensionGetFragmentVirtualAddressOffset(
+    NET_FRAGMENT const * Fragment,
+    NET_EXTENSION const * Extension,
+    UINT32 Index
+)
+{
+    NET_FRAGMENT_VIRTUAL_ADDRESS const * virtualAddress =
+        NetExtensionGetFragmentVirtualAddress(Extension, Index);
+
+    return (UINT8 *)virtualAddress->VirtualAddress + Fragment->Offset;
+}
+
 EXTERN_C_END
 
 #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)

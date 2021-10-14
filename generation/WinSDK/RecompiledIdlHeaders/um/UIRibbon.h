@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -364,6 +372,7 @@ EXTERN_C const IID IID_IUISimplePropertySet;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUISimplePropertySet * This,
             /* [annotation][in] */ 
@@ -371,12 +380,15 @@ EXTERN_C const IID IID_IUISimplePropertySet;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IUISimplePropertySet * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IUISimplePropertySet * This);
         
+        DECLSPEC_XFGVIRT(IUISimplePropertySet, GetValue)
         /* [annotation] */ 
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *GetValue )( 
@@ -465,6 +477,7 @@ EXTERN_C const IID IID_IUIRibbon;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIRibbon * This,
             /* [annotation][in] */ 
@@ -472,12 +485,15 @@ EXTERN_C const IID IID_IUIRibbon;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IUIRibbon * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IUIRibbon * This);
         
+        DECLSPEC_XFGVIRT(IUIRibbon, GetHeight)
         /* [annotation] */ 
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *GetHeight )( 
@@ -485,6 +501,7 @@ EXTERN_C const IID IID_IUIRibbon;
             /* [annotation][out] */ 
             _Out_  UINT32 *cy);
         
+        DECLSPEC_XFGVIRT(IUIRibbon, LoadSettingsFromStream)
         /* [annotation] */ 
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *LoadSettingsFromStream )( 
@@ -492,6 +509,7 @@ EXTERN_C const IID IID_IUIRibbon;
             /* [annotation][in] */ 
             _In_  IStream *pStream);
         
+        DECLSPEC_XFGVIRT(IUIRibbon, SaveSettingsToStream)
         /* [annotation] */ 
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *SaveSettingsToStream )( 
@@ -646,6 +664,7 @@ EXTERN_C const IID IID_IUIFramework;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIFramework * This,
             /* [annotation][in] */ 
@@ -653,12 +672,15 @@ EXTERN_C const IID IID_IUIFramework;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IUIFramework * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IUIFramework * This);
         
+        DECLSPEC_XFGVIRT(IUIFramework, Initialize)
         /* [annotation] */ 
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
@@ -668,9 +690,11 @@ EXTERN_C const IID IID_IUIFramework;
             /* [annotation][in] */ 
             _In_  IUIApplication *application);
         
+        DECLSPEC_XFGVIRT(IUIFramework, Destroy)
         HRESULT ( STDMETHODCALLTYPE *Destroy )( 
             IUIFramework * This);
         
+        DECLSPEC_XFGVIRT(IUIFramework, LoadUI)
         /* [annotation] */ 
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *LoadUI )( 
@@ -680,6 +704,7 @@ EXTERN_C const IID IID_IUIFramework;
             /* [annotation][in] */ 
             _In_  LPCWSTR resourceName);
         
+        DECLSPEC_XFGVIRT(IUIFramework, GetView)
         /* [annotation] */ 
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *GetView )( 
@@ -689,6 +714,7 @@ EXTERN_C const IID IID_IUIFramework;
             /* [annotation][iid_is][out] */ 
             _Outptr_  void **ppv);
         
+        DECLSPEC_XFGVIRT(IUIFramework, GetUICommandProperty)
         /* [annotation] */ 
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *GetUICommandProperty )( 
@@ -699,6 +725,7 @@ EXTERN_C const IID IID_IUIFramework;
             /* [annotation][out] */ 
             _Out_  PROPVARIANT *value);
         
+        DECLSPEC_XFGVIRT(IUIFramework, SetUICommandProperty)
         /* [annotation] */ 
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *SetUICommandProperty )( 
@@ -709,6 +736,7 @@ EXTERN_C const IID IID_IUIFramework;
             /* [annotation][in] */ 
             _In_  REFPROPVARIANT value);
         
+        DECLSPEC_XFGVIRT(IUIFramework, InvalidateUICommand)
         /* [annotation] */ 
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *InvalidateUICommand )( 
@@ -718,9 +746,11 @@ EXTERN_C const IID IID_IUIFramework;
             /* [annotation][in] */ 
             _In_opt_  const PROPERTYKEY *key);
         
+        DECLSPEC_XFGVIRT(IUIFramework, FlushPendingInvalidations)
         HRESULT ( STDMETHODCALLTYPE *FlushPendingInvalidations )( 
             IUIFramework * This);
         
+        DECLSPEC_XFGVIRT(IUIFramework, SetModes)
         /* [annotation] */ 
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *SetModes )( 
@@ -845,6 +875,7 @@ EXTERN_C const IID IID_IUIEventLogger;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIEventLogger * This,
             /* [annotation][in] */ 
@@ -852,12 +883,15 @@ EXTERN_C const IID IID_IUIEventLogger;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IUIEventLogger * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IUIEventLogger * This);
         
+        DECLSPEC_XFGVIRT(IUIEventLogger, OnUIEvent)
         void ( STDMETHODCALLTYPE *OnUIEvent )( 
             IUIEventLogger * This,
             /* [annotation][in] */ 
@@ -930,6 +964,7 @@ EXTERN_C const IID IID_IUIEventingManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIEventingManager * This,
             /* [annotation][in] */ 
@@ -937,12 +972,15 @@ EXTERN_C const IID IID_IUIEventingManager;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IUIEventingManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IUIEventingManager * This);
         
+        DECLSPEC_XFGVIRT(IUIEventingManager, SetEventLogger)
         /* [annotation] */ 
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *SetEventLogger )( 
@@ -1017,6 +1055,7 @@ EXTERN_C const IID IID_IUIContextualUI;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIContextualUI * This,
             /* [annotation][in] */ 
@@ -1024,12 +1063,15 @@ EXTERN_C const IID IID_IUIContextualUI;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IUIContextualUI * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IUIContextualUI * This);
         
+        DECLSPEC_XFGVIRT(IUIContextualUI, ShowAtLocation)
         /* [annotation] */ 
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *ShowAtLocation )( 
@@ -1140,6 +1182,7 @@ EXTERN_C const IID IID_IUICollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUICollection * This,
             /* [annotation][in] */ 
@@ -1147,12 +1190,15 @@ EXTERN_C const IID IID_IUICollection;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IUICollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IUICollection * This);
         
+        DECLSPEC_XFGVIRT(IUICollection, GetCount)
         /* [annotation] */ 
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
@@ -1160,6 +1206,7 @@ EXTERN_C const IID IID_IUICollection;
             /* [annotation][out] */ 
             _Out_  UINT32 *count);
         
+        DECLSPEC_XFGVIRT(IUICollection, GetItem)
         /* [annotation] */ 
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *GetItem )( 
@@ -1168,6 +1215,7 @@ EXTERN_C const IID IID_IUICollection;
             /* [annotation][out] */ 
             _Outptr_  IUnknown **item);
         
+        DECLSPEC_XFGVIRT(IUICollection, Add)
         /* [annotation] */ 
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *Add )( 
@@ -1175,6 +1223,7 @@ EXTERN_C const IID IID_IUICollection;
             /* [annotation][in] */ 
             _In_  IUnknown *item);
         
+        DECLSPEC_XFGVIRT(IUICollection, Insert)
         /* [annotation] */ 
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *Insert )( 
@@ -1183,12 +1232,14 @@ EXTERN_C const IID IID_IUICollection;
             /* [annotation][in] */ 
             _In_  IUnknown *item);
         
+        DECLSPEC_XFGVIRT(IUICollection, RemoveAt)
         /* [annotation] */ 
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *RemoveAt )( 
             IUICollection * This,
             UINT32 index);
         
+        DECLSPEC_XFGVIRT(IUICollection, Replace)
         /* [annotation] */ 
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *Replace )( 
@@ -1197,6 +1248,7 @@ EXTERN_C const IID IID_IUICollection;
             /* [annotation][in] */ 
             _In_  IUnknown *itemReplaceWith);
         
+        DECLSPEC_XFGVIRT(IUICollection, Clear)
         /* [annotation] */ 
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *Clear )( 
@@ -1311,6 +1363,7 @@ EXTERN_C const IID IID_IUICollectionChangedEvent;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUICollectionChangedEvent * This,
             /* [annotation][in] */ 
@@ -1318,12 +1371,15 @@ EXTERN_C const IID IID_IUICollectionChangedEvent;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IUICollectionChangedEvent * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IUICollectionChangedEvent * This);
         
+        DECLSPEC_XFGVIRT(IUICollectionChangedEvent, OnChanged)
         /* [annotation] */ 
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *OnChanged )( 
@@ -1428,6 +1484,7 @@ EXTERN_C const IID IID_IUICommandHandler;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUICommandHandler * This,
             /* [annotation][in] */ 
@@ -1435,12 +1492,15 @@ EXTERN_C const IID IID_IUICommandHandler;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IUICommandHandler * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IUICommandHandler * This);
         
+        DECLSPEC_XFGVIRT(IUICommandHandler, Execute)
         /* [annotation] */ 
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *Execute )( 
@@ -1454,6 +1514,7 @@ EXTERN_C const IID IID_IUICommandHandler;
             /* [annotation][in] */ 
             _In_opt_  IUISimplePropertySet *commandExecutionProperties);
         
+        DECLSPEC_XFGVIRT(IUICommandHandler, UpdateProperty)
         /* [annotation] */ 
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *UpdateProperty )( 
@@ -1597,6 +1658,7 @@ EXTERN_C const IID IID_IUIApplication;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIApplication * This,
             /* [annotation][in] */ 
@@ -1604,12 +1666,15 @@ EXTERN_C const IID IID_IUIApplication;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IUIApplication * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IUIApplication * This);
         
+        DECLSPEC_XFGVIRT(IUIApplication, OnViewChanged)
         /* [annotation] */ 
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *OnViewChanged )( 
@@ -1621,6 +1686,7 @@ EXTERN_C const IID IID_IUIApplication;
             UI_VIEWVERB verb,
             INT32 uReasonCode);
         
+        DECLSPEC_XFGVIRT(IUIApplication, OnCreateUICommand)
         /* [annotation] */ 
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *OnCreateUICommand )( 
@@ -1630,6 +1696,7 @@ EXTERN_C const IID IID_IUIApplication;
             /* [annotation][out] */ 
             _Out_  IUICommandHandler **commandHandler);
         
+        DECLSPEC_XFGVIRT(IUIApplication, OnDestroyUICommand)
         /* [annotation] */ 
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *OnDestroyUICommand )( 
@@ -1712,6 +1779,7 @@ EXTERN_C const IID IID_IUIImage;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIImage * This,
             /* [annotation][in] */ 
@@ -1719,12 +1787,15 @@ EXTERN_C const IID IID_IUIImage;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IUIImage * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IUIImage * This);
         
+        DECLSPEC_XFGVIRT(IUIImage, GetBitmap)
         /* [annotation] */ 
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *GetBitmap )( 
@@ -1809,6 +1880,7 @@ EXTERN_C const IID IID_IUIImageFromBitmap;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIImageFromBitmap * This,
             /* [annotation][in] */ 
@@ -1816,12 +1888,15 @@ EXTERN_C const IID IID_IUIImageFromBitmap;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IUIImageFromBitmap * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IUIImageFromBitmap * This);
         
+        DECLSPEC_XFGVIRT(IUIImageFromBitmap, CreateImage)
         /* [annotation] */ 
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *CreateImage )( 

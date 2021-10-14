@@ -1,6 +1,11 @@
 --traverse
+<IncludeRoot>/shared/hvsocket.h
 <IncludeRoot>/um/WinHvPlatformDefs.h
 <IncludeRoot>/um/WinHvPlatform.h
 <IncludeRoot>/um/WinHvEmulation.h
+<IncludeRoot>/shared/vmgenerationcounter.h
+<IncludeRoot>/um/hypervdevicevirtualization.h
+<IncludeRoot>/um/vmsavedstatedump.h
+<IncludeRoot>/um/vmsavedstatedumpdefs.h
 --namespace
 Windows.Win32.System.Hypervisor

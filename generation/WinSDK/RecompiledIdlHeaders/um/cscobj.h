@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -895,33 +903,41 @@ EXTERN_C const IID IID_IOfflineFilesEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesEvents * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesEvents * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, CacheMoved)
         HRESULT ( STDMETHODCALLTYPE *CacheMoved )( 
             __RPC__in IOfflineFilesEvents * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszOldPath,
             /* [string][in] */ __RPC__in_string LPCWSTR pszNewPath);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, CacheIsFull)
         HRESULT ( STDMETHODCALLTYPE *CacheIsFull )( 
             __RPC__in IOfflineFilesEvents * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, CacheIsCorrupted)
         HRESULT ( STDMETHODCALLTYPE *CacheIsCorrupted )( 
             __RPC__in IOfflineFilesEvents * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, Enabled)
         HRESULT ( STDMETHODCALLTYPE *Enabled )( 
             __RPC__in IOfflineFilesEvents * This,
             /* [in] */ BOOL bEnabled);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, EncryptionChanged)
         HRESULT ( STDMETHODCALLTYPE *EncryptionChanged )( 
             __RPC__in IOfflineFilesEvents * This,
             /* [in] */ BOOL bWasEncrypted,
@@ -929,75 +945,90 @@ EXTERN_C const IID IID_IOfflineFilesEvents;
             /* [in] */ BOOL bIsEncrypted,
             /* [in] */ BOOL bIsPartial);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, SyncBegin)
         HRESULT ( STDMETHODCALLTYPE *SyncBegin )( 
             __RPC__in IOfflineFilesEvents * This,
             /* [in] */ __RPC__in REFGUID rSyncId);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, SyncFileResult)
         HRESULT ( STDMETHODCALLTYPE *SyncFileResult )( 
             __RPC__in IOfflineFilesEvents * This,
             /* [in] */ __RPC__in REFGUID rSyncId,
             /* [string][in] */ __RPC__in_string LPCWSTR pszFile,
             /* [in] */ HRESULT hrResult);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, SyncConflictRecAdded)
         HRESULT ( STDMETHODCALLTYPE *SyncConflictRecAdded )( 
             __RPC__in IOfflineFilesEvents * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszConflictPath,
             /* [in] */ __RPC__in const FILETIME *pftConflictDateTime,
             /* [in] */ OFFLINEFILES_SYNC_STATE ConflictSyncState);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, SyncConflictRecUpdated)
         HRESULT ( STDMETHODCALLTYPE *SyncConflictRecUpdated )( 
             __RPC__in IOfflineFilesEvents * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszConflictPath,
             /* [in] */ __RPC__in const FILETIME *pftConflictDateTime,
             /* [in] */ OFFLINEFILES_SYNC_STATE ConflictSyncState);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, SyncConflictRecRemoved)
         HRESULT ( STDMETHODCALLTYPE *SyncConflictRecRemoved )( 
             __RPC__in IOfflineFilesEvents * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszConflictPath,
             /* [in] */ __RPC__in const FILETIME *pftConflictDateTime,
             /* [in] */ OFFLINEFILES_SYNC_STATE ConflictSyncState);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, SyncEnd)
         HRESULT ( STDMETHODCALLTYPE *SyncEnd )( 
             __RPC__in IOfflineFilesEvents * This,
             /* [in] */ __RPC__in REFGUID rSyncId,
             /* [in] */ HRESULT hrResult);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, NetTransportArrived)
         HRESULT ( STDMETHODCALLTYPE *NetTransportArrived )( 
             __RPC__in IOfflineFilesEvents * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, NoNetTransports)
         HRESULT ( STDMETHODCALLTYPE *NoNetTransports )( 
             __RPC__in IOfflineFilesEvents * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemDisconnected)
         HRESULT ( STDMETHODCALLTYPE *ItemDisconnected )( 
             __RPC__in IOfflineFilesEvents * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemReconnected)
         HRESULT ( STDMETHODCALLTYPE *ItemReconnected )( 
             __RPC__in IOfflineFilesEvents * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemAvailableOffline)
         HRESULT ( STDMETHODCALLTYPE *ItemAvailableOffline )( 
             __RPC__in IOfflineFilesEvents * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemNotAvailableOffline)
         HRESULT ( STDMETHODCALLTYPE *ItemNotAvailableOffline )( 
             __RPC__in IOfflineFilesEvents * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemPinned)
         HRESULT ( STDMETHODCALLTYPE *ItemPinned )( 
             __RPC__in IOfflineFilesEvents * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemNotPinned)
         HRESULT ( STDMETHODCALLTYPE *ItemNotPinned )( 
             __RPC__in IOfflineFilesEvents * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemModified)
         HRESULT ( STDMETHODCALLTYPE *ItemModified )( 
             __RPC__in IOfflineFilesEvents * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
@@ -1005,25 +1036,30 @@ EXTERN_C const IID IID_IOfflineFilesEvents;
             /* [in] */ BOOL bModifiedData,
             /* [in] */ BOOL bModifiedAttributes);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemAddedToCache)
         HRESULT ( STDMETHODCALLTYPE *ItemAddedToCache )( 
             __RPC__in IOfflineFilesEvents * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemDeletedFromCache)
         HRESULT ( STDMETHODCALLTYPE *ItemDeletedFromCache )( 
             __RPC__in IOfflineFilesEvents * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemRenamed)
         HRESULT ( STDMETHODCALLTYPE *ItemRenamed )( 
             __RPC__in IOfflineFilesEvents * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszOldPath,
             /* [string][in] */ __RPC__in_string LPCWSTR pszNewPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, DataLost)
         HRESULT ( STDMETHODCALLTYPE *DataLost )( 
             __RPC__in IOfflineFilesEvents * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, Ping)
         HRESULT ( STDMETHODCALLTYPE *Ping )( 
             __RPC__in IOfflineFilesEvents * This);
         
@@ -1180,33 +1216,41 @@ EXTERN_C const IID IID_IOfflineFilesEvents2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesEvents2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesEvents2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesEvents2 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, CacheMoved)
         HRESULT ( STDMETHODCALLTYPE *CacheMoved )( 
             __RPC__in IOfflineFilesEvents2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszOldPath,
             /* [string][in] */ __RPC__in_string LPCWSTR pszNewPath);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, CacheIsFull)
         HRESULT ( STDMETHODCALLTYPE *CacheIsFull )( 
             __RPC__in IOfflineFilesEvents2 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, CacheIsCorrupted)
         HRESULT ( STDMETHODCALLTYPE *CacheIsCorrupted )( 
             __RPC__in IOfflineFilesEvents2 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, Enabled)
         HRESULT ( STDMETHODCALLTYPE *Enabled )( 
             __RPC__in IOfflineFilesEvents2 * This,
             /* [in] */ BOOL bEnabled);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, EncryptionChanged)
         HRESULT ( STDMETHODCALLTYPE *EncryptionChanged )( 
             __RPC__in IOfflineFilesEvents2 * This,
             /* [in] */ BOOL bWasEncrypted,
@@ -1214,75 +1258,90 @@ EXTERN_C const IID IID_IOfflineFilesEvents2;
             /* [in] */ BOOL bIsEncrypted,
             /* [in] */ BOOL bIsPartial);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, SyncBegin)
         HRESULT ( STDMETHODCALLTYPE *SyncBegin )( 
             __RPC__in IOfflineFilesEvents2 * This,
             /* [in] */ __RPC__in REFGUID rSyncId);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, SyncFileResult)
         HRESULT ( STDMETHODCALLTYPE *SyncFileResult )( 
             __RPC__in IOfflineFilesEvents2 * This,
             /* [in] */ __RPC__in REFGUID rSyncId,
             /* [string][in] */ __RPC__in_string LPCWSTR pszFile,
             /* [in] */ HRESULT hrResult);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, SyncConflictRecAdded)
         HRESULT ( STDMETHODCALLTYPE *SyncConflictRecAdded )( 
             __RPC__in IOfflineFilesEvents2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszConflictPath,
             /* [in] */ __RPC__in const FILETIME *pftConflictDateTime,
             /* [in] */ OFFLINEFILES_SYNC_STATE ConflictSyncState);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, SyncConflictRecUpdated)
         HRESULT ( STDMETHODCALLTYPE *SyncConflictRecUpdated )( 
             __RPC__in IOfflineFilesEvents2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszConflictPath,
             /* [in] */ __RPC__in const FILETIME *pftConflictDateTime,
             /* [in] */ OFFLINEFILES_SYNC_STATE ConflictSyncState);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, SyncConflictRecRemoved)
         HRESULT ( STDMETHODCALLTYPE *SyncConflictRecRemoved )( 
             __RPC__in IOfflineFilesEvents2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszConflictPath,
             /* [in] */ __RPC__in const FILETIME *pftConflictDateTime,
             /* [in] */ OFFLINEFILES_SYNC_STATE ConflictSyncState);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, SyncEnd)
         HRESULT ( STDMETHODCALLTYPE *SyncEnd )( 
             __RPC__in IOfflineFilesEvents2 * This,
             /* [in] */ __RPC__in REFGUID rSyncId,
             /* [in] */ HRESULT hrResult);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, NetTransportArrived)
         HRESULT ( STDMETHODCALLTYPE *NetTransportArrived )( 
             __RPC__in IOfflineFilesEvents2 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, NoNetTransports)
         HRESULT ( STDMETHODCALLTYPE *NoNetTransports )( 
             __RPC__in IOfflineFilesEvents2 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemDisconnected)
         HRESULT ( STDMETHODCALLTYPE *ItemDisconnected )( 
             __RPC__in IOfflineFilesEvents2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemReconnected)
         HRESULT ( STDMETHODCALLTYPE *ItemReconnected )( 
             __RPC__in IOfflineFilesEvents2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemAvailableOffline)
         HRESULT ( STDMETHODCALLTYPE *ItemAvailableOffline )( 
             __RPC__in IOfflineFilesEvents2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemNotAvailableOffline)
         HRESULT ( STDMETHODCALLTYPE *ItemNotAvailableOffline )( 
             __RPC__in IOfflineFilesEvents2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemPinned)
         HRESULT ( STDMETHODCALLTYPE *ItemPinned )( 
             __RPC__in IOfflineFilesEvents2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemNotPinned)
         HRESULT ( STDMETHODCALLTYPE *ItemNotPinned )( 
             __RPC__in IOfflineFilesEvents2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemModified)
         HRESULT ( STDMETHODCALLTYPE *ItemModified )( 
             __RPC__in IOfflineFilesEvents2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
@@ -1290,54 +1349,68 @@ EXTERN_C const IID IID_IOfflineFilesEvents2;
             /* [in] */ BOOL bModifiedData,
             /* [in] */ BOOL bModifiedAttributes);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemAddedToCache)
         HRESULT ( STDMETHODCALLTYPE *ItemAddedToCache )( 
             __RPC__in IOfflineFilesEvents2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemDeletedFromCache)
         HRESULT ( STDMETHODCALLTYPE *ItemDeletedFromCache )( 
             __RPC__in IOfflineFilesEvents2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemRenamed)
         HRESULT ( STDMETHODCALLTYPE *ItemRenamed )( 
             __RPC__in IOfflineFilesEvents2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszOldPath,
             /* [string][in] */ __RPC__in_string LPCWSTR pszNewPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, DataLost)
         HRESULT ( STDMETHODCALLTYPE *DataLost )( 
             __RPC__in IOfflineFilesEvents2 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, Ping)
         HRESULT ( STDMETHODCALLTYPE *Ping )( 
             __RPC__in IOfflineFilesEvents2 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents2, ItemReconnectBegin)
         HRESULT ( STDMETHODCALLTYPE *ItemReconnectBegin )( 
             __RPC__in IOfflineFilesEvents2 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents2, ItemReconnectEnd)
         HRESULT ( STDMETHODCALLTYPE *ItemReconnectEnd )( 
             __RPC__in IOfflineFilesEvents2 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents2, CacheEvictBegin)
         HRESULT ( STDMETHODCALLTYPE *CacheEvictBegin )( 
             __RPC__in IOfflineFilesEvents2 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents2, CacheEvictEnd)
         HRESULT ( STDMETHODCALLTYPE *CacheEvictEnd )( 
             __RPC__in IOfflineFilesEvents2 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents2, BackgroundSyncBegin)
         HRESULT ( STDMETHODCALLTYPE *BackgroundSyncBegin )( 
             __RPC__in IOfflineFilesEvents2 * This,
             /* [in] */ DWORD dwSyncControlFlags);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents2, BackgroundSyncEnd)
         HRESULT ( STDMETHODCALLTYPE *BackgroundSyncEnd )( 
             __RPC__in IOfflineFilesEvents2 * This,
             /* [in] */ DWORD dwSyncControlFlags);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents2, PolicyChangeDetected)
         HRESULT ( STDMETHODCALLTYPE *PolicyChangeDetected )( 
             __RPC__in IOfflineFilesEvents2 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents2, PreferenceChangeDetected)
         HRESULT ( STDMETHODCALLTYPE *PreferenceChangeDetected )( 
             __RPC__in IOfflineFilesEvents2 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents2, SettingsChangesApplied)
         HRESULT ( STDMETHODCALLTYPE *SettingsChangesApplied )( 
             __RPC__in IOfflineFilesEvents2 * This);
         
@@ -1517,33 +1590,41 @@ EXTERN_C const IID IID_IOfflineFilesEvents3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesEvents3 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesEvents3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesEvents3 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, CacheMoved)
         HRESULT ( STDMETHODCALLTYPE *CacheMoved )( 
             __RPC__in IOfflineFilesEvents3 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszOldPath,
             /* [string][in] */ __RPC__in_string LPCWSTR pszNewPath);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, CacheIsFull)
         HRESULT ( STDMETHODCALLTYPE *CacheIsFull )( 
             __RPC__in IOfflineFilesEvents3 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, CacheIsCorrupted)
         HRESULT ( STDMETHODCALLTYPE *CacheIsCorrupted )( 
             __RPC__in IOfflineFilesEvents3 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, Enabled)
         HRESULT ( STDMETHODCALLTYPE *Enabled )( 
             __RPC__in IOfflineFilesEvents3 * This,
             /* [in] */ BOOL bEnabled);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, EncryptionChanged)
         HRESULT ( STDMETHODCALLTYPE *EncryptionChanged )( 
             __RPC__in IOfflineFilesEvents3 * This,
             /* [in] */ BOOL bWasEncrypted,
@@ -1551,75 +1632,90 @@ EXTERN_C const IID IID_IOfflineFilesEvents3;
             /* [in] */ BOOL bIsEncrypted,
             /* [in] */ BOOL bIsPartial);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, SyncBegin)
         HRESULT ( STDMETHODCALLTYPE *SyncBegin )( 
             __RPC__in IOfflineFilesEvents3 * This,
             /* [in] */ __RPC__in REFGUID rSyncId);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, SyncFileResult)
         HRESULT ( STDMETHODCALLTYPE *SyncFileResult )( 
             __RPC__in IOfflineFilesEvents3 * This,
             /* [in] */ __RPC__in REFGUID rSyncId,
             /* [string][in] */ __RPC__in_string LPCWSTR pszFile,
             /* [in] */ HRESULT hrResult);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, SyncConflictRecAdded)
         HRESULT ( STDMETHODCALLTYPE *SyncConflictRecAdded )( 
             __RPC__in IOfflineFilesEvents3 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszConflictPath,
             /* [in] */ __RPC__in const FILETIME *pftConflictDateTime,
             /* [in] */ OFFLINEFILES_SYNC_STATE ConflictSyncState);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, SyncConflictRecUpdated)
         HRESULT ( STDMETHODCALLTYPE *SyncConflictRecUpdated )( 
             __RPC__in IOfflineFilesEvents3 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszConflictPath,
             /* [in] */ __RPC__in const FILETIME *pftConflictDateTime,
             /* [in] */ OFFLINEFILES_SYNC_STATE ConflictSyncState);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, SyncConflictRecRemoved)
         HRESULT ( STDMETHODCALLTYPE *SyncConflictRecRemoved )( 
             __RPC__in IOfflineFilesEvents3 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszConflictPath,
             /* [in] */ __RPC__in const FILETIME *pftConflictDateTime,
             /* [in] */ OFFLINEFILES_SYNC_STATE ConflictSyncState);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, SyncEnd)
         HRESULT ( STDMETHODCALLTYPE *SyncEnd )( 
             __RPC__in IOfflineFilesEvents3 * This,
             /* [in] */ __RPC__in REFGUID rSyncId,
             /* [in] */ HRESULT hrResult);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, NetTransportArrived)
         HRESULT ( STDMETHODCALLTYPE *NetTransportArrived )( 
             __RPC__in IOfflineFilesEvents3 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, NoNetTransports)
         HRESULT ( STDMETHODCALLTYPE *NoNetTransports )( 
             __RPC__in IOfflineFilesEvents3 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemDisconnected)
         HRESULT ( STDMETHODCALLTYPE *ItemDisconnected )( 
             __RPC__in IOfflineFilesEvents3 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemReconnected)
         HRESULT ( STDMETHODCALLTYPE *ItemReconnected )( 
             __RPC__in IOfflineFilesEvents3 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemAvailableOffline)
         HRESULT ( STDMETHODCALLTYPE *ItemAvailableOffline )( 
             __RPC__in IOfflineFilesEvents3 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemNotAvailableOffline)
         HRESULT ( STDMETHODCALLTYPE *ItemNotAvailableOffline )( 
             __RPC__in IOfflineFilesEvents3 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemPinned)
         HRESULT ( STDMETHODCALLTYPE *ItemPinned )( 
             __RPC__in IOfflineFilesEvents3 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemNotPinned)
         HRESULT ( STDMETHODCALLTYPE *ItemNotPinned )( 
             __RPC__in IOfflineFilesEvents3 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemModified)
         HRESULT ( STDMETHODCALLTYPE *ItemModified )( 
             __RPC__in IOfflineFilesEvents3 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
@@ -1627,57 +1723,72 @@ EXTERN_C const IID IID_IOfflineFilesEvents3;
             /* [in] */ BOOL bModifiedData,
             /* [in] */ BOOL bModifiedAttributes);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemAddedToCache)
         HRESULT ( STDMETHODCALLTYPE *ItemAddedToCache )( 
             __RPC__in IOfflineFilesEvents3 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemDeletedFromCache)
         HRESULT ( STDMETHODCALLTYPE *ItemDeletedFromCache )( 
             __RPC__in IOfflineFilesEvents3 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemRenamed)
         HRESULT ( STDMETHODCALLTYPE *ItemRenamed )( 
             __RPC__in IOfflineFilesEvents3 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszOldPath,
             /* [string][in] */ __RPC__in_string LPCWSTR pszNewPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, DataLost)
         HRESULT ( STDMETHODCALLTYPE *DataLost )( 
             __RPC__in IOfflineFilesEvents3 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, Ping)
         HRESULT ( STDMETHODCALLTYPE *Ping )( 
             __RPC__in IOfflineFilesEvents3 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents2, ItemReconnectBegin)
         HRESULT ( STDMETHODCALLTYPE *ItemReconnectBegin )( 
             __RPC__in IOfflineFilesEvents3 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents2, ItemReconnectEnd)
         HRESULT ( STDMETHODCALLTYPE *ItemReconnectEnd )( 
             __RPC__in IOfflineFilesEvents3 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents2, CacheEvictBegin)
         HRESULT ( STDMETHODCALLTYPE *CacheEvictBegin )( 
             __RPC__in IOfflineFilesEvents3 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents2, CacheEvictEnd)
         HRESULT ( STDMETHODCALLTYPE *CacheEvictEnd )( 
             __RPC__in IOfflineFilesEvents3 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents2, BackgroundSyncBegin)
         HRESULT ( STDMETHODCALLTYPE *BackgroundSyncBegin )( 
             __RPC__in IOfflineFilesEvents3 * This,
             /* [in] */ DWORD dwSyncControlFlags);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents2, BackgroundSyncEnd)
         HRESULT ( STDMETHODCALLTYPE *BackgroundSyncEnd )( 
             __RPC__in IOfflineFilesEvents3 * This,
             /* [in] */ DWORD dwSyncControlFlags);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents2, PolicyChangeDetected)
         HRESULT ( STDMETHODCALLTYPE *PolicyChangeDetected )( 
             __RPC__in IOfflineFilesEvents3 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents2, PreferenceChangeDetected)
         HRESULT ( STDMETHODCALLTYPE *PreferenceChangeDetected )( 
             __RPC__in IOfflineFilesEvents3 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents2, SettingsChangesApplied)
         HRESULT ( STDMETHODCALLTYPE *SettingsChangesApplied )( 
             __RPC__in IOfflineFilesEvents3 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents3, TransparentCacheItemNotify)
         HRESULT ( STDMETHODCALLTYPE *TransparentCacheItemNotify )( 
             __RPC__in IOfflineFilesEvents3 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
@@ -1687,10 +1798,12 @@ EXTERN_C const IID IID_IOfflineFilesEvents3;
             /* [in] */ BOOL bModifiedAttributes,
             /* [string][in] */ __RPC__in_string LPCWSTR pzsOldPath);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents3, PrefetchFileBegin)
         HRESULT ( STDMETHODCALLTYPE *PrefetchFileBegin )( 
             __RPC__in IOfflineFilesEvents3 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents3, PrefetchFileEnd)
         HRESULT ( STDMETHODCALLTYPE *PrefetchFileEnd )( 
             __RPC__in IOfflineFilesEvents3 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
@@ -1874,33 +1987,41 @@ EXTERN_C const IID IID_IOfflineFilesEvents4;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesEvents4 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesEvents4 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesEvents4 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, CacheMoved)
         HRESULT ( STDMETHODCALLTYPE *CacheMoved )( 
             __RPC__in IOfflineFilesEvents4 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszOldPath,
             /* [string][in] */ __RPC__in_string LPCWSTR pszNewPath);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, CacheIsFull)
         HRESULT ( STDMETHODCALLTYPE *CacheIsFull )( 
             __RPC__in IOfflineFilesEvents4 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, CacheIsCorrupted)
         HRESULT ( STDMETHODCALLTYPE *CacheIsCorrupted )( 
             __RPC__in IOfflineFilesEvents4 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, Enabled)
         HRESULT ( STDMETHODCALLTYPE *Enabled )( 
             __RPC__in IOfflineFilesEvents4 * This,
             /* [in] */ BOOL bEnabled);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, EncryptionChanged)
         HRESULT ( STDMETHODCALLTYPE *EncryptionChanged )( 
             __RPC__in IOfflineFilesEvents4 * This,
             /* [in] */ BOOL bWasEncrypted,
@@ -1908,75 +2029,90 @@ EXTERN_C const IID IID_IOfflineFilesEvents4;
             /* [in] */ BOOL bIsEncrypted,
             /* [in] */ BOOL bIsPartial);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, SyncBegin)
         HRESULT ( STDMETHODCALLTYPE *SyncBegin )( 
             __RPC__in IOfflineFilesEvents4 * This,
             /* [in] */ __RPC__in REFGUID rSyncId);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, SyncFileResult)
         HRESULT ( STDMETHODCALLTYPE *SyncFileResult )( 
             __RPC__in IOfflineFilesEvents4 * This,
             /* [in] */ __RPC__in REFGUID rSyncId,
             /* [string][in] */ __RPC__in_string LPCWSTR pszFile,
             /* [in] */ HRESULT hrResult);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, SyncConflictRecAdded)
         HRESULT ( STDMETHODCALLTYPE *SyncConflictRecAdded )( 
             __RPC__in IOfflineFilesEvents4 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszConflictPath,
             /* [in] */ __RPC__in const FILETIME *pftConflictDateTime,
             /* [in] */ OFFLINEFILES_SYNC_STATE ConflictSyncState);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, SyncConflictRecUpdated)
         HRESULT ( STDMETHODCALLTYPE *SyncConflictRecUpdated )( 
             __RPC__in IOfflineFilesEvents4 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszConflictPath,
             /* [in] */ __RPC__in const FILETIME *pftConflictDateTime,
             /* [in] */ OFFLINEFILES_SYNC_STATE ConflictSyncState);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, SyncConflictRecRemoved)
         HRESULT ( STDMETHODCALLTYPE *SyncConflictRecRemoved )( 
             __RPC__in IOfflineFilesEvents4 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszConflictPath,
             /* [in] */ __RPC__in const FILETIME *pftConflictDateTime,
             /* [in] */ OFFLINEFILES_SYNC_STATE ConflictSyncState);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, SyncEnd)
         HRESULT ( STDMETHODCALLTYPE *SyncEnd )( 
             __RPC__in IOfflineFilesEvents4 * This,
             /* [in] */ __RPC__in REFGUID rSyncId,
             /* [in] */ HRESULT hrResult);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, NetTransportArrived)
         HRESULT ( STDMETHODCALLTYPE *NetTransportArrived )( 
             __RPC__in IOfflineFilesEvents4 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, NoNetTransports)
         HRESULT ( STDMETHODCALLTYPE *NoNetTransports )( 
             __RPC__in IOfflineFilesEvents4 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemDisconnected)
         HRESULT ( STDMETHODCALLTYPE *ItemDisconnected )( 
             __RPC__in IOfflineFilesEvents4 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemReconnected)
         HRESULT ( STDMETHODCALLTYPE *ItemReconnected )( 
             __RPC__in IOfflineFilesEvents4 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemAvailableOffline)
         HRESULT ( STDMETHODCALLTYPE *ItemAvailableOffline )( 
             __RPC__in IOfflineFilesEvents4 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemNotAvailableOffline)
         HRESULT ( STDMETHODCALLTYPE *ItemNotAvailableOffline )( 
             __RPC__in IOfflineFilesEvents4 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemPinned)
         HRESULT ( STDMETHODCALLTYPE *ItemPinned )( 
             __RPC__in IOfflineFilesEvents4 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemNotPinned)
         HRESULT ( STDMETHODCALLTYPE *ItemNotPinned )( 
             __RPC__in IOfflineFilesEvents4 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemModified)
         HRESULT ( STDMETHODCALLTYPE *ItemModified )( 
             __RPC__in IOfflineFilesEvents4 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
@@ -1984,57 +2120,72 @@ EXTERN_C const IID IID_IOfflineFilesEvents4;
             /* [in] */ BOOL bModifiedData,
             /* [in] */ BOOL bModifiedAttributes);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemAddedToCache)
         HRESULT ( STDMETHODCALLTYPE *ItemAddedToCache )( 
             __RPC__in IOfflineFilesEvents4 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemDeletedFromCache)
         HRESULT ( STDMETHODCALLTYPE *ItemDeletedFromCache )( 
             __RPC__in IOfflineFilesEvents4 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, ItemRenamed)
         HRESULT ( STDMETHODCALLTYPE *ItemRenamed )( 
             __RPC__in IOfflineFilesEvents4 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszOldPath,
             /* [string][in] */ __RPC__in_string LPCWSTR pszNewPath,
             /* [in] */ OFFLINEFILES_ITEM_TYPE ItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, DataLost)
         HRESULT ( STDMETHODCALLTYPE *DataLost )( 
             __RPC__in IOfflineFilesEvents4 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents, Ping)
         HRESULT ( STDMETHODCALLTYPE *Ping )( 
             __RPC__in IOfflineFilesEvents4 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents2, ItemReconnectBegin)
         HRESULT ( STDMETHODCALLTYPE *ItemReconnectBegin )( 
             __RPC__in IOfflineFilesEvents4 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents2, ItemReconnectEnd)
         HRESULT ( STDMETHODCALLTYPE *ItemReconnectEnd )( 
             __RPC__in IOfflineFilesEvents4 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents2, CacheEvictBegin)
         HRESULT ( STDMETHODCALLTYPE *CacheEvictBegin )( 
             __RPC__in IOfflineFilesEvents4 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents2, CacheEvictEnd)
         HRESULT ( STDMETHODCALLTYPE *CacheEvictEnd )( 
             __RPC__in IOfflineFilesEvents4 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents2, BackgroundSyncBegin)
         HRESULT ( STDMETHODCALLTYPE *BackgroundSyncBegin )( 
             __RPC__in IOfflineFilesEvents4 * This,
             /* [in] */ DWORD dwSyncControlFlags);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents2, BackgroundSyncEnd)
         HRESULT ( STDMETHODCALLTYPE *BackgroundSyncEnd )( 
             __RPC__in IOfflineFilesEvents4 * This,
             /* [in] */ DWORD dwSyncControlFlags);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents2, PolicyChangeDetected)
         HRESULT ( STDMETHODCALLTYPE *PolicyChangeDetected )( 
             __RPC__in IOfflineFilesEvents4 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents2, PreferenceChangeDetected)
         HRESULT ( STDMETHODCALLTYPE *PreferenceChangeDetected )( 
             __RPC__in IOfflineFilesEvents4 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents2, SettingsChangesApplied)
         HRESULT ( STDMETHODCALLTYPE *SettingsChangesApplied )( 
             __RPC__in IOfflineFilesEvents4 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents3, TransparentCacheItemNotify)
         HRESULT ( STDMETHODCALLTYPE *TransparentCacheItemNotify )( 
             __RPC__in IOfflineFilesEvents4 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
@@ -2044,18 +2195,22 @@ EXTERN_C const IID IID_IOfflineFilesEvents4;
             /* [in] */ BOOL bModifiedAttributes,
             /* [string][in] */ __RPC__in_string LPCWSTR pzsOldPath);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents3, PrefetchFileBegin)
         HRESULT ( STDMETHODCALLTYPE *PrefetchFileBegin )( 
             __RPC__in IOfflineFilesEvents4 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents3, PrefetchFileEnd)
         HRESULT ( STDMETHODCALLTYPE *PrefetchFileEnd )( 
             __RPC__in IOfflineFilesEvents4 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ HRESULT hrResult);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents4, PrefetchCloseHandleBegin)
         HRESULT ( STDMETHODCALLTYPE *PrefetchCloseHandleBegin )( 
             __RPC__in IOfflineFilesEvents4 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEvents4, PrefetchCloseHandleEnd)
         HRESULT ( STDMETHODCALLTYPE *PrefetchCloseHandleEnd )( 
             __RPC__in IOfflineFilesEvents4 * This,
             /* [in] */ DWORD dwClosedHandleCount,
@@ -2254,29 +2409,35 @@ EXTERN_C const IID IID_IOfflineFilesEventsFilter;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesEventsFilter * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesEventsFilter * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesEventsFilter * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEventsFilter, GetPathFilter)
         HRESULT ( STDMETHODCALLTYPE *GetPathFilter )( 
             __RPC__in IOfflineFilesEventsFilter * This,
             /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszFilter,
             /* [out] */ __RPC__out OFFLINEFILES_PATHFILTER_MATCH *pMatch);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEventsFilter, GetIncludedEvents)
         HRESULT ( STDMETHODCALLTYPE *GetIncludedEvents )( 
             __RPC__in IOfflineFilesEventsFilter * This,
             /* [in] */ ULONG cElements,
             /* [length_is][size_is][out] */ __RPC__out_ecount_part(cElements, *pcEvents) OFFLINEFILES_EVENTS *prgEvents,
             /* [out] */ __RPC__out ULONG *pcEvents);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesEventsFilter, GetExcludedEvents)
         HRESULT ( STDMETHODCALLTYPE *GetExcludedEvents )( 
             __RPC__in IOfflineFilesEventsFilter * This,
             /* [in] */ ULONG cElements,
@@ -2356,22 +2517,27 @@ EXTERN_C const IID IID_IOfflineFilesErrorInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesErrorInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesErrorInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesErrorInfo * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesErrorInfo, GetRawData)
         HRESULT ( STDMETHODCALLTYPE *GetRawData )( 
             __RPC__in IOfflineFilesErrorInfo * This,
             /* [out] */ __RPC__deref_out_opt BYTE_BLOB **ppBlob);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesErrorInfo, GetDescription)
         HRESULT ( STDMETHODCALLTYPE *GetDescription )( 
             __RPC__in IOfflineFilesErrorInfo * This,
             /* [out] */ __RPC__deref_out_opt LPWSTR *ppszDescription);
@@ -2450,27 +2616,33 @@ EXTERN_C const IID IID_IOfflineFilesSyncErrorItemInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesSyncErrorItemInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesSyncErrorItemInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesSyncErrorItemInfo * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesSyncErrorItemInfo, GetFileAttributes)
         HRESULT ( STDMETHODCALLTYPE *GetFileAttributes )( 
             __RPC__in IOfflineFilesSyncErrorItemInfo * This,
             /* [out] */ __RPC__out DWORD *pdwAttributes);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesSyncErrorItemInfo, GetFileTimes)
         HRESULT ( STDMETHODCALLTYPE *GetFileTimes )( 
             __RPC__in IOfflineFilesSyncErrorItemInfo * This,
             /* [out] */ __RPC__out FILETIME *pftLastWrite,
             /* [out] */ __RPC__out FILETIME *pftChange);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesSyncErrorItemInfo, GetFileSize)
         HRESULT ( STDMETHODCALLTYPE *GetFileSize )( 
             __RPC__in IOfflineFilesSyncErrorItemInfo * This,
             /* [out] */ __RPC__out LARGE_INTEGER *pSize);
@@ -2567,54 +2739,66 @@ EXTERN_C const IID IID_IOfflineFilesSyncErrorInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesSyncErrorInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesSyncErrorInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesSyncErrorInfo * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesErrorInfo, GetRawData)
         HRESULT ( STDMETHODCALLTYPE *GetRawData )( 
             __RPC__in IOfflineFilesSyncErrorInfo * This,
             /* [out] */ __RPC__deref_out_opt BYTE_BLOB **ppBlob);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesErrorInfo, GetDescription)
         HRESULT ( STDMETHODCALLTYPE *GetDescription )( 
             __RPC__in IOfflineFilesSyncErrorInfo * This,
             /* [out] */ __RPC__deref_out_opt LPWSTR *ppszDescription);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesSyncErrorInfo, GetSyncOperation)
         HRESULT ( STDMETHODCALLTYPE *GetSyncOperation )( 
             __RPC__in IOfflineFilesSyncErrorInfo * This,
             /* [out] */ __RPC__out OFFLINEFILES_SYNC_OPERATION *pSyncOp);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesSyncErrorInfo, GetItemChangeFlags)
         HRESULT ( STDMETHODCALLTYPE *GetItemChangeFlags )( 
             __RPC__in IOfflineFilesSyncErrorInfo * This,
             /* [out] */ __RPC__out DWORD *pdwItemChangeFlags);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesSyncErrorInfo, InfoEnumerated)
         HRESULT ( STDMETHODCALLTYPE *InfoEnumerated )( 
             __RPC__in IOfflineFilesSyncErrorInfo * This,
             /* [out] */ __RPC__out BOOL *pbLocalEnumerated,
             /* [out] */ __RPC__out BOOL *pbRemoteEnumerated,
             /* [out] */ __RPC__out BOOL *pbOriginalEnumerated);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesSyncErrorInfo, InfoAvailable)
         HRESULT ( STDMETHODCALLTYPE *InfoAvailable )( 
             __RPC__in IOfflineFilesSyncErrorInfo * This,
             /* [out] */ __RPC__out BOOL *pbLocalInfo,
             /* [out] */ __RPC__out BOOL *pbRemoteInfo,
             /* [out] */ __RPC__out BOOL *pbOriginalInfo);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesSyncErrorInfo, GetLocalInfo)
         HRESULT ( STDMETHODCALLTYPE *GetLocalInfo )( 
             __RPC__in IOfflineFilesSyncErrorInfo * This,
             /* [out] */ __RPC__deref_out_opt IOfflineFilesSyncErrorItemInfo **ppInfo);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesSyncErrorInfo, GetRemoteInfo)
         HRESULT ( STDMETHODCALLTYPE *GetRemoteInfo )( 
             __RPC__in IOfflineFilesSyncErrorInfo * This,
             /* [out] */ __RPC__deref_out_opt IOfflineFilesSyncErrorItemInfo **ppInfo);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesSyncErrorInfo, GetOriginalInfo)
         HRESULT ( STDMETHODCALLTYPE *GetOriginalInfo )( 
             __RPC__in IOfflineFilesSyncErrorInfo * This,
             /* [out] */ __RPC__deref_out_opt IOfflineFilesSyncErrorItemInfo **ppInfo);
@@ -2714,26 +2898,32 @@ EXTERN_C const IID IID_IOfflineFilesProgress;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesProgress * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesProgress * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesProgress * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesProgress, Begin)
         HRESULT ( STDMETHODCALLTYPE *Begin )( 
             __RPC__in IOfflineFilesProgress * This,
             /* [out] */ __RPC__out BOOL *pbAbort);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesProgress, QueryAbort)
         HRESULT ( STDMETHODCALLTYPE *QueryAbort )( 
             __RPC__in IOfflineFilesProgress * This,
             /* [out] */ __RPC__out BOOL *pbAbort);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesProgress, End)
         HRESULT ( STDMETHODCALLTYPE *End )( 
             __RPC__in IOfflineFilesProgress * This,
             /* [in] */ HRESULT hrResult);
@@ -2814,35 +3004,43 @@ EXTERN_C const IID IID_IOfflineFilesSimpleProgress;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesSimpleProgress * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesSimpleProgress * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesSimpleProgress * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesProgress, Begin)
         HRESULT ( STDMETHODCALLTYPE *Begin )( 
             __RPC__in IOfflineFilesSimpleProgress * This,
             /* [out] */ __RPC__out BOOL *pbAbort);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesProgress, QueryAbort)
         HRESULT ( STDMETHODCALLTYPE *QueryAbort )( 
             __RPC__in IOfflineFilesSimpleProgress * This,
             /* [out] */ __RPC__out BOOL *pbAbort);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesProgress, End)
         HRESULT ( STDMETHODCALLTYPE *End )( 
             __RPC__in IOfflineFilesSimpleProgress * This,
             /* [in] */ HRESULT hrResult);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesSimpleProgress, ItemBegin)
         HRESULT ( STDMETHODCALLTYPE *ItemBegin )( 
             __RPC__in IOfflineFilesSimpleProgress * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszFile,
             /* [out] */ __RPC__out OFFLINEFILES_OP_RESPONSE *pResponse);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesSimpleProgress, ItemResult)
         HRESULT ( STDMETHODCALLTYPE *ItemResult )( 
             __RPC__in IOfflineFilesSimpleProgress * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszFile,
@@ -2933,35 +3131,43 @@ EXTERN_C const IID IID_IOfflineFilesSyncProgress;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesSyncProgress * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesSyncProgress * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesSyncProgress * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesProgress, Begin)
         HRESULT ( STDMETHODCALLTYPE *Begin )( 
             __RPC__in IOfflineFilesSyncProgress * This,
             /* [out] */ __RPC__out BOOL *pbAbort);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesProgress, QueryAbort)
         HRESULT ( STDMETHODCALLTYPE *QueryAbort )( 
             __RPC__in IOfflineFilesSyncProgress * This,
             /* [out] */ __RPC__out BOOL *pbAbort);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesProgress, End)
         HRESULT ( STDMETHODCALLTYPE *End )( 
             __RPC__in IOfflineFilesSyncProgress * This,
             /* [in] */ HRESULT hrResult);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesSyncProgress, SyncItemBegin)
         HRESULT ( STDMETHODCALLTYPE *SyncItemBegin )( 
             __RPC__in IOfflineFilesSyncProgress * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszFile,
             /* [out] */ __RPC__out OFFLINEFILES_OP_RESPONSE *pResponse);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesSyncProgress, SyncItemResult)
         HRESULT ( STDMETHODCALLTYPE *SyncItemResult )( 
             __RPC__in IOfflineFilesSyncProgress * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszFile,
@@ -3051,18 +3257,22 @@ EXTERN_C const IID IID_IOfflineFilesSyncConflictHandler;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesSyncConflictHandler * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesSyncConflictHandler * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesSyncConflictHandler * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesSyncConflictHandler, ResolveConflict)
         HRESULT ( STDMETHODCALLTYPE *ResolveConflict )( 
             __RPC__in IOfflineFilesSyncConflictHandler * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
@@ -3147,23 +3357,28 @@ EXTERN_C const IID IID_IOfflineFilesItemFilter;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesItemFilter * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesItemFilter * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesItemFilter * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesItemFilter, GetFilterFlags)
         HRESULT ( STDMETHODCALLTYPE *GetFilterFlags )( 
             __RPC__in IOfflineFilesItemFilter * This,
             /* [out] */ __RPC__out ULONGLONG *pullFlags,
             /* [out] */ __RPC__out ULONGLONG *pullMask);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesItemFilter, GetTimeFilter)
         HRESULT ( STDMETHODCALLTYPE *GetTimeFilter )( 
             __RPC__in IOfflineFilesItemFilter * This,
             /* [out] */ __RPC__out FILETIME *pftTime,
@@ -3171,6 +3386,7 @@ EXTERN_C const IID IID_IOfflineFilesItemFilter;
             /* [out] */ __RPC__out OFFLINEFILES_ITEM_TIME *pTimeType,
             /* [out] */ __RPC__out OFFLINEFILES_COMPARE *pCompare);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesItemFilter, GetPatternFilter)
         HRESULT ( STDMETHODCALLTYPE *GetPatternFilter )( 
             __RPC__in IOfflineFilesItemFilter * This,
             /* [size_is][string][out] */ __RPC__out_ecount_full_string(cchPattern) LPWSTR pszPattern,
@@ -3258,34 +3474,42 @@ EXTERN_C const IID IID_IOfflineFilesItem;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesItem * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesItem * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesItem * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesItem, GetItemType)
         HRESULT ( STDMETHODCALLTYPE *GetItemType )( 
             __RPC__in IOfflineFilesItem * This,
             /* [out] */ __RPC__out OFFLINEFILES_ITEM_TYPE *pItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesItem, GetPath)
         HRESULT ( STDMETHODCALLTYPE *GetPath )( 
             __RPC__in IOfflineFilesItem * This,
             /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszPath);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesItem, GetParentItem)
         HRESULT ( STDMETHODCALLTYPE *GetParentItem )( 
             __RPC__in IOfflineFilesItem * This,
             /* [out] */ __RPC__deref_out_opt IOfflineFilesItem **ppItem);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesItem, Refresh)
         HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IOfflineFilesItem * This,
             /* [in] */ DWORD dwQueryFlags);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesItem, IsMarkedForDeletion)
         HRESULT ( STDMETHODCALLTYPE *IsMarkedForDeletion )( 
             __RPC__in IOfflineFilesItem * This,
             /* [out] */ __RPC__out BOOL *pbMarkedForDeletion);
@@ -3363,34 +3587,42 @@ EXTERN_C const IID IID_IOfflineFilesServerItem;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesServerItem * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesServerItem * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesServerItem * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesItem, GetItemType)
         HRESULT ( STDMETHODCALLTYPE *GetItemType )( 
             __RPC__in IOfflineFilesServerItem * This,
             /* [out] */ __RPC__out OFFLINEFILES_ITEM_TYPE *pItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesItem, GetPath)
         HRESULT ( STDMETHODCALLTYPE *GetPath )( 
             __RPC__in IOfflineFilesServerItem * This,
             /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszPath);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesItem, GetParentItem)
         HRESULT ( STDMETHODCALLTYPE *GetParentItem )( 
             __RPC__in IOfflineFilesServerItem * This,
             /* [out] */ __RPC__deref_out_opt IOfflineFilesItem **ppItem);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesItem, Refresh)
         HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IOfflineFilesServerItem * This,
             /* [in] */ DWORD dwQueryFlags);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesItem, IsMarkedForDeletion)
         HRESULT ( STDMETHODCALLTYPE *IsMarkedForDeletion )( 
             __RPC__in IOfflineFilesServerItem * This,
             /* [out] */ __RPC__out BOOL *pbMarkedForDeletion);
@@ -3469,34 +3701,42 @@ EXTERN_C const IID IID_IOfflineFilesShareItem;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesShareItem * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesShareItem * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesShareItem * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesItem, GetItemType)
         HRESULT ( STDMETHODCALLTYPE *GetItemType )( 
             __RPC__in IOfflineFilesShareItem * This,
             /* [out] */ __RPC__out OFFLINEFILES_ITEM_TYPE *pItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesItem, GetPath)
         HRESULT ( STDMETHODCALLTYPE *GetPath )( 
             __RPC__in IOfflineFilesShareItem * This,
             /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszPath);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesItem, GetParentItem)
         HRESULT ( STDMETHODCALLTYPE *GetParentItem )( 
             __RPC__in IOfflineFilesShareItem * This,
             /* [out] */ __RPC__deref_out_opt IOfflineFilesItem **ppItem);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesItem, Refresh)
         HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IOfflineFilesShareItem * This,
             /* [in] */ DWORD dwQueryFlags);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesItem, IsMarkedForDeletion)
         HRESULT ( STDMETHODCALLTYPE *IsMarkedForDeletion )( 
             __RPC__in IOfflineFilesShareItem * This,
             /* [out] */ __RPC__out BOOL *pbMarkedForDeletion);
@@ -3575,34 +3815,42 @@ EXTERN_C const IID IID_IOfflineFilesDirectoryItem;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesDirectoryItem * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesDirectoryItem * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesDirectoryItem * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesItem, GetItemType)
         HRESULT ( STDMETHODCALLTYPE *GetItemType )( 
             __RPC__in IOfflineFilesDirectoryItem * This,
             /* [out] */ __RPC__out OFFLINEFILES_ITEM_TYPE *pItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesItem, GetPath)
         HRESULT ( STDMETHODCALLTYPE *GetPath )( 
             __RPC__in IOfflineFilesDirectoryItem * This,
             /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszPath);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesItem, GetParentItem)
         HRESULT ( STDMETHODCALLTYPE *GetParentItem )( 
             __RPC__in IOfflineFilesDirectoryItem * This,
             /* [out] */ __RPC__deref_out_opt IOfflineFilesItem **ppItem);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesItem, Refresh)
         HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IOfflineFilesDirectoryItem * This,
             /* [in] */ DWORD dwQueryFlags);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesItem, IsMarkedForDeletion)
         HRESULT ( STDMETHODCALLTYPE *IsMarkedForDeletion )( 
             __RPC__in IOfflineFilesDirectoryItem * This,
             /* [out] */ __RPC__out BOOL *pbMarkedForDeletion);
@@ -3687,42 +3935,52 @@ EXTERN_C const IID IID_IOfflineFilesFileItem;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesFileItem * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesFileItem * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesFileItem * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesItem, GetItemType)
         HRESULT ( STDMETHODCALLTYPE *GetItemType )( 
             __RPC__in IOfflineFilesFileItem * This,
             /* [out] */ __RPC__out OFFLINEFILES_ITEM_TYPE *pItemType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesItem, GetPath)
         HRESULT ( STDMETHODCALLTYPE *GetPath )( 
             __RPC__in IOfflineFilesFileItem * This,
             /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszPath);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesItem, GetParentItem)
         HRESULT ( STDMETHODCALLTYPE *GetParentItem )( 
             __RPC__in IOfflineFilesFileItem * This,
             /* [out] */ __RPC__deref_out_opt IOfflineFilesItem **ppItem);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesItem, Refresh)
         HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IOfflineFilesFileItem * This,
             /* [in] */ DWORD dwQueryFlags);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesItem, IsMarkedForDeletion)
         HRESULT ( STDMETHODCALLTYPE *IsMarkedForDeletion )( 
             __RPC__in IOfflineFilesFileItem * This,
             /* [out] */ __RPC__out BOOL *pbMarkedForDeletion);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesFileItem, IsSparse)
         HRESULT ( STDMETHODCALLTYPE *IsSparse )( 
             __RPC__in IOfflineFilesFileItem * This,
             /* [out] */ __RPC__out BOOL *pbIsSparse);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesFileItem, IsEncrypted)
         HRESULT ( STDMETHODCALLTYPE *IsEncrypted )( 
             __RPC__in IOfflineFilesFileItem * This,
             /* [out] */ __RPC__out BOOL *pbIsEncrypted);
@@ -3820,31 +4078,38 @@ EXTERN_C const IID IID_IEnumOfflineFilesItems;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumOfflineFilesItems * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumOfflineFilesItems * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumOfflineFilesItems * This);
         
+        DECLSPEC_XFGVIRT(IEnumOfflineFilesItems, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumOfflineFilesItems * This,
             /* [in] */ ULONG celt,
             /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) IOfflineFilesItem **rgelt,
             /* [out] */ __RPC__out ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IEnumOfflineFilesItems, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumOfflineFilesItems * This,
             /* [in] */ ULONG celt);
         
+        DECLSPEC_XFGVIRT(IEnumOfflineFilesItems, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumOfflineFilesItems * This);
         
+        DECLSPEC_XFGVIRT(IEnumOfflineFilesItems, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumOfflineFilesItems * This,
             /* [out] */ __RPC__deref_out_opt IEnumOfflineFilesItems **ppenum);
@@ -3932,23 +4197,28 @@ EXTERN_C const IID IID_IOfflineFilesItemContainer;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesItemContainer * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesItemContainer * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesItemContainer * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesItemContainer, EnumItems)
         HRESULT ( STDMETHODCALLTYPE *EnumItems )( 
             __RPC__in IOfflineFilesItemContainer * This,
             /* [in] */ DWORD dwQueryFlags,
             /* [out] */ __RPC__deref_out_opt IEnumOfflineFilesItems **ppenum);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesItemContainer, EnumItemsEx)
         HRESULT ( STDMETHODCALLTYPE *EnumItemsEx )( 
             __RPC__in IOfflineFilesItemContainer * This,
             /* [unique][in] */ __RPC__in_opt IOfflineFilesItemFilter *pIncludeFileFilter,
@@ -4041,38 +4311,47 @@ EXTERN_C const IID IID_IOfflineFilesChangeInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesChangeInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesChangeInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesChangeInfo * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesChangeInfo, IsDirty)
         HRESULT ( STDMETHODCALLTYPE *IsDirty )( 
             __RPC__in IOfflineFilesChangeInfo * This,
             /* [out] */ __RPC__out BOOL *pbDirty);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesChangeInfo, IsDeletedOffline)
         HRESULT ( STDMETHODCALLTYPE *IsDeletedOffline )( 
             __RPC__in IOfflineFilesChangeInfo * This,
             /* [out] */ __RPC__out BOOL *pbDeletedOffline);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesChangeInfo, IsCreatedOffline)
         HRESULT ( STDMETHODCALLTYPE *IsCreatedOffline )( 
             __RPC__in IOfflineFilesChangeInfo * This,
             /* [out] */ __RPC__out BOOL *pbCreatedOffline);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesChangeInfo, IsLocallyModifiedData)
         HRESULT ( STDMETHODCALLTYPE *IsLocallyModifiedData )( 
             __RPC__in IOfflineFilesChangeInfo * This,
             /* [out] */ __RPC__out BOOL *pbLocallyModifiedData);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesChangeInfo, IsLocallyModifiedAttributes)
         HRESULT ( STDMETHODCALLTYPE *IsLocallyModifiedAttributes )( 
             __RPC__in IOfflineFilesChangeInfo * This,
             /* [out] */ __RPC__out BOOL *pbLocallyModifiedAttributes);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesChangeInfo, IsLocallyModifiedTime)
         HRESULT ( STDMETHODCALLTYPE *IsLocallyModifiedTime )( 
             __RPC__in IOfflineFilesChangeInfo * This,
             /* [out] */ __RPC__out BOOL *pbLocallyModifiedTime);
@@ -4159,22 +4438,27 @@ EXTERN_C const IID IID_IOfflineFilesDirtyInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesDirtyInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesDirtyInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesDirtyInfo * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesDirtyInfo, LocalDirtyByteCount)
         HRESULT ( STDMETHODCALLTYPE *LocalDirtyByteCount )( 
             __RPC__in IOfflineFilesDirtyInfo * This,
             /* [out] */ __RPC__out LARGE_INTEGER *pDirtyByteCount);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesDirtyInfo, RemoteDirtyByteCount)
         HRESULT ( STDMETHODCALLTYPE *RemoteDirtyByteCount )( 
             __RPC__in IOfflineFilesDirtyInfo * This,
             /* [out] */ __RPC__out LARGE_INTEGER *pDirtyByteCount);
@@ -4258,23 +4542,28 @@ EXTERN_C const IID IID_IOfflineFilesFileSysInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesFileSysInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesFileSysInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesFileSysInfo * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesFileSysInfo, GetAttributes)
         HRESULT ( STDMETHODCALLTYPE *GetAttributes )( 
             __RPC__in IOfflineFilesFileSysInfo * This,
             /* [in] */ OFFLINEFILES_ITEM_COPY copy,
             /* [out] */ __RPC__out DWORD *pdwAttributes);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesFileSysInfo, GetTimes)
         HRESULT ( STDMETHODCALLTYPE *GetTimes )( 
             __RPC__in IOfflineFilesFileSysInfo * This,
             /* [in] */ OFFLINEFILES_ITEM_COPY copy,
@@ -4283,6 +4572,7 @@ EXTERN_C const IID IID_IOfflineFilesFileSysInfo;
             /* [out] */ __RPC__out FILETIME *pftChangeTime,
             /* [out] */ __RPC__out FILETIME *pftLastAccessTime);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesFileSysInfo, GetFileSize)
         HRESULT ( STDMETHODCALLTYPE *GetFileSize )( 
             __RPC__in IOfflineFilesFileSysInfo * This,
             /* [in] */ OFFLINEFILES_ITEM_COPY copy,
@@ -4374,37 +4664,45 @@ EXTERN_C const IID IID_IOfflineFilesPinInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesPinInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesPinInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesPinInfo * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesPinInfo, IsPinned)
         HRESULT ( STDMETHODCALLTYPE *IsPinned )( 
             __RPC__in IOfflineFilesPinInfo * This,
             /* [out] */ __RPC__out BOOL *pbPinned);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesPinInfo, IsPinnedForUser)
         HRESULT ( STDMETHODCALLTYPE *IsPinnedForUser )( 
             __RPC__in IOfflineFilesPinInfo * This,
             /* [out] */ __RPC__out BOOL *pbPinnedForUser,
             /* [out] */ __RPC__out BOOL *pbInherit);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesPinInfo, IsPinnedForUserByPolicy)
         HRESULT ( STDMETHODCALLTYPE *IsPinnedForUserByPolicy )( 
             __RPC__in IOfflineFilesPinInfo * This,
             /* [out] */ __RPC__out BOOL *pbPinnedForUser,
             /* [out] */ __RPC__out BOOL *pbInherit);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesPinInfo, IsPinnedForComputer)
         HRESULT ( STDMETHODCALLTYPE *IsPinnedForComputer )( 
             __RPC__in IOfflineFilesPinInfo * This,
             /* [out] */ __RPC__out BOOL *pbPinnedForComputer,
             /* [out] */ __RPC__out BOOL *pbInherit);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesPinInfo, IsPinnedForFolderRedirection)
         HRESULT ( STDMETHODCALLTYPE *IsPinnedForFolderRedirection )( 
             __RPC__in IOfflineFilesPinInfo * This,
             /* [out] */ __RPC__out BOOL *pbPinnedForFolderRedirection,
@@ -4486,42 +4784,51 @@ EXTERN_C const IID IID_IOfflineFilesPinInfo2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesPinInfo2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesPinInfo2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesPinInfo2 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesPinInfo, IsPinned)
         HRESULT ( STDMETHODCALLTYPE *IsPinned )( 
             __RPC__in IOfflineFilesPinInfo2 * This,
             /* [out] */ __RPC__out BOOL *pbPinned);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesPinInfo, IsPinnedForUser)
         HRESULT ( STDMETHODCALLTYPE *IsPinnedForUser )( 
             __RPC__in IOfflineFilesPinInfo2 * This,
             /* [out] */ __RPC__out BOOL *pbPinnedForUser,
             /* [out] */ __RPC__out BOOL *pbInherit);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesPinInfo, IsPinnedForUserByPolicy)
         HRESULT ( STDMETHODCALLTYPE *IsPinnedForUserByPolicy )( 
             __RPC__in IOfflineFilesPinInfo2 * This,
             /* [out] */ __RPC__out BOOL *pbPinnedForUser,
             /* [out] */ __RPC__out BOOL *pbInherit);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesPinInfo, IsPinnedForComputer)
         HRESULT ( STDMETHODCALLTYPE *IsPinnedForComputer )( 
             __RPC__in IOfflineFilesPinInfo2 * This,
             /* [out] */ __RPC__out BOOL *pbPinnedForComputer,
             /* [out] */ __RPC__out BOOL *pbInherit);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesPinInfo, IsPinnedForFolderRedirection)
         HRESULT ( STDMETHODCALLTYPE *IsPinnedForFolderRedirection )( 
             __RPC__in IOfflineFilesPinInfo2 * This,
             /* [out] */ __RPC__out BOOL *pbPinnedForFolderRedirection,
             /* [out] */ __RPC__out BOOL *pbInherit);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesPinInfo2, IsPartlyPinned)
         HRESULT ( STDMETHODCALLTYPE *IsPartlyPinned )( 
             __RPC__in IOfflineFilesPinInfo2 * This,
             /* [out] */ __RPC__out BOOL *pbPartlyPinned);
@@ -4606,18 +4913,22 @@ EXTERN_C const IID IID_IOfflineFilesTransparentCacheInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesTransparentCacheInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesTransparentCacheInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesTransparentCacheInfo * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesTransparentCacheInfo, IsTransparentlyCached)
         HRESULT ( STDMETHODCALLTYPE *IsTransparentlyCached )( 
             __RPC__in IOfflineFilesTransparentCacheInfo * This,
             /* [out] */ __RPC__out BOOL *pbTransparentlyCached);
@@ -4686,18 +4997,22 @@ EXTERN_C const IID IID_IOfflineFilesGhostInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesGhostInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesGhostInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesGhostInfo * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesGhostInfo, IsGhosted)
         HRESULT ( STDMETHODCALLTYPE *IsGhosted )( 
             __RPC__in IOfflineFilesGhostInfo * This,
             /* [out] */ __RPC__out BOOL *pbGhosted);
@@ -4782,34 +5097,41 @@ EXTERN_C const IID IID_IOfflineFilesConnectionInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesConnectionInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesConnectionInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesConnectionInfo * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesConnectionInfo, GetConnectState)
         HRESULT ( STDMETHODCALLTYPE *GetConnectState )( 
             __RPC__in IOfflineFilesConnectionInfo * This,
             /* [out] */ __RPC__out OFFLINEFILES_CONNECT_STATE *pConnectState,
             /* [out] */ __RPC__out OFFLINEFILES_OFFLINE_REASON *pOfflineReason);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesConnectionInfo, SetConnectState)
         HRESULT ( STDMETHODCALLTYPE *SetConnectState )( 
             __RPC__in IOfflineFilesConnectionInfo * This,
             /* [unique][in] */ __RPC__in_opt HWND hwndParent,
             /* [in] */ DWORD dwFlags,
             /* [in] */ OFFLINEFILES_CONNECT_STATE ConnectState);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesConnectionInfo, TransitionOnline)
         HRESULT ( STDMETHODCALLTYPE *TransitionOnline )( 
             __RPC__in IOfflineFilesConnectionInfo * This,
             /* [unique][in] */ __RPC__in_opt HWND hwndParent,
             /* [in] */ DWORD dwFlags);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesConnectionInfo, TransitionOffline)
         HRESULT ( STDMETHODCALLTYPE *TransitionOffline )( 
             __RPC__in IOfflineFilesConnectionInfo * This,
             /* [unique][in] */ __RPC__in_opt HWND hwndParent,
@@ -4896,26 +5218,32 @@ EXTERN_C const IID IID_IOfflineFilesShareInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesShareInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesShareInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesShareInfo * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesShareInfo, GetShareItem)
         HRESULT ( STDMETHODCALLTYPE *GetShareItem )( 
             __RPC__in IOfflineFilesShareInfo * This,
             /* [out] */ __RPC__deref_out_opt IOfflineFilesShareItem **ppShareItem);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesShareInfo, GetShareCachingMode)
         HRESULT ( STDMETHODCALLTYPE *GetShareCachingMode )( 
             __RPC__in IOfflineFilesShareInfo * This,
             /* [out] */ __RPC__out OFFLINEFILES_CACHING_MODE *pCachingMode);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesShareInfo, IsShareDfsJunction)
         HRESULT ( STDMETHODCALLTYPE *IsShareDfsJunction )( 
             __RPC__in IOfflineFilesShareInfo * This,
             /* [out] */ __RPC__out BOOL *pbIsDfsJunction);
@@ -4990,18 +5318,22 @@ EXTERN_C const IID IID_IOfflineFilesSuspend;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesSuspend * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesSuspend * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesSuspend * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesSuspend, SuspendRoot)
         HRESULT ( STDMETHODCALLTYPE *SuspendRoot )( 
             __RPC__in IOfflineFilesSuspend * This,
             /* [in] */ BOOL bSuspend);
@@ -5071,18 +5403,22 @@ EXTERN_C const IID IID_IOfflineFilesSuspendInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesSuspendInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesSuspendInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesSuspendInfo * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesSuspendInfo, IsSuspended)
         HRESULT ( STDMETHODCALLTYPE *IsSuspended )( 
             __RPC__in IOfflineFilesSuspendInfo * This,
             /* [out] */ __RPC__out BOOL *pbSuspended,
@@ -5180,53 +5516,65 @@ EXTERN_C const IID IID_IOfflineFilesSetting;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesSetting * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesSetting * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesSetting * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesSetting, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in IOfflineFilesSetting * This,
             /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszName);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesSetting, GetValueType)
         HRESULT ( STDMETHODCALLTYPE *GetValueType )( 
             __RPC__in IOfflineFilesSetting * This,
             /* [out] */ __RPC__out OFFLINEFILES_SETTING_VALUE_TYPE *pType);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesSetting, GetPreference)
         HRESULT ( STDMETHODCALLTYPE *GetPreference )( 
             __RPC__in IOfflineFilesSetting * This,
             /* [out] */ __RPC__out VARIANT *pvarValue,
             /* [in] */ DWORD dwScope);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesSetting, GetPreferenceScope)
         HRESULT ( STDMETHODCALLTYPE *GetPreferenceScope )( 
             __RPC__in IOfflineFilesSetting * This,
             /* [out] */ __RPC__out DWORD *pdwScope);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesSetting, SetPreference)
         HRESULT ( STDMETHODCALLTYPE *SetPreference )( 
             __RPC__in IOfflineFilesSetting * This,
             /* [in] */ __RPC__in const VARIANT *pvarValue,
             /* [in] */ DWORD dwScope);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesSetting, DeletePreference)
         HRESULT ( STDMETHODCALLTYPE *DeletePreference )( 
             __RPC__in IOfflineFilesSetting * This,
             /* [in] */ DWORD dwScope);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesSetting, GetPolicy)
         HRESULT ( STDMETHODCALLTYPE *GetPolicy )( 
             __RPC__in IOfflineFilesSetting * This,
             /* [out] */ __RPC__out VARIANT *pvarValue,
             /* [in] */ DWORD dwScope);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesSetting, GetPolicyScope)
         HRESULT ( STDMETHODCALLTYPE *GetPolicyScope )( 
             __RPC__in IOfflineFilesSetting * This,
             /* [out] */ __RPC__out DWORD *pdwScope);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesSetting, GetValue)
         HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             __RPC__in IOfflineFilesSetting * This,
             /* [out] */ __RPC__out VARIANT *pvarValue,
@@ -5330,31 +5678,38 @@ EXTERN_C const IID IID_IEnumOfflineFilesSettings;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumOfflineFilesSettings * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumOfflineFilesSettings * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumOfflineFilesSettings * This);
         
+        DECLSPEC_XFGVIRT(IEnumOfflineFilesSettings, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumOfflineFilesSettings * This,
             /* [in] */ ULONG celt,
             /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) IOfflineFilesSetting **rgelt,
             /* [out] */ __RPC__out ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IEnumOfflineFilesSettings, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumOfflineFilesSettings * This,
             /* [in] */ ULONG celt);
         
+        DECLSPEC_XFGVIRT(IEnumOfflineFilesSettings, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumOfflineFilesSettings * This);
         
+        DECLSPEC_XFGVIRT(IEnumOfflineFilesSettings, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumOfflineFilesSettings * This,
             /* [out] */ __RPC__deref_out_opt IEnumOfflineFilesSettings **ppenum);
@@ -5532,18 +5887,22 @@ EXTERN_C const IID IID_IOfflineFilesCache;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesCache * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesCache * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesCache * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, Synchronize)
         HRESULT ( STDMETHODCALLTYPE *Synchronize )( 
             __RPC__in IOfflineFilesCache * This,
             /* [unique][in] */ __RPC__in_opt HWND hwndParent,
@@ -5555,6 +5914,7 @@ EXTERN_C const IID IID_IOfflineFilesCache;
             /* [unique][in] */ __RPC__in_opt IOfflineFilesSyncProgress *pIProgress,
             /* [unique][in] */ __RPC__in_opt GUID *pSyncId);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, DeleteItems)
         HRESULT ( STDMETHODCALLTYPE *DeleteItems )( 
             __RPC__in IOfflineFilesCache * This,
             /* [string][size_is][in] */ __RPC__in_ecount_full(cPaths) LPCWSTR *rgpszPaths,
@@ -5563,6 +5923,7 @@ EXTERN_C const IID IID_IOfflineFilesCache;
             /* [in] */ BOOL bAsync,
             /* [unique][in] */ __RPC__in_opt IOfflineFilesSimpleProgress *pIProgress);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, DeleteItemsForUser)
         HRESULT ( STDMETHODCALLTYPE *DeleteItemsForUser )( 
             __RPC__in IOfflineFilesCache * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszUser,
@@ -5572,6 +5933,7 @@ EXTERN_C const IID IID_IOfflineFilesCache;
             /* [in] */ BOOL bAsync,
             /* [unique][in] */ __RPC__in_opt IOfflineFilesSimpleProgress *pIProgress);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, Pin)
         HRESULT ( STDMETHODCALLTYPE *Pin )( 
             __RPC__in IOfflineFilesCache * This,
             /* [unique][in] */ __RPC__in_opt HWND hwndParent,
@@ -5582,6 +5944,7 @@ EXTERN_C const IID IID_IOfflineFilesCache;
             /* [in] */ DWORD dwPinControlFlags,
             /* [unique][in] */ __RPC__in_opt IOfflineFilesSyncProgress *pIProgress);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, Unpin)
         HRESULT ( STDMETHODCALLTYPE *Unpin )( 
             __RPC__in IOfflineFilesCache * This,
             /* [unique][in] */ __RPC__in_opt HWND hwndParent,
@@ -5592,11 +5955,13 @@ EXTERN_C const IID IID_IOfflineFilesCache;
             /* [in] */ DWORD dwPinControlFlags,
             /* [unique][in] */ __RPC__in_opt IOfflineFilesSyncProgress *pIProgress);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, GetEncryptionStatus)
         HRESULT ( STDMETHODCALLTYPE *GetEncryptionStatus )( 
             __RPC__in IOfflineFilesCache * This,
             /* [out] */ __RPC__out BOOL *pbEncrypted,
             /* [out] */ __RPC__out BOOL *pbPartial);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, Encrypt)
         HRESULT ( STDMETHODCALLTYPE *Encrypt )( 
             __RPC__in IOfflineFilesCache * This,
             /* [unique][in] */ __RPC__in_opt HWND hwndParent,
@@ -5605,12 +5970,14 @@ EXTERN_C const IID IID_IOfflineFilesCache;
             /* [in] */ BOOL bAsync,
             /* [unique][in] */ __RPC__in_opt IOfflineFilesSyncProgress *pIProgress);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, FindItem)
         HRESULT ( STDMETHODCALLTYPE *FindItem )( 
             __RPC__in IOfflineFilesCache * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ DWORD dwQueryFlags,
             /* [out] */ __RPC__deref_out_opt IOfflineFilesItem **ppItem);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, FindItemEx)
         HRESULT ( STDMETHODCALLTYPE *FindItemEx )( 
             __RPC__in IOfflineFilesCache * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
@@ -5621,16 +5988,19 @@ EXTERN_C const IID IID_IOfflineFilesCache;
             /* [in] */ DWORD dwQueryFlags,
             /* [out] */ __RPC__deref_out_opt IOfflineFilesItem **ppItem);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, RenameItem)
         HRESULT ( STDMETHODCALLTYPE *RenameItem )( 
             __RPC__in IOfflineFilesCache * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPathOriginal,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPathNew,
             /* [in] */ BOOL bReplaceIfExists);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, GetLocation)
         HRESULT ( STDMETHODCALLTYPE *GetLocation )( 
             __RPC__in IOfflineFilesCache * This,
             /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszPath);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, GetDiskSpaceInformation)
         HRESULT ( STDMETHODCALLTYPE *GetDiskSpaceInformation )( 
             __RPC__in IOfflineFilesCache * This,
             /* [out] */ __RPC__out ULONGLONG *pcbVolumeTotal,
@@ -5639,25 +6009,30 @@ EXTERN_C const IID IID_IOfflineFilesCache;
             /* [out] */ __RPC__out ULONGLONG *pcbUnpinnedLimit,
             /* [out] */ __RPC__out ULONGLONG *pcbUnpinnedUsed);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, SetDiskSpaceLimits)
         HRESULT ( STDMETHODCALLTYPE *SetDiskSpaceLimits )( 
             __RPC__in IOfflineFilesCache * This,
             /* [in] */ ULONGLONG cbLimit,
             /* [in] */ ULONGLONG cbUnpinnedLimit);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, ProcessAdminPinPolicy)
         HRESULT ( STDMETHODCALLTYPE *ProcessAdminPinPolicy )( 
             __RPC__in IOfflineFilesCache * This,
             /* [unique][in] */ __RPC__in_opt IOfflineFilesSyncProgress *pPinProgress,
             /* [unique][in] */ __RPC__in_opt IOfflineFilesSyncProgress *pUnpinProgress);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, GetSettingObject)
         HRESULT ( STDMETHODCALLTYPE *GetSettingObject )( 
             __RPC__in IOfflineFilesCache * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszSettingName,
             /* [out] */ __RPC__deref_out_opt IOfflineFilesSetting **ppSetting);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, EnumSettingObjects)
         HRESULT ( STDMETHODCALLTYPE *EnumSettingObjects )( 
             __RPC__in IOfflineFilesCache * This,
             /* [out] */ __RPC__deref_out_opt IEnumOfflineFilesSettings **ppEnum);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, IsPathCacheable)
         HRESULT ( STDMETHODCALLTYPE *IsPathCacheable )( 
             __RPC__in IOfflineFilesCache * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
@@ -5778,18 +6153,22 @@ EXTERN_C const IID IID_IOfflineFilesCache2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOfflineFilesCache2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOfflineFilesCache2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOfflineFilesCache2 * This);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, Synchronize)
         HRESULT ( STDMETHODCALLTYPE *Synchronize )( 
             __RPC__in IOfflineFilesCache2 * This,
             /* [unique][in] */ __RPC__in_opt HWND hwndParent,
@@ -5801,6 +6180,7 @@ EXTERN_C const IID IID_IOfflineFilesCache2;
             /* [unique][in] */ __RPC__in_opt IOfflineFilesSyncProgress *pIProgress,
             /* [unique][in] */ __RPC__in_opt GUID *pSyncId);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, DeleteItems)
         HRESULT ( STDMETHODCALLTYPE *DeleteItems )( 
             __RPC__in IOfflineFilesCache2 * This,
             /* [string][size_is][in] */ __RPC__in_ecount_full(cPaths) LPCWSTR *rgpszPaths,
@@ -5809,6 +6189,7 @@ EXTERN_C const IID IID_IOfflineFilesCache2;
             /* [in] */ BOOL bAsync,
             /* [unique][in] */ __RPC__in_opt IOfflineFilesSimpleProgress *pIProgress);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, DeleteItemsForUser)
         HRESULT ( STDMETHODCALLTYPE *DeleteItemsForUser )( 
             __RPC__in IOfflineFilesCache2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszUser,
@@ -5818,6 +6199,7 @@ EXTERN_C const IID IID_IOfflineFilesCache2;
             /* [in] */ BOOL bAsync,
             /* [unique][in] */ __RPC__in_opt IOfflineFilesSimpleProgress *pIProgress);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, Pin)
         HRESULT ( STDMETHODCALLTYPE *Pin )( 
             __RPC__in IOfflineFilesCache2 * This,
             /* [unique][in] */ __RPC__in_opt HWND hwndParent,
@@ -5828,6 +6210,7 @@ EXTERN_C const IID IID_IOfflineFilesCache2;
             /* [in] */ DWORD dwPinControlFlags,
             /* [unique][in] */ __RPC__in_opt IOfflineFilesSyncProgress *pIProgress);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, Unpin)
         HRESULT ( STDMETHODCALLTYPE *Unpin )( 
             __RPC__in IOfflineFilesCache2 * This,
             /* [unique][in] */ __RPC__in_opt HWND hwndParent,
@@ -5838,11 +6221,13 @@ EXTERN_C const IID IID_IOfflineFilesCache2;
             /* [in] */ DWORD dwPinControlFlags,
             /* [unique][in] */ __RPC__in_opt IOfflineFilesSyncProgress *pIProgress);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, GetEncryptionStatus)
         HRESULT ( STDMETHODCALLTYPE *GetEncryptionStatus )( 
             __RPC__in IOfflineFilesCache2 * This,
             /* [out] */ __RPC__out BOOL *pbEncrypted,
             /* [out] */ __RPC__out BOOL *pbPartial);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, Encrypt)
         HRESULT ( STDMETHODCALLTYPE *Encrypt )( 
             __RPC__in IOfflineFilesCache2 * This,
             /* [unique][in] */ __RPC__in_opt HWND hwndParent,
@@ -5851,12 +6236,14 @@ EXTERN_C const IID IID_IOfflineFilesCache2;
             /* [in] */ BOOL bAsync,
             /* [unique][in] */ __RPC__in_opt IOfflineFilesSyncProgress *pIProgress);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, FindItem)
         HRESULT ( STDMETHODCALLTYPE *FindItem )( 
             __RPC__in IOfflineFilesCache2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [in] */ DWORD dwQueryFlags,
             /* [out] */ __RPC__deref_out_opt IOfflineFilesItem **ppItem);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, FindItemEx)
         HRESULT ( STDMETHODCALLTYPE *FindItemEx )( 
             __RPC__in IOfflineFilesCache2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
@@ -5867,16 +6254,19 @@ EXTERN_C const IID IID_IOfflineFilesCache2;
             /* [in] */ DWORD dwQueryFlags,
             /* [out] */ __RPC__deref_out_opt IOfflineFilesItem **ppItem);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, RenameItem)
         HRESULT ( STDMETHODCALLTYPE *RenameItem )( 
             __RPC__in IOfflineFilesCache2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPathOriginal,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPathNew,
             /* [in] */ BOOL bReplaceIfExists);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, GetLocation)
         HRESULT ( STDMETHODCALLTYPE *GetLocation )( 
             __RPC__in IOfflineFilesCache2 * This,
             /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszPath);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, GetDiskSpaceInformation)
         HRESULT ( STDMETHODCALLTYPE *GetDiskSpaceInformation )( 
             __RPC__in IOfflineFilesCache2 * This,
             /* [out] */ __RPC__out ULONGLONG *pcbVolumeTotal,
@@ -5885,31 +6275,37 @@ EXTERN_C const IID IID_IOfflineFilesCache2;
             /* [out] */ __RPC__out ULONGLONG *pcbUnpinnedLimit,
             /* [out] */ __RPC__out ULONGLONG *pcbUnpinnedUsed);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, SetDiskSpaceLimits)
         HRESULT ( STDMETHODCALLTYPE *SetDiskSpaceLimits )( 
             __RPC__in IOfflineFilesCache2 * This,
             /* [in] */ ULONGLONG cbLimit,
             /* [in] */ ULONGLONG cbUnpinnedLimit);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, ProcessAdminPinPolicy)
         HRESULT ( STDMETHODCALLTYPE *ProcessAdminPinPolicy )( 
             __RPC__in IOfflineFilesCache2 * This,
             /* [unique][in] */ __RPC__in_opt IOfflineFilesSyncProgress *pPinProgress,
             /* [unique][in] */ __RPC__in_opt IOfflineFilesSyncProgress *pUnpinProgress);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, GetSettingObject)
         HRESULT ( STDMETHODCALLTYPE *GetSettingObject )( 
             __RPC__in IOfflineFilesCache2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszSettingName,
             /* [out] */ __RPC__deref_out_opt IOfflineFilesSetting **ppSetting);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, EnumSettingObjects)
         HRESULT ( STDMETHODCALLTYPE *EnumSettingObjects )( 
             __RPC__in IOfflineFilesCache2 * This,
             /* [out] */ __RPC__deref_out_opt IEnumOfflineFilesSettings **ppEnum);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache, IsPathCacheable)
         HRESULT ( STDMETHODCALLTYPE *IsPathCacheable )( 
             __RPC__in IOfflineFilesCache2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPath,
             /* [out] */ __RPC__out BOOL *pbCacheable,
             /* [out] */ __RPC__out OFFLINEFILES_CACHING_MODE *pShareCachingMode);
         
+        DECLSPEC_XFGVIRT(IOfflineFilesCache2, RenameItemEx)
         HRESULT ( STDMETHODCALLTYPE *RenameItemEx )( 
             __RPC__in IOfflineFilesCache2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPathOriginal,

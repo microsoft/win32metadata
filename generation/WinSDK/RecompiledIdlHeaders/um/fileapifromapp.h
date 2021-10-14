@@ -34,8 +34,11 @@ CopyFileFromAppW(
     _In_ LPCWSTR lpExistingFileName,
     _In_ LPCWSTR lpNewFileName,
     _In_ BOOL bFailIfExists
-    );
-
+    )
+#if defined(__cplusplus) && _MSC_VER >= 1900
+noexcept
+#endif
+;
 
 WINSTORAGEAPI
 BOOL
@@ -43,8 +46,11 @@ WINAPI
 CreateDirectoryFromAppW(
     _In_ LPCWSTR lpPathName,
     _In_opt_ LPSECURITY_ATTRIBUTES lpSecurityAttributes
-    );
-
+    )
+#if defined(__cplusplus) && _MSC_VER >= 1900
+noexcept
+#endif
+;
 
 WINSTORAGEAPI
 HANDLE
@@ -57,8 +63,11 @@ CreateFileFromAppW(
     _In_ DWORD dwCreationDisposition,
     _In_ DWORD dwFlagsAndAttributes,
     _In_opt_ HANDLE hTemplateFile
-    );
-
+    )
+#if defined(__cplusplus) && _MSC_VER >= 1900
+noexcept
+#endif
+;
 
 WINSTORAGEAPI
 HANDLE
@@ -69,16 +78,22 @@ CreateFile2FromAppW(
     _In_ DWORD dwShareMode,
     _In_ DWORD dwCreationDisposition,
     _In_opt_ LPCREATEFILE2_EXTENDED_PARAMETERS pCreateExParams
-    );
-
+    )
+#if defined(__cplusplus) && _MSC_VER >= 1900
+noexcept
+#endif
+;
 
 WINSTORAGEAPI
 BOOL
 WINAPI
 DeleteFileFromAppW(
     _In_ LPCWSTR lpFileName
-    );
-
+    )
+#if defined(__cplusplus) && _MSC_VER >= 1900
+noexcept
+#endif
+;
 
 WINSTORAGEAPI
 HANDLE
@@ -90,8 +105,11 @@ FindFirstFileExFromAppW(
     _In_ FINDEX_SEARCH_OPS fSearchOp,
     _Reserved_ LPVOID lpSearchFilter,
     _In_ DWORD dwAdditionalFlags
-    );
-
+    )
+#if defined(__cplusplus) && _MSC_VER >= 1900
+noexcept
+#endif
+;
 
 WINSTORAGEAPI
 BOOL
@@ -100,8 +118,11 @@ GetFileAttributesExFromAppW(
     _In_ LPCWSTR lpFileName,
     _In_ GET_FILEEX_INFO_LEVELS fInfoLevelId,
     _Out_writes_bytes_(sizeof(WIN32_FILE_ATTRIBUTE_DATA)) LPVOID lpFileInformation
-    );
-
+    )
+#if defined(__cplusplus) && _MSC_VER >= 1900
+noexcept
+#endif
+;
 
 WINSTORAGEAPI
 BOOL
@@ -109,16 +130,22 @@ WINAPI
 MoveFileFromAppW(
     _In_ LPCWSTR lpExistingFileName,
     _In_ LPCWSTR lpNewFileName
-    );
-
+    )
+#if defined(__cplusplus) && _MSC_VER >= 1900
+noexcept
+#endif
+;
 
 WINSTORAGEAPI
 BOOL
 WINAPI
 RemoveDirectoryFromAppW(
     _In_ LPCWSTR lpPathName
-    );
-
+    )
+#if defined(__cplusplus) && _MSC_VER >= 1900
+noexcept
+#endif
+;
 
 WINSTORAGEAPI
 BOOL
@@ -130,8 +157,11 @@ ReplaceFileFromAppW(
     _In_ DWORD dwReplaceFlags,
     _Reserved_ LPVOID lpExclude,
     _Reserved_ LPVOID lpReserved
-    );
-
+    )
+#if defined(__cplusplus) && _MSC_VER >= 1900
+noexcept
+#endif
+;
 
 WINSTORAGEAPI
 BOOL
@@ -139,8 +169,11 @@ WINAPI
 SetFileAttributesFromAppW(
     _In_ LPCWSTR lpFileName,
     _In_ DWORD dwFileAttributes
-    );
-
+    )
+#if defined(__cplusplus) && _MSC_VER >= 1900
+noexcept
+#endif
+;
 
 #endif // Version check
 #endif/* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */

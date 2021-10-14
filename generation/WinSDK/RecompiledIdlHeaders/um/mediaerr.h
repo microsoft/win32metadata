@@ -26,4 +26,4 @@
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
 
-#endif _MEDIAERR_H_
+#endif // _MEDIAERR_H_

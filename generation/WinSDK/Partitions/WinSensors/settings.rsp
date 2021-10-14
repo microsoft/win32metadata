@@ -1,5 +1,8 @@
 --traverse
 <IncludeRoot>/um/sensors.h
 <IncludeRoot>/um/SensorsApi.h
+<IncludeRoot>/shared/sensorsdef.h
+<IncludeRoot>/shared/sensorsstructures.h
+<IncludeRoot>/shared/sensorsutils.h
 --namespace
 Windows.Win32.Devices.Sensors

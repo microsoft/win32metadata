@@ -6,5 +6,9 @@
 #include "windows.fixed.h"
 #include <sdkddkver.h>
 
+typedef LONG NTSTATUS;
+
 #include <locationapi.h>
 #include <sensorsapi.h>
+
+#include <gnssdriver.h>

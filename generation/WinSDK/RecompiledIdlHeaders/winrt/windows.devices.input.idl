@@ -10,8 +10,19 @@ import "AsyncInfo.idl";
 import "EventToken.idl";
 import "windowscontracts.idl";
 import "Windows.Foundation.idl";
+import "Windows.Devices.Haptics.idl";
 
 // Forward Declare
+namespace Windows
+{
+    namespace Devices
+    {
+        namespace Haptics
+        {
+            runtimeclass SimpleHapticsController;
+        }
+    }
+}
 namespace Windows
 {
     namespace Foundation
@@ -48,6 +59,8 @@ namespace Windows
             interface IPenButtonListenerStatics;
 
             interface IPenDevice;
+
+            interface IPenDevice2;
 
             interface IPenDeviceStatics;
 
@@ -257,6 +270,14 @@ namespace Windows
                 [propget] HRESULT PenId([out] [retval] GUID* value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 14.0)]
+            [exclusiveto(Windows.Devices.Input.PenDevice)]
+            [uuid(0207D327-7FB8-5566-8C34-F8342037B7F9)]
+            interface IPenDevice2 : IInspectable
+            {
+                [propget] HRESULT SimpleHapticsController([out] [retval] Windows.Devices.Haptics.SimpleHapticsController** value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 8.0)]
             [exclusiveto(Windows.Devices.Input.PenDevice)]
             [uuid(9DFBBE01-0966-5180-BCB4-B85060E39479)]
@@ -408,6 +429,7 @@ namespace Windows
             runtimeclass PenDevice
             {
                 [default] interface Windows.Devices.Input.IPenDevice;
+                [contract(Windows.Foundation.UniversalApiContract, 14.0)] interface Windows.Devices.Input.IPenDevice2;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 10.0)]

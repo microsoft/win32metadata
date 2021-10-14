@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -140,41 +148,50 @@ EXTERN_C const IID IID_IWMDMLogger;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMDMLogger * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMDMLogger * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMDMLogger * This);
         
+        DECLSPEC_XFGVIRT(IWMDMLogger, IsEnabled)
         HRESULT ( STDMETHODCALLTYPE *IsEnabled )( 
             __RPC__in IWMDMLogger * This,
             /* [out] */ __RPC__out BOOL *pfEnabled);
         
+        DECLSPEC_XFGVIRT(IWMDMLogger, Enable)
         HRESULT ( STDMETHODCALLTYPE *Enable )( 
             __RPC__in IWMDMLogger * This,
             /* [in] */ BOOL fEnable);
         
+        DECLSPEC_XFGVIRT(IWMDMLogger, GetLogFileName)
         HRESULT ( STDMETHODCALLTYPE *GetLogFileName )( 
             __RPC__in IWMDMLogger * This,
             /* [max_is][string][out] */ __RPC__out_ecount_full_string(( 256 + 1 ) ) LPSTR pszFilename,
             /* [range][in] */ __RPC__in_range(0,256) UINT nMaxChars);
         
+        DECLSPEC_XFGVIRT(IWMDMLogger, SetLogFileName)
         HRESULT ( STDMETHODCALLTYPE *SetLogFileName )( 
             __RPC__in IWMDMLogger * This,
             /* [string][in] */ __RPC__in_string LPSTR pszFilename);
         
+        DECLSPEC_XFGVIRT(IWMDMLogger, LogString)
         HRESULT ( STDMETHODCALLTYPE *LogString )( 
             __RPC__in IWMDMLogger * This,
             /* [in] */ DWORD dwFlags,
             /* [string][in] */ __RPC__in_string LPSTR pszSrcName,
             /* [string][in] */ __RPC__in_string LPSTR pszLog);
         
+        DECLSPEC_XFGVIRT(IWMDMLogger, LogDword)
         HRESULT ( STDMETHODCALLTYPE *LogDword )( 
             __RPC__in IWMDMLogger * This,
             /* [in] */ DWORD dwFlags,
@@ -182,14 +199,17 @@ EXTERN_C const IID IID_IWMDMLogger;
             /* [string][in] */ __RPC__in_string LPSTR pszLogFormat,
             /* [in] */ DWORD dwLog);
         
+        DECLSPEC_XFGVIRT(IWMDMLogger, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IWMDMLogger * This);
         
+        DECLSPEC_XFGVIRT(IWMDMLogger, GetSizeParams)
         HRESULT ( STDMETHODCALLTYPE *GetSizeParams )( 
             __RPC__in IWMDMLogger * This,
             /* [out] */ __RPC__out LPDWORD pdwMaxSize,
             /* [out] */ __RPC__out LPDWORD pdwShrinkToSize);
         
+        DECLSPEC_XFGVIRT(IWMDMLogger, SetSizeParams)
         HRESULT ( STDMETHODCALLTYPE *SetSizeParams )( 
             __RPC__in IWMDMLogger * This,
             /* [in] */ DWORD dwMaxSize,

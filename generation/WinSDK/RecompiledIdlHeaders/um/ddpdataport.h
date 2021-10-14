@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -261,6 +269,7 @@ EXTERN_C const IID IID_IDedupDataPort;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDedupDataPort * This,
             /* [annotation][in] */ 
@@ -268,18 +277,22 @@ EXTERN_C const IID IID_IDedupDataPort;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDedupDataPort * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDedupDataPort * This);
         
+        DECLSPEC_XFGVIRT(IDedupDataPort, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in IDedupDataPort * This,
             /* [annotation][out] */ 
             _Out_  DedupDataPortVolumeStatus *pStatus,
             /* [optional][out] */ __RPC__out DWORD *pDataHeadroomMb);
         
+        DECLSPEC_XFGVIRT(IDedupDataPort, LookupChunks)
         HRESULT ( STDMETHODCALLTYPE *LookupChunks )( 
             __RPC__in IDedupDataPort * This,
             /* [annotation][in] */ 
@@ -289,6 +302,7 @@ EXTERN_C const IID IID_IDedupDataPort;
             /* [annotation][out] */ 
             _Out_  GUID *pRequestId);
         
+        DECLSPEC_XFGVIRT(IDedupDataPort, InsertChunks)
         HRESULT ( STDMETHODCALLTYPE *InsertChunks )( 
             __RPC__in IDedupDataPort * This,
             /* [annotation][in] */ 
@@ -302,6 +316,7 @@ EXTERN_C const IID IID_IDedupDataPort;
             /* [annotation][out] */ 
             _Out_  GUID *pRequestId);
         
+        DECLSPEC_XFGVIRT(IDedupDataPort, InsertChunksWithStream)
         HRESULT ( STDMETHODCALLTYPE *InsertChunksWithStream )( 
             __RPC__in IDedupDataPort * This,
             /* [annotation][in] */ 
@@ -315,6 +330,7 @@ EXTERN_C const IID IID_IDedupDataPort;
             /* [annotation][out] */ 
             _Out_  GUID *pRequestId);
         
+        DECLSPEC_XFGVIRT(IDedupDataPort, CommitStreams)
         HRESULT ( STDMETHODCALLTYPE *CommitStreams )( 
             __RPC__in IDedupDataPort * This,
             /* [annotation][in] */ 
@@ -328,6 +344,7 @@ EXTERN_C const IID IID_IDedupDataPort;
             /* [annotation][out] */ 
             _Out_  GUID *pRequestId);
         
+        DECLSPEC_XFGVIRT(IDedupDataPort, CommitStreamsWithStream)
         HRESULT ( STDMETHODCALLTYPE *CommitStreamsWithStream )( 
             __RPC__in IDedupDataPort * This,
             /* [annotation][in] */ 
@@ -341,6 +358,7 @@ EXTERN_C const IID IID_IDedupDataPort;
             /* [annotation][out] */ 
             _Out_  GUID *pRequestId);
         
+        DECLSPEC_XFGVIRT(IDedupDataPort, GetStreams)
         HRESULT ( STDMETHODCALLTYPE *GetStreams )( 
             __RPC__in IDedupDataPort * This,
             /* [annotation][in] */ 
@@ -350,6 +368,7 @@ EXTERN_C const IID IID_IDedupDataPort;
             /* [annotation][out] */ 
             _Out_  GUID *pRequestId);
         
+        DECLSPEC_XFGVIRT(IDedupDataPort, GetStreamsResults)
         HRESULT ( STDMETHODCALLTYPE *GetStreamsResults )( 
             __RPC__in IDedupDataPort * This,
             /* [annotation][in] */ 
@@ -371,6 +390,7 @@ EXTERN_C const IID IID_IDedupDataPort;
             /* [annotation][size_is][size_is][out] */ 
             _Out_writes_(*pStreamCount)  HRESULT **ppItemResults);
         
+        DECLSPEC_XFGVIRT(IDedupDataPort, GetChunks)
         HRESULT ( STDMETHODCALLTYPE *GetChunks )( 
             __RPC__in IDedupDataPort * This,
             /* [annotation][in] */ 
@@ -380,6 +400,7 @@ EXTERN_C const IID IID_IDedupDataPort;
             /* [annotation][out] */ 
             _Out_  GUID *pRequestId);
         
+        DECLSPEC_XFGVIRT(IDedupDataPort, GetChunksResults)
         HRESULT ( STDMETHODCALLTYPE *GetChunksResults )( 
             __RPC__in IDedupDataPort * This,
             /* [annotation][in] */ 
@@ -401,6 +422,7 @@ EXTERN_C const IID IID_IDedupDataPort;
             /* [annotation][size_is][size_is][out] */ 
             _Out_writes_(*pChunkCount)  HRESULT **ppItemResults);
         
+        DECLSPEC_XFGVIRT(IDedupDataPort, GetRequestStatus)
         HRESULT ( STDMETHODCALLTYPE *GetRequestStatus )( 
             __RPC__in IDedupDataPort * This,
             /* [annotation][in] */ 
@@ -408,6 +430,7 @@ EXTERN_C const IID IID_IDedupDataPort;
             /* [annotation][out] */ 
             _Out_  DedupDataPortRequestStatus *pStatus);
         
+        DECLSPEC_XFGVIRT(IDedupDataPort, GetRequestResults)
         HRESULT ( STDMETHODCALLTYPE *GetRequestResults )( 
             __RPC__in IDedupDataPort * This,
             /* [annotation][in] */ 
@@ -545,6 +568,7 @@ EXTERN_C const IID IID_IDedupDataPortManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDedupDataPortManager * This,
             /* [annotation][in] */ 
@@ -552,12 +576,15 @@ EXTERN_C const IID IID_IDedupDataPortManager;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDedupDataPortManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDedupDataPortManager * This);
         
+        DECLSPEC_XFGVIRT(IDedupDataPortManager, GetConfiguration)
         HRESULT ( STDMETHODCALLTYPE *GetConfiguration )( 
             __RPC__in IDedupDataPortManager * This,
             /* [annotation][out] */ 
@@ -571,6 +598,7 @@ EXTERN_C const IID IID_IDedupDataPortManager;
             /* [annotation][out] */ 
             _Out_  DedupCompressionAlgorithm *pCompressionAlgorithm);
         
+        DECLSPEC_XFGVIRT(IDedupDataPortManager, GetVolumeStatus)
         HRESULT ( STDMETHODCALLTYPE *GetVolumeStatus )( 
             __RPC__in IDedupDataPortManager * This,
             /* [annotation][in] */ 
@@ -580,6 +608,7 @@ EXTERN_C const IID IID_IDedupDataPortManager;
             /* [annotation][out] */ 
             _Out_  DedupDataPortVolumeStatus *pStatus);
         
+        DECLSPEC_XFGVIRT(IDedupDataPortManager, GetVolumeDataPort)
         HRESULT ( STDMETHODCALLTYPE *GetVolumeDataPort )( 
             __RPC__in IDedupDataPortManager * This,
             /* [annotation][in] */ 

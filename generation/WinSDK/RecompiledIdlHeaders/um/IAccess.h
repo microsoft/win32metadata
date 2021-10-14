@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -153,6 +161,7 @@ EXTERN_C const IID IID_IAccessControl;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAccessControl * This,
             /* [annotation][in] */ 
@@ -160,22 +169,27 @@ EXTERN_C const IID IID_IAccessControl;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAccessControl * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAccessControl * This);
         
+        DECLSPEC_XFGVIRT(IAccessControl, GrantAccessRights)
         HRESULT ( STDMETHODCALLTYPE *GrantAccessRights )( 
             __RPC__in IAccessControl * This,
             /* [annotation][in] */ 
             _In_  PACTRL_ACCESSW pAccessList);
         
+        DECLSPEC_XFGVIRT(IAccessControl, SetAccessRights)
         HRESULT ( STDMETHODCALLTYPE *SetAccessRights )( 
             __RPC__in IAccessControl * This,
             /* [annotation][in] */ 
             _In_  PACTRL_ACCESSW pAccessList);
         
+        DECLSPEC_XFGVIRT(IAccessControl, SetOwner)
         HRESULT ( STDMETHODCALLTYPE *SetOwner )( 
             __RPC__in IAccessControl * This,
             /* [annotation][in] */ 
@@ -183,6 +197,7 @@ EXTERN_C const IID IID_IAccessControl;
             /* [annotation][in] */ 
             _In_  PTRUSTEEW pGroup);
         
+        DECLSPEC_XFGVIRT(IAccessControl, RevokeAccessRights)
         HRESULT ( STDMETHODCALLTYPE *RevokeAccessRights )( 
             __RPC__in IAccessControl * This,
             /* [annotation][in] */ 
@@ -192,6 +207,7 @@ EXTERN_C const IID IID_IAccessControl;
             /* [annotation][size_is][in] */ 
             _In_reads_(cTrustees)  TRUSTEEW prgTrustees[  ]);
         
+        DECLSPEC_XFGVIRT(IAccessControl, GetAllAccessRights)
         HRESULT ( STDMETHODCALLTYPE *GetAllAccessRights )( 
             __RPC__in IAccessControl * This,
             /* [annotation][in] */ 
@@ -203,6 +219,7 @@ EXTERN_C const IID IID_IAccessControl;
             /* [annotation][out] */ 
             _Out_  PTRUSTEEW *ppGroup);
         
+        DECLSPEC_XFGVIRT(IAccessControl, IsAccessAllowed)
         HRESULT ( STDMETHODCALLTYPE *IsAccessAllowed )( 
             __RPC__in IAccessControl * This,
             /* [annotation][in] */ 
@@ -329,6 +346,7 @@ EXTERN_C const IID IID_IAuditControl;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAuditControl * This,
             /* [annotation][in] */ 
@@ -336,22 +354,27 @@ EXTERN_C const IID IID_IAuditControl;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAuditControl * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAuditControl * This);
         
+        DECLSPEC_XFGVIRT(IAuditControl, GrantAuditRights)
         HRESULT ( STDMETHODCALLTYPE *GrantAuditRights )( 
             __RPC__in IAuditControl * This,
             /* [annotation][in] */ 
             _In_  PACTRL_AUDITW pAuditList);
         
+        DECLSPEC_XFGVIRT(IAuditControl, SetAuditRights)
         HRESULT ( STDMETHODCALLTYPE *SetAuditRights )( 
             __RPC__in IAuditControl * This,
             /* [annotation][in] */ 
             _In_  PACTRL_AUDITW pAuditList);
         
+        DECLSPEC_XFGVIRT(IAuditControl, RevokeAuditRights)
         HRESULT ( STDMETHODCALLTYPE *RevokeAuditRights )( 
             __RPC__in IAuditControl * This,
             /* [annotation][in] */ 
@@ -361,6 +384,7 @@ EXTERN_C const IID IID_IAuditControl;
             /* [annotation][size_is][in] */ 
             _In_reads_(cTrustees)  TRUSTEEW prgTrustees[  ]);
         
+        DECLSPEC_XFGVIRT(IAuditControl, GetAllAuditRights)
         HRESULT ( STDMETHODCALLTYPE *GetAllAuditRights )( 
             __RPC__in IAuditControl * This,
             /* [annotation][in] */ 
@@ -368,6 +392,7 @@ EXTERN_C const IID IID_IAuditControl;
             /* [annotation][out] */ 
             _Out_  PACTRL_AUDITW *ppAuditList);
         
+        DECLSPEC_XFGVIRT(IAuditControl, IsAccessAudited)
         HRESULT ( STDMETHODCALLTYPE *IsAccessAudited )( 
             __RPC__in IAuditControl * This,
             /* [annotation][in] */ 

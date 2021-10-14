@@ -20,3 +20,4 @@
 #include <uxtheme.h>
 #include <commctrl.h>
 #include <vssym32.h>
+#include <custcntl.h>

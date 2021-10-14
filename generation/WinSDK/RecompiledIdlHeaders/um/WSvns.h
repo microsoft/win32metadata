@@ -48,6 +48,6 @@ typedef struct sockaddr_vns {
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
 
-#endif _WSVNS_
+#endif // _WSVNS_
 
 

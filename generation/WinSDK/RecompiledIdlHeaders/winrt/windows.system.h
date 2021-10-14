@@ -88,7 +88,7 @@
 //  API Contract Inclusion Definitions
 #if !defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
 #if !defined(WINDOWS_APPLICATIONMODEL_FULLTRUSTAPPCONTRACT_VERSION)
-#define WINDOWS_APPLICATIONMODEL_FULLTRUSTAPPCONTRACT_VERSION 0x10000
+#define WINDOWS_APPLICATIONMODEL_FULLTRUSTAPPCONTRACT_VERSION 0x20000
 #endif // defined(WINDOWS_APPLICATIONMODEL_FULLTRUSTAPPCONTRACT_VERSION)
 
 #if !defined(WINDOWS_APPLICATIONMODEL_STARTUPTASKCONTRACT_VERSION)
@@ -100,7 +100,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xa0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -419,6 +419,19 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CSystem_CIAppUriHandlerHost_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CSystem_CIAppUriHandlerHost2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSystem_CIAppUriHandlerHost2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            interface IAppUriHandlerHost2;
+        } /* System */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerHost2 ABI::Windows::System::IAppUriHandlerHost2
+
+#endif // ____x_ABI_CWindows_CSystem_CIAppUriHandlerHost2_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CSystem_CIAppUriHandlerHostFactory_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSystem_CIAppUriHandlerHostFactory_FWD_DEFINED__
 namespace ABI {
@@ -445,6 +458,19 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            interface IAppUriHandlerRegistration2;
+        } /* System */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2 ABI::Windows::System::IAppUriHandlerRegistration2
+
+#endif // ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager_FWD_DEFINED__
 namespace ABI {
@@ -458,6 +484,19 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            interface IAppUriHandlerRegistrationManager2;
+        } /* System */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2 ABI::Windows::System::IAppUriHandlerRegistrationManager2
+
+#endif // ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics_FWD_DEFINED__
 namespace ABI {
@@ -470,6 +509,19 @@ namespace ABI {
 #define __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics ABI::Windows::System::IAppUriHandlerRegistrationManagerStatics
 
 #endif // ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            interface IAppUriHandlerRegistrationManagerStatics2;
+        } /* System */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2 ABI::Windows::System::IAppUriHandlerRegistrationManagerStatics2
+
+#endif // ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CSystem_CIDateTimeSettingsStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSystem_CIDateTimeSettingsStatics_FWD_DEFINED__
@@ -600,6 +652,19 @@ namespace ABI {
 #define __x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics ABI::Windows::System::IKnownUserPropertiesStatics
 
 #endif // ____x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            interface IKnownUserPropertiesStatics2;
+        } /* System */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2 ABI::Windows::System::IKnownUserPropertiesStatics2
+
+#endif // ____x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CSystem_CILaunchUriResult_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSystem_CILaunchUriResult_FWD_DEFINED__
@@ -965,6 +1030,19 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CSystem_CIUser_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CSystem_CIUser2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSystem_CIUser2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            interface IUser2;
+        } /* System */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CSystem_CIUser2 ABI::Windows::System::IUser2
+
+#endif // ____x_ABI_CWindows_CSystem_CIUser2_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CSystem_CIUserAuthenticationStatusChangeDeferral_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSystem_CIUserAuthenticationStatusChangeDeferral_FWD_DEFINED__
 namespace ABI {
@@ -1081,6 +1159,19 @@ namespace ABI {
 #define __x_ABI_CWindows_CSystem_CIUserStatics ABI::Windows::System::IUserStatics
 
 #endif // ____x_ABI_CWindows_CSystem_CIUserStatics_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CSystem_CIUserStatics2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSystem_CIUserStatics2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            interface IUserStatics2;
+        } /* System */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CSystem_CIUserStatics2 ABI::Windows::System::IUserStatics2
+
+#endif // ____x_ABI_CWindows_CSystem_CIUserStatics2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CSystem_CIUserWatcher_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSystem_CIUserWatcher_FWD_DEFINED__
@@ -2586,6 +2677,68 @@ typedef IAsyncOperationCompletedHandler<ABI::Windows::System::User*> __FIAsyncOp
 #endif /* DEF___FIAsyncOperationCompletedHandler_1_Windows__CSystem__CUser_USE */
 
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            typedef enum UserAgeConsentResult : int UserAgeConsentResult;
+        } /* System */
+    } /* Windows */
+} /* ABI */
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+
+#ifndef DEF___FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult_USE
+#define DEF___FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("d4df0010-0172-5efa-bd5c-6444de94af74"))
+IAsyncOperation<enum ABI::Windows::System::UserAgeConsentResult> : IAsyncOperation_impl<enum ABI::Windows::System::UserAgeConsentResult>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.IAsyncOperation`1<Windows.System.UserAgeConsentResult>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IAsyncOperation<enum ABI::Windows::System::UserAgeConsentResult> __FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult_t;
+#define __FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult ABI::Windows::Foundation::__FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+
+#ifndef DEF___FIAsyncOperationCompletedHandler_1_Windows__CSystem__CUserAgeConsentResult_USE
+#define DEF___FIAsyncOperationCompletedHandler_1_Windows__CSystem__CUserAgeConsentResult_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("5ff26075-034f-5186-8fd3-9eda8da3e739"))
+IAsyncOperationCompletedHandler<enum ABI::Windows::System::UserAgeConsentResult> : IAsyncOperationCompletedHandler_impl<enum ABI::Windows::System::UserAgeConsentResult>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.AsyncOperationCompletedHandler`1<Windows.System.UserAgeConsentResult>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IAsyncOperationCompletedHandler<enum ABI::Windows::System::UserAgeConsentResult> __FIAsyncOperationCompletedHandler_1_Windows__CSystem__CUserAgeConsentResult_t;
+#define __FIAsyncOperationCompletedHandler_1_Windows__CSystem__CUserAgeConsentResult ABI::Windows::Foundation::__FIAsyncOperationCompletedHandler_1_Windows__CSystem__CUserAgeConsentResult_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIAsyncOperationCompletedHandler_1_Windows__CSystem__CUserAgeConsentResult_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
 
 
 #ifndef DEF___FIIterator_1_HSTRING_USE
@@ -4127,6 +4280,14 @@ namespace ABI {
 namespace ABI {
     namespace Windows {
         namespace System {
+            typedef enum UserAgeConsentGroup : int UserAgeConsentGroup;
+        } /* System */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace System {
             typedef enum UserAuthenticationStatus : int UserAuthenticationStatus;
         } /* System */
     } /* Windows */
@@ -4641,6 +4802,52 @@ namespace ABI {
 
 /*
  *
+ * Struct Windows.System.UserAgeConsentGroup
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 14.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            enum UserAgeConsentGroup : int
+            {
+                UserAgeConsentGroup_Child = 0,
+                UserAgeConsentGroup_Minor = 1,
+                UserAgeConsentGroup_Adult = 2,
+            };
+        } /* System */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+
+/*
+ *
+ * Struct Windows.System.UserAgeConsentResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 14.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            enum UserAgeConsentResult : int
+            {
+                UserAgeConsentResult_NotEnforced = 0,
+                UserAgeConsentResult_Included = 1,
+                UserAgeConsentResult_NotIncluded = 2,
+                UserAgeConsentResult_Unknown = 3,
+                UserAgeConsentResult_Ambiguous = 4,
+            };
+        } /* System */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+
+/*
+ *
  * Struct Windows.System.UserAuthenticationStatus
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -4701,6 +4908,9 @@ namespace ABI {
                 UserType_RemoteUser = 1,
                 UserType_LocalGuest = 2,
                 UserType_RemoteGuest = 3,
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+                UserType_SystemManaged = 4,
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
             };
         } /* System */
     } /* Windows */
@@ -4784,10 +4994,16 @@ namespace ABI {
                 VirtualKey_CapitalLock = 20,
                 VirtualKey_Kana = 21,
                 VirtualKey_Hangul = 21,
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+                VirtualKey_ImeOn = 22,
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
                 VirtualKey_Junja = 23,
                 VirtualKey_Final = 24,
                 VirtualKey_Hanja = 25,
                 VirtualKey_Kanji = 25,
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+                VirtualKey_ImeOff = 26,
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
                 VirtualKey_Escape = 27,
                 VirtualKey_Convert = 28,
                 VirtualKey_NonConvert = 29,
@@ -5941,6 +6157,43 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CIAppUriHandlerHost;
 
 /*
  *
+ * Interface Windows.System.IAppUriHandlerHost2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.System.AppUriHandlerHost
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CSystem_CIAppUriHandlerHost2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSystem_CIAppUriHandlerHost2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_System_IAppUriHandlerHost2[] = L"Windows.System.IAppUriHandlerHost2";
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            MIDL_INTERFACE("3a0bee95-29e4-51bf-8095-a3c068e3c72a")
+            IAppUriHandlerHost2 : public IInspectable
+            {
+            public:
+                virtual HRESULT STDMETHODCALLTYPE get_IsEnabled(
+                    boolean* value
+                    ) = 0;
+                virtual HRESULT STDMETHODCALLTYPE put_IsEnabled(
+                    boolean value
+                    ) = 0;
+            };
+
+            extern MIDL_CONST_ID IID& IID_IAppUriHandlerHost2 = _uuidof(IAppUriHandlerHost2);
+        } /* System */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CIAppUriHandlerHost2;
+#endif /* !defined(____x_ABI_CWindows_CSystem_CIAppUriHandlerHost2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
  * Interface Windows.System.IAppUriHandlerHostFactory
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 7.0
@@ -6020,6 +6273,46 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration;
 
 /*
  *
+ * Interface Windows.System.IAppUriHandlerRegistration2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.System.AppUriHandlerRegistration
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_System_IAppUriHandlerRegistration2[] = L"Windows.System.IAppUriHandlerRegistration2";
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            MIDL_INTERFACE("d54dac97-cb39-5f1f-883e-01853730bd6d")
+            IAppUriHandlerRegistration2 : public IInspectable
+            {
+            public:
+                virtual HRESULT STDMETHODCALLTYPE GetAllHosts(
+                    __FIVector_1_Windows__CSystem__CAppUriHandlerHost** result
+                    ) = 0;
+                virtual HRESULT STDMETHODCALLTYPE UpdateHosts(
+                    __FIIterable_1_Windows__CSystem__CAppUriHandlerHost* hosts
+                    ) = 0;
+                virtual HRESULT STDMETHODCALLTYPE get_PackageFamilyName(
+                    HSTRING* value
+                    ) = 0;
+            };
+
+            extern MIDL_CONST_ID IID& IID_IAppUriHandlerRegistration2 = _uuidof(IAppUriHandlerRegistration2);
+        } /* System */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2;
+#endif /* !defined(____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
  * Interface Windows.System.IAppUriHandlerRegistrationManager
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 7.0
@@ -6058,6 +6351,40 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManag
 
 /*
  *
+ * Interface Windows.System.IAppUriHandlerRegistrationManager2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.System.AppUriHandlerRegistrationManager
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_System_IAppUriHandlerRegistrationManager2[] = L"Windows.System.IAppUriHandlerRegistrationManager2";
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            MIDL_INTERFACE("bddfcaf1-b51a-5e69-aefd-7088d9f2b123")
+            IAppUriHandlerRegistrationManager2 : public IInspectable
+            {
+            public:
+                virtual HRESULT STDMETHODCALLTYPE get_PackageFamilyName(
+                    HSTRING* value
+                    ) = 0;
+            };
+
+            extern MIDL_CONST_ID IID& IID_IAppUriHandlerRegistrationManager2 = _uuidof(IAppUriHandlerRegistrationManager2);
+        } /* System */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2;
+#endif /* !defined(____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
  * Interface Windows.System.IAppUriHandlerRegistrationManagerStatics
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 7.0
@@ -6093,6 +6420,46 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics;
 #endif /* !defined(____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
+
+/*
+ *
+ * Interface Windows.System.IAppUriHandlerRegistrationManagerStatics2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.System.AppUriHandlerRegistrationManager
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_System_IAppUriHandlerRegistrationManagerStatics2[] = L"Windows.System.IAppUriHandlerRegistrationManagerStatics2";
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            MIDL_INTERFACE("14f78379-6890-5080-90a7-98824a7f079e")
+            IAppUriHandlerRegistrationManagerStatics2 : public IInspectable
+            {
+            public:
+                virtual HRESULT STDMETHODCALLTYPE GetForPackage(
+                    HSTRING packageFamilyName,
+                    ABI::Windows::System::IAppUriHandlerRegistrationManager** result
+                    ) = 0;
+                virtual HRESULT STDMETHODCALLTYPE GetForPackageForUser(
+                    HSTRING packageFamilyName,
+                    ABI::Windows::System::IUser* user,
+                    ABI::Windows::System::IAppUriHandlerRegistrationManager** result
+                    ) = 0;
+            };
+
+            extern MIDL_CONST_ID IID& IID_IAppUriHandlerRegistrationManagerStatics2 = _uuidof(IAppUriHandlerRegistrationManagerStatics2);
+        } /* System */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2;
+#endif /* !defined(____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *
@@ -6504,6 +6871,40 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics;
 #endif /* !defined(____x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.System.IKnownUserPropertiesStatics2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 14.0
+ *
+ * Interface is a part of the implementation of type Windows.System.KnownUserProperties
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+#if !defined(____x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_System_IKnownUserPropertiesStatics2[] = L"Windows.System.IKnownUserPropertiesStatics2";
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            MIDL_INTERFACE("5b450782-f620-577e-b1b3-dd56644d79b1")
+            IKnownUserPropertiesStatics2 : public IInspectable
+            {
+            public:
+                virtual HRESULT STDMETHODCALLTYPE get_AgeEnforcementRegion(
+                    HSTRING* value
+                    ) = 0;
+            };
+
+            extern MIDL_CONST_ID IID& IID_IKnownUserPropertiesStatics2 = _uuidof(IKnownUserPropertiesStatics2);
+        } /* System */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2;
+#endif /* !defined(____x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
 
 /*
  *
@@ -7780,6 +8181,41 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CIUser;
 
 /*
  *
+ * Interface Windows.System.IUser2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 14.0
+ *
+ * Interface is a part of the implementation of type Windows.System.User
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+#if !defined(____x_ABI_CWindows_CSystem_CIUser2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSystem_CIUser2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_System_IUser2[] = L"Windows.System.IUser2";
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            MIDL_INTERFACE("98ba5628-a6e3-518e-89d9-d3b2b1991a10")
+            IUser2 : public IInspectable
+            {
+            public:
+                virtual HRESULT STDMETHODCALLTYPE CheckUserAgeConsentGroupAsync(
+                    ABI::Windows::System::UserAgeConsentGroup consentGroup,
+                    __FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult** operation
+                    ) = 0;
+            };
+
+            extern MIDL_CONST_ID IID& IID_IUser2 = _uuidof(IUser2);
+        } /* System */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CIUser2;
+#endif /* !defined(____x_ABI_CWindows_CSystem_CIUser2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+
+/*
+ *
  * Interface Windows.System.IUserAuthenticationStatusChangeDeferral
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -8109,10 +8545,16 @@ namespace ABI {
                 virtual HRESULT STDMETHODCALLTYPE FindAllAsync(
                     __FIAsyncOperation_1___FIVectorView_1_Windows__CSystem__CUser** operation
                     ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+                DEPRECATED("FindAllAsyncByType is deprecated and might not function consistently on all platforms. Instead, use FindAllAsync or GetDefault.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
                 virtual HRESULT STDMETHODCALLTYPE FindAllAsyncByType(
                     ABI::Windows::System::UserType type,
                     __FIAsyncOperation_1___FIVectorView_1_Windows__CSystem__CUser** operation
                     ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+                DEPRECATED("FindAllAsyncByTypeAndStatus is deprecated and might not function consistently on all platforms. Instead, use FindAllAsync or GetDefault.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
                 virtual HRESULT STDMETHODCALLTYPE FindAllAsyncByTypeAndStatus(
                     ABI::Windows::System::UserType type,
                     ABI::Windows::System::UserAuthenticationStatus status,
@@ -8132,6 +8574,40 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CIUserStatics;
 #endif /* !defined(____x_ABI_CWindows_CSystem_CIUserStatics_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.System.IUserStatics2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 11.0
+ *
+ * Interface is a part of the implementation of type Windows.System.User
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+#if !defined(____x_ABI_CWindows_CSystem_CIUserStatics2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSystem_CIUserStatics2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_System_IUserStatics2[] = L"Windows.System.IUserStatics2";
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            MIDL_INTERFACE("74a37e11-2eb5-4487-b0d5-2c6790e013e9")
+            IUserStatics2 : public IInspectable
+            {
+            public:
+                virtual HRESULT STDMETHODCALLTYPE GetDefault(
+                    ABI::Windows::System::IUser** result
+                    ) = 0;
+            };
+
+            extern MIDL_CONST_ID IID& IID_IUserStatics2 = _uuidof(IUserStatics2);
+        } /* System */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CIUserStatics2;
+#endif /* !defined(____x_ABI_CWindows_CSystem_CIUserStatics2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
 
 /*
  *
@@ -8246,8 +8722,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 4.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.IAppDiagnosticInfoStatics interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.IAppDiagnosticInfoStatics2 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.IAppDiagnosticInfoStatics interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.System.IAppDiagnosticInfo ** Default Interface **
@@ -8523,11 +8999,12 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 7.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.System.IAppUriHandlerHostFactory interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.System.IAppUriHandlerHost ** Default Interface **
+ *    Windows.System.IAppUriHandlerHost2
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -8549,6 +9026,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.System.IAppUriHandlerRegistration ** Default Interface **
+ *    Windows.System.IAppUriHandlerRegistration2
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -8568,9 +9046,11 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.System.IAppUriHandlerRegistrationManagerStatics interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.IAppUriHandlerRegistrationManagerStatics2 interface starting with version 13.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.System.IAppUriHandlerRegistrationManager ** Default Interface **
+ *    Windows.System.IAppUriHandlerRegistrationManager2
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -8724,6 +9204,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.System.IKnownUserPropertiesStatics2 interface starting with version 14.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.IKnownUserPropertiesStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
@@ -8764,11 +9245,11 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.ILauncherStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.System.ILauncherStatics4 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.System.ILauncherStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.ILauncherStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.ILauncherStatics4 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.ILauncherStatics5 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.ILauncherStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.ILauncherStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -8836,10 +9317,10 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.IMemoryManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.System.IMemoryManagerStatics4 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.System.IMemoryManagerStatics3 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.IMemoryManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.IMemoryManagerStatics4 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.IMemoryManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.IMemoryManagerStatics3 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -9005,8 +9486,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.System.SystemManagementContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.IShutdownManagerStatics interface starting with version 1.0 of the Windows.System.SystemManagementContract API contract
  *   Static Methods exist on the Windows.System.IShutdownManagerStatics2 interface starting with version 3.0 of the Windows.System.SystemManagementContract API contract
+ *   Static Methods exist on the Windows.System.IShutdownManagerStatics interface starting with version 1.0 of the Windows.System.SystemManagementContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -9025,8 +9506,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.System.SystemManagementContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.ITimeZoneSettingsStatics2 interface starting with version 5.0 of the Windows.System.SystemManagementContract API contract
  *   Static Methods exist on the Windows.System.ITimeZoneSettingsStatics interface starting with version 1.0 of the Windows.System.SystemManagementContract API contract
+ *   Static Methods exist on the Windows.System.ITimeZoneSettingsStatics2 interface starting with version 5.0 of the Windows.System.SystemManagementContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -9046,9 +9527,11 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.System.IUserStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.IUserStatics2 interface starting with version 11.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.System.IUser ** Default Interface **
+ *    Windows.System.IUser2
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -9342,6 +9825,12 @@ typedef interface __x_ABI_CWindows_CSystem_CIAppUriHandlerHost __x_ABI_CWindows_
 
 #endif // ____x_ABI_CWindows_CSystem_CIAppUriHandlerHost_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CSystem_CIAppUriHandlerHost2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSystem_CIAppUriHandlerHost2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CSystem_CIAppUriHandlerHost2 __x_ABI_CWindows_CSystem_CIAppUriHandlerHost2;
+
+#endif // ____x_ABI_CWindows_CSystem_CIAppUriHandlerHost2_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CSystem_CIAppUriHandlerHostFactory_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSystem_CIAppUriHandlerHostFactory_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CSystem_CIAppUriHandlerHostFactory __x_ABI_CWindows_CSystem_CIAppUriHandlerHostFactory;
@@ -9354,17 +9843,35 @@ typedef interface __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration __x_ABI_C
 
 #endif // ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2 __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2;
+
+#endif // ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager;
 
 #endif // ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2 __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2;
+
+#endif // ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics;
 
 #endif // ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2 __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2;
+
+#endif // ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CSystem_CIDateTimeSettingsStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSystem_CIDateTimeSettingsStatics_FWD_DEFINED__
@@ -9425,6 +9932,12 @@ typedef interface __x_ABI_CWindows_CSystem_CIFolderLauncherOptions __x_ABI_CWind
 typedef interface __x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics __x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics;
 
 #endif // ____x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2 __x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2;
+
+#endif // ____x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CSystem_CILaunchUriResult_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSystem_CILaunchUriResult_FWD_DEFINED__
@@ -9594,6 +10107,12 @@ typedef interface __x_ABI_CWindows_CSystem_CIUser __x_ABI_CWindows_CSystem_CIUse
 
 #endif // ____x_ABI_CWindows_CSystem_CIUser_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CSystem_CIUser2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSystem_CIUser2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CSystem_CIUser2 __x_ABI_CWindows_CSystem_CIUser2;
+
+#endif // ____x_ABI_CWindows_CSystem_CIUser2_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CSystem_CIUserAuthenticationStatusChangeDeferral_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSystem_CIUserAuthenticationStatusChangeDeferral_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CSystem_CIUserAuthenticationStatusChangeDeferral __x_ABI_CWindows_CSystem_CIUserAuthenticationStatusChangeDeferral;
@@ -9647,6 +10166,12 @@ typedef interface __x_ABI_CWindows_CSystem_CIUserPickerStatics __x_ABI_CWindows_
 typedef interface __x_ABI_CWindows_CSystem_CIUserStatics __x_ABI_CWindows_CSystem_CIUserStatics;
 
 #endif // ____x_ABI_CWindows_CSystem_CIUserStatics_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CSystem_CIUserStatics2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSystem_CIUserStatics2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CSystem_CIUserStatics2 __x_ABI_CWindows_CSystem_CIUserStatics2;
+
+#endif // ____x_ABI_CWindows_CSystem_CIUserStatics2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CSystem_CIUserWatcher_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSystem_CIUserWatcher_FWD_DEFINED__
@@ -13100,6 +13625,133 @@ interface __FIAsyncOperationCompletedHandler_1_Windows__CSystem__CUser
 #endif // ____FIAsyncOperationCompletedHandler_1_Windows__CSystem__CUser_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
+typedef enum __x_ABI_CWindows_CSystem_CUserAgeConsentResult __x_ABI_CWindows_CSystem_CUserAgeConsentResult;
+
+typedef interface __FIAsyncOperationCompletedHandler_1_Windows__CSystem__CUserAgeConsentResult __FIAsyncOperationCompletedHandler_1_Windows__CSystem__CUserAgeConsentResult;
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+#if !defined(____FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult_INTERFACE_DEFINED__)
+#define ____FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult __FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult;
+
+typedef struct __FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResultVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* put_Completed)(__FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult* This,
+        __FIAsyncOperationCompletedHandler_1_Windows__CSystem__CUserAgeConsentResult* handler);
+    HRESULT (STDMETHODCALLTYPE* get_Completed)(__FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult* This,
+        __FIAsyncOperationCompletedHandler_1_Windows__CSystem__CUserAgeConsentResult** result);
+    HRESULT (STDMETHODCALLTYPE* GetResults)(__FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult* This,
+        enum __x_ABI_CWindows_CSystem_CUserAgeConsentResult* result);
+
+    END_INTERFACE
+} __FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResultVtbl;
+
+interface __FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult
+{
+    CONST_VTBL struct __FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResultVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult_put_Completed(This, handler) \
+    ((This)->lpVtbl->put_Completed(This, handler))
+
+#define __FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult_get_Completed(This, result) \
+    ((This)->lpVtbl->get_Completed(This, result))
+
+#define __FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult_GetResults(This, result) \
+    ((This)->lpVtbl->GetResults(This, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+#if !defined(____FIAsyncOperationCompletedHandler_1_Windows__CSystem__CUserAgeConsentResult_INTERFACE_DEFINED__)
+#define ____FIAsyncOperationCompletedHandler_1_Windows__CSystem__CUserAgeConsentResult_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperationCompletedHandler_1_Windows__CSystem__CUserAgeConsentResult __FIAsyncOperationCompletedHandler_1_Windows__CSystem__CUserAgeConsentResult;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIAsyncOperationCompletedHandler_1_Windows__CSystem__CUserAgeConsentResult;
+
+typedef struct __FIAsyncOperationCompletedHandler_1_Windows__CSystem__CUserAgeConsentResultVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIAsyncOperationCompletedHandler_1_Windows__CSystem__CUserAgeConsentResult* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIAsyncOperationCompletedHandler_1_Windows__CSystem__CUserAgeConsentResult* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIAsyncOperationCompletedHandler_1_Windows__CSystem__CUserAgeConsentResult* This);
+    HRESULT (STDMETHODCALLTYPE* Invoke)(__FIAsyncOperationCompletedHandler_1_Windows__CSystem__CUserAgeConsentResult* This,
+        __FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult* asyncInfo,
+        AsyncStatus asyncStatus);
+
+    END_INTERFACE
+} __FIAsyncOperationCompletedHandler_1_Windows__CSystem__CUserAgeConsentResultVtbl;
+
+interface __FIAsyncOperationCompletedHandler_1_Windows__CSystem__CUserAgeConsentResult
+{
+    CONST_VTBL struct __FIAsyncOperationCompletedHandler_1_Windows__CSystem__CUserAgeConsentResultVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CSystem__CUserAgeConsentResult_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CSystem__CUserAgeConsentResult_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CSystem__CUserAgeConsentResult_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CSystem__CUserAgeConsentResult_Invoke(This, asyncInfo, asyncStatus) \
+    ((This)->lpVtbl->Invoke(This, asyncInfo, asyncStatus))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIAsyncOperationCompletedHandler_1_Windows__CSystem__CUserAgeConsentResult_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+
 #if !defined(____FIIterator_1_HSTRING_INTERFACE_DEFINED__)
 #define ____FIIterator_1_HSTRING_INTERFACE_DEFINED__
 
@@ -16030,6 +16682,8 @@ typedef enum __x_ABI_CWindows_CSystem_CPowerState __x_ABI_CWindows_CSystem_CPowe
 
 typedef enum __x_ABI_CWindows_CSystem_CShutdownKind __x_ABI_CWindows_CSystem_CShutdownKind;
 
+typedef enum __x_ABI_CWindows_CSystem_CUserAgeConsentGroup __x_ABI_CWindows_CSystem_CUserAgeConsentGroup;
+
 typedef enum __x_ABI_CWindows_CSystem_CUserAuthenticationStatus __x_ABI_CWindows_CSystem_CUserAuthenticationStatus;
 
 typedef enum __x_ABI_CWindows_CSystem_CUserPictureSize __x_ABI_CWindows_CSystem_CUserPictureSize;
@@ -16323,6 +16977,40 @@ enum __x_ABI_CWindows_CSystem_CShutdownKind
 
 /*
  *
+ * Struct Windows.System.UserAgeConsentGroup
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 14.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+enum __x_ABI_CWindows_CSystem_CUserAgeConsentGroup
+{
+    UserAgeConsentGroup_Child = 0,
+    UserAgeConsentGroup_Minor = 1,
+    UserAgeConsentGroup_Adult = 2,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+
+/*
+ *
+ * Struct Windows.System.UserAgeConsentResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 14.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+enum __x_ABI_CWindows_CSystem_CUserAgeConsentResult
+{
+    UserAgeConsentResult_NotEnforced = 0,
+    UserAgeConsentResult_Included = 1,
+    UserAgeConsentResult_NotIncluded = 2,
+    UserAgeConsentResult_Unknown = 3,
+    UserAgeConsentResult_Ambiguous = 4,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+
+/*
+ *
  * Struct Windows.System.UserAuthenticationStatus
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -16368,6 +17056,9 @@ enum __x_ABI_CWindows_CSystem_CUserType
     UserType_RemoteUser = 1,
     UserType_LocalGuest = 2,
     UserType_RemoteGuest = 3,
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+    UserType_SystemManaged = 4,
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
 };
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
@@ -16433,10 +17124,16 @@ enum __x_ABI_CWindows_CSystem_CVirtualKey
     VirtualKey_CapitalLock = 20,
     VirtualKey_Kana = 21,
     VirtualKey_Hangul = 21,
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+    VirtualKey_ImeOn = 22,
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
     VirtualKey_Junja = 23,
     VirtualKey_Final = 24,
     VirtualKey_Hanja = 25,
     VirtualKey_Kanji = 25,
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+    VirtualKey_ImeOff = 26,
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
     VirtualKey_Escape = 27,
     VirtualKey_Convert = 28,
     VirtualKey_NonConvert = 29,
@@ -18436,6 +19133,80 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CIAppUriHandlerHost;
 
 /*
  *
+ * Interface Windows.System.IAppUriHandlerHost2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.System.AppUriHandlerHost
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CSystem_CIAppUriHandlerHost2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSystem_CIAppUriHandlerHost2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_System_IAppUriHandlerHost2[] = L"Windows.System.IAppUriHandlerHost2";
+typedef struct __x_ABI_CWindows_CSystem_CIAppUriHandlerHost2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CSystem_CIAppUriHandlerHost2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CSystem_CIAppUriHandlerHost2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CSystem_CIAppUriHandlerHost2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CSystem_CIAppUriHandlerHost2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CSystem_CIAppUriHandlerHost2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSystem_CIAppUriHandlerHost2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_IsEnabled)(__x_ABI_CWindows_CSystem_CIAppUriHandlerHost2* This,
+        boolean* value);
+    HRESULT (STDMETHODCALLTYPE* put_IsEnabled)(__x_ABI_CWindows_CSystem_CIAppUriHandlerHost2* This,
+        boolean value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CSystem_CIAppUriHandlerHost2Vtbl;
+
+interface __x_ABI_CWindows_CSystem_CIAppUriHandlerHost2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CSystem_CIAppUriHandlerHost2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerHost2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerHost2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerHost2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerHost2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerHost2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerHost2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerHost2_get_IsEnabled(This, value) \
+    ((This)->lpVtbl->get_IsEnabled(This, value))
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerHost2_put_IsEnabled(This, value) \
+    ((This)->lpVtbl->put_IsEnabled(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CIAppUriHandlerHost2;
+#endif /* !defined(____x_ABI_CWindows_CSystem_CIAppUriHandlerHost2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
  * Interface Windows.System.IAppUriHandlerHostFactory
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 7.0
@@ -18591,6 +19362,85 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration;
 
 /*
  *
+ * Interface Windows.System.IAppUriHandlerRegistration2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.System.AppUriHandlerRegistration
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_System_IAppUriHandlerRegistration2[] = L"Windows.System.IAppUriHandlerRegistration2";
+typedef struct __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* GetAllHosts)(__x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2* This,
+        __FIVector_1_Windows__CSystem__CAppUriHandlerHost** result);
+    HRESULT (STDMETHODCALLTYPE* UpdateHosts)(__x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2* This,
+        __FIIterable_1_Windows__CSystem__CAppUriHandlerHost* hosts);
+    HRESULT (STDMETHODCALLTYPE* get_PackageFamilyName)(__x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2* This,
+        HSTRING* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2Vtbl;
+
+interface __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2_GetAllHosts(This, result) \
+    ((This)->lpVtbl->GetAllHosts(This, result))
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2_UpdateHosts(This, hosts) \
+    ((This)->lpVtbl->UpdateHosts(This, hosts))
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2_get_PackageFamilyName(This, value) \
+    ((This)->lpVtbl->get_PackageFamilyName(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2;
+#endif /* !defined(____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistration2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
  * Interface Windows.System.IAppUriHandlerRegistrationManager
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 7.0
@@ -18666,6 +19516,75 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManag
 
 /*
  *
+ * Interface Windows.System.IAppUriHandlerRegistrationManager2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.System.AppUriHandlerRegistrationManager
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_System_IAppUriHandlerRegistrationManager2[] = L"Windows.System.IAppUriHandlerRegistrationManager2";
+typedef struct __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_PackageFamilyName)(__x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2* This,
+        HSTRING* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2Vtbl;
+
+interface __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2_get_PackageFamilyName(This, value) \
+    ((This)->lpVtbl->get_PackageFamilyName(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2;
+#endif /* !defined(____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
  * Interface Windows.System.IAppUriHandlerRegistrationManagerStatics
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 7.0
@@ -18738,6 +19657,83 @@ interface __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics
 EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics;
 #endif /* !defined(____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
+
+/*
+ *
+ * Interface Windows.System.IAppUriHandlerRegistrationManagerStatics2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.System.AppUriHandlerRegistrationManager
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_System_IAppUriHandlerRegistrationManagerStatics2[] = L"Windows.System.IAppUriHandlerRegistrationManagerStatics2";
+typedef struct __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* GetForPackage)(__x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2* This,
+        HSTRING packageFamilyName,
+        __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager** result);
+    HRESULT (STDMETHODCALLTYPE* GetForPackageForUser)(__x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2* This,
+        HSTRING packageFamilyName,
+        __x_ABI_CWindows_CSystem_CIUser* user,
+        __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManager** result);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2Vtbl;
+
+interface __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2_GetForPackage(This, packageFamilyName, result) \
+    ((This)->lpVtbl->GetForPackage(This, packageFamilyName, result))
+
+#define __x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2_GetForPackageForUser(This, packageFamilyName, user, result) \
+    ((This)->lpVtbl->GetForPackageForUser(This, packageFamilyName, user, result))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2;
+#endif /* !defined(____x_ABI_CWindows_CSystem_CIAppUriHandlerRegistrationManagerStatics2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *
@@ -19547,6 +20543,75 @@ interface __x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics
 EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics;
 #endif /* !defined(____x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.System.IKnownUserPropertiesStatics2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 14.0
+ *
+ * Interface is a part of the implementation of type Windows.System.KnownUserProperties
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+#if !defined(____x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_System_IKnownUserPropertiesStatics2[] = L"Windows.System.IKnownUserPropertiesStatics2";
+typedef struct __x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_AgeEnforcementRegion)(__x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2* This,
+        HSTRING* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2Vtbl;
+
+interface __x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2_get_AgeEnforcementRegion(This, value) \
+    ((This)->lpVtbl->get_AgeEnforcementRegion(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2;
+#endif /* !defined(____x_ABI_CWindows_CSystem_CIKnownUserPropertiesStatics2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
 
 /*
  *
@@ -21964,6 +23029,76 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CIUser;
 
 /*
  *
+ * Interface Windows.System.IUser2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 14.0
+ *
+ * Interface is a part of the implementation of type Windows.System.User
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+#if !defined(____x_ABI_CWindows_CSystem_CIUser2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSystem_CIUser2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_System_IUser2[] = L"Windows.System.IUser2";
+typedef struct __x_ABI_CWindows_CSystem_CIUser2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CSystem_CIUser2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CSystem_CIUser2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CSystem_CIUser2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CSystem_CIUser2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CSystem_CIUser2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSystem_CIUser2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* CheckUserAgeConsentGroupAsync)(__x_ABI_CWindows_CSystem_CIUser2* This,
+        enum __x_ABI_CWindows_CSystem_CUserAgeConsentGroup consentGroup,
+        __FIAsyncOperation_1_Windows__CSystem__CUserAgeConsentResult** operation);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CSystem_CIUser2Vtbl;
+
+interface __x_ABI_CWindows_CSystem_CIUser2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CSystem_CIUser2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CSystem_CIUser2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CSystem_CIUser2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CSystem_CIUser2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CSystem_CIUser2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CSystem_CIUser2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CSystem_CIUser2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CSystem_CIUser2_CheckUserAgeConsentGroupAsync(This, consentGroup, operation) \
+    ((This)->lpVtbl->CheckUserAgeConsentGroupAsync(This, consentGroup, operation))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CIUser2;
+#endif /* !defined(____x_ABI_CWindows_CSystem_CIUser2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+
+/*
+ *
  * Interface Windows.System.IUserAuthenticationStatusChangeDeferral
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -22603,9 +23738,15 @@ typedef struct __x_ABI_CWindows_CSystem_CIUserStaticsVtbl
         __x_ABI_CWindows_CSystem_CIUserWatcher** result);
     HRESULT (STDMETHODCALLTYPE* FindAllAsync)(__x_ABI_CWindows_CSystem_CIUserStatics* This,
         __FIAsyncOperation_1___FIVectorView_1_Windows__CSystem__CUser** operation);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+    DEPRECATED("FindAllAsyncByType is deprecated and might not function consistently on all platforms. Instead, use FindAllAsync or GetDefault.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
     HRESULT (STDMETHODCALLTYPE* FindAllAsyncByType)(__x_ABI_CWindows_CSystem_CIUserStatics* This,
         enum __x_ABI_CWindows_CSystem_CUserType type,
         __FIAsyncOperation_1___FIVectorView_1_Windows__CSystem__CUser** operation);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+    DEPRECATED("FindAllAsyncByTypeAndStatus is deprecated and might not function consistently on all platforms. Instead, use FindAllAsync or GetDefault.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
     HRESULT (STDMETHODCALLTYPE* FindAllAsyncByTypeAndStatus)(__x_ABI_CWindows_CSystem_CIUserStatics* This,
         enum __x_ABI_CWindows_CSystem_CUserType type,
         enum __x_ABI_CWindows_CSystem_CUserAuthenticationStatus status,
@@ -22648,9 +23789,15 @@ interface __x_ABI_CWindows_CSystem_CIUserStatics
 #define __x_ABI_CWindows_CSystem_CIUserStatics_FindAllAsync(This, operation) \
     ((This)->lpVtbl->FindAllAsync(This, operation))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+    DEPRECATED("FindAllAsyncByType is deprecated and might not function consistently on all platforms. Instead, use FindAllAsync or GetDefault.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
 #define __x_ABI_CWindows_CSystem_CIUserStatics_FindAllAsyncByType(This, type, operation) \
     ((This)->lpVtbl->FindAllAsyncByType(This, type, operation))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+    DEPRECATED("FindAllAsyncByTypeAndStatus is deprecated and might not function consistently on all platforms. Instead, use FindAllAsync or GetDefault.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
 #define __x_ABI_CWindows_CSystem_CIUserStatics_FindAllAsyncByTypeAndStatus(This, type, status, operation) \
     ((This)->lpVtbl->FindAllAsyncByTypeAndStatus(This, type, status, operation))
 
@@ -22662,6 +23809,75 @@ interface __x_ABI_CWindows_CSystem_CIUserStatics
 EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CIUserStatics;
 #endif /* !defined(____x_ABI_CWindows_CSystem_CIUserStatics_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.System.IUserStatics2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 11.0
+ *
+ * Interface is a part of the implementation of type Windows.System.User
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+#if !defined(____x_ABI_CWindows_CSystem_CIUserStatics2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSystem_CIUserStatics2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_System_IUserStatics2[] = L"Windows.System.IUserStatics2";
+typedef struct __x_ABI_CWindows_CSystem_CIUserStatics2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CSystem_CIUserStatics2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CSystem_CIUserStatics2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CSystem_CIUserStatics2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CSystem_CIUserStatics2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CSystem_CIUserStatics2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSystem_CIUserStatics2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* GetDefault)(__x_ABI_CWindows_CSystem_CIUserStatics2* This,
+        __x_ABI_CWindows_CSystem_CIUser** result);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CSystem_CIUserStatics2Vtbl;
+
+interface __x_ABI_CWindows_CSystem_CIUserStatics2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CSystem_CIUserStatics2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CSystem_CIUserStatics2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CSystem_CIUserStatics2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CSystem_CIUserStatics2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CSystem_CIUserStatics2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CSystem_CIUserStatics2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CSystem_CIUserStatics2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CSystem_CIUserStatics2_GetDefault(This, result) \
+    ((This)->lpVtbl->GetDefault(This, result))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CIUserStatics2;
+#endif /* !defined(____x_ABI_CWindows_CSystem_CIUserStatics2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
 
 /*
  *
@@ -22845,8 +24061,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 4.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.IAppDiagnosticInfoStatics interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.IAppDiagnosticInfoStatics2 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.IAppDiagnosticInfoStatics interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.System.IAppDiagnosticInfo ** Default Interface **
@@ -23122,11 +24338,12 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 7.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.System.IAppUriHandlerHostFactory interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.System.IAppUriHandlerHost ** Default Interface **
+ *    Windows.System.IAppUriHandlerHost2
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -23148,6 +24365,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.System.IAppUriHandlerRegistration ** Default Interface **
+ *    Windows.System.IAppUriHandlerRegistration2
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -23167,9 +24385,11 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.System.IAppUriHandlerRegistrationManagerStatics interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.IAppUriHandlerRegistrationManagerStatics2 interface starting with version 13.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.System.IAppUriHandlerRegistrationManager ** Default Interface **
+ *    Windows.System.IAppUriHandlerRegistrationManager2
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -23323,6 +24543,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.System.IKnownUserPropertiesStatics2 interface starting with version 14.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.IKnownUserPropertiesStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
@@ -23363,11 +24584,11 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.ILauncherStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.System.ILauncherStatics4 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.System.ILauncherStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.ILauncherStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.ILauncherStatics4 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.ILauncherStatics5 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.ILauncherStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.ILauncherStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -23435,10 +24656,10 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.IMemoryManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.System.IMemoryManagerStatics4 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.System.IMemoryManagerStatics3 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.IMemoryManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.IMemoryManagerStatics4 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.IMemoryManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.IMemoryManagerStatics3 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -23604,8 +24825,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.System.SystemManagementContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.IShutdownManagerStatics interface starting with version 1.0 of the Windows.System.SystemManagementContract API contract
  *   Static Methods exist on the Windows.System.IShutdownManagerStatics2 interface starting with version 3.0 of the Windows.System.SystemManagementContract API contract
+ *   Static Methods exist on the Windows.System.IShutdownManagerStatics interface starting with version 1.0 of the Windows.System.SystemManagementContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -23624,8 +24845,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.System.SystemManagementContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.ITimeZoneSettingsStatics2 interface starting with version 5.0 of the Windows.System.SystemManagementContract API contract
  *   Static Methods exist on the Windows.System.ITimeZoneSettingsStatics interface starting with version 1.0 of the Windows.System.SystemManagementContract API contract
+ *   Static Methods exist on the Windows.System.ITimeZoneSettingsStatics2 interface starting with version 5.0 of the Windows.System.SystemManagementContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -23645,9 +24866,11 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.System.IUserStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.IUserStatics2 interface starting with version 11.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.System.IUser ** Default Interface **
+ *    Windows.System.IUser2
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *

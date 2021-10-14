@@ -754,7 +754,8 @@ public:
     template <class TFIND> 
     T * FindNext(const T * pCurNode, TFIND & FindVal) const 
     {
-        for (T * pNode = pCurNode->m_pNext; pNode && (!(*pNode == FindVal)); pNode = pNode->m_pNext)
+        T * pNode = pCurNode->m_pNext;
+        for (; pNode && (!(*pNode == FindVal)); pNode = pNode->m_pNext)
         {}
         return pNode;
     }

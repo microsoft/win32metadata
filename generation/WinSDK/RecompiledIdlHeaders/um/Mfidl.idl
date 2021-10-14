@@ -5079,7 +5079,11 @@ interface IMFTopoLoader : IUnknown
 cpp_quote( "STDAPI MFCreateTopoLoader(" )
 cpp_quote( "    _Outptr_ IMFTopoLoader ** ppObj );" )
 
+cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
+#pragma endregion
 
+#pragma region Application Family
+cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -5376,22 +5380,26 @@ interface IMFContentEnabler : IUnknown
     HRESULT Cancel();
 };
 
+cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
+#pragma endregion
+
 //
 // Content Enabler Type GUIDs
 //
-cpp_quote( "" )
+#pragma region Desktop Family
+cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
 cpp_quote( "EXTERN_GUID( MFENABLETYPE_WMDRMV1_LicenseAcquisition, 0x4ff6eeaf, 0xb43, 0x4797, 0x9b, 0x85, 0xab, 0xf3, 0x18, 0x15, 0xe7, 0xb0);" )
 cpp_quote( "EXTERN_GUID( MFENABLETYPE_WMDRMV7_LicenseAcquisition, 0x3306df, 0x4a06, 0x4884,0xa0, 0x97, 0xef, 0x6d, 0x22, 0xec, 0x84, 0xa3);" )
 cpp_quote( "EXTERN_GUID( MFENABLETYPE_WMDRMV7_Individualization, 0xacd2c84a, 0xb303, 0x4f65, 0xbc, 0x2c, 0x2c, 0x84, 0x8d, 0x1, 0xa9, 0x89);" )
-cpp_quote( "EXTERN_GUID( MFENABLETYPE_MF_UpdateRevocationInformation, 0xe558b0b5, 0xb3c4, 0x44a0, 0x92, 0x4c, 0x50, 0xd1, 0x78, 0x93, 0x23, 0x85);" )
-cpp_quote( "EXTERN_GUID( MFENABLETYPE_MF_UpdateUntrustedComponent, 0x9879f3d6, 0xcee2, 0x48e6, 0xb5, 0x73, 0x97, 0x67, 0xab, 0x17, 0x2f, 0x16);" )
-cpp_quote( "EXTERN_GUID( MFENABLETYPE_MF_RebootRequired, 0x6d4d3d4b, 0x0ece, 0x4652, 0x8b, 0x3a, 0xf2, 0xd2, 0x42, 0x60, 0xd8, 0x87);" )
-
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
 #pragma endregion
 
 #pragma region Application Family
 cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+
+cpp_quote( "EXTERN_GUID( MFENABLETYPE_MF_UpdateRevocationInformation, 0xe558b0b5, 0xb3c4, 0x44a0, 0x92, 0x4c, 0x50, 0xd1, 0x78, 0x93, 0x23, 0x85);" )
+cpp_quote( "EXTERN_GUID( MFENABLETYPE_MF_UpdateUntrustedComponent, 0x9879f3d6, 0xcee2, 0x48e6, 0xb5, 0x73, 0x97, 0x67, 0xab, 0x17, 0x2f, 0x16);" )
+cpp_quote( "EXTERN_GUID( MFENABLETYPE_MF_RebootRequired, 0x6d4d3d4b, 0x0ece, 0x4652, 0x8b, 0x3a, 0xf2, 0xd2, 0x42, 0x60, 0xd8, 0x87);" )
 
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
@@ -13794,6 +13802,124 @@ cpp_quote("    _COM_Outptr_ IMFRelativePanelWatcher** ppRelativePanelWatcher")
 cpp_quote("    );")
 
 cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN10_VB) ")
+
+cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN10_CO) ")
+
+
+/// <summary>
+/// This enum defines the possible occlusion states for a camera
+/// </summary>
+[v1_enum]
+typedef enum MFCameraOcclusionState
+{
+    MFCameraOcclusionState_Open                         = 0x0,
+    MFCameraOcclusionState_OccludedByLid                = 0x1,
+    MFCameraOcclusionState_OccludedByCameraHardware     = 0x2,
+} MFCameraOcclusionState;
+cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(MFCameraOcclusionState)")
+
+/// <summary>
+/// This interface is an input parameter for OnOcclusionStateReport callback function
+/// adn is used to get the most recent camera occlusion state for the camera under monitoring.
+/// </summary>
+[
+    object,
+    uuid(1640B2CF-74DA-4462-A43B-B76D3BDC1434),
+    helpstring("IMFCameraOcclusionStateReport Interface"),
+    local
+]
+interface IMFCameraOcclusionStateReport : IUnknown
+{
+    /// <summary>
+    /// This function will get the most recent occlusion state for the camera that's being monitored.
+    /// </summary>
+    /// <param name = "occlusionState">
+    /// Numeric value that represents one or more MFCameraOcclusionState values.
+    /// </param>
+    HRESULT GetOcclusionState(
+            [out, annotation("_Out_ ")] DWORD* occlusionState
+    );
+};
+
+/// <summary>
+/// This callback interface is required to be implemented by the client that creates
+/// an IMFCameraOcclusionStateMonitor object.
+/// </summary>
+[
+    object,
+    uuid(6E5841C7-3889-4019-9035-783FB19B5948),
+    helpstring("IMFCameraOcclusionStateReportCallback Interface"),
+    local
+]
+interface IMFCameraOcclusionStateReportCallback : IUnknown
+{
+    /// <summary>
+    /// This function will be called when the monitor detects that the occlusion state has changed.
+    /// </summary>
+    /// <param name = "occlusionStateReport">
+    /// Pointer to the IMFCameraOcclusionStateReport interface that is used to get the most recent state.
+    /// </param>
+    HRESULT OnOcclusionStateReport(
+        [in, annotation("_In_")] IMFCameraOcclusionStateReport* occlusionStateReport
+    );
+};
+
+/// <summary>
+/// This interface represents the main camera occlusion state monitor object.
+/// </summary>
+[
+    object,
+    uuid(CC692F46-C697-47E2-A72D-7B064617749B),
+    helpstring("IMFCameraOcclusionStateMonitor Interface"),
+    local
+]
+interface IMFCameraOcclusionStateMonitor : IUnknown
+{
+    /// <summary>
+    /// This function will start the monitor and will immediately cause 
+    /// OnOcclusionStateReport callback funtion to be called with the current state information.
+    /// </summary>
+    HRESULT Start(
+    );
+
+    /// <summary>
+    /// This function will stop the monitor.
+    /// </summary>
+    HRESULT Stop(
+    );
+
+    /// <summary>
+    /// This function will return supported camera occlusion states, the return value
+    /// is combination MFCameraOcclusionState flags. MFCameraOcclusionState_Open is always supported.
+    /// </summary>
+    DWORD GetSupportedStates(
+    );
+}
+
+/// <summary>
+/// Allows app to create Camera Occlusion State Monitor for the given camera device.
+/// The symbolicLink should be from the camera that is already activated, otherwise 
+/// the state information is not guaranteed to be correct.
+/// </summary>
+/// <param name = "symbolicLink">
+/// String symbolic link name of the video capture device that is active.
+/// </param>
+/// <param name = "callback">
+/// Pointer to an object that implements the callback interface.
+/// </param>
+/// <param name = "occlusionStateMonitor">
+/// Specifies a pointer to a variable where theIMFCameraOcclusionStateMonitor object
+/// will be stored.
+/// </param>
+cpp_quote("")
+cpp_quote("STDAPI")
+cpp_quote("MFCreateCameraOcclusionStateMonitor(")
+cpp_quote("    _In_z_ LPCWSTR symbolicLink,")
+cpp_quote("    _In_ IMFCameraOcclusionStateReportCallback* callback,")
+cpp_quote("    _COM_Outptr_ IMFCameraOcclusionStateMonitor** occlusionStateMonitor")
+cpp_quote("    );")
+
+cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO) ")
 
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
 

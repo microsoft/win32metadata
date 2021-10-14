@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -443,6 +451,7 @@ EXTERN_C const IID IID_IUrlAccessor;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUrlAccessor * This,
             /* [annotation][in] */ 
@@ -450,70 +459,85 @@ EXTERN_C const IID IID_IUrlAccessor;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IUrlAccessor * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IUrlAccessor * This);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, AddRequestParameter)
         HRESULT ( STDMETHODCALLTYPE *AddRequestParameter )( 
             __RPC__in IUrlAccessor * This,
             /* [in] */ __RPC__in PROPSPEC *pSpec,
             /* [in] */ __RPC__in PROPVARIANT *pVar);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetDocFormat)
         HRESULT ( STDMETHODCALLTYPE *GetDocFormat )( 
             __RPC__in IUrlAccessor * This,
             /* [size_is][length_is][out] */ __RPC__out_ecount_part(dwSize, *pdwLength) WCHAR wszDocFormat[  ],
             /* [in] */ DWORD dwSize,
             /* [out] */ __RPC__out DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetCLSID)
         HRESULT ( STDMETHODCALLTYPE *GetCLSID )( 
             __RPC__in IUrlAccessor * This,
             /* [out] */ __RPC__out CLSID *pClsid);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetHost)
         HRESULT ( STDMETHODCALLTYPE *GetHost )( 
             __RPC__in IUrlAccessor * This,
             /* [size_is][length_is][out] */ __RPC__out_ecount_part(dwSize, *pdwLength) WCHAR wszHost[  ],
             /* [in] */ DWORD dwSize,
             /* [out] */ __RPC__out DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, IsDirectory)
         HRESULT ( STDMETHODCALLTYPE *IsDirectory )( 
             __RPC__in IUrlAccessor * This);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetSize)
         HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             __RPC__in IUrlAccessor * This,
             /* [out] */ __RPC__out ULONGLONG *pllSize);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetLastModified)
         HRESULT ( STDMETHODCALLTYPE *GetLastModified )( 
             __RPC__in IUrlAccessor * This,
             /* [out] */ __RPC__out FILETIME *pftLastModified);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetFileName)
         HRESULT ( STDMETHODCALLTYPE *GetFileName )( 
             __RPC__in IUrlAccessor * This,
             /* [size_is][length_is][out] */ __RPC__out_ecount_part(dwSize, *pdwLength) WCHAR wszFileName[  ],
             /* [in] */ DWORD dwSize,
             /* [out] */ __RPC__out DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetSecurityDescriptor)
         HRESULT ( STDMETHODCALLTYPE *GetSecurityDescriptor )( 
             __RPC__in IUrlAccessor * This,
             /* [size_is][out] */ __RPC__out_ecount_full(dwSize) BYTE *pSD,
             /* [in] */ DWORD dwSize,
             /* [out] */ __RPC__out DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetRedirectedURL)
         HRESULT ( STDMETHODCALLTYPE *GetRedirectedURL )( 
             __RPC__in IUrlAccessor * This,
             /* [size_is][length_is][out] */ __RPC__out_ecount_part(dwSize, *pdwLength) WCHAR wszRedirectedURL[  ],
             /* [in] */ DWORD dwSize,
             /* [out] */ __RPC__out DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetSecurityProvider)
         HRESULT ( STDMETHODCALLTYPE *GetSecurityProvider )( 
             __RPC__in IUrlAccessor * This,
             /* [out] */ __RPC__out CLSID *pSPClsid);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, BindToStream)
         HRESULT ( STDMETHODCALLTYPE *BindToStream )( 
             __RPC__in IUrlAccessor * This,
             /* [out] */ __RPC__deref_out_opt IStream **ppStream);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, BindToFilter)
         HRESULT ( STDMETHODCALLTYPE *BindToFilter )( 
             __RPC__in IUrlAccessor * This,
             /* [out] */ __RPC__deref_out_opt IFilter **ppFilter);
@@ -627,6 +651,7 @@ EXTERN_C const IID IID_IUrlAccessor2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUrlAccessor2 * This,
             /* [annotation][in] */ 
@@ -634,83 +659,101 @@ EXTERN_C const IID IID_IUrlAccessor2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IUrlAccessor2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IUrlAccessor2 * This);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, AddRequestParameter)
         HRESULT ( STDMETHODCALLTYPE *AddRequestParameter )( 
             __RPC__in IUrlAccessor2 * This,
             /* [in] */ __RPC__in PROPSPEC *pSpec,
             /* [in] */ __RPC__in PROPVARIANT *pVar);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetDocFormat)
         HRESULT ( STDMETHODCALLTYPE *GetDocFormat )( 
             __RPC__in IUrlAccessor2 * This,
             /* [size_is][length_is][out] */ __RPC__out_ecount_part(dwSize, *pdwLength) WCHAR wszDocFormat[  ],
             /* [in] */ DWORD dwSize,
             /* [out] */ __RPC__out DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetCLSID)
         HRESULT ( STDMETHODCALLTYPE *GetCLSID )( 
             __RPC__in IUrlAccessor2 * This,
             /* [out] */ __RPC__out CLSID *pClsid);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetHost)
         HRESULT ( STDMETHODCALLTYPE *GetHost )( 
             __RPC__in IUrlAccessor2 * This,
             /* [size_is][length_is][out] */ __RPC__out_ecount_part(dwSize, *pdwLength) WCHAR wszHost[  ],
             /* [in] */ DWORD dwSize,
             /* [out] */ __RPC__out DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, IsDirectory)
         HRESULT ( STDMETHODCALLTYPE *IsDirectory )( 
             __RPC__in IUrlAccessor2 * This);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetSize)
         HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             __RPC__in IUrlAccessor2 * This,
             /* [out] */ __RPC__out ULONGLONG *pllSize);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetLastModified)
         HRESULT ( STDMETHODCALLTYPE *GetLastModified )( 
             __RPC__in IUrlAccessor2 * This,
             /* [out] */ __RPC__out FILETIME *pftLastModified);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetFileName)
         HRESULT ( STDMETHODCALLTYPE *GetFileName )( 
             __RPC__in IUrlAccessor2 * This,
             /* [size_is][length_is][out] */ __RPC__out_ecount_part(dwSize, *pdwLength) WCHAR wszFileName[  ],
             /* [in] */ DWORD dwSize,
             /* [out] */ __RPC__out DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetSecurityDescriptor)
         HRESULT ( STDMETHODCALLTYPE *GetSecurityDescriptor )( 
             __RPC__in IUrlAccessor2 * This,
             /* [size_is][out] */ __RPC__out_ecount_full(dwSize) BYTE *pSD,
             /* [in] */ DWORD dwSize,
             /* [out] */ __RPC__out DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetRedirectedURL)
         HRESULT ( STDMETHODCALLTYPE *GetRedirectedURL )( 
             __RPC__in IUrlAccessor2 * This,
             /* [size_is][length_is][out] */ __RPC__out_ecount_part(dwSize, *pdwLength) WCHAR wszRedirectedURL[  ],
             /* [in] */ DWORD dwSize,
             /* [out] */ __RPC__out DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetSecurityProvider)
         HRESULT ( STDMETHODCALLTYPE *GetSecurityProvider )( 
             __RPC__in IUrlAccessor2 * This,
             /* [out] */ __RPC__out CLSID *pSPClsid);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, BindToStream)
         HRESULT ( STDMETHODCALLTYPE *BindToStream )( 
             __RPC__in IUrlAccessor2 * This,
             /* [out] */ __RPC__deref_out_opt IStream **ppStream);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, BindToFilter)
         HRESULT ( STDMETHODCALLTYPE *BindToFilter )( 
             __RPC__in IUrlAccessor2 * This,
             /* [out] */ __RPC__deref_out_opt IFilter **ppFilter);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor2, GetDisplayUrl)
         HRESULT ( STDMETHODCALLTYPE *GetDisplayUrl )( 
             __RPC__in IUrlAccessor2 * This,
             /* [size_is][length_is][out] */ __RPC__out_ecount_part(dwSize, *pdwLength) WCHAR wszDocUrl[  ],
             /* [in] */ DWORD dwSize,
             /* [out] */ __RPC__out DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor2, IsDocument)
         HRESULT ( STDMETHODCALLTYPE *IsDocument )( 
             __RPC__in IUrlAccessor2 * This);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor2, GetCodePage)
         HRESULT ( STDMETHODCALLTYPE *GetCodePage )( 
             __RPC__in IUrlAccessor2 * This,
             /* [size_is][length_is][out] */ __RPC__out_ecount_part(dwSize, *pdwLength) WCHAR wszCodePage[  ],
@@ -829,6 +872,7 @@ EXTERN_C const IID IID_IUrlAccessor3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUrlAccessor3 * This,
             /* [annotation][in] */ 
@@ -836,89 +880,108 @@ EXTERN_C const IID IID_IUrlAccessor3;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IUrlAccessor3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IUrlAccessor3 * This);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, AddRequestParameter)
         HRESULT ( STDMETHODCALLTYPE *AddRequestParameter )( 
             __RPC__in IUrlAccessor3 * This,
             /* [in] */ __RPC__in PROPSPEC *pSpec,
             /* [in] */ __RPC__in PROPVARIANT *pVar);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetDocFormat)
         HRESULT ( STDMETHODCALLTYPE *GetDocFormat )( 
             __RPC__in IUrlAccessor3 * This,
             /* [size_is][length_is][out] */ __RPC__out_ecount_part(dwSize, *pdwLength) WCHAR wszDocFormat[  ],
             /* [in] */ DWORD dwSize,
             /* [out] */ __RPC__out DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetCLSID)
         HRESULT ( STDMETHODCALLTYPE *GetCLSID )( 
             __RPC__in IUrlAccessor3 * This,
             /* [out] */ __RPC__out CLSID *pClsid);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetHost)
         HRESULT ( STDMETHODCALLTYPE *GetHost )( 
             __RPC__in IUrlAccessor3 * This,
             /* [size_is][length_is][out] */ __RPC__out_ecount_part(dwSize, *pdwLength) WCHAR wszHost[  ],
             /* [in] */ DWORD dwSize,
             /* [out] */ __RPC__out DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, IsDirectory)
         HRESULT ( STDMETHODCALLTYPE *IsDirectory )( 
             __RPC__in IUrlAccessor3 * This);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetSize)
         HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             __RPC__in IUrlAccessor3 * This,
             /* [out] */ __RPC__out ULONGLONG *pllSize);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetLastModified)
         HRESULT ( STDMETHODCALLTYPE *GetLastModified )( 
             __RPC__in IUrlAccessor3 * This,
             /* [out] */ __RPC__out FILETIME *pftLastModified);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetFileName)
         HRESULT ( STDMETHODCALLTYPE *GetFileName )( 
             __RPC__in IUrlAccessor3 * This,
             /* [size_is][length_is][out] */ __RPC__out_ecount_part(dwSize, *pdwLength) WCHAR wszFileName[  ],
             /* [in] */ DWORD dwSize,
             /* [out] */ __RPC__out DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetSecurityDescriptor)
         HRESULT ( STDMETHODCALLTYPE *GetSecurityDescriptor )( 
             __RPC__in IUrlAccessor3 * This,
             /* [size_is][out] */ __RPC__out_ecount_full(dwSize) BYTE *pSD,
             /* [in] */ DWORD dwSize,
             /* [out] */ __RPC__out DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetRedirectedURL)
         HRESULT ( STDMETHODCALLTYPE *GetRedirectedURL )( 
             __RPC__in IUrlAccessor3 * This,
             /* [size_is][length_is][out] */ __RPC__out_ecount_part(dwSize, *pdwLength) WCHAR wszRedirectedURL[  ],
             /* [in] */ DWORD dwSize,
             /* [out] */ __RPC__out DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetSecurityProvider)
         HRESULT ( STDMETHODCALLTYPE *GetSecurityProvider )( 
             __RPC__in IUrlAccessor3 * This,
             /* [out] */ __RPC__out CLSID *pSPClsid);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, BindToStream)
         HRESULT ( STDMETHODCALLTYPE *BindToStream )( 
             __RPC__in IUrlAccessor3 * This,
             /* [out] */ __RPC__deref_out_opt IStream **ppStream);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, BindToFilter)
         HRESULT ( STDMETHODCALLTYPE *BindToFilter )( 
             __RPC__in IUrlAccessor3 * This,
             /* [out] */ __RPC__deref_out_opt IFilter **ppFilter);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor2, GetDisplayUrl)
         HRESULT ( STDMETHODCALLTYPE *GetDisplayUrl )( 
             __RPC__in IUrlAccessor3 * This,
             /* [size_is][length_is][out] */ __RPC__out_ecount_part(dwSize, *pdwLength) WCHAR wszDocUrl[  ],
             /* [in] */ DWORD dwSize,
             /* [out] */ __RPC__out DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor2, IsDocument)
         HRESULT ( STDMETHODCALLTYPE *IsDocument )( 
             __RPC__in IUrlAccessor3 * This);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor2, GetCodePage)
         HRESULT ( STDMETHODCALLTYPE *GetCodePage )( 
             __RPC__in IUrlAccessor3 * This,
             /* [size_is][length_is][out] */ __RPC__out_ecount_part(dwSize, *pdwLength) WCHAR wszCodePage[  ],
             /* [in] */ DWORD dwSize,
             /* [out] */ __RPC__out DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor3, GetImpersonationSidBlobs)
         HRESULT ( STDMETHODCALLTYPE *GetImpersonationSidBlobs )( 
             __RPC__in IUrlAccessor3 * This,
             /* [in] */ __RPC__in LPCWSTR pcwszURL,
@@ -1043,6 +1106,7 @@ EXTERN_C const IID IID_IUrlAccessor4;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUrlAccessor4 * This,
             /* [annotation][in] */ 
@@ -1050,99 +1114,120 @@ EXTERN_C const IID IID_IUrlAccessor4;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IUrlAccessor4 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IUrlAccessor4 * This);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, AddRequestParameter)
         HRESULT ( STDMETHODCALLTYPE *AddRequestParameter )( 
             __RPC__in IUrlAccessor4 * This,
             /* [in] */ __RPC__in PROPSPEC *pSpec,
             /* [in] */ __RPC__in PROPVARIANT *pVar);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetDocFormat)
         HRESULT ( STDMETHODCALLTYPE *GetDocFormat )( 
             __RPC__in IUrlAccessor4 * This,
             /* [size_is][length_is][out] */ __RPC__out_ecount_part(dwSize, *pdwLength) WCHAR wszDocFormat[  ],
             /* [in] */ DWORD dwSize,
             /* [out] */ __RPC__out DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetCLSID)
         HRESULT ( STDMETHODCALLTYPE *GetCLSID )( 
             __RPC__in IUrlAccessor4 * This,
             /* [out] */ __RPC__out CLSID *pClsid);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetHost)
         HRESULT ( STDMETHODCALLTYPE *GetHost )( 
             __RPC__in IUrlAccessor4 * This,
             /* [size_is][length_is][out] */ __RPC__out_ecount_part(dwSize, *pdwLength) WCHAR wszHost[  ],
             /* [in] */ DWORD dwSize,
             /* [out] */ __RPC__out DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, IsDirectory)
         HRESULT ( STDMETHODCALLTYPE *IsDirectory )( 
             __RPC__in IUrlAccessor4 * This);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetSize)
         HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             __RPC__in IUrlAccessor4 * This,
             /* [out] */ __RPC__out ULONGLONG *pllSize);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetLastModified)
         HRESULT ( STDMETHODCALLTYPE *GetLastModified )( 
             __RPC__in IUrlAccessor4 * This,
             /* [out] */ __RPC__out FILETIME *pftLastModified);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetFileName)
         HRESULT ( STDMETHODCALLTYPE *GetFileName )( 
             __RPC__in IUrlAccessor4 * This,
             /* [size_is][length_is][out] */ __RPC__out_ecount_part(dwSize, *pdwLength) WCHAR wszFileName[  ],
             /* [in] */ DWORD dwSize,
             /* [out] */ __RPC__out DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetSecurityDescriptor)
         HRESULT ( STDMETHODCALLTYPE *GetSecurityDescriptor )( 
             __RPC__in IUrlAccessor4 * This,
             /* [size_is][out] */ __RPC__out_ecount_full(dwSize) BYTE *pSD,
             /* [in] */ DWORD dwSize,
             /* [out] */ __RPC__out DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetRedirectedURL)
         HRESULT ( STDMETHODCALLTYPE *GetRedirectedURL )( 
             __RPC__in IUrlAccessor4 * This,
             /* [size_is][length_is][out] */ __RPC__out_ecount_part(dwSize, *pdwLength) WCHAR wszRedirectedURL[  ],
             /* [in] */ DWORD dwSize,
             /* [out] */ __RPC__out DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, GetSecurityProvider)
         HRESULT ( STDMETHODCALLTYPE *GetSecurityProvider )( 
             __RPC__in IUrlAccessor4 * This,
             /* [out] */ __RPC__out CLSID *pSPClsid);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, BindToStream)
         HRESULT ( STDMETHODCALLTYPE *BindToStream )( 
             __RPC__in IUrlAccessor4 * This,
             /* [out] */ __RPC__deref_out_opt IStream **ppStream);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor, BindToFilter)
         HRESULT ( STDMETHODCALLTYPE *BindToFilter )( 
             __RPC__in IUrlAccessor4 * This,
             /* [out] */ __RPC__deref_out_opt IFilter **ppFilter);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor2, GetDisplayUrl)
         HRESULT ( STDMETHODCALLTYPE *GetDisplayUrl )( 
             __RPC__in IUrlAccessor4 * This,
             /* [size_is][length_is][out] */ __RPC__out_ecount_part(dwSize, *pdwLength) WCHAR wszDocUrl[  ],
             /* [in] */ DWORD dwSize,
             /* [out] */ __RPC__out DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor2, IsDocument)
         HRESULT ( STDMETHODCALLTYPE *IsDocument )( 
             __RPC__in IUrlAccessor4 * This);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor2, GetCodePage)
         HRESULT ( STDMETHODCALLTYPE *GetCodePage )( 
             __RPC__in IUrlAccessor4 * This,
             /* [size_is][length_is][out] */ __RPC__out_ecount_part(dwSize, *pdwLength) WCHAR wszCodePage[  ],
             /* [in] */ DWORD dwSize,
             /* [out] */ __RPC__out DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor3, GetImpersonationSidBlobs)
         HRESULT ( STDMETHODCALLTYPE *GetImpersonationSidBlobs )( 
             __RPC__in IUrlAccessor4 * This,
             /* [in] */ __RPC__in LPCWSTR pcwszURL,
             /* [out] */ __RPC__out DWORD *pcSidCount,
             /* [out] */ __RPC__deref_out_opt BLOB **ppSidBlobs);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor4, ShouldIndexItemContent)
         HRESULT ( STDMETHODCALLTYPE *ShouldIndexItemContent )( 
             __RPC__in IUrlAccessor4 * This,
             /* [out] */ __RPC__out BOOL *pfIndexContent);
         
+        DECLSPEC_XFGVIRT(IUrlAccessor4, ShouldIndexProperty)
         HRESULT ( STDMETHODCALLTYPE *ShouldIndexProperty )( 
             __RPC__in IUrlAccessor4 * This,
             /* [in] */ __RPC__in REFPROPERTYKEY key,
@@ -1292,6 +1377,7 @@ EXTERN_C const IID IID_IOpLockStatus;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IOpLockStatus * This,
             /* [annotation][in] */ 
@@ -1299,22 +1385,27 @@ EXTERN_C const IID IID_IOpLockStatus;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IOpLockStatus * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IOpLockStatus * This);
         
+        DECLSPEC_XFGVIRT(IOpLockStatus, IsOplockValid)
         HRESULT ( STDMETHODCALLTYPE *IsOplockValid )( 
             IOpLockStatus * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfIsOplockValid);
         
+        DECLSPEC_XFGVIRT(IOpLockStatus, IsOplockBroken)
         HRESULT ( STDMETHODCALLTYPE *IsOplockBroken )( 
             IOpLockStatus * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfIsOplockBroken);
         
+        DECLSPEC_XFGVIRT(IOpLockStatus, GetOplockEventHandle)
         HRESULT ( STDMETHODCALLTYPE *GetOplockEventHandle )( 
             IOpLockStatus * This,
             /* [annotation][out] */ 
@@ -1394,6 +1485,7 @@ EXTERN_C const IID IID_ISearchProtocolThreadContext;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISearchProtocolThreadContext * This,
             /* [annotation][in] */ 
@@ -1401,18 +1493,23 @@ EXTERN_C const IID IID_ISearchProtocolThreadContext;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISearchProtocolThreadContext * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISearchProtocolThreadContext * This);
         
+        DECLSPEC_XFGVIRT(ISearchProtocolThreadContext, ThreadInit)
         HRESULT ( STDMETHODCALLTYPE *ThreadInit )( 
             ISearchProtocolThreadContext * This);
         
+        DECLSPEC_XFGVIRT(ISearchProtocolThreadContext, ThreadShutdown)
         HRESULT ( STDMETHODCALLTYPE *ThreadShutdown )( 
             ISearchProtocolThreadContext * This);
         
+        DECLSPEC_XFGVIRT(ISearchProtocolThreadContext, ThreadIdle)
         HRESULT ( STDMETHODCALLTYPE *ThreadIdle )( 
             ISearchProtocolThreadContext * This,
             /* [in] */ DWORD dwTimeElaspedSinceLastCallInMS);
@@ -1576,6 +1673,7 @@ EXTERN_C const IID IID_ISearchProtocol;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISearchProtocol * This,
             /* [annotation][in] */ 
@@ -1583,18 +1681,22 @@ EXTERN_C const IID IID_ISearchProtocol;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISearchProtocol * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISearchProtocol * This);
         
+        DECLSPEC_XFGVIRT(ISearchProtocol, Init)
         HRESULT ( STDMETHODCALLTYPE *Init )( 
             ISearchProtocol * This,
             /* [in] */ TIMEOUT_INFO *pTimeoutInfo,
             /* [in] */ IProtocolHandlerSite *pProtocolHandlerSite,
             /* [in] */ PROXY_INFO *pProxyInfo);
         
+        DECLSPEC_XFGVIRT(ISearchProtocol, CreateAccessor)
         HRESULT ( STDMETHODCALLTYPE *CreateAccessor )( 
             ISearchProtocol * This,
             /* [in] */ LPCWSTR pcwszURL,
@@ -1603,10 +1705,12 @@ EXTERN_C const IID IID_ISearchProtocol;
             /* [in] */ ITEM_INFO *pItemInfo,
             /* [out] */ IUrlAccessor **ppAccessor);
         
+        DECLSPEC_XFGVIRT(ISearchProtocol, CloseAccessor)
         HRESULT ( STDMETHODCALLTYPE *CloseAccessor )( 
             ISearchProtocol * This,
             /* [in] */ IUrlAccessor *pAccessor);
         
+        DECLSPEC_XFGVIRT(ISearchProtocol, ShutDown)
         HRESULT ( STDMETHODCALLTYPE *ShutDown )( 
             ISearchProtocol * This);
         
@@ -1688,6 +1792,7 @@ EXTERN_C const IID IID_ISearchProtocol2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISearchProtocol2 * This,
             /* [annotation][in] */ 
@@ -1695,18 +1800,22 @@ EXTERN_C const IID IID_ISearchProtocol2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISearchProtocol2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISearchProtocol2 * This);
         
+        DECLSPEC_XFGVIRT(ISearchProtocol, Init)
         HRESULT ( STDMETHODCALLTYPE *Init )( 
             ISearchProtocol2 * This,
             /* [in] */ TIMEOUT_INFO *pTimeoutInfo,
             /* [in] */ IProtocolHandlerSite *pProtocolHandlerSite,
             /* [in] */ PROXY_INFO *pProxyInfo);
         
+        DECLSPEC_XFGVIRT(ISearchProtocol, CreateAccessor)
         HRESULT ( STDMETHODCALLTYPE *CreateAccessor )( 
             ISearchProtocol2 * This,
             /* [in] */ LPCWSTR pcwszURL,
@@ -1715,13 +1824,16 @@ EXTERN_C const IID IID_ISearchProtocol2;
             /* [in] */ ITEM_INFO *pItemInfo,
             /* [out] */ IUrlAccessor **ppAccessor);
         
+        DECLSPEC_XFGVIRT(ISearchProtocol, CloseAccessor)
         HRESULT ( STDMETHODCALLTYPE *CloseAccessor )( 
             ISearchProtocol2 * This,
             /* [in] */ IUrlAccessor *pAccessor);
         
+        DECLSPEC_XFGVIRT(ISearchProtocol, ShutDown)
         HRESULT ( STDMETHODCALLTYPE *ShutDown )( 
             ISearchProtocol2 * This);
         
+        DECLSPEC_XFGVIRT(ISearchProtocol2, CreateAccessorEx)
         HRESULT ( STDMETHODCALLTYPE *CreateAccessorEx )( 
             ISearchProtocol2 * This,
             /* [in] */ LPCWSTR pcwszURL,
@@ -1811,6 +1923,7 @@ EXTERN_C const IID IID_IProtocolHandlerSite;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IProtocolHandlerSite * This,
             /* [annotation][in] */ 
@@ -1818,12 +1931,15 @@ EXTERN_C const IID IID_IProtocolHandlerSite;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IProtocolHandlerSite * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IProtocolHandlerSite * This);
         
+        DECLSPEC_XFGVIRT(IProtocolHandlerSite, GetFilter)
         HRESULT ( STDMETHODCALLTYPE *GetFilter )( 
             IProtocolHandlerSite * This,
             /* [in] */ CLSID *pclsidObj,
@@ -1973,6 +2089,7 @@ EXTERN_C const IID IID_ISearchRoot;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISearchRoot * This,
             /* [annotation][in] */ 
@@ -1980,96 +2097,120 @@ EXTERN_C const IID IID_ISearchRoot;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISearchRoot * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISearchRoot * This);
         
+        DECLSPEC_XFGVIRT(ISearchRoot, put_Schedule)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Schedule )( 
             __RPC__in ISearchRoot * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszTaskArg);
         
+        DECLSPEC_XFGVIRT(ISearchRoot, get_Schedule)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Schedule )( 
             __RPC__in ISearchRoot * This,
             /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *ppszTaskArg);
         
+        DECLSPEC_XFGVIRT(ISearchRoot, put_RootURL)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RootURL )( 
             __RPC__in ISearchRoot * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszURL);
         
+        DECLSPEC_XFGVIRT(ISearchRoot, get_RootURL)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RootURL )( 
             __RPC__in ISearchRoot * This,
             /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *ppszURL);
         
+        DECLSPEC_XFGVIRT(ISearchRoot, put_IsHierarchical)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_IsHierarchical )( 
             __RPC__in ISearchRoot * This,
             /* [in] */ BOOL fIsHierarchical);
         
+        DECLSPEC_XFGVIRT(ISearchRoot, get_IsHierarchical)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsHierarchical )( 
             __RPC__in ISearchRoot * This,
             /* [retval][out] */ __RPC__out BOOL *pfIsHierarchical);
         
+        DECLSPEC_XFGVIRT(ISearchRoot, put_ProvidesNotifications)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ProvidesNotifications )( 
             __RPC__in ISearchRoot * This,
             /* [in] */ BOOL fProvidesNotifications);
         
+        DECLSPEC_XFGVIRT(ISearchRoot, get_ProvidesNotifications)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProvidesNotifications )( 
             __RPC__in ISearchRoot * This,
             /* [retval][out] */ __RPC__out BOOL *pfProvidesNotifications);
         
+        DECLSPEC_XFGVIRT(ISearchRoot, put_UseNotificationsOnly)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_UseNotificationsOnly )( 
             __RPC__in ISearchRoot * This,
             /* [in] */ BOOL fUseNotificationsOnly);
         
+        DECLSPEC_XFGVIRT(ISearchRoot, get_UseNotificationsOnly)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UseNotificationsOnly )( 
             __RPC__in ISearchRoot * This,
             /* [retval][out] */ __RPC__out BOOL *pfUseNotificationsOnly);
         
+        DECLSPEC_XFGVIRT(ISearchRoot, put_EnumerationDepth)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_EnumerationDepth )( 
             __RPC__in ISearchRoot * This,
             /* [in] */ DWORD dwDepth);
         
+        DECLSPEC_XFGVIRT(ISearchRoot, get_EnumerationDepth)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_EnumerationDepth )( 
             __RPC__in ISearchRoot * This,
             /* [retval][out] */ __RPC__out DWORD *pdwDepth);
         
+        DECLSPEC_XFGVIRT(ISearchRoot, put_HostDepth)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_HostDepth )( 
             __RPC__in ISearchRoot * This,
             /* [in] */ DWORD dwDepth);
         
+        DECLSPEC_XFGVIRT(ISearchRoot, get_HostDepth)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_HostDepth )( 
             __RPC__in ISearchRoot * This,
             /* [retval][out] */ __RPC__out DWORD *pdwDepth);
         
+        DECLSPEC_XFGVIRT(ISearchRoot, put_FollowDirectories)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_FollowDirectories )( 
             __RPC__in ISearchRoot * This,
             /* [in] */ BOOL fFollowDirectories);
         
+        DECLSPEC_XFGVIRT(ISearchRoot, get_FollowDirectories)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FollowDirectories )( 
             __RPC__in ISearchRoot * This,
             /* [retval][out] */ __RPC__out BOOL *pfFollowDirectories);
         
+        DECLSPEC_XFGVIRT(ISearchRoot, put_AuthenticationType)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_AuthenticationType )( 
             __RPC__in ISearchRoot * This,
             /* [in] */ AUTH_TYPE authType);
         
+        DECLSPEC_XFGVIRT(ISearchRoot, get_AuthenticationType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AuthenticationType )( 
             __RPC__in ISearchRoot * This,
             /* [retval][out] */ __RPC__out AUTH_TYPE *pAuthType);
         
+        DECLSPEC_XFGVIRT(ISearchRoot, put_User)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_User )( 
             __RPC__in ISearchRoot * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszUser);
         
+        DECLSPEC_XFGVIRT(ISearchRoot, get_User)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_User )( 
             __RPC__in ISearchRoot * This,
             /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *ppszUser);
         
+        DECLSPEC_XFGVIRT(ISearchRoot, put_Password)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Password )( 
             __RPC__in ISearchRoot * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPassword);
         
+        DECLSPEC_XFGVIRT(ISearchRoot, get_Password)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Password )( 
             __RPC__in ISearchRoot * This,
             /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *ppszPassword);
@@ -2211,6 +2352,7 @@ EXTERN_C const IID IID_IEnumSearchRoots;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumSearchRoots * This,
             /* [annotation][in] */ 
@@ -2218,25 +2360,31 @@ EXTERN_C const IID IID_IEnumSearchRoots;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumSearchRoots * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumSearchRoots * This);
         
+        DECLSPEC_XFGVIRT(IEnumSearchRoots, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumSearchRoots * This,
             /* [in] */ ULONG celt,
             /* [size_is][out] */ __RPC__out_ecount_full(celt) ISearchRoot **rgelt,
             /* [unique][out][in] */ __RPC__inout_opt ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IEnumSearchRoots, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumSearchRoots * This,
             /* [in] */ ULONG celt);
         
+        DECLSPEC_XFGVIRT(IEnumSearchRoots, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumSearchRoots * This);
         
+        DECLSPEC_XFGVIRT(IEnumSearchRoots, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumSearchRoots * This,
             /* [retval][out] */ __RPC__deref_out_opt IEnumSearchRoots **ppenum);
@@ -2338,6 +2486,7 @@ EXTERN_C const IID IID_ISearchScopeRule;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISearchScopeRule * This,
             /* [annotation][in] */ 
@@ -2345,24 +2494,30 @@ EXTERN_C const IID IID_ISearchScopeRule;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISearchScopeRule * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISearchScopeRule * This);
         
+        DECLSPEC_XFGVIRT(ISearchScopeRule, get_PatternOrURL)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PatternOrURL )( 
             __RPC__in ISearchScopeRule * This,
             /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *ppszPatternOrURL);
         
+        DECLSPEC_XFGVIRT(ISearchScopeRule, get_IsIncluded)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsIncluded )( 
             __RPC__in ISearchScopeRule * This,
             /* [retval][out] */ __RPC__out BOOL *pfIsIncluded);
         
+        DECLSPEC_XFGVIRT(ISearchScopeRule, get_IsDefault)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsDefault )( 
             __RPC__in ISearchScopeRule * This,
             /* [retval][out] */ __RPC__out BOOL *pfIsDefault);
         
+        DECLSPEC_XFGVIRT(ISearchScopeRule, get_FollowFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FollowFlags )( 
             __RPC__in ISearchScopeRule * This,
             /* [retval][out] */ __RPC__out DWORD *pFollowFlags);
@@ -2450,6 +2605,7 @@ EXTERN_C const IID IID_IEnumSearchScopeRules;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumSearchScopeRules * This,
             /* [annotation][in] */ 
@@ -2457,25 +2613,31 @@ EXTERN_C const IID IID_IEnumSearchScopeRules;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumSearchScopeRules * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumSearchScopeRules * This);
         
+        DECLSPEC_XFGVIRT(IEnumSearchScopeRules, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumSearchScopeRules * This,
             /* [in] */ ULONG celt,
             /* [size_is][out] */ __RPC__out_ecount_full(celt) ISearchScopeRule **pprgelt,
             /* [unique][out][in] */ __RPC__inout_opt ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IEnumSearchScopeRules, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumSearchScopeRules * This,
             /* [in] */ ULONG celt);
         
+        DECLSPEC_XFGVIRT(IEnumSearchScopeRules, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumSearchScopeRules * This);
         
+        DECLSPEC_XFGVIRT(IEnumSearchScopeRules, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumSearchScopeRules * This,
             /* [retval][out] */ __RPC__deref_out_opt IEnumSearchScopeRules **ppenum);
@@ -2627,6 +2789,7 @@ EXTERN_C const IID IID_ISearchCrawlScopeManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISearchCrawlScopeManager * This,
             /* [annotation][in] */ 
@@ -2634,30 +2797,37 @@ EXTERN_C const IID IID_ISearchCrawlScopeManager;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISearchCrawlScopeManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISearchCrawlScopeManager * This);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, AddDefaultScopeRule)
         HRESULT ( STDMETHODCALLTYPE *AddDefaultScopeRule )( 
             __RPC__in ISearchCrawlScopeManager * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszURL,
             /* [in] */ BOOL fInclude,
             /* [in] */ DWORD fFollowFlags);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, AddRoot)
         HRESULT ( STDMETHODCALLTYPE *AddRoot )( 
             __RPC__in ISearchCrawlScopeManager * This,
             /* [in] */ __RPC__in_opt ISearchRoot *pSearchRoot);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, RemoveRoot)
         HRESULT ( STDMETHODCALLTYPE *RemoveRoot )( 
             __RPC__in ISearchCrawlScopeManager * This,
             /* [in] */ __RPC__in LPCWSTR pszURL);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, EnumerateRoots)
         HRESULT ( STDMETHODCALLTYPE *EnumerateRoots )( 
             __RPC__in ISearchCrawlScopeManager * This,
             /* [retval][out] */ __RPC__deref_out_opt IEnumSearchRoots **ppSearchRoots);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, AddHierarchicalScope)
         HRESULT ( STDMETHODCALLTYPE *AddHierarchicalScope )( 
             __RPC__in ISearchCrawlScopeManager * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszURL,
@@ -2665,6 +2835,7 @@ EXTERN_C const IID IID_ISearchCrawlScopeManager;
             /* [in] */ BOOL fDefault,
             /* [in] */ BOOL fOverrideChildren);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, AddUserScopeRule)
         HRESULT ( STDMETHODCALLTYPE *AddUserScopeRule )( 
             __RPC__in ISearchCrawlScopeManager * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszURL,
@@ -2672,46 +2843,56 @@ EXTERN_C const IID IID_ISearchCrawlScopeManager;
             /* [in] */ BOOL fOverrideChildren,
             /* [in] */ DWORD fFollowFlags);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, RemoveScopeRule)
         HRESULT ( STDMETHODCALLTYPE *RemoveScopeRule )( 
             __RPC__in ISearchCrawlScopeManager * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszRule);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, EnumerateScopeRules)
         HRESULT ( STDMETHODCALLTYPE *EnumerateScopeRules )( 
             __RPC__in ISearchCrawlScopeManager * This,
             /* [retval][out] */ __RPC__deref_out_opt IEnumSearchScopeRules **ppSearchScopeRules);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, HasParentScopeRule)
         HRESULT ( STDMETHODCALLTYPE *HasParentScopeRule )( 
             __RPC__in ISearchCrawlScopeManager * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszURL,
             /* [retval][out] */ __RPC__out BOOL *pfHasParentRule);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, HasChildScopeRule)
         HRESULT ( STDMETHODCALLTYPE *HasChildScopeRule )( 
             __RPC__in ISearchCrawlScopeManager * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszURL,
             /* [retval][out] */ __RPC__out BOOL *pfHasChildRule);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, IncludedInCrawlScope)
         HRESULT ( STDMETHODCALLTYPE *IncludedInCrawlScope )( 
             __RPC__in ISearchCrawlScopeManager * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszURL,
             /* [retval][out] */ __RPC__out BOOL *pfIsIncluded);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, IncludedInCrawlScopeEx)
         HRESULT ( STDMETHODCALLTYPE *IncludedInCrawlScopeEx )( 
             __RPC__in ISearchCrawlScopeManager * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszURL,
             /* [out] */ __RPC__out BOOL *pfIsIncluded,
             /* [out] */ __RPC__out CLUSION_REASON *pReason);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, RevertToDefaultScopes)
         HRESULT ( STDMETHODCALLTYPE *RevertToDefaultScopes )( 
             __RPC__in ISearchCrawlScopeManager * This);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, SaveAll)
         HRESULT ( STDMETHODCALLTYPE *SaveAll )( 
             __RPC__in ISearchCrawlScopeManager * This);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, GetParentScopeVersionId)
         HRESULT ( STDMETHODCALLTYPE *GetParentScopeVersionId )( 
             __RPC__in ISearchCrawlScopeManager * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszURL,
             /* [retval][out] */ __RPC__out LONG *plScopeId);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, RemoveDefaultScopeRule)
         HRESULT ( STDMETHODCALLTYPE *RemoveDefaultScopeRule )( 
             __RPC__in ISearchCrawlScopeManager * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszURL);
@@ -2826,6 +3007,7 @@ EXTERN_C const IID IID_ISearchCrawlScopeManager2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISearchCrawlScopeManager2 * This,
             /* [annotation][in] */ 
@@ -2833,30 +3015,37 @@ EXTERN_C const IID IID_ISearchCrawlScopeManager2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISearchCrawlScopeManager2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISearchCrawlScopeManager2 * This);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, AddDefaultScopeRule)
         HRESULT ( STDMETHODCALLTYPE *AddDefaultScopeRule )( 
             __RPC__in ISearchCrawlScopeManager2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszURL,
             /* [in] */ BOOL fInclude,
             /* [in] */ DWORD fFollowFlags);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, AddRoot)
         HRESULT ( STDMETHODCALLTYPE *AddRoot )( 
             __RPC__in ISearchCrawlScopeManager2 * This,
             /* [in] */ __RPC__in_opt ISearchRoot *pSearchRoot);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, RemoveRoot)
         HRESULT ( STDMETHODCALLTYPE *RemoveRoot )( 
             __RPC__in ISearchCrawlScopeManager2 * This,
             /* [in] */ __RPC__in LPCWSTR pszURL);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, EnumerateRoots)
         HRESULT ( STDMETHODCALLTYPE *EnumerateRoots )( 
             __RPC__in ISearchCrawlScopeManager2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IEnumSearchRoots **ppSearchRoots);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, AddHierarchicalScope)
         HRESULT ( STDMETHODCALLTYPE *AddHierarchicalScope )( 
             __RPC__in ISearchCrawlScopeManager2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszURL,
@@ -2864,6 +3053,7 @@ EXTERN_C const IID IID_ISearchCrawlScopeManager2;
             /* [in] */ BOOL fDefault,
             /* [in] */ BOOL fOverrideChildren);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, AddUserScopeRule)
         HRESULT ( STDMETHODCALLTYPE *AddUserScopeRule )( 
             __RPC__in ISearchCrawlScopeManager2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszURL,
@@ -2871,50 +3061,61 @@ EXTERN_C const IID IID_ISearchCrawlScopeManager2;
             /* [in] */ BOOL fOverrideChildren,
             /* [in] */ DWORD fFollowFlags);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, RemoveScopeRule)
         HRESULT ( STDMETHODCALLTYPE *RemoveScopeRule )( 
             __RPC__in ISearchCrawlScopeManager2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszRule);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, EnumerateScopeRules)
         HRESULT ( STDMETHODCALLTYPE *EnumerateScopeRules )( 
             __RPC__in ISearchCrawlScopeManager2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IEnumSearchScopeRules **ppSearchScopeRules);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, HasParentScopeRule)
         HRESULT ( STDMETHODCALLTYPE *HasParentScopeRule )( 
             __RPC__in ISearchCrawlScopeManager2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszURL,
             /* [retval][out] */ __RPC__out BOOL *pfHasParentRule);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, HasChildScopeRule)
         HRESULT ( STDMETHODCALLTYPE *HasChildScopeRule )( 
             __RPC__in ISearchCrawlScopeManager2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszURL,
             /* [retval][out] */ __RPC__out BOOL *pfHasChildRule);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, IncludedInCrawlScope)
         HRESULT ( STDMETHODCALLTYPE *IncludedInCrawlScope )( 
             __RPC__in ISearchCrawlScopeManager2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszURL,
             /* [retval][out] */ __RPC__out BOOL *pfIsIncluded);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, IncludedInCrawlScopeEx)
         HRESULT ( STDMETHODCALLTYPE *IncludedInCrawlScopeEx )( 
             __RPC__in ISearchCrawlScopeManager2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszURL,
             /* [out] */ __RPC__out BOOL *pfIsIncluded,
             /* [out] */ __RPC__out CLUSION_REASON *pReason);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, RevertToDefaultScopes)
         HRESULT ( STDMETHODCALLTYPE *RevertToDefaultScopes )( 
             __RPC__in ISearchCrawlScopeManager2 * This);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, SaveAll)
         HRESULT ( STDMETHODCALLTYPE *SaveAll )( 
             __RPC__in ISearchCrawlScopeManager2 * This);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, GetParentScopeVersionId)
         HRESULT ( STDMETHODCALLTYPE *GetParentScopeVersionId )( 
             __RPC__in ISearchCrawlScopeManager2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszURL,
             /* [retval][out] */ __RPC__out LONG *plScopeId);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager, RemoveDefaultScopeRule)
         HRESULT ( STDMETHODCALLTYPE *RemoveDefaultScopeRule )( 
             __RPC__in ISearchCrawlScopeManager2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszURL);
         
+        DECLSPEC_XFGVIRT(ISearchCrawlScopeManager2, GetVersion)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetVersion )( 
             ISearchCrawlScopeManager2 * This,
             /* [out] */ long **plVersion,
@@ -3095,6 +3296,7 @@ EXTERN_C const IID IID_ISearchItemsChangedSink;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISearchItemsChangedSink * This,
             /* [annotation][in] */ 
@@ -3102,20 +3304,25 @@ EXTERN_C const IID IID_ISearchItemsChangedSink;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISearchItemsChangedSink * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISearchItemsChangedSink * This);
         
+        DECLSPEC_XFGVIRT(ISearchItemsChangedSink, StartedMonitoringScope)
         HRESULT ( STDMETHODCALLTYPE *StartedMonitoringScope )( 
             __RPC__in ISearchItemsChangedSink * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszURL);
         
+        DECLSPEC_XFGVIRT(ISearchItemsChangedSink, StoppedMonitoringScope)
         HRESULT ( STDMETHODCALLTYPE *StoppedMonitoringScope )( 
             __RPC__in ISearchItemsChangedSink * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszURL);
         
+        DECLSPEC_XFGVIRT(ISearchItemsChangedSink, OnItemsChanged)
         HRESULT ( STDMETHODCALLTYPE *OnItemsChanged )( 
             __RPC__in ISearchItemsChangedSink * This,
             /* [in] */ DWORD dwNumberOfChanges,
@@ -3209,6 +3416,7 @@ EXTERN_C const IID IID_ISearchPersistentItemsChangedSink;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISearchPersistentItemsChangedSink * This,
             /* [annotation][in] */ 
@@ -3216,20 +3424,25 @@ EXTERN_C const IID IID_ISearchPersistentItemsChangedSink;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISearchPersistentItemsChangedSink * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISearchPersistentItemsChangedSink * This);
         
+        DECLSPEC_XFGVIRT(ISearchPersistentItemsChangedSink, StartedMonitoringScope)
         HRESULT ( STDMETHODCALLTYPE *StartedMonitoringScope )( 
             __RPC__in ISearchPersistentItemsChangedSink * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszURL);
         
+        DECLSPEC_XFGVIRT(ISearchPersistentItemsChangedSink, StoppedMonitoringScope)
         HRESULT ( STDMETHODCALLTYPE *StoppedMonitoringScope )( 
             __RPC__in ISearchPersistentItemsChangedSink * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszURL);
         
+        DECLSPEC_XFGVIRT(ISearchPersistentItemsChangedSink, OnItemsChanged)
         HRESULT ( STDMETHODCALLTYPE *OnItemsChanged )( 
             __RPC__in ISearchPersistentItemsChangedSink * This,
             /* [in] */ DWORD dwNumberOfChanges,
@@ -3308,6 +3521,7 @@ EXTERN_C const IID IID_ISearchViewChangedSink;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISearchViewChangedSink * This,
             /* [annotation][in] */ 
@@ -3315,12 +3529,15 @@ EXTERN_C const IID IID_ISearchViewChangedSink;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISearchViewChangedSink * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISearchViewChangedSink * This);
         
+        DECLSPEC_XFGVIRT(ISearchViewChangedSink, OnChange)
         HRESULT ( STDMETHODCALLTYPE *OnChange )( 
             __RPC__in ISearchViewChangedSink * This,
             /* [in] */ __RPC__in ITEMID *pdwDocID,
@@ -3425,6 +3642,7 @@ EXTERN_C const IID IID_ISearchNotifyInlineSite;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISearchNotifyInlineSite * This,
             /* [annotation][in] */ 
@@ -3432,18 +3650,22 @@ EXTERN_C const IID IID_ISearchNotifyInlineSite;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISearchNotifyInlineSite * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISearchNotifyInlineSite * This);
         
+        DECLSPEC_XFGVIRT(ISearchNotifyInlineSite, OnItemIndexedStatusChange)
         HRESULT ( STDMETHODCALLTYPE *OnItemIndexedStatusChange )( 
             __RPC__in ISearchNotifyInlineSite * This,
             /* [in] */ SEARCH_INDEXING_PHASE sipStatus,
             /* [in] */ DWORD dwNumEntries,
             /* [size_is][in] */ __RPC__in_ecount_full(dwNumEntries) SEARCH_ITEM_INDEXING_STATUS rgItemStatusEntries[  ]);
         
+        DECLSPEC_XFGVIRT(ISearchNotifyInlineSite, OnCatalogStatusChange)
         HRESULT ( STDMETHODCALLTYPE *OnCatalogStatusChange )( 
             __RPC__in ISearchNotifyInlineSite * This,
             /* [in] */ __RPC__in REFGUID guidCatalogResetSignature,
@@ -3646,6 +3868,7 @@ EXTERN_C const IID IID_ISearchCatalogManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISearchCatalogManager * This,
             /* [annotation][in] */ 
@@ -3653,90 +3876,111 @@ EXTERN_C const IID IID_ISearchCatalogManager;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISearchCatalogManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISearchCatalogManager * This);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ISearchCatalogManager * This,
             /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *pszName);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, GetParameter)
         HRESULT ( STDMETHODCALLTYPE *GetParameter )( 
             __RPC__in ISearchCatalogManager * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszName,
             /* [retval][out] */ __RPC__deref_out_opt PROPVARIANT **ppValue);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, SetParameter)
         HRESULT ( STDMETHODCALLTYPE *SetParameter )( 
             __RPC__in ISearchCatalogManager * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszName,
             /* [in] */ __RPC__in PROPVARIANT *pValue);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, GetCatalogStatus)
         HRESULT ( STDMETHODCALLTYPE *GetCatalogStatus )( 
             __RPC__in ISearchCatalogManager * This,
             /* [out] */ __RPC__out CatalogStatus *pStatus,
             /* [out] */ __RPC__out CatalogPausedReason *pPausedReason);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in ISearchCatalogManager * This);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, Reindex)
         HRESULT ( STDMETHODCALLTYPE *Reindex )( 
             __RPC__in ISearchCatalogManager * This);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, ReindexMatchingURLs)
         HRESULT ( STDMETHODCALLTYPE *ReindexMatchingURLs )( 
             __RPC__in ISearchCatalogManager * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPattern);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, ReindexSearchRoot)
         HRESULT ( STDMETHODCALLTYPE *ReindexSearchRoot )( 
             __RPC__in ISearchCatalogManager * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszRootURL);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, put_ConnectTimeout)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ConnectTimeout )( 
             __RPC__in ISearchCatalogManager * This,
             /* [in] */ DWORD dwConnectTimeout);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, get_ConnectTimeout)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConnectTimeout )( 
             __RPC__in ISearchCatalogManager * This,
             /* [retval][out] */ __RPC__out DWORD *pdwConnectTimeout);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, put_DataTimeout)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_DataTimeout )( 
             __RPC__in ISearchCatalogManager * This,
             /* [in] */ DWORD dwDataTimeout);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, get_DataTimeout)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DataTimeout )( 
             __RPC__in ISearchCatalogManager * This,
             /* [retval][out] */ __RPC__out DWORD *pdwDataTimeout);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, NumberOfItems)
         HRESULT ( STDMETHODCALLTYPE *NumberOfItems )( 
             __RPC__in ISearchCatalogManager * This,
             /* [retval][out] */ __RPC__out LONG *plCount);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, NumberOfItemsToIndex)
         HRESULT ( STDMETHODCALLTYPE *NumberOfItemsToIndex )( 
             __RPC__in ISearchCatalogManager * This,
             /* [out] */ __RPC__out LONG *plIncrementalCount,
             /* [out] */ __RPC__out LONG *plNotificationQueue,
             /* [out] */ __RPC__out LONG *plHighPriorityQueue);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, URLBeingIndexed)
         HRESULT ( STDMETHODCALLTYPE *URLBeingIndexed )( 
             __RPC__in ISearchCatalogManager * This,
             /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *pszUrl);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, GetURLIndexingState)
         HRESULT ( STDMETHODCALLTYPE *GetURLIndexingState )( 
             __RPC__in ISearchCatalogManager * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszURL,
             /* [retval][out] */ __RPC__out DWORD *pdwState);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, GetPersistentItemsChangedSink)
         HRESULT ( STDMETHODCALLTYPE *GetPersistentItemsChangedSink )( 
             __RPC__in ISearchCatalogManager * This,
             /* [retval][out] */ __RPC__deref_out_opt ISearchPersistentItemsChangedSink **ppISearchPersistentItemsChangedSink);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, RegisterViewForNotification)
         HRESULT ( STDMETHODCALLTYPE *RegisterViewForNotification )( 
             __RPC__in ISearchCatalogManager * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszView,
             /* [in] */ __RPC__in_opt ISearchViewChangedSink *pViewChangedSink,
             /* [out] */ __RPC__out DWORD *pdwCookie);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, GetItemsChangedSink)
         HRESULT ( STDMETHODCALLTYPE *GetItemsChangedSink )( 
             __RPC__in ISearchCatalogManager * This,
             /* [in] */ __RPC__in_opt ISearchNotifyInlineSite *pISearchNotifyInlineSite,
@@ -3746,31 +3990,38 @@ EXTERN_C const IID IID_ISearchCatalogManager;
             /* [out] */ __RPC__out GUID *pGUIDCheckPointSignature,
             /* [out] */ __RPC__out DWORD *pdwLastCheckPointNumber);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, UnregisterViewForNotification)
         HRESULT ( STDMETHODCALLTYPE *UnregisterViewForNotification )( 
             __RPC__in ISearchCatalogManager * This,
             /* [in] */ DWORD dwCookie);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, SetExtensionClusion)
         HRESULT ( STDMETHODCALLTYPE *SetExtensionClusion )( 
             __RPC__in ISearchCatalogManager * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszExtension,
             /* [in] */ BOOL fExclude);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, EnumerateExcludedExtensions)
         HRESULT ( STDMETHODCALLTYPE *EnumerateExcludedExtensions )( 
             __RPC__in ISearchCatalogManager * This,
             /* [retval][out] */ __RPC__deref_out_opt IEnumString **ppExtensions);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, GetQueryHelper)
         HRESULT ( STDMETHODCALLTYPE *GetQueryHelper )( 
             __RPC__in ISearchCatalogManager * This,
             /* [retval][out] */ __RPC__deref_out_opt ISearchQueryHelper **ppSearchQueryHelper);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, put_DiacriticSensitivity)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_DiacriticSensitivity )( 
             __RPC__in ISearchCatalogManager * This,
             /* [in] */ BOOL fDiacriticSensitive);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, get_DiacriticSensitivity)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DiacriticSensitivity )( 
             __RPC__in ISearchCatalogManager * This,
             /* [retval][out] */ __RPC__out BOOL *pfDiacriticSensitive);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, GetCrawlScopeManager)
         HRESULT ( STDMETHODCALLTYPE *GetCrawlScopeManager )( 
             __RPC__in ISearchCatalogManager * This,
             /* [retval][out] */ __RPC__deref_out_opt ISearchCrawlScopeManager **ppCrawlScopeManager);
@@ -3931,6 +4182,7 @@ EXTERN_C const IID IID_ISearchCatalogManager2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISearchCatalogManager2 * This,
             /* [annotation][in] */ 
@@ -3938,90 +4190,111 @@ EXTERN_C const IID IID_ISearchCatalogManager2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISearchCatalogManager2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISearchCatalogManager2 * This);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ISearchCatalogManager2 * This,
             /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *pszName);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, GetParameter)
         HRESULT ( STDMETHODCALLTYPE *GetParameter )( 
             __RPC__in ISearchCatalogManager2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszName,
             /* [retval][out] */ __RPC__deref_out_opt PROPVARIANT **ppValue);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, SetParameter)
         HRESULT ( STDMETHODCALLTYPE *SetParameter )( 
             __RPC__in ISearchCatalogManager2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszName,
             /* [in] */ __RPC__in PROPVARIANT *pValue);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, GetCatalogStatus)
         HRESULT ( STDMETHODCALLTYPE *GetCatalogStatus )( 
             __RPC__in ISearchCatalogManager2 * This,
             /* [out] */ __RPC__out CatalogStatus *pStatus,
             /* [out] */ __RPC__out CatalogPausedReason *pPausedReason);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in ISearchCatalogManager2 * This);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, Reindex)
         HRESULT ( STDMETHODCALLTYPE *Reindex )( 
             __RPC__in ISearchCatalogManager2 * This);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, ReindexMatchingURLs)
         HRESULT ( STDMETHODCALLTYPE *ReindexMatchingURLs )( 
             __RPC__in ISearchCatalogManager2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPattern);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, ReindexSearchRoot)
         HRESULT ( STDMETHODCALLTYPE *ReindexSearchRoot )( 
             __RPC__in ISearchCatalogManager2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszRootURL);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, put_ConnectTimeout)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ConnectTimeout )( 
             __RPC__in ISearchCatalogManager2 * This,
             /* [in] */ DWORD dwConnectTimeout);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, get_ConnectTimeout)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConnectTimeout )( 
             __RPC__in ISearchCatalogManager2 * This,
             /* [retval][out] */ __RPC__out DWORD *pdwConnectTimeout);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, put_DataTimeout)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_DataTimeout )( 
             __RPC__in ISearchCatalogManager2 * This,
             /* [in] */ DWORD dwDataTimeout);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, get_DataTimeout)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DataTimeout )( 
             __RPC__in ISearchCatalogManager2 * This,
             /* [retval][out] */ __RPC__out DWORD *pdwDataTimeout);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, NumberOfItems)
         HRESULT ( STDMETHODCALLTYPE *NumberOfItems )( 
             __RPC__in ISearchCatalogManager2 * This,
             /* [retval][out] */ __RPC__out LONG *plCount);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, NumberOfItemsToIndex)
         HRESULT ( STDMETHODCALLTYPE *NumberOfItemsToIndex )( 
             __RPC__in ISearchCatalogManager2 * This,
             /* [out] */ __RPC__out LONG *plIncrementalCount,
             /* [out] */ __RPC__out LONG *plNotificationQueue,
             /* [out] */ __RPC__out LONG *plHighPriorityQueue);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, URLBeingIndexed)
         HRESULT ( STDMETHODCALLTYPE *URLBeingIndexed )( 
             __RPC__in ISearchCatalogManager2 * This,
             /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *pszUrl);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, GetURLIndexingState)
         HRESULT ( STDMETHODCALLTYPE *GetURLIndexingState )( 
             __RPC__in ISearchCatalogManager2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszURL,
             /* [retval][out] */ __RPC__out DWORD *pdwState);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, GetPersistentItemsChangedSink)
         HRESULT ( STDMETHODCALLTYPE *GetPersistentItemsChangedSink )( 
             __RPC__in ISearchCatalogManager2 * This,
             /* [retval][out] */ __RPC__deref_out_opt ISearchPersistentItemsChangedSink **ppISearchPersistentItemsChangedSink);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, RegisterViewForNotification)
         HRESULT ( STDMETHODCALLTYPE *RegisterViewForNotification )( 
             __RPC__in ISearchCatalogManager2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszView,
             /* [in] */ __RPC__in_opt ISearchViewChangedSink *pViewChangedSink,
             /* [out] */ __RPC__out DWORD *pdwCookie);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, GetItemsChangedSink)
         HRESULT ( STDMETHODCALLTYPE *GetItemsChangedSink )( 
             __RPC__in ISearchCatalogManager2 * This,
             /* [in] */ __RPC__in_opt ISearchNotifyInlineSite *pISearchNotifyInlineSite,
@@ -4031,35 +4304,43 @@ EXTERN_C const IID IID_ISearchCatalogManager2;
             /* [out] */ __RPC__out GUID *pGUIDCheckPointSignature,
             /* [out] */ __RPC__out DWORD *pdwLastCheckPointNumber);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, UnregisterViewForNotification)
         HRESULT ( STDMETHODCALLTYPE *UnregisterViewForNotification )( 
             __RPC__in ISearchCatalogManager2 * This,
             /* [in] */ DWORD dwCookie);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, SetExtensionClusion)
         HRESULT ( STDMETHODCALLTYPE *SetExtensionClusion )( 
             __RPC__in ISearchCatalogManager2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszExtension,
             /* [in] */ BOOL fExclude);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, EnumerateExcludedExtensions)
         HRESULT ( STDMETHODCALLTYPE *EnumerateExcludedExtensions )( 
             __RPC__in ISearchCatalogManager2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IEnumString **ppExtensions);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, GetQueryHelper)
         HRESULT ( STDMETHODCALLTYPE *GetQueryHelper )( 
             __RPC__in ISearchCatalogManager2 * This,
             /* [retval][out] */ __RPC__deref_out_opt ISearchQueryHelper **ppSearchQueryHelper);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, put_DiacriticSensitivity)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_DiacriticSensitivity )( 
             __RPC__in ISearchCatalogManager2 * This,
             /* [in] */ BOOL fDiacriticSensitive);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, get_DiacriticSensitivity)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DiacriticSensitivity )( 
             __RPC__in ISearchCatalogManager2 * This,
             /* [retval][out] */ __RPC__out BOOL *pfDiacriticSensitive);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager, GetCrawlScopeManager)
         HRESULT ( STDMETHODCALLTYPE *GetCrawlScopeManager )( 
             __RPC__in ISearchCatalogManager2 * This,
             /* [retval][out] */ __RPC__deref_out_opt ISearchCrawlScopeManager **ppCrawlScopeManager);
         
+        DECLSPEC_XFGVIRT(ISearchCatalogManager2, PrioritizeMatchingURLs)
         HRESULT ( STDMETHODCALLTYPE *PrioritizeMatchingURLs )( 
             __RPC__in ISearchCatalogManager2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPattern,
@@ -4308,6 +4589,7 @@ EXTERN_C const IID IID_ISearchQueryHelper;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISearchQueryHelper * This,
             /* [annotation][in] */ 
@@ -4315,85 +4597,106 @@ EXTERN_C const IID IID_ISearchQueryHelper;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISearchQueryHelper * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISearchQueryHelper * This);
         
+        DECLSPEC_XFGVIRT(ISearchQueryHelper, get_ConnectionString)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConnectionString )( 
             __RPC__in ISearchQueryHelper * This,
             /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *pszConnectionString);
         
+        DECLSPEC_XFGVIRT(ISearchQueryHelper, put_QueryContentLocale)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_QueryContentLocale )( 
             __RPC__in ISearchQueryHelper * This,
             /* [in] */ LCID lcid);
         
+        DECLSPEC_XFGVIRT(ISearchQueryHelper, get_QueryContentLocale)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_QueryContentLocale )( 
             __RPC__in ISearchQueryHelper * This,
             /* [retval][out] */ __RPC__out LCID *plcid);
         
+        DECLSPEC_XFGVIRT(ISearchQueryHelper, put_QueryKeywordLocale)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_QueryKeywordLocale )( 
             __RPC__in ISearchQueryHelper * This,
             /* [in] */ LCID lcid);
         
+        DECLSPEC_XFGVIRT(ISearchQueryHelper, get_QueryKeywordLocale)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_QueryKeywordLocale )( 
             __RPC__in ISearchQueryHelper * This,
             /* [retval][out] */ __RPC__out LCID *plcid);
         
+        DECLSPEC_XFGVIRT(ISearchQueryHelper, put_QueryTermExpansion)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_QueryTermExpansion )( 
             __RPC__in ISearchQueryHelper * This,
             /* [in] */ SEARCH_TERM_EXPANSION expandTerms);
         
+        DECLSPEC_XFGVIRT(ISearchQueryHelper, get_QueryTermExpansion)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_QueryTermExpansion )( 
             __RPC__in ISearchQueryHelper * This,
             /* [retval][out] */ __RPC__out SEARCH_TERM_EXPANSION *pExpandTerms);
         
+        DECLSPEC_XFGVIRT(ISearchQueryHelper, put_QuerySyntax)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_QuerySyntax )( 
             __RPC__in ISearchQueryHelper * This,
             /* [in] */ SEARCH_QUERY_SYNTAX querySyntax);
         
+        DECLSPEC_XFGVIRT(ISearchQueryHelper, get_QuerySyntax)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuerySyntax )( 
             __RPC__in ISearchQueryHelper * This,
             /* [retval][out] */ __RPC__out SEARCH_QUERY_SYNTAX *pQuerySyntax);
         
+        DECLSPEC_XFGVIRT(ISearchQueryHelper, put_QueryContentProperties)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_QueryContentProperties )( 
             __RPC__in ISearchQueryHelper * This,
             /* [unique][string][in] */ __RPC__in_opt_string LPCWSTR pszContentProperties);
         
+        DECLSPEC_XFGVIRT(ISearchQueryHelper, get_QueryContentProperties)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_QueryContentProperties )( 
             __RPC__in ISearchQueryHelper * This,
             /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszContentProperties);
         
+        DECLSPEC_XFGVIRT(ISearchQueryHelper, put_QuerySelectColumns)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_QuerySelectColumns )( 
             __RPC__in ISearchQueryHelper * This,
             /* [unique][string][in] */ __RPC__in_opt_string LPCWSTR pszSelectColumns);
         
+        DECLSPEC_XFGVIRT(ISearchQueryHelper, get_QuerySelectColumns)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuerySelectColumns )( 
             __RPC__in ISearchQueryHelper * This,
             /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszSelectColumns);
         
+        DECLSPEC_XFGVIRT(ISearchQueryHelper, put_QueryWhereRestrictions)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_QueryWhereRestrictions )( 
             __RPC__in ISearchQueryHelper * This,
             /* [unique][string][in] */ __RPC__in_opt_string LPCWSTR pszRestrictions);
         
+        DECLSPEC_XFGVIRT(ISearchQueryHelper, get_QueryWhereRestrictions)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_QueryWhereRestrictions )( 
             __RPC__in ISearchQueryHelper * This,
             /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszRestrictions);
         
+        DECLSPEC_XFGVIRT(ISearchQueryHelper, put_QuerySorting)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_QuerySorting )( 
             __RPC__in ISearchQueryHelper * This,
             /* [unique][string][in] */ __RPC__in_opt_string LPCWSTR pszSorting);
         
+        DECLSPEC_XFGVIRT(ISearchQueryHelper, get_QuerySorting)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuerySorting )( 
             __RPC__in ISearchQueryHelper * This,
             /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszSorting);
         
+        DECLSPEC_XFGVIRT(ISearchQueryHelper, GenerateSQLFromUserQuery)
         HRESULT ( STDMETHODCALLTYPE *GenerateSQLFromUserQuery )( 
             __RPC__in ISearchQueryHelper * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszQuery,
             /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *ppszSQL);
         
+        DECLSPEC_XFGVIRT(ISearchQueryHelper, WriteProperties)
         HRESULT ( STDMETHODCALLTYPE *WriteProperties )( 
             __RPC__in ISearchQueryHelper * This,
             /* [in] */ ITEMID itemID,
@@ -4402,10 +4705,12 @@ EXTERN_C const IID IID_ISearchQueryHelper;
             /* [size_is][in] */ __RPC__in_ecount_full(dwNumberOfColumns) SEARCH_COLUMN_PROPERTIES *pValues,
             /* [unique][in] */ __RPC__in_opt FILETIME *pftGatherModifiedTime);
         
+        DECLSPEC_XFGVIRT(ISearchQueryHelper, put_QueryMaxResults)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_QueryMaxResults )( 
             __RPC__in ISearchQueryHelper * This,
             /* [in] */ LONG cMaxResults);
         
+        DECLSPEC_XFGVIRT(ISearchQueryHelper, get_QueryMaxResults)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_QueryMaxResults )( 
             __RPC__in ISearchQueryHelper * This,
             /* [retval][out] */ __RPC__out LONG *pcMaxResults);
@@ -4561,6 +4866,7 @@ EXTERN_C const IID IID_IRowsetPrioritization;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRowsetPrioritization * This,
             /* [annotation][in] */ 
@@ -4568,22 +4874,27 @@ EXTERN_C const IID IID_IRowsetPrioritization;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IRowsetPrioritization * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IRowsetPrioritization * This);
         
+        DECLSPEC_XFGVIRT(IRowsetPrioritization, SetScopePriority)
         HRESULT ( STDMETHODCALLTYPE *SetScopePriority )( 
             __RPC__in IRowsetPrioritization * This,
             /* [in] */ PRIORITY_LEVEL priority,
             /* [in] */ DWORD scopeStatisticsEventFrequency);
         
+        DECLSPEC_XFGVIRT(IRowsetPrioritization, GetScopePriority)
         HRESULT ( STDMETHODCALLTYPE *GetScopePriority )( 
             __RPC__in IRowsetPrioritization * This,
             /* [out] */ __RPC__out PRIORITY_LEVEL *priority,
             /* [out] */ __RPC__out DWORD *scopeStatisticsEventFrequency);
         
+        DECLSPEC_XFGVIRT(IRowsetPrioritization, GetScopeStatistics)
         HRESULT ( STDMETHODCALLTYPE *GetScopeStatistics )( 
             __RPC__in IRowsetPrioritization * This,
             /* [out] */ __RPC__out DWORD *indexedDocumentCount,
@@ -4698,6 +5009,7 @@ EXTERN_C const IID IID_IRowsetEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRowsetEvents * This,
             /* [annotation][in] */ 
@@ -4705,28 +5017,34 @@ EXTERN_C const IID IID_IRowsetEvents;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IRowsetEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IRowsetEvents * This);
         
+        DECLSPEC_XFGVIRT(IRowsetEvents, OnNewItem)
         HRESULT ( STDMETHODCALLTYPE *OnNewItem )( 
             __RPC__in IRowsetEvents * This,
             /* [in] */ __RPC__in REFPROPVARIANT itemID,
             /* [in] */ ROWSETEVENT_ITEMSTATE newItemState);
         
+        DECLSPEC_XFGVIRT(IRowsetEvents, OnChangedItem)
         HRESULT ( STDMETHODCALLTYPE *OnChangedItem )( 
             __RPC__in IRowsetEvents * This,
             /* [in] */ __RPC__in REFPROPVARIANT itemID,
             /* [in] */ ROWSETEVENT_ITEMSTATE rowsetItemState,
             /* [in] */ ROWSETEVENT_ITEMSTATE changedItemState);
         
+        DECLSPEC_XFGVIRT(IRowsetEvents, OnDeletedItem)
         HRESULT ( STDMETHODCALLTYPE *OnDeletedItem )( 
             __RPC__in IRowsetEvents * This,
             /* [in] */ __RPC__in REFPROPVARIANT itemID,
             /* [in] */ ROWSETEVENT_ITEMSTATE deletedItemState);
         
+        DECLSPEC_XFGVIRT(IRowsetEvents, OnRowsetEvent)
         HRESULT ( STDMETHODCALLTYPE *OnRowsetEvent )( 
             __RPC__in IRowsetEvents * This,
             /* [in] */ ROWSETEVENT_TYPE eventType,
@@ -4862,6 +5180,7 @@ EXTERN_C const IID IID_ISearchManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISearchManager * This,
             /* [annotation][in] */ 
@@ -4869,39 +5188,48 @@ EXTERN_C const IID IID_ISearchManager;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISearchManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISearchManager * This);
         
+        DECLSPEC_XFGVIRT(ISearchManager, GetIndexerVersionStr)
         HRESULT ( STDMETHODCALLTYPE *GetIndexerVersionStr )( 
             __RPC__in ISearchManager * This,
             /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszVersionString);
         
+        DECLSPEC_XFGVIRT(ISearchManager, GetIndexerVersion)
         HRESULT ( STDMETHODCALLTYPE *GetIndexerVersion )( 
             __RPC__in ISearchManager * This,
             /* [out] */ __RPC__out DWORD *pdwMajor,
             /* [out] */ __RPC__out DWORD *pdwMinor);
         
+        DECLSPEC_XFGVIRT(ISearchManager, GetParameter)
         HRESULT ( STDMETHODCALLTYPE *GetParameter )( 
             __RPC__in ISearchManager * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszName,
             /* [retval][out] */ __RPC__deref_out_opt PROPVARIANT **ppValue);
         
+        DECLSPEC_XFGVIRT(ISearchManager, SetParameter)
         HRESULT ( STDMETHODCALLTYPE *SetParameter )( 
             __RPC__in ISearchManager * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszName,
             /* [in] */ __RPC__in const PROPVARIANT *pValue);
         
+        DECLSPEC_XFGVIRT(ISearchManager, get_ProxyName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProxyName )( 
             __RPC__in ISearchManager * This,
             /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *ppszProxyName);
         
+        DECLSPEC_XFGVIRT(ISearchManager, get_BypassList)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_BypassList )( 
             __RPC__in ISearchManager * This,
             /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *ppszBypassList);
         
+        DECLSPEC_XFGVIRT(ISearchManager, SetProxy)
         HRESULT ( STDMETHODCALLTYPE *SetProxy )( 
             __RPC__in ISearchManager * This,
             /* [in] */ PROXY_ACCESS sUseProxy,
@@ -4910,27 +5238,33 @@ EXTERN_C const IID IID_ISearchManager;
             /* [string][in] */ __RPC__in_string LPCWSTR pszProxyName,
             /* [string][in] */ __RPC__in_string LPCWSTR pszByPassList);
         
+        DECLSPEC_XFGVIRT(ISearchManager, GetCatalog)
         HRESULT ( STDMETHODCALLTYPE *GetCatalog )( 
             __RPC__in ISearchManager * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszCatalog,
             /* [retval][out] */ __RPC__deref_out_opt ISearchCatalogManager **ppCatalogManager);
         
+        DECLSPEC_XFGVIRT(ISearchManager, get_UserAgent)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserAgent )( 
             __RPC__in ISearchManager * This,
             /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *ppszUserAgent);
         
+        DECLSPEC_XFGVIRT(ISearchManager, put_UserAgent)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_UserAgent )( 
             __RPC__in ISearchManager * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszUserAgent);
         
+        DECLSPEC_XFGVIRT(ISearchManager, get_UseProxy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UseProxy )( 
             __RPC__in ISearchManager * This,
             /* [retval][out] */ __RPC__out PROXY_ACCESS *pUseProxy);
         
+        DECLSPEC_XFGVIRT(ISearchManager, get_LocalBypass)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LocalBypass )( 
             __RPC__in ISearchManager * This,
             /* [retval][out] */ __RPC__out BOOL *pfLocalBypass);
         
+        DECLSPEC_XFGVIRT(ISearchManager, get_PortNumber)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PortNumber )( 
             __RPC__in ISearchManager * This,
             /* [retval][out] */ __RPC__out DWORD *pdwPortNumber);
@@ -5039,6 +5373,7 @@ EXTERN_C const IID IID_ISearchManager2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISearchManager2 * This,
             /* [annotation][in] */ 
@@ -5046,39 +5381,48 @@ EXTERN_C const IID IID_ISearchManager2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISearchManager2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISearchManager2 * This);
         
+        DECLSPEC_XFGVIRT(ISearchManager, GetIndexerVersionStr)
         HRESULT ( STDMETHODCALLTYPE *GetIndexerVersionStr )( 
             __RPC__in ISearchManager2 * This,
             /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszVersionString);
         
+        DECLSPEC_XFGVIRT(ISearchManager, GetIndexerVersion)
         HRESULT ( STDMETHODCALLTYPE *GetIndexerVersion )( 
             __RPC__in ISearchManager2 * This,
             /* [out] */ __RPC__out DWORD *pdwMajor,
             /* [out] */ __RPC__out DWORD *pdwMinor);
         
+        DECLSPEC_XFGVIRT(ISearchManager, GetParameter)
         HRESULT ( STDMETHODCALLTYPE *GetParameter )( 
             __RPC__in ISearchManager2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszName,
             /* [retval][out] */ __RPC__deref_out_opt PROPVARIANT **ppValue);
         
+        DECLSPEC_XFGVIRT(ISearchManager, SetParameter)
         HRESULT ( STDMETHODCALLTYPE *SetParameter )( 
             __RPC__in ISearchManager2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszName,
             /* [in] */ __RPC__in const PROPVARIANT *pValue);
         
+        DECLSPEC_XFGVIRT(ISearchManager, get_ProxyName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProxyName )( 
             __RPC__in ISearchManager2 * This,
             /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *ppszProxyName);
         
+        DECLSPEC_XFGVIRT(ISearchManager, get_BypassList)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_BypassList )( 
             __RPC__in ISearchManager2 * This,
             /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *ppszBypassList);
         
+        DECLSPEC_XFGVIRT(ISearchManager, SetProxy)
         HRESULT ( STDMETHODCALLTYPE *SetProxy )( 
             __RPC__in ISearchManager2 * This,
             /* [in] */ PROXY_ACCESS sUseProxy,
@@ -5087,36 +5431,44 @@ EXTERN_C const IID IID_ISearchManager2;
             /* [string][in] */ __RPC__in_string LPCWSTR pszProxyName,
             /* [string][in] */ __RPC__in_string LPCWSTR pszByPassList);
         
+        DECLSPEC_XFGVIRT(ISearchManager, GetCatalog)
         HRESULT ( STDMETHODCALLTYPE *GetCatalog )( 
             __RPC__in ISearchManager2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszCatalog,
             /* [retval][out] */ __RPC__deref_out_opt ISearchCatalogManager **ppCatalogManager);
         
+        DECLSPEC_XFGVIRT(ISearchManager, get_UserAgent)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserAgent )( 
             __RPC__in ISearchManager2 * This,
             /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *ppszUserAgent);
         
+        DECLSPEC_XFGVIRT(ISearchManager, put_UserAgent)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_UserAgent )( 
             __RPC__in ISearchManager2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszUserAgent);
         
+        DECLSPEC_XFGVIRT(ISearchManager, get_UseProxy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UseProxy )( 
             __RPC__in ISearchManager2 * This,
             /* [retval][out] */ __RPC__out PROXY_ACCESS *pUseProxy);
         
+        DECLSPEC_XFGVIRT(ISearchManager, get_LocalBypass)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LocalBypass )( 
             __RPC__in ISearchManager2 * This,
             /* [retval][out] */ __RPC__out BOOL *pfLocalBypass);
         
+        DECLSPEC_XFGVIRT(ISearchManager, get_PortNumber)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PortNumber )( 
             __RPC__in ISearchManager2 * This,
             /* [retval][out] */ __RPC__out DWORD *pdwPortNumber);
         
+        DECLSPEC_XFGVIRT(ISearchManager2, CreateCatalog)
         HRESULT ( STDMETHODCALLTYPE *CreateCatalog )( 
             __RPC__in ISearchManager2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszCatalog,
             /* [out] */ __RPC__deref_out_opt ISearchCatalogManager **ppCatalogManager);
         
+        DECLSPEC_XFGVIRT(ISearchManager2, DeleteCatalog)
         HRESULT ( STDMETHODCALLTYPE *DeleteCatalog )( 
             __RPC__in ISearchManager2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszCatalog);
@@ -5268,6 +5620,7 @@ EXTERN_C const IID IID_ISearchLanguageSupport;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISearchLanguageSupport * This,
             /* [annotation][in] */ 
@@ -5275,20 +5628,25 @@ EXTERN_C const IID IID_ISearchLanguageSupport;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISearchLanguageSupport * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISearchLanguageSupport * This);
         
+        DECLSPEC_XFGVIRT(ISearchLanguageSupport, SetDiacriticSensitivity)
         HRESULT ( STDMETHODCALLTYPE *SetDiacriticSensitivity )( 
             __RPC__in ISearchLanguageSupport * This,
             /* [in] */ BOOL fDiacriticSensitive);
         
+        DECLSPEC_XFGVIRT(ISearchLanguageSupport, GetDiacriticSensitivity)
         HRESULT ( STDMETHODCALLTYPE *GetDiacriticSensitivity )( 
             __RPC__in ISearchLanguageSupport * This,
             /* [retval][out] */ __RPC__out BOOL *pfDiacriticSensitive);
         
+        DECLSPEC_XFGVIRT(ISearchLanguageSupport, LoadWordBreaker)
         HRESULT ( STDMETHODCALLTYPE *LoadWordBreaker )( 
             __RPC__in ISearchLanguageSupport * This,
             /* [in] */ LCID lcid,
@@ -5296,6 +5654,7 @@ EXTERN_C const IID IID_ISearchLanguageSupport;
             /* [iid_is][out] */ __RPC__deref_out_opt void **ppWordBreaker,
             /* [out] */ __RPC__out LCID *pLcidUsed);
         
+        DECLSPEC_XFGVIRT(ISearchLanguageSupport, LoadStemmer)
         HRESULT ( STDMETHODCALLTYPE *LoadStemmer )( 
             __RPC__in ISearchLanguageSupport * This,
             /* [in] */ LCID lcid,
@@ -5303,6 +5662,7 @@ EXTERN_C const IID IID_ISearchLanguageSupport;
             /* [iid_is][out] */ __RPC__deref_out_opt void **ppStemmer,
             /* [out] */ __RPC__out LCID *pLcidUsed);
         
+        DECLSPEC_XFGVIRT(ISearchLanguageSupport, IsPrefixNormalized)
         HRESULT ( STDMETHODCALLTYPE *IsPrefixNormalized )( 
             __RPC__in ISearchLanguageSupport * This,
             /* [size_is][in] */ __RPC__in_ecount_full(cwcQueryToken) LPCWSTR pwcsQueryToken,

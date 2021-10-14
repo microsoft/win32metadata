@@ -77,7 +77,7 @@ extern "C" {
 /* Missing from RTM sal.h */
 #define __inner_bound                     _SAL_L_Source_(__inner_bound, (), _SA_annotes0(SAL_bound))
 #define __inner_range(lb,ub)              _SAL_L_Source_(__inner_range, (lb,ub), _SA_annotes2(SAL_range,lb,ub))
-#define __inner_assume_bound_dec          __inline __nothrow void __AssumeBoundInt(_Post_ __inner_bound int i) {i;}
+#define __inner_assume_bound_dec          __inline __nothrow void __AssumeBoundInt(_Post_ __inner_bound int i) {(void)i;}
 #define __inner_assume_bound(i)           __AssumeBoundInt(i);
 #define __inner_allocator                 _SAL_L_Source_(__inner_allocater, (), _SA_annotes0(SAL_allocator))
 
@@ -235,7 +235,7 @@ __ANNOTATION(SAL_failureDefault(enum __SAL_failureKind));
 #define __inner_this_data_source(src_raw)   _SAL_L_Source_(__inner_this_data_source, (src_raw),  _SA_annotes1(SAL_untrusted_data_source_this,src_raw))
 #define __inner_out_validated(typ_raw)      _SAL_L_Source_(__inner_out_validated, (typ_raw),  _Post_ _SA_annotes1(SAL_validated,typ_raw))
 #define __inner_this_out_validated(typ_raw) _SAL_L_Source_(__inner_this_out_validated, (typ_raw),  _SA_annotes1(SAL_validated_this,typ_raw))
-#define __inner_assume_validated_dec        __inline __nothrow void __AssumeValidated(__inner_out_validated("BY_DESIGN") const void *p) {p;}
+#define __inner_assume_validated_dec        __inline __nothrow void __AssumeValidated(__inner_out_validated("BY_DESIGN") const void *p) {(void)p;}
 #define __inner_assume_validated(p)         __AssumeValidated(p)
 #define __inner_transfer(formal)            _SAL_L_Source_(__inner_transfer, (formal),  _SA_annotes1(SAL_transfer_adt_property_from,formal))
 #define __inner_encoded                     _SAL_L_Source_(__inner_encoded, (),  _SA_annotes0(SAL_encoded))

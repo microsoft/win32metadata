@@ -16,5 +16,17 @@
 <IncludeRoot>/um/LMSvc.h
 <IncludeRoot>/um/LMUse.h
 <IncludeRoot>/um/lmwksta.h
+<IncludeRoot>/shared/netevent.h
+<IncludeRoot>/shared/nettypes.h
+<IncludeRoot>/um/lm.h
+<IncludeRoot>/um/lmrepl.h
+<IncludeRoot>/um/lmsname.h
+<IncludeRoot>/um/lmuseflg.h
+<IncludeRoot>/um/netcfgn.h
+<IncludeRoot>/um/netcfgx.h
+<IncludeRoot>/um/netprov.h
+<IncludeRoot>/um/routprot.h
+<IncludeRoot>/um/rtinfo.h
+<IncludeRoot>/um/rtutils.h
 --namespace
 Windows.Win32.NetworkManagement.NetManagement

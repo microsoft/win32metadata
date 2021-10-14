@@ -1,14 +1,34 @@
+. "$PSScriptRoot\CommonUtils.ps1"
 
-param
-(
-    [Parameter(Mandatory=$true)]
-    [string]
-    $sdkBinDir,
+if (Test-Path $recompiledIdlHeadersDir)
+{
+    Remove-Item $recompiledIdlHeadersDir -recurse
+}
 
-    [Parameter(Mandatory=$true)]
-    [string]
-    $includeDir
-)
+Create-Directory $recompiledIdlHeadersDir
+
+$cppPkgPath = Get-WinSdkCppPkgPath
+$sdkIncludeDir = (Get-ChildItem -Path "$cppPkgPath\c\include").FullName
+
+if (!(Test-Path -path $sdkIncludeDir))
+{
+    Write-Output "Error: Couldn't find $sdkIncludeDir."
+    exit -1
+}
+
+Write-Output "Copying headers from Win SDK...$sdkIncludeDir to $recompiledIdlHeadersDir"
+copy-item -Path "$sdkIncludeDir\um" -destination "$recompiledIdlHeadersDir" -recurse
+copy-item -Path "$sdkIncludeDir\shared" -destination "$recompiledIdlHeadersDir" -recurse
+copy-item -Path "$sdkIncludeDir\winrt" -destination "$recompiledIdlHeadersDir" -recurse
+copy-item -Path "$sdkIncludeDir\ucrt" -destination "$recompiledIdlHeadersDir" -recurse
+
+Write-Output "Recompiling midl headers with SAL annotations in $recompiledIdlHeadersDir"
+
+$version = [System.IO.Path]::GetFileName($cppPkgPath)
+$sdkParts = $version.Split('.')
+$sdkVersion = "$($sdkParts[0]).$($sdkParts[1]).$($sdkParts[2]).0"
+
+$sdkBinDir = "$cppPkgPath\c\bin\$sdkVersion\x86"
 
 if (!(Test-Path -path $sdkBinDir))
 {
@@ -16,15 +36,7 @@ if (!(Test-Path -path $sdkBinDir))
     exit -1
 }
 
-if (!(Test-Path -path $includeDir))
-{
-    Write-Output "Error: Couldn't find $includeDir."
-    exit -1
-}
-
-. "$PSScriptRoot\CommonUtils.ps1"
-
-$scratchDir = "$artifactsDir\RecompileIdlScratch"
+$scratchDir = "$rootDir\obj\RecompileIdlScratch"
 if (Test-Path -path $scratchDir)
 {
     Remove-Item $scratchDir -r
@@ -51,7 +63,7 @@ if ($throttleCount -lt 2)
 
 Write-Output "Updating annotations in idl files..."
 
-$idlFiles = Get-ChildItem "$includeDir\um\*.idl","$includeDir\shared\*.idl"
+$idlFiles = Get-ChildItem "$sdkIncludeDir\um\*.idl","$sdkIncludeDir\shared\*.idl"
 $foundIdlFiles = [System.Collections.ArrayList]@()
 foreach ($idlFile in $idlFiles)    
 {
@@ -72,12 +84,18 @@ foreach ($idlFile in $idlFiles)
         continue
     }
 
+    #if (!$idlFile.FullName.Contains("mfvirtualcamera"))
+    #{
+    #    continue
+    #}
+
     $fixedIdlFile =  "$scratchDir\$($idlFile.Name)"
     & $PSScriptRoot\ConvertMidlAttributesToSalAnnotations.ps1 -inputFileName $idlFile.FullName -outputFileName $fixedIdlFile
 
     [void]$foundIdlFiles.Add($idlFile)
 }
 
+$ErrorActionPreference = "Continue"
 $foundIdlFiles | ForEach-Object -Parallel {
     $idlFile = $_
  
@@ -88,7 +106,7 @@ $foundIdlFiles | ForEach-Object -Parallel {
     $inputFileName = $fixedIdlFile.ToLowerInvariant()
     $outputHeader = "$using:scratchDir\$($idlFile.BaseName).h".ToLowerInvariant()
     $outputLog = "$using:scratchDir\$($idlFile.BaseName).txt"
-    & "$using:midl" $inputFileName /out $using:scratchDir /header $outputHeader /no_warn /DUNICODE /D_UNICODE /DWINVER=0x0A00 -D_APISET_MINWIN_VERSION=0x010F /DNTDDI_VERSION=0x0A00000B /DBUILD_UMS_ENABLED=0 /DBUILD_WOW64_ENABLED=0 /DBUILD_ARM64X_ENABLED=0 /DEXECUTABLE_WRITES_SUPPORT=0 -D_USE_DECLSPECS_FOR_SAL=1 -D_CONTROL_FLOW_GUARD_SVCTAB=1  /Di386 /D_X86_ /D_WCHAR_T_DEFINED /no_stamp /nologo  /no_settings_comment /lcid 1033 -sal /win32 -target NT100 /Zp8 /I$using:scratchDir /I$using:includeDir\um /I$using:includeDir\shared /I$using:includeDir\winrt /I$using:extraIncPath 3>&1 2>&1 > $outputLog
+    & "$using:midl" $inputFileName /out $using:scratchDir /header $outputHeader /no_warn /DUNICODE /D_UNICODE /DWINVER=0x0A00 -D_APISET_MINWIN_VERSION=0x010F /DNTDDI_VERSION=0x0A00000B /DBUILD_UMS_ENABLED=0 /DBUILD_WOW64_ENABLED=0 /DBUILD_ARM64X_ENABLED=0 /DEXECUTABLE_WRITES_SUPPORT=0 -D_USE_DECLSPECS_FOR_SAL=1 -D_CONTROL_FLOW_GUARD_SVCTAB=1 -DMIDL_PASS=1 /Di386 /D_X86_ /D_WCHAR_T_DEFINED /no_stamp /nologo  /no_settings_comment /lcid 1033 -sal /win32 -target NT100 /Zp8 /I$using:scratchDir /I$using:sdkIncludeDir\um /I$using:sdkIncludeDir\shared /I$using:sdkIncludeDir\winrt /I$using:extraIncPath 3>&1 2>&1 > $outputLog
     if ($LASTEXITCODE -ne 0)
     {
         $outText = "Failed for $($idlFile.FullName)`r`n"
@@ -108,3 +126,4 @@ $foundIdlFiles | ForEach-Object -Parallel {
         Copy-Item -Path $outputHeader -Destination $origHeader
     }
 } -ThrottleLimit $throttleCount
+$ErrorActionPreference = "Stop"

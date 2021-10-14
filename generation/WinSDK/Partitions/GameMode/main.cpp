@@ -7,3 +7,4 @@
 #include <sdkddkver.h>
 
 #include <expandedresources.h>
+#include <gameux.h>

@@ -10,8 +10,6 @@
 #pragma region Desktop Family or AppRuntime Package
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_APPRUNTIME)
 
-#define FW_BITMAP_INDEX_FULL  ((UINT8)~(0))
-
 
 
 #if (NTDDI_VERSION >= NTDDI_WIN6)
@@ -1024,8 +1022,52 @@ DEFINE_GUID(
 
 #endif // (NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
 
-#endif // (NTDDI_VERSION >= NTDDI_WIN8)
+// B3CDD441-AF90-41BA-A745-7C6008FF2300
+DEFINE_GUID(
+   FWPM_SUBLAYER_MPSSVC_WSH,
+   0xb3cdd441,
+   0xaf90,
+   0x41ba,
+   0xa7, 0x45, 0x7c, 0x60, 0x08, 0xff, 0x23, 0x00
+);
 
+// B3CDD441-AF90-41BA-A745-7C6008FF2301
+DEFINE_GUID(
+   FWPM_SUBLAYER_MPSSVC_WF,
+   0xb3cdd441,
+   0xaf90,
+   0x41ba,
+   0xa7, 0x45, 0x7c, 0x60, 0x08, 0xff, 0x23, 0x01
+);
+
+// B3CDD441-AF90-41BA-A745-7C6008FF2302
+DEFINE_GUID(
+   FWPM_SUBLAYER_MPSSVC_QUARANTINE,
+   0xb3cdd441,
+   0xaf90,
+   0x41ba,
+   0xa7, 0x45, 0x7c, 0x60, 0x08, 0xff, 0x23, 0x02
+);
+
+// 09A47E38-FA97-471B-B12318BCD7E65071
+DEFINE_GUID(
+   FWPM_SUBLAYER_MPSSVC_EDP,
+   0x09a47e38,
+   0xfa97,
+   0x471b,
+   0xb1, 0x23, 0x18, 0xbc, 0xd7, 0xe6, 0x50, 0x71
+);
+
+// 1EC6C7E1-FDD9-478A-B55F-FF8BA1D2C17D
+DEFINE_GUID(
+   FWPM_SUBLAYER_MPSSVC_TENANT_RESTRICTIONS,
+   0x1ec6c7e1,
+   0xfdd9,
+   0x478a,
+   0xb5, 0x5f, 0xff, 0x8b, 0xa1, 0xd2, 0xc1, 0x7d
+);
+
+#endif // (NTDDI_VERSION >= NTDDI_WIN8)
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -1371,38 +1413,6 @@ DEFINE_GUID(
    0xb9, 0xef, 0x76, 0xbe, 0xaa, 0xaf, 0x17, 0xee
 );
 
-// {16EBC3DF-957A-452E-A1FC-3D2FF6A730BA}
-DEFINE_GUID(FWPM_CONDITION_BITMAP_IP_LOCAL_ADDRESS,
-   0x16ebc3df,
-   0x957a,
-   0x452e,
-   0xa1, 0xfc, 0x3d, 0x2f, 0xf6, 0xa7, 0x30, 0xba
-);
-
-// {9F90A920-C3B5-4569-BA31-8BD3910DC656}
-DEFINE_GUID(FWPM_CONDITION_BITMAP_IP_LOCAL_PORT,
-   0x9f90a920,
-   0xc3b5,
-   0x4569,
-   0xba, 0x31, 0x8b, 0xd3, 0x91, 0xd, 0xc6, 0x56
-);
-
-// {33F00E25-8EEC-4531-A005-41B911F62452}
-DEFINE_GUID(FWPM_CONDITION_BITMAP_IP_REMOTE_ADDRESS,
-	0x33f00e25,
-	0x8eec,
-	0x4531,
-	0xa0, 0x5, 0x41, 0xb9, 0x11, 0xf6, 0x24, 0x52
-);
-
-// {2663D549-AAF2-46A2-8666-1E7667F86985}
-DEFINE_GUID(FWPM_CONDITION_BITMAP_IP_REMOTE_PORT,
-   0x2663d549,
-   0xaaf2,
-   0x46a2,
-   0x86, 0x66, 0x1e, 0x76, 0x67, 0xf8, 0x69, 0x85
-);
-
 #if (NTDDI_VERSION >= NTDDI_WIN7)
 
 // eabe448a-a711-4d64-85b7-3f76b65299c7
@@ -1412,14 +1422,6 @@ DEFINE_GUID(
    0xa711,
    0x4d64,
    0x85, 0xb7, 0x3f, 0x76, 0xb6, 0x52, 0x99, 0xc7
-);
-
-// {0F36514C-3226-4A81-A214-2D518B04D08A}
-DEFINE_GUID(FWPM_CONDITION_BITMAP_INDEX_KEY,
-   0xf36514c,
-   0x3226,
-   0x4a81,
-   0xa2, 0x14, 0x2d, 0x51, 0x8b, 0x4, 0xd0, 0x8a
 );
 
 #endif // (NTDDI_VERSION >= NTDDI_WIN7)
@@ -2427,8 +2429,43 @@ DEFINE_GUID(
    0x432d,
    0xbe, 0xd3, 0x44, 0x1a, 0xe5, 0x0e, 0x63, 0xc3
 );
-#endif // (NTDDI_VERSION >= NTDDI_WIN8)
 
+// 4b153735-1049-4480-aab4-d1b9bdc03710
+DEFINE_GUID(
+   FWPM_PROVIDER_MPSSVC_WSH,
+   0x4b153735,
+   0x1049,
+   0x4480,
+   0xaa, 0xb4, 0xd1, 0xb9, 0xbd, 0xc0, 0x37, 0x10
+);
+
+// decc16ca-3f33-4346-be1e-8fb4ae0f3d62
+DEFINE_GUID(
+   FWPM_PROVIDER_MPSSVC_WF,
+   0xdecc16ca,
+   0x3f33,
+   0x4346,
+   0xbe, 0x1e, 0x8f, 0xb4, 0xae, 0x0f, 0x3d, 0x62
+);
+
+// a90296f7-46b8-4457-8f84-b05e05d3c622
+DEFINE_GUID(
+   FWPM_PROVIDER_MPSSVC_EDP,
+   0xa90296f7,
+   0x46b8,
+   0x4457,
+   0x8f, 0x84, 0xb0, 0x5e, 0x05, 0xd3, 0xc6, 0x22
+);
+
+// d0718ff9-44da-4f50-9dc2-c963a4247613
+DEFINE_GUID(
+   FWPM_PROVIDER_MPSSVC_TENANT_RESTRICTIONS,
+   0xd0718ff9,
+   0x44da,
+   0x4f50,
+   0x9d, 0xc2, 0xc9, 0x63, 0xa4, 0x24, 0x76, 0x13
+);
+#endif // (NTDDI_VERSION >= NTDDI_WIN8)
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -2866,6 +2903,45 @@ DEFINE_GUID(
     );
 
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS3)
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// GUIDs for private built-in callouts.
+//
+///////////////////////////////////////////////////////////////////////////////
+#if (NTDDI_VERSION >= NTDDI_WIN10_FE)
+// {779719a4-e695-47b6-a199-7999fec9163b}
+DEFINE_GUID(FWPM_CALLOUT_BUILT_IN_RESERVED_1,
+   0x779719a4,
+   0xe695,
+   0x47b6,
+   0xa1, 0x99, 0x79, 0x99, 0xfe, 0xc9, 0x16, 0x3b
+);
+
+// {ef9661b6-7c5e-48fd-a130-96678ceacc41}
+DEFINE_GUID(FWPM_CALLOUT_BUILT_IN_RESERVED_2,
+   0xef9661b6,
+   0x7c5e,
+   0x48fd,
+   0xa1, 0x30, 0x96, 0x67, 0x8c, 0xea, 0xcc, 0x41
+);
+
+// {18729c7a-2f62-4be0-966f-974b21b86df1}
+DEFINE_GUID(FWPM_CALLOUT_BUILT_IN_RESERVED_3,
+   0x18729c7a,
+   0x2f62,
+   0x4be0,
+   0x96, 0x6f, 0x97, 0x4b, 0x21, 0xb8, 0x6d, 0xf1
+);
+
+// {6c3fb801-daff-40e9-91e6-f7ff7e52f7d9}
+DEFINE_GUID(FWPM_CALLOUT_BUILT_IN_RESERVED_4,
+   0x6c3fb801,
+   0xdaff,
+   0x40e9,
+   0x91, 0xe6, 0xf7, 0xff, 0x7e, 0x52, 0xf7, 0xd9
+);
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_FE)
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -4100,29 +4176,6 @@ FwpmGetAppIdFromFileName0(
    _Outptr_ FWP_BYTE_BLOB** appId
    );
 
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Functions for managing Bitmaps.
-//
-///////////////////////////////////////////////////////////////////////////////
-
-DWORD
-WINAPI
-FwpmBitmapIndexGet0(
-   _In_ HANDLE engineHandle,
-   _In_ const GUID* fieldId,
-   _Out_ UINT8* idx
-   );
-
-   DWORD
-WINAPI
-FwpmBitmapIndexFree0(
-   _In_ HANDLE engineHandle,
-   _In_ const GUID* fieldId,
-   _In_ UINT8* idx
-   );
-
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Helper functions for configuring an IPsec tunnel.
@@ -4137,9 +4190,8 @@ FwpmBitmapIndexFree0(
 #endif // (NTDDI_VERSION >= NTDDI_WIN7)
 
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS3)
-// Enable S2S IPsec tunnel mode.
-#define FWPM_TUNNEL_FLAG_SITE_TO_SITE (0x00000004)
-
+// Reserved flags.
+#define FWPM_TUNNEL_FLAG_RESERVED0 (0x00000004)
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS3)
 
 DWORD
@@ -5010,6 +5062,39 @@ FwpmNetEventSubscribe4(
    );
 
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS5)
+
+
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+///////////////////////////////////////////////////////////////////////////////
+//
+// Functions for Tracking Dynamic Keyword Changes
+//
+///////////////////////////////////////////////////////////////////////////////
+#define FWPM_NOTIFY_ADDRESSES_AUTO_RESOLVE 0x01ui64
+#define FWPM_NOTIFY_ADDRESSES_NON_AUTO_RESOLVE 0x02ui64
+#define FWPM_NOTIFY_ADDRESSES_ALL (FWPM_NOTIFY_ADDRESSES_AUTO_RESOLVE | FWPM_NOTIFY_ADDRESSES_NON_AUTO_RESOLVE)
+#define FWPM_NOTIFY_GRANULAR 0x04ui64
+
+typedef void (CALLBACK *FWPM_DYNAMIC_KEYWORD_CALLBACK0)(
+                           _Inout_ void* notification,
+                           _Inout_ void* context
+                           );
+
+DWORD
+WINAPI
+FwpmDynamicKeywordSubscribe0(
+   _In_ DWORD flags,
+   _In_ FWPM_DYNAMIC_KEYWORD_CALLBACK0 callback,
+   _In_opt_ void* context,
+   _Out_ HANDLE* subscriptionHandle
+   );
+
+DWORD
+WINAPI
+FwpmDynamicKeywordUnsubscribe0(
+   _In_ HANDLE subscriptionHandle
+   );
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
 
 
 #if (NTDDI_VERSION >= NTDDI_WIN7)

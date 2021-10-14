@@ -1,9 +1,6 @@
 --exclude
 IResourceManagerXXX
 --traverse
-<IncludeRoot>/um/txcoord.h
-<IncludeRoot>/um/txdtc.h
-<IncludeRoot>/um/transact.h
 <IncludeRoot>/um/ComSvcs.h
 <IncludeRoot>/um/EventSys.h
 <IncludeRoot>/um/ComAdmin.h

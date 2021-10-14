@@ -110,6 +110,8 @@ namespace Windows
 
             interface ILockScreenCallActivatedEventArgs;
 
+            interface IPhoneCallActivatedEventArgs;
+
             interface IPrelaunchActivatedEventArgs;
 
             interface IPrint3DWorkflowActivatedEventArgs;
@@ -378,6 +380,8 @@ namespace Windows
             runtimeclass WebUINavigatedEventArgs;
 
             runtimeclass WebUINavigatedOperation;
+
+            runtimeclass WebUIPhoneCallActivatedEventArgs;
 
             runtimeclass WebUIPrint3DWorkflowActivatedEventArgs;
 
@@ -1079,6 +1083,16 @@ namespace Windows
             runtimeclass WebUINavigatedOperation
             {
                 [default] interface Windows.UI.WebUI.IWebUINavigatedOperation;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass WebUIPhoneCallActivatedEventArgs
+            {
+                [default] interface Windows.ApplicationModel.Activation.IPhoneCallActivatedEventArgs;
+                interface Windows.ApplicationModel.Activation.IActivatedEventArgs;
+                interface Windows.ApplicationModel.Activation.IActivatedEventArgsWithUser;
+                interface Windows.UI.WebUI.IActivatedEventArgsDeferral;
             }
 
             [contract(Windows.ApplicationModel.Activation.ActivatedEventsContract, 1.0)]

@@ -1211,7 +1211,9 @@ namespace Windows
                 [contract(Windows.Foundation.UniversalApiContract, 6.0)]
                 HdrWithWcgPhoto       = 8,
                 [contract(Windows.Foundation.UniversalApiContract, 6.0)]
-                VideoHdr8             = 9
+                VideoHdr8             = 9,
+                [contract(Windows.Foundation.UniversalApiContract, 11.0)]
+                CompressedCamera      = 10
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 4.0)]
@@ -1252,7 +1254,13 @@ namespace Windows
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)]
                 GameChat       = 3,
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)]
-                Speech         = 4
+                Speech         = 4,
+                [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+                FarFieldSpeech = 5,
+                [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+                UniformSpeech  = 6,
+                [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+                VoiceTyping    = 7
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -1261,7 +1269,9 @@ namespace Windows
                 VideoPreview = 0,
                 VideoRecord  = 1,
                 Audio        = 2,
-                Photo        = 3
+                Photo        = 3,
+                [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+                Metadata     = 4
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]

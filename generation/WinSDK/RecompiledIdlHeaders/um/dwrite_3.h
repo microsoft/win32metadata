@@ -3629,4 +3629,41 @@ interface DWRITE_DECLARE_INTERFACE("7C073EF2-A7F4-4045-8C32-8AB8AE640F90") IDWri
 
 #endif // NTDDI_VERSION >= NTDDI_WIN10_RS5
 
+#if NTDDI_VERSION >= NTDDI_WIN10_MN
+
+interface DWRITE_DECLARE_INTERFACE("C4B1FE1B-6E84-47D5-B54C-A597981B06AD") IDWriteFontFace6 : public IDWriteFontFace5
+{
+    /// <summary>
+    /// Creates a localized strings object that contains the family names for the font, indexed by locale name.
+    /// </summary>
+    /// <param name="fontFamilyModel">Specifies how fonts are grouped into families, which affects the family name property.</param>
+    /// <param name="names">Receives a pointer to an object to contains the font family names, indexed by locale.</param>
+    /// <returns>
+    /// Standard HRESULT error code.
+    /// </returns>
+    STDMETHOD(GetFamilyNames)(
+        DWRITE_FONT_FAMILY_MODEL fontFamilyModel,
+        _COM_Outptr_ IDWriteLocalizedStrings** names
+        ) PURE;
+
+    using IDWriteFontFace3::GetFamilyNames;
+
+    /// <summary>
+    /// Creates a localized strings object that contains the face names for the font, indexed by locale name.
+    /// </summary>
+    /// <param name="fontFamilyModel">Specifies how fonts are grouped into families, which affects the face name property.</param>
+    /// <param name="names">Receives a pointer to an object to contains the font face names, indexed by locale.</param>
+    /// <returns>
+    /// Standard HRESULT error code.
+    /// </returns>
+    STDMETHOD(GetFaceNames)(
+        DWRITE_FONT_FAMILY_MODEL fontFamilyModel,
+        _COM_Outptr_ IDWriteLocalizedStrings** names
+        ) PURE;
+
+    using IDWriteFontFace3::GetFaceNames;
+};
+
+#endif // NTDDI_VERSION >= NTDDI_WIN10_MN
+
 #endif // DWRITE_3_H_INCLUDED

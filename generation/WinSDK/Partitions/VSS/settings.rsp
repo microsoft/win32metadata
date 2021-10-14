@@ -10,5 +10,6 @@ CVssWriterEx2
 <IncludeRoot>/um/vsprov.h
 <IncludeRoot>/um/vss.h
 <IncludeRoot>/um/vswriter.h
+<IncludeRoot>/um/vsserror.h
 --namespace
 Windows.Win32.Storage.Vss

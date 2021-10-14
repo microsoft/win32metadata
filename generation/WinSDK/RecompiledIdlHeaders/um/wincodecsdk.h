@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -321,6 +329,7 @@ EXTERN_C const IID IID_IWICMetadataBlockReader;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICMetadataBlockReader * This,
             /* [annotation][in] */ 
@@ -328,22 +337,27 @@ EXTERN_C const IID IID_IWICMetadataBlockReader;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICMetadataBlockReader * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICMetadataBlockReader * This);
         
+        DECLSPEC_XFGVIRT(IWICMetadataBlockReader, GetContainerFormat)
         HRESULT ( STDMETHODCALLTYPE *GetContainerFormat )( 
             __RPC__in IWICMetadataBlockReader * This,
             /* [annotation][out] */ 
             _Out_  GUID *pguidContainerFormat);
         
+        DECLSPEC_XFGVIRT(IWICMetadataBlockReader, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IWICMetadataBlockReader * This,
             /* [annotation][out] */ 
             _Out_  UINT *pcCount);
         
+        DECLSPEC_XFGVIRT(IWICMetadataBlockReader, GetReaderByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetReaderByIndex )( 
             __RPC__in IWICMetadataBlockReader * This,
             /* [annotation][in] */ 
@@ -351,6 +365,7 @@ EXTERN_C const IID IID_IWICMetadataBlockReader;
             /* [annotation][out] */ 
             _Out_  IWICMetadataReader **ppIMetadataReader);
         
+        DECLSPEC_XFGVIRT(IWICMetadataBlockReader, GetEnumerator)
         HRESULT ( STDMETHODCALLTYPE *GetEnumerator )( 
             __RPC__in IWICMetadataBlockReader * This,
             /* [annotation][out] */ 
@@ -450,6 +465,7 @@ EXTERN_C const IID IID_IWICMetadataBlockWriter;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICMetadataBlockWriter * This,
             /* [annotation][in] */ 
@@ -457,22 +473,27 @@ EXTERN_C const IID IID_IWICMetadataBlockWriter;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICMetadataBlockWriter * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICMetadataBlockWriter * This);
         
+        DECLSPEC_XFGVIRT(IWICMetadataBlockReader, GetContainerFormat)
         HRESULT ( STDMETHODCALLTYPE *GetContainerFormat )( 
             __RPC__in IWICMetadataBlockWriter * This,
             /* [annotation][out] */ 
             _Out_  GUID *pguidContainerFormat);
         
+        DECLSPEC_XFGVIRT(IWICMetadataBlockReader, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IWICMetadataBlockWriter * This,
             /* [annotation][out] */ 
             _Out_  UINT *pcCount);
         
+        DECLSPEC_XFGVIRT(IWICMetadataBlockReader, GetReaderByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetReaderByIndex )( 
             __RPC__in IWICMetadataBlockWriter * This,
             /* [annotation][in] */ 
@@ -480,16 +501,19 @@ EXTERN_C const IID IID_IWICMetadataBlockWriter;
             /* [annotation][out] */ 
             _Out_  IWICMetadataReader **ppIMetadataReader);
         
+        DECLSPEC_XFGVIRT(IWICMetadataBlockReader, GetEnumerator)
         HRESULT ( STDMETHODCALLTYPE *GetEnumerator )( 
             __RPC__in IWICMetadataBlockWriter * This,
             /* [annotation][out] */ 
             _Out_  IEnumUnknown **ppIEnumMetadata);
         
+        DECLSPEC_XFGVIRT(IWICMetadataBlockWriter, InitializeFromBlockReader)
         HRESULT ( STDMETHODCALLTYPE *InitializeFromBlockReader )( 
             __RPC__in IWICMetadataBlockWriter * This,
             /* [annotation][in] */ 
             _In_  IWICMetadataBlockReader *pIMDBlockReader);
         
+        DECLSPEC_XFGVIRT(IWICMetadataBlockWriter, GetWriterByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetWriterByIndex )( 
             __RPC__in IWICMetadataBlockWriter * This,
             /* [annotation][in] */ 
@@ -497,11 +521,13 @@ EXTERN_C const IID IID_IWICMetadataBlockWriter;
             /* [annotation][out] */ 
             _Out_  IWICMetadataWriter **ppIMetadataWriter);
         
+        DECLSPEC_XFGVIRT(IWICMetadataBlockWriter, AddWriter)
         HRESULT ( STDMETHODCALLTYPE *AddWriter )( 
             __RPC__in IWICMetadataBlockWriter * This,
             /* [annotation][in] */ 
             _In_  IWICMetadataWriter *pIMetadataWriter);
         
+        DECLSPEC_XFGVIRT(IWICMetadataBlockWriter, SetWriterByIndex)
         HRESULT ( STDMETHODCALLTYPE *SetWriterByIndex )( 
             __RPC__in IWICMetadataBlockWriter * This,
             /* [annotation][in] */ 
@@ -509,6 +535,7 @@ EXTERN_C const IID IID_IWICMetadataBlockWriter;
             /* [annotation][in] */ 
             _In_  IWICMetadataWriter *pIMetadataWriter);
         
+        DECLSPEC_XFGVIRT(IWICMetadataBlockWriter, RemoveWriterByIndex)
         HRESULT ( STDMETHODCALLTYPE *RemoveWriterByIndex )( 
             __RPC__in IWICMetadataBlockWriter * This,
             /* [annotation][in] */ 
@@ -634,6 +661,7 @@ EXTERN_C const IID IID_IWICMetadataReader;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICMetadataReader * This,
             /* [annotation][in] */ 
@@ -641,27 +669,33 @@ EXTERN_C const IID IID_IWICMetadataReader;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICMetadataReader * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICMetadataReader * This);
         
+        DECLSPEC_XFGVIRT(IWICMetadataReader, GetMetadataFormat)
         HRESULT ( STDMETHODCALLTYPE *GetMetadataFormat )( 
             __RPC__in IWICMetadataReader * This,
             /* [annotation][out] */ 
             _Out_  GUID *pguidMetadataFormat);
         
+        DECLSPEC_XFGVIRT(IWICMetadataReader, GetMetadataHandlerInfo)
         HRESULT ( STDMETHODCALLTYPE *GetMetadataHandlerInfo )( 
             __RPC__in IWICMetadataReader * This,
             /* [annotation][out] */ 
             _Out_  IWICMetadataHandlerInfo **ppIHandler);
         
+        DECLSPEC_XFGVIRT(IWICMetadataReader, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IWICMetadataReader * This,
             /* [annotation][out] */ 
             _Out_  UINT *pcCount);
         
+        DECLSPEC_XFGVIRT(IWICMetadataReader, GetValueByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetValueByIndex )( 
             __RPC__in IWICMetadataReader * This,
             /* [annotation][in] */ 
@@ -673,6 +707,7 @@ EXTERN_C const IID IID_IWICMetadataReader;
             /* [annotation][unique][out][in] */ 
             _Inout_  PROPVARIANT *pvarValue);
         
+        DECLSPEC_XFGVIRT(IWICMetadataReader, GetValue)
         HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             __RPC__in IWICMetadataReader * This,
             /* [annotation][unique][in] */ 
@@ -682,6 +717,7 @@ EXTERN_C const IID IID_IWICMetadataReader;
             /* [annotation][unique][out][in] */ 
             _Inout_  PROPVARIANT *pvarValue);
         
+        DECLSPEC_XFGVIRT(IWICMetadataReader, GetEnumerator)
         HRESULT ( STDMETHODCALLTYPE *GetEnumerator )( 
             __RPC__in IWICMetadataReader * This,
             /* [annotation][out] */ 
@@ -791,6 +827,7 @@ EXTERN_C const IID IID_IWICMetadataWriter;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICMetadataWriter * This,
             /* [annotation][in] */ 
@@ -798,27 +835,33 @@ EXTERN_C const IID IID_IWICMetadataWriter;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICMetadataWriter * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICMetadataWriter * This);
         
+        DECLSPEC_XFGVIRT(IWICMetadataReader, GetMetadataFormat)
         HRESULT ( STDMETHODCALLTYPE *GetMetadataFormat )( 
             __RPC__in IWICMetadataWriter * This,
             /* [annotation][out] */ 
             _Out_  GUID *pguidMetadataFormat);
         
+        DECLSPEC_XFGVIRT(IWICMetadataReader, GetMetadataHandlerInfo)
         HRESULT ( STDMETHODCALLTYPE *GetMetadataHandlerInfo )( 
             __RPC__in IWICMetadataWriter * This,
             /* [annotation][out] */ 
             _Out_  IWICMetadataHandlerInfo **ppIHandler);
         
+        DECLSPEC_XFGVIRT(IWICMetadataReader, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IWICMetadataWriter * This,
             /* [annotation][out] */ 
             _Out_  UINT *pcCount);
         
+        DECLSPEC_XFGVIRT(IWICMetadataReader, GetValueByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetValueByIndex )( 
             __RPC__in IWICMetadataWriter * This,
             /* [annotation][in] */ 
@@ -830,6 +873,7 @@ EXTERN_C const IID IID_IWICMetadataWriter;
             /* [annotation][unique][out][in] */ 
             _Inout_  PROPVARIANT *pvarValue);
         
+        DECLSPEC_XFGVIRT(IWICMetadataReader, GetValue)
         HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             __RPC__in IWICMetadataWriter * This,
             /* [annotation][unique][in] */ 
@@ -839,11 +883,13 @@ EXTERN_C const IID IID_IWICMetadataWriter;
             /* [annotation][unique][out][in] */ 
             _Inout_  PROPVARIANT *pvarValue);
         
+        DECLSPEC_XFGVIRT(IWICMetadataReader, GetEnumerator)
         HRESULT ( STDMETHODCALLTYPE *GetEnumerator )( 
             __RPC__in IWICMetadataWriter * This,
             /* [annotation][out] */ 
             _Out_  IWICEnumMetadataItem **ppIEnumMetadata);
         
+        DECLSPEC_XFGVIRT(IWICMetadataWriter, SetValue)
         HRESULT ( STDMETHODCALLTYPE *SetValue )( 
             __RPC__in IWICMetadataWriter * This,
             /* [annotation][unique][in] */ 
@@ -853,6 +899,7 @@ EXTERN_C const IID IID_IWICMetadataWriter;
             /* [annotation][in] */ 
             _In_  const PROPVARIANT *pvarValue);
         
+        DECLSPEC_XFGVIRT(IWICMetadataWriter, SetValueByIndex)
         HRESULT ( STDMETHODCALLTYPE *SetValueByIndex )( 
             __RPC__in IWICMetadataWriter * This,
             /* [annotation][in] */ 
@@ -864,6 +911,7 @@ EXTERN_C const IID IID_IWICMetadataWriter;
             /* [annotation][in] */ 
             _In_  const PROPVARIANT *pvarValue);
         
+        DECLSPEC_XFGVIRT(IWICMetadataWriter, RemoveValue)
         HRESULT ( STDMETHODCALLTYPE *RemoveValue )( 
             __RPC__in IWICMetadataWriter * This,
             /* [annotation][unique][in] */ 
@@ -871,6 +919,7 @@ EXTERN_C const IID IID_IWICMetadataWriter;
             /* [annotation][in] */ 
             _In_  const PROPVARIANT *pvarId);
         
+        DECLSPEC_XFGVIRT(IWICMetadataWriter, RemoveValueByIndex)
         HRESULT ( STDMETHODCALLTYPE *RemoveValueByIndex )( 
             __RPC__in IWICMetadataWriter * This,
             /* [annotation][in] */ 
@@ -979,6 +1028,7 @@ EXTERN_C const IID IID_IWICStreamProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICStreamProvider * This,
             /* [annotation][in] */ 
@@ -986,27 +1036,33 @@ EXTERN_C const IID IID_IWICStreamProvider;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICStreamProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICStreamProvider * This);
         
+        DECLSPEC_XFGVIRT(IWICStreamProvider, GetStream)
         HRESULT ( STDMETHODCALLTYPE *GetStream )( 
             __RPC__in IWICStreamProvider * This,
             /* [annotation][out] */ 
             _Out_  IStream **ppIStream);
         
+        DECLSPEC_XFGVIRT(IWICStreamProvider, GetPersistOptions)
         HRESULT ( STDMETHODCALLTYPE *GetPersistOptions )( 
             __RPC__in IWICStreamProvider * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pdwPersistOptions);
         
+        DECLSPEC_XFGVIRT(IWICStreamProvider, GetPreferredVendorGUID)
         HRESULT ( STDMETHODCALLTYPE *GetPreferredVendorGUID )( 
             __RPC__in IWICStreamProvider * This,
             /* [annotation][out] */ 
             _Out_  GUID *pguidPreferredVendor);
         
+        DECLSPEC_XFGVIRT(IWICStreamProvider, RefreshStream)
         HRESULT ( STDMETHODCALLTYPE *RefreshStream )( 
             __RPC__in IWICStreamProvider * This);
         
@@ -1096,6 +1152,7 @@ EXTERN_C const IID IID_IWICPersistStream;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICPersistStream * This,
             /* [annotation][in] */ 
@@ -1103,25 +1160,31 @@ EXTERN_C const IID IID_IWICPersistStream;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICPersistStream * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICPersistStream * This);
         
+        DECLSPEC_XFGVIRT(IPersist, GetClassID)
         HRESULT ( STDMETHODCALLTYPE *GetClassID )( 
             __RPC__in IWICPersistStream * This,
             /* [annotation][out] */ 
             _Out_  CLSID *pClassID);
         
+        DECLSPEC_XFGVIRT(IPersistStream, IsDirty)
         HRESULT ( STDMETHODCALLTYPE *IsDirty )( 
             __RPC__in IWICPersistStream * This);
         
+        DECLSPEC_XFGVIRT(IPersistStream, Load)
         HRESULT ( STDMETHODCALLTYPE *Load )( 
             __RPC__in IWICPersistStream * This,
             /* [annotation][unique][in] */ 
             _In_  IStream *pStm);
         
+        DECLSPEC_XFGVIRT(IPersistStream, Save)
         HRESULT ( STDMETHODCALLTYPE *Save )( 
             __RPC__in IWICPersistStream * This,
             /* [annotation][unique][in] */ 
@@ -1129,11 +1192,13 @@ EXTERN_C const IID IID_IWICPersistStream;
             /* [annotation][in] */ 
             _In_  BOOL fClearDirty);
         
+        DECLSPEC_XFGVIRT(IPersistStream, GetSizeMax)
         HRESULT ( STDMETHODCALLTYPE *GetSizeMax )( 
             __RPC__in IWICPersistStream * This,
             /* [annotation][out] */ 
             _Out_  ULARGE_INTEGER *pcbSize);
         
+        DECLSPEC_XFGVIRT(IWICPersistStream, LoadEx)
         HRESULT ( STDMETHODCALLTYPE *LoadEx )( 
             __RPC__in IWICPersistStream * This,
             /* [annotation][unique][in] */ 
@@ -1143,6 +1208,7 @@ EXTERN_C const IID IID_IWICPersistStream;
             /* [annotation][in] */ 
             _In_  DWORD dwPersistOptions);
         
+        DECLSPEC_XFGVIRT(IWICPersistStream, SaveEx)
         HRESULT ( STDMETHODCALLTYPE *SaveEx )( 
             __RPC__in IWICPersistStream * This,
             /* [annotation][in] */ 
@@ -1273,6 +1339,7 @@ EXTERN_C const IID IID_IWICMetadataHandlerInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICMetadataHandlerInfo * This,
             /* [annotation][in] */ 
@@ -1280,27 +1347,33 @@ EXTERN_C const IID IID_IWICMetadataHandlerInfo;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICMetadataHandlerInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICMetadataHandlerInfo * This);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetComponentType)
         HRESULT ( STDMETHODCALLTYPE *GetComponentType )( 
             __RPC__in IWICMetadataHandlerInfo * This,
             /* [annotation][out] */ 
             _Out_  WICComponentType *pType);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetCLSID)
         HRESULT ( STDMETHODCALLTYPE *GetCLSID )( 
             __RPC__in IWICMetadataHandlerInfo * This,
             /* [annotation][out] */ 
             _Out_  CLSID *pclsid);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetSigningStatus)
         HRESULT ( STDMETHODCALLTYPE *GetSigningStatus )( 
             __RPC__in IWICMetadataHandlerInfo * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pStatus);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetAuthor)
         HRESULT ( STDMETHODCALLTYPE *GetAuthor )( 
             __RPC__in IWICMetadataHandlerInfo * This,
             /* [annotation][in] */ 
@@ -1310,11 +1383,13 @@ EXTERN_C const IID IID_IWICMetadataHandlerInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetVendorGUID)
         HRESULT ( STDMETHODCALLTYPE *GetVendorGUID )( 
             __RPC__in IWICMetadataHandlerInfo * This,
             /* [annotation][out] */ 
             _Out_  GUID *pguidVendor);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetVersion)
         HRESULT ( STDMETHODCALLTYPE *GetVersion )( 
             __RPC__in IWICMetadataHandlerInfo * This,
             /* [annotation][in] */ 
@@ -1324,6 +1399,7 @@ EXTERN_C const IID IID_IWICMetadataHandlerInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetSpecVersion)
         HRESULT ( STDMETHODCALLTYPE *GetSpecVersion )( 
             __RPC__in IWICMetadataHandlerInfo * This,
             /* [annotation][in] */ 
@@ -1333,6 +1409,7 @@ EXTERN_C const IID IID_IWICMetadataHandlerInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetFriendlyName)
         HRESULT ( STDMETHODCALLTYPE *GetFriendlyName )( 
             __RPC__in IWICMetadataHandlerInfo * This,
             /* [annotation][in] */ 
@@ -1342,11 +1419,13 @@ EXTERN_C const IID IID_IWICMetadataHandlerInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICMetadataHandlerInfo, GetMetadataFormat)
         HRESULT ( STDMETHODCALLTYPE *GetMetadataFormat )( 
             __RPC__in IWICMetadataHandlerInfo * This,
             /* [annotation][out] */ 
             _Out_  GUID *pguidMetadataFormat);
         
+        DECLSPEC_XFGVIRT(IWICMetadataHandlerInfo, GetContainerFormats)
         HRESULT ( STDMETHODCALLTYPE *GetContainerFormats )( 
             __RPC__in IWICMetadataHandlerInfo * This,
             /* [annotation][in] */ 
@@ -1356,6 +1435,7 @@ EXTERN_C const IID IID_IWICMetadataHandlerInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICMetadataHandlerInfo, GetDeviceManufacturer)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceManufacturer )( 
             __RPC__in IWICMetadataHandlerInfo * This,
             /* [annotation][in] */ 
@@ -1365,6 +1445,7 @@ EXTERN_C const IID IID_IWICMetadataHandlerInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICMetadataHandlerInfo, GetDeviceModels)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceModels )( 
             __RPC__in IWICMetadataHandlerInfo * This,
             /* [annotation][in] */ 
@@ -1374,16 +1455,19 @@ EXTERN_C const IID IID_IWICMetadataHandlerInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICMetadataHandlerInfo, DoesRequireFullStream)
         HRESULT ( STDMETHODCALLTYPE *DoesRequireFullStream )( 
             __RPC__in IWICMetadataHandlerInfo * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfRequiresFullStream);
         
+        DECLSPEC_XFGVIRT(IWICMetadataHandlerInfo, DoesSupportPadding)
         HRESULT ( STDMETHODCALLTYPE *DoesSupportPadding )( 
             __RPC__in IWICMetadataHandlerInfo * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfSupportsPadding);
         
+        DECLSPEC_XFGVIRT(IWICMetadataHandlerInfo, DoesRequireFixedSize)
         HRESULT ( STDMETHODCALLTYPE *DoesRequireFixedSize )( 
             __RPC__in IWICMetadataHandlerInfo * This,
             /* [annotation][out] */ 
@@ -1534,6 +1618,7 @@ EXTERN_C const IID IID_IWICMetadataReaderInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICMetadataReaderInfo * This,
             /* [annotation][in] */ 
@@ -1541,27 +1626,33 @@ EXTERN_C const IID IID_IWICMetadataReaderInfo;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICMetadataReaderInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICMetadataReaderInfo * This);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetComponentType)
         HRESULT ( STDMETHODCALLTYPE *GetComponentType )( 
             __RPC__in IWICMetadataReaderInfo * This,
             /* [annotation][out] */ 
             _Out_  WICComponentType *pType);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetCLSID)
         HRESULT ( STDMETHODCALLTYPE *GetCLSID )( 
             __RPC__in IWICMetadataReaderInfo * This,
             /* [annotation][out] */ 
             _Out_  CLSID *pclsid);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetSigningStatus)
         HRESULT ( STDMETHODCALLTYPE *GetSigningStatus )( 
             __RPC__in IWICMetadataReaderInfo * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pStatus);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetAuthor)
         HRESULT ( STDMETHODCALLTYPE *GetAuthor )( 
             __RPC__in IWICMetadataReaderInfo * This,
             /* [annotation][in] */ 
@@ -1571,11 +1662,13 @@ EXTERN_C const IID IID_IWICMetadataReaderInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetVendorGUID)
         HRESULT ( STDMETHODCALLTYPE *GetVendorGUID )( 
             __RPC__in IWICMetadataReaderInfo * This,
             /* [annotation][out] */ 
             _Out_  GUID *pguidVendor);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetVersion)
         HRESULT ( STDMETHODCALLTYPE *GetVersion )( 
             __RPC__in IWICMetadataReaderInfo * This,
             /* [annotation][in] */ 
@@ -1585,6 +1678,7 @@ EXTERN_C const IID IID_IWICMetadataReaderInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetSpecVersion)
         HRESULT ( STDMETHODCALLTYPE *GetSpecVersion )( 
             __RPC__in IWICMetadataReaderInfo * This,
             /* [annotation][in] */ 
@@ -1594,6 +1688,7 @@ EXTERN_C const IID IID_IWICMetadataReaderInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetFriendlyName)
         HRESULT ( STDMETHODCALLTYPE *GetFriendlyName )( 
             __RPC__in IWICMetadataReaderInfo * This,
             /* [annotation][in] */ 
@@ -1603,11 +1698,13 @@ EXTERN_C const IID IID_IWICMetadataReaderInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICMetadataHandlerInfo, GetMetadataFormat)
         HRESULT ( STDMETHODCALLTYPE *GetMetadataFormat )( 
             __RPC__in IWICMetadataReaderInfo * This,
             /* [annotation][out] */ 
             _Out_  GUID *pguidMetadataFormat);
         
+        DECLSPEC_XFGVIRT(IWICMetadataHandlerInfo, GetContainerFormats)
         HRESULT ( STDMETHODCALLTYPE *GetContainerFormats )( 
             __RPC__in IWICMetadataReaderInfo * This,
             /* [annotation][in] */ 
@@ -1617,6 +1714,7 @@ EXTERN_C const IID IID_IWICMetadataReaderInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICMetadataHandlerInfo, GetDeviceManufacturer)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceManufacturer )( 
             __RPC__in IWICMetadataReaderInfo * This,
             /* [annotation][in] */ 
@@ -1626,6 +1724,7 @@ EXTERN_C const IID IID_IWICMetadataReaderInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICMetadataHandlerInfo, GetDeviceModels)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceModels )( 
             __RPC__in IWICMetadataReaderInfo * This,
             /* [annotation][in] */ 
@@ -1635,21 +1734,25 @@ EXTERN_C const IID IID_IWICMetadataReaderInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICMetadataHandlerInfo, DoesRequireFullStream)
         HRESULT ( STDMETHODCALLTYPE *DoesRequireFullStream )( 
             __RPC__in IWICMetadataReaderInfo * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfRequiresFullStream);
         
+        DECLSPEC_XFGVIRT(IWICMetadataHandlerInfo, DoesSupportPadding)
         HRESULT ( STDMETHODCALLTYPE *DoesSupportPadding )( 
             __RPC__in IWICMetadataReaderInfo * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfSupportsPadding);
         
+        DECLSPEC_XFGVIRT(IWICMetadataHandlerInfo, DoesRequireFixedSize)
         HRESULT ( STDMETHODCALLTYPE *DoesRequireFixedSize )( 
             __RPC__in IWICMetadataReaderInfo * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfFixedSize);
         
+        DECLSPEC_XFGVIRT(IWICMetadataReaderInfo, GetPatterns)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetPatterns )( 
             IWICMetadataReaderInfo * This,
             /* [annotation][in] */ 
@@ -1663,6 +1766,7 @@ EXTERN_C const IID IID_IWICMetadataReaderInfo;
             /* [annotation][unique][out] */ 
             _Out_opt_  UINT *pcbActual);
         
+        DECLSPEC_XFGVIRT(IWICMetadataReaderInfo, MatchesPattern)
         HRESULT ( STDMETHODCALLTYPE *MatchesPattern )( 
             __RPC__in IWICMetadataReaderInfo * This,
             /* [annotation][in] */ 
@@ -1672,6 +1776,7 @@ EXTERN_C const IID IID_IWICMetadataReaderInfo;
             /* [annotation][out] */ 
             _Out_  BOOL *pfMatches);
         
+        DECLSPEC_XFGVIRT(IWICMetadataReaderInfo, CreateInstance)
         HRESULT ( STDMETHODCALLTYPE *CreateInstance )( 
             __RPC__in IWICMetadataReaderInfo * This,
             /* [annotation][out] */ 
@@ -1838,6 +1943,7 @@ EXTERN_C const IID IID_IWICMetadataWriterInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICMetadataWriterInfo * This,
             /* [annotation][in] */ 
@@ -1845,27 +1951,33 @@ EXTERN_C const IID IID_IWICMetadataWriterInfo;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICMetadataWriterInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICMetadataWriterInfo * This);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetComponentType)
         HRESULT ( STDMETHODCALLTYPE *GetComponentType )( 
             __RPC__in IWICMetadataWriterInfo * This,
             /* [annotation][out] */ 
             _Out_  WICComponentType *pType);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetCLSID)
         HRESULT ( STDMETHODCALLTYPE *GetCLSID )( 
             __RPC__in IWICMetadataWriterInfo * This,
             /* [annotation][out] */ 
             _Out_  CLSID *pclsid);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetSigningStatus)
         HRESULT ( STDMETHODCALLTYPE *GetSigningStatus )( 
             __RPC__in IWICMetadataWriterInfo * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pStatus);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetAuthor)
         HRESULT ( STDMETHODCALLTYPE *GetAuthor )( 
             __RPC__in IWICMetadataWriterInfo * This,
             /* [annotation][in] */ 
@@ -1875,11 +1987,13 @@ EXTERN_C const IID IID_IWICMetadataWriterInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetVendorGUID)
         HRESULT ( STDMETHODCALLTYPE *GetVendorGUID )( 
             __RPC__in IWICMetadataWriterInfo * This,
             /* [annotation][out] */ 
             _Out_  GUID *pguidVendor);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetVersion)
         HRESULT ( STDMETHODCALLTYPE *GetVersion )( 
             __RPC__in IWICMetadataWriterInfo * This,
             /* [annotation][in] */ 
@@ -1889,6 +2003,7 @@ EXTERN_C const IID IID_IWICMetadataWriterInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetSpecVersion)
         HRESULT ( STDMETHODCALLTYPE *GetSpecVersion )( 
             __RPC__in IWICMetadataWriterInfo * This,
             /* [annotation][in] */ 
@@ -1898,6 +2013,7 @@ EXTERN_C const IID IID_IWICMetadataWriterInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetFriendlyName)
         HRESULT ( STDMETHODCALLTYPE *GetFriendlyName )( 
             __RPC__in IWICMetadataWriterInfo * This,
             /* [annotation][in] */ 
@@ -1907,11 +2023,13 @@ EXTERN_C const IID IID_IWICMetadataWriterInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICMetadataHandlerInfo, GetMetadataFormat)
         HRESULT ( STDMETHODCALLTYPE *GetMetadataFormat )( 
             __RPC__in IWICMetadataWriterInfo * This,
             /* [annotation][out] */ 
             _Out_  GUID *pguidMetadataFormat);
         
+        DECLSPEC_XFGVIRT(IWICMetadataHandlerInfo, GetContainerFormats)
         HRESULT ( STDMETHODCALLTYPE *GetContainerFormats )( 
             __RPC__in IWICMetadataWriterInfo * This,
             /* [annotation][in] */ 
@@ -1921,6 +2039,7 @@ EXTERN_C const IID IID_IWICMetadataWriterInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICMetadataHandlerInfo, GetDeviceManufacturer)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceManufacturer )( 
             __RPC__in IWICMetadataWriterInfo * This,
             /* [annotation][in] */ 
@@ -1930,6 +2049,7 @@ EXTERN_C const IID IID_IWICMetadataWriterInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICMetadataHandlerInfo, GetDeviceModels)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceModels )( 
             __RPC__in IWICMetadataWriterInfo * This,
             /* [annotation][in] */ 
@@ -1939,21 +2059,25 @@ EXTERN_C const IID IID_IWICMetadataWriterInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICMetadataHandlerInfo, DoesRequireFullStream)
         HRESULT ( STDMETHODCALLTYPE *DoesRequireFullStream )( 
             __RPC__in IWICMetadataWriterInfo * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfRequiresFullStream);
         
+        DECLSPEC_XFGVIRT(IWICMetadataHandlerInfo, DoesSupportPadding)
         HRESULT ( STDMETHODCALLTYPE *DoesSupportPadding )( 
             __RPC__in IWICMetadataWriterInfo * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfSupportsPadding);
         
+        DECLSPEC_XFGVIRT(IWICMetadataHandlerInfo, DoesRequireFixedSize)
         HRESULT ( STDMETHODCALLTYPE *DoesRequireFixedSize )( 
             __RPC__in IWICMetadataWriterInfo * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfFixedSize);
         
+        DECLSPEC_XFGVIRT(IWICMetadataWriterInfo, GetHeader)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetHeader )( 
             IWICMetadataWriterInfo * This,
             /* [annotation][in] */ 
@@ -1965,6 +2089,7 @@ EXTERN_C const IID IID_IWICMetadataWriterInfo;
             /* [annotation][unique][out][in] */ 
             _Out_opt_  UINT *pcbActual);
         
+        DECLSPEC_XFGVIRT(IWICMetadataWriterInfo, CreateInstance)
         HRESULT ( STDMETHODCALLTYPE *CreateInstance )( 
             __RPC__in IWICMetadataWriterInfo * This,
             /* [annotation][out] */ 
@@ -2158,6 +2283,7 @@ EXTERN_C const IID IID_IWICComponentFactory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][in] */ 
@@ -2165,12 +2291,15 @@ EXTERN_C const IID IID_IWICComponentFactory;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICComponentFactory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICComponentFactory * This);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateDecoderFromFilename)
         HRESULT ( STDMETHODCALLTYPE *CreateDecoderFromFilename )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][in] */ 
@@ -2184,6 +2313,7 @@ EXTERN_C const IID IID_IWICComponentFactory;
             /* [annotation][retval][out] */ 
             _Out_retval_  IWICBitmapDecoder **ppIDecoder);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateDecoderFromStream)
         HRESULT ( STDMETHODCALLTYPE *CreateDecoderFromStream )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][in] */ 
@@ -2195,6 +2325,7 @@ EXTERN_C const IID IID_IWICComponentFactory;
             /* [annotation][retval][out] */ 
             _Out_retval_  IWICBitmapDecoder **ppIDecoder);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateDecoderFromFileHandle)
         HRESULT ( STDMETHODCALLTYPE *CreateDecoderFromFileHandle )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][in] */ 
@@ -2206,6 +2337,7 @@ EXTERN_C const IID IID_IWICComponentFactory;
             /* [annotation][retval][out] */ 
             _Out_retval_  IWICBitmapDecoder **ppIDecoder);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateComponentInfo)
         HRESULT ( STDMETHODCALLTYPE *CreateComponentInfo )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][in] */ 
@@ -2213,6 +2345,7 @@ EXTERN_C const IID IID_IWICComponentFactory;
             /* [annotation][out] */ 
             _Out_  IWICComponentInfo **ppIInfo);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateDecoder)
         HRESULT ( STDMETHODCALLTYPE *CreateDecoder )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][in] */ 
@@ -2222,6 +2355,7 @@ EXTERN_C const IID IID_IWICComponentFactory;
             /* [annotation][retval][out] */ 
             _Out_retval_  IWICBitmapDecoder **ppIDecoder);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateEncoder)
         HRESULT ( STDMETHODCALLTYPE *CreateEncoder )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][in] */ 
@@ -2231,46 +2365,55 @@ EXTERN_C const IID IID_IWICComponentFactory;
             /* [annotation][retval][out] */ 
             _Out_retval_  IWICBitmapEncoder **ppIEncoder);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreatePalette)
         HRESULT ( STDMETHODCALLTYPE *CreatePalette )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][out] */ 
             _Out_  IWICPalette **ppIPalette);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateFormatConverter)
         HRESULT ( STDMETHODCALLTYPE *CreateFormatConverter )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][out] */ 
             _Out_  IWICFormatConverter **ppIFormatConverter);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateBitmapScaler)
         HRESULT ( STDMETHODCALLTYPE *CreateBitmapScaler )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][out] */ 
             _Out_  IWICBitmapScaler **ppIBitmapScaler);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateBitmapClipper)
         HRESULT ( STDMETHODCALLTYPE *CreateBitmapClipper )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][out] */ 
             _Out_  IWICBitmapClipper **ppIBitmapClipper);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateBitmapFlipRotator)
         HRESULT ( STDMETHODCALLTYPE *CreateBitmapFlipRotator )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][out] */ 
             _Out_  IWICBitmapFlipRotator **ppIBitmapFlipRotator);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateStream)
         HRESULT ( STDMETHODCALLTYPE *CreateStream )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][out] */ 
             _Out_  IWICStream **ppIWICStream);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateColorContext)
         HRESULT ( STDMETHODCALLTYPE *CreateColorContext )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][out] */ 
             _Out_  IWICColorContext **ppIWICColorContext);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateColorTransformer)
         HRESULT ( STDMETHODCALLTYPE *CreateColorTransformer )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][out] */ 
             _Out_  IWICColorTransform **ppIWICColorTransform);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateBitmap)
         HRESULT ( STDMETHODCALLTYPE *CreateBitmap )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][in] */ 
@@ -2284,6 +2427,7 @@ EXTERN_C const IID IID_IWICComponentFactory;
             /* [annotation][out] */ 
             _Out_  IWICBitmap **ppIBitmap);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateBitmapFromSource)
         HRESULT ( STDMETHODCALLTYPE *CreateBitmapFromSource )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][in] */ 
@@ -2293,6 +2437,7 @@ EXTERN_C const IID IID_IWICComponentFactory;
             /* [annotation][out] */ 
             _Out_  IWICBitmap **ppIBitmap);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateBitmapFromSourceRect)
         HRESULT ( STDMETHODCALLTYPE *CreateBitmapFromSourceRect )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][in] */ 
@@ -2308,6 +2453,7 @@ EXTERN_C const IID IID_IWICComponentFactory;
             /* [annotation][out] */ 
             _Out_  IWICBitmap **ppIBitmap);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateBitmapFromMemory)
         HRESULT ( STDMETHODCALLTYPE *CreateBitmapFromMemory )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][in] */ 
@@ -2325,6 +2471,7 @@ EXTERN_C const IID IID_IWICComponentFactory;
             /* [annotation][out] */ 
             _Out_  IWICBitmap **ppIBitmap);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateBitmapFromHBITMAP)
         HRESULT ( STDMETHODCALLTYPE *CreateBitmapFromHBITMAP )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][in] */ 
@@ -2336,6 +2483,7 @@ EXTERN_C const IID IID_IWICComponentFactory;
             /* [annotation][out] */ 
             _Out_  IWICBitmap **ppIBitmap);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateBitmapFromHICON)
         HRESULT ( STDMETHODCALLTYPE *CreateBitmapFromHICON )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][in] */ 
@@ -2343,6 +2491,7 @@ EXTERN_C const IID IID_IWICComponentFactory;
             /* [annotation][out] */ 
             _Out_  IWICBitmap **ppIBitmap);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateComponentEnumerator)
         HRESULT ( STDMETHODCALLTYPE *CreateComponentEnumerator )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][in] */ 
@@ -2352,6 +2501,7 @@ EXTERN_C const IID IID_IWICComponentFactory;
             /* [annotation][out] */ 
             _Out_  IEnumUnknown **ppIEnumUnknown);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateFastMetadataEncoderFromDecoder)
         HRESULT ( STDMETHODCALLTYPE *CreateFastMetadataEncoderFromDecoder )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][in] */ 
@@ -2359,6 +2509,7 @@ EXTERN_C const IID IID_IWICComponentFactory;
             /* [annotation][out] */ 
             _Out_  IWICFastMetadataEncoder **ppIFastEncoder);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateFastMetadataEncoderFromFrameDecode)
         HRESULT ( STDMETHODCALLTYPE *CreateFastMetadataEncoderFromFrameDecode )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][in] */ 
@@ -2366,6 +2517,7 @@ EXTERN_C const IID IID_IWICComponentFactory;
             /* [annotation][out] */ 
             _Out_  IWICFastMetadataEncoder **ppIFastEncoder);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateQueryWriter)
         HRESULT ( STDMETHODCALLTYPE *CreateQueryWriter )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][in] */ 
@@ -2375,6 +2527,7 @@ EXTERN_C const IID IID_IWICComponentFactory;
             /* [annotation][out] */ 
             _Out_  IWICMetadataQueryWriter **ppIQueryWriter);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateQueryWriterFromReader)
         HRESULT ( STDMETHODCALLTYPE *CreateQueryWriterFromReader )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][in] */ 
@@ -2384,6 +2537,7 @@ EXTERN_C const IID IID_IWICComponentFactory;
             /* [annotation][out] */ 
             _Out_  IWICMetadataQueryWriter **ppIQueryWriter);
         
+        DECLSPEC_XFGVIRT(IWICComponentFactory, CreateMetadataReader)
         HRESULT ( STDMETHODCALLTYPE *CreateMetadataReader )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][in] */ 
@@ -2397,6 +2551,7 @@ EXTERN_C const IID IID_IWICComponentFactory;
             /* [annotation][out] */ 
             _Out_  IWICMetadataReader **ppIReader);
         
+        DECLSPEC_XFGVIRT(IWICComponentFactory, CreateMetadataReaderFromContainer)
         HRESULT ( STDMETHODCALLTYPE *CreateMetadataReaderFromContainer )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][in] */ 
@@ -2410,6 +2565,7 @@ EXTERN_C const IID IID_IWICComponentFactory;
             /* [annotation][out] */ 
             _Out_  IWICMetadataReader **ppIReader);
         
+        DECLSPEC_XFGVIRT(IWICComponentFactory, CreateMetadataWriter)
         HRESULT ( STDMETHODCALLTYPE *CreateMetadataWriter )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][in] */ 
@@ -2421,6 +2577,7 @@ EXTERN_C const IID IID_IWICComponentFactory;
             /* [annotation][out] */ 
             _Out_  IWICMetadataWriter **ppIWriter);
         
+        DECLSPEC_XFGVIRT(IWICComponentFactory, CreateMetadataWriterFromReader)
         HRESULT ( STDMETHODCALLTYPE *CreateMetadataWriterFromReader )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][in] */ 
@@ -2430,6 +2587,7 @@ EXTERN_C const IID IID_IWICComponentFactory;
             /* [annotation][out] */ 
             _Out_  IWICMetadataWriter **ppIWriter);
         
+        DECLSPEC_XFGVIRT(IWICComponentFactory, CreateQueryReaderFromBlockReader)
         HRESULT ( STDMETHODCALLTYPE *CreateQueryReaderFromBlockReader )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][in] */ 
@@ -2437,6 +2595,7 @@ EXTERN_C const IID IID_IWICComponentFactory;
             /* [annotation][out] */ 
             _Out_  IWICMetadataQueryReader **ppIQueryReader);
         
+        DECLSPEC_XFGVIRT(IWICComponentFactory, CreateQueryWriterFromBlockWriter)
         HRESULT ( STDMETHODCALLTYPE *CreateQueryWriterFromBlockWriter )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][in] */ 
@@ -2444,6 +2603,7 @@ EXTERN_C const IID IID_IWICComponentFactory;
             /* [annotation][out] */ 
             _Out_  IWICMetadataQueryWriter **ppIQueryWriter);
         
+        DECLSPEC_XFGVIRT(IWICComponentFactory, CreateEncoderPropertyBag)
         HRESULT ( STDMETHODCALLTYPE *CreateEncoderPropertyBag )( 
             __RPC__in IWICComponentFactory * This,
             /* [annotation][size_is][unique][in] */ 

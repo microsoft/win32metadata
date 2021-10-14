@@ -1,5 +1,6 @@
 --traverse
 <IncludeRoot>/um/wpcevent.h
 <IncludeRoot>/um/wpcapi.h
+<IncludeRoot>/um/wpc.h
 --namespace
 Windows.Win32.System.ParentalControls

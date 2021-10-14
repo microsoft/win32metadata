@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -102,6 +110,7 @@ EXTERN_C const IID IID_IContentPrefetcherTaskTrigger;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IContentPrefetcherTaskTrigger * This,
             /* [annotation][in] */ 
@@ -109,30 +118,37 @@ EXTERN_C const IID IID_IContentPrefetcherTaskTrigger;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IContentPrefetcherTaskTrigger * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IContentPrefetcherTaskTrigger * This);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetIids)
         HRESULT ( STDMETHODCALLTYPE *GetIids )( 
             __RPC__in IContentPrefetcherTaskTrigger * This,
             /* [out] */ __RPC__out ULONG *iidCount,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*iidCount) IID **iids);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetRuntimeClassName)
         HRESULT ( STDMETHODCALLTYPE *GetRuntimeClassName )( 
             __RPC__in IContentPrefetcherTaskTrigger * This,
             /* [out] */ __RPC__deref_out_opt HSTRING *className);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetTrustLevel)
         HRESULT ( STDMETHODCALLTYPE *GetTrustLevel )( 
             __RPC__in IContentPrefetcherTaskTrigger * This,
             /* [out] */ __RPC__out TrustLevel *trustLevel);
         
+        DECLSPEC_XFGVIRT(IContentPrefetcherTaskTrigger, TriggerContentPrefetcherTask)
         HRESULT ( STDMETHODCALLTYPE *TriggerContentPrefetcherTask )( 
             __RPC__in IContentPrefetcherTaskTrigger * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR packageFullName);
         
+        DECLSPEC_XFGVIRT(IContentPrefetcherTaskTrigger, IsRegisteredForContentPrefetch)
         /* [annotation][local] */ 
         _On_failure_(_Post_satisfies_(*isRegistered == false))
         HRESULT ( STDMETHODCALLTYPE *IsRegisteredForContentPrefetch )( 

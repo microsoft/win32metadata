@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -204,6 +212,7 @@ EXTERN_C const IID IID_ITTerminalControl;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITTerminalControl * This,
             /* [annotation][in] */ 
@@ -211,17 +220,21 @@ EXTERN_C const IID IID_ITTerminalControl;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITTerminalControl * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITTerminalControl * This);
         
+        DECLSPEC_XFGVIRT(ITTerminalControl, get_AddressHandle)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AddressHandle )( 
             __RPC__in ITTerminalControl * This,
             /* [annotation][out] */ 
             _Out_  MSP_HANDLE *phtAddress);
         
+        DECLSPEC_XFGVIRT(ITTerminalControl, ConnectTerminal)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ConnectTerminal )( 
             __RPC__in ITTerminalControl * This,
             /* [annotation][in] */ 
@@ -233,9 +246,11 @@ EXTERN_C const IID IID_ITTerminalControl;
             /* [annotation][out] */ 
             _Out_  IPin **ppPins);
         
+        DECLSPEC_XFGVIRT(ITTerminalControl, CompleteConnectTerminal)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CompleteConnectTerminal )( 
             __RPC__in ITTerminalControl * This);
         
+        DECLSPEC_XFGVIRT(ITTerminalControl, DisconnectTerminal)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DisconnectTerminal )( 
             __RPC__in ITTerminalControl * This,
             /* [annotation][in] */ 
@@ -243,9 +258,11 @@ EXTERN_C const IID IID_ITTerminalControl;
             /* [annotation][in] */ 
             _In_  DWORD dwReserved);
         
+        DECLSPEC_XFGVIRT(ITTerminalControl, RunRenderFilter)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RunRenderFilter )( 
             __RPC__in ITTerminalControl * This);
         
+        DECLSPEC_XFGVIRT(ITTerminalControl, StopRenderFilter)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *StopRenderFilter )( 
             __RPC__in ITTerminalControl * This);
         
@@ -335,6 +352,7 @@ EXTERN_C const IID IID_ITPluggableTerminalInitialization;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITPluggableTerminalInitialization * This,
             /* [annotation][in] */ 
@@ -342,12 +360,15 @@ EXTERN_C const IID IID_ITPluggableTerminalInitialization;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITPluggableTerminalInitialization * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITPluggableTerminalInitialization * This);
         
+        DECLSPEC_XFGVIRT(ITPluggableTerminalInitialization, InitializeDynamic)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InitializeDynamic )( 
             __RPC__in ITPluggableTerminalInitialization * This,
             /* [annotation][in] */ 
@@ -442,6 +463,7 @@ EXTERN_C const IID IID_ITTerminalManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITTerminalManager * This,
             /* [annotation][in] */ 
@@ -449,12 +471,15 @@ EXTERN_C const IID IID_ITTerminalManager;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITTerminalManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITTerminalManager * This);
         
+        DECLSPEC_XFGVIRT(ITTerminalManager, GetDynamicTerminalClasses)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetDynamicTerminalClasses )( 
             __RPC__in ITTerminalManager * This,
             /* [annotation][in] */ 
@@ -464,6 +489,7 @@ EXTERN_C const IID IID_ITTerminalManager;
             /* [annotation][out] */ 
             _Out_  IID *pTerminalClasses);
         
+        DECLSPEC_XFGVIRT(ITTerminalManager, CreateDynamicTerminal)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateDynamicTerminal )( 
             __RPC__in ITTerminalManager * This,
             /* [annotation][in] */ 
@@ -559,6 +585,7 @@ EXTERN_C const IID IID_ITTerminalManager2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITTerminalManager2 * This,
             /* [annotation][in] */ 
@@ -566,12 +593,15 @@ EXTERN_C const IID IID_ITTerminalManager2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITTerminalManager2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITTerminalManager2 * This);
         
+        DECLSPEC_XFGVIRT(ITTerminalManager, GetDynamicTerminalClasses)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetDynamicTerminalClasses )( 
             __RPC__in ITTerminalManager2 * This,
             /* [annotation][in] */ 
@@ -581,6 +611,7 @@ EXTERN_C const IID IID_ITTerminalManager2;
             /* [annotation][out] */ 
             _Out_  IID *pTerminalClasses);
         
+        DECLSPEC_XFGVIRT(ITTerminalManager, CreateDynamicTerminal)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateDynamicTerminal )( 
             __RPC__in ITTerminalManager2 * This,
             /* [annotation][in] */ 
@@ -596,6 +627,7 @@ EXTERN_C const IID IID_ITTerminalManager2;
             /* [annotation][out] */ 
             _Out_  ITTerminal **ppTerminal);
         
+        DECLSPEC_XFGVIRT(ITTerminalManager2, GetPluggableSuperclasses)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetPluggableSuperclasses )( 
             __RPC__in ITTerminalManager2 * This,
             /* [annotation][out][in] */ 
@@ -603,6 +635,7 @@ EXTERN_C const IID IID_ITTerminalManager2;
             /* [annotation][out] */ 
             _Out_  IID *pSuperclasses);
         
+        DECLSPEC_XFGVIRT(ITTerminalManager2, GetPluggableTerminalClasses)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetPluggableTerminalClasses )( 
             __RPC__in ITTerminalManager2 * This,
             /* [annotation][in] */ 
@@ -753,6 +786,7 @@ EXTERN_C const IID IID_ITPluggableTerminalClassRegistration;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITPluggableTerminalClassRegistration * This,
             /* [annotation][in] */ 
@@ -760,17 +794,21 @@ EXTERN_C const IID IID_ITPluggableTerminalClassRegistration;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITPluggableTerminalClassRegistration * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITPluggableTerminalClassRegistration * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITPluggableTerminalClassRegistration * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITPluggableTerminalClassRegistration * This,
             /* [annotation][in] */ 
@@ -780,6 +818,7 @@ EXTERN_C const IID IID_ITPluggableTerminalClassRegistration;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITPluggableTerminalClassRegistration * This,
             /* [annotation][in] */ 
@@ -792,6 +831,7 @@ EXTERN_C const IID IID_ITPluggableTerminalClassRegistration;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ITPluggableTerminalClassRegistration * This,
             /* [annotation][in] */ 
@@ -811,86 +851,103 @@ EXTERN_C const IID IID_ITPluggableTerminalClassRegistration;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ITPluggableTerminalClassRegistration, get_Name)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ITPluggableTerminalClassRegistration * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pName);
         
+        DECLSPEC_XFGVIRT(ITPluggableTerminalClassRegistration, put_Name)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in ITPluggableTerminalClassRegistration * This,
             /* [annotation][in] */ 
             _In_  BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(ITPluggableTerminalClassRegistration, get_Company)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Company )( 
             __RPC__in ITPluggableTerminalClassRegistration * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pCompany);
         
+        DECLSPEC_XFGVIRT(ITPluggableTerminalClassRegistration, put_Company)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Company )( 
             __RPC__in ITPluggableTerminalClassRegistration * This,
             /* [annotation][in] */ 
             _In_  BSTR bstrCompany);
         
+        DECLSPEC_XFGVIRT(ITPluggableTerminalClassRegistration, get_Version)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Version )( 
             __RPC__in ITPluggableTerminalClassRegistration * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pVersion);
         
+        DECLSPEC_XFGVIRT(ITPluggableTerminalClassRegistration, put_Version)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Version )( 
             __RPC__in ITPluggableTerminalClassRegistration * This,
             /* [annotation][in] */ 
             _In_  BSTR bstrVersion);
         
+        DECLSPEC_XFGVIRT(ITPluggableTerminalClassRegistration, get_TerminalClass)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_TerminalClass )( 
             __RPC__in ITPluggableTerminalClassRegistration * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pTerminalClass);
         
+        DECLSPEC_XFGVIRT(ITPluggableTerminalClassRegistration, put_TerminalClass)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_TerminalClass )( 
             __RPC__in ITPluggableTerminalClassRegistration * This,
             /* [annotation][in] */ 
             _In_  BSTR bstrTerminalClass);
         
+        DECLSPEC_XFGVIRT(ITPluggableTerminalClassRegistration, get_CLSID)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_CLSID )( 
             __RPC__in ITPluggableTerminalClassRegistration * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pCLSID);
         
+        DECLSPEC_XFGVIRT(ITPluggableTerminalClassRegistration, put_CLSID)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_CLSID )( 
             __RPC__in ITPluggableTerminalClassRegistration * This,
             /* [annotation][in] */ 
             _In_  BSTR bstrCLSID);
         
+        DECLSPEC_XFGVIRT(ITPluggableTerminalClassRegistration, get_Direction)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Direction )( 
             __RPC__in ITPluggableTerminalClassRegistration * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  TMGR_DIRECTION *pDirection);
         
+        DECLSPEC_XFGVIRT(ITPluggableTerminalClassRegistration, put_Direction)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Direction )( 
             __RPC__in ITPluggableTerminalClassRegistration * This,
             /* [annotation][in] */ 
             _In_  TMGR_DIRECTION nDirection);
         
+        DECLSPEC_XFGVIRT(ITPluggableTerminalClassRegistration, get_MediaTypes)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MediaTypes )( 
             __RPC__in ITPluggableTerminalClassRegistration * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *pMediaTypes);
         
+        DECLSPEC_XFGVIRT(ITPluggableTerminalClassRegistration, put_MediaTypes)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MediaTypes )( 
             __RPC__in ITPluggableTerminalClassRegistration * This,
             /* [annotation][in] */ 
             _In_  long nMediaTypes);
         
+        DECLSPEC_XFGVIRT(ITPluggableTerminalClassRegistration, Add)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in ITPluggableTerminalClassRegistration * This,
             /* [annotation][in] */ 
             _In_  BSTR bstrSuperclass);
         
+        DECLSPEC_XFGVIRT(ITPluggableTerminalClassRegistration, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in ITPluggableTerminalClassRegistration * This,
             /* [annotation][in] */ 
             _In_  BSTR bstrSuperclass);
         
+        DECLSPEC_XFGVIRT(ITPluggableTerminalClassRegistration, GetTerminalClassInfo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetTerminalClassInfo )( 
             __RPC__in ITPluggableTerminalClassRegistration * This,
             /* [annotation][in] */ 
@@ -1048,6 +1105,7 @@ EXTERN_C const IID IID_ITPluggableTerminalSuperclassRegistration;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITPluggableTerminalSuperclassRegistration * This,
             /* [annotation][in] */ 
@@ -1055,17 +1113,21 @@ EXTERN_C const IID IID_ITPluggableTerminalSuperclassRegistration;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITPluggableTerminalSuperclassRegistration * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITPluggableTerminalSuperclassRegistration * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITPluggableTerminalSuperclassRegistration * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITPluggableTerminalSuperclassRegistration * This,
             /* [annotation][in] */ 
@@ -1075,6 +1137,7 @@ EXTERN_C const IID IID_ITPluggableTerminalSuperclassRegistration;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITPluggableTerminalSuperclassRegistration * This,
             /* [annotation][in] */ 
@@ -1087,6 +1150,7 @@ EXTERN_C const IID IID_ITPluggableTerminalSuperclassRegistration;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ITPluggableTerminalSuperclassRegistration * This,
             /* [annotation][in] */ 
@@ -1106,40 +1170,49 @@ EXTERN_C const IID IID_ITPluggableTerminalSuperclassRegistration;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ITPluggableTerminalSuperclassRegistration, get_Name)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ITPluggableTerminalSuperclassRegistration * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pName);
         
+        DECLSPEC_XFGVIRT(ITPluggableTerminalSuperclassRegistration, put_Name)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in ITPluggableTerminalSuperclassRegistration * This,
             /* [annotation][in] */ 
             _In_  BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(ITPluggableTerminalSuperclassRegistration, get_CLSID)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_CLSID )( 
             __RPC__in ITPluggableTerminalSuperclassRegistration * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pCLSID);
         
+        DECLSPEC_XFGVIRT(ITPluggableTerminalSuperclassRegistration, put_CLSID)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_CLSID )( 
             __RPC__in ITPluggableTerminalSuperclassRegistration * This,
             /* [annotation][in] */ 
             _In_  BSTR bstrCLSID);
         
+        DECLSPEC_XFGVIRT(ITPluggableTerminalSuperclassRegistration, Add)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in ITPluggableTerminalSuperclassRegistration * This);
         
+        DECLSPEC_XFGVIRT(ITPluggableTerminalSuperclassRegistration, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in ITPluggableTerminalSuperclassRegistration * This);
         
+        DECLSPEC_XFGVIRT(ITPluggableTerminalSuperclassRegistration, GetTerminalSuperclassInfo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetTerminalSuperclassInfo )( 
             __RPC__in ITPluggableTerminalSuperclassRegistration * This);
         
+        DECLSPEC_XFGVIRT(ITPluggableTerminalSuperclassRegistration, get_TerminalClasses)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_TerminalClasses )( 
             __RPC__in ITPluggableTerminalSuperclassRegistration * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  VARIANT *pTerminals);
         
+        DECLSPEC_XFGVIRT(ITPluggableTerminalSuperclassRegistration, EnumerateTerminalClasses)
         /* [hidden][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateTerminalClasses )( 
             __RPC__in ITPluggableTerminalSuperclassRegistration * This,
             /* [annotation][retval][out] */ 

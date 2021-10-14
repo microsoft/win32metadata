@@ -129,12 +129,12 @@ typedef NTSTATUS *PNTSTATUS;
 #define KDF_SALT                0xF
 #define KDF_ITERATION_COUNT     0x10
 //
-//  
+//
 // Parameters for BCrypt(/NCrypt)KeyDerivation:
-// Generic parameters: 
+// Generic parameters:
 // KDF_GENERIC_PARAMETER and KDF_HASH_ALGORITHM are the generic parameters that can be passed for the following KDF algorithms:
-// BCRYPT/NCRYPT_SP800108_CTR_HMAC_ALGORITHM 
-//      KDF_GENERIC_PARAMETER = KDF_LABEL||0x00||KDF_CONTEXT 
+// BCRYPT/NCRYPT_SP800108_CTR_HMAC_ALGORITHM
+//      KDF_GENERIC_PARAMETER = KDF_LABEL||0x00||KDF_CONTEXT
 // BCRYPT/NCRYPT_SP80056A_CONCAT_ALGORITHM
 //      KDF_GENERIC_PARAMETER = KDF_ALGORITHMID || KDF_PARTYUINFO || KDF_PARTYVINFO {|| KDF_SUPPPUBINFO } {|| KDF_SUPPPRIVINFO }
 // BCRYPT/NCRYPT_PBKDF2_ALGORITHM
@@ -149,7 +149,7 @@ typedef NTSTATUS *PNTSTATUS;
 //      KDF_GENERIC_PARAMETER = Not used
 //
 // KDF specific parameters:
-// For BCRYPT/NCRYPT_SP800108_CTR_HMAC_ALGORITHM: 
+// For BCRYPT/NCRYPT_SP800108_CTR_HMAC_ALGORITHM:
 //      KDF_HASH_ALGORITHM, KDF_LABEL and KDF_CONTEXT are required
 // For BCRYPT/NCRYPT_SP80056A_CONCAT_ALGORITHM:
 //      KDF_HASH_ALGORITHM, KDF_ALGORITHMID, KDF_PARTYUINFO, KDF_PARTYVINFO are required
@@ -376,6 +376,10 @@ typedef struct _BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO
 #define BCRYPT_PROV_DISPATCH        0x00000001  // BCryptOpenAlgorithmProvider
 
 #define BCRYPT_BLOCK_PADDING        0x00000001  // BCryptEncrypt/Decrypt
+
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+#define BCRYPT_GENERATE_IV          0x00000020  // BCryptGenerateSymmetricKey BCryptEncrypt
+#endif
 
 // RSA padding schemes
 #define BCRYPT_PAD_NONE             0x00000001
@@ -768,10 +772,10 @@ typedef enum {
 } BCRYPT_HASH_OPERATION_TYPE;
 
 typedef struct _BCRYPT_MULTI_HASH_OPERATION {
-                            ULONG                           iHash;          // index of hash object 
+                            ULONG                           iHash;          // index of hash object
                             BCRYPT_HASH_OPERATION_TYPE      hashOperation;  // operation to be performed
     _Field_size_(cbBuffer)  PUCHAR                          pbBuffer;       // data to be hashed, or result buffer
-                            ULONG                           cbBuffer;       
+                            ULONG                           cbBuffer;
 } BCRYPT_MULTI_HASH_OPERATION;
 
 // Enum to specify type of multi-operation is passed to BCryptProcesMultiOperations
@@ -843,6 +847,10 @@ typedef struct _BCRYPT_MULTI_OBJECT_LENGTH_STRUCT
 
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS4)
 #define BCRYPT_HKDF_ALGORITHM                   L"HKDF"
+#endif
+
+#if (NTDDI_VERSION >= NTDDI_WIN10_FE)
+#define BCRYPT_CHACHA20_POLY1305_ALGORITHM      L"CHACHA20_POLY1305"
 #endif
 
 //
@@ -935,6 +943,10 @@ typedef struct _BCRYPT_MULTI_OBJECT_LENGTH_STRUCT
 
 #endif
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_FE)
+#define BCRYPT_CHACHA20_POLY1305_ALG_HANDLE     ((BCRYPT_ALG_HANDLE) 0x000003A1)
+#endif
+
 //
 // Primitive algorithm provider functions.
 //
@@ -984,8 +996,8 @@ typedef struct _BCRYPT_MULTI_OBJECT_LENGTH_STRUCT
 
 //
 // The EXTENDED_KEYSIZE flag extends the supported set of key sizes.
-// 
-// The original design has a per-algorithm maximum key size, and 
+//
+// The original design has a per-algorithm maximum key size, and
 // BCryptGenerateSymmetricKey truncates any longer input to the maximum key size for that
 // algorithm. Some callers depend on this feature and pass in large buffers.
 // This makes it impossible to silently extend the supported key size without breaking
@@ -1007,11 +1019,11 @@ typedef struct _BCRYPT_MULTI_OBJECT_LENGTH_STRUCT
 // Starting in Redstone 1 (summer 2016 release of Win10) this flag has the following effect on the
 //  Microsoft default algorithm provider.
 // - BCryptGenerateSymmetricKey when generating an XTS-AES key with this flag specified and FIPS mode enabled
-//      will verify that the two halves of the key are not identical. If they are, an error is returned. 
+//      will verify that the two halves of the key are not identical. If they are, an error is returned.
 //      This is actually incompatible with the NIST SP 800-38E and IEEE Std 1619-2007 definitions
-//      of XTS-AES. Rather than change the standard, NIST added this requirement in the FIPS 140-2 
+//      of XTS-AES. Rather than change the standard, NIST added this requirement in the FIPS 140-2
 //      implementation guidance.
-//      This check breaks existing usage of the algorithm, which is why we only perform the check when the 
+//      This check breaks existing usage of the algorithm, which is why we only perform the check when the
 //      caller explicitly asks for it.
 //      Use of this flag  for any algorithm other than XTS-AES generates an error.
 // Note that this flag is not supported for BCryptImportKey.
@@ -1079,7 +1091,7 @@ BCryptEnumProviders(
     _In_    ULONG   dwFlags);
 
 
-// Unused flags. Kept for backward compatibility. 
+// Unused flags. Kept for backward compatibility.
 //   "Flags for use with BCryptGetProperty and BCryptSetProperty"
 #define BCRYPT_PUBLIC_KEY_FLAG                  0x00000001
 #define BCRYPT_PRIVATE_KEY_FLAG                 0x00000002
@@ -1207,6 +1219,13 @@ BCryptImportKey(
 
 
 #define BCRYPT_NO_KEY_VALIDATION    0x00000008
+
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+#define BCRYPT_KEY_VALIDATION_RANGE             0x00000010  // BCryptImportKeyPair
+#define BCRYPT_KEY_VALIDATION_RANGE_AND_ORDER   0x00000018  // BCryptImportKeyPair & BCryptFinalizeKeyPair
+#define BCRYPT_KEY_VALIDATION_REGENERATE        0x00000020  // BCryptImportKeyPair
+#endif
+
 _Must_inspect_result_
 NTSTATUS
 WINAPI
@@ -1918,13 +1937,13 @@ WINAPI
 BCryptGetFipsAlgorithmMode(
     _Out_ BOOLEAN *pfEnabled
     );
-    
+
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)*/
 #pragma endregion
 
 #pragma region Desktop Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
-    
+
 BOOLEAN
 CngGetFipsAlgorithmMode(
     VOID

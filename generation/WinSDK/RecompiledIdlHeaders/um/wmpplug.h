@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 #pragma warning( disable: 4049 )  /* more than 64k source lines */
@@ -31,6 +31,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -161,44 +169,54 @@ EXTERN_C const IID IID_IWMPPluginUI;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPPluginUI * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPPluginUI * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPPluginUI * This);
         
+        DECLSPEC_XFGVIRT(IWMPPluginUI, SetCore)
         HRESULT ( STDMETHODCALLTYPE *SetCore )( 
             IWMPPluginUI * This,
             /* [in] */ IWMPCore *pCore);
         
+        DECLSPEC_XFGVIRT(IWMPPluginUI, Create)
         HRESULT ( STDMETHODCALLTYPE *Create )( 
             IWMPPluginUI * This,
             /* [in] */ HWND hwndParent,
             /* [out] */ HWND *phwndWindow);
         
+        DECLSPEC_XFGVIRT(IWMPPluginUI, Destroy)
         HRESULT ( STDMETHODCALLTYPE *Destroy )( 
             IWMPPluginUI * This);
         
+        DECLSPEC_XFGVIRT(IWMPPluginUI, DisplayPropertyPage)
         HRESULT ( STDMETHODCALLTYPE *DisplayPropertyPage )( 
             IWMPPluginUI * This,
             /* [in] */ HWND hwndParent);
         
+        DECLSPEC_XFGVIRT(IWMPPluginUI, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             IWMPPluginUI * This,
             /* [in] */ const WCHAR *pwszName,
             /* [out] */ VARIANT *pvarProperty);
         
+        DECLSPEC_XFGVIRT(IWMPPluginUI, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             IWMPPluginUI * This,
             /* [in] */ const WCHAR *pwszName,
             /* [in] */ const VARIANT *pvarProperty);
         
+        DECLSPEC_XFGVIRT(IWMPPluginUI, TranslateAccelerator)
         HRESULT ( STDMETHODCALLTYPE *TranslateAccelerator )( 
             IWMPPluginUI * This,
             /* [in] */ LPMSG lpmsg);

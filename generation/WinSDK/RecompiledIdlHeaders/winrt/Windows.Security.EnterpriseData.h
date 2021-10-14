@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xa0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SECURITY_ENTERPRISEDATA_ENTERPRISEDATACONTRACT_VERSION)
@@ -3475,9 +3475,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Security.EnterpriseData.EnterpriseDataContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics3 interface starting with version 3.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
  *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics4 interface starting with version 4.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
  *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics2 interface starting with version 2.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
+ *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics3 interface starting with version 3.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
  *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics interface starting with version 1.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
  *
  * Class implements the following interfaces:
@@ -8340,9 +8340,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Security.EnterpriseData.EnterpriseDataContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics3 interface starting with version 3.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
  *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics4 interface starting with version 4.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
  *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics2 interface starting with version 2.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
+ *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics3 interface starting with version 3.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
  *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics interface starting with version 1.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
  *
  * Class implements the following interfaces:

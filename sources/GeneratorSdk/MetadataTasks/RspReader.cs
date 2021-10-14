@@ -18,7 +18,7 @@ namespace MetadataTasks
                     continue;
                 }
 
-                if (inSettingsName)
+                if (inSettingsName && !string.IsNullOrEmpty(line))
                 {
                     yield return line;
                 }

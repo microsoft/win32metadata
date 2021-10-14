@@ -37,3 +37,4 @@ typedef struct _OLD_LARGE_INTEGER {
 #include <certsrv.h>
 #include <certview.h>
 #include <xenroll.h>
+#include <certreqd.h>

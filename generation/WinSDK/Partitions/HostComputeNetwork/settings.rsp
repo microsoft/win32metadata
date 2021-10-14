@@ -1,0 +1,5 @@
+--traverse
+<IncludeRoot>/um/computenetwork.h
+--namespace
+Windows.Win32.System.HostComputeNetwork
+

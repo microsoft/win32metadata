@@ -96,7 +96,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xa0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -895,8 +895,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.ApplicationModel.Resources.Management.ResourceIndexerContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.ApplicationModel.Resources.Management.IResourceIndexerFactory2 interface starting with version 1.0 of the Windows.ApplicationModel.Resources.Management.ResourceIndexerContract API contract
  *   Type can be activated via the Windows.ApplicationModel.Resources.Management.IResourceIndexerFactory interface starting with version 1.0 of the Windows.ApplicationModel.Resources.Management.ResourceIndexerContract API contract
+ *   Type can be activated via the Windows.ApplicationModel.Resources.Management.IResourceIndexerFactory2 interface starting with version 1.0 of the Windows.ApplicationModel.Resources.Management.ResourceIndexerContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Resources.Management.IResourceIndexer ** Default Interface **
@@ -2318,8 +2318,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.ApplicationModel.Resources.Management.ResourceIndexerContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.ApplicationModel.Resources.Management.IResourceIndexerFactory2 interface starting with version 1.0 of the Windows.ApplicationModel.Resources.Management.ResourceIndexerContract API contract
  *   Type can be activated via the Windows.ApplicationModel.Resources.Management.IResourceIndexerFactory interface starting with version 1.0 of the Windows.ApplicationModel.Resources.Management.ResourceIndexerContract API contract
+ *   Type can be activated via the Windows.ApplicationModel.Resources.Management.IResourceIndexerFactory2 interface starting with version 1.0 of the Windows.ApplicationModel.Resources.Management.ResourceIndexerContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Resources.Management.IResourceIndexer ** Default Interface **

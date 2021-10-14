@@ -9,5 +9,7 @@ namespace Windows.Win32.Networking.WinSock
         // (SOCKET)(~0) which equals uint.MaxValue
         [NativeTypeName("SOCKET")]
         public const uint INVALID_SOCKET = uint.MaxValue;
+
+        public const uint WSA_INFINITE = 0xFFFFFFFF;
     }
 }

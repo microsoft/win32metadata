@@ -92,6 +92,7 @@ __inline int __CRTDECL __acrt_locale_get_ctype_array_value(
     // To avoid undefined behavior, we should check this range for all accesses.
     // Note _locale_pctype array does extend to -127 to support accessing
     // _pctype directly with signed chars.
+
     if (_Char_value >= -1 && _Char_value <= 255)
     {
         return _Locale_pctype_array[_Char_value] & _Mask;
@@ -223,12 +224,12 @@ __inline int __CRTDECL __acrt_locale_get_ctype_array_value(
         #ifdef _DEBUG
         return _chvalidator_l(_Locale, _C, _Mask);
         #else
-        if (_Locale)
+        if (!_Locale)
         {
-            return __acrt_locale_get_ctype_array_value(__acrt_get_locale_data_prefix(_Locale)->_locale_pctype, _C, _Mask);
+            return __chvalidchk(_C, _Mask);
         }
 
-        return __chvalidchk(_C, _Mask);
+        return __acrt_locale_get_ctype_array_value(__acrt_get_locale_data_prefix(_Locale)->_locale_pctype, _C, _Mask);
         #endif
     }
 
@@ -241,21 +242,22 @@ __inline int __CRTDECL __acrt_locale_get_ctype_array_value(
         _In_opt_ _locale_t const _Locale
         )
     {
-        if (_Locale) {
-            if (_C >= -1 && _C <= 255)
-            {
-                return __acrt_get_locale_data_prefix(_Locale)->_locale_pctype[_C] & _Mask;
-            }
-
-            if (__acrt_get_locale_data_prefix(_Locale)->_locale_mb_cur_max > 1)
-            {
-                return _isctype_l(_C, _Mask, _Locale);
-            }
-
-            return 0; // >0xFF and SBCS locale
+        if (!_Locale)
+        {
+            return _chvalidchk_l(_C, _Mask, 0);
         }
 
-        return _chvalidchk_l(_C, _Mask, 0);
+        if (_C >= -1 && _C <= 255)
+        {
+            return __acrt_get_locale_data_prefix(_Locale)->_locale_pctype[_C] & _Mask;
+        }
+
+        if (__acrt_get_locale_data_prefix(_Locale)->_locale_mb_cur_max > 1)
+        {
+            return _isctype_l(_C, _Mask, _Locale);
+        }
+
+        return 0; // >0xFF and SBCS locale
     }
 
     #define _isalpha_l(c, locale)  _ischartype_l(c, _ALPHA, locale)

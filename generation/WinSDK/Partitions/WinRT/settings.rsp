@@ -1,3 +1,7 @@
+--with-type
+HANDLE_OPTIONS=uint
+--with-attribute
+HANDLE_OPTIONS=Flags
 --exclude
 PFNGETACTIVATIONFACTORY
 RO_REGISTRATION_COOKIE
@@ -56,6 +60,9 @@ ID2D1Factory
 <IncludeRoot>/winrt/windows.graphics.interop.h
 <IncludeRoot>/winrt/windows.ui.composition.interop.h
 <IncludeRoot>/winrt/winstring.h
+<IncludeRoot>/um/sharewindowcommandsourceinterop.h
+<IncludeRoot>/um/windows.ui.viewmanagement.core.coreframeworkinputviewinterop.h
+<IncludeRoot>/um/windowsstoragecom.h
 <PartitionDir>\main.cpp
 --namespace
 Windows.Win32.System.WinRT

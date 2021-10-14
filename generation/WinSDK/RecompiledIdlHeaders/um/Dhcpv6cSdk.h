@@ -73,7 +73,7 @@ extern "C" {
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
 
-#endif  DHCPV6_OPTIONS_DEFINED
+#endif // DHCPV6_OPTIONS_DEFINED
 
 #pragma region Application Family or OneCore Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
@@ -89,7 +89,7 @@ typedef struct _DHCPV6CAPI_PARAMS {                  // use this structure to re
     DWORD                        nBytesData;    // how many bytes of data are there in Data?
 } DHCPV6CAPI_PARAMS, *PDHCPV6CAPI_PARAMS, *LPDHCPV6CAPI_PARAMS;
 
-#endif DHCPV6API_PARAMS_DEFINED
+#endif // DHCPV6API_PARAMS_DEFINED
 
 typedef struct _DHCPV6CAPI_PARAMS_ARRAY {          // array of params..
     ULONG                            nParams;       // size of array
@@ -216,5 +216,5 @@ IN LPDHCPV6PrefixLeaseInformation	leaseInfo
 //================================================================================
 // end of file
 //================================================================================
-#endif _DHCPV6CSDK_
+#endif // _DHCPV6CSDK_
 

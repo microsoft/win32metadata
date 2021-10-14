@@ -16,5 +16,7 @@ PfnRecoCallback
 <IncludeRoot>/um/micaut.h
 <IncludeRoot>/um/RTSCOM.h
 <IncludeRoot>/um/recapis.h
+<IncludeRoot>/um/recdefs.h
+<IncludeRoot>/um/tpcerror.h
 --namespace
 Windows.Win32.UI.TabletPC

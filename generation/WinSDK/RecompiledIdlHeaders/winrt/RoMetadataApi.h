@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -239,18 +247,22 @@ EXTERN_C const IID IID_IMetaDataDispenser;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMetaDataDispenser * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMetaDataDispenser * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMetaDataDispenser * This);
         
+        DECLSPEC_XFGVIRT(IMetaDataDispenser, DefineScope)
         HRESULT ( STDMETHODCALLTYPE *DefineScope )( 
             IMetaDataDispenser * This,
             /* [in] */ REFCLSID rclsid,
@@ -258,6 +270,7 @@ EXTERN_C const IID IID_IMetaDataDispenser;
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ IUnknown **ppIUnk);
         
+        DECLSPEC_XFGVIRT(IMetaDataDispenser, OpenScope)
         HRESULT ( STDMETHODCALLTYPE *OpenScope )( 
             IMetaDataDispenser * This,
             /* [string][in] */ LPCWSTR szScope,
@@ -265,6 +278,7 @@ EXTERN_C const IID IID_IMetaDataDispenser;
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ IUnknown **ppIUnk);
         
+        DECLSPEC_XFGVIRT(IMetaDataDispenser, OpenScopeOnMemory)
         HRESULT ( STDMETHODCALLTYPE *OpenScopeOnMemory )( 
             IMetaDataDispenser * This,
             /* [size_is][in] */ const BYTE *pData,
@@ -380,18 +394,22 @@ EXTERN_C const IID IID_IMetaDataDispenserEx;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMetaDataDispenserEx * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMetaDataDispenserEx * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMetaDataDispenserEx * This);
         
+        DECLSPEC_XFGVIRT(IMetaDataDispenser, DefineScope)
         HRESULT ( STDMETHODCALLTYPE *DefineScope )( 
             IMetaDataDispenserEx * This,
             /* [in] */ REFCLSID rclsid,
@@ -399,6 +417,7 @@ EXTERN_C const IID IID_IMetaDataDispenserEx;
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ IUnknown **ppIUnk);
         
+        DECLSPEC_XFGVIRT(IMetaDataDispenser, OpenScope)
         HRESULT ( STDMETHODCALLTYPE *OpenScope )( 
             IMetaDataDispenserEx * This,
             /* [string][in] */ LPCWSTR szScope,
@@ -406,6 +425,7 @@ EXTERN_C const IID IID_IMetaDataDispenserEx;
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ IUnknown **ppIUnk);
         
+        DECLSPEC_XFGVIRT(IMetaDataDispenser, OpenScopeOnMemory)
         HRESULT ( STDMETHODCALLTYPE *OpenScopeOnMemory )( 
             IMetaDataDispenserEx * This,
             /* [size_is][in] */ const BYTE *pData,
@@ -414,16 +434,19 @@ EXTERN_C const IID IID_IMetaDataDispenserEx;
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ IUnknown **ppIUnk);
         
+        DECLSPEC_XFGVIRT(IMetaDataDispenserEx, SetOption)
         HRESULT ( STDMETHODCALLTYPE *SetOption )( 
             IMetaDataDispenserEx * This,
             /* [in] */ REFGUID optionId,
             /* [in] */ const VARIANT *pValue);
         
+        DECLSPEC_XFGVIRT(IMetaDataDispenserEx, GetOption)
         HRESULT ( STDMETHODCALLTYPE *GetOption )( 
             IMetaDataDispenserEx * This,
             /* [in] */ REFGUID optionId,
             /* [out] */ VARIANT *pValue);
         
+        DECLSPEC_XFGVIRT(IMetaDataDispenserEx, OpenScopeOnITypeInfo)
         HRESULT ( STDMETHODCALLTYPE *OpenScopeOnITypeInfo )( 
             IMetaDataDispenserEx * This,
             /* [in] */ ITypeInfo *pITI,
@@ -431,6 +454,7 @@ EXTERN_C const IID IID_IMetaDataDispenserEx;
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ IUnknown **ppIUnk);
         
+        DECLSPEC_XFGVIRT(IMetaDataDispenserEx, GetCORSystemDirectory)
         HRESULT ( STDMETHODCALLTYPE *GetCORSystemDirectory )( 
             IMetaDataDispenserEx * This,
             /* [annotation][size_is][string][out] */ 
@@ -438,6 +462,7 @@ EXTERN_C const IID IID_IMetaDataDispenserEx;
             /* [in] */ DWORD cchBuffer,
             /* [out] */ DWORD *pchBuffer);
         
+        DECLSPEC_XFGVIRT(IMetaDataDispenserEx, FindAssembly)
         HRESULT ( STDMETHODCALLTYPE *FindAssembly )( 
             IMetaDataDispenserEx * This,
             /* [unique][string][in] */ LPCWSTR szAppBase,
@@ -448,6 +473,7 @@ EXTERN_C const IID IID_IMetaDataDispenserEx;
             /* [in] */ ULONG cchName,
             /* [out] */ ULONG *pchName);
         
+        DECLSPEC_XFGVIRT(IMetaDataDispenserEx, FindAssemblyModule)
         HRESULT ( STDMETHODCALLTYPE *FindAssemblyModule )( 
             IMetaDataDispenserEx * This,
             /* [unique][string][in] */ LPCWSTR szAppBase,
@@ -648,18 +674,22 @@ EXTERN_C const IID IID_IMetaDataAssemblyImport;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMetaDataAssemblyImport * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMetaDataAssemblyImport * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMetaDataAssemblyImport * This);
         
+        DECLSPEC_XFGVIRT(IMetaDataAssemblyImport, GetAssemblyProps)
         HRESULT ( STDMETHODCALLTYPE *GetAssemblyProps )( 
             IMetaDataAssemblyImport * This,
             /* [in] */ mdAssembly mda,
@@ -673,6 +703,7 @@ EXTERN_C const IID IID_IMetaDataAssemblyImport;
             /* [out] */ ASSEMBLYMETADATA *pMetaData,
             /* [out] */ DWORD *pdwAssemblyFlags);
         
+        DECLSPEC_XFGVIRT(IMetaDataAssemblyImport, GetAssemblyRefProps)
         HRESULT ( STDMETHODCALLTYPE *GetAssemblyRefProps )( 
             IMetaDataAssemblyImport * This,
             /* [in] */ mdAssemblyRef mdar,
@@ -687,6 +718,7 @@ EXTERN_C const IID IID_IMetaDataAssemblyImport;
             /* [out] */ ULONG *pcbHashValue,
             /* [out] */ DWORD *pdwAssemblyRefFlags);
         
+        DECLSPEC_XFGVIRT(IMetaDataAssemblyImport, GetFileProps)
         HRESULT ( STDMETHODCALLTYPE *GetFileProps )( 
             IMetaDataAssemblyImport * This,
             /* [in] */ mdFile mdf,
@@ -698,6 +730,7 @@ EXTERN_C const IID IID_IMetaDataAssemblyImport;
             /* [out] */ ULONG *pcbHashValue,
             /* [out] */ DWORD *pdwFileFlags);
         
+        DECLSPEC_XFGVIRT(IMetaDataAssemblyImport, GetExportedTypeProps)
         HRESULT ( STDMETHODCALLTYPE *GetExportedTypeProps )( 
             IMetaDataAssemblyImport * This,
             /* [in] */ mdExportedType mdct,
@@ -709,6 +742,7 @@ EXTERN_C const IID IID_IMetaDataAssemblyImport;
             /* [out] */ mdTypeDef *ptkTypeDef,
             /* [out] */ DWORD *pdwExportedTypeFlags);
         
+        DECLSPEC_XFGVIRT(IMetaDataAssemblyImport, GetManifestResourceProps)
         HRESULT ( STDMETHODCALLTYPE *GetManifestResourceProps )( 
             IMetaDataAssemblyImport * This,
             /* [in] */ mdManifestResource mdmr,
@@ -720,6 +754,7 @@ EXTERN_C const IID IID_IMetaDataAssemblyImport;
             /* [out] */ DWORD *pdwOffset,
             /* [out] */ DWORD *pdwResourceFlags);
         
+        DECLSPEC_XFGVIRT(IMetaDataAssemblyImport, EnumAssemblyRefs)
         HRESULT ( STDMETHODCALLTYPE *EnumAssemblyRefs )( 
             IMetaDataAssemblyImport * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -727,6 +762,7 @@ EXTERN_C const IID IID_IMetaDataAssemblyImport;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcTokens);
         
+        DECLSPEC_XFGVIRT(IMetaDataAssemblyImport, EnumFiles)
         HRESULT ( STDMETHODCALLTYPE *EnumFiles )( 
             IMetaDataAssemblyImport * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -734,6 +770,7 @@ EXTERN_C const IID IID_IMetaDataAssemblyImport;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcTokens);
         
+        DECLSPEC_XFGVIRT(IMetaDataAssemblyImport, EnumExportedTypes)
         HRESULT ( STDMETHODCALLTYPE *EnumExportedTypes )( 
             IMetaDataAssemblyImport * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -741,6 +778,7 @@ EXTERN_C const IID IID_IMetaDataAssemblyImport;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcTokens);
         
+        DECLSPEC_XFGVIRT(IMetaDataAssemblyImport, EnumManifestResources)
         HRESULT ( STDMETHODCALLTYPE *EnumManifestResources )( 
             IMetaDataAssemblyImport * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -748,25 +786,30 @@ EXTERN_C const IID IID_IMetaDataAssemblyImport;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcTokens);
         
+        DECLSPEC_XFGVIRT(IMetaDataAssemblyImport, GetAssemblyFromScope)
         HRESULT ( STDMETHODCALLTYPE *GetAssemblyFromScope )( 
             IMetaDataAssemblyImport * This,
             /* [out] */ mdAssembly *ptkAssembly);
         
+        DECLSPEC_XFGVIRT(IMetaDataAssemblyImport, FindExportedTypeByName)
         HRESULT ( STDMETHODCALLTYPE *FindExportedTypeByName )( 
             IMetaDataAssemblyImport * This,
             /* [string][in] */ LPCWSTR szName,
             /* [in] */ mdToken mdtExportedType,
             /* [out] */ mdExportedType *ptkExportedType);
         
+        DECLSPEC_XFGVIRT(IMetaDataAssemblyImport, FindManifestResourceByName)
         HRESULT ( STDMETHODCALLTYPE *FindManifestResourceByName )( 
             IMetaDataAssemblyImport * This,
             /* [string][in] */ LPCWSTR szName,
             /* [out] */ mdManifestResource *ptkManifestResource);
         
+        DECLSPEC_XFGVIRT(IMetaDataAssemblyImport, CloseEnum)
         void ( STDMETHODCALLTYPE *CloseEnum )( 
             IMetaDataAssemblyImport * This,
             /* [in] */ HCORENUM hEnum);
         
+        DECLSPEC_XFGVIRT(IMetaDataAssemblyImport, FindAssembliesByName)
         HRESULT ( STDMETHODCALLTYPE *FindAssembliesByName )( 
             IMetaDataAssemblyImport * This,
             /* [unique][string][in] */ LPCWSTR szAppBase,
@@ -1315,32 +1358,39 @@ EXTERN_C const IID IID_IMetaDataImport;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMetaDataImport * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMetaDataImport * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMetaDataImport * This);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, CloseEnum)
         void ( STDMETHODCALLTYPE *CloseEnum )( 
             IMetaDataImport * This,
             /* [in] */ HCORENUM hEnum);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, CountEnum)
         HRESULT ( STDMETHODCALLTYPE *CountEnum )( 
             IMetaDataImport * This,
             /* [in] */ HCORENUM hEnum,
             /* [retval][out] */ ULONG *pulCount);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, ResetEnum)
         HRESULT ( STDMETHODCALLTYPE *ResetEnum )( 
             IMetaDataImport * This,
             /* [in] */ HCORENUM hEnum,
             /* [in] */ ULONG ulPos);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumTypeDefs)
         HRESULT ( STDMETHODCALLTYPE *EnumTypeDefs )( 
             IMetaDataImport * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -1348,6 +1398,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [in] */ ULONG cMax,
             /* [retval][out] */ ULONG *pcTypeDefs);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumInterfaceImpls)
         HRESULT ( STDMETHODCALLTYPE *EnumInterfaceImpls )( 
             IMetaDataImport * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -1356,6 +1407,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [in] */ ULONG cMax,
             /* [retval][out] */ ULONG *pcImpls);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumTypeRefs)
         HRESULT ( STDMETHODCALLTYPE *EnumTypeRefs )( 
             IMetaDataImport * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -1363,12 +1415,14 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [in] */ ULONG cMax,
             /* [retval][out] */ ULONG *pcTypeRefs);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, FindTypeDefByName)
         HRESULT ( STDMETHODCALLTYPE *FindTypeDefByName )( 
             IMetaDataImport * This,
             /* [string][in] */ LPCWSTR szTypeDef,
             /* [in] */ mdToken tkEnclosingClass,
             /* [retval][out] */ mdTypeDef *ptkTypeDef);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetScopeProps)
         HRESULT ( STDMETHODCALLTYPE *GetScopeProps )( 
             IMetaDataImport * This,
             /* [annotation][length_is][size_is][string][out] */ 
@@ -1377,10 +1431,12 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [out] */ ULONG *pchName,
             /* [unique][out] */ GUID *pmvid);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetModuleFromScope)
         HRESULT ( STDMETHODCALLTYPE *GetModuleFromScope )( 
             IMetaDataImport * This,
             /* [out] */ mdModule *ptkModule);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetTypeDefProps)
         HRESULT ( STDMETHODCALLTYPE *GetTypeDefProps )( 
             IMetaDataImport * This,
             /* [in] */ mdTypeDef tkTypeDef,
@@ -1391,12 +1447,14 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [out] */ DWORD *pdwTypeDefFlags,
             /* [out] */ mdToken *ptkExtends);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetInterfaceImplProps)
         HRESULT ( STDMETHODCALLTYPE *GetInterfaceImplProps )( 
             IMetaDataImport * This,
             /* [in] */ mdInterfaceImpl tkInterfaceImpl,
             /* [out] */ mdTypeDef *ptkClass,
             /* [out] */ mdToken *ptkIface);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetTypeRefProps)
         HRESULT ( STDMETHODCALLTYPE *GetTypeRefProps )( 
             IMetaDataImport * This,
             /* [in] */ mdTypeRef tkTypeRef,
@@ -1406,6 +1464,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [in] */ ULONG cchName,
             /* [out] */ ULONG *pchName);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, ResolveTypeRef)
         HRESULT ( STDMETHODCALLTYPE *ResolveTypeRef )( 
             IMetaDataImport * This,
             /* [in] */ mdTypeRef tkTypeRef,
@@ -1413,6 +1472,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [iid_is][out] */ IUnknown **ppIScope,
             /* [retval][out] */ mdTypeDef *ptkTypeDef);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumMembers)
         HRESULT ( STDMETHODCALLTYPE *EnumMembers )( 
             IMetaDataImport * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -1421,6 +1481,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcTokens);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumMembersWithName)
         HRESULT ( STDMETHODCALLTYPE *EnumMembersWithName )( 
             IMetaDataImport * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -1430,6 +1491,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcTokens);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumMethods)
         HRESULT ( STDMETHODCALLTYPE *EnumMethods )( 
             IMetaDataImport * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -1438,6 +1500,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcTokens);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumMethodsWithName)
         HRESULT ( STDMETHODCALLTYPE *EnumMethodsWithName )( 
             IMetaDataImport * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -1447,6 +1510,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcTokens);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumFields)
         HRESULT ( STDMETHODCALLTYPE *EnumFields )( 
             IMetaDataImport * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -1455,6 +1519,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcTokens);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumFieldsWithName)
         HRESULT ( STDMETHODCALLTYPE *EnumFieldsWithName )( 
             IMetaDataImport * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -1464,6 +1529,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcTokens);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumParams)
         HRESULT ( STDMETHODCALLTYPE *EnumParams )( 
             IMetaDataImport * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -1472,6 +1538,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcTokens);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumMemberRefs)
         HRESULT ( STDMETHODCALLTYPE *EnumMemberRefs )( 
             IMetaDataImport * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -1480,6 +1547,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcTokens);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumMethodImpls)
         HRESULT ( STDMETHODCALLTYPE *EnumMethodImpls )( 
             IMetaDataImport * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -1489,6 +1557,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcTokens);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumPermissionSets)
         HRESULT ( STDMETHODCALLTYPE *EnumPermissionSets )( 
             IMetaDataImport * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -1498,6 +1567,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcTokens);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, FindMember)
         HRESULT ( STDMETHODCALLTYPE *FindMember )( 
             IMetaDataImport * This,
             /* [in] */ mdTypeDef tkTypeDef,
@@ -1506,6 +1576,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [in] */ ULONG cbSigBlob,
             /* [out] */ mdToken *pmb);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, FindMethod)
         HRESULT ( STDMETHODCALLTYPE *FindMethod )( 
             IMetaDataImport * This,
             /* [in] */ mdTypeDef tkTypeDef,
@@ -1514,6 +1585,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [in] */ ULONG cbSigBlob,
             /* [out] */ mdMethodDef *ptkMethodDef);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, FindField)
         HRESULT ( STDMETHODCALLTYPE *FindField )( 
             IMetaDataImport * This,
             /* [in] */ mdTypeDef tkTypeDef,
@@ -1522,6 +1594,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [in] */ ULONG cbSigBlob,
             /* [out] */ mdFieldDef *ptkFieldDef);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, FindMemberRef)
         HRESULT ( STDMETHODCALLTYPE *FindMemberRef )( 
             IMetaDataImport * This,
             /* [in] */ mdTypeRef tkTypeRef,
@@ -1530,6 +1603,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [in] */ ULONG cbSigBlob,
             /* [out] */ mdMemberRef *pMemberRef);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetMethodProps)
         HRESULT ( STDMETHODCALLTYPE *GetMethodProps )( 
             IMetaDataImport * This,
             /* [in] */ mdMethodDef tkMethodDef,
@@ -1544,6 +1618,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [out] */ ULONG *pulCodeRVA,
             /* [out] */ DWORD *pdwImplFlags);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetMemberRefProps)
         HRESULT ( STDMETHODCALLTYPE *GetMemberRefProps )( 
             IMetaDataImport * This,
             /* [in] */ mdMemberRef tkMemberRef,
@@ -1555,6 +1630,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [size_is][size_is][out] */ PCCOR_SIGNATURE *ppvSigBlob,
             /* [out] */ ULONG *pcbSigBlob);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumProperties)
         HRESULT ( STDMETHODCALLTYPE *EnumProperties )( 
             IMetaDataImport * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -1563,6 +1639,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcProperties);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumEvents)
         HRESULT ( STDMETHODCALLTYPE *EnumEvents )( 
             IMetaDataImport * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -1571,6 +1648,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcEvents);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetEventProps)
         HRESULT ( STDMETHODCALLTYPE *GetEventProps )( 
             IMetaDataImport * This,
             /* [in] */ mdEvent tkEvent,
@@ -1587,6 +1665,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcOtherMethod);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumMethodSemantics)
         HRESULT ( STDMETHODCALLTYPE *EnumMethodSemantics )( 
             IMetaDataImport * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -1595,12 +1674,14 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcEventProp);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetMethodSemantics)
         HRESULT ( STDMETHODCALLTYPE *GetMethodSemantics )( 
             IMetaDataImport * This,
             /* [in] */ mdMethodDef tkMethodDef,
             /* [in] */ mdToken tkEventProp,
             /* [out] */ DWORD *pdwSemanticsFlags);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetClassLayout)
         HRESULT ( STDMETHODCALLTYPE *GetClassLayout )( 
             IMetaDataImport * This,
             /* [in] */ mdTypeDef tkTypeDef,
@@ -1610,18 +1691,21 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [out] */ ULONG *pcFieldOffset,
             /* [out] */ ULONG *pulClassSize);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetFieldMarshal)
         HRESULT ( STDMETHODCALLTYPE *GetFieldMarshal )( 
             IMetaDataImport * This,
             /* [in] */ mdToken tk,
             /* [size_is][size_is][out] */ PCCOR_SIGNATURE *ppvNativeType,
             /* [out] */ ULONG *pcbNativeType);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetRVA)
         HRESULT ( STDMETHODCALLTYPE *GetRVA )( 
             IMetaDataImport * This,
             /* [in] */ mdToken tk,
             /* [out] */ ULONG *pulCodeRVA,
             /* [out] */ DWORD *pdwImplFlags);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetPermissionSetProps)
         HRESULT ( STDMETHODCALLTYPE *GetPermissionSetProps )( 
             IMetaDataImport * This,
             /* [in] */ mdPermission tk,
@@ -1629,12 +1713,14 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [size_is][size_is][out] */ const BYTE **ppvPermission,
             /* [out] */ ULONG *pcbPermission);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetSigFromToken)
         HRESULT ( STDMETHODCALLTYPE *GetSigFromToken )( 
             IMetaDataImport * This,
             /* [in] */ mdSignature tkSignature,
             /* [size_is][size_is][out] */ PCCOR_SIGNATURE *ppvSig,
             /* [out] */ ULONG *pcbSig);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetModuleRefProps)
         HRESULT ( STDMETHODCALLTYPE *GetModuleRefProps )( 
             IMetaDataImport * This,
             /* [in] */ mdModuleRef tkModuleRef,
@@ -1643,6 +1729,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [in] */ ULONG cchName,
             /* [out] */ ULONG *pchName);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumModuleRefs)
         HRESULT ( STDMETHODCALLTYPE *EnumModuleRefs )( 
             IMetaDataImport * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -1650,17 +1737,20 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcModuleRefs);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetTypeSpecFromToken)
         HRESULT ( STDMETHODCALLTYPE *GetTypeSpecFromToken )( 
             IMetaDataImport * This,
             /* [in] */ mdTypeSpec tkTypeSpec,
             /* [size_is][size_is][out] */ PCCOR_SIGNATURE *ppvSig,
             /* [out] */ ULONG *pcbSig);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetNameFromToken)
         HRESULT ( STDMETHODCALLTYPE *GetNameFromToken )( 
             IMetaDataImport * This,
             /* [in] */ mdToken tk,
             /* [string][out] */ MDUTF8CSTR *pszUtf8NamePtr);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumUnresolvedMethods)
         HRESULT ( STDMETHODCALLTYPE *EnumUnresolvedMethods )( 
             IMetaDataImport * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -1668,6 +1758,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcTokens);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetUserString)
         HRESULT ( STDMETHODCALLTYPE *GetUserString )( 
             IMetaDataImport * This,
             /* [in] */ mdString tkString,
@@ -1676,6 +1767,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [in] */ ULONG cchString,
             /* [out] */ ULONG *pchString);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetPinvokeMap)
         HRESULT ( STDMETHODCALLTYPE *GetPinvokeMap )( 
             IMetaDataImport * This,
             /* [in] */ mdToken tk,
@@ -1686,6 +1778,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [out] */ ULONG *pchImportName,
             /* [out] */ mdModuleRef *ptkImportDLL);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumSignatures)
         HRESULT ( STDMETHODCALLTYPE *EnumSignatures )( 
             IMetaDataImport * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -1693,6 +1786,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcSignatures);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumTypeSpecs)
         HRESULT ( STDMETHODCALLTYPE *EnumTypeSpecs )( 
             IMetaDataImport * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -1700,6 +1794,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcTypeSpecs);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumUserStrings)
         HRESULT ( STDMETHODCALLTYPE *EnumUserStrings )( 
             IMetaDataImport * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -1707,12 +1802,14 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcStrings);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetParamForMethodIndex)
         HRESULT ( STDMETHODCALLTYPE *GetParamForMethodIndex )( 
             IMetaDataImport * This,
             /* [in] */ mdMethodDef tkMethodDef,
             /* [in] */ ULONG ulParamSeq,
             /* [out] */ mdParamDef *ptkParamDef);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumCustomAttributes)
         HRESULT ( STDMETHODCALLTYPE *EnumCustomAttributes )( 
             IMetaDataImport * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -1722,6 +1819,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcCustomAttributes);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetCustomAttributeProps)
         HRESULT ( STDMETHODCALLTYPE *GetCustomAttributeProps )( 
             IMetaDataImport * This,
             /* [in] */ mdCustomAttribute cv,
@@ -1730,12 +1828,14 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [unique][size_is][size_is][out] */ const BYTE **ppBlob,
             /* [unique][out] */ ULONG *pcbBlob);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, FindTypeRef)
         HRESULT ( STDMETHODCALLTYPE *FindTypeRef )( 
             IMetaDataImport * This,
             /* [in] */ mdToken tkResolutionScope,
             /* [string][in] */ LPCWSTR szName,
             /* [out] */ mdTypeRef *tkTypeRef);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetMemberProps)
         HRESULT ( STDMETHODCALLTYPE *GetMemberProps )( 
             IMetaDataImport * This,
             /* [in] */ mdToken tkMember,
@@ -1753,6 +1853,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [size_is][size_is][out] */ UVCP_CONSTANT *ppValue,
             /* [out] */ ULONG *pcchValue);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetFieldProps)
         HRESULT ( STDMETHODCALLTYPE *GetFieldProps )( 
             IMetaDataImport * This,
             /* [in] */ mdFieldDef tkFieldDef,
@@ -1768,6 +1869,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [size_is][size_is][out] */ UVCP_CONSTANT *ppValue,
             /* [out] */ ULONG *pcchValue);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetPropertyProps)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyProps )( 
             IMetaDataImport * This,
             /* [in] */ mdProperty prop,
@@ -1787,6 +1889,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcOtherMethod);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetParamProps)
         HRESULT ( STDMETHODCALLTYPE *GetParamProps )( 
             IMetaDataImport * This,
             /* [in] */ mdParamDef tkParamDef,
@@ -1801,6 +1904,7 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [size_is][size_is][out] */ UVCP_CONSTANT *ppValue,
             /* [out] */ ULONG *pcchValue);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetCustomAttributeByName)
         HRESULT ( STDMETHODCALLTYPE *GetCustomAttributeByName )( 
             IMetaDataImport * This,
             /* [in] */ mdToken tkObj,
@@ -1808,21 +1912,25 @@ EXTERN_C const IID IID_IMetaDataImport;
             /* [size_is][size_is][out] */ const BYTE **ppData,
             /* [out] */ ULONG *pcbData);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, IsValidToken)
         BOOL ( STDMETHODCALLTYPE *IsValidToken )( 
             IMetaDataImport * This,
             /* [in] */ mdToken tk);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetNestedClassProps)
         HRESULT ( STDMETHODCALLTYPE *GetNestedClassProps )( 
             IMetaDataImport * This,
             /* [in] */ mdTypeDef tdNestedClass,
             /* [out] */ mdTypeDef *ptdEnclosingClass);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetNativeCallConvFromSig)
         HRESULT ( STDMETHODCALLTYPE *GetNativeCallConvFromSig )( 
             IMetaDataImport * This,
             /* [size_is][in] */ const BYTE *pvSig,
             /* [in] */ ULONG cbSig,
             /* [out] */ ULONG *pCallConv);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, IsGlobal)
         HRESULT ( STDMETHODCALLTYPE *IsGlobal )( 
             IMetaDataImport * This,
             /* [in] */ mdToken tk,
@@ -2125,32 +2233,39 @@ EXTERN_C const IID IID_IMetaDataImport2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMetaDataImport2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMetaDataImport2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMetaDataImport2 * This);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, CloseEnum)
         void ( STDMETHODCALLTYPE *CloseEnum )( 
             IMetaDataImport2 * This,
             /* [in] */ HCORENUM hEnum);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, CountEnum)
         HRESULT ( STDMETHODCALLTYPE *CountEnum )( 
             IMetaDataImport2 * This,
             /* [in] */ HCORENUM hEnum,
             /* [retval][out] */ ULONG *pulCount);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, ResetEnum)
         HRESULT ( STDMETHODCALLTYPE *ResetEnum )( 
             IMetaDataImport2 * This,
             /* [in] */ HCORENUM hEnum,
             /* [in] */ ULONG ulPos);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumTypeDefs)
         HRESULT ( STDMETHODCALLTYPE *EnumTypeDefs )( 
             IMetaDataImport2 * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -2158,6 +2273,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cMax,
             /* [retval][out] */ ULONG *pcTypeDefs);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumInterfaceImpls)
         HRESULT ( STDMETHODCALLTYPE *EnumInterfaceImpls )( 
             IMetaDataImport2 * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -2166,6 +2282,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cMax,
             /* [retval][out] */ ULONG *pcImpls);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumTypeRefs)
         HRESULT ( STDMETHODCALLTYPE *EnumTypeRefs )( 
             IMetaDataImport2 * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -2173,12 +2290,14 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cMax,
             /* [retval][out] */ ULONG *pcTypeRefs);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, FindTypeDefByName)
         HRESULT ( STDMETHODCALLTYPE *FindTypeDefByName )( 
             IMetaDataImport2 * This,
             /* [string][in] */ LPCWSTR szTypeDef,
             /* [in] */ mdToken tkEnclosingClass,
             /* [retval][out] */ mdTypeDef *ptkTypeDef);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetScopeProps)
         HRESULT ( STDMETHODCALLTYPE *GetScopeProps )( 
             IMetaDataImport2 * This,
             /* [annotation][length_is][size_is][string][out] */ 
@@ -2187,10 +2306,12 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [out] */ ULONG *pchName,
             /* [unique][out] */ GUID *pmvid);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetModuleFromScope)
         HRESULT ( STDMETHODCALLTYPE *GetModuleFromScope )( 
             IMetaDataImport2 * This,
             /* [out] */ mdModule *ptkModule);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetTypeDefProps)
         HRESULT ( STDMETHODCALLTYPE *GetTypeDefProps )( 
             IMetaDataImport2 * This,
             /* [in] */ mdTypeDef tkTypeDef,
@@ -2201,12 +2322,14 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [out] */ DWORD *pdwTypeDefFlags,
             /* [out] */ mdToken *ptkExtends);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetInterfaceImplProps)
         HRESULT ( STDMETHODCALLTYPE *GetInterfaceImplProps )( 
             IMetaDataImport2 * This,
             /* [in] */ mdInterfaceImpl tkInterfaceImpl,
             /* [out] */ mdTypeDef *ptkClass,
             /* [out] */ mdToken *ptkIface);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetTypeRefProps)
         HRESULT ( STDMETHODCALLTYPE *GetTypeRefProps )( 
             IMetaDataImport2 * This,
             /* [in] */ mdTypeRef tkTypeRef,
@@ -2216,6 +2339,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cchName,
             /* [out] */ ULONG *pchName);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, ResolveTypeRef)
         HRESULT ( STDMETHODCALLTYPE *ResolveTypeRef )( 
             IMetaDataImport2 * This,
             /* [in] */ mdTypeRef tkTypeRef,
@@ -2223,6 +2347,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [iid_is][out] */ IUnknown **ppIScope,
             /* [retval][out] */ mdTypeDef *ptkTypeDef);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumMembers)
         HRESULT ( STDMETHODCALLTYPE *EnumMembers )( 
             IMetaDataImport2 * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -2231,6 +2356,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcTokens);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumMembersWithName)
         HRESULT ( STDMETHODCALLTYPE *EnumMembersWithName )( 
             IMetaDataImport2 * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -2240,6 +2366,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcTokens);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumMethods)
         HRESULT ( STDMETHODCALLTYPE *EnumMethods )( 
             IMetaDataImport2 * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -2248,6 +2375,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcTokens);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumMethodsWithName)
         HRESULT ( STDMETHODCALLTYPE *EnumMethodsWithName )( 
             IMetaDataImport2 * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -2257,6 +2385,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcTokens);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumFields)
         HRESULT ( STDMETHODCALLTYPE *EnumFields )( 
             IMetaDataImport2 * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -2265,6 +2394,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcTokens);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumFieldsWithName)
         HRESULT ( STDMETHODCALLTYPE *EnumFieldsWithName )( 
             IMetaDataImport2 * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -2274,6 +2404,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcTokens);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumParams)
         HRESULT ( STDMETHODCALLTYPE *EnumParams )( 
             IMetaDataImport2 * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -2282,6 +2413,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcTokens);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumMemberRefs)
         HRESULT ( STDMETHODCALLTYPE *EnumMemberRefs )( 
             IMetaDataImport2 * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -2290,6 +2422,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcTokens);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumMethodImpls)
         HRESULT ( STDMETHODCALLTYPE *EnumMethodImpls )( 
             IMetaDataImport2 * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -2299,6 +2432,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcTokens);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumPermissionSets)
         HRESULT ( STDMETHODCALLTYPE *EnumPermissionSets )( 
             IMetaDataImport2 * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -2308,6 +2442,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcTokens);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, FindMember)
         HRESULT ( STDMETHODCALLTYPE *FindMember )( 
             IMetaDataImport2 * This,
             /* [in] */ mdTypeDef tkTypeDef,
@@ -2316,6 +2451,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cbSigBlob,
             /* [out] */ mdToken *pmb);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, FindMethod)
         HRESULT ( STDMETHODCALLTYPE *FindMethod )( 
             IMetaDataImport2 * This,
             /* [in] */ mdTypeDef tkTypeDef,
@@ -2324,6 +2460,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cbSigBlob,
             /* [out] */ mdMethodDef *ptkMethodDef);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, FindField)
         HRESULT ( STDMETHODCALLTYPE *FindField )( 
             IMetaDataImport2 * This,
             /* [in] */ mdTypeDef tkTypeDef,
@@ -2332,6 +2469,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cbSigBlob,
             /* [out] */ mdFieldDef *ptkFieldDef);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, FindMemberRef)
         HRESULT ( STDMETHODCALLTYPE *FindMemberRef )( 
             IMetaDataImport2 * This,
             /* [in] */ mdTypeRef tkTypeRef,
@@ -2340,6 +2478,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cbSigBlob,
             /* [out] */ mdMemberRef *pMemberRef);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetMethodProps)
         HRESULT ( STDMETHODCALLTYPE *GetMethodProps )( 
             IMetaDataImport2 * This,
             /* [in] */ mdMethodDef tkMethodDef,
@@ -2354,6 +2493,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [out] */ ULONG *pulCodeRVA,
             /* [out] */ DWORD *pdwImplFlags);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetMemberRefProps)
         HRESULT ( STDMETHODCALLTYPE *GetMemberRefProps )( 
             IMetaDataImport2 * This,
             /* [in] */ mdMemberRef tkMemberRef,
@@ -2365,6 +2505,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [size_is][size_is][out] */ PCCOR_SIGNATURE *ppvSigBlob,
             /* [out] */ ULONG *pcbSigBlob);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumProperties)
         HRESULT ( STDMETHODCALLTYPE *EnumProperties )( 
             IMetaDataImport2 * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -2373,6 +2514,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcProperties);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumEvents)
         HRESULT ( STDMETHODCALLTYPE *EnumEvents )( 
             IMetaDataImport2 * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -2381,6 +2523,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcEvents);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetEventProps)
         HRESULT ( STDMETHODCALLTYPE *GetEventProps )( 
             IMetaDataImport2 * This,
             /* [in] */ mdEvent tkEvent,
@@ -2397,6 +2540,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcOtherMethod);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumMethodSemantics)
         HRESULT ( STDMETHODCALLTYPE *EnumMethodSemantics )( 
             IMetaDataImport2 * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -2405,12 +2549,14 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcEventProp);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetMethodSemantics)
         HRESULT ( STDMETHODCALLTYPE *GetMethodSemantics )( 
             IMetaDataImport2 * This,
             /* [in] */ mdMethodDef tkMethodDef,
             /* [in] */ mdToken tkEventProp,
             /* [out] */ DWORD *pdwSemanticsFlags);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetClassLayout)
         HRESULT ( STDMETHODCALLTYPE *GetClassLayout )( 
             IMetaDataImport2 * This,
             /* [in] */ mdTypeDef tkTypeDef,
@@ -2420,18 +2566,21 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [out] */ ULONG *pcFieldOffset,
             /* [out] */ ULONG *pulClassSize);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetFieldMarshal)
         HRESULT ( STDMETHODCALLTYPE *GetFieldMarshal )( 
             IMetaDataImport2 * This,
             /* [in] */ mdToken tk,
             /* [size_is][size_is][out] */ PCCOR_SIGNATURE *ppvNativeType,
             /* [out] */ ULONG *pcbNativeType);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetRVA)
         HRESULT ( STDMETHODCALLTYPE *GetRVA )( 
             IMetaDataImport2 * This,
             /* [in] */ mdToken tk,
             /* [out] */ ULONG *pulCodeRVA,
             /* [out] */ DWORD *pdwImplFlags);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetPermissionSetProps)
         HRESULT ( STDMETHODCALLTYPE *GetPermissionSetProps )( 
             IMetaDataImport2 * This,
             /* [in] */ mdPermission tk,
@@ -2439,12 +2588,14 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [size_is][size_is][out] */ const BYTE **ppvPermission,
             /* [out] */ ULONG *pcbPermission);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetSigFromToken)
         HRESULT ( STDMETHODCALLTYPE *GetSigFromToken )( 
             IMetaDataImport2 * This,
             /* [in] */ mdSignature tkSignature,
             /* [size_is][size_is][out] */ PCCOR_SIGNATURE *ppvSig,
             /* [out] */ ULONG *pcbSig);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetModuleRefProps)
         HRESULT ( STDMETHODCALLTYPE *GetModuleRefProps )( 
             IMetaDataImport2 * This,
             /* [in] */ mdModuleRef tkModuleRef,
@@ -2453,6 +2604,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cchName,
             /* [out] */ ULONG *pchName);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumModuleRefs)
         HRESULT ( STDMETHODCALLTYPE *EnumModuleRefs )( 
             IMetaDataImport2 * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -2460,17 +2612,20 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcModuleRefs);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetTypeSpecFromToken)
         HRESULT ( STDMETHODCALLTYPE *GetTypeSpecFromToken )( 
             IMetaDataImport2 * This,
             /* [in] */ mdTypeSpec tkTypeSpec,
             /* [size_is][size_is][out] */ PCCOR_SIGNATURE *ppvSig,
             /* [out] */ ULONG *pcbSig);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetNameFromToken)
         HRESULT ( STDMETHODCALLTYPE *GetNameFromToken )( 
             IMetaDataImport2 * This,
             /* [in] */ mdToken tk,
             /* [string][out] */ MDUTF8CSTR *pszUtf8NamePtr);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumUnresolvedMethods)
         HRESULT ( STDMETHODCALLTYPE *EnumUnresolvedMethods )( 
             IMetaDataImport2 * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -2478,6 +2633,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcTokens);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetUserString)
         HRESULT ( STDMETHODCALLTYPE *GetUserString )( 
             IMetaDataImport2 * This,
             /* [in] */ mdString tkString,
@@ -2486,6 +2642,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cchString,
             /* [out] */ ULONG *pchString);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetPinvokeMap)
         HRESULT ( STDMETHODCALLTYPE *GetPinvokeMap )( 
             IMetaDataImport2 * This,
             /* [in] */ mdToken tk,
@@ -2496,6 +2653,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [out] */ ULONG *pchImportName,
             /* [out] */ mdModuleRef *ptkImportDLL);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumSignatures)
         HRESULT ( STDMETHODCALLTYPE *EnumSignatures )( 
             IMetaDataImport2 * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -2503,6 +2661,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcSignatures);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumTypeSpecs)
         HRESULT ( STDMETHODCALLTYPE *EnumTypeSpecs )( 
             IMetaDataImport2 * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -2510,6 +2669,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcTypeSpecs);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumUserStrings)
         HRESULT ( STDMETHODCALLTYPE *EnumUserStrings )( 
             IMetaDataImport2 * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -2517,12 +2677,14 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcStrings);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetParamForMethodIndex)
         HRESULT ( STDMETHODCALLTYPE *GetParamForMethodIndex )( 
             IMetaDataImport2 * This,
             /* [in] */ mdMethodDef tkMethodDef,
             /* [in] */ ULONG ulParamSeq,
             /* [out] */ mdParamDef *ptkParamDef);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, EnumCustomAttributes)
         HRESULT ( STDMETHODCALLTYPE *EnumCustomAttributes )( 
             IMetaDataImport2 * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -2532,6 +2694,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcCustomAttributes);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetCustomAttributeProps)
         HRESULT ( STDMETHODCALLTYPE *GetCustomAttributeProps )( 
             IMetaDataImport2 * This,
             /* [in] */ mdCustomAttribute cv,
@@ -2540,12 +2703,14 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [unique][size_is][size_is][out] */ const BYTE **ppBlob,
             /* [unique][out] */ ULONG *pcbBlob);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, FindTypeRef)
         HRESULT ( STDMETHODCALLTYPE *FindTypeRef )( 
             IMetaDataImport2 * This,
             /* [in] */ mdToken tkResolutionScope,
             /* [string][in] */ LPCWSTR szName,
             /* [out] */ mdTypeRef *tkTypeRef);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetMemberProps)
         HRESULT ( STDMETHODCALLTYPE *GetMemberProps )( 
             IMetaDataImport2 * This,
             /* [in] */ mdToken tkMember,
@@ -2563,6 +2728,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [size_is][size_is][out] */ UVCP_CONSTANT *ppValue,
             /* [out] */ ULONG *pcchValue);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetFieldProps)
         HRESULT ( STDMETHODCALLTYPE *GetFieldProps )( 
             IMetaDataImport2 * This,
             /* [in] */ mdFieldDef tkFieldDef,
@@ -2578,6 +2744,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [size_is][size_is][out] */ UVCP_CONSTANT *ppValue,
             /* [out] */ ULONG *pcchValue);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetPropertyProps)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyProps )( 
             IMetaDataImport2 * This,
             /* [in] */ mdProperty prop,
@@ -2597,6 +2764,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcOtherMethod);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetParamProps)
         HRESULT ( STDMETHODCALLTYPE *GetParamProps )( 
             IMetaDataImport2 * This,
             /* [in] */ mdParamDef tkParamDef,
@@ -2611,6 +2779,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [size_is][size_is][out] */ UVCP_CONSTANT *ppValue,
             /* [out] */ ULONG *pcchValue);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetCustomAttributeByName)
         HRESULT ( STDMETHODCALLTYPE *GetCustomAttributeByName )( 
             IMetaDataImport2 * This,
             /* [in] */ mdToken tkObj,
@@ -2618,26 +2787,31 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [size_is][size_is][out] */ const BYTE **ppData,
             /* [out] */ ULONG *pcbData);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, IsValidToken)
         BOOL ( STDMETHODCALLTYPE *IsValidToken )( 
             IMetaDataImport2 * This,
             /* [in] */ mdToken tk);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetNestedClassProps)
         HRESULT ( STDMETHODCALLTYPE *GetNestedClassProps )( 
             IMetaDataImport2 * This,
             /* [in] */ mdTypeDef tdNestedClass,
             /* [out] */ mdTypeDef *ptdEnclosingClass);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, GetNativeCallConvFromSig)
         HRESULT ( STDMETHODCALLTYPE *GetNativeCallConvFromSig )( 
             IMetaDataImport2 * This,
             /* [size_is][in] */ const BYTE *pvSig,
             /* [in] */ ULONG cbSig,
             /* [out] */ ULONG *pCallConv);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport, IsGlobal)
         HRESULT ( STDMETHODCALLTYPE *IsGlobal )( 
             IMetaDataImport2 * This,
             /* [in] */ mdToken tk,
             /* [out] */ int *pbIsGlobal);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport2, EnumGenericParams)
         HRESULT ( STDMETHODCALLTYPE *EnumGenericParams )( 
             IMetaDataImport2 * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -2646,6 +2820,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcGenericParams);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport2, GetGenericParamProps)
         HRESULT ( STDMETHODCALLTYPE *GetGenericParamProps )( 
             IMetaDataImport2 * This,
             /* [in] */ mdGenericParam gp,
@@ -2658,6 +2833,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cchName,
             /* [out] */ ULONG *pchName);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport2, GetMethodSpecProps)
         HRESULT ( STDMETHODCALLTYPE *GetMethodSpecProps )( 
             IMetaDataImport2 * This,
             /* [in] */ mdMethodSpec mi,
@@ -2665,6 +2841,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [size_is][size_is][out] */ PCCOR_SIGNATURE *ppvSigBlob,
             /* [out] */ ULONG *pcbSigBlob);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport2, EnumGenericParamConstraints)
         HRESULT ( STDMETHODCALLTYPE *EnumGenericParamConstraints )( 
             IMetaDataImport2 * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -2673,17 +2850,20 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ ULONG cMax,
             /* [out] */ ULONG *pcGenericParamConstraints);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport2, GetGenericParamConstraintProps)
         HRESULT ( STDMETHODCALLTYPE *GetGenericParamConstraintProps )( 
             IMetaDataImport2 * This,
             /* [in] */ mdGenericParamConstraint gpc,
             /* [out] */ mdGenericParam *ptGenericParam,
             /* [out] */ mdToken *ptkConstraintType);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport2, GetPEKind)
         HRESULT ( STDMETHODCALLTYPE *GetPEKind )( 
             IMetaDataImport2 * This,
             /* [out] */ DWORD *pdwPEKind,
             /* [out] */ DWORD *pdwMAchine);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport2, GetVersionString)
         HRESULT ( STDMETHODCALLTYPE *GetVersionString )( 
             IMetaDataImport2 * This,
             /* [annotation][length_is][size_is][string][out] */ 
@@ -2691,6 +2871,7 @@ EXTERN_C const IID IID_IMetaDataImport2;
             /* [in] */ DWORD ccBufSize,
             /* [out] */ DWORD *pccBufSize);
         
+        DECLSPEC_XFGVIRT(IMetaDataImport2, EnumMethodSpecs)
         HRESULT ( STDMETHODCALLTYPE *EnumMethodSpecs )( 
             IMetaDataImport2 * This,
             /* [out][in] */ HCORENUM *phEnum,
@@ -3054,43 +3235,53 @@ EXTERN_C const IID IID_IMetaDataTables;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMetaDataTables * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMetaDataTables * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMetaDataTables * This);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetStringHeapSize)
         HRESULT ( STDMETHODCALLTYPE *GetStringHeapSize )( 
             IMetaDataTables * This,
             /* [out] */ ULONG *pcbStrings);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetBlobHeapSize)
         HRESULT ( STDMETHODCALLTYPE *GetBlobHeapSize )( 
             IMetaDataTables * This,
             /* [out] */ ULONG *pcbBlobs);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetGuidHeapSize)
         HRESULT ( STDMETHODCALLTYPE *GetGuidHeapSize )( 
             IMetaDataTables * This,
             /* [out] */ ULONG *pcbGuids);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetUserStringHeapSize)
         HRESULT ( STDMETHODCALLTYPE *GetUserStringHeapSize )( 
             IMetaDataTables * This,
             /* [out] */ ULONG *pcbUserStrings);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetNumTables)
         HRESULT ( STDMETHODCALLTYPE *GetNumTables )( 
             IMetaDataTables * This,
             /* [out] */ ULONG *pcTables);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetTableIndex)
         HRESULT ( STDMETHODCALLTYPE *GetTableIndex )( 
             IMetaDataTables * This,
             /* [in] */ ULONG token,
             /* [out] */ ULONG *pixTbl);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetTableInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTableInfo )( 
             IMetaDataTables * This,
             /* [in] */ ULONG ixTbl,
@@ -3100,6 +3291,7 @@ EXTERN_C const IID IID_IMetaDataTables;
             /* [out] */ ULONG *piKey,
             /* [string][out] */ LPCSTR *ppName);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetColumnInfo)
         HRESULT ( STDMETHODCALLTYPE *GetColumnInfo )( 
             IMetaDataTables * This,
             /* [in] */ ULONG ixTbl,
@@ -3109,6 +3301,7 @@ EXTERN_C const IID IID_IMetaDataTables;
             /* [out] */ ULONG *pType,
             /* [string][out] */ LPCSTR *ppName);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetCodedTokenInfo)
         HRESULT ( STDMETHODCALLTYPE *GetCodedTokenInfo )( 
             IMetaDataTables * This,
             /* [in] */ ULONG ixCdTkn,
@@ -3116,12 +3309,14 @@ EXTERN_C const IID IID_IMetaDataTables;
             /* [size_is][size_is][out] */ const ULONG **ppTokens,
             /* [string][out] */ LPCSTR *ppName);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetRow)
         HRESULT ( STDMETHODCALLTYPE *GetRow )( 
             IMetaDataTables * This,
             /* [in] */ ULONG ixTbl,
             /* [in] */ ULONG rid,
             /* [out] */ const BYTE *ppRow);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetColumn)
         HRESULT ( STDMETHODCALLTYPE *GetColumn )( 
             IMetaDataTables * This,
             /* [in] */ ULONG ixTbl,
@@ -3129,43 +3324,51 @@ EXTERN_C const IID IID_IMetaDataTables;
             /* [in] */ ULONG rid,
             /* [out] */ ULONG *pVal);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetString)
         HRESULT ( STDMETHODCALLTYPE *GetString )( 
             IMetaDataTables * This,
             /* [in] */ ULONG ixString,
             /* [string][out] */ LPCSTR *ppString);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetBlob)
         HRESULT ( STDMETHODCALLTYPE *GetBlob )( 
             IMetaDataTables * This,
             /* [in] */ ULONG ixBlob,
             /* [out] */ ULONG *pcbData,
             /* [size_is][size_is][out] */ const BYTE **ppData);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetGuid)
         HRESULT ( STDMETHODCALLTYPE *GetGuid )( 
             IMetaDataTables * This,
             /* [in] */ ULONG ixGuid,
             /* [out] */ const GUID **ppGUID);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetUserString)
         HRESULT ( STDMETHODCALLTYPE *GetUserString )( 
             IMetaDataTables * This,
             /* [in] */ ULONG ixUserString,
             /* [out] */ ULONG *pcbData,
             /* [size_is][size_is][out] */ const BYTE **ppData);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetNextString)
         HRESULT ( STDMETHODCALLTYPE *GetNextString )( 
             IMetaDataTables * This,
             /* [in] */ ULONG ixString,
             /* [out] */ ULONG *pNext);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetNextBlob)
         HRESULT ( STDMETHODCALLTYPE *GetNextBlob )( 
             IMetaDataTables * This,
             /* [in] */ ULONG ixBlob,
             /* [out] */ ULONG *pNext);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetNextGuid)
         HRESULT ( STDMETHODCALLTYPE *GetNextGuid )( 
             IMetaDataTables * This,
             /* [in] */ ULONG ixGuid,
             /* [out] */ ULONG *pNext);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetNextUserString)
         HRESULT ( STDMETHODCALLTYPE *GetNextUserString )( 
             IMetaDataTables * This,
             /* [in] */ ULONG ixUserString,
@@ -3296,43 +3499,53 @@ EXTERN_C const IID IID_IMetaDataTables2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMetaDataTables2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMetaDataTables2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMetaDataTables2 * This);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetStringHeapSize)
         HRESULT ( STDMETHODCALLTYPE *GetStringHeapSize )( 
             IMetaDataTables2 * This,
             /* [out] */ ULONG *pcbStrings);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetBlobHeapSize)
         HRESULT ( STDMETHODCALLTYPE *GetBlobHeapSize )( 
             IMetaDataTables2 * This,
             /* [out] */ ULONG *pcbBlobs);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetGuidHeapSize)
         HRESULT ( STDMETHODCALLTYPE *GetGuidHeapSize )( 
             IMetaDataTables2 * This,
             /* [out] */ ULONG *pcbGuids);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetUserStringHeapSize)
         HRESULT ( STDMETHODCALLTYPE *GetUserStringHeapSize )( 
             IMetaDataTables2 * This,
             /* [out] */ ULONG *pcbUserStrings);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetNumTables)
         HRESULT ( STDMETHODCALLTYPE *GetNumTables )( 
             IMetaDataTables2 * This,
             /* [out] */ ULONG *pcTables);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetTableIndex)
         HRESULT ( STDMETHODCALLTYPE *GetTableIndex )( 
             IMetaDataTables2 * This,
             /* [in] */ ULONG token,
             /* [out] */ ULONG *pixTbl);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetTableInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTableInfo )( 
             IMetaDataTables2 * This,
             /* [in] */ ULONG ixTbl,
@@ -3342,6 +3555,7 @@ EXTERN_C const IID IID_IMetaDataTables2;
             /* [out] */ ULONG *piKey,
             /* [string][out] */ LPCSTR *ppName);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetColumnInfo)
         HRESULT ( STDMETHODCALLTYPE *GetColumnInfo )( 
             IMetaDataTables2 * This,
             /* [in] */ ULONG ixTbl,
@@ -3351,6 +3565,7 @@ EXTERN_C const IID IID_IMetaDataTables2;
             /* [out] */ ULONG *pType,
             /* [string][out] */ LPCSTR *ppName);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetCodedTokenInfo)
         HRESULT ( STDMETHODCALLTYPE *GetCodedTokenInfo )( 
             IMetaDataTables2 * This,
             /* [in] */ ULONG ixCdTkn,
@@ -3358,12 +3573,14 @@ EXTERN_C const IID IID_IMetaDataTables2;
             /* [size_is][size_is][out] */ const ULONG **ppTokens,
             /* [string][out] */ LPCSTR *ppName);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetRow)
         HRESULT ( STDMETHODCALLTYPE *GetRow )( 
             IMetaDataTables2 * This,
             /* [in] */ ULONG ixTbl,
             /* [in] */ ULONG rid,
             /* [out] */ const BYTE *ppRow);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetColumn)
         HRESULT ( STDMETHODCALLTYPE *GetColumn )( 
             IMetaDataTables2 * This,
             /* [in] */ ULONG ixTbl,
@@ -3371,53 +3588,63 @@ EXTERN_C const IID IID_IMetaDataTables2;
             /* [in] */ ULONG rid,
             /* [out] */ ULONG *pVal);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetString)
         HRESULT ( STDMETHODCALLTYPE *GetString )( 
             IMetaDataTables2 * This,
             /* [in] */ ULONG ixString,
             /* [string][out] */ LPCSTR *ppString);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetBlob)
         HRESULT ( STDMETHODCALLTYPE *GetBlob )( 
             IMetaDataTables2 * This,
             /* [in] */ ULONG ixBlob,
             /* [out] */ ULONG *pcbData,
             /* [size_is][size_is][out] */ const BYTE **ppData);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetGuid)
         HRESULT ( STDMETHODCALLTYPE *GetGuid )( 
             IMetaDataTables2 * This,
             /* [in] */ ULONG ixGuid,
             /* [out] */ const GUID **ppGUID);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetUserString)
         HRESULT ( STDMETHODCALLTYPE *GetUserString )( 
             IMetaDataTables2 * This,
             /* [in] */ ULONG ixUserString,
             /* [out] */ ULONG *pcbData,
             /* [size_is][size_is][out] */ const BYTE **ppData);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetNextString)
         HRESULT ( STDMETHODCALLTYPE *GetNextString )( 
             IMetaDataTables2 * This,
             /* [in] */ ULONG ixString,
             /* [out] */ ULONG *pNext);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetNextBlob)
         HRESULT ( STDMETHODCALLTYPE *GetNextBlob )( 
             IMetaDataTables2 * This,
             /* [in] */ ULONG ixBlob,
             /* [out] */ ULONG *pNext);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetNextGuid)
         HRESULT ( STDMETHODCALLTYPE *GetNextGuid )( 
             IMetaDataTables2 * This,
             /* [in] */ ULONG ixGuid,
             /* [out] */ ULONG *pNext);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables, GetNextUserString)
         HRESULT ( STDMETHODCALLTYPE *GetNextUserString )( 
             IMetaDataTables2 * This,
             /* [in] */ ULONG ixUserString,
             /* [out] */ ULONG *pNext);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables2, GetMetaDataStorage)
         HRESULT ( STDMETHODCALLTYPE *GetMetaDataStorage )( 
             IMetaDataTables2 * This,
             /* [size_is][size_is][out] */ const BYTE **ppvMd,
             /* [out] */ ULONG *pcbMd);
         
+        DECLSPEC_XFGVIRT(IMetaDataTables2, GetMetaDataStreamInfo)
         HRESULT ( STDMETHODCALLTYPE *GetMetaDataStreamInfo )( 
             IMetaDataTables2 * This,
             /* [in] */ ULONG ix,

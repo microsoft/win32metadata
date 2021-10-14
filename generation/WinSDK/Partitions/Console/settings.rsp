@@ -1,4 +1,5 @@
 --traverse
+<IncludeRoot>/um/wincon.h
 <IncludeRoot>/um/consoleapi.h
 <IncludeRoot>/um/consoleapi2.h
 <IncludeRoot>/um/consoleapi3.h

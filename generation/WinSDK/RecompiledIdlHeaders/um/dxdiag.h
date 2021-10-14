@@ -112,7 +112,7 @@ DECLARE_INTERFACE_(IDxDiagProvider,IUnknown)
     
     /*** IDxDiagProvider methods ***/
     STDMETHOD(Initialize)                   (THIS_ DXDIAG_INIT_PARAMS* pParams) PURE; 
-    STDMETHOD(GetRootContainer)             (THIS_ IDxDiagContainer **ppInstance) PURE;
+    STDMETHOD(GetRootContainer)             (THIS_ struct IDxDiagContainer **ppInstance) PURE;
 };
 
 

@@ -1989,6 +1989,52 @@ typedef enum MF_TIMED_TEXT_TRACK_READY_STATE
     MF_TIMED_TEXT_TRACK_READY_STATE_ERROR,
 } MF_TIMED_TEXT_TRACK_READY_STATE;
 
+typedef enum MF_TIMED_TEXT_RUBY_POSITION
+{
+    MF_TIMED_TEXT_RUBY_POSITION_BEFORE = 0,
+    MF_TIMED_TEXT_RUBY_POSITION_AFTER = 1,
+    MF_TIMED_TEXT_RUBY_POSITION_OUTSIDE = 2,
+} MF_TIMED_TEXT_RUBY_POSITION;
+
+typedef enum MF_TIMED_TEXT_RUBY_ALIGN
+{
+    MF_TIMED_TEXT_RUBY_ALIGN_CENTER = 0,
+    MF_TIMED_TEXT_RUBY_ALIGN_START = 1,
+    MF_TIMED_TEXT_RUBY_ALIGN_END = 2,
+    MF_TIMED_TEXT_RUBY_ALIGN_SPACEAROUND = 3,
+    MF_TIMED_TEXT_RUBY_ALIGN_SPACEBETWEEN = 4,
+    MF_TIMED_TEXT_RUBY_ALIGN_WITHBASE = 5
+} MF_TIMED_TEXT_RUBY_ALIGN;
+
+typedef enum MF_TIMED_TEXT_RUBY_RESERVE
+{
+    MF_TIMED_TEXT_RUBY_RESERVE_NONE = 0,
+    MF_TIMED_TEXT_RUBY_RESERVE_BEFORE = 1,
+    MF_TIMED_TEXT_RUBY_RESERVE_AFTER = 2,
+    MF_TIMED_TEXT_RUBY_RESERVE_BOTH = 3,
+    MF_TIMED_TEXT_RUBY_RESERVE_OUTSIDE = 4
+} MF_TIMED_TEXT_RUBY_RESERVE;
+
+typedef enum MF_TIMED_TEXT_BOUTEN_TYPE
+{
+    MF_TIMED_TEXT_BOUTEN_TYPE_NONE = 0,
+    MF_TIMED_TEXT_BOUTEN_TYPE_AUTO = 1,
+    MF_TIMED_TEXT_BOUTEN_TYPE_FILLEDCIRCLE = 2,
+    MF_TIMED_TEXT_BOUTEN_TYPE_OPENCIRCLE = 3,
+    MF_TIMED_TEXT_BOUTEN_TYPE_FILLEDDOT = 4,
+    MF_TIMED_TEXT_BOUTEN_TYPE_OPENDOT = 5,
+    MF_TIMED_TEXT_BOUTEN_TYPE_FILLEDSESAME = 6,
+    MF_TIMED_TEXT_BOUTEN_TYPE_OPENSESAME = 7
+} 	MF_TIMED_TEXT_BOUTEN_TYPE;
+
+typedef enum MF_TIMED_TEXT_BOUTEN_POSITION
+{
+    MF_TIMED_TEXT_BOUTEN_POSITION_BEFORE = 0,
+    MF_TIMED_TEXT_BOUTEN_POSITION_AFTER = 1,
+    MF_TIMED_TEXT_BOUTEN_POSITION_OUTSIDE = 2
+} 	MF_TIMED_TEXT_BOUTEN_POSITION;
+
+
 interface IMFTimedText;
 interface IMFTimedTextNotify;
 interface IMFTimedTextTrack;
@@ -2431,6 +2477,72 @@ interface IMFTimedTextCueList : IUnknown
         );
 }
 
+[
+    object,
+    uuid(76c6a6f5-4955-4de5-b27b-14b734cc14b4),
+    pointer_default(unique),
+    local
+]
+interface IMFTimedTextRuby : IUnknown
+{
+    HRESULT GetRubyText(
+        [out, annotation("_Outptr_")] LPWSTR* rubyText
+    );
+    HRESULT GetRubyPosition(
+        [out, annotation("_Out_")] MF_TIMED_TEXT_RUBY_POSITION* value
+    );
+    HRESULT GetRubyAlign(
+        [out, annotation("_Out_")] MF_TIMED_TEXT_RUBY_ALIGN* value
+    );
+    HRESULT GetRubyReserve(
+        [out, annotation("_Out_")] MF_TIMED_TEXT_RUBY_RESERVE* value
+    );
+}
+
+[
+    object,
+    uuid(3c5f3e8a-90c0-464e-8136-898d2975f847),
+    pointer_default(unique),
+    local
+]
+interface IMFTimedTextBouten : IUnknown
+{
+    HRESULT GetBoutenType(
+        [out, annotation("_Out_")] MF_TIMED_TEXT_BOUTEN_TYPE* value
+    );
+    HRESULT GetBoutenColor(
+        [out, annotation("_Out_")] MFARGB* value
+    );
+    HRESULT GetBoutenPosition(
+        [out, annotation("_Out_")] MF_TIMED_TEXT_BOUTEN_POSITION* value
+    );
+}
+
+[
+    object,
+    uuid(db639199-c809-4c89-bfca-d0bbb9729d6e),
+    pointer_default(unique),
+    local
+]
+interface IMFTimedTextStyle2 : IUnknown
+{
+    HRESULT GetRuby(
+        [out, annotation("_COM_Outptr_result_maybenull_")] IMFTimedTextRuby** ruby
+    );
+    HRESULT GetBouten(
+        [out, annotation("_COM_Outptr_result_maybenull_")] IMFTimedTextBouten** bouten
+    );
+    // Tate-chu-yoko
+    HRESULT IsTextCombined(
+        [out, annotation("_Out_")] BOOL* value
+    );
+    // Slanted Text, when is 0, that means the texts are not slanted texts
+    HRESULT GetFontAngleInDegrees(
+        [out, annotation("_Out_")] double* value
+    );
+}
+
+
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
 #pragma endregion
 
@@ -2509,6 +2621,14 @@ interface IMFMediaEngineEMENotify : IUnknown
     void WaitingForKey();
 }
 
+cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WINTHRESHOLD) ")
+cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
+#pragma endregion
+
+#pragma region Application Family
+cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+cpp_quote("#if (WINVER >= _WIN32_WINNT_WINTHRESHOLD) ")
+
 //+-----------------------------------------------------------------------------
 //
 //  Enumeration:  MF_MEDIA_KEYS_REQUIREMENT
@@ -2522,6 +2642,14 @@ typedef enum MF_MEDIAKEYS_REQUIREMENT
     MF_MEDIAKEYS_REQUIREMENT_OPTIONAL = 2,
     MF_MEDIAKEYS_REQUIREMENT_NOT_ALLOWED = 3
 } MF_MEDIAKEYS_REQUIREMENT;
+
+cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WINTHRESHOLD) ")
+cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
+#pragma endregion
+
+#pragma region Desktop Family
+cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+cpp_quote("#if (WINVER >= _WIN32_WINNT_WINTHRESHOLD) ")
 
 //+-----------------------------------------------------------------------------
 //
@@ -2598,6 +2726,14 @@ interface IMFMediaEngineClassFactory3 : IUnknown
         );
 }
 
+cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WINTHRESHOLD) ")
+cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
+#pragma endregion
+
+#pragma region Application Family
+cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+cpp_quote("#if (WINVER >= _WIN32_WINNT_WINTHRESHOLD) ")
+
 // Attributes for MediaKeySystemConfigurations
 cpp_quote("EXTERN_C const DECLSPEC_SELECTANY PROPERTYKEY MF_EME_INITDATATYPES =     { { 0x497d231b, 0x4eb9, 0x4df0, { 0xb4, 0x74, 0xb9, 0xaf, 0xeb, 0x0a, 0xdf, 0x38 } }, PID_FIRST_USABLE+0x00000001 }; ")
 cpp_quote("EXTERN_C const DECLSPEC_SELECTANY PROPERTYKEY MF_EME_DISTINCTIVEID =     { { 0x7dc9c4a5, 0x12be, 0x497e, { 0x8b, 0xff, 0x9b, 0x60, 0xb2, 0xdc, 0x58, 0x45 } }, PID_FIRST_USABLE+0x00000002 }; ")
@@ -2614,6 +2750,14 @@ cpp_quote("EXTERN_C const DECLSPEC_SELECTANY PROPERTYKEY MF_EME_CONTENTTYPE = { 
 // Attributes to pass to CreateMediaKeys
 cpp_quote("EXTERN_C const DECLSPEC_SELECTANY PROPERTYKEY MF_EME_CDM_INPRIVATESTOREPATH = { { 0xec305fd9, 0x039f, 0x4ac8, { 0x98, 0xda, 0xe7, 0x92, 0x1e, 0x00, 0x6a, 0x90 } }, PID_FIRST_USABLE+0x00000001 }; ")
 cpp_quote("EXTERN_C const DECLSPEC_SELECTANY PROPERTYKEY MF_EME_CDM_STOREPATH =          { { 0xf795841e, 0x99f9, 0x44d7, { 0xaf, 0xc0, 0xd3, 0x09, 0xc0, 0x4c, 0x94, 0xab } }, PID_FIRST_USABLE+0x00000002 }; ")
+
+cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WINTHRESHOLD) ")
+cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
+#pragma endregion
+
+#pragma region Desktop Family
+cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+cpp_quote("#if (WINVER >= _WIN32_WINNT_WINTHRESHOLD) ")
 
 //+-----------------------------------------------------------------------------
 //
@@ -2685,6 +2829,13 @@ interface IMFMediaKeySession2 : IMFMediaKeySession
     HRESULT Shutdown();
 }
 
+cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WINTHRESHOLD) ")
+cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
+#pragma endregion
+
+#pragma region Application Family
+cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+cpp_quote("#if (WINVER >= _WIN32_WINNT_WINTHRESHOLD) ")
 
 //////////////////////////////////////////////////////////////////////////////
 //
@@ -2717,5 +2868,5 @@ interface IMFMediaEngineClassFactory4 : IUnknown
 
 
 cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WINTHRESHOLD) ")
-cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
+cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
 #pragma endregion

@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -136,6 +144,7 @@ EXTERN_C const IID IID_IRandomAccessStreamFileAccessMode;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRandomAccessStreamFileAccessMode * This,
             /* [annotation][in] */ 
@@ -143,12 +152,15 @@ EXTERN_C const IID IID_IRandomAccessStreamFileAccessMode;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IRandomAccessStreamFileAccessMode * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IRandomAccessStreamFileAccessMode * This);
         
+        DECLSPEC_XFGVIRT(IRandomAccessStreamFileAccessMode, GetMode)
         HRESULT ( STDMETHODCALLTYPE *GetMode )( 
             __RPC__in IRandomAccessStreamFileAccessMode * This,
             /* [annotation][out] */ 
@@ -217,6 +229,7 @@ EXTERN_C const IID IID_IUnbufferedFileHandleOplockCallback;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUnbufferedFileHandleOplockCallback * This,
             /* [annotation][in] */ 
@@ -224,12 +237,15 @@ EXTERN_C const IID IID_IUnbufferedFileHandleOplockCallback;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IUnbufferedFileHandleOplockCallback * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IUnbufferedFileHandleOplockCallback * This);
         
+        DECLSPEC_XFGVIRT(IUnbufferedFileHandleOplockCallback, OnBrokenCallback)
         HRESULT ( STDMETHODCALLTYPE *OnBrokenCallback )( 
             IUnbufferedFileHandleOplockCallback * This);
         
@@ -302,6 +318,7 @@ EXTERN_C const IID IID_IUnbufferedFileHandleProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUnbufferedFileHandleProvider * This,
             /* [annotation][in] */ 
@@ -309,12 +326,15 @@ EXTERN_C const IID IID_IUnbufferedFileHandleProvider;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IUnbufferedFileHandleProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IUnbufferedFileHandleProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnbufferedFileHandleProvider, OpenUnbufferedFileHandle)
         HRESULT ( STDMETHODCALLTYPE *OpenUnbufferedFileHandle )( 
             __RPC__in IUnbufferedFileHandleProvider * This,
             /* [annotation][in] */ 
@@ -322,6 +342,7 @@ EXTERN_C const IID IID_IUnbufferedFileHandleProvider;
             /* [retval][annotation][out] */ 
             _Out_  DWORD_PTR *fileHandle);
         
+        DECLSPEC_XFGVIRT(IUnbufferedFileHandleProvider, CloseUnbufferedFileHandle)
         HRESULT ( STDMETHODCALLTYPE *CloseUnbufferedFileHandle )( 
             __RPC__in IUnbufferedFileHandleProvider * This);
         
@@ -448,6 +469,7 @@ EXTERN_C const IID IID_IOplockBreakingHandler;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOplockBreakingHandler * This,
             /* [annotation][in] */ 
@@ -455,12 +477,15 @@ EXTERN_C const IID IID_IOplockBreakingHandler;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOplockBreakingHandler * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOplockBreakingHandler * This);
         
+        DECLSPEC_XFGVIRT(IOplockBreakingHandler, OplockBreaking)
         HRESULT ( STDMETHODCALLTYPE *OplockBreaking )( 
             __RPC__in IOplockBreakingHandler * This);
         
@@ -535,6 +560,7 @@ EXTERN_C const IID IID_IStorageItemHandleAccess;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IStorageItemHandleAccess * This,
             /* [annotation][in] */ 
@@ -542,12 +568,15 @@ EXTERN_C const IID IID_IStorageItemHandleAccess;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IStorageItemHandleAccess * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IStorageItemHandleAccess * This);
         
+        DECLSPEC_XFGVIRT(IStorageItemHandleAccess, Create)
         HRESULT ( STDMETHODCALLTYPE *Create )( 
             __RPC__in IStorageItemHandleAccess * This,
             /* [annotation][in] */ 
@@ -634,6 +663,7 @@ EXTERN_C const IID IID_IStorageFolderHandleAccess;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IStorageFolderHandleAccess * This,
             /* [annotation][in] */ 
@@ -641,12 +671,15 @@ EXTERN_C const IID IID_IStorageFolderHandleAccess;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IStorageFolderHandleAccess * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IStorageFolderHandleAccess * This);
         
+        DECLSPEC_XFGVIRT(IStorageFolderHandleAccess, Create)
         HRESULT ( STDMETHODCALLTYPE *Create )( 
             __RPC__in IStorageFolderHandleAccess * This,
             /* [annotation][string][in] */ 
@@ -763,6 +796,7 @@ EXTERN_C const IID IID_IDDEInitializer;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDDEInitializer * This,
             /* [annotation][in] */ 
@@ -770,12 +804,15 @@ EXTERN_C const IID IID_IDDEInitializer;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDDEInitializer * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDDEInitializer * This);
         
+        DECLSPEC_XFGVIRT(IDDEInitializer, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IDDEInitializer * This,
             /* [annotation][string][in] */ 

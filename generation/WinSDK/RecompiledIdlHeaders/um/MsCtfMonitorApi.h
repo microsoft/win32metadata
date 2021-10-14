@@ -30,7 +30,7 @@
 #define DCM_FLAGS_TASKENG         0x00000001
 #define DCM_FLAGS_CTFMON          0x00000002
 #define DCM_FLAGS_LOCALTHREADTSF  0x00000004
-extern "C" BOOL WINAPI DoMsCtfMonitor(DWORD dwFlags, HANDLE hEventForServiceStop);
+EXTERN_C BOOL WINAPI DoMsCtfMonitor(DWORD dwFlags, HANDLE hEventForServiceStop);
 
 ////////////////////////////////////////////////////////////////////////////
 //
@@ -59,14 +59,14 @@ extern "C" BOOL WINAPI DoMsCtfMonitor(DWORD dwFlags, HANDLE hEventForServiceStop
 // InitLocalMsCtfMonitor
 //
 ////////////////////////////////////////////////////////////////////////////
-extern "C" HRESULT WINAPI InitLocalMsCtfMonitor(DWORD dwFlags);
+EXTERN_C HRESULT WINAPI InitLocalMsCtfMonitor(DWORD dwFlags);
 
 ////////////////////////////////////////////////////////////////////////////
 //
 // UninitLocalMsCtfMonitor
 //
 ////////////////////////////////////////////////////////////////////////////
-extern "C" HRESULT WINAPI UninitLocalMsCtfMonitor();
+EXTERN_C HRESULT WINAPI UninitLocalMsCtfMonitor();
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion

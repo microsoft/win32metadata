@@ -15,10 +15,23 @@ import "Windows.Storage.Streams.idl";
 // Forward Declare
 namespace Windows
 {
+    namespace Foundation
+    {
+        typedef struct DateTime DateTime;
+
+        apicontract UniversalApiContract;
+
+        runtimeclass Uri;
+    }
+}
+namespace Windows
+{
     namespace Storage
     {
         namespace Streams
         {
+            interface IBuffer;
+
             interface IRandomAccessStreamWithContentType;
         }
     }
@@ -31,11 +44,53 @@ namespace Windows
         {
             apicontract PrintersContract;
 
+            typedef enum IppAttributeErrorReason IppAttributeErrorReason;
+
+            typedef enum IppAttributeValueKind IppAttributeValueKind;
+
+            typedef enum IppResolutionUnit IppResolutionUnit;
+
+            interface IIppAttributeError;
+
+            interface IIppAttributeValue;
+
+            interface IIppAttributeValueStatics;
+
+            interface IIppIntegerRange;
+
+            interface IIppIntegerRangeFactory;
+
+            interface IIppPrintDevice;
+
+            interface IIppResolution;
+
+            interface IIppResolutionFactory;
+
+            interface IIppSetAttributesResult;
+
+            interface IIppTextWithLanguage;
+
+            interface IIppTextWithLanguageFactory;
+
             interface IPrint3DDevice;
 
             interface IPrint3DDeviceStatics;
 
             interface IPrintSchema;
+
+            runtimeclass IppAttributeError;
+
+            runtimeclass IppAttributeValue;
+
+            runtimeclass IppIntegerRange;
+
+            runtimeclass IppPrintDevice;
+
+            runtimeclass IppResolution;
+
+            runtimeclass IppSetAttributesResult;
+
+            runtimeclass IppTextWithLanguage;
 
             runtimeclass Print3DDevice;
 
@@ -53,6 +108,66 @@ namespace Windows
         {
             declare
             {
+                interface Windows.Foundation.Collections.IIterable<Windows.Devices.Printers.IppAttributeValue*>;
+
+                interface Windows.Foundation.Collections.IIterable<Windows.Devices.Printers.IppIntegerRange*>;
+
+                interface Windows.Foundation.Collections.IIterable<Windows.Devices.Printers.IppResolution*>;
+
+                interface Windows.Foundation.Collections.IIterable<Windows.Devices.Printers.IppTextWithLanguage*>;
+
+                interface Windows.Foundation.Collections.IIterable<Windows.Foundation.Collections.IIterable<Windows.Foundation.Collections.IKeyValuePair<HSTRING, Windows.Devices.Printers.IppAttributeValue*>*>*>;
+
+                interface Windows.Foundation.Collections.IIterable<Windows.Foundation.Collections.IKeyValuePair<HSTRING, Windows.Devices.Printers.IppAttributeError*>*>;
+
+                interface Windows.Foundation.Collections.IIterable<Windows.Foundation.Collections.IKeyValuePair<HSTRING, Windows.Devices.Printers.IppAttributeValue*>*>;
+
+                interface Windows.Foundation.Collections.IIterable<Windows.Foundation.Collections.IMapView<HSTRING, Windows.Devices.Printers.IppAttributeValue*>*>;
+
+                interface Windows.Foundation.Collections.IIterator<Windows.Devices.Printers.IppAttributeValue*>;
+
+                interface Windows.Foundation.Collections.IIterator<Windows.Devices.Printers.IppIntegerRange*>;
+
+                interface Windows.Foundation.Collections.IIterator<Windows.Devices.Printers.IppResolution*>;
+
+                interface Windows.Foundation.Collections.IIterator<Windows.Devices.Printers.IppTextWithLanguage*>;
+
+                interface Windows.Foundation.Collections.IIterator<Windows.Foundation.Collections.IIterable<Windows.Foundation.Collections.IKeyValuePair<HSTRING, Windows.Devices.Printers.IppAttributeValue*>*>*>;
+
+                interface Windows.Foundation.Collections.IIterator<Windows.Foundation.Collections.IKeyValuePair<HSTRING, Windows.Devices.Printers.IppAttributeError*>*>;
+
+                interface Windows.Foundation.Collections.IIterator<Windows.Foundation.Collections.IKeyValuePair<HSTRING, Windows.Devices.Printers.IppAttributeValue*>*>;
+
+                interface Windows.Foundation.Collections.IIterator<Windows.Foundation.Collections.IMapView<HSTRING, Windows.Devices.Printers.IppAttributeValue*>*>;
+
+                interface Windows.Foundation.Collections.IKeyValuePair<HSTRING, Windows.Devices.Printers.IppAttributeError*>;
+
+                interface Windows.Foundation.Collections.IKeyValuePair<HSTRING, Windows.Devices.Printers.IppAttributeValue*>;
+
+                interface Windows.Foundation.Collections.IMapView<HSTRING, Windows.Devices.Printers.IppAttributeError*>;
+
+                interface Windows.Foundation.Collections.IMapView<HSTRING, Windows.Devices.Printers.IppAttributeValue*>;
+
+                interface Windows.Foundation.Collections.IMap<HSTRING, Windows.Devices.Printers.IppAttributeValue*>;
+
+                interface Windows.Foundation.Collections.IVectorView<Windows.Devices.Printers.IppAttributeValue*>;
+
+                interface Windows.Foundation.Collections.IVectorView<Windows.Devices.Printers.IppIntegerRange*>;
+
+                interface Windows.Foundation.Collections.IVectorView<Windows.Devices.Printers.IppResolution*>;
+
+                interface Windows.Foundation.Collections.IVectorView<Windows.Devices.Printers.IppTextWithLanguage*>;
+
+                interface Windows.Foundation.Collections.IVectorView<Windows.Foundation.Collections.IMapView<HSTRING, Windows.Devices.Printers.IppAttributeValue*>*>;
+
+                interface Windows.Foundation.Collections.IVector<Windows.Devices.Printers.IppIntegerRange*>;
+
+                interface Windows.Foundation.Collections.IVector<Windows.Devices.Printers.IppResolution*>;
+
+                interface Windows.Foundation.Collections.IVector<Windows.Devices.Printers.IppTextWithLanguage*>;
+
+                interface Windows.Foundation.Collections.IVector<Windows.Foundation.Collections.IMapView<HSTRING, Windows.Devices.Printers.IppAttributeValue*>*>;
+
                 interface Windows.Foundation.IAsyncOperation<Windows.Devices.Printers.Print3DDevice*>;
             }
         }
@@ -69,6 +184,205 @@ namespace Windows
             [contractversion(1.0)]
             apicontract PrintersContract
             {
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            enum IppAttributeErrorReason
+            {
+                RequestEntityTooLarge       = 0,
+                AttributeNotSupported       = 1,
+                AttributeValuesNotSupported = 2,
+                AttributeNotSettable        = 3,
+                ConflictingAttributes       = 4
+            };
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            enum IppAttributeValueKind
+            {
+                Unsupported         = 0,
+                Unknown             = 1,
+                NoValue             = 2,
+                Integer             = 3,
+                Boolean             = 4,
+                Enum                = 5,
+                OctetString         = 6,
+                DateTime            = 7,
+                Resolution          = 8,
+                RangeOfInteger      = 9,
+                Collection          = 10,
+                TextWithLanguage    = 11,
+                NameWithLanguage    = 12,
+                TextWithoutLanguage = 13,
+                NameWithoutLanguage = 14,
+                Keyword             = 15,
+                Uri                 = 16,
+                UriSchema           = 17,
+                Charset             = 18,
+                NaturalLanguage     = 19,
+                MimeMediaType       = 20
+            };
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            enum IppResolutionUnit
+            {
+                DotsPerInch       = 0,
+                DotsPerCentimeter = 1
+            };
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [exclusiveto(Windows.Devices.Printers.IppAttributeError)]
+            [uuid(750FEDA1-9EEF-5C39-93E4-46149BBCEF27)]
+            interface IIppAttributeError : IInspectable
+            {
+                [propget] HRESULT Reason([out] [retval] Windows.Devices.Printers.IppAttributeErrorReason* value);
+                [propget] HRESULT ExtendedError([out] [retval] HRESULT* value);
+                HRESULT GetUnsupportedValues([out] [retval] Windows.Foundation.Collections.IVectorView<Windows.Devices.Printers.IppAttributeValue*>** result);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [exclusiveto(Windows.Devices.Printers.IppAttributeValue)]
+            [uuid(99407FED-E2BB-59A3-988B-28A974052A26)]
+            interface IIppAttributeValue : IInspectable
+            {
+                [propget] HRESULT Kind([out] [retval] Windows.Devices.Printers.IppAttributeValueKind* value);
+                HRESULT GetIntegerArray([out] [retval] Windows.Foundation.Collections.IVector<INT32>** result);
+                HRESULT GetBooleanArray([out] [retval] Windows.Foundation.Collections.IVector<boolean>** result);
+                HRESULT GetEnumArray([out] [retval] Windows.Foundation.Collections.IVector<INT32>** result);
+                HRESULT GetOctetStringArray([out] [retval] Windows.Foundation.Collections.IVector<Windows.Storage.Streams.IBuffer*>** result);
+                HRESULT GetDateTimeArray([out] [retval] Windows.Foundation.Collections.IVector<Windows.Foundation.DateTime>** result);
+                HRESULT GetResolutionArray([out] [retval] Windows.Foundation.Collections.IVector<Windows.Devices.Printers.IppResolution*>** result);
+                HRESULT GetRangeOfIntegerArray([out] [retval] Windows.Foundation.Collections.IVector<Windows.Devices.Printers.IppIntegerRange*>** result);
+                HRESULT GetCollectionArray([out] [retval] Windows.Foundation.Collections.IVector<Windows.Foundation.Collections.IMapView<HSTRING, Windows.Devices.Printers.IppAttributeValue*>*>** result);
+                HRESULT GetTextWithLanguageArray([out] [retval] Windows.Foundation.Collections.IVector<Windows.Devices.Printers.IppTextWithLanguage*>** result);
+                HRESULT GetNameWithLanguageArray([out] [retval] Windows.Foundation.Collections.IVector<Windows.Devices.Printers.IppTextWithLanguage*>** result);
+                HRESULT GetTextWithoutLanguageArray([out] [retval] Windows.Foundation.Collections.IVector<HSTRING>** result);
+                HRESULT GetNameWithoutLanguageArray([out] [retval] Windows.Foundation.Collections.IVector<HSTRING>** result);
+                HRESULT GetKeywordArray([out] [retval] Windows.Foundation.Collections.IVector<HSTRING>** result);
+                HRESULT GetUriArray([out] [retval] Windows.Foundation.Collections.IVector<Windows.Foundation.Uri*>** result);
+                HRESULT GetUriSchemaArray([out] [retval] Windows.Foundation.Collections.IVector<HSTRING>** result);
+                HRESULT GetCharsetArray([out] [retval] Windows.Foundation.Collections.IVector<HSTRING>** result);
+                HRESULT GetNaturalLanguageArray([out] [retval] Windows.Foundation.Collections.IVector<HSTRING>** result);
+                HRESULT GetMimeMediaTypeArray([out] [retval] Windows.Foundation.Collections.IVector<HSTRING>** result);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [exclusiveto(Windows.Devices.Printers.IppAttributeValue)]
+            [uuid(10D43942-DD94-5998-B235-AFAFB6FA7935)]
+            interface IIppAttributeValueStatics : IInspectable
+            {
+                HRESULT CreateUnsupported([out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateUnknown([out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateNoValue([out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateInteger([in] INT32 value, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateIntegerArray([in] Windows.Foundation.Collections.IIterable<INT32>* values, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateBoolean([in] boolean value, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateBooleanArray([in] Windows.Foundation.Collections.IIterable<boolean>* values, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateEnum([in] INT32 value, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateEnumArray([in] Windows.Foundation.Collections.IIterable<INT32>* values, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateOctetString([in] Windows.Storage.Streams.IBuffer* value, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateOctetStringArray([in] Windows.Foundation.Collections.IIterable<Windows.Storage.Streams.IBuffer*>* values, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateDateTime([in] Windows.Foundation.DateTime value, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateDateTimeArray([in] Windows.Foundation.Collections.IIterable<Windows.Foundation.DateTime>* values, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateResolution([in] Windows.Devices.Printers.IppResolution* value, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateResolutionArray([in] Windows.Foundation.Collections.IIterable<Windows.Devices.Printers.IppResolution*>* values, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateRangeOfInteger([in] Windows.Devices.Printers.IppIntegerRange* value, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateRangeOfIntegerArray([in] Windows.Foundation.Collections.IIterable<Windows.Devices.Printers.IppIntegerRange*>* values, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateCollection([in] Windows.Foundation.Collections.IIterable<Windows.Foundation.Collections.IKeyValuePair<HSTRING, Windows.Devices.Printers.IppAttributeValue*>*>* memberAttributes, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateCollectionArray([in] Windows.Foundation.Collections.IIterable<Windows.Foundation.Collections.IIterable<Windows.Foundation.Collections.IKeyValuePair<HSTRING, Windows.Devices.Printers.IppAttributeValue*>*>*>* memberAttributesArray, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateTextWithLanguage([in] Windows.Devices.Printers.IppTextWithLanguage* value, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateTextWithLanguageArray([in] Windows.Foundation.Collections.IIterable<Windows.Devices.Printers.IppTextWithLanguage*>* values, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateNameWithLanguage([in] Windows.Devices.Printers.IppTextWithLanguage* value, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateNameWithLanguageArray([in] Windows.Foundation.Collections.IIterable<Windows.Devices.Printers.IppTextWithLanguage*>* values, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateTextWithoutLanguage([in] HSTRING value, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateTextWithoutLanguageArray([in] Windows.Foundation.Collections.IIterable<HSTRING>* values, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateNameWithoutLanguage([in] HSTRING value, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateNameWithoutLanguageArray([in] Windows.Foundation.Collections.IIterable<HSTRING>* values, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateKeyword([in] HSTRING value, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateKeywordArray([in] Windows.Foundation.Collections.IIterable<HSTRING>* values, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateUri([in] Windows.Foundation.Uri* value, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateUriArray([in] Windows.Foundation.Collections.IIterable<Windows.Foundation.Uri*>* values, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateUriSchema([in] HSTRING value, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateUriSchemaArray([in] Windows.Foundation.Collections.IIterable<HSTRING>* values, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateCharset([in] HSTRING value, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateCharsetArray([in] Windows.Foundation.Collections.IIterable<HSTRING>* values, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateNaturalLanguage([in] HSTRING value, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateNaturalLanguageArray([in] Windows.Foundation.Collections.IIterable<HSTRING>* values, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateMimeMedia([in] HSTRING value, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+                HRESULT CreateMimeMediaArray([in] Windows.Foundation.Collections.IIterable<HSTRING>* values, [out] [retval] Windows.Devices.Printers.IppAttributeValue** result);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [exclusiveto(Windows.Devices.Printers.IppIntegerRange)]
+            [uuid(92907346-C3EA-5ED6-BDB1-3752C62C6F7F)]
+            interface IIppIntegerRange : IInspectable
+            {
+                [propget] HRESULT Start([out] [retval] INT32* value);
+                [propget] HRESULT End([out] [retval] INT32* value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [exclusiveto(Windows.Devices.Printers.IppIntegerRange)]
+            [uuid(75D4ECAE-F87E-54AD-B5D0-465204DB7553)]
+            interface IIppIntegerRangeFactory : IInspectable
+            {
+                HRESULT CreateInstance([in] INT32 start, [in] INT32 end, [out] [retval] Windows.Devices.Printers.IppIntegerRange** value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [exclusiveto(Windows.Devices.Printers.IppPrintDevice)]
+            [uuid(D748AC56-76F3-5DC6-AFD4-C2A8686B9359)]
+            interface IIppPrintDevice : IInspectable
+            {
+                [propget] HRESULT PrinterName([out] [retval] HSTRING* value);
+                [propget] HRESULT PrinterUri([out] [retval] Windows.Foundation.Uri** value);
+                HRESULT GetPrinterAttributesAsBuffer([in] Windows.Foundation.Collections.IIterable<HSTRING>* attributeNames, [out] [retval] Windows.Storage.Streams.IBuffer** result);
+                HRESULT GetPrinterAttributes([in] Windows.Foundation.Collections.IIterable<HSTRING>* attributeNames, [out] [retval] Windows.Foundation.Collections.IMap<HSTRING, Windows.Devices.Printers.IppAttributeValue*>** result);
+                HRESULT SetPrinterAttributesFromBuffer([in] Windows.Storage.Streams.IBuffer* printerAttributesBuffer, [out] [retval] Windows.Devices.Printers.IppSetAttributesResult** result);
+                HRESULT SetPrinterAttributes([in] Windows.Foundation.Collections.IIterable<Windows.Foundation.Collections.IKeyValuePair<HSTRING, Windows.Devices.Printers.IppAttributeValue*>*>* printerAttributes, [out] [retval] Windows.Devices.Printers.IppSetAttributesResult** result);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [exclusiveto(Windows.Devices.Printers.IppResolution)]
+            [uuid(CB493F86-6BF3-56F5-86CE-263D08AEAD63)]
+            interface IIppResolution : IInspectable
+            {
+                [propget] HRESULT Width([out] [retval] INT32* value);
+                [propget] HRESULT Height([out] [retval] INT32* value);
+                [propget] HRESULT Unit([out] [retval] Windows.Devices.Printers.IppResolutionUnit* value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [exclusiveto(Windows.Devices.Printers.IppResolution)]
+            [uuid(E481C2AE-251A-5326-B173-95543ED99A35)]
+            interface IIppResolutionFactory : IInspectable
+            {
+                HRESULT CreateInstance([in] INT32 width, [in] INT32 height, [in] Windows.Devices.Printers.IppResolutionUnit unit, [out] [retval] Windows.Devices.Printers.IppResolution** value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [exclusiveto(Windows.Devices.Printers.IppSetAttributesResult)]
+            [uuid(7D1C7F55-AA9D-58A3-90E9-17BDC5281F07)]
+            interface IIppSetAttributesResult : IInspectable
+            {
+                [propget] HRESULT Succeeded([out] [retval] boolean* value);
+                [propget] HRESULT AttributeErrors([out] [retval] Windows.Foundation.Collections.IMapView<HSTRING, Windows.Devices.Printers.IppAttributeError*>** value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [exclusiveto(Windows.Devices.Printers.IppTextWithLanguage)]
+            [uuid(326447A6-5149-5936-90E8-0C736036BF77)]
+            interface IIppTextWithLanguage : IInspectable
+            {
+                [propget] HRESULT Language([out] [retval] HSTRING* value);
+                [propget] HRESULT Value([out] [retval] HSTRING* value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [exclusiveto(Windows.Devices.Printers.IppTextWithLanguage)]
+            [uuid(CA4A1E8D-2968-5775-997C-8A46F1A574ED)]
+            interface IIppTextWithLanguageFactory : IInspectable
+            {
+                HRESULT CreateInstance([in] HSTRING language, [in] HSTRING text, [out] [retval] Windows.Devices.Printers.IppTextWithLanguage** value);
             }
 
             [contract(Windows.Devices.Printers.PrintersContract, 1.0)]
@@ -96,6 +410,63 @@ namespace Windows
                 HRESULT GetDefaultPrintTicketAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.Storage.Streams.IRandomAccessStreamWithContentType*>** operation);
                 HRESULT GetCapabilitiesAsync([in] Windows.Storage.Streams.IRandomAccessStreamWithContentType* constrainTicket, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.Storage.Streams.IRandomAccessStreamWithContentType*>** operation);
                 HRESULT MergeAndValidateWithDefaultPrintTicketAsync([in] Windows.Storage.Streams.IRandomAccessStreamWithContentType* deltaTicket, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.Storage.Streams.IRandomAccessStreamWithContentType*>** operation);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass IppAttributeError
+            {
+                [default] interface Windows.Devices.Printers.IIppAttributeError;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [marshaling_behavior(agile)]
+            [static(Windows.Devices.Printers.IIppAttributeValueStatics, Windows.Foundation.UniversalApiContract, 13.0)]
+            [threading(both)]
+            runtimeclass IppAttributeValue
+            {
+                [default] interface Windows.Devices.Printers.IIppAttributeValue;
+            }
+
+            [activatable(Windows.Devices.Printers.IIppIntegerRangeFactory, Windows.Foundation.UniversalApiContract, 13.0)]
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [marshaling_behavior(agile)]
+            [threading(both)]
+            runtimeclass IppIntegerRange
+            {
+                [default] interface Windows.Devices.Printers.IIppIntegerRange;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass IppPrintDevice
+            {
+                [default] interface Windows.Devices.Printers.IIppPrintDevice;
+            }
+
+            [activatable(Windows.Devices.Printers.IIppResolutionFactory, Windows.Foundation.UniversalApiContract, 13.0)]
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [marshaling_behavior(agile)]
+            [threading(both)]
+            runtimeclass IppResolution
+            {
+                [default] interface Windows.Devices.Printers.IIppResolution;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass IppSetAttributesResult
+            {
+                [default] interface Windows.Devices.Printers.IIppSetAttributesResult;
+            }
+
+            [activatable(Windows.Devices.Printers.IIppTextWithLanguageFactory, Windows.Foundation.UniversalApiContract, 13.0)]
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [marshaling_behavior(agile)]
+            [threading(both)]
+            runtimeclass IppTextWithLanguage
+            {
+                [default] interface Windows.Devices.Printers.IIppTextWithLanguage;
             }
 
             [contract(Windows.Devices.Printers.PrintersContract, 1.0)]

@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xa0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_GLOBALIZATION_GLOBALIZATIONJAPANESEPHONETICANALYZERCONTRACT_VERSION)
@@ -2365,7 +2365,11 @@ namespace ABI {
     namespace Windows {
         namespace Devices {
             namespace AllJoyn {
-                enum AllJoynAuthenticationMechanism : int
+                enum
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynAuthenticationMechanism has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                AllJoynAuthenticationMechanism : int
                 {
                     AllJoynAuthenticationMechanism_None = 0,
                     AllJoynAuthenticationMechanism_SrpAnonymous
@@ -2407,7 +2411,11 @@ namespace ABI {
     namespace Windows {
         namespace Devices {
             namespace AllJoyn {
-                enum AllJoynBusAttachmentState : int
+                enum
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynBusAttachmentState has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                AllJoynBusAttachmentState : int
                 {
                     AllJoynBusAttachmentState_Disconnected = 0,
                     AllJoynBusAttachmentState_Connecting = 1,
@@ -2432,7 +2440,11 @@ namespace ABI {
     namespace Windows {
         namespace Devices {
             namespace AllJoyn {
-                enum AllJoynSessionLostReason : int
+                enum
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynSessionLostReason has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                AllJoynSessionLostReason : int
                 {
                     AllJoynSessionLostReason_None = 0,
                     AllJoynSessionLostReason_ProducerLeftSession = 1,
@@ -2459,7 +2471,11 @@ namespace ABI {
     namespace Windows {
         namespace Devices {
             namespace AllJoyn {
-                enum AllJoynTrafficType : int
+                enum
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynTrafficType has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                AllJoynTrafficType : int
                 {
                     AllJoynTrafficType_Unknown = 0,
                     AllJoynTrafficType_Messages = 1,
@@ -2490,69 +2506,135 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("e5a9bf00-1fa2-4839-93ef-f9df404890f7")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynAboutData : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_IsEnabled(
                         boolean* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE put_IsEnabled(
                         boolean value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_DefaultAppName(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE put_DefaultAppName(
                         HSTRING value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_AppNames(
                         __FIMap_2_HSTRING_HSTRING** value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_DateOfManufacture(
                         __FIReference_1_Windows__CFoundation__CDateTime** value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE put_DateOfManufacture(
                         __FIReference_1_Windows__CFoundation__CDateTime* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_DefaultDescription(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE put_DefaultDescription(
                         HSTRING value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_Descriptions(
                         __FIMap_2_HSTRING_HSTRING** value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_DefaultManufacturer(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE put_DefaultManufacturer(
                         HSTRING value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_Manufacturers(
                         __FIMap_2_HSTRING_HSTRING** value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_ModelNumber(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE put_ModelNumber(
                         HSTRING value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_SoftwareVersion(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE put_SoftwareVersion(
                         HSTRING value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_SupportUrl(
                         ABI::Windows::Foundation::IUriRuntimeClass** value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE put_SupportUrl(
                         ABI::Windows::Foundation::IUriRuntimeClass* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_AppId(
                         GUID* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE put_AppId(
                         GUID value
                         ) = 0;
@@ -2586,54 +2668,105 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("6823111f-6212-4934-9c48-e19ca4984288")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynAboutDataView : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_Status(
                         INT32* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_Properties(
                         __FIMapView_2_HSTRING_IInspectable** value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_AJSoftwareVersion(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_AppId(
                         GUID* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_DateOfManufacture(
                         __FIReference_1_Windows__CFoundation__CDateTime** value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_DefaultLanguage(
                         ABI::Windows::Globalization::ILanguage** value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_DeviceId(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_HardwareVersion(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_ModelNumber(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_SoftwareVersion(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_SupportedLanguages(
                         __FIVectorView_1_Windows__CGlobalization__CLanguage** value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_SupportUrl(
                         ABI::Windows::Foundation::IUriRuntimeClass** value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_AppName(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_Description(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_DeviceName(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_Manufacturer(
                         HSTRING* value
                         ) = 0;
@@ -2667,15 +2800,24 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("57edb688-0c5e-416e-88b5-39b32d25c47d")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynAboutDataViewStatics : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE GetDataBySessionPortAsync(
                         HSTRING uniqueName,
                         ABI::Windows::Devices::AllJoyn::IAllJoynBusAttachment* busAttachment,
                         UINT16 sessionPort,
                         __FIAsyncOperation_1_Windows__CDevices__CAllJoyn__CAllJoynAboutDataView** operation
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE GetDataBySessionPortWithLanguageAsync(
                         HSTRING uniqueName,
                         ABI::Windows::Devices::AllJoyn::IAllJoynBusAttachment* busAttachment,
@@ -2711,9 +2853,15 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("4da817d2-cd1d-4023-a7c4-16def89c28df")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("IAllJoynAcceptSessionJoiner has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynAcceptSessionJoiner : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("IAllJoynAcceptSessionJoiner has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE Accept(void) = 0;
                 };
 
@@ -2745,24 +2893,45 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("4efb5365-3e8a-4257-8f10-539ce0d56c0f")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynAcceptSessionJoinerEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynAcceptSessionJoinerEventArgs : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAcceptSessionJoinerEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_UniqueName(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAcceptSessionJoinerEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_SessionPort(
                         UINT16* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAcceptSessionJoinerEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_TrafficType(
                         ABI::Windows::Devices::AllJoyn::AllJoynTrafficType* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAcceptSessionJoinerEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_SamePhysicalNode(
                         boolean* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAcceptSessionJoinerEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_SameNetwork(
                         boolean* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAcceptSessionJoinerEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE Accept(void) = 0;
                 };
 
@@ -2794,9 +2963,15 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("b4435bc0-6145-429e-84db-d5bfe772b14f")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynAcceptSessionJoinerEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynAcceptSessionJoinerEventArgsFactory : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAcceptSessionJoinerEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE Create(
                         HSTRING uniqueName,
                         UINT16 sessionPort,
@@ -2835,15 +3010,27 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("97b4701c-15dc-4b53-b6a4-7d134300d7bf")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynAuthenticationCompleteEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynAuthenticationCompleteEventArgs : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAuthenticationCompleteEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_AuthenticationMechanism(
                         ABI::Windows::Devices::AllJoyn::AllJoynAuthenticationMechanism* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAuthenticationCompleteEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_PeerUniqueName(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynAuthenticationCompleteEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_Succeeded(
                         boolean* value
                         ) = 0;
@@ -2877,55 +3064,106 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("f309f153-1eed-42c3-a20e-436d41fe62f6")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynBusAttachment : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_AboutData(
                         ABI::Windows::Devices::AllJoyn::IAllJoynAboutData** value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_ConnectionSpecification(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_State(
                         ABI::Windows::Devices::AllJoyn::AllJoynBusAttachmentState* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_UniqueName(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE PingAsync(
                         HSTRING uniqueName,
                         __FIAsyncOperation_1_int** operation
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE Connect(void) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE Disconnect(void) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE add_StateChanged(
                         __FITypedEventHandler_2_Windows__CDevices__CAllJoyn__CAllJoynBusAttachment_Windows__CDevices__CAllJoyn__CAllJoynBusAttachmentStateChangedEventArgs* handler,
                         EventRegistrationToken* token
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE remove_StateChanged(
                         EventRegistrationToken token
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_AuthenticationMechanisms(
                         __FIVector_1_Windows__CDevices__CAllJoyn__CAllJoynAuthenticationMechanism** value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE add_CredentialsRequested(
                         __FITypedEventHandler_2_Windows__CDevices__CAllJoyn__CAllJoynBusAttachment_Windows__CDevices__CAllJoyn__CAllJoynCredentialsRequestedEventArgs* handler,
                         EventRegistrationToken* token
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE remove_CredentialsRequested(
                         EventRegistrationToken token
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE add_CredentialsVerificationRequested(
                         __FITypedEventHandler_2_Windows__CDevices__CAllJoyn__CAllJoynBusAttachment_Windows__CDevices__CAllJoyn__CAllJoynCredentialsVerificationRequestedEventArgs* handler,
                         EventRegistrationToken* token
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE remove_CredentialsVerificationRequested(
                         EventRegistrationToken token
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE add_AuthenticationComplete(
                         __FITypedEventHandler_2_Windows__CDevices__CAllJoyn__CAllJoynBusAttachment_Windows__CDevices__CAllJoyn__CAllJoynAuthenticationCompleteEventArgs* handler,
                         EventRegistrationToken* token
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE remove_AuthenticationComplete(
                         EventRegistrationToken token
                         ) = 0;
@@ -2959,29 +3197,50 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("3474cb1e-2368-43b2-b43e-6a3ac1278d98")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynBusAttachment2 : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE GetAboutDataAsync(
                         ABI::Windows::Devices::AllJoyn::IAllJoynServiceInfo* serviceInfo,
                         __FIAsyncOperation_1_Windows__CDevices__CAllJoyn__CAllJoynAboutDataView** operation
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE GetAboutDataWithLanguageAsync(
                         ABI::Windows::Devices::AllJoyn::IAllJoynServiceInfo* serviceInfo,
                         ABI::Windows::Globalization::ILanguage* language,
                         __FIAsyncOperation_1_Windows__CDevices__CAllJoyn__CAllJoynAboutDataView** operation
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE add_AcceptSessionJoinerRequested(
                         __FITypedEventHandler_2_Windows__CDevices__CAllJoyn__CAllJoynBusAttachment_Windows__CDevices__CAllJoyn__CAllJoynAcceptSessionJoinerEventArgs* handler,
                         EventRegistrationToken* token
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE remove_AcceptSessionJoinerRequested(
                         EventRegistrationToken token
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE add_SessionJoined(
                         __FITypedEventHandler_2_Windows__CDevices__CAllJoyn__CAllJoynBusAttachment_Windows__CDevices__CAllJoyn__CAllJoynSessionJoinedEventArgs* handler,
                         EventRegistrationToken* token
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE remove_SessionJoined(
                         EventRegistrationToken token
                         ) = 0;
@@ -3015,9 +3274,15 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("642ef1a4-ad85-4ddf-90ae-604452b22288")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynBusAttachmentFactory : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE Create(
                         HSTRING connectionSpecification,
                         ABI::Windows::Devices::AllJoyn::IAllJoynBusAttachment** result
@@ -3052,12 +3317,21 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("d82e75f4-c02a-41ec-a8d5-eab1558953aa")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynBusAttachmentStateChangedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynBusAttachmentStateChangedEventArgs : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusAttachmentStateChangedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_State(
                         ABI::Windows::Devices::AllJoyn::AllJoynBusAttachmentState* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusAttachmentStateChangedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_Status(
                         INT32* value
                         ) = 0;
@@ -3091,12 +3365,21 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("839d4d3d-1051-40d7-872a-8d0141115b1f")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynBusAttachmentStatics : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE GetDefault(
                         ABI::Windows::Devices::AllJoyn::IAllJoynBusAttachment** defaultBusAttachment
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE GetWatcher(
                         __FIIterable_1_HSTRING* requiredInterfaces,
                         ABI::Windows::Devices::Enumeration::IDeviceWatcher** deviceWatcher
@@ -3131,24 +3414,48 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("e8fd825e-f73a-490c-8804-04e026643047")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynBusObject : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE Start(void) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE Stop(void) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE AddProducer(
                         ABI::Windows::Devices::AllJoyn::IAllJoynProducer* producer
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_BusAttachment(
                         ABI::Windows::Devices::AllJoyn::IAllJoynBusAttachment** value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_Session(
                         ABI::Windows::Devices::AllJoyn::IAllJoynSession** value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE add_Stopped(
                         __FITypedEventHandler_2_Windows__CDevices__CAllJoyn__CAllJoynBusObject_Windows__CDevices__CAllJoyn__CAllJoynBusObjectStoppedEventArgs* handler,
                         EventRegistrationToken* token
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE remove_Stopped(
                         EventRegistrationToken token
                         ) = 0;
@@ -3182,13 +3489,22 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("2c2f9f0b-8e02-4f9c-ac27-ea6dad5d3b50")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynBusObjectFactory : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE Create(
                         HSTRING objectPath,
                         ABI::Windows::Devices::AllJoyn::IAllJoynBusObject** result
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE CreateWithBusAttachment(
                         HSTRING objectPath,
                         ABI::Windows::Devices::AllJoyn::IAllJoynBusAttachment* busAttachment,
@@ -3224,9 +3540,15 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("de102115-ef8e-4d42-b93b-a2ae74519766")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynBusObjectStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynBusObjectStoppedEventArgs : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusObjectStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_Status(
                         INT32* value
                         ) = 0;
@@ -3260,9 +3582,15 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("6b22fd48-d0a3-4255-953a-4772b4028073")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynBusObjectStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynBusObjectStoppedEventArgsFactory : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynBusObjectStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE Create(
                         INT32 status,
                         ABI::Windows::Devices::AllJoyn::IAllJoynBusObjectStoppedEventArgs** result
@@ -3297,27 +3625,51 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("824650f2-a190-40b1-abab-349ec244dfaa")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynCredentials has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynCredentials : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynCredentials has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_AuthenticationMechanism(
                         ABI::Windows::Devices::AllJoyn::AllJoynAuthenticationMechanism* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynCredentials has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_Certificate(
                         ABI::Windows::Security::Cryptography::Certificates::ICertificate** value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynCredentials has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE put_Certificate(
                         ABI::Windows::Security::Cryptography::Certificates::ICertificate* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynCredentials has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_PasswordCredential(
                         ABI::Windows::Security::Credentials::IPasswordCredential** value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynCredentials has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE put_PasswordCredential(
                         ABI::Windows::Security::Credentials::IPasswordCredential* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynCredentials has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_Timeout(
                         ABI::Windows::Foundation::TimeSpan* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynCredentials has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE put_Timeout(
                         ABI::Windows::Foundation::TimeSpan value
                         ) = 0;
@@ -3351,21 +3703,39 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("6a87e34e-b069-4b80-9e1a-41bc837c65d2")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynCredentialsRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynCredentialsRequestedEventArgs : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynCredentialsRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_AttemptCount(
                         UINT16* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynCredentialsRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_Credentials(
                         ABI::Windows::Devices::AllJoyn::IAllJoynCredentials** value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynCredentialsRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_PeerUniqueName(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynCredentialsRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_RequestedUserName(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynCredentialsRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE GetDeferral(
                         ABI::Windows::Foundation::IDeferral** result
                         ) = 0;
@@ -3399,28 +3769,55 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("800a7612-b805-44af-a2e1-792ab655a2d0")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynCredentialsVerificationRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynCredentialsVerificationRequestedEventArgs : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynCredentialsVerificationRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_AuthenticationMechanism(
                         ABI::Windows::Devices::AllJoyn::AllJoynAuthenticationMechanism* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynCredentialsVerificationRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_PeerUniqueName(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynCredentialsVerificationRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_PeerCertificate(
                         ABI::Windows::Security::Cryptography::Certificates::ICertificate** value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynCredentialsVerificationRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_PeerCertificateErrorSeverity(
                         ABI::Windows::Networking::Sockets::SocketSslErrorSeverity* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynCredentialsVerificationRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_PeerCertificateErrors(
                         __FIVectorView_1_Windows__CSecurity__CCryptography__CCertificates__CChainValidationResult** value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynCredentialsVerificationRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_PeerIntermediateCertificates(
                         __FIVectorView_1_Windows__CSecurity__CCryptography__CCertificates__CCertificate** value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynCredentialsVerificationRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE Accept(void) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynCredentialsVerificationRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE GetDeferral(
                         ABI::Windows::Foundation::IDeferral** result
                         ) = 0;
@@ -3454,9 +3851,15 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("ff2b0127-2c12-4859-aa3a-c74461ee814c")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynMessageInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynMessageInfo : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynMessageInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_SenderUniqueName(
                         HSTRING* value
                         ) = 0;
@@ -3490,9 +3893,15 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("34664c2a-8289-43d4-b4a8-3f4de359f043")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynMessageInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynMessageInfoFactory : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynMessageInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE Create(
                         HSTRING senderUniqueName,
                         ABI::Windows::Devices::AllJoyn::IAllJoynMessageInfo** result
@@ -3525,9 +3934,15 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("9d084679-469b-495a-a710-ac50f123069f")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("IAllJoynProducer has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynProducer : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("IAllJoynProducer has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE SetBusObject(
                         ABI::Windows::Devices::AllJoyn::IAllJoynBusObject* busObject
                         ) = 0;
@@ -3561,9 +3976,15 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("51309770-4937-492d-8080-236439987ceb")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynProducerStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynProducerStoppedEventArgs : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynProducerStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_Status(
                         INT32* value
                         ) = 0;
@@ -3597,9 +4018,15 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("56529961-b219-4d6e-9f78-fa3f99fa8fe5")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynProducerStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynProducerStoppedEventArgsFactory : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynProducerStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE Create(
                         INT32 status,
                         ABI::Windows::Devices::AllJoyn::IAllJoynProducerStoppedEventArgs** result
@@ -3634,15 +4061,27 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("4cbe8209-b93e-4182-999b-ddd000f9c575")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynServiceInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynServiceInfo : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynServiceInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_UniqueName(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynServiceInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_ObjectPath(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynServiceInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_SessionPort(
                         UINT16* value
                         ) = 0;
@@ -3676,9 +4115,15 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("7581dabd-fe03-4f4b-94a4-f02fdcbd11b8")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynServiceInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynServiceInfoFactory : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynServiceInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE Create(
                         HSTRING uniqueName,
                         HSTRING objectPath,
@@ -3715,9 +4160,15 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("3057a95f-1d3f-41f3-8969-e32792627396")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynServiceInfoRemovedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynServiceInfoRemovedEventArgs : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynServiceInfoRemovedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_UniqueName(
                         HSTRING* value
                         ) = 0;
@@ -3751,9 +4202,15 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("0dbf8627-9aff-4955-9227-6953baf41569")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynServiceInfoRemovedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynServiceInfoRemovedEventArgsFactory : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynServiceInfoRemovedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE Create(
                         HSTRING uniqueName,
                         ABI::Windows::Devices::AllJoyn::IAllJoynServiceInfoRemovedEventArgs** result
@@ -3788,9 +4245,15 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("5678570a-603a-49fc-b750-0ef13609213c")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynServiceInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynServiceInfoStatics : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynServiceInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE FromIdAsync(
                         HSTRING deviceId,
                         __FIAsyncOperation_1_Windows__CDevices__CAllJoyn__CAllJoynServiceInfo** operation
@@ -3825,37 +4288,67 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("e8d11b0c-c0d4-406c-88a9-a93efa85d4b1")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynSession : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_Id(
                         INT32* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_Status(
                         INT32* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE RemoveMemberAsync(
                         HSTRING uniqueName,
                         __FIAsyncOperation_1_int** operation
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE add_MemberAdded(
                         __FITypedEventHandler_2_Windows__CDevices__CAllJoyn__CAllJoynSession_Windows__CDevices__CAllJoyn__CAllJoynSessionMemberAddedEventArgs* handler,
                         EventRegistrationToken* token
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE remove_MemberAdded(
                         EventRegistrationToken token
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE add_MemberRemoved(
                         __FITypedEventHandler_2_Windows__CDevices__CAllJoyn__CAllJoynSession_Windows__CDevices__CAllJoyn__CAllJoynSessionMemberRemovedEventArgs* handler,
                         EventRegistrationToken* token
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE remove_MemberRemoved(
                         EventRegistrationToken token
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE add_Lost(
                         __FITypedEventHandler_2_Windows__CDevices__CAllJoyn__CAllJoynSession_Windows__CDevices__CAllJoyn__CAllJoynSessionLostEventArgs* handler,
                         EventRegistrationToken* token
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE remove_Lost(
                         EventRegistrationToken token
                         ) = 0;
@@ -3889,9 +4382,15 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("9e9f5bd0-b5d7-47c5-8dab-b040cc192871")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynSessionJoinedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynSessionJoinedEventArgs : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynSessionJoinedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_Session(
                         ABI::Windows::Devices::AllJoyn::IAllJoynSession** value
                         ) = 0;
@@ -3925,9 +4424,15 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("6824d689-d6cb-4d9e-a09e-35806870b17f")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynSessionJoinedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynSessionJoinedEventArgsFactory : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynSessionJoinedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE Create(
                         ABI::Windows::Devices::AllJoyn::IAllJoynSession* session,
                         ABI::Windows::Devices::AllJoyn::IAllJoynSessionJoinedEventArgs** result
@@ -3962,9 +4467,15 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("e766a48a-8bb8-4954-ae67-d2fa43d1f96b")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynSessionLostEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynSessionLostEventArgs : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynSessionLostEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_Reason(
                         ABI::Windows::Devices::AllJoyn::AllJoynSessionLostReason* value
                         ) = 0;
@@ -3998,9 +4509,15 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("13bbfd32-d2f4-49c9-980e-2805e13586b1")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynSessionLostEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynSessionLostEventArgsFactory : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynSessionLostEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE Create(
                         ABI::Windows::Devices::AllJoyn::AllJoynSessionLostReason reason,
                         ABI::Windows::Devices::AllJoyn::IAllJoynSessionLostEventArgs** result
@@ -4035,9 +4552,15 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("49a2798a-0dd1-46c1-9cd6-27190e503a5e")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynSessionMemberAddedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynSessionMemberAddedEventArgs : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynSessionMemberAddedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_UniqueName(
                         HSTRING* value
                         ) = 0;
@@ -4071,9 +4594,15 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("341de352-1d33-40a1-a1d3-e5777020e1f1")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynSessionMemberAddedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynSessionMemberAddedEventArgsFactory : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynSessionMemberAddedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE Create(
                         HSTRING uniqueName,
                         ABI::Windows::Devices::AllJoyn::IAllJoynSessionMemberAddedEventArgs** result
@@ -4108,9 +4637,15 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("409a219f-aa4a-4893-b430-baa1b63c6219")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynSessionMemberRemovedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynSessionMemberRemovedEventArgs : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynSessionMemberRemovedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_UniqueName(
                         HSTRING* value
                         ) = 0;
@@ -4144,9 +4679,15 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("c4d355e8-42b8-4b67-b757-d0cfcad59280")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynSessionMemberRemovedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynSessionMemberRemovedEventArgsFactory : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynSessionMemberRemovedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE Create(
                         HSTRING uniqueName,
                         ABI::Windows::Devices::AllJoyn::IAllJoynSessionMemberRemovedEventArgs** result
@@ -4181,13 +4722,22 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("9e05d604-a06c-46d4-b46c-0b0b54105b44")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynSessionStatics : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE GetFromServiceInfoAsync(
                         ABI::Windows::Devices::AllJoyn::IAllJoynServiceInfo* serviceInfo,
                         __FIAsyncOperation_1_Windows__CDevices__CAllJoyn__CAllJoynSession** operation
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE GetFromServiceInfoAndBusAttachmentAsync(
                         ABI::Windows::Devices::AllJoyn::IAllJoynServiceInfo* serviceInfo,
                         ABI::Windows::Devices::AllJoyn::IAllJoynBusAttachment* busAttachment,
@@ -4223,60 +4773,117 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("d0b7a17e-0d29-4da9-8ac6-54c554bedbc5")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynStatusStatics : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_Ok(
                         INT32* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_Fail(
                         INT32* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_OperationTimedOut(
                         INT32* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_OtherEndClosed(
                         INT32* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_ConnectionRefused(
                         INT32* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_AuthenticationFailed(
                         INT32* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_AuthenticationRejectedByUser(
                         INT32* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_SslConnectFailed(
                         INT32* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_SslIdentityVerificationFailed(
                         INT32* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_InsufficientSecurity(
                         INT32* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_InvalidArgument1(
                         INT32* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_InvalidArgument2(
                         INT32* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_InvalidArgument3(
                         INT32* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_InvalidArgument4(
                         INT32* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_InvalidArgument5(
                         INT32* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_InvalidArgument6(
                         INT32* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_InvalidArgument7(
                         INT32* value
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_InvalidArgument8(
                         INT32* value
                         ) = 0;
@@ -4310,9 +4917,15 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("c9fca03b-701d-4aa8-97dd-a2bb0a8f5fa3")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynWatcherStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynWatcherStoppedEventArgs : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynWatcherStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE get_Status(
                         INT32* value
                         ) = 0;
@@ -4346,9 +4959,15 @@ namespace ABI {
         namespace Devices {
             namespace AllJoyn {
                 MIDL_INTERFACE("878fa5a8-2d50-47e1-904a-20bf0d48c782")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                DEPRECATED("AllJoynWatcherStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                 IAllJoynWatcherStoppedEventArgsFactory : public IInspectable
                 {
                 public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+                    DEPRECATED("AllJoynWatcherStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
                     virtual HRESULT STDMETHODCALLTYPE Create(
                         INT32 status,
                         ABI::Windows::Devices::AllJoyn::IAllJoynWatcherStoppedEventArgs** result
@@ -4380,6 +4999,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynWatcherStoppe
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynAboutData_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynAboutData_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynAboutData[] = L"Windows.Devices.AllJoyn.AllJoynAboutData";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -4402,6 +5024,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynAboutDataView_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynAboutDataView_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynAboutDataView[] = L"Windows.Devices.AllJoyn.AllJoynAboutDataView";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -4424,6 +5049,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynAcceptSessionJoinerEventArgs_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynAcceptSessionJoinerEventArgs_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynAcceptSessionJoinerEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynAcceptSessionJoinerEventArgs[] = L"Windows.Devices.AllJoyn.AllJoynAcceptSessionJoinerEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -4443,6 +5071,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynAuthenticationCompleteEventArgs_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynAuthenticationCompleteEventArgs_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynAuthenticationCompleteEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynAuthenticationCompleteEventArgs[] = L"Windows.Devices.AllJoyn.AllJoynAuthenticationCompleteEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -4470,6 +5101,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynBusAttachment_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynBusAttachment_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynBusAttachment[] = L"Windows.Devices.AllJoyn.AllJoynBusAttachment";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -4489,6 +5123,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynBusAttachmentStateChangedEventArgs_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynBusAttachmentStateChangedEventArgs_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynBusAttachmentStateChangedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynBusAttachmentStateChangedEventArgs[] = L"Windows.Devices.AllJoyn.AllJoynBusAttachmentStateChangedEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -4512,6 +5149,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x30000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynBusObject_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynBusObject_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynBusObject[] = L"Windows.Devices.AllJoyn.AllJoynBusObject";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x30000
@@ -4534,6 +5174,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x30000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynBusObjectStoppedEventArgs_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynBusObjectStoppedEventArgs_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynBusObjectStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynBusObjectStoppedEventArgs[] = L"Windows.Devices.AllJoyn.AllJoynBusObjectStoppedEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x30000
@@ -4553,6 +5196,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynCredentials_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynCredentials_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynCredentials has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynCredentials[] = L"Windows.Devices.AllJoyn.AllJoynCredentials";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -4572,6 +5218,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynCredentialsRequestedEventArgs_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynCredentialsRequestedEventArgs_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynCredentialsRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynCredentialsRequestedEventArgs[] = L"Windows.Devices.AllJoyn.AllJoynCredentialsRequestedEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -4591,6 +5240,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynCredentialsVerificationRequestedEventArgs_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynCredentialsVerificationRequestedEventArgs_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynCredentialsVerificationRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynCredentialsVerificationRequestedEventArgs[] = L"Windows.Devices.AllJoyn.AllJoynCredentialsVerificationRequestedEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -4613,6 +5265,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynMessageInfo_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynMessageInfo_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynMessageInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynMessageInfo[] = L"Windows.Devices.AllJoyn.AllJoynMessageInfo";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -4635,6 +5290,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynProducerStoppedEventArgs_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynProducerStoppedEventArgs_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynProducerStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynProducerStoppedEventArgs[] = L"Windows.Devices.AllJoyn.AllJoynProducerStoppedEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -4660,6 +5318,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynServiceInfo_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynServiceInfo_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynServiceInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynServiceInfo[] = L"Windows.Devices.AllJoyn.AllJoynServiceInfo";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -4682,6 +5343,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynServiceInfoRemovedEventArgs_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynServiceInfoRemovedEventArgs_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynServiceInfoRemovedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynServiceInfoRemovedEventArgs[] = L"Windows.Devices.AllJoyn.AllJoynServiceInfoRemovedEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -4704,6 +5368,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x30000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynSession_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynSession_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynSession[] = L"Windows.Devices.AllJoyn.AllJoynSession";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x30000
@@ -4726,6 +5393,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x30000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynSessionJoinedEventArgs_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynSessionJoinedEventArgs_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynSessionJoinedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynSessionJoinedEventArgs[] = L"Windows.Devices.AllJoyn.AllJoynSessionJoinedEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x30000
@@ -4748,6 +5418,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynSessionLostEventArgs_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynSessionLostEventArgs_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynSessionLostEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynSessionLostEventArgs[] = L"Windows.Devices.AllJoyn.AllJoynSessionLostEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -4770,6 +5443,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynSessionMemberAddedEventArgs_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynSessionMemberAddedEventArgs_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynSessionMemberAddedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynSessionMemberAddedEventArgs[] = L"Windows.Devices.AllJoyn.AllJoynSessionMemberAddedEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -4792,6 +5468,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynSessionMemberRemovedEventArgs_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynSessionMemberRemovedEventArgs_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynSessionMemberRemovedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynSessionMemberRemovedEventArgs[] = L"Windows.Devices.AllJoyn.AllJoynSessionMemberRemovedEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -4811,6 +5490,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynStatus_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynStatus_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynStatus[] = L"Windows.Devices.AllJoyn.AllJoynStatus";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -4833,6 +5515,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynWatcherStoppedEventArgs_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynWatcherStoppedEventArgs_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynWatcherStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynWatcherStoppedEventArgs[] = L"Windows.Devices.AllJoyn.AllJoynWatcherStoppedEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -8093,7 +8778,11 @@ typedef enum __x_ABI_CWindows_CDevices_CAllJoyn_CAllJoynTrafficType __x_ABI_CWin
  *
  */
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
-enum __x_ABI_CWindows_CDevices_CAllJoyn_CAllJoynAuthenticationMechanism
+enum
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynAuthenticationMechanism has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CAllJoynAuthenticationMechanism
 {
     AllJoynAuthenticationMechanism_None = 0,
     AllJoynAuthenticationMechanism_SrpAnonymous
@@ -8127,7 +8816,11 @@ enum __x_ABI_CWindows_CDevices_CAllJoyn_CAllJoynAuthenticationMechanism
  *
  */
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
-enum __x_ABI_CWindows_CDevices_CAllJoyn_CAllJoynBusAttachmentState
+enum
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynBusAttachmentState has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CAllJoynBusAttachmentState
 {
     AllJoynBusAttachmentState_Disconnected = 0,
     AllJoynBusAttachmentState_Connecting = 1,
@@ -8144,7 +8837,11 @@ enum __x_ABI_CWindows_CDevices_CAllJoyn_CAllJoynBusAttachmentState
  *
  */
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
-enum __x_ABI_CWindows_CDevices_CAllJoyn_CAllJoynSessionLostReason
+enum
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynSessionLostReason has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CAllJoynSessionLostReason
 {
     AllJoynSessionLostReason_None = 0,
     AllJoynSessionLostReason_ProducerLeftSession = 1,
@@ -8163,7 +8860,11 @@ enum __x_ABI_CWindows_CDevices_CAllJoyn_CAllJoynSessionLostReason
  *
  */
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
-enum __x_ABI_CWindows_CDevices_CAllJoyn_CAllJoynTrafficType
+enum
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynTrafficType has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CAllJoynTrafficType
 {
     AllJoynTrafficType_Unknown = 0,
     AllJoynTrafficType_Messages = 1,
@@ -8185,7 +8886,11 @@ enum __x_ABI_CWindows_CDevices_CAllJoyn_CAllJoynTrafficType
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynAboutData[] = L"Windows.Devices.AllJoyn.IAllJoynAboutData";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataVtbl
 {
     BEGIN_INTERFACE
 
@@ -8201,46 +8906,109 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataVtbl
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_IsEnabled)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData* This,
         boolean* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* put_IsEnabled)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData* This,
         boolean value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_DefaultAppName)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData* This,
         HSTRING* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* put_DefaultAppName)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData* This,
         HSTRING value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_AppNames)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData* This,
         __FIMap_2_HSTRING_HSTRING** value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_DateOfManufacture)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData* This,
         __FIReference_1_Windows__CFoundation__CDateTime** value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* put_DateOfManufacture)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData* This,
         __FIReference_1_Windows__CFoundation__CDateTime* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_DefaultDescription)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData* This,
         HSTRING* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* put_DefaultDescription)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData* This,
         HSTRING value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_Descriptions)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData* This,
         __FIMap_2_HSTRING_HSTRING** value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_DefaultManufacturer)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData* This,
         HSTRING* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* put_DefaultManufacturer)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData* This,
         HSTRING value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_Manufacturers)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData* This,
         __FIMap_2_HSTRING_HSTRING** value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_ModelNumber)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData* This,
         HSTRING* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* put_ModelNumber)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData* This,
         HSTRING value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_SoftwareVersion)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData* This,
         HSTRING* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* put_SoftwareVersion)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData* This,
         HSTRING value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_SupportUrl)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData* This,
         __x_ABI_CWindows_CFoundation_CIUriRuntimeClass** value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* put_SupportUrl)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData* This,
         __x_ABI_CWindows_CFoundation_CIUriRuntimeClass* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_AppId)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData* This,
         GUID* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* put_AppId)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData* This,
         GUID value);
 
@@ -8272,66 +9040,129 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData_get_IsEnabled(This, value) \
     ((This)->lpVtbl->get_IsEnabled(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData_put_IsEnabled(This, value) \
     ((This)->lpVtbl->put_IsEnabled(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData_get_DefaultAppName(This, value) \
     ((This)->lpVtbl->get_DefaultAppName(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData_put_DefaultAppName(This, value) \
     ((This)->lpVtbl->put_DefaultAppName(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData_get_AppNames(This, value) \
     ((This)->lpVtbl->get_AppNames(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData_get_DateOfManufacture(This, value) \
     ((This)->lpVtbl->get_DateOfManufacture(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData_put_DateOfManufacture(This, value) \
     ((This)->lpVtbl->put_DateOfManufacture(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData_get_DefaultDescription(This, value) \
     ((This)->lpVtbl->get_DefaultDescription(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData_put_DefaultDescription(This, value) \
     ((This)->lpVtbl->put_DefaultDescription(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData_get_Descriptions(This, value) \
     ((This)->lpVtbl->get_Descriptions(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData_get_DefaultManufacturer(This, value) \
     ((This)->lpVtbl->get_DefaultManufacturer(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData_put_DefaultManufacturer(This, value) \
     ((This)->lpVtbl->put_DefaultManufacturer(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData_get_Manufacturers(This, value) \
     ((This)->lpVtbl->get_Manufacturers(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData_get_ModelNumber(This, value) \
     ((This)->lpVtbl->get_ModelNumber(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData_put_ModelNumber(This, value) \
     ((This)->lpVtbl->put_ModelNumber(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData_get_SoftwareVersion(This, value) \
     ((This)->lpVtbl->get_SoftwareVersion(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData_put_SoftwareVersion(This, value) \
     ((This)->lpVtbl->put_SoftwareVersion(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData_get_SupportUrl(This, value) \
     ((This)->lpVtbl->get_SupportUrl(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData_put_SupportUrl(This, value) \
     ((This)->lpVtbl->put_SupportUrl(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData_get_AppId(This, value) \
     ((This)->lpVtbl->get_AppId(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData_put_AppId(This, value) \
     ((This)->lpVtbl->put_AppId(This, value))
 
@@ -8354,7 +9185,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData;
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynAboutDataView[] = L"Windows.Devices.AllJoyn.IAllJoynAboutDataView";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataViewVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataViewVtbl
 {
     BEGIN_INTERFACE
 
@@ -8370,36 +9205,84 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataViewVtbl
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_Status)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView* This,
         INT32* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_Properties)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView* This,
         __FIMapView_2_HSTRING_IInspectable** value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_AJSoftwareVersion)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView* This,
         HSTRING* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_AppId)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView* This,
         GUID* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_DateOfManufacture)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView* This,
         __FIReference_1_Windows__CFoundation__CDateTime** value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_DefaultLanguage)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView* This,
         __x_ABI_CWindows_CGlobalization_CILanguage** value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_DeviceId)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView* This,
         HSTRING* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_HardwareVersion)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView* This,
         HSTRING* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_ModelNumber)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView* This,
         HSTRING* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_SoftwareVersion)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView* This,
         HSTRING* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_SupportedLanguages)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView* This,
         __FIVectorView_1_Windows__CGlobalization__CLanguage** value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_SupportUrl)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView* This,
         __x_ABI_CWindows_CFoundation_CIUriRuntimeClass** value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_AppName)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView* This,
         HSTRING* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_Description)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView* This,
         HSTRING* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_DeviceName)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView* This,
         HSTRING* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_Manufacturer)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView* This,
         HSTRING* value);
 
@@ -8431,51 +9314,99 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView_get_Status(This, value) \
     ((This)->lpVtbl->get_Status(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView_get_Properties(This, value) \
     ((This)->lpVtbl->get_Properties(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView_get_AJSoftwareVersion(This, value) \
     ((This)->lpVtbl->get_AJSoftwareVersion(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView_get_AppId(This, value) \
     ((This)->lpVtbl->get_AppId(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView_get_DateOfManufacture(This, value) \
     ((This)->lpVtbl->get_DateOfManufacture(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView_get_DefaultLanguage(This, value) \
     ((This)->lpVtbl->get_DefaultLanguage(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView_get_DeviceId(This, value) \
     ((This)->lpVtbl->get_DeviceId(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView_get_HardwareVersion(This, value) \
     ((This)->lpVtbl->get_HardwareVersion(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView_get_ModelNumber(This, value) \
     ((This)->lpVtbl->get_ModelNumber(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView_get_SoftwareVersion(This, value) \
     ((This)->lpVtbl->get_SoftwareVersion(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView_get_SupportedLanguages(This, value) \
     ((This)->lpVtbl->get_SupportedLanguages(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView_get_SupportUrl(This, value) \
     ((This)->lpVtbl->get_SupportUrl(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView_get_AppName(This, value) \
     ((This)->lpVtbl->get_AppName(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView_get_Description(This, value) \
     ((This)->lpVtbl->get_Description(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView_get_DeviceName(This, value) \
     ((This)->lpVtbl->get_DeviceName(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView_get_Manufacturer(This, value) \
     ((This)->lpVtbl->get_Manufacturer(This, value))
 
@@ -8498,7 +9429,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataViewStatics_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataViewStatics_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynAboutDataViewStatics[] = L"Windows.Devices.AllJoyn.IAllJoynAboutDataViewStatics";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataViewStaticsVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataViewStaticsVtbl
 {
     BEGIN_INTERFACE
 
@@ -8514,11 +9449,17 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataViewStaticsV
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataViewStatics* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* GetDataBySessionPortAsync)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataViewStatics* This,
         HSTRING uniqueName,
         __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment* busAttachment,
         UINT16 sessionPort,
         __FIAsyncOperation_1_Windows__CDevices__CAllJoyn__CAllJoynAboutDataView** operation);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* GetDataBySessionPortWithLanguageAsync)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataViewStatics* This,
         HSTRING uniqueName,
         __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment* busAttachment,
@@ -8554,9 +9495,15 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataViewStatics
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataViewStatics_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataViewStatics_GetDataBySessionPortAsync(This, uniqueName, busAttachment, sessionPort, operation) \
     ((This)->lpVtbl->GetDataBySessionPortAsync(This, uniqueName, busAttachment, sessionPort, operation))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataViewStatics_GetDataBySessionPortWithLanguageAsync(This, uniqueName, busAttachment, sessionPort, language, operation) \
     ((This)->lpVtbl->GetDataBySessionPortWithLanguageAsync(This, uniqueName, busAttachment, sessionPort, language, operation))
 
@@ -8577,7 +9524,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutDataView
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoiner_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoiner_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynAcceptSessionJoiner[] = L"Windows.Devices.AllJoyn.IAllJoynAcceptSessionJoiner";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("IAllJoynAcceptSessionJoiner has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerVtbl
 {
     BEGIN_INTERFACE
 
@@ -8593,6 +9544,9 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerVt
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoiner* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("IAllJoynAcceptSessionJoiner has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* Accept)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoiner* This);
 
     END_INTERFACE
@@ -8623,6 +9577,9 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoiner
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoiner_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("IAllJoynAcceptSessionJoiner has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoiner_Accept(This) \
     ((This)->lpVtbl->Accept(This))
 
@@ -8645,7 +9602,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSession
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerEventArgs_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerEventArgs_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynAcceptSessionJoinerEventArgs[] = L"Windows.Devices.AllJoyn.IAllJoynAcceptSessionJoinerEventArgs";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerEventArgsVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynAcceptSessionJoinerEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerEventArgsVtbl
 {
     BEGIN_INTERFACE
 
@@ -8661,16 +9622,34 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerEv
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerEventArgs* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAcceptSessionJoinerEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_UniqueName)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerEventArgs* This,
         HSTRING* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAcceptSessionJoinerEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_SessionPort)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerEventArgs* This,
         UINT16* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAcceptSessionJoinerEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_TrafficType)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerEventArgs* This,
         enum __x_ABI_CWindows_CDevices_CAllJoyn_CAllJoynTrafficType* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAcceptSessionJoinerEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_SamePhysicalNode)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerEventArgs* This,
         boolean* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAcceptSessionJoinerEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_SameNetwork)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerEventArgs* This,
         boolean* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAcceptSessionJoinerEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* Accept)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerEventArgs* This);
 
     END_INTERFACE
@@ -8701,21 +9680,39 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerEventAr
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerEventArgs_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAcceptSessionJoinerEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerEventArgs_get_UniqueName(This, value) \
     ((This)->lpVtbl->get_UniqueName(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAcceptSessionJoinerEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerEventArgs_get_SessionPort(This, value) \
     ((This)->lpVtbl->get_SessionPort(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAcceptSessionJoinerEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerEventArgs_get_TrafficType(This, value) \
     ((This)->lpVtbl->get_TrafficType(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAcceptSessionJoinerEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerEventArgs_get_SamePhysicalNode(This, value) \
     ((This)->lpVtbl->get_SamePhysicalNode(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAcceptSessionJoinerEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerEventArgs_get_SameNetwork(This, value) \
     ((This)->lpVtbl->get_SameNetwork(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAcceptSessionJoinerEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerEventArgs_Accept(This) \
     ((This)->lpVtbl->Accept(This))
 
@@ -8738,7 +9735,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSession
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerEventArgsFactory_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerEventArgsFactory_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynAcceptSessionJoinerEventArgsFactory[] = L"Windows.Devices.AllJoyn.IAllJoynAcceptSessionJoinerEventArgsFactory";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerEventArgsFactoryVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynAcceptSessionJoinerEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerEventArgsFactoryVtbl
 {
     BEGIN_INTERFACE
 
@@ -8754,6 +9755,9 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerEv
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerEventArgsFactory* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAcceptSessionJoinerEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* Create)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerEventArgsFactory* This,
         HSTRING uniqueName,
         UINT16 sessionPort,
@@ -8790,6 +9794,9 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerEventAr
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerEventArgsFactory_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAcceptSessionJoinerEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSessionJoinerEventArgsFactory_Create(This, uniqueName, sessionPort, trafficType, proximity, acceptSessionJoiner, result) \
     ((This)->lpVtbl->Create(This, uniqueName, sessionPort, trafficType, proximity, acceptSessionJoiner, result))
 
@@ -8812,7 +9819,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAcceptSession
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAuthenticationCompleteEventArgs_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAuthenticationCompleteEventArgs_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynAuthenticationCompleteEventArgs[] = L"Windows.Devices.AllJoyn.IAllJoynAuthenticationCompleteEventArgs";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAuthenticationCompleteEventArgsVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynAuthenticationCompleteEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAuthenticationCompleteEventArgsVtbl
 {
     BEGIN_INTERFACE
 
@@ -8828,10 +9839,19 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAuthenticationComplet
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAuthenticationCompleteEventArgs* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAuthenticationCompleteEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_AuthenticationMechanism)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAuthenticationCompleteEventArgs* This,
         enum __x_ABI_CWindows_CDevices_CAllJoyn_CAllJoynAuthenticationMechanism* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAuthenticationCompleteEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_PeerUniqueName)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAuthenticationCompleteEventArgs* This,
         HSTRING* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAuthenticationCompleteEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_Succeeded)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAuthenticationCompleteEventArgs* This,
         boolean* value);
 
@@ -8863,12 +9883,21 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAuthenticationCompleteEven
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAuthenticationCompleteEventArgs_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAuthenticationCompleteEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAuthenticationCompleteEventArgs_get_AuthenticationMechanism(This, value) \
     ((This)->lpVtbl->get_AuthenticationMechanism(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAuthenticationCompleteEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAuthenticationCompleteEventArgs_get_PeerUniqueName(This, value) \
     ((This)->lpVtbl->get_PeerUniqueName(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynAuthenticationCompleteEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAuthenticationCompleteEventArgs_get_Succeeded(This, value) \
     ((This)->lpVtbl->get_Succeeded(This, value))
 
@@ -8891,7 +9920,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAuthenticatio
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynBusAttachment[] = L"Windows.Devices.AllJoyn.IAllJoynBusAttachment";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentVtbl
 {
     BEGIN_INTERFACE
 
@@ -8907,39 +9940,87 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentVtbl
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_AboutData)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment* This,
         __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynAboutData** value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_ConnectionSpecification)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment* This,
         HSTRING* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_State)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment* This,
         enum __x_ABI_CWindows_CDevices_CAllJoyn_CAllJoynBusAttachmentState* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_UniqueName)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment* This,
         HSTRING* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* PingAsync)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment* This,
         HSTRING uniqueName,
         __FIAsyncOperation_1_int** operation);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* Connect)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment* This);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* Disconnect)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment* This);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* add_StateChanged)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment* This,
         __FITypedEventHandler_2_Windows__CDevices__CAllJoyn__CAllJoynBusAttachment_Windows__CDevices__CAllJoyn__CAllJoynBusAttachmentStateChangedEventArgs* handler,
         EventRegistrationToken* token);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* remove_StateChanged)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment* This,
         EventRegistrationToken token);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_AuthenticationMechanisms)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment* This,
         __FIVector_1_Windows__CDevices__CAllJoyn__CAllJoynAuthenticationMechanism** value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* add_CredentialsRequested)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment* This,
         __FITypedEventHandler_2_Windows__CDevices__CAllJoyn__CAllJoynBusAttachment_Windows__CDevices__CAllJoyn__CAllJoynCredentialsRequestedEventArgs* handler,
         EventRegistrationToken* token);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* remove_CredentialsRequested)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment* This,
         EventRegistrationToken token);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* add_CredentialsVerificationRequested)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment* This,
         __FITypedEventHandler_2_Windows__CDevices__CAllJoyn__CAllJoynBusAttachment_Windows__CDevices__CAllJoyn__CAllJoynCredentialsVerificationRequestedEventArgs* handler,
         EventRegistrationToken* token);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* remove_CredentialsVerificationRequested)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment* This,
         EventRegistrationToken token);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* add_AuthenticationComplete)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment* This,
         __FITypedEventHandler_2_Windows__CDevices__CAllJoyn__CAllJoynBusAttachment_Windows__CDevices__CAllJoyn__CAllJoynAuthenticationCompleteEventArgs* handler,
         EventRegistrationToken* token);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* remove_AuthenticationComplete)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment* This,
         EventRegistrationToken token);
 
@@ -8971,51 +10052,99 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment_get_AboutData(This, value) \
     ((This)->lpVtbl->get_AboutData(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment_get_ConnectionSpecification(This, value) \
     ((This)->lpVtbl->get_ConnectionSpecification(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment_get_State(This, value) \
     ((This)->lpVtbl->get_State(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment_get_UniqueName(This, value) \
     ((This)->lpVtbl->get_UniqueName(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment_PingAsync(This, uniqueName, operation) \
     ((This)->lpVtbl->PingAsync(This, uniqueName, operation))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment_Connect(This) \
     ((This)->lpVtbl->Connect(This))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment_Disconnect(This) \
     ((This)->lpVtbl->Disconnect(This))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment_add_StateChanged(This, handler, token) \
     ((This)->lpVtbl->add_StateChanged(This, handler, token))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment_remove_StateChanged(This, token) \
     ((This)->lpVtbl->remove_StateChanged(This, token))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment_get_AuthenticationMechanisms(This, value) \
     ((This)->lpVtbl->get_AuthenticationMechanisms(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment_add_CredentialsRequested(This, handler, token) \
     ((This)->lpVtbl->add_CredentialsRequested(This, handler, token))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment_remove_CredentialsRequested(This, token) \
     ((This)->lpVtbl->remove_CredentialsRequested(This, token))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment_add_CredentialsVerificationRequested(This, handler, token) \
     ((This)->lpVtbl->add_CredentialsVerificationRequested(This, handler, token))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment_remove_CredentialsVerificationRequested(This, token) \
     ((This)->lpVtbl->remove_CredentialsVerificationRequested(This, token))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment_add_AuthenticationComplete(This, handler, token) \
     ((This)->lpVtbl->add_AuthenticationComplete(This, handler, token))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment_remove_AuthenticationComplete(This, token) \
     ((This)->lpVtbl->remove_AuthenticationComplete(This, token))
 
@@ -9038,7 +10167,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment2_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment2_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynBusAttachment2[] = L"Windows.Devices.AllJoyn.IAllJoynBusAttachment2";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment2Vtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment2Vtbl
 {
     BEGIN_INTERFACE
 
@@ -9054,21 +10187,39 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment2Vtbl
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment2* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* GetAboutDataAsync)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment2* This,
         __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfo* serviceInfo,
         __FIAsyncOperation_1_Windows__CDevices__CAllJoyn__CAllJoynAboutDataView** operation);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* GetAboutDataWithLanguageAsync)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment2* This,
         __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfo* serviceInfo,
         __x_ABI_CWindows_CGlobalization_CILanguage* language,
         __FIAsyncOperation_1_Windows__CDevices__CAllJoyn__CAllJoynAboutDataView** operation);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* add_AcceptSessionJoinerRequested)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment2* This,
         __FITypedEventHandler_2_Windows__CDevices__CAllJoyn__CAllJoynBusAttachment_Windows__CDevices__CAllJoyn__CAllJoynAcceptSessionJoinerEventArgs* handler,
         EventRegistrationToken* token);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* remove_AcceptSessionJoinerRequested)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment2* This,
         EventRegistrationToken token);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* add_SessionJoined)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment2* This,
         __FITypedEventHandler_2_Windows__CDevices__CAllJoyn__CAllJoynBusAttachment_Windows__CDevices__CAllJoyn__CAllJoynSessionJoinedEventArgs* handler,
         EventRegistrationToken* token);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* remove_SessionJoined)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment2* This,
         EventRegistrationToken token);
 
@@ -9100,21 +10251,39 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment2
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment2_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment2_GetAboutDataAsync(This, serviceInfo, operation) \
     ((This)->lpVtbl->GetAboutDataAsync(This, serviceInfo, operation))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment2_GetAboutDataWithLanguageAsync(This, serviceInfo, language, operation) \
     ((This)->lpVtbl->GetAboutDataWithLanguageAsync(This, serviceInfo, language, operation))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment2_add_AcceptSessionJoinerRequested(This, handler, token) \
     ((This)->lpVtbl->add_AcceptSessionJoinerRequested(This, handler, token))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment2_remove_AcceptSessionJoinerRequested(This, token) \
     ((This)->lpVtbl->remove_AcceptSessionJoinerRequested(This, token))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment2_add_SessionJoined(This, handler, token) \
     ((This)->lpVtbl->add_SessionJoined(This, handler, token))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment2_remove_SessionJoined(This, token) \
     ((This)->lpVtbl->remove_SessionJoined(This, token))
 
@@ -9137,7 +10306,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentFactory_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentFactory_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynBusAttachmentFactory[] = L"Windows.Devices.AllJoyn.IAllJoynBusAttachmentFactory";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentFactoryVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentFactoryVtbl
 {
     BEGIN_INTERFACE
 
@@ -9153,6 +10326,9 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentFactoryV
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentFactory* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* Create)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentFactory* This,
         HSTRING connectionSpecification,
         __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment** result);
@@ -9185,6 +10361,9 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentFactory
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentFactory_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentFactory_Create(This, connectionSpecification, result) \
     ((This)->lpVtbl->Create(This, connectionSpecification, result))
 
@@ -9207,7 +10386,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentStateChangedEventArgs_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentStateChangedEventArgs_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynBusAttachmentStateChangedEventArgs[] = L"Windows.Devices.AllJoyn.IAllJoynBusAttachmentStateChangedEventArgs";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentStateChangedEventArgsVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynBusAttachmentStateChangedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentStateChangedEventArgsVtbl
 {
     BEGIN_INTERFACE
 
@@ -9223,8 +10406,14 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentStateCha
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentStateChangedEventArgs* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachmentStateChangedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_State)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentStateChangedEventArgs* This,
         enum __x_ABI_CWindows_CDevices_CAllJoyn_CAllJoynBusAttachmentState* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachmentStateChangedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_Status)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentStateChangedEventArgs* This,
         INT32* value);
 
@@ -9256,9 +10445,15 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentStateChangedE
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentStateChangedEventArgs_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachmentStateChangedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentStateChangedEventArgs_get_State(This, value) \
     ((This)->lpVtbl->get_State(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachmentStateChangedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentStateChangedEventArgs_get_Status(This, value) \
     ((This)->lpVtbl->get_Status(This, value))
 
@@ -9281,7 +10476,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentStatics_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentStatics_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynBusAttachmentStatics[] = L"Windows.Devices.AllJoyn.IAllJoynBusAttachmentStatics";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentStaticsVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentStaticsVtbl
 {
     BEGIN_INTERFACE
 
@@ -9297,8 +10496,14 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentStaticsV
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentStatics* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* GetDefault)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentStatics* This,
         __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment** defaultBusAttachment);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* GetWatcher)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentStatics* This,
         __FIIterable_1_HSTRING* requiredInterfaces,
         __x_ABI_CWindows_CDevices_CEnumeration_CIDeviceWatcher** deviceWatcher);
@@ -9331,9 +10536,15 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentStatics
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentStatics_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentStatics_GetDefault(This, defaultBusAttachment) \
     ((This)->lpVtbl->GetDefault(This, defaultBusAttachment))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachmentStatics_GetWatcher(This, requiredInterfaces, deviceWatcher) \
     ((This)->lpVtbl->GetWatcher(This, requiredInterfaces, deviceWatcher))
 
@@ -9356,7 +10567,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObject_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObject_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynBusObject[] = L"Windows.Devices.AllJoyn.IAllJoynBusObject";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectVtbl
 {
     BEGIN_INTERFACE
 
@@ -9372,17 +10587,38 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectVtbl
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObject* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* Start)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObject* This);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* Stop)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObject* This);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* AddProducer)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObject* This,
         __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducer* producer);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_BusAttachment)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObject* This,
         __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment** value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_Session)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObject* This,
         __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSession** value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* add_Stopped)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObject* This,
         __FITypedEventHandler_2_Windows__CDevices__CAllJoyn__CAllJoynBusObject_Windows__CDevices__CAllJoyn__CAllJoynBusObjectStoppedEventArgs* handler,
         EventRegistrationToken* token);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* remove_Stopped)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObject* This,
         EventRegistrationToken token);
 
@@ -9414,24 +10650,45 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObject
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObject_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObject_Start(This) \
     ((This)->lpVtbl->Start(This))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObject_Stop(This) \
     ((This)->lpVtbl->Stop(This))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObject_AddProducer(This, producer) \
     ((This)->lpVtbl->AddProducer(This, producer))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObject_get_BusAttachment(This, value) \
     ((This)->lpVtbl->get_BusAttachment(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObject_get_Session(This, value) \
     ((This)->lpVtbl->get_Session(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObject_add_Stopped(This, handler, token) \
     ((This)->lpVtbl->add_Stopped(This, handler, token))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObject_remove_Stopped(This, token) \
     ((This)->lpVtbl->remove_Stopped(This, token))
 
@@ -9454,7 +10711,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObject;
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectFactory_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectFactory_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynBusObjectFactory[] = L"Windows.Devices.AllJoyn.IAllJoynBusObjectFactory";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectFactoryVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectFactoryVtbl
 {
     BEGIN_INTERFACE
 
@@ -9470,9 +10731,15 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectFactoryVtbl
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectFactory* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* Create)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectFactory* This,
         HSTRING objectPath,
         __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObject** result);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* CreateWithBusAttachment)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectFactory* This,
         HSTRING objectPath,
         __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment* busAttachment,
@@ -9506,9 +10773,15 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectFactory
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectFactory_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectFactory_Create(This, objectPath, result) \
     ((This)->lpVtbl->Create(This, objectPath, result))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectFactory_CreateWithBusAttachment(This, objectPath, busAttachment, result) \
     ((This)->lpVtbl->CreateWithBusAttachment(This, objectPath, busAttachment, result))
 
@@ -9531,7 +10804,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectFact
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectStoppedEventArgs_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectStoppedEventArgs_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynBusObjectStoppedEventArgs[] = L"Windows.Devices.AllJoyn.IAllJoynBusObjectStoppedEventArgs";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectStoppedEventArgsVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynBusObjectStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectStoppedEventArgsVtbl
 {
     BEGIN_INTERFACE
 
@@ -9547,6 +10824,9 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectStoppedEvent
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectStoppedEventArgs* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusObjectStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_Status)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectStoppedEventArgs* This,
         INT32* value);
 
@@ -9578,6 +10858,9 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectStoppedEventArgs
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectStoppedEventArgs_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusObjectStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectStoppedEventArgs_get_Status(This, value) \
     ((This)->lpVtbl->get_Status(This, value))
 
@@ -9600,7 +10883,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectStop
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectStoppedEventArgsFactory_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectStoppedEventArgsFactory_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynBusObjectStoppedEventArgsFactory[] = L"Windows.Devices.AllJoyn.IAllJoynBusObjectStoppedEventArgsFactory";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectStoppedEventArgsFactoryVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynBusObjectStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectStoppedEventArgsFactoryVtbl
 {
     BEGIN_INTERFACE
 
@@ -9616,6 +10903,9 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectStoppedEvent
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectStoppedEventArgsFactory* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusObjectStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* Create)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectStoppedEventArgsFactory* This,
         INT32 status,
         __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectStoppedEventArgs** result);
@@ -9648,6 +10938,9 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectStoppedEventArgsF
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectStoppedEventArgsFactory_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynBusObjectStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectStoppedEventArgsFactory_Create(This, status, result) \
     ((This)->lpVtbl->Create(This, status, result))
 
@@ -9670,7 +10963,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObjectStop
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentials_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentials_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynCredentials[] = L"Windows.Devices.AllJoyn.IAllJoynCredentials";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynCredentials has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsVtbl
 {
     BEGIN_INTERFACE
 
@@ -9686,18 +10983,39 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsVtbl
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentials* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentials has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_AuthenticationMechanism)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentials* This,
         enum __x_ABI_CWindows_CDevices_CAllJoyn_CAllJoynAuthenticationMechanism* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentials has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_Certificate)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentials* This,
         __x_ABI_CWindows_CSecurity_CCryptography_CCertificates_CICertificate** value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentials has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* put_Certificate)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentials* This,
         __x_ABI_CWindows_CSecurity_CCryptography_CCertificates_CICertificate* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentials has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_PasswordCredential)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentials* This,
         __x_ABI_CWindows_CSecurity_CCredentials_CIPasswordCredential** value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentials has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* put_PasswordCredential)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentials* This,
         __x_ABI_CWindows_CSecurity_CCredentials_CIPasswordCredential* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentials has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_Timeout)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentials* This,
         struct __x_ABI_CWindows_CFoundation_CTimeSpan* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentials has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* put_Timeout)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentials* This,
         struct __x_ABI_CWindows_CFoundation_CTimeSpan value);
 
@@ -9729,24 +11047,45 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentials
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentials_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentials has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentials_get_AuthenticationMechanism(This, value) \
     ((This)->lpVtbl->get_AuthenticationMechanism(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentials has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentials_get_Certificate(This, value) \
     ((This)->lpVtbl->get_Certificate(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentials has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentials_put_Certificate(This, value) \
     ((This)->lpVtbl->put_Certificate(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentials has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentials_get_PasswordCredential(This, value) \
     ((This)->lpVtbl->get_PasswordCredential(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentials has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentials_put_PasswordCredential(This, value) \
     ((This)->lpVtbl->put_PasswordCredential(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentials has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentials_get_Timeout(This, value) \
     ((This)->lpVtbl->get_Timeout(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentials has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentials_put_Timeout(This, value) \
     ((This)->lpVtbl->put_Timeout(This, value))
 
@@ -9769,7 +11108,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentials;
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsRequestedEventArgs_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsRequestedEventArgs_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynCredentialsRequestedEventArgs[] = L"Windows.Devices.AllJoyn.IAllJoynCredentialsRequestedEventArgs";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsRequestedEventArgsVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynCredentialsRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsRequestedEventArgsVtbl
 {
     BEGIN_INTERFACE
 
@@ -9785,14 +11128,29 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsRequestedE
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsRequestedEventArgs* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentialsRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_AttemptCount)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsRequestedEventArgs* This,
         UINT16* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentialsRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_Credentials)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsRequestedEventArgs* This,
         __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentials** value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentialsRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_PeerUniqueName)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsRequestedEventArgs* This,
         HSTRING* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentialsRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_RequestedUserName)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsRequestedEventArgs* This,
         HSTRING* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentialsRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* GetDeferral)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsRequestedEventArgs* This,
         __x_ABI_CWindows_CFoundation_CIDeferral** result);
 
@@ -9824,18 +11182,33 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsRequestedEventA
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsRequestedEventArgs_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentialsRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsRequestedEventArgs_get_AttemptCount(This, value) \
     ((This)->lpVtbl->get_AttemptCount(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentialsRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsRequestedEventArgs_get_Credentials(This, value) \
     ((This)->lpVtbl->get_Credentials(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentialsRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsRequestedEventArgs_get_PeerUniqueName(This, value) \
     ((This)->lpVtbl->get_PeerUniqueName(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentialsRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsRequestedEventArgs_get_RequestedUserName(This, value) \
     ((This)->lpVtbl->get_RequestedUserName(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentialsRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsRequestedEventArgs_GetDeferral(This, result) \
     ((This)->lpVtbl->GetDeferral(This, result))
 
@@ -9858,7 +11231,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsRe
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsVerificationRequestedEventArgs_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsVerificationRequestedEventArgs_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynCredentialsVerificationRequestedEventArgs[] = L"Windows.Devices.AllJoyn.IAllJoynCredentialsVerificationRequestedEventArgs";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsVerificationRequestedEventArgsVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynCredentialsVerificationRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsVerificationRequestedEventArgsVtbl
 {
     BEGIN_INTERFACE
 
@@ -9874,19 +11251,43 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsVerificati
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsVerificationRequestedEventArgs* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentialsVerificationRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_AuthenticationMechanism)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsVerificationRequestedEventArgs* This,
         enum __x_ABI_CWindows_CDevices_CAllJoyn_CAllJoynAuthenticationMechanism* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentialsVerificationRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_PeerUniqueName)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsVerificationRequestedEventArgs* This,
         HSTRING* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentialsVerificationRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_PeerCertificate)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsVerificationRequestedEventArgs* This,
         __x_ABI_CWindows_CSecurity_CCryptography_CCertificates_CICertificate** value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentialsVerificationRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_PeerCertificateErrorSeverity)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsVerificationRequestedEventArgs* This,
         enum __x_ABI_CWindows_CNetworking_CSockets_CSocketSslErrorSeverity* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentialsVerificationRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_PeerCertificateErrors)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsVerificationRequestedEventArgs* This,
         __FIVectorView_1_Windows__CSecurity__CCryptography__CCertificates__CChainValidationResult** value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentialsVerificationRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_PeerIntermediateCertificates)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsVerificationRequestedEventArgs* This,
         __FIVectorView_1_Windows__CSecurity__CCryptography__CCertificates__CCertificate** value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentialsVerificationRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* Accept)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsVerificationRequestedEventArgs* This);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentialsVerificationRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* GetDeferral)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsVerificationRequestedEventArgs* This,
         __x_ABI_CWindows_CFoundation_CIDeferral** result);
 
@@ -9918,27 +11319,51 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsVerificationReq
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsVerificationRequestedEventArgs_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentialsVerificationRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsVerificationRequestedEventArgs_get_AuthenticationMechanism(This, value) \
     ((This)->lpVtbl->get_AuthenticationMechanism(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentialsVerificationRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsVerificationRequestedEventArgs_get_PeerUniqueName(This, value) \
     ((This)->lpVtbl->get_PeerUniqueName(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentialsVerificationRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsVerificationRequestedEventArgs_get_PeerCertificate(This, value) \
     ((This)->lpVtbl->get_PeerCertificate(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentialsVerificationRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsVerificationRequestedEventArgs_get_PeerCertificateErrorSeverity(This, value) \
     ((This)->lpVtbl->get_PeerCertificateErrorSeverity(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentialsVerificationRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsVerificationRequestedEventArgs_get_PeerCertificateErrors(This, value) \
     ((This)->lpVtbl->get_PeerCertificateErrors(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentialsVerificationRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsVerificationRequestedEventArgs_get_PeerIntermediateCertificates(This, value) \
     ((This)->lpVtbl->get_PeerIntermediateCertificates(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentialsVerificationRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsVerificationRequestedEventArgs_Accept(This) \
     ((This)->lpVtbl->Accept(This))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynCredentialsVerificationRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsVerificationRequestedEventArgs_GetDeferral(This, result) \
     ((This)->lpVtbl->GetDeferral(This, result))
 
@@ -9961,7 +11386,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynCredentialsVe
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynMessageInfo_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynMessageInfo_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynMessageInfo[] = L"Windows.Devices.AllJoyn.IAllJoynMessageInfo";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynMessageInfoVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynMessageInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynMessageInfoVtbl
 {
     BEGIN_INTERFACE
 
@@ -9977,6 +11406,9 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynMessageInfoVtbl
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynMessageInfo* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynMessageInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_SenderUniqueName)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynMessageInfo* This,
         HSTRING* value);
 
@@ -10008,6 +11440,9 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynMessageInfo
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynMessageInfo_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynMessageInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynMessageInfo_get_SenderUniqueName(This, value) \
     ((This)->lpVtbl->get_SenderUniqueName(This, value))
 
@@ -10030,7 +11465,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynMessageInfo;
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynMessageInfoFactory_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynMessageInfoFactory_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynMessageInfoFactory[] = L"Windows.Devices.AllJoyn.IAllJoynMessageInfoFactory";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynMessageInfoFactoryVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynMessageInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynMessageInfoFactoryVtbl
 {
     BEGIN_INTERFACE
 
@@ -10046,6 +11485,9 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynMessageInfoFactoryVtb
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynMessageInfoFactory* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynMessageInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* Create)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynMessageInfoFactory* This,
         HSTRING senderUniqueName,
         __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynMessageInfo** result);
@@ -10078,6 +11520,9 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynMessageInfoFactory
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynMessageInfoFactory_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynMessageInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynMessageInfoFactory_Create(This, senderUniqueName, result) \
     ((This)->lpVtbl->Create(This, senderUniqueName, result))
 
@@ -10098,7 +11543,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynMessageInfoFa
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducer_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducer_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynProducer[] = L"Windows.Devices.AllJoyn.IAllJoynProducer";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducerVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("IAllJoynProducer has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducerVtbl
 {
     BEGIN_INTERFACE
 
@@ -10114,6 +11563,9 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducerVtbl
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducer* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("IAllJoynProducer has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* SetBusObject)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducer* This,
         __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusObject* busObject);
 
@@ -10145,6 +11597,9 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducer
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducer_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("IAllJoynProducer has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducer_SetBusObject(This, busObject) \
     ((This)->lpVtbl->SetBusObject(This, busObject))
 
@@ -10167,7 +11622,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducer;
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducerStoppedEventArgs_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducerStoppedEventArgs_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynProducerStoppedEventArgs[] = L"Windows.Devices.AllJoyn.IAllJoynProducerStoppedEventArgs";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducerStoppedEventArgsVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynProducerStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducerStoppedEventArgsVtbl
 {
     BEGIN_INTERFACE
 
@@ -10183,6 +11642,9 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducerStoppedEventA
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducerStoppedEventArgs* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynProducerStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_Status)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducerStoppedEventArgs* This,
         INT32* value);
 
@@ -10214,6 +11676,9 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducerStoppedEventArgs
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducerStoppedEventArgs_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynProducerStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducerStoppedEventArgs_get_Status(This, value) \
     ((This)->lpVtbl->get_Status(This, value))
 
@@ -10236,7 +11701,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducerStopp
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducerStoppedEventArgsFactory_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducerStoppedEventArgsFactory_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynProducerStoppedEventArgsFactory[] = L"Windows.Devices.AllJoyn.IAllJoynProducerStoppedEventArgsFactory";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducerStoppedEventArgsFactoryVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynProducerStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducerStoppedEventArgsFactoryVtbl
 {
     BEGIN_INTERFACE
 
@@ -10252,6 +11721,9 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducerStoppedEventA
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducerStoppedEventArgsFactory* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynProducerStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* Create)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducerStoppedEventArgsFactory* This,
         INT32 status,
         __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducerStoppedEventArgs** result);
@@ -10284,6 +11756,9 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducerStoppedEventArgsFa
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducerStoppedEventArgsFactory_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynProducerStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducerStoppedEventArgsFactory_Create(This, status, result) \
     ((This)->lpVtbl->Create(This, status, result))
 
@@ -10306,7 +11781,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynProducerStopp
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfo_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfo_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynServiceInfo[] = L"Windows.Devices.AllJoyn.IAllJoynServiceInfo";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynServiceInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoVtbl
 {
     BEGIN_INTERFACE
 
@@ -10322,10 +11801,19 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoVtbl
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfo* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynServiceInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_UniqueName)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfo* This,
         HSTRING* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynServiceInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_ObjectPath)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfo* This,
         HSTRING* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynServiceInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_SessionPort)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfo* This,
         UINT16* value);
 
@@ -10357,12 +11845,21 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfo
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfo_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynServiceInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfo_get_UniqueName(This, value) \
     ((This)->lpVtbl->get_UniqueName(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynServiceInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfo_get_ObjectPath(This, value) \
     ((This)->lpVtbl->get_ObjectPath(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynServiceInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfo_get_SessionPort(This, value) \
     ((This)->lpVtbl->get_SessionPort(This, value))
 
@@ -10385,7 +11882,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfo;
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoFactory_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoFactory_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynServiceInfoFactory[] = L"Windows.Devices.AllJoyn.IAllJoynServiceInfoFactory";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoFactoryVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynServiceInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoFactoryVtbl
 {
     BEGIN_INTERFACE
 
@@ -10401,6 +11902,9 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoFactoryVtb
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoFactory* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynServiceInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* Create)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoFactory* This,
         HSTRING uniqueName,
         HSTRING objectPath,
@@ -10435,6 +11939,9 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoFactory
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoFactory_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynServiceInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoFactory_Create(This, uniqueName, objectPath, sessionPort, result) \
     ((This)->lpVtbl->Create(This, uniqueName, objectPath, sessionPort, result))
 
@@ -10457,7 +11964,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoFa
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoRemovedEventArgs_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoRemovedEventArgs_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynServiceInfoRemovedEventArgs[] = L"Windows.Devices.AllJoyn.IAllJoynServiceInfoRemovedEventArgs";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoRemovedEventArgsVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynServiceInfoRemovedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoRemovedEventArgsVtbl
 {
     BEGIN_INTERFACE
 
@@ -10473,6 +11984,9 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoRemovedEve
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoRemovedEventArgs* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynServiceInfoRemovedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_UniqueName)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoRemovedEventArgs* This,
         HSTRING* value);
 
@@ -10504,6 +12018,9 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoRemovedEventArg
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoRemovedEventArgs_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynServiceInfoRemovedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoRemovedEventArgs_get_UniqueName(This, value) \
     ((This)->lpVtbl->get_UniqueName(This, value))
 
@@ -10526,7 +12043,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoRe
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoRemovedEventArgsFactory_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoRemovedEventArgsFactory_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynServiceInfoRemovedEventArgsFactory[] = L"Windows.Devices.AllJoyn.IAllJoynServiceInfoRemovedEventArgsFactory";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoRemovedEventArgsFactoryVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynServiceInfoRemovedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoRemovedEventArgsFactoryVtbl
 {
     BEGIN_INTERFACE
 
@@ -10542,6 +12063,9 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoRemovedEve
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoRemovedEventArgsFactory* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynServiceInfoRemovedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* Create)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoRemovedEventArgsFactory* This,
         HSTRING uniqueName,
         __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoRemovedEventArgs** result);
@@ -10574,6 +12098,9 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoRemovedEventArg
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoRemovedEventArgsFactory_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynServiceInfoRemovedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoRemovedEventArgsFactory_Create(This, uniqueName, result) \
     ((This)->lpVtbl->Create(This, uniqueName, result))
 
@@ -10596,7 +12123,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoRe
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoStatics_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoStatics_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynServiceInfoStatics[] = L"Windows.Devices.AllJoyn.IAllJoynServiceInfoStatics";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoStaticsVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynServiceInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoStaticsVtbl
 {
     BEGIN_INTERFACE
 
@@ -10612,6 +12143,9 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoStaticsVtb
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoStatics* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynServiceInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* FromIdAsync)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoStatics* This,
         HSTRING deviceId,
         __FIAsyncOperation_1_Windows__CDevices__CAllJoyn__CAllJoynServiceInfo** operation);
@@ -10644,6 +12178,9 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoStatics
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoStatics_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynServiceInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoStatics_FromIdAsync(This, deviceId, operation) \
     ((This)->lpVtbl->FromIdAsync(This, deviceId, operation))
 
@@ -10666,7 +12203,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfoSt
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSession_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSession_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynSession[] = L"Windows.Devices.AllJoyn.IAllJoynSession";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionVtbl
 {
     BEGIN_INTERFACE
 
@@ -10682,26 +12223,53 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionVtbl
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSession* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_Id)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSession* This,
         INT32* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_Status)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSession* This,
         INT32* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* RemoveMemberAsync)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSession* This,
         HSTRING uniqueName,
         __FIAsyncOperation_1_int** operation);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* add_MemberAdded)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSession* This,
         __FITypedEventHandler_2_Windows__CDevices__CAllJoyn__CAllJoynSession_Windows__CDevices__CAllJoyn__CAllJoynSessionMemberAddedEventArgs* handler,
         EventRegistrationToken* token);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* remove_MemberAdded)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSession* This,
         EventRegistrationToken token);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* add_MemberRemoved)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSession* This,
         __FITypedEventHandler_2_Windows__CDevices__CAllJoyn__CAllJoynSession_Windows__CDevices__CAllJoyn__CAllJoynSessionMemberRemovedEventArgs* handler,
         EventRegistrationToken* token);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* remove_MemberRemoved)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSession* This,
         EventRegistrationToken token);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* add_Lost)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSession* This,
         __FITypedEventHandler_2_Windows__CDevices__CAllJoyn__CAllJoynSession_Windows__CDevices__CAllJoyn__CAllJoynSessionLostEventArgs* handler,
         EventRegistrationToken* token);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* remove_Lost)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSession* This,
         EventRegistrationToken token);
 
@@ -10733,30 +12301,57 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSession
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSession_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSession_get_Id(This, value) \
     ((This)->lpVtbl->get_Id(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSession_get_Status(This, value) \
     ((This)->lpVtbl->get_Status(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSession_RemoveMemberAsync(This, uniqueName, operation) \
     ((This)->lpVtbl->RemoveMemberAsync(This, uniqueName, operation))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSession_add_MemberAdded(This, handler, token) \
     ((This)->lpVtbl->add_MemberAdded(This, handler, token))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSession_remove_MemberAdded(This, token) \
     ((This)->lpVtbl->remove_MemberAdded(This, token))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSession_add_MemberRemoved(This, handler, token) \
     ((This)->lpVtbl->add_MemberRemoved(This, handler, token))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSession_remove_MemberRemoved(This, token) \
     ((This)->lpVtbl->remove_MemberRemoved(This, token))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSession_add_Lost(This, handler, token) \
     ((This)->lpVtbl->add_Lost(This, handler, token))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSession_remove_Lost(This, token) \
     ((This)->lpVtbl->remove_Lost(This, token))
 
@@ -10779,7 +12374,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSession;
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionJoinedEventArgs_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionJoinedEventArgs_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynSessionJoinedEventArgs[] = L"Windows.Devices.AllJoyn.IAllJoynSessionJoinedEventArgs";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionJoinedEventArgsVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynSessionJoinedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionJoinedEventArgsVtbl
 {
     BEGIN_INTERFACE
 
@@ -10795,6 +12394,9 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionJoinedEventArg
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionJoinedEventArgs* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSessionJoinedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_Session)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionJoinedEventArgs* This,
         __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSession** value);
 
@@ -10826,6 +12428,9 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionJoinedEventArgs
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionJoinedEventArgs_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSessionJoinedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionJoinedEventArgs_get_Session(This, value) \
     ((This)->lpVtbl->get_Session(This, value))
 
@@ -10848,7 +12453,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionJoined
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionJoinedEventArgsFactory_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionJoinedEventArgsFactory_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynSessionJoinedEventArgsFactory[] = L"Windows.Devices.AllJoyn.IAllJoynSessionJoinedEventArgsFactory";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionJoinedEventArgsFactoryVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynSessionJoinedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionJoinedEventArgsFactoryVtbl
 {
     BEGIN_INTERFACE
 
@@ -10864,6 +12473,9 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionJoinedEventArg
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionJoinedEventArgsFactory* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSessionJoinedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* Create)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionJoinedEventArgsFactory* This,
         __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSession* session,
         __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionJoinedEventArgs** result);
@@ -10896,6 +12508,9 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionJoinedEventArgsFact
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionJoinedEventArgsFactory_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSessionJoinedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionJoinedEventArgsFactory_Create(This, session, result) \
     ((This)->lpVtbl->Create(This, session, result))
 
@@ -10918,7 +12533,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionJoined
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionLostEventArgs_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionLostEventArgs_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynSessionLostEventArgs[] = L"Windows.Devices.AllJoyn.IAllJoynSessionLostEventArgs";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionLostEventArgsVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynSessionLostEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionLostEventArgsVtbl
 {
     BEGIN_INTERFACE
 
@@ -10934,6 +12553,9 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionLostEventArgsV
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionLostEventArgs* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSessionLostEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_Reason)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionLostEventArgs* This,
         enum __x_ABI_CWindows_CDevices_CAllJoyn_CAllJoynSessionLostReason* value);
 
@@ -10965,6 +12587,9 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionLostEventArgs
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionLostEventArgs_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSessionLostEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionLostEventArgs_get_Reason(This, value) \
     ((This)->lpVtbl->get_Reason(This, value))
 
@@ -10987,7 +12612,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionLostEv
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionLostEventArgsFactory_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionLostEventArgsFactory_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynSessionLostEventArgsFactory[] = L"Windows.Devices.AllJoyn.IAllJoynSessionLostEventArgsFactory";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionLostEventArgsFactoryVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynSessionLostEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionLostEventArgsFactoryVtbl
 {
     BEGIN_INTERFACE
 
@@ -11003,6 +12632,9 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionLostEventArgsF
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionLostEventArgsFactory* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSessionLostEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* Create)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionLostEventArgsFactory* This,
         enum __x_ABI_CWindows_CDevices_CAllJoyn_CAllJoynSessionLostReason reason,
         __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionLostEventArgs** result);
@@ -11035,6 +12667,9 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionLostEventArgsFactor
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionLostEventArgsFactory_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSessionLostEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionLostEventArgsFactory_Create(This, reason, result) \
     ((This)->lpVtbl->Create(This, reason, result))
 
@@ -11057,7 +12692,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionLostEv
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberAddedEventArgs_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberAddedEventArgs_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynSessionMemberAddedEventArgs[] = L"Windows.Devices.AllJoyn.IAllJoynSessionMemberAddedEventArgs";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberAddedEventArgsVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynSessionMemberAddedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberAddedEventArgsVtbl
 {
     BEGIN_INTERFACE
 
@@ -11073,6 +12712,9 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberAddedEve
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberAddedEventArgs* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSessionMemberAddedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_UniqueName)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberAddedEventArgs* This,
         HSTRING* value);
 
@@ -11104,6 +12746,9 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberAddedEventArg
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberAddedEventArgs_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSessionMemberAddedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberAddedEventArgs_get_UniqueName(This, value) \
     ((This)->lpVtbl->get_UniqueName(This, value))
 
@@ -11126,7 +12771,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMember
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberAddedEventArgsFactory_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberAddedEventArgsFactory_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynSessionMemberAddedEventArgsFactory[] = L"Windows.Devices.AllJoyn.IAllJoynSessionMemberAddedEventArgsFactory";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberAddedEventArgsFactoryVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynSessionMemberAddedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberAddedEventArgsFactoryVtbl
 {
     BEGIN_INTERFACE
 
@@ -11142,6 +12791,9 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberAddedEve
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberAddedEventArgsFactory* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSessionMemberAddedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* Create)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberAddedEventArgsFactory* This,
         HSTRING uniqueName,
         __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberAddedEventArgs** result);
@@ -11174,6 +12826,9 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberAddedEventArg
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberAddedEventArgsFactory_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSessionMemberAddedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberAddedEventArgsFactory_Create(This, uniqueName, result) \
     ((This)->lpVtbl->Create(This, uniqueName, result))
 
@@ -11196,7 +12851,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMember
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberRemovedEventArgs_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberRemovedEventArgs_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynSessionMemberRemovedEventArgs[] = L"Windows.Devices.AllJoyn.IAllJoynSessionMemberRemovedEventArgs";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberRemovedEventArgsVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynSessionMemberRemovedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberRemovedEventArgsVtbl
 {
     BEGIN_INTERFACE
 
@@ -11212,6 +12871,9 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberRemovedE
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberRemovedEventArgs* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSessionMemberRemovedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_UniqueName)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberRemovedEventArgs* This,
         HSTRING* value);
 
@@ -11243,6 +12905,9 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberRemovedEventA
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberRemovedEventArgs_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSessionMemberRemovedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberRemovedEventArgs_get_UniqueName(This, value) \
     ((This)->lpVtbl->get_UniqueName(This, value))
 
@@ -11265,7 +12930,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMember
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberRemovedEventArgsFactory_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberRemovedEventArgsFactory_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynSessionMemberRemovedEventArgsFactory[] = L"Windows.Devices.AllJoyn.IAllJoynSessionMemberRemovedEventArgsFactory";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberRemovedEventArgsFactoryVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynSessionMemberRemovedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberRemovedEventArgsFactoryVtbl
 {
     BEGIN_INTERFACE
 
@@ -11281,6 +12950,9 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberRemovedE
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberRemovedEventArgsFactory* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSessionMemberRemovedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* Create)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberRemovedEventArgsFactory* This,
         HSTRING uniqueName,
         __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberRemovedEventArgs** result);
@@ -11313,6 +12985,9 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberRemovedEventA
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberRemovedEventArgsFactory_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSessionMemberRemovedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMemberRemovedEventArgsFactory_Create(This, uniqueName, result) \
     ((This)->lpVtbl->Create(This, uniqueName, result))
 
@@ -11335,7 +13010,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionMember
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionStatics_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionStatics_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynSessionStatics[] = L"Windows.Devices.AllJoyn.IAllJoynSessionStatics";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionStaticsVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionStaticsVtbl
 {
     BEGIN_INTERFACE
 
@@ -11351,9 +13030,15 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionStaticsVtbl
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionStatics* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* GetFromServiceInfoAsync)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionStatics* This,
         __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfo* serviceInfo,
         __FIAsyncOperation_1_Windows__CDevices__CAllJoyn__CAllJoynSession** operation);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* GetFromServiceInfoAndBusAttachmentAsync)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionStatics* This,
         __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynServiceInfo* serviceInfo,
         __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynBusAttachment* busAttachment,
@@ -11387,9 +13072,15 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionStatics
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionStatics_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionStatics_GetFromServiceInfoAsync(This, serviceInfo, operation) \
     ((This)->lpVtbl->GetFromServiceInfoAsync(This, serviceInfo, operation))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionStatics_GetFromServiceInfoAndBusAttachmentAsync(This, serviceInfo, busAttachment, operation) \
     ((This)->lpVtbl->GetFromServiceInfoAndBusAttachmentAsync(This, serviceInfo, busAttachment, operation))
 
@@ -11412,7 +13103,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynSessionStatic
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynStatusStatics[] = L"Windows.Devices.AllJoyn.IAllJoynStatusStatics";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStaticsVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStaticsVtbl
 {
     BEGIN_INTERFACE
 
@@ -11428,40 +13123,94 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStaticsVtbl
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_Ok)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics* This,
         INT32* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_Fail)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics* This,
         INT32* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_OperationTimedOut)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics* This,
         INT32* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_OtherEndClosed)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics* This,
         INT32* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_ConnectionRefused)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics* This,
         INT32* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_AuthenticationFailed)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics* This,
         INT32* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_AuthenticationRejectedByUser)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics* This,
         INT32* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_SslConnectFailed)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics* This,
         INT32* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_SslIdentityVerificationFailed)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics* This,
         INT32* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_InsufficientSecurity)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics* This,
         INT32* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_InvalidArgument1)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics* This,
         INT32* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_InvalidArgument2)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics* This,
         INT32* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_InvalidArgument3)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics* This,
         INT32* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_InvalidArgument4)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics* This,
         INT32* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_InvalidArgument5)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics* This,
         INT32* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_InvalidArgument6)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics* This,
         INT32* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_InvalidArgument7)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics* This,
         INT32* value);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_InvalidArgument8)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics* This,
         INT32* value);
 
@@ -11493,57 +13242,111 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics_get_Ok(This, value) \
     ((This)->lpVtbl->get_Ok(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics_get_Fail(This, value) \
     ((This)->lpVtbl->get_Fail(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics_get_OperationTimedOut(This, value) \
     ((This)->lpVtbl->get_OperationTimedOut(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics_get_OtherEndClosed(This, value) \
     ((This)->lpVtbl->get_OtherEndClosed(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics_get_ConnectionRefused(This, value) \
     ((This)->lpVtbl->get_ConnectionRefused(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics_get_AuthenticationFailed(This, value) \
     ((This)->lpVtbl->get_AuthenticationFailed(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics_get_AuthenticationRejectedByUser(This, value) \
     ((This)->lpVtbl->get_AuthenticationRejectedByUser(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics_get_SslConnectFailed(This, value) \
     ((This)->lpVtbl->get_SslConnectFailed(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics_get_SslIdentityVerificationFailed(This, value) \
     ((This)->lpVtbl->get_SslIdentityVerificationFailed(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics_get_InsufficientSecurity(This, value) \
     ((This)->lpVtbl->get_InsufficientSecurity(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics_get_InvalidArgument1(This, value) \
     ((This)->lpVtbl->get_InvalidArgument1(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics_get_InvalidArgument2(This, value) \
     ((This)->lpVtbl->get_InvalidArgument2(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics_get_InvalidArgument3(This, value) \
     ((This)->lpVtbl->get_InvalidArgument3(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics_get_InvalidArgument4(This, value) \
     ((This)->lpVtbl->get_InvalidArgument4(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics_get_InvalidArgument5(This, value) \
     ((This)->lpVtbl->get_InvalidArgument5(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics_get_InvalidArgument6(This, value) \
     ((This)->lpVtbl->get_InvalidArgument6(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics_get_InvalidArgument7(This, value) \
     ((This)->lpVtbl->get_InvalidArgument7(This, value))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics_get_InvalidArgument8(This, value) \
     ((This)->lpVtbl->get_InvalidArgument8(This, value))
 
@@ -11566,7 +13369,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynStatusStatics
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynWatcherStoppedEventArgs_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynWatcherStoppedEventArgs_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynWatcherStoppedEventArgs[] = L"Windows.Devices.AllJoyn.IAllJoynWatcherStoppedEventArgs";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynWatcherStoppedEventArgsVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynWatcherStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynWatcherStoppedEventArgsVtbl
 {
     BEGIN_INTERFACE
 
@@ -11582,6 +13389,9 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynWatcherStoppedEventAr
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynWatcherStoppedEventArgs* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynWatcherStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* get_Status)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynWatcherStoppedEventArgs* This,
         INT32* value);
 
@@ -11613,6 +13423,9 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynWatcherStoppedEventArgs
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynWatcherStoppedEventArgs_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynWatcherStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynWatcherStoppedEventArgs_get_Status(This, value) \
     ((This)->lpVtbl->get_Status(This, value))
 
@@ -11635,7 +13448,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynWatcherStoppe
 #if !defined(____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynWatcherStoppedEventArgsFactory_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynWatcherStoppedEventArgsFactory_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_AllJoyn_IAllJoynWatcherStoppedEventArgsFactory[] = L"Windows.Devices.AllJoyn.IAllJoynWatcherStoppedEventArgsFactory";
-typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynWatcherStoppedEventArgsFactoryVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynWatcherStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynWatcherStoppedEventArgsFactoryVtbl
 {
     BEGIN_INTERFACE
 
@@ -11651,6 +13468,9 @@ typedef struct __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynWatcherStoppedEventAr
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynWatcherStoppedEventArgsFactory* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynWatcherStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
     HRESULT (STDMETHODCALLTYPE* Create)(__x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynWatcherStoppedEventArgsFactory* This,
         INT32 status,
         __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynWatcherStoppedEventArgs** result);
@@ -11683,6 +13503,9 @@ interface __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynWatcherStoppedEventArgsFac
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynWatcherStoppedEventArgsFactory_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+    DEPRECATED("AllJoynWatcherStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 #define __x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynWatcherStoppedEventArgsFactory_Create(This, status, result) \
     ((This)->lpVtbl->Create(This, status, result))
 
@@ -11707,6 +13530,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CAllJoyn_CIAllJoynWatcherStoppe
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynAboutData_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynAboutData_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynAboutData has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynAboutData[] = L"Windows.Devices.AllJoyn.AllJoynAboutData";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -11729,6 +13555,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynAboutDataView_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynAboutDataView_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynAboutDataView has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynAboutDataView[] = L"Windows.Devices.AllJoyn.AllJoynAboutDataView";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -11751,6 +13580,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynAcceptSessionJoinerEventArgs_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynAcceptSessionJoinerEventArgs_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynAcceptSessionJoinerEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynAcceptSessionJoinerEventArgs[] = L"Windows.Devices.AllJoyn.AllJoynAcceptSessionJoinerEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -11770,6 +13602,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynAuthenticationCompleteEventArgs_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynAuthenticationCompleteEventArgs_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynAuthenticationCompleteEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynAuthenticationCompleteEventArgs[] = L"Windows.Devices.AllJoyn.AllJoynAuthenticationCompleteEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -11797,6 +13632,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynBusAttachment_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynBusAttachment_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynBusAttachment has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynBusAttachment[] = L"Windows.Devices.AllJoyn.AllJoynBusAttachment";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -11816,6 +13654,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynBusAttachmentStateChangedEventArgs_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynBusAttachmentStateChangedEventArgs_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynBusAttachmentStateChangedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynBusAttachmentStateChangedEventArgs[] = L"Windows.Devices.AllJoyn.AllJoynBusAttachmentStateChangedEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -11839,6 +13680,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x30000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynBusObject_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynBusObject_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynBusObject has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynBusObject[] = L"Windows.Devices.AllJoyn.AllJoynBusObject";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x30000
@@ -11861,6 +13705,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x30000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynBusObjectStoppedEventArgs_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynBusObjectStoppedEventArgs_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynBusObjectStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynBusObjectStoppedEventArgs[] = L"Windows.Devices.AllJoyn.AllJoynBusObjectStoppedEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x30000
@@ -11880,6 +13727,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynCredentials_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynCredentials_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynCredentials has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynCredentials[] = L"Windows.Devices.AllJoyn.AllJoynCredentials";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -11899,6 +13749,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynCredentialsRequestedEventArgs_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynCredentialsRequestedEventArgs_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynCredentialsRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynCredentialsRequestedEventArgs[] = L"Windows.Devices.AllJoyn.AllJoynCredentialsRequestedEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -11918,6 +13771,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynCredentialsVerificationRequestedEventArgs_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynCredentialsVerificationRequestedEventArgs_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynCredentialsVerificationRequestedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynCredentialsVerificationRequestedEventArgs[] = L"Windows.Devices.AllJoyn.AllJoynCredentialsVerificationRequestedEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -11940,6 +13796,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynMessageInfo_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynMessageInfo_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynMessageInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynMessageInfo[] = L"Windows.Devices.AllJoyn.AllJoynMessageInfo";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -11962,6 +13821,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynProducerStoppedEventArgs_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynProducerStoppedEventArgs_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynProducerStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynProducerStoppedEventArgs[] = L"Windows.Devices.AllJoyn.AllJoynProducerStoppedEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -11987,6 +13849,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynServiceInfo_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynServiceInfo_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynServiceInfo has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynServiceInfo[] = L"Windows.Devices.AllJoyn.AllJoynServiceInfo";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -12009,6 +13874,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynServiceInfoRemovedEventArgs_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynServiceInfoRemovedEventArgs_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynServiceInfoRemovedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynServiceInfoRemovedEventArgs[] = L"Windows.Devices.AllJoyn.AllJoynServiceInfoRemovedEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -12031,6 +13899,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x30000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynSession_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynSession_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynSession has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynSession[] = L"Windows.Devices.AllJoyn.AllJoynSession";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x30000
@@ -12053,6 +13924,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x30000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynSessionJoinedEventArgs_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynSessionJoinedEventArgs_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynSessionJoinedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynSessionJoinedEventArgs[] = L"Windows.Devices.AllJoyn.AllJoynSessionJoinedEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x30000
@@ -12075,6 +13949,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynSessionLostEventArgs_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynSessionLostEventArgs_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynSessionLostEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynSessionLostEventArgs[] = L"Windows.Devices.AllJoyn.AllJoynSessionLostEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -12097,6 +13974,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynSessionMemberAddedEventArgs_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynSessionMemberAddedEventArgs_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynSessionMemberAddedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynSessionMemberAddedEventArgs[] = L"Windows.Devices.AllJoyn.AllJoynSessionMemberAddedEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -12119,6 +13999,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynSessionMemberRemovedEventArgs_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynSessionMemberRemovedEventArgs_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynSessionMemberRemovedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynSessionMemberRemovedEventArgs[] = L"Windows.Devices.AllJoyn.AllJoynSessionMemberRemovedEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -12138,6 +14021,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynStatus_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynStatus_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynStatus has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynStatus[] = L"Windows.Devices.AllJoyn.AllJoynStatus";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -12160,6 +14046,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynWatcherStoppedEventArgs_DEFINED
 #define RUNTIMECLASS_Windows_Devices_AllJoyn_AllJoynWatcherStoppedEventArgs_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+DEPRECATED("AllJoynWatcherStoppedEventArgs has been deprecated.  For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_AllJoyn_AllJoynWatcherStoppedEventArgs[] = L"Windows.Devices.AllJoyn.AllJoynWatcherStoppedEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000

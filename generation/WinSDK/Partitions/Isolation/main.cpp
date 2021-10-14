@@ -8,3 +8,4 @@
 
 #include <securityappcontainer.h>
 #include <isolatedapplauncher.h>
+#include <isolatedwindowsenvironmentutils.h>

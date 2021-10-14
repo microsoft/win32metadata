@@ -1,6 +1,6 @@
 /********************************************************************************
 *                                                                               *
-* HeapApi.h -- ApiSet Contract for api-ms-win-core-heap-l1                      *  
+* HeapApi.h -- ApiSet Contract for api-ms-win-core-heap-l1                      *
 *                                                                               *
 * Copyright (c) Microsoft Corporation. All rights reserved.                     *
 *                                                                               *
@@ -63,14 +63,12 @@ HeapCreate(
     _In_ SIZE_T dwMaximumSize
     );
 
-
 WINBASEAPI
 BOOL
 WINAPI
 HeapDestroy(
     _In_ HANDLE hHeap
     );
-
 
 WINBASEAPI
 _Ret_maybenull_
@@ -83,7 +81,6 @@ HeapAlloc(
     _In_ DWORD dwFlags,
     _In_ SIZE_T dwBytes
     );
-
 
 WINBASEAPI
 _Success_(return != 0)
@@ -99,7 +96,6 @@ HeapReAlloc(
     _In_ SIZE_T dwBytes
     );
 
-
 WINBASEAPI
 _Success_(return != FALSE)
 BOOL
@@ -110,7 +106,6 @@ HeapFree(
     __drv_freesMem(Mem) _Frees_ptr_opt_ LPVOID lpMem
     );
 
-
 WINBASEAPI
 SIZE_T
 WINAPI
@@ -120,14 +115,12 @@ HeapSize(
     _In_ LPCVOID lpMem
     );
 
-
 WINBASEAPI
 HANDLE
 WINAPI
 GetProcessHeap(
     VOID
     );
-
 
 WINBASEAPI
 SIZE_T
@@ -136,7 +129,6 @@ HeapCompact(
     _In_ HANDLE hHeap,
     _In_ DWORD dwFlags
     );
-
 
 WINBASEAPI
 BOOL
@@ -147,7 +139,6 @@ HeapSetInformation(
     _In_reads_bytes_opt_(HeapInformationLength) PVOID HeapInformation,
     _In_ SIZE_T HeapInformationLength
     );
-
 
 #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 #pragma endregion
@@ -164,7 +155,6 @@ HeapValidate(
     _In_opt_ LPCVOID lpMem
     );
 
-
 #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 #pragma endregion
 
@@ -178,7 +168,6 @@ HeapSummary(
     _In_ DWORD dwFlags,
     _Out_ LPHEAP_SUMMARY lpSummary
     );
-
 
 #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
 #pragma endregion
@@ -194,7 +183,6 @@ GetProcessHeaps(
     _Out_writes_to_(NumberOfHeaps,return) PHANDLE ProcessHeaps
     );
 
-
 WINBASEAPI
 BOOL
 WINAPI
@@ -202,14 +190,12 @@ HeapLock(
     _In_ HANDLE hHeap
     );
 
-
 WINBASEAPI
 BOOL
 WINAPI
 HeapUnlock(
     _In_ HANDLE hHeap
     );
-
 
 #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 #pragma endregion
@@ -225,7 +211,6 @@ HeapWalk(
     _Inout_ LPPROCESS_HEAP_ENTRY lpEntry
     );
 
-
 WINBASEAPI
 BOOL
 WINAPI
@@ -237,13 +222,12 @@ HeapQueryInformation(
     _Out_opt_ PSIZE_T ReturnLength
     );
 
-    
 #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 #pragma endregion
 
 //
 // HeapSummary() is in minwinbase.w within ;beg_internal tags. Has to stay there for downlevel reasons.
-// 
+//
 
 #if _MSC_VER >= 1200
 #pragma warning(pop)

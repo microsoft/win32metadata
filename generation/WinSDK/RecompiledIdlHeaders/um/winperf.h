@@ -153,18 +153,33 @@ typedef struct _PERF_OBJECT_TYPE {
                                         // this object is selected, index
                                         // starting at 0 (-1 = none, but
                                         // this is not expected to be used)
-    LONG            NumInstances;       // Number of object instances
-                                        // for which counters are being
-                                        // returned from the system under
-                                        // measurement. If the object defined
-                                        // will never have any instance data
-                                        // structures (PERF_INSTANCE_DEFINITION)
-                                        // then this value should be -1, if the
-                                        // object can have 0 or more instances,
-                                        // but has none present, then this
-                                        // should be 0, otherwise this field
-                                        // contains the number of instances of
-                                        // this counter.
+    LONG            NumInstances;       // * If set to a value from 0 to
+                                        // 0x7fffffff, indicates that this is
+                                        // data collected from an object that
+                                        // supports 0 or more named instances.
+                                        // The PERF_COUNTER_DEFINITION block
+                                        // should be followed by the specified
+                                        // number of PERF_INSTANCE_DEFINITION
+                                        // blocks.
+                                        // * If set to the value
+                                        // PERF_NO_INSTANCES, indicates that
+                                        // this is data collected from an object
+                                        // that always has exactly one unnamed
+                                        // instance. The PERF_COUNTER_DEFINITION
+                                        // block should be followed by exactly
+                                        // one PERF_COUNTER_BLOCK block.
+                                        // * If set to the value
+                                        // PERF_METADATA_MULTIPLE_INSTANCES,
+                                        // indicates that this is metadata for
+                                        // an object that supports 0 or more
+                                        // named instances. The result contains
+                                        // no PERF_INSTANCE_DEFINITION blocks.
+                                        // * If set to the value
+                                        // PERF_METADATA_NO_INSTANCES, indicates
+                                        // that this is metadata for an object
+                                        // that always has exactly one unnamed
+                                        // instance. The result contains no
+                                        // PERF_COUNTER_BLOCK.
     DWORD           CodePage;           // 0 if instance strings are in
                                         // UNICODE, else the Code Page of
                                         // the instance names
@@ -174,7 +189,13 @@ typedef struct _PERF_OBJECT_TYPE {
                                         // counts per second.
 } PERF_OBJECT_TYPE, *PPERF_OBJECT_TYPE;
 
-#define PERF_NO_INSTANCES           -1  // no instances (see NumInstances above)
+//
+// Special cases for PERF_OBJECT_TYPE.NumInstances field
+//
+#define PERF_NO_INSTANCES                (-1) // data collection, one unnamed instance
+#define PERF_METADATA_MULTIPLE_INSTANCES (-2) // metadata-only, 0 or more instances
+#define PERF_METADATA_NO_INSTANCES       (-3) // metadata-only, one unnamed instance
+
 //
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //
@@ -590,9 +611,9 @@ typedef struct _PERF_COUNTER_DEFINITION {
 //  followed by a PERF_COUNTER_BLOCK followed by the counter data fields)
 //  for each instance.
 //
-//  If (PERF_DATA_BLOCK.NumInstances < 0) then the counter definition
-//  structure above will be followed by only a PERF_COUNTER_BLOCK and the
-//  counter data for that COUNTER.
+//  If (PERF_DATA_BLOCK.NumInstances == PERF_NO_INSTANCES) then the counter
+//  definition structure above will be followed by only a PERF_COUNTER_BLOCK
+//  and the counter data for that COUNTER.
 //
 
 #define PERF_NO_UNIQUE_ID -1
@@ -647,25 +668,83 @@ typedef struct _PERF_COUNTER_BLOCK {
 //
 
 //
-// Support for New Extensible API starting with NT 5.0
+// Performance data provider DLL OpenPerformanceData callback function.
 //
-#define     PERF_QUERY_OBJECTS      ((LONG)0x80000000)
-#define     PERF_QUERY_GLOBAL       ((LONG)0x80000001)
-#define     PERF_QUERY_COSTLY       ((LONG)0x80000002)
+// The pContext parameter contains the strings from the optional Export
+// registry value. Since this value is not normally used, pContext is usually
+// NULL.
+//
+// The provider's OpenPerformanceData function should almost always return
+// ERROR_SUCCESS. An unsuccessful result from OpenPerformanceData will cause
+// an error to be reported in Event Log. Return an unsuccessful result only
+// when there is a problem that requires attention from the system
+// administrator. In particular, OpenPerformanceData should return
+// ERROR_SUCCESS even if the provider's data source is unavailable (perhaps
+// due to the user's limited permissions or because the data source is not
+// running). In these cases, the OpenPerformanceData function should return
+// success and the CollectPerformanceData function should succeed and return
+// no data.
+//
+typedef DWORD (APIENTRY PM_OPEN_PROC)(
+    _In_opt_ LPWSTR pContext
+    );
 
 //
-//  function typedefs for extensible counter function prototypes
+// Performance data provider DLL CollectPerformanceData callback function.
 //
-typedef DWORD (APIENTRY PM_OPEN_PROC) (_In_opt_ LPWSTR);
-typedef DWORD (APIENTRY PM_COLLECT_PROC) (_In_opt_ LPWSTR lpValueName, 
-                                          _Inout_
-                                            _At_(*lppData, _Pre_writable_byte_size_(*lpcbTotalBytes) _Post_writable_byte_size_(*lpcbTotalBytes))
-                                            _At_(_Old_(*lppData), _Post_writable_byte_size_(*lpcbTotalBytes))
-                                                  LPVOID *lppData, 
-                                          _Inout_ LPDWORD lpcbTotalBytes, 
-                                          _Inout_ LPDWORD lpNumObjectTypes);
-typedef DWORD (APIENTRY PM_CLOSE_PROC) (void);
-typedef DWORD (APIENTRY PM_QUERY_PROC) (LPDWORD, LPVOID *, LPDWORD, LPDWORD);
+// The pValueName parameter contains the query for which data is to be
+// collected. This value will either be be a space-separated sequence of one
+// or more decimal object IDs (e.g. "268 322") or it will be a special
+// command string (e.g. "Global"). In the case of a sequence of object IDs,
+// the provider should return data for each object in the list that it
+// supports. In the case of "Global", the provider should return data for all
+// objects that it supports. In the case of an unrecognized command string,
+// the provider should succeed with no returned data.
+//
+// On entry, *ppData points at the buffer to which collected data should be
+// written. On exit, *ppData should be advanced by the number of bytes written
+// to the buffer.
+//
+// On entry, *pcbTotalBytes contains the number of bytes available in the
+// *ppData buffer. On exit, *pcbTotalBytes should be set to the number of
+// bytes that were written to the buffer, which must be a multiple of 8.
+//
+// On exit, *pNumObjectTypes should be set to the number of PERF_OBJECT_TYPE
+// blocks written to the buffer.
+//
+// If data collection succeeds, the provider should write the data to the
+// *ppData buffer, advance the *ppData pointer by the number of bytes written
+// to the buffer, set *pcbTotalBytes to the number of bytes written to the
+// buffer, set *pNumObjectTypes to the number of PERF_OBJECT_TYPE blocks that
+// were written to the buffer, and return ERROR_SUCCESS.
+//
+// If the provided buffer is too small for the collected data, the provider
+// should leave *ppData unchanged, set *pcbTotalBytes to 0, set
+// *pNumObjectTypes to 0, and return ERROR_MORE_DATA.
+//
+// If there is an error while collecting data or if no supported object types
+// match the pValueName query string, the provider should leave *ppData
+// unchanged, set *pcbTotalBytes to 0, set *pNumObjectTypes to 0, and return
+// ERROR_SUCCESS. Return an error only when there is a problem that requires
+// attention from the system administrator.
+//
+typedef DWORD (APIENTRY PM_COLLECT_PROC)(
+    _In_opt_ LPWSTR pValueName,
+    _Inout_
+        _At_(*ppData, _Pre_writable_byte_size_(*pcbTotalBytes) _Post_writable_byte_size_(*pcbTotalBytes))
+        _At_(_Old_(*ppData), _Post_writable_byte_size_(*pcbTotalBytes))
+        void** ppData,
+    _Inout_ DWORD* pcbTotalBytes,
+    _Out_ DWORD* pNumObjectTypes
+    );
+
+//
+// Performance data provider DLL ClosePerformanceData callback function.
+//
+// This function should perform any cleanup required by the provider and
+// should always return ERROR_SUCCESS.
+//
+typedef DWORD (APIENTRY PM_CLOSE_PROC)(void);
 
 #if ((defined(_WIN32_WINDOWS) && _WIN32_WINDOWS >= 0x0501) || _WIN32_WINNT >= 0x0501 || (defined(NTDDI_VERSION) && NTDDI_VERSION >= NTDDI_WINXP))
 #define     MAX_PERF_OBJECTS_IN_QUERY_FUNCTION      (64L)

@@ -62,6 +62,10 @@ DEFINE_GUID( GUID_CLASS_INPUT,              0x4D1E55B2L, 0xF16F, 0x11CF, 0x88, 0
 DEFINE_GUID(GUID_DEVINTERFACE_THERMAL_COOLING,
 0xdbe4373d, 0x3c81, 0x40cb, 0xac, 0xe4, 0xe0, 0xe5, 0xd0, 0x5f, 0xc, 0x9f);
 
+// {927EC093-69A4-4bc0-BD02-711664714463}
+DEFINE_GUID(GUID_DEVINTERFACE_THERMAL_MANAGER,
+0x927ec093, 0x69a4, 0x4bc0, 0xbd, 0x2, 0x71, 0x16, 0x64, 0x71, 0x44, 0x63);
+
 #ifndef _POCLASS_
 #define _POCLASS_
 
@@ -322,11 +326,10 @@ typedef struct _BATTERY_STATUS {
 #define UNKNOWN_VOLTAGE         BATTERY_UNKNOWN_VOLTAGE
 
 // PowerState flags
-
-#define BATTERY_POWER_ON_LINE   0x00000001
-#define BATTERY_DISCHARGING     0x00000002
-#define BATTERY_CHARGING        0x00000004
-#define BATTERY_CRITICAL        0x00000008
+#define BATTERY_POWER_ON_LINE                       0x00000001
+#define BATTERY_DISCHARGING                         0x00000002
+#define BATTERY_CHARGING                            0x00000004
+#define BATTERY_CRITICAL                            0x00000008
 
 // Max battery driver BATTERY_QUERY_INFORMATION_LEVEL string storage
 // size in bytes.

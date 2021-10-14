@@ -16,7 +16,6 @@
 #pragma once
 #endif  // _MSC_VER
 
-
 #include <apiset.h>
 #include <apisetcconv.h>
 
@@ -83,6 +82,7 @@ typedef DWORD STGFMT;
 
 // Structured storage APIs
 _Check_return_
+
 WINOLEAPI
 StgCreateDocfile(
     _In_opt_ _Null_terminated_ const WCHAR* pwcsName,
@@ -91,8 +91,8 @@ StgCreateDocfile(
     _Outptr_ IStorage** ppstgOpen
     );
 
-
 _Check_return_
+
 WINOLEAPI
 StgCreateDocfileOnILockBytes(
     _In_ ILockBytes* plkbyt,
@@ -101,8 +101,8 @@ StgCreateDocfileOnILockBytes(
     _Outptr_ IStorage** ppstgOpen
     );
 
-
 _Check_return_
+
 WINOLEAPI
 StgOpenStorage(
     _In_opt_ _Null_terminated_ const WCHAR* pwcsName,
@@ -113,8 +113,8 @@ StgOpenStorage(
     _Outptr_ IStorage** ppstgOpen
     );
 
-
 _Check_return_
+
 WINOLEAPI
 StgOpenStorageOnILockBytes(
     _In_ ILockBytes* plkbyt,
@@ -125,22 +125,22 @@ StgOpenStorageOnILockBytes(
     _Outptr_ IStorage** ppstgOpen
     );
 
-
 _Check_return_
+
 WINOLEAPI
 StgIsStorageFile(
     _In_ _Null_terminated_ const WCHAR* pwcsName
     );
 
-
 _Check_return_
+
 WINOLEAPI
 StgIsStorageILockBytes(
     _In_ ILockBytes* plkbyt
     );
 
-
 _Check_return_
+
 WINOLEAPI
 StgSetTimes(
     _In_ _Null_terminated_ const WCHAR* lpszName,
@@ -148,7 +148,6 @@ StgSetTimes(
     _In_opt_ const FILETIME* patime,
     _In_opt_ const FILETIME* pmtime
     );
-
 
 // STG initialization options for StgCreateStorageEx and StgOpenStorageEx
 #if _WIN32_WINNT == 0x500
@@ -170,6 +169,7 @@ typedef struct tagSTGOPTIONS
 } STGOPTIONS;
 
 _Check_return_
+
 WINOLEAPI
 StgCreateStorageEx(
     _In_opt_ _Null_terminated_ const WCHAR* pwcsName,
@@ -182,8 +182,8 @@ StgCreateStorageEx(
     _Outptr_ void** ppObjectOpen
     );
 
-
 _Check_return_
+
 WINOLEAPI
 StgOpenStorageEx(
     _In_ _Null_terminated_ const WCHAR* pwcsName,
@@ -196,10 +196,10 @@ StgOpenStorageEx(
     _Outptr_ void** ppObjectOpen
     );
 
-
 #ifndef _STGCREATEPROPSTG_DEFINED_
 
 _Check_return_
+
 WINOLEAPI
 StgCreatePropStg(
     _In_ IUnknown* pUnk,
@@ -210,8 +210,8 @@ StgCreatePropStg(
     _Outptr_ IPropertyStorage** ppPropStg
     );
 
-
 _Check_return_
+
 WINOLEAPI
 StgOpenPropStg(
     _In_ IUnknown* pUnk,
@@ -221,8 +221,8 @@ StgOpenPropStg(
     _Outptr_ IPropertyStorage** ppPropStg
     );
 
-
 _Check_return_
+
 WINOLEAPI
 StgCreatePropSetStg(
     _In_ IStorage* pStorage,
@@ -230,34 +230,33 @@ StgCreatePropSetStg(
     _Outptr_ IPropertySetStorage** ppPropSetStg
     );
 
-
 #define CCH_MAX_PROPSTG_NAME    31
 
 _Check_return_
+
 WINOLEAPI
 FmtIdToPropStgName(
     _In_ const FMTID* pfmtid,
-    _Out_writes_(CCH_MAX_PROPSTG_NAME + 1) LPOLESTR oszName
+    _Out_writes_(CCH_MAX_PROPSTG_NAME+1) LPOLESTR oszName
     );
 
-
 _Check_return_
+
 WINOLEAPI
 PropStgNameToFmtId(
     _In_ const LPOLESTR oszName,
     _Out_ FMTID* pfmtid
     );
 
-
 #endif // _STGCREATEPROPSTG_DEFINED_
 
 // Helper functions
+
 WINOLEAPI
 ReadClassStg(
     _In_ LPSTORAGE pStg,
     _Out_ CLSID  FAR * pclsid
     );
-
 
 WINOLEAPI
 WriteClassStg(
@@ -265,31 +264,29 @@ WriteClassStg(
     _In_ REFCLSID rclsid
     );
 
-
 WINOLEAPI
 ReadClassStm(
     _In_ LPSTREAM pStm,
     _Out_ CLSID  FAR * pclsid
     );
 
-
 WINOLEAPI
 WriteClassStm(
     _In_ LPSTREAM pStm,
     _In_ REFCLSID rclsid
     );
- 
 
 // Storage utility APIs
 _Check_return_
+
 WINOLEAPI
 GetHGlobalFromILockBytes(
     _In_ LPLOCKBYTES plkbyt,
     _Out_ HGLOBAL  FAR * phglobal
     );
 
-
 _Check_return_
+
 WINOLEAPI
 CreateILockBytesOnHGlobal(
     _In_opt_ HGLOBAL hGlobal,
@@ -297,13 +294,12 @@ CreateILockBytesOnHGlobal(
     _Outptr_ LPLOCKBYTES  FAR * pplkbyt
     );
 
-
 // ConvertTo APIs
+
 WINOLEAPI
 GetConvertStg(
     _In_ LPSTORAGE pStg
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
 #pragma endregion

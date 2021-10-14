@@ -60,59 +60,58 @@ extern "C" {
 //
 DECLARE_INTERFACE_(IAMWstDecoder, IUnknown)
 {
-	public:
-		//
-		// Decoder options to be used by apps
-		//
+	//
+	// Decoder options to be used by apps
+	//
 
-		// What is the decoder's level
-		STDMETHOD(GetDecoderLevel)(THIS_ AM_WST_LEVEL *lpLevel) PURE ;  
+	// What is the decoder's level
+	STDMETHOD(GetDecoderLevel)(THIS_ AM_WST_LEVEL *lpLevel) PURE ;  
 
 //		STDMETHOD(SetDecoderLevel)(THIS_ AM_WST_LEVEL Level) PURE ;  
 
-		// Which of the services is being currently used
-		STDMETHOD(GetCurrentService)(THIS_ AM_WST_SERVICE *lpService) PURE ;  
+	// Which of the services is being currently used
+	STDMETHOD(GetCurrentService)(THIS_ AM_WST_SERVICE *lpService) PURE ;  
 //		STDMETHOD(SetCurrentService)(THIS_ AM_WST_SERVICE Service) PURE ;  
 
-		// Query/Set the service state (On/Off)
-		// supported state values are AM_WSTState_On and AM_WSTState_Off
-		STDMETHOD(GetServiceState)(THIS_ AM_WST_STATE *lpState) PURE ;  
-		STDMETHOD(SetServiceState)(THIS_ AM_WST_STATE State) PURE ;  
+	// Query/Set the service state (On/Off)
+	// supported state values are AM_WSTState_On and AM_WSTState_Off
+	STDMETHOD(GetServiceState)(THIS_ AM_WST_STATE *lpState) PURE ;  
+	STDMETHOD(SetServiceState)(THIS_ AM_WST_STATE State) PURE ;  
 
-		//
-		// Output options to be used by downstream filters
-		//
+	//
+	// Output options to be used by downstream filters
+	//
 
-		// What size, bitdepth etc should the output video be
-		STDMETHOD(GetOutputFormat)(THIS_ LPBITMAPINFOHEADER lpbmih) PURE ;
-		// GetOutputFormat() method, if successful, returns 
-		// 1.  S_FALSE if no output format has so far been defined by downstream filters
-		// 2.  S_OK if an output format has already been defined by downstream filters
-		STDMETHOD(SetOutputFormat)(THIS_ LPBITMAPINFO lpbmi) PURE ;
+	// What size, bitdepth etc should the output video be
+	STDMETHOD(GetOutputFormat)(THIS_ LPBITMAPINFOHEADER lpbmih) PURE ;
+	// GetOutputFormat() method, if successful, returns 
+	// 1.  S_FALSE if no output format has so far been defined by downstream filters
+	// 2.  S_OK if an output format has already been defined by downstream filters
+	STDMETHOD(SetOutputFormat)(THIS_ LPBITMAPINFO lpbmi) PURE ;
 
-		// Specify physical color to be used in colorkeying the background 
-		// for overlay mixing
-		STDMETHOD(GetBackgroundColor)(THIS_ DWORD *pdwPhysColor) PURE ;
-		STDMETHOD(SetBackgroundColor)(THIS_ DWORD dwPhysColor) PURE ;
+	// Specify physical color to be used in colorkeying the background 
+	// for overlay mixing
+	STDMETHOD(GetBackgroundColor)(THIS_ DWORD *pdwPhysColor) PURE ;
+	STDMETHOD(SetBackgroundColor)(THIS_ DWORD dwPhysColor) PURE ;
 
-		// Specify if whole output bitmap should be redrawn for each sample
-		STDMETHOD(GetRedrawAlways)(THIS_ LPBOOL lpbOption) PURE ;
-		STDMETHOD(SetRedrawAlways)(THIS_ BOOL bOption) PURE ;
+	// Specify if whole output bitmap should be redrawn for each sample
+	STDMETHOD(GetRedrawAlways)(THIS_ LPBOOL lpbOption) PURE ;
+	STDMETHOD(SetRedrawAlways)(THIS_ BOOL bOption) PURE ;
 
-		// Specify if the caption text background should be opaque/transparent
-		STDMETHOD(GetDrawBackgroundMode)(THIS_ AM_WST_DRAWBGMODE *lpMode) PURE ;
-		STDMETHOD(SetDrawBackgroundMode)(THIS_ AM_WST_DRAWBGMODE Mode) PURE ;
-		// supported mode values are AM_WST_DrawBGMode_Opaque and
-		// AM_WST_DrawBGMode_Transparent
+	// Specify if the caption text background should be opaque/transparent
+	STDMETHOD(GetDrawBackgroundMode)(THIS_ AM_WST_DRAWBGMODE *lpMode) PURE ;
+	STDMETHOD(SetDrawBackgroundMode)(THIS_ AM_WST_DRAWBGMODE Mode) PURE ;
+	// supported mode values are AM_WST_DrawBGMode_Opaque and
+	// AM_WST_DrawBGMode_Transparent
 
-		STDMETHOD(SetAnswerMode)(THIS_ BOOL bAnswer) PURE ;
-		STDMETHOD(GetAnswerMode)(THIS_ BOOL* pbAnswer) PURE ;
+	STDMETHOD(SetAnswerMode)(THIS_ BOOL bAnswer) PURE ;
+	STDMETHOD(GetAnswerMode)(THIS_ BOOL* pbAnswer) PURE ;
 
-		STDMETHOD(SetHoldPage)(THIS_ BOOL bHoldPage) PURE ;
-		STDMETHOD(GetHoldPage)(THIS_ BOOL* pbHoldPage) PURE ;
+	STDMETHOD(SetHoldPage)(THIS_ BOOL bHoldPage) PURE ;
+	STDMETHOD(GetHoldPage)(THIS_ BOOL* pbHoldPage) PURE ;
 
-		STDMETHOD(GetCurrentPage)(THIS_ PAM_WST_PAGE pWstPage) PURE;
-		STDMETHOD(SetCurrentPage)(THIS_ AM_WST_PAGE WstPage) PURE;
+	STDMETHOD(GetCurrentPage)(THIS_ PAM_WST_PAGE pWstPage) PURE;
+	STDMETHOD(SetCurrentPage)(THIS_ AM_WST_PAGE WstPage) PURE;
 
 } ;
 

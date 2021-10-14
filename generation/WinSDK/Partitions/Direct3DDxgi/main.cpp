@@ -18,3 +18,5 @@
 #include <dxgitype.h>
 #include <dxgicommon.h>
 #include <dxgiformat.h>
+#include <dxgimessages.h>
+#include <dxprogrammablecapture.h>

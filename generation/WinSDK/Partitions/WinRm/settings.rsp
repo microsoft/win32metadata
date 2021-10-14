@@ -1,5 +1,6 @@
 --traverse
 <IncludeRoot>/um/wsman.h
 <IncludeRoot>/um/wsmandisp.h
+<IncludeRoot>/um/wsmerror.h
 --namespace
 Windows.Win32.System.RemoteManagement

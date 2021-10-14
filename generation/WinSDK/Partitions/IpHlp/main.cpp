@@ -16,3 +16,4 @@
 #include <ip2string.h>
 #include <iphlpapi.h>
 #include <fltdefs.h>
+#include <ipinfoid.h>

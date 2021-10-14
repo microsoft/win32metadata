@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -216,28 +224,34 @@ EXTERN_C const IID IID_IWCNDevice;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWCNDevice * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWCNDevice * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWCNDevice * This);
         
+        DECLSPEC_XFGVIRT(IWCNDevice, SetPassword)
         HRESULT ( STDMETHODCALLTYPE *SetPassword )( 
             __RPC__in IWCNDevice * This,
             /* [in] */ WCN_PASSWORD_TYPE Type,
             /* [in] */ DWORD dwPasswordLength,
             /* [size_is][in] */ __RPC__in_ecount_full(dwPasswordLength) const BYTE pbPassword[  ]);
         
+        DECLSPEC_XFGVIRT(IWCNDevice, Connect)
         HRESULT ( STDMETHODCALLTYPE *Connect )( 
             __RPC__in IWCNDevice * This,
             /* [unique][in] */ __RPC__in_opt IWCNConnectNotify *pNotify);
         
+        DECLSPEC_XFGVIRT(IWCNDevice, GetAttribute)
         HRESULT ( STDMETHODCALLTYPE *GetAttribute )( 
             __RPC__in IWCNDevice * This,
             /* [in] */ WCN_ATTRIBUTE_TYPE AttributeType,
@@ -245,26 +259,31 @@ EXTERN_C const IID IID_IWCNDevice;
             /* [size_is][length_is][out] */ __RPC__out_ecount_part(dwMaxBufferSize, *pdwBufferUsed) BYTE pbBuffer[  ],
             /* [out] */ __RPC__out DWORD *pdwBufferUsed);
         
+        DECLSPEC_XFGVIRT(IWCNDevice, GetIntegerAttribute)
         HRESULT ( STDMETHODCALLTYPE *GetIntegerAttribute )( 
             __RPC__in IWCNDevice * This,
             /* [in] */ WCN_ATTRIBUTE_TYPE AttributeType,
             /* [out] */ __RPC__out UINT *puInteger);
         
+        DECLSPEC_XFGVIRT(IWCNDevice, GetStringAttribute)
         HRESULT ( STDMETHODCALLTYPE *GetStringAttribute )( 
             __RPC__in IWCNDevice * This,
             /* [in] */ WCN_ATTRIBUTE_TYPE AttributeType,
             /* [range][in] */ __RPC__in_range(0,WCN_API_MAX_BUFFER_SIZE) DWORD cchMaxString,
             /* [size_is][string][out] */ __RPC__out_ecount_full_string(cchMaxString) WCHAR wszString[  ]);
         
+        DECLSPEC_XFGVIRT(IWCNDevice, GetNetworkProfile)
         HRESULT ( STDMETHODCALLTYPE *GetNetworkProfile )( 
             __RPC__in IWCNDevice * This,
             /* [range][in] */ __RPC__in_range(0,WCN_API_MAX_BUFFER_SIZE) DWORD cchMaxStringLength,
             /* [size_is][out] */ __RPC__out_ecount_full(cchMaxStringLength) LPWSTR wszProfile);
         
+        DECLSPEC_XFGVIRT(IWCNDevice, SetNetworkProfile)
         HRESULT ( STDMETHODCALLTYPE *SetNetworkProfile )( 
             __RPC__in IWCNDevice * This,
             /* [in] */ __RPC__in LPCWSTR pszProfileXml);
         
+        DECLSPEC_XFGVIRT(IWCNDevice, GetVendorExtension)
         HRESULT ( STDMETHODCALLTYPE *GetVendorExtension )( 
             __RPC__in IWCNDevice * This,
             /* [in] */ __RPC__in const WCN_VENDOR_EXTENSION_SPEC *pVendorExtSpec,
@@ -272,15 +291,18 @@ EXTERN_C const IID IID_IWCNDevice;
             /* [size_is][length_is][out] */ __RPC__out_ecount_part(dwMaxBufferSize, *pdwBufferUsed) BYTE pbBuffer[  ],
             /* [out] */ __RPC__out DWORD *pdwBufferUsed);
         
+        DECLSPEC_XFGVIRT(IWCNDevice, SetVendorExtension)
         HRESULT ( STDMETHODCALLTYPE *SetVendorExtension )( 
             __RPC__in IWCNDevice * This,
             /* [in] */ __RPC__in const WCN_VENDOR_EXTENSION_SPEC *pVendorExtSpec,
             /* [range][in] */ __RPC__in_range(0,WCN_API_MAX_BUFFER_SIZE) DWORD cbBuffer,
             /* [size_is][in] */ __RPC__in_ecount_full(cbBuffer) const BYTE pbBuffer[  ]);
         
+        DECLSPEC_XFGVIRT(IWCNDevice, Unadvise)
         HRESULT ( STDMETHODCALLTYPE *Unadvise )( 
             __RPC__in IWCNDevice * This);
         
+        DECLSPEC_XFGVIRT(IWCNDevice, SetNFCPasswordParams)
         HRESULT ( STDMETHODCALLTYPE *SetNFCPasswordParams )( 
             __RPC__in IWCNDevice * This,
             /* [in] */ WCN_PASSWORD_TYPE Type,
@@ -388,21 +410,26 @@ EXTERN_C const IID IID_IWCNConnectNotify;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWCNConnectNotify * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWCNConnectNotify * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWCNConnectNotify * This);
         
+        DECLSPEC_XFGVIRT(IWCNConnectNotify, ConnectSucceeded)
         HRESULT ( STDMETHODCALLTYPE *ConnectSucceeded )( 
             __RPC__in IWCNConnectNotify * This);
         
+        DECLSPEC_XFGVIRT(IWCNConnectNotify, ConnectFailed)
         HRESULT ( STDMETHODCALLTYPE *ConnectFailed )( 
             __RPC__in IWCNConnectNotify * This,
             /* [in] */ HRESULT hrFailure);

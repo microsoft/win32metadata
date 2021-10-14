@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -140,18 +148,22 @@ EXTERN_C const IID IID_IDocObjectService;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDocObjectService * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDocObjectService * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDocObjectService * This);
         
+        DECLSPEC_XFGVIRT(IDocObjectService, FireBeforeNavigate2)
         HRESULT ( STDMETHODCALLTYPE *FireBeforeNavigate2 )( 
             __RPC__in IDocObjectService * This,
             /* [in] */ __RPC__in_opt IDispatch *pDispatch,
@@ -164,38 +176,47 @@ EXTERN_C const IID IID_IDocObjectService;
             /* [in] */ BOOL fPlayNavSound,
             /* [out] */ __RPC__out BOOL *pfCancel);
         
+        DECLSPEC_XFGVIRT(IDocObjectService, FireNavigateComplete2)
         HRESULT ( STDMETHODCALLTYPE *FireNavigateComplete2 )( 
             __RPC__in IDocObjectService * This,
             /* [in] */ __RPC__in_opt IHTMLWindow2 *pHTMLWindow2,
             /* [in] */ DWORD dwFlags);
         
+        DECLSPEC_XFGVIRT(IDocObjectService, FireDownloadBegin)
         HRESULT ( STDMETHODCALLTYPE *FireDownloadBegin )( 
             __RPC__in IDocObjectService * This);
         
+        DECLSPEC_XFGVIRT(IDocObjectService, FireDownloadComplete)
         HRESULT ( STDMETHODCALLTYPE *FireDownloadComplete )( 
             __RPC__in IDocObjectService * This);
         
+        DECLSPEC_XFGVIRT(IDocObjectService, FireDocumentComplete)
         HRESULT ( STDMETHODCALLTYPE *FireDocumentComplete )( 
             __RPC__in IDocObjectService * This,
             /* [in] */ __RPC__in_opt IHTMLWindow2 *pHTMLWindow,
             /* [in] */ DWORD dwFlags);
         
+        DECLSPEC_XFGVIRT(IDocObjectService, UpdateDesktopComponent)
         HRESULT ( STDMETHODCALLTYPE *UpdateDesktopComponent )( 
             __RPC__in IDocObjectService * This,
             /* [in] */ __RPC__in_opt IHTMLWindow2 *pHTMLWindow);
         
+        DECLSPEC_XFGVIRT(IDocObjectService, GetPendingUrl)
         HRESULT ( STDMETHODCALLTYPE *GetPendingUrl )( 
             __RPC__in IDocObjectService * This,
             /* [out] */ __RPC__deref_out_opt BSTR *pbstrPendingUrl);
         
+        DECLSPEC_XFGVIRT(IDocObjectService, ActiveElementChanged)
         HRESULT ( STDMETHODCALLTYPE *ActiveElementChanged )( 
             __RPC__in IDocObjectService * This,
             __RPC__in_opt IHTMLElement *pHTMLElement);
         
+        DECLSPEC_XFGVIRT(IDocObjectService, GetUrlSearchComponent)
         HRESULT ( STDMETHODCALLTYPE *GetUrlSearchComponent )( 
             __RPC__in IDocObjectService * This,
             /* [out] */ __RPC__deref_out_opt BSTR *pbstrSearch);
         
+        DECLSPEC_XFGVIRT(IDocObjectService, IsErrorUrl)
         HRESULT ( STDMETHODCALLTYPE *IsErrorUrl )( 
             __RPC__in IDocObjectService * This,
             /* [in] */ __RPC__in LPCWSTR lpszUrl,

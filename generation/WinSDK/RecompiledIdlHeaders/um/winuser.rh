@@ -106,19 +106,12 @@ Revision History:
 #define VK_KANA           0x15
 #define VK_HANGEUL        0x15  /* old name - should be here for compatibility */
 #define VK_HANGUL         0x15
-
-/*
- * 0x16 : unassigned
- */
-
+#define VK_IME_ON         0x16
 #define VK_JUNJA          0x17
 #define VK_FINAL          0x18
 #define VK_HANJA          0x19
 #define VK_KANJI          0x19
-
-/*
- * 0x1A : unassigned
- */
+#define VK_IME_OFF        0x1A
 
 #define VK_ESCAPE         0x1B
 
@@ -786,7 +779,6 @@ Revision History:
 #define WM_DPICHANGED_AFTERPARENT       0x02E3
 #define WM_GETDPISCALEDSIZE             0x02E4
 #endif /* WINVER >= 0x0605 */
-
 
 #define WM_CUT                          0x0300
 #define WM_COPY                         0x0301

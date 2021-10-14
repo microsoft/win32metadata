@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -190,27 +198,33 @@ EXTERN_C const IID IID_ITravelEntry;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITravelEntry * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITravelEntry * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITravelEntry * This);
         
+        DECLSPEC_XFGVIRT(ITravelEntry, Invoke)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             __RPC__in ITravelEntry * This,
             /* [in] */ __RPC__in_opt IUnknown *punk);
         
+        DECLSPEC_XFGVIRT(ITravelEntry, Update)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Update )( 
             __RPC__in ITravelEntry * This,
             /* [in] */ __RPC__in_opt IUnknown *punk,
             /* [in] */ BOOL fIsLocalAnchor);
         
+        DECLSPEC_XFGVIRT(ITravelEntry, GetPidl)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPidl )( 
             __RPC__in ITravelEntry * This,
             /* [out] */ __RPC__deref_out_opt PIDLIST_ABSOLUTE *ppidl);
@@ -334,38 +348,46 @@ EXTERN_C const IID IID_ITravelLog;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITravelLog * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITravelLog * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITravelLog * This);
         
+        DECLSPEC_XFGVIRT(ITravelLog, AddEntry)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *AddEntry )( 
             __RPC__in ITravelLog * This,
             /* [in] */ __RPC__in_opt IUnknown *punk,
             /* [in] */ BOOL fIsLocalAnchor);
         
+        DECLSPEC_XFGVIRT(ITravelLog, UpdateEntry)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *UpdateEntry )( 
             __RPC__in ITravelLog * This,
             /* [in] */ __RPC__in_opt IUnknown *punk,
             /* [in] */ BOOL fIsLocalAnchor);
         
+        DECLSPEC_XFGVIRT(ITravelLog, UpdateExternal)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *UpdateExternal )( 
             __RPC__in ITravelLog * This,
             /* [in] */ __RPC__in_opt IUnknown *punk,
             /* [in] */ __RPC__in_opt IUnknown *punkHLBrowseContext);
         
+        DECLSPEC_XFGVIRT(ITravelLog, Travel)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Travel )( 
             __RPC__in ITravelLog * This,
             /* [in] */ __RPC__in_opt IUnknown *punk,
             /* [in] */ int iOffset);
         
+        DECLSPEC_XFGVIRT(ITravelLog, GetTravelEntry)
         /* [local][helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetTravelEntry )( 
             ITravelLog * This,
             /* [annotation][in] */ 
@@ -375,12 +397,14 @@ EXTERN_C const IID IID_ITravelLog;
             /* [annotation][out] */ 
             _Outptr_opt_  ITravelEntry **ppte);
         
+        DECLSPEC_XFGVIRT(ITravelLog, FindTravelEntry)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *FindTravelEntry )( 
             __RPC__in ITravelLog * This,
             /* [in] */ __RPC__in_opt IUnknown *punk,
             /* [in] */ __RPC__in PCIDLIST_ABSOLUTE pidl,
             /* [out] */ __RPC__deref_out_opt ITravelEntry **ppte);
         
+        DECLSPEC_XFGVIRT(ITravelLog, GetToolTipText)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetToolTipText )( 
             __RPC__in ITravelLog * This,
             /* [in] */ __RPC__in_opt IUnknown *punk,
@@ -389,6 +413,7 @@ EXTERN_C const IID IID_ITravelLog;
             /* [size_is][out] */ __RPC__out_ecount_full(cchText) LPWSTR pwzText,
             /* [in] */ DWORD cchText);
         
+        DECLSPEC_XFGVIRT(ITravelLog, InsertMenuEntries)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *InsertMenuEntries )( 
             __RPC__in ITravelLog * This,
             /* [in] */ __RPC__in_opt IUnknown *punk,
@@ -398,14 +423,17 @@ EXTERN_C const IID IID_ITravelLog;
             /* [in] */ int idLast,
             /* [in] */ DWORD dwFlags);
         
+        DECLSPEC_XFGVIRT(ITravelLog, Clone)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in ITravelLog * This,
             /* [out] */ __RPC__deref_out_opt ITravelLog **pptl);
         
+        DECLSPEC_XFGVIRT(ITravelLog, CountEntries)
         /* [local][helpcontext][helpstring] */ DWORD ( STDMETHODCALLTYPE *CountEntries )( 
             ITravelLog * This,
             /* [in] */ IUnknown *punk);
         
+        DECLSPEC_XFGVIRT(ITravelLog, Revert)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Revert )( 
             __RPC__in ITravelLog * This);
         
@@ -565,18 +593,22 @@ EXTERN_C const IID IID_IExpDispSupportXP;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IExpDispSupportXP * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IExpDispSupportXP * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IExpDispSupportXP * This);
         
+        DECLSPEC_XFGVIRT(IExpDispSupportXP, FindCIE4ConnectionPoint)
         HRESULT ( STDMETHODCALLTYPE *FindCIE4ConnectionPoint )( 
             IExpDispSupportXP * This,
             /* [annotation][in] */ 
@@ -584,6 +616,7 @@ EXTERN_C const IID IID_IExpDispSupportXP;
             /* [annotation][out] */ 
             _Outptr_  CIE4ConnectionPoint **ppccp);
         
+        DECLSPEC_XFGVIRT(IExpDispSupportXP, OnTranslateAccelerator)
         HRESULT ( STDMETHODCALLTYPE *OnTranslateAccelerator )( 
             IExpDispSupportXP * This,
             /* [annotation][in] */ 
@@ -591,6 +624,7 @@ EXTERN_C const IID IID_IExpDispSupportXP;
             /* [annotation][in] */ 
             _In_  DWORD grfModifiers);
         
+        DECLSPEC_XFGVIRT(IExpDispSupportXP, OnInvoke)
         HRESULT ( STDMETHODCALLTYPE *OnInvoke )( 
             IExpDispSupportXP * This,
             /* [annotation][in] */ 
@@ -707,18 +741,22 @@ EXTERN_C const IID IID_IExpDispSupport;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IExpDispSupport * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IExpDispSupport * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IExpDispSupport * This);
         
+        DECLSPEC_XFGVIRT(IExpDispSupport, FindConnectionPoint)
         HRESULT ( STDMETHODCALLTYPE *FindConnectionPoint )( 
             IExpDispSupport * This,
             /* [annotation][in] */ 
@@ -726,6 +764,7 @@ EXTERN_C const IID IID_IExpDispSupport;
             /* [annotation][out] */ 
             _Outptr_  IConnectionPoint **ppccp);
         
+        DECLSPEC_XFGVIRT(IExpDispSupport, OnTranslateAccelerator)
         HRESULT ( STDMETHODCALLTYPE *OnTranslateAccelerator )( 
             IExpDispSupport * This,
             /* [annotation][in] */ 
@@ -733,6 +772,7 @@ EXTERN_C const IID IID_IExpDispSupport;
             /* [annotation][in] */ 
             _In_  DWORD grfModifiers);
         
+        DECLSPEC_XFGVIRT(IExpDispSupport, OnInvoke)
         HRESULT ( STDMETHODCALLTYPE *OnInvoke )( 
             IExpDispSupport * This,
             /* [annotation][in] */ 
@@ -1019,23 +1059,28 @@ EXTERN_C const IID IID_IBrowserService;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBrowserService * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IBrowserService * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IBrowserService * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetParentSite)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetParentSite )( 
             IBrowserService * This,
             /* [annotation][out] */ 
             _Outptr_  IOleInPlaceSite **ppipsite);
         
+        DECLSPEC_XFGVIRT(IBrowserService, SetTitle)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetTitle )( 
             IBrowserService * This,
             /* [annotation][in] */ 
@@ -1043,6 +1088,7 @@ EXTERN_C const IID IID_IBrowserService;
             /* [annotation][in] */ 
             _In_  LPCWSTR pszName);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetTitle)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetTitle )( 
             IBrowserService * This,
             /* [annotation][in] */ 
@@ -1051,26 +1097,31 @@ EXTERN_C const IID IID_IBrowserService;
             _Out_writes_(cchName)  LPWSTR pszName,
             DWORD cchName);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetOleObject)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetOleObject )( 
             IBrowserService * This,
             /* [annotation][out] */ 
             _Outptr_  IOleObject **ppobjv);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetTravelLog)
         HRESULT ( STDMETHODCALLTYPE *GetTravelLog )( 
             __RPC__in IBrowserService * This,
             /* [out] */ __RPC__deref_out_opt ITravelLog **pptl);
         
+        DECLSPEC_XFGVIRT(IBrowserService, ShowControlWindow)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *ShowControlWindow )( 
             IBrowserService * This,
             UINT id,
             BOOL fShow);
         
+        DECLSPEC_XFGVIRT(IBrowserService, IsControlWindowShown)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *IsControlWindowShown )( 
             IBrowserService * This,
             UINT id,
             /* [annotation][out] */ 
             _Out_  BOOL *pfShown);
         
+        DECLSPEC_XFGVIRT(IBrowserService, IEGetDisplayName)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *IEGetDisplayName )( 
             IBrowserService * This,
             /* [annotation][in] */ 
@@ -1079,6 +1130,7 @@ EXTERN_C const IID IID_IBrowserService;
             _Out_writes_(INTERNET_MAX_URL_LENGTH)  LPWSTR pwszName,
             UINT uFlags);
         
+        DECLSPEC_XFGVIRT(IBrowserService, IEParseDisplayName)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *IEParseDisplayName )( 
             IBrowserService * This,
             UINT uiCP,
@@ -1087,27 +1139,32 @@ EXTERN_C const IID IID_IBrowserService;
             /* [annotation][out] */ 
             _Outptr_  PIDLIST_ABSOLUTE *ppidlOut);
         
+        DECLSPEC_XFGVIRT(IBrowserService, DisplayParseError)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *DisplayParseError )( 
             IBrowserService * This,
             HRESULT hres,
             /* [annotation][in] */ 
             _In_  LPCWSTR pwszPath);
         
+        DECLSPEC_XFGVIRT(IBrowserService, NavigateToPidl)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *NavigateToPidl )( 
             IBrowserService * This,
             /* [annotation][in] */ 
             _In_  PCIDLIST_ABSOLUTE pidl,
             DWORD grfHLNF);
         
+        DECLSPEC_XFGVIRT(IBrowserService, SetNavigateState)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetNavigateState )( 
             IBrowserService * This,
             BNSTATE bnstate);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetNavigateState)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetNavigateState )( 
             IBrowserService * This,
             /* [annotation][out] */ 
             _Out_  BNSTATE *pbnstate);
         
+        DECLSPEC_XFGVIRT(IBrowserService, NotifyRedirect)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *NotifyRedirect )( 
             IBrowserService * This,
             /* [annotation][in] */ 
@@ -1117,44 +1174,54 @@ EXTERN_C const IID IID_IBrowserService;
             /* [annotation][out] */ 
             _Out_  BOOL *pfDidBrowse);
         
+        DECLSPEC_XFGVIRT(IBrowserService, UpdateWindowList)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *UpdateWindowList )( 
             IBrowserService * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService, UpdateBackForwardState)
         HRESULT ( STDMETHODCALLTYPE *UpdateBackForwardState )( 
             __RPC__in IBrowserService * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService, SetFlags)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetFlags )( 
             IBrowserService * This,
             DWORD dwFlags,
             DWORD dwFlagMask);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetFlags)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetFlags )( 
             IBrowserService * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pdwFlags);
         
+        DECLSPEC_XFGVIRT(IBrowserService, CanNavigateNow)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CanNavigateNow )( 
             IBrowserService * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetPidl)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetPidl )( 
             IBrowserService * This,
             /* [annotation][out] */ 
             _Out_  PIDLIST_ABSOLUTE *ppidl);
         
+        DECLSPEC_XFGVIRT(IBrowserService, SetReferrer)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetReferrer )( 
             IBrowserService * This,
             /* [annotation][in] */ 
             _In_  PCIDLIST_ABSOLUTE pidl);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetBrowserIndex)
         /* [local] */ DWORD ( STDMETHODCALLTYPE *GetBrowserIndex )( 
             IBrowserService * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetBrowserByIndex)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetBrowserByIndex )( 
             IBrowserService * This,
             DWORD dwID,
             /* [annotation][out] */ 
             _Outptr_  IUnknown **ppunk);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetHistoryObject)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetHistoryObject )( 
             IBrowserService * This,
             /* [annotation][out] */ 
@@ -1164,17 +1231,20 @@ EXTERN_C const IID IID_IBrowserService;
             /* [annotation][out] */ 
             _Outptr_  IBindCtx **ppbc);
         
+        DECLSPEC_XFGVIRT(IBrowserService, SetHistoryObject)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetHistoryObject )( 
             IBrowserService * This,
             /* [annotation][in] */ 
             _In_  IOleObject *pole,
             BOOL fIsLocalAnchor);
         
+        DECLSPEC_XFGVIRT(IBrowserService, CacheOLEServer)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CacheOLEServer )( 
             IBrowserService * This,
             /* [annotation][in] */ 
             _In_  IOleObject *pole);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetSetCodePage)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetSetCodePage )( 
             IBrowserService * This,
             /* [annotation][in] */ 
@@ -1182,6 +1252,7 @@ EXTERN_C const IID IID_IBrowserService;
             /* [annotation][out] */ 
             _Out_  VARIANT *pvarOut);
         
+        DECLSPEC_XFGVIRT(IBrowserService, OnHttpEquiv)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *OnHttpEquiv )( 
             IBrowserService * This,
             /* [annotation][in] */ 
@@ -1192,11 +1263,13 @@ EXTERN_C const IID IID_IBrowserService;
             /* [annotation][out] */ 
             _Out_  VARIANT *pvarargOut);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetPalette)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetPalette )( 
             IBrowserService * This,
             /* [annotation][out] */ 
             _Out_  HPALETTE *hpal);
         
+        DECLSPEC_XFGVIRT(IBrowserService, RegisterWindow)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *RegisterWindow )( 
             IBrowserService * This,
             BOOL fForceRegister,
@@ -1354,18 +1427,22 @@ EXTERN_C const IID IID_IShellService;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IShellService * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IShellService * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IShellService * This);
         
+        DECLSPEC_XFGVIRT(IShellService, SetOwner)
         HRESULT ( STDMETHODCALLTYPE *SetOwner )( 
             IShellService * This,
             /* [annotation][unique][in] */ 
@@ -1858,23 +1935,28 @@ EXTERN_C const IID IID_IBrowserService2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IBrowserService2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IBrowserService2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IBrowserService2 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetParentSite)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetParentSite )( 
             IBrowserService2 * This,
             /* [annotation][out] */ 
             _Outptr_  IOleInPlaceSite **ppipsite);
         
+        DECLSPEC_XFGVIRT(IBrowserService, SetTitle)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetTitle )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
@@ -1882,6 +1964,7 @@ EXTERN_C const IID IID_IBrowserService2;
             /* [annotation][in] */ 
             _In_  LPCWSTR pszName);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetTitle)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetTitle )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
@@ -1890,26 +1973,31 @@ EXTERN_C const IID IID_IBrowserService2;
             _Out_writes_(cchName)  LPWSTR pszName,
             DWORD cchName);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetOleObject)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetOleObject )( 
             IBrowserService2 * This,
             /* [annotation][out] */ 
             _Outptr_  IOleObject **ppobjv);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetTravelLog)
         HRESULT ( STDMETHODCALLTYPE *GetTravelLog )( 
             IBrowserService2 * This,
             /* [out] */ ITravelLog **pptl);
         
+        DECLSPEC_XFGVIRT(IBrowserService, ShowControlWindow)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *ShowControlWindow )( 
             IBrowserService2 * This,
             UINT id,
             BOOL fShow);
         
+        DECLSPEC_XFGVIRT(IBrowserService, IsControlWindowShown)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *IsControlWindowShown )( 
             IBrowserService2 * This,
             UINT id,
             /* [annotation][out] */ 
             _Out_  BOOL *pfShown);
         
+        DECLSPEC_XFGVIRT(IBrowserService, IEGetDisplayName)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *IEGetDisplayName )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
@@ -1918,6 +2006,7 @@ EXTERN_C const IID IID_IBrowserService2;
             _Out_writes_(INTERNET_MAX_URL_LENGTH)  LPWSTR pwszName,
             UINT uFlags);
         
+        DECLSPEC_XFGVIRT(IBrowserService, IEParseDisplayName)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *IEParseDisplayName )( 
             IBrowserService2 * This,
             UINT uiCP,
@@ -1926,27 +2015,32 @@ EXTERN_C const IID IID_IBrowserService2;
             /* [annotation][out] */ 
             _Outptr_  PIDLIST_ABSOLUTE *ppidlOut);
         
+        DECLSPEC_XFGVIRT(IBrowserService, DisplayParseError)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *DisplayParseError )( 
             IBrowserService2 * This,
             HRESULT hres,
             /* [annotation][in] */ 
             _In_  LPCWSTR pwszPath);
         
+        DECLSPEC_XFGVIRT(IBrowserService, NavigateToPidl)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *NavigateToPidl )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
             _In_  PCIDLIST_ABSOLUTE pidl,
             DWORD grfHLNF);
         
+        DECLSPEC_XFGVIRT(IBrowserService, SetNavigateState)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetNavigateState )( 
             IBrowserService2 * This,
             BNSTATE bnstate);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetNavigateState)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetNavigateState )( 
             IBrowserService2 * This,
             /* [annotation][out] */ 
             _Out_  BNSTATE *pbnstate);
         
+        DECLSPEC_XFGVIRT(IBrowserService, NotifyRedirect)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *NotifyRedirect )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
@@ -1956,44 +2050,54 @@ EXTERN_C const IID IID_IBrowserService2;
             /* [annotation][out] */ 
             _Out_  BOOL *pfDidBrowse);
         
+        DECLSPEC_XFGVIRT(IBrowserService, UpdateWindowList)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *UpdateWindowList )( 
             IBrowserService2 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService, UpdateBackForwardState)
         HRESULT ( STDMETHODCALLTYPE *UpdateBackForwardState )( 
             IBrowserService2 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService, SetFlags)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetFlags )( 
             IBrowserService2 * This,
             DWORD dwFlags,
             DWORD dwFlagMask);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetFlags)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetFlags )( 
             IBrowserService2 * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pdwFlags);
         
+        DECLSPEC_XFGVIRT(IBrowserService, CanNavigateNow)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CanNavigateNow )( 
             IBrowserService2 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetPidl)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetPidl )( 
             IBrowserService2 * This,
             /* [annotation][out] */ 
             _Out_  PIDLIST_ABSOLUTE *ppidl);
         
+        DECLSPEC_XFGVIRT(IBrowserService, SetReferrer)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetReferrer )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
             _In_  PCIDLIST_ABSOLUTE pidl);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetBrowserIndex)
         /* [local] */ DWORD ( STDMETHODCALLTYPE *GetBrowserIndex )( 
             IBrowserService2 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetBrowserByIndex)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetBrowserByIndex )( 
             IBrowserService2 * This,
             DWORD dwID,
             /* [annotation][out] */ 
             _Outptr_  IUnknown **ppunk);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetHistoryObject)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetHistoryObject )( 
             IBrowserService2 * This,
             /* [annotation][out] */ 
@@ -2003,17 +2107,20 @@ EXTERN_C const IID IID_IBrowserService2;
             /* [annotation][out] */ 
             _Outptr_  IBindCtx **ppbc);
         
+        DECLSPEC_XFGVIRT(IBrowserService, SetHistoryObject)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetHistoryObject )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
             _In_  IOleObject *pole,
             BOOL fIsLocalAnchor);
         
+        DECLSPEC_XFGVIRT(IBrowserService, CacheOLEServer)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CacheOLEServer )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
             _In_  IOleObject *pole);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetSetCodePage)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetSetCodePage )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
@@ -2021,6 +2128,7 @@ EXTERN_C const IID IID_IBrowserService2;
             /* [annotation][out] */ 
             _Out_  VARIANT *pvarOut);
         
+        DECLSPEC_XFGVIRT(IBrowserService, OnHttpEquiv)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *OnHttpEquiv )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
@@ -2031,16 +2139,19 @@ EXTERN_C const IID IID_IBrowserService2;
             /* [annotation][out] */ 
             _Out_  VARIANT *pvarargOut);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetPalette)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetPalette )( 
             IBrowserService2 * This,
             /* [annotation][out] */ 
             _Out_  HPALETTE *hpal);
         
+        DECLSPEC_XFGVIRT(IBrowserService, RegisterWindow)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *RegisterWindow )( 
             IBrowserService2 * This,
             BOOL fForceRegister,
             int swc);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, WndProcBS)
         LRESULT ( STDMETHODCALLTYPE *WndProcBS )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
@@ -2052,24 +2163,29 @@ EXTERN_C const IID IID_IBrowserService2;
             /* [annotation][in] */ 
             _In_  LPARAM lParam);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, SetAsDefFolderSettings)
         HRESULT ( STDMETHODCALLTYPE *SetAsDefFolderSettings )( 
             IBrowserService2 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, GetViewRect)
         HRESULT ( STDMETHODCALLTYPE *GetViewRect )( 
             IBrowserService2 * This,
             /* [annotation][out] */ 
             _Out_  RECT *prc);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, OnSize)
         HRESULT ( STDMETHODCALLTYPE *OnSize )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
             _In_  WPARAM wParam);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, OnCreate)
         HRESULT ( STDMETHODCALLTYPE *OnCreate )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
             _In_  struct tagCREATESTRUCTW *pcs);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, OnCommand)
         LRESULT ( STDMETHODCALLTYPE *OnCommand )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
@@ -2077,28 +2193,35 @@ EXTERN_C const IID IID_IBrowserService2;
             /* [annotation][in] */ 
             _In_  LPARAM lParam);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, OnDestroy)
         HRESULT ( STDMETHODCALLTYPE *OnDestroy )( 
             IBrowserService2 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, OnNotify)
         LRESULT ( STDMETHODCALLTYPE *OnNotify )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
             _In_  struct tagNMHDR *pnm);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, OnSetFocus)
         HRESULT ( STDMETHODCALLTYPE *OnSetFocus )( 
             IBrowserService2 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, OnFrameWindowActivateBS)
         HRESULT ( STDMETHODCALLTYPE *OnFrameWindowActivateBS )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
             _In_  BOOL fActive);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, ReleaseShellView)
         HRESULT ( STDMETHODCALLTYPE *ReleaseShellView )( 
             IBrowserService2 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, ActivatePendingView)
         HRESULT ( STDMETHODCALLTYPE *ActivatePendingView )( 
             IBrowserService2 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, CreateViewWindow)
         HRESULT ( STDMETHODCALLTYPE *CreateViewWindow )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
@@ -2110,6 +2233,7 @@ EXTERN_C const IID IID_IBrowserService2;
             /* [annotation][out] */ 
             _Out_  HWND *phwnd);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, CreateBrowserPropSheetExt)
         HRESULT ( STDMETHODCALLTYPE *CreateBrowserPropSheetExt )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
@@ -2117,19 +2241,23 @@ EXTERN_C const IID IID_IBrowserService2;
             /* [annotation][iid_is][out] */ 
             _Outptr_  void **ppv);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, GetViewWindow)
         HRESULT ( STDMETHODCALLTYPE *GetViewWindow )( 
             IBrowserService2 * This,
             /* [annotation][out] */ 
             _Out_  HWND *phwndView);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, GetBaseBrowserData)
         HRESULT ( STDMETHODCALLTYPE *GetBaseBrowserData )( 
             IBrowserService2 * This,
             /* [annotation][out] */ 
             _Outptr_  LPCBASEBROWSERDATA *pbbd);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, PutBaseBrowserData)
         LPBASEBROWSERDATA ( STDMETHODCALLTYPE *PutBaseBrowserData )( 
             IBrowserService2 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, InitializeTravelLog)
         HRESULT ( STDMETHODCALLTYPE *InitializeTravelLog )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
@@ -2137,35 +2265,43 @@ EXTERN_C const IID IID_IBrowserService2;
             /* [annotation][in] */ 
             _In_  DWORD dw);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, SetTopBrowser)
         HRESULT ( STDMETHODCALLTYPE *SetTopBrowser )( 
             IBrowserService2 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, Offline)
         HRESULT ( STDMETHODCALLTYPE *Offline )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
             _In_  int iCmd);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, AllowViewResize)
         HRESULT ( STDMETHODCALLTYPE *AllowViewResize )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
             _In_  BOOL f);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, SetActivateState)
         HRESULT ( STDMETHODCALLTYPE *SetActivateState )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
             _In_  UINT u);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, UpdateSecureLockIcon)
         HRESULT ( STDMETHODCALLTYPE *UpdateSecureLockIcon )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
             _In_  int eSecureLock);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, InitializeDownloadManager)
         HRESULT ( STDMETHODCALLTYPE *InitializeDownloadManager )( 
             IBrowserService2 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, InitializeTransitionSite)
         HRESULT ( STDMETHODCALLTYPE *InitializeTransitionSite )( 
             IBrowserService2 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _Initialize)
         HRESULT ( STDMETHODCALLTYPE *_Initialize )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
@@ -2173,22 +2309,28 @@ EXTERN_C const IID IID_IBrowserService2;
             /* [annotation][in] */ 
             _In_  IUnknown *pauto);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _CancelPendingNavigationAsync)
         HRESULT ( STDMETHODCALLTYPE *_CancelPendingNavigationAsync )( 
             IBrowserService2 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _CancelPendingView)
         HRESULT ( STDMETHODCALLTYPE *_CancelPendingView )( 
             IBrowserService2 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _MaySaveChanges)
         HRESULT ( STDMETHODCALLTYPE *_MaySaveChanges )( 
             IBrowserService2 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _PauseOrResumeView)
         HRESULT ( STDMETHODCALLTYPE *_PauseOrResumeView )( 
             IBrowserService2 * This,
             BOOL fPaused);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _DisableModeless)
         HRESULT ( STDMETHODCALLTYPE *_DisableModeless )( 
             IBrowserService2 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _NavigateToPidl)
         HRESULT ( STDMETHODCALLTYPE *_NavigateToPidl )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
@@ -2198,6 +2340,7 @@ EXTERN_C const IID IID_IBrowserService2;
             /* [annotation][in] */ 
             _In_  DWORD dwFlags);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _TryShell2Rename)
         HRESULT ( STDMETHODCALLTYPE *_TryShell2Rename )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
@@ -2205,9 +2348,11 @@ EXTERN_C const IID IID_IBrowserService2;
             /* [annotation][in] */ 
             _In_  PCIDLIST_ABSOLUTE pidlNew);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _SwitchActivationNow)
         HRESULT ( STDMETHODCALLTYPE *_SwitchActivationNow )( 
             IBrowserService2 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _ExecChildren)
         HRESULT ( STDMETHODCALLTYPE *_ExecChildren )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
@@ -2225,6 +2370,7 @@ EXTERN_C const IID IID_IBrowserService2;
             /* [annotation][unique][out][in] */ 
             _Inout_opt_  VARIANTARG *pvarargOut);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _SendChildren)
         HRESULT ( STDMETHODCALLTYPE *_SendChildren )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
@@ -2238,48 +2384,59 @@ EXTERN_C const IID IID_IBrowserService2;
             /* [annotation][in] */ 
             _In_  LPARAM lParam);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, GetFolderSetData)
         HRESULT ( STDMETHODCALLTYPE *GetFolderSetData )( 
             IBrowserService2 * This,
             /* [out] */ struct tagFolderSetData *pfsd);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _OnFocusChange)
         HRESULT ( STDMETHODCALLTYPE *_OnFocusChange )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
             _In_  UINT itb);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, v_ShowHideChildWindows)
         HRESULT ( STDMETHODCALLTYPE *v_ShowHideChildWindows )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
             _In_  BOOL fChildOnly);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _get_itbLastFocus)
         UINT ( STDMETHODCALLTYPE *_get_itbLastFocus )( 
             IBrowserService2 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _put_itbLastFocus)
         HRESULT ( STDMETHODCALLTYPE *_put_itbLastFocus )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
             _In_  UINT itbLastFocus);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _UIActivateView)
         HRESULT ( STDMETHODCALLTYPE *_UIActivateView )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
             _In_  UINT uState);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _GetViewBorderRect)
         HRESULT ( STDMETHODCALLTYPE *_GetViewBorderRect )( 
             IBrowserService2 * This,
             /* [out] */ RECT *prc);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _UpdateViewRectSize)
         HRESULT ( STDMETHODCALLTYPE *_UpdateViewRectSize )( 
             IBrowserService2 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _ResizeNextBorder)
         HRESULT ( STDMETHODCALLTYPE *_ResizeNextBorder )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
             _In_  UINT itb);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _ResizeView)
         HRESULT ( STDMETHODCALLTYPE *_ResizeView )( 
             IBrowserService2 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _GetEffectiveClientArea)
         HRESULT ( STDMETHODCALLTYPE *_GetEffectiveClientArea )( 
             IBrowserService2 * This,
             /* [annotation][out] */ 
@@ -2287,6 +2444,7 @@ EXTERN_C const IID IID_IBrowserService2;
             /* [annotation][in] */ 
             _In_  HMONITOR hmon);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, v_GetViewStream)
         IStream *( STDMETHODCALLTYPE *v_GetViewStream )( 
             IBrowserService2 * This,
             /* [in] */ PCIDLIST_ABSOLUTE pidl,
@@ -2295,6 +2453,7 @@ EXTERN_C const IID IID_IBrowserService2;
             /* [annotation][in] */ 
             _In_  LPCWSTR pwszName);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, ForwardViewMsg)
         LRESULT ( STDMETHODCALLTYPE *ForwardViewMsg )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
@@ -2304,32 +2463,39 @@ EXTERN_C const IID IID_IBrowserService2;
             /* [annotation][in] */ 
             _In_  LPARAM lParam);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, SetAcceleratorMenu)
         HRESULT ( STDMETHODCALLTYPE *SetAcceleratorMenu )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
             _In_  HACCEL hacc);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _GetToolbarCount)
         int ( STDMETHODCALLTYPE *_GetToolbarCount )( 
             IBrowserService2 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _GetToolbarItem)
         LPTOOLBARITEM ( STDMETHODCALLTYPE *_GetToolbarItem )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
             _In_  int itb);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _SaveToolbars)
         HRESULT ( STDMETHODCALLTYPE *_SaveToolbars )( 
             IBrowserService2 * This,
             /* [in] */ IStream *pstm);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _LoadToolbars)
         HRESULT ( STDMETHODCALLTYPE *_LoadToolbars )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
             _In_  IStream *pstm);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _CloseAndReleaseToolbars)
         HRESULT ( STDMETHODCALLTYPE *_CloseAndReleaseToolbars )( 
             IBrowserService2 * This,
             BOOL fClose);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, v_MayGetNextToolbarFocus)
         HRESULT ( STDMETHODCALLTYPE *v_MayGetNextToolbarFocus )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
@@ -2343,16 +2509,19 @@ EXTERN_C const IID IID_IBrowserService2;
             /* [annotation][out] */ 
             _Out_  HWND *phwnd);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _ResizeNextBorderHelper)
         HRESULT ( STDMETHODCALLTYPE *_ResizeNextBorderHelper )( 
             IBrowserService2 * This,
             UINT itb,
             BOOL bUseHmonitor);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _FindTBar)
         UINT ( STDMETHODCALLTYPE *_FindTBar )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
             _In_  IUnknown *punkSrc);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _SetFocus)
         HRESULT ( STDMETHODCALLTYPE *_SetFocus )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
@@ -2362,10 +2531,12 @@ EXTERN_C const IID IID_IBrowserService2;
             /* [annotation][in] */ 
             _In_  LPMSG lpMsg);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, v_MayTranslateAccelerator)
         HRESULT ( STDMETHODCALLTYPE *v_MayTranslateAccelerator )( 
             IBrowserService2 * This,
             /* [in] */ MSG *pmsg);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _GetBorderDWHelper)
         HRESULT ( STDMETHODCALLTYPE *_GetBorderDWHelper )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
@@ -2375,6 +2546,7 @@ EXTERN_C const IID IID_IBrowserService2;
             /* [annotation][in] */ 
             _In_  BOOL bUseHmonitor);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, v_CheckZoneCrossing)
         HRESULT ( STDMETHODCALLTYPE *v_CheckZoneCrossing )( 
             IBrowserService2 * This,
             /* [annotation][in] */ 
@@ -2737,23 +2909,28 @@ EXTERN_C const IID IID_IBrowserService3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IBrowserService3 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IBrowserService3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IBrowserService3 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetParentSite)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetParentSite )( 
             IBrowserService3 * This,
             /* [annotation][out] */ 
             _Outptr_  IOleInPlaceSite **ppipsite);
         
+        DECLSPEC_XFGVIRT(IBrowserService, SetTitle)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetTitle )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
@@ -2761,6 +2938,7 @@ EXTERN_C const IID IID_IBrowserService3;
             /* [annotation][in] */ 
             _In_  LPCWSTR pszName);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetTitle)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetTitle )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
@@ -2769,26 +2947,31 @@ EXTERN_C const IID IID_IBrowserService3;
             _Out_writes_(cchName)  LPWSTR pszName,
             DWORD cchName);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetOleObject)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetOleObject )( 
             IBrowserService3 * This,
             /* [annotation][out] */ 
             _Outptr_  IOleObject **ppobjv);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetTravelLog)
         HRESULT ( STDMETHODCALLTYPE *GetTravelLog )( 
             IBrowserService3 * This,
             /* [out] */ ITravelLog **pptl);
         
+        DECLSPEC_XFGVIRT(IBrowserService, ShowControlWindow)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *ShowControlWindow )( 
             IBrowserService3 * This,
             UINT id,
             BOOL fShow);
         
+        DECLSPEC_XFGVIRT(IBrowserService, IsControlWindowShown)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *IsControlWindowShown )( 
             IBrowserService3 * This,
             UINT id,
             /* [annotation][out] */ 
             _Out_  BOOL *pfShown);
         
+        DECLSPEC_XFGVIRT(IBrowserService, IEGetDisplayName)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *IEGetDisplayName )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
@@ -2797,6 +2980,7 @@ EXTERN_C const IID IID_IBrowserService3;
             _Out_writes_(INTERNET_MAX_URL_LENGTH)  LPWSTR pwszName,
             UINT uFlags);
         
+        DECLSPEC_XFGVIRT(IBrowserService, IEParseDisplayName)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *IEParseDisplayName )( 
             IBrowserService3 * This,
             UINT uiCP,
@@ -2805,27 +2989,32 @@ EXTERN_C const IID IID_IBrowserService3;
             /* [annotation][out] */ 
             _Outptr_  PIDLIST_ABSOLUTE *ppidlOut);
         
+        DECLSPEC_XFGVIRT(IBrowserService, DisplayParseError)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *DisplayParseError )( 
             IBrowserService3 * This,
             HRESULT hres,
             /* [annotation][in] */ 
             _In_  LPCWSTR pwszPath);
         
+        DECLSPEC_XFGVIRT(IBrowserService, NavigateToPidl)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *NavigateToPidl )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
             _In_  PCIDLIST_ABSOLUTE pidl,
             DWORD grfHLNF);
         
+        DECLSPEC_XFGVIRT(IBrowserService, SetNavigateState)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetNavigateState )( 
             IBrowserService3 * This,
             BNSTATE bnstate);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetNavigateState)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetNavigateState )( 
             IBrowserService3 * This,
             /* [annotation][out] */ 
             _Out_  BNSTATE *pbnstate);
         
+        DECLSPEC_XFGVIRT(IBrowserService, NotifyRedirect)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *NotifyRedirect )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
@@ -2835,44 +3024,54 @@ EXTERN_C const IID IID_IBrowserService3;
             /* [annotation][out] */ 
             _Out_  BOOL *pfDidBrowse);
         
+        DECLSPEC_XFGVIRT(IBrowserService, UpdateWindowList)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *UpdateWindowList )( 
             IBrowserService3 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService, UpdateBackForwardState)
         HRESULT ( STDMETHODCALLTYPE *UpdateBackForwardState )( 
             IBrowserService3 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService, SetFlags)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetFlags )( 
             IBrowserService3 * This,
             DWORD dwFlags,
             DWORD dwFlagMask);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetFlags)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetFlags )( 
             IBrowserService3 * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pdwFlags);
         
+        DECLSPEC_XFGVIRT(IBrowserService, CanNavigateNow)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CanNavigateNow )( 
             IBrowserService3 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetPidl)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetPidl )( 
             IBrowserService3 * This,
             /* [annotation][out] */ 
             _Out_  PIDLIST_ABSOLUTE *ppidl);
         
+        DECLSPEC_XFGVIRT(IBrowserService, SetReferrer)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetReferrer )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
             _In_  PCIDLIST_ABSOLUTE pidl);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetBrowserIndex)
         /* [local] */ DWORD ( STDMETHODCALLTYPE *GetBrowserIndex )( 
             IBrowserService3 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetBrowserByIndex)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetBrowserByIndex )( 
             IBrowserService3 * This,
             DWORD dwID,
             /* [annotation][out] */ 
             _Outptr_  IUnknown **ppunk);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetHistoryObject)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetHistoryObject )( 
             IBrowserService3 * This,
             /* [annotation][out] */ 
@@ -2882,17 +3081,20 @@ EXTERN_C const IID IID_IBrowserService3;
             /* [annotation][out] */ 
             _Outptr_  IBindCtx **ppbc);
         
+        DECLSPEC_XFGVIRT(IBrowserService, SetHistoryObject)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetHistoryObject )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
             _In_  IOleObject *pole,
             BOOL fIsLocalAnchor);
         
+        DECLSPEC_XFGVIRT(IBrowserService, CacheOLEServer)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CacheOLEServer )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
             _In_  IOleObject *pole);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetSetCodePage)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetSetCodePage )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
@@ -2900,6 +3102,7 @@ EXTERN_C const IID IID_IBrowserService3;
             /* [annotation][out] */ 
             _Out_  VARIANT *pvarOut);
         
+        DECLSPEC_XFGVIRT(IBrowserService, OnHttpEquiv)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *OnHttpEquiv )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
@@ -2910,16 +3113,19 @@ EXTERN_C const IID IID_IBrowserService3;
             /* [annotation][out] */ 
             _Out_  VARIANT *pvarargOut);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetPalette)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetPalette )( 
             IBrowserService3 * This,
             /* [annotation][out] */ 
             _Out_  HPALETTE *hpal);
         
+        DECLSPEC_XFGVIRT(IBrowserService, RegisterWindow)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *RegisterWindow )( 
             IBrowserService3 * This,
             BOOL fForceRegister,
             int swc);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, WndProcBS)
         LRESULT ( STDMETHODCALLTYPE *WndProcBS )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
@@ -2931,24 +3137,29 @@ EXTERN_C const IID IID_IBrowserService3;
             /* [annotation][in] */ 
             _In_  LPARAM lParam);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, SetAsDefFolderSettings)
         HRESULT ( STDMETHODCALLTYPE *SetAsDefFolderSettings )( 
             IBrowserService3 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, GetViewRect)
         HRESULT ( STDMETHODCALLTYPE *GetViewRect )( 
             IBrowserService3 * This,
             /* [annotation][out] */ 
             _Out_  RECT *prc);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, OnSize)
         HRESULT ( STDMETHODCALLTYPE *OnSize )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
             _In_  WPARAM wParam);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, OnCreate)
         HRESULT ( STDMETHODCALLTYPE *OnCreate )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
             _In_  struct tagCREATESTRUCTW *pcs);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, OnCommand)
         LRESULT ( STDMETHODCALLTYPE *OnCommand )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
@@ -2956,28 +3167,35 @@ EXTERN_C const IID IID_IBrowserService3;
             /* [annotation][in] */ 
             _In_  LPARAM lParam);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, OnDestroy)
         HRESULT ( STDMETHODCALLTYPE *OnDestroy )( 
             IBrowserService3 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, OnNotify)
         LRESULT ( STDMETHODCALLTYPE *OnNotify )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
             _In_  struct tagNMHDR *pnm);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, OnSetFocus)
         HRESULT ( STDMETHODCALLTYPE *OnSetFocus )( 
             IBrowserService3 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, OnFrameWindowActivateBS)
         HRESULT ( STDMETHODCALLTYPE *OnFrameWindowActivateBS )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
             _In_  BOOL fActive);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, ReleaseShellView)
         HRESULT ( STDMETHODCALLTYPE *ReleaseShellView )( 
             IBrowserService3 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, ActivatePendingView)
         HRESULT ( STDMETHODCALLTYPE *ActivatePendingView )( 
             IBrowserService3 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, CreateViewWindow)
         HRESULT ( STDMETHODCALLTYPE *CreateViewWindow )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
@@ -2989,6 +3207,7 @@ EXTERN_C const IID IID_IBrowserService3;
             /* [annotation][out] */ 
             _Out_  HWND *phwnd);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, CreateBrowserPropSheetExt)
         HRESULT ( STDMETHODCALLTYPE *CreateBrowserPropSheetExt )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
@@ -2996,19 +3215,23 @@ EXTERN_C const IID IID_IBrowserService3;
             /* [annotation][iid_is][out] */ 
             _Outptr_  void **ppv);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, GetViewWindow)
         HRESULT ( STDMETHODCALLTYPE *GetViewWindow )( 
             IBrowserService3 * This,
             /* [annotation][out] */ 
             _Out_  HWND *phwndView);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, GetBaseBrowserData)
         HRESULT ( STDMETHODCALLTYPE *GetBaseBrowserData )( 
             IBrowserService3 * This,
             /* [annotation][out] */ 
             _Outptr_  LPCBASEBROWSERDATA *pbbd);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, PutBaseBrowserData)
         LPBASEBROWSERDATA ( STDMETHODCALLTYPE *PutBaseBrowserData )( 
             IBrowserService3 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, InitializeTravelLog)
         HRESULT ( STDMETHODCALLTYPE *InitializeTravelLog )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
@@ -3016,35 +3239,43 @@ EXTERN_C const IID IID_IBrowserService3;
             /* [annotation][in] */ 
             _In_  DWORD dw);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, SetTopBrowser)
         HRESULT ( STDMETHODCALLTYPE *SetTopBrowser )( 
             IBrowserService3 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, Offline)
         HRESULT ( STDMETHODCALLTYPE *Offline )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
             _In_  int iCmd);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, AllowViewResize)
         HRESULT ( STDMETHODCALLTYPE *AllowViewResize )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
             _In_  BOOL f);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, SetActivateState)
         HRESULT ( STDMETHODCALLTYPE *SetActivateState )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
             _In_  UINT u);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, UpdateSecureLockIcon)
         HRESULT ( STDMETHODCALLTYPE *UpdateSecureLockIcon )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
             _In_  int eSecureLock);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, InitializeDownloadManager)
         HRESULT ( STDMETHODCALLTYPE *InitializeDownloadManager )( 
             IBrowserService3 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, InitializeTransitionSite)
         HRESULT ( STDMETHODCALLTYPE *InitializeTransitionSite )( 
             IBrowserService3 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _Initialize)
         HRESULT ( STDMETHODCALLTYPE *_Initialize )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
@@ -3052,22 +3283,28 @@ EXTERN_C const IID IID_IBrowserService3;
             /* [annotation][in] */ 
             _In_  IUnknown *pauto);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _CancelPendingNavigationAsync)
         HRESULT ( STDMETHODCALLTYPE *_CancelPendingNavigationAsync )( 
             IBrowserService3 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _CancelPendingView)
         HRESULT ( STDMETHODCALLTYPE *_CancelPendingView )( 
             IBrowserService3 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _MaySaveChanges)
         HRESULT ( STDMETHODCALLTYPE *_MaySaveChanges )( 
             IBrowserService3 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _PauseOrResumeView)
         HRESULT ( STDMETHODCALLTYPE *_PauseOrResumeView )( 
             IBrowserService3 * This,
             BOOL fPaused);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _DisableModeless)
         HRESULT ( STDMETHODCALLTYPE *_DisableModeless )( 
             IBrowserService3 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _NavigateToPidl)
         HRESULT ( STDMETHODCALLTYPE *_NavigateToPidl )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
@@ -3077,6 +3314,7 @@ EXTERN_C const IID IID_IBrowserService3;
             /* [annotation][in] */ 
             _In_  DWORD dwFlags);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _TryShell2Rename)
         HRESULT ( STDMETHODCALLTYPE *_TryShell2Rename )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
@@ -3084,9 +3322,11 @@ EXTERN_C const IID IID_IBrowserService3;
             /* [annotation][in] */ 
             _In_  PCIDLIST_ABSOLUTE pidlNew);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _SwitchActivationNow)
         HRESULT ( STDMETHODCALLTYPE *_SwitchActivationNow )( 
             IBrowserService3 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _ExecChildren)
         HRESULT ( STDMETHODCALLTYPE *_ExecChildren )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
@@ -3104,6 +3344,7 @@ EXTERN_C const IID IID_IBrowserService3;
             /* [annotation][unique][out][in] */ 
             _Inout_opt_  VARIANTARG *pvarargOut);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _SendChildren)
         HRESULT ( STDMETHODCALLTYPE *_SendChildren )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
@@ -3117,48 +3358,59 @@ EXTERN_C const IID IID_IBrowserService3;
             /* [annotation][in] */ 
             _In_  LPARAM lParam);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, GetFolderSetData)
         HRESULT ( STDMETHODCALLTYPE *GetFolderSetData )( 
             IBrowserService3 * This,
             /* [out] */ struct tagFolderSetData *pfsd);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _OnFocusChange)
         HRESULT ( STDMETHODCALLTYPE *_OnFocusChange )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
             _In_  UINT itb);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, v_ShowHideChildWindows)
         HRESULT ( STDMETHODCALLTYPE *v_ShowHideChildWindows )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
             _In_  BOOL fChildOnly);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _get_itbLastFocus)
         UINT ( STDMETHODCALLTYPE *_get_itbLastFocus )( 
             IBrowserService3 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _put_itbLastFocus)
         HRESULT ( STDMETHODCALLTYPE *_put_itbLastFocus )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
             _In_  UINT itbLastFocus);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _UIActivateView)
         HRESULT ( STDMETHODCALLTYPE *_UIActivateView )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
             _In_  UINT uState);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _GetViewBorderRect)
         HRESULT ( STDMETHODCALLTYPE *_GetViewBorderRect )( 
             IBrowserService3 * This,
             /* [out] */ RECT *prc);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _UpdateViewRectSize)
         HRESULT ( STDMETHODCALLTYPE *_UpdateViewRectSize )( 
             IBrowserService3 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _ResizeNextBorder)
         HRESULT ( STDMETHODCALLTYPE *_ResizeNextBorder )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
             _In_  UINT itb);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _ResizeView)
         HRESULT ( STDMETHODCALLTYPE *_ResizeView )( 
             IBrowserService3 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _GetEffectiveClientArea)
         HRESULT ( STDMETHODCALLTYPE *_GetEffectiveClientArea )( 
             IBrowserService3 * This,
             /* [annotation][out] */ 
@@ -3166,6 +3418,7 @@ EXTERN_C const IID IID_IBrowserService3;
             /* [annotation][in] */ 
             _In_  HMONITOR hmon);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, v_GetViewStream)
         IStream *( STDMETHODCALLTYPE *v_GetViewStream )( 
             IBrowserService3 * This,
             /* [in] */ PCIDLIST_ABSOLUTE pidl,
@@ -3174,6 +3427,7 @@ EXTERN_C const IID IID_IBrowserService3;
             /* [annotation][in] */ 
             _In_  LPCWSTR pwszName);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, ForwardViewMsg)
         LRESULT ( STDMETHODCALLTYPE *ForwardViewMsg )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
@@ -3183,32 +3437,39 @@ EXTERN_C const IID IID_IBrowserService3;
             /* [annotation][in] */ 
             _In_  LPARAM lParam);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, SetAcceleratorMenu)
         HRESULT ( STDMETHODCALLTYPE *SetAcceleratorMenu )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
             _In_  HACCEL hacc);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _GetToolbarCount)
         int ( STDMETHODCALLTYPE *_GetToolbarCount )( 
             IBrowserService3 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _GetToolbarItem)
         LPTOOLBARITEM ( STDMETHODCALLTYPE *_GetToolbarItem )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
             _In_  int itb);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _SaveToolbars)
         HRESULT ( STDMETHODCALLTYPE *_SaveToolbars )( 
             IBrowserService3 * This,
             /* [in] */ IStream *pstm);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _LoadToolbars)
         HRESULT ( STDMETHODCALLTYPE *_LoadToolbars )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
             _In_  IStream *pstm);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _CloseAndReleaseToolbars)
         HRESULT ( STDMETHODCALLTYPE *_CloseAndReleaseToolbars )( 
             IBrowserService3 * This,
             BOOL fClose);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, v_MayGetNextToolbarFocus)
         HRESULT ( STDMETHODCALLTYPE *v_MayGetNextToolbarFocus )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
@@ -3222,16 +3483,19 @@ EXTERN_C const IID IID_IBrowserService3;
             /* [annotation][out] */ 
             _Out_  HWND *phwnd);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _ResizeNextBorderHelper)
         HRESULT ( STDMETHODCALLTYPE *_ResizeNextBorderHelper )( 
             IBrowserService3 * This,
             UINT itb,
             BOOL bUseHmonitor);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _FindTBar)
         UINT ( STDMETHODCALLTYPE *_FindTBar )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
             _In_  IUnknown *punkSrc);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _SetFocus)
         HRESULT ( STDMETHODCALLTYPE *_SetFocus )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
@@ -3241,10 +3505,12 @@ EXTERN_C const IID IID_IBrowserService3;
             /* [annotation][in] */ 
             _In_  LPMSG lpMsg);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, v_MayTranslateAccelerator)
         HRESULT ( STDMETHODCALLTYPE *v_MayTranslateAccelerator )( 
             IBrowserService3 * This,
             /* [in] */ MSG *pmsg);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _GetBorderDWHelper)
         HRESULT ( STDMETHODCALLTYPE *_GetBorderDWHelper )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
@@ -3254,11 +3520,13 @@ EXTERN_C const IID IID_IBrowserService3;
             /* [annotation][in] */ 
             _In_  BOOL bUseHmonitor);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, v_CheckZoneCrossing)
         HRESULT ( STDMETHODCALLTYPE *v_CheckZoneCrossing )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
             _In_  PCIDLIST_ABSOLUTE pidl);
         
+        DECLSPEC_XFGVIRT(IBrowserService3, _PositionViewWindow)
         HRESULT ( STDMETHODCALLTYPE *_PositionViewWindow )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
@@ -3266,6 +3534,7 @@ EXTERN_C const IID IID_IBrowserService3;
             /* [annotation][in] */ 
             _In_  LPRECT prc);
         
+        DECLSPEC_XFGVIRT(IBrowserService3, IEParseDisplayNameEx)
         HRESULT ( STDMETHODCALLTYPE *IEParseDisplayNameEx )( 
             IBrowserService3 * This,
             /* [annotation][in] */ 
@@ -3635,23 +3904,28 @@ EXTERN_C const IID IID_IBrowserService4;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IBrowserService4 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IBrowserService4 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IBrowserService4 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetParentSite)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetParentSite )( 
             IBrowserService4 * This,
             /* [annotation][out] */ 
             _Outptr_  IOleInPlaceSite **ppipsite);
         
+        DECLSPEC_XFGVIRT(IBrowserService, SetTitle)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetTitle )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
@@ -3659,6 +3933,7 @@ EXTERN_C const IID IID_IBrowserService4;
             /* [annotation][in] */ 
             _In_  LPCWSTR pszName);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetTitle)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetTitle )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
@@ -3667,26 +3942,31 @@ EXTERN_C const IID IID_IBrowserService4;
             _Out_writes_(cchName)  LPWSTR pszName,
             DWORD cchName);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetOleObject)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetOleObject )( 
             IBrowserService4 * This,
             /* [annotation][out] */ 
             _Outptr_  IOleObject **ppobjv);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetTravelLog)
         HRESULT ( STDMETHODCALLTYPE *GetTravelLog )( 
             IBrowserService4 * This,
             /* [out] */ ITravelLog **pptl);
         
+        DECLSPEC_XFGVIRT(IBrowserService, ShowControlWindow)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *ShowControlWindow )( 
             IBrowserService4 * This,
             UINT id,
             BOOL fShow);
         
+        DECLSPEC_XFGVIRT(IBrowserService, IsControlWindowShown)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *IsControlWindowShown )( 
             IBrowserService4 * This,
             UINT id,
             /* [annotation][out] */ 
             _Out_  BOOL *pfShown);
         
+        DECLSPEC_XFGVIRT(IBrowserService, IEGetDisplayName)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *IEGetDisplayName )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
@@ -3695,6 +3975,7 @@ EXTERN_C const IID IID_IBrowserService4;
             _Out_writes_(INTERNET_MAX_URL_LENGTH)  LPWSTR pwszName,
             UINT uFlags);
         
+        DECLSPEC_XFGVIRT(IBrowserService, IEParseDisplayName)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *IEParseDisplayName )( 
             IBrowserService4 * This,
             UINT uiCP,
@@ -3703,27 +3984,32 @@ EXTERN_C const IID IID_IBrowserService4;
             /* [annotation][out] */ 
             _Outptr_  PIDLIST_ABSOLUTE *ppidlOut);
         
+        DECLSPEC_XFGVIRT(IBrowserService, DisplayParseError)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *DisplayParseError )( 
             IBrowserService4 * This,
             HRESULT hres,
             /* [annotation][in] */ 
             _In_  LPCWSTR pwszPath);
         
+        DECLSPEC_XFGVIRT(IBrowserService, NavigateToPidl)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *NavigateToPidl )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
             _In_  PCIDLIST_ABSOLUTE pidl,
             DWORD grfHLNF);
         
+        DECLSPEC_XFGVIRT(IBrowserService, SetNavigateState)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetNavigateState )( 
             IBrowserService4 * This,
             BNSTATE bnstate);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetNavigateState)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetNavigateState )( 
             IBrowserService4 * This,
             /* [annotation][out] */ 
             _Out_  BNSTATE *pbnstate);
         
+        DECLSPEC_XFGVIRT(IBrowserService, NotifyRedirect)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *NotifyRedirect )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
@@ -3733,44 +4019,54 @@ EXTERN_C const IID IID_IBrowserService4;
             /* [annotation][out] */ 
             _Out_  BOOL *pfDidBrowse);
         
+        DECLSPEC_XFGVIRT(IBrowserService, UpdateWindowList)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *UpdateWindowList )( 
             IBrowserService4 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService, UpdateBackForwardState)
         HRESULT ( STDMETHODCALLTYPE *UpdateBackForwardState )( 
             IBrowserService4 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService, SetFlags)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetFlags )( 
             IBrowserService4 * This,
             DWORD dwFlags,
             DWORD dwFlagMask);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetFlags)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetFlags )( 
             IBrowserService4 * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pdwFlags);
         
+        DECLSPEC_XFGVIRT(IBrowserService, CanNavigateNow)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CanNavigateNow )( 
             IBrowserService4 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetPidl)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetPidl )( 
             IBrowserService4 * This,
             /* [annotation][out] */ 
             _Out_  PIDLIST_ABSOLUTE *ppidl);
         
+        DECLSPEC_XFGVIRT(IBrowserService, SetReferrer)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetReferrer )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
             _In_  PCIDLIST_ABSOLUTE pidl);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetBrowserIndex)
         /* [local] */ DWORD ( STDMETHODCALLTYPE *GetBrowserIndex )( 
             IBrowserService4 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetBrowserByIndex)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetBrowserByIndex )( 
             IBrowserService4 * This,
             DWORD dwID,
             /* [annotation][out] */ 
             _Outptr_  IUnknown **ppunk);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetHistoryObject)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetHistoryObject )( 
             IBrowserService4 * This,
             /* [annotation][out] */ 
@@ -3780,17 +4076,20 @@ EXTERN_C const IID IID_IBrowserService4;
             /* [annotation][out] */ 
             _Outptr_  IBindCtx **ppbc);
         
+        DECLSPEC_XFGVIRT(IBrowserService, SetHistoryObject)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetHistoryObject )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
             _In_  IOleObject *pole,
             BOOL fIsLocalAnchor);
         
+        DECLSPEC_XFGVIRT(IBrowserService, CacheOLEServer)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CacheOLEServer )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
             _In_  IOleObject *pole);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetSetCodePage)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetSetCodePage )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
@@ -3798,6 +4097,7 @@ EXTERN_C const IID IID_IBrowserService4;
             /* [annotation][out] */ 
             _Out_  VARIANT *pvarOut);
         
+        DECLSPEC_XFGVIRT(IBrowserService, OnHttpEquiv)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *OnHttpEquiv )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
@@ -3808,16 +4108,19 @@ EXTERN_C const IID IID_IBrowserService4;
             /* [annotation][out] */ 
             _Out_  VARIANT *pvarargOut);
         
+        DECLSPEC_XFGVIRT(IBrowserService, GetPalette)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetPalette )( 
             IBrowserService4 * This,
             /* [annotation][out] */ 
             _Out_  HPALETTE *hpal);
         
+        DECLSPEC_XFGVIRT(IBrowserService, RegisterWindow)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *RegisterWindow )( 
             IBrowserService4 * This,
             BOOL fForceRegister,
             int swc);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, WndProcBS)
         LRESULT ( STDMETHODCALLTYPE *WndProcBS )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
@@ -3829,24 +4132,29 @@ EXTERN_C const IID IID_IBrowserService4;
             /* [annotation][in] */ 
             _In_  LPARAM lParam);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, SetAsDefFolderSettings)
         HRESULT ( STDMETHODCALLTYPE *SetAsDefFolderSettings )( 
             IBrowserService4 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, GetViewRect)
         HRESULT ( STDMETHODCALLTYPE *GetViewRect )( 
             IBrowserService4 * This,
             /* [annotation][out] */ 
             _Out_  RECT *prc);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, OnSize)
         HRESULT ( STDMETHODCALLTYPE *OnSize )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
             _In_  WPARAM wParam);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, OnCreate)
         HRESULT ( STDMETHODCALLTYPE *OnCreate )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
             _In_  struct tagCREATESTRUCTW *pcs);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, OnCommand)
         LRESULT ( STDMETHODCALLTYPE *OnCommand )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
@@ -3854,28 +4162,35 @@ EXTERN_C const IID IID_IBrowserService4;
             /* [annotation][in] */ 
             _In_  LPARAM lParam);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, OnDestroy)
         HRESULT ( STDMETHODCALLTYPE *OnDestroy )( 
             IBrowserService4 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, OnNotify)
         LRESULT ( STDMETHODCALLTYPE *OnNotify )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
             _In_  struct tagNMHDR *pnm);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, OnSetFocus)
         HRESULT ( STDMETHODCALLTYPE *OnSetFocus )( 
             IBrowserService4 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, OnFrameWindowActivateBS)
         HRESULT ( STDMETHODCALLTYPE *OnFrameWindowActivateBS )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
             _In_  BOOL fActive);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, ReleaseShellView)
         HRESULT ( STDMETHODCALLTYPE *ReleaseShellView )( 
             IBrowserService4 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, ActivatePendingView)
         HRESULT ( STDMETHODCALLTYPE *ActivatePendingView )( 
             IBrowserService4 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, CreateViewWindow)
         HRESULT ( STDMETHODCALLTYPE *CreateViewWindow )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
@@ -3887,6 +4202,7 @@ EXTERN_C const IID IID_IBrowserService4;
             /* [annotation][out] */ 
             _Out_  HWND *phwnd);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, CreateBrowserPropSheetExt)
         HRESULT ( STDMETHODCALLTYPE *CreateBrowserPropSheetExt )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
@@ -3894,19 +4210,23 @@ EXTERN_C const IID IID_IBrowserService4;
             /* [annotation][iid_is][out] */ 
             _Outptr_  void **ppv);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, GetViewWindow)
         HRESULT ( STDMETHODCALLTYPE *GetViewWindow )( 
             IBrowserService4 * This,
             /* [annotation][out] */ 
             _Out_  HWND *phwndView);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, GetBaseBrowserData)
         HRESULT ( STDMETHODCALLTYPE *GetBaseBrowserData )( 
             IBrowserService4 * This,
             /* [annotation][out] */ 
             _Outptr_  LPCBASEBROWSERDATA *pbbd);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, PutBaseBrowserData)
         LPBASEBROWSERDATA ( STDMETHODCALLTYPE *PutBaseBrowserData )( 
             IBrowserService4 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, InitializeTravelLog)
         HRESULT ( STDMETHODCALLTYPE *InitializeTravelLog )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
@@ -3914,35 +4234,43 @@ EXTERN_C const IID IID_IBrowserService4;
             /* [annotation][in] */ 
             _In_  DWORD dw);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, SetTopBrowser)
         HRESULT ( STDMETHODCALLTYPE *SetTopBrowser )( 
             IBrowserService4 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, Offline)
         HRESULT ( STDMETHODCALLTYPE *Offline )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
             _In_  int iCmd);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, AllowViewResize)
         HRESULT ( STDMETHODCALLTYPE *AllowViewResize )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
             _In_  BOOL f);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, SetActivateState)
         HRESULT ( STDMETHODCALLTYPE *SetActivateState )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
             _In_  UINT u);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, UpdateSecureLockIcon)
         HRESULT ( STDMETHODCALLTYPE *UpdateSecureLockIcon )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
             _In_  int eSecureLock);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, InitializeDownloadManager)
         HRESULT ( STDMETHODCALLTYPE *InitializeDownloadManager )( 
             IBrowserService4 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, InitializeTransitionSite)
         HRESULT ( STDMETHODCALLTYPE *InitializeTransitionSite )( 
             IBrowserService4 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _Initialize)
         HRESULT ( STDMETHODCALLTYPE *_Initialize )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
@@ -3950,22 +4278,28 @@ EXTERN_C const IID IID_IBrowserService4;
             /* [annotation][in] */ 
             _In_  IUnknown *pauto);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _CancelPendingNavigationAsync)
         HRESULT ( STDMETHODCALLTYPE *_CancelPendingNavigationAsync )( 
             IBrowserService4 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _CancelPendingView)
         HRESULT ( STDMETHODCALLTYPE *_CancelPendingView )( 
             IBrowserService4 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _MaySaveChanges)
         HRESULT ( STDMETHODCALLTYPE *_MaySaveChanges )( 
             IBrowserService4 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _PauseOrResumeView)
         HRESULT ( STDMETHODCALLTYPE *_PauseOrResumeView )( 
             IBrowserService4 * This,
             BOOL fPaused);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _DisableModeless)
         HRESULT ( STDMETHODCALLTYPE *_DisableModeless )( 
             IBrowserService4 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _NavigateToPidl)
         HRESULT ( STDMETHODCALLTYPE *_NavigateToPidl )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
@@ -3975,6 +4309,7 @@ EXTERN_C const IID IID_IBrowserService4;
             /* [annotation][in] */ 
             _In_  DWORD dwFlags);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _TryShell2Rename)
         HRESULT ( STDMETHODCALLTYPE *_TryShell2Rename )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
@@ -3982,9 +4317,11 @@ EXTERN_C const IID IID_IBrowserService4;
             /* [annotation][in] */ 
             _In_  PCIDLIST_ABSOLUTE pidlNew);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _SwitchActivationNow)
         HRESULT ( STDMETHODCALLTYPE *_SwitchActivationNow )( 
             IBrowserService4 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _ExecChildren)
         HRESULT ( STDMETHODCALLTYPE *_ExecChildren )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
@@ -4002,6 +4339,7 @@ EXTERN_C const IID IID_IBrowserService4;
             /* [annotation][unique][out][in] */ 
             _Inout_opt_  VARIANTARG *pvarargOut);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _SendChildren)
         HRESULT ( STDMETHODCALLTYPE *_SendChildren )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
@@ -4015,48 +4353,59 @@ EXTERN_C const IID IID_IBrowserService4;
             /* [annotation][in] */ 
             _In_  LPARAM lParam);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, GetFolderSetData)
         HRESULT ( STDMETHODCALLTYPE *GetFolderSetData )( 
             IBrowserService4 * This,
             /* [out] */ struct tagFolderSetData *pfsd);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _OnFocusChange)
         HRESULT ( STDMETHODCALLTYPE *_OnFocusChange )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
             _In_  UINT itb);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, v_ShowHideChildWindows)
         HRESULT ( STDMETHODCALLTYPE *v_ShowHideChildWindows )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
             _In_  BOOL fChildOnly);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _get_itbLastFocus)
         UINT ( STDMETHODCALLTYPE *_get_itbLastFocus )( 
             IBrowserService4 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _put_itbLastFocus)
         HRESULT ( STDMETHODCALLTYPE *_put_itbLastFocus )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
             _In_  UINT itbLastFocus);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _UIActivateView)
         HRESULT ( STDMETHODCALLTYPE *_UIActivateView )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
             _In_  UINT uState);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _GetViewBorderRect)
         HRESULT ( STDMETHODCALLTYPE *_GetViewBorderRect )( 
             IBrowserService4 * This,
             /* [out] */ RECT *prc);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _UpdateViewRectSize)
         HRESULT ( STDMETHODCALLTYPE *_UpdateViewRectSize )( 
             IBrowserService4 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _ResizeNextBorder)
         HRESULT ( STDMETHODCALLTYPE *_ResizeNextBorder )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
             _In_  UINT itb);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _ResizeView)
         HRESULT ( STDMETHODCALLTYPE *_ResizeView )( 
             IBrowserService4 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _GetEffectiveClientArea)
         HRESULT ( STDMETHODCALLTYPE *_GetEffectiveClientArea )( 
             IBrowserService4 * This,
             /* [annotation][out] */ 
@@ -4064,6 +4413,7 @@ EXTERN_C const IID IID_IBrowserService4;
             /* [annotation][in] */ 
             _In_  HMONITOR hmon);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, v_GetViewStream)
         IStream *( STDMETHODCALLTYPE *v_GetViewStream )( 
             IBrowserService4 * This,
             /* [in] */ PCIDLIST_ABSOLUTE pidl,
@@ -4072,6 +4422,7 @@ EXTERN_C const IID IID_IBrowserService4;
             /* [annotation][in] */ 
             _In_  LPCWSTR pwszName);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, ForwardViewMsg)
         LRESULT ( STDMETHODCALLTYPE *ForwardViewMsg )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
@@ -4081,32 +4432,39 @@ EXTERN_C const IID IID_IBrowserService4;
             /* [annotation][in] */ 
             _In_  LPARAM lParam);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, SetAcceleratorMenu)
         HRESULT ( STDMETHODCALLTYPE *SetAcceleratorMenu )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
             _In_  HACCEL hacc);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _GetToolbarCount)
         int ( STDMETHODCALLTYPE *_GetToolbarCount )( 
             IBrowserService4 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _GetToolbarItem)
         LPTOOLBARITEM ( STDMETHODCALLTYPE *_GetToolbarItem )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
             _In_  int itb);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _SaveToolbars)
         HRESULT ( STDMETHODCALLTYPE *_SaveToolbars )( 
             IBrowserService4 * This,
             /* [in] */ IStream *pstm);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _LoadToolbars)
         HRESULT ( STDMETHODCALLTYPE *_LoadToolbars )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
             _In_  IStream *pstm);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _CloseAndReleaseToolbars)
         HRESULT ( STDMETHODCALLTYPE *_CloseAndReleaseToolbars )( 
             IBrowserService4 * This,
             BOOL fClose);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, v_MayGetNextToolbarFocus)
         HRESULT ( STDMETHODCALLTYPE *v_MayGetNextToolbarFocus )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
@@ -4120,16 +4478,19 @@ EXTERN_C const IID IID_IBrowserService4;
             /* [annotation][out] */ 
             _Out_  HWND *phwnd);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _ResizeNextBorderHelper)
         HRESULT ( STDMETHODCALLTYPE *_ResizeNextBorderHelper )( 
             IBrowserService4 * This,
             UINT itb,
             BOOL bUseHmonitor);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _FindTBar)
         UINT ( STDMETHODCALLTYPE *_FindTBar )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
             _In_  IUnknown *punkSrc);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _SetFocus)
         HRESULT ( STDMETHODCALLTYPE *_SetFocus )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
@@ -4139,10 +4500,12 @@ EXTERN_C const IID IID_IBrowserService4;
             /* [annotation][in] */ 
             _In_  LPMSG lpMsg);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, v_MayTranslateAccelerator)
         HRESULT ( STDMETHODCALLTYPE *v_MayTranslateAccelerator )( 
             IBrowserService4 * This,
             /* [in] */ MSG *pmsg);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, _GetBorderDWHelper)
         HRESULT ( STDMETHODCALLTYPE *_GetBorderDWHelper )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
@@ -4152,11 +4515,13 @@ EXTERN_C const IID IID_IBrowserService4;
             /* [annotation][in] */ 
             _In_  BOOL bUseHmonitor);
         
+        DECLSPEC_XFGVIRT(IBrowserService2, v_CheckZoneCrossing)
         HRESULT ( STDMETHODCALLTYPE *v_CheckZoneCrossing )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
             _In_  PCIDLIST_ABSOLUTE pidl);
         
+        DECLSPEC_XFGVIRT(IBrowserService3, _PositionViewWindow)
         HRESULT ( STDMETHODCALLTYPE *_PositionViewWindow )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
@@ -4164,6 +4529,7 @@ EXTERN_C const IID IID_IBrowserService4;
             /* [annotation][in] */ 
             _In_  LPRECT prc);
         
+        DECLSPEC_XFGVIRT(IBrowserService3, IEParseDisplayNameEx)
         HRESULT ( STDMETHODCALLTYPE *IEParseDisplayNameEx )( 
             IBrowserService4 * This,
             /* [annotation][in] */ 
@@ -4175,13 +4541,16 @@ EXTERN_C const IID IID_IBrowserService4;
             /* [annotation][out] */ 
             _Outptr_  PIDLIST_ABSOLUTE *ppidlOut);
         
+        DECLSPEC_XFGVIRT(IBrowserService4, ActivateView)
         HRESULT ( STDMETHODCALLTYPE *ActivateView )( 
             IBrowserService4 * This,
             /* [in] */ BOOL fPendingView);
         
+        DECLSPEC_XFGVIRT(IBrowserService4, SaveViewState)
         HRESULT ( STDMETHODCALLTYPE *SaveViewState )( 
             IBrowserService4 * This);
         
+        DECLSPEC_XFGVIRT(IBrowserService4, _ResizeAllBorders)
         HRESULT ( STDMETHODCALLTYPE *_ResizeAllBorders )( 
             IBrowserService4 * This);
         
@@ -4558,18 +4927,22 @@ EXTERN_C const IID IID_ITrackShellMenu;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ITrackShellMenu * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ITrackShellMenu * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ITrackShellMenu * This);
         
+        DECLSPEC_XFGVIRT(IShellMenu, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             ITrackShellMenu * This,
             /* [annotation][unique][in] */ 
@@ -4581,6 +4954,7 @@ EXTERN_C const IID IID_ITrackShellMenu;
             /* [annotation][in] */ 
             _In_  DWORD dwFlags);
         
+        DECLSPEC_XFGVIRT(IShellMenu, GetMenuInfo)
         HRESULT ( STDMETHODCALLTYPE *GetMenuInfo )( 
             ITrackShellMenu * This,
             /* [annotation][out] */ 
@@ -4592,6 +4966,7 @@ EXTERN_C const IID IID_ITrackShellMenu;
             /* [annotation][out] */ 
             _Out_opt_  DWORD *pdwFlags);
         
+        DECLSPEC_XFGVIRT(IShellMenu, SetShellFolder)
         HRESULT ( STDMETHODCALLTYPE *SetShellFolder )( 
             ITrackShellMenu * This,
             /* [annotation][unique][in] */ 
@@ -4603,6 +4978,7 @@ EXTERN_C const IID IID_ITrackShellMenu;
             /* [annotation][in] */ 
             _In_  DWORD dwFlags);
         
+        DECLSPEC_XFGVIRT(IShellMenu, GetShellFolder)
         HRESULT ( STDMETHODCALLTYPE *GetShellFolder )( 
             ITrackShellMenu * This,
             /* [annotation][out] */ 
@@ -4613,6 +4989,7 @@ EXTERN_C const IID IID_ITrackShellMenu;
             /* [annotation][iid_is][out] */ 
             _Outptr_  void **ppv);
         
+        DECLSPEC_XFGVIRT(IShellMenu, SetMenu)
         HRESULT ( STDMETHODCALLTYPE *SetMenu )( 
             ITrackShellMenu * This,
             /* [annotation][unique][in] */ 
@@ -4622,6 +4999,7 @@ EXTERN_C const IID IID_ITrackShellMenu;
             /* [annotation][in] */ 
             _In_  DWORD dwFlags);
         
+        DECLSPEC_XFGVIRT(IShellMenu, GetMenu)
         HRESULT ( STDMETHODCALLTYPE *GetMenu )( 
             ITrackShellMenu * This,
             /* [annotation][out] */ 
@@ -4631,6 +5009,7 @@ EXTERN_C const IID IID_ITrackShellMenu;
             /* [annotation][out] */ 
             _Out_opt_  DWORD *pdwFlags);
         
+        DECLSPEC_XFGVIRT(IShellMenu, InvalidateItem)
         HRESULT ( STDMETHODCALLTYPE *InvalidateItem )( 
             ITrackShellMenu * This,
             /* [annotation][in] */ 
@@ -4638,11 +5017,13 @@ EXTERN_C const IID IID_ITrackShellMenu;
             /* [annotation][in] */ 
             _In_  DWORD dwFlags);
         
+        DECLSPEC_XFGVIRT(IShellMenu, GetState)
         HRESULT ( STDMETHODCALLTYPE *GetState )( 
             ITrackShellMenu * This,
             /* [annotation][out] */ 
             _Out_  LPSMDATA psmd);
         
+        DECLSPEC_XFGVIRT(IShellMenu, SetMenuToolbar)
         HRESULT ( STDMETHODCALLTYPE *SetMenuToolbar )( 
             ITrackShellMenu * This,
             /* [annotation][in] */ 
@@ -4650,12 +5031,14 @@ EXTERN_C const IID IID_ITrackShellMenu;
             /* [annotation][in] */ 
             _In_  DWORD dwFlags);
         
+        DECLSPEC_XFGVIRT(ITrackShellMenu, SetObscured)
         HRESULT ( STDMETHODCALLTYPE *SetObscured )( 
             ITrackShellMenu * This,
             /* [in] */ HWND hwndTB,
             /* [in] */ IUnknown *punkBand,
             DWORD dwSMSetFlags);
         
+        DECLSPEC_XFGVIRT(ITrackShellMenu, Popup)
         HRESULT ( STDMETHODCALLTYPE *Popup )( 
             ITrackShellMenu * This,
             /* [in] */ HWND hwnd,

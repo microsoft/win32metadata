@@ -26,6 +26,10 @@ _GUID
 <IncludeRoot>/shared/dmerror.h
 <IncludeRoot>/winrt/MessageDispatcherApi.h
 <IncludeRoot>/shared/guiddef.h
+<IncludeRoot>/um/ichannelcredentials.h
+<IncludeRoot>/um/mtx.h
+<IncludeRoot>/um/mtxadmin.h
+<IncludeRoot>/um/mtxattr.h
 --namespace
 Windows.Win32.System.Com
 --with-type

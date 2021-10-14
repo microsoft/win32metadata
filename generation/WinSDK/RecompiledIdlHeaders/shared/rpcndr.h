@@ -272,7 +272,7 @@ void __RPC_USER I_RpcDefaultFree(
 
 typedef void  * NDR_CCONTEXT;
 
-typedef struct
+typedef struct _NDR_SCONTEXT
     {
     void  * pad[2];
     void  * userContext;
@@ -3058,6 +3058,22 @@ NdrOleFree (
 #define DECLSPEC_UUID(x) __declspec(uuid(x))
 #else
 #define DECLSPEC_UUID(x)
+#endif
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
+#endif
+
+#ifndef DECLSPEC_XFGREUSE
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGREUSE(vtbl, func) __declspec(xfg_reuse_typehash(vtbl, func))
+#else
+#define DECLSPEC_XFGREUSE(vtbl, func)
 #endif
 #endif
 

@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -133,6 +141,7 @@ EXTERN_C const IID IID_IDedupChunkLibrary;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDedupChunkLibrary * This,
             /* [annotation][in] */ 
@@ -140,18 +149,23 @@ EXTERN_C const IID IID_IDedupChunkLibrary;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDedupChunkLibrary * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDedupChunkLibrary * This);
         
+        DECLSPEC_XFGVIRT(IDedupChunkLibrary, InitializeForPushBuffers)
         HRESULT ( STDMETHODCALLTYPE *InitializeForPushBuffers )( 
             __RPC__in IDedupChunkLibrary * This);
         
+        DECLSPEC_XFGVIRT(IDedupChunkLibrary, Uninitialize)
         HRESULT ( STDMETHODCALLTYPE *Uninitialize )( 
             __RPC__in IDedupChunkLibrary * This);
         
+        DECLSPEC_XFGVIRT(IDedupChunkLibrary, SetParameter)
         HRESULT ( STDMETHODCALLTYPE *SetParameter )( 
             __RPC__in IDedupChunkLibrary * This,
             /* [annotation][in] */ 
@@ -159,6 +173,7 @@ EXTERN_C const IID IID_IDedupChunkLibrary;
             /* [annotation][in] */ 
             _In_  VARIANT vParamValue);
         
+        DECLSPEC_XFGVIRT(IDedupChunkLibrary, StartChunking)
         HRESULT ( STDMETHODCALLTYPE *StartChunking )( 
             __RPC__in IDedupChunkLibrary * This,
             /* [annotation][in] */ 
@@ -253,6 +268,7 @@ EXTERN_C const IID IID_IDedupIterateChunksHash32;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDedupIterateChunksHash32 * This,
             /* [annotation][in] */ 
@@ -260,12 +276,15 @@ EXTERN_C const IID IID_IDedupIterateChunksHash32;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDedupIterateChunksHash32 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDedupIterateChunksHash32 * This);
         
+        DECLSPEC_XFGVIRT(IDedupIterateChunksHash32, PushBuffer)
         HRESULT ( STDMETHODCALLTYPE *PushBuffer )( 
             __RPC__in IDedupIterateChunksHash32 * This,
             /* [annotation][size_is][in] */ 
@@ -273,6 +292,7 @@ EXTERN_C const IID IID_IDedupIterateChunksHash32;
             /* [annotation][in] */ 
             _In_  ULONG ulBufferLength);
         
+        DECLSPEC_XFGVIRT(IDedupIterateChunksHash32, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IDedupIterateChunksHash32 * This,
             /* [range][in] */ __RPC__in_range(0,DEDUP_CHUNKLIB_MAX_CHUNKS_ENUM) ULONG ulMaxChunks,
@@ -281,9 +301,11 @@ EXTERN_C const IID IID_IDedupIterateChunksHash32;
             /* [annotation][out] */ 
             _Out_  ULONG *pulFetched);
         
+        DECLSPEC_XFGVIRT(IDedupIterateChunksHash32, Drain)
         HRESULT ( STDMETHODCALLTYPE *Drain )( 
             __RPC__in IDedupIterateChunksHash32 * This);
         
+        DECLSPEC_XFGVIRT(IDedupIterateChunksHash32, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IDedupIterateChunksHash32 * This);
         

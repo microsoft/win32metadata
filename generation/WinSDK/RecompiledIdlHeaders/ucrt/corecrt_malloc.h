@@ -106,7 +106,7 @@ _Check_return_
 _ACRTIMP
 size_t __cdecl _msize_base(
     _Pre_notnull_ void* _Block
-    );
+    ) _CRT_NOEXCEPT;
 
 _Check_return_
 _ACRTIMP _CRT_HYBRIDPATCHABLE

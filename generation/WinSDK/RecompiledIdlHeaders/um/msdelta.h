@@ -92,6 +92,9 @@ typedef __int64 DELTA_FILE_TYPE;
 /** File type for ARM64 Portable Executable files with CLI4 transform. */
 #define DELTA_FILE_TYPE_CLI4_ARM64          ( (DELTA_FILE_TYPE) 0x00000080 )
 
+/** File type for distinguishing delta patches from reverse delta patches. */
+#define DELTA_FILE_TYPE_REVERSE_ANY         ( (DELTA_FILE_TYPE) 0x00000100 )
+
 /** File type set that treats any file as raw. */
 #define DELTA_FILE_TYPE_SET_RAW_ONLY        ( DELTA_FILE_TYPE_RAW )
 
@@ -379,6 +382,27 @@ GetDeltaInfoW(
 #define GetDeltaInfo                        GetDeltaInfoA
 #endif /* _UNICODE */
 
+/**
+ * Applies a given delta to a given source file and creates the reverse delta to the original.
+ * The resultant target file and reverse is put into allocated memory.
+ * @param ApplyFlags        Apply-specific flags.
+ * @param Source            Source memory block.
+ * @param Delta             Delta memory block.
+ * @param lpReverseFileTime Timestamp
+ * @param lpTarget          Target memory block. Caller DeltaFree.
+ * @param lpTargetReverse   Target reverse memory block. Caller DeltaFree.
+ * @return                  TRUE if success, FALSE otherwise.
+ */
+BOOL
+WINAPI
+ApplyDeltaGetReverseB(
+    _In_ DELTA_FLAG_TYPE ApplyFlags,
+    _In_ DELTA_INPUT Source,
+    _In_ DELTA_INPUT Delta,
+    _In_opt_ const FILETIME* lpReverseFileTime,
+    _Out_ LPDELTA_OUTPUT lpTarget,
+    _Out_ LPDELTA_OUTPUT lpTargetReverse
+    );
 
 /**
  * Applies a given delta to a given source file.

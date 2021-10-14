@@ -8,5 +8,7 @@
 <IncludeRoot>/um/Wsddisco.h
 <IncludeRoot>/um/Wsdattachment.h
 <IncludeRoot>/um/Wsdxml.h
+<IncludeRoot>/um/wsdapi.h
+<IncludeRoot>/um/wsdns.h
 --namespace
 Windows.Win32.Devices.WebServicesOnDevices

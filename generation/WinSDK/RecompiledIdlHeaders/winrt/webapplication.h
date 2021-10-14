@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -154,22 +162,27 @@ EXTERN_C const IID IID_IWebApplicationScriptEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWebApplicationScriptEvents * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWebApplicationScriptEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWebApplicationScriptEvents * This);
         
+        DECLSPEC_XFGVIRT(IWebApplicationScriptEvents, BeforeScriptExecute)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *BeforeScriptExecute )( 
             IWebApplicationScriptEvents * This,
             /* [in] */ IHTMLWindow2 *htmlWindow);
         
+        DECLSPEC_XFGVIRT(IWebApplicationScriptEvents, ScriptError)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ScriptError )( 
             IWebApplicationScriptEvents * This,
             /* [annotation][in] */ 
@@ -268,18 +281,22 @@ EXTERN_C const IID IID_IWebApplicationNavigationEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWebApplicationNavigationEvents * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWebApplicationNavigationEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWebApplicationNavigationEvents * This);
         
+        DECLSPEC_XFGVIRT(IWebApplicationNavigationEvents, BeforeNavigate)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *BeforeNavigate )( 
             IWebApplicationNavigationEvents * This,
             /* [in] */ IHTMLWindow2 *htmlWindow,
@@ -288,11 +305,13 @@ EXTERN_C const IID IID_IWebApplicationNavigationEvents;
             /* [annotation][string][in] */ 
             _In_opt_  LPCWSTR targetFrameName);
         
+        DECLSPEC_XFGVIRT(IWebApplicationNavigationEvents, NavigateComplete)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *NavigateComplete )( 
             IWebApplicationNavigationEvents * This,
             /* [in] */ IHTMLWindow2 *htmlWindow,
             /* [string][in] */ LPCWSTR url);
         
+        DECLSPEC_XFGVIRT(IWebApplicationNavigationEvents, NavigateError)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *NavigateError )( 
             IWebApplicationNavigationEvents * This,
             /* [in] */ IHTMLWindow2 *htmlWindow,
@@ -301,14 +320,17 @@ EXTERN_C const IID IID_IWebApplicationNavigationEvents;
             _In_opt_  LPCWSTR targetFrameName,
             /* [in] */ DWORD statusCode);
         
+        DECLSPEC_XFGVIRT(IWebApplicationNavigationEvents, DocumentComplete)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *DocumentComplete )( 
             IWebApplicationNavigationEvents * This,
             /* [in] */ IHTMLWindow2 *htmlWindow,
             /* [string][in] */ LPCWSTR url);
         
+        DECLSPEC_XFGVIRT(IWebApplicationNavigationEvents, DownloadBegin)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *DownloadBegin )( 
             IWebApplicationNavigationEvents * This);
         
+        DECLSPEC_XFGVIRT(IWebApplicationNavigationEvents, DownloadComplete)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *DownloadComplete )( 
             IWebApplicationNavigationEvents * This);
         
@@ -392,18 +414,22 @@ EXTERN_C const IID IID_IWebApplicationUIEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWebApplicationUIEvents * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWebApplicationUIEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWebApplicationUIEvents * This);
         
+        DECLSPEC_XFGVIRT(IWebApplicationUIEvents, SecurityProblem)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SecurityProblem )( 
             IWebApplicationUIEvents * This,
             /* [in] */ DWORD securityProblem,
@@ -474,21 +500,26 @@ EXTERN_C const IID IID_IWebApplicationUpdateEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWebApplicationUpdateEvents * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWebApplicationUpdateEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWebApplicationUpdateEvents * This);
         
+        DECLSPEC_XFGVIRT(IWebApplicationUpdateEvents, OnPaint)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *OnPaint )( 
             IWebApplicationUpdateEvents * This);
         
+        DECLSPEC_XFGVIRT(IWebApplicationUpdateEvents, OnCssChanged)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *OnCssChanged )( 
             IWebApplicationUpdateEvents * This);
         
@@ -572,35 +603,43 @@ EXTERN_C const IID IID_IWebApplicationHost;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWebApplicationHost * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWebApplicationHost * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWebApplicationHost * This);
         
+        DECLSPEC_XFGVIRT(IWebApplicationHost, get_HWND)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_HWND )( 
             IWebApplicationHost * This,
             /* [retval][out] */ HWND *hwnd);
         
+        DECLSPEC_XFGVIRT(IWebApplicationHost, get_Document)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Document )( 
             IWebApplicationHost * This,
             /* [retval][out] */ IHTMLDocument2 **htmlDocument);
         
+        DECLSPEC_XFGVIRT(IWebApplicationHost, Refresh)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             IWebApplicationHost * This);
         
+        DECLSPEC_XFGVIRT(IWebApplicationHost, Advise)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Advise )( 
             IWebApplicationHost * This,
             /* [in] */ REFIID interfaceId,
             /* [in] */ IUnknown *callback,
             /* [out] */ DWORD *cookie);
         
+        DECLSPEC_XFGVIRT(IWebApplicationHost, Unadvise)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Unadvise )( 
             IWebApplicationHost * This,
             /* [in] */ DWORD cookie);
@@ -680,18 +719,22 @@ EXTERN_C const IID IID_IWebApplicationActivation;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWebApplicationActivation * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWebApplicationActivation * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWebApplicationActivation * This);
         
+        DECLSPEC_XFGVIRT(IWebApplicationActivation, CancelPendingActivation)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CancelPendingActivation )( 
             IWebApplicationActivation * This);
         
@@ -769,18 +812,22 @@ EXTERN_C const IID IID_IWebApplicationAuthoringMode;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWebApplicationAuthoringMode * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWebApplicationAuthoringMode * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWebApplicationAuthoringMode * This);
         
+        DECLSPEC_XFGVIRT(IServiceProvider, QueryService)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *QueryService )( 
             IWebApplicationAuthoringMode * This,
             /* [annotation][in] */ 
@@ -790,6 +837,7 @@ EXTERN_C const IID IID_IWebApplicationAuthoringMode;
             /* [annotation][out] */ 
             _Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IWebApplicationAuthoringMode, get_AuthoringClientBinary)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AuthoringClientBinary )( 
             __RPC__in IWebApplicationAuthoringMode * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *designModeDllPath);

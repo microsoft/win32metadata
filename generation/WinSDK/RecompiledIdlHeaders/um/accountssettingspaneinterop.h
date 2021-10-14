@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -115,6 +123,7 @@ EXTERN_C const IID IID_IAccountsSettingsPaneInterop;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAccountsSettingsPaneInterop * This,
             /* [annotation][in] */ 
@@ -122,25 +131,31 @@ EXTERN_C const IID IID_IAccountsSettingsPaneInterop;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAccountsSettingsPaneInterop * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAccountsSettingsPaneInterop * This);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetIids)
         HRESULT ( STDMETHODCALLTYPE *GetIids )( 
             __RPC__in IAccountsSettingsPaneInterop * This,
             /* [out] */ __RPC__out ULONG *iidCount,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*iidCount) IID **iids);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetRuntimeClassName)
         HRESULT ( STDMETHODCALLTYPE *GetRuntimeClassName )( 
             __RPC__in IAccountsSettingsPaneInterop * This,
             /* [out] */ __RPC__deref_out_opt HSTRING *className);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetTrustLevel)
         HRESULT ( STDMETHODCALLTYPE *GetTrustLevel )( 
             __RPC__in IAccountsSettingsPaneInterop * This,
             /* [out] */ __RPC__out TrustLevel *trustLevel);
         
+        DECLSPEC_XFGVIRT(IAccountsSettingsPaneInterop, GetForWindow)
         HRESULT ( STDMETHODCALLTYPE *GetForWindow )( 
             __RPC__in IAccountsSettingsPaneInterop * This,
             /* [annotation][in] */ 
@@ -150,6 +165,7 @@ EXTERN_C const IID IID_IAccountsSettingsPaneInterop;
             /* [annotation][iid_is][retval][out] */ 
             _COM_Outptr_retval_  void **accountsSettingsPane);
         
+        DECLSPEC_XFGVIRT(IAccountsSettingsPaneInterop, ShowManageAccountsForWindowAsync)
         HRESULT ( STDMETHODCALLTYPE *ShowManageAccountsForWindowAsync )( 
             __RPC__in IAccountsSettingsPaneInterop * This,
             /* [annotation][in] */ 
@@ -159,6 +175,7 @@ EXTERN_C const IID IID_IAccountsSettingsPaneInterop;
             /* [annotation][iid_is][retval][out] */ 
             _COM_Outptr_retval_  void **asyncAction);
         
+        DECLSPEC_XFGVIRT(IAccountsSettingsPaneInterop, ShowAddAccountForWindowAsync)
         HRESULT ( STDMETHODCALLTYPE *ShowAddAccountForWindowAsync )( 
             __RPC__in IAccountsSettingsPaneInterop * This,
             /* [annotation][in] */ 

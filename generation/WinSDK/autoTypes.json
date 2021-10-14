@@ -1164,5 +1164,10 @@
     "Namespace": "Windows.Win32.System.HostCompute",
     "Name": "HCS_CALLBACK",
     "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.Bluetooth",
+    "Name": "HANDLE_SDP_TYPE",
+    "ValueType": "ulong"
   }
 ]

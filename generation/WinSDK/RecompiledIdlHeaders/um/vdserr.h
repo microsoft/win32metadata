@@ -3654,3 +3654,18 @@ Revision History:
 //
 #define VDS_E_CLEAN_WITH_BOOTBACKING     ((HRESULT)0x80042A09L)
 
+//////////////////////////////////////////////////////////////////////////////
+//
+// Codes added in redstone fe:     0x2B00-0x2BFF
+//
+//////////////////////////////////////////////////////////////////////////////
+//
+// MessageId: VDS_E_SHRINK_EXTEND_UNALIGNED
+//
+// MessageText:
+//
+// 
+// The specified shrink or extend size does not meet alignment requirements for the device.
+//
+#define VDS_E_SHRINK_EXTEND_UNALIGNED    ((HRESULT)0x80042B00L)
+

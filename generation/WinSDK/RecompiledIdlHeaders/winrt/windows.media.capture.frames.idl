@@ -412,7 +412,9 @@ namespace Windows
                     [contract(Windows.Foundation.UniversalApiContract, 6.0)]
                     Audio    = 4,
                     [contract(Windows.Foundation.UniversalApiContract, 6.0)]
-                    Image    = 5
+                    Image    = 5,
+                    [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+                    Metadata = 6
                 };
 
                 [contract(Windows.Foundation.UniversalApiContract, 3.0)]

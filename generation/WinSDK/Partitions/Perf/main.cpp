@@ -11,3 +11,5 @@
 #include <pdh.h>
 #include <winperf.h>
 #include <profileapi.h>
+#include <isysmon.h>
+#include <pdhmsg.h>

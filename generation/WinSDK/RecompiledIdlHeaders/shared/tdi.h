@@ -111,7 +111,7 @@ typedef struct _TRANSPORT_ADDRESS {
 // and misaligned where necessary.
 //
 
-#include <packon.h>
+#include <pshpack1.h>
 
 //
 // Unicode NetBIOS
@@ -404,7 +404,7 @@ typedef struct _TA_ADDRESS_VNS {
     } Address [1];
 } TA_VNS_ADDRESS, *PTA_VNS_ADDRESS;
 
-#include <packoff.h>
+#include <poppack.h>
 
 
 //

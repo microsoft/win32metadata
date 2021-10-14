@@ -51,6 +51,8 @@ namespace Windows
     {
         namespace Core
         {
+            runtimeclass CoreCursor;
+
             runtimeclass PointerEventArgs;
         }
     }
@@ -91,6 +93,8 @@ namespace Windows
                     interface ICoreIncrementalInkStrokeFactory;
 
                     interface ICoreInkIndependentInputSource;
+
+                    interface ICoreInkIndependentInputSource2;
 
                     interface ICoreInkIndependentInputSourceStatics;
 
@@ -199,6 +203,15 @@ namespace Windows
                         [propget] HRESULT InkPresenter([out] [retval] Windows.UI.Input.Inking.InkPresenter** value);
                     }
 
+                    [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+                    [exclusiveto(Windows.UI.Input.Inking.Core.CoreInkIndependentInputSource)]
+                    [uuid(2846B012-0B59-5BB9-A3C5-BECB7CF03A33)]
+                    interface ICoreInkIndependentInputSource2 : IInspectable
+                    {
+                        [propget] HRESULT PointerCursor([out] [retval] Windows.UI.Core.CoreCursor** value);
+                        [propput] HRESULT PointerCursor([in] Windows.UI.Core.CoreCursor* value);
+                    }
+
                     [contract(Windows.Foundation.UniversalApiContract, 1.0)]
                     [exclusiveto(Windows.UI.Input.Inking.Core.CoreInkIndependentInputSource)]
                     [uuid(73E6011B-80C0-4DFB-9B66-10BA7F3F9C84)]
@@ -268,6 +281,7 @@ namespace Windows
                     runtimeclass CoreInkIndependentInputSource
                     {
                         [default] interface Windows.UI.Input.Inking.Core.ICoreInkIndependentInputSource;
+                        [contract(Windows.Foundation.UniversalApiContract, 13.0)] interface Windows.UI.Input.Inking.Core.ICoreInkIndependentInputSource2;
                     }
 
                     [activatable(Windows.Foundation.UniversalApiContract, 5.0)]

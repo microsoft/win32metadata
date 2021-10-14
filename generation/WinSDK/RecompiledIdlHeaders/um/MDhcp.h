@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -168,28 +176,34 @@ EXTERN_C const IID IID_IMcastScope;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMcastScope * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMcastScope * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMcastScope * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMcastScope * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMcastScope * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMcastScope * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -198,6 +212,7 @@ EXTERN_C const IID IID_IMcastScope;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMcastScope * This,
             /* [annotation][in] */ 
@@ -217,22 +232,27 @@ EXTERN_C const IID IID_IMcastScope;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMcastScope, get_ScopeID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ScopeID )( 
             __RPC__in IMcastScope * This,
             /* [retval][out] */ __RPC__out long *pID);
         
+        DECLSPEC_XFGVIRT(IMcastScope, get_ServerID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ServerID )( 
             __RPC__in IMcastScope * This,
             /* [retval][out] */ __RPC__out long *pID);
         
+        DECLSPEC_XFGVIRT(IMcastScope, get_InterfaceID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InterfaceID )( 
             __RPC__in IMcastScope * This,
             /* [retval][out] */ __RPC__out long *pID);
         
+        DECLSPEC_XFGVIRT(IMcastScope, get_ScopeDescription)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ScopeDescription )( 
             __RPC__in IMcastScope * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *ppDescription);
         
+        DECLSPEC_XFGVIRT(IMcastScope, get_TTL)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TTL )( 
             __RPC__in IMcastScope * This,
             /* [retval][out] */ __RPC__out long *pTTL);
@@ -353,28 +373,34 @@ EXTERN_C const IID IID_IMcastLeaseInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMcastLeaseInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMcastLeaseInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMcastLeaseInfo * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMcastLeaseInfo * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMcastLeaseInfo * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMcastLeaseInfo * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -383,6 +409,7 @@ EXTERN_C const IID IID_IMcastLeaseInfo;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMcastLeaseInfo * This,
             /* [annotation][in] */ 
@@ -402,42 +429,52 @@ EXTERN_C const IID IID_IMcastLeaseInfo;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMcastLeaseInfo, get_RequestID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequestID )( 
             __RPC__in IMcastLeaseInfo * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *ppRequestID);
         
+        DECLSPEC_XFGVIRT(IMcastLeaseInfo, get_LeaseStartTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LeaseStartTime )( 
             __RPC__in IMcastLeaseInfo * This,
             /* [retval][out] */ __RPC__out DATE *pTime);
         
+        DECLSPEC_XFGVIRT(IMcastLeaseInfo, put_LeaseStartTime)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LeaseStartTime )( 
             __RPC__in IMcastLeaseInfo * This,
             /* [in] */ DATE time);
         
+        DECLSPEC_XFGVIRT(IMcastLeaseInfo, get_LeaseStopTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LeaseStopTime )( 
             __RPC__in IMcastLeaseInfo * This,
             /* [retval][out] */ __RPC__out DATE *pTime);
         
+        DECLSPEC_XFGVIRT(IMcastLeaseInfo, put_LeaseStopTime)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LeaseStopTime )( 
             __RPC__in IMcastLeaseInfo * This,
             /* [in] */ DATE time);
         
+        DECLSPEC_XFGVIRT(IMcastLeaseInfo, get_AddressCount)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AddressCount )( 
             __RPC__in IMcastLeaseInfo * This,
             /* [retval][out] */ __RPC__out long *pCount);
         
+        DECLSPEC_XFGVIRT(IMcastLeaseInfo, get_ServerAddress)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ServerAddress )( 
             __RPC__in IMcastLeaseInfo * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *ppAddress);
         
+        DECLSPEC_XFGVIRT(IMcastLeaseInfo, get_TTL)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TTL )( 
             __RPC__in IMcastLeaseInfo * This,
             /* [retval][out] */ __RPC__out long *pTTL);
         
+        DECLSPEC_XFGVIRT(IMcastLeaseInfo, get_Addresses)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Addresses )( 
             __RPC__in IMcastLeaseInfo * This,
             /* [retval][out] */ __RPC__out VARIANT *pVariant);
         
+        DECLSPEC_XFGVIRT(IMcastLeaseInfo, EnumerateAddresses)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateAddresses )( 
             __RPC__in IMcastLeaseInfo * This,
             /* [retval][out] */ __RPC__deref_out_opt IEnumBstr **ppEnumAddresses);
@@ -556,31 +593,38 @@ EXTERN_C const IID IID_IEnumMcastScope;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumMcastScope * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumMcastScope * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumMcastScope * This);
         
+        DECLSPEC_XFGVIRT(IEnumMcastScope, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumMcastScope * This,
             /* [in] */ ULONG celt,
             /* [out] */ __RPC__deref_out_opt IMcastScope **ppScopes,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IEnumMcastScope, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumMcastScope * This);
         
+        DECLSPEC_XFGVIRT(IEnumMcastScope, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumMcastScope * This,
             /* [in] */ ULONG celt);
         
+        DECLSPEC_XFGVIRT(IEnumMcastScope, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumMcastScope * This,
             /* [retval][out] */ __RPC__deref_out_opt IEnumMcastScope **ppEnum);
@@ -693,28 +737,34 @@ EXTERN_C const IID IID_IMcastAddressAllocation;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMcastAddressAllocation * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMcastAddressAllocation * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMcastAddressAllocation * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMcastAddressAllocation * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMcastAddressAllocation * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMcastAddressAllocation * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -723,6 +773,7 @@ EXTERN_C const IID IID_IMcastAddressAllocation;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMcastAddressAllocation * This,
             /* [annotation][in] */ 
@@ -742,14 +793,17 @@ EXTERN_C const IID IID_IMcastAddressAllocation;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMcastAddressAllocation, get_Scopes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Scopes )( 
             __RPC__in IMcastAddressAllocation * This,
             /* [retval][out] */ __RPC__out VARIANT *pVariant);
         
+        DECLSPEC_XFGVIRT(IMcastAddressAllocation, EnumerateScopes)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateScopes )( 
             __RPC__in IMcastAddressAllocation * This,
             /* [out] */ __RPC__deref_out_opt IEnumMcastScope **ppEnumMcastScope);
         
+        DECLSPEC_XFGVIRT(IMcastAddressAllocation, RequestAddress)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RequestAddress )( 
             __RPC__in IMcastAddressAllocation * This,
             /* [in] */ __RPC__in_opt IMcastScope *pScope,
@@ -758,16 +812,19 @@ EXTERN_C const IID IID_IMcastAddressAllocation;
             /* [in] */ long NumAddresses,
             /* [retval][out] */ __RPC__deref_out_opt IMcastLeaseInfo **ppLeaseResponse);
         
+        DECLSPEC_XFGVIRT(IMcastAddressAllocation, RenewAddress)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RenewAddress )( 
             __RPC__in IMcastAddressAllocation * This,
             /* [in] */ long lReserved,
             /* [in] */ __RPC__in_opt IMcastLeaseInfo *pRenewRequest,
             /* [retval][out] */ __RPC__deref_out_opt IMcastLeaseInfo **ppRenewResponse);
         
+        DECLSPEC_XFGVIRT(IMcastAddressAllocation, ReleaseAddress)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ReleaseAddress )( 
             __RPC__in IMcastAddressAllocation * This,
             /* [in] */ __RPC__in_opt IMcastLeaseInfo *pReleaseRequest);
         
+        DECLSPEC_XFGVIRT(IMcastAddressAllocation, CreateLeaseInfo)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *CreateLeaseInfo )( 
             __RPC__in IMcastAddressAllocation * This,
             /* [in] */ DATE LeaseStartTime,
@@ -778,6 +835,7 @@ EXTERN_C const IID IID_IMcastAddressAllocation;
             /* [in] */ __RPC__in LPWSTR pServerAddress,
             /* [retval][out] */ __RPC__deref_out_opt IMcastLeaseInfo **ppReleaseRequest);
         
+        DECLSPEC_XFGVIRT(IMcastAddressAllocation, CreateLeaseInfoFromVariant)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateLeaseInfoFromVariant )( 
             __RPC__in IMcastAddressAllocation * This,
             /* [in] */ DATE LeaseStartTime,

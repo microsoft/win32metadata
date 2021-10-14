@@ -89,6 +89,16 @@ namespace Windows
     {
         namespace Xaml
         {
+            typedef struct CornerRadius CornerRadius;
+        }
+    }
+}
+namespace Windows
+{
+    namespace UI
+    {
+        namespace Xaml
+        {
             namespace Data
             {
                 interface IValueConverter;
@@ -210,7 +220,11 @@ namespace Windows
 
                     typedef enum ListViewItemPresenterCheckMode ListViewItemPresenterCheckMode;
 
+                    typedef enum ListViewItemPresenterSelectionIndicatorMode ListViewItemPresenterSelectionIndicatorMode;
+
                     typedef enum PlacementMode PlacementMode;
+
+                    typedef enum PopupPlacementMode PopupPlacementMode;
 
                     typedef enum ScrollEventType ScrollEventType;
 
@@ -368,6 +382,8 @@ namespace Windows
 
                     interface IListViewItemPresenter3;
 
+                    interface IListViewItemPresenter4;
+
                     interface IListViewItemPresenterFactory;
 
                     interface IListViewItemPresenterStatics;
@@ -375,6 +391,8 @@ namespace Windows
                     interface IListViewItemPresenterStatics2;
 
                     interface IListViewItemPresenterStatics3;
+
+                    interface IListViewItemPresenterStatics4;
 
                     interface IListViewItemTemplateSettings;
 
@@ -422,11 +440,15 @@ namespace Windows
 
                     interface IPopup3;
 
+                    interface IPopup4;
+
                     interface IPopupStatics;
 
                     interface IPopupStatics2;
 
                     interface IPopupStatics3;
+
+                    interface IPopupStatics4;
 
                     interface IProgressBarTemplateSettings;
 
@@ -728,6 +750,13 @@ namespace Windows
                         Overlay = 1
                     };
 
+                    [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+                    enum ListViewItemPresenterSelectionIndicatorMode
+                    {
+                        Inline  = 0,
+                        Overlay = 1
+                    };
+
                     [contract(Windows.Foundation.UniversalApiContract, 1.0)]
                     enum PlacementMode
                     {
@@ -736,6 +765,24 @@ namespace Windows
                         Mouse  = 7,
                         Right  = 4,
                         Top    = 10
+                    };
+
+                    [contract(Windows.Foundation.UniversalApiContract, 14.0)]
+                    enum PopupPlacementMode
+                    {
+                        Auto                   = 0,
+                        Top                    = 1,
+                        Bottom                 = 2,
+                        Left                   = 3,
+                        Right                  = 4,
+                        TopEdgeAlignedLeft     = 5,
+                        TopEdgeAlignedRight    = 6,
+                        BottomEdgeAlignedLeft  = 7,
+                        BottomEdgeAlignedRight = 8,
+                        LeftEdgeAlignedTop     = 9,
+                        LeftEdgeAlignedBottom  = 10,
+                        RightEdgeAlignedTop    = 11,
+                        RightEdgeAlignedBottom = 12
                     };
 
                     [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -1660,6 +1707,67 @@ namespace Windows
                         [propput] HRESULT RevealBackgroundShowsAboveContent([in] boolean value);
                     }
 
+                    [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+                    [exclusiveto(Windows.UI.Xaml.Controls.Primitives.ListViewItemPresenter)]
+                    [uuid(DA600AC1-ADEA-5940-A18F-57582F96D99A)]
+                    interface IListViewItemPresenter4 : IInspectable
+                    {
+                        [propget] HRESULT SelectedDisabledBackground([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                        [propput] HRESULT SelectedDisabledBackground([in] Windows.UI.Xaml.Media.Brush* value);
+                        [propget] HRESULT CheckPressedBrush([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                        [propput] HRESULT CheckPressedBrush([in] Windows.UI.Xaml.Media.Brush* value);
+                        [propget] HRESULT CheckDisabledBrush([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                        [propput] HRESULT CheckDisabledBrush([in] Windows.UI.Xaml.Media.Brush* value);
+                        [propget] HRESULT CheckBoxPointerOverBrush([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                        [propput] HRESULT CheckBoxPointerOverBrush([in] Windows.UI.Xaml.Media.Brush* value);
+                        [propget] HRESULT CheckBoxPressedBrush([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                        [propput] HRESULT CheckBoxPressedBrush([in] Windows.UI.Xaml.Media.Brush* value);
+                        [propget] HRESULT CheckBoxDisabledBrush([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                        [propput] HRESULT CheckBoxDisabledBrush([in] Windows.UI.Xaml.Media.Brush* value);
+                        [propget] HRESULT CheckBoxSelectedBrush([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                        [propput] HRESULT CheckBoxSelectedBrush([in] Windows.UI.Xaml.Media.Brush* value);
+                        [propget] HRESULT CheckBoxSelectedPointerOverBrush([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                        [propput] HRESULT CheckBoxSelectedPointerOverBrush([in] Windows.UI.Xaml.Media.Brush* value);
+                        [propget] HRESULT CheckBoxSelectedPressedBrush([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                        [propput] HRESULT CheckBoxSelectedPressedBrush([in] Windows.UI.Xaml.Media.Brush* value);
+                        [propget] HRESULT CheckBoxSelectedDisabledBrush([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                        [propput] HRESULT CheckBoxSelectedDisabledBrush([in] Windows.UI.Xaml.Media.Brush* value);
+                        [propget] HRESULT CheckBoxBorderBrush([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                        [propput] HRESULT CheckBoxBorderBrush([in] Windows.UI.Xaml.Media.Brush* value);
+                        [propget] HRESULT CheckBoxPointerOverBorderBrush([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                        [propput] HRESULT CheckBoxPointerOverBorderBrush([in] Windows.UI.Xaml.Media.Brush* value);
+                        [propget] HRESULT CheckBoxPressedBorderBrush([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                        [propput] HRESULT CheckBoxPressedBorderBrush([in] Windows.UI.Xaml.Media.Brush* value);
+                        [propget] HRESULT CheckBoxDisabledBorderBrush([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                        [propput] HRESULT CheckBoxDisabledBorderBrush([in] Windows.UI.Xaml.Media.Brush* value);
+                        [propget] HRESULT CheckBoxCornerRadius([out] [retval] Windows.UI.Xaml.CornerRadius* value);
+                        [propput] HRESULT CheckBoxCornerRadius([in] Windows.UI.Xaml.CornerRadius value);
+                        [propget] HRESULT SelectionIndicatorCornerRadius([out] [retval] Windows.UI.Xaml.CornerRadius* value);
+                        [propput] HRESULT SelectionIndicatorCornerRadius([in] Windows.UI.Xaml.CornerRadius value);
+                        [propget] HRESULT SelectionIndicatorVisualEnabled([out] [retval] boolean* value);
+                        [propput] HRESULT SelectionIndicatorVisualEnabled([in] boolean value);
+                        [propget] HRESULT SelectionIndicatorMode([out] [retval] Windows.UI.Xaml.Controls.Primitives.ListViewItemPresenterSelectionIndicatorMode* value);
+                        [propput] HRESULT SelectionIndicatorMode([in] Windows.UI.Xaml.Controls.Primitives.ListViewItemPresenterSelectionIndicatorMode value);
+                        [propget] HRESULT SelectionIndicatorBrush([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                        [propput] HRESULT SelectionIndicatorBrush([in] Windows.UI.Xaml.Media.Brush* value);
+                        [propget] HRESULT SelectionIndicatorPointerOverBrush([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                        [propput] HRESULT SelectionIndicatorPointerOverBrush([in] Windows.UI.Xaml.Media.Brush* value);
+                        [propget] HRESULT SelectionIndicatorPressedBrush([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                        [propput] HRESULT SelectionIndicatorPressedBrush([in] Windows.UI.Xaml.Media.Brush* value);
+                        [propget] HRESULT SelectionIndicatorDisabledBrush([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                        [propput] HRESULT SelectionIndicatorDisabledBrush([in] Windows.UI.Xaml.Media.Brush* value);
+                        [propget] HRESULT SelectedBorderBrush([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                        [propput] HRESULT SelectedBorderBrush([in] Windows.UI.Xaml.Media.Brush* value);
+                        [propget] HRESULT SelectedPressedBorderBrush([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                        [propput] HRESULT SelectedPressedBorderBrush([in] Windows.UI.Xaml.Media.Brush* value);
+                        [propget] HRESULT SelectedDisabledBorderBrush([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                        [propput] HRESULT SelectedDisabledBorderBrush([in] Windows.UI.Xaml.Media.Brush* value);
+                        [propget] HRESULT SelectedInnerBorderBrush([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                        [propput] HRESULT SelectedInnerBorderBrush([in] Windows.UI.Xaml.Media.Brush* value);
+                        [propget] HRESULT PointerOverBorderBrush([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                        [propput] HRESULT PointerOverBorderBrush([in] Windows.UI.Xaml.Media.Brush* value);
+                    }
+
                     [contract(Windows.Foundation.UniversalApiContract, 1.0)]
                     [exclusiveto(Windows.UI.Xaml.Controls.Primitives.ListViewItemPresenter)]
                     [uuid(E0777CFD-F7E4-4A67-9AC0-A994FCACD020)]
@@ -1719,6 +1827,40 @@ namespace Windows
                         [propget] HRESULT RevealBorderBrushProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
                         [propget] HRESULT RevealBorderThicknessProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
                         [propget] HRESULT RevealBackgroundShowsAboveContentProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                    }
+
+                    [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+                    [exclusiveto(Windows.UI.Xaml.Controls.Primitives.ListViewItemPresenter)]
+                    [uuid(3917159E-74A1-5E7E-A743-E45BE9FB919B)]
+                    interface IListViewItemPresenterStatics4 : IInspectable
+                    {
+                        [propget] HRESULT SelectedDisabledBackgroundProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                        [propget] HRESULT CheckPressedBrushProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                        [propget] HRESULT CheckDisabledBrushProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                        [propget] HRESULT CheckBoxPointerOverBrushProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                        [propget] HRESULT CheckBoxPressedBrushProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                        [propget] HRESULT CheckBoxDisabledBrushProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                        [propget] HRESULT CheckBoxSelectedBrushProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                        [propget] HRESULT CheckBoxSelectedPointerOverBrushProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                        [propget] HRESULT CheckBoxSelectedPressedBrushProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                        [propget] HRESULT CheckBoxSelectedDisabledBrushProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                        [propget] HRESULT CheckBoxBorderBrushProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                        [propget] HRESULT CheckBoxPointerOverBorderBrushProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                        [propget] HRESULT CheckBoxPressedBorderBrushProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                        [propget] HRESULT CheckBoxDisabledBorderBrushProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                        [propget] HRESULT CheckBoxCornerRadiusProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                        [propget] HRESULT SelectionIndicatorCornerRadiusProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                        [propget] HRESULT SelectionIndicatorVisualEnabledProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                        [propget] HRESULT SelectionIndicatorModeProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                        [propget] HRESULT SelectionIndicatorBrushProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                        [propget] HRESULT SelectionIndicatorPointerOverBrushProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                        [propget] HRESULT SelectionIndicatorPressedBrushProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                        [propget] HRESULT SelectionIndicatorDisabledBrushProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                        [propget] HRESULT SelectedBorderBrushProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                        [propget] HRESULT SelectedPressedBorderBrushProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                        [propget] HRESULT SelectedDisabledBorderBrushProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                        [propget] HRESULT SelectedInnerBorderBrushProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                        [propget] HRESULT PointerOverBorderBrushProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
                     }
 
                     [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -1967,6 +2109,20 @@ namespace Windows
                         [propget] HRESULT IsConstrainedToRootBounds([out] [retval] boolean* value);
                     }
 
+                    [contract(Windows.Foundation.UniversalApiContract, 14.0)]
+                    [exclusiveto(Windows.UI.Xaml.Controls.Primitives.Popup)]
+                    [uuid(1870B836-DF2F-5FC6-A5F2-748ED6CE7321)]
+                    interface IPopup4 : IInspectable
+                    {
+                        [propget] HRESULT PlacementTarget([out] [retval] Windows.UI.Xaml.FrameworkElement** value);
+                        [propput] HRESULT PlacementTarget([in] Windows.UI.Xaml.FrameworkElement* value);
+                        [propget] HRESULT DesiredPlacement([out] [retval] Windows.UI.Xaml.Controls.Primitives.PopupPlacementMode* value);
+                        [propput] HRESULT DesiredPlacement([in] Windows.UI.Xaml.Controls.Primitives.PopupPlacementMode value);
+                        [propget] HRESULT ActualPlacement([out] [retval] Windows.UI.Xaml.Controls.Primitives.PopupPlacementMode* value);
+                        [eventadd] HRESULT ActualPlacementChanged([in] Windows.Foundation.EventHandler<IInspectable*>* handler, [out] [retval] EventRegistrationToken* token);
+                        [eventremove] HRESULT ActualPlacementChanged([in] EventRegistrationToken token);
+                    }
+
                     [contract(Windows.Foundation.UniversalApiContract, 1.0)]
                     [exclusiveto(Windows.UI.Xaml.Controls.Primitives.Popup)]
                     [uuid(5AE3BF1A-6E34-40D6-8A7F-CA822AAF59E3)]
@@ -1994,6 +2150,15 @@ namespace Windows
                     interface IPopupStatics3 : IInspectable
                     {
                         [propget] HRESULT ShouldConstrainToRootBoundsProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                    }
+
+                    [contract(Windows.Foundation.UniversalApiContract, 14.0)]
+                    [exclusiveto(Windows.UI.Xaml.Controls.Primitives.Popup)]
+                    [uuid(D1A42C06-8BFA-5164-8554-48BFE6BD4CC6)]
+                    interface IPopupStatics4 : IInspectable
+                    {
+                        [propget] HRESULT PlacementTargetProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                        [propget] HRESULT DesiredPlacementProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
                     }
 
                     [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -2597,12 +2762,14 @@ namespace Windows
                     [static(Windows.UI.Xaml.Controls.Primitives.IListViewItemPresenterStatics, Windows.Foundation.UniversalApiContract, 1.0)]
                     [static(Windows.UI.Xaml.Controls.Primitives.IListViewItemPresenterStatics2, Windows.Foundation.UniversalApiContract, 1.0)]
                     [static(Windows.UI.Xaml.Controls.Primitives.IListViewItemPresenterStatics3, Windows.Foundation.UniversalApiContract, 5.0)]
+                    [static(Windows.UI.Xaml.Controls.Primitives.IListViewItemPresenterStatics4, Windows.Foundation.UniversalApiContract, 13.0)]
                     [threading(both)]
                     runtimeclass ListViewItemPresenter : Windows.UI.Xaml.Controls.ContentPresenter
                     {
                         [default] interface Windows.UI.Xaml.Controls.Primitives.IListViewItemPresenter;
                         [contract(Windows.Foundation.UniversalApiContract, 1.0)] interface Windows.UI.Xaml.Controls.Primitives.IListViewItemPresenter2;
                         [contract(Windows.Foundation.UniversalApiContract, 5.0)] interface Windows.UI.Xaml.Controls.Primitives.IListViewItemPresenter3;
+                        [contract(Windows.Foundation.UniversalApiContract, 13.0)] interface Windows.UI.Xaml.Controls.Primitives.IListViewItemPresenter4;
                     }
 
                     [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -2721,12 +2888,14 @@ namespace Windows
                     [static(Windows.UI.Xaml.Controls.Primitives.IPopupStatics, Windows.Foundation.UniversalApiContract, 1.0)]
                     [static(Windows.UI.Xaml.Controls.Primitives.IPopupStatics2, Windows.Foundation.UniversalApiContract, 3.0)]
                     [static(Windows.UI.Xaml.Controls.Primitives.IPopupStatics3, Windows.Foundation.UniversalApiContract, 8.0)]
+                    [static(Windows.UI.Xaml.Controls.Primitives.IPopupStatics4, Windows.Foundation.UniversalApiContract, 14.0)]
                     [threading(both)]
                     runtimeclass Popup : Windows.UI.Xaml.FrameworkElement
                     {
                         [default] interface Windows.UI.Xaml.Controls.Primitives.IPopup;
                         [contract(Windows.Foundation.UniversalApiContract, 3.0)] interface Windows.UI.Xaml.Controls.Primitives.IPopup2;
                         [contract(Windows.Foundation.UniversalApiContract, 8.0)] interface Windows.UI.Xaml.Controls.Primitives.IPopup3;
+                        [contract(Windows.Foundation.UniversalApiContract, 14.0)] interface Windows.UI.Xaml.Controls.Primitives.IPopup4;
                     }
 
                     [contract(Windows.Foundation.UniversalApiContract, 1.0)]

@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xa0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -110,6 +110,74 @@
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
 /* Forward Declarations */
+#ifndef ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace ViewManagement {
+                namespace Core {
+                    interface ICoreFrameworkInputView;
+                } /* Core */
+            } /* ViewManagement */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView ABI::Windows::UI::ViewManagement::Core::ICoreFrameworkInputView
+
+#endif // ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace ViewManagement {
+                namespace Core {
+                    interface ICoreFrameworkInputViewAnimationStartingEventArgs;
+                } /* Core */
+            } /* ViewManagement */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs ABI::Windows::UI::ViewManagement::Core::ICoreFrameworkInputViewAnimationStartingEventArgs
+
+#endif // ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace ViewManagement {
+                namespace Core {
+                    interface ICoreFrameworkInputViewOcclusionsChangedEventArgs;
+                } /* Core */
+            } /* ViewManagement */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs ABI::Windows::UI::ViewManagement::Core::ICoreFrameworkInputViewOcclusionsChangedEventArgs
+
+#endif // ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace ViewManagement {
+                namespace Core {
+                    interface ICoreFrameworkInputViewStatics;
+                } /* Core */
+            } /* ViewManagement */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics ABI::Windows::UI::ViewManagement::Core::ICoreFrameworkInputViewStatics
+
+#endif // ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView_FWD_DEFINED__
 #define ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView_FWD_DEFINED__
 namespace ABI {
@@ -177,6 +245,40 @@ namespace ABI {
 #define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView4 ABI::Windows::UI::ViewManagement::Core::ICoreInputView4
 
 #endif // ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView4_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace ViewManagement {
+                namespace Core {
+                    interface ICoreInputView5;
+                } /* Core */
+            } /* ViewManagement */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5 ABI::Windows::UI::ViewManagement::Core::ICoreInputView5
+
+#endif // ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace ViewManagement {
+                namespace Core {
+                    interface ICoreInputViewAnimationStartingEventArgs;
+                } /* Core */
+            } /* ViewManagement */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs ABI::Windows::UI::ViewManagement::Core::ICoreInputViewAnimationStartingEventArgs
+
+#endif // ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewHidingEventArgs_FWD_DEFINED__
 #define ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewHidingEventArgs_FWD_DEFINED__
@@ -498,6 +600,100 @@ namespace ABI {
         namespace UI {
             namespace ViewManagement {
                 namespace Core {
+                    class CoreFrameworkInputView;
+                } /* Core */
+            } /* ViewManagement */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace ViewManagement {
+                namespace Core {
+                    class CoreFrameworkInputViewAnimationStartingEventArgs;
+                } /* Core */
+            } /* ViewManagement */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#ifndef DEF___FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewAnimationStartingEventArgs_USE
+#define DEF___FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewAnimationStartingEventArgs_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("cfd46669-0e5a-5c60-a8a2-dc2d899789da"))
+ITypedEventHandler<ABI::Windows::UI::ViewManagement::Core::CoreFrameworkInputView*, ABI::Windows::UI::ViewManagement::Core::CoreFrameworkInputViewAnimationStartingEventArgs*> : ITypedEventHandler_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::UI::ViewManagement::Core::CoreFrameworkInputView*, ABI::Windows::UI::ViewManagement::Core::ICoreFrameworkInputView*>, ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::UI::ViewManagement::Core::CoreFrameworkInputViewAnimationStartingEventArgs*, ABI::Windows::UI::ViewManagement::Core::ICoreFrameworkInputViewAnimationStartingEventArgs*>>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.TypedEventHandler`2<Windows.UI.ViewManagement.Core.CoreFrameworkInputView, Windows.UI.ViewManagement.Core.CoreFrameworkInputViewAnimationStartingEventArgs>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef ITypedEventHandler<ABI::Windows::UI::ViewManagement::Core::CoreFrameworkInputView*, ABI::Windows::UI::ViewManagement::Core::CoreFrameworkInputViewAnimationStartingEventArgs*> __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewAnimationStartingEventArgs_t;
+#define __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewAnimationStartingEventArgs ABI::Windows::Foundation::__FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewAnimationStartingEventArgs_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewAnimationStartingEventArgs_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace ViewManagement {
+                namespace Core {
+                    class CoreFrameworkInputViewOcclusionsChangedEventArgs;
+                } /* Core */
+            } /* ViewManagement */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#ifndef DEF___FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewOcclusionsChangedEventArgs_USE
+#define DEF___FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewOcclusionsChangedEventArgs_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("d081e63b-b7c7-5859-8a08-bb19bf0c90b2"))
+ITypedEventHandler<ABI::Windows::UI::ViewManagement::Core::CoreFrameworkInputView*, ABI::Windows::UI::ViewManagement::Core::CoreFrameworkInputViewOcclusionsChangedEventArgs*> : ITypedEventHandler_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::UI::ViewManagement::Core::CoreFrameworkInputView*, ABI::Windows::UI::ViewManagement::Core::ICoreFrameworkInputView*>, ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::UI::ViewManagement::Core::CoreFrameworkInputViewOcclusionsChangedEventArgs*, ABI::Windows::UI::ViewManagement::Core::ICoreFrameworkInputViewOcclusionsChangedEventArgs*>>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.TypedEventHandler`2<Windows.UI.ViewManagement.Core.CoreFrameworkInputView, Windows.UI.ViewManagement.Core.CoreFrameworkInputViewOcclusionsChangedEventArgs>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef ITypedEventHandler<ABI::Windows::UI::ViewManagement::Core::CoreFrameworkInputView*, ABI::Windows::UI::ViewManagement::Core::CoreFrameworkInputViewOcclusionsChangedEventArgs*> __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewOcclusionsChangedEventArgs_t;
+#define __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewOcclusionsChangedEventArgs ABI::Windows::Foundation::__FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewOcclusionsChangedEventArgs_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewOcclusionsChangedEventArgs_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace ViewManagement {
+                namespace Core {
                     class CoreInputView;
                 } /* Core */
             } /* ViewManagement */
@@ -530,6 +726,47 @@ typedef ITypedEventHandler<ABI::Windows::UI::ViewManagement::Core::CoreInputView
 #endif // !defined(RO_NO_TEMPLATE_NAME)
 #endif /* DEF___FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_IInspectable_USE */
 
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x50000
+
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace ViewManagement {
+                namespace Core {
+                    class CoreInputViewAnimationStartingEventArgs;
+                } /* Core */
+            } /* ViewManagement */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x50000
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#ifndef DEF___FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_Windows__CUI__CViewManagement__CCore__CCoreInputViewAnimationStartingEventArgs_USE
+#define DEF___FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_Windows__CUI__CViewManagement__CCore__CCoreInputViewAnimationStartingEventArgs_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("070cc1cf-2c3a-5e23-a0aa-0dabe6d4d27e"))
+ITypedEventHandler<ABI::Windows::UI::ViewManagement::Core::CoreInputView*, ABI::Windows::UI::ViewManagement::Core::CoreInputViewAnimationStartingEventArgs*> : ITypedEventHandler_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::UI::ViewManagement::Core::CoreInputView*, ABI::Windows::UI::ViewManagement::Core::ICoreInputView*>, ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::UI::ViewManagement::Core::CoreInputViewAnimationStartingEventArgs*, ABI::Windows::UI::ViewManagement::Core::ICoreInputViewAnimationStartingEventArgs*>>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.TypedEventHandler`2<Windows.UI.ViewManagement.Core.CoreInputView, Windows.UI.ViewManagement.Core.CoreInputViewAnimationStartingEventArgs>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef ITypedEventHandler<ABI::Windows::UI::ViewManagement::Core::CoreInputView*, ABI::Windows::UI::ViewManagement::Core::CoreInputViewAnimationStartingEventArgs*> __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_Windows__CUI__CViewManagement__CCore__CCoreInputViewAnimationStartingEventArgs_t;
+#define __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_Windows__CUI__CViewManagement__CCore__CCoreInputViewAnimationStartingEventArgs ABI::Windows::Foundation::__FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_Windows__CUI__CViewManagement__CCore__CCoreInputViewAnimationStartingEventArgs_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_Windows__CUI__CViewManagement__CCore__CCoreInputViewAnimationStartingEventArgs_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x50000
 
 namespace ABI {
@@ -706,6 +943,14 @@ namespace ABI {
 
 namespace ABI {
     namespace Windows {
+        namespace Foundation {
+            typedef struct TimeSpan TimeSpan;
+        } /* Foundation */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
         namespace UI {
             class UIContext;
         } /* UI */
@@ -783,6 +1028,12 @@ namespace ABI {
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
                         CoreInputViewKind_Symbols = 4,
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+                        CoreInputViewKind_Clipboard = 5,
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+                        CoreInputViewKind_Dictation = 6,
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
                     };
                 } /* Core */
             } /* ViewManagement */
@@ -843,6 +1094,182 @@ namespace ABI {
     } /* Windows */
 } /* ABI */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x60000
+
+/*
+ *
+ * Interface Windows.UI.ViewManagement.Core.ICoreFrameworkInputView
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.ViewManagement.Core.CoreFrameworkInputView
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_ViewManagement_Core_ICoreFrameworkInputView[] = L"Windows.UI.ViewManagement.Core.ICoreFrameworkInputView";
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace ViewManagement {
+                namespace Core {
+                    MIDL_INTERFACE("d77c94ae-46b8-5d4a-9489-8ddec3d639a6")
+                    ICoreFrameworkInputView : public IInspectable
+                    {
+                    public:
+                        virtual HRESULT STDMETHODCALLTYPE add_PrimaryViewAnimationStarting(
+                            __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewAnimationStartingEventArgs* handler,
+                            EventRegistrationToken* token
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE remove_PrimaryViewAnimationStarting(
+                            EventRegistrationToken token
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE add_OcclusionsChanged(
+                            __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewOcclusionsChangedEventArgs* handler,
+                            EventRegistrationToken* token
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE remove_OcclusionsChanged(
+                            EventRegistrationToken token
+                            ) = 0;
+                    };
+
+                    extern MIDL_CONST_ID IID& IID_ICoreFrameworkInputView = _uuidof(ICoreFrameworkInputView);
+                } /* Core */
+            } /* ViewManagement */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView;
+#endif /* !defined(____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.UI.ViewManagement.Core.ICoreFrameworkInputViewAnimationStartingEventArgs
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.ViewManagement.Core.CoreFrameworkInputViewAnimationStartingEventArgs
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_ViewManagement_Core_ICoreFrameworkInputViewAnimationStartingEventArgs[] = L"Windows.UI.ViewManagement.Core.ICoreFrameworkInputViewAnimationStartingEventArgs";
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace ViewManagement {
+                namespace Core {
+                    MIDL_INTERFACE("c0ec901c-bba4-501b-ae8b-65c9e756a719")
+                    ICoreFrameworkInputViewAnimationStartingEventArgs : public IInspectable
+                    {
+                    public:
+                        virtual HRESULT STDMETHODCALLTYPE get_Occlusions(
+                            __FIVectorView_1_Windows__CUI__CViewManagement__CCore__CCoreInputViewOcclusion** value
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE get_FrameworkAnimationRecommended(
+                            boolean* value
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE get_AnimationDuration(
+                            ABI::Windows::Foundation::TimeSpan* value
+                            ) = 0;
+                    };
+
+                    extern MIDL_CONST_ID IID& IID_ICoreFrameworkInputViewAnimationStartingEventArgs = _uuidof(ICoreFrameworkInputViewAnimationStartingEventArgs);
+                } /* Core */
+            } /* ViewManagement */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs;
+#endif /* !defined(____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.UI.ViewManagement.Core.ICoreFrameworkInputViewOcclusionsChangedEventArgs
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.ViewManagement.Core.CoreFrameworkInputViewOcclusionsChangedEventArgs
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_ViewManagement_Core_ICoreFrameworkInputViewOcclusionsChangedEventArgs[] = L"Windows.UI.ViewManagement.Core.ICoreFrameworkInputViewOcclusionsChangedEventArgs";
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace ViewManagement {
+                namespace Core {
+                    MIDL_INTERFACE("f36f4949-c82c-53d1-a75d-2b2baf0d9b0d")
+                    ICoreFrameworkInputViewOcclusionsChangedEventArgs : public IInspectable
+                    {
+                    public:
+                        virtual HRESULT STDMETHODCALLTYPE get_Occlusions(
+                            __FIVectorView_1_Windows__CUI__CViewManagement__CCore__CCoreInputViewOcclusion** value
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE get_Handled(
+                            boolean* value
+                            ) = 0;
+                    };
+
+                    extern MIDL_CONST_ID IID& IID_ICoreFrameworkInputViewOcclusionsChangedEventArgs = _uuidof(ICoreFrameworkInputViewOcclusionsChangedEventArgs);
+                } /* Core */
+            } /* ViewManagement */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs;
+#endif /* !defined(____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.UI.ViewManagement.Core.ICoreFrameworkInputViewStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.ViewManagement.Core.CoreFrameworkInputView
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_ViewManagement_Core_ICoreFrameworkInputViewStatics[] = L"Windows.UI.ViewManagement.Core.ICoreFrameworkInputViewStatics";
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace ViewManagement {
+                namespace Core {
+                    MIDL_INTERFACE("6eebd9b6-eac2-5f8b-975f-772ee3e42eeb")
+                    ICoreFrameworkInputViewStatics : public IInspectable
+                    {
+                    public:
+                        virtual HRESULT STDMETHODCALLTYPE GetForUIContext(
+                            ABI::Windows::UI::IUIContext* context,
+                            ABI::Windows::UI::ViewManagement::Core::ICoreFrameworkInputView** result
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE GetForCurrentView(
+                            ABI::Windows::UI::ViewManagement::Core::ICoreFrameworkInputView** result
+                            ) = 0;
+                    };
+
+                    extern MIDL_CONST_ID IID& IID_ICoreFrameworkInputViewStatics = _uuidof(ICoreFrameworkInputViewStatics);
+                } /* Core */
+            } /* ViewManagement */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics;
+#endif /* !defined(____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *
@@ -1042,6 +1469,106 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView4;
 #endif /* !defined(____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView4_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
+
+/*
+ *
+ * Interface Windows.UI.ViewManagement.Core.ICoreInputView5
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.ViewManagement.Core.CoreInputView
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_ViewManagement_Core_ICoreInputView5[] = L"Windows.UI.ViewManagement.Core.ICoreInputView5";
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace ViewManagement {
+                namespace Core {
+                    MIDL_INTERFACE("136316e0-c6d5-5c57-811e-1ad8a99ba6ab")
+                    ICoreInputView5 : public IInspectable
+                    {
+                    public:
+                        virtual HRESULT STDMETHODCALLTYPE IsKindSupported(
+                            ABI::Windows::UI::ViewManagement::Core::CoreInputViewKind type,
+                            boolean* result
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE add_SupportedKindsChanged(
+                            __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_IInspectable* handler,
+                            EventRegistrationToken* token
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE remove_SupportedKindsChanged(
+                            EventRegistrationToken token
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE add_PrimaryViewAnimationStarting(
+                            __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_Windows__CUI__CViewManagement__CCore__CCoreInputViewAnimationStartingEventArgs* handler,
+                            EventRegistrationToken* token
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE remove_PrimaryViewAnimationStarting(
+                            EventRegistrationToken token
+                            ) = 0;
+                    };
+
+                    extern MIDL_CONST_ID IID& IID_ICoreInputView5 = _uuidof(ICoreInputView5);
+                } /* Core */
+            } /* ViewManagement */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5;
+#endif /* !defined(____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.UI.ViewManagement.Core.ICoreInputViewAnimationStartingEventArgs
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.ViewManagement.Core.CoreInputViewAnimationStartingEventArgs
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_ViewManagement_Core_ICoreInputViewAnimationStartingEventArgs[] = L"Windows.UI.ViewManagement.Core.ICoreInputViewAnimationStartingEventArgs";
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace ViewManagement {
+                namespace Core {
+                    MIDL_INTERFACE("a9144af2-b55c-5ea1-b8ab-5340f3e94897")
+                    ICoreInputViewAnimationStartingEventArgs : public IInspectable
+                    {
+                    public:
+                        virtual HRESULT STDMETHODCALLTYPE get_Occlusions(
+                            __FIVectorView_1_Windows__CUI__CViewManagement__CCore__CCoreInputViewOcclusion** value
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE get_Handled(
+                            boolean* value
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE put_Handled(
+                            boolean value
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE get_AnimationDuration(
+                            ABI::Windows::Foundation::TimeSpan* value
+                            ) = 0;
+                    };
+
+                    extern MIDL_CONST_ID IID& IID_ICoreInputViewAnimationStartingEventArgs = _uuidof(ICoreInputViewAnimationStartingEventArgs);
+                } /* Core */
+            } /* ViewManagement */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs;
+#endif /* !defined(____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *
@@ -1424,19 +1951,82 @@ EXTERN_C const IID IID___x_ABI_CWindows_CUI_CViewManagement_CCore_CIUISettingsCo
 
 /*
  *
+ * Class Windows.UI.ViewManagement.Core.CoreFrameworkInputView
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.UI.ViewManagement.Core.ICoreFrameworkInputViewStatics interface starting with version 13.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.UI.ViewManagement.Core.ICoreFrameworkInputView ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#ifndef RUNTIMECLASS_Windows_UI_ViewManagement_Core_CoreFrameworkInputView_DEFINED
+#define RUNTIMECLASS_Windows_UI_ViewManagement_Core_CoreFrameworkInputView_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_UI_ViewManagement_Core_CoreFrameworkInputView[] = L"Windows.UI.ViewManagement.Core.CoreFrameworkInputView";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Class Windows.UI.ViewManagement.Core.CoreFrameworkInputViewAnimationStartingEventArgs
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.UI.ViewManagement.Core.ICoreFrameworkInputViewAnimationStartingEventArgs ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#ifndef RUNTIMECLASS_Windows_UI_ViewManagement_Core_CoreFrameworkInputViewAnimationStartingEventArgs_DEFINED
+#define RUNTIMECLASS_Windows_UI_ViewManagement_Core_CoreFrameworkInputViewAnimationStartingEventArgs_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_UI_ViewManagement_Core_CoreFrameworkInputViewAnimationStartingEventArgs[] = L"Windows.UI.ViewManagement.Core.CoreFrameworkInputViewAnimationStartingEventArgs";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Class Windows.UI.ViewManagement.Core.CoreFrameworkInputViewOcclusionsChangedEventArgs
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.UI.ViewManagement.Core.ICoreFrameworkInputViewOcclusionsChangedEventArgs ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#ifndef RUNTIMECLASS_Windows_UI_ViewManagement_Core_CoreFrameworkInputViewOcclusionsChangedEventArgs_DEFINED
+#define RUNTIMECLASS_Windows_UI_ViewManagement_Core_CoreFrameworkInputViewOcclusionsChangedEventArgs_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_UI_ViewManagement_Core_CoreFrameworkInputViewOcclusionsChangedEventArgs[] = L"Windows.UI.ViewManagement.Core.CoreFrameworkInputViewOcclusionsChangedEventArgs";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
  * Class Windows.UI.ViewManagement.Core.CoreInputView
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 5.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.ViewManagement.Core.ICoreInputViewStatics interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.ViewManagement.Core.ICoreInputViewStatics2 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.ViewManagement.Core.ICoreInputViewStatics interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.ViewManagement.Core.ICoreInputView ** Default Interface **
  *    Windows.UI.ViewManagement.Core.ICoreInputView2
  *    Windows.UI.ViewManagement.Core.ICoreInputView3
  *    Windows.UI.ViewManagement.Core.ICoreInputView4
+ *    Windows.UI.ViewManagement.Core.ICoreInputView5
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -1449,6 +2039,25 @@ EXTERN_C const IID IID___x_ABI_CWindows_CUI_CViewManagement_CCore_CIUISettingsCo
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_UI_ViewManagement_Core_CoreInputView[] = L"Windows.UI.ViewManagement.Core.CoreInputView";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x50000
+
+/*
+ *
+ * Class Windows.UI.ViewManagement.Core.CoreInputViewAnimationStartingEventArgs
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.UI.ViewManagement.Core.ICoreInputViewAnimationStartingEventArgs ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#ifndef RUNTIMECLASS_Windows_UI_ViewManagement_Core_CoreInputViewAnimationStartingEventArgs_DEFINED
+#define RUNTIMECLASS_Windows_UI_ViewManagement_Core_CoreInputViewAnimationStartingEventArgs_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_UI_ViewManagement_Core_CoreInputViewAnimationStartingEventArgs[] = L"Windows.UI.ViewManagement.Core.CoreInputViewAnimationStartingEventArgs";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *
@@ -1571,6 +2180,30 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 
 #else // !defined(__cplusplus)
 /* Forward Declarations */
+#ifndef ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView;
+
+#endif // ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs;
+
+#endif // ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs;
+
+#endif // ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics;
+
+#endif // ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView_FWD_DEFINED__
 #define ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView;
@@ -1594,6 +2227,18 @@ typedef interface __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView3 __
 typedef interface __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView4 __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView4;
 
 #endif // ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView4_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5 __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5;
+
+#endif // ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs;
+
+#endif // ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewHidingEventArgs_FWD_DEFINED__
 #define ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewHidingEventArgs_FWD_DEFINED__
@@ -2008,6 +2653,108 @@ interface __FIVectorView_1_Windows__CUI__CViewManagement__CCore__CCoreInputViewO
 #endif // ____FIVectorView_1_Windows__CUI__CViewManagement__CCore__CCoreInputViewOcclusion_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x50000
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewAnimationStartingEventArgs_INTERFACE_DEFINED__)
+#define ____FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewAnimationStartingEventArgs_INTERFACE_DEFINED__
+
+typedef interface __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewAnimationStartingEventArgs __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewAnimationStartingEventArgs;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewAnimationStartingEventArgs;
+
+typedef struct __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewAnimationStartingEventArgsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewAnimationStartingEventArgs* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewAnimationStartingEventArgs* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewAnimationStartingEventArgs* This);
+    HRESULT (STDMETHODCALLTYPE* Invoke)(__FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewAnimationStartingEventArgs* This,
+        __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView* sender,
+        __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs* args);
+
+    END_INTERFACE
+} __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewAnimationStartingEventArgsVtbl;
+
+interface __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewAnimationStartingEventArgs
+{
+    CONST_VTBL struct __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewAnimationStartingEventArgsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewAnimationStartingEventArgs_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewAnimationStartingEventArgs_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewAnimationStartingEventArgs_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewAnimationStartingEventArgs_Invoke(This, sender, args) \
+    ((This)->lpVtbl->Invoke(This, sender, args))
+
+#endif /* COBJMACROS */
+
+#endif // ____FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewAnimationStartingEventArgs_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewOcclusionsChangedEventArgs_INTERFACE_DEFINED__)
+#define ____FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewOcclusionsChangedEventArgs_INTERFACE_DEFINED__
+
+typedef interface __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewOcclusionsChangedEventArgs __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewOcclusionsChangedEventArgs;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewOcclusionsChangedEventArgs;
+
+typedef struct __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewOcclusionsChangedEventArgsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewOcclusionsChangedEventArgs* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewOcclusionsChangedEventArgs* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewOcclusionsChangedEventArgs* This);
+    HRESULT (STDMETHODCALLTYPE* Invoke)(__FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewOcclusionsChangedEventArgs* This,
+        __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView* sender,
+        __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs* args);
+
+    END_INTERFACE
+} __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewOcclusionsChangedEventArgsVtbl;
+
+interface __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewOcclusionsChangedEventArgs
+{
+    CONST_VTBL struct __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewOcclusionsChangedEventArgsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewOcclusionsChangedEventArgs_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewOcclusionsChangedEventArgs_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewOcclusionsChangedEventArgs_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewOcclusionsChangedEventArgs_Invoke(This, sender, args) \
+    ((This)->lpVtbl->Invoke(This, sender, args))
+
+#endif /* COBJMACROS */
+
+#endif // ____FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewOcclusionsChangedEventArgs_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x50000
 #if !defined(____FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_IInspectable_INTERFACE_DEFINED__)
 #define ____FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_IInspectable_INTERFACE_DEFINED__
@@ -2055,6 +2802,57 @@ interface __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInp
 #endif /* COBJMACROS */
 
 #endif // ____FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_IInspectable_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x50000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x50000
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_Windows__CUI__CViewManagement__CCore__CCoreInputViewAnimationStartingEventArgs_INTERFACE_DEFINED__)
+#define ____FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_Windows__CUI__CViewManagement__CCore__CCoreInputViewAnimationStartingEventArgs_INTERFACE_DEFINED__
+
+typedef interface __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_Windows__CUI__CViewManagement__CCore__CCoreInputViewAnimationStartingEventArgs __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_Windows__CUI__CViewManagement__CCore__CCoreInputViewAnimationStartingEventArgs;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_Windows__CUI__CViewManagement__CCore__CCoreInputViewAnimationStartingEventArgs;
+
+typedef struct __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_Windows__CUI__CViewManagement__CCore__CCoreInputViewAnimationStartingEventArgsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_Windows__CUI__CViewManagement__CCore__CCoreInputViewAnimationStartingEventArgs* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_Windows__CUI__CViewManagement__CCore__CCoreInputViewAnimationStartingEventArgs* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_Windows__CUI__CViewManagement__CCore__CCoreInputViewAnimationStartingEventArgs* This);
+    HRESULT (STDMETHODCALLTYPE* Invoke)(__FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_Windows__CUI__CViewManagement__CCore__CCoreInputViewAnimationStartingEventArgs* This,
+        __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView* sender,
+        __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs* args);
+
+    END_INTERFACE
+} __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_Windows__CUI__CViewManagement__CCore__CCoreInputViewAnimationStartingEventArgsVtbl;
+
+interface __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_Windows__CUI__CViewManagement__CCore__CCoreInputViewAnimationStartingEventArgs
+{
+    CONST_VTBL struct __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_Windows__CUI__CViewManagement__CCore__CCoreInputViewAnimationStartingEventArgsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_Windows__CUI__CViewManagement__CCore__CCoreInputViewAnimationStartingEventArgs_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_Windows__CUI__CViewManagement__CCore__CCoreInputViewAnimationStartingEventArgs_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_Windows__CUI__CViewManagement__CCore__CCoreInputViewAnimationStartingEventArgs_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_Windows__CUI__CViewManagement__CCore__CCoreInputViewAnimationStartingEventArgs_Invoke(This, sender, args) \
+    ((This)->lpVtbl->Invoke(This, sender, args))
+
+#endif /* COBJMACROS */
+
+#endif // ____FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_Windows__CUI__CViewManagement__CCore__CCoreInputViewAnimationStartingEventArgs_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x50000
 
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x50000
@@ -2263,6 +3061,8 @@ interface __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInp
 
 typedef struct __x_ABI_CWindows_CFoundation_CRect __x_ABI_CWindows_CFoundation_CRect;
 
+typedef struct __x_ABI_CWindows_CFoundation_CTimeSpan __x_ABI_CWindows_CFoundation_CTimeSpan;
+
 #ifndef ____x_ABI_CWindows_CUI_CIUIContext_FWD_DEFINED__
 #define ____x_ABI_CWindows_CUI_CIUIContext_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CUI_CIUIContext __x_ABI_CWindows_CUI_CIUIContext;
@@ -2292,6 +3092,12 @@ enum __x_ABI_CWindows_CUI_CViewManagement_CCore_CCoreInputViewKind
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
     CoreInputViewKind_Symbols = 4,
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+    CoreInputViewKind_Clipboard = 5,
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+    CoreInputViewKind_Dictation = 6,
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 };
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
 
@@ -2327,6 +3133,320 @@ enum __x_ABI_CWindows_CUI_CViewManagement_CCore_CCoreInputViewXYFocusTransferDir
     CoreInputViewXYFocusTransferDirection_Left = 3,
 };
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x60000
+
+/*
+ *
+ * Interface Windows.UI.ViewManagement.Core.ICoreFrameworkInputView
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.ViewManagement.Core.CoreFrameworkInputView
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_ViewManagement_Core_ICoreFrameworkInputView[] = L"Windows.UI.ViewManagement.Core.ICoreFrameworkInputView";
+typedef struct __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* add_PrimaryViewAnimationStarting)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView* This,
+        __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewAnimationStartingEventArgs* handler,
+        EventRegistrationToken* token);
+    HRESULT (STDMETHODCALLTYPE* remove_PrimaryViewAnimationStarting)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView* This,
+        EventRegistrationToken token);
+    HRESULT (STDMETHODCALLTYPE* add_OcclusionsChanged)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView* This,
+        __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputView_Windows__CUI__CViewManagement__CCore__CCoreFrameworkInputViewOcclusionsChangedEventArgs* handler,
+        EventRegistrationToken* token);
+    HRESULT (STDMETHODCALLTYPE* remove_OcclusionsChanged)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView* This,
+        EventRegistrationToken token);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewVtbl;
+
+interface __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView
+{
+    CONST_VTBL struct __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView_add_PrimaryViewAnimationStarting(This, handler, token) \
+    ((This)->lpVtbl->add_PrimaryViewAnimationStarting(This, handler, token))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView_remove_PrimaryViewAnimationStarting(This, token) \
+    ((This)->lpVtbl->remove_PrimaryViewAnimationStarting(This, token))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView_add_OcclusionsChanged(This, handler, token) \
+    ((This)->lpVtbl->add_OcclusionsChanged(This, handler, token))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView_remove_OcclusionsChanged(This, token) \
+    ((This)->lpVtbl->remove_OcclusionsChanged(This, token))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView;
+#endif /* !defined(____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.UI.ViewManagement.Core.ICoreFrameworkInputViewAnimationStartingEventArgs
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.ViewManagement.Core.CoreFrameworkInputViewAnimationStartingEventArgs
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_ViewManagement_Core_ICoreFrameworkInputViewAnimationStartingEventArgs[] = L"Windows.UI.ViewManagement.Core.ICoreFrameworkInputViewAnimationStartingEventArgs";
+typedef struct __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Occlusions)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs* This,
+        __FIVectorView_1_Windows__CUI__CViewManagement__CCore__CCoreInputViewOcclusion** value);
+    HRESULT (STDMETHODCALLTYPE* get_FrameworkAnimationRecommended)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs* This,
+        boolean* value);
+    HRESULT (STDMETHODCALLTYPE* get_AnimationDuration)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs* This,
+        struct __x_ABI_CWindows_CFoundation_CTimeSpan* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgsVtbl;
+
+interface __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs
+{
+    CONST_VTBL struct __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs_get_Occlusions(This, value) \
+    ((This)->lpVtbl->get_Occlusions(This, value))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs_get_FrameworkAnimationRecommended(This, value) \
+    ((This)->lpVtbl->get_FrameworkAnimationRecommended(This, value))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs_get_AnimationDuration(This, value) \
+    ((This)->lpVtbl->get_AnimationDuration(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs;
+#endif /* !defined(____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewAnimationStartingEventArgs_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.UI.ViewManagement.Core.ICoreFrameworkInputViewOcclusionsChangedEventArgs
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.ViewManagement.Core.CoreFrameworkInputViewOcclusionsChangedEventArgs
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_ViewManagement_Core_ICoreFrameworkInputViewOcclusionsChangedEventArgs[] = L"Windows.UI.ViewManagement.Core.ICoreFrameworkInputViewOcclusionsChangedEventArgs";
+typedef struct __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Occlusions)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs* This,
+        __FIVectorView_1_Windows__CUI__CViewManagement__CCore__CCoreInputViewOcclusion** value);
+    HRESULT (STDMETHODCALLTYPE* get_Handled)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs* This,
+        boolean* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgsVtbl;
+
+interface __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs
+{
+    CONST_VTBL struct __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs_get_Occlusions(This, value) \
+    ((This)->lpVtbl->get_Occlusions(This, value))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs_get_Handled(This, value) \
+    ((This)->lpVtbl->get_Handled(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs;
+#endif /* !defined(____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewOcclusionsChangedEventArgs_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.UI.ViewManagement.Core.ICoreFrameworkInputViewStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.ViewManagement.Core.CoreFrameworkInputView
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_ViewManagement_Core_ICoreFrameworkInputViewStatics[] = L"Windows.UI.ViewManagement.Core.ICoreFrameworkInputViewStatics";
+typedef struct __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStaticsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* GetForUIContext)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics* This,
+        __x_ABI_CWindows_CUI_CIUIContext* context,
+        __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView** result);
+    HRESULT (STDMETHODCALLTYPE* GetForCurrentView)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics* This,
+        __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputView** result);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStaticsVtbl;
+
+interface __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics
+{
+    CONST_VTBL struct __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStaticsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics_GetForUIContext(This, context, result) \
+    ((This)->lpVtbl->GetForUIContext(This, context, result))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics_GetForCurrentView(This, result) \
+    ((This)->lpVtbl->GetForCurrentView(This, result))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics;
+#endif /* !defined(____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreFrameworkInputViewStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *
@@ -2676,6 +3796,182 @@ interface __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView4
 EXTERN_C const IID IID___x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView4;
 #endif /* !defined(____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView4_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
+
+/*
+ *
+ * Interface Windows.UI.ViewManagement.Core.ICoreInputView5
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.ViewManagement.Core.CoreInputView
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_ViewManagement_Core_ICoreInputView5[] = L"Windows.UI.ViewManagement.Core.ICoreInputView5";
+typedef struct __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* IsKindSupported)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5* This,
+        enum __x_ABI_CWindows_CUI_CViewManagement_CCore_CCoreInputViewKind type,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* add_SupportedKindsChanged)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5* This,
+        __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_IInspectable* handler,
+        EventRegistrationToken* token);
+    HRESULT (STDMETHODCALLTYPE* remove_SupportedKindsChanged)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5* This,
+        EventRegistrationToken token);
+    HRESULT (STDMETHODCALLTYPE* add_PrimaryViewAnimationStarting)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5* This,
+        __FITypedEventHandler_2_Windows__CUI__CViewManagement__CCore__CCoreInputView_Windows__CUI__CViewManagement__CCore__CCoreInputViewAnimationStartingEventArgs* handler,
+        EventRegistrationToken* token);
+    HRESULT (STDMETHODCALLTYPE* remove_PrimaryViewAnimationStarting)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5* This,
+        EventRegistrationToken token);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5Vtbl;
+
+interface __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5
+{
+    CONST_VTBL struct __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5_IsKindSupported(This, type, result) \
+    ((This)->lpVtbl->IsKindSupported(This, type, result))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5_add_SupportedKindsChanged(This, handler, token) \
+    ((This)->lpVtbl->add_SupportedKindsChanged(This, handler, token))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5_remove_SupportedKindsChanged(This, token) \
+    ((This)->lpVtbl->remove_SupportedKindsChanged(This, token))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5_add_PrimaryViewAnimationStarting(This, handler, token) \
+    ((This)->lpVtbl->add_PrimaryViewAnimationStarting(This, handler, token))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5_remove_PrimaryViewAnimationStarting(This, token) \
+    ((This)->lpVtbl->remove_PrimaryViewAnimationStarting(This, token))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5;
+#endif /* !defined(____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputView5_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.UI.ViewManagement.Core.ICoreInputViewAnimationStartingEventArgs
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.ViewManagement.Core.CoreInputViewAnimationStartingEventArgs
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_ViewManagement_Core_ICoreInputViewAnimationStartingEventArgs[] = L"Windows.UI.ViewManagement.Core.ICoreInputViewAnimationStartingEventArgs";
+typedef struct __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Occlusions)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs* This,
+        __FIVectorView_1_Windows__CUI__CViewManagement__CCore__CCoreInputViewOcclusion** value);
+    HRESULT (STDMETHODCALLTYPE* get_Handled)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs* This,
+        boolean* value);
+    HRESULT (STDMETHODCALLTYPE* put_Handled)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs* This,
+        boolean value);
+    HRESULT (STDMETHODCALLTYPE* get_AnimationDuration)(__x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs* This,
+        struct __x_ABI_CWindows_CFoundation_CTimeSpan* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgsVtbl;
+
+interface __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs
+{
+    CONST_VTBL struct __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs_get_Occlusions(This, value) \
+    ((This)->lpVtbl->get_Occlusions(This, value))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs_get_Handled(This, value) \
+    ((This)->lpVtbl->get_Handled(This, value))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs_put_Handled(This, value) \
+    ((This)->lpVtbl->put_Handled(This, value))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs_get_AnimationDuration(This, value) \
+    ((This)->lpVtbl->get_AnimationDuration(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs;
+#endif /* !defined(____x_ABI_CWindows_CUI_CViewManagement_CCore_CICoreInputViewAnimationStartingEventArgs_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *
@@ -3361,19 +4657,82 @@ EXTERN_C const IID IID___x_ABI_CWindows_CUI_CViewManagement_CCore_CIUISettingsCo
 
 /*
  *
+ * Class Windows.UI.ViewManagement.Core.CoreFrameworkInputView
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.UI.ViewManagement.Core.ICoreFrameworkInputViewStatics interface starting with version 13.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.UI.ViewManagement.Core.ICoreFrameworkInputView ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#ifndef RUNTIMECLASS_Windows_UI_ViewManagement_Core_CoreFrameworkInputView_DEFINED
+#define RUNTIMECLASS_Windows_UI_ViewManagement_Core_CoreFrameworkInputView_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_UI_ViewManagement_Core_CoreFrameworkInputView[] = L"Windows.UI.ViewManagement.Core.CoreFrameworkInputView";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Class Windows.UI.ViewManagement.Core.CoreFrameworkInputViewAnimationStartingEventArgs
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.UI.ViewManagement.Core.ICoreFrameworkInputViewAnimationStartingEventArgs ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#ifndef RUNTIMECLASS_Windows_UI_ViewManagement_Core_CoreFrameworkInputViewAnimationStartingEventArgs_DEFINED
+#define RUNTIMECLASS_Windows_UI_ViewManagement_Core_CoreFrameworkInputViewAnimationStartingEventArgs_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_UI_ViewManagement_Core_CoreFrameworkInputViewAnimationStartingEventArgs[] = L"Windows.UI.ViewManagement.Core.CoreFrameworkInputViewAnimationStartingEventArgs";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Class Windows.UI.ViewManagement.Core.CoreFrameworkInputViewOcclusionsChangedEventArgs
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.UI.ViewManagement.Core.ICoreFrameworkInputViewOcclusionsChangedEventArgs ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#ifndef RUNTIMECLASS_Windows_UI_ViewManagement_Core_CoreFrameworkInputViewOcclusionsChangedEventArgs_DEFINED
+#define RUNTIMECLASS_Windows_UI_ViewManagement_Core_CoreFrameworkInputViewOcclusionsChangedEventArgs_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_UI_ViewManagement_Core_CoreFrameworkInputViewOcclusionsChangedEventArgs[] = L"Windows.UI.ViewManagement.Core.CoreFrameworkInputViewOcclusionsChangedEventArgs";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
  * Class Windows.UI.ViewManagement.Core.CoreInputView
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 5.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.ViewManagement.Core.ICoreInputViewStatics interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.ViewManagement.Core.ICoreInputViewStatics2 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.ViewManagement.Core.ICoreInputViewStatics interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.ViewManagement.Core.ICoreInputView ** Default Interface **
  *    Windows.UI.ViewManagement.Core.ICoreInputView2
  *    Windows.UI.ViewManagement.Core.ICoreInputView3
  *    Windows.UI.ViewManagement.Core.ICoreInputView4
+ *    Windows.UI.ViewManagement.Core.ICoreInputView5
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -3386,6 +4745,25 @@ EXTERN_C const IID IID___x_ABI_CWindows_CUI_CViewManagement_CCore_CIUISettingsCo
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_UI_ViewManagement_Core_CoreInputView[] = L"Windows.UI.ViewManagement.Core.CoreInputView";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x50000
+
+/*
+ *
+ * Class Windows.UI.ViewManagement.Core.CoreInputViewAnimationStartingEventArgs
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.UI.ViewManagement.Core.ICoreInputViewAnimationStartingEventArgs ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#ifndef RUNTIMECLASS_Windows_UI_ViewManagement_Core_CoreInputViewAnimationStartingEventArgs_DEFINED
+#define RUNTIMECLASS_Windows_UI_ViewManagement_Core_CoreInputViewAnimationStartingEventArgs_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_UI_ViewManagement_Core_CoreInputViewAnimationStartingEventArgs[] = L"Windows.UI.ViewManagement.Core.CoreInputViewAnimationStartingEventArgs";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *

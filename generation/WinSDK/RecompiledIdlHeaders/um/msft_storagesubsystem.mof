@@ -167,6 +167,11 @@ class MSFT_StorageSubSystem : MSFT_StorageObject {
         )]
     Boolean VirtualDiskRepairEnabled;
 
+    [Read, Description(
+        "Denotes the virtual disk repair queue depth policy in this subsystem."
+        )]
+    UInt32 VirtualDiskRepairQueueDepth;
+
     [Read, Required, Description(
         "Denotes the minimum number of physical disks required for "
         "creating a storage pool on this subsystem."
@@ -704,6 +709,12 @@ class MSFT_StorageSubSystem : MSFT_StorageObject {
 
         [In, Units("Bytes")]
         UInt64 LogicalSectorSizeDefault,
+
+        [In, Units("Bytes")]
+        UInt64 MetadataLength,
+
+        [In, Units("Bytes")]
+        UInt64 MinimumAllocationSize,
 
         [In]
         UInt16 FaultDomainAwarenessDefault,
@@ -1257,6 +1268,9 @@ class MSFT_StorageSubSystem : MSFT_StorageObject {
 
         [In]
         Boolean VirtualDiskRepairEnabled,
+
+        [In]
+        UInt32 VirtualDiskRepairQueueDepth,
 
         [In]
         UInt16 FaultDomainAwarenessDefault,

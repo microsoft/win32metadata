@@ -414,17 +414,10 @@ typedef struct WINTRUST_CERT_INFO_
 extern LONG WINAPI WinVerifyTrust(HWND hwnd, GUID *pgActionID,
                                   LPVOID pWVTData);
 
-
-//////////////////////////////////////////////////////////////////////////////
-//
-// WinVerifyTrustEx
-//----------------------------------------------------------------------------
-//      *** DO NOT USE ***
-//
-//
-extern HRESULT WINAPI WinVerifyTrustEx(HWND hwnd, GUID *pgActionID,
-                                       WINTRUST_DATA *pWinTrustData);
-
+// This API returns a Win32 error code, previously it was declared to return HRESULT.
+// Do not test the result with SUCCEEDED() or FAILED(), any non-zero value represents
+// verification failure. To avoid this problem use WinVerifyTrust() instead.
+extern long WINAPI WinVerifyTrustEx(HWND hwnd, GUID *pgActionID, WINTRUST_DATA *pWinTrustData);
 
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////

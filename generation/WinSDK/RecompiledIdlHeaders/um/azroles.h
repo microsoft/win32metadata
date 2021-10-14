@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -873,28 +881,34 @@ EXTERN_C const IID IID_IAzAuthorizationStore;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzAuthorizationStore * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzAuthorizationStore * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -903,6 +917,7 @@ EXTERN_C const IID IID_IAzAuthorizationStore;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzAuthorizationStore * This,
             /* [annotation][in] */ 
@@ -922,239 +937,290 @@ EXTERN_C const IID IID_IAzAuthorizationStore;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_Description)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, put_Description)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ __RPC__in BSTR bstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_ApplicationData)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplicationData )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrApplicationData);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, put_ApplicationData)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ApplicationData )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ __RPC__in BSTR bstrApplicationData);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_DomainTimeout)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DomainTimeout )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [retval][out] */ __RPC__out LONG *plProp);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, put_DomainTimeout)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_DomainTimeout )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ LONG lProp);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_ScriptEngineTimeout)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ScriptEngineTimeout )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [retval][out] */ __RPC__out LONG *plProp);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, put_ScriptEngineTimeout)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ScriptEngineTimeout )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ LONG lProp);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_MaxScriptEngines)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MaxScriptEngines )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [retval][out] */ __RPC__out LONG *plProp);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, put_MaxScriptEngines)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MaxScriptEngines )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ LONG lProp);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_GenerateAudits)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_GenerateAudits )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [retval][out] */ __RPC__out BOOL *pbProp);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, put_GenerateAudits)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_GenerateAudits )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ BOOL bProp);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_Writable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Writable )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [retval][out] */ __RPC__out BOOL *pfProp);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ LONG lPropId,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, AddPropertyItem)
         HRESULT ( STDMETHODCALLTYPE *AddPropertyItem )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, DeletePropertyItem)
         HRESULT ( STDMETHODCALLTYPE *DeletePropertyItem )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_PolicyAdministrators)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyAdministrators )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarAdmins);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_PolicyReaders)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyReaders )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarReaders);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, AddPolicyAdministrator)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyAdministrator )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, DeletePolicyAdministrator)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyAdministrator )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, AddPolicyReader)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyReader )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ __RPC__in BSTR bstrReader,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, DeletePolicyReader)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyReader )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ __RPC__in BSTR bstrReader,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ LONG lFlags,
             /* [in] */ __RPC__in BSTR bstrPolicyURL,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, UpdateCache)
         HRESULT ( STDMETHODCALLTYPE *UpdateCache )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, Delete)
         HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_Applications)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Applications )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplications **ppAppCollection);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, OpenApplication)
         HRESULT ( STDMETHODCALLTYPE *OpenApplication )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ __RPC__in BSTR bstrApplicationName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplication **ppApplication);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, CreateApplication)
         HRESULT ( STDMETHODCALLTYPE *CreateApplication )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ __RPC__in BSTR bstrApplicationName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplication **ppApplication);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, DeleteApplication)
         HRESULT ( STDMETHODCALLTYPE *DeleteApplication )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ __RPC__in BSTR bstrApplicationName,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_ApplicationGroups)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplicationGroups )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplicationGroups **ppGroupCollection);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, CreateApplicationGroup)
         HRESULT ( STDMETHODCALLTYPE *CreateApplicationGroup )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ __RPC__in BSTR bstrGroupName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplicationGroup **ppGroup);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, OpenApplicationGroup)
         HRESULT ( STDMETHODCALLTYPE *OpenApplicationGroup )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ __RPC__in BSTR bstrGroupName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplicationGroup **ppGroup);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, DeleteApplicationGroup)
         HRESULT ( STDMETHODCALLTYPE *DeleteApplicationGroup )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ __RPC__in BSTR bstrGroupName,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, Submit)
         HRESULT ( STDMETHODCALLTYPE *Submit )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [defaultvalue][in] */ LONG lFlags,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_DelegatedPolicyUsers)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DelegatedPolicyUsers )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarDelegatedPolicyUsers);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, AddDelegatedPolicyUser)
         HRESULT ( STDMETHODCALLTYPE *AddDelegatedPolicyUser )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ __RPC__in BSTR bstrDelegatedPolicyUser,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, DeleteDelegatedPolicyUser)
         HRESULT ( STDMETHODCALLTYPE *DeleteDelegatedPolicyUser )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ __RPC__in BSTR bstrDelegatedPolicyUser,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_TargetMachine)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_TargetMachine )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTargetMachine);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_ApplyStoreSacl)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplyStoreSacl )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [retval][out] */ __RPC__out BOOL *pbApplyStoreSacl);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, put_ApplyStoreSacl)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ApplyStoreSacl )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ BOOL bApplyStoreSacl);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_PolicyAdministratorsName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyAdministratorsName )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarAdmins);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_PolicyReadersName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyReadersName )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarReaders);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, AddPolicyAdministratorName)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyAdministratorName )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, DeletePolicyAdministratorName)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyAdministratorName )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, AddPolicyReaderName)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyReaderName )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ __RPC__in BSTR bstrReader,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, DeletePolicyReaderName)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyReaderName )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ __RPC__in BSTR bstrReader,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_DelegatedPolicyUsersName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DelegatedPolicyUsersName )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarDelegatedPolicyUsers);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, AddDelegatedPolicyUserName)
         HRESULT ( STDMETHODCALLTYPE *AddDelegatedPolicyUserName )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ __RPC__in BSTR bstrDelegatedPolicyUser,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, DeleteDelegatedPolicyUserName)
         HRESULT ( STDMETHODCALLTYPE *DeleteDelegatedPolicyUserName )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ __RPC__in BSTR bstrDelegatedPolicyUser,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, CloseApplication)
         HRESULT ( STDMETHODCALLTYPE *CloseApplication )( 
             __RPC__in IAzAuthorizationStore * This,
             /* [in] */ __RPC__in BSTR bstrApplicationName,
@@ -1394,28 +1460,34 @@ EXTERN_C const IID IID_IAzAuthorizationStore2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzAuthorizationStore2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzAuthorizationStore2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1424,6 +1496,7 @@ EXTERN_C const IID IID_IAzAuthorizationStore2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzAuthorizationStore2 * This,
             /* [annotation][in] */ 
@@ -1443,250 +1516,303 @@ EXTERN_C const IID IID_IAzAuthorizationStore2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_Description)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, put_Description)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ __RPC__in BSTR bstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_ApplicationData)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplicationData )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrApplicationData);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, put_ApplicationData)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ApplicationData )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ __RPC__in BSTR bstrApplicationData);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_DomainTimeout)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DomainTimeout )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [retval][out] */ __RPC__out LONG *plProp);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, put_DomainTimeout)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_DomainTimeout )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ LONG lProp);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_ScriptEngineTimeout)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ScriptEngineTimeout )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [retval][out] */ __RPC__out LONG *plProp);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, put_ScriptEngineTimeout)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ScriptEngineTimeout )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ LONG lProp);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_MaxScriptEngines)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MaxScriptEngines )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [retval][out] */ __RPC__out LONG *plProp);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, put_MaxScriptEngines)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MaxScriptEngines )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ LONG lProp);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_GenerateAudits)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_GenerateAudits )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [retval][out] */ __RPC__out BOOL *pbProp);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, put_GenerateAudits)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_GenerateAudits )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ BOOL bProp);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_Writable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Writable )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [retval][out] */ __RPC__out BOOL *pfProp);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ LONG lPropId,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, AddPropertyItem)
         HRESULT ( STDMETHODCALLTYPE *AddPropertyItem )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, DeletePropertyItem)
         HRESULT ( STDMETHODCALLTYPE *DeletePropertyItem )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_PolicyAdministrators)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyAdministrators )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarAdmins);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_PolicyReaders)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyReaders )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarReaders);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, AddPolicyAdministrator)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyAdministrator )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, DeletePolicyAdministrator)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyAdministrator )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, AddPolicyReader)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyReader )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ __RPC__in BSTR bstrReader,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, DeletePolicyReader)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyReader )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ __RPC__in BSTR bstrReader,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ LONG lFlags,
             /* [in] */ __RPC__in BSTR bstrPolicyURL,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, UpdateCache)
         HRESULT ( STDMETHODCALLTYPE *UpdateCache )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, Delete)
         HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_Applications)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Applications )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplications **ppAppCollection);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, OpenApplication)
         HRESULT ( STDMETHODCALLTYPE *OpenApplication )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ __RPC__in BSTR bstrApplicationName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplication **ppApplication);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, CreateApplication)
         HRESULT ( STDMETHODCALLTYPE *CreateApplication )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ __RPC__in BSTR bstrApplicationName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplication **ppApplication);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, DeleteApplication)
         HRESULT ( STDMETHODCALLTYPE *DeleteApplication )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ __RPC__in BSTR bstrApplicationName,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_ApplicationGroups)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplicationGroups )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplicationGroups **ppGroupCollection);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, CreateApplicationGroup)
         HRESULT ( STDMETHODCALLTYPE *CreateApplicationGroup )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ __RPC__in BSTR bstrGroupName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplicationGroup **ppGroup);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, OpenApplicationGroup)
         HRESULT ( STDMETHODCALLTYPE *OpenApplicationGroup )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ __RPC__in BSTR bstrGroupName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplicationGroup **ppGroup);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, DeleteApplicationGroup)
         HRESULT ( STDMETHODCALLTYPE *DeleteApplicationGroup )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ __RPC__in BSTR bstrGroupName,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, Submit)
         HRESULT ( STDMETHODCALLTYPE *Submit )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [defaultvalue][in] */ LONG lFlags,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_DelegatedPolicyUsers)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DelegatedPolicyUsers )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarDelegatedPolicyUsers);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, AddDelegatedPolicyUser)
         HRESULT ( STDMETHODCALLTYPE *AddDelegatedPolicyUser )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ __RPC__in BSTR bstrDelegatedPolicyUser,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, DeleteDelegatedPolicyUser)
         HRESULT ( STDMETHODCALLTYPE *DeleteDelegatedPolicyUser )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ __RPC__in BSTR bstrDelegatedPolicyUser,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_TargetMachine)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_TargetMachine )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTargetMachine);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_ApplyStoreSacl)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplyStoreSacl )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [retval][out] */ __RPC__out BOOL *pbApplyStoreSacl);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, put_ApplyStoreSacl)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ApplyStoreSacl )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ BOOL bApplyStoreSacl);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_PolicyAdministratorsName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyAdministratorsName )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarAdmins);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_PolicyReadersName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyReadersName )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarReaders);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, AddPolicyAdministratorName)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyAdministratorName )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, DeletePolicyAdministratorName)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyAdministratorName )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, AddPolicyReaderName)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyReaderName )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ __RPC__in BSTR bstrReader,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, DeletePolicyReaderName)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyReaderName )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ __RPC__in BSTR bstrReader,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_DelegatedPolicyUsersName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DelegatedPolicyUsersName )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarDelegatedPolicyUsers);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, AddDelegatedPolicyUserName)
         HRESULT ( STDMETHODCALLTYPE *AddDelegatedPolicyUserName )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ __RPC__in BSTR bstrDelegatedPolicyUser,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, DeleteDelegatedPolicyUserName)
         HRESULT ( STDMETHODCALLTYPE *DeleteDelegatedPolicyUserName )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ __RPC__in BSTR bstrDelegatedPolicyUser,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, CloseApplication)
         HRESULT ( STDMETHODCALLTYPE *CloseApplication )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ __RPC__in BSTR bstrApplicationName,
             /* [in] */ LONG lFlag);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore2, OpenApplication2)
         HRESULT ( STDMETHODCALLTYPE *OpenApplication2 )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ __RPC__in BSTR bstrApplicationName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplication2 **ppApplication);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore2, CreateApplication2)
         HRESULT ( STDMETHODCALLTYPE *CreateApplication2 )( 
             __RPC__in IAzAuthorizationStore2 * This,
             /* [in] */ __RPC__in BSTR bstrApplicationName,
@@ -1941,28 +2067,34 @@ EXTERN_C const IID IID_IAzAuthorizationStore3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzAuthorizationStore3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzAuthorizationStore3 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1971,6 +2103,7 @@ EXTERN_C const IID IID_IAzAuthorizationStore3;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzAuthorizationStore3 * This,
             /* [annotation][in] */ 
@@ -1990,273 +2123,331 @@ EXTERN_C const IID IID_IAzAuthorizationStore3;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_Description)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, put_Description)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ __RPC__in BSTR bstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_ApplicationData)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplicationData )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrApplicationData);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, put_ApplicationData)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ApplicationData )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ __RPC__in BSTR bstrApplicationData);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_DomainTimeout)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DomainTimeout )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [retval][out] */ __RPC__out LONG *plProp);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, put_DomainTimeout)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_DomainTimeout )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ LONG lProp);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_ScriptEngineTimeout)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ScriptEngineTimeout )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [retval][out] */ __RPC__out LONG *plProp);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, put_ScriptEngineTimeout)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ScriptEngineTimeout )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ LONG lProp);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_MaxScriptEngines)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MaxScriptEngines )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [retval][out] */ __RPC__out LONG *plProp);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, put_MaxScriptEngines)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MaxScriptEngines )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ LONG lProp);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_GenerateAudits)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_GenerateAudits )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [retval][out] */ __RPC__out BOOL *pbProp);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, put_GenerateAudits)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_GenerateAudits )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ BOOL bProp);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_Writable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Writable )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [retval][out] */ __RPC__out BOOL *pfProp);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ LONG lPropId,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, AddPropertyItem)
         HRESULT ( STDMETHODCALLTYPE *AddPropertyItem )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, DeletePropertyItem)
         HRESULT ( STDMETHODCALLTYPE *DeletePropertyItem )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_PolicyAdministrators)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyAdministrators )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarAdmins);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_PolicyReaders)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyReaders )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarReaders);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, AddPolicyAdministrator)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyAdministrator )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, DeletePolicyAdministrator)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyAdministrator )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, AddPolicyReader)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyReader )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ __RPC__in BSTR bstrReader,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, DeletePolicyReader)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyReader )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ __RPC__in BSTR bstrReader,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ LONG lFlags,
             /* [in] */ __RPC__in BSTR bstrPolicyURL,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, UpdateCache)
         HRESULT ( STDMETHODCALLTYPE *UpdateCache )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, Delete)
         HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_Applications)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Applications )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplications **ppAppCollection);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, OpenApplication)
         HRESULT ( STDMETHODCALLTYPE *OpenApplication )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ __RPC__in BSTR bstrApplicationName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplication **ppApplication);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, CreateApplication)
         HRESULT ( STDMETHODCALLTYPE *CreateApplication )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ __RPC__in BSTR bstrApplicationName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplication **ppApplication);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, DeleteApplication)
         HRESULT ( STDMETHODCALLTYPE *DeleteApplication )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ __RPC__in BSTR bstrApplicationName,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_ApplicationGroups)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplicationGroups )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplicationGroups **ppGroupCollection);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, CreateApplicationGroup)
         HRESULT ( STDMETHODCALLTYPE *CreateApplicationGroup )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ __RPC__in BSTR bstrGroupName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplicationGroup **ppGroup);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, OpenApplicationGroup)
         HRESULT ( STDMETHODCALLTYPE *OpenApplicationGroup )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ __RPC__in BSTR bstrGroupName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplicationGroup **ppGroup);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, DeleteApplicationGroup)
         HRESULT ( STDMETHODCALLTYPE *DeleteApplicationGroup )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ __RPC__in BSTR bstrGroupName,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, Submit)
         HRESULT ( STDMETHODCALLTYPE *Submit )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [defaultvalue][in] */ LONG lFlags,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_DelegatedPolicyUsers)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DelegatedPolicyUsers )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarDelegatedPolicyUsers);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, AddDelegatedPolicyUser)
         HRESULT ( STDMETHODCALLTYPE *AddDelegatedPolicyUser )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ __RPC__in BSTR bstrDelegatedPolicyUser,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, DeleteDelegatedPolicyUser)
         HRESULT ( STDMETHODCALLTYPE *DeleteDelegatedPolicyUser )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ __RPC__in BSTR bstrDelegatedPolicyUser,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_TargetMachine)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_TargetMachine )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTargetMachine);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_ApplyStoreSacl)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplyStoreSacl )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [retval][out] */ __RPC__out BOOL *pbApplyStoreSacl);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, put_ApplyStoreSacl)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ApplyStoreSacl )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ BOOL bApplyStoreSacl);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_PolicyAdministratorsName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyAdministratorsName )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarAdmins);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_PolicyReadersName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyReadersName )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarReaders);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, AddPolicyAdministratorName)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyAdministratorName )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, DeletePolicyAdministratorName)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyAdministratorName )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, AddPolicyReaderName)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyReaderName )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ __RPC__in BSTR bstrReader,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, DeletePolicyReaderName)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyReaderName )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ __RPC__in BSTR bstrReader,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, get_DelegatedPolicyUsersName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DelegatedPolicyUsersName )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarDelegatedPolicyUsers);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, AddDelegatedPolicyUserName)
         HRESULT ( STDMETHODCALLTYPE *AddDelegatedPolicyUserName )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ __RPC__in BSTR bstrDelegatedPolicyUser,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, DeleteDelegatedPolicyUserName)
         HRESULT ( STDMETHODCALLTYPE *DeleteDelegatedPolicyUserName )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ __RPC__in BSTR bstrDelegatedPolicyUser,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore, CloseApplication)
         HRESULT ( STDMETHODCALLTYPE *CloseApplication )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ __RPC__in BSTR bstrApplicationName,
             /* [in] */ LONG lFlag);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore2, OpenApplication2)
         HRESULT ( STDMETHODCALLTYPE *OpenApplication2 )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ __RPC__in BSTR bstrApplicationName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplication2 **ppApplication);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore2, CreateApplication2)
         HRESULT ( STDMETHODCALLTYPE *CreateApplication2 )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ __RPC__in BSTR bstrApplicationName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplication2 **ppApplication);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore3, IsUpdateNeeded)
         HRESULT ( STDMETHODCALLTYPE *IsUpdateNeeded )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbIsUpdateNeeded);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore3, BizruleGroupSupported)
         HRESULT ( STDMETHODCALLTYPE *BizruleGroupSupported )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbSupported);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore3, UpgradeStoresFunctionalLevel)
         HRESULT ( STDMETHODCALLTYPE *UpgradeStoresFunctionalLevel )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ LONG lFunctionalLevel);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore3, IsFunctionalLevelUpgradeSupported)
         HRESULT ( STDMETHODCALLTYPE *IsFunctionalLevelUpgradeSupported )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [in] */ LONG lFunctionalLevel,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbSupported);
         
+        DECLSPEC_XFGVIRT(IAzAuthorizationStore3, GetSchemaVersion)
         HRESULT ( STDMETHODCALLTYPE *GetSchemaVersion )( 
             __RPC__in IAzAuthorizationStore3 * This,
             /* [out] */ __RPC__out LONG *plMajorVersion,
@@ -2746,28 +2937,34 @@ EXTERN_C const IID IID_IAzApplication;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzApplication * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzApplication * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzApplication * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzApplication * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2776,6 +2973,7 @@ EXTERN_C const IID IID_IAzApplication;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzApplication * This,
             /* [annotation][in] */ 
@@ -2795,234 +2993,282 @@ EXTERN_C const IID IID_IAzApplication;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IAzApplication * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IAzApplication, put_Name)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_Description)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IAzApplication * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzApplication, put_Description)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_ApplicationData)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplicationData )( 
             __RPC__in IAzApplication * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrApplicationData);
         
+        DECLSPEC_XFGVIRT(IAzApplication, put_ApplicationData)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ApplicationData )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrApplicationData);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_AuthzInterfaceClsid)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AuthzInterfaceClsid )( 
             __RPC__in IAzApplication * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzApplication, put_AuthzInterfaceClsid)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_AuthzInterfaceClsid )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrProp);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_Version)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Version )( 
             __RPC__in IAzApplication * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzApplication, put_Version)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Version )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrProp);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_GenerateAudits)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_GenerateAudits )( 
             __RPC__in IAzApplication * This,
             /* [retval][out] */ __RPC__out BOOL *pbProp);
         
+        DECLSPEC_XFGVIRT(IAzApplication, put_GenerateAudits)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_GenerateAudits )( 
             __RPC__in IAzApplication * This,
             /* [in] */ BOOL bProp);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_ApplyStoreSacl)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplyStoreSacl )( 
             __RPC__in IAzApplication * This,
             /* [retval][out] */ __RPC__out BOOL *pbProp);
         
+        DECLSPEC_XFGVIRT(IAzApplication, put_ApplyStoreSacl)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ApplyStoreSacl )( 
             __RPC__in IAzApplication * This,
             /* [in] */ BOOL bProp);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_Writable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Writable )( 
             __RPC__in IAzApplication * This,
             /* [retval][out] */ __RPC__out BOOL *pfProp);
         
+        DECLSPEC_XFGVIRT(IAzApplication, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IAzApplication * This,
             /* [in] */ LONG lPropId,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzApplication, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IAzApplication * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_PolicyAdministrators)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyAdministrators )( 
             __RPC__in IAzApplication * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarAdmins);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_PolicyReaders)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyReaders )( 
             __RPC__in IAzApplication * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarReaders);
         
+        DECLSPEC_XFGVIRT(IAzApplication, AddPolicyAdministrator)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyAdministrator )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeletePolicyAdministrator)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyAdministrator )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, AddPolicyReader)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyReader )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrReader,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeletePolicyReader)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyReader )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrReader,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_Scopes)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Scopes )( 
             __RPC__in IAzApplication * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzScopes **ppScopeCollection);
         
+        DECLSPEC_XFGVIRT(IAzApplication, OpenScope)
         HRESULT ( STDMETHODCALLTYPE *OpenScope )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrScopeName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzScope **ppScope);
         
+        DECLSPEC_XFGVIRT(IAzApplication, CreateScope)
         HRESULT ( STDMETHODCALLTYPE *CreateScope )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrScopeName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzScope **ppScope);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeleteScope)
         HRESULT ( STDMETHODCALLTYPE *DeleteScope )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrScopeName,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_Operations)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Operations )( 
             __RPC__in IAzApplication * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzOperations **ppOperationCollection);
         
+        DECLSPEC_XFGVIRT(IAzApplication, OpenOperation)
         HRESULT ( STDMETHODCALLTYPE *OpenOperation )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrOperationName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzOperation **ppOperation);
         
+        DECLSPEC_XFGVIRT(IAzApplication, CreateOperation)
         HRESULT ( STDMETHODCALLTYPE *CreateOperation )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrOperationName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzOperation **ppOperation);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeleteOperation)
         HRESULT ( STDMETHODCALLTYPE *DeleteOperation )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrOperationName,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_Tasks)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Tasks )( 
             __RPC__in IAzApplication * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzTasks **ppTaskCollection);
         
+        DECLSPEC_XFGVIRT(IAzApplication, OpenTask)
         HRESULT ( STDMETHODCALLTYPE *OpenTask )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrTaskName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzTask **ppTask);
         
+        DECLSPEC_XFGVIRT(IAzApplication, CreateTask)
         HRESULT ( STDMETHODCALLTYPE *CreateTask )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrTaskName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzTask **ppTask);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeleteTask)
         HRESULT ( STDMETHODCALLTYPE *DeleteTask )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrTaskName,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_ApplicationGroups)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplicationGroups )( 
             __RPC__in IAzApplication * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplicationGroups **ppGroupCollection);
         
+        DECLSPEC_XFGVIRT(IAzApplication, OpenApplicationGroup)
         HRESULT ( STDMETHODCALLTYPE *OpenApplicationGroup )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrGroupName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplicationGroup **ppGroup);
         
+        DECLSPEC_XFGVIRT(IAzApplication, CreateApplicationGroup)
         HRESULT ( STDMETHODCALLTYPE *CreateApplicationGroup )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrGroupName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplicationGroup **ppGroup);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeleteApplicationGroup)
         HRESULT ( STDMETHODCALLTYPE *DeleteApplicationGroup )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrGroupName,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_Roles)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Roles )( 
             __RPC__in IAzApplication * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzRoles **ppRoleCollection);
         
+        DECLSPEC_XFGVIRT(IAzApplication, OpenRole)
         HRESULT ( STDMETHODCALLTYPE *OpenRole )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrRoleName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzRole **ppRole);
         
+        DECLSPEC_XFGVIRT(IAzApplication, CreateRole)
         HRESULT ( STDMETHODCALLTYPE *CreateRole )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrRoleName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzRole **ppRole);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeleteRole)
         HRESULT ( STDMETHODCALLTYPE *DeleteRole )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrRoleName,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, InitializeClientContextFromToken)
         HRESULT ( STDMETHODCALLTYPE *InitializeClientContextFromToken )( 
             __RPC__in IAzApplication * This,
             /* [in] */ ULONGLONG ullTokenHandle,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzClientContext **ppClientContext);
         
+        DECLSPEC_XFGVIRT(IAzApplication, AddPropertyItem)
         HRESULT ( STDMETHODCALLTYPE *AddPropertyItem )( 
             __RPC__in IAzApplication * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeletePropertyItem)
         HRESULT ( STDMETHODCALLTYPE *DeletePropertyItem )( 
             __RPC__in IAzApplication * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, Submit)
         HRESULT ( STDMETHODCALLTYPE *Submit )( 
             __RPC__in IAzApplication * This,
             /* [defaultvalue][in] */ LONG lFlags,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, InitializeClientContextFromName)
         HRESULT ( STDMETHODCALLTYPE *InitializeClientContextFromName )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR ClientName,
@@ -3030,20 +3276,24 @@ EXTERN_C const IID IID_IAzApplication;
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzClientContext **ppClientContext);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_DelegatedPolicyUsers)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DelegatedPolicyUsers )( 
             __RPC__in IAzApplication * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarDelegatedPolicyUsers);
         
+        DECLSPEC_XFGVIRT(IAzApplication, AddDelegatedPolicyUser)
         HRESULT ( STDMETHODCALLTYPE *AddDelegatedPolicyUser )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrDelegatedPolicyUser,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeleteDelegatedPolicyUser)
         HRESULT ( STDMETHODCALLTYPE *DeleteDelegatedPolicyUser )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrDelegatedPolicyUser,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, InitializeClientContextFromStringSid)
         HRESULT ( STDMETHODCALLTYPE *InitializeClientContextFromStringSid )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR SidString,
@@ -3051,43 +3301,52 @@ EXTERN_C const IID IID_IAzApplication;
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzClientContext **ppClientContext);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_PolicyAdministratorsName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyAdministratorsName )( 
             __RPC__in IAzApplication * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarAdmins);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_PolicyReadersName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyReadersName )( 
             __RPC__in IAzApplication * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarReaders);
         
+        DECLSPEC_XFGVIRT(IAzApplication, AddPolicyAdministratorName)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyAdministratorName )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeletePolicyAdministratorName)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyAdministratorName )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, AddPolicyReaderName)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyReaderName )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrReader,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeletePolicyReaderName)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyReaderName )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrReader,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_DelegatedPolicyUsersName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DelegatedPolicyUsersName )( 
             __RPC__in IAzApplication * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarDelegatedPolicyUsers);
         
+        DECLSPEC_XFGVIRT(IAzApplication, AddDelegatedPolicyUserName)
         HRESULT ( STDMETHODCALLTYPE *AddDelegatedPolicyUserName )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrDelegatedPolicyUser,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeleteDelegatedPolicyUserName)
         HRESULT ( STDMETHODCALLTYPE *DeleteDelegatedPolicyUserName )( 
             __RPC__in IAzApplication * This,
             /* [in] */ __RPC__in BSTR bstrDelegatedPolicyUser,
@@ -3358,28 +3617,34 @@ EXTERN_C const IID IID_IAzApplication2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzApplication2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzApplication2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzApplication2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -3388,6 +3653,7 @@ EXTERN_C const IID IID_IAzApplication2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzApplication2 * This,
             /* [annotation][in] */ 
@@ -3407,234 +3673,282 @@ EXTERN_C const IID IID_IAzApplication2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IAzApplication2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IAzApplication, put_Name)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_Description)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IAzApplication2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzApplication, put_Description)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_ApplicationData)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplicationData )( 
             __RPC__in IAzApplication2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrApplicationData);
         
+        DECLSPEC_XFGVIRT(IAzApplication, put_ApplicationData)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ApplicationData )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrApplicationData);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_AuthzInterfaceClsid)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AuthzInterfaceClsid )( 
             __RPC__in IAzApplication2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzApplication, put_AuthzInterfaceClsid)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_AuthzInterfaceClsid )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrProp);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_Version)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Version )( 
             __RPC__in IAzApplication2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzApplication, put_Version)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Version )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrProp);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_GenerateAudits)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_GenerateAudits )( 
             __RPC__in IAzApplication2 * This,
             /* [retval][out] */ __RPC__out BOOL *pbProp);
         
+        DECLSPEC_XFGVIRT(IAzApplication, put_GenerateAudits)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_GenerateAudits )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ BOOL bProp);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_ApplyStoreSacl)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplyStoreSacl )( 
             __RPC__in IAzApplication2 * This,
             /* [retval][out] */ __RPC__out BOOL *pbProp);
         
+        DECLSPEC_XFGVIRT(IAzApplication, put_ApplyStoreSacl)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ApplyStoreSacl )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ BOOL bProp);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_Writable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Writable )( 
             __RPC__in IAzApplication2 * This,
             /* [retval][out] */ __RPC__out BOOL *pfProp);
         
+        DECLSPEC_XFGVIRT(IAzApplication, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ LONG lPropId,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzApplication, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_PolicyAdministrators)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyAdministrators )( 
             __RPC__in IAzApplication2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarAdmins);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_PolicyReaders)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyReaders )( 
             __RPC__in IAzApplication2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarReaders);
         
+        DECLSPEC_XFGVIRT(IAzApplication, AddPolicyAdministrator)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyAdministrator )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeletePolicyAdministrator)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyAdministrator )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, AddPolicyReader)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyReader )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrReader,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeletePolicyReader)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyReader )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrReader,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_Scopes)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Scopes )( 
             __RPC__in IAzApplication2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzScopes **ppScopeCollection);
         
+        DECLSPEC_XFGVIRT(IAzApplication, OpenScope)
         HRESULT ( STDMETHODCALLTYPE *OpenScope )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrScopeName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzScope **ppScope);
         
+        DECLSPEC_XFGVIRT(IAzApplication, CreateScope)
         HRESULT ( STDMETHODCALLTYPE *CreateScope )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrScopeName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzScope **ppScope);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeleteScope)
         HRESULT ( STDMETHODCALLTYPE *DeleteScope )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrScopeName,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_Operations)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Operations )( 
             __RPC__in IAzApplication2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzOperations **ppOperationCollection);
         
+        DECLSPEC_XFGVIRT(IAzApplication, OpenOperation)
         HRESULT ( STDMETHODCALLTYPE *OpenOperation )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrOperationName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzOperation **ppOperation);
         
+        DECLSPEC_XFGVIRT(IAzApplication, CreateOperation)
         HRESULT ( STDMETHODCALLTYPE *CreateOperation )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrOperationName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzOperation **ppOperation);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeleteOperation)
         HRESULT ( STDMETHODCALLTYPE *DeleteOperation )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrOperationName,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_Tasks)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Tasks )( 
             __RPC__in IAzApplication2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzTasks **ppTaskCollection);
         
+        DECLSPEC_XFGVIRT(IAzApplication, OpenTask)
         HRESULT ( STDMETHODCALLTYPE *OpenTask )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrTaskName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzTask **ppTask);
         
+        DECLSPEC_XFGVIRT(IAzApplication, CreateTask)
         HRESULT ( STDMETHODCALLTYPE *CreateTask )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrTaskName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzTask **ppTask);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeleteTask)
         HRESULT ( STDMETHODCALLTYPE *DeleteTask )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrTaskName,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_ApplicationGroups)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplicationGroups )( 
             __RPC__in IAzApplication2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplicationGroups **ppGroupCollection);
         
+        DECLSPEC_XFGVIRT(IAzApplication, OpenApplicationGroup)
         HRESULT ( STDMETHODCALLTYPE *OpenApplicationGroup )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrGroupName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplicationGroup **ppGroup);
         
+        DECLSPEC_XFGVIRT(IAzApplication, CreateApplicationGroup)
         HRESULT ( STDMETHODCALLTYPE *CreateApplicationGroup )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrGroupName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplicationGroup **ppGroup);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeleteApplicationGroup)
         HRESULT ( STDMETHODCALLTYPE *DeleteApplicationGroup )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrGroupName,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_Roles)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Roles )( 
             __RPC__in IAzApplication2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzRoles **ppRoleCollection);
         
+        DECLSPEC_XFGVIRT(IAzApplication, OpenRole)
         HRESULT ( STDMETHODCALLTYPE *OpenRole )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrRoleName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzRole **ppRole);
         
+        DECLSPEC_XFGVIRT(IAzApplication, CreateRole)
         HRESULT ( STDMETHODCALLTYPE *CreateRole )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrRoleName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzRole **ppRole);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeleteRole)
         HRESULT ( STDMETHODCALLTYPE *DeleteRole )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrRoleName,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, InitializeClientContextFromToken)
         HRESULT ( STDMETHODCALLTYPE *InitializeClientContextFromToken )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ ULONGLONG ullTokenHandle,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzClientContext **ppClientContext);
         
+        DECLSPEC_XFGVIRT(IAzApplication, AddPropertyItem)
         HRESULT ( STDMETHODCALLTYPE *AddPropertyItem )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeletePropertyItem)
         HRESULT ( STDMETHODCALLTYPE *DeletePropertyItem )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, Submit)
         HRESULT ( STDMETHODCALLTYPE *Submit )( 
             __RPC__in IAzApplication2 * This,
             /* [defaultvalue][in] */ LONG lFlags,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, InitializeClientContextFromName)
         HRESULT ( STDMETHODCALLTYPE *InitializeClientContextFromName )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR ClientName,
@@ -3642,20 +3956,24 @@ EXTERN_C const IID IID_IAzApplication2;
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzClientContext **ppClientContext);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_DelegatedPolicyUsers)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DelegatedPolicyUsers )( 
             __RPC__in IAzApplication2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarDelegatedPolicyUsers);
         
+        DECLSPEC_XFGVIRT(IAzApplication, AddDelegatedPolicyUser)
         HRESULT ( STDMETHODCALLTYPE *AddDelegatedPolicyUser )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrDelegatedPolicyUser,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeleteDelegatedPolicyUser)
         HRESULT ( STDMETHODCALLTYPE *DeleteDelegatedPolicyUser )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrDelegatedPolicyUser,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, InitializeClientContextFromStringSid)
         HRESULT ( STDMETHODCALLTYPE *InitializeClientContextFromStringSid )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR SidString,
@@ -3663,48 +3981,58 @@ EXTERN_C const IID IID_IAzApplication2;
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzClientContext **ppClientContext);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_PolicyAdministratorsName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyAdministratorsName )( 
             __RPC__in IAzApplication2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarAdmins);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_PolicyReadersName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyReadersName )( 
             __RPC__in IAzApplication2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarReaders);
         
+        DECLSPEC_XFGVIRT(IAzApplication, AddPolicyAdministratorName)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyAdministratorName )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeletePolicyAdministratorName)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyAdministratorName )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, AddPolicyReaderName)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyReaderName )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrReader,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeletePolicyReaderName)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyReaderName )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrReader,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_DelegatedPolicyUsersName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DelegatedPolicyUsersName )( 
             __RPC__in IAzApplication2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarDelegatedPolicyUsers);
         
+        DECLSPEC_XFGVIRT(IAzApplication, AddDelegatedPolicyUserName)
         HRESULT ( STDMETHODCALLTYPE *AddDelegatedPolicyUserName )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrDelegatedPolicyUser,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeleteDelegatedPolicyUserName)
         HRESULT ( STDMETHODCALLTYPE *DeleteDelegatedPolicyUserName )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrDelegatedPolicyUser,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication2, InitializeClientContextFromToken2)
         HRESULT ( STDMETHODCALLTYPE *InitializeClientContextFromToken2 )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ ULONG ulTokenHandleLowPart,
@@ -3712,6 +4040,7 @@ EXTERN_C const IID IID_IAzApplication2;
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzClientContext2 **ppClientContext);
         
+        DECLSPEC_XFGVIRT(IAzApplication2, InitializeClientContext2)
         HRESULT ( STDMETHODCALLTYPE *InitializeClientContext2 )( 
             __RPC__in IAzApplication2 * This,
             /* [in] */ __RPC__in BSTR IdentifyingString,
@@ -3989,28 +4318,34 @@ EXTERN_C const IID IID_IAzApplications;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzApplications * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzApplications * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzApplications * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzApplications * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzApplications * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzApplications * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -4019,6 +4354,7 @@ EXTERN_C const IID IID_IAzApplications;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzApplications * This,
             /* [annotation][in] */ 
@@ -4038,15 +4374,18 @@ EXTERN_C const IID IID_IAzApplications;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzApplications, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IAzApplications * This,
             /* [in] */ long Index,
             /* [retval][out] */ __RPC__out VARIANT *pvarObtPtr);
         
+        DECLSPEC_XFGVIRT(IAzApplications, get_Count)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IAzApplications * This,
             /* [retval][out] */ __RPC__out long *plCount);
         
+        DECLSPEC_XFGVIRT(IAzApplications, get__NewEnum)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IAzApplications * This,
             /* [retval][out] */ __RPC__deref_out_opt LPUNKNOWN *ppEnumPtr);
@@ -4172,28 +4511,34 @@ EXTERN_C const IID IID_IAzOperation;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzOperation * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzOperation * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzOperation * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzOperation * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzOperation * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzOperation * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -4202,6 +4547,7 @@ EXTERN_C const IID IID_IAzOperation;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzOperation * This,
             /* [annotation][in] */ 
@@ -4221,54 +4567,66 @@ EXTERN_C const IID IID_IAzOperation;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzOperation, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IAzOperation * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IAzOperation, put_Name)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IAzOperation * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(IAzOperation, get_Description)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IAzOperation * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzOperation, put_Description)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IAzOperation * This,
             /* [in] */ __RPC__in BSTR bstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzOperation, get_ApplicationData)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplicationData )( 
             __RPC__in IAzOperation * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrApplicationData);
         
+        DECLSPEC_XFGVIRT(IAzOperation, put_ApplicationData)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ApplicationData )( 
             __RPC__in IAzOperation * This,
             /* [in] */ __RPC__in BSTR bstrApplicationData);
         
+        DECLSPEC_XFGVIRT(IAzOperation, get_OperationID)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_OperationID )( 
             __RPC__in IAzOperation * This,
             /* [retval][out] */ __RPC__out LONG *plProp);
         
+        DECLSPEC_XFGVIRT(IAzOperation, put_OperationID)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_OperationID )( 
             __RPC__in IAzOperation * This,
             /* [in] */ LONG lProp);
         
+        DECLSPEC_XFGVIRT(IAzOperation, get_Writable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Writable )( 
             __RPC__in IAzOperation * This,
             /* [retval][out] */ __RPC__out BOOL *pfProp);
         
+        DECLSPEC_XFGVIRT(IAzOperation, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IAzOperation * This,
             /* [in] */ LONG lPropId,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzOperation, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IAzOperation * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzOperation, Submit)
         HRESULT ( STDMETHODCALLTYPE *Submit )( 
             __RPC__in IAzOperation * This,
             /* [defaultvalue][in] */ LONG lFlags,
@@ -4391,28 +4749,34 @@ EXTERN_C const IID IID_IAzOperations;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzOperations * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzOperations * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzOperations * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzOperations * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzOperations * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzOperations * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -4421,6 +4785,7 @@ EXTERN_C const IID IID_IAzOperations;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzOperations * This,
             /* [annotation][in] */ 
@@ -4440,15 +4805,18 @@ EXTERN_C const IID IID_IAzOperations;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzOperations, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IAzOperations * This,
             /* [in] */ LONG Index,
             /* [retval][out] */ __RPC__out VARIANT *pvarObtPtr);
         
+        DECLSPEC_XFGVIRT(IAzOperations, get_Count)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IAzOperations * This,
             /* [retval][out] */ __RPC__out LONG *plCount);
         
+        DECLSPEC_XFGVIRT(IAzOperations, get__NewEnum)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IAzOperations * This,
             /* [retval][out] */ __RPC__deref_out_opt LPUNKNOWN *ppEnumPtr);
@@ -4624,28 +4992,34 @@ EXTERN_C const IID IID_IAzTask;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzTask * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzTask * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzTask * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzTask * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzTask * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzTask * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -4654,6 +5028,7 @@ EXTERN_C const IID IID_IAzTask;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzTask * This,
             /* [annotation][in] */ 
@@ -4673,118 +5048,144 @@ EXTERN_C const IID IID_IAzTask;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzTask, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IAzTask * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IAzTask, put_Name)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IAzTask * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(IAzTask, get_Description)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IAzTask * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzTask, put_Description)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IAzTask * This,
             /* [in] */ __RPC__in BSTR bstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzTask, get_ApplicationData)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplicationData )( 
             __RPC__in IAzTask * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrApplicationData);
         
+        DECLSPEC_XFGVIRT(IAzTask, put_ApplicationData)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ApplicationData )( 
             __RPC__in IAzTask * This,
             /* [in] */ __RPC__in BSTR bstrApplicationData);
         
+        DECLSPEC_XFGVIRT(IAzTask, get_BizRule)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_BizRule )( 
             __RPC__in IAzTask * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, put_BizRule)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_BizRule )( 
             __RPC__in IAzTask * This,
             /* [in] */ __RPC__in BSTR bstrProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, get_BizRuleLanguage)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_BizRuleLanguage )( 
             __RPC__in IAzTask * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, put_BizRuleLanguage)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_BizRuleLanguage )( 
             __RPC__in IAzTask * This,
             /* [in] */ __RPC__in BSTR bstrProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, get_BizRuleImportedPath)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_BizRuleImportedPath )( 
             __RPC__in IAzTask * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, put_BizRuleImportedPath)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_BizRuleImportedPath )( 
             __RPC__in IAzTask * This,
             /* [in] */ __RPC__in BSTR bstrProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, get_IsRoleDefinition)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsRoleDefinition )( 
             __RPC__in IAzTask * This,
             /* [retval][out] */ __RPC__out BOOL *pfProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, put_IsRoleDefinition)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_IsRoleDefinition )( 
             __RPC__in IAzTask * This,
             /* [in] */ BOOL fProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, get_Operations)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Operations )( 
             __RPC__in IAzTask * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, get_Tasks)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Tasks )( 
             __RPC__in IAzTask * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, AddOperation)
         HRESULT ( STDMETHODCALLTYPE *AddOperation )( 
             __RPC__in IAzTask * This,
             /* [in] */ __RPC__in BSTR bstrOp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzTask, DeleteOperation)
         HRESULT ( STDMETHODCALLTYPE *DeleteOperation )( 
             __RPC__in IAzTask * This,
             /* [in] */ __RPC__in BSTR bstrOp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzTask, AddTask)
         HRESULT ( STDMETHODCALLTYPE *AddTask )( 
             __RPC__in IAzTask * This,
             /* [in] */ __RPC__in BSTR bstrTask,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzTask, DeleteTask)
         HRESULT ( STDMETHODCALLTYPE *DeleteTask )( 
             __RPC__in IAzTask * This,
             /* [in] */ __RPC__in BSTR bstrTask,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzTask, get_Writable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Writable )( 
             __RPC__in IAzTask * This,
             /* [retval][out] */ __RPC__out BOOL *pfProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IAzTask * This,
             /* [in] */ LONG lPropId,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IAzTask * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzTask, AddPropertyItem)
         HRESULT ( STDMETHODCALLTYPE *AddPropertyItem )( 
             __RPC__in IAzTask * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzTask, DeletePropertyItem)
         HRESULT ( STDMETHODCALLTYPE *DeletePropertyItem )( 
             __RPC__in IAzTask * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzTask, Submit)
         HRESULT ( STDMETHODCALLTYPE *Submit )( 
             __RPC__in IAzTask * This,
             /* [defaultvalue][in] */ LONG lFlags,
@@ -4949,28 +5350,34 @@ EXTERN_C const IID IID_IAzTasks;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzTasks * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzTasks * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzTasks * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzTasks * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzTasks * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzTasks * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -4979,6 +5386,7 @@ EXTERN_C const IID IID_IAzTasks;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzTasks * This,
             /* [annotation][in] */ 
@@ -4998,15 +5406,18 @@ EXTERN_C const IID IID_IAzTasks;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzTasks, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IAzTasks * This,
             /* [in] */ LONG Index,
             /* [retval][out] */ __RPC__out VARIANT *pvarObtPtr);
         
+        DECLSPEC_XFGVIRT(IAzTasks, get_Count)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IAzTasks * This,
             /* [retval][out] */ __RPC__out LONG *plCount);
         
+        DECLSPEC_XFGVIRT(IAzTasks, get__NewEnum)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IAzTasks * This,
             /* [retval][out] */ __RPC__deref_out_opt LPUNKNOWN *ppEnumPtr);
@@ -5237,28 +5648,34 @@ EXTERN_C const IID IID_IAzScope;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzScope * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzScope * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzScope * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzScope * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzScope * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzScope * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -5267,6 +5684,7 @@ EXTERN_C const IID IID_IAzScope;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzScope * This,
             /* [annotation][in] */ 
@@ -5286,185 +5704,223 @@ EXTERN_C const IID IID_IAzScope;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzScope, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IAzScope * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IAzScope, put_Name)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IAzScope * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(IAzScope, get_Description)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IAzScope * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzScope, put_Description)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IAzScope * This,
             /* [in] */ __RPC__in BSTR bstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzScope, get_ApplicationData)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplicationData )( 
             __RPC__in IAzScope * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrApplicationData);
         
+        DECLSPEC_XFGVIRT(IAzScope, put_ApplicationData)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ApplicationData )( 
             __RPC__in IAzScope * This,
             /* [in] */ __RPC__in BSTR bstrApplicationData);
         
+        DECLSPEC_XFGVIRT(IAzScope, get_Writable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Writable )( 
             __RPC__in IAzScope * This,
             /* [retval][out] */ __RPC__out BOOL *pfProp);
         
+        DECLSPEC_XFGVIRT(IAzScope, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IAzScope * This,
             /* [in] */ LONG lPropId,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzScope, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IAzScope * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzScope, AddPropertyItem)
         HRESULT ( STDMETHODCALLTYPE *AddPropertyItem )( 
             __RPC__in IAzScope * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzScope, DeletePropertyItem)
         HRESULT ( STDMETHODCALLTYPE *DeletePropertyItem )( 
             __RPC__in IAzScope * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzScope, get_PolicyAdministrators)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyAdministrators )( 
             __RPC__in IAzScope * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarAdmins);
         
+        DECLSPEC_XFGVIRT(IAzScope, get_PolicyReaders)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyReaders )( 
             __RPC__in IAzScope * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarReaders);
         
+        DECLSPEC_XFGVIRT(IAzScope, AddPolicyAdministrator)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyAdministrator )( 
             __RPC__in IAzScope * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzScope, DeletePolicyAdministrator)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyAdministrator )( 
             __RPC__in IAzScope * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzScope, AddPolicyReader)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyReader )( 
             __RPC__in IAzScope * This,
             /* [in] */ __RPC__in BSTR bstrReader,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzScope, DeletePolicyReader)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyReader )( 
             __RPC__in IAzScope * This,
             /* [in] */ __RPC__in BSTR bstrReader,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzScope, get_ApplicationGroups)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplicationGroups )( 
             __RPC__in IAzScope * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplicationGroups **ppGroupCollection);
         
+        DECLSPEC_XFGVIRT(IAzScope, OpenApplicationGroup)
         HRESULT ( STDMETHODCALLTYPE *OpenApplicationGroup )( 
             __RPC__in IAzScope * This,
             /* [in] */ __RPC__in BSTR bstrGroupName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplicationGroup **ppGroup);
         
+        DECLSPEC_XFGVIRT(IAzScope, CreateApplicationGroup)
         HRESULT ( STDMETHODCALLTYPE *CreateApplicationGroup )( 
             __RPC__in IAzScope * This,
             /* [in] */ __RPC__in BSTR bstrGroupName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplicationGroup **ppGroup);
         
+        DECLSPEC_XFGVIRT(IAzScope, DeleteApplicationGroup)
         HRESULT ( STDMETHODCALLTYPE *DeleteApplicationGroup )( 
             __RPC__in IAzScope * This,
             /* [in] */ __RPC__in BSTR bstrGroupName,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzScope, get_Roles)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Roles )( 
             __RPC__in IAzScope * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzRoles **ppRoleCollection);
         
+        DECLSPEC_XFGVIRT(IAzScope, OpenRole)
         HRESULT ( STDMETHODCALLTYPE *OpenRole )( 
             __RPC__in IAzScope * This,
             /* [in] */ __RPC__in BSTR bstrRoleName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzRole **ppRole);
         
+        DECLSPEC_XFGVIRT(IAzScope, CreateRole)
         HRESULT ( STDMETHODCALLTYPE *CreateRole )( 
             __RPC__in IAzScope * This,
             /* [in] */ __RPC__in BSTR bstrRoleName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzRole **ppRole);
         
+        DECLSPEC_XFGVIRT(IAzScope, DeleteRole)
         HRESULT ( STDMETHODCALLTYPE *DeleteRole )( 
             __RPC__in IAzScope * This,
             /* [in] */ __RPC__in BSTR bstrRoleName,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzScope, get_Tasks)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Tasks )( 
             __RPC__in IAzScope * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzTasks **ppTaskCollection);
         
+        DECLSPEC_XFGVIRT(IAzScope, OpenTask)
         HRESULT ( STDMETHODCALLTYPE *OpenTask )( 
             __RPC__in IAzScope * This,
             /* [in] */ __RPC__in BSTR bstrTaskName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzTask **ppTask);
         
+        DECLSPEC_XFGVIRT(IAzScope, CreateTask)
         HRESULT ( STDMETHODCALLTYPE *CreateTask )( 
             __RPC__in IAzScope * This,
             /* [in] */ __RPC__in BSTR bstrTaskName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzTask **ppTask);
         
+        DECLSPEC_XFGVIRT(IAzScope, DeleteTask)
         HRESULT ( STDMETHODCALLTYPE *DeleteTask )( 
             __RPC__in IAzScope * This,
             /* [in] */ __RPC__in BSTR bstrTaskName,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzScope, Submit)
         HRESULT ( STDMETHODCALLTYPE *Submit )( 
             __RPC__in IAzScope * This,
             /* [defaultvalue][in] */ LONG lFlags,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzScope, get_CanBeDelegated)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CanBeDelegated )( 
             __RPC__in IAzScope * This,
             /* [retval][out] */ __RPC__out BOOL *pfProp);
         
+        DECLSPEC_XFGVIRT(IAzScope, get_BizrulesWritable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_BizrulesWritable )( 
             __RPC__in IAzScope * This,
             /* [retval][out] */ __RPC__out BOOL *pfProp);
         
+        DECLSPEC_XFGVIRT(IAzScope, get_PolicyAdministratorsName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyAdministratorsName )( 
             __RPC__in IAzScope * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarAdmins);
         
+        DECLSPEC_XFGVIRT(IAzScope, get_PolicyReadersName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyReadersName )( 
             __RPC__in IAzScope * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarReaders);
         
+        DECLSPEC_XFGVIRT(IAzScope, AddPolicyAdministratorName)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyAdministratorName )( 
             __RPC__in IAzScope * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzScope, DeletePolicyAdministratorName)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyAdministratorName )( 
             __RPC__in IAzScope * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzScope, AddPolicyReaderName)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyReaderName )( 
             __RPC__in IAzScope * This,
             /* [in] */ __RPC__in BSTR bstrReader,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzScope, DeletePolicyReaderName)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyReaderName )( 
             __RPC__in IAzScope * This,
             /* [in] */ __RPC__in BSTR bstrReader,
@@ -5665,28 +6121,34 @@ EXTERN_C const IID IID_IAzScopes;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzScopes * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzScopes * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzScopes * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzScopes * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzScopes * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzScopes * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -5695,6 +6157,7 @@ EXTERN_C const IID IID_IAzScopes;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzScopes * This,
             /* [annotation][in] */ 
@@ -5714,15 +6177,18 @@ EXTERN_C const IID IID_IAzScopes;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzScopes, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IAzScopes * This,
             /* [in] */ LONG Index,
             /* [retval][out] */ __RPC__out VARIANT *pvarObtPtr);
         
+        DECLSPEC_XFGVIRT(IAzScopes, get_Count)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IAzScopes * This,
             /* [retval][out] */ __RPC__out LONG *plCount);
         
+        DECLSPEC_XFGVIRT(IAzScopes, get__NewEnum)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IAzScopes * This,
             /* [retval][out] */ __RPC__deref_out_opt LPUNKNOWN *ppEnumPtr);
@@ -5924,28 +6390,34 @@ EXTERN_C const IID IID_IAzApplicationGroup;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzApplicationGroup * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzApplicationGroup * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzApplicationGroup * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzApplicationGroup * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzApplicationGroup * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzApplicationGroup * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -5954,6 +6426,7 @@ EXTERN_C const IID IID_IAzApplicationGroup;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzApplicationGroup * This,
             /* [annotation][in] */ 
@@ -5973,151 +6446,183 @@ EXTERN_C const IID IID_IAzApplicationGroup;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IAzApplicationGroup * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, put_Name)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IAzApplicationGroup * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, get_Type)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in IAzApplicationGroup * This,
             /* [retval][out] */ __RPC__out LONG *plProp);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, put_Type)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Type )( 
             __RPC__in IAzApplicationGroup * This,
             /* [in] */ LONG lProp);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, get_LdapQuery)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LdapQuery )( 
             __RPC__in IAzApplicationGroup * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, put_LdapQuery)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LdapQuery )( 
             __RPC__in IAzApplicationGroup * This,
             /* [in] */ __RPC__in BSTR bstrProp);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, get_AppMembers)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AppMembers )( 
             __RPC__in IAzApplicationGroup * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, get_AppNonMembers)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AppNonMembers )( 
             __RPC__in IAzApplicationGroup * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, get_Members)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Members )( 
             __RPC__in IAzApplicationGroup * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, get_NonMembers)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_NonMembers )( 
             __RPC__in IAzApplicationGroup * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, get_Description)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IAzApplicationGroup * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, put_Description)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IAzApplicationGroup * This,
             /* [in] */ __RPC__in BSTR bstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, AddAppMember)
         HRESULT ( STDMETHODCALLTYPE *AddAppMember )( 
             __RPC__in IAzApplicationGroup * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, DeleteAppMember)
         HRESULT ( STDMETHODCALLTYPE *DeleteAppMember )( 
             __RPC__in IAzApplicationGroup * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, AddAppNonMember)
         HRESULT ( STDMETHODCALLTYPE *AddAppNonMember )( 
             __RPC__in IAzApplicationGroup * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, DeleteAppNonMember)
         HRESULT ( STDMETHODCALLTYPE *DeleteAppNonMember )( 
             __RPC__in IAzApplicationGroup * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, AddMember)
         HRESULT ( STDMETHODCALLTYPE *AddMember )( 
             __RPC__in IAzApplicationGroup * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, DeleteMember)
         HRESULT ( STDMETHODCALLTYPE *DeleteMember )( 
             __RPC__in IAzApplicationGroup * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, AddNonMember)
         HRESULT ( STDMETHODCALLTYPE *AddNonMember )( 
             __RPC__in IAzApplicationGroup * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, DeleteNonMember)
         HRESULT ( STDMETHODCALLTYPE *DeleteNonMember )( 
             __RPC__in IAzApplicationGroup * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, get_Writable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Writable )( 
             __RPC__in IAzApplicationGroup * This,
             /* [retval][out] */ __RPC__out BOOL *pfProp);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IAzApplicationGroup * This,
             /* [in] */ LONG lPropId,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IAzApplicationGroup * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, AddPropertyItem)
         HRESULT ( STDMETHODCALLTYPE *AddPropertyItem )( 
             __RPC__in IAzApplicationGroup * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, DeletePropertyItem)
         HRESULT ( STDMETHODCALLTYPE *DeletePropertyItem )( 
             __RPC__in IAzApplicationGroup * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, Submit)
         HRESULT ( STDMETHODCALLTYPE *Submit )( 
             __RPC__in IAzApplicationGroup * This,
             /* [defaultvalue][in] */ LONG lFlags,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, AddMemberName)
         HRESULT ( STDMETHODCALLTYPE *AddMemberName )( 
             __RPC__in IAzApplicationGroup * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, DeleteMemberName)
         HRESULT ( STDMETHODCALLTYPE *DeleteMemberName )( 
             __RPC__in IAzApplicationGroup * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, AddNonMemberName)
         HRESULT ( STDMETHODCALLTYPE *AddNonMemberName )( 
             __RPC__in IAzApplicationGroup * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, DeleteNonMemberName)
         HRESULT ( STDMETHODCALLTYPE *DeleteNonMemberName )( 
             __RPC__in IAzApplicationGroup * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, get_MembersName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MembersName )( 
             __RPC__in IAzApplicationGroup * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, get_NonMembersName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_NonMembersName )( 
             __RPC__in IAzApplicationGroup * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
@@ -6299,28 +6804,34 @@ EXTERN_C const IID IID_IAzApplicationGroups;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzApplicationGroups * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzApplicationGroups * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzApplicationGroups * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzApplicationGroups * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzApplicationGroups * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzApplicationGroups * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -6329,6 +6840,7 @@ EXTERN_C const IID IID_IAzApplicationGroups;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzApplicationGroups * This,
             /* [annotation][in] */ 
@@ -6348,15 +6860,18 @@ EXTERN_C const IID IID_IAzApplicationGroups;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroups, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IAzApplicationGroups * This,
             /* [in] */ LONG Index,
             /* [retval][out] */ __RPC__out VARIANT *pvarObtPtr);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroups, get_Count)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IAzApplicationGroups * This,
             /* [retval][out] */ __RPC__out LONG *plCount);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroups, get__NewEnum)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IAzApplicationGroups * This,
             /* [retval][out] */ __RPC__deref_out_opt LPUNKNOWN *ppEnumPtr);
@@ -6541,28 +7056,34 @@ EXTERN_C const IID IID_IAzRole;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzRole * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzRole * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzRole * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzRole * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzRole * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzRole * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -6571,6 +7092,7 @@ EXTERN_C const IID IID_IAzRole;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzRole * This,
             /* [annotation][in] */ 
@@ -6590,129 +7112,156 @@ EXTERN_C const IID IID_IAzRole;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzRole, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IAzRole * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IAzRole, put_Name)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IAzRole * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(IAzRole, get_Description)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IAzRole * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzRole, put_Description)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IAzRole * This,
             /* [in] */ __RPC__in BSTR bstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzRole, get_ApplicationData)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplicationData )( 
             __RPC__in IAzRole * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrApplicationData);
         
+        DECLSPEC_XFGVIRT(IAzRole, put_ApplicationData)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ApplicationData )( 
             __RPC__in IAzRole * This,
             /* [in] */ __RPC__in BSTR bstrApplicationData);
         
+        DECLSPEC_XFGVIRT(IAzRole, AddAppMember)
         HRESULT ( STDMETHODCALLTYPE *AddAppMember )( 
             __RPC__in IAzRole * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzRole, DeleteAppMember)
         HRESULT ( STDMETHODCALLTYPE *DeleteAppMember )( 
             __RPC__in IAzRole * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzRole, AddTask)
         HRESULT ( STDMETHODCALLTYPE *AddTask )( 
             __RPC__in IAzRole * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzRole, DeleteTask)
         HRESULT ( STDMETHODCALLTYPE *DeleteTask )( 
             __RPC__in IAzRole * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzRole, AddOperation)
         HRESULT ( STDMETHODCALLTYPE *AddOperation )( 
             __RPC__in IAzRole * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzRole, DeleteOperation)
         HRESULT ( STDMETHODCALLTYPE *DeleteOperation )( 
             __RPC__in IAzRole * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzRole, AddMember)
         HRESULT ( STDMETHODCALLTYPE *AddMember )( 
             __RPC__in IAzRole * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzRole, DeleteMember)
         HRESULT ( STDMETHODCALLTYPE *DeleteMember )( 
             __RPC__in IAzRole * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzRole, get_Writable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Writable )( 
             __RPC__in IAzRole * This,
             /* [retval][out] */ __RPC__out BOOL *pfProp);
         
+        DECLSPEC_XFGVIRT(IAzRole, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IAzRole * This,
             /* [in] */ LONG lPropId,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzRole, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IAzRole * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzRole, get_AppMembers)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AppMembers )( 
             __RPC__in IAzRole * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzRole, get_Members)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Members )( 
             __RPC__in IAzRole * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzRole, get_Operations)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Operations )( 
             __RPC__in IAzRole * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzRole, get_Tasks)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Tasks )( 
             __RPC__in IAzRole * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzRole, AddPropertyItem)
         HRESULT ( STDMETHODCALLTYPE *AddPropertyItem )( 
             __RPC__in IAzRole * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzRole, DeletePropertyItem)
         HRESULT ( STDMETHODCALLTYPE *DeletePropertyItem )( 
             __RPC__in IAzRole * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzRole, Submit)
         HRESULT ( STDMETHODCALLTYPE *Submit )( 
             __RPC__in IAzRole * This,
             /* [defaultvalue][in] */ LONG lFlags,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzRole, AddMemberName)
         HRESULT ( STDMETHODCALLTYPE *AddMemberName )( 
             __RPC__in IAzRole * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzRole, DeleteMemberName)
         HRESULT ( STDMETHODCALLTYPE *DeleteMemberName )( 
             __RPC__in IAzRole * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzRole, get_MembersName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MembersName )( 
             __RPC__in IAzRole * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
@@ -6879,28 +7428,34 @@ EXTERN_C const IID IID_IAzRoles;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzRoles * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzRoles * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzRoles * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzRoles * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzRoles * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzRoles * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -6909,6 +7464,7 @@ EXTERN_C const IID IID_IAzRoles;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzRoles * This,
             /* [annotation][in] */ 
@@ -6928,15 +7484,18 @@ EXTERN_C const IID IID_IAzRoles;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzRoles, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IAzRoles * This,
             /* [in] */ LONG Index,
             /* [retval][out] */ __RPC__out VARIANT *pvarObtPtr);
         
+        DECLSPEC_XFGVIRT(IAzRoles, get_Count)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IAzRoles * This,
             /* [retval][out] */ __RPC__out LONG *plCount);
         
+        DECLSPEC_XFGVIRT(IAzRoles, get__NewEnum)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IAzRoles * This,
             /* [retval][out] */ __RPC__deref_out_opt LPUNKNOWN *ppEnumPtr);
@@ -7071,28 +7630,34 @@ EXTERN_C const IID IID_IAzClientContext;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzClientContext * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzClientContext * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzClientContext * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzClientContext * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzClientContext * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzClientContext * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -7101,6 +7666,7 @@ EXTERN_C const IID IID_IAzClientContext;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzClientContext * This,
             /* [annotation][in] */ 
@@ -7120,6 +7686,7 @@ EXTERN_C const IID IID_IAzClientContext;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, AccessCheck)
         HRESULT ( STDMETHODCALLTYPE *AccessCheck )( 
             __RPC__in IAzClientContext * This,
             /* [in] */ __RPC__in BSTR bstrObjectName,
@@ -7132,53 +7699,65 @@ EXTERN_C const IID IID_IAzClientContext;
             /* [optional][in] */ VARIANT varInterfaces,
             /* [retval][out] */ __RPC__out VARIANT *pvarResults);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, GetBusinessRuleString)
         HRESULT ( STDMETHODCALLTYPE *GetBusinessRuleString )( 
             __RPC__in IAzClientContext * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrBusinessRuleString);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, get_UserDn)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserDn )( 
             __RPC__in IAzClientContext * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, get_UserSamCompat)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserSamCompat )( 
             __RPC__in IAzClientContext * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, get_UserDisplay)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserDisplay )( 
             __RPC__in IAzClientContext * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, get_UserGuid)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserGuid )( 
             __RPC__in IAzClientContext * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, get_UserCanonical)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserCanonical )( 
             __RPC__in IAzClientContext * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, get_UserUpn)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserUpn )( 
             __RPC__in IAzClientContext * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, get_UserDnsSamCompat)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserDnsSamCompat )( 
             __RPC__in IAzClientContext * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IAzClientContext * This,
             /* [in] */ LONG lPropId,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, GetRoles)
         HRESULT ( STDMETHODCALLTYPE *GetRoles )( 
             __RPC__in IAzClientContext * This,
             /* [defaultvalue][in] */ __RPC__in BSTR bstrScopeName,
             /* [retval][out] */ __RPC__out VARIANT *pvarRoleNames);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, get_RoleForAccessCheck)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RoleForAccessCheck )( 
             __RPC__in IAzClientContext * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, put_RoleForAccessCheck)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RoleForAccessCheck )( 
             __RPC__in IAzClientContext * This,
             /* [in] */ __RPC__in BSTR bstrProp);
@@ -7315,28 +7894,34 @@ EXTERN_C const IID IID_IAzClientContext2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzClientContext2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzClientContext2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzClientContext2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzClientContext2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzClientContext2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzClientContext2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -7345,6 +7930,7 @@ EXTERN_C const IID IID_IAzClientContext2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzClientContext2 * This,
             /* [annotation][in] */ 
@@ -7364,6 +7950,7 @@ EXTERN_C const IID IID_IAzClientContext2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, AccessCheck)
         HRESULT ( STDMETHODCALLTYPE *AccessCheck )( 
             __RPC__in IAzClientContext2 * This,
             /* [in] */ __RPC__in BSTR bstrObjectName,
@@ -7376,57 +7963,70 @@ EXTERN_C const IID IID_IAzClientContext2;
             /* [optional][in] */ VARIANT varInterfaces,
             /* [retval][out] */ __RPC__out VARIANT *pvarResults);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, GetBusinessRuleString)
         HRESULT ( STDMETHODCALLTYPE *GetBusinessRuleString )( 
             __RPC__in IAzClientContext2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrBusinessRuleString);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, get_UserDn)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserDn )( 
             __RPC__in IAzClientContext2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, get_UserSamCompat)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserSamCompat )( 
             __RPC__in IAzClientContext2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, get_UserDisplay)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserDisplay )( 
             __RPC__in IAzClientContext2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, get_UserGuid)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserGuid )( 
             __RPC__in IAzClientContext2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, get_UserCanonical)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserCanonical )( 
             __RPC__in IAzClientContext2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, get_UserUpn)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserUpn )( 
             __RPC__in IAzClientContext2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, get_UserDnsSamCompat)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserDnsSamCompat )( 
             __RPC__in IAzClientContext2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IAzClientContext2 * This,
             /* [in] */ LONG lPropId,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, GetRoles)
         HRESULT ( STDMETHODCALLTYPE *GetRoles )( 
             __RPC__in IAzClientContext2 * This,
             /* [defaultvalue][in] */ __RPC__in BSTR bstrScopeName,
             /* [retval][out] */ __RPC__out VARIANT *pvarRoleNames);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, get_RoleForAccessCheck)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RoleForAccessCheck )( 
             __RPC__in IAzClientContext2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, put_RoleForAccessCheck)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RoleForAccessCheck )( 
             __RPC__in IAzClientContext2 * This,
             /* [in] */ __RPC__in BSTR bstrProp);
         
+        DECLSPEC_XFGVIRT(IAzClientContext2, GetAssignedScopesPage)
         HRESULT ( STDMETHODCALLTYPE *GetAssignedScopesPage )( 
             __RPC__in IAzClientContext2 * This,
             /* [in] */ LONG lOptions,
@@ -7434,23 +8034,28 @@ EXTERN_C const IID IID_IAzClientContext2;
             /* [out][in] */ __RPC__inout VARIANT *pvarCursor,
             /* [retval][out] */ __RPC__out VARIANT *pvarScopeNames);
         
+        DECLSPEC_XFGVIRT(IAzClientContext2, AddRoles)
         HRESULT ( STDMETHODCALLTYPE *AddRoles )( 
             __RPC__in IAzClientContext2 * This,
             /* [in] */ VARIANT varRoles,
             /* [in] */ __RPC__in BSTR bstrScopeName);
         
+        DECLSPEC_XFGVIRT(IAzClientContext2, AddApplicationGroups)
         HRESULT ( STDMETHODCALLTYPE *AddApplicationGroups )( 
             __RPC__in IAzClientContext2 * This,
             /* [in] */ VARIANT varApplicationGroups);
         
+        DECLSPEC_XFGVIRT(IAzClientContext2, AddStringSids)
         HRESULT ( STDMETHODCALLTYPE *AddStringSids )( 
             __RPC__in IAzClientContext2 * This,
             /* [in] */ VARIANT varStringSids);
         
+        DECLSPEC_XFGVIRT(IAzClientContext2, put_LDAPQueryDN)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LDAPQueryDN )( 
             __RPC__in IAzClientContext2 * This,
             /* [in] */ __RPC__in BSTR bstrLDAPQueryDN);
         
+        DECLSPEC_XFGVIRT(IAzClientContext2, get_LDAPQueryDN)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LDAPQueryDN )( 
             __RPC__in IAzClientContext2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrLDAPQueryDN);
@@ -7597,28 +8202,34 @@ EXTERN_C const IID IID_IAzBizRuleContext;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzBizRuleContext * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzBizRuleContext * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzBizRuleContext * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzBizRuleContext * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzBizRuleContext * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzBizRuleContext * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -7627,6 +8238,7 @@ EXTERN_C const IID IID_IAzBizRuleContext;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzBizRuleContext * This,
             /* [annotation][in] */ 
@@ -7646,18 +8258,22 @@ EXTERN_C const IID IID_IAzBizRuleContext;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzBizRuleContext, put_BusinessRuleResult)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_BusinessRuleResult )( 
             __RPC__in IAzBizRuleContext * This,
             /* [in] */ BOOL bResult);
         
+        DECLSPEC_XFGVIRT(IAzBizRuleContext, put_BusinessRuleString)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_BusinessRuleString )( 
             __RPC__in IAzBizRuleContext * This,
             /* [in] */ __RPC__in BSTR bstrBusinessRuleString);
         
+        DECLSPEC_XFGVIRT(IAzBizRuleContext, get_BusinessRuleString)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_BusinessRuleString )( 
             __RPC__in IAzBizRuleContext * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrBusinessRuleString);
         
+        DECLSPEC_XFGVIRT(IAzBizRuleContext, GetParameter)
         HRESULT ( STDMETHODCALLTYPE *GetParameter )( 
             __RPC__in IAzBizRuleContext * This,
             /* [in] */ __RPC__in BSTR bstrParameterName,
@@ -7766,28 +8382,34 @@ EXTERN_C const IID IID_IAzBizRuleParameters;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzBizRuleParameters * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzBizRuleParameters * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzBizRuleParameters * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzBizRuleParameters * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzBizRuleParameters * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzBizRuleParameters * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -7796,6 +8418,7 @@ EXTERN_C const IID IID_IAzBizRuleParameters;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzBizRuleParameters * This,
             /* [annotation][in] */ 
@@ -7815,28 +8438,34 @@ EXTERN_C const IID IID_IAzBizRuleParameters;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzBizRuleParameters, AddParameter)
         HRESULT ( STDMETHODCALLTYPE *AddParameter )( 
             __RPC__in IAzBizRuleParameters * This,
             /* [in] */ __RPC__in BSTR bstrParameterName,
             /* [in] */ VARIANT varParameterValue);
         
+        DECLSPEC_XFGVIRT(IAzBizRuleParameters, AddParameters)
         HRESULT ( STDMETHODCALLTYPE *AddParameters )( 
             __RPC__in IAzBizRuleParameters * This,
             /* [in] */ VARIANT varParameterNames,
             /* [in] */ VARIANT varParameterValues);
         
+        DECLSPEC_XFGVIRT(IAzBizRuleParameters, GetParameterValue)
         HRESULT ( STDMETHODCALLTYPE *GetParameterValue )( 
             __RPC__in IAzBizRuleParameters * This,
             /* [in] */ __RPC__in BSTR bstrParameterName,
             /* [retval][out] */ __RPC__out VARIANT *pvarParameterValue);
         
+        DECLSPEC_XFGVIRT(IAzBizRuleParameters, Remove)
         HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in IAzBizRuleParameters * This,
             /* [in] */ __RPC__in BSTR varParameterName);
         
+        DECLSPEC_XFGVIRT(IAzBizRuleParameters, RemoveAll)
         HRESULT ( STDMETHODCALLTYPE *RemoveAll )( 
             __RPC__in IAzBizRuleParameters * This);
         
+        DECLSPEC_XFGVIRT(IAzBizRuleParameters, get_Count)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IAzBizRuleParameters * This,
             /* [retval][out] */ __RPC__out unsigned long *plCount);
@@ -7953,28 +8582,34 @@ EXTERN_C const IID IID_IAzBizRuleInterfaces;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzBizRuleInterfaces * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzBizRuleInterfaces * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzBizRuleInterfaces * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzBizRuleInterfaces * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzBizRuleInterfaces * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzBizRuleInterfaces * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -7983,6 +8618,7 @@ EXTERN_C const IID IID_IAzBizRuleInterfaces;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzBizRuleInterfaces * This,
             /* [annotation][in] */ 
@@ -8002,31 +8638,37 @@ EXTERN_C const IID IID_IAzBizRuleInterfaces;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzBizRuleInterfaces, AddInterface)
         HRESULT ( STDMETHODCALLTYPE *AddInterface )( 
             __RPC__in IAzBizRuleInterfaces * This,
             /* [in] */ __RPC__in BSTR bstrInterfaceName,
             /* [in] */ LONG lInterfaceFlag,
             /* [in] */ VARIANT varInterface);
         
+        DECLSPEC_XFGVIRT(IAzBizRuleInterfaces, AddInterfaces)
         HRESULT ( STDMETHODCALLTYPE *AddInterfaces )( 
             __RPC__in IAzBizRuleInterfaces * This,
             /* [in] */ VARIANT varInterfaceNames,
             /* [in] */ VARIANT varInterfaceFlags,
             /* [in] */ VARIANT varInterfaces);
         
+        DECLSPEC_XFGVIRT(IAzBizRuleInterfaces, GetInterfaceValue)
         HRESULT ( STDMETHODCALLTYPE *GetInterfaceValue )( 
             __RPC__in IAzBizRuleInterfaces * This,
             /* [in] */ __RPC__in BSTR bstrInterfaceName,
             /* [out] */ __RPC__out LONG *lInterfaceFlag,
             /* [out] */ __RPC__out VARIANT *varInterface);
         
+        DECLSPEC_XFGVIRT(IAzBizRuleInterfaces, Remove)
         HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in IAzBizRuleInterfaces * This,
             /* [in] */ __RPC__in BSTR bstrInterfaceName);
         
+        DECLSPEC_XFGVIRT(IAzBizRuleInterfaces, RemoveAll)
         HRESULT ( STDMETHODCALLTYPE *RemoveAll )( 
             __RPC__in IAzBizRuleInterfaces * This);
         
+        DECLSPEC_XFGVIRT(IAzBizRuleInterfaces, get_Count)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IAzBizRuleInterfaces * This,
             /* [retval][out] */ __RPC__out unsigned long *plCount);
@@ -8153,28 +8795,34 @@ EXTERN_C const IID IID_IAzClientContext3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzClientContext3 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzClientContext3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzClientContext3 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzClientContext3 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzClientContext3 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzClientContext3 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -8183,6 +8831,7 @@ EXTERN_C const IID IID_IAzClientContext3;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzClientContext3 * This,
             /* [annotation][in] */ 
@@ -8202,6 +8851,7 @@ EXTERN_C const IID IID_IAzClientContext3;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, AccessCheck)
         HRESULT ( STDMETHODCALLTYPE *AccessCheck )( 
             __RPC__in IAzClientContext3 * This,
             /* [in] */ __RPC__in BSTR bstrObjectName,
@@ -8214,57 +8864,70 @@ EXTERN_C const IID IID_IAzClientContext3;
             /* [optional][in] */ VARIANT varInterfaces,
             /* [retval][out] */ __RPC__out VARIANT *pvarResults);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, GetBusinessRuleString)
         HRESULT ( STDMETHODCALLTYPE *GetBusinessRuleString )( 
             __RPC__in IAzClientContext3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrBusinessRuleString);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, get_UserDn)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserDn )( 
             __RPC__in IAzClientContext3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, get_UserSamCompat)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserSamCompat )( 
             __RPC__in IAzClientContext3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, get_UserDisplay)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserDisplay )( 
             __RPC__in IAzClientContext3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, get_UserGuid)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserGuid )( 
             __RPC__in IAzClientContext3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, get_UserCanonical)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserCanonical )( 
             __RPC__in IAzClientContext3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, get_UserUpn)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserUpn )( 
             __RPC__in IAzClientContext3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, get_UserDnsSamCompat)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserDnsSamCompat )( 
             __RPC__in IAzClientContext3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IAzClientContext3 * This,
             /* [in] */ LONG lPropId,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, GetRoles)
         HRESULT ( STDMETHODCALLTYPE *GetRoles )( 
             __RPC__in IAzClientContext3 * This,
             /* [defaultvalue][in] */ __RPC__in BSTR bstrScopeName,
             /* [retval][out] */ __RPC__out VARIANT *pvarRoleNames);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, get_RoleForAccessCheck)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RoleForAccessCheck )( 
             __RPC__in IAzClientContext3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzClientContext, put_RoleForAccessCheck)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RoleForAccessCheck )( 
             __RPC__in IAzClientContext3 * This,
             /* [in] */ __RPC__in BSTR bstrProp);
         
+        DECLSPEC_XFGVIRT(IAzClientContext2, GetAssignedScopesPage)
         HRESULT ( STDMETHODCALLTYPE *GetAssignedScopesPage )( 
             __RPC__in IAzClientContext3 * This,
             /* [in] */ LONG lOptions,
@@ -8272,27 +8935,33 @@ EXTERN_C const IID IID_IAzClientContext3;
             /* [out][in] */ __RPC__inout VARIANT *pvarCursor,
             /* [retval][out] */ __RPC__out VARIANT *pvarScopeNames);
         
+        DECLSPEC_XFGVIRT(IAzClientContext2, AddRoles)
         HRESULT ( STDMETHODCALLTYPE *AddRoles )( 
             __RPC__in IAzClientContext3 * This,
             /* [in] */ VARIANT varRoles,
             /* [in] */ __RPC__in BSTR bstrScopeName);
         
+        DECLSPEC_XFGVIRT(IAzClientContext2, AddApplicationGroups)
         HRESULT ( STDMETHODCALLTYPE *AddApplicationGroups )( 
             __RPC__in IAzClientContext3 * This,
             /* [in] */ VARIANT varApplicationGroups);
         
+        DECLSPEC_XFGVIRT(IAzClientContext2, AddStringSids)
         HRESULT ( STDMETHODCALLTYPE *AddStringSids )( 
             __RPC__in IAzClientContext3 * This,
             /* [in] */ VARIANT varStringSids);
         
+        DECLSPEC_XFGVIRT(IAzClientContext2, put_LDAPQueryDN)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LDAPQueryDN )( 
             __RPC__in IAzClientContext3 * This,
             /* [in] */ __RPC__in BSTR bstrLDAPQueryDN);
         
+        DECLSPEC_XFGVIRT(IAzClientContext2, get_LDAPQueryDN)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LDAPQueryDN )( 
             __RPC__in IAzClientContext3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrLDAPQueryDN);
         
+        DECLSPEC_XFGVIRT(IAzClientContext3, AccessCheck2)
         HRESULT ( STDMETHODCALLTYPE *AccessCheck2 )( 
             __RPC__in IAzClientContext3 * This,
             /* [in] */ __RPC__in BSTR bstrObjectName,
@@ -8300,36 +8969,43 @@ EXTERN_C const IID IID_IAzClientContext3;
             /* [in] */ long lOperation,
             /* [retval][out] */ __RPC__out unsigned long *plResult);
         
+        DECLSPEC_XFGVIRT(IAzClientContext3, IsInRoleAssignment)
         HRESULT ( STDMETHODCALLTYPE *IsInRoleAssignment )( 
             __RPC__in IAzClientContext3 * This,
             /* [in] */ __RPC__in BSTR bstrScopeName,
             /* [in] */ __RPC__in BSTR bstrRoleName,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbIsInRole);
         
+        DECLSPEC_XFGVIRT(IAzClientContext3, GetOperations)
         HRESULT ( STDMETHODCALLTYPE *GetOperations )( 
             __RPC__in IAzClientContext3 * This,
             /* [in] */ __RPC__in BSTR bstrScopeName,
             /* [retval][out] */ __RPC__deref_out_opt IAzOperations **ppOperationCollection);
         
+        DECLSPEC_XFGVIRT(IAzClientContext3, GetTasks)
         HRESULT ( STDMETHODCALLTYPE *GetTasks )( 
             __RPC__in IAzClientContext3 * This,
             /* [in] */ __RPC__in BSTR bstrScopeName,
             /* [retval][out] */ __RPC__deref_out_opt IAzTasks **ppTaskCollection);
         
+        DECLSPEC_XFGVIRT(IAzClientContext3, get_BizRuleParameters)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_BizRuleParameters )( 
             __RPC__in IAzClientContext3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzBizRuleParameters **ppBizRuleParam);
         
+        DECLSPEC_XFGVIRT(IAzClientContext3, get_BizRuleInterfaces)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_BizRuleInterfaces )( 
             __RPC__in IAzClientContext3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzBizRuleInterfaces **ppBizRuleInterfaces);
         
+        DECLSPEC_XFGVIRT(IAzClientContext3, GetGroups)
         HRESULT ( STDMETHODCALLTYPE *GetGroups )( 
             __RPC__in IAzClientContext3 * This,
             /* [in] */ __RPC__in BSTR bstrScopeName,
             /* [in] */ ULONG ulOptions,
             /* [retval][out] */ __RPC__out VARIANT *pGroupArray);
         
+        DECLSPEC_XFGVIRT(IAzClientContext3, get_Sids)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Sids )( 
             __RPC__in IAzClientContext3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pStringSidArray);
@@ -8516,28 +9192,34 @@ EXTERN_C const IID IID_IAzScope2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzScope2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzScope2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzScope2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -8546,6 +9228,7 @@ EXTERN_C const IID IID_IAzScope2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzScope2 * This,
             /* [annotation][in] */ 
@@ -8565,222 +9248,268 @@ EXTERN_C const IID IID_IAzScope2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzScope, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IAzScope2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IAzScope, put_Name)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(IAzScope, get_Description)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IAzScope2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzScope, put_Description)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ __RPC__in BSTR bstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzScope, get_ApplicationData)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplicationData )( 
             __RPC__in IAzScope2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrApplicationData);
         
+        DECLSPEC_XFGVIRT(IAzScope, put_ApplicationData)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ApplicationData )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ __RPC__in BSTR bstrApplicationData);
         
+        DECLSPEC_XFGVIRT(IAzScope, get_Writable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Writable )( 
             __RPC__in IAzScope2 * This,
             /* [retval][out] */ __RPC__out BOOL *pfProp);
         
+        DECLSPEC_XFGVIRT(IAzScope, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ LONG lPropId,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzScope, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzScope, AddPropertyItem)
         HRESULT ( STDMETHODCALLTYPE *AddPropertyItem )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzScope, DeletePropertyItem)
         HRESULT ( STDMETHODCALLTYPE *DeletePropertyItem )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzScope, get_PolicyAdministrators)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyAdministrators )( 
             __RPC__in IAzScope2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarAdmins);
         
+        DECLSPEC_XFGVIRT(IAzScope, get_PolicyReaders)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyReaders )( 
             __RPC__in IAzScope2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarReaders);
         
+        DECLSPEC_XFGVIRT(IAzScope, AddPolicyAdministrator)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyAdministrator )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzScope, DeletePolicyAdministrator)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyAdministrator )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzScope, AddPolicyReader)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyReader )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ __RPC__in BSTR bstrReader,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzScope, DeletePolicyReader)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyReader )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ __RPC__in BSTR bstrReader,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzScope, get_ApplicationGroups)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplicationGroups )( 
             __RPC__in IAzScope2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplicationGroups **ppGroupCollection);
         
+        DECLSPEC_XFGVIRT(IAzScope, OpenApplicationGroup)
         HRESULT ( STDMETHODCALLTYPE *OpenApplicationGroup )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ __RPC__in BSTR bstrGroupName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplicationGroup **ppGroup);
         
+        DECLSPEC_XFGVIRT(IAzScope, CreateApplicationGroup)
         HRESULT ( STDMETHODCALLTYPE *CreateApplicationGroup )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ __RPC__in BSTR bstrGroupName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplicationGroup **ppGroup);
         
+        DECLSPEC_XFGVIRT(IAzScope, DeleteApplicationGroup)
         HRESULT ( STDMETHODCALLTYPE *DeleteApplicationGroup )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ __RPC__in BSTR bstrGroupName,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzScope, get_Roles)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Roles )( 
             __RPC__in IAzScope2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzRoles **ppRoleCollection);
         
+        DECLSPEC_XFGVIRT(IAzScope, OpenRole)
         HRESULT ( STDMETHODCALLTYPE *OpenRole )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ __RPC__in BSTR bstrRoleName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzRole **ppRole);
         
+        DECLSPEC_XFGVIRT(IAzScope, CreateRole)
         HRESULT ( STDMETHODCALLTYPE *CreateRole )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ __RPC__in BSTR bstrRoleName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzRole **ppRole);
         
+        DECLSPEC_XFGVIRT(IAzScope, DeleteRole)
         HRESULT ( STDMETHODCALLTYPE *DeleteRole )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ __RPC__in BSTR bstrRoleName,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzScope, get_Tasks)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Tasks )( 
             __RPC__in IAzScope2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzTasks **ppTaskCollection);
         
+        DECLSPEC_XFGVIRT(IAzScope, OpenTask)
         HRESULT ( STDMETHODCALLTYPE *OpenTask )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ __RPC__in BSTR bstrTaskName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzTask **ppTask);
         
+        DECLSPEC_XFGVIRT(IAzScope, CreateTask)
         HRESULT ( STDMETHODCALLTYPE *CreateTask )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ __RPC__in BSTR bstrTaskName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzTask **ppTask);
         
+        DECLSPEC_XFGVIRT(IAzScope, DeleteTask)
         HRESULT ( STDMETHODCALLTYPE *DeleteTask )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ __RPC__in BSTR bstrTaskName,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzScope, Submit)
         HRESULT ( STDMETHODCALLTYPE *Submit )( 
             __RPC__in IAzScope2 * This,
             /* [defaultvalue][in] */ LONG lFlags,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzScope, get_CanBeDelegated)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CanBeDelegated )( 
             __RPC__in IAzScope2 * This,
             /* [retval][out] */ __RPC__out BOOL *pfProp);
         
+        DECLSPEC_XFGVIRT(IAzScope, get_BizrulesWritable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_BizrulesWritable )( 
             __RPC__in IAzScope2 * This,
             /* [retval][out] */ __RPC__out BOOL *pfProp);
         
+        DECLSPEC_XFGVIRT(IAzScope, get_PolicyAdministratorsName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyAdministratorsName )( 
             __RPC__in IAzScope2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarAdmins);
         
+        DECLSPEC_XFGVIRT(IAzScope, get_PolicyReadersName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyReadersName )( 
             __RPC__in IAzScope2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarReaders);
         
+        DECLSPEC_XFGVIRT(IAzScope, AddPolicyAdministratorName)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyAdministratorName )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzScope, DeletePolicyAdministratorName)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyAdministratorName )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzScope, AddPolicyReaderName)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyReaderName )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ __RPC__in BSTR bstrReader,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzScope, DeletePolicyReaderName)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyReaderName )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ __RPC__in BSTR bstrReader,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzScope2, get_RoleDefinitions)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RoleDefinitions )( 
             __RPC__in IAzScope2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzRoleDefinitions **ppRoleDefinitions);
         
+        DECLSPEC_XFGVIRT(IAzScope2, CreateRoleDefinition)
         HRESULT ( STDMETHODCALLTYPE *CreateRoleDefinition )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ __RPC__in BSTR bstrRoleDefinitionName,
             /* [retval][out] */ __RPC__deref_out_opt IAzRoleDefinition **ppRoleDefinitions);
         
+        DECLSPEC_XFGVIRT(IAzScope2, OpenRoleDefinition)
         HRESULT ( STDMETHODCALLTYPE *OpenRoleDefinition )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ __RPC__in BSTR bstrRoleDefinitionName,
             /* [retval][out] */ __RPC__deref_out_opt IAzRoleDefinition **ppRoleDefinitions);
         
+        DECLSPEC_XFGVIRT(IAzScope2, DeleteRoleDefinition)
         HRESULT ( STDMETHODCALLTYPE *DeleteRoleDefinition )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ __RPC__in BSTR bstrRoleDefinitionName);
         
+        DECLSPEC_XFGVIRT(IAzScope2, get_RoleAssignments)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RoleAssignments )( 
             __RPC__in IAzScope2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzRoleAssignments **ppRoleAssignments);
         
+        DECLSPEC_XFGVIRT(IAzScope2, CreateRoleAssignment)
         HRESULT ( STDMETHODCALLTYPE *CreateRoleAssignment )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ __RPC__in BSTR bstrRoleAssignmentName,
             /* [retval][out] */ __RPC__deref_out_opt IAzRoleAssignment **ppRoleAssignment);
         
+        DECLSPEC_XFGVIRT(IAzScope2, OpenRoleAssignment)
         HRESULT ( STDMETHODCALLTYPE *OpenRoleAssignment )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ __RPC__in BSTR bstrRoleAssignmentName,
             /* [retval][out] */ __RPC__deref_out_opt IAzRoleAssignment **ppRoleAssignment);
         
+        DECLSPEC_XFGVIRT(IAzScope2, DeleteRoleAssignment)
         HRESULT ( STDMETHODCALLTYPE *DeleteRoleAssignment )( 
             __RPC__in IAzScope2 * This,
             /* [in] */ __RPC__in BSTR bstrRoleAssignmentName);
@@ -9044,28 +9773,34 @@ EXTERN_C const IID IID_IAzApplication3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzApplication3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzApplication3 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzApplication3 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -9074,6 +9809,7 @@ EXTERN_C const IID IID_IAzApplication3;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzApplication3 * This,
             /* [annotation][in] */ 
@@ -9093,234 +9829,282 @@ EXTERN_C const IID IID_IAzApplication3;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IAzApplication3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IAzApplication, put_Name)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_Description)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IAzApplication3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzApplication, put_Description)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_ApplicationData)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplicationData )( 
             __RPC__in IAzApplication3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrApplicationData);
         
+        DECLSPEC_XFGVIRT(IAzApplication, put_ApplicationData)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ApplicationData )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrApplicationData);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_AuthzInterfaceClsid)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AuthzInterfaceClsid )( 
             __RPC__in IAzApplication3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzApplication, put_AuthzInterfaceClsid)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_AuthzInterfaceClsid )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrProp);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_Version)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Version )( 
             __RPC__in IAzApplication3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzApplication, put_Version)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Version )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrProp);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_GenerateAudits)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_GenerateAudits )( 
             __RPC__in IAzApplication3 * This,
             /* [retval][out] */ __RPC__out BOOL *pbProp);
         
+        DECLSPEC_XFGVIRT(IAzApplication, put_GenerateAudits)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_GenerateAudits )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ BOOL bProp);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_ApplyStoreSacl)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplyStoreSacl )( 
             __RPC__in IAzApplication3 * This,
             /* [retval][out] */ __RPC__out BOOL *pbProp);
         
+        DECLSPEC_XFGVIRT(IAzApplication, put_ApplyStoreSacl)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ApplyStoreSacl )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ BOOL bProp);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_Writable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Writable )( 
             __RPC__in IAzApplication3 * This,
             /* [retval][out] */ __RPC__out BOOL *pfProp);
         
+        DECLSPEC_XFGVIRT(IAzApplication, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ LONG lPropId,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzApplication, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_PolicyAdministrators)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyAdministrators )( 
             __RPC__in IAzApplication3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarAdmins);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_PolicyReaders)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyReaders )( 
             __RPC__in IAzApplication3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarReaders);
         
+        DECLSPEC_XFGVIRT(IAzApplication, AddPolicyAdministrator)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyAdministrator )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeletePolicyAdministrator)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyAdministrator )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, AddPolicyReader)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyReader )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrReader,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeletePolicyReader)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyReader )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrReader,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_Scopes)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Scopes )( 
             __RPC__in IAzApplication3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzScopes **ppScopeCollection);
         
+        DECLSPEC_XFGVIRT(IAzApplication, OpenScope)
         HRESULT ( STDMETHODCALLTYPE *OpenScope )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrScopeName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzScope **ppScope);
         
+        DECLSPEC_XFGVIRT(IAzApplication, CreateScope)
         HRESULT ( STDMETHODCALLTYPE *CreateScope )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrScopeName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzScope **ppScope);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeleteScope)
         HRESULT ( STDMETHODCALLTYPE *DeleteScope )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrScopeName,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_Operations)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Operations )( 
             __RPC__in IAzApplication3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzOperations **ppOperationCollection);
         
+        DECLSPEC_XFGVIRT(IAzApplication, OpenOperation)
         HRESULT ( STDMETHODCALLTYPE *OpenOperation )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrOperationName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzOperation **ppOperation);
         
+        DECLSPEC_XFGVIRT(IAzApplication, CreateOperation)
         HRESULT ( STDMETHODCALLTYPE *CreateOperation )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrOperationName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzOperation **ppOperation);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeleteOperation)
         HRESULT ( STDMETHODCALLTYPE *DeleteOperation )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrOperationName,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_Tasks)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Tasks )( 
             __RPC__in IAzApplication3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzTasks **ppTaskCollection);
         
+        DECLSPEC_XFGVIRT(IAzApplication, OpenTask)
         HRESULT ( STDMETHODCALLTYPE *OpenTask )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrTaskName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzTask **ppTask);
         
+        DECLSPEC_XFGVIRT(IAzApplication, CreateTask)
         HRESULT ( STDMETHODCALLTYPE *CreateTask )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrTaskName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzTask **ppTask);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeleteTask)
         HRESULT ( STDMETHODCALLTYPE *DeleteTask )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrTaskName,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_ApplicationGroups)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplicationGroups )( 
             __RPC__in IAzApplication3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplicationGroups **ppGroupCollection);
         
+        DECLSPEC_XFGVIRT(IAzApplication, OpenApplicationGroup)
         HRESULT ( STDMETHODCALLTYPE *OpenApplicationGroup )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrGroupName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplicationGroup **ppGroup);
         
+        DECLSPEC_XFGVIRT(IAzApplication, CreateApplicationGroup)
         HRESULT ( STDMETHODCALLTYPE *CreateApplicationGroup )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrGroupName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzApplicationGroup **ppGroup);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeleteApplicationGroup)
         HRESULT ( STDMETHODCALLTYPE *DeleteApplicationGroup )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrGroupName,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_Roles)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Roles )( 
             __RPC__in IAzApplication3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzRoles **ppRoleCollection);
         
+        DECLSPEC_XFGVIRT(IAzApplication, OpenRole)
         HRESULT ( STDMETHODCALLTYPE *OpenRole )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrRoleName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzRole **ppRole);
         
+        DECLSPEC_XFGVIRT(IAzApplication, CreateRole)
         HRESULT ( STDMETHODCALLTYPE *CreateRole )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrRoleName,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzRole **ppRole);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeleteRole)
         HRESULT ( STDMETHODCALLTYPE *DeleteRole )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrRoleName,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, InitializeClientContextFromToken)
         HRESULT ( STDMETHODCALLTYPE *InitializeClientContextFromToken )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ ULONGLONG ullTokenHandle,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzClientContext **ppClientContext);
         
+        DECLSPEC_XFGVIRT(IAzApplication, AddPropertyItem)
         HRESULT ( STDMETHODCALLTYPE *AddPropertyItem )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeletePropertyItem)
         HRESULT ( STDMETHODCALLTYPE *DeletePropertyItem )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, Submit)
         HRESULT ( STDMETHODCALLTYPE *Submit )( 
             __RPC__in IAzApplication3 * This,
             /* [defaultvalue][in] */ LONG lFlags,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, InitializeClientContextFromName)
         HRESULT ( STDMETHODCALLTYPE *InitializeClientContextFromName )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR ClientName,
@@ -9328,20 +10112,24 @@ EXTERN_C const IID IID_IAzApplication3;
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzClientContext **ppClientContext);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_DelegatedPolicyUsers)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DelegatedPolicyUsers )( 
             __RPC__in IAzApplication3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarDelegatedPolicyUsers);
         
+        DECLSPEC_XFGVIRT(IAzApplication, AddDelegatedPolicyUser)
         HRESULT ( STDMETHODCALLTYPE *AddDelegatedPolicyUser )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrDelegatedPolicyUser,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeleteDelegatedPolicyUser)
         HRESULT ( STDMETHODCALLTYPE *DeleteDelegatedPolicyUser )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrDelegatedPolicyUser,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, InitializeClientContextFromStringSid)
         HRESULT ( STDMETHODCALLTYPE *InitializeClientContextFromStringSid )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR SidString,
@@ -9349,48 +10137,58 @@ EXTERN_C const IID IID_IAzApplication3;
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzClientContext **ppClientContext);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_PolicyAdministratorsName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyAdministratorsName )( 
             __RPC__in IAzApplication3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarAdmins);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_PolicyReadersName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolicyReadersName )( 
             __RPC__in IAzApplication3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarReaders);
         
+        DECLSPEC_XFGVIRT(IAzApplication, AddPolicyAdministratorName)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyAdministratorName )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeletePolicyAdministratorName)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyAdministratorName )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrAdmin,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, AddPolicyReaderName)
         HRESULT ( STDMETHODCALLTYPE *AddPolicyReaderName )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrReader,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeletePolicyReaderName)
         HRESULT ( STDMETHODCALLTYPE *DeletePolicyReaderName )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrReader,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, get_DelegatedPolicyUsersName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DelegatedPolicyUsersName )( 
             __RPC__in IAzApplication3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarDelegatedPolicyUsers);
         
+        DECLSPEC_XFGVIRT(IAzApplication, AddDelegatedPolicyUserName)
         HRESULT ( STDMETHODCALLTYPE *AddDelegatedPolicyUserName )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrDelegatedPolicyUser,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication, DeleteDelegatedPolicyUserName)
         HRESULT ( STDMETHODCALLTYPE *DeleteDelegatedPolicyUserName )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrDelegatedPolicyUser,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplication2, InitializeClientContextFromToken2)
         HRESULT ( STDMETHODCALLTYPE *InitializeClientContextFromToken2 )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ ULONG ulTokenHandleLowPart,
@@ -9398,71 +10196,86 @@ EXTERN_C const IID IID_IAzApplication3;
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzClientContext2 **ppClientContext);
         
+        DECLSPEC_XFGVIRT(IAzApplication2, InitializeClientContext2)
         HRESULT ( STDMETHODCALLTYPE *InitializeClientContext2 )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR IdentifyingString,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__deref_out_opt IAzClientContext2 **ppClientContext);
         
+        DECLSPEC_XFGVIRT(IAzApplication3, ScopeExists)
         HRESULT ( STDMETHODCALLTYPE *ScopeExists )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrScopeName,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbExist);
         
+        DECLSPEC_XFGVIRT(IAzApplication3, OpenScope2)
         HRESULT ( STDMETHODCALLTYPE *OpenScope2 )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrScopeName,
             /* [retval][out] */ __RPC__deref_out_opt IAzScope2 **ppScope2);
         
+        DECLSPEC_XFGVIRT(IAzApplication3, CreateScope2)
         HRESULT ( STDMETHODCALLTYPE *CreateScope2 )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrScopeName,
             /* [retval][out] */ __RPC__deref_out_opt IAzScope2 **ppScope2);
         
+        DECLSPEC_XFGVIRT(IAzApplication3, DeleteScope2)
         HRESULT ( STDMETHODCALLTYPE *DeleteScope2 )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrScopeName);
         
+        DECLSPEC_XFGVIRT(IAzApplication3, get_RoleDefinitions)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RoleDefinitions )( 
             __RPC__in IAzApplication3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzRoleDefinitions **ppRoleDefinitions);
         
+        DECLSPEC_XFGVIRT(IAzApplication3, CreateRoleDefinition)
         HRESULT ( STDMETHODCALLTYPE *CreateRoleDefinition )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrRoleDefinitionName,
             /* [retval][out] */ __RPC__deref_out_opt IAzRoleDefinition **ppRoleDefinitions);
         
+        DECLSPEC_XFGVIRT(IAzApplication3, OpenRoleDefinition)
         HRESULT ( STDMETHODCALLTYPE *OpenRoleDefinition )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrRoleDefinitionName,
             /* [retval][out] */ __RPC__deref_out_opt IAzRoleDefinition **ppRoleDefinitions);
         
+        DECLSPEC_XFGVIRT(IAzApplication3, DeleteRoleDefinition)
         HRESULT ( STDMETHODCALLTYPE *DeleteRoleDefinition )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrRoleDefinitionName);
         
+        DECLSPEC_XFGVIRT(IAzApplication3, get_RoleAssignments)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RoleAssignments )( 
             __RPC__in IAzApplication3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzRoleAssignments **ppRoleAssignments);
         
+        DECLSPEC_XFGVIRT(IAzApplication3, CreateRoleAssignment)
         HRESULT ( STDMETHODCALLTYPE *CreateRoleAssignment )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrRoleAssignmentName,
             /* [retval][out] */ __RPC__deref_out_opt IAzRoleAssignment **ppRoleAssignment);
         
+        DECLSPEC_XFGVIRT(IAzApplication3, OpenRoleAssignment)
         HRESULT ( STDMETHODCALLTYPE *OpenRoleAssignment )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrRoleAssignmentName,
             /* [retval][out] */ __RPC__deref_out_opt IAzRoleAssignment **ppRoleAssignment);
         
+        DECLSPEC_XFGVIRT(IAzApplication3, DeleteRoleAssignment)
         HRESULT ( STDMETHODCALLTYPE *DeleteRoleAssignment )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrRoleAssignmentName);
         
+        DECLSPEC_XFGVIRT(IAzApplication3, get_BizRulesEnabled)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_BizRulesEnabled )( 
             __RPC__in IAzApplication3 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbEnabled);
         
+        DECLSPEC_XFGVIRT(IAzApplication3, put_BizRulesEnabled)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_BizRulesEnabled )( 
             __RPC__in IAzApplication3 * This,
             /* [in] */ VARIANT_BOOL bEnabled);
@@ -9776,28 +10589,34 @@ EXTERN_C const IID IID_IAzOperation2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzOperation2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzOperation2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzOperation2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzOperation2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzOperation2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzOperation2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -9806,6 +10625,7 @@ EXTERN_C const IID IID_IAzOperation2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzOperation2 * This,
             /* [annotation][in] */ 
@@ -9825,59 +10645,72 @@ EXTERN_C const IID IID_IAzOperation2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzOperation, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IAzOperation2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IAzOperation, put_Name)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IAzOperation2 * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(IAzOperation, get_Description)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IAzOperation2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzOperation, put_Description)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IAzOperation2 * This,
             /* [in] */ __RPC__in BSTR bstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzOperation, get_ApplicationData)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplicationData )( 
             __RPC__in IAzOperation2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrApplicationData);
         
+        DECLSPEC_XFGVIRT(IAzOperation, put_ApplicationData)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ApplicationData )( 
             __RPC__in IAzOperation2 * This,
             /* [in] */ __RPC__in BSTR bstrApplicationData);
         
+        DECLSPEC_XFGVIRT(IAzOperation, get_OperationID)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_OperationID )( 
             __RPC__in IAzOperation2 * This,
             /* [retval][out] */ __RPC__out LONG *plProp);
         
+        DECLSPEC_XFGVIRT(IAzOperation, put_OperationID)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_OperationID )( 
             __RPC__in IAzOperation2 * This,
             /* [in] */ LONG lProp);
         
+        DECLSPEC_XFGVIRT(IAzOperation, get_Writable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Writable )( 
             __RPC__in IAzOperation2 * This,
             /* [retval][out] */ __RPC__out BOOL *pfProp);
         
+        DECLSPEC_XFGVIRT(IAzOperation, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IAzOperation2 * This,
             /* [in] */ LONG lPropId,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzOperation, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IAzOperation2 * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzOperation, Submit)
         HRESULT ( STDMETHODCALLTYPE *Submit )( 
             __RPC__in IAzOperation2 * This,
             /* [defaultvalue][in] */ LONG lFlags,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzOperation2, RoleAssignments)
         HRESULT ( STDMETHODCALLTYPE *RoleAssignments )( 
             __RPC__in IAzOperation2 * This,
             /* [in] */ __RPC__in BSTR bstrScopeName,
@@ -10005,28 +10838,34 @@ EXTERN_C const IID IID_IAzRoleDefinitions;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzRoleDefinitions * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzRoleDefinitions * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzRoleDefinitions * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzRoleDefinitions * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzRoleDefinitions * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzRoleDefinitions * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -10035,6 +10874,7 @@ EXTERN_C const IID IID_IAzRoleDefinitions;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzRoleDefinitions * This,
             /* [annotation][in] */ 
@@ -10054,15 +10894,18 @@ EXTERN_C const IID IID_IAzRoleDefinitions;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzRoleDefinitions, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IAzRoleDefinitions * This,
             /* [in] */ LONG Index,
             /* [retval][out] */ __RPC__out VARIANT *pvarObtPtr);
         
+        DECLSPEC_XFGVIRT(IAzRoleDefinitions, get_Count)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IAzRoleDefinitions * This,
             /* [retval][out] */ __RPC__out LONG *plCount);
         
+        DECLSPEC_XFGVIRT(IAzRoleDefinitions, get__NewEnum)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IAzRoleDefinitions * This,
             /* [retval][out] */ __RPC__deref_out_opt LPUNKNOWN *ppEnumPtr);
@@ -10161,28 +11004,34 @@ EXTERN_C const IID IID_IAzRoleDefinition;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzRoleDefinition * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzRoleDefinition * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzRoleDefinition * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzRoleDefinition * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzRoleDefinition * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzRoleDefinition * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -10191,6 +11040,7 @@ EXTERN_C const IID IID_IAzRoleDefinition;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzRoleDefinition * This,
             /* [annotation][in] */ 
@@ -10210,137 +11060,167 @@ EXTERN_C const IID IID_IAzRoleDefinition;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzTask, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IAzRoleDefinition * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IAzTask, put_Name)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IAzRoleDefinition * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(IAzTask, get_Description)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IAzRoleDefinition * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzTask, put_Description)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IAzRoleDefinition * This,
             /* [in] */ __RPC__in BSTR bstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzTask, get_ApplicationData)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplicationData )( 
             __RPC__in IAzRoleDefinition * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrApplicationData);
         
+        DECLSPEC_XFGVIRT(IAzTask, put_ApplicationData)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ApplicationData )( 
             __RPC__in IAzRoleDefinition * This,
             /* [in] */ __RPC__in BSTR bstrApplicationData);
         
+        DECLSPEC_XFGVIRT(IAzTask, get_BizRule)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_BizRule )( 
             __RPC__in IAzRoleDefinition * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, put_BizRule)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_BizRule )( 
             __RPC__in IAzRoleDefinition * This,
             /* [in] */ __RPC__in BSTR bstrProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, get_BizRuleLanguage)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_BizRuleLanguage )( 
             __RPC__in IAzRoleDefinition * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, put_BizRuleLanguage)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_BizRuleLanguage )( 
             __RPC__in IAzRoleDefinition * This,
             /* [in] */ __RPC__in BSTR bstrProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, get_BizRuleImportedPath)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_BizRuleImportedPath )( 
             __RPC__in IAzRoleDefinition * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, put_BizRuleImportedPath)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_BizRuleImportedPath )( 
             __RPC__in IAzRoleDefinition * This,
             /* [in] */ __RPC__in BSTR bstrProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, get_IsRoleDefinition)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsRoleDefinition )( 
             __RPC__in IAzRoleDefinition * This,
             /* [retval][out] */ __RPC__out BOOL *pfProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, put_IsRoleDefinition)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_IsRoleDefinition )( 
             __RPC__in IAzRoleDefinition * This,
             /* [in] */ BOOL fProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, get_Operations)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Operations )( 
             __RPC__in IAzRoleDefinition * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, get_Tasks)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Tasks )( 
             __RPC__in IAzRoleDefinition * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, AddOperation)
         HRESULT ( STDMETHODCALLTYPE *AddOperation )( 
             __RPC__in IAzRoleDefinition * This,
             /* [in] */ __RPC__in BSTR bstrOp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzTask, DeleteOperation)
         HRESULT ( STDMETHODCALLTYPE *DeleteOperation )( 
             __RPC__in IAzRoleDefinition * This,
             /* [in] */ __RPC__in BSTR bstrOp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzTask, AddTask)
         HRESULT ( STDMETHODCALLTYPE *AddTask )( 
             __RPC__in IAzRoleDefinition * This,
             /* [in] */ __RPC__in BSTR bstrTask,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzTask, DeleteTask)
         HRESULT ( STDMETHODCALLTYPE *DeleteTask )( 
             __RPC__in IAzRoleDefinition * This,
             /* [in] */ __RPC__in BSTR bstrTask,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzTask, get_Writable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Writable )( 
             __RPC__in IAzRoleDefinition * This,
             /* [retval][out] */ __RPC__out BOOL *pfProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IAzRoleDefinition * This,
             /* [in] */ LONG lPropId,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IAzRoleDefinition * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzTask, AddPropertyItem)
         HRESULT ( STDMETHODCALLTYPE *AddPropertyItem )( 
             __RPC__in IAzRoleDefinition * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzTask, DeletePropertyItem)
         HRESULT ( STDMETHODCALLTYPE *DeletePropertyItem )( 
             __RPC__in IAzRoleDefinition * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzTask, Submit)
         HRESULT ( STDMETHODCALLTYPE *Submit )( 
             __RPC__in IAzRoleDefinition * This,
             /* [defaultvalue][in] */ LONG lFlags,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzRoleDefinition, RoleAssignments)
         HRESULT ( STDMETHODCALLTYPE *RoleAssignments )( 
             __RPC__in IAzRoleDefinition * This,
             /* [in] */ __RPC__in BSTR bstrScopeName,
             /* [in] */ VARIANT_BOOL bRecursive,
             /* [retval][out] */ __RPC__deref_out_opt IAzRoleAssignments **ppRoleAssignments);
         
+        DECLSPEC_XFGVIRT(IAzRoleDefinition, AddRoleDefinition)
         HRESULT ( STDMETHODCALLTYPE *AddRoleDefinition )( 
             __RPC__in IAzRoleDefinition * This,
             /* [in] */ __RPC__in BSTR bstrRoleDefinition);
         
+        DECLSPEC_XFGVIRT(IAzRoleDefinition, DeleteRoleDefinition)
         HRESULT ( STDMETHODCALLTYPE *DeleteRoleDefinition )( 
             __RPC__in IAzRoleDefinition * This,
             /* [in] */ __RPC__in BSTR bstrRoleDefinition);
         
+        DECLSPEC_XFGVIRT(IAzRoleDefinition, get_RoleDefinitions)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RoleDefinitions )( 
             __RPC__in IAzRoleDefinition * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzRoleDefinitions **ppRoleDefinitions);
@@ -10519,28 +11399,34 @@ EXTERN_C const IID IID_IAzRoleAssignment;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzRoleAssignment * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzRoleAssignment * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzRoleAssignment * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzRoleAssignment * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzRoleAssignment * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzRoleAssignment * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -10549,6 +11435,7 @@ EXTERN_C const IID IID_IAzRoleAssignment;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzRoleAssignment * This,
             /* [annotation][in] */ 
@@ -10568,145 +11455,176 @@ EXTERN_C const IID IID_IAzRoleAssignment;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzRole, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IAzRoleAssignment * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IAzRole, put_Name)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IAzRoleAssignment * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(IAzRole, get_Description)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IAzRoleAssignment * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzRole, put_Description)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IAzRoleAssignment * This,
             /* [in] */ __RPC__in BSTR bstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzRole, get_ApplicationData)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplicationData )( 
             __RPC__in IAzRoleAssignment * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrApplicationData);
         
+        DECLSPEC_XFGVIRT(IAzRole, put_ApplicationData)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ApplicationData )( 
             __RPC__in IAzRoleAssignment * This,
             /* [in] */ __RPC__in BSTR bstrApplicationData);
         
+        DECLSPEC_XFGVIRT(IAzRole, AddAppMember)
         HRESULT ( STDMETHODCALLTYPE *AddAppMember )( 
             __RPC__in IAzRoleAssignment * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzRole, DeleteAppMember)
         HRESULT ( STDMETHODCALLTYPE *DeleteAppMember )( 
             __RPC__in IAzRoleAssignment * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzRole, AddTask)
         HRESULT ( STDMETHODCALLTYPE *AddTask )( 
             __RPC__in IAzRoleAssignment * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzRole, DeleteTask)
         HRESULT ( STDMETHODCALLTYPE *DeleteTask )( 
             __RPC__in IAzRoleAssignment * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzRole, AddOperation)
         HRESULT ( STDMETHODCALLTYPE *AddOperation )( 
             __RPC__in IAzRoleAssignment * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzRole, DeleteOperation)
         HRESULT ( STDMETHODCALLTYPE *DeleteOperation )( 
             __RPC__in IAzRoleAssignment * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzRole, AddMember)
         HRESULT ( STDMETHODCALLTYPE *AddMember )( 
             __RPC__in IAzRoleAssignment * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzRole, DeleteMember)
         HRESULT ( STDMETHODCALLTYPE *DeleteMember )( 
             __RPC__in IAzRoleAssignment * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzRole, get_Writable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Writable )( 
             __RPC__in IAzRoleAssignment * This,
             /* [retval][out] */ __RPC__out BOOL *pfProp);
         
+        DECLSPEC_XFGVIRT(IAzRole, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IAzRoleAssignment * This,
             /* [in] */ LONG lPropId,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzRole, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IAzRoleAssignment * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzRole, get_AppMembers)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AppMembers )( 
             __RPC__in IAzRoleAssignment * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzRole, get_Members)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Members )( 
             __RPC__in IAzRoleAssignment * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzRole, get_Operations)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Operations )( 
             __RPC__in IAzRoleAssignment * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzRole, get_Tasks)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Tasks )( 
             __RPC__in IAzRoleAssignment * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzRole, AddPropertyItem)
         HRESULT ( STDMETHODCALLTYPE *AddPropertyItem )( 
             __RPC__in IAzRoleAssignment * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzRole, DeletePropertyItem)
         HRESULT ( STDMETHODCALLTYPE *DeletePropertyItem )( 
             __RPC__in IAzRoleAssignment * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzRole, Submit)
         HRESULT ( STDMETHODCALLTYPE *Submit )( 
             __RPC__in IAzRoleAssignment * This,
             /* [defaultvalue][in] */ LONG lFlags,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzRole, AddMemberName)
         HRESULT ( STDMETHODCALLTYPE *AddMemberName )( 
             __RPC__in IAzRoleAssignment * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzRole, DeleteMemberName)
         HRESULT ( STDMETHODCALLTYPE *DeleteMemberName )( 
             __RPC__in IAzRoleAssignment * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzRole, get_MembersName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MembersName )( 
             __RPC__in IAzRoleAssignment * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzRoleAssignment, AddRoleDefinition)
         HRESULT ( STDMETHODCALLTYPE *AddRoleDefinition )( 
             __RPC__in IAzRoleAssignment * This,
             /* [in] */ __RPC__in BSTR bstrRoleDefinition);
         
+        DECLSPEC_XFGVIRT(IAzRoleAssignment, DeleteRoleDefinition)
         HRESULT ( STDMETHODCALLTYPE *DeleteRoleDefinition )( 
             __RPC__in IAzRoleAssignment * This,
             /* [in] */ __RPC__in BSTR bstrRoleDefinition);
         
+        DECLSPEC_XFGVIRT(IAzRoleAssignment, get_RoleDefinitions)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RoleDefinitions )( 
             __RPC__in IAzRoleAssignment * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzRoleDefinitions **ppRoleDefinitions);
         
+        DECLSPEC_XFGVIRT(IAzRoleAssignment, get_Scope)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Scope )( 
             __RPC__in IAzRoleAssignment * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzScope **ppScope);
@@ -10886,28 +11804,34 @@ EXTERN_C const IID IID_IAzRoleAssignments;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzRoleAssignments * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzRoleAssignments * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzRoleAssignments * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzRoleAssignments * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzRoleAssignments * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzRoleAssignments * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -10916,6 +11840,7 @@ EXTERN_C const IID IID_IAzRoleAssignments;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzRoleAssignments * This,
             /* [annotation][in] */ 
@@ -10935,15 +11860,18 @@ EXTERN_C const IID IID_IAzRoleAssignments;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzRoleAssignments, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IAzRoleAssignments * This,
             /* [in] */ LONG Index,
             /* [retval][out] */ __RPC__out VARIANT *pvarObtPtr);
         
+        DECLSPEC_XFGVIRT(IAzRoleAssignments, get_Count)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IAzRoleAssignments * This,
             /* [retval][out] */ __RPC__out LONG *plCount);
         
+        DECLSPEC_XFGVIRT(IAzRoleAssignments, get__NewEnum)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IAzRoleAssignments * This,
             /* [retval][out] */ __RPC__deref_out_opt LPUNKNOWN *ppEnumPtr);
@@ -11034,28 +11962,34 @@ EXTERN_C const IID IID_IAzPrincipalLocator;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzPrincipalLocator * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzPrincipalLocator * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzPrincipalLocator * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzPrincipalLocator * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzPrincipalLocator * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzPrincipalLocator * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -11064,6 +11998,7 @@ EXTERN_C const IID IID_IAzPrincipalLocator;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzPrincipalLocator * This,
             /* [annotation][in] */ 
@@ -11083,10 +12018,12 @@ EXTERN_C const IID IID_IAzPrincipalLocator;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzPrincipalLocator, get_NameResolver)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_NameResolver )( 
             __RPC__in IAzPrincipalLocator * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzNameResolver **ppNameResolver);
         
+        DECLSPEC_XFGVIRT(IAzPrincipalLocator, get_ObjectPicker)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ObjectPicker )( 
             __RPC__in IAzPrincipalLocator * This,
             /* [retval][out] */ __RPC__deref_out_opt IAzObjectPicker **ppObjectPicker);
@@ -11178,28 +12115,34 @@ EXTERN_C const IID IID_IAzNameResolver;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzNameResolver * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzNameResolver * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzNameResolver * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzNameResolver * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzNameResolver * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzNameResolver * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -11208,6 +12151,7 @@ EXTERN_C const IID IID_IAzNameResolver;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzNameResolver * This,
             /* [annotation][in] */ 
@@ -11227,12 +12171,14 @@ EXTERN_C const IID IID_IAzNameResolver;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzNameResolver, NameFromSid)
         HRESULT ( STDMETHODCALLTYPE *NameFromSid )( 
             __RPC__in IAzNameResolver * This,
             /* [in] */ __RPC__in BSTR bstrSid,
             /* [out] */ __RPC__out long *pSidType,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IAzNameResolver, NamesFromSids)
         HRESULT ( STDMETHODCALLTYPE *NamesFromSids )( 
             __RPC__in IAzNameResolver * This,
             /* [in] */ VARIANT vSids,
@@ -11326,28 +12272,34 @@ EXTERN_C const IID IID_IAzObjectPicker;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzObjectPicker * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzObjectPicker * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzObjectPicker * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzObjectPicker * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzObjectPicker * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzObjectPicker * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -11356,6 +12308,7 @@ EXTERN_C const IID IID_IAzObjectPicker;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzObjectPicker * This,
             /* [annotation][in] */ 
@@ -11375,6 +12328,7 @@ EXTERN_C const IID IID_IAzObjectPicker;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzObjectPicker, GetPrincipals)
         HRESULT ( STDMETHODCALLTYPE *GetPrincipals )( 
             __RPC__in IAzObjectPicker * This,
             /* [in] */ __RPC__in HWND hParentWnd,
@@ -11383,6 +12337,7 @@ EXTERN_C const IID IID_IAzObjectPicker;
             /* [out] */ __RPC__out VARIANT *pvNames,
             /* [retval][out] */ __RPC__out VARIANT *pvSids);
         
+        DECLSPEC_XFGVIRT(IAzObjectPicker, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IAzObjectPicker * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
@@ -11487,28 +12442,34 @@ EXTERN_C const IID IID_IAzApplicationGroup2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzApplicationGroup2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzApplicationGroup2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -11517,6 +12478,7 @@ EXTERN_C const IID IID_IAzApplicationGroup2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzApplicationGroup2 * This,
             /* [annotation][in] */ 
@@ -11536,179 +12498,218 @@ EXTERN_C const IID IID_IAzApplicationGroup2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, put_Name)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, get_Type)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [retval][out] */ __RPC__out LONG *plProp);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, put_Type)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Type )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [in] */ LONG lProp);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, get_LdapQuery)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LdapQuery )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, put_LdapQuery)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LdapQuery )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [in] */ __RPC__in BSTR bstrProp);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, get_AppMembers)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AppMembers )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, get_AppNonMembers)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AppNonMembers )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, get_Members)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Members )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, get_NonMembers)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_NonMembers )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, get_Description)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, put_Description)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [in] */ __RPC__in BSTR bstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, AddAppMember)
         HRESULT ( STDMETHODCALLTYPE *AddAppMember )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, DeleteAppMember)
         HRESULT ( STDMETHODCALLTYPE *DeleteAppMember )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, AddAppNonMember)
         HRESULT ( STDMETHODCALLTYPE *AddAppNonMember )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, DeleteAppNonMember)
         HRESULT ( STDMETHODCALLTYPE *DeleteAppNonMember )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, AddMember)
         HRESULT ( STDMETHODCALLTYPE *AddMember )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, DeleteMember)
         HRESULT ( STDMETHODCALLTYPE *DeleteMember )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, AddNonMember)
         HRESULT ( STDMETHODCALLTYPE *AddNonMember )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, DeleteNonMember)
         HRESULT ( STDMETHODCALLTYPE *DeleteNonMember )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, get_Writable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Writable )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [retval][out] */ __RPC__out BOOL *pfProp);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [in] */ LONG lPropId,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, AddPropertyItem)
         HRESULT ( STDMETHODCALLTYPE *AddPropertyItem )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, DeletePropertyItem)
         HRESULT ( STDMETHODCALLTYPE *DeletePropertyItem )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, Submit)
         HRESULT ( STDMETHODCALLTYPE *Submit )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [defaultvalue][in] */ LONG lFlags,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, AddMemberName)
         HRESULT ( STDMETHODCALLTYPE *AddMemberName )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, DeleteMemberName)
         HRESULT ( STDMETHODCALLTYPE *DeleteMemberName )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, AddNonMemberName)
         HRESULT ( STDMETHODCALLTYPE *AddNonMemberName )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, DeleteNonMemberName)
         HRESULT ( STDMETHODCALLTYPE *DeleteNonMemberName )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [in] */ __RPC__in BSTR bstrProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, get_MembersName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MembersName )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup, get_NonMembersName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_NonMembersName )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup2, get_BizRule)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_BizRule )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup2, put_BizRule)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_BizRule )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [in] */ __RPC__in BSTR bstrProp);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup2, get_BizRuleLanguage)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_BizRuleLanguage )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup2, put_BizRuleLanguage)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_BizRuleLanguage )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [in] */ __RPC__in BSTR bstrProp);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup2, get_BizRuleImportedPath)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_BizRuleImportedPath )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup2, put_BizRuleImportedPath)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_BizRuleImportedPath )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [in] */ __RPC__in BSTR bstrProp);
         
+        DECLSPEC_XFGVIRT(IAzApplicationGroup2, RoleAssignments)
         HRESULT ( STDMETHODCALLTYPE *RoleAssignments )( 
             __RPC__in IAzApplicationGroup2 * This,
             /* [in] */ __RPC__in BSTR bstrScopeName,
@@ -11909,28 +12910,34 @@ EXTERN_C const IID IID_IAzTask2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAzTask2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAzTask2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAzTask2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAzTask2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAzTask2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAzTask2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -11939,6 +12946,7 @@ EXTERN_C const IID IID_IAzTask2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAzTask2 * This,
             /* [annotation][in] */ 
@@ -11958,123 +12966,150 @@ EXTERN_C const IID IID_IAzTask2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAzTask, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IAzTask2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IAzTask, put_Name)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IAzTask2 * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(IAzTask, get_Description)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IAzTask2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzTask, put_Description)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IAzTask2 * This,
             /* [in] */ __RPC__in BSTR bstrDescription);
         
+        DECLSPEC_XFGVIRT(IAzTask, get_ApplicationData)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplicationData )( 
             __RPC__in IAzTask2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrApplicationData);
         
+        DECLSPEC_XFGVIRT(IAzTask, put_ApplicationData)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ApplicationData )( 
             __RPC__in IAzTask2 * This,
             /* [in] */ __RPC__in BSTR bstrApplicationData);
         
+        DECLSPEC_XFGVIRT(IAzTask, get_BizRule)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_BizRule )( 
             __RPC__in IAzTask2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, put_BizRule)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_BizRule )( 
             __RPC__in IAzTask2 * This,
             /* [in] */ __RPC__in BSTR bstrProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, get_BizRuleLanguage)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_BizRuleLanguage )( 
             __RPC__in IAzTask2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, put_BizRuleLanguage)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_BizRuleLanguage )( 
             __RPC__in IAzTask2 * This,
             /* [in] */ __RPC__in BSTR bstrProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, get_BizRuleImportedPath)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_BizRuleImportedPath )( 
             __RPC__in IAzTask2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, put_BizRuleImportedPath)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_BizRuleImportedPath )( 
             __RPC__in IAzTask2 * This,
             /* [in] */ __RPC__in BSTR bstrProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, get_IsRoleDefinition)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsRoleDefinition )( 
             __RPC__in IAzTask2 * This,
             /* [retval][out] */ __RPC__out BOOL *pfProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, put_IsRoleDefinition)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_IsRoleDefinition )( 
             __RPC__in IAzTask2 * This,
             /* [in] */ BOOL fProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, get_Operations)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Operations )( 
             __RPC__in IAzTask2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, get_Tasks)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Tasks )( 
             __RPC__in IAzTask2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, AddOperation)
         HRESULT ( STDMETHODCALLTYPE *AddOperation )( 
             __RPC__in IAzTask2 * This,
             /* [in] */ __RPC__in BSTR bstrOp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzTask, DeleteOperation)
         HRESULT ( STDMETHODCALLTYPE *DeleteOperation )( 
             __RPC__in IAzTask2 * This,
             /* [in] */ __RPC__in BSTR bstrOp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzTask, AddTask)
         HRESULT ( STDMETHODCALLTYPE *AddTask )( 
             __RPC__in IAzTask2 * This,
             /* [in] */ __RPC__in BSTR bstrTask,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzTask, DeleteTask)
         HRESULT ( STDMETHODCALLTYPE *DeleteTask )( 
             __RPC__in IAzTask2 * This,
             /* [in] */ __RPC__in BSTR bstrTask,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzTask, get_Writable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Writable )( 
             __RPC__in IAzTask2 * This,
             /* [retval][out] */ __RPC__out BOOL *pfProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IAzTask2 * This,
             /* [in] */ LONG lPropId,
             /* [optional][in] */ VARIANT varReserved,
             /* [retval][out] */ __RPC__out VARIANT *pvarProp);
         
+        DECLSPEC_XFGVIRT(IAzTask, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IAzTask2 * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzTask, AddPropertyItem)
         HRESULT ( STDMETHODCALLTYPE *AddPropertyItem )( 
             __RPC__in IAzTask2 * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzTask, DeletePropertyItem)
         HRESULT ( STDMETHODCALLTYPE *DeletePropertyItem )( 
             __RPC__in IAzTask2 * This,
             /* [in] */ LONG lPropId,
             /* [in] */ VARIANT varProp,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzTask, Submit)
         HRESULT ( STDMETHODCALLTYPE *Submit )( 
             __RPC__in IAzTask2 * This,
             /* [defaultvalue][in] */ LONG lFlags,
             /* [optional][in] */ VARIANT varReserved);
         
+        DECLSPEC_XFGVIRT(IAzTask2, RoleAssignments)
         HRESULT ( STDMETHODCALLTYPE *RoleAssignments )( 
             __RPC__in IAzTask2 * This,
             /* [in] */ __RPC__in BSTR bstrScopeName,

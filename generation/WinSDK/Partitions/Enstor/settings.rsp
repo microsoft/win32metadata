@@ -2,5 +2,6 @@
 <IncludeRoot>/um/ehstorextensions.h
 <IncludeRoot>/um/propkey.h
 <IncludeRoot>/um/ehstorapi.h
+<IncludeRoot>/um/ehstormsg.h
 --namespace
 Windows.Win32.Storage.EnhancedStorage

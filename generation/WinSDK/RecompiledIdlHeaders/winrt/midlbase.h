@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -141,15 +149,18 @@ EXTERN_C const IID IID_IUnknown;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUnknown * This,
             /* [in] */ const GUID *riid,
             /* [annotation][iid_is][out] */ 
             __RPC__deref_out  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IUnknown * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IUnknown * This);
         
@@ -293,27 +304,33 @@ EXTERN_C const IID IID_IInspectable;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInspectable * This,
             /* [in] */ __RPC__in const GUID *riid,
             /* [annotation][iid_is][out] */ 
             __RPC__deref_out  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInspectable * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInspectable * This);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetIids)
         HRESULT ( STDMETHODCALLTYPE *GetIids )( 
             __RPC__in IInspectable * This,
             /* [out] */ __RPC__out ULONG *iidCount,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*iidCount) GUID **iids);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetRuntimeClassName)
         HRESULT ( STDMETHODCALLTYPE *GetRuntimeClassName )( 
             __RPC__in IInspectable * This,
             /* [out] */ __RPC__deref_out_opt HSTRING *className);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetTrustLevel)
         HRESULT ( STDMETHODCALLTYPE *GetTrustLevel )( 
             __RPC__in IInspectable * This,
             /* [out] */ __RPC__out TrustLevel *trustLevel);
@@ -415,46 +432,57 @@ EXTERN_C const IID IID_IAsyncInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAsyncInfo * This,
             /* [in] */ __RPC__in const GUID *riid,
             /* [annotation][iid_is][out] */ 
             __RPC__deref_out  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAsyncInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAsyncInfo * This);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetIids)
         HRESULT ( STDMETHODCALLTYPE *GetIids )( 
             __RPC__in IAsyncInfo * This,
             /* [out] */ __RPC__out ULONG *iidCount,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*iidCount) GUID **iids);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetRuntimeClassName)
         HRESULT ( STDMETHODCALLTYPE *GetRuntimeClassName )( 
             __RPC__in IAsyncInfo * This,
             /* [out] */ __RPC__deref_out_opt HSTRING *className);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetTrustLevel)
         HRESULT ( STDMETHODCALLTYPE *GetTrustLevel )( 
             __RPC__in IAsyncInfo * This,
             /* [out] */ __RPC__out TrustLevel *trustLevel);
         
+        DECLSPEC_XFGVIRT(IAsyncInfo, get_Id)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IAsyncInfo * This,
             /* [retval][out] */ __RPC__out unsigned __int32 *id);
         
+        DECLSPEC_XFGVIRT(IAsyncInfo, get_Status)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
             __RPC__in IAsyncInfo * This,
             /* [retval][out] */ __RPC__out AsyncStatus *status);
         
+        DECLSPEC_XFGVIRT(IAsyncInfo, get_ErrorCode)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ErrorCode )( 
             __RPC__in IAsyncInfo * This,
             /* [retval][out] */ __RPC__out HRESULT *errorCode);
         
+        DECLSPEC_XFGVIRT(IAsyncInfo, Cancel)
         HRESULT ( STDMETHODCALLTYPE *Cancel )( 
             __RPC__in IAsyncInfo * This);
         
+        DECLSPEC_XFGVIRT(IAsyncInfo, Close)
         HRESULT ( STDMETHODCALLTYPE *Close )( 
             __RPC__in IAsyncInfo * This);
         

@@ -7,7 +7,7 @@
 #pragma once
 #endif
 
-#include <windows.ui.composition.h>
+#include <Windows.ui.composition.h>
 #include <sdkddkver.h>
 
 #ifndef BUILD_WINDOWS
@@ -130,10 +130,10 @@ DECLARE_INTERFACE_IID_(IVisualInteractionSourceInterop, IUnknown, "11F62CD1-2F9D
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
 
+
 namespace Desktop {
 
-    typedef interface IDesktopWindowTarget IDesktopWindowTarget;
-
+typedef interface IDesktopWindowTarget IDesktopWindowTarget;
 
 #undef INTERFACE
 #define INTERFACE ICompositionCapabilitiesInteropFactory
@@ -170,24 +170,9 @@ DECLARE_INTERFACE_IID_(IDesktopWindowTargetInterop, IUnknown, "35DBF59E-E3F9-45B
         ) PURE;
 };
 
-
-#undef INTERFACE
-#define INTERFACE IDesktopWindowContentBridgeInterop
-DECLARE_INTERFACE_IID_(IDesktopWindowContentBridgeInterop, IUnknown, "37642806-F421-4FD0-9F82-23AE7C776182")
-{
-    IFACEMETHOD(Initialize)(
-        _In_ Windows::UI::Composition::ICompositor* compositor, _In_ HWND parentHwnd) PURE;
-
-    IFACEMETHOD(get_Hwnd)(
-        _Outptr_ HWND * value
-        ) PURE;
-
-    IFACEMETHOD(get_AppliedScaleFactor)(
-        _Out_ float* value
-        ) PURE;
-};
-
 } // namespace Desktop
+
+
 } // namespace Composition
 } // namespace UI
 } // namespace Windows

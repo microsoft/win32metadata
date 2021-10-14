@@ -12,6 +12,7 @@
 //----------------------------------------------------------------------------
 
 #pragma once
+#include <new>
 #include <winapifamily.h>
 #include <Shellapi.h>
 
@@ -95,7 +96,7 @@ __inline HRESULT AllocFileDesc(ULONG nFileDesc, _Outptr_result_buffer_(nFileDesc
     {
         *ppFileDesc = NULL;
 
-        MapiFileDesc* pNewFileDesc = new MapiFileDesc[nFileDesc];
+        MapiFileDesc* pNewFileDesc = new (std::nothrow) MapiFileDesc[nFileDesc];
         if (pNewFileDesc == NULL)
         {
             hr = E_OUTOFMEMORY;
@@ -140,7 +141,7 @@ __inline HRESULT AllocRecipDesc(ULONG nRecipDesc, _Outptr_result_buffer_(nRecipD
     {
         *ppRecipDesc = NULL;
 
-        MapiRecipDesc* pNewRecipDesc = new MapiRecipDesc[nRecipDesc];
+        MapiRecipDesc* pNewRecipDesc = new (std::nothrow) MapiRecipDesc[nRecipDesc];
 
         if (pNewRecipDesc == NULL)
         {
@@ -165,7 +166,7 @@ __inline void FreeRecipDesc(_Inout_updates_opt_(nRecipDesc) MapiRecipDesc* pReci
         {
             delete[] pRecipDesc[i].lpszName;
             delete[] pRecipDesc[i].lpszAddress;
-            delete[] pRecipDesc[i].lpEntryID;
+            delete[] static_cast<BYTE*>(pRecipDesc[i].lpEntryID);
 
             pRecipDesc[i].ulReserved = 0;
             pRecipDesc[i].ulRecipClass = 0;
@@ -229,7 +230,7 @@ __inline HRESULT ConvertStringToMultiByteEx(PCWSTR pszIn, _Outptr_ PSTR *ppszOut
 
         if (iLen)
         {
-            *ppszOut = new char[iLen];
+            *ppszOut = new (std::nothrow) char[iLen];
             if (*ppszOut)
             {
                 if (0 == WideCharToMultiByte(fSupportUTF8 ? CP_UTF8 : CP_ACP, fSupportUTF8 ? WC_ERR_INVALID_CHARS : 0, pszIn, -1, *ppszOut, iLen, NULL, fSupportUTF8 ? NULL : &fUsedDefaultChar))
@@ -360,7 +361,7 @@ __inline HRESULT ConvertRecipDescArrayFromUnicode(_In_reads_(ulRecipDesc) const 
                 }
                 if (SUCCEEDED(hr) && pRecipIn[ul].ulEIDSize && pRecipIn[ul].lpEntryID)
                 {
-                    pRecipOut[ul].lpEntryID = new BYTE[pRecipIn[ul].ulEIDSize];
+                    pRecipOut[ul].lpEntryID = new (std::nothrow) BYTE[pRecipIn[ul].ulEIDSize];
                     if (pRecipOut[ul].lpEntryID)
                     {
                         memcpy(pRecipOut[ul].lpEntryID, pRecipIn[ul].lpEntryID, pRecipIn[ul].ulEIDSize);
@@ -401,7 +402,7 @@ __inline HRESULT ConvertMessageFromUnicode(_In_ const MapiMessageW *pMessageIn, 
 
     if (pMessageIn)
     {
-        MapiMessage *pMessageOut = new MapiMessage;
+        MapiMessage *pMessageOut = new (std::nothrow) MapiMessage;
         if (pMessageOut == NULL)
         {
            hr = E_OUTOFMEMORY;
@@ -903,7 +904,7 @@ __inline bool GetDefaultMailClientExePath(HKEY hkeyRoot, _Out_ PWSTR* exePath)
                 if (REG_EXPAND_SZ == valueType)
                 {
                     lResult = ExpandEnvironmentStringsW(shellCommand, expandedPath, ARRAYSIZE(expandedPath));
-                    if (lResult > 0 && lResult <= ARRAYSIZE(shellCommand))
+                    if (lResult > 0 && lResult <= static_cast<LRESULT>(ARRAYSIZE(shellCommand)))
                     {
                         wcscpy_s(shellCommand, ARRAYSIZE(shellCommand), expandedPath);
                     }

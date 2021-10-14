@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -653,6 +661,7 @@ EXTERN_C const IID IID_IActiveScriptSite;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptSite * This,
             /* [annotation][in] */ 
@@ -660,17 +669,21 @@ EXTERN_C const IID IID_IActiveScriptSite;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IActiveScriptSite * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IActiveScriptSite * This);
         
+        DECLSPEC_XFGVIRT(IActiveScriptSite, GetLCID)
         HRESULT ( STDMETHODCALLTYPE *GetLCID )( 
             __RPC__in IActiveScriptSite * This,
             /* [annotation][out] */ 
             _Out_  LCID *plcid);
         
+        DECLSPEC_XFGVIRT(IActiveScriptSite, GetItemInfo)
         HRESULT ( STDMETHODCALLTYPE *GetItemInfo )( 
             __RPC__in IActiveScriptSite * This,
             /* [annotation][in] */ 
@@ -682,11 +695,13 @@ EXTERN_C const IID IID_IActiveScriptSite;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppti);
         
+        DECLSPEC_XFGVIRT(IActiveScriptSite, GetDocVersionString)
         HRESULT ( STDMETHODCALLTYPE *GetDocVersionString )( 
             __RPC__in IActiveScriptSite * This,
             /* [annotation][out] */ 
             _Out_  BSTR *pbstrVersion);
         
+        DECLSPEC_XFGVIRT(IActiveScriptSite, OnScriptTerminate)
         HRESULT ( STDMETHODCALLTYPE *OnScriptTerminate )( 
             __RPC__in IActiveScriptSite * This,
             /* [annotation][in] */ 
@@ -694,19 +709,23 @@ EXTERN_C const IID IID_IActiveScriptSite;
             /* [annotation][in] */ 
             _In_  const EXCEPINFO *pexcepinfo);
         
+        DECLSPEC_XFGVIRT(IActiveScriptSite, OnStateChange)
         HRESULT ( STDMETHODCALLTYPE *OnStateChange )( 
             __RPC__in IActiveScriptSite * This,
             /* [annotation][in] */ 
             _In_  SCRIPTSTATE ssScriptState);
         
+        DECLSPEC_XFGVIRT(IActiveScriptSite, OnScriptError)
         HRESULT ( STDMETHODCALLTYPE *OnScriptError )( 
             __RPC__in IActiveScriptSite * This,
             /* [annotation][in] */ 
             _In_  IActiveScriptError *pscripterror);
         
+        DECLSPEC_XFGVIRT(IActiveScriptSite, OnEnterScript)
         HRESULT ( STDMETHODCALLTYPE *OnEnterScript )( 
             __RPC__in IActiveScriptSite * This);
         
+        DECLSPEC_XFGVIRT(IActiveScriptSite, OnLeaveScript)
         HRESULT ( STDMETHODCALLTYPE *OnLeaveScript )( 
             __RPC__in IActiveScriptSite * This);
         
@@ -808,6 +827,7 @@ EXTERN_C const IID IID_IActiveScriptError;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptError * This,
             /* [annotation][in] */ 
@@ -815,17 +835,21 @@ EXTERN_C const IID IID_IActiveScriptError;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IActiveScriptError * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IActiveScriptError * This);
         
+        DECLSPEC_XFGVIRT(IActiveScriptError, GetExceptionInfo)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetExceptionInfo )( 
             IActiveScriptError * This,
             /* [annotation][out] */ 
             _Out_  EXCEPINFO *pexcepinfo);
         
+        DECLSPEC_XFGVIRT(IActiveScriptError, GetSourcePosition)
         HRESULT ( STDMETHODCALLTYPE *GetSourcePosition )( 
             __RPC__in IActiveScriptError * This,
             /* [annotation][out] */ 
@@ -835,6 +859,7 @@ EXTERN_C const IID IID_IActiveScriptError;
             /* [annotation][out] */ 
             _Out_  LONG *plCharacterPosition);
         
+        DECLSPEC_XFGVIRT(IActiveScriptError, GetSourceLineText)
         HRESULT ( STDMETHODCALLTYPE *GetSourceLineText )( 
             __RPC__in IActiveScriptError * This,
             /* [annotation][out] */ 
@@ -928,6 +953,7 @@ EXTERN_C const IID IID_IActiveScriptError64;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptError64 * This,
             /* [annotation][in] */ 
@@ -935,17 +961,21 @@ EXTERN_C const IID IID_IActiveScriptError64;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IActiveScriptError64 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IActiveScriptError64 * This);
         
+        DECLSPEC_XFGVIRT(IActiveScriptError, GetExceptionInfo)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetExceptionInfo )( 
             IActiveScriptError64 * This,
             /* [annotation][out] */ 
             _Out_  EXCEPINFO *pexcepinfo);
         
+        DECLSPEC_XFGVIRT(IActiveScriptError, GetSourcePosition)
         HRESULT ( STDMETHODCALLTYPE *GetSourcePosition )( 
             __RPC__in IActiveScriptError64 * This,
             /* [annotation][out] */ 
@@ -955,11 +985,13 @@ EXTERN_C const IID IID_IActiveScriptError64;
             /* [annotation][out] */ 
             _Out_  LONG *plCharacterPosition);
         
+        DECLSPEC_XFGVIRT(IActiveScriptError, GetSourceLineText)
         HRESULT ( STDMETHODCALLTYPE *GetSourceLineText )( 
             __RPC__in IActiveScriptError64 * This,
             /* [annotation][out] */ 
             _Out_  BSTR *pbstrSourceLine);
         
+        DECLSPEC_XFGVIRT(IActiveScriptError64, GetSourcePosition64)
         HRESULT ( STDMETHODCALLTYPE *GetSourcePosition64 )( 
             __RPC__in IActiveScriptError64 * This,
             /* [annotation][out] */ 
@@ -1048,6 +1080,7 @@ EXTERN_C const IID IID_IActiveScriptSiteWindow;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptSiteWindow * This,
             /* [annotation][in] */ 
@@ -1055,17 +1088,21 @@ EXTERN_C const IID IID_IActiveScriptSiteWindow;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IActiveScriptSiteWindow * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IActiveScriptSiteWindow * This);
         
+        DECLSPEC_XFGVIRT(IActiveScriptSiteWindow, GetWindow)
         HRESULT ( STDMETHODCALLTYPE *GetWindow )( 
             __RPC__in IActiveScriptSiteWindow * This,
             /* [annotation][out] */ 
             _Out_  HWND *phwnd);
         
+        DECLSPEC_XFGVIRT(IActiveScriptSiteWindow, EnableModeless)
         HRESULT ( STDMETHODCALLTYPE *EnableModeless )( 
             __RPC__in IActiveScriptSiteWindow * This,
             /* [annotation][in] */ 
@@ -1141,6 +1178,7 @@ EXTERN_C const IID IID_IActiveScriptSiteUIControl;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptSiteUIControl * This,
             /* [annotation][in] */ 
@@ -1148,12 +1186,15 @@ EXTERN_C const IID IID_IActiveScriptSiteUIControl;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IActiveScriptSiteUIControl * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IActiveScriptSiteUIControl * This);
         
+        DECLSPEC_XFGVIRT(IActiveScriptSiteUIControl, GetUIBehavior)
         HRESULT ( STDMETHODCALLTYPE *GetUIBehavior )( 
             __RPC__in IActiveScriptSiteUIControl * This,
             /* [annotation][in] */ 
@@ -1224,6 +1265,7 @@ EXTERN_C const IID IID_IActiveScriptSiteInterruptPoll;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptSiteInterruptPoll * This,
             /* [annotation][in] */ 
@@ -1231,12 +1273,15 @@ EXTERN_C const IID IID_IActiveScriptSiteInterruptPoll;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IActiveScriptSiteInterruptPoll * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IActiveScriptSiteInterruptPoll * This);
         
+        DECLSPEC_XFGVIRT(IActiveScriptSiteInterruptPoll, QueryContinue)
         HRESULT ( STDMETHODCALLTYPE *QueryContinue )( 
             __RPC__in IActiveScriptSiteInterruptPoll * This);
         
@@ -1371,6 +1416,7 @@ EXTERN_C const IID IID_IActiveScript;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScript * This,
             /* [annotation][in] */ 
@@ -1378,17 +1424,21 @@ EXTERN_C const IID IID_IActiveScript;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IActiveScript * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IActiveScript * This);
         
+        DECLSPEC_XFGVIRT(IActiveScript, SetScriptSite)
         HRESULT ( STDMETHODCALLTYPE *SetScriptSite )( 
             __RPC__in IActiveScript * This,
             /* [annotation][in] */ 
             _In_  IActiveScriptSite *pass);
         
+        DECLSPEC_XFGVIRT(IActiveScript, GetScriptSite)
         HRESULT ( STDMETHODCALLTYPE *GetScriptSite )( 
             __RPC__in IActiveScript * This,
             /* [annotation][in] */ 
@@ -1396,19 +1446,23 @@ EXTERN_C const IID IID_IActiveScript;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IActiveScript, SetScriptState)
         HRESULT ( STDMETHODCALLTYPE *SetScriptState )( 
             __RPC__in IActiveScript * This,
             /* [annotation][in] */ 
             _In_  SCRIPTSTATE ss);
         
+        DECLSPEC_XFGVIRT(IActiveScript, GetScriptState)
         HRESULT ( STDMETHODCALLTYPE *GetScriptState )( 
             __RPC__in IActiveScript * This,
             /* [annotation][out] */ 
             _Out_  SCRIPTSTATE *pssState);
         
+        DECLSPEC_XFGVIRT(IActiveScript, Close)
         HRESULT ( STDMETHODCALLTYPE *Close )( 
             __RPC__in IActiveScript * This);
         
+        DECLSPEC_XFGVIRT(IActiveScript, AddNamedItem)
         HRESULT ( STDMETHODCALLTYPE *AddNamedItem )( 
             __RPC__in IActiveScript * This,
             /* [annotation][in] */ 
@@ -1416,6 +1470,7 @@ EXTERN_C const IID IID_IActiveScript;
             /* [annotation][in] */ 
             _In_  DWORD dwFlags);
         
+        DECLSPEC_XFGVIRT(IActiveScript, AddTypeLib)
         HRESULT ( STDMETHODCALLTYPE *AddTypeLib )( 
             __RPC__in IActiveScript * This,
             /* [annotation][in] */ 
@@ -1427,6 +1482,7 @@ EXTERN_C const IID IID_IActiveScript;
             /* [annotation][in] */ 
             _In_  DWORD dwFlags);
         
+        DECLSPEC_XFGVIRT(IActiveScript, GetScriptDispatch)
         HRESULT ( STDMETHODCALLTYPE *GetScriptDispatch )( 
             __RPC__in IActiveScript * This,
             /* [annotation][in] */ 
@@ -1434,11 +1490,13 @@ EXTERN_C const IID IID_IActiveScript;
             /* [annotation][out] */ 
             _Out_  IDispatch **ppdisp);
         
+        DECLSPEC_XFGVIRT(IActiveScript, GetCurrentScriptThreadID)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentScriptThreadID )( 
             __RPC__in IActiveScript * This,
             /* [annotation][out] */ 
             _Out_  SCRIPTTHREADID *pstidThread);
         
+        DECLSPEC_XFGVIRT(IActiveScript, GetScriptThreadID)
         HRESULT ( STDMETHODCALLTYPE *GetScriptThreadID )( 
             __RPC__in IActiveScript * This,
             /* [annotation][in] */ 
@@ -1446,6 +1504,7 @@ EXTERN_C const IID IID_IActiveScript;
             /* [annotation][out] */ 
             _Out_  SCRIPTTHREADID *pstidThread);
         
+        DECLSPEC_XFGVIRT(IActiveScript, GetScriptThreadState)
         HRESULT ( STDMETHODCALLTYPE *GetScriptThreadState )( 
             __RPC__in IActiveScript * This,
             /* [annotation][in] */ 
@@ -1453,6 +1512,7 @@ EXTERN_C const IID IID_IActiveScript;
             /* [annotation][out] */ 
             _Out_  SCRIPTTHREADSTATE *pstsState);
         
+        DECLSPEC_XFGVIRT(IActiveScript, InterruptScriptThread)
         HRESULT ( STDMETHODCALLTYPE *InterruptScriptThread )( 
             __RPC__in IActiveScript * This,
             /* [annotation][in] */ 
@@ -1462,6 +1522,7 @@ EXTERN_C const IID IID_IActiveScript;
             /* [annotation][in] */ 
             _In_  DWORD dwFlags);
         
+        DECLSPEC_XFGVIRT(IActiveScript, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IActiveScript * This,
             /* [annotation][out] */ 
@@ -1610,6 +1671,7 @@ EXTERN_C const IID IID_IActiveScriptParse32;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptParse32 * This,
             /* [annotation][in] */ 
@@ -1617,15 +1679,19 @@ EXTERN_C const IID IID_IActiveScriptParse32;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IActiveScriptParse32 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IActiveScriptParse32 * This);
         
+        DECLSPEC_XFGVIRT(IActiveScriptParse32, InitNew)
         HRESULT ( STDMETHODCALLTYPE *InitNew )( 
             __RPC__in IActiveScriptParse32 * This);
         
+        DECLSPEC_XFGVIRT(IActiveScriptParse32, AddScriptlet)
         HRESULT ( STDMETHODCALLTYPE *AddScriptlet )( 
             __RPC__in IActiveScriptParse32 * This,
             /* [annotation][in] */ 
@@ -1651,6 +1717,7 @@ EXTERN_C const IID IID_IActiveScriptParse32;
             /* [annotation][out] */ 
             _Out_  EXCEPINFO *pexcepinfo);
         
+        DECLSPEC_XFGVIRT(IActiveScriptParse32, ParseScriptText)
         HRESULT ( STDMETHODCALLTYPE *ParseScriptText )( 
             __RPC__in IActiveScriptParse32 * This,
             /* [annotation][in] */ 
@@ -1785,6 +1852,7 @@ EXTERN_C const IID IID_IActiveScriptParse64;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptParse64 * This,
             /* [annotation][in] */ 
@@ -1792,15 +1860,19 @@ EXTERN_C const IID IID_IActiveScriptParse64;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IActiveScriptParse64 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IActiveScriptParse64 * This);
         
+        DECLSPEC_XFGVIRT(IActiveScriptParse64, InitNew)
         HRESULT ( STDMETHODCALLTYPE *InitNew )( 
             __RPC__in IActiveScriptParse64 * This);
         
+        DECLSPEC_XFGVIRT(IActiveScriptParse64, AddScriptlet)
         HRESULT ( STDMETHODCALLTYPE *AddScriptlet )( 
             __RPC__in IActiveScriptParse64 * This,
             /* [annotation][in] */ 
@@ -1826,6 +1898,7 @@ EXTERN_C const IID IID_IActiveScriptParse64;
             /* [annotation][out] */ 
             _Out_  EXCEPINFO *pexcepinfo);
         
+        DECLSPEC_XFGVIRT(IActiveScriptParse64, ParseScriptText)
         HRESULT ( STDMETHODCALLTYPE *ParseScriptText )( 
             __RPC__in IActiveScriptParse64 * This,
             /* [annotation][in] */ 
@@ -1951,6 +2024,7 @@ EXTERN_C const IID IID_IActiveScriptParseProcedureOld32;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptParseProcedureOld32 * This,
             /* [annotation][in] */ 
@@ -1958,12 +2032,15 @@ EXTERN_C const IID IID_IActiveScriptParseProcedureOld32;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IActiveScriptParseProcedureOld32 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IActiveScriptParseProcedureOld32 * This);
         
+        DECLSPEC_XFGVIRT(IActiveScriptParseProcedureOld32, ParseProcedureText)
         HRESULT ( STDMETHODCALLTYPE *ParseProcedureText )( 
             __RPC__in IActiveScriptParseProcedureOld32 * This,
             /* [annotation][in] */ 
@@ -2066,6 +2143,7 @@ EXTERN_C const IID IID_IActiveScriptParseProcedureOld64;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptParseProcedureOld64 * This,
             /* [annotation][in] */ 
@@ -2073,12 +2151,15 @@ EXTERN_C const IID IID_IActiveScriptParseProcedureOld64;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IActiveScriptParseProcedureOld64 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IActiveScriptParseProcedureOld64 * This);
         
+        DECLSPEC_XFGVIRT(IActiveScriptParseProcedureOld64, ParseProcedureText)
         HRESULT ( STDMETHODCALLTYPE *ParseProcedureText )( 
             __RPC__in IActiveScriptParseProcedureOld64 * This,
             /* [annotation][in] */ 
@@ -2199,6 +2280,7 @@ EXTERN_C const IID IID_IActiveScriptParseProcedure32;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptParseProcedure32 * This,
             /* [annotation][in] */ 
@@ -2206,12 +2288,15 @@ EXTERN_C const IID IID_IActiveScriptParseProcedure32;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IActiveScriptParseProcedure32 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IActiveScriptParseProcedure32 * This);
         
+        DECLSPEC_XFGVIRT(IActiveScriptParseProcedure32, ParseProcedureText)
         HRESULT ( STDMETHODCALLTYPE *ParseProcedureText )( 
             __RPC__in IActiveScriptParseProcedure32 * This,
             /* [annotation][in] */ 
@@ -2318,6 +2403,7 @@ EXTERN_C const IID IID_IActiveScriptParseProcedure64;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptParseProcedure64 * This,
             /* [annotation][in] */ 
@@ -2325,12 +2411,15 @@ EXTERN_C const IID IID_IActiveScriptParseProcedure64;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IActiveScriptParseProcedure64 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IActiveScriptParseProcedure64 * This);
         
+        DECLSPEC_XFGVIRT(IActiveScriptParseProcedure64, ParseProcedureText)
         HRESULT ( STDMETHODCALLTYPE *ParseProcedureText )( 
             __RPC__in IActiveScriptParseProcedure64 * This,
             /* [annotation][in] */ 
@@ -2431,6 +2520,7 @@ EXTERN_C const IID IID_IActiveScriptParseProcedure2_32;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptParseProcedure2_32 * This,
             /* [annotation][in] */ 
@@ -2438,12 +2528,15 @@ EXTERN_C const IID IID_IActiveScriptParseProcedure2_32;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IActiveScriptParseProcedure2_32 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IActiveScriptParseProcedure2_32 * This);
         
+        DECLSPEC_XFGVIRT(IActiveScriptParseProcedure32, ParseProcedureText)
         HRESULT ( STDMETHODCALLTYPE *ParseProcedureText )( 
             __RPC__in IActiveScriptParseProcedure2_32 * This,
             /* [annotation][in] */ 
@@ -2529,6 +2622,7 @@ EXTERN_C const IID IID_IActiveScriptParseProcedure2_64;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptParseProcedure2_64 * This,
             /* [annotation][in] */ 
@@ -2536,12 +2630,15 @@ EXTERN_C const IID IID_IActiveScriptParseProcedure2_64;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IActiveScriptParseProcedure2_64 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IActiveScriptParseProcedure2_64 * This);
         
+        DECLSPEC_XFGVIRT(IActiveScriptParseProcedure64, ParseProcedureText)
         HRESULT ( STDMETHODCALLTYPE *ParseProcedureText )( 
             __RPC__in IActiveScriptParseProcedure2_64 * This,
             /* [annotation][in] */ 
@@ -2671,6 +2768,7 @@ EXTERN_C const IID IID_IActiveScriptEncode;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptEncode * This,
             /* [annotation][in] */ 
@@ -2678,12 +2776,15 @@ EXTERN_C const IID IID_IActiveScriptEncode;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IActiveScriptEncode * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IActiveScriptEncode * This);
         
+        DECLSPEC_XFGVIRT(IActiveScriptEncode, EncodeSection)
         HRESULT ( STDMETHODCALLTYPE *EncodeSection )( 
             __RPC__in IActiveScriptEncode * This,
             /* [annotation][in] */ 
@@ -2697,6 +2798,7 @@ EXTERN_C const IID IID_IActiveScriptEncode;
             /* [annotation][out][in] */ 
             _Inout_  DWORD *pcchRet);
         
+        DECLSPEC_XFGVIRT(IActiveScriptEncode, DecodeScript)
         HRESULT ( STDMETHODCALLTYPE *DecodeScript )( 
             __RPC__in IActiveScriptEncode * This,
             /* [annotation][in] */ 
@@ -2710,6 +2812,7 @@ EXTERN_C const IID IID_IActiveScriptEncode;
             /* [annotation][out][in] */ 
             _Inout_  DWORD *pcchRet);
         
+        DECLSPEC_XFGVIRT(IActiveScriptEncode, GetEncodeProgId)
         HRESULT ( STDMETHODCALLTYPE *GetEncodeProgId )( 
             __RPC__in IActiveScriptEncode * This,
             /* [annotation][out][in] */ 
@@ -2792,6 +2895,7 @@ EXTERN_C const IID IID_IActiveScriptHostEncode;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptHostEncode * This,
             /* [annotation][in] */ 
@@ -2799,12 +2903,15 @@ EXTERN_C const IID IID_IActiveScriptHostEncode;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IActiveScriptHostEncode * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IActiveScriptHostEncode * This);
         
+        DECLSPEC_XFGVIRT(IActiveScriptHostEncode, EncodeScriptHostFile)
         HRESULT ( STDMETHODCALLTYPE *EncodeScriptHostFile )( 
             __RPC__in IActiveScriptHostEncode * This,
             /* [annotation][in] */ 
@@ -2883,6 +2990,7 @@ EXTERN_C const IID IID_IBindEventHandler;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBindEventHandler * This,
             /* [annotation][in] */ 
@@ -2890,12 +2998,15 @@ EXTERN_C const IID IID_IBindEventHandler;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IBindEventHandler * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IBindEventHandler * This);
         
+        DECLSPEC_XFGVIRT(IBindEventHandler, BindHandler)
         HRESULT ( STDMETHODCALLTYPE *BindHandler )( 
             __RPC__in IBindEventHandler * This,
             /* [annotation][in] */ 
@@ -2982,6 +3093,7 @@ EXTERN_C const IID IID_IActiveScriptStats;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptStats * This,
             /* [annotation][in] */ 
@@ -2989,12 +3101,15 @@ EXTERN_C const IID IID_IActiveScriptStats;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IActiveScriptStats * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IActiveScriptStats * This);
         
+        DECLSPEC_XFGVIRT(IActiveScriptStats, GetStat)
         HRESULT ( STDMETHODCALLTYPE *GetStat )( 
             __RPC__in IActiveScriptStats * This,
             /* [annotation][in] */ 
@@ -3004,6 +3119,7 @@ EXTERN_C const IID IID_IActiveScriptStats;
             /* [annotation][out] */ 
             _Out_  ULONG *pluLo);
         
+        DECLSPEC_XFGVIRT(IActiveScriptStats, GetStatEx)
         HRESULT ( STDMETHODCALLTYPE *GetStatEx )( 
             __RPC__in IActiveScriptStats * This,
             /* [annotation][in] */ 
@@ -3013,6 +3129,7 @@ EXTERN_C const IID IID_IActiveScriptStats;
             /* [annotation][out] */ 
             _Out_  ULONG *pluLo);
         
+        DECLSPEC_XFGVIRT(IActiveScriptStats, ResetStats)
         HRESULT ( STDMETHODCALLTYPE *ResetStats )( 
             __RPC__in IActiveScriptStats * This);
         
@@ -3099,6 +3216,7 @@ EXTERN_C const IID IID_IActiveScriptProperty;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptProperty * This,
             /* [annotation][in] */ 
@@ -3106,12 +3224,15 @@ EXTERN_C const IID IID_IActiveScriptProperty;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IActiveScriptProperty * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IActiveScriptProperty * This);
         
+        DECLSPEC_XFGVIRT(IActiveScriptProperty, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IActiveScriptProperty * This,
             /* [annotation][in] */ 
@@ -3121,6 +3242,7 @@ EXTERN_C const IID IID_IActiveScriptProperty;
             /* [annotation][out] */ 
             _Out_  VARIANT *pvarValue);
         
+        DECLSPEC_XFGVIRT(IActiveScriptProperty, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IActiveScriptProperty * This,
             /* [annotation][in] */ 
@@ -3204,6 +3326,7 @@ EXTERN_C const IID IID_ITridentEventSink;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITridentEventSink * This,
             /* [annotation][in] */ 
@@ -3211,12 +3334,15 @@ EXTERN_C const IID IID_ITridentEventSink;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITridentEventSink * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITridentEventSink * This);
         
+        DECLSPEC_XFGVIRT(ITridentEventSink, FireEvent)
         HRESULT ( STDMETHODCALLTYPE *FireEvent )( 
             __RPC__in ITridentEventSink * This,
             /* [annotation][in] */ 
@@ -3292,6 +3418,7 @@ EXTERN_C const IID IID_IActiveScriptGarbageCollector;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptGarbageCollector * This,
             /* [annotation][in] */ 
@@ -3299,12 +3426,15 @@ EXTERN_C const IID IID_IActiveScriptGarbageCollector;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IActiveScriptGarbageCollector * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IActiveScriptGarbageCollector * This);
         
+        DECLSPEC_XFGVIRT(IActiveScriptGarbageCollector, CollectGarbage)
         HRESULT ( STDMETHODCALLTYPE *CollectGarbage )( 
             __RPC__in IActiveScriptGarbageCollector * This,
             SCRIPTGCTYPE scriptgctype);
@@ -3374,6 +3504,7 @@ EXTERN_C const IID IID_IActiveScriptSIPInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptSIPInfo * This,
             /* [annotation][in] */ 
@@ -3381,12 +3512,15 @@ EXTERN_C const IID IID_IActiveScriptSIPInfo;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IActiveScriptSIPInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IActiveScriptSIPInfo * This);
         
+        DECLSPEC_XFGVIRT(IActiveScriptSIPInfo, GetSIPOID)
         HRESULT ( STDMETHODCALLTYPE *GetSIPOID )( 
             __RPC__in IActiveScriptSIPInfo * This,
             /* [annotation][out] */ 
@@ -3467,6 +3601,7 @@ EXTERN_C const IID IID_IActiveScriptSiteTraceInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptSiteTraceInfo * This,
             /* [annotation][in] */ 
@@ -3474,12 +3609,15 @@ EXTERN_C const IID IID_IActiveScriptSiteTraceInfo;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IActiveScriptSiteTraceInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IActiveScriptSiteTraceInfo * This);
         
+        DECLSPEC_XFGVIRT(IActiveScriptSiteTraceInfo, SendScriptTraceInfo)
         HRESULT ( STDMETHODCALLTYPE *SendScriptTraceInfo )( 
             __RPC__in IActiveScriptSiteTraceInfo * This,
             /* [annotation][in] */ 
@@ -3564,6 +3702,7 @@ EXTERN_C const IID IID_IActiveScriptTraceInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptTraceInfo * This,
             /* [annotation][in] */ 
@@ -3571,12 +3710,15 @@ EXTERN_C const IID IID_IActiveScriptTraceInfo;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IActiveScriptTraceInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IActiveScriptTraceInfo * This);
         
+        DECLSPEC_XFGVIRT(IActiveScriptTraceInfo, StartScriptTracing)
         HRESULT ( STDMETHODCALLTYPE *StartScriptTracing )( 
             __RPC__in IActiveScriptTraceInfo * This,
             /* [annotation][in] */ 
@@ -3584,6 +3726,7 @@ EXTERN_C const IID IID_IActiveScriptTraceInfo;
             /* [annotation][in] */ 
             _In_  GUID guidContextID);
         
+        DECLSPEC_XFGVIRT(IActiveScriptTraceInfo, StopScriptTracing)
         HRESULT ( STDMETHODCALLTYPE *StopScriptTracing )( 
             __RPC__in IActiveScriptTraceInfo * This);
         
@@ -3659,6 +3802,7 @@ EXTERN_C const IID IID_IActiveScriptStringCompare;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptStringCompare * This,
             /* [annotation][in] */ 
@@ -3666,12 +3810,15 @@ EXTERN_C const IID IID_IActiveScriptStringCompare;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IActiveScriptStringCompare * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IActiveScriptStringCompare * This);
         
+        DECLSPEC_XFGVIRT(IActiveScriptStringCompare, StrComp)
         HRESULT ( STDMETHODCALLTYPE *StrComp )( 
             __RPC__in IActiveScriptStringCompare * This,
             /* [annotation][in] */ 

@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -173,6 +181,7 @@ EXTERN_C const IID IID_IMFSharingEngineClassFactory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFSharingEngineClassFactory * This,
             /* [annotation][in] */ 
@@ -180,12 +189,15 @@ EXTERN_C const IID IID_IMFSharingEngineClassFactory;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFSharingEngineClassFactory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFSharingEngineClassFactory * This);
         
+        DECLSPEC_XFGVIRT(IMFSharingEngineClassFactory, CreateInstance)
         HRESULT ( STDMETHODCALLTYPE *CreateInstance )( 
             IMFSharingEngineClassFactory * This,
             /* [annotation][in] */ 
@@ -260,6 +272,7 @@ EXTERN_C const IID IID_IMFMediaSharingEngine;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaSharingEngine * This,
             /* [annotation][in] */ 
@@ -267,56 +280,69 @@ EXTERN_C const IID IID_IMFMediaSharingEngine;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaSharingEngine * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaSharingEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetError)
         HRESULT ( STDMETHODCALLTYPE *GetError )( 
             IMFMediaSharingEngine * This,
             /* [annotation][out] */ 
             _Outptr_  IMFMediaError **ppError);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetErrorCode)
         HRESULT ( STDMETHODCALLTYPE *SetErrorCode )( 
             IMFMediaSharingEngine * This,
             /* [annotation][in] */ 
             _In_  MF_MEDIA_ENGINE_ERR error);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetSourceElements)
         HRESULT ( STDMETHODCALLTYPE *SetSourceElements )( 
             IMFMediaSharingEngine * This,
             /* [annotation][in] */ 
             _In_  IMFMediaEngineSrcElements *pSrcElements);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetSource)
         HRESULT ( STDMETHODCALLTYPE *SetSource )( 
             IMFMediaSharingEngine * This,
             /* [annotation][in] */ 
             _In_  BSTR pUrl);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetCurrentSource)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentSource )( 
             IMFMediaSharingEngine * This,
             /* [annotation][out] */ 
             _Out_  BSTR *ppUrl);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetNetworkState)
         USHORT ( STDMETHODCALLTYPE *GetNetworkState )( 
             IMFMediaSharingEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetPreload)
         MF_MEDIA_ENGINE_PRELOAD ( STDMETHODCALLTYPE *GetPreload )( 
             IMFMediaSharingEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetPreload)
         HRESULT ( STDMETHODCALLTYPE *SetPreload )( 
             IMFMediaSharingEngine * This,
             /* [annotation][in] */ 
             _In_  MF_MEDIA_ENGINE_PRELOAD Preload);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetBuffered)
         HRESULT ( STDMETHODCALLTYPE *GetBuffered )( 
             IMFMediaSharingEngine * This,
             /* [annotation][out] */ 
             _Outptr_  IMFMediaTimeRange **ppBuffered);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, Load)
         HRESULT ( STDMETHODCALLTYPE *Load )( 
             IMFMediaSharingEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, CanPlayType)
         HRESULT ( STDMETHODCALLTYPE *CanPlayType )( 
             IMFMediaSharingEngine * This,
             /* [annotation][in] */ 
@@ -324,102 +350,129 @@ EXTERN_C const IID IID_IMFMediaSharingEngine;
             /* [annotation][out] */ 
             _Out_  MF_MEDIA_ENGINE_CANPLAY *pAnswer);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetReadyState)
         USHORT ( STDMETHODCALLTYPE *GetReadyState )( 
             IMFMediaSharingEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, IsSeeking)
         BOOL ( STDMETHODCALLTYPE *IsSeeking )( 
             IMFMediaSharingEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetCurrentTime)
         double ( STDMETHODCALLTYPE *GetCurrentTime )( 
             IMFMediaSharingEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetCurrentTime)
         HRESULT ( STDMETHODCALLTYPE *SetCurrentTime )( 
             IMFMediaSharingEngine * This,
             /* [annotation][in] */ 
             _In_  double seekTime);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetStartTime)
         double ( STDMETHODCALLTYPE *GetStartTime )( 
             IMFMediaSharingEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetDuration)
         double ( STDMETHODCALLTYPE *GetDuration )( 
             IMFMediaSharingEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, IsPaused)
         BOOL ( STDMETHODCALLTYPE *IsPaused )( 
             IMFMediaSharingEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetDefaultPlaybackRate)
         double ( STDMETHODCALLTYPE *GetDefaultPlaybackRate )( 
             IMFMediaSharingEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetDefaultPlaybackRate)
         HRESULT ( STDMETHODCALLTYPE *SetDefaultPlaybackRate )( 
             IMFMediaSharingEngine * This,
             /* [annotation][in] */ 
             _In_  double Rate);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetPlaybackRate)
         double ( STDMETHODCALLTYPE *GetPlaybackRate )( 
             IMFMediaSharingEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetPlaybackRate)
         HRESULT ( STDMETHODCALLTYPE *SetPlaybackRate )( 
             IMFMediaSharingEngine * This,
             /* [annotation][in] */ 
             _In_  double Rate);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetPlayed)
         HRESULT ( STDMETHODCALLTYPE *GetPlayed )( 
             IMFMediaSharingEngine * This,
             /* [annotation][out] */ 
             _Outptr_  IMFMediaTimeRange **ppPlayed);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetSeekable)
         HRESULT ( STDMETHODCALLTYPE *GetSeekable )( 
             IMFMediaSharingEngine * This,
             /* [annotation][out] */ 
             _Outptr_  IMFMediaTimeRange **ppSeekable);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, IsEnded)
         BOOL ( STDMETHODCALLTYPE *IsEnded )( 
             IMFMediaSharingEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetAutoPlay)
         BOOL ( STDMETHODCALLTYPE *GetAutoPlay )( 
             IMFMediaSharingEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetAutoPlay)
         HRESULT ( STDMETHODCALLTYPE *SetAutoPlay )( 
             IMFMediaSharingEngine * This,
             /* [annotation][in] */ 
             _In_  BOOL AutoPlay);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetLoop)
         BOOL ( STDMETHODCALLTYPE *GetLoop )( 
             IMFMediaSharingEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetLoop)
         HRESULT ( STDMETHODCALLTYPE *SetLoop )( 
             IMFMediaSharingEngine * This,
             /* [annotation][in] */ 
             _In_  BOOL Loop);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, Play)
         HRESULT ( STDMETHODCALLTYPE *Play )( 
             IMFMediaSharingEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, Pause)
         HRESULT ( STDMETHODCALLTYPE *Pause )( 
             IMFMediaSharingEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetMuted)
         BOOL ( STDMETHODCALLTYPE *GetMuted )( 
             IMFMediaSharingEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetMuted)
         HRESULT ( STDMETHODCALLTYPE *SetMuted )( 
             IMFMediaSharingEngine * This,
             /* [annotation][in] */ 
             _In_  BOOL Muted);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetVolume)
         double ( STDMETHODCALLTYPE *GetVolume )( 
             IMFMediaSharingEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetVolume)
         HRESULT ( STDMETHODCALLTYPE *SetVolume )( 
             IMFMediaSharingEngine * This,
             /* [annotation][in] */ 
             _In_  double Volume);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, HasVideo)
         BOOL ( STDMETHODCALLTYPE *HasVideo )( 
             IMFMediaSharingEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, HasAudio)
         BOOL ( STDMETHODCALLTYPE *HasAudio )( 
             IMFMediaSharingEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetNativeVideoSize)
         HRESULT ( STDMETHODCALLTYPE *GetNativeVideoSize )( 
             IMFMediaSharingEngine * This,
             /* [annotation][out] */ 
@@ -427,6 +480,7 @@ EXTERN_C const IID IID_IMFMediaSharingEngine;
             /* [annotation][out] */ 
             _Out_opt_  DWORD *cy);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetVideoAspectRatio)
         HRESULT ( STDMETHODCALLTYPE *GetVideoAspectRatio )( 
             IMFMediaSharingEngine * This,
             /* [annotation][out] */ 
@@ -434,9 +488,11 @@ EXTERN_C const IID IID_IMFMediaSharingEngine;
             /* [annotation][out] */ 
             _Out_opt_  DWORD *cy);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, Shutdown)
         HRESULT ( STDMETHODCALLTYPE *Shutdown )( 
             IMFMediaSharingEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, TransferVideoFrame)
         HRESULT ( STDMETHODCALLTYPE *TransferVideoFrame )( 
             IMFMediaSharingEngine * This,
             /* [annotation][in] */ 
@@ -448,11 +504,13 @@ EXTERN_C const IID IID_IMFMediaSharingEngine;
             /* [annotation][in] */ 
             _In_opt_  const MFARGB *pBorderClr);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, OnVideoStreamTick)
         HRESULT ( STDMETHODCALLTYPE *OnVideoStreamTick )( 
             IMFMediaSharingEngine * This,
             /* [annotation][out] */ 
             _Out_  LONGLONG *pPts);
         
+        DECLSPEC_XFGVIRT(IMFMediaSharingEngine, GetDevice)
         HRESULT ( STDMETHODCALLTYPE *GetDevice )( 
             IMFMediaSharingEngine * This,
             /* [annotation][out] */ 
@@ -676,6 +734,7 @@ EXTERN_C const IID IID_IMFMediaSharingEngineClassFactory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaSharingEngineClassFactory * This,
             /* [annotation][in] */ 
@@ -683,12 +742,15 @@ EXTERN_C const IID IID_IMFMediaSharingEngineClassFactory;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaSharingEngineClassFactory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaSharingEngineClassFactory * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaSharingEngineClassFactory, CreateInstance)
         HRESULT ( STDMETHODCALLTYPE *CreateInstance )( 
             IMFMediaSharingEngineClassFactory * This,
             /* [annotation][in] */ 
@@ -778,6 +840,7 @@ EXTERN_C const IID IID_IMFImageSharingEngine;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFImageSharingEngine * This,
             /* [annotation][in] */ 
@@ -785,22 +848,27 @@ EXTERN_C const IID IID_IMFImageSharingEngine;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFImageSharingEngine * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFImageSharingEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFImageSharingEngine, SetSource)
         HRESULT ( STDMETHODCALLTYPE *SetSource )( 
             IMFImageSharingEngine * This,
             /* [annotation][in] */ 
             _In_  IUnknown *pStream);
         
+        DECLSPEC_XFGVIRT(IMFImageSharingEngine, GetDevice)
         HRESULT ( STDMETHODCALLTYPE *GetDevice )( 
             IMFImageSharingEngine * This,
             /* [annotation][out] */ 
             _Out_  DEVICE_INFO *pDevice);
         
+        DECLSPEC_XFGVIRT(IMFImageSharingEngine, Shutdown)
         HRESULT ( STDMETHODCALLTYPE *Shutdown )( 
             IMFImageSharingEngine * This);
         
@@ -877,6 +945,7 @@ EXTERN_C const IID IID_IMFImageSharingEngineClassFactory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFImageSharingEngineClassFactory * This,
             /* [annotation][in] */ 
@@ -884,12 +953,15 @@ EXTERN_C const IID IID_IMFImageSharingEngineClassFactory;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFImageSharingEngineClassFactory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFImageSharingEngineClassFactory * This);
         
+        DECLSPEC_XFGVIRT(IMFImageSharingEngineClassFactory, CreateInstanceFromUDN)
         HRESULT ( STDMETHODCALLTYPE *CreateInstanceFromUDN )( 
             IMFImageSharingEngineClassFactory * This,
             /* [annotation][in] */ 
@@ -984,6 +1056,7 @@ EXTERN_C const IID IID_IPlayToControl;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPlayToControl * This,
             /* [annotation][in] */ 
@@ -991,17 +1064,21 @@ EXTERN_C const IID IID_IPlayToControl;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPlayToControl * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPlayToControl * This);
         
+        DECLSPEC_XFGVIRT(IPlayToControl, Connect)
         HRESULT ( STDMETHODCALLTYPE *Connect )( 
             __RPC__in IPlayToControl * This,
             /* [annotation][in] */ 
             _In_  IMFSharingEngineClassFactory *pFactory);
         
+        DECLSPEC_XFGVIRT(IPlayToControl, Disconnect)
         HRESULT ( STDMETHODCALLTYPE *Disconnect )( 
             __RPC__in IPlayToControl * This);
         
@@ -1073,6 +1150,7 @@ EXTERN_C const IID IID_IPlayToControlWithCapabilities;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPlayToControlWithCapabilities * This,
             /* [annotation][in] */ 
@@ -1080,20 +1158,25 @@ EXTERN_C const IID IID_IPlayToControlWithCapabilities;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPlayToControlWithCapabilities * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPlayToControlWithCapabilities * This);
         
+        DECLSPEC_XFGVIRT(IPlayToControl, Connect)
         HRESULT ( STDMETHODCALLTYPE *Connect )( 
             __RPC__in IPlayToControlWithCapabilities * This,
             /* [annotation][in] */ 
             _In_  IMFSharingEngineClassFactory *pFactory);
         
+        DECLSPEC_XFGVIRT(IPlayToControl, Disconnect)
         HRESULT ( STDMETHODCALLTYPE *Disconnect )( 
             __RPC__in IPlayToControlWithCapabilities * This);
         
+        DECLSPEC_XFGVIRT(IPlayToControlWithCapabilities, GetCapabilities)
         HRESULT ( STDMETHODCALLTYPE *GetCapabilities )( 
             __RPC__in IPlayToControlWithCapabilities * This,
             /* [annotation][out] */ 
@@ -1175,6 +1258,7 @@ EXTERN_C const IID IID_IPlayToSourceClassFactory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPlayToSourceClassFactory * This,
             /* [annotation][in] */ 
@@ -1182,12 +1266,15 @@ EXTERN_C const IID IID_IPlayToSourceClassFactory;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IPlayToSourceClassFactory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IPlayToSourceClassFactory * This);
         
+        DECLSPEC_XFGVIRT(IPlayToSourceClassFactory, CreateInstance)
         HRESULT ( STDMETHODCALLTYPE *CreateInstance )( 
             IPlayToSourceClassFactory * This,
             /* [annotation][in] */ 

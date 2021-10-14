@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -29,11 +31,11 @@ namespace MetadataUtils
         {
             private static readonly Regex DefineRegex =
                 new Regex(
-                    @"^#define\s+([_A-Z][\dA-Za-z_]+)\s+(.+)");
+                    @"^\s*#define\s+([_A-Z][\dA-Za-z_]+)\s+(.+)");
 
             private static readonly Regex DefineConstantRegex =
                 new Regex(
-                    @"^((_HRESULT_TYPEDEF_|_NDIS_ERROR_TYPEDEF_)\(((?:0x)?[\da-f]+L?)\)|(\(HRESULT\)((?:0x)?[\da-f]+L?))|(-?\d+\.\d+(?:e\+\d+)?f?)|((?:0x[\da-f]+|\-?\d+)(?:UL|L)?)|((\d+)\s*(<<\s*\d+))|(MAKEINTRESOURCE\(\s*(\-?\d+)\s*\))|(\(HWND\)(-?\d+))|([a-z0-9_]+\s*\+\s*(\d+|0x[0-de-f]+))|(\(NTSTATUS\)((?:0x)?[\da-f]+L?))|(\s*\(DWORD\)\s*\(?\s*-1(L|\b)\s*\)?)|(\(BCRYPT_ALG_HANDLE\)\s*((?:0x)?[\da-f]+L?)))$", RegexOptions.IgnoreCase);
+                    @"^((_HRESULT_TYPEDEF_|_NDIS_ERROR_TYPEDEF_)\(((?:0x)?[\da-f]+L?)\)|(\(HRESULT\)((?:0x)?[\da-f]+L?))|(-?\d+\.\d+(?:e\+\d+)?f?)|((?:0x[\da-f]+|\-?\d+)(?:UL|L)?)|((\d+)\s*(<<\s*\d+))|(MAKEINTRESOURCE\(\s*(\-?\d+)\s*\))|(\(HWND\)(-?\d+))|([a-z0-9_]+\s*\+\s*(\d+|0x[0-de-f]+))|(\(NTSTATUS\)((?:0x)?[\da-f]+L?))|(\s*\(DWORD\)\s*\(?\s*-1(L|\b)\s*\)?)|(\(BCRYPT_ALG_HANDLE\)\s*((?:0x)?[\da-f]+L?))|([a-z0-9_]+))$", RegexOptions.IgnoreCase);
 
             private static readonly Regex DefineGuidConstRegex =
                 new Regex(
@@ -75,7 +77,7 @@ namespace MetadataUtils
             private Dictionary<string, ConstantWriter> namespacesToConstantWriters = new Dictionary<string, ConstantWriter>();
             private WildcardDictionary requiredNamespaces;
             private Dictionary<string, string> scannedNamesToNamespaces;
-            private HashSet<string> writtenConstants;
+            private Dictionary<string, string> writtenConstants;
 
             private List<EnumObject> enumObjectsFromJsons;
             private Dictionary<string, string> withTypes;
@@ -119,6 +121,8 @@ namespace MetadataUtils
                 this.scannedNamesToNamespaces = ScraperUtils.GetNameToNamespaceMap(scraperOutputDir);
 
                 this.writtenConstants = ScraperUtils.GetConstants(scraperOutputDir);
+
+                this.CleanExistingFiles();
 
                 this.LoadEnumObjectsFromJsonFiles(enumJsonFiles);
 
@@ -182,6 +186,14 @@ namespace MetadataUtils
                 }
 
                 return rawValue;
+            }
+
+            private void CleanExistingFiles()
+            {
+                foreach (string file in Directory.GetFiles(this.scraperOutputDir).Where(f => f.EndsWith(".enums.cs") || f.EndsWith(".constants.cs")))
+                {
+                    File.Delete(file);
+                }
             }
 
             private void InitEnumFlagsFixupFile()
@@ -258,7 +270,7 @@ namespace MetadataUtils
 
             private void AddCtlCodeConstant(string originalNamespace, string name, string deviceType, string function, string method, string access)
             {
-                if (this.writtenConstants.Contains(name))
+                if (this.writtenConstants.ContainsKey(name))
                 {
                     return;
                 }
@@ -271,12 +283,12 @@ namespace MetadataUtils
 
                 writer.AddValue("uint", name, $"(({deviceType}) << 16) | (uint)(((int)({access})) << 14) | (({function}) << 2) | ({method})");
 
-                this.writtenConstants.Add(name);
+                this.writtenConstants.Add(name, "uint");
             }
 
             private void AddConstantValue(string originalNamespace, string type, string name, string valueText)
             {
-                if (this.writtenConstants.Contains(name))
+                if (this.writtenConstants.ContainsKey(name))
                 {
                     return;
                 }
@@ -284,14 +296,14 @@ namespace MetadataUtils
                 var writer = this.GetConstantWriter(originalNamespace, name);
                 writer.AddValue(type, name, valueText);
 
-                this.writtenConstants.Add(name);
+                this.writtenConstants.Add(name, type);
             }
             
             private void AddConstantGuid(string defineGuidKeyword, string originalNamespace, string line)
             {
                 int firstComma = line.IndexOf(',');
                 string name = line.Substring(0, firstComma).Trim();
-                if (this.writtenConstants.Contains(name))
+                if (this.writtenConstants.ContainsKey(name))
                 {
                     return;
                 }
@@ -316,12 +328,12 @@ namespace MetadataUtils
                     writer.AddGuid(name, args);
                 }
 
-                this.writtenConstants.Add(name);
+                this.writtenConstants.Add(name, "Guid");
             }
 
             private void AddConstantInteger(string originalNamespace, string nativeTypeName, string name, string valueText)
             {
-                if (this.writtenConstants.Contains(name))
+                if (this.writtenConstants.ContainsKey(name))
                 {
                     return;
                 }
@@ -329,9 +341,9 @@ namespace MetadataUtils
                 string forcedType = nativeTypeName != null ? null : this.GetForcedTypeForName(name);
 
                 var writer = this.GetConstantWriter(originalNamespace, name);
-                writer.AddInt(forcedType, nativeTypeName, name, valueText);
+                writer.AddInt(forcedType, nativeTypeName, name, valueText, out var finalType);
 
-                this.writtenConstants.Add(name);
+                this.writtenConstants.Add(name, finalType);
             }
 
             private ConstantWriter GetConstantWriter(string originalNamespace, string name)
@@ -519,7 +531,6 @@ namespace MetadataUtils
                         }
 
                         string name = defineMatch.Groups[1].Value;
-
                         if (this.ShouldExclude(name))
                         {
                             continue;
@@ -582,6 +593,8 @@ namespace MetadataUtils
                         Match match = DefineConstantRegex.Match(fixedRawValue);
                         string valueText;
                         string nativeTypeName = null;
+                        string matchedConstantType = null;
+                        bool matchedToOtherName = false;
 
                         if (match.Success)
                         {
@@ -659,6 +672,27 @@ namespace MetadataUtils
                                 nativeTypeName = "BCRYPT_ALG_HANDLE";
                                 valueText = match.Groups[22].Value;
                             }
+                            // SOME_OTHER_CONSTANT
+                            else if (match.Groups[23].Success)
+                            {
+                                string otherName = match.Groups[23].Value;
+
+                                matchedToOtherName = true;
+
+                                // Only use a constant as the value if we have seen the constant before
+                                // and we know its type
+                                if (this.writtenConstants.TryGetValue(otherName, out var otherType))
+                                {
+                                    // Skip guids for now
+                                    if (otherType != "Guid")
+                                    {
+                                        matchedConstantType = otherType;
+                                    }
+                                }
+
+                                // If we didn't match it to another constant, keep going as we may be setting an enum
+                                valueText = otherName;
+                            }
                             else
                             {
                                 continue;
@@ -675,6 +709,7 @@ namespace MetadataUtils
                             }
 
                             valueText = valueText.Replace("(DWORD)", "(uint)");
+                            valueText = valueText.Replace("(ULONG)", "(uint)");
                         }
 
                         bool updatedEnum = false;
@@ -722,7 +757,18 @@ namespace MetadataUtils
                             // Only add the constant if it's not part of a manual enum
                             if (!manualEnumMemberNames.Contains(name))
                             {
-                                this.AddConstantInteger(currentNamespace, nativeTypeName, name, valueText);
+                                if (matchedConstantType != null)
+                                {
+                                    this.AddConstantValue(currentNamespace, matchedConstantType, name, valueText);
+                                }
+                                else
+                                {
+                                    // Only add as an int if it didn't match some other constant/enum name
+                                    if (!matchedToOtherName)
+                                    {
+                                        this.AddConstantInteger(currentNamespace, nativeTypeName, name, valueText);
+                                    }
+                                }
                             }
                         }
                     }
@@ -871,7 +917,7 @@ namespace MetadataUtils
 
                         if (obj.name != null)
                         {
-                            if (this.writtenConstants.Contains(obj.name))
+                            if (this.writtenConstants.ContainsKey(obj.name))
                             {
                                 throw new InvalidOperationException($"Tried to add enum {obj.name} but a constant with the same name already exists.");
                             }

@@ -15,3 +15,4 @@
 #include <fsrmpipeline.h>
 #include <fsrmreports.h>
 #include <fsrmscreen.h>
+#include <fsrmerr.h>

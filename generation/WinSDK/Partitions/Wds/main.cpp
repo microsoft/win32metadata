@@ -12,3 +12,6 @@
 #include <wdstci.h>
 #include <wdstptmgmt.h>
 #include <wdsbp.h>
+#include <wdsmcerr.h>
+#include <wdstptmgmtmsg.h>
+

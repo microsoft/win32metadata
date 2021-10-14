@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -874,28 +882,34 @@ EXTERN_C const IID IID_ITaskFolderCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITaskFolderCollection * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITaskFolderCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITaskFolderCollection * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITaskFolderCollection * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITaskFolderCollection * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITaskFolderCollection * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -904,6 +918,7 @@ EXTERN_C const IID IID_ITaskFolderCollection;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ITaskFolderCollection * This,
             /* [annotation][in] */ 
@@ -923,15 +938,18 @@ EXTERN_C const IID IID_ITaskFolderCollection;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ITaskFolderCollection, get_Count)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ITaskFolderCollection * This,
             /* [retval][out] */ __RPC__out LONG *pCount);
         
+        DECLSPEC_XFGVIRT(ITaskFolderCollection, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ITaskFolderCollection * This,
             /* [in] */ VARIANT index,
             /* [retval][out] */ __RPC__deref_out_opt ITaskFolder **ppFolder);
         
+        DECLSPEC_XFGVIRT(ITaskFolderCollection, get__NewEnum)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ITaskFolderCollection * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppEnum);
@@ -1049,28 +1067,34 @@ EXTERN_C const IID IID_ITaskService;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITaskService * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITaskService * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITaskService * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITaskService * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITaskService * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITaskService * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1079,6 +1103,7 @@ EXTERN_C const IID IID_ITaskService;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ITaskService * This,
             /* [annotation][in] */ 
@@ -1098,21 +1123,25 @@ EXTERN_C const IID IID_ITaskService;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ITaskService, GetFolder)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetFolder )( 
             __RPC__in ITaskService * This,
             /* [unique][in] */ __RPC__in_opt BSTR path,
             /* [retval][out] */ __RPC__deref_out_opt ITaskFolder **ppFolder);
         
+        DECLSPEC_XFGVIRT(ITaskService, GetRunningTasks)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetRunningTasks )( 
             __RPC__in ITaskService * This,
             /* [in] */ LONG flags,
             /* [retval][out] */ __RPC__deref_out_opt IRunningTaskCollection **ppRunningTasks);
         
+        DECLSPEC_XFGVIRT(ITaskService, NewTask)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *NewTask )( 
             __RPC__in ITaskService * This,
             /* [in] */ DWORD flags,
             /* [retval][out] */ __RPC__deref_out_opt ITaskDefinition **ppDefinition);
         
+        DECLSPEC_XFGVIRT(ITaskService, Connect)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Connect )( 
             __RPC__in ITaskService * This,
             /* [optional][in] */ VARIANT serverName,
@@ -1120,22 +1149,27 @@ EXTERN_C const IID IID_ITaskService;
             /* [optional][in] */ VARIANT domain,
             /* [optional][in] */ VARIANT password);
         
+        DECLSPEC_XFGVIRT(ITaskService, get_Connected)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Connected )( 
             __RPC__in ITaskService * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pConnected);
         
+        DECLSPEC_XFGVIRT(ITaskService, get_TargetServer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TargetServer )( 
             __RPC__in ITaskService * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pServer);
         
+        DECLSPEC_XFGVIRT(ITaskService, get_ConnectedUser)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConnectedUser )( 
             __RPC__in ITaskService * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pUser);
         
+        DECLSPEC_XFGVIRT(ITaskService, get_ConnectedDomain)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConnectedDomain )( 
             __RPC__in ITaskService * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pDomain);
         
+        DECLSPEC_XFGVIRT(ITaskService, get_HighestVersion)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_HighestVersion )( 
             __RPC__in ITaskService * This,
             /* [retval][out] */ __RPC__out DWORD *pVersion);
@@ -1249,30 +1283,37 @@ EXTERN_C const IID IID_ITaskHandler;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITaskHandler * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITaskHandler * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITaskHandler * This);
         
+        DECLSPEC_XFGVIRT(ITaskHandler, Start)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Start )( 
             __RPC__in ITaskHandler * This,
             /* [in] */ __RPC__in_opt IUnknown *pHandlerServices,
             /* [in] */ __RPC__in BSTR data);
         
+        DECLSPEC_XFGVIRT(ITaskHandler, Stop)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Stop )( 
             __RPC__in ITaskHandler * This,
             /* [out] */ __RPC__out HRESULT *pRetCode);
         
+        DECLSPEC_XFGVIRT(ITaskHandler, Pause)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Pause )( 
             __RPC__in ITaskHandler * This);
         
+        DECLSPEC_XFGVIRT(ITaskHandler, Resume)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Resume )( 
             __RPC__in ITaskHandler * This);
         
@@ -1353,23 +1394,28 @@ EXTERN_C const IID IID_ITaskHandlerStatus;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITaskHandlerStatus * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITaskHandlerStatus * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITaskHandlerStatus * This);
         
+        DECLSPEC_XFGVIRT(ITaskHandlerStatus, UpdateStatus)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *UpdateStatus )( 
             __RPC__in ITaskHandlerStatus * This,
             /* [in] */ short percentComplete,
             /* [in] */ __RPC__in BSTR statusMessage);
         
+        DECLSPEC_XFGVIRT(ITaskHandlerStatus, TaskCompleted)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *TaskCompleted )( 
             __RPC__in ITaskHandlerStatus * This,
             /* [in] */ HRESULT taskErrCode);
@@ -1447,26 +1493,32 @@ EXTERN_C const IID IID_ITaskVariables;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITaskVariables * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITaskVariables * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITaskVariables * This);
         
+        DECLSPEC_XFGVIRT(ITaskVariables, GetInput)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetInput )( 
             __RPC__in ITaskVariables * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pInput);
         
+        DECLSPEC_XFGVIRT(ITaskVariables, SetOutput)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetOutput )( 
             __RPC__in ITaskVariables * This,
             /* [in] */ __RPC__in BSTR input);
         
+        DECLSPEC_XFGVIRT(ITaskVariables, GetContext)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetContext )( 
             __RPC__in ITaskVariables * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pContext);
@@ -1550,28 +1602,34 @@ EXTERN_C const IID IID_ITaskNamedValuePair;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ITaskNamedValuePair * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ITaskNamedValuePair * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ITaskNamedValuePair * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ITaskNamedValuePair * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ITaskNamedValuePair * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ITaskNamedValuePair * This,
             /* [in] */ REFIID riid,
@@ -1580,6 +1638,7 @@ EXTERN_C const IID IID_ITaskNamedValuePair;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ITaskNamedValuePair * This,
             /* [annotation][in] */ 
@@ -1599,18 +1658,22 @@ EXTERN_C const IID IID_ITaskNamedValuePair;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ITaskNamedValuePair, get_Name)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             ITaskNamedValuePair * This,
             /* [retval][out] */ BSTR *pName);
         
+        DECLSPEC_XFGVIRT(ITaskNamedValuePair, put_Name)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             ITaskNamedValuePair * This,
             /* [in] */ BSTR name);
         
+        DECLSPEC_XFGVIRT(ITaskNamedValuePair, get_Value)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
             ITaskNamedValuePair * This,
             /* [retval][out] */ BSTR *pValue);
         
+        DECLSPEC_XFGVIRT(ITaskNamedValuePair, put_Value)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Value )( 
             ITaskNamedValuePair * This,
             /* [in] */ BSTR value);
@@ -1718,28 +1781,34 @@ EXTERN_C const IID IID_ITaskNamedValueCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ITaskNamedValueCollection * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ITaskNamedValueCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ITaskNamedValueCollection * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ITaskNamedValueCollection * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ITaskNamedValueCollection * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ITaskNamedValueCollection * This,
             /* [in] */ REFIID riid,
@@ -1748,6 +1817,7 @@ EXTERN_C const IID IID_ITaskNamedValueCollection;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ITaskNamedValueCollection * This,
             /* [annotation][in] */ 
@@ -1767,29 +1837,35 @@ EXTERN_C const IID IID_ITaskNamedValueCollection;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ITaskNamedValueCollection, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             ITaskNamedValueCollection * This,
             /* [retval][out] */ long *pCount);
         
+        DECLSPEC_XFGVIRT(ITaskNamedValueCollection, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             ITaskNamedValueCollection * This,
             /* [in] */ LONG index,
             /* [retval][out] */ ITaskNamedValuePair **ppPair);
         
+        DECLSPEC_XFGVIRT(ITaskNamedValueCollection, get__NewEnum)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             ITaskNamedValueCollection * This,
             /* [retval][out] */ IUnknown **ppEnum);
         
+        DECLSPEC_XFGVIRT(ITaskNamedValueCollection, Create)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Create )( 
             ITaskNamedValueCollection * This,
             /* [in] */ BSTR name,
             /* [in] */ BSTR value,
             /* [retval][out] */ ITaskNamedValuePair **ppPair);
         
+        DECLSPEC_XFGVIRT(ITaskNamedValueCollection, Remove)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             ITaskNamedValueCollection * This,
             /* [in] */ LONG index);
         
+        DECLSPEC_XFGVIRT(ITaskNamedValueCollection, Clear)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clear )( 
             ITaskNamedValueCollection * This);
         
@@ -1904,28 +1980,34 @@ EXTERN_C const IID IID_IRunningTask;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRunningTask * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IRunningTask * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IRunningTask * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IRunningTask * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IRunningTask * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IRunningTask * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1934,6 +2016,7 @@ EXTERN_C const IID IID_IRunningTask;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IRunningTask * This,
             /* [annotation][in] */ 
@@ -1953,32 +2036,40 @@ EXTERN_C const IID IID_IRunningTask;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IRunningTask, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IRunningTask * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pName);
         
+        DECLSPEC_XFGVIRT(IRunningTask, get_InstanceGuid)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InstanceGuid )( 
             __RPC__in IRunningTask * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pGuid);
         
+        DECLSPEC_XFGVIRT(IRunningTask, get_Path)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Path )( 
             __RPC__in IRunningTask * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pPath);
         
+        DECLSPEC_XFGVIRT(IRunningTask, get_State)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
             __RPC__in IRunningTask * This,
             /* [retval][out] */ __RPC__out TASK_STATE *pState);
         
+        DECLSPEC_XFGVIRT(IRunningTask, get_CurrentAction)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAction )( 
             __RPC__in IRunningTask * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pName);
         
+        DECLSPEC_XFGVIRT(IRunningTask, Stop)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Stop )( 
             __RPC__in IRunningTask * This);
         
+        DECLSPEC_XFGVIRT(IRunningTask, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IRunningTask * This);
         
+        DECLSPEC_XFGVIRT(IRunningTask, get_EnginePID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EnginePID )( 
             __RPC__in IRunningTask * This,
             /* [retval][out] */ __RPC__out DWORD *pPID);
@@ -2088,28 +2179,34 @@ EXTERN_C const IID IID_IRunningTaskCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRunningTaskCollection * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IRunningTaskCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IRunningTaskCollection * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IRunningTaskCollection * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IRunningTaskCollection * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IRunningTaskCollection * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2118,6 +2215,7 @@ EXTERN_C const IID IID_IRunningTaskCollection;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IRunningTaskCollection * This,
             /* [annotation][in] */ 
@@ -2137,15 +2235,18 @@ EXTERN_C const IID IID_IRunningTaskCollection;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IRunningTaskCollection, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IRunningTaskCollection * This,
             /* [retval][out] */ __RPC__out LONG *pCount);
         
+        DECLSPEC_XFGVIRT(IRunningTaskCollection, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IRunningTaskCollection * This,
             /* [in] */ VARIANT index,
             /* [retval][out] */ __RPC__deref_out_opt IRunningTask **ppRunningTask);
         
+        DECLSPEC_XFGVIRT(IRunningTaskCollection, get__NewEnum)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IRunningTaskCollection * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppEnum);
@@ -2295,28 +2396,34 @@ EXTERN_C const IID IID_IRegisteredTask;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRegisteredTask * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IRegisteredTask * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IRegisteredTask * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IRegisteredTask * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IRegisteredTask * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IRegisteredTask * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2325,6 +2432,7 @@ EXTERN_C const IID IID_IRegisteredTask;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IRegisteredTask * This,
             /* [annotation][in] */ 
@@ -2344,31 +2452,38 @@ EXTERN_C const IID IID_IRegisteredTask;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IRegisteredTask, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IRegisteredTask * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pName);
         
+        DECLSPEC_XFGVIRT(IRegisteredTask, get_Path)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Path )( 
             __RPC__in IRegisteredTask * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pPath);
         
+        DECLSPEC_XFGVIRT(IRegisteredTask, get_State)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
             __RPC__in IRegisteredTask * This,
             /* [retval][out] */ __RPC__out TASK_STATE *pState);
         
+        DECLSPEC_XFGVIRT(IRegisteredTask, get_Enabled)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             __RPC__in IRegisteredTask * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pEnabled);
         
+        DECLSPEC_XFGVIRT(IRegisteredTask, put_Enabled)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             __RPC__in IRegisteredTask * This,
             VARIANT_BOOL enabled);
         
+        DECLSPEC_XFGVIRT(IRegisteredTask, Run)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Run )( 
             __RPC__in IRegisteredTask * This,
             /* [in] */ VARIANT params,
             /* [retval][out] */ __RPC__deref_out_opt IRunningTask **ppRunningTask);
         
+        DECLSPEC_XFGVIRT(IRegisteredTask, RunEx)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RunEx )( 
             __RPC__in IRegisteredTask * This,
             /* [in] */ VARIANT params,
@@ -2377,49 +2492,60 @@ EXTERN_C const IID IID_IRegisteredTask;
             /* [in] */ __RPC__in BSTR user,
             /* [retval][out] */ __RPC__deref_out_opt IRunningTask **ppRunningTask);
         
+        DECLSPEC_XFGVIRT(IRegisteredTask, GetInstances)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetInstances )( 
             __RPC__in IRegisteredTask * This,
             /* [in] */ LONG flags,
             /* [retval][out] */ __RPC__deref_out_opt IRunningTaskCollection **ppRunningTasks);
         
+        DECLSPEC_XFGVIRT(IRegisteredTask, get_LastRunTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastRunTime )( 
             __RPC__in IRegisteredTask * This,
             /* [retval][out] */ __RPC__out DATE *pLastRunTime);
         
+        DECLSPEC_XFGVIRT(IRegisteredTask, get_LastTaskResult)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastTaskResult )( 
             __RPC__in IRegisteredTask * This,
             /* [retval][out] */ __RPC__out LONG *pLastTaskResult);
         
+        DECLSPEC_XFGVIRT(IRegisteredTask, get_NumberOfMissedRuns)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NumberOfMissedRuns )( 
             __RPC__in IRegisteredTask * This,
             /* [retval][out] */ __RPC__out LONG *pNumberOfMissedRuns);
         
+        DECLSPEC_XFGVIRT(IRegisteredTask, get_NextRunTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NextRunTime )( 
             __RPC__in IRegisteredTask * This,
             /* [retval][out] */ __RPC__out DATE *pNextRunTime);
         
+        DECLSPEC_XFGVIRT(IRegisteredTask, get_Definition)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Definition )( 
             __RPC__in IRegisteredTask * This,
             /* [retval][out] */ __RPC__deref_out_opt ITaskDefinition **ppDefinition);
         
+        DECLSPEC_XFGVIRT(IRegisteredTask, get_Xml)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Xml )( 
             __RPC__in IRegisteredTask * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pXml);
         
+        DECLSPEC_XFGVIRT(IRegisteredTask, GetSecurityDescriptor)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetSecurityDescriptor )( 
             __RPC__in IRegisteredTask * This,
             /* [in] */ LONG securityInformation,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pSddl);
         
+        DECLSPEC_XFGVIRT(IRegisteredTask, SetSecurityDescriptor)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetSecurityDescriptor )( 
             __RPC__in IRegisteredTask * This,
             /* [in] */ __RPC__in BSTR sddl,
             /* [in] */ LONG flags);
         
+        DECLSPEC_XFGVIRT(IRegisteredTask, Stop)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Stop )( 
             __RPC__in IRegisteredTask * This,
             /* [in] */ LONG flags);
         
+        DECLSPEC_XFGVIRT(IRegisteredTask, GetRunTimes)
         /* [helpstring][hidden][restricted] */ HRESULT ( STDMETHODCALLTYPE *GetRunTimes )( 
             __RPC__in IRegisteredTask * This,
             /* [in] */ __RPC__in const LPSYSTEMTIME pstStart,
@@ -2591,28 +2717,34 @@ EXTERN_C const IID IID_ITrigger;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ITrigger * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ITrigger * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ITrigger * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ITrigger * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ITrigger * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ITrigger * This,
             /* [in] */ REFIID riid,
@@ -2621,6 +2753,7 @@ EXTERN_C const IID IID_ITrigger;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ITrigger * This,
             /* [annotation][in] */ 
@@ -2640,54 +2773,67 @@ EXTERN_C const IID IID_ITrigger;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Type)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             ITrigger * This,
             /* [retval][out] */ TASK_TRIGGER_TYPE2 *pType);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Id)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             ITrigger * This,
             /* [retval][out] */ BSTR *pId);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Id)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Id )( 
             ITrigger * This,
             /* [in] */ BSTR id);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Repetition)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Repetition )( 
             ITrigger * This,
             /* [retval][out] */ IRepetitionPattern **ppRepeat);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Repetition)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Repetition )( 
             ITrigger * This,
             /* [in] */ IRepetitionPattern *pRepeat);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_ExecutionTimeLimit)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ExecutionTimeLimit )( 
             ITrigger * This,
             /* [retval][out] */ BSTR *pTimeLimit);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_ExecutionTimeLimit)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ExecutionTimeLimit )( 
             ITrigger * This,
             /* [in] */ BSTR timelimit);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_StartBoundary)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_StartBoundary )( 
             ITrigger * This,
             /* [retval][out] */ BSTR *pStart);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_StartBoundary)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_StartBoundary )( 
             ITrigger * This,
             /* [in] */ BSTR start);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_EndBoundary)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_EndBoundary )( 
             ITrigger * This,
             /* [retval][out] */ BSTR *pEnd);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_EndBoundary)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_EndBoundary )( 
             ITrigger * This,
             /* [in] */ BSTR end);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Enabled)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             ITrigger * This,
             /* [retval][out] */ VARIANT_BOOL *pEnabled);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Enabled)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             ITrigger * This,
             /* [in] */ VARIANT_BOOL enabled);
@@ -2802,28 +2948,34 @@ EXTERN_C const IID IID_IIdleTrigger;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IIdleTrigger * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IIdleTrigger * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IIdleTrigger * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IIdleTrigger * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IIdleTrigger * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IIdleTrigger * This,
             /* [in] */ REFIID riid,
@@ -2832,6 +2984,7 @@ EXTERN_C const IID IID_IIdleTrigger;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IIdleTrigger * This,
             /* [annotation][in] */ 
@@ -2851,54 +3004,67 @@ EXTERN_C const IID IID_IIdleTrigger;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Type)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             IIdleTrigger * This,
             /* [retval][out] */ TASK_TRIGGER_TYPE2 *pType);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Id)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             IIdleTrigger * This,
             /* [retval][out] */ BSTR *pId);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Id)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Id )( 
             IIdleTrigger * This,
             /* [in] */ BSTR id);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Repetition)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Repetition )( 
             IIdleTrigger * This,
             /* [retval][out] */ IRepetitionPattern **ppRepeat);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Repetition)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Repetition )( 
             IIdleTrigger * This,
             /* [in] */ IRepetitionPattern *pRepeat);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_ExecutionTimeLimit)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ExecutionTimeLimit )( 
             IIdleTrigger * This,
             /* [retval][out] */ BSTR *pTimeLimit);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_ExecutionTimeLimit)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ExecutionTimeLimit )( 
             IIdleTrigger * This,
             /* [in] */ BSTR timelimit);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_StartBoundary)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_StartBoundary )( 
             IIdleTrigger * This,
             /* [retval][out] */ BSTR *pStart);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_StartBoundary)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_StartBoundary )( 
             IIdleTrigger * This,
             /* [in] */ BSTR start);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_EndBoundary)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_EndBoundary )( 
             IIdleTrigger * This,
             /* [retval][out] */ BSTR *pEnd);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_EndBoundary)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_EndBoundary )( 
             IIdleTrigger * This,
             /* [in] */ BSTR end);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Enabled)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             IIdleTrigger * This,
             /* [retval][out] */ VARIANT_BOOL *pEnabled);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Enabled)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             IIdleTrigger * This,
             /* [in] */ VARIANT_BOOL enabled);
@@ -3026,28 +3192,34 @@ EXTERN_C const IID IID_ILogonTrigger;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ILogonTrigger * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ILogonTrigger * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ILogonTrigger * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ILogonTrigger * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ILogonTrigger * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ILogonTrigger * This,
             /* [in] */ REFIID riid,
@@ -3056,6 +3228,7 @@ EXTERN_C const IID IID_ILogonTrigger;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ILogonTrigger * This,
             /* [annotation][in] */ 
@@ -3075,70 +3248,87 @@ EXTERN_C const IID IID_ILogonTrigger;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Type)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             ILogonTrigger * This,
             /* [retval][out] */ TASK_TRIGGER_TYPE2 *pType);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Id)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             ILogonTrigger * This,
             /* [retval][out] */ BSTR *pId);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Id)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Id )( 
             ILogonTrigger * This,
             /* [in] */ BSTR id);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Repetition)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Repetition )( 
             ILogonTrigger * This,
             /* [retval][out] */ IRepetitionPattern **ppRepeat);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Repetition)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Repetition )( 
             ILogonTrigger * This,
             /* [in] */ IRepetitionPattern *pRepeat);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_ExecutionTimeLimit)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ExecutionTimeLimit )( 
             ILogonTrigger * This,
             /* [retval][out] */ BSTR *pTimeLimit);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_ExecutionTimeLimit)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ExecutionTimeLimit )( 
             ILogonTrigger * This,
             /* [in] */ BSTR timelimit);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_StartBoundary)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_StartBoundary )( 
             ILogonTrigger * This,
             /* [retval][out] */ BSTR *pStart);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_StartBoundary)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_StartBoundary )( 
             ILogonTrigger * This,
             /* [in] */ BSTR start);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_EndBoundary)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_EndBoundary )( 
             ILogonTrigger * This,
             /* [retval][out] */ BSTR *pEnd);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_EndBoundary)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_EndBoundary )( 
             ILogonTrigger * This,
             /* [in] */ BSTR end);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Enabled)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             ILogonTrigger * This,
             /* [retval][out] */ VARIANT_BOOL *pEnabled);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Enabled)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             ILogonTrigger * This,
             /* [in] */ VARIANT_BOOL enabled);
         
+        DECLSPEC_XFGVIRT(ILogonTrigger, get_Delay)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Delay )( 
             ILogonTrigger * This,
             /* [retval][out] */ BSTR *pDelay);
         
+        DECLSPEC_XFGVIRT(ILogonTrigger, put_Delay)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Delay )( 
             ILogonTrigger * This,
             /* [in] */ BSTR delay);
         
+        DECLSPEC_XFGVIRT(ILogonTrigger, get_UserId)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_UserId )( 
             ILogonTrigger * This,
             /* [retval][out] */ BSTR *pUser);
         
+        DECLSPEC_XFGVIRT(ILogonTrigger, put_UserId)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_UserId )( 
             ILogonTrigger * This,
             /* [in] */ BSTR user);
@@ -3284,28 +3474,34 @@ EXTERN_C const IID IID_ISessionStateChangeTrigger;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISessionStateChangeTrigger * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISessionStateChangeTrigger * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISessionStateChangeTrigger * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISessionStateChangeTrigger * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISessionStateChangeTrigger * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISessionStateChangeTrigger * This,
             /* [in] */ REFIID riid,
@@ -3314,6 +3510,7 @@ EXTERN_C const IID IID_ISessionStateChangeTrigger;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISessionStateChangeTrigger * This,
             /* [annotation][in] */ 
@@ -3333,78 +3530,97 @@ EXTERN_C const IID IID_ISessionStateChangeTrigger;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Type)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             ISessionStateChangeTrigger * This,
             /* [retval][out] */ TASK_TRIGGER_TYPE2 *pType);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Id)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             ISessionStateChangeTrigger * This,
             /* [retval][out] */ BSTR *pId);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Id)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Id )( 
             ISessionStateChangeTrigger * This,
             /* [in] */ BSTR id);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Repetition)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Repetition )( 
             ISessionStateChangeTrigger * This,
             /* [retval][out] */ IRepetitionPattern **ppRepeat);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Repetition)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Repetition )( 
             ISessionStateChangeTrigger * This,
             /* [in] */ IRepetitionPattern *pRepeat);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_ExecutionTimeLimit)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ExecutionTimeLimit )( 
             ISessionStateChangeTrigger * This,
             /* [retval][out] */ BSTR *pTimeLimit);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_ExecutionTimeLimit)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ExecutionTimeLimit )( 
             ISessionStateChangeTrigger * This,
             /* [in] */ BSTR timelimit);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_StartBoundary)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_StartBoundary )( 
             ISessionStateChangeTrigger * This,
             /* [retval][out] */ BSTR *pStart);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_StartBoundary)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_StartBoundary )( 
             ISessionStateChangeTrigger * This,
             /* [in] */ BSTR start);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_EndBoundary)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_EndBoundary )( 
             ISessionStateChangeTrigger * This,
             /* [retval][out] */ BSTR *pEnd);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_EndBoundary)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_EndBoundary )( 
             ISessionStateChangeTrigger * This,
             /* [in] */ BSTR end);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Enabled)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             ISessionStateChangeTrigger * This,
             /* [retval][out] */ VARIANT_BOOL *pEnabled);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Enabled)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             ISessionStateChangeTrigger * This,
             /* [in] */ VARIANT_BOOL enabled);
         
+        DECLSPEC_XFGVIRT(ISessionStateChangeTrigger, get_Delay)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Delay )( 
             ISessionStateChangeTrigger * This,
             /* [retval][out] */ BSTR *pDelay);
         
+        DECLSPEC_XFGVIRT(ISessionStateChangeTrigger, put_Delay)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Delay )( 
             ISessionStateChangeTrigger * This,
             /* [in] */ BSTR delay);
         
+        DECLSPEC_XFGVIRT(ISessionStateChangeTrigger, get_UserId)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_UserId )( 
             ISessionStateChangeTrigger * This,
             /* [retval][out] */ BSTR *pUser);
         
+        DECLSPEC_XFGVIRT(ISessionStateChangeTrigger, put_UserId)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_UserId )( 
             ISessionStateChangeTrigger * This,
             /* [in] */ BSTR user);
         
+        DECLSPEC_XFGVIRT(ISessionStateChangeTrigger, get_StateChange)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_StateChange )( 
             ISessionStateChangeTrigger * This,
             /* [retval][out] */ TASK_SESSION_STATE_CHANGE_TYPE *pType);
         
+        DECLSPEC_XFGVIRT(ISessionStateChangeTrigger, put_StateChange)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_StateChange )( 
             ISessionStateChangeTrigger * This,
             /* [in] */ TASK_SESSION_STATE_CHANGE_TYPE type);
@@ -3556,28 +3772,34 @@ EXTERN_C const IID IID_IEventTrigger;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEventTrigger * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IEventTrigger * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IEventTrigger * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IEventTrigger * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IEventTrigger * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IEventTrigger * This,
             /* [in] */ REFIID riid,
@@ -3586,6 +3808,7 @@ EXTERN_C const IID IID_IEventTrigger;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IEventTrigger * This,
             /* [annotation][in] */ 
@@ -3605,78 +3828,97 @@ EXTERN_C const IID IID_IEventTrigger;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Type)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             IEventTrigger * This,
             /* [retval][out] */ TASK_TRIGGER_TYPE2 *pType);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Id)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             IEventTrigger * This,
             /* [retval][out] */ BSTR *pId);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Id)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Id )( 
             IEventTrigger * This,
             /* [in] */ BSTR id);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Repetition)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Repetition )( 
             IEventTrigger * This,
             /* [retval][out] */ IRepetitionPattern **ppRepeat);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Repetition)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Repetition )( 
             IEventTrigger * This,
             /* [in] */ IRepetitionPattern *pRepeat);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_ExecutionTimeLimit)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ExecutionTimeLimit )( 
             IEventTrigger * This,
             /* [retval][out] */ BSTR *pTimeLimit);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_ExecutionTimeLimit)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ExecutionTimeLimit )( 
             IEventTrigger * This,
             /* [in] */ BSTR timelimit);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_StartBoundary)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_StartBoundary )( 
             IEventTrigger * This,
             /* [retval][out] */ BSTR *pStart);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_StartBoundary)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_StartBoundary )( 
             IEventTrigger * This,
             /* [in] */ BSTR start);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_EndBoundary)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_EndBoundary )( 
             IEventTrigger * This,
             /* [retval][out] */ BSTR *pEnd);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_EndBoundary)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_EndBoundary )( 
             IEventTrigger * This,
             /* [in] */ BSTR end);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Enabled)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             IEventTrigger * This,
             /* [retval][out] */ VARIANT_BOOL *pEnabled);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Enabled)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             IEventTrigger * This,
             /* [in] */ VARIANT_BOOL enabled);
         
+        DECLSPEC_XFGVIRT(IEventTrigger, get_Subscription)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Subscription )( 
             IEventTrigger * This,
             /* [retval][out] */ BSTR *pQuery);
         
+        DECLSPEC_XFGVIRT(IEventTrigger, put_Subscription)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Subscription )( 
             IEventTrigger * This,
             /* [in] */ BSTR query);
         
+        DECLSPEC_XFGVIRT(IEventTrigger, get_Delay)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Delay )( 
             IEventTrigger * This,
             /* [retval][out] */ BSTR *pDelay);
         
+        DECLSPEC_XFGVIRT(IEventTrigger, put_Delay)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Delay )( 
             IEventTrigger * This,
             /* [in] */ BSTR delay);
         
+        DECLSPEC_XFGVIRT(IEventTrigger, get_ValueQueries)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ValueQueries )( 
             IEventTrigger * This,
             /* [retval][out] */ ITaskNamedValueCollection **ppNamedXPaths);
         
+        DECLSPEC_XFGVIRT(IEventTrigger, put_ValueQueries)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ValueQueries )( 
             IEventTrigger * This,
             /* [in] */ ITaskNamedValueCollection *pNamedXPaths);
@@ -3816,28 +4058,34 @@ EXTERN_C const IID IID_ITimeTrigger;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ITimeTrigger * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ITimeTrigger * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ITimeTrigger * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ITimeTrigger * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ITimeTrigger * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ITimeTrigger * This,
             /* [in] */ REFIID riid,
@@ -3846,6 +4094,7 @@ EXTERN_C const IID IID_ITimeTrigger;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ITimeTrigger * This,
             /* [annotation][in] */ 
@@ -3865,62 +4114,77 @@ EXTERN_C const IID IID_ITimeTrigger;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Type)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             ITimeTrigger * This,
             /* [retval][out] */ TASK_TRIGGER_TYPE2 *pType);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Id)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             ITimeTrigger * This,
             /* [retval][out] */ BSTR *pId);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Id)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Id )( 
             ITimeTrigger * This,
             /* [in] */ BSTR id);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Repetition)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Repetition )( 
             ITimeTrigger * This,
             /* [retval][out] */ IRepetitionPattern **ppRepeat);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Repetition)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Repetition )( 
             ITimeTrigger * This,
             /* [in] */ IRepetitionPattern *pRepeat);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_ExecutionTimeLimit)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ExecutionTimeLimit )( 
             ITimeTrigger * This,
             /* [retval][out] */ BSTR *pTimeLimit);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_ExecutionTimeLimit)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ExecutionTimeLimit )( 
             ITimeTrigger * This,
             /* [in] */ BSTR timelimit);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_StartBoundary)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_StartBoundary )( 
             ITimeTrigger * This,
             /* [retval][out] */ BSTR *pStart);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_StartBoundary)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_StartBoundary )( 
             ITimeTrigger * This,
             /* [in] */ BSTR start);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_EndBoundary)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_EndBoundary )( 
             ITimeTrigger * This,
             /* [retval][out] */ BSTR *pEnd);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_EndBoundary)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_EndBoundary )( 
             ITimeTrigger * This,
             /* [in] */ BSTR end);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Enabled)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             ITimeTrigger * This,
             /* [retval][out] */ VARIANT_BOOL *pEnabled);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Enabled)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             ITimeTrigger * This,
             /* [in] */ VARIANT_BOOL enabled);
         
+        DECLSPEC_XFGVIRT(ITimeTrigger, get_RandomDelay)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RandomDelay )( 
             ITimeTrigger * This,
             /* [retval][out] */ BSTR *pRandomDelay);
         
+        DECLSPEC_XFGVIRT(ITimeTrigger, put_RandomDelay)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RandomDelay )( 
             ITimeTrigger * This,
             /* [in] */ BSTR randomDelay);
@@ -4054,28 +4318,34 @@ EXTERN_C const IID IID_IDailyTrigger;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDailyTrigger * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDailyTrigger * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDailyTrigger * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IDailyTrigger * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IDailyTrigger * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IDailyTrigger * This,
             /* [in] */ REFIID riid,
@@ -4084,6 +4354,7 @@ EXTERN_C const IID IID_IDailyTrigger;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IDailyTrigger * This,
             /* [annotation][in] */ 
@@ -4103,70 +4374,87 @@ EXTERN_C const IID IID_IDailyTrigger;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Type)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             IDailyTrigger * This,
             /* [retval][out] */ TASK_TRIGGER_TYPE2 *pType);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Id)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             IDailyTrigger * This,
             /* [retval][out] */ BSTR *pId);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Id)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Id )( 
             IDailyTrigger * This,
             /* [in] */ BSTR id);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Repetition)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Repetition )( 
             IDailyTrigger * This,
             /* [retval][out] */ IRepetitionPattern **ppRepeat);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Repetition)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Repetition )( 
             IDailyTrigger * This,
             /* [in] */ IRepetitionPattern *pRepeat);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_ExecutionTimeLimit)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ExecutionTimeLimit )( 
             IDailyTrigger * This,
             /* [retval][out] */ BSTR *pTimeLimit);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_ExecutionTimeLimit)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ExecutionTimeLimit )( 
             IDailyTrigger * This,
             /* [in] */ BSTR timelimit);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_StartBoundary)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_StartBoundary )( 
             IDailyTrigger * This,
             /* [retval][out] */ BSTR *pStart);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_StartBoundary)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_StartBoundary )( 
             IDailyTrigger * This,
             /* [in] */ BSTR start);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_EndBoundary)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_EndBoundary )( 
             IDailyTrigger * This,
             /* [retval][out] */ BSTR *pEnd);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_EndBoundary)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_EndBoundary )( 
             IDailyTrigger * This,
             /* [in] */ BSTR end);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Enabled)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             IDailyTrigger * This,
             /* [retval][out] */ VARIANT_BOOL *pEnabled);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Enabled)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             IDailyTrigger * This,
             /* [in] */ VARIANT_BOOL enabled);
         
+        DECLSPEC_XFGVIRT(IDailyTrigger, get_DaysInterval)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DaysInterval )( 
             IDailyTrigger * This,
             /* [retval][out] */ short *pDays);
         
+        DECLSPEC_XFGVIRT(IDailyTrigger, put_DaysInterval)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DaysInterval )( 
             IDailyTrigger * This,
             /* [in] */ short days);
         
+        DECLSPEC_XFGVIRT(IDailyTrigger, get_RandomDelay)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RandomDelay )( 
             IDailyTrigger * This,
             /* [retval][out] */ BSTR *pRandomDelay);
         
+        DECLSPEC_XFGVIRT(IDailyTrigger, put_RandomDelay)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RandomDelay )( 
             IDailyTrigger * This,
             /* [in] */ BSTR randomDelay);
@@ -4312,28 +4600,34 @@ EXTERN_C const IID IID_IWeeklyTrigger;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWeeklyTrigger * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWeeklyTrigger * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWeeklyTrigger * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWeeklyTrigger * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWeeklyTrigger * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWeeklyTrigger * This,
             /* [in] */ REFIID riid,
@@ -4342,6 +4636,7 @@ EXTERN_C const IID IID_IWeeklyTrigger;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWeeklyTrigger * This,
             /* [annotation][in] */ 
@@ -4361,78 +4656,97 @@ EXTERN_C const IID IID_IWeeklyTrigger;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Type)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             IWeeklyTrigger * This,
             /* [retval][out] */ TASK_TRIGGER_TYPE2 *pType);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Id)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             IWeeklyTrigger * This,
             /* [retval][out] */ BSTR *pId);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Id)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Id )( 
             IWeeklyTrigger * This,
             /* [in] */ BSTR id);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Repetition)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Repetition )( 
             IWeeklyTrigger * This,
             /* [retval][out] */ IRepetitionPattern **ppRepeat);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Repetition)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Repetition )( 
             IWeeklyTrigger * This,
             /* [in] */ IRepetitionPattern *pRepeat);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_ExecutionTimeLimit)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ExecutionTimeLimit )( 
             IWeeklyTrigger * This,
             /* [retval][out] */ BSTR *pTimeLimit);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_ExecutionTimeLimit)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ExecutionTimeLimit )( 
             IWeeklyTrigger * This,
             /* [in] */ BSTR timelimit);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_StartBoundary)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_StartBoundary )( 
             IWeeklyTrigger * This,
             /* [retval][out] */ BSTR *pStart);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_StartBoundary)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_StartBoundary )( 
             IWeeklyTrigger * This,
             /* [in] */ BSTR start);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_EndBoundary)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_EndBoundary )( 
             IWeeklyTrigger * This,
             /* [retval][out] */ BSTR *pEnd);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_EndBoundary)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_EndBoundary )( 
             IWeeklyTrigger * This,
             /* [in] */ BSTR end);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Enabled)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             IWeeklyTrigger * This,
             /* [retval][out] */ VARIANT_BOOL *pEnabled);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Enabled)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             IWeeklyTrigger * This,
             /* [in] */ VARIANT_BOOL enabled);
         
+        DECLSPEC_XFGVIRT(IWeeklyTrigger, get_DaysOfWeek)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DaysOfWeek )( 
             IWeeklyTrigger * This,
             /* [retval][out] */ short *pDays);
         
+        DECLSPEC_XFGVIRT(IWeeklyTrigger, put_DaysOfWeek)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DaysOfWeek )( 
             IWeeklyTrigger * This,
             /* [in] */ short days);
         
+        DECLSPEC_XFGVIRT(IWeeklyTrigger, get_WeeksInterval)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_WeeksInterval )( 
             IWeeklyTrigger * This,
             /* [retval][out] */ short *pWeeks);
         
+        DECLSPEC_XFGVIRT(IWeeklyTrigger, put_WeeksInterval)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_WeeksInterval )( 
             IWeeklyTrigger * This,
             /* [in] */ short weeks);
         
+        DECLSPEC_XFGVIRT(IWeeklyTrigger, get_RandomDelay)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RandomDelay )( 
             IWeeklyTrigger * This,
             /* [retval][out] */ BSTR *pRandomDelay);
         
+        DECLSPEC_XFGVIRT(IWeeklyTrigger, put_RandomDelay)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RandomDelay )( 
             IWeeklyTrigger * This,
             /* [in] */ BSTR randomDelay);
@@ -4590,28 +4904,34 @@ EXTERN_C const IID IID_IMonthlyTrigger;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMonthlyTrigger * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMonthlyTrigger * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMonthlyTrigger * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IMonthlyTrigger * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IMonthlyTrigger * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IMonthlyTrigger * This,
             /* [in] */ REFIID riid,
@@ -4620,6 +4940,7 @@ EXTERN_C const IID IID_IMonthlyTrigger;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMonthlyTrigger * This,
             /* [annotation][in] */ 
@@ -4639,86 +4960,107 @@ EXTERN_C const IID IID_IMonthlyTrigger;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Type)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             IMonthlyTrigger * This,
             /* [retval][out] */ TASK_TRIGGER_TYPE2 *pType);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Id)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             IMonthlyTrigger * This,
             /* [retval][out] */ BSTR *pId);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Id)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Id )( 
             IMonthlyTrigger * This,
             /* [in] */ BSTR id);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Repetition)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Repetition )( 
             IMonthlyTrigger * This,
             /* [retval][out] */ IRepetitionPattern **ppRepeat);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Repetition)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Repetition )( 
             IMonthlyTrigger * This,
             /* [in] */ IRepetitionPattern *pRepeat);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_ExecutionTimeLimit)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ExecutionTimeLimit )( 
             IMonthlyTrigger * This,
             /* [retval][out] */ BSTR *pTimeLimit);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_ExecutionTimeLimit)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ExecutionTimeLimit )( 
             IMonthlyTrigger * This,
             /* [in] */ BSTR timelimit);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_StartBoundary)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_StartBoundary )( 
             IMonthlyTrigger * This,
             /* [retval][out] */ BSTR *pStart);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_StartBoundary)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_StartBoundary )( 
             IMonthlyTrigger * This,
             /* [in] */ BSTR start);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_EndBoundary)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_EndBoundary )( 
             IMonthlyTrigger * This,
             /* [retval][out] */ BSTR *pEnd);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_EndBoundary)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_EndBoundary )( 
             IMonthlyTrigger * This,
             /* [in] */ BSTR end);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Enabled)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             IMonthlyTrigger * This,
             /* [retval][out] */ VARIANT_BOOL *pEnabled);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Enabled)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             IMonthlyTrigger * This,
             /* [in] */ VARIANT_BOOL enabled);
         
+        DECLSPEC_XFGVIRT(IMonthlyTrigger, get_DaysOfMonth)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DaysOfMonth )( 
             IMonthlyTrigger * This,
             /* [retval][out] */ long *pDays);
         
+        DECLSPEC_XFGVIRT(IMonthlyTrigger, put_DaysOfMonth)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DaysOfMonth )( 
             IMonthlyTrigger * This,
             /* [in] */ long days);
         
+        DECLSPEC_XFGVIRT(IMonthlyTrigger, get_MonthsOfYear)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MonthsOfYear )( 
             IMonthlyTrigger * This,
             /* [retval][out] */ short *pMonths);
         
+        DECLSPEC_XFGVIRT(IMonthlyTrigger, put_MonthsOfYear)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MonthsOfYear )( 
             IMonthlyTrigger * This,
             /* [in] */ short months);
         
+        DECLSPEC_XFGVIRT(IMonthlyTrigger, get_RunOnLastDayOfMonth)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RunOnLastDayOfMonth )( 
             IMonthlyTrigger * This,
             /* [retval][out] */ VARIANT_BOOL *pLastDay);
         
+        DECLSPEC_XFGVIRT(IMonthlyTrigger, put_RunOnLastDayOfMonth)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RunOnLastDayOfMonth )( 
             IMonthlyTrigger * This,
             /* [in] */ VARIANT_BOOL lastDay);
         
+        DECLSPEC_XFGVIRT(IMonthlyTrigger, get_RandomDelay)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RandomDelay )( 
             IMonthlyTrigger * This,
             /* [retval][out] */ BSTR *pRandomDelay);
         
+        DECLSPEC_XFGVIRT(IMonthlyTrigger, put_RandomDelay)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RandomDelay )( 
             IMonthlyTrigger * This,
             /* [in] */ BSTR randomDelay);
@@ -4888,28 +5230,34 @@ EXTERN_C const IID IID_IMonthlyDOWTrigger;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMonthlyDOWTrigger * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMonthlyDOWTrigger * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMonthlyDOWTrigger * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IMonthlyDOWTrigger * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IMonthlyDOWTrigger * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IMonthlyDOWTrigger * This,
             /* [in] */ REFIID riid,
@@ -4918,6 +5266,7 @@ EXTERN_C const IID IID_IMonthlyDOWTrigger;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMonthlyDOWTrigger * This,
             /* [annotation][in] */ 
@@ -4937,94 +5286,117 @@ EXTERN_C const IID IID_IMonthlyDOWTrigger;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Type)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             IMonthlyDOWTrigger * This,
             /* [retval][out] */ TASK_TRIGGER_TYPE2 *pType);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Id)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             IMonthlyDOWTrigger * This,
             /* [retval][out] */ BSTR *pId);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Id)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Id )( 
             IMonthlyDOWTrigger * This,
             /* [in] */ BSTR id);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Repetition)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Repetition )( 
             IMonthlyDOWTrigger * This,
             /* [retval][out] */ IRepetitionPattern **ppRepeat);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Repetition)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Repetition )( 
             IMonthlyDOWTrigger * This,
             /* [in] */ IRepetitionPattern *pRepeat);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_ExecutionTimeLimit)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ExecutionTimeLimit )( 
             IMonthlyDOWTrigger * This,
             /* [retval][out] */ BSTR *pTimeLimit);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_ExecutionTimeLimit)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ExecutionTimeLimit )( 
             IMonthlyDOWTrigger * This,
             /* [in] */ BSTR timelimit);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_StartBoundary)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_StartBoundary )( 
             IMonthlyDOWTrigger * This,
             /* [retval][out] */ BSTR *pStart);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_StartBoundary)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_StartBoundary )( 
             IMonthlyDOWTrigger * This,
             /* [in] */ BSTR start);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_EndBoundary)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_EndBoundary )( 
             IMonthlyDOWTrigger * This,
             /* [retval][out] */ BSTR *pEnd);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_EndBoundary)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_EndBoundary )( 
             IMonthlyDOWTrigger * This,
             /* [in] */ BSTR end);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Enabled)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             IMonthlyDOWTrigger * This,
             /* [retval][out] */ VARIANT_BOOL *pEnabled);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Enabled)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             IMonthlyDOWTrigger * This,
             /* [in] */ VARIANT_BOOL enabled);
         
+        DECLSPEC_XFGVIRT(IMonthlyDOWTrigger, get_DaysOfWeek)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DaysOfWeek )( 
             IMonthlyDOWTrigger * This,
             /* [retval][out] */ short *pDays);
         
+        DECLSPEC_XFGVIRT(IMonthlyDOWTrigger, put_DaysOfWeek)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DaysOfWeek )( 
             IMonthlyDOWTrigger * This,
             /* [in] */ short days);
         
+        DECLSPEC_XFGVIRT(IMonthlyDOWTrigger, get_WeeksOfMonth)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_WeeksOfMonth )( 
             IMonthlyDOWTrigger * This,
             /* [retval][out] */ short *pWeeks);
         
+        DECLSPEC_XFGVIRT(IMonthlyDOWTrigger, put_WeeksOfMonth)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_WeeksOfMonth )( 
             IMonthlyDOWTrigger * This,
             /* [in] */ short weeks);
         
+        DECLSPEC_XFGVIRT(IMonthlyDOWTrigger, get_MonthsOfYear)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MonthsOfYear )( 
             IMonthlyDOWTrigger * This,
             /* [retval][out] */ short *pMonths);
         
+        DECLSPEC_XFGVIRT(IMonthlyDOWTrigger, put_MonthsOfYear)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MonthsOfYear )( 
             IMonthlyDOWTrigger * This,
             /* [in] */ short months);
         
+        DECLSPEC_XFGVIRT(IMonthlyDOWTrigger, get_RunOnLastWeekOfMonth)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RunOnLastWeekOfMonth )( 
             IMonthlyDOWTrigger * This,
             /* [retval][out] */ VARIANT_BOOL *pLastWeek);
         
+        DECLSPEC_XFGVIRT(IMonthlyDOWTrigger, put_RunOnLastWeekOfMonth)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RunOnLastWeekOfMonth )( 
             IMonthlyDOWTrigger * This,
             /* [in] */ VARIANT_BOOL lastWeek);
         
+        DECLSPEC_XFGVIRT(IMonthlyDOWTrigger, get_RandomDelay)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RandomDelay )( 
             IMonthlyDOWTrigger * This,
             /* [retval][out] */ BSTR *pRandomDelay);
         
+        DECLSPEC_XFGVIRT(IMonthlyDOWTrigger, put_RandomDelay)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RandomDelay )( 
             IMonthlyDOWTrigger * This,
             /* [in] */ BSTR randomDelay);
@@ -5176,28 +5548,34 @@ EXTERN_C const IID IID_IBootTrigger;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IBootTrigger * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IBootTrigger * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IBootTrigger * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IBootTrigger * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IBootTrigger * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IBootTrigger * This,
             /* [in] */ REFIID riid,
@@ -5206,6 +5584,7 @@ EXTERN_C const IID IID_IBootTrigger;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IBootTrigger * This,
             /* [annotation][in] */ 
@@ -5225,62 +5604,77 @@ EXTERN_C const IID IID_IBootTrigger;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Type)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             IBootTrigger * This,
             /* [retval][out] */ TASK_TRIGGER_TYPE2 *pType);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Id)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             IBootTrigger * This,
             /* [retval][out] */ BSTR *pId);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Id)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Id )( 
             IBootTrigger * This,
             /* [in] */ BSTR id);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Repetition)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Repetition )( 
             IBootTrigger * This,
             /* [retval][out] */ IRepetitionPattern **ppRepeat);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Repetition)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Repetition )( 
             IBootTrigger * This,
             /* [in] */ IRepetitionPattern *pRepeat);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_ExecutionTimeLimit)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ExecutionTimeLimit )( 
             IBootTrigger * This,
             /* [retval][out] */ BSTR *pTimeLimit);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_ExecutionTimeLimit)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ExecutionTimeLimit )( 
             IBootTrigger * This,
             /* [in] */ BSTR timelimit);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_StartBoundary)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_StartBoundary )( 
             IBootTrigger * This,
             /* [retval][out] */ BSTR *pStart);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_StartBoundary)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_StartBoundary )( 
             IBootTrigger * This,
             /* [in] */ BSTR start);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_EndBoundary)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_EndBoundary )( 
             IBootTrigger * This,
             /* [retval][out] */ BSTR *pEnd);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_EndBoundary)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_EndBoundary )( 
             IBootTrigger * This,
             /* [in] */ BSTR end);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Enabled)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             IBootTrigger * This,
             /* [retval][out] */ VARIANT_BOOL *pEnabled);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Enabled)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             IBootTrigger * This,
             /* [in] */ VARIANT_BOOL enabled);
         
+        DECLSPEC_XFGVIRT(IBootTrigger, get_Delay)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Delay )( 
             IBootTrigger * This,
             /* [retval][out] */ BSTR *pDelay);
         
+        DECLSPEC_XFGVIRT(IBootTrigger, put_Delay)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Delay )( 
             IBootTrigger * This,
             /* [in] */ BSTR delay);
@@ -5408,28 +5802,34 @@ EXTERN_C const IID IID_IRegistrationTrigger;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRegistrationTrigger * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IRegistrationTrigger * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IRegistrationTrigger * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IRegistrationTrigger * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IRegistrationTrigger * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IRegistrationTrigger * This,
             /* [in] */ REFIID riid,
@@ -5438,6 +5838,7 @@ EXTERN_C const IID IID_IRegistrationTrigger;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IRegistrationTrigger * This,
             /* [annotation][in] */ 
@@ -5457,62 +5858,77 @@ EXTERN_C const IID IID_IRegistrationTrigger;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Type)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             IRegistrationTrigger * This,
             /* [retval][out] */ TASK_TRIGGER_TYPE2 *pType);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Id)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             IRegistrationTrigger * This,
             /* [retval][out] */ BSTR *pId);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Id)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Id )( 
             IRegistrationTrigger * This,
             /* [in] */ BSTR id);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Repetition)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Repetition )( 
             IRegistrationTrigger * This,
             /* [retval][out] */ IRepetitionPattern **ppRepeat);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Repetition)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Repetition )( 
             IRegistrationTrigger * This,
             /* [in] */ IRepetitionPattern *pRepeat);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_ExecutionTimeLimit)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ExecutionTimeLimit )( 
             IRegistrationTrigger * This,
             /* [retval][out] */ BSTR *pTimeLimit);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_ExecutionTimeLimit)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ExecutionTimeLimit )( 
             IRegistrationTrigger * This,
             /* [in] */ BSTR timelimit);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_StartBoundary)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_StartBoundary )( 
             IRegistrationTrigger * This,
             /* [retval][out] */ BSTR *pStart);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_StartBoundary)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_StartBoundary )( 
             IRegistrationTrigger * This,
             /* [in] */ BSTR start);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_EndBoundary)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_EndBoundary )( 
             IRegistrationTrigger * This,
             /* [retval][out] */ BSTR *pEnd);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_EndBoundary)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_EndBoundary )( 
             IRegistrationTrigger * This,
             /* [in] */ BSTR end);
         
+        DECLSPEC_XFGVIRT(ITrigger, get_Enabled)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             IRegistrationTrigger * This,
             /* [retval][out] */ VARIANT_BOOL *pEnabled);
         
+        DECLSPEC_XFGVIRT(ITrigger, put_Enabled)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             IRegistrationTrigger * This,
             /* [in] */ VARIANT_BOOL enabled);
         
+        DECLSPEC_XFGVIRT(IRegistrationTrigger, get_Delay)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Delay )( 
             IRegistrationTrigger * This,
             /* [retval][out] */ BSTR *pDelay);
         
+        DECLSPEC_XFGVIRT(IRegistrationTrigger, put_Delay)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Delay )( 
             IRegistrationTrigger * This,
             /* [in] */ BSTR delay);
@@ -5643,28 +6059,34 @@ EXTERN_C const IID IID_IAction;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAction * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAction * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IAction * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IAction * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IAction * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IAction * This,
             /* [in] */ REFIID riid,
@@ -5673,6 +6095,7 @@ EXTERN_C const IID IID_IAction;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAction * This,
             /* [annotation][in] */ 
@@ -5692,14 +6115,17 @@ EXTERN_C const IID IID_IAction;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAction, get_Id)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             IAction * This,
             /* [retval][out] */ BSTR *pId);
         
+        DECLSPEC_XFGVIRT(IAction, put_Id)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Id )( 
             IAction * This,
             /* [in] */ BSTR Id);
         
+        DECLSPEC_XFGVIRT(IAction, get_Type)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             IAction * This,
             /* [retval][out] */ TASK_ACTION_TYPE *pType);
@@ -5802,28 +6228,34 @@ EXTERN_C const IID IID_IExecAction;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IExecAction * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IExecAction * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IExecAction * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IExecAction * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IExecAction * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IExecAction * This,
             /* [in] */ REFIID riid,
@@ -5832,6 +6264,7 @@ EXTERN_C const IID IID_IExecAction;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IExecAction * This,
             /* [annotation][in] */ 
@@ -5851,38 +6284,47 @@ EXTERN_C const IID IID_IExecAction;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAction, get_Id)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             IExecAction * This,
             /* [retval][out] */ BSTR *pId);
         
+        DECLSPEC_XFGVIRT(IAction, put_Id)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Id )( 
             IExecAction * This,
             /* [in] */ BSTR Id);
         
+        DECLSPEC_XFGVIRT(IAction, get_Type)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             IExecAction * This,
             /* [retval][out] */ TASK_ACTION_TYPE *pType);
         
+        DECLSPEC_XFGVIRT(IExecAction, get_Path)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Path )( 
             IExecAction * This,
             /* [retval][out] */ BSTR *pPath);
         
+        DECLSPEC_XFGVIRT(IExecAction, put_Path)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Path )( 
             IExecAction * This,
             /* [in] */ BSTR path);
         
+        DECLSPEC_XFGVIRT(IExecAction, get_Arguments)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Arguments )( 
             IExecAction * This,
             /* [retval][out] */ BSTR *pArgument);
         
+        DECLSPEC_XFGVIRT(IExecAction, put_Arguments)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Arguments )( 
             IExecAction * This,
             /* [in] */ BSTR argument);
         
+        DECLSPEC_XFGVIRT(IExecAction, get_WorkingDirectory)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_WorkingDirectory )( 
             IExecAction * This,
             /* [retval][out] */ BSTR *pWorkingDirectory);
         
+        DECLSPEC_XFGVIRT(IExecAction, put_WorkingDirectory)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_WorkingDirectory )( 
             IExecAction * This,
             /* [in] */ BSTR workingDirectory);
@@ -5992,28 +6434,34 @@ EXTERN_C const IID IID_IExecAction2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IExecAction2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IExecAction2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IExecAction2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IExecAction2 * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IExecAction2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IExecAction2 * This,
             /* [in] */ REFIID riid,
@@ -6022,6 +6470,7 @@ EXTERN_C const IID IID_IExecAction2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IExecAction2 * This,
             /* [annotation][in] */ 
@@ -6041,46 +6490,57 @@ EXTERN_C const IID IID_IExecAction2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAction, get_Id)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             IExecAction2 * This,
             /* [retval][out] */ BSTR *pId);
         
+        DECLSPEC_XFGVIRT(IAction, put_Id)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Id )( 
             IExecAction2 * This,
             /* [in] */ BSTR Id);
         
+        DECLSPEC_XFGVIRT(IAction, get_Type)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             IExecAction2 * This,
             /* [retval][out] */ TASK_ACTION_TYPE *pType);
         
+        DECLSPEC_XFGVIRT(IExecAction, get_Path)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Path )( 
             IExecAction2 * This,
             /* [retval][out] */ BSTR *pPath);
         
+        DECLSPEC_XFGVIRT(IExecAction, put_Path)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Path )( 
             IExecAction2 * This,
             /* [in] */ BSTR path);
         
+        DECLSPEC_XFGVIRT(IExecAction, get_Arguments)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Arguments )( 
             IExecAction2 * This,
             /* [retval][out] */ BSTR *pArgument);
         
+        DECLSPEC_XFGVIRT(IExecAction, put_Arguments)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Arguments )( 
             IExecAction2 * This,
             /* [in] */ BSTR argument);
         
+        DECLSPEC_XFGVIRT(IExecAction, get_WorkingDirectory)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_WorkingDirectory )( 
             IExecAction2 * This,
             /* [retval][out] */ BSTR *pWorkingDirectory);
         
+        DECLSPEC_XFGVIRT(IExecAction, put_WorkingDirectory)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_WorkingDirectory )( 
             IExecAction2 * This,
             /* [in] */ BSTR workingDirectory);
         
+        DECLSPEC_XFGVIRT(IExecAction2, get_HideAppWindow)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_HideAppWindow )( 
             IExecAction2 * This,
             /* [retval][out] */ VARIANT_BOOL *pHideAppWindow);
         
+        DECLSPEC_XFGVIRT(IExecAction2, put_HideAppWindow)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_HideAppWindow )( 
             IExecAction2 * This,
             /* [in] */ VARIANT_BOOL hideAppWindow);
@@ -6203,28 +6663,34 @@ EXTERN_C const IID IID_IShowMessageAction;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IShowMessageAction * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IShowMessageAction * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IShowMessageAction * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IShowMessageAction * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IShowMessageAction * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IShowMessageAction * This,
             /* [in] */ REFIID riid,
@@ -6233,6 +6699,7 @@ EXTERN_C const IID IID_IShowMessageAction;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IShowMessageAction * This,
             /* [annotation][in] */ 
@@ -6252,30 +6719,37 @@ EXTERN_C const IID IID_IShowMessageAction;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAction, get_Id)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             IShowMessageAction * This,
             /* [retval][out] */ BSTR *pId);
         
+        DECLSPEC_XFGVIRT(IAction, put_Id)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Id )( 
             IShowMessageAction * This,
             /* [in] */ BSTR Id);
         
+        DECLSPEC_XFGVIRT(IAction, get_Type)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             IShowMessageAction * This,
             /* [retval][out] */ TASK_ACTION_TYPE *pType);
         
+        DECLSPEC_XFGVIRT(IShowMessageAction, get_Title)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Title )( 
             IShowMessageAction * This,
             /* [retval][out] */ BSTR *pTitle);
         
+        DECLSPEC_XFGVIRT(IShowMessageAction, put_Title)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Title )( 
             IShowMessageAction * This,
             /* [in] */ BSTR title);
         
+        DECLSPEC_XFGVIRT(IShowMessageAction, get_MessageBody)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MessageBody )( 
             IShowMessageAction * This,
             /* [retval][out] */ BSTR *pMessageBody);
         
+        DECLSPEC_XFGVIRT(IShowMessageAction, put_MessageBody)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MessageBody )( 
             IShowMessageAction * This,
             /* [in] */ BSTR messageBody);
@@ -6385,28 +6859,34 @@ EXTERN_C const IID IID_IComHandlerAction;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IComHandlerAction * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IComHandlerAction * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IComHandlerAction * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IComHandlerAction * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IComHandlerAction * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IComHandlerAction * This,
             /* [in] */ REFIID riid,
@@ -6415,6 +6895,7 @@ EXTERN_C const IID IID_IComHandlerAction;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IComHandlerAction * This,
             /* [annotation][in] */ 
@@ -6434,30 +6915,37 @@ EXTERN_C const IID IID_IComHandlerAction;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAction, get_Id)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             IComHandlerAction * This,
             /* [retval][out] */ BSTR *pId);
         
+        DECLSPEC_XFGVIRT(IAction, put_Id)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Id )( 
             IComHandlerAction * This,
             /* [in] */ BSTR Id);
         
+        DECLSPEC_XFGVIRT(IAction, get_Type)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             IComHandlerAction * This,
             /* [retval][out] */ TASK_ACTION_TYPE *pType);
         
+        DECLSPEC_XFGVIRT(IComHandlerAction, get_ClassId)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ClassId )( 
             IComHandlerAction * This,
             /* [retval][out] */ BSTR *pClsid);
         
+        DECLSPEC_XFGVIRT(IComHandlerAction, put_ClassId)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ClassId )( 
             IComHandlerAction * This,
             /* [in] */ BSTR clsid);
         
+        DECLSPEC_XFGVIRT(IComHandlerAction, get_Data)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Data )( 
             IComHandlerAction * This,
             /* [retval][out] */ BSTR *pData);
         
+        DECLSPEC_XFGVIRT(IComHandlerAction, put_Data)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Data )( 
             IComHandlerAction * This,
             /* [in] */ BSTR data);
@@ -6615,28 +7103,34 @@ EXTERN_C const IID IID_IEmailAction;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEmailAction * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IEmailAction * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IEmailAction * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IEmailAction * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IEmailAction * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IEmailAction * This,
             /* [in] */ REFIID riid,
@@ -6645,6 +7139,7 @@ EXTERN_C const IID IID_IEmailAction;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IEmailAction * This,
             /* [annotation][in] */ 
@@ -6664,94 +7159,117 @@ EXTERN_C const IID IID_IEmailAction;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAction, get_Id)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             IEmailAction * This,
             /* [retval][out] */ BSTR *pId);
         
+        DECLSPEC_XFGVIRT(IAction, put_Id)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Id )( 
             IEmailAction * This,
             /* [in] */ BSTR Id);
         
+        DECLSPEC_XFGVIRT(IAction, get_Type)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             IEmailAction * This,
             /* [retval][out] */ TASK_ACTION_TYPE *pType);
         
+        DECLSPEC_XFGVIRT(IEmailAction, get_Server)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Server )( 
             IEmailAction * This,
             /* [retval][out] */ BSTR *pServer);
         
+        DECLSPEC_XFGVIRT(IEmailAction, put_Server)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Server )( 
             IEmailAction * This,
             /* [in] */ BSTR server);
         
+        DECLSPEC_XFGVIRT(IEmailAction, get_Subject)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Subject )( 
             IEmailAction * This,
             /* [retval][out] */ BSTR *pSubject);
         
+        DECLSPEC_XFGVIRT(IEmailAction, put_Subject)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Subject )( 
             IEmailAction * This,
             /* [in] */ BSTR subject);
         
+        DECLSPEC_XFGVIRT(IEmailAction, get_To)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_To )( 
             IEmailAction * This,
             /* [retval][out] */ BSTR *pTo);
         
+        DECLSPEC_XFGVIRT(IEmailAction, put_To)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_To )( 
             IEmailAction * This,
             /* [in] */ BSTR to);
         
+        DECLSPEC_XFGVIRT(IEmailAction, get_Cc)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Cc )( 
             IEmailAction * This,
             /* [retval][out] */ BSTR *pCc);
         
+        DECLSPEC_XFGVIRT(IEmailAction, put_Cc)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Cc )( 
             IEmailAction * This,
             /* [in] */ BSTR cc);
         
+        DECLSPEC_XFGVIRT(IEmailAction, get_Bcc)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Bcc )( 
             IEmailAction * This,
             /* [retval][out] */ BSTR *pBcc);
         
+        DECLSPEC_XFGVIRT(IEmailAction, put_Bcc)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Bcc )( 
             IEmailAction * This,
             /* [in] */ BSTR bcc);
         
+        DECLSPEC_XFGVIRT(IEmailAction, get_ReplyTo)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ReplyTo )( 
             IEmailAction * This,
             /* [retval][out] */ BSTR *pReplyTo);
         
+        DECLSPEC_XFGVIRT(IEmailAction, put_ReplyTo)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ReplyTo )( 
             IEmailAction * This,
             /* [in] */ BSTR replyTo);
         
+        DECLSPEC_XFGVIRT(IEmailAction, get_From)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_From )( 
             IEmailAction * This,
             /* [retval][out] */ BSTR *pFrom);
         
+        DECLSPEC_XFGVIRT(IEmailAction, put_From)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_From )( 
             IEmailAction * This,
             /* [in] */ BSTR from);
         
+        DECLSPEC_XFGVIRT(IEmailAction, get_HeaderFields)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_HeaderFields )( 
             IEmailAction * This,
             /* [retval][out] */ ITaskNamedValueCollection **ppHeaderFields);
         
+        DECLSPEC_XFGVIRT(IEmailAction, put_HeaderFields)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_HeaderFields )( 
             IEmailAction * This,
             /* [in] */ ITaskNamedValueCollection *pHeaderFields);
         
+        DECLSPEC_XFGVIRT(IEmailAction, get_Body)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Body )( 
             IEmailAction * This,
             /* [retval][out] */ BSTR *pBody);
         
+        DECLSPEC_XFGVIRT(IEmailAction, put_Body)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Body )( 
             IEmailAction * This,
             /* [in] */ BSTR body);
         
+        DECLSPEC_XFGVIRT(IEmailAction, get_Attachments)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Attachments )( 
             IEmailAction * This,
             /* [retval][out] */ SAFEARRAY * *pAttachements);
         
+        DECLSPEC_XFGVIRT(IEmailAction, put_Attachments)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Attachments )( 
             IEmailAction * This,
             /* [max_is][in] */ SAFEARRAY * pAttachements);
@@ -6916,28 +7434,34 @@ EXTERN_C const IID IID_ITriggerCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ITriggerCollection * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ITriggerCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ITriggerCollection * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ITriggerCollection * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ITriggerCollection * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ITriggerCollection * This,
             /* [in] */ REFIID riid,
@@ -6946,6 +7470,7 @@ EXTERN_C const IID IID_ITriggerCollection;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ITriggerCollection * This,
             /* [annotation][in] */ 
@@ -6965,28 +7490,34 @@ EXTERN_C const IID IID_ITriggerCollection;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ITriggerCollection, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             ITriggerCollection * This,
             /* [retval][out] */ long *pCount);
         
+        DECLSPEC_XFGVIRT(ITriggerCollection, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             ITriggerCollection * This,
             /* [in] */ long index,
             /* [retval][out] */ ITrigger **ppTrigger);
         
+        DECLSPEC_XFGVIRT(ITriggerCollection, get__NewEnum)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             ITriggerCollection * This,
             /* [retval][out] */ IUnknown **ppEnum);
         
+        DECLSPEC_XFGVIRT(ITriggerCollection, Create)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Create )( 
             ITriggerCollection * This,
             /* [in] */ TASK_TRIGGER_TYPE2 type,
             /* [retval][out] */ ITrigger **ppTrigger);
         
+        DECLSPEC_XFGVIRT(ITriggerCollection, Remove)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             ITriggerCollection * This,
             /* [in] */ VARIANT index);
         
+        DECLSPEC_XFGVIRT(ITriggerCollection, Clear)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clear )( 
             ITriggerCollection * This);
         
@@ -7110,28 +7641,34 @@ EXTERN_C const IID IID_IActionCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IActionCollection * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IActionCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IActionCollection * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IActionCollection * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IActionCollection * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IActionCollection * This,
             /* [in] */ REFIID riid,
@@ -7140,6 +7677,7 @@ EXTERN_C const IID IID_IActionCollection;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IActionCollection * This,
             /* [annotation][in] */ 
@@ -7159,43 +7697,53 @@ EXTERN_C const IID IID_IActionCollection;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IActionCollection, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             IActionCollection * This,
             /* [retval][out] */ long *pCount);
         
+        DECLSPEC_XFGVIRT(IActionCollection, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             IActionCollection * This,
             /* [in] */ long index,
             /* [retval][out] */ IAction **ppAction);
         
+        DECLSPEC_XFGVIRT(IActionCollection, get__NewEnum)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             IActionCollection * This,
             /* [retval][out] */ IUnknown **ppEnum);
         
+        DECLSPEC_XFGVIRT(IActionCollection, get_XmlText)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_XmlText )( 
             IActionCollection * This,
             /* [retval][out] */ BSTR *pText);
         
+        DECLSPEC_XFGVIRT(IActionCollection, put_XmlText)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_XmlText )( 
             IActionCollection * This,
             /* [in] */ BSTR text);
         
+        DECLSPEC_XFGVIRT(IActionCollection, Create)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Create )( 
             IActionCollection * This,
             /* [in] */ TASK_ACTION_TYPE type,
             /* [retval][out] */ IAction **ppAction);
         
+        DECLSPEC_XFGVIRT(IActionCollection, Remove)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             IActionCollection * This,
             /* [in] */ VARIANT index);
         
+        DECLSPEC_XFGVIRT(IActionCollection, Clear)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clear )( 
             IActionCollection * This);
         
+        DECLSPEC_XFGVIRT(IActionCollection, get_Context)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Context )( 
             IActionCollection * This,
             /* [retval][out] */ BSTR *pContext);
         
+        DECLSPEC_XFGVIRT(IActionCollection, put_Context)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Context )( 
             IActionCollection * This,
             /* [in] */ BSTR context);
@@ -7337,28 +7885,34 @@ EXTERN_C const IID IID_IPrincipal;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPrincipal * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IPrincipal * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IPrincipal * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IPrincipal * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IPrincipal * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IPrincipal * This,
             /* [in] */ REFIID riid,
@@ -7367,6 +7921,7 @@ EXTERN_C const IID IID_IPrincipal;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IPrincipal * This,
             /* [annotation][in] */ 
@@ -7386,50 +7941,62 @@ EXTERN_C const IID IID_IPrincipal;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IPrincipal, get_Id)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             IPrincipal * This,
             /* [retval][out] */ BSTR *pId);
         
+        DECLSPEC_XFGVIRT(IPrincipal, put_Id)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Id )( 
             IPrincipal * This,
             /* [in] */ BSTR Id);
         
+        DECLSPEC_XFGVIRT(IPrincipal, get_DisplayName)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DisplayName )( 
             IPrincipal * This,
             /* [retval][out] */ BSTR *pName);
         
+        DECLSPEC_XFGVIRT(IPrincipal, put_DisplayName)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DisplayName )( 
             IPrincipal * This,
             /* [in] */ BSTR name);
         
+        DECLSPEC_XFGVIRT(IPrincipal, get_UserId)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_UserId )( 
             IPrincipal * This,
             /* [retval][out] */ BSTR *pUser);
         
+        DECLSPEC_XFGVIRT(IPrincipal, put_UserId)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_UserId )( 
             IPrincipal * This,
             /* [in] */ BSTR user);
         
+        DECLSPEC_XFGVIRT(IPrincipal, get_LogonType)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LogonType )( 
             IPrincipal * This,
             /* [retval][out] */ TASK_LOGON_TYPE *pLogon);
         
+        DECLSPEC_XFGVIRT(IPrincipal, put_LogonType)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_LogonType )( 
             IPrincipal * This,
             /* [in] */ TASK_LOGON_TYPE logon);
         
+        DECLSPEC_XFGVIRT(IPrincipal, get_GroupId)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_GroupId )( 
             IPrincipal * This,
             /* [retval][out] */ BSTR *pGroup);
         
+        DECLSPEC_XFGVIRT(IPrincipal, put_GroupId)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_GroupId )( 
             IPrincipal * This,
             /* [in] */ BSTR group);
         
+        DECLSPEC_XFGVIRT(IPrincipal, get_RunLevel)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RunLevel )( 
             IPrincipal * This,
             /* [retval][out] */ TASK_RUNLEVEL_TYPE *pRunLevel);
         
+        DECLSPEC_XFGVIRT(IPrincipal, put_RunLevel)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RunLevel )( 
             IPrincipal * This,
             /* [in] */ TASK_RUNLEVEL_TYPE runLevel);
@@ -7557,28 +8124,34 @@ EXTERN_C const IID IID_IPrincipal2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPrincipal2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IPrincipal2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IPrincipal2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IPrincipal2 * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IPrincipal2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IPrincipal2 * This,
             /* [in] */ REFIID riid,
@@ -7587,6 +8160,7 @@ EXTERN_C const IID IID_IPrincipal2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IPrincipal2 * This,
             /* [annotation][in] */ 
@@ -7606,23 +8180,28 @@ EXTERN_C const IID IID_IPrincipal2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IPrincipal2, get_ProcessTokenSidType)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ProcessTokenSidType )( 
             IPrincipal2 * This,
             /* [retval][out] */ TASK_PROCESSTOKENSID_TYPE *pProcessTokenSidType);
         
+        DECLSPEC_XFGVIRT(IPrincipal2, put_ProcessTokenSidType)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ProcessTokenSidType )( 
             IPrincipal2 * This,
             /* [in] */ TASK_PROCESSTOKENSID_TYPE processTokenSidType);
         
+        DECLSPEC_XFGVIRT(IPrincipal2, get_RequiredPrivilegeCount)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RequiredPrivilegeCount )( 
             IPrincipal2 * This,
             /* [retval][out] */ long *pCount);
         
+        DECLSPEC_XFGVIRT(IPrincipal2, get_RequiredPrivilege)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RequiredPrivilege )( 
             IPrincipal2 * This,
             /* [in] */ long index,
             /* [retval][out] */ BSTR *pPrivilege);
         
+        DECLSPEC_XFGVIRT(IPrincipal2, AddRequiredPrivilege)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddRequiredPrivilege )( 
             IPrincipal2 * This,
             /* [in] */ BSTR privilege);
@@ -7767,28 +8346,34 @@ EXTERN_C const IID IID_IRegistrationInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRegistrationInfo * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IRegistrationInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IRegistrationInfo * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IRegistrationInfo * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IRegistrationInfo * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IRegistrationInfo * This,
             /* [in] */ REFIID riid,
@@ -7797,6 +8382,7 @@ EXTERN_C const IID IID_IRegistrationInfo;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IRegistrationInfo * This,
             /* [annotation][in] */ 
@@ -7816,74 +8402,92 @@ EXTERN_C const IID IID_IRegistrationInfo;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IRegistrationInfo, get_Description)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             IRegistrationInfo * This,
             /* [retval][out] */ BSTR *pDescription);
         
+        DECLSPEC_XFGVIRT(IRegistrationInfo, put_Description)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             IRegistrationInfo * This,
             /* [in] */ BSTR description);
         
+        DECLSPEC_XFGVIRT(IRegistrationInfo, get_Author)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Author )( 
             IRegistrationInfo * This,
             /* [retval][out] */ BSTR *pAuthor);
         
+        DECLSPEC_XFGVIRT(IRegistrationInfo, put_Author)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Author )( 
             IRegistrationInfo * This,
             /* [in] */ BSTR author);
         
+        DECLSPEC_XFGVIRT(IRegistrationInfo, get_Version)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Version )( 
             IRegistrationInfo * This,
             /* [retval][out] */ BSTR *pVersion);
         
+        DECLSPEC_XFGVIRT(IRegistrationInfo, put_Version)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Version )( 
             IRegistrationInfo * This,
             /* [in] */ BSTR version);
         
+        DECLSPEC_XFGVIRT(IRegistrationInfo, get_Date)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Date )( 
             IRegistrationInfo * This,
             /* [retval][out] */ BSTR *pDate);
         
+        DECLSPEC_XFGVIRT(IRegistrationInfo, put_Date)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Date )( 
             IRegistrationInfo * This,
             /* [in] */ BSTR date);
         
+        DECLSPEC_XFGVIRT(IRegistrationInfo, get_Documentation)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Documentation )( 
             IRegistrationInfo * This,
             /* [retval][out] */ BSTR *pDocumentation);
         
+        DECLSPEC_XFGVIRT(IRegistrationInfo, put_Documentation)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Documentation )( 
             IRegistrationInfo * This,
             /* [in] */ BSTR documentation);
         
+        DECLSPEC_XFGVIRT(IRegistrationInfo, get_XmlText)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_XmlText )( 
             IRegistrationInfo * This,
             /* [retval][out] */ BSTR *pText);
         
+        DECLSPEC_XFGVIRT(IRegistrationInfo, put_XmlText)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_XmlText )( 
             IRegistrationInfo * This,
             /* [in] */ BSTR text);
         
+        DECLSPEC_XFGVIRT(IRegistrationInfo, get_URI)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_URI )( 
             IRegistrationInfo * This,
             /* [retval][out] */ BSTR *pUri);
         
+        DECLSPEC_XFGVIRT(IRegistrationInfo, put_URI)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_URI )( 
             IRegistrationInfo * This,
             /* [in] */ BSTR uri);
         
+        DECLSPEC_XFGVIRT(IRegistrationInfo, get_SecurityDescriptor)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SecurityDescriptor )( 
             IRegistrationInfo * This,
             /* [retval][out] */ VARIANT *pSddl);
         
+        DECLSPEC_XFGVIRT(IRegistrationInfo, put_SecurityDescriptor)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_SecurityDescriptor )( 
             IRegistrationInfo * This,
             /* [in] */ VARIANT sddl);
         
+        DECLSPEC_XFGVIRT(IRegistrationInfo, get_Source)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Source )( 
             IRegistrationInfo * This,
             /* [retval][out] */ BSTR *pSource);
         
+        DECLSPEC_XFGVIRT(IRegistrationInfo, put_Source)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Source )( 
             IRegistrationInfo * This,
             /* [in] */ BSTR source);
@@ -8055,28 +8659,34 @@ EXTERN_C const IID IID_ITaskDefinition;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ITaskDefinition * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ITaskDefinition * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ITaskDefinition * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ITaskDefinition * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ITaskDefinition * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ITaskDefinition * This,
             /* [in] */ REFIID riid,
@@ -8085,6 +8695,7 @@ EXTERN_C const IID IID_ITaskDefinition;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ITaskDefinition * This,
             /* [annotation][in] */ 
@@ -8104,58 +8715,72 @@ EXTERN_C const IID IID_ITaskDefinition;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ITaskDefinition, get_RegistrationInfo)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RegistrationInfo )( 
             ITaskDefinition * This,
             /* [retval][out] */ IRegistrationInfo **ppRegistrationInfo);
         
+        DECLSPEC_XFGVIRT(ITaskDefinition, put_RegistrationInfo)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RegistrationInfo )( 
             ITaskDefinition * This,
             /* [in] */ IRegistrationInfo *pRegistrationInfo);
         
+        DECLSPEC_XFGVIRT(ITaskDefinition, get_Triggers)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Triggers )( 
             ITaskDefinition * This,
             /* [retval][out] */ ITriggerCollection **ppTriggers);
         
+        DECLSPEC_XFGVIRT(ITaskDefinition, put_Triggers)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Triggers )( 
             ITaskDefinition * This,
             /* [in] */ ITriggerCollection *pTriggers);
         
+        DECLSPEC_XFGVIRT(ITaskDefinition, get_Settings)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Settings )( 
             ITaskDefinition * This,
             /* [retval][out] */ ITaskSettings **ppSettings);
         
+        DECLSPEC_XFGVIRT(ITaskDefinition, put_Settings)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Settings )( 
             ITaskDefinition * This,
             /* [in] */ ITaskSettings *pSettings);
         
+        DECLSPEC_XFGVIRT(ITaskDefinition, get_Data)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Data )( 
             ITaskDefinition * This,
             /* [retval][out] */ BSTR *pData);
         
+        DECLSPEC_XFGVIRT(ITaskDefinition, put_Data)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Data )( 
             ITaskDefinition * This,
             /* [in] */ BSTR data);
         
+        DECLSPEC_XFGVIRT(ITaskDefinition, get_Principal)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Principal )( 
             ITaskDefinition * This,
             /* [retval][out] */ IPrincipal **ppPrincipal);
         
+        DECLSPEC_XFGVIRT(ITaskDefinition, put_Principal)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Principal )( 
             ITaskDefinition * This,
             /* [in] */ IPrincipal *pPrincipal);
         
+        DECLSPEC_XFGVIRT(ITaskDefinition, get_Actions)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Actions )( 
             ITaskDefinition * This,
             /* [retval][out] */ IActionCollection **ppActions);
         
+        DECLSPEC_XFGVIRT(ITaskDefinition, put_Actions)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Actions )( 
             ITaskDefinition * This,
             /* [in] */ IActionCollection *pActions);
         
+        DECLSPEC_XFGVIRT(ITaskDefinition, get_XmlText)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_XmlText )( 
             ITaskDefinition * This,
             /* [retval][out] */ BSTR *pXml);
         
+        DECLSPEC_XFGVIRT(ITaskDefinition, put_XmlText)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_XmlText )( 
             ITaskDefinition * This,
             /* [in] */ BSTR xml);
@@ -8393,28 +9018,34 @@ EXTERN_C const IID IID_ITaskSettings;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ITaskSettings * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ITaskSettings * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ITaskSettings * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ITaskSettings * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ITaskSettings * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ITaskSettings * This,
             /* [in] */ REFIID riid,
@@ -8423,6 +9054,7 @@ EXTERN_C const IID IID_ITaskSettings;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ITaskSettings * This,
             /* [annotation][in] */ 
@@ -8442,162 +9074,202 @@ EXTERN_C const IID IID_ITaskSettings;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_AllowDemandStart)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AllowDemandStart )( 
             ITaskSettings * This,
             /* [retval][out] */ VARIANT_BOOL *pAllowDemandStart);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_AllowDemandStart)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_AllowDemandStart )( 
             ITaskSettings * This,
             /* [in] */ VARIANT_BOOL allowDemandStart);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_RestartInterval)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RestartInterval )( 
             ITaskSettings * This,
             /* [retval][out] */ BSTR *pRestartInterval);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_RestartInterval)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RestartInterval )( 
             ITaskSettings * This,
             /* [in] */ BSTR restartInterval);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_RestartCount)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RestartCount )( 
             ITaskSettings * This,
             /* [retval][out] */ int *pRestartCount);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_RestartCount)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RestartCount )( 
             ITaskSettings * This,
             /* [in] */ int restartCount);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_MultipleInstances)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MultipleInstances )( 
             ITaskSettings * This,
             /* [retval][out] */ TASK_INSTANCES_POLICY *pPolicy);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_MultipleInstances)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MultipleInstances )( 
             ITaskSettings * This,
             /* [in] */ TASK_INSTANCES_POLICY policy);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_StopIfGoingOnBatteries)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_StopIfGoingOnBatteries )( 
             ITaskSettings * This,
             /* [retval][out] */ VARIANT_BOOL *pStopIfOnBatteries);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_StopIfGoingOnBatteries)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_StopIfGoingOnBatteries )( 
             ITaskSettings * This,
             /* [in] */ VARIANT_BOOL stopIfOnBatteries);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_DisallowStartIfOnBatteries)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DisallowStartIfOnBatteries )( 
             ITaskSettings * This,
             /* [retval][out] */ VARIANT_BOOL *pDisallowStart);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_DisallowStartIfOnBatteries)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DisallowStartIfOnBatteries )( 
             ITaskSettings * This,
             /* [in] */ VARIANT_BOOL disallowStart);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_AllowHardTerminate)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AllowHardTerminate )( 
             ITaskSettings * This,
             /* [retval][out] */ VARIANT_BOOL *pAllowHardTerminate);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_AllowHardTerminate)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_AllowHardTerminate )( 
             ITaskSettings * This,
             /* [in] */ VARIANT_BOOL allowHardTerminate);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_StartWhenAvailable)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_StartWhenAvailable )( 
             ITaskSettings * This,
             /* [retval][out] */ VARIANT_BOOL *pStartWhenAvailable);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_StartWhenAvailable)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_StartWhenAvailable )( 
             ITaskSettings * This,
             /* [in] */ VARIANT_BOOL startWhenAvailable);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_XmlText)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_XmlText )( 
             ITaskSettings * This,
             /* [retval][out] */ BSTR *pText);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_XmlText)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_XmlText )( 
             ITaskSettings * This,
             /* [in] */ BSTR text);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_RunOnlyIfNetworkAvailable)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RunOnlyIfNetworkAvailable )( 
             ITaskSettings * This,
             /* [retval][out] */ VARIANT_BOOL *pRunOnlyIfNetworkAvailable);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_RunOnlyIfNetworkAvailable)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RunOnlyIfNetworkAvailable )( 
             ITaskSettings * This,
             /* [in] */ VARIANT_BOOL runOnlyIfNetworkAvailable);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_ExecutionTimeLimit)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ExecutionTimeLimit )( 
             ITaskSettings * This,
             /* [retval][out] */ BSTR *pExecutionTimeLimit);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_ExecutionTimeLimit)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ExecutionTimeLimit )( 
             ITaskSettings * This,
             /* [in] */ BSTR executionTimeLimit);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_Enabled)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             ITaskSettings * This,
             /* [retval][out] */ VARIANT_BOOL *pEnabled);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_Enabled)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             ITaskSettings * This,
             /* [in] */ VARIANT_BOOL enabled);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_DeleteExpiredTaskAfter)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DeleteExpiredTaskAfter )( 
             ITaskSettings * This,
             /* [retval][out] */ BSTR *pExpirationDelay);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_DeleteExpiredTaskAfter)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DeleteExpiredTaskAfter )( 
             ITaskSettings * This,
             /* [in] */ BSTR expirationDelay);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_Priority)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Priority )( 
             ITaskSettings * This,
             /* [retval][out] */ int *pPriority);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_Priority)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Priority )( 
             ITaskSettings * This,
             /* [in] */ int priority);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_Compatibility)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Compatibility )( 
             ITaskSettings * This,
             /* [retval][out] */ TASK_COMPATIBILITY *pCompatLevel);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_Compatibility)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Compatibility )( 
             ITaskSettings * This,
             /* [in] */ TASK_COMPATIBILITY compatLevel);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_Hidden)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Hidden )( 
             ITaskSettings * This,
             /* [retval][out] */ VARIANT_BOOL *pHidden);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_Hidden)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Hidden )( 
             ITaskSettings * This,
             /* [in] */ VARIANT_BOOL hidden);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_IdleSettings)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IdleSettings )( 
             ITaskSettings * This,
             /* [retval][out] */ IIdleSettings **ppIdleSettings);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_IdleSettings)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_IdleSettings )( 
             ITaskSettings * This,
             /* [in] */ IIdleSettings *pIdleSettings);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_RunOnlyIfIdle)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RunOnlyIfIdle )( 
             ITaskSettings * This,
             /* [retval][out] */ VARIANT_BOOL *pRunOnlyIfIdle);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_RunOnlyIfIdle)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RunOnlyIfIdle )( 
             ITaskSettings * This,
             /* [in] */ VARIANT_BOOL runOnlyIfIdle);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_WakeToRun)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_WakeToRun )( 
             ITaskSettings * This,
             /* [retval][out] */ VARIANT_BOOL *pWake);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_WakeToRun)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_WakeToRun )( 
             ITaskSettings * This,
             /* [in] */ VARIANT_BOOL wake);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_NetworkSettings)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_NetworkSettings )( 
             ITaskSettings * This,
             /* [retval][out] */ INetworkSettings **ppNetworkSettings);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_NetworkSettings)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_NetworkSettings )( 
             ITaskSettings * This,
             /* [in] */ INetworkSettings *pNetworkSettings);
@@ -8805,28 +9477,34 @@ EXTERN_C const IID IID_ITaskSettings2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ITaskSettings2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ITaskSettings2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ITaskSettings2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ITaskSettings2 * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ITaskSettings2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ITaskSettings2 * This,
             /* [in] */ REFIID riid,
@@ -8835,6 +9513,7 @@ EXTERN_C const IID IID_ITaskSettings2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ITaskSettings2 * This,
             /* [annotation][in] */ 
@@ -8854,18 +9533,22 @@ EXTERN_C const IID IID_ITaskSettings2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ITaskSettings2, get_DisallowStartOnRemoteAppSession)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DisallowStartOnRemoteAppSession )( 
             ITaskSettings2 * This,
             /* [retval][out] */ VARIANT_BOOL *pDisallowStart);
         
+        DECLSPEC_XFGVIRT(ITaskSettings2, put_DisallowStartOnRemoteAppSession)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DisallowStartOnRemoteAppSession )( 
             ITaskSettings2 * This,
             /* [in] */ VARIANT_BOOL disallowStart);
         
+        DECLSPEC_XFGVIRT(ITaskSettings2, get_UseUnifiedSchedulingEngine)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_UseUnifiedSchedulingEngine )( 
             ITaskSettings2 * This,
             /* [retval][out] */ VARIANT_BOOL *pUseUnifiedEngine);
         
+        DECLSPEC_XFGVIRT(ITaskSettings2, put_UseUnifiedSchedulingEngine)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_UseUnifiedSchedulingEngine )( 
             ITaskSettings2 * This,
             /* [in] */ VARIANT_BOOL useUnifiedEngine);
@@ -8980,28 +9663,34 @@ EXTERN_C const IID IID_ITaskSettings3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ITaskSettings3 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ITaskSettings3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ITaskSettings3 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ITaskSettings3 * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ITaskSettings3 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ITaskSettings3 * This,
             /* [in] */ REFIID riid,
@@ -9010,6 +9699,7 @@ EXTERN_C const IID IID_ITaskSettings3;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ITaskSettings3 * This,
             /* [annotation][in] */ 
@@ -9029,198 +9719,247 @@ EXTERN_C const IID IID_ITaskSettings3;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_AllowDemandStart)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AllowDemandStart )( 
             ITaskSettings3 * This,
             /* [retval][out] */ VARIANT_BOOL *pAllowDemandStart);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_AllowDemandStart)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_AllowDemandStart )( 
             ITaskSettings3 * This,
             /* [in] */ VARIANT_BOOL allowDemandStart);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_RestartInterval)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RestartInterval )( 
             ITaskSettings3 * This,
             /* [retval][out] */ BSTR *pRestartInterval);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_RestartInterval)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RestartInterval )( 
             ITaskSettings3 * This,
             /* [in] */ BSTR restartInterval);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_RestartCount)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RestartCount )( 
             ITaskSettings3 * This,
             /* [retval][out] */ int *pRestartCount);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_RestartCount)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RestartCount )( 
             ITaskSettings3 * This,
             /* [in] */ int restartCount);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_MultipleInstances)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MultipleInstances )( 
             ITaskSettings3 * This,
             /* [retval][out] */ TASK_INSTANCES_POLICY *pPolicy);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_MultipleInstances)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MultipleInstances )( 
             ITaskSettings3 * This,
             /* [in] */ TASK_INSTANCES_POLICY policy);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_StopIfGoingOnBatteries)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_StopIfGoingOnBatteries )( 
             ITaskSettings3 * This,
             /* [retval][out] */ VARIANT_BOOL *pStopIfOnBatteries);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_StopIfGoingOnBatteries)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_StopIfGoingOnBatteries )( 
             ITaskSettings3 * This,
             /* [in] */ VARIANT_BOOL stopIfOnBatteries);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_DisallowStartIfOnBatteries)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DisallowStartIfOnBatteries )( 
             ITaskSettings3 * This,
             /* [retval][out] */ VARIANT_BOOL *pDisallowStart);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_DisallowStartIfOnBatteries)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DisallowStartIfOnBatteries )( 
             ITaskSettings3 * This,
             /* [in] */ VARIANT_BOOL disallowStart);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_AllowHardTerminate)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AllowHardTerminate )( 
             ITaskSettings3 * This,
             /* [retval][out] */ VARIANT_BOOL *pAllowHardTerminate);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_AllowHardTerminate)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_AllowHardTerminate )( 
             ITaskSettings3 * This,
             /* [in] */ VARIANT_BOOL allowHardTerminate);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_StartWhenAvailable)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_StartWhenAvailable )( 
             ITaskSettings3 * This,
             /* [retval][out] */ VARIANT_BOOL *pStartWhenAvailable);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_StartWhenAvailable)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_StartWhenAvailable )( 
             ITaskSettings3 * This,
             /* [in] */ VARIANT_BOOL startWhenAvailable);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_XmlText)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_XmlText )( 
             ITaskSettings3 * This,
             /* [retval][out] */ BSTR *pText);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_XmlText)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_XmlText )( 
             ITaskSettings3 * This,
             /* [in] */ BSTR text);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_RunOnlyIfNetworkAvailable)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RunOnlyIfNetworkAvailable )( 
             ITaskSettings3 * This,
             /* [retval][out] */ VARIANT_BOOL *pRunOnlyIfNetworkAvailable);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_RunOnlyIfNetworkAvailable)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RunOnlyIfNetworkAvailable )( 
             ITaskSettings3 * This,
             /* [in] */ VARIANT_BOOL runOnlyIfNetworkAvailable);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_ExecutionTimeLimit)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ExecutionTimeLimit )( 
             ITaskSettings3 * This,
             /* [retval][out] */ BSTR *pExecutionTimeLimit);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_ExecutionTimeLimit)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ExecutionTimeLimit )( 
             ITaskSettings3 * This,
             /* [in] */ BSTR executionTimeLimit);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_Enabled)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             ITaskSettings3 * This,
             /* [retval][out] */ VARIANT_BOOL *pEnabled);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_Enabled)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             ITaskSettings3 * This,
             /* [in] */ VARIANT_BOOL enabled);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_DeleteExpiredTaskAfter)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DeleteExpiredTaskAfter )( 
             ITaskSettings3 * This,
             /* [retval][out] */ BSTR *pExpirationDelay);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_DeleteExpiredTaskAfter)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DeleteExpiredTaskAfter )( 
             ITaskSettings3 * This,
             /* [in] */ BSTR expirationDelay);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_Priority)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Priority )( 
             ITaskSettings3 * This,
             /* [retval][out] */ int *pPriority);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_Priority)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Priority )( 
             ITaskSettings3 * This,
             /* [in] */ int priority);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_Compatibility)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Compatibility )( 
             ITaskSettings3 * This,
             /* [retval][out] */ TASK_COMPATIBILITY *pCompatLevel);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_Compatibility)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Compatibility )( 
             ITaskSettings3 * This,
             /* [in] */ TASK_COMPATIBILITY compatLevel);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_Hidden)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Hidden )( 
             ITaskSettings3 * This,
             /* [retval][out] */ VARIANT_BOOL *pHidden);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_Hidden)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Hidden )( 
             ITaskSettings3 * This,
             /* [in] */ VARIANT_BOOL hidden);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_IdleSettings)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IdleSettings )( 
             ITaskSettings3 * This,
             /* [retval][out] */ IIdleSettings **ppIdleSettings);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_IdleSettings)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_IdleSettings )( 
             ITaskSettings3 * This,
             /* [in] */ IIdleSettings *pIdleSettings);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_RunOnlyIfIdle)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RunOnlyIfIdle )( 
             ITaskSettings3 * This,
             /* [retval][out] */ VARIANT_BOOL *pRunOnlyIfIdle);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_RunOnlyIfIdle)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RunOnlyIfIdle )( 
             ITaskSettings3 * This,
             /* [in] */ VARIANT_BOOL runOnlyIfIdle);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_WakeToRun)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_WakeToRun )( 
             ITaskSettings3 * This,
             /* [retval][out] */ VARIANT_BOOL *pWake);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_WakeToRun)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_WakeToRun )( 
             ITaskSettings3 * This,
             /* [in] */ VARIANT_BOOL wake);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, get_NetworkSettings)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_NetworkSettings )( 
             ITaskSettings3 * This,
             /* [retval][out] */ INetworkSettings **ppNetworkSettings);
         
+        DECLSPEC_XFGVIRT(ITaskSettings, put_NetworkSettings)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_NetworkSettings )( 
             ITaskSettings3 * This,
             /* [in] */ INetworkSettings *pNetworkSettings);
         
+        DECLSPEC_XFGVIRT(ITaskSettings3, get_DisallowStartOnRemoteAppSession)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DisallowStartOnRemoteAppSession )( 
             ITaskSettings3 * This,
             /* [retval][out] */ VARIANT_BOOL *pDisallowStart);
         
+        DECLSPEC_XFGVIRT(ITaskSettings3, put_DisallowStartOnRemoteAppSession)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DisallowStartOnRemoteAppSession )( 
             ITaskSettings3 * This,
             /* [in] */ VARIANT_BOOL disallowStart);
         
+        DECLSPEC_XFGVIRT(ITaskSettings3, get_UseUnifiedSchedulingEngine)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_UseUnifiedSchedulingEngine )( 
             ITaskSettings3 * This,
             /* [retval][out] */ VARIANT_BOOL *pUseUnifiedEngine);
         
+        DECLSPEC_XFGVIRT(ITaskSettings3, put_UseUnifiedSchedulingEngine)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_UseUnifiedSchedulingEngine )( 
             ITaskSettings3 * This,
             /* [in] */ VARIANT_BOOL useUnifiedEngine);
         
+        DECLSPEC_XFGVIRT(ITaskSettings3, get_MaintenanceSettings)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MaintenanceSettings )( 
             ITaskSettings3 * This,
             /* [retval][out] */ IMaintenanceSettings **ppMaintenanceSettings);
         
+        DECLSPEC_XFGVIRT(ITaskSettings3, put_MaintenanceSettings)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MaintenanceSettings )( 
             ITaskSettings3 * This,
             /* [in] */ IMaintenanceSettings *pMaintenanceSettings);
         
+        DECLSPEC_XFGVIRT(ITaskSettings3, CreateMaintenanceSettings)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateMaintenanceSettings )( 
             ITaskSettings3 * This,
             /* [retval][out] */ IMaintenanceSettings **ppMaintenanceSettings);
         
+        DECLSPEC_XFGVIRT(ITaskSettings3, get_Volatile)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Volatile )( 
             ITaskSettings3 * This,
             /* [retval][out] */ VARIANT_BOOL *pVolatile);
         
+        DECLSPEC_XFGVIRT(ITaskSettings3, put_Volatile)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Volatile )( 
             ITaskSettings3 * This,
             /* [in] */ VARIANT_BOOL Volatile);
@@ -9462,28 +10201,34 @@ EXTERN_C const IID IID_IMaintenanceSettings;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMaintenanceSettings * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMaintenanceSettings * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMaintenanceSettings * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IMaintenanceSettings * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IMaintenanceSettings * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IMaintenanceSettings * This,
             /* [in] */ REFIID riid,
@@ -9492,6 +10237,7 @@ EXTERN_C const IID IID_IMaintenanceSettings;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMaintenanceSettings * This,
             /* [annotation][in] */ 
@@ -9511,26 +10257,32 @@ EXTERN_C const IID IID_IMaintenanceSettings;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMaintenanceSettings, put_Period)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Period )( 
             IMaintenanceSettings * This,
             /* [in] */ BSTR value);
         
+        DECLSPEC_XFGVIRT(IMaintenanceSettings, get_Period)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Period )( 
             IMaintenanceSettings * This,
             /* [retval][out] */ BSTR *target);
         
+        DECLSPEC_XFGVIRT(IMaintenanceSettings, put_Deadline)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Deadline )( 
             IMaintenanceSettings * This,
             /* [in] */ BSTR value);
         
+        DECLSPEC_XFGVIRT(IMaintenanceSettings, get_Deadline)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Deadline )( 
             IMaintenanceSettings * This,
             /* [retval][out] */ BSTR *target);
         
+        DECLSPEC_XFGVIRT(IMaintenanceSettings, put_Exclusive)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Exclusive )( 
             IMaintenanceSettings * This,
             /* [in] */ VARIANT_BOOL value);
         
+        DECLSPEC_XFGVIRT(IMaintenanceSettings, get_Exclusive)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Exclusive )( 
             IMaintenanceSettings * This,
             /* [retval][out] */ VARIANT_BOOL *target);
@@ -9659,28 +10411,34 @@ EXTERN_C const IID IID_IRegisteredTaskCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRegisteredTaskCollection * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IRegisteredTaskCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IRegisteredTaskCollection * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IRegisteredTaskCollection * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IRegisteredTaskCollection * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IRegisteredTaskCollection * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -9689,6 +10447,7 @@ EXTERN_C const IID IID_IRegisteredTaskCollection;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IRegisteredTaskCollection * This,
             /* [annotation][in] */ 
@@ -9708,15 +10467,18 @@ EXTERN_C const IID IID_IRegisteredTaskCollection;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IRegisteredTaskCollection, get_Count)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IRegisteredTaskCollection * This,
             /* [retval][out] */ __RPC__out LONG *pCount);
         
+        DECLSPEC_XFGVIRT(IRegisteredTaskCollection, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IRegisteredTaskCollection * This,
             /* [in] */ VARIANT index,
             /* [retval][out] */ __RPC__deref_out_opt IRegisteredTask **ppRegisteredTask);
         
+        DECLSPEC_XFGVIRT(IRegisteredTaskCollection, get__NewEnum)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IRegisteredTaskCollection * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppEnum);
@@ -9864,28 +10626,34 @@ EXTERN_C const IID IID_ITaskFolder;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITaskFolder * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITaskFolder * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITaskFolder * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITaskFolder * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITaskFolder * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITaskFolder * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -9894,6 +10662,7 @@ EXTERN_C const IID IID_ITaskFolder;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ITaskFolder * This,
             /* [annotation][in] */ 
@@ -9913,50 +10682,60 @@ EXTERN_C const IID IID_ITaskFolder;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ITaskFolder, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ITaskFolder * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pName);
         
+        DECLSPEC_XFGVIRT(ITaskFolder, get_Path)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Path )( 
             __RPC__in ITaskFolder * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pPath);
         
+        DECLSPEC_XFGVIRT(ITaskFolder, GetFolder)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetFolder )( 
             __RPC__in ITaskFolder * This,
             __RPC__in BSTR path,
             /* [retval][out] */ __RPC__deref_out_opt ITaskFolder **ppFolder);
         
+        DECLSPEC_XFGVIRT(ITaskFolder, GetFolders)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetFolders )( 
             __RPC__in ITaskFolder * This,
             /* [in] */ LONG flags,
             /* [retval][out] */ __RPC__deref_out_opt ITaskFolderCollection **ppFolders);
         
+        DECLSPEC_XFGVIRT(ITaskFolder, CreateFolder)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateFolder )( 
             __RPC__in ITaskFolder * This,
             /* [in] */ __RPC__in BSTR subFolderName,
             /* [optional][in] */ VARIANT sddl,
             /* [retval][out] */ __RPC__deref_out_opt ITaskFolder **ppFolder);
         
+        DECLSPEC_XFGVIRT(ITaskFolder, DeleteFolder)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteFolder )( 
             __RPC__in ITaskFolder * This,
             __RPC__in BSTR subFolderName,
             /* [in] */ LONG flags);
         
+        DECLSPEC_XFGVIRT(ITaskFolder, GetTask)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetTask )( 
             __RPC__in ITaskFolder * This,
             /* [in] */ __RPC__in BSTR path,
             /* [retval][out] */ __RPC__deref_out_opt IRegisteredTask **ppTask);
         
+        DECLSPEC_XFGVIRT(ITaskFolder, GetTasks)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetTasks )( 
             __RPC__in ITaskFolder * This,
             /* [in] */ LONG flags,
             /* [retval][out] */ __RPC__deref_out_opt IRegisteredTaskCollection **ppTasks);
         
+        DECLSPEC_XFGVIRT(ITaskFolder, DeleteTask)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteTask )( 
             __RPC__in ITaskFolder * This,
             /* [in] */ __RPC__in BSTR name,
             /* [in] */ LONG flags);
         
+        DECLSPEC_XFGVIRT(ITaskFolder, RegisterTask)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RegisterTask )( 
             __RPC__in ITaskFolder * This,
             /* [in] */ __RPC__in BSTR path,
@@ -9968,6 +10747,7 @@ EXTERN_C const IID IID_ITaskFolder;
             /* [optional][in] */ VARIANT sddl,
             /* [retval][out] */ __RPC__deref_out_opt IRegisteredTask **ppTask);
         
+        DECLSPEC_XFGVIRT(ITaskFolder, RegisterTaskDefinition)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RegisterTaskDefinition )( 
             __RPC__in ITaskFolder * This,
             /* [in] */ __RPC__in BSTR path,
@@ -9979,11 +10759,13 @@ EXTERN_C const IID IID_ITaskFolder;
             /* [optional][in] */ VARIANT sddl,
             /* [retval][out] */ __RPC__deref_out_opt IRegisteredTask **ppTask);
         
+        DECLSPEC_XFGVIRT(ITaskFolder, GetSecurityDescriptor)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetSecurityDescriptor )( 
             __RPC__in ITaskFolder * This,
             LONG securityInformation,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pSddl);
         
+        DECLSPEC_XFGVIRT(ITaskFolder, SetSecurityDescriptor)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetSecurityDescriptor )( 
             __RPC__in ITaskFolder * This,
             /* [in] */ __RPC__in BSTR sddl,
@@ -10123,28 +10905,34 @@ EXTERN_C const IID IID_IIdleSettings;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IIdleSettings * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IIdleSettings * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IIdleSettings * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IIdleSettings * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IIdleSettings * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IIdleSettings * This,
             /* [in] */ REFIID riid,
@@ -10153,6 +10941,7 @@ EXTERN_C const IID IID_IIdleSettings;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IIdleSettings * This,
             /* [annotation][in] */ 
@@ -10172,34 +10961,42 @@ EXTERN_C const IID IID_IIdleSettings;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IIdleSettings, get_IdleDuration)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IdleDuration )( 
             IIdleSettings * This,
             /* [retval][out] */ BSTR *pDelay);
         
+        DECLSPEC_XFGVIRT(IIdleSettings, put_IdleDuration)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_IdleDuration )( 
             IIdleSettings * This,
             /* [in] */ BSTR delay);
         
+        DECLSPEC_XFGVIRT(IIdleSettings, get_WaitTimeout)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_WaitTimeout )( 
             IIdleSettings * This,
             /* [retval][out] */ BSTR *pTimeout);
         
+        DECLSPEC_XFGVIRT(IIdleSettings, put_WaitTimeout)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_WaitTimeout )( 
             IIdleSettings * This,
             /* [in] */ BSTR timeout);
         
+        DECLSPEC_XFGVIRT(IIdleSettings, get_StopOnIdleEnd)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_StopOnIdleEnd )( 
             IIdleSettings * This,
             /* [retval][out] */ VARIANT_BOOL *pStop);
         
+        DECLSPEC_XFGVIRT(IIdleSettings, put_StopOnIdleEnd)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_StopOnIdleEnd )( 
             IIdleSettings * This,
             /* [in] */ VARIANT_BOOL stop);
         
+        DECLSPEC_XFGVIRT(IIdleSettings, get_RestartOnIdle)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RestartOnIdle )( 
             IIdleSettings * This,
             /* [retval][out] */ VARIANT_BOOL *pRestart);
         
+        DECLSPEC_XFGVIRT(IIdleSettings, put_RestartOnIdle)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RestartOnIdle )( 
             IIdleSettings * This,
             /* [in] */ VARIANT_BOOL restart);
@@ -10311,28 +11108,34 @@ EXTERN_C const IID IID_INetworkSettings;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             INetworkSettings * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             INetworkSettings * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             INetworkSettings * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             INetworkSettings * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             INetworkSettings * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             INetworkSettings * This,
             /* [in] */ REFIID riid,
@@ -10341,6 +11144,7 @@ EXTERN_C const IID IID_INetworkSettings;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             INetworkSettings * This,
             /* [annotation][in] */ 
@@ -10360,18 +11164,22 @@ EXTERN_C const IID IID_INetworkSettings;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(INetworkSettings, get_Name)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             INetworkSettings * This,
             /* [retval][out] */ BSTR *pName);
         
+        DECLSPEC_XFGVIRT(INetworkSettings, put_Name)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             INetworkSettings * This,
             /* [in] */ BSTR name);
         
+        DECLSPEC_XFGVIRT(INetworkSettings, get_Id)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             INetworkSettings * This,
             /* [retval][out] */ BSTR *pId);
         
+        DECLSPEC_XFGVIRT(INetworkSettings, put_Id)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Id )( 
             INetworkSettings * This,
             /* [in] */ BSTR id);
@@ -10477,28 +11285,34 @@ EXTERN_C const IID IID_IRepetitionPattern;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRepetitionPattern * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IRepetitionPattern * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IRepetitionPattern * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IRepetitionPattern * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IRepetitionPattern * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IRepetitionPattern * This,
             /* [in] */ REFIID riid,
@@ -10507,6 +11321,7 @@ EXTERN_C const IID IID_IRepetitionPattern;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IRepetitionPattern * This,
             /* [annotation][in] */ 
@@ -10526,26 +11341,32 @@ EXTERN_C const IID IID_IRepetitionPattern;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IRepetitionPattern, get_Interval)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Interval )( 
             IRepetitionPattern * This,
             /* [retval][out] */ BSTR *pInterval);
         
+        DECLSPEC_XFGVIRT(IRepetitionPattern, put_Interval)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Interval )( 
             IRepetitionPattern * This,
             /* [in] */ BSTR interval);
         
+        DECLSPEC_XFGVIRT(IRepetitionPattern, get_Duration)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Duration )( 
             IRepetitionPattern * This,
             /* [retval][out] */ BSTR *pDuration);
         
+        DECLSPEC_XFGVIRT(IRepetitionPattern, put_Duration)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Duration )( 
             IRepetitionPattern * This,
             /* [in] */ BSTR duration);
         
+        DECLSPEC_XFGVIRT(IRepetitionPattern, get_StopAtDurationEnd)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_StopAtDurationEnd )( 
             IRepetitionPattern * This,
             /* [retval][out] */ VARIANT_BOOL *pStop);
         
+        DECLSPEC_XFGVIRT(IRepetitionPattern, put_StopAtDurationEnd)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_StopAtDurationEnd )( 
             IRepetitionPattern * This,
             /* [in] */ VARIANT_BOOL stop);

@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -266,28 +274,34 @@ EXTERN_C const IID IID_IProvideWinSATAssessmentInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IProvideWinSATAssessmentInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IProvideWinSATAssessmentInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IProvideWinSATAssessmentInfo * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IProvideWinSATAssessmentInfo * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IProvideWinSATAssessmentInfo * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IProvideWinSATAssessmentInfo * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -296,6 +310,7 @@ EXTERN_C const IID IID_IProvideWinSATAssessmentInfo;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IProvideWinSATAssessmentInfo * This,
             /* [annotation][in] */ 
@@ -315,14 +330,17 @@ EXTERN_C const IID IID_IProvideWinSATAssessmentInfo;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IProvideWinSATAssessmentInfo, get_Score)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Score )( 
             __RPC__in IProvideWinSATAssessmentInfo * This,
             /* [retval][out] */ __RPC__out float *score);
         
+        DECLSPEC_XFGVIRT(IProvideWinSATAssessmentInfo, get_Title)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Title )( 
             __RPC__in IProvideWinSATAssessmentInfo * This,
             /* [string][retval][out] */ __RPC__deref_out_opt_string BSTR *title);
         
+        DECLSPEC_XFGVIRT(IProvideWinSATAssessmentInfo, get_Description)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IProvideWinSATAssessmentInfo * This,
             /* [string][retval][out] */ __RPC__deref_out_opt_string BSTR *description);
@@ -423,28 +441,34 @@ EXTERN_C const IID IID_IProvideWinSATResultsInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IProvideWinSATResultsInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IProvideWinSATResultsInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IProvideWinSATResultsInfo * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IProvideWinSATResultsInfo * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IProvideWinSATResultsInfo * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IProvideWinSATResultsInfo * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -453,6 +477,7 @@ EXTERN_C const IID IID_IProvideWinSATResultsInfo;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IProvideWinSATResultsInfo * This,
             /* [annotation][in] */ 
@@ -472,23 +497,28 @@ EXTERN_C const IID IID_IProvideWinSATResultsInfo;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IProvideWinSATResultsInfo, GetAssessmentInfo)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetAssessmentInfo )( 
             __RPC__in IProvideWinSATResultsInfo * This,
             /* [in] */ WINSAT_ASSESSMENT_TYPE assessment,
             /* [retval][out] */ __RPC__deref_out_opt IProvideWinSATAssessmentInfo **ppinfo);
         
+        DECLSPEC_XFGVIRT(IProvideWinSATResultsInfo, get_AssessmentState)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AssessmentState )( 
             __RPC__in IProvideWinSATResultsInfo * This,
             /* [retval][out] */ __RPC__out WINSAT_ASSESSMENT_STATE *state);
         
+        DECLSPEC_XFGVIRT(IProvideWinSATResultsInfo, get_AssessmentDateTime)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AssessmentDateTime )( 
             __RPC__in IProvideWinSATResultsInfo * This,
             /* [retval][out] */ __RPC__out VARIANT *fileTime);
         
+        DECLSPEC_XFGVIRT(IProvideWinSATResultsInfo, get_SystemRating)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SystemRating )( 
             __RPC__in IProvideWinSATResultsInfo * This,
             /* [retval][out] */ __RPC__out float *level);
         
+        DECLSPEC_XFGVIRT(IProvideWinSATResultsInfo, get_RatingStateDesc)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RatingStateDesc )( 
             __RPC__in IProvideWinSATResultsInfo * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *description);
@@ -587,28 +617,34 @@ EXTERN_C const IID IID_IQueryRecentWinSATAssessment;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IQueryRecentWinSATAssessment * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IQueryRecentWinSATAssessment * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IQueryRecentWinSATAssessment * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IQueryRecentWinSATAssessment * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IQueryRecentWinSATAssessment * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IQueryRecentWinSATAssessment * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -617,6 +653,7 @@ EXTERN_C const IID IID_IQueryRecentWinSATAssessment;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IQueryRecentWinSATAssessment * This,
             /* [annotation][in] */ 
@@ -636,12 +673,14 @@ EXTERN_C const IID IID_IQueryRecentWinSATAssessment;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IQueryRecentWinSATAssessment, get_XML)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_XML )( 
             __RPC__in IQueryRecentWinSATAssessment * This,
             /* [string][in] */ __RPC__in_string BSTR xPath,
             /* [defaultvalue][string][in] */ __RPC__in_string BSTR namespaces,
             /* [retval][out] */ __RPC__deref_out_opt IXMLDOMNodeList **ppDomNodeList);
         
+        DECLSPEC_XFGVIRT(IQueryRecentWinSATAssessment, get_Info)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Info )( 
             __RPC__in IQueryRecentWinSATAssessment * This,
             /* [retval][out] */ __RPC__deref_out_opt IProvideWinSATResultsInfo **ppWinSATAssessmentInfo);
@@ -729,18 +768,22 @@ EXTERN_C const IID IID_IProvideWinSATVisuals;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IProvideWinSATVisuals * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IProvideWinSATVisuals * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IProvideWinSATVisuals * This);
         
+        DECLSPEC_XFGVIRT(IProvideWinSATVisuals, get_Bitmap)
         HRESULT ( STDMETHODCALLTYPE *get_Bitmap )( 
             __RPC__in IProvideWinSATVisuals * This,
             /* [in] */ WINSAT_BITMAP_SIZE bitmapSize,
@@ -814,28 +857,34 @@ EXTERN_C const IID IID_IQueryAllWinSATAssessments;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IQueryAllWinSATAssessments * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IQueryAllWinSATAssessments * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IQueryAllWinSATAssessments * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IQueryAllWinSATAssessments * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IQueryAllWinSATAssessments * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IQueryAllWinSATAssessments * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -844,6 +893,7 @@ EXTERN_C const IID IID_IQueryAllWinSATAssessments;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IQueryAllWinSATAssessments * This,
             /* [annotation][in] */ 
@@ -863,6 +913,7 @@ EXTERN_C const IID IID_IQueryAllWinSATAssessments;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IQueryAllWinSATAssessments, get_AllXML)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AllXML )( 
             __RPC__in IQueryAllWinSATAssessments * This,
             /* [string][in] */ __RPC__in_string BSTR xPath,
@@ -952,23 +1003,28 @@ EXTERN_C const IID IID_IWinSATInitiateEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWinSATInitiateEvents * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWinSATInitiateEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWinSATInitiateEvents * This);
         
+        DECLSPEC_XFGVIRT(IWinSATInitiateEvents, WinSATComplete)
         HRESULT ( STDMETHODCALLTYPE *WinSATComplete )( 
             __RPC__in IWinSATInitiateEvents * This,
             /* [in] */ HRESULT hresult,
             /* [string][in] */ __RPC__in_string LPCWSTR strDescription);
         
+        DECLSPEC_XFGVIRT(IWinSATInitiateEvents, WinSATUpdate)
         HRESULT ( STDMETHODCALLTYPE *WinSATUpdate )( 
             __RPC__in IWinSATInitiateEvents * This,
             /* [in] */ UINT uCurrentTick,
@@ -1050,29 +1106,35 @@ EXTERN_C const IID IID_IInitiateWinSATAssessment;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInitiateWinSATAssessment * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInitiateWinSATAssessment * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInitiateWinSATAssessment * This);
         
+        DECLSPEC_XFGVIRT(IInitiateWinSATAssessment, InitiateAssessment)
         HRESULT ( STDMETHODCALLTYPE *InitiateAssessment )( 
             __RPC__in IInitiateWinSATAssessment * This,
             /* [string][in] */ __RPC__in_string LPCWSTR cmdLine,
             /* [unique][optional][in] */ __RPC__in_opt IWinSATInitiateEvents *pCallbacks,
             /* [unique][optional][in] */ __RPC__in_opt HWND callerHwnd);
         
+        DECLSPEC_XFGVIRT(IInitiateWinSATAssessment, InitiateFormalAssessment)
         HRESULT ( STDMETHODCALLTYPE *InitiateFormalAssessment )( 
             __RPC__in IInitiateWinSATAssessment * This,
             /* [unique][optional][in] */ __RPC__in_opt IWinSATInitiateEvents *pCallbacks,
             /* [unique][optional][in] */ __RPC__in_opt HWND callerHwnd);
         
+        DECLSPEC_XFGVIRT(IInitiateWinSATAssessment, CancelAssessment)
         HRESULT ( STDMETHODCALLTYPE *CancelAssessment )( 
             __RPC__in IInitiateWinSATAssessment * This);
         
@@ -1148,28 +1210,34 @@ EXTERN_C const IID IID_IAccessibleWinSAT;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAccessibleWinSAT * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAccessibleWinSAT * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAccessibleWinSAT * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAccessibleWinSAT * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAccessibleWinSAT * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAccessibleWinSAT * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1178,6 +1246,7 @@ EXTERN_C const IID IID_IAccessibleWinSAT;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAccessibleWinSAT * This,
             /* [annotation][in] */ 
@@ -1197,78 +1266,94 @@ EXTERN_C const IID IID_IAccessibleWinSAT;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAccessible, get_accParent)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_accParent )( 
             __RPC__in IAccessibleWinSAT * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppdispParent);
         
+        DECLSPEC_XFGVIRT(IAccessible, get_accChildCount)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_accChildCount )( 
             __RPC__in IAccessibleWinSAT * This,
             /* [retval][out] */ __RPC__out long *pcountChildren);
         
+        DECLSPEC_XFGVIRT(IAccessible, get_accChild)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_accChild )( 
             __RPC__in IAccessibleWinSAT * This,
             /* [in] */ VARIANT varChild,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppdispChild);
         
+        DECLSPEC_XFGVIRT(IAccessible, get_accName)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_accName )( 
             __RPC__in IAccessibleWinSAT * This,
             /* [optional][in] */ VARIANT varChild,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pszName);
         
+        DECLSPEC_XFGVIRT(IAccessible, get_accValue)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_accValue )( 
             __RPC__in IAccessibleWinSAT * This,
             /* [optional][in] */ VARIANT varChild,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pszValue);
         
+        DECLSPEC_XFGVIRT(IAccessible, get_accDescription)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_accDescription )( 
             __RPC__in IAccessibleWinSAT * This,
             /* [optional][in] */ VARIANT varChild,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pszDescription);
         
+        DECLSPEC_XFGVIRT(IAccessible, get_accRole)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_accRole )( 
             __RPC__in IAccessibleWinSAT * This,
             /* [optional][in] */ VARIANT varChild,
             /* [retval][out] */ __RPC__out VARIANT *pvarRole);
         
+        DECLSPEC_XFGVIRT(IAccessible, get_accState)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_accState )( 
             __RPC__in IAccessibleWinSAT * This,
             /* [optional][in] */ VARIANT varChild,
             /* [retval][out] */ __RPC__out VARIANT *pvarState);
         
+        DECLSPEC_XFGVIRT(IAccessible, get_accHelp)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_accHelp )( 
             __RPC__in IAccessibleWinSAT * This,
             /* [optional][in] */ VARIANT varChild,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pszHelp);
         
+        DECLSPEC_XFGVIRT(IAccessible, get_accHelpTopic)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_accHelpTopic )( 
             __RPC__in IAccessibleWinSAT * This,
             /* [out] */ __RPC__deref_out_opt BSTR *pszHelpFile,
             /* [optional][in] */ VARIANT varChild,
             /* [retval][out] */ __RPC__out long *pidTopic);
         
+        DECLSPEC_XFGVIRT(IAccessible, get_accKeyboardShortcut)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_accKeyboardShortcut )( 
             __RPC__in IAccessibleWinSAT * This,
             /* [optional][in] */ VARIANT varChild,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pszKeyboardShortcut);
         
+        DECLSPEC_XFGVIRT(IAccessible, get_accFocus)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_accFocus )( 
             __RPC__in IAccessibleWinSAT * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarChild);
         
+        DECLSPEC_XFGVIRT(IAccessible, get_accSelection)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_accSelection )( 
             __RPC__in IAccessibleWinSAT * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarChildren);
         
+        DECLSPEC_XFGVIRT(IAccessible, get_accDefaultAction)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_accDefaultAction )( 
             __RPC__in IAccessibleWinSAT * This,
             /* [optional][in] */ VARIANT varChild,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pszDefaultAction);
         
+        DECLSPEC_XFGVIRT(IAccessible, accSelect)
         /* [id][hidden] */ HRESULT ( STDMETHODCALLTYPE *accSelect )( 
             __RPC__in IAccessibleWinSAT * This,
             /* [in] */ long flagsSelect,
             /* [optional][in] */ VARIANT varChild);
         
+        DECLSPEC_XFGVIRT(IAccessible, accLocation)
         /* [id][hidden] */ HRESULT ( STDMETHODCALLTYPE *accLocation )( 
             __RPC__in IAccessibleWinSAT * This,
             /* [out] */ __RPC__out long *pxLeft,
@@ -1277,32 +1362,38 @@ EXTERN_C const IID IID_IAccessibleWinSAT;
             /* [out] */ __RPC__out long *pcyHeight,
             /* [optional][in] */ VARIANT varChild);
         
+        DECLSPEC_XFGVIRT(IAccessible, accNavigate)
         /* [id][hidden] */ HRESULT ( STDMETHODCALLTYPE *accNavigate )( 
             __RPC__in IAccessibleWinSAT * This,
             /* [in] */ long navDir,
             /* [optional][in] */ VARIANT varStart,
             /* [retval][out] */ __RPC__out VARIANT *pvarEndUpAt);
         
+        DECLSPEC_XFGVIRT(IAccessible, accHitTest)
         /* [id][hidden] */ HRESULT ( STDMETHODCALLTYPE *accHitTest )( 
             __RPC__in IAccessibleWinSAT * This,
             /* [in] */ long xLeft,
             /* [in] */ long yTop,
             /* [retval][out] */ __RPC__out VARIANT *pvarChild);
         
+        DECLSPEC_XFGVIRT(IAccessible, accDoDefaultAction)
         /* [id][hidden] */ HRESULT ( STDMETHODCALLTYPE *accDoDefaultAction )( 
             __RPC__in IAccessibleWinSAT * This,
             /* [optional][in] */ VARIANT varChild);
         
+        DECLSPEC_XFGVIRT(IAccessible, put_accName)
         /* [id][propput][hidden] */ HRESULT ( STDMETHODCALLTYPE *put_accName )( 
             __RPC__in IAccessibleWinSAT * This,
             /* [optional][in] */ VARIANT varChild,
             /* [in] */ __RPC__in BSTR szName);
         
+        DECLSPEC_XFGVIRT(IAccessible, put_accValue)
         /* [id][propput][hidden] */ HRESULT ( STDMETHODCALLTYPE *put_accValue )( 
             __RPC__in IAccessibleWinSAT * This,
             /* [optional][in] */ VARIANT varChild,
             /* [in] */ __RPC__in BSTR szValue);
         
+        DECLSPEC_XFGVIRT(IAccessibleWinSAT, SetAccessiblityData)
         HRESULT ( STDMETHODCALLTYPE *SetAccessiblityData )( 
             __RPC__in IAccessibleWinSAT * This,
             /* [string][in] */ __RPC__in_string LPCWSTR wsName,
@@ -1450,18 +1541,22 @@ EXTERN_C const IID IID_IQueryOEMWinSATCustomization;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IQueryOEMWinSATCustomization * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IQueryOEMWinSATCustomization * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IQueryOEMWinSATCustomization * This);
         
+        DECLSPEC_XFGVIRT(IQueryOEMWinSATCustomization, GetOEMPrePopulationInfo)
         HRESULT ( STDMETHODCALLTYPE *GetOEMPrePopulationInfo )( 
             __RPC__in IQueryOEMWinSATCustomization * This,
             /* [retval][out] */ __RPC__out WINSAT_OEM_CUSTOMIZATION_STATE *state);

@@ -18,7 +18,7 @@
 #endif
 
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
@@ -37,6 +37,13 @@
 #define __adocat_h__
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 /* Forward Declarations */ 
 #ifndef ___ADOCollection_FWD_DEFINED__
@@ -362,28 +369,34 @@ EXTERN_C const IID IID__ADOCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _ADOADOCollection * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in _ADOADOCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in _ADOADOCollection * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in _ADOADOCollection * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in _ADOADOCollection * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in _ADOADOCollection * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -392,6 +405,7 @@ EXTERN_C const IID IID__ADOCollection;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             _ADOADOCollection * This,
             /* [annotation][in] */ 
@@ -411,14 +425,17 @@ EXTERN_C const IID IID__ADOCollection;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(_Collection, get_Count)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in _ADOADOCollection * This,
             /* [retval][out] */ __RPC__out long *c);
         
+        DECLSPEC_XFGVIRT(_ADOCollection, _NewEnum)
         /* [id][restricted] */ HRESULT ( STDMETHODCALLTYPE *_NewEnum )( 
             __RPC__in _ADOADOCollection * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppvObject);
         
+        DECLSPEC_XFGVIRT(_ADOCollection, Refresh)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in _ADOADOCollection * This);
         
@@ -478,28 +495,34 @@ EXTERN_C const IID IID__ADODynaCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _ADODynaADOCollection * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in _ADODynaADOCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in _ADODynaADOCollection * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in _ADODynaADOCollection * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in _ADODynaADOCollection * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in _ADODynaADOCollection * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -508,6 +531,7 @@ EXTERN_C const IID IID__ADODynaCollection;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             _ADODynaADOCollection * This,
             /* [annotation][in] */ 
@@ -527,21 +551,26 @@ EXTERN_C const IID IID__ADODynaCollection;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(_Collection, get_Count)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in _ADODynaADOCollection * This,
             /* [retval][out] */ __RPC__out long *c);
         
+        DECLSPEC_XFGVIRT(_ADOCollection, _NewEnum)
         /* [id][restricted] */ HRESULT ( STDMETHODCALLTYPE *_NewEnum )( 
             __RPC__in _ADODynaADOCollection * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppvObject);
         
+        DECLSPEC_XFGVIRT(_ADOCollection, Refresh)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in _ADODynaADOCollection * This);
         
+        DECLSPEC_XFGVIRT(_ADODynaCollection, Append)
         HRESULT ( STDMETHODCALLTYPE *Append )( 
             __RPC__in _ADODynaADOCollection * This,
             /* [in] */ __RPC__in_opt IDispatch *Object);
         
+        DECLSPEC_XFGVIRT(_ADODynaCollection, Delete)
         HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in _ADODynaADOCollection * This,
             /* [in] */ VARIANT Item);
@@ -640,28 +669,34 @@ EXTERN_C const IID IID__Catalog;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _ADOCatalog * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in _ADOCatalog * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in _ADOCatalog * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in _ADOCatalog * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in _ADOCatalog * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in _ADOCatalog * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -670,6 +705,7 @@ EXTERN_C const IID IID__Catalog;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             _ADOCatalog * This,
             /* [annotation][in] */ 
@@ -689,43 +725,53 @@ EXTERN_C const IID IID__Catalog;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(_Catalog, get_Tables)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Tables )( 
             __RPC__in _ADOCatalog * This,
             /* [retval][out] */ __RPC__deref_out_opt ADOTables **ppvObject);
         
+        DECLSPEC_XFGVIRT(_Catalog, get_ActiveConnection)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ActiveConnection )( 
             __RPC__in _ADOCatalog * This,
             /* [retval][out] */ __RPC__out VARIANT *pVal);
         
+        DECLSPEC_XFGVIRT(_Catalog, put_ActiveConnection)
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ActiveConnection )( 
             __RPC__in _ADOCatalog * This,
             /* [in] */ VARIANT newVal);
         
+        DECLSPEC_XFGVIRT(_Catalog, putref_ActiveConnection)
         /* [helpcontext][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_ActiveConnection )( 
             __RPC__in _ADOCatalog * This,
             /* [in] */ __RPC__in_opt IDispatch *pCon);
         
+        DECLSPEC_XFGVIRT(_Catalog, get_Procedures)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Procedures )( 
             __RPC__in _ADOCatalog * This,
             /* [retval][out] */ __RPC__deref_out_opt ADOProcedures **ppvObject);
         
+        DECLSPEC_XFGVIRT(_Catalog, get_Views)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Views )( 
             __RPC__in _ADOCatalog * This,
             /* [retval][out] */ __RPC__deref_out_opt ADOViews **ppvObject);
         
+        DECLSPEC_XFGVIRT(_Catalog, get_Groups)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Groups )( 
             __RPC__in _ADOCatalog * This,
             /* [retval][out] */ __RPC__deref_out_opt ADOGroups **ppvObject);
         
+        DECLSPEC_XFGVIRT(_Catalog, get_Users)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Users )( 
             __RPC__in _ADOCatalog * This,
             /* [retval][out] */ __RPC__deref_out_opt ADOUsers **ppvObject);
         
+        DECLSPEC_XFGVIRT(_Catalog, Create)
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *Create )( 
             __RPC__in _ADOCatalog * This,
             /* [in] */ __RPC__in BSTR ConnectString,
             /* [retval][out] */ __RPC__out VARIANT *Connection);
         
+        DECLSPEC_XFGVIRT(_Catalog, GetObjectOwner)
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *GetObjectOwner )( 
             __RPC__in _ADOCatalog * This,
             /* [in] */ __RPC__in BSTR ObjectName,
@@ -733,6 +779,7 @@ EXTERN_C const IID IID__Catalog;
             /* [optional][in] */ VARIANT ObjectTypeId,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *OwnerName);
         
+        DECLSPEC_XFGVIRT(_Catalog, SetObjectOwner)
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *SetObjectOwner )( 
             __RPC__in _ADOCatalog * This,
             /* [in] */ __RPC__in BSTR ObjectName,
@@ -842,28 +889,34 @@ EXTERN_C const IID IID__Table;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _ADOTable * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in _ADOTable * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in _ADOTable * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in _ADOTable * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in _ADOTable * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in _ADOTable * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -872,6 +925,7 @@ EXTERN_C const IID IID__Table;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             _ADOTable * This,
             /* [annotation][in] */ 
@@ -891,50 +945,62 @@ EXTERN_C const IID IID__Table;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(_Table, get_Columns)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Columns )( 
             __RPC__in _ADOTable * This,
             /* [retval][out] */ __RPC__deref_out_opt ADOColumns **ppvObject);
         
+        DECLSPEC_XFGVIRT(_Table, get_Name)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in _ADOTable * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(_Table, put_Name)
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in _ADOTable * This,
             /* [in] */ __RPC__in BSTR newVal);
         
+        DECLSPEC_XFGVIRT(_Table, get_Type)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in _ADOTable * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(_Table, get_Indexes)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Indexes )( 
             __RPC__in _ADOTable * This,
             /* [retval][out] */ __RPC__deref_out_opt ADOIndexes **ppvObject);
         
+        DECLSPEC_XFGVIRT(_Table, get_Keys)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Keys )( 
             __RPC__in _ADOTable * This,
             /* [retval][out] */ __RPC__deref_out_opt ADOKeys **ppvObject);
         
+        DECLSPEC_XFGVIRT(_Table, get_Properties)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in _ADOTable * This,
             /* [retval][out] */ __RPC__deref_out_opt ADOProperties **ppvObject);
         
+        DECLSPEC_XFGVIRT(_Table, get_DateCreated)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DateCreated )( 
             __RPC__in _ADOTable * This,
             /* [retval][out] */ __RPC__out VARIANT *pVal);
         
+        DECLSPEC_XFGVIRT(_Table, get_DateModified)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DateModified )( 
             __RPC__in _ADOTable * This,
             /* [retval][out] */ __RPC__out VARIANT *pVal);
         
+        DECLSPEC_XFGVIRT(_Table, get_ParentCatalog)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ParentCatalog )( 
             __RPC__in _ADOTable * This,
             /* [retval][out] */ __RPC__deref_out_opt _ADOCatalog **ppvObject);
         
+        DECLSPEC_XFGVIRT(_Table, put_ParentCatalog)
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ParentCatalog )( 
             __RPC__in _ADOTable * This,
             /* [in] */ __RPC__in_opt _ADOCatalog *ppvObject);
         
+        DECLSPEC_XFGVIRT(_Table, putref_ParentCatalog)
         /* [helpcontext][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_ParentADOCatalog )( 
             __RPC__in _ADOTable * This,
             /* [in] */ __RPC__in_opt _ADOCatalog *ppvObject);
@@ -1030,28 +1096,34 @@ EXTERN_C const IID IID__Group25;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _Group25 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in _Group25 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in _Group25 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in _Group25 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in _Group25 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in _Group25 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1060,6 +1132,7 @@ EXTERN_C const IID IID__Group25;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             _Group25 * This,
             /* [annotation][in] */ 
@@ -1079,14 +1152,17 @@ EXTERN_C const IID IID__Group25;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(_Group25, get_Name)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in _Group25 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(_Group25, put_Name)
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in _Group25 * This,
             /* [in] */ __RPC__in BSTR newVal);
         
+        DECLSPEC_XFGVIRT(_Group25, GetPermissions)
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *GetPermissions )( 
             __RPC__in _Group25 * This,
             /* [in] */ VARIANT Name,
@@ -1094,6 +1170,7 @@ EXTERN_C const IID IID__Group25;
             /* [optional][in] */ VARIANT ObjectTypeId,
             /* [retval][out] */ __RPC__out RightsEnum *Rights);
         
+        DECLSPEC_XFGVIRT(_Group25, SetPermissions)
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *SetPermissions )( 
             __RPC__in _Group25 * This,
             /* [in] */ VARIANT Name,
@@ -1103,6 +1180,7 @@ EXTERN_C const IID IID__Group25;
             /* [defaultvalue][in] */ InheritTypeEnum Inherit,
             /* [optional][in] */ VARIANT ObjectTypeId);
         
+        DECLSPEC_XFGVIRT(_Group25, get_Users)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Users )( 
             __RPC__in _Group25 * This,
             /* [retval][out] */ __RPC__deref_out_opt ADOUsers **ppvObject);
@@ -1173,28 +1251,34 @@ EXTERN_C const IID IID__Group;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _ADOGroup * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in _ADOGroup * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in _ADOGroup * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in _ADOGroup * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in _ADOGroup * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in _ADOGroup * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1203,6 +1287,7 @@ EXTERN_C const IID IID__Group;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             _ADOGroup * This,
             /* [annotation][in] */ 
@@ -1222,14 +1307,17 @@ EXTERN_C const IID IID__Group;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(_Group25, get_Name)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in _ADOGroup * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(_Group25, put_Name)
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in _ADOGroup * This,
             /* [in] */ __RPC__in BSTR newVal);
         
+        DECLSPEC_XFGVIRT(_Group25, GetPermissions)
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *GetPermissions )( 
             __RPC__in _ADOGroup * This,
             /* [in] */ VARIANT Name,
@@ -1237,6 +1325,7 @@ EXTERN_C const IID IID__Group;
             /* [optional][in] */ VARIANT ObjectTypeId,
             /* [retval][out] */ __RPC__out RightsEnum *Rights);
         
+        DECLSPEC_XFGVIRT(_Group25, SetPermissions)
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *SetPermissions )( 
             __RPC__in _ADOGroup * This,
             /* [in] */ VARIANT Name,
@@ -1246,22 +1335,27 @@ EXTERN_C const IID IID__Group;
             /* [defaultvalue][in] */ InheritTypeEnum Inherit,
             /* [optional][in] */ VARIANT ObjectTypeId);
         
+        DECLSPEC_XFGVIRT(_Group25, get_Users)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Users )( 
             __RPC__in _ADOGroup * This,
             /* [retval][out] */ __RPC__deref_out_opt ADOUsers **ppvObject);
         
+        DECLSPEC_XFGVIRT(_Group, get_Properties)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in _ADOGroup * This,
             /* [retval][out] */ __RPC__deref_out_opt ADOProperties **ppvObject);
         
+        DECLSPEC_XFGVIRT(_Group, get_ParentCatalog)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ParentCatalog )( 
             __RPC__in _ADOGroup * This,
             /* [retval][out] */ __RPC__deref_out_opt _ADOCatalog **ppvObject);
         
+        DECLSPEC_XFGVIRT(_Group, put_ParentCatalog)
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ParentCatalog )( 
             __RPC__in _ADOGroup * This,
             /* [in] */ __RPC__in_opt _ADOCatalog *ppvObject);
         
+        DECLSPEC_XFGVIRT(_Group, putref_ParentCatalog)
         /* [helpcontext][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_ParentADOCatalog )( 
             __RPC__in _ADOGroup * This,
             /* [in] */ __RPC__in_opt _ADOCatalog *ppvObject);
@@ -1355,28 +1449,34 @@ EXTERN_C const IID IID__User25;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _User25 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in _User25 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in _User25 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in _User25 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in _User25 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in _User25 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1385,6 +1485,7 @@ EXTERN_C const IID IID__User25;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             _User25 * This,
             /* [annotation][in] */ 
@@ -1404,14 +1505,17 @@ EXTERN_C const IID IID__User25;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(_User25, get_Name)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in _User25 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(_User25, put_Name)
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in _User25 * This,
             /* [in] */ __RPC__in BSTR newVal);
         
+        DECLSPEC_XFGVIRT(_User25, GetPermissions)
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *GetPermissions )( 
             __RPC__in _User25 * This,
             /* [in] */ VARIANT Name,
@@ -1419,6 +1523,7 @@ EXTERN_C const IID IID__User25;
             /* [optional][in] */ VARIANT ObjectTypeId,
             /* [retval][out] */ __RPC__out RightsEnum *Rights);
         
+        DECLSPEC_XFGVIRT(_User25, SetPermissions)
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *SetPermissions )( 
             __RPC__in _User25 * This,
             /* [in] */ VARIANT Name,
@@ -1428,11 +1533,13 @@ EXTERN_C const IID IID__User25;
             /* [defaultvalue][in] */ InheritTypeEnum Inherit,
             /* [optional][in] */ VARIANT ObjectTypeId);
         
+        DECLSPEC_XFGVIRT(_User25, ChangePassword)
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *ChangePassword )( 
             __RPC__in _User25 * This,
             /* [in] */ __RPC__in BSTR OldPassword,
             /* [in] */ __RPC__in BSTR NewPassword);
         
+        DECLSPEC_XFGVIRT(_User25, get_Groups)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Groups )( 
             __RPC__in _User25 * This,
             /* [retval][out] */ __RPC__deref_out_opt ADOGroups **ppvObject);
@@ -1505,28 +1612,34 @@ EXTERN_C const IID IID__User;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _ADOUser * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in _ADOUser * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in _ADOUser * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in _ADOUser * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in _ADOUser * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in _ADOUser * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1535,6 +1648,7 @@ EXTERN_C const IID IID__User;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             _ADOUser * This,
             /* [annotation][in] */ 
@@ -1554,14 +1668,17 @@ EXTERN_C const IID IID__User;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(_User25, get_Name)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in _ADOUser * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(_User25, put_Name)
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in _ADOUser * This,
             /* [in] */ __RPC__in BSTR newVal);
         
+        DECLSPEC_XFGVIRT(_User25, GetPermissions)
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *GetPermissions )( 
             __RPC__in _ADOUser * This,
             /* [in] */ VARIANT Name,
@@ -1569,6 +1686,7 @@ EXTERN_C const IID IID__User;
             /* [optional][in] */ VARIANT ObjectTypeId,
             /* [retval][out] */ __RPC__out RightsEnum *Rights);
         
+        DECLSPEC_XFGVIRT(_User25, SetPermissions)
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *SetPermissions )( 
             __RPC__in _ADOUser * This,
             /* [in] */ VARIANT Name,
@@ -1578,27 +1696,33 @@ EXTERN_C const IID IID__User;
             /* [defaultvalue][in] */ InheritTypeEnum Inherit,
             /* [optional][in] */ VARIANT ObjectTypeId);
         
+        DECLSPEC_XFGVIRT(_User25, ChangePassword)
         /* [helpcontext][id] */ HRESULT ( STDMETHODCALLTYPE *ChangePassword )( 
             __RPC__in _ADOUser * This,
             /* [in] */ __RPC__in BSTR OldPassword,
             /* [in] */ __RPC__in BSTR NewPassword);
         
+        DECLSPEC_XFGVIRT(_User25, get_Groups)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Groups )( 
             __RPC__in _ADOUser * This,
             /* [retval][out] */ __RPC__deref_out_opt ADOGroups **ppvObject);
         
+        DECLSPEC_XFGVIRT(_User, get_Properties)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in _ADOUser * This,
             /* [retval][out] */ __RPC__deref_out_opt ADOProperties **ppvObject);
         
+        DECLSPEC_XFGVIRT(_User, get_ParentCatalog)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ParentCatalog )( 
             __RPC__in _ADOUser * This,
             /* [retval][out] */ __RPC__deref_out_opt _ADOCatalog **ppvObject);
         
+        DECLSPEC_XFGVIRT(_User, put_ParentCatalog)
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ParentCatalog )( 
             __RPC__in _ADOUser * This,
             /* [in] */ __RPC__in_opt _ADOCatalog *ppvObject);
         
+        DECLSPEC_XFGVIRT(_User, putref_ParentCatalog)
         /* [helpcontext][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_ParentADOCatalog )( 
             __RPC__in _ADOUser * This,
             /* [in] */ __RPC__in_opt _ADOCatalog *ppvObject);
@@ -1727,28 +1851,34 @@ EXTERN_C const IID IID__Column;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _ADOColumn * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in _ADOColumn * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in _ADOColumn * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in _ADOColumn * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in _ADOColumn * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in _ADOColumn * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1757,6 +1887,7 @@ EXTERN_C const IID IID__Column;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             _ADOColumn * This,
             /* [annotation][in] */ 
@@ -1776,82 +1907,102 @@ EXTERN_C const IID IID__Column;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(_Column, get_Name)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in _ADOColumn * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(_Column, put_Name)
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in _ADOColumn * This,
             /* [in] */ __RPC__in BSTR newVal);
         
+        DECLSPEC_XFGVIRT(_Column, get_Attributes)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Attributes )( 
             __RPC__in _ADOColumn * This,
             /* [retval][out] */ __RPC__out ColumnAttributesEnum *pVal);
         
+        DECLSPEC_XFGVIRT(_Column, put_Attributes)
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Attributes )( 
             __RPC__in _ADOColumn * This,
             /* [in] */ ColumnAttributesEnum newVal);
         
+        DECLSPEC_XFGVIRT(_Column, get_DefinedSize)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefinedSize )( 
             __RPC__in _ADOColumn * This,
             /* [retval][out] */ __RPC__out long *pVal);
         
+        DECLSPEC_XFGVIRT(_Column, put_DefinedSize)
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DefinedSize )( 
             __RPC__in _ADOColumn * This,
             /* [in] */ long DefinedSize);
         
+        DECLSPEC_XFGVIRT(_Column, get_NumericScale)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NumericScale )( 
             __RPC__in _ADOColumn * This,
             /* [retval][out] */ __RPC__out BYTE *pVal);
         
+        DECLSPEC_XFGVIRT(_Column, put_NumericScale)
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_NumericScale )( 
             __RPC__in _ADOColumn * This,
             /* [in] */ BYTE newVal);
         
+        DECLSPEC_XFGVIRT(_Column, get_Precision)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Precision )( 
             __RPC__in _ADOColumn * This,
             /* [retval][out] */ __RPC__out long *pVal);
         
+        DECLSPEC_XFGVIRT(_Column, put_Precision)
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Precision )( 
             __RPC__in _ADOColumn * This,
             /* [in] */ long newVal);
         
+        DECLSPEC_XFGVIRT(_Column, get_RelatedColumn)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RelatedColumn )( 
             __RPC__in _ADOColumn * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(_Column, put_RelatedColumn)
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_RelatedColumn )( 
             __RPC__in _ADOColumn * This,
             /* [in] */ __RPC__in BSTR newVal);
         
+        DECLSPEC_XFGVIRT(_Column, get_SortOrder)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SortOrder )( 
             __RPC__in _ADOColumn * This,
             /* [retval][out] */ __RPC__out SortOrderEnum *pVal);
         
+        DECLSPEC_XFGVIRT(_Column, put_SortOrder)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SortOrder )( 
             __RPC__in _ADOColumn * This,
             /* [in] */ SortOrderEnum newVal);
         
+        DECLSPEC_XFGVIRT(_Column, get_Type)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in _ADOColumn * This,
             /* [retval][out] */ __RPC__out DataTypeEnum *pVal);
         
+        DECLSPEC_XFGVIRT(_Column, put_Type)
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Type )( 
             __RPC__in _ADOColumn * This,
             /* [in] */ DataTypeEnum newVal);
         
+        DECLSPEC_XFGVIRT(_Column, get_Properties)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in _ADOColumn * This,
             /* [retval][out] */ __RPC__deref_out_opt ADOProperties **ppvObject);
         
+        DECLSPEC_XFGVIRT(_Column, get_ParentCatalog)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ParentCatalog )( 
             __RPC__in _ADOColumn * This,
             /* [retval][out] */ __RPC__deref_out_opt _ADOCatalog **ppvObject);
         
+        DECLSPEC_XFGVIRT(_Column, put_ParentCatalog)
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ParentCatalog )( 
             __RPC__in _ADOColumn * This,
             /* [in] */ __RPC__in_opt _ADOCatalog *ppvObject);
         
+        DECLSPEC_XFGVIRT(_Column, putref_ParentCatalog)
         /* [helpcontext][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_ParentADOCatalog )( 
             __RPC__in _ADOColumn * This,
             /* [in] */ __RPC__in_opt _ADOCatalog *ppvObject);
@@ -1976,28 +2127,34 @@ EXTERN_C const IID IID__Index;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _ADOIndex * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in _ADOIndex * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in _ADOIndex * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in _ADOIndex * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in _ADOIndex * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in _ADOIndex * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2006,6 +2163,7 @@ EXTERN_C const IID IID__Index;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             _ADOIndex * This,
             /* [annotation][in] */ 
@@ -2025,50 +2183,62 @@ EXTERN_C const IID IID__Index;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(_Index, get_Name)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in _ADOIndex * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(_Index, put_Name)
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in _ADOIndex * This,
             /* [in] */ __RPC__in BSTR newVal);
         
+        DECLSPEC_XFGVIRT(_Index, get_Clustered)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Clustered )( 
             __RPC__in _ADOIndex * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal);
         
+        DECLSPEC_XFGVIRT(_Index, put_Clustered)
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Clustered )( 
             __RPC__in _ADOIndex * This,
             /* [in] */ VARIANT_BOOL newVal);
         
+        DECLSPEC_XFGVIRT(_Index, get_IndexNulls)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IndexNulls )( 
             __RPC__in _ADOIndex * This,
             /* [retval][out] */ __RPC__out AllowNullsEnum *pVal);
         
+        DECLSPEC_XFGVIRT(_Index, put_IndexNulls)
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_IndexNulls )( 
             __RPC__in _ADOIndex * This,
             /* [in] */ AllowNullsEnum newVal);
         
+        DECLSPEC_XFGVIRT(_Index, get_PrimaryKey)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PrimaryKey )( 
             __RPC__in _ADOIndex * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal);
         
+        DECLSPEC_XFGVIRT(_Index, put_PrimaryKey)
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PrimaryKey )( 
             __RPC__in _ADOIndex * This,
             /* [in] */ VARIANT_BOOL newVal);
         
+        DECLSPEC_XFGVIRT(_Index, get_Unique)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Unique )( 
             __RPC__in _ADOIndex * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal);
         
+        DECLSPEC_XFGVIRT(_Index, put_Unique)
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Unique )( 
             __RPC__in _ADOIndex * This,
             /* [in] */ VARIANT_BOOL newVal);
         
+        DECLSPEC_XFGVIRT(_Index, get_Columns)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Columns )( 
             __RPC__in _ADOIndex * This,
             /* [retval][out] */ __RPC__deref_out_opt ADOColumns **ppvObject);
         
+        DECLSPEC_XFGVIRT(_Index, get_Properties)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in _ADOIndex * This,
             /* [retval][out] */ __RPC__deref_out_opt ADOProperties **ppvObject);
@@ -2174,28 +2344,34 @@ EXTERN_C const IID IID__Key;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _ADOKey * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in _ADOKey * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in _ADOKey * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in _ADOKey * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in _ADOKey * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in _ADOKey * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2204,6 +2380,7 @@ EXTERN_C const IID IID__Key;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             _ADOKey * This,
             /* [annotation][in] */ 
@@ -2223,46 +2400,57 @@ EXTERN_C const IID IID__Key;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(_Key, get_Name)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in _ADOKey * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(_Key, put_Name)
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in _ADOKey * This,
             /* [in] */ __RPC__in BSTR newVal);
         
+        DECLSPEC_XFGVIRT(_Key, get_DeleteRule)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DeleteRule )( 
             __RPC__in _ADOKey * This,
             /* [retval][out] */ __RPC__out RuleEnum *pVal);
         
+        DECLSPEC_XFGVIRT(_Key, put_DeleteRule)
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DeleteRule )( 
             __RPC__in _ADOKey * This,
             /* [in] */ RuleEnum newVal);
         
+        DECLSPEC_XFGVIRT(_Key, get_Type)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in _ADOKey * This,
             /* [retval][out] */ __RPC__out KeyTypeEnum *pVal);
         
+        DECLSPEC_XFGVIRT(_Key, put_Type)
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Type )( 
             __RPC__in _ADOKey * This,
             /* [in] */ KeyTypeEnum newVal);
         
+        DECLSPEC_XFGVIRT(_Key, get_RelatedTable)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RelatedTable )( 
             __RPC__in _ADOKey * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(_Key, put_RelatedTable)
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_RelatedTable )( 
             __RPC__in _ADOKey * This,
             /* [in] */ __RPC__in BSTR newVal);
         
+        DECLSPEC_XFGVIRT(_Key, get_UpdateRule)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UpdateRule )( 
             __RPC__in _ADOKey * This,
             /* [retval][out] */ __RPC__out RuleEnum *pVal);
         
+        DECLSPEC_XFGVIRT(_Key, put_UpdateRule)
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_UpdateRule )( 
             __RPC__in _ADOKey * This,
             /* [in] */ RuleEnum newVal);
         
+        DECLSPEC_XFGVIRT(_Key, get_Columns)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Columns )( 
             __RPC__in _ADOKey * This,
             /* [retval][out] */ __RPC__deref_out_opt ADOColumns **ppvObject);
@@ -2351,28 +2539,34 @@ EXTERN_C const IID IID_View;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ADOView * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ADOView * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ADOView * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ADOView * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ADOView * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ADOView * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2381,6 +2575,7 @@ EXTERN_C const IID IID_View;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ADOView * This,
             /* [annotation][in] */ 
@@ -2400,26 +2595,32 @@ EXTERN_C const IID IID_View;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(View, get_Command)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Command )( 
             __RPC__in ADOView * This,
             /* [retval][out] */ __RPC__out VARIANT *pVal);
         
+        DECLSPEC_XFGVIRT(View, put_Command)
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Command )( 
             __RPC__in ADOView * This,
             /* [in] */ VARIANT newVal);
         
+        DECLSPEC_XFGVIRT(View, putref_Command)
         /* [helpcontext][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_Command )( 
             __RPC__in ADOView * This,
             /* [in] */ __RPC__in_opt IDispatch *pComm);
         
+        DECLSPEC_XFGVIRT(View, get_Name)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ADOView * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(View, get_DateCreated)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DateCreated )( 
             __RPC__in ADOView * This,
             /* [retval][out] */ __RPC__out VARIANT *pVal);
         
+        DECLSPEC_XFGVIRT(View, get_DateModified)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DateModified )( 
             __RPC__in ADOView * This,
             /* [retval][out] */ __RPC__out VARIANT *pVal);
@@ -2498,28 +2699,34 @@ EXTERN_C const IID IID_Procedure;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ADOProcedure * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ADOProcedure * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ADOProcedure * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ADOProcedure * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ADOProcedure * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ADOProcedure * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2528,6 +2735,7 @@ EXTERN_C const IID IID_Procedure;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ADOProcedure * This,
             /* [annotation][in] */ 
@@ -2547,26 +2755,32 @@ EXTERN_C const IID IID_Procedure;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(Procedure, get_Command)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Command )( 
             __RPC__in ADOProcedure * This,
             /* [retval][out] */ __RPC__out VARIANT *pVar);
         
+        DECLSPEC_XFGVIRT(Procedure, put_Command)
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Command )( 
             __RPC__in ADOProcedure * This,
             /* [in] */ VARIANT newVal);
         
+        DECLSPEC_XFGVIRT(Procedure, putref_Command)
         /* [helpcontext][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_Command )( 
             __RPC__in ADOProcedure * This,
             /* [in] */ __RPC__in_opt IDispatch *pComm);
         
+        DECLSPEC_XFGVIRT(Procedure, get_Name)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ADOProcedure * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(Procedure, get_DateCreated)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DateCreated )( 
             __RPC__in ADOProcedure * This,
             /* [retval][out] */ __RPC__out VARIANT *pVal);
         
+        DECLSPEC_XFGVIRT(Procedure, get_DateModified)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DateModified )( 
             __RPC__in ADOProcedure * This,
             /* [retval][out] */ __RPC__out VARIANT *pVal);
@@ -2653,28 +2867,34 @@ EXTERN_C const IID IID_Property;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ADOProperty * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ADOProperty * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ADOProperty * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ADOProperty * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ADOProperty * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ADOProperty * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2683,6 +2903,7 @@ EXTERN_C const IID IID_Property;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ADOProperty * This,
             /* [annotation][in] */ 
@@ -2702,26 +2923,32 @@ EXTERN_C const IID IID_Property;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(Property, get_Value)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
             __RPC__in ADOProperty * This,
             /* [retval][out] */ __RPC__out VARIANT *pval);
         
+        DECLSPEC_XFGVIRT(Property, put_Value)
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Value )( 
             __RPC__in ADOProperty * This,
             /* [in] */ VARIANT val);
         
+        DECLSPEC_XFGVIRT(Property, get_Name)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ADOProperty * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(Property, get_Type)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in ADOProperty * This,
             /* [retval][out] */ __RPC__out DataTypeEnum *ptype);
         
+        DECLSPEC_XFGVIRT(Property, get_Attributes)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Attributes )( 
             __RPC__in ADOProperty * This,
             /* [retval][out] */ __RPC__out long *plAttributes);
         
+        DECLSPEC_XFGVIRT(Property, put_Attributes)
         /* [helpcontext][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Attributes )( 
             __RPC__in ADOProperty * This,
             /* [in] */ long lAttributes);
@@ -2812,28 +3039,34 @@ EXTERN_C const IID IID_Tables;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ADOTables * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ADOTables * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ADOTables * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ADOTables * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ADOTables * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ADOTables * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2842,6 +3075,7 @@ EXTERN_C const IID IID_Tables;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ADOTables * This,
             /* [annotation][in] */ 
@@ -2861,26 +3095,32 @@ EXTERN_C const IID IID_Tables;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(_Collection, get_Count)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ADOTables * This,
             /* [retval][out] */ __RPC__out long *c);
         
+        DECLSPEC_XFGVIRT(_ADOCollection, _NewEnum)
         /* [id][restricted] */ HRESULT ( STDMETHODCALLTYPE *_NewEnum )( 
             __RPC__in ADOTables * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppvObject);
         
+        DECLSPEC_XFGVIRT(_ADOCollection, Refresh)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in ADOTables * This);
         
+        DECLSPEC_XFGVIRT(Tables, get_Item)
         /* [id][helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ADOTables * This,
             /* [in] */ VARIANT Item,
             /* [retval][out] */ __RPC__deref_out_opt Table	**ppvObject);
         
+        DECLSPEC_XFGVIRT(Tables, Append)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Append )( 
             __RPC__in ADOTables * This,
             /* [in] */ VARIANT Item);
         
+        DECLSPEC_XFGVIRT(Tables, Delete)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in ADOTables * This,
             /* [in] */ VARIANT Item);
@@ -2953,28 +3193,34 @@ EXTERN_C const IID IID_Columns;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ADOColumns * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ADOColumns * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ADOColumns * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ADOColumns * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ADOColumns * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ADOColumns * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2983,6 +3229,7 @@ EXTERN_C const IID IID_Columns;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ADOColumns * This,
             /* [annotation][in] */ 
@@ -3002,28 +3249,34 @@ EXTERN_C const IID IID_Columns;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(_Collection, get_Count)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ADOColumns * This,
             /* [retval][out] */ __RPC__out long *c);
         
+        DECLSPEC_XFGVIRT(_ADOCollection, _NewEnum)
         /* [id][restricted] */ HRESULT ( STDMETHODCALLTYPE *_NewEnum )( 
             __RPC__in ADOColumns * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppvObject);
         
+        DECLSPEC_XFGVIRT(_ADOCollection, Refresh)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in ADOColumns * This);
         
+        DECLSPEC_XFGVIRT(Columns, get_Item)
         /* [id][helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ADOColumns * This,
             /* [in] */ VARIANT Item,
             /* [retval][out] */ __RPC__deref_out_opt Column	**ppvObject);
         
+        DECLSPEC_XFGVIRT(Columns, Append)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Append )( 
             __RPC__in ADOColumns * This,
             /* [in] */ VARIANT Item,
             /* [defaultvalue][in] */ DataTypeEnum Type,
             /* [defaultvalue][in] */ long DefinedSize);
         
+        DECLSPEC_XFGVIRT(Columns, Delete)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in ADOColumns * This,
             /* [in] */ VARIANT Item);
@@ -3095,28 +3348,34 @@ EXTERN_C const IID IID_Procedures;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ADOProcedures * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ADOProcedures * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ADOProcedures * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ADOProcedures * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ADOProcedures * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ADOProcedures * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -3125,6 +3384,7 @@ EXTERN_C const IID IID_Procedures;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ADOProcedures * This,
             /* [annotation][in] */ 
@@ -3144,27 +3404,33 @@ EXTERN_C const IID IID_Procedures;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(_Collection, get_Count)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ADOProcedures * This,
             /* [retval][out] */ __RPC__out long *c);
         
+        DECLSPEC_XFGVIRT(_ADOCollection, _NewEnum)
         /* [id][restricted] */ HRESULT ( STDMETHODCALLTYPE *_NewEnum )( 
             __RPC__in ADOProcedures * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppvObject);
         
+        DECLSPEC_XFGVIRT(_ADOCollection, Refresh)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in ADOProcedures * This);
         
+        DECLSPEC_XFGVIRT(Procedures, get_Item)
         /* [id][helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ADOProcedures * This,
             /* [in] */ VARIANT Item,
             /* [retval][out] */ __RPC__deref_out_opt ADOProcedure **ppvObject);
         
+        DECLSPEC_XFGVIRT(Procedures, Append)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Append )( 
             __RPC__in ADOProcedures * This,
             /* [in] */ __RPC__in BSTR Name,
             /* [in] */ __RPC__in_opt IDispatch *Command);
         
+        DECLSPEC_XFGVIRT(Procedures, Delete)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in ADOProcedures * This,
             /* [in] */ VARIANT Item);
@@ -3236,28 +3502,34 @@ EXTERN_C const IID IID_Views;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ADOViews * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ADOViews * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ADOViews * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ADOViews * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ADOViews * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ADOViews * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -3266,6 +3538,7 @@ EXTERN_C const IID IID_Views;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ADOViews * This,
             /* [annotation][in] */ 
@@ -3285,27 +3558,33 @@ EXTERN_C const IID IID_Views;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(_Collection, get_Count)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ADOViews * This,
             /* [retval][out] */ __RPC__out long *c);
         
+        DECLSPEC_XFGVIRT(_ADOCollection, _NewEnum)
         /* [id][restricted] */ HRESULT ( STDMETHODCALLTYPE *_NewEnum )( 
             __RPC__in ADOViews * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppvObject);
         
+        DECLSPEC_XFGVIRT(_ADOCollection, Refresh)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in ADOViews * This);
         
+        DECLSPEC_XFGVIRT(Views, get_Item)
         /* [id][helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ADOViews * This,
             /* [in] */ VARIANT Item,
             /* [retval][out] */ __RPC__deref_out_opt ADOView **ppvObject);
         
+        DECLSPEC_XFGVIRT(Views, Append)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Append )( 
             __RPC__in ADOViews * This,
             /* [in] */ __RPC__in BSTR Name,
             /* [in] */ __RPC__in_opt IDispatch *Command);
         
+        DECLSPEC_XFGVIRT(Views, Delete)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in ADOViews * This,
             /* [in] */ VARIANT Item);
@@ -3377,28 +3656,34 @@ EXTERN_C const IID IID_Indexes;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ADOIndexes * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ADOIndexes * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ADOIndexes * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ADOIndexes * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ADOIndexes * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ADOIndexes * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -3407,6 +3692,7 @@ EXTERN_C const IID IID_Indexes;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ADOIndexes * This,
             /* [annotation][in] */ 
@@ -3426,27 +3712,33 @@ EXTERN_C const IID IID_Indexes;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(_Collection, get_Count)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ADOIndexes * This,
             /* [retval][out] */ __RPC__out long *c);
         
+        DECLSPEC_XFGVIRT(_ADOCollection, _NewEnum)
         /* [id][restricted] */ HRESULT ( STDMETHODCALLTYPE *_NewEnum )( 
             __RPC__in ADOIndexes * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppvObject);
         
+        DECLSPEC_XFGVIRT(_ADOCollection, Refresh)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in ADOIndexes * This);
         
+        DECLSPEC_XFGVIRT(Indexes, get_Item)
         /* [id][helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ADOIndexes * This,
             /* [in] */ VARIANT Item,
             /* [retval][out] */ __RPC__deref_out_opt Index	**ppvObject);
         
+        DECLSPEC_XFGVIRT(Indexes, Append)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Append )( 
             __RPC__in ADOIndexes * This,
             /* [in] */ VARIANT Item,
             /* [optional][in] */ VARIANT columns);
         
+        DECLSPEC_XFGVIRT(Indexes, Delete)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in ADOIndexes * This,
             /* [in] */ VARIANT Item);
@@ -3521,28 +3813,34 @@ EXTERN_C const IID IID_Keys;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ADOKeys * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ADOKeys * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ADOKeys * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ADOKeys * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ADOKeys * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ADOKeys * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -3551,6 +3849,7 @@ EXTERN_C const IID IID_Keys;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ADOKeys * This,
             /* [annotation][in] */ 
@@ -3570,22 +3869,27 @@ EXTERN_C const IID IID_Keys;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(_Collection, get_Count)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ADOKeys * This,
             /* [retval][out] */ __RPC__out long *c);
         
+        DECLSPEC_XFGVIRT(_ADOCollection, _NewEnum)
         /* [id][restricted] */ HRESULT ( STDMETHODCALLTYPE *_NewEnum )( 
             __RPC__in ADOKeys * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppvObject);
         
+        DECLSPEC_XFGVIRT(_ADOCollection, Refresh)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in ADOKeys * This);
         
+        DECLSPEC_XFGVIRT(Keys, get_Item)
         /* [id][helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ADOKeys * This,
             /* [in] */ VARIANT Item,
             /* [retval][out] */ __RPC__deref_out_opt Key	**ppvObject);
         
+        DECLSPEC_XFGVIRT(Keys, Append)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Append )( 
             __RPC__in ADOKeys * This,
             /* [in] */ VARIANT Item,
@@ -3594,6 +3898,7 @@ EXTERN_C const IID IID_Keys;
             /* [defaultvalue][in] */ __RPC__in BSTR RelatedTable,
             /* [defaultvalue][in] */ __RPC__in BSTR RelatedColumn);
         
+        DECLSPEC_XFGVIRT(Keys, Delete)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in ADOKeys * This,
             /* [in] */ VARIANT Item);
@@ -3665,28 +3970,34 @@ EXTERN_C const IID IID_Users;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ADOUsers * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ADOUsers * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ADOUsers * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ADOUsers * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ADOUsers * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ADOUsers * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -3695,6 +4006,7 @@ EXTERN_C const IID IID_Users;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ADOUsers * This,
             /* [annotation][in] */ 
@@ -3714,27 +4026,33 @@ EXTERN_C const IID IID_Users;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(_Collection, get_Count)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ADOUsers * This,
             /* [retval][out] */ __RPC__out long *c);
         
+        DECLSPEC_XFGVIRT(_ADOCollection, _NewEnum)
         /* [id][restricted] */ HRESULT ( STDMETHODCALLTYPE *_NewEnum )( 
             __RPC__in ADOUsers * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppvObject);
         
+        DECLSPEC_XFGVIRT(_ADOCollection, Refresh)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in ADOUsers * This);
         
+        DECLSPEC_XFGVIRT(Users, get_Item)
         /* [id][helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ADOUsers * This,
             /* [in] */ VARIANT Item,
             /* [retval][out] */ __RPC__deref_out_opt User	**ppvObject);
         
+        DECLSPEC_XFGVIRT(Users, Append)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Append )( 
             __RPC__in ADOUsers * This,
             /* [in] */ VARIANT Item,
             /* [defaultvalue][in] */ __RPC__in BSTR Password);
         
+        DECLSPEC_XFGVIRT(Users, Delete)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in ADOUsers * This,
             /* [in] */ VARIANT Item);
@@ -3805,28 +4123,34 @@ EXTERN_C const IID IID_Groups;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ADOGroups * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ADOGroups * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ADOGroups * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ADOGroups * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ADOGroups * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ADOGroups * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -3835,6 +4159,7 @@ EXTERN_C const IID IID_Groups;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ADOGroups * This,
             /* [annotation][in] */ 
@@ -3854,26 +4179,32 @@ EXTERN_C const IID IID_Groups;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(_Collection, get_Count)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ADOGroups * This,
             /* [retval][out] */ __RPC__out long *c);
         
+        DECLSPEC_XFGVIRT(_ADOCollection, _NewEnum)
         /* [id][restricted] */ HRESULT ( STDMETHODCALLTYPE *_NewEnum )( 
             __RPC__in ADOGroups * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppvObject);
         
+        DECLSPEC_XFGVIRT(_ADOCollection, Refresh)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in ADOGroups * This);
         
+        DECLSPEC_XFGVIRT(Groups, get_Item)
         /* [id][helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ADOGroups * This,
             /* [in] */ VARIANT Item,
             /* [retval][out] */ __RPC__deref_out_opt Group	**ppvObject);
         
+        DECLSPEC_XFGVIRT(Groups, Append)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Append )( 
             __RPC__in ADOGroups * This,
             /* [in] */ VARIANT Item);
         
+        DECLSPEC_XFGVIRT(Groups, Delete)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in ADOGroups * This,
             /* [in] */ VARIANT Item);
@@ -3938,28 +4269,34 @@ EXTERN_C const IID IID_Properties;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ADOProperties * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ADOProperties * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ADOProperties * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ADOProperties * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ADOProperties * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ADOProperties * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -3968,6 +4305,7 @@ EXTERN_C const IID IID_Properties;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ADOProperties * This,
             /* [annotation][in] */ 
@@ -3987,17 +4325,21 @@ EXTERN_C const IID IID_Properties;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(_Collection, get_Count)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ADOProperties * This,
             /* [retval][out] */ __RPC__out long *c);
         
+        DECLSPEC_XFGVIRT(_ADOCollection, _NewEnum)
         /* [id][restricted] */ HRESULT ( STDMETHODCALLTYPE *_NewEnum )( 
             __RPC__in ADOProperties * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppvObject);
         
+        DECLSPEC_XFGVIRT(_ADOCollection, Refresh)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in ADOProperties * This);
         
+        DECLSPEC_XFGVIRT(Properties, get_Item)
         /* [id][helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ADOProperties * This,
             /* [in] */ VARIANT Item,

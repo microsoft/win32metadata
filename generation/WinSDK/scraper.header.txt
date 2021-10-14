@@ -214,5 +214,6 @@ using Windows.Win32.UI.WindowsAndMessaging;
 using Windows.Win32.UI.Wpf;
 using Windows.Win32.UI.XInput;
 using Windows.Win32.Web.MsHtml;
+using Windows.Win32.System.DistributedTransactionCoordinator;
 
 using IServiceProvider = Windows.Win32.System.SystemServices.IServiceProvider;

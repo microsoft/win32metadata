@@ -808,7 +808,7 @@ DsCrackSpn4W(
 #ifdef __cplusplus
 }
 #endif
-#endif !MIDL_PASS
+#endif // !MIDL_PASS
 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */

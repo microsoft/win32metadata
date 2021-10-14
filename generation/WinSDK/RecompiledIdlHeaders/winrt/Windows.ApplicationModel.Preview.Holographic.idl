@@ -97,21 +97,23 @@ namespace Windows
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 8.0)]
+                [deprecated("Use Windows.ApplicationModel.Holographic.HolographicKeyboard instead of Windows.ApplicationModel.Preview.Holographic.HolographicKeyboardPlacementOverridePreview. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 11.0)]
                 [exclusiveto(Windows.ApplicationModel.Preview.Holographic.HolographicKeyboardPlacementOverridePreview)]
                 [uuid(C8A8CE3A-DFDE-5A14-8D5F-182C526DD9C4)]
                 interface IHolographicKeyboardPlacementOverridePreview : IInspectable
                 {
-                    [overload("SetPlacementOverride")] HRESULT SetPlacementOverride([in] Windows.Perception.Spatial.SpatialCoordinateSystem* coordinateSystem, [in] Windows.Foundation.Numerics.Vector3 topCenterPosition, [in] Windows.Foundation.Numerics.Vector3 normal);
-                    [overload("SetPlacementOverride")] HRESULT SetPlacementOverrideWithMaxSize([in] Windows.Perception.Spatial.SpatialCoordinateSystem* coordinateSystem, [in] Windows.Foundation.Numerics.Vector3 topCenterPosition, [in] Windows.Foundation.Numerics.Vector3 normal, [in] Windows.Foundation.Numerics.Vector2 maxSize);
-                    HRESULT ResetPlacementOverride();
+                    [deprecated("Use Windows.ApplicationModel.Holographic.HolographicKeyboard instead of Windows.ApplicationModel.Preview.Holographic.HolographicKeyboardPlacementOverridePreview. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 11.0)] [overload("SetPlacementOverride")] HRESULT SetPlacementOverride([in] Windows.Perception.Spatial.SpatialCoordinateSystem* coordinateSystem, [in] Windows.Foundation.Numerics.Vector3 topCenterPosition, [in] Windows.Foundation.Numerics.Vector3 normal);
+                    [deprecated("Use Windows.ApplicationModel.Holographic.HolographicKeyboard instead of Windows.ApplicationModel.Preview.Holographic.HolographicKeyboardPlacementOverridePreview. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 11.0)] [overload("SetPlacementOverride")] HRESULT SetPlacementOverrideWithMaxSize([in] Windows.Perception.Spatial.SpatialCoordinateSystem* coordinateSystem, [in] Windows.Foundation.Numerics.Vector3 topCenterPosition, [in] Windows.Foundation.Numerics.Vector3 normal, [in] Windows.Foundation.Numerics.Vector2 maxSize);
+                    [deprecated("Use Windows.ApplicationModel.Holographic.HolographicKeyboard instead of Windows.ApplicationModel.Preview.Holographic.HolographicKeyboardPlacementOverridePreview. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 11.0)] HRESULT ResetPlacementOverride();
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 8.0)]
+                [deprecated("Use Windows.ApplicationModel.Holographic.HolographicKeyboard instead of Windows.ApplicationModel.Preview.Holographic.HolographicKeyboardPlacementOverridePreview. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 11.0)]
                 [exclusiveto(Windows.ApplicationModel.Preview.Holographic.HolographicKeyboardPlacementOverridePreview)]
                 [uuid(202E6039-1FF6-5A06-AAC4-A5E24FA3EC4B)]
                 interface IHolographicKeyboardPlacementOverridePreviewStatics : IInspectable
                 {
-                    HRESULT GetForCurrentView([out] [retval] Windows.ApplicationModel.Preview.Holographic.HolographicKeyboardPlacementOverridePreview** result);
+                    [deprecated("Use Windows.ApplicationModel.Holographic.HolographicKeyboard instead of Windows.ApplicationModel.Preview.Holographic.HolographicKeyboardPlacementOverridePreview. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 11.0)] HRESULT GetForCurrentView([out] [retval] Windows.ApplicationModel.Preview.Holographic.HolographicKeyboardPlacementOverridePreview** result);
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)]
@@ -123,6 +125,7 @@ namespace Windows
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 8.0)]
+                [deprecated("Use Windows.ApplicationModel.Holographic.HolographicKeyboard instead of Windows.ApplicationModel.Preview.Holographic.HolographicKeyboardPlacementOverridePreview. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 11.0)]
                 [marshaling_behavior(agile)]
                 [static(Windows.ApplicationModel.Preview.Holographic.IHolographicKeyboardPlacementOverridePreviewStatics, Windows.Foundation.UniversalApiContract, 8.0)]
                 [threading(both)]

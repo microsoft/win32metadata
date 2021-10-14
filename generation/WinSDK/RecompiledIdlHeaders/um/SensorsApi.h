@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -278,37 +286,45 @@ EXTERN_C const IID IID_ISensorManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISensorManager * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISensorManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISensorManager * This);
         
+        DECLSPEC_XFGVIRT(ISensorManager, GetSensorsByCategory)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSensorsByCategory )( 
             __RPC__in ISensorManager * This,
             /* [in] */ __RPC__in REFSENSOR_CATEGORY_ID sensorCategory,
             /* [out] */ __RPC__deref_out_opt ISensorCollection **ppSensorsFound);
         
+        DECLSPEC_XFGVIRT(ISensorManager, GetSensorsByType)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSensorsByType )( 
             __RPC__in ISensorManager * This,
             /* [in] */ __RPC__in REFSENSOR_TYPE_ID sensorType,
             /* [out] */ __RPC__deref_out_opt ISensorCollection **ppSensorsFound);
         
+        DECLSPEC_XFGVIRT(ISensorManager, GetSensorByID)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSensorByID )( 
             __RPC__in ISensorManager * This,
             /* [in] */ __RPC__in REFSENSOR_ID sensorID,
             /* [out] */ __RPC__deref_out_opt ISensor **ppSensor);
         
+        DECLSPEC_XFGVIRT(ISensorManager, SetEventSink)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetEventSink )( 
             __RPC__in ISensorManager * This,
             /* [in] */ __RPC__in_opt ISensorManagerEvents *pEvents);
         
+        DECLSPEC_XFGVIRT(ISensorManager, RequestPermissions)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RequestPermissions )( 
             __RPC__in ISensorManager * This,
             /* [in] */ __RPC__in HWND hParent,
@@ -394,22 +410,27 @@ EXTERN_C const IID IID_ILocationPermissions;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ILocationPermissions * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ILocationPermissions * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ILocationPermissions * This);
         
+        DECLSPEC_XFGVIRT(ILocationPermissions, GetGlobalLocationPermission)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetGlobalLocationPermission )( 
             __RPC__in ILocationPermissions * This,
             /* [out] */ __RPC__out BOOL *pfEnabled);
         
+        DECLSPEC_XFGVIRT(ILocationPermissions, CheckLocationCapability)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CheckLocationCapability )( 
             __RPC__in ILocationPermissions * This,
             /* [in] */ DWORD dwClientThreadId);
@@ -496,39 +517,48 @@ EXTERN_C const IID IID_ISensorCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISensorCollection * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISensorCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISensorCollection * This);
         
+        DECLSPEC_XFGVIRT(ISensorCollection, GetAt)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetAt )( 
             __RPC__in ISensorCollection * This,
             /* [in] */ ULONG ulIndex,
             /* [out] */ __RPC__deref_out_opt ISensor **ppSensor);
         
+        DECLSPEC_XFGVIRT(ISensorCollection, GetCount)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in ISensorCollection * This,
             /* [out] */ __RPC__out ULONG *pCount);
         
+        DECLSPEC_XFGVIRT(ISensorCollection, Add)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in ISensorCollection * This,
             /* [in] */ __RPC__in_opt ISensor *pSensor);
         
+        DECLSPEC_XFGVIRT(ISensorCollection, Remove)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in ISensorCollection * This,
             /* [in] */ __RPC__in_opt ISensor *pSensor);
         
+        DECLSPEC_XFGVIRT(ISensorCollection, RemoveByID)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RemoveByID )( 
             __RPC__in ISensorCollection * This,
             /* [in] */ __RPC__in REFSENSOR_ID sensorID);
         
+        DECLSPEC_XFGVIRT(ISensorCollection, Clear)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Clear )( 
             __RPC__in ISensorCollection * This);
         
@@ -660,81 +690,99 @@ EXTERN_C const IID IID_ISensor;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISensor * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISensor * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISensor * This);
         
+        DECLSPEC_XFGVIRT(ISensor, GetID)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetID )( 
             __RPC__in ISensor * This,
             /* [out] */ __RPC__out SENSOR_ID *pID);
         
+        DECLSPEC_XFGVIRT(ISensor, GetCategory)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetCategory )( 
             __RPC__in ISensor * This,
             /* [out] */ __RPC__out SENSOR_CATEGORY_ID *pSensorCategory);
         
+        DECLSPEC_XFGVIRT(ISensor, GetType)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetType )( 
             __RPC__in ISensor * This,
             /* [out] */ __RPC__out SENSOR_TYPE_ID *pSensorType);
         
+        DECLSPEC_XFGVIRT(ISensor, GetFriendlyName)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetFriendlyName )( 
             __RPC__in ISensor * This,
             /* [out] */ __RPC__deref_out_opt BSTR *pFriendlyName);
         
+        DECLSPEC_XFGVIRT(ISensor, GetProperty)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in ISensor * This,
             /* [in] */ __RPC__in REFPROPERTYKEY key,
             /* [out] */ __RPC__out PROPVARIANT *pProperty);
         
+        DECLSPEC_XFGVIRT(ISensor, GetProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProperties )( 
             __RPC__in ISensor * This,
             /* [in] */ __RPC__in_opt IPortableDeviceKeyCollection *pKeys,
             /* [out] */ __RPC__deref_out_opt IPortableDeviceValues **ppProperties);
         
+        DECLSPEC_XFGVIRT(ISensor, GetSupportedDataFields)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSupportedDataFields )( 
             __RPC__in ISensor * This,
             /* [out] */ __RPC__deref_out_opt IPortableDeviceKeyCollection **ppDataFields);
         
+        DECLSPEC_XFGVIRT(ISensor, SetProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetProperties )( 
             __RPC__in ISensor * This,
             /* [in] */ __RPC__in_opt IPortableDeviceValues *pProperties,
             /* [out] */ __RPC__deref_out_opt IPortableDeviceValues **ppResults);
         
+        DECLSPEC_XFGVIRT(ISensor, SupportsDataField)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SupportsDataField )( 
             __RPC__in ISensor * This,
             /* [in] */ __RPC__in REFPROPERTYKEY key,
             /* [out] */ __RPC__out VARIANT_BOOL *pIsSupported);
         
+        DECLSPEC_XFGVIRT(ISensor, GetState)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetState )( 
             __RPC__in ISensor * This,
             /* [out] */ __RPC__out SensorState *pState);
         
+        DECLSPEC_XFGVIRT(ISensor, GetData)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetData )( 
             __RPC__in ISensor * This,
             /* [out] */ __RPC__deref_out_opt ISensorDataReport **ppDataReport);
         
+        DECLSPEC_XFGVIRT(ISensor, SupportsEvent)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SupportsEvent )( 
             __RPC__in ISensor * This,
             /* [in] */ __RPC__in REFGUID eventGuid,
             /* [out] */ __RPC__out VARIANT_BOOL *pIsSupported);
         
+        DECLSPEC_XFGVIRT(ISensor, GetEventInterest)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetEventInterest )( 
             __RPC__in ISensor * This,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pCount) GUID **ppValues,
             /* [out] */ __RPC__out ULONG *pCount);
         
+        DECLSPEC_XFGVIRT(ISensor, SetEventInterest)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetEventInterest )( 
             __RPC__in ISensor * This,
             /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(count) GUID *pValues,
             /* [in] */ ULONG count);
         
+        DECLSPEC_XFGVIRT(ISensor, SetEventSink)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetEventSink )( 
             __RPC__in ISensor * This,
             /* [in] */ __RPC__in_opt ISensorEvents *pEvents);
@@ -853,27 +901,33 @@ EXTERN_C const IID IID_ISensorDataReport;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISensorDataReport * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISensorDataReport * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISensorDataReport * This);
         
+        DECLSPEC_XFGVIRT(ISensorDataReport, GetTimestamp)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetTimestamp )( 
             __RPC__in ISensorDataReport * This,
             /* [out] */ __RPC__out SYSTEMTIME *pTimeStamp);
         
+        DECLSPEC_XFGVIRT(ISensorDataReport, GetSensorValue)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSensorValue )( 
             __RPC__in ISensorDataReport * This,
             /* [in] */ __RPC__in REFPROPERTYKEY pKey,
             /* [out] */ __RPC__out PROPVARIANT *pValue);
         
+        DECLSPEC_XFGVIRT(ISensorDataReport, GetSensorValues)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSensorValues )( 
             __RPC__in ISensorDataReport * This,
             /* [in] */ __RPC__in_opt IPortableDeviceKeyCollection *pKeys,
@@ -950,18 +1004,22 @@ EXTERN_C const IID IID_ISensorManagerEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISensorManagerEvents * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISensorManagerEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISensorManagerEvents * This);
         
+        DECLSPEC_XFGVIRT(ISensorManagerEvents, OnSensorEnter)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *OnSensorEnter )( 
             __RPC__in ISensorManagerEvents * This,
             /* [in] */ __RPC__in_opt ISensor *pSensor,
@@ -1044,34 +1102,41 @@ EXTERN_C const IID IID_ISensorEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISensorEvents * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISensorEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISensorEvents * This);
         
+        DECLSPEC_XFGVIRT(ISensorEvents, OnStateChanged)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *OnStateChanged )( 
             __RPC__in ISensorEvents * This,
             /* [in] */ __RPC__in_opt ISensor *pSensor,
             /* [in] */ SensorState state);
         
+        DECLSPEC_XFGVIRT(ISensorEvents, OnDataUpdated)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *OnDataUpdated )( 
             __RPC__in ISensorEvents * This,
             /* [in] */ __RPC__in_opt ISensor *pSensor,
             /* [in] */ __RPC__in_opt ISensorDataReport *pNewData);
         
+        DECLSPEC_XFGVIRT(ISensorEvents, OnEvent)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *OnEvent )( 
             __RPC__in ISensorEvents * This,
             /* [in] */ __RPC__in_opt ISensor *pSensor,
             /* [in] */ __RPC__in REFGUID eventID,
             /* [in] */ __RPC__in_opt IPortableDeviceValues *pEventData);
         
+        DECLSPEC_XFGVIRT(ISensorEvents, OnLeave)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *OnLeave )( 
             __RPC__in ISensorEvents * This,
             /* [in] */ __RPC__in REFSENSOR_ID ID);

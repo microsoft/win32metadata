@@ -82,7 +82,11 @@ typedef struct _HIDP_BUTTON_CAPS
     BOOLEAN  IsDesignatorRange;
     BOOLEAN  IsAbsolute;
 
-    ULONG    Reserved[10];
+    USHORT   ReportCount;   // Available in API version >= 2 only.
+
+    USHORT   Reserved2;
+
+    ULONG    Reserved[9];
     union {
         struct {
             USAGE    UsageMin,         UsageMax;
@@ -1713,6 +1717,211 @@ HidP_UsageAndPageListDifference (
    );
 
 //
+// Used to get/set data for single button in a ButtonArray.
+//
+typedef struct _HIDP_BUTTON_ARRAY_DATA
+{
+    //
+    // The position (zero-based index) of the button within the ButtonArray.
+    // Value will always be < HIDP_BUTTON_CAPS.ReportCount
+    // (Note: This is NOT an index 'of' a ButtonArray within the preparsed data.)
+    //
+    USHORT ArrayIndex;
+
+    //
+    // TRUE when the button at the ArrayIndex (within the ButtonArray) is 'On'.
+    // This is FALSE when the button is 'Off'.
+    //
+    BOOLEAN On;
+} HIDP_BUTTON_ARRAY_DATA, *PHIDP_BUTTON_ARRAY_DATA;
+
+_Must_inspect_result_
+NTSTATUS __stdcall
+HidP_GetButtonArray (
+    _In_ HIDP_REPORT_TYPE ReportType,
+    _In_ USAGE UsagePage,
+    _In_opt_ USHORT LinkCollection,
+    _In_ USAGE Usage,
+    _Out_writes_to_(*ButtonDataLength, *ButtonDataLength) PHIDP_BUTTON_ARRAY_DATA ButtonData,
+    _Inout_ PUSHORT ButtonDataLength,
+    _In_ PHIDP_PREPARSED_DATA PreparsedData,
+    _In_reads_bytes_(ReportLength) PCHAR Report,
+    _In_ ULONG ReportLength
+    );
+
+/*++
+Routine Descripton:
+    A button array occurs when the last usage in the sequence of usages
+    describing a main item, must be repeated because there are less usages defined
+    than the ReportCount declared for the given main item.  In this case,
+    a single HIDP_BUTTON_CAPS is allocated for that usage and the ReportCount of the
+    HIDP_BUTTON_CAPS is set to reflect the number of fields the usage refers.
+
+    A HIDP_BUTTON_CAPS that describes a button array, will always have ReportCount > 1.
+    If ReportCount == 1, then it is not a button array and cannot be used with HidP_GetButtonArray.
+    (see instead HidP_GetUsages)
+
+    HidP_GetButtonArray returns (via _Out_ parameter) an array of HIDP_BUTTON_ARRAY_DATAs, one for each button 
+    (in the first button array found (and within the specified LinkCollection) with the supplied Usage) 
+    that is set to ON, for the supplied Report.
+
+
+Parameters:
+
+    ReportType    One of HidP_Input, HidP_Output or HidP_Feature.
+
+    UsagePage     The usage page to which the given usage refers.
+
+    LinkCollection  (Optional)  This value can be used to differentiate between two fields that may have 
+                the same UsagePage and Usage but exist in different collections.
+                If the LinkCollection value is HIDP_LINK_COLLECTION_UNSPECIFIED, the first found button array
+                matching the UsagePage and Usage will be returned (regardless of location).
+                If the LinkCollection value is HIDP_LINK_COLLECTION_ROOT, the first found button array (in the 
+                root collection) matching the UsagePage and Usage will be returned.
+
+    Usage    The usage whose buttons HidP_GetButtonArray will retrieve.
+
+    ButtonData    A HIDP_BUTTON_ARRAY_DATAs array where the data of buttons set to ON will be
+                  placed.  The number of elements required is the ReportCount field 
+                  of the HIDP_BUTTON_CAPS for this control.  This buffer is provided by
+                  the caller.
+
+    ButtonDataLength   As input, this parameter specifies the length of the
+                  ButtonData parameter (array) in number of array elements (NOT number of bytes).
+                  As output, if HIDP_STATUS_SUCCESS is returned, this value is set to indicate how many of those
+                  array elements were filled in by the function.  The maximum number of
+                  HIDP_BUTTON_ARRAY_DATA that can be returned is determined by HIDP_BUTTON_CAPS.ReportCount
+                  If HIDP_STATUS_BUFFER_TOO_SMALL is returned, this value contains the number 
+                  of array elements needed to successfully complete the request.
+
+    PreparsedData The preparsed data returned by the HIDCLASS
+
+    Report      The report packet.  (Note: The first byte MUST be the ReportId; this will be correctly set if the report is read from the system)
+
+    ReportLength   Length of the given report packet (in bytes).
+
+Return Value:
+
+    HIDP_STATUS_SUCCESS                -- upon successfully retrieving the buttons
+                                          from the report packet
+    HIDP_STATUS_INVALID_REPORT_TYPE    -- if ReportType is not valid.
+    HIDP_STATUS_INVALID_PREPARSED_DATA -- if PreparsedData is not valid
+    HIDP_STATUS_INVALID_REPORT_LENGTH  -- the length of the report packet is not
+                                          equal to the length specified in
+                                          the HIDP_CAPS structure for the given
+                                          ReportType
+    HIDP_STATUS_NOT_BUTTON_ARRAY       -- if the control specified is not a
+                                          button array -- a button array will have
+                                          a ReportCount field in the
+                                          HIDP_BUTTON_CAPS structure that is > 1.
+                                          If ReportCount == 1, Use HidP_GetUsages instead.
+    HIDP_STATUS_BUFFER_TOO_SMALL       -- if the size of the passed in buffer in
+                                          which to return the array is too small
+                                          (i.e. has fewer values than the number of
+                                          fields in the array).  ButtonDataLength will be set
+                                          to the required size.
+    HIDP_STATUS_INCOMPATIBLE_REPORT_ID -- the specified usage page, usage and
+                                          link collection exist but exists in
+                                          a report with a different report ID
+                                          than the report being passed in.  To
+                                          set this value, call
+                                          HidP_GetButtonArray with a
+                                          different report packet
+    HIDP_STATUS_USAGE_NOT_FOUND        -- if the usage page, usage, and link
+                                          collection combination does not exist
+                                          in any reports for this ReportType
+--*/
+
+_Must_inspect_result_
+NTSTATUS __stdcall
+HidP_SetButtonArray (
+    _In_ HIDP_REPORT_TYPE ReportType,
+    _In_ USAGE UsagePage,
+    _In_opt_ USHORT LinkCollection,
+    _In_ USAGE Usage,
+    _In_reads_(ButtonDataLength) PHIDP_BUTTON_ARRAY_DATA ButtonData,
+    _In_ USHORT ButtonDataLength,
+    _In_ PHIDP_PREPARSED_DATA PreparsedData,
+    _Inout_updates_bytes_(ReportLength) PCHAR Report,
+    _In_ ULONG ReportLength
+    );
+
+/*++
+Routine Descripton:
+    A button array occurs when the last usage in the sequence of usages
+    describing a main item, must be repeated because there are less usages defined
+    than the ReportCount declared for the given main item.  In this case,
+    a single HIDP_BUTTON_CAPS is allocated for that usage and the ReportCount of the
+    HIDP_BUTTON_CAPS is set to reflect the number of fields the usage refers.
+
+    A HIDP_BUTTON_CAPS that describes a button array, will always have ReportCount > 1.
+    If ReportCount == 1, then it is not a button array and cannot be used with HidP_SetButtonArray.
+    (see instead HidP_SetUsages)
+
+    HidP_SetButtonArray sets the state of buttons via an array of HIDP_BUTTON_ARRAY_DATAs.
+
+    HidP_SetButtonArray sets the state of buttons via an array of HIDP_BUTTON_ARRAY_DATAs
+    (for the first button array found (and within the specified LinkCollection) with the supplied Usage) 
+    for the supplied Report.
+
+Parameters:
+
+    ReportType  One of HidP_Output or HidP_Feature.
+
+    UsagePage   The usage page to which the given usage refers.
+
+    LinkCollection  (Optional)  This value can be used to differentiate between two fields that may have 
+                the same UsagePage and Usage but exist in different collections.
+                If the LinkCollection value is HIDP_LINK_COLLECTION_UNSPECIFIED, the first found button array
+                matching the UsagePage and Usage will be returned (regardless of location).
+                If the LinkCollection value is HIDP_LINK_COLLECTION_ROOT, the first found button array (in the 
+                root collection) matching the UsagePage and Usage will be returned.
+
+    Usage       The usage whose button array HidP_SetButtonArray will set.
+
+    ButtonData  The buffer with the values to set into the button array.
+
+    ButtonDataLength  Number of elements in the ButtonData buffer.
+
+    PreparsedData The preparsed data returned from HIDCLASS
+
+    Report      The report packet.  (Note: The first byte MUST be the ReportId).
+
+    ReportLength Length of the given report packet (in bytes).
+
+
+Return Value:
+    HIDP_STATUS_SUCCESS                -- upon successfully setting the value
+                                          array in the report packet
+    HIDP_STATUS_INVALID_REPORT_TYPE    -- if ReportType is not valid.
+    HIDP_STATUS_INVALID_PREPARSED_DATA -- if PreparsedData is not valid
+    HIDP_STATUS_INVALID_REPORT_LENGTH  -- the length of the report packet is not
+                                          equal to the length specified in
+                                          the HIDP_CAPS structure for the given
+                                          ReportType
+    HIDP_STATUS_REPORT_DOES_NOT_EXIST  -- if there are no reports on this device
+                                          for the given ReportType
+    HIDP_STATUS_NOT_BUTTON_ARRAY       -- if the control specified is not a
+                                          button array -- a button array will have
+                                          a ReportCount field in the
+                                          HIDP_BUTTON_CAPS structure that is > 1.
+                                          If ReportCount == 1, Use HidP_SetUsages instead.
+    HIDP_STATUS_INCOMPATIBLE_REPORT_ID -- the specified usage page, usage and
+                                          link collection exist but exists in
+                                          a report with a different report ID
+                                          than the report being passed in.  To
+                                          set this value, call
+                                          HidP_SetButtonArray again with
+                                          a zero-initialized report packet
+    HIDP_STATUS_USAGE_NOT_FOUND        -- if the usage page, usage, and link
+                                          collection combination does not exist
+                                          in any reports for this ReportType
+    HIDP_STATUS_DATA_INDEX_OUT_OF_RANGE -- if the ArrayIndex for one of the supplied HIDP_BUTTON_ARRAY_DATA
+                                          is outside the valid range for this button array (i.e. >= HIDP_BUTTON_CAPS.ReportCount)
+--*/
+
+
+//
 // Produce Make or Break Codes
 //
 typedef enum _HIDP_KEYBOARD_DIRECTION {
@@ -1784,8 +1993,6 @@ Routine Description:
 Parameters:
 --*/
 
-
-
 //
 // Define NT Status codes with Facility Code of FACILITY_HID_ERROR_CODE
 //
@@ -1817,11 +2024,55 @@ Parameters:
 #define HIDP_STATUS_BUTTON_NOT_PRESSED       (HIDP_ERROR_CODES(0xC,0xF))
 #define HIDP_STATUS_REPORT_DOES_NOT_EXIST    (HIDP_ERROR_CODES(0xC,0x10))
 #define HIDP_STATUS_NOT_IMPLEMENTED          (HIDP_ERROR_CODES(0xC,0x20))
+#define HIDP_STATUS_NOT_BUTTON_ARRAY         (HIDP_ERROR_CODES(0xC,0x21))
 
 //
 // We blundered this status code.
 //
 #define HIDP_STATUS_I8242_TRANS_UNKNOWN HIDP_STATUS_I8042_TRANS_UNKNOWN
+
+#ifndef _KERNEL_MODE
+
+typedef NTSTATUS
+(*PFN_HidP_GetVersionInternal)(
+    _Out_ ULONG* Version);
+
+_Must_inspect_result_
+inline NTSTATUS __stdcall
+HidP_GetVersion (
+  _Out_ ULONG* Version
+  )
+/*++
+Routine Description:
+  Header-only implementation of HidP versioning, to separate API versions that support HidP_GetButtonArray && HidP_SetButtonArray
+  APIs and those that don't.
+--*/
+{
+    NTSTATUS status = HIDP_STATUS_SUCCESS;
+
+    *Version = 1;
+
+    HMODULE module = LoadLibraryW(L"hid.dll");
+    if (module == NULL)
+    {
+        // Couldn't Load the hid dll.  Something is very wrong.
+        return HIDP_STATUS_INTERNAL_ERROR;
+    }
+
+    PFN_HidP_GetVersionInternal fnVersionInternal = (PFN_HidP_GetVersionInternal) GetProcAddress(module, "HidP_GetVersionInternal");
+    if (fnVersionInternal != NULL)
+    {
+        status = fnVersionInternal(Version);
+    }
+    else
+    {
+        // This DLL build doesn't support HidP_GetVersionInternal, so the version is 1.
+    }
+
+    return status;
+}
+
+#endif
 
 #include <poppack.h>
 

@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -92,8 +100,9 @@ extern "C"{
 //
 //----------------------------------------------------------------------------
 #include <winapifamily.h>
-#pragma region Desktop Family
-#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+#pragma region App Partition
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+DEFINE_GUID(CLSID_XPSRASTERIZER_FACTORY, 0x503E79BF, 0x1D09, 0x4764, 0x9D, 0x72, 0x1E, 0xB0, 0xC6, 0x59, 0x67, 0xC6);
 
 
 extern RPC_IF_HANDLE __MIDL_itf_xpsrassvc_0000_0000_v0_0_c_ifspec;
@@ -125,18 +134,22 @@ EXTERN_C const IID IID_IXpsRasterizerNotificationCallback;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsRasterizerNotificationCallback * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IXpsRasterizerNotificationCallback * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IXpsRasterizerNotificationCallback * This);
         
+        DECLSPEC_XFGVIRT(IXpsRasterizerNotificationCallback, Continue)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Continue )( 
             __RPC__in IXpsRasterizerNotificationCallback * This);
         
@@ -227,18 +240,22 @@ EXTERN_C const IID IID_IXpsRasterizer;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsRasterizer * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IXpsRasterizer * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IXpsRasterizer * This);
         
+        DECLSPEC_XFGVIRT(IXpsRasterizer, RasterizeRect)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RasterizeRect )( 
             __RPC__in IXpsRasterizer * This,
             /* [in] */ INT x,
@@ -248,6 +265,7 @@ EXTERN_C const IID IID_IXpsRasterizer;
             /* [in] */ __RPC__in_opt IXpsRasterizerNotificationCallback *notificationCallback,
             /* [out] */ __RPC__deref_out_opt IWICBitmap **bitmap);
         
+        DECLSPEC_XFGVIRT(IXpsRasterizer, SetMinimalLineWidth)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetMinimalLineWidth )( 
             __RPC__in IXpsRasterizer * This,
             /* [in] */ INT width);
@@ -323,18 +341,22 @@ EXTERN_C const IID IID_IXpsRasterizationFactory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsRasterizationFactory * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IXpsRasterizationFactory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IXpsRasterizationFactory * This);
         
+        DECLSPEC_XFGVIRT(IXpsRasterizationFactory, CreateRasterizer)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateRasterizer )( 
             __RPC__in IXpsRasterizationFactory * This,
             /* [in] */ __RPC__in_opt IXpsOMPage *xpsPage,
@@ -429,18 +451,22 @@ EXTERN_C const IID IID_IXpsRasterizationFactory1;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsRasterizationFactory1 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IXpsRasterizationFactory1 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IXpsRasterizationFactory1 * This);
         
+        DECLSPEC_XFGVIRT(IXpsRasterizationFactory1, CreateRasterizer)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateRasterizer )( 
             __RPC__in IXpsRasterizationFactory1 * This,
             /* [in] */ __RPC__in_opt IXpsOMPage *xpsPage,
@@ -538,18 +564,22 @@ EXTERN_C const IID IID_IXpsRasterizationFactory2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsRasterizationFactory2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IXpsRasterizationFactory2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IXpsRasterizationFactory2 * This);
         
+        DECLSPEC_XFGVIRT(IXpsRasterizationFactory2, CreateRasterizer)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateRasterizer )( 
             __RPC__in IXpsRasterizationFactory2 * This,
             /* [in] */ __RPC__in_opt IXpsOMPage *xpsPage,
@@ -602,7 +632,7 @@ EXTERN_C const IID IID_IXpsRasterizationFactory2;
 /* [local] */ 
 
 #endif // (NTDDI >= NTDDI_WINTHRESHOLD)
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
 #pragma endregion
 
 

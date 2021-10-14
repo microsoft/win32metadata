@@ -10,3 +10,5 @@
 #include <wincred.h>
 #include <winsmcrd.h>
 #include <winscard.h>
+#include <credssp.h>
+#include <scarderr.h>

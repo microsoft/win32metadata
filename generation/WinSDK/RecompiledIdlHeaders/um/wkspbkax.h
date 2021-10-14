@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -226,6 +234,7 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWorkspaceBrokerAx * This,
             /* [annotation][in] */ 
@@ -233,17 +242,21 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWorkspaceBrokerAx * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWorkspaceBrokerAx * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWorkspaceBrokerAx * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWorkspaceBrokerAx * This,
             /* [annotation][in] */ 
@@ -253,6 +266,7 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWorkspaceBrokerAx * This,
             /* [annotation][in] */ 
@@ -265,6 +279,7 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWorkspaceBrokerAx * This,
             /* [annotation][in] */ 
@@ -284,17 +299,21 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx, SetupWorkspace)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetupWorkspace )( 
             __RPC__in IWorkspaceBrokerAx * This);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx, InitializeWorkspaceConfiguration)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InitializeWorkspaceConfiguration )( 
             __RPC__in IWorkspaceBrokerAx * This);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx, get_WorkspacesCount)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WorkspacesCount )( 
             __RPC__in IWorkspaceBrokerAx * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  LONG *pVal);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx, get_WorkspaceName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WorkspaceName )( 
             __RPC__in IWorkspaceBrokerAx * This,
             /* [annotation][in] */ 
@@ -302,6 +321,7 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pVl);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx, get_WorkspaceId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WorkspaceId )( 
             __RPC__in IWorkspaceBrokerAx * This,
             /* [annotation][in] */ 
@@ -309,6 +329,7 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx, get_WorkspaceFoldersCount)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WorkspaceFoldersCount )( 
             __RPC__in IWorkspaceBrokerAx * This,
             /* [annotation][in] */ 
@@ -316,6 +337,7 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx;
             /* [annotation][retval][out] */ 
             _Out_retval_  LONG *pVal);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx, get_WorkspaceFolderName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WorkspaceFolderName )( 
             __RPC__in IWorkspaceBrokerAx * This,
             /* [annotation][in] */ 
@@ -325,6 +347,7 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx, get_WorkspaceFolderContentsCount)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WorkspaceFolderContentsCount )( 
             __RPC__in IWorkspaceBrokerAx * This,
             /* [annotation][in] */ 
@@ -334,6 +357,7 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx;
             /* [annotation][retval][out] */ 
             _Out_retval_  LONG *pVal);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx, get_WorkspaceFolderImageData)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WorkspaceFolderImageData )( 
             __RPC__in IWorkspaceBrokerAx * This,
             /* [annotation][in] */ 
@@ -345,6 +369,7 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx, get_WorkspaceFolderItemName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WorkspaceFolderItemName )( 
             __RPC__in IWorkspaceBrokerAx * This,
             /* [annotation][in] */ 
@@ -356,6 +381,7 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx, get_WorkspaceFolderItemFileExtension)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WorkspaceFolderItemFileExtension )( 
             __RPC__in IWorkspaceBrokerAx * This,
             /* [annotation][in] */ 
@@ -367,6 +393,7 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx, get_IsWorkspaceFolderItemRemoteDesktop)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsWorkspaceFolderItemRemoteDesktop )( 
             __RPC__in IWorkspaceBrokerAx * This,
             /* [annotation][in] */ 
@@ -378,6 +405,7 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx;
             /* [annotation][retval][out] */ 
             _Out_retval_  VARIANT_BOOL *pVal);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx, LaunchWorkspaceItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *LaunchWorkspaceItem )( 
             __RPC__in IWorkspaceBrokerAx * This,
             /* [annotation][in] */ 
@@ -389,6 +417,7 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx;
             /* [annotation][in] */ 
             _In_  BSTR ActivationContext);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx, attachEvent)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *attachEvent )( 
             __RPC__in IWorkspaceBrokerAx * This,
             /* [annotation][in] */ 
@@ -396,6 +425,7 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx;
             /* [annotation][in] */ 
             _In_  IDispatch *callback);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx, detachEvent)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *detachEvent )( 
             __RPC__in IWorkspaceBrokerAx * This,
             /* [annotation][in] */ 
@@ -551,6 +581,7 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWorkspaceBrokerAx2 * This,
             /* [annotation][in] */ 
@@ -558,17 +589,21 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWorkspaceBrokerAx2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWorkspaceBrokerAx2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWorkspaceBrokerAx2 * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWorkspaceBrokerAx2 * This,
             /* [annotation][in] */ 
@@ -578,6 +613,7 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx2;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWorkspaceBrokerAx2 * This,
             /* [annotation][in] */ 
@@ -590,6 +626,7 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx2;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWorkspaceBrokerAx2 * This,
             /* [annotation][in] */ 
@@ -609,17 +646,21 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx, SetupWorkspace)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetupWorkspace )( 
             __RPC__in IWorkspaceBrokerAx2 * This);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx, InitializeWorkspaceConfiguration)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InitializeWorkspaceConfiguration )( 
             __RPC__in IWorkspaceBrokerAx2 * This);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx, get_WorkspacesCount)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WorkspacesCount )( 
             __RPC__in IWorkspaceBrokerAx2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  LONG *pVal);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx, get_WorkspaceName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WorkspaceName )( 
             __RPC__in IWorkspaceBrokerAx2 * This,
             /* [annotation][in] */ 
@@ -627,6 +668,7 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx2;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pVl);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx, get_WorkspaceId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WorkspaceId )( 
             __RPC__in IWorkspaceBrokerAx2 * This,
             /* [annotation][in] */ 
@@ -634,6 +676,7 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx2;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx, get_WorkspaceFoldersCount)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WorkspaceFoldersCount )( 
             __RPC__in IWorkspaceBrokerAx2 * This,
             /* [annotation][in] */ 
@@ -641,6 +684,7 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx2;
             /* [annotation][retval][out] */ 
             _Out_retval_  LONG *pVal);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx, get_WorkspaceFolderName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WorkspaceFolderName )( 
             __RPC__in IWorkspaceBrokerAx2 * This,
             /* [annotation][in] */ 
@@ -650,6 +694,7 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx2;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx, get_WorkspaceFolderContentsCount)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WorkspaceFolderContentsCount )( 
             __RPC__in IWorkspaceBrokerAx2 * This,
             /* [annotation][in] */ 
@@ -659,6 +704,7 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx2;
             /* [annotation][retval][out] */ 
             _Out_retval_  LONG *pVal);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx, get_WorkspaceFolderImageData)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WorkspaceFolderImageData )( 
             __RPC__in IWorkspaceBrokerAx2 * This,
             /* [annotation][in] */ 
@@ -670,6 +716,7 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx2;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx, get_WorkspaceFolderItemName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WorkspaceFolderItemName )( 
             __RPC__in IWorkspaceBrokerAx2 * This,
             /* [annotation][in] */ 
@@ -681,6 +728,7 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx2;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx, get_WorkspaceFolderItemFileExtension)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WorkspaceFolderItemFileExtension )( 
             __RPC__in IWorkspaceBrokerAx2 * This,
             /* [annotation][in] */ 
@@ -692,6 +740,7 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx2;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx, get_IsWorkspaceFolderItemRemoteDesktop)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsWorkspaceFolderItemRemoteDesktop )( 
             __RPC__in IWorkspaceBrokerAx2 * This,
             /* [annotation][in] */ 
@@ -703,6 +752,7 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx2;
             /* [annotation][retval][out] */ 
             _Out_retval_  VARIANT_BOOL *pVal);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx, LaunchWorkspaceItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *LaunchWorkspaceItem )( 
             __RPC__in IWorkspaceBrokerAx2 * This,
             /* [annotation][in] */ 
@@ -714,6 +764,7 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx2;
             /* [annotation][in] */ 
             _In_  BSTR ActivationContext);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx, attachEvent)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *attachEvent )( 
             __RPC__in IWorkspaceBrokerAx2 * This,
             /* [annotation][in] */ 
@@ -721,6 +772,7 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx2;
             /* [annotation][in] */ 
             _In_  IDispatch *callback);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx, detachEvent)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *detachEvent )( 
             __RPC__in IWorkspaceBrokerAx2 * This,
             /* [annotation][in] */ 
@@ -728,16 +780,19 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx2;
             /* [annotation][in] */ 
             _In_  IDispatch *callback);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx2, RefreshWorkspace)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RefreshWorkspace )( 
             __RPC__in IWorkspaceBrokerAx2 * This,
             /* [annotation][in] */ 
             _In_  BSTR bstrWorkspaceGUID);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx2, RemoveWorkspace)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RemoveWorkspace )( 
             __RPC__in IWorkspaceBrokerAx2 * This,
             /* [annotation][in] */ 
             _In_  BSTR bstrWorkspaceGUID);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx2, get_WorkspaceDescription)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WorkspaceDescription )( 
             __RPC__in IWorkspaceBrokerAx2 * This,
             /* [annotation][in] */ 
@@ -745,6 +800,7 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx2;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pbstrMessage);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx2, get_WorkspaceURL)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WorkspaceURL )( 
             __RPC__in IWorkspaceBrokerAx2 * This,
             /* [annotation][in] */ 
@@ -752,6 +808,7 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx2;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pbstrMessage);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx2, get_WorkspaceLastUpdateDescription)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WorkspaceLastUpdateDescription )( 
             __RPC__in IWorkspaceBrokerAx2 * This,
             /* [annotation][in] */ 
@@ -759,6 +816,7 @@ EXTERN_C const IID IID_IWorkspaceBrokerAx2;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pbstrMessage);
         
+        DECLSPEC_XFGVIRT(IWorkspaceBrokerAx2, get_IsDefaultWorkspace)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsDefaultWorkspace )( 
             __RPC__in IWorkspaceBrokerAx2 * This,
             /* [annotation][in] */ 
@@ -909,6 +967,7 @@ EXTERN_C const IID DIID__IWorkspaceBrokerAxEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _IWorkspaceBrokerAxEvents * This,
             /* [annotation][in] */ 
@@ -916,17 +975,21 @@ EXTERN_C const IID DIID__IWorkspaceBrokerAxEvents;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in _IWorkspaceBrokerAxEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in _IWorkspaceBrokerAxEvents * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in _IWorkspaceBrokerAxEvents * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in _IWorkspaceBrokerAxEvents * This,
             /* [annotation][in] */ 
@@ -936,6 +999,7 @@ EXTERN_C const IID DIID__IWorkspaceBrokerAxEvents;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in _IWorkspaceBrokerAxEvents * This,
             /* [annotation][in] */ 
@@ -948,6 +1012,7 @@ EXTERN_C const IID DIID__IWorkspaceBrokerAxEvents;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             _IWorkspaceBrokerAxEvents * This,
             /* [annotation][in] */ 

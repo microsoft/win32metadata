@@ -1,4 +1,6 @@
 --traverse
 <IncludeRoot>/um/IContact.h
+<IncludeRoot>/um/contactaggregation.h
+<IncludeRoot>/um/icontactproperties.h
 --namespace
 Windows.Win32.System.Contacts

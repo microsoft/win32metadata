@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -305,26 +313,32 @@ EXTERN_C const IID IID_ILocationReport;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ILocationReport * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ILocationReport * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ILocationReport * This);
         
+        DECLSPEC_XFGVIRT(ILocationReport, GetSensorID)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSensorID )( 
             __RPC__in ILocationReport * This,
             /* [retval][out] */ __RPC__out SENSOR_ID *pSensorID);
         
+        DECLSPEC_XFGVIRT(ILocationReport, GetTimestamp)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetTimestamp )( 
             __RPC__in ILocationReport * This,
             /* [retval][out] */ __RPC__out SYSTEMTIME *pCreationTime);
         
+        DECLSPEC_XFGVIRT(ILocationReport, GetValue)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             __RPC__in ILocationReport * This,
             /* [in] */ __RPC__in REFPROPERTYKEY pKey,
@@ -412,47 +426,58 @@ EXTERN_C const IID IID_ILatLongReport;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ILatLongReport * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ILatLongReport * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ILatLongReport * This);
         
+        DECLSPEC_XFGVIRT(ILocationReport, GetSensorID)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSensorID )( 
             __RPC__in ILatLongReport * This,
             /* [retval][out] */ __RPC__out SENSOR_ID *pSensorID);
         
+        DECLSPEC_XFGVIRT(ILocationReport, GetTimestamp)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetTimestamp )( 
             __RPC__in ILatLongReport * This,
             /* [retval][out] */ __RPC__out SYSTEMTIME *pCreationTime);
         
+        DECLSPEC_XFGVIRT(ILocationReport, GetValue)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             __RPC__in ILatLongReport * This,
             /* [in] */ __RPC__in REFPROPERTYKEY pKey,
             /* [retval][out] */ __RPC__out PROPVARIANT *pValue);
         
+        DECLSPEC_XFGVIRT(ILatLongReport, GetLatitude)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetLatitude )( 
             __RPC__in ILatLongReport * This,
             /* [retval][out] */ __RPC__out DOUBLE *pLatitude);
         
+        DECLSPEC_XFGVIRT(ILatLongReport, GetLongitude)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetLongitude )( 
             __RPC__in ILatLongReport * This,
             /* [retval][out] */ __RPC__out DOUBLE *pLongitude);
         
+        DECLSPEC_XFGVIRT(ILatLongReport, GetErrorRadius)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetErrorRadius )( 
             __RPC__in ILatLongReport * This,
             /* [retval][out] */ __RPC__out DOUBLE *pErrorRadius);
         
+        DECLSPEC_XFGVIRT(ILatLongReport, GetAltitude)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetAltitude )( 
             __RPC__in ILatLongReport * This,
             /* [retval][out] */ __RPC__out DOUBLE *pAltitude);
         
+        DECLSPEC_XFGVIRT(ILatLongReport, GetAltitudeError)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetAltitudeError )( 
             __RPC__in ILatLongReport * This,
             /* [retval][out] */ __RPC__out DOUBLE *pAltitudeError);
@@ -561,55 +586,68 @@ EXTERN_C const IID IID_ICivicAddressReport;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICivicAddressReport * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICivicAddressReport * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICivicAddressReport * This);
         
+        DECLSPEC_XFGVIRT(ILocationReport, GetSensorID)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSensorID )( 
             __RPC__in ICivicAddressReport * This,
             /* [retval][out] */ __RPC__out SENSOR_ID *pSensorID);
         
+        DECLSPEC_XFGVIRT(ILocationReport, GetTimestamp)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetTimestamp )( 
             __RPC__in ICivicAddressReport * This,
             /* [retval][out] */ __RPC__out SYSTEMTIME *pCreationTime);
         
+        DECLSPEC_XFGVIRT(ILocationReport, GetValue)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             __RPC__in ICivicAddressReport * This,
             /* [in] */ __RPC__in REFPROPERTYKEY pKey,
             /* [retval][out] */ __RPC__out PROPVARIANT *pValue);
         
+        DECLSPEC_XFGVIRT(ICivicAddressReport, GetAddressLine1)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetAddressLine1 )( 
             __RPC__in ICivicAddressReport * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrAddress1);
         
+        DECLSPEC_XFGVIRT(ICivicAddressReport, GetAddressLine2)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetAddressLine2 )( 
             __RPC__in ICivicAddressReport * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrAddress2);
         
+        DECLSPEC_XFGVIRT(ICivicAddressReport, GetCity)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetCity )( 
             __RPC__in ICivicAddressReport * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCity);
         
+        DECLSPEC_XFGVIRT(ICivicAddressReport, GetStateProvince)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetStateProvince )( 
             __RPC__in ICivicAddressReport * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrStateProvince);
         
+        DECLSPEC_XFGVIRT(ICivicAddressReport, GetPostalCode)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPostalCode )( 
             __RPC__in ICivicAddressReport * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrPostalCode);
         
+        DECLSPEC_XFGVIRT(ICivicAddressReport, GetCountryRegion)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetCountryRegion )( 
             __RPC__in ICivicAddressReport * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCountryRegion);
         
+        DECLSPEC_XFGVIRT(ICivicAddressReport, GetDetailLevel)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetDetailLevel )( 
             __RPC__in ICivicAddressReport * This,
             /* [retval][out] */ __RPC__out DWORD *pDetailLevel);
@@ -742,58 +780,70 @@ EXTERN_C const IID IID_ILocation;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ILocation * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ILocation * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ILocation * This);
         
+        DECLSPEC_XFGVIRT(ILocation, RegisterForReport)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RegisterForReport )( 
             __RPC__in ILocation * This,
             /* [in] */ __RPC__in_opt ILocationEvents *pEvents,
             /* [in] */ __RPC__in REFIID reportType,
             /* [in] */ DWORD dwRequestedReportInterval);
         
+        DECLSPEC_XFGVIRT(ILocation, UnregisterForReport)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *UnregisterForReport )( 
             __RPC__in ILocation * This,
             /* [in] */ __RPC__in REFIID reportType);
         
+        DECLSPEC_XFGVIRT(ILocation, GetReport)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetReport )( 
             __RPC__in ILocation * This,
             /* [in] */ __RPC__in REFIID reportType,
             /* [retval][out] */ __RPC__deref_out_opt ILocationReport **ppLocationReport);
         
+        DECLSPEC_XFGVIRT(ILocation, GetReportStatus)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetReportStatus )( 
             __RPC__in ILocation * This,
             /* [in] */ __RPC__in REFIID reportType,
             /* [retval][out] */ __RPC__out enum LOCATION_REPORT_STATUS *pStatus);
         
+        DECLSPEC_XFGVIRT(ILocation, GetReportInterval)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetReportInterval )( 
             __RPC__in ILocation * This,
             /* [in] */ __RPC__in REFIID reportType,
             /* [retval][out] */ __RPC__out DWORD *pMilliseconds);
         
+        DECLSPEC_XFGVIRT(ILocation, SetReportInterval)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetReportInterval )( 
             __RPC__in ILocation * This,
             /* [in] */ __RPC__in REFIID reportType,
             /* [in] */ DWORD millisecondsRequested);
         
+        DECLSPEC_XFGVIRT(ILocation, GetDesiredAccuracy)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetDesiredAccuracy )( 
             __RPC__in ILocation * This,
             /* [in] */ __RPC__in REFIID reportType,
             /* [retval][out] */ __RPC__out enum LOCATION_DESIRED_ACCURACY *pDesiredAccuracy);
         
+        DECLSPEC_XFGVIRT(ILocation, SetDesiredAccuracy)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetDesiredAccuracy )( 
             __RPC__in ILocation * This,
             /* [in] */ __RPC__in REFIID reportType,
             /* [in] */ enum LOCATION_DESIRED_ACCURACY desiredAccuracy);
         
+        DECLSPEC_XFGVIRT(ILocation, RequestPermissions)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RequestPermissions )( 
             __RPC__in ILocation * This,
             /* [unique][in] */ __RPC__in_opt HWND hParent,
@@ -890,21 +940,26 @@ EXTERN_C const IID IID_ILocationPower;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ILocationPower * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ILocationPower * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ILocationPower * This);
         
+        DECLSPEC_XFGVIRT(ILocationPower, Connect)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Connect )( 
             __RPC__in ILocationPower * This);
         
+        DECLSPEC_XFGVIRT(ILocationPower, Disconnect)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Disconnect )( 
             __RPC__in ILocationPower * This);
         
@@ -980,23 +1035,28 @@ EXTERN_C const IID IID_IDefaultLocation;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDefaultLocation * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDefaultLocation * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDefaultLocation * This);
         
+        DECLSPEC_XFGVIRT(IDefaultLocation, SetReport)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetReport )( 
             __RPC__in IDefaultLocation * This,
             /* [in] */ __RPC__in REFIID reportType,
             /* [in] */ __RPC__in_opt ILocationReport *pLocationReport);
         
+        DECLSPEC_XFGVIRT(IDefaultLocation, GetReport)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetReport )( 
             __RPC__in IDefaultLocation * This,
             /* [in] */ __RPC__in REFIID reportType,
@@ -1074,23 +1134,28 @@ EXTERN_C const IID IID_ILocationEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ILocationEvents * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ILocationEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ILocationEvents * This);
         
+        DECLSPEC_XFGVIRT(ILocationEvents, OnLocationChanged)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *OnLocationChanged )( 
             __RPC__in ILocationEvents * This,
             /* [in] */ __RPC__in REFIID reportType,
             /* [in] */ __RPC__in_opt ILocationReport *pLocationReport);
         
+        DECLSPEC_XFGVIRT(ILocationEvents, OnStatusChanged)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *OnStatusChanged )( 
             __RPC__in ILocationEvents * This,
             /* [in] */ __RPC__in REFIID reportType,
@@ -1178,28 +1243,34 @@ EXTERN_C const IID IID_IDispLatLongReport;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDispLatLongReport * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDispLatLongReport * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDispLatLongReport * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDispLatLongReport * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDispLatLongReport * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDispLatLongReport * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1208,6 +1279,7 @@ EXTERN_C const IID IID_IDispLatLongReport;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IDispLatLongReport * This,
             /* [annotation][in] */ 
@@ -1227,26 +1299,32 @@ EXTERN_C const IID IID_IDispLatLongReport;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IDispLatLongReport, get_Latitude)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Latitude )( 
             __RPC__in IDispLatLongReport * This,
             /* [retval][out] */ __RPC__out DOUBLE *pVal);
         
+        DECLSPEC_XFGVIRT(IDispLatLongReport, get_Longitude)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Longitude )( 
             __RPC__in IDispLatLongReport * This,
             /* [retval][out] */ __RPC__out DOUBLE *pVal);
         
+        DECLSPEC_XFGVIRT(IDispLatLongReport, get_ErrorRadius)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ErrorRadius )( 
             __RPC__in IDispLatLongReport * This,
             /* [retval][out] */ __RPC__out DOUBLE *pVal);
         
+        DECLSPEC_XFGVIRT(IDispLatLongReport, get_Altitude)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Altitude )( 
             __RPC__in IDispLatLongReport * This,
             /* [retval][out] */ __RPC__out DOUBLE *pVal);
         
+        DECLSPEC_XFGVIRT(IDispLatLongReport, get_AltitudeError)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AltitudeError )( 
             __RPC__in IDispLatLongReport * This,
             /* [retval][out] */ __RPC__out DOUBLE *pVal);
         
+        DECLSPEC_XFGVIRT(IDispLatLongReport, get_Timestamp)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Timestamp )( 
             __RPC__in IDispLatLongReport * This,
             /* [retval][out] */ __RPC__out DATE *pVal);
@@ -1364,28 +1442,34 @@ EXTERN_C const IID IID_IDispCivicAddressReport;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDispCivicAddressReport * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDispCivicAddressReport * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDispCivicAddressReport * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDispCivicAddressReport * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDispCivicAddressReport * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDispCivicAddressReport * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1394,6 +1478,7 @@ EXTERN_C const IID IID_IDispCivicAddressReport;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IDispCivicAddressReport * This,
             /* [annotation][in] */ 
@@ -1413,34 +1498,42 @@ EXTERN_C const IID IID_IDispCivicAddressReport;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IDispCivicAddressReport, get_AddressLine1)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AddressLine1 )( 
             __RPC__in IDispCivicAddressReport * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pAddress1);
         
+        DECLSPEC_XFGVIRT(IDispCivicAddressReport, get_AddressLine2)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AddressLine2 )( 
             __RPC__in IDispCivicAddressReport * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pAddress2);
         
+        DECLSPEC_XFGVIRT(IDispCivicAddressReport, get_City)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_City )( 
             __RPC__in IDispCivicAddressReport * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pCity);
         
+        DECLSPEC_XFGVIRT(IDispCivicAddressReport, get_StateProvince)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StateProvince )( 
             __RPC__in IDispCivicAddressReport * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pStateProvince);
         
+        DECLSPEC_XFGVIRT(IDispCivicAddressReport, get_PostalCode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PostalCode )( 
             __RPC__in IDispCivicAddressReport * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pPostalCode);
         
+        DECLSPEC_XFGVIRT(IDispCivicAddressReport, get_CountryRegion)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CountryRegion )( 
             __RPC__in IDispCivicAddressReport * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pCountryRegion);
         
+        DECLSPEC_XFGVIRT(IDispCivicAddressReport, get_DetailLevel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DetailLevel )( 
             __RPC__in IDispCivicAddressReport * This,
             /* [retval][out] */ __RPC__out ULONG *pDetailLevel);
         
+        DECLSPEC_XFGVIRT(IDispCivicAddressReport, get_Timestamp)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Timestamp )( 
             __RPC__in IDispCivicAddressReport * This,
             /* [retval][out] */ __RPC__out DATE *pVal);
@@ -1563,28 +1656,34 @@ EXTERN_C const IID IID_ILocationReportFactory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ILocationReportFactory * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ILocationReportFactory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ILocationReportFactory * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ILocationReportFactory * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ILocationReportFactory * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ILocationReportFactory * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1593,6 +1692,7 @@ EXTERN_C const IID IID_ILocationReportFactory;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ILocationReportFactory * This,
             /* [annotation][in] */ 
@@ -1612,33 +1712,41 @@ EXTERN_C const IID IID_ILocationReportFactory;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ILocationReportFactory, ListenForReports)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ListenForReports )( 
             __RPC__in ILocationReportFactory * This,
             /* [defaultvalue][in] */ ULONG requestedReportInterval);
         
+        DECLSPEC_XFGVIRT(ILocationReportFactory, StopListeningForReports)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *StopListeningForReports )( 
             __RPC__in ILocationReportFactory * This);
         
+        DECLSPEC_XFGVIRT(ILocationReportFactory, get_Status)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
             __RPC__in ILocationReportFactory * This,
             /* [retval][out] */ __RPC__out ULONG *pVal);
         
+        DECLSPEC_XFGVIRT(ILocationReportFactory, get_ReportInterval)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReportInterval )( 
             __RPC__in ILocationReportFactory * This,
             /* [retval][out] */ __RPC__out ULONG *pMilliseconds);
         
+        DECLSPEC_XFGVIRT(ILocationReportFactory, put_ReportInterval)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ReportInterval )( 
             __RPC__in ILocationReportFactory * This,
             /* [in] */ ULONG millisecondsRequested);
         
+        DECLSPEC_XFGVIRT(ILocationReportFactory, get_DesiredAccuracy)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DesiredAccuracy )( 
             __RPC__in ILocationReportFactory * This,
             /* [retval][out] */ __RPC__out ULONG *pDesiredAccuracy);
         
+        DECLSPEC_XFGVIRT(ILocationReportFactory, put_DesiredAccuracy)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DesiredAccuracy )( 
             __RPC__in ILocationReportFactory * This,
             /* [in] */ ULONG desiredAccuracy);
         
+        DECLSPEC_XFGVIRT(ILocationReportFactory, RequestPermissions)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RequestPermissions )( 
             __RPC__in ILocationReportFactory * This,
             /* [in] */ __RPC__in ULONG *hWnd);
@@ -1741,28 +1849,34 @@ EXTERN_C const IID IID_ILatLongReportFactory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ILatLongReportFactory * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ILatLongReportFactory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ILatLongReportFactory * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ILatLongReportFactory * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ILatLongReportFactory * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ILatLongReportFactory * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1771,6 +1885,7 @@ EXTERN_C const IID IID_ILatLongReportFactory;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ILatLongReportFactory * This,
             /* [annotation][in] */ 
@@ -1790,37 +1905,46 @@ EXTERN_C const IID IID_ILatLongReportFactory;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ILocationReportFactory, ListenForReports)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ListenForReports )( 
             __RPC__in ILatLongReportFactory * This,
             /* [defaultvalue][in] */ ULONG requestedReportInterval);
         
+        DECLSPEC_XFGVIRT(ILocationReportFactory, StopListeningForReports)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *StopListeningForReports )( 
             __RPC__in ILatLongReportFactory * This);
         
+        DECLSPEC_XFGVIRT(ILocationReportFactory, get_Status)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
             __RPC__in ILatLongReportFactory * This,
             /* [retval][out] */ __RPC__out ULONG *pVal);
         
+        DECLSPEC_XFGVIRT(ILocationReportFactory, get_ReportInterval)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReportInterval )( 
             __RPC__in ILatLongReportFactory * This,
             /* [retval][out] */ __RPC__out ULONG *pMilliseconds);
         
+        DECLSPEC_XFGVIRT(ILocationReportFactory, put_ReportInterval)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ReportInterval )( 
             __RPC__in ILatLongReportFactory * This,
             /* [in] */ ULONG millisecondsRequested);
         
+        DECLSPEC_XFGVIRT(ILocationReportFactory, get_DesiredAccuracy)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DesiredAccuracy )( 
             __RPC__in ILatLongReportFactory * This,
             /* [retval][out] */ __RPC__out ULONG *pDesiredAccuracy);
         
+        DECLSPEC_XFGVIRT(ILocationReportFactory, put_DesiredAccuracy)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DesiredAccuracy )( 
             __RPC__in ILatLongReportFactory * This,
             /* [in] */ ULONG desiredAccuracy);
         
+        DECLSPEC_XFGVIRT(ILocationReportFactory, RequestPermissions)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RequestPermissions )( 
             __RPC__in ILatLongReportFactory * This,
             /* [in] */ __RPC__in ULONG *hWnd);
         
+        DECLSPEC_XFGVIRT(ILatLongReportFactory, get_LatLongReport)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LatLongReport )( 
             __RPC__in ILatLongReportFactory * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispLatLongReport **pVal);
@@ -1927,28 +2051,34 @@ EXTERN_C const IID IID_ICivicAddressReportFactory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICivicAddressReportFactory * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICivicAddressReportFactory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICivicAddressReportFactory * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICivicAddressReportFactory * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICivicAddressReportFactory * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICivicAddressReportFactory * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1957,6 +2087,7 @@ EXTERN_C const IID IID_ICivicAddressReportFactory;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICivicAddressReportFactory * This,
             /* [annotation][in] */ 
@@ -1976,37 +2107,46 @@ EXTERN_C const IID IID_ICivicAddressReportFactory;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ILocationReportFactory, ListenForReports)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ListenForReports )( 
             __RPC__in ICivicAddressReportFactory * This,
             /* [defaultvalue][in] */ ULONG requestedReportInterval);
         
+        DECLSPEC_XFGVIRT(ILocationReportFactory, StopListeningForReports)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *StopListeningForReports )( 
             __RPC__in ICivicAddressReportFactory * This);
         
+        DECLSPEC_XFGVIRT(ILocationReportFactory, get_Status)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
             __RPC__in ICivicAddressReportFactory * This,
             /* [retval][out] */ __RPC__out ULONG *pVal);
         
+        DECLSPEC_XFGVIRT(ILocationReportFactory, get_ReportInterval)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReportInterval )( 
             __RPC__in ICivicAddressReportFactory * This,
             /* [retval][out] */ __RPC__out ULONG *pMilliseconds);
         
+        DECLSPEC_XFGVIRT(ILocationReportFactory, put_ReportInterval)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ReportInterval )( 
             __RPC__in ICivicAddressReportFactory * This,
             /* [in] */ ULONG millisecondsRequested);
         
+        DECLSPEC_XFGVIRT(ILocationReportFactory, get_DesiredAccuracy)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DesiredAccuracy )( 
             __RPC__in ICivicAddressReportFactory * This,
             /* [retval][out] */ __RPC__out ULONG *pDesiredAccuracy);
         
+        DECLSPEC_XFGVIRT(ILocationReportFactory, put_DesiredAccuracy)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DesiredAccuracy )( 
             __RPC__in ICivicAddressReportFactory * This,
             /* [in] */ ULONG desiredAccuracy);
         
+        DECLSPEC_XFGVIRT(ILocationReportFactory, RequestPermissions)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RequestPermissions )( 
             __RPC__in ICivicAddressReportFactory * This,
             /* [in] */ __RPC__in ULONG *hWnd);
         
+        DECLSPEC_XFGVIRT(ICivicAddressReportFactory, get_CivicAddressReport)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CivicAddressReport )( 
             __RPC__in ICivicAddressReportFactory * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispCivicAddressReport **pVal);
@@ -2150,28 +2290,34 @@ EXTERN_C const IID DIID__ILatLongReportFactoryEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _ILatLongReportFactoryEvents * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in _ILatLongReportFactoryEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in _ILatLongReportFactoryEvents * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in _ILatLongReportFactoryEvents * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in _ILatLongReportFactoryEvents * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in _ILatLongReportFactoryEvents * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2180,6 +2326,7 @@ EXTERN_C const IID DIID__ILatLongReportFactoryEvents;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             _ILatLongReportFactoryEvents * This,
             /* [annotation][in] */ 
@@ -2265,28 +2412,34 @@ EXTERN_C const IID DIID__ICivicAddressReportFactoryEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _ICivicAddressReportFactoryEvents * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in _ICivicAddressReportFactoryEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in _ICivicAddressReportFactoryEvents * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in _ICivicAddressReportFactoryEvents * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in _ICivicAddressReportFactoryEvents * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in _ICivicAddressReportFactoryEvents * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2295,6 +2448,7 @@ EXTERN_C const IID DIID__ICivicAddressReportFactoryEvents;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             _ICivicAddressReportFactoryEvents * This,
             /* [annotation][in] */ 

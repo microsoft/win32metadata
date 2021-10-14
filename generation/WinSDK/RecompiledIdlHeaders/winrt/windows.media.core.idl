@@ -323,6 +323,10 @@ namespace Windows
 
             typedef enum TimedMetadataTrackErrorCode TimedMetadataTrackErrorCode;
 
+            typedef enum TimedTextBoutenPosition TimedTextBoutenPosition;
+
+            typedef enum TimedTextBoutenType TimedTextBoutenType;
+
             typedef enum TimedTextDisplayAlignment TimedTextDisplayAlignment;
 
             typedef enum TimedTextFlowDirection TimedTextFlowDirection;
@@ -330,6 +334,12 @@ namespace Windows
             typedef enum TimedTextFontStyle TimedTextFontStyle;
 
             typedef enum TimedTextLineAlignment TimedTextLineAlignment;
+
+            typedef enum TimedTextRubyAlign TimedTextRubyAlign;
+
+            typedef enum TimedTextRubyPosition TimedTextRubyPosition;
+
+            typedef enum TimedTextRubyReserve TimedTextRubyReserve;
 
             typedef enum TimedTextScrollMode TimedTextScrollMode;
 
@@ -527,11 +537,15 @@ namespace Windows
 
             interface ITimedMetadataTrackProvider;
 
+            interface ITimedTextBouten;
+
             interface ITimedTextCue;
 
             interface ITimedTextLine;
 
             interface ITimedTextRegion;
+
+            interface ITimedTextRuby;
 
             interface ITimedTextSource;
 
@@ -544,6 +558,8 @@ namespace Windows
             interface ITimedTextStyle;
 
             interface ITimedTextStyle2;
+
+            interface ITimedTextStyle3;
 
             interface ITimedTextSubformat;
 
@@ -673,11 +689,15 @@ namespace Windows
 
             runtimeclass TimedMetadataTrackFailedEventArgs;
 
+            runtimeclass TimedTextBouten;
+
             runtimeclass TimedTextCue;
 
             runtimeclass TimedTextLine;
 
             runtimeclass TimedTextRegion;
+
+            runtimeclass TimedTextRuby;
 
             runtimeclass TimedTextSource;
 
@@ -1031,6 +1051,27 @@ namespace Windows
                 InternalError   = 3
             };
 
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            enum TimedTextBoutenPosition
+            {
+                Before  = 0,
+                After   = 1,
+                Outside = 2
+            };
+
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            enum TimedTextBoutenType
+            {
+                None         = 0,
+                Auto         = 1,
+                FilledCircle = 2,
+                OpenCircle   = 3,
+                FilledDot    = 4,
+                OpenDot      = 5,
+                FilledSesame = 6,
+                OpenSesame   = 7
+            };
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             enum TimedTextDisplayAlignment
             {
@@ -1060,6 +1101,35 @@ namespace Windows
                 Start  = 0,
                 End    = 1,
                 Center = 2
+            };
+
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            enum TimedTextRubyAlign
+            {
+                Center       = 0,
+                Start        = 1,
+                End          = 2,
+                SpaceAround  = 3,
+                SpaceBetween = 4,
+                WithBase     = 5
+            };
+
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            enum TimedTextRubyPosition
+            {
+                Before  = 0,
+                After   = 1,
+                Outside = 2
+            };
+
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            enum TimedTextRubyReserve
+            {
+                None    = 0,
+                Before  = 1,
+                After   = 2,
+                Both    = 3,
+                Outside = 4
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -2159,6 +2229,19 @@ namespace Windows
                 [propget] HRESULT TimedMetadataTracks([out] [retval] Windows.Foundation.Collections.IVectorView<Windows.Media.Core.TimedMetadataTrack*>** value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [exclusiveto(Windows.Media.Core.TimedTextBouten)]
+            [uuid(D9062783-5597-5092-820C-8F738E0F774A)]
+            interface ITimedTextBouten : IInspectable
+            {
+                [propget] HRESULT Type([out] [retval] Windows.Media.Core.TimedTextBoutenType* value);
+                [propput] HRESULT Type([in] Windows.Media.Core.TimedTextBoutenType value);
+                [propget] HRESULT Color([out] [retval] Windows.UI.Color* value);
+                [propput] HRESULT Color([in] Windows.UI.Color value);
+                [propget] HRESULT Position([out] [retval] Windows.Media.Core.TimedTextBoutenPosition* value);
+                [propput] HRESULT Position([in] Windows.Media.Core.TimedTextBoutenPosition value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [exclusiveto(Windows.Media.Core.TimedTextCue)]
             [uuid(51C79E51-3B86-494D-B359-BB2EA7ACA9A9)]
@@ -2212,6 +2295,21 @@ namespace Windows
                 [propput] HRESULT ZIndex([in] INT32 value);
                 [propget] HRESULT ScrollMode([out] [retval] Windows.Media.Core.TimedTextScrollMode* value);
                 [propput] HRESULT ScrollMode([in] Windows.Media.Core.TimedTextScrollMode value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [exclusiveto(Windows.Media.Core.TimedTextRuby)]
+            [uuid(10335C29-5B3C-5693-9959-D05A0BD24628)]
+            interface ITimedTextRuby : IInspectable
+            {
+                [propget] HRESULT Text([out] [retval] HSTRING* value);
+                [propput] HRESULT Text([in] HSTRING value);
+                [propget] HRESULT Position([out] [retval] Windows.Media.Core.TimedTextRubyPosition* value);
+                [propput] HRESULT Position([in] Windows.Media.Core.TimedTextRubyPosition value);
+                [propget] HRESULT Align([out] [retval] Windows.Media.Core.TimedTextRubyAlign* value);
+                [propput] HRESULT Align([in] Windows.Media.Core.TimedTextRubyAlign value);
+                [propget] HRESULT Reserve([out] [retval] Windows.Media.Core.TimedTextRubyReserve* value);
+                [propput] HRESULT Reserve([in] Windows.Media.Core.TimedTextRubyReserve value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -2298,6 +2396,19 @@ namespace Windows
                 [propput] HRESULT IsLineThroughEnabled([in] boolean value);
                 [propget] HRESULT IsOverlineEnabled([out] [retval] boolean* value);
                 [propput] HRESULT IsOverlineEnabled([in] boolean value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [exclusiveto(Windows.Media.Core.TimedTextStyle)]
+            [uuid(F803F93B-3E99-595E-BBB7-78A2FA13C270)]
+            interface ITimedTextStyle3 : IInspectable
+            {
+                [propget] HRESULT Ruby([out] [retval] Windows.Media.Core.TimedTextRuby** value);
+                [propget] HRESULT Bouten([out] [retval] Windows.Media.Core.TimedTextBouten** value);
+                [propget] HRESULT IsTextCombined([out] [retval] boolean* value);
+                [propput] HRESULT IsTextCombined([in] boolean value);
+                [propget] HRESULT FontAngleInDegrees([out] [retval] DOUBLE* value);
+                [propput] HRESULT FontAngleInDegrees([in] DOUBLE value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -2887,6 +2998,13 @@ namespace Windows
                 [default] interface Windows.Media.Core.ITimedMetadataTrackFailedEventArgs;
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass TimedTextBouten
+            {
+                [default] interface Windows.Media.Core.ITimedTextBouten;
+            }
+
             [activatable(Windows.Foundation.UniversalApiContract, 1.0)]
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [marshaling_behavior(agile)]
@@ -2915,6 +3033,13 @@ namespace Windows
                 [default] interface Windows.Media.Core.ITimedTextRegion;
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass TimedTextRuby
+            {
+                [default] interface Windows.Media.Core.ITimedTextRuby;
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [marshaling_behavior(agile)]
             [static(Windows.Media.Core.ITimedTextSourceStatics, Windows.Foundation.UniversalApiContract, 1.0)]
@@ -2941,6 +3066,7 @@ namespace Windows
             {
                 [default] interface Windows.Media.Core.ITimedTextStyle;
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)] interface Windows.Media.Core.ITimedTextStyle2;
+                [contract(Windows.Foundation.UniversalApiContract, 12.0)] interface Windows.Media.Core.ITimedTextStyle3;
             }
 
             [activatable(Windows.Foundation.UniversalApiContract, 1.0)]

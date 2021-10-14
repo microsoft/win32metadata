@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -1374,22 +1382,27 @@ EXTERN_C const IID IID_ISpNotifySource;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpNotifySource * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpNotifySource * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpNotifySource * This);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, SetNotifySink)
         HRESULT ( STDMETHODCALLTYPE *SetNotifySink )( 
             __RPC__in ISpNotifySource * This,
             /* [in] */ __RPC__in_opt ISpNotifySink *pNotifySink);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, SetNotifyWindowMessage)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetNotifyWindowMessage )( 
             ISpNotifySource * This,
             /* [in] */ HWND hWnd,
@@ -1397,25 +1410,30 @@ EXTERN_C const IID IID_ISpNotifySource;
             /* [in] */ WPARAM wParam,
             /* [in] */ LPARAM lParam);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, SetNotifyCallbackFunction)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetNotifyCallbackFunction )( 
             ISpNotifySource * This,
             /* [in] */ SPNOTIFYCALLBACK *pfnCallback,
             /* [in] */ WPARAM wParam,
             /* [in] */ LPARAM lParam);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, SetNotifyCallbackInterface)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetNotifyCallbackInterface )( 
             ISpNotifySource * This,
             /* [in] */ ISpNotifyCallback *pSpCallback,
             /* [in] */ WPARAM wParam,
             /* [in] */ LPARAM lParam);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, SetNotifyWin32Event)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetNotifyWin32Event )( 
             ISpNotifySource * This);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, WaitForNotifyEvent)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *WaitForNotifyEvent )( 
             ISpNotifySource * This,
             /* [in] */ DWORD dwMilliseconds);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, GetNotifyEventHandle)
         /* [local] */ HANDLE ( STDMETHODCALLTYPE *GetNotifyEventHandle )( 
             ISpNotifySource * This);
         
@@ -1500,18 +1518,22 @@ EXTERN_C const IID IID_ISpNotifySink;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpNotifySink * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpNotifySink * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpNotifySink * This);
         
+        DECLSPEC_XFGVIRT(ISpNotifySink, Notify)
         HRESULT ( STDMETHODCALLTYPE *Notify )( 
             __RPC__in ISpNotifySink * This);
         
@@ -1601,21 +1623,26 @@ EXTERN_C const IID IID_ISpNotifyTranslator;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpNotifyTranslator * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpNotifyTranslator * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISpNotifyTranslator * This);
         
+        DECLSPEC_XFGVIRT(ISpNotifySink, Notify)
         HRESULT ( STDMETHODCALLTYPE *Notify )( 
             ISpNotifyTranslator * This);
         
+        DECLSPEC_XFGVIRT(ISpNotifyTranslator, InitWindowMessage)
         HRESULT ( STDMETHODCALLTYPE *InitWindowMessage )( 
             ISpNotifyTranslator * This,
             /* [in] */ HWND hWnd,
@@ -1623,27 +1650,32 @@ EXTERN_C const IID IID_ISpNotifyTranslator;
             /* [in] */ WPARAM wParam,
             /* [in] */ LPARAM lParam);
         
+        DECLSPEC_XFGVIRT(ISpNotifyTranslator, InitCallback)
         HRESULT ( STDMETHODCALLTYPE *InitCallback )( 
             ISpNotifyTranslator * This,
             /* [in] */ SPNOTIFYCALLBACK *pfnCallback,
             /* [in] */ WPARAM wParam,
             /* [in] */ LPARAM lParam);
         
+        DECLSPEC_XFGVIRT(ISpNotifyTranslator, InitSpNotifyCallback)
         HRESULT ( STDMETHODCALLTYPE *InitSpNotifyCallback )( 
             ISpNotifyTranslator * This,
             /* [in] */ ISpNotifyCallback *pSpCallback,
             /* [in] */ WPARAM wParam,
             /* [in] */ LPARAM lParam);
         
+        DECLSPEC_XFGVIRT(ISpNotifyTranslator, InitWin32Event)
         HRESULT ( STDMETHODCALLTYPE *InitWin32Event )( 
             ISpNotifyTranslator * This,
             /* [in] */ HANDLE hEvent,
             /* [in] */ BOOL fCloseHandleOnRelease);
         
+        DECLSPEC_XFGVIRT(ISpNotifyTranslator, Wait)
         HRESULT ( STDMETHODCALLTYPE *Wait )( 
             ISpNotifyTranslator * This,
             /* [in] */ DWORD dwMilliseconds);
         
+        DECLSPEC_XFGVIRT(ISpNotifyTranslator, GetEventHandle)
         HANDLE ( STDMETHODCALLTYPE *GetEventHandle )( 
             ISpNotifyTranslator * This);
         
@@ -1782,36 +1814,43 @@ EXTERN_C const IID IID_ISpDataKey;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpDataKey * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpDataKey * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISpDataKey * This);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, SetData)
         HRESULT ( STDMETHODCALLTYPE *SetData )( 
             ISpDataKey * This,
             /* [in] */ LPCWSTR pszValueName,
             /* [in] */ ULONG cbData,
             /* [in] */ const BYTE *pData);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, GetData)
         HRESULT ( STDMETHODCALLTYPE *GetData )( 
             ISpDataKey * This,
             /* [in] */ LPCWSTR pszValueName,
             /* [in] */ ULONG *pcbData,
             /* [out] */ BYTE *pData);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, SetStringValue)
         HRESULT ( STDMETHODCALLTYPE *SetStringValue )( 
             ISpDataKey * This,
             /* [in][annotation] */ 
             _In_opt_  LPCWSTR pszValueName,
             /* [in] */ LPCWSTR pszValue);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, GetStringValue)
         HRESULT ( STDMETHODCALLTYPE *GetStringValue )( 
             ISpDataKey * This,
             /* [in][annotation] */ 
@@ -1819,42 +1858,50 @@ EXTERN_C const IID IID_ISpDataKey;
             /* [out][annotation] */ 
             _Outptr_  LPWSTR *ppszValue);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, SetDWORD)
         HRESULT ( STDMETHODCALLTYPE *SetDWORD )( 
             ISpDataKey * This,
             /* [in] */ LPCWSTR pszValueName,
             /* [in] */ DWORD dwValue);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, GetDWORD)
         HRESULT ( STDMETHODCALLTYPE *GetDWORD )( 
             ISpDataKey * This,
             /* [in] */ LPCWSTR pszValueName,
             /* [out] */ DWORD *pdwValue);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, OpenKey)
         HRESULT ( STDMETHODCALLTYPE *OpenKey )( 
             ISpDataKey * This,
             /* [in] */ LPCWSTR pszSubKeyName,
             /* [out][annotation] */ 
             _Outptr_  ISpDataKey **ppSubKey);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, CreateKey)
         HRESULT ( STDMETHODCALLTYPE *CreateKey )( 
             ISpDataKey * This,
             /* [in] */ LPCWSTR pszSubKey,
             /* [out][annotation] */ 
             _Outptr_  ISpDataKey **ppSubKey);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, DeleteKey)
         HRESULT ( STDMETHODCALLTYPE *DeleteKey )( 
             ISpDataKey * This,
             /* [in] */ LPCWSTR pszSubKey);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, DeleteValue)
         HRESULT ( STDMETHODCALLTYPE *DeleteValue )( 
             ISpDataKey * This,
             /* [in] */ LPCWSTR pszValueName);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, EnumKeys)
         HRESULT ( STDMETHODCALLTYPE *EnumKeys )( 
             ISpDataKey * This,
             /* [in] */ ULONG Index,
             /* [out][annotation] */ 
             _Outptr_  LPWSTR *ppszSubKeyName);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, EnumValues)
         HRESULT ( STDMETHODCALLTYPE *EnumValues )( 
             ISpDataKey * This,
             /* [in] */ ULONG Index,
@@ -1959,36 +2006,43 @@ EXTERN_C const IID IID_ISpRegDataKey;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpRegDataKey * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpRegDataKey * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpRegDataKey * This);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, SetData)
         HRESULT ( STDMETHODCALLTYPE *SetData )( 
             __RPC__in ISpRegDataKey * This,
             /* [in] */ __RPC__in LPCWSTR pszValueName,
             /* [in] */ ULONG cbData,
             /* [in] */ __RPC__in const BYTE *pData);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, GetData)
         HRESULT ( STDMETHODCALLTYPE *GetData )( 
             __RPC__in ISpRegDataKey * This,
             /* [in] */ __RPC__in LPCWSTR pszValueName,
             /* [in] */ __RPC__in ULONG *pcbData,
             /* [out] */ __RPC__out BYTE *pData);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, SetStringValue)
         HRESULT ( STDMETHODCALLTYPE *SetStringValue )( 
             __RPC__in ISpRegDataKey * This,
             /* [in][annotation] */ 
             _In_opt_  LPCWSTR pszValueName,
             /* [in] */ __RPC__in LPCWSTR pszValue);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, GetStringValue)
         HRESULT ( STDMETHODCALLTYPE *GetStringValue )( 
             __RPC__in ISpRegDataKey * This,
             /* [in][annotation] */ 
@@ -1996,48 +2050,57 @@ EXTERN_C const IID IID_ISpRegDataKey;
             /* [out][annotation] */ 
             _Outptr_  LPWSTR *ppszValue);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, SetDWORD)
         HRESULT ( STDMETHODCALLTYPE *SetDWORD )( 
             __RPC__in ISpRegDataKey * This,
             /* [in] */ __RPC__in LPCWSTR pszValueName,
             /* [in] */ DWORD dwValue);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, GetDWORD)
         HRESULT ( STDMETHODCALLTYPE *GetDWORD )( 
             __RPC__in ISpRegDataKey * This,
             /* [in] */ __RPC__in LPCWSTR pszValueName,
             /* [out] */ __RPC__out DWORD *pdwValue);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, OpenKey)
         HRESULT ( STDMETHODCALLTYPE *OpenKey )( 
             __RPC__in ISpRegDataKey * This,
             /* [in] */ __RPC__in LPCWSTR pszSubKeyName,
             /* [out][annotation] */ 
             _Outptr_  ISpDataKey **ppSubKey);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, CreateKey)
         HRESULT ( STDMETHODCALLTYPE *CreateKey )( 
             __RPC__in ISpRegDataKey * This,
             /* [in] */ __RPC__in LPCWSTR pszSubKey,
             /* [out][annotation] */ 
             _Outptr_  ISpDataKey **ppSubKey);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, DeleteKey)
         HRESULT ( STDMETHODCALLTYPE *DeleteKey )( 
             __RPC__in ISpRegDataKey * This,
             /* [in] */ __RPC__in LPCWSTR pszSubKey);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, DeleteValue)
         HRESULT ( STDMETHODCALLTYPE *DeleteValue )( 
             __RPC__in ISpRegDataKey * This,
             /* [in] */ __RPC__in LPCWSTR pszValueName);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, EnumKeys)
         HRESULT ( STDMETHODCALLTYPE *EnumKeys )( 
             __RPC__in ISpRegDataKey * This,
             /* [in] */ ULONG Index,
             /* [out][annotation] */ 
             _Outptr_  LPWSTR *ppszSubKeyName);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, EnumValues)
         HRESULT ( STDMETHODCALLTYPE *EnumValues )( 
             __RPC__in ISpRegDataKey * This,
             /* [in] */ ULONG Index,
             /* [out][annotation] */ 
             _Outptr_  LPWSTR *ppszValueName);
         
+        DECLSPEC_XFGVIRT(ISpRegDataKey, SetKey)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetKey )( 
             ISpRegDataKey * This,
             /* [in] */ HKEY hkey,
@@ -2168,36 +2231,43 @@ EXTERN_C const IID IID_ISpObjectTokenCategory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpObjectTokenCategory * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpObjectTokenCategory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISpObjectTokenCategory * This);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, SetData)
         HRESULT ( STDMETHODCALLTYPE *SetData )( 
             ISpObjectTokenCategory * This,
             /* [in] */ LPCWSTR pszValueName,
             /* [in] */ ULONG cbData,
             /* [in] */ const BYTE *pData);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, GetData)
         HRESULT ( STDMETHODCALLTYPE *GetData )( 
             ISpObjectTokenCategory * This,
             /* [in] */ LPCWSTR pszValueName,
             /* [in] */ ULONG *pcbData,
             /* [out] */ BYTE *pData);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, SetStringValue)
         HRESULT ( STDMETHODCALLTYPE *SetStringValue )( 
             ISpObjectTokenCategory * This,
             /* [in][annotation] */ 
             _In_opt_  LPCWSTR pszValueName,
             /* [in] */ LPCWSTR pszValue);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, GetStringValue)
         HRESULT ( STDMETHODCALLTYPE *GetStringValue )( 
             ISpObjectTokenCategory * This,
             /* [in][annotation] */ 
@@ -2205,64 +2275,76 @@ EXTERN_C const IID IID_ISpObjectTokenCategory;
             /* [out][annotation] */ 
             _Outptr_  LPWSTR *ppszValue);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, SetDWORD)
         HRESULT ( STDMETHODCALLTYPE *SetDWORD )( 
             ISpObjectTokenCategory * This,
             /* [in] */ LPCWSTR pszValueName,
             /* [in] */ DWORD dwValue);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, GetDWORD)
         HRESULT ( STDMETHODCALLTYPE *GetDWORD )( 
             ISpObjectTokenCategory * This,
             /* [in] */ LPCWSTR pszValueName,
             /* [out] */ DWORD *pdwValue);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, OpenKey)
         HRESULT ( STDMETHODCALLTYPE *OpenKey )( 
             ISpObjectTokenCategory * This,
             /* [in] */ LPCWSTR pszSubKeyName,
             /* [out][annotation] */ 
             _Outptr_  ISpDataKey **ppSubKey);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, CreateKey)
         HRESULT ( STDMETHODCALLTYPE *CreateKey )( 
             ISpObjectTokenCategory * This,
             /* [in] */ LPCWSTR pszSubKey,
             /* [out][annotation] */ 
             _Outptr_  ISpDataKey **ppSubKey);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, DeleteKey)
         HRESULT ( STDMETHODCALLTYPE *DeleteKey )( 
             ISpObjectTokenCategory * This,
             /* [in] */ LPCWSTR pszSubKey);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, DeleteValue)
         HRESULT ( STDMETHODCALLTYPE *DeleteValue )( 
             ISpObjectTokenCategory * This,
             /* [in] */ LPCWSTR pszValueName);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, EnumKeys)
         HRESULT ( STDMETHODCALLTYPE *EnumKeys )( 
             ISpObjectTokenCategory * This,
             /* [in] */ ULONG Index,
             /* [out][annotation] */ 
             _Outptr_  LPWSTR *ppszSubKeyName);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, EnumValues)
         HRESULT ( STDMETHODCALLTYPE *EnumValues )( 
             ISpObjectTokenCategory * This,
             /* [in] */ ULONG Index,
             /* [out][annotation] */ 
             _Outptr_  LPWSTR *ppszValueName);
         
+        DECLSPEC_XFGVIRT(ISpObjectTokenCategory, SetId)
         HRESULT ( STDMETHODCALLTYPE *SetId )( 
             ISpObjectTokenCategory * This,
             /* [in] */ LPCWSTR pszCategoryId,
             /* [in] */ BOOL fCreateIfNotExist);
         
+        DECLSPEC_XFGVIRT(ISpObjectTokenCategory, GetId)
         HRESULT ( STDMETHODCALLTYPE *GetId )( 
             ISpObjectTokenCategory * This,
             /* [out][annotation] */ 
             _Outptr_  LPWSTR *ppszCoMemCategoryId);
         
+        DECLSPEC_XFGVIRT(ISpObjectTokenCategory, GetDataKey)
         HRESULT ( STDMETHODCALLTYPE *GetDataKey )( 
             ISpObjectTokenCategory * This,
             /* [in] */ SPDATAKEYLOCATION spdkl,
             /* [out][annotation] */ 
             _Outptr_  ISpDataKey **ppDataKey);
         
+        DECLSPEC_XFGVIRT(ISpObjectTokenCategory, EnumTokens)
         HRESULT ( STDMETHODCALLTYPE *EnumTokens )( 
             ISpObjectTokenCategory * This,
             /* [string][in][annotation] */ 
@@ -2271,10 +2353,12 @@ EXTERN_C const IID IID_ISpObjectTokenCategory;
             _In_opt_  LPCWSTR pszOptAttribs,
             /* [out] */ IEnumSpObjectTokens **ppEnum);
         
+        DECLSPEC_XFGVIRT(ISpObjectTokenCategory, SetDefaultTokenId)
         HRESULT ( STDMETHODCALLTYPE *SetDefaultTokenId )( 
             ISpObjectTokenCategory * This,
             /* [in] */ LPCWSTR pszTokenId);
         
+        DECLSPEC_XFGVIRT(ISpObjectTokenCategory, GetDefaultTokenId)
         HRESULT ( STDMETHODCALLTYPE *GetDefaultTokenId )( 
             ISpObjectTokenCategory * This,
             /* [out][annotation] */ 
@@ -2452,36 +2536,43 @@ EXTERN_C const IID IID_ISpObjectToken;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpObjectToken * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpObjectToken * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISpObjectToken * This);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, SetData)
         HRESULT ( STDMETHODCALLTYPE *SetData )( 
             ISpObjectToken * This,
             /* [in] */ LPCWSTR pszValueName,
             /* [in] */ ULONG cbData,
             /* [in] */ const BYTE *pData);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, GetData)
         HRESULT ( STDMETHODCALLTYPE *GetData )( 
             ISpObjectToken * This,
             /* [in] */ LPCWSTR pszValueName,
             /* [in] */ ULONG *pcbData,
             /* [out] */ BYTE *pData);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, SetStringValue)
         HRESULT ( STDMETHODCALLTYPE *SetStringValue )( 
             ISpObjectToken * This,
             /* [in][annotation] */ 
             _In_opt_  LPCWSTR pszValueName,
             /* [in] */ LPCWSTR pszValue);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, GetStringValue)
         HRESULT ( STDMETHODCALLTYPE *GetStringValue )( 
             ISpObjectToken * This,
             /* [in][annotation] */ 
@@ -2489,48 +2580,57 @@ EXTERN_C const IID IID_ISpObjectToken;
             /* [out][annotation] */ 
             _Outptr_  LPWSTR *ppszValue);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, SetDWORD)
         HRESULT ( STDMETHODCALLTYPE *SetDWORD )( 
             ISpObjectToken * This,
             /* [in] */ LPCWSTR pszValueName,
             /* [in] */ DWORD dwValue);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, GetDWORD)
         HRESULT ( STDMETHODCALLTYPE *GetDWORD )( 
             ISpObjectToken * This,
             /* [in] */ LPCWSTR pszValueName,
             /* [out] */ DWORD *pdwValue);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, OpenKey)
         HRESULT ( STDMETHODCALLTYPE *OpenKey )( 
             ISpObjectToken * This,
             /* [in] */ LPCWSTR pszSubKeyName,
             /* [out][annotation] */ 
             _Outptr_  ISpDataKey **ppSubKey);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, CreateKey)
         HRESULT ( STDMETHODCALLTYPE *CreateKey )( 
             ISpObjectToken * This,
             /* [in] */ LPCWSTR pszSubKey,
             /* [out][annotation] */ 
             _Outptr_  ISpDataKey **ppSubKey);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, DeleteKey)
         HRESULT ( STDMETHODCALLTYPE *DeleteKey )( 
             ISpObjectToken * This,
             /* [in] */ LPCWSTR pszSubKey);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, DeleteValue)
         HRESULT ( STDMETHODCALLTYPE *DeleteValue )( 
             ISpObjectToken * This,
             /* [in] */ LPCWSTR pszValueName);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, EnumKeys)
         HRESULT ( STDMETHODCALLTYPE *EnumKeys )( 
             ISpObjectToken * This,
             /* [in] */ ULONG Index,
             /* [out][annotation] */ 
             _Outptr_  LPWSTR *ppszSubKeyName);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, EnumValues)
         HRESULT ( STDMETHODCALLTYPE *EnumValues )( 
             ISpObjectToken * This,
             /* [in] */ ULONG Index,
             /* [out][annotation] */ 
             _Outptr_  LPWSTR *ppszValueName);
         
+        DECLSPEC_XFGVIRT(ISpObjectToken, SetId)
         HRESULT ( STDMETHODCALLTYPE *SetId )( 
             ISpObjectToken * This,
             /* [annotation] */ 
@@ -2538,16 +2638,19 @@ EXTERN_C const IID IID_ISpObjectToken;
             /* [in] */ LPCWSTR pszTokenId,
             /* [in] */ BOOL fCreateIfNotExist);
         
+        DECLSPEC_XFGVIRT(ISpObjectToken, GetId)
         HRESULT ( STDMETHODCALLTYPE *GetId )( 
             ISpObjectToken * This,
             /* [out][annotation] */ 
             _Outptr_  LPWSTR *ppszCoMemTokenId);
         
+        DECLSPEC_XFGVIRT(ISpObjectToken, GetCategory)
         HRESULT ( STDMETHODCALLTYPE *GetCategory )( 
             ISpObjectToken * This,
             /* [out][annotation] */ 
             _Outptr_  ISpObjectTokenCategory **ppTokenCategory);
         
+        DECLSPEC_XFGVIRT(ISpObjectToken, CreateInstance)
         HRESULT ( STDMETHODCALLTYPE *CreateInstance )( 
             ISpObjectToken * This,
             /* [in] */ IUnknown *pUnkOuter,
@@ -2555,6 +2658,7 @@ EXTERN_C const IID IID_ISpObjectToken;
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ void **ppvObject);
         
+        DECLSPEC_XFGVIRT(ISpObjectToken, GetStorageFileName)
         HRESULT ( STDMETHODCALLTYPE *GetStorageFileName )( 
             ISpObjectToken * This,
             /* [in] */ REFCLSID clsidCaller,
@@ -2566,6 +2670,7 @@ EXTERN_C const IID IID_ISpObjectToken;
             /* [out][annotation] */ 
             _Outptr_  LPWSTR *ppszFilePath);
         
+        DECLSPEC_XFGVIRT(ISpObjectToken, RemoveStorageFileName)
         HRESULT ( STDMETHODCALLTYPE *RemoveStorageFileName )( 
             ISpObjectToken * This,
             /* [in] */ REFCLSID clsidCaller,
@@ -2573,11 +2678,13 @@ EXTERN_C const IID IID_ISpObjectToken;
             _In_  LPCWSTR pszKeyName,
             /* [in] */ BOOL fDeleteFile);
         
+        DECLSPEC_XFGVIRT(ISpObjectToken, Remove)
         HRESULT ( STDMETHODCALLTYPE *Remove )( 
             ISpObjectToken * This,
             /* [annotation] */ 
             _In_opt_  const CLSID *pclsidCaller);
         
+        DECLSPEC_XFGVIRT(ISpObjectToken, IsUISupported)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *IsUISupported )( 
             ISpObjectToken * This,
             /* [in] */ LPCWSTR pszTypeOfUI,
@@ -2586,6 +2693,7 @@ EXTERN_C const IID IID_ISpObjectToken;
             /* [in] */ IUnknown *punkObject,
             /* [out] */ BOOL *pfSupported);
         
+        DECLSPEC_XFGVIRT(ISpObjectToken, DisplayUI)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *DisplayUI )( 
             ISpObjectToken * This,
             /* [in] */ HWND hwndParent,
@@ -2595,6 +2703,7 @@ EXTERN_C const IID IID_ISpObjectToken;
             /* [in] */ ULONG cbExtraData,
             /* [in] */ IUnknown *punkObject);
         
+        DECLSPEC_XFGVIRT(ISpObjectToken, MatchesAttributes)
         HRESULT ( STDMETHODCALLTYPE *MatchesAttributes )( 
             ISpObjectToken * This,
             /* [in] */ LPCWSTR pszAttributes,
@@ -2730,36 +2839,43 @@ EXTERN_C const IID IID_ISpObjectTokenInit;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpObjectTokenInit * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpObjectTokenInit * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpObjectTokenInit * This);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, SetData)
         HRESULT ( STDMETHODCALLTYPE *SetData )( 
             __RPC__in ISpObjectTokenInit * This,
             /* [in] */ __RPC__in LPCWSTR pszValueName,
             /* [in] */ ULONG cbData,
             /* [in] */ __RPC__in const BYTE *pData);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, GetData)
         HRESULT ( STDMETHODCALLTYPE *GetData )( 
             __RPC__in ISpObjectTokenInit * This,
             /* [in] */ __RPC__in LPCWSTR pszValueName,
             /* [in] */ __RPC__in ULONG *pcbData,
             /* [out] */ __RPC__out BYTE *pData);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, SetStringValue)
         HRESULT ( STDMETHODCALLTYPE *SetStringValue )( 
             __RPC__in ISpObjectTokenInit * This,
             /* [in][annotation] */ 
             _In_opt_  LPCWSTR pszValueName,
             /* [in] */ __RPC__in LPCWSTR pszValue);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, GetStringValue)
         HRESULT ( STDMETHODCALLTYPE *GetStringValue )( 
             __RPC__in ISpObjectTokenInit * This,
             /* [in][annotation] */ 
@@ -2767,48 +2883,57 @@ EXTERN_C const IID IID_ISpObjectTokenInit;
             /* [out][annotation] */ 
             _Outptr_  LPWSTR *ppszValue);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, SetDWORD)
         HRESULT ( STDMETHODCALLTYPE *SetDWORD )( 
             __RPC__in ISpObjectTokenInit * This,
             /* [in] */ __RPC__in LPCWSTR pszValueName,
             /* [in] */ DWORD dwValue);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, GetDWORD)
         HRESULT ( STDMETHODCALLTYPE *GetDWORD )( 
             __RPC__in ISpObjectTokenInit * This,
             /* [in] */ __RPC__in LPCWSTR pszValueName,
             /* [out] */ __RPC__out DWORD *pdwValue);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, OpenKey)
         HRESULT ( STDMETHODCALLTYPE *OpenKey )( 
             __RPC__in ISpObjectTokenInit * This,
             /* [in] */ __RPC__in LPCWSTR pszSubKeyName,
             /* [out][annotation] */ 
             _Outptr_  ISpDataKey **ppSubKey);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, CreateKey)
         HRESULT ( STDMETHODCALLTYPE *CreateKey )( 
             __RPC__in ISpObjectTokenInit * This,
             /* [in] */ __RPC__in LPCWSTR pszSubKey,
             /* [out][annotation] */ 
             _Outptr_  ISpDataKey **ppSubKey);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, DeleteKey)
         HRESULT ( STDMETHODCALLTYPE *DeleteKey )( 
             __RPC__in ISpObjectTokenInit * This,
             /* [in] */ __RPC__in LPCWSTR pszSubKey);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, DeleteValue)
         HRESULT ( STDMETHODCALLTYPE *DeleteValue )( 
             __RPC__in ISpObjectTokenInit * This,
             /* [in] */ __RPC__in LPCWSTR pszValueName);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, EnumKeys)
         HRESULT ( STDMETHODCALLTYPE *EnumKeys )( 
             __RPC__in ISpObjectTokenInit * This,
             /* [in] */ ULONG Index,
             /* [out][annotation] */ 
             _Outptr_  LPWSTR *ppszSubKeyName);
         
+        DECLSPEC_XFGVIRT(ISpDataKey, EnumValues)
         HRESULT ( STDMETHODCALLTYPE *EnumValues )( 
             __RPC__in ISpObjectTokenInit * This,
             /* [in] */ ULONG Index,
             /* [out][annotation] */ 
             _Outptr_  LPWSTR *ppszValueName);
         
+        DECLSPEC_XFGVIRT(ISpObjectToken, SetId)
         HRESULT ( STDMETHODCALLTYPE *SetId )( 
             __RPC__in ISpObjectTokenInit * This,
             /* [annotation] */ 
@@ -2816,16 +2941,19 @@ EXTERN_C const IID IID_ISpObjectTokenInit;
             /* [in] */ __RPC__in LPCWSTR pszTokenId,
             /* [in] */ BOOL fCreateIfNotExist);
         
+        DECLSPEC_XFGVIRT(ISpObjectToken, GetId)
         HRESULT ( STDMETHODCALLTYPE *GetId )( 
             __RPC__in ISpObjectTokenInit * This,
             /* [out][annotation] */ 
             _Outptr_  LPWSTR *ppszCoMemTokenId);
         
+        DECLSPEC_XFGVIRT(ISpObjectToken, GetCategory)
         HRESULT ( STDMETHODCALLTYPE *GetCategory )( 
             __RPC__in ISpObjectTokenInit * This,
             /* [out][annotation] */ 
             _Outptr_  ISpObjectTokenCategory **ppTokenCategory);
         
+        DECLSPEC_XFGVIRT(ISpObjectToken, CreateInstance)
         HRESULT ( STDMETHODCALLTYPE *CreateInstance )( 
             __RPC__in ISpObjectTokenInit * This,
             /* [in] */ __RPC__in_opt IUnknown *pUnkOuter,
@@ -2833,6 +2961,7 @@ EXTERN_C const IID IID_ISpObjectTokenInit;
             /* [in] */ __RPC__in REFIID riid,
             /* [iid_is][out] */ __RPC__deref_out_opt void **ppvObject);
         
+        DECLSPEC_XFGVIRT(ISpObjectToken, GetStorageFileName)
         HRESULT ( STDMETHODCALLTYPE *GetStorageFileName )( 
             __RPC__in ISpObjectTokenInit * This,
             /* [in] */ __RPC__in REFCLSID clsidCaller,
@@ -2844,6 +2973,7 @@ EXTERN_C const IID IID_ISpObjectTokenInit;
             /* [out][annotation] */ 
             _Outptr_  LPWSTR *ppszFilePath);
         
+        DECLSPEC_XFGVIRT(ISpObjectToken, RemoveStorageFileName)
         HRESULT ( STDMETHODCALLTYPE *RemoveStorageFileName )( 
             __RPC__in ISpObjectTokenInit * This,
             /* [in] */ __RPC__in REFCLSID clsidCaller,
@@ -2851,11 +2981,13 @@ EXTERN_C const IID IID_ISpObjectTokenInit;
             _In_  LPCWSTR pszKeyName,
             /* [in] */ BOOL fDeleteFile);
         
+        DECLSPEC_XFGVIRT(ISpObjectToken, Remove)
         HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in ISpObjectTokenInit * This,
             /* [annotation] */ 
             _In_opt_  const CLSID *pclsidCaller);
         
+        DECLSPEC_XFGVIRT(ISpObjectToken, IsUISupported)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *IsUISupported )( 
             ISpObjectTokenInit * This,
             /* [in] */ LPCWSTR pszTypeOfUI,
@@ -2864,6 +2996,7 @@ EXTERN_C const IID IID_ISpObjectTokenInit;
             /* [in] */ IUnknown *punkObject,
             /* [out] */ BOOL *pfSupported);
         
+        DECLSPEC_XFGVIRT(ISpObjectToken, DisplayUI)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *DisplayUI )( 
             ISpObjectTokenInit * This,
             /* [in] */ HWND hwndParent,
@@ -2873,11 +3006,13 @@ EXTERN_C const IID IID_ISpObjectTokenInit;
             /* [in] */ ULONG cbExtraData,
             /* [in] */ IUnknown *punkObject);
         
+        DECLSPEC_XFGVIRT(ISpObjectToken, MatchesAttributes)
         HRESULT ( STDMETHODCALLTYPE *MatchesAttributes )( 
             __RPC__in ISpObjectTokenInit * This,
             /* [in] */ __RPC__in LPCWSTR pszAttributes,
             /* [out] */ __RPC__out BOOL *pfMatches);
         
+        DECLSPEC_XFGVIRT(ISpObjectTokenInit, InitFromDataKey)
         HRESULT ( STDMETHODCALLTYPE *InitFromDataKey )( 
             __RPC__in ISpObjectTokenInit * This,
             /* [in] */ __RPC__in LPCWSTR pszCategoryId,
@@ -3034,18 +3169,22 @@ EXTERN_C const IID IID_IEnumSpObjectTokens;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnumSpObjectTokens * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IEnumSpObjectTokens * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IEnumSpObjectTokens * This);
         
+        DECLSPEC_XFGVIRT(IEnumSpObjectTokens, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumSpObjectTokens * This,
             /* [in] */ ULONG celt,
@@ -3053,22 +3192,27 @@ EXTERN_C const IID IID_IEnumSpObjectTokens;
             /* [out][annotation] */ 
             _Out_opt_  ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IEnumSpObjectTokens, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             IEnumSpObjectTokens * This,
             /* [in] */ ULONG celt);
         
+        DECLSPEC_XFGVIRT(IEnumSpObjectTokens, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             IEnumSpObjectTokens * This);
         
+        DECLSPEC_XFGVIRT(IEnumSpObjectTokens, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             IEnumSpObjectTokens * This,
             /* [out] */ IEnumSpObjectTokens **ppEnum);
         
+        DECLSPEC_XFGVIRT(IEnumSpObjectTokens, Item)
         HRESULT ( STDMETHODCALLTYPE *Item )( 
             IEnumSpObjectTokens * This,
             /* [in] */ ULONG Index,
             /* [out] */ ISpObjectToken **ppToken);
         
+        DECLSPEC_XFGVIRT(IEnumSpObjectTokens, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             IEnumSpObjectTokens * This,
             /* [out] */ ULONG *pCount);
@@ -3155,22 +3299,27 @@ EXTERN_C const IID IID_ISpObjectWithToken;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpObjectWithToken * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpObjectWithToken * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpObjectWithToken * This);
         
+        DECLSPEC_XFGVIRT(ISpObjectWithToken, SetObjectToken)
         HRESULT ( STDMETHODCALLTYPE *SetObjectToken )( 
             __RPC__in ISpObjectWithToken * This,
             /* [in] */ __RPC__in_opt ISpObjectToken *pToken);
         
+        DECLSPEC_XFGVIRT(ISpObjectWithToken, GetObjectToken)
         HRESULT ( STDMETHODCALLTYPE *GetObjectToken )( 
             __RPC__in ISpObjectWithToken * This,
             /* [out] */ __RPC__deref_out_opt ISpObjectToken **ppToken);
@@ -3250,18 +3399,22 @@ EXTERN_C const IID IID_ISpResourceManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpResourceManager * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpResourceManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpResourceManager * This);
         
+        DECLSPEC_XFGVIRT(IServiceProvider, QueryService)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *QueryService )( 
             ISpResourceManager * This,
             /* [annotation][in] */ 
@@ -3271,11 +3424,13 @@ EXTERN_C const IID IID_ISpResourceManager;
             /* [annotation][out] */ 
             _Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(ISpResourceManager, SetObject)
         HRESULT ( STDMETHODCALLTYPE *SetObject )( 
             __RPC__in ISpResourceManager * This,
             /* [in] */ __RPC__in REFGUID guidServiceId,
             /* [in] */ __RPC__in_opt IUnknown *pUnkObject);
         
+        DECLSPEC_XFGVIRT(ISpResourceManager, GetObject)
         HRESULT ( STDMETHODCALLTYPE *GetObject )( 
             __RPC__in ISpResourceManager * This,
             /* [in] */ __RPC__in REFGUID guidServiceId,
@@ -3580,22 +3735,27 @@ EXTERN_C const IID IID_ISpEventSource;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpEventSource * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpEventSource * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISpEventSource * This);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, SetNotifySink)
         HRESULT ( STDMETHODCALLTYPE *SetNotifySink )( 
             ISpEventSource * This,
             /* [in] */ ISpNotifySink *pNotifySink);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, SetNotifyWindowMessage)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetNotifyWindowMessage )( 
             ISpEventSource * This,
             /* [in] */ HWND hWnd,
@@ -3603,39 +3763,47 @@ EXTERN_C const IID IID_ISpEventSource;
             /* [in] */ WPARAM wParam,
             /* [in] */ LPARAM lParam);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, SetNotifyCallbackFunction)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetNotifyCallbackFunction )( 
             ISpEventSource * This,
             /* [in] */ SPNOTIFYCALLBACK *pfnCallback,
             /* [in] */ WPARAM wParam,
             /* [in] */ LPARAM lParam);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, SetNotifyCallbackInterface)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetNotifyCallbackInterface )( 
             ISpEventSource * This,
             /* [in] */ ISpNotifyCallback *pSpCallback,
             /* [in] */ WPARAM wParam,
             /* [in] */ LPARAM lParam);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, SetNotifyWin32Event)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetNotifyWin32Event )( 
             ISpEventSource * This);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, WaitForNotifyEvent)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *WaitForNotifyEvent )( 
             ISpEventSource * This,
             /* [in] */ DWORD dwMilliseconds);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, GetNotifyEventHandle)
         /* [local] */ HANDLE ( STDMETHODCALLTYPE *GetNotifyEventHandle )( 
             ISpEventSource * This);
         
+        DECLSPEC_XFGVIRT(ISpEventSource, SetInterest)
         HRESULT ( STDMETHODCALLTYPE *SetInterest )( 
             ISpEventSource * This,
             /* [in] */ ULONGLONG ullEventInterest,
             /* [in] */ ULONGLONG ullQueuedInterest);
         
+        DECLSPEC_XFGVIRT(ISpEventSource, GetEvents)
         HRESULT ( STDMETHODCALLTYPE *GetEvents )( 
             ISpEventSource * This,
             /* [in] */ ULONG ulCount,
             /* [size_is][out] */ SPEVENT *pEventArray,
             /* [out] */ ULONG *pulFetched);
         
+        DECLSPEC_XFGVIRT(ISpEventSource, GetInfo)
         HRESULT ( STDMETHODCALLTYPE *GetInfo )( 
             ISpEventSource * This,
             /* [out] */ SPEVENTSOURCEINFO *pInfo);
@@ -3734,22 +3902,27 @@ EXTERN_C const IID IID_ISpEventSource2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpEventSource2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpEventSource2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISpEventSource2 * This);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, SetNotifySink)
         HRESULT ( STDMETHODCALLTYPE *SetNotifySink )( 
             ISpEventSource2 * This,
             /* [in] */ ISpNotifySink *pNotifySink);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, SetNotifyWindowMessage)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetNotifyWindowMessage )( 
             ISpEventSource2 * This,
             /* [in] */ HWND hWnd,
@@ -3757,43 +3930,52 @@ EXTERN_C const IID IID_ISpEventSource2;
             /* [in] */ WPARAM wParam,
             /* [in] */ LPARAM lParam);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, SetNotifyCallbackFunction)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetNotifyCallbackFunction )( 
             ISpEventSource2 * This,
             /* [in] */ SPNOTIFYCALLBACK *pfnCallback,
             /* [in] */ WPARAM wParam,
             /* [in] */ LPARAM lParam);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, SetNotifyCallbackInterface)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetNotifyCallbackInterface )( 
             ISpEventSource2 * This,
             /* [in] */ ISpNotifyCallback *pSpCallback,
             /* [in] */ WPARAM wParam,
             /* [in] */ LPARAM lParam);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, SetNotifyWin32Event)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetNotifyWin32Event )( 
             ISpEventSource2 * This);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, WaitForNotifyEvent)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *WaitForNotifyEvent )( 
             ISpEventSource2 * This,
             /* [in] */ DWORD dwMilliseconds);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, GetNotifyEventHandle)
         /* [local] */ HANDLE ( STDMETHODCALLTYPE *GetNotifyEventHandle )( 
             ISpEventSource2 * This);
         
+        DECLSPEC_XFGVIRT(ISpEventSource, SetInterest)
         HRESULT ( STDMETHODCALLTYPE *SetInterest )( 
             ISpEventSource2 * This,
             /* [in] */ ULONGLONG ullEventInterest,
             /* [in] */ ULONGLONG ullQueuedInterest);
         
+        DECLSPEC_XFGVIRT(ISpEventSource, GetEvents)
         HRESULT ( STDMETHODCALLTYPE *GetEvents )( 
             ISpEventSource2 * This,
             /* [in] */ ULONG ulCount,
             /* [size_is][out] */ SPEVENT *pEventArray,
             /* [out] */ ULONG *pulFetched);
         
+        DECLSPEC_XFGVIRT(ISpEventSource, GetInfo)
         HRESULT ( STDMETHODCALLTYPE *GetInfo )( 
             ISpEventSource2 * This,
             /* [out] */ SPEVENTSOURCEINFO *pInfo);
         
+        DECLSPEC_XFGVIRT(ISpEventSource2, GetEventsEx)
         HRESULT ( STDMETHODCALLTYPE *GetEventsEx )( 
             ISpEventSource2 * This,
             /* [in] */ ULONG ulCount,
@@ -3900,23 +4082,28 @@ EXTERN_C const IID IID_ISpEventSink;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpEventSink * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpEventSink * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISpEventSink * This);
         
+        DECLSPEC_XFGVIRT(ISpEventSink, AddEvents)
         HRESULT ( STDMETHODCALLTYPE *AddEvents )( 
             ISpEventSink * This,
             /* [in] */ const SPEVENT *pEventArray,
             /* [in] */ ULONG ulCount);
         
+        DECLSPEC_XFGVIRT(ISpEventSink, GetEventInterest)
         HRESULT ( STDMETHODCALLTYPE *GetEventInterest )( 
             ISpEventSink * This,
             /* [out] */ ULONGLONG *pullEventInterest);
@@ -3989,18 +4176,22 @@ EXTERN_C const IID IID_ISpStreamFormat;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpStreamFormat * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpStreamFormat * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpStreamFormat * This);
         
+        DECLSPEC_XFGVIRT(ISequentialStream, Read)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Read )( 
             ISpStreamFormat * This,
             /* [annotation] */ 
@@ -4010,6 +4201,7 @@ EXTERN_C const IID IID_ISpStreamFormat;
             /* [annotation] */ 
             _Out_opt_  ULONG *pcbRead);
         
+        DECLSPEC_XFGVIRT(ISequentialStream, Write)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Write )( 
             ISpStreamFormat * This,
             /* [annotation] */ 
@@ -4019,6 +4211,7 @@ EXTERN_C const IID IID_ISpStreamFormat;
             /* [annotation] */ 
             _Out_opt_  ULONG *pcbWritten);
         
+        DECLSPEC_XFGVIRT(IStream, Seek)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Seek )( 
             ISpStreamFormat * This,
             /* [in] */ LARGE_INTEGER dlibMove,
@@ -4026,10 +4219,12 @@ EXTERN_C const IID IID_ISpStreamFormat;
             /* [annotation] */ 
             _Out_opt_  ULARGE_INTEGER *plibNewPosition);
         
+        DECLSPEC_XFGVIRT(IStream, SetSize)
         HRESULT ( STDMETHODCALLTYPE *SetSize )( 
             __RPC__in ISpStreamFormat * This,
             /* [in] */ ULARGE_INTEGER libNewSize);
         
+        DECLSPEC_XFGVIRT(IStream, CopyTo)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CopyTo )( 
             ISpStreamFormat * This,
             /* [annotation][unique][in] */ 
@@ -4040,34 +4235,41 @@ EXTERN_C const IID IID_ISpStreamFormat;
             /* [annotation] */ 
             _Out_opt_  ULARGE_INTEGER *pcbWritten);
         
+        DECLSPEC_XFGVIRT(IStream, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
             __RPC__in ISpStreamFormat * This,
             /* [in] */ DWORD grfCommitFlags);
         
+        DECLSPEC_XFGVIRT(IStream, Revert)
         HRESULT ( STDMETHODCALLTYPE *Revert )( 
             __RPC__in ISpStreamFormat * This);
         
+        DECLSPEC_XFGVIRT(IStream, LockRegion)
         HRESULT ( STDMETHODCALLTYPE *LockRegion )( 
             __RPC__in ISpStreamFormat * This,
             /* [in] */ ULARGE_INTEGER libOffset,
             /* [in] */ ULARGE_INTEGER cb,
             /* [in] */ DWORD dwLockType);
         
+        DECLSPEC_XFGVIRT(IStream, UnlockRegion)
         HRESULT ( STDMETHODCALLTYPE *UnlockRegion )( 
             __RPC__in ISpStreamFormat * This,
             /* [in] */ ULARGE_INTEGER libOffset,
             /* [in] */ ULARGE_INTEGER cb,
             /* [in] */ DWORD dwLockType);
         
+        DECLSPEC_XFGVIRT(IStream, Stat)
         HRESULT ( STDMETHODCALLTYPE *Stat )( 
             __RPC__in ISpStreamFormat * This,
             /* [out] */ __RPC__out STATSTG *pstatstg,
             /* [in] */ DWORD grfStatFlag);
         
+        DECLSPEC_XFGVIRT(IStream, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in ISpStreamFormat * This,
             /* [out] */ __RPC__deref_out_opt IStream **ppstm);
         
+        DECLSPEC_XFGVIRT(ISpStreamFormat, GetFormat)
         HRESULT ( STDMETHODCALLTYPE *GetFormat )( 
             __RPC__in ISpStreamFormat * This,
             /* [in] */ __RPC__in GUID *pguidFormatId,
@@ -4208,18 +4410,22 @@ EXTERN_C const IID IID_ISpStream;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpStream * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpStream * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISpStream * This);
         
+        DECLSPEC_XFGVIRT(ISequentialStream, Read)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Read )( 
             ISpStream * This,
             /* [annotation] */ 
@@ -4229,6 +4435,7 @@ EXTERN_C const IID IID_ISpStream;
             /* [annotation] */ 
             _Out_opt_  ULONG *pcbRead);
         
+        DECLSPEC_XFGVIRT(ISequentialStream, Write)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Write )( 
             ISpStream * This,
             /* [annotation] */ 
@@ -4238,6 +4445,7 @@ EXTERN_C const IID IID_ISpStream;
             /* [annotation] */ 
             _Out_opt_  ULONG *pcbWritten);
         
+        DECLSPEC_XFGVIRT(IStream, Seek)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Seek )( 
             ISpStream * This,
             /* [in] */ LARGE_INTEGER dlibMove,
@@ -4245,10 +4453,12 @@ EXTERN_C const IID IID_ISpStream;
             /* [annotation] */ 
             _Out_opt_  ULARGE_INTEGER *plibNewPosition);
         
+        DECLSPEC_XFGVIRT(IStream, SetSize)
         HRESULT ( STDMETHODCALLTYPE *SetSize )( 
             ISpStream * This,
             /* [in] */ ULARGE_INTEGER libNewSize);
         
+        DECLSPEC_XFGVIRT(IStream, CopyTo)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CopyTo )( 
             ISpStream * This,
             /* [annotation][unique][in] */ 
@@ -4259,50 +4469,60 @@ EXTERN_C const IID IID_ISpStream;
             /* [annotation] */ 
             _Out_opt_  ULARGE_INTEGER *pcbWritten);
         
+        DECLSPEC_XFGVIRT(IStream, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
             ISpStream * This,
             /* [in] */ DWORD grfCommitFlags);
         
+        DECLSPEC_XFGVIRT(IStream, Revert)
         HRESULT ( STDMETHODCALLTYPE *Revert )( 
             ISpStream * This);
         
+        DECLSPEC_XFGVIRT(IStream, LockRegion)
         HRESULT ( STDMETHODCALLTYPE *LockRegion )( 
             ISpStream * This,
             /* [in] */ ULARGE_INTEGER libOffset,
             /* [in] */ ULARGE_INTEGER cb,
             /* [in] */ DWORD dwLockType);
         
+        DECLSPEC_XFGVIRT(IStream, UnlockRegion)
         HRESULT ( STDMETHODCALLTYPE *UnlockRegion )( 
             ISpStream * This,
             /* [in] */ ULARGE_INTEGER libOffset,
             /* [in] */ ULARGE_INTEGER cb,
             /* [in] */ DWORD dwLockType);
         
+        DECLSPEC_XFGVIRT(IStream, Stat)
         HRESULT ( STDMETHODCALLTYPE *Stat )( 
             ISpStream * This,
             /* [out] */ STATSTG *pstatstg,
             /* [in] */ DWORD grfStatFlag);
         
+        DECLSPEC_XFGVIRT(IStream, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             ISpStream * This,
             /* [out] */ IStream **ppstm);
         
+        DECLSPEC_XFGVIRT(ISpStreamFormat, GetFormat)
         HRESULT ( STDMETHODCALLTYPE *GetFormat )( 
             ISpStream * This,
             /* [in] */ GUID *pguidFormatId,
             /* [out] */ WAVEFORMATEX **ppCoMemWaveFormatEx);
         
+        DECLSPEC_XFGVIRT(ISpStream, SetBaseStream)
         HRESULT ( STDMETHODCALLTYPE *SetBaseStream )( 
             ISpStream * This,
             /* [in] */ IStream *pStream,
             /* [in] */ REFGUID rguidFormat,
             /* [in] */ const WAVEFORMATEX *pWaveFormatEx);
         
+        DECLSPEC_XFGVIRT(ISpStream, GetBaseStream)
         HRESULT ( STDMETHODCALLTYPE *GetBaseStream )( 
             ISpStream * This,
             /* [out][annotation] */ 
             _Outptr_  IStream **ppStream);
         
+        DECLSPEC_XFGVIRT(ISpStream, BindToFile)
         HRESULT ( STDMETHODCALLTYPE *BindToFile )( 
             ISpStream * This,
             /* [in][annotation] */ 
@@ -4314,6 +4534,7 @@ EXTERN_C const IID IID_ISpStream;
             _In_opt_  const WAVEFORMATEX *pWaveFormatEx,
             /* [in] */ ULONGLONG ullEventInterest);
         
+        DECLSPEC_XFGVIRT(ISpStream, Close)
         HRESULT ( STDMETHODCALLTYPE *Close )( 
             ISpStream * This);
         
@@ -4448,18 +4669,22 @@ EXTERN_C const IID IID_ISpStreamFormatConverter;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpStreamFormatConverter * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpStreamFormatConverter * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpStreamFormatConverter * This);
         
+        DECLSPEC_XFGVIRT(ISequentialStream, Read)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Read )( 
             ISpStreamFormatConverter * This,
             /* [annotation] */ 
@@ -4469,6 +4694,7 @@ EXTERN_C const IID IID_ISpStreamFormatConverter;
             /* [annotation] */ 
             _Out_opt_  ULONG *pcbRead);
         
+        DECLSPEC_XFGVIRT(ISequentialStream, Write)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Write )( 
             ISpStreamFormatConverter * This,
             /* [annotation] */ 
@@ -4478,6 +4704,7 @@ EXTERN_C const IID IID_ISpStreamFormatConverter;
             /* [annotation] */ 
             _Out_opt_  ULONG *pcbWritten);
         
+        DECLSPEC_XFGVIRT(IStream, Seek)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Seek )( 
             ISpStreamFormatConverter * This,
             /* [in] */ LARGE_INTEGER dlibMove,
@@ -4485,10 +4712,12 @@ EXTERN_C const IID IID_ISpStreamFormatConverter;
             /* [annotation] */ 
             _Out_opt_  ULARGE_INTEGER *plibNewPosition);
         
+        DECLSPEC_XFGVIRT(IStream, SetSize)
         HRESULT ( STDMETHODCALLTYPE *SetSize )( 
             __RPC__in ISpStreamFormatConverter * This,
             /* [in] */ ULARGE_INTEGER libNewSize);
         
+        DECLSPEC_XFGVIRT(IStream, CopyTo)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CopyTo )( 
             ISpStreamFormatConverter * This,
             /* [annotation][unique][in] */ 
@@ -4499,62 +4728,75 @@ EXTERN_C const IID IID_ISpStreamFormatConverter;
             /* [annotation] */ 
             _Out_opt_  ULARGE_INTEGER *pcbWritten);
         
+        DECLSPEC_XFGVIRT(IStream, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
             __RPC__in ISpStreamFormatConverter * This,
             /* [in] */ DWORD grfCommitFlags);
         
+        DECLSPEC_XFGVIRT(IStream, Revert)
         HRESULT ( STDMETHODCALLTYPE *Revert )( 
             __RPC__in ISpStreamFormatConverter * This);
         
+        DECLSPEC_XFGVIRT(IStream, LockRegion)
         HRESULT ( STDMETHODCALLTYPE *LockRegion )( 
             __RPC__in ISpStreamFormatConverter * This,
             /* [in] */ ULARGE_INTEGER libOffset,
             /* [in] */ ULARGE_INTEGER cb,
             /* [in] */ DWORD dwLockType);
         
+        DECLSPEC_XFGVIRT(IStream, UnlockRegion)
         HRESULT ( STDMETHODCALLTYPE *UnlockRegion )( 
             __RPC__in ISpStreamFormatConverter * This,
             /* [in] */ ULARGE_INTEGER libOffset,
             /* [in] */ ULARGE_INTEGER cb,
             /* [in] */ DWORD dwLockType);
         
+        DECLSPEC_XFGVIRT(IStream, Stat)
         HRESULT ( STDMETHODCALLTYPE *Stat )( 
             __RPC__in ISpStreamFormatConverter * This,
             /* [out] */ __RPC__out STATSTG *pstatstg,
             /* [in] */ DWORD grfStatFlag);
         
+        DECLSPEC_XFGVIRT(IStream, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in ISpStreamFormatConverter * This,
             /* [out] */ __RPC__deref_out_opt IStream **ppstm);
         
+        DECLSPEC_XFGVIRT(ISpStreamFormat, GetFormat)
         HRESULT ( STDMETHODCALLTYPE *GetFormat )( 
             __RPC__in ISpStreamFormatConverter * This,
             /* [in] */ __RPC__in GUID *pguidFormatId,
             /* [out] */ __RPC__deref_out_opt WAVEFORMATEX **ppCoMemWaveFormatEx);
         
+        DECLSPEC_XFGVIRT(ISpStreamFormatConverter, SetBaseStream)
         HRESULT ( STDMETHODCALLTYPE *SetBaseStream )( 
             __RPC__in ISpStreamFormatConverter * This,
             /* [in] */ __RPC__in_opt ISpStreamFormat *pStream,
             /* [in] */ BOOL fSetFormatToBaseStreamFormat,
             /* [in] */ BOOL fWriteToBaseStream);
         
+        DECLSPEC_XFGVIRT(ISpStreamFormatConverter, GetBaseStream)
         HRESULT ( STDMETHODCALLTYPE *GetBaseStream )( 
             __RPC__in ISpStreamFormatConverter * This,
             /* [out] */ __RPC__deref_out_opt ISpStreamFormat **ppStream);
         
+        DECLSPEC_XFGVIRT(ISpStreamFormatConverter, SetFormat)
         HRESULT ( STDMETHODCALLTYPE *SetFormat )( 
             __RPC__in ISpStreamFormatConverter * This,
             /* [in] */ __RPC__in REFGUID rguidFormatIdOfConvertedStream,
             /* [in] */ __RPC__in const WAVEFORMATEX *pWaveFormatExOfConvertedStream);
         
+        DECLSPEC_XFGVIRT(ISpStreamFormatConverter, ResetSeekPosition)
         HRESULT ( STDMETHODCALLTYPE *ResetSeekPosition )( 
             __RPC__in ISpStreamFormatConverter * This);
         
+        DECLSPEC_XFGVIRT(ISpStreamFormatConverter, ScaleConvertedToBaseOffset)
         HRESULT ( STDMETHODCALLTYPE *ScaleConvertedToBaseOffset )( 
             __RPC__in ISpStreamFormatConverter * This,
             /* [in] */ ULONGLONG ullOffsetConvertedStream,
             /* [out] */ __RPC__out ULONGLONG *pullOffsetBaseStream);
         
+        DECLSPEC_XFGVIRT(ISpStreamFormatConverter, ScaleBaseToConvertedOffset)
         HRESULT ( STDMETHODCALLTYPE *ScaleBaseToConvertedOffset )( 
             __RPC__in ISpStreamFormatConverter * This,
             /* [in] */ ULONGLONG ullOffsetBaseStream,
@@ -4745,18 +4987,22 @@ EXTERN_C const IID IID_ISpAudio;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpAudio * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpAudio * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISpAudio * This);
         
+        DECLSPEC_XFGVIRT(ISequentialStream, Read)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Read )( 
             ISpAudio * This,
             /* [annotation] */ 
@@ -4766,6 +5012,7 @@ EXTERN_C const IID IID_ISpAudio;
             /* [annotation] */ 
             _Out_opt_  ULONG *pcbRead);
         
+        DECLSPEC_XFGVIRT(ISequentialStream, Write)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Write )( 
             ISpAudio * This,
             /* [annotation] */ 
@@ -4775,6 +5022,7 @@ EXTERN_C const IID IID_ISpAudio;
             /* [annotation] */ 
             _Out_opt_  ULONG *pcbWritten);
         
+        DECLSPEC_XFGVIRT(IStream, Seek)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Seek )( 
             ISpAudio * This,
             /* [in] */ LARGE_INTEGER dlibMove,
@@ -4782,10 +5030,12 @@ EXTERN_C const IID IID_ISpAudio;
             /* [annotation] */ 
             _Out_opt_  ULARGE_INTEGER *plibNewPosition);
         
+        DECLSPEC_XFGVIRT(IStream, SetSize)
         HRESULT ( STDMETHODCALLTYPE *SetSize )( 
             ISpAudio * This,
             /* [in] */ ULARGE_INTEGER libNewSize);
         
+        DECLSPEC_XFGVIRT(IStream, CopyTo)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CopyTo )( 
             ISpAudio * This,
             /* [annotation][unique][in] */ 
@@ -4796,81 +5046,99 @@ EXTERN_C const IID IID_ISpAudio;
             /* [annotation] */ 
             _Out_opt_  ULARGE_INTEGER *pcbWritten);
         
+        DECLSPEC_XFGVIRT(IStream, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
             ISpAudio * This,
             /* [in] */ DWORD grfCommitFlags);
         
+        DECLSPEC_XFGVIRT(IStream, Revert)
         HRESULT ( STDMETHODCALLTYPE *Revert )( 
             ISpAudio * This);
         
+        DECLSPEC_XFGVIRT(IStream, LockRegion)
         HRESULT ( STDMETHODCALLTYPE *LockRegion )( 
             ISpAudio * This,
             /* [in] */ ULARGE_INTEGER libOffset,
             /* [in] */ ULARGE_INTEGER cb,
             /* [in] */ DWORD dwLockType);
         
+        DECLSPEC_XFGVIRT(IStream, UnlockRegion)
         HRESULT ( STDMETHODCALLTYPE *UnlockRegion )( 
             ISpAudio * This,
             /* [in] */ ULARGE_INTEGER libOffset,
             /* [in] */ ULARGE_INTEGER cb,
             /* [in] */ DWORD dwLockType);
         
+        DECLSPEC_XFGVIRT(IStream, Stat)
         HRESULT ( STDMETHODCALLTYPE *Stat )( 
             ISpAudio * This,
             /* [out] */ STATSTG *pstatstg,
             /* [in] */ DWORD grfStatFlag);
         
+        DECLSPEC_XFGVIRT(IStream, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             ISpAudio * This,
             /* [out] */ IStream **ppstm);
         
+        DECLSPEC_XFGVIRT(ISpStreamFormat, GetFormat)
         HRESULT ( STDMETHODCALLTYPE *GetFormat )( 
             ISpAudio * This,
             /* [in] */ GUID *pguidFormatId,
             /* [out] */ WAVEFORMATEX **ppCoMemWaveFormatEx);
         
+        DECLSPEC_XFGVIRT(ISpAudio, SetState)
         HRESULT ( STDMETHODCALLTYPE *SetState )( 
             ISpAudio * This,
             /* [in] */ SPAUDIOSTATE NewState,
             /* [in] */ ULONGLONG ullReserved);
         
+        DECLSPEC_XFGVIRT(ISpAudio, SetFormat)
         HRESULT ( STDMETHODCALLTYPE *SetFormat )( 
             ISpAudio * This,
             /* [in] */ REFGUID rguidFmtId,
             /* [in] */ const WAVEFORMATEX *pWaveFormatEx);
         
+        DECLSPEC_XFGVIRT(ISpAudio, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             ISpAudio * This,
             /* [out] */ SPAUDIOSTATUS *pStatus);
         
+        DECLSPEC_XFGVIRT(ISpAudio, SetBufferInfo)
         HRESULT ( STDMETHODCALLTYPE *SetBufferInfo )( 
             ISpAudio * This,
             /* [in] */ const SPAUDIOBUFFERINFO *pBuffInfo);
         
+        DECLSPEC_XFGVIRT(ISpAudio, GetBufferInfo)
         HRESULT ( STDMETHODCALLTYPE *GetBufferInfo )( 
             ISpAudio * This,
             /* [out] */ SPAUDIOBUFFERINFO *pBuffInfo);
         
+        DECLSPEC_XFGVIRT(ISpAudio, GetDefaultFormat)
         HRESULT ( STDMETHODCALLTYPE *GetDefaultFormat )( 
             ISpAudio * This,
             /* [out] */ GUID *pFormatId,
             /* [out] */ WAVEFORMATEX **ppCoMemWaveFormatEx);
         
+        DECLSPEC_XFGVIRT(ISpAudio, EventHandle)
         HANDLE ( STDMETHODCALLTYPE *EventHandle )( 
             ISpAudio * This);
         
+        DECLSPEC_XFGVIRT(ISpAudio, GetVolumeLevel)
         HRESULT ( STDMETHODCALLTYPE *GetVolumeLevel )( 
             ISpAudio * This,
             /* [out] */ ULONG *pLevel);
         
+        DECLSPEC_XFGVIRT(ISpAudio, SetVolumeLevel)
         HRESULT ( STDMETHODCALLTYPE *SetVolumeLevel )( 
             ISpAudio * This,
             /* [in] */ ULONG Level);
         
+        DECLSPEC_XFGVIRT(ISpAudio, GetBufferNotifySize)
         HRESULT ( STDMETHODCALLTYPE *GetBufferNotifySize )( 
             ISpAudio * This,
             /* [out] */ ULONG *pcbSize);
         
+        DECLSPEC_XFGVIRT(ISpAudio, SetBufferNotifySize)
         HRESULT ( STDMETHODCALLTYPE *SetBufferNotifySize )( 
             ISpAudio * This,
             /* [in] */ ULONG cbSize);
@@ -5020,18 +5288,22 @@ EXTERN_C const IID IID_ISpMMSysAudio;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpMMSysAudio * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpMMSysAudio * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISpMMSysAudio * This);
         
+        DECLSPEC_XFGVIRT(ISequentialStream, Read)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Read )( 
             ISpMMSysAudio * This,
             /* [annotation] */ 
@@ -5041,6 +5313,7 @@ EXTERN_C const IID IID_ISpMMSysAudio;
             /* [annotation] */ 
             _Out_opt_  ULONG *pcbRead);
         
+        DECLSPEC_XFGVIRT(ISequentialStream, Write)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Write )( 
             ISpMMSysAudio * This,
             /* [annotation] */ 
@@ -5050,6 +5323,7 @@ EXTERN_C const IID IID_ISpMMSysAudio;
             /* [annotation] */ 
             _Out_opt_  ULONG *pcbWritten);
         
+        DECLSPEC_XFGVIRT(IStream, Seek)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Seek )( 
             ISpMMSysAudio * This,
             /* [in] */ LARGE_INTEGER dlibMove,
@@ -5057,10 +5331,12 @@ EXTERN_C const IID IID_ISpMMSysAudio;
             /* [annotation] */ 
             _Out_opt_  ULARGE_INTEGER *plibNewPosition);
         
+        DECLSPEC_XFGVIRT(IStream, SetSize)
         HRESULT ( STDMETHODCALLTYPE *SetSize )( 
             ISpMMSysAudio * This,
             /* [in] */ ULARGE_INTEGER libNewSize);
         
+        DECLSPEC_XFGVIRT(IStream, CopyTo)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CopyTo )( 
             ISpMMSysAudio * This,
             /* [annotation][unique][in] */ 
@@ -5071,101 +5347,124 @@ EXTERN_C const IID IID_ISpMMSysAudio;
             /* [annotation] */ 
             _Out_opt_  ULARGE_INTEGER *pcbWritten);
         
+        DECLSPEC_XFGVIRT(IStream, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
             ISpMMSysAudio * This,
             /* [in] */ DWORD grfCommitFlags);
         
+        DECLSPEC_XFGVIRT(IStream, Revert)
         HRESULT ( STDMETHODCALLTYPE *Revert )( 
             ISpMMSysAudio * This);
         
+        DECLSPEC_XFGVIRT(IStream, LockRegion)
         HRESULT ( STDMETHODCALLTYPE *LockRegion )( 
             ISpMMSysAudio * This,
             /* [in] */ ULARGE_INTEGER libOffset,
             /* [in] */ ULARGE_INTEGER cb,
             /* [in] */ DWORD dwLockType);
         
+        DECLSPEC_XFGVIRT(IStream, UnlockRegion)
         HRESULT ( STDMETHODCALLTYPE *UnlockRegion )( 
             ISpMMSysAudio * This,
             /* [in] */ ULARGE_INTEGER libOffset,
             /* [in] */ ULARGE_INTEGER cb,
             /* [in] */ DWORD dwLockType);
         
+        DECLSPEC_XFGVIRT(IStream, Stat)
         HRESULT ( STDMETHODCALLTYPE *Stat )( 
             ISpMMSysAudio * This,
             /* [out] */ STATSTG *pstatstg,
             /* [in] */ DWORD grfStatFlag);
         
+        DECLSPEC_XFGVIRT(IStream, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             ISpMMSysAudio * This,
             /* [out] */ IStream **ppstm);
         
+        DECLSPEC_XFGVIRT(ISpStreamFormat, GetFormat)
         HRESULT ( STDMETHODCALLTYPE *GetFormat )( 
             ISpMMSysAudio * This,
             /* [in] */ GUID *pguidFormatId,
             /* [out] */ WAVEFORMATEX **ppCoMemWaveFormatEx);
         
+        DECLSPEC_XFGVIRT(ISpAudio, SetState)
         HRESULT ( STDMETHODCALLTYPE *SetState )( 
             ISpMMSysAudio * This,
             /* [in] */ SPAUDIOSTATE NewState,
             /* [in] */ ULONGLONG ullReserved);
         
+        DECLSPEC_XFGVIRT(ISpAudio, SetFormat)
         HRESULT ( STDMETHODCALLTYPE *SetFormat )( 
             ISpMMSysAudio * This,
             /* [in] */ REFGUID rguidFmtId,
             /* [in] */ const WAVEFORMATEX *pWaveFormatEx);
         
+        DECLSPEC_XFGVIRT(ISpAudio, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             ISpMMSysAudio * This,
             /* [out] */ SPAUDIOSTATUS *pStatus);
         
+        DECLSPEC_XFGVIRT(ISpAudio, SetBufferInfo)
         HRESULT ( STDMETHODCALLTYPE *SetBufferInfo )( 
             ISpMMSysAudio * This,
             /* [in] */ const SPAUDIOBUFFERINFO *pBuffInfo);
         
+        DECLSPEC_XFGVIRT(ISpAudio, GetBufferInfo)
         HRESULT ( STDMETHODCALLTYPE *GetBufferInfo )( 
             ISpMMSysAudio * This,
             /* [out] */ SPAUDIOBUFFERINFO *pBuffInfo);
         
+        DECLSPEC_XFGVIRT(ISpAudio, GetDefaultFormat)
         HRESULT ( STDMETHODCALLTYPE *GetDefaultFormat )( 
             ISpMMSysAudio * This,
             /* [out] */ GUID *pFormatId,
             /* [out] */ WAVEFORMATEX **ppCoMemWaveFormatEx);
         
+        DECLSPEC_XFGVIRT(ISpAudio, EventHandle)
         HANDLE ( STDMETHODCALLTYPE *EventHandle )( 
             ISpMMSysAudio * This);
         
+        DECLSPEC_XFGVIRT(ISpAudio, GetVolumeLevel)
         HRESULT ( STDMETHODCALLTYPE *GetVolumeLevel )( 
             ISpMMSysAudio * This,
             /* [out] */ ULONG *pLevel);
         
+        DECLSPEC_XFGVIRT(ISpAudio, SetVolumeLevel)
         HRESULT ( STDMETHODCALLTYPE *SetVolumeLevel )( 
             ISpMMSysAudio * This,
             /* [in] */ ULONG Level);
         
+        DECLSPEC_XFGVIRT(ISpAudio, GetBufferNotifySize)
         HRESULT ( STDMETHODCALLTYPE *GetBufferNotifySize )( 
             ISpMMSysAudio * This,
             /* [out] */ ULONG *pcbSize);
         
+        DECLSPEC_XFGVIRT(ISpAudio, SetBufferNotifySize)
         HRESULT ( STDMETHODCALLTYPE *SetBufferNotifySize )( 
             ISpMMSysAudio * This,
             /* [in] */ ULONG cbSize);
         
+        DECLSPEC_XFGVIRT(ISpMMSysAudio, GetDeviceId)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceId )( 
             ISpMMSysAudio * This,
             /* [out] */ UINT *puDeviceId);
         
+        DECLSPEC_XFGVIRT(ISpMMSysAudio, SetDeviceId)
         HRESULT ( STDMETHODCALLTYPE *SetDeviceId )( 
             ISpMMSysAudio * This,
             /* [in] */ UINT uDeviceId);
         
+        DECLSPEC_XFGVIRT(ISpMMSysAudio, GetMMHandle)
         HRESULT ( STDMETHODCALLTYPE *GetMMHandle )( 
             ISpMMSysAudio * This,
             /* [out] */ void **pHandle);
         
+        DECLSPEC_XFGVIRT(ISpMMSysAudio, GetLineId)
         HRESULT ( STDMETHODCALLTYPE *GetLineId )( 
             ISpMMSysAudio * This,
             /* [out] */ UINT *puLineId);
         
+        DECLSPEC_XFGVIRT(ISpMMSysAudio, SetLineId)
         HRESULT ( STDMETHODCALLTYPE *SetLineId )( 
             ISpMMSysAudio * This,
             /* [in] */ UINT uLineId);
@@ -5322,22 +5621,27 @@ EXTERN_C const IID IID_ISpTranscript;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpTranscript * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpTranscript * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpTranscript * This);
         
+        DECLSPEC_XFGVIRT(ISpTranscript, GetTranscript)
         HRESULT ( STDMETHODCALLTYPE *GetTranscript )( 
             __RPC__in ISpTranscript * This,
             /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszTranscript);
         
+        DECLSPEC_XFGVIRT(ISpTranscript, AppendTranscript)
         HRESULT ( STDMETHODCALLTYPE *AppendTranscript )( 
             __RPC__in ISpTranscript * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszTranscript);
@@ -5764,18 +6068,22 @@ EXTERN_C const IID IID_ISpLexicon;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpLexicon * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpLexicon * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISpLexicon * This);
         
+        DECLSPEC_XFGVIRT(ISpLexicon, GetPronunciations)
         HRESULT ( STDMETHODCALLTYPE *GetPronunciations )( 
             ISpLexicon * This,
             /* [in] */ LPCWSTR pszWord,
@@ -5783,6 +6091,7 @@ EXTERN_C const IID IID_ISpLexicon;
             /* [in] */ DWORD dwFlags,
             /* [out][in] */ SPWORDPRONUNCIATIONLIST *pWordPronunciationList);
         
+        DECLSPEC_XFGVIRT(ISpLexicon, AddPronunciation)
         HRESULT ( STDMETHODCALLTYPE *AddPronunciation )( 
             ISpLexicon * This,
             /* [in] */ LPCWSTR pszWord,
@@ -5791,6 +6100,7 @@ EXTERN_C const IID IID_ISpLexicon;
             /* [in][annotation] */ 
             _In_opt_  PCSPPHONEID pszPronunciation);
         
+        DECLSPEC_XFGVIRT(ISpLexicon, RemovePronunciation)
         HRESULT ( STDMETHODCALLTYPE *RemovePronunciation )( 
             ISpLexicon * This,
             /* [in] */ LPCWSTR pszWord,
@@ -5799,16 +6109,19 @@ EXTERN_C const IID IID_ISpLexicon;
             /* [in][annotation] */ 
             _In_opt_  PCSPPHONEID pszPronunciation);
         
+        DECLSPEC_XFGVIRT(ISpLexicon, GetGeneration)
         HRESULT ( STDMETHODCALLTYPE *GetGeneration )( 
             ISpLexicon * This,
             /* [out] */ DWORD *pdwGeneration);
         
+        DECLSPEC_XFGVIRT(ISpLexicon, GetGenerationChange)
         HRESULT ( STDMETHODCALLTYPE *GetGenerationChange )( 
             ISpLexicon * This,
             /* [in] */ DWORD dwFlags,
             /* [out][in] */ DWORD *pdwGeneration,
             /* [out][in] */ SPWORDLIST *pWordList);
         
+        DECLSPEC_XFGVIRT(ISpLexicon, GetWords)
         HRESULT ( STDMETHODCALLTYPE *GetWords )( 
             ISpLexicon * This,
             /* [in] */ DWORD dwFlags,
@@ -5897,18 +6210,22 @@ EXTERN_C const IID IID_ISpContainerLexicon;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpContainerLexicon * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpContainerLexicon * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpContainerLexicon * This);
         
+        DECLSPEC_XFGVIRT(ISpLexicon, GetPronunciations)
         HRESULT ( STDMETHODCALLTYPE *GetPronunciations )( 
             __RPC__in ISpContainerLexicon * This,
             /* [in] */ __RPC__in LPCWSTR pszWord,
@@ -5916,6 +6233,7 @@ EXTERN_C const IID IID_ISpContainerLexicon;
             /* [in] */ DWORD dwFlags,
             /* [out][in] */ __RPC__inout SPWORDPRONUNCIATIONLIST *pWordPronunciationList);
         
+        DECLSPEC_XFGVIRT(ISpLexicon, AddPronunciation)
         HRESULT ( STDMETHODCALLTYPE *AddPronunciation )( 
             __RPC__in ISpContainerLexicon * This,
             /* [in] */ __RPC__in LPCWSTR pszWord,
@@ -5924,6 +6242,7 @@ EXTERN_C const IID IID_ISpContainerLexicon;
             /* [in][annotation] */ 
             _In_opt_  PCSPPHONEID pszPronunciation);
         
+        DECLSPEC_XFGVIRT(ISpLexicon, RemovePronunciation)
         HRESULT ( STDMETHODCALLTYPE *RemovePronunciation )( 
             __RPC__in ISpContainerLexicon * This,
             /* [in] */ __RPC__in LPCWSTR pszWord,
@@ -5932,16 +6251,19 @@ EXTERN_C const IID IID_ISpContainerLexicon;
             /* [in][annotation] */ 
             _In_opt_  PCSPPHONEID pszPronunciation);
         
+        DECLSPEC_XFGVIRT(ISpLexicon, GetGeneration)
         HRESULT ( STDMETHODCALLTYPE *GetGeneration )( 
             __RPC__in ISpContainerLexicon * This,
             /* [out] */ __RPC__out DWORD *pdwGeneration);
         
+        DECLSPEC_XFGVIRT(ISpLexicon, GetGenerationChange)
         HRESULT ( STDMETHODCALLTYPE *GetGenerationChange )( 
             __RPC__in ISpContainerLexicon * This,
             /* [in] */ DWORD dwFlags,
             /* [out][in] */ __RPC__inout DWORD *pdwGeneration,
             /* [out][in] */ __RPC__inout SPWORDLIST *pWordList);
         
+        DECLSPEC_XFGVIRT(ISpLexicon, GetWords)
         HRESULT ( STDMETHODCALLTYPE *GetWords )( 
             __RPC__in ISpContainerLexicon * This,
             /* [in] */ DWORD dwFlags,
@@ -5950,6 +6272,7 @@ EXTERN_C const IID IID_ISpContainerLexicon;
             _Inout_opt_  DWORD *pdwCookie,
             /* [out][in] */ __RPC__inout SPWORDLIST *pWordList);
         
+        DECLSPEC_XFGVIRT(ISpContainerLexicon, AddLexicon)
         HRESULT ( STDMETHODCALLTYPE *AddLexicon )( 
             __RPC__in ISpContainerLexicon * This,
             /* [in] */ __RPC__in_opt ISpLexicon *pAddLexicon,
@@ -6109,18 +6432,22 @@ EXTERN_C const IID IID_ISpShortcut;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpShortcut * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpShortcut * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpShortcut * This);
         
+        DECLSPEC_XFGVIRT(ISpShortcut, AddShortcut)
         HRESULT ( STDMETHODCALLTYPE *AddShortcut )( 
             __RPC__in ISpShortcut * This,
             /* [in] */ __RPC__in LPCWSTR pszDisplay,
@@ -6128,6 +6455,7 @@ EXTERN_C const IID IID_ISpShortcut;
             /* [in] */ __RPC__in LPCWSTR pszSpoken,
             /* [in] */ SPSHORTCUTTYPE shType);
         
+        DECLSPEC_XFGVIRT(ISpShortcut, RemoveShortcut)
         HRESULT ( STDMETHODCALLTYPE *RemoveShortcut )( 
             __RPC__in ISpShortcut * This,
             /* [in] */ __RPC__in LPCWSTR pszDisplay,
@@ -6135,32 +6463,38 @@ EXTERN_C const IID IID_ISpShortcut;
             /* [in] */ __RPC__in LPCWSTR pszSpoken,
             /* [in] */ SPSHORTCUTTYPE shType);
         
+        DECLSPEC_XFGVIRT(ISpShortcut, GetShortcuts)
         HRESULT ( STDMETHODCALLTYPE *GetShortcuts )( 
             __RPC__in ISpShortcut * This,
             /* [in] */ WORD LangID,
             /* [out][in] */ __RPC__inout SPSHORTCUTPAIRLIST *pShortcutpairList);
         
+        DECLSPEC_XFGVIRT(ISpShortcut, GetGeneration)
         HRESULT ( STDMETHODCALLTYPE *GetGeneration )( 
             __RPC__in ISpShortcut * This,
             /* [out] */ __RPC__out DWORD *pdwGeneration);
         
+        DECLSPEC_XFGVIRT(ISpShortcut, GetWordsFromGenerationChange)
         HRESULT ( STDMETHODCALLTYPE *GetWordsFromGenerationChange )( 
             __RPC__in ISpShortcut * This,
             /* [out][in] */ __RPC__inout DWORD *pdwGeneration,
             /* [out][in] */ __RPC__inout SPWORDLIST *pWordList);
         
+        DECLSPEC_XFGVIRT(ISpShortcut, GetWords)
         HRESULT ( STDMETHODCALLTYPE *GetWords )( 
             __RPC__in ISpShortcut * This,
             /* [out][in] */ __RPC__inout DWORD *pdwGeneration,
             /* [out][in] */ __RPC__inout DWORD *pdwCookie,
             /* [out][in] */ __RPC__inout SPWORDLIST *pWordList);
         
+        DECLSPEC_XFGVIRT(ISpShortcut, GetShortcutsForGeneration)
         HRESULT ( STDMETHODCALLTYPE *GetShortcutsForGeneration )( 
             __RPC__in ISpShortcut * This,
             /* [out][in] */ __RPC__inout DWORD *pdwGeneration,
             /* [out][in] */ __RPC__inout DWORD *pdwCookie,
             /* [out][in] */ __RPC__inout SPSHORTCUTPAIRLIST *pShortcutpairList);
         
+        DECLSPEC_XFGVIRT(ISpShortcut, GetGenerationChange)
         HRESULT ( STDMETHODCALLTYPE *GetGenerationChange )( 
             __RPC__in ISpShortcut * This,
             /* [out][in] */ __RPC__inout DWORD *pdwGeneration,
@@ -6256,31 +6590,38 @@ EXTERN_C const IID IID_ISpPhoneConverter;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpPhoneConverter * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpPhoneConverter * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpPhoneConverter * This);
         
+        DECLSPEC_XFGVIRT(ISpObjectWithToken, SetObjectToken)
         HRESULT ( STDMETHODCALLTYPE *SetObjectToken )( 
             __RPC__in ISpPhoneConverter * This,
             /* [in] */ __RPC__in_opt ISpObjectToken *pToken);
         
+        DECLSPEC_XFGVIRT(ISpObjectWithToken, GetObjectToken)
         HRESULT ( STDMETHODCALLTYPE *GetObjectToken )( 
             __RPC__in ISpPhoneConverter * This,
             /* [out] */ __RPC__deref_out_opt ISpObjectToken **ppToken);
         
+        DECLSPEC_XFGVIRT(ISpPhoneConverter, PhoneToId)
         HRESULT ( STDMETHODCALLTYPE *PhoneToId )( 
             __RPC__in ISpPhoneConverter * This,
             /* [in] */ __RPC__in LPCWSTR pszPhone,
             /* [out] */ __RPC__out SPPHONEID *pId);
         
+        DECLSPEC_XFGVIRT(ISpPhoneConverter, IdToPhone)
         HRESULT ( STDMETHODCALLTYPE *IdToPhone )( 
             __RPC__in ISpPhoneConverter * This,
             /* [in] */ __RPC__in PCSPPHONEID pId,
@@ -6384,27 +6725,33 @@ EXTERN_C const IID IID_ISpPhoneticAlphabetConverter;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpPhoneticAlphabetConverter * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpPhoneticAlphabetConverter * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISpPhoneticAlphabetConverter * This);
         
+        DECLSPEC_XFGVIRT(ISpPhoneticAlphabetConverter, GetLangId)
         HRESULT ( STDMETHODCALLTYPE *GetLangId )( 
             ISpPhoneticAlphabetConverter * This,
             /* [out][annotation] */ 
             _Out_writes_(1)  WORD *pLangID);
         
+        DECLSPEC_XFGVIRT(ISpPhoneticAlphabetConverter, SetLangId)
         HRESULT ( STDMETHODCALLTYPE *SetLangId )( 
             ISpPhoneticAlphabetConverter * This,
             /* [in] */ WORD LangID);
         
+        DECLSPEC_XFGVIRT(ISpPhoneticAlphabetConverter, SAPI2UPS)
         HRESULT ( STDMETHODCALLTYPE *SAPI2UPS )( 
             ISpPhoneticAlphabetConverter * This,
             /* [in][annotation] */ 
@@ -6413,6 +6760,7 @@ EXTERN_C const IID IID_ISpPhoneticAlphabetConverter;
             _Out_writes_z_(cMaxLength)  SPPHONEID *pszUPSId,
             /* [in] */ DWORD cMaxLength);
         
+        DECLSPEC_XFGVIRT(ISpPhoneticAlphabetConverter, UPS2SAPI)
         HRESULT ( STDMETHODCALLTYPE *UPS2SAPI )( 
             ISpPhoneticAlphabetConverter * This,
             /* [in][annotation] */ 
@@ -6421,6 +6769,7 @@ EXTERN_C const IID IID_ISpPhoneticAlphabetConverter;
             _Out_writes_z_(cMaxLength)  SPPHONEID *pszSAPIId,
             /* [in] */ DWORD cMaxLength);
         
+        DECLSPEC_XFGVIRT(ISpPhoneticAlphabetConverter, GetMaxConvertLength)
         HRESULT ( STDMETHODCALLTYPE *GetMaxConvertLength )( 
             ISpPhoneticAlphabetConverter * This,
             /* [in] */ DWORD cSrcLength,
@@ -6507,22 +6856,27 @@ EXTERN_C const IID IID_ISpPhoneticAlphabetSelection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpPhoneticAlphabetSelection * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpPhoneticAlphabetSelection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpPhoneticAlphabetSelection * This);
         
+        DECLSPEC_XFGVIRT(ISpPhoneticAlphabetSelection, IsAlphabetUPS)
         HRESULT ( STDMETHODCALLTYPE *IsAlphabetUPS )( 
             __RPC__in ISpPhoneticAlphabetSelection * This,
             /* [out] */ __RPC__out BOOL *pfIsUPS);
         
+        DECLSPEC_XFGVIRT(ISpPhoneticAlphabetSelection, SetAlphabetToUPS)
         HRESULT ( STDMETHODCALLTYPE *SetAlphabetToUPS )( 
             __RPC__in ISpPhoneticAlphabetSelection * This,
             /* [in] */ BOOL fForceUPS);
@@ -6793,22 +7147,27 @@ EXTERN_C const IID IID_ISpVoice;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpVoice * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpVoice * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISpVoice * This);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, SetNotifySink)
         HRESULT ( STDMETHODCALLTYPE *SetNotifySink )( 
             ISpVoice * This,
             /* [in] */ ISpNotifySink *pNotifySink);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, SetNotifyWindowMessage)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetNotifyWindowMessage )( 
             ISpVoice * This,
             /* [in] */ HWND hWnd,
@@ -6816,72 +7175,88 @@ EXTERN_C const IID IID_ISpVoice;
             /* [in] */ WPARAM wParam,
             /* [in] */ LPARAM lParam);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, SetNotifyCallbackFunction)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetNotifyCallbackFunction )( 
             ISpVoice * This,
             /* [in] */ SPNOTIFYCALLBACK *pfnCallback,
             /* [in] */ WPARAM wParam,
             /* [in] */ LPARAM lParam);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, SetNotifyCallbackInterface)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetNotifyCallbackInterface )( 
             ISpVoice * This,
             /* [in] */ ISpNotifyCallback *pSpCallback,
             /* [in] */ WPARAM wParam,
             /* [in] */ LPARAM lParam);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, SetNotifyWin32Event)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetNotifyWin32Event )( 
             ISpVoice * This);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, WaitForNotifyEvent)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *WaitForNotifyEvent )( 
             ISpVoice * This,
             /* [in] */ DWORD dwMilliseconds);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, GetNotifyEventHandle)
         /* [local] */ HANDLE ( STDMETHODCALLTYPE *GetNotifyEventHandle )( 
             ISpVoice * This);
         
+        DECLSPEC_XFGVIRT(ISpEventSource, SetInterest)
         HRESULT ( STDMETHODCALLTYPE *SetInterest )( 
             ISpVoice * This,
             /* [in] */ ULONGLONG ullEventInterest,
             /* [in] */ ULONGLONG ullQueuedInterest);
         
+        DECLSPEC_XFGVIRT(ISpEventSource, GetEvents)
         HRESULT ( STDMETHODCALLTYPE *GetEvents )( 
             ISpVoice * This,
             /* [in] */ ULONG ulCount,
             /* [size_is][out] */ SPEVENT *pEventArray,
             /* [out] */ ULONG *pulFetched);
         
+        DECLSPEC_XFGVIRT(ISpEventSource, GetInfo)
         HRESULT ( STDMETHODCALLTYPE *GetInfo )( 
             ISpVoice * This,
             /* [out] */ SPEVENTSOURCEINFO *pInfo);
         
+        DECLSPEC_XFGVIRT(ISpVoice, SetOutput)
         HRESULT ( STDMETHODCALLTYPE *SetOutput )( 
             ISpVoice * This,
             /* [in] */ IUnknown *pUnkOutput,
             /* [in] */ BOOL fAllowFormatChanges);
         
+        DECLSPEC_XFGVIRT(ISpVoice, GetOutputObjectToken)
         HRESULT ( STDMETHODCALLTYPE *GetOutputObjectToken )( 
             ISpVoice * This,
             /* [out][annotation] */ 
             _Outptr_  ISpObjectToken **ppObjectToken);
         
+        DECLSPEC_XFGVIRT(ISpVoice, GetOutputStream)
         HRESULT ( STDMETHODCALLTYPE *GetOutputStream )( 
             ISpVoice * This,
             /* [out] */ ISpStreamFormat **ppStream);
         
+        DECLSPEC_XFGVIRT(ISpVoice, Pause)
         HRESULT ( STDMETHODCALLTYPE *Pause )( 
             ISpVoice * This);
         
+        DECLSPEC_XFGVIRT(ISpVoice, Resume)
         HRESULT ( STDMETHODCALLTYPE *Resume )( 
             ISpVoice * This);
         
+        DECLSPEC_XFGVIRT(ISpVoice, SetVoice)
         HRESULT ( STDMETHODCALLTYPE *SetVoice )( 
             ISpVoice * This,
             /* [in] */ ISpObjectToken *pToken);
         
+        DECLSPEC_XFGVIRT(ISpVoice, GetVoice)
         HRESULT ( STDMETHODCALLTYPE *GetVoice )( 
             ISpVoice * This,
             /* [out][annotation] */ 
             _Outptr_  ISpObjectToken **ppToken);
         
+        DECLSPEC_XFGVIRT(ISpVoice, Speak)
         HRESULT ( STDMETHODCALLTYPE *Speak )( 
             ISpVoice * This,
             /* [string][in][annotation] */ 
@@ -6890,6 +7265,7 @@ EXTERN_C const IID IID_ISpVoice;
             /* [out][annotation] */ 
             _Out_opt_  ULONG *pulStreamNumber);
         
+        DECLSPEC_XFGVIRT(ISpVoice, SpeakStream)
         HRESULT ( STDMETHODCALLTYPE *SpeakStream )( 
             ISpVoice * This,
             /* [in] */ IStream *pStream,
@@ -6897,65 +7273,80 @@ EXTERN_C const IID IID_ISpVoice;
             /* [out][annotation] */ 
             _Out_opt_  ULONG *pulStreamNumber);
         
+        DECLSPEC_XFGVIRT(ISpVoice, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             ISpVoice * This,
             /* [out] */ SPVOICESTATUS *pStatus,
             /* [out][annotation] */ 
             _Outptr_  LPWSTR *ppszLastBookmark);
         
+        DECLSPEC_XFGVIRT(ISpVoice, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             ISpVoice * This,
             /* [string][in] */ LPCWSTR pItemType,
             /* [in] */ long lNumItems,
             /* [out] */ ULONG *pulNumSkipped);
         
+        DECLSPEC_XFGVIRT(ISpVoice, SetPriority)
         HRESULT ( STDMETHODCALLTYPE *SetPriority )( 
             ISpVoice * This,
             /* [in] */ SPVPRIORITY ePriority);
         
+        DECLSPEC_XFGVIRT(ISpVoice, GetPriority)
         HRESULT ( STDMETHODCALLTYPE *GetPriority )( 
             ISpVoice * This,
             /* [out] */ SPVPRIORITY *pePriority);
         
+        DECLSPEC_XFGVIRT(ISpVoice, SetAlertBoundary)
         HRESULT ( STDMETHODCALLTYPE *SetAlertBoundary )( 
             ISpVoice * This,
             /* [in] */ SPEVENTENUM eBoundary);
         
+        DECLSPEC_XFGVIRT(ISpVoice, GetAlertBoundary)
         HRESULT ( STDMETHODCALLTYPE *GetAlertBoundary )( 
             ISpVoice * This,
             /* [out] */ SPEVENTENUM *peBoundary);
         
+        DECLSPEC_XFGVIRT(ISpVoice, SetRate)
         HRESULT ( STDMETHODCALLTYPE *SetRate )( 
             ISpVoice * This,
             /* [in] */ long RateAdjust);
         
+        DECLSPEC_XFGVIRT(ISpVoice, GetRate)
         HRESULT ( STDMETHODCALLTYPE *GetRate )( 
             ISpVoice * This,
             /* [out] */ long *pRateAdjust);
         
+        DECLSPEC_XFGVIRT(ISpVoice, SetVolume)
         HRESULT ( STDMETHODCALLTYPE *SetVolume )( 
             ISpVoice * This,
             /* [in] */ USHORT usVolume);
         
+        DECLSPEC_XFGVIRT(ISpVoice, GetVolume)
         HRESULT ( STDMETHODCALLTYPE *GetVolume )( 
             ISpVoice * This,
             /* [out] */ USHORT *pusVolume);
         
+        DECLSPEC_XFGVIRT(ISpVoice, WaitUntilDone)
         HRESULT ( STDMETHODCALLTYPE *WaitUntilDone )( 
             ISpVoice * This,
             /* [in] */ ULONG msTimeout);
         
+        DECLSPEC_XFGVIRT(ISpVoice, SetSyncSpeakTimeout)
         HRESULT ( STDMETHODCALLTYPE *SetSyncSpeakTimeout )( 
             ISpVoice * This,
             /* [in] */ ULONG msTimeout);
         
+        DECLSPEC_XFGVIRT(ISpVoice, GetSyncSpeakTimeout)
         HRESULT ( STDMETHODCALLTYPE *GetSyncSpeakTimeout )( 
             ISpVoice * This,
             /* [out] */ ULONG *pmsTimeout);
         
+        DECLSPEC_XFGVIRT(ISpVoice, SpeakCompleteEvent)
         /* [local] */ HANDLE ( STDMETHODCALLTYPE *SpeakCompleteEvent )( 
             ISpVoice * This);
         
+        DECLSPEC_XFGVIRT(ISpVoice, IsUISupported)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *IsUISupported )( 
             ISpVoice * This,
             /* [in] */ LPCWSTR pszTypeOfUI,
@@ -6963,6 +7354,7 @@ EXTERN_C const IID IID_ISpVoice;
             /* [in] */ ULONG cbExtraData,
             /* [out] */ BOOL *pfSupported);
         
+        DECLSPEC_XFGVIRT(ISpVoice, DisplayUI)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *DisplayUI )( 
             ISpVoice * This,
             /* [in] */ HWND hwndParent,
@@ -7156,28 +7548,34 @@ EXTERN_C const IID IID_ISpPhrase;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpPhrase * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpPhrase * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISpPhrase * This);
         
+        DECLSPEC_XFGVIRT(ISpPhrase, GetPhrase)
         HRESULT ( STDMETHODCALLTYPE *GetPhrase )( 
             ISpPhrase * This,
             /* [out][annotation] */ 
             _Outptr_  SPPHRASE **ppCoMemPhrase);
         
+        DECLSPEC_XFGVIRT(ISpPhrase, GetSerializedPhrase)
         HRESULT ( STDMETHODCALLTYPE *GetSerializedPhrase )( 
             ISpPhrase * This,
             /* [out][annotation] */ 
             _Outptr_  SPSERIALIZEDPHRASE **ppCoMemPhrase);
         
+        DECLSPEC_XFGVIRT(ISpPhrase, GetText)
         HRESULT ( STDMETHODCALLTYPE *GetText )( 
             ISpPhrase * This,
             /* [in] */ ULONG ulStart,
@@ -7188,6 +7586,7 @@ EXTERN_C const IID IID_ISpPhrase;
             /* [optional][out][annotation] */ 
             _Out_writes_opt_(1)  BYTE *pbDisplayAttributes);
         
+        DECLSPEC_XFGVIRT(ISpPhrase, Discard)
         HRESULT ( STDMETHODCALLTYPE *Discard )( 
             ISpPhrase * This,
             /* [in] */ DWORD dwValueTypes);
@@ -7270,28 +7669,34 @@ EXTERN_C const IID IID_ISpPhraseAlt;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpPhraseAlt * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpPhraseAlt * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISpPhraseAlt * This);
         
+        DECLSPEC_XFGVIRT(ISpPhrase, GetPhrase)
         HRESULT ( STDMETHODCALLTYPE *GetPhrase )( 
             ISpPhraseAlt * This,
             /* [out][annotation] */ 
             _Outptr_  SPPHRASE **ppCoMemPhrase);
         
+        DECLSPEC_XFGVIRT(ISpPhrase, GetSerializedPhrase)
         HRESULT ( STDMETHODCALLTYPE *GetSerializedPhrase )( 
             ISpPhraseAlt * This,
             /* [out][annotation] */ 
             _Outptr_  SPSERIALIZEDPHRASE **ppCoMemPhrase);
         
+        DECLSPEC_XFGVIRT(ISpPhrase, GetText)
         HRESULT ( STDMETHODCALLTYPE *GetText )( 
             ISpPhraseAlt * This,
             /* [in] */ ULONG ulStart,
@@ -7302,10 +7707,12 @@ EXTERN_C const IID IID_ISpPhraseAlt;
             /* [optional][out][annotation] */ 
             _Out_writes_opt_(1)  BYTE *pbDisplayAttributes);
         
+        DECLSPEC_XFGVIRT(ISpPhrase, Discard)
         HRESULT ( STDMETHODCALLTYPE *Discard )( 
             ISpPhraseAlt * This,
             /* [in] */ DWORD dwValueTypes);
         
+        DECLSPEC_XFGVIRT(ISpPhraseAlt, GetAltInfo)
         HRESULT ( STDMETHODCALLTYPE *GetAltInfo )( 
             ISpPhraseAlt * This,
             /* [out] */ ISpPhrase **ppParent,
@@ -7313,6 +7720,7 @@ EXTERN_C const IID IID_ISpPhraseAlt;
             /* [out] */ ULONG *pcElementsInParent,
             /* [out] */ ULONG *pcElementsInAlt);
         
+        DECLSPEC_XFGVIRT(ISpPhraseAlt, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
             ISpPhraseAlt * This);
         
@@ -7422,28 +7830,34 @@ EXTERN_C const IID IID_ISpPhrase2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpPhrase2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpPhrase2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISpPhrase2 * This);
         
+        DECLSPEC_XFGVIRT(ISpPhrase, GetPhrase)
         HRESULT ( STDMETHODCALLTYPE *GetPhrase )( 
             ISpPhrase2 * This,
             /* [out][annotation] */ 
             _Outptr_  SPPHRASE **ppCoMemPhrase);
         
+        DECLSPEC_XFGVIRT(ISpPhrase, GetSerializedPhrase)
         HRESULT ( STDMETHODCALLTYPE *GetSerializedPhrase )( 
             ISpPhrase2 * This,
             /* [out][annotation] */ 
             _Outptr_  SPSERIALIZEDPHRASE **ppCoMemPhrase);
         
+        DECLSPEC_XFGVIRT(ISpPhrase, GetText)
         HRESULT ( STDMETHODCALLTYPE *GetText )( 
             ISpPhrase2 * This,
             /* [in] */ ULONG ulStart,
@@ -7454,20 +7868,24 @@ EXTERN_C const IID IID_ISpPhrase2;
             /* [optional][out][annotation] */ 
             _Out_writes_opt_(1)  BYTE *pbDisplayAttributes);
         
+        DECLSPEC_XFGVIRT(ISpPhrase, Discard)
         HRESULT ( STDMETHODCALLTYPE *Discard )( 
             ISpPhrase2 * This,
             /* [in] */ DWORD dwValueTypes);
         
+        DECLSPEC_XFGVIRT(ISpPhrase2, GetXMLResult)
         HRESULT ( STDMETHODCALLTYPE *GetXMLResult )( 
             ISpPhrase2 * This,
             /* [out][annotation] */ 
             _Outptr_  LPWSTR *ppszCoMemXMLResult,
             /* [in] */ SPXMLRESULTOPTIONS Options);
         
+        DECLSPEC_XFGVIRT(ISpPhrase2, GetXMLErrorInfo)
         HRESULT ( STDMETHODCALLTYPE *GetXMLErrorInfo )( 
             ISpPhrase2 * This,
             /* [out] */ SPSEMANTICERRORINFO *pSemanticErrorInfo);
         
+        DECLSPEC_XFGVIRT(ISpPhrase2, GetAudio)
         HRESULT ( STDMETHODCALLTYPE *GetAudio )( 
             ISpPhrase2 * This,
             /* [in] */ ULONG ulStartElement,
@@ -7608,28 +8026,34 @@ EXTERN_C const IID IID_ISpRecoResult;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpRecoResult * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpRecoResult * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISpRecoResult * This);
         
+        DECLSPEC_XFGVIRT(ISpPhrase, GetPhrase)
         HRESULT ( STDMETHODCALLTYPE *GetPhrase )( 
             ISpRecoResult * This,
             /* [out][annotation] */ 
             _Outptr_  SPPHRASE **ppCoMemPhrase);
         
+        DECLSPEC_XFGVIRT(ISpPhrase, GetSerializedPhrase)
         HRESULT ( STDMETHODCALLTYPE *GetSerializedPhrase )( 
             ISpRecoResult * This,
             /* [out][annotation] */ 
             _Outptr_  SPSERIALIZEDPHRASE **ppCoMemPhrase);
         
+        DECLSPEC_XFGVIRT(ISpPhrase, GetText)
         HRESULT ( STDMETHODCALLTYPE *GetText )( 
             ISpRecoResult * This,
             /* [in] */ ULONG ulStart,
@@ -7640,14 +8064,17 @@ EXTERN_C const IID IID_ISpRecoResult;
             /* [optional][out][annotation] */ 
             _Out_writes_opt_(1)  BYTE *pbDisplayAttributes);
         
+        DECLSPEC_XFGVIRT(ISpPhrase, Discard)
         HRESULT ( STDMETHODCALLTYPE *Discard )( 
             ISpRecoResult * This,
             /* [in] */ DWORD dwValueTypes);
         
+        DECLSPEC_XFGVIRT(ISpRecoResult, GetResultTimes)
         HRESULT ( STDMETHODCALLTYPE *GetResultTimes )( 
             ISpRecoResult * This,
             /* [out] */ SPRECORESULTTIMES *pTimes);
         
+        DECLSPEC_XFGVIRT(ISpRecoResult, GetAlternates)
         HRESULT ( STDMETHODCALLTYPE *GetAlternates )( 
             ISpRecoResult * This,
             /* [in] */ ULONG ulStartElement,
@@ -7657,12 +8084,14 @@ EXTERN_C const IID IID_ISpRecoResult;
             _Out_writes_to_(ulRequestCount,*pcPhrasesReturned)  ISpPhraseAlt **ppPhrases,
             /* [out] */ ULONG *pcPhrasesReturned);
         
+        DECLSPEC_XFGVIRT(ISpRecoResult, GetAudio)
         HRESULT ( STDMETHODCALLTYPE *GetAudio )( 
             ISpRecoResult * This,
             /* [in] */ ULONG ulStartElement,
             /* [in] */ ULONG cElements,
             /* [out] */ ISpStreamFormat **ppStream);
         
+        DECLSPEC_XFGVIRT(ISpRecoResult, SpeakAudio)
         HRESULT ( STDMETHODCALLTYPE *SpeakAudio )( 
             ISpRecoResult * This,
             /* [in] */ ULONG ulStartElement,
@@ -7670,15 +8099,18 @@ EXTERN_C const IID IID_ISpRecoResult;
             /* [in] */ DWORD dwFlags,
             /* [out] */ ULONG *pulStreamNumber);
         
+        DECLSPEC_XFGVIRT(ISpRecoResult, Serialize)
         HRESULT ( STDMETHODCALLTYPE *Serialize )( 
             ISpRecoResult * This,
             /* [out] */ SPSERIALIZEDRESULT **ppCoMemSerializedResult);
         
+        DECLSPEC_XFGVIRT(ISpRecoResult, ScaleAudio)
         HRESULT ( STDMETHODCALLTYPE *ScaleAudio )( 
             ISpRecoResult * This,
             /* [in] */ const GUID *pAudioFormatId,
             /* [in] */ const WAVEFORMATEX *pWaveFormatEx);
         
+        DECLSPEC_XFGVIRT(ISpRecoResult, GetRecoContext)
         HRESULT ( STDMETHODCALLTYPE *GetRecoContext )( 
             ISpRecoResult * This,
             /* [out] */ ISpRecoContext **ppRecoContext);
@@ -7806,28 +8238,34 @@ EXTERN_C const IID IID_ISpRecoResult2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpRecoResult2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpRecoResult2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISpRecoResult2 * This);
         
+        DECLSPEC_XFGVIRT(ISpPhrase, GetPhrase)
         HRESULT ( STDMETHODCALLTYPE *GetPhrase )( 
             ISpRecoResult2 * This,
             /* [out][annotation] */ 
             _Outptr_  SPPHRASE **ppCoMemPhrase);
         
+        DECLSPEC_XFGVIRT(ISpPhrase, GetSerializedPhrase)
         HRESULT ( STDMETHODCALLTYPE *GetSerializedPhrase )( 
             ISpRecoResult2 * This,
             /* [out][annotation] */ 
             _Outptr_  SPSERIALIZEDPHRASE **ppCoMemPhrase);
         
+        DECLSPEC_XFGVIRT(ISpPhrase, GetText)
         HRESULT ( STDMETHODCALLTYPE *GetText )( 
             ISpRecoResult2 * This,
             /* [in] */ ULONG ulStart,
@@ -7838,14 +8276,17 @@ EXTERN_C const IID IID_ISpRecoResult2;
             /* [optional][out][annotation] */ 
             _Out_writes_opt_(1)  BYTE *pbDisplayAttributes);
         
+        DECLSPEC_XFGVIRT(ISpPhrase, Discard)
         HRESULT ( STDMETHODCALLTYPE *Discard )( 
             ISpRecoResult2 * This,
             /* [in] */ DWORD dwValueTypes);
         
+        DECLSPEC_XFGVIRT(ISpRecoResult, GetResultTimes)
         HRESULT ( STDMETHODCALLTYPE *GetResultTimes )( 
             ISpRecoResult2 * This,
             /* [out] */ SPRECORESULTTIMES *pTimes);
         
+        DECLSPEC_XFGVIRT(ISpRecoResult, GetAlternates)
         HRESULT ( STDMETHODCALLTYPE *GetAlternates )( 
             ISpRecoResult2 * This,
             /* [in] */ ULONG ulStartElement,
@@ -7855,12 +8296,14 @@ EXTERN_C const IID IID_ISpRecoResult2;
             _Out_writes_to_(ulRequestCount,*pcPhrasesReturned)  ISpPhraseAlt **ppPhrases,
             /* [out] */ ULONG *pcPhrasesReturned);
         
+        DECLSPEC_XFGVIRT(ISpRecoResult, GetAudio)
         HRESULT ( STDMETHODCALLTYPE *GetAudio )( 
             ISpRecoResult2 * This,
             /* [in] */ ULONG ulStartElement,
             /* [in] */ ULONG cElements,
             /* [out] */ ISpStreamFormat **ppStream);
         
+        DECLSPEC_XFGVIRT(ISpRecoResult, SpeakAudio)
         HRESULT ( STDMETHODCALLTYPE *SpeakAudio )( 
             ISpRecoResult2 * This,
             /* [in] */ ULONG ulStartElement,
@@ -7868,24 +8311,29 @@ EXTERN_C const IID IID_ISpRecoResult2;
             /* [in] */ DWORD dwFlags,
             /* [out] */ ULONG *pulStreamNumber);
         
+        DECLSPEC_XFGVIRT(ISpRecoResult, Serialize)
         HRESULT ( STDMETHODCALLTYPE *Serialize )( 
             ISpRecoResult2 * This,
             /* [out] */ SPSERIALIZEDRESULT **ppCoMemSerializedResult);
         
+        DECLSPEC_XFGVIRT(ISpRecoResult, ScaleAudio)
         HRESULT ( STDMETHODCALLTYPE *ScaleAudio )( 
             ISpRecoResult2 * This,
             /* [in] */ const GUID *pAudioFormatId,
             /* [in] */ const WAVEFORMATEX *pWaveFormatEx);
         
+        DECLSPEC_XFGVIRT(ISpRecoResult, GetRecoContext)
         HRESULT ( STDMETHODCALLTYPE *GetRecoContext )( 
             ISpRecoResult2 * This,
             /* [out] */ ISpRecoContext **ppRecoContext);
         
+        DECLSPEC_XFGVIRT(ISpRecoResult2, CommitAlternate)
         HRESULT ( STDMETHODCALLTYPE *CommitAlternate )( 
             ISpRecoResult2 * This,
             /* [in] */ ISpPhraseAlt *pPhraseAlt,
             /* [out] */ ISpRecoResult **ppNewResult);
         
+        DECLSPEC_XFGVIRT(ISpRecoResult2, CommitText)
         HRESULT ( STDMETHODCALLTYPE *CommitText )( 
             ISpRecoResult2 * This,
             /* [in] */ ULONG ulStartElement,
@@ -7894,6 +8342,7 @@ EXTERN_C const IID IID_ISpRecoResult2;
             _In_opt_  LPCWSTR pszCorrectedData,
             /* [in] */ DWORD eCommitFlags);
         
+        DECLSPEC_XFGVIRT(ISpRecoResult2, SetTextFeedback)
         HRESULT ( STDMETHODCALLTYPE *SetTextFeedback )( 
             ISpRecoResult2 * This,
             /* [string][in] */ LPCWSTR pszFeedback,
@@ -8009,28 +8458,34 @@ EXTERN_C const IID IID_ISpXMLRecoResult;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpXMLRecoResult * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpXMLRecoResult * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISpXMLRecoResult * This);
         
+        DECLSPEC_XFGVIRT(ISpPhrase, GetPhrase)
         HRESULT ( STDMETHODCALLTYPE *GetPhrase )( 
             ISpXMLRecoResult * This,
             /* [out][annotation] */ 
             _Outptr_  SPPHRASE **ppCoMemPhrase);
         
+        DECLSPEC_XFGVIRT(ISpPhrase, GetSerializedPhrase)
         HRESULT ( STDMETHODCALLTYPE *GetSerializedPhrase )( 
             ISpXMLRecoResult * This,
             /* [out][annotation] */ 
             _Outptr_  SPSERIALIZEDPHRASE **ppCoMemPhrase);
         
+        DECLSPEC_XFGVIRT(ISpPhrase, GetText)
         HRESULT ( STDMETHODCALLTYPE *GetText )( 
             ISpXMLRecoResult * This,
             /* [in] */ ULONG ulStart,
@@ -8041,14 +8496,17 @@ EXTERN_C const IID IID_ISpXMLRecoResult;
             /* [optional][out][annotation] */ 
             _Out_writes_opt_(1)  BYTE *pbDisplayAttributes);
         
+        DECLSPEC_XFGVIRT(ISpPhrase, Discard)
         HRESULT ( STDMETHODCALLTYPE *Discard )( 
             ISpXMLRecoResult * This,
             /* [in] */ DWORD dwValueTypes);
         
+        DECLSPEC_XFGVIRT(ISpRecoResult, GetResultTimes)
         HRESULT ( STDMETHODCALLTYPE *GetResultTimes )( 
             ISpXMLRecoResult * This,
             /* [out] */ SPRECORESULTTIMES *pTimes);
         
+        DECLSPEC_XFGVIRT(ISpRecoResult, GetAlternates)
         HRESULT ( STDMETHODCALLTYPE *GetAlternates )( 
             ISpXMLRecoResult * This,
             /* [in] */ ULONG ulStartElement,
@@ -8058,12 +8516,14 @@ EXTERN_C const IID IID_ISpXMLRecoResult;
             _Out_writes_to_(ulRequestCount,*pcPhrasesReturned)  ISpPhraseAlt **ppPhrases,
             /* [out] */ ULONG *pcPhrasesReturned);
         
+        DECLSPEC_XFGVIRT(ISpRecoResult, GetAudio)
         HRESULT ( STDMETHODCALLTYPE *GetAudio )( 
             ISpXMLRecoResult * This,
             /* [in] */ ULONG ulStartElement,
             /* [in] */ ULONG cElements,
             /* [out] */ ISpStreamFormat **ppStream);
         
+        DECLSPEC_XFGVIRT(ISpRecoResult, SpeakAudio)
         HRESULT ( STDMETHODCALLTYPE *SpeakAudio )( 
             ISpXMLRecoResult * This,
             /* [in] */ ULONG ulStartElement,
@@ -8071,25 +8531,30 @@ EXTERN_C const IID IID_ISpXMLRecoResult;
             /* [in] */ DWORD dwFlags,
             /* [out] */ ULONG *pulStreamNumber);
         
+        DECLSPEC_XFGVIRT(ISpRecoResult, Serialize)
         HRESULT ( STDMETHODCALLTYPE *Serialize )( 
             ISpXMLRecoResult * This,
             /* [out] */ SPSERIALIZEDRESULT **ppCoMemSerializedResult);
         
+        DECLSPEC_XFGVIRT(ISpRecoResult, ScaleAudio)
         HRESULT ( STDMETHODCALLTYPE *ScaleAudio )( 
             ISpXMLRecoResult * This,
             /* [in] */ const GUID *pAudioFormatId,
             /* [in] */ const WAVEFORMATEX *pWaveFormatEx);
         
+        DECLSPEC_XFGVIRT(ISpRecoResult, GetRecoContext)
         HRESULT ( STDMETHODCALLTYPE *GetRecoContext )( 
             ISpXMLRecoResult * This,
             /* [out] */ ISpRecoContext **ppRecoContext);
         
+        DECLSPEC_XFGVIRT(ISpXMLRecoResult, GetXMLResult)
         HRESULT ( STDMETHODCALLTYPE *GetXMLResult )( 
             ISpXMLRecoResult * This,
             /* [out][annotation] */ 
             _Outptr_  LPWSTR *ppszCoMemXMLResult,
             /* [in] */ SPXMLRESULTOPTIONS Options);
         
+        DECLSPEC_XFGVIRT(ISpXMLRecoResult, GetXMLErrorInfo)
         HRESULT ( STDMETHODCALLTYPE *GetXMLErrorInfo )( 
             ISpXMLRecoResult * This,
             /* [out] */ SPSEMANTICERRORINFO *pSemanticErrorInfo);
@@ -8323,22 +8788,27 @@ EXTERN_C const IID IID_ISpGrammarBuilder;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpGrammarBuilder * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpGrammarBuilder * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISpGrammarBuilder * This);
         
+        DECLSPEC_XFGVIRT(ISpGrammarBuilder, ResetGrammar)
         HRESULT ( STDMETHODCALLTYPE *ResetGrammar )( 
             ISpGrammarBuilder * This,
             /* [in] */ WORD NewLanguage);
         
+        DECLSPEC_XFGVIRT(ISpGrammarBuilder, GetRule)
         HRESULT ( STDMETHODCALLTYPE *GetRule )( 
             ISpGrammarBuilder * This,
             /* [in] */ LPCWSTR pszRuleName,
@@ -8347,15 +8817,18 @@ EXTERN_C const IID IID_ISpGrammarBuilder;
             /* [in] */ BOOL fCreateIfNotExist,
             /* [out] */ SPSTATEHANDLE *phInitialState);
         
+        DECLSPEC_XFGVIRT(ISpGrammarBuilder, ClearRule)
         HRESULT ( STDMETHODCALLTYPE *ClearRule )( 
             ISpGrammarBuilder * This,
             /* [in] */ SPSTATEHANDLE hState);
         
+        DECLSPEC_XFGVIRT(ISpGrammarBuilder, CreateNewState)
         HRESULT ( STDMETHODCALLTYPE *CreateNewState )( 
             ISpGrammarBuilder * This,
             /* [in] */ SPSTATEHANDLE hState,
             /* [out] */ SPSTATEHANDLE *phState);
         
+        DECLSPEC_XFGVIRT(ISpGrammarBuilder, AddWordTransition)
         HRESULT ( STDMETHODCALLTYPE *AddWordTransition )( 
             ISpGrammarBuilder * This,
             /* [in] */ SPSTATEHANDLE hFromState,
@@ -8368,6 +8841,7 @@ EXTERN_C const IID IID_ISpGrammarBuilder;
             /* [in] */ float Weight,
             /* [in] */ const SPPROPERTYINFO *pPropInfo);
         
+        DECLSPEC_XFGVIRT(ISpGrammarBuilder, AddRuleTransition)
         HRESULT ( STDMETHODCALLTYPE *AddRuleTransition )( 
             ISpGrammarBuilder * This,
             /* [in] */ SPSTATEHANDLE hFromState,
@@ -8376,6 +8850,7 @@ EXTERN_C const IID IID_ISpGrammarBuilder;
             /* [in] */ float Weight,
             /* [in] */ const SPPROPERTYINFO *pPropInfo);
         
+        DECLSPEC_XFGVIRT(ISpGrammarBuilder, AddResource)
         HRESULT ( STDMETHODCALLTYPE *AddResource )( 
             ISpGrammarBuilder * This,
             /* [in] */ SPSTATEHANDLE hRuleState,
@@ -8383,6 +8858,7 @@ EXTERN_C const IID IID_ISpGrammarBuilder;
             /* [in][annotation] */ 
             _In_opt_  LPCWSTR pszResourceValue);
         
+        DECLSPEC_XFGVIRT(ISpGrammarBuilder, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
             ISpGrammarBuilder * This,
             /* [in] */ DWORD dwReserved);
@@ -8562,22 +9038,27 @@ EXTERN_C const IID IID_ISpRecoGrammar;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpRecoGrammar * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpRecoGrammar * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISpRecoGrammar * This);
         
+        DECLSPEC_XFGVIRT(ISpGrammarBuilder, ResetGrammar)
         HRESULT ( STDMETHODCALLTYPE *ResetGrammar )( 
             ISpRecoGrammar * This,
             /* [in] */ WORD NewLanguage);
         
+        DECLSPEC_XFGVIRT(ISpGrammarBuilder, GetRule)
         HRESULT ( STDMETHODCALLTYPE *GetRule )( 
             ISpRecoGrammar * This,
             /* [in] */ LPCWSTR pszRuleName,
@@ -8586,15 +9067,18 @@ EXTERN_C const IID IID_ISpRecoGrammar;
             /* [in] */ BOOL fCreateIfNotExist,
             /* [out] */ SPSTATEHANDLE *phInitialState);
         
+        DECLSPEC_XFGVIRT(ISpGrammarBuilder, ClearRule)
         HRESULT ( STDMETHODCALLTYPE *ClearRule )( 
             ISpRecoGrammar * This,
             /* [in] */ SPSTATEHANDLE hState);
         
+        DECLSPEC_XFGVIRT(ISpGrammarBuilder, CreateNewState)
         HRESULT ( STDMETHODCALLTYPE *CreateNewState )( 
             ISpRecoGrammar * This,
             /* [in] */ SPSTATEHANDLE hState,
             /* [out] */ SPSTATEHANDLE *phState);
         
+        DECLSPEC_XFGVIRT(ISpGrammarBuilder, AddWordTransition)
         HRESULT ( STDMETHODCALLTYPE *AddWordTransition )( 
             ISpRecoGrammar * This,
             /* [in] */ SPSTATEHANDLE hFromState,
@@ -8607,6 +9091,7 @@ EXTERN_C const IID IID_ISpRecoGrammar;
             /* [in] */ float Weight,
             /* [in] */ const SPPROPERTYINFO *pPropInfo);
         
+        DECLSPEC_XFGVIRT(ISpGrammarBuilder, AddRuleTransition)
         HRESULT ( STDMETHODCALLTYPE *AddRuleTransition )( 
             ISpRecoGrammar * This,
             /* [in] */ SPSTATEHANDLE hFromState,
@@ -8615,6 +9100,7 @@ EXTERN_C const IID IID_ISpRecoGrammar;
             /* [in] */ float Weight,
             /* [in] */ const SPPROPERTYINFO *pPropInfo);
         
+        DECLSPEC_XFGVIRT(ISpGrammarBuilder, AddResource)
         HRESULT ( STDMETHODCALLTYPE *AddResource )( 
             ISpRecoGrammar * This,
             /* [in] */ SPSTATEHANDLE hRuleState,
@@ -8622,30 +9108,36 @@ EXTERN_C const IID IID_ISpRecoGrammar;
             /* [in][annotation] */ 
             _In_opt_  LPCWSTR pszResourceValue);
         
+        DECLSPEC_XFGVIRT(ISpGrammarBuilder, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
             ISpRecoGrammar * This,
             /* [in] */ DWORD dwReserved);
         
+        DECLSPEC_XFGVIRT(ISpRecoGrammar, GetGrammarId)
         HRESULT ( STDMETHODCALLTYPE *GetGrammarId )( 
             ISpRecoGrammar * This,
             /* [out] */ ULONGLONG *pullGrammarId);
         
+        DECLSPEC_XFGVIRT(ISpRecoGrammar, GetRecoContext)
         HRESULT ( STDMETHODCALLTYPE *GetRecoContext )( 
             ISpRecoGrammar * This,
             /* [out][annotation] */ 
             _Outptr_  ISpRecoContext **ppRecoCtxt);
         
+        DECLSPEC_XFGVIRT(ISpRecoGrammar, LoadCmdFromFile)
         HRESULT ( STDMETHODCALLTYPE *LoadCmdFromFile )( 
             ISpRecoGrammar * This,
             /* [string][in] */ LPCWSTR pszFileName,
             /* [in] */ SPLOADOPTIONS Options);
         
+        DECLSPEC_XFGVIRT(ISpRecoGrammar, LoadCmdFromObject)
         HRESULT ( STDMETHODCALLTYPE *LoadCmdFromObject )( 
             ISpRecoGrammar * This,
             /* [in] */ REFCLSID rcid,
             /* [string][in] */ LPCWSTR pszGrammarName,
             /* [in] */ SPLOADOPTIONS Options);
         
+        DECLSPEC_XFGVIRT(ISpRecoGrammar, LoadCmdFromResource)
         HRESULT ( STDMETHODCALLTYPE *LoadCmdFromResource )( 
             ISpRecoGrammar * This,
             /* [in] */ HMODULE hModule,
@@ -8654,11 +9146,13 @@ EXTERN_C const IID IID_ISpRecoGrammar;
             /* [in] */ WORD wLanguage,
             /* [in] */ SPLOADOPTIONS Options);
         
+        DECLSPEC_XFGVIRT(ISpRecoGrammar, LoadCmdFromMemory)
         HRESULT ( STDMETHODCALLTYPE *LoadCmdFromMemory )( 
             ISpRecoGrammar * This,
             /* [in] */ const SPBINARYGRAMMAR *pGrammar,
             /* [in] */ SPLOADOPTIONS Options);
         
+        DECLSPEC_XFGVIRT(ISpRecoGrammar, LoadCmdFromProprietaryGrammar)
         HRESULT ( STDMETHODCALLTYPE *LoadCmdFromProprietaryGrammar )( 
             ISpRecoGrammar * This,
             /* [in] */ REFGUID rguidParam,
@@ -8667,6 +9161,7 @@ EXTERN_C const IID IID_ISpRecoGrammar;
             /* [in] */ ULONG cbDataSize,
             /* [in] */ SPLOADOPTIONS Options);
         
+        DECLSPEC_XFGVIRT(ISpRecoGrammar, SetRuleState)
         HRESULT ( STDMETHODCALLTYPE *SetRuleState )( 
             ISpRecoGrammar * This,
             /* [string][in][annotation] */ 
@@ -8674,24 +9169,29 @@ EXTERN_C const IID IID_ISpRecoGrammar;
             /* [in] */ void *pReserved,
             /* [in] */ SPRULESTATE NewState);
         
+        DECLSPEC_XFGVIRT(ISpRecoGrammar, SetRuleIdState)
         HRESULT ( STDMETHODCALLTYPE *SetRuleIdState )( 
             ISpRecoGrammar * This,
             /* [in] */ ULONG ulRuleId,
             /* [in] */ SPRULESTATE NewState);
         
+        DECLSPEC_XFGVIRT(ISpRecoGrammar, LoadDictation)
         HRESULT ( STDMETHODCALLTYPE *LoadDictation )( 
             ISpRecoGrammar * This,
             /* [string][in][annotation] */ 
             _In_opt_  LPCWSTR pszTopicName,
             /* [in] */ SPLOADOPTIONS Options);
         
+        DECLSPEC_XFGVIRT(ISpRecoGrammar, UnloadDictation)
         HRESULT ( STDMETHODCALLTYPE *UnloadDictation )( 
             ISpRecoGrammar * This);
         
+        DECLSPEC_XFGVIRT(ISpRecoGrammar, SetDictationState)
         HRESULT ( STDMETHODCALLTYPE *SetDictationState )( 
             ISpRecoGrammar * This,
             /* [in] */ SPRULESTATE NewState);
         
+        DECLSPEC_XFGVIRT(ISpRecoGrammar, SetWordSequenceData)
         HRESULT ( STDMETHODCALLTYPE *SetWordSequenceData )( 
             ISpRecoGrammar * This,
             /* [in][annotation] */ 
@@ -8699,25 +9199,30 @@ EXTERN_C const IID IID_ISpRecoGrammar;
             /* [in] */ ULONG cchText,
             /* [in] */ const SPTEXTSELECTIONINFO *pInfo);
         
+        DECLSPEC_XFGVIRT(ISpRecoGrammar, SetTextSelection)
         HRESULT ( STDMETHODCALLTYPE *SetTextSelection )( 
             ISpRecoGrammar * This,
             /* [in] */ const SPTEXTSELECTIONINFO *pInfo);
         
+        DECLSPEC_XFGVIRT(ISpRecoGrammar, IsPronounceable)
         HRESULT ( STDMETHODCALLTYPE *IsPronounceable )( 
             ISpRecoGrammar * This,
             /* [string][in] */ LPCWSTR pszWord,
             /* [out] */ SPWORDPRONOUNCEABLE *pWordPronounceable);
         
+        DECLSPEC_XFGVIRT(ISpRecoGrammar, SetGrammarState)
         HRESULT ( STDMETHODCALLTYPE *SetGrammarState )( 
             ISpRecoGrammar * This,
             /* [in] */ SPGRAMMARSTATE eGrammarState);
         
+        DECLSPEC_XFGVIRT(ISpRecoGrammar, SaveCmd)
         HRESULT ( STDMETHODCALLTYPE *SaveCmd )( 
             ISpRecoGrammar * This,
             /* [in] */ IStream *pStream,
             /* [optional][out][annotation] */ 
             _Outptr_opt_  LPWSTR *ppszCoMemErrorText);
         
+        DECLSPEC_XFGVIRT(ISpRecoGrammar, GetGrammarState)
         HRESULT ( STDMETHODCALLTYPE *GetGrammarState )( 
             ISpRecoGrammar * This,
             /* [out] */ SPGRAMMARSTATE *peGrammarState);
@@ -8894,18 +9399,22 @@ EXTERN_C const IID IID_ISpGrammarBuilder2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpGrammarBuilder2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpGrammarBuilder2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISpGrammarBuilder2 * This);
         
+        DECLSPEC_XFGVIRT(ISpGrammarBuilder2, AddTextSubset)
         HRESULT ( STDMETHODCALLTYPE *AddTextSubset )( 
             ISpGrammarBuilder2 * This,
             /* [in] */ SPSTATEHANDLE hFromState,
@@ -8913,6 +9422,7 @@ EXTERN_C const IID IID_ISpGrammarBuilder2;
             /* [in] */ LPCWSTR psz,
             /* [in] */ SPMATCHINGMODE eMatchMode);
         
+        DECLSPEC_XFGVIRT(ISpGrammarBuilder2, SetPhoneticAlphabet)
         HRESULT ( STDMETHODCALLTYPE *SetPhoneticAlphabet )( 
             ISpGrammarBuilder2 * This,
             /* [in] */ PHONETICALPHABET phoneticALphabet);
@@ -9029,23 +9539,28 @@ EXTERN_C const IID IID_ISpRecoGrammar2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpRecoGrammar2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpRecoGrammar2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISpRecoGrammar2 * This);
         
+        DECLSPEC_XFGVIRT(ISpRecoGrammar2, GetRules)
         HRESULT ( STDMETHODCALLTYPE *GetRules )( 
             ISpRecoGrammar2 * This,
             /* [out] */ SPRULE **ppCoMemRules,
             /* [out] */ UINT *puNumRules);
         
+        DECLSPEC_XFGVIRT(ISpRecoGrammar2, LoadCmdFromFile2)
         HRESULT ( STDMETHODCALLTYPE *LoadCmdFromFile2 )( 
             ISpRecoGrammar2 * This,
             /* [string][in] */ LPCWSTR pszFileName,
@@ -9055,6 +9570,7 @@ EXTERN_C const IID IID_ISpRecoGrammar2;
             /* [string][in][annotation] */ 
             _In_opt_  LPCWSTR pszBaseUri);
         
+        DECLSPEC_XFGVIRT(ISpRecoGrammar2, LoadCmdFromMemory2)
         HRESULT ( STDMETHODCALLTYPE *LoadCmdFromMemory2 )( 
             ISpRecoGrammar2 * This,
             /* [in] */ const SPBINARYGRAMMAR *pGrammar,
@@ -9064,26 +9580,31 @@ EXTERN_C const IID IID_ISpRecoGrammar2;
             /* [string][in][annotation] */ 
             _In_opt_  LPCWSTR pszBaseUri);
         
+        DECLSPEC_XFGVIRT(ISpRecoGrammar2, SetRulePriority)
         HRESULT ( STDMETHODCALLTYPE *SetRulePriority )( 
             ISpRecoGrammar2 * This,
             /* [string][in] */ LPCWSTR pszRuleName,
             /* [in] */ ULONG ulRuleId,
             /* [in] */ int nRulePriority);
         
+        DECLSPEC_XFGVIRT(ISpRecoGrammar2, SetRuleWeight)
         HRESULT ( STDMETHODCALLTYPE *SetRuleWeight )( 
             ISpRecoGrammar2 * This,
             /* [string][in] */ LPCWSTR pszRuleName,
             /* [in] */ ULONG ulRuleId,
             /* [in] */ float flWeight);
         
+        DECLSPEC_XFGVIRT(ISpRecoGrammar2, SetDictationWeight)
         HRESULT ( STDMETHODCALLTYPE *SetDictationWeight )( 
             ISpRecoGrammar2 * This,
             /* [in] */ float flWeight);
         
+        DECLSPEC_XFGVIRT(ISpRecoGrammar2, SetGrammarLoader)
         HRESULT ( STDMETHODCALLTYPE *SetGrammarLoader )( 
             ISpRecoGrammar2 * This,
             /* [in] */ ISpeechResourceLoader *pLoader);
         
+        DECLSPEC_XFGVIRT(ISpRecoGrammar2, SetSMLSecurityManager)
         HRESULT ( STDMETHODCALLTYPE *SetSMLSecurityManager )( 
             ISpRecoGrammar2 * This,
             /* [in] */ IInternetSecurityManager *pSMLSecurityManager);
@@ -9191,28 +9712,34 @@ EXTERN_C const IID IID_ISpeechResourceLoader;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpeechResourceLoader * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpeechResourceLoader * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISpeechResourceLoader * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISpeechResourceLoader * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISpeechResourceLoader * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISpeechResourceLoader * This,
             /* [in] */ REFIID riid,
@@ -9221,6 +9748,7 @@ EXTERN_C const IID IID_ISpeechResourceLoader;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechResourceLoader * This,
             /* [annotation][in] */ 
@@ -9240,6 +9768,7 @@ EXTERN_C const IID IID_ISpeechResourceLoader;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechResourceLoader, LoadResource)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *LoadResource )( 
             ISpeechResourceLoader * This,
             /* [in] */ BSTR bstrResourceUri,
@@ -9251,6 +9780,7 @@ EXTERN_C const IID IID_ISpeechResourceLoader;
             /* [out][annotation] */ 
             _Out_opt_  BSTR *pbstrRedirectUrl);
         
+        DECLSPEC_XFGVIRT(ISpeechResourceLoader, GetLocalCopy)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetLocalCopy )( 
             ISpeechResourceLoader * This,
             /* [in] */ BSTR bstrResourceUri,
@@ -9260,6 +9790,7 @@ EXTERN_C const IID IID_ISpeechResourceLoader;
             /* [out][annotation] */ 
             _Out_opt_  BSTR *pbstrRedirectUrl);
         
+        DECLSPEC_XFGVIRT(ISpeechResourceLoader, ReleaseLocalCopy)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ReleaseLocalCopy )( 
             ISpeechResourceLoader * This,
             /* [in] */ BSTR pbstrLocalPath);
@@ -9440,22 +9971,27 @@ EXTERN_C const IID IID_ISpRecoContext;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpRecoContext * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpRecoContext * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISpRecoContext * This);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, SetNotifySink)
         HRESULT ( STDMETHODCALLTYPE *SetNotifySink )( 
             ISpRecoContext * This,
             /* [in] */ ISpNotifySink *pNotifySink);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, SetNotifyWindowMessage)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetNotifyWindowMessage )( 
             ISpRecoContext * This,
             /* [in] */ HWND hWnd,
@@ -9463,121 +9999,147 @@ EXTERN_C const IID IID_ISpRecoContext;
             /* [in] */ WPARAM wParam,
             /* [in] */ LPARAM lParam);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, SetNotifyCallbackFunction)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetNotifyCallbackFunction )( 
             ISpRecoContext * This,
             /* [in] */ SPNOTIFYCALLBACK *pfnCallback,
             /* [in] */ WPARAM wParam,
             /* [in] */ LPARAM lParam);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, SetNotifyCallbackInterface)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetNotifyCallbackInterface )( 
             ISpRecoContext * This,
             /* [in] */ ISpNotifyCallback *pSpCallback,
             /* [in] */ WPARAM wParam,
             /* [in] */ LPARAM lParam);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, SetNotifyWin32Event)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetNotifyWin32Event )( 
             ISpRecoContext * This);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, WaitForNotifyEvent)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *WaitForNotifyEvent )( 
             ISpRecoContext * This,
             /* [in] */ DWORD dwMilliseconds);
         
+        DECLSPEC_XFGVIRT(ISpNotifySource, GetNotifyEventHandle)
         /* [local] */ HANDLE ( STDMETHODCALLTYPE *GetNotifyEventHandle )( 
             ISpRecoContext * This);
         
+        DECLSPEC_XFGVIRT(ISpEventSource, SetInterest)
         HRESULT ( STDMETHODCALLTYPE *SetInterest )( 
             ISpRecoContext * This,
             /* [in] */ ULONGLONG ullEventInterest,
             /* [in] */ ULONGLONG ullQueuedInterest);
         
+        DECLSPEC_XFGVIRT(ISpEventSource, GetEvents)
         HRESULT ( STDMETHODCALLTYPE *GetEvents )( 
             ISpRecoContext * This,
             /* [in] */ ULONG ulCount,
             /* [size_is][out] */ SPEVENT *pEventArray,
             /* [out] */ ULONG *pulFetched);
         
+        DECLSPEC_XFGVIRT(ISpEventSource, GetInfo)
         HRESULT ( STDMETHODCALLTYPE *GetInfo )( 
             ISpRecoContext * This,
             /* [out] */ SPEVENTSOURCEINFO *pInfo);
         
+        DECLSPEC_XFGVIRT(ISpRecoContext, GetRecognizer)
         HRESULT ( STDMETHODCALLTYPE *GetRecognizer )( 
             ISpRecoContext * This,
             /* [out] */ ISpRecognizer **ppRecognizer);
         
+        DECLSPEC_XFGVIRT(ISpRecoContext, CreateGrammar)
         HRESULT ( STDMETHODCALLTYPE *CreateGrammar )( 
             ISpRecoContext * This,
             /* [in] */ ULONGLONG ullGrammarId,
             /* [out] */ ISpRecoGrammar **ppGrammar);
         
+        DECLSPEC_XFGVIRT(ISpRecoContext, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             ISpRecoContext * This,
             /* [out] */ SPRECOCONTEXTSTATUS *pStatus);
         
+        DECLSPEC_XFGVIRT(ISpRecoContext, GetMaxAlternates)
         HRESULT ( STDMETHODCALLTYPE *GetMaxAlternates )( 
             ISpRecoContext * This,
             /* [in] */ ULONG *pcAlternates);
         
+        DECLSPEC_XFGVIRT(ISpRecoContext, SetMaxAlternates)
         HRESULT ( STDMETHODCALLTYPE *SetMaxAlternates )( 
             ISpRecoContext * This,
             /* [in] */ ULONG cAlternates);
         
+        DECLSPEC_XFGVIRT(ISpRecoContext, SetAudioOptions)
         HRESULT ( STDMETHODCALLTYPE *SetAudioOptions )( 
             ISpRecoContext * This,
             /* [in] */ SPAUDIOOPTIONS Options,
             /* [in] */ const GUID *pAudioFormatId,
             /* [in] */ const WAVEFORMATEX *pWaveFormatEx);
         
+        DECLSPEC_XFGVIRT(ISpRecoContext, GetAudioOptions)
         HRESULT ( STDMETHODCALLTYPE *GetAudioOptions )( 
             ISpRecoContext * This,
             /* [in] */ SPAUDIOOPTIONS *pOptions,
             /* [out] */ GUID *pAudioFormatId,
             /* [out] */ WAVEFORMATEX **ppCoMemWFEX);
         
+        DECLSPEC_XFGVIRT(ISpRecoContext, DeserializeResult)
         HRESULT ( STDMETHODCALLTYPE *DeserializeResult )( 
             ISpRecoContext * This,
             /* [in] */ const SPSERIALIZEDRESULT *pSerializedResult,
             /* [out] */ ISpRecoResult **ppResult);
         
+        DECLSPEC_XFGVIRT(ISpRecoContext, Bookmark)
         HRESULT ( STDMETHODCALLTYPE *Bookmark )( 
             ISpRecoContext * This,
             /* [in] */ SPBOOKMARKOPTIONS Options,
             /* [in] */ ULONGLONG ullStreamPosition,
             /* [in] */ LPARAM lparamEvent);
         
+        DECLSPEC_XFGVIRT(ISpRecoContext, SetAdaptationData)
         HRESULT ( STDMETHODCALLTYPE *SetAdaptationData )( 
             ISpRecoContext * This,
             /* [string][in] */ LPCWSTR pAdaptationData,
             /* [in] */ const ULONG cch);
         
+        DECLSPEC_XFGVIRT(ISpRecoContext, Pause)
         HRESULT ( STDMETHODCALLTYPE *Pause )( 
             ISpRecoContext * This,
             /* [in] */ DWORD dwReserved);
         
+        DECLSPEC_XFGVIRT(ISpRecoContext, Resume)
         HRESULT ( STDMETHODCALLTYPE *Resume )( 
             ISpRecoContext * This,
             /* [in] */ DWORD dwReserved);
         
+        DECLSPEC_XFGVIRT(ISpRecoContext, SetVoice)
         HRESULT ( STDMETHODCALLTYPE *SetVoice )( 
             ISpRecoContext * This,
             /* [in] */ ISpVoice *pVoice,
             /* [in] */ BOOL fAllowFormatChanges);
         
+        DECLSPEC_XFGVIRT(ISpRecoContext, GetVoice)
         HRESULT ( STDMETHODCALLTYPE *GetVoice )( 
             ISpRecoContext * This,
             /* [out] */ ISpVoice **ppVoice);
         
+        DECLSPEC_XFGVIRT(ISpRecoContext, SetVoicePurgeEvent)
         HRESULT ( STDMETHODCALLTYPE *SetVoicePurgeEvent )( 
             ISpRecoContext * This,
             /* [in] */ ULONGLONG ullEventInterest);
         
+        DECLSPEC_XFGVIRT(ISpRecoContext, GetVoicePurgeEvent)
         HRESULT ( STDMETHODCALLTYPE *GetVoicePurgeEvent )( 
             ISpRecoContext * This,
             /* [out] */ ULONGLONG *pullEventInterest);
         
+        DECLSPEC_XFGVIRT(ISpRecoContext, SetContextState)
         HRESULT ( STDMETHODCALLTYPE *SetContextState )( 
             ISpRecoContext * This,
             /* [in] */ SPCONTEXTSTATE eContextState);
         
+        DECLSPEC_XFGVIRT(ISpRecoContext, GetContextState)
         HRESULT ( STDMETHODCALLTYPE *GetContextState )( 
             ISpRecoContext * This,
             /* [out] */ SPCONTEXTSTATE *peContextState);
@@ -9785,26 +10347,32 @@ EXTERN_C const IID IID_ISpRecoContext2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpRecoContext2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpRecoContext2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISpRecoContext2 * This);
         
+        DECLSPEC_XFGVIRT(ISpRecoContext2, SetGrammarOptions)
         HRESULT ( STDMETHODCALLTYPE *SetGrammarOptions )( 
             ISpRecoContext2 * This,
             /* [in] */ DWORD eGrammarOptions);
         
+        DECLSPEC_XFGVIRT(ISpRecoContext2, GetGrammarOptions)
         HRESULT ( STDMETHODCALLTYPE *GetGrammarOptions )( 
             ISpRecoContext2 * This,
             /* [out] */ DWORD *peGrammarOptions);
         
+        DECLSPEC_XFGVIRT(ISpRecoContext2, SetAdaptationData2)
         HRESULT ( STDMETHODCALLTYPE *SetAdaptationData2 )( 
             ISpRecoContext2 * This,
             /* [in] */ LPCWSTR pAdaptationData,
@@ -9897,33 +10465,40 @@ EXTERN_C const IID IID_ISpProperties;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpProperties * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpProperties * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISpProperties * This);
         
+        DECLSPEC_XFGVIRT(ISpProperties, SetPropertyNum)
         HRESULT ( STDMETHODCALLTYPE *SetPropertyNum )( 
             ISpProperties * This,
             /* [in] */ LPCWSTR pName,
             /* [in] */ LONG lValue);
         
+        DECLSPEC_XFGVIRT(ISpProperties, GetPropertyNum)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyNum )( 
             ISpProperties * This,
             /* [in] */ LPCWSTR pName,
             /* [out] */ LONG *plValue);
         
+        DECLSPEC_XFGVIRT(ISpProperties, SetPropertyString)
         HRESULT ( STDMETHODCALLTYPE *SetPropertyString )( 
             ISpProperties * This,
             /* [in] */ LPCWSTR pName,
             /* [in] */ LPCWSTR pValue);
         
+        DECLSPEC_XFGVIRT(ISpProperties, GetPropertyString)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyString )( 
             ISpProperties * This,
             /* [in] */ LPCWSTR pName,
@@ -10103,92 +10678,112 @@ EXTERN_C const IID IID_ISpRecognizer;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpRecognizer * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpRecognizer * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISpRecognizer * This);
         
+        DECLSPEC_XFGVIRT(ISpProperties, SetPropertyNum)
         HRESULT ( STDMETHODCALLTYPE *SetPropertyNum )( 
             ISpRecognizer * This,
             /* [in] */ LPCWSTR pName,
             /* [in] */ LONG lValue);
         
+        DECLSPEC_XFGVIRT(ISpProperties, GetPropertyNum)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyNum )( 
             ISpRecognizer * This,
             /* [in] */ LPCWSTR pName,
             /* [out] */ LONG *plValue);
         
+        DECLSPEC_XFGVIRT(ISpProperties, SetPropertyString)
         HRESULT ( STDMETHODCALLTYPE *SetPropertyString )( 
             ISpRecognizer * This,
             /* [in] */ LPCWSTR pName,
             /* [in] */ LPCWSTR pValue);
         
+        DECLSPEC_XFGVIRT(ISpProperties, GetPropertyString)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyString )( 
             ISpRecognizer * This,
             /* [in] */ LPCWSTR pName,
             /* [string][out][annotation] */ 
             _Outptr_  LPWSTR *ppCoMemValue);
         
+        DECLSPEC_XFGVIRT(ISpRecognizer, SetRecognizer)
         HRESULT ( STDMETHODCALLTYPE *SetRecognizer )( 
             ISpRecognizer * This,
             /* [in] */ ISpObjectToken *pRecognizer);
         
+        DECLSPEC_XFGVIRT(ISpRecognizer, GetRecognizer)
         HRESULT ( STDMETHODCALLTYPE *GetRecognizer )( 
             ISpRecognizer * This,
             /* [out] */ ISpObjectToken **ppRecognizer);
         
+        DECLSPEC_XFGVIRT(ISpRecognizer, SetInput)
         HRESULT ( STDMETHODCALLTYPE *SetInput )( 
             ISpRecognizer * This,
             /* [in][annotation] */ 
             _In_opt_  IUnknown *pUnkInput,
             /* [in] */ BOOL fAllowFormatChanges);
         
+        DECLSPEC_XFGVIRT(ISpRecognizer, GetInputObjectToken)
         HRESULT ( STDMETHODCALLTYPE *GetInputObjectToken )( 
             ISpRecognizer * This,
             /* [out][annotation] */ 
             _Outptr_  ISpObjectToken **ppToken);
         
+        DECLSPEC_XFGVIRT(ISpRecognizer, GetInputStream)
         HRESULT ( STDMETHODCALLTYPE *GetInputStream )( 
             ISpRecognizer * This,
             /* [out][annotation] */ 
             _Outptr_  ISpStreamFormat **ppStream);
         
+        DECLSPEC_XFGVIRT(ISpRecognizer, CreateRecoContext)
         HRESULT ( STDMETHODCALLTYPE *CreateRecoContext )( 
             ISpRecognizer * This,
             /* [out][annotation] */ 
             _Outptr_  ISpRecoContext **ppNewCtxt);
         
+        DECLSPEC_XFGVIRT(ISpRecognizer, GetRecoProfile)
         HRESULT ( STDMETHODCALLTYPE *GetRecoProfile )( 
             ISpRecognizer * This,
             /* [out][annotation] */ 
             _Outptr_  ISpObjectToken **ppToken);
         
+        DECLSPEC_XFGVIRT(ISpRecognizer, SetRecoProfile)
         HRESULT ( STDMETHODCALLTYPE *SetRecoProfile )( 
             ISpRecognizer * This,
             /* [in] */ ISpObjectToken *pToken);
         
+        DECLSPEC_XFGVIRT(ISpRecognizer, IsSharedInstance)
         HRESULT ( STDMETHODCALLTYPE *IsSharedInstance )( 
             ISpRecognizer * This);
         
+        DECLSPEC_XFGVIRT(ISpRecognizer, GetRecoState)
         HRESULT ( STDMETHODCALLTYPE *GetRecoState )( 
             ISpRecognizer * This,
             /* [out] */ SPRECOSTATE *pState);
         
+        DECLSPEC_XFGVIRT(ISpRecognizer, SetRecoState)
         HRESULT ( STDMETHODCALLTYPE *SetRecoState )( 
             ISpRecognizer * This,
             /* [in] */ SPRECOSTATE NewState);
         
+        DECLSPEC_XFGVIRT(ISpRecognizer, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             ISpRecognizer * This,
             /* [out] */ SPRECOGNIZERSTATUS *pStatus);
         
+        DECLSPEC_XFGVIRT(ISpRecognizer, GetFormat)
         HRESULT ( STDMETHODCALLTYPE *GetFormat )( 
             ISpRecognizer * This,
             /* [in] */ SPSTREAMFORMATTYPE WaveFormatType,
@@ -10196,6 +10791,7 @@ EXTERN_C const IID IID_ISpRecognizer;
             /* [out][annotation] */ 
             _Outptr_  WAVEFORMATEX **ppCoMemWFEX);
         
+        DECLSPEC_XFGVIRT(ISpRecognizer, IsUISupported)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *IsUISupported )( 
             ISpRecognizer * This,
             /* [in] */ LPCWSTR pszTypeOfUI,
@@ -10203,6 +10799,7 @@ EXTERN_C const IID IID_ISpRecognizer;
             /* [in] */ ULONG cbExtraData,
             /* [out] */ BOOL *pfSupported);
         
+        DECLSPEC_XFGVIRT(ISpRecognizer, DisplayUI)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *DisplayUI )( 
             ISpRecognizer * This,
             /* [in] */ HWND hwndParent,
@@ -10212,6 +10809,7 @@ EXTERN_C const IID IID_ISpRecognizer;
             /* [in] */ void *pvExtraData,
             /* [in] */ ULONG cbExtraData);
         
+        DECLSPEC_XFGVIRT(ISpRecognizer, EmulateRecognition)
         HRESULT ( STDMETHODCALLTYPE *EmulateRecognition )( 
             ISpRecognizer * This,
             /* [in] */ ISpPhrase *pPhrase);
@@ -10345,24 +10943,29 @@ EXTERN_C const IID IID_ISpSerializeState;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpSerializeState * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpSerializeState * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpSerializeState * This);
         
+        DECLSPEC_XFGVIRT(ISpSerializeState, GetSerializedState)
         HRESULT ( STDMETHODCALLTYPE *GetSerializedState )( 
             __RPC__in ISpSerializeState * This,
             /* [out] */ __RPC__deref_out_opt BYTE **ppbData,
             /* [out] */ __RPC__out ULONG *pulSize,
             /* [in] */ DWORD dwReserved);
         
+        DECLSPEC_XFGVIRT(ISpSerializeState, SetSerializedState)
         HRESULT ( STDMETHODCALLTYPE *SetSerializedState )( 
             __RPC__in ISpSerializeState * This,
             /* [in] */ __RPC__in BYTE *pbData,
@@ -10443,28 +11046,34 @@ EXTERN_C const IID IID_ISpRecognizer2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpRecognizer2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpRecognizer2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISpRecognizer2 * This);
         
+        DECLSPEC_XFGVIRT(ISpRecognizer2, EmulateRecognitionEx)
         HRESULT ( STDMETHODCALLTYPE *EmulateRecognitionEx )( 
             ISpRecognizer2 * This,
             /* [in] */ ISpPhrase *pPhrase,
             /* [in] */ DWORD dwCompareFlags);
         
+        DECLSPEC_XFGVIRT(ISpRecognizer2, SetTrainingState)
         HRESULT ( STDMETHODCALLTYPE *SetTrainingState )( 
             ISpRecognizer2 * This,
             /* [in] */ BOOL fDoingTraining,
             /* [in] */ BOOL fAdaptFromTrainingData);
         
+        DECLSPEC_XFGVIRT(ISpRecognizer2, ResetAcousticModelAdaptation)
         HRESULT ( STDMETHODCALLTYPE *ResetAcousticModelAdaptation )( 
             ISpRecognizer2 * This);
         
@@ -10563,18 +11172,22 @@ EXTERN_C const IID IID_ISpEnginePronunciation;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpEnginePronunciation * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpEnginePronunciation * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISpEnginePronunciation * This);
         
+        DECLSPEC_XFGVIRT(ISpEnginePronunciation, Normalize)
         HRESULT ( STDMETHODCALLTYPE *Normalize )( 
             ISpEnginePronunciation * This,
             /* [string][in] */ LPCWSTR pszWord,
@@ -10583,6 +11196,7 @@ EXTERN_C const IID IID_ISpEnginePronunciation;
             /* [in] */ WORD LangID,
             /* [out] */ SPNORMALIZATIONLIST *pNormalizationList);
         
+        DECLSPEC_XFGVIRT(ISpEnginePronunciation, GetPronunciations)
         HRESULT ( STDMETHODCALLTYPE *GetPronunciations )( 
             ISpEnginePronunciation * This,
             /* [string][in] */ LPCWSTR pszWord,
@@ -10685,18 +11299,22 @@ EXTERN_C const IID IID_ISpDisplayAlternates;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpDisplayAlternates * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpDisplayAlternates * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISpDisplayAlternates * This);
         
+        DECLSPEC_XFGVIRT(ISpDisplayAlternates, GetDisplayAlternates)
         HRESULT ( STDMETHODCALLTYPE *GetDisplayAlternates )( 
             ISpDisplayAlternates * This,
             /* [in] */ const SPDISPLAYPHRASE *pPhrase,
@@ -10704,6 +11322,7 @@ EXTERN_C const IID IID_ISpDisplayAlternates;
             /* [out] */ SPDISPLAYPHRASE **ppCoMemPhrases,
             /* [out] */ ULONG *pcPhrasesReturned);
         
+        DECLSPEC_XFGVIRT(ISpDisplayAlternates, SetFullStopTrailSpace)
         HRESULT ( STDMETHODCALLTYPE *SetFullStopTrailSpace )( 
             ISpDisplayAlternates * This,
             /* [in] */ ULONG ulTrailSpace);
@@ -11920,28 +12539,34 @@ EXTERN_C const IID IID_ISpeechDataKey;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechDataKey * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechDataKey * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechDataKey * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechDataKey * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechDataKey * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechDataKey * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -11950,6 +12575,7 @@ EXTERN_C const IID IID_ISpeechDataKey;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechDataKey * This,
             /* [annotation][in] */ 
@@ -11969,59 +12595,71 @@ EXTERN_C const IID IID_ISpeechDataKey;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechDataKey, SetBinaryValue)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetBinaryValue )( 
             __RPC__in ISpeechDataKey * This,
             /* [in] */ __RPC__in const BSTR ValueName,
             /* [in] */ VARIANT Value);
         
+        DECLSPEC_XFGVIRT(ISpeechDataKey, GetBinaryValue)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetBinaryValue )( 
             __RPC__in ISpeechDataKey * This,
             /* [in] */ __RPC__in const BSTR ValueName,
             /* [retval][out] */ __RPC__out VARIANT *Value);
         
+        DECLSPEC_XFGVIRT(ISpeechDataKey, SetStringValue)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetStringValue )( 
             __RPC__in ISpeechDataKey * This,
             /* [in] */ __RPC__in const BSTR ValueName,
             /* [in] */ __RPC__in const BSTR Value);
         
+        DECLSPEC_XFGVIRT(ISpeechDataKey, GetStringValue)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetStringValue )( 
             __RPC__in ISpeechDataKey * This,
             /* [in] */ __RPC__in const BSTR ValueName,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Value);
         
+        DECLSPEC_XFGVIRT(ISpeechDataKey, SetLongValue)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetLongValue )( 
             __RPC__in ISpeechDataKey * This,
             /* [in] */ __RPC__in const BSTR ValueName,
             /* [in] */ long Value);
         
+        DECLSPEC_XFGVIRT(ISpeechDataKey, GetLongValue)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetLongValue )( 
             __RPC__in ISpeechDataKey * This,
             /* [in] */ __RPC__in const BSTR ValueName,
             /* [retval][out] */ __RPC__out long *Value);
         
+        DECLSPEC_XFGVIRT(ISpeechDataKey, OpenKey)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *OpenKey )( 
             __RPC__in ISpeechDataKey * This,
             /* [in] */ __RPC__in const BSTR SubKeyName,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechDataKey **SubKey);
         
+        DECLSPEC_XFGVIRT(ISpeechDataKey, CreateKey)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateKey )( 
             __RPC__in ISpeechDataKey * This,
             /* [in] */ __RPC__in const BSTR SubKeyName,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechDataKey **SubKey);
         
+        DECLSPEC_XFGVIRT(ISpeechDataKey, DeleteKey)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *DeleteKey )( 
             __RPC__in ISpeechDataKey * This,
             /* [in] */ __RPC__in const BSTR SubKeyName);
         
+        DECLSPEC_XFGVIRT(ISpeechDataKey, DeleteValue)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *DeleteValue )( 
             __RPC__in ISpeechDataKey * This,
             /* [in] */ __RPC__in const BSTR ValueName);
         
+        DECLSPEC_XFGVIRT(ISpeechDataKey, EnumKeys)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *EnumKeys )( 
             __RPC__in ISpeechDataKey * This,
             /* [in] */ long Index,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *SubKeyName);
         
+        DECLSPEC_XFGVIRT(ISpeechDataKey, EnumValues)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *EnumValues )( 
             __RPC__in ISpeechDataKey * This,
             /* [in] */ long Index,
@@ -12193,28 +12831,34 @@ EXTERN_C const IID IID_ISpeechObjectToken;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechObjectToken * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechObjectToken * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechObjectToken * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechObjectToken * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechObjectToken * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechObjectToken * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -12223,6 +12867,7 @@ EXTERN_C const IID IID_ISpeechObjectToken;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechObjectToken * This,
             /* [annotation][in] */ 
@@ -12242,44 +12887,53 @@ EXTERN_C const IID IID_ISpeechObjectToken;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechObjectToken, get_Id)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in ISpeechObjectToken * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *ObjectId);
         
+        DECLSPEC_XFGVIRT(ISpeechObjectToken, get_DataKey)
         /* [hidden][id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DataKey )( 
             __RPC__in ISpeechObjectToken * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechDataKey **DataKey);
         
+        DECLSPEC_XFGVIRT(ISpeechObjectToken, get_Category)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Category )( 
             __RPC__in ISpeechObjectToken * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechObjectTokenCategory **Category);
         
+        DECLSPEC_XFGVIRT(ISpeechObjectToken, GetDescription)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetDescription )( 
             __RPC__in ISpeechObjectToken * This,
             /* [defaultvalue][in] */ long Locale,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Description);
         
+        DECLSPEC_XFGVIRT(ISpeechObjectToken, SetId)
         /* [id][hidden][helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetId )( 
             __RPC__in ISpeechObjectToken * This,
             /* [in] */ __RPC__in BSTR Id,
             /* [defaultvalue][in] */ __RPC__in BSTR CategoryID,
             /* [defaultvalue][in] */ VARIANT_BOOL CreateIfNotExist);
         
+        DECLSPEC_XFGVIRT(ISpeechObjectToken, GetAttribute)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetAttribute )( 
             __RPC__in ISpeechObjectToken * This,
             /* [in] */ __RPC__in BSTR AttributeName,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *AttributeValue);
         
+        DECLSPEC_XFGVIRT(ISpeechObjectToken, CreateInstance)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateInstance )( 
             __RPC__in ISpeechObjectToken * This,
             /* [defaultvalue][in] */ __RPC__in_opt IUnknown *pUnkOuter,
             /* [defaultvalue][in] */ SpeechTokenContext ClsContext,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **Object);
         
+        DECLSPEC_XFGVIRT(ISpeechObjectToken, Remove)
         /* [id][hidden][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in ISpeechObjectToken * This,
             /* [in] */ __RPC__in BSTR ObjectStorageCLSID);
         
+        DECLSPEC_XFGVIRT(ISpeechObjectToken, GetStorageFileName)
         /* [id][hidden][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetStorageFileName )( 
             __RPC__in ISpeechObjectToken * This,
             /* [in] */ __RPC__in BSTR ObjectStorageCLSID,
@@ -12288,12 +12942,14 @@ EXTERN_C const IID IID_ISpeechObjectToken;
             /* [in] */ SpeechTokenShellFolder Folder,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *FilePath);
         
+        DECLSPEC_XFGVIRT(ISpeechObjectToken, RemoveStorageFileName)
         /* [id][hidden][helpstring] */ HRESULT ( STDMETHODCALLTYPE *RemoveStorageFileName )( 
             __RPC__in ISpeechObjectToken * This,
             /* [in] */ __RPC__in BSTR ObjectStorageCLSID,
             /* [in] */ __RPC__in BSTR KeyName,
             /* [in] */ VARIANT_BOOL DeleteFile);
         
+        DECLSPEC_XFGVIRT(ISpeechObjectToken, IsUISupported)
         /* [id][hidden][helpstring] */ HRESULT ( STDMETHODCALLTYPE *IsUISupported )( 
             __RPC__in ISpeechObjectToken * This,
             /* [in] */ __RPC__in const BSTR TypeOfUI,
@@ -12301,6 +12957,7 @@ EXTERN_C const IID IID_ISpeechObjectToken;
             /* [defaultvalue][in] */ __RPC__in_opt IUnknown *Object,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Supported);
         
+        DECLSPEC_XFGVIRT(ISpeechObjectToken, DisplayUI)
         /* [id][hidden][helpstring] */ HRESULT ( STDMETHODCALLTYPE *DisplayUI )( 
             __RPC__in ISpeechObjectToken * This,
             /* [in] */ long hWnd,
@@ -12309,6 +12966,7 @@ EXTERN_C const IID IID_ISpeechObjectToken;
             /* [defaultvalue][in] */ __RPC__in const VARIANT *ExtraData,
             /* [defaultvalue][in] */ __RPC__in_opt IUnknown *Object);
         
+        DECLSPEC_XFGVIRT(ISpeechObjectToken, MatchesAttributes)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *MatchesAttributes )( 
             __RPC__in ISpeechObjectToken * This,
             /* [in] */ __RPC__in BSTR Attributes,
@@ -12434,28 +13092,34 @@ EXTERN_C const IID IID_ISpeechObjectTokens;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechObjectTokens * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechObjectTokens * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechObjectTokens * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechObjectTokens * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechObjectTokens * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechObjectTokens * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -12464,6 +13128,7 @@ EXTERN_C const IID IID_ISpeechObjectTokens;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechObjectTokens * This,
             /* [annotation][in] */ 
@@ -12483,15 +13148,18 @@ EXTERN_C const IID IID_ISpeechObjectTokens;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechObjectTokens, get_Count)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISpeechObjectTokens * This,
             /* [retval][out] */ __RPC__out long *Count);
         
+        DECLSPEC_XFGVIRT(ISpeechObjectTokens, Item)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             __RPC__in ISpeechObjectTokens * This,
             /* [in] */ long Index,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechObjectToken **Token);
         
+        DECLSPEC_XFGVIRT(ISpeechObjectTokens, get__NewEnum)
         /* [id][restricted][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISpeechObjectTokens * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppEnumVARIANT);
@@ -12598,28 +13266,34 @@ EXTERN_C const IID IID_ISpeechObjectTokenCategory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechObjectTokenCategory * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechObjectTokenCategory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechObjectTokenCategory * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechObjectTokenCategory * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechObjectTokenCategory * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechObjectTokenCategory * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -12628,6 +13302,7 @@ EXTERN_C const IID IID_ISpeechObjectTokenCategory;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechObjectTokenCategory * This,
             /* [annotation][in] */ 
@@ -12647,28 +13322,34 @@ EXTERN_C const IID IID_ISpeechObjectTokenCategory;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechObjectTokenCategory, get_Id)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in ISpeechObjectTokenCategory * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Id);
         
+        DECLSPEC_XFGVIRT(ISpeechObjectTokenCategory, put_Default)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Default )( 
             __RPC__in ISpeechObjectTokenCategory * This,
             /* [in] */ __RPC__in const BSTR TokenId);
         
+        DECLSPEC_XFGVIRT(ISpeechObjectTokenCategory, get_Default)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Default )( 
             __RPC__in ISpeechObjectTokenCategory * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *TokenId);
         
+        DECLSPEC_XFGVIRT(ISpeechObjectTokenCategory, SetId)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetId )( 
             __RPC__in ISpeechObjectTokenCategory * This,
             /* [in] */ __RPC__in const BSTR Id,
             /* [defaultvalue][in] */ VARIANT_BOOL CreateIfNotExist);
         
+        DECLSPEC_XFGVIRT(ISpeechObjectTokenCategory, GetDataKey)
         /* [id][hidden][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetDataKey )( 
             __RPC__in ISpeechObjectTokenCategory * This,
             /* [defaultvalue][in] */ SpeechDataKeyLocation Location,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechDataKey **DataKey);
         
+        DECLSPEC_XFGVIRT(ISpeechObjectTokenCategory, EnumerateTokens)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *EnumerateTokens )( 
             __RPC__in ISpeechObjectTokenCategory * This,
             /* [defaultvalue][in] */ __RPC__in BSTR RequiredAttributes,
@@ -12782,28 +13463,34 @@ EXTERN_C const IID IID_ISpeechAudioBufferInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechAudioBufferInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechAudioBufferInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechAudioBufferInfo * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechAudioBufferInfo * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechAudioBufferInfo * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechAudioBufferInfo * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -12812,6 +13499,7 @@ EXTERN_C const IID IID_ISpeechAudioBufferInfo;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechAudioBufferInfo * This,
             /* [annotation][in] */ 
@@ -12831,26 +13519,32 @@ EXTERN_C const IID IID_ISpeechAudioBufferInfo;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechAudioBufferInfo, get_MinNotification)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MinNotification )( 
             __RPC__in ISpeechAudioBufferInfo * This,
             /* [retval][out] */ __RPC__out long *MinNotification);
         
+        DECLSPEC_XFGVIRT(ISpeechAudioBufferInfo, put_MinNotification)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MinNotification )( 
             __RPC__in ISpeechAudioBufferInfo * This,
             /* [in] */ long MinNotification);
         
+        DECLSPEC_XFGVIRT(ISpeechAudioBufferInfo, get_BufferSize)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BufferSize )( 
             __RPC__in ISpeechAudioBufferInfo * This,
             /* [retval][out] */ __RPC__out long *BufferSize);
         
+        DECLSPEC_XFGVIRT(ISpeechAudioBufferInfo, put_BufferSize)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_BufferSize )( 
             __RPC__in ISpeechAudioBufferInfo * This,
             /* [in] */ long BufferSize);
         
+        DECLSPEC_XFGVIRT(ISpeechAudioBufferInfo, get_EventBias)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EventBias )( 
             __RPC__in ISpeechAudioBufferInfo * This,
             /* [retval][out] */ __RPC__out long *EventBias);
         
+        DECLSPEC_XFGVIRT(ISpeechAudioBufferInfo, put_EventBias)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_EventBias )( 
             __RPC__in ISpeechAudioBufferInfo * This,
             /* [in] */ long EventBias);
@@ -12959,28 +13653,34 @@ EXTERN_C const IID IID_ISpeechAudioStatus;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechAudioStatus * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechAudioStatus * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechAudioStatus * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechAudioStatus * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechAudioStatus * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechAudioStatus * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -12989,6 +13689,7 @@ EXTERN_C const IID IID_ISpeechAudioStatus;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechAudioStatus * This,
             /* [annotation][in] */ 
@@ -13008,22 +13709,27 @@ EXTERN_C const IID IID_ISpeechAudioStatus;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechAudioStatus, get_FreeBufferSpace)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FreeBufferSpace )( 
             __RPC__in ISpeechAudioStatus * This,
             /* [retval][out] */ __RPC__out long *FreeBufferSpace);
         
+        DECLSPEC_XFGVIRT(ISpeechAudioStatus, get_NonBlockingIO)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NonBlockingIO )( 
             __RPC__in ISpeechAudioStatus * This,
             /* [retval][out] */ __RPC__out long *NonBlockingIO);
         
+        DECLSPEC_XFGVIRT(ISpeechAudioStatus, get_State)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
             __RPC__in ISpeechAudioStatus * This,
             /* [retval][out] */ __RPC__out SpeechAudioState *State);
         
+        DECLSPEC_XFGVIRT(ISpeechAudioStatus, get_CurrentSeekPosition)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentSeekPosition )( 
             __RPC__in ISpeechAudioStatus * This,
             /* [retval][out] */ __RPC__out VARIANT *CurrentSeekPosition);
         
+        DECLSPEC_XFGVIRT(ISpeechAudioStatus, get_CurrentDevicePosition)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentDevicePosition )( 
             __RPC__in ISpeechAudioStatus * This,
             /* [retval][out] */ __RPC__out VARIANT *CurrentDevicePosition);
@@ -13132,28 +13838,34 @@ EXTERN_C const IID IID_ISpeechAudioFormat;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechAudioFormat * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechAudioFormat * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechAudioFormat * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechAudioFormat * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechAudioFormat * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechAudioFormat * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -13162,6 +13874,7 @@ EXTERN_C const IID IID_ISpeechAudioFormat;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechAudioFormat * This,
             /* [annotation][in] */ 
@@ -13181,26 +13894,32 @@ EXTERN_C const IID IID_ISpeechAudioFormat;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechAudioFormat, get_Type)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in ISpeechAudioFormat * This,
             /* [retval][out] */ __RPC__out SpeechAudioFormatType *AudioFormat);
         
+        DECLSPEC_XFGVIRT(ISpeechAudioFormat, put_Type)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Type )( 
             __RPC__in ISpeechAudioFormat * This,
             /* [in] */ SpeechAudioFormatType AudioFormat);
         
+        DECLSPEC_XFGVIRT(ISpeechAudioFormat, get_Guid)
         /* [id][helpstring][hidden][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Guid )( 
             __RPC__in ISpeechAudioFormat * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Guid);
         
+        DECLSPEC_XFGVIRT(ISpeechAudioFormat, put_Guid)
         /* [id][helpstring][hidden][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Guid )( 
             __RPC__in ISpeechAudioFormat * This,
             /* [in] */ __RPC__in BSTR Guid);
         
+        DECLSPEC_XFGVIRT(ISpeechAudioFormat, GetWaveFormatEx)
         /* [id][helpstring][hidden] */ HRESULT ( STDMETHODCALLTYPE *GetWaveFormatEx )( 
             __RPC__in ISpeechAudioFormat * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechWaveFormatEx **SpeechWaveFormatEx);
         
+        DECLSPEC_XFGVIRT(ISpeechAudioFormat, SetWaveFormatEx)
         /* [id][helpstring][hidden] */ HRESULT ( STDMETHODCALLTYPE *SetWaveFormatEx )( 
             __RPC__in ISpeechAudioFormat * This,
             /* [in] */ __RPC__in_opt ISpeechWaveFormatEx *SpeechWaveFormatEx);
@@ -13336,28 +14055,34 @@ EXTERN_C const IID IID_ISpeechWaveFormatEx;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechWaveFormatEx * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechWaveFormatEx * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechWaveFormatEx * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechWaveFormatEx * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechWaveFormatEx * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechWaveFormatEx * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -13366,6 +14091,7 @@ EXTERN_C const IID IID_ISpeechWaveFormatEx;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechWaveFormatEx * This,
             /* [annotation][in] */ 
@@ -13385,58 +14111,72 @@ EXTERN_C const IID IID_ISpeechWaveFormatEx;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechWaveFormatEx, get_FormatTag)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FormatTag )( 
             __RPC__in ISpeechWaveFormatEx * This,
             /* [retval][out] */ __RPC__out short *FormatTag);
         
+        DECLSPEC_XFGVIRT(ISpeechWaveFormatEx, put_FormatTag)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FormatTag )( 
             __RPC__in ISpeechWaveFormatEx * This,
             /* [in] */ short FormatTag);
         
+        DECLSPEC_XFGVIRT(ISpeechWaveFormatEx, get_Channels)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Channels )( 
             __RPC__in ISpeechWaveFormatEx * This,
             /* [retval][out] */ __RPC__out short *Channels);
         
+        DECLSPEC_XFGVIRT(ISpeechWaveFormatEx, put_Channels)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Channels )( 
             __RPC__in ISpeechWaveFormatEx * This,
             /* [in] */ short Channels);
         
+        DECLSPEC_XFGVIRT(ISpeechWaveFormatEx, get_SamplesPerSec)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SamplesPerSec )( 
             __RPC__in ISpeechWaveFormatEx * This,
             /* [retval][out] */ __RPC__out long *SamplesPerSec);
         
+        DECLSPEC_XFGVIRT(ISpeechWaveFormatEx, put_SamplesPerSec)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SamplesPerSec )( 
             __RPC__in ISpeechWaveFormatEx * This,
             /* [in] */ long SamplesPerSec);
         
+        DECLSPEC_XFGVIRT(ISpeechWaveFormatEx, get_AvgBytesPerSec)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AvgBytesPerSec )( 
             __RPC__in ISpeechWaveFormatEx * This,
             /* [retval][out] */ __RPC__out long *AvgBytesPerSec);
         
+        DECLSPEC_XFGVIRT(ISpeechWaveFormatEx, put_AvgBytesPerSec)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AvgBytesPerSec )( 
             __RPC__in ISpeechWaveFormatEx * This,
             /* [in] */ long AvgBytesPerSec);
         
+        DECLSPEC_XFGVIRT(ISpeechWaveFormatEx, get_BlockAlign)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BlockAlign )( 
             __RPC__in ISpeechWaveFormatEx * This,
             /* [retval][out] */ __RPC__out short *BlockAlign);
         
+        DECLSPEC_XFGVIRT(ISpeechWaveFormatEx, put_BlockAlign)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_BlockAlign )( 
             __RPC__in ISpeechWaveFormatEx * This,
             /* [in] */ short BlockAlign);
         
+        DECLSPEC_XFGVIRT(ISpeechWaveFormatEx, get_BitsPerSample)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BitsPerSample )( 
             __RPC__in ISpeechWaveFormatEx * This,
             /* [retval][out] */ __RPC__out short *BitsPerSample);
         
+        DECLSPEC_XFGVIRT(ISpeechWaveFormatEx, put_BitsPerSample)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_BitsPerSample )( 
             __RPC__in ISpeechWaveFormatEx * This,
             /* [in] */ short BitsPerSample);
         
+        DECLSPEC_XFGVIRT(ISpeechWaveFormatEx, get_ExtraData)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ExtraData )( 
             __RPC__in ISpeechWaveFormatEx * This,
             /* [retval][out] */ __RPC__out VARIANT *ExtraData);
         
+        DECLSPEC_XFGVIRT(ISpeechWaveFormatEx, put_ExtraData)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ExtraData )( 
             __RPC__in ISpeechWaveFormatEx * This,
             /* [in] */ VARIANT ExtraData);
@@ -13574,28 +14314,34 @@ EXTERN_C const IID IID_ISpeechBaseStream;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechBaseStream * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechBaseStream * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechBaseStream * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechBaseStream * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechBaseStream * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechBaseStream * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -13604,6 +14350,7 @@ EXTERN_C const IID IID_ISpeechBaseStream;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechBaseStream * This,
             /* [annotation][in] */ 
@@ -13623,25 +14370,30 @@ EXTERN_C const IID IID_ISpeechBaseStream;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechBaseStream, get_Format)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Format )( 
             __RPC__in ISpeechBaseStream * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechAudioFormat **AudioFormat);
         
+        DECLSPEC_XFGVIRT(ISpeechBaseStream, putref_Format)
         /* [id][helpstring][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_Format )( 
             __RPC__in ISpeechBaseStream * This,
             /* [in] */ __RPC__in_opt ISpeechAudioFormat *AudioFormat);
         
+        DECLSPEC_XFGVIRT(ISpeechBaseStream, Read)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Read )( 
             __RPC__in ISpeechBaseStream * This,
             /* [out] */ __RPC__out VARIANT *Buffer,
             /* [in] */ long NumberOfBytes,
             /* [retval][out] */ __RPC__out long *BytesRead);
         
+        DECLSPEC_XFGVIRT(ISpeechBaseStream, Write)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Write )( 
             __RPC__in ISpeechBaseStream * This,
             /* [in] */ VARIANT Buffer,
             /* [retval][out] */ __RPC__out long *BytesWritten);
         
+        DECLSPEC_XFGVIRT(ISpeechBaseStream, Seek)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Seek )( 
             __RPC__in ISpeechBaseStream * This,
             /* [in] */ VARIANT Position,
@@ -13741,28 +14493,34 @@ EXTERN_C const IID IID_ISpeechFileStream;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechFileStream * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechFileStream * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechFileStream * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechFileStream * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechFileStream * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechFileStream * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -13771,6 +14529,7 @@ EXTERN_C const IID IID_ISpeechFileStream;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechFileStream * This,
             /* [annotation][in] */ 
@@ -13790,37 +14549,44 @@ EXTERN_C const IID IID_ISpeechFileStream;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechBaseStream, get_Format)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Format )( 
             __RPC__in ISpeechFileStream * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechAudioFormat **AudioFormat);
         
+        DECLSPEC_XFGVIRT(ISpeechBaseStream, putref_Format)
         /* [id][helpstring][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_Format )( 
             __RPC__in ISpeechFileStream * This,
             /* [in] */ __RPC__in_opt ISpeechAudioFormat *AudioFormat);
         
+        DECLSPEC_XFGVIRT(ISpeechBaseStream, Read)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Read )( 
             __RPC__in ISpeechFileStream * This,
             /* [out] */ __RPC__out VARIANT *Buffer,
             /* [in] */ long NumberOfBytes,
             /* [retval][out] */ __RPC__out long *BytesRead);
         
+        DECLSPEC_XFGVIRT(ISpeechBaseStream, Write)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Write )( 
             __RPC__in ISpeechFileStream * This,
             /* [in] */ VARIANT Buffer,
             /* [retval][out] */ __RPC__out long *BytesWritten);
         
+        DECLSPEC_XFGVIRT(ISpeechBaseStream, Seek)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Seek )( 
             __RPC__in ISpeechFileStream * This,
             /* [in] */ VARIANT Position,
             /* [defaultvalue][in] */ SpeechStreamSeekPositionType Origin,
             /* [retval][out] */ __RPC__out VARIANT *NewPosition);
         
+        DECLSPEC_XFGVIRT(ISpeechFileStream, Open)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Open )( 
             __RPC__in ISpeechFileStream * This,
             /* [in] */ __RPC__in BSTR FileName,
             /* [defaultvalue][in] */ SpeechStreamFileMode FileMode,
             /* [defaultvalue][in] */ VARIANT_BOOL DoEvents);
         
+        DECLSPEC_XFGVIRT(ISpeechFileStream, Close)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Close )( 
             __RPC__in ISpeechFileStream * This);
         
@@ -13923,28 +14689,34 @@ EXTERN_C const IID IID_ISpeechMemoryStream;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechMemoryStream * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechMemoryStream * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechMemoryStream * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechMemoryStream * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechMemoryStream * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechMemoryStream * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -13953,6 +14725,7 @@ EXTERN_C const IID IID_ISpeechMemoryStream;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechMemoryStream * This,
             /* [annotation][in] */ 
@@ -13972,35 +14745,42 @@ EXTERN_C const IID IID_ISpeechMemoryStream;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechBaseStream, get_Format)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Format )( 
             __RPC__in ISpeechMemoryStream * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechAudioFormat **AudioFormat);
         
+        DECLSPEC_XFGVIRT(ISpeechBaseStream, putref_Format)
         /* [id][helpstring][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_Format )( 
             __RPC__in ISpeechMemoryStream * This,
             /* [in] */ __RPC__in_opt ISpeechAudioFormat *AudioFormat);
         
+        DECLSPEC_XFGVIRT(ISpeechBaseStream, Read)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Read )( 
             __RPC__in ISpeechMemoryStream * This,
             /* [out] */ __RPC__out VARIANT *Buffer,
             /* [in] */ long NumberOfBytes,
             /* [retval][out] */ __RPC__out long *BytesRead);
         
+        DECLSPEC_XFGVIRT(ISpeechBaseStream, Write)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Write )( 
             __RPC__in ISpeechMemoryStream * This,
             /* [in] */ VARIANT Buffer,
             /* [retval][out] */ __RPC__out long *BytesWritten);
         
+        DECLSPEC_XFGVIRT(ISpeechBaseStream, Seek)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Seek )( 
             __RPC__in ISpeechMemoryStream * This,
             /* [in] */ VARIANT Position,
             /* [defaultvalue][in] */ SpeechStreamSeekPositionType Origin,
             /* [retval][out] */ __RPC__out VARIANT *NewPosition);
         
+        DECLSPEC_XFGVIRT(ISpeechMemoryStream, SetData)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetData )( 
             __RPC__in ISpeechMemoryStream * This,
             /* [in] */ VARIANT Data);
         
+        DECLSPEC_XFGVIRT(ISpeechMemoryStream, GetData)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetData )( 
             __RPC__in ISpeechMemoryStream * This,
             /* [retval][out] */ __RPC__out VARIANT *pData);
@@ -14104,28 +14884,34 @@ EXTERN_C const IID IID_ISpeechCustomStream;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechCustomStream * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechCustomStream * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechCustomStream * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechCustomStream * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechCustomStream * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechCustomStream * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -14134,6 +14920,7 @@ EXTERN_C const IID IID_ISpeechCustomStream;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechCustomStream * This,
             /* [annotation][in] */ 
@@ -14153,35 +14940,42 @@ EXTERN_C const IID IID_ISpeechCustomStream;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechBaseStream, get_Format)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Format )( 
             __RPC__in ISpeechCustomStream * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechAudioFormat **AudioFormat);
         
+        DECLSPEC_XFGVIRT(ISpeechBaseStream, putref_Format)
         /* [id][helpstring][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_Format )( 
             __RPC__in ISpeechCustomStream * This,
             /* [in] */ __RPC__in_opt ISpeechAudioFormat *AudioFormat);
         
+        DECLSPEC_XFGVIRT(ISpeechBaseStream, Read)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Read )( 
             __RPC__in ISpeechCustomStream * This,
             /* [out] */ __RPC__out VARIANT *Buffer,
             /* [in] */ long NumberOfBytes,
             /* [retval][out] */ __RPC__out long *BytesRead);
         
+        DECLSPEC_XFGVIRT(ISpeechBaseStream, Write)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Write )( 
             __RPC__in ISpeechCustomStream * This,
             /* [in] */ VARIANT Buffer,
             /* [retval][out] */ __RPC__out long *BytesWritten);
         
+        DECLSPEC_XFGVIRT(ISpeechBaseStream, Seek)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Seek )( 
             __RPC__in ISpeechCustomStream * This,
             /* [in] */ VARIANT Position,
             /* [defaultvalue][in] */ SpeechStreamSeekPositionType Origin,
             /* [retval][out] */ __RPC__out VARIANT *NewPosition);
         
+        DECLSPEC_XFGVIRT(ISpeechCustomStream, get_BaseStream)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BaseStream )( 
             __RPC__in ISpeechCustomStream * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppUnkStream);
         
+        DECLSPEC_XFGVIRT(ISpeechCustomStream, putref_BaseStream)
         /* [id][helpstring][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_BaseStream )( 
             __RPC__in ISpeechCustomStream * This,
             /* [in] */ __RPC__in_opt IUnknown *pUnkStream);
@@ -14306,28 +15100,34 @@ EXTERN_C const IID IID_ISpeechAudio;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechAudio * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechAudio * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechAudio * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechAudio * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechAudio * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechAudio * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -14336,6 +15136,7 @@ EXTERN_C const IID IID_ISpeechAudio;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechAudio * This,
             /* [annotation][in] */ 
@@ -14355,63 +15156,77 @@ EXTERN_C const IID IID_ISpeechAudio;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechBaseStream, get_Format)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Format )( 
             __RPC__in ISpeechAudio * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechAudioFormat **AudioFormat);
         
+        DECLSPEC_XFGVIRT(ISpeechBaseStream, putref_Format)
         /* [id][helpstring][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_Format )( 
             __RPC__in ISpeechAudio * This,
             /* [in] */ __RPC__in_opt ISpeechAudioFormat *AudioFormat);
         
+        DECLSPEC_XFGVIRT(ISpeechBaseStream, Read)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Read )( 
             __RPC__in ISpeechAudio * This,
             /* [out] */ __RPC__out VARIANT *Buffer,
             /* [in] */ long NumberOfBytes,
             /* [retval][out] */ __RPC__out long *BytesRead);
         
+        DECLSPEC_XFGVIRT(ISpeechBaseStream, Write)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Write )( 
             __RPC__in ISpeechAudio * This,
             /* [in] */ VARIANT Buffer,
             /* [retval][out] */ __RPC__out long *BytesWritten);
         
+        DECLSPEC_XFGVIRT(ISpeechBaseStream, Seek)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Seek )( 
             __RPC__in ISpeechAudio * This,
             /* [in] */ VARIANT Position,
             /* [defaultvalue][in] */ SpeechStreamSeekPositionType Origin,
             /* [retval][out] */ __RPC__out VARIANT *NewPosition);
         
+        DECLSPEC_XFGVIRT(ISpeechAudio, get_Status)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
             __RPC__in ISpeechAudio * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechAudioStatus **Status);
         
+        DECLSPEC_XFGVIRT(ISpeechAudio, get_BufferInfo)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BufferInfo )( 
             __RPC__in ISpeechAudio * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechAudioBufferInfo **BufferInfo);
         
+        DECLSPEC_XFGVIRT(ISpeechAudio, get_DefaultFormat)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultFormat )( 
             __RPC__in ISpeechAudio * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechAudioFormat **StreamFormat);
         
+        DECLSPEC_XFGVIRT(ISpeechAudio, get_Volume)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Volume )( 
             __RPC__in ISpeechAudio * This,
             /* [retval][out] */ __RPC__out long *Volume);
         
+        DECLSPEC_XFGVIRT(ISpeechAudio, put_Volume)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Volume )( 
             __RPC__in ISpeechAudio * This,
             /* [in] */ long Volume);
         
+        DECLSPEC_XFGVIRT(ISpeechAudio, get_BufferNotifySize)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BufferNotifySize )( 
             __RPC__in ISpeechAudio * This,
             /* [retval][out] */ __RPC__out long *BufferNotifySize);
         
+        DECLSPEC_XFGVIRT(ISpeechAudio, put_BufferNotifySize)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_BufferNotifySize )( 
             __RPC__in ISpeechAudio * This,
             /* [in] */ long BufferNotifySize);
         
+        DECLSPEC_XFGVIRT(ISpeechAudio, get_EventHandle)
         /* [id][helpstring][hidden][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EventHandle )( 
             __RPC__in ISpeechAudio * This,
             /* [retval][out] */ __RPC__out long *EventHandle);
         
+        DECLSPEC_XFGVIRT(ISpeechAudio, SetState)
         /* [hidden][id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetState )( 
             __RPC__in ISpeechAudio * This,
             /* [in] */ SpeechAudioState State);
@@ -14545,28 +15360,34 @@ EXTERN_C const IID IID_ISpeechMMSysAudio;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechMMSysAudio * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechMMSysAudio * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechMMSysAudio * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechMMSysAudio * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechMMSysAudio * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechMMSysAudio * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -14575,6 +15396,7 @@ EXTERN_C const IID IID_ISpeechMMSysAudio;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechMMSysAudio * This,
             /* [annotation][in] */ 
@@ -14594,83 +15416,102 @@ EXTERN_C const IID IID_ISpeechMMSysAudio;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechBaseStream, get_Format)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Format )( 
             __RPC__in ISpeechMMSysAudio * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechAudioFormat **AudioFormat);
         
+        DECLSPEC_XFGVIRT(ISpeechBaseStream, putref_Format)
         /* [id][helpstring][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_Format )( 
             __RPC__in ISpeechMMSysAudio * This,
             /* [in] */ __RPC__in_opt ISpeechAudioFormat *AudioFormat);
         
+        DECLSPEC_XFGVIRT(ISpeechBaseStream, Read)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Read )( 
             __RPC__in ISpeechMMSysAudio * This,
             /* [out] */ __RPC__out VARIANT *Buffer,
             /* [in] */ long NumberOfBytes,
             /* [retval][out] */ __RPC__out long *BytesRead);
         
+        DECLSPEC_XFGVIRT(ISpeechBaseStream, Write)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Write )( 
             __RPC__in ISpeechMMSysAudio * This,
             /* [in] */ VARIANT Buffer,
             /* [retval][out] */ __RPC__out long *BytesWritten);
         
+        DECLSPEC_XFGVIRT(ISpeechBaseStream, Seek)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Seek )( 
             __RPC__in ISpeechMMSysAudio * This,
             /* [in] */ VARIANT Position,
             /* [defaultvalue][in] */ SpeechStreamSeekPositionType Origin,
             /* [retval][out] */ __RPC__out VARIANT *NewPosition);
         
+        DECLSPEC_XFGVIRT(ISpeechAudio, get_Status)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
             __RPC__in ISpeechMMSysAudio * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechAudioStatus **Status);
         
+        DECLSPEC_XFGVIRT(ISpeechAudio, get_BufferInfo)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BufferInfo )( 
             __RPC__in ISpeechMMSysAudio * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechAudioBufferInfo **BufferInfo);
         
+        DECLSPEC_XFGVIRT(ISpeechAudio, get_DefaultFormat)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultFormat )( 
             __RPC__in ISpeechMMSysAudio * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechAudioFormat **StreamFormat);
         
+        DECLSPEC_XFGVIRT(ISpeechAudio, get_Volume)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Volume )( 
             __RPC__in ISpeechMMSysAudio * This,
             /* [retval][out] */ __RPC__out long *Volume);
         
+        DECLSPEC_XFGVIRT(ISpeechAudio, put_Volume)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Volume )( 
             __RPC__in ISpeechMMSysAudio * This,
             /* [in] */ long Volume);
         
+        DECLSPEC_XFGVIRT(ISpeechAudio, get_BufferNotifySize)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BufferNotifySize )( 
             __RPC__in ISpeechMMSysAudio * This,
             /* [retval][out] */ __RPC__out long *BufferNotifySize);
         
+        DECLSPEC_XFGVIRT(ISpeechAudio, put_BufferNotifySize)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_BufferNotifySize )( 
             __RPC__in ISpeechMMSysAudio * This,
             /* [in] */ long BufferNotifySize);
         
+        DECLSPEC_XFGVIRT(ISpeechAudio, get_EventHandle)
         /* [id][helpstring][hidden][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EventHandle )( 
             __RPC__in ISpeechMMSysAudio * This,
             /* [retval][out] */ __RPC__out long *EventHandle);
         
+        DECLSPEC_XFGVIRT(ISpeechAudio, SetState)
         /* [hidden][id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetState )( 
             __RPC__in ISpeechMMSysAudio * This,
             /* [in] */ SpeechAudioState State);
         
+        DECLSPEC_XFGVIRT(ISpeechMMSysAudio, get_DeviceId)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DeviceId )( 
             __RPC__in ISpeechMMSysAudio * This,
             /* [retval][out] */ __RPC__out long *DeviceId);
         
+        DECLSPEC_XFGVIRT(ISpeechMMSysAudio, put_DeviceId)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DeviceId )( 
             __RPC__in ISpeechMMSysAudio * This,
             /* [in] */ long DeviceId);
         
+        DECLSPEC_XFGVIRT(ISpeechMMSysAudio, get_LineId)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LineId )( 
             __RPC__in ISpeechMMSysAudio * This,
             /* [retval][out] */ __RPC__out long *LineId);
         
+        DECLSPEC_XFGVIRT(ISpeechMMSysAudio, put_LineId)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LineId )( 
             __RPC__in ISpeechMMSysAudio * This,
             /* [in] */ long LineId);
         
+        DECLSPEC_XFGVIRT(ISpeechMMSysAudio, get_MMHandle)
         /* [id][helpstring][hidden][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MMHandle )( 
             __RPC__in ISpeechMMSysAudio * This,
             /* [retval][out] */ __RPC__out long *Handle);
@@ -14915,28 +15756,34 @@ EXTERN_C const IID IID_ISpeechVoice;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechVoice * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechVoice * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechVoice * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechVoice * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechVoice * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechVoice * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -14945,6 +15792,7 @@ EXTERN_C const IID IID_ISpeechVoice;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechVoice * This,
             /* [annotation][in] */ 
@@ -14964,141 +15812,173 @@ EXTERN_C const IID IID_ISpeechVoice;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, get_Status)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
             __RPC__in ISpeechVoice * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechVoiceStatus **Status);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, get_Voice)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Voice )( 
             __RPC__in ISpeechVoice * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechObjectToken **Voice);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, putref_Voice)
         /* [id][helpstring][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_Voice )( 
             __RPC__in ISpeechVoice * This,
             /* [in] */ __RPC__in_opt ISpeechObjectToken *Voice);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, get_AudioOutput)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AudioOutput )( 
             __RPC__in ISpeechVoice * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechObjectToken **AudioOutput);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, putref_AudioOutput)
         /* [id][helpstring][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_AudioOutput )( 
             __RPC__in ISpeechVoice * This,
             /* [in] */ __RPC__in_opt ISpeechObjectToken *AudioOutput);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, get_AudioOutputStream)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AudioOutputStream )( 
             __RPC__in ISpeechVoice * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechBaseStream **AudioOutputStream);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, putref_AudioOutputStream)
         /* [id][helpstring][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_AudioOutputStream )( 
             __RPC__in ISpeechVoice * This,
             /* [in] */ __RPC__in_opt ISpeechBaseStream *AudioOutputStream);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, get_Rate)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Rate )( 
             __RPC__in ISpeechVoice * This,
             /* [retval][out] */ __RPC__out long *Rate);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, put_Rate)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Rate )( 
             __RPC__in ISpeechVoice * This,
             /* [in] */ long Rate);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, get_Volume)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Volume )( 
             __RPC__in ISpeechVoice * This,
             /* [retval][out] */ __RPC__out long *Volume);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, put_Volume)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Volume )( 
             __RPC__in ISpeechVoice * This,
             /* [in] */ long Volume);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, put_AllowAudioOutputFormatChangesOnNextSet)
         /* [id][helpstring][hidden][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AllowAudioOutputFormatChangesOnNextSet )( 
             __RPC__in ISpeechVoice * This,
             /* [in] */ VARIANT_BOOL Allow);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, get_AllowAudioOutputFormatChangesOnNextSet)
         /* [id][helpstring][hidden][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AllowAudioOutputFormatChangesOnNextSet )( 
             __RPC__in ISpeechVoice * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Allow);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, get_EventInterests)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EventInterests )( 
             __RPC__in ISpeechVoice * This,
             /* [retval][out] */ __RPC__out SpeechVoiceEvents *EventInterestFlags);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, put_EventInterests)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_EventInterests )( 
             __RPC__in ISpeechVoice * This,
             /* [in] */ SpeechVoiceEvents EventInterestFlags);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, put_Priority)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Priority )( 
             __RPC__in ISpeechVoice * This,
             /* [in] */ SpeechVoicePriority Priority);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, get_Priority)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Priority )( 
             __RPC__in ISpeechVoice * This,
             /* [retval][out] */ __RPC__out SpeechVoicePriority *Priority);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, put_AlertBoundary)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AlertBoundary )( 
             __RPC__in ISpeechVoice * This,
             /* [in] */ SpeechVoiceEvents Boundary);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, get_AlertBoundary)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AlertBoundary )( 
             __RPC__in ISpeechVoice * This,
             /* [retval][out] */ __RPC__out SpeechVoiceEvents *Boundary);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, put_SynchronousSpeakTimeout)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SynchronousSpeakTimeout )( 
             __RPC__in ISpeechVoice * This,
             /* [in] */ long msTimeout);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, get_SynchronousSpeakTimeout)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SynchronousSpeakTimeout )( 
             __RPC__in ISpeechVoice * This,
             /* [retval][out] */ __RPC__out long *msTimeout);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, Speak)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Speak )( 
             __RPC__in ISpeechVoice * This,
             /* [in] */ __RPC__in BSTR Text,
             /* [defaultvalue][in] */ SpeechVoiceSpeakFlags Flags,
             /* [retval][out] */ __RPC__out long *StreamNumber);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, SpeakStream)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *SpeakStream )( 
             __RPC__in ISpeechVoice * This,
             /* [in] */ __RPC__in_opt ISpeechBaseStream *Stream,
             /* [defaultvalue][in] */ SpeechVoiceSpeakFlags Flags,
             /* [retval][out] */ __RPC__out long *StreamNumber);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, Pause)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Pause )( 
             __RPC__in ISpeechVoice * This);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, Resume)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Resume )( 
             __RPC__in ISpeechVoice * This);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, Skip)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in ISpeechVoice * This,
             /* [in] */ __RPC__in const BSTR Type,
             /* [in] */ long NumItems,
             /* [retval][out] */ __RPC__out long *NumSkipped);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, GetVoices)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetVoices )( 
             __RPC__in ISpeechVoice * This,
             /* [defaultvalue][in] */ __RPC__in BSTR RequiredAttributes,
             /* [defaultvalue][in] */ __RPC__in BSTR OptionalAttributes,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechObjectTokens **ObjectTokens);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, GetAudioOutputs)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetAudioOutputs )( 
             __RPC__in ISpeechVoice * This,
             /* [defaultvalue][in] */ __RPC__in BSTR RequiredAttributes,
             /* [defaultvalue][in] */ __RPC__in BSTR OptionalAttributes,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechObjectTokens **ObjectTokens);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, WaitUntilDone)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *WaitUntilDone )( 
             __RPC__in ISpeechVoice * This,
             /* [in] */ long msTimeout,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Done);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, SpeakCompleteEvent)
         /* [id][hidden][helpstring] */ HRESULT ( STDMETHODCALLTYPE *SpeakCompleteEvent )( 
             __RPC__in ISpeechVoice * This,
             /* [retval][out] */ __RPC__out long *Handle);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, IsUISupported)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *IsUISupported )( 
             __RPC__in ISpeechVoice * This,
             /* [in] */ __RPC__in const BSTR TypeOfUI,
             /* [defaultvalue][in] */ __RPC__in const VARIANT *ExtraData,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Supported);
         
+        DECLSPEC_XFGVIRT(ISpeechVoice, DisplayUI)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *DisplayUI )( 
             __RPC__in ISpeechVoice * This,
             /* [in] */ long hWndParent,
@@ -15309,28 +16189,34 @@ EXTERN_C const IID IID_ISpeechVoiceStatus;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechVoiceStatus * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechVoiceStatus * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechVoiceStatus * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechVoiceStatus * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechVoiceStatus * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechVoiceStatus * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -15339,6 +16225,7 @@ EXTERN_C const IID IID_ISpeechVoiceStatus;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechVoiceStatus * This,
             /* [annotation][in] */ 
@@ -15358,50 +16245,62 @@ EXTERN_C const IID IID_ISpeechVoiceStatus;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechVoiceStatus, get_CurrentStreamNumber)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentStreamNumber )( 
             __RPC__in ISpeechVoiceStatus * This,
             /* [retval][out] */ __RPC__out long *StreamNumber);
         
+        DECLSPEC_XFGVIRT(ISpeechVoiceStatus, get_LastStreamNumberQueued)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastStreamNumberQueued )( 
             __RPC__in ISpeechVoiceStatus * This,
             /* [retval][out] */ __RPC__out long *StreamNumber);
         
+        DECLSPEC_XFGVIRT(ISpeechVoiceStatus, get_LastHResult)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastHResult )( 
             __RPC__in ISpeechVoiceStatus * This,
             /* [retval][out] */ __RPC__out long *HResult);
         
+        DECLSPEC_XFGVIRT(ISpeechVoiceStatus, get_RunningState)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RunningState )( 
             __RPC__in ISpeechVoiceStatus * This,
             /* [retval][out] */ __RPC__out SpeechRunState *State);
         
+        DECLSPEC_XFGVIRT(ISpeechVoiceStatus, get_InputWordPosition)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InputWordPosition )( 
             __RPC__in ISpeechVoiceStatus * This,
             /* [retval][out] */ __RPC__out long *Position);
         
+        DECLSPEC_XFGVIRT(ISpeechVoiceStatus, get_InputWordLength)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InputWordLength )( 
             __RPC__in ISpeechVoiceStatus * This,
             /* [retval][out] */ __RPC__out long *Length);
         
+        DECLSPEC_XFGVIRT(ISpeechVoiceStatus, get_InputSentencePosition)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InputSentencePosition )( 
             __RPC__in ISpeechVoiceStatus * This,
             /* [retval][out] */ __RPC__out long *Position);
         
+        DECLSPEC_XFGVIRT(ISpeechVoiceStatus, get_InputSentenceLength)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InputSentenceLength )( 
             __RPC__in ISpeechVoiceStatus * This,
             /* [retval][out] */ __RPC__out long *Length);
         
+        DECLSPEC_XFGVIRT(ISpeechVoiceStatus, get_LastBookmark)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastBookmark )( 
             __RPC__in ISpeechVoiceStatus * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Bookmark);
         
+        DECLSPEC_XFGVIRT(ISpeechVoiceStatus, get_LastBookmarkId)
         /* [hidden][id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastBookmarkId )( 
             __RPC__in ISpeechVoiceStatus * This,
             /* [retval][out] */ __RPC__out long *BookmarkId);
         
+        DECLSPEC_XFGVIRT(ISpeechVoiceStatus, get_PhonemeId)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PhonemeId )( 
             __RPC__in ISpeechVoiceStatus * This,
             /* [retval][out] */ __RPC__out short *PhoneId);
         
+        DECLSPEC_XFGVIRT(ISpeechVoiceStatus, get_VisemeId)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_VisemeId )( 
             __RPC__in ISpeechVoiceStatus * This,
             /* [retval][out] */ __RPC__out short *VisemeId);
@@ -15511,28 +16410,34 @@ EXTERN_C const IID DIID__ISpeechVoiceEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _ISpeechVoiceEvents * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in _ISpeechVoiceEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in _ISpeechVoiceEvents * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in _ISpeechVoiceEvents * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in _ISpeechVoiceEvents * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in _ISpeechVoiceEvents * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -15541,6 +16446,7 @@ EXTERN_C const IID DIID__ISpeechVoiceEvents;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             _ISpeechVoiceEvents * This,
             /* [annotation][in] */ 
@@ -15728,28 +16634,34 @@ EXTERN_C const IID IID_ISpeechRecognizer;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechRecognizer * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechRecognizer * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechRecognizer * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechRecognizer * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechRecognizer * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechRecognizer * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -15758,6 +16670,7 @@ EXTERN_C const IID IID_ISpeechRecognizer;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechRecognizer * This,
             /* [annotation][in] */ 
@@ -15777,107 +16690,130 @@ EXTERN_C const IID IID_ISpeechRecognizer;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizer, putref_Recognizer)
         /* [id][helpstring][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_Recognizer )( 
             __RPC__in ISpeechRecognizer * This,
             /* [in] */ __RPC__in_opt ISpeechObjectToken *Recognizer);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizer, get_Recognizer)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Recognizer )( 
             __RPC__in ISpeechRecognizer * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechObjectToken **Recognizer);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizer, put_AllowAudioInputFormatChangesOnNextSet)
         /* [id][helpstring][hidden][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AllowAudioInputFormatChangesOnNextSet )( 
             __RPC__in ISpeechRecognizer * This,
             /* [in] */ VARIANT_BOOL Allow);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizer, get_AllowAudioInputFormatChangesOnNextSet)
         /* [id][helpstring][hidden][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AllowAudioInputFormatChangesOnNextSet )( 
             __RPC__in ISpeechRecognizer * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Allow);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizer, putref_AudioInput)
         /* [id][helpstring][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_AudioInput )( 
             __RPC__in ISpeechRecognizer * This,
             /* [defaultvalue][in] */ __RPC__in_opt ISpeechObjectToken *AudioInput);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizer, get_AudioInput)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AudioInput )( 
             __RPC__in ISpeechRecognizer * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechObjectToken **AudioInput);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizer, putref_AudioInputStream)
         /* [id][helpstring][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_AudioInputStream )( 
             __RPC__in ISpeechRecognizer * This,
             /* [defaultvalue][in] */ __RPC__in_opt ISpeechBaseStream *AudioInputStream);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizer, get_AudioInputStream)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AudioInputStream )( 
             __RPC__in ISpeechRecognizer * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechBaseStream **AudioInputStream);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizer, get_IsShared)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsShared )( 
             __RPC__in ISpeechRecognizer * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Shared);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizer, put_State)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_State )( 
             __RPC__in ISpeechRecognizer * This,
             /* [in] */ SpeechRecognizerState State);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizer, get_State)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
             __RPC__in ISpeechRecognizer * This,
             /* [retval][out] */ __RPC__out SpeechRecognizerState *State);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizer, get_Status)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
             __RPC__in ISpeechRecognizer * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechRecognizerStatus **Status);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizer, putref_Profile)
         /* [id][helpstring][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_Profile )( 
             __RPC__in ISpeechRecognizer * This,
             /* [defaultvalue][in] */ __RPC__in_opt ISpeechObjectToken *Profile);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizer, get_Profile)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Profile )( 
             __RPC__in ISpeechRecognizer * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechObjectToken **Profile);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizer, EmulateRecognition)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *EmulateRecognition )( 
             __RPC__in ISpeechRecognizer * This,
             /* [in] */ VARIANT TextElements,
             /* [defaultvalue][in] */ __RPC__in VARIANT *ElementDisplayAttributes,
             /* [defaultvalue][in] */ long LanguageId);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizer, CreateRecoContext)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateRecoContext )( 
             __RPC__in ISpeechRecognizer * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechRecoContext **NewContext);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizer, GetFormat)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetFormat )( 
             __RPC__in ISpeechRecognizer * This,
             /* [in] */ SpeechFormatType Type,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechAudioFormat **Format);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizer, SetPropertyNumber)
         /* [id][hidden][helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetPropertyNumber )( 
             __RPC__in ISpeechRecognizer * This,
             /* [in] */ __RPC__in const BSTR Name,
             /* [in] */ long Value,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Supported);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizer, GetPropertyNumber)
         /* [id][hidden][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPropertyNumber )( 
             __RPC__in ISpeechRecognizer * This,
             /* [in] */ __RPC__in const BSTR Name,
             /* [out][in] */ __RPC__inout long *Value,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Supported);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizer, SetPropertyString)
         /* [id][hidden][helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetPropertyString )( 
             __RPC__in ISpeechRecognizer * This,
             /* [in] */ __RPC__in const BSTR Name,
             /* [in] */ __RPC__in const BSTR Value,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Supported);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizer, GetPropertyString)
         /* [id][hidden][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPropertyString )( 
             __RPC__in ISpeechRecognizer * This,
             /* [in] */ __RPC__in const BSTR Name,
             /* [out][in] */ __RPC__deref_inout_opt BSTR *Value,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Supported);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizer, IsUISupported)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *IsUISupported )( 
             __RPC__in ISpeechRecognizer * This,
             /* [in] */ __RPC__in const BSTR TypeOfUI,
             /* [defaultvalue][in] */ __RPC__in const VARIANT *ExtraData,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Supported);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizer, DisplayUI)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *DisplayUI )( 
             __RPC__in ISpeechRecognizer * This,
             /* [in] */ long hWndParent,
@@ -15885,18 +16821,21 @@ EXTERN_C const IID IID_ISpeechRecognizer;
             /* [in] */ __RPC__in const BSTR TypeOfUI,
             /* [defaultvalue][in] */ __RPC__in const VARIANT *ExtraData);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizer, GetRecognizers)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetRecognizers )( 
             __RPC__in ISpeechRecognizer * This,
             /* [defaultvalue][in] */ __RPC__in BSTR RequiredAttributes,
             /* [defaultvalue][in] */ __RPC__in BSTR OptionalAttributes,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechObjectTokens **ObjectTokens);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizer, GetAudioInputs)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetAudioInputs )( 
             __RPC__in ISpeechRecognizer * This,
             /* [defaultvalue][in] */ __RPC__in BSTR RequiredAttributes,
             /* [defaultvalue][in] */ __RPC__in BSTR OptionalAttributes,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechObjectTokens **ObjectTokens);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizer, GetProfiles)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProfiles )( 
             __RPC__in ISpeechRecognizer * This,
             /* [defaultvalue][in] */ __RPC__in BSTR RequiredAttributes,
@@ -16070,28 +17009,34 @@ EXTERN_C const IID IID_ISpeechRecognizerStatus;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechRecognizerStatus * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechRecognizerStatus * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechRecognizerStatus * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechRecognizerStatus * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechRecognizerStatus * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechRecognizerStatus * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -16100,6 +17045,7 @@ EXTERN_C const IID IID_ISpeechRecognizerStatus;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechRecognizerStatus * This,
             /* [annotation][in] */ 
@@ -16119,26 +17065,32 @@ EXTERN_C const IID IID_ISpeechRecognizerStatus;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizerStatus, get_AudioStatus)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AudioStatus )( 
             __RPC__in ISpeechRecognizerStatus * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechAudioStatus **AudioStatus);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizerStatus, get_CurrentStreamPosition)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentStreamPosition )( 
             __RPC__in ISpeechRecognizerStatus * This,
             /* [retval][out] */ __RPC__out VARIANT *pCurrentStreamPos);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizerStatus, get_CurrentStreamNumber)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentStreamNumber )( 
             __RPC__in ISpeechRecognizerStatus * This,
             /* [retval][out] */ __RPC__out long *StreamNumber);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizerStatus, get_NumberOfActiveRules)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NumberOfActiveRules )( 
             __RPC__in ISpeechRecognizerStatus * This,
             /* [retval][out] */ __RPC__out long *NumberOfActiveRules);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizerStatus, get_ClsidEngine)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ClsidEngine )( 
             __RPC__in ISpeechRecognizerStatus * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *ClsidEngine);
         
+        DECLSPEC_XFGVIRT(ISpeechRecognizerStatus, get_SupportedLanguages)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SupportedLanguages )( 
             __RPC__in ISpeechRecognizerStatus * This,
             /* [retval][out] */ __RPC__out VARIANT *SupportedLanguages);
@@ -16309,28 +17261,34 @@ EXTERN_C const IID IID_ISpeechRecoContext;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechRecoContext * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechRecoContext * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechRecoContext * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechRecoContext * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechRecoContext * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechRecoContext * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -16339,6 +17297,7 @@ EXTERN_C const IID IID_ISpeechRecoContext;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechRecoContext * This,
             /* [annotation][in] */ 
@@ -16358,104 +17317,129 @@ EXTERN_C const IID IID_ISpeechRecoContext;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoContext, get_Recognizer)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Recognizer )( 
             __RPC__in ISpeechRecoContext * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechRecognizer **Recognizer);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoContext, get_AudioInputInterferenceStatus)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AudioInputInterferenceStatus )( 
             __RPC__in ISpeechRecoContext * This,
             /* [retval][out] */ __RPC__out SpeechInterference *Interference);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoContext, get_RequestedUIType)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequestedUIType )( 
             __RPC__in ISpeechRecoContext * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *UIType);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoContext, putref_Voice)
         /* [id][helpstring][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_Voice )( 
             __RPC__in ISpeechRecoContext * This,
             /* [in] */ __RPC__in_opt ISpeechVoice *Voice);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoContext, get_Voice)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Voice )( 
             __RPC__in ISpeechRecoContext * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechVoice **Voice);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoContext, put_AllowVoiceFormatMatchingOnNextSet)
         /* [id][helpstring][hidden][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AllowVoiceFormatMatchingOnNextSet )( 
             __RPC__in ISpeechRecoContext * This,
             /* [in] */ VARIANT_BOOL Allow);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoContext, get_AllowVoiceFormatMatchingOnNextSet)
         /* [id][helpstring][hidden][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AllowVoiceFormatMatchingOnNextSet )( 
             __RPC__in ISpeechRecoContext * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pAllow);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoContext, put_VoicePurgeEvent)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_VoicePurgeEvent )( 
             __RPC__in ISpeechRecoContext * This,
             /* [in] */ SpeechRecoEvents EventInterest);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoContext, get_VoicePurgeEvent)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_VoicePurgeEvent )( 
             __RPC__in ISpeechRecoContext * This,
             /* [retval][out] */ __RPC__out SpeechRecoEvents *EventInterest);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoContext, put_EventInterests)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_EventInterests )( 
             __RPC__in ISpeechRecoContext * This,
             /* [in] */ SpeechRecoEvents EventInterest);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoContext, get_EventInterests)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EventInterests )( 
             __RPC__in ISpeechRecoContext * This,
             /* [retval][out] */ __RPC__out SpeechRecoEvents *EventInterest);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoContext, put_CmdMaxAlternates)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CmdMaxAlternates )( 
             __RPC__in ISpeechRecoContext * This,
             /* [in] */ long MaxAlternates);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoContext, get_CmdMaxAlternates)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CmdMaxAlternates )( 
             __RPC__in ISpeechRecoContext * This,
             /* [retval][out] */ __RPC__out long *MaxAlternates);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoContext, put_State)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_State )( 
             __RPC__in ISpeechRecoContext * This,
             /* [in] */ SpeechRecoContextState State);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoContext, get_State)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
             __RPC__in ISpeechRecoContext * This,
             /* [retval][out] */ __RPC__out SpeechRecoContextState *State);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoContext, put_RetainedAudio)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_RetainedAudio )( 
             __RPC__in ISpeechRecoContext * This,
             /* [in] */ SpeechRetainedAudioOptions Option);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoContext, get_RetainedAudio)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RetainedAudio )( 
             __RPC__in ISpeechRecoContext * This,
             /* [retval][out] */ __RPC__out SpeechRetainedAudioOptions *Option);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoContext, putref_RetainedAudioFormat)
         /* [id][helpstring][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_RetainedAudioFormat )( 
             __RPC__in ISpeechRecoContext * This,
             /* [in] */ __RPC__in_opt ISpeechAudioFormat *Format);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoContext, get_RetainedAudioFormat)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RetainedAudioFormat )( 
             __RPC__in ISpeechRecoContext * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechAudioFormat **Format);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoContext, Pause)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Pause )( 
             __RPC__in ISpeechRecoContext * This);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoContext, Resume)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Resume )( 
             __RPC__in ISpeechRecoContext * This);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoContext, CreateGrammar)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateGrammar )( 
             __RPC__in ISpeechRecoContext * This,
             /* [defaultvalue][in] */ VARIANT GrammarId,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechRecoGrammar **Grammar);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoContext, CreateResultFromMemory)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateResultFromMemory )( 
             __RPC__in ISpeechRecoContext * This,
             /* [in] */ __RPC__in VARIANT *ResultBlock,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechRecoResult **Result);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoContext, Bookmark)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Bookmark )( 
             __RPC__in ISpeechRecoContext * This,
             /* [in] */ SpeechBookmarkOptions Options,
             /* [in] */ VARIANT StreamPos,
             /* [in] */ VARIANT BookmarkId);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoContext, SetAdaptationData)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetAdaptationData )( 
             __RPC__in ISpeechRecoContext * This,
             /* [in] */ __RPC__in BSTR AdaptationString);
@@ -16679,28 +17663,34 @@ EXTERN_C const IID IID_ISpeechRecoGrammar;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechRecoGrammar * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechRecoGrammar * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechRecoGrammar * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechRecoGrammar * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechRecoGrammar * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechRecoGrammar * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -16709,6 +17699,7 @@ EXTERN_C const IID IID_ISpeechRecoGrammar;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechRecoGrammar * This,
             /* [annotation][in] */ 
@@ -16728,41 +17719,50 @@ EXTERN_C const IID IID_ISpeechRecoGrammar;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoGrammar, get_Id)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in ISpeechRecoGrammar * This,
             /* [retval][out] */ __RPC__out VARIANT *Id);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoGrammar, get_RecoContext)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RecoContext )( 
             __RPC__in ISpeechRecoGrammar * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechRecoContext **RecoContext);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoGrammar, put_State)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_State )( 
             __RPC__in ISpeechRecoGrammar * This,
             /* [in] */ SpeechGrammarState State);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoGrammar, get_State)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
             __RPC__in ISpeechRecoGrammar * This,
             /* [retval][out] */ __RPC__out SpeechGrammarState *State);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoGrammar, get_Rules)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Rules )( 
             __RPC__in ISpeechRecoGrammar * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechGrammarRules **Rules);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoGrammar, Reset)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in ISpeechRecoGrammar * This,
             /* [defaultvalue][in] */ SpeechLanguageId NewLanguage);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoGrammar, CmdLoadFromFile)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *CmdLoadFromFile )( 
             __RPC__in ISpeechRecoGrammar * This,
             /* [in] */ __RPC__in const BSTR FileName,
             /* [defaultvalue][in] */ SpeechLoadOption LoadOption);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoGrammar, CmdLoadFromObject)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *CmdLoadFromObject )( 
             __RPC__in ISpeechRecoGrammar * This,
             /* [in] */ __RPC__in const BSTR ClassId,
             /* [in] */ __RPC__in const BSTR GrammarName,
             /* [defaultvalue][in] */ SpeechLoadOption LoadOption);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoGrammar, CmdLoadFromResource)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *CmdLoadFromResource )( 
             __RPC__in ISpeechRecoGrammar * This,
             /* [in] */ long hModule,
@@ -16771,11 +17771,13 @@ EXTERN_C const IID IID_ISpeechRecoGrammar;
             /* [in] */ SpeechLanguageId LanguageId,
             /* [defaultvalue][in] */ SpeechLoadOption LoadOption);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoGrammar, CmdLoadFromMemory)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *CmdLoadFromMemory )( 
             __RPC__in ISpeechRecoGrammar * This,
             /* [in] */ VARIANT GrammarData,
             /* [defaultvalue][in] */ SpeechLoadOption LoadOption);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoGrammar, CmdLoadFromProprietaryGrammar)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *CmdLoadFromProprietaryGrammar )( 
             __RPC__in ISpeechRecoGrammar * This,
             /* [in] */ __RPC__in const BSTR ProprietaryGuid,
@@ -16783,38 +17785,46 @@ EXTERN_C const IID IID_ISpeechRecoGrammar;
             /* [in] */ VARIANT ProprietaryData,
             /* [defaultvalue][in] */ SpeechLoadOption LoadOption);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoGrammar, CmdSetRuleState)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *CmdSetRuleState )( 
             __RPC__in ISpeechRecoGrammar * This,
             /* [in] */ __RPC__in const BSTR Name,
             /* [in] */ SpeechRuleState State);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoGrammar, CmdSetRuleIdState)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *CmdSetRuleIdState )( 
             __RPC__in ISpeechRecoGrammar * This,
             /* [in] */ long RuleId,
             /* [in] */ SpeechRuleState State);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoGrammar, DictationLoad)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *DictationLoad )( 
             __RPC__in ISpeechRecoGrammar * This,
             /* [defaultvalue][in] */ __RPC__in const BSTR TopicName,
             /* [defaultvalue][in] */ SpeechLoadOption LoadOption);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoGrammar, DictationUnload)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *DictationUnload )( 
             __RPC__in ISpeechRecoGrammar * This);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoGrammar, DictationSetState)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *DictationSetState )( 
             __RPC__in ISpeechRecoGrammar * This,
             /* [in] */ SpeechRuleState State);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoGrammar, SetWordSequenceData)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetWordSequenceData )( 
             __RPC__in ISpeechRecoGrammar * This,
             /* [in] */ __RPC__in const BSTR Text,
             /* [in] */ long TextLength,
             /* [in] */ __RPC__in_opt ISpeechTextSelectionInformation *Info);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoGrammar, SetTextSelection)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetTextSelection )( 
             __RPC__in ISpeechRecoGrammar * This,
             /* [in] */ __RPC__in_opt ISpeechTextSelectionInformation *Info);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoGrammar, IsPronounceable)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *IsPronounceable )( 
             __RPC__in ISpeechRecoGrammar * This,
             /* [in] */ __RPC__in const BSTR Word,
@@ -16946,28 +17956,34 @@ EXTERN_C const IID DIID__ISpeechRecoContextEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _ISpeechRecoContextEvents * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in _ISpeechRecoContextEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in _ISpeechRecoContextEvents * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in _ISpeechRecoContextEvents * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in _ISpeechRecoContextEvents * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in _ISpeechRecoContextEvents * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -16976,6 +17992,7 @@ EXTERN_C const IID DIID__ISpeechRecoContextEvents;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             _ISpeechRecoContextEvents * This,
             /* [annotation][in] */ 
@@ -17084,28 +18101,34 @@ EXTERN_C const IID IID_ISpeechGrammarRule;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechGrammarRule * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechGrammarRule * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechGrammarRule * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechGrammarRule * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechGrammarRule * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechGrammarRule * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -17114,6 +18137,7 @@ EXTERN_C const IID IID_ISpeechGrammarRule;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechGrammarRule * This,
             /* [annotation][in] */ 
@@ -17133,30 +18157,37 @@ EXTERN_C const IID IID_ISpeechGrammarRule;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechGrammarRule, get_Attributes)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Attributes )( 
             __RPC__in ISpeechGrammarRule * This,
             /* [retval][out] */ __RPC__out SpeechRuleAttributes *Attributes);
         
+        DECLSPEC_XFGVIRT(ISpeechGrammarRule, get_InitialState)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InitialState )( 
             __RPC__in ISpeechGrammarRule * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechGrammarRuleState **State);
         
+        DECLSPEC_XFGVIRT(ISpeechGrammarRule, get_Name)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ISpeechGrammarRule * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Name);
         
+        DECLSPEC_XFGVIRT(ISpeechGrammarRule, get_Id)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in ISpeechGrammarRule * This,
             /* [retval][out] */ __RPC__out long *Id);
         
+        DECLSPEC_XFGVIRT(ISpeechGrammarRule, Clear)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Clear )( 
             __RPC__in ISpeechGrammarRule * This);
         
+        DECLSPEC_XFGVIRT(ISpeechGrammarRule, AddResource)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *AddResource )( 
             __RPC__in ISpeechGrammarRule * This,
             /* [in] */ __RPC__in const BSTR ResourceName,
             /* [in] */ __RPC__in const BSTR ResourceValue);
         
+        DECLSPEC_XFGVIRT(ISpeechGrammarRule, AddState)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *AddState )( 
             __RPC__in ISpeechGrammarRule * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechGrammarRuleState **State);
@@ -17282,28 +18313,34 @@ EXTERN_C const IID IID_ISpeechGrammarRules;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechGrammarRules * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechGrammarRules * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechGrammarRules * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechGrammarRules * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechGrammarRules * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechGrammarRules * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -17312,6 +18349,7 @@ EXTERN_C const IID IID_ISpeechGrammarRules;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechGrammarRules * This,
             /* [annotation][in] */ 
@@ -17331,28 +18369,34 @@ EXTERN_C const IID IID_ISpeechGrammarRules;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechGrammarRules, get_Count)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISpeechGrammarRules * This,
             /* [retval][out] */ __RPC__out long *Count);
         
+        DECLSPEC_XFGVIRT(ISpeechGrammarRules, FindRule)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *FindRule )( 
             __RPC__in ISpeechGrammarRules * This,
             /* [in] */ VARIANT RuleNameOrId,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechGrammarRule **Rule);
         
+        DECLSPEC_XFGVIRT(ISpeechGrammarRules, Item)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             __RPC__in ISpeechGrammarRules * This,
             /* [in] */ long Index,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechGrammarRule **Rule);
         
+        DECLSPEC_XFGVIRT(ISpeechGrammarRules, get__NewEnum)
         /* [restricted][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISpeechGrammarRules * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **EnumVARIANT);
         
+        DECLSPEC_XFGVIRT(ISpeechGrammarRules, get_Dynamic)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Dynamic )( 
             __RPC__in ISpeechGrammarRules * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Dynamic);
         
+        DECLSPEC_XFGVIRT(ISpeechGrammarRules, Add)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in ISpeechGrammarRules * This,
             /* [in] */ __RPC__in BSTR RuleName,
@@ -17360,9 +18404,11 @@ EXTERN_C const IID IID_ISpeechGrammarRules;
             /* [defaultvalue][in] */ long RuleId,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechGrammarRule **Rule);
         
+        DECLSPEC_XFGVIRT(ISpeechGrammarRules, Commit)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Commit )( 
             __RPC__in ISpeechGrammarRules * This);
         
+        DECLSPEC_XFGVIRT(ISpeechGrammarRules, CommitAndSave)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *CommitAndSave )( 
             __RPC__in ISpeechGrammarRules * This,
             /* [out] */ __RPC__deref_out_opt BSTR *ErrorText,
@@ -17495,28 +18541,34 @@ EXTERN_C const IID IID_ISpeechGrammarRuleState;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechGrammarRuleState * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechGrammarRuleState * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechGrammarRuleState * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechGrammarRuleState * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechGrammarRuleState * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechGrammarRuleState * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -17525,6 +18577,7 @@ EXTERN_C const IID IID_ISpeechGrammarRuleState;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechGrammarRuleState * This,
             /* [annotation][in] */ 
@@ -17544,14 +18597,17 @@ EXTERN_C const IID IID_ISpeechGrammarRuleState;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechGrammarRuleState, get_Rule)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Rule )( 
             __RPC__in ISpeechGrammarRuleState * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechGrammarRule **Rule);
         
+        DECLSPEC_XFGVIRT(ISpeechGrammarRuleState, get_Transitions)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Transitions )( 
             __RPC__in ISpeechGrammarRuleState * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechGrammarRuleStateTransitions **Transitions);
         
+        DECLSPEC_XFGVIRT(ISpeechGrammarRuleState, AddWordTransition)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *AddWordTransition )( 
             __RPC__in ISpeechGrammarRuleState * This,
             /* [in] */ __RPC__in_opt ISpeechGrammarRuleState *DestState,
@@ -17563,6 +18619,7 @@ EXTERN_C const IID IID_ISpeechGrammarRuleState;
             /* [defaultvalue][in] */ __RPC__in VARIANT *PropertyValue,
             /* [defaultvalue][in] */ float Weight);
         
+        DECLSPEC_XFGVIRT(ISpeechGrammarRuleState, AddRuleTransition)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *AddRuleTransition )( 
             __RPC__in ISpeechGrammarRuleState * This,
             /* [in] */ __RPC__in_opt ISpeechGrammarRuleState *DestinationState,
@@ -17572,6 +18629,7 @@ EXTERN_C const IID IID_ISpeechGrammarRuleState;
             /* [defaultvalue][in] */ __RPC__in VARIANT *PropertyValue,
             /* [defaultvalue][in] */ float Weight);
         
+        DECLSPEC_XFGVIRT(ISpeechGrammarRuleState, AddSpecialTransition)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *AddSpecialTransition )( 
             __RPC__in ISpeechGrammarRuleState * This,
             /* [in] */ __RPC__in_opt ISpeechGrammarRuleState *DestinationState,
@@ -17691,28 +18749,34 @@ EXTERN_C const IID IID_ISpeechGrammarRuleStateTransition;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechGrammarRuleStateTransition * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechGrammarRuleStateTransition * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechGrammarRuleStateTransition * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechGrammarRuleStateTransition * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechGrammarRuleStateTransition * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechGrammarRuleStateTransition * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -17721,6 +18785,7 @@ EXTERN_C const IID IID_ISpeechGrammarRuleStateTransition;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechGrammarRuleStateTransition * This,
             /* [annotation][in] */ 
@@ -17740,34 +18805,42 @@ EXTERN_C const IID IID_ISpeechGrammarRuleStateTransition;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechGrammarRuleStateTransition, get_Type)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in ISpeechGrammarRuleStateTransition * This,
             /* [retval][out] */ __RPC__out SpeechGrammarRuleStateTransitionType *Type);
         
+        DECLSPEC_XFGVIRT(ISpeechGrammarRuleStateTransition, get_Text)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Text )( 
             __RPC__in ISpeechGrammarRuleStateTransition * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Text);
         
+        DECLSPEC_XFGVIRT(ISpeechGrammarRuleStateTransition, get_Rule)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Rule )( 
             __RPC__in ISpeechGrammarRuleStateTransition * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechGrammarRule **Rule);
         
+        DECLSPEC_XFGVIRT(ISpeechGrammarRuleStateTransition, get_Weight)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Weight )( 
             __RPC__in ISpeechGrammarRuleStateTransition * This,
             /* [retval][out] */ __RPC__out VARIANT *Weight);
         
+        DECLSPEC_XFGVIRT(ISpeechGrammarRuleStateTransition, get_PropertyName)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PropertyName )( 
             __RPC__in ISpeechGrammarRuleStateTransition * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *PropertyName);
         
+        DECLSPEC_XFGVIRT(ISpeechGrammarRuleStateTransition, get_PropertyId)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PropertyId )( 
             __RPC__in ISpeechGrammarRuleStateTransition * This,
             /* [retval][out] */ __RPC__out long *PropertyId);
         
+        DECLSPEC_XFGVIRT(ISpeechGrammarRuleStateTransition, get_PropertyValue)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PropertyValue )( 
             __RPC__in ISpeechGrammarRuleStateTransition * This,
             /* [retval][out] */ __RPC__out VARIANT *PropertyValue);
         
+        DECLSPEC_XFGVIRT(ISpeechGrammarRuleStateTransition, get_NextState)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NextState )( 
             __RPC__in ISpeechGrammarRuleStateTransition * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechGrammarRuleState **NextState);
@@ -17877,28 +18950,34 @@ EXTERN_C const IID IID_ISpeechGrammarRuleStateTransitions;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechGrammarRuleStateTransitions * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechGrammarRuleStateTransitions * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechGrammarRuleStateTransitions * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechGrammarRuleStateTransitions * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechGrammarRuleStateTransitions * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechGrammarRuleStateTransitions * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -17907,6 +18986,7 @@ EXTERN_C const IID IID_ISpeechGrammarRuleStateTransitions;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechGrammarRuleStateTransitions * This,
             /* [annotation][in] */ 
@@ -17926,15 +19006,18 @@ EXTERN_C const IID IID_ISpeechGrammarRuleStateTransitions;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechGrammarRuleStateTransitions, get_Count)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISpeechGrammarRuleStateTransitions * This,
             /* [retval][out] */ __RPC__out long *Count);
         
+        DECLSPEC_XFGVIRT(ISpeechGrammarRuleStateTransitions, Item)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             __RPC__in ISpeechGrammarRuleStateTransitions * This,
             /* [in] */ long Index,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechGrammarRuleStateTransition **Transition);
         
+        DECLSPEC_XFGVIRT(ISpeechGrammarRuleStateTransitions, get__NewEnum)
         /* [id][restricted][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISpeechGrammarRuleStateTransitions * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **EnumVARIANT);
@@ -18043,28 +19126,34 @@ EXTERN_C const IID IID_ISpeechTextSelectionInformation;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechTextSelectionInformation * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechTextSelectionInformation * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechTextSelectionInformation * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechTextSelectionInformation * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechTextSelectionInformation * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechTextSelectionInformation * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -18073,6 +19162,7 @@ EXTERN_C const IID IID_ISpeechTextSelectionInformation;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechTextSelectionInformation * This,
             /* [annotation][in] */ 
@@ -18092,34 +19182,42 @@ EXTERN_C const IID IID_ISpeechTextSelectionInformation;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechTextSelectionInformation, put_ActiveOffset)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ActiveOffset )( 
             __RPC__in ISpeechTextSelectionInformation * This,
             /* [in] */ long ActiveOffset);
         
+        DECLSPEC_XFGVIRT(ISpeechTextSelectionInformation, get_ActiveOffset)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ActiveOffset )( 
             __RPC__in ISpeechTextSelectionInformation * This,
             /* [retval][out] */ __RPC__out long *ActiveOffset);
         
+        DECLSPEC_XFGVIRT(ISpeechTextSelectionInformation, put_ActiveLength)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ActiveLength )( 
             __RPC__in ISpeechTextSelectionInformation * This,
             /* [in] */ long ActiveLength);
         
+        DECLSPEC_XFGVIRT(ISpeechTextSelectionInformation, get_ActiveLength)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ActiveLength )( 
             __RPC__in ISpeechTextSelectionInformation * This,
             /* [retval][out] */ __RPC__out long *ActiveLength);
         
+        DECLSPEC_XFGVIRT(ISpeechTextSelectionInformation, put_SelectionOffset)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SelectionOffset )( 
             __RPC__in ISpeechTextSelectionInformation * This,
             /* [in] */ long SelectionOffset);
         
+        DECLSPEC_XFGVIRT(ISpeechTextSelectionInformation, get_SelectionOffset)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SelectionOffset )( 
             __RPC__in ISpeechTextSelectionInformation * This,
             /* [retval][out] */ __RPC__out long *SelectionOffset);
         
+        DECLSPEC_XFGVIRT(ISpeechTextSelectionInformation, put_SelectionLength)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SelectionLength )( 
             __RPC__in ISpeechTextSelectionInformation * This,
             /* [in] */ long SelectionLength);
         
+        DECLSPEC_XFGVIRT(ISpeechTextSelectionInformation, get_SelectionLength)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SelectionLength )( 
             __RPC__in ISpeechTextSelectionInformation * This,
             /* [retval][out] */ __RPC__out long *SelectionLength);
@@ -18257,28 +19355,34 @@ EXTERN_C const IID IID_ISpeechRecoResult;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechRecoResult * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechRecoResult * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechRecoResult * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechRecoResult * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechRecoResult * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechRecoResult * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -18287,6 +19391,7 @@ EXTERN_C const IID IID_ISpeechRecoResult;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechRecoResult * This,
             /* [annotation][in] */ 
@@ -18306,26 +19411,32 @@ EXTERN_C const IID IID_ISpeechRecoResult;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResult, get_RecoContext)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RecoContext )( 
             __RPC__in ISpeechRecoResult * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechRecoContext **RecoContext);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResult, get_Times)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Times )( 
             __RPC__in ISpeechRecoResult * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechRecoResultTimes **Times);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResult, putref_AudioFormat)
         /* [id][helpstring][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_AudioFormat )( 
             __RPC__in ISpeechRecoResult * This,
             /* [in] */ __RPC__in_opt ISpeechAudioFormat *Format);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResult, get_AudioFormat)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AudioFormat )( 
             __RPC__in ISpeechRecoResult * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechAudioFormat **Format);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResult, get_PhraseInfo)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PhraseInfo )( 
             __RPC__in ISpeechRecoResult * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechPhraseInfo **PhraseInfo);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResult, Alternates)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Alternates )( 
             __RPC__in ISpeechRecoResult * This,
             /* [in] */ long RequestCount,
@@ -18333,12 +19444,14 @@ EXTERN_C const IID IID_ISpeechRecoResult;
             /* [defaultvalue][in] */ long Elements,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechPhraseAlternates **Alternates);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResult, Audio)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Audio )( 
             __RPC__in ISpeechRecoResult * This,
             /* [defaultvalue][in] */ long StartElement,
             /* [defaultvalue][in] */ long Elements,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechMemoryStream **Stream);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResult, SpeakAudio)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *SpeakAudio )( 
             __RPC__in ISpeechRecoResult * This,
             /* [defaultvalue][in] */ long StartElement,
@@ -18346,10 +19459,12 @@ EXTERN_C const IID IID_ISpeechRecoResult;
             /* [defaultvalue][in] */ SpeechVoiceSpeakFlags Flags,
             /* [retval][out] */ __RPC__out long *StreamNumber);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResult, SaveToMemory)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *SaveToMemory )( 
             __RPC__in ISpeechRecoResult * This,
             /* [retval][out] */ __RPC__out VARIANT *ResultBlock);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResult, DiscardResultInfo)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *DiscardResultInfo )( 
             __RPC__in ISpeechRecoResult * This,
             /* [in] */ SpeechDiscardType ValueTypes);
@@ -18459,28 +19574,34 @@ EXTERN_C const IID IID_ISpeechRecoResult2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechRecoResult2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechRecoResult2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechRecoResult2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechRecoResult2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechRecoResult2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechRecoResult2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -18489,6 +19610,7 @@ EXTERN_C const IID IID_ISpeechRecoResult2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechRecoResult2 * This,
             /* [annotation][in] */ 
@@ -18508,26 +19630,32 @@ EXTERN_C const IID IID_ISpeechRecoResult2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResult, get_RecoContext)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RecoContext )( 
             __RPC__in ISpeechRecoResult2 * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechRecoContext **RecoContext);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResult, get_Times)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Times )( 
             __RPC__in ISpeechRecoResult2 * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechRecoResultTimes **Times);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResult, putref_AudioFormat)
         /* [id][helpstring][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_AudioFormat )( 
             __RPC__in ISpeechRecoResult2 * This,
             /* [in] */ __RPC__in_opt ISpeechAudioFormat *Format);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResult, get_AudioFormat)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AudioFormat )( 
             __RPC__in ISpeechRecoResult2 * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechAudioFormat **Format);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResult, get_PhraseInfo)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PhraseInfo )( 
             __RPC__in ISpeechRecoResult2 * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechPhraseInfo **PhraseInfo);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResult, Alternates)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Alternates )( 
             __RPC__in ISpeechRecoResult2 * This,
             /* [in] */ long RequestCount,
@@ -18535,12 +19663,14 @@ EXTERN_C const IID IID_ISpeechRecoResult2;
             /* [defaultvalue][in] */ long Elements,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechPhraseAlternates **Alternates);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResult, Audio)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Audio )( 
             __RPC__in ISpeechRecoResult2 * This,
             /* [defaultvalue][in] */ long StartElement,
             /* [defaultvalue][in] */ long Elements,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechMemoryStream **Stream);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResult, SpeakAudio)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *SpeakAudio )( 
             __RPC__in ISpeechRecoResult2 * This,
             /* [defaultvalue][in] */ long StartElement,
@@ -18548,14 +19678,17 @@ EXTERN_C const IID IID_ISpeechRecoResult2;
             /* [defaultvalue][in] */ SpeechVoiceSpeakFlags Flags,
             /* [retval][out] */ __RPC__out long *StreamNumber);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResult, SaveToMemory)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *SaveToMemory )( 
             __RPC__in ISpeechRecoResult2 * This,
             /* [retval][out] */ __RPC__out VARIANT *ResultBlock);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResult, DiscardResultInfo)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *DiscardResultInfo )( 
             __RPC__in ISpeechRecoResult2 * This,
             /* [in] */ SpeechDiscardType ValueTypes);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResult2, SetTextFeedback)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetTextFeedback )( 
             __RPC__in ISpeechRecoResult2 * This,
             /* [in] */ __RPC__in BSTR Feedback,
@@ -18678,28 +19811,34 @@ EXTERN_C const IID IID_ISpeechRecoResultTimes;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechRecoResultTimes * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechRecoResultTimes * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechRecoResultTimes * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechRecoResultTimes * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechRecoResultTimes * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechRecoResultTimes * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -18708,6 +19847,7 @@ EXTERN_C const IID IID_ISpeechRecoResultTimes;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechRecoResultTimes * This,
             /* [annotation][in] */ 
@@ -18727,18 +19867,22 @@ EXTERN_C const IID IID_ISpeechRecoResultTimes;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResultTimes, get_StreamTime)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StreamTime )( 
             __RPC__in ISpeechRecoResultTimes * This,
             /* [retval][out] */ __RPC__out VARIANT *Time);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResultTimes, get_Length)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Length )( 
             __RPC__in ISpeechRecoResultTimes * This,
             /* [retval][out] */ __RPC__out VARIANT *Length);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResultTimes, get_TickCount)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TickCount )( 
             __RPC__in ISpeechRecoResultTimes * This,
             /* [retval][out] */ __RPC__out long *TickCount);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResultTimes, get_OffsetFromStart)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OffsetFromStart )( 
             __RPC__in ISpeechRecoResultTimes * This,
             /* [retval][out] */ __RPC__out VARIANT *OffsetFromStart);
@@ -18840,28 +19984,34 @@ EXTERN_C const IID IID_ISpeechPhraseAlternate;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechPhraseAlternate * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechPhraseAlternate * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechPhraseAlternate * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechPhraseAlternate * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechPhraseAlternate * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechPhraseAlternate * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -18870,6 +20020,7 @@ EXTERN_C const IID IID_ISpeechPhraseAlternate;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechPhraseAlternate * This,
             /* [annotation][in] */ 
@@ -18889,22 +20040,27 @@ EXTERN_C const IID IID_ISpeechPhraseAlternate;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseAlternate, get_RecoResult)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RecoResult )( 
             __RPC__in ISpeechPhraseAlternate * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechRecoResult **RecoResult);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseAlternate, get_StartElementInResult)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StartElementInResult )( 
             __RPC__in ISpeechPhraseAlternate * This,
             /* [retval][out] */ __RPC__out long *StartElement);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseAlternate, get_NumberOfElementsInResult)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NumberOfElementsInResult )( 
             __RPC__in ISpeechPhraseAlternate * This,
             /* [retval][out] */ __RPC__out long *NumberOfElements);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseAlternate, get_PhraseInfo)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PhraseInfo )( 
             __RPC__in ISpeechPhraseAlternate * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechPhraseInfo **PhraseInfo);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseAlternate, Commit)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Commit )( 
             __RPC__in ISpeechPhraseAlternate * This);
         
@@ -19004,28 +20160,34 @@ EXTERN_C const IID IID_ISpeechPhraseAlternates;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechPhraseAlternates * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechPhraseAlternates * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechPhraseAlternates * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechPhraseAlternates * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechPhraseAlternates * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechPhraseAlternates * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -19034,6 +20196,7 @@ EXTERN_C const IID IID_ISpeechPhraseAlternates;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechPhraseAlternates * This,
             /* [annotation][in] */ 
@@ -19053,15 +20216,18 @@ EXTERN_C const IID IID_ISpeechPhraseAlternates;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseAlternates, get_Count)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISpeechPhraseAlternates * This,
             /* [retval][out] */ __RPC__out long *Count);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseAlternates, Item)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             __RPC__in ISpeechPhraseAlternates * This,
             /* [in] */ long Index,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechPhraseAlternate **PhraseAlternate);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseAlternates, get__NewEnum)
         /* [id][restricted][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISpeechPhraseAlternates * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **EnumVARIANT);
@@ -19200,28 +20366,34 @@ EXTERN_C const IID IID_ISpeechPhraseInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechPhraseInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechPhraseInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechPhraseInfo * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechPhraseInfo * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechPhraseInfo * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechPhraseInfo * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -19230,6 +20402,7 @@ EXTERN_C const IID IID_ISpeechPhraseInfo;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechPhraseInfo * This,
             /* [annotation][in] */ 
@@ -19249,62 +20422,77 @@ EXTERN_C const IID IID_ISpeechPhraseInfo;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseInfo, get_LanguageId)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LanguageId )( 
             __RPC__in ISpeechPhraseInfo * This,
             /* [retval][out] */ __RPC__out long *LanguageId);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseInfo, get_GrammarId)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_GrammarId )( 
             __RPC__in ISpeechPhraseInfo * This,
             /* [retval][out] */ __RPC__out VARIANT *GrammarId);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseInfo, get_StartTime)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StartTime )( 
             __RPC__in ISpeechPhraseInfo * This,
             /* [retval][out] */ __RPC__out VARIANT *StartTime);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseInfo, get_AudioStreamPosition)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AudioStreamPosition )( 
             __RPC__in ISpeechPhraseInfo * This,
             /* [retval][out] */ __RPC__out VARIANT *AudioStreamPosition);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseInfo, get_AudioSizeBytes)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AudioSizeBytes )( 
             __RPC__in ISpeechPhraseInfo * This,
             /* [retval][out] */ __RPC__out long *pAudioSizeBytes);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseInfo, get_RetainedSizeBytes)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RetainedSizeBytes )( 
             __RPC__in ISpeechPhraseInfo * This,
             /* [retval][out] */ __RPC__out long *RetainedSizeBytes);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseInfo, get_AudioSizeTime)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AudioSizeTime )( 
             __RPC__in ISpeechPhraseInfo * This,
             /* [retval][out] */ __RPC__out long *AudioSizeTime);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseInfo, get_Rule)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Rule )( 
             __RPC__in ISpeechPhraseInfo * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechPhraseRule **Rule);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseInfo, get_Properties)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in ISpeechPhraseInfo * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechPhraseProperties **Properties);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseInfo, get_Elements)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Elements )( 
             __RPC__in ISpeechPhraseInfo * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechPhraseElements **Elements);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseInfo, get_Replacements)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Replacements )( 
             __RPC__in ISpeechPhraseInfo * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechPhraseReplacements **Replacements);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseInfo, get_EngineId)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EngineId )( 
             __RPC__in ISpeechPhraseInfo * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *EngineIdGuid);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseInfo, get_EnginePrivateData)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EnginePrivateData )( 
             __RPC__in ISpeechPhraseInfo * This,
             /* [retval][out] */ __RPC__out VARIANT *PrivateData);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseInfo, SaveToMemory)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *SaveToMemory )( 
             __RPC__in ISpeechPhraseInfo * This,
             /* [retval][out] */ __RPC__out VARIANT *PhraseBlock);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseInfo, GetText)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetText )( 
             __RPC__in ISpeechPhraseInfo * This,
             /* [defaultvalue][in] */ long StartElement,
@@ -19312,6 +20500,7 @@ EXTERN_C const IID IID_ISpeechPhraseInfo;
             /* [defaultvalue][in] */ VARIANT_BOOL UseReplacements,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Text);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseInfo, GetDisplayAttributes)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetDisplayAttributes )( 
             __RPC__in ISpeechPhraseInfo * This,
             /* [defaultvalue][in] */ long StartElement,
@@ -19477,28 +20666,34 @@ EXTERN_C const IID IID_ISpeechPhraseElement;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechPhraseElement * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechPhraseElement * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechPhraseElement * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechPhraseElement * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechPhraseElement * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechPhraseElement * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -19507,6 +20702,7 @@ EXTERN_C const IID IID_ISpeechPhraseElement;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechPhraseElement * This,
             /* [annotation][in] */ 
@@ -19526,54 +20722,67 @@ EXTERN_C const IID IID_ISpeechPhraseElement;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseElement, get_AudioTimeOffset)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AudioTimeOffset )( 
             __RPC__in ISpeechPhraseElement * This,
             /* [retval][out] */ __RPC__out long *AudioTimeOffset);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseElement, get_AudioSizeTime)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AudioSizeTime )( 
             __RPC__in ISpeechPhraseElement * This,
             /* [retval][out] */ __RPC__out long *AudioSizeTime);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseElement, get_AudioStreamOffset)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AudioStreamOffset )( 
             __RPC__in ISpeechPhraseElement * This,
             /* [retval][out] */ __RPC__out long *AudioStreamOffset);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseElement, get_AudioSizeBytes)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AudioSizeBytes )( 
             __RPC__in ISpeechPhraseElement * This,
             /* [retval][out] */ __RPC__out long *AudioSizeBytes);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseElement, get_RetainedStreamOffset)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RetainedStreamOffset )( 
             __RPC__in ISpeechPhraseElement * This,
             /* [retval][out] */ __RPC__out long *RetainedStreamOffset);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseElement, get_RetainedSizeBytes)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RetainedSizeBytes )( 
             __RPC__in ISpeechPhraseElement * This,
             /* [retval][out] */ __RPC__out long *RetainedSizeBytes);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseElement, get_DisplayText)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DisplayText )( 
             __RPC__in ISpeechPhraseElement * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *DisplayText);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseElement, get_LexicalForm)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LexicalForm )( 
             __RPC__in ISpeechPhraseElement * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *LexicalForm);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseElement, get_Pronunciation)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Pronunciation )( 
             __RPC__in ISpeechPhraseElement * This,
             /* [retval][out] */ __RPC__out VARIANT *Pronunciation);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseElement, get_DisplayAttributes)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DisplayAttributes )( 
             __RPC__in ISpeechPhraseElement * This,
             /* [retval][out] */ __RPC__out SpeechDisplayAttributes *DisplayAttributes);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseElement, get_RequiredConfidence)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequiredConfidence )( 
             __RPC__in ISpeechPhraseElement * This,
             /* [retval][out] */ __RPC__out SpeechEngineConfidence *RequiredConfidence);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseElement, get_ActualConfidence)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ActualConfidence )( 
             __RPC__in ISpeechPhraseElement * This,
             /* [retval][out] */ __RPC__out SpeechEngineConfidence *ActualConfidence);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseElement, get_EngineConfidence)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EngineConfidence )( 
             __RPC__in ISpeechPhraseElement * This,
             /* [retval][out] */ __RPC__out float *EngineConfidence);
@@ -19698,28 +20907,34 @@ EXTERN_C const IID IID_ISpeechPhraseElements;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechPhraseElements * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechPhraseElements * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechPhraseElements * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechPhraseElements * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechPhraseElements * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechPhraseElements * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -19728,6 +20943,7 @@ EXTERN_C const IID IID_ISpeechPhraseElements;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechPhraseElements * This,
             /* [annotation][in] */ 
@@ -19747,15 +20963,18 @@ EXTERN_C const IID IID_ISpeechPhraseElements;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseElements, get_Count)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISpeechPhraseElements * This,
             /* [retval][out] */ __RPC__out long *Count);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseElements, Item)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             __RPC__in ISpeechPhraseElements * This,
             /* [in] */ long Index,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechPhraseElement **Element);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseElements, get__NewEnum)
         /* [id][restricted][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISpeechPhraseElements * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **EnumVARIANT);
@@ -19852,28 +21071,34 @@ EXTERN_C const IID IID_ISpeechPhraseReplacement;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechPhraseReplacement * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechPhraseReplacement * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechPhraseReplacement * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechPhraseReplacement * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechPhraseReplacement * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechPhraseReplacement * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -19882,6 +21107,7 @@ EXTERN_C const IID IID_ISpeechPhraseReplacement;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechPhraseReplacement * This,
             /* [annotation][in] */ 
@@ -19901,18 +21127,22 @@ EXTERN_C const IID IID_ISpeechPhraseReplacement;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseReplacement, get_DisplayAttributes)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DisplayAttributes )( 
             __RPC__in ISpeechPhraseReplacement * This,
             /* [retval][out] */ __RPC__out SpeechDisplayAttributes *DisplayAttributes);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseReplacement, get_Text)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Text )( 
             __RPC__in ISpeechPhraseReplacement * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Text);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseReplacement, get_FirstElement)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FirstElement )( 
             __RPC__in ISpeechPhraseReplacement * This,
             /* [retval][out] */ __RPC__out long *FirstElement);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseReplacement, get_NumberOfElements)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NumberOfElements )( 
             __RPC__in ISpeechPhraseReplacement * This,
             /* [retval][out] */ __RPC__out long *NumberOfElements);
@@ -20010,28 +21240,34 @@ EXTERN_C const IID IID_ISpeechPhraseReplacements;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechPhraseReplacements * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechPhraseReplacements * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechPhraseReplacements * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechPhraseReplacements * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechPhraseReplacements * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechPhraseReplacements * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -20040,6 +21276,7 @@ EXTERN_C const IID IID_ISpeechPhraseReplacements;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechPhraseReplacements * This,
             /* [annotation][in] */ 
@@ -20059,15 +21296,18 @@ EXTERN_C const IID IID_ISpeechPhraseReplacements;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseReplacements, get_Count)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISpeechPhraseReplacements * This,
             /* [retval][out] */ __RPC__out long *Count);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseReplacements, Item)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             __RPC__in ISpeechPhraseReplacements * This,
             /* [in] */ long Index,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechPhraseReplacement **Reps);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseReplacements, get__NewEnum)
         /* [id][restricted][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISpeechPhraseReplacements * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **EnumVARIANT);
@@ -20179,28 +21419,34 @@ EXTERN_C const IID IID_ISpeechPhraseProperty;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechPhraseProperty * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechPhraseProperty * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechPhraseProperty * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechPhraseProperty * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechPhraseProperty * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechPhraseProperty * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -20209,6 +21455,7 @@ EXTERN_C const IID IID_ISpeechPhraseProperty;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechPhraseProperty * This,
             /* [annotation][in] */ 
@@ -20228,38 +21475,47 @@ EXTERN_C const IID IID_ISpeechPhraseProperty;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseProperty, get_Name)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ISpeechPhraseProperty * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Name);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseProperty, get_Id)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in ISpeechPhraseProperty * This,
             /* [retval][out] */ __RPC__out long *Id);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseProperty, get_Value)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
             __RPC__in ISpeechPhraseProperty * This,
             /* [retval][out] */ __RPC__out VARIANT *Value);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseProperty, get_FirstElement)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FirstElement )( 
             __RPC__in ISpeechPhraseProperty * This,
             /* [retval][out] */ __RPC__out long *FirstElement);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseProperty, get_NumberOfElements)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NumberOfElements )( 
             __RPC__in ISpeechPhraseProperty * This,
             /* [retval][out] */ __RPC__out long *NumberOfElements);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseProperty, get_EngineConfidence)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EngineConfidence )( 
             __RPC__in ISpeechPhraseProperty * This,
             /* [retval][out] */ __RPC__out float *Confidence);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseProperty, get_Confidence)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Confidence )( 
             __RPC__in ISpeechPhraseProperty * This,
             /* [retval][out] */ __RPC__out SpeechEngineConfidence *Confidence);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseProperty, get_Parent)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Parent )( 
             __RPC__in ISpeechPhraseProperty * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechPhraseProperty **ParentProperty);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseProperty, get_Children)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Children )( 
             __RPC__in ISpeechPhraseProperty * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechPhraseProperties **Children);
@@ -20372,28 +21628,34 @@ EXTERN_C const IID IID_ISpeechPhraseProperties;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechPhraseProperties * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechPhraseProperties * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechPhraseProperties * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechPhraseProperties * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechPhraseProperties * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechPhraseProperties * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -20402,6 +21664,7 @@ EXTERN_C const IID IID_ISpeechPhraseProperties;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechPhraseProperties * This,
             /* [annotation][in] */ 
@@ -20421,15 +21684,18 @@ EXTERN_C const IID IID_ISpeechPhraseProperties;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseProperties, get_Count)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISpeechPhraseProperties * This,
             /* [retval][out] */ __RPC__out long *Count);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseProperties, Item)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             __RPC__in ISpeechPhraseProperties * This,
             /* [in] */ long Index,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechPhraseProperty **Property);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseProperties, get__NewEnum)
         /* [id][restricted][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISpeechPhraseProperties * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **EnumVARIANT);
@@ -20538,28 +21804,34 @@ EXTERN_C const IID IID_ISpeechPhraseRule;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechPhraseRule * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechPhraseRule * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechPhraseRule * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechPhraseRule * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechPhraseRule * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechPhraseRule * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -20568,6 +21840,7 @@ EXTERN_C const IID IID_ISpeechPhraseRule;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechPhraseRule * This,
             /* [annotation][in] */ 
@@ -20587,34 +21860,42 @@ EXTERN_C const IID IID_ISpeechPhraseRule;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseRule, get_Name)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ISpeechPhraseRule * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Name);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseRule, get_Id)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in ISpeechPhraseRule * This,
             /* [retval][out] */ __RPC__out long *Id);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseRule, get_FirstElement)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FirstElement )( 
             __RPC__in ISpeechPhraseRule * This,
             /* [retval][out] */ __RPC__out long *FirstElement);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseRule, get_NumberOfElements)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NumberOfElements )( 
             __RPC__in ISpeechPhraseRule * This,
             /* [retval][out] */ __RPC__out long *NumberOfElements);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseRule, get_Parent)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Parent )( 
             __RPC__in ISpeechPhraseRule * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechPhraseRule **Parent);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseRule, get_Children)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Children )( 
             __RPC__in ISpeechPhraseRule * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechPhraseRules **Children);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseRule, get_Confidence)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Confidence )( 
             __RPC__in ISpeechPhraseRule * This,
             /* [retval][out] */ __RPC__out SpeechEngineConfidence *ActualConfidence);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseRule, get_EngineConfidence)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EngineConfidence )( 
             __RPC__in ISpeechPhraseRule * This,
             /* [retval][out] */ __RPC__out float *EngineConfidence);
@@ -20724,28 +22005,34 @@ EXTERN_C const IID IID_ISpeechPhraseRules;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechPhraseRules * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechPhraseRules * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechPhraseRules * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechPhraseRules * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechPhraseRules * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechPhraseRules * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -20754,6 +22041,7 @@ EXTERN_C const IID IID_ISpeechPhraseRules;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechPhraseRules * This,
             /* [annotation][in] */ 
@@ -20773,15 +22061,18 @@ EXTERN_C const IID IID_ISpeechPhraseRules;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseRules, get_Count)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISpeechPhraseRules * This,
             /* [retval][out] */ __RPC__out long *Count);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseRules, Item)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             __RPC__in ISpeechPhraseRules * This,
             /* [in] */ long Index,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechPhraseRule **Rule);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseRules, get__NewEnum)
         /* [id][restricted][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISpeechPhraseRules * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **EnumVARIANT);
@@ -20908,28 +22199,34 @@ EXTERN_C const IID IID_ISpeechLexicon;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechLexicon * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechLexicon * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechLexicon * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechLexicon * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechLexicon * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechLexicon * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -20938,6 +22235,7 @@ EXTERN_C const IID IID_ISpeechLexicon;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechLexicon * This,
             /* [annotation][in] */ 
@@ -20957,16 +22255,19 @@ EXTERN_C const IID IID_ISpeechLexicon;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechLexicon, get_GenerationId)
         /* [hidden][id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_GenerationId )( 
             __RPC__in ISpeechLexicon * This,
             /* [retval][out] */ __RPC__out long *GenerationId);
         
+        DECLSPEC_XFGVIRT(ISpeechLexicon, GetWords)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetWords )( 
             __RPC__in ISpeechLexicon * This,
             /* [defaultvalue][in] */ SpeechLexiconType Flags,
             /* [defaultvalue][out] */ __RPC__out long *GenerationID,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechLexiconWords **Words);
         
+        DECLSPEC_XFGVIRT(ISpeechLexicon, AddPronunciation)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *AddPronunciation )( 
             __RPC__in ISpeechLexicon * This,
             /* [in] */ __RPC__in BSTR bstrWord,
@@ -20974,6 +22275,7 @@ EXTERN_C const IID IID_ISpeechLexicon;
             /* [defaultvalue][in] */ SpeechPartOfSpeech PartOfSpeech,
             /* [defaultvalue][in] */ __RPC__in BSTR bstrPronunciation);
         
+        DECLSPEC_XFGVIRT(ISpeechLexicon, AddPronunciationByPhoneIds)
         /* [id][hidden][helpstring] */ HRESULT ( STDMETHODCALLTYPE *AddPronunciationByPhoneIds )( 
             __RPC__in ISpeechLexicon * This,
             /* [in] */ __RPC__in BSTR bstrWord,
@@ -20981,6 +22283,7 @@ EXTERN_C const IID IID_ISpeechLexicon;
             /* [defaultvalue][in] */ SpeechPartOfSpeech PartOfSpeech,
             /* [defaultvalue][in] */ __RPC__in VARIANT *PhoneIds);
         
+        DECLSPEC_XFGVIRT(ISpeechLexicon, RemovePronunciation)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *RemovePronunciation )( 
             __RPC__in ISpeechLexicon * This,
             /* [in] */ __RPC__in BSTR bstrWord,
@@ -20988,6 +22291,7 @@ EXTERN_C const IID IID_ISpeechLexicon;
             /* [defaultvalue][in] */ SpeechPartOfSpeech PartOfSpeech,
             /* [defaultvalue][in] */ __RPC__in BSTR bstrPronunciation);
         
+        DECLSPEC_XFGVIRT(ISpeechLexicon, RemovePronunciationByPhoneIds)
         /* [id][hidden][helpstring] */ HRESULT ( STDMETHODCALLTYPE *RemovePronunciationByPhoneIds )( 
             __RPC__in ISpeechLexicon * This,
             /* [in] */ __RPC__in BSTR bstrWord,
@@ -20995,6 +22299,7 @@ EXTERN_C const IID IID_ISpeechLexicon;
             /* [defaultvalue][in] */ SpeechPartOfSpeech PartOfSpeech,
             /* [defaultvalue][in] */ __RPC__in VARIANT *PhoneIds);
         
+        DECLSPEC_XFGVIRT(ISpeechLexicon, GetPronunciations)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPronunciations )( 
             __RPC__in ISpeechLexicon * This,
             /* [in] */ __RPC__in BSTR bstrWord,
@@ -21002,6 +22307,7 @@ EXTERN_C const IID IID_ISpeechLexicon;
             /* [defaultvalue][in] */ SpeechLexiconType TypeFlags,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechLexiconPronunciations **ppPronunciations);
         
+        DECLSPEC_XFGVIRT(ISpeechLexicon, GetGenerationChange)
         /* [hidden][id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetGenerationChange )( 
             __RPC__in ISpeechLexicon * This,
             /* [out][in] */ __RPC__inout long *GenerationID,
@@ -21112,28 +22418,34 @@ EXTERN_C const IID IID_ISpeechLexiconWords;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechLexiconWords * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechLexiconWords * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechLexiconWords * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechLexiconWords * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechLexiconWords * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechLexiconWords * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -21142,6 +22454,7 @@ EXTERN_C const IID IID_ISpeechLexiconWords;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechLexiconWords * This,
             /* [annotation][in] */ 
@@ -21161,15 +22474,18 @@ EXTERN_C const IID IID_ISpeechLexiconWords;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechLexiconWords, get_Count)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISpeechLexiconWords * This,
             /* [retval][out] */ __RPC__out long *Count);
         
+        DECLSPEC_XFGVIRT(ISpeechLexiconWords, Item)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             __RPC__in ISpeechLexiconWords * This,
             /* [in] */ long Index,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechLexiconWord **Word);
         
+        DECLSPEC_XFGVIRT(ISpeechLexiconWords, get__NewEnum)
         /* [restricted][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISpeechLexiconWords * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **EnumVARIANT);
@@ -21266,28 +22582,34 @@ EXTERN_C const IID IID_ISpeechLexiconWord;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechLexiconWord * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechLexiconWord * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechLexiconWord * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechLexiconWord * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechLexiconWord * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechLexiconWord * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -21296,6 +22618,7 @@ EXTERN_C const IID IID_ISpeechLexiconWord;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechLexiconWord * This,
             /* [annotation][in] */ 
@@ -21315,18 +22638,22 @@ EXTERN_C const IID IID_ISpeechLexiconWord;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechLexiconWord, get_LangId)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LangId )( 
             __RPC__in ISpeechLexiconWord * This,
             /* [retval][out] */ __RPC__out SpeechLanguageId *LangId);
         
+        DECLSPEC_XFGVIRT(ISpeechLexiconWord, get_Type)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in ISpeechLexiconWord * This,
             /* [retval][out] */ __RPC__out SpeechWordType *WordType);
         
+        DECLSPEC_XFGVIRT(ISpeechLexiconWord, get_Word)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Word )( 
             __RPC__in ISpeechLexiconWord * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Word);
         
+        DECLSPEC_XFGVIRT(ISpeechLexiconWord, get_Pronunciations)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Pronunciations )( 
             __RPC__in ISpeechLexiconWord * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechLexiconPronunciations **Pronunciations);
@@ -21424,28 +22751,34 @@ EXTERN_C const IID IID_ISpeechLexiconPronunciations;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechLexiconPronunciations * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechLexiconPronunciations * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechLexiconPronunciations * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechLexiconPronunciations * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechLexiconPronunciations * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechLexiconPronunciations * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -21454,6 +22787,7 @@ EXTERN_C const IID IID_ISpeechLexiconPronunciations;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechLexiconPronunciations * This,
             /* [annotation][in] */ 
@@ -21473,15 +22807,18 @@ EXTERN_C const IID IID_ISpeechLexiconPronunciations;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechLexiconPronunciations, get_Count)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISpeechLexiconPronunciations * This,
             /* [retval][out] */ __RPC__out long *Count);
         
+        DECLSPEC_XFGVIRT(ISpeechLexiconPronunciations, Item)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             __RPC__in ISpeechLexiconPronunciations * This,
             /* [in] */ long Index,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechLexiconPronunciation **Pronunciation);
         
+        DECLSPEC_XFGVIRT(ISpeechLexiconPronunciations, get__NewEnum)
         /* [restricted][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISpeechLexiconPronunciations * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **EnumVARIANT);
@@ -21581,28 +22918,34 @@ EXTERN_C const IID IID_ISpeechLexiconPronunciation;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechLexiconPronunciation * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechLexiconPronunciation * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechLexiconPronunciation * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechLexiconPronunciation * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechLexiconPronunciation * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechLexiconPronunciation * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -21611,6 +22954,7 @@ EXTERN_C const IID IID_ISpeechLexiconPronunciation;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechLexiconPronunciation * This,
             /* [annotation][in] */ 
@@ -21630,22 +22974,27 @@ EXTERN_C const IID IID_ISpeechLexiconPronunciation;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechLexiconPronunciation, get_Type)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in ISpeechLexiconPronunciation * This,
             /* [retval][out] */ __RPC__out SpeechLexiconType *LexiconType);
         
+        DECLSPEC_XFGVIRT(ISpeechLexiconPronunciation, get_LangId)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LangId )( 
             __RPC__in ISpeechLexiconPronunciation * This,
             /* [retval][out] */ __RPC__out SpeechLanguageId *LangId);
         
+        DECLSPEC_XFGVIRT(ISpeechLexiconPronunciation, get_PartOfSpeech)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_PartOfSpeech )( 
             __RPC__in ISpeechLexiconPronunciation * This,
             /* [retval][out] */ __RPC__out SpeechPartOfSpeech *PartOfSpeech);
         
+        DECLSPEC_XFGVIRT(ISpeechLexiconPronunciation, get_PhoneIds)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_PhoneIds )( 
             __RPC__in ISpeechLexiconPronunciation * This,
             /* [retval][out] */ __RPC__out VARIANT *PhoneIds);
         
+        DECLSPEC_XFGVIRT(ISpeechLexiconPronunciation, get_Symbolic)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Symbolic )( 
             __RPC__in ISpeechLexiconPronunciation * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Symbolic);
@@ -21852,28 +23201,34 @@ EXTERN_C const IID IID_ISpeechXMLRecoResult;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechXMLRecoResult * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechXMLRecoResult * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechXMLRecoResult * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechXMLRecoResult * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechXMLRecoResult * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechXMLRecoResult * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -21882,6 +23237,7 @@ EXTERN_C const IID IID_ISpeechXMLRecoResult;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechXMLRecoResult * This,
             /* [annotation][in] */ 
@@ -21901,26 +23257,32 @@ EXTERN_C const IID IID_ISpeechXMLRecoResult;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResult, get_RecoContext)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RecoContext )( 
             __RPC__in ISpeechXMLRecoResult * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechRecoContext **RecoContext);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResult, get_Times)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Times )( 
             __RPC__in ISpeechXMLRecoResult * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechRecoResultTimes **Times);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResult, putref_AudioFormat)
         /* [id][helpstring][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_AudioFormat )( 
             __RPC__in ISpeechXMLRecoResult * This,
             /* [in] */ __RPC__in_opt ISpeechAudioFormat *Format);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResult, get_AudioFormat)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AudioFormat )( 
             __RPC__in ISpeechXMLRecoResult * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechAudioFormat **Format);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResult, get_PhraseInfo)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PhraseInfo )( 
             __RPC__in ISpeechXMLRecoResult * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechPhraseInfo **PhraseInfo);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResult, Alternates)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Alternates )( 
             __RPC__in ISpeechXMLRecoResult * This,
             /* [in] */ long RequestCount,
@@ -21928,12 +23290,14 @@ EXTERN_C const IID IID_ISpeechXMLRecoResult;
             /* [defaultvalue][in] */ long Elements,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechPhraseAlternates **Alternates);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResult, Audio)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Audio )( 
             __RPC__in ISpeechXMLRecoResult * This,
             /* [defaultvalue][in] */ long StartElement,
             /* [defaultvalue][in] */ long Elements,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechMemoryStream **Stream);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResult, SpeakAudio)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *SpeakAudio )( 
             __RPC__in ISpeechXMLRecoResult * This,
             /* [defaultvalue][in] */ long StartElement,
@@ -21941,19 +23305,23 @@ EXTERN_C const IID IID_ISpeechXMLRecoResult;
             /* [defaultvalue][in] */ SpeechVoiceSpeakFlags Flags,
             /* [retval][out] */ __RPC__out long *StreamNumber);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResult, SaveToMemory)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *SaveToMemory )( 
             __RPC__in ISpeechXMLRecoResult * This,
             /* [retval][out] */ __RPC__out VARIANT *ResultBlock);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResult, DiscardResultInfo)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *DiscardResultInfo )( 
             __RPC__in ISpeechXMLRecoResult * This,
             /* [in] */ SpeechDiscardType ValueTypes);
         
+        DECLSPEC_XFGVIRT(ISpeechXMLRecoResult, GetXMLResult)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetXMLResult )( 
             __RPC__in ISpeechXMLRecoResult * This,
             /* [in] */ SPXMLRESULTOPTIONS Options,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pResult);
         
+        DECLSPEC_XFGVIRT(ISpeechXMLRecoResult, GetXMLErrorInfo)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetXMLErrorInfo )( 
             __RPC__in ISpeechXMLRecoResult * This,
             /* [out] */ __RPC__out long *LineNumber,
@@ -22125,28 +23493,34 @@ EXTERN_C const IID IID_ISpeechRecoResultDispatch;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechRecoResultDispatch * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechRecoResultDispatch * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechRecoResultDispatch * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechRecoResultDispatch * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechRecoResultDispatch * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechRecoResultDispatch * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -22155,6 +23529,7 @@ EXTERN_C const IID IID_ISpeechRecoResultDispatch;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechRecoResultDispatch * This,
             /* [annotation][in] */ 
@@ -22174,26 +23549,32 @@ EXTERN_C const IID IID_ISpeechRecoResultDispatch;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResultDispatch, get_RecoContext)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RecoContext )( 
             __RPC__in ISpeechRecoResultDispatch * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechRecoContext **RecoContext);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResultDispatch, get_Times)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Times )( 
             __RPC__in ISpeechRecoResultDispatch * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechRecoResultTimes **Times);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResultDispatch, putref_AudioFormat)
         /* [id][helpstring][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_AudioFormat )( 
             __RPC__in ISpeechRecoResultDispatch * This,
             /* [in] */ __RPC__in_opt ISpeechAudioFormat *Format);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResultDispatch, get_AudioFormat)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AudioFormat )( 
             __RPC__in ISpeechRecoResultDispatch * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechAudioFormat **Format);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResultDispatch, get_PhraseInfo)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PhraseInfo )( 
             __RPC__in ISpeechRecoResultDispatch * This,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechPhraseInfo **PhraseInfo);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResultDispatch, Alternates)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Alternates )( 
             __RPC__in ISpeechRecoResultDispatch * This,
             /* [in] */ long RequestCount,
@@ -22201,12 +23582,14 @@ EXTERN_C const IID IID_ISpeechRecoResultDispatch;
             /* [defaultvalue][in] */ long Elements,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechPhraseAlternates **Alternates);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResultDispatch, Audio)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Audio )( 
             __RPC__in ISpeechRecoResultDispatch * This,
             /* [defaultvalue][in] */ long StartElement,
             /* [defaultvalue][in] */ long Elements,
             /* [retval][out] */ __RPC__deref_out_opt ISpeechMemoryStream **Stream);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResultDispatch, SpeakAudio)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *SpeakAudio )( 
             __RPC__in ISpeechRecoResultDispatch * This,
             /* [defaultvalue][in] */ long StartElement,
@@ -22214,19 +23597,23 @@ EXTERN_C const IID IID_ISpeechRecoResultDispatch;
             /* [defaultvalue][in] */ SpeechVoiceSpeakFlags Flags,
             /* [retval][out] */ __RPC__out long *StreamNumber);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResultDispatch, SaveToMemory)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *SaveToMemory )( 
             __RPC__in ISpeechRecoResultDispatch * This,
             /* [retval][out] */ __RPC__out VARIANT *ResultBlock);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResultDispatch, DiscardResultInfo)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *DiscardResultInfo )( 
             __RPC__in ISpeechRecoResultDispatch * This,
             /* [in] */ SpeechDiscardType ValueTypes);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResultDispatch, GetXMLResult)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetXMLResult )( 
             __RPC__in ISpeechRecoResultDispatch * This,
             /* [in] */ SPXMLRESULTOPTIONS Options,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pResult);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResultDispatch, GetXMLErrorInfo)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetXMLErrorInfo )( 
             __RPC__in ISpeechRecoResultDispatch * This,
             /* [out] */ __RPC__out long *LineNumber,
@@ -22236,6 +23623,7 @@ EXTERN_C const IID IID_ISpeechRecoResultDispatch;
             /* [out] */ __RPC__out HRESULT *ResultCode,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *IsError);
         
+        DECLSPEC_XFGVIRT(ISpeechRecoResultDispatch, SetTextFeedback)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetTextFeedback )( 
             __RPC__in ISpeechRecoResultDispatch * This,
             /* [in] */ __RPC__in BSTR Feedback,
@@ -22355,28 +23743,34 @@ EXTERN_C const IID IID_ISpeechPhraseInfoBuilder;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechPhraseInfoBuilder * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechPhraseInfoBuilder * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechPhraseInfoBuilder * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechPhraseInfoBuilder * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechPhraseInfoBuilder * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechPhraseInfoBuilder * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -22385,6 +23779,7 @@ EXTERN_C const IID IID_ISpeechPhraseInfoBuilder;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechPhraseInfoBuilder * This,
             /* [annotation][in] */ 
@@ -22404,6 +23799,7 @@ EXTERN_C const IID IID_ISpeechPhraseInfoBuilder;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechPhraseInfoBuilder, RestorePhraseFromMemory)
         /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *RestorePhraseFromMemory )( 
             __RPC__in ISpeechPhraseInfoBuilder * This,
             /* [in] */ __RPC__in VARIANT *PhraseInMemory,
@@ -22497,28 +23893,34 @@ EXTERN_C const IID IID_ISpeechPhoneConverter;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpeechPhoneConverter * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpeechPhoneConverter * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpeechPhoneConverter * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISpeechPhoneConverter * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISpeechPhoneConverter * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISpeechPhoneConverter * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -22527,6 +23929,7 @@ EXTERN_C const IID IID_ISpeechPhoneConverter;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISpeechPhoneConverter * This,
             /* [annotation][in] */ 
@@ -22546,19 +23949,23 @@ EXTERN_C const IID IID_ISpeechPhoneConverter;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISpeechPhoneConverter, get_LanguageId)
         /* [id][helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LanguageId )( 
             __RPC__in ISpeechPhoneConverter * This,
             /* [retval][out] */ __RPC__out SpeechLanguageId *LanguageId);
         
+        DECLSPEC_XFGVIRT(ISpeechPhoneConverter, put_LanguageId)
         /* [id][helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LanguageId )( 
             __RPC__in ISpeechPhoneConverter * This,
             /* [in] */ SpeechLanguageId LanguageId);
         
+        DECLSPEC_XFGVIRT(ISpeechPhoneConverter, PhoneToId)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *PhoneToId )( 
             __RPC__in ISpeechPhoneConverter * This,
             /* [in] */ __RPC__in const BSTR Phonemes,
             /* [retval][out] */ __RPC__out VARIANT *IdArray);
         
+        DECLSPEC_XFGVIRT(ISpeechPhoneConverter, IdToPhone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IdToPhone )( 
             __RPC__in ISpeechPhoneConverter * This,
             /* [in] */ const VARIANT IdArray,

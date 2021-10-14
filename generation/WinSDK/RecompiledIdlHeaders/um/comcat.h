@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -207,6 +215,7 @@ EXTERN_C const IID IID_IEnumGUID;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumGUID * This,
             /* [annotation][in] */ 
@@ -214,12 +223,15 @@ EXTERN_C const IID IID_IEnumGUID;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumGUID * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumGUID * This);
         
+        DECLSPEC_XFGVIRT(IEnumGUID, Next)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumGUID * This,
             /* [annotation][in] */ 
@@ -229,14 +241,17 @@ EXTERN_C const IID IID_IEnumGUID;
             /* [annotation][out] */ 
             _Out_opt_  ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IEnumGUID, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumGUID * This,
             /* [annotation][in] */ 
             _In_  ULONG celt);
         
+        DECLSPEC_XFGVIRT(IEnumGUID, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumGUID * This);
         
+        DECLSPEC_XFGVIRT(IEnumGUID, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumGUID * This,
             /* [annotation][out] */ 
@@ -373,6 +388,7 @@ EXTERN_C const IID IID_IEnumCATEGORYINFO;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumCATEGORYINFO * This,
             /* [annotation][in] */ 
@@ -380,12 +396,15 @@ EXTERN_C const IID IID_IEnumCATEGORYINFO;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumCATEGORYINFO * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumCATEGORYINFO * This);
         
+        DECLSPEC_XFGVIRT(IEnumCATEGORYINFO, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumCATEGORYINFO * This,
             /* [annotation][in] */ 
@@ -395,14 +414,17 @@ EXTERN_C const IID IID_IEnumCATEGORYINFO;
             /* [annotation][out] */ 
             _Out_  ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IEnumCATEGORYINFO, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumCATEGORYINFO * This,
             /* [annotation][in] */ 
             _In_  ULONG celt);
         
+        DECLSPEC_XFGVIRT(IEnumCATEGORYINFO, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumCATEGORYINFO * This);
         
+        DECLSPEC_XFGVIRT(IEnumCATEGORYINFO, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumCATEGORYINFO * This,
             /* [annotation][out] */ 
@@ -535,6 +557,7 @@ EXTERN_C const IID IID_ICatRegister;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICatRegister * This,
             /* [annotation][in] */ 
@@ -542,12 +565,15 @@ EXTERN_C const IID IID_ICatRegister;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICatRegister * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICatRegister * This);
         
+        DECLSPEC_XFGVIRT(ICatRegister, RegisterCategories)
         HRESULT ( STDMETHODCALLTYPE *RegisterCategories )( 
             __RPC__in ICatRegister * This,
             /* [annotation][in] */ 
@@ -555,6 +581,7 @@ EXTERN_C const IID IID_ICatRegister;
             /* [annotation][size_is][in] */ 
             _In_reads_(cCategories)  CATEGORYINFO rgCategoryInfo[  ]);
         
+        DECLSPEC_XFGVIRT(ICatRegister, UnRegisterCategories)
         HRESULT ( STDMETHODCALLTYPE *UnRegisterCategories )( 
             __RPC__in ICatRegister * This,
             /* [annotation][in] */ 
@@ -562,6 +589,7 @@ EXTERN_C const IID IID_ICatRegister;
             /* [annotation][size_is][in] */ 
             _In_reads_(cCategories)  CATID rgcatid[  ]);
         
+        DECLSPEC_XFGVIRT(ICatRegister, RegisterClassImplCategories)
         HRESULT ( STDMETHODCALLTYPE *RegisterClassImplCategories )( 
             __RPC__in ICatRegister * This,
             /* [annotation][in] */ 
@@ -571,6 +599,7 @@ EXTERN_C const IID IID_ICatRegister;
             /* [annotation][size_is][in] */ 
             _In_reads_(cCategories)  CATID rgcatid[  ]);
         
+        DECLSPEC_XFGVIRT(ICatRegister, UnRegisterClassImplCategories)
         HRESULT ( STDMETHODCALLTYPE *UnRegisterClassImplCategories )( 
             __RPC__in ICatRegister * This,
             /* [annotation][in] */ 
@@ -580,6 +609,7 @@ EXTERN_C const IID IID_ICatRegister;
             /* [annotation][size_is][in] */ 
             _In_reads_(cCategories)  CATID rgcatid[  ]);
         
+        DECLSPEC_XFGVIRT(ICatRegister, RegisterClassReqCategories)
         HRESULT ( STDMETHODCALLTYPE *RegisterClassReqCategories )( 
             __RPC__in ICatRegister * This,
             /* [annotation][in] */ 
@@ -589,6 +619,7 @@ EXTERN_C const IID IID_ICatRegister;
             /* [annotation][size_is][in] */ 
             _In_reads_(cCategories)  CATID rgcatid[  ]);
         
+        DECLSPEC_XFGVIRT(ICatRegister, UnRegisterClassReqCategories)
         HRESULT ( STDMETHODCALLTYPE *UnRegisterClassReqCategories )( 
             __RPC__in ICatRegister * This,
             /* [annotation][in] */ 
@@ -737,6 +768,7 @@ EXTERN_C const IID IID_ICatInformation;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICatInformation * This,
             /* [annotation][in] */ 
@@ -744,12 +776,15 @@ EXTERN_C const IID IID_ICatInformation;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICatInformation * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICatInformation * This);
         
+        DECLSPEC_XFGVIRT(ICatInformation, EnumCategories)
         HRESULT ( STDMETHODCALLTYPE *EnumCategories )( 
             __RPC__in ICatInformation * This,
             /* [annotation][in] */ 
@@ -757,6 +792,7 @@ EXTERN_C const IID IID_ICatInformation;
             /* [annotation][out] */ 
             _Out_  IEnumCATEGORYINFO **ppenumCategoryInfo);
         
+        DECLSPEC_XFGVIRT(ICatInformation, GetCategoryDesc)
         HRESULT ( STDMETHODCALLTYPE *GetCategoryDesc )( 
             __RPC__in ICatInformation * This,
             /* [annotation][in] */ 
@@ -766,6 +802,7 @@ EXTERN_C const IID IID_ICatInformation;
             /* [annotation][out] */ 
             _Out_  LPWSTR *pszDesc);
         
+        DECLSPEC_XFGVIRT(ICatInformation, EnumClassesOfCategories)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *EnumClassesOfCategories )( 
             ICatInformation * This,
             /* [annotation][in] */ 
@@ -779,6 +816,7 @@ EXTERN_C const IID IID_ICatInformation;
             /* [annotation][out] */ 
             _Out_  IEnumGUID **ppenumClsid);
         
+        DECLSPEC_XFGVIRT(ICatInformation, IsClassOfCategories)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *IsClassOfCategories )( 
             ICatInformation * This,
             /* [annotation][in] */ 
@@ -792,6 +830,7 @@ EXTERN_C const IID IID_ICatInformation;
             /* [annotation][size_is][in] */ 
             _In_reads_(cRequired)  const CATID rgcatidReq[  ]);
         
+        DECLSPEC_XFGVIRT(ICatInformation, EnumImplCategoriesOfClass)
         HRESULT ( STDMETHODCALLTYPE *EnumImplCategoriesOfClass )( 
             __RPC__in ICatInformation * This,
             /* [annotation][in] */ 
@@ -799,6 +838,7 @@ EXTERN_C const IID IID_ICatInformation;
             /* [annotation][out] */ 
             _Out_  IEnumGUID **ppenumCatid);
         
+        DECLSPEC_XFGVIRT(ICatInformation, EnumReqCategoriesOfClass)
         HRESULT ( STDMETHODCALLTYPE *EnumReqCategoriesOfClass )( 
             __RPC__in ICatInformation * This,
             /* [annotation][in] */ 

@@ -10,3 +10,6 @@
 #include <d3d12.h>
 #include <d3d12sdklayers.h>
 #include <d3d12shader.h>
+#include <d3d12compatibility.h>
+#include <d3d9on12.h>
+#include <mfd3d12.h>

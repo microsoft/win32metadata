@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -207,6 +215,7 @@ EXTERN_C const IID IID_IBDA_TIF_REGISTRATION;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_TIF_REGISTRATION * This,
             /* [annotation][in] */ 
@@ -214,12 +223,15 @@ EXTERN_C const IID IID_IBDA_TIF_REGISTRATION;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IBDA_TIF_REGISTRATION * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IBDA_TIF_REGISTRATION * This);
         
+        DECLSPEC_XFGVIRT(IBDA_TIF_REGISTRATION, RegisterTIFEx)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RegisterTIFEx )( 
             __RPC__in IBDA_TIF_REGISTRATION * This,
             /* [annotation][in] */ 
@@ -229,6 +241,7 @@ EXTERN_C const IID IID_IBDA_TIF_REGISTRATION;
             /* [annotation][out][in] */ 
             _Inout_  IUnknown **ppMpeg2DataControl);
         
+        DECLSPEC_XFGVIRT(IBDA_TIF_REGISTRATION, UnregisterTIF)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *UnregisterTIF )( 
             __RPC__in IBDA_TIF_REGISTRATION * This,
             /* [annotation][in] */ 
@@ -330,6 +343,7 @@ EXTERN_C const IID IID_IMPEG2_TIF_CONTROL;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMPEG2_TIF_CONTROL * This,
             /* [annotation][in] */ 
@@ -337,12 +351,15 @@ EXTERN_C const IID IID_IMPEG2_TIF_CONTROL;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMPEG2_TIF_CONTROL * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMPEG2_TIF_CONTROL * This);
         
+        DECLSPEC_XFGVIRT(IMPEG2_TIF_CONTROL, RegisterTIF)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RegisterTIF )( 
             __RPC__in IMPEG2_TIF_CONTROL * This,
             /* [annotation][in] */ 
@@ -350,11 +367,13 @@ EXTERN_C const IID IID_IMPEG2_TIF_CONTROL;
             /* [annotation][out][in] */ 
             _Inout_  ULONG *ppvRegistrationContext);
         
+        DECLSPEC_XFGVIRT(IMPEG2_TIF_CONTROL, UnregisterTIF)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *UnregisterTIF )( 
             __RPC__in IMPEG2_TIF_CONTROL * This,
             /* [annotation][in] */ 
             _In_  ULONG pvRegistrationContext);
         
+        DECLSPEC_XFGVIRT(IMPEG2_TIF_CONTROL, AddPIDs)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AddPIDs )( 
             __RPC__in IMPEG2_TIF_CONTROL * This,
             /* [annotation][in] */ 
@@ -362,6 +381,7 @@ EXTERN_C const IID IID_IMPEG2_TIF_CONTROL;
             /* [annotation][in] */ 
             _In_  ULONG *pulPIDs);
         
+        DECLSPEC_XFGVIRT(IMPEG2_TIF_CONTROL, DeletePIDs)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *DeletePIDs )( 
             __RPC__in IMPEG2_TIF_CONTROL * This,
             /* [annotation][in] */ 
@@ -369,11 +389,13 @@ EXTERN_C const IID IID_IMPEG2_TIF_CONTROL;
             /* [annotation][in] */ 
             _In_  ULONG *pulPIDs);
         
+        DECLSPEC_XFGVIRT(IMPEG2_TIF_CONTROL, GetPIDCount)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPIDCount )( 
             __RPC__in IMPEG2_TIF_CONTROL * This,
             /* [annotation][out] */ 
             _Out_  ULONG *pulcPIDs);
         
+        DECLSPEC_XFGVIRT(IMPEG2_TIF_CONTROL, GetPIDs)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPIDs )( 
             __RPC__in IMPEG2_TIF_CONTROL * This,
             /* [annotation][out] */ 
@@ -493,6 +515,7 @@ EXTERN_C const IID IID_ITuneRequestInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITuneRequestInfo * This,
             /* [annotation][in] */ 
@@ -500,27 +523,33 @@ EXTERN_C const IID IID_ITuneRequestInfo;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITuneRequestInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITuneRequestInfo * This);
         
+        DECLSPEC_XFGVIRT(ITuneRequestInfo, GetLocatorData)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetLocatorData )( 
             __RPC__in ITuneRequestInfo * This,
             /* [annotation][in] */ 
             _In_  ITuneRequest *Request);
         
+        DECLSPEC_XFGVIRT(ITuneRequestInfo, GetComponentData)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetComponentData )( 
             __RPC__in ITuneRequestInfo * This,
             /* [annotation][in] */ 
             _In_  ITuneRequest *CurrentRequest);
         
+        DECLSPEC_XFGVIRT(ITuneRequestInfo, CreateComponentList)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateComponentList )( 
             __RPC__in ITuneRequestInfo * This,
             /* [annotation][in] */ 
             _In_  ITuneRequest *CurrentRequest);
         
+        DECLSPEC_XFGVIRT(ITuneRequestInfo, GetNextProgram)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetNextProgram )( 
             __RPC__in ITuneRequestInfo * This,
             /* [annotation][in] */ 
@@ -528,6 +557,7 @@ EXTERN_C const IID IID_ITuneRequestInfo;
             /* [annotation][retval][out] */ 
             _Out_retval_  ITuneRequest **TuneRequest);
         
+        DECLSPEC_XFGVIRT(ITuneRequestInfo, GetPreviousProgram)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPreviousProgram )( 
             __RPC__in ITuneRequestInfo * This,
             /* [annotation][in] */ 
@@ -535,6 +565,7 @@ EXTERN_C const IID IID_ITuneRequestInfo;
             /* [annotation][retval][out] */ 
             _Out_retval_  ITuneRequest **TuneRequest);
         
+        DECLSPEC_XFGVIRT(ITuneRequestInfo, GetNextLocator)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetNextLocator )( 
             __RPC__in ITuneRequestInfo * This,
             /* [annotation][in] */ 
@@ -542,6 +573,7 @@ EXTERN_C const IID IID_ITuneRequestInfo;
             /* [annotation][retval][out] */ 
             _Out_retval_  ITuneRequest **TuneRequest);
         
+        DECLSPEC_XFGVIRT(ITuneRequestInfo, GetPreviousLocator)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPreviousLocator )( 
             __RPC__in ITuneRequestInfo * This,
             /* [annotation][in] */ 
@@ -634,6 +666,7 @@ EXTERN_C const IID IID_ITuneRequestInfoEx;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITuneRequestInfoEx * This,
             /* [annotation][in] */ 
@@ -641,27 +674,33 @@ EXTERN_C const IID IID_ITuneRequestInfoEx;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITuneRequestInfoEx * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITuneRequestInfoEx * This);
         
+        DECLSPEC_XFGVIRT(ITuneRequestInfo, GetLocatorData)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetLocatorData )( 
             __RPC__in ITuneRequestInfoEx * This,
             /* [annotation][in] */ 
             _In_  ITuneRequest *Request);
         
+        DECLSPEC_XFGVIRT(ITuneRequestInfo, GetComponentData)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetComponentData )( 
             __RPC__in ITuneRequestInfoEx * This,
             /* [annotation][in] */ 
             _In_  ITuneRequest *CurrentRequest);
         
+        DECLSPEC_XFGVIRT(ITuneRequestInfo, CreateComponentList)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateComponentList )( 
             __RPC__in ITuneRequestInfoEx * This,
             /* [annotation][in] */ 
             _In_  ITuneRequest *CurrentRequest);
         
+        DECLSPEC_XFGVIRT(ITuneRequestInfo, GetNextProgram)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetNextProgram )( 
             __RPC__in ITuneRequestInfoEx * This,
             /* [annotation][in] */ 
@@ -669,6 +708,7 @@ EXTERN_C const IID IID_ITuneRequestInfoEx;
             /* [annotation][retval][out] */ 
             _Out_retval_  ITuneRequest **TuneRequest);
         
+        DECLSPEC_XFGVIRT(ITuneRequestInfo, GetPreviousProgram)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPreviousProgram )( 
             __RPC__in ITuneRequestInfoEx * This,
             /* [annotation][in] */ 
@@ -676,6 +716,7 @@ EXTERN_C const IID IID_ITuneRequestInfoEx;
             /* [annotation][retval][out] */ 
             _Out_retval_  ITuneRequest **TuneRequest);
         
+        DECLSPEC_XFGVIRT(ITuneRequestInfo, GetNextLocator)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetNextLocator )( 
             __RPC__in ITuneRequestInfoEx * This,
             /* [annotation][in] */ 
@@ -683,6 +724,7 @@ EXTERN_C const IID IID_ITuneRequestInfoEx;
             /* [annotation][retval][out] */ 
             _Out_retval_  ITuneRequest **TuneRequest);
         
+        DECLSPEC_XFGVIRT(ITuneRequestInfo, GetPreviousLocator)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPreviousLocator )( 
             __RPC__in ITuneRequestInfoEx * This,
             /* [annotation][in] */ 
@@ -690,6 +732,7 @@ EXTERN_C const IID IID_ITuneRequestInfoEx;
             /* [annotation][retval][out] */ 
             _Out_retval_  ITuneRequest **TuneRequest);
         
+        DECLSPEC_XFGVIRT(ITuneRequestInfoEx, CreateComponentListEx)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateComponentListEx )( 
             __RPC__in ITuneRequestInfoEx * This,
             /* [annotation][in] */ 
@@ -788,6 +831,7 @@ EXTERN_C const IID IID_ISIInbandEPGEvent;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISIInbandEPGEvent * This,
             /* [annotation][in] */ 
@@ -795,12 +839,15 @@ EXTERN_C const IID IID_ISIInbandEPGEvent;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISIInbandEPGEvent * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISIInbandEPGEvent * This);
         
+        DECLSPEC_XFGVIRT(ISIInbandEPGEvent, SIObjectEvent)
         HRESULT ( STDMETHODCALLTYPE *SIObjectEvent )( 
             __RPC__in ISIInbandEPGEvent * This,
             /* [annotation][in] */ 
@@ -879,6 +926,7 @@ EXTERN_C const IID IID_ISIInbandEPG;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISIInbandEPG * This,
             /* [annotation][in] */ 
@@ -886,18 +934,23 @@ EXTERN_C const IID IID_ISIInbandEPG;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISIInbandEPG * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISIInbandEPG * This);
         
+        DECLSPEC_XFGVIRT(ISIInbandEPG, StartSIEPGScan)
         HRESULT ( STDMETHODCALLTYPE *StartSIEPGScan )( 
             __RPC__in ISIInbandEPG * This);
         
+        DECLSPEC_XFGVIRT(ISIInbandEPG, StopSIEPGScan)
         HRESULT ( STDMETHODCALLTYPE *StopSIEPGScan )( 
             __RPC__in ISIInbandEPG * This);
         
+        DECLSPEC_XFGVIRT(ISIInbandEPG, IsSIEPGScanRunning)
         HRESULT ( STDMETHODCALLTYPE *IsSIEPGScanRunning )( 
             __RPC__in ISIInbandEPG * This,
             /* [annotation][retval][out] */ 
@@ -996,6 +1049,7 @@ EXTERN_C const IID IID_IGuideDataEvent;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGuideDataEvent * This,
             /* [annotation][in] */ 
@@ -1003,40 +1057,49 @@ EXTERN_C const IID IID_IGuideDataEvent;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IGuideDataEvent * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IGuideDataEvent * This);
         
+        DECLSPEC_XFGVIRT(IGuideDataEvent, GuideDataAcquired)
         HRESULT ( STDMETHODCALLTYPE *GuideDataAcquired )( 
             __RPC__in IGuideDataEvent * This);
         
+        DECLSPEC_XFGVIRT(IGuideDataEvent, ProgramChanged)
         HRESULT ( STDMETHODCALLTYPE *ProgramChanged )( 
             __RPC__in IGuideDataEvent * This,
             /* [annotation][in] */ 
             _In_  VARIANT varProgramDescriptionID);
         
+        DECLSPEC_XFGVIRT(IGuideDataEvent, ServiceChanged)
         HRESULT ( STDMETHODCALLTYPE *ServiceChanged )( 
             __RPC__in IGuideDataEvent * This,
             /* [annotation][in] */ 
             _In_  VARIANT varServiceDescriptionID);
         
+        DECLSPEC_XFGVIRT(IGuideDataEvent, ScheduleEntryChanged)
         HRESULT ( STDMETHODCALLTYPE *ScheduleEntryChanged )( 
             __RPC__in IGuideDataEvent * This,
             /* [annotation][in] */ 
             _In_  VARIANT varScheduleEntryDescriptionID);
         
+        DECLSPEC_XFGVIRT(IGuideDataEvent, ProgramDeleted)
         HRESULT ( STDMETHODCALLTYPE *ProgramDeleted )( 
             __RPC__in IGuideDataEvent * This,
             /* [annotation][in] */ 
             _In_  VARIANT varProgramDescriptionID);
         
+        DECLSPEC_XFGVIRT(IGuideDataEvent, ServiceDeleted)
         HRESULT ( STDMETHODCALLTYPE *ServiceDeleted )( 
             __RPC__in IGuideDataEvent * This,
             /* [annotation][in] */ 
             _In_  VARIANT varServiceDescriptionID);
         
+        DECLSPEC_XFGVIRT(IGuideDataEvent, ScheduleDeleted)
         HRESULT ( STDMETHODCALLTYPE *ScheduleDeleted )( 
             __RPC__in IGuideDataEvent * This,
             /* [annotation][in] */ 
@@ -1133,6 +1196,7 @@ EXTERN_C const IID IID_IGuideDataProperty;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGuideDataProperty * This,
             /* [annotation][in] */ 
@@ -1140,22 +1204,27 @@ EXTERN_C const IID IID_IGuideDataProperty;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IGuideDataProperty * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IGuideDataProperty * This);
         
+        DECLSPEC_XFGVIRT(IGuideDataProperty, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IGuideDataProperty * This,
             /* [annotation][out] */ 
             _Out_  BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IGuideDataProperty, get_Language)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Language )( 
             __RPC__in IGuideDataProperty * This,
             /* [annotation][out] */ 
             _Out_  long *idLang);
         
+        DECLSPEC_XFGVIRT(IGuideDataProperty, get_Value)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
             __RPC__in IGuideDataProperty * This,
             /* [annotation][out] */ 
@@ -1246,6 +1315,7 @@ EXTERN_C const IID IID_IEnumGuideDataProperties;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumGuideDataProperties * This,
             /* [annotation][in] */ 
@@ -1253,12 +1323,15 @@ EXTERN_C const IID IID_IEnumGuideDataProperties;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumGuideDataProperties * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumGuideDataProperties * This);
         
+        DECLSPEC_XFGVIRT(IEnumGuideDataProperties, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumGuideDataProperties * This,
             /* [annotation][in] */ 
@@ -1268,14 +1341,17 @@ EXTERN_C const IID IID_IEnumGuideDataProperties;
             /* [annotation][out] */ 
             _Out_  unsigned long *pcelt);
         
+        DECLSPEC_XFGVIRT(IEnumGuideDataProperties, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumGuideDataProperties * This,
             /* [annotation][in] */ 
             _In_  unsigned long celt);
         
+        DECLSPEC_XFGVIRT(IEnumGuideDataProperties, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumGuideDataProperties * This);
         
+        DECLSPEC_XFGVIRT(IEnumGuideDataProperties, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumGuideDataProperties * This,
             /* [annotation][out] */ 
@@ -1369,6 +1445,7 @@ EXTERN_C const IID IID_IEnumTuneRequests;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumTuneRequests * This,
             /* [annotation][in] */ 
@@ -1376,12 +1453,15 @@ EXTERN_C const IID IID_IEnumTuneRequests;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumTuneRequests * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumTuneRequests * This);
         
+        DECLSPEC_XFGVIRT(IEnumTuneRequests, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumTuneRequests * This,
             /* [annotation][in] */ 
@@ -1391,14 +1471,17 @@ EXTERN_C const IID IID_IEnumTuneRequests;
             /* [annotation][out] */ 
             _Out_  unsigned long *pcelt);
         
+        DECLSPEC_XFGVIRT(IEnumTuneRequests, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumTuneRequests * This,
             /* [annotation][in] */ 
             _In_  unsigned long celt);
         
+        DECLSPEC_XFGVIRT(IEnumTuneRequests, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumTuneRequests * This);
         
+        DECLSPEC_XFGVIRT(IEnumTuneRequests, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumTuneRequests * This,
             /* [annotation][out] */ 
@@ -1504,6 +1587,7 @@ EXTERN_C const IID IID_IGuideData;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGuideData * This,
             /* [annotation][in] */ 
@@ -1511,17 +1595,21 @@ EXTERN_C const IID IID_IGuideData;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IGuideData * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IGuideData * This);
         
+        DECLSPEC_XFGVIRT(IGuideData, GetServices)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetServices )( 
             __RPC__in IGuideData * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IEnumTuneRequests **ppEnumTuneRequests);
         
+        DECLSPEC_XFGVIRT(IGuideData, GetServiceProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetServiceProperties )( 
             __RPC__in IGuideData * This,
             /* [annotation][in] */ 
@@ -1529,11 +1617,13 @@ EXTERN_C const IID IID_IGuideData;
             /* [annotation][retval][out] */ 
             _Out_retval_  IEnumGuideDataProperties **ppEnumProperties);
         
+        DECLSPEC_XFGVIRT(IGuideData, GetGuideProgramIDs)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetGuideProgramIDs )( 
             __RPC__in IGuideData * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IEnumVARIANT **pEnumPrograms);
         
+        DECLSPEC_XFGVIRT(IGuideData, GetProgramProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProgramProperties )( 
             __RPC__in IGuideData * This,
             /* [annotation][in] */ 
@@ -1541,11 +1631,13 @@ EXTERN_C const IID IID_IGuideData;
             /* [annotation][retval][out] */ 
             _Out_retval_  IEnumGuideDataProperties **ppEnumProperties);
         
+        DECLSPEC_XFGVIRT(IGuideData, GetScheduleEntryIDs)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetScheduleEntryIDs )( 
             __RPC__in IGuideData * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IEnumVARIANT **pEnumScheduleEntries);
         
+        DECLSPEC_XFGVIRT(IGuideData, GetScheduleEntryProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetScheduleEntryProperties )( 
             __RPC__in IGuideData * This,
             /* [annotation][in] */ 
@@ -1635,6 +1727,7 @@ EXTERN_C const IID IID_IGuideDataLoader;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGuideDataLoader * This,
             /* [annotation][in] */ 
@@ -1642,17 +1735,21 @@ EXTERN_C const IID IID_IGuideDataLoader;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IGuideDataLoader * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IGuideDataLoader * This);
         
+        DECLSPEC_XFGVIRT(IGuideDataLoader, Init)
         HRESULT ( STDMETHODCALLTYPE *Init )( 
             __RPC__in IGuideDataLoader * This,
             /* [annotation][in] */ 
             _In_  IGuideData *pGuideStore);
         
+        DECLSPEC_XFGVIRT(IGuideDataLoader, Terminate)
         HRESULT ( STDMETHODCALLTYPE *Terminate )( 
             __RPC__in IGuideDataLoader * This);
         

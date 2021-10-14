@@ -386,29 +386,29 @@ D3DKMDT_MONITOR_ORIENTATION;
 //
 typedef enum _D3DKMDT_VIDEO_OUTPUT_TECHNOLOGY
 {
-    D3DKMDT_VOT_UNINITIALIZED        = -2,
-    D3DKMDT_VOT_OTHER                = -1,
-    D3DKMDT_VOT_HD15                 =  0,
-    D3DKMDT_VOT_SVIDEO               =  1,
-    D3DKMDT_VOT_COMPOSITE_VIDEO      =  2,
-    D3DKMDT_VOT_COMPONENT_VIDEO      =  3,
-    D3DKMDT_VOT_DVI                  =  4,
-    D3DKMDT_VOT_HDMI                 =  5,
-    D3DKMDT_VOT_LVDS                 =  6,
-    D3DKMDT_VOT_D_JPN                =  8,
-    D3DKMDT_VOT_SDI                  =  9,
-    D3DKMDT_VOT_DISPLAYPORT_EXTERNAL = 10,
-    D3DKMDT_VOT_DISPLAYPORT_EMBEDDED = 11,
-    D3DKMDT_VOT_UDI_EXTERNAL         = 12,
-    D3DKMDT_VOT_UDI_EMBEDDED         = 13,
-    D3DKMDT_VOT_SDTVDONGLE           = 14,
+    D3DKMDT_VOT_UNINITIALIZED            = -2,
+    D3DKMDT_VOT_OTHER                    = -1,
+    D3DKMDT_VOT_HD15                     =  0,
+    D3DKMDT_VOT_SVIDEO                   =  1,
+    D3DKMDT_VOT_COMPOSITE_VIDEO          =  2,
+    D3DKMDT_VOT_COMPONENT_VIDEO          =  3,
+    D3DKMDT_VOT_DVI                      =  4,
+    D3DKMDT_VOT_HDMI                     =  5,
+    D3DKMDT_VOT_LVDS                     =  6,
+    D3DKMDT_VOT_D_JPN                    =  8,
+    D3DKMDT_VOT_SDI                      =  9,
+    D3DKMDT_VOT_DISPLAYPORT_EXTERNAL     = 10,
+    D3DKMDT_VOT_DISPLAYPORT_EMBEDDED     = 11,
+    D3DKMDT_VOT_UDI_EXTERNAL             = 12,
+    D3DKMDT_VOT_UDI_EMBEDDED             = 13,
+    D3DKMDT_VOT_SDTVDONGLE               = 14,
 #if (DXGKDDI_INTERFACE_VERSION >= DXGKDDI_INTERFACE_VERSION_WDDM1_3_M1)
-    D3DKMDT_VOT_MIRACAST             = 15,
+    D3DKMDT_VOT_MIRACAST                 = 15,
 #if (DXGKDDI_INTERFACE_VERSION >= DXGKDDI_INTERFACE_VERSION_WDDM2_1)
-    D3DKMDT_VOT_INDIRECT_WIRED       = 16,
+    D3DKMDT_VOT_INDIRECT_WIRED           = 16,
 #endif // (DXGKDDI_INTERFACE_VERSION >= DXGKDDI_INTERFACE_VERSION_WDDM2_1)
 #endif // (DXGKDDI_INTERFACE_VERSION >= DXGKDDI_INTERFACE_VERSION_WDDM1_3_M1)
-    D3DKMDT_VOT_INTERNAL             = 0x80000000,
+    D3DKMDT_VOT_INTERNAL                 = 0x80000000,
 
     // Remove when DDI is unlocked.
     D3DKMDT_VOT_SVIDEO_4PIN          = D3DKMDT_VOT_SVIDEO,
@@ -551,9 +551,9 @@ typedef struct _D3DKMDT_VIDEO_SIGNAL_INFO
             D3DDDI_VIDEO_SIGNAL_SCANLINE_ORDERING ScanLineOrdering : 3;
 
             // Vertical refresh frequency divider
-            UINT VSyncFreqDivider : 6;
+            UINT VSyncFreqDivider               : 6;
 
-            UINT Reserved : 23;
+            UINT Reserved                       : 23;
 
         } AdditionalSignalInfo;
 #endif // DXGKDDI_INTERFACE_VERSION_WDDM1_3_M1
@@ -632,6 +632,12 @@ typedef struct _D3DKMDT_VIDPN_TARGET_MODE
     // the source of the respective present path.
     D3DKMDT_MODE_PREFERENCE  Preference;
 #endif // (DXGKDDI_INTERFACE_VERSION < DXGKDDI_INTERFACE_VERSION_WDDM2_2)
+
+#if (DXGKDDI_INTERFACE_VERSION >= DXGKDDI_INTERFACE_VERSION_WDDM2_9)
+
+    D3DDDI_RATIONAL MinimumVSyncFreq;
+
+#endif // (DXGKDDI_INTERFACE_VERSION < DXGKDDI_INTERFACE_VERSION_WDDM2_9)
 
 }
 D3DKMDT_VIDPN_TARGET_MODE;
@@ -2123,6 +2129,64 @@ typedef struct _D3DKMT_WDDM_2_7_CAPS
 
 #endif
 
+#if (DXGKDDI_INTERFACE_VERSION >= DXGKDDI_INTERFACE_VERSION_WDDM2_9)
+
+// DXGK_FEATURE_SUPPORT constants
+
+// When a driver doesn't support a feature, it doesn't call into QueryFeatureSupport with that feature ID.
+// This value is provided for implementation convenience of enumerating possible driver support states
+// for a particular feature.
+#define DXGK_FEATURE_SUPPORT_ALWAYS_OFF ((UINT)0)
+
+// Driver support for a feature is in the experimental state
+#define DXGK_FEATURE_SUPPORT_EXPERIMENTAL ((UINT)1)
+
+// Driver support for a feature is in the stable state
+#define DXGK_FEATURE_SUPPORT_STABLE ((UINT)2)
+
+// Driver support for a feature is in the always on state,
+// and it doesn't operate without this feature enabled.
+#define DXGK_FEATURE_SUPPORT_ALWAYS_ON ((UINT)3)
+
+typedef struct _D3DKMT_WDDM_2_9_CAPS
+{
+    union
+    {
+        struct
+        {
+            _Field_range_(DXGK_FEATURE_SUPPORT_ALWAYS_OFF, DXGK_FEATURE_SUPPORT_ALWAYS_ON)
+            UINT    HwSchSupportState           :  2;   // DXGK_FEATURE_SUPPORT_* value that specifies driver support state for GPU supports hardware scheduling
+            UINT    HwSchEnabled                :  1;   // Specifies whether the hardware scheduling is currently enabled for this GPU
+            UINT    SelfRefreshMemorySupported  :  1;   // Specifies whether Self Refresh Memory is supported for this GPU
+            UINT    Reserved                    : 28;
+        };
+        UINT Value;
+    };
+} D3DKMT_WDDM_2_9_CAPS;
+
+#endif // (DXGKDDI_INTERFACE_VERSION >= DXGKDDI_INTERFACE_VERSION_WDDM2_9)
+
+#if (DXGKDDI_INTERFACE_VERSION >= DXGKDDI_INTERFACE_VERSION_WDDM3_0)
+
+typedef struct _D3DKMT_WDDM_3_0_CAPS
+{
+    union
+    {
+        struct
+        {
+            _Field_range_(DXGK_FEATURE_SUPPORT_ALWAYS_OFF, DXGK_FEATURE_SUPPORT_ALWAYS_ON)
+            UINT    HwFlipQueueSupportState     :  2;   // DXGK_FEATURE_SUPPORT_* value that specifies driver support state for GPU supports hardware flip queue
+            UINT    HwFlipQueueEnabled          :  1;   // Specifies whether the hardware flip queue is currently enabled for this GPU
+            UINT    DisplayableSupported        :  1;   // Specifies whether displayable feature is supported
+            UINT    Reserved                    : 28;
+        };
+        UINT Value;
+    };
+} D3DKMT_WDDM_3_0_CAPS;
+
+#endif // (DXGKDDI_INTERFACE_VERSION >= DXGKDDI_INTERFACE_VERSION_WDDM3_0)
+
+
 typedef struct _D3DKMT_TRACKEDWORKLOAD_SUPPORT
 {
     _In_ UINT PhysicalAdapterIndex;
@@ -2211,7 +2275,8 @@ typedef struct _D3DKMT_DRIVERCAPS_EXT
         struct
         {
             UINT VirtualModeSupport     : 1;
-            UINT Reserved               : 31;
+            UINT Usb4MonitorSupport     : 1;
+            UINT Reserved               : 30;
         };
         UINT Value;
     };
@@ -2323,6 +2388,26 @@ typedef BYTE DXGK_DISPLAY_DESCRIPTOR_TYPE;
 #endif // defined(__cplusplus) && !defined(SORTPP_PASS)
 
 #endif // (DXGKDDI_INTERFACE_VERSION >= DXGKDDI_INTERFACE_VERSION_WDDM2_2)
+
+#if (DXGKDDI_INTERFACE_VERSION >= DXGKDDI_INTERFACE_VERSION_WDDM2_5)
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Capabilities, preferences and other information reported by display only capable adapters.
+
+typedef struct _D3DKMT_DISPLAY_CAPS
+{
+    union
+    {
+        struct
+        {
+            UINT64 PreferPhysicallyContiguous : 1;
+            UINT64 Reserved : 63;
+        };
+        UINT64 Value;
+    };
+} D3DKMT_DISPLAY_CAPS;
+
+#endif // (DXGKDDI_INTERFACE_VERSION >= DXGKDDI_INTERFACE_VERSION_WDDM2_5)
 
 #pragma pack( pop )
 

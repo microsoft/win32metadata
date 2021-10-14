@@ -1,7 +1,10 @@
 --traverse
 <IncludeRoot>/shared/cfg.h
+<IncludeRoot>/shared/devguid.h
 <IncludeRoot>/um/SetupAPI.h
 <IncludeRoot>/um/cfgmgr32.h
 <IncludeRoot>/um/newdev.h
+<IncludeRoot>/shared/infstr.h
+<IncludeRoot>/shared/wdmguid.h
 --namespace
 Windows.Win32.Devices.DeviceAndDriverInstallation

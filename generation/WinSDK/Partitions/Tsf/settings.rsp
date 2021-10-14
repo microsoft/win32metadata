@@ -7,5 +7,6 @@
 <IncludeRoot>/um/ctfspui.h
 <IncludeRoot>/um/MsCtfMonitorApi.h
 <IncludeRoot>/um/MSAAText.h
+<IncludeRoot>/um/tsattrs.h
 --namespace
 Windows.Win32.UI.TextServices

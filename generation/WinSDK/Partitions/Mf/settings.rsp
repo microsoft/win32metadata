@@ -31,5 +31,9 @@ tagMPEG2VIDEOINFO
 <IncludeRoot>/um/opmapi.h
 <IncludeRoot>/um/wmcodecdsp.h
 <IncludeRoot>/um/wmcontainer.h
+<IncludeRoot>/um/mferror.h
+<IncludeRoot>/um/mfvirtualcamera.h
+<IncludeRoot>/um/opmxbox.h
+<IncludeRoot>/um/playto.h
 --namespace
 Windows.Win32.Media.MediaFoundation

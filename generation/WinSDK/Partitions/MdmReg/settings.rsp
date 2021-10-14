@@ -1,4 +1,5 @@
 --traverse
 <IncludeRoot>/um/MDMRegistration.h
+<IncludeRoot>/um/mdmlocalmanagement.h
 --namespace
 Windows.Win32.Management.MobileDeviceManagementRegistration

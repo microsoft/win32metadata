@@ -261,6 +261,22 @@ interface IAntimalwareUacProvider : IUnknown
     local,
     object,
     pointer_default(unique),
+    uuid(7c1e6570-3f73-4e0f-8ad4-98b94cd3290f)
+]
+interface IAntimalwareProvider2 : IAntimalwareProvider
+{
+    HRESULT Notify(
+        [in] PVOID buffer,
+        [in] ULONG length,
+        [in] LPCWSTR contentName,
+        [in] LPCWSTR appName,
+        [out] AMSI_RESULT *pResult);
+}
+
+[
+    local,
+    object,
+    pointer_default(unique),
     uuid(82d29c2e-f062-44e6-b5c9-3d9a2f24a2df)
 ]
 interface IAntimalware : IUnknown
@@ -271,6 +287,22 @@ interface IAntimalware : IUnknown
                 [out]  IAntimalwareProvider** provider);
 
     void CloseSession([in] ULONGLONG session);
+}
+
+[
+    local,
+    object,
+    pointer_default(unique),
+    uuid(301035b5-2d42-4f56-8c65-2dcaa7fb3cdc)
+]
+interface IAntimalware2 : IAntimalware
+{
+    HRESULT Notify(
+        [in] PVOID buffer,
+        [in] ULONG length,
+        [in] LPCWSTR contentName,
+        [in] LPCWSTR appName,
+        [out] AMSI_RESULT *pResult);
 }
 
 cpp_quote("#ifdef __cplusplus")
@@ -302,6 +334,13 @@ cpp_quote("    _In_reads_bytes_(length) PVOID buffer,")
 cpp_quote("    _In_  ULONG length,")
 cpp_quote("    _In_opt_  LPCWSTR contentName,")
 cpp_quote("    _In_opt_  HAMSISESSION amsiSession,")
+cpp_quote("    _Out_ AMSI_RESULT* result);")
+cpp_quote("")
+cpp_quote("STDAPI AmsiNotifyOperation(")
+cpp_quote("    _In_  HAMSICONTEXT amsiContext,")
+cpp_quote("    _In_reads_bytes_(length) PVOID buffer,")
+cpp_quote("    _In_  ULONG length,")
+cpp_quote("    _In_opt_  LPCWSTR contentName,")
 cpp_quote("    _Out_ AMSI_RESULT* result);")
 cpp_quote("")
 cpp_quote("STDAPI AmsiScanString(")

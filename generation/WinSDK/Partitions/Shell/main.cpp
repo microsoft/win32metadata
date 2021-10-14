@@ -54,3 +54,7 @@
 #include <appmgmt.h>
 #include <profinfo.h>
 #include <tlogstg.h>
+#include <animationcoordinator.h>
+#include <cplext.h>
+#include <shdispid.h>
+#include <sherrors.h>

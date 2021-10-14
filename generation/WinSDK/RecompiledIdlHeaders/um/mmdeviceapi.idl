@@ -609,8 +609,8 @@ cpp_quote("/* IMMDeviceActivator is reserved for system use */")
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
 #pragma endregion
 
-#pragma region Application Family
-cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+#pragma region Application or Games Family
+cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
 
 interface IActivateAudioInterfaceAsyncOperation;
 
@@ -658,7 +658,10 @@ cpp_quote("    _In_ IActivateAudioInterfaceCompletionHandler *completionHandler,
 cpp_quote("    _COM_Outptr_ IActivateAudioInterfaceAsyncOperation **activationOperation")
 cpp_quote("    );")
 
-cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
+cpp_quote("// The AUDIOCLIENT_ACTIVATION_PARAMS structure can be used when creating an IAudioClient.")
+cpp_quote("// It is defined in AudioClientActivationParams.h")
+
+cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */")
 #pragma endregion
 
 #pragma region Desktop Family
@@ -677,7 +680,70 @@ typedef struct
     IMMDevice*  pPnpInterface;
     IMMDevice*  pPnpDevnode;
 } AudioExtensionParams;
+
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
+#pragma endregion
+
+#pragma region Desktop and Application Family
+cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_APP)")
+
+typedef enum
+{
+    AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE_DEFAULT = 0,
+	AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE_USER = 1, 
+	AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE_VOLATILE = 2,
+    AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE_ENUM_COUNT
+} AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE;
+
+// ----------------------------------------------------------------------
+// Interfaces
+// ----------------------------------------------------------------------
+
+// ----------------------------------------------------------------------
+// IAudioSystemEffectsPropertyChangeNotificationClient
+//
+// Description:
+//  
+[
+    object,
+    local,
+    uuid(20049D40-56D5-400E-A2EF-385599FEED49),
+    nonextensible,
+    helpstring("IAudioSystemEffectsPropertyChangeNotificationClient"),
+    pointer_default(unique)
+]
+interface IAudioSystemEffectsPropertyChangeNotificationClient : IUnknown
+{
+    HRESULT OnPropertyChanged([in, annotation("_In_")] AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE type, [in, annotation("_In_")] const PROPERTYKEY key);
+};
+
+// ----------------------------------------------------------------------
+// IAudioSystemEffectsPropertyStore
+//
+// Description:
+//  
+[
+    object,
+    local,
+    uuid(302AE7F9-D7E0-43E4-971B-1F8293613D2A),
+    nonextensible,
+    helpstring("IAudioSystemEffectsPropertyStore"),
+    pointer_default(unique)
+]
+interface IAudioSystemEffectsPropertyStore : IUnknown
+{
+    HRESULT OpenDefaultPropertyStore([in, annotation("_In_")] DWORD stgmAccess, [out, annotation("_COM_Outptr_")] IPropertyStore** propStore);
+    HRESULT OpenUserPropertyStore([in, annotation("_In_")] DWORD stgmAccess, [out, annotation("_COM_Outptr_")] IPropertyStore** propStore);
+    HRESULT OpenVolatilePropertyStore([in, annotation("_In_")] DWORD stgmAccess, [out, annotation("_COM_Outptr_")] IPropertyStore** propStore);
+
+    HRESULT ResetUserPropertyStore();
+    HRESULT ResetVolatilePropertyStore();
+
+    HRESULT RegisterPropertyChangeNotification([in, annotation("_In_")] IAudioSystemEffectsPropertyChangeNotificationClient* callback);
+    HRESULT UnregisterPropertyChangeNotification([in, annotation("_In_")] IAudioSystemEffectsPropertyChangeNotificationClient* callback);
+};
+
+cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_APP) */")
 #pragma endregion
 
 #pragma region Desktop and Games Family

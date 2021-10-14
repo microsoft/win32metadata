@@ -33,11 +33,11 @@
         }
 
         #ifdef _M_CEE
-            using std::_new_handler_m;
+            using ::std::_new_handler_m;
         #endif
 
-        using std::new_handler;
-        using std::set_new_handler;
+        using ::std::new_handler;
+        using ::std::set_new_handler;
     #endif
 
 #endif // __cplusplus

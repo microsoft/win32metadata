@@ -263,16 +263,41 @@ typedef struct _CMINVOKECOMMANDINFOEX
 typedef CMINVOKECOMMANDINFOEX *LPCMINVOKECOMMANDINFOEX;
 typedef const CMINVOKECOMMANDINFOEX *PCCMINVOKECOMMANDINFOEX;
 
+// Marshalable substitute for ContextMenu Invoke Command Info CMINVOKECOMMANDINFO and CMINVOKECOMMANDINFOEX.
+typedef struct CMINVOKECOMMANDINFOEX_REMOTE
+{
+    DWORD cbSize;
+    DWORD fMask;
+    HWND hwnd;
+    LPCSTR lpVerbString;           // like lpVerb, but can only contain a string.
+    LPCSTR lpParameters;
+    LPCSTR lpDirectory;
+    int nShow;
+    DWORD dwHotKey;
+    LPCSTR lpTitle;
+    LPCWSTR lpVerbWString;        // like lpVerbW, but can only contain a string.
+    LPCWSTR lpParametersW;
+    LPCWSTR lpDirectoryW;
+    LPCWSTR lpTitleW;
+    POINT   ptInvoke;
+
+    UINT lpVerbInt;         // like lpVerb, but can only contain an intresource.    
+    UINT lpVerbWInt;        // like lpVerbW, but can only contain an intresource.
+} CMINVOKECOMMANDINFOEX_REMOTE;
+
 cpp_quote("#include <poppack.h>")
 
 // IContextMenu
 [
+#ifndef BUILD_ICONTEXTMENU_ISHELLEXTINIT_REMOTE_INTERFACE
     local,
+#endif
     uuid(000214e4-0000-0000-c000-000000000046), // IID_IContextMenu
     pointer_default(unique),
 ]
 interface IContextMenu : IUnknown
 {
+    [local]
     HRESULT QueryContextMenu(
         [in, annotation("_In_")] HMENU hmenu,
         [in, annotation("_In_")] UINT indexMenu,
@@ -280,47 +305,96 @@ interface IContextMenu : IUnknown
         [in, annotation("_In_")] UINT idCmdLast,
         [in, annotation("_In_")] UINT uFlags);
 
+    [local]
     HRESULT InvokeCommand([in, annotation("_In_")] CMINVOKECOMMANDINFO *pici);
 
+    [local]
     HRESULT GetCommandString(
         [in, annotation("_In_")] UINT_PTR idCmd,
         [in, annotation("_In_")] UINT uType,
         [in, annotation("_Reserved_")] UINT * pReserved,
         [out, annotation("_Out_writes_bytes_((uType & GCS_UNICODE) ? (cchMax * sizeof(wchar_t)) : cchMax) _When_(!(uType & (GCS_VALIDATEA | GCS_VALIDATEW)), _Null_terminated_)")] CHAR* pszName,
         [in, annotation("_In_")] UINT cchMax);
+
+#ifdef BUILD_ICONTEXTMENU_ISHELLEXTINIT_REMOTE_INTERFACE
+    [call_as(QueryContextMenu)]
+    HRESULT RemoteQueryContextMenu(
+        [in] HMENU hmenu,
+        [in] UINT indexMenu,
+        [in] UINT idCmdFirst,
+        [in] UINT idCmdLast,
+        [in] UINT uFlags,
+        [out] UINT* fileMappingHandlesCount, // number of items in fileMappingHandles array
+        [out, system_handle(sh_section), size_is( ,*fileMappingHandlesCount)] HANDLE** fileMappingHandles,  // array of FileMapping handles for bitmap DIB sections
+        [out, size_is( ,*fileMappingHandlesCount)] ULONG** bitmapIndices); // array to map HBITMAP to fileMappingHandles index
+
+    [call_as(InvokeCommand)]
+    HRESULT RemoteInvokeCommand([in] const CMINVOKECOMMANDINFOEX_REMOTE *pici);
+
+    [call_as(GetCommandString)]
+    HRESULT RemoteGetCommandString(
+        [in] UINT_PTR idCmd,
+        [in] UINT uType,
+        [in] UINT * pReserved,
+        [out] CHAR* pszName,
+        [in] UINT cchMax);
+#endif
 }
 
 typedef IContextMenu *LPCONTEXTMENU;
 
 // IContextMenu2
 [
+#ifndef BUILD_ICONTEXTMENU_ISHELLEXTINIT_REMOTE_INTERFACE
     local,
+#endif
     uuid(000214f4-0000-0000-c000-000000000046), // IID_IContextMenu2
     pointer_default(unique),
 ]
 interface IContextMenu2 : IContextMenu
 {
+    [local]
     HRESULT HandleMenuMsg(
         [in, annotation("_In_")] UINT uMsg,
         [in, annotation("_In_")] WPARAM wParam,
         [in, annotation("_In_")] LPARAM lParam);
+
+#ifdef BUILD_ICONTEXTMENU_ISHELLEXTINIT_REMOTE_INTERFACE
+    [call_as(HandleMenuMsg)]
+    HRESULT RemoteHandleMenuMsg(
+        [in] UINT uMsg,
+        [in] WPARAM wParam,
+        [in] LPARAM lParam);
+#endif
 }
 
 typedef IContextMenu2 * LPCONTEXTMENU2;
 
 // IContextMenu3
 [
+#ifndef BUILD_ICONTEXTMENU_ISHELLEXTINIT_REMOTE_INTERFACE
     local,
+#endif
     uuid(BCFCE0A0-EC17-11d0-8D10-00A0C90F2719), // IID_IContextMenu3
     pointer_default(unique),
 ]
 interface IContextMenu3 : IContextMenu2
-{
+{    
+    [local]
     HRESULT HandleMenuMsg2(
         [in, annotation("_In_")] UINT uMsg,
         [in, annotation("_In_")] WPARAM wParam,
         [in, annotation("_In_")] LPARAM lParam,
         [out, annotation("_Out_opt_")] LRESULT* plResult);
+
+#ifdef BUILD_ICONTEXTMENU_ISHELLEXTINIT_REMOTE_INTERFACE
+    [call_as(HandleMenuMsg2)]
+    HRESULT RemoteHandleMenuMsg2(
+        [in] UINT uMsg,
+        [in] WPARAM wParam,
+        [in] LPARAM lParam,
+        [out] LRESULT* plResult);
+#endif
 }
 
 typedef IContextMenu3 * LPCONTEXTMENU3;
@@ -2556,22 +2630,24 @@ interface IShellBrowser : IOleWindow
 typedef IShellBrowser * LPSHELLBROWSER;
 
 
-[
-    uuid(cb728b20-f786-11ce-92ad-00aa00a74cd0), // IID_IProfferService
-    object,
-    pointer_default(unique)
-]
+[uuid(cb728b20-f786-11ce-92ad-00aa00a74cd0), object, pointer_default(unique)]
 interface IProfferService : IUnknown
 {
-    HRESULT ProfferService(
-        [in] REFGUID guidService,
-        [in] IServiceProvider *psp,
-        [out] DWORD *pdwCookie);
-
-    HRESULT RevokeService([in] DWORD dwCookie);
+    HRESULT ProfferService([in] REFGUID serviceId, [in] IServiceProvider* serviceProvider, [out] DWORD* cookie);
+    HRESULT RevokeService([in] DWORD cookie);
 }
 
 cpp_quote("#define SID_SProfferService IID_IProfferService    // nearest service that you can proffer to")
+
+// This can be implemented by components that implement IProfferService as a way to discover the set
+// of services that they provide. It can also be used in designs that identify objects using a GUID
+// like IObjectProvider.
+
+[uuid(4A073526-6103-4E21-B7BC-F519D1524E5D), object, pointer_default(unique)]
+interface IGetServiceIds : IUnknown
+{
+    HRESULT GetServiceIds([out] ULONG* serviceIdCount, [out, size_is(, *serviceIdCount)] GUID** serviceIds);
+}
 
 // Tells an IShellItem not to resolve the link target obtained
 // when using the BHID_LinkTargetItem GUID in BindToHandler.
@@ -4173,15 +4249,26 @@ interface IActionProgress : IUnknown
 [
     uuid(000214E8-0000-0000-C000-000000000046),
     object,
+#ifndef BUILD_ICONTEXTMENU_ISHELLEXTINIT_REMOTE_INTERFACE
     local,
+#endif
     pointer_default(unique)
 ]
 interface IShellExtInit : IUnknown
 {
+    [local]
     HRESULT Initialize(
         [in, unique, annotation("_In_opt_")] PCIDLIST_ABSOLUTE pidlFolder,
         [in, unique, annotation("_In_opt_")] IDataObject *pdtobj,
         [in, unique, annotation("_In_opt_")] HKEY hkeyProgID);
+
+#ifdef BUILD_ICONTEXTMENU_ISHELLEXTINIT_REMOTE_INTERFACE
+    [call_as(Initialize)]
+    HRESULT RemoteInitialize(
+        [in, unique] PCIDLIST_ABSOLUTE pidlFolder,
+        [in, unique] IDataObject *pdtobj,
+        [in, unique, system_handle(sh_reg_key)] HANDLE hkeyProgID);
+#endif
 }
 typedef IShellExtInit * LPSHELLEXTINIT;
 
@@ -5326,7 +5413,7 @@ cpp_quote("{                                        ")
 cpp_quote("     UINT i;                             ")
 cpp_quote("     for (i = 0; i < cItems; i++)        ")
 cpp_quote("     {                                   ")
-cpp_quote("         CoTaskMemFree(ppidls[i]);       ")
+cpp_quote("         CoTaskMemFree((PVOID)ppidls[i]);")
 cpp_quote("     }                                   ")
 cpp_quote("     CoTaskMemFree(ppidls);              ")
 cpp_quote("}                                        ")
@@ -8011,6 +8098,7 @@ typedef [v1_enum] enum DEFAULT_FOLDER_MENU_RESTRICTIONS
     DFMR_USE_SPECIFIED_VERBS                    = 0X0200,   // only load handlers that support the specified verbs
     DFMR_NO_ASYNC_VERBS                         = 0x0400,   // ignore async verbs
     DFMR_NO_NATIVECPU_VERBS                     = 0x0800,   // ignore verbs that are registered for the native CPU architecture
+    DFMR_NO_NONWOW_VERBS                        = 0x1000,   // ignore verbs that are registered for non-WoW architectures
 } DEFAULT_FOLDER_MENU_RESTRICTIONS;
 
 cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(DEFAULT_FOLDER_MENU_RESTRICTIONS)")

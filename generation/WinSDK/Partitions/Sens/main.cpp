@@ -8,3 +8,4 @@
 
 #include <sensapi.h>
 #include <sensevts.h>
+#include <sens.h>

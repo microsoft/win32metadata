@@ -1,0 +1,10 @@
+--traverse
+<IncludeRoot>/um/txcoord.h
+<IncludeRoot>/um/txdtc.h
+<IncludeRoot>/um/transact.h
+<IncludeRoot>/um/dtchelp.h
+<IncludeRoot>/um/oletx2xa.h
+<IncludeRoot>/um/xa.h
+<IncludeRoot>/um/xolehlp.h
+--namespace
+Windows.Win32.System.DistributedTransactionCoordinator

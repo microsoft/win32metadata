@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -1179,6 +1187,7 @@ EXTERN_C const IID IID_IWICPalette;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICPalette * This,
             /* [annotation][in] */ 
@@ -1186,12 +1195,15 @@ EXTERN_C const IID IID_IWICPalette;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICPalette * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICPalette * This);
         
+        DECLSPEC_XFGVIRT(IWICPalette, InitializePredefined)
         HRESULT ( STDMETHODCALLTYPE *InitializePredefined )( 
             __RPC__in IWICPalette * This,
             /* [annotation][in] */ 
@@ -1199,6 +1211,7 @@ EXTERN_C const IID IID_IWICPalette;
             /* [annotation][in] */ 
             _In_  BOOL fAddTransparentColor);
         
+        DECLSPEC_XFGVIRT(IWICPalette, InitializeCustom)
         HRESULT ( STDMETHODCALLTYPE *InitializeCustom )( 
             __RPC__in IWICPalette * This,
             /* [annotation][size_is][in] */ 
@@ -1206,6 +1219,7 @@ EXTERN_C const IID IID_IWICPalette;
             /* [annotation][in] */ 
             _In_  UINT cCount);
         
+        DECLSPEC_XFGVIRT(IWICPalette, InitializeFromBitmap)
         HRESULT ( STDMETHODCALLTYPE *InitializeFromBitmap )( 
             __RPC__in IWICPalette * This,
             /* [annotation][in] */ 
@@ -1215,21 +1229,25 @@ EXTERN_C const IID IID_IWICPalette;
             /* [annotation][in] */ 
             _In_  BOOL fAddTransparentColor);
         
+        DECLSPEC_XFGVIRT(IWICPalette, InitializeFromPalette)
         HRESULT ( STDMETHODCALLTYPE *InitializeFromPalette )( 
             __RPC__in IWICPalette * This,
             /* [annotation][in] */ 
             _In_  IWICPalette *pIPalette);
         
+        DECLSPEC_XFGVIRT(IWICPalette, GetType)
         HRESULT ( STDMETHODCALLTYPE *GetType )( 
             __RPC__in IWICPalette * This,
             /* [annotation][out] */ 
             _Out_  WICBitmapPaletteType *pePaletteType);
         
+        DECLSPEC_XFGVIRT(IWICPalette, GetColorCount)
         HRESULT ( STDMETHODCALLTYPE *GetColorCount )( 
             __RPC__in IWICPalette * This,
             /* [annotation][out] */ 
             _Out_  UINT *pcCount);
         
+        DECLSPEC_XFGVIRT(IWICPalette, GetColors)
         HRESULT ( STDMETHODCALLTYPE *GetColors )( 
             __RPC__in IWICPalette * This,
             /* [annotation][in] */ 
@@ -1239,16 +1257,19 @@ EXTERN_C const IID IID_IWICPalette;
             /* [annotation][out] */ 
             _Out_  UINT *pcActualColors);
         
+        DECLSPEC_XFGVIRT(IWICPalette, IsBlackWhite)
         HRESULT ( STDMETHODCALLTYPE *IsBlackWhite )( 
             __RPC__in IWICPalette * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfIsBlackWhite);
         
+        DECLSPEC_XFGVIRT(IWICPalette, IsGrayscale)
         HRESULT ( STDMETHODCALLTYPE *IsGrayscale )( 
             __RPC__in IWICPalette * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfIsGrayscale);
         
+        DECLSPEC_XFGVIRT(IWICPalette, HasAlpha)
         HRESULT ( STDMETHODCALLTYPE *HasAlpha )( 
             __RPC__in IWICPalette * This,
             /* [annotation][out] */ 
@@ -1372,6 +1393,7 @@ EXTERN_C const IID IID_IWICBitmapSource;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICBitmapSource * This,
             /* [annotation][in] */ 
@@ -1379,12 +1401,15 @@ EXTERN_C const IID IID_IWICBitmapSource;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICBitmapSource * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICBitmapSource * This);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, GetSize)
         HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             __RPC__in IWICBitmapSource * This,
             /* [annotation][out] */ 
@@ -1392,11 +1417,13 @@ EXTERN_C const IID IID_IWICBitmapSource;
             /* [annotation][out] */ 
             _Out_  UINT *puiHeight);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, GetPixelFormat)
         HRESULT ( STDMETHODCALLTYPE *GetPixelFormat )( 
             __RPC__in IWICBitmapSource * This,
             /* [annotation][out] */ 
             _Out_  WICPixelFormatGUID *pPixelFormat);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, GetResolution)
         HRESULT ( STDMETHODCALLTYPE *GetResolution )( 
             __RPC__in IWICBitmapSource * This,
             /* [annotation][out] */ 
@@ -1404,11 +1431,13 @@ EXTERN_C const IID IID_IWICBitmapSource;
             /* [annotation][out] */ 
             _Out_  double *pDpiY);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, CopyPalette)
         HRESULT ( STDMETHODCALLTYPE *CopyPalette )( 
             __RPC__in IWICBitmapSource * This,
             /* [annotation][in] */ 
             _In_  IWICPalette *pIPalette);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, CopyPixels)
         HRESULT ( STDMETHODCALLTYPE *CopyPixels )( 
             __RPC__in IWICBitmapSource * This,
             /* [annotation][unique][in] */ 
@@ -1515,6 +1544,7 @@ EXTERN_C const IID IID_IWICFormatConverter;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICFormatConverter * This,
             /* [annotation][in] */ 
@@ -1522,12 +1552,15 @@ EXTERN_C const IID IID_IWICFormatConverter;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICFormatConverter * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICFormatConverter * This);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, GetSize)
         HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             __RPC__in IWICFormatConverter * This,
             /* [annotation][out] */ 
@@ -1535,11 +1568,13 @@ EXTERN_C const IID IID_IWICFormatConverter;
             /* [annotation][out] */ 
             _Out_  UINT *puiHeight);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, GetPixelFormat)
         HRESULT ( STDMETHODCALLTYPE *GetPixelFormat )( 
             __RPC__in IWICFormatConverter * This,
             /* [annotation][out] */ 
             _Out_  WICPixelFormatGUID *pPixelFormat);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, GetResolution)
         HRESULT ( STDMETHODCALLTYPE *GetResolution )( 
             __RPC__in IWICFormatConverter * This,
             /* [annotation][out] */ 
@@ -1547,11 +1582,13 @@ EXTERN_C const IID IID_IWICFormatConverter;
             /* [annotation][out] */ 
             _Out_  double *pDpiY);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, CopyPalette)
         HRESULT ( STDMETHODCALLTYPE *CopyPalette )( 
             __RPC__in IWICFormatConverter * This,
             /* [annotation][in] */ 
             _In_  IWICPalette *pIPalette);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, CopyPixels)
         HRESULT ( STDMETHODCALLTYPE *CopyPixels )( 
             __RPC__in IWICFormatConverter * This,
             /* [annotation][unique][in] */ 
@@ -1563,6 +1600,7 @@ EXTERN_C const IID IID_IWICFormatConverter;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cbBufferSize)  BYTE *pbBuffer);
         
+        DECLSPEC_XFGVIRT(IWICFormatConverter, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IWICFormatConverter * This,
             /* [annotation][in] */ 
@@ -1578,6 +1616,7 @@ EXTERN_C const IID IID_IWICFormatConverter;
             /* [annotation][in] */ 
             _In_  WICBitmapPaletteType paletteTranslate);
         
+        DECLSPEC_XFGVIRT(IWICFormatConverter, CanConvert)
         HRESULT ( STDMETHODCALLTYPE *CanConvert )( 
             __RPC__in IWICFormatConverter * This,
             /* [annotation][in] */ 
@@ -1691,6 +1730,7 @@ EXTERN_C const IID IID_IWICPlanarFormatConverter;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICPlanarFormatConverter * This,
             /* [annotation][in] */ 
@@ -1698,12 +1738,15 @@ EXTERN_C const IID IID_IWICPlanarFormatConverter;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICPlanarFormatConverter * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICPlanarFormatConverter * This);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, GetSize)
         HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             __RPC__in IWICPlanarFormatConverter * This,
             /* [annotation][out] */ 
@@ -1711,11 +1754,13 @@ EXTERN_C const IID IID_IWICPlanarFormatConverter;
             /* [annotation][out] */ 
             _Out_  UINT *puiHeight);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, GetPixelFormat)
         HRESULT ( STDMETHODCALLTYPE *GetPixelFormat )( 
             __RPC__in IWICPlanarFormatConverter * This,
             /* [annotation][out] */ 
             _Out_  WICPixelFormatGUID *pPixelFormat);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, GetResolution)
         HRESULT ( STDMETHODCALLTYPE *GetResolution )( 
             __RPC__in IWICPlanarFormatConverter * This,
             /* [annotation][out] */ 
@@ -1723,11 +1768,13 @@ EXTERN_C const IID IID_IWICPlanarFormatConverter;
             /* [annotation][out] */ 
             _Out_  double *pDpiY);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, CopyPalette)
         HRESULT ( STDMETHODCALLTYPE *CopyPalette )( 
             __RPC__in IWICPlanarFormatConverter * This,
             /* [annotation][in] */ 
             _In_  IWICPalette *pIPalette);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, CopyPixels)
         HRESULT ( STDMETHODCALLTYPE *CopyPixels )( 
             __RPC__in IWICPlanarFormatConverter * This,
             /* [annotation][unique][in] */ 
@@ -1739,6 +1786,7 @@ EXTERN_C const IID IID_IWICPlanarFormatConverter;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cbBufferSize)  BYTE *pbBuffer);
         
+        DECLSPEC_XFGVIRT(IWICPlanarFormatConverter, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IWICPlanarFormatConverter * This,
             /* [annotation][size_is][in] */ 
@@ -1755,6 +1803,7 @@ EXTERN_C const IID IID_IWICPlanarFormatConverter;
             /* [annotation][in] */ 
             _In_  WICBitmapPaletteType paletteTranslate);
         
+        DECLSPEC_XFGVIRT(IWICPlanarFormatConverter, CanConvert)
         HRESULT ( STDMETHODCALLTYPE *CanConvert )( 
             __RPC__in IWICPlanarFormatConverter * This,
             /* [annotation][size_is][in] */ 
@@ -1855,6 +1904,7 @@ EXTERN_C const IID IID_IWICBitmapScaler;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICBitmapScaler * This,
             /* [annotation][in] */ 
@@ -1862,12 +1912,15 @@ EXTERN_C const IID IID_IWICBitmapScaler;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICBitmapScaler * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICBitmapScaler * This);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, GetSize)
         HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             __RPC__in IWICBitmapScaler * This,
             /* [annotation][out] */ 
@@ -1875,11 +1928,13 @@ EXTERN_C const IID IID_IWICBitmapScaler;
             /* [annotation][out] */ 
             _Out_  UINT *puiHeight);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, GetPixelFormat)
         HRESULT ( STDMETHODCALLTYPE *GetPixelFormat )( 
             __RPC__in IWICBitmapScaler * This,
             /* [annotation][out] */ 
             _Out_  WICPixelFormatGUID *pPixelFormat);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, GetResolution)
         HRESULT ( STDMETHODCALLTYPE *GetResolution )( 
             __RPC__in IWICBitmapScaler * This,
             /* [annotation][out] */ 
@@ -1887,11 +1942,13 @@ EXTERN_C const IID IID_IWICBitmapScaler;
             /* [annotation][out] */ 
             _Out_  double *pDpiY);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, CopyPalette)
         HRESULT ( STDMETHODCALLTYPE *CopyPalette )( 
             __RPC__in IWICBitmapScaler * This,
             /* [annotation][in] */ 
             _In_  IWICPalette *pIPalette);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, CopyPixels)
         HRESULT ( STDMETHODCALLTYPE *CopyPixels )( 
             __RPC__in IWICBitmapScaler * This,
             /* [annotation][unique][in] */ 
@@ -1903,6 +1960,7 @@ EXTERN_C const IID IID_IWICBitmapScaler;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cbBufferSize)  BYTE *pbBuffer);
         
+        DECLSPEC_XFGVIRT(IWICBitmapScaler, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IWICBitmapScaler * This,
             /* [annotation][in] */ 
@@ -1997,6 +2055,7 @@ EXTERN_C const IID IID_IWICBitmapClipper;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICBitmapClipper * This,
             /* [annotation][in] */ 
@@ -2004,12 +2063,15 @@ EXTERN_C const IID IID_IWICBitmapClipper;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICBitmapClipper * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICBitmapClipper * This);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, GetSize)
         HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             __RPC__in IWICBitmapClipper * This,
             /* [annotation][out] */ 
@@ -2017,11 +2079,13 @@ EXTERN_C const IID IID_IWICBitmapClipper;
             /* [annotation][out] */ 
             _Out_  UINT *puiHeight);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, GetPixelFormat)
         HRESULT ( STDMETHODCALLTYPE *GetPixelFormat )( 
             __RPC__in IWICBitmapClipper * This,
             /* [annotation][out] */ 
             _Out_  WICPixelFormatGUID *pPixelFormat);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, GetResolution)
         HRESULT ( STDMETHODCALLTYPE *GetResolution )( 
             __RPC__in IWICBitmapClipper * This,
             /* [annotation][out] */ 
@@ -2029,11 +2093,13 @@ EXTERN_C const IID IID_IWICBitmapClipper;
             /* [annotation][out] */ 
             _Out_  double *pDpiY);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, CopyPalette)
         HRESULT ( STDMETHODCALLTYPE *CopyPalette )( 
             __RPC__in IWICBitmapClipper * This,
             /* [annotation][in] */ 
             _In_  IWICPalette *pIPalette);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, CopyPixels)
         HRESULT ( STDMETHODCALLTYPE *CopyPixels )( 
             __RPC__in IWICBitmapClipper * This,
             /* [annotation][unique][in] */ 
@@ -2045,6 +2111,7 @@ EXTERN_C const IID IID_IWICBitmapClipper;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cbBufferSize)  BYTE *pbBuffer);
         
+        DECLSPEC_XFGVIRT(IWICBitmapClipper, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IWICBitmapClipper * This,
             /* [annotation][in] */ 
@@ -2135,6 +2202,7 @@ EXTERN_C const IID IID_IWICBitmapFlipRotator;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICBitmapFlipRotator * This,
             /* [annotation][in] */ 
@@ -2142,12 +2210,15 @@ EXTERN_C const IID IID_IWICBitmapFlipRotator;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICBitmapFlipRotator * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICBitmapFlipRotator * This);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, GetSize)
         HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             __RPC__in IWICBitmapFlipRotator * This,
             /* [annotation][out] */ 
@@ -2155,11 +2226,13 @@ EXTERN_C const IID IID_IWICBitmapFlipRotator;
             /* [annotation][out] */ 
             _Out_  UINT *puiHeight);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, GetPixelFormat)
         HRESULT ( STDMETHODCALLTYPE *GetPixelFormat )( 
             __RPC__in IWICBitmapFlipRotator * This,
             /* [annotation][out] */ 
             _Out_  WICPixelFormatGUID *pPixelFormat);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, GetResolution)
         HRESULT ( STDMETHODCALLTYPE *GetResolution )( 
             __RPC__in IWICBitmapFlipRotator * This,
             /* [annotation][out] */ 
@@ -2167,11 +2240,13 @@ EXTERN_C const IID IID_IWICBitmapFlipRotator;
             /* [annotation][out] */ 
             _Out_  double *pDpiY);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, CopyPalette)
         HRESULT ( STDMETHODCALLTYPE *CopyPalette )( 
             __RPC__in IWICBitmapFlipRotator * This,
             /* [annotation][in] */ 
             _In_  IWICPalette *pIPalette);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, CopyPixels)
         HRESULT ( STDMETHODCALLTYPE *CopyPixels )( 
             __RPC__in IWICBitmapFlipRotator * This,
             /* [annotation][unique][in] */ 
@@ -2183,6 +2258,7 @@ EXTERN_C const IID IID_IWICBitmapFlipRotator;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cbBufferSize)  BYTE *pbBuffer);
         
+        DECLSPEC_XFGVIRT(IWICBitmapFlipRotator, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IWICBitmapFlipRotator * This,
             /* [annotation][in] */ 
@@ -2287,6 +2363,7 @@ EXTERN_C const IID IID_IWICBitmapLock;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICBitmapLock * This,
             /* [annotation][in] */ 
@@ -2294,12 +2371,15 @@ EXTERN_C const IID IID_IWICBitmapLock;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICBitmapLock * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICBitmapLock * This);
         
+        DECLSPEC_XFGVIRT(IWICBitmapLock, GetSize)
         HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             __RPC__in IWICBitmapLock * This,
             /* [annotation][out] */ 
@@ -2307,11 +2387,13 @@ EXTERN_C const IID IID_IWICBitmapLock;
             /* [annotation][out] */ 
             _Out_  UINT *puiHeight);
         
+        DECLSPEC_XFGVIRT(IWICBitmapLock, GetStride)
         HRESULT ( STDMETHODCALLTYPE *GetStride )( 
             __RPC__in IWICBitmapLock * This,
             /* [annotation][out] */ 
             _Out_  UINT *pcbStride);
         
+        DECLSPEC_XFGVIRT(IWICBitmapLock, GetDataPointer)
         HRESULT ( STDMETHODCALLTYPE *GetDataPointer )( 
             __RPC__in IWICBitmapLock * This,
             /* [annotation][out] */ 
@@ -2319,6 +2401,7 @@ EXTERN_C const IID IID_IWICBitmapLock;
             /* [annotation][size_is][size_is][out] */ 
             _Out_writes_(*pcbBufferSize)  WICInProcPointer *ppbData);
         
+        DECLSPEC_XFGVIRT(IWICBitmapLock, GetPixelFormat)
         HRESULT ( STDMETHODCALLTYPE *GetPixelFormat )( 
             __RPC__in IWICBitmapLock * This,
             /* [annotation][out] */ 
@@ -2412,6 +2495,7 @@ EXTERN_C const IID IID_IWICBitmap;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICBitmap * This,
             /* [annotation][in] */ 
@@ -2419,12 +2503,15 @@ EXTERN_C const IID IID_IWICBitmap;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICBitmap * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICBitmap * This);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, GetSize)
         HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             __RPC__in IWICBitmap * This,
             /* [annotation][out] */ 
@@ -2432,11 +2519,13 @@ EXTERN_C const IID IID_IWICBitmap;
             /* [annotation][out] */ 
             _Out_  UINT *puiHeight);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, GetPixelFormat)
         HRESULT ( STDMETHODCALLTYPE *GetPixelFormat )( 
             __RPC__in IWICBitmap * This,
             /* [annotation][out] */ 
             _Out_  WICPixelFormatGUID *pPixelFormat);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, GetResolution)
         HRESULT ( STDMETHODCALLTYPE *GetResolution )( 
             __RPC__in IWICBitmap * This,
             /* [annotation][out] */ 
@@ -2444,11 +2533,13 @@ EXTERN_C const IID IID_IWICBitmap;
             /* [annotation][out] */ 
             _Out_  double *pDpiY);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, CopyPalette)
         HRESULT ( STDMETHODCALLTYPE *CopyPalette )( 
             __RPC__in IWICBitmap * This,
             /* [annotation][in] */ 
             _In_  IWICPalette *pIPalette);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, CopyPixels)
         HRESULT ( STDMETHODCALLTYPE *CopyPixels )( 
             __RPC__in IWICBitmap * This,
             /* [annotation][unique][in] */ 
@@ -2460,6 +2551,7 @@ EXTERN_C const IID IID_IWICBitmap;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cbBufferSize)  BYTE *pbBuffer);
         
+        DECLSPEC_XFGVIRT(IWICBitmap, Lock)
         HRESULT ( STDMETHODCALLTYPE *Lock )( 
             __RPC__in IWICBitmap * This,
             /* [annotation][unique][in] */ 
@@ -2469,11 +2561,13 @@ EXTERN_C const IID IID_IWICBitmap;
             /* [annotation][out] */ 
             _Out_  IWICBitmapLock **ppILock);
         
+        DECLSPEC_XFGVIRT(IWICBitmap, SetPalette)
         HRESULT ( STDMETHODCALLTYPE *SetPalette )( 
             __RPC__in IWICBitmap * This,
             /* [annotation][in] */ 
             _In_  IWICPalette *pIPalette);
         
+        DECLSPEC_XFGVIRT(IWICBitmap, SetResolution)
         HRESULT ( STDMETHODCALLTYPE *SetResolution )( 
             __RPC__in IWICBitmap * This,
             /* [annotation][in] */ 
@@ -2594,6 +2688,7 @@ EXTERN_C const IID IID_IWICColorContext;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICColorContext * This,
             /* [annotation][in] */ 
@@ -2601,17 +2696,21 @@ EXTERN_C const IID IID_IWICColorContext;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICColorContext * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICColorContext * This);
         
+        DECLSPEC_XFGVIRT(IWICColorContext, InitializeFromFilename)
         HRESULT ( STDMETHODCALLTYPE *InitializeFromFilename )( 
             __RPC__in IWICColorContext * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR wzFilename);
         
+        DECLSPEC_XFGVIRT(IWICColorContext, InitializeFromMemory)
         HRESULT ( STDMETHODCALLTYPE *InitializeFromMemory )( 
             __RPC__in IWICColorContext * This,
             /* [annotation][size_is][in] */ 
@@ -2619,16 +2718,19 @@ EXTERN_C const IID IID_IWICColorContext;
             /* [annotation][in] */ 
             _In_  UINT cbBufferSize);
         
+        DECLSPEC_XFGVIRT(IWICColorContext, InitializeFromExifColorSpace)
         HRESULT ( STDMETHODCALLTYPE *InitializeFromExifColorSpace )( 
             __RPC__in IWICColorContext * This,
             /* [annotation][in] */ 
             _In_  UINT value);
         
+        DECLSPEC_XFGVIRT(IWICColorContext, GetType)
         HRESULT ( STDMETHODCALLTYPE *GetType )( 
             __RPC__in IWICColorContext * This,
             /* [annotation][out] */ 
             _Out_  WICColorContextType *pType);
         
+        DECLSPEC_XFGVIRT(IWICColorContext, GetProfileBytes)
         HRESULT ( STDMETHODCALLTYPE *GetProfileBytes )( 
             __RPC__in IWICColorContext * This,
             /* [annotation][in] */ 
@@ -2638,6 +2740,7 @@ EXTERN_C const IID IID_IWICColorContext;
             /* [annotation][out] */ 
             _Out_  UINT *pcbActual);
         
+        DECLSPEC_XFGVIRT(IWICColorContext, GetExifColorSpace)
         HRESULT ( STDMETHODCALLTYPE *GetExifColorSpace )( 
             __RPC__in IWICColorContext * This,
             /* [annotation][out] */ 
@@ -2729,6 +2832,7 @@ EXTERN_C const IID IID_IWICColorTransform;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICColorTransform * This,
             /* [annotation][in] */ 
@@ -2736,12 +2840,15 @@ EXTERN_C const IID IID_IWICColorTransform;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICColorTransform * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICColorTransform * This);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, GetSize)
         HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             __RPC__in IWICColorTransform * This,
             /* [annotation][out] */ 
@@ -2749,11 +2856,13 @@ EXTERN_C const IID IID_IWICColorTransform;
             /* [annotation][out] */ 
             _Out_  UINT *puiHeight);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, GetPixelFormat)
         HRESULT ( STDMETHODCALLTYPE *GetPixelFormat )( 
             __RPC__in IWICColorTransform * This,
             /* [annotation][out] */ 
             _Out_  WICPixelFormatGUID *pPixelFormat);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, GetResolution)
         HRESULT ( STDMETHODCALLTYPE *GetResolution )( 
             __RPC__in IWICColorTransform * This,
             /* [annotation][out] */ 
@@ -2761,11 +2870,13 @@ EXTERN_C const IID IID_IWICColorTransform;
             /* [annotation][out] */ 
             _Out_  double *pDpiY);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, CopyPalette)
         HRESULT ( STDMETHODCALLTYPE *CopyPalette )( 
             __RPC__in IWICColorTransform * This,
             /* [annotation][in] */ 
             _In_  IWICPalette *pIPalette);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, CopyPixels)
         HRESULT ( STDMETHODCALLTYPE *CopyPixels )( 
             __RPC__in IWICColorTransform * This,
             /* [annotation][unique][in] */ 
@@ -2777,6 +2888,7 @@ EXTERN_C const IID IID_IWICColorTransform;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cbBufferSize)  BYTE *pbBuffer);
         
+        DECLSPEC_XFGVIRT(IWICColorTransform, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IWICColorTransform * This,
             /* [annotation][in] */ 
@@ -2871,6 +2983,7 @@ EXTERN_C const IID IID_IWICFastMetadataEncoder;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICFastMetadataEncoder * This,
             /* [annotation][in] */ 
@@ -2878,15 +2991,19 @@ EXTERN_C const IID IID_IWICFastMetadataEncoder;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICFastMetadataEncoder * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICFastMetadataEncoder * This);
         
+        DECLSPEC_XFGVIRT(IWICFastMetadataEncoder, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
             __RPC__in IWICFastMetadataEncoder * This);
         
+        DECLSPEC_XFGVIRT(IWICFastMetadataEncoder, GetMetadataQueryWriter)
         HRESULT ( STDMETHODCALLTYPE *GetMetadataQueryWriter )( 
             __RPC__in IWICFastMetadataEncoder * This,
             /* [annotation][out] */ 
@@ -2980,6 +3097,7 @@ EXTERN_C const IID IID_IWICStream;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICStream * This,
             /* [annotation][in] */ 
@@ -2987,12 +3105,15 @@ EXTERN_C const IID IID_IWICStream;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICStream * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICStream * This);
         
+        DECLSPEC_XFGVIRT(ISequentialStream, Read)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Read )( 
             IWICStream * This,
             /* [annotation] */ 
@@ -3002,6 +3123,7 @@ EXTERN_C const IID IID_IWICStream;
             /* [annotation] */ 
             _Out_opt_  ULONG *pcbRead);
         
+        DECLSPEC_XFGVIRT(ISequentialStream, Write)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Write )( 
             IWICStream * This,
             /* [annotation] */ 
@@ -3011,6 +3133,7 @@ EXTERN_C const IID IID_IWICStream;
             /* [annotation] */ 
             _Out_opt_  ULONG *pcbWritten);
         
+        DECLSPEC_XFGVIRT(IStream, Seek)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Seek )( 
             IWICStream * This,
             /* [annotation][in] */ 
@@ -3020,11 +3143,13 @@ EXTERN_C const IID IID_IWICStream;
             /* [annotation] */ 
             _Out_opt_  ULARGE_INTEGER *plibNewPosition);
         
+        DECLSPEC_XFGVIRT(IStream, SetSize)
         HRESULT ( STDMETHODCALLTYPE *SetSize )( 
             __RPC__in IWICStream * This,
             /* [annotation][in] */ 
             _In_  ULARGE_INTEGER libNewSize);
         
+        DECLSPEC_XFGVIRT(IStream, CopyTo)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CopyTo )( 
             IWICStream * This,
             /* [annotation][unique][in] */ 
@@ -3036,14 +3161,17 @@ EXTERN_C const IID IID_IWICStream;
             /* [annotation] */ 
             _Out_opt_  ULARGE_INTEGER *pcbWritten);
         
+        DECLSPEC_XFGVIRT(IStream, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
             __RPC__in IWICStream * This,
             /* [annotation][in] */ 
             _In_  DWORD grfCommitFlags);
         
+        DECLSPEC_XFGVIRT(IStream, Revert)
         HRESULT ( STDMETHODCALLTYPE *Revert )( 
             __RPC__in IWICStream * This);
         
+        DECLSPEC_XFGVIRT(IStream, LockRegion)
         HRESULT ( STDMETHODCALLTYPE *LockRegion )( 
             __RPC__in IWICStream * This,
             /* [annotation][in] */ 
@@ -3053,6 +3181,7 @@ EXTERN_C const IID IID_IWICStream;
             /* [annotation][in] */ 
             _In_  DWORD dwLockType);
         
+        DECLSPEC_XFGVIRT(IStream, UnlockRegion)
         HRESULT ( STDMETHODCALLTYPE *UnlockRegion )( 
             __RPC__in IWICStream * This,
             /* [annotation][in] */ 
@@ -3062,6 +3191,7 @@ EXTERN_C const IID IID_IWICStream;
             /* [annotation][in] */ 
             _In_  DWORD dwLockType);
         
+        DECLSPEC_XFGVIRT(IStream, Stat)
         HRESULT ( STDMETHODCALLTYPE *Stat )( 
             __RPC__in IWICStream * This,
             /* [annotation][out] */ 
@@ -3069,16 +3199,19 @@ EXTERN_C const IID IID_IWICStream;
             /* [annotation][in] */ 
             _In_  DWORD grfStatFlag);
         
+        DECLSPEC_XFGVIRT(IStream, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IWICStream * This,
             /* [annotation][out] */ 
             _Out_  IStream **ppstm);
         
+        DECLSPEC_XFGVIRT(IWICStream, InitializeFromIStream)
         HRESULT ( STDMETHODCALLTYPE *InitializeFromIStream )( 
             __RPC__in IWICStream * This,
             /* [annotation][in] */ 
             _In_  IStream *pIStream);
         
+        DECLSPEC_XFGVIRT(IWICStream, InitializeFromFilename)
         HRESULT ( STDMETHODCALLTYPE *InitializeFromFilename )( 
             __RPC__in IWICStream * This,
             /* [annotation][in] */ 
@@ -3086,6 +3219,7 @@ EXTERN_C const IID IID_IWICStream;
             /* [annotation][in] */ 
             _In_  DWORD dwDesiredAccess);
         
+        DECLSPEC_XFGVIRT(IWICStream, InitializeFromMemory)
         HRESULT ( STDMETHODCALLTYPE *InitializeFromMemory )( 
             __RPC__in IWICStream * This,
             /* [annotation][size_is][in] */ 
@@ -3093,6 +3227,7 @@ EXTERN_C const IID IID_IWICStream;
             /* [annotation][in] */ 
             _In_  DWORD cbBufferSize);
         
+        DECLSPEC_XFGVIRT(IWICStream, InitializeFromIStreamRegion)
         HRESULT ( STDMETHODCALLTYPE *InitializeFromIStreamRegion )( 
             __RPC__in IWICStream * This,
             /* [annotation][in] */ 
@@ -3227,6 +3362,7 @@ EXTERN_C const IID IID_IWICEnumMetadataItem;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICEnumMetadataItem * This,
             /* [annotation][in] */ 
@@ -3234,12 +3370,15 @@ EXTERN_C const IID IID_IWICEnumMetadataItem;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICEnumMetadataItem * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICEnumMetadataItem * This);
         
+        DECLSPEC_XFGVIRT(IWICEnumMetadataItem, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IWICEnumMetadataItem * This,
             /* [annotation][in] */ 
@@ -3251,14 +3390,17 @@ EXTERN_C const IID IID_IWICEnumMetadataItem;
             /* [size_is][optional][out][in] */ __RPC__inout_ecount_full(celt) PROPVARIANT *rgeltValue,
             /* [optional][out] */ __RPC__out ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IWICEnumMetadataItem, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IWICEnumMetadataItem * This,
             /* [annotation][in] */ 
             _In_  ULONG celt);
         
+        DECLSPEC_XFGVIRT(IWICEnumMetadataItem, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IWICEnumMetadataItem * This);
         
+        DECLSPEC_XFGVIRT(IWICEnumMetadataItem, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IWICEnumMetadataItem * This,
             /* [annotation][out] */ 
@@ -3356,6 +3498,7 @@ EXTERN_C const IID IID_IWICMetadataQueryReader;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICMetadataQueryReader * This,
             /* [annotation][in] */ 
@@ -3363,17 +3506,21 @@ EXTERN_C const IID IID_IWICMetadataQueryReader;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICMetadataQueryReader * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICMetadataQueryReader * This);
         
+        DECLSPEC_XFGVIRT(IWICMetadataQueryReader, GetContainerFormat)
         HRESULT ( STDMETHODCALLTYPE *GetContainerFormat )( 
             __RPC__in IWICMetadataQueryReader * This,
             /* [annotation][out] */ 
             _Out_  GUID *pguidContainerFormat);
         
+        DECLSPEC_XFGVIRT(IWICMetadataQueryReader, GetLocation)
         HRESULT ( STDMETHODCALLTYPE *GetLocation )( 
             __RPC__in IWICMetadataQueryReader * This,
             /* [annotation][in] */ 
@@ -3383,6 +3530,7 @@ EXTERN_C const IID IID_IWICMetadataQueryReader;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActualLength);
         
+        DECLSPEC_XFGVIRT(IWICMetadataQueryReader, GetMetadataByName)
         HRESULT ( STDMETHODCALLTYPE *GetMetadataByName )( 
             __RPC__in IWICMetadataQueryReader * This,
             /* [annotation][in] */ 
@@ -3390,6 +3538,7 @@ EXTERN_C const IID IID_IWICMetadataQueryReader;
             /* [annotation][unique][out][in] */ 
             _Inout_  PROPVARIANT *pvarValue);
         
+        DECLSPEC_XFGVIRT(IWICMetadataQueryReader, GetEnumerator)
         HRESULT ( STDMETHODCALLTYPE *GetEnumerator )( 
             __RPC__in IWICMetadataQueryReader * This,
             /* [annotation][out] */ 
@@ -3475,6 +3624,7 @@ EXTERN_C const IID IID_IWICMetadataQueryWriter;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICMetadataQueryWriter * This,
             /* [annotation][in] */ 
@@ -3482,17 +3632,21 @@ EXTERN_C const IID IID_IWICMetadataQueryWriter;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICMetadataQueryWriter * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICMetadataQueryWriter * This);
         
+        DECLSPEC_XFGVIRT(IWICMetadataQueryReader, GetContainerFormat)
         HRESULT ( STDMETHODCALLTYPE *GetContainerFormat )( 
             __RPC__in IWICMetadataQueryWriter * This,
             /* [annotation][out] */ 
             _Out_  GUID *pguidContainerFormat);
         
+        DECLSPEC_XFGVIRT(IWICMetadataQueryReader, GetLocation)
         HRESULT ( STDMETHODCALLTYPE *GetLocation )( 
             __RPC__in IWICMetadataQueryWriter * This,
             /* [annotation][in] */ 
@@ -3502,6 +3656,7 @@ EXTERN_C const IID IID_IWICMetadataQueryWriter;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActualLength);
         
+        DECLSPEC_XFGVIRT(IWICMetadataQueryReader, GetMetadataByName)
         HRESULT ( STDMETHODCALLTYPE *GetMetadataByName )( 
             __RPC__in IWICMetadataQueryWriter * This,
             /* [annotation][in] */ 
@@ -3509,11 +3664,13 @@ EXTERN_C const IID IID_IWICMetadataQueryWriter;
             /* [annotation][unique][out][in] */ 
             _Inout_  PROPVARIANT *pvarValue);
         
+        DECLSPEC_XFGVIRT(IWICMetadataQueryReader, GetEnumerator)
         HRESULT ( STDMETHODCALLTYPE *GetEnumerator )( 
             __RPC__in IWICMetadataQueryWriter * This,
             /* [annotation][out] */ 
             _Out_  IEnumString **ppIEnumString);
         
+        DECLSPEC_XFGVIRT(IWICMetadataQueryWriter, SetMetadataByName)
         HRESULT ( STDMETHODCALLTYPE *SetMetadataByName )( 
             __RPC__in IWICMetadataQueryWriter * This,
             /* [annotation][in] */ 
@@ -3521,6 +3678,7 @@ EXTERN_C const IID IID_IWICMetadataQueryWriter;
             /* [annotation][in] */ 
             _In_  const PROPVARIANT *pvarValue);
         
+        DECLSPEC_XFGVIRT(IWICMetadataQueryWriter, RemoveMetadataByName)
         HRESULT ( STDMETHODCALLTYPE *RemoveMetadataByName )( 
             __RPC__in IWICMetadataQueryWriter * This,
             /* [annotation][in] */ 
@@ -3647,6 +3805,7 @@ EXTERN_C const IID IID_IWICBitmapEncoder;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICBitmapEncoder * This,
             /* [annotation][in] */ 
@@ -3654,12 +3813,15 @@ EXTERN_C const IID IID_IWICBitmapEncoder;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICBitmapEncoder * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICBitmapEncoder * This);
         
+        DECLSPEC_XFGVIRT(IWICBitmapEncoder, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IWICBitmapEncoder * This,
             /* [annotation][in] */ 
@@ -3667,16 +3829,19 @@ EXTERN_C const IID IID_IWICBitmapEncoder;
             /* [annotation][in] */ 
             _In_  WICBitmapEncoderCacheOption cacheOption);
         
+        DECLSPEC_XFGVIRT(IWICBitmapEncoder, GetContainerFormat)
         HRESULT ( STDMETHODCALLTYPE *GetContainerFormat )( 
             __RPC__in IWICBitmapEncoder * This,
             /* [annotation][out] */ 
             _Out_  GUID *pguidContainerFormat);
         
+        DECLSPEC_XFGVIRT(IWICBitmapEncoder, GetEncoderInfo)
         HRESULT ( STDMETHODCALLTYPE *GetEncoderInfo )( 
             __RPC__in IWICBitmapEncoder * This,
             /* [annotation][out] */ 
             _Out_  IWICBitmapEncoderInfo **ppIEncoderInfo);
         
+        DECLSPEC_XFGVIRT(IWICBitmapEncoder, SetColorContexts)
         HRESULT ( STDMETHODCALLTYPE *SetColorContexts )( 
             __RPC__in IWICBitmapEncoder * This,
             /* [annotation][in] */ 
@@ -3684,21 +3849,25 @@ EXTERN_C const IID IID_IWICBitmapEncoder;
             /* [annotation][size_is][in] */ 
             _In_reads_(cCount)  IWICColorContext **ppIColorContext);
         
+        DECLSPEC_XFGVIRT(IWICBitmapEncoder, SetPalette)
         HRESULT ( STDMETHODCALLTYPE *SetPalette )( 
             __RPC__in IWICBitmapEncoder * This,
             /* [annotation][in] */ 
             _In_  IWICPalette *pIPalette);
         
+        DECLSPEC_XFGVIRT(IWICBitmapEncoder, SetThumbnail)
         HRESULT ( STDMETHODCALLTYPE *SetThumbnail )( 
             __RPC__in IWICBitmapEncoder * This,
             /* [annotation][in] */ 
             _In_  IWICBitmapSource *pIThumbnail);
         
+        DECLSPEC_XFGVIRT(IWICBitmapEncoder, SetPreview)
         HRESULT ( STDMETHODCALLTYPE *SetPreview )( 
             __RPC__in IWICBitmapEncoder * This,
             /* [annotation][in] */ 
             _In_  IWICBitmapSource *pIPreview);
         
+        DECLSPEC_XFGVIRT(IWICBitmapEncoder, CreateNewFrame)
         HRESULT ( STDMETHODCALLTYPE *CreateNewFrame )( 
             __RPC__in IWICBitmapEncoder * This,
             /* [annotation][out] */ 
@@ -3706,9 +3875,11 @@ EXTERN_C const IID IID_IWICBitmapEncoder;
             /* [annotation][unique][out][in] */ 
             _Inout_  IPropertyBag2 **ppIEncoderOptions);
         
+        DECLSPEC_XFGVIRT(IWICBitmapEncoder, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
             __RPC__in IWICBitmapEncoder * This);
         
+        DECLSPEC_XFGVIRT(IWICBitmapEncoder, GetMetadataQueryWriter)
         HRESULT ( STDMETHODCALLTYPE *GetMetadataQueryWriter )( 
             __RPC__in IWICBitmapEncoder * This,
             /* [annotation][out] */ 
@@ -3858,6 +4029,7 @@ EXTERN_C const IID IID_IWICBitmapFrameEncode;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICBitmapFrameEncode * This,
             /* [annotation][in] */ 
@@ -3865,17 +4037,21 @@ EXTERN_C const IID IID_IWICBitmapFrameEncode;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICBitmapFrameEncode * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICBitmapFrameEncode * This);
         
+        DECLSPEC_XFGVIRT(IWICBitmapFrameEncode, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IWICBitmapFrameEncode * This,
             /* [annotation][unique][in] */ 
             _In_  IPropertyBag2 *pIEncoderOptions);
         
+        DECLSPEC_XFGVIRT(IWICBitmapFrameEncode, SetSize)
         HRESULT ( STDMETHODCALLTYPE *SetSize )( 
             __RPC__in IWICBitmapFrameEncode * This,
             /* [annotation][in] */ 
@@ -3883,6 +4059,7 @@ EXTERN_C const IID IID_IWICBitmapFrameEncode;
             /* [annotation][in] */ 
             _In_  UINT uiHeight);
         
+        DECLSPEC_XFGVIRT(IWICBitmapFrameEncode, SetResolution)
         HRESULT ( STDMETHODCALLTYPE *SetResolution )( 
             __RPC__in IWICBitmapFrameEncode * This,
             /* [annotation][in] */ 
@@ -3890,11 +4067,13 @@ EXTERN_C const IID IID_IWICBitmapFrameEncode;
             /* [annotation][in] */ 
             _In_  double dpiY);
         
+        DECLSPEC_XFGVIRT(IWICBitmapFrameEncode, SetPixelFormat)
         HRESULT ( STDMETHODCALLTYPE *SetPixelFormat )( 
             __RPC__in IWICBitmapFrameEncode * This,
             /* [annotation][out][in] */ 
             _Inout_  WICPixelFormatGUID *pPixelFormat);
         
+        DECLSPEC_XFGVIRT(IWICBitmapFrameEncode, SetColorContexts)
         HRESULT ( STDMETHODCALLTYPE *SetColorContexts )( 
             __RPC__in IWICBitmapFrameEncode * This,
             /* [annotation][in] */ 
@@ -3902,16 +4081,19 @@ EXTERN_C const IID IID_IWICBitmapFrameEncode;
             /* [annotation][size_is][in] */ 
             _In_reads_(cCount)  IWICColorContext **ppIColorContext);
         
+        DECLSPEC_XFGVIRT(IWICBitmapFrameEncode, SetPalette)
         HRESULT ( STDMETHODCALLTYPE *SetPalette )( 
             __RPC__in IWICBitmapFrameEncode * This,
             /* [annotation][in] */ 
             _In_  IWICPalette *pIPalette);
         
+        DECLSPEC_XFGVIRT(IWICBitmapFrameEncode, SetThumbnail)
         HRESULT ( STDMETHODCALLTYPE *SetThumbnail )( 
             __RPC__in IWICBitmapFrameEncode * This,
             /* [annotation][in] */ 
             _In_  IWICBitmapSource *pIThumbnail);
         
+        DECLSPEC_XFGVIRT(IWICBitmapFrameEncode, WritePixels)
         HRESULT ( STDMETHODCALLTYPE *WritePixels )( 
             __RPC__in IWICBitmapFrameEncode * This,
             /* [annotation][in] */ 
@@ -3923,6 +4105,7 @@ EXTERN_C const IID IID_IWICBitmapFrameEncode;
             /* [annotation][size_is][in] */ 
             _In_reads_(cbBufferSize)  BYTE *pbPixels);
         
+        DECLSPEC_XFGVIRT(IWICBitmapFrameEncode, WriteSource)
         HRESULT ( STDMETHODCALLTYPE *WriteSource )( 
             __RPC__in IWICBitmapFrameEncode * This,
             /* [annotation][in] */ 
@@ -3930,9 +4113,11 @@ EXTERN_C const IID IID_IWICBitmapFrameEncode;
             /* [annotation][unique][in] */ 
             _In_  WICRect *prc);
         
+        DECLSPEC_XFGVIRT(IWICBitmapFrameEncode, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
             __RPC__in IWICBitmapFrameEncode * This);
         
+        DECLSPEC_XFGVIRT(IWICBitmapFrameEncode, GetMetadataQueryWriter)
         HRESULT ( STDMETHODCALLTYPE *GetMetadataQueryWriter )( 
             __RPC__in IWICBitmapFrameEncode * This,
             /* [annotation][out] */ 
@@ -4042,6 +4227,7 @@ EXTERN_C const IID IID_IWICPlanarBitmapFrameEncode;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICPlanarBitmapFrameEncode * This,
             /* [annotation][in] */ 
@@ -4049,12 +4235,15 @@ EXTERN_C const IID IID_IWICPlanarBitmapFrameEncode;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICPlanarBitmapFrameEncode * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICPlanarBitmapFrameEncode * This);
         
+        DECLSPEC_XFGVIRT(IWICPlanarBitmapFrameEncode, WritePixels)
         HRESULT ( STDMETHODCALLTYPE *WritePixels )( 
             __RPC__in IWICPlanarBitmapFrameEncode * This,
             UINT lineCount,
@@ -4062,6 +4251,7 @@ EXTERN_C const IID IID_IWICPlanarBitmapFrameEncode;
             _In_reads_(cPlanes)  WICBitmapPlane *pPlanes,
             UINT cPlanes);
         
+        DECLSPEC_XFGVIRT(IWICPlanarBitmapFrameEncode, WriteSource)
         HRESULT ( STDMETHODCALLTYPE *WriteSource )( 
             __RPC__in IWICPlanarBitmapFrameEncode * This,
             /* [annotation][size_is][in] */ 
@@ -4167,6 +4357,7 @@ EXTERN_C const IID IID_IWICImageEncoder;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWICImageEncoder * This,
             /* [annotation][in] */ 
@@ -4174,12 +4365,15 @@ EXTERN_C const IID IID_IWICImageEncoder;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWICImageEncoder * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWICImageEncoder * This);
         
+        DECLSPEC_XFGVIRT(IWICImageEncoder, WriteFrame)
         HRESULT ( STDMETHODCALLTYPE *WriteFrame )( 
             IWICImageEncoder * This,
             /* [annotation][in] */ 
@@ -4189,6 +4383,7 @@ EXTERN_C const IID IID_IWICImageEncoder;
             /* [annotation][unique][in] */ 
             _In_  const WICImageParameters *pImageParameters);
         
+        DECLSPEC_XFGVIRT(IWICImageEncoder, WriteFrameThumbnail)
         HRESULT ( STDMETHODCALLTYPE *WriteFrameThumbnail )( 
             IWICImageEncoder * This,
             /* [annotation][in] */ 
@@ -4198,6 +4393,7 @@ EXTERN_C const IID IID_IWICImageEncoder;
             /* [annotation][unique][in] */ 
             _In_  const WICImageParameters *pImageParameters);
         
+        DECLSPEC_XFGVIRT(IWICImageEncoder, WriteThumbnail)
         HRESULT ( STDMETHODCALLTYPE *WriteThumbnail )( 
             IWICImageEncoder * This,
             /* [annotation][in] */ 
@@ -4337,6 +4533,7 @@ EXTERN_C const IID IID_IWICBitmapDecoder;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICBitmapDecoder * This,
             /* [annotation][in] */ 
@@ -4344,12 +4541,15 @@ EXTERN_C const IID IID_IWICBitmapDecoder;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICBitmapDecoder * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICBitmapDecoder * This);
         
+        DECLSPEC_XFGVIRT(IWICBitmapDecoder, QueryCapability)
         HRESULT ( STDMETHODCALLTYPE *QueryCapability )( 
             __RPC__in IWICBitmapDecoder * This,
             /* [annotation][in] */ 
@@ -4357,6 +4557,7 @@ EXTERN_C const IID IID_IWICBitmapDecoder;
             /* [annotation][out] */ 
             _Out_  DWORD *pdwCapability);
         
+        DECLSPEC_XFGVIRT(IWICBitmapDecoder, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IWICBitmapDecoder * This,
             /* [annotation][in] */ 
@@ -4364,31 +4565,37 @@ EXTERN_C const IID IID_IWICBitmapDecoder;
             /* [annotation][in] */ 
             _In_  WICDecodeOptions cacheOptions);
         
+        DECLSPEC_XFGVIRT(IWICBitmapDecoder, GetContainerFormat)
         HRESULT ( STDMETHODCALLTYPE *GetContainerFormat )( 
             __RPC__in IWICBitmapDecoder * This,
             /* [annotation][out] */ 
             _Out_  GUID *pguidContainerFormat);
         
+        DECLSPEC_XFGVIRT(IWICBitmapDecoder, GetDecoderInfo)
         HRESULT ( STDMETHODCALLTYPE *GetDecoderInfo )( 
             __RPC__in IWICBitmapDecoder * This,
             /* [annotation][out] */ 
             _Out_  IWICBitmapDecoderInfo **ppIDecoderInfo);
         
+        DECLSPEC_XFGVIRT(IWICBitmapDecoder, CopyPalette)
         HRESULT ( STDMETHODCALLTYPE *CopyPalette )( 
             __RPC__in IWICBitmapDecoder * This,
             /* [annotation][in] */ 
             _In_  IWICPalette *pIPalette);
         
+        DECLSPEC_XFGVIRT(IWICBitmapDecoder, GetMetadataQueryReader)
         HRESULT ( STDMETHODCALLTYPE *GetMetadataQueryReader )( 
             __RPC__in IWICBitmapDecoder * This,
             /* [annotation][out] */ 
             _Out_  IWICMetadataQueryReader **ppIMetadataQueryReader);
         
+        DECLSPEC_XFGVIRT(IWICBitmapDecoder, GetPreview)
         HRESULT ( STDMETHODCALLTYPE *GetPreview )( 
             __RPC__in IWICBitmapDecoder * This,
             /* [annotation][out] */ 
             _Out_  IWICBitmapSource **ppIBitmapSource);
         
+        DECLSPEC_XFGVIRT(IWICBitmapDecoder, GetColorContexts)
         HRESULT ( STDMETHODCALLTYPE *GetColorContexts )( 
             __RPC__in IWICBitmapDecoder * This,
             /* [annotation][in] */ 
@@ -4398,16 +4605,19 @@ EXTERN_C const IID IID_IWICBitmapDecoder;
             /* [annotation][out] */ 
             _Out_  UINT *pcActualCount);
         
+        DECLSPEC_XFGVIRT(IWICBitmapDecoder, GetThumbnail)
         HRESULT ( STDMETHODCALLTYPE *GetThumbnail )( 
             __RPC__in IWICBitmapDecoder * This,
             /* [annotation][out] */ 
             _Out_  IWICBitmapSource **ppIThumbnail);
         
+        DECLSPEC_XFGVIRT(IWICBitmapDecoder, GetFrameCount)
         HRESULT ( STDMETHODCALLTYPE *GetFrameCount )( 
             __RPC__in IWICBitmapDecoder * This,
             /* [annotation][out] */ 
             _Out_  UINT *pCount);
         
+        DECLSPEC_XFGVIRT(IWICBitmapDecoder, GetFrame)
         HRESULT ( STDMETHODCALLTYPE *GetFrame )( 
             __RPC__in IWICBitmapDecoder * This,
             /* [annotation][in] */ 
@@ -4540,6 +4750,7 @@ EXTERN_C const IID IID_IWICBitmapSourceTransform;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICBitmapSourceTransform * This,
             /* [annotation][in] */ 
@@ -4547,12 +4758,15 @@ EXTERN_C const IID IID_IWICBitmapSourceTransform;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICBitmapSourceTransform * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICBitmapSourceTransform * This);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSourceTransform, CopyPixels)
         HRESULT ( STDMETHODCALLTYPE *CopyPixels )( 
             __RPC__in IWICBitmapSourceTransform * This,
             /* [annotation][unique][in] */ 
@@ -4572,6 +4786,7 @@ EXTERN_C const IID IID_IWICBitmapSourceTransform;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cbBufferSize)  BYTE *pbBuffer);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSourceTransform, GetClosestSize)
         HRESULT ( STDMETHODCALLTYPE *GetClosestSize )( 
             __RPC__in IWICBitmapSourceTransform * This,
             /* [annotation][out][in] */ 
@@ -4579,11 +4794,13 @@ EXTERN_C const IID IID_IWICBitmapSourceTransform;
             /* [annotation][out][in] */ 
             _Inout_  UINT *puiHeight);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSourceTransform, GetClosestPixelFormat)
         HRESULT ( STDMETHODCALLTYPE *GetClosestPixelFormat )( 
             __RPC__in IWICBitmapSourceTransform * This,
             /* [annotation][out][in] */ 
             _Inout_  WICPixelFormatGUID *pguidDstFormat);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSourceTransform, DoesSupportTransform)
         HRESULT ( STDMETHODCALLTYPE *DoesSupportTransform )( 
             __RPC__in IWICBitmapSourceTransform * This,
             /* [annotation][in] */ 
@@ -4687,6 +4904,7 @@ EXTERN_C const IID IID_IWICPlanarBitmapSourceTransform;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICPlanarBitmapSourceTransform * This,
             /* [annotation][in] */ 
@@ -4694,12 +4912,15 @@ EXTERN_C const IID IID_IWICPlanarBitmapSourceTransform;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICPlanarBitmapSourceTransform * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICPlanarBitmapSourceTransform * This);
         
+        DECLSPEC_XFGVIRT(IWICPlanarBitmapSourceTransform, DoesSupportTransform)
         HRESULT ( STDMETHODCALLTYPE *DoesSupportTransform )( 
             __RPC__in IWICPlanarBitmapSourceTransform * This,
             /* [annotation][out][in] */ 
@@ -4716,6 +4937,7 @@ EXTERN_C const IID IID_IWICPlanarBitmapSourceTransform;
             /* [annotation][out] */ 
             _Out_  BOOL *pfIsSupported);
         
+        DECLSPEC_XFGVIRT(IWICPlanarBitmapSourceTransform, CopyPixels)
         HRESULT ( STDMETHODCALLTYPE *CopyPixels )( 
             __RPC__in IWICPlanarBitmapSourceTransform * This,
             /* [annotation][unique][in] */ 
@@ -4808,6 +5030,7 @@ EXTERN_C const IID IID_IWICBitmapFrameDecode;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICBitmapFrameDecode * This,
             /* [annotation][in] */ 
@@ -4815,12 +5038,15 @@ EXTERN_C const IID IID_IWICBitmapFrameDecode;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICBitmapFrameDecode * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICBitmapFrameDecode * This);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, GetSize)
         HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             __RPC__in IWICBitmapFrameDecode * This,
             /* [annotation][out] */ 
@@ -4828,11 +5054,13 @@ EXTERN_C const IID IID_IWICBitmapFrameDecode;
             /* [annotation][out] */ 
             _Out_  UINT *puiHeight);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, GetPixelFormat)
         HRESULT ( STDMETHODCALLTYPE *GetPixelFormat )( 
             __RPC__in IWICBitmapFrameDecode * This,
             /* [annotation][out] */ 
             _Out_  WICPixelFormatGUID *pPixelFormat);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, GetResolution)
         HRESULT ( STDMETHODCALLTYPE *GetResolution )( 
             __RPC__in IWICBitmapFrameDecode * This,
             /* [annotation][out] */ 
@@ -4840,11 +5068,13 @@ EXTERN_C const IID IID_IWICBitmapFrameDecode;
             /* [annotation][out] */ 
             _Out_  double *pDpiY);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, CopyPalette)
         HRESULT ( STDMETHODCALLTYPE *CopyPalette )( 
             __RPC__in IWICBitmapFrameDecode * This,
             /* [annotation][in] */ 
             _In_  IWICPalette *pIPalette);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, CopyPixels)
         HRESULT ( STDMETHODCALLTYPE *CopyPixels )( 
             __RPC__in IWICBitmapFrameDecode * This,
             /* [annotation][unique][in] */ 
@@ -4856,11 +5086,13 @@ EXTERN_C const IID IID_IWICBitmapFrameDecode;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cbBufferSize)  BYTE *pbBuffer);
         
+        DECLSPEC_XFGVIRT(IWICBitmapFrameDecode, GetMetadataQueryReader)
         HRESULT ( STDMETHODCALLTYPE *GetMetadataQueryReader )( 
             __RPC__in IWICBitmapFrameDecode * This,
             /* [annotation][out] */ 
             _Out_  IWICMetadataQueryReader **ppIMetadataQueryReader);
         
+        DECLSPEC_XFGVIRT(IWICBitmapFrameDecode, GetColorContexts)
         HRESULT ( STDMETHODCALLTYPE *GetColorContexts )( 
             __RPC__in IWICBitmapFrameDecode * This,
             /* [annotation][in] */ 
@@ -4870,6 +5102,7 @@ EXTERN_C const IID IID_IWICBitmapFrameDecode;
             /* [annotation][out] */ 
             _Out_  UINT *pcActualCount);
         
+        DECLSPEC_XFGVIRT(IWICBitmapFrameDecode, GetThumbnail)
         HRESULT ( STDMETHODCALLTYPE *GetThumbnail )( 
             __RPC__in IWICBitmapFrameDecode * This,
             /* [annotation][out] */ 
@@ -4970,6 +5203,7 @@ EXTERN_C const IID IID_IWICProgressiveLevelControl;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICProgressiveLevelControl * This,
             /* [annotation][in] */ 
@@ -4977,22 +5211,27 @@ EXTERN_C const IID IID_IWICProgressiveLevelControl;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICProgressiveLevelControl * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICProgressiveLevelControl * This);
         
+        DECLSPEC_XFGVIRT(IWICProgressiveLevelControl, GetLevelCount)
         HRESULT ( STDMETHODCALLTYPE *GetLevelCount )( 
             __RPC__in IWICProgressiveLevelControl * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  UINT *pcLevels);
         
+        DECLSPEC_XFGVIRT(IWICProgressiveLevelControl, GetCurrentLevel)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentLevel )( 
             __RPC__in IWICProgressiveLevelControl * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  UINT *pnLevel);
         
+        DECLSPEC_XFGVIRT(IWICProgressiveLevelControl, SetCurrentLevel)
         HRESULT ( STDMETHODCALLTYPE *SetCurrentLevel )( 
             __RPC__in IWICProgressiveLevelControl * This,
             /* [annotation][in] */ 
@@ -5073,6 +5312,7 @@ EXTERN_C const IID IID_IWICProgressCallback;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICProgressCallback * This,
             /* [annotation][in] */ 
@@ -5080,12 +5320,15 @@ EXTERN_C const IID IID_IWICProgressCallback;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICProgressCallback * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICProgressCallback * This);
         
+        DECLSPEC_XFGVIRT(IWICProgressCallback, Notify)
         HRESULT ( STDMETHODCALLTYPE *Notify )( 
             __RPC__in IWICProgressCallback * This,
             /* [annotation][in] */ 
@@ -5170,6 +5413,7 @@ EXTERN_C const IID IID_IWICBitmapCodecProgressNotification;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICBitmapCodecProgressNotification * This,
             /* [annotation][in] */ 
@@ -5177,12 +5421,15 @@ EXTERN_C const IID IID_IWICBitmapCodecProgressNotification;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICBitmapCodecProgressNotification * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICBitmapCodecProgressNotification * This);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecProgressNotification, RegisterProgressNotification)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *RegisterProgressNotification )( 
             IWICBitmapCodecProgressNotification * This,
             /* [annotation][unique][in] */ 
@@ -5316,6 +5563,7 @@ EXTERN_C const IID IID_IWICComponentInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICComponentInfo * This,
             /* [annotation][in] */ 
@@ -5323,27 +5571,33 @@ EXTERN_C const IID IID_IWICComponentInfo;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICComponentInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICComponentInfo * This);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetComponentType)
         HRESULT ( STDMETHODCALLTYPE *GetComponentType )( 
             __RPC__in IWICComponentInfo * This,
             /* [annotation][out] */ 
             _Out_  WICComponentType *pType);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetCLSID)
         HRESULT ( STDMETHODCALLTYPE *GetCLSID )( 
             __RPC__in IWICComponentInfo * This,
             /* [annotation][out] */ 
             _Out_  CLSID *pclsid);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetSigningStatus)
         HRESULT ( STDMETHODCALLTYPE *GetSigningStatus )( 
             __RPC__in IWICComponentInfo * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pStatus);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetAuthor)
         HRESULT ( STDMETHODCALLTYPE *GetAuthor )( 
             __RPC__in IWICComponentInfo * This,
             /* [annotation][in] */ 
@@ -5353,11 +5607,13 @@ EXTERN_C const IID IID_IWICComponentInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetVendorGUID)
         HRESULT ( STDMETHODCALLTYPE *GetVendorGUID )( 
             __RPC__in IWICComponentInfo * This,
             /* [annotation][out] */ 
             _Out_  GUID *pguidVendor);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetVersion)
         HRESULT ( STDMETHODCALLTYPE *GetVersion )( 
             __RPC__in IWICComponentInfo * This,
             /* [annotation][in] */ 
@@ -5367,6 +5623,7 @@ EXTERN_C const IID IID_IWICComponentInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetSpecVersion)
         HRESULT ( STDMETHODCALLTYPE *GetSpecVersion )( 
             __RPC__in IWICComponentInfo * This,
             /* [annotation][in] */ 
@@ -5376,6 +5633,7 @@ EXTERN_C const IID IID_IWICComponentInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetFriendlyName)
         HRESULT ( STDMETHODCALLTYPE *GetFriendlyName )( 
             __RPC__in IWICComponentInfo * This,
             /* [annotation][in] */ 
@@ -5479,6 +5737,7 @@ EXTERN_C const IID IID_IWICFormatConverterInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICFormatConverterInfo * This,
             /* [annotation][in] */ 
@@ -5486,27 +5745,33 @@ EXTERN_C const IID IID_IWICFormatConverterInfo;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICFormatConverterInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICFormatConverterInfo * This);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetComponentType)
         HRESULT ( STDMETHODCALLTYPE *GetComponentType )( 
             __RPC__in IWICFormatConverterInfo * This,
             /* [annotation][out] */ 
             _Out_  WICComponentType *pType);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetCLSID)
         HRESULT ( STDMETHODCALLTYPE *GetCLSID )( 
             __RPC__in IWICFormatConverterInfo * This,
             /* [annotation][out] */ 
             _Out_  CLSID *pclsid);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetSigningStatus)
         HRESULT ( STDMETHODCALLTYPE *GetSigningStatus )( 
             __RPC__in IWICFormatConverterInfo * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pStatus);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetAuthor)
         HRESULT ( STDMETHODCALLTYPE *GetAuthor )( 
             __RPC__in IWICFormatConverterInfo * This,
             /* [annotation][in] */ 
@@ -5516,11 +5781,13 @@ EXTERN_C const IID IID_IWICFormatConverterInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetVendorGUID)
         HRESULT ( STDMETHODCALLTYPE *GetVendorGUID )( 
             __RPC__in IWICFormatConverterInfo * This,
             /* [annotation][out] */ 
             _Out_  GUID *pguidVendor);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetVersion)
         HRESULT ( STDMETHODCALLTYPE *GetVersion )( 
             __RPC__in IWICFormatConverterInfo * This,
             /* [annotation][in] */ 
@@ -5530,6 +5797,7 @@ EXTERN_C const IID IID_IWICFormatConverterInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetSpecVersion)
         HRESULT ( STDMETHODCALLTYPE *GetSpecVersion )( 
             __RPC__in IWICFormatConverterInfo * This,
             /* [annotation][in] */ 
@@ -5539,6 +5807,7 @@ EXTERN_C const IID IID_IWICFormatConverterInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetFriendlyName)
         HRESULT ( STDMETHODCALLTYPE *GetFriendlyName )( 
             __RPC__in IWICFormatConverterInfo * This,
             /* [annotation][in] */ 
@@ -5548,6 +5817,7 @@ EXTERN_C const IID IID_IWICFormatConverterInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICFormatConverterInfo, GetPixelFormats)
         HRESULT ( STDMETHODCALLTYPE *GetPixelFormats )( 
             __RPC__in IWICFormatConverterInfo * This,
             /* [annotation][in] */ 
@@ -5557,6 +5827,7 @@ EXTERN_C const IID IID_IWICFormatConverterInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcActual);
         
+        DECLSPEC_XFGVIRT(IWICFormatConverterInfo, CreateInstance)
         HRESULT ( STDMETHODCALLTYPE *CreateInstance )( 
             __RPC__in IWICFormatConverterInfo * This,
             /* [annotation][out] */ 
@@ -5725,6 +5996,7 @@ EXTERN_C const IID IID_IWICBitmapCodecInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICBitmapCodecInfo * This,
             /* [annotation][in] */ 
@@ -5732,27 +6004,33 @@ EXTERN_C const IID IID_IWICBitmapCodecInfo;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICBitmapCodecInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICBitmapCodecInfo * This);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetComponentType)
         HRESULT ( STDMETHODCALLTYPE *GetComponentType )( 
             __RPC__in IWICBitmapCodecInfo * This,
             /* [annotation][out] */ 
             _Out_  WICComponentType *pType);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetCLSID)
         HRESULT ( STDMETHODCALLTYPE *GetCLSID )( 
             __RPC__in IWICBitmapCodecInfo * This,
             /* [annotation][out] */ 
             _Out_  CLSID *pclsid);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetSigningStatus)
         HRESULT ( STDMETHODCALLTYPE *GetSigningStatus )( 
             __RPC__in IWICBitmapCodecInfo * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pStatus);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetAuthor)
         HRESULT ( STDMETHODCALLTYPE *GetAuthor )( 
             __RPC__in IWICBitmapCodecInfo * This,
             /* [annotation][in] */ 
@@ -5762,11 +6040,13 @@ EXTERN_C const IID IID_IWICBitmapCodecInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetVendorGUID)
         HRESULT ( STDMETHODCALLTYPE *GetVendorGUID )( 
             __RPC__in IWICBitmapCodecInfo * This,
             /* [annotation][out] */ 
             _Out_  GUID *pguidVendor);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetVersion)
         HRESULT ( STDMETHODCALLTYPE *GetVersion )( 
             __RPC__in IWICBitmapCodecInfo * This,
             /* [annotation][in] */ 
@@ -5776,6 +6056,7 @@ EXTERN_C const IID IID_IWICBitmapCodecInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetSpecVersion)
         HRESULT ( STDMETHODCALLTYPE *GetSpecVersion )( 
             __RPC__in IWICBitmapCodecInfo * This,
             /* [annotation][in] */ 
@@ -5785,6 +6066,7 @@ EXTERN_C const IID IID_IWICBitmapCodecInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetFriendlyName)
         HRESULT ( STDMETHODCALLTYPE *GetFriendlyName )( 
             __RPC__in IWICBitmapCodecInfo * This,
             /* [annotation][in] */ 
@@ -5794,11 +6076,13 @@ EXTERN_C const IID IID_IWICBitmapCodecInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, GetContainerFormat)
         HRESULT ( STDMETHODCALLTYPE *GetContainerFormat )( 
             __RPC__in IWICBitmapCodecInfo * This,
             /* [annotation][out] */ 
             _Out_  GUID *pguidContainerFormat);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, GetPixelFormats)
         HRESULT ( STDMETHODCALLTYPE *GetPixelFormats )( 
             __RPC__in IWICBitmapCodecInfo * This,
             /* [annotation][in] */ 
@@ -5808,6 +6092,7 @@ EXTERN_C const IID IID_IWICBitmapCodecInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcActual);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, GetColorManagementVersion)
         HRESULT ( STDMETHODCALLTYPE *GetColorManagementVersion )( 
             __RPC__in IWICBitmapCodecInfo * This,
             /* [annotation][in] */ 
@@ -5817,6 +6102,7 @@ EXTERN_C const IID IID_IWICBitmapCodecInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, GetDeviceManufacturer)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceManufacturer )( 
             __RPC__in IWICBitmapCodecInfo * This,
             /* [annotation][in] */ 
@@ -5826,6 +6112,7 @@ EXTERN_C const IID IID_IWICBitmapCodecInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, GetDeviceModels)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceModels )( 
             __RPC__in IWICBitmapCodecInfo * This,
             /* [annotation][in] */ 
@@ -5835,6 +6122,7 @@ EXTERN_C const IID IID_IWICBitmapCodecInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, GetMimeTypes)
         HRESULT ( STDMETHODCALLTYPE *GetMimeTypes )( 
             __RPC__in IWICBitmapCodecInfo * This,
             /* [annotation][in] */ 
@@ -5844,6 +6132,7 @@ EXTERN_C const IID IID_IWICBitmapCodecInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, GetFileExtensions)
         HRESULT ( STDMETHODCALLTYPE *GetFileExtensions )( 
             __RPC__in IWICBitmapCodecInfo * This,
             /* [annotation][in] */ 
@@ -5853,26 +6142,31 @@ EXTERN_C const IID IID_IWICBitmapCodecInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, DoesSupportAnimation)
         HRESULT ( STDMETHODCALLTYPE *DoesSupportAnimation )( 
             __RPC__in IWICBitmapCodecInfo * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfSupportAnimation);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, DoesSupportChromakey)
         HRESULT ( STDMETHODCALLTYPE *DoesSupportChromakey )( 
             __RPC__in IWICBitmapCodecInfo * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfSupportChromakey);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, DoesSupportLossless)
         HRESULT ( STDMETHODCALLTYPE *DoesSupportLossless )( 
             __RPC__in IWICBitmapCodecInfo * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfSupportLossless);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, DoesSupportMultiframe)
         HRESULT ( STDMETHODCALLTYPE *DoesSupportMultiframe )( 
             __RPC__in IWICBitmapCodecInfo * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfSupportMultiframe);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, MatchesMimeType)
         HRESULT ( STDMETHODCALLTYPE *MatchesMimeType )( 
             __RPC__in IWICBitmapCodecInfo * This,
             /* [annotation][in] */ 
@@ -6003,6 +6297,7 @@ EXTERN_C const IID IID_IWICBitmapEncoderInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICBitmapEncoderInfo * This,
             /* [annotation][in] */ 
@@ -6010,27 +6305,33 @@ EXTERN_C const IID IID_IWICBitmapEncoderInfo;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICBitmapEncoderInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICBitmapEncoderInfo * This);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetComponentType)
         HRESULT ( STDMETHODCALLTYPE *GetComponentType )( 
             __RPC__in IWICBitmapEncoderInfo * This,
             /* [annotation][out] */ 
             _Out_  WICComponentType *pType);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetCLSID)
         HRESULT ( STDMETHODCALLTYPE *GetCLSID )( 
             __RPC__in IWICBitmapEncoderInfo * This,
             /* [annotation][out] */ 
             _Out_  CLSID *pclsid);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetSigningStatus)
         HRESULT ( STDMETHODCALLTYPE *GetSigningStatus )( 
             __RPC__in IWICBitmapEncoderInfo * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pStatus);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetAuthor)
         HRESULT ( STDMETHODCALLTYPE *GetAuthor )( 
             __RPC__in IWICBitmapEncoderInfo * This,
             /* [annotation][in] */ 
@@ -6040,11 +6341,13 @@ EXTERN_C const IID IID_IWICBitmapEncoderInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetVendorGUID)
         HRESULT ( STDMETHODCALLTYPE *GetVendorGUID )( 
             __RPC__in IWICBitmapEncoderInfo * This,
             /* [annotation][out] */ 
             _Out_  GUID *pguidVendor);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetVersion)
         HRESULT ( STDMETHODCALLTYPE *GetVersion )( 
             __RPC__in IWICBitmapEncoderInfo * This,
             /* [annotation][in] */ 
@@ -6054,6 +6357,7 @@ EXTERN_C const IID IID_IWICBitmapEncoderInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetSpecVersion)
         HRESULT ( STDMETHODCALLTYPE *GetSpecVersion )( 
             __RPC__in IWICBitmapEncoderInfo * This,
             /* [annotation][in] */ 
@@ -6063,6 +6367,7 @@ EXTERN_C const IID IID_IWICBitmapEncoderInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetFriendlyName)
         HRESULT ( STDMETHODCALLTYPE *GetFriendlyName )( 
             __RPC__in IWICBitmapEncoderInfo * This,
             /* [annotation][in] */ 
@@ -6072,11 +6377,13 @@ EXTERN_C const IID IID_IWICBitmapEncoderInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, GetContainerFormat)
         HRESULT ( STDMETHODCALLTYPE *GetContainerFormat )( 
             __RPC__in IWICBitmapEncoderInfo * This,
             /* [annotation][out] */ 
             _Out_  GUID *pguidContainerFormat);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, GetPixelFormats)
         HRESULT ( STDMETHODCALLTYPE *GetPixelFormats )( 
             __RPC__in IWICBitmapEncoderInfo * This,
             /* [annotation][in] */ 
@@ -6086,6 +6393,7 @@ EXTERN_C const IID IID_IWICBitmapEncoderInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcActual);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, GetColorManagementVersion)
         HRESULT ( STDMETHODCALLTYPE *GetColorManagementVersion )( 
             __RPC__in IWICBitmapEncoderInfo * This,
             /* [annotation][in] */ 
@@ -6095,6 +6403,7 @@ EXTERN_C const IID IID_IWICBitmapEncoderInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, GetDeviceManufacturer)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceManufacturer )( 
             __RPC__in IWICBitmapEncoderInfo * This,
             /* [annotation][in] */ 
@@ -6104,6 +6413,7 @@ EXTERN_C const IID IID_IWICBitmapEncoderInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, GetDeviceModels)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceModels )( 
             __RPC__in IWICBitmapEncoderInfo * This,
             /* [annotation][in] */ 
@@ -6113,6 +6423,7 @@ EXTERN_C const IID IID_IWICBitmapEncoderInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, GetMimeTypes)
         HRESULT ( STDMETHODCALLTYPE *GetMimeTypes )( 
             __RPC__in IWICBitmapEncoderInfo * This,
             /* [annotation][in] */ 
@@ -6122,6 +6433,7 @@ EXTERN_C const IID IID_IWICBitmapEncoderInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, GetFileExtensions)
         HRESULT ( STDMETHODCALLTYPE *GetFileExtensions )( 
             __RPC__in IWICBitmapEncoderInfo * This,
             /* [annotation][in] */ 
@@ -6131,26 +6443,31 @@ EXTERN_C const IID IID_IWICBitmapEncoderInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, DoesSupportAnimation)
         HRESULT ( STDMETHODCALLTYPE *DoesSupportAnimation )( 
             __RPC__in IWICBitmapEncoderInfo * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfSupportAnimation);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, DoesSupportChromakey)
         HRESULT ( STDMETHODCALLTYPE *DoesSupportChromakey )( 
             __RPC__in IWICBitmapEncoderInfo * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfSupportChromakey);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, DoesSupportLossless)
         HRESULT ( STDMETHODCALLTYPE *DoesSupportLossless )( 
             __RPC__in IWICBitmapEncoderInfo * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfSupportLossless);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, DoesSupportMultiframe)
         HRESULT ( STDMETHODCALLTYPE *DoesSupportMultiframe )( 
             __RPC__in IWICBitmapEncoderInfo * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfSupportMultiframe);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, MatchesMimeType)
         HRESULT ( STDMETHODCALLTYPE *MatchesMimeType )( 
             __RPC__in IWICBitmapEncoderInfo * This,
             /* [annotation][in] */ 
@@ -6158,6 +6475,7 @@ EXTERN_C const IID IID_IWICBitmapEncoderInfo;
             /* [annotation][out] */ 
             _Out_  BOOL *pfMatches);
         
+        DECLSPEC_XFGVIRT(IWICBitmapEncoderInfo, CreateInstance)
         HRESULT ( STDMETHODCALLTYPE *CreateInstance )( 
             __RPC__in IWICBitmapEncoderInfo * This,
             /* [annotation][out] */ 
@@ -6306,6 +6624,7 @@ EXTERN_C const IID IID_IWICBitmapDecoderInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICBitmapDecoderInfo * This,
             /* [annotation][in] */ 
@@ -6313,27 +6632,33 @@ EXTERN_C const IID IID_IWICBitmapDecoderInfo;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICBitmapDecoderInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICBitmapDecoderInfo * This);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetComponentType)
         HRESULT ( STDMETHODCALLTYPE *GetComponentType )( 
             __RPC__in IWICBitmapDecoderInfo * This,
             /* [annotation][out] */ 
             _Out_  WICComponentType *pType);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetCLSID)
         HRESULT ( STDMETHODCALLTYPE *GetCLSID )( 
             __RPC__in IWICBitmapDecoderInfo * This,
             /* [annotation][out] */ 
             _Out_  CLSID *pclsid);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetSigningStatus)
         HRESULT ( STDMETHODCALLTYPE *GetSigningStatus )( 
             __RPC__in IWICBitmapDecoderInfo * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pStatus);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetAuthor)
         HRESULT ( STDMETHODCALLTYPE *GetAuthor )( 
             __RPC__in IWICBitmapDecoderInfo * This,
             /* [annotation][in] */ 
@@ -6343,11 +6668,13 @@ EXTERN_C const IID IID_IWICBitmapDecoderInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetVendorGUID)
         HRESULT ( STDMETHODCALLTYPE *GetVendorGUID )( 
             __RPC__in IWICBitmapDecoderInfo * This,
             /* [annotation][out] */ 
             _Out_  GUID *pguidVendor);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetVersion)
         HRESULT ( STDMETHODCALLTYPE *GetVersion )( 
             __RPC__in IWICBitmapDecoderInfo * This,
             /* [annotation][in] */ 
@@ -6357,6 +6684,7 @@ EXTERN_C const IID IID_IWICBitmapDecoderInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetSpecVersion)
         HRESULT ( STDMETHODCALLTYPE *GetSpecVersion )( 
             __RPC__in IWICBitmapDecoderInfo * This,
             /* [annotation][in] */ 
@@ -6366,6 +6694,7 @@ EXTERN_C const IID IID_IWICBitmapDecoderInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetFriendlyName)
         HRESULT ( STDMETHODCALLTYPE *GetFriendlyName )( 
             __RPC__in IWICBitmapDecoderInfo * This,
             /* [annotation][in] */ 
@@ -6375,11 +6704,13 @@ EXTERN_C const IID IID_IWICBitmapDecoderInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, GetContainerFormat)
         HRESULT ( STDMETHODCALLTYPE *GetContainerFormat )( 
             __RPC__in IWICBitmapDecoderInfo * This,
             /* [annotation][out] */ 
             _Out_  GUID *pguidContainerFormat);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, GetPixelFormats)
         HRESULT ( STDMETHODCALLTYPE *GetPixelFormats )( 
             __RPC__in IWICBitmapDecoderInfo * This,
             /* [annotation][in] */ 
@@ -6389,6 +6720,7 @@ EXTERN_C const IID IID_IWICBitmapDecoderInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcActual);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, GetColorManagementVersion)
         HRESULT ( STDMETHODCALLTYPE *GetColorManagementVersion )( 
             __RPC__in IWICBitmapDecoderInfo * This,
             /* [annotation][in] */ 
@@ -6398,6 +6730,7 @@ EXTERN_C const IID IID_IWICBitmapDecoderInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, GetDeviceManufacturer)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceManufacturer )( 
             __RPC__in IWICBitmapDecoderInfo * This,
             /* [annotation][in] */ 
@@ -6407,6 +6740,7 @@ EXTERN_C const IID IID_IWICBitmapDecoderInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, GetDeviceModels)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceModels )( 
             __RPC__in IWICBitmapDecoderInfo * This,
             /* [annotation][in] */ 
@@ -6416,6 +6750,7 @@ EXTERN_C const IID IID_IWICBitmapDecoderInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, GetMimeTypes)
         HRESULT ( STDMETHODCALLTYPE *GetMimeTypes )( 
             __RPC__in IWICBitmapDecoderInfo * This,
             /* [annotation][in] */ 
@@ -6425,6 +6760,7 @@ EXTERN_C const IID IID_IWICBitmapDecoderInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, GetFileExtensions)
         HRESULT ( STDMETHODCALLTYPE *GetFileExtensions )( 
             __RPC__in IWICBitmapDecoderInfo * This,
             /* [annotation][in] */ 
@@ -6434,26 +6770,31 @@ EXTERN_C const IID IID_IWICBitmapDecoderInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, DoesSupportAnimation)
         HRESULT ( STDMETHODCALLTYPE *DoesSupportAnimation )( 
             __RPC__in IWICBitmapDecoderInfo * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfSupportAnimation);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, DoesSupportChromakey)
         HRESULT ( STDMETHODCALLTYPE *DoesSupportChromakey )( 
             __RPC__in IWICBitmapDecoderInfo * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfSupportChromakey);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, DoesSupportLossless)
         HRESULT ( STDMETHODCALLTYPE *DoesSupportLossless )( 
             __RPC__in IWICBitmapDecoderInfo * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfSupportLossless);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, DoesSupportMultiframe)
         HRESULT ( STDMETHODCALLTYPE *DoesSupportMultiframe )( 
             __RPC__in IWICBitmapDecoderInfo * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfSupportMultiframe);
         
+        DECLSPEC_XFGVIRT(IWICBitmapCodecInfo, MatchesMimeType)
         HRESULT ( STDMETHODCALLTYPE *MatchesMimeType )( 
             __RPC__in IWICBitmapDecoderInfo * This,
             /* [annotation][in] */ 
@@ -6461,6 +6802,7 @@ EXTERN_C const IID IID_IWICBitmapDecoderInfo;
             /* [annotation][out] */ 
             _Out_  BOOL *pfMatches);
         
+        DECLSPEC_XFGVIRT(IWICBitmapDecoderInfo, GetPatterns)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetPatterns )( 
             IWICBitmapDecoderInfo * This,
             /* [annotation][in] */ 
@@ -6472,6 +6814,7 @@ EXTERN_C const IID IID_IWICBitmapDecoderInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcbPatternsActual);
         
+        DECLSPEC_XFGVIRT(IWICBitmapDecoderInfo, MatchesPattern)
         HRESULT ( STDMETHODCALLTYPE *MatchesPattern )( 
             __RPC__in IWICBitmapDecoderInfo * This,
             /* [annotation][in] */ 
@@ -6479,6 +6822,7 @@ EXTERN_C const IID IID_IWICBitmapDecoderInfo;
             /* [annotation][out] */ 
             _Out_  BOOL *pfMatches);
         
+        DECLSPEC_XFGVIRT(IWICBitmapDecoderInfo, CreateInstance)
         HRESULT ( STDMETHODCALLTYPE *CreateInstance )( 
             __RPC__in IWICBitmapDecoderInfo * This,
             /* [annotation][out] */ 
@@ -6654,6 +6998,7 @@ EXTERN_C const IID IID_IWICPixelFormatInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICPixelFormatInfo * This,
             /* [annotation][in] */ 
@@ -6661,27 +7006,33 @@ EXTERN_C const IID IID_IWICPixelFormatInfo;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICPixelFormatInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICPixelFormatInfo * This);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetComponentType)
         HRESULT ( STDMETHODCALLTYPE *GetComponentType )( 
             __RPC__in IWICPixelFormatInfo * This,
             /* [annotation][out] */ 
             _Out_  WICComponentType *pType);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetCLSID)
         HRESULT ( STDMETHODCALLTYPE *GetCLSID )( 
             __RPC__in IWICPixelFormatInfo * This,
             /* [annotation][out] */ 
             _Out_  CLSID *pclsid);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetSigningStatus)
         HRESULT ( STDMETHODCALLTYPE *GetSigningStatus )( 
             __RPC__in IWICPixelFormatInfo * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pStatus);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetAuthor)
         HRESULT ( STDMETHODCALLTYPE *GetAuthor )( 
             __RPC__in IWICPixelFormatInfo * This,
             /* [annotation][in] */ 
@@ -6691,11 +7042,13 @@ EXTERN_C const IID IID_IWICPixelFormatInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetVendorGUID)
         HRESULT ( STDMETHODCALLTYPE *GetVendorGUID )( 
             __RPC__in IWICPixelFormatInfo * This,
             /* [annotation][out] */ 
             _Out_  GUID *pguidVendor);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetVersion)
         HRESULT ( STDMETHODCALLTYPE *GetVersion )( 
             __RPC__in IWICPixelFormatInfo * This,
             /* [annotation][in] */ 
@@ -6705,6 +7058,7 @@ EXTERN_C const IID IID_IWICPixelFormatInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetSpecVersion)
         HRESULT ( STDMETHODCALLTYPE *GetSpecVersion )( 
             __RPC__in IWICPixelFormatInfo * This,
             /* [annotation][in] */ 
@@ -6714,6 +7068,7 @@ EXTERN_C const IID IID_IWICPixelFormatInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetFriendlyName)
         HRESULT ( STDMETHODCALLTYPE *GetFriendlyName )( 
             __RPC__in IWICPixelFormatInfo * This,
             /* [annotation][in] */ 
@@ -6723,26 +7078,31 @@ EXTERN_C const IID IID_IWICPixelFormatInfo;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICPixelFormatInfo, GetFormatGUID)
         HRESULT ( STDMETHODCALLTYPE *GetFormatGUID )( 
             __RPC__in IWICPixelFormatInfo * This,
             /* [annotation][out] */ 
             _Out_  GUID *pFormat);
         
+        DECLSPEC_XFGVIRT(IWICPixelFormatInfo, GetColorContext)
         HRESULT ( STDMETHODCALLTYPE *GetColorContext )( 
             __RPC__in IWICPixelFormatInfo * This,
             /* [annotation][out] */ 
             _Out_  IWICColorContext **ppIColorContext);
         
+        DECLSPEC_XFGVIRT(IWICPixelFormatInfo, GetBitsPerPixel)
         HRESULT ( STDMETHODCALLTYPE *GetBitsPerPixel )( 
             __RPC__in IWICPixelFormatInfo * This,
             /* [annotation][out] */ 
             _Out_  UINT *puiBitsPerPixel);
         
+        DECLSPEC_XFGVIRT(IWICPixelFormatInfo, GetChannelCount)
         HRESULT ( STDMETHODCALLTYPE *GetChannelCount )( 
             __RPC__in IWICPixelFormatInfo * This,
             /* [annotation][out] */ 
             _Out_  UINT *puiChannelCount);
         
+        DECLSPEC_XFGVIRT(IWICPixelFormatInfo, GetChannelMask)
         HRESULT ( STDMETHODCALLTYPE *GetChannelMask )( 
             __RPC__in IWICPixelFormatInfo * This,
             /* [annotation][in] */ 
@@ -6860,6 +7220,7 @@ EXTERN_C const IID IID_IWICPixelFormatInfo2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICPixelFormatInfo2 * This,
             /* [annotation][in] */ 
@@ -6867,27 +7228,33 @@ EXTERN_C const IID IID_IWICPixelFormatInfo2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICPixelFormatInfo2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICPixelFormatInfo2 * This);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetComponentType)
         HRESULT ( STDMETHODCALLTYPE *GetComponentType )( 
             __RPC__in IWICPixelFormatInfo2 * This,
             /* [annotation][out] */ 
             _Out_  WICComponentType *pType);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetCLSID)
         HRESULT ( STDMETHODCALLTYPE *GetCLSID )( 
             __RPC__in IWICPixelFormatInfo2 * This,
             /* [annotation][out] */ 
             _Out_  CLSID *pclsid);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetSigningStatus)
         HRESULT ( STDMETHODCALLTYPE *GetSigningStatus )( 
             __RPC__in IWICPixelFormatInfo2 * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pStatus);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetAuthor)
         HRESULT ( STDMETHODCALLTYPE *GetAuthor )( 
             __RPC__in IWICPixelFormatInfo2 * This,
             /* [annotation][in] */ 
@@ -6897,11 +7264,13 @@ EXTERN_C const IID IID_IWICPixelFormatInfo2;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetVendorGUID)
         HRESULT ( STDMETHODCALLTYPE *GetVendorGUID )( 
             __RPC__in IWICPixelFormatInfo2 * This,
             /* [annotation][out] */ 
             _Out_  GUID *pguidVendor);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetVersion)
         HRESULT ( STDMETHODCALLTYPE *GetVersion )( 
             __RPC__in IWICPixelFormatInfo2 * This,
             /* [annotation][in] */ 
@@ -6911,6 +7280,7 @@ EXTERN_C const IID IID_IWICPixelFormatInfo2;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetSpecVersion)
         HRESULT ( STDMETHODCALLTYPE *GetSpecVersion )( 
             __RPC__in IWICPixelFormatInfo2 * This,
             /* [annotation][in] */ 
@@ -6920,6 +7290,7 @@ EXTERN_C const IID IID_IWICPixelFormatInfo2;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICComponentInfo, GetFriendlyName)
         HRESULT ( STDMETHODCALLTYPE *GetFriendlyName )( 
             __RPC__in IWICPixelFormatInfo2 * This,
             /* [annotation][in] */ 
@@ -6929,26 +7300,31 @@ EXTERN_C const IID IID_IWICPixelFormatInfo2;
             /* [annotation][out] */ 
             _Out_  UINT *pcchActual);
         
+        DECLSPEC_XFGVIRT(IWICPixelFormatInfo, GetFormatGUID)
         HRESULT ( STDMETHODCALLTYPE *GetFormatGUID )( 
             __RPC__in IWICPixelFormatInfo2 * This,
             /* [annotation][out] */ 
             _Out_  GUID *pFormat);
         
+        DECLSPEC_XFGVIRT(IWICPixelFormatInfo, GetColorContext)
         HRESULT ( STDMETHODCALLTYPE *GetColorContext )( 
             __RPC__in IWICPixelFormatInfo2 * This,
             /* [annotation][out] */ 
             _Out_  IWICColorContext **ppIColorContext);
         
+        DECLSPEC_XFGVIRT(IWICPixelFormatInfo, GetBitsPerPixel)
         HRESULT ( STDMETHODCALLTYPE *GetBitsPerPixel )( 
             __RPC__in IWICPixelFormatInfo2 * This,
             /* [annotation][out] */ 
             _Out_  UINT *puiBitsPerPixel);
         
+        DECLSPEC_XFGVIRT(IWICPixelFormatInfo, GetChannelCount)
         HRESULT ( STDMETHODCALLTYPE *GetChannelCount )( 
             __RPC__in IWICPixelFormatInfo2 * This,
             /* [annotation][out] */ 
             _Out_  UINT *puiChannelCount);
         
+        DECLSPEC_XFGVIRT(IWICPixelFormatInfo, GetChannelMask)
         HRESULT ( STDMETHODCALLTYPE *GetChannelMask )( 
             __RPC__in IWICPixelFormatInfo2 * This,
             /* [annotation][in] */ 
@@ -6960,11 +7336,13 @@ EXTERN_C const IID IID_IWICPixelFormatInfo2;
             /* [annotation][out] */ 
             _Out_  UINT *pcbActual);
         
+        DECLSPEC_XFGVIRT(IWICPixelFormatInfo2, SupportsTransparency)
         HRESULT ( STDMETHODCALLTYPE *SupportsTransparency )( 
             __RPC__in IWICPixelFormatInfo2 * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfSupportsTransparency);
         
+        DECLSPEC_XFGVIRT(IWICPixelFormatInfo2, GetNumericRepresentation)
         HRESULT ( STDMETHODCALLTYPE *GetNumericRepresentation )( 
             __RPC__in IWICPixelFormatInfo2 * This,
             /* [annotation][out] */ 
@@ -7263,6 +7641,7 @@ EXTERN_C const IID IID_IWICImagingFactory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICImagingFactory * This,
             /* [annotation][in] */ 
@@ -7270,12 +7649,15 @@ EXTERN_C const IID IID_IWICImagingFactory;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICImagingFactory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICImagingFactory * This);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateDecoderFromFilename)
         HRESULT ( STDMETHODCALLTYPE *CreateDecoderFromFilename )( 
             __RPC__in IWICImagingFactory * This,
             /* [annotation][in] */ 
@@ -7289,6 +7671,7 @@ EXTERN_C const IID IID_IWICImagingFactory;
             /* [annotation][retval][out] */ 
             _Out_retval_  IWICBitmapDecoder **ppIDecoder);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateDecoderFromStream)
         HRESULT ( STDMETHODCALLTYPE *CreateDecoderFromStream )( 
             __RPC__in IWICImagingFactory * This,
             /* [annotation][in] */ 
@@ -7300,6 +7683,7 @@ EXTERN_C const IID IID_IWICImagingFactory;
             /* [annotation][retval][out] */ 
             _Out_retval_  IWICBitmapDecoder **ppIDecoder);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateDecoderFromFileHandle)
         HRESULT ( STDMETHODCALLTYPE *CreateDecoderFromFileHandle )( 
             __RPC__in IWICImagingFactory * This,
             /* [annotation][in] */ 
@@ -7311,6 +7695,7 @@ EXTERN_C const IID IID_IWICImagingFactory;
             /* [annotation][retval][out] */ 
             _Out_retval_  IWICBitmapDecoder **ppIDecoder);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateComponentInfo)
         HRESULT ( STDMETHODCALLTYPE *CreateComponentInfo )( 
             __RPC__in IWICImagingFactory * This,
             /* [annotation][in] */ 
@@ -7318,6 +7703,7 @@ EXTERN_C const IID IID_IWICImagingFactory;
             /* [annotation][out] */ 
             _Out_  IWICComponentInfo **ppIInfo);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateDecoder)
         HRESULT ( STDMETHODCALLTYPE *CreateDecoder )( 
             __RPC__in IWICImagingFactory * This,
             /* [annotation][in] */ 
@@ -7327,6 +7713,7 @@ EXTERN_C const IID IID_IWICImagingFactory;
             /* [annotation][retval][out] */ 
             _Out_retval_  IWICBitmapDecoder **ppIDecoder);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateEncoder)
         HRESULT ( STDMETHODCALLTYPE *CreateEncoder )( 
             __RPC__in IWICImagingFactory * This,
             /* [annotation][in] */ 
@@ -7336,46 +7723,55 @@ EXTERN_C const IID IID_IWICImagingFactory;
             /* [annotation][retval][out] */ 
             _Out_retval_  IWICBitmapEncoder **ppIEncoder);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreatePalette)
         HRESULT ( STDMETHODCALLTYPE *CreatePalette )( 
             __RPC__in IWICImagingFactory * This,
             /* [annotation][out] */ 
             _Out_  IWICPalette **ppIPalette);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateFormatConverter)
         HRESULT ( STDMETHODCALLTYPE *CreateFormatConverter )( 
             __RPC__in IWICImagingFactory * This,
             /* [annotation][out] */ 
             _Out_  IWICFormatConverter **ppIFormatConverter);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateBitmapScaler)
         HRESULT ( STDMETHODCALLTYPE *CreateBitmapScaler )( 
             __RPC__in IWICImagingFactory * This,
             /* [annotation][out] */ 
             _Out_  IWICBitmapScaler **ppIBitmapScaler);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateBitmapClipper)
         HRESULT ( STDMETHODCALLTYPE *CreateBitmapClipper )( 
             __RPC__in IWICImagingFactory * This,
             /* [annotation][out] */ 
             _Out_  IWICBitmapClipper **ppIBitmapClipper);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateBitmapFlipRotator)
         HRESULT ( STDMETHODCALLTYPE *CreateBitmapFlipRotator )( 
             __RPC__in IWICImagingFactory * This,
             /* [annotation][out] */ 
             _Out_  IWICBitmapFlipRotator **ppIBitmapFlipRotator);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateStream)
         HRESULT ( STDMETHODCALLTYPE *CreateStream )( 
             __RPC__in IWICImagingFactory * This,
             /* [annotation][out] */ 
             _Out_  IWICStream **ppIWICStream);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateColorContext)
         HRESULT ( STDMETHODCALLTYPE *CreateColorContext )( 
             __RPC__in IWICImagingFactory * This,
             /* [annotation][out] */ 
             _Out_  IWICColorContext **ppIWICColorContext);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateColorTransformer)
         HRESULT ( STDMETHODCALLTYPE *CreateColorTransformer )( 
             __RPC__in IWICImagingFactory * This,
             /* [annotation][out] */ 
             _Out_  IWICColorTransform **ppIWICColorTransform);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateBitmap)
         HRESULT ( STDMETHODCALLTYPE *CreateBitmap )( 
             __RPC__in IWICImagingFactory * This,
             /* [annotation][in] */ 
@@ -7389,6 +7785,7 @@ EXTERN_C const IID IID_IWICImagingFactory;
             /* [annotation][out] */ 
             _Out_  IWICBitmap **ppIBitmap);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateBitmapFromSource)
         HRESULT ( STDMETHODCALLTYPE *CreateBitmapFromSource )( 
             __RPC__in IWICImagingFactory * This,
             /* [annotation][in] */ 
@@ -7398,6 +7795,7 @@ EXTERN_C const IID IID_IWICImagingFactory;
             /* [annotation][out] */ 
             _Out_  IWICBitmap **ppIBitmap);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateBitmapFromSourceRect)
         HRESULT ( STDMETHODCALLTYPE *CreateBitmapFromSourceRect )( 
             __RPC__in IWICImagingFactory * This,
             /* [annotation][in] */ 
@@ -7413,6 +7811,7 @@ EXTERN_C const IID IID_IWICImagingFactory;
             /* [annotation][out] */ 
             _Out_  IWICBitmap **ppIBitmap);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateBitmapFromMemory)
         HRESULT ( STDMETHODCALLTYPE *CreateBitmapFromMemory )( 
             __RPC__in IWICImagingFactory * This,
             /* [annotation][in] */ 
@@ -7430,6 +7829,7 @@ EXTERN_C const IID IID_IWICImagingFactory;
             /* [annotation][out] */ 
             _Out_  IWICBitmap **ppIBitmap);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateBitmapFromHBITMAP)
         HRESULT ( STDMETHODCALLTYPE *CreateBitmapFromHBITMAP )( 
             __RPC__in IWICImagingFactory * This,
             /* [annotation][in] */ 
@@ -7441,6 +7841,7 @@ EXTERN_C const IID IID_IWICImagingFactory;
             /* [annotation][out] */ 
             _Out_  IWICBitmap **ppIBitmap);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateBitmapFromHICON)
         HRESULT ( STDMETHODCALLTYPE *CreateBitmapFromHICON )( 
             __RPC__in IWICImagingFactory * This,
             /* [annotation][in] */ 
@@ -7448,6 +7849,7 @@ EXTERN_C const IID IID_IWICImagingFactory;
             /* [annotation][out] */ 
             _Out_  IWICBitmap **ppIBitmap);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateComponentEnumerator)
         HRESULT ( STDMETHODCALLTYPE *CreateComponentEnumerator )( 
             __RPC__in IWICImagingFactory * This,
             /* [annotation][in] */ 
@@ -7457,6 +7859,7 @@ EXTERN_C const IID IID_IWICImagingFactory;
             /* [annotation][out] */ 
             _Out_  IEnumUnknown **ppIEnumUnknown);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateFastMetadataEncoderFromDecoder)
         HRESULT ( STDMETHODCALLTYPE *CreateFastMetadataEncoderFromDecoder )( 
             __RPC__in IWICImagingFactory * This,
             /* [annotation][in] */ 
@@ -7464,6 +7867,7 @@ EXTERN_C const IID IID_IWICImagingFactory;
             /* [annotation][out] */ 
             _Out_  IWICFastMetadataEncoder **ppIFastEncoder);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateFastMetadataEncoderFromFrameDecode)
         HRESULT ( STDMETHODCALLTYPE *CreateFastMetadataEncoderFromFrameDecode )( 
             __RPC__in IWICImagingFactory * This,
             /* [annotation][in] */ 
@@ -7471,6 +7875,7 @@ EXTERN_C const IID IID_IWICImagingFactory;
             /* [annotation][out] */ 
             _Out_  IWICFastMetadataEncoder **ppIFastEncoder);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateQueryWriter)
         HRESULT ( STDMETHODCALLTYPE *CreateQueryWriter )( 
             __RPC__in IWICImagingFactory * This,
             /* [annotation][in] */ 
@@ -7480,6 +7885,7 @@ EXTERN_C const IID IID_IWICImagingFactory;
             /* [annotation][out] */ 
             _Out_  IWICMetadataQueryWriter **ppIQueryWriter);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateQueryWriterFromReader)
         HRESULT ( STDMETHODCALLTYPE *CreateQueryWriterFromReader )( 
             __RPC__in IWICImagingFactory * This,
             /* [annotation][in] */ 
@@ -7637,6 +8043,7 @@ EXTERN_C const IID IID_IWICImagingFactory2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWICImagingFactory2 * This,
             /* [annotation][in] */ 
@@ -7644,12 +8051,15 @@ EXTERN_C const IID IID_IWICImagingFactory2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWICImagingFactory2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWICImagingFactory2 * This);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateDecoderFromFilename)
         HRESULT ( STDMETHODCALLTYPE *CreateDecoderFromFilename )( 
             IWICImagingFactory2 * This,
             /* [annotation][in] */ 
@@ -7663,6 +8073,7 @@ EXTERN_C const IID IID_IWICImagingFactory2;
             /* [annotation][retval][out] */ 
             _Out_retval_  IWICBitmapDecoder **ppIDecoder);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateDecoderFromStream)
         HRESULT ( STDMETHODCALLTYPE *CreateDecoderFromStream )( 
             IWICImagingFactory2 * This,
             /* [annotation][in] */ 
@@ -7674,6 +8085,7 @@ EXTERN_C const IID IID_IWICImagingFactory2;
             /* [annotation][retval][out] */ 
             _Out_retval_  IWICBitmapDecoder **ppIDecoder);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateDecoderFromFileHandle)
         HRESULT ( STDMETHODCALLTYPE *CreateDecoderFromFileHandle )( 
             IWICImagingFactory2 * This,
             /* [annotation][in] */ 
@@ -7685,6 +8097,7 @@ EXTERN_C const IID IID_IWICImagingFactory2;
             /* [annotation][retval][out] */ 
             _Out_retval_  IWICBitmapDecoder **ppIDecoder);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateComponentInfo)
         HRESULT ( STDMETHODCALLTYPE *CreateComponentInfo )( 
             IWICImagingFactory2 * This,
             /* [annotation][in] */ 
@@ -7692,6 +8105,7 @@ EXTERN_C const IID IID_IWICImagingFactory2;
             /* [annotation][out] */ 
             _Out_  IWICComponentInfo **ppIInfo);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateDecoder)
         HRESULT ( STDMETHODCALLTYPE *CreateDecoder )( 
             IWICImagingFactory2 * This,
             /* [annotation][in] */ 
@@ -7701,6 +8115,7 @@ EXTERN_C const IID IID_IWICImagingFactory2;
             /* [annotation][retval][out] */ 
             _Out_retval_  IWICBitmapDecoder **ppIDecoder);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateEncoder)
         HRESULT ( STDMETHODCALLTYPE *CreateEncoder )( 
             IWICImagingFactory2 * This,
             /* [annotation][in] */ 
@@ -7710,46 +8125,55 @@ EXTERN_C const IID IID_IWICImagingFactory2;
             /* [annotation][retval][out] */ 
             _Out_retval_  IWICBitmapEncoder **ppIEncoder);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreatePalette)
         HRESULT ( STDMETHODCALLTYPE *CreatePalette )( 
             IWICImagingFactory2 * This,
             /* [annotation][out] */ 
             _Out_  IWICPalette **ppIPalette);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateFormatConverter)
         HRESULT ( STDMETHODCALLTYPE *CreateFormatConverter )( 
             IWICImagingFactory2 * This,
             /* [annotation][out] */ 
             _Out_  IWICFormatConverter **ppIFormatConverter);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateBitmapScaler)
         HRESULT ( STDMETHODCALLTYPE *CreateBitmapScaler )( 
             IWICImagingFactory2 * This,
             /* [annotation][out] */ 
             _Out_  IWICBitmapScaler **ppIBitmapScaler);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateBitmapClipper)
         HRESULT ( STDMETHODCALLTYPE *CreateBitmapClipper )( 
             IWICImagingFactory2 * This,
             /* [annotation][out] */ 
             _Out_  IWICBitmapClipper **ppIBitmapClipper);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateBitmapFlipRotator)
         HRESULT ( STDMETHODCALLTYPE *CreateBitmapFlipRotator )( 
             IWICImagingFactory2 * This,
             /* [annotation][out] */ 
             _Out_  IWICBitmapFlipRotator **ppIBitmapFlipRotator);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateStream)
         HRESULT ( STDMETHODCALLTYPE *CreateStream )( 
             IWICImagingFactory2 * This,
             /* [annotation][out] */ 
             _Out_  IWICStream **ppIWICStream);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateColorContext)
         HRESULT ( STDMETHODCALLTYPE *CreateColorContext )( 
             IWICImagingFactory2 * This,
             /* [annotation][out] */ 
             _Out_  IWICColorContext **ppIWICColorContext);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateColorTransformer)
         HRESULT ( STDMETHODCALLTYPE *CreateColorTransformer )( 
             IWICImagingFactory2 * This,
             /* [annotation][out] */ 
             _Out_  IWICColorTransform **ppIWICColorTransform);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateBitmap)
         HRESULT ( STDMETHODCALLTYPE *CreateBitmap )( 
             IWICImagingFactory2 * This,
             /* [annotation][in] */ 
@@ -7763,6 +8187,7 @@ EXTERN_C const IID IID_IWICImagingFactory2;
             /* [annotation][out] */ 
             _Out_  IWICBitmap **ppIBitmap);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateBitmapFromSource)
         HRESULT ( STDMETHODCALLTYPE *CreateBitmapFromSource )( 
             IWICImagingFactory2 * This,
             /* [annotation][in] */ 
@@ -7772,6 +8197,7 @@ EXTERN_C const IID IID_IWICImagingFactory2;
             /* [annotation][out] */ 
             _Out_  IWICBitmap **ppIBitmap);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateBitmapFromSourceRect)
         HRESULT ( STDMETHODCALLTYPE *CreateBitmapFromSourceRect )( 
             IWICImagingFactory2 * This,
             /* [annotation][in] */ 
@@ -7787,6 +8213,7 @@ EXTERN_C const IID IID_IWICImagingFactory2;
             /* [annotation][out] */ 
             _Out_  IWICBitmap **ppIBitmap);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateBitmapFromMemory)
         HRESULT ( STDMETHODCALLTYPE *CreateBitmapFromMemory )( 
             IWICImagingFactory2 * This,
             /* [annotation][in] */ 
@@ -7804,6 +8231,7 @@ EXTERN_C const IID IID_IWICImagingFactory2;
             /* [annotation][out] */ 
             _Out_  IWICBitmap **ppIBitmap);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateBitmapFromHBITMAP)
         HRESULT ( STDMETHODCALLTYPE *CreateBitmapFromHBITMAP )( 
             IWICImagingFactory2 * This,
             /* [annotation][in] */ 
@@ -7815,6 +8243,7 @@ EXTERN_C const IID IID_IWICImagingFactory2;
             /* [annotation][out] */ 
             _Out_  IWICBitmap **ppIBitmap);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateBitmapFromHICON)
         HRESULT ( STDMETHODCALLTYPE *CreateBitmapFromHICON )( 
             IWICImagingFactory2 * This,
             /* [annotation][in] */ 
@@ -7822,6 +8251,7 @@ EXTERN_C const IID IID_IWICImagingFactory2;
             /* [annotation][out] */ 
             _Out_  IWICBitmap **ppIBitmap);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateComponentEnumerator)
         HRESULT ( STDMETHODCALLTYPE *CreateComponentEnumerator )( 
             IWICImagingFactory2 * This,
             /* [annotation][in] */ 
@@ -7831,6 +8261,7 @@ EXTERN_C const IID IID_IWICImagingFactory2;
             /* [annotation][out] */ 
             _Out_  IEnumUnknown **ppIEnumUnknown);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateFastMetadataEncoderFromDecoder)
         HRESULT ( STDMETHODCALLTYPE *CreateFastMetadataEncoderFromDecoder )( 
             IWICImagingFactory2 * This,
             /* [annotation][in] */ 
@@ -7838,6 +8269,7 @@ EXTERN_C const IID IID_IWICImagingFactory2;
             /* [annotation][out] */ 
             _Out_  IWICFastMetadataEncoder **ppIFastEncoder);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateFastMetadataEncoderFromFrameDecode)
         HRESULT ( STDMETHODCALLTYPE *CreateFastMetadataEncoderFromFrameDecode )( 
             IWICImagingFactory2 * This,
             /* [annotation][in] */ 
@@ -7845,6 +8277,7 @@ EXTERN_C const IID IID_IWICImagingFactory2;
             /* [annotation][out] */ 
             _Out_  IWICFastMetadataEncoder **ppIFastEncoder);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateQueryWriter)
         HRESULT ( STDMETHODCALLTYPE *CreateQueryWriter )( 
             IWICImagingFactory2 * This,
             /* [annotation][in] */ 
@@ -7854,6 +8287,7 @@ EXTERN_C const IID IID_IWICImagingFactory2;
             /* [annotation][out] */ 
             _Out_  IWICMetadataQueryWriter **ppIQueryWriter);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory, CreateQueryWriterFromReader)
         HRESULT ( STDMETHODCALLTYPE *CreateQueryWriterFromReader )( 
             IWICImagingFactory2 * This,
             /* [annotation][in] */ 
@@ -7863,6 +8297,7 @@ EXTERN_C const IID IID_IWICImagingFactory2;
             /* [annotation][out] */ 
             _Out_  IWICMetadataQueryWriter **ppIQueryWriter);
         
+        DECLSPEC_XFGVIRT(IWICImagingFactory2, CreateImageEncoder)
         HRESULT ( STDMETHODCALLTYPE *CreateImageEncoder )( 
             IWICImagingFactory2 * This,
             /* [annotation][in] */ 
@@ -8212,6 +8647,7 @@ EXTERN_C const IID IID_IWICDevelopRawNotificationCallback;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICDevelopRawNotificationCallback * This,
             /* [annotation][in] */ 
@@ -8219,12 +8655,15 @@ EXTERN_C const IID IID_IWICDevelopRawNotificationCallback;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICDevelopRawNotificationCallback * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICDevelopRawNotificationCallback * This);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRawNotificationCallback, Notify)
         HRESULT ( STDMETHODCALLTYPE *Notify )( 
             __RPC__in IWICDevelopRawNotificationCallback * This,
             /* [annotation][in] */ 
@@ -8437,6 +8876,7 @@ EXTERN_C const IID IID_IWICDevelopRaw;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][in] */ 
@@ -8444,12 +8884,15 @@ EXTERN_C const IID IID_IWICDevelopRaw;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICDevelopRaw * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICDevelopRaw * This);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, GetSize)
         HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][out] */ 
@@ -8457,11 +8900,13 @@ EXTERN_C const IID IID_IWICDevelopRaw;
             /* [annotation][out] */ 
             _Out_  UINT *puiHeight);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, GetPixelFormat)
         HRESULT ( STDMETHODCALLTYPE *GetPixelFormat )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][out] */ 
             _Out_  WICPixelFormatGUID *pPixelFormat);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, GetResolution)
         HRESULT ( STDMETHODCALLTYPE *GetResolution )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][out] */ 
@@ -8469,11 +8914,13 @@ EXTERN_C const IID IID_IWICDevelopRaw;
             /* [annotation][out] */ 
             _Out_  double *pDpiY);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, CopyPalette)
         HRESULT ( STDMETHODCALLTYPE *CopyPalette )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][in] */ 
             _In_  IWICPalette *pIPalette);
         
+        DECLSPEC_XFGVIRT(IWICBitmapSource, CopyPixels)
         HRESULT ( STDMETHODCALLTYPE *CopyPixels )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][unique][in] */ 
@@ -8485,11 +8932,13 @@ EXTERN_C const IID IID_IWICDevelopRaw;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cbBufferSize)  BYTE *pbBuffer);
         
+        DECLSPEC_XFGVIRT(IWICBitmapFrameDecode, GetMetadataQueryReader)
         HRESULT ( STDMETHODCALLTYPE *GetMetadataQueryReader )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][out] */ 
             _Out_  IWICMetadataQueryReader **ppIMetadataQueryReader);
         
+        DECLSPEC_XFGVIRT(IWICBitmapFrameDecode, GetColorContexts)
         HRESULT ( STDMETHODCALLTYPE *GetColorContexts )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][in] */ 
@@ -8499,36 +8948,43 @@ EXTERN_C const IID IID_IWICDevelopRaw;
             /* [annotation][out] */ 
             _Out_  UINT *pcActualCount);
         
+        DECLSPEC_XFGVIRT(IWICBitmapFrameDecode, GetThumbnail)
         HRESULT ( STDMETHODCALLTYPE *GetThumbnail )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][out] */ 
             _Out_  IWICBitmapSource **ppIThumbnail);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, QueryRawCapabilitiesInfo)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *QueryRawCapabilitiesInfo )( 
             IWICDevelopRaw * This,
             /* [annotation][out][in] */ 
             _Inout_  WICRawCapabilitiesInfo *pInfo);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, LoadParameterSet)
         HRESULT ( STDMETHODCALLTYPE *LoadParameterSet )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][in] */ 
             _In_  WICRawParameterSet ParameterSet);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, GetCurrentParameterSet)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentParameterSet )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][out] */ 
             _Out_  IPropertyBag2 **ppCurrentParameterSet);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, SetExposureCompensation)
         HRESULT ( STDMETHODCALLTYPE *SetExposureCompensation )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][in] */ 
             _In_  double ev);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, GetExposureCompensation)
         HRESULT ( STDMETHODCALLTYPE *GetExposureCompensation )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][out] */ 
             _Out_  double *pEV);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, SetWhitePointRGB)
         HRESULT ( STDMETHODCALLTYPE *SetWhitePointRGB )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][in] */ 
@@ -8538,6 +8994,7 @@ EXTERN_C const IID IID_IWICDevelopRaw;
             /* [annotation][in] */ 
             _In_  UINT Blue);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, GetWhitePointRGB)
         HRESULT ( STDMETHODCALLTYPE *GetWhitePointRGB )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][out] */ 
@@ -8547,26 +9004,31 @@ EXTERN_C const IID IID_IWICDevelopRaw;
             /* [annotation][out] */ 
             _Out_  UINT *pBlue);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, SetNamedWhitePoint)
         HRESULT ( STDMETHODCALLTYPE *SetNamedWhitePoint )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][in] */ 
             _In_  WICNamedWhitePoint WhitePoint);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, GetNamedWhitePoint)
         HRESULT ( STDMETHODCALLTYPE *GetNamedWhitePoint )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][out] */ 
             _Out_  WICNamedWhitePoint *pWhitePoint);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, SetWhitePointKelvin)
         HRESULT ( STDMETHODCALLTYPE *SetWhitePointKelvin )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][in] */ 
             _In_  UINT WhitePointKelvin);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, GetWhitePointKelvin)
         HRESULT ( STDMETHODCALLTYPE *GetWhitePointKelvin )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][out] */ 
             _Out_  UINT *pWhitePointKelvin);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, GetKelvinRangeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetKelvinRangeInfo )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][out] */ 
@@ -8576,71 +9038,85 @@ EXTERN_C const IID IID_IWICDevelopRaw;
             /* [annotation][out] */ 
             _Out_  UINT *pKelvinTempStepValue);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, SetContrast)
         HRESULT ( STDMETHODCALLTYPE *SetContrast )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][in] */ 
             _In_  double Contrast);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, GetContrast)
         HRESULT ( STDMETHODCALLTYPE *GetContrast )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][out] */ 
             _Out_  double *pContrast);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, SetGamma)
         HRESULT ( STDMETHODCALLTYPE *SetGamma )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][in] */ 
             _In_  double Gamma);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, GetGamma)
         HRESULT ( STDMETHODCALLTYPE *GetGamma )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][out] */ 
             _Out_  double *pGamma);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, SetSharpness)
         HRESULT ( STDMETHODCALLTYPE *SetSharpness )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][in] */ 
             _In_  double Sharpness);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, GetSharpness)
         HRESULT ( STDMETHODCALLTYPE *GetSharpness )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][out] */ 
             _Out_  double *pSharpness);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, SetSaturation)
         HRESULT ( STDMETHODCALLTYPE *SetSaturation )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][in] */ 
             _In_  double Saturation);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, GetSaturation)
         HRESULT ( STDMETHODCALLTYPE *GetSaturation )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][out] */ 
             _Out_  double *pSaturation);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, SetTint)
         HRESULT ( STDMETHODCALLTYPE *SetTint )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][in] */ 
             _In_  double Tint);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, GetTint)
         HRESULT ( STDMETHODCALLTYPE *GetTint )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][out] */ 
             _Out_  double *pTint);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, SetNoiseReduction)
         HRESULT ( STDMETHODCALLTYPE *SetNoiseReduction )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][in] */ 
             _In_  double NoiseReduction);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, GetNoiseReduction)
         HRESULT ( STDMETHODCALLTYPE *GetNoiseReduction )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][out] */ 
             _Out_  double *pNoiseReduction);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, SetDestinationColorContext)
         HRESULT ( STDMETHODCALLTYPE *SetDestinationColorContext )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][unique][in] */ 
             _In_  IWICColorContext *pColorContext);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, SetToneCurve)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetToneCurve )( 
             IWICDevelopRaw * This,
             /* [annotation][in] */ 
@@ -8648,6 +9124,7 @@ EXTERN_C const IID IID_IWICDevelopRaw;
             /* [annotation][in] */ 
             _In_reads_bytes_(cbToneCurveSize)  const WICRawToneCurve *pToneCurve);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, GetToneCurve)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetToneCurve )( 
             IWICDevelopRaw * This,
             /* [annotation][in] */ 
@@ -8657,26 +9134,31 @@ EXTERN_C const IID IID_IWICDevelopRaw;
             /* [annotation][unique][out] */ 
             _Inout_opt_  UINT *pcbActualToneCurveBufferSize);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, SetRotation)
         HRESULT ( STDMETHODCALLTYPE *SetRotation )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][in] */ 
             _In_  double Rotation);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, GetRotation)
         HRESULT ( STDMETHODCALLTYPE *GetRotation )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][out] */ 
             _Out_  double *pRotation);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, SetRenderMode)
         HRESULT ( STDMETHODCALLTYPE *SetRenderMode )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][in] */ 
             _In_  WICRawRenderMode RenderMode);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, GetRenderMode)
         HRESULT ( STDMETHODCALLTYPE *GetRenderMode )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][out] */ 
             _Out_  WICRawRenderMode *pRenderMode);
         
+        DECLSPEC_XFGVIRT(IWICDevelopRaw, SetNotificationCallback)
         HRESULT ( STDMETHODCALLTYPE *SetNotificationCallback )( 
             __RPC__in IWICDevelopRaw * This,
             /* [annotation][unique][in] */ 
@@ -8960,6 +9442,7 @@ EXTERN_C const IID IID_IWICDdsDecoder;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICDdsDecoder * This,
             /* [annotation][in] */ 
@@ -8967,17 +9450,21 @@ EXTERN_C const IID IID_IWICDdsDecoder;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICDdsDecoder * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICDdsDecoder * This);
         
+        DECLSPEC_XFGVIRT(IWICDdsDecoder, GetParameters)
         HRESULT ( STDMETHODCALLTYPE *GetParameters )( 
             __RPC__in IWICDdsDecoder * This,
             /* [annotation][out] */ 
             _Out_  WICDdsParameters *pParameters);
         
+        DECLSPEC_XFGVIRT(IWICDdsDecoder, GetFrame)
         HRESULT ( STDMETHODCALLTYPE *GetFrame )( 
             __RPC__in IWICDdsDecoder * This,
             /* [annotation][in] */ 
@@ -9068,6 +9555,7 @@ EXTERN_C const IID IID_IWICDdsEncoder;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICDdsEncoder * This,
             /* [annotation][in] */ 
@@ -9075,22 +9563,27 @@ EXTERN_C const IID IID_IWICDdsEncoder;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICDdsEncoder * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICDdsEncoder * This);
         
+        DECLSPEC_XFGVIRT(IWICDdsEncoder, SetParameters)
         HRESULT ( STDMETHODCALLTYPE *SetParameters )( 
             __RPC__in IWICDdsEncoder * This,
             /* [annotation][in] */ 
             _In_  WICDdsParameters *pParameters);
         
+        DECLSPEC_XFGVIRT(IWICDdsEncoder, GetParameters)
         HRESULT ( STDMETHODCALLTYPE *GetParameters )( 
             __RPC__in IWICDdsEncoder * This,
             /* [annotation][out] */ 
             _Out_  WICDdsParameters *pParameters);
         
+        DECLSPEC_XFGVIRT(IWICDdsEncoder, CreateNewFrame)
         HRESULT ( STDMETHODCALLTYPE *CreateNewFrame )( 
             __RPC__in IWICDdsEncoder * This,
             /* [annotation][out] */ 
@@ -9202,6 +9695,7 @@ EXTERN_C const IID IID_IWICDdsFrameDecode;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICDdsFrameDecode * This,
             /* [annotation][in] */ 
@@ -9209,12 +9703,15 @@ EXTERN_C const IID IID_IWICDdsFrameDecode;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICDdsFrameDecode * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICDdsFrameDecode * This);
         
+        DECLSPEC_XFGVIRT(IWICDdsFrameDecode, GetSizeInBlocks)
         HRESULT ( STDMETHODCALLTYPE *GetSizeInBlocks )( 
             __RPC__in IWICDdsFrameDecode * This,
             /* [annotation][out] */ 
@@ -9222,11 +9719,13 @@ EXTERN_C const IID IID_IWICDdsFrameDecode;
             /* [annotation][out] */ 
             _Out_  UINT *pHeightInBlocks);
         
+        DECLSPEC_XFGVIRT(IWICDdsFrameDecode, GetFormatInfo)
         HRESULT ( STDMETHODCALLTYPE *GetFormatInfo )( 
             __RPC__in IWICDdsFrameDecode * This,
             /* [annotation][out] */ 
             _Out_  WICDdsFormatInfo *pFormatInfo);
         
+        DECLSPEC_XFGVIRT(IWICDdsFrameDecode, CopyBlocks)
         HRESULT ( STDMETHODCALLTYPE *CopyBlocks )( 
             __RPC__in IWICDdsFrameDecode * This,
             /* [annotation][unique][in] */ 
@@ -9361,6 +9860,7 @@ EXTERN_C const IID IID_IWICJpegFrameDecode;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICJpegFrameDecode * This,
             /* [annotation][in] */ 
@@ -9368,25 +9868,31 @@ EXTERN_C const IID IID_IWICJpegFrameDecode;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICJpegFrameDecode * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICJpegFrameDecode * This);
         
+        DECLSPEC_XFGVIRT(IWICJpegFrameDecode, DoesSupportIndexing)
         HRESULT ( STDMETHODCALLTYPE *DoesSupportIndexing )( 
             __RPC__in IWICJpegFrameDecode * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfIndexingSupported);
         
+        DECLSPEC_XFGVIRT(IWICJpegFrameDecode, SetIndexing)
         HRESULT ( STDMETHODCALLTYPE *SetIndexing )( 
             __RPC__in IWICJpegFrameDecode * This,
             WICJpegIndexingOptions options,
             UINT horizontalIntervalSize);
         
+        DECLSPEC_XFGVIRT(IWICJpegFrameDecode, ClearIndexing)
         HRESULT ( STDMETHODCALLTYPE *ClearIndexing )( 
             __RPC__in IWICJpegFrameDecode * This);
         
+        DECLSPEC_XFGVIRT(IWICJpegFrameDecode, GetAcHuffmanTable)
         HRESULT ( STDMETHODCALLTYPE *GetAcHuffmanTable )( 
             __RPC__in IWICJpegFrameDecode * This,
             UINT scanIndex,
@@ -9394,6 +9900,7 @@ EXTERN_C const IID IID_IWICJpegFrameDecode;
             /* [annotation][out] */ 
             _Out_  DXGI_JPEG_AC_HUFFMAN_TABLE *pAcHuffmanTable);
         
+        DECLSPEC_XFGVIRT(IWICJpegFrameDecode, GetDcHuffmanTable)
         HRESULT ( STDMETHODCALLTYPE *GetDcHuffmanTable )( 
             __RPC__in IWICJpegFrameDecode * This,
             UINT scanIndex,
@@ -9401,6 +9908,7 @@ EXTERN_C const IID IID_IWICJpegFrameDecode;
             /* [annotation][out] */ 
             _Out_  DXGI_JPEG_DC_HUFFMAN_TABLE *pDcHuffmanTable);
         
+        DECLSPEC_XFGVIRT(IWICJpegFrameDecode, GetQuantizationTable)
         HRESULT ( STDMETHODCALLTYPE *GetQuantizationTable )( 
             __RPC__in IWICJpegFrameDecode * This,
             UINT scanIndex,
@@ -9408,17 +9916,20 @@ EXTERN_C const IID IID_IWICJpegFrameDecode;
             /* [annotation][out] */ 
             _Out_  DXGI_JPEG_QUANTIZATION_TABLE *pQuantizationTable);
         
+        DECLSPEC_XFGVIRT(IWICJpegFrameDecode, GetFrameHeader)
         HRESULT ( STDMETHODCALLTYPE *GetFrameHeader )( 
             __RPC__in IWICJpegFrameDecode * This,
             /* [annotation][out] */ 
             _Out_  WICJpegFrameHeader *pFrameHeader);
         
+        DECLSPEC_XFGVIRT(IWICJpegFrameDecode, GetScanHeader)
         HRESULT ( STDMETHODCALLTYPE *GetScanHeader )( 
             __RPC__in IWICJpegFrameDecode * This,
             UINT scanIndex,
             /* [annotation][out] */ 
             _Out_  WICJpegScanHeader *pScanHeader);
         
+        DECLSPEC_XFGVIRT(IWICJpegFrameDecode, CopyScan)
         HRESULT ( STDMETHODCALLTYPE *CopyScan )( 
             __RPC__in IWICJpegFrameDecode * This,
             UINT scanIndex,
@@ -9430,6 +9941,7 @@ EXTERN_C const IID IID_IWICJpegFrameDecode;
             /* [annotation][out] */ 
             _Out_  UINT *pcbScanDataActual);
         
+        DECLSPEC_XFGVIRT(IWICJpegFrameDecode, CopyMinimalStream)
         HRESULT ( STDMETHODCALLTYPE *CopyMinimalStream )( 
             __RPC__in IWICJpegFrameDecode * This,
             UINT streamOffset,
@@ -9552,6 +10064,7 @@ EXTERN_C const IID IID_IWICJpegFrameEncode;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWICJpegFrameEncode * This,
             /* [annotation][in] */ 
@@ -9559,12 +10072,15 @@ EXTERN_C const IID IID_IWICJpegFrameEncode;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWICJpegFrameEncode * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWICJpegFrameEncode * This);
         
+        DECLSPEC_XFGVIRT(IWICJpegFrameEncode, GetAcHuffmanTable)
         HRESULT ( STDMETHODCALLTYPE *GetAcHuffmanTable )( 
             __RPC__in IWICJpegFrameEncode * This,
             UINT scanIndex,
@@ -9572,6 +10088,7 @@ EXTERN_C const IID IID_IWICJpegFrameEncode;
             /* [annotation][out] */ 
             _Out_  DXGI_JPEG_AC_HUFFMAN_TABLE *pAcHuffmanTable);
         
+        DECLSPEC_XFGVIRT(IWICJpegFrameEncode, GetDcHuffmanTable)
         HRESULT ( STDMETHODCALLTYPE *GetDcHuffmanTable )( 
             __RPC__in IWICJpegFrameEncode * This,
             UINT scanIndex,
@@ -9579,6 +10096,7 @@ EXTERN_C const IID IID_IWICJpegFrameEncode;
             /* [annotation][out] */ 
             _Out_  DXGI_JPEG_DC_HUFFMAN_TABLE *pDcHuffmanTable);
         
+        DECLSPEC_XFGVIRT(IWICJpegFrameEncode, GetQuantizationTable)
         HRESULT ( STDMETHODCALLTYPE *GetQuantizationTable )( 
             __RPC__in IWICJpegFrameEncode * This,
             UINT scanIndex,
@@ -9586,6 +10104,7 @@ EXTERN_C const IID IID_IWICJpegFrameEncode;
             /* [annotation][out] */ 
             _Out_  DXGI_JPEG_QUANTIZATION_TABLE *pQuantizationTable);
         
+        DECLSPEC_XFGVIRT(IWICJpegFrameEncode, WriteScan)
         HRESULT ( STDMETHODCALLTYPE *WriteScan )( 
             __RPC__in IWICJpegFrameEncode * This,
             /* [annotation][in] */ 

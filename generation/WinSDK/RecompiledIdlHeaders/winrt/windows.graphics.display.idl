@@ -10,6 +10,7 @@ import "AsyncInfo.idl";
 import "EventToken.idl";
 import "windowscontracts.idl";
 import "Windows.Foundation.idl";
+import "Windows.Graphics.idl";
 import "Windows.Storage.Streams.idl";
 
 // Forward Declare
@@ -20,6 +21,13 @@ namespace Windows
         typedef struct Point Point;
 
         apicontract UniversalApiContract;
+    }
+}
+namespace Windows
+{
+    namespace Graphics
+    {
+        typedef struct DisplayId DisplayId;
     }
 }
 namespace Windows
@@ -94,6 +102,10 @@ namespace Windows
 
             interface IDisplayPropertiesStatics;
 
+            interface IDisplayServices;
+
+            interface IDisplayServicesStatics;
+
             runtimeclass AdvancedColorInfo;
 
             runtimeclass BrightnessOverride;
@@ -111,6 +123,8 @@ namespace Windows
             runtimeclass DisplayInformation;
 
             runtimeclass DisplayProperties;
+
+            runtimeclass DisplayServices;
         }
     }
 }
@@ -485,6 +499,21 @@ namespace Windows
                 [deprecated("DisplayProperties may be altered or unavailable for releases after Windows Phone 8.1. Instead, use DisplayInformation.", deprecate, Windows.Foundation.UniversalApiContract, 1.0)] [eventremove] HRESULT DisplayContentsInvalidated([in] EventRegistrationToken token);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [exclusiveto(Windows.Graphics.Display.DisplayServices)]
+            [uuid(1B54F32B-890D-5747-BD26-FDBDEB0C8A71)]
+            interface IDisplayServices : IInspectable
+            {
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [exclusiveto(Windows.Graphics.Display.DisplayServices)]
+            [uuid(DC2096BF-730A-5560-B461-91C13D692E0C)]
+            interface IDisplayServicesStatics : IInspectable
+            {
+                HRESULT FindAll([out] UINT32* __resultSize, [out] [retval] [size_is(, *__resultSize)] Windows.Graphics.DisplayId** result);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 6.0)]
             [marshaling_behavior(agile)]
             [threading(both)]
@@ -563,6 +592,15 @@ namespace Windows
             [static(Windows.Graphics.Display.IDisplayPropertiesStatics, Windows.Foundation.UniversalApiContract, 1.0)]
             runtimeclass DisplayProperties
             {
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [marshaling_behavior(agile)]
+            [static(Windows.Graphics.Display.IDisplayServicesStatics, Windows.Foundation.UniversalApiContract, 12.0)]
+            [threading(both)]
+            runtimeclass DisplayServices
+            {
+                [default] interface Windows.Graphics.Display.IDisplayServices;
             }
         }
     }

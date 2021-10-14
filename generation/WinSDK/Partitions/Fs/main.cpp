@@ -32,4 +32,8 @@
 #include <lmstats.h>
 #include <filehc.h>
 #include <winver.h> // Also includes verrsrc.h
-//#include <verrsrc.h>
+#include <diskguid.h>
+#include <fttypes.h>
+#include <ioringapi.h>
+#include <ntioring_x.h>
+

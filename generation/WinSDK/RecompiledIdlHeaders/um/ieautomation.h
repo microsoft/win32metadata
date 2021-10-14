@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -156,6 +164,7 @@ EXTERN_C const IID IID_IEnumManagerFrames;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumManagerFrames * This,
             /* [annotation][in] */ 
@@ -163,12 +172,15 @@ EXTERN_C const IID IID_IEnumManagerFrames;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumManagerFrames * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumManagerFrames * This);
         
+        DECLSPEC_XFGVIRT(IEnumManagerFrames, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumManagerFrames * This,
             /* [annotation][in] */ 
@@ -178,19 +190,23 @@ EXTERN_C const IID IID_IEnumManagerFrames;
             /* [annotation][out] */ 
             _Out_  ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IEnumManagerFrames, Count)
         HRESULT ( STDMETHODCALLTYPE *Count )( 
             __RPC__in IEnumManagerFrames * This,
             /* [annotation][out] */ 
             _Out_  ULONG *pcelt);
         
+        DECLSPEC_XFGVIRT(IEnumManagerFrames, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumManagerFrames * This,
             /* [annotation][in] */ 
             _In_  ULONG celt);
         
+        DECLSPEC_XFGVIRT(IEnumManagerFrames, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumManagerFrames * This);
         
+        DECLSPEC_XFGVIRT(IEnumManagerFrames, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumManagerFrames * This,
             /* [annotation][out] */ 
@@ -279,6 +295,7 @@ EXTERN_C const IID IID_IInternetExplorerManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInternetExplorerManager * This,
             /* [annotation][in] */ 
@@ -286,12 +303,15 @@ EXTERN_C const IID IID_IInternetExplorerManager;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInternetExplorerManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInternetExplorerManager * This);
         
+        DECLSPEC_XFGVIRT(IInternetExplorerManager, CreateObject)
         HRESULT ( STDMETHODCALLTYPE *CreateObject )( 
             __RPC__in IInternetExplorerManager * This,
             /* [annotation][in] */ 
@@ -368,6 +388,7 @@ EXTERN_C const IID IID_IInternetExplorerManager2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInternetExplorerManager2 * This,
             /* [annotation][in] */ 
@@ -375,12 +396,15 @@ EXTERN_C const IID IID_IInternetExplorerManager2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInternetExplorerManager2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInternetExplorerManager2 * This);
         
+        DECLSPEC_XFGVIRT(IInternetExplorerManager2, EnumFrameWindows)
         HRESULT ( STDMETHODCALLTYPE *EnumFrameWindows )( 
             __RPC__in IInternetExplorerManager2 * This,
             /* [annotation][out] */ 

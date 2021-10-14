@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 #pragma warning( disable: 4049 )  /* more than 64k source lines */
@@ -31,6 +31,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -181,46 +189,56 @@ EXTERN_C const IID IID_IWMPNodeRealEstate;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPNodeRealEstate * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPNodeRealEstate * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPNodeRealEstate * This);
         
+        DECLSPEC_XFGVIRT(IWMPNodeRealEstate, GetDesiredSize)
         HRESULT ( STDMETHODCALLTYPE *GetDesiredSize )( 
             IWMPNodeRealEstate * This,
             /* [out] */ LPSIZE pSize);
         
+        DECLSPEC_XFGVIRT(IWMPNodeRealEstate, SetRects)
         HRESULT ( STDMETHODCALLTYPE *SetRects )( 
             IWMPNodeRealEstate * This,
             /* [in] */ const RECT *pSrc,
             /* [in] */ const RECT *pDest,
             /* [in] */ const RECT *pClip);
         
+        DECLSPEC_XFGVIRT(IWMPNodeRealEstate, GetRects)
         HRESULT ( STDMETHODCALLTYPE *GetRects )( 
             IWMPNodeRealEstate * This,
             /* [out] */ RECT *pSrc,
             /* [out] */ RECT *pDest,
             /* [out] */ RECT *pClip);
         
+        DECLSPEC_XFGVIRT(IWMPNodeRealEstate, SetWindowless)
         HRESULT ( STDMETHODCALLTYPE *SetWindowless )( 
             IWMPNodeRealEstate * This,
             /* [in] */ BOOL fWindowless);
         
+        DECLSPEC_XFGVIRT(IWMPNodeRealEstate, GetWindowless)
         HRESULT ( STDMETHODCALLTYPE *GetWindowless )( 
             IWMPNodeRealEstate * This,
             /* [out] */ BOOL *pfWindowless);
         
+        DECLSPEC_XFGVIRT(IWMPNodeRealEstate, SetFullScreen)
         HRESULT ( STDMETHODCALLTYPE *SetFullScreen )( 
             IWMPNodeRealEstate * This,
             /* [in] */ BOOL fFullScreen);
         
+        DECLSPEC_XFGVIRT(IWMPNodeRealEstate, GetFullScreen)
         HRESULT ( STDMETHODCALLTYPE *GetFullScreen )( 
             IWMPNodeRealEstate * This,
             /* [out] */ BOOL *pfFullScreen);
@@ -310,22 +328,27 @@ EXTERN_C const IID IID_IWMPNodeRealEstateHost;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPNodeRealEstateHost * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPNodeRealEstateHost * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPNodeRealEstateHost * This);
         
+        DECLSPEC_XFGVIRT(IWMPNodeRealEstateHost, OnDesiredSizeChange)
         HRESULT ( STDMETHODCALLTYPE *OnDesiredSizeChange )( 
             IWMPNodeRealEstateHost * This,
             /* [in] */ LPSIZE pSize);
         
+        DECLSPEC_XFGVIRT(IWMPNodeRealEstateHost, OnFullScreenTransition)
         HRESULT ( STDMETHODCALLTYPE *OnFullScreenTransition )( 
             IWMPNodeRealEstateHost * This,
             /* [in] */ BOOL fFullScreen);
@@ -410,22 +433,27 @@ EXTERN_C const IID IID_IWMPNodeWindowed;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPNodeWindowed * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPNodeWindowed * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPNodeWindowed * This);
         
+        DECLSPEC_XFGVIRT(IWMPNodeWindowed, SetOwnerWindow)
         HRESULT ( STDMETHODCALLTYPE *SetOwnerWindow )( 
             IWMPNodeWindowed * This,
             /* [in] */ OLE_HWND hwnd);
         
+        DECLSPEC_XFGVIRT(IWMPNodeWindowed, GetOwnerWindow)
         HRESULT ( STDMETHODCALLTYPE *GetOwnerWindow )( 
             IWMPNodeWindowed * This,
             /* [out] */ OLE_HWND *phwnd);
@@ -501,18 +529,22 @@ EXTERN_C const IID IID_IWMPNodeWindowedHost;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPNodeWindowedHost * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPNodeWindowedHost * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPNodeWindowedHost * This);
         
+        DECLSPEC_XFGVIRT(IWMPNodeWindowedHost, OnWindowMessageFromRenderer)
         HRESULT ( STDMETHODCALLTYPE *OnWindowMessageFromRenderer )( 
             IWMPNodeWindowedHost * This,
             /* [in] */ UINT uMsg,
@@ -589,18 +621,22 @@ EXTERN_C const IID IID_IWMPWindowMessageSink;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPWindowMessageSink * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPWindowMessageSink * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPWindowMessageSink * This);
         
+        DECLSPEC_XFGVIRT(IWMPWindowMessageSink, OnWindowMessage)
         HRESULT ( STDMETHODCALLTYPE *OnWindowMessage )( 
             IWMPWindowMessageSink * This,
             UINT uMsg,
@@ -684,18 +720,22 @@ EXTERN_C const IID IID_IWMPNodeWindowless;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPNodeWindowless * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPNodeWindowless * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPNodeWindowless * This);
         
+        DECLSPEC_XFGVIRT(IWMPWindowMessageSink, OnWindowMessage)
         HRESULT ( STDMETHODCALLTYPE *OnWindowMessage )( 
             IWMPNodeWindowless * This,
             UINT uMsg,
@@ -704,6 +744,7 @@ EXTERN_C const IID IID_IWMPNodeWindowless;
             LRESULT *plRet,
             BOOL *pfHandled);
         
+        DECLSPEC_XFGVIRT(IWMPNodeWindowless, OnDraw)
         HRESULT ( STDMETHODCALLTYPE *OnDraw )( 
             IWMPNodeWindowless * This,
             /* [in] */ OLE_HDC hdc,
@@ -778,18 +819,22 @@ EXTERN_C const IID IID_IWMPNodeWindowlessHost;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPNodeWindowlessHost * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPNodeWindowlessHost * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPNodeWindowlessHost * This);
         
+        DECLSPEC_XFGVIRT(IWMPNodeWindowlessHost, InvalidateRect)
         HRESULT ( STDMETHODCALLTYPE *InvalidateRect )( 
             IWMPNodeWindowlessHost * This,
             /* [in] */ const RECT *prc,
@@ -859,18 +904,22 @@ EXTERN_C const IID IID_IWMPVideoRenderConfig;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPVideoRenderConfig * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPVideoRenderConfig * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPVideoRenderConfig * This);
         
+        DECLSPEC_XFGVIRT(IWMPVideoRenderConfig, put_presenterActivate)
         HRESULT ( STDMETHODCALLTYPE *put_presenterActivate )( 
             IWMPVideoRenderConfig * This,
             /* [in] */ IMFActivate *pActivate);
@@ -942,22 +991,27 @@ EXTERN_C const IID IID_IWMPAudioRenderConfig;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPAudioRenderConfig * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPAudioRenderConfig * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPAudioRenderConfig * This);
         
+        DECLSPEC_XFGVIRT(IWMPAudioRenderConfig, get_audioOutputDevice)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_audioOutputDevice )( 
             IWMPAudioRenderConfig * This,
             /* [retval][out] */ BSTR *pbstrOutputDevice);
         
+        DECLSPEC_XFGVIRT(IWMPAudioRenderConfig, put_audioOutputDevice)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_audioOutputDevice )( 
             IWMPAudioRenderConfig * This,
             /* [unique][in] */ BSTR bstrOutputDevice);
@@ -1032,22 +1086,27 @@ EXTERN_C const IID IID_IWMPRenderConfig;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPRenderConfig * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPRenderConfig * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPRenderConfig * This);
         
+        DECLSPEC_XFGVIRT(IWMPRenderConfig, put_inProcOnly)
         HRESULT ( STDMETHODCALLTYPE *put_inProcOnly )( 
             IWMPRenderConfig * This,
             /* [in] */ BOOL fInProc);
         
+        DECLSPEC_XFGVIRT(IWMPRenderConfig, get_inProcOnly)
         HRESULT ( STDMETHODCALLTYPE *get_inProcOnly )( 
             IWMPRenderConfig * This,
             /* [out] */ BOOL *pfInProc);

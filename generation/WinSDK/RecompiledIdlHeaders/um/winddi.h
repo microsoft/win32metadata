@@ -2459,7 +2459,7 @@ CLIPOBJ * APIENTRY EngCreateClip();
 
 ENGAPI
 VOID APIENTRY EngDeleteClip(
-    CLIPOBJ *pco
+    _In_opt_ CLIPOBJ *pco
     );
 
 /*

@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -333,6 +341,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICOMAdminCatalog * This,
             /* [annotation][in] */ 
@@ -340,17 +349,21 @@ EXTERN_C const IID IID_ICOMAdminCatalog;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICOMAdminCatalog * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICOMAdminCatalog * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICOMAdminCatalog * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICOMAdminCatalog * This,
             /* [annotation][in] */ 
@@ -360,6 +373,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICOMAdminCatalog * This,
             /* [annotation][in] */ 
@@ -372,6 +386,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICOMAdminCatalog * This,
             /* [annotation][in] */ 
@@ -391,6 +406,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, GetCollection)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetCollection )( 
             __RPC__in ICOMAdminCatalog * This,
             /* [annotation][in] */ 
@@ -398,6 +414,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog;
             /* [annotation][retval][out] */ 
             _Out_retval_  IDispatch **ppCatalogCollection);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, Connect)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Connect )( 
             __RPC__in ICOMAdminCatalog * This,
             /* [annotation][in] */ 
@@ -405,16 +422,19 @@ EXTERN_C const IID IID_ICOMAdminCatalog;
             /* [annotation][retval][out] */ 
             _Out_retval_  IDispatch **ppCatalogCollection);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, get_MajorVersion)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MajorVersion )( 
             __RPC__in ICOMAdminCatalog * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *plMajorVersion);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, get_MinorVersion)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MinorVersion )( 
             __RPC__in ICOMAdminCatalog * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *plMinorVersion);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, GetCollectionByQuery)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetCollectionByQuery )( 
             __RPC__in ICOMAdminCatalog * This,
             /* [annotation][in] */ 
@@ -424,6 +444,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog;
             /* [annotation][retval][out] */ 
             _Out_retval_  IDispatch **ppCatalogCollection);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, ImportComponent)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ImportComponent )( 
             __RPC__in ICOMAdminCatalog * This,
             /* [annotation][in] */ 
@@ -431,6 +452,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog;
             /* [annotation][in] */ 
             _In_  BSTR bstrCLSIDOrProgID);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, InstallComponent)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InstallComponent )( 
             __RPC__in ICOMAdminCatalog * This,
             /* [annotation][in] */ 
@@ -442,11 +464,13 @@ EXTERN_C const IID IID_ICOMAdminCatalog;
             /* [annotation][in] */ 
             _In_  BSTR bstrPSDLL);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, ShutdownApplication)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ShutdownApplication )( 
             __RPC__in ICOMAdminCatalog * This,
             /* [annotation][in] */ 
             _In_  BSTR bstrApplIDOrName);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, ExportApplication)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExportApplication )( 
             __RPC__in ICOMAdminCatalog * This,
             /* [annotation][in] */ 
@@ -456,6 +480,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog;
             /* [annotation][in] */ 
             _In_  long lOptions);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, InstallApplication)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InstallApplication )( 
             __RPC__in ICOMAdminCatalog * This,
             /* [annotation][in] */ 
@@ -466,21 +491,27 @@ EXTERN_C const IID IID_ICOMAdminCatalog;
             /* [optional][in] */ __RPC__in BSTR bstrPassword,
             /* [optional][in] */ __RPC__in BSTR bstrRSN);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, StopRouter)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *StopRouter )( 
             __RPC__in ICOMAdminCatalog * This);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, RefreshRouter)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RefreshRouter )( 
             __RPC__in ICOMAdminCatalog * This);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, StartRouter)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *StartRouter )( 
             __RPC__in ICOMAdminCatalog * This);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, Reserved1)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Reserved1 )( 
             __RPC__in ICOMAdminCatalog * This);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, Reserved2)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Reserved2 )( 
             __RPC__in ICOMAdminCatalog * This);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, InstallMultipleComponents)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InstallMultipleComponents )( 
             __RPC__in ICOMAdminCatalog * This,
             /* [annotation][in] */ 
@@ -490,6 +521,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog;
             /* [annotation][in] */ 
             _In_  SAFEARRAY * *ppsaVarCLSIDs);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, GetMultipleComponentsInfo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetMultipleComponentsInfo )( 
             __RPC__in ICOMAdminCatalog * This,
             /* [annotation][in] */ 
@@ -505,19 +537,23 @@ EXTERN_C const IID IID_ICOMAdminCatalog;
             /* [annotation][out] */ 
             _Out_  SAFEARRAY * *ppsaVarComponentFlags);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, RefreshComponents)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RefreshComponents )( 
             __RPC__in ICOMAdminCatalog * This);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, BackupREGDB)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *BackupREGDB )( 
             __RPC__in ICOMAdminCatalog * This,
             /* [annotation][in] */ 
             _In_  BSTR bstrBackupFilePath);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, RestoreREGDB)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RestoreREGDB )( 
             __RPC__in ICOMAdminCatalog * This,
             /* [annotation][in] */ 
             _In_  BSTR bstrBackupFilePath);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, QueryApplicationFile)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *QueryApplicationFile )( 
             __RPC__in ICOMAdminCatalog * This,
             /* [annotation][in] */ 
@@ -533,11 +569,13 @@ EXTERN_C const IID IID_ICOMAdminCatalog;
             /* [annotation][out] */ 
             _Out_  SAFEARRAY * *ppsaVarFileNames);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, StartApplication)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *StartApplication )( 
             __RPC__in ICOMAdminCatalog * This,
             /* [annotation][in] */ 
             _In_  BSTR bstrApplIdOrName);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, ServiceCheck)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ServiceCheck )( 
             __RPC__in ICOMAdminCatalog * This,
             /* [annotation][in] */ 
@@ -545,6 +583,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog;
             /* [annotation][retval][out] */ 
             _Out_retval_  long *plStatus);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, InstallMultipleEventClasses)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InstallMultipleEventClasses )( 
             __RPC__in ICOMAdminCatalog * This,
             /* [annotation][in] */ 
@@ -554,6 +593,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog;
             /* [annotation][in] */ 
             _In_  SAFEARRAY * *ppsaVarCLSIDS);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, InstallEventClass)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InstallEventClass )( 
             __RPC__in ICOMAdminCatalog * This,
             /* [annotation][in] */ 
@@ -565,6 +605,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog;
             /* [annotation][in] */ 
             _In_  BSTR bstrPSDLL);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, GetEventClassesForIID)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetEventClassesForIID )( 
             __RPC__in ICOMAdminCatalog * This,
             /* [annotation][in] */ 
@@ -949,6 +990,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -956,17 +998,21 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICOMAdminCatalog2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICOMAdminCatalog2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -976,6 +1022,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -988,6 +1035,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1007,6 +1055,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, GetCollection)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetCollection )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1014,6 +1063,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][retval][out] */ 
             _Out_retval_  IDispatch **ppCatalogCollection);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, Connect)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Connect )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1021,16 +1071,19 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][retval][out] */ 
             _Out_retval_  IDispatch **ppCatalogCollection);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, get_MajorVersion)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MajorVersion )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *plMajorVersion);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, get_MinorVersion)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MinorVersion )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *plMinorVersion);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, GetCollectionByQuery)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetCollectionByQuery )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1040,6 +1093,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][retval][out] */ 
             _Out_retval_  IDispatch **ppCatalogCollection);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, ImportComponent)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ImportComponent )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1047,6 +1101,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][in] */ 
             _In_  BSTR bstrCLSIDOrProgID);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, InstallComponent)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InstallComponent )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1058,11 +1113,13 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][in] */ 
             _In_  BSTR bstrPSDLL);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, ShutdownApplication)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ShutdownApplication )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
             _In_  BSTR bstrApplIDOrName);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, ExportApplication)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExportApplication )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1072,6 +1129,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][in] */ 
             _In_  long lOptions);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, InstallApplication)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InstallApplication )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1082,21 +1140,27 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [optional][in] */ __RPC__in BSTR bstrPassword,
             /* [optional][in] */ __RPC__in BSTR bstrRSN);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, StopRouter)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *StopRouter )( 
             __RPC__in ICOMAdminCatalog2 * This);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, RefreshRouter)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RefreshRouter )( 
             __RPC__in ICOMAdminCatalog2 * This);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, StartRouter)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *StartRouter )( 
             __RPC__in ICOMAdminCatalog2 * This);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, Reserved1)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Reserved1 )( 
             __RPC__in ICOMAdminCatalog2 * This);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, Reserved2)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Reserved2 )( 
             __RPC__in ICOMAdminCatalog2 * This);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, InstallMultipleComponents)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InstallMultipleComponents )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1106,6 +1170,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][in] */ 
             _In_  SAFEARRAY * *ppsaVarCLSIDs);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, GetMultipleComponentsInfo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetMultipleComponentsInfo )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1121,19 +1186,23 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][out] */ 
             _Out_  SAFEARRAY * *ppsaVarComponentFlags);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, RefreshComponents)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RefreshComponents )( 
             __RPC__in ICOMAdminCatalog2 * This);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, BackupREGDB)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *BackupREGDB )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
             _In_  BSTR bstrBackupFilePath);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, RestoreREGDB)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RestoreREGDB )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
             _In_  BSTR bstrBackupFilePath);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, QueryApplicationFile)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *QueryApplicationFile )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1149,11 +1218,13 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][out] */ 
             _Out_  SAFEARRAY * *ppsaVarFileNames);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, StartApplication)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *StartApplication )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
             _In_  BSTR bstrApplIdOrName);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, ServiceCheck)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ServiceCheck )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1161,6 +1232,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][retval][out] */ 
             _Out_retval_  long *plStatus);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, InstallMultipleEventClasses)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InstallMultipleEventClasses )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1170,6 +1242,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][in] */ 
             _In_  SAFEARRAY * *ppsaVarCLSIDS);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, InstallEventClass)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InstallEventClass )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1181,6 +1254,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][in] */ 
             _In_  BSTR bstrPSDLL);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog, GetEventClassesForIID)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetEventClassesForIID )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1192,6 +1266,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][out] */ 
             _Out_  SAFEARRAY * *ppsaVarDescriptions);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog2, GetCollectionByQuery2)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetCollectionByQuery2 )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1201,6 +1276,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][retval][out] */ 
             _Out_retval_  IDispatch **ppCatalogCollection);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog2, GetApplicationInstanceIDFromProcessID)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetApplicationInstanceIDFromProcessID )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1208,21 +1284,25 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pbstrApplicationInstanceID);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog2, ShutdownApplicationInstances)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ShutdownApplicationInstances )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
             _In_  VARIANT *pVarApplicationInstanceID);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog2, PauseApplicationInstances)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *PauseApplicationInstances )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
             _In_  VARIANT *pVarApplicationInstanceID);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog2, ResumeApplicationInstances)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ResumeApplicationInstances )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
             _In_  VARIANT *pVarApplicationInstanceID);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog2, RecycleApplicationInstances)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RecycleApplicationInstances )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1230,6 +1310,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][in] */ 
             _In_  long lReasonCode);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog2, AreApplicationInstancesPaused)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AreApplicationInstancesPaused )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1237,6 +1318,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][retval][out] */ 
             _Out_retval_  VARIANT_BOOL *pVarBoolPaused);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog2, DumpApplicationInstance)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DumpApplicationInstance )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1248,11 +1330,13 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pbstrDumpFile);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog2, get_IsApplicationInstanceDumpSupported)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsApplicationInstanceDumpSupported )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  VARIANT_BOOL *pVarBoolDumpSupported);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog2, CreateServiceForApplication)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateServiceForApplication )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1272,11 +1356,13 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][in] */ 
             _In_  VARIANT_BOOL bDesktopOk);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog2, DeleteServiceForApplication)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteServiceForApplication )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
             _In_  BSTR bstrApplicationIDOrName);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog2, GetPartitionID)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetPartitionID )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1284,6 +1370,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pbstrPartitionID);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog2, GetPartitionName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetPartitionName )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1291,29 +1378,35 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pbstrPartitionName);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog2, put_CurrentPartition)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CurrentPartition )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
             _In_  BSTR bstrPartitionIDOrName);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog2, get_CurrentPartitionID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentPartitionID )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pbstrPartitionID);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog2, get_CurrentPartitionName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentPartitionName )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pbstrPartitionName);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog2, get_GlobalPartitionID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_GlobalPartitionID )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pbstrGlobalPartitionID);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog2, FlushPartitionCache)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *FlushPartitionCache )( 
             __RPC__in ICOMAdminCatalog2 * This);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog2, CopyApplications)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CopyApplications )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1323,6 +1416,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][in] */ 
             _In_  BSTR bstrDestinationPartitionIDOrName);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog2, CopyComponents)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CopyComponents )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1332,6 +1426,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][in] */ 
             _In_  BSTR bstrDestinationApplicationIDOrName);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog2, MoveComponents)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *MoveComponents )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1341,6 +1436,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][in] */ 
             _In_  BSTR bstrDestinationApplicationIDOrName);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog2, AliasComponent)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AliasComponent )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1354,6 +1450,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][in] */ 
             _In_  BSTR bstrNewClsid);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog2, IsSafeToDelete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsSafeToDelete )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1361,6 +1458,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][retval][out] */ 
             _Out_retval_  COMAdminInUse *pCOMAdminInUse);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog2, ImportUnconfiguredComponents)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ImportUnconfiguredComponents )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1369,6 +1467,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             _In_  VARIANT *pVarCLSIDOrProgID,
             /* [optional][in] */ __RPC__in VARIANT *pVarComponentType);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog2, PromoteUnconfiguredComponents)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *PromoteUnconfiguredComponents )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1377,6 +1476,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             _In_  VARIANT *pVarCLSIDOrProgID,
             /* [optional][in] */ __RPC__in VARIANT *pVarComponentType);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog2, ImportComponents)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ImportComponents )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1385,11 +1485,13 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             _In_  VARIANT *pVarCLSIDOrProgID,
             /* [optional][in] */ __RPC__in VARIANT *pVarComponentType);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog2, get_Is64BitCatalogServer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Is64BitCatalogServer )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  VARIANT_BOOL *pbIs64Bit);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog2, ExportPartition)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExportPartition )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1399,6 +1501,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][in] */ 
             _In_  long lOptions);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog2, InstallPartition)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InstallPartition )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1414,6 +1517,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][in] */ 
             _In_  BSTR bstrRSN);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog2, QueryApplicationFile2)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *QueryApplicationFile2 )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1421,6 +1525,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
             /* [annotation][retval][out] */ 
             _Out_retval_  IDispatch **ppFilesForImport);
         
+        DECLSPEC_XFGVIRT(ICOMAdminCatalog2, GetComponentVersionCount)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetComponentVersionCount )( 
             __RPC__in ICOMAdminCatalog2 * This,
             /* [annotation][in] */ 
@@ -1707,6 +1812,7 @@ EXTERN_C const IID IID_ICatalogObject;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICatalogObject * This,
             /* [annotation][in] */ 
@@ -1714,17 +1820,21 @@ EXTERN_C const IID IID_ICatalogObject;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICatalogObject * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICatalogObject * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICatalogObject * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICatalogObject * This,
             /* [annotation][in] */ 
@@ -1734,6 +1844,7 @@ EXTERN_C const IID IID_ICatalogObject;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICatalogObject * This,
             /* [annotation][in] */ 
@@ -1746,6 +1857,7 @@ EXTERN_C const IID IID_ICatalogObject;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICatalogObject * This,
             /* [annotation][in] */ 
@@ -1765,6 +1877,7 @@ EXTERN_C const IID IID_ICatalogObject;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICatalogObject, get_Value)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
             __RPC__in ICatalogObject * This,
             /* [annotation][in] */ 
@@ -1772,6 +1885,7 @@ EXTERN_C const IID IID_ICatalogObject;
             /* [annotation][retval][out] */ 
             _Out_retval_  VARIANT *pvarRetVal);
         
+        DECLSPEC_XFGVIRT(ICatalogObject, put_Value)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Value )( 
             __RPC__in ICatalogObject * This,
             /* [annotation][in] */ 
@@ -1779,16 +1893,19 @@ EXTERN_C const IID IID_ICatalogObject;
             /* [annotation][in] */ 
             _In_  VARIANT val);
         
+        DECLSPEC_XFGVIRT(ICatalogObject, get_Key)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Key )( 
             __RPC__in ICatalogObject * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  VARIANT *pvarRetVal);
         
+        DECLSPEC_XFGVIRT(ICatalogObject, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ICatalogObject * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  VARIANT *pvarRetVal);
         
+        DECLSPEC_XFGVIRT(ICatalogObject, IsPropertyReadOnly)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsPropertyReadOnly )( 
             __RPC__in ICatalogObject * This,
             /* [annotation][in] */ 
@@ -1796,11 +1913,13 @@ EXTERN_C const IID IID_ICatalogObject;
             /* [annotation][retval][out] */ 
             _Out_retval_  VARIANT_BOOL *pbRetVal);
         
+        DECLSPEC_XFGVIRT(ICatalogObject, get_Valid)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Valid )( 
             __RPC__in ICatalogObject * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  VARIANT_BOOL *pbRetVal);
         
+        DECLSPEC_XFGVIRT(ICatalogObject, IsPropertyWriteOnly)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsPropertyWriteOnly )( 
             __RPC__in ICatalogObject * This,
             /* [annotation][in] */ 
@@ -1970,6 +2089,7 @@ EXTERN_C const IID IID_ICatalogCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICatalogCollection * This,
             /* [annotation][in] */ 
@@ -1977,17 +2097,21 @@ EXTERN_C const IID IID_ICatalogCollection;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICatalogCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICatalogCollection * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICatalogCollection * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICatalogCollection * This,
             /* [annotation][in] */ 
@@ -1997,6 +2121,7 @@ EXTERN_C const IID IID_ICatalogCollection;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICatalogCollection * This,
             /* [annotation][in] */ 
@@ -2009,6 +2134,7 @@ EXTERN_C const IID IID_ICatalogCollection;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICatalogCollection * This,
             /* [annotation][in] */ 
@@ -2028,11 +2154,13 @@ EXTERN_C const IID IID_ICatalogCollection;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICatalogCollection, get__NewEnum)
         /* [id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ICatalogCollection * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IUnknown **ppEnumVariant);
         
+        DECLSPEC_XFGVIRT(ICatalogCollection, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ICatalogCollection * This,
             /* [annotation][in] */ 
@@ -2040,29 +2168,35 @@ EXTERN_C const IID IID_ICatalogCollection;
             /* [annotation][retval][out] */ 
             _Out_retval_  IDispatch **ppCatalogObject);
         
+        DECLSPEC_XFGVIRT(ICatalogCollection, get_Count)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ICatalogCollection * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *plObjectCount);
         
+        DECLSPEC_XFGVIRT(ICatalogCollection, Remove)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in ICatalogCollection * This,
             /* [annotation][in] */ 
             _In_  long lIndex);
         
+        DECLSPEC_XFGVIRT(ICatalogCollection, Add)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in ICatalogCollection * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IDispatch **ppCatalogObject);
         
+        DECLSPEC_XFGVIRT(ICatalogCollection, Populate)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Populate )( 
             __RPC__in ICatalogCollection * This);
         
+        DECLSPEC_XFGVIRT(ICatalogCollection, SaveChanges)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SaveChanges )( 
             __RPC__in ICatalogCollection * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *pcChanges);
         
+        DECLSPEC_XFGVIRT(ICatalogCollection, GetCollection)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetCollection )( 
             __RPC__in ICatalogCollection * This,
             /* [annotation][in] */ 
@@ -2072,41 +2206,49 @@ EXTERN_C const IID IID_ICatalogCollection;
             /* [annotation][retval][out] */ 
             _Out_retval_  IDispatch **ppCatalogCollection);
         
+        DECLSPEC_XFGVIRT(ICatalogCollection, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ICatalogCollection * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  VARIANT *pVarNamel);
         
+        DECLSPEC_XFGVIRT(ICatalogCollection, get_AddEnabled)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AddEnabled )( 
             __RPC__in ICatalogCollection * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  VARIANT_BOOL *pVarBool);
         
+        DECLSPEC_XFGVIRT(ICatalogCollection, get_RemoveEnabled)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RemoveEnabled )( 
             __RPC__in ICatalogCollection * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  VARIANT_BOOL *pVarBool);
         
+        DECLSPEC_XFGVIRT(ICatalogCollection, GetUtilInterface)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetUtilInterface )( 
             __RPC__in ICatalogCollection * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IDispatch **ppIDispatch);
         
+        DECLSPEC_XFGVIRT(ICatalogCollection, get_DataStoreMajorVersion)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DataStoreMajorVersion )( 
             __RPC__in ICatalogCollection * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *plMajorVersion);
         
+        DECLSPEC_XFGVIRT(ICatalogCollection, get_DataStoreMinorVersion)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DataStoreMinorVersion )( 
             __RPC__in ICatalogCollection * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *plMinorVersionl);
         
+        DECLSPEC_XFGVIRT(ICatalogCollection, PopulateByKey)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *PopulateByKey )( 
             __RPC__in ICatalogCollection * This,
             /* [annotation][in] */ 
             _In_  SAFEARRAY * psaKeys);
         
+        DECLSPEC_XFGVIRT(ICatalogCollection, PopulateByQuery)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *PopulateByQuery )( 
             __RPC__in ICatalogCollection * This,
             /* [annotation][in] */ 

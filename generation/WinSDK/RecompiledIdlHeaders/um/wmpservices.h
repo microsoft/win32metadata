@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 #pragma warning( disable: 4049 )  /* more than 64k source lines */
@@ -31,6 +31,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -155,22 +163,27 @@ EXTERN_C const IID IID_IWMPServices;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPServices * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPServices * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPServices * This);
         
+        DECLSPEC_XFGVIRT(IWMPServices, GetStreamTime)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetStreamTime )( 
             IWMPServices * This,
             /* [retval][out] */ LONGLONG *prt);
         
+        DECLSPEC_XFGVIRT(IWMPServices, GetStreamState)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetStreamState )( 
             IWMPServices * This,
             /* [retval][out] */ WMPServices_StreamState *pState);
@@ -265,18 +278,22 @@ EXTERN_C const IID IID_IWMPMediaPluginRegistrar;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPMediaPluginRegistrar * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPMediaPluginRegistrar * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPMediaPluginRegistrar * This);
         
+        DECLSPEC_XFGVIRT(IWMPMediaPluginRegistrar, WMPRegisterPlayerPlugin)
         HRESULT ( STDMETHODCALLTYPE *WMPRegisterPlayerPlugin )( 
             IWMPMediaPluginRegistrar * This,
             /* [in] */ LPWSTR pwszFriendlyName,
@@ -288,6 +305,7 @@ EXTERN_C const IID IID_IWMPMediaPluginRegistrar;
             UINT cMediaTypes,
             LPVOID pMediaTypes);
         
+        DECLSPEC_XFGVIRT(IWMPMediaPluginRegistrar, WMPUnRegisterPlayerPlugin)
         HRESULT ( STDMETHODCALLTYPE *WMPUnRegisterPlayerPlugin )( 
             IWMPMediaPluginRegistrar * This,
             GUID guidPluginType,
@@ -387,37 +405,46 @@ EXTERN_C const IID IID_IWMPPlugin;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPPlugin * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPPlugin * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPPlugin * This);
         
+        DECLSPEC_XFGVIRT(IWMPPlugin, Init)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Init )( 
             IWMPPlugin * This,
             DWORD_PTR dwPlaybackContext);
         
+        DECLSPEC_XFGVIRT(IWMPPlugin, Shutdown)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Shutdown )( 
             IWMPPlugin * This);
         
+        DECLSPEC_XFGVIRT(IWMPPlugin, GetID)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetID )( 
             IWMPPlugin * This,
             /* [retval][out] */ GUID *pGUID);
         
+        DECLSPEC_XFGVIRT(IWMPPlugin, GetCaps)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetCaps )( 
             IWMPPlugin * This,
             /* [retval][out] */ DWORD *pdwFlags);
         
+        DECLSPEC_XFGVIRT(IWMPPlugin, AdviseWMPServices)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AdviseWMPServices )( 
             IWMPPlugin * This,
             /* [in] */ IWMPServices *pWMPServices);
         
+        DECLSPEC_XFGVIRT(IWMPPlugin, UnAdviseWMPServices)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *UnAdviseWMPServices )( 
             IWMPPlugin * This);
         
@@ -503,22 +530,27 @@ EXTERN_C const IID IID_IWMPPluginEnable;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPPluginEnable * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPPluginEnable * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPPluginEnable * This);
         
+        DECLSPEC_XFGVIRT(IWMPPluginEnable, SetEnable)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetEnable )( 
             IWMPPluginEnable * This,
             /* [in] */ BOOL fEnable);
         
+        DECLSPEC_XFGVIRT(IWMPPluginEnable, GetEnable)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetEnable )( 
             IWMPPluginEnable * This,
             /* [out] */ BOOL *pfEnable);
@@ -597,27 +629,33 @@ EXTERN_C const IID IID_IWMPGraphCreation;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPGraphCreation * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPGraphCreation * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPGraphCreation * This);
         
+        DECLSPEC_XFGVIRT(IWMPGraphCreation, GraphCreationPreRender)
         HRESULT ( STDMETHODCALLTYPE *GraphCreationPreRender )( 
             IWMPGraphCreation * This,
             /* [in] */ IUnknown *pFilterGraph,
             /* [in] */ IUnknown *pReserved);
         
+        DECLSPEC_XFGVIRT(IWMPGraphCreation, GraphCreationPostRender)
         HRESULT ( STDMETHODCALLTYPE *GraphCreationPostRender )( 
             IWMPGraphCreation * This,
             /* [in] */ IUnknown *pFilterGraph);
         
+        DECLSPEC_XFGVIRT(IWMPGraphCreation, GetGraphCreationFlags)
         HRESULT ( STDMETHODCALLTYPE *GetGraphCreationFlags )( 
             IWMPGraphCreation * This,
             /* [out] */ DWORD *pdwFlags);
@@ -710,24 +748,29 @@ EXTERN_C const IID IID_IWMPConvert;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPConvert * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPConvert * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPConvert * This);
         
+        DECLSPEC_XFGVIRT(IWMPConvert, ConvertFile)
         HRESULT ( STDMETHODCALLTYPE *ConvertFile )( 
             IWMPConvert * This,
             /* [in] */ BSTR bstrInputFile,
             /* [in] */ BSTR bstrDestinationFolder,
             /* [out] */ BSTR *pbstrOutputFile);
         
+        DECLSPEC_XFGVIRT(IWMPConvert, GetErrorURL)
         HRESULT ( STDMETHODCALLTYPE *GetErrorURL )( 
             IWMPConvert * This,
             /* [out] */ BSTR *pbstrURL);
@@ -799,18 +842,22 @@ EXTERN_C const IID IID_IWMPTranscodePolicy;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPTranscodePolicy * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPTranscodePolicy * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPTranscodePolicy * This);
         
+        DECLSPEC_XFGVIRT(IWMPTranscodePolicy, allowTranscode)
         HRESULT ( STDMETHODCALLTYPE *allowTranscode )( 
             IWMPTranscodePolicy * This,
             /* [out] */ VARIANT_BOOL *pvbAllow);
@@ -888,18 +935,22 @@ EXTERN_C const IID IID_IWMPUserEventSink;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPUserEventSink * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPUserEventSink * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPUserEventSink * This);
         
+        DECLSPEC_XFGVIRT(IWMPUserEventSink, NotifyUserEvent)
         HRESULT ( STDMETHODCALLTYPE *NotifyUserEvent )( 
             IWMPUserEventSink * This,
             /* [in] */ long EventCode);

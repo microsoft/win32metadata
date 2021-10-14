@@ -163,6 +163,13 @@ typedef enum _HTTP_SERVER_PROPERTY
     HttpServerProtectionLevelProperty = 11,
 
 
+    //
+    // Used for manipulating Url Group to Delegate Request Queue association.
+    //
+
+    HttpServerDelegationProperty = 16,
+
+
 } HTTP_SERVER_PROPERTY, *PHTTP_SERVER_PROPERTY;
 
 
@@ -589,6 +596,7 @@ typedef struct _HTTP_REQUEST_TOKEN_BINDING_INFO
 #define HTTP_LOG_FIELD_SITE_ID               0x01000000
 #define HTTP_LOG_FIELD_REASON                0x02000000
 #define HTTP_LOG_FIELD_QUEUE_NAME            0x04000000
+#define HTTP_LOG_FIELD_CORRELATION_ID        0x40000000
 
 //
 // Defines the logging type.
@@ -815,6 +823,7 @@ typedef struct _HTTP_PROTECTION_LEVEL_INFO
 
 #define HTTP_CREATE_REQUEST_QUEUE_FLAG_OPEN_EXISTING       (0x00000001)
 #define HTTP_CREATE_REQUEST_QUEUE_FLAG_CONTROLLER          (0x00000002)
+#define HTTP_CREATE_REQUEST_QUEUE_FLAG_DELEGATION          (0x00000008)
 
 #endif // _WIN32_WINNT >= 0x0600
 
@@ -916,6 +925,8 @@ typedef HTTP_OPAQUE_ID HTTP_SERVER_SESSION_ID, *PHTTP_SERVER_SESSION_ID;
 
 // #if _WIN32_WINNT >= Somevalue
 typedef HTTP_OPAQUE_ID HTTP_CLIENT_REQUEST_ID, *PHTTP_CLIENT_REQUEST_ID;
+typedef HTTP_OPAQUE_ID HTTP_CLIENT_CONNECTION_ID, *PHTTP_CLIENT_CONNECTION_ID;
+typedef HTTP_OPAQUE_ID HTTP_CLIENT_STREAM_ID, *PHTTP_CLIENT_STREAM_ID;
 
 #endif // _WIN32_WINNT >= 0x0600
 
@@ -969,7 +980,7 @@ typedef struct _HTTP_VERSION
 do {                                                        \
     (version).MajorVersion = (major);                       \
     (version).MinorVersion = (minor);                       \
-} while (0, 0)
+} while (0)
 
 #define HTTP_EQUAL_VERSION(version, major, minor)           \
     ((version).MajorVersion == (major) &&                   \
@@ -1222,6 +1233,7 @@ typedef enum _HTTP_DATA_CHUNK_TYPE
     HttpDataChunkFromFileHandle,
     HttpDataChunkFromFragmentCache,
     HttpDataChunkFromFragmentCacheEx,
+    HttpDataChunkTrailers,
 
     HttpDataChunkMaximum
 
@@ -1290,6 +1302,16 @@ typedef struct _HTTP_DATA_CHUNK
 
         } FromFragmentCacheEx;
 
+        //
+        // Trailer data chunk that specifies Trailer headers.
+        //
+
+        struct
+        {
+            USHORT TrailerCount;
+            PHTTP_UNKNOWN_HEADER pTrailers;
+
+        } Trailers;
     };
 
 } HTTP_DATA_CHUNK, *PHTTP_DATA_CHUNK;
@@ -1365,15 +1387,32 @@ typedef struct _HTTP_RESPONSE_HEADERS
 typedef enum _HTTP_DELEGATE_REQUEST_PROPERTY_ID
 {
     DelegateRequestReservedProperty,
-
+    DelegateRequestDelegateUrlProperty,
 } HTTP_DELEGATE_REQUEST_PROPERTY_ID, *PHTTP_DELEGATE_REQUEST_PROPERTY_ID;
 
 typedef struct _HTTP_DELEGATE_REQUEST_PROPERTY_INFO
 {
-    HTTP_DELEGATE_REQUEST_PROPERTY_ID ProperyId;
+    HTTP_DELEGATE_REQUEST_PROPERTY_ID PropertyId;
     ULONG PropertyInfoLength;
     PVOID PropertyInfo;
 } HTTP_DELEGATE_REQUEST_PROPERTY_INFO, *PHTTP_DELEGATE_REQUEST_PROPERTY_INFO;
+
+//
+// Properties that can be passed down with IOCTL_HTTP_CREATE_REQUEST_QUEUE_EX
+//
+
+typedef enum _HTTP_CREATE_REQUEST_QUEUE_PROPERTY_ID
+{
+    CreateRequestQueueExternalIdProperty = 1,
+    CreateRequestQueueMax
+} HTTP_CREATE_REQUEST_QUEUE_PROPERTY_ID, *PHTTP_CREATE_REQUEST_QUEUE_PROPERTY_ID;
+
+typedef struct _HTTP_CREATE_REQUEST_QUEUE_PROPERTY_INFO
+{
+    HTTP_CREATE_REQUEST_QUEUE_PROPERTY_ID PropertyId;
+    ULONG PropertyInfoLength;
+    PVOID PropertyInfo;
+} HTTP_CREATE_REQUEST_QUEUE_PROPERTY_INFO, *PHTTP_CREATE_REQUEST_QUEUE_PROPERTY_INFO;
 
 //
 // Structure defining format of transport address. Use pLocalAddress->sa_family
@@ -1483,6 +1522,12 @@ typedef struct _HTTP_SSL_CLIENT_CERT_INFO
 
 #define HTTP_RECEIVE_SECURE_CHANNEL_TOKEN 0x1
 
+//
+// Flag to retrieve full certificate chain with HttpReceiveClientCertificate
+//
+
+#define HTTP_RECEIVE_FULL_CHAIN 0x2
+
 #endif
 
 //
@@ -1568,7 +1613,7 @@ typedef struct _HTTP_REQUEST_SIZING_INFO
 // HTTP_REQUEST_TIMING_INFO. Not all timings apply for every request.
 //
 
-typedef enum  _HTTP_REQUEST_TIMING_TYPE
+typedef enum _HTTP_REQUEST_TIMING_TYPE
 {
     HttpRequestTimingTypeConnectionStart,
     HttpRequestTimingTypeDataStart,
@@ -1633,7 +1678,7 @@ typedef enum _HTTP_REQUEST_INFO_TYPE
     HttpRequestInfoTypeTcpInfoV0,
     HttpRequestInfoTypeRequestSizing,
     HttpRequestInfoTypeQuicStats,
-    HttpRequestInfoTypeTcpInfoV1,
+    HttpRequestInfoTypeTcpInfoV1
 
 } HTTP_REQUEST_INFO_TYPE, *PHTTP_REQUEST_INFO_TYPE;
 
@@ -1870,11 +1915,13 @@ typedef HTTP_REQUEST * PHTTP_REQUEST;
 // to include the local ip while flushing kernel cache entries build for this
 // request if any.
 // HTTP_REQUEST_FLAG_HTTP2 - Indicates the request was received over HTTP/2.
+// HTTP_REQUEST_FLAG_HTTP3 - Indicates the request was received over HTTP/3.
 //
 
 #define HTTP_REQUEST_FLAG_MORE_ENTITY_BODY_EXISTS   0x00000001
 #define HTTP_REQUEST_FLAG_IP_ROUTED                 0x00000002
 #define HTTP_REQUEST_FLAG_HTTP2                     0x00000004
+#define HTTP_REQUEST_FLAG_HTTP3                     0x00000008
 
 
 //
@@ -2265,6 +2312,9 @@ typedef enum _HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE
     ExParamTypeHttp2Window,
     ExParamTypeHttp2SettingsLimits,
     ExParamTypeHttpPerformance,
+    ExParamTypeTlsRestrictions,
+    ExParamTypeErrorHeaders,
+    ExParamTypeTlsSessionTicketKeys,
     ExParamTypeMax
 } HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE, *PHTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE;
 
@@ -2292,36 +2342,45 @@ typedef struct _HTTP2_SETTINGS_LIMITS_PARAM
     DWORD Http2MaxSettingsPerMinute;
 } HTTP2_SETTINGS_LIMITS_PARAM, *PHTTP2_SETTINGS_LIMITS_PARAM;
 
+typedef enum _HTTP_PERFORMANCE_PARAM_TYPE
+{
+    PerformanceParamSendBufferingFlags,
+    PerformanceParamAggressiveICW,
+    PerformanceParamMaxSendBufferSize,
+    PerformanceParamMaxConcurrentClientStreams,
+    PerformanceParamMaxReceiveBufferSize,
+    PerformanceParamDecryptOnSspiThread,
+    PerformanceParamMax,
+} HTTP_PERFORMANCE_PARAM_TYPE, *PHTTP_PERFORMANCE_PARAM_TYPE;
+
 typedef struct _HTTP_PERFORMANCE_PARAM
 {
-    //
-    // The knob to enable/disable buffering synchronous sends.
-    //
-
-    ULONGLONG SendBufferingFlags;
-
-    //
-    // The knob to enable aggressive ICW.
-    //
-
-    BOOLEAN EnableAggressiveICW;
-
-    //
-    // The maximum send buffer size for connections on this binding.
-    //
-
-    ULONG MaxBufferedSendBytes;
-
-    //
-    // The maximum number of concurrent streams on an http/2 connection.
-    //
-
-    ULONG MaxConcurrentClientStreams;
-
+    HTTP_PERFORMANCE_PARAM_TYPE Type;
+    ULONG BufferSize;
+    PVOID Buffer;
 } HTTP_PERFORMANCE_PARAM, *PHTTP_PERFORMANCE_PARAM;
 
+typedef struct _HTTP_TLS_RESTRICTIONS_PARAM
+{
+    ULONG RestrictionCount;
+    PVOID TlsRestrictions;
+} HTTP_TLS_RESTRICTIONS_PARAM, *PHTTP_TLS_RESTRICTIONS_PARAM;
+
+typedef struct _HTTP_ERROR_HEADERS_PARAM
+{
+    USHORT StatusCode;
+    USHORT HeaderCount;
+    PHTTP_UNKNOWN_HEADER Headers;
+} HTTP_ERROR_HEADERS_PARAM, *PHTTP_ERROR_HEADERS_PARAM;
+
+typedef struct _HTTP_TLS_SESSION_TICKET_KEYS_PARAM
+{
+    ULONG SessionTicketKeyCount;
+    PVOID SessionTicketKeys;
+} HTTP_TLS_SESSION_TICKET_KEYS_PARAM, *PHTTP_TLS_SESSION_TICKET_KEYS_PARAM;
+
 //
-// This defines the exteded params for the ssl config record.
+// This defines the extended params for the ssl config record.
 //
 
 typedef struct _HTTP_SERVICE_CONFIG_SSL_PARAM_EX
@@ -2347,6 +2406,9 @@ typedef struct _HTTP_SERVICE_CONFIG_SSL_PARAM_EX
         HTTP2_WINDOW_SIZE_PARAM Http2WindowSizeParam;
         HTTP2_SETTINGS_LIMITS_PARAM Http2SettingsLimitsParam;
         HTTP_PERFORMANCE_PARAM HttpPerformanceParam;
+        HTTP_TLS_RESTRICTIONS_PARAM HttpTlsRestrictionsParam;
+        HTTP_ERROR_HEADERS_PARAM HttpErrorHeadersParam;
+        HTTP_TLS_SESSION_TICKET_KEYS_PARAM HttpTlsSessionTicketKeysParam;
     };
 } HTTP_SERVICE_CONFIG_SSL_PARAM_EX, *PHTTP_SERVICE_CONFIG_SSL_PARAM_EX;
 
@@ -2354,23 +2416,24 @@ typedef struct _HTTP_SERVICE_CONFIG_SSL_PARAM_EX
 // The SSL config flags.
 //
 
-#define HTTP_SERVICE_CONFIG_SSL_FLAG_USE_DS_MAPPER         0x00000001
-#define HTTP_SERVICE_CONFIG_SSL_FLAG_NEGOTIATE_CLIENT_CERT 0x00000002
+#define HTTP_SERVICE_CONFIG_SSL_FLAG_USE_DS_MAPPER              0x00000001
+#define HTTP_SERVICE_CONFIG_SSL_FLAG_NEGOTIATE_CLIENT_CERT      0x00000002
 #if _WIN32_WINNT < 0x0600
-#define HTTP_SERVICE_CONFIG_SSL_FLAG_NO_RAW_FILTER         0x00000004
+#define HTTP_SERVICE_CONFIG_SSL_FLAG_NO_RAW_FILTER              0x00000004
 #endif // _WIN32_WINNT < 0x0600
-#define HTTP_SERVICE_CONFIG_SSL_FLAG_REJECT                0x00000008
+#define HTTP_SERVICE_CONFIG_SSL_FLAG_REJECT                     0x00000008
 
-#define HTTP_SERVICE_CONFIG_SSL_FLAG_DISABLE_HTTP2         0x00000010
-#define HTTP_SERVICE_CONFIG_SSL_FLAG_DISABLE_QUIC          0x00000020
-#define HTTP_SERVICE_CONFIG_SSL_FLAG_DISABLE_TLS13         0x00000040
+#define HTTP_SERVICE_CONFIG_SSL_FLAG_DISABLE_HTTP2              0x00000010
+#define HTTP_SERVICE_CONFIG_SSL_FLAG_DISABLE_QUIC               0x00000020
+#define HTTP_SERVICE_CONFIG_SSL_FLAG_DISABLE_TLS13              0x00000040
 
-#define HTTP_SERVICE_CONFIG_SSL_FLAG_DISABLE_OCSP_STAPLING 0x00000080
-#define HTTP_SERVICE_CONFIG_SSL_FLAG_ENABLE_TOKEN_BINDING  0x00000100
-#define HTTP_SERVICE_CONFIG_SSL_FLAG_LOG_EXTENDED_EVENTS   0x00000200
-#define HTTP_SERVICE_CONFIG_SSL_FLAG_DISABLE_LEGACY_TLS    0x00000400
-#define HTTP_SERVICE_CONFIG_SSL_FLAG_ENABLE_SESSION_TICKET 0x00000800
-#define HTTP_SERVICE_CONFIG_SSL_FLAG_DISABLE_TLS12         0x00001000
+#define HTTP_SERVICE_CONFIG_SSL_FLAG_DISABLE_OCSP_STAPLING      0x00000080
+#define HTTP_SERVICE_CONFIG_SSL_FLAG_ENABLE_TOKEN_BINDING       0x00000100
+#define HTTP_SERVICE_CONFIG_SSL_FLAG_LOG_EXTENDED_EVENTS        0x00000200
+#define HTTP_SERVICE_CONFIG_SSL_FLAG_DISABLE_LEGACY_TLS         0x00000400
+#define HTTP_SERVICE_CONFIG_SSL_FLAG_ENABLE_SESSION_TICKET      0x00000800
+#define HTTP_SERVICE_CONFIG_SSL_FLAG_DISABLE_TLS12              0x00001000
+#define HTTP_SERVICE_CONFIG_SSL_FLAG_ENABLE_CLIENT_CORRELATION  0x00002000
 
 
 //
@@ -2620,6 +2683,9 @@ typedef enum _HTTP_REQUEST_PROPERTY
     HttpRequestPropertyQuicStats,
     HttpRequestPropertyTcpInfoV1,
     HttpRequestPropertySni,
+    HttpRequestPropertyStreamError,
+    HttpRequestPropertyWskApiTimings,
+    HttpRequestPropertyQuicApiTimings
 } HTTP_REQUEST_PROPERTY, *PHTTP_REQUEST_PROPERTY;
 
 typedef struct _HTTP_QUERY_REQUEST_QUALIFIER_TCP
@@ -2651,6 +2717,104 @@ typedef struct _HTTP_REQUEST_PROPERTY_SNI
     WCHAR Hostname[HTTP_REQUEST_PROPERTY_SNI_HOST_MAX_LENGTH + 1];
     ULONG Flags;
 } HTTP_REQUEST_PROPERTY_SNI, *PHTTP_REQUEST_PROPERTY_SNI;
+
+typedef struct _HTTP_REQUEST_PROPERTY_STREAM_ERROR
+{
+    ULONG ErrorCode;
+} HTTP_REQUEST_PROPERTY_STREAM_ERROR, *PHTTP_REQUEST_PROPERTY_STREAM_ERROR;
+
+typedef struct _HTTP_WSK_API_TIMINGS
+{
+    ULONGLONG ConnectCount;
+    ULONGLONG ConnectSum;
+    ULONGLONG DisconnectCount;
+    ULONGLONG DisconnectSum;
+
+    ULONGLONG SendCount;
+    ULONGLONG SendSum;
+    ULONGLONG ReceiveCount;
+    ULONGLONG ReceiveSum;
+
+    ULONGLONG ReleaseCount;
+    ULONGLONG ReleaseSum;
+
+    ULONGLONG ControlSocketCount;
+    ULONGLONG ControlSocketSum;
+} HTTP_WSK_API_TIMINGS, *PHTTP_WSK_API_TIMINGS;
+
+typedef struct _HTTP_QUIC_STREAM_API_TIMINGS
+{
+    ULONGLONG OpenCount;
+    ULONGLONG OpenSum;
+    ULONGLONG CloseCount;
+    ULONGLONG CloseSum;
+
+    ULONGLONG StartCount;
+    ULONGLONG StartSum;
+    ULONGLONG ShutdownCount;
+    ULONGLONG ShutdownSum;
+
+    ULONGLONG SendCount;
+    ULONGLONG SendSum;
+
+    ULONGLONG ReceiveSetEnabledCount;
+    ULONGLONG ReceiveSetEnabledSum;
+
+    ULONGLONG GetParamCount;
+    ULONGLONG GetParamSum;
+
+    ULONGLONG SetParamCount;
+    ULONGLONG SetParamSum;
+
+    ULONGLONG SetCallbackHandlerCount;
+    ULONGLONG SetCallbackHandlerSum;
+
+} HTTP_QUIC_STREAM_API_TIMINGS, *PHTTP_QUIC_STREAM_API_TIMINGS;
+
+typedef struct _HTTP_QUIC_CONNECTION_API_TIMINGS
+{
+    ULONGLONG OpenTime;
+    ULONGLONG CloseTime;
+
+    ULONGLONG StartTime;
+    ULONGLONG ShutdownTime;
+
+    ULONGLONG SecConfigCreateTime;
+    ULONGLONG SecConfigDeleteTime;
+
+    ULONGLONG GetParamCount;
+    ULONGLONG GetParamSum;
+
+    ULONGLONG SetParamCount;
+    ULONGLONG SetParamSum;
+
+    ULONGLONG SetCallbackHandlerCount;
+    ULONGLONG SetCallbackHandlerSum;
+
+    HTTP_QUIC_STREAM_API_TIMINGS ControlStreamTimings;
+
+} HTTP_QUIC_CONNECTION_API_TIMINGS, *PHTTP_QUIC_CONNECTION_API_TIMINGS;
+
+typedef struct _HTTP_QUIC_API_TIMINGS
+{
+    HTTP_QUIC_CONNECTION_API_TIMINGS ConnectionTimings;
+    HTTP_QUIC_STREAM_API_TIMINGS StreamTimings;
+
+} HTTP_QUIC_API_TIMINGS, *PHTTP_QUIC_API_TIMINGS;
+
+
+typedef enum _HTTP_FEATURE_ID
+{
+    HttpFeatureUnknown          = 0,
+    HttpFeatureResponseTrailers = 1,
+    HttpFeatureApiTimings       = 2,
+    HttpFeatureDelegateEx       = 3,
+    HttpFeatureHttp3            = 4,
+
+
+    HttpFeaturemax              = 0xFFFFFFFF,
+
+} HTTP_FEATURE_ID, *PHTTP_FEATURE_ID;
 
 
 //
@@ -2756,6 +2920,18 @@ HttpQueryRequestQueueProperty(
     _Reserved_ ULONG Reserved1,
     _Out_opt_ PULONG ReturnLength,
     _Reserved_ PVOID Reserved2
+    );
+
+HTTPAPI_LINKAGE
+ULONG
+WINAPI
+HttpSetRequestProperty(
+    _In_ HANDLE RequestQueueHandle,
+    _In_ HTTP_OPAQUE_ID Id,
+    _In_ HTTP_REQUEST_PROPERTY PropertyId,
+    _In_reads_bytes_opt_(InputPropertySize) PVOID Input,
+    _In_ ULONG InputPropertySize,
+    _In_ LPOVERLAPPED Overlapped
     );
 
 HTTPAPI_LINKAGE
@@ -3085,6 +3261,33 @@ WINAPI
 HttpWaitForDemandStart(
     IN HANDLE RequestQueueHandle,
     IN LPOVERLAPPED Overlapped OPTIONAL
+    );
+
+BOOL
+WINAPI
+HttpIsFeatureSupported(
+    _In_ HTTP_FEATURE_ID FeatureId
+    );
+
+HTTPAPI_LINKAGE
+ULONG
+WINAPI
+HttpDelegateRequestEx(
+    _In_ HANDLE RequestQueueHandle,
+    _In_ HANDLE DelegateQueueHandle,
+    _In_ HTTP_REQUEST_ID RequestId,
+    _In_ HTTP_URL_GROUP_ID DelegateUrlGroupId,
+    _In_ ULONG PropertyInfoSetSize,
+    _In_ PHTTP_DELEGATE_REQUEST_PROPERTY_INFO PropertyInfoSet
+    );
+
+HTTPAPI_LINKAGE
+ULONG
+WINAPI
+HttpFindUrlGroupId(
+    _In_ PCWSTR FullyQualifiedUrl,
+    _In_ HANDLE RequestQueueHandle,
+    _Out_ PHTTP_URL_GROUP_ID UrlGroupId
     );
 
 

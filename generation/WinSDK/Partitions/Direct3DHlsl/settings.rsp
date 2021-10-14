@@ -1,6 +1,3 @@
---with-librarypath
-DxcCreateInstance=dxcompiler
-DxcCreateInstance2=dxcompiler
 --traverse
 <IncludeRoot>/um/d3dcompiler.h
 <IncludeRoot>/um/dxcapi.h

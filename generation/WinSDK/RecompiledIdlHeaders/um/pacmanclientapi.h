@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -855,235 +863,293 @@ EXTERN_C const IID IID_IPMApplicationInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPMApplicationInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPMApplicationInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPMApplicationInfo * This);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_ProductID)
         HRESULT ( STDMETHODCALLTYPE *get_ProductID )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out PRODUCTID *pProductID);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_InstanceID)
         HRESULT ( STDMETHODCALLTYPE *get_InstanceID )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out GUID *pInstanceID);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_OfferID)
         HRESULT ( STDMETHODCALLTYPE *get_OfferID )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out GUID *pOfferID);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_DefaultTask)
         HRESULT ( STDMETHODCALLTYPE *get_DefaultTask )( 
             __RPC__in IPMApplicationInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pDefaultTask);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_AppTitle)
         HRESULT ( STDMETHODCALLTYPE *get_AppTitle )( 
             __RPC__in IPMApplicationInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pAppTitle);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_IconPath)
         HRESULT ( STDMETHODCALLTYPE *get_IconPath )( 
             __RPC__in IPMApplicationInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pAppIconPath);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_NotificationState)
         HRESULT ( STDMETHODCALLTYPE *get_NotificationState )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out BOOL *pIsNotified);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_AppInstallType)
         HRESULT ( STDMETHODCALLTYPE *get_AppInstallType )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out PM_APPLICATION_INSTALL_TYPE *pAppInstallType);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_State)
         HRESULT ( STDMETHODCALLTYPE *get_State )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out PM_APPLICATION_STATE *pState);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_IsRevoked)
         HRESULT ( STDMETHODCALLTYPE *get_IsRevoked )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out BOOL *pIsRevoked);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_UpdateAvailable)
         HRESULT ( STDMETHODCALLTYPE *get_UpdateAvailable )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out BOOL *pIsUpdateAvailable);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_InstallDate)
         HRESULT ( STDMETHODCALLTYPE *get_InstallDate )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out FILETIME *pInstallDate);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_IsUninstallable)
         HRESULT ( STDMETHODCALLTYPE *get_IsUninstallable )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out BOOL *pIsUninstallable);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_IsThemable)
         HRESULT ( STDMETHODCALLTYPE *get_IsThemable )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out BOOL *pIsThemable);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_IsTrial)
         HRESULT ( STDMETHODCALLTYPE *get_IsTrial )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out BOOL *pIsTrial);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_InstallPath)
         HRESULT ( STDMETHODCALLTYPE *get_InstallPath )( 
             __RPC__in IPMApplicationInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pInstallPath);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_DataRoot)
         HRESULT ( STDMETHODCALLTYPE *get_DataRoot )( 
             __RPC__in IPMApplicationInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pDataRoot);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_Genre)
         HRESULT ( STDMETHODCALLTYPE *get_Genre )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out PM_APP_GENRE *pGenre);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_Publisher)
         HRESULT ( STDMETHODCALLTYPE *get_Publisher )( 
             __RPC__in IPMApplicationInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pPublisher);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_Author)
         HRESULT ( STDMETHODCALLTYPE *get_Author )( 
             __RPC__in IPMApplicationInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pAuthor);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_Description)
         HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IPMApplicationInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pDescription);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_Version)
         HRESULT ( STDMETHODCALLTYPE *get_Version )( 
             __RPC__in IPMApplicationInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pVersion);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_InvocationInfo)
         HRESULT ( STDMETHODCALLTYPE *get_InvocationInfo )( 
             __RPC__in IPMApplicationInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pImageUrn,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pParameters);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_AppPlatMajorVersion)
         HRESULT ( STDMETHODCALLTYPE *get_AppPlatMajorVersion )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out BYTE *pMajorVer);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_AppPlatMinorVersion)
         HRESULT ( STDMETHODCALLTYPE *get_AppPlatMinorVersion )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out BYTE *pMinorVer);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_PublisherID)
         HRESULT ( STDMETHODCALLTYPE *get_PublisherID )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out GUID *pPublisherID);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_IsMultiCore)
         HRESULT ( STDMETHODCALLTYPE *get_IsMultiCore )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out BOOL *pIsMultiCore);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_SID)
         HRESULT ( STDMETHODCALLTYPE *get_SID )( 
             __RPC__in IPMApplicationInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pSID);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_AppPlatMajorVersionLightUp)
         HRESULT ( STDMETHODCALLTYPE *get_AppPlatMajorVersionLightUp )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out BYTE *pMajorVer);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_AppPlatMinorVersionLightUp)
         HRESULT ( STDMETHODCALLTYPE *get_AppPlatMinorVersionLightUp )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out BYTE *pMinorVer);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, set_UpdateAvailable)
         HRESULT ( STDMETHODCALLTYPE *set_UpdateAvailable )( 
             __RPC__in IPMApplicationInfo * This,
             /* [in] */ BOOL IsUpdateAvailable);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, set_NotificationState)
         HRESULT ( STDMETHODCALLTYPE *set_NotificationState )( 
             __RPC__in IPMApplicationInfo * This,
             /* [in] */ BOOL IsNotified);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, set_IconPath)
         HRESULT ( STDMETHODCALLTYPE *set_IconPath )( 
             __RPC__in IPMApplicationInfo * This,
             /* [string][in] */ __RPC__in_string BSTR AppIconPath);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, set_UninstallableState)
         HRESULT ( STDMETHODCALLTYPE *set_UninstallableState )( 
             __RPC__in IPMApplicationInfo * This,
             /* [in] */ BOOL IsUninstallable);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_IsPinableOnKidZone)
         HRESULT ( STDMETHODCALLTYPE *get_IsPinableOnKidZone )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out BOOL *pIsPinable);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_IsOriginallyPreInstalled)
         HRESULT ( STDMETHODCALLTYPE *get_IsOriginallyPreInstalled )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out BOOL *pIsPreinstalled);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_IsInstallOnSD)
         HRESULT ( STDMETHODCALLTYPE *get_IsInstallOnSD )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out BOOL *pIsInstallOnSD);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_IsOptoutOnSD)
         HRESULT ( STDMETHODCALLTYPE *get_IsOptoutOnSD )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out BOOL *pIsOptoutOnSD);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_IsOptoutBackupRestore)
         HRESULT ( STDMETHODCALLTYPE *get_IsOptoutBackupRestore )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out BOOL *pIsOptoutBackupRestore);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, set_EnterpriseDisabled)
         HRESULT ( STDMETHODCALLTYPE *set_EnterpriseDisabled )( 
             __RPC__in IPMApplicationInfo * This,
             /* [in] */ BOOL IsDisabled);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, set_EnterpriseUninstallable)
         HRESULT ( STDMETHODCALLTYPE *set_EnterpriseUninstallable )( 
             __RPC__in IPMApplicationInfo * This,
             /* [in] */ BOOL IsUninstallable);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_EnterpriseDisabled)
         HRESULT ( STDMETHODCALLTYPE *get_EnterpriseDisabled )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out BOOL *IsDisabled);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_EnterpriseUninstallable)
         HRESULT ( STDMETHODCALLTYPE *get_EnterpriseUninstallable )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out BOOL *IsUninstallable);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_IsVisibleOnAppList)
         HRESULT ( STDMETHODCALLTYPE *get_IsVisibleOnAppList )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out BOOL *pIsVisible);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_IsInboxApp)
         HRESULT ( STDMETHODCALLTYPE *get_IsInboxApp )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out BOOL *pIsInboxApp);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_StorageID)
         HRESULT ( STDMETHODCALLTYPE *get_StorageID )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out GUID *pStorageID);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_StartAppBlob)
         HRESULT ( STDMETHODCALLTYPE *get_StartAppBlob )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out][in] */ __RPC__inout PM_STARTAPPBLOB *pBlob);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_IsMovable)
         HRESULT ( STDMETHODCALLTYPE *get_IsMovable )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out BOOL *pIsMovable);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_DeploymentAppEnumerationHubFilter)
         HRESULT ( STDMETHODCALLTYPE *get_DeploymentAppEnumerationHubFilter )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out PM_TILE_HUBTYPE *HubType);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_ModifiedDate)
         HRESULT ( STDMETHODCALLTYPE *get_ModifiedDate )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out FILETIME *pModifiedDate);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_IsOriginallyRestored)
         HRESULT ( STDMETHODCALLTYPE *get_IsOriginallyRestored )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out BOOL *pIsRestored);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_ShouldDeferMdilBind)
         HRESULT ( STDMETHODCALLTYPE *get_ShouldDeferMdilBind )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out BOOL *pfDeferMdilBind);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, get_IsFullyPreInstall)
         HRESULT ( STDMETHODCALLTYPE *get_IsFullyPreInstall )( 
             __RPC__in IPMApplicationInfo * This,
             /* [out] */ __RPC__out BOOL *pfIsFullyPreInstall);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, set_IsMdilMaintenanceNeeded)
         HRESULT ( STDMETHODCALLTYPE *set_IsMdilMaintenanceNeeded )( 
             __RPC__in IPMApplicationInfo * This,
             /* [in] */ BOOL fIsMdilMaintenanceNeeded);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfo, set_Title)
         HRESULT ( STDMETHODCALLTYPE *set_Title )( 
             __RPC__in IPMApplicationInfo * This,
             /* [string][in] */ __RPC__in_string BSTR AppTitle);
@@ -1320,26 +1386,32 @@ EXTERN_C const IID IID_IPMTilePropertyInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPMTilePropertyInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPMTilePropertyInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPMTilePropertyInfo * This);
         
+        DECLSPEC_XFGVIRT(IPMTilePropertyInfo, get_PropertyID)
         HRESULT ( STDMETHODCALLTYPE *get_PropertyID )( 
             __RPC__in IPMTilePropertyInfo * This,
             /* [out] */ __RPC__out ULONG *pPropID);
         
+        DECLSPEC_XFGVIRT(IPMTilePropertyInfo, get_PropertyValue)
         HRESULT ( STDMETHODCALLTYPE *get_PropertyValue )( 
             __RPC__in IPMTilePropertyInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pPropValue);
         
+        DECLSPEC_XFGVIRT(IPMTilePropertyInfo, set_Property)
         HRESULT ( STDMETHODCALLTYPE *set_Property )( 
             __RPC__in IPMTilePropertyInfo * This,
             /* [string][in] */ __RPC__in_string BSTR PropValue);
@@ -1414,18 +1486,22 @@ EXTERN_C const IID IID_IPMTilePropertyEnumerator;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPMTilePropertyEnumerator * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPMTilePropertyEnumerator * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPMTilePropertyEnumerator * This);
         
+        DECLSPEC_XFGVIRT(IPMTilePropertyEnumerator, get_Next)
         HRESULT ( STDMETHODCALLTYPE *get_Next )( 
             __RPC__in IPMTilePropertyEnumerator * This,
             /* [out] */ __RPC__deref_out_opt IPMTilePropertyInfo **ppPropInfo);
@@ -1572,119 +1648,146 @@ EXTERN_C const IID IID_IPMTileInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPMTileInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPMTileInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPMTileInfo * This);
         
+        DECLSPEC_XFGVIRT(IPMTileInfo, get_ProductID)
         HRESULT ( STDMETHODCALLTYPE *get_ProductID )( 
             __RPC__in IPMTileInfo * This,
             /* [out] */ __RPC__out PRODUCTID *pProductID);
         
+        DECLSPEC_XFGVIRT(IPMTileInfo, get_TileID)
         HRESULT ( STDMETHODCALLTYPE *get_TileID )( 
             __RPC__in IPMTileInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pTileID);
         
+        DECLSPEC_XFGVIRT(IPMTileInfo, get_TemplateType)
         HRESULT ( STDMETHODCALLTYPE *get_TemplateType )( 
             __RPC__in IPMTileInfo * This,
             /* [out] */ __RPC__out TILE_TEMPLATE_TYPE *pTemplateType);
         
+        DECLSPEC_XFGVIRT(IPMTileInfo, get_HubPinnedState)
         HRESULT ( STDMETHODCALLTYPE *get_HubPinnedState )( 
             __RPC__in IPMTileInfo * This,
             /* [in] */ PM_TILE_HUBTYPE HubType,
             /* [out] */ __RPC__out BOOL *pPinned);
         
+        DECLSPEC_XFGVIRT(IPMTileInfo, get_HubPosition)
         HRESULT ( STDMETHODCALLTYPE *get_HubPosition )( 
             __RPC__in IPMTileInfo * This,
             /* [in] */ PM_TILE_HUBTYPE HubType,
             /* [out] */ __RPC__out ULONG *pPosition);
         
+        DECLSPEC_XFGVIRT(IPMTileInfo, get_IsNotified)
         HRESULT ( STDMETHODCALLTYPE *get_IsNotified )( 
             __RPC__in IPMTileInfo * This,
             /* [out] */ __RPC__out BOOL *pIsNotified);
         
+        DECLSPEC_XFGVIRT(IPMTileInfo, get_IsDefault)
         HRESULT ( STDMETHODCALLTYPE *get_IsDefault )( 
             __RPC__in IPMTileInfo * This,
             /* [out] */ __RPC__out BOOL *pIsDefault);
         
+        DECLSPEC_XFGVIRT(IPMTileInfo, get_TaskID)
         HRESULT ( STDMETHODCALLTYPE *get_TaskID )( 
             __RPC__in IPMTileInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pTaskID);
         
+        DECLSPEC_XFGVIRT(IPMTileInfo, get_TileType)
         HRESULT ( STDMETHODCALLTYPE *get_TileType )( 
             __RPC__in IPMTileInfo * This,
             /* [out] */ __RPC__out PM_STARTTILE_TYPE *pStartTileType);
         
+        DECLSPEC_XFGVIRT(IPMTileInfo, get_IsThemable)
         HRESULT ( STDMETHODCALLTYPE *get_IsThemable )( 
             __RPC__in IPMTileInfo * This,
             /* [out] */ __RPC__out BOOL *pIsThemable);
         
+        DECLSPEC_XFGVIRT(IPMTileInfo, get_PropertyById)
         HRESULT ( STDMETHODCALLTYPE *get_PropertyById )( 
             __RPC__in IPMTileInfo * This,
             /* [in] */ ULONG PropID,
             /* [out] */ __RPC__deref_out_opt IPMTilePropertyInfo **ppPropInfo);
         
+        DECLSPEC_XFGVIRT(IPMTileInfo, get_InvocationInfo)
         HRESULT ( STDMETHODCALLTYPE *get_InvocationInfo )( 
             __RPC__in IPMTileInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pImageUrn,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pParameters);
         
+        DECLSPEC_XFGVIRT(IPMTileInfo, get_PropertyEnum)
         HRESULT ( STDMETHODCALLTYPE *get_PropertyEnum )( 
             __RPC__in IPMTileInfo * This,
             /* [out] */ __RPC__deref_out_opt IPMTilePropertyEnumerator **ppTilePropEnum);
         
+        DECLSPEC_XFGVIRT(IPMTileInfo, get_HubTileSize)
         HRESULT ( STDMETHODCALLTYPE *get_HubTileSize )( 
             __RPC__in IPMTileInfo * This,
             /* [in] */ PM_TILE_HUBTYPE HubType,
             /* [out] */ __RPC__out PM_TILE_SIZE *pSize);
         
+        DECLSPEC_XFGVIRT(IPMTileInfo, set_HubPosition)
         HRESULT ( STDMETHODCALLTYPE *set_HubPosition )( 
             __RPC__in IPMTileInfo * This,
             /* [in] */ PM_TILE_HUBTYPE HubType,
             /* [in] */ ULONG Position);
         
+        DECLSPEC_XFGVIRT(IPMTileInfo, set_NotifiedState)
         HRESULT ( STDMETHODCALLTYPE *set_NotifiedState )( 
             __RPC__in IPMTileInfo * This,
             /* [in] */ BOOL Notified);
         
+        DECLSPEC_XFGVIRT(IPMTileInfo, set_HubPinnedState)
         HRESULT ( STDMETHODCALLTYPE *set_HubPinnedState )( 
             __RPC__in IPMTileInfo * This,
             /* [in] */ PM_TILE_HUBTYPE HubType,
             /* [in] */ BOOL Pinned);
         
+        DECLSPEC_XFGVIRT(IPMTileInfo, set_HubTileSize)
         HRESULT ( STDMETHODCALLTYPE *set_HubTileSize )( 
             __RPC__in IPMTileInfo * This,
             /* [in] */ PM_TILE_HUBTYPE HubType,
             /* [in] */ PM_TILE_SIZE Size);
         
+        DECLSPEC_XFGVIRT(IPMTileInfo, set_InvocationInfo)
         HRESULT ( STDMETHODCALLTYPE *set_InvocationInfo )( 
             __RPC__in IPMTileInfo * This,
             /* [string][in] */ __RPC__in_string BSTR TaskName,
             /* [string][in] */ __RPC__in_string BSTR TaskParameters);
         
+        DECLSPEC_XFGVIRT(IPMTileInfo, get_StartTileBlob)
         HRESULT ( STDMETHODCALLTYPE *get_StartTileBlob )( 
             __RPC__in IPMTileInfo * This,
             /* [out][in] */ __RPC__inout PM_STARTTILEBLOB *pBlob);
         
+        DECLSPEC_XFGVIRT(IPMTileInfo, get_IsRestoring)
         HRESULT ( STDMETHODCALLTYPE *get_IsRestoring )( 
             __RPC__in IPMTileInfo * This,
             /* [out] */ __RPC__out BOOL *pIsRestoring);
         
+        DECLSPEC_XFGVIRT(IPMTileInfo, get_IsAutoRestoreDisabled)
         HRESULT ( STDMETHODCALLTYPE *get_IsAutoRestoreDisabled )( 
             __RPC__in IPMTileInfo * This,
             /* [out] */ __RPC__out BOOL *pIsAutoRestoreDisabled);
         
+        DECLSPEC_XFGVIRT(IPMTileInfo, set_IsRestoring)
         HRESULT ( STDMETHODCALLTYPE *set_IsRestoring )( 
             __RPC__in IPMTileInfo * This,
             /* [in] */ BOOL Restoring);
         
+        DECLSPEC_XFGVIRT(IPMTileInfo, set_IsAutoRestoreDisabled)
         HRESULT ( STDMETHODCALLTYPE *set_IsAutoRestoreDisabled )( 
             __RPC__in IPMTileInfo * This,
             /* [in] */ BOOL AutoRestoreDisabled);
@@ -1822,18 +1925,22 @@ EXTERN_C const IID IID_IPMTileInfoEnumerator;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPMTileInfoEnumerator * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPMTileInfoEnumerator * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPMTileInfoEnumerator * This);
         
+        DECLSPEC_XFGVIRT(IPMTileInfoEnumerator, get_Next)
         HRESULT ( STDMETHODCALLTYPE *get_Next )( 
             __RPC__in IPMTileInfoEnumerator * This,
             /* [out] */ __RPC__deref_out_opt IPMTileInfo **ppTileInfo);
@@ -1902,18 +2009,22 @@ EXTERN_C const IID IID_IPMApplicationInfoEnumerator;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPMApplicationInfoEnumerator * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPMApplicationInfoEnumerator * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPMApplicationInfoEnumerator * This);
         
+        DECLSPEC_XFGVIRT(IPMApplicationInfoEnumerator, get_Next)
         HRESULT ( STDMETHODCALLTYPE *get_Next )( 
             __RPC__in IPMApplicationInfoEnumerator * This,
             /* [out] */ __RPC__deref_out_opt IPMApplicationInfo **ppAppInfo);
@@ -2055,114 +2166,141 @@ EXTERN_C const IID IID_IPMLiveTileJobInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPMLiveTileJobInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPMLiveTileJobInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPMLiveTileJobInfo * This);
         
+        DECLSPEC_XFGVIRT(IPMLiveTileJobInfo, get_ProductID)
         HRESULT ( STDMETHODCALLTYPE *get_ProductID )( 
             __RPC__in IPMLiveTileJobInfo * This,
             /* [out] */ __RPC__out PRODUCTID *pProductID);
         
+        DECLSPEC_XFGVIRT(IPMLiveTileJobInfo, get_TileID)
         HRESULT ( STDMETHODCALLTYPE *get_TileID )( 
             __RPC__in IPMLiveTileJobInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pTileID);
         
+        DECLSPEC_XFGVIRT(IPMLiveTileJobInfo, get_NextSchedule)
         HRESULT ( STDMETHODCALLTYPE *get_NextSchedule )( 
             __RPC__in IPMLiveTileJobInfo * This,
             /* [out] */ __RPC__out FILETIME *pNextSchedule);
         
+        DECLSPEC_XFGVIRT(IPMLiveTileJobInfo, set_NextSchedule)
         HRESULT ( STDMETHODCALLTYPE *set_NextSchedule )( 
             __RPC__in IPMLiveTileJobInfo * This,
             /* [in] */ FILETIME ftNextSchedule);
         
+        DECLSPEC_XFGVIRT(IPMLiveTileJobInfo, get_StartSchedule)
         HRESULT ( STDMETHODCALLTYPE *get_StartSchedule )( 
             __RPC__in IPMLiveTileJobInfo * This,
             /* [out] */ __RPC__out FILETIME *pStartSchedule);
         
+        DECLSPEC_XFGVIRT(IPMLiveTileJobInfo, set_StartSchedule)
         HRESULT ( STDMETHODCALLTYPE *set_StartSchedule )( 
             __RPC__in IPMLiveTileJobInfo * This,
             /* [in] */ FILETIME ftStartSchedule);
         
+        DECLSPEC_XFGVIRT(IPMLiveTileJobInfo, get_IntervalDuration)
         HRESULT ( STDMETHODCALLTYPE *get_IntervalDuration )( 
             __RPC__in IPMLiveTileJobInfo * This,
             /* [out] */ __RPC__out ULONG *pIntervalDuration);
         
+        DECLSPEC_XFGVIRT(IPMLiveTileJobInfo, set_IntervalDuration)
         HRESULT ( STDMETHODCALLTYPE *set_IntervalDuration )( 
             __RPC__in IPMLiveTileJobInfo * This,
             /* [in] */ ULONG ulIntervalDuration);
         
+        DECLSPEC_XFGVIRT(IPMLiveTileJobInfo, get_RunForever)
         HRESULT ( STDMETHODCALLTYPE *get_RunForever )( 
             __RPC__in IPMLiveTileJobInfo * This,
             /* [out] */ __RPC__out BOOL *IsRunForever);
         
+        DECLSPEC_XFGVIRT(IPMLiveTileJobInfo, set_RunForever)
         HRESULT ( STDMETHODCALLTYPE *set_RunForever )( 
             __RPC__in IPMLiveTileJobInfo * This,
             /* [in] */ BOOL fRunForever);
         
+        DECLSPEC_XFGVIRT(IPMLiveTileJobInfo, get_MaxRunCount)
         HRESULT ( STDMETHODCALLTYPE *get_MaxRunCount )( 
             __RPC__in IPMLiveTileJobInfo * This,
             /* [out] */ __RPC__out ULONG *pMaxRunCount);
         
+        DECLSPEC_XFGVIRT(IPMLiveTileJobInfo, set_MaxRunCount)
         HRESULT ( STDMETHODCALLTYPE *set_MaxRunCount )( 
             __RPC__in IPMLiveTileJobInfo * This,
             /* [in] */ ULONG ulMaxRunCount);
         
+        DECLSPEC_XFGVIRT(IPMLiveTileJobInfo, get_RunCount)
         HRESULT ( STDMETHODCALLTYPE *get_RunCount )( 
             __RPC__in IPMLiveTileJobInfo * This,
             /* [out] */ __RPC__out ULONG *pRunCount);
         
+        DECLSPEC_XFGVIRT(IPMLiveTileJobInfo, set_RunCount)
         HRESULT ( STDMETHODCALLTYPE *set_RunCount )( 
             __RPC__in IPMLiveTileJobInfo * This,
             /* [in] */ ULONG ulRunCount);
         
+        DECLSPEC_XFGVIRT(IPMLiveTileJobInfo, get_RecurrenceType)
         HRESULT ( STDMETHODCALLTYPE *get_RecurrenceType )( 
             __RPC__in IPMLiveTileJobInfo * This,
             /* [out] */ __RPC__out ULONG *pRecurrenceType);
         
+        DECLSPEC_XFGVIRT(IPMLiveTileJobInfo, set_RecurrenceType)
         HRESULT ( STDMETHODCALLTYPE *set_RecurrenceType )( 
             __RPC__in IPMLiveTileJobInfo * This,
             /* [in] */ ULONG ulRecurrenceType);
         
+        DECLSPEC_XFGVIRT(IPMLiveTileJobInfo, get_TileXML)
         HRESULT ( STDMETHODCALLTYPE *get_TileXML )( 
             __RPC__in IPMLiveTileJobInfo * This,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcbTileXml) BYTE **pTileXml,
             /* [out] */ __RPC__out ULONG *pcbTileXml);
         
+        DECLSPEC_XFGVIRT(IPMLiveTileJobInfo, set_TileXML)
         HRESULT ( STDMETHODCALLTYPE *set_TileXML )( 
             __RPC__in IPMLiveTileJobInfo * This,
             /* [size_is][in] */ __RPC__in_ecount_full(cbTileXml) BYTE *pTileXml,
             /* [in] */ ULONG cbTileXml);
         
+        DECLSPEC_XFGVIRT(IPMLiveTileJobInfo, get_UrlXML)
         HRESULT ( STDMETHODCALLTYPE *get_UrlXML )( 
             __RPC__in IPMLiveTileJobInfo * This,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcbUrlXML) BYTE **pUrlXML,
             /* [out] */ __RPC__out ULONG *pcbUrlXML);
         
+        DECLSPEC_XFGVIRT(IPMLiveTileJobInfo, set_UrlXML)
         HRESULT ( STDMETHODCALLTYPE *set_UrlXML )( 
             __RPC__in IPMLiveTileJobInfo * This,
             /* [size_is][in] */ __RPC__in_ecount_full(cbUrlXML) BYTE *pUrlXML,
             /* [in] */ ULONG cbUrlXML);
         
+        DECLSPEC_XFGVIRT(IPMLiveTileJobInfo, get_AttemptCount)
         HRESULT ( STDMETHODCALLTYPE *get_AttemptCount )( 
             __RPC__in IPMLiveTileJobInfo * This,
             /* [out] */ __RPC__out ULONG *pAttemptCount);
         
+        DECLSPEC_XFGVIRT(IPMLiveTileJobInfo, set_AttemptCount)
         HRESULT ( STDMETHODCALLTYPE *set_AttemptCount )( 
             __RPC__in IPMLiveTileJobInfo * This,
             /* [in] */ ULONG ulAttemptCount);
         
+        DECLSPEC_XFGVIRT(IPMLiveTileJobInfo, get_DownloadState)
         HRESULT ( STDMETHODCALLTYPE *get_DownloadState )( 
             __RPC__in IPMLiveTileJobInfo * This,
             /* [out] */ __RPC__out ULONG *pDownloadState);
         
+        DECLSPEC_XFGVIRT(IPMLiveTileJobInfo, set_DownloadState)
         HRESULT ( STDMETHODCALLTYPE *set_DownloadState )( 
             __RPC__in IPMLiveTileJobInfo * This,
             /* [in] */ ULONG ulDownloadState);
@@ -2300,18 +2438,22 @@ EXTERN_C const IID IID_IPMLiveTileJobInfoEnumerator;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPMLiveTileJobInfoEnumerator * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPMLiveTileJobInfoEnumerator * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPMLiveTileJobInfoEnumerator * This);
         
+        DECLSPEC_XFGVIRT(IPMLiveTileJobInfoEnumerator, get_Next)
         HRESULT ( STDMETHODCALLTYPE *get_Next )( 
             __RPC__in IPMLiveTileJobInfoEnumerator * This,
             /* [out] */ __RPC__deref_out_opt IPMLiveTileJobInfo **ppLiveTileJobInfo);
@@ -2519,60 +2661,74 @@ EXTERN_C const IID IID_IPMDeploymentManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPMDeploymentManager * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPMDeploymentManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPMDeploymentManager * This);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, ReportDownloadBegin)
         HRESULT ( STDMETHODCALLTYPE *ReportDownloadBegin )( 
             __RPC__in IPMDeploymentManager * This,
             /* [in] */ PRODUCTID productID);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, ReportDownloadProgress)
         HRESULT ( STDMETHODCALLTYPE *ReportDownloadProgress )( 
             __RPC__in IPMDeploymentManager * This,
             /* [in] */ PRODUCTID productID,
             /* [in] */ USHORT usProgress);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, ReportDownloadComplete)
         HRESULT ( STDMETHODCALLTYPE *ReportDownloadComplete )( 
             __RPC__in IPMDeploymentManager * This,
             /* [in] */ PRODUCTID productID,
             /* [in] */ HRESULT hrResult);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, BeginInstall)
         HRESULT ( STDMETHODCALLTYPE *BeginInstall )( 
             __RPC__in IPMDeploymentManager * This,
             /* [in] */ __RPC__in PM_INSTALLINFO *pInstallInfo);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, BeginUpdate)
         HRESULT ( STDMETHODCALLTYPE *BeginUpdate )( 
             __RPC__in IPMDeploymentManager * This,
             /* [in] */ __RPC__in PM_UPDATEINFO *pUpdateInfo);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, BeginDeployPackage)
         HRESULT ( STDMETHODCALLTYPE *BeginDeployPackage )( 
             __RPC__in IPMDeploymentManager * This,
             /* [in] */ __RPC__in PM_INSTALLINFO *pInstallInfo);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, BeginUpdateDeployedPackageLegacy)
         HRESULT ( STDMETHODCALLTYPE *BeginUpdateDeployedPackageLegacy )( 
             __RPC__in IPMDeploymentManager * This,
             /* [in] */ __RPC__in PM_UPDATEINFO_LEGACY *pUpdateInfo);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, BeginUninstall)
         HRESULT ( STDMETHODCALLTYPE *BeginUninstall )( 
             __RPC__in IPMDeploymentManager * This,
             /* [in] */ PRODUCTID productID);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, BeginEnterpriseAppInstall)
         HRESULT ( STDMETHODCALLTYPE *BeginEnterpriseAppInstall )( 
             __RPC__in IPMDeploymentManager * This,
             /* [in] */ __RPC__in PM_INSTALLINFO *pInstallInfo);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, BeginEnterpriseAppUpdate)
         HRESULT ( STDMETHODCALLTYPE *BeginEnterpriseAppUpdate )( 
             __RPC__in IPMDeploymentManager * This,
             /* [in] */ __RPC__in PM_UPDATEINFO *pUpdateInfo);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, BeginUpdateLicense)
         HRESULT ( STDMETHODCALLTYPE *BeginUpdateLicense )( 
             __RPC__in IPMDeploymentManager * This,
             /* [in] */ PRODUCTID productID,
@@ -2580,6 +2736,7 @@ EXTERN_C const IID IID_IPMDeploymentManager;
             /* [size_is][in] */ __RPC__in_ecount_full(cbLicense) BYTE *pbLicense,
             /* [in] */ DWORD cbLicense);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, GetLicenseChallenge)
         HRESULT ( STDMETHODCALLTYPE *GetLicenseChallenge )( 
             __RPC__in IPMDeploymentManager * This,
             /* [string][in] */ __RPC__in_string BSTR PackagePath,
@@ -2594,12 +2751,14 @@ EXTERN_C const IID IID_IPMDeploymentManager;
             /* [unique][size_is][size_is][out][in] */ __RPC__deref_opt_inout_ecount_full_opt(*pcbKGVValue) BYTE **ppbKGVValue,
             /* [unique][out][in] */ __RPC__inout_opt DWORD *pcbKGVValue);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, GetLicenseChallengeByProductID)
         HRESULT ( STDMETHODCALLTYPE *GetLicenseChallengeByProductID )( 
             __RPC__in IPMDeploymentManager * This,
             /* [in] */ PRODUCTID ProductID,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcbLicense) BYTE **ppbChallenge,
             /* [out] */ __RPC__out DWORD *pcbLicense);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, GetLicenseChallengeByProductID2)
         HRESULT ( STDMETHODCALLTYPE *GetLicenseChallengeByProductID2 )( 
             __RPC__in IPMDeploymentManager * This,
             /* [in] */ PRODUCTID ProductID,
@@ -2614,89 +2773,109 @@ EXTERN_C const IID IID_IPMDeploymentManager;
             /* [unique][size_is][size_is][out][in] */ __RPC__deref_opt_inout_ecount_full_opt(*pcbKGVValue) BYTE **ppbKGVValue,
             /* [unique][out][in] */ __RPC__inout_opt DWORD *pcbKGVValue);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, RevokeLicense)
         HRESULT ( STDMETHODCALLTYPE *RevokeLicense )( 
             __RPC__in IPMDeploymentManager * This,
             /* [in] */ PRODUCTID productID);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, RebindMdilBinaries)
         HRESULT ( STDMETHODCALLTYPE *RebindMdilBinaries )( 
             __RPC__in IPMDeploymentManager * This,
             /* [in] */ PRODUCTID ProductID,
             /* [in] */ __RPC__in SAFEARRAY * FileNames);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, RebindAllMdilBinaries)
         HRESULT ( STDMETHODCALLTYPE *RebindAllMdilBinaries )( 
             __RPC__in IPMDeploymentManager * This,
             /* [in] */ PRODUCTID ProductID,
             /* [in] */ GUID InstanceID);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, RegenerateXbf)
         HRESULT ( STDMETHODCALLTYPE *RegenerateXbf )( 
             __RPC__in IPMDeploymentManager * This,
             /* [in] */ PRODUCTID ProductID,
             /* [in] */ __RPC__in SAFEARRAY * AssemblyPaths);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, GenerateXbfForCurrentLocale)
         HRESULT ( STDMETHODCALLTYPE *GenerateXbfForCurrentLocale )( 
             __RPC__in IPMDeploymentManager * This,
             /* [in] */ PRODUCTID ProductID);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, BeginProvision)
         HRESULT ( STDMETHODCALLTYPE *BeginProvision )( 
             __RPC__in IPMDeploymentManager * This,
             /* [in] */ PRODUCTID ProductID,
             /* [string][in] */ __RPC__in_string BSTR XMLpath);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, BeginDeprovision)
         HRESULT ( STDMETHODCALLTYPE *BeginDeprovision )( 
             __RPC__in IPMDeploymentManager * This,
             /* [in] */ PRODUCTID ProductID);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, ReindexSQLCEDatabases)
         HRESULT ( STDMETHODCALLTYPE *ReindexSQLCEDatabases )( 
             __RPC__in IPMDeploymentManager * This,
             /* [in] */ PRODUCTID ProductID);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, SetApplicationsNeedMaintenance)
         HRESULT ( STDMETHODCALLTYPE *SetApplicationsNeedMaintenance )( 
             __RPC__in IPMDeploymentManager * This,
             /* [in] */ DWORD RequiredMaintenanceOperations,
             /* [out] */ __RPC__out DWORD *pcApplications);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, UpdateChamberProfile)
         HRESULT ( STDMETHODCALLTYPE *UpdateChamberProfile )( 
             __RPC__in IPMDeploymentManager * This,
             /* [in] */ PRODUCTID ProductID);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, EnterprisePolicyIsApplicationAllowed)
         HRESULT ( STDMETHODCALLTYPE *EnterprisePolicyIsApplicationAllowed )( 
             __RPC__in IPMDeploymentManager * This,
             /* [in] */ PRODUCTID productId,
             /* [in] */ __RPC__in LPCWSTR publisherName,
             /* [out] */ __RPC__out BOOL *pIsAllowed);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, BeginUpdateDeployedPackage)
         HRESULT ( STDMETHODCALLTYPE *BeginUpdateDeployedPackage )( 
             __RPC__in IPMDeploymentManager * This,
             /* [in] */ __RPC__in PM_UPDATEINFO *pUpdateInfo);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, ReportRestoreCancelled)
         HRESULT ( STDMETHODCALLTYPE *ReportRestoreCancelled )( 
             __RPC__in IPMDeploymentManager * This,
             /* [in] */ PRODUCTID productID);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, ResolveResourceString)
         HRESULT ( STDMETHODCALLTYPE *ResolveResourceString )( 
             __RPC__in IPMDeploymentManager * This,
             /* [in] */ __RPC__in LPCWSTR resourceString,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pResolvedResourceString);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, UpdateCapabilitiesForModernApps)
         HRESULT ( STDMETHODCALLTYPE *UpdateCapabilitiesForModernApps )( 
             __RPC__in IPMDeploymentManager * This);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, ReportDownloadStatusUpdate)
         HRESULT ( STDMETHODCALLTYPE *ReportDownloadStatusUpdate )( 
             __RPC__in IPMDeploymentManager * This,
             /* [in] */ PRODUCTID productId);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, BeginUninstallWithOptions)
         HRESULT ( STDMETHODCALLTYPE *BeginUninstallWithOptions )( 
             __RPC__in IPMDeploymentManager * This,
             /* [in] */ PRODUCTID productID,
             /* [in] */ DWORD removalOptions);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, BindDeferredMdilBinaries)
         HRESULT ( STDMETHODCALLTYPE *BindDeferredMdilBinaries )( 
             __RPC__in IPMDeploymentManager * This);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, GenerateXamlLightupXbfForCurrentLocale)
         HRESULT ( STDMETHODCALLTYPE *GenerateXamlLightupXbfForCurrentLocale )( 
             __RPC__in IPMDeploymentManager * This,
             /* [string][in] */ __RPC__in_string BSTR PackageFamilyName);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, AddLicenseForAppx)
         HRESULT ( STDMETHODCALLTYPE *AddLicenseForAppx )( 
             __RPC__in IPMDeploymentManager * This,
             /* [in] */ PRODUCTID productID,
@@ -2705,6 +2884,7 @@ EXTERN_C const IID IID_IPMDeploymentManager;
             /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(cbPlayReadyHeader) BYTE *pbPlayReadyHeader,
             /* [in] */ DWORD cbPlayReadyHeader);
         
+        DECLSPEC_XFGVIRT(IPMDeploymentManager, FixJunctionsForAppsOnSDCard)
         HRESULT ( STDMETHODCALLTYPE *FixJunctionsForAppsOnSDCard )( 
             __RPC__in IPMDeploymentManager * This);
         
@@ -2951,80 +3131,96 @@ EXTERN_C const IID IID_IPMEnumerationManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPMEnumerationManager * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPMEnumerationManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPMEnumerationManager * This);
         
+        DECLSPEC_XFGVIRT(IPMEnumerationManager, get_AllApplications)
         HRESULT ( STDMETHODCALLTYPE *get_AllApplications )( 
             __RPC__in IPMEnumerationManager * This,
             /* [out] */ __RPC__deref_out_opt IPMApplicationInfoEnumerator **ppAppEnum,
             /* [in] */ PM_ENUM_FILTER Filter);
         
+        DECLSPEC_XFGVIRT(IPMEnumerationManager, get_AllTiles)
         HRESULT ( STDMETHODCALLTYPE *get_AllTiles )( 
             __RPC__in IPMEnumerationManager * This,
             /* [out] */ __RPC__deref_out_opt IPMTileInfoEnumerator **ppTileEnum,
             /* [in] */ PM_ENUM_FILTER Filter);
         
+        DECLSPEC_XFGVIRT(IPMEnumerationManager, get_AllTasks)
         HRESULT ( STDMETHODCALLTYPE *get_AllTasks )( 
             __RPC__in IPMEnumerationManager * This,
             /* [out] */ __RPC__deref_out_opt IPMTaskInfoEnumerator **ppTaskEnum,
             /* [in] */ PM_ENUM_FILTER Filter);
         
+        DECLSPEC_XFGVIRT(IPMEnumerationManager, get_AllExtensions)
         HRESULT ( STDMETHODCALLTYPE *get_AllExtensions )( 
             __RPC__in IPMEnumerationManager * This,
             /* [out] */ __RPC__deref_out_opt IPMExtensionInfoEnumerator **ppExtensionEnum,
             /* [in] */ PM_ENUM_FILTER Filter);
         
+        DECLSPEC_XFGVIRT(IPMEnumerationManager, get_AllBackgroundServiceAgents)
         HRESULT ( STDMETHODCALLTYPE *get_AllBackgroundServiceAgents )( 
             __RPC__in IPMEnumerationManager * This,
             /* [out] */ __RPC__deref_out_opt IPMBackgroundServiceAgentInfoEnumerator **ppBSAEnum,
             /* [in] */ PM_ENUM_FILTER Filter);
         
+        DECLSPEC_XFGVIRT(IPMEnumerationManager, get_AllBackgroundWorkers)
         HRESULT ( STDMETHODCALLTYPE *get_AllBackgroundWorkers )( 
             __RPC__in IPMEnumerationManager * This,
             /* [out] */ __RPC__deref_out_opt IPMBackgroundWorkerInfoEnumerator **ppBSWEnum,
             /* [in] */ PM_ENUM_FILTER Filter);
         
+        DECLSPEC_XFGVIRT(IPMEnumerationManager, get_ApplicationInfo)
         HRESULT ( STDMETHODCALLTYPE *get_ApplicationInfo )( 
             __RPC__in IPMEnumerationManager * This,
             /* [in] */ PRODUCTID ProductID,
             /* [out] */ __RPC__deref_out_opt IPMApplicationInfo **ppAppInfo);
         
+        DECLSPEC_XFGVIRT(IPMEnumerationManager, get_TileInfo)
         HRESULT ( STDMETHODCALLTYPE *get_TileInfo )( 
             __RPC__in IPMEnumerationManager * This,
             /* [in] */ PRODUCTID ProductID,
             /* [string][in] */ __RPC__in_string BSTR TileID,
             /* [out] */ __RPC__deref_out_opt IPMTileInfo **ppTileInfo);
         
+        DECLSPEC_XFGVIRT(IPMEnumerationManager, get_TaskInfo)
         HRESULT ( STDMETHODCALLTYPE *get_TaskInfo )( 
             __RPC__in IPMEnumerationManager * This,
             /* [in] */ PRODUCTID ProductID,
             /* [string][in] */ __RPC__in_string BSTR TaskID,
             /* [out] */ __RPC__deref_out_opt IPMTaskInfo **ppTaskInfo);
         
+        DECLSPEC_XFGVIRT(IPMEnumerationManager, get_TaskInfoEx)
         HRESULT ( STDMETHODCALLTYPE *get_TaskInfoEx )( 
             __RPC__in IPMEnumerationManager * This,
             /* [in] */ PRODUCTID ProductID,
             /* [string][in] */ __RPC__in_string LPCWSTR TaskID,
             /* [out] */ __RPC__deref_out_opt IPMTaskInfo **ppTaskInfo);
         
+        DECLSPEC_XFGVIRT(IPMEnumerationManager, get_BackgroundServiceAgentInfo)
         HRESULT ( STDMETHODCALLTYPE *get_BackgroundServiceAgentInfo )( 
             __RPC__in IPMEnumerationManager * This,
             /* [in] */ DWORD BSAID,
             /* [out] */ __RPC__deref_out_opt IPMBackgroundServiceAgentInfo **ppTaskInfo);
         
+        DECLSPEC_XFGVIRT(IPMEnumerationManager, get_AllLiveTileJobs)
         HRESULT ( STDMETHODCALLTYPE *get_AllLiveTileJobs )( 
             __RPC__in IPMEnumerationManager * This,
             /* [out] */ __RPC__deref_out_opt IPMLiveTileJobInfoEnumerator **ppLiveTileJobEnum);
         
+        DECLSPEC_XFGVIRT(IPMEnumerationManager, get_LiveTileJob)
         HRESULT ( STDMETHODCALLTYPE *get_LiveTileJob )( 
             __RPC__in IPMEnumerationManager * This,
             /* [in] */ PRODUCTID ProductID,
@@ -3032,29 +3228,34 @@ EXTERN_C const IID IID_IPMEnumerationManager;
             /* [in] */ PM_LIVETILE_RECURRENCE_TYPE RecurrenceType,
             /* [out] */ __RPC__deref_out_opt IPMLiveTileJobInfo **ppLiveTileJobInfo);
         
+        DECLSPEC_XFGVIRT(IPMEnumerationManager, get_ApplicationInfoExternal)
         HRESULT ( STDMETHODCALLTYPE *get_ApplicationInfoExternal )( 
             __RPC__in IPMEnumerationManager * This,
             /* [in] */ PRODUCTID ProductID,
             /* [out] */ __RPC__deref_out_opt IPMApplicationInfo **ppAppInfo);
         
+        DECLSPEC_XFGVIRT(IPMEnumerationManager, get_FileHandlerGenericLogo)
         HRESULT ( STDMETHODCALLTYPE *get_FileHandlerGenericLogo )( 
             __RPC__in IPMEnumerationManager * This,
             /* [string][in] */ __RPC__in_string BSTR FileType,
             /* [in] */ PM_LOGO_SIZE LogoSize,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pLogo);
         
+        DECLSPEC_XFGVIRT(IPMEnumerationManager, get_ApplicationInfoFromAccessClaims)
         HRESULT ( STDMETHODCALLTYPE *get_ApplicationInfoFromAccessClaims )( 
             __RPC__in IPMEnumerationManager * This,
             /* [string][in] */ __RPC__in_string BSTR SysAppID0,
             /* [string][in] */ __RPC__in_string BSTR SysAppID1,
             /* [out] */ __RPC__deref_out_opt IPMApplicationInfo **ppAppInfo);
         
+        DECLSPEC_XFGVIRT(IPMEnumerationManager, get_StartTileEnumeratorBlob)
         HRESULT ( STDMETHODCALLTYPE *get_StartTileEnumeratorBlob )( 
             __RPC__in IPMEnumerationManager * This,
             /* [in] */ PM_ENUM_FILTER Filter,
             /* [out] */ __RPC__out DWORD *pcTiles,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcTiles) PM_STARTTILEBLOB **ppTileBlobs);
         
+        DECLSPEC_XFGVIRT(IPMEnumerationManager, get_StartAppEnumeratorBlob)
         HRESULT ( STDMETHODCALLTYPE *get_StartAppEnumeratorBlob )( 
             __RPC__in IPMEnumerationManager * This,
             /* [in] */ PM_ENUM_FILTER Filter,
@@ -3238,100 +3439,124 @@ EXTERN_C const IID IID_IPMTaskInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPMTaskInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPMTaskInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPMTaskInfo * This);
         
+        DECLSPEC_XFGVIRT(IPMTaskInfo, get_ProductID)
         HRESULT ( STDMETHODCALLTYPE *get_ProductID )( 
             __RPC__in IPMTaskInfo * This,
             /* [out] */ __RPC__out PRODUCTID *pProductID);
         
+        DECLSPEC_XFGVIRT(IPMTaskInfo, get_TaskID)
         HRESULT ( STDMETHODCALLTYPE *get_TaskID )( 
             __RPC__in IPMTaskInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pTaskID);
         
+        DECLSPEC_XFGVIRT(IPMTaskInfo, get_NavigationPage)
         HRESULT ( STDMETHODCALLTYPE *get_NavigationPage )( 
             __RPC__in IPMTaskInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pNavigationPage);
         
+        DECLSPEC_XFGVIRT(IPMTaskInfo, get_TaskTransition)
         HRESULT ( STDMETHODCALLTYPE *get_TaskTransition )( 
             __RPC__in IPMTaskInfo * This,
             /* [out] */ __RPC__out PM_TASK_TRANSITION *pTaskTransition);
         
+        DECLSPEC_XFGVIRT(IPMTaskInfo, get_RuntimeType)
         HRESULT ( STDMETHODCALLTYPE *get_RuntimeType )( 
             __RPC__in IPMTaskInfo * This,
             /* [out] */ __RPC__out PACKMAN_RUNTIME *pRuntimetype);
         
+        DECLSPEC_XFGVIRT(IPMTaskInfo, get_ActivationPolicy)
         HRESULT ( STDMETHODCALLTYPE *get_ActivationPolicy )( 
             __RPC__in IPMTaskInfo * This,
             /* [out] */ __RPC__out PM_ACTIVATION_POLICY *pActivationPolicy);
         
+        DECLSPEC_XFGVIRT(IPMTaskInfo, get_TaskType)
         HRESULT ( STDMETHODCALLTYPE *get_TaskType )( 
             __RPC__in IPMTaskInfo * This,
             /* [out] */ __RPC__out PM_TASK_TYPE *pTaskType);
         
+        DECLSPEC_XFGVIRT(IPMTaskInfo, get_InvocationInfo)
         HRESULT ( STDMETHODCALLTYPE *get_InvocationInfo )( 
             __RPC__in IPMTaskInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pImageUrn,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pParameters);
         
+        DECLSPEC_XFGVIRT(IPMTaskInfo, get_ImagePath)
         HRESULT ( STDMETHODCALLTYPE *get_ImagePath )( 
             __RPC__in IPMTaskInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pImagePath);
         
+        DECLSPEC_XFGVIRT(IPMTaskInfo, get_ImageParams)
         HRESULT ( STDMETHODCALLTYPE *get_ImageParams )( 
             __RPC__in IPMTaskInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pImageParams);
         
+        DECLSPEC_XFGVIRT(IPMTaskInfo, get_InstallRootFolder)
         HRESULT ( STDMETHODCALLTYPE *get_InstallRootFolder )( 
             __RPC__in IPMTaskInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pInstallRootFolder);
         
+        DECLSPEC_XFGVIRT(IPMTaskInfo, get_DataRootFolder)
         HRESULT ( STDMETHODCALLTYPE *get_DataRootFolder )( 
             __RPC__in IPMTaskInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pDataRootFolder);
         
+        DECLSPEC_XFGVIRT(IPMTaskInfo, get_IsSingleInstanceHost)
         HRESULT ( STDMETHODCALLTYPE *get_IsSingleInstanceHost )( 
             __RPC__in IPMTaskInfo * This,
             /* [out] */ __RPC__out BOOL *pIsSingleInstanceHost);
         
+        DECLSPEC_XFGVIRT(IPMTaskInfo, get_IsInteropEnabled)
         HRESULT ( STDMETHODCALLTYPE *get_IsInteropEnabled )( 
             __RPC__in IPMTaskInfo * This,
             /* [out] */ __RPC__out BOOL *pIsInteropEnabled);
         
+        DECLSPEC_XFGVIRT(IPMTaskInfo, get_ApplicationState)
         HRESULT ( STDMETHODCALLTYPE *get_ApplicationState )( 
             __RPC__in IPMTaskInfo * This,
             /* [out] */ __RPC__out PM_APPLICATION_STATE *pApplicationState);
         
+        DECLSPEC_XFGVIRT(IPMTaskInfo, get_InstallType)
         HRESULT ( STDMETHODCALLTYPE *get_InstallType )( 
             __RPC__in IPMTaskInfo * This,
             /* [out] */ __RPC__out PM_APPLICATION_INSTALL_TYPE *pInstallType);
         
+        DECLSPEC_XFGVIRT(IPMTaskInfo, get_Version)
         HRESULT ( STDMETHODCALLTYPE *get_Version )( 
             __RPC__in IPMTaskInfo * This,
             /* [out] */ __RPC__out BYTE *pTargetMajorVersion,
             /* [out] */ __RPC__out BYTE *pTargetMinorVersion);
         
+        DECLSPEC_XFGVIRT(IPMTaskInfo, get_BitsPerPixel)
         HRESULT ( STDMETHODCALLTYPE *get_BitsPerPixel )( 
             __RPC__in IPMTaskInfo * This,
             /* [out] */ __RPC__out USHORT *pBitsPerPixel);
         
+        DECLSPEC_XFGVIRT(IPMTaskInfo, get_SuppressesDehydration)
         HRESULT ( STDMETHODCALLTYPE *get_SuppressesDehydration )( 
             __RPC__in IPMTaskInfo * This,
             /* [out] */ __RPC__out BOOL *pSuppressesDehydration);
         
+        DECLSPEC_XFGVIRT(IPMTaskInfo, get_BackgroundExecutionAbilities)
         HRESULT ( STDMETHODCALLTYPE *get_BackgroundExecutionAbilities )( 
             __RPC__in IPMTaskInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pBackgroundExecutionAbilities);
         
+        DECLSPEC_XFGVIRT(IPMTaskInfo, get_IsOptedForExtendedMem)
         HRESULT ( STDMETHODCALLTYPE *get_IsOptedForExtendedMem )( 
             __RPC__in IPMTaskInfo * This,
             /* [out] */ __RPC__out BOOL *pIsOptedIn);
@@ -3460,18 +3685,22 @@ EXTERN_C const IID IID_IPMTaskInfoEnumerator;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPMTaskInfoEnumerator * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPMTaskInfoEnumerator * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPMTaskInfoEnumerator * This);
         
+        DECLSPEC_XFGVIRT(IPMTaskInfoEnumerator, get_Next)
         HRESULT ( STDMETHODCALLTYPE *get_Next )( 
             __RPC__in IPMTaskInfoEnumerator * This,
             /* [out] */ __RPC__deref_out_opt IPMTaskInfo **ppTaskInfo);
@@ -3556,38 +3785,47 @@ EXTERN_C const IID IID_IPMExtensionInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPMExtensionInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPMExtensionInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPMExtensionInfo * This);
         
+        DECLSPEC_XFGVIRT(IPMExtensionInfo, get_SupplierPID)
         HRESULT ( STDMETHODCALLTYPE *get_SupplierPID )( 
             __RPC__in IPMExtensionInfo * This,
             /* [out] */ __RPC__out PRODUCTID *pSupplierPID);
         
+        DECLSPEC_XFGVIRT(IPMExtensionInfo, get_SupplierTaskID)
         HRESULT ( STDMETHODCALLTYPE *get_SupplierTaskID )( 
             __RPC__in IPMExtensionInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pSupplierTID);
         
+        DECLSPEC_XFGVIRT(IPMExtensionInfo, get_Title)
         HRESULT ( STDMETHODCALLTYPE *get_Title )( 
             __RPC__in IPMExtensionInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pTitle);
         
+        DECLSPEC_XFGVIRT(IPMExtensionInfo, get_IconPath)
         HRESULT ( STDMETHODCALLTYPE *get_IconPath )( 
             __RPC__in IPMExtensionInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pIconPath);
         
+        DECLSPEC_XFGVIRT(IPMExtensionInfo, get_ExtraFile)
         HRESULT ( STDMETHODCALLTYPE *get_ExtraFile )( 
             __RPC__in IPMExtensionInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pFilePath);
         
+        DECLSPEC_XFGVIRT(IPMExtensionInfo, get_InvocationInfo)
         HRESULT ( STDMETHODCALLTYPE *get_InvocationInfo )( 
             __RPC__in IPMExtensionInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pImageUrn,
@@ -3695,46 +3933,56 @@ EXTERN_C const IID IID_IPMExtensionFileExtensionInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPMExtensionFileExtensionInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPMExtensionFileExtensionInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPMExtensionFileExtensionInfo * This);
         
+        DECLSPEC_XFGVIRT(IPMExtensionFileExtensionInfo, get_Name)
         HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IPMExtensionFileExtensionInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pName);
         
+        DECLSPEC_XFGVIRT(IPMExtensionFileExtensionInfo, get_DisplayName)
         HRESULT ( STDMETHODCALLTYPE *get_DisplayName )( 
             __RPC__in IPMExtensionFileExtensionInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pDisplayName);
         
+        DECLSPEC_XFGVIRT(IPMExtensionFileExtensionInfo, get_Logo)
         HRESULT ( STDMETHODCALLTYPE *get_Logo )( 
             __RPC__in IPMExtensionFileExtensionInfo * This,
             /* [in] */ PM_LOGO_SIZE LogoSize,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pLogo);
         
+        DECLSPEC_XFGVIRT(IPMExtensionFileExtensionInfo, get_ContentType)
         HRESULT ( STDMETHODCALLTYPE *get_ContentType )( 
             __RPC__in IPMExtensionFileExtensionInfo * This,
             /* [string][ref][in] */ __RPC__in_string BSTR FileType,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pContentType);
         
+        DECLSPEC_XFGVIRT(IPMExtensionFileExtensionInfo, get_FileType)
         HRESULT ( STDMETHODCALLTYPE *get_FileType )( 
             __RPC__in IPMExtensionFileExtensionInfo * This,
             /* [string][in] */ __RPC__in_string BSTR ContentType,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pFileType);
         
+        DECLSPEC_XFGVIRT(IPMExtensionFileExtensionInfo, get_InvocationInfo)
         HRESULT ( STDMETHODCALLTYPE *get_InvocationInfo )( 
             __RPC__in IPMExtensionFileExtensionInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pImageUrn,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pParameters);
         
+        DECLSPEC_XFGVIRT(IPMExtensionFileExtensionInfo, get_AllFileTypes)
         HRESULT ( STDMETHODCALLTYPE *get_AllFileTypes )( 
             __RPC__in IPMExtensionFileExtensionInfo * This,
             /* [out] */ __RPC__out DWORD *pcbTypes,
@@ -3826,22 +4074,27 @@ EXTERN_C const IID IID_IPMExtensionProtocolInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPMExtensionProtocolInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPMExtensionProtocolInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPMExtensionProtocolInfo * This);
         
+        DECLSPEC_XFGVIRT(IPMExtensionProtocolInfo, get_Protocol)
         HRESULT ( STDMETHODCALLTYPE *get_Protocol )( 
             __RPC__in IPMExtensionProtocolInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pProtocol);
         
+        DECLSPEC_XFGVIRT(IPMExtensionProtocolInfo, get_InvocationInfo)
         HRESULT ( STDMETHODCALLTYPE *get_InvocationInfo )( 
             __RPC__in IPMExtensionProtocolInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pImageUrn,
@@ -3922,28 +4175,34 @@ EXTERN_C const IID IID_IPMExtensionShareTargetInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPMExtensionShareTargetInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPMExtensionShareTargetInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPMExtensionShareTargetInfo * This);
         
+        DECLSPEC_XFGVIRT(IPMExtensionShareTargetInfo, get_AllFileTypes)
         HRESULT ( STDMETHODCALLTYPE *get_AllFileTypes )( 
             __RPC__in IPMExtensionShareTargetInfo * This,
             /* [out] */ __RPC__out DWORD *pcTypes,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcTypes) BSTR **ppTypes);
         
+        DECLSPEC_XFGVIRT(IPMExtensionShareTargetInfo, get_AllDataFormats)
         HRESULT ( STDMETHODCALLTYPE *get_AllDataFormats )( 
             __RPC__in IPMExtensionShareTargetInfo * This,
             /* [out] */ __RPC__out DWORD *pcDataFormats,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcDataFormats) BSTR **ppDataFormats);
         
+        DECLSPEC_XFGVIRT(IPMExtensionShareTargetInfo, get_SupportsAllFileTypes)
         HRESULT ( STDMETHODCALLTYPE *get_SupportsAllFileTypes )( 
             __RPC__in IPMExtensionShareTargetInfo * This,
             /* [out] */ __RPC__out BOOL *pSupportsAllTypes);
@@ -4019,18 +4278,22 @@ EXTERN_C const IID IID_IPMExtensionContractInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPMExtensionContractInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPMExtensionContractInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPMExtensionContractInfo * This);
         
+        DECLSPEC_XFGVIRT(IPMExtensionContractInfo, get_InvocationInfo)
         HRESULT ( STDMETHODCALLTYPE *get_InvocationInfo )( 
             __RPC__in IPMExtensionContractInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pAUMID,
@@ -4104,23 +4367,28 @@ EXTERN_C const IID IID_IPMExtensionFileOpenPickerInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPMExtensionFileOpenPickerInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPMExtensionFileOpenPickerInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPMExtensionFileOpenPickerInfo * This);
         
+        DECLSPEC_XFGVIRT(IPMExtensionFileOpenPickerInfo, get_AllFileTypes)
         HRESULT ( STDMETHODCALLTYPE *get_AllFileTypes )( 
             __RPC__in IPMExtensionFileOpenPickerInfo * This,
             /* [out] */ __RPC__out DWORD *pcTypes,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcTypes) BSTR **ppTypes);
         
+        DECLSPEC_XFGVIRT(IPMExtensionFileOpenPickerInfo, get_SupportsAllFileTypes)
         HRESULT ( STDMETHODCALLTYPE *get_SupportsAllFileTypes )( 
             __RPC__in IPMExtensionFileOpenPickerInfo * This,
             /* [out] */ __RPC__out BOOL *pSupportsAllTypes);
@@ -4196,23 +4464,28 @@ EXTERN_C const IID IID_IPMExtensionFileSavePickerInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPMExtensionFileSavePickerInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPMExtensionFileSavePickerInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPMExtensionFileSavePickerInfo * This);
         
+        DECLSPEC_XFGVIRT(IPMExtensionFileSavePickerInfo, get_AllFileTypes)
         HRESULT ( STDMETHODCALLTYPE *get_AllFileTypes )( 
             __RPC__in IPMExtensionFileSavePickerInfo * This,
             /* [out] */ __RPC__out DWORD *pcTypes,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcTypes) BSTR **ppTypes);
         
+        DECLSPEC_XFGVIRT(IPMExtensionFileSavePickerInfo, get_SupportsAllFileTypes)
         HRESULT ( STDMETHODCALLTYPE *get_SupportsAllFileTypes )( 
             __RPC__in IPMExtensionFileSavePickerInfo * This,
             /* [out] */ __RPC__out BOOL *pSupportsAllTypes);
@@ -4284,18 +4557,22 @@ EXTERN_C const IID IID_IPMExtensionCachedFileUpdaterInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPMExtensionCachedFileUpdaterInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPMExtensionCachedFileUpdaterInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPMExtensionCachedFileUpdaterInfo * This);
         
+        DECLSPEC_XFGVIRT(IPMExtensionCachedFileUpdaterInfo, get_SupportsUpdates)
         HRESULT ( STDMETHODCALLTYPE *get_SupportsUpdates )( 
             __RPC__in IPMExtensionCachedFileUpdaterInfo * This,
             /* [out] */ __RPC__out BOOL *pSupportsUpdates);
@@ -4364,18 +4641,22 @@ EXTERN_C const IID IID_IPMExtensionInfoEnumerator;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPMExtensionInfoEnumerator * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPMExtensionInfoEnumerator * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPMExtensionInfoEnumerator * This);
         
+        DECLSPEC_XFGVIRT(IPMExtensionInfoEnumerator, get_Next)
         HRESULT ( STDMETHODCALLTYPE *get_Next )( 
             __RPC__in IPMExtensionInfoEnumerator * This,
             /* [out] */ __RPC__deref_out_opt IPMExtensionInfo **ppExtensionInfo);
@@ -4483,70 +4764,87 @@ EXTERN_C const IID IID_IPMBackgroundServiceAgentInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPMBackgroundServiceAgentInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPMBackgroundServiceAgentInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPMBackgroundServiceAgentInfo * This);
         
+        DECLSPEC_XFGVIRT(IPMBackgroundServiceAgentInfo, get_ProductID)
         HRESULT ( STDMETHODCALLTYPE *get_ProductID )( 
             __RPC__in IPMBackgroundServiceAgentInfo * This,
             /* [out] */ __RPC__out PRODUCTID *pProductID);
         
+        DECLSPEC_XFGVIRT(IPMBackgroundServiceAgentInfo, get_TaskID)
         HRESULT ( STDMETHODCALLTYPE *get_TaskID )( 
             __RPC__in IPMBackgroundServiceAgentInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pTaskID);
         
+        DECLSPEC_XFGVIRT(IPMBackgroundServiceAgentInfo, get_BSAID)
         HRESULT ( STDMETHODCALLTYPE *get_BSAID )( 
             __RPC__in IPMBackgroundServiceAgentInfo * This,
             /* [out] */ __RPC__out DWORD *pBSAID);
         
+        DECLSPEC_XFGVIRT(IPMBackgroundServiceAgentInfo, get_BGSpecifier)
         HRESULT ( STDMETHODCALLTYPE *get_BGSpecifier )( 
             __RPC__in IPMBackgroundServiceAgentInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pBGSpecifier);
         
+        DECLSPEC_XFGVIRT(IPMBackgroundServiceAgentInfo, get_BGName)
         HRESULT ( STDMETHODCALLTYPE *get_BGName )( 
             __RPC__in IPMBackgroundServiceAgentInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pBGName);
         
+        DECLSPEC_XFGVIRT(IPMBackgroundServiceAgentInfo, get_BGSource)
         HRESULT ( STDMETHODCALLTYPE *get_BGSource )( 
             __RPC__in IPMBackgroundServiceAgentInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pBGSource);
         
+        DECLSPEC_XFGVIRT(IPMBackgroundServiceAgentInfo, get_BGType)
         HRESULT ( STDMETHODCALLTYPE *get_BGType )( 
             __RPC__in IPMBackgroundServiceAgentInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pBGType);
         
+        DECLSPEC_XFGVIRT(IPMBackgroundServiceAgentInfo, get_IsPeriodic)
         HRESULT ( STDMETHODCALLTYPE *get_IsPeriodic )( 
             __RPC__in IPMBackgroundServiceAgentInfo * This,
             /* [out] */ __RPC__out BOOL *pIsPeriodic);
         
+        DECLSPEC_XFGVIRT(IPMBackgroundServiceAgentInfo, get_IsScheduled)
         HRESULT ( STDMETHODCALLTYPE *get_IsScheduled )( 
             __RPC__in IPMBackgroundServiceAgentInfo * This,
             /* [out] */ __RPC__out BOOL *pIsScheduled);
         
+        DECLSPEC_XFGVIRT(IPMBackgroundServiceAgentInfo, get_IsScheduleAllowed)
         HRESULT ( STDMETHODCALLTYPE *get_IsScheduleAllowed )( 
             __RPC__in IPMBackgroundServiceAgentInfo * This,
             /* [out] */ __RPC__out BOOL *pIsScheduleAllowed);
         
+        DECLSPEC_XFGVIRT(IPMBackgroundServiceAgentInfo, get_Description)
         HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IPMBackgroundServiceAgentInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pDescription);
         
+        DECLSPEC_XFGVIRT(IPMBackgroundServiceAgentInfo, get_IsLaunchOnBoot)
         HRESULT ( STDMETHODCALLTYPE *get_IsLaunchOnBoot )( 
             __RPC__in IPMBackgroundServiceAgentInfo * This,
             /* [out] */ __RPC__out BOOL *pLaunchOnBoot);
         
+        DECLSPEC_XFGVIRT(IPMBackgroundServiceAgentInfo, set_IsScheduled)
         HRESULT ( STDMETHODCALLTYPE *set_IsScheduled )( 
             __RPC__in IPMBackgroundServiceAgentInfo * This,
             /* [in] */ BOOL IsScheduled);
         
+        DECLSPEC_XFGVIRT(IPMBackgroundServiceAgentInfo, set_IsScheduleAllowed)
         HRESULT ( STDMETHODCALLTYPE *set_IsScheduleAllowed )( 
             __RPC__in IPMBackgroundServiceAgentInfo * This,
             /* [in] */ BOOL IsScheduleAllowed);
@@ -4669,38 +4967,47 @@ EXTERN_C const IID IID_IPMBackgroundWorkerInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPMBackgroundWorkerInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPMBackgroundWorkerInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPMBackgroundWorkerInfo * This);
         
+        DECLSPEC_XFGVIRT(IPMBackgroundWorkerInfo, get_ProductID)
         HRESULT ( STDMETHODCALLTYPE *get_ProductID )( 
             __RPC__in IPMBackgroundWorkerInfo * This,
             /* [out] */ __RPC__out PRODUCTID *pProductID);
         
+        DECLSPEC_XFGVIRT(IPMBackgroundWorkerInfo, get_TaskID)
         HRESULT ( STDMETHODCALLTYPE *get_TaskID )( 
             __RPC__in IPMBackgroundWorkerInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pTaskID);
         
+        DECLSPEC_XFGVIRT(IPMBackgroundWorkerInfo, get_BGName)
         HRESULT ( STDMETHODCALLTYPE *get_BGName )( 
             __RPC__in IPMBackgroundWorkerInfo * This,
             /* [string][out][in] */ __RPC__deref_inout_opt_string BSTR *pBGName);
         
+        DECLSPEC_XFGVIRT(IPMBackgroundWorkerInfo, get_MaxStartupLatency)
         HRESULT ( STDMETHODCALLTYPE *get_MaxStartupLatency )( 
             __RPC__in IPMBackgroundWorkerInfo * This,
             /* [out] */ __RPC__out DWORD *pMaxStartupLatency);
         
+        DECLSPEC_XFGVIRT(IPMBackgroundWorkerInfo, get_ExpectedRuntime)
         HRESULT ( STDMETHODCALLTYPE *get_ExpectedRuntime )( 
             __RPC__in IPMBackgroundWorkerInfo * This,
             /* [out] */ __RPC__out DWORD *pExpectedRuntime);
         
+        DECLSPEC_XFGVIRT(IPMBackgroundWorkerInfo, get_IsBootWorker)
         HRESULT ( STDMETHODCALLTYPE *get_IsBootWorker )( 
             __RPC__in IPMBackgroundWorkerInfo * This,
             /* [out] */ __RPC__out BOOL *pIsBootWorker);
@@ -4784,18 +5091,22 @@ EXTERN_C const IID IID_IPMBackgroundServiceAgentInfoEnumerator;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPMBackgroundServiceAgentInfoEnumerator * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPMBackgroundServiceAgentInfoEnumerator * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPMBackgroundServiceAgentInfoEnumerator * This);
         
+        DECLSPEC_XFGVIRT(IPMBackgroundServiceAgentInfoEnumerator, get_Next)
         HRESULT ( STDMETHODCALLTYPE *get_Next )( 
             __RPC__in IPMBackgroundServiceAgentInfoEnumerator * This,
             /* [out] */ __RPC__deref_out_opt IPMBackgroundServiceAgentInfo **ppBSAInfo);
@@ -4864,18 +5175,22 @@ EXTERN_C const IID IID_IPMBackgroundWorkerInfoEnumerator;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPMBackgroundWorkerInfoEnumerator * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPMBackgroundWorkerInfoEnumerator * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPMBackgroundWorkerInfoEnumerator * This);
         
+        DECLSPEC_XFGVIRT(IPMBackgroundWorkerInfoEnumerator, get_Next)
         HRESULT ( STDMETHODCALLTYPE *get_Next )( 
             __RPC__in IPMBackgroundWorkerInfoEnumerator * This,
             /* [out] */ __RPC__deref_out_opt IPMBackgroundWorkerInfo **ppBWInfo);

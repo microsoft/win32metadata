@@ -1,6 +1,6 @@
 /********************************************************************************
 *                                                                               *
-* joystickapi.h -- ApiSet Contract for api-ms-win-mm-joystick-l1-1-0            *  
+* joystickapi.h -- ApiSet Contract for api-ms-win-mm-joystick-l1-1-0            *
 *                                                                               *
 * Copyright (c) Microsoft Corporation. All rights reserved.                     *
 *                                                                               *
@@ -16,7 +16,6 @@
 #include <apiset.h>
 #include <apisetcconv.h>
 
-
 #include <mmsyscom.h> // mm common definitions
 
 #ifdef __cplusplus
@@ -26,8 +25,7 @@ extern "C" {
 #pragma region Desktop Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 
-
-#ifndef MMNOJOY                                                
+#ifndef MMNOJOY
 /****************************************************************************
 
                             Joystick support
@@ -127,8 +125,6 @@ extern "C" {
 #define JOYCAPS_HASPOV          0x0010
 #define JOYCAPS_POV4DIR         0x0020
 #define JOYCAPS_POVCTS          0x0040
-
-
 
 /* joystick device capabilities data structure */
 #ifdef _WIN32
@@ -301,7 +297,6 @@ typedef struct joycaps_tag {
 } JOYCAPS, *PJOYCAPS, NEAR *NPJOYCAPS, FAR *LPJOYCAPS;
 #endif
 
-
 /* joystick information data structure */
 typedef struct joyinfo_tag {
     UINT wXpos;                 /* x position */
@@ -331,6 +326,7 @@ typedef struct joyinfoex_tag {
 /* joystick function prototypes */
 
 #if (WINVER >= 0x0400)
+
 WINMMAPI
 MMRESULT
 WINAPI
@@ -338,7 +334,6 @@ joyGetPosEx(
     _In_ UINT uJoyID,
     _Out_ LPJOYINFOEX pji
     );
-
 #endif /* WINVER >= 0x0400 */
 
 WINMMAPI
@@ -347,7 +342,6 @@ WINAPI
 joyGetNumDevs(
     void
     );
-
 #ifdef _WIN32
 
 WINMMAPI
@@ -367,7 +361,6 @@ joyGetDevCapsW(
     _Out_writes_bytes_(cbjc) LPJOYCAPSW pjc,
     _In_ UINT cbjc
     );
-
 #ifdef UNICODE
 #define joyGetDevCaps  joyGetDevCapsW
 #else
@@ -386,7 +379,6 @@ joyGetPos(
     _Out_ LPJOYINFO pji
     );
 
-
 WINMMAPI
 MMRESULT
 WINAPI
@@ -395,14 +387,12 @@ joyGetThreshold(
     _Out_ LPUINT puThreshold
     );
 
-
 WINMMAPI
 MMRESULT
 WINAPI
 joyReleaseCapture(
     _In_ UINT uJoyID
     );
-
 
 WINMMAPI
 MMRESULT
@@ -414,7 +404,6 @@ joySetCapture(
     _In_ BOOL fChanged
     );
 
-
 WINMMAPI
 MMRESULT
 WINAPI
@@ -423,15 +412,14 @@ joySetThreshold(
     _In_ UINT uThreshold
     );
 
-
 #if (WINVER >= 0x0400)
+
 WINMMAPI
 MMRESULT
 WINAPI
 joyConfigChanged(
     _In_ DWORD dwFlags
     );
-
 #endif
 
 #endif  /* ifndef MMNOJOY */
@@ -444,5 +432,4 @@ joyConfigChanged(
 #endif
 
 #endif // _JOYSTICKAPI_H_
-
 

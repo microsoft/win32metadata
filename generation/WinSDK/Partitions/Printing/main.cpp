@@ -31,3 +31,6 @@
 #include <winppi.h>
 #include <winsplp.h>
 #include <xpsrassvc.h>
+#include <imgerror.h>
+#include <printerextensiondispid.h>
+#include <printpreview.h>

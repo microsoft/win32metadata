@@ -193,6 +193,11 @@ class MSFT_PhysicalDisk : MSFT_StorageFaultDomain {
         )]
     String AdapterSerialNumber;
 
+    [Read, Description(
+        "FruId is an identifier of the replacement unit housing the physical disk."
+        )]
+    String FruId;
+
 
     //
     // Method: GetPhysicalExtent

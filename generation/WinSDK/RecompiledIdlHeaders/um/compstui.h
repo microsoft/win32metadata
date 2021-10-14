@@ -997,7 +997,7 @@ typedef struct _EXTPUSH {
     union {
         WORD    DlgTemplateID;          // dialog box template ID
         HANDLE  hDlgTemplate;           // handle to the dialog template
-        } DUMMYUNIONNAME;
+        } DUMMYUNIONNAME2;
     ULONG_PTR   dwReserved[3];          // reserved field, must be 0
     } EXTPUSH, *PEXTPUSH;
 

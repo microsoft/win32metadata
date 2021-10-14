@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 #pragma warning( disable: 4049 )  /* more than 64k source lines */
@@ -31,6 +31,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -654,28 +662,34 @@ EXTERN_C const IID IID_IWMPErrorItem;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPErrorItem * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPErrorItem * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPErrorItem * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPErrorItem * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPErrorItem * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPErrorItem * This,
             /* [in] */ REFIID riid,
@@ -684,6 +698,7 @@ EXTERN_C const IID IID_IWMPErrorItem;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPErrorItem * This,
             /* [annotation][in] */ 
@@ -703,22 +718,27 @@ EXTERN_C const IID IID_IWMPErrorItem;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPErrorItem, get_errorCode)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_errorCode )( 
             IWMPErrorItem * This,
             /* [retval][out] */ long *phr);
         
+        DECLSPEC_XFGVIRT(IWMPErrorItem, get_errorDescription)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_errorDescription )( 
             IWMPErrorItem * This,
             /* [retval][out] */ BSTR *pbstrDescription);
         
+        DECLSPEC_XFGVIRT(IWMPErrorItem, get_errorContext)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_errorContext )( 
             IWMPErrorItem * This,
             /* [retval][out] */ VARIANT *pvarContext);
         
+        DECLSPEC_XFGVIRT(IWMPErrorItem, get_remedy)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_remedy )( 
             IWMPErrorItem * This,
             /* [retval][out] */ long *plRemedy);
         
+        DECLSPEC_XFGVIRT(IWMPErrorItem, get_customUrl)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_customUrl )( 
             IWMPErrorItem * This,
             /* [retval][out] */ BSTR *pbstrCustomUrl);
@@ -820,28 +840,34 @@ EXTERN_C const IID IID_IWMPError;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPError * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPError * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPError * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPError * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPError * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPError * This,
             /* [in] */ REFIID riid,
@@ -850,6 +876,7 @@ EXTERN_C const IID IID_IWMPError;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPError * This,
             /* [annotation][in] */ 
@@ -869,18 +896,22 @@ EXTERN_C const IID IID_IWMPError;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPError, clearErrorQueue)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *clearErrorQueue )( 
             IWMPError * This);
         
+        DECLSPEC_XFGVIRT(IWMPError, get_errorCount)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_errorCount )( 
             IWMPError * This,
             /* [retval][out] */ long *plNumErrors);
         
+        DECLSPEC_XFGVIRT(IWMPError, get_item)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_item )( 
             IWMPError * This,
             /* [in] */ long dwIndex,
             /* [retval][out] */ IWMPErrorItem **ppErrorItem);
         
+        DECLSPEC_XFGVIRT(IWMPError, webHelp)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *webHelp )( 
             IWMPError * This);
         
@@ -1030,28 +1061,34 @@ EXTERN_C const IID IID_IWMPMedia;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPMedia * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPMedia * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPMedia * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPMedia * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPMedia * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPMedia * This,
             /* [in] */ REFIID riid,
@@ -1060,6 +1097,7 @@ EXTERN_C const IID IID_IWMPMedia;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPMedia * This,
             /* [annotation][in] */ 
@@ -1079,82 +1117,100 @@ EXTERN_C const IID IID_IWMPMedia;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, get_isIdentical)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_isIdentical )( 
             IWMPMedia * This,
             /* [in] */ IWMPMedia *pIWMPMedia,
             /* [retval][out] */ VARIANT_BOOL *pvbool);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, get_sourceURL)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_sourceURL )( 
             IWMPMedia * This,
             /* [retval][out] */ BSTR *pbstrSourceURL);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, get_name)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_name )( 
             IWMPMedia * This,
             /* [retval][out] */ BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, put_name)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_name )( 
             IWMPMedia * This,
             /* [in] */ BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, get_imageSourceWidth)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_imageSourceWidth )( 
             IWMPMedia * This,
             /* [retval][out] */ long *pWidth);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, get_imageSourceHeight)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_imageSourceHeight )( 
             IWMPMedia * This,
             /* [retval][out] */ long *pHeight);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, get_markerCount)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_markerCount )( 
             IWMPMedia * This,
             /* [retval][out] */ long *pMarkerCount);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, getMarkerTime)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getMarkerTime )( 
             IWMPMedia * This,
             /* [in] */ long MarkerNum,
             /* [retval][out] */ double *pMarkerTime);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, getMarkerName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getMarkerName )( 
             IWMPMedia * This,
             /* [in] */ long MarkerNum,
             /* [retval][out] */ BSTR *pbstrMarkerName);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, get_duration)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_duration )( 
             IWMPMedia * This,
             /* [retval][out] */ double *pDuration);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, get_durationString)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_durationString )( 
             IWMPMedia * This,
             /* [retval][out] */ BSTR *pbstrDuration);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, get_attributeCount)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_attributeCount )( 
             IWMPMedia * This,
             /* [retval][out] */ long *plCount);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, getAttributeName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getAttributeName )( 
             IWMPMedia * This,
             /* [in] */ long lIndex,
             /* [retval][out] */ BSTR *pbstrItemName);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, getItemInfo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getItemInfo )( 
             IWMPMedia * This,
             /* [in] */ BSTR bstrItemName,
             /* [retval][out] */ BSTR *pbstrVal);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, setItemInfo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setItemInfo )( 
             IWMPMedia * This,
             /* [in] */ BSTR bstrItemName,
             /* [in] */ BSTR bstrVal);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, getItemInfoByAtom)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getItemInfoByAtom )( 
             IWMPMedia * This,
             /* [in] */ long lAtom,
             /* [retval][out] */ BSTR *pbstrVal);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, isMemberOf)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *isMemberOf )( 
             IWMPMedia * This,
             /* [in] */ IWMPPlaylist *pPlaylist,
             /* [retval][out] */ VARIANT_BOOL *pvarfIsMemberOf);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, isReadOnlyItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *isReadOnlyItem )( 
             IWMPMedia * This,
             /* [in] */ BSTR bstrItemName,
@@ -1327,28 +1383,34 @@ EXTERN_C const IID IID_IWMPControls;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPControls * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPControls * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPControls * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPControls * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPControls * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPControls * This,
             /* [in] */ REFIID riid,
@@ -1357,6 +1419,7 @@ EXTERN_C const IID IID_IWMPControls;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPControls * This,
             /* [annotation][in] */ 
@@ -1376,60 +1439,76 @@ EXTERN_C const IID IID_IWMPControls;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPControls, get_isAvailable)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_isAvailable )( 
             IWMPControls * This,
             /* [in] */ BSTR bstrItem,
             /* [retval][out] */ VARIANT_BOOL *pIsAvailable);
         
+        DECLSPEC_XFGVIRT(IWMPControls, play)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *play )( 
             IWMPControls * This);
         
+        DECLSPEC_XFGVIRT(IWMPControls, stop)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *stop )( 
             IWMPControls * This);
         
+        DECLSPEC_XFGVIRT(IWMPControls, pause)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *pause )( 
             IWMPControls * This);
         
+        DECLSPEC_XFGVIRT(IWMPControls, fastForward)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *fastForward )( 
             IWMPControls * This);
         
+        DECLSPEC_XFGVIRT(IWMPControls, fastReverse)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *fastReverse )( 
             IWMPControls * This);
         
+        DECLSPEC_XFGVIRT(IWMPControls, get_currentPosition)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_currentPosition )( 
             IWMPControls * This,
             /* [retval][out] */ double *pdCurrentPosition);
         
+        DECLSPEC_XFGVIRT(IWMPControls, put_currentPosition)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_currentPosition )( 
             IWMPControls * This,
             /* [in] */ double dCurrentPosition);
         
+        DECLSPEC_XFGVIRT(IWMPControls, get_currentPositionString)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_currentPositionString )( 
             IWMPControls * This,
             /* [retval][out] */ BSTR *pbstrCurrentPosition);
         
+        DECLSPEC_XFGVIRT(IWMPControls, next)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *next )( 
             IWMPControls * This);
         
+        DECLSPEC_XFGVIRT(IWMPControls, previous)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *previous )( 
             IWMPControls * This);
         
+        DECLSPEC_XFGVIRT(IWMPControls, get_currentItem)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_currentItem )( 
             IWMPControls * This,
             /* [retval][out] */ IWMPMedia **ppIWMPMedia);
         
+        DECLSPEC_XFGVIRT(IWMPControls, put_currentItem)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_currentItem )( 
             IWMPControls * This,
             /* [in] */ IWMPMedia *pIWMPMedia);
         
+        DECLSPEC_XFGVIRT(IWMPControls, get_currentMarker)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_currentMarker )( 
             IWMPControls * This,
             /* [retval][out] */ long *plMarker);
         
+        DECLSPEC_XFGVIRT(IWMPControls, put_currentMarker)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_currentMarker )( 
             IWMPControls * This,
             /* [in] */ long lMarker);
         
+        DECLSPEC_XFGVIRT(IWMPControls, playItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *playItem )( 
             IWMPControls * This,
             /* [in] */ IWMPMedia *pIWMPMedia);
@@ -1625,28 +1704,34 @@ EXTERN_C const IID IID_IWMPSettings;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPSettings * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPSettings * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPSettings * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPSettings * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPSettings * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPSettings * This,
             /* [in] */ REFIID riid,
@@ -1655,6 +1740,7 @@ EXTERN_C const IID IID_IWMPSettings;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPSettings * This,
             /* [annotation][in] */ 
@@ -1674,97 +1760,120 @@ EXTERN_C const IID IID_IWMPSettings;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, get_isAvailable)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_isAvailable )( 
             IWMPSettings * This,
             /* [in] */ BSTR bstrItem,
             /* [retval][out] */ VARIANT_BOOL *pIsAvailable);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, get_autoStart)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_autoStart )( 
             IWMPSettings * This,
             /* [retval][out] */ VARIANT_BOOL *pfAutoStart);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, put_autoStart)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_autoStart )( 
             IWMPSettings * This,
             /* [in] */ VARIANT_BOOL fAutoStart);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, get_baseURL)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_baseURL )( 
             IWMPSettings * This,
             /* [retval][out] */ BSTR *pbstrBaseURL);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, put_baseURL)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_baseURL )( 
             IWMPSettings * This,
             /* [in] */ BSTR bstrBaseURL);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, get_defaultFrame)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_defaultFrame )( 
             IWMPSettings * This,
             /* [retval][out] */ BSTR *pbstrDefaultFrame);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, put_defaultFrame)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_defaultFrame )( 
             IWMPSettings * This,
             /* [in] */ BSTR bstrDefaultFrame);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, get_invokeURLs)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_invokeURLs )( 
             IWMPSettings * This,
             /* [retval][out] */ VARIANT_BOOL *pfInvokeURLs);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, put_invokeURLs)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_invokeURLs )( 
             IWMPSettings * This,
             /* [in] */ VARIANT_BOOL fInvokeURLs);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, get_mute)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_mute )( 
             IWMPSettings * This,
             /* [retval][out] */ VARIANT_BOOL *pfMute);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, put_mute)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_mute )( 
             IWMPSettings * This,
             /* [in] */ VARIANT_BOOL fMute);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, get_playCount)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_playCount )( 
             IWMPSettings * This,
             /* [retval][out] */ long *plCount);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, put_playCount)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_playCount )( 
             IWMPSettings * This,
             /* [in] */ long lCount);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, get_rate)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_rate )( 
             IWMPSettings * This,
             /* [retval][out] */ double *pdRate);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, put_rate)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_rate )( 
             IWMPSettings * This,
             /* [in] */ double dRate);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, get_balance)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_balance )( 
             IWMPSettings * This,
             /* [retval][out] */ long *plBalance);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, put_balance)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_balance )( 
             IWMPSettings * This,
             /* [in] */ long lBalance);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, get_volume)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_volume )( 
             IWMPSettings * This,
             /* [retval][out] */ long *plVolume);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, put_volume)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_volume )( 
             IWMPSettings * This,
             /* [in] */ long lVolume);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, getMode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getMode )( 
             IWMPSettings * This,
             /* [in] */ BSTR bstrMode,
             /* [retval][out] */ VARIANT_BOOL *pvarfMode);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, setMode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setMode )( 
             IWMPSettings * This,
             /* [in] */ BSTR bstrMode,
             /* [in] */ VARIANT_BOOL varfMode);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, get_enableErrorDialogs)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_enableErrorDialogs )( 
             IWMPSettings * This,
             /* [retval][out] */ VARIANT_BOOL *pfEnableErrorDialogs);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, put_enableErrorDialogs)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_enableErrorDialogs )( 
             IWMPSettings * This,
             /* [in] */ VARIANT_BOOL fEnableErrorDialogs);
@@ -1933,28 +2042,34 @@ EXTERN_C const IID IID_IWMPClosedCaption;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPClosedCaption * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPClosedCaption * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPClosedCaption * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPClosedCaption * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPClosedCaption * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPClosedCaption * This,
             /* [in] */ REFIID riid,
@@ -1963,6 +2078,7 @@ EXTERN_C const IID IID_IWMPClosedCaption;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPClosedCaption * This,
             /* [annotation][in] */ 
@@ -1982,34 +2098,42 @@ EXTERN_C const IID IID_IWMPClosedCaption;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPClosedCaption, get_SAMIStyle)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SAMIStyle )( 
             IWMPClosedCaption * This,
             /* [retval][out] */ BSTR *pbstrSAMIStyle);
         
+        DECLSPEC_XFGVIRT(IWMPClosedCaption, put_SAMIStyle)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_SAMIStyle )( 
             IWMPClosedCaption * This,
             /* [in] */ BSTR bstrSAMIStyle);
         
+        DECLSPEC_XFGVIRT(IWMPClosedCaption, get_SAMILang)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SAMILang )( 
             IWMPClosedCaption * This,
             /* [retval][out] */ BSTR *pbstrSAMILang);
         
+        DECLSPEC_XFGVIRT(IWMPClosedCaption, put_SAMILang)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_SAMILang )( 
             IWMPClosedCaption * This,
             /* [in] */ BSTR bstrSAMILang);
         
+        DECLSPEC_XFGVIRT(IWMPClosedCaption, get_SAMIFileName)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SAMIFileName )( 
             IWMPClosedCaption * This,
             /* [retval][out] */ BSTR *pbstrSAMIFileName);
         
+        DECLSPEC_XFGVIRT(IWMPClosedCaption, put_SAMIFileName)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_SAMIFileName )( 
             IWMPClosedCaption * This,
             /* [in] */ BSTR bstrSAMIFileName);
         
+        DECLSPEC_XFGVIRT(IWMPClosedCaption, get_captioningId)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_captioningId )( 
             IWMPClosedCaption * This,
             /* [retval][out] */ BSTR *pbstrCaptioningID);
         
+        DECLSPEC_XFGVIRT(IWMPClosedCaption, put_captioningId)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_captioningId )( 
             IWMPClosedCaption * This,
             /* [in] */ BSTR bstrCaptioningID);
@@ -2157,28 +2281,34 @@ EXTERN_C const IID IID_IWMPPlaylist;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPPlaylist * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPPlaylist * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPPlaylist * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPPlaylist * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPPlaylist * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPPlaylist * This,
             /* [in] */ REFIID riid,
@@ -2187,6 +2317,7 @@ EXTERN_C const IID IID_IWMPPlaylist;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPPlaylist * This,
             /* [annotation][in] */ 
@@ -2206,63 +2337,77 @@ EXTERN_C const IID IID_IWMPPlaylist;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPPlaylist, get_count)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_count )( 
             IWMPPlaylist * This,
             /* [retval][out] */ long *plCount);
         
+        DECLSPEC_XFGVIRT(IWMPPlaylist, get_name)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_name )( 
             IWMPPlaylist * This,
             /* [retval][out] */ BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IWMPPlaylist, put_name)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_name )( 
             IWMPPlaylist * This,
             /* [in] */ BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(IWMPPlaylist, get_attributeCount)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_attributeCount )( 
             IWMPPlaylist * This,
             /* [retval][out] */ long *plCount);
         
+        DECLSPEC_XFGVIRT(IWMPPlaylist, get_attributeName)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_attributeName )( 
             IWMPPlaylist * This,
             /* [in] */ long lIndex,
             /* [retval][out] */ BSTR *pbstrAttributeName);
         
+        DECLSPEC_XFGVIRT(IWMPPlaylist, get_item)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_item )( 
             IWMPPlaylist * This,
             long lIndex,
             /* [retval][out] */ IWMPMedia **ppIWMPMedia);
         
+        DECLSPEC_XFGVIRT(IWMPPlaylist, getItemInfo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getItemInfo )( 
             IWMPPlaylist * This,
             /* [in] */ BSTR bstrName,
             /* [retval][out] */ BSTR *pbstrVal);
         
+        DECLSPEC_XFGVIRT(IWMPPlaylist, setItemInfo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setItemInfo )( 
             IWMPPlaylist * This,
             /* [in] */ BSTR bstrName,
             /* [in] */ BSTR bstrValue);
         
+        DECLSPEC_XFGVIRT(IWMPPlaylist, get_isIdentical)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_isIdentical )( 
             IWMPPlaylist * This,
             /* [in] */ IWMPPlaylist *pIWMPPlaylist,
             /* [retval][out] */ VARIANT_BOOL *pvbool);
         
+        DECLSPEC_XFGVIRT(IWMPPlaylist, clear)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *clear )( 
             IWMPPlaylist * This);
         
+        DECLSPEC_XFGVIRT(IWMPPlaylist, insertItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *insertItem )( 
             IWMPPlaylist * This,
             /* [in] */ long lIndex,
             /* [in] */ IWMPMedia *pIWMPMedia);
         
+        DECLSPEC_XFGVIRT(IWMPPlaylist, appendItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *appendItem )( 
             IWMPPlaylist * This,
             /* [in] */ IWMPMedia *pIWMPMedia);
         
+        DECLSPEC_XFGVIRT(IWMPPlaylist, removeItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *removeItem )( 
             IWMPPlaylist * This,
             /* [in] */ IWMPMedia *pIWMPMedia);
         
+        DECLSPEC_XFGVIRT(IWMPPlaylist, moveItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *moveItem )( 
             IWMPPlaylist * This,
             long lIndexOld,
@@ -2389,28 +2534,34 @@ EXTERN_C const IID IID_IWMPCdrom;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPCdrom * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPCdrom * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPCdrom * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPCdrom * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPCdrom * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPCdrom * This,
             /* [in] */ REFIID riid,
@@ -2419,6 +2570,7 @@ EXTERN_C const IID IID_IWMPCdrom;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPCdrom * This,
             /* [annotation][in] */ 
@@ -2438,14 +2590,17 @@ EXTERN_C const IID IID_IWMPCdrom;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPCdrom, get_driveSpecifier)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_driveSpecifier )( 
             IWMPCdrom * This,
             /* [retval][out] */ BSTR *pbstrDrive);
         
+        DECLSPEC_XFGVIRT(IWMPCdrom, get_playlist)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_playlist )( 
             IWMPCdrom * This,
             /* [retval][out] */ IWMPPlaylist **ppPlaylist);
         
+        DECLSPEC_XFGVIRT(IWMPCdrom, eject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *eject )( 
             IWMPCdrom * This);
         
@@ -2540,28 +2695,34 @@ EXTERN_C const IID IID_IWMPCdromCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPCdromCollection * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPCdromCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPCdromCollection * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPCdromCollection * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPCdromCollection * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPCdromCollection * This,
             /* [in] */ REFIID riid,
@@ -2570,6 +2731,7 @@ EXTERN_C const IID IID_IWMPCdromCollection;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPCdromCollection * This,
             /* [annotation][in] */ 
@@ -2589,15 +2751,18 @@ EXTERN_C const IID IID_IWMPCdromCollection;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPCdromCollection, get_count)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_count )( 
             IWMPCdromCollection * This,
             /* [retval][out] */ long *plCount);
         
+        DECLSPEC_XFGVIRT(IWMPCdromCollection, item)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *item )( 
             IWMPCdromCollection * This,
             /* [in] */ long lIndex,
             /* [retval][out] */ IWMPCdrom **ppItem);
         
+        DECLSPEC_XFGVIRT(IWMPCdromCollection, getByDriveSpecifier)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getByDriveSpecifier )( 
             IWMPCdromCollection * This,
             /* [in] */ BSTR bstrDriveSpecifier,
@@ -2690,28 +2855,34 @@ EXTERN_C const IID IID_IWMPStringCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPStringCollection * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPStringCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPStringCollection * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPStringCollection * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPStringCollection * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPStringCollection * This,
             /* [in] */ REFIID riid,
@@ -2720,6 +2891,7 @@ EXTERN_C const IID IID_IWMPStringCollection;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPStringCollection * This,
             /* [annotation][in] */ 
@@ -2739,10 +2911,12 @@ EXTERN_C const IID IID_IWMPStringCollection;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPStringCollection, get_count)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_count )( 
             IWMPStringCollection * This,
             /* [retval][out] */ long *plCount);
         
+        DECLSPEC_XFGVIRT(IWMPStringCollection, item)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *item )( 
             IWMPStringCollection * This,
             /* [in] */ long lIndex,
@@ -2874,28 +3048,34 @@ EXTERN_C const IID IID_IWMPMediaCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPMediaCollection * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPMediaCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPMediaCollection * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPMediaCollection * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPMediaCollection * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPMediaCollection * This,
             /* [in] */ REFIID riid,
@@ -2904,6 +3084,7 @@ EXTERN_C const IID IID_IWMPMediaCollection;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPMediaCollection * This,
             /* [annotation][in] */ 
@@ -2923,62 +3104,74 @@ EXTERN_C const IID IID_IWMPMediaCollection;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPMediaCollection, add)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *add )( 
             IWMPMediaCollection * This,
             /* [in] */ BSTR bstrURL,
             /* [retval][out] */ IWMPMedia **ppItem);
         
+        DECLSPEC_XFGVIRT(IWMPMediaCollection, getAll)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getAll )( 
             IWMPMediaCollection * This,
             /* [retval][out] */ IWMPPlaylist **ppMediaItems);
         
+        DECLSPEC_XFGVIRT(IWMPMediaCollection, getByName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getByName )( 
             IWMPMediaCollection * This,
             /* [in] */ BSTR bstrName,
             /* [retval][out] */ IWMPPlaylist **ppMediaItems);
         
+        DECLSPEC_XFGVIRT(IWMPMediaCollection, getByGenre)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getByGenre )( 
             IWMPMediaCollection * This,
             /* [in] */ BSTR bstrGenre,
             /* [retval][out] */ IWMPPlaylist **ppMediaItems);
         
+        DECLSPEC_XFGVIRT(IWMPMediaCollection, getByAuthor)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getByAuthor )( 
             IWMPMediaCollection * This,
             /* [in] */ BSTR bstrAuthor,
             /* [retval][out] */ IWMPPlaylist **ppMediaItems);
         
+        DECLSPEC_XFGVIRT(IWMPMediaCollection, getByAlbum)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getByAlbum )( 
             IWMPMediaCollection * This,
             /* [in] */ BSTR bstrAlbum,
             /* [retval][out] */ IWMPPlaylist **ppMediaItems);
         
+        DECLSPEC_XFGVIRT(IWMPMediaCollection, getByAttribute)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getByAttribute )( 
             IWMPMediaCollection * This,
             /* [in] */ BSTR bstrAttribute,
             /* [in] */ BSTR bstrValue,
             /* [retval][out] */ IWMPPlaylist **ppMediaItems);
         
+        DECLSPEC_XFGVIRT(IWMPMediaCollection, remove)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *remove )( 
             IWMPMediaCollection * This,
             /* [in] */ IWMPMedia *pItem,
             /* [in] */ VARIANT_BOOL varfDeleteFile);
         
+        DECLSPEC_XFGVIRT(IWMPMediaCollection, getAttributeStringCollection)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getAttributeStringCollection )( 
             IWMPMediaCollection * This,
             /* [in] */ BSTR bstrAttribute,
             /* [in] */ BSTR bstrMediaType,
             /* [retval][out] */ IWMPStringCollection **ppStringCollection);
         
+        DECLSPEC_XFGVIRT(IWMPMediaCollection, getMediaAtom)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getMediaAtom )( 
             IWMPMediaCollection * This,
             /* [in] */ BSTR bstrItemName,
             /* [retval][out] */ long *plAtom);
         
+        DECLSPEC_XFGVIRT(IWMPMediaCollection, setDeleted)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setDeleted )( 
             IWMPMediaCollection * This,
             /* [in] */ IWMPMedia *pItem,
             /* [in] */ VARIANT_BOOL varfIsDeleted);
         
+        DECLSPEC_XFGVIRT(IWMPMediaCollection, isDeleted)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *isDeleted )( 
             IWMPMediaCollection * This,
             /* [in] */ IWMPMedia *pItem,
@@ -3098,28 +3291,34 @@ EXTERN_C const IID IID_IWMPPlaylistArray;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPPlaylistArray * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPPlaylistArray * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPPlaylistArray * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPPlaylistArray * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPPlaylistArray * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPPlaylistArray * This,
             /* [in] */ REFIID riid,
@@ -3128,6 +3327,7 @@ EXTERN_C const IID IID_IWMPPlaylistArray;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPPlaylistArray * This,
             /* [annotation][in] */ 
@@ -3147,10 +3347,12 @@ EXTERN_C const IID IID_IWMPPlaylistArray;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPPlaylistArray, get_count)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_count )( 
             IWMPPlaylistArray * This,
             /* [retval][out] */ long *plCount);
         
+        DECLSPEC_XFGVIRT(IWMPPlaylistArray, item)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *item )( 
             IWMPPlaylistArray * This,
             /* [in] */ long lIndex,
@@ -3259,28 +3461,34 @@ EXTERN_C const IID IID_IWMPPlaylistCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPPlaylistCollection * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPPlaylistCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPPlaylistCollection * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPPlaylistCollection * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPPlaylistCollection * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPPlaylistCollection * This,
             /* [in] */ REFIID riid,
@@ -3289,6 +3497,7 @@ EXTERN_C const IID IID_IWMPPlaylistCollection;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPPlaylistCollection * This,
             /* [annotation][in] */ 
@@ -3308,34 +3517,41 @@ EXTERN_C const IID IID_IWMPPlaylistCollection;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPPlaylistCollection, newPlaylist)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *newPlaylist )( 
             IWMPPlaylistCollection * This,
             /* [in] */ BSTR bstrName,
             /* [retval][out] */ IWMPPlaylist **ppItem);
         
+        DECLSPEC_XFGVIRT(IWMPPlaylistCollection, getAll)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getAll )( 
             IWMPPlaylistCollection * This,
             /* [retval][out] */ IWMPPlaylistArray **ppPlaylistArray);
         
+        DECLSPEC_XFGVIRT(IWMPPlaylistCollection, getByName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getByName )( 
             IWMPPlaylistCollection * This,
             /* [in] */ BSTR bstrName,
             /* [retval][out] */ IWMPPlaylistArray **ppPlaylistArray);
         
+        DECLSPEC_XFGVIRT(IWMPPlaylistCollection, remove)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *remove )( 
             IWMPPlaylistCollection * This,
             /* [in] */ IWMPPlaylist *pItem);
         
+        DECLSPEC_XFGVIRT(IWMPPlaylistCollection, setDeleted)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setDeleted )( 
             IWMPPlaylistCollection * This,
             /* [in] */ IWMPPlaylist *pItem,
             /* [in] */ VARIANT_BOOL varfIsDeleted);
         
+        DECLSPEC_XFGVIRT(IWMPPlaylistCollection, isDeleted)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *isDeleted )( 
             IWMPPlaylistCollection * This,
             /* [in] */ IWMPPlaylist *pItem,
             /* [retval][out] */ VARIANT_BOOL *pvarfIsDeleted);
         
+        DECLSPEC_XFGVIRT(IWMPPlaylistCollection, importPlaylist)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *importPlaylist )( 
             IWMPPlaylistCollection * This,
             /* [in] */ IWMPPlaylist *pItem,
@@ -3527,28 +3743,34 @@ EXTERN_C const IID IID_IWMPNetwork;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPNetwork * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPNetwork * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPNetwork * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPNetwork * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPNetwork * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPNetwork * This,
             /* [in] */ REFIID riid,
@@ -3557,6 +3779,7 @@ EXTERN_C const IID IID_IWMPNetwork;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPNetwork * This,
             /* [annotation][in] */ 
@@ -3576,124 +3799,152 @@ EXTERN_C const IID IID_IWMPNetwork;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPNetwork, get_bandWidth)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_bandWidth )( 
             IWMPNetwork * This,
             /* [retval][out] */ long *plBandwidth);
         
+        DECLSPEC_XFGVIRT(IWMPNetwork, get_recoveredPackets)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_recoveredPackets )( 
             IWMPNetwork * This,
             /* [retval][out] */ long *plRecoveredPackets);
         
+        DECLSPEC_XFGVIRT(IWMPNetwork, get_sourceProtocol)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_sourceProtocol )( 
             IWMPNetwork * This,
             /* [retval][out] */ BSTR *pbstrSourceProtocol);
         
+        DECLSPEC_XFGVIRT(IWMPNetwork, get_receivedPackets)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_receivedPackets )( 
             IWMPNetwork * This,
             /* [retval][out] */ long *plReceivedPackets);
         
+        DECLSPEC_XFGVIRT(IWMPNetwork, get_lostPackets)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_lostPackets )( 
             IWMPNetwork * This,
             /* [retval][out] */ long *plLostPackets);
         
+        DECLSPEC_XFGVIRT(IWMPNetwork, get_receptionQuality)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_receptionQuality )( 
             IWMPNetwork * This,
             /* [retval][out] */ long *plReceptionQuality);
         
+        DECLSPEC_XFGVIRT(IWMPNetwork, get_bufferingCount)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_bufferingCount )( 
             IWMPNetwork * This,
             /* [retval][out] */ long *plBufferingCount);
         
+        DECLSPEC_XFGVIRT(IWMPNetwork, get_bufferingProgress)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_bufferingProgress )( 
             IWMPNetwork * This,
             /* [retval][out] */ long *plBufferingProgress);
         
+        DECLSPEC_XFGVIRT(IWMPNetwork, get_bufferingTime)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_bufferingTime )( 
             IWMPNetwork * This,
             /* [retval][out] */ long *plBufferingTime);
         
+        DECLSPEC_XFGVIRT(IWMPNetwork, put_bufferingTime)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_bufferingTime )( 
             IWMPNetwork * This,
             /* [in] */ long lBufferingTime);
         
+        DECLSPEC_XFGVIRT(IWMPNetwork, get_frameRate)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_frameRate )( 
             IWMPNetwork * This,
             /* [retval][out] */ long *plFrameRate);
         
+        DECLSPEC_XFGVIRT(IWMPNetwork, get_maxBitRate)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_maxBitRate )( 
             IWMPNetwork * This,
             /* [retval][out] */ long *plBitRate);
         
+        DECLSPEC_XFGVIRT(IWMPNetwork, get_bitRate)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_bitRate )( 
             IWMPNetwork * This,
             /* [retval][out] */ long *plBitRate);
         
+        DECLSPEC_XFGVIRT(IWMPNetwork, getProxySettings)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getProxySettings )( 
             IWMPNetwork * This,
             /* [in] */ BSTR bstrProtocol,
             /* [retval][out] */ long *plProxySetting);
         
+        DECLSPEC_XFGVIRT(IWMPNetwork, setProxySettings)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setProxySettings )( 
             IWMPNetwork * This,
             /* [in] */ BSTR bstrProtocol,
             /* [in] */ long lProxySetting);
         
+        DECLSPEC_XFGVIRT(IWMPNetwork, getProxyName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getProxyName )( 
             IWMPNetwork * This,
             /* [in] */ BSTR bstrProtocol,
             /* [retval][out] */ BSTR *pbstrProxyName);
         
+        DECLSPEC_XFGVIRT(IWMPNetwork, setProxyName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setProxyName )( 
             IWMPNetwork * This,
             /* [in] */ BSTR bstrProtocol,
             /* [in] */ BSTR bstrProxyName);
         
+        DECLSPEC_XFGVIRT(IWMPNetwork, getProxyPort)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getProxyPort )( 
             IWMPNetwork * This,
             /* [in] */ BSTR bstrProtocol,
             /* [retval][out] */ long *lProxyPort);
         
+        DECLSPEC_XFGVIRT(IWMPNetwork, setProxyPort)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setProxyPort )( 
             IWMPNetwork * This,
             /* [in] */ BSTR bstrProtocol,
             /* [in] */ long lProxyPort);
         
+        DECLSPEC_XFGVIRT(IWMPNetwork, getProxyExceptionList)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getProxyExceptionList )( 
             IWMPNetwork * This,
             /* [in] */ BSTR bstrProtocol,
             /* [retval][out] */ BSTR *pbstrExceptionList);
         
+        DECLSPEC_XFGVIRT(IWMPNetwork, setProxyExceptionList)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setProxyExceptionList )( 
             IWMPNetwork * This,
             /* [in] */ BSTR bstrProtocol,
             /* [in] */ BSTR pbstrExceptionList);
         
+        DECLSPEC_XFGVIRT(IWMPNetwork, getProxyBypassForLocal)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getProxyBypassForLocal )( 
             IWMPNetwork * This,
             /* [in] */ BSTR bstrProtocol,
             /* [retval][out] */ VARIANT_BOOL *pfBypassForLocal);
         
+        DECLSPEC_XFGVIRT(IWMPNetwork, setProxyBypassForLocal)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setProxyBypassForLocal )( 
             IWMPNetwork * This,
             /* [in] */ BSTR bstrProtocol,
             /* [in] */ VARIANT_BOOL fBypassForLocal);
         
+        DECLSPEC_XFGVIRT(IWMPNetwork, get_maxBandwidth)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_maxBandwidth )( 
             IWMPNetwork * This,
             /* [retval][out] */ long *lMaxBandwidth);
         
+        DECLSPEC_XFGVIRT(IWMPNetwork, put_maxBandwidth)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_maxBandwidth )( 
             IWMPNetwork * This,
             /* [in] */ long lMaxBandwidth);
         
+        DECLSPEC_XFGVIRT(IWMPNetwork, get_downloadProgress)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_downloadProgress )( 
             IWMPNetwork * This,
             /* [retval][out] */ long *plDownloadProgress);
         
+        DECLSPEC_XFGVIRT(IWMPNetwork, get_encodedFrameRate)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_encodedFrameRate )( 
             IWMPNetwork * This,
             /* [retval][out] */ long *plFrameRate);
         
+        DECLSPEC_XFGVIRT(IWMPNetwork, get_framesSkipped)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_framesSkipped )( 
             IWMPNetwork * This,
             /* [retval][out] */ long *plFrames);
@@ -3915,28 +4166,34 @@ EXTERN_C const IID IID_IWMPCore;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPCore * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPCore * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPCore * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPCore * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPCore * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPCore * This,
             /* [in] */ REFIID riid,
@@ -3945,6 +4202,7 @@ EXTERN_C const IID IID_IWMPCore;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPCore * This,
             /* [annotation][in] */ 
@@ -3964,85 +4222,106 @@ EXTERN_C const IID IID_IWMPCore;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPCore, close)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *close )( 
             IWMPCore * This);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_URL)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_URL )( 
             IWMPCore * This,
             /* [retval][out] */ BSTR *pbstrURL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, put_URL)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_URL )( 
             IWMPCore * This,
             /* [in] */ BSTR bstrURL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_openState)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_openState )( 
             IWMPCore * This,
             /* [retval][out] */ WMPOpenState *pwmpos);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_playState)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_playState )( 
             IWMPCore * This,
             /* [retval][out] */ WMPPlayState *pwmpps);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_controls)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_controls )( 
             IWMPCore * This,
             /* [retval][out] */ IWMPControls **ppControl);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_settings)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_settings )( 
             IWMPCore * This,
             /* [retval][out] */ IWMPSettings **ppSettings);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_currentMedia)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_currentMedia )( 
             IWMPCore * This,
             /* [retval][out] */ IWMPMedia **ppMedia);
         
+        DECLSPEC_XFGVIRT(IWMPCore, put_currentMedia)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_currentMedia )( 
             IWMPCore * This,
             /* [in] */ IWMPMedia *pMedia);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_mediaCollection)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_mediaCollection )( 
             IWMPCore * This,
             /* [retval][out] */ IWMPMediaCollection **ppMediaCollection);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_playlistCollection)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_playlistCollection )( 
             IWMPCore * This,
             /* [retval][out] */ IWMPPlaylistCollection **ppPlaylistCollection);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_versionInfo)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_versionInfo )( 
             IWMPCore * This,
             /* [retval][out] */ BSTR *pbstrVersionInfo);
         
+        DECLSPEC_XFGVIRT(IWMPCore, launchURL)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *launchURL )( 
             IWMPCore * This,
             /* [in] */ BSTR bstrURL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_network)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_network )( 
             IWMPCore * This,
             /* [retval][out] */ IWMPNetwork **ppQNI);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_currentPlaylist)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_currentPlaylist )( 
             IWMPCore * This,
             /* [retval][out] */ IWMPPlaylist **ppPL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, put_currentPlaylist)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_currentPlaylist )( 
             IWMPCore * This,
             /* [in] */ IWMPPlaylist *pPL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_cdromCollection)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_cdromCollection )( 
             IWMPCore * This,
             /* [retval][out] */ IWMPCdromCollection **ppCdromCollection);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_closedCaption)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_closedCaption )( 
             IWMPCore * This,
             /* [retval][out] */ IWMPClosedCaption **ppClosedCaption);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_isOnline)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_isOnline )( 
             IWMPCore * This,
             /* [retval][out] */ VARIANT_BOOL *pfOnline);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_error)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_error )( 
             IWMPCore * This,
             /* [retval][out] */ IWMPError **ppError);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_status)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_status )( 
             IWMPCore * This,
             /* [retval][out] */ BSTR *pbstrStatus);
@@ -4205,28 +4484,34 @@ EXTERN_C const IID IID_IWMPPlayer;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPPlayer * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPPlayer * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPPlayer * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPPlayer * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPPlayer * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPPlayer * This,
             /* [in] */ REFIID riid,
@@ -4235,6 +4520,7 @@ EXTERN_C const IID IID_IWMPPlayer;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPPlayer * This,
             /* [annotation][in] */ 
@@ -4254,117 +4540,146 @@ EXTERN_C const IID IID_IWMPPlayer;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPCore, close)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *close )( 
             IWMPPlayer * This);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_URL)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_URL )( 
             IWMPPlayer * This,
             /* [retval][out] */ BSTR *pbstrURL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, put_URL)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_URL )( 
             IWMPPlayer * This,
             /* [in] */ BSTR bstrURL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_openState)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_openState )( 
             IWMPPlayer * This,
             /* [retval][out] */ WMPOpenState *pwmpos);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_playState)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_playState )( 
             IWMPPlayer * This,
             /* [retval][out] */ WMPPlayState *pwmpps);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_controls)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_controls )( 
             IWMPPlayer * This,
             /* [retval][out] */ IWMPControls **ppControl);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_settings)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_settings )( 
             IWMPPlayer * This,
             /* [retval][out] */ IWMPSettings **ppSettings);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_currentMedia)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_currentMedia )( 
             IWMPPlayer * This,
             /* [retval][out] */ IWMPMedia **ppMedia);
         
+        DECLSPEC_XFGVIRT(IWMPCore, put_currentMedia)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_currentMedia )( 
             IWMPPlayer * This,
             /* [in] */ IWMPMedia *pMedia);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_mediaCollection)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_mediaCollection )( 
             IWMPPlayer * This,
             /* [retval][out] */ IWMPMediaCollection **ppMediaCollection);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_playlistCollection)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_playlistCollection )( 
             IWMPPlayer * This,
             /* [retval][out] */ IWMPPlaylistCollection **ppPlaylistCollection);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_versionInfo)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_versionInfo )( 
             IWMPPlayer * This,
             /* [retval][out] */ BSTR *pbstrVersionInfo);
         
+        DECLSPEC_XFGVIRT(IWMPCore, launchURL)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *launchURL )( 
             IWMPPlayer * This,
             /* [in] */ BSTR bstrURL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_network)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_network )( 
             IWMPPlayer * This,
             /* [retval][out] */ IWMPNetwork **ppQNI);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_currentPlaylist)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_currentPlaylist )( 
             IWMPPlayer * This,
             /* [retval][out] */ IWMPPlaylist **ppPL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, put_currentPlaylist)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_currentPlaylist )( 
             IWMPPlayer * This,
             /* [in] */ IWMPPlaylist *pPL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_cdromCollection)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_cdromCollection )( 
             IWMPPlayer * This,
             /* [retval][out] */ IWMPCdromCollection **ppCdromCollection);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_closedCaption)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_closedCaption )( 
             IWMPPlayer * This,
             /* [retval][out] */ IWMPClosedCaption **ppClosedCaption);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_isOnline)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_isOnline )( 
             IWMPPlayer * This,
             /* [retval][out] */ VARIANT_BOOL *pfOnline);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_error)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_error )( 
             IWMPPlayer * This,
             /* [retval][out] */ IWMPError **ppError);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_status)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_status )( 
             IWMPPlayer * This,
             /* [retval][out] */ BSTR *pbstrStatus);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer, get_enabled)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_enabled )( 
             IWMPPlayer * This,
             /* [retval][out] */ VARIANT_BOOL *pbEnabled);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer, put_enabled)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_enabled )( 
             IWMPPlayer * This,
             /* [in] */ VARIANT_BOOL bEnabled);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer, get_fullScreen)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_fullScreen )( 
             IWMPPlayer * This,
             /* [retval][out] */ VARIANT_BOOL *pbFullScreen);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer, put_fullScreen)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_fullScreen )( 
             IWMPPlayer * This,
             VARIANT_BOOL bFullScreen);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer, get_enableContextMenu)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_enableContextMenu )( 
             IWMPPlayer * This,
             /* [retval][out] */ VARIANT_BOOL *pbEnableContextMenu);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer, put_enableContextMenu)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_enableContextMenu )( 
             IWMPPlayer * This,
             VARIANT_BOOL bEnableContextMenu);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer, put_uiMode)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_uiMode )( 
             IWMPPlayer * This,
             /* [in] */ BSTR bstrMode);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer, get_uiMode)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_uiMode )( 
             IWMPPlayer * This,
             /* [retval][out] */ BSTR *pbstrMode);
@@ -4564,28 +4879,34 @@ EXTERN_C const IID IID_IWMPPlayer2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPPlayer2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPPlayer2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPPlayer2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPPlayer2 * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPPlayer2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPPlayer2 * This,
             /* [in] */ REFIID riid,
@@ -4594,6 +4915,7 @@ EXTERN_C const IID IID_IWMPPlayer2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPPlayer2 * This,
             /* [annotation][in] */ 
@@ -4613,133 +4935,166 @@ EXTERN_C const IID IID_IWMPPlayer2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPCore, close)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *close )( 
             IWMPPlayer2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_URL)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_URL )( 
             IWMPPlayer2 * This,
             /* [retval][out] */ BSTR *pbstrURL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, put_URL)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_URL )( 
             IWMPPlayer2 * This,
             /* [in] */ BSTR bstrURL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_openState)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_openState )( 
             IWMPPlayer2 * This,
             /* [retval][out] */ WMPOpenState *pwmpos);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_playState)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_playState )( 
             IWMPPlayer2 * This,
             /* [retval][out] */ WMPPlayState *pwmpps);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_controls)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_controls )( 
             IWMPPlayer2 * This,
             /* [retval][out] */ IWMPControls **ppControl);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_settings)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_settings )( 
             IWMPPlayer2 * This,
             /* [retval][out] */ IWMPSettings **ppSettings);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_currentMedia)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_currentMedia )( 
             IWMPPlayer2 * This,
             /* [retval][out] */ IWMPMedia **ppMedia);
         
+        DECLSPEC_XFGVIRT(IWMPCore, put_currentMedia)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_currentMedia )( 
             IWMPPlayer2 * This,
             /* [in] */ IWMPMedia *pMedia);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_mediaCollection)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_mediaCollection )( 
             IWMPPlayer2 * This,
             /* [retval][out] */ IWMPMediaCollection **ppMediaCollection);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_playlistCollection)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_playlistCollection )( 
             IWMPPlayer2 * This,
             /* [retval][out] */ IWMPPlaylistCollection **ppPlaylistCollection);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_versionInfo)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_versionInfo )( 
             IWMPPlayer2 * This,
             /* [retval][out] */ BSTR *pbstrVersionInfo);
         
+        DECLSPEC_XFGVIRT(IWMPCore, launchURL)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *launchURL )( 
             IWMPPlayer2 * This,
             /* [in] */ BSTR bstrURL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_network)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_network )( 
             IWMPPlayer2 * This,
             /* [retval][out] */ IWMPNetwork **ppQNI);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_currentPlaylist)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_currentPlaylist )( 
             IWMPPlayer2 * This,
             /* [retval][out] */ IWMPPlaylist **ppPL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, put_currentPlaylist)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_currentPlaylist )( 
             IWMPPlayer2 * This,
             /* [in] */ IWMPPlaylist *pPL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_cdromCollection)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_cdromCollection )( 
             IWMPPlayer2 * This,
             /* [retval][out] */ IWMPCdromCollection **ppCdromCollection);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_closedCaption)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_closedCaption )( 
             IWMPPlayer2 * This,
             /* [retval][out] */ IWMPClosedCaption **ppClosedCaption);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_isOnline)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_isOnline )( 
             IWMPPlayer2 * This,
             /* [retval][out] */ VARIANT_BOOL *pfOnline);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_error)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_error )( 
             IWMPPlayer2 * This,
             /* [retval][out] */ IWMPError **ppError);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_status)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_status )( 
             IWMPPlayer2 * This,
             /* [retval][out] */ BSTR *pbstrStatus);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer2, get_enabled)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_enabled )( 
             IWMPPlayer2 * This,
             /* [retval][out] */ VARIANT_BOOL *pbEnabled);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer2, put_enabled)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_enabled )( 
             IWMPPlayer2 * This,
             /* [in] */ VARIANT_BOOL bEnabled);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer2, get_fullScreen)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_fullScreen )( 
             IWMPPlayer2 * This,
             /* [retval][out] */ VARIANT_BOOL *pbFullScreen);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer2, put_fullScreen)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_fullScreen )( 
             IWMPPlayer2 * This,
             VARIANT_BOOL bFullScreen);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer2, get_enableContextMenu)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_enableContextMenu )( 
             IWMPPlayer2 * This,
             /* [retval][out] */ VARIANT_BOOL *pbEnableContextMenu);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer2, put_enableContextMenu)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_enableContextMenu )( 
             IWMPPlayer2 * This,
             VARIANT_BOOL bEnableContextMenu);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer2, put_uiMode)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_uiMode )( 
             IWMPPlayer2 * This,
             /* [in] */ BSTR bstrMode);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer2, get_uiMode)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_uiMode )( 
             IWMPPlayer2 * This,
             /* [retval][out] */ BSTR *pbstrMode);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer2, get_stretchToFit)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_stretchToFit )( 
             IWMPPlayer2 * This,
             /* [retval][out] */ VARIANT_BOOL *pbEnabled);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer2, put_stretchToFit)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_stretchToFit )( 
             IWMPPlayer2 * This,
             /* [in] */ VARIANT_BOOL bEnabled);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer2, get_windowlessVideo)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_windowlessVideo )( 
             IWMPPlayer2 * This,
             /* [retval][out] */ VARIANT_BOOL *pbEnabled);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer2, put_windowlessVideo)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_windowlessVideo )( 
             IWMPPlayer2 * This,
             /* [in] */ VARIANT_BOOL bEnabled);
@@ -4918,28 +5273,34 @@ EXTERN_C const IID IID_IWMPMedia2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPMedia2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPMedia2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPMedia2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPMedia2 * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPMedia2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPMedia2 * This,
             /* [in] */ REFIID riid,
@@ -4948,6 +5309,7 @@ EXTERN_C const IID IID_IWMPMedia2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPMedia2 * This,
             /* [annotation][in] */ 
@@ -4967,87 +5329,106 @@ EXTERN_C const IID IID_IWMPMedia2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, get_isIdentical)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_isIdentical )( 
             IWMPMedia2 * This,
             /* [in] */ IWMPMedia *pIWMPMedia,
             /* [retval][out] */ VARIANT_BOOL *pvbool);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, get_sourceURL)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_sourceURL )( 
             IWMPMedia2 * This,
             /* [retval][out] */ BSTR *pbstrSourceURL);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, get_name)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_name )( 
             IWMPMedia2 * This,
             /* [retval][out] */ BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, put_name)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_name )( 
             IWMPMedia2 * This,
             /* [in] */ BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, get_imageSourceWidth)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_imageSourceWidth )( 
             IWMPMedia2 * This,
             /* [retval][out] */ long *pWidth);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, get_imageSourceHeight)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_imageSourceHeight )( 
             IWMPMedia2 * This,
             /* [retval][out] */ long *pHeight);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, get_markerCount)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_markerCount )( 
             IWMPMedia2 * This,
             /* [retval][out] */ long *pMarkerCount);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, getMarkerTime)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getMarkerTime )( 
             IWMPMedia2 * This,
             /* [in] */ long MarkerNum,
             /* [retval][out] */ double *pMarkerTime);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, getMarkerName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getMarkerName )( 
             IWMPMedia2 * This,
             /* [in] */ long MarkerNum,
             /* [retval][out] */ BSTR *pbstrMarkerName);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, get_duration)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_duration )( 
             IWMPMedia2 * This,
             /* [retval][out] */ double *pDuration);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, get_durationString)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_durationString )( 
             IWMPMedia2 * This,
             /* [retval][out] */ BSTR *pbstrDuration);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, get_attributeCount)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_attributeCount )( 
             IWMPMedia2 * This,
             /* [retval][out] */ long *plCount);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, getAttributeName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getAttributeName )( 
             IWMPMedia2 * This,
             /* [in] */ long lIndex,
             /* [retval][out] */ BSTR *pbstrItemName);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, getItemInfo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getItemInfo )( 
             IWMPMedia2 * This,
             /* [in] */ BSTR bstrItemName,
             /* [retval][out] */ BSTR *pbstrVal);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, setItemInfo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setItemInfo )( 
             IWMPMedia2 * This,
             /* [in] */ BSTR bstrItemName,
             /* [in] */ BSTR bstrVal);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, getItemInfoByAtom)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getItemInfoByAtom )( 
             IWMPMedia2 * This,
             /* [in] */ long lAtom,
             /* [retval][out] */ BSTR *pbstrVal);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, isMemberOf)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *isMemberOf )( 
             IWMPMedia2 * This,
             /* [in] */ IWMPPlaylist *pPlaylist,
             /* [retval][out] */ VARIANT_BOOL *pvarfIsMemberOf);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, isReadOnlyItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *isReadOnlyItem )( 
             IWMPMedia2 * This,
             /* [in] */ BSTR bstrItemName,
             /* [retval][out] */ VARIANT_BOOL *pvarfIsReadOnly);
         
+        DECLSPEC_XFGVIRT(IWMPMedia2, get_error)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_error )( 
             IWMPMedia2 * This,
             /* [retval][out] */ IWMPErrorItem **ppIWMPErrorItem);
@@ -5184,28 +5565,34 @@ EXTERN_C const IID IID_IWMPControls2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPControls2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPControls2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPControls2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPControls2 * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPControls2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPControls2 * This,
             /* [in] */ REFIID riid,
@@ -5214,6 +5601,7 @@ EXTERN_C const IID IID_IWMPControls2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPControls2 * This,
             /* [annotation][in] */ 
@@ -5233,64 +5621,81 @@ EXTERN_C const IID IID_IWMPControls2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPControls, get_isAvailable)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_isAvailable )( 
             IWMPControls2 * This,
             /* [in] */ BSTR bstrItem,
             /* [retval][out] */ VARIANT_BOOL *pIsAvailable);
         
+        DECLSPEC_XFGVIRT(IWMPControls, play)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *play )( 
             IWMPControls2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPControls, stop)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *stop )( 
             IWMPControls2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPControls, pause)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *pause )( 
             IWMPControls2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPControls, fastForward)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *fastForward )( 
             IWMPControls2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPControls, fastReverse)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *fastReverse )( 
             IWMPControls2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPControls, get_currentPosition)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_currentPosition )( 
             IWMPControls2 * This,
             /* [retval][out] */ double *pdCurrentPosition);
         
+        DECLSPEC_XFGVIRT(IWMPControls, put_currentPosition)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_currentPosition )( 
             IWMPControls2 * This,
             /* [in] */ double dCurrentPosition);
         
+        DECLSPEC_XFGVIRT(IWMPControls, get_currentPositionString)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_currentPositionString )( 
             IWMPControls2 * This,
             /* [retval][out] */ BSTR *pbstrCurrentPosition);
         
+        DECLSPEC_XFGVIRT(IWMPControls, next)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *next )( 
             IWMPControls2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPControls, previous)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *previous )( 
             IWMPControls2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPControls, get_currentItem)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_currentItem )( 
             IWMPControls2 * This,
             /* [retval][out] */ IWMPMedia **ppIWMPMedia);
         
+        DECLSPEC_XFGVIRT(IWMPControls, put_currentItem)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_currentItem )( 
             IWMPControls2 * This,
             /* [in] */ IWMPMedia *pIWMPMedia);
         
+        DECLSPEC_XFGVIRT(IWMPControls, get_currentMarker)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_currentMarker )( 
             IWMPControls2 * This,
             /* [retval][out] */ long *plMarker);
         
+        DECLSPEC_XFGVIRT(IWMPControls, put_currentMarker)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_currentMarker )( 
             IWMPControls2 * This,
             /* [in] */ long lMarker);
         
+        DECLSPEC_XFGVIRT(IWMPControls, playItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *playItem )( 
             IWMPControls2 * This,
             /* [in] */ IWMPMedia *pIWMPMedia);
         
+        DECLSPEC_XFGVIRT(IWMPControls2, step)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *step )( 
             IWMPControls2 * This,
             /* [in] */ long lStep);
@@ -5433,28 +5838,34 @@ EXTERN_C const IID IID_IWMPDVD;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPDVD * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPDVD * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPDVD * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPDVD * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPDVD * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPDVD * This,
             /* [in] */ REFIID riid,
@@ -5463,6 +5874,7 @@ EXTERN_C const IID IID_IWMPDVD;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPDVD * This,
             /* [annotation][in] */ 
@@ -5482,24 +5894,30 @@ EXTERN_C const IID IID_IWMPDVD;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPDVD, get_isAvailable)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_isAvailable )( 
             IWMPDVD * This,
             /* [in] */ BSTR bstrItem,
             /* [retval][out] */ VARIANT_BOOL *pIsAvailable);
         
+        DECLSPEC_XFGVIRT(IWMPDVD, get_domain)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_domain )( 
             IWMPDVD * This,
             /* [retval][out] */ BSTR *strDomain);
         
+        DECLSPEC_XFGVIRT(IWMPDVD, topMenu)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *topMenu )( 
             IWMPDVD * This);
         
+        DECLSPEC_XFGVIRT(IWMPDVD, titleMenu)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *titleMenu )( 
             IWMPDVD * This);
         
+        DECLSPEC_XFGVIRT(IWMPDVD, back)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *back )( 
             IWMPDVD * This);
         
+        DECLSPEC_XFGVIRT(IWMPDVD, resume)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *resume )( 
             IWMPDVD * This);
         
@@ -5595,28 +6013,34 @@ EXTERN_C const IID IID_IWMPCore2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPCore2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPCore2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPCore2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPCore2 * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPCore2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPCore2 * This,
             /* [in] */ REFIID riid,
@@ -5625,6 +6049,7 @@ EXTERN_C const IID IID_IWMPCore2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPCore2 * This,
             /* [annotation][in] */ 
@@ -5644,89 +6069,111 @@ EXTERN_C const IID IID_IWMPCore2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPCore, close)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *close )( 
             IWMPCore2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_URL)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_URL )( 
             IWMPCore2 * This,
             /* [retval][out] */ BSTR *pbstrURL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, put_URL)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_URL )( 
             IWMPCore2 * This,
             /* [in] */ BSTR bstrURL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_openState)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_openState )( 
             IWMPCore2 * This,
             /* [retval][out] */ WMPOpenState *pwmpos);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_playState)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_playState )( 
             IWMPCore2 * This,
             /* [retval][out] */ WMPPlayState *pwmpps);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_controls)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_controls )( 
             IWMPCore2 * This,
             /* [retval][out] */ IWMPControls **ppControl);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_settings)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_settings )( 
             IWMPCore2 * This,
             /* [retval][out] */ IWMPSettings **ppSettings);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_currentMedia)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_currentMedia )( 
             IWMPCore2 * This,
             /* [retval][out] */ IWMPMedia **ppMedia);
         
+        DECLSPEC_XFGVIRT(IWMPCore, put_currentMedia)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_currentMedia )( 
             IWMPCore2 * This,
             /* [in] */ IWMPMedia *pMedia);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_mediaCollection)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_mediaCollection )( 
             IWMPCore2 * This,
             /* [retval][out] */ IWMPMediaCollection **ppMediaCollection);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_playlistCollection)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_playlistCollection )( 
             IWMPCore2 * This,
             /* [retval][out] */ IWMPPlaylistCollection **ppPlaylistCollection);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_versionInfo)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_versionInfo )( 
             IWMPCore2 * This,
             /* [retval][out] */ BSTR *pbstrVersionInfo);
         
+        DECLSPEC_XFGVIRT(IWMPCore, launchURL)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *launchURL )( 
             IWMPCore2 * This,
             /* [in] */ BSTR bstrURL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_network)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_network )( 
             IWMPCore2 * This,
             /* [retval][out] */ IWMPNetwork **ppQNI);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_currentPlaylist)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_currentPlaylist )( 
             IWMPCore2 * This,
             /* [retval][out] */ IWMPPlaylist **ppPL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, put_currentPlaylist)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_currentPlaylist )( 
             IWMPCore2 * This,
             /* [in] */ IWMPPlaylist *pPL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_cdromCollection)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_cdromCollection )( 
             IWMPCore2 * This,
             /* [retval][out] */ IWMPCdromCollection **ppCdromCollection);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_closedCaption)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_closedCaption )( 
             IWMPCore2 * This,
             /* [retval][out] */ IWMPClosedCaption **ppClosedCaption);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_isOnline)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_isOnline )( 
             IWMPCore2 * This,
             /* [retval][out] */ VARIANT_BOOL *pfOnline);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_error)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_error )( 
             IWMPCore2 * This,
             /* [retval][out] */ IWMPError **ppError);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_status)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_status )( 
             IWMPCore2 * This,
             /* [retval][out] */ BSTR *pbstrStatus);
         
+        DECLSPEC_XFGVIRT(IWMPCore2, get_dvd)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_dvd )( 
             IWMPCore2 * This,
             /* [retval][out] */ IWMPDVD **ppDVD);
@@ -5905,28 +6352,34 @@ EXTERN_C const IID IID_IWMPPlayer3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPPlayer3 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPPlayer3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPPlayer3 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPPlayer3 * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPPlayer3 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPPlayer3 * This,
             /* [in] */ REFIID riid,
@@ -5935,6 +6388,7 @@ EXTERN_C const IID IID_IWMPPlayer3;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPPlayer3 * This,
             /* [annotation][in] */ 
@@ -5954,137 +6408,171 @@ EXTERN_C const IID IID_IWMPPlayer3;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPCore, close)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *close )( 
             IWMPPlayer3 * This);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_URL)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_URL )( 
             IWMPPlayer3 * This,
             /* [retval][out] */ BSTR *pbstrURL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, put_URL)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_URL )( 
             IWMPPlayer3 * This,
             /* [in] */ BSTR bstrURL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_openState)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_openState )( 
             IWMPPlayer3 * This,
             /* [retval][out] */ WMPOpenState *pwmpos);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_playState)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_playState )( 
             IWMPPlayer3 * This,
             /* [retval][out] */ WMPPlayState *pwmpps);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_controls)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_controls )( 
             IWMPPlayer3 * This,
             /* [retval][out] */ IWMPControls **ppControl);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_settings)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_settings )( 
             IWMPPlayer3 * This,
             /* [retval][out] */ IWMPSettings **ppSettings);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_currentMedia)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_currentMedia )( 
             IWMPPlayer3 * This,
             /* [retval][out] */ IWMPMedia **ppMedia);
         
+        DECLSPEC_XFGVIRT(IWMPCore, put_currentMedia)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_currentMedia )( 
             IWMPPlayer3 * This,
             /* [in] */ IWMPMedia *pMedia);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_mediaCollection)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_mediaCollection )( 
             IWMPPlayer3 * This,
             /* [retval][out] */ IWMPMediaCollection **ppMediaCollection);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_playlistCollection)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_playlistCollection )( 
             IWMPPlayer3 * This,
             /* [retval][out] */ IWMPPlaylistCollection **ppPlaylistCollection);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_versionInfo)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_versionInfo )( 
             IWMPPlayer3 * This,
             /* [retval][out] */ BSTR *pbstrVersionInfo);
         
+        DECLSPEC_XFGVIRT(IWMPCore, launchURL)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *launchURL )( 
             IWMPPlayer3 * This,
             /* [in] */ BSTR bstrURL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_network)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_network )( 
             IWMPPlayer3 * This,
             /* [retval][out] */ IWMPNetwork **ppQNI);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_currentPlaylist)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_currentPlaylist )( 
             IWMPPlayer3 * This,
             /* [retval][out] */ IWMPPlaylist **ppPL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, put_currentPlaylist)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_currentPlaylist )( 
             IWMPPlayer3 * This,
             /* [in] */ IWMPPlaylist *pPL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_cdromCollection)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_cdromCollection )( 
             IWMPPlayer3 * This,
             /* [retval][out] */ IWMPCdromCollection **ppCdromCollection);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_closedCaption)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_closedCaption )( 
             IWMPPlayer3 * This,
             /* [retval][out] */ IWMPClosedCaption **ppClosedCaption);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_isOnline)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_isOnline )( 
             IWMPPlayer3 * This,
             /* [retval][out] */ VARIANT_BOOL *pfOnline);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_error)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_error )( 
             IWMPPlayer3 * This,
             /* [retval][out] */ IWMPError **ppError);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_status)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_status )( 
             IWMPPlayer3 * This,
             /* [retval][out] */ BSTR *pbstrStatus);
         
+        DECLSPEC_XFGVIRT(IWMPCore2, get_dvd)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_dvd )( 
             IWMPPlayer3 * This,
             /* [retval][out] */ IWMPDVD **ppDVD);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer3, get_enabled)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_enabled )( 
             IWMPPlayer3 * This,
             /* [retval][out] */ VARIANT_BOOL *pbEnabled);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer3, put_enabled)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_enabled )( 
             IWMPPlayer3 * This,
             /* [in] */ VARIANT_BOOL bEnabled);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer3, get_fullScreen)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_fullScreen )( 
             IWMPPlayer3 * This,
             /* [retval][out] */ VARIANT_BOOL *pbFullScreen);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer3, put_fullScreen)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_fullScreen )( 
             IWMPPlayer3 * This,
             VARIANT_BOOL bFullScreen);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer3, get_enableContextMenu)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_enableContextMenu )( 
             IWMPPlayer3 * This,
             /* [retval][out] */ VARIANT_BOOL *pbEnableContextMenu);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer3, put_enableContextMenu)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_enableContextMenu )( 
             IWMPPlayer3 * This,
             VARIANT_BOOL bEnableContextMenu);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer3, put_uiMode)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_uiMode )( 
             IWMPPlayer3 * This,
             /* [in] */ BSTR bstrMode);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer3, get_uiMode)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_uiMode )( 
             IWMPPlayer3 * This,
             /* [retval][out] */ BSTR *pbstrMode);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer3, get_stretchToFit)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_stretchToFit )( 
             IWMPPlayer3 * This,
             /* [retval][out] */ VARIANT_BOOL *pbEnabled);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer3, put_stretchToFit)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_stretchToFit )( 
             IWMPPlayer3 * This,
             /* [in] */ VARIANT_BOOL bEnabled);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer3, get_windowlessVideo)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_windowlessVideo )( 
             IWMPPlayer3 * This,
             /* [retval][out] */ VARIANT_BOOL *pbEnabled);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer3, put_windowlessVideo)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_windowlessVideo )( 
             IWMPPlayer3 * This,
             /* [in] */ VARIANT_BOOL bEnabled);
@@ -6267,28 +6755,34 @@ EXTERN_C const IID IID_IWMPErrorItem2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPErrorItem2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPErrorItem2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPErrorItem2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPErrorItem2 * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPErrorItem2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPErrorItem2 * This,
             /* [in] */ REFIID riid,
@@ -6297,6 +6791,7 @@ EXTERN_C const IID IID_IWMPErrorItem2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPErrorItem2 * This,
             /* [annotation][in] */ 
@@ -6316,26 +6811,32 @@ EXTERN_C const IID IID_IWMPErrorItem2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPErrorItem, get_errorCode)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_errorCode )( 
             IWMPErrorItem2 * This,
             /* [retval][out] */ long *phr);
         
+        DECLSPEC_XFGVIRT(IWMPErrorItem, get_errorDescription)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_errorDescription )( 
             IWMPErrorItem2 * This,
             /* [retval][out] */ BSTR *pbstrDescription);
         
+        DECLSPEC_XFGVIRT(IWMPErrorItem, get_errorContext)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_errorContext )( 
             IWMPErrorItem2 * This,
             /* [retval][out] */ VARIANT *pvarContext);
         
+        DECLSPEC_XFGVIRT(IWMPErrorItem, get_remedy)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_remedy )( 
             IWMPErrorItem2 * This,
             /* [retval][out] */ long *plRemedy);
         
+        DECLSPEC_XFGVIRT(IWMPErrorItem, get_customUrl)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_customUrl )( 
             IWMPErrorItem2 * This,
             /* [retval][out] */ BSTR *pbstrCustomUrl);
         
+        DECLSPEC_XFGVIRT(IWMPErrorItem2, get_condition)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_condition )( 
             IWMPErrorItem2 * This,
             /* [retval][out] */ long *plCondition);
@@ -6443,31 +6944,38 @@ EXTERN_C const IID IID_IWMPRemoteMediaServices;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPRemoteMediaServices * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPRemoteMediaServices * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPRemoteMediaServices * This);
         
+        DECLSPEC_XFGVIRT(IWMPRemoteMediaServices, GetServiceType)
         HRESULT ( STDMETHODCALLTYPE *GetServiceType )( 
             IWMPRemoteMediaServices * This,
             /* [out] */ BSTR *pbstrType);
         
+        DECLSPEC_XFGVIRT(IWMPRemoteMediaServices, GetApplicationName)
         HRESULT ( STDMETHODCALLTYPE *GetApplicationName )( 
             IWMPRemoteMediaServices * This,
             /* [out] */ BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IWMPRemoteMediaServices, GetScriptableObject)
         HRESULT ( STDMETHODCALLTYPE *GetScriptableObject )( 
             IWMPRemoteMediaServices * This,
             /* [out] */ BSTR *pbstrName,
             /* [out] */ IDispatch **ppDispatch);
         
+        DECLSPEC_XFGVIRT(IWMPRemoteMediaServices, GetCustomUIMode)
         HRESULT ( STDMETHODCALLTYPE *GetCustomUIMode )( 
             IWMPRemoteMediaServices * This,
             /* [out] */ BSTR *pbstrFile);
@@ -6554,18 +7062,22 @@ EXTERN_C const IID IID_IWMPSkinManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPSkinManager * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPSkinManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPSkinManager * This);
         
+        DECLSPEC_XFGVIRT(IWMPSkinManager, SetVisualStyle)
         HRESULT ( STDMETHODCALLTYPE *SetVisualStyle )( 
             IWMPSkinManager * This,
             /* [in] */ BSTR bstrPath);
@@ -6643,28 +7155,34 @@ EXTERN_C const IID IID_IWMPMetadataPicture;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPMetadataPicture * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPMetadataPicture * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPMetadataPicture * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPMetadataPicture * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPMetadataPicture * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPMetadataPicture * This,
             /* [in] */ REFIID riid,
@@ -6673,6 +7191,7 @@ EXTERN_C const IID IID_IWMPMetadataPicture;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPMetadataPicture * This,
             /* [annotation][in] */ 
@@ -6692,18 +7211,22 @@ EXTERN_C const IID IID_IWMPMetadataPicture;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPMetadataPicture, get_mimeType)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_mimeType )( 
             IWMPMetadataPicture * This,
             /* [retval][out] */ BSTR *pbstrMimeType);
         
+        DECLSPEC_XFGVIRT(IWMPMetadataPicture, get_pictureType)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_pictureType )( 
             IWMPMetadataPicture * This,
             /* [retval][out] */ BSTR *pbstrPictureType);
         
+        DECLSPEC_XFGVIRT(IWMPMetadataPicture, get_description)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_description )( 
             IWMPMetadataPicture * This,
             /* [retval][out] */ BSTR *pbstrDescription);
         
+        DECLSPEC_XFGVIRT(IWMPMetadataPicture, get_URL)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_URL )( 
             IWMPMetadataPicture * This,
             /* [retval][out] */ BSTR *pbstrURL);
@@ -6797,28 +7320,34 @@ EXTERN_C const IID IID_IWMPMetadataText;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPMetadataText * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPMetadataText * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPMetadataText * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPMetadataText * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPMetadataText * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPMetadataText * This,
             /* [in] */ REFIID riid,
@@ -6827,6 +7356,7 @@ EXTERN_C const IID IID_IWMPMetadataText;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPMetadataText * This,
             /* [annotation][in] */ 
@@ -6846,10 +7376,12 @@ EXTERN_C const IID IID_IWMPMetadataText;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPMetadataText, get_description)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_description )( 
             IWMPMetadataText * This,
             /* [retval][out] */ BSTR *pbstrDescription);
         
+        DECLSPEC_XFGVIRT(IWMPMetadataText, get_text)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_text )( 
             IWMPMetadataText * This,
             /* [retval][out] */ BSTR *pbstrText);
@@ -6942,28 +7474,34 @@ EXTERN_C const IID IID_IWMPMedia3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPMedia3 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPMedia3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPMedia3 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPMedia3 * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPMedia3 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPMedia3 * This,
             /* [in] */ REFIID riid,
@@ -6972,6 +7510,7 @@ EXTERN_C const IID IID_IWMPMedia3;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPMedia3 * This,
             /* [annotation][in] */ 
@@ -6991,97 +7530,118 @@ EXTERN_C const IID IID_IWMPMedia3;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, get_isIdentical)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_isIdentical )( 
             IWMPMedia3 * This,
             /* [in] */ IWMPMedia *pIWMPMedia,
             /* [retval][out] */ VARIANT_BOOL *pvbool);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, get_sourceURL)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_sourceURL )( 
             IWMPMedia3 * This,
             /* [retval][out] */ BSTR *pbstrSourceURL);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, get_name)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_name )( 
             IWMPMedia3 * This,
             /* [retval][out] */ BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, put_name)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_name )( 
             IWMPMedia3 * This,
             /* [in] */ BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, get_imageSourceWidth)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_imageSourceWidth )( 
             IWMPMedia3 * This,
             /* [retval][out] */ long *pWidth);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, get_imageSourceHeight)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_imageSourceHeight )( 
             IWMPMedia3 * This,
             /* [retval][out] */ long *pHeight);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, get_markerCount)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_markerCount )( 
             IWMPMedia3 * This,
             /* [retval][out] */ long *pMarkerCount);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, getMarkerTime)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getMarkerTime )( 
             IWMPMedia3 * This,
             /* [in] */ long MarkerNum,
             /* [retval][out] */ double *pMarkerTime);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, getMarkerName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getMarkerName )( 
             IWMPMedia3 * This,
             /* [in] */ long MarkerNum,
             /* [retval][out] */ BSTR *pbstrMarkerName);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, get_duration)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_duration )( 
             IWMPMedia3 * This,
             /* [retval][out] */ double *pDuration);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, get_durationString)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_durationString )( 
             IWMPMedia3 * This,
             /* [retval][out] */ BSTR *pbstrDuration);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, get_attributeCount)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_attributeCount )( 
             IWMPMedia3 * This,
             /* [retval][out] */ long *plCount);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, getAttributeName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getAttributeName )( 
             IWMPMedia3 * This,
             /* [in] */ long lIndex,
             /* [retval][out] */ BSTR *pbstrItemName);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, getItemInfo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getItemInfo )( 
             IWMPMedia3 * This,
             /* [in] */ BSTR bstrItemName,
             /* [retval][out] */ BSTR *pbstrVal);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, setItemInfo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setItemInfo )( 
             IWMPMedia3 * This,
             /* [in] */ BSTR bstrItemName,
             /* [in] */ BSTR bstrVal);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, getItemInfoByAtom)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getItemInfoByAtom )( 
             IWMPMedia3 * This,
             /* [in] */ long lAtom,
             /* [retval][out] */ BSTR *pbstrVal);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, isMemberOf)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *isMemberOf )( 
             IWMPMedia3 * This,
             /* [in] */ IWMPPlaylist *pPlaylist,
             /* [retval][out] */ VARIANT_BOOL *pvarfIsMemberOf);
         
+        DECLSPEC_XFGVIRT(IWMPMedia, isReadOnlyItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *isReadOnlyItem )( 
             IWMPMedia3 * This,
             /* [in] */ BSTR bstrItemName,
             /* [retval][out] */ VARIANT_BOOL *pvarfIsReadOnly);
         
+        DECLSPEC_XFGVIRT(IWMPMedia2, get_error)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_error )( 
             IWMPMedia3 * This,
             /* [retval][out] */ IWMPErrorItem **ppIWMPErrorItem);
         
+        DECLSPEC_XFGVIRT(IWMPMedia3, getAttributeCountByType)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *getAttributeCountByType )( 
             IWMPMedia3 * This,
             /* [in] */ BSTR bstrType,
             /* [in] */ BSTR bstrLanguage,
             /* [retval][out] */ long *plCount);
         
+        DECLSPEC_XFGVIRT(IWMPMedia3, getItemInfoByType)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *getItemInfoByType )( 
             IWMPMedia3 * This,
             /* [in] */ BSTR bstrType,
@@ -7235,28 +7795,34 @@ EXTERN_C const IID IID_IWMPSettings2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPSettings2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPSettings2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPSettings2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPSettings2 * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPSettings2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPSettings2 * This,
             /* [in] */ REFIID riid,
@@ -7265,6 +7831,7 @@ EXTERN_C const IID IID_IWMPSettings2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPSettings2 * This,
             /* [annotation][in] */ 
@@ -7284,109 +7851,135 @@ EXTERN_C const IID IID_IWMPSettings2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, get_isAvailable)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_isAvailable )( 
             IWMPSettings2 * This,
             /* [in] */ BSTR bstrItem,
             /* [retval][out] */ VARIANT_BOOL *pIsAvailable);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, get_autoStart)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_autoStart )( 
             IWMPSettings2 * This,
             /* [retval][out] */ VARIANT_BOOL *pfAutoStart);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, put_autoStart)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_autoStart )( 
             IWMPSettings2 * This,
             /* [in] */ VARIANT_BOOL fAutoStart);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, get_baseURL)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_baseURL )( 
             IWMPSettings2 * This,
             /* [retval][out] */ BSTR *pbstrBaseURL);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, put_baseURL)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_baseURL )( 
             IWMPSettings2 * This,
             /* [in] */ BSTR bstrBaseURL);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, get_defaultFrame)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_defaultFrame )( 
             IWMPSettings2 * This,
             /* [retval][out] */ BSTR *pbstrDefaultFrame);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, put_defaultFrame)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_defaultFrame )( 
             IWMPSettings2 * This,
             /* [in] */ BSTR bstrDefaultFrame);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, get_invokeURLs)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_invokeURLs )( 
             IWMPSettings2 * This,
             /* [retval][out] */ VARIANT_BOOL *pfInvokeURLs);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, put_invokeURLs)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_invokeURLs )( 
             IWMPSettings2 * This,
             /* [in] */ VARIANT_BOOL fInvokeURLs);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, get_mute)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_mute )( 
             IWMPSettings2 * This,
             /* [retval][out] */ VARIANT_BOOL *pfMute);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, put_mute)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_mute )( 
             IWMPSettings2 * This,
             /* [in] */ VARIANT_BOOL fMute);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, get_playCount)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_playCount )( 
             IWMPSettings2 * This,
             /* [retval][out] */ long *plCount);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, put_playCount)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_playCount )( 
             IWMPSettings2 * This,
             /* [in] */ long lCount);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, get_rate)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_rate )( 
             IWMPSettings2 * This,
             /* [retval][out] */ double *pdRate);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, put_rate)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_rate )( 
             IWMPSettings2 * This,
             /* [in] */ double dRate);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, get_balance)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_balance )( 
             IWMPSettings2 * This,
             /* [retval][out] */ long *plBalance);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, put_balance)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_balance )( 
             IWMPSettings2 * This,
             /* [in] */ long lBalance);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, get_volume)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_volume )( 
             IWMPSettings2 * This,
             /* [retval][out] */ long *plVolume);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, put_volume)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_volume )( 
             IWMPSettings2 * This,
             /* [in] */ long lVolume);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, getMode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getMode )( 
             IWMPSettings2 * This,
             /* [in] */ BSTR bstrMode,
             /* [retval][out] */ VARIANT_BOOL *pvarfMode);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, setMode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setMode )( 
             IWMPSettings2 * This,
             /* [in] */ BSTR bstrMode,
             /* [in] */ VARIANT_BOOL varfMode);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, get_enableErrorDialogs)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_enableErrorDialogs )( 
             IWMPSettings2 * This,
             /* [retval][out] */ VARIANT_BOOL *pfEnableErrorDialogs);
         
+        DECLSPEC_XFGVIRT(IWMPSettings, put_enableErrorDialogs)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_enableErrorDialogs )( 
             IWMPSettings2 * This,
             /* [in] */ VARIANT_BOOL fEnableErrorDialogs);
         
+        DECLSPEC_XFGVIRT(IWMPSettings2, get_defaultAudioLanguage)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_defaultAudioLanguage )( 
             IWMPSettings2 * This,
             /* [retval][out] */ long *plLangID);
         
+        DECLSPEC_XFGVIRT(IWMPSettings2, get_mediaAccessRights)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_mediaAccessRights )( 
             IWMPSettings2 * This,
             /* [retval][out] */ BSTR *pbstrRights);
         
+        DECLSPEC_XFGVIRT(IWMPSettings2, requestMediaAccessRights)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *requestMediaAccessRights )( 
             IWMPSettings2 * This,
             /* [in] */ BSTR bstrDesiredAccess,
@@ -7575,28 +8168,34 @@ EXTERN_C const IID IID_IWMPControls3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPControls3 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPControls3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPControls3 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPControls3 * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPControls3 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPControls3 * This,
             /* [in] */ REFIID riid,
@@ -7605,6 +8204,7 @@ EXTERN_C const IID IID_IWMPControls3;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPControls3 * This,
             /* [annotation][in] */ 
@@ -7624,107 +8224,134 @@ EXTERN_C const IID IID_IWMPControls3;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPControls, get_isAvailable)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_isAvailable )( 
             IWMPControls3 * This,
             /* [in] */ BSTR bstrItem,
             /* [retval][out] */ VARIANT_BOOL *pIsAvailable);
         
+        DECLSPEC_XFGVIRT(IWMPControls, play)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *play )( 
             IWMPControls3 * This);
         
+        DECLSPEC_XFGVIRT(IWMPControls, stop)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *stop )( 
             IWMPControls3 * This);
         
+        DECLSPEC_XFGVIRT(IWMPControls, pause)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *pause )( 
             IWMPControls3 * This);
         
+        DECLSPEC_XFGVIRT(IWMPControls, fastForward)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *fastForward )( 
             IWMPControls3 * This);
         
+        DECLSPEC_XFGVIRT(IWMPControls, fastReverse)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *fastReverse )( 
             IWMPControls3 * This);
         
+        DECLSPEC_XFGVIRT(IWMPControls, get_currentPosition)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_currentPosition )( 
             IWMPControls3 * This,
             /* [retval][out] */ double *pdCurrentPosition);
         
+        DECLSPEC_XFGVIRT(IWMPControls, put_currentPosition)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_currentPosition )( 
             IWMPControls3 * This,
             /* [in] */ double dCurrentPosition);
         
+        DECLSPEC_XFGVIRT(IWMPControls, get_currentPositionString)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_currentPositionString )( 
             IWMPControls3 * This,
             /* [retval][out] */ BSTR *pbstrCurrentPosition);
         
+        DECLSPEC_XFGVIRT(IWMPControls, next)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *next )( 
             IWMPControls3 * This);
         
+        DECLSPEC_XFGVIRT(IWMPControls, previous)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *previous )( 
             IWMPControls3 * This);
         
+        DECLSPEC_XFGVIRT(IWMPControls, get_currentItem)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_currentItem )( 
             IWMPControls3 * This,
             /* [retval][out] */ IWMPMedia **ppIWMPMedia);
         
+        DECLSPEC_XFGVIRT(IWMPControls, put_currentItem)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_currentItem )( 
             IWMPControls3 * This,
             /* [in] */ IWMPMedia *pIWMPMedia);
         
+        DECLSPEC_XFGVIRT(IWMPControls, get_currentMarker)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_currentMarker )( 
             IWMPControls3 * This,
             /* [retval][out] */ long *plMarker);
         
+        DECLSPEC_XFGVIRT(IWMPControls, put_currentMarker)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_currentMarker )( 
             IWMPControls3 * This,
             /* [in] */ long lMarker);
         
+        DECLSPEC_XFGVIRT(IWMPControls, playItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *playItem )( 
             IWMPControls3 * This,
             /* [in] */ IWMPMedia *pIWMPMedia);
         
+        DECLSPEC_XFGVIRT(IWMPControls2, step)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *step )( 
             IWMPControls3 * This,
             /* [in] */ long lStep);
         
+        DECLSPEC_XFGVIRT(IWMPControls3, get_audioLanguageCount)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_audioLanguageCount )( 
             IWMPControls3 * This,
             /* [retval][out] */ long *plCount);
         
+        DECLSPEC_XFGVIRT(IWMPControls3, getAudioLanguageID)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getAudioLanguageID )( 
             IWMPControls3 * This,
             /* [in] */ long lIndex,
             /* [retval][out] */ long *plLangID);
         
+        DECLSPEC_XFGVIRT(IWMPControls3, getAudioLanguageDescription)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getAudioLanguageDescription )( 
             IWMPControls3 * This,
             /* [in] */ long lIndex,
             /* [retval][out] */ BSTR *pbstrLangDesc);
         
+        DECLSPEC_XFGVIRT(IWMPControls3, get_currentAudioLanguage)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_currentAudioLanguage )( 
             IWMPControls3 * This,
             /* [retval][out] */ long *plLangID);
         
+        DECLSPEC_XFGVIRT(IWMPControls3, put_currentAudioLanguage)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_currentAudioLanguage )( 
             IWMPControls3 * This,
             /* [in] */ long lLangID);
         
+        DECLSPEC_XFGVIRT(IWMPControls3, get_currentAudioLanguageIndex)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_currentAudioLanguageIndex )( 
             IWMPControls3 * This,
             /* [retval][out] */ long *plIndex);
         
+        DECLSPEC_XFGVIRT(IWMPControls3, put_currentAudioLanguageIndex)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_currentAudioLanguageIndex )( 
             IWMPControls3 * This,
             /* [in] */ long lIndex);
         
+        DECLSPEC_XFGVIRT(IWMPControls3, getLanguageName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getLanguageName )( 
             IWMPControls3 * This,
             /* [in] */ long lLangID,
             /* [retval][out] */ BSTR *pbstrLangName);
         
+        DECLSPEC_XFGVIRT(IWMPControls3, get_currentPositionTimecode)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_currentPositionTimecode )( 
             IWMPControls3 * This,
             /* [retval][out] */ BSTR *bstrTimecode);
         
+        DECLSPEC_XFGVIRT(IWMPControls3, put_currentPositionTimecode)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_currentPositionTimecode )( 
             IWMPControls3 * This,
             /* [in] */ BSTR bstrTimecode);
@@ -7901,28 +8528,34 @@ EXTERN_C const IID IID_IWMPClosedCaption2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPClosedCaption2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPClosedCaption2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPClosedCaption2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPClosedCaption2 * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPClosedCaption2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPClosedCaption2 * This,
             /* [in] */ REFIID riid,
@@ -7931,6 +8564,7 @@ EXTERN_C const IID IID_IWMPClosedCaption2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPClosedCaption2 * This,
             /* [annotation][in] */ 
@@ -7950,56 +8584,69 @@ EXTERN_C const IID IID_IWMPClosedCaption2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPClosedCaption, get_SAMIStyle)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SAMIStyle )( 
             IWMPClosedCaption2 * This,
             /* [retval][out] */ BSTR *pbstrSAMIStyle);
         
+        DECLSPEC_XFGVIRT(IWMPClosedCaption, put_SAMIStyle)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_SAMIStyle )( 
             IWMPClosedCaption2 * This,
             /* [in] */ BSTR bstrSAMIStyle);
         
+        DECLSPEC_XFGVIRT(IWMPClosedCaption, get_SAMILang)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SAMILang )( 
             IWMPClosedCaption2 * This,
             /* [retval][out] */ BSTR *pbstrSAMILang);
         
+        DECLSPEC_XFGVIRT(IWMPClosedCaption, put_SAMILang)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_SAMILang )( 
             IWMPClosedCaption2 * This,
             /* [in] */ BSTR bstrSAMILang);
         
+        DECLSPEC_XFGVIRT(IWMPClosedCaption, get_SAMIFileName)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SAMIFileName )( 
             IWMPClosedCaption2 * This,
             /* [retval][out] */ BSTR *pbstrSAMIFileName);
         
+        DECLSPEC_XFGVIRT(IWMPClosedCaption, put_SAMIFileName)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_SAMIFileName )( 
             IWMPClosedCaption2 * This,
             /* [in] */ BSTR bstrSAMIFileName);
         
+        DECLSPEC_XFGVIRT(IWMPClosedCaption, get_captioningId)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_captioningId )( 
             IWMPClosedCaption2 * This,
             /* [retval][out] */ BSTR *pbstrCaptioningID);
         
+        DECLSPEC_XFGVIRT(IWMPClosedCaption, put_captioningId)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_captioningId )( 
             IWMPClosedCaption2 * This,
             /* [in] */ BSTR bstrCaptioningID);
         
+        DECLSPEC_XFGVIRT(IWMPClosedCaption2, get_SAMILangCount)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SAMILangCount )( 
             IWMPClosedCaption2 * This,
             /* [retval][out] */ long *plCount);
         
+        DECLSPEC_XFGVIRT(IWMPClosedCaption2, getSAMILangName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getSAMILangName )( 
             IWMPClosedCaption2 * This,
             /* [in] */ long nIndex,
             /* [retval][out] */ BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IWMPClosedCaption2, getSAMILangID)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getSAMILangID )( 
             IWMPClosedCaption2 * This,
             /* [in] */ long nIndex,
             /* [retval][out] */ long *plLangID);
         
+        DECLSPEC_XFGVIRT(IWMPClosedCaption2, get_SAMIStyleCount)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SAMIStyleCount )( 
             IWMPClosedCaption2 * This,
             /* [retval][out] */ long *plCount);
         
+        DECLSPEC_XFGVIRT(IWMPClosedCaption2, getSAMIStyleName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getSAMIStyleName )( 
             IWMPClosedCaption2 * This,
             /* [in] */ long nIndex,
@@ -8126,28 +8773,34 @@ EXTERN_C const IID IID_IWMPPlayerApplication;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPPlayerApplication * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPPlayerApplication * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPPlayerApplication * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPPlayerApplication * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPPlayerApplication * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPPlayerApplication * This,
             /* [in] */ REFIID riid,
@@ -8156,6 +8809,7 @@ EXTERN_C const IID IID_IWMPPlayerApplication;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPPlayerApplication * This,
             /* [annotation][in] */ 
@@ -8175,16 +8829,20 @@ EXTERN_C const IID IID_IWMPPlayerApplication;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPPlayerApplication, switchToPlayerApplication)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *switchToPlayerApplication )( 
             IWMPPlayerApplication * This);
         
+        DECLSPEC_XFGVIRT(IWMPPlayerApplication, switchToControl)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *switchToControl )( 
             IWMPPlayerApplication * This);
         
+        DECLSPEC_XFGVIRT(IWMPPlayerApplication, get_playerDocked)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_playerDocked )( 
             IWMPPlayerApplication * This,
             /* [retval][out] */ VARIANT_BOOL *pbPlayerDocked);
         
+        DECLSPEC_XFGVIRT(IWMPPlayerApplication, get_hasDisplay)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_hasDisplay )( 
             IWMPPlayerApplication * This,
             /* [retval][out] */ VARIANT_BOOL *pbHasDisplay);
@@ -8281,28 +8939,34 @@ EXTERN_C const IID IID_IWMPCore3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPCore3 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPCore3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPCore3 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPCore3 * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPCore3 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPCore3 * This,
             /* [in] */ REFIID riid,
@@ -8311,6 +8975,7 @@ EXTERN_C const IID IID_IWMPCore3;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPCore3 * This,
             /* [annotation][in] */ 
@@ -8330,99 +8995,123 @@ EXTERN_C const IID IID_IWMPCore3;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPCore, close)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *close )( 
             IWMPCore3 * This);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_URL)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_URL )( 
             IWMPCore3 * This,
             /* [retval][out] */ BSTR *pbstrURL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, put_URL)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_URL )( 
             IWMPCore3 * This,
             /* [in] */ BSTR bstrURL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_openState)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_openState )( 
             IWMPCore3 * This,
             /* [retval][out] */ WMPOpenState *pwmpos);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_playState)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_playState )( 
             IWMPCore3 * This,
             /* [retval][out] */ WMPPlayState *pwmpps);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_controls)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_controls )( 
             IWMPCore3 * This,
             /* [retval][out] */ IWMPControls **ppControl);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_settings)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_settings )( 
             IWMPCore3 * This,
             /* [retval][out] */ IWMPSettings **ppSettings);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_currentMedia)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_currentMedia )( 
             IWMPCore3 * This,
             /* [retval][out] */ IWMPMedia **ppMedia);
         
+        DECLSPEC_XFGVIRT(IWMPCore, put_currentMedia)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_currentMedia )( 
             IWMPCore3 * This,
             /* [in] */ IWMPMedia *pMedia);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_mediaCollection)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_mediaCollection )( 
             IWMPCore3 * This,
             /* [retval][out] */ IWMPMediaCollection **ppMediaCollection);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_playlistCollection)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_playlistCollection )( 
             IWMPCore3 * This,
             /* [retval][out] */ IWMPPlaylistCollection **ppPlaylistCollection);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_versionInfo)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_versionInfo )( 
             IWMPCore3 * This,
             /* [retval][out] */ BSTR *pbstrVersionInfo);
         
+        DECLSPEC_XFGVIRT(IWMPCore, launchURL)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *launchURL )( 
             IWMPCore3 * This,
             /* [in] */ BSTR bstrURL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_network)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_network )( 
             IWMPCore3 * This,
             /* [retval][out] */ IWMPNetwork **ppQNI);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_currentPlaylist)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_currentPlaylist )( 
             IWMPCore3 * This,
             /* [retval][out] */ IWMPPlaylist **ppPL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, put_currentPlaylist)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_currentPlaylist )( 
             IWMPCore3 * This,
             /* [in] */ IWMPPlaylist *pPL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_cdromCollection)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_cdromCollection )( 
             IWMPCore3 * This,
             /* [retval][out] */ IWMPCdromCollection **ppCdromCollection);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_closedCaption)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_closedCaption )( 
             IWMPCore3 * This,
             /* [retval][out] */ IWMPClosedCaption **ppClosedCaption);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_isOnline)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_isOnline )( 
             IWMPCore3 * This,
             /* [retval][out] */ VARIANT_BOOL *pfOnline);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_error)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_error )( 
             IWMPCore3 * This,
             /* [retval][out] */ IWMPError **ppError);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_status)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_status )( 
             IWMPCore3 * This,
             /* [retval][out] */ BSTR *pbstrStatus);
         
+        DECLSPEC_XFGVIRT(IWMPCore2, get_dvd)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_dvd )( 
             IWMPCore3 * This,
             /* [retval][out] */ IWMPDVD **ppDVD);
         
+        DECLSPEC_XFGVIRT(IWMPCore3, newPlaylist)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *newPlaylist )( 
             IWMPCore3 * This,
             /* [in] */ BSTR bstrName,
             /* [in] */ BSTR bstrURL,
             /* [retval][out] */ IWMPPlaylist **ppPlaylist);
         
+        DECLSPEC_XFGVIRT(IWMPCore3, newMedia)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *newMedia )( 
             IWMPCore3 * This,
             /* [in] */ BSTR bstrURL,
@@ -8618,28 +9307,34 @@ EXTERN_C const IID IID_IWMPPlayer4;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPPlayer4 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPPlayer4 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPPlayer4 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPPlayer4 * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPPlayer4 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPPlayer4 * This,
             /* [in] */ REFIID riid,
@@ -8648,6 +9343,7 @@ EXTERN_C const IID IID_IWMPPlayer4;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPPlayer4 * This,
             /* [annotation][in] */ 
@@ -8667,160 +9363,199 @@ EXTERN_C const IID IID_IWMPPlayer4;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPCore, close)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *close )( 
             IWMPPlayer4 * This);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_URL)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_URL )( 
             IWMPPlayer4 * This,
             /* [retval][out] */ BSTR *pbstrURL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, put_URL)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_URL )( 
             IWMPPlayer4 * This,
             /* [in] */ BSTR bstrURL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_openState)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_openState )( 
             IWMPPlayer4 * This,
             /* [retval][out] */ WMPOpenState *pwmpos);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_playState)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_playState )( 
             IWMPPlayer4 * This,
             /* [retval][out] */ WMPPlayState *pwmpps);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_controls)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_controls )( 
             IWMPPlayer4 * This,
             /* [retval][out] */ IWMPControls **ppControl);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_settings)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_settings )( 
             IWMPPlayer4 * This,
             /* [retval][out] */ IWMPSettings **ppSettings);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_currentMedia)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_currentMedia )( 
             IWMPPlayer4 * This,
             /* [retval][out] */ IWMPMedia **ppMedia);
         
+        DECLSPEC_XFGVIRT(IWMPCore, put_currentMedia)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_currentMedia )( 
             IWMPPlayer4 * This,
             /* [in] */ IWMPMedia *pMedia);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_mediaCollection)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_mediaCollection )( 
             IWMPPlayer4 * This,
             /* [retval][out] */ IWMPMediaCollection **ppMediaCollection);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_playlistCollection)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_playlistCollection )( 
             IWMPPlayer4 * This,
             /* [retval][out] */ IWMPPlaylistCollection **ppPlaylistCollection);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_versionInfo)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_versionInfo )( 
             IWMPPlayer4 * This,
             /* [retval][out] */ BSTR *pbstrVersionInfo);
         
+        DECLSPEC_XFGVIRT(IWMPCore, launchURL)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *launchURL )( 
             IWMPPlayer4 * This,
             /* [in] */ BSTR bstrURL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_network)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_network )( 
             IWMPPlayer4 * This,
             /* [retval][out] */ IWMPNetwork **ppQNI);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_currentPlaylist)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_currentPlaylist )( 
             IWMPPlayer4 * This,
             /* [retval][out] */ IWMPPlaylist **ppPL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, put_currentPlaylist)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_currentPlaylist )( 
             IWMPPlayer4 * This,
             /* [in] */ IWMPPlaylist *pPL);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_cdromCollection)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_cdromCollection )( 
             IWMPPlayer4 * This,
             /* [retval][out] */ IWMPCdromCollection **ppCdromCollection);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_closedCaption)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_closedCaption )( 
             IWMPPlayer4 * This,
             /* [retval][out] */ IWMPClosedCaption **ppClosedCaption);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_isOnline)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_isOnline )( 
             IWMPPlayer4 * This,
             /* [retval][out] */ VARIANT_BOOL *pfOnline);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_error)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_error )( 
             IWMPPlayer4 * This,
             /* [retval][out] */ IWMPError **ppError);
         
+        DECLSPEC_XFGVIRT(IWMPCore, get_status)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_status )( 
             IWMPPlayer4 * This,
             /* [retval][out] */ BSTR *pbstrStatus);
         
+        DECLSPEC_XFGVIRT(IWMPCore2, get_dvd)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_dvd )( 
             IWMPPlayer4 * This,
             /* [retval][out] */ IWMPDVD **ppDVD);
         
+        DECLSPEC_XFGVIRT(IWMPCore3, newPlaylist)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *newPlaylist )( 
             IWMPPlayer4 * This,
             /* [in] */ BSTR bstrName,
             /* [in] */ BSTR bstrURL,
             /* [retval][out] */ IWMPPlaylist **ppPlaylist);
         
+        DECLSPEC_XFGVIRT(IWMPCore3, newMedia)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *newMedia )( 
             IWMPPlayer4 * This,
             /* [in] */ BSTR bstrURL,
             /* [retval][out] */ IWMPMedia **ppMedia);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer4, get_enabled)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_enabled )( 
             IWMPPlayer4 * This,
             /* [retval][out] */ VARIANT_BOOL *pbEnabled);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer4, put_enabled)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_enabled )( 
             IWMPPlayer4 * This,
             /* [in] */ VARIANT_BOOL bEnabled);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer4, get_fullScreen)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_fullScreen )( 
             IWMPPlayer4 * This,
             /* [retval][out] */ VARIANT_BOOL *pbFullScreen);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer4, put_fullScreen)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_fullScreen )( 
             IWMPPlayer4 * This,
             VARIANT_BOOL bFullScreen);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer4, get_enableContextMenu)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_enableContextMenu )( 
             IWMPPlayer4 * This,
             /* [retval][out] */ VARIANT_BOOL *pbEnableContextMenu);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer4, put_enableContextMenu)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_enableContextMenu )( 
             IWMPPlayer4 * This,
             VARIANT_BOOL bEnableContextMenu);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer4, put_uiMode)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_uiMode )( 
             IWMPPlayer4 * This,
             /* [in] */ BSTR bstrMode);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer4, get_uiMode)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_uiMode )( 
             IWMPPlayer4 * This,
             /* [retval][out] */ BSTR *pbstrMode);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer4, get_stretchToFit)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_stretchToFit )( 
             IWMPPlayer4 * This,
             /* [retval][out] */ VARIANT_BOOL *pbEnabled);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer4, put_stretchToFit)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_stretchToFit )( 
             IWMPPlayer4 * This,
             /* [in] */ VARIANT_BOOL bEnabled);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer4, get_windowlessVideo)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_windowlessVideo )( 
             IWMPPlayer4 * This,
             /* [retval][out] */ VARIANT_BOOL *pbEnabled);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer4, put_windowlessVideo)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_windowlessVideo )( 
             IWMPPlayer4 * This,
             /* [in] */ VARIANT_BOOL bEnabled);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer4, get_isRemote)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_isRemote )( 
             IWMPPlayer4 * This,
             /* [retval][out] */ VARIANT_BOOL *pvarfIsRemote);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer4, get_playerApplication)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_playerApplication )( 
             IWMPPlayer4 * This,
             /* [retval][out] */ IWMPPlayerApplication **ppIWMPPlayerApplication);
         
+        DECLSPEC_XFGVIRT(IWMPPlayer4, openPlayer)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *openPlayer )( 
             IWMPPlayer4 * This,
             /* [in] */ BSTR bstrURL);
@@ -9027,26 +9762,32 @@ EXTERN_C const IID IID_IWMPPlayerServices;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPPlayerServices * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPPlayerServices * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPPlayerServices * This);
         
+        DECLSPEC_XFGVIRT(IWMPPlayerServices, activateUIPlugin)
         HRESULT ( STDMETHODCALLTYPE *activateUIPlugin )( 
             IWMPPlayerServices * This,
             /* [in] */ BSTR bstrPlugin);
         
+        DECLSPEC_XFGVIRT(IWMPPlayerServices, setTaskPane)
         HRESULT ( STDMETHODCALLTYPE *setTaskPane )( 
             IWMPPlayerServices * This,
             /* [in] */ BSTR bstrTaskPane);
         
+        DECLSPEC_XFGVIRT(IWMPPlayerServices, setTaskPaneURL)
         HRESULT ( STDMETHODCALLTYPE *setTaskPaneURL )( 
             IWMPPlayerServices * This,
             /* [in] */ BSTR bstrTaskPane,
@@ -9196,75 +9937,94 @@ EXTERN_C const IID IID_IWMPSyncDevice;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPSyncDevice * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPSyncDevice * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPSyncDevice * This);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, get_friendlyName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_friendlyName )( 
             IWMPSyncDevice * This,
             /* [retval][out] */ BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, put_friendlyName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_friendlyName )( 
             IWMPSyncDevice * This,
             /* [in] */ BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, get_deviceName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_deviceName )( 
             IWMPSyncDevice * This,
             /* [retval][out] */ BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, get_deviceId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_deviceId )( 
             IWMPSyncDevice * This,
             /* [retval][out] */ BSTR *pbstrDeviceId);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, get_partnershipIndex)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_partnershipIndex )( 
             IWMPSyncDevice * This,
             /* [retval][out] */ long *plIndex);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, get_connected)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_connected )( 
             IWMPSyncDevice * This,
             /* [retval][out] */ VARIANT_BOOL *pvbConnected);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, get_status)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_status )( 
             IWMPSyncDevice * This,
             /* [retval][out] */ WMPDeviceStatus *pwmpds);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, get_syncState)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_syncState )( 
             IWMPSyncDevice * This,
             /* [retval][out] */ WMPSyncState *pwmpss);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, get_progress)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_progress )( 
             IWMPSyncDevice * This,
             /* [retval][out] */ long *plProgress);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, getItemInfo)
         HRESULT ( STDMETHODCALLTYPE *getItemInfo )( 
             IWMPSyncDevice * This,
             /* [in] */ BSTR bstrItemName,
             /* [retval][out] */ BSTR *pbstrVal);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, createPartnership)
         HRESULT ( STDMETHODCALLTYPE *createPartnership )( 
             IWMPSyncDevice * This,
             /* [in] */ VARIANT_BOOL vbShowUI);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, deletePartnership)
         HRESULT ( STDMETHODCALLTYPE *deletePartnership )( 
             IWMPSyncDevice * This);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, start)
         HRESULT ( STDMETHODCALLTYPE *start )( 
             IWMPSyncDevice * This);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, stop)
         HRESULT ( STDMETHODCALLTYPE *stop )( 
             IWMPSyncDevice * This);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, showSettings)
         HRESULT ( STDMETHODCALLTYPE *showSettings )( 
             IWMPSyncDevice * This);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, isIdentical)
         HRESULT ( STDMETHODCALLTYPE *isIdentical )( 
             IWMPSyncDevice * This,
             /* [in] */ IWMPSyncDevice *pDevice,
@@ -9383,22 +10143,27 @@ EXTERN_C const IID IID_IWMPSyncServices;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPSyncServices * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPSyncServices * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPSyncServices * This);
         
+        DECLSPEC_XFGVIRT(IWMPSyncServices, get_deviceCount)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_deviceCount )( 
             IWMPSyncServices * This,
             /* [retval][out] */ long *plCount);
         
+        DECLSPEC_XFGVIRT(IWMPSyncServices, getDevice)
         HRESULT ( STDMETHODCALLTYPE *getDevice )( 
             IWMPSyncServices * This,
             /* [in] */ long lIndex,
@@ -9471,32 +10236,39 @@ EXTERN_C const IID IID_IWMPPlayerServices2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPPlayerServices2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPPlayerServices2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPPlayerServices2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPPlayerServices, activateUIPlugin)
         HRESULT ( STDMETHODCALLTYPE *activateUIPlugin )( 
             IWMPPlayerServices2 * This,
             /* [in] */ BSTR bstrPlugin);
         
+        DECLSPEC_XFGVIRT(IWMPPlayerServices, setTaskPane)
         HRESULT ( STDMETHODCALLTYPE *setTaskPane )( 
             IWMPPlayerServices2 * This,
             /* [in] */ BSTR bstrTaskPane);
         
+        DECLSPEC_XFGVIRT(IWMPPlayerServices, setTaskPaneURL)
         HRESULT ( STDMETHODCALLTYPE *setTaskPaneURL )( 
             IWMPPlayerServices2 * This,
             /* [in] */ BSTR bstrTaskPane,
             /* [in] */ BSTR bstrURL,
             /* [in] */ BSTR bstrFriendlyName);
         
+        DECLSPEC_XFGVIRT(IWMPPlayerServices2, setBackgroundProcessingPriority)
         HRESULT ( STDMETHODCALLTYPE *setBackgroundProcessingPriority )( 
             IWMPPlayerServices2 * This,
             /* [in] */ BSTR bstrPriority);
@@ -9632,29 +10404,36 @@ EXTERN_C const IID IID_IWMPCdromRip;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPCdromRip * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPCdromRip * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPCdromRip * This);
         
+        DECLSPEC_XFGVIRT(IWMPCdromRip, get_ripState)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ripState )( 
             IWMPCdromRip * This,
             /* [retval][out] */ WMPRipState *pwmprs);
         
+        DECLSPEC_XFGVIRT(IWMPCdromRip, get_ripProgress)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ripProgress )( 
             IWMPCdromRip * This,
             /* [retval][out] */ long *plProgress);
         
+        DECLSPEC_XFGVIRT(IWMPCdromRip, startRip)
         HRESULT ( STDMETHODCALLTYPE *startRip )( 
             IWMPCdromRip * This);
         
+        DECLSPEC_XFGVIRT(IWMPCdromRip, stopRip)
         HRESULT ( STDMETHODCALLTYPE *stopRip )( 
             IWMPCdromRip * This);
         
@@ -9768,69 +10547,86 @@ EXTERN_C const IID IID_IWMPCdromBurn;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPCdromBurn * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPCdromBurn * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPCdromBurn * This);
         
+        DECLSPEC_XFGVIRT(IWMPCdromBurn, isAvailable)
         HRESULT ( STDMETHODCALLTYPE *isAvailable )( 
             IWMPCdromBurn * This,
             /* [in] */ BSTR bstrItem,
             /* [retval][out] */ VARIANT_BOOL *pIsAvailable);
         
+        DECLSPEC_XFGVIRT(IWMPCdromBurn, getItemInfo)
         HRESULT ( STDMETHODCALLTYPE *getItemInfo )( 
             IWMPCdromBurn * This,
             /* [in] */ BSTR bstrItem,
             /* [retval][out] */ BSTR *pbstrVal);
         
+        DECLSPEC_XFGVIRT(IWMPCdromBurn, get_label)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_label )( 
             IWMPCdromBurn * This,
             /* [retval][out] */ BSTR *pbstrLabel);
         
+        DECLSPEC_XFGVIRT(IWMPCdromBurn, put_label)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_label )( 
             IWMPCdromBurn * This,
             /* [in] */ BSTR bstrLabel);
         
+        DECLSPEC_XFGVIRT(IWMPCdromBurn, get_burnFormat)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_burnFormat )( 
             IWMPCdromBurn * This,
             /* [retval][out] */ WMPBurnFormat *pwmpbf);
         
+        DECLSPEC_XFGVIRT(IWMPCdromBurn, put_burnFormat)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_burnFormat )( 
             IWMPCdromBurn * This,
             /* [in] */ WMPBurnFormat wmpbf);
         
+        DECLSPEC_XFGVIRT(IWMPCdromBurn, get_burnPlaylist)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_burnPlaylist )( 
             IWMPCdromBurn * This,
             /* [retval][out] */ IWMPPlaylist **ppPlaylist);
         
+        DECLSPEC_XFGVIRT(IWMPCdromBurn, put_burnPlaylist)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_burnPlaylist )( 
             IWMPCdromBurn * This,
             /* [in] */ IWMPPlaylist *pPlaylist);
         
+        DECLSPEC_XFGVIRT(IWMPCdromBurn, refreshStatus)
         HRESULT ( STDMETHODCALLTYPE *refreshStatus )( 
             IWMPCdromBurn * This);
         
+        DECLSPEC_XFGVIRT(IWMPCdromBurn, get_burnState)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_burnState )( 
             IWMPCdromBurn * This,
             /* [retval][out] */ WMPBurnState *pwmpbs);
         
+        DECLSPEC_XFGVIRT(IWMPCdromBurn, get_burnProgress)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_burnProgress )( 
             IWMPCdromBurn * This,
             /* [retval][out] */ long *plProgress);
         
+        DECLSPEC_XFGVIRT(IWMPCdromBurn, startBurn)
         HRESULT ( STDMETHODCALLTYPE *startBurn )( 
             IWMPCdromBurn * This);
         
+        DECLSPEC_XFGVIRT(IWMPCdromBurn, stopBurn)
         HRESULT ( STDMETHODCALLTYPE *stopBurn )( 
             IWMPCdromBurn * This);
         
+        DECLSPEC_XFGVIRT(IWMPCdromBurn, erase)
         HRESULT ( STDMETHODCALLTYPE *erase )( 
             IWMPCdromBurn * This);
         
@@ -9941,28 +10737,34 @@ EXTERN_C const IID IID_IWMPQuery;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPQuery * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPQuery * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPQuery * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPQuery * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPQuery * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPQuery * This,
             /* [in] */ REFIID riid,
@@ -9971,6 +10773,7 @@ EXTERN_C const IID IID_IWMPQuery;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPQuery * This,
             /* [annotation][in] */ 
@@ -9990,12 +10793,14 @@ EXTERN_C const IID IID_IWMPQuery;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPQuery, addCondition)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *addCondition )( 
             IWMPQuery * This,
             /* [in] */ BSTR bstrAttribute,
             /* [in] */ BSTR bstrOperator,
             /* [in] */ BSTR bstrValue);
         
+        DECLSPEC_XFGVIRT(IWMPQuery, beginNextGroup)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *beginNextGroup )( 
             IWMPQuery * This);
         
@@ -10109,28 +10914,34 @@ EXTERN_C const IID IID_IWMPMediaCollection2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPMediaCollection2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPMediaCollection2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPMediaCollection2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPMediaCollection2 * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPMediaCollection2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPMediaCollection2 * This,
             /* [in] */ REFIID riid,
@@ -10139,6 +10950,7 @@ EXTERN_C const IID IID_IWMPMediaCollection2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPMediaCollection2 * This,
             /* [annotation][in] */ 
@@ -10158,71 +10970,85 @@ EXTERN_C const IID IID_IWMPMediaCollection2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPMediaCollection, add)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *add )( 
             IWMPMediaCollection2 * This,
             /* [in] */ BSTR bstrURL,
             /* [retval][out] */ IWMPMedia **ppItem);
         
+        DECLSPEC_XFGVIRT(IWMPMediaCollection, getAll)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getAll )( 
             IWMPMediaCollection2 * This,
             /* [retval][out] */ IWMPPlaylist **ppMediaItems);
         
+        DECLSPEC_XFGVIRT(IWMPMediaCollection, getByName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getByName )( 
             IWMPMediaCollection2 * This,
             /* [in] */ BSTR bstrName,
             /* [retval][out] */ IWMPPlaylist **ppMediaItems);
         
+        DECLSPEC_XFGVIRT(IWMPMediaCollection, getByGenre)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getByGenre )( 
             IWMPMediaCollection2 * This,
             /* [in] */ BSTR bstrGenre,
             /* [retval][out] */ IWMPPlaylist **ppMediaItems);
         
+        DECLSPEC_XFGVIRT(IWMPMediaCollection, getByAuthor)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getByAuthor )( 
             IWMPMediaCollection2 * This,
             /* [in] */ BSTR bstrAuthor,
             /* [retval][out] */ IWMPPlaylist **ppMediaItems);
         
+        DECLSPEC_XFGVIRT(IWMPMediaCollection, getByAlbum)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getByAlbum )( 
             IWMPMediaCollection2 * This,
             /* [in] */ BSTR bstrAlbum,
             /* [retval][out] */ IWMPPlaylist **ppMediaItems);
         
+        DECLSPEC_XFGVIRT(IWMPMediaCollection, getByAttribute)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getByAttribute )( 
             IWMPMediaCollection2 * This,
             /* [in] */ BSTR bstrAttribute,
             /* [in] */ BSTR bstrValue,
             /* [retval][out] */ IWMPPlaylist **ppMediaItems);
         
+        DECLSPEC_XFGVIRT(IWMPMediaCollection, remove)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *remove )( 
             IWMPMediaCollection2 * This,
             /* [in] */ IWMPMedia *pItem,
             /* [in] */ VARIANT_BOOL varfDeleteFile);
         
+        DECLSPEC_XFGVIRT(IWMPMediaCollection, getAttributeStringCollection)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getAttributeStringCollection )( 
             IWMPMediaCollection2 * This,
             /* [in] */ BSTR bstrAttribute,
             /* [in] */ BSTR bstrMediaType,
             /* [retval][out] */ IWMPStringCollection **ppStringCollection);
         
+        DECLSPEC_XFGVIRT(IWMPMediaCollection, getMediaAtom)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getMediaAtom )( 
             IWMPMediaCollection2 * This,
             /* [in] */ BSTR bstrItemName,
             /* [retval][out] */ long *plAtom);
         
+        DECLSPEC_XFGVIRT(IWMPMediaCollection, setDeleted)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setDeleted )( 
             IWMPMediaCollection2 * This,
             /* [in] */ IWMPMedia *pItem,
             /* [in] */ VARIANT_BOOL varfIsDeleted);
         
+        DECLSPEC_XFGVIRT(IWMPMediaCollection, isDeleted)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *isDeleted )( 
             IWMPMediaCollection2 * This,
             /* [in] */ IWMPMedia *pItem,
             /* [retval][out] */ VARIANT_BOOL *pvarfIsDeleted);
         
+        DECLSPEC_XFGVIRT(IWMPMediaCollection2, createQuery)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createQuery )( 
             IWMPMediaCollection2 * This,
             /* [retval][out] */ IWMPQuery **ppQuery);
         
+        DECLSPEC_XFGVIRT(IWMPMediaCollection2, getPlaylistByQuery)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getPlaylistByQuery )( 
             IWMPMediaCollection2 * This,
             /* [in] */ IWMPQuery *pQuery,
@@ -10231,6 +11057,7 @@ EXTERN_C const IID IID_IWMPMediaCollection2;
             /* [in] */ VARIANT_BOOL fSortAscending,
             /* [retval][out] */ IWMPPlaylist **ppPlaylist);
         
+        DECLSPEC_XFGVIRT(IWMPMediaCollection2, getStringCollectionByQuery)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getStringCollectionByQuery )( 
             IWMPMediaCollection2 * This,
             /* [in] */ BSTR bstrAttribute,
@@ -10240,6 +11067,7 @@ EXTERN_C const IID IID_IWMPMediaCollection2;
             /* [in] */ VARIANT_BOOL fSortAscending,
             /* [retval][out] */ IWMPStringCollection **ppStringCollection);
         
+        DECLSPEC_XFGVIRT(IWMPMediaCollection2, getByAttributeAndMediaType)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getByAttributeAndMediaType )( 
             IWMPMediaCollection2 * This,
             /* [in] */ BSTR bstrAttribute,
@@ -10389,28 +11217,34 @@ EXTERN_C const IID IID_IWMPStringCollection2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPStringCollection2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPStringCollection2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPStringCollection2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPStringCollection2 * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPStringCollection2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPStringCollection2 * This,
             /* [in] */ REFIID riid,
@@ -10419,6 +11253,7 @@ EXTERN_C const IID IID_IWMPStringCollection2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPStringCollection2 * This,
             /* [annotation][in] */ 
@@ -10438,26 +11273,31 @@ EXTERN_C const IID IID_IWMPStringCollection2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPStringCollection, get_count)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_count )( 
             IWMPStringCollection2 * This,
             /* [retval][out] */ long *plCount);
         
+        DECLSPEC_XFGVIRT(IWMPStringCollection, item)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *item )( 
             IWMPStringCollection2 * This,
             /* [in] */ long lIndex,
             /* [retval][out] */ BSTR *pbstrString);
         
+        DECLSPEC_XFGVIRT(IWMPStringCollection2, isIdentical)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *isIdentical )( 
             IWMPStringCollection2 * This,
             /* [in] */ IWMPStringCollection2 *pIWMPStringCollection2,
             /* [retval][out] */ VARIANT_BOOL *pvbool);
         
+        DECLSPEC_XFGVIRT(IWMPStringCollection2, getItemInfo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getItemInfo )( 
             IWMPStringCollection2 * This,
             /* [in] */ long lCollectionIndex,
             /* [in] */ BSTR bstrItemName,
             /* [retval][out] */ BSTR *pbstrValue);
         
+        DECLSPEC_XFGVIRT(IWMPStringCollection2, getAttributeCountByType)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getAttributeCountByType )( 
             IWMPStringCollection2 * This,
             /* [in] */ long lCollectionIndex,
@@ -10465,6 +11305,7 @@ EXTERN_C const IID IID_IWMPStringCollection2;
             /* [in] */ BSTR bstrLanguage,
             /* [retval][out] */ long *plCount);
         
+        DECLSPEC_XFGVIRT(IWMPStringCollection2, getItemInfoByType)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getItemInfoByType )( 
             IWMPStringCollection2 * This,
             /* [in] */ long lCollectionIndex,
@@ -10595,30 +11436,37 @@ EXTERN_C const IID IID_IWMPLibrary;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPLibrary * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPLibrary * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPLibrary * This);
         
+        DECLSPEC_XFGVIRT(IWMPLibrary, get_name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_name )( 
             IWMPLibrary * This,
             /* [retval][out] */ BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IWMPLibrary, get_type)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_type )( 
             IWMPLibrary * This,
             /* [retval][out] */ WMPLibraryType *pwmplt);
         
+        DECLSPEC_XFGVIRT(IWMPLibrary, get_mediaCollection)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_mediaCollection )( 
             IWMPLibrary * This,
             /* [retval][out] */ IWMPMediaCollection **ppIWMPMediaCollection);
         
+        DECLSPEC_XFGVIRT(IWMPLibrary, isIdentical)
         HRESULT ( STDMETHODCALLTYPE *isIdentical )( 
             IWMPLibrary * This,
             /* [in] */ IWMPLibrary *pIWMPLibrary,
@@ -10703,23 +11551,28 @@ EXTERN_C const IID IID_IWMPLibraryServices;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPLibraryServices * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPLibraryServices * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPLibraryServices * This);
         
+        DECLSPEC_XFGVIRT(IWMPLibraryServices, getCountByType)
         HRESULT ( STDMETHODCALLTYPE *getCountByType )( 
             IWMPLibraryServices * This,
             /* [in] */ WMPLibraryType wmplt,
             /* [retval][out] */ long *plCount);
         
+        DECLSPEC_XFGVIRT(IWMPLibraryServices, getLibraryByType)
         HRESULT ( STDMETHODCALLTYPE *getLibraryByType )( 
             IWMPLibraryServices * This,
             /* [in] */ WMPLibraryType wmplt,
@@ -10798,26 +11651,32 @@ EXTERN_C const IID IID_IWMPLibrarySharingServices;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPLibrarySharingServices * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPLibrarySharingServices * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPLibrarySharingServices * This);
         
+        DECLSPEC_XFGVIRT(IWMPLibrarySharingServices, isLibraryShared)
         HRESULT ( STDMETHODCALLTYPE *isLibraryShared )( 
             IWMPLibrarySharingServices * This,
             /* [retval][out] */ VARIANT_BOOL *pvbShared);
         
+        DECLSPEC_XFGVIRT(IWMPLibrarySharingServices, isLibrarySharingEnabled)
         HRESULT ( STDMETHODCALLTYPE *isLibrarySharingEnabled )( 
             IWMPLibrarySharingServices * This,
             /* [retval][out] */ VARIANT_BOOL *pvbEnabled);
         
+        DECLSPEC_XFGVIRT(IWMPLibrarySharingServices, showLibrarySharing)
         HRESULT ( STDMETHODCALLTYPE *showLibrarySharing )( 
             IWMPLibrarySharingServices * This);
         
@@ -10937,58 +11796,72 @@ EXTERN_C const IID IID_IWMPFolderMonitorServices;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPFolderMonitorServices * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPFolderMonitorServices * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPFolderMonitorServices * This);
         
+        DECLSPEC_XFGVIRT(IWMPFolderMonitorServices, get_count)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_count )( 
             IWMPFolderMonitorServices * This,
             /* [retval][out] */ long *plCount);
         
+        DECLSPEC_XFGVIRT(IWMPFolderMonitorServices, item)
         HRESULT ( STDMETHODCALLTYPE *item )( 
             IWMPFolderMonitorServices * This,
             /* [in] */ long lIndex,
             /* [retval][out] */ BSTR *pbstrFolder);
         
+        DECLSPEC_XFGVIRT(IWMPFolderMonitorServices, add)
         HRESULT ( STDMETHODCALLTYPE *add )( 
             IWMPFolderMonitorServices * This,
             /* [in] */ BSTR bstrFolder);
         
+        DECLSPEC_XFGVIRT(IWMPFolderMonitorServices, remove)
         HRESULT ( STDMETHODCALLTYPE *remove )( 
             IWMPFolderMonitorServices * This,
             /* [in] */ long lIndex);
         
+        DECLSPEC_XFGVIRT(IWMPFolderMonitorServices, get_scanState)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_scanState )( 
             IWMPFolderMonitorServices * This,
             /* [retval][out] */ WMPFolderScanState *pwmpfss);
         
+        DECLSPEC_XFGVIRT(IWMPFolderMonitorServices, get_currentFolder)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_currentFolder )( 
             IWMPFolderMonitorServices * This,
             /* [retval][out] */ BSTR *pbstrFolder);
         
+        DECLSPEC_XFGVIRT(IWMPFolderMonitorServices, get_scannedFilesCount)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_scannedFilesCount )( 
             IWMPFolderMonitorServices * This,
             /* [retval][out] */ long *plCount);
         
+        DECLSPEC_XFGVIRT(IWMPFolderMonitorServices, get_addedFilesCount)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_addedFilesCount )( 
             IWMPFolderMonitorServices * This,
             /* [retval][out] */ long *plCount);
         
+        DECLSPEC_XFGVIRT(IWMPFolderMonitorServices, get_updateProgress)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_updateProgress )( 
             IWMPFolderMonitorServices * This,
             /* [retval][out] */ long *plProgress);
         
+        DECLSPEC_XFGVIRT(IWMPFolderMonitorServices, startScan)
         HRESULT ( STDMETHODCALLTYPE *startScan )( 
             IWMPFolderMonitorServices * This);
         
+        DECLSPEC_XFGVIRT(IWMPFolderMonitorServices, stopScan)
         HRESULT ( STDMETHODCALLTYPE *stopScan )( 
             IWMPFolderMonitorServices * This);
         
@@ -11087,80 +11960,100 @@ EXTERN_C const IID IID_IWMPSyncDevice2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPSyncDevice2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPSyncDevice2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPSyncDevice2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, get_friendlyName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_friendlyName )( 
             IWMPSyncDevice2 * This,
             /* [retval][out] */ BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, put_friendlyName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_friendlyName )( 
             IWMPSyncDevice2 * This,
             /* [in] */ BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, get_deviceName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_deviceName )( 
             IWMPSyncDevice2 * This,
             /* [retval][out] */ BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, get_deviceId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_deviceId )( 
             IWMPSyncDevice2 * This,
             /* [retval][out] */ BSTR *pbstrDeviceId);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, get_partnershipIndex)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_partnershipIndex )( 
             IWMPSyncDevice2 * This,
             /* [retval][out] */ long *plIndex);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, get_connected)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_connected )( 
             IWMPSyncDevice2 * This,
             /* [retval][out] */ VARIANT_BOOL *pvbConnected);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, get_status)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_status )( 
             IWMPSyncDevice2 * This,
             /* [retval][out] */ WMPDeviceStatus *pwmpds);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, get_syncState)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_syncState )( 
             IWMPSyncDevice2 * This,
             /* [retval][out] */ WMPSyncState *pwmpss);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, get_progress)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_progress )( 
             IWMPSyncDevice2 * This,
             /* [retval][out] */ long *plProgress);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, getItemInfo)
         HRESULT ( STDMETHODCALLTYPE *getItemInfo )( 
             IWMPSyncDevice2 * This,
             /* [in] */ BSTR bstrItemName,
             /* [retval][out] */ BSTR *pbstrVal);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, createPartnership)
         HRESULT ( STDMETHODCALLTYPE *createPartnership )( 
             IWMPSyncDevice2 * This,
             /* [in] */ VARIANT_BOOL vbShowUI);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, deletePartnership)
         HRESULT ( STDMETHODCALLTYPE *deletePartnership )( 
             IWMPSyncDevice2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, start)
         HRESULT ( STDMETHODCALLTYPE *start )( 
             IWMPSyncDevice2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, stop)
         HRESULT ( STDMETHODCALLTYPE *stop )( 
             IWMPSyncDevice2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, showSettings)
         HRESULT ( STDMETHODCALLTYPE *showSettings )( 
             IWMPSyncDevice2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, isIdentical)
         HRESULT ( STDMETHODCALLTYPE *isIdentical )( 
             IWMPSyncDevice2 * This,
             /* [in] */ IWMPSyncDevice *pDevice,
             /* [retval][out] */ VARIANT_BOOL *pvbool);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice2, setItemInfo)
         HRESULT ( STDMETHODCALLTYPE *setItemInfo )( 
             IWMPSyncDevice2 * This,
             /* [in] */ BSTR bstrItemName,
@@ -11282,90 +12175,112 @@ EXTERN_C const IID IID_IWMPSyncDevice3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPSyncDevice3 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPSyncDevice3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPSyncDevice3 * This);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, get_friendlyName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_friendlyName )( 
             IWMPSyncDevice3 * This,
             /* [retval][out] */ BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, put_friendlyName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_friendlyName )( 
             IWMPSyncDevice3 * This,
             /* [in] */ BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, get_deviceName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_deviceName )( 
             IWMPSyncDevice3 * This,
             /* [retval][out] */ BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, get_deviceId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_deviceId )( 
             IWMPSyncDevice3 * This,
             /* [retval][out] */ BSTR *pbstrDeviceId);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, get_partnershipIndex)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_partnershipIndex )( 
             IWMPSyncDevice3 * This,
             /* [retval][out] */ long *plIndex);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, get_connected)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_connected )( 
             IWMPSyncDevice3 * This,
             /* [retval][out] */ VARIANT_BOOL *pvbConnected);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, get_status)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_status )( 
             IWMPSyncDevice3 * This,
             /* [retval][out] */ WMPDeviceStatus *pwmpds);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, get_syncState)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_syncState )( 
             IWMPSyncDevice3 * This,
             /* [retval][out] */ WMPSyncState *pwmpss);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, get_progress)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_progress )( 
             IWMPSyncDevice3 * This,
             /* [retval][out] */ long *plProgress);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, getItemInfo)
         HRESULT ( STDMETHODCALLTYPE *getItemInfo )( 
             IWMPSyncDevice3 * This,
             /* [in] */ BSTR bstrItemName,
             /* [retval][out] */ BSTR *pbstrVal);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, createPartnership)
         HRESULT ( STDMETHODCALLTYPE *createPartnership )( 
             IWMPSyncDevice3 * This,
             /* [in] */ VARIANT_BOOL vbShowUI);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, deletePartnership)
         HRESULT ( STDMETHODCALLTYPE *deletePartnership )( 
             IWMPSyncDevice3 * This);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, start)
         HRESULT ( STDMETHODCALLTYPE *start )( 
             IWMPSyncDevice3 * This);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, stop)
         HRESULT ( STDMETHODCALLTYPE *stop )( 
             IWMPSyncDevice3 * This);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, showSettings)
         HRESULT ( STDMETHODCALLTYPE *showSettings )( 
             IWMPSyncDevice3 * This);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice, isIdentical)
         HRESULT ( STDMETHODCALLTYPE *isIdentical )( 
             IWMPSyncDevice3 * This,
             /* [in] */ IWMPSyncDevice *pDevice,
             /* [retval][out] */ VARIANT_BOOL *pvbool);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice2, setItemInfo)
         HRESULT ( STDMETHODCALLTYPE *setItemInfo )( 
             IWMPSyncDevice3 * This,
             /* [in] */ BSTR bstrItemName,
             /* [in] */ BSTR bstrVal);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice3, estimateSyncSize)
         HRESULT ( STDMETHODCALLTYPE *estimateSyncSize )( 
             IWMPSyncDevice3 * This,
             /* [unique][in] */ IWMPPlaylist *pNonRulePlaylist,
             /* [unique][in] */ IWMPPlaylist *pRulesPlaylist);
         
+        DECLSPEC_XFGVIRT(IWMPSyncDevice3, cancelEstimation)
         HRESULT ( STDMETHODCALLTYPE *cancelEstimation )( 
             IWMPSyncDevice3 * This);
         
@@ -11490,35 +12405,43 @@ EXTERN_C const IID IID_IWMPLibrary2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPLibrary2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPLibrary2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPLibrary2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPLibrary, get_name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_name )( 
             IWMPLibrary2 * This,
             /* [retval][out] */ BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IWMPLibrary, get_type)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_type )( 
             IWMPLibrary2 * This,
             /* [retval][out] */ WMPLibraryType *pwmplt);
         
+        DECLSPEC_XFGVIRT(IWMPLibrary, get_mediaCollection)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_mediaCollection )( 
             IWMPLibrary2 * This,
             /* [retval][out] */ IWMPMediaCollection **ppIWMPMediaCollection);
         
+        DECLSPEC_XFGVIRT(IWMPLibrary, isIdentical)
         HRESULT ( STDMETHODCALLTYPE *isIdentical )( 
             IWMPLibrary2 * This,
             /* [in] */ IWMPLibrary *pIWMPLibrary,
             /* [retval][out] */ VARIANT_BOOL *pvbool);
         
+        DECLSPEC_XFGVIRT(IWMPLibrary2, getItemInfo)
         HRESULT ( STDMETHODCALLTYPE *getItemInfo )( 
             IWMPLibrary2 * This,
             /* [in] */ BSTR bstrItemName,
@@ -11782,168 +12705,209 @@ EXTERN_C const IID IID_IWMPEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPEvents * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPEvents * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, OpenStateChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *OpenStateChange )( 
             IWMPEvents * This,
             /* [in] */ long NewState);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlayStateChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlayStateChange )( 
             IWMPEvents * This,
             /* [in] */ long NewState);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, AudioLanguageChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *AudioLanguageChange )( 
             IWMPEvents * This,
             /* [in] */ long LangID);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, StatusChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *StatusChange )( 
             IWMPEvents * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, ScriptCommand)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *ScriptCommand )( 
             IWMPEvents * This,
             /* [in] */ BSTR scType,
             /* [in] */ BSTR Param);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, NewStream)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *NewStream )( 
             IWMPEvents * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, Disconnect)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *Disconnect )( 
             IWMPEvents * This,
             /* [in] */ long Result);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, Buffering)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *Buffering )( 
             IWMPEvents * This,
             /* [in] */ VARIANT_BOOL Start);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, Error)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *Error )( 
             IWMPEvents * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, Warning)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *Warning )( 
             IWMPEvents * This,
             /* [in] */ long WarningType,
             /* [in] */ long Param,
             /* [in] */ BSTR Description);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, EndOfStream)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *EndOfStream )( 
             IWMPEvents * This,
             /* [in] */ long Result);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PositionChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PositionChange )( 
             IWMPEvents * This,
             /* [in] */ double oldPosition,
             /* [in] */ double newPosition);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MarkerHit)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MarkerHit )( 
             IWMPEvents * This,
             /* [in] */ long MarkerNum);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, DurationUnitChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *DurationUnitChange )( 
             IWMPEvents * This,
             /* [in] */ long NewDurationUnit);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, CdromMediaChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CdromMediaChange )( 
             IWMPEvents * This,
             /* [in] */ long CdromNum);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlaylistChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlaylistChange )( 
             IWMPEvents * This,
             /* [in] */ IDispatch *Playlist,
             /* [in] */ WMPPlaylistChangeEventType change);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, CurrentPlaylistChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CurrentPlaylistChange )( 
             IWMPEvents * This,
             /* [in] */ WMPPlaylistChangeEventType change);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, CurrentPlaylistItemAvailable)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CurrentPlaylistItemAvailable )( 
             IWMPEvents * This,
             /* [in] */ BSTR bstrItemName);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MediaChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MediaChange )( 
             IWMPEvents * This,
             /* [in] */ IDispatch *Item);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, CurrentMediaItemAvailable)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CurrentMediaItemAvailable )( 
             IWMPEvents * This,
             /* [in] */ BSTR bstrItemName);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, CurrentItemChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CurrentItemChange )( 
             IWMPEvents * This,
             /* [in] */ IDispatch *pdispMedia);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MediaCollectionChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MediaCollectionChange )( 
             IWMPEvents * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MediaCollectionAttributeStringAdded)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MediaCollectionAttributeStringAdded )( 
             IWMPEvents * This,
             /* [in] */ BSTR bstrAttribName,
             /* [in] */ BSTR bstrAttribVal);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MediaCollectionAttributeStringRemoved)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MediaCollectionAttributeStringRemoved )( 
             IWMPEvents * This,
             /* [in] */ BSTR bstrAttribName,
             /* [in] */ BSTR bstrAttribVal);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MediaCollectionAttributeStringChanged)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MediaCollectionAttributeStringChanged )( 
             IWMPEvents * This,
             /* [in] */ BSTR bstrAttribName,
             /* [in] */ BSTR bstrOldAttribVal,
             /* [in] */ BSTR bstrNewAttribVal);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlaylistCollectionChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlaylistCollectionChange )( 
             IWMPEvents * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlaylistCollectionPlaylistAdded)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlaylistCollectionPlaylistAdded )( 
             IWMPEvents * This,
             /* [in] */ BSTR bstrPlaylistName);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlaylistCollectionPlaylistRemoved)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlaylistCollectionPlaylistRemoved )( 
             IWMPEvents * This,
             /* [in] */ BSTR bstrPlaylistName);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlaylistCollectionPlaylistSetAsDeleted)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlaylistCollectionPlaylistSetAsDeleted )( 
             IWMPEvents * This,
             /* [in] */ BSTR bstrPlaylistName,
             /* [in] */ VARIANT_BOOL varfIsDeleted);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, ModeChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *ModeChange )( 
             IWMPEvents * This,
             /* [in] */ BSTR ModeName,
             /* [in] */ VARIANT_BOOL NewValue);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MediaError)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MediaError )( 
             IWMPEvents * This,
             /* [in] */ IDispatch *pMediaObject);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, OpenPlaylistSwitch)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *OpenPlaylistSwitch )( 
             IWMPEvents * This,
             /* [in] */ IDispatch *pItem);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, DomainChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *DomainChange )( 
             IWMPEvents * This,
             /* [in] */ BSTR strDomain);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, SwitchedToPlayerApplication)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *SwitchedToPlayerApplication )( 
             IWMPEvents * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, SwitchedToControl)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *SwitchedToControl )( 
             IWMPEvents * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlayerDockedStateChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlayerDockedStateChange )( 
             IWMPEvents * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlayerReconnect)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlayerReconnect )( 
             IWMPEvents * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, Click)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *Click )( 
             IWMPEvents * This,
             /* [in] */ short nButton,
@@ -11951,6 +12915,7 @@ EXTERN_C const IID IID_IWMPEvents;
             /* [in] */ long fX,
             /* [in] */ long fY);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, DoubleClick)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *DoubleClick )( 
             IWMPEvents * This,
             /* [in] */ short nButton,
@@ -11958,20 +12923,24 @@ EXTERN_C const IID IID_IWMPEvents;
             /* [in] */ long fX,
             /* [in] */ long fY);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, KeyDown)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *KeyDown )( 
             IWMPEvents * This,
             /* [in] */ short nKeyCode,
             /* [in] */ short nShiftState);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, KeyPress)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *KeyPress )( 
             IWMPEvents * This,
             /* [in] */ short nKeyAscii);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, KeyUp)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *KeyUp )( 
             IWMPEvents * This,
             /* [in] */ short nKeyCode,
             /* [in] */ short nShiftState);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MouseDown)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MouseDown )( 
             IWMPEvents * This,
             /* [in] */ short nButton,
@@ -11979,6 +12948,7 @@ EXTERN_C const IID IID_IWMPEvents;
             /* [in] */ long fX,
             /* [in] */ long fY);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MouseMove)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MouseMove )( 
             IWMPEvents * This,
             /* [in] */ short nButton,
@@ -11986,6 +12956,7 @@ EXTERN_C const IID IID_IWMPEvents;
             /* [in] */ long fX,
             /* [in] */ long fY);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MouseUp)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MouseUp )( 
             IWMPEvents * This,
             /* [in] */ short nButton,
@@ -12208,168 +13179,209 @@ EXTERN_C const IID IID_IWMPEvents2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPEvents2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPEvents2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPEvents2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, OpenStateChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *OpenStateChange )( 
             IWMPEvents2 * This,
             /* [in] */ long NewState);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlayStateChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlayStateChange )( 
             IWMPEvents2 * This,
             /* [in] */ long NewState);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, AudioLanguageChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *AudioLanguageChange )( 
             IWMPEvents2 * This,
             /* [in] */ long LangID);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, StatusChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *StatusChange )( 
             IWMPEvents2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, ScriptCommand)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *ScriptCommand )( 
             IWMPEvents2 * This,
             /* [in] */ BSTR scType,
             /* [in] */ BSTR Param);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, NewStream)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *NewStream )( 
             IWMPEvents2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, Disconnect)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *Disconnect )( 
             IWMPEvents2 * This,
             /* [in] */ long Result);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, Buffering)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *Buffering )( 
             IWMPEvents2 * This,
             /* [in] */ VARIANT_BOOL Start);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, Error)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *Error )( 
             IWMPEvents2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, Warning)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *Warning )( 
             IWMPEvents2 * This,
             /* [in] */ long WarningType,
             /* [in] */ long Param,
             /* [in] */ BSTR Description);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, EndOfStream)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *EndOfStream )( 
             IWMPEvents2 * This,
             /* [in] */ long Result);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PositionChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PositionChange )( 
             IWMPEvents2 * This,
             /* [in] */ double oldPosition,
             /* [in] */ double newPosition);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MarkerHit)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MarkerHit )( 
             IWMPEvents2 * This,
             /* [in] */ long MarkerNum);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, DurationUnitChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *DurationUnitChange )( 
             IWMPEvents2 * This,
             /* [in] */ long NewDurationUnit);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, CdromMediaChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CdromMediaChange )( 
             IWMPEvents2 * This,
             /* [in] */ long CdromNum);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlaylistChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlaylistChange )( 
             IWMPEvents2 * This,
             /* [in] */ IDispatch *Playlist,
             /* [in] */ WMPPlaylistChangeEventType change);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, CurrentPlaylistChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CurrentPlaylistChange )( 
             IWMPEvents2 * This,
             /* [in] */ WMPPlaylistChangeEventType change);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, CurrentPlaylistItemAvailable)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CurrentPlaylistItemAvailable )( 
             IWMPEvents2 * This,
             /* [in] */ BSTR bstrItemName);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MediaChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MediaChange )( 
             IWMPEvents2 * This,
             /* [in] */ IDispatch *Item);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, CurrentMediaItemAvailable)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CurrentMediaItemAvailable )( 
             IWMPEvents2 * This,
             /* [in] */ BSTR bstrItemName);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, CurrentItemChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CurrentItemChange )( 
             IWMPEvents2 * This,
             /* [in] */ IDispatch *pdispMedia);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MediaCollectionChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MediaCollectionChange )( 
             IWMPEvents2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MediaCollectionAttributeStringAdded)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MediaCollectionAttributeStringAdded )( 
             IWMPEvents2 * This,
             /* [in] */ BSTR bstrAttribName,
             /* [in] */ BSTR bstrAttribVal);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MediaCollectionAttributeStringRemoved)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MediaCollectionAttributeStringRemoved )( 
             IWMPEvents2 * This,
             /* [in] */ BSTR bstrAttribName,
             /* [in] */ BSTR bstrAttribVal);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MediaCollectionAttributeStringChanged)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MediaCollectionAttributeStringChanged )( 
             IWMPEvents2 * This,
             /* [in] */ BSTR bstrAttribName,
             /* [in] */ BSTR bstrOldAttribVal,
             /* [in] */ BSTR bstrNewAttribVal);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlaylistCollectionChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlaylistCollectionChange )( 
             IWMPEvents2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlaylistCollectionPlaylistAdded)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlaylistCollectionPlaylistAdded )( 
             IWMPEvents2 * This,
             /* [in] */ BSTR bstrPlaylistName);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlaylistCollectionPlaylistRemoved)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlaylistCollectionPlaylistRemoved )( 
             IWMPEvents2 * This,
             /* [in] */ BSTR bstrPlaylistName);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlaylistCollectionPlaylistSetAsDeleted)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlaylistCollectionPlaylistSetAsDeleted )( 
             IWMPEvents2 * This,
             /* [in] */ BSTR bstrPlaylistName,
             /* [in] */ VARIANT_BOOL varfIsDeleted);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, ModeChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *ModeChange )( 
             IWMPEvents2 * This,
             /* [in] */ BSTR ModeName,
             /* [in] */ VARIANT_BOOL NewValue);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MediaError)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MediaError )( 
             IWMPEvents2 * This,
             /* [in] */ IDispatch *pMediaObject);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, OpenPlaylistSwitch)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *OpenPlaylistSwitch )( 
             IWMPEvents2 * This,
             /* [in] */ IDispatch *pItem);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, DomainChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *DomainChange )( 
             IWMPEvents2 * This,
             /* [in] */ BSTR strDomain);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, SwitchedToPlayerApplication)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *SwitchedToPlayerApplication )( 
             IWMPEvents2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, SwitchedToControl)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *SwitchedToControl )( 
             IWMPEvents2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlayerDockedStateChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlayerDockedStateChange )( 
             IWMPEvents2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlayerReconnect)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlayerReconnect )( 
             IWMPEvents2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, Click)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *Click )( 
             IWMPEvents2 * This,
             /* [in] */ short nButton,
@@ -12377,6 +13389,7 @@ EXTERN_C const IID IID_IWMPEvents2;
             /* [in] */ long fX,
             /* [in] */ long fY);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, DoubleClick)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *DoubleClick )( 
             IWMPEvents2 * This,
             /* [in] */ short nButton,
@@ -12384,20 +13397,24 @@ EXTERN_C const IID IID_IWMPEvents2;
             /* [in] */ long fX,
             /* [in] */ long fY);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, KeyDown)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *KeyDown )( 
             IWMPEvents2 * This,
             /* [in] */ short nKeyCode,
             /* [in] */ short nShiftState);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, KeyPress)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *KeyPress )( 
             IWMPEvents2 * This,
             /* [in] */ short nKeyAscii);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, KeyUp)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *KeyUp )( 
             IWMPEvents2 * This,
             /* [in] */ short nKeyCode,
             /* [in] */ short nShiftState);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MouseDown)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MouseDown )( 
             IWMPEvents2 * This,
             /* [in] */ short nButton,
@@ -12405,6 +13422,7 @@ EXTERN_C const IID IID_IWMPEvents2;
             /* [in] */ long fX,
             /* [in] */ long fY);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MouseMove)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MouseMove )( 
             IWMPEvents2 * This,
             /* [in] */ short nButton,
@@ -12412,6 +13430,7 @@ EXTERN_C const IID IID_IWMPEvents2;
             /* [in] */ long fX,
             /* [in] */ long fY);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MouseUp)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MouseUp )( 
             IWMPEvents2 * This,
             /* [in] */ short nButton,
@@ -12419,29 +13438,35 @@ EXTERN_C const IID IID_IWMPEvents2;
             /* [in] */ long fX,
             /* [in] */ long fY);
         
+        DECLSPEC_XFGVIRT(IWMPEvents2, DeviceConnect)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *DeviceConnect )( 
             IWMPEvents2 * This,
             /* [in] */ IWMPSyncDevice *pDevice);
         
+        DECLSPEC_XFGVIRT(IWMPEvents2, DeviceDisconnect)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *DeviceDisconnect )( 
             IWMPEvents2 * This,
             /* [in] */ IWMPSyncDevice *pDevice);
         
+        DECLSPEC_XFGVIRT(IWMPEvents2, DeviceStatusChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *DeviceStatusChange )( 
             IWMPEvents2 * This,
             /* [in] */ IWMPSyncDevice *pDevice,
             /* [in] */ WMPDeviceStatus NewStatus);
         
+        DECLSPEC_XFGVIRT(IWMPEvents2, DeviceSyncStateChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *DeviceSyncStateChange )( 
             IWMPEvents2 * This,
             /* [in] */ IWMPSyncDevice *pDevice,
             /* [in] */ WMPSyncState NewState);
         
+        DECLSPEC_XFGVIRT(IWMPEvents2, DeviceSyncError)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *DeviceSyncError )( 
             IWMPEvents2 * This,
             /* [in] */ IWMPSyncDevice *pDevice,
             /* [in] */ IDispatch *pMedia);
         
+        DECLSPEC_XFGVIRT(IWMPEvents2, CreatePartnershipComplete)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CreatePartnershipComplete )( 
             IWMPEvents2 * This,
             /* [in] */ IWMPSyncDevice *pDevice,
@@ -12699,168 +13724,209 @@ EXTERN_C const IID IID_IWMPEvents3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPEvents3 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPEvents3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPEvents3 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, OpenStateChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *OpenStateChange )( 
             IWMPEvents3 * This,
             /* [in] */ long NewState);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlayStateChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlayStateChange )( 
             IWMPEvents3 * This,
             /* [in] */ long NewState);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, AudioLanguageChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *AudioLanguageChange )( 
             IWMPEvents3 * This,
             /* [in] */ long LangID);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, StatusChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *StatusChange )( 
             IWMPEvents3 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, ScriptCommand)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *ScriptCommand )( 
             IWMPEvents3 * This,
             /* [in] */ BSTR scType,
             /* [in] */ BSTR Param);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, NewStream)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *NewStream )( 
             IWMPEvents3 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, Disconnect)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *Disconnect )( 
             IWMPEvents3 * This,
             /* [in] */ long Result);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, Buffering)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *Buffering )( 
             IWMPEvents3 * This,
             /* [in] */ VARIANT_BOOL Start);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, Error)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *Error )( 
             IWMPEvents3 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, Warning)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *Warning )( 
             IWMPEvents3 * This,
             /* [in] */ long WarningType,
             /* [in] */ long Param,
             /* [in] */ BSTR Description);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, EndOfStream)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *EndOfStream )( 
             IWMPEvents3 * This,
             /* [in] */ long Result);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PositionChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PositionChange )( 
             IWMPEvents3 * This,
             /* [in] */ double oldPosition,
             /* [in] */ double newPosition);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MarkerHit)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MarkerHit )( 
             IWMPEvents3 * This,
             /* [in] */ long MarkerNum);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, DurationUnitChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *DurationUnitChange )( 
             IWMPEvents3 * This,
             /* [in] */ long NewDurationUnit);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, CdromMediaChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CdromMediaChange )( 
             IWMPEvents3 * This,
             /* [in] */ long CdromNum);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlaylistChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlaylistChange )( 
             IWMPEvents3 * This,
             /* [in] */ IDispatch *Playlist,
             /* [in] */ WMPPlaylistChangeEventType change);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, CurrentPlaylistChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CurrentPlaylistChange )( 
             IWMPEvents3 * This,
             /* [in] */ WMPPlaylistChangeEventType change);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, CurrentPlaylistItemAvailable)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CurrentPlaylistItemAvailable )( 
             IWMPEvents3 * This,
             /* [in] */ BSTR bstrItemName);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MediaChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MediaChange )( 
             IWMPEvents3 * This,
             /* [in] */ IDispatch *Item);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, CurrentMediaItemAvailable)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CurrentMediaItemAvailable )( 
             IWMPEvents3 * This,
             /* [in] */ BSTR bstrItemName);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, CurrentItemChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CurrentItemChange )( 
             IWMPEvents3 * This,
             /* [in] */ IDispatch *pdispMedia);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MediaCollectionChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MediaCollectionChange )( 
             IWMPEvents3 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MediaCollectionAttributeStringAdded)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MediaCollectionAttributeStringAdded )( 
             IWMPEvents3 * This,
             /* [in] */ BSTR bstrAttribName,
             /* [in] */ BSTR bstrAttribVal);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MediaCollectionAttributeStringRemoved)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MediaCollectionAttributeStringRemoved )( 
             IWMPEvents3 * This,
             /* [in] */ BSTR bstrAttribName,
             /* [in] */ BSTR bstrAttribVal);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MediaCollectionAttributeStringChanged)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MediaCollectionAttributeStringChanged )( 
             IWMPEvents3 * This,
             /* [in] */ BSTR bstrAttribName,
             /* [in] */ BSTR bstrOldAttribVal,
             /* [in] */ BSTR bstrNewAttribVal);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlaylistCollectionChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlaylistCollectionChange )( 
             IWMPEvents3 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlaylistCollectionPlaylistAdded)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlaylistCollectionPlaylistAdded )( 
             IWMPEvents3 * This,
             /* [in] */ BSTR bstrPlaylistName);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlaylistCollectionPlaylistRemoved)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlaylistCollectionPlaylistRemoved )( 
             IWMPEvents3 * This,
             /* [in] */ BSTR bstrPlaylistName);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlaylistCollectionPlaylistSetAsDeleted)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlaylistCollectionPlaylistSetAsDeleted )( 
             IWMPEvents3 * This,
             /* [in] */ BSTR bstrPlaylistName,
             /* [in] */ VARIANT_BOOL varfIsDeleted);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, ModeChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *ModeChange )( 
             IWMPEvents3 * This,
             /* [in] */ BSTR ModeName,
             /* [in] */ VARIANT_BOOL NewValue);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MediaError)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MediaError )( 
             IWMPEvents3 * This,
             /* [in] */ IDispatch *pMediaObject);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, OpenPlaylistSwitch)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *OpenPlaylistSwitch )( 
             IWMPEvents3 * This,
             /* [in] */ IDispatch *pItem);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, DomainChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *DomainChange )( 
             IWMPEvents3 * This,
             /* [in] */ BSTR strDomain);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, SwitchedToPlayerApplication)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *SwitchedToPlayerApplication )( 
             IWMPEvents3 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, SwitchedToControl)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *SwitchedToControl )( 
             IWMPEvents3 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlayerDockedStateChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlayerDockedStateChange )( 
             IWMPEvents3 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlayerReconnect)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlayerReconnect )( 
             IWMPEvents3 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, Click)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *Click )( 
             IWMPEvents3 * This,
             /* [in] */ short nButton,
@@ -12868,6 +13934,7 @@ EXTERN_C const IID IID_IWMPEvents3;
             /* [in] */ long fX,
             /* [in] */ long fY);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, DoubleClick)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *DoubleClick )( 
             IWMPEvents3 * This,
             /* [in] */ short nButton,
@@ -12875,20 +13942,24 @@ EXTERN_C const IID IID_IWMPEvents3;
             /* [in] */ long fX,
             /* [in] */ long fY);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, KeyDown)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *KeyDown )( 
             IWMPEvents3 * This,
             /* [in] */ short nKeyCode,
             /* [in] */ short nShiftState);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, KeyPress)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *KeyPress )( 
             IWMPEvents3 * This,
             /* [in] */ short nKeyAscii);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, KeyUp)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *KeyUp )( 
             IWMPEvents3 * This,
             /* [in] */ short nKeyCode,
             /* [in] */ short nShiftState);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MouseDown)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MouseDown )( 
             IWMPEvents3 * This,
             /* [in] */ short nButton,
@@ -12896,6 +13967,7 @@ EXTERN_C const IID IID_IWMPEvents3;
             /* [in] */ long fX,
             /* [in] */ long fY);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MouseMove)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MouseMove )( 
             IWMPEvents3 * This,
             /* [in] */ short nButton,
@@ -12903,6 +13975,7 @@ EXTERN_C const IID IID_IWMPEvents3;
             /* [in] */ long fX,
             /* [in] */ long fY);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MouseUp)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MouseUp )( 
             IWMPEvents3 * This,
             /* [in] */ short nButton,
@@ -12910,81 +13983,98 @@ EXTERN_C const IID IID_IWMPEvents3;
             /* [in] */ long fX,
             /* [in] */ long fY);
         
+        DECLSPEC_XFGVIRT(IWMPEvents2, DeviceConnect)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *DeviceConnect )( 
             IWMPEvents3 * This,
             /* [in] */ IWMPSyncDevice *pDevice);
         
+        DECLSPEC_XFGVIRT(IWMPEvents2, DeviceDisconnect)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *DeviceDisconnect )( 
             IWMPEvents3 * This,
             /* [in] */ IWMPSyncDevice *pDevice);
         
+        DECLSPEC_XFGVIRT(IWMPEvents2, DeviceStatusChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *DeviceStatusChange )( 
             IWMPEvents3 * This,
             /* [in] */ IWMPSyncDevice *pDevice,
             /* [in] */ WMPDeviceStatus NewStatus);
         
+        DECLSPEC_XFGVIRT(IWMPEvents2, DeviceSyncStateChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *DeviceSyncStateChange )( 
             IWMPEvents3 * This,
             /* [in] */ IWMPSyncDevice *pDevice,
             /* [in] */ WMPSyncState NewState);
         
+        DECLSPEC_XFGVIRT(IWMPEvents2, DeviceSyncError)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *DeviceSyncError )( 
             IWMPEvents3 * This,
             /* [in] */ IWMPSyncDevice *pDevice,
             /* [in] */ IDispatch *pMedia);
         
+        DECLSPEC_XFGVIRT(IWMPEvents2, CreatePartnershipComplete)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CreatePartnershipComplete )( 
             IWMPEvents3 * This,
             /* [in] */ IWMPSyncDevice *pDevice,
             /* [in] */ HRESULT hrResult);
         
+        DECLSPEC_XFGVIRT(IWMPEvents3, CdromRipStateChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CdromRipStateChange )( 
             IWMPEvents3 * This,
             /* [in] */ IWMPCdromRip *pCdromRip,
             /* [in] */ WMPRipState wmprs);
         
+        DECLSPEC_XFGVIRT(IWMPEvents3, CdromRipMediaError)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CdromRipMediaError )( 
             IWMPEvents3 * This,
             /* [in] */ IWMPCdromRip *pCdromRip,
             /* [in] */ IDispatch *pMedia);
         
+        DECLSPEC_XFGVIRT(IWMPEvents3, CdromBurnStateChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CdromBurnStateChange )( 
             IWMPEvents3 * This,
             /* [in] */ IWMPCdromBurn *pCdromBurn,
             /* [in] */ WMPBurnState wmpbs);
         
+        DECLSPEC_XFGVIRT(IWMPEvents3, CdromBurnMediaError)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CdromBurnMediaError )( 
             IWMPEvents3 * This,
             /* [in] */ IWMPCdromBurn *pCdromBurn,
             /* [in] */ IDispatch *pMedia);
         
+        DECLSPEC_XFGVIRT(IWMPEvents3, CdromBurnError)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CdromBurnError )( 
             IWMPEvents3 * This,
             /* [in] */ IWMPCdromBurn *pCdromBurn,
             /* [in] */ HRESULT hrError);
         
+        DECLSPEC_XFGVIRT(IWMPEvents3, LibraryConnect)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *LibraryConnect )( 
             IWMPEvents3 * This,
             /* [in] */ IWMPLibrary *pLibrary);
         
+        DECLSPEC_XFGVIRT(IWMPEvents3, LibraryDisconnect)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *LibraryDisconnect )( 
             IWMPEvents3 * This,
             /* [in] */ IWMPLibrary *pLibrary);
         
+        DECLSPEC_XFGVIRT(IWMPEvents3, FolderScanStateChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *FolderScanStateChange )( 
             IWMPEvents3 * This,
             /* [in] */ WMPFolderScanState wmpfss);
         
+        DECLSPEC_XFGVIRT(IWMPEvents3, StringCollectionChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *StringCollectionChange )( 
             IWMPEvents3 * This,
             /* [in] */ IDispatch *pdispStringCollection,
             /* [in] */ WMPStringCollectionChangeEventType change,
             /* [in] */ long lCollectionIndex);
         
+        DECLSPEC_XFGVIRT(IWMPEvents3, MediaCollectionMediaAdded)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MediaCollectionMediaAdded )( 
             IWMPEvents3 * This,
             /* [in] */ IDispatch *pdispMedia);
         
+        DECLSPEC_XFGVIRT(IWMPEvents3, MediaCollectionMediaRemoved)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MediaCollectionMediaRemoved )( 
             IWMPEvents3 * This,
             /* [in] */ IDispatch *pdispMedia);
@@ -13241,168 +14331,209 @@ EXTERN_C const IID IID_IWMPEvents4;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPEvents4 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPEvents4 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPEvents4 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, OpenStateChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *OpenStateChange )( 
             IWMPEvents4 * This,
             /* [in] */ long NewState);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlayStateChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlayStateChange )( 
             IWMPEvents4 * This,
             /* [in] */ long NewState);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, AudioLanguageChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *AudioLanguageChange )( 
             IWMPEvents4 * This,
             /* [in] */ long LangID);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, StatusChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *StatusChange )( 
             IWMPEvents4 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, ScriptCommand)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *ScriptCommand )( 
             IWMPEvents4 * This,
             /* [in] */ BSTR scType,
             /* [in] */ BSTR Param);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, NewStream)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *NewStream )( 
             IWMPEvents4 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, Disconnect)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *Disconnect )( 
             IWMPEvents4 * This,
             /* [in] */ long Result);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, Buffering)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *Buffering )( 
             IWMPEvents4 * This,
             /* [in] */ VARIANT_BOOL Start);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, Error)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *Error )( 
             IWMPEvents4 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, Warning)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *Warning )( 
             IWMPEvents4 * This,
             /* [in] */ long WarningType,
             /* [in] */ long Param,
             /* [in] */ BSTR Description);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, EndOfStream)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *EndOfStream )( 
             IWMPEvents4 * This,
             /* [in] */ long Result);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PositionChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PositionChange )( 
             IWMPEvents4 * This,
             /* [in] */ double oldPosition,
             /* [in] */ double newPosition);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MarkerHit)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MarkerHit )( 
             IWMPEvents4 * This,
             /* [in] */ long MarkerNum);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, DurationUnitChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *DurationUnitChange )( 
             IWMPEvents4 * This,
             /* [in] */ long NewDurationUnit);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, CdromMediaChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CdromMediaChange )( 
             IWMPEvents4 * This,
             /* [in] */ long CdromNum);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlaylistChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlaylistChange )( 
             IWMPEvents4 * This,
             /* [in] */ IDispatch *Playlist,
             /* [in] */ WMPPlaylistChangeEventType change);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, CurrentPlaylistChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CurrentPlaylistChange )( 
             IWMPEvents4 * This,
             /* [in] */ WMPPlaylistChangeEventType change);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, CurrentPlaylistItemAvailable)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CurrentPlaylistItemAvailable )( 
             IWMPEvents4 * This,
             /* [in] */ BSTR bstrItemName);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MediaChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MediaChange )( 
             IWMPEvents4 * This,
             /* [in] */ IDispatch *Item);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, CurrentMediaItemAvailable)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CurrentMediaItemAvailable )( 
             IWMPEvents4 * This,
             /* [in] */ BSTR bstrItemName);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, CurrentItemChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CurrentItemChange )( 
             IWMPEvents4 * This,
             /* [in] */ IDispatch *pdispMedia);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MediaCollectionChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MediaCollectionChange )( 
             IWMPEvents4 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MediaCollectionAttributeStringAdded)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MediaCollectionAttributeStringAdded )( 
             IWMPEvents4 * This,
             /* [in] */ BSTR bstrAttribName,
             /* [in] */ BSTR bstrAttribVal);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MediaCollectionAttributeStringRemoved)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MediaCollectionAttributeStringRemoved )( 
             IWMPEvents4 * This,
             /* [in] */ BSTR bstrAttribName,
             /* [in] */ BSTR bstrAttribVal);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MediaCollectionAttributeStringChanged)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MediaCollectionAttributeStringChanged )( 
             IWMPEvents4 * This,
             /* [in] */ BSTR bstrAttribName,
             /* [in] */ BSTR bstrOldAttribVal,
             /* [in] */ BSTR bstrNewAttribVal);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlaylistCollectionChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlaylistCollectionChange )( 
             IWMPEvents4 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlaylistCollectionPlaylistAdded)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlaylistCollectionPlaylistAdded )( 
             IWMPEvents4 * This,
             /* [in] */ BSTR bstrPlaylistName);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlaylistCollectionPlaylistRemoved)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlaylistCollectionPlaylistRemoved )( 
             IWMPEvents4 * This,
             /* [in] */ BSTR bstrPlaylistName);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlaylistCollectionPlaylistSetAsDeleted)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlaylistCollectionPlaylistSetAsDeleted )( 
             IWMPEvents4 * This,
             /* [in] */ BSTR bstrPlaylistName,
             /* [in] */ VARIANT_BOOL varfIsDeleted);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, ModeChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *ModeChange )( 
             IWMPEvents4 * This,
             /* [in] */ BSTR ModeName,
             /* [in] */ VARIANT_BOOL NewValue);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MediaError)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MediaError )( 
             IWMPEvents4 * This,
             /* [in] */ IDispatch *pMediaObject);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, OpenPlaylistSwitch)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *OpenPlaylistSwitch )( 
             IWMPEvents4 * This,
             /* [in] */ IDispatch *pItem);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, DomainChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *DomainChange )( 
             IWMPEvents4 * This,
             /* [in] */ BSTR strDomain);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, SwitchedToPlayerApplication)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *SwitchedToPlayerApplication )( 
             IWMPEvents4 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, SwitchedToControl)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *SwitchedToControl )( 
             IWMPEvents4 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlayerDockedStateChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlayerDockedStateChange )( 
             IWMPEvents4 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, PlayerReconnect)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *PlayerReconnect )( 
             IWMPEvents4 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, Click)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *Click )( 
             IWMPEvents4 * This,
             /* [in] */ short nButton,
@@ -13410,6 +14541,7 @@ EXTERN_C const IID IID_IWMPEvents4;
             /* [in] */ long fX,
             /* [in] */ long fY);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, DoubleClick)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *DoubleClick )( 
             IWMPEvents4 * This,
             /* [in] */ short nButton,
@@ -13417,20 +14549,24 @@ EXTERN_C const IID IID_IWMPEvents4;
             /* [in] */ long fX,
             /* [in] */ long fY);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, KeyDown)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *KeyDown )( 
             IWMPEvents4 * This,
             /* [in] */ short nKeyCode,
             /* [in] */ short nShiftState);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, KeyPress)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *KeyPress )( 
             IWMPEvents4 * This,
             /* [in] */ short nKeyAscii);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, KeyUp)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *KeyUp )( 
             IWMPEvents4 * This,
             /* [in] */ short nKeyCode,
             /* [in] */ short nShiftState);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MouseDown)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MouseDown )( 
             IWMPEvents4 * This,
             /* [in] */ short nButton,
@@ -13438,6 +14574,7 @@ EXTERN_C const IID IID_IWMPEvents4;
             /* [in] */ long fX,
             /* [in] */ long fY);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MouseMove)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MouseMove )( 
             IWMPEvents4 * This,
             /* [in] */ short nButton,
@@ -13445,6 +14582,7 @@ EXTERN_C const IID IID_IWMPEvents4;
             /* [in] */ long fX,
             /* [in] */ long fY);
         
+        DECLSPEC_XFGVIRT(IWMPEvents, MouseUp)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MouseUp )( 
             IWMPEvents4 * This,
             /* [in] */ short nButton,
@@ -13452,85 +14590,103 @@ EXTERN_C const IID IID_IWMPEvents4;
             /* [in] */ long fX,
             /* [in] */ long fY);
         
+        DECLSPEC_XFGVIRT(IWMPEvents2, DeviceConnect)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *DeviceConnect )( 
             IWMPEvents4 * This,
             /* [in] */ IWMPSyncDevice *pDevice);
         
+        DECLSPEC_XFGVIRT(IWMPEvents2, DeviceDisconnect)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *DeviceDisconnect )( 
             IWMPEvents4 * This,
             /* [in] */ IWMPSyncDevice *pDevice);
         
+        DECLSPEC_XFGVIRT(IWMPEvents2, DeviceStatusChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *DeviceStatusChange )( 
             IWMPEvents4 * This,
             /* [in] */ IWMPSyncDevice *pDevice,
             /* [in] */ WMPDeviceStatus NewStatus);
         
+        DECLSPEC_XFGVIRT(IWMPEvents2, DeviceSyncStateChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *DeviceSyncStateChange )( 
             IWMPEvents4 * This,
             /* [in] */ IWMPSyncDevice *pDevice,
             /* [in] */ WMPSyncState NewState);
         
+        DECLSPEC_XFGVIRT(IWMPEvents2, DeviceSyncError)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *DeviceSyncError )( 
             IWMPEvents4 * This,
             /* [in] */ IWMPSyncDevice *pDevice,
             /* [in] */ IDispatch *pMedia);
         
+        DECLSPEC_XFGVIRT(IWMPEvents2, CreatePartnershipComplete)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CreatePartnershipComplete )( 
             IWMPEvents4 * This,
             /* [in] */ IWMPSyncDevice *pDevice,
             /* [in] */ HRESULT hrResult);
         
+        DECLSPEC_XFGVIRT(IWMPEvents3, CdromRipStateChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CdromRipStateChange )( 
             IWMPEvents4 * This,
             /* [in] */ IWMPCdromRip *pCdromRip,
             /* [in] */ WMPRipState wmprs);
         
+        DECLSPEC_XFGVIRT(IWMPEvents3, CdromRipMediaError)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CdromRipMediaError )( 
             IWMPEvents4 * This,
             /* [in] */ IWMPCdromRip *pCdromRip,
             /* [in] */ IDispatch *pMedia);
         
+        DECLSPEC_XFGVIRT(IWMPEvents3, CdromBurnStateChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CdromBurnStateChange )( 
             IWMPEvents4 * This,
             /* [in] */ IWMPCdromBurn *pCdromBurn,
             /* [in] */ WMPBurnState wmpbs);
         
+        DECLSPEC_XFGVIRT(IWMPEvents3, CdromBurnMediaError)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CdromBurnMediaError )( 
             IWMPEvents4 * This,
             /* [in] */ IWMPCdromBurn *pCdromBurn,
             /* [in] */ IDispatch *pMedia);
         
+        DECLSPEC_XFGVIRT(IWMPEvents3, CdromBurnError)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *CdromBurnError )( 
             IWMPEvents4 * This,
             /* [in] */ IWMPCdromBurn *pCdromBurn,
             /* [in] */ HRESULT hrError);
         
+        DECLSPEC_XFGVIRT(IWMPEvents3, LibraryConnect)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *LibraryConnect )( 
             IWMPEvents4 * This,
             /* [in] */ IWMPLibrary *pLibrary);
         
+        DECLSPEC_XFGVIRT(IWMPEvents3, LibraryDisconnect)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *LibraryDisconnect )( 
             IWMPEvents4 * This,
             /* [in] */ IWMPLibrary *pLibrary);
         
+        DECLSPEC_XFGVIRT(IWMPEvents3, FolderScanStateChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *FolderScanStateChange )( 
             IWMPEvents4 * This,
             /* [in] */ WMPFolderScanState wmpfss);
         
+        DECLSPEC_XFGVIRT(IWMPEvents3, StringCollectionChange)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *StringCollectionChange )( 
             IWMPEvents4 * This,
             /* [in] */ IDispatch *pdispStringCollection,
             /* [in] */ WMPStringCollectionChangeEventType change,
             /* [in] */ long lCollectionIndex);
         
+        DECLSPEC_XFGVIRT(IWMPEvents3, MediaCollectionMediaAdded)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MediaCollectionMediaAdded )( 
             IWMPEvents4 * This,
             /* [in] */ IDispatch *pdispMedia);
         
+        DECLSPEC_XFGVIRT(IWMPEvents3, MediaCollectionMediaRemoved)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *MediaCollectionMediaRemoved )( 
             IWMPEvents4 * This,
             /* [in] */ IDispatch *pdispMedia);
         
+        DECLSPEC_XFGVIRT(IWMPEvents4, DeviceEstimation)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *DeviceEstimation )( 
             IWMPEvents4 * This,
             /* [in] */ IWMPSyncDevice *pDevice,
@@ -13786,28 +14942,34 @@ EXTERN_C const IID DIID__WMPOCXEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             _WMPOCXEvents * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             _WMPOCXEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             _WMPOCXEvents * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             _WMPOCXEvents * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             _WMPOCXEvents * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             _WMPOCXEvents * This,
             /* [in] */ REFIID riid,
@@ -13816,6 +14978,7 @@ EXTERN_C const IID DIID__WMPOCXEvents;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             _WMPOCXEvents * This,
             /* [annotation][in] */ 

@@ -860,6 +860,19 @@ interface IAppxManifestHostRuntimeDependency : IUnknown
 
 [
     object,
+    uuid(C26F23A8-EE10-4AD6-B898-2B4D7AEBFE6A),
+    pointer_default(ref)
+]
+interface IAppxManifestHostRuntimeDependency2 : IUnknown
+{
+    HRESULT
+    GetPackageFamilyName(
+        [out, string, retval] LPWSTR* packageFamilyName
+    );
+}
+
+[
+    object,
     uuid(2634847D-5B5D-4FE5-A243-002FF95EDC7E),
     pointer_default(ref)
 ]

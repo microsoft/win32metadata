@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -31,6 +31,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -75,6 +83,8 @@ typedef struct FWPS_ACTION0_
 #define FWPS_FILTER_FLAG_HAS_SECURITY_REALM_PROVIDER_CONTEXT (0x0008)
 #define FWPS_FILTER_FLAG_SILENT_MODE     (0x0010)
 #define FWPS_FILTER_FLAG_IPSEC_NO_ACQUIRE_INITIATE (0x0020)
+#define FWPS_FILTER_FLAG_RESERVED0 (0x0040)
+#define FWPS_FILTER_FLAG_RESERVED1 (0x0080)
 typedef struct FWPM_PROVIDER_CONTEXT0_ FWPM_PROVIDER_CONTEXT0;
 
 typedef struct FWPS_FILTER0_

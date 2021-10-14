@@ -116,8 +116,9 @@ const	DWORD	DTC_INSTALL_OVERWRITE_SERVER	=	0x00000002;
 //---------------------------------------------------------
 //			Function Prototypes
 //---------------------------------------------------------
-EXTERN_C
-{
+#ifdef __cplusplus
+extern "C" {
+#endif
 	DTC_GET_TRANSACTION_MANAGER			__cdecl LoadDtcHelper (void);
 	DTC_GET_TRANSACTION_MANAGER_EX_A	__cdecl LoadDtcHelperExA (void);
 	DTC_GET_TRANSACTION_MANAGER_EX_W	__cdecl LoadDtcHelperExW (void);
@@ -218,7 +219,9 @@ EXTERN_C
 	//			E_FAIL if the operation failed for some reason
 	//  E_UNEXPECTED if an unexpected error occured
 	HRESULT __cdecl DtcInstallClient(_In_ LPTSTR i_pszRemoteTmHostName, DWORD i_dwProtocol, DWORD i_dwOverwrite);
+#ifdef __cplusplus
 }
+#endif
 
 
 //---------------------------------------------------------
@@ -230,4 +233,4 @@ EXTERN_C
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
 
-#endif __DTCHELP_H__
+#endif // __DTCHELP_H__

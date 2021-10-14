@@ -221,6 +221,7 @@ cpp_quote("#endif //(_WIN32_IE >= _WIN32_IE_IE60SP2)")
 #pragma midl_echo("#define     FMFD_RESPECTTEXTPLAIN   0x00000010 ")
 #pragma midl_echo("#define     FMFD_RETURNUPDATEDIMGMIMES   0x00000020")
 #pragma midl_echo("#define     FMFD_RESERVED_1   0x00000040")
+#pragma midl_echo("#define     FMFD_RESERVED_2   0x00000080")
 
 #pragma midl_echo("#define     UAS_EXACTLEGACY   0x00001000 ")
 #pragma midl_echo("STDAPI ObtainUserAgentString(                           ")
@@ -931,7 +932,8 @@ interface IBindStatusCallback: IUnknown
             ,BINDSTATUS_RESERVED_11
             ,BINDSTATUS_RESERVED_12
             ,BINDSTATUS_RESERVED_13
-            , BINDSTATUS_LAST_PRIVATE = BINDSTATUS_RESERVED_13
+            ,BINDSTATUS_RESERVED_14
+            ,BINDSTATUS_LAST_PRIVATE = BINDSTATUS_RESERVED_14
         } BINDSTATUS;
 
         HRESULT OnStartBinding(
@@ -3643,7 +3645,8 @@ cpp_quote("#define URLACTION_SCRIPT_XSSFILTER                             0x0000
 cpp_quote("#define URLACTION_SCRIPT_NAVIGATE                              0x0000140A")
 cpp_quote("#define URLACTION_PLUGGABLE_PROTOCOL_XHR                       0x0000140B")
 cpp_quote("#define URLACTION_ALLOW_VBSCRIPT_IE                            0x0000140C")
-cpp_quote("#define URLACTION_SCRIPT_CURR_MAX                              0x0000140C")
+cpp_quote("#define URLACTION_ALLOW_JSCRIPT_IE                             0x0000140D")
+cpp_quote("#define URLACTION_SCRIPT_CURR_MAX                              0x0000140D")
 cpp_quote("#define URLACTION_SCRIPT_MAX                                   0x000015ff")
 cpp_quote("")
 cpp_quote("#define URLACTION_HTML_MIN                                     0x00001600")

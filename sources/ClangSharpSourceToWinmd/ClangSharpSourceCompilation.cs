@@ -135,7 +135,13 @@ namespace ClangSharpSourceToWinmd
         {
             sourceDirectory = Path.GetFullPath(sourceDirectory);
 
-            string objDir = Path.Combine(sourceDirectory, $"obj\\{arch}");
+            string topObjDir = Path.Combine(sourceDirectory, $"obj");
+            if (Directory.Exists(topObjDir))
+            {
+                Directory.Delete(topObjDir, true);
+            }
+
+            string objDir = Path.Combine(topObjDir, arch);
             Directory.CreateDirectory(objDir);
 
             var netstandardPath = FindNetstandardDllPath();

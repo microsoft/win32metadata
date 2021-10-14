@@ -61,53 +61,52 @@ extern "C" {
 //
 DECLARE_INTERFACE_(IAMLine21Decoder, IUnknown)
 {
-    public:
-        //
-        // Decoder options to be used by apps
-        //
+    //
+    // Decoder options to be used by apps
+    //
 
-        // What is the decoder's level
-        STDMETHOD(GetDecoderLevel)(THIS_ AM_LINE21_CCLEVEL *lpLevel) PURE ;  
-        // supported level value is AM_L21Level_TC2 only
-        // skipping the SetDecoderLevel( )
+    // What is the decoder's level
+    STDMETHOD(GetDecoderLevel)(THIS_ AM_LINE21_CCLEVEL *lpLevel) PURE ;  
+    // supported level value is AM_L21Level_TC2 only
+    // skipping the SetDecoderLevel( )
 
-        // Which of the services is being currently used
-        STDMETHOD(GetCurrentService)(THIS_ AM_LINE21_CCSERVICE *lpService) PURE ;  
-        STDMETHOD(SetCurrentService)(THIS_ AM_LINE21_CCSERVICE Service) PURE ;  
-        // supported service values are AM_L21Service_Caption1, 
-        // AM_L21Service_Caption2, AM_L21Service_Text1, AM_L21Service_Text2, 
-        // AM_L21Service_XDS, AM_L21Service_None)
+    // Which of the services is being currently used
+    STDMETHOD(GetCurrentService)(THIS_ AM_LINE21_CCSERVICE *lpService) PURE ;  
+    STDMETHOD(SetCurrentService)(THIS_ AM_LINE21_CCSERVICE Service) PURE ;  
+    // supported service values are AM_L21Service_Caption1, 
+    // AM_L21Service_Caption2, AM_L21Service_Text1, AM_L21Service_Text2, 
+    // AM_L21Service_XDS, AM_L21Service_None)
 
-        // Query/Set the service state (On/Off)
-        // supported state values are AM_L21State_On and AM_L21State_Off
-        STDMETHOD(GetServiceState)(THIS_ AM_LINE21_CCSTATE *lpState) PURE ;  
-        STDMETHOD(SetServiceState)(THIS_ AM_LINE21_CCSTATE State) PURE ;  
+    // Query/Set the service state (On/Off)
+    // supported state values are AM_L21State_On and AM_L21State_Off
+    STDMETHOD(GetServiceState)(THIS_ AM_LINE21_CCSTATE *lpState) PURE ;  
+    STDMETHOD(SetServiceState)(THIS_ AM_LINE21_CCSTATE State) PURE ;  
 
-        //
-        // Output options to be used by downstream filters
-        //
+    //
+    // Output options to be used by downstream filters
+    //
 
-        // What size, bitdepth etc should the output video be
-        STDMETHOD(GetOutputFormat)(THIS_ LPBITMAPINFOHEADER lpbmih) PURE ;
-        // GetOutputFormat() method, if successful, returns 
-        // 1.  S_FALSE if no output format has so far been defined by downstream filters
-        // 2.  S_OK if an output format has already been defined by downstream filters
-        STDMETHOD(SetOutputFormat)(THIS_ LPBITMAPINFO lpbmi) PURE ;
+    // What size, bitdepth etc should the output video be
+    STDMETHOD(GetOutputFormat)(THIS_ LPBITMAPINFOHEADER lpbmih) PURE ;
+    // GetOutputFormat() method, if successful, returns 
+    // 1.  S_FALSE if no output format has so far been defined by downstream filters
+    // 2.  S_OK if an output format has already been defined by downstream filters
+    STDMETHOD(SetOutputFormat)(THIS_ LPBITMAPINFO lpbmi) PURE ;
 
-        // Specify physical color to be used in colorkeying the background 
-        // for overlay mixing
-        STDMETHOD(GetBackgroundColor)(THIS_ DWORD *pdwPhysColor) PURE ;
-        STDMETHOD(SetBackgroundColor)(THIS_ DWORD dwPhysColor) PURE ;
+    // Specify physical color to be used in colorkeying the background 
+    // for overlay mixing
+    STDMETHOD(GetBackgroundColor)(THIS_ DWORD *pdwPhysColor) PURE ;
+    STDMETHOD(SetBackgroundColor)(THIS_ DWORD dwPhysColor) PURE ;
 
-        // Specify if whole output bitmap should be redrawn for each sample
-        STDMETHOD(GetRedrawAlways)(THIS_ LPBOOL lpbOption) PURE ;
-        STDMETHOD(SetRedrawAlways)(THIS_ BOOL bOption) PURE ;
+    // Specify if whole output bitmap should be redrawn for each sample
+    STDMETHOD(GetRedrawAlways)(THIS_ LPBOOL lpbOption) PURE ;
+    STDMETHOD(SetRedrawAlways)(THIS_ BOOL bOption) PURE ;
 
-        // Specify if the caption text background should be opaque/transparent
-        STDMETHOD(GetDrawBackgroundMode)(THIS_ AM_LINE21_DRAWBGMODE *lpMode) PURE ;
-        STDMETHOD(SetDrawBackgroundMode)(THIS_ AM_LINE21_DRAWBGMODE Mode) PURE ;
-        // supported mode values are AM_L21_DrawBGMode_Opaque and
-        // AM_L21_DrawBGMode_Transparent
+    // Specify if the caption text background should be opaque/transparent
+    STDMETHOD(GetDrawBackgroundMode)(THIS_ AM_LINE21_DRAWBGMODE *lpMode) PURE ;
+    STDMETHOD(SetDrawBackgroundMode)(THIS_ AM_LINE21_DRAWBGMODE Mode) PURE ;
+    // supported mode values are AM_L21_DrawBGMode_Opaque and
+    // AM_L21_DrawBGMode_Transparent
 
 } ;
 

@@ -126,6 +126,145 @@ DEFINE_GUID ( /* 3595ab5c-042a-4c8e-b942-2d059bfeb1b1 */
     0xb9, 0x42, 0x2d, 0x05, 0x9b, 0xfe, 0xb1, 0xb1
   );
 
+//
+// System Provider GUIDs
+//
+
+DEFINE_GUID( /* fbd09363-9e22-4661-b8bf-e7a34b535b8c */
+    SystemIoFilterProviderGuid,
+    0xfbd09363,
+    0x9e22,
+    0x4661,
+    0xb8, 0xbf, 0xe7, 0xa3, 0x4b, 0x53, 0x5b, 0x8c
+    );
+
+DEFINE_GUID( /* febd7460-3d1d-47eb-af49-c9eeb1e146f2 */
+    SystemObjectProviderGuid,
+    0xfebd7460,
+    0x3d1d,
+    0x47eb,
+    0xaf, 0x49, 0xc9, 0xee, 0xb1, 0xe1, 0x46, 0xf2
+    );
+
+DEFINE_GUID( /* c134884a-32d5-4488-80e5-14ed7abb8269 */
+    SystemPowerProviderGuid,
+    0xc134884a,
+    0x32d5,
+    0x4488,
+    0x80, 0xe5, 0x14, 0xed, 0x7a, 0xbb, 0x82, 0x69
+    );
+
+DEFINE_GUID( /* bafa072a-918a-4bed-b622-bc152097098f */
+    SystemHypervisorProviderGuid,
+    0xbafa072a,
+    0x918a,
+    0x4bed,
+    0xb6, 0x22, 0xbc, 0x15, 0x20, 0x97, 0x9, 0x8f
+    );
+
+DEFINE_GUID( /* 721ddfd3-dacc-4e1e-b26a-a2cb31d4705a */
+    SystemLockProviderGuid,
+    0x721ddfd3,
+    0xdacc,
+    0x4e1e,
+    0xb2, 0x6a, 0xa2, 0xcb, 0x31, 0xd4, 0x70, 0x5a
+    );
+
+DEFINE_GUID( /* fef3a8b6-318d-4b67-a96a-3b0f6b8f18fe */
+    SystemConfigProviderGuid,
+    0xfef3a8b6,
+    0x318d,
+    0x4b67,
+    0xa9, 0x6a, 0x3b, 0xf, 0x6b, 0x8f, 0x18, 0xfe
+    );
+
+DEFINE_GUID( /* c6c5265f-eae8-4650-aae4-9d48603d8510 */
+    SystemCpuProviderGuid,
+    0xc6c5265f,
+    0xeae8,
+    0x4650,
+    0xaa, 0xe4, 0x9d, 0x48, 0x60, 0x3d, 0x85, 0x10
+    );
+
+DEFINE_GUID( /* 599a2a76-4d91-4910-9ac7-7d33f2e97a6c */
+    SystemSchedulerProviderGuid,
+    0x599a2a76,
+    0x4d91,
+    0x4910,
+    0x9a, 0xc7, 0x7d, 0x33, 0xf2, 0xe9, 0x7a, 0x6c
+    );
+
+DEFINE_GUID( /* bfeb0324-1cee-496f-a409-2ac2b48a6322 */
+    SystemProfileProviderGuid,
+    0xbfeb0324,
+    0x1cee,
+    0x496f,
+    0xa4, 0x9, 0x2a, 0xc2, 0xb4, 0x8a, 0x63, 0x22
+    );
+
+DEFINE_GUID( /* 3d5c43e3-0f1c-4202-b817-174c0070dc79 */
+    SystemIoProviderGuid,
+    0x3d5c43e3,
+    0xf1c,
+    0x4202,
+    0xb8, 0x17, 0x17, 0x4c, 0x0, 0x70, 0xdc, 0x79
+    );
+
+DEFINE_GUID( /* 82958ca9-b6cd-47f8-a3a8-03ae85a4bc24 */
+    SystemMemoryProviderGuid,
+    0x82958ca9,
+    0xb6cd,
+    0x47f8,
+    0xa3, 0xa8, 0x3, 0xae, 0x85, 0xa4, 0xbc, 0x24
+    );
+
+DEFINE_GUID( /* 16156bd9-fab4-4cfa-a232-89d1099058e3 */
+    SystemRegistryProviderGuid,
+    0x16156bd9,
+    0xfab4,
+    0x4cfa,
+    0xa2, 0x32, 0x89, 0xd1, 0x9, 0x90, 0x58, 0xe3
+    );
+
+DEFINE_GUID( /* 151f55dc-467d-471f-83b5-5f889d46ff66 */
+    SystemProcessProviderGuid,
+    0x151f55dc,
+    0x467d,
+    0x471f,
+    0x83, 0xb5, 0x5f, 0x88, 0x9d, 0x46, 0xff, 0x66
+    );
+
+DEFINE_GUID( /* fcb9baaf-e529-4980-92e9-ced1a6aadfdf */
+    SystemAlpcProviderGuid,
+    0xfcb9baaf,
+    0xe529,
+    0x4980,
+    0x92, 0xe9, 0xce, 0xd1, 0xa6, 0xaa, 0xdf, 0xdf
+    );
+
+DEFINE_GUID( /* 434286f7-6f1b-45bb-b37e-95f623046c7c */
+    SystemSyscallProviderGuid,
+    0x434286f7,
+    0x6f1b,
+    0x45bb,
+    0xb3, 0x7e, 0x95, 0xf6, 0x23, 0x04, 0x6c, 0x7c
+    );
+
+DEFINE_GUID( /* d4bbee17-b545-4888-858b-744169015b25 */
+    SystemInterruptProviderGuid,
+    0xd4bbee17,
+    0xb545,
+    0x4888,
+    0x85, 0x8b, 0x74, 0x41, 0x69, 0x01, 0x5b, 0x25
+    );
+
+DEFINE_GUID( /* 4f061568-e215-499f-ab2e-eda0ae890a5b */
+    SystemTimerProviderGuid,
+    0x4f061568,
+    0xe215,
+    0x499f,
+    0xab, 0x2e, 0xed, 0xa0, 0xae, 0x89, 0x0a, 0x5b
+    );
 
 #define KERNEL_LOGGER_NAMEW         L"NT Kernel Logger"
 #define GLOBAL_LOGGER_NAMEW         L"GlobalLogger"
@@ -473,9 +612,19 @@ typedef ULONG64 TRACEHANDLE, *PTRACEHANDLE;
 
 #define EVENT_TRACE_CONTROL_FLUSH           3       // Flushes all the buffers
 
+//
+// Supported for RS5 and above.
+//
+
 #define EVENT_TRACE_CONTROL_INCREMENT_FILE  4       // Causes a session with EVENT_TRACE_FILE_MODE_NEWFILE
                                                     // to switch to the next file before the automatic 
                                                     // switching criteria is met
+
+//
+// Supported for Manganese and above.
+//
+
+#define EVENT_TRACE_CONTROL_CONVERT_TO_REALTIME  5  // Transitions from file mode tracing to real-time.
 
 //
 // Flags used by WMI Trace Message
@@ -525,6 +674,190 @@ typedef ULONG64 TRACEHANDLE, *PTRACEHANDLE;
 #define TRACE_HEADER_FLAG_LOG_WNODE         0x00040000 // request to log Wnode
 #define TRACE_HEADER_FLAG_USE_GUID_PTR      0x00080000 // Guid is actually a pointer
 #define TRACE_HEADER_FLAG_USE_MOF_PTR       0x00100000 // MOF data are dereferenced
+
+//
+// Keywords to be used for the System ALPC Provider.
+//
+
+#define SYSTEM_ALPC_KW_GENERAL  0x0000000000000001
+
+//
+// Keywords to be used for the System Config Provider.
+//
+
+#define SYSTEM_CONFIG_KW_SYSTEM   0x0000000000000001
+#define SYSTEM_CONFIG_KW_GRAPHICS 0x0000000000000002
+#define SYSTEM_CONFIG_KW_STORAGE  0x0000000000000004
+#define SYSTEM_CONFIG_KW_NETWORK  0x0000000000000008
+#define SYSTEM_CONFIG_KW_SERVICES 0x0000000000000010
+#define SYSTEM_CONFIG_KW_PNP      0x0000000000000020
+#define SYSTEM_CONFIG_KW_OPTICAL  0x0000000000000040
+
+//
+// Keywords to be used for the System CPU Provider.
+//
+
+#define SYSTEM_CPU_KW_CONFIG           0x0000000000000001
+#define SYSTEM_CPU_KW_CACHE_FLUSH      0x0000000000000002
+#define SYSTEM_CPU_KW_SPEC_CONTROL     0x0000000000000004
+
+//
+// Keywords to be used for the System Hypervisor Provider.
+//
+
+#define SYSTEM_HYPERVISOR_KW_PROFILE     0x0000000000000001
+#define SYSTEM_HYPERVISOR_KW_CALLOUTS    0x0000000000000002
+#define SYSTEM_HYPERVISOR_KW_VTL_CHANGE  0x0000000000000004
+
+//
+// Keywords to be used for the System Interrupt Provider.
+//
+
+#define SYSTEM_INTERRUPT_KW_GENERAL           0x0000000000000001
+#define SYSTEM_INTERRUPT_KW_CLOCK_INTERRUPT   0x0000000000000002
+#define SYSTEM_INTERRUPT_KW_DPC               0x0000000000000004
+#define SYSTEM_INTERRUPT_KW_DPC_QUEUE         0x0000000000000008
+#define SYSTEM_INTERRUPT_KW_WDF_DPC           0x0000000000000010
+#define SYSTEM_INTERRUPT_KW_WDF_INTERRUPT     0x0000000000000020
+#define SYSTEM_INTERRUPT_KW_IPI               0x0000000000000040
+
+//
+// Keywords to be used for the System IO Provider.
+//
+
+#define SYSTEM_IO_KW_DISK            0x0000000000000001
+#define SYSTEM_IO_KW_DISK_INIT       0x0000000000000002
+#define SYSTEM_IO_KW_FILENAME        0x0000000000000004
+#define SYSTEM_IO_KW_SPLIT           0x0000000000000008
+#define SYSTEM_IO_KW_FILE            0x0000000000000010
+#define SYSTEM_IO_KW_OPTICAL         0x0000000000000020
+#define SYSTEM_IO_KW_OPTICAL_INIT    0x0000000000000040
+#define SYSTEM_IO_KW_DRIVERS         0x0000000000000080
+#define SYSTEM_IO_KW_CC              0x0000000000000100
+#define SYSTEM_IO_KW_NETWORK         0x0000000000000200
+
+//
+// Keywords to be used for the System IoFilter Provider.
+//
+
+#define SYSTEM_IOFILTER_KW_GENERAL         0x0000000000000001
+#define SYSTEM_IOFILTER_KW_INIT            0x0000000000000002
+#define SYSTEM_IOFILTER_KW_FASTIO          0x0000000000000004
+#define SYSTEM_IOFILTER_KW_FAILURE         0x0000000000000008
+
+//
+// Keywords to be used for the System SpinLock Provider.
+//
+
+#define SYSTEM_LOCK_KW_SPINLOCK           0x0000000000000001
+#define SYSTEM_LOCK_KW_SPINLOCK_COUNTERS  0x0000000000000002
+#define SYSTEM_LOCK_KW_SYNC_OBJECTS       0x0000000000000004
+
+//
+// Keywords to be used for the System Memory Provider.
+//
+
+#define SYSTEM_MEMORY_KW_GENERAL       0x0000000000000001
+#define SYSTEM_MEMORY_KW_HARD_FAULTS   0x0000000000000002
+#define SYSTEM_MEMORY_KW_ALL_FAULTS    0x0000000000000004
+#define SYSTEM_MEMORY_KW_POOL          0x0000000000000008
+#define SYSTEM_MEMORY_KW_MEMINFO       0x0000000000000010
+#define SYSTEM_MEMORY_KW_PFSECTION     0x0000000000000020
+#define SYSTEM_MEMORY_KW_MEMINFO_WS    0x0000000000000040
+#define SYSTEM_MEMORY_KW_HEAP          0x0000000000000080
+#define SYSTEM_MEMORY_KW_WS            0x0000000000000100
+#define SYSTEM_MEMORY_KW_CONTMEM_GEN   0x0000000000000200
+#define SYSTEM_MEMORY_KW_VIRTUAL_ALLOC 0x0000000000000400
+#define SYSTEM_MEMORY_KW_FOOTPRINT     0x0000000000000800
+#define SYSTEM_MEMORY_KW_SESSION       0x0000000000001000
+#define SYSTEM_MEMORY_KW_REFSET        0x0000000000002000
+#define SYSTEM_MEMORY_KW_VAMAP         0x0000000000004000
+#define SYSTEM_MEMORY_KW_NONTRADEABLE  0x0000000000008000
+
+//
+// Keywords to be used for the System Object Provider.
+//
+
+#define SYSTEM_OBJECT_KW_GENERAL 0x0000000000000001
+#define SYSTEM_OBJECT_KW_HANDLE  0x0000000000000002
+
+//
+// Keywords to be used for the System Power Provider.
+//
+
+#define SYSTEM_POWER_KW_GENERAL            0x0000000000000001
+#define SYSTEM_POWER_KW_HIBER_RUNDOWN      0x0000000000000002
+#define SYSTEM_POWER_KW_PROCESSOR_IDLE     0x0000000000000004
+#define SYSTEM_POWER_KW_IDLE_SELECTION     0x0000000000000008
+#define SYSTEM_POWER_KW_PPM_EXIT_LATENCY   0x0000000000000010
+
+//
+// Keywords to be used for the System Process Provider.
+//
+
+#define SYSTEM_PROCESS_KW_GENERAL        0x0000000000000001
+#define SYSTEM_PROCESS_KW_INSWAP         0x0000000000000002
+#define SYSTEM_PROCESS_KW_FREEZE         0x0000000000000004
+#define SYSTEM_PROCESS_KW_PERF_COUNTER   0x0000000000000008
+#define SYSTEM_PROCESS_KW_WAKE_COUNTER   0x0000000000000010
+#define SYSTEM_PROCESS_KW_WAKE_DROP      0x0000000000000020
+#define SYSTEM_PROCESS_KW_WAKE_EVENT     0x0000000000000040
+#define SYSTEM_PROCESS_KW_DEBUG_EVENTS   0x0000000000000080
+#define SYSTEM_PROCESS_KW_DBGPRINT       0x0000000000000100
+#define SYSTEM_PROCESS_KW_JOB            0x0000000000000200
+#define SYSTEM_PROCESS_KW_WORKER_THREAD  0x0000000000000400
+#define SYSTEM_PROCESS_KW_THREAD         0x0000000000000800
+#define SYSTEM_PROCESS_KW_LOADER         0x0000000000001000
+
+//
+// Keywords to be used for the System Profile Provider.
+//
+
+#define SYSTEM_PROFILE_KW_GENERAL         0x0000000000000001
+#define SYSTEM_PROFILE_KW_PMC_PROFILE     0x0000000000000002
+
+//
+// Keywords to be used for the System Registry Provider.
+//
+
+#define SYSTEM_REGISTRY_KW_GENERAL      0x0000000000000001
+#define SYSTEM_REGISTRY_KW_HIVE         0x0000000000000002
+#define SYSTEM_REGISTRY_KW_NOTIFICATION 0x0000000000000004
+
+//
+// Keywords to be used for the System Scheduler Provider.
+//
+
+#define SYSTEM_SCHEDULER_KW_XSCHEDULER      0x0000000000000001
+#define SYSTEM_SCHEDULER_KW_DISPATCHER      0x0000000000000002
+#define SYSTEM_SCHEDULER_KW_KERNEL_QUEUE    0x0000000000000004
+#define SYSTEM_SCHEDULER_KW_SHOULD_YIELD    0x0000000000000008
+#define SYSTEM_SCHEDULER_KW_ANTI_STARVATION 0x0000000000000010
+#define SYSTEM_SCHEDULER_KW_LOAD_BALANCER   0x0000000000000020
+#define SYSTEM_SCHEDULER_KW_AFFINITY        0x0000000000000040
+#define SYSTEM_SCHEDULER_KW_PRIORITY        0x0000000000000080
+#define SYSTEM_SCHEDULER_KW_IDEAL_PROCESSOR 0x0000000000000100
+#define SYSTEM_SCHEDULER_KW_CONTEXT_SWITCH  0x0000000000000200
+#define SYSTEM_SCHEDULER_KW_COMPACT_CSWITCH 0x0000000000000400
+
+//
+// Keywords to be used for the System Syscall Provider.
+//
+
+#define SYSTEM_SYSCALL_KW_GENERAL  0x0000000000000001
+
+//
+// Keywords to be used for the System Timer Provider.
+//
+
+#define SYSTEM_TIMER_KW_GENERAL       0x0000000000000001
+#define SYSTEM_TIMER_KW_CLOCK_TIMER   0x0000000000000002
+
+//
+// Schematized Filter ID for the Pool Tag Filter on the System Memory Provider.
+//
+
+#define SYSTEM_MEMORY_POOL_FILTER_ID 1
 
 typedef enum {
     EtwCompressionModeRestart = 0,
@@ -1037,6 +1370,25 @@ typedef struct _PROFILE_SOURCE_INFO {
     WCHAR Description[ANYSIZE_ARRAY];
 } PROFILE_SOURCE_INFO, *PPROFILE_SOURCE_INFO;
 
+typedef enum _ETW_PMC_COUNTER_OWNER_TYPE {
+    EtwPmcOwnerFree,
+    EtwPmcOwnerUntagged,
+    EtwPmcOwnerTagged,
+    EtwPmcOwnerTaggedWithSource
+} ETW_PMC_COUNTER_OWNER_TYPE;
+
+typedef struct _ETW_PMC_COUNTER_OWNER {
+    ETW_PMC_COUNTER_OWNER_TYPE OwnerType;
+    ULONG ProfileSource;
+    ULONG OwnerTag;
+} ETW_PMC_COUNTER_OWNER, *PETW_PMC_COUNTER_OWNER;
+
+typedef struct _ETW_PMC_COUNTER_OWNERSHIP_STATUS {
+    ULONG ProcessorNumber;
+    ULONG NumberOfCounters;
+    ETW_PMC_COUNTER_OWNER CounterOwners[ANYSIZE_ARRAY];
+} ETW_PMC_COUNTER_OWNERSHIP_STATUS, *PETW_PMC_COUNTER_OWNERSHIP_STATUS;
+
 //
 // An EVENT_TRACE consists of a fixed header (EVENT_TRACE_HEADER) and
 // optionally a variable portion pointed to by MofData. The datablock
@@ -1074,7 +1426,7 @@ typedef struct _EVENT_TRACE {
 #if !defined(_EVNTRACE_KERNEL_MODE)
 
 #pragma region Application Family or OneCore Family
-#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
 typedef struct _EVENT_RECORD
                 EVENT_RECORD, *PEVENT_RECORD;
@@ -1095,7 +1447,7 @@ typedef VOID (WINAPI *PEVENT_CALLBACK)( PEVENT_TRACE pEvent );
 
 typedef VOID (WINAPI *PEVENT_RECORD_CALLBACK) (PEVENT_RECORD EventRecord);
 
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion
 
 #pragma region Application Family or OneCore Family
@@ -1254,7 +1606,7 @@ extern "C" {
 //      );
 
 
- EXTERN_C
+EXTERN_C
 ULONG
 WMIAPI
 StartTraceW (
@@ -1877,11 +2229,60 @@ typedef enum _TRACE_QUERY_INFO_CLASS {
     //
     // TraceMaxPmcCounterQuery:
     // - TraceQueryInformation
-    //      Queries the maximum number of PMC counters supported on this platform
+    //      Queries the maximum number of PMC counters supported on this platform.
     //
     //      Output Format: ULONG
     //
     TraceMaxPmcCounterQuery = 22,
+
+    //
+    // TraceStreamCount:
+    // - TraceQueryInformation
+    //      Queries the number of streams that a given session can be expected 
+    //      to emit. This is usually proportional to CPU count, or 1 if no 
+    //      per-processor buffering is enabled.
+    //
+    //      Output Format: ULONG
+    //
+    TraceStreamCount = 23,
+
+    //
+    // TraceStackCachingInfo:
+    // - TraceSetInformation
+    //      Turns on stack caching for classic event stacks.
+    //
+    //      Input Format: TRACE_STACK_CACHING_INFO
+    //
+    TraceStackCachingInfo = 24,
+
+    //
+    // TracePmcCounterOwners:
+    // - TraceQueryInformation
+    //      Queries ownership information for active PMC counters.
+    //      Expects NULL SessionHandle.
+    //
+    //      Input Format: ETW_PMC_COUNTER_OWNERSHIP_STATUS with ProcessorNumber set to an 
+    //                    appropriate processor index. The input buffer must be of size at least
+    //                    RTL_SIZEOF_THROUGH_FIELD(ETW_PMC_COUNTER_OWNERSHIP_STATUS, NumberOfCounters) + 
+    //                    (sizeof(ETW_PMC_COUNTER_OWNER) * EtwMaxPmcCounters), where EtwMaxPmcCounters 
+    //                    is the result of a TraceQueryInformation(TraceMaxPmcCounterQuery, ...) operation.
+    //
+    //      Output Format: ETW_PMC_COUNTER_OWNERSHIP_STATUS with CounterOwners filled out. NumberOfCounters is
+    //                     set to the number of items in the CounterOwners array.
+    //                     If a counter owner's OwnershipType is EtwPmcOwnerTagged, then OwnerTag contains
+    //                     a tag provided by the counter owner.
+    //               
+    TracePmcCounterOwners = 25,
+
+    //
+    // TraceStackCachingInfo:
+    // - TraceSetInformation
+    //      Turns on unified stack caching for all event stacks.
+    //
+    //      Input Format: TRACE_STACK_CACHING_INFO
+    //
+    TraceUnifiedStackCachingInfo = 26,
+
     MaxTraceSetInfoClass
 } TRACE_QUERY_INFO_CLASS, TRACE_INFO_CLASS;
 
@@ -1914,6 +2315,12 @@ typedef struct _CLASSIC_EVENT_ID {
     UCHAR Type;
     UCHAR Reserved[7];
 } CLASSIC_EVENT_ID, *PCLASSIC_EVENT_ID;
+
+typedef struct _TRACE_STACK_CACHING_INFO {
+    BOOLEAN Enabled;
+    ULONG CacheSize;
+    ULONG BucketCount;
+} TRACE_STACK_CACHING_INFO, *PTRACE_STACK_CACHING_INFO;
 
 typedef struct _TRACE_PROFILE_INTERVAL {
     ULONG Source;
@@ -2123,8 +2530,8 @@ GetTraceEnableFlags (
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion
 
-#pragma region Application Family or OneCore Family
-#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+#pragma region Application Family or OneCore Family or GameCore family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
 //
 // TRACEHANDLE
@@ -2200,7 +2607,7 @@ QueryTraceProcessingHandle (
     _Inout_ PULONG ReturnLength
     );
 
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion
 
 #pragma region Desktop Family or OneCore Family

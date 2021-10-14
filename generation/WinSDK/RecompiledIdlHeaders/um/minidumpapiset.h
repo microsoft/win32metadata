@@ -87,7 +87,7 @@ typedef struct _MINIDUMP_HEADER {
 } MINIDUMP_HEADER, *PMINIDUMP_HEADER;
 
 //
-// The MINIDUMP_HEADER field StreamDirectoryRva points to 
+// The MINIDUMP_HEADER field StreamDirectoryRva points to
 // an array of MINIDUMP_DIRECTORY structures.
 //
 
@@ -148,12 +148,12 @@ typedef enum _MINIDUMP_STREAM_TYPE {
     ceStreamException           = 0x8002,
     ceStreamModuleList          = 0x8003,
     ceStreamProcessList         = 0x8004,
-    ceStreamThreadList          = 0x8005, 
+    ceStreamThreadList          = 0x8005,
     ceStreamThreadContextList   = 0x8006,
     ceStreamThreadCallStackList = 0x8007,
     ceStreamMemoryVirtualList   = 0x8008,
     ceStreamMemoryPhysicalList  = 0x8009,
-    ceStreamBucketParameters    = 0x800A,     
+    ceStreamBucketParameters    = 0x800A,
     ceStreamProcessModuleMap    = 0x800B,
     ceStreamDiagnosisList       = 0x800C,
 
@@ -170,7 +170,7 @@ typedef enum _MINIDUMP_STREAM_TYPE {
 //
 // The minidump system information contains processor and
 // Operating System specific information.
-// 
+//
 
 //
 // CPU information is obtained from one of two places.
@@ -188,34 +188,33 @@ typedef union _CPU_INFORMATION {
     //
     // X86 platforms use CPUID function to obtain processor information.
     //
-    
+
     struct {
 
         //
         // CPUID Subfunction 0, register EAX (VendorId [0]),
         // EBX (VendorId [1]) and ECX (VendorId [2]).
         //
-        
+
         ULONG32 VendorId [ 3 ];
-        
+
         //
         // CPUID Subfunction 1, register EAX
         //
-        
+
         ULONG32 VersionInformation;
 
         //
         // CPUID Subfunction 1, register EDX
         //
-        
+
         ULONG32 FeatureInformation;
-        
 
         //
         // CPUID, Subfunction 80000001, register EBX. This will only
         // be obtained if the vendor id is "AuthenticAMD".
         //
-        
+
         ULONG32 AMDExtendedCpuFeatures;
 
     } X86CpuInfo;
@@ -223,22 +222,22 @@ typedef union _CPU_INFORMATION {
     //
     // Non-x86 platforms use processor feature flags.
     //
-    
+
     struct {
 
         ULONG64 ProcessorFeatures [ 2 ];
-        
+
     } OtherCpuInfo;
 
 } CPU_INFORMATION, *PCPU_INFORMATION;
-        
+
 typedef struct _MINIDUMP_SYSTEM_INFO {
 
     //
     // ProcessorArchitecture, ProcessorLevel and ProcessorRevision are all
     // taken from the SYSTEM_INFO structure obtained by GetSystemInfo( ).
     //
-    
+
     USHORT ProcessorArchitecture;
     USHORT ProcessorLevel;
     USHORT ProcessorRevision;
@@ -256,7 +255,7 @@ typedef struct _MINIDUMP_SYSTEM_INFO {
     // CSDVersion are all taken from the OSVERSIONINFO structure
     // returned by GetVersionEx( ).
     //
-    
+
     ULONG32 MajorVersion;
     ULONG32 MinorVersion;
     ULONG32 BuildNumber;
@@ -265,7 +264,7 @@ typedef struct _MINIDUMP_SYSTEM_INFO {
     //
     // RVA to a CSDVersion string in the string table.
     //
-    
+
     RVA CSDVersionRva;
 
     union {
@@ -282,7 +281,7 @@ typedef struct _MINIDUMP_SYSTEM_INFO {
 
 //
 // The minidump thread contains standard thread
-// information plus an RVA to the memory for this 
+// information plus an RVA to the memory for this
 // thread and an RVA to the CONTEXT structure for
 // this thread.
 //
@@ -378,7 +377,7 @@ typedef struct _MINIDUMP_MODULE {
     MINIDUMP_LOCATION_DESCRIPTOR MiscRecord;
     ULONG64 Reserved0;                          // Reserved for future use.
     ULONG64 Reserved1;                          // Reserved for future use.
-} MINIDUMP_MODULE, *PMINIDUMP_MODULE;   
+} MINIDUMP_MODULE, *PMINIDUMP_MODULE;
 
 //
 // The minidump module list is a container for modules.
@@ -555,7 +554,7 @@ typedef struct _MINIDUMP_UNLOADED_MODULE_LIST {
 } MINIDUMP_UNLOADED_MODULE_LIST, *PMINIDUMP_UNLOADED_MODULE_LIST;
 
 //
-// The XSTATE_CONFIG_FEATURE_MSC_INFO struct is used to determine if the x86/amd64 machine 
+// The XSTATE_CONFIG_FEATURE_MSC_INFO struct is used to determine if the x86/amd64 machine
 // supports a specific XState feature.
 // Also, it is used to locate the XState context feature (AVX) in the context extended buffer.
 //
@@ -564,7 +563,7 @@ typedef struct _XSTATE_CONFIG_FEATURE_MSC_INFO
 {
     ULONG32 SizeOfInfo;
     ULONG32 ContextSize;
-    ULONG64 EnabledFeatures; 	           
+    ULONG64 EnabledFeatures;
     XSTATE_FEATURE Features[MAXIMUM_XSTATE_FEATURES];
 } XSTATE_CONFIG_FEATURE_MSC_INFO, *PXSTATE_CONFIG_FEATURE_MSC_INFO;
 
@@ -667,7 +666,7 @@ typedef struct _MINIDUMP_MISC_INFO_5 {
     TIME_ZONE_INFORMATION TimeZone;
     WCHAR   BuildString[MAX_PATH];
     WCHAR   DbgBldStr[40];
-    XSTATE_CONFIG_FEATURE_MSC_INFO XStateData;    
+    XSTATE_CONFIG_FEATURE_MSC_INFO XStateData;
     ULONG32 ProcessCookie;
 } MINIDUMP_MISC_INFO_5, *PMINIDUMP_MISC_INFO_5;
 
@@ -1066,7 +1065,7 @@ typedef struct _MINIDUMP_MODULE_CALLBACK {
     ULONG CheckSum;
     ULONG TimeDateStamp;
     VS_FIXEDFILEINFO VersionInfo;
-    PVOID CvRecord; 
+    PVOID CvRecord;
     ULONG SizeOfCvRecord;
     PVOID MiscRecord;
     ULONG SizeOfMiscRecord;
@@ -1183,7 +1182,7 @@ typedef struct _MINIDUMP_CALLBACK_OUTPUT {
         HRESULT Status;
     };
 } MINIDUMP_CALLBACK_OUTPUT, *PMINIDUMP_CALLBACK_OUTPUT;
-        
+
 //
 // A normal minidump contains just the information
 // necessary to capture stack traces for all of the
@@ -1258,6 +1257,9 @@ typedef struct _MINIDUMP_CALLBACK_OUTPUT {
 // The exact set of what is provided depends on the auxiliary.
 // This can be quite large.
 //
+// MiniDumpFilterWriteCombinedMemory asks to exclude all memory
+// with the virtual protection attribute of PAGE_WRITECOMBINE.
+//
 
 typedef enum _MINIDUMP_TYPE {
     MiniDumpNormal                         = 0x00000000,
@@ -1285,7 +1287,8 @@ typedef enum _MINIDUMP_TYPE {
     MiniDumpWithAvxXStateContext           = 0x00200000,
     MiniDumpWithIptTrace                   = 0x00400000,
     MiniDumpScanInaccessiblePartialPages   = 0x00800000,
-    MiniDumpValidTypeFlags                 = 0x00ffffff,
+    MiniDumpFilterWriteCombinedMemory      = 0x01000000,
+    MiniDumpValidTypeFlags                 = 0x01ffffff,
 } MINIDUMP_TYPE;
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES) */
@@ -1304,7 +1307,7 @@ typedef enum _MINIDUMP_TYPE {
 // query that retrieves processor power information for
 // MINIDUMP_MISC_INFO.
 //
-    
+
 typedef enum _MINIDUMP_SECONDARY_FLAGS {
     MiniSecondaryWithoutPowerInfo = 0x00000001,
 
@@ -1375,7 +1378,6 @@ MiniDumpWriteDump(
     _In_opt_ PMINIDUMP_CALLBACK_INFORMATION CallbackParam
     );
 
-
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES) */
 #pragma endregion
 
@@ -1391,7 +1393,6 @@ MiniDumpReadDumpStream(
     _Outptr_result_maybenull_ PVOID* StreamPointer,
     _Out_opt_ ULONG* StreamSize
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion

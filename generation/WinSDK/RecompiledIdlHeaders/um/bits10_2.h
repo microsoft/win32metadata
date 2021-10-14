@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -124,6 +132,7 @@ EXTERN_C const IID IID_IBackgroundCopyJobHttpOptions2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBackgroundCopyJobHttpOptions2 * This,
             /* [annotation][in] */ 
@@ -131,12 +140,15 @@ EXTERN_C const IID IID_IBackgroundCopyJobHttpOptions2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IBackgroundCopyJobHttpOptions2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IBackgroundCopyJobHttpOptions2 * This);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyJobHttpOptions, SetClientCertificateByID)
         HRESULT ( STDMETHODCALLTYPE *SetClientCertificateByID )( 
             __RPC__in IBackgroundCopyJobHttpOptions2 * This,
             /* [annotation][in] */ 
@@ -145,6 +157,7 @@ EXTERN_C const IID IID_IBackgroundCopyJobHttpOptions2;
             _In_  LPCWSTR StoreName,
             /* [ref][size_is][in] */ __RPC__in_ecount_full(20) byte *pCertHashBlob);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyJobHttpOptions, SetClientCertificateByName)
         HRESULT ( STDMETHODCALLTYPE *SetClientCertificateByName )( 
             __RPC__in IBackgroundCopyJobHttpOptions2 * This,
             /* [annotation][in] */ 
@@ -154,9 +167,11 @@ EXTERN_C const IID IID_IBackgroundCopyJobHttpOptions2;
             /* [annotation][in] */ 
             _In_  LPCWSTR SubjectName);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyJobHttpOptions, RemoveClientCertificate)
         HRESULT ( STDMETHODCALLTYPE *RemoveClientCertificate )( 
             __RPC__in IBackgroundCopyJobHttpOptions2 * This);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyJobHttpOptions, GetClientCertificate)
         HRESULT ( STDMETHODCALLTYPE *GetClientCertificate )( 
             __RPC__in IBackgroundCopyJobHttpOptions2 * This,
             /* [ref][out] */ __RPC__out BG_CERT_STORE_LOCATION *pStoreLocation,
@@ -164,29 +179,35 @@ EXTERN_C const IID IID_IBackgroundCopyJobHttpOptions2;
             /* [ref][size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(20) byte **ppCertHashBlob,
             /* [ref][out] */ __RPC__deref_out_opt LPWSTR *pSubjectName);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyJobHttpOptions, SetCustomHeaders)
         HRESULT ( STDMETHODCALLTYPE *SetCustomHeaders )( 
             __RPC__in IBackgroundCopyJobHttpOptions2 * This,
             /* [annotation][unique][in] */ 
             _In_  LPCWSTR RequestHeaders);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyJobHttpOptions, GetCustomHeaders)
         HRESULT ( STDMETHODCALLTYPE *GetCustomHeaders )( 
             __RPC__in IBackgroundCopyJobHttpOptions2 * This,
             /* [ref][out] */ __RPC__deref_out_opt LPWSTR *pRequestHeaders);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyJobHttpOptions, SetSecurityFlags)
         HRESULT ( STDMETHODCALLTYPE *SetSecurityFlags )( 
             __RPC__in IBackgroundCopyJobHttpOptions2 * This,
             /* [annotation][in] */ 
             _In_  ULONG Flags);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyJobHttpOptions, GetSecurityFlags)
         HRESULT ( STDMETHODCALLTYPE *GetSecurityFlags )( 
             __RPC__in IBackgroundCopyJobHttpOptions2 * This,
             /* [ref][out] */ __RPC__out ULONG *pFlags);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyJobHttpOptions2, SetHttpMethod)
         HRESULT ( STDMETHODCALLTYPE *SetHttpMethod )( 
             __RPC__in IBackgroundCopyJobHttpOptions2 * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR method);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyJobHttpOptions2, GetHttpMethod)
         HRESULT ( STDMETHODCALLTYPE *GetHttpMethod )( 
             __RPC__in IBackgroundCopyJobHttpOptions2 * This,
             /* [annotation][out] */ 

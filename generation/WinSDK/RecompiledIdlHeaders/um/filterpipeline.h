@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -374,18 +382,22 @@ EXTERN_C const IID IID_IPrintReadStream;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPrintReadStream * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IPrintReadStream * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IPrintReadStream * This);
         
+        DECLSPEC_XFGVIRT(IPrintReadStream, Seek)
         HRESULT ( STDMETHODCALLTYPE *Seek )( 
             IPrintReadStream * This,
             /* [annotation][in] */ 
@@ -395,6 +407,7 @@ EXTERN_C const IID IID_IPrintReadStream;
             /* [annotation][out] */ 
             _Out_opt_  ULONGLONG *plibNewPosition);
         
+        DECLSPEC_XFGVIRT(IPrintReadStream, ReadBytes)
         HRESULT ( STDMETHODCALLTYPE *ReadBytes )( 
             IPrintReadStream * This,
             /* [annotation][length_is][size_is][out] */ 
@@ -480,18 +493,22 @@ EXTERN_C const IID IID_IPrintWriteStream;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPrintWriteStream * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IPrintWriteStream * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IPrintWriteStream * This);
         
+        DECLSPEC_XFGVIRT(IPrintWriteStream, WriteBytes)
         HRESULT ( STDMETHODCALLTYPE *WriteBytes )( 
             IPrintWriteStream * This,
             /* [annotation][size_is][in] */ 
@@ -501,6 +518,7 @@ EXTERN_C const IID IID_IPrintWriteStream;
             /* [annotation][out] */ 
             _Out_  ULONG *pcbWritten);
         
+        DECLSPEC_XFGVIRT(IPrintWriteStream, Close)
         void ( STDMETHODCALLTYPE *Close )( 
             IPrintWriteStream * This);
         
@@ -570,18 +588,22 @@ EXTERN_C const IID IID_IPrintWriteStreamFlush;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPrintWriteStreamFlush * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IPrintWriteStreamFlush * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IPrintWriteStreamFlush * This);
         
+        DECLSPEC_XFGVIRT(IPrintWriteStreamFlush, FlushData)
         HRESULT ( STDMETHODCALLTYPE *FlushData )( 
             IPrintWriteStreamFlush * This);
         
@@ -654,23 +676,28 @@ EXTERN_C const IID IID_IInterFilterCommunicator;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IInterFilterCommunicator * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IInterFilterCommunicator * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IInterFilterCommunicator * This);
         
+        DECLSPEC_XFGVIRT(IInterFilterCommunicator, RequestReader)
         HRESULT ( STDMETHODCALLTYPE *RequestReader )( 
             IInterFilterCommunicator * This,
             /* [annotation][out] */ 
             _Out_  void **ppIReader);
         
+        DECLSPEC_XFGVIRT(IInterFilterCommunicator, RequestWriter)
         HRESULT ( STDMETHODCALLTYPE *RequestWriter )( 
             IInterFilterCommunicator * This,
             /* [annotation][out] */ 
@@ -748,18 +775,22 @@ EXTERN_C const IID IID_IPrintPipelineManagerControl;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPrintPipelineManagerControl * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IPrintPipelineManagerControl * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IPrintPipelineManagerControl * This);
         
+        DECLSPEC_XFGVIRT(IPrintPipelineManagerControl, RequestShutdown)
         HRESULT ( STDMETHODCALLTYPE *RequestShutdown )( 
             IPrintPipelineManagerControl * This,
             /* [annotation][in] */ 
@@ -767,6 +798,7 @@ EXTERN_C const IID IID_IPrintPipelineManagerControl;
             /* [annotation][in] */ 
             _In_  IImgErrorInfo *pReason);
         
+        DECLSPEC_XFGVIRT(IPrintPipelineManagerControl, FilterFinished)
         HRESULT ( STDMETHODCALLTYPE *FilterFinished )( 
             IPrintPipelineManagerControl * This);
         
@@ -850,18 +882,22 @@ EXTERN_C const IID IID_IPrintPipelinePropertyBag;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPrintPipelinePropertyBag * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IPrintPipelinePropertyBag * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IPrintPipelinePropertyBag * This);
         
+        DECLSPEC_XFGVIRT(IPrintPipelinePropertyBag, AddProperty)
         HRESULT ( STDMETHODCALLTYPE *AddProperty )( 
             IPrintPipelinePropertyBag * This,
             /* [annotation][string][in] */ 
@@ -869,6 +905,7 @@ EXTERN_C const IID IID_IPrintPipelinePropertyBag;
             /* [annotation][in] */ 
             _In_  const VARIANT *pVar);
         
+        DECLSPEC_XFGVIRT(IPrintPipelinePropertyBag, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             IPrintPipelinePropertyBag * This,
             /* [annotation][string][in] */ 
@@ -876,6 +913,7 @@ EXTERN_C const IID IID_IPrintPipelinePropertyBag;
             /* [annotation][out] */ 
             _Out_  VARIANT *pVar);
         
+        DECLSPEC_XFGVIRT(IPrintPipelinePropertyBag, DeleteProperty)
         BOOL ( STDMETHODCALLTYPE *DeleteProperty )( 
             IPrintPipelinePropertyBag * This,
             /* [annotation][string][in] */ 
@@ -952,18 +990,22 @@ EXTERN_C const IID IID_IPrintPipelineProgressReport;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPrintPipelineProgressReport * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IPrintPipelineProgressReport * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IPrintPipelineProgressReport * This);
         
+        DECLSPEC_XFGVIRT(IPrintPipelineProgressReport, ReportProgress)
         HRESULT ( STDMETHODCALLTYPE *ReportProgress )( 
             IPrintPipelineProgressReport * This,
             /* [annotation][in] */ 
@@ -1038,18 +1080,22 @@ EXTERN_C const IID IID_IPrintClassObjectFactory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPrintClassObjectFactory * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IPrintClassObjectFactory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IPrintClassObjectFactory * This);
         
+        DECLSPEC_XFGVIRT(IPrintClassObjectFactory, GetPrintClassObject)
         HRESULT ( STDMETHODCALLTYPE *GetPrintClassObject )( 
             IPrintClassObjectFactory * This,
             /* [annotation][string][in] */ 
@@ -1132,18 +1178,22 @@ EXTERN_C const IID IID_IPrintPipelineFilter;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPrintPipelineFilter * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IPrintPipelineFilter * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IPrintPipelineFilter * This);
         
+        DECLSPEC_XFGVIRT(IPrintPipelineFilter, InitializeFilter)
         HRESULT ( STDMETHODCALLTYPE *InitializeFilter )( 
             IPrintPipelineFilter * This,
             /* [annotation][in] */ 
@@ -1153,9 +1203,11 @@ EXTERN_C const IID IID_IPrintPipelineFilter;
             /* [annotation][in] */ 
             _In_  IPrintPipelineManagerControl *pIPipelineControl);
         
+        DECLSPEC_XFGVIRT(IPrintPipelineFilter, ShutdownOperation)
         HRESULT ( STDMETHODCALLTYPE *ShutdownOperation )( 
             IPrintPipelineFilter * This);
         
+        DECLSPEC_XFGVIRT(IPrintPipelineFilter, StartOperation)
         HRESULT ( STDMETHODCALLTYPE *StartOperation )( 
             IPrintPipelineFilter * This);
         
@@ -1230,18 +1282,22 @@ EXTERN_C const IID IID_IXpsDocumentProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXpsDocumentProvider * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IXpsDocumentProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IXpsDocumentProvider * This);
         
+        DECLSPEC_XFGVIRT(IXpsDocumentProvider, GetXpsPart)
         HRESULT ( STDMETHODCALLTYPE *GetXpsPart )( 
             IXpsDocumentProvider * This,
             /* [annotation][out] */ 
@@ -1340,46 +1396,56 @@ EXTERN_C const IID IID_IXpsDocumentConsumer;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXpsDocumentConsumer * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IXpsDocumentConsumer * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IXpsDocumentConsumer * This);
         
+        DECLSPEC_XFGVIRT(IXpsDocumentConsumer, SendXpsUnknown)
         HRESULT ( STDMETHODCALLTYPE *SendXpsUnknown )( 
             IXpsDocumentConsumer * This,
             /* [annotation][in] */ 
             _In_  IUnknown *pUnknown);
         
+        DECLSPEC_XFGVIRT(IXpsDocumentConsumer, SendXpsDocument)
         HRESULT ( STDMETHODCALLTYPE *SendXpsDocument )( 
             IXpsDocumentConsumer * This,
             /* [annotation][in] */ 
             _In_  IXpsDocument *pIXpsDocument);
         
+        DECLSPEC_XFGVIRT(IXpsDocumentConsumer, SendFixedDocumentSequence)
         HRESULT ( STDMETHODCALLTYPE *SendFixedDocumentSequence )( 
             IXpsDocumentConsumer * This,
             /* [annotation][in] */ 
             _In_  IFixedDocumentSequence *pIFixedDocumentSequence);
         
+        DECLSPEC_XFGVIRT(IXpsDocumentConsumer, SendFixedDocument)
         HRESULT ( STDMETHODCALLTYPE *SendFixedDocument )( 
             IXpsDocumentConsumer * This,
             /* [annotation][in] */ 
             _In_  IFixedDocument *pIFixedDocument);
         
+        DECLSPEC_XFGVIRT(IXpsDocumentConsumer, SendFixedPage)
         HRESULT ( STDMETHODCALLTYPE *SendFixedPage )( 
             IXpsDocumentConsumer * This,
             /* [annotation][in] */ 
             _In_  IFixedPage *pIFixedPage);
         
+        DECLSPEC_XFGVIRT(IXpsDocumentConsumer, CloseSender)
         HRESULT ( STDMETHODCALLTYPE *CloseSender )( 
             IXpsDocumentConsumer * This);
         
+        DECLSPEC_XFGVIRT(IXpsDocumentConsumer, GetNewEmptyPart)
         HRESULT ( STDMETHODCALLTYPE *GetNewEmptyPart )( 
             IXpsDocumentConsumer * This,
             /* [annotation][string][in] */ 
@@ -1478,23 +1544,28 @@ EXTERN_C const IID IID_IXpsDocument;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXpsDocument * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IXpsDocument * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IXpsDocument * This);
         
+        DECLSPEC_XFGVIRT(IXpsDocument, GetThumbnail)
         HRESULT ( STDMETHODCALLTYPE *GetThumbnail )( 
             IXpsDocument * This,
             /* [annotation][out] */ 
             _Outptr_  IPartThumbnail **ppThumbnail);
         
+        DECLSPEC_XFGVIRT(IXpsDocument, SetThumbnail)
         HRESULT ( STDMETHODCALLTYPE *SetThumbnail )( 
             IXpsDocument * This,
             /* [annotation][in] */ 
@@ -1576,28 +1647,34 @@ EXTERN_C const IID IID_IFixedDocumentSequence;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IFixedDocumentSequence * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IFixedDocumentSequence * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IFixedDocumentSequence * This);
         
+        DECLSPEC_XFGVIRT(IFixedDocumentSequence, GetUri)
         HRESULT ( STDMETHODCALLTYPE *GetUri )( 
             IFixedDocumentSequence * This,
             /* [annotation][out] */ 
             _Out_  BSTR *uri);
         
+        DECLSPEC_XFGVIRT(IFixedDocumentSequence, GetPrintTicket)
         HRESULT ( STDMETHODCALLTYPE *GetPrintTicket )( 
             IFixedDocumentSequence * This,
             /* [annotation][out] */ 
             _Outptr_  IPartPrintTicket **ppPrintTicket);
         
+        DECLSPEC_XFGVIRT(IFixedDocumentSequence, SetPrintTicket)
         HRESULT ( STDMETHODCALLTYPE *SetPrintTicket )( 
             IFixedDocumentSequence * This,
             /* [annotation][in] */ 
@@ -1682,28 +1759,34 @@ EXTERN_C const IID IID_IFixedDocument;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IFixedDocument * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IFixedDocument * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IFixedDocument * This);
         
+        DECLSPEC_XFGVIRT(IFixedDocument, GetUri)
         HRESULT ( STDMETHODCALLTYPE *GetUri )( 
             IFixedDocument * This,
             /* [annotation][out] */ 
             _Out_  BSTR *uri);
         
+        DECLSPEC_XFGVIRT(IFixedDocument, GetPrintTicket)
         HRESULT ( STDMETHODCALLTYPE *GetPrintTicket )( 
             IFixedDocument * This,
             /* [annotation][out] */ 
             _Outptr_  IPartPrintTicket **ppPrintTicket);
         
+        DECLSPEC_XFGVIRT(IFixedDocument, SetPrintTicket)
         HRESULT ( STDMETHODCALLTYPE *SetPrintTicket )( 
             IFixedDocument * This,
             /* [annotation][in] */ 
@@ -1792,33 +1875,40 @@ EXTERN_C const IID IID_IPartBase;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPartBase * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IPartBase * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IPartBase * This);
         
+        DECLSPEC_XFGVIRT(IPartBase, GetUri)
         HRESULT ( STDMETHODCALLTYPE *GetUri )( 
             IPartBase * This,
             /* [annotation][out] */ 
             _Out_  BSTR *uri);
         
+        DECLSPEC_XFGVIRT(IPartBase, GetStream)
         HRESULT ( STDMETHODCALLTYPE *GetStream )( 
             IPartBase * This,
             /* [annotation][out] */ 
             _Outptr_  IPrintReadStream **ppStream);
         
+        DECLSPEC_XFGVIRT(IPartBase, GetPartCompression)
         HRESULT ( STDMETHODCALLTYPE *GetPartCompression )( 
             IPartBase * This,
             /* [annotation][out] */ 
             _Out_  EXpsCompressionOptions *pCompression);
         
+        DECLSPEC_XFGVIRT(IPartBase, SetPartCompression)
         HRESULT ( STDMETHODCALLTYPE *SetPartCompression )( 
             IPartBase * This,
             /* [annotation][in] */ 
@@ -1924,43 +2014,52 @@ EXTERN_C const IID IID_IFixedPage;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IFixedPage * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IFixedPage * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IFixedPage * This);
         
+        DECLSPEC_XFGVIRT(IPartBase, GetUri)
         HRESULT ( STDMETHODCALLTYPE *GetUri )( 
             IFixedPage * This,
             /* [annotation][out] */ 
             _Out_  BSTR *uri);
         
+        DECLSPEC_XFGVIRT(IPartBase, GetStream)
         HRESULT ( STDMETHODCALLTYPE *GetStream )( 
             IFixedPage * This,
             /* [annotation][out] */ 
             _Outptr_  IPrintReadStream **ppStream);
         
+        DECLSPEC_XFGVIRT(IPartBase, GetPartCompression)
         HRESULT ( STDMETHODCALLTYPE *GetPartCompression )( 
             IFixedPage * This,
             /* [annotation][out] */ 
             _Out_  EXpsCompressionOptions *pCompression);
         
+        DECLSPEC_XFGVIRT(IPartBase, SetPartCompression)
         HRESULT ( STDMETHODCALLTYPE *SetPartCompression )( 
             IFixedPage * This,
             /* [annotation][in] */ 
             _In_  EXpsCompressionOptions compression);
         
+        DECLSPEC_XFGVIRT(IFixedPage, GetPrintTicket)
         HRESULT ( STDMETHODCALLTYPE *GetPrintTicket )( 
             IFixedPage * This,
             /* [annotation][out] */ 
             _Outptr_  IPartPrintTicket **ppPrintTicket);
         
+        DECLSPEC_XFGVIRT(IFixedPage, GetPagePart)
         HRESULT ( STDMETHODCALLTYPE *GetPagePart )( 
             IFixedPage * This,
             /* [annotation][string][in] */ 
@@ -1968,26 +2067,31 @@ EXTERN_C const IID IID_IFixedPage;
             /* [annotation][out] */ 
             _Outptr_  IUnknown **ppUnk);
         
+        DECLSPEC_XFGVIRT(IFixedPage, GetWriteStream)
         HRESULT ( STDMETHODCALLTYPE *GetWriteStream )( 
             IFixedPage * This,
             /* [annotation][out] */ 
             _Outptr_  IPrintWriteStream **ppWriteStream);
         
+        DECLSPEC_XFGVIRT(IFixedPage, SetPrintTicket)
         HRESULT ( STDMETHODCALLTYPE *SetPrintTicket )( 
             IFixedPage * This,
             /* [annotation][in] */ 
             _In_  IPartPrintTicket *ppPrintTicket);
         
+        DECLSPEC_XFGVIRT(IFixedPage, SetPagePart)
         HRESULT ( STDMETHODCALLTYPE *SetPagePart )( 
             IFixedPage * This,
             /* [annotation][in] */ 
             _In_  IUnknown *pUnk);
         
+        DECLSPEC_XFGVIRT(IFixedPage, DeleteResource)
         HRESULT ( STDMETHODCALLTYPE *DeleteResource )( 
             IFixedPage * This,
             /* [annotation][string][in] */ 
             _In_z_  const wchar_t *uri);
         
+        DECLSPEC_XFGVIRT(IFixedPage, GetXpsPartIterator)
         HRESULT ( STDMETHODCALLTYPE *GetXpsPartIterator )( 
             IFixedPage * This,
             /* [annotation][out] */ 
@@ -2093,43 +2197,52 @@ EXTERN_C const IID IID_IPartImage;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPartImage * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IPartImage * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IPartImage * This);
         
+        DECLSPEC_XFGVIRT(IPartBase, GetUri)
         HRESULT ( STDMETHODCALLTYPE *GetUri )( 
             IPartImage * This,
             /* [annotation][out] */ 
             _Out_  BSTR *uri);
         
+        DECLSPEC_XFGVIRT(IPartBase, GetStream)
         HRESULT ( STDMETHODCALLTYPE *GetStream )( 
             IPartImage * This,
             /* [annotation][out] */ 
             _Outptr_  IPrintReadStream **ppStream);
         
+        DECLSPEC_XFGVIRT(IPartBase, GetPartCompression)
         HRESULT ( STDMETHODCALLTYPE *GetPartCompression )( 
             IPartImage * This,
             /* [annotation][out] */ 
             _Out_  EXpsCompressionOptions *pCompression);
         
+        DECLSPEC_XFGVIRT(IPartBase, SetPartCompression)
         HRESULT ( STDMETHODCALLTYPE *SetPartCompression )( 
             IPartImage * This,
             /* [annotation][in] */ 
             _In_  EXpsCompressionOptions compression);
         
+        DECLSPEC_XFGVIRT(IPartImage, GetImageProperties)
         HRESULT ( STDMETHODCALLTYPE *GetImageProperties )( 
             IPartImage * This,
             /* [annotation][out] */ 
             _Out_  BSTR *pContentType);
         
+        DECLSPEC_XFGVIRT(IPartImage, SetImageContent)
         HRESULT ( STDMETHODCALLTYPE *SetImageContent )( 
             IPartImage * This,
             /* [annotation][string][in] */ 
@@ -2226,38 +2339,46 @@ EXTERN_C const IID IID_IPartFont;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPartFont * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IPartFont * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IPartFont * This);
         
+        DECLSPEC_XFGVIRT(IPartBase, GetUri)
         HRESULT ( STDMETHODCALLTYPE *GetUri )( 
             IPartFont * This,
             /* [annotation][out] */ 
             _Out_  BSTR *uri);
         
+        DECLSPEC_XFGVIRT(IPartBase, GetStream)
         HRESULT ( STDMETHODCALLTYPE *GetStream )( 
             IPartFont * This,
             /* [annotation][out] */ 
             _Outptr_  IPrintReadStream **ppStream);
         
+        DECLSPEC_XFGVIRT(IPartBase, GetPartCompression)
         HRESULT ( STDMETHODCALLTYPE *GetPartCompression )( 
             IPartFont * This,
             /* [annotation][out] */ 
             _Out_  EXpsCompressionOptions *pCompression);
         
+        DECLSPEC_XFGVIRT(IPartBase, SetPartCompression)
         HRESULT ( STDMETHODCALLTYPE *SetPartCompression )( 
             IPartFont * This,
             /* [annotation][in] */ 
             _In_  EXpsCompressionOptions compression);
         
+        DECLSPEC_XFGVIRT(IPartFont, GetFontProperties)
         HRESULT ( STDMETHODCALLTYPE *GetFontProperties )( 
             IPartFont * This,
             /* [annotation][out] */ 
@@ -2265,11 +2386,13 @@ EXTERN_C const IID IID_IPartFont;
             /* [annotation][out] */ 
             _Out_  EXpsFontOptions *pFontOptions);
         
+        DECLSPEC_XFGVIRT(IPartFont, SetFontContent)
         HRESULT ( STDMETHODCALLTYPE *SetFontContent )( 
             IPartFont * This,
             /* [annotation][string][in] */ 
             _In_z_  const wchar_t *pContentType);
         
+        DECLSPEC_XFGVIRT(IPartFont, SetFontOptions)
         HRESULT ( STDMETHODCALLTYPE *SetFontOptions )( 
             IPartFont * This,
             /* [annotation][in] */ 
@@ -2359,38 +2482,46 @@ EXTERN_C const IID IID_IPartFont2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPartFont2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IPartFont2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IPartFont2 * This);
         
+        DECLSPEC_XFGVIRT(IPartBase, GetUri)
         HRESULT ( STDMETHODCALLTYPE *GetUri )( 
             IPartFont2 * This,
             /* [annotation][out] */ 
             _Out_  BSTR *uri);
         
+        DECLSPEC_XFGVIRT(IPartBase, GetStream)
         HRESULT ( STDMETHODCALLTYPE *GetStream )( 
             IPartFont2 * This,
             /* [annotation][out] */ 
             _Outptr_  IPrintReadStream **ppStream);
         
+        DECLSPEC_XFGVIRT(IPartBase, GetPartCompression)
         HRESULT ( STDMETHODCALLTYPE *GetPartCompression )( 
             IPartFont2 * This,
             /* [annotation][out] */ 
             _Out_  EXpsCompressionOptions *pCompression);
         
+        DECLSPEC_XFGVIRT(IPartBase, SetPartCompression)
         HRESULT ( STDMETHODCALLTYPE *SetPartCompression )( 
             IPartFont2 * This,
             /* [annotation][in] */ 
             _In_  EXpsCompressionOptions compression);
         
+        DECLSPEC_XFGVIRT(IPartFont, GetFontProperties)
         HRESULT ( STDMETHODCALLTYPE *GetFontProperties )( 
             IPartFont2 * This,
             /* [annotation][out] */ 
@@ -2398,16 +2529,19 @@ EXTERN_C const IID IID_IPartFont2;
             /* [annotation][out] */ 
             _Out_  EXpsFontOptions *pFontOptions);
         
+        DECLSPEC_XFGVIRT(IPartFont, SetFontContent)
         HRESULT ( STDMETHODCALLTYPE *SetFontContent )( 
             IPartFont2 * This,
             /* [annotation][string][in] */ 
             _In_z_  const wchar_t *pContentType);
         
+        DECLSPEC_XFGVIRT(IPartFont, SetFontOptions)
         HRESULT ( STDMETHODCALLTYPE *SetFontOptions )( 
             IPartFont2 * This,
             /* [annotation][in] */ 
             _In_  EXpsFontOptions options);
         
+        DECLSPEC_XFGVIRT(IPartFont2, GetFontRestriction)
         HRESULT ( STDMETHODCALLTYPE *GetFontRestriction )( 
             IPartFont2 * This,
             /* [annotation][out] */ 
@@ -2505,43 +2639,52 @@ EXTERN_C const IID IID_IPartThumbnail;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPartThumbnail * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IPartThumbnail * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IPartThumbnail * This);
         
+        DECLSPEC_XFGVIRT(IPartBase, GetUri)
         HRESULT ( STDMETHODCALLTYPE *GetUri )( 
             IPartThumbnail * This,
             /* [annotation][out] */ 
             _Out_  BSTR *uri);
         
+        DECLSPEC_XFGVIRT(IPartBase, GetStream)
         HRESULT ( STDMETHODCALLTYPE *GetStream )( 
             IPartThumbnail * This,
             /* [annotation][out] */ 
             _Outptr_  IPrintReadStream **ppStream);
         
+        DECLSPEC_XFGVIRT(IPartBase, GetPartCompression)
         HRESULT ( STDMETHODCALLTYPE *GetPartCompression )( 
             IPartThumbnail * This,
             /* [annotation][out] */ 
             _Out_  EXpsCompressionOptions *pCompression);
         
+        DECLSPEC_XFGVIRT(IPartBase, SetPartCompression)
         HRESULT ( STDMETHODCALLTYPE *SetPartCompression )( 
             IPartThumbnail * This,
             /* [annotation][in] */ 
             _In_  EXpsCompressionOptions compression);
         
+        DECLSPEC_XFGVIRT(IPartThumbnail, GetThumbnailProperties)
         HRESULT ( STDMETHODCALLTYPE *GetThumbnailProperties )( 
             IPartThumbnail * This,
             /* [annotation][out] */ 
             _Out_  BSTR *pContentType);
         
+        DECLSPEC_XFGVIRT(IPartThumbnail, SetThumbnailContent)
         HRESULT ( STDMETHODCALLTYPE *SetThumbnailContent )( 
             IPartThumbnail * This,
             /* [annotation][string][in] */ 
@@ -2624,33 +2767,40 @@ EXTERN_C const IID IID_IPartPrintTicket;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPartPrintTicket * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IPartPrintTicket * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IPartPrintTicket * This);
         
+        DECLSPEC_XFGVIRT(IPartBase, GetUri)
         HRESULT ( STDMETHODCALLTYPE *GetUri )( 
             IPartPrintTicket * This,
             /* [annotation][out] */ 
             _Out_  BSTR *uri);
         
+        DECLSPEC_XFGVIRT(IPartBase, GetStream)
         HRESULT ( STDMETHODCALLTYPE *GetStream )( 
             IPartPrintTicket * This,
             /* [annotation][out] */ 
             _Outptr_  IPrintReadStream **ppStream);
         
+        DECLSPEC_XFGVIRT(IPartBase, GetPartCompression)
         HRESULT ( STDMETHODCALLTYPE *GetPartCompression )( 
             IPartPrintTicket * This,
             /* [annotation][out] */ 
             _Out_  EXpsCompressionOptions *pCompression);
         
+        DECLSPEC_XFGVIRT(IPartBase, SetPartCompression)
         HRESULT ( STDMETHODCALLTYPE *SetPartCompression )( 
             IPartPrintTicket * This,
             /* [annotation][in] */ 
@@ -2727,33 +2877,40 @@ EXTERN_C const IID IID_IPartColorProfile;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPartColorProfile * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IPartColorProfile * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IPartColorProfile * This);
         
+        DECLSPEC_XFGVIRT(IPartBase, GetUri)
         HRESULT ( STDMETHODCALLTYPE *GetUri )( 
             IPartColorProfile * This,
             /* [annotation][out] */ 
             _Out_  BSTR *uri);
         
+        DECLSPEC_XFGVIRT(IPartBase, GetStream)
         HRESULT ( STDMETHODCALLTYPE *GetStream )( 
             IPartColorProfile * This,
             /* [annotation][out] */ 
             _Outptr_  IPrintReadStream **ppStream);
         
+        DECLSPEC_XFGVIRT(IPartBase, GetPartCompression)
         HRESULT ( STDMETHODCALLTYPE *GetPartCompression )( 
             IPartColorProfile * This,
             /* [annotation][out] */ 
             _Out_  EXpsCompressionOptions *pCompression);
         
+        DECLSPEC_XFGVIRT(IPartBase, SetPartCompression)
         HRESULT ( STDMETHODCALLTYPE *SetPartCompression )( 
             IPartColorProfile * This,
             /* [annotation][in] */ 
@@ -2830,33 +2987,40 @@ EXTERN_C const IID IID_IPartResourceDictionary;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPartResourceDictionary * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IPartResourceDictionary * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IPartResourceDictionary * This);
         
+        DECLSPEC_XFGVIRT(IPartBase, GetUri)
         HRESULT ( STDMETHODCALLTYPE *GetUri )( 
             IPartResourceDictionary * This,
             /* [annotation][out] */ 
             _Out_  BSTR *uri);
         
+        DECLSPEC_XFGVIRT(IPartBase, GetStream)
         HRESULT ( STDMETHODCALLTYPE *GetStream )( 
             IPartResourceDictionary * This,
             /* [annotation][out] */ 
             _Outptr_  IPrintReadStream **ppStream);
         
+        DECLSPEC_XFGVIRT(IPartBase, GetPartCompression)
         HRESULT ( STDMETHODCALLTYPE *GetPartCompression )( 
             IPartResourceDictionary * This,
             /* [annotation][out] */ 
             _Out_  EXpsCompressionOptions *pCompression);
         
+        DECLSPEC_XFGVIRT(IPartBase, SetPartCompression)
         HRESULT ( STDMETHODCALLTYPE *SetPartCompression )( 
             IPartResourceDictionary * This,
             /* [annotation][in] */ 
@@ -2945,21 +3109,26 @@ EXTERN_C const IID IID_IXpsPartIterator;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXpsPartIterator * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IXpsPartIterator * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IXpsPartIterator * This);
         
+        DECLSPEC_XFGVIRT(IXpsPartIterator, Reset)
         void ( STDMETHODCALLTYPE *Reset )( 
             IXpsPartIterator * This);
         
+        DECLSPEC_XFGVIRT(IXpsPartIterator, Current)
         HRESULT ( STDMETHODCALLTYPE *Current )( 
             IXpsPartIterator * This,
             /* [annotation][out] */ 
@@ -2967,9 +3136,11 @@ EXTERN_C const IID IID_IXpsPartIterator;
             /* [annotation][out] */ 
             _Outptr_  IUnknown **ppXpsPart);
         
+        DECLSPEC_XFGVIRT(IXpsPartIterator, IsDone)
         BOOL ( STDMETHODCALLTYPE *IsDone )( 
             IXpsPartIterator * This);
         
+        DECLSPEC_XFGVIRT(IXpsPartIterator, Next)
         void ( STDMETHODCALLTYPE *Next )( 
             IXpsPartIterator * This);
         
@@ -3047,18 +3218,22 @@ EXTERN_C const IID IID_IPrintReadStreamFactory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPrintReadStreamFactory * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IPrintReadStreamFactory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IPrintReadStreamFactory * This);
         
+        DECLSPEC_XFGVIRT(IPrintReadStreamFactory, GetStream)
         HRESULT ( STDMETHODCALLTYPE *GetStream )( 
             IPrintReadStreamFactory * This,
             /* [annotation][out] */ 
@@ -3131,18 +3306,22 @@ EXTERN_C const IID IID_IPartDiscardControl;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPartDiscardControl * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IPartDiscardControl * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IPartDiscardControl * This);
         
+        DECLSPEC_XFGVIRT(IPartDiscardControl, GetDiscardProperties)
         HRESULT ( STDMETHODCALLTYPE *GetDiscardProperties )( 
             IPartDiscardControl * This,
             /* [annotation][out] */ 

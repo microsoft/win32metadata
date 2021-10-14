@@ -72,6 +72,9 @@
 // localebuilder.h
 // No supported content
 
+// localematcher.h
+// No supported content
+
 // localpointer.h
 // No supported content
 
@@ -558,18 +561,9 @@
 #   define UCONFIG_NO_FILTERED_BREAK_ITERATION 0
 #endif
 
-#endif
-
-// ucpmap.h
-// No supported content
-
-// ucptrie.h
-// No supported content
+#endif  // __UCONFIG_H__
 
 // udata.h
-// No supported content
-
-// umutablecptrie.h
 // No supported content
 
 // unifilt.h
@@ -738,6 +732,14 @@
 /** Fuchsia is a POSIX-ish platform. @internal */
 #define U_PF_FUCHSIA 4100
 /* Maximum value for Linux-based platform is 4499 */
+/**
+ * Emscripten is a C++ transpiler for the Web that can target asm.js or
+ * WebAssembly. It provides some POSIX-compatible wrappers and stubs and
+ * some Linux-like functionality, but is not fully compatible with
+ * either.
+ * @internal
+ */
+#define U_PF_EMSCRIPTEN 5010
 /** z/OS is the successor to OS/390 which was the successor to MVS. @internal */
 #define U_PF_OS390 9000
 /** "IBM i" is the current name of what used to be i5/OS and earlier OS/400. @internal */
@@ -795,6 +797,8 @@
 #   define U_PLATFORM U_PF_OS390
 #elif defined(__OS400__) || defined(__TOS_OS400__)
 #   define U_PLATFORM U_PF_OS400
+#elif defined(__EMSCRIPTEN__)
+#   define U_PLATFORM U_PF_EMSCRIPTEN
 #else
 #   define U_PLATFORM U_PF_UNKNOWN
 #endif
@@ -994,30 +998,40 @@
 #endif
 
 /* Compatibility with compilers other than clang: http://clang.llvm.org/docs/LanguageExtensions.html */
-#ifndef __has_attribute
-#    define __has_attribute(x) 0
+#ifdef __has_attribute
+#   define UPRV_HAS_ATTRIBUTE(x) __has_attribute(x)
+#else
+#   define UPRV_HAS_ATTRIBUTE(x) 0
 #endif
-#ifndef __has_cpp_attribute
-#    define __has_cpp_attribute(x) 0
+#ifdef __has_cpp_attribute
+#   define UPRV_HAS_CPP_ATTRIBUTE(x) __has_cpp_attribute(x)
+#else
+#   define UPRV_HAS_CPP_ATTRIBUTE(x) 0
 #endif
-
-#if (NTDDI_VERSION >= NTDDI_WIN10_19H1)
-#ifndef __has_declspec_attribute
-#    define __has_declspec_attribute(x) 0
+#ifdef __has_declspec_attribute
+#   define UPRV_HAS_DECLSPEC_ATTRIBUTE(x) __has_declspec_attribute(x)
+#else
+#   define UPRV_HAS_DECLSPEC_ATTRIBUTE(x) 0
 #endif
-#endif // (NTDDI_VERSION >= NTDDI_WIN10_19H1)
-
-#ifndef __has_builtin
-#    define __has_builtin(x) 0
+#ifdef __has_builtin
+#   define UPRV_HAS_BUILTIN(x) __has_builtin(x)
+#else
+#   define UPRV_HAS_BUILTIN(x) 0
 #endif
-#ifndef __has_feature
-#    define __has_feature(x) 0
+#ifdef __has_feature
+#   define UPRV_HAS_FEATURE(x) __has_feature(x)
+#else
+#   define UPRV_HAS_FEATURE(x) 0
 #endif
-#ifndef __has_extension
-#    define __has_extension(x) 0
+#ifdef __has_extension
+#   define UPRV_HAS_EXTENSION(x) __has_extension(x)
+#else
+#   define UPRV_HAS_EXTENSION(x) 0
 #endif
-#ifndef __has_warning
-#    define __has_warning(x) 0
+#ifdef __has_warning
+#   define UPRV_HAS_WARNING(x) __has_warning(x)
+#else
+#   define UPRV_HAS_WARNING(x) 0
 #endif
 
 /**
@@ -1036,7 +1050,9 @@
  * Attribute to specify the size of the allocated buffer for malloc-like functions
  * @internal
  */
-#if (defined(__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 3))) || __has_attribute(alloc_size)
+#if (defined(__GNUC__) &&                                            \
+        (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 3))) || \
+        UPRV_HAS_ATTRIBUTE(alloc_size)
 #   define U_ALLOC_SIZE_ATTR(X) __attribute__ ((alloc_size(X)))
 #   define U_ALLOC_SIZE_ATTR2(X,Y) __attribute__ ((alloc_size(X,Y)))
 #else
@@ -1100,8 +1116,9 @@ namespace std {
 #elif defined(__clang__)
     // Test for compiler vs. feature separately.
     // Other compilers might choke on the feature test.
-#   if __has_cpp_attribute(clang::fallthrough) || \
-            (__has_feature(cxx_attributes) && __has_warning("-Wimplicit-fallthrough"))
+#    if UPRV_HAS_CPP_ATTRIBUTE(clang::fallthrough) || \
+             (UPRV_HAS_FEATURE(cxx_attributes) &&     \
+             UPRV_HAS_WARNING("-Wimplicit-fallthrough"))
 #       define U_FALLTHROUGH [[clang::fallthrough]]
 #   endif
 #elif defined(__GNUC__) && (__GNUC__ >= 7)
@@ -1204,7 +1221,8 @@ namespace std {
  */
 #ifdef U_CHARSET_IS_UTF8
     /* Use the predefined value. */
-#elif U_PLATFORM_IS_LINUX_BASED || U_PLATFORM_IS_DARWIN_BASED
+#elif U_PLATFORM_IS_LINUX_BASED || U_PLATFORM_IS_DARWIN_BASED || \
+        U_PLATFORM == U_PF_EMSCRIPTEN
 #   define U_CHARSET_IS_UTF8 1
 #else
 #   define U_CHARSET_IS_UTF8 0
@@ -1291,7 +1309,7 @@ namespace std {
          * narrow-character strings are in EBCDIC.
          */
 #       define U_SIZEOF_WCHAR_T 2
-#else
+#   else
         /*
          * LOCALETYPE(*CLD) or LOCALETYPE(*LOCALE) is specified.
          * Wide-character strings are in 16-bit EBCDIC,
@@ -1366,12 +1384,12 @@ namespace std {
 /** @{ Symbol import-export control                                          */
 /*===========================================================================*/
 
-#if (NTDDI_VERSION >= NTDDI_WIN10_19H1)
 #ifdef U_EXPORT
     /* Use the predefined value. */
 #elif defined(U_STATIC_IMPLEMENTATION)
 #   define U_EXPORT
-#elif defined(_MSC_VER) || (__has_declspec_attribute(dllexport) && __has_declspec_attribute(dllimport))
+#elif defined(_MSC_VER) || (UPRV_HAS_DECLSPEC_ATTRIBUTE(dllexport) && \
+                            UPRV_HAS_DECLSPEC_ATTRIBUTE(dllimport))
 #   define U_EXPORT __declspec(dllexport)
 #elif defined(__GNUC__)
 #   define U_EXPORT __attribute__((visibility("default")))
@@ -1383,26 +1401,8 @@ namespace std {
 #else
 #   define U_EXPORT
 #endif
-#elif (NTDDI_VERSION >= NTDDI_WIN10_RS3)
-#ifdef U_EXPORT
-    /* Use the predefined value. */
-#elif defined(U_STATIC_IMPLEMENTATION)
-#   define U_EXPORT
-#elif defined(__GNUC__)
-#   define U_EXPORT __attribute__((visibility("default")))
-#elif (defined(__SUNPRO_CC) && __SUNPRO_CC >= 0x550) \
-   || (defined(__SUNPRO_C) && __SUNPRO_C >= 0x550) 
-#   define U_EXPORT __global
-/*#elif defined(__HP_aCC) || defined(__HP_cc)
-#   define U_EXPORT __declspec(dllexport)*/
-#elif defined(_MSC_VER)
-#   define U_EXPORT __declspec(dllexport)
-#else
-#   define U_EXPORT
-#endif
-#endif // (NTDDI_VERSION >= NTDDI_WIN10_19H1)
 
-/* U_CALLCONV is releated to U_EXPORT2 */
+/* U_CALLCONV is related to U_EXPORT2 */
 #ifdef U_EXPORT2
     /* Use the predefined value. */
 #elif defined(_MSC_VER)
@@ -1411,25 +1411,15 @@ namespace std {
 #   define U_EXPORT2
 #endif
 
-#if (NTDDI_VERSION >= NTDDI_WIN10_19H1)
 #ifdef U_IMPORT
     /* Use the predefined value. */
-#elif defined(_MSC_VER) || (__has_declspec_attribute(dllexport) && __has_declspec_attribute(dllimport))
+#elif defined(_MSC_VER) || (UPRV_HAS_DECLSPEC_ATTRIBUTE(dllexport) && \
+                            UPRV_HAS_DECLSPEC_ATTRIBUTE(dllimport))
     /* Windows needs to export/import data. */
 #   define U_IMPORT __declspec(dllimport)
 #else
 #   define U_IMPORT 
 #endif
-#elif (NTDDI_VERSION >= NTDDI_WIN10_RS3)
-#ifdef U_IMPORT
-    /* Use the predefined value. */
-#elif defined(_MSC_VER)
-    /* Windows needs to export/import data. */
-#   define U_IMPORT __declspec(dllimport)
-#else
-#   define U_IMPORT 
-#endif
-#endif // (NTDDI_VERSION >= NTDDI_WIN10_19H1)
 
 /**
  * \def U_CALLCONV
@@ -1466,7 +1456,7 @@ namespace std {
 #endif
 /* @} */
 
-#endif
+#endif  // _PLATFORM_H
 
 // ptypes.h
 // Copyright (C) 2016 and later: Unicode, Inc. and others.
@@ -1650,12 +1640,31 @@ typedef unsigned int uint32_t;
  * ANSI C headers:
  * stddef.h defines wchar_t
  */
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+// Microsoft-specific change: Non-C++ callers with older CRTs that don't have the
+// C99 header stdbool.h available can define the macro DONT_HAVE_STDBOOL_H before
+// including this header in order to avoid the dependency on stdbool.h
+// In this case we'll provide our own definitions for true/false, similar to the
+// stdbool.h header definitions.
+#ifndef __cplusplus
+    #ifndef DONT_HAVE_STDBOOL_H
+        #include <stdbool.h>
+    #else
+        #ifndef false
+            #define false 0
+        #endif
+        #ifndef true
+            #define true  1
+        #endif
+    #endif // DONT_HAVE_STDBOOL_H
+#endif // __cplusplus
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
 #include <stddef.h>
 
 /*==========================================================================*/
-/* For C wrappers, we use the symbol U_STABLE.                                */
+/* For C wrappers, we use the symbol U_CAPI.                                */
 /* This works properly if the includer is C or C++.                         */
-/* Functions are declared   U_STABLE return-type U_EXPORT2 function-name()... */
+/* Functions are declared   U_CAPI return-type U_EXPORT2 function-name()... */
 /*==========================================================================*/
 
 /**
@@ -1708,17 +1717,63 @@ typedef unsigned int uint32_t;
 
 /** This is used to declare a function as a public ICU C API @stable ICU 2.0*/
 #define U_CAPI U_CFUNC U_EXPORT
-/** This is used to declare a function as a stable public ICU C API*/
+/** Obsolete/same as U_CAPI; was used to declare a function as a stable public ICU C API*/
 #define U_STABLE U_CAPI
-/** This is used to declare a function as a draft public ICU C API  */
+/** Obsolete/same as U_CAPI; was used to declare a function as a draft public ICU C API  */
 #define U_DRAFT  U_CAPI
 /** This is used to declare a function as a deprecated public ICU C API  */
 #define U_DEPRECATED U_CAPI U_ATTRIBUTE_DEPRECATED
-/** This is used to declare a function as an obsolete public ICU C API  */
+/** Obsolete/same as U_CAPI; was used to declare a function as an obsolete public ICU C API  */
 #define U_OBSOLETE U_CAPI
-/** This is used to declare a function as an internal ICU C API  */
+/** Obsolete/same as U_CAPI; was used to declare a function as an internal ICU C API  */
 #define U_INTERNAL U_CAPI
 
+
+// Before ICU 65, function-like, multi-statement ICU macros were just defined as
+// series of statements wrapped in { } blocks and the caller could choose to
+// either treat them as if they were actual functions and end the invocation
+// with a trailing ; creating an empty statement after the block or else omit
+// this trailing ; using the knowledge that the macro would expand to { }.
+//
+// But doing so doesn't work well with macros that look like functions and
+// compiler warnings about empty statements (ICU-20601) and ICU 65 therefore
+// switches to the standard solution of wrapping such macros in do { } while.
+//
+// This will however break existing code that depends on being able to invoke
+// these macros without a trailing ; so to be able to remain compatible with
+// such code the wrapper is itself defined as macros so that it's possible to
+// build ICU 65 and later with the old macro behaviour, like this:
+//
+// export CPPFLAGS='-DUPRV_BLOCK_MACRO_BEGIN="" -DUPRV_BLOCK_MACRO_END=""'
+// runConfigureICU ...
+//
+
+#if (NTDDI_VERSION < NTDDI_WIN10_CO)
+// Microsoft-specific change:
+// In order to avoid having to add #ifdefs everywhere these are used, since these
+// are private macros, we define these to nothing for versions below NTDDI_WIN10_CO
+// for compatibility.
+#define UPRV_BLOCK_MACRO_BEGIN
+#define UPRV_BLOCK_MACRO_END
+#endif // (NTDDI_VERSION < NTDDI_WIN10_CO)
+
+/**
+ * \def UPRV_BLOCK_MACRO_BEGIN
+ * Defined as the "do" keyword by default.
+ * @internal
+ */
+#ifndef UPRV_BLOCK_MACRO_BEGIN
+#define UPRV_BLOCK_MACRO_BEGIN do
+#endif
+
+/**
+ * \def UPRV_BLOCK_MACRO_END
+ * Defined as "while (false)" by default.
+ * @internal
+ */
+#ifndef UPRV_BLOCK_MACRO_END
+#define UPRV_BLOCK_MACRO_END while (false)
+#endif
 
 /*==========================================================================*/
 /* limits for int32_t etc., like in POSIX inttypes.h                        */
@@ -1800,18 +1855,68 @@ typedef unsigned int uint32_t;
 /* Boolean data type                                                        */
 /*==========================================================================*/
 
-/** The ICU boolean type @stable ICU 2.0 */
+/**
+ * The ICU boolean type, a signed-byte integer.
+ * ICU-specific for historical reasons: The C and C++ standards used to not define type bool.
+ * Also provides a fixed type definition, as opposed to
+ * type bool whose details (e.g., sizeof) may vary by compiler and between C and C++.
+ *
+ * @stable ICU 2.0
+ */
 typedef int8_t UBool;
 
+#if (NTDDI_VERSION < NTDDI_WIN10_CO)
+// Microsoft-specific change:
+// ICU previously defined FALSE=0 & TRUE=1 in the public ICU headers, but this was changed
+// in ICU 68, such that they are now deprecated and no longer defined. For versions
+// below NTDDI_WIN10_CO, we set U_DEFINE_FALSE_AND_TRUE to 1 so they will still be defined
+// for compatibility.
+#define U_DEFINE_FALSE_AND_TRUE 1
+#endif // (NTDDI_VERSION < NTDDI_WIN10_CO)
+
+/**
+ * \def U_DEFINE_FALSE_AND_TRUE
+ * Normally turns off defining macros FALSE=0 & TRUE=1 in public ICU headers.
+ * These obsolete macros sometimes break compilation of other code that
+ * defines enum constants or similar with these names.
+ * C++ has long defined bool/false/true.
+ * C99 also added definitions for these, although as macros; see stdbool.h.
+ *
+ * You may transitionally define U_DEFINE_FALSE_AND_TRUE=1 if you need time to migrate code.
+ *
+ * @internal ICU 68
+ */
+#ifdef U_DEFINE_FALSE_AND_TRUE
+    // Use the predefined value.
+#elif defined(U_COMBINED_IMPLEMENTATION) || \
+        defined(U_COMMON_IMPLEMENTATION) || defined(U_I18N_IMPLEMENTATION) || \
+        defined(U_IO_IMPLEMENTATION) || defined(U_LAYOUTEX_IMPLEMENTATION) || \
+        defined(U_TOOLUTIL_IMPLEMENTATION)
+    // Inside ICU: Keep FALSE & TRUE available.
+#   define U_DEFINE_FALSE_AND_TRUE 1
+#else
+    // Outside ICU: Avoid collision with non-macro definitions of FALSE & TRUE.
+#   define U_DEFINE_FALSE_AND_TRUE 0
+#endif
+
+#if U_DEFINE_FALSE_AND_TRUE || defined(U_IN_DOXYGEN)
 #ifndef TRUE
-/** The TRUE value of a UBool @stable ICU 2.0 */
+/**
+ * The TRUE value of a UBool.
+ *
+ * @deprecated ICU 68 Use standard "true" instead.
+ */
 #   define TRUE  1
 #endif
 #ifndef FALSE
-/** The FALSE value of a UBool @stable ICU 2.0 */
+/**
+ * The FALSE value of a UBool.
+ *
+ * @deprecated ICU 68 Use standard "false" instead.
+ */
 #   define FALSE 0
 #endif
-
+#endif  // U_DEFINE_FALSE_AND_TRUE
 
 /*==========================================================================*/
 /* Unicode data types                                                       */
@@ -1915,7 +2020,7 @@ typedef int8_t UBool;
     typedef char16_t UChar;
 #elif defined(UCHAR_TYPE)
     typedef UCHAR_TYPE UChar;
-#elif defined(__cplusplus)
+#elif (U_CPLUSPLUS_VERSION >= 11)
     typedef char16_t UChar;
 #else
     typedef uint16_t UChar;
@@ -2096,7 +2201,7 @@ typedef int32_t UChar32;
  * code point values (0..U+10ffff). They are indicated with negative values instead.
  *
  * For more information see the ICU User Guide Strings chapter
- * (http://userguide.icu-project.org/strings).
+ * (https://unicode-org.github.io/icu/userguide/strings).
  *
  * <em>Usage:</em>
  * ICU coding guidelines for if() statements should be followed when using these macros.
@@ -2116,7 +2221,7 @@ typedef int32_t UChar32;
 /**
  * Is this code point a Unicode noncharacter?
  * @param c 32-bit code point
- * @return TRUE or FALSE
+ * @return true or false
  * @stable ICU 2.4
  */
 #define U_IS_UNICODE_NONCHAR(c) \
@@ -2137,7 +2242,7 @@ typedef int32_t UChar32;
  * and that boundary is tested first for performance.
  *
  * @param c 32-bit code point
- * @return TRUE or FALSE
+ * @return true or false
  * @stable ICU 2.4
  */
 #define U_IS_UNICODE_CHAR(c) \
@@ -2147,7 +2252,7 @@ typedef int32_t UChar32;
 /**
  * Is this code point a BMP code point (U+0000..U+ffff)?
  * @param c 32-bit code point
- * @return TRUE or FALSE
+ * @return true or false
  * @stable ICU 2.8
  */
 #define U_IS_BMP(c) ((uint32_t)(c)<=0xffff)
@@ -2155,7 +2260,7 @@ typedef int32_t UChar32;
 /**
  * Is this code point a supplementary code point (U+10000..U+10ffff)?
  * @param c 32-bit code point
- * @return TRUE or FALSE
+ * @return true or false
  * @stable ICU 2.8
  */
 #define U_IS_SUPPLEMENTARY(c) ((uint32_t)((c)-0x10000)<=0xfffff)
@@ -2163,7 +2268,7 @@ typedef int32_t UChar32;
 /**
  * Is this code point a lead surrogate (U+d800..U+dbff)?
  * @param c 32-bit code point
- * @return TRUE or FALSE
+ * @return true or false
  * @stable ICU 2.4
  */
 #define U_IS_LEAD(c) (((c)&0xfffffc00)==0xd800)
@@ -2171,7 +2276,7 @@ typedef int32_t UChar32;
 /**
  * Is this code point a trail surrogate (U+dc00..U+dfff)?
  * @param c 32-bit code point
- * @return TRUE or FALSE
+ * @return true or false
  * @stable ICU 2.4
  */
 #define U_IS_TRAIL(c) (((c)&0xfffffc00)==0xdc00)
@@ -2179,7 +2284,7 @@ typedef int32_t UChar32;
 /**
  * Is this code point a surrogate (U+d800..U+dfff)?
  * @param c 32-bit code point
- * @return TRUE or FALSE
+ * @return true or false
  * @stable ICU 2.4
  */
 #define U_IS_SURROGATE(c) (((c)&0xfffff800)==0xd800)
@@ -2188,7 +2293,7 @@ typedef int32_t UChar32;
  * Assuming c is a surrogate code point (U_IS_SURROGATE(c)),
  * is it a lead surrogate?
  * @param c 32-bit code point
- * @return TRUE or FALSE
+ * @return true or false
  * @stable ICU 2.4
  */
 #define U_IS_SURROGATE_LEAD(c) (((c)&0x400)==0)
@@ -2197,7 +2302,7 @@ typedef int32_t UChar32;
  * Assuming c is a surrogate code point (U_IS_SURROGATE(c)),
  * is it a trail surrogate?
  * @param c 32-bit code point
- * @return TRUE or FALSE
+ * @return true or false
  * @stable ICU 4.2
  */
 #define U_IS_SURROGATE_TRAIL(c) (((c)&0x400)!=0)
@@ -2233,7 +2338,7 @@ typedef int32_t UChar32;
  * This file defines macros to deal with 8-bit Unicode (UTF-8) code units (bytes) and strings.
  *
  * For more information see utf.h and the ICU User Guide Strings chapter
- * (http://userguide.icu-project.org/strings).
+ * (https://unicode-org.github.io/icu/userguide/strings).
  *
  * <em>Usage:</em>
  * ICU coding guidelines for if() statements should be followed when using these macros.
@@ -2326,48 +2431,48 @@ typedef int32_t UChar32;
  * Function for handling "next code point" with error-checking.
  *
  * This is internal since it is not meant to be called directly by external clients;
- * however it is U_STABLE (not U_INTERNAL) since it is called by public macros in this
+ * however it is called by public macros in this
  * file and thus must remain stable, and should not be hidden when other internal
  * functions are hidden (otherwise public macros would fail to compile).
  * @internal
  */
-U_STABLE UChar32 U_EXPORT2
+U_CAPI UChar32 U_EXPORT2
 utf8_nextCharSafeBody(const uint8_t *s, int32_t *pi, int32_t length, UChar32 c, UBool strict);
 
 /**
  * Function for handling "append code point" with error-checking.
  *
  * This is internal since it is not meant to be called directly by external clients;
- * however it is U_STABLE (not U_INTERNAL) since it is called by public macros in this
+ * however it is called by public macros in this
  * file and thus must remain stable, and should not be hidden when other internal
  * functions are hidden (otherwise public macros would fail to compile).
  * @internal
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 utf8_appendCharSafeBody(uint8_t *s, int32_t i, int32_t length, UChar32 c, UBool *pIsError);
 
 /**
  * Function for handling "previous code point" with error-checking.
  *
  * This is internal since it is not meant to be called directly by external clients;
- * however it is U_STABLE (not U_INTERNAL) since it is called by public macros in this
+ * however it is called by public macros in this
  * file and thus must remain stable, and should not be hidden when other internal
  * functions are hidden (otherwise public macros would fail to compile).
  * @internal
  */
-U_STABLE UChar32 U_EXPORT2
+U_CAPI UChar32 U_EXPORT2
 utf8_prevCharSafeBody(const uint8_t *s, int32_t start, int32_t *pi, UChar32 c, UBool strict);
 
 /**
  * Function for handling "skip backward one code point" with error-checking.
  *
  * This is internal since it is not meant to be called directly by external clients;
- * however it is U_STABLE (not U_INTERNAL) since it is called by public macros in this
+ * however it is called by public macros in this
  * file and thus must remain stable, and should not be hidden when other internal
  * functions are hidden (otherwise public macros would fail to compile).
  * @internal
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
 
 /* single-code point definitions -------------------------------------------- */
@@ -2375,7 +2480,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
 /**
  * Does this code unit (byte) encode a code point by itself (US-ASCII 0..0x7f)?
  * @param c 8-bit code unit (byte)
- * @return TRUE or FALSE
+ * @return true or false
  * @stable ICU 2.4
  */
 #define U8_IS_SINGLE(c) (((c)&0x80)==0)
@@ -2383,7 +2488,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
 /**
  * Is this code unit (byte) a UTF-8 lead byte? (0xC2..0xF4)
  * @param c 8-bit code unit (byte)
- * @return TRUE or FALSE
+ * @return true or false
  * @stable ICU 2.4
  */
 #define U8_IS_LEAD(c) ((uint8_t)((c)-0xc2)<=0x32)
@@ -2392,7 +2497,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
 /**
  * Is this code unit (byte) a UTF-8 trail byte? (0x80..0xBF)
  * @param c 8-bit code unit (byte)
- * @return TRUE or FALSE
+ * @return true or false
  * @stable ICU 2.4
  */
 #define U8_IS_TRAIL(c) ((int8_t)(c)<-0x40)
@@ -2438,11 +2543,11 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U8_GET
  * @stable ICU 2.4
  */
-#define U8_GET_UNSAFE(s, i, c) { \
+#define U8_GET_UNSAFE(s, i, c) UPRV_BLOCK_MACRO_BEGIN { \
     int32_t _u8_get_unsafe_index=(int32_t)(i); \
     U8_SET_CP_START_UNSAFE(s, _u8_get_unsafe_index); \
     U8_NEXT_UNSAFE(s, _u8_get_unsafe_index, c); \
-}
+} UPRV_BLOCK_MACRO_END
 
 /**
  * Get a code point from a string at a random-access offset,
@@ -2465,11 +2570,11 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U8_GET_UNSAFE
  * @stable ICU 2.4
  */
-#define U8_GET(s, start, i, length, c) { \
+#define U8_GET(s, start, i, length, c) UPRV_BLOCK_MACRO_BEGIN { \
     int32_t _u8_get_index=(i); \
     U8_SET_CP_START(s, start, _u8_get_index); \
     U8_NEXT(s, _u8_get_index, length, c); \
-}
+} UPRV_BLOCK_MACRO_END
 
 /**
  * Get a code point from a string at a random-access offset,
@@ -2496,11 +2601,11 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U8_GET
  * @stable ICU 51
  */
-#define U8_GET_OR_FFFD(s, start, i, length, c) { \
+#define U8_GET_OR_FFFD(s, start, i, length, c) UPRV_BLOCK_MACRO_BEGIN { \
     int32_t _u8_get_index=(i); \
     U8_SET_CP_START(s, start, _u8_get_index); \
     U8_NEXT_OR_FFFD(s, _u8_get_index, length, c); \
-}
+} UPRV_BLOCK_MACRO_END
 
 /* definitions with forward iteration --------------------------------------- */
 
@@ -2521,7 +2626,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U8_NEXT
  * @stable ICU 2.4
  */
-#define U8_NEXT_UNSAFE(s, i, c) { \
+#define U8_NEXT_UNSAFE(s, i, c) UPRV_BLOCK_MACRO_BEGIN { \
     (c)=(uint8_t)(s)[(i)++]; \
     if(!U8_IS_SINGLE(c)) { \
         if((c)<0xe0) { \
@@ -2535,7 +2640,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
             (i)+=3; \
         } \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /**
  * Get a code point from a string at a code point boundary offset,
@@ -2639,7 +2744,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
 
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS5)
 /** @internal */
-#define U8_INTERNAL_NEXT_OR_SUB(s, i, length, c, sub) { \
+#define U8_INTERNAL_NEXT_OR_SUB(s, i, length, c, sub) UPRV_BLOCK_MACRO_BEGIN { \
     (c)=(uint8_t)(s)[(i)++]; \
     if(!U8_IS_SINGLE(c)) { \
         uint8_t __t = 0; \
@@ -2665,7 +2770,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
             (c)=(sub);  /* ill-formed*/ \
         } \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS5)
 
 /**
@@ -2682,7 +2787,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @stable ICU 2.4
  */
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS5)
-#define U8_APPEND_UNSAFE(s, i, c) { \
+#define U8_APPEND_UNSAFE(s, i, c) UPRV_BLOCK_MACRO_BEGIN { \
     uint32_t __uc=(c); \
     if(__uc<=0x7f) { \
         (s)[(i)++]=(uint8_t)__uc; \
@@ -2700,7 +2805,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
         } \
         (s)[(i)++]=(uint8_t)((__uc&0x3f)|0x80); \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 #elif (NTDDI_VERSION >= NTDDI_WIN10_RS3)
 #define U8_APPEND_UNSAFE(s, i, c) { \
     if((uint32_t)(c)<=0x7f) { \
@@ -2729,17 +2834,38 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * "Safe" macro, checks for a valid code point.
  * If a non-ASCII code point is written, checks for sufficient space in the string.
  * If the code point is not valid or trail bytes do not fit,
- * then isError is set to TRUE.
+ * then isError is set to true.
  *
  * @param s const uint8_t * string buffer
  * @param i int32_t string offset, must be i<capacity
  * @param capacity int32_t size of the string buffer
  * @param c UChar32 code point to append
- * @param isError output UBool set to TRUE if an error occurs, otherwise not modified
+ * @param isError output UBool set to true if an error occurs, otherwise not modified
  * @see U8_APPEND_UNSAFE
  * @stable ICU 2.4
  */
-#if (NTDDI_VERSION >= NTDDI_WIN10_RS5)
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+#define U8_APPEND(s, i, capacity, c, isError) UPRV_BLOCK_MACRO_BEGIN { \
+    uint32_t __uc=(c); \
+    if(__uc<=0x7f) { \
+        (s)[(i)++]=(uint8_t)__uc; \
+    } else if(__uc<=0x7ff && (i)+1<(capacity)) { \
+        (s)[(i)++]=(uint8_t)((__uc>>6)|0xc0); \
+        (s)[(i)++]=(uint8_t)((__uc&0x3f)|0x80); \
+    } else if((__uc<=0xd7ff || (0xe000<=__uc && __uc<=0xffff)) && (i)+2<(capacity)) { \
+        (s)[(i)++]=(uint8_t)((__uc>>12)|0xe0); \
+        (s)[(i)++]=(uint8_t)(((__uc>>6)&0x3f)|0x80); \
+        (s)[(i)++]=(uint8_t)((__uc&0x3f)|0x80); \
+    } else if(0xffff<__uc && __uc<=0x10ffff && (i)+3<(capacity)) { \
+        (s)[(i)++]=(uint8_t)((__uc>>18)|0xf0); \
+        (s)[(i)++]=(uint8_t)(((__uc>>12)&0x3f)|0x80); \
+        (s)[(i)++]=(uint8_t)(((__uc>>6)&0x3f)|0x80); \
+        (s)[(i)++]=(uint8_t)((__uc&0x3f)|0x80); \
+    } else { \
+        (isError)=true; \
+    } \
+} UPRV_BLOCK_MACRO_END
+#elif (NTDDI_VERSION >= NTDDI_WIN10_RS5)
 #define U8_APPEND(s, i, capacity, c, isError) { \
     uint32_t __uc=(c); \
     if(__uc<=0x7f) { \
@@ -2760,6 +2886,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
         (isError)=TRUE; \
     } \
 }
+
 #elif (NTDDI_VERSION >= NTDDI_WIN10_RS3)
 #define U8_APPEND(s, i, capacity, c, isError) { \
     if((uint32_t)(c)<=0x7f) { \
@@ -2787,9 +2914,9 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U8_FWD_1
  * @stable ICU 2.4
  */
-#define U8_FWD_1_UNSAFE(s, i) { \
+#define U8_FWD_1_UNSAFE(s, i) UPRV_BLOCK_MACRO_BEGIN { \
     (i)+=1+U8_COUNT_TRAIL_BYTES_UNSAFE((s)[i]); \
-}
+} UPRV_BLOCK_MACRO_END
 
 /**
  * Advance the string offset from one code point boundary to the next.
@@ -2804,7 +2931,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U8_FWD_1_UNSAFE
  * @stable ICU 2.4
  */
-#define U8_FWD_1(s, i, length) { \
+#define U8_FWD_1(s, i, length) UPRV_BLOCK_MACRO_BEGIN { \
     uint8_t __b=(s)[(i)++]; \
     if(U8_IS_LEAD(__b) && (i)!=(length)) { \
         uint8_t __t1=(s)[i]; \
@@ -2825,7 +2952,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
             } \
         } \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /**
  * Advance the string offset from one code point boundary to the n-th next one,
@@ -2839,13 +2966,13 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U8_FWD_N
  * @stable ICU 2.4
  */
-#define U8_FWD_N_UNSAFE(s, i, n) { \
+#define U8_FWD_N_UNSAFE(s, i, n) UPRV_BLOCK_MACRO_BEGIN { \
     int32_t __N=(n); \
     while(__N>0) { \
         U8_FWD_1_UNSAFE(s, i); \
         --__N; \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /**
  * Advance the string offset from one code point boundary to the n-th next one,
@@ -2862,13 +2989,13 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U8_FWD_N_UNSAFE
  * @stable ICU 2.4
  */
-#define U8_FWD_N(s, i, length, n) { \
+#define U8_FWD_N(s, i, length, n) UPRV_BLOCK_MACRO_BEGIN { \
     int32_t __N=(n); \
     while(__N>0 && ((i)<(length) || ((length)<0 && (s)[i]!=0))) { \
         U8_FWD_1(s, i, length); \
         --__N; \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /**
  * Adjust a random-access offset to a code point boundary
@@ -2883,9 +3010,9 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U8_SET_CP_START
  * @stable ICU 2.4
  */
-#define U8_SET_CP_START_UNSAFE(s, i) { \
+#define U8_SET_CP_START_UNSAFE(s, i) UPRV_BLOCK_MACRO_BEGIN { \
     while(U8_IS_TRAIL((s)[i])) { --(i); } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /**
  * Adjust a random-access offset to a code point boundary
@@ -2904,11 +3031,11 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U8_TRUNCATE_IF_INCOMPLETE
  * @stable ICU 2.4
  */
-#define U8_SET_CP_START(s, start, i) { \
+#define U8_SET_CP_START(s, start, i) UPRV_BLOCK_MACRO_BEGIN { \
     if(U8_IS_TRAIL((s)[(i)])) { \
         (i)=utf8_back1SafeBody(s, start, (i)); \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 #if (NTDDI_VERSION >= NTDDI_WIN10_VB)
 /**
@@ -2937,7 +3064,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U8_SET_CP_START
  * @stable ICU 61
  */
-#define U8_TRUNCATE_IF_INCOMPLETE(s, start, length) \
+#define U8_TRUNCATE_IF_INCOMPLETE(s, start, length) UPRV_BLOCK_MACRO_BEGIN { \
     if((length)>(start)) { \
         uint8_t __b1=s[(length)-1]; \
         if(U8_IS_SINGLE(__b1)) { \
@@ -2958,7 +3085,8 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
                 } \
             } \
         } \
-    }
+    } \
+} UPRV_BLOCK_MACRO_END
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_VB)
 
 /* definitions with backward iteration -------------------------------------- */
@@ -2982,7 +3110,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U8_PREV
  * @stable ICU 2.4
  */
-#define U8_PREV_UNSAFE(s, i, c) { \
+#define U8_PREV_UNSAFE(s, i, c) UPRV_BLOCK_MACRO_BEGIN { \
     (c)=(uint8_t)(s)[--(i)]; \
     if(U8_IS_TRAIL(c)) { \
         uint8_t __b, __count=1, __shift=6; \
@@ -3002,7 +3130,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
             } \
         } \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /**
  * Move the string offset from one code point boundary to the previous one
@@ -3024,12 +3152,12 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U8_PREV_UNSAFE
  * @stable ICU 2.4
  */
-#define U8_PREV(s, start, i, c) { \
+#define U8_PREV(s, start, i, c) UPRV_BLOCK_MACRO_BEGIN { \
     (c)=(uint8_t)(s)[--(i)]; \
     if(!U8_IS_SINGLE(c)) { \
         (c)=utf8_prevCharSafeBody((const uint8_t *)s, start, &(i), c, -1); \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /**
  * Move the string offset from one code point boundary to the previous one
@@ -3055,12 +3183,12 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U8_PREV
  * @stable ICU 51
  */
-#define U8_PREV_OR_FFFD(s, start, i, c) { \
+#define U8_PREV_OR_FFFD(s, start, i, c) UPRV_BLOCK_MACRO_BEGIN { \
     (c)=(uint8_t)(s)[--(i)]; \
     if(!U8_IS_SINGLE(c)) { \
         (c)=utf8_prevCharSafeBody((const uint8_t *)s, start, &(i), c, -3); \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /**
  * Move the string offset from one code point boundary to the previous one.
@@ -3073,9 +3201,9 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U8_BACK_1
  * @stable ICU 2.4
  */
-#define U8_BACK_1_UNSAFE(s, i) { \
+#define U8_BACK_1_UNSAFE(s, i) UPRV_BLOCK_MACRO_BEGIN { \
     while(U8_IS_TRAIL((s)[--(i)])) {} \
-}
+} UPRV_BLOCK_MACRO_END
 
 /**
  * Move the string offset from one code point boundary to the previous one.
@@ -3089,11 +3217,11 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U8_BACK_1_UNSAFE
  * @stable ICU 2.4
  */
-#define U8_BACK_1(s, start, i) { \
+#define U8_BACK_1(s, start, i) UPRV_BLOCK_MACRO_BEGIN { \
     if(U8_IS_TRAIL((s)[--(i)])) { \
         (i)=utf8_back1SafeBody(s, start, (i)); \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /**
  * Move the string offset from one code point boundary to the n-th one before it,
@@ -3108,13 +3236,13 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U8_BACK_N
  * @stable ICU 2.4
  */
-#define U8_BACK_N_UNSAFE(s, i, n) { \
+#define U8_BACK_N_UNSAFE(s, i, n) UPRV_BLOCK_MACRO_BEGIN { \
     int32_t __N=(n); \
     while(__N>0) { \
         U8_BACK_1_UNSAFE(s, i); \
         --__N; \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /**
  * Move the string offset from one code point boundary to the n-th one before it,
@@ -3130,13 +3258,13 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U8_BACK_N_UNSAFE
  * @stable ICU 2.4
  */
-#define U8_BACK_N(s, start, i, n) { \
+#define U8_BACK_N(s, start, i, n) UPRV_BLOCK_MACRO_BEGIN { \
     int32_t __N=(n); \
     while(__N>0 && (i)>(start)) { \
         U8_BACK_1(s, start, i); \
         --__N; \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /**
  * Adjust a random-access offset to a code point boundary after a code point.
@@ -3151,10 +3279,10 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U8_SET_CP_LIMIT
  * @stable ICU 2.4
  */
-#define U8_SET_CP_LIMIT_UNSAFE(s, i) { \
+#define U8_SET_CP_LIMIT_UNSAFE(s, i) UPRV_BLOCK_MACRO_BEGIN { \
     U8_BACK_1_UNSAFE(s, i); \
     U8_FWD_1_UNSAFE(s, i); \
-}
+} UPRV_BLOCK_MACRO_END
 
 /**
  * Adjust a random-access offset to a code point boundary after a code point.
@@ -3173,12 +3301,12 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U8_SET_CP_LIMIT_UNSAFE
  * @stable ICU 2.4
  */
-#define U8_SET_CP_LIMIT(s, start, i, length) { \
+#define U8_SET_CP_LIMIT(s, start, i, length) UPRV_BLOCK_MACRO_BEGIN { \
     if((start)<(i) && ((i)<(length) || (length)<0)) { \
         U8_BACK_1(s, start, i); \
         U8_FWD_1(s, i, length); \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 #endif
 
@@ -3208,7 +3336,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * This file defines macros to deal with 16-bit Unicode (UTF-16) code units and strings.
  *
  * For more information see utf.h and the ICU User Guide Strings chapter
- * (http://userguide.icu-project.org/strings).
+ * (https://unicode-org.github.io/icu/userguide/strings).
  *
  * <em>Usage:</em>
  * ICU coding guidelines for if() statements should be followed when using these macros.
@@ -3228,7 +3356,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
 /**
  * Does this code unit alone encode a code point (BMP, not a surrogate)?
  * @param c 16-bit code unit
- * @return TRUE or FALSE
+ * @return true or false
  * @stable ICU 2.4
  */
 #define U16_IS_SINGLE(c) !U_IS_SURROGATE(c)
@@ -3236,7 +3364,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
 /**
  * Is this code unit a lead surrogate (U+d800..U+dbff)?
  * @param c 16-bit code unit
- * @return TRUE or FALSE
+ * @return true or false
  * @stable ICU 2.4
  */
 #define U16_IS_LEAD(c) (((c)&0xfffffc00)==0xd800)
@@ -3244,7 +3372,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
 /**
  * Is this code unit a trail surrogate (U+dc00..U+dfff)?
  * @param c 16-bit code unit
- * @return TRUE or FALSE
+ * @return true or false
  * @stable ICU 2.4
  */
 #define U16_IS_TRAIL(c) (((c)&0xfffffc00)==0xdc00)
@@ -3252,7 +3380,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
 /**
  * Is this code unit a surrogate (U+d800..U+dfff)?
  * @param c 16-bit code unit
- * @return TRUE or FALSE
+ * @return true or false
  * @stable ICU 2.4
  */
 #define U16_IS_SURROGATE(c) U_IS_SURROGATE(c)
@@ -3261,7 +3389,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * Assuming c is a surrogate code point (U16_IS_SURROGATE(c)),
  * is it a lead surrogate?
  * @param c 16-bit code unit
- * @return TRUE or FALSE
+ * @return true or false
  * @stable ICU 2.4
  */
 #define U16_IS_SURROGATE_LEAD(c) (((c)&0x400)==0)
@@ -3270,7 +3398,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * Assuming c is a surrogate code point (U16_IS_SURROGATE(c)),
  * is it a trail surrogate?
  * @param c 16-bit code unit
- * @return TRUE or FALSE
+ * @return true or false
  * @stable ICU 4.2
  */
 #define U16_IS_SURROGATE_TRAIL(c) (((c)&0x400)!=0)
@@ -3347,7 +3475,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U16_GET
  * @stable ICU 2.4
  */
-#define U16_GET_UNSAFE(s, i, c) { \
+#define U16_GET_UNSAFE(s, i, c) UPRV_BLOCK_MACRO_BEGIN { \
     (c)=(s)[i]; \
     if(U16_IS_SURROGATE(c)) { \
         if(U16_IS_SURROGATE_LEAD(c)) { \
@@ -3356,7 +3484,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
             (c)=U16_GET_SUPPLEMENTARY((s)[(i)-1], (c)); \
         } \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /**
  * Get a code point from a string at a random-access offset,
@@ -3381,7 +3509,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U16_GET_UNSAFE
  * @stable ICU 2.4
  */
-#define U16_GET(s, start, i, length, c) { \
+#define U16_GET(s, start, i, length, c) UPRV_BLOCK_MACRO_BEGIN { \
     (c)=(s)[i]; \
     if(U16_IS_SURROGATE(c)) { \
         uint16_t __c2; \
@@ -3395,7 +3523,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
             } \
         } \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 #if (NTDDI_VERSION >= NTDDI_WIN10_19H1)
 /**
@@ -3421,7 +3549,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U16_GET_UNSAFE
  * @stable ICU 60
  */
-#define U16_GET_OR_FFFD(s, start, i, length, c) { \
+#define U16_GET_OR_FFFD(s, start, i, length, c) UPRV_BLOCK_MACRO_BEGIN { \
     (c)=(s)[i]; \
     if(U16_IS_SURROGATE(c)) { \
         uint16_t __c2; \
@@ -3439,7 +3567,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
             } \
         } \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_19H1)
 
 /* definitions with forward iteration --------------------------------------- */
@@ -3463,12 +3591,12 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U16_NEXT
  * @stable ICU 2.4
  */
-#define U16_NEXT_UNSAFE(s, i, c) { \
+#define U16_NEXT_UNSAFE(s, i, c) UPRV_BLOCK_MACRO_BEGIN { \
     (c)=(s)[(i)++]; \
     if(U16_IS_LEAD(c)) { \
         (c)=U16_GET_SUPPLEMENTARY((c), (s)[(i)++]); \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /**
  * Get a code point from a string at a code point boundary offset,
@@ -3491,7 +3619,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U16_NEXT_UNSAFE
  * @stable ICU 2.4
  */
-#define U16_NEXT(s, i, length, c) { \
+#define U16_NEXT(s, i, length, c) UPRV_BLOCK_MACRO_BEGIN { \
     (c)=(s)[(i)++]; \
     if(U16_IS_LEAD(c)) { \
         uint16_t __c2; \
@@ -3500,7 +3628,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
             (c)=U16_GET_SUPPLEMENTARY((c), __c2); \
         } \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 #if (NTDDI_VERSION >= NTDDI_WIN10_19H1)
 /**
@@ -3524,7 +3652,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U16_NEXT_UNSAFE
  * @stable ICU 60
  */
-#define U16_NEXT_OR_FFFD(s, i, length, c) { \
+#define U16_NEXT_OR_FFFD(s, i, length, c) UPRV_BLOCK_MACRO_BEGIN { \
     (c)=(s)[(i)++]; \
     if(U16_IS_SURROGATE(c)) { \
         uint16_t __c2; \
@@ -3535,7 +3663,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
             (c)=0xfffd; \
         } \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_19H1)
 
 /**
@@ -3551,14 +3679,14 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U16_APPEND
  * @stable ICU 2.4
  */
-#define U16_APPEND_UNSAFE(s, i, c) { \
+#define U16_APPEND_UNSAFE(s, i, c) UPRV_BLOCK_MACRO_BEGIN { \
     if((uint32_t)(c)<=0xffff) { \
         (s)[(i)++]=(uint16_t)(c); \
     } else { \
         (s)[(i)++]=(uint16_t)(((c)>>10)+0xd7c0); \
         (s)[(i)++]=(uint16_t)(((c)&0x3ff)|0xdc00); \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /**
  * Append a code point to a string, overwriting 1 or 2 code units.
@@ -3567,16 +3695,28 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * "Safe" macro, checks for a valid code point.
  * If a surrogate pair is written, checks for sufficient space in the string.
  * If the code point is not valid or a trail surrogate does not fit,
- * then isError is set to TRUE.
+ * then isError is set to true.
  *
  * @param s const UChar * string buffer
  * @param i string offset, must be i<capacity
  * @param capacity size of the string buffer
  * @param c code point to append
- * @param isError output UBool set to TRUE if an error occurs, otherwise not modified
+ * @param isError output UBool set to true if an error occurs, otherwise not modified
  * @see U16_APPEND_UNSAFE
  * @stable ICU 2.4
  */
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+#define U16_APPEND(s, i, capacity, c, isError) UPRV_BLOCK_MACRO_BEGIN { \
+    if((uint32_t)(c)<=0xffff) { \
+        (s)[(i)++]=(uint16_t)(c); \
+    } else if((uint32_t)(c)<=0x10ffff && (i)+1<(capacity)) { \
+        (s)[(i)++]=(uint16_t)(((c)>>10)+0xd7c0); \
+        (s)[(i)++]=(uint16_t)(((c)&0x3ff)|0xdc00); \
+    } else /* c>0x10ffff or not enough space */ { \
+        (isError)=true; \
+    } \
+} UPRV_BLOCK_MACRO_END
+#else
 #define U16_APPEND(s, i, capacity, c, isError) { \
     if((uint32_t)(c)<=0xffff) { \
         (s)[(i)++]=(uint16_t)(c); \
@@ -3587,6 +3727,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
         (isError)=TRUE; \
     } \
 }
+#endif
 
 /**
  * Advance the string offset from one code point boundary to the next.
@@ -3598,11 +3739,11 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U16_FWD_1
  * @stable ICU 2.4
  */
-#define U16_FWD_1_UNSAFE(s, i) { \
+#define U16_FWD_1_UNSAFE(s, i) UPRV_BLOCK_MACRO_BEGIN { \
     if(U16_IS_LEAD((s)[(i)++])) { \
         ++(i); \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /**
  * Advance the string offset from one code point boundary to the next.
@@ -3617,11 +3758,11 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U16_FWD_1_UNSAFE
  * @stable ICU 2.4
  */
-#define U16_FWD_1(s, i, length) { \
+#define U16_FWD_1(s, i, length) UPRV_BLOCK_MACRO_BEGIN { \
     if(U16_IS_LEAD((s)[(i)++]) && (i)!=(length) && U16_IS_TRAIL((s)[i])) { \
         ++(i); \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /**
  * Advance the string offset from one code point boundary to the n-th next one,
@@ -3635,13 +3776,13 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U16_FWD_N
  * @stable ICU 2.4
  */
-#define U16_FWD_N_UNSAFE(s, i, n) { \
+#define U16_FWD_N_UNSAFE(s, i, n) UPRV_BLOCK_MACRO_BEGIN { \
     int32_t __N=(n); \
     while(__N>0) { \
         U16_FWD_1_UNSAFE(s, i); \
         --__N; \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /**
  * Advance the string offset from one code point boundary to the n-th next one,
@@ -3658,13 +3799,13 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U16_FWD_N_UNSAFE
  * @stable ICU 2.4
  */
-#define U16_FWD_N(s, i, length, n) { \
+#define U16_FWD_N(s, i, length, n) UPRV_BLOCK_MACRO_BEGIN { \
     int32_t __N=(n); \
     while(__N>0 && ((i)<(length) || ((length)<0 && (s)[i]!=0))) { \
         U16_FWD_1(s, i, length); \
         --__N; \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /**
  * Adjust a random-access offset to a code point boundary
@@ -3679,11 +3820,11 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U16_SET_CP_START
  * @stable ICU 2.4
  */
-#define U16_SET_CP_START_UNSAFE(s, i) { \
+#define U16_SET_CP_START_UNSAFE(s, i) UPRV_BLOCK_MACRO_BEGIN { \
     if(U16_IS_TRAIL((s)[i])) { \
         --(i); \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /**
  * Adjust a random-access offset to a code point boundary
@@ -3699,11 +3840,11 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U16_SET_CP_START_UNSAFE
  * @stable ICU 2.4
  */
-#define U16_SET_CP_START(s, start, i) { \
+#define U16_SET_CP_START(s, start, i) UPRV_BLOCK_MACRO_BEGIN { \
     if(U16_IS_TRAIL((s)[i]) && (i)>(start) && U16_IS_LEAD((s)[(i)-1])) { \
         --(i); \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /* definitions with backward iteration -------------------------------------- */
 
@@ -3727,12 +3868,12 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U16_PREV
  * @stable ICU 2.4
  */
-#define U16_PREV_UNSAFE(s, i, c) { \
+#define U16_PREV_UNSAFE(s, i, c) UPRV_BLOCK_MACRO_BEGIN { \
     (c)=(s)[--(i)]; \
     if(U16_IS_TRAIL(c)) { \
         (c)=U16_GET_SUPPLEMENTARY((s)[--(i)], (c)); \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /**
  * Move the string offset from one code point boundary to the previous one
@@ -3754,7 +3895,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U16_PREV_UNSAFE
  * @stable ICU 2.4
  */
-#define U16_PREV(s, start, i, c) { \
+#define U16_PREV(s, start, i, c) UPRV_BLOCK_MACRO_BEGIN { \
     (c)=(s)[--(i)]; \
     if(U16_IS_TRAIL(c)) { \
         uint16_t __c2; \
@@ -3763,7 +3904,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
             (c)=U16_GET_SUPPLEMENTARY(__c2, (c)); \
         } \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 #if (NTDDI_VERSION >= NTDDI_WIN10_19H1)
 /**
@@ -3786,7 +3927,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U16_PREV_UNSAFE
  * @stable ICU 60
  */
-#define U16_PREV_OR_FFFD(s, start, i, c) { \
+#define U16_PREV_OR_FFFD(s, start, i, c) UPRV_BLOCK_MACRO_BEGIN { \
     (c)=(s)[--(i)]; \
     if(U16_IS_SURROGATE(c)) { \
         uint16_t __c2; \
@@ -3797,7 +3938,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
             (c)=0xfffd; \
         } \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_19H1)
 
 /**
@@ -3811,11 +3952,11 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U16_BACK_1
  * @stable ICU 2.4
  */
-#define U16_BACK_1_UNSAFE(s, i) { \
+#define U16_BACK_1_UNSAFE(s, i) UPRV_BLOCK_MACRO_BEGIN { \
     if(U16_IS_TRAIL((s)[--(i)])) { \
         --(i); \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /**
  * Move the string offset from one code point boundary to the previous one.
@@ -3829,11 +3970,11 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U16_BACK_1_UNSAFE
  * @stable ICU 2.4
  */
-#define U16_BACK_1(s, start, i) { \
+#define U16_BACK_1(s, start, i) UPRV_BLOCK_MACRO_BEGIN { \
     if(U16_IS_TRAIL((s)[--(i)]) && (i)>(start) && U16_IS_LEAD((s)[(i)-1])) { \
         --(i); \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /**
  * Move the string offset from one code point boundary to the n-th one before it,
@@ -3848,13 +3989,13 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U16_BACK_N
  * @stable ICU 2.4
  */
-#define U16_BACK_N_UNSAFE(s, i, n) { \
+#define U16_BACK_N_UNSAFE(s, i, n) UPRV_BLOCK_MACRO_BEGIN { \
     int32_t __N=(n); \
     while(__N>0) { \
         U16_BACK_1_UNSAFE(s, i); \
         --__N; \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /**
  * Move the string offset from one code point boundary to the n-th one before it,
@@ -3870,13 +4011,13 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U16_BACK_N_UNSAFE
  * @stable ICU 2.4
  */
-#define U16_BACK_N(s, start, i, n) { \
+#define U16_BACK_N(s, start, i, n) UPRV_BLOCK_MACRO_BEGIN { \
     int32_t __N=(n); \
     while(__N>0 && (i)>(start)) { \
         U16_BACK_1(s, start, i); \
         --__N; \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /**
  * Adjust a random-access offset to a code point boundary after a code point.
@@ -3891,11 +4032,11 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U16_SET_CP_LIMIT
  * @stable ICU 2.4
  */
-#define U16_SET_CP_LIMIT_UNSAFE(s, i) { \
+#define U16_SET_CP_LIMIT_UNSAFE(s, i) UPRV_BLOCK_MACRO_BEGIN { \
     if(U16_IS_LEAD((s)[(i)-1])) { \
         ++(i); \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /**
  * Adjust a random-access offset to a code point boundary after a code point.
@@ -3914,11 +4055,11 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * @see U16_SET_CP_LIMIT_UNSAFE
  * @stable ICU 2.4
  */
-#define U16_SET_CP_LIMIT(s, start, i, length) { \
+#define U16_SET_CP_LIMIT(s, start, i, length) UPRV_BLOCK_MACRO_BEGIN { \
     if((start)<(i) && ((i)<(length) || (length)<0) && U16_IS_LEAD((s)[(i)-1]) && U16_IS_TRAIL((s)[i])) { \
         ++(i); \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 #endif
 
@@ -3944,9 +4085,6 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
 /**
  * \file
  * \brief C API: Deprecated macros for Unicode string handling
- */
-
-/**
  *
  * The macros in utf_old.h are all deprecated and their use discouraged.
  * Some of the design principles behind the set of UTF macros
@@ -4037,7 +4175,7 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  * Where such a distinction is useful, there are two versions of the macros, "unsafe" and "safe"
  * ones with ..._UNSAFE and ..._SAFE suffixes. The unsafe macros are fast but may cause
  * program failures if the strings are not well-formed. The safe macros have an additional, boolean
- * parameter "strict". If strict is FALSE, then only illegal sequences are detected.
+ * parameter "strict". If strict is false, then only illegal sequences are detected.
  * Otherwise, irregular sequences and non-characters are detected as well (like single surrogates).
  * Safe macros return special error code points for illegal/irregular sequences:
  * Typically, U+ffff, or values that would result in a code unit sequence of the same length
@@ -4064,11 +4202,12 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
  *
  * <hr>
  *
- * @deprecated ICU 2.4. Use the macros in utf.h, utf16.h, utf8.h instead.
+ * Deprecated ICU 2.4. Use the macros in utf.h, utf16.h, utf8.h instead.
  */
 
 #ifndef __UTF_OLD_H__
 #define __UTF_OLD_H__
+
 
 /**
  * \def U_HIDE_OBSOLETE_UTF_OLD_H
@@ -4086,7 +4225,6 @@ utf8_back1SafeBody(const uint8_t *s, int32_t start, int32_t i);
 #endif
 
 #if !defined(U_HIDE_DEPRECATED_API) && !U_HIDE_OBSOLETE_UTF_OLD_H
-
 
 /* Formerly utf.h, part 1 --------------------------------------------------- */
 
@@ -4106,7 +4244,7 @@ typedef int32_t UTextOffset;
 
 /**
  * The default choice for general Unicode string macros is to use the ..._SAFE macro implementations
- * with strict=FALSE.
+ * with strict=false.
  *
  * @deprecated ICU 2.4. Obsolete, see utf_old.h.
  */
@@ -4287,21 +4425,21 @@ U_CFUNC U_IMPORT const uint8_t utf8_countTrailBytes[];    /* U_IMPORT2? */ /*U_I
 #define UTF8_ARRAY_SIZE(size) ((5*(size))/2)
 
 /** @deprecated ICU 2.4. Renamed to U8_GET_UNSAFE, see utf_old.h. */
-#define UTF8_GET_CHAR_UNSAFE(s, i, c) { \
+#define UTF8_GET_CHAR_UNSAFE(s, i, c) UPRV_BLOCK_MACRO_BEGIN { \
     int32_t _utf8_get_char_unsafe_index=(int32_t)(i); \
     UTF8_SET_CHAR_START_UNSAFE(s, _utf8_get_char_unsafe_index); \
     UTF8_NEXT_CHAR_UNSAFE(s, _utf8_get_char_unsafe_index, c); \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Use U8_GET instead, see utf_old.h. */
-#define UTF8_GET_CHAR_SAFE(s, start, i, length, c, strict) { \
+#define UTF8_GET_CHAR_SAFE(s, start, i, length, c, strict) UPRV_BLOCK_MACRO_BEGIN { \
     int32_t _utf8_get_char_safe_index=(int32_t)(i); \
     UTF8_SET_CHAR_START_SAFE(s, start, _utf8_get_char_safe_index); \
     UTF8_NEXT_CHAR_SAFE(s, _utf8_get_char_safe_index, length, c, strict); \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Renamed to U8_NEXT_UNSAFE, see utf_old.h. */
-#define UTF8_NEXT_CHAR_UNSAFE(s, i, c) { \
+#define UTF8_NEXT_CHAR_UNSAFE(s, i, c) UPRV_BLOCK_MACRO_BEGIN { \
     (c)=(s)[(i)++]; \
     if((uint8_t)((c)-0xc0)<0x35) { \
         uint8_t __count=UTF8_COUNT_TRAIL_BYTES(c); \
@@ -4318,10 +4456,10 @@ U_CFUNC U_IMPORT const uint8_t utf8_countTrailBytes[];    /* U_IMPORT2? */ /*U_I
             break; \
         } \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Renamed to U8_APPEND_UNSAFE, see utf_old.h. */
-#define UTF8_APPEND_CHAR_UNSAFE(s, i, c) { \
+#define UTF8_APPEND_CHAR_UNSAFE(s, i, c) UPRV_BLOCK_MACRO_BEGIN { \
     if((uint32_t)(c)<=0x7f) { \
         (s)[(i)++]=(uint8_t)(c); \
     } else { \
@@ -4338,29 +4476,29 @@ U_CFUNC U_IMPORT const uint8_t utf8_countTrailBytes[];    /* U_IMPORT2? */ /*U_I
         } \
         (s)[(i)++]=(uint8_t)(((c)&0x3f)|0x80); \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Renamed to U8_FWD_1_UNSAFE, see utf_old.h. */
-#define UTF8_FWD_1_UNSAFE(s, i) { \
+#define UTF8_FWD_1_UNSAFE(s, i) UPRV_BLOCK_MACRO_BEGIN { \
     (i)+=1+UTF8_COUNT_TRAIL_BYTES((s)[i]); \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Renamed to U8_FWD_N_UNSAFE, see utf_old.h. */
-#define UTF8_FWD_N_UNSAFE(s, i, n) { \
+#define UTF8_FWD_N_UNSAFE(s, i, n) UPRV_BLOCK_MACRO_BEGIN { \
     int32_t __N=(n); \
     while(__N>0) { \
         UTF8_FWD_1_UNSAFE(s, i); \
         --__N; \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Renamed to U8_SET_CP_START_UNSAFE, see utf_old.h. */
-#define UTF8_SET_CHAR_START_UNSAFE(s, i) { \
+#define UTF8_SET_CHAR_START_UNSAFE(s, i) UPRV_BLOCK_MACRO_BEGIN { \
     while(UTF8_IS_TRAIL((s)[i])) { --(i); } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Use U8_NEXT instead, see utf_old.h. */
-#define UTF8_NEXT_CHAR_SAFE(s, i, length, c, strict) { \
+#define UTF8_NEXT_CHAR_SAFE(s, i, length, c, strict) UPRV_BLOCK_MACRO_BEGIN { \
     (c)=(s)[(i)++]; \
     if((c)>=0x80) { \
         if(UTF8_IS_LEAD(c)) { \
@@ -4369,16 +4507,16 @@ U_CFUNC U_IMPORT const uint8_t utf8_countTrailBytes[];    /* U_IMPORT2? */ /*U_I
             (c)=UTF8_ERROR_VALUE_1; \
         } \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Use U8_APPEND instead, see utf_old.h. */
-#define UTF8_APPEND_CHAR_SAFE(s, i, length, c)  { \
+#define UTF8_APPEND_CHAR_SAFE(s, i, length, c)  UPRV_BLOCK_MACRO_BEGIN { \
     if((uint32_t)(c)<=0x7f) { \
         (s)[(i)++]=(uint8_t)(c); \
     } else { \
         (i)=utf8_appendCharSafeBody(s, (int32_t)(i), (int32_t)(length), c, NULL); \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Renamed to U8_FWD_1, see utf_old.h. */
 #define UTF8_FWD_1_SAFE(s, i, length) U8_FWD_1(s, i, length)
@@ -4390,7 +4528,7 @@ U_CFUNC U_IMPORT const uint8_t utf8_countTrailBytes[];    /* U_IMPORT2? */ /*U_I
 #define UTF8_SET_CHAR_START_SAFE(s, start, i) U8_SET_CP_START(s, start, i)
 
 /** @deprecated ICU 2.4. Renamed to U8_PREV_UNSAFE, see utf_old.h. */
-#define UTF8_PREV_CHAR_UNSAFE(s, i, c) { \
+#define UTF8_PREV_CHAR_UNSAFE(s, i, c) UPRV_BLOCK_MACRO_BEGIN { \
     (c)=(s)[--(i)]; \
     if(UTF8_IS_TRAIL(c)) { \
         uint8_t __b, __count=1, __shift=6; \
@@ -4410,30 +4548,30 @@ U_CFUNC U_IMPORT const uint8_t utf8_countTrailBytes[];    /* U_IMPORT2? */ /*U_I
             } \
         } \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Renamed to U8_BACK_1_UNSAFE, see utf_old.h. */
-#define UTF8_BACK_1_UNSAFE(s, i) { \
+#define UTF8_BACK_1_UNSAFE(s, i) UPRV_BLOCK_MACRO_BEGIN { \
     while(UTF8_IS_TRAIL((s)[--(i)])) {} \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Renamed to U8_BACK_N_UNSAFE, see utf_old.h. */
-#define UTF8_BACK_N_UNSAFE(s, i, n) { \
+#define UTF8_BACK_N_UNSAFE(s, i, n) UPRV_BLOCK_MACRO_BEGIN { \
     int32_t __N=(n); \
     while(__N>0) { \
         UTF8_BACK_1_UNSAFE(s, i); \
         --__N; \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Renamed to U8_SET_CP_LIMIT_UNSAFE, see utf_old.h. */
-#define UTF8_SET_CHAR_LIMIT_UNSAFE(s, i) { \
+#define UTF8_SET_CHAR_LIMIT_UNSAFE(s, i) UPRV_BLOCK_MACRO_BEGIN { \
     UTF8_BACK_1_UNSAFE(s, i); \
     UTF8_FWD_1_UNSAFE(s, i); \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Use U8_PREV instead, see utf_old.h. */
-#define UTF8_PREV_CHAR_SAFE(s, start, i, c, strict) { \
+#define UTF8_PREV_CHAR_SAFE(s, start, i, c, strict) UPRV_BLOCK_MACRO_BEGIN { \
     (c)=(s)[--(i)]; \
     if((c)>=0x80) { \
         if((c)<=0xbf) { \
@@ -4442,7 +4580,7 @@ U_CFUNC U_IMPORT const uint8_t utf8_countTrailBytes[];    /* U_IMPORT2? */ /*U_I
             (c)=UTF8_ERROR_VALUE_1; \
         } \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Renamed to U8_BACK_1, see utf_old.h. */
 #define UTF8_BACK_1_SAFE(s, start, i) U8_BACK_1(s, start, i)
@@ -4515,7 +4653,7 @@ U_CFUNC U_IMPORT const uint8_t utf8_countTrailBytes[];    /* U_IMPORT2? */ /*U_I
  * UTF16_PREV_CHAR[_UNSAFE]() is more efficient for that.
  * @deprecated ICU 2.4. Renamed to U16_GET_UNSAFE, see utf_old.h.
  */
-#define UTF16_GET_CHAR_UNSAFE(s, i, c) { \
+#define UTF16_GET_CHAR_UNSAFE(s, i, c) UPRV_BLOCK_MACRO_BEGIN { \
     (c)=(s)[i]; \
     if(UTF_IS_SURROGATE(c)) { \
         if(UTF_IS_SURROGATE_FIRST(c)) { \
@@ -4524,10 +4662,10 @@ U_CFUNC U_IMPORT const uint8_t utf8_countTrailBytes[];    /* U_IMPORT2? */ /*U_I
             (c)=UTF16_GET_PAIR_VALUE((s)[(i)-1], (c)); \
         } \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Use U16_GET instead, see utf_old.h. */
-#define UTF16_GET_CHAR_SAFE(s, start, i, length, c, strict) { \
+#define UTF16_GET_CHAR_SAFE(s, start, i, length, c, strict) UPRV_BLOCK_MACRO_BEGIN { \
     (c)=(s)[i]; \
     if(UTF_IS_SURROGATE(c)) { \
         uint16_t __c2; \
@@ -4551,51 +4689,51 @@ U_CFUNC U_IMPORT const uint8_t utf8_countTrailBytes[];    /* U_IMPORT2? */ /*U_I
     } else if((strict) && !UTF_IS_UNICODE_CHAR(c)) { \
         (c)=UTF_ERROR_VALUE; \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Renamed to U16_NEXT_UNSAFE, see utf_old.h. */
-#define UTF16_NEXT_CHAR_UNSAFE(s, i, c) { \
+#define UTF16_NEXT_CHAR_UNSAFE(s, i, c) UPRV_BLOCK_MACRO_BEGIN { \
     (c)=(s)[(i)++]; \
     if(UTF_IS_FIRST_SURROGATE(c)) { \
         (c)=UTF16_GET_PAIR_VALUE((c), (s)[(i)++]); \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Renamed to U16_APPEND_UNSAFE, see utf_old.h. */
-#define UTF16_APPEND_CHAR_UNSAFE(s, i, c) { \
+#define UTF16_APPEND_CHAR_UNSAFE(s, i, c) UPRV_BLOCK_MACRO_BEGIN { \
     if((uint32_t)(c)<=0xffff) { \
         (s)[(i)++]=(uint16_t)(c); \
     } else { \
         (s)[(i)++]=(uint16_t)(((c)>>10)+0xd7c0); \
         (s)[(i)++]=(uint16_t)(((c)&0x3ff)|0xdc00); \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Renamed to U16_FWD_1_UNSAFE, see utf_old.h. */
-#define UTF16_FWD_1_UNSAFE(s, i) { \
+#define UTF16_FWD_1_UNSAFE(s, i) UPRV_BLOCK_MACRO_BEGIN { \
     if(UTF_IS_FIRST_SURROGATE((s)[(i)++])) { \
         ++(i); \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Renamed to U16_FWD_N_UNSAFE, see utf_old.h. */
-#define UTF16_FWD_N_UNSAFE(s, i, n) { \
+#define UTF16_FWD_N_UNSAFE(s, i, n) UPRV_BLOCK_MACRO_BEGIN { \
     int32_t __N=(n); \
     while(__N>0) { \
         UTF16_FWD_1_UNSAFE(s, i); \
         --__N; \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Renamed to U16_SET_CP_START_UNSAFE, see utf_old.h. */
-#define UTF16_SET_CHAR_START_UNSAFE(s, i) { \
+#define UTF16_SET_CHAR_START_UNSAFE(s, i) UPRV_BLOCK_MACRO_BEGIN { \
     if(UTF_IS_SECOND_SURROGATE((s)[i])) { \
         --(i); \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Use U16_NEXT instead, see utf_old.h. */
-#define UTF16_NEXT_CHAR_SAFE(s, i, length, c, strict) { \
+#define UTF16_NEXT_CHAR_SAFE(s, i, length, c, strict) UPRV_BLOCK_MACRO_BEGIN { \
     (c)=(s)[(i)++]; \
     if(UTF_IS_FIRST_SURROGATE(c)) { \
         uint16_t __c2; \
@@ -4611,10 +4749,10 @@ U_CFUNC U_IMPORT const uint8_t utf8_countTrailBytes[];    /* U_IMPORT2? */ /*U_I
         /* unmatched second surrogate or other non-character */ \
         (c)=UTF_ERROR_VALUE; \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Use U16_APPEND instead, see utf_old.h. */
-#define UTF16_APPEND_CHAR_SAFE(s, i, length, c) { \
+#define UTF16_APPEND_CHAR_SAFE(s, i, length, c) UPRV_BLOCK_MACRO_BEGIN { \
     if((uint32_t)(c)<=0xffff) { \
         (s)[(i)++]=(uint16_t)(c); \
     } else if((uint32_t)(c)<=0x10ffff) { \
@@ -4627,7 +4765,7 @@ U_CFUNC U_IMPORT const uint8_t utf8_countTrailBytes[];    /* U_IMPORT2? */ /*U_I
     } else /* c>0x10ffff, write error value */ { \
         (s)[(i)++]=UTF_ERROR_VALUE; \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Renamed to U16_FWD_1, see utf_old.h. */
 #define UTF16_FWD_1_SAFE(s, i, length) U16_FWD_1(s, i, length)
@@ -4639,38 +4777,38 @@ U_CFUNC U_IMPORT const uint8_t utf8_countTrailBytes[];    /* U_IMPORT2? */ /*U_I
 #define UTF16_SET_CHAR_START_SAFE(s, start, i) U16_SET_CP_START(s, start, i)
 
 /** @deprecated ICU 2.4. Renamed to U16_PREV_UNSAFE, see utf_old.h. */
-#define UTF16_PREV_CHAR_UNSAFE(s, i, c) { \
+#define UTF16_PREV_CHAR_UNSAFE(s, i, c) UPRV_BLOCK_MACRO_BEGIN { \
     (c)=(s)[--(i)]; \
     if(UTF_IS_SECOND_SURROGATE(c)) { \
         (c)=UTF16_GET_PAIR_VALUE((s)[--(i)], (c)); \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Renamed to U16_BACK_1_UNSAFE, see utf_old.h. */
-#define UTF16_BACK_1_UNSAFE(s, i) { \
+#define UTF16_BACK_1_UNSAFE(s, i) UPRV_BLOCK_MACRO_BEGIN { \
     if(UTF_IS_SECOND_SURROGATE((s)[--(i)])) { \
         --(i); \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Renamed to U16_BACK_N_UNSAFE, see utf_old.h. */
-#define UTF16_BACK_N_UNSAFE(s, i, n) { \
+#define UTF16_BACK_N_UNSAFE(s, i, n) UPRV_BLOCK_MACRO_BEGIN { \
     int32_t __N=(n); \
     while(__N>0) { \
         UTF16_BACK_1_UNSAFE(s, i); \
         --__N; \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Renamed to U16_SET_CP_LIMIT_UNSAFE, see utf_old.h. */
-#define UTF16_SET_CHAR_LIMIT_UNSAFE(s, i) { \
+#define UTF16_SET_CHAR_LIMIT_UNSAFE(s, i) UPRV_BLOCK_MACRO_BEGIN { \
     if(UTF_IS_FIRST_SURROGATE((s)[(i)-1])) { \
         ++(i); \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Use U16_PREV instead, see utf_old.h. */
-#define UTF16_PREV_CHAR_SAFE(s, start, i, c, strict) { \
+#define UTF16_PREV_CHAR_SAFE(s, start, i, c, strict) UPRV_BLOCK_MACRO_BEGIN { \
     (c)=(s)[--(i)]; \
     if(UTF_IS_SECOND_SURROGATE(c)) { \
         uint16_t __c2; \
@@ -4686,7 +4824,7 @@ U_CFUNC U_IMPORT const uint8_t utf8_countTrailBytes[];    /* U_IMPORT2? */ /*U_I
         /* unmatched first surrogate or other non-character */ \
         (c)=UTF_ERROR_VALUE; \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Renamed to U16_BACK_1, see utf_old.h. */
 #define UTF16_BACK_1_SAFE(s, start, i) U16_BACK_1(s, start, i)
@@ -4752,122 +4890,122 @@ U_CFUNC U_IMPORT const uint8_t utf8_countTrailBytes[];    /* U_IMPORT2? */ /*U_I
 #define UTF32_ARRAY_SIZE(size) (size)
 
 /** @deprecated ICU 2.4. Obsolete, see utf_old.h. */
-#define UTF32_GET_CHAR_UNSAFE(s, i, c) { \
+#define UTF32_GET_CHAR_UNSAFE(s, i, c) UPRV_BLOCK_MACRO_BEGIN { \
     (c)=(s)[i]; \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Obsolete, see utf_old.h. */
-#define UTF32_GET_CHAR_SAFE(s, start, i, length, c, strict) { \
+#define UTF32_GET_CHAR_SAFE(s, start, i, length, c, strict) UPRV_BLOCK_MACRO_BEGIN { \
     (c)=(s)[i]; \
     if(!UTF32_IS_SAFE(c, strict)) { \
         (c)=UTF_ERROR_VALUE; \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /* definitions with forward iteration --------------------------------------- */
 
 /** @deprecated ICU 2.4. Obsolete, see utf_old.h. */
-#define UTF32_NEXT_CHAR_UNSAFE(s, i, c) { \
+#define UTF32_NEXT_CHAR_UNSAFE(s, i, c) UPRV_BLOCK_MACRO_BEGIN { \
     (c)=(s)[(i)++]; \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Obsolete, see utf_old.h. */
-#define UTF32_APPEND_CHAR_UNSAFE(s, i, c) { \
+#define UTF32_APPEND_CHAR_UNSAFE(s, i, c) UPRV_BLOCK_MACRO_BEGIN { \
     (s)[(i)++]=(c); \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Obsolete, see utf_old.h. */
-#define UTF32_FWD_1_UNSAFE(s, i) { \
+#define UTF32_FWD_1_UNSAFE(s, i) UPRV_BLOCK_MACRO_BEGIN { \
     ++(i); \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Obsolete, see utf_old.h. */
-#define UTF32_FWD_N_UNSAFE(s, i, n) { \
+#define UTF32_FWD_N_UNSAFE(s, i, n) UPRV_BLOCK_MACRO_BEGIN { \
     (i)+=(n); \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Obsolete, see utf_old.h. */
-#define UTF32_SET_CHAR_START_UNSAFE(s, i) { \
-}
+#define UTF32_SET_CHAR_START_UNSAFE(s, i) UPRV_BLOCK_MACRO_BEGIN { \
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Obsolete, see utf_old.h. */
-#define UTF32_NEXT_CHAR_SAFE(s, i, length, c, strict) { \
+#define UTF32_NEXT_CHAR_SAFE(s, i, length, c, strict) UPRV_BLOCK_MACRO_BEGIN { \
     (c)=(s)[(i)++]; \
     if(!UTF32_IS_SAFE(c, strict)) { \
         (c)=UTF_ERROR_VALUE; \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Obsolete, see utf_old.h. */
-#define UTF32_APPEND_CHAR_SAFE(s, i, length, c) { \
+#define UTF32_APPEND_CHAR_SAFE(s, i, length, c) UPRV_BLOCK_MACRO_BEGIN { \
     if((uint32_t)(c)<=0x10ffff) { \
         (s)[(i)++]=(c); \
     } else /* c>0x10ffff, write 0xfffd */ { \
         (s)[(i)++]=0xfffd; \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Obsolete, see utf_old.h. */
-#define UTF32_FWD_1_SAFE(s, i, length) { \
+#define UTF32_FWD_1_SAFE(s, i, length) UPRV_BLOCK_MACRO_BEGIN { \
     ++(i); \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Obsolete, see utf_old.h. */
-#define UTF32_FWD_N_SAFE(s, i, length, n) { \
+#define UTF32_FWD_N_SAFE(s, i, length, n) UPRV_BLOCK_MACRO_BEGIN { \
     if(((i)+=(n))>(length)) { \
         (i)=(length); \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Obsolete, see utf_old.h. */
-#define UTF32_SET_CHAR_START_SAFE(s, start, i) { \
-}
+#define UTF32_SET_CHAR_START_SAFE(s, start, i) UPRV_BLOCK_MACRO_BEGIN { \
+} UPRV_BLOCK_MACRO_END
 
 /* definitions with backward iteration -------------------------------------- */
 
 /** @deprecated ICU 2.4. Obsolete, see utf_old.h. */
-#define UTF32_PREV_CHAR_UNSAFE(s, i, c) { \
+#define UTF32_PREV_CHAR_UNSAFE(s, i, c) UPRV_BLOCK_MACRO_BEGIN { \
     (c)=(s)[--(i)]; \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Obsolete, see utf_old.h. */
-#define UTF32_BACK_1_UNSAFE(s, i) { \
+#define UTF32_BACK_1_UNSAFE(s, i) UPRV_BLOCK_MACRO_BEGIN { \
     --(i); \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Obsolete, see utf_old.h. */
-#define UTF32_BACK_N_UNSAFE(s, i, n) { \
+#define UTF32_BACK_N_UNSAFE(s, i, n) UPRV_BLOCK_MACRO_BEGIN { \
     (i)-=(n); \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Obsolete, see utf_old.h. */
-#define UTF32_SET_CHAR_LIMIT_UNSAFE(s, i) { \
-}
+#define UTF32_SET_CHAR_LIMIT_UNSAFE(s, i) UPRV_BLOCK_MACRO_BEGIN { \
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Obsolete, see utf_old.h. */
-#define UTF32_PREV_CHAR_SAFE(s, start, i, c, strict) { \
+#define UTF32_PREV_CHAR_SAFE(s, start, i, c, strict) UPRV_BLOCK_MACRO_BEGIN { \
     (c)=(s)[--(i)]; \
     if(!UTF32_IS_SAFE(c, strict)) { \
         (c)=UTF_ERROR_VALUE; \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Obsolete, see utf_old.h. */
-#define UTF32_BACK_1_SAFE(s, start, i) { \
+#define UTF32_BACK_1_SAFE(s, start, i) UPRV_BLOCK_MACRO_BEGIN { \
     --(i); \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Obsolete, see utf_old.h. */
-#define UTF32_BACK_N_SAFE(s, start, i, n) { \
+#define UTF32_BACK_N_SAFE(s, start, i, n) UPRV_BLOCK_MACRO_BEGIN { \
     (i)-=(n); \
     if((i)<(start)) { \
         (i)=(start); \
     } \
-}
+} UPRV_BLOCK_MACRO_END
 
 /** @deprecated ICU 2.4. Obsolete, see utf_old.h. */
-#define UTF32_SET_CHAR_LIMIT_SAFE(s, i, length) { \
-}
+#define UTF32_SET_CHAR_LIMIT_SAFE(s, i, length) UPRV_BLOCK_MACRO_BEGIN { \
+} UPRV_BLOCK_MACRO_END
 
 /* Formerly utf.h, part 2 --------------------------------------------------- */
 
@@ -5200,7 +5338,7 @@ typedef uint8_t UVersionInfo[U_MAX_VERSION_LENGTH];
  *                      values of up to 255 each.
  * @stable ICU 2.4
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 u_versionFromString(UVersionInfo versionArray, const char *versionString);
 
 /**
@@ -5214,7 +5352,7 @@ u_versionFromString(UVersionInfo versionArray, const char *versionString);
  *                      fields with values of up to 255 each.
  * @stable ICU 4.2
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 u_versionFromUString(UVersionInfo versionArray, const UChar *versionString);
 
 
@@ -5230,7 +5368,7 @@ u_versionFromUString(UVersionInfo versionArray, const UChar *versionString);
  *                      The buffer size must be at least U_MAX_VERSION_STRING_LENGTH.
  * @stable ICU 2.4
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 u_versionToString(const UVersionInfo versionArray, char *versionString);
 
 /**
@@ -5241,7 +5379,7 @@ u_versionToString(const UVersionInfo versionArray, char *versionString);
  * @param versionArray the version # information, the result will be filled in
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 u_getVersion(UVersionInfo versionArray);
 #endif
 
@@ -5537,17 +5675,31 @@ typedef double UDate;
 /*===========================================================================*/
 
 /**
- * Error code to replace exception handling, so that the code is compatible with all C++ compilers,
- * and to use the same mechanism for C and C++.
+ * Standard ICU4C error code type, a substitute for exceptions.
  *
- * \par
- * ICU functions that take a reference (C++) or a pointer (C) to a UErrorCode
- * first test if(U_FAILURE(errorCode)) { return immediately; }
+ * Initialize the UErrorCode with U_ZERO_ERROR, and check for success or
+ * failure using U_SUCCESS() or U_FAILURE():
+ *
+ *     UErrorCode errorCode = U_ZERO_ERROR;
+ *     // call ICU API that needs an error code parameter.
+ *     if (U_FAILURE(errorCode)) {
+ *         // An error occurred. Handle it here.
+ *     }
+ *
+ * C++ code should use icu::ErrorCode, available in unicode/errorcode.h, or a
+ * suitable subclass.
+ *
+ * For more information, see:
+ * http://icu-project.org/userguide/conventions
+ *
+ * Note: By convention, ICU functions that take a reference (C++) or a pointer
+ * (C) to a UErrorCode first test:
+ *
+ *     if (U_FAILURE(errorCode)) { return immediately; }
+ *
  * so that in a chain of such functions the first one that sets an error code
  * causes the following ones to not perform any operations.
  *
- * \par
- * Error codes should be tested using U_FAILURE() and U_SUCCESS().
  * @stable ICU 2.0
  */
 typedef enum UErrorCode {
@@ -5788,7 +5940,7 @@ typedef enum UErrorCode {
  * in the UErrorCode enum above.
  * @stable ICU 2.0
  */
-U_STABLE const char * U_EXPORT2
+U_CAPI const char * U_EXPORT2
 u_errorName(UErrorCode code);
 
 
@@ -5863,6 +6015,7 @@ typedef enum UTraceFunctionNumber {
     UTRACE_U_INIT=UTRACE_FUNCTION_START,
     UTRACE_U_CLEANUP,
 
+
     UTRACE_CONVERSION_START=0x1000,
     UTRACE_UCNV_OPEN=UTRACE_CONVERSION_START,
     UTRACE_UCNV_OPEN_PACKAGE,
@@ -5872,6 +6025,7 @@ typedef enum UTraceFunctionNumber {
     UTRACE_UCNV_FLUSH_CACHE,
     UTRACE_UCNV_LOAD,
     UTRACE_UCNV_UNLOAD,
+
 
     UTRACE_COLLATION_START=0x2000,
     UTRACE_UCOL_OPEN=UTRACE_COLLATION_START,
@@ -5883,6 +6037,66 @@ typedef enum UTraceFunctionNumber {
     UTRACE_UCOL_STRCOLLITER,
     UTRACE_UCOL_OPEN_FROM_SHORT_STRING,
     UTRACE_UCOL_STRCOLLUTF8, /**< @stable ICU 50 */
+
+
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+
+    /**
+     * The lowest resource/data location.
+     * @stable ICU 65
+     */
+    UTRACE_UDATA_START=0x3000,
+
+    /**
+     * Indicates that a value was read from a resource bundle. Provides three
+     * C-style strings to UTraceData: type, file name, and resource path. The
+     * possible types are:
+     *
+     * - "string" (a string value was accessed)
+     * - "binary" (a binary value was accessed)
+     * - "intvector" (a integer vector value was accessed)
+     * - "int" (a signed integer value was accessed)
+     * - "uint" (a unsigned integer value was accessed)
+     * - "get" (a path was loaded, but the value was not accessed)
+     * - "getalias" (a path was loaded, and an alias was resolved)
+     *
+     * @stable ICU 65
+     */
+    UTRACE_UDATA_RESOURCE=UTRACE_UDATA_START,
+
+    /**
+     * Indicates that a resource bundle was opened.
+     *
+     * Provides one C-style string to UTraceData: file name.
+     * @stable ICU 65
+     */
+    UTRACE_UDATA_BUNDLE,
+
+    /**
+     * Indicates that a data file was opened, but not *.res files.
+     *
+     * Provides one C-style string to UTraceData: file name.
+     *
+     * @stable ICU 65
+     */
+    UTRACE_UDATA_DATA_FILE,
+
+    /**
+     * Indicates that a *.res file was opened.
+     *
+     * This differs from UTRACE_UDATA_BUNDLE because a res file is typically
+     * opened only once per application runtime, but the bundle corresponding
+     * to that res file may be opened many times.
+     *
+     * Provides one C-style string to UTraceData: file name.
+     *
+     * @stable ICU 65
+     */
+    UTRACE_UDATA_RES_FILE,
+
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
+
+
 } UTraceFunctionNumber;
 
 /**
@@ -5890,7 +6104,7 @@ typedef enum UTraceFunctionNumber {
  * @param traceLevel A UTraceLevel value.
  * @stable ICU 2.8
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 utrace_setLevel(int32_t traceLevel);
 
 /**
@@ -5898,7 +6112,7 @@ utrace_setLevel(int32_t traceLevel);
  * @return The UTraceLevel value being used by ICU.
  * @stable ICU 2.8
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 utrace_getLevel(void);
 
 /* Trace function pointers types  ----------------------------- */
@@ -5972,7 +6186,7 @@ UTraceData(const void *context, int32_t fnNumber, int32_t level,
   *
   *  @stable ICU 2.8
   */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 utrace_setFunctions(const void *context,
                     UTraceEntry *e, UTraceExit *x, UTraceData *d);
 
@@ -5986,7 +6200,7 @@ utrace_setFunctions(const void *context,
   * @param d        The currently installed UTraceData function.
   * @stable ICU 2.8
   */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 utrace_getFunctions(const void **context,
                     UTraceEntry **e, UTraceExit **x, UTraceData **d);
 
@@ -6108,7 +6322,7 @@ utrace_getFunctions(const void **context,
   *                 If buffer capacity is insufficient, the required capacity is returned. 
   *  @stable ICU 2.8
   */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 utrace_vformat(char *outBuf, int32_t capacity,
               int32_t indent, const char *fmt,  va_list args);
 
@@ -6129,7 +6343,7 @@ utrace_vformat(char *outBuf, int32_t capacity,
   *                 If buffer capacity is insufficient, the required capacity is returned. 
   *  @stable ICU 2.8
   */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 utrace_format(char *outBuf, int32_t capacity,
               int32_t indent, const char *fmt,  ...);
 
@@ -6146,7 +6360,7 @@ utrace_format(char *outBuf, int32_t capacity,
  * @see UTraceFunctionNumber
  * @stable ICU 2.8
  */
-U_STABLE const char * U_EXPORT2
+U_CAPI const char * U_EXPORT2
 utrace_functionName(int32_t fnNumber);
 
 U_CDECL_END
@@ -6351,7 +6565,7 @@ enum UStringTrieResult {
  *         the return value indicates the necessary destination buffer size.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 u_shapeArabic(const UChar *source, int32_t sourceLength,
               UChar *dest, int32_t destSize,
               uint32_t options,
@@ -7205,6 +7419,17 @@ typedef enum UScriptCode {
       USCRIPT_WANCHO                        = 188,/* Wcho */
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_VB)
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+      /** @stable ICU 66 */
+      USCRIPT_CHORASMIAN                    = 189,/* Chrs */
+      /** @stable ICU 66 */
+      USCRIPT_DIVES_AKURU                   = 190,/* Diak */
+      /** @stable ICU 66 */
+      USCRIPT_KHITAN_SMALL_SCRIPT           = 191,/* Kits */
+      /** @stable ICU 66 */
+      USCRIPT_YEZIDI                        = 192,/* Yezi */
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
+
 } UScriptCode;
 
 /**
@@ -7226,7 +7451,7 @@ typedef enum UScriptCode {
  * @return The number of script codes filled in the buffer passed in
  * @stable ICU 2.4
  */
-U_STABLE int32_t  U_EXPORT2
+U_CAPI int32_t  U_EXPORT2
 uscript_getCode(const char* nameOrAbbrOrLocale,UScriptCode* fillIn,int32_t capacity,UErrorCode *err);
 
 /**
@@ -7239,7 +7464,7 @@ uscript_getCode(const char* nameOrAbbrOrLocale,UScriptCode* fillIn,int32_t capac
  * or NULL if scriptCode is invalid
  * @stable ICU 2.4
  */
-U_STABLE const char*  U_EXPORT2
+U_CAPI const char*  U_EXPORT2
 uscript_getName(UScriptCode scriptCode);
 
 /**
@@ -7251,7 +7476,7 @@ uscript_getName(UScriptCode scriptCode);
  * @return short script name (4-letter code), or NULL if scriptCode is invalid
  * @stable ICU 2.4
  */
-U_STABLE const char*  U_EXPORT2
+U_CAPI const char*  U_EXPORT2
 uscript_getShortName(UScriptCode scriptCode);
 
 /**
@@ -7262,7 +7487,7 @@ uscript_getShortName(UScriptCode scriptCode);
  * @return The UScriptCode, or 0 if codepoint is invalid
  * @stable ICU 2.4
  */
-U_STABLE UScriptCode  U_EXPORT2
+U_CAPI UScriptCode  U_EXPORT2
 uscript_getScript(UChar32 codepoint, UErrorCode *err);
 
 /**
@@ -7274,10 +7499,10 @@ uscript_getScript(UChar32 codepoint, UErrorCode *err);
  * For more information, see UAX #24: http://www.unicode.org/reports/tr24/.
  * @param c code point
  * @param sc script code
- * @return TRUE if sc is in Script_Extensions(c)
+ * @return true if sc is in Script_Extensions(c)
  * @stable ICU 49
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 uscript_hasScript(UChar32 c, UScriptCode sc);
 
 /**
@@ -7309,7 +7534,7 @@ uscript_hasScript(UChar32 c, UScriptCode sc);
  *         written to scripts unless U_BUFFER_OVERFLOW_ERROR indicates insufficient capacity
  * @stable ICU 49
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uscript_getScriptExtensions(UChar32 c,
                             UScriptCode *scripts, int32_t capacity,
                             UErrorCode *errorCode);
@@ -7348,7 +7573,7 @@ typedef enum UScriptUsage {
  * @return the string length, even if U_BUFFER_OVERFLOW_ERROR
  * @stable ICU 51
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uscript_getSampleString(UScriptCode script, UChar *dest, int32_t capacity, UErrorCode *pErrorCode);
 
 
@@ -7361,41 +7586,41 @@ uscript_getSampleString(UScriptCode script, UChar *dest, int32_t capacity, UErro
  * @see UScriptUsage
  * @stable ICU 51
  */
-U_STABLE UScriptUsage U_EXPORT2
+U_CAPI UScriptUsage U_EXPORT2
 uscript_getUsage(UScriptCode script);
 
 /**
- * Returns TRUE if the script is written right-to-left.
+ * Returns true if the script is written right-to-left.
  * For example, Arab and Hebr.
  *
  * @param script script code
- * @return TRUE if the script is right-to-left
+ * @return true if the script is right-to-left
  * @stable ICU 51
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 uscript_isRightToLeft(UScriptCode script);
 
 /**
- * Returns TRUE if the script allows line breaks between letters (excluding hyphenation).
+ * Returns true if the script allows line breaks between letters (excluding hyphenation).
  * Such a script typically requires dictionary-based line breaking.
  * For example, Hani and Thai.
  *
  * @param script script code
- * @return TRUE if the script allows line breaks between letters
+ * @return true if the script allows line breaks between letters
  * @stable ICU 51
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 uscript_breaksBetweenLetters(UScriptCode script);
 
 /**
- * Returns TRUE if in modern (or most recent) usage of the script case distinctions are customary.
+ * Returns true if in modern (or most recent) usage of the script case distinctions are customary.
  * For example, Latn and Cyrl.
  *
  * @param script script code
- * @return TRUE if the script is cased
+ * @return true if the script is cased
  * @stable ICU 51
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 uscript_isCased(UScriptCode script);
 
 #endif
@@ -8107,7 +8332,7 @@ struct UCharIterator {
  * @see UnicodeString::char32At()
  * @stable ICU 2.1
  */
-U_STABLE UChar32 U_EXPORT2
+U_CAPI UChar32 U_EXPORT2
 uiter_current32(UCharIterator *iter);
 
 /**
@@ -8124,7 +8349,7 @@ uiter_current32(UCharIterator *iter);
  * @see U16_NEXT
  * @stable ICU 2.1
  */
-U_STABLE UChar32 U_EXPORT2
+U_CAPI UChar32 U_EXPORT2
 uiter_next32(UCharIterator *iter);
 
 /**
@@ -8141,7 +8366,7 @@ uiter_next32(UCharIterator *iter);
  * @see U16_PREV
  * @stable ICU 2.1
  */
-U_STABLE UChar32 U_EXPORT2
+U_CAPI UChar32 U_EXPORT2
 uiter_previous32(UCharIterator *iter);
 
 /**
@@ -8162,7 +8387,7 @@ uiter_previous32(UCharIterator *iter);
  * @see UITER_NO_STATE
  * @stable ICU 2.6
  */
-U_STABLE uint32_t U_EXPORT2
+U_CAPI uint32_t U_EXPORT2
 uiter_getState(const UCharIterator *iter);
 
 /**
@@ -8180,7 +8405,7 @@ uiter_getState(const UCharIterator *iter);
  * @see UCharIteratorSetState
  * @stable ICU 2.6
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uiter_setState(UCharIterator *iter, uint32_t state, UErrorCode *pErrorCode);
 
 /**
@@ -8205,7 +8430,7 @@ uiter_setState(UCharIterator *iter, uint32_t state, UErrorCode *pErrorCode);
  * @see UCharIterator
  * @stable ICU 2.1
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uiter_setString(UCharIterator *iter, const UChar *s, int32_t length);
 
 /**
@@ -8228,7 +8453,7 @@ uiter_setString(UCharIterator *iter, const UChar *s, int32_t length);
  * @see uiter_setString
  * @stable ICU 2.6
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uiter_setUTF16BE(UCharIterator *iter, const char *s, int32_t length);
 
 /**
@@ -8264,7 +8489,7 @@ uiter_setUTF16BE(UCharIterator *iter, const char *s, int32_t length);
  * @see UCharIterator
  * @stable ICU 2.6
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uiter_setUTF8(UCharIterator *iter, const char *s, int32_t length);
 
 
@@ -8317,7 +8542,7 @@ typedef struct UEnumeration UEnumeration;
  * @param en UEnumeration structure pointer
  * @stable ICU 2.2
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uenum_close(UEnumeration* en);
 
 
@@ -8335,7 +8560,7 @@ uenum_close(UEnumeration* en);
  * @return number of elements in the iterator
  * @stable ICU 2.2
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uenum_count(UEnumeration* en, UErrorCode* status);
 
 /**
@@ -8359,7 +8584,7 @@ uenum_count(UEnumeration* en, UErrorCode* status);
  *         traversed, returns NULL.
  * @stable ICU 2.2
  */
-U_STABLE const UChar* U_EXPORT2
+U_CAPI const UChar* U_EXPORT2
 uenum_unext(UEnumeration* en,
             int32_t* resultLength,
             UErrorCode* status);
@@ -8392,7 +8617,7 @@ uenum_unext(UEnumeration* en,
  *         traversed, returns NULL.
  * @stable ICU 2.2
  */
-U_STABLE const char* U_EXPORT2
+U_CAPI const char* U_EXPORT2
 uenum_next(UEnumeration* en,
            int32_t* resultLength,
            UErrorCode* status);
@@ -8406,7 +8631,7 @@ uenum_next(UEnumeration* en,
  *               the iterator is out of sync with its service.  
  * @stable ICU 2.2
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uenum_reset(UEnumeration* en, UErrorCode* status);
 
 
@@ -8421,7 +8646,7 @@ uenum_reset(UEnumeration* en, UErrorCode* status);
  * @see uenum_close
  * @stable ICU 50
  */
-U_STABLE UEnumeration* U_EXPORT2
+U_CAPI UEnumeration* U_EXPORT2
 uenum_openUCharStringsEnumeration(const UChar* const strings[], int32_t count,
                                  UErrorCode* ec);
 
@@ -8436,7 +8661,7 @@ uenum_openUCharStringsEnumeration(const UChar* const strings[], int32_t count,
  * @see uenum_close
  * @stable ICU 50
  */
-U_STABLE UEnumeration* U_EXPORT2
+U_CAPI UEnumeration* U_EXPORT2
 uenum_openCharStringsEnumeration(const char* const strings[], int32_t count,
                                  UErrorCode* ec);
 
@@ -8802,7 +9027,7 @@ typedef enum {
  * @system
  * @stable ICU 2.0
  */
-U_STABLE const char* U_EXPORT2
+U_CAPI const char* U_EXPORT2
 uloc_getDefault(void);
 
 /**
@@ -8822,7 +9047,7 @@ uloc_getDefault(void);
  * @system
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uloc_setDefault(const char* localeID,
         UErrorCode*       status);
 #endif  /* U_HIDE_SYSTEM_API */
@@ -8839,7 +9064,7 @@ uloc_setDefault(const char* localeID,
  * than languageCapacity, the returned language code will be truncated.  
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uloc_getLanguage(const char*    localeID,
          char* language,
          int32_t languageCapacity,
@@ -8857,7 +9082,7 @@ uloc_getLanguage(const char*    localeID,
  * than scriptCapacity, the returned language code will be truncated.  
  * @stable ICU 2.8
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uloc_getScript(const char*    localeID,
          char* script,
          int32_t scriptCapacity,
@@ -8875,7 +9100,7 @@ uloc_getScript(const char*    localeID,
  * than countryCapacity, the returned country code will be truncated.  
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uloc_getCountry(const char*    localeID,
         char* country,
         int32_t countryCapacity,
@@ -8893,7 +9118,7 @@ uloc_getCountry(const char*    localeID,
  * than variantCapacity, the returned variant code will be truncated.  
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uloc_getVariant(const char*    localeID,
         char* variant,
         int32_t variantCapacity,
@@ -8916,7 +9141,7 @@ uloc_getVariant(const char*    localeID,
  * than nameCapacity, the returned full name will be truncated.  
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uloc_getName(const char*    localeID,
          char* name,
          int32_t nameCapacity,
@@ -8939,7 +9164,7 @@ uloc_getName(const char*    localeID,
  * than nameCapacity, the returned full name will be truncated.  
  * @stable ICU 2.8
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uloc_canonicalize(const char*    localeID,
          char* name,
          int32_t nameCapacity,
@@ -8952,7 +9177,7 @@ uloc_canonicalize(const char*    localeID,
  * @return language the ISO language code for localeID
  * @stable ICU 2.0
  */
-U_STABLE const char* U_EXPORT2
+U_CAPI const char* U_EXPORT2
 uloc_getISO3Language(const char* localeID);
 
 
@@ -8963,7 +9188,7 @@ uloc_getISO3Language(const char* localeID);
  * @return country the ISO country code for localeID
  * @stable ICU 2.0
  */
-U_STABLE const char* U_EXPORT2
+U_CAPI const char* U_EXPORT2
 uloc_getISO3Country(const char* localeID);
 
 /**
@@ -8977,26 +9202,31 @@ uloc_getISO3Country(const char* localeID);
  * @return country the Win32 LCID for localeID
  * @stable ICU 2.0
  */
-U_STABLE uint32_t U_EXPORT2
+U_CAPI uint32_t U_EXPORT2
 uloc_getLCID(const char* localeID);
 
 /**
  * Gets the language name suitable for display for the specified locale.
  *
  * @param locale the locale to get the ISO language code with
- * @param displayLocale Specifies the locale to be used to display the name.  In other words,
- *                 if the locale's language code is "en", passing Locale::getFrench() for
- *                 inLocale would result in "Anglais", while passing Locale::getGerman()
- *                 for inLocale would result in "Englisch".
+ * @param displayLocale Specifies the locale to be used to display the name. In
+ *                 other words, if the locale's language code is "en", passing
+ *                 Locale::getFrench() for inLocale would result in "Anglais",
+ *                 while passing Locale::getGerman() for inLocale would result
+ *                 in "Englisch".
  * @param language the displayable language code for localeID
- * @param languageCapacity the size of the language buffer to store the  
- * displayable language code with
- * @param status error information if retrieving the displayable language code failed
- * @return the actual buffer size needed for the displayable language code.  If it's greater 
- * than languageCapacity, the returned language code will be truncated.  
+ * @param languageCapacity the size of the language buffer to store the
+ *                 displayable language code with.
+ * @param status error information if retrieving the displayable language code
+ *                 failed. U_USING_DEFAULT_WARNING indicates that no data was
+ *                 found from the locale resources and a case canonicalized
+ *                 language code is placed into language as fallback.
+ * @return the actual buffer size needed for the displayable language code. If
+ *                 it's greater than languageCapacity, the returned language
+ *                 code will be truncated.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uloc_getDisplayLanguage(const char* locale,
             const char* displayLocale,
             UChar* language,
@@ -9006,20 +9236,26 @@ uloc_getDisplayLanguage(const char* locale,
 /**
  * Gets the script name suitable for display for the specified locale.
  *
- * @param locale the locale to get the displayable script code with. NULL may be used to specify the default.
- * @param displayLocale Specifies the locale to be used to display the name.  In other words,
- *                 if the locale's language code is "en", passing Locale::getFrench() for
- *                 inLocale would result in "", while passing Locale::getGerman()
- *                 for inLocale would result in "". NULL may be used to specify the default.
- * @param script the displayable script for the localeID
- * @param scriptCapacity the size of the script buffer to store the  
- * displayable script code with
- * @param status error information if retrieving the displayable script code failed
- * @return the actual buffer size needed for the displayable script code.  If it's greater 
- * than scriptCapacity, the returned displayable script code will be truncated.  
+ * @param locale the locale to get the displayable script code with. NULL may be
+ *                 used to specify the default.
+ * @param displayLocale Specifies the locale to be used to display the name. In
+ *                 other words, if the locale's language code is "en", passing
+ *                 Locale::getFrench() for inLocale would result in "", while
+ *                 passing Locale::getGerman() for inLocale would result in "".
+ *                 NULL may be used to specify the default.
+ * @param script the displayable script for the localeID.
+ * @param scriptCapacity the size of the script buffer to store the displayable
+ *                 script code with.
+ * @param status error information if retrieving the displayable script code
+ *                 failed. U_USING_DEFAULT_WARNING indicates that no data was
+ *                 found from the locale resources and a case canonicalized
+ *                 script code is placed into script as fallback.
+ * @return the actual buffer size needed for the displayable script code. If
+ *                 it's greater than scriptCapacity, the returned displayable
+ *                 script code will be truncated.
  * @stable ICU 2.8
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uloc_getDisplayScript(const char* locale,
             const char* displayLocale,
             UChar* script,
@@ -9028,23 +9264,30 @@ uloc_getDisplayScript(const char* locale,
 
 /**
  * Gets the country name suitable for display for the specified locale.
- * Warning: this is for the region part of a valid locale ID; it cannot just be the region code (like "FR").
- * To get the display name for a region alone, or for other options, use ULocaleDisplayNames instead.
+ * Warning: this is for the region part of a valid locale ID; it cannot just be
+ * the region code (like "FR"). To get the display name for a region alone, or
+ * for other options, use ULocaleDisplayNames instead.
  *
- * @param locale the locale to get the displayable country code with. NULL may be used to specify the default.
- * @param displayLocale Specifies the locale to be used to display the name.  In other words,
- *                 if the locale's language code is "en", passing Locale::getFrench() for
- *                 inLocale would result in "Anglais", while passing Locale::getGerman()
- *                 for inLocale would result in "Englisch". NULL may be used to specify the default.
- * @param country the displayable country code for localeID
- * @param countryCapacity the size of the country buffer to store the  
- * displayable country code with
- * @param status error information if retrieving the displayable country code failed
- * @return the actual buffer size needed for the displayable country code.  If it's greater 
- * than countryCapacity, the returned displayable country code will be truncated.  
+ * @param locale the locale to get the displayable country code with. NULL may
+ *                 be used to specify the default.
+ * @param displayLocale Specifies the locale to be used to display the name. In
+ *                 other words, if the locale's language code is "en", passing
+ *                 Locale::getFrench() for inLocale would result in "Anglais",
+ *                 while passing Locale::getGerman() for inLocale would result
+ *                 in "Englisch". NULL may be used to specify the default.
+ * @param country the displayable country code for localeID.
+ * @param countryCapacity the size of the country buffer to store the
+ *                 displayable country code with.
+ * @param status error information if retrieving the displayable country code
+ *                 failed. U_USING_DEFAULT_WARNING indicates that no data was
+ *                 found from the locale resources and a case canonicalized
+ *                 country code is placed into country as fallback.
+ * @return the actual buffer size needed for the displayable country code. If
+ *                 it's greater than countryCapacity, the returned displayable
+ *                 country code will be truncated.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uloc_getDisplayCountry(const char* locale,
                        const char* displayLocale,
                        UChar* country,
@@ -9055,20 +9298,26 @@ uloc_getDisplayCountry(const char* locale,
 /**
  * Gets the variant name suitable for display for the specified locale.
  *
- * @param locale the locale to get the displayable variant code with. NULL may be used to specify the default.
- * @param displayLocale Specifies the locale to be used to display the name.  In other words,
- *                 if the locale's language code is "en", passing Locale::getFrench() for
- *                 inLocale would result in "Anglais", while passing Locale::getGerman()
- *                 for inLocale would result in "Englisch". NULL may be used to specify the default.
- * @param variant the displayable variant code for localeID
- * @param variantCapacity the size of the variant buffer to store the 
- * displayable variant code with
- * @param status error information if retrieving the displayable variant code failed
- * @return the actual buffer size needed for the displayable variant code.  If it's greater 
- * than variantCapacity, the returned displayable variant code will be truncated.  
+ * @param locale the locale to get the displayable variant code with. NULL may
+ *                 be used to specify the default.
+ * @param displayLocale Specifies the locale to be used to display the name. In
+ *                 other words, if the locale's language code is "en", passing
+ *                 Locale::getFrench() for inLocale would result in "Anglais",
+ *                 while passing Locale::getGerman() for inLocale would result
+ *                 in "Englisch". NULL may be used to specify the default.
+ * @param variant the displayable variant code for localeID.
+ * @param variantCapacity the size of the variant buffer to store the
+ *                 displayable variant code with.
+ * @param status error information if retrieving the displayable variant code
+ *                 failed. U_USING_DEFAULT_WARNING indicates that no data was
+ *                 found from the locale resources and a case canonicalized
+ *                 variant code is placed into variant as fallback.
+ * @return the actual buffer size needed for the displayable variant code. If
+ *                 it's greater than variantCapacity, the returned displayable
+ *                 variant code will be truncated.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uloc_getDisplayVariant(const char* locale,
                        const char* displayLocale,
                        UChar* variant,
@@ -9076,9 +9325,9 @@ uloc_getDisplayVariant(const char* locale,
                        UErrorCode* status);
 
 /**
- * Gets the keyword name suitable for display for the specified locale.
- * E.g: for the locale string de_DE\@collation=PHONEBOOK, this API gets the display 
- * string for the keyword collation. 
+ * Gets the keyword name suitable for display for the specified locale. E.g:
+ * for the locale string de_DE\@collation=PHONEBOOK, this API gets the display
+ * string for the keyword collation.
  * Usage:
  * <code>
  *    UErrorCode status = U_ZERO_ERROR;
@@ -9107,15 +9356,17 @@ uloc_getDisplayVariant(const char* locale,
  *                          for inLocale would result in "Englisch". NULL may be used to specify the default.
  * @param dest              the buffer to which the displayable keyword should be written.
  * @param destCapacity      The size of the buffer (number of UChars). If it is 0, then
- *                          dest may be NULL and the function will only return the length of the 
+ *                          dest may be NULL and the function will only return the length of the
  *                          result without writing any of the result string (pre-flighting).
- * @param status            error information if retrieving the displayable string failed. 
+ * @param status            error information if retrieving the displayable string failed.
  *                          Should not be NULL and should not indicate failure on entry.
- * @return the actual buffer size needed for the displayable variant code.  
+ *                          U_USING_DEFAULT_WARNING indicates that no data was found from the locale
+ *                          resources and the keyword is placed into dest as fallback.
+ * @return the actual buffer size needed for the displayable variant code.
  * @see #uloc_openKeywords
  * @stable ICU 2.8
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uloc_getDisplayKeyword(const char* keyword,
                        const char* displayLocale,
                        UChar* dest,
@@ -9123,7 +9374,7 @@ uloc_getDisplayKeyword(const char* keyword,
                        UErrorCode* status);
 /**
  * Gets the value of the keyword suitable for display for the specified locale.
- * E.g: for the locale string de_DE\@collation=PHONEBOOK, this API gets the display 
+ * E.g: for the locale string de_DE\@collation=PHONEBOOK, this API gets the display
  * string for PHONEBOOK, in the display locale, when "collation" is specified as the keyword.
  *
  * @param locale            The locale to get the displayable variant code with. NULL may be used to specify the default.
@@ -9134,14 +9385,16 @@ uloc_getDisplayKeyword(const char* keyword,
  *                          for inLocale would result in "Englisch". NULL may be used to specify the default.
  * @param dest              the buffer to which the displayable keyword should be written.
  * @param destCapacity      The size of the buffer (number of UChars). If it is 0, then
- *                          dest may be NULL and the function will only return the length of the 
+ *                          dest may be NULL and the function will only return the length of the
  *                          result without writing any of the result string (pre-flighting).
- * @param status            error information if retrieving the displayable string failed. 
+ * @param status            error information if retrieving the displayable string failed.
  *                          Should not be NULL and must not indicate failure on entry.
- * @return the actual buffer size needed for the displayable variant code.  
+ *                          U_USING_DEFAULT_WARNING indicates that no data was found from the locale
+ *                          resources and the value of the keyword is placed into dest as fallback.
+ * @return the actual buffer size needed for the displayable variant code.
  * @stable ICU 2.8
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uloc_getDisplayKeywordValue(   const char* locale,
                                const char* keyword,
                                const char* displayLocale,
@@ -9164,7 +9417,7 @@ uloc_getDisplayKeywordValue(   const char* locale,
  * than maxResultSize, the returned displayable name will be truncated.  
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uloc_getDisplayName(const char* localeID,
             const char* inLocaleID,
             UChar* result,
@@ -9173,16 +9426,22 @@ uloc_getDisplayName(const char* localeID,
 
 
 /**
- * Gets the specified locale from a list of all available locales.  
- * The return value is a pointer to an item of 
- * a locale name array.  Both this array and the pointers
- * it contains are owned by ICU and should not be deleted or written through
- * by the caller.  The locale name is terminated by a null pointer.
- * @param n the specific locale name index of the available locale list
+ * Gets the specified locale from a list of available locales.
+ *
+ * This method corresponds to uloc_openAvailableByType called with the
+ * ULOC_AVAILABLE_DEFAULT type argument.
+ *
+ * The return value is a pointer to an item of a locale name array. Both this
+ * array and the pointers it contains are owned by ICU and should not be
+ * deleted or written through by the caller. The locale name is terminated by
+ * a null pointer.
+ *
+ * @param n the specific locale name index of the available locale list;
+ *     should not exceed the number returned by uloc_countAvailable.
  * @return a specified locale name of all available locales
  * @stable ICU 2.0
  */
-U_STABLE const char* U_EXPORT2
+U_CAPI const char* U_EXPORT2
 uloc_getAvailable(int32_t n);
 
 /**
@@ -9191,7 +9450,67 @@ uloc_getAvailable(int32_t n);
  * @return the size of the locale list
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 uloc_countAvailable(void);
+U_CAPI int32_t U_EXPORT2 uloc_countAvailable(void);
+
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+
+/**
+ * Types for uloc_getAvailableByType and uloc_countAvailableByType.
+ *
+ * @stable ICU 65
+ */
+typedef enum ULocAvailableType {
+  /**
+   * Locales that return data when passed to ICU APIs,
+   * but not including legacy or alias locales.
+   *
+   * @stable ICU 65
+   */
+  ULOC_AVAILABLE_DEFAULT,
+
+  /**
+   * Legacy or alias locales that return data when passed to ICU APIs.
+   * Examples of supported legacy or alias locales:
+   *
+   * - iw (alias to he)
+   * - mo (alias to ro)
+   * - zh_CN (alias to zh_Hans_CN)
+   * - sr_BA (alias to sr_Cyrl_BA)
+   * - ars (alias to ar_SA)
+   *
+   * The locales in this set are disjoint from the ones in
+   * ULOC_AVAILABLE_DEFAULT. To get both sets at the same time, use
+   * ULOC_AVAILABLE_WITH_LEGACY_ALIASES.
+   *
+   * @stable ICU 65
+   */
+  ULOC_AVAILABLE_ONLY_LEGACY_ALIASES,
+
+  /**
+   * The union of the locales in ULOC_AVAILABLE_DEFAULT and
+   * ULOC_AVAILABLE_ONLY_LEGACY_ALIAS.
+   *
+   * @stable ICU 65
+   */
+  ULOC_AVAILABLE_WITH_LEGACY_ALIASES,
+
+} ULocAvailableType;
+
+/**
+ * Gets a list of available locales according to the type argument, allowing
+ * the user to access different sets of supported locales in ICU.
+ *
+ * The returned UEnumeration must be closed by the caller.
+ *
+ * @param type Type choice from ULocAvailableType.
+ * @param status Set if an error occurred.
+ * @return a UEnumeration owned by the caller, or nullptr on failure.
+ * @stable ICU 65
+ */
+U_CAPI UEnumeration* U_EXPORT2
+uloc_openAvailableByType(ULocAvailableType type, UErrorCode* status);
+
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
 
 /**
  *
@@ -9204,7 +9523,7 @@ U_STABLE int32_t U_EXPORT2 uloc_countAvailable(void);
  * @return a list of all available language codes
  * @stable ICU 2.0
  */
-U_STABLE const char* const* U_EXPORT2
+U_CAPI const char* const* U_EXPORT2
 uloc_getISOLanguages(void);
 
 /**
@@ -9216,7 +9535,7 @@ uloc_getISOLanguages(void);
  * @return a list of all available country codes
  * @stable ICU 2.0
  */
-U_STABLE const char* const* U_EXPORT2
+U_CAPI const char* const* U_EXPORT2
 uloc_getISOCountries(void);
 
 /**
@@ -9232,7 +9551,7 @@ uloc_getISOCountries(void);
  * @return The length of the parent locale ID.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uloc_getParent(const char*    localeID,
                  char* parent,
                  int32_t parentCapacity,
@@ -9263,7 +9582,7 @@ uloc_getParent(const char*    localeID,
  * than nameCapacity, the returned full name will be truncated.  
  * @stable ICU 2.8
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uloc_getBaseName(const char*    localeID,
          char* name,
          int32_t nameCapacity,
@@ -9278,7 +9597,7 @@ uloc_getBaseName(const char*    localeID,
  * @return enumeration of keywords or NULL if there are no keywords.
  * @stable ICU 2.8
  */
-U_STABLE UEnumeration* U_EXPORT2
+U_CAPI UEnumeration* U_EXPORT2
 uloc_openKeywords(const char* localeID,
                         UErrorCode* status);
 
@@ -9295,7 +9614,7 @@ uloc_openKeywords(const char* localeID,
  * @return the length of keyword value
  * @stable ICU 2.8
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uloc_getKeywordValue(const char* localeID,
                      const char* keywordName,
                      char* buffer, int32_t bufferCapacity,
@@ -9332,7 +9651,7 @@ uloc_getKeywordValue(const char* localeID,
  * @see uloc_getKeywordValue
  * @stable ICU 3.2
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uloc_setKeywordValue(const char* keywordName,
                      const char* keywordValue,
                      char* buffer, int32_t bufferCapacity,
@@ -9341,18 +9660,18 @@ uloc_setKeywordValue(const char* keywordName,
 /**
  * Returns whether the locale's script is written right-to-left.
  * If there is no script subtag, then the likely script is used, see uloc_addLikelySubtags().
- * If no likely script is known, then FALSE is returned.
+ * If no likely script is known, then false is returned.
  *
  * A script is right-to-left according to the CLDR script metadata
  * which corresponds to whether the script's letters have Bidi_Class=R or AL.
  *
- * Returns TRUE for "ar" and "en-Hebr", FALSE for "zh" and "fa-Cyrl".
+ * Returns true for "ar" and "en-Hebr", false for "zh" and "fa-Cyrl".
  *
  * @param locale input locale ID
- * @return TRUE if the locale's script is written right-to-left
+ * @return true if the locale's script is written right-to-left
  * @stable ICU 54
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 uloc_isRightToLeft(const char *locale);
 
 /**
@@ -9376,7 +9695,7 @@ typedef enum {
  * @return an enum indicating the layout orientation for characters.
  * @stable ICU 4.0
  */
-U_STABLE ULayoutType U_EXPORT2
+U_CAPI ULayoutType U_EXPORT2
 uloc_getCharacterOrientation(const char* localeId,
                              UErrorCode *status);
 
@@ -9388,38 +9707,54 @@ uloc_getCharacterOrientation(const char* localeId,
  * @return an enum indicating the layout orientation for lines.
  * @stable ICU 4.0
  */
-U_STABLE ULayoutType U_EXPORT2
+U_CAPI ULayoutType U_EXPORT2
 uloc_getLineOrientation(const char* localeId,
                         UErrorCode *status);
 
 /**
- * enums for the 'outResult' parameter return value
+ * Output values which uloc_acceptLanguage() writes to the 'outResult' parameter.
+ *
  * @see uloc_acceptLanguageFromHTTP
  * @see uloc_acceptLanguage
  * @stable ICU 3.2
  */
 typedef enum {
-  ULOC_ACCEPT_FAILED   = 0,  /* No exact match was found. */
-  ULOC_ACCEPT_VALID    = 1,  /* An exact match was found. */
-  ULOC_ACCEPT_FALLBACK = 2   /* A fallback was found, for example, 
-                                Accept list contained 'ja_JP'
-                                which matched available locale 'ja'. */
+    /**
+     * No exact match was found.
+     * @stable ICU 3.2
+     */
+    ULOC_ACCEPT_FAILED   = 0,
+    /**
+     * An exact match was found.
+     * @stable ICU 3.2
+     */
+    ULOC_ACCEPT_VALID    = 1,
+    /**
+     * A fallback was found. For example, the Accept-Language list includes 'ja_JP'
+     * and is matched with available locale 'ja'.
+     * @stable ICU 3.2
+     */
+    ULOC_ACCEPT_FALLBACK = 2   /*  */
 } UAcceptResult;
-
 
 /**
  * Based on a HTTP header from a web browser and a list of available locales,
  * determine an acceptable locale for the user.
+ *
+ * This is a thin wrapper over C++ class LocaleMatcher.
+ *
  * @param result - buffer to accept the result locale
  * @param resultAvailable the size of the result buffer.
  * @param outResult - An out parameter that contains the fallback status
  * @param httpAcceptLanguage - "Accept-Language:" header as per HTTP.
  * @param availableLocales - list of available locales to match
- * @param status Error status, may be BUFFER_OVERFLOW_ERROR
+ * @param status ICU error code. Its input value must pass the U_SUCCESS() test,
+ *               or else the function returns immediately. Check for U_FAILURE()
+ *               on output or use with function chaining. (See User Guide for details.)
  * @return length needed for the locale.
  * @stable ICU 3.2
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uloc_acceptLanguageFromHTTP(char *result, int32_t resultAvailable,
                             UAcceptResult *outResult,
                             const char *httpAcceptLanguage,
@@ -9429,17 +9764,22 @@ uloc_acceptLanguageFromHTTP(char *result, int32_t resultAvailable,
 /**
  * Based on a list of available locales,
  * determine an acceptable locale for the user.
+ *
+ * This is a thin wrapper over C++ class LocaleMatcher.
+ *
  * @param result - buffer to accept the result locale
  * @param resultAvailable the size of the result buffer.
  * @param outResult - An out parameter that contains the fallback status
  * @param acceptList - list of acceptable languages
  * @param acceptListCount - count of acceptList items
  * @param availableLocales - list of available locales to match
- * @param status Error status, may be BUFFER_OVERFLOW_ERROR
+ * @param status ICU error code. Its input value must pass the U_SUCCESS() test,
+ *               or else the function returns immediately. Check for U_FAILURE()
+ *               on output or use with function chaining. (See User Guide for details.)
  * @return length needed for the locale.
  * @stable ICU 3.2
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uloc_acceptLanguage(char *result, int32_t resultAvailable, 
                     UAcceptResult *outResult, const char **acceptList,
                     int32_t acceptListCount,
@@ -9459,7 +9799,7 @@ uloc_acceptLanguage(char *result, int32_t resultAvailable,
  * @return actual the actual size of the locale ID, not including NUL-termination 
  * @stable ICU 3.8
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uloc_getLocaleForLCID(uint32_t hostID, char *locale, int32_t localeCapacity,
                     UErrorCode *status);
 
@@ -9497,7 +9837,7 @@ uloc_getLocaleForLCID(uint32_t hostID, char *locale, int32_t localeCapacity,
  * On error, the return value is -1.
  * @stable ICU 4.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uloc_addLikelySubtags(const char*    localeID,
          char* maximizedLocaleID,
          int32_t maximizedLocaleIDCapacity,
@@ -9537,7 +9877,7 @@ uloc_addLikelySubtags(const char*    localeID,
  * On error, the return value is -1.
  * @stable ICU 4.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uloc_minimizeSubtags(const char*    localeID,
          char* minimizedLocaleID,
          int32_t minimizedLocaleIDCapacity,
@@ -9547,14 +9887,18 @@ uloc_minimizeSubtags(const char*    localeID,
  * Returns a locale ID for the specified BCP47 language tag string.
  * If the specified language tag contains any ill-formed subtags,
  * the first such subtag and all following subtags are ignored.
- * <p> 
- * This implements the 'Language-Tag' production of BCP47, and so
- * supports grandfathered (regular and irregular) as well as private
- * use language tags.  Private use tags are represented as 'x-whatever',
- * and grandfathered tags are converted to their canonical replacements
- * where they exist.  Note that a few grandfathered tags have no modern
- * replacement, these will be converted using the fallback described in
+ * <p>
+ * This implements the 'Language-Tag' production of BCP 47, and so
+ * supports legacy language tags (marked as “Type: grandfathered” in BCP 47)
+ * (regular and irregular) as well as private use language tags.
+ *
+ * Private use tags are represented as 'x-whatever',
+ * and legacy tags are converted to their canonical replacements where they exist.
+ *
+ * Note that a few legacy tags have no modern replacement;
+ * these will be converted using the fallback described in
  * the first paragraph, so some information might be lost.
+ *
  * @param langtag   the input BCP47 language tag.
  * @param localeID  the output buffer receiving a locale ID for the
  *                  specified BCP47 language tag.
@@ -9566,7 +9910,7 @@ uloc_minimizeSubtags(const char*    localeID,
  * @return          the length of the locale ID.
  * @stable ICU 4.2
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uloc_forLanguageTag(const char* langtag,
                     char* localeID,
                     int32_t localeIDCapacity,
@@ -9576,10 +9920,10 @@ uloc_forLanguageTag(const char* langtag,
 /**
  * Returns a well-formed language tag for this locale ID. 
  * <p> 
- * <b>Note</b>: When <code>strict</code> is FALSE, any locale
+ * <b>Note</b>: When <code>strict</code> is false, any locale
  * fields which do not satisfy the BCP47 syntax requirement will
  * be omitted from the result.  When <code>strict</code> is
- * TRUE, this function sets U_ILLEGAL_ARGUMENT_ERROR to the
+ * true, this function sets U_ILLEGAL_ARGUMENT_ERROR to the
  * <code>err</code> if any locale fields do not satisfy the
  * BCP47 syntax requirement.
  * @param localeID  the input locale ID
@@ -9594,7 +9938,7 @@ uloc_forLanguageTag(const char* langtag,
  * @return          The length of the BCP47 language tag.
  * @stable ICU 4.2
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uloc_toLanguageTag(const char* localeID,
                    char* langtag,
                    int32_t langtagCapacity,
@@ -9622,7 +9966,7 @@ uloc_toLanguageTag(const char* localeID,
  * @see uloc_toLegacyKey
  * @stable ICU 54
  */
-U_STABLE const char* U_EXPORT2
+U_CAPI const char* U_EXPORT2
 uloc_toUnicodeLocaleKey(const char* keyword);
 
 /**
@@ -9653,7 +9997,7 @@ uloc_toUnicodeLocaleKey(const char* keyword);
  * @see uloc_toLegacyType
  * @stable ICU 54
  */
-U_STABLE const char* U_EXPORT2
+U_CAPI const char* U_EXPORT2
 uloc_toUnicodeLocaleType(const char* keyword, const char* value);
 
 /**
@@ -9668,7 +10012,7 @@ uloc_toUnicodeLocaleType(const char* keyword, const char* value);
  * @see toUnicodeLocaleKey
  * @stable ICU 54
  */
-U_STABLE const char* U_EXPORT2
+U_CAPI const char* U_EXPORT2
 uloc_toLegacyKey(const char* keyword);
 
 /**
@@ -9697,7 +10041,7 @@ uloc_toLegacyKey(const char* keyword);
  * @see toUnicodeLocaleType
  * @stable ICU 54
  */
-U_STABLE const char* U_EXPORT2
+U_CAPI const char* U_EXPORT2
 uloc_toLegacyType(const char* keyword, const char* value);
 
 #endif /*_ULOC*/
@@ -9729,6 +10073,7 @@ uloc_toLegacyType(const char* keyword, const char* value);
 
 #ifndef URES_H
 #define URES_H
+
 
 
 /**
@@ -9839,7 +10184,7 @@ typedef enum {
  * @see ures_close
  * @stable ICU 2.0
  */
-U_STABLE UResourceBundle*  U_EXPORT2
+U_CAPI UResourceBundle*  U_EXPORT2
 ures_open(const char*    packageName,
           const char*  locale,
           UErrorCode*     status);
@@ -9862,7 +10207,7 @@ ures_open(const char*    packageName,
  * @see ures_close
  * @stable ICU 2.0
  */
-U_STABLE UResourceBundle* U_EXPORT2
+U_CAPI UResourceBundle* U_EXPORT2
 ures_openDirect(const char* packageName,
                 const char* locale,
                 UErrorCode* status);
@@ -9885,7 +10230,7 @@ ures_openDirect(const char* packageName,
  * @see ures_open
  * @stable ICU 2.0
  */
-U_STABLE UResourceBundle* U_EXPORT2
+U_CAPI UResourceBundle* U_EXPORT2
 ures_openU(const UChar* packageName,
            const char* locale,
            UErrorCode* status);
@@ -9899,7 +10244,7 @@ ures_openU(const UChar* packageName,
  * @see ures_open
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ures_close(UResourceBundle* resourceBundle);
 
 
@@ -9913,7 +10258,7 @@ ures_close(UResourceBundle* resourceBundle);
  *                    as specified in the resource bundle or its parent.
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ures_getVersion(const UResourceBundle* resB,
                 UVersionInfo versionInfo);
 
@@ -9930,7 +10275,7 @@ ures_getVersion(const UResourceBundle* resB,
  * @return  A Locale name
  * @stable ICU 2.8
  */
-U_STABLE const char* U_EXPORT2
+U_CAPI const char* U_EXPORT2
 ures_getLocaleByType(const UResourceBundle* resourceBundle,
                      ULocDataLocaleType type,
                      UErrorCode* status);
@@ -9954,7 +10299,7 @@ ures_getLocaleByType(const UResourceBundle* resourceBundle,
  * @see ures_getUInt
  * @stable ICU 2.0
  */
-U_STABLE const UChar* U_EXPORT2
+U_CAPI const UChar* U_EXPORT2
 ures_getString(const UResourceBundle* resourceBundle,
                int32_t* len,
                UErrorCode* status);
@@ -9965,10 +10310,10 @@ ures_getString(const UResourceBundle* resourceBundle,
  * it may need to be copied, or transformed from UTF-16 using u_strToUTF8()
  * or equivalent.
  *
- * If forceCopy==TRUE, then the string is always written to the dest buffer
+ * If forceCopy==true, then the string is always written to the dest buffer
  * and dest is returned.
  *
- * If forceCopy==FALSE, then the string is returned as a pointer if possible,
+ * If forceCopy==false, then the string is returned as a pointer if possible,
  * without needing a dest buffer (it can be NULL). If the string needs to be
  * copied or transformed, then it may be placed into dest at an arbitrary offset.
  *
@@ -9986,10 +10331,10 @@ ures_getString(const UResourceBundle* resourceBundle,
  *               terminating NUL, even in case of U_BUFFER_OVERFLOW_ERROR.
  *               Can be NULL, meaning capacity=0 and the string length is not
  *               returned to the caller.
- * @param forceCopy If TRUE, then the output string will always be written to
+ * @param forceCopy If true, then the output string will always be written to
  *                  dest, with U_BUFFER_OVERFLOW_ERROR and
  *                  U_STRING_NOT_TERMINATED_WARNING set if appropriate.
- *                  If FALSE, then the dest buffer may or may not contain a
+ *                  If false, then the dest buffer may or may not contain a
  *                  copy of the string. dest may or may not be modified.
  *                  If a copy needs to be written, then the UErrorCode parameter
  *                  indicates overflow etc. as usual.
@@ -10006,7 +10351,7 @@ ures_getString(const UResourceBundle* resourceBundle,
  * @see u_strToUTF8
  * @stable ICU 3.6
  */
-U_STABLE const char * U_EXPORT2
+U_CAPI const char * U_EXPORT2
 ures_getUTF8String(const UResourceBundle *resB,
                    char *dest, int32_t *length,
                    UBool forceCopy,
@@ -10029,7 +10374,7 @@ ures_getUTF8String(const UResourceBundle *resB,
  * @see ures_getUInt
  * @stable ICU 2.0
  */
-U_STABLE const uint8_t* U_EXPORT2
+U_CAPI const uint8_t* U_EXPORT2
 ures_getBinary(const UResourceBundle* resourceBundle,
                int32_t* len,
                UErrorCode* status);
@@ -10051,7 +10396,7 @@ ures_getBinary(const UResourceBundle* resourceBundle,
  * @see ures_getUInt
  * @stable ICU 2.0
  */
-U_STABLE const int32_t* U_EXPORT2
+U_CAPI const int32_t* U_EXPORT2
 ures_getIntVector(const UResourceBundle* resourceBundle,
                   int32_t* len,
                   UErrorCode* status);
@@ -10072,7 +10417,7 @@ ures_getIntVector(const UResourceBundle* resourceBundle,
  * @see ures_getString
  * @stable ICU 2.0
  */
-U_STABLE uint32_t U_EXPORT2
+U_CAPI uint32_t U_EXPORT2
 ures_getUInt(const UResourceBundle* resourceBundle,
              UErrorCode *status);
 
@@ -10092,7 +10437,7 @@ ures_getUInt(const UResourceBundle* resourceBundle,
  * @see ures_getString
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ures_getInt(const UResourceBundle* resourceBundle,
             UErrorCode *status);
 
@@ -10106,7 +10451,7 @@ ures_getInt(const UResourceBundle* resourceBundle,
  * @return number of resources in a given resource.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ures_getSize(const UResourceBundle *resourceBundle);
 
 /**
@@ -10117,7 +10462,7 @@ ures_getSize(const UResourceBundle *resourceBundle);
  * @see UResType
  * @stable ICU 2.0
  */
-U_STABLE UResType U_EXPORT2
+U_CAPI UResType U_EXPORT2
 ures_getType(const UResourceBundle *resourceBundle);
 
 /**
@@ -10128,7 +10473,7 @@ ures_getType(const UResourceBundle *resourceBundle);
  * @return a key associated to this resource, or NULL if it doesn't have a key
  * @stable ICU 2.0
  */
-U_STABLE const char * U_EXPORT2
+U_CAPI const char * U_EXPORT2
 ures_getKey(const UResourceBundle *resourceBundle);
 
 /* ITERATION API
@@ -10141,17 +10486,17 @@ ures_getKey(const UResourceBundle *resourceBundle);
  * @param resourceBundle a resource
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ures_resetIterator(UResourceBundle *resourceBundle);
 
 /**
  * Checks whether the given resource has another element to iterate over.
  *
  * @param resourceBundle a resource
- * @return TRUE if there are more elements, FALSE if there is no more elements
+ * @return true if there are more elements, false if there is no more elements
  * @stable ICU 2.0
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 ures_hasNext(const UResourceBundle *resourceBundle);
 
 /**
@@ -10166,7 +10511,7 @@ ures_hasNext(const UResourceBundle *resourceBundle);
  * @return                  a pointer to a UResourceBundle struct. If fill in param was NULL, caller must close it
  * @stable ICU 2.0
  */
-U_STABLE UResourceBundle* U_EXPORT2
+U_CAPI UResourceBundle* U_EXPORT2
 ures_getNextResource(UResourceBundle *resourceBundle,
                      UResourceBundle *fillIn,
                      UErrorCode *status);
@@ -10183,7 +10528,7 @@ ures_getNextResource(UResourceBundle *resourceBundle,
  * @return a pointer to a zero-terminated UChar array which lives in a memory mapped/DLL file.
  * @stable ICU 2.0
  */
-U_STABLE const UChar* U_EXPORT2
+U_CAPI const UChar* U_EXPORT2
 ures_getNextString(UResourceBundle *resourceBundle,
                    int32_t* len,
                    const char ** key,
@@ -10201,7 +10546,7 @@ ures_getNextString(UResourceBundle *resourceBundle,
  * @return                  a pointer to a UResourceBundle struct. If fill in param was NULL, caller must close it
  * @stable ICU 2.0
  */
-U_STABLE UResourceBundle* U_EXPORT2
+U_CAPI UResourceBundle* U_EXPORT2
 ures_getByIndex(const UResourceBundle *resourceBundle,
                 int32_t indexR,
                 UResourceBundle *fillIn,
@@ -10218,7 +10563,7 @@ ures_getByIndex(const UResourceBundle *resourceBundle,
  * @return                  a pointer to a zero-terminated UChar array which lives in a memory mapped/DLL file.
  * @stable ICU 2.0
  */
-U_STABLE const UChar* U_EXPORT2
+U_CAPI const UChar* U_EXPORT2
 ures_getStringByIndex(const UResourceBundle *resourceBundle,
                       int32_t indexS,
                       int32_t* len,
@@ -10230,10 +10575,10 @@ ures_getStringByIndex(const UResourceBundle *resourceBundle,
  * it may need to be copied, or transformed from UTF-16 using u_strToUTF8()
  * or equivalent.
  *
- * If forceCopy==TRUE, then the string is always written to the dest buffer
+ * If forceCopy==true, then the string is always written to the dest buffer
  * and dest is returned.
  *
- * If forceCopy==FALSE, then the string is returned as a pointer if possible,
+ * If forceCopy==false, then the string is returned as a pointer if possible,
  * without needing a dest buffer (it can be NULL). If the string needs to be
  * copied or transformed, then it may be placed into dest at an arbitrary offset.
  *
@@ -10252,10 +10597,10 @@ ures_getStringByIndex(const UResourceBundle *resourceBundle,
  *               terminating NUL, even in case of U_BUFFER_OVERFLOW_ERROR.
  *               Can be NULL, meaning capacity=0 and the string length is not
  *               returned to the caller.
- * @param forceCopy If TRUE, then the output string will always be written to
+ * @param forceCopy If true, then the output string will always be written to
  *                  dest, with U_BUFFER_OVERFLOW_ERROR and
  *                  U_STRING_NOT_TERMINATED_WARNING set if appropriate.
- *                  If FALSE, then the dest buffer may or may not contain a
+ *                  If false, then the dest buffer may or may not contain a
  *                  copy of the string. dest may or may not be modified.
  *                  If a copy needs to be written, then the UErrorCode parameter
  *                  indicates overflow etc. as usual.
@@ -10272,7 +10617,7 @@ ures_getStringByIndex(const UResourceBundle *resourceBundle,
  * @see u_strToUTF8
  * @stable ICU 3.6
  */
-U_STABLE const char * U_EXPORT2
+U_CAPI const char * U_EXPORT2
 ures_getUTF8StringByIndex(const UResourceBundle *resB,
                           int32_t stringIndex,
                           char *dest, int32_t *pLength,
@@ -10291,7 +10636,7 @@ ures_getUTF8StringByIndex(const UResourceBundle *resB,
  * @return                  a pointer to a UResourceBundle struct. If fill in param was NULL, caller must close it
  * @stable ICU 2.0
  */
-U_STABLE UResourceBundle* U_EXPORT2
+U_CAPI UResourceBundle* U_EXPORT2
 ures_getByKey(const UResourceBundle *resourceBundle,
               const char* key,
               UResourceBundle *fillIn,
@@ -10309,7 +10654,7 @@ ures_getByKey(const UResourceBundle *resourceBundle,
  * @return                  a pointer to a zero-terminated UChar array which lives in a memory mapped/DLL file.
  * @stable ICU 2.0
  */
-U_STABLE const UChar* U_EXPORT2
+U_CAPI const UChar* U_EXPORT2
 ures_getStringByKey(const UResourceBundle *resB,
                     const char* key,
                     int32_t* len,
@@ -10323,10 +10668,10 @@ ures_getStringByKey(const UResourceBundle *resB,
  * it may need to be copied, or transformed from UTF-16 using u_strToUTF8()
  * or equivalent.
  *
- * If forceCopy==TRUE, then the string is always written to the dest buffer
+ * If forceCopy==true, then the string is always written to the dest buffer
  * and dest is returned.
  *
- * If forceCopy==FALSE, then the string is returned as a pointer if possible,
+ * If forceCopy==false, then the string is returned as a pointer if possible,
  * without needing a dest buffer (it can be NULL). If the string needs to be
  * copied or transformed, then it may be placed into dest at an arbitrary offset.
  *
@@ -10345,10 +10690,10 @@ ures_getStringByKey(const UResourceBundle *resB,
  *               terminating NUL, even in case of U_BUFFER_OVERFLOW_ERROR.
  *               Can be NULL, meaning capacity=0 and the string length is not
  *               returned to the caller.
- * @param forceCopy If TRUE, then the output string will always be written to
+ * @param forceCopy If true, then the output string will always be written to
  *                  dest, with U_BUFFER_OVERFLOW_ERROR and
  *                  U_STRING_NOT_TERMINATED_WARNING set if appropriate.
- *                  If FALSE, then the dest buffer may or may not contain a
+ *                  If false, then the dest buffer may or may not contain a
  *                  copy of the string. dest may or may not be modified.
  *                  If a copy needs to be written, then the UErrorCode parameter
  *                  indicates overflow etc. as usual.
@@ -10365,7 +10710,7 @@ ures_getStringByKey(const UResourceBundle *resB,
  * @see u_strToUTF8
  * @stable ICU 3.6
  */
-U_STABLE const char * U_EXPORT2
+U_CAPI const char * U_EXPORT2
 ures_getUTF8StringByKey(const UResourceBundle *resB,
                         const char *key,
                         char *dest, int32_t *pLength,
@@ -10381,7 +10726,7 @@ ures_getUTF8StringByKey(const UResourceBundle *resB,
  * @param status error code
  * @stable ICU 3.2
  */
-U_STABLE UEnumeration* U_EXPORT2
+U_CAPI UEnumeration* U_EXPORT2
 ures_openAvailableLocales(const char *packageName, UErrorCode *status);
 
 
@@ -10546,7 +10891,8 @@ enum UDisplayContext {
     UDISPCTX_SUBSTITUTE = (UDISPCTX_TYPE_SUBSTITUTE_HANDLING<<8) + 0,
     /**
      * A possible setting for SUBSTITUTE_HANDLING:
-     * Returns a null value when no data is available.
+     * Returns a null value with error code set to U_ILLEGAL_ARGUMENT_ERROR when no
+     * data is available.
      * @stable ICU 58
      */
     UDISPCTX_NO_SUBSTITUTE = (UDISPCTX_TYPE_SUBSTITUTE_HANDLING<<8) + 1
@@ -10578,6 +10924,7 @@ typedef enum UDisplayContext UDisplayContext;
  * \file
  * \brief C API: Provides display names of Locale ids and their components.
  */
+
 
 
 /**
@@ -10625,7 +10972,7 @@ typedef struct ULocaleDisplayNames ULocaleDisplayNames;
  * @param pErrorCode the status code
  * @stable ICU 4.4
  */
-U_STABLE ULocaleDisplayNames * U_EXPORT2
+U_CAPI ULocaleDisplayNames * U_EXPORT2
 uldn_open(const char * locale,
           UDialectHandling dialectHandling,
           UErrorCode *pErrorCode);
@@ -10635,7 +10982,7 @@ uldn_open(const char * locale,
  * @param ldn the ULocaleDisplayNames instance to be closed
  * @stable ICU 4.4
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uldn_close(ULocaleDisplayNames *ldn);
 
 
@@ -10648,7 +10995,7 @@ uldn_close(ULocaleDisplayNames *ldn);
  * @return the display locale 
  * @stable ICU 4.4
  */
-U_STABLE const char * U_EXPORT2
+U_CAPI const char * U_EXPORT2
 uldn_getLocale(const ULocaleDisplayNames *ldn);
 
 /**
@@ -10657,7 +11004,7 @@ uldn_getLocale(const ULocaleDisplayNames *ldn);
  * @return the dialect handling enum
  * @stable ICU 4.4
  */
-U_STABLE UDialectHandling U_EXPORT2
+U_CAPI UDialectHandling U_EXPORT2
 uldn_getDialectHandling(const ULocaleDisplayNames *ldn);
 
 /* names for entire locales */
@@ -10673,7 +11020,7 @@ uldn_getDialectHandling(const ULocaleDisplayNames *ldn);
  * greater than maxResultSize, the returned name will be truncated.
  * @stable ICU 4.4
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uldn_localeDisplayName(const ULocaleDisplayNames *ldn,
                        const char *locale,
                        UChar *result,
@@ -10693,7 +11040,7 @@ uldn_localeDisplayName(const ULocaleDisplayNames *ldn,
  * greater than maxResultSize, the returned name will be truncated.
  * @stable ICU 4.4
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uldn_languageDisplayName(const ULocaleDisplayNames *ldn,
                          const char *lang,
                          UChar *result,
@@ -10711,7 +11058,7 @@ uldn_languageDisplayName(const ULocaleDisplayNames *ldn,
  * greater than maxResultSize, the returned name will be truncated.
  * @stable ICU 4.4
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uldn_scriptDisplayName(const ULocaleDisplayNames *ldn,
                        const char *script,
                        UChar *result,
@@ -10729,7 +11076,7 @@ uldn_scriptDisplayName(const ULocaleDisplayNames *ldn,
  * greater than maxResultSize, the returned name will be truncated.
  * @stable ICU 4.4
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uldn_scriptCodeDisplayName(const ULocaleDisplayNames *ldn,
                            UScriptCode scriptCode,
                            UChar *result,
@@ -10747,7 +11094,7 @@ uldn_scriptCodeDisplayName(const ULocaleDisplayNames *ldn,
  * greater than maxResultSize, the returned name will be truncated.
  * @stable ICU 4.4
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uldn_regionDisplayName(const ULocaleDisplayNames *ldn,
                        const char *region,
                        UChar *result,
@@ -10765,7 +11112,7 @@ uldn_regionDisplayName(const ULocaleDisplayNames *ldn,
  * greater than maxResultSize, the returned name will be truncated.
  * @stable ICU 4.4
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uldn_variantDisplayName(const ULocaleDisplayNames *ldn,
                         const char *variant,
                         UChar *result,
@@ -10783,7 +11130,7 @@ uldn_variantDisplayName(const ULocaleDisplayNames *ldn,
  * greater than maxResultSize, the returned name will be truncated.
  * @stable ICU 4.4
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uldn_keyDisplayName(const ULocaleDisplayNames *ldn,
                     const char *key,
                     UChar *result,
@@ -10802,7 +11149,7 @@ uldn_keyDisplayName(const ULocaleDisplayNames *ldn,
  * greater than maxResultSize, the returned name will be truncated.
  * @stable ICU 4.4
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uldn_keyValueDisplayName(const ULocaleDisplayNames *ldn,
                          const char *key,
                          const char *value,
@@ -10824,7 +11171,7 @@ uldn_keyValueDisplayName(const ULocaleDisplayNames *ldn,
 * @return a ULocaleDisplayNames instance 
 * @stable ICU 51
 */
-U_STABLE ULocaleDisplayNames * U_EXPORT2
+U_CAPI ULocaleDisplayNames * U_EXPORT2
 uldn_openForContext(const char * locale, UDisplayContext *contexts,
                     int32_t length, UErrorCode *pErrorCode);
 
@@ -10838,7 +11185,7 @@ uldn_openForContext(const char * locale, UDisplayContext *contexts,
 * @return the UDisplayContextValue for the specified type.
 * @stable ICU 51
 */
-U_STABLE UDisplayContext U_EXPORT2
+U_CAPI UDisplayContext U_EXPORT2
 uldn_getContext(const ULocaleDisplayNames *ldn, UDisplayContextType type,
                 UErrorCode *pErrorCode);
 
@@ -10917,7 +11264,7 @@ typedef enum UCurrencyUsage UCurrencyUsage;
  *                invalid. 
  * @stable ICU 2.8
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucurr_forLocale(const char* locale,
                 UChar* buff,
                 int32_t buffCapacity,
@@ -10975,7 +11322,7 @@ typedef const void* UCurrRegistryKey;
  * if there was an error.
  * @stable ICU 2.6
  */
-U_STABLE UCurrRegistryKey U_EXPORT2
+U_CAPI UCurrRegistryKey U_EXPORT2
 ucurr_register(const UChar* isoCode, 
                    const char* locale,  
                    UErrorCode* status);
@@ -10987,10 +11334,10 @@ ucurr_register(const UChar* isoCode,
  * restored.
  * @param key the registry key returned by a previous call to ucurr_register
  * @param status the in/out status code, no special meanings are assigned
- * @return TRUE if the currency for this key was successfully unregistered
+ * @return true if the currency for this key was successfully unregistered
  * @stable ICU 2.6
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 ucurr_unregister(UCurrRegistryKey key, UErrorCode* status);
 #endif /* UCONFIG_NO_SERVICE */
 
@@ -11001,17 +11348,17 @@ ucurr_unregister(UCurrRegistryKey key, UErrorCode* status);
  * @param currency null-terminated 3-letter ISO 4217 code
  * @param locale locale in which to display currency
  * @param nameStyle selector for which kind of name to return
- * @param isChoiceFormat fill-in set to TRUE if the returned value
- * is a ChoiceFormat pattern; otherwise it is a static string
+ * @param isChoiceFormat always set to false, or can be NULL;
+ *     display names are static strings;
+ *     since ICU 4.4, ChoiceFormat patterns are no longer supported
  * @param len fill-in parameter to receive length of result
  * @param ec error code
  * @return pointer to display string of 'len' UChars.  If the resource
  * data contains no entry for 'currency', then 'currency' itself is
- * returned.  If *isChoiceFormat is TRUE, then the result is a
- * ChoiceFormat pattern.  Otherwise it is a static string.
+ * returned.
  * @stable ICU 2.6
  */
-U_STABLE const UChar* U_EXPORT2
+U_CAPI const UChar* U_EXPORT2
 ucurr_getName(const UChar* currency,
               const char* locale,
               UCurrNameStyle nameStyle,
@@ -11025,17 +11372,18 @@ ucurr_getName(const UChar* currency,
  * currency object in the en_US locale is "US dollar" or "US dollars".
  * @param currency null-terminated 3-letter ISO 4217 code
  * @param locale locale in which to display currency
- * @param isChoiceFormat fill-in set to TRUE if the returned value
- * is a ChoiceFormat pattern; otherwise it is a static string
+ * @param isChoiceFormat always set to false, or can be NULL;
+ *     display names are static strings;
+ *     since ICU 4.4, ChoiceFormat patterns are no longer supported
  * @param pluralCount plural count
  * @param len fill-in parameter to receive length of result
  * @param ec error code
  * @return pointer to display string of 'len' UChars.  If the resource
  * data contains no entry for 'currency', then 'currency' itself is
- * returned.  
+ * returned.
  * @stable ICU 4.2
  */
-U_STABLE const UChar* U_EXPORT2
+U_CAPI const UChar* U_EXPORT2
 ucurr_getPluralName(const UChar* currency,
                     const char* locale,
                     UBool* isChoiceFormat,
@@ -11060,7 +11408,7 @@ ucurr_getPluralName(const UChar* currency,
  * displayed, or 0 if there is an error
  * @stable ICU 3.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucurr_getDefaultFractionDigits(const UChar* currency,
                                UErrorCode* ec);
 
@@ -11081,7 +11429,7 @@ ucurr_getDefaultFractionDigits(const UChar* currency,
  * displayed, or 0 if there is an error
  * @stable ICU 54
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucurr_getDefaultFractionDigitsForUsage(const UChar* currency, 
                                        const UCurrencyUsage usage,
                                        UErrorCode* ec);
@@ -11096,7 +11444,7 @@ ucurr_getDefaultFractionDigitsForUsage(const UChar* currency,
  * or 0.0 if there is an error
  * @stable ICU 3.0
  */
-U_STABLE double U_EXPORT2
+U_CAPI double U_EXPORT2
 ucurr_getRoundingIncrement(const UChar* currency,
                            UErrorCode* ec);
 
@@ -11110,7 +11458,7 @@ ucurr_getRoundingIncrement(const UChar* currency,
  * or 0.0 if there is an error
  * @stable ICU 54
  */
-U_STABLE double U_EXPORT2
+U_CAPI double U_EXPORT2
 ucurr_getRoundingIncrementForUsage(const UChar* currency,
                                    const UCurrencyUsage usage,
                                    UErrorCode* ec);
@@ -11167,7 +11515,7 @@ typedef enum UCurrCurrencyType {
  * @param pErrorCode Error code
  * @stable ICU 3.2
  */
-U_STABLE UEnumeration * U_EXPORT2
+U_CAPI UEnumeration * U_EXPORT2
 ucurr_openISOCurrencies(uint32_t currType, UErrorCode *pErrorCode);
 
 /**
@@ -11192,11 +11540,11 @@ ucurr_openISOCurrencies(uint32_t currType, UErrorCode *pErrorCode);
   * @param errorCode 
   *            ICU error code 
    * 
-  * @return TRUE if the given ISO 4217 3-letter code is supported on the specified date range. 
+  * @return true if the given ISO 4217 3-letter code is supported on the specified date range. 
   * 
   * @stable ICU 4.8 
   */ 
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 ucurr_isAvailable(const UChar* isoCode, 
              UDate from, 
              UDate to, 
@@ -11216,7 +11564,7 @@ ucurr_isAvailable(const UChar* isoCode,
  *               values are invalid.
  * @stable ICU 4.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucurr_countCurrencies(const char* locale, 
                  UDate date, 
                  UErrorCode* ec); 
@@ -11240,7 +11588,7 @@ ucurr_countCurrencies(const char* locale,
  *               invalid.  
  * @stable ICU 4.0 
  */ 
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 ucurr_forLocaleAndDate(const char* locale, 
                 UDate date, 
                 int32_t index,
@@ -11264,7 +11612,7 @@ ucurr_forLocaleAndDate(const char* locale,
  * @return a string enumeration over keyword values for the given key and the locale.
  * @stable ICU 4.2
  */
-U_STABLE UEnumeration* U_EXPORT2
+U_CAPI UEnumeration* U_EXPORT2
 ucurr_getKeywordValuesForLocale(const char* key,
                                 const char* locale,
                                 UBool commonlyUsed,
@@ -11279,12 +11627,1018 @@ ucurr_getKeywordValuesForLocale(const char* key,
  * @return The ISO 4217 numeric code of the currency
  * @stable ICU 49
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucurr_getNumericCode(const UChar* currency);
 
 #endif /* #if !UCONFIG_NO_FORMATTING */
 
+#endif // _UCURR_H_
+
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+
+// ucpmap.h
+// Copyright (C) 2018 and later: Unicode, Inc. and others.
+// License & terms of use: http://www.unicode.org/copyright.html
+
+// ucpmap.h
+// created: 2018sep03 Markus W. Scherer
+
+#ifndef __UCPMAP_H__
+#define __UCPMAP_H__
+
+
+U_CDECL_BEGIN
+
+/**
+ * \file
+ *
+ * This file defines an abstract map from Unicode code points to integer values.
+ *
+ * @see UCPMap
+ * @see UCPTrie
+ * @see UMutableCPTrie
+ */
+
+/**
+ * Abstract map from Unicode code points (U+0000..U+10FFFF) to integer values.
+ *
+ * @see UCPTrie
+ * @see UMutableCPTrie
+ * @stable ICU 63
+ */
+typedef struct UCPMap UCPMap;
+
+/**
+ * Selectors for how ucpmap_getRange() etc. should report value ranges overlapping with surrogates.
+ * Most users should use UCPMAP_RANGE_NORMAL.
+ *
+ * @see ucpmap_getRange
+ * @see ucptrie_getRange
+ * @see umutablecptrie_getRange
+ * @stable ICU 63
+ */
+enum UCPMapRangeOption {
+    /**
+     * ucpmap_getRange() enumerates all same-value ranges as stored in the map.
+     * Most users should use this option.
+     * @stable ICU 63
+     */
+    UCPMAP_RANGE_NORMAL,
+    /**
+     * ucpmap_getRange() enumerates all same-value ranges as stored in the map,
+     * except that lead surrogates (U+D800..U+DBFF) are treated as having the
+     * surrogateValue, which is passed to getRange() as a separate parameter.
+     * The surrogateValue is not transformed via filter().
+     * See U_IS_LEAD(c).
+     *
+     * Most users should use UCPMAP_RANGE_NORMAL instead.
+     *
+     * This option is useful for maps that map surrogate code *units* to
+     * special values optimized for UTF-16 string processing
+     * or for special error behavior for unpaired surrogates,
+     * but those values are not to be associated with the lead surrogate code *points*.
+     * @stable ICU 63
+     */
+    UCPMAP_RANGE_FIXED_LEAD_SURROGATES,
+    /**
+     * ucpmap_getRange() enumerates all same-value ranges as stored in the map,
+     * except that all surrogates (U+D800..U+DFFF) are treated as having the
+     * surrogateValue, which is passed to getRange() as a separate parameter.
+     * The surrogateValue is not transformed via filter().
+     * See U_IS_SURROGATE(c).
+     *
+     * Most users should use UCPMAP_RANGE_NORMAL instead.
+     *
+     * This option is useful for maps that map surrogate code *units* to
+     * special values optimized for UTF-16 string processing
+     * or for special error behavior for unpaired surrogates,
+     * but those values are not to be associated with the lead surrogate code *points*.
+     * @stable ICU 63
+     */
+    UCPMAP_RANGE_FIXED_ALL_SURROGATES
+};
+#ifndef U_IN_DOXYGEN
+typedef enum UCPMapRangeOption UCPMapRangeOption;
 #endif
+
+/**
+ * Returns the value for a code point as stored in the map, with range checking.
+ * Returns an implementation-defined error value if c is not in the range 0..U+10FFFF.
+ *
+ * @param map the map
+ * @param c the code point
+ * @return the map value,
+ *         or an implementation-defined error value if the code point is not in the range 0..U+10FFFF
+ * @stable ICU 63
+ */
+U_CAPI uint32_t U_EXPORT2
+ucpmap_get(const UCPMap *map, UChar32 c);
+
+/**
+ * Callback function type: Modifies a map value.
+ * Optionally called by ucpmap_getRange()/ucptrie_getRange()/umutablecptrie_getRange().
+ * The modified value will be returned by the getRange function.
+ *
+ * Can be used to ignore some of the value bits,
+ * make a filter for one of several values,
+ * return a value index computed from the map value, etc.
+ *
+ * @param context an opaque pointer, as passed into the getRange function
+ * @param value a value from the map
+ * @return the modified value
+ * @stable ICU 63
+ */
+typedef uint32_t U_CALLCONV
+UCPMapValueFilter(const void *context, uint32_t value);
+
+/**
+ * Returns the last code point such that all those from start to there have the same value.
+ * Can be used to efficiently iterate over all same-value ranges in a map.
+ * (This is normally faster than iterating over code points and get()ting each value,
+ * but much slower than a data structure that stores ranges directly.)
+ *
+ * If the UCPMapValueFilter function pointer is not NULL, then
+ * the value to be delivered is passed through that function, and the return value is the end
+ * of the range where all values are modified to the same actual value.
+ * The value is unchanged if that function pointer is NULL.
+ *
+ * Example:
+ * \code
+ * UChar32 start = 0, end;
+ * uint32_t value;
+ * while ((end = ucpmap_getRange(map, start, UCPMAP_RANGE_NORMAL, 0,
+ *                               NULL, NULL, &value)) >= 0) {
+ *     // Work with the range start..end and its value.
+ *     start = end + 1;
+ * }
+ * \endcode
+ *
+ * @param map the map
+ * @param start range start
+ * @param option defines whether surrogates are treated normally,
+ *               or as having the surrogateValue; usually UCPMAP_RANGE_NORMAL
+ * @param surrogateValue value for surrogates; ignored if option==UCPMAP_RANGE_NORMAL
+ * @param filter a pointer to a function that may modify the map data value,
+ *     or NULL if the values from the map are to be used unmodified
+ * @param context an opaque pointer that is passed on to the filter function
+ * @param pValue if not NULL, receives the value that every code point start..end has;
+ *     may have been modified by filter(context, map value)
+ *     if that function pointer is not NULL
+ * @return the range end code point, or -1 if start is not a valid code point
+ * @stable ICU 63
+ */
+U_CAPI UChar32 U_EXPORT2
+ucpmap_getRange(const UCPMap *map, UChar32 start,
+                UCPMapRangeOption option, uint32_t surrogateValue,
+                UCPMapValueFilter *filter, const void *context, uint32_t *pValue);
+
+U_CDECL_END
+
+#endif // __UCPMAP_H__
+
+// ucptrie.h
+// Copyright (C) 2017 and later: Unicode, Inc. and others.
+// License & terms of use: http://www.unicode.org/copyright.html
+
+// ucptrie.h (modified from utrie2.h)
+// created: 2017dec29 Markus W. Scherer
+
+#ifndef __UCPTRIE_H__
+#define __UCPTRIE_H__
+
+
+
+U_CDECL_BEGIN
+
+/**
+ * \file
+ *
+ * This file defines an immutable Unicode code point trie.
+ *
+ * @see UCPTrie
+ * @see UMutableCPTrie
+ */
+
+#ifndef U_IN_DOXYGEN
+/** @internal */
+typedef union UCPTrieData {
+    /** @internal */
+    const void *ptr0;
+    /** @internal */
+    const uint16_t *ptr16;
+    /** @internal */
+    const uint32_t *ptr32;
+    /** @internal */
+    const uint8_t *ptr8;
+} UCPTrieData;
+#endif
+
+/**
+ * Immutable Unicode code point trie structure.
+ * Fast, reasonably compact, map from Unicode code points (U+0000..U+10FFFF) to integer values.
+ * For details see http://site.icu-project.org/design/struct/utrie
+ *
+ * Do not access UCPTrie fields directly; use public functions and macros.
+ * Functions are easy to use: They support all trie types and value widths.
+ *
+ * When performance is really important, macros provide faster access.
+ * Most macros are specific to either "fast" or "small" tries, see UCPTrieType.
+ * There are "fast" macros for special optimized use cases.
+ *
+ * The macros will return bogus values, or may crash, if used on the wrong type or value width.
+ *
+ * @see UMutableCPTrie
+ * @stable ICU 63
+ */
+struct UCPTrie {
+#ifndef U_IN_DOXYGEN
+    /** @internal */
+    const uint16_t *index;
+    /** @internal */
+    UCPTrieData data;
+
+    /** @internal */
+    int32_t indexLength;
+    /** @internal */
+    int32_t dataLength;
+    /** Start of the last range which ends at U+10FFFF. @internal */
+    UChar32 highStart;
+    /** highStart>>12 @internal */
+    uint16_t shifted12HighStart;
+
+    /** @internal */
+    int8_t type;  // UCPTrieType
+    /** @internal */
+    int8_t valueWidth;  // UCPTrieValueWidth
+
+    /** padding/reserved @internal */
+    uint32_t reserved32;
+    /** padding/reserved @internal */
+    uint16_t reserved16;
+
+    /**
+     * Internal index-3 null block offset.
+     * Set to an impossibly high value (e.g., 0xffff) if there is no dedicated index-3 null block.
+     * @internal
+     */
+    uint16_t index3NullOffset;
+    /**
+     * Internal data null block offset, not shifted.
+     * Set to an impossibly high value (e.g., 0xfffff) if there is no dedicated data null block.
+     * @internal
+     */
+    int32_t dataNullOffset;
+    /** @internal */
+    uint32_t nullValue;
+
+#ifdef UCPTRIE_DEBUG
+    /** @internal */
+    const char *name;
+#endif
+#endif
+};
+#ifndef U_IN_DOXYGEN
+typedef struct UCPTrie UCPTrie;
+#endif
+
+/**
+ * Selectors for the type of a UCPTrie.
+ * Different trade-offs for size vs. speed.
+ *
+ * @see umutablecptrie_buildImmutable
+ * @see ucptrie_openFromBinary
+ * @see ucptrie_getType
+ * @stable ICU 63
+ */
+enum UCPTrieType {
+    /**
+     * For ucptrie_openFromBinary() to accept any type.
+     * ucptrie_getType() will return the actual type.
+     * @stable ICU 63
+     */
+    UCPTRIE_TYPE_ANY = -1,
+    /**
+     * Fast/simple/larger BMP data structure. Use functions and "fast" macros.
+     * @stable ICU 63
+     */
+    UCPTRIE_TYPE_FAST,
+    /**
+     * Small/slower BMP data structure. Use functions and "small" macros.
+     * @stable ICU 63
+     */
+    UCPTRIE_TYPE_SMALL
+};
+#ifndef U_IN_DOXYGEN
+typedef enum UCPTrieType UCPTrieType;
+#endif
+
+/**
+ * Selectors for the number of bits in a UCPTrie data value.
+ *
+ * @see umutablecptrie_buildImmutable
+ * @see ucptrie_openFromBinary
+ * @see ucptrie_getValueWidth
+ * @stable ICU 63
+ */
+enum UCPTrieValueWidth {
+    /**
+     * For ucptrie_openFromBinary() to accept any data value width.
+     * ucptrie_getValueWidth() will return the actual data value width.
+     * @stable ICU 63
+     */
+    UCPTRIE_VALUE_BITS_ANY = -1,
+    /**
+     * The trie stores 16 bits per data value.
+     * It returns them as unsigned values 0..0xffff=65535.
+     * @stable ICU 63
+     */
+    UCPTRIE_VALUE_BITS_16,
+    /**
+     * The trie stores 32 bits per data value.
+     * @stable ICU 63
+     */
+    UCPTRIE_VALUE_BITS_32,
+    /**
+     * The trie stores 8 bits per data value.
+     * It returns them as unsigned values 0..0xff=255.
+     * @stable ICU 63
+     */
+    UCPTRIE_VALUE_BITS_8
+};
+#ifndef U_IN_DOXYGEN
+typedef enum UCPTrieValueWidth UCPTrieValueWidth;
+#endif
+
+/**
+ * Opens a trie from its binary form, stored in 32-bit-aligned memory.
+ * Inverse of ucptrie_toBinary().
+ *
+ * The memory must remain valid and unchanged as long as the trie is used.
+ * You must ucptrie_close() the trie once you are done using it.
+ *
+ * @param type selects the trie type; results in an
+ *             U_INVALID_FORMAT_ERROR if it does not match the binary data;
+ *             use UCPTRIE_TYPE_ANY to accept any type
+ * @param valueWidth selects the number of bits in a data value; results in an
+ *                  U_INVALID_FORMAT_ERROR if it does not match the binary data;
+ *                  use UCPTRIE_VALUE_BITS_ANY to accept any data value width
+ * @param data a pointer to 32-bit-aligned memory containing the binary data of a UCPTrie
+ * @param length the number of bytes available at data;
+ *               can be more than necessary
+ * @param pActualLength receives the actual number of bytes at data taken up by the trie data;
+ *                      can be NULL
+ * @param pErrorCode an in/out ICU UErrorCode
+ * @return the trie
+ *
+ * @see umutablecptrie_open
+ * @see umutablecptrie_buildImmutable
+ * @see ucptrie_toBinary
+ * @stable ICU 63
+ */
+U_CAPI UCPTrie * U_EXPORT2
+ucptrie_openFromBinary(UCPTrieType type, UCPTrieValueWidth valueWidth,
+                       const void *data, int32_t length, int32_t *pActualLength,
+                       UErrorCode *pErrorCode);
+
+/**
+ * Closes a trie and releases associated memory.
+ *
+ * @param trie the trie
+ * @stable ICU 63
+ */
+U_CAPI void U_EXPORT2
+ucptrie_close(UCPTrie *trie);
+
+/**
+ * Returns the trie type.
+ *
+ * @param trie the trie
+ * @return the trie type
+ * @see ucptrie_openFromBinary
+ * @see UCPTRIE_TYPE_ANY
+ * @stable ICU 63
+ */
+U_CAPI UCPTrieType U_EXPORT2
+ucptrie_getType(const UCPTrie *trie);
+
+/**
+ * Returns the number of bits in a trie data value.
+ *
+ * @param trie the trie
+ * @return the number of bits in a trie data value
+ * @see ucptrie_openFromBinary
+ * @see UCPTRIE_VALUE_BITS_ANY
+ * @stable ICU 63
+ */
+U_CAPI UCPTrieValueWidth U_EXPORT2
+ucptrie_getValueWidth(const UCPTrie *trie);
+
+/**
+ * Returns the value for a code point as stored in the trie, with range checking.
+ * Returns the trie error value if c is not in the range 0..U+10FFFF.
+ *
+ * Easier to use than UCPTRIE_FAST_GET() and similar macros but slower.
+ * Easier to use because, unlike the macros, this function works on all UCPTrie
+ * objects, for all types and value widths.
+ *
+ * @param trie the trie
+ * @param c the code point
+ * @return the trie value,
+ *         or the trie error value if the code point is not in the range 0..U+10FFFF
+ * @stable ICU 63
+ */
+U_CAPI uint32_t U_EXPORT2
+ucptrie_get(const UCPTrie *trie, UChar32 c);
+
+/**
+ * Returns the last code point such that all those from start to there have the same value.
+ * Can be used to efficiently iterate over all same-value ranges in a trie.
+ * (This is normally faster than iterating over code points and get()ting each value,
+ * but much slower than a data structure that stores ranges directly.)
+ *
+ * If the UCPMapValueFilter function pointer is not NULL, then
+ * the value to be delivered is passed through that function, and the return value is the end
+ * of the range where all values are modified to the same actual value.
+ * The value is unchanged if that function pointer is NULL.
+ *
+ * Example:
+ * \code
+ * UChar32 start = 0, end;
+ * uint32_t value;
+ * while ((end = ucptrie_getRange(trie, start, UCPMAP_RANGE_NORMAL, 0,
+ *                                NULL, NULL, &value)) >= 0) {
+ *     // Work with the range start..end and its value.
+ *     start = end + 1;
+ * }
+ * \endcode
+ *
+ * @param trie the trie
+ * @param start range start
+ * @param option defines whether surrogates are treated normally,
+ *               or as having the surrogateValue; usually UCPMAP_RANGE_NORMAL
+ * @param surrogateValue value for surrogates; ignored if option==UCPMAP_RANGE_NORMAL
+ * @param filter a pointer to a function that may modify the trie data value,
+ *     or NULL if the values from the trie are to be used unmodified
+ * @param context an opaque pointer that is passed on to the filter function
+ * @param pValue if not NULL, receives the value that every code point start..end has;
+ *     may have been modified by filter(context, trie value)
+ *     if that function pointer is not NULL
+ * @return the range end code point, or -1 if start is not a valid code point
+ * @stable ICU 63
+ */
+U_CAPI UChar32 U_EXPORT2
+ucptrie_getRange(const UCPTrie *trie, UChar32 start,
+                 UCPMapRangeOption option, uint32_t surrogateValue,
+                 UCPMapValueFilter *filter, const void *context, uint32_t *pValue);
+
+/**
+ * Writes a memory-mappable form of the trie into 32-bit aligned memory.
+ * Inverse of ucptrie_openFromBinary().
+ *
+ * @param trie the trie
+ * @param data a pointer to 32-bit-aligned memory to be filled with the trie data;
+ *             can be NULL if capacity==0
+ * @param capacity the number of bytes available at data, or 0 for pure preflighting
+ * @param pErrorCode an in/out ICU UErrorCode;
+ *                   U_BUFFER_OVERFLOW_ERROR if the capacity is too small
+ * @return the number of bytes written or (if buffer overflow) needed for the trie
+ *
+ * @see ucptrie_openFromBinary()
+ * @stable ICU 63
+ */
+U_CAPI int32_t U_EXPORT2
+ucptrie_toBinary(const UCPTrie *trie, void *data, int32_t capacity, UErrorCode *pErrorCode);
+
+/**
+ * Macro parameter value for a trie with 16-bit data values.
+ * Use the name of this macro as a "dataAccess" parameter in other macros.
+ * Do not use this macro in any other way.
+ *
+ * @see UCPTRIE_VALUE_BITS_16
+ * @stable ICU 63
+ */
+#define UCPTRIE_16(trie, i) ((trie)->data.ptr16[i])
+
+/**
+ * Macro parameter value for a trie with 32-bit data values.
+ * Use the name of this macro as a "dataAccess" parameter in other macros.
+ * Do not use this macro in any other way.
+ *
+ * @see UCPTRIE_VALUE_BITS_32
+ * @stable ICU 63
+ */
+#define UCPTRIE_32(trie, i) ((trie)->data.ptr32[i])
+
+/**
+ * Macro parameter value for a trie with 8-bit data values.
+ * Use the name of this macro as a "dataAccess" parameter in other macros.
+ * Do not use this macro in any other way.
+ *
+ * @see UCPTRIE_VALUE_BITS_8
+ * @stable ICU 63
+ */
+#define UCPTRIE_8(trie, i) ((trie)->data.ptr8[i])
+
+/**
+ * Returns a trie value for a code point, with range checking.
+ * Returns the trie error value if c is not in the range 0..U+10FFFF.
+ *
+ * @param trie (const UCPTrie *, in) the trie; must have type UCPTRIE_TYPE_FAST
+ * @param dataAccess UCPTRIE_16, UCPTRIE_32, or UCPTRIE_8 according to the trie’s value width
+ * @param c (UChar32, in) the input code point
+ * @return The code point's trie value.
+ * @stable ICU 63
+ */
+#define UCPTRIE_FAST_GET(trie, dataAccess, c) dataAccess(trie, _UCPTRIE_CP_INDEX(trie, 0xffff, c))
+
+/**
+ * Returns a 16-bit trie value for a code point, with range checking.
+ * Returns the trie error value if c is not in the range U+0000..U+10FFFF.
+ *
+ * @param trie (const UCPTrie *, in) the trie; must have type UCPTRIE_TYPE_SMALL
+ * @param dataAccess UCPTRIE_16, UCPTRIE_32, or UCPTRIE_8 according to the trie’s value width
+ * @param c (UChar32, in) the input code point
+ * @return The code point's trie value.
+ * @stable ICU 63
+ */
+#define UCPTRIE_SMALL_GET(trie, dataAccess, c) \
+    dataAccess(trie, _UCPTRIE_CP_INDEX(trie, UCPTRIE_SMALL_MAX, c))
+
+/**
+ * UTF-16: Reads the next code point (UChar32 c, out), post-increments src,
+ * and gets a value from the trie.
+ * Sets the trie error value if c is an unpaired surrogate.
+ *
+ * @param trie (const UCPTrie *, in) the trie; must have type UCPTRIE_TYPE_FAST
+ * @param dataAccess UCPTRIE_16, UCPTRIE_32, or UCPTRIE_8 according to the trie’s value width
+ * @param src (const UChar *, in/out) the source text pointer
+ * @param limit (const UChar *, in) the limit pointer for the text, or NULL if NUL-terminated
+ * @param c (UChar32, out) variable for the code point
+ * @param result (out) variable for the trie lookup result
+ * @stable ICU 63
+ */
+#define UCPTRIE_FAST_U16_NEXT(trie, dataAccess, src, limit, c, result) UPRV_BLOCK_MACRO_BEGIN { \
+    (c) = *(src)++; \
+    int32_t __index; \
+    if (!U16_IS_SURROGATE(c)) { \
+        __index = _UCPTRIE_FAST_INDEX(trie, c); \
+    } else { \
+        uint16_t __c2; \
+        if (U16_IS_SURROGATE_LEAD(c) && (src) != (limit) && U16_IS_TRAIL(__c2 = *(src))) { \
+            ++(src); \
+            (c) = U16_GET_SUPPLEMENTARY((c), __c2); \
+            __index = _UCPTRIE_SMALL_INDEX(trie, c); \
+        } else { \
+            __index = (trie)->dataLength - UCPTRIE_ERROR_VALUE_NEG_DATA_OFFSET; \
+        } \
+    } \
+    (result) = dataAccess(trie, __index); \
+} UPRV_BLOCK_MACRO_END
+
+/**
+ * UTF-16: Reads the previous code point (UChar32 c, out), pre-decrements src,
+ * and gets a value from the trie.
+ * Sets the trie error value if c is an unpaired surrogate.
+ *
+ * @param trie (const UCPTrie *, in) the trie; must have type UCPTRIE_TYPE_FAST
+ * @param dataAccess UCPTRIE_16, UCPTRIE_32, or UCPTRIE_8 according to the trie’s value width
+ * @param start (const UChar *, in) the start pointer for the text
+ * @param src (const UChar *, in/out) the source text pointer
+ * @param c (UChar32, out) variable for the code point
+ * @param result (out) variable for the trie lookup result
+ * @stable ICU 63
+ */
+#define UCPTRIE_FAST_U16_PREV(trie, dataAccess, start, src, c, result) UPRV_BLOCK_MACRO_BEGIN { \
+    (c) = *--(src); \
+    int32_t __index; \
+    if (!U16_IS_SURROGATE(c)) { \
+        __index = _UCPTRIE_FAST_INDEX(trie, c); \
+    } else { \
+        uint16_t __c2; \
+        if (U16_IS_SURROGATE_TRAIL(c) && (src) != (start) && U16_IS_LEAD(__c2 = *((src) - 1))) { \
+            --(src); \
+            (c) = U16_GET_SUPPLEMENTARY(__c2, (c)); \
+            __index = _UCPTRIE_SMALL_INDEX(trie, c); \
+        } else { \
+            __index = (trie)->dataLength - UCPTRIE_ERROR_VALUE_NEG_DATA_OFFSET; \
+        } \
+    } \
+    (result) = dataAccess(trie, __index); \
+} UPRV_BLOCK_MACRO_END
+
+/**
+ * UTF-8: Post-increments src and gets a value from the trie.
+ * Sets the trie error value for an ill-formed byte sequence.
+ *
+ * Unlike UCPTRIE_FAST_U16_NEXT() this UTF-8 macro does not provide the code point
+ * because it would be more work to do so and is often not needed.
+ * If the trie value differs from the error value, then the byte sequence is well-formed,
+ * and the code point can be assembled without revalidation.
+ *
+ * @param trie (const UCPTrie *, in) the trie; must have type UCPTRIE_TYPE_FAST
+ * @param dataAccess UCPTRIE_16, UCPTRIE_32, or UCPTRIE_8 according to the trie’s value width
+ * @param src (const char *, in/out) the source text pointer
+ * @param limit (const char *, in) the limit pointer for the text (must not be NULL)
+ * @param result (out) variable for the trie lookup result
+ * @stable ICU 63
+ */
+#define UCPTRIE_FAST_U8_NEXT(trie, dataAccess, src, limit, result) UPRV_BLOCK_MACRO_BEGIN { \
+    int32_t __lead = (uint8_t)*(src)++; \
+    if (!U8_IS_SINGLE(__lead)) { \
+        uint8_t __t1, __t2, __t3; \
+        if ((src) != (limit) && \
+            (__lead >= 0xe0 ? \
+                __lead < 0xf0 ?  /* U+0800..U+FFFF except surrogates */ \
+                    U8_LEAD3_T1_BITS[__lead &= 0xf] & (1 << ((__t1 = *(src)) >> 5)) && \
+                    ++(src) != (limit) && (__t2 = *(src) - 0x80) <= 0x3f && \
+                    (__lead = ((int32_t)(trie)->index[(__lead << 6) + (__t1 & 0x3f)]) + __t2, 1) \
+                :  /* U+10000..U+10FFFF */ \
+                    (__lead -= 0xf0) <= 4 && \
+                    U8_LEAD4_T1_BITS[(__t1 = *(src)) >> 4] & (1 << __lead) && \
+                    (__lead = (__lead << 6) | (__t1 & 0x3f), ++(src) != (limit)) && \
+                    (__t2 = *(src) - 0x80) <= 0x3f && \
+                    ++(src) != (limit) && (__t3 = *(src) - 0x80) <= 0x3f && \
+                    (__lead = __lead >= (trie)->shifted12HighStart ? \
+                        (trie)->dataLength - UCPTRIE_HIGH_VALUE_NEG_DATA_OFFSET : \
+                        ucptrie_internalSmallU8Index((trie), __lead, __t2, __t3), 1) \
+            :  /* U+0080..U+07FF */ \
+                __lead >= 0xc2 && (__t1 = *(src) - 0x80) <= 0x3f && \
+                (__lead = (int32_t)(trie)->index[__lead & 0x1f] + __t1, 1))) { \
+            ++(src); \
+        } else { \
+            __lead = (trie)->dataLength - UCPTRIE_ERROR_VALUE_NEG_DATA_OFFSET;  /* ill-formed*/ \
+        } \
+    } \
+    (result) = dataAccess(trie, __lead); \
+} UPRV_BLOCK_MACRO_END
+
+/**
+ * UTF-8: Pre-decrements src and gets a value from the trie.
+ * Sets the trie error value for an ill-formed byte sequence.
+ *
+ * Unlike UCPTRIE_FAST_U16_PREV() this UTF-8 macro does not provide the code point
+ * because it would be more work to do so and is often not needed.
+ * If the trie value differs from the error value, then the byte sequence is well-formed,
+ * and the code point can be assembled without revalidation.
+ *
+ * @param trie (const UCPTrie *, in) the trie; must have type UCPTRIE_TYPE_FAST
+ * @param dataAccess UCPTRIE_16, UCPTRIE_32, or UCPTRIE_8 according to the trie’s value width
+ * @param start (const char *, in) the start pointer for the text
+ * @param src (const char *, in/out) the source text pointer
+ * @param result (out) variable for the trie lookup result
+ * @stable ICU 63
+ */
+#define UCPTRIE_FAST_U8_PREV(trie, dataAccess, start, src, result) UPRV_BLOCK_MACRO_BEGIN { \
+    int32_t __index = (uint8_t)*--(src); \
+    if (!U8_IS_SINGLE(__index)) { \
+        __index = ucptrie_internalU8PrevIndex((trie), __index, (const uint8_t *)(start), \
+                                              (const uint8_t *)(src)); \
+        (src) -= __index & 7; \
+        __index >>= 3; \
+    } \
+    (result) = dataAccess(trie, __index); \
+} UPRV_BLOCK_MACRO_END
+
+/**
+ * Returns a trie value for an ASCII code point, without range checking.
+ *
+ * @param trie (const UCPTrie *, in) the trie (of either fast or small type)
+ * @param dataAccess UCPTRIE_16, UCPTRIE_32, or UCPTRIE_8 according to the trie’s value width
+ * @param c (UChar32, in) the input code point; must be U+0000..U+007F
+ * @return The ASCII code point's trie value.
+ * @stable ICU 63
+ */
+#define UCPTRIE_ASCII_GET(trie, dataAccess, c) dataAccess(trie, c)
+
+/**
+ * Returns a trie value for a BMP code point (U+0000..U+FFFF), without range checking.
+ * Can be used to look up a value for a UTF-16 code unit if other parts of
+ * the string processing check for surrogates.
+ *
+ * @param trie (const UCPTrie *, in) the trie; must have type UCPTRIE_TYPE_FAST
+ * @param dataAccess UCPTRIE_16, UCPTRIE_32, or UCPTRIE_8 according to the trie’s value width
+ * @param c (UChar32, in) the input code point, must be U+0000..U+FFFF
+ * @return The BMP code point's trie value.
+ * @stable ICU 63
+ */
+#define UCPTRIE_FAST_BMP_GET(trie, dataAccess, c) dataAccess(trie, _UCPTRIE_FAST_INDEX(trie, c))
+
+/**
+ * Returns a trie value for a supplementary code point (U+10000..U+10FFFF),
+ * without range checking.
+ *
+ * @param trie (const UCPTrie *, in) the trie; must have type UCPTRIE_TYPE_FAST
+ * @param dataAccess UCPTRIE_16, UCPTRIE_32, or UCPTRIE_8 according to the trie’s value width
+ * @param c (UChar32, in) the input code point, must be U+10000..U+10FFFF
+ * @return The supplementary code point's trie value.
+ * @stable ICU 63
+ */
+#define UCPTRIE_FAST_SUPP_GET(trie, dataAccess, c) dataAccess(trie, _UCPTRIE_SMALL_INDEX(trie, c))
+
+/* Internal definitions ----------------------------------------------------- */
+
+#ifndef U_IN_DOXYGEN
+
+/**
+ * Internal implementation constants.
+ * These are needed for the API macros, but users should not use these directly.
+ * @internal
+ */
+enum {
+    /** @internal */
+    UCPTRIE_FAST_SHIFT = 6,
+
+    /** Number of entries in a data block for code points below the fast limit. 64=0x40 @internal */
+    UCPTRIE_FAST_DATA_BLOCK_LENGTH = 1 << UCPTRIE_FAST_SHIFT,
+
+    /** Mask for getting the lower bits for the in-fast-data-block offset. @internal */
+    UCPTRIE_FAST_DATA_MASK = UCPTRIE_FAST_DATA_BLOCK_LENGTH - 1,
+
+    /** @internal */
+    UCPTRIE_SMALL_MAX = 0xfff,
+
+    /**
+     * Offset from dataLength (to be subtracted) for fetching the
+     * value returned for out-of-range code points and ill-formed UTF-8/16.
+     * @internal
+     */
+    UCPTRIE_ERROR_VALUE_NEG_DATA_OFFSET = 1,
+    /**
+     * Offset from dataLength (to be subtracted) for fetching the
+     * value returned for code points highStart..U+10FFFF.
+     * @internal
+     */
+    UCPTRIE_HIGH_VALUE_NEG_DATA_OFFSET = 2
+};
+
+/* Internal functions and macros -------------------------------------------- */
+// Do not conditionalize with #ifndef U_HIDE_INTERNAL_API, needed for public API
+
+/** @internal */
+U_CAPI int32_t U_EXPORT2
+ucptrie_internalSmallIndex(const UCPTrie *trie, UChar32 c);
+
+/** @internal */
+U_CAPI int32_t U_EXPORT2
+ucptrie_internalSmallU8Index(const UCPTrie *trie, int32_t lt1, uint8_t t2, uint8_t t3);
+
+/**
+ * Internal function for part of the UCPTRIE_FAST_U8_PREVxx() macro implementations.
+ * Do not call directly.
+ * @internal
+ */
+U_CAPI int32_t U_EXPORT2
+ucptrie_internalU8PrevIndex(const UCPTrie *trie, UChar32 c,
+                            const uint8_t *start, const uint8_t *src);
+
+/** Internal trie getter for a code point below the fast limit. Returns the data index. @internal */
+#define _UCPTRIE_FAST_INDEX(trie, c) \
+    ((int32_t)(trie)->index[(c) >> UCPTRIE_FAST_SHIFT] + ((c) & UCPTRIE_FAST_DATA_MASK))
+
+/** Internal trie getter for a code point at or above the fast limit. Returns the data index. @internal */
+#define _UCPTRIE_SMALL_INDEX(trie, c) \
+    ((c) >= (trie)->highStart ? \
+        (trie)->dataLength - UCPTRIE_HIGH_VALUE_NEG_DATA_OFFSET : \
+        ucptrie_internalSmallIndex(trie, c))
+
+/**
+ * Internal trie getter for a code point, with checking that c is in U+0000..10FFFF.
+ * Returns the data index.
+ * @internal
+ */
+#define _UCPTRIE_CP_INDEX(trie, fastMax, c) \
+    ((uint32_t)(c) <= (uint32_t)(fastMax) ? \
+        _UCPTRIE_FAST_INDEX(trie, c) : \
+        (uint32_t)(c) <= 0x10ffff ? \
+            _UCPTRIE_SMALL_INDEX(trie, c) : \
+            (trie)->dataLength - UCPTRIE_ERROR_VALUE_NEG_DATA_OFFSET)
+
+U_CDECL_END
+
+#endif  // U_IN_DOXYGEN
+
+
+#endif // __UCPTRIE_H__
+
+// umutablecptrie.h
+// Copyright (C) 2017 and later: Unicode, Inc. and others.
+// License & terms of use: http://www.unicode.org/copyright.html
+
+// umutablecptrie.h (split out of ucptrie.h)
+// created: 2018jan24 Markus W. Scherer
+
+#ifndef __UMUTABLECPTRIE_H__
+#define __UMUTABLECPTRIE_H__
+
+
+
+
+U_CDECL_BEGIN
+
+/**
+ * \file
+ *
+ * This file defines a mutable Unicode code point trie.
+ *
+ * @see UCPTrie
+ * @see UMutableCPTrie
+ */
+
+/**
+ * Mutable Unicode code point trie.
+ * Fast map from Unicode code points (U+0000..U+10FFFF) to 32-bit integer values.
+ * For details see http://site.icu-project.org/design/struct/utrie
+ *
+ * Setting values (especially ranges) and lookup is fast.
+ * The mutable trie is only somewhat space-efficient.
+ * It builds a compacted, immutable UCPTrie.
+ *
+ * This trie can be modified while iterating over its contents.
+ * For example, it is possible to merge its values with those from another
+ * set of ranges (e.g., another mutable or immutable trie):
+ * Iterate over those source ranges; for each of them iterate over this trie;
+ * add the source value into the value of each trie range.
+ *
+ * @see UCPTrie
+ * @see umutablecptrie_buildImmutable
+ * @stable ICU 63
+ */
+typedef struct UMutableCPTrie UMutableCPTrie;
+
+/**
+ * Creates a mutable trie that initially maps each Unicode code point to the same value.
+ * It uses 32-bit data values until umutablecptrie_buildImmutable() is called.
+ * umutablecptrie_buildImmutable() takes a valueWidth parameter which
+ * determines the number of bits in the data value in the resulting UCPTrie.
+ * You must umutablecptrie_close() the trie once you are done using it.
+ *
+ * @param initialValue the initial value that is set for all code points
+ * @param errorValue the value for out-of-range code points and ill-formed UTF-8/16
+ * @param pErrorCode an in/out ICU UErrorCode
+ * @return the trie
+ * @stable ICU 63
+ */
+U_CAPI UMutableCPTrie * U_EXPORT2
+umutablecptrie_open(uint32_t initialValue, uint32_t errorValue, UErrorCode *pErrorCode);
+
+/**
+ * Clones a mutable trie.
+ * You must umutablecptrie_close() the clone once you are done using it.
+ *
+ * @param other the trie to clone
+ * @param pErrorCode an in/out ICU UErrorCode
+ * @return the trie clone
+ * @stable ICU 63
+ */
+U_CAPI UMutableCPTrie * U_EXPORT2
+umutablecptrie_clone(const UMutableCPTrie *other, UErrorCode *pErrorCode);
+
+/**
+ * Closes a mutable trie and releases associated memory.
+ *
+ * @param trie the trie
+ * @stable ICU 63
+ */
+U_CAPI void U_EXPORT2
+umutablecptrie_close(UMutableCPTrie *trie);
+
+/**
+ * Creates a mutable trie with the same contents as the UCPMap.
+ * You must umutablecptrie_close() the mutable trie once you are done using it.
+ *
+ * @param map the source map
+ * @param pErrorCode an in/out ICU UErrorCode
+ * @return the mutable trie
+ * @stable ICU 63
+ */
+U_CAPI UMutableCPTrie * U_EXPORT2
+umutablecptrie_fromUCPMap(const UCPMap *map, UErrorCode *pErrorCode);
+
+/**
+ * Creates a mutable trie with the same contents as the immutable one.
+ * You must umutablecptrie_close() the mutable trie once you are done using it.
+ *
+ * @param trie the immutable trie
+ * @param pErrorCode an in/out ICU UErrorCode
+ * @return the mutable trie
+ * @stable ICU 63
+ */
+U_CAPI UMutableCPTrie * U_EXPORT2
+umutablecptrie_fromUCPTrie(const UCPTrie *trie, UErrorCode *pErrorCode);
+
+/**
+ * Returns the value for a code point as stored in the trie.
+ *
+ * @param trie the trie
+ * @param c the code point
+ * @return the value
+ * @stable ICU 63
+ */
+U_CAPI uint32_t U_EXPORT2
+umutablecptrie_get(const UMutableCPTrie *trie, UChar32 c);
+
+/**
+ * Returns the last code point such that all those from start to there have the same value.
+ * Can be used to efficiently iterate over all same-value ranges in a trie.
+ * (This is normally faster than iterating over code points and get()ting each value,
+ * but much slower than a data structure that stores ranges directly.)
+ *
+ * The trie can be modified between calls to this function.
+ *
+ * If the UCPMapValueFilter function pointer is not NULL, then
+ * the value to be delivered is passed through that function, and the return value is the end
+ * of the range where all values are modified to the same actual value.
+ * The value is unchanged if that function pointer is NULL.
+ *
+ * See the same-signature ucptrie_getRange() for a code sample.
+ *
+ * @param trie the trie
+ * @param start range start
+ * @param option defines whether surrogates are treated normally,
+ *               or as having the surrogateValue; usually UCPMAP_RANGE_NORMAL
+ * @param surrogateValue value for surrogates; ignored if option==UCPMAP_RANGE_NORMAL
+ * @param filter a pointer to a function that may modify the trie data value,
+ *     or NULL if the values from the trie are to be used unmodified
+ * @param context an opaque pointer that is passed on to the filter function
+ * @param pValue if not NULL, receives the value that every code point start..end has;
+ *     may have been modified by filter(context, trie value)
+ *     if that function pointer is not NULL
+ * @return the range end code point, or -1 if start is not a valid code point
+ * @stable ICU 63
+ */
+U_CAPI UChar32 U_EXPORT2
+umutablecptrie_getRange(const UMutableCPTrie *trie, UChar32 start,
+                        UCPMapRangeOption option, uint32_t surrogateValue,
+                        UCPMapValueFilter *filter, const void *context, uint32_t *pValue);
+
+/**
+ * Sets a value for a code point.
+ *
+ * @param trie the trie
+ * @param c the code point
+ * @param value the value
+ * @param pErrorCode an in/out ICU UErrorCode
+ * @stable ICU 63
+ */
+U_CAPI void U_EXPORT2
+umutablecptrie_set(UMutableCPTrie *trie, UChar32 c, uint32_t value, UErrorCode *pErrorCode);
+
+/**
+ * Sets a value for each code point [start..end].
+ * Faster and more space-efficient than setting the value for each code point separately.
+ *
+ * @param trie the trie
+ * @param start the first code point to get the value
+ * @param end the last code point to get the value (inclusive)
+ * @param value the value
+ * @param pErrorCode an in/out ICU UErrorCode
+ * @stable ICU 63
+ */
+U_CAPI void U_EXPORT2
+umutablecptrie_setRange(UMutableCPTrie *trie,
+                        UChar32 start, UChar32 end,
+                        uint32_t value, UErrorCode *pErrorCode);
+
+/**
+ * Compacts the data and builds an immutable UCPTrie according to the parameters.
+ * After this, the mutable trie will be empty.
+ *
+ * The mutable trie stores 32-bit values until buildImmutable() is called.
+ * If values shorter than 32 bits are to be stored in the immutable trie,
+ * then the upper bits are discarded.
+ * For example, when the mutable trie contains values 0x81, -0x7f, and 0xa581,
+ * and the value width is 8 bits, then each of these is stored as 0x81
+ * and the immutable trie will return that as an unsigned value.
+ * (Some implementations may want to make productive temporary use of the upper bits
+ * until buildImmutable() discards them.)
+ *
+ * Not every possible set of mappings can be built into a UCPTrie,
+ * because of limitations resulting from speed and space optimizations.
+ * Every Unicode assigned character can be mapped to a unique value.
+ * Typical data yields data structures far smaller than the limitations.
+ *
+ * It is possible to construct extremely unusual mappings that exceed the data structure limits.
+ * In such a case this function will fail with a U_INDEX_OUTOFBOUNDS_ERROR.
+ *
+ * @param trie the trie trie
+ * @param type selects the trie type
+ * @param valueWidth selects the number of bits in a trie data value; if smaller than 32 bits,
+ *                   then the values stored in the trie will be truncated first
+ * @param pErrorCode an in/out ICU UErrorCode
+ *
+ * @see umutablecptrie_fromUCPTrie
+ * @stable ICU 63
+ */
+U_CAPI UCPTrie * U_EXPORT2
+umutablecptrie_buildImmutable(UMutableCPTrie *trie, UCPTrieType type, UCPTrieValueWidth valueWidth,
+                              UErrorCode *pErrorCode);
+
+U_CDECL_END
+
+
+#endif // __UMUTABLECPTRIE_H__
+
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
 
 // ucnv_err.h
 // Copyright (C) 2016 and later: Unicode, Inc. and others.
@@ -11481,7 +12835,7 @@ typedef enum {
  */
 typedef struct {
     uint16_t size;              /**< The size of this struct. @stable ICU 2.0 */
-    UBool flush;                /**< The internal state of converter will be reset and data flushed if set to TRUE. @stable ICU 2.0    */
+    UBool flush;                /**< The internal state of converter will be reset and data flushed if set to true. @stable ICU 2.0    */
     UConverter *converter;      /**< Pointer to the converter that is opened and to which this struct is passed as an argument. @stable ICU 2.0  */
     const UChar *source;        /**< Pointer to the source source buffer. @stable ICU 2.0    */
     const UChar *sourceLimit;   /**< Pointer to the limit (end + 1) of source buffer. @stable ICU 2.0    */
@@ -11497,7 +12851,7 @@ typedef struct {
  */
 typedef struct {
     uint16_t size;              /**< The size of this struct   @stable ICU 2.0 */
-    UBool flush;                /**< The internal state of converter will be reset and data flushed if set to TRUE. @stable ICU 2.0   */
+    UBool flush;                /**< The internal state of converter will be reset and data flushed if set to true. @stable ICU 2.0   */
     UConverter *converter;      /**< Pointer to the converter that is opened and to which this struct is passed as an argument. @stable ICU 2.0 */
     const char *source;         /**< Pointer to the source source buffer. @stable ICU 2.0    */
     const char *sourceLimit;    /**< Pointer to the limit (end + 1) of source buffer. @stable ICU 2.0    */
@@ -11521,7 +12875,7 @@ typedef struct {
  * @param err This should always be set to a failure status prior to calling.
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 UCNV_FROM_U_CALLBACK_STOP (
+U_CAPI void U_EXPORT2 UCNV_FROM_U_CALLBACK_STOP (
                   const void *context,
                   UConverterFromUnicodeArgs *fromUArgs,
                   const UChar* codeUnits,
@@ -11545,7 +12899,7 @@ U_STABLE void U_EXPORT2 UCNV_FROM_U_CALLBACK_STOP (
  * @param err This should always be set to a failure status prior to calling.
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 UCNV_TO_U_CALLBACK_STOP (
+U_CAPI void U_EXPORT2 UCNV_TO_U_CALLBACK_STOP (
                   const void *context,
                   UConverterToUnicodeArgs *toUArgs,
                   const char* codeUnits,
@@ -11572,7 +12926,7 @@ U_STABLE void U_EXPORT2 UCNV_TO_U_CALLBACK_STOP (
  *      otherwise this value will be set to a failure status.
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 UCNV_FROM_U_CALLBACK_SKIP (
+U_CAPI void U_EXPORT2 UCNV_FROM_U_CALLBACK_SKIP (
                   const void *context,
                   UConverterFromUnicodeArgs *fromUArgs,
                   const UChar* codeUnits,
@@ -11602,7 +12956,7 @@ U_STABLE void U_EXPORT2 UCNV_FROM_U_CALLBACK_SKIP (
  * @see ucnv_setSubstChars
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 UCNV_FROM_U_CALLBACK_SUBSTITUTE (
+U_CAPI void U_EXPORT2 UCNV_FROM_U_CALLBACK_SUBSTITUTE (
                   const void *context,
                   UConverterFromUnicodeArgs *fromUArgs,
                   const UChar* codeUnits,
@@ -11658,7 +13012,7 @@ U_STABLE void U_EXPORT2 UCNV_FROM_U_CALLBACK_SUBSTITUTE (
  *      otherwise this value will be set to a failure status.
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 UCNV_FROM_U_CALLBACK_ESCAPE (
+U_CAPI void U_EXPORT2 UCNV_FROM_U_CALLBACK_ESCAPE (
                   const void *context,
                   UConverterFromUnicodeArgs *fromUArgs,
                   const UChar* codeUnits,
@@ -11686,7 +13040,7 @@ U_STABLE void U_EXPORT2 UCNV_FROM_U_CALLBACK_ESCAPE (
  *      otherwise this value will be set to a failure status.
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 UCNV_TO_U_CALLBACK_SKIP (
+U_CAPI void U_EXPORT2 UCNV_TO_U_CALLBACK_SKIP (
                   const void *context,
                   UConverterToUnicodeArgs *toUArgs,
                   const char* codeUnits,
@@ -11712,7 +13066,7 @@ U_STABLE void U_EXPORT2 UCNV_TO_U_CALLBACK_SKIP (
  *      otherwise this value will be set to a failure status.
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 UCNV_TO_U_CALLBACK_SUBSTITUTE (
+U_CAPI void U_EXPORT2 UCNV_TO_U_CALLBACK_SUBSTITUTE (
                   const void *context,
                   UConverterToUnicodeArgs *toUArgs,
                   const char* codeUnits,
@@ -11738,7 +13092,7 @@ U_STABLE void U_EXPORT2 UCNV_TO_U_CALLBACK_SUBSTITUTE (
  * @stable ICU 2.0
  */
 
-U_STABLE void U_EXPORT2 UCNV_TO_U_CALLBACK_ESCAPE (
+U_CAPI void U_EXPORT2 UCNV_TO_U_CALLBACK_ESCAPE (
                   const void *context,
                   UConverterToUnicodeArgs *toUArgs,
                   const char* codeUnits,
@@ -11803,6 +13157,7 @@ U_STABLE void U_EXPORT2 UCNV_TO_U_CALLBACK_ESCAPE (
 
 #ifndef UCNV_H
 #define UCNV_H
+
 
 
 #if !defined(USET_DEFINED) && !defined(U_IN_DOXYGEN)
@@ -12060,7 +13415,7 @@ U_CDECL_END
  * lexically follows name2.
  * @stable ICU 2.0
  */
-U_STABLE int U_EXPORT2
+U_CAPI int U_EXPORT2
 ucnv_compareNames(const char *name1, const char *name2);
 
 
@@ -12114,7 +13469,7 @@ ucnv_compareNames(const char *name1, const char *name2);
  * @see ucnv_compareNames
  * @stable ICU 2.0
  */
-U_STABLE UConverter* U_EXPORT2
+U_CAPI UConverter* U_EXPORT2
 ucnv_open(const char *converterName, UErrorCode *err);
 
 
@@ -12144,7 +13499,7 @@ ucnv_open(const char *converterName, UErrorCode *err);
  * @see ucnv_compareNames
  * @stable ICU 2.0
  */
-U_STABLE UConverter* U_EXPORT2
+U_CAPI UConverter* U_EXPORT2
 ucnv_openU(const UChar *name,
            UErrorCode *err);
 
@@ -12212,7 +13567,7 @@ ucnv_openU(const UChar *name,
  * @see UConverterPlatform
  * @stable ICU 2.0
  */
-U_STABLE UConverter* U_EXPORT2
+U_CAPI UConverter* U_EXPORT2
 ucnv_openCCSID(int32_t codepage,
                UConverterPlatform platform,
                UErrorCode * err);
@@ -12228,7 +13583,7 @@ ucnv_openCCSID(int32_t codepage,
  * <p>The name will NOT be looked up in the alias mechanism, nor will the converter be
  * stored in the converter cache or the alias table. The only way to open further converters
  * is call this function multiple times, or use the ucnv_safeClone() function to clone a
- * 'master' converter.</p>
+ * 'primary' converter.</p>
  *
  * <p>A future version of ICU may add alias table lookups and/or caching
  * to this function.</p>
@@ -12247,7 +13602,7 @@ ucnv_openCCSID(int32_t codepage,
  * @see ucnv_close
  * @stable ICU 2.2
  */
-U_STABLE UConverter* U_EXPORT2
+U_CAPI UConverter* U_EXPORT2
 ucnv_openPackage(const char *packageName, const char *converterName, UErrorCode *err);
 
 /**
@@ -12289,7 +13644,7 @@ ucnv_openPackage(const char *packageName, const char *converterName, UErrorCode 
  * @return pointer to the new clone
  * @stable ICU 2.0
  */
-U_STABLE UConverter * U_EXPORT2
+U_CAPI UConverter * U_EXPORT2
 ucnv_safeClone(const UConverter *cnv,
                void             *stackBuffer,
                int32_t          *pBufferSize,
@@ -12307,7 +13662,7 @@ ucnv_safeClone(const UConverter *cnv,
  * @see ucnv_openCCSID
  * @stable ICU 2.0
  */
-U_STABLE void  U_EXPORT2
+U_CAPI void  U_EXPORT2
 ucnv_close(UConverter * converter);
 
 
@@ -12328,7 +13683,7 @@ ucnv_close(UConverter * converter);
  * @see ucnv_setSubstChars
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucnv_getSubstChars(const UConverter *converter,
                    char *subChars,
                    int8_t *len,
@@ -12353,7 +13708,7 @@ ucnv_getSubstChars(const UConverter *converter,
  * @see ucnv_getSubstChars
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucnv_setSubstChars(UConverter *converter,
                    const char *subChars,
                    int8_t len,
@@ -12386,7 +13741,7 @@ ucnv_setSubstChars(UConverter *converter,
  * @see ucnv_getSubstChars
  * @stable ICU 3.6
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucnv_setSubstString(UConverter *cnv,
                     const UChar *s,
                     int32_t length,
@@ -12405,7 +13760,7 @@ ucnv_setSubstString(UConverter *cnv,
  * <TT>U_INDEX_OUTOFBOUNDS_ERROR</TT> will be returned.
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucnv_getInvalidChars(const UConverter *converter,
                      char *errBytes,
                      int8_t *len,
@@ -12424,7 +13779,7 @@ ucnv_getInvalidChars(const UConverter *converter,
  * <TT>U_INDEX_OUTOFBOUNDS_ERROR</TT> will be returned.
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucnv_getInvalidUChars(const UConverter *converter,
                       UChar *errUChars,
                       int8_t *len,
@@ -12437,7 +13792,7 @@ ucnv_getInvalidUChars(const UConverter *converter,
  * @param converter the Unicode converter
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucnv_reset(UConverter *converter);
 
 /**
@@ -12448,7 +13803,7 @@ ucnv_reset(UConverter *converter);
  * @param converter the Unicode converter
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucnv_resetToUnicode(UConverter *converter);
 
 /**
@@ -12459,7 +13814,7 @@ ucnv_resetToUnicode(UConverter *converter);
  * @param converter the Unicode converter
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucnv_resetFromUnicode(UConverter *converter);
 
 /**
@@ -12512,7 +13867,7 @@ ucnv_resetFromUnicode(UConverter *converter);
  * @see ucnv_getMinCharSize
  * @stable ICU 2.0
  */
-U_STABLE int8_t U_EXPORT2
+U_CAPI int8_t U_EXPORT2
 ucnv_getMaxCharSize(const UConverter *converter);
 
 /**
@@ -12545,7 +13900,7 @@ ucnv_getMaxCharSize(const UConverter *converter);
  * @see ucnv_getMaxCharSize
  * @stable ICU 2.0
  */
-U_STABLE int8_t U_EXPORT2
+U_CAPI int8_t U_EXPORT2
 ucnv_getMinCharSize(const UConverter *converter);
 
 /**
@@ -12562,7 +13917,7 @@ ucnv_getMinCharSize(const UConverter *converter);
  * @see ucnv_getName
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucnv_getDisplayName(const UConverter *converter,
                     const char *displayLocale,
                     UChar *displayName,
@@ -12579,7 +13934,7 @@ ucnv_getDisplayName(const UConverter *converter,
  * @see ucnv_getDisplayName
  * @stable ICU 2.0
  */
-U_STABLE const char * U_EXPORT2
+U_CAPI const char * U_EXPORT2
 ucnv_getName(const UConverter *converter, UErrorCode *err);
 
 /**
@@ -12605,7 +13960,7 @@ ucnv_getName(const UConverter *converter, UErrorCode *err);
  * @see ucnv_getPlatform
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucnv_getCCSID(const UConverter *converter,
               UErrorCode *err);
 
@@ -12619,7 +13974,7 @@ ucnv_getCCSID(const UConverter *converter,
  * @return The codepage platform
  * @stable ICU 2.0
  */
-U_STABLE UConverterPlatform U_EXPORT2
+U_CAPI UConverterPlatform U_EXPORT2
 ucnv_getPlatform(const UConverter *converter,
                  UErrorCode *err);
 
@@ -12631,14 +13986,14 @@ ucnv_getPlatform(const UConverter *converter,
  * @return the type of the converter
  * @stable ICU 2.0
  */
-U_STABLE UConverterType U_EXPORT2
+U_CAPI UConverterType U_EXPORT2
 ucnv_getType(const UConverter * converter);
 
 /**
  * Gets the "starter" (lead) bytes for converters of type MBCS.
  * Will fill in an <TT>U_ILLEGAL_ARGUMENT_ERROR</TT> if converter passed in
  * is not MBCS. Fills in an array of type UBool, with the value of the byte
- * as offset to the array. For example, if (starters[0x20] == TRUE) at return,
+ * as offset to the array. For example, if (starters[0x20] == true) at return,
  * it means that the byte 0x20 is a starter byte in this converter.
  * Context pointers are always owned by the caller.
  *
@@ -12649,7 +14004,7 @@ ucnv_getType(const UConverter * converter);
  * @see ucnv_getType
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucnv_getStarters(const UConverter* converter,
                  UBool starters[256],
                  UErrorCode* err);
@@ -12713,7 +14068,7 @@ typedef enum UConverterUnicodeSet {
  * @see uset_close
  * @stable ICU 2.6
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucnv_getUnicodeSet(const UConverter *cnv,
                    USet *setFillIn,
                    UConverterUnicodeSet whichSet,
@@ -12730,7 +14085,7 @@ ucnv_getUnicodeSet(const UConverter *cnv,
  * @see ucnv_setToUCallBack
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucnv_getToUCallBack (const UConverter * converter,
                      UConverterToUCallback *action,
                      const void **context);
@@ -12746,7 +14101,7 @@ ucnv_getToUCallBack (const UConverter * converter,
  * @see ucnv_setFromUCallBack
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucnv_getFromUCallBack (const UConverter * converter,
                        UConverterFromUCallback *action,
                        const void **context);
@@ -12766,7 +14121,7 @@ ucnv_getFromUCallBack (const UConverter * converter,
  * @see ucnv_getToUCallBack
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucnv_setToUCallBack (UConverter * converter,
                      UConverterToUCallback newAction,
                      const void* newContext,
@@ -12789,7 +14144,7 @@ ucnv_setToUCallBack (UConverter * converter,
  * @see ucnv_getFromUCallBack
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucnv_setFromUCallBack (UConverter * converter,
                        UConverterFromUCallback newAction,
                        const void *newContext,
@@ -12816,7 +14171,7 @@ ucnv_setFromUCallBack (UConverter * converter,
  *  consumed. At that point, the caller should reset the source and
  *  sourceLimit pointers to point to the next chunk.
  *
- * At the end of the stream (flush==TRUE), the input is completely consumed
+ * At the end of the stream (flush==true), the input is completely consumed
  * when *source==sourceLimit and no error code is set.
  * The converter object is then automatically reset by this function.
  * (This means that a converter need not be reset explicitly between data
@@ -12841,9 +14196,9 @@ ucnv_setFromUCallBack (UConverter * converter,
  * e.g: <TT>offsets[3]</TT> is equal to 6, it means that the <TT>target[3]</TT> was a result of transcoding <TT>source[6]</TT>
  * For output data carried across calls, and other data without a specific source character
  * (such as from escape sequences or callbacks)  -1 will be placed for offsets.
- * @param flush set to <TT>TRUE</TT> if the current source buffer is the last available
- * chunk of the source, <TT>FALSE</TT> otherwise. Note that if a failing status is returned,
- * this function may have to be called multiple times with flush set to <TT>TRUE</TT> until
+ * @param flush set to <TT>true</TT> if the current source buffer is the last available
+ * chunk of the source, <TT>false</TT> otherwise. Note that if a failing status is returned,
+ * this function may have to be called multiple times with flush set to <TT>true</TT> until
  * the source buffer is consumed.
  * @param err the error status.  <TT>U_ILLEGAL_ARGUMENT_ERROR</TT> will be set if the
  * converter is <TT>NULL</TT>.
@@ -12855,7 +14210,7 @@ ucnv_setFromUCallBack (UConverter * converter,
  * @see ucnv_setToUCallBack
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucnv_fromUnicode (UConverter * converter,
                   char **target,
                   const char *targetLimit,
@@ -12885,7 +14240,7 @@ ucnv_fromUnicode (UConverter * converter,
  *  consumed. At that point, the caller should reset the source and
  *  sourceLimit pointers to point to the next chunk.
  *
- * At the end of the stream (flush==TRUE), the input is completely consumed
+ * At the end of the stream (flush==true), the input is completely consumed
  * when *source==sourceLimit and no error code is set
  * The converter object is then automatically reset by this function.
  * (This means that a converter need not be reset explicitly between data
@@ -12909,9 +14264,9 @@ ucnv_fromUnicode (UConverter * converter,
  * e.g: <TT>offsets[3]</TT> is equal to 6, it means that the <TT>target[3]</TT> was a result of transcoding <TT>source[6]</TT>
  * For output data carried across calls, and other data without a specific source character
  * (such as from escape sequences or callbacks)  -1 will be placed for offsets.
- * @param flush set to <TT>TRUE</TT> if the current source buffer is the last available
- * chunk of the source, <TT>FALSE</TT> otherwise. Note that if a failing status is returned,
- * this function may have to be called multiple times with flush set to <TT>TRUE</TT> until
+ * @param flush set to <TT>true</TT> if the current source buffer is the last available
+ * chunk of the source, <TT>false</TT> otherwise. Note that if a failing status is returned,
+ * this function may have to be called multiple times with flush set to <TT>true</TT> until
  * the source buffer is consumed.
  * @param err the error status.  <TT>U_ILLEGAL_ARGUMENT_ERROR</TT> will be set if the
  * converter is <TT>NULL</TT>.
@@ -12924,7 +14279,7 @@ ucnv_fromUnicode (UConverter * converter,
  * @see ucnv_getNextUChar
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucnv_toUnicode(UConverter *converter,
                UChar **target,
                const UChar *targetLimit,
@@ -12961,7 +14316,7 @@ ucnv_toUnicode(UConverter *converter,
  * @see UCNV_GET_MAX_BYTES_FOR_STRING
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucnv_fromUChars(UConverter *cnv,
                 char *dest, int32_t destCapacity,
                 const UChar *src, int32_t srcLength,
@@ -12993,7 +14348,7 @@ ucnv_fromUChars(UConverter *cnv,
  * @see ucnv_convert
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucnv_toUChars(UConverter *cnv,
               UChar *dest, int32_t destCapacity,
               const char *src, int32_t srcLength,
@@ -13011,7 +14366,7 @@ ucnv_toUChars(UConverter *cnv,
  * - Convenient.
  *
  * Limitations compared to ucnv_toUnicode():
- * - Always assumes flush=TRUE.
+ * - Always assumes flush=true.
  *   This makes ucnv_getNextUChar() unsuitable for "streaming" conversion,
  *   that is, for where the input is supplied in multiple buffers,
  *   because ucnv_getNextUChar() will assume the end of the input at the end
@@ -13022,7 +14377,7 @@ ucnv_toUChars(UConverter *cnv,
  * ucnv_getNextUChar() uses the current state of the converter
  * (unlike ucnv_toUChars() which always resets first).
  * However, if ucnv_getNextUChar() is called after ucnv_toUnicode()
- * stopped in the middle of a character sequence (with flush=FALSE),
+ * stopped in the middle of a character sequence (with flush=false),
  * then ucnv_getNextUChar() will always use the slower ucnv_toUnicode()
  * internally until the next character boundary.
  * (This is new in ICU 2.6. In earlier releases, ucnv_getNextUChar() had to
@@ -13069,7 +14424,7 @@ ucnv_toUChars(UConverter *cnv,
  * @see ucnv_convert
  * @stable ICU 2.0
  */
-U_STABLE UChar32 U_EXPORT2
+U_CAPI UChar32 U_EXPORT2
 ucnv_getNextUChar(UConverter * converter,
                   const char **source,
                   const char * sourceLimit,
@@ -13101,7 +14456,7 @@ ucnv_getNextUChar(UConverter * converter,
  *
  * ucnv_convertEx() also provides further convenience:
  * - an option to reset the converters at the beginning
- *   (if reset==TRUE, see parameters;
+ *   (if reset==true, see parameters;
  *    also sets *pivotTarget=*pivotSource=pivotStart)
  * - allow NUL-terminated input
  *   (only a single NUL byte, will not work for charsets with multi-byte NULs)
@@ -13158,7 +14513,7 @@ ucnv_getNextUChar(UConverter * converter,
  *                    &target, u8+capacity,
  *                    &s, s+length,
  *                    NULL, NULL, NULL, NULL,
- *                    TRUE, TRUE,
+ *                    true, true,
  *                    pErrorCode);
  *
  *     myReleaseCachedUTF8Converter(utf8Cnv);
@@ -13190,7 +14545,7 @@ ucnv_getNextUChar(UConverter * converter,
  *                      It must be pivotStart<=*pivotSource<=*pivotTarget<=pivotLimit
  *                      and pivotStart<pivotLimit (unless pivotStart==NULL).
  * @param pivotLimit    Pointer to the first unit after the pivot buffer.
- * @param reset         If TRUE, then ucnv_resetToUnicode(sourceCnv) and
+ * @param reset         If true, then ucnv_resetToUnicode(sourceCnv) and
  *                      ucnv_resetFromUnicode(targetCnv) are called, and the
  *                      pivot pointers are reset (*pivotTarget=*pivotSource=pivotStart).
  * @param flush         If true, indicates the end of the input.
@@ -13213,7 +14568,7 @@ ucnv_getNextUChar(UConverter * converter,
  * @see ucnv_toUChars
  * @stable ICU 2.6
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucnv_convertEx(UConverter *targetCnv, UConverter *sourceCnv,
                char **target, const char *targetLimit,
                const char **source, const char *sourceLimit,
@@ -13277,7 +14632,7 @@ ucnv_convertEx(UConverter *targetCnv, UConverter *sourceCnv,
  * @see ucnv_getNextUChar
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucnv_convert(const char *toConverterName,
              const char *fromConverterName,
              char *target,
@@ -13331,7 +14686,7 @@ ucnv_convert(const char *toConverterName,
  * @see ucnv_toUChars
  * @stable ICU 2.6
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucnv_toAlgorithmic(UConverterType algorithmicType,
                    UConverter *cnv,
                    char *target, int32_t targetCapacity,
@@ -13383,7 +14738,7 @@ ucnv_toAlgorithmic(UConverterType algorithmicType,
  * @see ucnv_toUChars
  * @stable ICU 2.6
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucnv_fromAlgorithmic(UConverter *cnv,
                      UConverterType algorithmicType,
                      char *target, int32_t targetCapacity,
@@ -13397,7 +14752,7 @@ ucnv_fromAlgorithmic(UConverter *cnv,
  * @see ucnv_close
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucnv_flushCache(void);
 
 /**
@@ -13407,7 +14762,7 @@ ucnv_flushCache(void);
  * @see ucnv_getAvailableName
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucnv_countAvailable(void);
 
 /**
@@ -13420,7 +14775,7 @@ ucnv_countAvailable(void);
  * @see ucnv_countAvailable
  * @stable ICU 2.0
  */
-U_STABLE const char* U_EXPORT2
+U_CAPI const char* U_EXPORT2
 ucnv_getAvailableName(int32_t n);
 
 /**
@@ -13435,7 +14790,7 @@ ucnv_getAvailableName(int32_t n);
  * @see uenum_next
  * @stable ICU 2.4
  */
-U_STABLE UEnumeration * U_EXPORT2
+U_CAPI UEnumeration * U_EXPORT2
 ucnv_openAllNames(UErrorCode *pErrorCode);
 
 /**
@@ -13448,7 +14803,7 @@ ucnv_openAllNames(UErrorCode *pErrorCode);
  * @return number of names on alias list for given alias
  * @stable ICU 2.0
  */
-U_STABLE uint16_t U_EXPORT2
+U_CAPI uint16_t U_EXPORT2
 ucnv_countAliases(const char *alias, UErrorCode *pErrorCode);
 
 /**
@@ -13463,7 +14818,7 @@ ucnv_countAliases(const char *alias, UErrorCode *pErrorCode);
  * @see ucnv_countAliases
  * @stable ICU 2.0
  */
-U_STABLE const char * U_EXPORT2
+U_CAPI const char * U_EXPORT2
 ucnv_getAlias(const char *alias, uint16_t n, UErrorCode *pErrorCode);
 
 /**
@@ -13479,7 +14834,7 @@ ucnv_getAlias(const char *alias, uint16_t n, UErrorCode *pErrorCode);
  * @param pErrorCode result of operation
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucnv_getAliases(const char *alias, const char **aliases, UErrorCode *pErrorCode);
 
 /**
@@ -13505,7 +14860,7 @@ ucnv_getAliases(const char *alias, const char **aliases, UErrorCode *pErrorCode)
  * @see uenum_next
  * @stable ICU 2.2
  */
-U_STABLE UEnumeration * U_EXPORT2
+U_CAPI UEnumeration * U_EXPORT2
 ucnv_openStandardNames(const char *convName,
                        const char *standard,
                        UErrorCode *pErrorCode);
@@ -13515,7 +14870,7 @@ ucnv_openStandardNames(const char *convName,
  * @return number of standards
  * @stable ICU 2.0
  */
-U_STABLE uint16_t U_EXPORT2
+U_CAPI uint16_t U_EXPORT2
 ucnv_countStandards(void);
 
 /**
@@ -13525,7 +14880,7 @@ ucnv_countStandards(void);
  * @return returns the name of the standard at given index. Owned by the library.
  * @stable ICU 2.0
  */
-U_STABLE const char * U_EXPORT2
+U_CAPI const char * U_EXPORT2
 ucnv_getStandard(uint16_t n, UErrorCode *pErrorCode);
 
 /**
@@ -13547,7 +14902,7 @@ ucnv_getStandard(uint16_t n, UErrorCode *pErrorCode);
  *         then <code>NULL</code> is returned. Owned by the library.
  * @stable ICU 2.0
  */
-U_STABLE const char * U_EXPORT2
+U_CAPI const char * U_EXPORT2
 ucnv_getStandardName(const char *name, const char *standard, UErrorCode *pErrorCode);
 
 /**
@@ -13569,7 +14924,7 @@ ucnv_getStandardName(const char *name, const char *standard, UErrorCode *pErrorC
  * @see ucnv_getStandardName
  * @stable ICU 2.4
  */
-U_STABLE const char * U_EXPORT2
+U_CAPI const char * U_EXPORT2
 ucnv_getCanonicalName(const char *alias, const char *standard, UErrorCode *pErrorCode);
 
 /**
@@ -13586,7 +14941,7 @@ ucnv_getCanonicalName(const char *alias, const char *standard, UErrorCode *pErro
  * @see ucnv_setDefaultName
  * @stable ICU 2.0
  */
-U_STABLE const char * U_EXPORT2
+U_CAPI const char * U_EXPORT2
 ucnv_getDefaultName(void);
 
 #ifndef U_HIDE_SYSTEM_API
@@ -13606,7 +14961,7 @@ ucnv_getDefaultName(void);
  * @system
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucnv_setDefaultName(const char *name);
 #endif  /* U_HIDE_SYSTEM_API */
 
@@ -13627,18 +14982,18 @@ ucnv_setDefaultName(const char *name);
  * @see ucnv_isAmbiguous
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucnv_fixFileSeparator(const UConverter *cnv, UChar *source, int32_t sourceLen);
 
 /**
  * Determines if the converter contains ambiguous mappings of the same
  * character or not.
  * @param cnv the converter to be tested
- * @return TRUE if the converter contains ambiguous mapping of the same
- * character, FALSE otherwise.
+ * @return true if the converter contains ambiguous mapping of the same
+ * character, false otherwise.
  * @stable ICU 2.0
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 ucnv_isAmbiguous(const UConverter *cnv);
 
 /**
@@ -13651,12 +15006,12 @@ ucnv_isAmbiguous(const UConverter *cnv);
  * http://www.icu-project.org/userguide/conversion-data.html#ucmformat
  *
  * @param cnv The converter to set the fallback mapping usage on.
- * @param usesFallback TRUE if the user wants the converter to take advantage of the fallback
- * mapping, FALSE otherwise.
+ * @param usesFallback true if the user wants the converter to take advantage of the fallback
+ * mapping, false otherwise.
  * @stable ICU 2.0
  * @see ucnv_usesFallback
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucnv_setFallback(UConverter *cnv, UBool usesFallback);
 
 /**
@@ -13664,11 +15019,11 @@ ucnv_setFallback(UConverter *cnv, UBool usesFallback);
  * This flag has restrictions, see ucnv_setFallback().
  *
  * @param cnv The converter to be tested
- * @return TRUE if the converter uses fallback, FALSE otherwise.
+ * @return true if the converter uses fallback, false otherwise.
  * @stable ICU 2.0
  * @see ucnv_setFallback
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 ucnv_usesFallback(const UConverter *cnv);
 
 /**
@@ -13700,7 +15055,7 @@ ucnv_usesFallback(const UConverter *cnv);
  * @return The name of the encoding detected. NULL if encoding is not detected.
  * @stable ICU 2.4
  */
-U_STABLE const char* U_EXPORT2
+U_CAPI const char* U_EXPORT2
 ucnv_detectUnicodeSignature(const char* source,
                             int32_t sourceLength,
                             int32_t *signatureLength,
@@ -13717,7 +15072,7 @@ ucnv_detectUnicodeSignature(const char* source,
  * @return The number of UChars in the state. -1 if an error is encountered.
  * @stable ICU 3.4
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucnv_fromUCountPending(const UConverter* cnv, UErrorCode* status);
 
 /**
@@ -13731,7 +15086,7 @@ ucnv_fromUCountPending(const UConverter* cnv, UErrorCode* status);
  * @return The number of chars in the state. -1 if an error is encountered.
  * @stable ICU 3.4
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucnv_toUCountPending(const UConverter* cnv, UErrorCode* status);
 
 /**
@@ -13743,13 +15098,13 @@ ucnv_toUCountPending(const UConverter* cnv, UErrorCode* status);
  * but a UTF-32 converter encodes each code point with 4 bytes.
  * Note: This method is not intended to be used to determine whether the charset has a
  * fixed ratio of bytes to Unicode codes <i>units</i> for any particular Unicode encoding form.
- * FALSE is returned with the UErrorCode if error occurs or cnv is NULL.
+ * false is returned with the UErrorCode if error occurs or cnv is NULL.
  * @param cnv       The converter to be tested
  * @param status    ICU error code in/out paramter
- * @return TRUE if the converter is fixed-width
+ * @return true if the converter is fixed-width
  * @stable ICU 4.8
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 ucnv_isFixedWidth(UConverter *cnv, UErrorCode *status);
 
 #endif
@@ -13841,7 +15196,7 @@ ucnv_isFixedWidth(UConverter *cnv, UErrorCode *status);
  * @see ucnv_cbFromUWriteSub
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucnv_cbFromUWriteBytes (UConverterFromUnicodeArgs *args,
                         const char* source,
                         int32_t length,
@@ -13861,7 +15216,7 @@ ucnv_cbFromUWriteBytes (UConverterFromUnicodeArgs *args,
  * @see ucnv_cbFromUWriteBytes
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 ucnv_cbFromUWriteSub (UConverterFromUnicodeArgs *args,
                       int32_t offsetIndex,
                       UErrorCode * err);
@@ -13878,7 +15233,7 @@ ucnv_cbFromUWriteSub (UConverterFromUnicodeArgs *args,
  * @see ucnv_cbToUWriteSub
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 ucnv_cbFromUWriteUChars(UConverterFromUnicodeArgs *args,
+U_CAPI void U_EXPORT2 ucnv_cbFromUWriteUChars(UConverterFromUnicodeArgs *args,
                              const UChar** source,
                              const UChar*  sourceLimit,
                              int32_t offsetIndex,
@@ -13897,7 +15252,7 @@ U_STABLE void U_EXPORT2 ucnv_cbFromUWriteUChars(UConverterFromUnicodeArgs *args,
  * @see ucnv_cbToUWriteSub
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 ucnv_cbToUWriteUChars (UConverterToUnicodeArgs *args,
+U_CAPI void U_EXPORT2 ucnv_cbToUWriteUChars (UConverterToUnicodeArgs *args,
                                              const UChar* source,
                                              int32_t length,
                                              int32_t offsetIndex,
@@ -13913,7 +15268,7 @@ U_STABLE void U_EXPORT2 ucnv_cbToUWriteUChars (UConverterToUnicodeArgs *args,
  * @see ucnv_cbToUWriteUChars
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 ucnv_cbToUWriteSub (UConverterToUnicodeArgs *args,
+U_CAPI void U_EXPORT2 ucnv_cbToUWriteSub (UConverterToUnicodeArgs *args,
                        int32_t offsetIndex,
                        UErrorCode * err);
 #endif
@@ -13971,7 +15326,7 @@ U_STABLE void U_EXPORT2 ucnv_cbToUWriteSub (UConverterToUnicodeArgs *args,
  *
  * @stable ICU 2.6
  */  
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 u_init(UErrorCode *status);
 
 #ifndef U_HIDE_SYSTEM_API
@@ -14020,7 +15375,7 @@ u_init(UErrorCode *status);
  * @stable ICU 2.0
  * @system
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 u_cleanup(void);
 
 U_CDECL_BEGIN
@@ -14070,7 +15425,7 @@ typedef void  U_CALLCONV UMemFreeFn (const void *context, void *mem);
  *  @stable ICU 2.8
  *  @system
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 u_setMemoryFunctions(const void *context, UMemAllocFn * a, UMemReallocFn * r, UMemFreeFn * f, 
                     UErrorCode *status);
 U_CDECL_END
@@ -14183,7 +15538,7 @@ typedef UResourceBundle* u_nl_catd;
  * 
  * @stable ICU 2.6
  */
-U_STABLE u_nl_catd U_EXPORT2
+U_CAPI u_nl_catd U_EXPORT2
 u_catopen(const char* name, const char* locale, UErrorCode* ec);
 
 /**
@@ -14194,7 +15549,7 @@ u_catopen(const char* name, const char* locale, UErrorCode* ec);
  * 
  * @stable ICU 2.6
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 u_catclose(u_nl_catd catd);
 
 /**
@@ -14229,7 +15584,7 @@ u_catclose(u_nl_catd catd);
  * 
  * @stable ICU 2.6
  */
-U_STABLE const UChar* U_EXPORT2
+U_CAPI const UChar* U_EXPORT2
 u_catgets(u_nl_catd catd, int32_t set_num, int32_t msg_num,
           const UChar* s,
           int32_t* len, UErrorCode* ec);
@@ -14501,7 +15856,7 @@ U_CDECL_BEGIN
  * and the ICU User Guide chapter on Properties (http://icu-project.org/userguide/properties.html).
  *
  * Many properties are accessible via generic functions that take a UProperty selector.
- * - u_hasBinaryProperty() returns a binary value (TRUE/FALSE) per property and code point.
+ * - u_hasBinaryProperty() returns a binary value (true/false) per property and code point.
  * - u_getIntPropertyValue() returns an integer value per property and code point.
  *   For each supported enumerated or catalog property, there is
  *   an enum type for all of the property's values, and
@@ -16145,6 +17500,27 @@ enum UBlockCode {
     UBLOCK_WANCHO = 300, /*[1E2C0]*/
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_VB)
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+    // New blocks in Unicode 13.0
+
+    /** @stable ICU 66 */
+    UBLOCK_CHORASMIAN = 301, /*[10FB0]*/
+    /** @stable ICU 66 */
+    UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_G = 302, /*[30000]*/
+    /** @stable ICU 66 */
+    UBLOCK_DIVES_AKURU = 303, /*[11900]*/
+    /** @stable ICU 66 */
+    UBLOCK_KHITAN_SMALL_SCRIPT = 304, /*[18B00]*/
+    /** @stable ICU 66 */
+    UBLOCK_LISU_SUPPLEMENT = 305, /*[11FB0]*/
+    /** @stable ICU 66 */
+    UBLOCK_SYMBOLS_FOR_LEGACY_COMPUTING = 306, /*[1FB00]*/
+    /** @stable ICU 66 */
+    UBLOCK_TANGUT_SUPPLEMENT = 307, /*[18D00]*/
+    /** @stable ICU 66 */
+    UBLOCK_YEZIDI = 308, /*[10E80]*/
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
+
     /** @stable ICU 2.0 */
     UBLOCK_INVALID_CODE=-1
 };
@@ -16676,6 +18052,12 @@ typedef enum UIndicPositionalCategory {
     U_INPC_TOP_AND_RIGHT,
     /** @stable ICU 63 */
     U_INPC_VISUAL_ORDER_LEFT,
+
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+    /** @stable ICU 66 */
+    U_INPC_TOP_AND_BOTTOM_AND_LEFT,
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
+
 } UIndicPositionalCategory;
 
 /**
@@ -16806,8 +18188,8 @@ typedef enum UVerticalOrientation {
  * @param c Code point to test.
  * @param which UProperty selector constant, identifies which binary property to check.
  *        Must be UCHAR_BINARY_START<=which<UCHAR_BINARY_LIMIT.
- * @return TRUE or FALSE according to the binary Unicode property value for c.
- *         Also FALSE if 'which' is out of bounds or if the Unicode version
+ * @return true or false according to the binary Unicode property value for c.
+ *         Also false if 'which' is out of bounds or if the Unicode version
  *         does not have data for the property at all, or not for this code point.
  *
  * @see UProperty
@@ -16816,9 +18198,28 @@ typedef enum UVerticalOrientation {
  * @see u_getUnicodeVersion
  * @stable ICU 2.1
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 u_hasBinaryProperty(UChar32 c, UProperty which);
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+/**
+ * Returns a frozen USet for a binary property.
+ * The library retains ownership over the returned object.
+ * Sets an error code if the property number is not one for a binary property.
+ *
+ * The returned set contains all code points for which the property is true.
+ *
+ * @param property UCHAR_BINARY_START..UCHAR_BINARY_LIMIT-1
+ * @param pErrorCode an in/out ICU UErrorCode
+ * @return the property as a set
+ * @see UProperty
+ * @see u_hasBinaryProperty
+ * @see Unicode::fromUSet
+ * @stable ICU 63
+ */
+U_CAPI const USet * U_EXPORT2
+u_getBinaryPropertySet(UProperty property, UErrorCode *pErrorCode);
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
 
 /**
  * Check if a code point has the Alphabetic Unicode property.
@@ -16832,7 +18233,7 @@ u_hasBinaryProperty(UChar32 c, UProperty which);
  * @see u_hasBinaryProperty
  * @stable ICU 2.1
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 u_isUAlphabetic(UChar32 c);
 
 /**
@@ -16847,7 +18248,7 @@ u_isUAlphabetic(UChar32 c);
  * @see u_hasBinaryProperty
  * @stable ICU 2.1
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 u_isULowercase(UChar32 c);
 
 /**
@@ -16862,7 +18263,7 @@ u_isULowercase(UChar32 c);
  * @see u_hasBinaryProperty
  * @stable ICU 2.1
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 u_isUUppercase(UChar32 c);
 
 /**
@@ -16883,7 +18284,7 @@ u_isUUppercase(UChar32 c);
  * @see u_hasBinaryProperty
  * @stable ICU 2.1
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 u_isUWhiteSpace(UChar32 c);
 
 /**
@@ -16911,7 +18312,7 @@ u_isUWhiteSpace(UChar32 c);
  *         for enumerated properties, corresponds to the numeric value of the enumerated
  *         constant of the respective property value enumeration type
  *         (cast to enum type if necessary).
- *         Returns 0 or 1 (for FALSE/TRUE) for binary Unicode properties.
+ *         Returns 0 or 1 (for false/true) for binary Unicode properties.
  *         Returns a bit-mask for mask properties.
  *         Returns 0 if 'which' is out of bounds or if the Unicode version
  *         does not have data for the property at all, or not for this code point.
@@ -16924,7 +18325,7 @@ u_isUWhiteSpace(UChar32 c);
  * @see u_getUnicodeVersion
  * @stable ICU 2.2
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 u_getIntPropertyValue(UChar32 c, UProperty which);
 
 /**
@@ -16945,7 +18346,7 @@ u_getIntPropertyValue(UChar32 c, UProperty which);
  * @see u_getIntPropertyValue
  * @stable ICU 2.2
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 u_getIntPropertyMinValue(UProperty which);
 
 /**
@@ -16957,7 +18358,7 @@ u_getIntPropertyMinValue(UProperty which);
  *
  * - UCHAR_BIDI_CLASS:    0/18 (U_LEFT_TO_RIGHT/U_BOUNDARY_NEUTRAL)
  * - UCHAR_SCRIPT:        0/45 (USCRIPT_COMMON/USCRIPT_TAGBANWA)
- * - UCHAR_IDEOGRAPHIC:   0/1  (FALSE/TRUE)
+ * - UCHAR_IDEOGRAPHIC:   0/1  (false/true)
  *
  * For undefined UProperty constant values, min/max values will be 0/-1.
  *
@@ -16974,9 +18375,28 @@ u_getIntPropertyMinValue(UProperty which);
  * @see u_getIntPropertyValue
  * @stable ICU 2.2
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 u_getIntPropertyMaxValue(UProperty which);
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+/**
+ * Returns an immutable UCPMap for an enumerated/catalog/int-valued property.
+ * The library retains ownership over the returned object.
+ * Sets an error code if the property number is not one for an "int property".
+ *
+ * The returned object maps all Unicode code points to their values for that property.
+ * For documentation of the integer values see u_getIntPropertyValue().
+ *
+ * @param property UCHAR_INT_START..UCHAR_INT_LIMIT-1
+ * @param pErrorCode an in/out ICU UErrorCode
+ * @return the property as a map
+ * @see UProperty
+ * @see u_getIntPropertyValue
+ * @stable ICU 63
+ */
+U_CAPI const UCPMap * U_EXPORT2
+u_getIntPropertyMap(UProperty property, UErrorCode *pErrorCode);
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
 
 /**
  * Get the numeric value for a Unicode code point as defined in the
@@ -17000,7 +18420,7 @@ u_getIntPropertyMaxValue(UProperty which);
  * @see U_NO_NUMERIC_VALUE
  * @stable ICU 2.2
  */
-U_STABLE double U_EXPORT2
+U_CAPI double U_EXPORT2
 u_getNumericValue(UChar32 c);
 
 /**
@@ -17028,14 +18448,14 @@ u_getNumericValue(UChar32 c);
  * documentation at the top of this header file.
  *
  * @param c the code point to be tested
- * @return TRUE if the code point is an Ll lowercase letter
+ * @return true if the code point is an Ll lowercase letter
  *
  * @see UCHAR_LOWERCASE
  * @see u_isupper
  * @see u_istitle
  * @stable ICU 2.0
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 u_islower(UChar32 c);
 
 /**
@@ -17054,7 +18474,7 @@ u_islower(UChar32 c);
  * documentation at the top of this header file.
  *
  * @param c the code point to be tested
- * @return TRUE if the code point is an Lu uppercase letter
+ * @return true if the code point is an Lu uppercase letter
  *
  * @see UCHAR_UPPERCASE
  * @see u_islower
@@ -17062,7 +18482,7 @@ u_islower(UChar32 c);
  * @see u_tolower
  * @stable ICU 2.0
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 u_isupper(UChar32 c);
 
 /**
@@ -17072,14 +18492,14 @@ u_isupper(UChar32 c);
  * Same as java.lang.Character.isTitleCase().
  *
  * @param c the code point to be tested
- * @return TRUE if the code point is an Lt titlecase letter
+ * @return true if the code point is an Lt titlecase letter
  *
  * @see u_isupper
  * @see u_islower
  * @see u_totitle
  * @stable ICU 2.0
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 u_istitle(UChar32 c);
 
 /**
@@ -17096,11 +18516,11 @@ u_istitle(UChar32 c);
  * documentation at the top of this header file.
  *
  * @param c the code point to be tested
- * @return TRUE if the code point is a digit character according to Character.isDigit()
+ * @return true if the code point is a digit character according to Character.isDigit()
  *
  * @stable ICU 2.0
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 u_isdigit(UChar32 c);
 
 /**
@@ -17115,13 +18535,13 @@ u_isdigit(UChar32 c);
  * documentation at the top of this header file.
  *
  * @param c the code point to be tested
- * @return TRUE if the code point is a letter character
+ * @return true if the code point is a letter character
  *
  * @see u_isdigit
  * @see u_isalnum
  * @stable ICU 2.0
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 u_isalpha(UChar32 c);
 
 /**
@@ -17138,11 +18558,11 @@ u_isalpha(UChar32 c);
  * documentation at the top of this header file.
  *
  * @param c the code point to be tested
- * @return TRUE if the code point is an alphanumeric character according to Character.isLetterOrDigit()
+ * @return true if the code point is an alphanumeric character according to Character.isLetterOrDigit()
  *
  * @stable ICU 2.0
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 u_isalnum(UChar32 c);
 
 /**
@@ -17161,11 +18581,11 @@ u_isalnum(UChar32 c);
  * documentation at the top of this header file.
  *
  * @param c the code point to be tested
- * @return TRUE if the code point is a hexadecimal digit
+ * @return true if the code point is a hexadecimal digit
  *
  * @stable ICU 2.6
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 u_isxdigit(UChar32 c);
 
 /**
@@ -17177,17 +18597,17 @@ u_isxdigit(UChar32 c);
  * documentation at the top of this header file.
  *
  * @param c the code point to be tested
- * @return TRUE if the code point is a punctuation character
+ * @return true if the code point is a punctuation character
  *
  * @stable ICU 2.6
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 u_ispunct(UChar32 c);
 
 /**
  * Determines whether the specified code point is a "graphic" character
  * (printable, excluding spaces).
- * TRUE for all characters except those with general categories
+ * true for all characters except those with general categories
  * "Cc" (control codes), "Cf" (format controls), "Cs" (surrogates),
  * "Cn" (unassigned), and "Z" (separators).
  *
@@ -17196,11 +18616,11 @@ u_ispunct(UChar32 c);
  * documentation at the top of this header file.
  *
  * @param c the code point to be tested
- * @return TRUE if the code point is a "graphic" character
+ * @return true if the code point is a "graphic" character
  *
  * @stable ICU 2.6
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 u_isgraph(UChar32 c);
 
 /**
@@ -17208,13 +18628,13 @@ u_isgraph(UChar32 c);
  * a character that visibly separates words on a line.
  * The following are equivalent definitions:
  *
- * TRUE for Unicode White_Space characters except for "vertical space controls"
+ * true for Unicode White_Space characters except for "vertical space controls"
  * where "vertical space controls" are the following characters:
  * U+000A (LF) U+000B (VT) U+000C (FF) U+000D (CR) U+0085 (NEL) U+2028 (LS) U+2029 (PS)
  *
  * same as
  *
- * TRUE for U+0009 (TAB) and characters with general category "Zs" (space separators).
+ * true for U+0009 (TAB) and characters with general category "Zs" (space separators).
  *
  * Note: There are several ICU whitespace functions; please see the uchar.h
  * file documentation for a detailed comparison.
@@ -17224,11 +18644,11 @@ u_isgraph(UChar32 c);
  * documentation at the top of this header file.
  *
  * @param c the code point to be tested
- * @return TRUE if the code point is a "blank"
+ * @return true if the code point is a "blank"
  *
  * @stable ICU 2.6
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 u_isblank(UChar32 c);
 
 /**
@@ -17243,7 +18663,7 @@ u_isblank(UChar32 c);
  * Same as java.lang.Character.isDefined().
  *
  * @param c the code point to be tested
- * @return TRUE if the code point is assigned a character
+ * @return true if the code point is assigned a character
  *
  * @see u_isdigit
  * @see u_isalpha
@@ -17253,7 +18673,7 @@ u_isblank(UChar32 c);
  * @see u_istitle
  * @stable ICU 2.0
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 u_isdefined(UChar32 c);
 
 /**
@@ -17274,7 +18694,7 @@ u_isdefined(UChar32 c);
  * @see u_isUWhiteSpace
  * @stable ICU 2.0
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 u_isspace(UChar32 c);
 
 /**
@@ -17288,14 +18708,14 @@ u_isspace(UChar32 c);
  * file documentation for a detailed comparison.
  *
  * @param c the code point to be tested
- * @return TRUE if the code point is a space character according to Character.isSpaceChar()
+ * @return true if the code point is a space character according to Character.isSpaceChar()
  *
  * @see u_isspace
  * @see u_isWhitespace
  * @see u_isUWhiteSpace
  * @stable ICU 2.6
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 u_isJavaSpaceChar(UChar32 c);
 
 /**
@@ -17328,14 +18748,14 @@ u_isJavaSpaceChar(UChar32 c);
  * file documentation for a detailed comparison.
  *
  * @param c the code point to be tested
- * @return TRUE if the code point is a whitespace character according to Java/ICU
+ * @return true if the code point is a whitespace character according to Java/ICU
  *
  * @see u_isspace
  * @see u_isJavaSpaceChar
  * @see u_isUWhiteSpace
  * @stable ICU 2.0
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 u_isWhitespace(UChar32 c);
 
 /**
@@ -17353,13 +18773,13 @@ u_isWhitespace(UChar32 c);
  * documentation at the top of this header file.
  *
  * @param c the code point to be tested
- * @return TRUE if the code point is a control character
+ * @return true if the code point is a control character
  *
  * @see UCHAR_DEFAULT_IGNORABLE_CODE_POINT
  * @see u_isprint
  * @stable ICU 2.0
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 u_iscntrl(UChar32 c);
 
 /**
@@ -17369,12 +18789,12 @@ u_iscntrl(UChar32 c);
  * Same as java.lang.Character.isISOControl().
  *
  * @param c the code point to be tested
- * @return TRUE if the code point is an ISO control code
+ * @return true if the code point is an ISO control code
  *
  * @see u_iscntrl
  * @stable ICU 2.6
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 u_isISOControl(UChar32 c);
 
 /**
@@ -17386,34 +18806,33 @@ u_isISOControl(UChar32 c);
  * documentation at the top of this header file.
  *
  * @param c the code point to be tested
- * @return TRUE if the code point is a printable character
+ * @return true if the code point is a printable character
  *
  * @see UCHAR_DEFAULT_IGNORABLE_CODE_POINT
  * @see u_iscntrl
  * @stable ICU 2.0
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 u_isprint(UChar32 c);
 
 /**
- * Determines whether the specified code point is a base character.
+ * Non-standard: Determines whether the specified code point is a base character.
  * True for general categories "L" (letters), "N" (numbers),
  * "Mc" (spacing combining marks), and "Me" (enclosing marks).
  *
- * Note that this is different from the Unicode definition in
- * chapter 3.5, conformance clause D13,
- * which defines base characters to be all characters (not Cn)
- * that do not graphically combine with preceding characters (M)
- * and that are neither control (Cc) or format (Cf) characters.
+ * Note that this is different from the Unicode Standard definition in
+ * chapter 3.6, conformance clause D51 “Base character”,
+ * which defines base characters as the code points with general categories
+ * Letter (L), Number (N), Punctuation (P), Symbol (S), or Space Separator (Zs).
  *
  * @param c the code point to be tested
- * @return TRUE if the code point is a base character according to this function
+ * @return true if the code point is a base character according to this function
  *
  * @see u_isalpha
  * @see u_isdigit
  * @stable ICU 2.0
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 u_isbase(UChar32 c);
 
 /**
@@ -17432,7 +18851,7 @@ u_isbase(UChar32 c);
  * @see UCharDirection
  * @stable ICU 2.0
  */
-U_STABLE UCharDirection U_EXPORT2
+U_CAPI UCharDirection U_EXPORT2
 u_charDirection(UChar32 c);
 
 /**
@@ -17445,12 +18864,12 @@ u_charDirection(UChar32 c);
  * Same as UCHAR_BIDI_MIRRORED
  *
  * @param c the code point to be tested
- * @return TRUE if the character has the Bidi_Mirrored property
+ * @return true if the character has the Bidi_Mirrored property
  *
  * @see UCHAR_BIDI_MIRRORED
  * @stable ICU 2.0
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 u_isMirrored(UChar32 c);
 
 /**
@@ -17472,7 +18891,7 @@ u_isMirrored(UChar32 c);
  * @see u_isMirrored
  * @stable ICU 2.0
  */
-U_STABLE UChar32 U_EXPORT2
+U_CAPI UChar32 U_EXPORT2
 u_charMirror(UChar32 c);
 
 /**
@@ -17491,7 +18910,7 @@ u_charMirror(UChar32 c);
  * @see u_charMirror
  * @stable ICU 52
  */
-U_STABLE UChar32 U_EXPORT2
+U_CAPI UChar32 U_EXPORT2
 u_getBidiPairedBracket(UChar32 c);
 
 /**
@@ -17505,7 +18924,7 @@ u_getBidiPairedBracket(UChar32 c);
  * @see UCharCategory
  * @stable ICU 2.0
  */
-U_STABLE int8_t U_EXPORT2
+U_CAPI int8_t U_EXPORT2
 u_charType(UChar32 c);
 
 /**
@@ -17528,13 +18947,13 @@ u_charType(UChar32 c);
  * of code points c (where start<=c<limit)
  * with the same Unicode general category ("character type").
  *
- * The callback function can stop the enumeration by returning FALSE.
+ * The callback function can stop the enumeration by returning false.
  *
  * @param context an opaque pointer, as passed into utrie_enum()
  * @param start the first code point in a contiguous range with value
  * @param limit one past the last code point in a contiguous range with value
  * @param type the general category for all code points in [start..limit[
- * @return FALSE to stop the enumeration
+ * @return false to stop the enumeration
  *
  * @stable ICU 2.1
  * @see UCharCategory
@@ -17562,7 +18981,7 @@ UCharEnumTypeRange(const void *context, UChar32 start, UChar32 limit, UCharCateg
  * @see UCharCategory
  * @see UCharEnumTypeRange
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 u_enumCharTypes(UCharEnumTypeRange *enumRange, const void *context);
 
 #if !UCONFIG_NO_NORMALIZATION
@@ -17574,7 +18993,7 @@ u_enumCharTypes(UCharEnumTypeRange *enumRange, const void *context);
  * @return the combining class of the character
  * @stable ICU 2.0
  */
-U_STABLE uint8_t U_EXPORT2
+U_CAPI uint8_t U_EXPORT2
 u_getCombiningClass(UChar32 c);
 
 #endif
@@ -17602,7 +19021,7 @@ u_getCombiningClass(UChar32 c);
  * @see u_getNumericValue
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 u_charDigitValue(UChar32 c);
 
 /**
@@ -17614,7 +19033,7 @@ u_charDigitValue(UChar32 c);
  * @see UBlockCode
  * @stable ICU 2.0
  */
-U_STABLE UBlockCode U_EXPORT2
+U_CAPI UBlockCode U_EXPORT2
 ublock_getCode(UChar32 c);
 
 /**
@@ -17649,7 +19068,7 @@ ublock_getCode(UChar32 c);
  * @see u_enumCharNames
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 u_charName(UChar32 code, UCharNameChoice nameChoice,
            char *buffer, int32_t bufferLength,
            UErrorCode *pErrorCode);
@@ -17675,7 +19094,7 @@ u_charName(UChar32 code, UCharNameChoice nameChoice,
  * @see u_enumCharNames
  * @stable ICU 1.7
  */
-U_STABLE UChar32 U_EXPORT2
+U_CAPI UChar32 U_EXPORT2
 u_charFromName(UCharNameChoice nameChoice,
                const char *name,
                UErrorCode *pErrorCode);
@@ -17684,14 +19103,14 @@ u_charFromName(UCharNameChoice nameChoice,
  * Type of a callback function for u_enumCharNames() that gets called
  * for each Unicode character with the code point value and
  * the character name.
- * If such a function returns FALSE, then the enumeration is stopped.
+ * If such a function returns false, then the enumeration is stopped.
  *
  * @param context The context pointer that was passed to u_enumCharNames().
  * @param code The Unicode code point for the character with this name.
  * @param nameChoice Selector for which kind of names is enumerated.
  * @param name The character's name, zero-terminated.
  * @param length The length of the name.
- * @return TRUE if the enumeration should continue, FALSE to stop it.
+ * @return true if the enumeration should continue, false to stop it.
  *
  * @see UCharNameChoice
  * @see u_enumCharNames
@@ -17724,7 +19143,7 @@ typedef UBool U_CALLCONV UEnumCharNamesFn(void *context,
  * @see u_charFromName
  * @stable ICU 1.7
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 u_enumCharNames(UChar32 start, UChar32 limit,
                 UEnumCharNamesFn *fn,
                 void *context,
@@ -17762,7 +19181,7 @@ u_enumCharNames(UChar32 start, UChar32 limit,
  * @see UPropertyNameChoice
  * @stable ICU 2.4
  */
-U_STABLE const char* U_EXPORT2
+U_CAPI const char* U_EXPORT2
 u_getPropertyName(UProperty property,
                   UPropertyNameChoice nameChoice);
 
@@ -17785,7 +19204,7 @@ u_getPropertyName(UProperty property,
  * @see UProperty
  * @stable ICU 2.4
  */
-U_STABLE UProperty U_EXPORT2
+U_CAPI UProperty U_EXPORT2
 u_getPropertyEnum(const char* alias);
 
 /**
@@ -17835,7 +19254,7 @@ u_getPropertyEnum(const char* alias);
  * @see UPropertyNameChoice
  * @stable ICU 2.4
  */
-U_STABLE const char* U_EXPORT2
+U_CAPI const char* U_EXPORT2
 u_getPropertyValueName(UProperty property,
                        int32_t value,
                        UPropertyNameChoice nameChoice);
@@ -17871,7 +19290,7 @@ u_getPropertyValueName(UProperty property,
  * @see UProperty
  * @stable ICU 2.4
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 u_getPropertyValueEnum(UProperty property,
                        const char* alias);
 
@@ -17885,14 +19304,14 @@ u_getPropertyValueEnum(UProperty property,
  * Same as UCHAR_ID_START
  *
  * @param c the code point to be tested
- * @return TRUE if the code point may start an identifier
+ * @return true if the code point may start an identifier
  *
  * @see UCHAR_ID_START
  * @see u_isalpha
  * @see u_isIDPart
  * @stable ICU 2.0
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 u_isIDStart(UChar32 c);
 
 /**
@@ -17909,14 +19328,14 @@ u_isIDStart(UChar32 c);
  * u_isIDIgnorable(c).
  *
  * @param c the code point to be tested
- * @return TRUE if the code point may occur in an identifier according to Java
+ * @return true if the code point may occur in an identifier according to Java
  *
  * @see UCHAR_ID_CONTINUE
  * @see u_isIDStart
  * @see u_isIDIgnorable
  * @stable ICU 2.0
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 u_isIDPart(UChar32 c);
 
 /**
@@ -17932,14 +19351,14 @@ u_isIDPart(UChar32 c);
  * Note that Unicode just recommends to ignore Cf (format controls).
  *
  * @param c the code point to be tested
- * @return TRUE if the code point is ignorable in identifiers according to Java
+ * @return true if the code point is ignorable in identifiers according to Java
  *
  * @see UCHAR_DEFAULT_IGNORABLE_CODE_POINT
  * @see u_isIDStart
  * @see u_isIDPart
  * @stable ICU 2.0
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 u_isIDIgnorable(UChar32 c);
 
 /**
@@ -17951,14 +19370,14 @@ u_isIDIgnorable(UChar32 c);
  * Same as java.lang.Character.isJavaIdentifierStart().
  *
  * @param c the code point to be tested
- * @return TRUE if the code point may start a Java identifier
+ * @return true if the code point may start a Java identifier
  *
  * @see     u_isJavaIDPart
  * @see     u_isalpha
  * @see     u_isIDStart
  * @stable ICU 2.0
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 u_isJavaIDStart(UChar32 c);
 
 /**
@@ -17970,7 +19389,7 @@ u_isJavaIDStart(UChar32 c);
  * Same as java.lang.Character.isJavaIdentifierPart().
  *
  * @param c the code point to be tested
- * @return TRUE if the code point may occur in a Java identifier
+ * @return true if the code point may occur in a Java identifier
  *
  * @see     u_isIDIgnorable
  * @see     u_isJavaIDStart
@@ -17979,7 +19398,7 @@ u_isJavaIDStart(UChar32 c);
  * @see     u_isIDPart
  * @stable ICU 2.0
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 u_isJavaIDPart(UChar32 c);
 
 /**
@@ -18004,7 +19423,7 @@ u_isJavaIDPart(UChar32 c);
  *         otherwise the code point itself.
  * @stable ICU 2.0
  */
-U_STABLE UChar32 U_EXPORT2
+U_CAPI UChar32 U_EXPORT2
 u_tolower(UChar32 c);
 
 /**
@@ -18029,7 +19448,7 @@ u_tolower(UChar32 c);
  *         otherwise the code point itself.
  * @stable ICU 2.0
  */
-U_STABLE UChar32 U_EXPORT2
+U_CAPI UChar32 U_EXPORT2
 u_toupper(UChar32 c);
 
 /**
@@ -18054,7 +19473,7 @@ u_toupper(UChar32 c);
  *         otherwise the code point itself.
  * @stable ICU 2.0
  */
-U_STABLE UChar32 U_EXPORT2
+U_CAPI UChar32 U_EXPORT2
 u_totitle(UChar32 c);
 
 /**
@@ -18079,7 +19498,7 @@ u_totitle(UChar32 c);
  *         otherwise the code point itself.
  * @stable ICU 2.0
  */
-U_STABLE UChar32 U_EXPORT2
+U_CAPI UChar32 U_EXPORT2
 u_foldCase(UChar32 c, uint32_t options);
 
 /**
@@ -18120,7 +19539,7 @@ u_foldCase(UChar32 c, uint32_t options);
  * @see     u_isdigit
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 u_digit(UChar32 ch, int8_t radix);
 
 /**
@@ -18151,7 +19570,7 @@ u_digit(UChar32 ch, int8_t radix);
  * @see     u_isdigit
  * @stable ICU 2.0
  */
-U_STABLE UChar32 U_EXPORT2
+U_CAPI UChar32 U_EXPORT2
 u_forDigit(int32_t digit, int8_t radix);
 
 /**
@@ -18168,7 +19587,7 @@ u_forDigit(int32_t digit, int8_t radix);
  *
  * @stable ICU 2.1
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 u_charAge(UChar32 c, UVersionInfo versionArray);
 
 /**
@@ -18182,7 +19601,7 @@ u_charAge(UChar32 c, UVersionInfo versionArray);
  *                     the Unicode version number
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 u_getUnicodeVersion(UVersionInfo versionArray);
 
 #if !UCONFIG_NO_NORMALIZATION
@@ -18207,7 +19626,7 @@ u_getUnicodeVersion(UVersionInfo versionArray);
  *
  * @stable ICU 2.2
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 u_getFC_NFKC_Closure(UChar32 c, UChar *dest, int32_t destCapacity, UErrorCode *pErrorCode);
 
 #endif
@@ -18239,6 +19658,7 @@ U_CDECL_END
 
 #ifndef UBIDI_H
 #define UBIDI_H
+
 
 
 /**
@@ -18714,7 +20134,7 @@ typedef struct UBiDi UBiDi;
  * @return An empty <code>UBiDi</code> object.
  * @stable ICU 2.0
  */
-U_STABLE UBiDi * U_EXPORT2
+U_CAPI UBiDi * U_EXPORT2
 ubidi_open(void);
 
 /**
@@ -18751,7 +20171,7 @@ ubidi_open(void);
  * @return An empty <code>UBiDi</code> object with preallocated memory.
  * @stable ICU 2.0
  */
-U_STABLE UBiDi * U_EXPORT2
+U_CAPI UBiDi * U_EXPORT2
 ubidi_openSized(int32_t maxLength, int32_t maxRunCount, UErrorCode *pErrorCode);
 
 /**
@@ -18774,7 +20194,7 @@ ubidi_openSized(int32_t maxLength, int32_t maxRunCount, UErrorCode *pErrorCode);
  * @see ubidi_setLine
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ubidi_close(UBiDi *pBiDi);
 
 
@@ -18794,7 +20214,7 @@ ubidi_close(UBiDi *pBiDi);
  * this "inverse Bidi" and that the current implementation provides only an
  * approximation of "inverse Bidi".</p>
  *
- * <p>With <code>isInverse</code> set to <code>TRUE</code>,
+ * <p>With <code>isInverse</code> set to <code>true</code>,
  * this function changes the behavior of some of the subsequent functions
  * in a way that they can be used for the inverse Bidi algorithm.
  * Specifically, runs of text with numeric characters will be treated in a
@@ -18807,12 +20227,12 @@ ubidi_close(UBiDi *pBiDi);
  * the runs of the logically ordered output.</p>
  *
  * <p>Calling this function with argument <code>isInverse</code> set to
- * <code>TRUE</code> is equivalent to calling
+ * <code>true</code> is equivalent to calling
  * <code>ubidi_setReorderingMode</code> with argument
  * <code>reorderingMode</code>
  * set to <code>#UBIDI_REORDER_INVERSE_NUMBERS_AS_L</code>.<br>
  * Calling this function with argument <code>isInverse</code> set to
- * <code>FALSE</code> is equivalent to calling
+ * <code>false</code> is equivalent to calling
  * <code>ubidi_setReorderingMode</code> with argument
  * <code>reorderingMode</code>
  * set to <code>#UBIDI_REORDER_DEFAULT</code>.
@@ -18826,18 +20246,18 @@ ubidi_close(UBiDi *pBiDi);
  * @see ubidi_setReorderingMode
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ubidi_setInverse(UBiDi *pBiDi, UBool isInverse);
 
 /**
  * Is this Bidi object set to perform the inverse Bidi algorithm?
  * <p>Note: calling this function after setting the reordering mode with
- * <code>ubidi_setReorderingMode</code> will return <code>TRUE</code> if the
+ * <code>ubidi_setReorderingMode</code> will return <code>true</code> if the
  * reordering mode was set to <code>#UBIDI_REORDER_INVERSE_NUMBERS_AS_L</code>,
- * <code>FALSE</code> for all other values.</p>
+ * <code>false</code> for all other values.</p>
  *
  * @param pBiDi is a <code>UBiDi</code> object.
- * @return TRUE if the Bidi object is set to perform the inverse Bidi algorithm
+ * @return true if the Bidi object is set to perform the inverse Bidi algorithm
  * by handling numbers as L.
  *
  * @see ubidi_setInverse
@@ -18845,7 +20265,7 @@ ubidi_setInverse(UBiDi *pBiDi, UBool isInverse);
  * @stable ICU 2.0
  */
 
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 ubidi_isInverse(UBiDi *pBiDi);
 
 /**
@@ -18868,7 +20288,7 @@ ubidi_isInverse(UBiDi *pBiDi);
  * @see ubidi_setPara
  * @stable ICU 3.4
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ubidi_orderParagraphsLTR(UBiDi *pBiDi, UBool orderParagraphsLTR);
 
 /**
@@ -18876,13 +20296,13 @@ ubidi_orderParagraphsLTR(UBiDi *pBiDi, UBool orderParagraphsLTR);
  * successive paragraphs progress from left to right?
  *
  * @param pBiDi is a <code>UBiDi</code> object.
- * @return TRUE if the Bidi object is set to allocate level 0 to block
+ * @return true if the Bidi object is set to allocate level 0 to block
  *         separators.
  *
  * @see ubidi_orderParagraphsLTR
  * @stable ICU 3.4
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 ubidi_isOrderParagraphsLTR(UBiDi *pBiDi);
 
 /**
@@ -18914,7 +20334,7 @@ typedef enum UBiDiReorderingMode {
       * @stable ICU 3.6 */
     UBIDI_REORDER_RUNS_ONLY,
     /** Visual to Logical algorithm which handles numbers like L
-      * (same algorithm as selected by <code>ubidi_setInverse(TRUE)</code>.
+      * (same algorithm as selected by <code>ubidi_setInverse(true)</code>.
       * @see ubidi_setInverse
       * @stable ICU 3.6 */
     UBIDI_REORDER_INVERSE_NUMBERS_AS_L,
@@ -19026,7 +20446,7 @@ typedef enum UBiDiReorderingMode {
  * reordered sequence (the option <code>#UBIDI_INSERT_LRM_FOR_NUMERIC</code> can
  * be used with function <code>ubidi_writeReordered</code> to this end. This
  * mode is equivalent to calling <code>ubidi_setInverse()</code> with
- * argument <code>isInverse</code> set to <code>TRUE</code>.</li>
+ * argument <code>isInverse</code> set to <code>true</code>.</li>
  *
  * <li>When the reordering mode is set to
  * <code>#UBIDI_REORDER_INVERSE_LIKE_DIRECT</code>, the "direct" Logical to Visual
@@ -19079,7 +20499,7 @@ typedef enum UBiDiReorderingMode {
  * @see ubidi_writeReordered
  * @stable ICU 3.6
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ubidi_setReorderingMode(UBiDi *pBiDi, UBiDiReorderingMode reorderingMode);
 
 /**
@@ -19090,7 +20510,7 @@ ubidi_setReorderingMode(UBiDi *pBiDi, UBiDiReorderingMode reorderingMode);
  * @see ubidi_setReorderingMode
  * @stable ICU 3.6
  */
-U_STABLE UBiDiReorderingMode U_EXPORT2
+U_CAPI UBiDiReorderingMode U_EXPORT2
 ubidi_getReorderingMode(UBiDi *pBiDi);
 
 /**
@@ -19128,7 +20548,7 @@ typedef enum UBiDiReorderingOption {
      *
      * <p>If this option is set in conjunction with reordering mode
      * <code>#UBIDI_REORDER_INVERSE_NUMBERS_AS_L</code> or with calling
-     * <code>ubidi_setInverse(TRUE)</code>, it implies
+     * <code>ubidi_setInverse(true)</code>, it implies
      * option <code>#UBIDI_INSERT_LRM_FOR_NUMERIC</code>
      * in calls to function <code>ubidi_writeReordered()</code>.</p>
      *
@@ -19209,7 +20629,7 @@ typedef enum UBiDiReorderingOption {
      *
      * <p>When the <code>UBIDI_OPTION_STREAMING</code> option is used,
      * it is recommended to call <code>ubidi_orderParagraphsLTR()</code> with
-     * argument <code>orderParagraphsLTR</code> set to <code>TRUE</code> before
+     * argument <code>orderParagraphsLTR</code> set to <code>true</code> before
      * calling <code>ubidi_setPara</code> so that later paragraphs may be
      * concatenated to previous paragraphs on the right.</p>
      *
@@ -19235,7 +20655,7 @@ typedef enum UBiDiReorderingOption {
  * @see ubidi_getReorderingOptions
  * @stable ICU 3.6
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ubidi_setReorderingOptions(UBiDi *pBiDi, uint32_t reorderingOptions);
 
 /**
@@ -19246,7 +20666,7 @@ ubidi_setReorderingOptions(UBiDi *pBiDi, uint32_t reorderingOptions);
  * @see ubidi_setReorderingOptions
  * @stable ICU 3.6
  */
-U_STABLE uint32_t U_EXPORT2
+U_CAPI uint32_t U_EXPORT2
 ubidi_getReorderingOptions(UBiDi *pBiDi);
 
 /**
@@ -19333,7 +20753,7 @@ ubidi_getReorderingOptions(UBiDi *pBiDi);
  * @see ubidi_setPara
  * @stable ICU 4.8
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ubidi_setContext(UBiDi *pBiDi,
                  const UChar *prologue, int32_t proLength,
                  const UChar *epilogue, int32_t epiLength,
@@ -19421,7 +20841,7 @@ ubidi_setContext(UBiDi *pBiDi,
  * @param pErrorCode must be a valid pointer to an error code value.
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ubidi_setPara(UBiDi *pBiDi, const UChar *text, int32_t length,
               UBiDiLevel paraLevel, UBiDiLevel *embeddingLevels,
               UErrorCode *pErrorCode);
@@ -19472,7 +20892,7 @@ ubidi_setPara(UBiDi *pBiDi, const UChar *text, int32_t length,
  * @see ubidi_getProcessedLength
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ubidi_setLine(const UBiDi *pParaBiDi,
               int32_t start, int32_t limit,
               UBiDi *pLineBiDi,
@@ -19493,7 +20913,7 @@ ubidi_setLine(const UBiDi *pParaBiDi,
  * @see UBiDiDirection
  * @stable ICU 2.0
  */
-U_STABLE UBiDiDirection U_EXPORT2
+U_CAPI UBiDiDirection U_EXPORT2
 ubidi_getDirection(const UBiDi *pBiDi);
 
 /**
@@ -19523,7 +20943,7 @@ ubidi_getDirection(const UBiDi *pBiDi);
  * @see UBiDiDirection
  * @stable ICU 4.6
  */
-U_STABLE UBiDiDirection U_EXPORT2
+U_CAPI UBiDiDirection U_EXPORT2
 ubidi_getBaseDirection(const UChar *text,  int32_t length );
 
 /**
@@ -19537,7 +20957,7 @@ ubidi_getBaseDirection(const UChar *text,  int32_t length );
  * @see ubidi_setLine
  * @stable ICU 2.0
  */
-U_STABLE const UChar * U_EXPORT2
+U_CAPI const UChar * U_EXPORT2
 ubidi_getText(const UBiDi *pBiDi);
 
 /**
@@ -19548,7 +20968,7 @@ ubidi_getText(const UBiDi *pBiDi);
  * @return The length of the text that the UBiDi object was created for.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ubidi_getLength(const UBiDi *pBiDi);
 
 /**
@@ -19566,7 +20986,7 @@ ubidi_getLength(const UBiDi *pBiDi);
  * @see ubidi_getParagraphByIndex
  * @stable ICU 2.0
  */
-U_STABLE UBiDiLevel U_EXPORT2
+U_CAPI UBiDiLevel U_EXPORT2
 ubidi_getParaLevel(const UBiDi *pBiDi);
 
 /**
@@ -19577,7 +20997,7 @@ ubidi_getParaLevel(const UBiDi *pBiDi);
  * @return The number of paragraphs.
  * @stable ICU 3.4
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ubidi_countParagraphs(UBiDi *pBiDi);
 
 /**
@@ -19614,7 +21034,7 @@ ubidi_countParagraphs(UBiDi *pBiDi);
  * @see ubidi_getProcessedLength
  * @stable ICU 3.4
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ubidi_getParagraph(const UBiDi *pBiDi, int32_t charIndex, int32_t *pParaStart,
                    int32_t *pParaLimit, UBiDiLevel *pParaLevel,
                    UErrorCode *pErrorCode);
@@ -19646,7 +21066,7 @@ ubidi_getParagraph(const UBiDi *pBiDi, int32_t charIndex, int32_t *pParaStart,
  *
  * @stable ICU 3.4
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ubidi_getParagraphByIndex(const UBiDi *pBiDi, int32_t paraIndex,
                           int32_t *pParaStart, int32_t *pParaLimit,
                           UBiDiLevel *pParaLevel, UErrorCode *pErrorCode);
@@ -19666,7 +21086,7 @@ ubidi_getParagraphByIndex(const UBiDi *pBiDi, int32_t paraIndex,
  * @see ubidi_getProcessedLength
  * @stable ICU 2.0
  */
-U_STABLE UBiDiLevel U_EXPORT2
+U_CAPI UBiDiLevel U_EXPORT2
 ubidi_getLevelAt(const UBiDi *pBiDi, int32_t charIndex);
 
 /**
@@ -19687,7 +21107,7 @@ ubidi_getLevelAt(const UBiDi *pBiDi, int32_t charIndex);
  * @see ubidi_getProcessedLength
  * @stable ICU 2.0
  */
-U_STABLE const UBiDiLevel * U_EXPORT2
+U_CAPI const UBiDiLevel * U_EXPORT2
 ubidi_getLevels(UBiDi *pBiDi, UErrorCode *pErrorCode);
 
 /**
@@ -19714,7 +21134,7 @@ ubidi_getLevels(UBiDi *pBiDi, UErrorCode *pErrorCode);
  * @see ubidi_getProcessedLength
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ubidi_getLogicalRun(const UBiDi *pBiDi, int32_t logicalPosition,
                     int32_t *pLogicalLimit, UBiDiLevel *pLevel);
 
@@ -19733,7 +21153,7 @@ ubidi_getLogicalRun(const UBiDi *pBiDi, int32_t logicalPosition,
  * @return The number of runs.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ubidi_countRuns(UBiDi *pBiDi, UErrorCode *pErrorCode);
 
 /**
@@ -19792,7 +21212,7 @@ ubidi_countRuns(UBiDi *pBiDi, UErrorCode *pErrorCode);
  * to avoid these issues.
  * @stable ICU 2.0
  */
-U_STABLE UBiDiDirection U_EXPORT2
+U_CAPI UBiDiDirection U_EXPORT2
 ubidi_getVisualRun(UBiDi *pBiDi, int32_t runIndex,
                    int32_t *pLogicalStart, int32_t *pLength);
 
@@ -19833,7 +21253,7 @@ ubidi_getVisualRun(UBiDi *pBiDi, int32_t runIndex,
  * @see ubidi_getProcessedLength
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ubidi_getVisualIndex(UBiDi *pBiDi, int32_t logicalIndex, UErrorCode *pErrorCode);
 
 /**
@@ -19868,7 +21288,7 @@ ubidi_getVisualIndex(UBiDi *pBiDi, int32_t logicalIndex, UErrorCode *pErrorCode)
  * @see ubidi_getResultLength
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ubidi_getLogicalIndex(UBiDi *pBiDi, int32_t visualIndex, UErrorCode *pErrorCode);
 
 /**
@@ -19911,7 +21331,7 @@ ubidi_getLogicalIndex(UBiDi *pBiDi, int32_t visualIndex, UErrorCode *pErrorCode)
  * @see ubidi_getResultLength
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ubidi_getLogicalMap(UBiDi *pBiDi, int32_t *indexMap, UErrorCode *pErrorCode);
 
 /**
@@ -19947,7 +21367,7 @@ ubidi_getLogicalMap(UBiDi *pBiDi, int32_t *indexMap, UErrorCode *pErrorCode);
  * @see ubidi_getResultLength
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ubidi_getVisualMap(UBiDi *pBiDi, int32_t *indexMap, UErrorCode *pErrorCode);
 
 /**
@@ -19970,7 +21390,7 @@ ubidi_getVisualMap(UBiDi *pBiDi, int32_t *indexMap, UErrorCode *pErrorCode);
  *        The index map will result in <code>indexMap[logicalIndex]==visualIndex</code>.
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ubidi_reorderLogical(const UBiDiLevel *levels, int32_t length, int32_t *indexMap);
 
 /**
@@ -19993,7 +21413,7 @@ ubidi_reorderLogical(const UBiDiLevel *levels, int32_t length, int32_t *indexMap
  *        The index map will result in <code>indexMap[visualIndex]==logicalIndex</code>.
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ubidi_reorderVisual(const UBiDiLevel *levels, int32_t length, int32_t *indexMap);
 
 /**
@@ -20028,7 +21448,7 @@ ubidi_reorderVisual(const UBiDiLevel *levels, int32_t length, int32_t *indexMap)
  * @see UBIDI_MAP_NOWHERE
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ubidi_invertMap(const int32_t *srcMap, int32_t *destMap, int32_t length);
 
 /** option flags for ubidi_writeReordered() */
@@ -20133,7 +21553,7 @@ ubidi_invertMap(const int32_t *srcMap, int32_t *destMap, int32_t length);
  * @see UBIDI_OPTION_STREAMING
  * @stable ICU 3.6
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ubidi_getProcessedLength(const UBiDi *pBiDi);
 
 /**
@@ -20163,7 +21583,7 @@ ubidi_getProcessedLength(const UBiDi *pBiDi);
  * @see UBIDI_OPTION_REMOVE_CONTROLS
  * @stable ICU 3.6
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ubidi_getResultLength(const UBiDi *pBiDi);
 
 U_CDECL_BEGIN
@@ -20209,7 +21629,7 @@ U_CDECL_END
  * @see UBiDiClassCallback
  * @stable ICU 3.6
  */
-U_STABLE UCharDirection U_EXPORT2
+U_CAPI UCharDirection U_EXPORT2
 ubidi_getCustomizedClass(UBiDi *pBiDi, UChar32 c);
 
 /**
@@ -20239,7 +21659,7 @@ ubidi_getCustomizedClass(UBiDi *pBiDi, UChar32 c);
  * @see ubidi_getClassCallback
  * @stable ICU 3.6
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ubidi_setClassCallback(UBiDi *pBiDi, UBiDiClassCallback *newFn,
                        const void *newContext, UBiDiClassCallback **oldFn,
                        const void **oldContext, UErrorCode *pErrorCode);
@@ -20256,7 +21676,7 @@ ubidi_setClassCallback(UBiDi *pBiDi, UBiDiClassCallback *newFn,
  * @see ubidi_setClassCallback
  * @stable ICU 3.6
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ubidi_getClassCallback(UBiDi *pBiDi, UBiDiClassCallback **fn, const void **context);
 
 /**
@@ -20324,7 +21744,7 @@ ubidi_getClassCallback(UBiDi *pBiDi, UBiDiClassCallback **fn, const void **conte
  * @see ubidi_getProcessedLength
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ubidi_writeReordered(UBiDi *pBiDi,
                      UChar *dest, int32_t destSize,
                      uint16_t options,
@@ -20376,7 +21796,7 @@ ubidi_writeReordered(UBiDi *pBiDi,
  * @return The length of the output string.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ubidi_writeReverse(const UChar *src, int32_t srcLength,
                    UChar *dest, int32_t destSize,
                    uint16_t options,
@@ -20407,6 +21827,7 @@ ubidi_writeReverse(const UChar *src, int32_t srcLength,
 
 #ifndef UBIDITRANSFORM_H
 #define UBIDITRANSFORM_H
+
 
 
 /**
@@ -20534,10 +21955,10 @@ typedef struct UBiDiTransform UBiDiTransform;
  * calling <code>ubidi_setPara</code> with
  * <code>paraLevel == UBIDI_DEFAULT_RTL</code>,</li>
  * <li><Visual LTR, Logical LTR>: this is equivalent to
- * calling <code>ubidi_setInverse(UBiDi*, TRUE)</code> and then
+ * calling <code>ubidi_setInverse(UBiDi*, true)</code> and then
  * <code>ubidi_setPara</code> with <code>paraLevel == UBIDI_LTR</code>,</li>
  * <li><Visual LTR, Logical RTL>: this is equivalent to
- * calling <code>ubidi_setInverse(UBiDi*, TRUE)</code> and then
+ * calling <code>ubidi_setInverse(UBiDi*, true)</code> and then
  * <code>ubidi_setPara</code> with <code>paraLevel == UBIDI_RTL</code>.</li>
  * </ul>
  * All combinations that involve the Visual RTL scheme are unsupported by
@@ -20632,7 +22053,7 @@ typedef struct UBiDiTransform UBiDiTransform;
  * @see u_shapeArabic
  * @stable ICU 58
  */
-U_STABLE uint32_t U_EXPORT2
+U_CAPI uint32_t U_EXPORT2
 ubiditransform_transform(UBiDiTransform *pBiDiTransform,
             const UChar *src, int32_t srcLength,
             UChar *dest, int32_t destSize,
@@ -20678,14 +22099,14 @@ ubiditransform_transform(UBiDiTransform *pBiDiTransform,
  * @return An empty <code>UBiDiTransform</code> object.
  * @stable ICU 58
  */
-U_STABLE UBiDiTransform* U_EXPORT2
+U_CAPI UBiDiTransform* U_EXPORT2
 ubiditransform_open(UErrorCode *pErrorCode);
 
 /**
  * Deallocates the given <code>UBiDiTransform</code> object.
  * @stable ICU 58
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ubiditransform_close(UBiDiTransform *pBidiTransform);
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS5)
 
@@ -20866,9 +22287,8 @@ typedef struct UText UText; /**< C typedef for struct UText. @stable ICU 3.6 */
   *
   * @stable ICU 3.4
   */
-U_STABLE UText * U_EXPORT2
+U_CAPI UText * U_EXPORT2
 utext_close(UText *ut);
-
 
 /**
  * Open a read-only UText implementation for UTF-8 strings.
@@ -20891,7 +22311,7 @@ utext_close(UText *ut);
  *               will always be used and returned.
  * @stable ICU 3.4
  */
-U_STABLE UText * U_EXPORT2
+U_CAPI UText * U_EXPORT2
 utext_openUTF8(UText *ut, const char *s, int64_t length, UErrorCode *status);
 
 
@@ -20909,7 +22329,7 @@ utext_openUTF8(UText *ut, const char *s, int64_t length, UErrorCode *status);
  *               will always be used and returned.
  * @stable ICU 3.4
  */
-U_STABLE UText * U_EXPORT2
+U_CAPI UText * U_EXPORT2
 utext_openUChars(UText *ut, const UChar *s, int64_t length, UErrorCode *status);
 
 
@@ -20946,7 +22366,7 @@ utext_openUChars(UText *ut, const UChar *s, int64_t length, UErrorCode *status);
   *  shallow clones provide some protection against errors of this type by
   *  disabling text modification via the cloned UText.
   *
-  *  A shallow clone made with the readOnly parameter == FALSE will preserve the 
+  *  A shallow clone made with the readOnly parameter == false will preserve the 
   *  utext_isWritable() state of the source object.  Note, however, that
   *  write operations must be avoided while more than one UText exists that refer
   *  to the same underlying text.
@@ -20962,8 +22382,8 @@ utext_openUChars(UText *ut, const UChar *s, int64_t length, UErrorCode *status);
   *                If non-NULL, must refer to an already existing UText, which will then
   *                be reset to become the clone.
   *  @param src    The UText to be cloned.
-  *  @param deep   TRUE to request a deep clone, FALSE for a shallow clone.
-  *  @param readOnly TRUE to request that the cloned UText have read only access to the 
+  *  @param deep   true to request a deep clone, false for a shallow clone.
+  *  @param readOnly true to request that the cloned UText have read only access to the 
   *                underlying text.  
 
   *  @param status Errors are returned here.  For deep clones, U_UNSUPPORTED_ERROR
@@ -20972,7 +22392,7 @@ utext_openUChars(UText *ut, const UChar *s, int64_t length, UErrorCode *status);
   *  @return       The newly created clone, or NULL if the clone operation failed.
   *  @stable ICU 3.4
   */
-U_STABLE UText * U_EXPORT2
+U_CAPI UText * U_EXPORT2
 utext_clone(UText *dest, const UText *src, UBool deep, UBool readOnly, UErrorCode *status);
 
 
@@ -20980,14 +22400,14 @@ utext_clone(UText *dest, const UText *src, UBool deep, UBool readOnly, UErrorCod
   *  Compare two UText objects for equality.
   *  UTexts are equal if they are iterating over the same text, and
   *    have the same iteration position within the text.
-  *    If either or both of the parameters are NULL, the comparison is FALSE.
+  *    If either or both of the parameters are NULL, the comparison is false.
   *
   *  @param a   The first of the two UTexts to compare.
   *  @param b   The other UText to be compared.
-  *  @return    TRUE if the two UTexts are equal.
+  *  @return    true if the two UTexts are equal.
   *  @stable ICU 3.6
   */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 utext_equals(const UText *a, const UText *b);
 
 
@@ -21008,11 +22428,11 @@ utext_equals(const UText *a, const UText *b);
   *
   * @stable ICU 3.4
   */
-U_STABLE int64_t U_EXPORT2
+U_CAPI int64_t U_EXPORT2
 utext_nativeLength(UText *ut);
 
 /**
- *  Return TRUE if calculating the length of the text could be expensive.
+ *  Return true if calculating the length of the text could be expensive.
  *  Finding the length of NUL terminated strings is considered to be expensive.
  *
  *  Note that the value of this function may change
@@ -21021,10 +22441,10 @@ utext_nativeLength(UText *ut);
  *  be expensive to report it.
  *
  * @param ut the text to be accessed.
- * @return TRUE if determining the length of the text could be time consuming.
+ * @return true if determining the length of the text could be time consuming.
  * @stable ICU 3.4
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 utext_isLengthExpensive(const UText *ut);
 
 /**
@@ -21052,7 +22472,7 @@ utext_isLengthExpensive(const UText *ut);
  * @return the code point at the specified index.
  * @stable ICU 3.4
  */
-U_STABLE UChar32 U_EXPORT2
+U_CAPI UChar32 U_EXPORT2
 utext_char32At(UText *ut, int64_t nativeIndex);
 
 
@@ -21066,7 +22486,7 @@ utext_char32At(UText *ut, int64_t nativeIndex);
  * @return the Unicode code point at the current iterator position.
  * @stable ICU 3.4
  */
-U_STABLE UChar32 U_EXPORT2
+U_CAPI UChar32 U_EXPORT2
 utext_current32(UText *ut);
 
 
@@ -21088,7 +22508,7 @@ utext_current32(UText *ut);
  * @see UTEXT_NEXT32
  * @stable ICU 3.4
  */
-U_STABLE UChar32 U_EXPORT2
+U_CAPI UChar32 U_EXPORT2
 utext_next32(UText *ut);
 
 
@@ -21109,7 +22529,7 @@ utext_next32(UText *ut);
  *  @see UTEXT_PREVIOUS32
  *  @stable ICU 3.4
  */
-U_STABLE UChar32 U_EXPORT2
+U_CAPI UChar32 U_EXPORT2
 utext_previous32(UText *ut);
 
 
@@ -21131,7 +22551,7 @@ utext_previous32(UText *ut);
   *         or U_SENTINEL (-1) if it is out of bounds.
   * @stable ICU 3.4
   */
-U_STABLE UChar32 U_EXPORT2
+U_CAPI UChar32 U_EXPORT2
 utext_next32From(UText *ut, int64_t nativeIndex);
 
 
@@ -21151,7 +22571,7 @@ utext_next32From(UText *ut, int64_t nativeIndex);
   *
   * @stable ICU 3.4
   */
-U_STABLE UChar32 U_EXPORT2
+U_CAPI UChar32 U_EXPORT2
 utext_previous32From(UText *ut, int64_t nativeIndex);
 
 /**
@@ -21166,7 +22586,7 @@ utext_previous32From(UText *ut, int64_t nativeIndex);
   * @return the current index position, in the native units of the text provider.
   * @stable ICU 3.4
   */
-U_STABLE int64_t U_EXPORT2
+U_CAPI int64_t U_EXPORT2
 utext_getNativeIndex(const UText *ut);
 
 /**
@@ -21192,7 +22612,7 @@ utext_getNativeIndex(const UText *ut);
  * @param nativeIndex the native unit index of the new iteration position.
  * @stable ICU 3.4
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 utext_setNativeIndex(UText *ut, int64_t nativeIndex);
 
 /**
@@ -21207,11 +22627,11 @@ utext_setNativeIndex(UText *ut, int64_t nativeIndex);
  *
  * @param ut the text to be accessed.
  * @param delta the signed number of code points to move the iteration position.
- * @return TRUE if the position could be moved the requested number of positions while
+ * @return true if the position could be moved the requested number of positions while
  *              staying within the range [0 - text length].
  * @stable ICU 3.4
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 utext_moveIndex32(UText *ut, int32_t delta);
 
 /**
@@ -21236,7 +22656,7 @@ utext_moveIndex32(UText *ut, int32_t delta);
  *         or zero if the current position is at the start of the text.
  * @stable ICU 3.6
  */
-U_STABLE int64_t U_EXPORT2
+U_CAPI int64_t U_EXPORT2
 utext_getPreviousNativeIndex(UText *ut); 
 
 
@@ -21274,7 +22694,7 @@ utext_getPreviousNativeIndex(UText *ut);
  *
  * @stable ICU 3.4
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 utext_extract(UText *ut,
              int64_t nativeStart, int64_t nativeLimit,
              UChar *dest, int32_t destCapacity,
@@ -21356,12 +22776,14 @@ utext_extract(UText *ut,
   *
   * @stable ICU 3.8
   */
-#define UTEXT_SETNATIVEINDEX(ut, ix)                       \
-    { int64_t __offset = (ix) - (ut)->chunkNativeStart; \
-      if (__offset>=0 && __offset<(int64_t)(ut)->nativeIndexingLimit && (ut)->chunkContents[__offset]<0xdc00) { \
-          (ut)->chunkOffset=(int32_t)__offset; \
-      } else { \
-          utext_setNativeIndex((ut), (ix)); } }
+#define UTEXT_SETNATIVEINDEX(ut, ix) UPRV_BLOCK_MACRO_BEGIN { \
+    int64_t __offset = (ix) - (ut)->chunkNativeStart; \
+    if (__offset>=0 && __offset<(int64_t)(ut)->nativeIndexingLimit && (ut)->chunkContents[__offset]<0xdc00) { \
+        (ut)->chunkOffset=(int32_t)__offset; \
+    } else { \
+        utext_setNativeIndex((ut), (ix)); \
+    } \
+} UPRV_BLOCK_MACRO_END
 
 
 
@@ -21375,16 +22797,16 @@ utext_extract(UText *ut,
 
 
 /**
- *  Return TRUE if the text can be written (modified) with utext_replace() or
+ *  Return true if the text can be written (modified) with utext_replace() or
  *  utext_copy().  For the text to be writable, the text provider must
  *  be of a type that supports writing and the UText must not be frozen.
  *
- *  Attempting to modify text when utext_isWriteable() is FALSE will fail -
+ *  Attempting to modify text when utext_isWriteable() is false will fail -
  *  the text will not be modified, and an error will be returned from the function
  *  that attempted the modification.
  *
  * @param  ut   the UText to be tested.
- * @return TRUE if the text is modifiable.
+ * @return true if the text is modifiable.
  *
  * @see    utext_freeze()
  * @see    utext_replace()
@@ -21392,7 +22814,7 @@ utext_extract(UText *ut,
  * @stable ICU 3.4
  *
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 utext_isWritable(const UText *ut);
 
 
@@ -21401,10 +22823,10 @@ utext_isWritable(const UText *ut);
   * @see Replaceable::hasMetaData()
   *
   * @param ut The UText to be tested
-  * @return TRUE if the underlying text includes meta data.
+  * @return true if the underlying text includes meta data.
   * @stable ICU 3.4
   */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 utext_hasMetaData(const UText *ut);
 
 
@@ -21415,7 +22837,7 @@ utext_hasMetaData(const UText *ut);
  *  newly inserted replacement text.
  *
  * This function is only available on UText types that support writing,
- * that is, ones where utext_isWritable() returns TRUE.
+ * that is, ones where utext_isWritable() returns true.
  *
  * When using this function, there should be only a single UText opened onto the
  * underlying native text string.  Behavior after a replace operation
@@ -21435,7 +22857,7 @@ utext_hasMetaData(const UText *ut);
  *
  * @stable ICU 3.4
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 utext_replace(UText *ut,
              int64_t nativeStart, int64_t nativeLimit,
              const UChar *replacementText, int32_t replacementLength,
@@ -21457,7 +22879,7 @@ utext_replace(UText *ut,
  * at the destination position.
  *
  * This function is only available on UText types that support writing,
- * that is, ones where utext_isWritable() returns TRUE.
+ * that is, ones where utext_isWritable() returns true.
  *
  * When using this function, there should be only a single UText opened onto the
  * underlying native text string.  Behavior after a copy operation
@@ -21470,12 +22892,12 @@ utext_replace(UText *ut,
  *                     to be copied.
  * @param destIndex    The native destination index to which the source substring is
  *                     copied or moved.
- * @param move         If TRUE, then the substring is moved, not copied/duplicated.
+ * @param move         If true, then the substring is moved, not copied/duplicated.
  * @param status       receives any error status.  Possible errors include U_NO_WRITE_PERMISSION
  *                       
  * @stable ICU 3.4
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 utext_copy(UText *ut,
           int64_t nativeStart, int64_t nativeLimit,
           int64_t destIndex,
@@ -21504,7 +22926,7 @@ utext_copy(UText *ut,
   *  @see   utext_isWritable()
   *  @stable ICU 3.6
   */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 utext_freeze(UText *ut);
 
 
@@ -21579,7 +23001,7 @@ enum {
   *  @param dest   A UText struct to be filled in with the result of the clone operation,
   *                or NULL if the clone function should heap-allocate a new UText struct.
   *  @param src    The UText to be cloned.
-  *  @param deep   TRUE to request a deep clone, FALSE for a shallow clone.
+  *  @param deep   true to request a deep clone, false for a shallow clone.
   *  @param status Errors are returned here.  For deep clones, U_UNSUPPORTED_ERROR
   *                should be returned if the text provider is unable to clone the
   *                original text.
@@ -21615,9 +23037,9 @@ UTextNativeLength(UText *ut);
  *
  * @param ut          the UText being accessed.
  * @param nativeIndex Requested index of the text to be accessed.
- * @param forward     If TRUE, then the returned chunk must contain text
+ * @param forward     If true, then the returned chunk must contain text
  *                    starting from the index, so that start<=index<limit.
- *                    If FALSE, then the returned chunk must contain text
+ *                    If false, then the returned chunk must contain text
  *                    before the index, so that start<index<=limit.
  * @return            True if the requested index could be accessed.  The chunk
  *                    will contain the requested text.
@@ -21721,7 +23143,7 @@ UTextReplace(UText *ut,
  * @param nativeStart  The index of the start of the region to be copied or moved
  * @param nativeLimit  The index of the character following the region to be replaced.
  * @param nativeDest   The destination index to which the source substring is copied or moved.
- * @param move         If TRUE, then the substring is moved, not copied/duplicated.
+ * @param move         If true, then the substring is moved, not copied/duplicated.
  * @param status       receives any error status.  Possible errors include U_NO_WRITE_PERMISSION
  *
  * @stable ICU 3.4
@@ -22142,7 +23564,7 @@ struct UText {
  * @return pointer to the UText, allocated if necessary, with extra space set up if requested.
  * @stable ICU 3.4
  */
-U_STABLE UText * U_EXPORT2
+U_CAPI UText * U_EXPORT2
 utext_setup(UText *ut, int32_t extraSpace, UErrorCode *status);
 
 // do not use #ifndef U_HIDE_INTERNAL_API around the following!
@@ -22188,6 +23610,7 @@ U_CDECL_END
 
 
 
+
 #endif
 
 // uset.h
@@ -22221,6 +23644,7 @@ U_CDECL_END
 
 #ifndef __USET_H__
 #define __USET_H__
+
 
 
 #ifndef USET_DEFINED
@@ -22348,7 +23772,7 @@ typedef enum USetSpanCondition {
      * Continues a span() while there is no set element at the current position.
      * Increments by one code point at a time.
      * Stops before the first set element (character or string).
-     * (For code points only, this is like while contains(current)==FALSE).
+     * (For code points only, this is like while contains(current)==false).
      *
      * When span() returns, the substring between where it started and the position
      * it returned consists only of characters that are not in the set,
@@ -22359,7 +23783,7 @@ typedef enum USetSpanCondition {
     USET_SPAN_NOT_CONTAINED = 0,
     /**
      * Spans the longest substring that is a concatenation of set elements (characters or strings).
-     * (For characters only, this is like while contains(current)==TRUE).
+     * (For characters only, this is like while contains(current)==true).
      *
      * When span() returns, the substring between where it started and the position
      * it returned consists only of set elements (characters or strings) that are in the set.
@@ -22375,7 +23799,7 @@ typedef enum USetSpanCondition {
     /**
      * Continues a span() while there is a set element at the current position.
      * Increments by the longest matching element at each position.
-     * (For characters only, this is like while contains(current)==TRUE).
+     * (For characters only, this is like while contains(current)==true).
      *
      * When span() returns, the substring between where it started and the position
      * it returned consists only of set elements (characters or strings) that are in the set.
@@ -22443,7 +23867,7 @@ typedef struct USerializedSet {
  * it when done.
  * @stable ICU 4.2
  */
-U_STABLE USet* U_EXPORT2
+U_CAPI USet* U_EXPORT2
 uset_openEmpty(void);
 
 /**
@@ -22456,7 +23880,7 @@ uset_openEmpty(void);
  * it when done.
  * @stable ICU 2.4
  */
-U_STABLE USet* U_EXPORT2
+U_CAPI USet* U_EXPORT2
 uset_open(UChar32 start, UChar32 end);
 
 /**
@@ -22468,7 +23892,7 @@ uset_open(UChar32 start, UChar32 end);
  * @param ec the error code
  * @stable ICU 2.4
  */
-U_STABLE USet* U_EXPORT2
+U_CAPI USet* U_EXPORT2
 uset_openPattern(const UChar* pattern, int32_t patternLength,
                  UErrorCode* ec);
 
@@ -22483,7 +23907,7 @@ uset_openPattern(const UChar* pattern, int32_t patternLength,
  * @param ec the error code
  * @stable ICU 2.4
  */
-U_STABLE USet* U_EXPORT2
+U_CAPI USet* U_EXPORT2
 uset_openPatternOptions(const UChar* pattern, int32_t patternLength,
                  uint32_t options,
                  UErrorCode* ec);
@@ -22494,7 +23918,7 @@ uset_openPatternOptions(const UChar* pattern, int32_t patternLength,
  * @param set the object to dispose of
  * @stable ICU 2.4
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uset_close(USet* set);
 
 
@@ -22507,19 +23931,19 @@ uset_close(USet* set);
  * @see uset_cloneAsThawed
  * @stable ICU 3.8
  */
-U_STABLE USet * U_EXPORT2
+U_CAPI USet * U_EXPORT2
 uset_clone(const USet *set);
 
 /**
  * Determines whether the set has been frozen (made immutable) or not.
  * See the ICU4J Freezable interface for details.
  * @param set the set
- * @return TRUE/FALSE for whether the set has been frozen
+ * @return true/false for whether the set has been frozen
  * @see uset_freeze
  * @see uset_cloneAsThawed
  * @stable ICU 3.8
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 uset_isFrozen(const USet *set);
 
 /**
@@ -22536,7 +23960,7 @@ uset_isFrozen(const USet *set);
  * @see uset_cloneAsThawed
  * @stable ICU 3.8
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uset_freeze(USet *set);
 
 /**
@@ -22549,7 +23973,7 @@ uset_freeze(USet *set);
  * @see uset_clone
  * @stable ICU 3.8
  */
-U_STABLE USet * U_EXPORT2
+U_CAPI USet * U_EXPORT2
 uset_cloneAsThawed(const USet *set);
 
 /**
@@ -22561,7 +23985,7 @@ uset_cloneAsThawed(const USet *set);
  * @param end last character in the set, inclusive
  * @stable ICU 3.2
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uset_set(USet* set,
          UChar32 start, UChar32 end);
 
@@ -22586,7 +24010,7 @@ uset_set(USet* set,
  *
  * @stable ICU 2.8
  */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 uset_applyPattern(USet *set,
                   const UChar *pattern, int32_t patternLength,
                   uint32_t options,
@@ -22614,7 +24038,7 @@ uset_applyPattern(USet *set,
  *
  * @stable ICU 3.2
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uset_applyIntPropertyValue(USet* set,
                            UProperty prop, int32_t value, UErrorCode* ec);
 
@@ -22653,7 +24077,7 @@ uset_applyIntPropertyValue(USet* set,
  *
  * @stable ICU 3.2
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uset_applyPropertyAlias(USet* set,
                         const UChar *prop, int32_t propLength,
                         const UChar *value, int32_t valueLength,
@@ -22668,7 +24092,7 @@ uset_applyPropertyAlias(USet* set,
  * @param pos the given position
  * @stable ICU 3.2
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 uset_resemblesPattern(const UChar *pattern, int32_t patternLength,
                       int32_t pos);
 
@@ -22679,7 +24103,7 @@ uset_resemblesPattern(const UChar *pattern, int32_t patternLength,
  * @param set the set
  * @param result the string to receive the rules, may be NULL
  * @param resultCapacity the capacity of result, may be 0 if result is NULL
- * @param escapeUnprintable if TRUE then convert unprintable
+ * @param escapeUnprintable if true then convert unprintable
  * character to their hex escape representations, \\uxxxx or
  * \\Uxxxxxxxx.  Unprintable characters are those other than
  * U+000A, U+0020..U+007E.
@@ -22687,7 +24111,7 @@ uset_resemblesPattern(const UChar *pattern, int32_t patternLength,
  * @return length of string, possibly larger than resultCapacity
  * @stable ICU 2.4
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uset_toPattern(const USet* set,
                UChar* result, int32_t resultCapacity,
                UBool escapeUnprintable,
@@ -22695,13 +24119,13 @@ uset_toPattern(const USet* set,
 
 /**
  * Adds the given character to the given USet.  After this call,
- * uset_contains(set, c) will return TRUE.
+ * uset_contains(set, c) will return true.
  * A frozen set will not be modified.
  * @param set the object to which to add the character
  * @param c the character to add
  * @stable ICU 2.4
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uset_add(USet* set, UChar32 c);
 
 /**
@@ -22716,31 +24140,31 @@ uset_add(USet* set, UChar32 c);
  * @param additionalSet the source set whose elements are to be added to this set.
  * @stable ICU 2.6
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uset_addAll(USet* set, const USet *additionalSet);
 
 /**
  * Adds the given range of characters to the given USet.  After this call,
- * uset_contains(set, start, end) will return TRUE.
+ * uset_contains(set, start, end) will return true.
  * A frozen set will not be modified.
  * @param set the object to which to add the character
  * @param start the first character of the range to add, inclusive
  * @param end the last character of the range to add, inclusive
  * @stable ICU 2.2
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uset_addRange(USet* set, UChar32 start, UChar32 end);
 
 /**
  * Adds the given string to the given USet.  After this call,
- * uset_containsString(set, str, strLen) will return TRUE.
+ * uset_containsString(set, str, strLen) will return true.
  * A frozen set will not be modified.
  * @param set the object to which to add the character
  * @param str the string to add
  * @param strLen the length of the string or -1 if null terminated.
  * @stable ICU 2.4
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uset_addString(USet* set, const UChar* str, int32_t strLen);
 
 /**
@@ -22752,42 +24176,42 @@ uset_addString(USet* set, const UChar* str, int32_t strLen);
  * @param strLen the length of the string or -1 if null terminated.
  * @stable ICU 3.4
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uset_addAllCodePoints(USet* set, const UChar *str, int32_t strLen);
 
 /**
  * Removes the given character from the given USet.  After this call,
- * uset_contains(set, c) will return FALSE.
+ * uset_contains(set, c) will return false.
  * A frozen set will not be modified.
  * @param set the object from which to remove the character
  * @param c the character to remove
  * @stable ICU 2.4
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uset_remove(USet* set, UChar32 c);
 
 /**
  * Removes the given range of characters from the given USet.  After this call,
- * uset_contains(set, start, end) will return FALSE.
+ * uset_contains(set, start, end) will return false.
  * A frozen set will not be modified.
  * @param set the object to which to add the character
  * @param start the first character of the range to remove, inclusive
  * @param end the last character of the range to remove, inclusive
  * @stable ICU 2.2
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uset_removeRange(USet* set, UChar32 start, UChar32 end);
 
 /**
  * Removes the given string to the given USet.  After this call,
- * uset_containsString(set, str, strLen) will return FALSE.
+ * uset_containsString(set, str, strLen) will return false.
  * A frozen set will not be modified.
  * @param set the object to which to add the character
  * @param str the string to remove
  * @param strLen the length of the string or -1 if null terminated.
  * @stable ICU 2.4
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uset_removeString(USet* set, const UChar* str, int32_t strLen);
 
 /**
@@ -22801,7 +24225,7 @@ uset_removeString(USet* set, const UChar* str, int32_t strLen);
  * removed from this set
  * @stable ICU 3.2
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uset_removeAll(USet* set, const USet* removeSet);
 
 /**
@@ -22818,7 +24242,7 @@ uset_removeAll(USet* set, const USet* removeSet);
  * to this set.
  * @stable ICU 3.2
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uset_retain(USet* set, UChar32 start, UChar32 end);
 
 /**
@@ -22833,7 +24257,7 @@ uset_retain(USet* set, UChar32 start, UChar32 end);
  * @param retain set that defines which elements this set will retain
  * @stable ICU 3.2
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uset_retainAll(USet* set, const USet* retain);
 
 /**
@@ -22844,7 +24268,7 @@ uset_retainAll(USet* set, const USet* retain);
  * @param set the object on which to perfrom the compact
  * @stable ICU 3.2
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uset_compact(USet* set);
 
 /**
@@ -22855,7 +24279,7 @@ uset_compact(USet* set);
  * @param set the set
  * @stable ICU 2.4
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uset_complement(USet* set);
 
 /**
@@ -22869,7 +24293,7 @@ uset_complement(USet* set);
  * from this set.
  * @stable ICU 3.2
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uset_complementAll(USet* set, const USet* complement);
 
 /**
@@ -22879,7 +24303,7 @@ uset_complementAll(USet* set, const USet* complement);
  * @param set the set
  * @stable ICU 2.4
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uset_clear(USet* set);
 
 /**
@@ -22908,7 +24332,7 @@ uset_clear(USet* set);
  * are ignored.
  * @stable ICU 4.2
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uset_closeOver(USet* set, int32_t attributes);
 
 /**
@@ -22917,51 +24341,51 @@ uset_closeOver(USet* set, int32_t attributes);
  * @param set the set
  * @stable ICU 4.2
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uset_removeAllStrings(USet* set);
 
 /**
- * Returns TRUE if the given USet contains no characters and no
+ * Returns true if the given USet contains no characters and no
  * strings.
  * @param set the set
  * @return true if set is empty
  * @stable ICU 2.4
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 uset_isEmpty(const USet* set);
 
 /**
- * Returns TRUE if the given USet contains the given character.
+ * Returns true if the given USet contains the given character.
  * This function works faster with a frozen set.
  * @param set the set
  * @param c The codepoint to check for within the set
  * @return true if set contains c
  * @stable ICU 2.4
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 uset_contains(const USet* set, UChar32 c);
 
 /**
- * Returns TRUE if the given USet contains all characters c
+ * Returns true if the given USet contains all characters c
  * where start <= c && c <= end.
  * @param set the set
  * @param start the first character of the range to test, inclusive
  * @param end the last character of the range to test, inclusive
- * @return TRUE if set contains the range
+ * @return true if set contains the range
  * @stable ICU 2.2
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 uset_containsRange(const USet* set, UChar32 start, UChar32 end);
 
 /**
- * Returns TRUE if the given USet contains the given string.
+ * Returns true if the given USet contains the given string.
  * @param set the set
  * @param str the string
  * @param strLen the length of the string or -1 if null terminated.
  * @return true if set contains str
  * @stable ICU 2.4
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 uset_containsString(const USet* set, const UChar* str, int32_t strLen);
 
 /**
@@ -22974,7 +24398,7 @@ uset_containsString(const USet* set, const UChar* str, int32_t strLen);
  * @return an index from 0..size()-1, or -1
  * @stable ICU 3.2
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uset_indexOf(const USet* set, UChar32 c);
 
 /**
@@ -22987,7 +24411,7 @@ uset_indexOf(const USet* set, UChar32 c);
  * @return the character at the given index, or (UChar32)-1.
  * @stable ICU 3.2
  */
-U_STABLE UChar32 U_EXPORT2
+U_CAPI UChar32 U_EXPORT2
 uset_charAt(const USet* set, int32_t charIndex);
 
 /**
@@ -22998,7 +24422,7 @@ uset_charAt(const USet* set, int32_t charIndex);
  * contained in set
  * @stable ICU 2.4
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uset_size(const USet* set);
 
 /**
@@ -23009,7 +24433,7 @@ uset_size(const USet* set);
  * and/or strings contained in set
  * @stable ICU 2.4
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uset_getItemCount(const USet* set);
 
 /**
@@ -23030,7 +24454,7 @@ uset_getItemCount(const USet* set);
  * itemIndex is out of range
  * @stable ICU 2.4
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uset_getItem(const USet* set, int32_t itemIndex,
              UChar32* start, UChar32* end,
              UChar* str, int32_t strCapacity,
@@ -23044,7 +24468,7 @@ uset_getItem(const USet* set, int32_t itemIndex,
  * @return true if the test condition is met
  * @stable ICU 3.2
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 uset_containsAll(const USet* set1, const USet* set2);
 
 /**
@@ -23057,7 +24481,7 @@ uset_containsAll(const USet* set1, const USet* set2);
  * @return true if the test condition is met
  * @stable ICU 3.4
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 uset_containsAllCodePoints(const USet* set, const UChar *str, int32_t strLen);
 
 /**
@@ -23068,7 +24492,7 @@ uset_containsAllCodePoints(const USet* set, const UChar *str, int32_t strLen);
  * @return true if the test condition is met
  * @stable ICU 3.2
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 uset_containsNone(const USet* set1, const USet* set2);
 
 /**
@@ -23079,7 +24503,7 @@ uset_containsNone(const USet* set1, const USet* set2);
  * @return true if the test condition is met
  * @stable ICU 3.2
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 uset_containsSome(const USet* set1, const USet* set2);
 
 /**
@@ -23101,7 +24525,7 @@ uset_containsSome(const USet* set1, const USet* set2);
  * @stable ICU 3.8
  * @see USetSpanCondition
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uset_span(const USet *set, const UChar *s, int32_t length, USetSpanCondition spanCondition);
 
 /**
@@ -23122,7 +24546,7 @@ uset_span(const USet *set, const UChar *s, int32_t length, USetSpanCondition spa
  * @stable ICU 3.8
  * @see USetSpanCondition
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uset_spanBack(const USet *set, const UChar *s, int32_t length, USetSpanCondition spanCondition);
 
 /**
@@ -23144,7 +24568,7 @@ uset_spanBack(const USet *set, const UChar *s, int32_t length, USetSpanCondition
  * @stable ICU 3.8
  * @see USetSpanCondition
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uset_spanUTF8(const USet *set, const char *s, int32_t length, USetSpanCondition spanCondition);
 
 /**
@@ -23165,7 +24589,7 @@ uset_spanUTF8(const USet *set, const char *s, int32_t length, USetSpanCondition 
  * @stable ICU 3.8
  * @see USetSpanCondition
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uset_spanBackUTF8(const USet *set, const char *s, int32_t length, USetSpanCondition spanCondition);
 
 /**
@@ -23176,7 +24600,7 @@ uset_spanBackUTF8(const USet *set, const char *s, int32_t length, USetSpanCondit
  * @return true if the test condition is met
  * @stable ICU 3.2
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 uset_equals(const USet* set1, const USet* set2);
 
 /*********************************************************************
@@ -23232,7 +24656,7 @@ uset_equals(const USet* set1, const USet* set2);
  * than U_BUFFER_OVERFLOW_ERROR.
  * @stable ICU 2.4
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uset_serialize(const USet* set, uint16_t* dest, int32_t destCapacity, UErrorCode* pErrorCode);
 
 /**
@@ -23243,7 +24667,7 @@ uset_serialize(const USet* set, uint16_t* dest, int32_t destCapacity, UErrorCode
  * @return true if the given array is valid, otherwise false
  * @stable ICU 2.4
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 uset_getSerializedSet(USerializedSet* fillSet, const uint16_t* src, int32_t srcLength);
 
 /**
@@ -23253,18 +24677,18 @@ uset_getSerializedSet(USerializedSet* fillSet, const uint16_t* src, int32_t srcL
  * @param c The codepoint to set
  * @stable ICU 2.4
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uset_setSerializedToOne(USerializedSet* fillSet, UChar32 c);
 
 /**
- * Returns TRUE if the given USerializedSet contains the given
+ * Returns true if the given USerializedSet contains the given
  * character.
  * @param set the serialized set
  * @param c The codepoint to check for within the set
  * @return true if set contains c
  * @stable ICU 2.4
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 uset_serializedContains(const USerializedSet* set, UChar32 c);
 
 /**
@@ -23276,7 +24700,7 @@ uset_serializedContains(const USerializedSet* set, UChar32 c);
  * contained in set
  * @stable ICU 2.4
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uset_getSerializedRangeCount(const USerializedSet* set);
 
 /**
@@ -23292,7 +24716,7 @@ uset_getSerializedRangeCount(const USerializedSet* set);
  * @return true if rangeIndex is valid, otherwise false
  * @stable ICU 2.4
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 uset_getSerializedRange(const USerializedSet* set, int32_t rangeIndex,
                         UChar32* pStart, UChar32* pEnd);
 
@@ -23330,6 +24754,7 @@ uset_getSerializedRange(const USerializedSet* set, int32_t rangeIndex,
  * Instances returned by unorm2_getInstance() are singletons that must not be deleted by the caller.
  * For more details see the Normalizer2 C++ class.
  */
+
 
 
 /**
@@ -23429,7 +24854,7 @@ typedef struct UNormalizer2 UNormalizer2;  /**< C typedef for struct UNormalizer
  * @return the requested Normalizer2, if successful
  * @stable ICU 49
  */
-U_STABLE const UNormalizer2 * U_EXPORT2
+U_CAPI const UNormalizer2 * U_EXPORT2
 unorm2_getNFCInstance(UErrorCode *pErrorCode);
 
 /**
@@ -23443,7 +24868,7 @@ unorm2_getNFCInstance(UErrorCode *pErrorCode);
  * @return the requested Normalizer2, if successful
  * @stable ICU 49
  */
-U_STABLE const UNormalizer2 * U_EXPORT2
+U_CAPI const UNormalizer2 * U_EXPORT2
 unorm2_getNFDInstance(UErrorCode *pErrorCode);
 
 /**
@@ -23457,7 +24882,7 @@ unorm2_getNFDInstance(UErrorCode *pErrorCode);
  * @return the requested Normalizer2, if successful
  * @stable ICU 49
  */
-U_STABLE const UNormalizer2 * U_EXPORT2
+U_CAPI const UNormalizer2 * U_EXPORT2
 unorm2_getNFKCInstance(UErrorCode *pErrorCode);
 
 /**
@@ -23471,7 +24896,7 @@ unorm2_getNFKCInstance(UErrorCode *pErrorCode);
  * @return the requested Normalizer2, if successful
  * @stable ICU 49
  */
-U_STABLE const UNormalizer2 * U_EXPORT2
+U_CAPI const UNormalizer2 * U_EXPORT2
 unorm2_getNFKDInstance(UErrorCode *pErrorCode);
 
 /**
@@ -23485,7 +24910,7 @@ unorm2_getNFKDInstance(UErrorCode *pErrorCode);
  * @return the requested Normalizer2, if successful
  * @stable ICU 49
  */
-U_STABLE const UNormalizer2 * U_EXPORT2
+U_CAPI const UNormalizer2 * U_EXPORT2
 unorm2_getNFKCCasefoldInstance(UErrorCode *pErrorCode);
 
 /**
@@ -23509,7 +24934,7 @@ unorm2_getNFKCCasefoldInstance(UErrorCode *pErrorCode);
  * @return the requested UNormalizer2, if successful
  * @stable ICU 4.4
  */
-U_STABLE const UNormalizer2 * U_EXPORT2
+U_CAPI const UNormalizer2 * U_EXPORT2
 unorm2_getInstance(const char *packageName,
                    const char *name,
                    UNormalization2Mode mode,
@@ -23530,7 +24955,7 @@ unorm2_getInstance(const char *packageName,
  * @return the requested UNormalizer2, if successful
  * @stable ICU 4.4
  */
-U_STABLE UNormalizer2 * U_EXPORT2
+U_CAPI UNormalizer2 * U_EXPORT2
 unorm2_openFiltered(const UNormalizer2 *norm2, const USet *filterSet, UErrorCode *pErrorCode);
 
 /**
@@ -23539,7 +24964,7 @@ unorm2_openFiltered(const UNormalizer2 *norm2, const USet *filterSet, UErrorCode
  * @param norm2 UNormalizer2 instance to be closed
  * @stable ICU 4.4
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 unorm2_close(UNormalizer2 *norm2);
 
 
@@ -23559,7 +24984,7 @@ unorm2_close(UNormalizer2 *norm2);
  * @return dest
  * @stable ICU 4.4
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 unorm2_normalize(const UNormalizer2 *norm2,
                  const UChar *src, int32_t length,
                  UChar *dest, int32_t capacity,
@@ -23582,7 +25007,7 @@ unorm2_normalize(const UNormalizer2 *norm2,
  * @return first
  * @stable ICU 4.4
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 unorm2_normalizeSecondAndAppend(const UNormalizer2 *norm2,
                                 UChar *first, int32_t firstLength, int32_t firstCapacity,
                                 const UChar *second, int32_t secondLength,
@@ -23605,7 +25030,7 @@ unorm2_normalizeSecondAndAppend(const UNormalizer2 *norm2,
  * @return first
  * @stable ICU 4.4
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 unorm2_append(const UNormalizer2 *norm2,
               UChar *first, int32_t firstLength, int32_t firstCapacity,
               const UChar *second, int32_t secondLength,
@@ -23630,7 +25055,7 @@ unorm2_append(const UNormalizer2 *norm2,
  * @return the non-negative length of c's decomposition, if there is one; otherwise a negative value
  * @stable ICU 4.6
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 unorm2_getDecomposition(const UNormalizer2 *norm2,
                         UChar32 c, UChar *decomposition, int32_t capacity,
                         UErrorCode *pErrorCode);
@@ -23664,7 +25089,7 @@ unorm2_getDecomposition(const UNormalizer2 *norm2,
  * @return the non-negative length of c's raw decomposition, if there is one; otherwise a negative value
  * @stable ICU 49
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 unorm2_getRawDecomposition(const UNormalizer2 *norm2,
                            UChar32 c, UChar *decomposition, int32_t capacity,
                            UErrorCode *pErrorCode);
@@ -23684,7 +25109,7 @@ unorm2_getRawDecomposition(const UNormalizer2 *norm2,
  * @return The non-negative composite code point if there is one; otherwise a negative value.
  * @stable ICU 49
  */
-U_STABLE UChar32 U_EXPORT2
+U_CAPI UChar32 U_EXPORT2
 unorm2_composePair(const UNormalizer2 *norm2, UChar32 a, UChar32 b);
 
 /**
@@ -23696,7 +25121,7 @@ unorm2_composePair(const UNormalizer2 *norm2, UChar32 a, UChar32 b);
  * @return c's combining class
  * @stable ICU 49
  */
-U_STABLE uint8_t U_EXPORT2
+U_CAPI uint8_t U_EXPORT2
 unorm2_getCombiningClass(const UNormalizer2 *norm2, UChar32 c);
 
 /**
@@ -23712,10 +25137,10 @@ unorm2_getCombiningClass(const UNormalizer2 *norm2, UChar32 c);
  *                   pass the U_SUCCESS() test, or else the function returns
  *                   immediately. Check for U_FAILURE() on output or use with
  *                   function chaining. (See User Guide for details.)
- * @return TRUE if s is normalized
+ * @return true if s is normalized
  * @stable ICU 4.4
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 unorm2_isNormalized(const UNormalizer2 *norm2,
                     const UChar *s, int32_t length,
                     UErrorCode *pErrorCode);
@@ -23737,7 +25162,7 @@ unorm2_isNormalized(const UNormalizer2 *norm2,
  * @return UNormalizationCheckResult
  * @stable ICU 4.4
  */
-U_STABLE UNormalizationCheckResult U_EXPORT2
+U_CAPI UNormalizationCheckResult U_EXPORT2
 unorm2_quickCheck(const UNormalizer2 *norm2,
                   const UChar *s, int32_t length,
                   UErrorCode *pErrorCode);
@@ -23766,7 +25191,7 @@ unorm2_quickCheck(const UNormalizer2 *norm2,
  * @return "yes" span end index
  * @stable ICU 4.4
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 unorm2_spanQuickCheckYes(const UNormalizer2 *norm2,
                          const UChar *s, int32_t length,
                          UErrorCode *pErrorCode);
@@ -23777,10 +25202,10 @@ unorm2_spanQuickCheckYes(const UNormalizer2 *norm2,
  * For details see the Normalizer2 base class documentation.
  * @param norm2 UNormalizer2 instance
  * @param c character to test
- * @return TRUE if c has a normalization boundary before it
+ * @return true if c has a normalization boundary before it
  * @stable ICU 4.4
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 unorm2_hasBoundaryBefore(const UNormalizer2 *norm2, UChar32 c);
 
 /**
@@ -23789,10 +25214,10 @@ unorm2_hasBoundaryBefore(const UNormalizer2 *norm2, UChar32 c);
  * For details see the Normalizer2 base class documentation.
  * @param norm2 UNormalizer2 instance
  * @param c character to test
- * @return TRUE if c has a normalization boundary after it
+ * @return true if c has a normalization boundary after it
  * @stable ICU 4.4
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 unorm2_hasBoundaryAfter(const UNormalizer2 *norm2, UChar32 c);
 
 /**
@@ -23800,10 +25225,10 @@ unorm2_hasBoundaryAfter(const UNormalizer2 *norm2, UChar32 c);
  * For details see the Normalizer2 base class documentation.
  * @param norm2 UNormalizer2 instance
  * @param c character to test
- * @return TRUE if c is normalization-inert
+ * @return true if c is normalization-inert
  * @stable ICU 4.4
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 unorm2_isInert(const UNormalizer2 *norm2, UChar32 c);
 
 /**
@@ -23872,7 +25297,7 @@ unorm2_isInert(const UNormalizer2 *norm2, UChar32 c);
  *
  * @stable ICU 2.2
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 unorm_compare(const UChar *s1, int32_t length1,
               const UChar *s2, int32_t length2,
               uint32_t options,
@@ -24012,6 +25437,8 @@ unorm_compare(const UChar *s1, int32_t length1,
 
 // Do not conditionalize the following enum with #ifndef U_HIDE_DEPRECATED_API,
 // it is needed for layout of Normalizer object.
+#ifndef U_FORCE_HIDE_DEPRECATED_API
+
 /**
  * Constants for normalization modes.
  * @deprecated ICU 56 Use unorm2.h instead.
@@ -24035,6 +25462,8 @@ typedef enum {
   /** One more than the highest normalization mode constant. @deprecated ICU 56 Use unorm2.h instead. */
   UNORM_MODE_COUNT
 } UNormalizationMode;
+
+#endif  // U_FORCE_HIDE_DEPRECATED_API
 
 #endif /* #if !UCONFIG_NO_NORMALIZATION */
 #endif
@@ -24065,6 +25494,7 @@ typedef enum {
 
 
 #if !UCONFIG_NO_CONVERSION
+
 
 
 /**
@@ -24108,7 +25538,7 @@ typedef struct UConverterSelector UConverterSelector;
  *
  * @stable ICU 4.2
  */
-U_STABLE UConverterSelector* U_EXPORT2
+U_CAPI UConverterSelector* U_EXPORT2
 ucnvsel_open(const char* const*  converterList, int32_t converterListSize,
              const USet* excludedCodePoints,
              const UConverterUnicodeSet whichSet, UErrorCode* status);
@@ -24126,7 +25556,7 @@ ucnvsel_open(const char* const*  converterList, int32_t converterListSize,
  *
  * @stable ICU 4.2
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucnvsel_close(UConverterSelector *sel);
 
 
@@ -24145,7 +25575,7 @@ ucnvsel_close(UConverterSelector *sel);
  *
  * @stable ICU 4.2
  */
-U_STABLE UConverterSelector* U_EXPORT2
+U_CAPI UConverterSelector* U_EXPORT2
 ucnvsel_openFromSerialized(const void* buffer, int32_t length, UErrorCode* status);
 
 /**
@@ -24162,7 +25592,7 @@ ucnvsel_openFromSerialized(const void* buffer, int32_t length, UErrorCode* statu
  *
  * @stable ICU 4.2
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucnvsel_serialize(const UConverterSelector* sel,
                   void* buffer, int32_t bufferCapacity, UErrorCode* status);
 
@@ -24180,7 +25610,7 @@ ucnvsel_serialize(const UConverterSelector* sel,
  *
  * @stable ICU 4.2
  */
-U_STABLE UEnumeration * U_EXPORT2
+U_CAPI UEnumeration * U_EXPORT2
 ucnvsel_selectForString(const UConverterSelector* sel,
                         const UChar *s, int32_t length, UErrorCode *status);
 
@@ -24198,7 +25628,7 @@ ucnvsel_selectForString(const UConverterSelector* sel,
  *
  * @stable ICU 4.2
  */
-U_STABLE UEnumeration * U_EXPORT2
+U_CAPI UEnumeration * U_EXPORT2
 ucnvsel_selectForUTF8(const UConverterSelector* sel,
                       const char *s, int32_t length, UErrorCode *status);
 
@@ -24251,7 +25681,6 @@ ucnvsel_selectForUTF8(const UConverterSelector* sel,
  */
 
 
-
 /** @} */
 
 /**
@@ -24272,7 +25701,7 @@ ucnvsel_selectForUTF8(const UConverterSelector* sel,
  * @see U_CHARSET_FAMILY
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 u_charsToUChars(const char *cs, UChar *us, int32_t length);
 
 /**
@@ -24294,7 +25723,7 @@ u_charsToUChars(const char *cs, UChar *us, int32_t length);
  * @see U_CHARSET_FAMILY
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 u_UCharsToChars(const UChar *us, char *cs, int32_t length);
 
 #endif
@@ -24388,7 +25817,7 @@ u_UCharsToChars(const UChar *us, char *cs, int32_t length);
  * @return The number of UChars in <code>chars</code>, minus the terminator.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 u_strlen(const UChar *s);
 /*@}*/
 
@@ -24405,7 +25834,7 @@ u_strlen(const UChar *s);
  * @return The number of code points in the specified code units.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 u_countChar32(const UChar *s, int32_t length);
 
 /**
@@ -24426,7 +25855,7 @@ u_countChar32(const UChar *s, int32_t length);
  *         than 'number'. Same as (u_countChar32(s, length)>number).
  * @stable ICU 2.4
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 u_strHasMoreChar32Than(const UChar *s, int32_t length, int32_t number);
 
 /**
@@ -24439,7 +25868,7 @@ u_strHasMoreChar32Than(const UChar *s, int32_t length, int32_t number);
  * @return A pointer to <code>dst</code>.
  * @stable ICU 2.0
  */
-U_STABLE UChar* U_EXPORT2
+U_CAPI UChar* U_EXPORT2
 u_strcat(UChar     *dst, 
     const UChar     *src);
 
@@ -24457,7 +25886,7 @@ u_strcat(UChar     *dst,
  * @return A pointer to <code>dst</code>.
  * @stable ICU 2.0
  */
-U_STABLE UChar* U_EXPORT2
+U_CAPI UChar* U_EXPORT2
 u_strncat(UChar     *dst, 
      const UChar     *src, 
      int32_t     n);
@@ -24482,7 +25911,7 @@ u_strncat(UChar     *dst,
  * @see u_strFindFirst
  * @see u_strFindLast
  */
-U_STABLE UChar * U_EXPORT2
+U_CAPI UChar * U_EXPORT2
 u_strstr(const UChar *s, const UChar *substring);
 
 /**
@@ -24506,7 +25935,7 @@ u_strstr(const UChar *s, const UChar *substring);
  * @see u_strstr
  * @see u_strFindLast
  */
-U_STABLE UChar * U_EXPORT2
+U_CAPI UChar * U_EXPORT2
 u_strFindFirst(const UChar *s, int32_t length, const UChar *substring, int32_t subLength);
 
 /**
@@ -24526,7 +25955,7 @@ u_strFindFirst(const UChar *s, int32_t length, const UChar *substring, int32_t s
  * @see u_strstr
  * @see u_strFindFirst
  */
-U_STABLE UChar * U_EXPORT2
+U_CAPI UChar * U_EXPORT2
 u_strchr(const UChar *s, UChar c);
 
 /**
@@ -24546,7 +25975,7 @@ u_strchr(const UChar *s, UChar c);
  * @see u_strstr
  * @see u_strFindFirst
  */
-U_STABLE UChar * U_EXPORT2
+U_CAPI UChar * U_EXPORT2
 u_strchr32(const UChar *s, UChar32 c);
 
 /**
@@ -24569,7 +25998,7 @@ u_strchr32(const UChar *s, UChar32 c);
  * @see u_strFindFirst
  * @see u_strFindLast
  */
-U_STABLE UChar * U_EXPORT2
+U_CAPI UChar * U_EXPORT2
 u_strrstr(const UChar *s, const UChar *substring);
 
 /**
@@ -24593,7 +26022,7 @@ u_strrstr(const UChar *s, const UChar *substring);
  * @see u_strstr
  * @see u_strFindLast
  */
-U_STABLE UChar * U_EXPORT2
+U_CAPI UChar * U_EXPORT2
 u_strFindLast(const UChar *s, int32_t length, const UChar *substring, int32_t subLength);
 
 /**
@@ -24613,7 +26042,7 @@ u_strFindLast(const UChar *s, int32_t length, const UChar *substring, int32_t su
  * @see u_strrstr
  * @see u_strFindLast
  */
-U_STABLE UChar * U_EXPORT2
+U_CAPI UChar * U_EXPORT2
 u_strrchr(const UChar *s, UChar c);
 
 /**
@@ -24633,7 +26062,7 @@ u_strrchr(const UChar *s, UChar c);
  * @see u_strrstr
  * @see u_strFindLast
  */
-U_STABLE UChar * U_EXPORT2
+U_CAPI UChar * U_EXPORT2
 u_strrchr32(const UChar *s, UChar32 c);
 
 /**
@@ -24648,7 +26077,7 @@ u_strrchr32(const UChar *s, UChar32 c);
  *         characters in <code>matchSet</code>, or NULL if no such character is found.
  * @stable ICU 2.0
  */
-U_STABLE UChar * U_EXPORT2
+U_CAPI UChar * U_EXPORT2
 u_strpbrk(const UChar *string, const UChar *matchSet);
 
 /**
@@ -24664,7 +26093,7 @@ u_strpbrk(const UChar *string, const UChar *matchSet);
  * @see u_strspn
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 u_strcspn(const UChar *string, const UChar *matchSet);
 
 /**
@@ -24680,7 +26109,7 @@ u_strcspn(const UChar *string, const UChar *matchSet);
  * @see u_strcspn
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 u_strspn(const UChar *string, const UChar *matchSet);
 
 /**
@@ -24708,7 +26137,7 @@ u_strspn(const UChar *string, const UChar *matchSet);
  *         when there are no more tokens.
  * @stable ICU 2.0
  */
-U_STABLE UChar * U_EXPORT2
+U_CAPI UChar * U_EXPORT2
 u_strtok_r(UChar    *src, 
      const UChar    *delim,
            UChar   **saveState);
@@ -24723,7 +26152,7 @@ u_strtok_r(UChar    *src,
  * value if <code>s1</code> is bitwise greater than <code>s2</code>.
  * @stable ICU 2.0
  */
-U_STABLE int32_t  U_EXPORT2
+U_CAPI int32_t  U_EXPORT2
 u_strcmp(const UChar     *s1, 
          const UChar     *s2);
 
@@ -24738,7 +26167,7 @@ u_strcmp(const UChar     *s1,
  * in code point order
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 u_strcmpCodePointOrder(const UChar *s1, const UChar *s2);
 
 /**
@@ -24761,14 +26190,14 @@ u_strcmpCodePointOrder(const UChar *s1, const UChar *s2);
  * @param s2 Second source string.
  * @param length2 Length of second source string, or -1 if NUL-terminated.
  *
- * @param codePointOrder Choose between code unit order (FALSE)
- *                       and code point order (TRUE).
+ * @param codePointOrder Choose between code unit order (false)
+ *                       and code point order (true).
  *
  * @return <0 or 0 or >0 as usual for string comparisons
  *
  * @stable ICU 2.2
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 u_strCompare(const UChar *s1, int32_t length1,
              const UChar *s2, int32_t length2,
              UBool codePointOrder);
@@ -24784,8 +26213,8 @@ u_strCompare(const UChar *s1, int32_t length1,
  *
  * @param iter1 First source string iterator.
  * @param iter2 Second source string iterator.
- * @param codePointOrder Choose between code unit order (FALSE)
- *                       and code point order (TRUE).
+ * @param codePointOrder Choose between code unit order (false)
+ *                       and code point order (true).
  *
  * @return <0 or 0 or >0 as usual for string comparisons
  *
@@ -24793,7 +26222,7 @@ u_strCompare(const UChar *s1, int32_t length1,
  *
  * @stable ICU 2.6
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 u_strCompareIter(UCharIterator *iter1, UCharIterator *iter2, UBool codePointOrder);
 
 /**
@@ -24836,7 +26265,7 @@ u_strCompareIter(UCharIterator *iter1, UCharIterator *iter2, UBool codePointOrde
  *
  * @stable ICU 2.2
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 u_strCaseCompare(const UChar *s1, int32_t length1,
                  const UChar *s2, int32_t length2,
                  uint32_t options,
@@ -24854,7 +26283,7 @@ u_strCaseCompare(const UChar *s1, int32_t length1,
  * value if <code>s1</code> is bitwise greater than <code>s2</code>.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 u_strncmp(const UChar     *ucs1, 
      const UChar     *ucs2, 
      int32_t     n);
@@ -24872,7 +26301,7 @@ u_strncmp(const UChar     *ucs1,
  * in code point order
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 u_strncmpCodePointOrder(const UChar *s1, const UChar *s2, int32_t n);
 
 /**
@@ -24894,7 +26323,7 @@ u_strncmpCodePointOrder(const UChar *s1, const UChar *s2, int32_t n);
  * @return A negative, zero, or positive integer indicating the comparison result.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 u_strcasecmp(const UChar *s1, const UChar *s2, uint32_t options);
 
 /**
@@ -24918,7 +26347,7 @@ u_strcasecmp(const UChar *s1, const UChar *s2, uint32_t options);
  * @return A negative, zero, or positive integer indicating the comparison result.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 u_strncasecmp(const UChar *s1, const UChar *s2, int32_t n, uint32_t options);
 
 /**
@@ -24942,7 +26371,7 @@ u_strncasecmp(const UChar *s1, const UChar *s2, int32_t n, uint32_t options);
  * @return A negative, zero, or positive integer indicating the comparison result.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 u_memcasecmp(const UChar *s1, const UChar *s2, int32_t length, uint32_t options);
 
 /**
@@ -24953,7 +26382,7 @@ u_memcasecmp(const UChar *s1, const UChar *s2, int32_t length, uint32_t options)
  * @return A pointer to <code>dst</code>.
  * @stable ICU 2.0
  */
-U_STABLE UChar* U_EXPORT2
+U_CAPI UChar* U_EXPORT2
 u_strcpy(UChar     *dst, 
     const UChar     *src);
 
@@ -24968,7 +26397,7 @@ u_strcpy(UChar     *dst,
  * @return A pointer to <code>dst</code>.
  * @stable ICU 2.0
  */
-U_STABLE UChar* U_EXPORT2
+U_CAPI UChar* U_EXPORT2
 u_strncpy(UChar     *dst, 
      const UChar     *src, 
      int32_t     n);
@@ -24985,7 +26414,7 @@ u_strncpy(UChar     *dst,
  * @return A pointer to <code>dst</code>.
  * @stable ICU 2.0
  */
-U_STABLE UChar* U_EXPORT2 u_uastrcpy(UChar *dst,
+U_CAPI UChar* U_EXPORT2 u_uastrcpy(UChar *dst,
                const char *src );
 
 /**
@@ -25000,7 +26429,7 @@ U_STABLE UChar* U_EXPORT2 u_uastrcpy(UChar *dst,
  * @return A pointer to <code>dst</code>.
  * @stable ICU 2.0
  */
-U_STABLE UChar* U_EXPORT2 u_uastrncpy(UChar *dst,
+U_CAPI UChar* U_EXPORT2 u_uastrncpy(UChar *dst,
             const char *src,
             int32_t n);
 
@@ -25014,7 +26443,7 @@ U_STABLE UChar* U_EXPORT2 u_uastrncpy(UChar *dst,
  * @return A pointer to <code>dst</code>.
  * @stable ICU 2.0
  */
-U_STABLE char* U_EXPORT2 u_austrcpy(char *dst,
+U_CAPI char* U_EXPORT2 u_austrcpy(char *dst,
             const UChar *src );
 
 /**
@@ -25029,7 +26458,7 @@ U_STABLE char* U_EXPORT2 u_austrcpy(char *dst,
  * @return A pointer to <code>dst</code>.
  * @stable ICU 2.0
  */
-U_STABLE char* U_EXPORT2 u_austrncpy(char *dst,
+U_CAPI char* U_EXPORT2 u_austrncpy(char *dst,
             const UChar *src,
             int32_t n );
 
@@ -25043,7 +26472,7 @@ U_STABLE char* U_EXPORT2 u_austrncpy(char *dst,
  * @return A pointer to <code>dest</code>
  * @stable ICU 2.0
  */
-U_STABLE UChar* U_EXPORT2
+U_CAPI UChar* U_EXPORT2
 u_memcpy(UChar *dest, const UChar *src, int32_t count);
 
 /**
@@ -25054,7 +26483,7 @@ u_memcpy(UChar *dest, const UChar *src, int32_t count);
  * @return A pointer to <code>dest</code>
  * @stable ICU 2.0
  */
-U_STABLE UChar* U_EXPORT2
+U_CAPI UChar* U_EXPORT2
 u_memmove(UChar *dest, const UChar *src, int32_t count);
 
 /**
@@ -25066,7 +26495,7 @@ u_memmove(UChar *dest, const UChar *src, int32_t count);
  * @return A pointer to <code>dest</code>.
  * @stable ICU 2.0
  */
-U_STABLE UChar* U_EXPORT2
+U_CAPI UChar* U_EXPORT2
 u_memset(UChar *dest, UChar c, int32_t count);
 
 /**
@@ -25080,7 +26509,7 @@ u_memset(UChar *dest, UChar c, int32_t count);
  *      When buf1 > buf2, a positive number is returned.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 u_memcmp(const UChar *buf1, const UChar *buf2, int32_t count);
 
 /**
@@ -25096,7 +26525,7 @@ u_memcmp(const UChar *buf1, const UChar *buf2, int32_t count);
  * in code point order
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 u_memcmpCodePointOrder(const UChar *s1, const UChar *s2, int32_t count);
 
 /**
@@ -25116,7 +26545,7 @@ u_memcmpCodePointOrder(const UChar *s1, const UChar *s2, int32_t count);
  * @see u_memchr32
  * @see u_strFindFirst
  */
-U_STABLE UChar* U_EXPORT2
+U_CAPI UChar* U_EXPORT2
 u_memchr(const UChar *s, UChar c, int32_t count);
 
 /**
@@ -25136,7 +26565,7 @@ u_memchr(const UChar *s, UChar c, int32_t count);
  * @see u_memchr
  * @see u_strFindFirst
  */
-U_STABLE UChar* U_EXPORT2
+U_CAPI UChar* U_EXPORT2
 u_memchr32(const UChar *s, UChar32 c, int32_t count);
 
 /**
@@ -25156,7 +26585,7 @@ u_memchr32(const UChar *s, UChar32 c, int32_t count);
  * @see u_memrchr32
  * @see u_strFindLast
  */
-U_STABLE UChar* U_EXPORT2
+U_CAPI UChar* U_EXPORT2
 u_memrchr(const UChar *s, UChar c, int32_t count);
 
 /**
@@ -25176,7 +26605,7 @@ u_memrchr(const UChar *s, UChar c, int32_t count);
  * @see u_memrchr
  * @see u_strFindLast
  */
-U_STABLE UChar* U_EXPORT2
+U_CAPI UChar* U_EXPORT2
 u_memrchr32(const UChar *s, UChar32 c, int32_t count);
 
 /**
@@ -25202,13 +26631,13 @@ u_memrchr32(const UChar *s, UChar32 c, int32_t count);
  *
  *     U_STRING_DECL(ustringVar1, "Quick-Fox 2", 11);
  *     U_STRING_DECL(ustringVar2, "jumps 5%", 8);
- *     static UBool didInit=FALSE;
+ *     static UBool didInit=false;
  *
  *     int32_t function() {
  *         if(!didInit) {
  *             U_STRING_INIT(ustringVar1, "Quick-Fox 2", 11);
  *             U_STRING_INIT(ustringVar2, "jumps 5%", 8);
- *             didInit=TRUE;
+ *             didInit=true;
  *         }
  *         return u_strcmp(ustringVar1, ustringVar2);
  *     }
@@ -25291,7 +26720,7 @@ u_memrchr32(const UChar *s, UChar32 c, int32_t count);
  * @see UnicodeString#unescapeAt()
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 u_unescape(const char *src,
            UChar *dest, int32_t destCapacity);
 
@@ -25339,7 +26768,7 @@ U_CDECL_END
  * @see UnicodeString#unescapeAt()
  * @stable ICU 2.0
  */
-U_STABLE UChar32 U_EXPORT2
+U_CAPI UChar32 U_EXPORT2
 u_unescapeAt(UNESCAPE_CHAR_AT charAt,
              int32_t *offset,
              int32_t length,
@@ -25365,7 +26794,7 @@ u_unescapeAt(UNESCAPE_CHAR_AT charAt,
  *         only some of the result was written to the destination buffer.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 u_strToUpper(UChar *dest, int32_t destCapacity,
              const UChar *src, int32_t srcLength,
              const char *locale,
@@ -25391,7 +26820,7 @@ u_strToUpper(UChar *dest, int32_t destCapacity,
  *         only some of the result was written to the destination buffer.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 u_strToLower(UChar *dest, int32_t destCapacity,
              const UChar *src, int32_t srcLength,
              const char *locale,
@@ -25437,7 +26866,7 @@ u_strToLower(UChar *dest, int32_t destCapacity,
  *         only some of the result was written to the destination buffer.
  * @stable ICU 2.1
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 u_strToTitle(UChar *dest, int32_t destCapacity,
              const UChar *src, int32_t srcLength,
              UBreakIterator *titleIter,
@@ -25470,7 +26899,7 @@ u_strToTitle(UChar *dest, int32_t destCapacity,
  *         only some of the result was written to the destination buffer.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 u_strFoldCase(UChar *dest, int32_t destCapacity,
               const UChar *src, int32_t srcLength,
               uint32_t options,
@@ -25499,7 +26928,7 @@ u_strFoldCase(UChar *dest, int32_t destCapacity,
  * @return The pointer to destination buffer.
  * @stable ICU 2.0
  */
-U_STABLE wchar_t* U_EXPORT2
+U_CAPI wchar_t* U_EXPORT2
 u_strToWCS(wchar_t *dest, 
            int32_t destCapacity,
            int32_t *pDestLength,
@@ -25528,7 +26957,7 @@ u_strToWCS(wchar_t *dest,
  * @return The pointer to destination buffer.
  * @stable ICU 2.0
  */
-U_STABLE UChar* U_EXPORT2
+U_CAPI UChar* U_EXPORT2
 u_strFromWCS(UChar   *dest,
              int32_t destCapacity, 
              int32_t *pDestLength,
@@ -25559,7 +26988,7 @@ u_strFromWCS(UChar   *dest,
  * @see u_strToUTF8WithSub
  * @see u_strFromUTF8
  */
-U_STABLE char* U_EXPORT2 
+U_CAPI char* U_EXPORT2 
 u_strToUTF8(char *dest,           
             int32_t destCapacity,
             int32_t *pDestLength,
@@ -25589,7 +27018,7 @@ u_strToUTF8(char *dest,
  * @see u_strFromUTF8WithSub
  * @see u_strFromUTF8Lenient
  */
-U_STABLE UChar* U_EXPORT2
+U_CAPI UChar* U_EXPORT2
 u_strFromUTF8(UChar *dest,             
               int32_t destCapacity,
               int32_t *pDestLength,
@@ -25632,7 +27061,7 @@ u_strFromUTF8(UChar *dest,
  * @see u_strFromUTF8WithSub
  * @stable ICU 3.6
  */
-U_STABLE char* U_EXPORT2
+U_CAPI char* U_EXPORT2
 u_strToUTF8WithSub(char *dest,
             int32_t destCapacity,
             int32_t *pDestLength,
@@ -25677,7 +27106,7 @@ u_strToUTF8WithSub(char *dest,
  * @see u_strToUTF8WithSub
  * @stable ICU 3.6
  */
-U_STABLE UChar* U_EXPORT2
+U_CAPI UChar* U_EXPORT2
 u_strFromUTF8WithSub(UChar *dest,
               int32_t destCapacity,
               int32_t *pDestLength,
@@ -25737,7 +27166,7 @@ u_strFromUTF8WithSub(UChar *dest,
  * @see u_strToUTF8WithSub
  * @stable ICU 3.6
  */
-U_STABLE UChar * U_EXPORT2
+U_CAPI UChar * U_EXPORT2
 u_strFromUTF8Lenient(UChar *dest,
                      int32_t destCapacity,
                      int32_t *pDestLength,
@@ -25767,7 +27196,7 @@ u_strFromUTF8Lenient(UChar *dest,
  * @see u_strFromUTF32
  * @stable ICU 2.0
  */
-U_STABLE UChar32* U_EXPORT2 
+U_CAPI UChar32* U_EXPORT2 
 u_strToUTF32(UChar32 *dest, 
              int32_t  destCapacity,
              int32_t  *pDestLength,
@@ -25797,7 +27226,7 @@ u_strToUTF32(UChar32 *dest,
  * @see u_strToUTF32
  * @stable ICU 2.0
  */
-U_STABLE UChar* U_EXPORT2 
+U_CAPI UChar* U_EXPORT2 
 u_strFromUTF32(UChar   *dest,
                int32_t destCapacity, 
                int32_t *pDestLength,
@@ -25840,7 +27269,7 @@ u_strFromUTF32(UChar   *dest,
  * @see u_strFromUTF32WithSub
  * @stable ICU 4.2
  */
-U_STABLE UChar32* U_EXPORT2
+U_CAPI UChar32* U_EXPORT2
 u_strToUTF32WithSub(UChar32 *dest,
              int32_t destCapacity,
              int32_t *pDestLength,
@@ -25884,7 +27313,7 @@ u_strToUTF32WithSub(UChar32 *dest,
  * @see u_strToUTF32WithSub
  * @stable ICU 4.2
  */
-U_STABLE UChar* U_EXPORT2
+U_CAPI UChar* U_EXPORT2
 u_strFromUTF32WithSub(UChar *dest,
                int32_t destCapacity,
                int32_t *pDestLength,
@@ -25925,7 +27354,7 @@ u_strFromUTF32WithSub(UChar *dest,
  * @see u_strToUTF8WithSub
  * @see u_strFromJavaModifiedUTF8WithSub
  */
-U_STABLE char* U_EXPORT2 
+U_CAPI char* U_EXPORT2 
 u_strToJavaModifiedUTF8(
         char *dest,
         int32_t destCapacity,
@@ -25975,7 +27404,7 @@ u_strToJavaModifiedUTF8(
  * @see u_strToJavaModifiedUTF8
  * @stable ICU 4.4
  */
-U_STABLE UChar* U_EXPORT2
+U_CAPI UChar* U_EXPORT2
 u_strFromJavaModifiedUTF8WithSub(
         UChar *dest,
         int32_t destCapacity,
@@ -26010,6 +27439,7 @@ u_strFromJavaModifiedUTF8WithSub(
 
 #ifndef __UCASEMAP_H__
 #define __UCASEMAP_H__
+
 
 
 /**
@@ -26055,7 +27485,7 @@ typedef struct UCaseMap UCaseMap; /**< C typedef for struct UCaseMap. @stable IC
  * @see U_TITLECASE_NO_BREAK_ADJUSTMENT
  * @stable ICU 3.4
  */
-U_STABLE UCaseMap * U_EXPORT2
+U_CAPI UCaseMap * U_EXPORT2
 ucasemap_open(const char *locale, uint32_t options, UErrorCode *pErrorCode);
 
 /**
@@ -26063,7 +27493,7 @@ ucasemap_open(const char *locale, uint32_t options, UErrorCode *pErrorCode);
  * @param csm Object to be closed.
  * @stable ICU 3.4
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucasemap_close(UCaseMap *csm);
 
 
@@ -26073,7 +27503,7 @@ ucasemap_close(UCaseMap *csm);
  * @return locale ID
  * @stable ICU 3.4
  */
-U_STABLE const char * U_EXPORT2
+U_CAPI const char * U_EXPORT2
 ucasemap_getLocale(const UCaseMap *csm);
 
 /**
@@ -26082,7 +27512,7 @@ ucasemap_getLocale(const UCaseMap *csm);
  * @return options bit set
  * @stable ICU 3.4
  */
-U_STABLE uint32_t U_EXPORT2
+U_CAPI uint32_t U_EXPORT2
 ucasemap_getOptions(const UCaseMap *csm);
 
 /**
@@ -26096,7 +27526,7 @@ ucasemap_getOptions(const UCaseMap *csm);
  * @see ucasemap_open
  * @stable ICU 3.4
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucasemap_setLocale(UCaseMap *csm, const char *locale, UErrorCode *pErrorCode);
 
 /**
@@ -26110,7 +27540,7 @@ ucasemap_setLocale(UCaseMap *csm, const char *locale, UErrorCode *pErrorCode);
  * @see ucasemap_open
  * @stable ICU 3.4
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucasemap_setOptions(UCaseMap *csm, uint32_t options, UErrorCode *pErrorCode);
 
 #if !UCONFIG_NO_BREAK_ITERATION
@@ -26122,7 +27552,7 @@ ucasemap_setOptions(UCaseMap *csm, uint32_t options, UErrorCode *pErrorCode);
  * @return titlecasing break iterator
  * @stable ICU 3.8
  */
-U_STABLE const UBreakIterator * U_EXPORT2
+U_CAPI const UBreakIterator * U_EXPORT2
 ucasemap_getBreakIterator(const UCaseMap *csm);
 
 /**
@@ -26145,7 +27575,7 @@ ucasemap_getBreakIterator(const UCaseMap *csm);
  * @see ucasemap_utf8ToTitle
  * @stable ICU 3.8
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucasemap_setBreakIterator(UCaseMap *csm, UBreakIterator *iterToAdopt, UErrorCode *pErrorCode);
 
 /**
@@ -26194,7 +27624,7 @@ ucasemap_setBreakIterator(UCaseMap *csm, UBreakIterator *iterToAdopt, UErrorCode
  * @see u_strToTitle
  * @stable ICU 3.8
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucasemap_toTitle(UCaseMap *csm,
                  UChar *dest, int32_t destCapacity,
                  const UChar *src, int32_t srcLength,
@@ -26225,7 +27655,7 @@ ucasemap_toTitle(UCaseMap *csm,
  * @see u_strToLower
  * @stable ICU 3.4
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucasemap_utf8ToLower(const UCaseMap *csm,
                      char *dest, int32_t destCapacity,
                      const char *src, int32_t srcLength,
@@ -26254,7 +27684,7 @@ ucasemap_utf8ToLower(const UCaseMap *csm,
  * @see u_strToUpper
  * @stable ICU 3.4
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucasemap_utf8ToUpper(const UCaseMap *csm,
                      char *dest, int32_t destCapacity,
                      const char *src, int32_t srcLength,
@@ -26306,7 +27736,7 @@ ucasemap_utf8ToUpper(const UCaseMap *csm,
  * @see U_TITLECASE_NO_BREAK_ADJUSTMENT
  * @stable ICU 3.8
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucasemap_utf8ToTitle(UCaseMap *csm,
                     char *dest, int32_t destCapacity,
                     const char *src, int32_t srcLength,
@@ -26344,7 +27774,7 @@ ucasemap_utf8ToTitle(UCaseMap *csm,
  * @see U_FOLD_CASE_EXCLUDE_SPECIAL_I
  * @stable ICU 3.8
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucasemap_utf8FoldCase(const UCaseMap *csm,
                       char *dest, int32_t destCapacity,
                       const char *src, int32_t srcLength,
@@ -26473,6 +27903,7 @@ typedef struct UParseError {
  * \file 
  * \brief C API: Implements the StringPrep algorithm.
  */
+
 
 
 /**
@@ -26628,7 +28059,7 @@ typedef enum UStringPrepProfileType {
  * @see usprep_close()
  * @stable ICU 2.8
  */
-U_STABLE UStringPrepProfile* U_EXPORT2
+U_CAPI UStringPrepProfile* U_EXPORT2
 usprep_open(const char* path, 
             const char* fileName,
             UErrorCode* status);
@@ -26644,16 +28075,16 @@ usprep_open(const char* path,
  * @see usprep_close()
  * @stable ICU 4.2
  */
-U_STABLE UStringPrepProfile* U_EXPORT2
+U_CAPI UStringPrepProfile* U_EXPORT2
 usprep_openByType(UStringPrepProfileType type,
-				  UErrorCode* status);
+                  UErrorCode* status);
 
 /**
  * Closes the profile
  * @param profile The profile to close
  * @stable ICU 2.8
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 usprep_close(UStringPrepProfile* profile);
 
 
@@ -26686,7 +28117,7 @@ usprep_close(UStringPrepProfile* profile);
  * @stable ICU 2.8
  */
 
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 usprep_prepare(   const UStringPrepProfile* prep,
                   const UChar* src, int32_t srcLength, 
                   UChar* dest, int32_t destCapacity,
@@ -26827,7 +28258,7 @@ typedef struct UIDNA UIDNA;  /**< C typedef for struct UIDNA. @stable ICU 4.6 */
  * @return the UTS #46 UIDNA instance, if successful
  * @stable ICU 4.6
  */
-U_STABLE UIDNA * U_EXPORT2
+U_CAPI UIDNA * U_EXPORT2
 uidna_openUTS46(uint32_t options, UErrorCode *pErrorCode);
 
 /**
@@ -26835,7 +28266,7 @@ uidna_openUTS46(uint32_t options, UErrorCode *pErrorCode);
  * @param idna UIDNA instance to be closed
  * @stable ICU 4.6
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uidna_close(UIDNA *idna);
 
 
@@ -26853,7 +28284,7 @@ typedef struct UIDNAInfo {
     /** sizeof(UIDNAInfo) @stable ICU 4.6 */
     int16_t size;
     /**
-     * Set to TRUE if transitional and nontransitional processing produce different results.
+     * Set to true if transitional and nontransitional processing produce different results.
      * For details see C++ IDNAInfo::isTransitionalDifferent().
      * @stable ICU 4.6
      */
@@ -26873,10 +28304,17 @@ typedef struct UIDNAInfo {
  * Static initializer for a UIDNAInfo struct.
  * @stable ICU 4.6
  */
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+#define UIDNA_INFO_INITIALIZER { \
+    (int16_t)sizeof(UIDNAInfo), \
+    false, false, \
+    0, 0, 0 }
+#else
 #define UIDNA_INFO_INITIALIZER { \
     (int16_t)sizeof(UIDNAInfo), \
     FALSE, FALSE, \
     0, 0, 0 }
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
 
 /**
  * Converts a single domain name label into its ASCII form for DNS lookup.
@@ -26901,7 +28339,7 @@ typedef struct UIDNAInfo {
  * @return destination string length
  * @stable ICU 4.6
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uidna_labelToASCII(const UIDNA *idna,
                    const UChar *label, int32_t length,
                    UChar *dest, int32_t capacity,
@@ -26928,7 +28366,7 @@ uidna_labelToASCII(const UIDNA *idna,
  * @return destination string length
  * @stable ICU 4.6
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uidna_labelToUnicode(const UIDNA *idna,
                      const UChar *label, int32_t length,
                      UChar *dest, int32_t capacity,
@@ -26957,7 +28395,7 @@ uidna_labelToUnicode(const UIDNA *idna,
  * @return destination string length
  * @stable ICU 4.6
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uidna_nameToASCII(const UIDNA *idna,
                   const UChar *name, int32_t length,
                   UChar *dest, int32_t capacity,
@@ -26984,7 +28422,7 @@ uidna_nameToASCII(const UIDNA *idna,
  * @return destination string length
  * @stable ICU 4.6
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uidna_nameToUnicode(const UIDNA *idna,
                     const UChar *name, int32_t length,
                     UChar *dest, int32_t capacity,
@@ -27009,7 +28447,7 @@ uidna_nameToUnicode(const UIDNA *idna,
  * @return destination string length
  * @stable ICU 4.6
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uidna_labelToASCII_UTF8(const UIDNA *idna,
                         const char *label, int32_t length,
                         char *dest, int32_t capacity,
@@ -27032,7 +28470,7 @@ uidna_labelToASCII_UTF8(const UIDNA *idna,
  * @return destination string length
  * @stable ICU 4.6
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uidna_labelToUnicodeUTF8(const UIDNA *idna,
                          const char *label, int32_t length,
                          char *dest, int32_t capacity,
@@ -27055,7 +28493,7 @@ uidna_labelToUnicodeUTF8(const UIDNA *idna,
  * @return destination string length
  * @stable ICU 4.6
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uidna_nameToASCII_UTF8(const UIDNA *idna,
                        const char *name, int32_t length,
                        char *dest, int32_t capacity,
@@ -27078,7 +28516,7 @@ uidna_nameToASCII_UTF8(const UIDNA *idna,
  * @return destination string length
  * @stable ICU 4.6
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uidna_nameToUnicodeUTF8(const UIDNA *idna,
                         const char *name, int32_t length,
                         char *dest, int32_t capacity,
@@ -27197,6 +28635,7 @@ enum {
 
 #ifndef UBRK_H
 #define UBRK_H
+
 
 
 /**
@@ -27405,7 +28844,7 @@ typedef enum USentenceBreakTag {
  * @see ubrk_openRules
  * @stable ICU 2.0
  */
-U_STABLE UBreakIterator* U_EXPORT2
+U_CAPI UBreakIterator* U_EXPORT2
 ubrk_open(UBreakIteratorType type,
       const char *locale,
       const UChar *text,
@@ -27427,7 +28866,7 @@ ubrk_open(UBreakIteratorType type,
  * @see ubrk_open
  * @stable ICU 2.2
  */
-U_STABLE UBreakIterator* U_EXPORT2
+U_CAPI UBreakIterator* U_EXPORT2
 ubrk_openRules(const UChar     *rules,
                int32_t         rulesLength,
                const UChar     *text,
@@ -27456,7 +28895,7 @@ ubrk_openRules(const UChar     *rules,
  * @see ubrk_getBinaryRules
  * @stable ICU 59
  */
-U_STABLE UBreakIterator* U_EXPORT2
+U_CAPI UBreakIterator* U_EXPORT2
 ubrk_openBinaryRules(const uint8_t *binaryRules, int32_t rulesLength,
                      const UChar *  text, int32_t textLength,
                      UErrorCode *   status);
@@ -27480,7 +28919,7 @@ ubrk_openBinaryRules(const uint8_t *binaryRules, int32_t rulesLength,
  * @return pointer to the new clone
  * @stable ICU 2.0
  */
-U_STABLE UBreakIterator * U_EXPORT2
+U_CAPI UBreakIterator * U_EXPORT2
 ubrk_safeClone(
           const UBreakIterator *bi,
           void *stackBuffer,
@@ -27494,7 +28933,7 @@ ubrk_safeClone(
 * @param bi The break iterator to close.
  * @stable ICU 2.0
 */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ubrk_close(UBreakIterator *bi);
 
 
@@ -27510,7 +28949,7 @@ ubrk_close(UBreakIterator *bi);
  * @param status The error code
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ubrk_setText(UBreakIterator* bi,
              const UChar*    text,
              int32_t         textLength,
@@ -27534,7 +28973,7 @@ ubrk_setText(UBreakIterator* bi,
  * @param status The error code
  * @stable ICU 3.4
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ubrk_setUText(UBreakIterator* bi,
              UText*          text,
              UErrorCode*     status);
@@ -27549,7 +28988,7 @@ ubrk_setUText(UBreakIterator* bi,
  * \ref ubrk_first, or \ref ubrk_last.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ubrk_current(const UBreakIterator *bi);
 
 /**
@@ -27561,7 +29000,7 @@ ubrk_current(const UBreakIterator *bi);
  * @see ubrk_previous
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ubrk_next(UBreakIterator *bi);
 
 /**
@@ -27573,7 +29012,7 @@ ubrk_next(UBreakIterator *bi);
  * @see ubrk_next
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ubrk_previous(UBreakIterator *bi);
 
 /**
@@ -27583,7 +29022,7 @@ ubrk_previous(UBreakIterator *bi);
  * @see ubrk_last
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ubrk_first(UBreakIterator *bi);
 
 /**
@@ -27595,7 +29034,7 @@ ubrk_first(UBreakIterator *bi);
  * @see ubrk_first
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ubrk_last(UBreakIterator *bi);
 
 /**
@@ -27607,7 +29046,7 @@ ubrk_last(UBreakIterator *bi);
  * @see ubrk_following
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ubrk_preceding(UBreakIterator *bi,
            int32_t offset);
 
@@ -27620,7 +29059,7 @@ ubrk_preceding(UBreakIterator *bi,
  * @see ubrk_preceding
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ubrk_following(UBreakIterator *bi,
            int32_t offset);
 
@@ -27633,7 +29072,7 @@ ubrk_following(UBreakIterator *bi,
 * @see ubrk_countAvailable
 * @stable ICU 2.0
 */
-U_STABLE const char* U_EXPORT2
+U_CAPI const char* U_EXPORT2
 ubrk_getAvailable(int32_t index);
 
 /**
@@ -27644,7 +29083,7 @@ ubrk_getAvailable(int32_t index);
 * @see ubrk_getAvailable
 * @stable ICU 2.0
 */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ubrk_countAvailable(void);
 
 
@@ -27657,7 +29096,7 @@ ubrk_countAvailable(void);
 * @return True if "offset" is a boundary position.
 * @stable ICU 2.0
 */
-U_STABLE  UBool U_EXPORT2
+U_CAPI  UBool U_EXPORT2
 ubrk_isBoundary(UBreakIterator *bi, int32_t offset);
 
 /**
@@ -27669,7 +29108,7 @@ ubrk_isBoundary(UBreakIterator *bi, int32_t offset);
  * For word break iterators, the possible values are defined in enum UWordBreak.
  * @stable ICU 2.2
  */
-U_STABLE  int32_t U_EXPORT2
+U_CAPI  int32_t U_EXPORT2
 ubrk_getRuleStatus(UBreakIterator *bi);
 
 /**
@@ -27689,7 +29128,7 @@ ubrk_getRuleStatus(UBreakIterator *bi);
  *                  the most recent boundary returned by the break iterator.
  * @stable ICU 3.0
  */
-U_STABLE  int32_t U_EXPORT2
+U_CAPI  int32_t U_EXPORT2
 ubrk_getRuleStatusVec(UBreakIterator *bi, int32_t *fillInVec, int32_t capacity, UErrorCode *status);
 
 /**
@@ -27701,7 +29140,7 @@ ubrk_getRuleStatusVec(UBreakIterator *bi, int32_t *fillInVec, int32_t capacity, 
  * @return locale string
  * @stable ICU 2.8
  */
-U_STABLE const char* U_EXPORT2
+U_CAPI const char* U_EXPORT2
 ubrk_getLocaleByType(const UBreakIterator *bi, ULocDataLocaleType type, UErrorCode* status);
 
 /**
@@ -27729,7 +29168,7 @@ ubrk_getLocaleByType(const UBreakIterator *bi, ULocDataLocaleType type, UErrorCo
   *
   * @stable ICU 49
   */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ubrk_refreshUText(UBreakIterator *bi,
                        UText          *text,
                        UErrorCode     *status);
@@ -27760,7 +29199,7 @@ ubrk_refreshUText(UBreakIterator *bi,
  * @see ubrk_openBinaryRules
  * @stable ICU 59
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ubrk_getBinaryRules(UBreakIterator *bi,
                     uint8_t *       binaryRules, int32_t rulesCapacity,
                     UErrorCode *    status);
@@ -27810,7 +29249,7 @@ ubrk_getBinaryRules(UBreakIterator *bi,
  * 
  * @stable ICU 49
  */
-U_STABLE void U_EXPORT2 u_getDataVersion(UVersionInfo dataVersionFillin, UErrorCode *status);
+U_CAPI void U_EXPORT2 u_getDataVersion(UVersionInfo dataVersionFillin, UErrorCode *status);
 
 #endif
 
@@ -28005,6 +29444,7 @@ U_STABLE void U_EXPORT2 u_getDataVersion(UVersionInfo dataVersionFillin, UErrorC
 #define UCAL_H
 
 
+
 #if !UCONFIG_NO_FORMATTING
 
 /**
@@ -28022,7 +29462,7 @@ U_STABLE void U_EXPORT2 u_getDataVersion(UVersionInfo dataVersionFillin, UErrorC
  *
  * <p>
  * Types of <code>UCalendar</code> interpret a <code>UDate</code>
- * according to the rules of a specific calendar system. The U_STABLE
+ * according to the rules of a specific calendar system. The C API
  * provides the enum UCalendarType with UCAL_TRADITIONAL and
  * UCAL_GREGORIAN.
  * <p>
@@ -28431,11 +29871,13 @@ enum UCalendarDateFields {
 
     /* Do not conditionalize the following with #ifndef U_HIDE_DEPRECATED_API,
      * it is needed for layout of Calendar, DateFormat, and other objects */
+#ifndef U_FORCE_HIDE_DEPRECATED_API
     /**
      * One more than the highest normal UCalendarDateFields value.
      * @deprecated ICU 58 The numeric value may change over time, see ICU ticket #12420.
      */
-  UCAL_FIELD_COUNT,
+    UCAL_FIELD_COUNT,
+#endif  // U_FORCE_HIDE_DEPRECATED_API
 
  /**
    * Field number indicating the
@@ -28572,7 +30014,7 @@ typedef enum USystemTimeZoneType USystemTimeZoneType;
  *          *ec will indicate the error.
  * @stable ICU 4.8
  */ 
-U_STABLE UEnumeration* U_EXPORT2
+U_CAPI UEnumeration* U_EXPORT2
 ucal_openTimeZoneIDEnumeration(USystemTimeZoneType zoneType, const char* region,
                                 const int32_t* rawOffset, UErrorCode* ec);
 
@@ -28587,7 +30029,7 @@ ucal_openTimeZoneIDEnumeration(USystemTimeZoneType zoneType, const char* region,
  *
  * @stable ICU 2.6
  */
-U_STABLE UEnumeration* U_EXPORT2
+U_CAPI UEnumeration* U_EXPORT2
 ucal_openTimeZones(UErrorCode* ec);
 
 /**
@@ -28606,7 +30048,7 @@ ucal_openTimeZones(UErrorCode* ec);
  *
  * @stable ICU 2.6
  */
-U_STABLE UEnumeration* U_EXPORT2
+U_CAPI UEnumeration* U_EXPORT2
 ucal_openCountryTimeZones(const char* country, UErrorCode* ec);
 
 /**
@@ -28632,7 +30074,7 @@ ucal_openCountryTimeZones(const char* country, UErrorCode* ec);
  * 
  * @stable ICU 2.6
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucal_getDefaultTimeZone(UChar* result, int32_t resultCapacity, UErrorCode* ec);
 
 /**
@@ -28644,8 +30086,42 @@ ucal_getDefaultTimeZone(UChar* result, int32_t resultCapacity, UErrorCode* ec);
  *
  * @stable ICU 2.6
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucal_setDefaultTimeZone(const UChar* zoneID, UErrorCode* ec);
+
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+/**
+ * Return the current host time zone. The host time zone is detected from
+ * the current host system configuration by querying the host operating
+ * system. If the host system detection routines fail, or if they specify
+ * a TimeZone or TimeZone offset which is not recognized, then the special
+ * TimeZone "Etc/Unknown" is returned.
+ * 
+ * Note that host time zone and the ICU default time zone can be different.
+ * 
+ * The ICU default time zone does not change once initialized unless modified
+ * by calling `ucal_setDefaultTimeZone()` or with the C++ TimeZone API,
+ * `TimeZone::adoptDefault(TimeZone*)`.
+ * 
+ * If the host operating system configuration has changed since ICU has
+ * initialized then the returned value can be different than the ICU default
+ * time zone, even if the default has not changed.
+ *
+ * <p>This function is not thread safe.</p>
+ * 
+ * @param result A buffer to receive the result, or NULL
+ * @param resultCapacity The capacity of the result buffer
+ * @param ec input/output error code
+ * @return The result string length, not including the terminating
+ * null
+ * 
+ * @see #UCAL_UNKNOWN_ZONE_ID
+ * 
+ * @stable ICU 65
+ */
+U_CAPI int32_t U_EXPORT2
+ucal_getHostTimeZone(UChar *result, int32_t resultCapacity, UErrorCode *ec);
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
 
 /**
  * Return the amount of time in milliseconds that the clock is
@@ -28663,7 +30139,7 @@ ucal_setDefaultTimeZone(const UChar* zoneID, UErrorCode* ec);
  *
  * @stable ICU 2.6
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucal_getDSTSavings(const UChar* zoneID, UErrorCode* ec);
 
 /**
@@ -28672,7 +30148,7 @@ ucal_getDSTSavings(const UChar* zoneID, UErrorCode* ec);
  * @return The current date and time.
  * @stable ICU 2.0
  */
-U_STABLE UDate U_EXPORT2 
+U_CAPI UDate U_EXPORT2 
 ucal_getNow(void);
 
 /**
@@ -28698,7 +30174,7 @@ ucal_getNow(void);
  * @see #UCAL_UNKNOWN_ZONE_ID
  * @stable ICU 2.0
  */
-U_STABLE UCalendar* U_EXPORT2 
+U_CAPI UCalendar* U_EXPORT2 
 ucal_open(const UChar*   zoneID,
           int32_t        len,
           const char*    locale,
@@ -28711,7 +30187,7 @@ ucal_open(const UChar*   zoneID,
  * @param cal The UCalendar to close.
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 ucal_close(UCalendar *cal);
 
 
@@ -28723,7 +30199,7 @@ ucal_close(UCalendar *cal);
  * @return A pointer to a UCalendar identical to cal.
  * @stable ICU 4.0
  */
-U_STABLE UCalendar* U_EXPORT2 
+U_CAPI UCalendar* U_EXPORT2 
 ucal_clone(const UCalendar* cal,
            UErrorCode*      status);
 
@@ -28736,7 +30212,7 @@ ucal_clone(const UCalendar* cal,
  * @param status A pointer to an UErrorCode to receive any errors.
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 ucal_setTimeZone(UCalendar*    cal,
                  const UChar*  zoneID,
                  int32_t       len,
@@ -28752,7 +30228,7 @@ ucal_setTimeZone(UCalendar*    cal,
  * @return              The total buffer size needed; if greater than resultLength, the output was truncated. 
  * @stable ICU 51 
  */ 
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 ucal_getTimeZoneID(const UCalendar *cal,
                    UChar *result,
                    int32_t resultLength,
@@ -28789,7 +30265,7 @@ typedef enum UCalendarDisplayNameType UCalendarDisplayNameType;
  * @return             The total buffer size needed; if greater than resultLength, the output was truncated.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 ucal_getTimeZoneDisplayName(const UCalendar*          cal,
                             UCalendarDisplayNameType  type,
                             const char*               locale,
@@ -28802,10 +30278,10 @@ ucal_getTimeZoneDisplayName(const UCalendar*          cal,
  * Daylight savings time is not used in all parts of the world.
  * @param cal The UCalendar to query.
  * @param status A pointer to an UErrorCode to receive any errors
- * @return TRUE if cal is currently in daylight savings time, FALSE otherwise
+ * @return true if cal is currently in daylight savings time, false otherwise
  * @stable ICU 2.0
  */
-U_STABLE UBool U_EXPORT2 
+U_CAPI UBool U_EXPORT2 
 ucal_inDaylightTime(const UCalendar*  cal,
                     UErrorCode*       status );
 
@@ -28829,7 +30305,7 @@ ucal_inDaylightTime(const UCalendar*  cal,
  * @see ucal_getGregorianChange
  * @stable ICU 3.6
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucal_setGregorianChange(UCalendar *cal, UDate date, UErrorCode *pErrorCode);
 
 /**
@@ -28852,7 +30328,7 @@ ucal_setGregorianChange(UCalendar *cal, UDate date, UErrorCode *pErrorCode);
  * @see ucal_setGregorianChange
  * @stable ICU 3.6
  */
-U_STABLE UDate U_EXPORT2
+U_CAPI UDate U_EXPORT2
 ucal_getGregorianChange(const UCalendar *cal, UErrorCode *pErrorCode);
 
 /**
@@ -28933,7 +30409,7 @@ typedef enum UCalendarWallTimeOption UCalendarWallTimeOption;
  * @see ucal_setAttribute
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 ucal_getAttribute(const UCalendar*    cal,
                   UCalendarAttribute  attr);
 
@@ -28948,7 +30424,7 @@ ucal_getAttribute(const UCalendar*    cal,
  * @see ucal_getAttribute
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 ucal_setAttribute(UCalendar*          cal,
                   UCalendarAttribute  attr,
                   int32_t             newValue);
@@ -28962,7 +30438,7 @@ ucal_setAttribute(UCalendar*          cal,
  * @see ucal_countAvailable
  * @stable ICU 2.0
  */
-U_STABLE const char* U_EXPORT2 
+U_CAPI const char* U_EXPORT2 
 ucal_getAvailable(int32_t localeIndex);
 
 /**
@@ -28973,7 +30449,7 @@ ucal_getAvailable(int32_t localeIndex);
  * @see ucal_getAvailable
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 ucal_countAvailable(void);
 
 /**
@@ -28987,7 +30463,7 @@ ucal_countAvailable(void);
  * @see ucal_setDateTime
  * @stable ICU 2.0
  */
-U_STABLE UDate U_EXPORT2 
+U_CAPI UDate U_EXPORT2 
 ucal_getMillis(const UCalendar*  cal,
                UErrorCode*       status);
 
@@ -29002,7 +30478,7 @@ ucal_getMillis(const UCalendar*  cal,
  * @see ucal_setDateTime
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 ucal_setMillis(UCalendar*   cal,
                UDate        dateTime,
                UErrorCode*  status );
@@ -29021,7 +30497,7 @@ ucal_setMillis(UCalendar*   cal,
  * @see ucal_setDateTime
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 ucal_setDate(UCalendar*   cal,
              int32_t      year,
              int32_t      month,
@@ -29045,7 +30521,7 @@ ucal_setDate(UCalendar*   cal,
  * @see ucal_setDate
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 ucal_setDateTime(UCalendar*   cal,
                  int32_t      year,
                  int32_t      month,
@@ -29056,15 +30532,15 @@ ucal_setDateTime(UCalendar*   cal,
                  UErrorCode*  status);
 
 /**
- * Returns TRUE if two UCalendars are equivalent.  Equivalent
+ * Returns true if two UCalendars are equivalent.  Equivalent
  * UCalendars will behave identically, but they may be set to
  * different times.
  * @param cal1 The first of the UCalendars to compare.
  * @param cal2 The second of the UCalendars to compare.
- * @return TRUE if cal1 and cal2 are equivalent, FALSE otherwise.
+ * @return true if cal1 and cal2 are equivalent, false otherwise.
  * @stable ICU 2.0
  */
-U_STABLE UBool U_EXPORT2 
+U_CAPI UBool U_EXPORT2 
 ucal_equivalentTo(const UCalendar*  cal1,
                   const UCalendar*  cal2);
 
@@ -29086,7 +30562,7 @@ ucal_equivalentTo(const UCalendar*  cal1,
  * @see ucal_roll
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 ucal_add(UCalendar*           cal,
          UCalendarDateFields  field,
          int32_t              amount,
@@ -29116,7 +30592,7 @@ ucal_add(UCalendar*           cal,
  * @see ucal_add
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 ucal_roll(UCalendar*           cal,
           UCalendarDateFields  field,
           int32_t              amount,
@@ -29138,7 +30614,7 @@ ucal_roll(UCalendar*           cal,
  * @see ucal_clear
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 ucal_get(const UCalendar*     cal,
          UCalendarDateFields  field,
          UErrorCode*          status );
@@ -29158,7 +30634,7 @@ ucal_get(const UCalendar*     cal,
  * @see ucal_clear
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 ucal_set(UCalendar*           cal,
          UCalendarDateFields  field,
          int32_t              value);
@@ -29171,14 +30647,14 @@ ucal_set(UCalendar*           cal,
  * UCAL_WEEK_OF_YEAR, UCAL_WEEK_OF_MONTH, UCAL_DATE, UCAL_DAY_OF_YEAR, UCAL_DAY_OF_WEEK,
  * UCAL_DAY_OF_WEEK_IN_MONTH, UCAL_AM_PM, UCAL_HOUR, UCAL_HOUR_OF_DAY, UCAL_MINUTE, UCAL_SECOND,
  * UCAL_MILLISECOND, UCAL_ZONE_OFFSET, UCAL_DST_OFFSET.
- * @return TRUE if field is set, FALSE otherwise.
+ * @return true if field is set, false otherwise.
  * @see ucal_get
  * @see ucal_set
  * @see ucal_clearField
  * @see ucal_clear
  * @stable ICU 2.0
  */
-U_STABLE UBool U_EXPORT2 
+U_CAPI UBool U_EXPORT2 
 ucal_isSet(const UCalendar*     cal,
            UCalendarDateFields  field);
 
@@ -29196,7 +30672,7 @@ ucal_isSet(const UCalendar*     cal,
  * @see ucal_clear
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 ucal_clearField(UCalendar*           cal,
                 UCalendarDateFields  field);
 
@@ -29210,7 +30686,7 @@ ucal_clearField(UCalendar*           cal,
  * @see ucal_clearField
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 ucal_clear(UCalendar* calendar);
 
 /**
@@ -29249,7 +30725,7 @@ typedef enum UCalendarLimitType UCalendarLimitType;
  * @return The requested value.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 ucal_getLimit(const UCalendar*     cal,
               UCalendarDateFields  field,
               UCalendarLimitType   type,
@@ -29262,7 +30738,7 @@ ucal_getLimit(const UCalendar*     cal,
  *  @return the locale name
  *  @stable ICU 2.8
  */
-U_STABLE const char * U_EXPORT2
+U_CAPI const char * U_EXPORT2
 ucal_getLocaleByType(const UCalendar *cal, ULocDataLocaleType type, UErrorCode* status);
 
 /**
@@ -29271,7 +30747,7 @@ ucal_getLocaleByType(const UCalendar *cal, ULocDataLocaleType type, UErrorCode* 
  * @return the version string, such as "2007f"
  * @stable ICU 3.8
  */
-U_STABLE const char * U_EXPORT2
+U_CAPI const char * U_EXPORT2
 ucal_getTZDataVersion(UErrorCode* status);
 
 /**
@@ -29292,7 +30768,7 @@ ucal_getTZDataVersion(UErrorCode* status);
  *                  null.
  * @stable ICU 4.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucal_getCanonicalTimeZoneID(const UChar* id, int32_t len,
                             UChar* result, int32_t resultCapacity, UBool *isSystemID, UErrorCode* status);
 /**
@@ -29302,7 +30778,7 @@ ucal_getCanonicalTimeZoneID(const UChar* id, int32_t len,
  * @return The resource keyword value string.
  * @stable ICU 4.2
  */
-U_STABLE const char * U_EXPORT2
+U_CAPI const char * U_EXPORT2
 ucal_getType(const UCalendar *cal, UErrorCode* status);
 
 /**
@@ -29321,7 +30797,7 @@ ucal_getType(const UCalendar *cal, UErrorCode* status);
  * @return a string enumeration over keyword values for the given key and the locale.
  * @stable ICU 4.2
  */
-U_STABLE UEnumeration* U_EXPORT2
+U_CAPI UEnumeration* U_EXPORT2
 ucal_getKeywordValuesForLocale(const char* key,
                                const char* locale,
                                UBool commonlyUsed,
@@ -29376,7 +30852,7 @@ typedef enum UCalendarWeekdayType UCalendarWeekdayType;
  * @return The UCalendarWeekdayType for the day of the week.
  * @stable ICU 4.4
  */
-U_STABLE UCalendarWeekdayType U_EXPORT2
+U_CAPI UCalendarWeekdayType U_EXPORT2
 ucal_getDayOfWeekType(const UCalendar *cal, UCalendarDaysOfWeek dayOfWeek, UErrorCode* status);
 
 /**
@@ -29394,20 +30870,20 @@ ucal_getDayOfWeekType(const UCalendar *cal, UCalendarDaysOfWeek dayOfWeek, UErro
  * @return The milliseconds after midnight at which the weekend begins or ends.
  * @stable ICU 4.4
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucal_getWeekendTransition(const UCalendar *cal, UCalendarDaysOfWeek dayOfWeek, UErrorCode *status);
 
 /**
- * Returns TRUE if the given UDate is in the weekend in
+ * Returns true if the given UDate is in the weekend in
  * this calendar system.
  * @param cal The UCalendar to query.
  * @param date The UDate in question.
  * @param status The error code for the operation.
- * @return TRUE if the given UDate is in the weekend in
- * this calendar system, FALSE otherwise.
+ * @return true if the given UDate is in the weekend in
+ * this calendar system, false otherwise.
  * @stable ICU 4.4
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 ucal_isWeekend(const UCalendar *cal, UDate date, UErrorCode *status);
 
 /**
@@ -29434,7 +30910,7 @@ ucal_isWeekend(const UCalendar *cal, UDate date, UErrorCode *status);
  * @return The date difference for the specified field.
  * @stable ICU 4.8
  */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 ucal_getFieldDifference(UCalendar* cal,
                         UDate target,
                         UCalendarDateFields field,
@@ -29478,17 +30954,17 @@ typedef enum UTimeZoneTransitionType UTimeZoneTransitionType; /**< @stable ICU 5
 * the calendar's current date, in the time zone to which the calendar
 * is currently set. If there is no known time zone transition of the
 * requested type relative to the calendar's date, the function returns
-* FALSE.
+* false.
 * @param cal The UCalendar to query.
 * @param type The type of transition desired.
 * @param transition A pointer to a UDate to be set to the transition time.
-*         If the function returns FALSE, the value set is unspecified.
+*         If the function returns false, the value set is unspecified.
 * @param status A pointer to a UErrorCode to receive any errors.
-* @return TRUE if a valid transition time is set in *transition, FALSE
+* @return true if a valid transition time is set in *transition, false
 *         otherwise.
 * @stable ICU 50
 */
-U_STABLE UBool U_EXPORT2 
+U_CAPI UBool U_EXPORT2 
 ucal_getTimeZoneTransitionDate(const UCalendar* cal, UTimeZoneTransitionType type,
                                UDate* transition, UErrorCode* status);
 
@@ -29503,7 +30979,7 @@ ucal_getTimeZoneTransitionDate(const UCalendar* cal, UTimeZoneTransitionType typ
 *
 * <p>This implementation utilizes <a href="http://unicode.org/cldr/charts/supplemental/zone_tzid.html">
 * Zone-Tzid mapping data</a>. The mapping data is updated time to time. To get the latest changes,
-* please read the ICU user guide section <a href="http://userguide.icu-project.org/datetime/timezone#TOC-Updating-the-Time-Zone-Data">
+* please read the ICU user guide section <a href="https://unicode-org.github.io/icu/userguide/datetime/timezone#updating-the-time-zone-data">
 * Updating the Time Zone Data</a>.
 *
 * @param id            A system time zone ID.
@@ -29516,7 +30992,7 @@ ucal_getTimeZoneTransitionDate(const UCalendar* cal, UTimeZoneTransitionType typ
 *
 * @stable ICU 52
 */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucal_getWindowsTimeZoneID(const UChar* id, int32_t len,
                             UChar* winid, int32_t winidCapacity, UErrorCode* status);
 
@@ -29534,7 +31010,7 @@ ucal_getWindowsTimeZoneID(const UChar* id, int32_t len,
 *
 * <p>This implementation utilizes <a href="http://unicode.org/cldr/charts/supplemental/zone_tzid.html">
 * Zone-Tzid mapping data</a>. The mapping data is updated time to time. To get the latest changes,
-* please read the ICU user guide section <a href="http://userguide.icu-project.org/datetime/timezone#TOC-Updating-the-Time-Zone-Data">
+* please read the ICU user guide section <a href="https://unicode-org.github.io/icu/userguide/datetime/timezone#updating-the-time-zone-data">
 * Updating the Time Zone Data</a>.
 *
 * @param winid         A Windows time zone ID.
@@ -29548,7 +31024,7 @@ ucal_getWindowsTimeZoneID(const UChar* id, int32_t len,
 *
 * @stable ICU 52
 */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucal_getTimeZoneIDForWindowsID(const UChar* winid, int32_t len, const char* region,
                                 UChar* id, int32_t idCapacity, UErrorCode* status);
 
@@ -29573,6 +31049,7 @@ ucal_getTimeZoneIDForWindowsID(const UChar* winid, int32_t len, const char* regi
 #if !UCONFIG_NO_COLLATION
 
 
+
 /**
  * \file
  * \brief C API: Collator 
@@ -29584,14 +31061,14 @@ ucal_getTimeZoneIDForWindowsID(const UChar* winid, int32_t len, const char* regi
  * searching and sorting routines for natural language text.
  * <p>
  * For more information about the collation service see 
- * <a href="http://userguide.icu-project.org/collation">the User Guide</a>.
+ * <a href="https://unicode-org.github.io/icu/userguide/collation">the User Guide</a>.
  * <p>
  * Collation service provides correct sorting orders for most locales supported in ICU. 
  * If specific data for a locale is not available, the orders eventually falls back
  * to the <a href="http://www.unicode.org/reports/tr35/tr35-collation.html#Root_Collation">CLDR root sort order</a>. 
  * <p>
  * Sort ordering may be customized by providing your own set of rules. For more on
- * this subject see the <a href="http://userguide.icu-project.org/collation/customization">
+ * this subject see the <a href="https://unicode-org.github.io/icu/userguide/collation/customization">
  * Collation Customization</a> section of the User Guide.
  * <p>
  * @see         UCollationResult
@@ -29868,11 +31345,13 @@ typedef enum {
 
     /* Do not conditionalize the following with #ifndef U_HIDE_DEPRECATED_API,
      * it is needed for layout of RuleBasedCollator object. */
+#ifndef U_FORCE_HIDE_DEPRECATED_API
     /**
      * One more than the highest normal UColAttribute value.
      * @deprecated ICU 58 The numeric value may change over time, see ICU ticket #12420.
      */
      UCOL_ATTRIBUTE_COUNT
+#endif  // U_FORCE_HIDE_DEPRECATED_API
 } UColAttribute;
 
 /** Options for retrieving the rule string 
@@ -29889,7 +31368,7 @@ typedef enum {
    * Retrieves the "UCA rules" concatenated with the tailoring rules.
    * The "UCA rules" are an <i>approximation</i> of the root collator's sort order.
    * They are almost never used or useful at runtime and can be removed from the data.
-   * See http://userguide.icu-project.org/collation/customization#TOC-Building-on-Existing-Locales
+   * See https://unicode-org.github.io/icu/userguide/collation/customization#building-on-existing-locales
    * @stable ICU 2.0
    */
   UCOL_FULL_RULES 
@@ -29903,7 +31382,7 @@ typedef enum {
  * Starting with ICU 54, collation attributes can be specified via locale keywords as well,
  * in the old locale extension syntax ("el@colCaseFirst=upper")
  * or in language tag syntax ("el-u-kf-upper").
- * See <a href="http://userguide.icu-project.org/collation/api">User Guide: Collation API</a>.
+ * See <a href="https://unicode-org.github.io/icu/userguide/collation/api">User Guide: Collation API</a>.
  *
  * The UCollator pointer is used in all the calls to the Collation 
  * service. After finished, collator must be disposed of by calling
@@ -29920,7 +31399,7 @@ typedef enum {
  * @see ucol_close
  * @stable ICU 2.0
  */
-U_STABLE UCollator* U_EXPORT2 
+U_CAPI UCollator* U_EXPORT2 
 ucol_open(const char *loc, UErrorCode *status);
 
 /**
@@ -29948,7 +31427,7 @@ ucol_open(const char *loc, UErrorCode *status);
  * @see ucol_close
  * @stable ICU 2.0
  */
-U_STABLE UCollator* U_EXPORT2 
+U_CAPI UCollator* U_EXPORT2 
 ucol_openRules( const UChar        *rules,
                 int32_t            rulesLength,
                 UColAttributeValue normalizationMode,
@@ -29969,7 +31448,7 @@ ucol_openRules( const UChar        *rules,
  *
  * @stable ICU 3.4
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucol_getContractionsAndExpansions( const UCollator *coll,
                   USet *contractions, USet *expansions,
                   UBool addPrefixes, UErrorCode *status);
@@ -29984,7 +31463,7 @@ ucol_getContractionsAndExpansions( const UCollator *coll,
  * @see ucol_safeClone
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 ucol_close(UCollator *coll);
 
 
@@ -30003,7 +31482,7 @@ ucol_close(UCollator *coll);
  * @see ucol_equal
  * @stable ICU 2.0
  */
-U_STABLE UCollationResult U_EXPORT2 
+U_CAPI UCollationResult U_EXPORT2 
 ucol_strcoll(    const    UCollator    *coll,
         const    UChar        *source,
         int32_t            sourceLength,
@@ -30028,7 +31507,7 @@ ucol_strcoll(    const    UCollator    *coll,
 * @see ucol_equal 
 * @stable ICU 50 
 */ 
-U_STABLE UCollationResult U_EXPORT2
+U_CAPI UCollationResult U_EXPORT2
 ucol_strcollUTF8(
         const UCollator *coll,
         const char      *source,
@@ -30045,13 +31524,13 @@ ucol_strcollUTF8(
  * @param sourceLength The length of source, or -1 if null-terminated.
  * @param target The target string.
  * @param targetLength The length of target, or -1 if null-terminated.
- * @return TRUE if source is greater than target, FALSE otherwise.
+ * @return true if source is greater than target, false otherwise.
  * @see ucol_strcoll
  * @see ucol_greaterOrEqual
  * @see ucol_equal
  * @stable ICU 2.0
  */
-U_STABLE UBool U_EXPORT2 
+U_CAPI UBool U_EXPORT2 
 ucol_greater(const UCollator *coll,
              const UChar     *source, int32_t sourceLength,
              const UChar     *target, int32_t targetLength);
@@ -30064,13 +31543,13 @@ ucol_greater(const UCollator *coll,
  * @param sourceLength The length of source, or -1 if null-terminated.
  * @param target The target string.
  * @param targetLength The length of target, or -1 if null-terminated.
- * @return TRUE if source is greater than or equal to target, FALSE otherwise.
+ * @return true if source is greater than or equal to target, false otherwise.
  * @see ucol_strcoll
  * @see ucol_greater
  * @see ucol_equal
  * @stable ICU 2.0
  */
-U_STABLE UBool U_EXPORT2 
+U_CAPI UBool U_EXPORT2 
 ucol_greaterOrEqual(const UCollator *coll,
                     const UChar     *source, int32_t sourceLength,
                     const UChar     *target, int32_t targetLength);
@@ -30083,13 +31562,13 @@ ucol_greaterOrEqual(const UCollator *coll,
  * @param sourceLength The length of source, or -1 if null-terminated.
  * @param target The target string.
  * @param targetLength The length of target, or -1 if null-terminated.
- * @return TRUE if source is equal to target, FALSE otherwise
+ * @return true if source is equal to target, false otherwise
  * @see ucol_strcoll
  * @see ucol_greater
  * @see ucol_greaterOrEqual
  * @stable ICU 2.0
  */
-U_STABLE UBool U_EXPORT2 
+U_CAPI UBool U_EXPORT2 
 ucol_equal(const UCollator *coll,
            const UChar     *source, int32_t sourceLength,
            const UChar     *target, int32_t targetLength);
@@ -30106,7 +31585,7 @@ ucol_equal(const UCollator *coll,
  * @see ucol_strcoll
  * @stable ICU 2.6
  */
-U_STABLE UCollationResult U_EXPORT2 
+U_CAPI UCollationResult U_EXPORT2 
 ucol_strcollIter(  const    UCollator    *coll,
                   UCharIterator *sIter,
                   UCharIterator *tIter,
@@ -30121,7 +31600,7 @@ ucol_strcollIter(  const    UCollator    *coll,
  * @see ucol_setStrength
  * @stable ICU 2.0
  */
-U_STABLE UCollationStrength U_EXPORT2 
+U_CAPI UCollationStrength U_EXPORT2 
 ucol_getStrength(const UCollator *coll);
 
 /**
@@ -30133,7 +31612,7 @@ ucol_getStrength(const UCollator *coll);
  * @see ucol_getStrength
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 ucol_setStrength(UCollator *coll,
                  UCollationStrength strength);
 
@@ -30153,7 +31632,7 @@ ucol_setStrength(UCollator *coll,
  * @see UColReorderCode
  * @stable ICU 4.8
  */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 ucol_getReorderCodes(const UCollator* coll,
                     int32_t* dest,
                     int32_t destCapacity,
@@ -30198,7 +31677,7 @@ ucol_getReorderCodes(const UCollator* coll,
  * @see UColReorderCode
  * @stable ICU 4.8
  */ 
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 ucol_setReorderCodes(UCollator* coll,
                     const int32_t* reorderCodes,
                     int32_t reorderCodesLength,
@@ -30223,7 +31702,7 @@ ucol_setReorderCodes(UCollator* coll,
  * @see UColReorderCode
  * @stable ICU 4.8
  */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 ucol_getEquivalentReorderCodes(int32_t reorderCode,
                     int32_t* dest,
                     int32_t destCapacity,
@@ -30241,7 +31720,7 @@ ucol_getEquivalentReorderCodes(int32_t reorderCode,
  * the output was truncated.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 ucol_getDisplayName(    const    char        *objLoc,
             const    char        *dispLoc,
             UChar             *result,
@@ -30257,7 +31736,7 @@ ucol_getDisplayName(    const    char        *objLoc,
  * @see ucol_countAvailable
  * @stable ICU 2.0
  */
-U_STABLE const char* U_EXPORT2 
+U_CAPI const char* U_EXPORT2 
 ucol_getAvailable(int32_t localeIndex);
 
 /**
@@ -30268,7 +31747,7 @@ ucol_getAvailable(int32_t localeIndex);
  * @see ucol_getAvailable
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 ucol_countAvailable(void);
 
 #if !UCONFIG_NO_SERVICE
@@ -30280,7 +31759,7 @@ ucol_countAvailable(void);
  * responsible for closing the result.
  * @stable ICU 3.0
  */
-U_STABLE UEnumeration* U_EXPORT2
+U_CAPI UEnumeration* U_EXPORT2
 ucol_openAvailableLocales(UErrorCode *status);
 #endif
 
@@ -30293,7 +31772,7 @@ ucol_openAvailableLocales(UErrorCode *status);
  * responsible for closing the result.
  * @stable ICU 3.0
  */
-U_STABLE UEnumeration* U_EXPORT2
+U_CAPI UEnumeration* U_EXPORT2
 ucol_getKeywords(UErrorCode *status);
 
 /**
@@ -30307,7 +31786,7 @@ ucol_getKeywords(UErrorCode *status);
  * upon error. The caller is responsible for closing the result.
  * @stable ICU 3.0
  */
-U_STABLE UEnumeration* U_EXPORT2
+U_CAPI UEnumeration* U_EXPORT2
 ucol_getKeywordValues(const char *keyword, UErrorCode *status);
 
 /**
@@ -30326,7 +31805,7 @@ ucol_getKeywordValues(const char *keyword, UErrorCode *status);
  * @return a string enumeration over keyword values for the given key and the locale.
  * @stable ICU 4.2
  */
-U_STABLE UEnumeration* U_EXPORT2
+U_CAPI UEnumeration* U_EXPORT2
 ucol_getKeywordValuesForLocale(const char* key,
                                const char* locale,
                                UBool commonlyUsed,
@@ -30346,7 +31825,7 @@ ucol_getKeywordValuesForLocale(const char* key,
  * applications who wish to cache collators, or otherwise reuse
  * collators when possible. The functional equivalent may change
  * over time. For more information, please see the <a
- * href="http://userguide.icu-project.org/locale#TOC-Locales-and-Services">
+ * href="https://unicode-org.github.io/icu/userguide/locale#locales-and-services">
  * Locales and Services</a> section of the ICU User Guide.
  * @param result fillin for the functionally equivalent result locale
  * @param resultCapacity capacity of the fillin buffer
@@ -30363,7 +31842,7 @@ ucol_getKeywordValuesForLocale(const char* key,
  * an error code will be returned.
  * @stable ICU 3.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucol_getFunctionalEquivalent(char* result, int32_t resultCapacity,
                              const char* keyword, const char* locale,
                              UBool* isAvailable, UErrorCode* status);
@@ -30376,7 +31855,7 @@ ucol_getFunctionalEquivalent(char* result, int32_t resultCapacity,
  * @return The collation tailoring rules.
  * @stable ICU 2.0
  */
-U_STABLE const UChar* U_EXPORT2 
+U_CAPI const UChar* U_EXPORT2 
 ucol_getRules(    const    UCollator    *coll, 
         int32_t            *length);
 
@@ -30404,7 +31883,7 @@ ucol_getRules(    const    UCollator    *coll,
  * @see ucol_keyHashCode
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 ucol_getSortKey(const    UCollator    *coll,
         const    UChar        *source,
         int32_t        sourceLength,
@@ -30432,7 +31911,7 @@ ucol_getSortKey(const    UCollator    *coll,
  *          the sort key.
  *  @stable ICU 2.6
  */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 ucol_nextSortKeyPart(const UCollator *coll,
                      UCharIterator *iter,
                      uint32_t state[2],
@@ -30492,7 +31971,7 @@ typedef enum {
  * @see ucol_keyHashCode
  * @stable ICU 2.1
  */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 ucol_getBound(const uint8_t       *source,
         int32_t             sourceLength,
         UColBoundMode       boundType,
@@ -30509,7 +31988,7 @@ ucol_getBound(const uint8_t       *source,
  * @param info the version # information, the result will be filled in
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucol_getVersion(const UCollator* coll, UVersionInfo info);
 
 /**
@@ -30519,7 +31998,7 @@ ucol_getVersion(const UCollator* coll, UVersionInfo info);
  * @param info the version # information, the result will be filled in
  * @stable ICU 2.8
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucol_getUCAVersion(const UCollator* coll, UVersionInfo info);
 
 /**
@@ -30538,7 +32017,7 @@ ucol_getUCAVersion(const UCollator* coll, UVersionInfo info);
  * Using strings with U+FFFE may yield shorter sort keys.
  *
  * For details about Sort Key Features see
- * http://userguide.icu-project.org/collation/api#TOC-Sort-Key-Features
+ * https://unicode-org.github.io/icu/userguide/collation/api#sort-key-features
  *
  * It is possible to merge multiple sort keys by consecutively merging
  * another one with the intermediate result.
@@ -30569,7 +32048,7 @@ ucol_getUCAVersion(const UCollator* coll, UVersionInfo info);
  *         in which cases the contents of dest is undefined
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 ucol_mergeSortkeys(const uint8_t *src1, int32_t src1Length,
                    const uint8_t *src2, int32_t src2Length,
                    uint8_t *dest, int32_t destCapacity);
@@ -30585,7 +32064,7 @@ ucol_mergeSortkeys(const uint8_t *src1, int32_t src1Length,
  * @see ucol_getAttribute
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 ucol_setAttribute(UCollator *coll, UColAttribute attr, UColAttributeValue value, UErrorCode *status);
 
 /**
@@ -30599,7 +32078,7 @@ ucol_setAttribute(UCollator *coll, UColAttribute attr, UColAttributeValue value,
  * @see ucol_setAttribute
  * @stable ICU 2.0
  */
-U_STABLE UColAttributeValue  U_EXPORT2 
+U_CAPI UColAttributeValue  U_EXPORT2 
 ucol_getAttribute(const UCollator *coll, UColAttribute attr, UErrorCode *status);
 
 /**
@@ -30618,7 +32097,7 @@ ucol_getAttribute(const UCollator *coll, UColAttribute attr, UErrorCode *status)
  * @see ucol_getMaxVariable
  * @stable ICU 53
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucol_setMaxVariable(UCollator *coll, UColReorderCode group, UErrorCode *pErrorCode);
 
 /**
@@ -30628,7 +32107,7 @@ ucol_setMaxVariable(UCollator *coll, UColReorderCode group, UErrorCode *pErrorCo
  * @see ucol_setMaxVariable
  * @stable ICU 53
  */
-U_STABLE UColReorderCode U_EXPORT2
+U_CAPI UColReorderCode U_EXPORT2
 ucol_getMaxVariable(const UCollator *coll);
 
 
@@ -30643,7 +32122,7 @@ ucol_getMaxVariable(const UCollator *coll);
  * @see ucol_restoreVariableTop
  * @stable ICU 2.0
  */
-U_STABLE uint32_t U_EXPORT2 ucol_getVariableTop(const UCollator *coll, UErrorCode *status);
+U_CAPI uint32_t U_EXPORT2 ucol_getVariableTop(const UCollator *coll, UErrorCode *status);
 
 
 /**
@@ -30669,7 +32148,7 @@ U_STABLE uint32_t U_EXPORT2 ucol_getVariableTop(const UCollator *coll, UErrorCod
  * @see ucol_close
  * @stable ICU 2.0
  */
-U_STABLE UCollator* U_EXPORT2 
+U_CAPI UCollator* U_EXPORT2 
 ucol_safeClone(const UCollator *coll,
                void            *stackBuffer,
                int32_t         *pBufferSize,
@@ -30682,7 +32161,7 @@ ucol_safeClone(const UCollator *coll,
  * to store rules, will store up to available space.
  *
  * ucol_getRules() should normally be used instead.
- * See http://userguide.icu-project.org/collation/customization#TOC-Building-on-Existing-Locales
+ * See https://unicode-org.github.io/icu/userguide/collation/customization#building-on-existing-locales
  * @param coll collator to get the rules from
  * @param delta one of UCOL_TAILORING_ONLY, UCOL_FULL_RULES. 
  * @param buffer buffer to store the result in. If NULL, you'll get no rules.
@@ -30691,7 +32170,7 @@ ucol_safeClone(const UCollator *coll,
  * @stable ICU 2.0
  * @see UCOL_FULL_RULES
  */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 ucol_getRulesEx(const UCollator *coll, UColRuleOption delta, UChar *buffer, int32_t bufferLen);
 
 
@@ -30709,7 +32188,7 @@ ucol_getRulesEx(const UCollator *coll, UColRuleOption delta, UChar *buffer, int3
  *         NULL.
  * @stable ICU 2.8
  */
-U_STABLE const char * U_EXPORT2
+U_CAPI const char * U_EXPORT2
 ucol_getLocaleByType(const UCollator *coll, ULocDataLocaleType type, UErrorCode *status);
 
 /**
@@ -30722,7 +32201,7 @@ ucol_getLocaleByType(const UCollator *coll, ULocDataLocaleType type, UErrorCode 
  * @see uset_close
  * @stable ICU 2.4
  */
-U_STABLE USet * U_EXPORT2
+U_CAPI USet * U_EXPORT2
 ucol_getTailoredSet(const UCollator *coll, UErrorCode *status);
 
 
@@ -30737,7 +32216,7 @@ ucol_getTailoredSet(const UCollator *coll, UErrorCode *status);
  *  @see ucol_openBinary
  *  @stable ICU 3.2
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucol_cloneBinary(const UCollator *coll,
                  uint8_t *buffer, int32_t capacity,
                  UErrorCode *status);
@@ -30759,7 +32238,7 @@ ucol_cloneBinary(const UCollator *coll,
  *  @see ucol_cloneBinary
  *  @stable ICU 3.2
  */
-U_STABLE UCollator* U_EXPORT2
+U_CAPI UCollator* U_EXPORT2
 ucol_openBinary(const uint8_t *bin, int32_t length, 
                 const UCollator *base, 
                 UErrorCode *status);
@@ -30794,7 +32273,7 @@ ucol_openBinary(const uint8_t *bin, int32_t length,
 #if !UCONFIG_NO_COLLATION
 
 /**  
- * This indicates an error has occured during processing or if no more CEs is 
+ * This indicates an error has occurred during processing or if no more CEs is 
  * to be returned.
  * @stable ICU 2.0
  */
@@ -30836,14 +32315,14 @@ typedef struct UCollationElements UCollationElements;
  * .      UCollationElements *c;
  * .      UCollatorOld *coll;
  * .      UErrorCode success = U_ZERO_ERROR;
- * .      s=(UChar*)malloc(sizeof(UChar) * (strlen("This is a test")+1) );
- * .      u_uastrcpy(s, "This is a test");
+ * .      str=(UChar*)malloc(sizeof(UChar) * (strlen("This is a test")+1) );
+ * .      u_uastrcpy(str, "This is a test");
  * .      coll = ucol_open(NULL, &success);
  * .      c = ucol_openElements(coll, str, u_strlen(str), &status);
  * .      order = ucol_next(c, &success);
  * .      ucol_reset(c);
  * .      order = ucol_prev(c, &success);
- * .      free(s);
+ * .      free(str);
  * .      ucol_close(coll);
  * .      ucol_closeElements(c);
  * .  }
@@ -30872,6 +32351,10 @@ typedef struct UCollationElements UCollationElements;
 /**
  * Open the collation elements for a string.
  *
+ * The UCollationElements retains a pointer to the supplied text.
+ * The caller must not modify or delete the text while the UCollationElements
+ * object is used to iterate over this text.
+ *
  * @param coll The collator containing the desired collation rules.
  * @param text The text to iterate over.
  * @param textLength The number of characters in text, or -1 if null-terminated
@@ -30879,12 +32362,11 @@ typedef struct UCollationElements UCollationElements;
  * @return a struct containing collation element information
  * @stable ICU 2.0
  */
-U_STABLE UCollationElements* U_EXPORT2 
+U_CAPI UCollationElements* U_EXPORT2 
 ucol_openElements(const UCollator  *coll,
                   const UChar      *text,
                         int32_t    textLength,
                         UErrorCode *status);
-
 
 /**
  * get a hash code for a key... Not very useful!
@@ -30893,7 +32375,7 @@ ucol_openElements(const UCollator  *coll,
  * @return       the hash code.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 ucol_keyHashCode(const uint8_t* key, int32_t length);
 
 /**
@@ -30902,7 +32384,7 @@ ucol_keyHashCode(const uint8_t* key, int32_t length);
  * @param elems The UCollationElements to close.
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 ucol_closeElements(UCollationElements *elems);
 
 /**
@@ -30914,7 +32396,7 @@ ucol_closeElements(UCollationElements *elems);
  * @see ucol_previous
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 ucol_reset(UCollationElements *elems);
 
 /**
@@ -30923,10 +32405,10 @@ ucol_reset(UCollationElements *elems);
  * @param elems The UCollationElements containing the text.
  * @param status A pointer to a UErrorCode to receive any errors.
  * @return The next collation elements ordering, otherwise returns UCOL_NULLORDER 
- *         if an error has occured or if the end of string has been reached
+ *         if an error has occurred or if the end of string has been reached
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 ucol_next(UCollationElements *elems, UErrorCode *status);
 
 /**
@@ -30938,11 +32420,11 @@ ucol_next(UCollationElements *elems, UErrorCode *status);
  *               a U_BUFFER_OVERFLOW_ERROR is returned if the internal stack
  *               buffer has been exhausted.
  * @return The previous collation elements ordering, otherwise returns 
- *         UCOL_NULLORDER if an error has occured or if the start of string has 
+ *         UCOL_NULLORDER if an error has occurred or if the start of string has 
  *         been reached.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 ucol_previous(UCollationElements *elems, UErrorCode *status);
 
 /**
@@ -30956,7 +32438,7 @@ ucol_previous(UCollationElements *elems, UErrorCode *status);
  *         expansion sequence
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 ucol_getMaxExpansion(const UCollationElements *elems, int32_t order);
 
 /**
@@ -30964,6 +32446,11 @@ ucol_getMaxExpansion(const UCollationElements *elems, int32_t order);
  * Property settings for collation will remain the same.
  * In order to reset the iterator to the current collation property settings,
  * the API reset() has to be called.
+ *
+ * The UCollationElements retains a pointer to the supplied text.
+ * The caller must not modify or delete the text while the UCollationElements
+ * object is used to iterate over this text.
+ *
  * @param elems The UCollationElements to set.
  * @param text The source text containing the collation elements.
  * @param textLength The length of text, or -1 if null-terminated.
@@ -30971,8 +32458,8 @@ ucol_getMaxExpansion(const UCollationElements *elems, int32_t order);
  * @see ucol_getText
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
-ucol_setText(      UCollationElements *elems, 
+U_CAPI void U_EXPORT2 
+ucol_setText(      UCollationElements *elems,
              const UChar              *text,
                    int32_t            textLength,
                    UErrorCode         *status);
@@ -30986,7 +32473,7 @@ ucol_setText(      UCollationElements *elems,
  * @see ucol_setOffset
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 ucol_getOffset(const UCollationElements *elems);
 
 /**
@@ -31001,9 +32488,9 @@ ucol_getOffset(const UCollationElements *elems);
  * @see ucol_getOffset
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 ucol_setOffset(UCollationElements *elems,
-               int32_t        offset,
+               int32_t             offset,
                UErrorCode         *status);
 
 /**
@@ -31012,7 +32499,7 @@ ucol_setOffset(UCollationElements *elems,
 * @return the primary order of a collation order.
 * @stable ICU 2.6
 */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucol_primaryOrder (int32_t order); 
 
 /**
@@ -31021,7 +32508,7 @@ ucol_primaryOrder (int32_t order);
 * @return the secondary order of a collation order.
 * @stable ICU 2.6
 */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucol_secondaryOrder (int32_t order); 
 
 /**
@@ -31030,7 +32517,7 @@ ucol_secondaryOrder (int32_t order);
 * @return the tertiary order of a collation order.
 * @stable ICU 2.6
 */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucol_tertiaryOrder (int32_t order); 
 
 #endif /* #if !UCONFIG_NO_COLLATION */
@@ -31063,6 +32550,7 @@ ucol_tertiaryOrder (int32_t order);
 
 
 #if !UCONFIG_NO_CONVERSION
+
 
 
 /**
@@ -31112,7 +32600,7 @@ typedef struct UCharsetMatch UCharsetMatch;
   *  @return the newly opened charset detector.
   *  @stable ICU 3.6
   */
-U_STABLE UCharsetDetector * U_EXPORT2
+U_CAPI UCharsetDetector * U_EXPORT2
 ucsdet_open(UErrorCode   *status);
 
 /**
@@ -31124,7 +32612,7 @@ ucsdet_open(UErrorCode   *status);
   *  @param ucsd  The charset detector to be closed.
   *  @stable ICU 3.6
   */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucsdet_close(UCharsetDetector *ucsd);
 
 
@@ -31143,7 +32631,7 @@ ucsdet_close(UCharsetDetector *ucsd);
   *
   * @stable ICU 3.6
   */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucsdet_setText(UCharsetDetector *ucsd, const char *textIn, int32_t len, UErrorCode *status);
 
 
@@ -31165,7 +32653,7 @@ ucsdet_setText(UCharsetDetector *ucsd, const char *textIn, int32_t len, UErrorCo
  *
  * @stable ICU 3.6
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ucsdet_setDeclaredEncoding(UCharsetDetector *ucsd, const char *encoding, int32_t length, UErrorCode *status);
 
 
@@ -31194,7 +32682,7 @@ ucsdet_setDeclaredEncoding(UCharsetDetector *ucsd, const char *encoding, int32_t
  *
  * @stable ICU 3.6
  */
-U_STABLE const UCharsetMatch * U_EXPORT2
+U_CAPI const UCharsetMatch * U_EXPORT2
 ucsdet_detect(UCharsetDetector *ucsd, UErrorCode *status);
     
 
@@ -31228,7 +32716,7 @@ ucsdet_detect(UCharsetDetector *ucsd, UErrorCode *status);
  *                      the detector is closed or modified.
  * @stable ICU 3.6
  */
-U_STABLE const UCharsetMatch ** U_EXPORT2
+U_CAPI const UCharsetMatch ** U_EXPORT2
 ucsdet_detectAll(UCharsetDetector *ucsd, int32_t *matchesFound, UErrorCode *status);
 
 
@@ -31248,7 +32736,7 @@ ucsdet_detectAll(UCharsetDetector *ucsd, int32_t *matchesFound, UErrorCode *stat
  *
  *  @stable ICU 3.6
  */
-U_STABLE const char * U_EXPORT2
+U_CAPI const char * U_EXPORT2
 ucsdet_getName(const UCharsetMatch *ucsm, UErrorCode *status);
 
 /**
@@ -31274,7 +32762,7 @@ ucsdet_getName(const UCharsetMatch *ucsm, UErrorCode *status);
  *
  *  @stable ICU 3.6
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ucsdet_getConfidence(const UCharsetMatch *ucsm, UErrorCode *status);
 
 /**
@@ -31306,7 +32794,7 @@ ucsdet_getConfidence(const UCharsetMatch *ucsm, UErrorCode *status);
  *
  *  @stable ICU 3.6
  */
-U_STABLE const char * U_EXPORT2
+U_CAPI const char * U_EXPORT2
 ucsdet_getLanguage(const UCharsetMatch *ucsm, UErrorCode *status);
 
 
@@ -31332,7 +32820,7 @@ ucsdet_getLanguage(const UCharsetMatch *ucsm, UErrorCode *status);
   *
   * @stable ICU 3.6
   */
-U_STABLE  int32_t U_EXPORT2
+U_CAPI  int32_t U_EXPORT2
 ucsdet_getUChars(const UCharsetMatch *ucsm,
                  UChar *buf, int32_t cap, UErrorCode *status);
 
@@ -31366,7 +32854,7 @@ ucsdet_getUChars(const UCharsetMatch *ucsm,
   *  @return an iterator providing access to the detectable charset names.
   *  @stable ICU 3.6
   */
-U_STABLE  UEnumeration * U_EXPORT2
+U_CAPI  UEnumeration * U_EXPORT2
 ucsdet_getAllDetectableCharsets(const UCharsetDetector *ucsd,  UErrorCode *status);
 
 /**
@@ -31376,11 +32864,11 @@ ucsdet_getAllDetectableCharsets(const UCharsetDetector *ucsd,  UErrorCode *statu
   *  heuristics.
   *
   *  @param ucsd  The charset detector to check.
-  *  @return TRUE if filtering is enabled.
+  *  @return true if filtering is enabled.
   *  @stable ICU 3.6
   */
 
-U_STABLE  UBool U_EXPORT2
+U_CAPI  UBool U_EXPORT2
 ucsdet_isInputFilterEnabled(const UCharsetDetector *ucsd);
 
 
@@ -31395,7 +32883,7 @@ ucsdet_isInputFilterEnabled(const UCharsetDetector *ucsd);
  *
  * @stable ICU 3.6
  */
-U_STABLE  UBool U_EXPORT2
+U_CAPI  UBool U_EXPORT2
 ucsdet_enableInputFilter(UCharsetDetector *ucsd, UBool filter);
 
 
@@ -31403,630 +32891,6 @@ ucsdet_enableInputFilter(UCharsetDetector *ucsd, UBool filter);
 #endif   /* __UCSDET_H */
 
 
-
-// udatpg.h
-// Copyright (C) 2016 and later: Unicode, Inc. and others.
-// License & terms of use: http://www.unicode.org/copyright.html
-/*
-*******************************************************************************
-*
-*   Copyright (C) 2007-2015, International Business Machines
-*   Corporation and others.  All Rights Reserved.
-*
-*******************************************************************************
-*   file name:  udatpg.h
-*   encoding:   UTF-8
-*   tab size:   8 (not used)
-*   indentation:4
-*
-*   created on: 2007jul30
-*   created by: Markus W. Scherer
-*/
-
-#ifndef __UDATPG_H__
-#define __UDATPG_H__
-
-
-/**
- * \file
- * \brief C API: Wrapper for icu::DateTimePatternGenerator (unicode/dtptngen.h).
- *
- * UDateTimePatternGenerator provides flexible generation of date format patterns, 
- * like "yy-MM-dd". The user can build up the generator by adding successive 
- * patterns. Once that is done, a query can be made using a "skeleton", which is 
- * a pattern which just includes the desired fields and lengths. The generator 
- * will return the "best fit" pattern corresponding to that skeleton.
- * <p>The main method people will use is udatpg_getBestPattern, since normally
- * UDateTimePatternGenerator is pre-built with data from a particular locale. 
- * However, generators can be built directly from other data as well.
- * <p><i>Issue: may be useful to also have a function that returns the list of 
- * fields in a pattern, in order, since we have that internally.
- * That would be useful for getting the UI order of field elements.</i>
- */
-
-/**
- * Opaque type for a date/time pattern generator object.
- * @stable ICU 3.8
- */
-typedef void *UDateTimePatternGenerator;
-
-/**
- * Field number constants for udatpg_getAppendItemFormats() and similar functions.
- * These constants are separate from UDateFormatField despite semantic overlap
- * because some fields are merged for the date/time pattern generator.
- * @stable ICU 3.8
- */
-typedef enum UDateTimePatternField {
-    /** @stable ICU 3.8 */
-    UDATPG_ERA_FIELD,
-    /** @stable ICU 3.8 */
-    UDATPG_YEAR_FIELD,
-    /** @stable ICU 3.8 */
-    UDATPG_QUARTER_FIELD,
-    /** @stable ICU 3.8 */
-    UDATPG_MONTH_FIELD,
-    /** @stable ICU 3.8 */
-    UDATPG_WEEK_OF_YEAR_FIELD,
-    /** @stable ICU 3.8 */
-    UDATPG_WEEK_OF_MONTH_FIELD,
-    /** @stable ICU 3.8 */
-    UDATPG_WEEKDAY_FIELD,
-    /** @stable ICU 3.8 */
-    UDATPG_DAY_OF_YEAR_FIELD,
-    /** @stable ICU 3.8 */
-    UDATPG_DAY_OF_WEEK_IN_MONTH_FIELD,
-    /** @stable ICU 3.8 */
-    UDATPG_DAY_FIELD,
-    /** @stable ICU 3.8 */
-    UDATPG_DAYPERIOD_FIELD,
-    /** @stable ICU 3.8 */
-    UDATPG_HOUR_FIELD,
-    /** @stable ICU 3.8 */
-    UDATPG_MINUTE_FIELD,
-    /** @stable ICU 3.8 */
-    UDATPG_SECOND_FIELD,
-    /** @stable ICU 3.8 */
-    UDATPG_FRACTIONAL_SECOND_FIELD,
-    /** @stable ICU 3.8 */
-    UDATPG_ZONE_FIELD,
-
-    /* Do not conditionalize the following with #ifndef U_HIDE_DEPRECATED_API,
-     * it is needed for layout of DateTimePatternGenerator object. */
-    /**
-     * One more than the highest normal UDateTimePatternField value.
-     * @deprecated ICU 58 The numeric value may change over time, see ICU ticket #12420.
-     */
-    UDATPG_FIELD_COUNT
-} UDateTimePatternField;
-
-#if (NTDDI_VERSION >= NTDDI_WIN10_VB)
-/**
- * Field display name width constants for udatpg_getFieldDisplayName().
- * @stable ICU 61
- */
-typedef enum UDateTimePGDisplayWidth {
-    /** @stable ICU 61 */
-    UDATPG_WIDE,
-    /** @stable ICU 61 */
-    UDATPG_ABBREVIATED,
-    /** @stable ICU 61 */
-    UDATPG_NARROW
-} UDateTimePGDisplayWidth;
-#endif // (NTDDI_VERSION >= NTDDI_WIN10_VB)
-
-/**
- * Masks to control forcing the length of specified fields in the returned
- * pattern to match those in the skeleton (when this would not happen
- * otherwise). These may be combined to force the length of multiple fields.
- * Used with udatpg_getBestPatternWithOptions, udatpg_replaceFieldTypesWithOptions.
- * @stable ICU 4.4
- */
-typedef enum UDateTimePatternMatchOptions {
-    /** @stable ICU 4.4 */
-    UDATPG_MATCH_NO_OPTIONS = 0,
-    /** @stable ICU 4.4 */
-    UDATPG_MATCH_HOUR_FIELD_LENGTH = 1 << UDATPG_HOUR_FIELD,
-    /** @stable ICU 4.4 */
-    UDATPG_MATCH_ALL_FIELDS_LENGTH = (1 << UDATPG_FIELD_COUNT) - 1
-} UDateTimePatternMatchOptions;
-
-/**
- * Status return values from udatpg_addPattern().
- * @stable ICU 3.8
- */
-typedef enum UDateTimePatternConflict {
-    /** @stable ICU 3.8 */
-    UDATPG_NO_CONFLICT,
-    /** @stable ICU 3.8 */
-    UDATPG_BASE_CONFLICT,
-    /** @stable ICU 3.8 */
-    UDATPG_CONFLICT,
-} UDateTimePatternConflict;
-
-/**
-  * Open a generator according to a given locale.
-  * @param locale
-  * @param pErrorCode a pointer to the UErrorCode which must not indicate a
-  *                   failure before the function call.
-  * @return a pointer to UDateTimePatternGenerator.
-  * @stable ICU 3.8
-  */
-U_STABLE UDateTimePatternGenerator * U_EXPORT2
-udatpg_open(const char *locale, UErrorCode *pErrorCode);
-
-/**
-  * Open an empty generator, to be constructed with udatpg_addPattern(...) etc.
-  * @param pErrorCode a pointer to the UErrorCode which must not indicate a
-  *                   failure before the function call.
-  * @return a pointer to UDateTimePatternGenerator.
-  * @stable ICU 3.8
-  */
-U_STABLE UDateTimePatternGenerator * U_EXPORT2
-udatpg_openEmpty(UErrorCode *pErrorCode);
-
-/**
-  * Close a generator.
-  * @param dtpg a pointer to UDateTimePatternGenerator.
-  * @stable ICU 3.8
-  */
-U_STABLE void U_EXPORT2
-udatpg_close(UDateTimePatternGenerator *dtpg);
-
-
-/**
-  * Create a copy pf a generator.
-  * @param dtpg a pointer to UDateTimePatternGenerator to be copied.
-  * @param pErrorCode a pointer to the UErrorCode which must not indicate a
-  *                   failure before the function call.
-  * @return a pointer to a new UDateTimePatternGenerator.
-  * @stable ICU 3.8
- */
-U_STABLE UDateTimePatternGenerator * U_EXPORT2
-udatpg_clone(const UDateTimePatternGenerator *dtpg, UErrorCode *pErrorCode);
-
-/**
- * Get the best pattern matching the input skeleton. It is guaranteed to
- * have all of the fields in the skeleton.
- * 
- * Note that this function uses a non-const UDateTimePatternGenerator:
- * It uses a stateful pattern parser which is set up for each generator object,
- * rather than creating one for each function call.
- * Consecutive calls to this function do not affect each other,
- * but this function cannot be used concurrently on a single generator object.
- * 
- * @param dtpg a pointer to UDateTimePatternGenerator.
- * @param skeleton
- *            The skeleton is a pattern containing only the variable fields.
- *            For example, "MMMdd" and "mmhh" are skeletons.
- * @param length the length of skeleton
- * @param bestPattern
- *            The best pattern found from the given skeleton.
- * @param capacity the capacity of bestPattern.
- * @param pErrorCode a pointer to the UErrorCode which must not indicate a
- *                   failure before the function call.
- * @return the length of bestPattern.
- * @stable ICU 3.8
- */
-U_STABLE int32_t U_EXPORT2
-udatpg_getBestPattern(UDateTimePatternGenerator *dtpg,
-                      const UChar *skeleton, int32_t length,
-                      UChar *bestPattern, int32_t capacity,
-                      UErrorCode *pErrorCode);
-
-/**
- * Get the best pattern matching the input skeleton. It is guaranteed to
- * have all of the fields in the skeleton.
- * 
- * Note that this function uses a non-const UDateTimePatternGenerator:
- * It uses a stateful pattern parser which is set up for each generator object,
- * rather than creating one for each function call.
- * Consecutive calls to this function do not affect each other,
- * but this function cannot be used concurrently on a single generator object.
- * 
- * @param dtpg a pointer to UDateTimePatternGenerator.
- * @param skeleton
- *            The skeleton is a pattern containing only the variable fields.
- *            For example, "MMMdd" and "mmhh" are skeletons.
- * @param length the length of skeleton
- * @param options
- *            Options for forcing the length of specified fields in the
- *            returned pattern to match those in the skeleton (when this
- *            would not happen otherwise). For default behavior, use
- *            UDATPG_MATCH_NO_OPTIONS.
- * @param bestPattern
- *            The best pattern found from the given skeleton.
- * @param capacity
- *            the capacity of bestPattern.
- * @param pErrorCode
- *            a pointer to the UErrorCode which must not indicate a
- *            failure before the function call.
- * @return the length of bestPattern.
- * @stable ICU 4.4
- */
-U_STABLE int32_t U_EXPORT2
-udatpg_getBestPatternWithOptions(UDateTimePatternGenerator *dtpg,
-                                 const UChar *skeleton, int32_t length,
-                                 UDateTimePatternMatchOptions options,
-                                 UChar *bestPattern, int32_t capacity,
-                                 UErrorCode *pErrorCode);
-
-/**
-  * Get a unique skeleton from a given pattern. For example,
-  * both "MMM-dd" and "dd/MMM" produce the skeleton "MMMdd".
-  * 
-  * Note that this function uses a non-const UDateTimePatternGenerator:
-  * It uses a stateful pattern parser which is set up for each generator object,
-  * rather than creating one for each function call.
-  * Consecutive calls to this function do not affect each other,
-  * but this function cannot be used concurrently on a single generator object.
-  *
-  * @param unusedDtpg     a pointer to UDateTimePatternGenerator.
-  *    This parameter is no longer used. Callers may pass NULL.
-  * @param pattern  input pattern, such as "dd/MMM".
-  * @param length   the length of pattern.
-  * @param skeleton such as "MMMdd"
-  * @param capacity the capacity of skeleton.
-  * @param pErrorCode a pointer to the UErrorCode which must not indicate a
-  *                  failure before the function call.
-  * @return the length of skeleton.
-  * @stable ICU 3.8
-  */
-U_STABLE int32_t U_EXPORT2
-udatpg_getSkeleton(UDateTimePatternGenerator *unusedDtpg,
-                   const UChar *pattern, int32_t length,
-                   UChar *skeleton, int32_t capacity,
-                   UErrorCode *pErrorCode);
-
-/**
- * Get a unique base skeleton from a given pattern. This is the same
- * as the skeleton, except that differences in length are minimized so
- * as to only preserve the difference between string and numeric form. So
- * for example, both "MMM-dd" and "d/MMM" produce the skeleton "MMMd"
- * (notice the single d).
- *
- * Note that this function uses a non-const UDateTimePatternGenerator:
- * It uses a stateful pattern parser which is set up for each generator object,
- * rather than creating one for each function call.
- * Consecutive calls to this function do not affect each other,
- * but this function cannot be used concurrently on a single generator object.
- *
- * @param unusedDtpg     a pointer to UDateTimePatternGenerator.
- *    This parameter is no longer used. Callers may pass NULL.
- * @param pattern  input pattern, such as "dd/MMM".
- * @param length   the length of pattern.
- * @param baseSkeleton such as "Md"
- * @param capacity the capacity of base skeleton.
- * @param pErrorCode a pointer to the UErrorCode which must not indicate a
- *                  failure before the function call.
- * @return the length of baseSkeleton.
- * @stable ICU 3.8
- */
-U_STABLE int32_t U_EXPORT2
-udatpg_getBaseSkeleton(UDateTimePatternGenerator *unusedDtpg,
-                       const UChar *pattern, int32_t length,
-                       UChar *baseSkeleton, int32_t capacity,
-                       UErrorCode *pErrorCode);
-
-/**
- * Adds a pattern to the generator. If the pattern has the same skeleton as
- * an existing pattern, and the override parameter is set, then the previous
- * value is overriden. Otherwise, the previous value is retained. In either
- * case, the conflicting status is set and previous vale is stored in 
- * conflicting pattern.
- * <p>
- * Note that single-field patterns (like "MMM") are automatically added, and
- * don't need to be added explicitly!
- *
- * @param dtpg     a pointer to UDateTimePatternGenerator.
- * @param pattern  input pattern, such as "dd/MMM"
- * @param patternLength the length of pattern.
- * @param override  When existing values are to be overridden use true, 
- *                  otherwise use false.
- * @param conflictingPattern  Previous pattern with the same skeleton.
- * @param capacity the capacity of conflictingPattern.
- * @param pLength a pointer to the length of conflictingPattern.
- * @param pErrorCode a pointer to the UErrorCode which must not indicate a
- *                  failure before the function call.
- * @return conflicting status. The value could be UDATPG_NO_CONFLICT, 
- *                  UDATPG_BASE_CONFLICT or UDATPG_CONFLICT.
- * @stable ICU 3.8
- */
-U_STABLE UDateTimePatternConflict U_EXPORT2
-udatpg_addPattern(UDateTimePatternGenerator *dtpg,
-                  const UChar *pattern, int32_t patternLength,
-                  UBool override,
-                  UChar *conflictingPattern, int32_t capacity, int32_t *pLength,
-                  UErrorCode *pErrorCode);
-
-/**
-  * An AppendItem format is a pattern used to append a field if there is no
-  * good match. For example, suppose that the input skeleton is "GyyyyMMMd",
-  * and there is no matching pattern internally, but there is a pattern
-  * matching "yyyyMMMd", say "d-MM-yyyy". Then that pattern is used, plus the
-  * G. The way these two are conjoined is by using the AppendItemFormat for G
-  * (era). So if that value is, say "{0}, {1}" then the final resulting
-  * pattern is "d-MM-yyyy, G".
-  * <p>
-  * There are actually three available variables: {0} is the pattern so far,
-  * {1} is the element we are adding, and {2} is the name of the element.
-  * <p>
-  * This reflects the way that the CLDR data is organized.
-  *
-  * @param dtpg   a pointer to UDateTimePatternGenerator.
-  * @param field  UDateTimePatternField, such as UDATPG_ERA_FIELD
-  * @param value  pattern, such as "{0}, {1}"
-  * @param length the length of value.
-  * @stable ICU 3.8
-  */
-U_STABLE void U_EXPORT2
-udatpg_setAppendItemFormat(UDateTimePatternGenerator *dtpg,
-                           UDateTimePatternField field,
-                           const UChar *value, int32_t length);
-
-/**
- * Getter corresponding to setAppendItemFormat. Values below 0 or at or
- * above UDATPG_FIELD_COUNT are illegal arguments.
- *
- * @param dtpg   A pointer to UDateTimePatternGenerator.
- * @param field  UDateTimePatternField, such as UDATPG_ERA_FIELD
- * @param pLength A pointer that will receive the length of appendItemFormat.
- * @return appendItemFormat for field.
- * @stable ICU 3.8
- */
-U_STABLE const UChar * U_EXPORT2
-udatpg_getAppendItemFormat(const UDateTimePatternGenerator *dtpg,
-                           UDateTimePatternField field,
-                           int32_t *pLength);
-
-/**
-   * Set the name of field, eg "era" in English for ERA. These are only
-   * used if the corresponding AppendItemFormat is used, and if it contains a
-   * {2} variable.
-   * <p>
-   * This reflects the way that the CLDR data is organized.
-   *
-   * @param dtpg   a pointer to UDateTimePatternGenerator.
-   * @param field  UDateTimePatternField
-   * @param value  name for the field.
-   * @param length the length of value.
-   * @stable ICU 3.8
-   */
-U_STABLE void U_EXPORT2
-udatpg_setAppendItemName(UDateTimePatternGenerator *dtpg,
-                         UDateTimePatternField field,
-                         const UChar *value, int32_t length);
-
-/**
- * Getter corresponding to setAppendItemNames. Values below 0 or at or above
- * UDATPG_FIELD_COUNT are illegal arguments. Note: The more general function
- * for getting date/time field display names is udatpg_getFieldDisplayName.
- *
- * @param dtpg   a pointer to UDateTimePatternGenerator.
- * @param field  UDateTimePatternField, such as UDATPG_ERA_FIELD
- * @param pLength A pointer that will receive the length of the name for field.
- * @return name for field
- * @see udatpg_getFieldDisplayName
- * @stable ICU 3.8
- */
-U_STABLE const UChar * U_EXPORT2
-udatpg_getAppendItemName(const UDateTimePatternGenerator *dtpg,
-                         UDateTimePatternField field,
-                         int32_t *pLength);
-
-#if (NTDDI_VERSION >= NTDDI_WIN10_VB)
-/**
- * The general interface to get a display name for a particular date/time field,
- * in one of several possible display widths.
- *
- * @param dtpg
- *          A pointer to the UDateTimePatternGenerator object with the localized
- *          display names.
- * @param field
- *          The desired UDateTimePatternField, such as UDATPG_ERA_FIELD.
- * @param width
- *          The desired UDateTimePGDisplayWidth, such as UDATPG_ABBREVIATED.
- * @param fieldName
- *          A pointer to a buffer to receive the NULL-terminated display name. If the name
- *          fits into fieldName but cannot be  NULL-terminated (length == capacity) then
- *          the error code is set to U_STRING_NOT_TERMINATED_WARNING. If the name doesn't
- *          fit into fieldName then the error code is set to U_BUFFER_OVERFLOW_ERROR.
- * @param capacity
- *          The size of fieldName (in UChars).
- * @param pErrorCode
- *          A pointer to a UErrorCode to receive any errors
- * @return
- *         The full length of the name; if greater than capacity, fieldName contains a
- *         truncated result.
- * @stable ICU 61
- */
-U_STABLE int32_t U_EXPORT2
-udatpg_getFieldDisplayName(const UDateTimePatternGenerator *dtpg,
-                           UDateTimePatternField field,
-                           UDateTimePGDisplayWidth width,
-                           UChar *fieldName, int32_t capacity,
-                           UErrorCode *pErrorCode);
-#endif // (NTDDI_VERSION >= NTDDI_WIN10_VB)
-
-/**
- * The DateTimeFormat is a message format pattern used to compose date and
- * time patterns. The default pattern in the root locale is "{1} {0}", where
- * {1} will be replaced by the date pattern and {0} will be replaced by the
- * time pattern; however, other locales may specify patterns such as
- * "{1}, {0}" or "{1} 'at' {0}", etc.
- * <p>
- * This is used when the input skeleton contains both date and time fields,
- * but there is not a close match among the added patterns. For example,
- * suppose that this object was created by adding "dd-MMM" and "hh:mm", and
- * its DateTimeFormat is the default "{1} {0}". Then if the input skeleton
- * is "MMMdhmm", there is not an exact match, so the input skeleton is
- * broken up into two components "MMMd" and "hmm". There are close matches
- * for those two skeletons, so the result is put together with this pattern,
- * resulting in "d-MMM h:mm".
- *
- * @param dtpg a pointer to UDateTimePatternGenerator.
- * @param dtFormat
- *            message format pattern, here {1} will be replaced by the date
- *            pattern and {0} will be replaced by the time pattern.
- * @param length the length of dtFormat.
- * @stable ICU 3.8
- */
-U_STABLE void U_EXPORT2
-udatpg_setDateTimeFormat(const UDateTimePatternGenerator *dtpg,
-                         const UChar *dtFormat, int32_t length);
-
-/**
- * Getter corresponding to setDateTimeFormat.
- * @param dtpg   a pointer to UDateTimePatternGenerator.
- * @param pLength A pointer that will receive the length of the format
- * @return dateTimeFormat.
- * @stable ICU 3.8
- */
-U_STABLE const UChar * U_EXPORT2
-udatpg_getDateTimeFormat(const UDateTimePatternGenerator *dtpg,
-                         int32_t *pLength);
-
-/**
- * The decimal value is used in formatting fractions of seconds. If the
- * skeleton contains fractional seconds, then this is used with the
- * fractional seconds. For example, suppose that the input pattern is
- * "hhmmssSSSS", and the best matching pattern internally is "H:mm:ss", and
- * the decimal string is ",". Then the resulting pattern is modified to be
- * "H:mm:ss,SSSS"
- *
- * @param dtpg a pointer to UDateTimePatternGenerator.
- * @param decimal
- * @param length the length of decimal.
- * @stable ICU 3.8
- */
-U_STABLE void U_EXPORT2
-udatpg_setDecimal(UDateTimePatternGenerator *dtpg,
-                  const UChar *decimal, int32_t length);
-
-/**
- * Getter corresponding to setDecimal.
- * 
- * @param dtpg a pointer to UDateTimePatternGenerator.
- * @param pLength A pointer that will receive the length of the decimal string.
- * @return corresponding to the decimal point.
- * @stable ICU 3.8
- */
-U_STABLE const UChar * U_EXPORT2
-udatpg_getDecimal(const UDateTimePatternGenerator *dtpg,
-                  int32_t *pLength);
-
-/**
- * Adjusts the field types (width and subtype) of a pattern to match what is
- * in a skeleton. That is, if you supply a pattern like "d-M H:m", and a
- * skeleton of "MMMMddhhmm", then the input pattern is adjusted to be
- * "dd-MMMM hh:mm". This is used internally to get the best match for the
- * input skeleton, but can also be used externally.
- *
- * Note that this function uses a non-const UDateTimePatternGenerator:
- * It uses a stateful pattern parser which is set up for each generator object,
- * rather than creating one for each function call.
- * Consecutive calls to this function do not affect each other,
- * but this function cannot be used concurrently on a single generator object.
- *
- * @param dtpg a pointer to UDateTimePatternGenerator.
- * @param pattern Input pattern
- * @param patternLength the length of input pattern.
- * @param skeleton
- * @param skeletonLength the length of input skeleton.
- * @param dest  pattern adjusted to match the skeleton fields widths and subtypes.
- * @param destCapacity the capacity of dest.
- * @param pErrorCode a pointer to the UErrorCode which must not indicate a
- *                  failure before the function call.
- * @return the length of dest.
- * @stable ICU 3.8
- */
-U_STABLE int32_t U_EXPORT2
-udatpg_replaceFieldTypes(UDateTimePatternGenerator *dtpg,
-                         const UChar *pattern, int32_t patternLength,
-                         const UChar *skeleton, int32_t skeletonLength,
-                         UChar *dest, int32_t destCapacity,
-                         UErrorCode *pErrorCode);
-
-/**
- * Adjusts the field types (width and subtype) of a pattern to match what is
- * in a skeleton. That is, if you supply a pattern like "d-M H:m", and a
- * skeleton of "MMMMddhhmm", then the input pattern is adjusted to be
- * "dd-MMMM hh:mm". This is used internally to get the best match for the
- * input skeleton, but can also be used externally.
- *
- * Note that this function uses a non-const UDateTimePatternGenerator:
- * It uses a stateful pattern parser which is set up for each generator object,
- * rather than creating one for each function call.
- * Consecutive calls to this function do not affect each other,
- * but this function cannot be used concurrently on a single generator object.
- *
- * @param dtpg a pointer to UDateTimePatternGenerator.
- * @param pattern Input pattern
- * @param patternLength the length of input pattern.
- * @param skeleton
- * @param skeletonLength the length of input skeleton.
- * @param options
- *            Options controlling whether the length of specified fields in the
- *            pattern are adjusted to match those in the skeleton (when this
- *            would not happen otherwise). For default behavior, use
- *            UDATPG_MATCH_NO_OPTIONS.
- * @param dest  pattern adjusted to match the skeleton fields widths and subtypes.
- * @param destCapacity the capacity of dest.
- * @param pErrorCode a pointer to the UErrorCode which must not indicate a
- *                  failure before the function call.
- * @return the length of dest.
- * @stable ICU 4.4
- */
-U_STABLE int32_t U_EXPORT2
-udatpg_replaceFieldTypesWithOptions(UDateTimePatternGenerator *dtpg,
-                                    const UChar *pattern, int32_t patternLength,
-                                    const UChar *skeleton, int32_t skeletonLength,
-                                    UDateTimePatternMatchOptions options,
-                                    UChar *dest, int32_t destCapacity,
-                                    UErrorCode *pErrorCode);
-
-/**
- * Return a UEnumeration list of all the skeletons in canonical form.
- * Call udatpg_getPatternForSkeleton() to get the corresponding pattern.
- * 
- * @param dtpg a pointer to UDateTimePatternGenerator.
- * @param pErrorCode a pointer to the UErrorCode which must not indicate a
- *                  failure before the function call
- * @return a UEnumeration list of all the skeletons
- *         The caller must close the object.
- * @stable ICU 3.8
- */
-U_STABLE UEnumeration * U_EXPORT2
-udatpg_openSkeletons(const UDateTimePatternGenerator *dtpg, UErrorCode *pErrorCode);
-
-/**
- * Return a UEnumeration list of all the base skeletons in canonical form.
- *
- * @param dtpg a pointer to UDateTimePatternGenerator.
- * @param pErrorCode a pointer to the UErrorCode which must not indicate a
- *             failure before the function call.
- * @return a UEnumeration list of all the base skeletons
- *             The caller must close the object.
- * @stable ICU 3.8
- */
-U_STABLE UEnumeration * U_EXPORT2
-udatpg_openBaseSkeletons(const UDateTimePatternGenerator *dtpg, UErrorCode *pErrorCode);
-
-/**
- * Get the pattern corresponding to a given skeleton.
- * 
- * @param dtpg a pointer to UDateTimePatternGenerator.
- * @param skeleton 
- * @param skeletonLength pointer to the length of skeleton.
- * @param pLength pointer to the length of return pattern.
- * @return pattern corresponding to a given skeleton.
- * @stable ICU 3.8
- */
-U_STABLE const UChar * U_EXPORT2
-udatpg_getPatternForSkeleton(const UDateTimePatternGenerator *dtpg,
-                             const UChar *skeleton, int32_t skeletonLength,
-                             int32_t *pLength);
-
-#endif
 
 // ufieldpositer.h
 // Copyright (C) 2016 and later: Unicode, Inc. and others.
@@ -32081,7 +32945,7 @@ typedef struct UFieldPositionIterator UFieldPositionIterator;  /**< C typedef fo
  *          or NULL if an error occurred.
  * @stable ICU 55
  */
-U_STABLE UFieldPositionIterator* U_EXPORT2
+U_CAPI UFieldPositionIterator* U_EXPORT2
 ufieldpositer_open(UErrorCode* status);
 
 /**
@@ -32090,7 +32954,7 @@ ufieldpositer_open(UErrorCode* status);
  *          A pointer to the UFieldPositionIterator object to close.
  * @stable ICU 55
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ufieldpositer_close(UFieldPositionIterator *fpositer);
 
 
@@ -32123,7 +32987,7 @@ ufieldpositer_close(UFieldPositionIterator *fpositer);
  *
  * @stable ICU 55
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ufieldpositer_next(UFieldPositionIterator *fpositer,
                    int32_t *beginIndex, int32_t *endIndex);
 
@@ -32204,7 +33068,7 @@ typedef void *UFormattable;
  * @see ufmt_close
  * @see icu::Formattable::Formattable()
  */
-U_STABLE UFormattable* U_EXPORT2
+U_CAPI UFormattable* U_EXPORT2
 ufmt_open(UErrorCode* status);
 
 /**
@@ -32213,7 +33077,7 @@ ufmt_open(UErrorCode* status);
  * @stable ICU 52
  * @see ufmt_open
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ufmt_close(UFormattable* fmt);
 
 
@@ -32227,7 +33091,7 @@ ufmt_close(UFormattable* fmt);
  * @see icu::Formattable::getType() const
  * @stable ICU 52
  */
-U_STABLE UFormattableType U_EXPORT2
+U_CAPI UFormattableType U_EXPORT2
 ufmt_getType(const UFormattable* fmt, UErrorCode *status);
 
 /**
@@ -32238,7 +33102,7 @@ ufmt_getType(const UFormattable* fmt, UErrorCode *status);
  * @see icu::Formattable::isNumeric() const
  * @stable ICU 52
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 ufmt_isNumeric(const UFormattable* fmt);
 
 /**
@@ -32251,7 +33115,7 @@ ufmt_isNumeric(const UFormattable* fmt);
  * @stable ICU 52
  * @see icu::Formattable::getDate(UErrorCode&) const
  */
-U_STABLE UDate U_EXPORT2
+U_CAPI UDate U_EXPORT2
 ufmt_getDate(const UFormattable* fmt, UErrorCode *status);
 
 /**
@@ -32269,7 +33133,7 @@ ufmt_getDate(const UFormattable* fmt, UErrorCode *status);
  * @stable ICU 52
  * @see icu::Formattable::getDouble(UErrorCode&) const
  */
-U_STABLE double U_EXPORT2
+U_CAPI double U_EXPORT2
 ufmt_getDouble(UFormattable* fmt, UErrorCode *status);
 
 /**
@@ -32290,7 +33154,7 @@ ufmt_getDouble(UFormattable* fmt, UErrorCode *status);
  * @stable ICU 52
  * @see icu::Formattable::getLong(UErrorCode&) const
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ufmt_getLong(UFormattable* fmt, UErrorCode *status);
 
 
@@ -32311,7 +33175,7 @@ ufmt_getLong(UFormattable* fmt, UErrorCode *status);
  * @stable ICU 52
  * @see icu::Formattable::getInt64(UErrorCode&) const
  */
-U_STABLE int64_t U_EXPORT2
+U_CAPI int64_t U_EXPORT2
 ufmt_getInt64(UFormattable* fmt, UErrorCode *status);
 
 /**
@@ -32324,7 +33188,7 @@ ufmt_getInt64(UFormattable* fmt, UErrorCode *status);
  * @stable ICU 52
  * @see icu::Formattable::getObject() const
  */
-U_STABLE const void *U_EXPORT2
+U_CAPI const void *U_EXPORT2
 ufmt_getObject(const UFormattable* fmt, UErrorCode *status);
 
 /**
@@ -32339,7 +33203,7 @@ ufmt_getObject(const UFormattable* fmt, UErrorCode *status);
  * @stable ICU 52
  * @see icu::Formattable::getString(UnicodeString&)const
  */
-U_STABLE const UChar* U_EXPORT2
+U_CAPI const UChar* U_EXPORT2
 ufmt_getUChars(UFormattable* fmt, int32_t *len, UErrorCode *status);
 
 /**
@@ -32350,7 +33214,7 @@ ufmt_getUChars(UFormattable* fmt, int32_t *len, UErrorCode *status);
  * @stable ICU 52
  * @see ufmt_getArrayItemByIndex
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ufmt_getArrayLength(const UFormattable* fmt, UErrorCode *status);
 
 /**
@@ -32362,7 +33226,7 @@ ufmt_getArrayLength(const UFormattable* fmt, UErrorCode *status);
  * @stable ICU 52
  * @see icu::Formattable::getArray(int32_t&, UErrorCode&) const
  */
-U_STABLE UFormattable * U_EXPORT2
+U_CAPI UFormattable * U_EXPORT2
 ufmt_getArrayItemByIndex(UFormattable* fmt, int32_t n, UErrorCode *status);
 
 /**
@@ -32387,15 +33251,427 @@ ufmt_getArrayItemByIndex(UFormattable* fmt, int32_t n, UErrorCode *status);
  * @stable ICU 52
  * @see icu::Formattable::getDecimalNumber(UErrorCode&)
  */
-U_STABLE const char * U_EXPORT2
+U_CAPI const char * U_EXPORT2
 ufmt_getDecNumChars(UFormattable *fmt, int32_t *len, UErrorCode *status);
 
 #endif
 
 #endif
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+
 // uformattedvalue.h
-// No supported content
+// Copyright (C) 2018 and later: Unicode, Inc. and others.
+// License & terms of use: http://www.unicode.org/copyright.html
+
+#ifndef __UFORMATTEDVALUE_H__
+#define __UFORMATTEDVALUE_H__
+
+#if !UCONFIG_NO_FORMATTING
+
+
+/**
+ * \file
+ * \brief C API: Abstract operations for localized strings.
+ * 
+ * This file contains declarations for classes that deal with formatted strings. A number
+ * of APIs throughout ICU use these classes for expressing their localized output.
+ */
+
+
+/**
+ * All possible field categories in ICU. Every entry in this enum corresponds
+ * to another enum that exists in ICU.
+ * 
+ * In the APIs that take a UFieldCategory, an int32_t type is used. Field
+ * categories having any of the top four bits turned on are reserved as
+ * private-use for external APIs implementing FormattedValue. This means that
+ * categories 2^28 and higher or below zero (with the highest bit turned on)
+ * are private-use and will not be used by ICU in the future.
+ *
+ * @stable ICU 64
+ */
+typedef enum UFieldCategory {
+    /**
+     * For an undefined field category.
+     * 
+     * @stable ICU 64
+     */
+    UFIELD_CATEGORY_UNDEFINED = 0,
+
+    /**
+     * For fields in UDateFormatField (udat.h), from ICU 3.0.
+     *
+     * @stable ICU 64
+     */
+    UFIELD_CATEGORY_DATE,
+
+    /**
+     * For fields in UNumberFormatFields (unum.h), from ICU 49.
+     *
+     * @stable ICU 64
+     */
+    UFIELD_CATEGORY_NUMBER,
+
+    /**
+     * For fields in UListFormatterField (ulistformatter.h), from ICU 63.
+     *
+     * @stable ICU 64
+     */
+    UFIELD_CATEGORY_LIST,
+
+    /**
+     * For fields in URelativeDateTimeFormatterField (ureldatefmt.h), from ICU 64.
+     *
+     * @stable ICU 64
+     */
+    UFIELD_CATEGORY_RELATIVE_DATETIME,
+
+    /**
+     * Reserved for possible future fields in UDateIntervalFormatField.
+     *
+     * @internal
+     */
+    UFIELD_CATEGORY_DATE_INTERVAL,
+
+
+    /**
+     * Category for spans in a list.
+     *
+     * @stable ICU 64
+     */
+    UFIELD_CATEGORY_LIST_SPAN = 0x1000 + UFIELD_CATEGORY_LIST,
+
+    /**
+     * Category for spans in a date interval.
+     *
+     * @stable ICU 64
+     */
+    UFIELD_CATEGORY_DATE_INTERVAL_SPAN = 0x1000 + UFIELD_CATEGORY_DATE_INTERVAL,
+
+} UFieldCategory;
+
+
+struct UConstrainedFieldPosition;
+/**
+ * Represents a span of a string containing a given field.
+ *
+ * This struct differs from UFieldPosition in the following ways:
+ *
+ *   1. It has information on the field category.
+ *   2. It allows you to set constraints to use when iterating over field positions.
+ *   3. It is used for the newer FormattedValue APIs.
+ *
+ * @stable ICU 64
+ */
+typedef struct UConstrainedFieldPosition UConstrainedFieldPosition;
+
+
+/**
+ * Creates a new UConstrainedFieldPosition.
+ *
+ * By default, the UConstrainedFieldPosition has no iteration constraints.
+ *
+ * @param ec Set if an error occurs.
+ * @return The new object, or NULL if an error occurs.
+ * @stable ICU 64
+ */
+U_CAPI UConstrainedFieldPosition* U_EXPORT2
+ucfpos_open(UErrorCode* ec);
+
+
+/**
+ * Resets a UConstrainedFieldPosition to its initial state, as if it were newly created.
+ *
+ * Removes any constraints that may have been set on the instance.
+ *
+ * @param ucfpos The instance of UConstrainedFieldPosition.
+ * @param ec Set if an error occurs.
+ * @stable ICU 64
+ */
+U_CAPI void U_EXPORT2
+ucfpos_reset(
+    UConstrainedFieldPosition* ucfpos,
+    UErrorCode* ec);
+
+
+/**
+ * Destroys a UConstrainedFieldPosition and releases its memory.
+ *
+ * @param ucfpos The instance of UConstrainedFieldPosition.
+ * @stable ICU 64
+ */
+U_CAPI void U_EXPORT2
+ucfpos_close(UConstrainedFieldPosition* ucfpos);
+
+
+/**
+ * Sets a constraint on the field category.
+ * 
+ * When this instance of UConstrainedFieldPosition is passed to ufmtval_nextPosition,
+ * positions are skipped unless they have the given category.
+ *
+ * Any previously set constraints are cleared.
+ *
+ * For example, to loop over only the number-related fields:
+ *
+ *     UConstrainedFieldPosition* ucfpos = ucfpos_open(ec);
+ *     ucfpos_constrainCategory(ucfpos, UFIELDCATEGORY_NUMBER_FORMAT, ec);
+ *     while (ufmtval_nextPosition(ufmtval, ucfpos, ec)) {
+ *         // handle the number-related field position
+ *     }
+ *     ucfpos_close(ucfpos);
+ *
+ * Changing the constraint while in the middle of iterating over a FormattedValue
+ * does not generally have well-defined behavior.
+ *
+ * @param ucfpos The instance of UConstrainedFieldPosition.
+ * @param category The field category to fix when iterating.
+ * @param ec Set if an error occurs.
+ * @stable ICU 64
+ */
+U_CAPI void U_EXPORT2
+ucfpos_constrainCategory(
+    UConstrainedFieldPosition* ucfpos,
+    int32_t category,
+    UErrorCode* ec);
+
+
+/**
+ * Sets a constraint on the category and field.
+ * 
+ * When this instance of UConstrainedFieldPosition is passed to ufmtval_nextPosition,
+ * positions are skipped unless they have the given category and field.
+ *
+ * Any previously set constraints are cleared.
+ *
+ * For example, to loop over all grouping separators:
+ *
+ *     UConstrainedFieldPosition* ucfpos = ucfpos_open(ec);
+ *     ucfpos_constrainField(ucfpos, UFIELDCATEGORY_NUMBER_FORMAT, UNUM_GROUPING_SEPARATOR_FIELD, ec);
+ *     while (ufmtval_nextPosition(ufmtval, ucfpos, ec)) {
+ *         // handle the grouping separator position
+ *     }
+ *     ucfpos_close(ucfpos);
+ *
+ * Changing the constraint while in the middle of iterating over a FormattedValue
+ * does not generally have well-defined behavior.
+ *
+ * @param ucfpos The instance of UConstrainedFieldPosition.
+ * @param category The field category to fix when iterating.
+ * @param field The field to fix when iterating.
+ * @param ec Set if an error occurs.
+ * @stable ICU 64
+ */
+U_CAPI void U_EXPORT2
+ucfpos_constrainField(
+    UConstrainedFieldPosition* ucfpos,
+    int32_t category,
+    int32_t field,
+    UErrorCode* ec);
+
+
+/**
+ * Gets the field category for the current position.
+ *
+ * If a category or field constraint was set, this function returns the constrained
+ * category. Otherwise, the return value is well-defined only after
+ * ufmtval_nextPosition returns true.
+ *
+ * @param ucfpos The instance of UConstrainedFieldPosition.
+ * @param ec Set if an error occurs.
+ * @return The field category saved in the instance.
+ * @stable ICU 64
+ */
+U_CAPI int32_t U_EXPORT2
+ucfpos_getCategory(
+    const UConstrainedFieldPosition* ucfpos,
+    UErrorCode* ec);
+
+
+/**
+ * Gets the field for the current position.
+ *
+ * If a field constraint was set, this function returns the constrained
+ * field. Otherwise, the return value is well-defined only after
+ * ufmtval_nextPosition returns true.
+ *
+ * @param ucfpos The instance of UConstrainedFieldPosition.
+ * @param ec Set if an error occurs.
+ * @return The field saved in the instance.
+ * @stable ICU 64
+ */
+U_CAPI int32_t U_EXPORT2
+ucfpos_getField(
+    const UConstrainedFieldPosition* ucfpos,
+    UErrorCode* ec);
+
+
+/**
+ * Gets the INCLUSIVE start and EXCLUSIVE end index stored for the current position.
+ *
+ * The output values are well-defined only after ufmtval_nextPosition returns true.
+ *
+ * @param ucfpos The instance of UConstrainedFieldPosition.
+ * @param pStart Set to the start index saved in the instance. Ignored if nullptr.
+ * @param pLimit Set to the end index saved in the instance. Ignored if nullptr.
+ * @param ec Set if an error occurs.
+ * @stable ICU 64
+ */
+U_CAPI void U_EXPORT2
+ucfpos_getIndexes(
+    const UConstrainedFieldPosition* ucfpos,
+    int32_t* pStart,
+    int32_t* pLimit,
+    UErrorCode* ec);
+
+
+/**
+ * Gets an int64 that FormattedValue implementations may use for storage.
+ *
+ * The initial value is zero.
+ *
+ * Users of FormattedValue should not need to call this method.
+ *
+ * @param ucfpos The instance of UConstrainedFieldPosition.
+ * @param ec Set if an error occurs.
+ * @return The current iteration context from ucfpos_setInt64IterationContext.
+ * @stable ICU 64
+ */
+U_CAPI int64_t U_EXPORT2
+ucfpos_getInt64IterationContext(
+    const UConstrainedFieldPosition* ucfpos,
+    UErrorCode* ec);
+
+
+/**
+ * Sets an int64 that FormattedValue implementations may use for storage.
+ *
+ * Intended to be used by FormattedValue implementations.
+ *
+ * @param ucfpos The instance of UConstrainedFieldPosition.
+ * @param context The new iteration context.
+ * @param ec Set if an error occurs.
+ * @stable ICU 64
+ */
+U_CAPI void U_EXPORT2
+ucfpos_setInt64IterationContext(
+    UConstrainedFieldPosition* ucfpos,
+    int64_t context,
+    UErrorCode* ec);
+
+
+/**
+ * Determines whether a given field should be included given the
+ * constraints.
+ *
+ * Intended to be used by FormattedValue implementations.
+ *
+ * @param ucfpos The instance of UConstrainedFieldPosition.
+ * @param category The category to test.
+ * @param field The field to test.
+ * @param ec Set if an error occurs.
+ * @stable ICU 64
+ */
+U_CAPI UBool U_EXPORT2
+ucfpos_matchesField(
+    const UConstrainedFieldPosition* ucfpos,
+    int32_t category,
+    int32_t field,
+    UErrorCode* ec);
+
+
+/**
+ * Sets new values for the primary public getters.
+ *
+ * Intended to be used by FormattedValue implementations.
+ *
+ * It is up to the implementation to ensure that the user-requested
+ * constraints are satisfied. This method does not check!
+ *
+ * @param ucfpos The instance of UConstrainedFieldPosition.
+ * @param category The new field category.
+ * @param field The new field.
+ * @param start The new inclusive start index.
+ * @param limit The new exclusive end index.
+ * @param ec Set if an error occurs.
+ * @stable ICU 64
+ */
+U_CAPI void U_EXPORT2
+ucfpos_setState(
+    UConstrainedFieldPosition* ucfpos,
+    int32_t category,
+    int32_t field,
+    int32_t start,
+    int32_t limit,
+    UErrorCode* ec);
+
+
+struct UFormattedValue;
+/**
+ * An abstract formatted value: a string with associated field attributes.
+ * Many formatters format to types compatible with UFormattedValue.
+ *
+ * @stable ICU 64
+ */
+typedef struct UFormattedValue UFormattedValue;
+
+
+/**
+ * Returns a pointer to the formatted string. The pointer is owned by the UFormattedValue. The
+ * return value is valid only as long as the UFormattedValue is present and unchanged in memory.
+ *
+ * The return value is NUL-terminated but could contain internal NULs.
+ *
+ * @param ufmtval
+ *         The object containing the formatted string and attributes.
+ * @param pLength Output variable for the length of the string. Ignored if NULL.
+ * @param ec Set if an error occurs.
+ * @return A NUL-terminated char16 string owned by the UFormattedValue.
+ * @stable ICU 64
+ */
+U_CAPI const UChar* U_EXPORT2
+ufmtval_getString(
+    const UFormattedValue* ufmtval,
+    int32_t* pLength,
+    UErrorCode* ec);
+
+
+/**
+ * Iterates over field positions in the UFormattedValue. This lets you determine the position
+ * of specific types of substrings, like a month or a decimal separator.
+ *
+ * To loop over all field positions:
+ *
+ *     UConstrainedFieldPosition* ucfpos = ucfpos_open(ec);
+ *     while (ufmtval_nextPosition(ufmtval, ucfpos, ec)) {
+ *         // handle the field position; get information from ucfpos
+ *     }
+ *     ucfpos_close(ucfpos);
+ *
+ * @param ufmtval
+ *         The object containing the formatted string and attributes.
+ * @param ucfpos
+ *         The object used for iteration state; can provide constraints to iterate over only
+ *         one specific category or field;
+ *         see ucfpos_constrainCategory
+ *         and ucfpos_constrainField.
+ * @param ec Set if an error occurs.
+ * @return true if another position was found; false otherwise.
+ * @stable ICU 64
+ */
+U_CAPI UBool U_EXPORT2
+ufmtval_nextPosition(
+    const UFormattedValue* ufmtval,
+    UConstrainedFieldPosition* ucfpos,
+    UErrorCode* ec);
+
+
+#endif /* #if !UCONFIG_NO_FORMATTING */
+#endif // __UFORMATTEDVALUE_H__
+
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
+
 
 // udateintervalformat.h
 // Copyright (C) 2016 and later: Unicode, Inc. and others.
@@ -32412,6 +33688,7 @@ ufmt_getDecNumChars(UFormattable *fmt, int32_t *len, UErrorCode *status);
 
 
 #if !UCONFIG_NO_FORMATTING
+
 
 
 /**
@@ -32478,6 +33755,14 @@ ufmt_getDecNumChars(UFormattable *fmt, int32_t *len, UErrorCode *status);
 struct UDateIntervalFormat;
 typedef struct UDateIntervalFormat UDateIntervalFormat;  /**< C typedef for struct UDateIntervalFormat. @stable ICU 4.8 */
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+struct UFormattedDateInterval;
+/**
+ * Opaque struct to contain the results of a UDateIntervalFormat operation.
+ * @stable ICU 64
+ */
+typedef struct UFormattedDateInterval UFormattedDateInterval;
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
 
 /**
  * Open a new UDateIntervalFormat object using the predefined rules for a
@@ -32503,7 +33788,7 @@ typedef struct UDateIntervalFormat UDateIntervalFormat;  /**< C typedef for stru
  *            or NULL if an error occurred.
  * @stable ICU 4.8
  */
-U_STABLE UDateIntervalFormat* U_EXPORT2
+U_CAPI UDateIntervalFormat* U_EXPORT2
 udtitvfmt_open(const char*  locale,
               const UChar* skeleton,
               int32_t      skeletonLength,
@@ -32517,11 +33802,56 @@ udtitvfmt_open(const char*  locale,
  *            The UDateIntervalFormat object to close.
  * @stable ICU 4.8
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 udtitvfmt_close(UDateIntervalFormat *formatter);
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+/**
+ * Creates an object to hold the result of a UDateIntervalFormat
+ * operation. The object can be used repeatedly; it is cleared whenever
+ * passed to a format function.
+ *
+ * @param ec Set if an error occurs.
+ * @return A pointer needing ownership.
+ * @stable ICU 64
+ */
+U_CAPI UFormattedDateInterval* U_EXPORT2
+udtitvfmt_openResult(UErrorCode* ec);
 
+/**
+ * Returns a representation of a UFormattedDateInterval as a UFormattedValue,
+ * which can be subsequently passed to any API requiring that type.
+ *
+ * The returned object is owned by the UFormattedDateInterval and is valid
+ * only as long as the UFormattedDateInterval is present and unchanged in memory.
+ *
+ * You can think of this method as a cast between types.
+ *
+ * When calling ufmtval_nextPosition():
+ * The fields are returned from left to right. The special field category
+ * UFIELD_CATEGORY_DATE_INTERVAL_SPAN is used to indicate which datetime
+ * primitives came from which arguments: 0 means fromCalendar, and 1 means
+ * toCalendar. The span category will always occur before the
+ * corresponding fields in UFIELD_CATEGORY_DATE
+ * in the ufmtval_nextPosition() iterator.
+ *
+ * @param uresult The object containing the formatted string.
+ * @param ec Set if an error occurs.
+ * @return A UFormattedValue owned by the input object.
+ * @stable ICU 64
+ */
+U_CAPI const UFormattedValue* U_EXPORT2
+udtitvfmt_resultAsValue(const UFormattedDateInterval* uresult, UErrorCode* ec);
 
+/**
+ * Releases the UFormattedDateInterval created by udtitvfmt_openResult().
+ *
+ * @param uresult The object to release.
+ * @stable ICU 64
+ */
+U_CAPI void U_EXPORT2
+udtitvfmt_closeResult(UFormattedDateInterval* uresult);
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
 
 
 
@@ -32554,7 +33884,7 @@ udtitvfmt_close(UDateIntervalFormat *formatter);
  *            output was truncated.
  * @stable ICU 4.8
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 udtitvfmt_format(const UDateIntervalFormat* formatter,
                 UDate           fromDate,
                 UDate           toDate,
@@ -32634,7 +33964,7 @@ typedef struct UGenderInfo UGenderInfo;
  * @return A UGenderInfo for the specified locale, or NULL if an error occurred.
  * @stable ICU 50
  */
-U_STABLE const UGenderInfo* U_EXPORT2
+U_CAPI const UGenderInfo* U_EXPORT2
 ugender_getInstance(const char *locale, UErrorCode *status);
 
 
@@ -32647,7 +33977,7 @@ ugender_getInstance(const char *locale, UErrorCode *status);
  * @return The gender of the list.
  * @stable ICU 50
  */
-U_STABLE UGender U_EXPORT2
+U_CAPI UGender U_EXPORT2
 ugender_getListGender(const UGenderInfo* genderInfo, const UGender *genders, int32_t size, UErrorCode *status);
 
 #endif /* #if !UCONFIG_NO_FORMATTING */
@@ -32671,6 +34001,7 @@ ugender_getListGender(const UGenderInfo* genderInfo, const UGender *genders, int
 #if !UCONFIG_NO_FORMATTING
 
 
+
 /**
  * \file
  * \brief C API: Format a list in a locale-appropriate way.
@@ -32688,10 +34019,94 @@ ugender_getListGender(const UGenderInfo* genderInfo, const UGender *genders, int
 struct UListFormatter;
 typedef struct UListFormatter UListFormatter;  /**< C typedef for struct UListFormatter. @stable ICU 55 */
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
 
+struct UFormattedList;
+/**
+ * Opaque struct to contain the results of a UListFormatter operation.
+ * @stable ICU 64
+ */
+typedef struct UFormattedList UFormattedList;
+
+/**
+ * FieldPosition and UFieldPosition selectors for format fields
+ * defined by ListFormatter.
+ * @stable ICU 63
+ */
+typedef enum UListFormatterField {
+    /**
+     * The literal text in the result which came from the resources.
+     * @stable ICU 63
+     */
+    ULISTFMT_LITERAL_FIELD,
+    /**
+     * The element text in the result which came from the input strings.
+     * @stable ICU 63
+     */
+    ULISTFMT_ELEMENT_FIELD
+} UListFormatterField;
+
+/**
+ * Type of meaning expressed by the list.
+ *
+ * @stable ICU 67
+ */
+typedef enum UListFormatterType {
+    /**
+     * Conjunction formatting, e.g. "Alice, Bob, Charlie, and Delta".
+     *
+     * @stable ICU 67
+     */
+    ULISTFMT_TYPE_AND,
+
+    /**
+     * Disjunction (or alternative, or simply one of) formatting, e.g.
+     * "Alice, Bob, Charlie, or Delta".
+     *
+     * @stable ICU 67
+     */
+    ULISTFMT_TYPE_OR,
+
+    /**
+     * Formatting of a list of values with units, e.g. "5 pounds, 12 ounces".
+     *
+     * @stable ICU 67
+     */
+    ULISTFMT_TYPE_UNITS
+} UListFormatterType;
+
+/**
+ * Verbosity level of the list patterns.
+ *
+ * @stable ICU 67
+ */
+typedef enum UListFormatterWidth {
+    /**
+     * Use list formatting with full words (no abbreviations) when possible.
+     *
+     * @stable ICU 67
+     */
+    ULISTFMT_WIDTH_WIDE,
+
+    /**
+     * Use list formatting of typical length.
+     * @stable ICU 67
+     */
+    ULISTFMT_WIDTH_SHORT,
+
+    /**
+     * Use list formatting of the shortest possible length.
+     * @stable ICU 67
+     */
+    ULISTFMT_WIDTH_NARROW,
+} UListFormatterWidth;
+
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
 
 /**
  * Open a new UListFormatter object using the rules for a given locale.
+ * The object will be initialized with AND type and WIDE width.
+ *
  * @param locale
  *            The locale whose rules should be used; may be NULL for
  *            default locale.
@@ -32710,6 +34125,34 @@ U_CAPI UListFormatter* U_EXPORT2
 ulistfmt_open(const char*  locale,
               UErrorCode*  status);
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+/**
+ * Open a new UListFormatter object appropriate for the given locale, list type,
+ * and style.
+ *
+ * @param locale
+ *            The locale whose rules should be used; may be NULL for
+ *            default locale.
+ * @param type
+ *            The type of list formatting to use.
+ * @param width
+ *            The width of formatting to use.
+ * @param status
+ *            A pointer to a standard ICU UErrorCode (input/output parameter).
+ *            Its input value must pass the U_SUCCESS() test, or else the
+ *            function returns immediately. The caller should check its output
+ *            value with U_FAILURE(), or use with function chaining (see User
+ *            Guide for details).
+ * @return
+ *            A pointer to a UListFormatter object for the specified locale,
+ *            or NULL if an error occurred.
+ * @stable ICU 67
+ */
+U_CAPI UListFormatter* U_EXPORT2
+ulistfmt_openForType(const char*  locale, UListFormatterType type,
+                     UListFormatterWidth width, UErrorCode*  status);
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
+
 /**
  * Close a UListFormatter object. Once closed it may no longer be used.
  * @param listfmt
@@ -32719,6 +34162,52 @@ ulistfmt_open(const char*  locale,
 U_CAPI void U_EXPORT2
 ulistfmt_close(UListFormatter *listfmt);
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+/**
+ * Creates an object to hold the result of a UListFormatter
+ * operation. The object can be used repeatedly; it is cleared whenever
+ * passed to a format function.
+ *
+ * @param ec Set if an error occurs.
+ * @return A pointer needing ownership.
+ * @stable ICU 64
+ */
+U_CAPI UFormattedList* U_EXPORT2
+ulistfmt_openResult(UErrorCode* ec);
+
+/**
+ * Returns a representation of a UFormattedList as a UFormattedValue,
+ * which can be subsequently passed to any API requiring that type.
+ *
+ * The returned object is owned by the UFormattedList and is valid
+ * only as long as the UFormattedList is present and unchanged in memory.
+ *
+ * You can think of this method as a cast between types.
+ *
+ * When calling ufmtval_nextPosition():
+ * The fields are returned from start to end. The special field category
+ * UFIELD_CATEGORY_LIST_SPAN is used to indicate which argument
+ * was inserted at the given position. The span category will
+ * always occur before the corresponding instance of UFIELD_CATEGORY_LIST
+ * in the ufmtval_nextPosition() iterator.
+ *
+ * @param uresult The object containing the formatted string.
+ * @param ec Set if an error occurs.
+ * @return A UFormattedValue owned by the input object.
+ * @stable ICU 64
+ */
+U_CAPI const UFormattedValue* U_EXPORT2
+ulistfmt_resultAsValue(const UFormattedList* uresult, UErrorCode* ec);
+
+/**
+ * Releases the UFormattedList created by ulistfmt_openResult().
+ *
+ * @param uresult The object to release.
+ * @stable ICU 64
+ */
+U_CAPI void U_EXPORT2
+ulistfmt_closeResult(UFormattedList* uresult);
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
 
 
 
@@ -32765,6 +34254,42 @@ ulistfmt_format(const UListFormatter* listfmt,
                 int32_t            resultCapacity,
                 UErrorCode*        status);
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+/**
+ * Formats a list of strings to a UFormattedList, which exposes more
+ * information than the string exported by ulistfmt_format().
+ *
+ * @param listfmt
+ *            The UListFormatter object specifying the list conventions.
+ * @param strings
+ *            An array of pointers to UChar strings; the array length is
+ *            specified by stringCount. Must be non-NULL if stringCount > 0.
+ * @param stringLengths
+ *            An array of string lengths corresponding to the strings[]
+ *            parameter; any individual length value may be negative to indicate
+ *            that the corresponding strings[] entry is 0-terminated, or
+ *            stringLengths itself may be NULL if all of the strings are
+ *            0-terminated. If non-NULL, the stringLengths array must have
+ *            stringCount entries.
+ * @param stringCount
+ *            the number of entries in strings[], and the number of entries
+ *            in the stringLengths array if it is not NULL. Must be >= 0.
+ * @param uresult
+ *            The object in which to store the result of the list formatting
+ *            operation. See ulistfmt_openResult().
+ * @param status
+ *            Error code set if an error occurred during formatting.
+ * @stable ICU 64
+ */
+U_CAPI void U_EXPORT2
+ulistfmt_formatStringsToResult(
+                const UListFormatter* listfmt,
+                const UChar* const strings[],
+                const int32_t *    stringLengths,
+                int32_t            stringCount,
+                UFormattedList*    uresult,
+                UErrorCode*        status);
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
 
 #endif /* #if !UCONFIG_NO_FORMATTING */
 
@@ -32791,6 +34316,7 @@ ulistfmt_format(const UListFormatter* listfmt,
 
 #ifndef __ULOCDATA_H__
 #define __ULOCDATA_H__
+
 
 
 /**
@@ -32842,7 +34368,7 @@ typedef enum ULocaleDataDelimiterType {
  * @param status    Pointer to error status code.
  * @stable ICU 3.4
  */
-U_STABLE ULocaleData* U_EXPORT2
+U_CAPI ULocaleData* U_EXPORT2
 ulocdata_open(const char *localeID, UErrorCode *status);
 
 /**
@@ -32851,7 +34377,7 @@ ulocdata_open(const char *localeID, UErrorCode *status);
  * @param uld       The locale data object to close
  * @stable ICU 3.4
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ulocdata_close(ULocaleData *uld);
 
 
@@ -32866,7 +34392,7 @@ ulocdata_close(ULocaleData *uld);
  * @param setting   Value of the "no substitute" attribute.
  * @stable ICU 3.4
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ulocdata_setNoSubstitute(ULocaleData *uld, UBool setting);
 
 /**
@@ -32880,7 +34406,7 @@ ulocdata_setNoSubstitute(ULocaleData *uld, UBool setting);
  * @return UBool    Value of the "no substitute" attribute.
  * @stable ICU 3.4
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 ulocdata_getNoSubstitute(ULocaleData *uld);
 
 /**
@@ -32910,7 +34436,7 @@ ulocdata_getNoSubstitute(ULocaleData *uld);
  *                  In case of error, NULL is returned.
  * @stable ICU 3.4
  */
-U_STABLE USet* U_EXPORT2
+U_CAPI USet* U_EXPORT2
 ulocdata_getExemplarSet(ULocaleData *uld, USet *fillIn,
                         uint32_t options, ULocaleDataExemplarSetType extype, UErrorCode *status);
 
@@ -32927,7 +34453,7 @@ ulocdata_getExemplarSet(ULocaleData *uld, USet *fillIn,
  *                      the output was truncated.
  * @stable ICU 3.4
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ulocdata_getDelimiter(ULocaleData *uld, ULocaleDataDelimiterType type, UChar *result, int32_t resultLength, UErrorCode *status);
 
 /**
@@ -32950,7 +34476,7 @@ typedef enum UMeasurementSystem {
  * @return UMeasurementSystem the measurement system used in the locale.
  * @stable ICU 2.8
  */
-U_STABLE UMeasurementSystem U_EXPORT2
+U_CAPI UMeasurementSystem U_EXPORT2
 ulocdata_getMeasurementSystem(const char *localeID, UErrorCode *status);
 
 /**
@@ -32969,7 +34495,7 @@ ulocdata_getMeasurementSystem(const char *localeID, UErrorCode *status);
  *                      which must not indicate a failure before the function call.
  * @stable ICU 2.8
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ulocdata_getPaperSize(const char *localeID, int32_t *height, int32_t *width, UErrorCode *status);
 
 /**
@@ -32978,7 +34504,7 @@ ulocdata_getPaperSize(const char *localeID, int32_t *height, int32_t *width, UEr
  * @param status error code - could be U_MISSING_RESOURCE_ERROR if the version was not found.
  * @stable ICU 4.2
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ulocdata_getCLDRVersion(UVersionInfo versionArray, UErrorCode *status);
 
 /**
@@ -32996,7 +34522,7 @@ ulocdata_getCLDRVersion(UVersionInfo versionArray, UErrorCode *status);
  *
  * @stable ICU 4.2
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ulocdata_getLocaleDisplayPattern(ULocaleData *uld,
                                  UChar *pattern,
                                  int32_t patternCapacity,
@@ -33018,7 +34544,7 @@ ulocdata_getLocaleDisplayPattern(ULocaleData *uld,
  *
  * @stable ICU 4.2
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ulocdata_getLocaleSeparator(ULocaleData *uld,
                             UChar *separator,
                             int32_t separatorCapacity,
@@ -33052,6 +34578,7 @@ ulocdata_getLocaleSeparator(ULocaleData *uld,
 #if !UCONFIG_NO_FORMATTING
 
 #include <stdarg.h>
+
 
 /**
  * \file
@@ -33199,7 +34726,7 @@ ulocdata_getLocaleSeparator(ULocaleData *uld,
  * @see u_parseMessage
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 u_formatMessage(const char  *locale,
                  const UChar *pattern,
                 int32_t     patternLength,
@@ -33226,7 +34753,7 @@ u_formatMessage(const char  *locale,
  * @see u_parseMessage
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 u_vformatMessage(   const char  *locale,
                     const UChar *pattern,
                     int32_t     patternLength,
@@ -33251,7 +34778,7 @@ u_vformatMessage(   const char  *locale,
  * @see u_formatMessage
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 u_parseMessage( const char   *locale,
                 const UChar  *pattern,
                 int32_t      patternLength,
@@ -33276,7 +34803,7 @@ u_parseMessage( const char   *locale,
  * @see u_formatMessage
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 u_vparseMessage(const char  *locale,
                 const UChar *pattern,
                 int32_t     patternLength,
@@ -33305,7 +34832,7 @@ u_vparseMessage(const char  *locale,
  * @see u_parseMessage
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 u_formatMessageWithError(   const char    *locale,
                             const UChar   *pattern,
                             int32_t       patternLength,
@@ -33334,7 +34861,7 @@ u_formatMessageWithError(   const char    *locale,
  * output was truncated.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 u_vformatMessageWithError(  const char   *locale,
                             const UChar  *pattern,
                             int32_t      patternLength,
@@ -33362,7 +34889,7 @@ u_vformatMessageWithError(  const char   *locale,
  * @see u_formatMessage
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 u_parseMessageWithError(const char  *locale,
                         const UChar *pattern,
                         int32_t     patternLength,
@@ -33390,7 +34917,7 @@ u_parseMessageWithError(const char  *locale,
  * @see u_formatMessage
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 u_vparseMessageWithError(const char  *locale,
                          const UChar *pattern,
                          int32_t     patternLength,
@@ -33420,7 +34947,7 @@ typedef void* UMessageFormat;
  *                      messages, or 0 if an error occurred. 
  * @stable ICU 2.0
  */
-U_STABLE UMessageFormat* U_EXPORT2 
+U_CAPI UMessageFormat* U_EXPORT2 
 umsg_open(  const UChar     *pattern,
             int32_t         patternLength,
             const  char     *locale,
@@ -33433,7 +34960,7 @@ umsg_open(  const UChar     *pattern,
  * @param format The formatter to close.
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 umsg_close(UMessageFormat* format);
 
 
@@ -33445,7 +34972,7 @@ umsg_close(UMessageFormat* format);
  * @return A pointer to a UDateFormat identical to fmt.
  * @stable ICU 2.0
  */
-U_STABLE UMessageFormat U_EXPORT2 
+U_CAPI UMessageFormat U_EXPORT2 
 umsg_clone(const UMessageFormat *fmt,
            UErrorCode *status);
 
@@ -33456,7 +34983,7 @@ umsg_clone(const UMessageFormat *fmt,
  * @param locale The locale the formatter should use.
  * @stable ICU 2.0
  */
-U_STABLE void  U_EXPORT2 
+U_CAPI void  U_EXPORT2 
 umsg_setLocale(UMessageFormat *fmt,
                const char* locale);
 
@@ -33467,7 +34994,7 @@ umsg_setLocale(UMessageFormat *fmt,
  * @return the locale.
  * @stable ICU 2.0
  */
-U_STABLE const char*  U_EXPORT2 
+U_CAPI const char*  U_EXPORT2 
 umsg_getLocale(const UMessageFormat *fmt);
 
 /**
@@ -33482,7 +35009,7 @@ umsg_getLocale(const UMessageFormat *fmt);
  *                      set to a failure result.
  * @stable ICU 2.0
  */
-U_STABLE void  U_EXPORT2 
+U_CAPI void  U_EXPORT2 
 umsg_applyPattern( UMessageFormat *fmt,
                    const UChar* pattern,
                    int32_t patternLength,
@@ -33500,7 +35027,7 @@ umsg_applyPattern( UMessageFormat *fmt,
  * @return the pattern of the format
  * @stable ICU 2.0
  */
-U_STABLE int32_t  U_EXPORT2 
+U_CAPI int32_t  U_EXPORT2 
 umsg_toPattern(const UMessageFormat *fmt,
                UChar* result, 
                int32_t resultLength,
@@ -33521,7 +35048,7 @@ umsg_toPattern(const UMessageFormat *fmt,
  *                      the output was truncated.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 umsg_format(    const UMessageFormat *fmt,
                 UChar          *result,
                 int32_t        resultLength,
@@ -33543,7 +35070,7 @@ umsg_format(    const UMessageFormat *fmt,
  *                     the output was truncated.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 umsg_vformat(   const UMessageFormat *fmt,
                 UChar          *result,
                 int32_t        resultLength,
@@ -33564,7 +35091,7 @@ umsg_vformat(   const UMessageFormat *fmt,
  *                      specified in pattern.
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 umsg_parse( const UMessageFormat *fmt,
             const UChar    *source,
             int32_t        sourceLength,
@@ -33587,7 +35114,7 @@ umsg_parse( const UMessageFormat *fmt,
  * @see u_formatMessage
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 umsg_vparse(const UMessageFormat *fmt,
             const UChar    *source,
             int32_t        sourceLength,
@@ -33619,7 +35146,7 @@ umsg_vparse(const UMessageFormat *fmt,
  *        not
  * @stable ICU 3.4
  */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 umsg_autoQuoteApostrophe(const UChar* pattern, 
                          int32_t patternLength,
                          UChar* dest,
@@ -33652,6 +35179,7 @@ umsg_autoQuoteApostrophe(const UChar* pattern,
 
 
 #if !UCONFIG_NO_FORMATTING
+
 
 
 /**
@@ -33892,7 +35420,7 @@ typedef enum UNumberFormatStyle {
  *
  * <p>
  * For more detail on rounding modes, see:
- * http://userguide.icu-project.org/formatparse/numbers/rounding-modes
+ * https://unicode-org.github.io/icu/userguide/format_parse/numbers/rounding-modes
  *
  * @stable ICU 2.0
  */
@@ -33951,11 +35479,13 @@ enum UCurrencySpacing {
 
     /* Do not conditionalize the following with #ifndef U_HIDE_DEPRECATED_API,
      * it is needed for layout of DecimalFormatSymbols object. */
+#ifndef U_FORCE_HIDE_DEPRECATED_API
     /**
      * One more than the highest normal UCurrencySpacing value.
      * @deprecated ICU 58 The numeric value may change over time, see ICU ticket #12420.
      */
     UNUM_CURRENCY_SPACING_COUNT
+#endif  // U_FORCE_HIDE_DEPRECATED_API
 };
 typedef enum UCurrencySpacing UCurrencySpacing; /**< @stable ICU 4.8 */
 
@@ -33988,6 +35518,13 @@ typedef enum UNumberFormatFields {
     UNUM_PERMILL_FIELD,
     /** @stable ICU 49 */
     UNUM_SIGN_FIELD,
+
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+    /** @stable ICU 64 */
+    UNUM_MEASURE_UNIT_FIELD,
+    /** @stable ICU 64 */
+    UNUM_COMPACT_FIELD,
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
 
 } UNumberFormatFields;
 
@@ -34029,7 +35566,7 @@ typedef enum UNumberFormatFields {
  * @see DecimalFormat
  * @stable ICU 2.0
  */
-U_STABLE UNumberFormat* U_EXPORT2 
+U_CAPI UNumberFormat* U_EXPORT2 
 unum_open(  UNumberFormatStyle    style,
             const    UChar*    pattern,
             int32_t            patternLength,
@@ -34044,7 +35581,7 @@ unum_open(  UNumberFormatStyle    style,
 * @param fmt The formatter to close.
 * @stable ICU 2.0
 */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 unum_close(UNumberFormat* fmt);
 
 
@@ -34056,7 +35593,7 @@ unum_close(UNumberFormat* fmt);
  * @return A pointer to a UNumberFormat identical to fmt.
  * @stable ICU 2.0
  */
-U_STABLE UNumberFormat* U_EXPORT2 
+U_CAPI UNumberFormat* U_EXPORT2 
 unum_clone(const UNumberFormat *fmt,
        UErrorCode *status);
 
@@ -34084,7 +35621,7 @@ unum_clone(const UNumberFormat *fmt,
 * @see UFieldPosition
 * @stable ICU 2.0
 */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 unum_format(    const    UNumberFormat*    fmt,
         int32_t            number,
         UChar*            result,
@@ -34116,7 +35653,7 @@ unum_format(    const    UNumberFormat*    fmt,
 * @see UFieldPosition
 * @stable ICU 2.0
 */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 unum_formatInt64(const UNumberFormat *fmt,
         int64_t         number,
         UChar*          result,
@@ -34148,7 +35685,7 @@ unum_formatInt64(const UNumberFormat *fmt,
 * @see UFieldPosition
 * @stable ICU 2.0
 */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 unum_formatDouble(    const    UNumberFormat*  fmt,
             double          number,
             UChar*          result,
@@ -34199,7 +35736,7 @@ unum_formatDouble(    const    UNumberFormat*  fmt,
 * @see UNumberFormatFields
 * @stable ICU 59
 */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 unum_formatDoubleForFields(const UNumberFormat* format,
                            double number,
                            UChar* result,
@@ -34236,7 +35773,7 @@ unum_formatDoubleForFields(const UNumberFormat* format,
 * @see UFieldPosition
 * @stable ICU 4.4 
 */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 unum_formatDecimal(    const    UNumberFormat*  fmt,
             const char *    number,
             int32_t         length,
@@ -34269,7 +35806,7 @@ unum_formatDecimal(    const    UNumberFormat*  fmt,
  * @see UFieldPosition
  * @stable ICU 3.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 unum_formatDoubleCurrency(const UNumberFormat* fmt,
                           double number,
                           UChar* currency,
@@ -34298,7 +35835,7 @@ unum_formatDoubleCurrency(const UNumberFormat* fmt,
  * @see unum_parseToUFormattable
  * @stable ICU 52
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 unum_formatUFormattable(const UNumberFormat* fmt,
                         const UFormattable *number,
                         UChar *result,
@@ -34325,7 +35862,7 @@ unum_formatUFormattable(const UNumberFormat* fmt,
 * @see unum_formatDouble
 * @stable ICU 2.0
 */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 unum_parse(    const   UNumberFormat*  fmt,
         const   UChar*          text,
         int32_t         textLength,
@@ -34351,7 +35888,7 @@ unum_parse(    const   UNumberFormat*  fmt,
 * @see unum_formatDouble
 * @stable ICU 2.8
 */
-U_STABLE int64_t U_EXPORT2 
+U_CAPI int64_t U_EXPORT2 
 unum_parseInt64(const UNumberFormat*  fmt,
         const UChar*  text,
         int32_t       textLength,
@@ -34377,7 +35914,7 @@ unum_parseInt64(const UNumberFormat*  fmt,
 * @see unum_formatDouble
 * @stable ICU 2.0
 */
-U_STABLE double U_EXPORT2 
+U_CAPI double U_EXPORT2 
 unum_parseDouble(    const   UNumberFormat*  fmt,
             const   UChar*          text,
             int32_t         textLength,
@@ -34412,7 +35949,7 @@ unum_parseDouble(    const   UNumberFormat*  fmt,
 * @see unum_formatDouble
 * @stable ICU 4.4
 */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 unum_parseDecimal(const   UNumberFormat*  fmt,
                  const   UChar*          text,
                          int32_t         textLength,
@@ -34440,7 +35977,7 @@ unum_parseDecimal(const   UNumberFormat*  fmt,
  * @see unum_formatDoubleCurrency
  * @stable ICU 3.0
  */
-U_STABLE double U_EXPORT2
+U_CAPI double U_EXPORT2
 unum_parseDoubleCurrency(const UNumberFormat* fmt,
                          const UChar* text,
                          int32_t textLength,
@@ -34468,7 +36005,7 @@ unum_parseDoubleCurrency(const UNumberFormat* fmt,
  * @see ufmt_close
  * @stable ICU 52
  */
-U_STABLE UFormattable* U_EXPORT2
+U_CAPI UFormattable* U_EXPORT2
 unum_parseToUFormattable(const UNumberFormat* fmt,
                          UFormattable *result,
                          const UChar* text,
@@ -34481,7 +36018,7 @@ unum_parseToUFormattable(const UNumberFormat* fmt,
  * on a DecimalFormat, other formats return U_UNSUPPORTED_ERROR
  * in the status.
  * @param format The formatter to set.
- * @param localized TRUE if the pattern is localized, FALSE otherwise.
+ * @param localized true if the pattern is localized, false otherwise.
  * @param pattern The new pattern
  * @param patternLength The length of pattern, or -1 if null-terminated.
  * @param parseError A pointer to UParseError to receive information
@@ -34492,7 +36029,7 @@ unum_parseToUFormattable(const UNumberFormat* fmt,
  * @see DecimalFormat
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 unum_applyPattern(          UNumberFormat  *format,
                             UBool          localized,
                     const   UChar          *pattern,
@@ -34511,7 +36048,7 @@ unum_applyPattern(          UNumberFormat  *format,
 * @see unum_countAvailable
 * @stable ICU 2.0
 */
-U_STABLE const char* U_EXPORT2 
+U_CAPI const char* U_EXPORT2 
 unum_getAvailable(int32_t localeIndex);
 
 /**
@@ -34523,7 +36060,7 @@ unum_getAvailable(int32_t localeIndex);
 * @see unum_getAvailable
 * @stable ICU 2.0
 */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 unum_countAvailable(void);
 
 #if UCONFIG_HAVE_PARSEALLINPUT
@@ -34604,6 +36141,18 @@ typedef enum UNumberFormatAttribute {
    * @stable ICU 51 */
   UNUM_SCALE = 21,
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+  /**
+   * Minimum grouping digits; most commonly set to 2 to print "1000" instead of "1,000".
+   * See DecimalFormat::getMinimumGroupingDigits().
+   *
+   * For better control over grouping strategies, use UNumberFormatter.
+   *
+   * @stable ICU 64
+   */
+  UNUM_MINIMUM_GROUPING_DIGITS = 22,
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
+
 
   /** 
    * if this attribute is set to 0, it is set to UNUM_CURRENCY_STANDARD purpose,
@@ -34638,6 +36187,23 @@ typedef enum UNumberFormatAttribute {
    */
   UNUM_PARSE_DECIMAL_MARK_REQUIRED = 0x1002,
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+  /**
+   * Parsing: if set to 1, parsing is sensitive to case (lowercase/uppercase).
+   *
+   * @stable ICU 64
+   */
+  UNUM_PARSE_CASE_SENSITIVE = 0x1003,
+
+  /**
+   * Formatting: if set to 1, whether to show the plus sign on non-negative numbers.
+   *
+   * For better control over sign display, use UNumberFormatter.
+   *
+   * @stable ICU 64
+   */
+  UNUM_SIGN_ALWAYS_SHOWN = 0x1004,
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
 
 
 } UNumberFormatAttribute;
@@ -34659,7 +36225,7 @@ typedef enum UNumberFormatAttribute {
 * @see unum_setTextAttribute
 * @stable ICU 2.0
 */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 unum_getAttribute(const UNumberFormat*          fmt,
           UNumberFormatAttribute  attr);
 
@@ -34682,7 +36248,7 @@ unum_getAttribute(const UNumberFormat*          fmt,
 * @see unum_setTextAttribute
 * @stable ICU 2.0
 */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 unum_setAttribute(    UNumberFormat*          fmt,
             UNumberFormatAttribute  attr,
             int32_t                 newValue);
@@ -34702,7 +36268,7 @@ unum_setAttribute(    UNumberFormat*          fmt,
 * @see unum_setTextAttribute
 * @stable ICU 2.0
 */
-U_STABLE double U_EXPORT2 
+U_CAPI double U_EXPORT2 
 unum_getDoubleAttribute(const UNumberFormat*          fmt,
           UNumberFormatAttribute  attr);
 
@@ -34720,7 +36286,7 @@ unum_getDoubleAttribute(const UNumberFormat*          fmt,
 * @see unum_setTextAttribute
 * @stable ICU 2.0
 */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 unum_setDoubleAttribute(    UNumberFormat*          fmt,
             UNumberFormatAttribute  attr,
             double                 newValue);
@@ -34777,7 +36343,7 @@ typedef enum UNumberFormatTextAttribute {
 * @see unum_setAttribute
 * @stable ICU 2.0
 */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 unum_getTextAttribute(    const    UNumberFormat*                    fmt,
             UNumberFormatTextAttribute      tag,
             UChar*                            result,
@@ -34800,7 +36366,7 @@ unum_getTextAttribute(    const    UNumberFormat*                    fmt,
 * @see unum_setAttribute
 * @stable ICU 2.0
 */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 unum_setTextAttribute(    UNumberFormat*                    fmt,
             UNumberFormatTextAttribute      tag,
             const    UChar*                            newValue,
@@ -34811,8 +36377,8 @@ unum_setTextAttribute(    UNumberFormat*                    fmt,
  * Extract the pattern from a UNumberFormat.  The pattern will follow
  * the DecimalFormat pattern syntax.
  * @param fmt The formatter to query.
- * @param isPatternLocalized TRUE if the pattern should be localized,
- * FALSE otherwise.  This is ignored if the formatter is a rule-based
+ * @param isPatternLocalized true if the pattern should be localized,
+ * false otherwise.  This is ignored if the formatter is a rule-based
  * formatter.
  * @param result A pointer to a buffer to receive the pattern.
  * @param resultLength The maximum size of result.
@@ -34823,7 +36389,7 @@ unum_setTextAttribute(    UNumberFormat*                    fmt,
  * @see DecimalFormat
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 unum_toPattern(    const    UNumberFormat*          fmt,
         UBool                  isPatternLocalized,
         UChar*                  result,
@@ -34935,7 +36501,7 @@ typedef enum UNumberFormatSymbol {
 * @see unum_setSymbol
 * @stable ICU 2.0
 */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 unum_getSymbol(const UNumberFormat *fmt,
                UNumberFormatSymbol symbol,
                UChar *buffer,
@@ -34955,7 +36521,7 @@ unum_getSymbol(const UNumberFormat *fmt,
 * @see unum_getSymbol
 * @stable ICU 2.0
 */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 unum_setSymbol(UNumberFormat *fmt,
                UNumberFormatSymbol symbol,
                const UChar *value,
@@ -34972,7 +36538,7 @@ unum_setSymbol(UNumberFormat *fmt,
  * @return the locale name
  * @stable ICU 2.8
  */
-U_STABLE const char* U_EXPORT2
+U_CAPI const char* U_EXPORT2
 unum_getLocaleByType(const UNumberFormat *fmt,
                      ULocDataLocaleType type,
                      UErrorCode* status); 
@@ -34985,7 +36551,7 @@ unum_getLocaleByType(const UNumberFormat *fmt,
  * @param status A pointer to an UErrorCode to receive any errors
  * @stable ICU 53
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 unum_setContext(UNumberFormat* fmt, UDisplayContext value, UErrorCode* status);
 
 /**
@@ -34997,7 +36563,7 @@ unum_setContext(UNumberFormat* fmt, UDisplayContext value, UErrorCode* status);
  * @return The UDisplayContextValue for the specified type.
  * @stable ICU 53
  */
-U_STABLE UDisplayContext U_EXPORT2
+U_CAPI UDisplayContext U_EXPORT2
 unum_getContext(const UNumberFormat *fmt, UDisplayContextType type, UErrorCode* status);
 
 #endif /* #if !UCONFIG_NO_FORMATTING */
@@ -35019,6 +36585,8 @@ unum_getContext(const UNumberFormat *fmt, UDisplayContextType type, UErrorCode* 
 
 
 #if !UCONFIG_NO_FORMATTING
+
+
 
 /**
  * \file
@@ -35143,7 +36711,7 @@ unum_getContext(const UNumberFormat *fmt, UDisplayContextType type, UErrorCode* 
  * the date and time formatting algorithm and pattern letters defined by
  * <a href="http://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table">UTS#35
  * Unicode Locale Data Markup Language (LDML)</a> and further documented for ICU in the
- * <a href="https://sites.google.com/site/icuprojectuserguide/formatparse/datetime?pli=1#TOC-Date-Field-Symbol-Table">ICU
+ * <a href="https://unicode-org.github.io/icu/userguide/format_parse/datetime#date-field-symbol-table">ICU
  * User Guide</a>.</p>
  */
 
@@ -35742,10 +37310,24 @@ typedef enum UDateFormatField {
 
 /**
  * Maps from a UDateFormatField to the corresponding UCalendarDateFields.
- * Note: since the mapping is many-to-one, there is no inverse mapping.
+ *
+ * Note 1: Since the mapping is many-to-one, there is no inverse mapping.
+ *
+ * Note 2: There is no UErrorCode parameter, so in case of error (UDateFormatField is
+ * unknown or has no corresponding UCalendarDateFields value), the function returns the
+ * current value of UCAL_FIELD_COUNT. However, that value may change from release to
+ * release and is consequently deprecated. For a future-proof runtime way of checking
+ * for errors:
+ * a) First save the value returned by the function when it is passed an invalid value
+ *    such as "(UDateFormatField)-1".
+ * b) Then, to test for errors when passing some other UDateFormatField value, check
+ *     whether the function returns that saved value.
+ *
  * @param field the UDateFormatField.
- * @return the UCalendarDateField.  This will be UCAL_FIELD_COUNT in case
- * of error (e.g., the input field is UDAT_FIELD_COUNT).
+ * @return the UCalendarDateField. In case of error (UDateFormatField is unknown or has
+ *   no corresponding UCalendarDateFields value) this will be the current value of
+ *   UCAL_FIELD_COUNT, but that value may change from release to release.
+ *   See Note 2 above.
  * @stable ICU 4.4
  */
 U_CAPI UCalendarDateFields U_EXPORT2
@@ -35833,11 +37415,13 @@ typedef enum UDateFormatBooleanAttribute {
 
     /* Do not conditionalize the following with #ifndef U_HIDE_DEPRECATED_API,
      * it is needed for layout of DateFormat object. */
+#ifndef U_FORCE_HIDE_DEPRECATED_API
     /**
      * One more than the highest normal UDateFormatBooleanAttribute value.
      * @deprecated ICU 58 The numeric value may change over time, see ICU ticket #12420.
      */
     UDAT_BOOLEAN_ATTRIBUTE_COUNT = 4
+#endif  // U_FORCE_HIDE_DEPRECATED_API
 } UDateFormatBooleanAttribute;
 
 /**
@@ -35865,7 +37449,6 @@ udat_getBooleanAttribute(const UDateFormat* fmt, UDateFormatBooleanAttribute att
  */
 U_CAPI void U_EXPORT2
 udat_setBooleanAttribute(UDateFormat *fmt, UDateFormatBooleanAttribute attr, UBool newValue, UErrorCode* status);
-
 
 
 
@@ -36077,7 +37660,7 @@ udat_parseCalendar(const    UDateFormat*    format,
 * With lenient parsing, the parser may use heuristics to interpret inputs that do not
 * precisely match the pattern. With strict parsing, inputs must match the pattern.
 * @param fmt The formatter to query
-* @return TRUE if fmt is set to perform lenient parsing, FALSE otherwise.
+* @return true if fmt is set to perform lenient parsing, false otherwise.
 * @see udat_setLenient
 * @stable ICU 2.0
 */
@@ -36089,7 +37672,7 @@ udat_isLenient(const UDateFormat* fmt);
 * With lenient parsing, the parser may use heuristics to interpret inputs that do not
 * precisely match the pattern. With strict parsing, inputs must match the pattern.
 * @param fmt The formatter to set
-* @param isLenient TRUE if fmt should perform lenient parsing, FALSE otherwise.
+* @param isLenient true if fmt should perform lenient parsing, false otherwise.
 * @see dat_isLenient
 * @stable ICU 2.0
 */
@@ -36249,7 +37832,7 @@ udat_set2DigitYearStart(    UDateFormat     *fmt,
 * Extract the pattern from a UDateFormat.
 * The pattern will follow the pattern syntax rules.
 * @param fmt The formatter to query.
-* @param localized TRUE if the pattern should be localized, FALSE otherwise.
+* @param localized true if the pattern should be localized, false otherwise.
 * @param result A pointer to a buffer to receive the pattern.
 * @param resultLength The maximum size of result.
 * @param status A pointer to an UErrorCode to receive any errors
@@ -36268,7 +37851,7 @@ udat_toPattern(    const   UDateFormat     *fmt,
 * Set the pattern used by an UDateFormat.
 * The pattern should follow the pattern syntax rules.
 * @param format The formatter to set.
-* @param localized TRUE if the pattern is localized, FALSE otherwise.
+* @param localized true if the pattern is localized, false otherwise.
 * @param pattern The new pattern
 * @param patternLength The length of pattern, or -1 if null-terminated.
 * @see udat_toPattern
@@ -36490,15 +38073,644 @@ udat_getContext(const UDateFormat* fmt, UDisplayContextType type, UErrorCode* st
 
 #endif
 
+// udatpg.h
+// Copyright (C) 2016 and later: Unicode, Inc. and others.
+// License & terms of use: http://www.unicode.org/copyright.html
+/*
+*******************************************************************************
+*
+*   Copyright (C) 2007-2015, International Business Machines
+*   Corporation and others.  All Rights Reserved.
+*
+*******************************************************************************
+*   file name:  udatpg.h
+*   encoding:   UTF-8
+*   tab size:   8 (not used)
+*   indentation:4
+*
+*   created on: 2007jul30
+*   created by: Markus W. Scherer
+*/
+
+#ifndef __UDATPG_H__
+#define __UDATPG_H__
+
+
+
+/**
+ * \file
+ * \brief C API: Wrapper for icu::DateTimePatternGenerator (unicode/dtptngen.h).
+ *
+ * UDateTimePatternGenerator provides flexible generation of date format patterns, 
+ * like "yy-MM-dd". The user can build up the generator by adding successive 
+ * patterns. Once that is done, a query can be made using a "skeleton", which is 
+ * a pattern which just includes the desired fields and lengths. The generator 
+ * will return the "best fit" pattern corresponding to that skeleton.
+ * <p>The main method people will use is udatpg_getBestPattern, since normally
+ * UDateTimePatternGenerator is pre-built with data from a particular locale. 
+ * However, generators can be built directly from other data as well.
+ * <p><i>Issue: may be useful to also have a function that returns the list of 
+ * fields in a pattern, in order, since we have that internally.
+ * That would be useful for getting the UI order of field elements.</i>
+ */
+
+/**
+ * Opaque type for a date/time pattern generator object.
+ * @stable ICU 3.8
+ */
+typedef void *UDateTimePatternGenerator;
+
+/**
+ * Field number constants for udatpg_getAppendItemFormats() and similar functions.
+ * These constants are separate from UDateFormatField despite semantic overlap
+ * because some fields are merged for the date/time pattern generator.
+ * @stable ICU 3.8
+ */
+typedef enum UDateTimePatternField {
+    /** @stable ICU 3.8 */
+    UDATPG_ERA_FIELD,
+    /** @stable ICU 3.8 */
+    UDATPG_YEAR_FIELD,
+    /** @stable ICU 3.8 */
+    UDATPG_QUARTER_FIELD,
+    /** @stable ICU 3.8 */
+    UDATPG_MONTH_FIELD,
+    /** @stable ICU 3.8 */
+    UDATPG_WEEK_OF_YEAR_FIELD,
+    /** @stable ICU 3.8 */
+    UDATPG_WEEK_OF_MONTH_FIELD,
+    /** @stable ICU 3.8 */
+    UDATPG_WEEKDAY_FIELD,
+    /** @stable ICU 3.8 */
+    UDATPG_DAY_OF_YEAR_FIELD,
+    /** @stable ICU 3.8 */
+    UDATPG_DAY_OF_WEEK_IN_MONTH_FIELD,
+    /** @stable ICU 3.8 */
+    UDATPG_DAY_FIELD,
+    /** @stable ICU 3.8 */
+    UDATPG_DAYPERIOD_FIELD,
+    /** @stable ICU 3.8 */
+    UDATPG_HOUR_FIELD,
+    /** @stable ICU 3.8 */
+    UDATPG_MINUTE_FIELD,
+    /** @stable ICU 3.8 */
+    UDATPG_SECOND_FIELD,
+    /** @stable ICU 3.8 */
+    UDATPG_FRACTIONAL_SECOND_FIELD,
+    /** @stable ICU 3.8 */
+    UDATPG_ZONE_FIELD,
+
+    /* Do not conditionalize the following with #ifndef U_HIDE_DEPRECATED_API,
+     * it is needed for layout of DateTimePatternGenerator object. */
+#ifndef U_FORCE_HIDE_DEPRECATED_API
+    /**
+     * One more than the highest normal UDateTimePatternField value.
+     * @deprecated ICU 58 The numeric value may change over time, see ICU ticket #12420.
+     */
+    UDATPG_FIELD_COUNT
+#endif  // U_FORCE_HIDE_DEPRECATED_API
+} UDateTimePatternField;
+
+#if (NTDDI_VERSION >= NTDDI_WIN10_VB)
+/**
+ * Field display name width constants for udatpg_getFieldDisplayName().
+ * @stable ICU 61
+ */
+typedef enum UDateTimePGDisplayWidth {
+    /** @stable ICU 61 */
+    UDATPG_WIDE,
+    /** @stable ICU 61 */
+    UDATPG_ABBREVIATED,
+    /** @stable ICU 61 */
+    UDATPG_NARROW
+} UDateTimePGDisplayWidth;
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_VB)
+
+/**
+ * Masks to control forcing the length of specified fields in the returned
+ * pattern to match those in the skeleton (when this would not happen
+ * otherwise). These may be combined to force the length of multiple fields.
+ * Used with udatpg_getBestPatternWithOptions, udatpg_replaceFieldTypesWithOptions.
+ * @stable ICU 4.4
+ */
+typedef enum UDateTimePatternMatchOptions {
+    /** @stable ICU 4.4 */
+    UDATPG_MATCH_NO_OPTIONS = 0,
+    /** @stable ICU 4.4 */
+    UDATPG_MATCH_HOUR_FIELD_LENGTH = 1 << UDATPG_HOUR_FIELD,
+    /** @stable ICU 4.4 */
+    UDATPG_MATCH_ALL_FIELDS_LENGTH = (1 << UDATPG_FIELD_COUNT) - 1
+} UDateTimePatternMatchOptions;
+
+/**
+ * Status return values from udatpg_addPattern().
+ * @stable ICU 3.8
+ */
+typedef enum UDateTimePatternConflict {
+    /** @stable ICU 3.8 */
+    UDATPG_NO_CONFLICT,
+    /** @stable ICU 3.8 */
+    UDATPG_BASE_CONFLICT,
+    /** @stable ICU 3.8 */
+    UDATPG_CONFLICT,
+} UDateTimePatternConflict;
+
+/**
+  * Open a generator according to a given locale.
+  * @param locale
+  * @param pErrorCode a pointer to the UErrorCode which must not indicate a
+  *                   failure before the function call.
+  * @return a pointer to UDateTimePatternGenerator.
+  * @stable ICU 3.8
+  */
+U_CAPI UDateTimePatternGenerator * U_EXPORT2
+udatpg_open(const char *locale, UErrorCode *pErrorCode);
+
+/**
+  * Open an empty generator, to be constructed with udatpg_addPattern(...) etc.
+  * @param pErrorCode a pointer to the UErrorCode which must not indicate a
+  *                   failure before the function call.
+  * @return a pointer to UDateTimePatternGenerator.
+  * @stable ICU 3.8
+  */
+U_CAPI UDateTimePatternGenerator * U_EXPORT2
+udatpg_openEmpty(UErrorCode *pErrorCode);
+
+/**
+  * Close a generator.
+  * @param dtpg a pointer to UDateTimePatternGenerator.
+  * @stable ICU 3.8
+  */
+U_CAPI void U_EXPORT2
+udatpg_close(UDateTimePatternGenerator *dtpg);
+
+
+/**
+  * Create a copy pf a generator.
+  * @param dtpg a pointer to UDateTimePatternGenerator to be copied.
+  * @param pErrorCode a pointer to the UErrorCode which must not indicate a
+  *                   failure before the function call.
+  * @return a pointer to a new UDateTimePatternGenerator.
+  * @stable ICU 3.8
+ */
+U_CAPI UDateTimePatternGenerator * U_EXPORT2
+udatpg_clone(const UDateTimePatternGenerator *dtpg, UErrorCode *pErrorCode);
+
+/**
+ * Get the best pattern matching the input skeleton. It is guaranteed to
+ * have all of the fields in the skeleton.
+ * 
+ * Note that this function uses a non-const UDateTimePatternGenerator:
+ * It uses a stateful pattern parser which is set up for each generator object,
+ * rather than creating one for each function call.
+ * Consecutive calls to this function do not affect each other,
+ * but this function cannot be used concurrently on a single generator object.
+ * 
+ * @param dtpg a pointer to UDateTimePatternGenerator.
+ * @param skeleton
+ *            The skeleton is a pattern containing only the variable fields.
+ *            For example, "MMMdd" and "mmhh" are skeletons.
+ * @param length the length of skeleton
+ * @param bestPattern
+ *            The best pattern found from the given skeleton.
+ * @param capacity the capacity of bestPattern.
+ * @param pErrorCode a pointer to the UErrorCode which must not indicate a
+ *                   failure before the function call.
+ * @return the length of bestPattern.
+ * @stable ICU 3.8
+ */
+U_CAPI int32_t U_EXPORT2
+udatpg_getBestPattern(UDateTimePatternGenerator *dtpg,
+                      const UChar *skeleton, int32_t length,
+                      UChar *bestPattern, int32_t capacity,
+                      UErrorCode *pErrorCode);
+
+/**
+ * Get the best pattern matching the input skeleton. It is guaranteed to
+ * have all of the fields in the skeleton.
+ * 
+ * Note that this function uses a non-const UDateTimePatternGenerator:
+ * It uses a stateful pattern parser which is set up for each generator object,
+ * rather than creating one for each function call.
+ * Consecutive calls to this function do not affect each other,
+ * but this function cannot be used concurrently on a single generator object.
+ * 
+ * @param dtpg a pointer to UDateTimePatternGenerator.
+ * @param skeleton
+ *            The skeleton is a pattern containing only the variable fields.
+ *            For example, "MMMdd" and "mmhh" are skeletons.
+ * @param length the length of skeleton
+ * @param options
+ *            Options for forcing the length of specified fields in the
+ *            returned pattern to match those in the skeleton (when this
+ *            would not happen otherwise). For default behavior, use
+ *            UDATPG_MATCH_NO_OPTIONS.
+ * @param bestPattern
+ *            The best pattern found from the given skeleton.
+ * @param capacity
+ *            the capacity of bestPattern.
+ * @param pErrorCode
+ *            a pointer to the UErrorCode which must not indicate a
+ *            failure before the function call.
+ * @return the length of bestPattern.
+ * @stable ICU 4.4
+ */
+U_CAPI int32_t U_EXPORT2
+udatpg_getBestPatternWithOptions(UDateTimePatternGenerator *dtpg,
+                                 const UChar *skeleton, int32_t length,
+                                 UDateTimePatternMatchOptions options,
+                                 UChar *bestPattern, int32_t capacity,
+                                 UErrorCode *pErrorCode);
+
+/**
+  * Get a unique skeleton from a given pattern. For example,
+  * both "MMM-dd" and "dd/MMM" produce the skeleton "MMMdd".
+  * 
+  * Note that this function uses a non-const UDateTimePatternGenerator:
+  * It uses a stateful pattern parser which is set up for each generator object,
+  * rather than creating one for each function call.
+  * Consecutive calls to this function do not affect each other,
+  * but this function cannot be used concurrently on a single generator object.
+  *
+  * @param unusedDtpg     a pointer to UDateTimePatternGenerator.
+  *    This parameter is no longer used. Callers may pass NULL.
+  * @param pattern  input pattern, such as "dd/MMM".
+  * @param length   the length of pattern.
+  * @param skeleton such as "MMMdd"
+  * @param capacity the capacity of skeleton.
+  * @param pErrorCode a pointer to the UErrorCode which must not indicate a
+  *                  failure before the function call.
+  * @return the length of skeleton.
+  * @stable ICU 3.8
+  */
+U_CAPI int32_t U_EXPORT2
+udatpg_getSkeleton(UDateTimePatternGenerator *unusedDtpg,
+                   const UChar *pattern, int32_t length,
+                   UChar *skeleton, int32_t capacity,
+                   UErrorCode *pErrorCode);
+
+/**
+ * Get a unique base skeleton from a given pattern. This is the same
+ * as the skeleton, except that differences in length are minimized so
+ * as to only preserve the difference between string and numeric form. So
+ * for example, both "MMM-dd" and "d/MMM" produce the skeleton "MMMd"
+ * (notice the single d).
+ *
+ * Note that this function uses a non-const UDateTimePatternGenerator:
+ * It uses a stateful pattern parser which is set up for each generator object,
+ * rather than creating one for each function call.
+ * Consecutive calls to this function do not affect each other,
+ * but this function cannot be used concurrently on a single generator object.
+ *
+ * @param unusedDtpg     a pointer to UDateTimePatternGenerator.
+ *    This parameter is no longer used. Callers may pass NULL.
+ * @param pattern  input pattern, such as "dd/MMM".
+ * @param length   the length of pattern.
+ * @param baseSkeleton such as "Md"
+ * @param capacity the capacity of base skeleton.
+ * @param pErrorCode a pointer to the UErrorCode which must not indicate a
+ *                  failure before the function call.
+ * @return the length of baseSkeleton.
+ * @stable ICU 3.8
+ */
+U_CAPI int32_t U_EXPORT2
+udatpg_getBaseSkeleton(UDateTimePatternGenerator *unusedDtpg,
+                       const UChar *pattern, int32_t length,
+                       UChar *baseSkeleton, int32_t capacity,
+                       UErrorCode *pErrorCode);
+
+/**
+ * Adds a pattern to the generator. If the pattern has the same skeleton as
+ * an existing pattern, and the override parameter is set, then the previous
+ * value is overriden. Otherwise, the previous value is retained. In either
+ * case, the conflicting status is set and previous vale is stored in 
+ * conflicting pattern.
+ * <p>
+ * Note that single-field patterns (like "MMM") are automatically added, and
+ * don't need to be added explicitly!
+ *
+ * @param dtpg     a pointer to UDateTimePatternGenerator.
+ * @param pattern  input pattern, such as "dd/MMM"
+ * @param patternLength the length of pattern.
+ * @param override  When existing values are to be overridden use true, 
+ *                  otherwise use false.
+ * @param conflictingPattern  Previous pattern with the same skeleton.
+ * @param capacity the capacity of conflictingPattern.
+ * @param pLength a pointer to the length of conflictingPattern.
+ * @param pErrorCode a pointer to the UErrorCode which must not indicate a
+ *                  failure before the function call.
+ * @return conflicting status. The value could be UDATPG_NO_CONFLICT, 
+ *                  UDATPG_BASE_CONFLICT or UDATPG_CONFLICT.
+ * @stable ICU 3.8
+ */
+U_CAPI UDateTimePatternConflict U_EXPORT2
+udatpg_addPattern(UDateTimePatternGenerator *dtpg,
+                  const UChar *pattern, int32_t patternLength,
+                  UBool override,
+                  UChar *conflictingPattern, int32_t capacity, int32_t *pLength,
+                  UErrorCode *pErrorCode);
+
+/**
+  * An AppendItem format is a pattern used to append a field if there is no
+  * good match. For example, suppose that the input skeleton is "GyyyyMMMd",
+  * and there is no matching pattern internally, but there is a pattern
+  * matching "yyyyMMMd", say "d-MM-yyyy". Then that pattern is used, plus the
+  * G. The way these two are conjoined is by using the AppendItemFormat for G
+  * (era). So if that value is, say "{0}, {1}" then the final resulting
+  * pattern is "d-MM-yyyy, G".
+  * <p>
+  * There are actually three available variables: {0} is the pattern so far,
+  * {1} is the element we are adding, and {2} is the name of the element.
+  * <p>
+  * This reflects the way that the CLDR data is organized.
+  *
+  * @param dtpg   a pointer to UDateTimePatternGenerator.
+  * @param field  UDateTimePatternField, such as UDATPG_ERA_FIELD
+  * @param value  pattern, such as "{0}, {1}"
+  * @param length the length of value.
+  * @stable ICU 3.8
+  */
+U_CAPI void U_EXPORT2
+udatpg_setAppendItemFormat(UDateTimePatternGenerator *dtpg,
+                           UDateTimePatternField field,
+                           const UChar *value, int32_t length);
+
+/**
+ * Getter corresponding to setAppendItemFormat. Values below 0 or at or
+ * above UDATPG_FIELD_COUNT are illegal arguments.
+ *
+ * @param dtpg   A pointer to UDateTimePatternGenerator.
+ * @param field  UDateTimePatternField, such as UDATPG_ERA_FIELD
+ * @param pLength A pointer that will receive the length of appendItemFormat.
+ * @return appendItemFormat for field.
+ * @stable ICU 3.8
+ */
+U_CAPI const UChar * U_EXPORT2
+udatpg_getAppendItemFormat(const UDateTimePatternGenerator *dtpg,
+                           UDateTimePatternField field,
+                           int32_t *pLength);
+
+/**
+   * Set the name of field, eg "era" in English for ERA. These are only
+   * used if the corresponding AppendItemFormat is used, and if it contains a
+   * {2} variable.
+   * <p>
+   * This reflects the way that the CLDR data is organized.
+   *
+   * @param dtpg   a pointer to UDateTimePatternGenerator.
+   * @param field  UDateTimePatternField
+   * @param value  name for the field.
+   * @param length the length of value.
+   * @stable ICU 3.8
+   */
+U_CAPI void U_EXPORT2
+udatpg_setAppendItemName(UDateTimePatternGenerator *dtpg,
+                         UDateTimePatternField field,
+                         const UChar *value, int32_t length);
+
+/**
+ * Getter corresponding to setAppendItemNames. Values below 0 or at or above
+ * UDATPG_FIELD_COUNT are illegal arguments. Note: The more general function
+ * for getting date/time field display names is udatpg_getFieldDisplayName.
+ *
+ * @param dtpg   a pointer to UDateTimePatternGenerator.
+ * @param field  UDateTimePatternField, such as UDATPG_ERA_FIELD
+ * @param pLength A pointer that will receive the length of the name for field.
+ * @return name for field
+ * @see udatpg_getFieldDisplayName
+ * @stable ICU 3.8
+ */
+U_CAPI const UChar * U_EXPORT2
+udatpg_getAppendItemName(const UDateTimePatternGenerator *dtpg,
+                         UDateTimePatternField field,
+                         int32_t *pLength);
+
+#if (NTDDI_VERSION >= NTDDI_WIN10_VB)
+/**
+ * The general interface to get a display name for a particular date/time field,
+ * in one of several possible display widths.
+ *
+ * @param dtpg
+ *          A pointer to the UDateTimePatternGenerator object with the localized
+ *          display names.
+ * @param field
+ *          The desired UDateTimePatternField, such as UDATPG_ERA_FIELD.
+ * @param width
+ *          The desired UDateTimePGDisplayWidth, such as UDATPG_ABBREVIATED.
+ * @param fieldName
+ *          A pointer to a buffer to receive the NULL-terminated display name. If the name
+ *          fits into fieldName but cannot be  NULL-terminated (length == capacity) then
+ *          the error code is set to U_STRING_NOT_TERMINATED_WARNING. If the name doesn't
+ *          fit into fieldName then the error code is set to U_BUFFER_OVERFLOW_ERROR.
+ * @param capacity
+ *          The size of fieldName (in UChars).
+ * @param pErrorCode
+ *          A pointer to a UErrorCode to receive any errors
+ * @return
+ *         The full length of the name; if greater than capacity, fieldName contains a
+ *         truncated result.
+ * @stable ICU 61
+ */
+U_CAPI int32_t U_EXPORT2
+udatpg_getFieldDisplayName(const UDateTimePatternGenerator *dtpg,
+                           UDateTimePatternField field,
+                           UDateTimePGDisplayWidth width,
+                           UChar *fieldName, int32_t capacity,
+                           UErrorCode *pErrorCode);
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_VB)
+
+/**
+ * The DateTimeFormat is a message format pattern used to compose date and
+ * time patterns. The default pattern in the root locale is "{1} {0}", where
+ * {1} will be replaced by the date pattern and {0} will be replaced by the
+ * time pattern; however, other locales may specify patterns such as
+ * "{1}, {0}" or "{1} 'at' {0}", etc.
+ * <p>
+ * This is used when the input skeleton contains both date and time fields,
+ * but there is not a close match among the added patterns. For example,
+ * suppose that this object was created by adding "dd-MMM" and "hh:mm", and
+ * its DateTimeFormat is the default "{1} {0}". Then if the input skeleton
+ * is "MMMdhmm", there is not an exact match, so the input skeleton is
+ * broken up into two components "MMMd" and "hmm". There are close matches
+ * for those two skeletons, so the result is put together with this pattern,
+ * resulting in "d-MMM h:mm".
+ *
+ * @param dtpg a pointer to UDateTimePatternGenerator.
+ * @param dtFormat
+ *            message format pattern, here {1} will be replaced by the date
+ *            pattern and {0} will be replaced by the time pattern.
+ * @param length the length of dtFormat.
+ * @stable ICU 3.8
+ */
+U_CAPI void U_EXPORT2
+udatpg_setDateTimeFormat(const UDateTimePatternGenerator *dtpg,
+                         const UChar *dtFormat, int32_t length);
+
+/**
+ * Getter corresponding to setDateTimeFormat.
+ * @param dtpg   a pointer to UDateTimePatternGenerator.
+ * @param pLength A pointer that will receive the length of the format
+ * @return dateTimeFormat.
+ * @stable ICU 3.8
+ */
+U_CAPI const UChar * U_EXPORT2
+udatpg_getDateTimeFormat(const UDateTimePatternGenerator *dtpg,
+                         int32_t *pLength);
+
+/**
+ * The decimal value is used in formatting fractions of seconds. If the
+ * skeleton contains fractional seconds, then this is used with the
+ * fractional seconds. For example, suppose that the input pattern is
+ * "hhmmssSSSS", and the best matching pattern internally is "H:mm:ss", and
+ * the decimal string is ",". Then the resulting pattern is modified to be
+ * "H:mm:ss,SSSS"
+ *
+ * @param dtpg a pointer to UDateTimePatternGenerator.
+ * @param decimal
+ * @param length the length of decimal.
+ * @stable ICU 3.8
+ */
+U_CAPI void U_EXPORT2
+udatpg_setDecimal(UDateTimePatternGenerator *dtpg,
+                  const UChar *decimal, int32_t length);
+
+/**
+ * Getter corresponding to setDecimal.
+ * 
+ * @param dtpg a pointer to UDateTimePatternGenerator.
+ * @param pLength A pointer that will receive the length of the decimal string.
+ * @return corresponding to the decimal point.
+ * @stable ICU 3.8
+ */
+U_CAPI const UChar * U_EXPORT2
+udatpg_getDecimal(const UDateTimePatternGenerator *dtpg,
+                  int32_t *pLength);
+
+/**
+ * Adjusts the field types (width and subtype) of a pattern to match what is
+ * in a skeleton. That is, if you supply a pattern like "d-M H:m", and a
+ * skeleton of "MMMMddhhmm", then the input pattern is adjusted to be
+ * "dd-MMMM hh:mm". This is used internally to get the best match for the
+ * input skeleton, but can also be used externally.
+ *
+ * Note that this function uses a non-const UDateTimePatternGenerator:
+ * It uses a stateful pattern parser which is set up for each generator object,
+ * rather than creating one for each function call.
+ * Consecutive calls to this function do not affect each other,
+ * but this function cannot be used concurrently on a single generator object.
+ *
+ * @param dtpg a pointer to UDateTimePatternGenerator.
+ * @param pattern Input pattern
+ * @param patternLength the length of input pattern.
+ * @param skeleton
+ * @param skeletonLength the length of input skeleton.
+ * @param dest  pattern adjusted to match the skeleton fields widths and subtypes.
+ * @param destCapacity the capacity of dest.
+ * @param pErrorCode a pointer to the UErrorCode which must not indicate a
+ *                  failure before the function call.
+ * @return the length of dest.
+ * @stable ICU 3.8
+ */
+U_CAPI int32_t U_EXPORT2
+udatpg_replaceFieldTypes(UDateTimePatternGenerator *dtpg,
+                         const UChar *pattern, int32_t patternLength,
+                         const UChar *skeleton, int32_t skeletonLength,
+                         UChar *dest, int32_t destCapacity,
+                         UErrorCode *pErrorCode);
+
+/**
+ * Adjusts the field types (width and subtype) of a pattern to match what is
+ * in a skeleton. That is, if you supply a pattern like "d-M H:m", and a
+ * skeleton of "MMMMddhhmm", then the input pattern is adjusted to be
+ * "dd-MMMM hh:mm". This is used internally to get the best match for the
+ * input skeleton, but can also be used externally.
+ *
+ * Note that this function uses a non-const UDateTimePatternGenerator:
+ * It uses a stateful pattern parser which is set up for each generator object,
+ * rather than creating one for each function call.
+ * Consecutive calls to this function do not affect each other,
+ * but this function cannot be used concurrently on a single generator object.
+ *
+ * @param dtpg a pointer to UDateTimePatternGenerator.
+ * @param pattern Input pattern
+ * @param patternLength the length of input pattern.
+ * @param skeleton
+ * @param skeletonLength the length of input skeleton.
+ * @param options
+ *            Options controlling whether the length of specified fields in the
+ *            pattern are adjusted to match those in the skeleton (when this
+ *            would not happen otherwise). For default behavior, use
+ *            UDATPG_MATCH_NO_OPTIONS.
+ * @param dest  pattern adjusted to match the skeleton fields widths and subtypes.
+ * @param destCapacity the capacity of dest.
+ * @param pErrorCode a pointer to the UErrorCode which must not indicate a
+ *                  failure before the function call.
+ * @return the length of dest.
+ * @stable ICU 4.4
+ */
+U_CAPI int32_t U_EXPORT2
+udatpg_replaceFieldTypesWithOptions(UDateTimePatternGenerator *dtpg,
+                                    const UChar *pattern, int32_t patternLength,
+                                    const UChar *skeleton, int32_t skeletonLength,
+                                    UDateTimePatternMatchOptions options,
+                                    UChar *dest, int32_t destCapacity,
+                                    UErrorCode *pErrorCode);
+
+/**
+ * Return a UEnumeration list of all the skeletons in canonical form.
+ * Call udatpg_getPatternForSkeleton() to get the corresponding pattern.
+ * 
+ * @param dtpg a pointer to UDateTimePatternGenerator.
+ * @param pErrorCode a pointer to the UErrorCode which must not indicate a
+ *                  failure before the function call
+ * @return a UEnumeration list of all the skeletons
+ *         The caller must close the object.
+ * @stable ICU 3.8
+ */
+U_CAPI UEnumeration * U_EXPORT2
+udatpg_openSkeletons(const UDateTimePatternGenerator *dtpg, UErrorCode *pErrorCode);
+
+/**
+ * Return a UEnumeration list of all the base skeletons in canonical form.
+ *
+ * @param dtpg a pointer to UDateTimePatternGenerator.
+ * @param pErrorCode a pointer to the UErrorCode which must not indicate a
+ *             failure before the function call.
+ * @return a UEnumeration list of all the base skeletons
+ *             The caller must close the object.
+ * @stable ICU 3.8
+ */
+U_CAPI UEnumeration * U_EXPORT2
+udatpg_openBaseSkeletons(const UDateTimePatternGenerator *dtpg, UErrorCode *pErrorCode);
+
+/**
+ * Get the pattern corresponding to a given skeleton.
+ * 
+ * @param dtpg a pointer to UDateTimePatternGenerator.
+ * @param skeleton 
+ * @param skeletonLength pointer to the length of skeleton.
+ * @param pLength pointer to the length of return pattern.
+ * @return pattern corresponding to a given skeleton.
+ * @stable ICU 3.8
+ */
+U_CAPI const UChar * U_EXPORT2
+udatpg_getPatternForSkeleton(const UDateTimePatternGenerator *dtpg,
+                             const UChar *skeleton, int32_t skeletonLength,
+                             int32_t *pLength);
+
+#endif // __UDATPG_H__
+
+
 #if (NTDDI_VERSION >= NTDDI_WIN10_VB)
 // unumberformatter.h
 // Copyright (C) 2018 and later: Unicode, Inc. and others.
 // License & terms of use: http://www.unicode.org/copyright.html
 
-
-#if !UCONFIG_NO_FORMATTING
 #ifndef __UNUMBERFORMATTER_H__
 #define __UNUMBERFORMATTER_H__
+
+
+#if !UCONFIG_NO_FORMATTING
 
 
 
@@ -36566,10 +38778,318 @@ udat_getContext(const UDateFormat* fmt, UDisplayContextType type, UErrorCode* st
  * </pre>
  */
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+
+/**
+ * An enum declaring how to render units, including currencies. Example outputs when formatting 123 USD and 123
+ * meters in <em>en-CA</em>:
+ *
+ * <p>
+ * <ul>
+ * <li>NARROW*: "$123.00" and "123 m"
+ * <li>SHORT: "US$ 123.00" and "123 m"
+ * <li>FULL_NAME: "123.00 US dollars" and "123 meters"
+ * <li>ISO_CODE: "USD 123.00" and undefined behavior
+ * <li>HIDDEN: "123.00" and "123"
+ * </ul>
+ *
+ * <p>
+ * This enum is similar to {@link UMeasureFormatWidth}.
+ *
+ * @stable ICU 60
+ */
+typedef enum UNumberUnitWidth {
+    /**
+     * Print an abbreviated version of the unit name. Similar to SHORT, but always use the shortest available
+     * abbreviation or symbol. This option can be used when the context hints at the identity of the unit. For more
+     * information on the difference between NARROW and SHORT, see SHORT.
+     *
+     * <p>
+     * In CLDR, this option corresponds to the "Narrow" format for measure units and the "¤¤¤¤¤" placeholder for
+     * currencies.
+     *
+     * @stable ICU 60
+     */
+            UNUM_UNIT_WIDTH_NARROW,
+
+    /**
+     * Print an abbreviated version of the unit name. Similar to NARROW, but use a slightly wider abbreviation or
+     * symbol when there may be ambiguity. This is the default behavior.
+     *
+     * <p>
+     * For example, in <em>es-US</em>, the SHORT form for Fahrenheit is "{0} °F", but the NARROW form is "{0}°",
+     * since Fahrenheit is the customary unit for temperature in that locale.
+     *
+     * <p>
+     * In CLDR, this option corresponds to the "Short" format for measure units and the "¤" placeholder for
+     * currencies.
+     *
+     * @stable ICU 60
+     */
+            UNUM_UNIT_WIDTH_SHORT,
+
+    /**
+     * Print the full name of the unit, without any abbreviations.
+     *
+     * <p>
+     * In CLDR, this option corresponds to the default format for measure units and the "¤¤¤" placeholder for
+     * currencies.
+     *
+     * @stable ICU 60
+     */
+            UNUM_UNIT_WIDTH_FULL_NAME,
+
+    /**
+     * Use the three-digit ISO XXX code in place of the symbol for displaying currencies. The behavior of this
+     * option is currently undefined for use with measure units.
+     *
+     * <p>
+     * In CLDR, this option corresponds to the "¤¤" placeholder for currencies.
+     *
+     * @stable ICU 60
+     */
+            UNUM_UNIT_WIDTH_ISO_CODE,
 
 
+    /**
+     * Format the number according to the specified unit, but do not display the unit. For currencies, apply
+     * monetary symbols and formats as with SHORT, but omit the currency symbol. For measure units, the behavior is
+     * equivalent to not specifying the unit at all.
+     *
+     * @stable ICU 60
+     */
+            UNUM_UNIT_WIDTH_HIDDEN,
+
+    /**
+     * One more than the highest UNumberUnitWidth value.
+     *
+     * @internal ICU 60: The numeric value may change over time; see ICU ticket #12420.
+     */
+            UNUM_UNIT_WIDTH_COUNT
+} UNumberUnitWidth;
+
+/**
+ * An enum declaring the strategy for when and how to display grouping separators (i.e., the
+ * separator, often a comma or period, after every 2-3 powers of ten). The choices are several
+ * pre-built strategies for different use cases that employ locale data whenever possible. Example
+ * outputs for 1234 and 1234567 in <em>en-IN</em>:
+ *
+ * <ul>
+ * <li>OFF: 1234 and 12345
+ * <li>MIN2: 1234 and 12,34,567
+ * <li>AUTO: 1,234 and 12,34,567
+ * <li>ON_ALIGNED: 1,234 and 12,34,567
+ * <li>THOUSANDS: 1,234 and 1,234,567
+ * </ul>
+ *
+ * <p>
+ * The default is AUTO, which displays grouping separators unless the locale data says that grouping
+ * is not customary. To force grouping for all numbers greater than 1000 consistently across locales,
+ * use ON_ALIGNED. On the other hand, to display grouping less frequently than the default, use MIN2
+ * or OFF. See the docs of each option for details.
+ *
+ * <p>
+ * Note: This enum specifies the strategy for grouping sizes. To set which character to use as the
+ * grouping separator, use the "symbols" setter.
+ *
+ * @stable ICU 63
+ */
+typedef enum UNumberGroupingStrategy {
+    /**
+     * Do not display grouping separators in any locale.
+     *
+     * @stable ICU 61
+     */
+            UNUM_GROUPING_OFF,
+
+    /**
+     * Display grouping using locale defaults, except do not show grouping on values smaller than
+     * 10000 (such that there is a <em>minimum of two digits</em> before the first separator).
+     *
+     * <p>
+     * Note that locales may restrict grouping separators to be displayed only on 1 million or
+     * greater (for example, ee and hu) or disable grouping altogether (for example, bg currency).
+     *
+     * <p>
+     * Locale data is used to determine whether to separate larger numbers into groups of 2
+     * (customary in South Asia) or groups of 3 (customary in Europe and the Americas).
+     *
+     * @stable ICU 61
+     */
+            UNUM_GROUPING_MIN2,
+
+    /**
+     * Display grouping using the default strategy for all locales. This is the default behavior.
+     *
+     * <p>
+     * Note that locales may restrict grouping separators to be displayed only on 1 million or
+     * greater (for example, ee and hu) or disable grouping altogether (for example, bg currency).
+     *
+     * <p>
+     * Locale data is used to determine whether to separate larger numbers into groups of 2
+     * (customary in South Asia) or groups of 3 (customary in Europe and the Americas).
+     *
+     * @stable ICU 61
+     */
+            UNUM_GROUPING_AUTO,
+
+    /**
+     * Always display the grouping separator on values of at least 1000.
+     *
+     * <p>
+     * This option ignores the locale data that restricts or disables grouping, described in MIN2 and
+     * AUTO. This option may be useful to normalize the alignment of numbers, such as in a
+     * spreadsheet.
+     *
+     * <p>
+     * Locale data is used to determine whether to separate larger numbers into groups of 2
+     * (customary in South Asia) or groups of 3 (customary in Europe and the Americas).
+     *
+     * @stable ICU 61
+     */
+            UNUM_GROUPING_ON_ALIGNED,
+
+    /**
+     * Use the Western defaults: groups of 3 and enabled for all numbers 1000 or greater. Do not use
+     * locale data for determining the grouping strategy.
+     *
+     * @stable ICU 61
+     */
+            UNUM_GROUPING_THOUSANDS
 
 
+} UNumberGroupingStrategy;
+
+/**
+ * An enum declaring how to denote positive and negative numbers. Example outputs when formatting
+ * 123, 0, and -123 in <em>en-US</em>:
+ *
+ * <ul>
+ * <li>AUTO: "123", "0", and "-123"
+ * <li>ALWAYS: "+123", "+0", and "-123"
+ * <li>NEVER: "123", "0", and "123"
+ * <li>ACCOUNTING: "$123", "$0", and "($123)"
+ * <li>ACCOUNTING_ALWAYS: "+$123", "+$0", and "($123)"
+ * <li>EXCEPT_ZERO: "+123", "0", and "-123"
+ * <li>ACCOUNTING_EXCEPT_ZERO: "+$123", "$0", and "($123)"
+ * </ul>
+ *
+ * <p>
+ * The exact format, including the position and the code point of the sign, differ by locale.
+ *
+ * @stable ICU 60
+ */
+typedef enum UNumberSignDisplay {
+    /**
+     * Show the minus sign on negative numbers, and do not show the sign on positive numbers. This is the default
+     * behavior.
+     *
+     * @stable ICU 60
+     */
+            UNUM_SIGN_AUTO,
+
+    /**
+     * Show the minus sign on negative numbers and the plus sign on positive numbers, including zero.
+     * To hide the sign on zero, see {@link UNUM_SIGN_EXCEPT_ZERO}.
+     *
+     * @stable ICU 60
+     */
+            UNUM_SIGN_ALWAYS,
+
+    /**
+     * Do not show the sign on positive or negative numbers.
+     *
+     * @stable ICU 60
+     */
+            UNUM_SIGN_NEVER,
+
+    /**
+     * Use the locale-dependent accounting format on negative numbers, and do not show the sign on positive numbers.
+     *
+     * <p>
+     * The accounting format is defined in CLDR and varies by locale; in many Western locales, the format is a pair
+     * of parentheses around the number.
+     *
+     * <p>
+     * Note: Since CLDR defines the accounting format in the monetary context only, this option falls back to the
+     * AUTO sign display strategy when formatting without a currency unit. This limitation may be lifted in the
+     * future.
+     *
+     * @stable ICU 60
+     */
+            UNUM_SIGN_ACCOUNTING,
+
+    /**
+     * Use the locale-dependent accounting format on negative numbers, and show the plus sign on
+     * positive numbers, including zero. For more information on the accounting format, see the
+     * ACCOUNTING sign display strategy. To hide the sign on zero, see
+     * {@link UNUM_SIGN_ACCOUNTING_EXCEPT_ZERO}.
+     *
+     * @stable ICU 60
+     */
+            UNUM_SIGN_ACCOUNTING_ALWAYS,
+
+    /**
+     * Show the minus sign on negative numbers and the plus sign on positive numbers. Do not show a
+     * sign on zero, numbers that round to zero, or NaN.
+     *
+     * @stable ICU 61
+     */
+            UNUM_SIGN_EXCEPT_ZERO,
+
+    /**
+     * Use the locale-dependent accounting format on negative numbers, and show the plus sign on
+     * positive numbers. Do not show a sign on zero, numbers that round to zero, or NaN. For more
+     * information on the accounting format, see the ACCOUNTING sign display strategy.
+     *
+     * @stable ICU 61
+     */
+            UNUM_SIGN_ACCOUNTING_EXCEPT_ZERO,
+
+    /**
+     * One more than the highest UNumberSignDisplay value.
+     *
+     * @internal ICU 60: The numeric value may change over time; see ICU ticket #12420.
+     */
+            UNUM_SIGN_COUNT
+} UNumberSignDisplay;
+
+/**
+ * An enum declaring how to render the decimal separator.
+ *
+ * <p>
+ * <ul>
+ * <li>UNUM_DECIMAL_SEPARATOR_AUTO: "1", "1.1"
+ * <li>UNUM_DECIMAL_SEPARATOR_ALWAYS: "1.", "1.1"
+ * </ul>
+ *
+ * @stable ICU 60
+ */
+typedef enum UNumberDecimalSeparatorDisplay {
+    /**
+     * Show the decimal separator when there are one or more digits to display after the separator, and do not show
+     * it otherwise. This is the default behavior.
+     *
+     * @stable ICU 60
+     */
+            UNUM_DECIMAL_SEPARATOR_AUTO,
+
+    /**
+     * Always show the decimal separator, even if there are no digits to display after the separator.
+     *
+     * @stable ICU 60
+     */
+            UNUM_DECIMAL_SEPARATOR_ALWAYS,
+
+    /**
+     * One more than the highest UNumberDecimalSeparatorDisplay value.
+     *
+     * @internal ICU 60: The numeric value may change over time; see ICU ticket #12420.
+     */
+            UNUM_DECIMAL_SEPARATOR_COUNT
+} UNumberDecimalSeparatorDisplay;
+
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
 
 struct UNumberFormatter;
 /**
@@ -36604,16 +39124,32 @@ typedef struct UFormattedNumber UFormattedNumber;
  * NOTE: This is a C-compatible API; C++ users should build against numberformatter.h instead.
  *
  * @param skeleton The skeleton string, like u"percent precision-integer"
- * @param skeletonLen The number of UChars in the skeleton string, or -1 it it is NUL-terminated.
+ * @param skeletonLen The number of UChars in the skeleton string, or -1 if it is NUL-terminated.
  * @param locale The NUL-terminated locale ID.
  * @param ec Set if an error occurs.
  * @stable ICU 62
  */
-U_STABLE UNumberFormatter* U_EXPORT2
+U_CAPI UNumberFormatter* U_EXPORT2
 unumf_openForSkeletonAndLocale(const UChar* skeleton, int32_t skeletonLen, const char* locale,
                                UErrorCode* ec);
 
-
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+/**
+ * Like unumf_openForSkeletonAndLocale, but accepts a UParseError, which will be populated with the
+ * location of a skeleton syntax error if such a syntax error exists.
+ *
+ * @param skeleton The skeleton string, like u"percent precision-integer"
+ * @param skeletonLen The number of UChars in the skeleton string, or -1 if it is NUL-terminated.
+ * @param locale The NUL-terminated locale ID.
+ * @param perror A parse error struct populated if an error occurs when parsing. Can be NULL.
+ *               If no error occurs, perror->offset will be set to -1.
+ * @param ec Set if an error occurs.
+ * @stable ICU 64
+ */
+U_CAPI UNumberFormatter* U_EXPORT2
+unumf_openForSkeletonAndLocaleWithError(
+       const UChar* skeleton, int32_t skeletonLen, const char* locale, UParseError* perror, UErrorCode* ec);
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
 
 
 /**
@@ -36624,7 +39160,7 @@ unumf_openForSkeletonAndLocale(const UChar* skeleton, int32_t skeletonLen, const
  * @param ec Set if an error occurs.
  * @stable ICU 62
  */
-U_STABLE UFormattedNumber* U_EXPORT2
+U_CAPI UFormattedNumber* U_EXPORT2
 unumf_openResult(UErrorCode* ec);
 
 
@@ -36643,7 +39179,7 @@ unumf_openResult(UErrorCode* ec);
  * @param ec Set if an error occurs.
  * @stable ICU 62
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 unumf_formatInt(const UNumberFormatter* uformatter, int64_t value, UFormattedNumber* uresult,
                 UErrorCode* ec);
 
@@ -36663,7 +39199,7 @@ unumf_formatInt(const UNumberFormatter* uformatter, int64_t value, UFormattedNum
  * @param ec Set if an error occurs.
  * @stable ICU 62
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 unumf_formatDouble(const UNumberFormatter* uformatter, double value, UFormattedNumber* uresult,
                    UErrorCode* ec);
 
@@ -36687,10 +39223,28 @@ unumf_formatDouble(const UNumberFormatter* uformatter, double value, UFormattedN
  * @param ec Set if an error occurs.
  * @stable ICU 62
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 unumf_formatDecimal(const UNumberFormatter* uformatter, const char* value, int32_t valueLen,
                     UFormattedNumber* uresult, UErrorCode* ec);
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+/**
+ * Returns a representation of a UFormattedNumber as a UFormattedValue,
+ * which can be subsequently passed to any API requiring that type.
+ *
+ * The returned object is owned by the UFormattedNumber and is valid
+ * only as long as the UFormattedNumber is present and unchanged in memory.
+ *
+ * You can think of this method as a cast between types.
+ *
+ * @param uresult The object containing the formatted string.
+ * @param ec Set if an error occurs.
+ * @return A UFormattedValue owned by the input object.
+ * @stable ICU 64
+ */
+U_CAPI const UFormattedValue* U_EXPORT2
+unumf_resultAsValue(const UFormattedNumber* uresult, UErrorCode* ec);
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
 
 
 /**
@@ -36712,7 +39266,7 @@ unumf_formatDecimal(const UNumberFormatter* uformatter, const char* value, int32
  * @return The required length.
  * @stable ICU 62
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 unumf_resultToString(const UFormattedNumber* uresult, UChar* buffer, int32_t bufferCapacity,
                      UErrorCode* ec);
 
@@ -36746,11 +39300,11 @@ unumf_resultToString(const UFormattedNumber* uresult, UChar* buffer, int32_t buf
  *            "beginIndex" field is set to the beginning of the first occurrence of the field after the
  *            input "endIndex", and "endIndex" is set to the end of that occurrence of the field
  *            (exclusive index). If a field position is not found, the FieldPosition is not changed and
- *            the method returns FALSE.
+ *            the method returns false.
  * @param ec Set if an error occurs.
  * @stable ICU 62
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 unumf_resultNextFieldPosition(const UFormattedNumber* uresult, UFieldPosition* ufpos, UErrorCode* ec);
 
 
@@ -36775,9 +39329,11 @@ unumf_resultNextFieldPosition(const UFormattedNumber* uresult, UFieldPosition* u
  * @param ec Set if an error occurs.
  * @stable ICU 62
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 unumf_resultGetAllFieldPositions(const UFormattedNumber* uresult, UFieldPositionIterator* ufpositer,
                                  UErrorCode* ec);
+
+
 
 
 /**
@@ -36786,7 +39342,7 @@ unumf_resultGetAllFieldPositions(const UFormattedNumber* uresult, UFieldPosition
  * @param uformatter An object created by unumf_openForSkeletonAndLocale().
  * @stable ICU 62
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 unumf_close(UNumberFormatter* uformatter);
 
 
@@ -36796,14 +39352,210 @@ unumf_close(UNumberFormatter* uformatter);
  * @param uresult An object created by unumf_openResult().
  * @stable ICU 62
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 unumf_closeResult(UFormattedNumber* uresult);
 
 
 
-#endif //__UNUMBERFORMATTER_H__
 #endif /* #if !UCONFIG_NO_FORMATTING */
+#endif //__UNUMBERFORMATTER_H__
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_VB)
+
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+
+// unumberrangeformatter.h
+// Copyright (C) 2020 and later: Unicode, Inc. and others.
+// License & terms of use: http://www.unicode.org/copyright.html
+
+#ifndef __UNUMBERRANGEFORMATTER_H__
+#define __UNUMBERRANGEFORMATTER_H__
+
+
+#if !UCONFIG_NO_FORMATTING
+
+
+
+/**
+ * \file
+ * \brief C-compatible API for localized number range formatting.
+ *
+ * This is the C-compatible version of the NumberRangeFormatter API. C++ users
+ * should include unicode/numberrangeformatter.h and use the proper C++ APIs.
+ *
+ * First create a UNumberRangeFormatter, which is immutable, and then format to
+ * a UFormattedNumberRange.
+ *
+ * Example code:
+ * <pre>
+ * // Setup:
+ * UErrorCode ec = U_ZERO_ERROR;
+ * UNumberRangeFormatter* uformatter = unumrf_openForSkeletonCollapseIdentityFallbackAndLocaleWithError(
+ *     u"currency/USD precision-integer",
+ *     -1,
+ *     UNUM_RANGE_COLLAPSE_AUTO,
+ *     UNUM_IDENTITY_FALLBACK_APPROXIMATELY,
+ *     "en-US",
+ *     NULL,
+ *     &ec);
+ * UFormattedNumberRange* uresult = unumrf_openResult(&ec);
+ * if (U_FAILURE(ec)) { return; }
+ *
+ * // Format a double range:
+ * unumrf_formatDoubleRange(uformatter, 3.0, 5.0, uresult, &ec);
+ * if (U_FAILURE(ec)) { return; }
+ *
+ * // Get the result string:
+ * int32_t len;
+ * const UChar* str = ufmtval_getString(unumrf_resultAsValue(uresult, &ec), &len, &ec);
+ * if (U_FAILURE(ec)) { return; }
+ * // str should equal "$3 – $5"
+ *
+ * // Cleanup:
+ * unumf_close(uformatter);
+ * unumf_closeResult(uresult);
+ * </pre>
+ *
+ * If you are a C++ user linking against the C libraries, you can use the LocalPointer versions of these
+ * APIs. The following example uses LocalPointer with the decimal number and field position APIs:
+ *
+ * <pre>
+ * // Setup:
+ * LocalUNumberRangeFormatterPointer uformatter(
+ *     unumrf_openForSkeletonCollapseIdentityFallbackAndLocaleWithError(...));
+ * LocalUFormattedNumberRangePointer uresult(unumrf_openResult(&ec));
+ * if (U_FAILURE(ec)) { return; }
+ *
+ * // Format a double number range:
+ * unumrf_formatDoubleRange(uformatter.getAlias(), 3.0, 5.0, uresult.getAlias(), &ec);
+ * if (U_FAILURE(ec)) { return; }
+ *
+ * // No need to do any cleanup since we are using LocalPointer.
+ * </pre>
+ *
+ * You can also get field positions. For more information, see uformattedvalue.h.
+ */
+
+/**
+ * Defines how to merge fields that are identical across the range sign.
+ *
+ * @stable ICU 63
+ */
+typedef enum UNumberRangeCollapse {
+    /**
+     * Use locale data and heuristics to determine how much of the string to collapse. Could end up collapsing none,
+     * some, or all repeated pieces in a locale-sensitive way.
+     *
+     * The heuristics used for this option are subject to change over time.
+     *
+     * @stable ICU 63
+     */
+    UNUM_RANGE_COLLAPSE_AUTO,
+
+    /**
+     * Do not collapse any part of the number. Example: "3.2 thousand kilograms – 5.3 thousand kilograms"
+     *
+     * @stable ICU 63
+     */
+    UNUM_RANGE_COLLAPSE_NONE,
+
+    /**
+     * Collapse the unit part of the number, but not the notation, if present. Example: "3.2 thousand – 5.3 thousand
+     * kilograms"
+     *
+     * @stable ICU 63
+     */
+    UNUM_RANGE_COLLAPSE_UNIT,
+
+    /**
+     * Collapse any field that is equal across the range sign. May introduce ambiguity on the magnitude of the
+     * number. Example: "3.2 – 5.3 thousand kilograms"
+     *
+     * @stable ICU 63
+     */
+    UNUM_RANGE_COLLAPSE_ALL
+} UNumberRangeCollapse;
+
+/**
+ * Defines the behavior when the two numbers in the range are identical after rounding. To programmatically detect
+ * when the identity fallback is used, compare the lower and upper BigDecimals via FormattedNumber.
+ *
+ * @stable ICU 63
+ * @see NumberRangeFormatter
+ */
+typedef enum UNumberRangeIdentityFallback {
+    /**
+     * Show the number as a single value rather than a range. Example: "$5"
+     *
+     * @stable ICU 63
+     */
+    UNUM_IDENTITY_FALLBACK_SINGLE_VALUE,
+
+    /**
+     * Show the number using a locale-sensitive approximation pattern. If the numbers were the same before rounding,
+     * show the single value. Example: "~$5" or "$5"
+     *
+     * @stable ICU 63
+     */
+    UNUM_IDENTITY_FALLBACK_APPROXIMATELY_OR_SINGLE_VALUE,
+
+    /**
+     * Show the number using a locale-sensitive approximation pattern. Use the range pattern always, even if the
+     * inputs are the same. Example: "~$5"
+     *
+     * @stable ICU 63
+     */
+    UNUM_IDENTITY_FALLBACK_APPROXIMATELY,
+
+    /**
+     * Show the number as the range of two equal values. Use the range pattern always, even if the inputs are the
+     * same. Example (with RangeCollapse.NONE): "$5 – $5"
+     *
+     * @stable ICU 63
+     */
+    UNUM_IDENTITY_FALLBACK_RANGE
+} UNumberRangeIdentityFallback;
+
+/**
+ * Used in the result class FormattedNumberRange to indicate to the user whether the numbers formatted in the range
+ * were equal or not, and whether or not the identity fallback was applied.
+ *
+ * @stable ICU 63
+ * @see NumberRangeFormatter
+ */
+typedef enum UNumberRangeIdentityResult {
+    /**
+     * Used to indicate that the two numbers in the range were equal, even before any rounding rules were applied.
+     *
+     * @stable ICU 63
+     * @see NumberRangeFormatter
+     */
+    UNUM_IDENTITY_RESULT_EQUAL_BEFORE_ROUNDING,
+
+    /**
+     * Used to indicate that the two numbers in the range were equal, but only after rounding rules were applied.
+     *
+     * @stable ICU 63
+     * @see NumberRangeFormatter
+     */
+    UNUM_IDENTITY_RESULT_EQUAL_AFTER_ROUNDING,
+
+    /**
+     * Used to indicate that the two numbers in the range were not equal, even after rounding rules were applied.
+     *
+     * @stable ICU 63
+     * @see NumberRangeFormatter
+     */
+    UNUM_IDENTITY_RESULT_NOT_EQUAL,
+
+
+} UNumberRangeIdentityResult;
+
+
+
+#endif /* #if !UCONFIG_NO_FORMATTING */
+#endif //__UNUMBERRANGEFORMATTER_H__
+
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
 
 // unumsys.h
 // Copyright (C) 2016 and later: Unicode, Inc. and others.
@@ -36820,6 +39572,7 @@ unumf_closeResult(UFormattedNumber* uresult);
 
 
 #if !UCONFIG_NO_FORMATTING
+
 
 
 /**
@@ -36859,7 +39612,7 @@ typedef struct UNumberingSystem UNumberingSystem;  /**< C typedef for struct UNu
  *                  occurred.
  * @stable ICU 52
  */
-U_STABLE UNumberingSystem * U_EXPORT2
+U_CAPI UNumberingSystem * U_EXPORT2
 unumsys_open(const char *locale, UErrorCode *status);
 
 /**
@@ -36880,7 +39633,7 @@ unumsys_open(const char *locale, UErrorCode *status);
  *                  occurred.
  * @stable ICU 52
  */
-U_STABLE UNumberingSystem * U_EXPORT2
+U_CAPI UNumberingSystem * U_EXPORT2
 unumsys_openByName(const char *name, UErrorCode *status);
 
 /**
@@ -36888,7 +39641,7 @@ unumsys_openByName(const char *name, UErrorCode *status);
  * @param unumsys   The UNumberingSystem object to close.
  * @stable ICU 52
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 unumsys_close(UNumberingSystem *unumsys);
 
 
@@ -36901,7 +39654,7 @@ unumsys_close(UNumberingSystem *unumsys);
  *                  or NULL if an error occurred.
  * @stable ICU 52
  */
-U_STABLE UEnumeration * U_EXPORT2
+U_CAPI UEnumeration * U_EXPORT2
 unumsys_openAvailableNames(UErrorCode *status);
 
 /**
@@ -36913,18 +39666,18 @@ unumsys_openAvailableNames(UErrorCode *status);
  *                  is only valid for the lifetime of the UNumberingSystem object.
  * @stable ICU 52
  */
-U_STABLE const char * U_EXPORT2
+U_CAPI const char * U_EXPORT2
 unumsys_getName(const UNumberingSystem *unumsys);
 
 /**
  * Returns whether the given UNumberingSystem object is for an algorithmic (not purely
  * positional) system.
  * @param unumsys   The UNumberingSystem whose algorithmic status is desired.
- * @return          TRUE if the specified UNumberingSystem object is for an algorithmic
+ * @return          true if the specified UNumberingSystem object is for an algorithmic
  *                  system.
  * @stable ICU 52
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 unumsys_isAlgorithmic(const UNumberingSystem *unumsys);
 
 /**
@@ -36935,7 +39688,7 @@ unumsys_isAlgorithmic(const UNumberingSystem *unumsys);
  * @return          The radix of the specified UNumberingSystem object.
  * @stable ICU 52
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 unumsys_getRadix(const UNumberingSystem *unumsys);
 
 /**
@@ -36954,7 +39707,7 @@ unumsys_getRadix(const UNumberingSystem *unumsys);
  *                  output was truncated.
  * @stable ICU 52
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 unumsys_getDescription(const UNumberingSystem *unumsys, UChar *result,
                        int32_t resultLength, UErrorCode *status);
 
@@ -36979,8 +39732,13 @@ unumsys_getDescription(const UNumberingSystem *unumsys, UChar *result,
 #if !UCONFIG_NO_FORMATTING
 
 
+
+
 // Forward-declaration
 struct UFormattedNumber;
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+struct UFormattedNumberRange;
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
 
 /**
  * \file
@@ -37086,6 +39844,32 @@ uplrules_select(const UPluralRules *uplrules,
                UChar *keyword, int32_t capacity,
                UErrorCode *status);
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+/**
+ * Given a formatted number, returns the keyword of the first rule
+ * that applies to the number, according to the supplied UPluralRules object.
+ *
+ * A UFormattedNumber allows you to specify an exponent or trailing zeros,
+ * which can affect the plural category. To get a UFormattedNumber, see
+ * {@link UNumberFormatter}.
+ *
+ * @param uplrules The UPluralRules object specifying the rules.
+ * @param number The formatted number for which the rule has to be determined.
+ * @param keyword The destination buffer for the keyword of the rule that
+ *         applies to the number.
+ * @param capacity The capacity of the keyword buffer.
+ * @param status A pointer to a UErrorCode to receive any errors.
+ * @return The length of the keyword.
+ * @stable ICU 64
+ */
+U_CAPI int32_t U_EXPORT2
+uplrules_selectFormatted(const UPluralRules *uplrules,
+               const struct UFormattedNumber* number,
+               UChar *keyword, int32_t capacity,
+               UErrorCode *status);
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
+
+
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS5)
 /**
  * Creates a string enumeration of all plural rule keywords used in this
@@ -37097,7 +39881,7 @@ uplrules_select(const UPluralRules *uplrules,
  * upon error. The caller is responsible for closing the result.
  * @stable ICU 59
  */
-U_STABLE UEnumeration* U_EXPORT2
+U_CAPI UEnumeration* U_EXPORT2
 uplrules_getKeywords(const UPluralRules *uplrules,
                      UErrorCode *status);
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS5)
@@ -37136,6 +39920,7 @@ uplrules_getKeywords(const UPluralRules *uplrules,
 
 
 #if !UCONFIG_NO_REGULAR_EXPRESSIONS
+
 
 
 struct URegularExpression;
@@ -37230,7 +40015,7 @@ typedef enum URegexpFlag{
   * @stable ICU 3.0
   *
   */
-U_STABLE URegularExpression * U_EXPORT2
+U_CAPI URegularExpression * U_EXPORT2
 uregex_open( const  UChar          *pattern,
                     int32_t         patternLength,
                     uint32_t        flags,
@@ -37260,7 +40045,7 @@ uregex_open( const  UChar          *pattern,
   *
   * @stable ICU 4.6
   */
-U_STABLE URegularExpression *  U_EXPORT2
+U_CAPI URegularExpression *  U_EXPORT2
 uregex_openUText(UText          *pattern,
                  uint32_t        flags,
                  UParseError    *pe,
@@ -37290,7 +40075,7 @@ uregex_openUText(UText          *pattern,
   *
   * @stable ICU 3.0
   */
-U_STABLE URegularExpression * U_EXPORT2
+U_CAPI URegularExpression * U_EXPORT2
 uregex_openC( const char           *pattern,
                     uint32_t        flags,
                     UParseError    *pe,
@@ -37306,7 +40091,7 @@ uregex_openC( const char           *pattern,
   * @param regexp   The regular expression to be closed.
   * @stable ICU 3.0
   */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 uregex_close(URegularExpression *regexp);
 
 
@@ -37328,7 +40113,7 @@ uregex_close(URegularExpression *regexp);
  * @return the cloned copy of the compiled regular expression.
  * @stable ICU 3.0
  */
-U_STABLE URegularExpression * U_EXPORT2 
+U_CAPI URegularExpression * U_EXPORT2 
 uregex_clone(const URegularExpression *regexp, UErrorCode *status);
 
 /**
@@ -37348,7 +40133,7 @@ uregex_clone(const URegularExpression *regexp, UErrorCode *status);
  *                   will remain valid until the regular expression is closed.
  * @stable ICU 3.0
  */
-U_STABLE const UChar * U_EXPORT2 
+U_CAPI const UChar * U_EXPORT2 
 uregex_pattern(const URegularExpression *regexp,
                      int32_t            *patLength,
                      UErrorCode         *status);
@@ -37364,7 +40149,7 @@ uregex_pattern(const URegularExpression *regexp,
  *
  * @stable ICU 4.6
  */
-U_STABLE UText * U_EXPORT2 
+U_CAPI UText * U_EXPORT2 
 uregex_patternUText(const URegularExpression *regexp,
                           UErrorCode         *status);
 
@@ -37376,7 +40161,7 @@ uregex_patternUText(const URegularExpression *regexp,
   * @see URegexpFlag
   * @stable ICU 3.0
   */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 uregex_flags(const  URegularExpression   *regexp,
                     UErrorCode           *status);
 
@@ -37401,7 +40186,7 @@ uregex_flags(const  URegularExpression   *regexp,
   * @param status     Receives errors detected by this function.
   * @stable ICU 3.0
   */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 uregex_setText(URegularExpression *regexp,
                const UChar        *text,
                int32_t             textLength,
@@ -37424,7 +40209,7 @@ uregex_setText(URegularExpression *regexp,
   *
   * @stable ICU 4.6
   */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 uregex_setUText(URegularExpression *regexp,
                 UText              *text,
                 UErrorCode         *status);
@@ -37449,7 +40234,7 @@ uregex_setUText(URegularExpression *regexp,
   *                    this regular expression.
   * @stable ICU 3.0
   */
-U_STABLE const UChar * U_EXPORT2 
+U_CAPI const UChar * U_EXPORT2 
 uregex_getText(URegularExpression *regexp,
                int32_t            *textLength,
                UErrorCode         *status);
@@ -37470,7 +40255,7 @@ uregex_getText(URegularExpression *regexp,
   *
   * @stable ICU 4.6
   */
-U_STABLE UText * U_EXPORT2 
+U_CAPI UText * U_EXPORT2 
 uregex_getUText(URegularExpression *regexp,
                 UText              *dest,
                 UErrorCode         *status);
@@ -37500,7 +40285,7 @@ uregex_getUText(URegularExpression *regexp,
   *
   * @stable ICU 4.8
   */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 uregex_refreshUText(URegularExpression *regexp,
                     UText              *text,
                     UErrorCode         *status);
@@ -37522,10 +40307,10 @@ uregex_refreshUText(URegularExpression *regexp,
   *    @param  startIndex  The input string (native) index at which to begin matching, or -1
   *                        to match the input Region.
   *    @param  status      Receives errors detected by this function.
-  *    @return             TRUE if there is a match
+  *    @return             true if there is a match
   *    @stable ICU 3.0
   */
-U_STABLE UBool U_EXPORT2 
+U_CAPI UBool U_EXPORT2 
 uregex_matches(URegularExpression *regexp,
                 int32_t            startIndex,
                 UErrorCode        *status);
@@ -37548,10 +40333,10 @@ uregex_matches(URegularExpression *regexp,
   *    @param  startIndex  The input string (native) index at which to begin matching, or -1
   *                        to match the input Region.
   *    @param  status      Receives errors detected by this function.
-  *    @return             TRUE if there is a match
+  *    @return             true if there is a match
   *   @stable ICU 4.6
   */
-U_STABLE UBool U_EXPORT2 
+U_CAPI UBool U_EXPORT2 
 uregex_matches64(URegularExpression *regexp,
                  int64_t            startIndex,
                  UErrorCode        *status);
@@ -37576,10 +40361,10 @@ uregex_matches64(URegularExpression *regexp,
   *    @param   startIndex  The input string (native) index at which to begin matching, or
   *                         -1 to match the Input Region
   *    @param   status      A reference to a UErrorCode to receive any errors.
-  *    @return  TRUE if there is a match.
+  *    @return  true if there is a match.
   *    @stable ICU 3.0
   */
-U_STABLE UBool U_EXPORT2 
+U_CAPI UBool U_EXPORT2 
 uregex_lookingAt(URegularExpression *regexp,
                  int32_t             startIndex,
                  UErrorCode         *status);
@@ -37605,10 +40390,10 @@ uregex_lookingAt(URegularExpression *regexp,
   *    @param   startIndex  The input string (native) index at which to begin matching, or
   *                         -1 to match the Input Region
   *    @param   status      A reference to a UErrorCode to receive any errors.
-  *    @return  TRUE if there is a match.
+  *    @return  true if there is a match.
   *    @stable ICU 4.6
   */
-U_STABLE UBool U_EXPORT2 
+U_CAPI UBool U_EXPORT2 
 uregex_lookingAt64(URegularExpression *regexp,
                    int64_t             startIndex,
                    UErrorCode         *status);
@@ -37629,10 +40414,10 @@ uregex_lookingAt64(URegularExpression *regexp,
   *   @param   startIndex  The position (native) in the input string to begin the search, or
   *                        -1 to search within the Input Region.
   *   @param   status      A reference to a UErrorCode to receive any errors.
-  *   @return              TRUE if a match is found.
+  *   @return              true if a match is found.
   *   @stable ICU 3.0
   */
-U_STABLE UBool U_EXPORT2 
+U_CAPI UBool U_EXPORT2 
 uregex_find(URegularExpression *regexp,
             int32_t             startIndex, 
             UErrorCode         *status);
@@ -37654,10 +40439,10 @@ uregex_find(URegularExpression *regexp,
   *   @param   startIndex  The position (native) in the input string to begin the search, or
   *                        -1 to search within the Input Region.
   *   @param   status      A reference to a UErrorCode to receive any errors.
-  *   @return              TRUE if a match is found.
+  *   @return              true if a match is found.
   *   @stable ICU 4.6
   */
-U_STABLE UBool U_EXPORT2 
+U_CAPI UBool U_EXPORT2 
 uregex_find64(URegularExpression *regexp,
               int64_t             startIndex, 
               UErrorCode         *status);
@@ -37671,11 +40456,11 @@ uregex_find64(URegularExpression *regexp,
   *
   *  @param   regexp      The compiled regular expression.
   *  @param   status      A reference to a UErrorCode to receive any errors.
-  *  @return              TRUE if a match is found.
+  *  @return              true if a match is found.
   *  @see uregex_reset
   *  @stable ICU 3.0
   */
-U_STABLE UBool U_EXPORT2 
+U_CAPI UBool U_EXPORT2 
 uregex_findNext(URegularExpression *regexp,
                 UErrorCode         *status);
 
@@ -37686,7 +40471,7 @@ uregex_findNext(URegularExpression *regexp,
   *   @return the number of capture groups
   *   @stable ICU 3.0
   */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 uregex_groupCount(URegularExpression *regexp,
                   UErrorCode         *status);
 
@@ -37706,7 +40491,7 @@ uregex_groupCount(URegularExpression *regexp,
   *
   * @stable ICU 55
   */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uregex_groupNumberFromName(URegularExpression *regexp,
                            const UChar        *groupName,
                            int32_t             nameLength,
@@ -37730,7 +40515,7 @@ uregex_groupNumberFromName(URegularExpression *regexp,
   *
   * @stable ICU 55
   */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uregex_groupNumberFromCName(URegularExpression *regexp,
                             const char         *groupName,
                             int32_t             nameLength,
@@ -37752,7 +40537,7 @@ uregex_groupNumberFromCName(URegularExpression *regexp,
   *                         or -1 if no applicable match.
   *   @stable ICU 3.0
   */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 uregex_group(URegularExpression *regexp,
              int32_t             groupNum,
              UChar              *dest,
@@ -37781,7 +40566,7 @@ uregex_group(URegularExpression *regexp,
   *
   *   @stable ICU 4.6
   */
-U_STABLE UText * U_EXPORT2 
+U_CAPI UText * U_EXPORT2 
 uregex_groupUText(URegularExpression *regexp,
                   int32_t             groupNum,
                   UText              *dest,
@@ -37802,7 +40587,7 @@ uregex_groupUText(URegularExpression *regexp,
   *                         by the specified group.
   *    @stable ICU 3.0
   */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 uregex_start(URegularExpression *regexp,
              int32_t             groupNum,
              UErrorCode          *status);
@@ -37822,7 +40607,7 @@ uregex_start(URegularExpression *regexp,
   *                         by the specified group.
   *   @stable ICU 4.6
   */
-U_STABLE int64_t U_EXPORT2 
+U_CAPI int64_t U_EXPORT2 
 uregex_start64(URegularExpression *regexp,
                int32_t             groupNum,
                UErrorCode          *status);
@@ -37840,7 +40625,7 @@ uregex_start64(URegularExpression *regexp,
   *    @return              the (native) index of the position following the last matched character.
   *    @stable ICU 3.0
   */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 uregex_end(URegularExpression   *regexp,
            int32_t               groupNum,
            UErrorCode           *status);
@@ -37859,7 +40644,7 @@ uregex_end(URegularExpression   *regexp,
   *    @return              the (native) index of the position following the last matched character.
   *   @stable ICU 4.6
   */
-U_STABLE int64_t U_EXPORT2 
+U_CAPI int64_t U_EXPORT2 
 uregex_end64(URegularExpression *regexp,
              int32_t               groupNum,
              UErrorCode           *status);
@@ -37877,7 +40662,7 @@ uregex_end64(URegularExpression *regexp,
   *    @param   status      A reference to a UErrorCode to receive any errors.
   *    @stable ICU 3.0
   */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 uregex_reset(URegularExpression    *regexp,
              int32_t               index,
              UErrorCode            *status);
@@ -37896,7 +40681,7 @@ uregex_reset(URegularExpression    *regexp,
   *    @param   status      A reference to a UErrorCode to receive any errors.
   *    @stable ICU 4.6
   */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 uregex_reset64(URegularExpression  *regexp,
                int64_t               index,
                UErrorCode            *status);
@@ -37921,7 +40706,7 @@ uregex_reset64(URegularExpression  *regexp,
   * @param status A pointer to a UErrorCode to receive any errors.
   * @stable ICU 4.0
   */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uregex_setRegion(URegularExpression   *regexp,
                  int32_t               regionStart,
                  int32_t               regionLimit,
@@ -37948,7 +40733,7 @@ uregex_setRegion(URegularExpression   *regexp,
   * @param status A pointer to a UErrorCode to receive any errors.
   * @stable ICU 4.6
   */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 uregex_setRegion64(URegularExpression *regexp,
                  int64_t               regionStart,
                  int64_t               regionLimit,
@@ -37968,7 +40753,7 @@ uregex_setRegion64(URegularExpression *regexp,
   * @param status A pointer to a UErrorCode to receive any errors.
   * @stable ICU 4.6
   */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 uregex_setRegionAndStart(URegularExpression *regexp,
                  int64_t               regionStart,
                  int64_t               regionLimit,
@@ -37984,7 +40769,7 @@ uregex_setRegionAndStart(URegularExpression *regexp,
   * @return The starting (native) index of this matcher's region.
   * @stable ICU 4.0
   */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uregex_regionStart(const  URegularExpression   *regexp,
                           UErrorCode           *status);
 
@@ -37998,7 +40783,7 @@ uregex_regionStart(const  URegularExpression   *regexp,
   * @return The starting (native) index of this matcher's region.
   * @stable ICU 4.6
   */
-U_STABLE int64_t U_EXPORT2 
+U_CAPI int64_t U_EXPORT2 
 uregex_regionStart64(const  URegularExpression   *regexp,
                             UErrorCode           *status);
 
@@ -38012,7 +40797,7 @@ uregex_regionStart64(const  URegularExpression   *regexp,
   * @return The ending point (native) of this matcher's region.
   * @stable ICU 4.0
   */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uregex_regionEnd(const  URegularExpression   *regexp,
                         UErrorCode           *status);
 
@@ -38027,7 +40812,7 @@ uregex_regionEnd(const  URegularExpression   *regexp,
   * @return The ending point (native) of this matcher's region.
   * @stable ICU 4.6
   */
-U_STABLE int64_t U_EXPORT2 
+U_CAPI int64_t U_EXPORT2 
 uregex_regionEnd64(const  URegularExpression   *regexp,
                           UErrorCode           *status);
 
@@ -38038,18 +40823,18 @@ uregex_regionEnd64(const  URegularExpression   *regexp,
   *
   * @param regexp The compiled regular expression.
   * @param status A pointer to a UErrorCode to receive any errors.
-  * @return TRUE if this matcher is using opaque bounds, false if it is not.
+  * @return true if this matcher is using opaque bounds, false if it is not.
   * @stable ICU 4.0
   */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 uregex_hasTransparentBounds(const  URegularExpression   *regexp,
                                    UErrorCode           *status);
 
 
 /**
   * Sets the transparency of region bounds for this URegularExpression.
-  * Invoking this function with an argument of TRUE will set matches to use transparent bounds.
-  * If the boolean argument is FALSE, then opaque bounds will be used.
+  * Invoking this function with an argument of true will set matches to use transparent bounds.
+  * If the boolean argument is false, then opaque bounds will be used.
   *
   * Using transparent bounds, the boundaries of the matching region are transparent
   * to lookahead, lookbehind, and boundary matching constructs. Those constructs can
@@ -38061,11 +40846,11 @@ uregex_hasTransparentBounds(const  URegularExpression   *regexp,
   * By default, opaque bounds are used.
   *
   * @param   regexp The compiled regular expression.
-  * @param   b      TRUE for transparent bounds; FALSE for opaque bounds
+  * @param   b      true for transparent bounds; false for opaque bounds
   * @param   status A pointer to a UErrorCode to receive any errors.
   * @stable ICU 4.0
   **/
-U_STABLE void U_EXPORT2  
+U_CAPI void U_EXPORT2  
 uregex_useTransparentBounds(URegularExpression   *regexp, 
                             UBool                b,
                             UErrorCode           *status);
@@ -38077,10 +40862,10 @@ uregex_useTransparentBounds(URegularExpression   *regexp,
   *
   * @param  regexp The compiled regular expression.
   * @param  status A pointer to a UErrorCode to receive any errors.
-  * @return TRUE if this matcher is using anchoring bounds.
+  * @return true if this matcher is using anchoring bounds.
   * @stable ICU 4.0
   */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 uregex_hasAnchoringBounds(const  URegularExpression   *regexp,
                                  UErrorCode           *status);
 
@@ -38094,41 +40879,41 @@ uregex_hasAnchoringBounds(const  URegularExpression   *regexp,
   * Anchoring Bounds are the default for regions.
   *
   * @param regexp The compiled regular expression.
-  * @param b      TRUE if to enable anchoring bounds; FALSE to disable them.
+  * @param b      true if to enable anchoring bounds; false to disable them.
   * @param status A pointer to a UErrorCode to receive any errors.
   * @stable ICU 4.0
   */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uregex_useAnchoringBounds(URegularExpression   *regexp,
                           UBool                 b,
                           UErrorCode           *status);
 
 /**
-  * Return TRUE if the most recent matching operation touched the
+  * Return true if the most recent matching operation touched the
   *  end of the text being processed.  In this case, additional input text could
   *  change the results of that match.
   *
   *  @param regexp The compiled regular expression.
   *  @param status A pointer to a UErrorCode to receive any errors.
-  *  @return  TRUE if the most recent match hit the end of input
+  *  @return  true if the most recent match hit the end of input
   *  @stable ICU 4.0
   */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 uregex_hitEnd(const  URegularExpression   *regexp,
                      UErrorCode           *status);
 
 /**
-  * Return TRUE the most recent match succeeded and additional input could cause
+  * Return true the most recent match succeeded and additional input could cause
   * it to fail. If this function returns false and a match was found, then more input
   * might change the match but the match won't be lost. If a match was not found,
   * then requireEnd has no meaning.
   *
   * @param regexp The compiled regular expression.
   * @param status A pointer to a UErrorCode to receive any errors.
-  * @return TRUE  if more input could cause the most recent match to no longer match.
+  * @return true  if more input could cause the most recent match to no longer match.
   * @stable ICU 4.0
   */
-U_STABLE UBool U_EXPORT2   
+U_CAPI UBool U_EXPORT2   
 uregex_requireEnd(const  URegularExpression   *regexp,
                          UErrorCode           *status);
 
@@ -38160,7 +40945,7 @@ uregex_requireEnd(const  URegularExpression   *regexp,
   *                                is still the full length of the untruncated string.
   *    @stable ICU 3.0
   */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 uregex_replaceAll(URegularExpression    *regexp,
                   const UChar           *replacementText,
                   int32_t                replacementLength,
@@ -38189,7 +40974,7 @@ uregex_replaceAll(URegularExpression    *regexp,
   *
   *    @stable ICU 4.6
   */
-U_STABLE UText * U_EXPORT2 
+U_CAPI UText * U_EXPORT2 
 uregex_replaceAllUText(URegularExpression *regexp,
                        UText              *replacement,
                        UText              *dest,
@@ -38219,7 +41004,7 @@ uregex_replaceAllUText(URegularExpression *regexp,
   *                                is still the full length of the untruncated string.
   *    @stable ICU 3.0
   */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 uregex_replaceFirst(URegularExpression  *regexp,
                     const UChar         *replacementText,
                     int32_t              replacementLength,
@@ -38248,7 +41033,7 @@ uregex_replaceFirst(URegularExpression  *regexp,
   *
   *    @stable ICU 4.6
   */
-U_STABLE UText * U_EXPORT2 
+U_CAPI UText * U_EXPORT2 
 uregex_replaceFirstUText(URegularExpression *regexp,
                          UText              *replacement,
                          UText              *dest,
@@ -38300,7 +41085,7 @@ uregex_replaceFirstUText(URegularExpression *regexp,
   *   @stable ICU 3.0
   *
   */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 uregex_appendReplacement(URegularExpression    *regexp,
                          const UChar           *replacementText,
                          int32_t                replacementLength,
@@ -38330,7 +41115,7 @@ uregex_appendReplacement(URegularExpression    *regexp,
   *
   *   @stable ICU 4.6
   */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 uregex_appendReplacementUText(URegularExpression    *regexp,
                               UText                 *replacementText,
                               UText                 *dest,
@@ -38360,7 +41145,7 @@ uregex_appendReplacementUText(URegularExpression    *regexp,
   *
   *   @stable ICU 3.0
   */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 uregex_appendTail(URegularExpression    *regexp,
                   UChar                **destBuf,
                   int32_t               *destCapacity,
@@ -38384,7 +41169,7 @@ uregex_appendTail(URegularExpression    *regexp,
   *
   *   @stable ICU 4.6
   */
-U_STABLE UText * U_EXPORT2 
+U_CAPI UText * U_EXPORT2 
 uregex_appendTailUText(URegularExpression    *regexp,
                        UText                 *dest,
                        UErrorCode            *status);
@@ -38440,7 +41225,7 @@ uregex_appendTailUText(URegularExpression    *regexp,
    * @return        The number of fields into which the input string was split.
    * @stable ICU 3.0
    */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 uregex_split(   URegularExpression      *regexp,
                   UChar                 *destBuf,
                   int32_t                destCapacity,
@@ -38475,7 +41260,7 @@ uregex_split(   URegularExpression      *regexp,
    *
    * @stable ICU 4.6
    */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 uregex_splitUText(URegularExpression    *regexp,
                   UText                 *destFields[],
                   int32_t                destFieldsCapacity,
@@ -38503,7 +41288,7 @@ uregex_splitUText(URegularExpression    *regexp,
  * @param   status      A reference to a UErrorCode to receive any errors.
  * @stable ICU 4.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uregex_setTimeLimit(URegularExpression      *regexp,
                     int32_t                  limit,
                     UErrorCode              *status);
@@ -38517,7 +41302,7 @@ uregex_setTimeLimit(URegularExpression      *regexp,
  * @return the maximum allowed time for a match, in units of processing steps.
  * @stable ICU 4.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uregex_getTimeLimit(const URegularExpression      *regexp,
                           UErrorCode              *status);
 
@@ -38541,7 +41326,7 @@ uregex_getTimeLimit(const URegularExpression      *regexp,
  *
  * @stable ICU 4.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uregex_setStackLimit(URegularExpression      *regexp,
                      int32_t                  limit,
                      UErrorCode              *status);
@@ -38553,7 +41338,7 @@ uregex_setStackLimit(URegularExpression      *regexp,
  *          stack size is unlimited.
  * @stable ICU 4.0
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uregex_getStackLimit(const URegularExpression      *regexp,
                            UErrorCode              *status);
 
@@ -38561,7 +41346,7 @@ uregex_getStackLimit(const URegularExpression      *regexp,
 /**
  * Function pointer for a regular expression matching callback function.
  * When set, a callback function will be called periodically during matching
- * operations.  If the call back function returns FALSE, the matching
+ * operations.  If the call back function returns false, the matching
  * operation will be terminated early.
  *
  * Note:  the callback function must not call other functions on this
@@ -38572,8 +41357,8 @@ uregex_getStackLimit(const URegularExpression      *regexp,
  *                 uregex_setMatchCallback() is called.
  * @param steps    the accumulated processing time, in match steps, 
  *                 for this matching operation.
- * @return         TRUE to continue the matching operation.
- *                 FALSE to terminate the matching operation.
+ * @return         true to continue the matching operation.
+ *                 false to terminate the matching operation.
  * @stable ICU 4.0
  */
 U_CDECL_BEGIN
@@ -38596,7 +41381,7 @@ U_CDECL_END
  * @param   status      A reference to a UErrorCode to receive any errors.
  * @stable ICU 4.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uregex_setMatchCallback(URegularExpression      *regexp,
                         URegexMatchCallback     *callback,
                         const void              *context,
@@ -38614,7 +41399,7 @@ uregex_setMatchCallback(URegularExpression      *regexp,
  * @param   status      A reference to a UErrorCode to receive any errors.
  * @stable ICU 4.0
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uregex_getMatchCallback(const URegularExpression    *regexp,
                         URegexMatchCallback        **callback,
                         const void                 **context,
@@ -38635,7 +41420,7 @@ uregex_getMatchCallback(const URegularExpression    *regexp,
  * to be attempted, giving the application the opportunity to terminate a long-running
  * find operation.
  * 
- * If the call back function returns FALSE, the find operation will be terminated early.
+ * If the call back function returns false, the find operation will be terminated early.
  *
  * Note:  the callback function must not call other functions on this
  *        URegularExpression
@@ -38646,8 +41431,8 @@ uregex_getMatchCallback(const URegularExpression    *regexp,
  * @param matchIndex  the next index at which a match attempt will be attempted for this
  *                 find operation.  If this callback interrupts the search, this is the
  *                 index at which a find/findNext operation may be re-initiated.
- * @return         TRUE to continue the matching operation.
- *                 FALSE to terminate the matching operation.
+ * @return         true to continue the matching operation.
+ *                 false to terminate the matching operation.
  * @stable ICU 4.6
  */
 U_CDECL_BEGIN
@@ -38668,7 +41453,7 @@ U_CDECL_END
  * @param   status      A reference to a UErrorCode to receive any errors.
  * @stable ICU 4.6
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uregex_setFindProgressCallback(URegularExpression              *regexp,
                                 URegexFindProgressCallback      *callback,
                                 const void                      *context,
@@ -38685,7 +41470,7 @@ uregex_setFindProgressCallback(URegularExpression              *regexp,
  * @param   status      A reference to a UErrorCode to receive any errors.
  * @stable ICU 4.6
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uregex_getFindProgressCallback(const URegularExpression          *regexp,
                                 URegexFindProgressCallback        **callback,
                                 const void                        **context,
@@ -38821,7 +41606,7 @@ typedef struct URegion URegion; /**< @stable ICU 52 */
  * (U_ILLEGAL_ARGUMENT_ERROR).
  * @stable ICU 52
  */
-U_STABLE const URegion* U_EXPORT2
+U_CAPI const URegion* U_EXPORT2
 uregion_getRegionFromCode(const char *regionCode, UErrorCode *status);
 
 /**
@@ -38829,7 +41614,7 @@ uregion_getRegionFromCode(const char *regionCode, UErrorCode *status);
  * code is not recognized, the appropriate error code will be set (U_ILLEGAL_ARGUMENT_ERROR).
  * @stable ICU 52
  */
-U_STABLE const URegion* U_EXPORT2
+U_CAPI const URegion* U_EXPORT2
 uregion_getRegionFromNumericCode (int32_t code, UErrorCode *status);
 
 /**
@@ -38837,14 +41622,14 @@ uregion_getRegionFromNumericCode (int32_t code, UErrorCode *status);
  * The enumeration must be closed with with uenum_close().
  * @stable ICU 52
  */
-U_STABLE UEnumeration* U_EXPORT2
+U_CAPI UEnumeration* U_EXPORT2
 uregion_getAvailable(URegionType type, UErrorCode *status);
 
 /**
  * Returns true if the specified uregion is equal to the specified otherRegion.
  * @stable ICU 52
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 uregion_areEqual(const URegion* uregion, const URegion* otherRegion);
 
 /**
@@ -38853,7 +41638,7 @@ uregion_areEqual(const URegion* uregion, const URegion* otherRegion);
  * this method with region "IT" (Italy) returns the URegion for "039" (Southern Europe).
  * @stable ICU 52
  */
-U_STABLE const URegion* U_EXPORT2
+U_CAPI const URegion* U_EXPORT2
 uregion_getContainingRegion(const URegion* uregion);
 
 /**
@@ -38865,7 +41650,7 @@ uregion_getContainingRegion(const URegion* uregion);
  * URegion "150" (Europe).
  * @stable ICU 52
  */
-U_STABLE const URegion* U_EXPORT2
+U_CAPI const URegion* U_EXPORT2
 uregion_getContainingRegionOfType(const URegion* uregion, URegionType type);
 
 /**
@@ -38878,7 +41663,7 @@ uregion_getContainingRegionOfType(const URegion* uregion, URegionType type);
  * and "155" (Western Europe). The enumeration must be closed with with uenum_close().
  * @stable ICU 52
  */
-U_STABLE UEnumeration* U_EXPORT2
+U_CAPI UEnumeration* U_EXPORT2
 uregion_getContainedRegions(const URegion* uregion, UErrorCode *status);
 
 /**
@@ -38890,7 +41675,7 @@ uregion_getContainedRegions(const URegion* uregion, UErrorCode *status);
  * etc. The enumeration must be closed with with uenum_close().
  * @stable ICU 52
  */
-U_STABLE UEnumeration* U_EXPORT2
+U_CAPI UEnumeration* U_EXPORT2
 uregion_getContainedRegionsOfType(const URegion* uregion, URegionType type, UErrorCode *status);
 
 /**
@@ -38898,7 +41683,7 @@ uregion_getContainedRegionsOfType(const URegion* uregion, URegionType type, UErr
  * hierarchy.
  * @stable ICU 52
  */
-U_STABLE UBool U_EXPORT2
+U_CAPI UBool U_EXPORT2
 uregion_contains(const URegion* uregion, const URegion* otherRegion);
 
 /**
@@ -38909,14 +41694,14 @@ uregion_contains(const URegion* uregion, const URegion* otherRegion);
  * "AZ" (Azerbaijan), etc... The enumeration must be closed with with uenum_close().
  * @stable ICU 52
  */
-U_STABLE UEnumeration* U_EXPORT2
+U_CAPI UEnumeration* U_EXPORT2
 uregion_getPreferredValues(const URegion* uregion, UErrorCode *status);
 
 /**
  * Returns the specified uregion's canonical code.
  * @stable ICU 52
  */
-U_STABLE const char* U_EXPORT2
+U_CAPI const char* U_EXPORT2
 uregion_getRegionCode(const URegion* uregion);
 
 /**
@@ -38924,14 +41709,14 @@ uregion_getRegionCode(const URegion* uregion);
  * for the specified uregion.
  * @stable ICU 52
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uregion_getNumericCode(const URegion* uregion);
 
 /**
  * Returns the URegionType of the specified uregion.
  * @stable ICU 52
  */
-U_STABLE URegionType U_EXPORT2
+U_CAPI URegionType U_EXPORT2
 uregion_getType(const URegion* uregion);
 
 
@@ -38954,6 +41739,7 @@ uregion_getType(const URegion* uregion);
 
 
 #if !UCONFIG_NO_FORMATTING && !UCONFIG_NO_BREAK_ITERATION
+
 
 
 /**
@@ -39098,6 +41884,25 @@ typedef enum URelativeDateTimeUnit {
     UDAT_REL_UNIT_SATURDAY,
 } URelativeDateTimeUnit;
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+/**
+ * FieldPosition and UFieldPosition selectors for format fields
+ * defined by RelativeDateTimeFormatter.
+ * @stable ICU 64
+ */
+typedef enum URelativeDateTimeFormatterField {
+    /**
+     * Represents a literal text string, like "tomorrow" or "days ago".
+     * @stable ICU 64
+     */
+    UDAT_REL_LITERAL_FIELD,
+    /**
+     * Represents a number quantity, like "3" in "3 days ago".
+     * @stable ICU 64
+     */
+    UDAT_REL_NUMERIC_FIELD,
+} URelativeDateTimeFormatterField;
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
 
 
 /**
@@ -39140,7 +41945,7 @@ typedef struct URelativeDateTimeFormatter URelativeDateTimeFormatter;  /**< C ty
  *          or NULL if an error occurred.
  * @stable ICU 57
  */
-U_STABLE URelativeDateTimeFormatter* U_EXPORT2
+U_CAPI URelativeDateTimeFormatter* U_EXPORT2
 ureldatefmt_open( const char*          locale,
                   UNumberFormat*       nfToAdopt,
                   UDateRelativeDateTimeFormatterStyle width,
@@ -39153,9 +41958,55 @@ ureldatefmt_open( const char*          locale,
  *            The URelativeDateTimeFormatter object to close.
  * @stable ICU 57
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 ureldatefmt_close(URelativeDateTimeFormatter *reldatefmt);
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+struct UFormattedRelativeDateTime;
+/**
+ * Opaque struct to contain the results of a URelativeDateTimeFormatter operation.
+ * @stable ICU 64
+ */
+typedef struct UFormattedRelativeDateTime UFormattedRelativeDateTime;
+
+/**
+ * Creates an object to hold the result of a URelativeDateTimeFormatter
+ * operation. The object can be used repeatedly; it is cleared whenever
+ * passed to a format function.
+ *
+ * @param ec Set if an error occurs.
+ * @return A pointer needing ownership.
+ * @stable ICU 64
+ */
+U_CAPI UFormattedRelativeDateTime* U_EXPORT2
+ureldatefmt_openResult(UErrorCode* ec);
+
+/**
+ * Returns a representation of a UFormattedRelativeDateTime as a UFormattedValue,
+ * which can be subsequently passed to any API requiring that type.
+ *
+ * The returned object is owned by the UFormattedRelativeDateTime and is valid
+ * only as long as the UFormattedRelativeDateTime is present and unchanged in memory.
+ *
+ * You can think of this method as a cast between types.
+ *
+ * @param ufrdt The object containing the formatted string.
+ * @param ec Set if an error occurs.
+ * @return A UFormattedValue owned by the input object.
+ * @stable ICU 64
+ */
+U_CAPI const UFormattedValue* U_EXPORT2
+ureldatefmt_resultAsValue(const UFormattedRelativeDateTime* ufrdt, UErrorCode* ec);
+
+/**
+ * Releases the UFormattedRelativeDateTime created by ureldatefmt_openResult.
+ *
+ * @param ufrdt The object to release.
+ * @stable ICU 64
+ */
+U_CAPI void U_EXPORT2
+ureldatefmt_closeResult(UFormattedRelativeDateTime* ufrdt);
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
 
 
 
@@ -39187,7 +42038,7 @@ ureldatefmt_close(URelativeDateTimeFormatter *reldatefmt);
  *          than resultCapacity, in which case an error is returned.
  * @stable ICU 57
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ureldatefmt_formatNumeric( const URelativeDateTimeFormatter* reldatefmt,
                     double                offset,
                     URelativeDateTimeUnit unit,
@@ -39195,6 +42046,38 @@ ureldatefmt_formatNumeric( const URelativeDateTimeFormatter* reldatefmt,
                     int32_t               resultCapacity,
                     UErrorCode*           status);
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+/**
+ * Format a combination of URelativeDateTimeUnit and numeric
+ * offset using a numeric style, e.g. "1 week ago", "in 1 week",
+ * "5 weeks ago", "in 5 weeks".
+ *
+ * @param reldatefmt
+ *          The URelativeDateTimeFormatter object specifying the
+ *          format conventions.
+ * @param offset
+ *          The signed offset for the specified unit. This will
+ *          be formatted according to this object's UNumberFormat
+ *          object.
+ * @param unit
+ *          The unit to use when formatting the relative
+ *          date, e.g. UDAT_REL_UNIT_WEEK, UDAT_REL_UNIT_FRIDAY.
+ * @param result
+ *          A pointer to a UFormattedRelativeDateTime to populate.
+ * @param status
+ *          A pointer to a UErrorCode to receive any errors. In
+ *          case of error status, the contents of result are
+ *          undefined.
+ * @stable ICU 64
+ */
+U_CAPI void U_EXPORT2
+ureldatefmt_formatNumericToResult(
+    const URelativeDateTimeFormatter* reldatefmt,
+    double                            offset,
+    URelativeDateTimeUnit             unit,
+    UFormattedRelativeDateTime*       result,
+    UErrorCode*                       status);
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
 
 /**
  * Format a combination of URelativeDateTimeUnit and numeric offset
@@ -39224,7 +42107,7 @@ ureldatefmt_formatNumeric( const URelativeDateTimeFormatter* reldatefmt,
  *          than resultCapacity, in which case an error is returned.
  * @stable ICU 57
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ureldatefmt_format( const URelativeDateTimeFormatter* reldatefmt,
                     double                offset,
                     URelativeDateTimeUnit unit,
@@ -39232,6 +42115,41 @@ ureldatefmt_format( const URelativeDateTimeFormatter* reldatefmt,
                     int32_t               resultCapacity,
                     UErrorCode*           status);
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+/**
+ * Format a combination of URelativeDateTimeUnit and numeric offset
+ * using a text style if possible, e.g. "last week", "this week",
+ * "next week", "yesterday", "tomorrow". Falls back to numeric
+ * style if no appropriate text term is available for the specified
+ * offset in the object's locale.
+ *
+ * This method populates a UFormattedRelativeDateTime, which exposes more
+ * information than the string populated by format().
+ *
+ * @param reldatefmt
+ *          The URelativeDateTimeFormatter object specifying the
+ *          format conventions.
+ * @param offset
+ *          The signed offset for the specified unit.
+ * @param unit
+ *          The unit to use when formatting the relative
+ *          date, e.g. UDAT_REL_UNIT_WEEK, UDAT_REL_UNIT_FRIDAY.
+ * @param result
+ *          A pointer to a UFormattedRelativeDateTime to populate.
+ * @param status
+ *          A pointer to a UErrorCode to receive any errors. In
+ *          case of error status, the contents of result are
+ *          undefined.
+ * @stable ICU 64
+ */
+U_CAPI void U_EXPORT2
+ureldatefmt_formatToResult(
+    const URelativeDateTimeFormatter* reldatefmt,
+    double                            offset,
+    URelativeDateTimeUnit             unit,
+    UFormattedRelativeDateTime*       result,
+    UErrorCode*                       status);
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
 
 /**
  * Combines a relative date string and a time string in this object's
@@ -39262,7 +42180,7 @@ ureldatefmt_format( const URelativeDateTimeFormatter* reldatefmt,
  *          in which case an error is returned.
  * @stable ICU 57
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 ureldatefmt_combineDateAndTime( const URelativeDateTimeFormatter* reldatefmt,
                     const UChar *     relativeDateString,
                     int32_t           relativeDateStringLen,
@@ -39294,13 +42212,14 @@ ureldatefmt_combineDateAndTime( const URelativeDateTimeFormatter* reldatefmt,
 #if !UCONFIG_NO_COLLATION && !UCONFIG_NO_BREAK_ITERATION
 
 
+
 /**
  * \file
  * \brief C API: StringSearch
  *
- * C Apis for an engine that provides language-sensitive text searching based 
- * on the comparison rules defined in a <tt>UCollator</tt> data struct,
- * see <tt>ucol.h</tt>. This ensures that language eccentricity can be 
+ * C APIs for an engine that provides language-sensitive text searching based 
+ * on the comparison rules defined in a <code>UCollator</code> data struct,
+ * see <code>ucol.h</code>. This ensures that language eccentricity can be 
  * handled, e.g. for the German collator, characters &szlig; and SS will be matched 
  * if case is chosen to be ignored. 
  * See the <a href="http://source.icu-project.org/repos/icu/icuhtml/trunk/design/collation/ICU_collation_design.htm">
@@ -39328,18 +42247,18 @@ ureldatefmt_combineDateAndTime( const URelativeDateTimeFormatter* reldatefmt,
  * Option 2. will be the default.
  * <p>
  * This search has APIs similar to that of other text iteration mechanisms 
- * such as the break iterators in <tt>ubrk.h</tt>. Using these 
- * APIs, it is easy to scan through text looking for all occurances of 
+ * such as the break iterators in <code>ubrk.h</code>. Using these 
+ * APIs, it is easy to scan through text looking for all occurrences of 
  * a given pattern. This search iterator allows changing of direction by 
- * calling a <tt>reset</tt> followed by a <tt>next</tt> or <tt>previous</tt>. 
- * Though a direction change can occur without calling <tt>reset</tt> first,  
+ * calling a <code>reset</code> followed by a <code>next</code> or <code>previous</code>. 
+ * Though a direction change can occur without calling <code>reset</code> first,  
  * this operation comes with some speed penalty.
  * Generally, match results in the forward direction will match the result 
  * matches in the backwards direction in the reverse order
  * <p>
- * <tt>usearch.h</tt> provides APIs to specify the starting position 
- * within the text string to be searched, e.g. <tt>usearch_setOffset</tt>,
- * <tt>usearch_preceding</tt> and <tt>usearch_following</tt>. Since the 
+ * <code>usearch.h</code> provides APIs to specify the starting position 
+ * within the text string to be searched, e.g. <code>usearch_setOffset</code>,
+ * <code>usearch_preceding</code> and <code>usearch_following</code>. Since the 
  * starting position will be set as it is specified, please take note that 
  * there are some dangerous positions which the search may render incorrect 
  * results:
@@ -39375,7 +42294,7 @@ ureldatefmt_combineDateAndTime( const URelativeDateTimeFormatter* reldatefmt,
  * Though collator attributes will be taken into consideration while 
  * performing matches, there are no APIs here for setting and getting the 
  * attributes. These attributes can be set by getting the collator
- * from <tt>usearch_getCollator</tt> and using the APIs in <tt>ucol.h</tt>.
+ * from <code>usearch_getCollator</code> and using the APIs in <code>ucol.h</code>.
  * Lastly to update String Search to the new collator attributes, 
  * usearch_reset() has to be called.
  * <p> 
@@ -39404,7 +42323,7 @@ ureldatefmt_combineDateAndTime( const URelativeDateTimeFormatter* reldatefmt,
  *          pos = usearch_next(search, &status))
  *     {
  *         printf("Found match at %d pos, length is %d\n", pos, 
- *                                        usearch_getMatchLength(search));
+ *                                        usearch_getMatchedLength(search));
  *     }
  * }
  *
@@ -39520,9 +42439,13 @@ typedef enum {
 /* open and close ------------------------------------------------------ */
 
 /**
-* Creating a search iterator data struct using the argument locale language
+* Creates a String Search iterator data struct using the argument locale language
 * rule set. A collator will be created in the process, which will be owned by
-* this search and will be deleted in <tt>usearch_close</tt>.
+* this String Search and will be deleted in <code>usearch_close</code>.
+*
+* The UStringSearch retains a pointer to both the pattern and text strings.
+* The caller must not modify or delete them while using the UStringSearch.
+*
 * @param pattern for matching
 * @param patternlength length of the pattern, -1 for null-termination
 * @param text text string
@@ -39531,9 +42454,9 @@ typedef enum {
 * @param breakiter A BreakIterator that will be used to restrict the points
 *                  at which matches are detected. If a match is found, but 
 *                  the match's start or end index is not a boundary as 
-*                  determined by the <tt>BreakIterator</tt>, the match will 
+*                  determined by the <code>BreakIterator</code>, the match will 
 *                  be rejected and another will be searched for. 
-*                  If this parameter is <tt>NULL</tt>, no break detection is 
+*                  If this parameter is <code>NULL</code>, no break detection is 
 *                  attempted.
 * @param status for errors if it occurs. If pattern or text is NULL, or if
 *               patternlength or textlength is 0 then an 
@@ -39541,54 +42464,59 @@ typedef enum {
 * @return search iterator data structure, or NULL if there is an error.
 * @stable ICU 2.4
 */
-U_STABLE UStringSearch * U_EXPORT2 usearch_open(const UChar          *pattern, 
-                                              int32_t         patternlength, 
-                                        const UChar          *text, 
+U_CAPI UStringSearch * U_EXPORT2 usearch_open(const UChar    *pattern,
+                                              int32_t         patternlength,
+                                        const UChar          *text,
                                               int32_t         textlength,
                                         const char           *locale,
                                               UBreakIterator *breakiter,
                                               UErrorCode     *status);
 
 /**
-* Creating a search iterator data struct using the argument collator language
-* rule set. Note, user retains the ownership of this collator, thus the 
+* Creates a String Search iterator data struct using the argument collator language
+* rule set. Note, user retains the ownership of this collator, thus the
 * responsibility of deletion lies with the user.
-* NOTE: string search cannot be instantiated from a collator that has 
-* collate digits as numbers (CODAN) turned on.
+
+* NOTE: String Search cannot be instantiated from a collator that has
+* collate digits as numbers (CODAN) turned on (UCOL_NUMERIC_COLLATION).
+*
+* The UStringSearch retains a pointer to both the pattern and text strings.
+* The caller must not modify or delete them while using the UStringSearch.
+*
 * @param pattern for matching
 * @param patternlength length of the pattern, -1 for null-termination
 * @param text text string
 * @param textlength length of the text string, -1 for null-termination
 * @param collator used for the language rules
 * @param breakiter A BreakIterator that will be used to restrict the points
-*                  at which matches are detected. If a match is found, but 
-*                  the match's start or end index is not a boundary as 
-*                  determined by the <tt>BreakIterator</tt>, the match will 
-*                  be rejected and another will be searched for. 
-*                  If this parameter is <tt>NULL</tt>, no break detection is 
+*                  at which matches are detected. If a match is found, but
+*                  the match's start or end index is not a boundary as
+*                  determined by the <code>BreakIterator</code>, the match will
+*                  be rejected and another will be searched for.
+*                  If this parameter is <code>NULL</code>, no break detection is
 *                  attempted.
-* @param status for errors if it occurs. If collator, pattern or text is NULL, 
-*               or if patternlength or textlength is 0 then an 
+* @param status for errors if it occurs. If collator, pattern or text is NULL,
+*               or if patternlength or textlength is 0 then an
 *               U_ILLEGAL_ARGUMENT_ERROR is returned.
 * @return search iterator data structure, or NULL if there is an error.
 * @stable ICU 2.4
 */
-U_STABLE UStringSearch * U_EXPORT2 usearch_openFromCollator(
-                                         const UChar *pattern, 
+U_CAPI UStringSearch * U_EXPORT2 usearch_openFromCollator(
+                                         const UChar          *pattern,
                                                int32_t         patternlength,
-                                         const UChar          *text, 
+                                         const UChar          *text,
                                                int32_t         textlength,
                                          const UCollator      *collator,
                                                UBreakIterator *breakiter,
                                                UErrorCode     *status);
 
 /**
-* Destroying and cleaning up the search iterator data struct.
-* If a collator is created in <tt>usearch_open</tt>, it will be destroyed here.
-* @param searchiter data struct to clean up
-* @stable ICU 2.4
-*/
-U_STABLE void U_EXPORT2 usearch_close(UStringSearch *searchiter);
+ * Destroys and cleans up the String Search iterator data struct.
+ * If a collator was created in <code>usearch_open</code>, then it will be destroyed here.
+ * @param searchiter The UStringSearch to clean up
+ * @stable ICU 2.4
+ */
+U_CAPI void U_EXPORT2 usearch_close(UStringSearch *searchiter);
 
 
 /* get and set methods -------------------------------------------------- */
@@ -39608,24 +42536,24 @@ U_STABLE void U_EXPORT2 usearch_close(UStringSearch *searchiter);
 * @param status error status if any.
 * @stable ICU 2.4
 */
-U_STABLE void U_EXPORT2 usearch_setOffset(UStringSearch *strsrch, 
-                                        int32_t    position,
+U_CAPI void U_EXPORT2 usearch_setOffset(UStringSearch *strsrch,
+                                        int32_t        position,
                                         UErrorCode    *status);
 
 /**
 * Return the current index in the string text being searched.
 * If the iteration has gone past the end of the text (or past the beginning 
-* for a backwards search), <tt>USEARCH_DONE</tt> is returned.
+* for a backwards search), <code>USEARCH_DONE</code> is returned.
 * @param strsrch search iterator data struct
 * @see #USEARCH_DONE
 * @stable ICU 2.4
 */
-U_STABLE int32_t U_EXPORT2 usearch_getOffset(const UStringSearch *strsrch);
+U_CAPI int32_t U_EXPORT2 usearch_getOffset(const UStringSearch *strsrch);
     
 /**
 * Sets the text searching attributes located in the enum USearchAttribute
 * with values from the enum USearchAttributeValue.
-* <tt>USEARCH_DEFAULT</tt> can be used for all attributes for resetting.
+* <code>USEARCH_DEFAULT</code> can be used for all attributes for resetting.
 * @param strsrch search iterator data struct
 * @param attribute text attribute to be set
 * @param value text attribute value
@@ -39633,7 +42561,7 @@ U_STABLE int32_t U_EXPORT2 usearch_getOffset(const UStringSearch *strsrch);
 * @see #usearch_getAttribute
 * @stable ICU 2.4
 */
-U_STABLE void U_EXPORT2 usearch_setAttribute(UStringSearch         *strsrch, 
+U_CAPI void U_EXPORT2 usearch_setAttribute(UStringSearch         *strsrch,
                                            USearchAttribute       attribute,
                                            USearchAttributeValue  value,
                                            UErrorCode            *status);
@@ -39646,19 +42574,19 @@ U_STABLE void U_EXPORT2 usearch_setAttribute(UStringSearch         *strsrch,
 * @see #usearch_setAttribute
 * @stable ICU 2.4
 */
-U_STABLE USearchAttributeValue U_EXPORT2 usearch_getAttribute(
+U_CAPI USearchAttributeValue U_EXPORT2 usearch_getAttribute(
                                          const UStringSearch    *strsrch,
                                                USearchAttribute  attribute);
 
 /**
 * Returns the index to the match in the text string that was searched.
 * This call returns a valid result only after a successful call to 
-* <tt>usearch_first</tt>, <tt>usearch_next</tt>, <tt>usearch_previous</tt>, 
-* or <tt>usearch_last</tt>.
+* <code>usearch_first</code>, <code>usearch_next</code>, <code>usearch_previous</code>, 
+* or <code>usearch_last</code>.
 * Just after construction, or after a searching method returns 
-* <tt>USEARCH_DONE</tt>, this method will return <tt>USEARCH_DONE</tt>.
+* <code>USEARCH_DONE</code>, this method will return <code>USEARCH_DONE</code>.
 * <p>
-* Use <tt>usearch_getMatchedLength</tt> to get the matched string length.
+* Use <code>usearch_getMatchedLength</code> to get the matched string length.
 * @param strsrch search iterator data struct
 * @return index to a substring within the text string that is being 
 *         searched.
@@ -39669,16 +42597,16 @@ U_STABLE USearchAttributeValue U_EXPORT2 usearch_getAttribute(
 * @see #USEARCH_DONE
 * @stable ICU 2.4
 */
-U_STABLE int32_t U_EXPORT2 usearch_getMatchedStart(
+U_CAPI int32_t U_EXPORT2 usearch_getMatchedStart(
                                                const UStringSearch *strsrch);
     
 /**
 * Returns the length of text in the string which matches the search pattern. 
 * This call returns a valid result only after a successful call to 
-* <tt>usearch_first</tt>, <tt>usearch_next</tt>, <tt>usearch_previous</tt>, 
-* or <tt>usearch_last</tt>.
+* <code>usearch_first</code>, <code>usearch_next</code>, <code>usearch_previous</code>, 
+* or <code>usearch_last</code>.
 * Just after construction, or after a searching method returns 
-* <tt>USEARCH_DONE</tt>, this method will return 0.
+* <code>USEARCH_DONE</code>, this method will return 0.
 * @param strsrch search iterator data struct
 * @return The length of the match in the string text, or 0 if there is no 
 *         match currently.
@@ -39689,22 +42617,22 @@ U_STABLE int32_t U_EXPORT2 usearch_getMatchedStart(
 * @see #USEARCH_DONE
 * @stable ICU 2.4
 */
-U_STABLE int32_t U_EXPORT2 usearch_getMatchedLength(
+U_CAPI int32_t U_EXPORT2 usearch_getMatchedLength(
                                                const UStringSearch *strsrch);
 
 /**
 * Returns the text that was matched by the most recent call to 
-* <tt>usearch_first</tt>, <tt>usearch_next</tt>, <tt>usearch_previous</tt>, 
-* or <tt>usearch_last</tt>.
+* <code>usearch_first</code>, <code>usearch_next</code>, <code>usearch_previous</code>, 
+* or <code>usearch_last</code>.
 * If the iterator is not pointing at a valid match (e.g. just after 
-* construction or after <tt>USEARCH_DONE</tt> has been returned, returns
+* construction or after <code>USEARCH_DONE</code> has been returned, returns
 * an empty string. If result is not large enough to store the matched text,
 * result will be filled with the partial text and an U_BUFFER_OVERFLOW_ERROR 
 * will be returned in status. result will be null-terminated whenever 
 * possible. If the buffer fits the matched text exactly, a null-termination 
 * is not possible, then a U_STRING_NOT_TERMINATED_ERROR set in status.
 * Pre-flighting can be either done with length = 0 or the API 
-* <tt>usearch_getMatchLength</tt>.
+* <code>usearch_getMatchedLength</code>.
 * @param strsrch search iterator data struct
 * @param result UChar buffer to store the matched string
 * @param resultCapacity length of the result buffer
@@ -39717,7 +42645,7 @@ U_STABLE int32_t U_EXPORT2 usearch_getMatchedLength(
 * @see #USEARCH_DONE
 * @stable ICU 2.4
 */
-U_STABLE int32_t U_EXPORT2 usearch_getMatchedText(const UStringSearch *strsrch, 
+U_CAPI int32_t U_EXPORT2 usearch_getMatchedText(const UStringSearch *strsrch, 
                                             UChar         *result, 
                                             int32_t        resultCapacity, 
                                             UErrorCode    *status);
@@ -39731,38 +42659,42 @@ U_STABLE int32_t U_EXPORT2 usearch_getMatchedText(const UStringSearch *strsrch,
 * @param breakiter A BreakIterator that will be used to restrict the points
 *                  at which matches are detected. If a match is found, but 
 *                  the match's start or end index is not a boundary as 
-*                  determined by the <tt>BreakIterator</tt>, the match will 
+*                  determined by the <code>BreakIterator</code>, the match will 
 *                  be rejected and another will be searched for. 
-*                  If this parameter is <tt>NULL</tt>, no break detection is 
+*                  If this parameter is <code>NULL</code>, no break detection is 
 *                  attempted.
 * @param status for errors if it occurs
 * @see #usearch_getBreakIterator
 * @stable ICU 2.4
 */
-U_STABLE void U_EXPORT2 usearch_setBreakIterator(UStringSearch  *strsrch, 
+U_CAPI void U_EXPORT2 usearch_setBreakIterator(UStringSearch  *strsrch, 
                                                UBreakIterator *breakiter,
                                                UErrorCode     *status);
 
 /**
 * Returns the BreakIterator that is used to restrict the points at which 
 * matches are detected. This will be the same object that was passed to the 
-* constructor or to <tt>usearch_setBreakIterator</tt>. Note that 
-* <tt>NULL</tt> 
+* constructor or to <code>usearch_setBreakIterator</code>. Note that 
+* <code>NULL</code> 
 * is a legal value; it means that break detection should not be attempted.
 * @param strsrch search iterator data struct
 * @return break iterator used
 * @see #usearch_setBreakIterator
 * @stable ICU 2.4
 */
-U_STABLE const UBreakIterator * U_EXPORT2 usearch_getBreakIterator(
+U_CAPI const UBreakIterator * U_EXPORT2 usearch_getBreakIterator(
                                               const UStringSearch *strsrch);
     
 #endif
-    
+
 /**
 * Set the string text to be searched. Text iteration will hence begin at the 
 * start of the text string. This method is useful if you want to re-use an 
 * iterator to search for the same pattern within a different body of text.
+*
+* The UStringSearch retains a pointer to the text string. The caller must not
+* modify or delete the string while using the UStringSearch.
+*
 * @param strsrch search iterator data struct
 * @param text new string to look for match
 * @param textlength length of the new string, -1 for null-termination
@@ -39772,7 +42704,7 @@ U_STABLE const UBreakIterator * U_EXPORT2 usearch_getBreakIterator(
 * @see #usearch_getText
 * @stable ICU 2.4
 */
-U_STABLE void U_EXPORT2 usearch_setText(      UStringSearch *strsrch, 
+U_CAPI void U_EXPORT2 usearch_setText(      UStringSearch *strsrch, 
                                       const UChar         *text,
                                             int32_t        textlength,
                                             UErrorCode    *status);
@@ -39785,20 +42717,20 @@ U_STABLE void U_EXPORT2 usearch_setText(      UStringSearch *strsrch,
 * @see #usearch_setText
 * @stable ICU 2.4
 */
-U_STABLE const UChar * U_EXPORT2 usearch_getText(const UStringSearch *strsrch, 
+U_CAPI const UChar * U_EXPORT2 usearch_getText(const UStringSearch *strsrch, 
                                                int32_t       *length);
 
 /**
 * Gets the collator used for the language rules. 
 * <p>
-* Deleting the returned <tt>UCollator</tt> before calling 
-* <tt>usearch_close</tt> would cause the string search to fail.
-* <tt>usearch_close</tt> will delete the collator if this search owns it.
+* Deleting the returned <code>UCollator</code> before calling 
+* <code>usearch_close</code> would cause the string search to fail.
+* <code>usearch_close</code> will delete the collator if this search owns it.
 * @param strsrch search iterator data struct
 * @return collator
 * @stable ICU 2.4
 */
-U_STABLE UCollator * U_EXPORT2 usearch_getCollator(
+U_CAPI UCollator * U_EXPORT2 usearch_getCollator(
                                                const UStringSearch *strsrch);
 
 /**
@@ -39811,7 +42743,7 @@ U_STABLE UCollator * U_EXPORT2 usearch_getCollator(
 * @param status for errors if it occurs
 * @stable ICU 2.4
 */
-U_STABLE void U_EXPORT2 usearch_setCollator(      UStringSearch *strsrch, 
+U_CAPI void U_EXPORT2 usearch_setCollator(      UStringSearch *strsrch, 
                                           const UCollator     *collator,
                                                 UErrorCode    *status);
 
@@ -39819,6 +42751,10 @@ U_STABLE void U_EXPORT2 usearch_setCollator(      UStringSearch *strsrch,
 * Sets the pattern used for matching.
 * Internal data like the Boyer Moore table will be recalculated, but the 
 * iterator's position is unchanged.
+*
+* The UStringSearch retains a pointer to the pattern string. The caller must not
+* modify or delete the string while using the UStringSearch.
+*
 * @param strsrch search iterator data struct
 * @param pattern string
 * @param patternlength pattern length, -1 for null-terminated string
@@ -39827,7 +42763,7 @@ U_STABLE void U_EXPORT2 usearch_setCollator(      UStringSearch *strsrch,
 *               done to strsrch.
 * @stable ICU 2.4
 */
-U_STABLE void U_EXPORT2 usearch_setPattern(      UStringSearch *strsrch, 
+U_CAPI void U_EXPORT2 usearch_setPattern(      UStringSearch *strsrch, 
                                          const UChar         *pattern,
                                                int32_t        patternlength,
                                                UErrorCode    *status);
@@ -39840,7 +42776,7 @@ U_STABLE void U_EXPORT2 usearch_setPattern(      UStringSearch *strsrch,
 * @return pattern string
 * @stable ICU 2.4
 */
-U_STABLE const UChar * U_EXPORT2 usearch_getPattern(
+U_CAPI const UChar * U_EXPORT2 usearch_getPattern(
                                                const UStringSearch *strsrch, 
                                                      int32_t       *length);
 
@@ -39850,28 +42786,28 @@ U_STABLE const UChar * U_EXPORT2 usearch_getPattern(
 * Returns the first index at which the string text matches the search 
 * pattern.  
 * The iterator is adjusted so that its current index (as returned by 
-* <tt>usearch_getOffset</tt>) is the match position if one was found.
-* If a match is not found, <tt>USEARCH_DONE</tt> will be returned and
-* the iterator will be adjusted to the index <tt>USEARCH_DONE</tt>.
+* <code>usearch_getOffset</code>) is the match position if one was found.
+* If a match is not found, <code>USEARCH_DONE</code> will be returned and
+* the iterator will be adjusted to the index <code>USEARCH_DONE</code>.
 * @param strsrch search iterator data struct
 * @param status for errors if it occurs
 * @return The character index of the first match, or 
-* <tt>USEARCH_DONE</tt> if there are no matches.
+* <code>USEARCH_DONE</code> if there are no matches.
 * @see #usearch_getOffset
 * @see #USEARCH_DONE
 * @stable ICU 2.4
 */
-U_STABLE int32_t U_EXPORT2 usearch_first(UStringSearch *strsrch, 
+U_CAPI int32_t U_EXPORT2 usearch_first(UStringSearch *strsrch, 
                                            UErrorCode    *status);
 
 /**
-* Returns the first index equal or greater than <tt>position</tt> at which
+* Returns the first index equal or greater than <code>position</code> at which
 * the string text
 * matches the search pattern. The iterator is adjusted so that its current 
-* index (as returned by <tt>usearch_getOffset</tt>) is the match position if 
+* index (as returned by <code>usearch_getOffset</code>) is the match position if 
 * one was found.
-* If a match is not found, <tt>USEARCH_DONE</tt> will be returned and
-* the iterator will be adjusted to the index <tt>USEARCH_DONE</tt>
+* If a match is not found, <code>USEARCH_DONE</code> will be returned and
+* the iterator will be adjusted to the index <code>USEARCH_DONE</code>
 * <p>
 * Search positions that may render incorrect results are highlighted in the
 * header comments. If position is less than or greater than the text range 
@@ -39879,60 +42815,60 @@ U_STABLE int32_t U_EXPORT2 usearch_first(UStringSearch *strsrch,
 * @param strsrch search iterator data struct
 * @param position to start the search at
 * @param status for errors if it occurs
-* @return The character index of the first match following <tt>pos</tt>,
-*         or <tt>USEARCH_DONE</tt> if there are no matches.
+* @return The character index of the first match following <code>pos</code>,
+*         or <code>USEARCH_DONE</code> if there are no matches.
 * @see #usearch_getOffset
 * @see #USEARCH_DONE
 * @stable ICU 2.4
 */
-U_STABLE int32_t U_EXPORT2 usearch_following(UStringSearch *strsrch, 
+U_CAPI int32_t U_EXPORT2 usearch_following(UStringSearch *strsrch, 
                                                int32_t    position, 
                                                UErrorCode    *status);
     
 /**
 * Returns the last index in the target text at which it matches the search 
 * pattern. The iterator is adjusted so that its current 
-* index (as returned by <tt>usearch_getOffset</tt>) is the match position if 
+* index (as returned by <code>usearch_getOffset</code>) is the match position if 
 * one was found.
-* If a match is not found, <tt>USEARCH_DONE</tt> will be returned and
-* the iterator will be adjusted to the index <tt>USEARCH_DONE</tt>.
+* If a match is not found, <code>USEARCH_DONE</code> will be returned and
+* the iterator will be adjusted to the index <code>USEARCH_DONE</code>.
 * @param strsrch search iterator data struct
 * @param status for errors if it occurs
-* @return The index of the first match, or <tt>USEARCH_DONE</tt> if there 
+* @return The index of the first match, or <code>USEARCH_DONE</code> if there 
 *         are no matches.
 * @see #usearch_getOffset
 * @see #USEARCH_DONE
 * @stable ICU 2.4
 */
-U_STABLE int32_t U_EXPORT2 usearch_last(UStringSearch *strsrch, 
+U_CAPI int32_t U_EXPORT2 usearch_last(UStringSearch *strsrch, 
                                           UErrorCode    *status);
 
 /**
-* Returns the first index less than <tt>position</tt> at which the string text 
+* Returns the first index less than <code>position</code> at which the string text 
 * matches the search pattern. The iterator is adjusted so that its current 
-* index (as returned by <tt>usearch_getOffset</tt>) is the match position if 
+* index (as returned by <code>usearch_getOffset</code>) is the match position if 
 * one was found.
-* If a match is not found, <tt>USEARCH_DONE</tt> will be returned and
-* the iterator will be adjusted to the index <tt>USEARCH_DONE</tt>
+* If a match is not found, <code>USEARCH_DONE</code> will be returned and
+* the iterator will be adjusted to the index <code>USEARCH_DONE</code>
 * <p>
 * Search positions that may render incorrect results are highlighted in the
 * header comments. If position is less than or greater than the text range 
 * for searching, an U_INDEX_OUTOFBOUNDS_ERROR will be returned.
 * <p>
-* When <tt>USEARCH_OVERLAP</tt> option is off, the last index of the
-* result match is always less than <tt>position</tt>.
-* When <tt>USERARCH_OVERLAP</tt> is on, the result match may span across
-* <tt>position</tt>.
+* When <code>USEARCH_OVERLAP</code> option is off, the last index of the
+* result match is always less than <code>position</code>.
+* When <code>USERARCH_OVERLAP</code> is on, the result match may span across
+* <code>position</code>.
 * @param strsrch search iterator data struct
 * @param position index position the search is to begin at
 * @param status for errors if it occurs
-* @return The character index of the first match preceding <tt>pos</tt>,
-*         or <tt>USEARCH_DONE</tt> if there are no matches.
+* @return The character index of the first match preceding <code>pos</code>,
+*         or <code>USEARCH_DONE</code> if there are no matches.
 * @see #usearch_getOffset
 * @see #USEARCH_DONE
 * @stable ICU 2.4
 */
-U_STABLE int32_t U_EXPORT2 usearch_preceding(UStringSearch *strsrch, 
+U_CAPI int32_t U_EXPORT2 usearch_preceding(UStringSearch *strsrch, 
                                                int32_t    position, 
                                                UErrorCode    *status);
     
@@ -39940,40 +42876,40 @@ U_STABLE int32_t U_EXPORT2 usearch_preceding(UStringSearch *strsrch,
 * Returns the index of the next point at which the string text matches the
 * search pattern, starting from the current position.
 * The iterator is adjusted so that its current 
-* index (as returned by <tt>usearch_getOffset</tt>) is the match position if 
+* index (as returned by <code>usearch_getOffset</code>) is the match position if 
 * one was found.
-* If a match is not found, <tt>USEARCH_DONE</tt> will be returned and
-* the iterator will be adjusted to the index <tt>USEARCH_DONE</tt>
+* If a match is not found, <code>USEARCH_DONE</code> will be returned and
+* the iterator will be adjusted to the index <code>USEARCH_DONE</code>
 * @param strsrch search iterator data struct
 * @param status for errors if it occurs
 * @return The index of the next match after the current position, or 
-*         <tt>USEARCH_DONE</tt> if there are no more matches.
+*         <code>USEARCH_DONE</code> if there are no more matches.
 * @see #usearch_first
 * @see #usearch_getOffset
 * @see #USEARCH_DONE
 * @stable ICU 2.4
 */
-U_STABLE int32_t U_EXPORT2 usearch_next(UStringSearch *strsrch, 
+U_CAPI int32_t U_EXPORT2 usearch_next(UStringSearch *strsrch, 
                                           UErrorCode    *status);
 
 /**
 * Returns the index of the previous point at which the string text matches
 * the search pattern, starting at the current position.
 * The iterator is adjusted so that its current 
-* index (as returned by <tt>usearch_getOffset</tt>) is the match position if 
+* index (as returned by <code>usearch_getOffset</code>) is the match position if 
 * one was found.
-* If a match is not found, <tt>USEARCH_DONE</tt> will be returned and
-* the iterator will be adjusted to the index <tt>USEARCH_DONE</tt>
+* If a match is not found, <code>USEARCH_DONE</code> will be returned and
+* the iterator will be adjusted to the index <code>USEARCH_DONE</code>
 * @param strsrch search iterator data struct
 * @param status for errors if it occurs
 * @return The index of the previous match before the current position,
-*         or <tt>USEARCH_DONE</tt> if there are no more matches.
+*         or <code>USEARCH_DONE</code> if there are no more matches.
 * @see #usearch_last
 * @see #usearch_getOffset
 * @see #USEARCH_DONE
 * @stable ICU 2.4
 */
-U_STABLE int32_t U_EXPORT2 usearch_previous(UStringSearch *strsrch, 
+U_CAPI int32_t U_EXPORT2 usearch_previous(UStringSearch *strsrch, 
                                               UErrorCode    *status);
     
 /** 
@@ -39986,7 +42922,7 @@ U_STABLE int32_t U_EXPORT2 usearch_previous(UStringSearch *strsrch,
 * @see #usearch_first
 * @stable ICU 2.4
 */
-U_STABLE void U_EXPORT2 usearch_reset(UStringSearch *strsrch);
+U_CAPI void U_EXPORT2 usearch_reset(UStringSearch *strsrch);
 
 
 #endif /* #if !UCONFIG_NO_COLLATION  && !UCONFIG_NO_BREAK_ITERATION */
@@ -40142,10 +43078,10 @@ U_STABLE void U_EXPORT2 usearch_reset(UStringSearch *strsrch);
  *     UChar* skel = (UChar*) malloc(++len * sizeof(UChar));
  *     status = U_ZERO_ERROR;
  *     uspoof_getSkeleton(sc, 0, str, -1, skel, len, &status);
- *     UBool result = FALSE;
+ *     UBool result = false;
  *     for (size_t i=0; i<DICTIONARY_LENGTH; i++) {
  *         result = u_strcmp(skel, skeletons[i]) == 0;
- *         if (result == TRUE) { break; }
+ *         if (result == true) { break; }
  *     }
  *     // Has confusable in dictionary: 1 (status: U_ZERO_ERROR)
  *     printf("Has confusable in dictionary: %d (status: %s)\n", result, u_errorName(status));
@@ -40445,6 +43381,28 @@ typedef enum USpoofChecks {
      */
     USPOOF_MIXED_NUMBERS            = 128,
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+    /**
+     * Check that an identifier does not have a combining character following a character in which that
+     * combining character would be hidden; for example 'i' followed by a U+0307 combining dot.
+     *
+     * More specifically, the following characters are forbidden from preceding a U+0307:
+     * <ul>
+     * <li>Those with the Soft_Dotted Unicode property (which includes 'i' and 'j')</li>
+     * <li>Latin lowercase letter 'l'</li>
+     * <li>Dotless 'i' and 'j' ('ı' and 'ȷ', U+0131 and U+0237)</li>
+     * <li>Any character whose confusable prototype ends with such a character
+     * (Soft_Dotted, 'l', 'ı', or 'ȷ')</li>
+     * </ul>
+     * In addition, combining characters are allowed between the above characters and U+0307 except those
+     * with combining class 0 or combining class "Above" (230, same class as U+0307).
+     *
+     * This list and the number of combing characters considered by this check may grow over time.
+     *
+     * @stable ICU 62
+     */
+    USPOOF_HIDDEN_OVERLAY            = 256,
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
 
    /**
      * Enable all spoof checks.
@@ -40546,7 +43504,7 @@ typedef enum USpoofChecks {
  *  @return        the newly created Spoof Checker
  *  @stable ICU 4.2
  */
-U_STABLE USpoofChecker * U_EXPORT2
+U_CAPI USpoofChecker * U_EXPORT2
 uspoof_open(UErrorCode *status);
 
 
@@ -40571,7 +43529,7 @@ uspoof_open(UErrorCode *status);
  * @see uspoof_serialize
  * @stable ICU 4.2
  */
-U_STABLE USpoofChecker * U_EXPORT2
+U_CAPI USpoofChecker * U_EXPORT2
 uspoof_openFromSerialized(const void *data, int32_t length, int32_t *pActualLength,
                           UErrorCode *pErrorCode);
 
@@ -40605,7 +43563,7 @@ uspoof_openFromSerialized(const void *data, int32_t length, int32_t *pActualLeng
   * @return            A spoof checker that uses the rules from the input files.
   * @stable ICU 4.2
   */
-U_STABLE USpoofChecker * U_EXPORT2
+U_CAPI USpoofChecker * U_EXPORT2
 uspoof_openFromSource(const char *confusables,  int32_t confusablesLen,
                       const char *confusablesWholeScript, int32_t confusablesWholeScriptLen,
                       int32_t *errType, UParseError *pe, UErrorCode *status);
@@ -40616,7 +43574,7 @@ uspoof_openFromSource(const char *confusables,  int32_t confusablesLen,
   *   its implementation.
   * @stable ICU 4.2
   */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uspoof_close(USpoofChecker *sc);
 
 /**
@@ -40628,7 +43586,7 @@ uspoof_close(USpoofChecker *sc);
  * @return
  * @stable ICU 4.2
  */
-U_STABLE USpoofChecker * U_EXPORT2
+U_CAPI USpoofChecker * U_EXPORT2
 uspoof_clone(const USpoofChecker *sc, UErrorCode *status);
 
 
@@ -40636,8 +43594,10 @@ uspoof_clone(const USpoofChecker *sc, UErrorCode *status);
  * Specify the bitmask of checks that will be performed by {@link uspoof_check}. Calling this method
  * overwrites any checks that may have already been enabled. By default, all checks are enabled.
  *
- * To enable specific checks and disable all others, the "whitelisted" checks should be ORed together. For
- * example, to fail strings containing characters outside of the set specified by {@link uspoof_setAllowedChars} and
+ * To enable specific checks and disable all others,
+ * OR together only the bit constants for the desired checks.
+ * For example, to fail strings containing characters outside of
+ * the set specified by {@link uspoof_setAllowedChars} and
  * also strings that contain digits from mixed numbering systems:
  *
  * <pre>
@@ -40646,8 +43606,9 @@ uspoof_clone(const USpoofChecker *sc, UErrorCode *status);
  * }
  * </pre>
  *
- * To disable specific checks and enable all others, the "blacklisted" checks should be ANDed away from
- * ALL_CHECKS. For example, if you are not planning to use the {@link uspoof_areConfusable} functionality,
+ * To disable specific checks and enable all others,
+ * start with ALL_CHECKS and "AND away" the not-desired checks.
+ * For example, if you are not planning to use the {@link uspoof_areConfusable} functionality,
  * it is good practice to disable the CONFUSABLE check:
  *
  * <pre>
@@ -40669,7 +43630,7 @@ uspoof_clone(const USpoofChecker *sc, UErrorCode *status);
  * @stable ICU 4.2
  *
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uspoof_setChecks(USpoofChecker *sc, int32_t checks, UErrorCode *status);
 
 /**
@@ -40683,7 +43644,7 @@ uspoof_setChecks(USpoofChecker *sc, int32_t checks, UErrorCode *status);
  * @stable ICU 4.2
  *
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uspoof_getChecks(const USpoofChecker *sc, UErrorCode *status);
 
 /**
@@ -40697,7 +43658,7 @@ uspoof_getChecks(const USpoofChecker *sc, UErrorCode *status);
  * @see URestrictionLevel
  * @stable ICU 51
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uspoof_setRestrictionLevel(USpoofChecker *sc, URestrictionLevel restrictionLevel);
 
 
@@ -40708,7 +43669,7 @@ uspoof_setRestrictionLevel(USpoofChecker *sc, URestrictionLevel restrictionLevel
   * @see URestrictionLevel
   * @stable ICU 51
   */
-U_STABLE URestrictionLevel U_EXPORT2
+U_CAPI URestrictionLevel U_EXPORT2
 uspoof_getRestrictionLevel(const USpoofChecker *sc);
 
 /**
@@ -40753,7 +43714,7 @@ uspoof_getRestrictionLevel(const USpoofChecker *sc);
  * @param status       The error code, set if this function encounters a problem.
  * @stable ICU 4.2
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uspoof_setAllowedLocales(USpoofChecker *sc, const char *localesList, UErrorCode *status);
 
 /**
@@ -40777,7 +43738,7 @@ uspoof_setAllowedLocales(USpoofChecker *sc, const char *localesList, UErrorCode 
  *
  * @stable ICU 4.2
  */
-U_STABLE const char * U_EXPORT2
+U_CAPI const char * U_EXPORT2
 uspoof_getAllowedLocales(USpoofChecker *sc, UErrorCode *status);
 
 
@@ -40799,7 +43760,7 @@ uspoof_getAllowedLocales(USpoofChecker *sc, UErrorCode *status);
  * @param status   The error code, set if this function encounters a problem.
  * @stable ICU 4.2
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uspoof_setAllowedChars(USpoofChecker *sc, const USet *chars, UErrorCode *status);
 
 
@@ -40823,7 +43784,7 @@ uspoof_setAllowedChars(USpoofChecker *sc, const USet *chars, UErrorCode *status)
  *                 the USPOOF_CHAR_LIMIT test.
  * @stable ICU 4.2
  */
-U_STABLE const USet * U_EXPORT2
+U_CAPI const USet * U_EXPORT2
 uspoof_getAllowedChars(const USpoofChecker *sc, UErrorCode *status);
 
 
@@ -40859,7 +43820,7 @@ uspoof_getAllowedChars(const USpoofChecker *sc, UErrorCode *status);
  * @see uspoof_check2
  * @stable ICU 4.2
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uspoof_check(const USpoofChecker *sc,
                          const UChar *id, int32_t length,
                          int32_t *position,
@@ -40898,7 +43859,7 @@ uspoof_check(const USpoofChecker *sc,
  * @see uspoof_check2UTF8
  * @stable ICU 4.2
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uspoof_checkUTF8(const USpoofChecker *sc,
                  const char *id, int32_t length,
                  int32_t *position,
@@ -40933,7 +43894,7 @@ uspoof_checkUTF8(const USpoofChecker *sc,
  * @see uspoof_check2UnicodeString
  * @stable ICU 58
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uspoof_check2(const USpoofChecker *sc,
     const UChar* id, int32_t length,
     USpoofCheckResult* checkResult,
@@ -40970,7 +43931,7 @@ uspoof_check2(const USpoofChecker *sc,
  * @see uspoof_check2UnicodeString
  * @stable ICU 58
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uspoof_check2UTF8(const USpoofChecker *sc,
     const char *id, int32_t length,
     USpoofCheckResult* checkResult,
@@ -40994,7 +43955,7 @@ uspoof_check2UTF8(const USpoofChecker *sc,
  * @see uspoof_check2UnicodeString
  * @stable ICU 58
  */
-U_STABLE USpoofCheckResult* U_EXPORT2
+U_CAPI USpoofCheckResult* U_EXPORT2
 uspoof_openCheckResult(UErrorCode *status);
 
 /**
@@ -41004,7 +43965,7 @@ uspoof_openCheckResult(UErrorCode *status);
  * @param checkResult  The instance of USpoofCheckResult to close
  * @stable ICU 58
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 uspoof_closeCheckResult(USpoofCheckResult *checkResult);
 
 /**
@@ -41021,7 +43982,7 @@ uspoof_closeCheckResult(USpoofCheckResult *checkResult);
  * @see uspoof_setChecks
  * @stable ICU 58
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uspoof_getCheckResultChecks(const USpoofCheckResult *checkResult, UErrorCode *status);
 
 /**
@@ -41034,7 +43995,7 @@ uspoof_getCheckResultChecks(const USpoofCheckResult *checkResult, UErrorCode *st
  * @see uspoof_setRestrictionLevel
  * @stable ICU 58
  */
-U_STABLE URestrictionLevel U_EXPORT2
+U_CAPI URestrictionLevel U_EXPORT2
 uspoof_getCheckResultRestrictionLevel(const USpoofCheckResult *checkResult, UErrorCode *status);
 
 /**
@@ -41048,7 +44009,7 @@ uspoof_getCheckResultRestrictionLevel(const USpoofCheckResult *checkResult, UErr
  * @param status       The error code, set if an error occurred.
  * @stable ICU 58
  */
-U_STABLE const USet* U_EXPORT2
+U_CAPI const USet* U_EXPORT2
 uspoof_getCheckResultNumerics(const USpoofCheckResult *checkResult, UErrorCode *status);
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS5)
 
@@ -41095,7 +44056,7 @@ uspoof_getCheckResultNumerics(const USpoofCheckResult *checkResult, UErrorCode *
  *
  * @stable ICU 4.2
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uspoof_areConfusable(const USpoofChecker *sc,
                      const UChar *id1, int32_t length1,
                      const UChar *id2, int32_t length2,
@@ -41128,7 +44089,7 @@ uspoof_areConfusable(const USpoofChecker *sc,
  *
  * @see uspoof_areConfusable
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uspoof_areConfusableUTF8(const USpoofChecker *sc,
                          const char *id1, int32_t length1,
                          const char *id2, int32_t length2,
@@ -41168,7 +44129,7 @@ uspoof_areConfusableUTF8(const USpoofChecker *sc,
  * @stable ICU 4.2
  * @see uspoof_areConfusable
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uspoof_getSkeleton(const USpoofChecker *sc,
                    uint32_t type,
                    const UChar *id,  int32_t length,
@@ -41208,7 +44169,7 @@ uspoof_getSkeleton(const USpoofChecker *sc,
  *
  * @stable ICU 4.2
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uspoof_getSkeletonUTF8(const USpoofChecker *sc,
                        uint32_t type,
                        const char *id,  int32_t length,
@@ -41227,7 +44188,7 @@ uspoof_getSkeletonUTF8(const USpoofChecker *sc,
   *
   * @stable ICU 51
   */
-U_STABLE const USet * U_EXPORT2
+U_CAPI const USet * U_EXPORT2
 uspoof_getInclusionSet(UErrorCode *status);
 
 /**
@@ -41242,7 +44203,7 @@ uspoof_getInclusionSet(UErrorCode *status);
   *
   * @stable ICU 51
   */
-U_STABLE const USet * U_EXPORT2
+U_CAPI const USet * U_EXPORT2
 uspoof_getRecommendedSet(UErrorCode *status);
 
 /**
@@ -41267,7 +44228,7 @@ uspoof_getRecommendedSet(UErrorCode *status);
  * @see utrie2_openFromSerialized()
  * @stable ICU 4.2
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 uspoof_serialize(USpoofChecker *sc,
                  void *data, int32_t capacity,
                  UErrorCode *status);
@@ -41650,7 +44611,7 @@ typedef enum UTimeScaleValue {
  * 
  * @stable ICU 3.2
  */
-U_STABLE int64_t U_EXPORT2
+U_CAPI int64_t U_EXPORT2
     utmscale_getTimeScaleValue(UDateTimeScale timeScale, UTimeScaleValue value, UErrorCode *status);
 
 /* Conversion to 'universal time scale' */
@@ -41666,7 +44627,7 @@ U_STABLE int64_t U_EXPORT2
  *
  * @stable ICU 3.2
  */
-U_STABLE int64_t U_EXPORT2
+U_CAPI int64_t U_EXPORT2
     utmscale_fromInt64(int64_t otherTime, UDateTimeScale timeScale, UErrorCode *status);
 
 /* Conversion from 'universal time scale' */
@@ -41682,7 +44643,7 @@ U_STABLE int64_t U_EXPORT2
  *
  * @stable ICU 3.2
  */
-U_STABLE int64_t U_EXPORT2
+U_CAPI int64_t U_EXPORT2
     utmscale_toInt64(int64_t universalTime, UDateTimeScale timeScale, UErrorCode *status);
 
 #endif /* #if !UCONFIG_NO_FORMATTING */
@@ -41708,6 +44669,7 @@ U_STABLE int64_t U_EXPORT2
 
 
 #if !UCONFIG_NO_TRANSLITERATION
+
 
 
 /********************************************************************
@@ -41829,7 +44791,7 @@ typedef struct UTransPosition {
     int32_t contextLimit;
     
     /**
-     * Beginning index, inclusive, of the text to be transliteratd.
+     * Beginning index, inclusive, of the text to be transliterated.
      * INPUT/OUTPUT parameter: This parameter is advanced past
      * characters that have already been transliterated by a
      * transliteration operation.
@@ -41838,7 +44800,7 @@ typedef struct UTransPosition {
     int32_t start;
     
     /**
-     * Ending index, exclusive, of the text to be transliteratd.
+     * Ending index, exclusive, of the text to be transliterated.
      * INPUT/OUTPUT parameter: This parameter is updated to reflect
      * changes in the length of the text, but points to the same
      * logical position in the text.
@@ -41875,7 +44837,7 @@ typedef struct UTransPosition {
  *         utrans_xxx() functions, or NULL if the open call fails.
  * @stable ICU 2.8
  */
-U_STABLE UTransliterator* U_EXPORT2
+U_CAPI UTransliterator* U_EXPORT2
 utrans_openU(const UChar *id,
              int32_t idLength,
              UTransDirection dir,
@@ -41899,7 +44861,7 @@ utrans_openU(const UChar *id,
  * inverse of trans, or NULL if the open call fails.
  * @stable ICU 2.0
  */
-U_STABLE UTransliterator* U_EXPORT2 
+U_CAPI UTransliterator* U_EXPORT2 
 utrans_openInverse(const UTransliterator* trans,
                    UErrorCode* status);
 
@@ -41913,7 +44875,7 @@ utrans_openInverse(const UTransliterator* trans,
  * utrans_xxx() functions, or NULL if the clone call fails.
  * @stable ICU 2.0
  */
-U_STABLE UTransliterator* U_EXPORT2 
+U_CAPI UTransliterator* U_EXPORT2 
 utrans_clone(const UTransliterator* trans,
              UErrorCode* status);
 
@@ -41923,7 +44885,7 @@ utrans_clone(const UTransliterator* trans,
  * @param trans the transliterator to be closed.
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 utrans_close(UTransliterator* trans);
 
 
@@ -41941,7 +44903,7 @@ utrans_close(UTransliterator* trans);
  *
  * @stable ICU 2.8
  */
-U_STABLE const UChar * U_EXPORT2
+U_CAPI const UChar * U_EXPORT2
 utrans_getUnicodeID(const UTransliterator *trans,
                     int32_t *resultLength);
 
@@ -41959,7 +44921,7 @@ utrans_getUnicodeID(const UTransliterator *trans,
  * @param status a pointer to the UErrorCode
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 utrans_register(UTransliterator* adoptedTrans,
                 UErrorCode* status);
 
@@ -41972,7 +44934,7 @@ utrans_register(UTransliterator* adoptedTrans,
  * @param idLength the length of id, or -1 if id is zero-terminated
  * @stable ICU 2.8
  */
-U_STABLE void U_EXPORT2
+U_CAPI void U_EXPORT2
 utrans_unregisterID(const UChar* id, int32_t idLength);
 
 /**
@@ -41993,7 +44955,7 @@ utrans_unregisterID(const UChar* id, int32_t idLength);
  * @see UnicodeSet
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 utrans_setFilter(UTransliterator* trans,
                  const UChar* filterPattern,
                  int32_t filterPatternLen,
@@ -42006,7 +44968,7 @@ utrans_setFilter(UTransliterator* trans,
  * @return the number of system transliterators.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
+U_CAPI int32_t U_EXPORT2 
 utrans_countAvailableIDs(void);
 
 /**
@@ -42018,7 +44980,7 @@ utrans_countAvailableIDs(void);
  *
  * @stable ICU 2.8
  */
-U_STABLE UEnumeration * U_EXPORT2
+U_CAPI UEnumeration * U_EXPORT2
 utrans_openIDs(UErrorCode *pErrorCode);
 
 /********************************************************************
@@ -42049,7 +45011,7 @@ utrans_openIDs(UErrorCode *pErrorCode);
  * @stable ICU 2.0
  */
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS5)
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 utrans_trans(const UTransliterator* trans,
              UReplaceable* rep,
              const UReplaceableCallbacks* repFunc,
@@ -42057,7 +45019,7 @@ utrans_trans(const UTransliterator* trans,
              int32_t* limit,
              UErrorCode* status);
 #elif (NTDDI_VERSION >= NTDDI_WIN10_RS3)
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 utrans_trans(const UTransliterator* trans,
              UReplaceable* rep,
              UReplaceableCallbacks* repFunc,
@@ -42068,7 +45030,7 @@ utrans_trans(const UTransliterator* trans,
 
 /**
  * Transliterate the portion of the UReplaceable text buffer that can
- * be transliterated unambiguosly.  This method is typically called
+ * be transliterated unambiguously.  This method is typically called
  * after new text has been inserted, e.g. as a result of a keyboard
  * event.  The transliterator will try to transliterate characters of
  * <code>rep</code> between <code>index.cursor</code> and
@@ -42110,14 +45072,14 @@ utrans_trans(const UTransliterator* trans,
  * @stable ICU 2.0
  */
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS5)
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 utrans_transIncremental(const UTransliterator* trans,
                         UReplaceable* rep,
                         const UReplaceableCallbacks* repFunc,
                         UTransPosition* pos,
                         UErrorCode* status);
 #elif (NTDDI_VERSION >= NTDDI_WIN10_RS3)
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 utrans_transIncremental(const UTransliterator* trans,
                         UReplaceable* rep,
                         UReplaceableCallbacks* repFunc,
@@ -42142,8 +45104,7 @@ utrans_transIncremental(const UTransliterator* trans,
  * zero-terminated.  Upon return, the new length is stored in
  * *textLength.  If textLength is NULL then the string is assumed to
  * be zero-terminated.
- * @param textCapacity a pointer to the length of the text buffer.
- * Upon return, 
+ * @param textCapacity the length of the text buffer
  * @param start the beginning index, inclusive; <code>0 <= start <=
  * limit</code>.
  * @param limit pointer to the ending index, exclusive; <code>start <=
@@ -42156,7 +45117,7 @@ utrans_transIncremental(const UTransliterator* trans,
  * @param status a pointer to the UErrorCode
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 utrans_transUChars(const UTransliterator* trans,
                    UChar* text,
                    int32_t* textLength,
@@ -42167,7 +45128,7 @@ utrans_transUChars(const UTransliterator* trans,
 
 /**
  * Transliterate the portion of the UChar* text buffer that can be
- * transliterated unambiguosly.  See utrans_transIncremental().  The
+ * transliterated unambiguously.  See utrans_transIncremental().  The
  * string is passed in in a UChar* buffer.  The string is modified in
  * place.  If the result is longer than textCapacity, it is truncated.
  * The actual length of the result is returned in *textLength, if
@@ -42191,7 +45152,7 @@ utrans_transUChars(const UTransliterator* trans,
  * @see utrans_transIncremental
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
+U_CAPI void U_EXPORT2 
 utrans_transIncrementalUChars(const UTransliterator* trans,
                               UChar* text,
                               int32_t* textLength,
@@ -42204,7 +45165,7 @@ utrans_transIncrementalUChars(const UTransliterator* trans,
  * transliterator.
  *
  * @param trans     The transliterator
- * @param escapeUnprintable if TRUE then convert unprintable characters to their
+ * @param escapeUnprintable if true then convert unprintable characters to their
  *                  hex escape representations, \\uxxxx or \\Uxxxxxxxx.
  *                  Unprintable characters are those other than
  *                  U+000A, U+0020..U+007E.
@@ -42216,7 +45177,7 @@ utrans_transIncrementalUChars(const UTransliterator* trans,
  *                  in which case an error is returned).
  * @stable ICU 53
  */
-U_STABLE int32_t U_EXPORT2
+U_CAPI int32_t U_EXPORT2
 utrans_toRules(     const UTransliterator* trans,
                     UBool escapeUnprintable,
                     UChar* result, int32_t resultLength,
@@ -42226,9 +45187,9 @@ utrans_toRules(     const UTransliterator* trans,
  * Returns the set of all characters that may be modified in the input text by
  * this UTransliterator, optionally ignoring the transliterator's current filter.
  * @param trans     The transliterator.
- * @param ignoreFilter If FALSE, the returned set incorporates the
+ * @param ignoreFilter If false, the returned set incorporates the
  *                  UTransliterator's current filter; if the filter is changed,
- *                  the return value of this function will change. If TRUE, the
+ *                  the return value of this function will change. If true, the
  *                  returned set ignores the effect of the UTransliterator's
  *                  current filter.
  * @param fillIn    Pointer to a USet object to receive the modifiable characters
@@ -42241,7 +45202,7 @@ utrans_toRules(     const UTransliterator* trans,
  *                  error, NULL is returned.
  * @stable ICU 53
  */
-U_STABLE USet* U_EXPORT2
+U_CAPI USet* U_EXPORT2
 utrans_getSourceSet(const UTransliterator* trans,
                     UBool ignoreFilter,
                     USet* fillIn,

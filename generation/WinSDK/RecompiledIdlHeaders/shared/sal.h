@@ -2877,8 +2877,12 @@ of each annotation, see the advanced annotations section.
 #endif // ]
 
 #ifndef __fallthrough // [
+#if (!defined(_MSVC_LANG) || _MSVC_LANG < 201703l) // [
     __inner_fallthrough_dec
     #define __fallthrough __inner_fallthrough
+#else // ][
+    #define __fallthrough [[fallthrough]]
+#endif // ]
 #endif // ]
 
 #ifndef __analysis_assume // [
@@ -2968,4 +2972,3 @@ __PRIMOP(int, _In_function_class_(__In_impl_ char*);)
 #endif // ]
 
 #include <concurrencysal.h>
-

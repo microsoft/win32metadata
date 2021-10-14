@@ -7,3 +7,5 @@
 #include <sdkddkver.h>
 
 #include <mdmregistration.h>
+#include <mdmlocalmanagement.h>
+

@@ -3,5 +3,7 @@ SpeechStreamSeekPositionType=uint
 --traverse
 <IncludeRoot>/um/sapi.h
 <IncludeRoot>/um/sapi53.h
+<IncludeRoot>/um/sapiddk.h
+<IncludeRoot>/um/sperror.h
 --namespace
 Windows.Win32.Media.Speech

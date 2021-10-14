@@ -683,9 +683,30 @@ RESOURCE_HUB_HRESULT_TO_NTSTATUS (
     }
 }
 
-#define RESOURCE_HUB_STRING_PRINTF(pszDest,cbDest,pszFormat,...) \
-    RESOURCE_HUB_HRESULT_TO_NTSTATUS( \
-        StringCbPrintfW(pszDest, cbDest, pszFormat, __VA_ARGS__))
+static
+NTSTATUS
+RESOURCE_HUB_STRING_PRINTF (
+    _Inout_ STRSAFE_LPWSTR DestinationString,
+    _In_ size_t DestinationSizeInBytes,
+    _In_ _Printf_format_string_ STRSAFE_LPCWSTR pszFormat,
+    ...
+    )
+{
+
+    HRESULT hr;
+    va_list argList;
+
+    va_start(argList, pszFormat);
+    hr = StringCbVPrintfExW(DestinationString,
+                            DestinationSizeInBytes,
+                            NULL,
+                            NULL,
+                            0,
+                            pszFormat,
+                            argList);
+
+    return RESOURCE_HUB_HRESULT_TO_NTSTATUS(hr);
+}
 
 static
 NTSTATUS
@@ -770,8 +791,58 @@ RESOURCE_HUB_UNICODE_STRING_INIT (
 
 #else
 
-#define RESOURCE_HUB_STRING_PRINTF RtlStringCbPrintfW
-#define RESOURCE_HUB_UNICODE_STRING_PRINTF RtlUnicodeStringPrintf
+static
+NTSTATUS
+RESOURCE_HUB_STRING_PRINTF (
+    _Inout_ NTSTRSAFE_PWSTR DestinationString,
+    _In_ size_t DestinationSizeInBytes,
+    _In_ _Printf_format_string_ NTSTRSAFE_PWSTR pszFormat,
+    ...
+    )
+{
+
+    va_list argList;
+
+    va_start(argList, pszFormat);
+    return RtlStringCbVPrintfExW(DestinationString,
+                                 DestinationSizeInBytes,
+                                 NULL,
+                                 NULL,
+                                 0,
+                                 pszFormat,
+                                 argList);
+}
+
+static
+NTSTATUS
+RESOURCE_HUB_UNICODE_STRING_PRINTF (
+    _Inout_ PUNICODE_STRING DestinationString,
+    _In_ _Printf_format_string_ NTSTRSAFE_PWSTR pszFormat,
+    ...
+    )
+{
+
+    va_list argList;
+    NTSTRSAFE_PWSTR pszDestEnd;
+    NTSTATUS status;
+
+    va_start(argList, pszFormat);
+    status = RtlStringCbVPrintfExW(DestinationString->Buffer,
+                                   DestinationString->MaximumLength,
+                                   &pszDestEnd,
+                                   NULL,
+                                   0,
+                                   pszFormat,
+                                   argList);
+
+    if (NT_SUCCESS(status)) {
+        DestinationString->Length = (USHORT)(
+            (pszDestEnd - DestinationString->Buffer) * sizeof(WCHAR));
+    }
+
+    return status;
+}
+
 #define RESOURCE_HUB_UNICODE_STRING_INIT RtlUnicodeStringInit
 #define RESOURCE_HUB_ASSERT(_exp) NT_ASSERT(_exp)
 
@@ -792,10 +863,10 @@ RESOURCE_HUB_ID_TO_FILE_NAME(
     Id.LowPart = IdLowPart;
     Id.HighPart = IdHighPart;
     return RESOURCE_HUB_STRING_PRINTF(FileName,
-                                         RESOURCE_HUB_FILE_SIZE,
-                                         L"%0*I64x",
-                                         (ULONG)(sizeof(LARGE_INTEGER) * 2),
-                                         Id.QuadPart);
+                                      RESOURCE_HUB_FILE_SIZE,
+                                      L"%0*I64x",
+                                      (ULONG)(sizeof(LARGE_INTEGER) * 2),
+                                      Id.QuadPart);
 
 }
 

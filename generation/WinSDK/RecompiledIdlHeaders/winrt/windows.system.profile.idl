@@ -64,6 +64,8 @@ namespace Windows
 
             interface IAnalyticsVersionInfo;
 
+            interface IAnalyticsVersionInfo2;
+
             interface IAppApplicabilityStatics;
 
             interface IEducationSettingsStatics;
@@ -225,6 +227,14 @@ namespace Windows
             {
                 [propget] HRESULT DeviceFamily([out] [retval] HSTRING* value);
                 [propget] HRESULT DeviceFamilyVersion([out] [retval] HSTRING* value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 11.0)]
+            [exclusiveto(Windows.System.Profile.AnalyticsVersionInfo)]
+            [uuid(76E915B1-FF36-407C-9F57-160D3E540747)]
+            interface IAnalyticsVersionInfo2 : IInspectable
+            {
+                [propget] HRESULT ProductName([out] [retval] HSTRING* value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 8.0)]
@@ -391,6 +401,7 @@ namespace Windows
             runtimeclass AnalyticsVersionInfo
             {
                 [default] interface Windows.System.Profile.IAnalyticsVersionInfo;
+                [contract(Windows.Foundation.UniversalApiContract, 11.0)] interface Windows.System.Profile.IAnalyticsVersionInfo2;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 8.0)]

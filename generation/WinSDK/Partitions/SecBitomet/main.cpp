@@ -13,3 +13,4 @@
 #include <winbio_types.h>
 #include <winbio_err.h>
 #include <winbio_adapter.h>
+#include <winbio_ioctl.h>

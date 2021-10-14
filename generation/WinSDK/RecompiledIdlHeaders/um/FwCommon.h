@@ -78,12 +78,6 @@
 extern POLARITY CCritSec g_cs;
 
 #include "utillib.h"
-#include "ThrdBase.h"
-#include "RefPtrCo.h"
-#include "MethodCo.h"
-#include "FRQuery.h"
-#include "wbemglue.h"
-#include "instance.h"
 
 class CFramework_Exception
 {
@@ -101,6 +95,13 @@ public:
 	HRESULT GetHRESULT() { return m_hr ; }
 	CHString &GetErrorText() { return m_sErrorText; }
 } ;
+
+#include "ThrdBase.h"
+#include "RefPtrCo.h"
+#include "MethodCo.h"
+#include "FRQuery.h"
+#include "wbemglue.h"
+#include "instance.h"
 
 #ifndef _DBG_ASSERT
   #ifdef DBG

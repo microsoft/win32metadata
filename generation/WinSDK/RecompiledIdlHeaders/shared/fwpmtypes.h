@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -31,6 +31,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -435,7 +443,6 @@ typedef struct FWPM_ACTION0_
         {
         /* [case()] */ GUID filterType;
         /* [case()] */ GUID calloutKey;
-        /* [case()] */ UINT8 bitmapIndex;
         } 	;
     } 	FWPM_ACTION0;
 
@@ -459,6 +466,8 @@ typedef struct FWPM_FILTER_CONDITION0_
 #define FWPM_FILTER_FLAG_GAMEOS_ONLY (0x00000200)
 #define FWPM_FILTER_FLAG_SILENT_MODE (0x00000400)
 #define FWPM_FILTER_FLAG_IPSEC_NO_ACQUIRE_INITIATE   (0x00000800)
+#define FWPM_FILTER_FLAG_RESERVED0   (0x00001000)
+#define FWPM_FILTER_FLAG_RESERVED1   (0x00002000)
 typedef struct FWPM_FILTER0_
     {
     GUID filterKey;
@@ -555,10 +564,6 @@ typedef struct FWPM_STATISTICS0_
     UINT64 reauthReasonSocketPropertyChanged;
     UINT64 reauthReasonNewInboundMCastBCastPacket;
     UINT64 reauthReasonEDPPolicyChanged;
-    UINT64 reauthReasonPreclassifyLocalAddrLayerChange;
-    UINT64 reauthReasonPreclassifyRemoteAddrLayerChange;
-    UINT64 reauthReasonPreclassifyLocalPortLayerChange;
-    UINT64 reauthReasonPreclassifyRemotePortLayerChange;
     UINT64 reauthReasonProxyHandleChanged;
     } 	FWPM_STATISTICS0;
 

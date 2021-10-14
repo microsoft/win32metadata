@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -215,51 +223,62 @@ EXTERN_C const IID IID_IAtscPsipParser;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAtscPsipParser * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAtscPsipParser * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAtscPsipParser * This);
         
+        DECLSPEC_XFGVIRT(IAtscPsipParser, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IAtscPsipParser * This,
             /* [in] */ __RPC__in_opt IUnknown *punkMpeg2Data);
         
+        DECLSPEC_XFGVIRT(IAtscPsipParser, GetPAT)
         HRESULT ( STDMETHODCALLTYPE *GetPAT )( 
             __RPC__in IAtscPsipParser * This,
             /* [out] */ __RPC__deref_out_opt IPAT **ppPAT);
         
+        DECLSPEC_XFGVIRT(IAtscPsipParser, GetCAT)
         HRESULT ( STDMETHODCALLTYPE *GetCAT )( 
             __RPC__in IAtscPsipParser * This,
             /* [in] */ DWORD dwTimeout,
             /* [out] */ __RPC__deref_out_opt ICAT **ppCAT);
         
+        DECLSPEC_XFGVIRT(IAtscPsipParser, GetPMT)
         HRESULT ( STDMETHODCALLTYPE *GetPMT )( 
             __RPC__in IAtscPsipParser * This,
             /* [in] */ PID pid,
             /* [in] */ __RPC__in WORD *pwProgramNumber,
             /* [out] */ __RPC__deref_out_opt IPMT **ppPMT);
         
+        DECLSPEC_XFGVIRT(IAtscPsipParser, GetTSDT)
         HRESULT ( STDMETHODCALLTYPE *GetTSDT )( 
             __RPC__in IAtscPsipParser * This,
             /* [out] */ __RPC__deref_out_opt ITSDT **ppTSDT);
         
+        DECLSPEC_XFGVIRT(IAtscPsipParser, GetMGT)
         HRESULT ( STDMETHODCALLTYPE *GetMGT )( 
             __RPC__in IAtscPsipParser * This,
             /* [out] */ __RPC__deref_out_opt IATSC_MGT **ppMGT);
         
+        DECLSPEC_XFGVIRT(IAtscPsipParser, GetVCT)
         HRESULT ( STDMETHODCALLTYPE *GetVCT )( 
             __RPC__in IAtscPsipParser * This,
             /* [in] */ TID tableId,
             /* [in] */ BOOL fGetNextTable,
             /* [out] */ __RPC__deref_out_opt IATSC_VCT **ppVCT);
         
+        DECLSPEC_XFGVIRT(IAtscPsipParser, GetEIT)
         HRESULT ( STDMETHODCALLTYPE *GetEIT )( 
             __RPC__in IAtscPsipParser * This,
             /* [in] */ PID pid,
@@ -267,6 +286,7 @@ EXTERN_C const IID IID_IAtscPsipParser;
             /* [in] */ DWORD dwTimeout,
             /* [out] */ __RPC__deref_out_opt IATSC_EIT **ppEIT);
         
+        DECLSPEC_XFGVIRT(IAtscPsipParser, GetETT)
         HRESULT ( STDMETHODCALLTYPE *GetETT )( 
             __RPC__in IAtscPsipParser * This,
             /* [in] */ PID pid,
@@ -274,10 +294,12 @@ EXTERN_C const IID IID_IAtscPsipParser;
             /* [in] */ __RPC__in WORD *pwEventId,
             /* [out] */ __RPC__deref_out_opt IATSC_ETT **ppETT);
         
+        DECLSPEC_XFGVIRT(IAtscPsipParser, GetSTT)
         HRESULT ( STDMETHODCALLTYPE *GetSTT )( 
             __RPC__in IAtscPsipParser * This,
             /* [out] */ __RPC__deref_out_opt IATSC_STT **ppSTT);
         
+        DECLSPEC_XFGVIRT(IAtscPsipParser, GetEAS)
         HRESULT ( STDMETHODCALLTYPE *GetEAS )( 
             __RPC__in IAtscPsipParser * This,
             /* [in] */ PID pid,
@@ -426,61 +448,74 @@ EXTERN_C const IID IID_IATSC_MGT;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IATSC_MGT * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IATSC_MGT * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IATSC_MGT * This);
         
+        DECLSPEC_XFGVIRT(IATSC_MGT, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IATSC_MGT * This,
             /* [in] */ __RPC__in_opt ISectionList *pSectionList,
             /* [in] */ __RPC__in_opt IMpeg2Data *pMPEGData);
         
+        DECLSPEC_XFGVIRT(IATSC_MGT, GetVersionNumber)
         HRESULT ( STDMETHODCALLTYPE *GetVersionNumber )( 
             __RPC__in IATSC_MGT * This,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(IATSC_MGT, GetProtocolVersion)
         HRESULT ( STDMETHODCALLTYPE *GetProtocolVersion )( 
             __RPC__in IATSC_MGT * This,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(IATSC_MGT, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             __RPC__in IATSC_MGT * This,
             /* [out] */ __RPC__out DWORD *pdwVal);
         
+        DECLSPEC_XFGVIRT(IATSC_MGT, GetRecordType)
         HRESULT ( STDMETHODCALLTYPE *GetRecordType )( 
             __RPC__in IATSC_MGT * This,
             /* [in] */ DWORD dwRecordIndex,
             /* [out] */ __RPC__out WORD *pwVal);
         
+        DECLSPEC_XFGVIRT(IATSC_MGT, GetRecordTypePid)
         HRESULT ( STDMETHODCALLTYPE *GetRecordTypePid )( 
             __RPC__in IATSC_MGT * This,
             /* [in] */ DWORD dwRecordIndex,
             /* [out] */ __RPC__out PID *ppidVal);
         
+        DECLSPEC_XFGVIRT(IATSC_MGT, GetRecordVersionNumber)
         HRESULT ( STDMETHODCALLTYPE *GetRecordVersionNumber )( 
             __RPC__in IATSC_MGT * This,
             /* [in] */ DWORD dwRecordIndex,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(IATSC_MGT, GetRecordCountOfDescriptors)
         HRESULT ( STDMETHODCALLTYPE *GetRecordCountOfDescriptors )( 
             __RPC__in IATSC_MGT * This,
             /* [in] */ DWORD dwRecordIndex,
             /* [out] */ __RPC__out DWORD *pdwVal);
         
+        DECLSPEC_XFGVIRT(IATSC_MGT, GetRecordDescriptorByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByIndex )( 
             __RPC__in IATSC_MGT * This,
             /* [in] */ DWORD dwRecordIndex,
             /* [in] */ DWORD dwIndex,
             /* [out] */ __RPC__deref_out_opt IGenericDescriptor **ppDescriptor);
         
+        DECLSPEC_XFGVIRT(IATSC_MGT, GetRecordDescriptorByTag)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByTag )( 
             __RPC__in IATSC_MGT * This,
             /* [in] */ DWORD dwRecordIndex,
@@ -488,15 +523,18 @@ EXTERN_C const IID IID_IATSC_MGT;
             /* [out][in] */ __RPC__inout DWORD *pdwCookie,
             /* [out] */ __RPC__deref_out_opt IGenericDescriptor **ppDescriptor);
         
+        DECLSPEC_XFGVIRT(IATSC_MGT, GetCountOfTableDescriptors)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfTableDescriptors )( 
             __RPC__in IATSC_MGT * This,
             /* [in] */ __RPC__in DWORD *pdwVal);
         
+        DECLSPEC_XFGVIRT(IATSC_MGT, GetTableDescriptorByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetTableDescriptorByIndex )( 
             __RPC__in IATSC_MGT * This,
             /* [in] */ DWORD dwIndex,
             /* [out] */ __RPC__deref_out_opt IGenericDescriptor **ppDescriptor);
         
+        DECLSPEC_XFGVIRT(IATSC_MGT, GetTableDescriptorByTag)
         HRESULT ( STDMETHODCALLTYPE *GetTableDescriptorByTag )( 
             __RPC__in IATSC_MGT * This,
             /* [in] */ BYTE bTag,
@@ -703,125 +741,151 @@ EXTERN_C const IID IID_IATSC_VCT;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IATSC_VCT * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IATSC_VCT * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IATSC_VCT * This);
         
+        DECLSPEC_XFGVIRT(IATSC_VCT, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IATSC_VCT * This,
             /* [in] */ __RPC__in_opt ISectionList *pSectionList,
             /* [in] */ __RPC__in_opt IMpeg2Data *pMPEGData);
         
+        DECLSPEC_XFGVIRT(IATSC_VCT, GetVersionNumber)
         HRESULT ( STDMETHODCALLTYPE *GetVersionNumber )( 
             __RPC__in IATSC_VCT * This,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(IATSC_VCT, GetTransportStreamId)
         HRESULT ( STDMETHODCALLTYPE *GetTransportStreamId )( 
             __RPC__in IATSC_VCT * This,
             /* [out] */ __RPC__out WORD *pwVal);
         
+        DECLSPEC_XFGVIRT(IATSC_VCT, GetProtocolVersion)
         HRESULT ( STDMETHODCALLTYPE *GetProtocolVersion )( 
             __RPC__in IATSC_VCT * This,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(IATSC_VCT, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             __RPC__in IATSC_VCT * This,
             /* [out] */ __RPC__out DWORD *pdwVal);
         
+        DECLSPEC_XFGVIRT(IATSC_VCT, GetRecordName)
         HRESULT ( STDMETHODCALLTYPE *GetRecordName )( 
             __RPC__in IATSC_VCT * This,
             /* [in] */ DWORD dwRecordIndex,
             /* [out] */ __RPC__deref_out_opt LPWSTR *pwsName);
         
+        DECLSPEC_XFGVIRT(IATSC_VCT, GetRecordMajorChannelNumber)
         HRESULT ( STDMETHODCALLTYPE *GetRecordMajorChannelNumber )( 
             __RPC__in IATSC_VCT * This,
             /* [in] */ DWORD dwRecordIndex,
             /* [out] */ __RPC__out WORD *pwVal);
         
+        DECLSPEC_XFGVIRT(IATSC_VCT, GetRecordMinorChannelNumber)
         HRESULT ( STDMETHODCALLTYPE *GetRecordMinorChannelNumber )( 
             __RPC__in IATSC_VCT * This,
             /* [in] */ DWORD dwRecordIndex,
             /* [out] */ __RPC__out WORD *pwVal);
         
+        DECLSPEC_XFGVIRT(IATSC_VCT, GetRecordModulationMode)
         HRESULT ( STDMETHODCALLTYPE *GetRecordModulationMode )( 
             __RPC__in IATSC_VCT * This,
             /* [in] */ DWORD dwRecordIndex,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(IATSC_VCT, GetRecordCarrierFrequency)
         HRESULT ( STDMETHODCALLTYPE *GetRecordCarrierFrequency )( 
             __RPC__in IATSC_VCT * This,
             /* [in] */ DWORD dwRecordIndex,
             /* [out] */ __RPC__out DWORD *pdwVal);
         
+        DECLSPEC_XFGVIRT(IATSC_VCT, GetRecordTransportStreamId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordTransportStreamId )( 
             __RPC__in IATSC_VCT * This,
             /* [in] */ DWORD dwRecordIndex,
             /* [out] */ __RPC__out WORD *pwVal);
         
+        DECLSPEC_XFGVIRT(IATSC_VCT, GetRecordProgramNumber)
         HRESULT ( STDMETHODCALLTYPE *GetRecordProgramNumber )( 
             __RPC__in IATSC_VCT * This,
             /* [in] */ DWORD dwRecordIndex,
             /* [out] */ __RPC__out WORD *pwVal);
         
+        DECLSPEC_XFGVIRT(IATSC_VCT, GetRecordEtmLocation)
         HRESULT ( STDMETHODCALLTYPE *GetRecordEtmLocation )( 
             __RPC__in IATSC_VCT * This,
             /* [in] */ DWORD dwRecordIndex,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(IATSC_VCT, GetRecordIsAccessControlledBitSet)
         HRESULT ( STDMETHODCALLTYPE *GetRecordIsAccessControlledBitSet )( 
             __RPC__in IATSC_VCT * This,
             /* [in] */ DWORD dwRecordIndex,
             /* [out] */ __RPC__out BOOL *pfVal);
         
+        DECLSPEC_XFGVIRT(IATSC_VCT, GetRecordIsHiddenBitSet)
         HRESULT ( STDMETHODCALLTYPE *GetRecordIsHiddenBitSet )( 
             __RPC__in IATSC_VCT * This,
             /* [in] */ DWORD dwRecordIndex,
             /* [out] */ __RPC__out BOOL *pfVal);
         
+        DECLSPEC_XFGVIRT(IATSC_VCT, GetRecordIsPathSelectBitSet)
         HRESULT ( STDMETHODCALLTYPE *GetRecordIsPathSelectBitSet )( 
             __RPC__in IATSC_VCT * This,
             /* [in] */ DWORD dwRecordIndex,
             /* [out] */ __RPC__out BOOL *pfVal);
         
+        DECLSPEC_XFGVIRT(IATSC_VCT, GetRecordIsOutOfBandBitSet)
         HRESULT ( STDMETHODCALLTYPE *GetRecordIsOutOfBandBitSet )( 
             __RPC__in IATSC_VCT * This,
             /* [in] */ DWORD dwRecordIndex,
             /* [out] */ __RPC__out BOOL *pfVal);
         
+        DECLSPEC_XFGVIRT(IATSC_VCT, GetRecordIsHideGuideBitSet)
         HRESULT ( STDMETHODCALLTYPE *GetRecordIsHideGuideBitSet )( 
             __RPC__in IATSC_VCT * This,
             /* [in] */ DWORD dwRecordIndex,
             /* [out] */ __RPC__out BOOL *pfVal);
         
+        DECLSPEC_XFGVIRT(IATSC_VCT, GetRecordServiceType)
         HRESULT ( STDMETHODCALLTYPE *GetRecordServiceType )( 
             __RPC__in IATSC_VCT * This,
             /* [in] */ DWORD dwRecordIndex,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(IATSC_VCT, GetRecordSourceId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordSourceId )( 
             __RPC__in IATSC_VCT * This,
             /* [in] */ DWORD dwRecordIndex,
             /* [out] */ __RPC__out WORD *pwVal);
         
+        DECLSPEC_XFGVIRT(IATSC_VCT, GetRecordCountOfDescriptors)
         HRESULT ( STDMETHODCALLTYPE *GetRecordCountOfDescriptors )( 
             __RPC__in IATSC_VCT * This,
             /* [in] */ DWORD dwRecordIndex,
             /* [out] */ __RPC__out DWORD *pdwVal);
         
+        DECLSPEC_XFGVIRT(IATSC_VCT, GetRecordDescriptorByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByIndex )( 
             __RPC__in IATSC_VCT * This,
             /* [in] */ DWORD dwRecordIndex,
             /* [in] */ DWORD dwIndex,
             /* [out] */ __RPC__deref_out_opt IGenericDescriptor **ppDescriptor);
         
+        DECLSPEC_XFGVIRT(IATSC_VCT, GetRecordDescriptorByTag)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByTag )( 
             __RPC__in IATSC_VCT * This,
             /* [in] */ DWORD dwRecordIndex,
@@ -829,15 +893,18 @@ EXTERN_C const IID IID_IATSC_VCT;
             /* [out][in] */ __RPC__inout DWORD *pdwCookie,
             /* [out] */ __RPC__deref_out_opt IGenericDescriptor **ppDescriptor);
         
+        DECLSPEC_XFGVIRT(IATSC_VCT, GetCountOfTableDescriptors)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfTableDescriptors )( 
             __RPC__in IATSC_VCT * This,
             /* [in] */ __RPC__in DWORD *pdwVal);
         
+        DECLSPEC_XFGVIRT(IATSC_VCT, GetTableDescriptorByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetTableDescriptorByIndex )( 
             __RPC__in IATSC_VCT * This,
             /* [in] */ DWORD dwIndex,
             /* [out] */ __RPC__deref_out_opt IGenericDescriptor **ppDescriptor);
         
+        DECLSPEC_XFGVIRT(IATSC_VCT, GetTableDescriptorByTag)
         HRESULT ( STDMETHODCALLTYPE *GetTableDescriptorByTag )( 
             __RPC__in IATSC_VCT * This,
             /* [in] */ BYTE bTag,
@@ -1032,76 +1099,92 @@ EXTERN_C const IID IID_IATSC_EIT;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IATSC_EIT * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IATSC_EIT * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IATSC_EIT * This);
         
+        DECLSPEC_XFGVIRT(IATSC_EIT, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IATSC_EIT * This,
             /* [in] */ __RPC__in_opt ISectionList *pSectionList,
             /* [in] */ __RPC__in_opt IMpeg2Data *pMPEGData);
         
+        DECLSPEC_XFGVIRT(IATSC_EIT, GetVersionNumber)
         HRESULT ( STDMETHODCALLTYPE *GetVersionNumber )( 
             __RPC__in IATSC_EIT * This,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(IATSC_EIT, GetSourceId)
         HRESULT ( STDMETHODCALLTYPE *GetSourceId )( 
             __RPC__in IATSC_EIT * This,
             /* [out] */ __RPC__out WORD *pwVal);
         
+        DECLSPEC_XFGVIRT(IATSC_EIT, GetProtocolVersion)
         HRESULT ( STDMETHODCALLTYPE *GetProtocolVersion )( 
             __RPC__in IATSC_EIT * This,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(IATSC_EIT, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             __RPC__in IATSC_EIT * This,
             /* [out] */ __RPC__out DWORD *pdwVal);
         
+        DECLSPEC_XFGVIRT(IATSC_EIT, GetRecordEventId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordEventId )( 
             __RPC__in IATSC_EIT * This,
             /* [in] */ DWORD dwRecordIndex,
             /* [out] */ __RPC__out WORD *pwVal);
         
+        DECLSPEC_XFGVIRT(IATSC_EIT, GetRecordStartTime)
         HRESULT ( STDMETHODCALLTYPE *GetRecordStartTime )( 
             __RPC__in IATSC_EIT * This,
             /* [in] */ DWORD dwRecordIndex,
             /* [out] */ __RPC__out MPEG_DATE_AND_TIME *pmdtVal);
         
+        DECLSPEC_XFGVIRT(IATSC_EIT, GetRecordEtmLocation)
         HRESULT ( STDMETHODCALLTYPE *GetRecordEtmLocation )( 
             __RPC__in IATSC_EIT * This,
             /* [in] */ DWORD dwRecordIndex,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(IATSC_EIT, GetRecordDuration)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDuration )( 
             __RPC__in IATSC_EIT * This,
             /* [in] */ DWORD dwRecordIndex,
             /* [out] */ __RPC__out MPEG_DURATION *pmdVal);
         
+        DECLSPEC_XFGVIRT(IATSC_EIT, GetRecordTitleText)
         HRESULT ( STDMETHODCALLTYPE *GetRecordTitleText )( 
             __RPC__in IATSC_EIT * This,
             /* [in] */ DWORD dwRecordIndex,
             /* [out] */ __RPC__out DWORD *pdwLength,
             /* [out] */ __RPC__deref_out_opt BYTE **ppText);
         
+        DECLSPEC_XFGVIRT(IATSC_EIT, GetRecordCountOfDescriptors)
         HRESULT ( STDMETHODCALLTYPE *GetRecordCountOfDescriptors )( 
             __RPC__in IATSC_EIT * This,
             /* [in] */ DWORD dwRecordIndex,
             /* [out] */ __RPC__out DWORD *pdwVal);
         
+        DECLSPEC_XFGVIRT(IATSC_EIT, GetRecordDescriptorByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByIndex )( 
             __RPC__in IATSC_EIT * This,
             /* [in] */ DWORD dwRecordIndex,
             /* [in] */ DWORD dwIndex,
             /* [out] */ __RPC__deref_out_opt IGenericDescriptor **ppDescriptor);
         
+        DECLSPEC_XFGVIRT(IATSC_EIT, GetRecordDescriptorByTag)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByTag )( 
             __RPC__in IATSC_EIT * This,
             /* [in] */ DWORD dwRecordIndex,
@@ -1223,35 +1306,43 @@ EXTERN_C const IID IID_IATSC_ETT;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IATSC_ETT * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IATSC_ETT * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IATSC_ETT * This);
         
+        DECLSPEC_XFGVIRT(IATSC_ETT, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IATSC_ETT * This,
             /* [in] */ __RPC__in_opt ISectionList *pSectionList,
             /* [in] */ __RPC__in_opt IMpeg2Data *pMPEGData);
         
+        DECLSPEC_XFGVIRT(IATSC_ETT, GetVersionNumber)
         HRESULT ( STDMETHODCALLTYPE *GetVersionNumber )( 
             __RPC__in IATSC_ETT * This,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(IATSC_ETT, GetProtocolVersion)
         HRESULT ( STDMETHODCALLTYPE *GetProtocolVersion )( 
             __RPC__in IATSC_ETT * This,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(IATSC_ETT, GetEtmId)
         HRESULT ( STDMETHODCALLTYPE *GetEtmId )( 
             __RPC__in IATSC_ETT * This,
             /* [out] */ __RPC__out DWORD *pdwVal);
         
+        DECLSPEC_XFGVIRT(IATSC_ETT, GetExtendedMessageText)
         HRESULT ( STDMETHODCALLTYPE *GetExtendedMessageText )( 
             __RPC__in IATSC_ETT * This,
             /* [out] */ __RPC__out DWORD *pdwLength,
@@ -1358,48 +1449,59 @@ EXTERN_C const IID IID_IATSC_STT;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IATSC_STT * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IATSC_STT * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IATSC_STT * This);
         
+        DECLSPEC_XFGVIRT(IATSC_STT, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IATSC_STT * This,
             /* [in] */ __RPC__in_opt ISectionList *pSectionList,
             /* [in] */ __RPC__in_opt IMpeg2Data *pMPEGData);
         
+        DECLSPEC_XFGVIRT(IATSC_STT, GetProtocolVersion)
         HRESULT ( STDMETHODCALLTYPE *GetProtocolVersion )( 
             __RPC__in IATSC_STT * This,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(IATSC_STT, GetSystemTime)
         HRESULT ( STDMETHODCALLTYPE *GetSystemTime )( 
             __RPC__in IATSC_STT * This,
             /* [out] */ __RPC__out MPEG_DATE_AND_TIME *pmdtSystemTime);
         
+        DECLSPEC_XFGVIRT(IATSC_STT, GetGpsUtcOffset)
         HRESULT ( STDMETHODCALLTYPE *GetGpsUtcOffset )( 
             __RPC__in IATSC_STT * This,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(IATSC_STT, GetDaylightSavings)
         HRESULT ( STDMETHODCALLTYPE *GetDaylightSavings )( 
             __RPC__in IATSC_STT * This,
             /* [out] */ __RPC__out WORD *pwVal);
         
+        DECLSPEC_XFGVIRT(IATSC_STT, GetCountOfTableDescriptors)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfTableDescriptors )( 
             __RPC__in IATSC_STT * This,
             /* [out] */ __RPC__out DWORD *pdwVal);
         
+        DECLSPEC_XFGVIRT(IATSC_STT, GetTableDescriptorByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetTableDescriptorByIndex )( 
             __RPC__in IATSC_STT * This,
             /* [in] */ DWORD dwIndex,
             /* [out] */ __RPC__deref_out_opt IGenericDescriptor **ppDescriptor);
         
+        DECLSPEC_XFGVIRT(IATSC_STT, GetTableDescriptorByTag)
         HRESULT ( STDMETHODCALLTYPE *GetTableDescriptorByTag )( 
             __RPC__in IATSC_STT * This,
             /* [in] */ BYTE bTag,
@@ -1587,113 +1689,140 @@ EXTERN_C const IID IID_ISCTE_EAS;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISCTE_EAS * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISCTE_EAS * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISCTE_EAS * This);
         
+        DECLSPEC_XFGVIRT(ISCTE_EAS, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in ISCTE_EAS * This,
             /* [in] */ __RPC__in_opt ISectionList *pSectionList,
             /* [in] */ __RPC__in_opt IMpeg2Data *pMPEGData);
         
+        DECLSPEC_XFGVIRT(ISCTE_EAS, GetVersionNumber)
         HRESULT ( STDMETHODCALLTYPE *GetVersionNumber )( 
             __RPC__in ISCTE_EAS * This,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(ISCTE_EAS, GetSequencyNumber)
         HRESULT ( STDMETHODCALLTYPE *GetSequencyNumber )( 
             __RPC__in ISCTE_EAS * This,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(ISCTE_EAS, GetProtocolVersion)
         HRESULT ( STDMETHODCALLTYPE *GetProtocolVersion )( 
             __RPC__in ISCTE_EAS * This,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(ISCTE_EAS, GetEASEventID)
         HRESULT ( STDMETHODCALLTYPE *GetEASEventID )( 
             __RPC__in ISCTE_EAS * This,
             /* [out] */ __RPC__out WORD *pwVal);
         
+        DECLSPEC_XFGVIRT(ISCTE_EAS, GetOriginatorCode)
         HRESULT ( STDMETHODCALLTYPE *GetOriginatorCode )( 
             __RPC__in ISCTE_EAS * This,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(ISCTE_EAS, GetEASEventCodeLen)
         HRESULT ( STDMETHODCALLTYPE *GetEASEventCodeLen )( 
             __RPC__in ISCTE_EAS * This,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(ISCTE_EAS, GetEASEventCode)
         HRESULT ( STDMETHODCALLTYPE *GetEASEventCode )( 
             __RPC__in ISCTE_EAS * This,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(ISCTE_EAS, GetRawNatureOfActivationTextLen)
         HRESULT ( STDMETHODCALLTYPE *GetRawNatureOfActivationTextLen )( 
             __RPC__in ISCTE_EAS * This,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(ISCTE_EAS, GetRawNatureOfActivationText)
         HRESULT ( STDMETHODCALLTYPE *GetRawNatureOfActivationText )( 
             __RPC__in ISCTE_EAS * This,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(ISCTE_EAS, GetNatureOfActivationText)
         HRESULT ( STDMETHODCALLTYPE *GetNatureOfActivationText )( 
             __RPC__in ISCTE_EAS * This,
             /* [in] */ __RPC__in BSTR bstrIS0639code,
             /* [out] */ __RPC__deref_out_opt BSTR *pbstrString);
         
+        DECLSPEC_XFGVIRT(ISCTE_EAS, GetTimeRemaining)
         HRESULT ( STDMETHODCALLTYPE *GetTimeRemaining )( 
             __RPC__in ISCTE_EAS * This,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(ISCTE_EAS, GetStartTime)
         HRESULT ( STDMETHODCALLTYPE *GetStartTime )( 
             __RPC__in ISCTE_EAS * This,
             /* [out] */ __RPC__out DWORD *pdwVal);
         
+        DECLSPEC_XFGVIRT(ISCTE_EAS, GetDuration)
         HRESULT ( STDMETHODCALLTYPE *GetDuration )( 
             __RPC__in ISCTE_EAS * This,
             /* [out] */ __RPC__out WORD *pwVal);
         
+        DECLSPEC_XFGVIRT(ISCTE_EAS, GetAlertPriority)
         HRESULT ( STDMETHODCALLTYPE *GetAlertPriority )( 
             __RPC__in ISCTE_EAS * This,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(ISCTE_EAS, GetDetailsOOBSourceID)
         HRESULT ( STDMETHODCALLTYPE *GetDetailsOOBSourceID )( 
             __RPC__in ISCTE_EAS * This,
             /* [out] */ __RPC__out WORD *pwVal);
         
+        DECLSPEC_XFGVIRT(ISCTE_EAS, GetDetailsMajor)
         HRESULT ( STDMETHODCALLTYPE *GetDetailsMajor )( 
             __RPC__in ISCTE_EAS * This,
             /* [out] */ __RPC__out WORD *pwVal);
         
+        DECLSPEC_XFGVIRT(ISCTE_EAS, GetDetailsMinor)
         HRESULT ( STDMETHODCALLTYPE *GetDetailsMinor )( 
             __RPC__in ISCTE_EAS * This,
             /* [out] */ __RPC__out WORD *pwVal);
         
+        DECLSPEC_XFGVIRT(ISCTE_EAS, GetDetailsAudioOOBSourceID)
         HRESULT ( STDMETHODCALLTYPE *GetDetailsAudioOOBSourceID )( 
             __RPC__in ISCTE_EAS * This,
             /* [out] */ __RPC__out WORD *pwVal);
         
+        DECLSPEC_XFGVIRT(ISCTE_EAS, GetAlertText)
         HRESULT ( STDMETHODCALLTYPE *GetAlertText )( 
             __RPC__in ISCTE_EAS * This,
             /* [in] */ __RPC__in BSTR bstrIS0639code,
             /* [out] */ __RPC__deref_out_opt BSTR *pbstrString);
         
+        DECLSPEC_XFGVIRT(ISCTE_EAS, GetRawAlertTextLen)
         HRESULT ( STDMETHODCALLTYPE *GetRawAlertTextLen )( 
             __RPC__in ISCTE_EAS * This,
             /* [out] */ __RPC__out WORD *pwVal);
         
+        DECLSPEC_XFGVIRT(ISCTE_EAS, GetRawAlertText)
         HRESULT ( STDMETHODCALLTYPE *GetRawAlertText )( 
             __RPC__in ISCTE_EAS * This,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(ISCTE_EAS, GetLocationCount)
         HRESULT ( STDMETHODCALLTYPE *GetLocationCount )( 
             __RPC__in ISCTE_EAS * This,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(ISCTE_EAS, GetLocationCodes)
         HRESULT ( STDMETHODCALLTYPE *GetLocationCodes )( 
             __RPC__in ISCTE_EAS * This,
             /* [in] */ BYTE bIndex,
@@ -1701,10 +1830,12 @@ EXTERN_C const IID IID_ISCTE_EAS;
             /* [out] */ __RPC__out BYTE *pbCountySubdivision,
             /* [out] */ __RPC__out WORD *pwCounty);
         
+        DECLSPEC_XFGVIRT(ISCTE_EAS, GetExceptionCount)
         HRESULT ( STDMETHODCALLTYPE *GetExceptionCount )( 
             __RPC__in ISCTE_EAS * This,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(ISCTE_EAS, GetExceptionService)
         HRESULT ( STDMETHODCALLTYPE *GetExceptionService )( 
             __RPC__in ISCTE_EAS * This,
             /* [in] */ BYTE bIndex,
@@ -1712,15 +1843,18 @@ EXTERN_C const IID IID_ISCTE_EAS;
             /* [out] */ __RPC__out WORD *pwFirst,
             /* [out] */ __RPC__out WORD *pwSecond);
         
+        DECLSPEC_XFGVIRT(ISCTE_EAS, GetCountOfTableDescriptors)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfTableDescriptors )( 
             __RPC__in ISCTE_EAS * This,
             /* [out] */ __RPC__out DWORD *pdwVal);
         
+        DECLSPEC_XFGVIRT(ISCTE_EAS, GetTableDescriptorByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetTableDescriptorByIndex )( 
             __RPC__in ISCTE_EAS * This,
             /* [in] */ DWORD dwIndex,
             /* [out] */ __RPC__deref_out_opt IGenericDescriptor **ppDescriptor);
         
+        DECLSPEC_XFGVIRT(ISCTE_EAS, GetTableDescriptorByTag)
         HRESULT ( STDMETHODCALLTYPE *GetTableDescriptorByTag )( 
             __RPC__in ISCTE_EAS * This,
             /* [in] */ BYTE bTag,
@@ -1904,52 +2038,63 @@ EXTERN_C const IID IID_IAtscContentAdvisoryDescriptor;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAtscContentAdvisoryDescriptor * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAtscContentAdvisoryDescriptor * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAtscContentAdvisoryDescriptor * This);
         
+        DECLSPEC_XFGVIRT(IAtscContentAdvisoryDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             __RPC__in IAtscContentAdvisoryDescriptor * This,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(IAtscContentAdvisoryDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             __RPC__in IAtscContentAdvisoryDescriptor * This,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(IAtscContentAdvisoryDescriptor, GetRatingRegionCount)
         HRESULT ( STDMETHODCALLTYPE *GetRatingRegionCount )( 
             __RPC__in IAtscContentAdvisoryDescriptor * This,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(IAtscContentAdvisoryDescriptor, GetRecordRatingRegion)
         HRESULT ( STDMETHODCALLTYPE *GetRecordRatingRegion )( 
             __RPC__in IAtscContentAdvisoryDescriptor * This,
             /* [in] */ BYTE bIndex,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(IAtscContentAdvisoryDescriptor, GetRecordRatedDimensions)
         HRESULT ( STDMETHODCALLTYPE *GetRecordRatedDimensions )( 
             __RPC__in IAtscContentAdvisoryDescriptor * This,
             /* [in] */ BYTE bIndex,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(IAtscContentAdvisoryDescriptor, GetRecordRatingDimension)
         HRESULT ( STDMETHODCALLTYPE *GetRecordRatingDimension )( 
             __RPC__in IAtscContentAdvisoryDescriptor * This,
             /* [in] */ BYTE bIndexOuter,
             /* [in] */ BYTE bIndexInner,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(IAtscContentAdvisoryDescriptor, GetRecordRatingValue)
         HRESULT ( STDMETHODCALLTYPE *GetRecordRatingValue )( 
             __RPC__in IAtscContentAdvisoryDescriptor * This,
             /* [in] */ BYTE bIndexOuter,
             /* [in] */ BYTE bIndexInner,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(IAtscContentAdvisoryDescriptor, GetRecordRatingDescriptionText)
         HRESULT ( STDMETHODCALLTYPE *GetRecordRatingDescriptionText )( 
             __RPC__in IAtscContentAdvisoryDescriptor * This,
             /* [in] */ BYTE bIndex,
@@ -2061,42 +2206,51 @@ EXTERN_C const IID IID_ICaptionServiceDescriptor;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICaptionServiceDescriptor * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICaptionServiceDescriptor * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICaptionServiceDescriptor * This);
         
+        DECLSPEC_XFGVIRT(ICaptionServiceDescriptor, GetNumberOfServices)
         HRESULT ( STDMETHODCALLTYPE *GetNumberOfServices )( 
             __RPC__in ICaptionServiceDescriptor * This,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(ICaptionServiceDescriptor, GetLanguageCode)
         HRESULT ( STDMETHODCALLTYPE *GetLanguageCode )( 
             __RPC__in ICaptionServiceDescriptor * This,
             /* [in] */ BYTE bIndex,
             /* [out] */ __RPC__out_ecount_full(3) BYTE LangCode[ 3 ]);
         
+        DECLSPEC_XFGVIRT(ICaptionServiceDescriptor, GetCaptionServiceNumber)
         HRESULT ( STDMETHODCALLTYPE *GetCaptionServiceNumber )( 
             __RPC__in ICaptionServiceDescriptor * This,
             /* [in] */ BYTE bIndex,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(ICaptionServiceDescriptor, GetCCType)
         HRESULT ( STDMETHODCALLTYPE *GetCCType )( 
             __RPC__in ICaptionServiceDescriptor * This,
             /* [in] */ BYTE bIndex,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(ICaptionServiceDescriptor, GetEasyReader)
         HRESULT ( STDMETHODCALLTYPE *GetEasyReader )( 
             __RPC__in ICaptionServiceDescriptor * This,
             /* [in] */ BYTE bIndex,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(ICaptionServiceDescriptor, GetWideAspectRatio)
         HRESULT ( STDMETHODCALLTYPE *GetWideAspectRatio )( 
             __RPC__in ICaptionServiceDescriptor * This,
             /* [in] */ BYTE bIndex,
@@ -2196,36 +2350,44 @@ EXTERN_C const IID IID_IServiceLocationDescriptor;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IServiceLocationDescriptor * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IServiceLocationDescriptor * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IServiceLocationDescriptor * This);
         
+        DECLSPEC_XFGVIRT(IServiceLocationDescriptor, GetPCR_PID)
         HRESULT ( STDMETHODCALLTYPE *GetPCR_PID )( 
             __RPC__in IServiceLocationDescriptor * This,
             /* [out] */ __RPC__out WORD *pwVal);
         
+        DECLSPEC_XFGVIRT(IServiceLocationDescriptor, GetNumberOfElements)
         HRESULT ( STDMETHODCALLTYPE *GetNumberOfElements )( 
             __RPC__in IServiceLocationDescriptor * This,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(IServiceLocationDescriptor, GetElementStreamType)
         HRESULT ( STDMETHODCALLTYPE *GetElementStreamType )( 
             __RPC__in IServiceLocationDescriptor * This,
             /* [in] */ BYTE bIndex,
             /* [out] */ __RPC__out BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(IServiceLocationDescriptor, GetElementPID)
         HRESULT ( STDMETHODCALLTYPE *GetElementPID )( 
             __RPC__in IServiceLocationDescriptor * This,
             /* [in] */ BYTE bIndex,
             /* [out] */ __RPC__out WORD *pwVal);
         
+        DECLSPEC_XFGVIRT(IServiceLocationDescriptor, GetElementLanguageCode)
         HRESULT ( STDMETHODCALLTYPE *GetElementLanguageCode )( 
             __RPC__in IServiceLocationDescriptor * This,
             /* [in] */ BYTE bIndex,

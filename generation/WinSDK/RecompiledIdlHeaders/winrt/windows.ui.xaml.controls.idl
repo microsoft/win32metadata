@@ -1014,6 +1014,8 @@ namespace Windows
 
                 interface ICalendarView;
 
+                interface ICalendarView2;
+
                 interface ICalendarViewDayItem;
 
                 interface ICalendarViewDayItemChangingEventArgs;
@@ -1027,6 +1029,8 @@ namespace Windows
                 interface ICalendarViewSelectedDatesChangedEventArgs;
 
                 interface ICalendarViewStatics;
+
+                interface ICalendarViewStatics2;
 
                 interface ICandidateWindowBoundsChangedEventArgs;
 
@@ -1404,9 +1408,17 @@ namespace Windows
 
                 interface IHandwritingView;
 
+                interface IHandwritingView2;
+
+                interface IHandwritingViewCandidatesChangedEventArgs;
+
                 interface IHandwritingViewFactory;
 
                 interface IHandwritingViewStatics;
+
+                interface IHandwritingViewStatics2;
+
+                interface IHandwritingViewTextSubmittedEventArgs;
 
                 interface IHub;
 
@@ -2726,6 +2738,10 @@ namespace Windows
 
                 runtimeclass HandwritingView;
 
+                runtimeclass HandwritingViewCandidatesChangedEventArgs;
+
+                runtimeclass HandwritingViewTextSubmittedEventArgs;
+
                 runtimeclass Hub;
 
                 runtimeclass HubSection;
@@ -3276,6 +3292,10 @@ namespace Windows
                     interface Windows.Foundation.TypedEventHandler<Windows.UI.Xaml.Controls.HandwritingView*, Windows.UI.Xaml.Controls.HandwritingPanelClosedEventArgs*>;
 
                     interface Windows.Foundation.TypedEventHandler<Windows.UI.Xaml.Controls.HandwritingView*, Windows.UI.Xaml.Controls.HandwritingPanelOpenedEventArgs*>;
+
+                    interface Windows.Foundation.TypedEventHandler<Windows.UI.Xaml.Controls.HandwritingView*, Windows.UI.Xaml.Controls.HandwritingViewCandidatesChangedEventArgs*>;
+
+                    interface Windows.Foundation.TypedEventHandler<Windows.UI.Xaml.Controls.HandwritingView*, Windows.UI.Xaml.Controls.HandwritingViewTextSubmittedEventArgs*>;
 
                     interface Windows.Foundation.TypedEventHandler<Windows.UI.Xaml.Controls.InkToolbar*, IInspectable*>;
 
@@ -5158,6 +5178,61 @@ namespace Windows
                     HRESULT SetYearDecadeDisplayDimensions([in] INT32 columns, [in] INT32 rows);
                 }
 
+                [contract(Windows.Foundation.UniversalApiContract, 14.0)]
+                [exclusiveto(Windows.UI.Xaml.Controls.CalendarView)]
+                [uuid(F55AB64A-5504-5D9E-9D20-2FFDB88FC56B)]
+                interface ICalendarView2 : IInspectable
+                {
+                    [propget] HRESULT SelectedDisabledBorderBrush([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                    [propput] HRESULT SelectedDisabledBorderBrush([in] Windows.UI.Xaml.Media.Brush* value);
+                    [propget] HRESULT TodaySelectedInnerBorderBrush([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                    [propput] HRESULT TodaySelectedInnerBorderBrush([in] Windows.UI.Xaml.Media.Brush* value);
+                    [propget] HRESULT BlackoutStrikethroughBrush([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                    [propput] HRESULT BlackoutStrikethroughBrush([in] Windows.UI.Xaml.Media.Brush* value);
+                    [propget] HRESULT BlackoutBackground([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                    [propput] HRESULT BlackoutBackground([in] Windows.UI.Xaml.Media.Brush* value);
+                    [propget] HRESULT CalendarItemHoverBackground([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                    [propput] HRESULT CalendarItemHoverBackground([in] Windows.UI.Xaml.Media.Brush* value);
+                    [propget] HRESULT CalendarItemPressedBackground([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                    [propput] HRESULT CalendarItemPressedBackground([in] Windows.UI.Xaml.Media.Brush* value);
+                    [propget] HRESULT CalendarItemDisabledBackground([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                    [propput] HRESULT CalendarItemDisabledBackground([in] Windows.UI.Xaml.Media.Brush* value);
+                    [propget] HRESULT TodayBackground([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                    [propput] HRESULT TodayBackground([in] Windows.UI.Xaml.Media.Brush* value);
+                    [propget] HRESULT TodayBlackoutBackground([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                    [propput] HRESULT TodayBlackoutBackground([in] Windows.UI.Xaml.Media.Brush* value);
+                    [propget] HRESULT TodayHoverBackground([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                    [propput] HRESULT TodayHoverBackground([in] Windows.UI.Xaml.Media.Brush* value);
+                    [propget] HRESULT TodayPressedBackground([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                    [propput] HRESULT TodayPressedBackground([in] Windows.UI.Xaml.Media.Brush* value);
+                    [propget] HRESULT TodayDisabledBackground([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                    [propput] HRESULT TodayDisabledBackground([in] Windows.UI.Xaml.Media.Brush* value);
+                    [propget] HRESULT TodayBlackoutForeground([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                    [propput] HRESULT TodayBlackoutForeground([in] Windows.UI.Xaml.Media.Brush* value);
+                    [propget] HRESULT SelectedHoverForeground([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                    [propput] HRESULT SelectedHoverForeground([in] Windows.UI.Xaml.Media.Brush* value);
+                    [propget] HRESULT SelectedPressedForeground([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                    [propput] HRESULT SelectedPressedForeground([in] Windows.UI.Xaml.Media.Brush* value);
+                    [propget] HRESULT SelectedDisabledForeground([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                    [propput] HRESULT SelectedDisabledForeground([in] Windows.UI.Xaml.Media.Brush* value);
+                    [propget] HRESULT OutOfScopeHoverForeground([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                    [propput] HRESULT OutOfScopeHoverForeground([in] Windows.UI.Xaml.Media.Brush* value);
+                    [propget] HRESULT OutOfScopePressedForeground([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                    [propput] HRESULT OutOfScopePressedForeground([in] Windows.UI.Xaml.Media.Brush* value);
+                    [propget] HRESULT DisabledForeground([out] [retval] Windows.UI.Xaml.Media.Brush** value);
+                    [propput] HRESULT DisabledForeground([in] Windows.UI.Xaml.Media.Brush* value);
+                    [propget] HRESULT DayItemMargin([out] [retval] Windows.UI.Xaml.Thickness* value);
+                    [propput] HRESULT DayItemMargin([in] Windows.UI.Xaml.Thickness value);
+                    [propget] HRESULT MonthYearItemMargin([out] [retval] Windows.UI.Xaml.Thickness* value);
+                    [propput] HRESULT MonthYearItemMargin([in] Windows.UI.Xaml.Thickness value);
+                    [propget] HRESULT FirstOfMonthLabelMargin([out] [retval] Windows.UI.Xaml.Thickness* value);
+                    [propput] HRESULT FirstOfMonthLabelMargin([in] Windows.UI.Xaml.Thickness value);
+                    [propget] HRESULT FirstOfYearDecadeLabelMargin([out] [retval] Windows.UI.Xaml.Thickness* value);
+                    [propput] HRESULT FirstOfYearDecadeLabelMargin([in] Windows.UI.Xaml.Thickness value);
+                    [propget] HRESULT CalendarItemCornerRadius([out] [retval] Windows.UI.Xaml.CornerRadius* value);
+                    [propput] HRESULT CalendarItemCornerRadius([in] Windows.UI.Xaml.CornerRadius value);
+                }
+
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)]
                 [exclusiveto(Windows.UI.Xaml.Controls.CalendarViewDayItem)]
                 [uuid(0FDB2DC5-32C1-4B8F-BEFC-017B555B32D2)]
@@ -5271,6 +5346,37 @@ namespace Windows
                     [propget] HRESULT VerticalFirstOfMonthLabelAlignmentProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
                     [propget] HRESULT CalendarItemBorderThicknessProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
                     [propget] HRESULT CalendarViewDayItemStyleProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 14.0)]
+                [exclusiveto(Windows.UI.Xaml.Controls.CalendarView)]
+                [uuid(F29E5024-B8FB-50C8-8A38-D443ABB37009)]
+                interface ICalendarViewStatics2 : IInspectable
+                {
+                    [propget] HRESULT SelectedDisabledBorderBrushProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                    [propget] HRESULT TodaySelectedInnerBorderBrushProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                    [propget] HRESULT BlackoutStrikethroughBrushProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                    [propget] HRESULT BlackoutBackgroundProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                    [propget] HRESULT CalendarItemHoverBackgroundProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                    [propget] HRESULT CalendarItemPressedBackgroundProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                    [propget] HRESULT CalendarItemDisabledBackgroundProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                    [propget] HRESULT TodayBackgroundProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                    [propget] HRESULT TodayBlackoutBackgroundProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                    [propget] HRESULT TodayHoverBackgroundProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                    [propget] HRESULT TodayPressedBackgroundProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                    [propget] HRESULT TodayDisabledBackgroundProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                    [propget] HRESULT TodayBlackoutForegroundProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                    [propget] HRESULT SelectedHoverForegroundProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                    [propget] HRESULT SelectedPressedForegroundProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                    [propget] HRESULT SelectedDisabledForegroundProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                    [propget] HRESULT OutOfScopeHoverForegroundProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                    [propget] HRESULT OutOfScopePressedForegroundProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                    [propget] HRESULT DisabledForegroundProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                    [propget] HRESULT DayItemMarginProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                    [propget] HRESULT MonthYearItemMarginProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                    [propget] HRESULT FirstOfMonthLabelMarginProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                    [propget] HRESULT FirstOfYearDecadeLabelMarginProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                    [propget] HRESULT CalendarItemCornerRadiusProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -7402,6 +7508,33 @@ namespace Windows
                     HRESULT TryOpen([out] [retval] boolean* result);
                 }
 
+                [contract(Windows.Foundation.UniversalApiContract, 11.0)]
+                [exclusiveto(Windows.UI.Xaml.Controls.HandwritingView)]
+                [uuid(4BCF991B-0DE1-5C9E-8970-37B9878FE171)]
+                interface IHandwritingView2 : IInspectable
+                {
+                    [propget] HRESULT IsSwitchToKeyboardEnabled([out] [retval] boolean* value);
+                    [propput] HRESULT IsSwitchToKeyboardEnabled([in] boolean value);
+                    [propget] HRESULT IsCommandBarOpen([out] [retval] boolean* value);
+                    [propput] HRESULT IsCommandBarOpen([in] boolean value);
+                    [propget] HRESULT InputDeviceTypes([out] [retval] Windows.UI.Core.CoreInputDeviceTypes* value);
+                    [propput] HRESULT InputDeviceTypes([in] Windows.UI.Core.CoreInputDeviceTypes value);
+                    [eventadd] HRESULT CandidatesChanged([in] Windows.Foundation.TypedEventHandler<Windows.UI.Xaml.Controls.HandwritingView*, Windows.UI.Xaml.Controls.HandwritingViewCandidatesChangedEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
+                    [eventremove] HRESULT CandidatesChanged([in] EventRegistrationToken token);
+                    [eventadd] HRESULT TextSubmitted([in] Windows.Foundation.TypedEventHandler<Windows.UI.Xaml.Controls.HandwritingView*, Windows.UI.Xaml.Controls.HandwritingViewTextSubmittedEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
+                    [eventremove] HRESULT TextSubmitted([in] EventRegistrationToken token);
+                    HRESULT GetCandidates([in] UINT32 candidatesSessionId, [out] [retval] Windows.Foundation.Collections.IVectorView<HSTRING>** result);
+                    HRESULT SelectCandidate([in] UINT32 candidatesSessionId, [in] UINT32 selectedCandidateIndex);
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 11.0)]
+                [exclusiveto(Windows.UI.Xaml.Controls.HandwritingViewCandidatesChangedEventArgs)]
+                [uuid(6F5F63D8-56B1-56C5-A416-C19C16BF7884)]
+                interface IHandwritingViewCandidatesChangedEventArgs : IInspectable
+                {
+                    [propget] HRESULT CandidatesSessionId([out] [retval] UINT32* value);
+                }
+
                 [contract(Windows.Foundation.UniversalApiContract, 6.0)]
                 [exclusiveto(Windows.UI.Xaml.Controls.HandwritingView)]
                 [uuid(E00C873F-0012-475C-890C-97AE308642DE)]
@@ -7419,6 +7552,22 @@ namespace Windows
                     [propget] HRESULT PlacementAlignmentProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
                     [propget] HRESULT IsOpenProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
                     [propget] HRESULT AreCandidatesEnabledProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 11.0)]
+                [exclusiveto(Windows.UI.Xaml.Controls.HandwritingView)]
+                [uuid(2CD052E4-D703-5183-A1BE-7E285DF978D9)]
+                interface IHandwritingViewStatics2 : IInspectable
+                {
+                    [propget] HRESULT IsSwitchToKeyboardEnabledProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                    [propget] HRESULT IsCommandBarOpenProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 11.0)]
+                [exclusiveto(Windows.UI.Xaml.Controls.HandwritingViewTextSubmittedEventArgs)]
+                [uuid(55AC0F47-F5E4-55DA-B8A3-D418B7564291)]
+                interface IHandwritingViewTextSubmittedEventArgs : IInspectable
+                {
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -14453,10 +14602,12 @@ namespace Windows
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)]
                 [marshaling_behavior(agile)]
                 [static(Windows.UI.Xaml.Controls.ICalendarViewStatics, Windows.Foundation.UniversalApiContract, 1.0)]
+                [static(Windows.UI.Xaml.Controls.ICalendarViewStatics2, Windows.Foundation.UniversalApiContract, 14.0)]
                 [threading(both)]
                 runtimeclass CalendarView : Windows.UI.Xaml.Controls.Control
                 {
                     [default] interface Windows.UI.Xaml.Controls.ICalendarView;
+                    [contract(Windows.Foundation.UniversalApiContract, 14.0)] interface Windows.UI.Xaml.Controls.ICalendarView2;
                 }
 
                 [composable(Windows.UI.Xaml.Controls.ICalendarViewDayItemFactory, public, Windows.Foundation.UniversalApiContract, 1.0)]
@@ -15107,10 +15258,26 @@ namespace Windows
                 [contract(Windows.Foundation.UniversalApiContract, 6.0)]
                 [marshaling_behavior(agile)]
                 [static(Windows.UI.Xaml.Controls.IHandwritingViewStatics, Windows.Foundation.UniversalApiContract, 6.0)]
+                [static(Windows.UI.Xaml.Controls.IHandwritingViewStatics2, Windows.Foundation.UniversalApiContract, 11.0)]
                 [threading(both)]
                 runtimeclass HandwritingView : Windows.UI.Xaml.Controls.Control
                 {
                     [default] interface Windows.UI.Xaml.Controls.IHandwritingView;
+                    [contract(Windows.Foundation.UniversalApiContract, 11.0)] interface Windows.UI.Xaml.Controls.IHandwritingView2;
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 11.0)]
+                [marshaling_behavior(agile)]
+                runtimeclass HandwritingViewCandidatesChangedEventArgs
+                {
+                    [default] interface Windows.UI.Xaml.Controls.IHandwritingViewCandidatesChangedEventArgs;
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 11.0)]
+                [marshaling_behavior(agile)]
+                runtimeclass HandwritingViewTextSubmittedEventArgs
+                {
+                    [default] interface Windows.UI.Xaml.Controls.IHandwritingViewTextSubmittedEventArgs;
                 }
 
                 [composable(Windows.UI.Xaml.Controls.IHubFactory, public, Windows.Foundation.UniversalApiContract, 1.0)]

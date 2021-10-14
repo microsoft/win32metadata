@@ -9,4 +9,9 @@
 #include <lpmapi.h>
 #include <qos2.h>
 #include <traffic.h>
-
+#include <qossp.h>
+#include <qospol.h>
+#include <tcerror.h>
+#include <tcguid.h>
+//#include <tcpioctl.h> - won't compile and duplicated by iphlpapi as per tcpioctl.h
+#include <wbcl.h>

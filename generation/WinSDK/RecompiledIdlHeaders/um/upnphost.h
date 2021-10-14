@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -259,6 +267,7 @@ EXTERN_C const IID IID_IUPnPEventSink;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUPnPEventSink * This,
             /* [annotation][in] */ 
@@ -266,12 +275,15 @@ EXTERN_C const IID IID_IUPnPEventSink;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IUPnPEventSink * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IUPnPEventSink * This);
         
+        DECLSPEC_XFGVIRT(IUPnPEventSink, OnStateChanged)
         /* [hidden][helpstring] */ HRESULT ( STDMETHODCALLTYPE *OnStateChanged )( 
             __RPC__in IUPnPEventSink * This,
             /* [annotation][in] */ 
@@ -279,6 +291,7 @@ EXTERN_C const IID IID_IUPnPEventSink;
             /* [annotation][size_is][in] */ 
             _In_reads_(cChanges)  DISPID rgdispidChanges[  ]);
         
+        DECLSPEC_XFGVIRT(IUPnPEventSink, OnStateChangedSafe)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *OnStateChangedSafe )( 
             __RPC__in IUPnPEventSink * This,
             /* [annotation][in] */ 
@@ -356,6 +369,7 @@ EXTERN_C const IID IID_IUPnPEventSource;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUPnPEventSource * This,
             /* [annotation][in] */ 
@@ -363,17 +377,21 @@ EXTERN_C const IID IID_IUPnPEventSource;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IUPnPEventSource * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IUPnPEventSource * This);
         
+        DECLSPEC_XFGVIRT(IUPnPEventSource, Advise)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Advise )( 
             __RPC__in IUPnPEventSource * This,
             /* [annotation][in] */ 
             _In_  IUPnPEventSink *pesSubscriber);
         
+        DECLSPEC_XFGVIRT(IUPnPEventSource, Unadvise)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Unadvise )( 
             __RPC__in IUPnPEventSource * This,
             /* [annotation][in] */ 
@@ -501,6 +519,7 @@ EXTERN_C const IID IID_IUPnPRegistrar;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUPnPRegistrar * This,
             /* [annotation][in] */ 
@@ -508,12 +527,15 @@ EXTERN_C const IID IID_IUPnPRegistrar;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IUPnPRegistrar * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IUPnPRegistrar * This);
         
+        DECLSPEC_XFGVIRT(IUPnPRegistrar, RegisterDevice)
         HRESULT ( STDMETHODCALLTYPE *RegisterDevice )( 
             __RPC__in IUPnPRegistrar * This,
             /* [annotation][in] */ 
@@ -531,6 +553,7 @@ EXTERN_C const IID IID_IUPnPRegistrar;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pbstrDeviceIdentifier);
         
+        DECLSPEC_XFGVIRT(IUPnPRegistrar, RegisterRunningDevice)
         HRESULT ( STDMETHODCALLTYPE *RegisterRunningDevice )( 
             __RPC__in IUPnPRegistrar * This,
             /* [annotation][in] */ 
@@ -546,6 +569,7 @@ EXTERN_C const IID IID_IUPnPRegistrar;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pbstrDeviceIdentifier);
         
+        DECLSPEC_XFGVIRT(IUPnPRegistrar, RegisterDeviceProvider)
         HRESULT ( STDMETHODCALLTYPE *RegisterDeviceProvider )( 
             __RPC__in IUPnPRegistrar * This,
             /* [annotation][in] */ 
@@ -557,6 +581,7 @@ EXTERN_C const IID IID_IUPnPRegistrar;
             /* [annotation][in] */ 
             _In_  BSTR bstrContainerId);
         
+        DECLSPEC_XFGVIRT(IUPnPRegistrar, GetUniqueDeviceName)
         HRESULT ( STDMETHODCALLTYPE *GetUniqueDeviceName )( 
             __RPC__in IUPnPRegistrar * This,
             /* [annotation][in] */ 
@@ -566,6 +591,7 @@ EXTERN_C const IID IID_IUPnPRegistrar;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pbstrUDN);
         
+        DECLSPEC_XFGVIRT(IUPnPRegistrar, UnregisterDevice)
         HRESULT ( STDMETHODCALLTYPE *UnregisterDevice )( 
             __RPC__in IUPnPRegistrar * This,
             /* [annotation][in] */ 
@@ -573,6 +599,7 @@ EXTERN_C const IID IID_IUPnPRegistrar;
             /* [annotation][in] */ 
             _In_  BOOL fPermanent);
         
+        DECLSPEC_XFGVIRT(IUPnPRegistrar, UnregisterDeviceProvider)
         HRESULT ( STDMETHODCALLTYPE *UnregisterDeviceProvider )( 
             __RPC__in IUPnPRegistrar * This,
             /* [annotation][in] */ 
@@ -684,6 +711,7 @@ EXTERN_C const IID IID_IUPnPReregistrar;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUPnPReregistrar * This,
             /* [annotation][in] */ 
@@ -691,12 +719,15 @@ EXTERN_C const IID IID_IUPnPReregistrar;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IUPnPReregistrar * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IUPnPReregistrar * This);
         
+        DECLSPEC_XFGVIRT(IUPnPReregistrar, ReregisterDevice)
         HRESULT ( STDMETHODCALLTYPE *ReregisterDevice )( 
             __RPC__in IUPnPReregistrar * This,
             /* [annotation][in] */ 
@@ -714,6 +745,7 @@ EXTERN_C const IID IID_IUPnPReregistrar;
             /* [annotation][in] */ 
             _In_  long nLifeTime);
         
+        DECLSPEC_XFGVIRT(IUPnPReregistrar, ReregisterRunningDevice)
         HRESULT ( STDMETHODCALLTYPE *ReregisterRunningDevice )( 
             __RPC__in IUPnPReregistrar * This,
             /* [annotation][in] */ 
@@ -809,6 +841,7 @@ EXTERN_C const IID IID_IUPnPDeviceControl;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUPnPDeviceControl * This,
             /* [annotation][in] */ 
@@ -816,12 +849,15 @@ EXTERN_C const IID IID_IUPnPDeviceControl;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IUPnPDeviceControl * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IUPnPDeviceControl * This);
         
+        DECLSPEC_XFGVIRT(IUPnPDeviceControl, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IUPnPDeviceControl * This,
             /* [annotation][in] */ 
@@ -831,6 +867,7 @@ EXTERN_C const IID IID_IUPnPDeviceControl;
             /* [annotation][in] */ 
             _In_  BSTR bstrInitString);
         
+        DECLSPEC_XFGVIRT(IUPnPDeviceControl, GetServiceObject)
         HRESULT ( STDMETHODCALLTYPE *GetServiceObject )( 
             __RPC__in IUPnPDeviceControl * This,
             /* [annotation][in] */ 
@@ -908,6 +945,7 @@ EXTERN_C const IID IID_IUPnPDeviceControlHttpHeaders;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUPnPDeviceControlHttpHeaders * This,
             /* [annotation][in] */ 
@@ -915,12 +953,15 @@ EXTERN_C const IID IID_IUPnPDeviceControlHttpHeaders;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IUPnPDeviceControlHttpHeaders * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IUPnPDeviceControlHttpHeaders * This);
         
+        DECLSPEC_XFGVIRT(IUPnPDeviceControlHttpHeaders, GetAdditionalResponseHeaders)
         HRESULT ( STDMETHODCALLTYPE *GetAdditionalResponseHeaders )( 
             __RPC__in IUPnPDeviceControlHttpHeaders * This,
             /* [annotation][retval][out] */ 
@@ -993,6 +1034,7 @@ EXTERN_C const IID IID_IUPnPDeviceProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUPnPDeviceProvider * This,
             /* [annotation][in] */ 
@@ -1000,17 +1042,21 @@ EXTERN_C const IID IID_IUPnPDeviceProvider;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IUPnPDeviceProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IUPnPDeviceProvider * This);
         
+        DECLSPEC_XFGVIRT(IUPnPDeviceProvider, Start)
         HRESULT ( STDMETHODCALLTYPE *Start )( 
             __RPC__in IUPnPDeviceProvider * This,
             /* [annotation][in] */ 
             _In_  BSTR bstrInitString);
         
+        DECLSPEC_XFGVIRT(IUPnPDeviceProvider, Stop)
         HRESULT ( STDMETHODCALLTYPE *Stop )( 
             __RPC__in IUPnPDeviceProvider * This);
         
@@ -1096,6 +1142,7 @@ EXTERN_C const IID IID_IUPnPRemoteEndpointInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUPnPRemoteEndpointInfo * This,
             /* [annotation][in] */ 
@@ -1103,12 +1150,15 @@ EXTERN_C const IID IID_IUPnPRemoteEndpointInfo;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IUPnPRemoteEndpointInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IUPnPRemoteEndpointInfo * This);
         
+        DECLSPEC_XFGVIRT(IUPnPRemoteEndpointInfo, GetDwordValue)
         HRESULT ( STDMETHODCALLTYPE *GetDwordValue )( 
             __RPC__in IUPnPRemoteEndpointInfo * This,
             /* [annotation][in] */ 
@@ -1116,6 +1166,7 @@ EXTERN_C const IID IID_IUPnPRemoteEndpointInfo;
             /* [annotation][out] */ 
             _Out_  DWORD *pdwValue);
         
+        DECLSPEC_XFGVIRT(IUPnPRemoteEndpointInfo, GetStringValue)
         HRESULT ( STDMETHODCALLTYPE *GetStringValue )( 
             __RPC__in IUPnPRemoteEndpointInfo * This,
             /* [annotation][in] */ 
@@ -1123,6 +1174,7 @@ EXTERN_C const IID IID_IUPnPRemoteEndpointInfo;
             /* [annotation][out] */ 
             _Out_  BSTR *pbstrValue);
         
+        DECLSPEC_XFGVIRT(IUPnPRemoteEndpointInfo, GetGuidValue)
         HRESULT ( STDMETHODCALLTYPE *GetGuidValue )( 
             __RPC__in IUPnPRemoteEndpointInfo * This,
             /* [annotation][in] */ 

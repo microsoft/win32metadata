@@ -6,5 +6,6 @@
 <IncludeRoot>/um/fxsutility.h
 <IncludeRoot>/um/WinFax.h
 <IncludeRoot>/um/FaxCom.h
+<IncludeRoot>/um/faxmmc.h
 --namespace
 Windows.Win32.Devices.Fax

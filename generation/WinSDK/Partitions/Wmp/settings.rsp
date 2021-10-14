@@ -8,5 +8,8 @@
 <IncludeRoot>/um/wmpplug.h
 <IncludeRoot>/um/contentpartner.h
 <IncludeRoot>/um/subscriptionservices.h
+<IncludeRoot>/um/msfeedsid.h
+<IncludeRoot>/um/wmpids.h
+<IncludeRoot>/um/wmsysprf.h
 --namespace
 Windows.Win32.Media.MediaPlayer

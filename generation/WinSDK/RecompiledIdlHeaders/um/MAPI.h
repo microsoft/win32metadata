@@ -35,6 +35,26 @@
 extern "C" {
 #endif
 
+#ifndef WIN_NOEXCEPT
+	#ifdef __cplusplus
+		#if _MSC_VER >= 1900
+			#define WIN_NOEXCEPT noexcept
+		#else
+			#define WIN_NOEXCEPT throw()
+		#endif
+
+		// 'noexcept' on typedefs is invalid prior to C++17
+		#if _MSVC_LANG >= 201703
+			#define WIN_NOEXCEPT_PFN noexcept
+		#else
+			#define WIN_NOEXCEPT_PFN
+		#endif
+	#else
+		#define WIN_NOEXCEPT
+		#define WIN_NOEXCEPT_PFN
+	#endif
+#endif
+
 
 #ifndef EXPORT
 #ifdef WIN16
@@ -236,7 +256,7 @@ typedef ULONG (FAR PASCAL MAPILOGON)(
 	FLAGS flFlags,
 	ULONG ulReserved,
 	LPLHANDLE lplhSession
-);
+) WIN_NOEXCEPT_PFN;
 typedef MAPILOGON FAR *LPMAPILOGON;
 DECLSPEC_DEPRECATED MAPILOGON MAPILogon;
 
@@ -245,7 +265,7 @@ typedef ULONG (FAR PASCAL MAPILOGOFF)(
 	ULONG_PTR ulUIParam,
 	FLAGS flFlags,
 	ULONG ulReserved
-);
+) WIN_NOEXCEPT_PFN;
 typedef MAPILOGOFF FAR *LPMAPILOGOFF;
 DECLSPEC_DEPRECATED MAPILOGOFF MAPILogoff;
 
@@ -256,7 +276,7 @@ typedef ULONG (FAR PASCAL MAPISENDMAIL)(
 	lpMapiMessage lpMessage,
 	FLAGS flFlags,
 	ULONG ulReserved
-);
+) WIN_NOEXCEPT_PFN;
 typedef MAPISENDMAIL FAR *LPMAPISENDMAIL;
 MAPISENDMAIL MAPISendMail;
 
@@ -266,7 +286,7 @@ typedef ULONG (FAR PASCAL MAPISENDMAILW)(
 	_In_ lpMapiMessageW lpMessage,
 	FLAGS flFlags,
 	ULONG ulReserved
-);
+) WIN_NOEXCEPT_PFN;
 typedef MAPISENDMAILW FAR *LPMAPISENDMAILW;
 MAPISENDMAILW MAPISendMailW;
 
@@ -289,7 +309,7 @@ typedef ULONG (FAR PASCAL MAPIFINDNEXT)(
 	FLAGS flFlags,
 	ULONG ulReserved,
 	_In_ LPSTR lpszMessageID
-);
+) WIN_NOEXCEPT_PFN;
 typedef MAPIFINDNEXT FAR *LPMAPIFINDNEXT;
 DECLSPEC_DEPRECATED MAPIFINDNEXT MAPIFindNext;
 
@@ -300,7 +320,7 @@ typedef ULONG (FAR PASCAL MAPIREADMAIL)(
 	FLAGS flFlags,
 	ULONG ulReserved,
 	lpMapiMessage FAR *lppMessage
-);
+) WIN_NOEXCEPT_PFN;
 typedef MAPIREADMAIL FAR *LPMAPIREADMAIL;
 DECLSPEC_DEPRECATED MAPIREADMAIL MAPIReadMail;
 
@@ -311,7 +331,7 @@ typedef ULONG (FAR PASCAL MAPISAVEMAIL)(
 	FLAGS flFlags,
 	ULONG ulReserved,
 	_In_ LPSTR lpszMessageID
-);
+) WIN_NOEXCEPT_PFN;
 typedef MAPISAVEMAIL FAR *LPMAPISAVEMAIL;
 DECLSPEC_DEPRECATED MAPISAVEMAIL MAPISaveMail;
 
@@ -321,7 +341,7 @@ typedef ULONG (FAR PASCAL MAPIDELETEMAIL)(
 	_In_ LPSTR lpszMessageID,
 	FLAGS flFlags,
 	ULONG ulReserved
-);
+) WIN_NOEXCEPT_PFN;
 typedef MAPIDELETEMAIL FAR *LPMAPIDELETEMAIL;
 DECLSPEC_DEPRECATED MAPIDELETEMAIL MAPIDeleteMail;
 
@@ -340,7 +360,7 @@ typedef ULONG (FAR PASCAL MAPIADDRESS)(
 	ULONG ulReserved,
 	LPULONG lpnNewRecips,
 	lpMapiRecipDesc FAR *lppNewRecips
-);
+) WIN_NOEXCEPT_PFN;
 typedef MAPIADDRESS FAR *LPMAPIADDRESS;
 DECLSPEC_DEPRECATED MAPIADDRESS MAPIAddress;
 
@@ -350,7 +370,7 @@ typedef ULONG (FAR PASCAL MAPIDETAILS)(
 	lpMapiRecipDesc lpRecip,
 	FLAGS flFlags,
 	ULONG ulReserved
-);
+) WIN_NOEXCEPT_PFN;
 typedef MAPIDETAILS FAR *LPMAPIDETAILS;
 DECLSPEC_DEPRECATED MAPIDETAILS MAPIDetails;
 
@@ -361,7 +381,7 @@ typedef ULONG (FAR PASCAL MAPIRESOLVENAME)(
 	FLAGS flFlags,
 	ULONG ulReserved,
 	lpMapiRecipDesc FAR *lppRecip
-);
+) WIN_NOEXCEPT_PFN;
 typedef MAPIRESOLVENAME FAR *LPMAPIRESOLVENAME;
 DECLSPEC_DEPRECATED MAPIRESOLVENAME MAPIResolveName;
 

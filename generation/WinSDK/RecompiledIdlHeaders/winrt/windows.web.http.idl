@@ -258,6 +258,8 @@ namespace Windows
                 interface Windows.Foundation.IAsyncOperationWithProgress<Windows.Web.Http.HttpRequestResult*, Windows.Web.Http.HttpProgress>;
 
                 interface Windows.Foundation.IAsyncOperationWithProgress<Windows.Web.Http.HttpResponseMessage*, Windows.Web.Http.HttpProgress>;
+
+                interface Windows.Foundation.IAsyncOperation<Windows.Web.Http.HttpResponseMessage*>;
             }
         }
     }

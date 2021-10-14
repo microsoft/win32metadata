@@ -10,3 +10,5 @@
 
 #include <wsman.h>
 #include <wsmandisp.h>
+#include <wsmerror.h>
+

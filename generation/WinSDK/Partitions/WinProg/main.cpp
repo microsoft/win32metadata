@@ -48,3 +48,6 @@
 #include <dsound.h>
 #include <wldp.h>
 
+#include <defaultbrowsersyncsettings.h>
+#include <delayloadhandler.h>
+#include <deletebrowsinghistory.h>

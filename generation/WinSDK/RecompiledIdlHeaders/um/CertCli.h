@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -189,28 +197,34 @@ EXTERN_C const IID IID_ICertGetConfig;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICertGetConfig * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICertGetConfig * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICertGetConfig * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICertGetConfig * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICertGetConfig * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICertGetConfig * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -219,6 +233,7 @@ EXTERN_C const IID IID_ICertGetConfig;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICertGetConfig * This,
             /* [annotation][in] */ 
@@ -238,6 +253,7 @@ EXTERN_C const IID IID_ICertGetConfig;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICertGetConfig, GetConfig)
         HRESULT ( STDMETHODCALLTYPE *GetConfig )( 
             __RPC__in ICertGetConfig * This,
             /* [in] */ LONG Flags,
@@ -332,28 +348,34 @@ EXTERN_C const IID IID_ICertConfig;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICertConfig * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICertConfig * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICertConfig * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICertConfig * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICertConfig * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICertConfig * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -362,6 +384,7 @@ EXTERN_C const IID IID_ICertConfig;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICertConfig * This,
             /* [annotation][in] */ 
@@ -381,20 +404,24 @@ EXTERN_C const IID IID_ICertConfig;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICertConfig, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in ICertConfig * This,
             /* [in] */ LONG Index,
             /* [retval][out] */ __RPC__out LONG *pCount);
         
+        DECLSPEC_XFGVIRT(ICertConfig, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in ICertConfig * This,
             /* [retval][out] */ __RPC__out LONG *pIndex);
         
+        DECLSPEC_XFGVIRT(ICertConfig, GetField)
         HRESULT ( STDMETHODCALLTYPE *GetField )( 
             __RPC__in ICertConfig * This,
             /* [in] */ __RPC__in const BSTR strFieldName,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrOut);
         
+        DECLSPEC_XFGVIRT(ICertConfig, GetConfig)
         HRESULT ( STDMETHODCALLTYPE *GetConfig )( 
             __RPC__in ICertConfig * This,
             /* [in] */ LONG Flags,
@@ -486,28 +513,34 @@ EXTERN_C const IID IID_ICertConfig2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICertConfig2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICertConfig2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICertConfig2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICertConfig2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICertConfig2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICertConfig2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -516,6 +549,7 @@ EXTERN_C const IID IID_ICertConfig2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICertConfig2 * This,
             /* [annotation][in] */ 
@@ -535,25 +569,30 @@ EXTERN_C const IID IID_ICertConfig2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICertConfig, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in ICertConfig2 * This,
             /* [in] */ LONG Index,
             /* [retval][out] */ __RPC__out LONG *pCount);
         
+        DECLSPEC_XFGVIRT(ICertConfig, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in ICertConfig2 * This,
             /* [retval][out] */ __RPC__out LONG *pIndex);
         
+        DECLSPEC_XFGVIRT(ICertConfig, GetField)
         HRESULT ( STDMETHODCALLTYPE *GetField )( 
             __RPC__in ICertConfig2 * This,
             /* [in] */ __RPC__in const BSTR strFieldName,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrOut);
         
+        DECLSPEC_XFGVIRT(ICertConfig, GetConfig)
         HRESULT ( STDMETHODCALLTYPE *GetConfig )( 
             __RPC__in ICertConfig2 * This,
             /* [in] */ LONG Flags,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrOut);
         
+        DECLSPEC_XFGVIRT(ICertConfig2, SetSharedFolder)
         HRESULT ( STDMETHODCALLTYPE *SetSharedFolder )( 
             __RPC__in ICertConfig2 * This,
             /* [in] */ __RPC__in const BSTR strSharedFolder);
@@ -676,28 +715,34 @@ EXTERN_C const IID IID_ICertRequest;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICertRequest * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICertRequest * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICertRequest * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICertRequest * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICertRequest * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICertRequest * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -706,6 +751,7 @@ EXTERN_C const IID IID_ICertRequest;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICertRequest * This,
             /* [annotation][in] */ 
@@ -725,6 +771,7 @@ EXTERN_C const IID IID_ICertRequest;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICertRequest, Submit)
         HRESULT ( STDMETHODCALLTYPE *Submit )( 
             __RPC__in ICertRequest * This,
             /* [in] */ LONG Flags,
@@ -733,24 +780,29 @@ EXTERN_C const IID IID_ICertRequest;
             /* [in] */ __RPC__in const BSTR strConfig,
             /* [retval][out] */ __RPC__out LONG *pDisposition);
         
+        DECLSPEC_XFGVIRT(ICertRequest, RetrievePending)
         HRESULT ( STDMETHODCALLTYPE *RetrievePending )( 
             __RPC__in ICertRequest * This,
             /* [in] */ LONG RequestId,
             /* [in] */ __RPC__in const BSTR strConfig,
             /* [retval][out] */ __RPC__out LONG *pDisposition);
         
+        DECLSPEC_XFGVIRT(ICertRequest, GetLastStatus)
         HRESULT ( STDMETHODCALLTYPE *GetLastStatus )( 
             __RPC__in ICertRequest * This,
             /* [retval][out] */ __RPC__out LONG *pStatus);
         
+        DECLSPEC_XFGVIRT(ICertRequest, GetRequestId)
         HRESULT ( STDMETHODCALLTYPE *GetRequestId )( 
             __RPC__in ICertRequest * This,
             /* [retval][out] */ __RPC__out LONG *pRequestId);
         
+        DECLSPEC_XFGVIRT(ICertRequest, GetDispositionMessage)
         HRESULT ( STDMETHODCALLTYPE *GetDispositionMessage )( 
             __RPC__in ICertRequest * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrDispositionMessage);
         
+        DECLSPEC_XFGVIRT(ICertRequest, GetCACertificate)
         HRESULT ( STDMETHODCALLTYPE *GetCACertificate )( 
             __RPC__in ICertRequest * This,
             /* [in] */ LONG fExchangeCertificate,
@@ -758,6 +810,7 @@ EXTERN_C const IID IID_ICertRequest;
             /* [in] */ LONG Flags,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrCertificate);
         
+        DECLSPEC_XFGVIRT(ICertRequest, GetCertificate)
         HRESULT ( STDMETHODCALLTYPE *GetCertificate )( 
             __RPC__in ICertRequest * This,
             /* [in] */ LONG Flags,
@@ -891,28 +944,34 @@ EXTERN_C const IID IID_ICertRequest2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICertRequest2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICertRequest2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICertRequest2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICertRequest2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICertRequest2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICertRequest2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -921,6 +980,7 @@ EXTERN_C const IID IID_ICertRequest2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICertRequest2 * This,
             /* [annotation][in] */ 
@@ -940,6 +1000,7 @@ EXTERN_C const IID IID_ICertRequest2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICertRequest, Submit)
         HRESULT ( STDMETHODCALLTYPE *Submit )( 
             __RPC__in ICertRequest2 * This,
             /* [in] */ LONG Flags,
@@ -948,24 +1009,29 @@ EXTERN_C const IID IID_ICertRequest2;
             /* [in] */ __RPC__in const BSTR strConfig,
             /* [retval][out] */ __RPC__out LONG *pDisposition);
         
+        DECLSPEC_XFGVIRT(ICertRequest, RetrievePending)
         HRESULT ( STDMETHODCALLTYPE *RetrievePending )( 
             __RPC__in ICertRequest2 * This,
             /* [in] */ LONG RequestId,
             /* [in] */ __RPC__in const BSTR strConfig,
             /* [retval][out] */ __RPC__out LONG *pDisposition);
         
+        DECLSPEC_XFGVIRT(ICertRequest, GetLastStatus)
         HRESULT ( STDMETHODCALLTYPE *GetLastStatus )( 
             __RPC__in ICertRequest2 * This,
             /* [retval][out] */ __RPC__out LONG *pStatus);
         
+        DECLSPEC_XFGVIRT(ICertRequest, GetRequestId)
         HRESULT ( STDMETHODCALLTYPE *GetRequestId )( 
             __RPC__in ICertRequest2 * This,
             /* [retval][out] */ __RPC__out LONG *pRequestId);
         
+        DECLSPEC_XFGVIRT(ICertRequest, GetDispositionMessage)
         HRESULT ( STDMETHODCALLTYPE *GetDispositionMessage )( 
             __RPC__in ICertRequest2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrDispositionMessage);
         
+        DECLSPEC_XFGVIRT(ICertRequest, GetCACertificate)
         HRESULT ( STDMETHODCALLTYPE *GetCACertificate )( 
             __RPC__in ICertRequest2 * This,
             /* [in] */ LONG fExchangeCertificate,
@@ -973,11 +1039,13 @@ EXTERN_C const IID IID_ICertRequest2;
             /* [in] */ LONG Flags,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrCertificate);
         
+        DECLSPEC_XFGVIRT(ICertRequest, GetCertificate)
         HRESULT ( STDMETHODCALLTYPE *GetCertificate )( 
             __RPC__in ICertRequest2 * This,
             /* [in] */ LONG Flags,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrCertificate);
         
+        DECLSPEC_XFGVIRT(ICertRequest2, GetIssuedCertificate)
         HRESULT ( STDMETHODCALLTYPE *GetIssuedCertificate )( 
             __RPC__in ICertRequest2 * This,
             /* [in] */ __RPC__in const BSTR strConfig,
@@ -985,12 +1053,14 @@ EXTERN_C const IID IID_ICertRequest2;
             /* [in] */ __RPC__in const BSTR strSerialNumber,
             /* [retval][out] */ __RPC__out LONG *pDisposition);
         
+        DECLSPEC_XFGVIRT(ICertRequest2, GetErrorMessageText)
         HRESULT ( STDMETHODCALLTYPE *GetErrorMessageText )( 
             __RPC__in ICertRequest2 * This,
             /* [in] */ LONG hrMessage,
             /* [in] */ LONG Flags,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrErrorMessageText);
         
+        DECLSPEC_XFGVIRT(ICertRequest2, GetCAProperty)
         HRESULT ( STDMETHODCALLTYPE *GetCAProperty )( 
             __RPC__in ICertRequest2 * This,
             /* [in] */ __RPC__in const BSTR strConfig,
@@ -1000,18 +1070,21 @@ EXTERN_C const IID IID_ICertRequest2;
             /* [in] */ LONG Flags,
             /* [retval][out] */ __RPC__out VARIANT *pvarPropertyValue);
         
+        DECLSPEC_XFGVIRT(ICertRequest2, GetCAPropertyFlags)
         HRESULT ( STDMETHODCALLTYPE *GetCAPropertyFlags )( 
             __RPC__in ICertRequest2 * This,
             /* [in] */ __RPC__in const BSTR strConfig,
             /* [in] */ LONG PropId,
             /* [retval][out] */ __RPC__out LONG *pPropFlags);
         
+        DECLSPEC_XFGVIRT(ICertRequest2, GetCAPropertyDisplayName)
         HRESULT ( STDMETHODCALLTYPE *GetCAPropertyDisplayName )( 
             __RPC__in ICertRequest2 * This,
             /* [in] */ __RPC__in const BSTR strConfig,
             /* [in] */ LONG PropId,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrDisplayName);
         
+        DECLSPEC_XFGVIRT(ICertRequest2, GetFullResponseProperty)
         HRESULT ( STDMETHODCALLTYPE *GetFullResponseProperty )( 
             __RPC__in ICertRequest2 * This,
             /* [in] */ LONG PropId,
@@ -1167,28 +1240,34 @@ EXTERN_C const IID IID_ICertRequest3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICertRequest3 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICertRequest3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICertRequest3 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICertRequest3 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICertRequest3 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICertRequest3 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1197,6 +1276,7 @@ EXTERN_C const IID IID_ICertRequest3;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICertRequest3 * This,
             /* [annotation][in] */ 
@@ -1216,6 +1296,7 @@ EXTERN_C const IID IID_ICertRequest3;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICertRequest, Submit)
         HRESULT ( STDMETHODCALLTYPE *Submit )( 
             __RPC__in ICertRequest3 * This,
             /* [in] */ LONG Flags,
@@ -1224,24 +1305,29 @@ EXTERN_C const IID IID_ICertRequest3;
             /* [in] */ __RPC__in const BSTR strConfig,
             /* [retval][out] */ __RPC__out LONG *pDisposition);
         
+        DECLSPEC_XFGVIRT(ICertRequest, RetrievePending)
         HRESULT ( STDMETHODCALLTYPE *RetrievePending )( 
             __RPC__in ICertRequest3 * This,
             /* [in] */ LONG RequestId,
             /* [in] */ __RPC__in const BSTR strConfig,
             /* [retval][out] */ __RPC__out LONG *pDisposition);
         
+        DECLSPEC_XFGVIRT(ICertRequest, GetLastStatus)
         HRESULT ( STDMETHODCALLTYPE *GetLastStatus )( 
             __RPC__in ICertRequest3 * This,
             /* [retval][out] */ __RPC__out LONG *pStatus);
         
+        DECLSPEC_XFGVIRT(ICertRequest, GetRequestId)
         HRESULT ( STDMETHODCALLTYPE *GetRequestId )( 
             __RPC__in ICertRequest3 * This,
             /* [retval][out] */ __RPC__out LONG *pRequestId);
         
+        DECLSPEC_XFGVIRT(ICertRequest, GetDispositionMessage)
         HRESULT ( STDMETHODCALLTYPE *GetDispositionMessage )( 
             __RPC__in ICertRequest3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrDispositionMessage);
         
+        DECLSPEC_XFGVIRT(ICertRequest, GetCACertificate)
         HRESULT ( STDMETHODCALLTYPE *GetCACertificate )( 
             __RPC__in ICertRequest3 * This,
             /* [in] */ LONG fExchangeCertificate,
@@ -1249,11 +1335,13 @@ EXTERN_C const IID IID_ICertRequest3;
             /* [in] */ LONG Flags,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrCertificate);
         
+        DECLSPEC_XFGVIRT(ICertRequest, GetCertificate)
         HRESULT ( STDMETHODCALLTYPE *GetCertificate )( 
             __RPC__in ICertRequest3 * This,
             /* [in] */ LONG Flags,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrCertificate);
         
+        DECLSPEC_XFGVIRT(ICertRequest2, GetIssuedCertificate)
         HRESULT ( STDMETHODCALLTYPE *GetIssuedCertificate )( 
             __RPC__in ICertRequest3 * This,
             /* [in] */ __RPC__in const BSTR strConfig,
@@ -1261,12 +1349,14 @@ EXTERN_C const IID IID_ICertRequest3;
             /* [in] */ __RPC__in const BSTR strSerialNumber,
             /* [retval][out] */ __RPC__out LONG *pDisposition);
         
+        DECLSPEC_XFGVIRT(ICertRequest2, GetErrorMessageText)
         HRESULT ( STDMETHODCALLTYPE *GetErrorMessageText )( 
             __RPC__in ICertRequest3 * This,
             /* [in] */ LONG hrMessage,
             /* [in] */ LONG Flags,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrErrorMessageText);
         
+        DECLSPEC_XFGVIRT(ICertRequest2, GetCAProperty)
         HRESULT ( STDMETHODCALLTYPE *GetCAProperty )( 
             __RPC__in ICertRequest3 * This,
             /* [in] */ __RPC__in const BSTR strConfig,
@@ -1276,18 +1366,21 @@ EXTERN_C const IID IID_ICertRequest3;
             /* [in] */ LONG Flags,
             /* [retval][out] */ __RPC__out VARIANT *pvarPropertyValue);
         
+        DECLSPEC_XFGVIRT(ICertRequest2, GetCAPropertyFlags)
         HRESULT ( STDMETHODCALLTYPE *GetCAPropertyFlags )( 
             __RPC__in ICertRequest3 * This,
             /* [in] */ __RPC__in const BSTR strConfig,
             /* [in] */ LONG PropId,
             /* [retval][out] */ __RPC__out LONG *pPropFlags);
         
+        DECLSPEC_XFGVIRT(ICertRequest2, GetCAPropertyDisplayName)
         HRESULT ( STDMETHODCALLTYPE *GetCAPropertyDisplayName )( 
             __RPC__in ICertRequest3 * This,
             /* [in] */ __RPC__in const BSTR strConfig,
             /* [in] */ LONG PropId,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrDisplayName);
         
+        DECLSPEC_XFGVIRT(ICertRequest2, GetFullResponseProperty)
         HRESULT ( STDMETHODCALLTYPE *GetFullResponseProperty )( 
             __RPC__in ICertRequest3 * This,
             /* [in] */ LONG PropId,
@@ -1296,6 +1389,7 @@ EXTERN_C const IID IID_ICertRequest3;
             /* [in] */ LONG Flags,
             /* [retval][out] */ __RPC__out VARIANT *pvarPropertyValue);
         
+        DECLSPEC_XFGVIRT(ICertRequest3, SetCredential)
         HRESULT ( STDMETHODCALLTYPE *SetCredential )( 
             __RPC__in ICertRequest3 * This,
             /* [in] */ LONG hWnd,
@@ -1303,10 +1397,12 @@ EXTERN_C const IID IID_ICertRequest3;
             /* [in] */ __RPC__in BSTR strCredential,
             /* [in] */ __RPC__in BSTR strPassword);
         
+        DECLSPEC_XFGVIRT(ICertRequest3, GetRequestIdString)
         HRESULT ( STDMETHODCALLTYPE *GetRequestIdString )( 
             __RPC__in ICertRequest3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrRequestId);
         
+        DECLSPEC_XFGVIRT(ICertRequest3, GetIssuedCertificate2)
         HRESULT ( STDMETHODCALLTYPE *GetIssuedCertificate2 )( 
             __RPC__in ICertRequest3 * This,
             /* [in] */ __RPC__in BSTR strConfig,
@@ -1314,6 +1410,7 @@ EXTERN_C const IID IID_ICertRequest3;
             /* [in] */ __RPC__in BSTR strSerialNumber,
             /* [retval][out] */ __RPC__out LONG *pDisposition);
         
+        DECLSPEC_XFGVIRT(ICertRequest3, GetRefreshPolicy)
         HRESULT ( STDMETHODCALLTYPE *GetRefreshPolicy )( 
             __RPC__in ICertRequest3 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pValue);

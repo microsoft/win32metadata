@@ -20,5 +20,8 @@ _LM_OWF_PASSWORD
 <IncludeRoot>/um/winsafer.h
 <IncludeRoot>/um/WinTrust.h
 <IncludeRoot>/um/WinWlx.h
+<IncludeRoot>/um/licenseprotection.h
+<IncludeRoot>/um/softpub.h
+<IncludeRoot>/um/wdigest.h
 --namespace
 Windows.Win32.Security

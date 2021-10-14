@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -123,24 +131,29 @@ EXTERN_C const IID IID_IRowsetChangeExtInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRowsetChangeExtInfo * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IRowsetChangeExtInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IRowsetChangeExtInfo * This);
         
+        DECLSPEC_XFGVIRT(IRowsetChangeExtInfo, GetOriginalRow)
         HRESULT ( STDMETHODCALLTYPE *GetOriginalRow )( 
             IRowsetChangeExtInfo * This,
             /* [in] */ HCHAPTER hReserved,
             /* [in] */ HROW hRow,
             /* [out] */ HROW *phRowOriginal);
         
+        DECLSPEC_XFGVIRT(IRowsetChangeExtInfo, GetPendingColumns)
         HRESULT ( STDMETHODCALLTYPE *GetPendingColumns )( 
             IRowsetChangeExtInfo * This,
             /* [in] */ HCHAPTER hReserved,
@@ -241,18 +254,22 @@ EXTERN_C const IID IID_ISQLRequestDiagFields;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISQLRequestDiagFields * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISQLRequestDiagFields * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISQLRequestDiagFields * This);
         
+        DECLSPEC_XFGVIRT(ISQLRequestDiagFields, RequestDiagFields)
         HRESULT ( STDMETHODCALLTYPE *RequestDiagFields )( 
             __RPC__in ISQLRequestDiagFields * This,
             /* [in] */ ULONG cDiagFields,
@@ -322,18 +339,22 @@ EXTERN_C const IID IID_ISQLGetDiagField;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISQLGetDiagField * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISQLGetDiagField * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISQLGetDiagField * This);
         
+        DECLSPEC_XFGVIRT(ISQLGetDiagField, GetDiagField)
         HRESULT ( STDMETHODCALLTYPE *GetDiagField )( 
             __RPC__in ISQLGetDiagField * This,
             /* [unique][out][in] */ __RPC__inout_opt KAGGETDIAG *pDiagInfo);

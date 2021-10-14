@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -109,6 +117,7 @@ EXTERN_C const IID IID_IWSDAttachment;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWSDAttachment * This,
             /* [annotation][in] */ 
@@ -116,9 +125,11 @@ EXTERN_C const IID IID_IWSDAttachment;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWSDAttachment * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWSDAttachment * This);
         
@@ -192,6 +203,7 @@ EXTERN_C const IID IID_IWSDOutboundAttachment;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWSDOutboundAttachment * This,
             /* [annotation][in] */ 
@@ -199,12 +211,15 @@ EXTERN_C const IID IID_IWSDOutboundAttachment;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWSDOutboundAttachment * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWSDOutboundAttachment * This);
         
+        DECLSPEC_XFGVIRT(IWSDOutboundAttachment, Write)
         HRESULT ( STDMETHODCALLTYPE *Write )( 
             IWSDOutboundAttachment * This,
             /* [annotation][size_is][in] */ 
@@ -214,9 +229,11 @@ EXTERN_C const IID IID_IWSDOutboundAttachment;
             /* [annotation][out] */ 
             _Out_  LPDWORD pdwNumberOfBytesWritten);
         
+        DECLSPEC_XFGVIRT(IWSDOutboundAttachment, Close)
         HRESULT ( STDMETHODCALLTYPE *Close )( 
             IWSDOutboundAttachment * This);
         
+        DECLSPEC_XFGVIRT(IWSDOutboundAttachment, Abort)
         HRESULT ( STDMETHODCALLTYPE *Abort )( 
             IWSDOutboundAttachment * This);
         
@@ -298,6 +315,7 @@ EXTERN_C const IID IID_IWSDInboundAttachment;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWSDInboundAttachment * This,
             /* [annotation][in] */ 
@@ -305,12 +323,15 @@ EXTERN_C const IID IID_IWSDInboundAttachment;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWSDInboundAttachment * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWSDInboundAttachment * This);
         
+        DECLSPEC_XFGVIRT(IWSDInboundAttachment, Read)
         HRESULT ( STDMETHODCALLTYPE *Read )( 
             IWSDInboundAttachment * This,
             /* [annotation][length_is][size_is][out] */ 
@@ -320,6 +341,7 @@ EXTERN_C const IID IID_IWSDInboundAttachment;
             /* [annotation][out] */ 
             _Out_  LPDWORD pdwNumberOfBytesRead);
         
+        DECLSPEC_XFGVIRT(IWSDInboundAttachment, Close)
         HRESULT ( STDMETHODCALLTYPE *Close )( 
             IWSDInboundAttachment * This);
         

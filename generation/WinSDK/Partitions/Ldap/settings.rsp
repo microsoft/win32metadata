@@ -1,5 +1,6 @@
 --traverse
 <IncludeRoot>/um/WinBer.h
 <IncludeRoot>/um/Winldap.h
+<IncludeRoot>/um/ntldap.h
 --namespace
 Windows.Win32.Networking.Ldap

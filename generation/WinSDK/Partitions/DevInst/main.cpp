@@ -10,3 +10,6 @@
 #include <cfg.h>
 #include <cfgmgr32.h>
 #include <newdev.h>
+#include <devguid.h>
+#include <infstr.h>
+#include <wdmguid.h>

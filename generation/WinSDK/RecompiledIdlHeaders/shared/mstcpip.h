@@ -202,9 +202,87 @@ typedef struct _ASSOCIATE_NAMERES_CONTEXT_INPUT
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS3)
 #define SIO_SET_PRIORITY_HINT               _WSAIOW(IOC_VENDOR,24)
 #endif // NTDDI_VERSION >= NTDDI_WIN10_RS3
+#if (NTDDI_VERSION >= NTDDI_WIN10_FE)
+#define SIO_PRIORITY_HINT SIO_SET_PRIORITY_HINT
+#endif // NTDDI_VERSION >= NTDDI_WIN10_FE
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS2)
 #define SIO_TCP_INFO                        _WSAIORW(IOC_VENDOR,39)
 #endif // NTDDI_VERSION >= NTDDI_WIN10_RS2
+#if (NTDDI_VERSION >= NTDDI_WIN10_VB)
+//
+// Socket IOCTL for port sharing per processor sockets.
+//
+#define SIO_CPU_AFFINITY                    _WSAIOW(IOC_VENDOR,21)
+#endif // NTDDI_VERSION >= NTDDI_WIN10_VB
+
+#if (NTDDI_VERSION >= NTDDI_WIN10_FE)
+//
+// Socket IOCTL used for configuring timestamp reception. Only valid for
+// datagram sockets.
+//
+#define SIO_TIMESTAMPING _WSAIOW(IOC_VENDOR, 235)
+
+//
+// Input structure for SIO_TIMESTAMPING configuration option.
+//
+// Flags                - Enable/disable timestamp reception for rx/tx direction.
+// TxTimestampsBuffered - Determines how many tx timestamps may be buffered.
+//                        When TxTimestampsBuffered tx timestamps are buffered
+//                        and a new tx timestamp has been generated, the new
+//                        timestamp will be discarded.
+//
+typedef struct _TIMESTAMPING_CONFIG {
+    ULONG Flags;
+    USHORT TxTimestampsBuffered;
+} TIMESTAMPING_CONFIG, *PTIMESTAMPING_CONFIG;
+
+//
+// Flags for the TIMESTAMPING_CONFIG struct. Specify a flag to enable, or omit
+// to disable timestamp reception for that direction.
+//
+#define TIMESTAMPING_FLAG_RX 0x1
+#define TIMESTAMPING_FLAG_TX 0x2
+
+//
+// Control message type for returning a rx timestamp through WSARecvMsg.
+// The control message data is returned as a UINT64.
+//
+#define SO_TIMESTAMP 0x300A
+
+//
+// Control message type for specifying a tx timestamp ID through WSASendMsg.
+// The control message data is supplied as a UINT32.
+//
+#define SO_TIMESTAMP_ID 0x300B
+
+//
+// Socket IOCTL to get timestamps for transmitted packets. Enable timestamp
+// reception first by using the SIO_TIMESTAMPING socket IOCTL, then retrieve tx
+// timestamps by ID using this IOCTL. Only valid for datagram sockets.
+//
+// Input is a UINT32 timestamp ID.
+// Output is a UINT64 timestamp value.
+// On success, the tx timestamp is available and is returned.
+// On failure, the tx timestamp is unavailable. WSAGetLastError will return
+//    WSAEWOULDBLOCK.
+//
+#define SIO_GET_TX_TIMESTAMP _WSAIOW(IOC_VENDOR, 234)
+
+//
+// This enum maps to the PRIORITY_HINT enum defined in WinBase.h.
+//
+typedef enum {
+    SocketPriorityHintVeryLow = 0,
+    SocketPriorityHintLow,
+    SocketPriorityHintNormal,
+    SocketMaximumPriorityHintType
+} SOCKET_PRIORITY_HINT, *PSOCKET_PRIORITY_HINT;
+
+typedef struct _PRIORITY_STATUS {
+    SOCKET_PRIORITY_HINT Sender;
+    SOCKET_PRIORITY_HINT Receiver;
+} PRIORITY_STATUS, *PPRIORITY_STATUS;
+#endif // NTDDI_VERSION >= NTDDI_WIN10_FE
 
 
 //
@@ -1016,6 +1094,11 @@ IN4_IS_UNALIGNED_ADDR_6TO4ELIGIBLE(_In_ CONST IN_ADDR UNALIGNED *a)
 
 #ifdef _WS2IPDEF_
 
+#ifdef _PREFAST_
+#pragma prefast(push)
+#pragma prefast(disable:6385, "apparent one byte buffer overread in IN6_PREFIX_EQUAL")
+#endif
+
 MSTCPIP_INLINE
 BOOLEAN
 IN6_PREFIX_EQUAL(
@@ -1033,6 +1116,10 @@ IN6_PREFIX_EQUAL(
          ((Bits == 0) ||
           ((a->s6_bytes[Bytes] | Mask) == (b->s6_bytes[Bytes] | Mask))));
 }
+
+#ifdef _PREFAST_
+#pragma prefast(pop)
+#endif
 
 MSTCPIP_INLINE
 BOOLEAN
@@ -1509,6 +1596,7 @@ INET_SET_ADDRESS(
     }
 }
 
+_Ret_range_(sizeof(IN_ADDR), sizeof(IN6_ADDR))
 MSTCPIP_INLINE
 SIZE_T
 INET_ADDR_LENGTH(_In_ ADDRESS_FAMILY af)
@@ -1521,6 +1609,7 @@ INET_ADDR_LENGTH(_In_ ADDRESS_FAMILY af)
     }
 }
 
+_Ret_range_(sizeof(SOCKADDR_IN), sizeof(SOCKADDR_IN6))
 MSTCPIP_INLINE
 SIZE_T
 INET_SOCKADDR_LENGTH(_In_ ADDRESS_FAMILY af)

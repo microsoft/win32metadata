@@ -52,6 +52,8 @@ namespace Windows
 {
     namespace Foundation
     {
+        typedef struct Point Point;
+
         typedef struct Size Size;
 
         typedef struct TimeSpan TimeSpan;
@@ -152,6 +154,8 @@ namespace Windows
 
             typedef enum CompositionDropShadowSourcePolicy CompositionDropShadowSourcePolicy;
 
+            typedef enum CompositionEasingFunctionMode CompositionEasingFunctionMode;
+
             typedef enum CompositionEffectFactoryLoadStatus CompositionEffectFactoryLoadStatus;
 
             typedef enum CompositionGetValueStatus CompositionGetValueStatus;
@@ -166,6 +170,8 @@ namespace Windows
 
             typedef enum CompositionStrokeLineJoin CompositionStrokeLineJoin;
 
+            typedef struct InkTrailPoint InkTrailPoint;
+
             interface IAmbientLight;
 
             interface IAmbientLight2;
@@ -178,13 +184,21 @@ namespace Windows
 
             interface IAnimationPropertyInfo;
 
+            interface IAnimationPropertyInfo2;
+
+            interface IBackEasingFunction;
+
             interface IBooleanKeyFrameAnimation;
+
+            interface IBounceEasingFunction;
 
             interface IBounceScalarNaturalMotionAnimation;
 
             interface IBounceVector2NaturalMotionAnimation;
 
             interface IBounceVector3NaturalMotionAnimation;
+
+            interface ICircleEasingFunction;
 
             interface IColorKeyFrameAnimation;
 
@@ -240,6 +254,8 @@ namespace Windows
 
             interface ICompositionEasingFunctionFactory;
 
+            interface ICompositionEasingFunctionStatics;
+
             interface ICompositionEffectBrush;
 
             interface ICompositionEffectFactory;
@@ -267,6 +283,8 @@ namespace Windows
             interface ICompositionGraphicsDevice2;
 
             interface ICompositionGraphicsDevice3;
+
+            interface ICompositionGraphicsDevice4;
 
             interface ICompositionLight;
 
@@ -338,6 +356,8 @@ namespace Windows
 
             interface ICompositionSpriteShape;
 
+            interface ICompositionSupportsSystemBackdrop;
+
             interface ICompositionSurface;
 
             interface ICompositionSurfaceBrush;
@@ -345,6 +365,8 @@ namespace Windows
             interface ICompositionSurfaceBrush2;
 
             interface ICompositionSurfaceBrush3;
+
+            interface ICompositionSurfaceFacade;
 
             interface ICompositionTarget;
 
@@ -374,7 +396,11 @@ namespace Windows
 
             interface ICompositor6;
 
+            interface ICompositor7;
+
             interface ICompositorStatics;
+
+            interface ICompositorWithBlurredWallpaperBackdropBrush;
 
             interface ICompositorWithProjectedShadow;
 
@@ -388,6 +414,10 @@ namespace Windows
 
             interface ICubicBezierEasingFunction;
 
+            interface IDelegatedInkTrailVisual;
+
+            interface IDelegatedInkTrailVisualStatics;
+
             interface IDistantLight;
 
             interface IDistantLight2;
@@ -395,6 +425,10 @@ namespace Windows
             interface IDropShadow;
 
             interface IDropShadow2;
+
+            interface IElasticEasingFunction;
+
+            interface IExponentialEasingFunction;
 
             interface IExpressionAnimation;
 
@@ -428,7 +462,11 @@ namespace Windows
 
             interface IPointLight3;
 
+            interface IPowerEasingFunction;
+
             interface IQuaternionKeyFrameAnimation;
+
+            interface IRectangleClip;
 
             interface IRedirectVisual;
 
@@ -441,6 +479,8 @@ namespace Windows
             interface IScalarNaturalMotionAnimationFactory;
 
             interface IShapeVisual;
+
+            interface ISineEasingFunction;
 
             interface ISpotLight;
 
@@ -478,9 +518,15 @@ namespace Windows
 
             interface IVisual2;
 
+            interface IVisual3;
+
+            interface IVisual4;
+
             interface IVisualCollection;
 
             interface IVisualElement;
+
+            interface IVisualElement2;
 
             interface IVisualFactory;
 
@@ -492,13 +538,19 @@ namespace Windows
 
             runtimeclass AnimationPropertyInfo;
 
+            runtimeclass BackEasingFunction;
+
             runtimeclass BooleanKeyFrameAnimation;
+
+            runtimeclass BounceEasingFunction;
 
             runtimeclass BounceScalarNaturalMotionAnimation;
 
             runtimeclass BounceVector2NaturalMotionAnimation;
 
             runtimeclass BounceVector3NaturalMotionAnimation;
+
+            runtimeclass CircleEasingFunction;
 
             runtimeclass ColorKeyFrameAnimation;
 
@@ -612,9 +664,15 @@ namespace Windows
 
             runtimeclass CubicBezierEasingFunction;
 
+            runtimeclass DelegatedInkTrailVisual;
+
             runtimeclass DistantLight;
 
             runtimeclass DropShadow;
+
+            runtimeclass ElasticEasingFunction;
+
+            runtimeclass ExponentialEasingFunction;
 
             runtimeclass ExpressionAnimation;
 
@@ -636,7 +694,11 @@ namespace Windows
 
             runtimeclass PointLight;
 
+            runtimeclass PowerEasingFunction;
+
             runtimeclass QuaternionKeyFrameAnimation;
+
+            runtimeclass RectangleClip;
 
             runtimeclass RedirectVisual;
 
@@ -647,6 +709,8 @@ namespace Windows
             runtimeclass ScalarNaturalMotionAnimation;
 
             runtimeclass ShapeVisual;
+
+            runtimeclass SineEasingFunction;
 
             runtimeclass SpotLight;
 
@@ -737,6 +801,8 @@ namespace Windows
                 interface Windows.Foundation.Collections.IVector<Windows.UI.Composition.CompositionShape*>;
 
                 interface Windows.Foundation.Collections.IVector<Windows.UI.Composition.IVisualElement*>;
+
+                interface Windows.Foundation.IAsyncOperation<Windows.UI.Composition.ICompositionSurface*>;
 
                 interface Windows.Foundation.TypedEventHandler<IInspectable*, Windows.UI.Composition.CompositionBatchCompletedEventArgs*>;
 
@@ -883,6 +949,14 @@ namespace Windows
                 InheritFromVisualContent = 1
             };
 
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            enum CompositionEasingFunctionMode
+            {
+                In    = 0,
+                Out   = 1,
+                InOut = 2
+            };
+
             [contract(Windows.Foundation.UniversalApiContract, 2.0)]
             enum CompositionEffectFactoryLoadStatus
             {
@@ -940,6 +1014,13 @@ namespace Windows
                 Bevel        = 1,
                 Round        = 2,
                 MiterOrBevel = 3
+            };
+
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            struct InkTrailPoint
+            {
+                Windows.Foundation.Point Point;
+                FLOAT Radius;
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 3.0)]
@@ -1000,12 +1081,40 @@ namespace Windows
                 [propput] HRESULT AccessMode([in] Windows.UI.Composition.AnimationPropertyAccessMode value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [exclusiveto(Windows.UI.Composition.AnimationPropertyInfo)]
+            [uuid(591720B4-7472-5218-8B39-DFFE615AE6DA)]
+            interface IAnimationPropertyInfo2 : IInspectable
+            {
+                HRESULT GetResolvedCompositionObject([out] [retval] Windows.UI.Composition.CompositionObject** result);
+                HRESULT GetResolvedCompositionObjectProperty([out] [retval] HSTRING* result);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [exclusiveto(Windows.UI.Composition.BackEasingFunction)]
+            [uuid(B8560DA4-5E3C-545D-B263-7987A2BD27CB)]
+            interface IBackEasingFunction : IInspectable
+            {
+                [propget] HRESULT Mode([out] [retval] Windows.UI.Composition.CompositionEasingFunctionMode* value);
+                [propget] HRESULT Amplitude([out] [retval] FLOAT* value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 7.0)]
             [exclusiveto(Windows.UI.Composition.BooleanKeyFrameAnimation)]
             [uuid(95E23A08-D1F4-4972-9770-3EFE68D82E14)]
             interface IBooleanKeyFrameAnimation : IInspectable
             {
                 [overload("InsertKeyFrame")] HRESULT InsertKeyFrame([in] FLOAT normalizedProgressKey, [in] boolean value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [exclusiveto(Windows.UI.Composition.BounceEasingFunction)]
+            [uuid(E7FDB44B-AAD5-5174-9421-EEF8B75A6A43)]
+            interface IBounceEasingFunction : IInspectable
+            {
+                [propget] HRESULT Mode([out] [retval] Windows.UI.Composition.CompositionEasingFunctionMode* value);
+                [propget] HRESULT Bounces([out] [retval] INT32* value);
+                [propget] HRESULT Bounciness([out] [retval] FLOAT* value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 6.0)]
@@ -1039,6 +1148,14 @@ namespace Windows
                 [propput] HRESULT Acceleration([in] FLOAT value);
                 [propget] HRESULT Restitution([out] [retval] FLOAT* value);
                 [propput] HRESULT Restitution([in] FLOAT value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [exclusiveto(Windows.UI.Composition.CircleEasingFunction)]
+            [uuid(1E07222A-6F82-5A28-8748-2E92FC46EE2B)]
+            interface ICircleEasingFunction : IInspectable
+            {
+                [propget] HRESULT Mode([out] [retval] Windows.UI.Composition.CompositionEasingFunctionMode* value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 2.0)]
@@ -1292,6 +1409,24 @@ namespace Windows
             {
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [exclusiveto(Windows.UI.Composition.CompositionEasingFunction)]
+            [uuid(17A766B6-2936-53EA-B5AF-C642F4A61083)]
+            interface ICompositionEasingFunctionStatics : IInspectable
+            {
+                HRESULT CreateCubicBezierEasingFunction([in] Windows.UI.Composition.Compositor* owner, [in] Windows.Foundation.Numerics.Vector2 controlPoint1, [in] Windows.Foundation.Numerics.Vector2 controlPoint2, [out] [retval] Windows.UI.Composition.CubicBezierEasingFunction** result);
+                HRESULT CreateLinearEasingFunction([in] Windows.UI.Composition.Compositor* owner, [out] [retval] Windows.UI.Composition.LinearEasingFunction** result);
+                [overload("CreateStepEasingFunction")] HRESULT CreateStepEasingFunction([in] Windows.UI.Composition.Compositor* owner, [out] [retval] Windows.UI.Composition.StepEasingFunction** result);
+                [overload("CreateStepEasingFunction")] HRESULT CreateStepEasingFunctionWithStepCount([in] Windows.UI.Composition.Compositor* owner, [in] INT32 stepCount, [out] [retval] Windows.UI.Composition.StepEasingFunction** result);
+                HRESULT CreateBackEasingFunction([in] Windows.UI.Composition.Compositor* owner, [in] Windows.UI.Composition.CompositionEasingFunctionMode mode, [in] FLOAT amplitude, [out] [retval] Windows.UI.Composition.BackEasingFunction** result);
+                HRESULT CreateBounceEasingFunction([in] Windows.UI.Composition.Compositor* owner, [in] Windows.UI.Composition.CompositionEasingFunctionMode mode, [in] INT32 bounces, [in] FLOAT bounciness, [out] [retval] Windows.UI.Composition.BounceEasingFunction** result);
+                HRESULT CreateCircleEasingFunction([in] Windows.UI.Composition.Compositor* owner, [in] Windows.UI.Composition.CompositionEasingFunctionMode mode, [out] [retval] Windows.UI.Composition.CircleEasingFunction** result);
+                HRESULT CreateElasticEasingFunction([in] Windows.UI.Composition.Compositor* owner, [in] Windows.UI.Composition.CompositionEasingFunctionMode mode, [in] INT32 oscillations, [in] FLOAT springiness, [out] [retval] Windows.UI.Composition.ElasticEasingFunction** result);
+                HRESULT CreateExponentialEasingFunction([in] Windows.UI.Composition.Compositor* owner, [in] Windows.UI.Composition.CompositionEasingFunctionMode mode, [in] FLOAT exponent, [out] [retval] Windows.UI.Composition.ExponentialEasingFunction** result);
+                HRESULT CreatePowerEasingFunction([in] Windows.UI.Composition.Compositor* owner, [in] Windows.UI.Composition.CompositionEasingFunctionMode mode, [in] FLOAT power, [out] [retval] Windows.UI.Composition.PowerEasingFunction** result);
+                HRESULT CreateSineEasingFunction([in] Windows.UI.Composition.Compositor* owner, [in] Windows.UI.Composition.CompositionEasingFunctionMode mode, [out] [retval] Windows.UI.Composition.SineEasingFunction** result);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 2.0)]
             [exclusiveto(Windows.UI.Composition.CompositionEffectBrush)]
             [uuid(BF7F795E-83CC-44BF-A447-3E3C071789EC)]
@@ -1437,6 +1572,14 @@ namespace Windows
             {
                 HRESULT CreateMipmapSurface([in] Windows.Graphics.SizeInt32 sizePixels, [in] Windows.Graphics.DirectX.DirectXPixelFormat pixelFormat, [in] Windows.Graphics.DirectX.DirectXAlphaMode alphaMode, [out] [retval] Windows.UI.Composition.CompositionMipmapSurface** result);
                 HRESULT Trim();
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [exclusiveto(Windows.UI.Composition.CompositionGraphicsDevice)]
+            [uuid(5A73BFF9-A97F-4CF5-BA46-98EF358E71B1)]
+            interface ICompositionGraphicsDevice4 : IInspectable
+            {
+                HRESULT CaptureAsync([in] Windows.UI.Composition.Visual* captureVisual, [in] Windows.Graphics.SizeInt32 size, [in] Windows.Graphics.DirectX.DirectXPixelFormat pixelFormat, [in] Windows.Graphics.DirectX.DirectXAlphaMode alphaMode, [in] FLOAT sdrBoost, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.UI.Composition.ICompositionSurface*>** operation);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 3.0)]
@@ -1851,6 +1994,14 @@ namespace Windows
                 [propput] HRESULT StrokeThickness([in] FLOAT value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [uuid(397DAFE4-B6C2-5BB9-951D-F5707DE8B7BC)]
+            interface ICompositionSupportsSystemBackdrop : IInspectable
+            {
+                [propget] HRESULT SystemBackdrop([out] [retval] Windows.UI.Composition.CompositionBrush** value);
+                [propput] HRESULT SystemBackdrop([in] Windows.UI.Composition.CompositionBrush* value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 2.0)]
             [uuid(1527540D-42C7-47A6-A408-668F79A90DFB)]
             interface ICompositionSurface : IInspectable
@@ -1902,6 +2053,13 @@ namespace Windows
             {
                 [propget] HRESULT SnapToPixels([out] [retval] boolean* value);
                 [propput] HRESULT SnapToPixels([in] boolean value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [uuid(E01622C8-2332-55C7-8868-A7312C5C229D)]
+            interface ICompositionSurfaceFacade : IInspectable
+            {
+                HRESULT GetRealSurface([out] [retval] Windows.UI.Composition.ICompositionSurface** result);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 2.0)]
@@ -2090,6 +2248,18 @@ namespace Windows
                 HRESULT CreateBooleanKeyFrameAnimation([out] [retval] Windows.UI.Composition.BooleanKeyFrameAnimation** result);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [exclusiveto(Windows.UI.Composition.Compositor)]
+            [uuid(D3483FAD-9A12-53BA-BFC8-88B7FF7977C6)]
+            interface ICompositor7 : IInspectable
+            {
+                [propget] HRESULT DispatcherQueue([out] [retval] Windows.System.DispatcherQueue** value);
+                HRESULT CreateAnimationPropertyInfo([out] [retval] Windows.UI.Composition.AnimationPropertyInfo** result);
+                [overload("CreateRectangleClip")] HRESULT CreateRectangleClip([out] [retval] Windows.UI.Composition.RectangleClip** result);
+                [overload("CreateRectangleClip")] HRESULT CreateRectangleClipWithSides([in] FLOAT left, [in] FLOAT top, [in] FLOAT right, [in] FLOAT bottom, [out] [retval] Windows.UI.Composition.RectangleClip** result);
+                [overload("CreateRectangleClip")] HRESULT CreateRectangleClipWithSidesAndRadius([in] FLOAT left, [in] FLOAT top, [in] FLOAT right, [in] FLOAT bottom, [in] Windows.Foundation.Numerics.Vector2 topLeftRadius, [in] Windows.Foundation.Numerics.Vector2 topRightRadius, [in] Windows.Foundation.Numerics.Vector2 bottomRightRadius, [in] Windows.Foundation.Numerics.Vector2 bottomLeftRadius, [out] [retval] Windows.UI.Composition.RectangleClip** result);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 6.0)]
             [exclusiveto(Windows.UI.Composition.Compositor)]
             [uuid(080DB93E-121E-4D97-8B74-1DFCF91987EA)]
@@ -2097,6 +2267,14 @@ namespace Windows
             {
                 [propget] HRESULT MaxGlobalPlaybackRate([out] [retval] FLOAT* value);
                 [propget] HRESULT MinGlobalPlaybackRate([out] [retval] FLOAT* value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [exclusiveto(Windows.UI.Composition.Compositor)]
+            [uuid(0D8FB190-F122-5B8D-9FDD-543B0D8EB7F3)]
+            interface ICompositorWithBlurredWallpaperBackdropBrush : IInspectable
+            {
+                HRESULT TryCreateBlurredWallpaperBackdropBrush([out] [retval] Windows.UI.Composition.CompositionBackdropBrush** result);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 8.0)]
@@ -2149,6 +2327,26 @@ namespace Windows
                 [propget] HRESULT ControlPoint2([out] [retval] Windows.Foundation.Numerics.Vector2* value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [exclusiveto(Windows.UI.Composition.DelegatedInkTrailVisual)]
+            [uuid(856E60B1-E1AB-5B23-8E3D-D513F221C998)]
+            interface IDelegatedInkTrailVisual : IInspectable
+            {
+                HRESULT AddTrailPoints([in] UINT32 __inkPointsSize, [in] [size_is(__inkPointsSize)] Windows.UI.Composition.InkTrailPoint* inkPoints, [out] [retval] UINT32* result);
+                HRESULT AddTrailPointsWithPrediction([in] UINT32 __inkPointsSize, [in] [size_is(__inkPointsSize)] Windows.UI.Composition.InkTrailPoint* inkPoints, [in] UINT32 __predictedInkPointsSize, [in] [size_is(__predictedInkPointsSize)] Windows.UI.Composition.InkTrailPoint* predictedInkPoints, [out] [retval] UINT32* result);
+                HRESULT RemoveTrailPoints([in] UINT32 generationId);
+                HRESULT StartNewTrail([in] Windows.UI.Color color);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [exclusiveto(Windows.UI.Composition.DelegatedInkTrailVisual)]
+            [uuid(0DAF6BD5-42C6-555C-9267-E0AC663AF836)]
+            interface IDelegatedInkTrailVisualStatics : IInspectable
+            {
+                HRESULT Create([in] Windows.UI.Composition.Compositor* compositor, [out] [retval] Windows.UI.Composition.DelegatedInkTrailVisual** result);
+                HRESULT CreateForSwapChain([in] Windows.UI.Composition.Compositor* compositor, [in] Windows.UI.Composition.ICompositionSurface* swapChain, [out] [retval] Windows.UI.Composition.DelegatedInkTrailVisual** result);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 3.0)]
             [exclusiveto(Windows.UI.Composition.DistantLight)]
             [uuid(318CFAFC-5CE3-4B55-AB5D-07A00353AC99)]
@@ -2195,6 +2393,25 @@ namespace Windows
             {
                 [propget] HRESULT SourcePolicy([out] [retval] Windows.UI.Composition.CompositionDropShadowSourcePolicy* value);
                 [propput] HRESULT SourcePolicy([in] Windows.UI.Composition.CompositionDropShadowSourcePolicy value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [exclusiveto(Windows.UI.Composition.ElasticEasingFunction)]
+            [uuid(66DE6285-054E-5594-8475-C22CB51F1BD5)]
+            interface IElasticEasingFunction : IInspectable
+            {
+                [propget] HRESULT Mode([out] [retval] Windows.UI.Composition.CompositionEasingFunctionMode* value);
+                [propget] HRESULT Oscillations([out] [retval] INT32* value);
+                [propget] HRESULT Springiness([out] [retval] FLOAT* value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [exclusiveto(Windows.UI.Composition.ExponentialEasingFunction)]
+            [uuid(6F7D1A51-98D2-5638-A34A-00486554C750)]
+            interface IExponentialEasingFunction : IInspectable
+            {
+                [propget] HRESULT Mode([out] [retval] Windows.UI.Composition.CompositionEasingFunctionMode* value);
+                [propget] HRESULT Exponent([out] [retval] FLOAT* value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 2.0)]
@@ -2366,6 +2583,15 @@ namespace Windows
                 [propput] HRESULT MaxAttenuationCutoff([in] FLOAT value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [exclusiveto(Windows.UI.Composition.PowerEasingFunction)]
+            [uuid(C3FF53D6-138B-5815-891A-B7F615CCC563)]
+            interface IPowerEasingFunction : IInspectable
+            {
+                [propget] HRESULT Mode([out] [retval] Windows.UI.Composition.CompositionEasingFunctionMode* value);
+                [propget] HRESULT Power([out] [retval] FLOAT* value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 2.0)]
             [exclusiveto(Windows.UI.Composition.QuaternionKeyFrameAnimation)]
             [uuid(404E5835-ECF6-4240-8520-671279CF36BC)]
@@ -2373,6 +2599,29 @@ namespace Windows
             {
                 [overload("InsertKeyFrame")] HRESULT InsertKeyFrame([in] FLOAT normalizedProgressKey, [in] Windows.Foundation.Numerics.Quaternion value);
                 [overload("InsertKeyFrame")] HRESULT InsertKeyFrameWithEasingFunction([in] FLOAT normalizedProgressKey, [in] Windows.Foundation.Numerics.Quaternion value, [in] Windows.UI.Composition.CompositionEasingFunction* easingFunction);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [exclusiveto(Windows.UI.Composition.RectangleClip)]
+            [uuid(B3E7549E-00B4-5B53-8BE8-353F6C433101)]
+            interface IRectangleClip : IInspectable
+            {
+                [propget] HRESULT Bottom([out] [retval] FLOAT* value);
+                [propput] HRESULT Bottom([in] FLOAT value);
+                [propget] HRESULT BottomLeftRadius([out] [retval] Windows.Foundation.Numerics.Vector2* value);
+                [propput] HRESULT BottomLeftRadius([in] Windows.Foundation.Numerics.Vector2 value);
+                [propget] HRESULT BottomRightRadius([out] [retval] Windows.Foundation.Numerics.Vector2* value);
+                [propput] HRESULT BottomRightRadius([in] Windows.Foundation.Numerics.Vector2 value);
+                [propget] HRESULT Left([out] [retval] FLOAT* value);
+                [propput] HRESULT Left([in] FLOAT value);
+                [propget] HRESULT Right([out] [retval] FLOAT* value);
+                [propput] HRESULT Right([in] FLOAT value);
+                [propget] HRESULT Top([out] [retval] FLOAT* value);
+                [propput] HRESULT Top([in] FLOAT value);
+                [propget] HRESULT TopLeftRadius([out] [retval] Windows.Foundation.Numerics.Vector2* value);
+                [propput] HRESULT TopLeftRadius([in] Windows.Foundation.Numerics.Vector2 value);
+                [propget] HRESULT TopRightRadius([out] [retval] Windows.Foundation.Numerics.Vector2* value);
+                [propput] HRESULT TopRightRadius([in] Windows.Foundation.Numerics.Vector2 value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 7.0)]
@@ -2429,6 +2678,14 @@ namespace Windows
                 [propget] HRESULT Shapes([out] [retval] Windows.UI.Composition.CompositionShapeCollection** value);
                 [propget] HRESULT ViewBox([out] [retval] Windows.UI.Composition.CompositionViewBox** value);
                 [propput] HRESULT ViewBox([in] Windows.UI.Composition.CompositionViewBox* value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [exclusiveto(Windows.UI.Composition.SineEasingFunction)]
+            [uuid(F1B518BF-9563-5474-BD13-44B2DF4B1D58)]
+            interface ISineEasingFunction : IInspectable
+            {
+                [propget] HRESULT Mode([out] [retval] Windows.UI.Composition.CompositionEasingFunctionMode* value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 3.0)]
@@ -2672,6 +2929,24 @@ namespace Windows
                 [propput] HRESULT RelativeSizeAdjustment([in] Windows.Foundation.Numerics.Vector2 value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 11.0)]
+            [exclusiveto(Windows.UI.Composition.Visual)]
+            [uuid(30BE580D-F4B6-4AB7-80DD-3738CBAC9F2C)]
+            interface IVisual3 : IInspectable
+            {
+                [propget] HRESULT IsHitTestVisible([out] [retval] boolean* value);
+                [propput] HRESULT IsHitTestVisible([in] boolean value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [exclusiveto(Windows.UI.Composition.Visual)]
+            [uuid(9476BF11-E24B-5BF9-9EBE-6274109B2711)]
+            interface IVisual4 : IInspectable
+            {
+                [propget] HRESULT IsPixelSnappingEnabled([out] [retval] boolean* value);
+                [propput] HRESULT IsPixelSnappingEnabled([in] boolean value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 2.0)]
             [exclusiveto(Windows.UI.Composition.VisualCollection)]
             [uuid(8B745505-FD3E-4A98-84A8-E949468C6BCB)]
@@ -2690,6 +2965,13 @@ namespace Windows
             [uuid(01E64612-1D82-42F4-8E3F-A722DED33FC7)]
             interface IVisualElement : IInspectable
             {
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [uuid(993AE8A0-6057-5E40-918C-E06E0B7E7C64)]
+            interface IVisualElement2 : IInspectable
+            {
+                HRESULT GetVisualInternal([out] [retval] Windows.UI.Composition.Visual** result);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 2.0)]
@@ -2734,6 +3016,15 @@ namespace Windows
             runtimeclass AnimationPropertyInfo : Windows.UI.Composition.CompositionObject
             {
                 [default] interface Windows.UI.Composition.IAnimationPropertyInfo;
+                [contract(Windows.Foundation.UniversalApiContract, 12.0)] interface Windows.UI.Composition.IAnimationPropertyInfo2;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [marshaling_behavior(agile)]
+            [threading(both)]
+            runtimeclass BackEasingFunction : Windows.UI.Composition.CompositionEasingFunction
+            {
+                [default] interface Windows.UI.Composition.IBackEasingFunction;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 7.0)]
@@ -2742,6 +3033,14 @@ namespace Windows
             runtimeclass BooleanKeyFrameAnimation : Windows.UI.Composition.KeyFrameAnimation
             {
                 [default] interface Windows.UI.Composition.IBooleanKeyFrameAnimation;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [marshaling_behavior(agile)]
+            [threading(both)]
+            runtimeclass BounceEasingFunction : Windows.UI.Composition.CompositionEasingFunction
+            {
+                [default] interface Windows.UI.Composition.IBounceEasingFunction;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 6.0)]
@@ -2766,6 +3065,14 @@ namespace Windows
             runtimeclass BounceVector3NaturalMotionAnimation : Windows.UI.Composition.Vector3NaturalMotionAnimation
             {
                 [default] interface Windows.UI.Composition.IBounceVector3NaturalMotionAnimation;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [marshaling_behavior(agile)]
+            [threading(both)]
+            runtimeclass CircleEasingFunction : Windows.UI.Composition.CompositionEasingFunction
+            {
+                [default] interface Windows.UI.Composition.ICircleEasingFunction;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 2.0)]
@@ -2898,6 +3205,7 @@ namespace Windows
             [composable(Windows.UI.Composition.ICompositionEasingFunctionFactory, public, Windows.Foundation.UniversalApiContract, 2.0)]
             [contract(Windows.Foundation.UniversalApiContract, 2.0)]
             [marshaling_behavior(agile)]
+            [static(Windows.UI.Composition.ICompositionEasingFunctionStatics, Windows.Foundation.UniversalApiContract, 12.0)]
             [threading(both)]
             runtimeclass CompositionEasingFunction : Windows.UI.Composition.CompositionObject
             {
@@ -2973,6 +3281,7 @@ namespace Windows
                 [default] interface Windows.UI.Composition.ICompositionGraphicsDevice;
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)] interface Windows.UI.Composition.ICompositionGraphicsDevice2;
                 [contract(Windows.Foundation.UniversalApiContract, 8.0)] interface Windows.UI.Composition.ICompositionGraphicsDevice3;
+                [contract(Windows.Foundation.UniversalApiContract, 12.0)] interface Windows.UI.Composition.ICompositionGraphicsDevice4;
             }
 
             [composable(Windows.UI.Composition.ICompositionLightFactory, public, Windows.Foundation.UniversalApiContract, 3.0)]
@@ -3258,6 +3567,8 @@ namespace Windows
                 [contract(Windows.Foundation.UniversalApiContract, 8.0)] interface Windows.UI.Composition.ICompositorWithProjectedShadow;
                 [contract(Windows.Foundation.UniversalApiContract, 8.0)] interface Windows.UI.Composition.ICompositorWithRadialGradient;
                 [contract(Windows.Foundation.UniversalApiContract, 8.0)] interface Windows.UI.Composition.ICompositorWithVisualSurface;
+                [contract(Windows.Foundation.UniversalApiContract, 12.0)] interface Windows.UI.Composition.ICompositor7;
+                [contract(Windows.Foundation.UniversalApiContract, 13.0)] interface Windows.UI.Composition.ICompositorWithBlurredWallpaperBackdropBrush;
                 interface Windows.Foundation.IClosable;
             }
 
@@ -3278,6 +3589,15 @@ namespace Windows
                 [default] interface Windows.UI.Composition.ICubicBezierEasingFunction;
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [marshaling_behavior(agile)]
+            [static(Windows.UI.Composition.IDelegatedInkTrailVisualStatics, Windows.Foundation.UniversalApiContract, 12.0)]
+            [threading(both)]
+            runtimeclass DelegatedInkTrailVisual : Windows.UI.Composition.Visual
+            {
+                [default] interface Windows.UI.Composition.IDelegatedInkTrailVisual;
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 3.0)]
             [marshaling_behavior(agile)]
             [threading(both)]
@@ -3294,6 +3614,22 @@ namespace Windows
             {
                 [default] interface Windows.UI.Composition.IDropShadow;
                 [contract(Windows.Foundation.UniversalApiContract, 5.0)] interface Windows.UI.Composition.IDropShadow2;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [marshaling_behavior(agile)]
+            [threading(both)]
+            runtimeclass ElasticEasingFunction : Windows.UI.Composition.CompositionEasingFunction
+            {
+                [default] interface Windows.UI.Composition.IElasticEasingFunction;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [marshaling_behavior(agile)]
+            [threading(both)]
+            runtimeclass ExponentialEasingFunction : Windows.UI.Composition.CompositionEasingFunction
+            {
+                [default] interface Windows.UI.Composition.IExponentialEasingFunction;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 2.0)]
@@ -3386,12 +3722,28 @@ namespace Windows
                 [contract(Windows.Foundation.UniversalApiContract, 6.0)] interface Windows.UI.Composition.IPointLight3;
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [marshaling_behavior(agile)]
+            [threading(both)]
+            runtimeclass PowerEasingFunction : Windows.UI.Composition.CompositionEasingFunction
+            {
+                [default] interface Windows.UI.Composition.IPowerEasingFunction;
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 2.0)]
             [marshaling_behavior(agile)]
             [threading(both)]
             runtimeclass QuaternionKeyFrameAnimation : Windows.UI.Composition.KeyFrameAnimation
             {
                 [default] interface Windows.UI.Composition.IQuaternionKeyFrameAnimation;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [marshaling_behavior(agile)]
+            [threading(both)]
+            runtimeclass RectangleClip : Windows.UI.Composition.CompositionClip
+            {
+                [default] interface Windows.UI.Composition.IRectangleClip;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 7.0)]
@@ -3433,6 +3785,14 @@ namespace Windows
             runtimeclass ShapeVisual : Windows.UI.Composition.ContainerVisual
             {
                 [default] interface Windows.UI.Composition.IShapeVisual;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [marshaling_behavior(agile)]
+            [threading(both)]
+            runtimeclass SineEasingFunction : Windows.UI.Composition.CompositionEasingFunction
+            {
+                [default] interface Windows.UI.Composition.ISineEasingFunction;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 3.0)]
@@ -3536,6 +3896,8 @@ namespace Windows
             {
                 [default] interface Windows.UI.Composition.IVisual;
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)] interface Windows.UI.Composition.IVisual2;
+                [contract(Windows.Foundation.UniversalApiContract, 11.0)] interface Windows.UI.Composition.IVisual3;
+                [contract(Windows.Foundation.UniversalApiContract, 12.0)] interface Windows.UI.Composition.IVisual4;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 2.0)]

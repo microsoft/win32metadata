@@ -88,7 +88,7 @@
 //  API Contract Inclusion Definitions
 #if !defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
 #if !defined(WINDOWS_APPLICATIONMODEL_FULLTRUSTAPPCONTRACT_VERSION)
-#define WINDOWS_APPLICATIONMODEL_FULLTRUSTAPPCONTRACT_VERSION 0x10000
+#define WINDOWS_APPLICATIONMODEL_FULLTRUSTAPPCONTRACT_VERSION 0x20000
 #endif // defined(WINDOWS_APPLICATIONMODEL_FULLTRUSTAPPCONTRACT_VERSION)
 
 #if !defined(WINDOWS_APPLICATIONMODEL_STARTUPTASKCONTRACT_VERSION)
@@ -100,8 +100,12 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xa0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
+
+#if !defined(WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION)
+#define WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION 0x10000
+#endif // defined(WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
 
@@ -133,6 +137,126 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                interface IAppInstallerManager;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager ABI::Windows::Management::Deployment::IAppInstallerManager
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                interface IAppInstallerManagerStatics;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics ABI::Windows::Management::Deployment::IAppInstallerManagerStatics
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                interface IAutoUpdateSettingsOptions;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions ABI::Windows::Management::Deployment::IAutoUpdateSettingsOptions
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                interface IAutoUpdateSettingsOptionsStatics;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics ABI::Windows::Management::Deployment::IAutoUpdateSettingsOptionsStatics
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                interface ICreateSharedPackageContainerOptions;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions ABI::Windows::Management::Deployment::ICreateSharedPackageContainerOptions
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                interface ICreateSharedPackageContainerResult;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult ABI::Windows::Management::Deployment::ICreateSharedPackageContainerResult
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                interface IDeleteSharedPackageContainerOptions;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions ABI::Windows::Management::Deployment::IDeleteSharedPackageContainerOptions
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                interface IDeleteSharedPackageContainerResult;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult ABI::Windows::Management::Deployment::IDeleteSharedPackageContainerResult
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIDeploymentResult_FWD_DEFINED__
 #define ____x_ABI_CWindows_CManagement_CDeployment_CIDeploymentResult_FWD_DEFINED__
 namespace ABI {
@@ -163,6 +287,36 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CManagement_CDeployment_CIDeploymentResult2_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                interface IFindSharedPackageContainerOptions;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions ABI::Windows::Management::Deployment::IFindSharedPackageContainerOptions
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                interface IPackageAllUserProvisioningOptions;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions ABI::Windows::Management::Deployment::IPackageAllUserProvisioningOptions
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIPackageManager_FWD_DEFINED__
 #define ____x_ABI_CWindows_CManagement_CDeployment_CIPackageManager_FWD_DEFINED__
 namespace ABI {
@@ -177,6 +331,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CManagement_CDeployment_CIPackageManager ABI::Windows::Management::Deployment::IPackageManager
 
 #endif // ____x_ABI_CWindows_CManagement_CDeployment_CIPackageManager_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                interface IPackageManager10;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10 ABI::Windows::Management::Deployment::IPackageManager10
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIPackageManager2_FWD_DEFINED__
 #define ____x_ABI_CWindows_CManagement_CDeployment_CIPackageManager2_FWD_DEFINED__
@@ -373,6 +542,81 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CManagement_CDeployment_CIRegisterPackageOptions_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                interface ISharedPackageContainer;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer ABI::Windows::Management::Deployment::ISharedPackageContainer
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                interface ISharedPackageContainerManager;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager ABI::Windows::Management::Deployment::ISharedPackageContainerManager
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                interface ISharedPackageContainerManagerStatics;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics ABI::Windows::Management::Deployment::ISharedPackageContainerManagerStatics
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                interface ISharedPackageContainerMember;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember ABI::Windows::Management::Deployment::ISharedPackageContainerMember
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                interface ISharedPackageContainerMemberFactory;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory ABI::Windows::Management::Deployment::ISharedPackageContainerMemberFactory
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions_FWD_DEFINED__
 #define ____x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions_FWD_DEFINED__
 namespace ABI {
@@ -387,6 +631,36 @@ namespace ABI {
 #define __x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions ABI::Windows::Management::Deployment::IStagePackageOptions
 
 #endif // ____x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                interface IUpdateSharedPackageContainerOptions;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions ABI::Windows::Management::Deployment::IUpdateSharedPackageContainerOptions
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                interface IUpdateSharedPackageContainerResult;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult ABI::Windows::Management::Deployment::IUpdateSharedPackageContainerResult
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult_FWD_DEFINED__
 
 // Parameterized interface forward declarations (C++)
 
@@ -1011,6 +1285,134 @@ typedef IIterable<ABI::Windows::Management::Deployment::PackageUserInformation*>
 
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                class SharedPackageContainer;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+#ifndef DEF___FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer_USE
+#define DEF___FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation { namespace Collections {
+template <>
+struct __declspec(uuid("01c05337-1d58-5f96-8290-b38f1cb0b6f3"))
+IIterator<ABI::Windows::Management::Deployment::SharedPackageContainer*> : IIterator_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::Management::Deployment::SharedPackageContainer*, ABI::Windows::Management::Deployment::ISharedPackageContainer*>>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.Collections.IIterator`1<Windows.Management.Deployment.SharedPackageContainer>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IIterator<ABI::Windows::Management::Deployment::SharedPackageContainer*> __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer_t;
+#define __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer ABI::Windows::Foundation::Collections::__FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer_t
+/* Collections */ } /* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer_USE */
+
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+#ifndef DEF___FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainer_USE
+#define DEF___FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainer_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation { namespace Collections {
+template <>
+struct __declspec(uuid("68a1862f-3ffa-58ec-89a9-5dfeb6d7433d"))
+IIterable<ABI::Windows::Management::Deployment::SharedPackageContainer*> : IIterable_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::Management::Deployment::SharedPackageContainer*, ABI::Windows::Management::Deployment::ISharedPackageContainer*>>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.Collections.IIterable`1<Windows.Management.Deployment.SharedPackageContainer>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IIterable<ABI::Windows::Management::Deployment::SharedPackageContainer*> __FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainer_t;
+#define __FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainer ABI::Windows::Foundation::Collections::__FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainer_t
+/* Collections */ } /* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainer_USE */
+
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                class SharedPackageContainerMember;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+#ifndef DEF___FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_USE
+#define DEF___FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation { namespace Collections {
+template <>
+struct __declspec(uuid("7b7526e6-1569-5879-9924-1dac1df3a48f"))
+IIterator<ABI::Windows::Management::Deployment::SharedPackageContainerMember*> : IIterator_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::Management::Deployment::SharedPackageContainerMember*, ABI::Windows::Management::Deployment::ISharedPackageContainerMember*>>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.Collections.IIterator`1<Windows.Management.Deployment.SharedPackageContainerMember>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IIterator<ABI::Windows::Management::Deployment::SharedPackageContainerMember*> __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_t;
+#define __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember ABI::Windows::Foundation::Collections::__FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_t
+/* Collections */ } /* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_USE */
+
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+#ifndef DEF___FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_USE
+#define DEF___FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation { namespace Collections {
+template <>
+struct __declspec(uuid("250d357d-d93f-5603-8c84-3d325bb319ee"))
+IIterable<ABI::Windows::Management::Deployment::SharedPackageContainerMember*> : IIterable_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::Management::Deployment::SharedPackageContainerMember*, ABI::Windows::Management::Deployment::ISharedPackageContainerMember*>>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.Collections.IIterable`1<Windows.Management.Deployment.SharedPackageContainerMember>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IIterable<ABI::Windows::Management::Deployment::SharedPackageContainerMember*> __FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_t;
+#define __FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember ABI::Windows::Foundation::Collections::__FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_t
+/* Collections */ } /* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_USE */
+
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
 
 #ifndef DEF___FIVectorView_1_HSTRING_USE
 #define DEF___FIVectorView_1_HSTRING_USE
@@ -1089,6 +1491,60 @@ typedef IVectorView<ABI::Windows::Foundation::Uri*> __FIVectorView_1_Windows__CF
 #endif /* DEF___FIVectorView_1_Windows__CFoundation__CUri_USE */
 
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+#ifndef DEF___FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer_USE
+#define DEF___FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation { namespace Collections {
+template <>
+struct __declspec(uuid("fbd55a40-1e67-5761-9542-1a3e7cb4b7d9"))
+IVectorView<ABI::Windows::Management::Deployment::SharedPackageContainer*> : IVectorView_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::Management::Deployment::SharedPackageContainer*, ABI::Windows::Management::Deployment::ISharedPackageContainer*>>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.Collections.IVectorView`1<Windows.Management.Deployment.SharedPackageContainer>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IVectorView<ABI::Windows::Management::Deployment::SharedPackageContainer*> __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer_t;
+#define __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer ABI::Windows::Foundation::Collections::__FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer_t
+/* Collections */ } /* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer_USE */
+
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+#ifndef DEF___FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_USE
+#define DEF___FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation { namespace Collections {
+template <>
+struct __declspec(uuid("430cca14-916e-583d-a944-c2b283be1de1"))
+IVectorView<ABI::Windows::Management::Deployment::SharedPackageContainerMember*> : IVectorView_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::Management::Deployment::SharedPackageContainerMember*, ABI::Windows::Management::Deployment::ISharedPackageContainerMember*>>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.Collections.IVectorView`1<Windows.Management.Deployment.SharedPackageContainerMember>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IVectorView<ABI::Windows::Management::Deployment::SharedPackageContainerMember*> __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_t;
+#define __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember ABI::Windows::Foundation::Collections::__FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_t
+/* Collections */ } /* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_USE */
+
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
 
 
 #ifndef DEF___FIVector_1_HSTRING_USE
@@ -1169,11 +1625,102 @@ typedef IVector<ABI::Windows::Foundation::Uri*> __FIVector_1_Windows__CFoundatio
 
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+#ifndef DEF___FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer_USE
+#define DEF___FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation { namespace Collections {
+template <>
+struct __declspec(uuid("42135abf-1929-5d3b-a972-e822f516aebc"))
+IVector<ABI::Windows::Management::Deployment::SharedPackageContainer*> : IVector_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::Management::Deployment::SharedPackageContainer*, ABI::Windows::Management::Deployment::ISharedPackageContainer*>>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.Collections.IVector`1<Windows.Management.Deployment.SharedPackageContainer>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IVector<ABI::Windows::Management::Deployment::SharedPackageContainer*> __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer_t;
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer ABI::Windows::Foundation::Collections::__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer_t
+/* Collections */ } /* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer_USE */
+
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+#ifndef DEF___FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_USE
+#define DEF___FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation { namespace Collections {
+template <>
+struct __declspec(uuid("45787bb3-2770-5086-9546-511141ef7289"))
+IVector<ABI::Windows::Management::Deployment::SharedPackageContainerMember*> : IVector_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::Management::Deployment::SharedPackageContainerMember*, ABI::Windows::Management::Deployment::ISharedPackageContainerMember*>>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.Collections.IVector`1<Windows.Management.Deployment.SharedPackageContainerMember>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IVector<ABI::Windows::Management::Deployment::SharedPackageContainerMember*> __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_t;
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember ABI::Windows::Foundation::Collections::__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_t
+/* Collections */ } /* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_USE */
+
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            class AppInstallerInfo;
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CIAppInstallerInfo_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CIAppInstallerInfo_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            interface IAppInstallerInfo;
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CIAppInstallerInfo ABI::Windows::ApplicationModel::IAppInstallerInfo
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CIAppInstallerInfo_FWD_DEFINED__
+
 namespace ABI {
     namespace Windows {
         namespace ApplicationModel {
             typedef enum PackageContentGroupState : int PackageContentGroupState;
         } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            typedef struct PackageVersion PackageVersion;
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Foundation {
+            typedef struct DateTime DateTime;
+        } /* Foundation */
     } /* Windows */
 } /* ABI */
 
@@ -1284,6 +1831,26 @@ namespace ABI {
     namespace Windows {
         namespace Management {
             namespace Deployment {
+                typedef enum SharedPackageContainerCreationCollisionOptions : int SharedPackageContainerCreationCollisionOptions;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                typedef enum SharedPackageContainerOperationStatus : int SharedPackageContainerOperationStatus;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
                 typedef enum StubPackageOption : int StubPackageOption;
             } /* Deployment */
         } /* Management */
@@ -1295,6 +1862,86 @@ namespace ABI {
         namespace Management {
             namespace Deployment {
                 class AddPackageOptions;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                class AppInstallerManager;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                class AutoUpdateSettingsOptions;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                class CreateSharedPackageContainerOptions;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                class CreateSharedPackageContainerResult;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                class DeleteSharedPackageContainerOptions;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                class DeleteSharedPackageContainerResult;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                class FindSharedPackageContainerOptions;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                class PackageAllUserProvisioningOptions;
             } /* Deployment */
         } /* Management */
     } /* Windows */
@@ -1324,7 +1971,37 @@ namespace ABI {
     namespace Windows {
         namespace Management {
             namespace Deployment {
+                class SharedPackageContainerManager;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
                 class StagePackageOptions;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                class UpdateSharedPackageContainerOptions;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                class UpdateSharedPackageContainerResult;
             } /* Deployment */
         } /* Management */
     } /* Windows */
@@ -1600,6 +2277,57 @@ namespace ABI {
 
 /*
  *
+ * Struct Windows.Management.Deployment.SharedPackageContainerCreationCollisionOptions
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                enum SharedPackageContainerCreationCollisionOptions : int
+                {
+                    SharedPackageContainerCreationCollisionOptions_FailIfExists = 0,
+                    SharedPackageContainerCreationCollisionOptions_MergeWithExisting = 1,
+                    SharedPackageContainerCreationCollisionOptions_ReplaceExisting = 2,
+                };
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Struct Windows.Management.Deployment.SharedPackageContainerOperationStatus
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                enum SharedPackageContainerOperationStatus : int
+                {
+                    SharedPackageContainerOperationStatus_Success = 0,
+                    SharedPackageContainerOperationStatus_BlockedByPolicy = 1,
+                    SharedPackageContainerOperationStatus_AlreadyExists = 2,
+                    SharedPackageContainerOperationStatus_PackageFamilyExistsInAnotherContainer = 3,
+                    SharedPackageContainerOperationStatus_NotFound = 4,
+                    SharedPackageContainerOperationStatus_UnknownFailure = 5,
+                };
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
  * Struct Windows.Management.Deployment.StubPackageOption
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 10.0
@@ -1771,6 +2499,399 @@ EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOpti
 
 /*
  *
+ * Interface Windows.Management.Deployment.IAppInstallerManager
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.AppInstallerManager
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_IAppInstallerManager[] = L"Windows.Management.Deployment.IAppInstallerManager";
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                MIDL_INTERFACE("e7ee21c3-2103-53ee-9b18-68afeab0033d")
+                IAppInstallerManager : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE SetAutoUpdateSettings(
+                        HSTRING packageFamilyName,
+                        ABI::Windows::Management::Deployment::IAutoUpdateSettingsOptions* appInstallerInfo
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE ClearAutoUpdateSettings(
+                        HSTRING packageFamilyName
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE PauseAutoUpdatesUntil(
+                        HSTRING packageFamilyName,
+                        ABI::Windows::Foundation::DateTime dateTime
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IAppInstallerManager = _uuidof(IAppInstallerManager);
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.IAppInstallerManagerStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.AppInstallerManager
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_IAppInstallerManagerStatics[] = L"Windows.Management.Deployment.IAppInstallerManagerStatics";
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                MIDL_INTERFACE("c95a6ed5-fc59-5336-9b2e-2b07c5e61434")
+                IAppInstallerManagerStatics : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE GetDefault(
+                        ABI::Windows::Management::Deployment::IAppInstallerManager** result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE GetForSystem(
+                        ABI::Windows::Management::Deployment::IAppInstallerManager** result
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IAppInstallerManagerStatics = _uuidof(IAppInstallerManagerStatics);
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.IAutoUpdateSettingsOptions
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.AutoUpdateSettingsOptions
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_IAutoUpdateSettingsOptions[] = L"Windows.Management.Deployment.IAutoUpdateSettingsOptions";
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                MIDL_INTERFACE("67491d87-35e1-512a-8968-1ae88d1be6d3")
+                IAutoUpdateSettingsOptions : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_Version(
+                        ABI::Windows::ApplicationModel::PackageVersion* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_Version(
+                        ABI::Windows::ApplicationModel::PackageVersion value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_AppInstallerUri(
+                        ABI::Windows::Foundation::IUriRuntimeClass** value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_AppInstallerUri(
+                        ABI::Windows::Foundation::IUriRuntimeClass* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_OnLaunch(
+                        boolean* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_OnLaunch(
+                        boolean value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_HoursBetweenUpdateChecks(
+                        UINT32* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_HoursBetweenUpdateChecks(
+                        UINT32 value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_ShowPrompt(
+                        boolean* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_ShowPrompt(
+                        boolean value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_UpdateBlocksActivation(
+                        boolean* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_UpdateBlocksActivation(
+                        boolean value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_AutomaticBackgroundTask(
+                        boolean* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_AutomaticBackgroundTask(
+                        boolean value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_ForceUpdateFromAnyVersion(
+                        boolean* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_ForceUpdateFromAnyVersion(
+                        boolean value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_IsAutoRepairEnabled(
+                        boolean* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_IsAutoRepairEnabled(
+                        boolean value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_UpdateUris(
+                        __FIVector_1_Windows__CFoundation__CUri** value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_RepairUris(
+                        __FIVector_1_Windows__CFoundation__CUri** value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_DependencyPackageUris(
+                        __FIVector_1_Windows__CFoundation__CUri** value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_OptionalPackageUris(
+                        __FIVector_1_Windows__CFoundation__CUri** value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IAutoUpdateSettingsOptions = _uuidof(IAutoUpdateSettingsOptions);
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.IAutoUpdateSettingsOptionsStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.AutoUpdateSettingsOptions
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_IAutoUpdateSettingsOptionsStatics[] = L"Windows.Management.Deployment.IAutoUpdateSettingsOptionsStatics";
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                MIDL_INTERFACE("887b337d-0c05-54d0-bd49-3bb7a2c084cb")
+                IAutoUpdateSettingsOptionsStatics : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE CreateFromAppInstallerInfo(
+                        ABI::Windows::ApplicationModel::IAppInstallerInfo* appInstallerInfo,
+                        ABI::Windows::Management::Deployment::IAutoUpdateSettingsOptions** result
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IAutoUpdateSettingsOptionsStatics = _uuidof(IAutoUpdateSettingsOptionsStatics);
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.ICreateSharedPackageContainerOptions
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.CreateSharedPackageContainerOptions
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_ICreateSharedPackageContainerOptions[] = L"Windows.Management.Deployment.ICreateSharedPackageContainerOptions";
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                MIDL_INTERFACE("c2ab6ece-f664-5c8e-a4b3-2a33276d3dde")
+                ICreateSharedPackageContainerOptions : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_Members(
+                        __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember** value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_ForceAppShutdown(
+                        boolean* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_ForceAppShutdown(
+                        boolean value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_CreateCollisionOption(
+                        ABI::Windows::Management::Deployment::SharedPackageContainerCreationCollisionOptions* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_CreateCollisionOption(
+                        ABI::Windows::Management::Deployment::SharedPackageContainerCreationCollisionOptions value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_ICreateSharedPackageContainerOptions = _uuidof(ICreateSharedPackageContainerOptions);
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions_INTERFACE_DEFINED__) */
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.ICreateSharedPackageContainerResult
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.CreateSharedPackageContainerResult
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_ICreateSharedPackageContainerResult[] = L"Windows.Management.Deployment.ICreateSharedPackageContainerResult";
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                MIDL_INTERFACE("ce8810bf-151c-5707-b936-497e564afc7a")
+                ICreateSharedPackageContainerResult : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_Container(
+                        ABI::Windows::Management::Deployment::ISharedPackageContainer** value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_Status(
+                        ABI::Windows::Management::Deployment::SharedPackageContainerOperationStatus* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_ExtendedError(
+                        HRESULT* value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_ICreateSharedPackageContainerResult = _uuidof(ICreateSharedPackageContainerResult);
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult_INTERFACE_DEFINED__) */
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.IDeleteSharedPackageContainerOptions
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.DeleteSharedPackageContainerOptions
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_IDeleteSharedPackageContainerOptions[] = L"Windows.Management.Deployment.IDeleteSharedPackageContainerOptions";
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                MIDL_INTERFACE("9d81865f-986e-5138-8b5d-384d8e66ed6c")
+                IDeleteSharedPackageContainerOptions : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_ForceAppShutdown(
+                        boolean* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_ForceAppShutdown(
+                        boolean value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_AllUsers(
+                        boolean* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_AllUsers(
+                        boolean value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IDeleteSharedPackageContainerOptions = _uuidof(IDeleteSharedPackageContainerOptions);
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions_INTERFACE_DEFINED__) */
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.IDeleteSharedPackageContainerResult
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.DeleteSharedPackageContainerResult
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_IDeleteSharedPackageContainerResult[] = L"Windows.Management.Deployment.IDeleteSharedPackageContainerResult";
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                MIDL_INTERFACE("35398884-5736-517b-85bc-e598c81ab284")
+                IDeleteSharedPackageContainerResult : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_Status(
+                        ABI::Windows::Management::Deployment::SharedPackageContainerOperationStatus* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_ExtendedError(
+                        HRESULT* value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IDeleteSharedPackageContainerResult = _uuidof(IDeleteSharedPackageContainerResult);
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult_INTERFACE_DEFINED__) */
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
  * Interface Windows.Management.Deployment.IDeploymentResult
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -1846,6 +2967,90 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIDeploymentResult2;
 #endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIDeploymentResult2_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x40000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.IFindSharedPackageContainerOptions
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.FindSharedPackageContainerOptions
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_IFindSharedPackageContainerOptions[] = L"Windows.Management.Deployment.IFindSharedPackageContainerOptions";
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                MIDL_INTERFACE("b40fc8fe-8384-54cc-817d-ae09d3b6a606")
+                IFindSharedPackageContainerOptions : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_Name(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_Name(
+                        HSTRING value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_PackageFamilyName(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_PackageFamilyName(
+                        HSTRING value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IFindSharedPackageContainerOptions = _uuidof(IFindSharedPackageContainerOptions);
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions_INTERFACE_DEFINED__) */
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.IPackageAllUserProvisioningOptions
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.PackageAllUserProvisioningOptions
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_IPackageAllUserProvisioningOptions[] = L"Windows.Management.Deployment.IPackageAllUserProvisioningOptions";
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                MIDL_INTERFACE("da35aa22-1de0-5d3e-99ff-d24f3118bf5e")
+                IPackageAllUserProvisioningOptions : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_OptionalPackageFamilyNames(
+                        __FIVector_1_HSTRING** value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_ProjectionOrderPackageFamilyNames(
+                        __FIVector_1_HSTRING** value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IPackageAllUserProvisioningOptions = _uuidof(IPackageAllUserProvisioningOptions);
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *
@@ -1955,6 +3160,44 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIPackageManager;
 #endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIPackageManager_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.IPackageManager10
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.PackageManager
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_IPackageManager10[] = L"Windows.Management.Deployment.IPackageManager10";
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                MIDL_INTERFACE("a7d7d07e-2e66-4093-aed5-e093ed87b3bb")
+                IPackageManager10 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE ProvisionPackageForAllUsersWithOptionsAsync(
+                        HSTRING mainPackageFamilyName,
+                        ABI::Windows::Management::Deployment::IPackageAllUserProvisioningOptions* options,
+                        __FIAsyncOperationWithProgress_2_Windows__CManagement__CDeployment__CDeploymentResult_Windows__CManagement__CDeployment__CDeploymentProgress** operation
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IPackageManager10 = _uuidof(IPackageManager10);
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *
@@ -2813,6 +4056,226 @@ EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIRegisterPackag
 
 /*
  *
+ * Interface Windows.Management.Deployment.ISharedPackageContainer
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.SharedPackageContainer
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_ISharedPackageContainer[] = L"Windows.Management.Deployment.ISharedPackageContainer";
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                MIDL_INTERFACE("177f1aa9-151e-5ef7-b1d9-2fba0b4b0d17")
+                ISharedPackageContainer : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_Name(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_Id(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE GetMembers(
+                        __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember** result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE RemovePackageFamily(
+                        HSTRING packageFamilyName,
+                        ABI::Windows::Management::Deployment::IUpdateSharedPackageContainerOptions* options,
+                        ABI::Windows::Management::Deployment::IUpdateSharedPackageContainerResult** result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE ResetData(
+                        ABI::Windows::Management::Deployment::IUpdateSharedPackageContainerResult** result
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_ISharedPackageContainer = _uuidof(ISharedPackageContainer);
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer_INTERFACE_DEFINED__) */
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.ISharedPackageContainerManager
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.SharedPackageContainerManager
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_ISharedPackageContainerManager[] = L"Windows.Management.Deployment.ISharedPackageContainerManager";
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                MIDL_INTERFACE("be353068-1ef7-5ac8-ab3f-0b9f612f0274")
+                ISharedPackageContainerManager : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE CreateContainer(
+                        HSTRING name,
+                        ABI::Windows::Management::Deployment::ICreateSharedPackageContainerOptions* options,
+                        ABI::Windows::Management::Deployment::ICreateSharedPackageContainerResult** result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE DeleteContainer(
+                        HSTRING id,
+                        ABI::Windows::Management::Deployment::IDeleteSharedPackageContainerOptions* options,
+                        ABI::Windows::Management::Deployment::IDeleteSharedPackageContainerResult** result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE GetContainer(
+                        HSTRING id,
+                        ABI::Windows::Management::Deployment::ISharedPackageContainer** result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE FindContainers(
+                        __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer** result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE FindContainersWithOptions(
+                        ABI::Windows::Management::Deployment::IFindSharedPackageContainerOptions* options,
+                        __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer** result
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_ISharedPackageContainerManager = _uuidof(ISharedPackageContainerManager);
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager_INTERFACE_DEFINED__) */
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.ISharedPackageContainerManagerStatics
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.SharedPackageContainerManager
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_ISharedPackageContainerManagerStatics[] = L"Windows.Management.Deployment.ISharedPackageContainerManagerStatics";
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                MIDL_INTERFACE("2ef56348-838a-5f55-a89e-1198a2c627e6")
+                ISharedPackageContainerManagerStatics : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE GetDefault(
+                        ABI::Windows::Management::Deployment::ISharedPackageContainerManager** result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE GetForUser(
+                        HSTRING userSid,
+                        ABI::Windows::Management::Deployment::ISharedPackageContainerManager** result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE GetForProvisioning(
+                        ABI::Windows::Management::Deployment::ISharedPackageContainerManager** result
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_ISharedPackageContainerManagerStatics = _uuidof(ISharedPackageContainerManagerStatics);
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.ISharedPackageContainerMember
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.SharedPackageContainerMember
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_ISharedPackageContainerMember[] = L"Windows.Management.Deployment.ISharedPackageContainerMember";
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                MIDL_INTERFACE("fe0d0438-43c9-5426-b89c-f79bf85ddff4")
+                ISharedPackageContainerMember : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_PackageFamilyName(
+                        HSTRING* value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_ISharedPackageContainerMember = _uuidof(ISharedPackageContainerMember);
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember_INTERFACE_DEFINED__) */
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.ISharedPackageContainerMemberFactory
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.SharedPackageContainerMember
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_ISharedPackageContainerMemberFactory[] = L"Windows.Management.Deployment.ISharedPackageContainerMemberFactory";
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                MIDL_INTERFACE("49b0ceeb-498f-5a62-b738-b3ca0d436704")
+                ISharedPackageContainerMemberFactory : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE CreateInstance(
+                        HSTRING packageFamilyName,
+                        ABI::Windows::Management::Deployment::ISharedPackageContainerMember** value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_ISharedPackageContainerMemberFactory = _uuidof(ISharedPackageContainerMemberFactory);
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory_INTERFACE_DEFINED__) */
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
  * Interface Windows.Management.Deployment.IStagePackageOptions
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 10.0
@@ -2912,6 +4375,90 @@ EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOp
 
 /*
  *
+ * Interface Windows.Management.Deployment.IUpdateSharedPackageContainerOptions
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.UpdateSharedPackageContainerOptions
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_IUpdateSharedPackageContainerOptions[] = L"Windows.Management.Deployment.IUpdateSharedPackageContainerOptions";
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                MIDL_INTERFACE("80672e83-7194-59f9-b5b9-daa5375f130a")
+                IUpdateSharedPackageContainerOptions : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_ForceAppShutdown(
+                        boolean* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_ForceAppShutdown(
+                        boolean value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_RequirePackagesPresent(
+                        boolean* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_RequirePackagesPresent(
+                        boolean value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IUpdateSharedPackageContainerOptions = _uuidof(IUpdateSharedPackageContainerOptions);
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions_INTERFACE_DEFINED__) */
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.IUpdateSharedPackageContainerResult
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.UpdateSharedPackageContainerResult
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_IUpdateSharedPackageContainerResult[] = L"Windows.Management.Deployment.IUpdateSharedPackageContainerResult";
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                MIDL_INTERFACE("aa407df7-c72d-5458-aea3-4645b6a8ee99")
+                IUpdateSharedPackageContainerResult : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_Status(
+                        ABI::Windows::Management::Deployment::SharedPackageContainerOperationStatus* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_ExtendedError(
+                        HRESULT* value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IUpdateSharedPackageContainerResult = _uuidof(IUpdateSharedPackageContainerResult);
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult_INTERFACE_DEFINED__) */
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
  * Class Windows.Management.Deployment.AddPackageOptions
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 10.0
@@ -2931,6 +4478,143 @@ EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOp
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Management_Deployment_AddPackageOptions[] = L"Windows.Management.Deployment.AddPackageOptions";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
+
+/*
+ *
+ * Class Windows.Management.Deployment.AppInstallerManager
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.Management.Deployment.IAppInstallerManagerStatics interface starting with version 13.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Management.Deployment.IAppInstallerManager ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#ifndef RUNTIMECLASS_Windows_Management_Deployment_AppInstallerManager_DEFINED
+#define RUNTIMECLASS_Windows_Management_Deployment_AppInstallerManager_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Management_Deployment_AppInstallerManager[] = L"Windows.Management.Deployment.AppInstallerManager";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Class Windows.Management.Deployment.AutoUpdateSettingsOptions
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * RuntimeClass can be activated.
+ *   Type can be activated via RoActivateInstance starting with version 13.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.Management.Deployment.IAutoUpdateSettingsOptionsStatics interface starting with version 13.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Management.Deployment.IAutoUpdateSettingsOptions ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#ifndef RUNTIMECLASS_Windows_Management_Deployment_AutoUpdateSettingsOptions_DEFINED
+#define RUNTIMECLASS_Windows_Management_Deployment_AutoUpdateSettingsOptions_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Management_Deployment_AutoUpdateSettingsOptions[] = L"Windows.Management.Deployment.AutoUpdateSettingsOptions";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Class Windows.Management.Deployment.CreateSharedPackageContainerOptions
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * RuntimeClass can be activated.
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Management.Deployment.SharedPackageContainerContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Management.Deployment.ICreateSharedPackageContainerOptions ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#ifndef RUNTIMECLASS_Windows_Management_Deployment_CreateSharedPackageContainerOptions_DEFINED
+#define RUNTIMECLASS_Windows_Management_Deployment_CreateSharedPackageContainerOptions_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Management_Deployment_CreateSharedPackageContainerOptions[] = L"Windows.Management.Deployment.CreateSharedPackageContainerOptions";
+#endif
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Class Windows.Management.Deployment.CreateSharedPackageContainerResult
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.Management.Deployment.ICreateSharedPackageContainerResult ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#ifndef RUNTIMECLASS_Windows_Management_Deployment_CreateSharedPackageContainerResult_DEFINED
+#define RUNTIMECLASS_Windows_Management_Deployment_CreateSharedPackageContainerResult_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Management_Deployment_CreateSharedPackageContainerResult[] = L"Windows.Management.Deployment.CreateSharedPackageContainerResult";
+#endif
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Class Windows.Management.Deployment.DeleteSharedPackageContainerOptions
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * RuntimeClass can be activated.
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Management.Deployment.SharedPackageContainerContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Management.Deployment.IDeleteSharedPackageContainerOptions ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#ifndef RUNTIMECLASS_Windows_Management_Deployment_DeleteSharedPackageContainerOptions_DEFINED
+#define RUNTIMECLASS_Windows_Management_Deployment_DeleteSharedPackageContainerOptions_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Management_Deployment_DeleteSharedPackageContainerOptions[] = L"Windows.Management.Deployment.DeleteSharedPackageContainerOptions";
+#endif
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Class Windows.Management.Deployment.DeleteSharedPackageContainerResult
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.Management.Deployment.IDeleteSharedPackageContainerResult ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#ifndef RUNTIMECLASS_Windows_Management_Deployment_DeleteSharedPackageContainerResult_DEFINED
+#define RUNTIMECLASS_Windows_Management_Deployment_DeleteSharedPackageContainerResult_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Management_Deployment_DeleteSharedPackageContainerResult[] = L"Windows.Management.Deployment.DeleteSharedPackageContainerResult";
+#endif
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
 
 /*
  *
@@ -2954,6 +4638,54 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 
 /*
  *
+ * Class Windows.Management.Deployment.FindSharedPackageContainerOptions
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * RuntimeClass can be activated.
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Management.Deployment.SharedPackageContainerContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Management.Deployment.IFindSharedPackageContainerOptions ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#ifndef RUNTIMECLASS_Windows_Management_Deployment_FindSharedPackageContainerOptions_DEFINED
+#define RUNTIMECLASS_Windows_Management_Deployment_FindSharedPackageContainerOptions_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Management_Deployment_FindSharedPackageContainerOptions[] = L"Windows.Management.Deployment.FindSharedPackageContainerOptions";
+#endif
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Class Windows.Management.Deployment.PackageAllUserProvisioningOptions
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * RuntimeClass can be activated.
+ *   Type can be activated via RoActivateInstance starting with version 13.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Management.Deployment.IPackageAllUserProvisioningOptions ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#ifndef RUNTIMECLASS_Windows_Management_Deployment_PackageAllUserProvisioningOptions_DEFINED
+#define RUNTIMECLASS_Windows_Management_Deployment_PackageAllUserProvisioningOptions_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Management_Deployment_PackageAllUserProvisioningOptions[] = L"Windows.Management.Deployment.PackageAllUserProvisioningOptions";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
  * Class Windows.Management.Deployment.PackageManager
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -2971,6 +4703,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *    Windows.Management.Deployment.IPackageManager7
  *    Windows.Management.Deployment.IPackageManager8
  *    Windows.Management.Deployment.IPackageManager9
+ *    Windows.Management.Deployment.IPackageManager10
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -3070,6 +4803,73 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 
 /*
  *
+ * Class Windows.Management.Deployment.SharedPackageContainer
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.Management.Deployment.ISharedPackageContainer ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#ifndef RUNTIMECLASS_Windows_Management_Deployment_SharedPackageContainer_DEFINED
+#define RUNTIMECLASS_Windows_Management_Deployment_SharedPackageContainer_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Management_Deployment_SharedPackageContainer[] = L"Windows.Management.Deployment.SharedPackageContainer";
+#endif
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Class Windows.Management.Deployment.SharedPackageContainerManager
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.Management.Deployment.ISharedPackageContainerManagerStatics interface starting with version 1.0 of the Windows.Management.Deployment.SharedPackageContainerContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Management.Deployment.ISharedPackageContainerManager ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#ifndef RUNTIMECLASS_Windows_Management_Deployment_SharedPackageContainerManager_DEFINED
+#define RUNTIMECLASS_Windows_Management_Deployment_SharedPackageContainerManager_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Management_Deployment_SharedPackageContainerManager[] = L"Windows.Management.Deployment.SharedPackageContainerManager";
+#endif
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Class Windows.Management.Deployment.SharedPackageContainerMember
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * RuntimeClass can be activated.
+ *   Type can be activated via the Windows.Management.Deployment.ISharedPackageContainerMemberFactory interface starting with version 1.0 of the Windows.Management.Deployment.SharedPackageContainerContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Management.Deployment.ISharedPackageContainerMember ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#ifndef RUNTIMECLASS_Windows_Management_Deployment_SharedPackageContainerMember_DEFINED
+#define RUNTIMECLASS_Windows_Management_Deployment_SharedPackageContainerMember_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Management_Deployment_SharedPackageContainerMember[] = L"Windows.Management.Deployment.SharedPackageContainerMember";
+#endif
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
  * Class Windows.Management.Deployment.StagePackageOptions
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 10.0
@@ -3090,6 +4890,49 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
 
+/*
+ *
+ * Class Windows.Management.Deployment.UpdateSharedPackageContainerOptions
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * RuntimeClass can be activated.
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Management.Deployment.SharedPackageContainerContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Management.Deployment.IUpdateSharedPackageContainerOptions ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#ifndef RUNTIMECLASS_Windows_Management_Deployment_UpdateSharedPackageContainerOptions_DEFINED
+#define RUNTIMECLASS_Windows_Management_Deployment_UpdateSharedPackageContainerOptions_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Management_Deployment_UpdateSharedPackageContainerOptions[] = L"Windows.Management.Deployment.UpdateSharedPackageContainerOptions";
+#endif
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Class Windows.Management.Deployment.UpdateSharedPackageContainerResult
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.Management.Deployment.IUpdateSharedPackageContainerResult ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#ifndef RUNTIMECLASS_Windows_Management_Deployment_UpdateSharedPackageContainerResult_DEFINED
+#define RUNTIMECLASS_Windows_Management_Deployment_UpdateSharedPackageContainerResult_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Management_Deployment_UpdateSharedPackageContainerResult[] = L"Windows.Management.Deployment.UpdateSharedPackageContainerResult";
+#endif
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
 #else // !defined(__cplusplus)
 /* Forward Declarations */
 #ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions_FWD_DEFINED__
@@ -3097,6 +4940,54 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 typedef interface __x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions __x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions;
 
 #endif // ____x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager;
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics;
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions;
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics;
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions;
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult;
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions;
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult;
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIDeploymentResult_FWD_DEFINED__
 #define ____x_ABI_CWindows_CManagement_CDeployment_CIDeploymentResult_FWD_DEFINED__
@@ -3110,11 +5001,29 @@ typedef interface __x_ABI_CWindows_CManagement_CDeployment_CIDeploymentResult2 _
 
 #endif // ____x_ABI_CWindows_CManagement_CDeployment_CIDeploymentResult2_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions __x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions;
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions __x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions;
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIPackageManager_FWD_DEFINED__
 #define ____x_ABI_CWindows_CManagement_CDeployment_CIPackageManager_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CManagement_CDeployment_CIPackageManager __x_ABI_CWindows_CManagement_CDeployment_CIPackageManager;
 
 #endif // ____x_ABI_CWindows_CManagement_CDeployment_CIPackageManager_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10 __x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10;
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIPackageManager2_FWD_DEFINED__
 #define ____x_ABI_CWindows_CManagement_CDeployment_CIPackageManager2_FWD_DEFINED__
@@ -3194,11 +5103,53 @@ typedef interface __x_ABI_CWindows_CManagement_CDeployment_CIRegisterPackageOpti
 
 #endif // ____x_ABI_CWindows_CManagement_CDeployment_CIRegisterPackageOptions_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer;
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager;
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics;
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember;
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory;
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions_FWD_DEFINED__
 #define ____x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions __x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions;
 
 #endif // ____x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions;
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult;
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult_FWD_DEFINED__
 
 // Parameterized interface forward declarations (C)
 
@@ -4587,6 +6538,296 @@ interface __FIIterable_1_Windows__CManagement__CDeployment__CPackageUserInformat
 #endif // ____FIIterable_1_Windows__CManagement__CDeployment__CPackageUserInformation_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer_INTERFACE_DEFINED__)
+#define ____FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer_INTERFACE_DEFINED__
+
+typedef interface __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer;
+
+typedef struct __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Current)(__FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer** result);
+    HRESULT (STDMETHODCALLTYPE* get_HasCurrent)(__FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* MoveNext)(__FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* GetMany)(__FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        UINT32 itemsLength,
+        __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer** items,
+        UINT32* result);
+
+    END_INTERFACE
+} __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerVtbl;
+
+interface __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer
+{
+    CONST_VTBL struct __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer_get_Current(This, result) \
+    ((This)->lpVtbl->get_Current(This, result))
+
+#define __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer_get_HasCurrent(This, result) \
+    ((This)->lpVtbl->get_HasCurrent(This, result))
+
+#define __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer_MoveNext(This, result) \
+    ((This)->lpVtbl->MoveNext(This, result))
+
+#define __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer_GetMany(This, itemsLength, items, result) \
+    ((This)->lpVtbl->GetMany(This, itemsLength, items, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer_INTERFACE_DEFINED__
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainer_INTERFACE_DEFINED__)
+#define ____FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainer_INTERFACE_DEFINED__
+
+typedef interface __FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainer __FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainer;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainer;
+
+typedef struct __FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* First)(__FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainer** result);
+
+    END_INTERFACE
+} __FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerVtbl;
+
+interface __FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainer
+{
+    CONST_VTBL struct __FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainer_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainer_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainer_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainer_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainer_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainer_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainer_First(This, result) \
+    ((This)->lpVtbl->First(This, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainer_INTERFACE_DEFINED__
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_INTERFACE_DEFINED__)
+#define ____FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_INTERFACE_DEFINED__
+
+typedef interface __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember;
+
+typedef struct __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMemberVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Current)(__FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember** result);
+    HRESULT (STDMETHODCALLTYPE* get_HasCurrent)(__FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* MoveNext)(__FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* GetMany)(__FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        UINT32 itemsLength,
+        __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember** items,
+        UINT32* result);
+
+    END_INTERFACE
+} __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMemberVtbl;
+
+interface __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember
+{
+    CONST_VTBL struct __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMemberVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_get_Current(This, result) \
+    ((This)->lpVtbl->get_Current(This, result))
+
+#define __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_get_HasCurrent(This, result) \
+    ((This)->lpVtbl->get_HasCurrent(This, result))
+
+#define __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_MoveNext(This, result) \
+    ((This)->lpVtbl->MoveNext(This, result))
+
+#define __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_GetMany(This, itemsLength, items, result) \
+    ((This)->lpVtbl->GetMany(This, itemsLength, items, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_INTERFACE_DEFINED__
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_INTERFACE_DEFINED__)
+#define ____FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_INTERFACE_DEFINED__
+
+typedef interface __FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember __FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember;
+
+typedef struct __FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerMemberVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* First)(__FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        __FIIterator_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember** result);
+
+    END_INTERFACE
+} __FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerMemberVtbl;
+
+interface __FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember
+{
+    CONST_VTBL struct __FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerMemberVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_First(This, result) \
+    ((This)->lpVtbl->First(This, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIIterable_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_INTERFACE_DEFINED__
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
 #if !defined(____FIVectorView_1_HSTRING_INTERFACE_DEFINED__)
 #define ____FIVectorView_1_HSTRING_INTERFACE_DEFINED__
 
@@ -4839,6 +7080,176 @@ interface __FIVectorView_1_Windows__CFoundation__CUri
 
 #endif // ____FIVectorView_1_Windows__CFoundation__CUri_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer_INTERFACE_DEFINED__)
+#define ____FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer_INTERFACE_DEFINED__
+
+typedef interface __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer;
+
+typedef struct __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* GetAt)(__FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        UINT32 index,
+        __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer** result);
+    HRESULT (STDMETHODCALLTYPE* get_Size)(__FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        UINT32* result);
+    HRESULT (STDMETHODCALLTYPE* IndexOf)(__FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer* value,
+        UINT32* index,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* GetMany)(__FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        UINT32 startIndex,
+        UINT32 itemsLength,
+        __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer** items,
+        UINT32* result);
+
+    END_INTERFACE
+} __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerVtbl;
+
+interface __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer
+{
+    CONST_VTBL struct __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer_GetAt(This, index, result) \
+    ((This)->lpVtbl->GetAt(This, index, result))
+
+#define __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer_get_Size(This, result) \
+    ((This)->lpVtbl->get_Size(This, result))
+
+#define __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer_IndexOf(This, value, index, result) \
+    ((This)->lpVtbl->IndexOf(This, value, index, result))
+
+#define __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer_GetMany(This, startIndex, itemsLength, items, result) \
+    ((This)->lpVtbl->GetMany(This, startIndex, itemsLength, items, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer_INTERFACE_DEFINED__
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_INTERFACE_DEFINED__)
+#define ____FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_INTERFACE_DEFINED__
+
+typedef interface __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember;
+
+typedef struct __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMemberVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* GetAt)(__FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        UINT32 index,
+        __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember** result);
+    HRESULT (STDMETHODCALLTYPE* get_Size)(__FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        UINT32* result);
+    HRESULT (STDMETHODCALLTYPE* IndexOf)(__FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember* value,
+        UINT32* index,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* GetMany)(__FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        UINT32 startIndex,
+        UINT32 itemsLength,
+        __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember** items,
+        UINT32* result);
+
+    END_INTERFACE
+} __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMemberVtbl;
+
+interface __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember
+{
+    CONST_VTBL struct __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMemberVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_GetAt(This, index, result) \
+    ((This)->lpVtbl->GetAt(This, index, result))
+
+#define __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_get_Size(This, result) \
+    ((This)->lpVtbl->get_Size(This, result))
+
+#define __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_IndexOf(This, value, index, result) \
+    ((This)->lpVtbl->IndexOf(This, value, index, result))
+
+#define __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_GetMany(This, startIndex, itemsLength, items, result) \
+    ((This)->lpVtbl->GetMany(This, startIndex, itemsLength, items, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_INTERFACE_DEFINED__
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
 
 #if !defined(____FIVector_1_HSTRING_INTERFACE_DEFINED__)
 #define ____FIVector_1_HSTRING_INTERFACE_DEFINED__
@@ -5216,7 +7627,269 @@ interface __FIVector_1_Windows__CFoundation__CUri
 #endif // ____FIVector_1_Windows__CFoundation__CUri_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer_INTERFACE_DEFINED__)
+#define ____FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer_INTERFACE_DEFINED__
+
+typedef interface __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer;
+
+typedef struct __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* GetAt)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        UINT32 index,
+        __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer** result);
+    HRESULT (STDMETHODCALLTYPE* get_Size)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        UINT32* result);
+    HRESULT (STDMETHODCALLTYPE* GetView)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainer** result);
+    HRESULT (STDMETHODCALLTYPE* IndexOf)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer* value,
+        UINT32* index,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* SetAt)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        UINT32 index,
+        __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer* value);
+    HRESULT (STDMETHODCALLTYPE* InsertAt)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        UINT32 index,
+        __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer* value);
+    HRESULT (STDMETHODCALLTYPE* RemoveAt)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        UINT32 index);
+    HRESULT (STDMETHODCALLTYPE* Append)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer* value);
+    HRESULT (STDMETHODCALLTYPE* RemoveAtEnd)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This);
+    HRESULT (STDMETHODCALLTYPE* Clear)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This);
+    HRESULT (STDMETHODCALLTYPE* GetMany)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        UINT32 startIndex,
+        UINT32 itemsLength,
+        __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer** items,
+        UINT32* result);
+    HRESULT (STDMETHODCALLTYPE* ReplaceAll)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer* This,
+        UINT32 itemsLength,
+        __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer** items);
+
+    END_INTERFACE
+} __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerVtbl;
+
+interface __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer
+{
+    CONST_VTBL struct __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer_GetAt(This, index, result) \
+    ((This)->lpVtbl->GetAt(This, index, result))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer_get_Size(This, result) \
+    ((This)->lpVtbl->get_Size(This, result))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer_GetView(This, result) \
+    ((This)->lpVtbl->GetView(This, result))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer_IndexOf(This, value, index, result) \
+    ((This)->lpVtbl->IndexOf(This, value, index, result))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer_SetAt(This, index, value) \
+    ((This)->lpVtbl->SetAt(This, index, value))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer_InsertAt(This, index, value) \
+    ((This)->lpVtbl->InsertAt(This, index, value))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer_RemoveAt(This, index) \
+    ((This)->lpVtbl->RemoveAt(This, index))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer_Append(This, value) \
+    ((This)->lpVtbl->Append(This, value))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer_RemoveAtEnd(This) \
+    ((This)->lpVtbl->RemoveAtEnd(This))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer_Clear(This) \
+    ((This)->lpVtbl->Clear(This))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer_GetMany(This, startIndex, itemsLength, items, result) \
+    ((This)->lpVtbl->GetMany(This, startIndex, itemsLength, items, result))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer_ReplaceAll(This, itemsLength, items) \
+    ((This)->lpVtbl->ReplaceAll(This, itemsLength, items))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer_INTERFACE_DEFINED__
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_INTERFACE_DEFINED__)
+#define ____FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_INTERFACE_DEFINED__
+
+typedef interface __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember;
+
+typedef struct __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMemberVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* GetAt)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        UINT32 index,
+        __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember** result);
+    HRESULT (STDMETHODCALLTYPE* get_Size)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        UINT32* result);
+    HRESULT (STDMETHODCALLTYPE* GetView)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        __FIVectorView_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember** result);
+    HRESULT (STDMETHODCALLTYPE* IndexOf)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember* value,
+        UINT32* index,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* SetAt)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        UINT32 index,
+        __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember* value);
+    HRESULT (STDMETHODCALLTYPE* InsertAt)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        UINT32 index,
+        __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember* value);
+    HRESULT (STDMETHODCALLTYPE* RemoveAt)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        UINT32 index);
+    HRESULT (STDMETHODCALLTYPE* Append)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember* value);
+    HRESULT (STDMETHODCALLTYPE* RemoveAtEnd)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This);
+    HRESULT (STDMETHODCALLTYPE* Clear)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This);
+    HRESULT (STDMETHODCALLTYPE* GetMany)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        UINT32 startIndex,
+        UINT32 itemsLength,
+        __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember** items,
+        UINT32* result);
+    HRESULT (STDMETHODCALLTYPE* ReplaceAll)(__FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember* This,
+        UINT32 itemsLength,
+        __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember** items);
+
+    END_INTERFACE
+} __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMemberVtbl;
+
+interface __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember
+{
+    CONST_VTBL struct __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMemberVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_GetAt(This, index, result) \
+    ((This)->lpVtbl->GetAt(This, index, result))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_get_Size(This, result) \
+    ((This)->lpVtbl->get_Size(This, result))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_GetView(This, result) \
+    ((This)->lpVtbl->GetView(This, result))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_IndexOf(This, value, index, result) \
+    ((This)->lpVtbl->IndexOf(This, value, index, result))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_SetAt(This, index, value) \
+    ((This)->lpVtbl->SetAt(This, index, value))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_InsertAt(This, index, value) \
+    ((This)->lpVtbl->InsertAt(This, index, value))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_RemoveAt(This, index) \
+    ((This)->lpVtbl->RemoveAt(This, index))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_Append(This, value) \
+    ((This)->lpVtbl->Append(This, value))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_RemoveAtEnd(This) \
+    ((This)->lpVtbl->RemoveAtEnd(This))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_Clear(This) \
+    ((This)->lpVtbl->Clear(This))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_GetMany(This, startIndex, itemsLength, items, result) \
+    ((This)->lpVtbl->GetMany(This, startIndex, itemsLength, items, result))
+
+#define __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_ReplaceAll(This, itemsLength, items) \
+    ((This)->lpVtbl->ReplaceAll(This, itemsLength, items))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember_INTERFACE_DEFINED__
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CIAppInstallerInfo_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CIAppInstallerInfo_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CIAppInstallerInfo __x_ABI_CWindows_CApplicationModel_CIAppInstallerInfo;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CIAppInstallerInfo_FWD_DEFINED__
+
 typedef enum __x_ABI_CWindows_CApplicationModel_CPackageContentGroupState __x_ABI_CWindows_CApplicationModel_CPackageContentGroupState;
+
+typedef struct __x_ABI_CWindows_CApplicationModel_CPackageVersion __x_ABI_CWindows_CApplicationModel_CPackageVersion;
+
+typedef struct __x_ABI_CWindows_CFoundation_CDateTime __x_ABI_CWindows_CFoundation_CDateTime;
 
 #ifndef ____x_ABI_CWindows_CFoundation_CIAsyncAction_FWD_DEFINED__
 #define ____x_ABI_CWindows_CFoundation_CIAsyncAction_FWD_DEFINED__
@@ -5241,6 +7914,10 @@ typedef enum __x_ABI_CWindows_CManagement_CDeployment_CPackageStubPreference __x
 typedef enum __x_ABI_CWindows_CManagement_CDeployment_CPackageTypes __x_ABI_CWindows_CManagement_CDeployment_CPackageTypes;
 
 typedef enum __x_ABI_CWindows_CManagement_CDeployment_CRemovalOptions __x_ABI_CWindows_CManagement_CDeployment_CRemovalOptions;
+
+typedef enum __x_ABI_CWindows_CManagement_CDeployment_CSharedPackageContainerCreationCollisionOptions __x_ABI_CWindows_CManagement_CDeployment_CSharedPackageContainerCreationCollisionOptions;
+
+typedef enum __x_ABI_CWindows_CManagement_CDeployment_CSharedPackageContainerOperationStatus __x_ABI_CWindows_CManagement_CDeployment_CSharedPackageContainerOperationStatus;
 
 typedef enum __x_ABI_CWindows_CManagement_CDeployment_CStubPackageOption __x_ABI_CWindows_CManagement_CDeployment_CStubPackageOption;
 
@@ -5429,6 +8106,41 @@ enum __x_ABI_CWindows_CManagement_CDeployment_CRemovalOptions
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
 };
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Struct Windows.Management.Deployment.SharedPackageContainerCreationCollisionOptions
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+enum __x_ABI_CWindows_CManagement_CDeployment_CSharedPackageContainerCreationCollisionOptions
+{
+    SharedPackageContainerCreationCollisionOptions_FailIfExists = 0,
+    SharedPackageContainerCreationCollisionOptions_MergeWithExisting = 1,
+    SharedPackageContainerCreationCollisionOptions_ReplaceExisting = 2,
+};
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Struct Windows.Management.Deployment.SharedPackageContainerOperationStatus
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+enum __x_ABI_CWindows_CManagement_CDeployment_CSharedPackageContainerOperationStatus
+{
+    SharedPackageContainerOperationStatus_Success = 0,
+    SharedPackageContainerOperationStatus_BlockedByPolicy = 1,
+    SharedPackageContainerOperationStatus_AlreadyExists = 2,
+    SharedPackageContainerOperationStatus_PackageFamilyExistsInAnotherContainer = 3,
+    SharedPackageContainerOperationStatus_NotFound = 4,
+    SharedPackageContainerOperationStatus_UnknownFailure = 5,
+};
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
 
 /*
  *
@@ -5678,6 +8390,731 @@ EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOpti
 
 /*
  *
+ * Interface Windows.Management.Deployment.IAppInstallerManager
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.AppInstallerManager
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_IAppInstallerManager[] = L"Windows.Management.Deployment.IAppInstallerManager";
+typedef struct __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* SetAutoUpdateSettings)(__x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager* This,
+        HSTRING packageFamilyName,
+        __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions* appInstallerInfo);
+    HRESULT (STDMETHODCALLTYPE* ClearAutoUpdateSettings)(__x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager* This,
+        HSTRING packageFamilyName);
+    HRESULT (STDMETHODCALLTYPE* PauseAutoUpdatesUntil)(__x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager* This,
+        HSTRING packageFamilyName,
+        struct __x_ABI_CWindows_CFoundation_CDateTime dateTime);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerVtbl;
+
+interface __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager
+{
+    CONST_VTBL struct __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager_SetAutoUpdateSettings(This, packageFamilyName, appInstallerInfo) \
+    ((This)->lpVtbl->SetAutoUpdateSettings(This, packageFamilyName, appInstallerInfo))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager_ClearAutoUpdateSettings(This, packageFamilyName) \
+    ((This)->lpVtbl->ClearAutoUpdateSettings(This, packageFamilyName))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager_PauseAutoUpdatesUntil(This, packageFamilyName, dateTime) \
+    ((This)->lpVtbl->PauseAutoUpdatesUntil(This, packageFamilyName, dateTime))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.IAppInstallerManagerStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.AppInstallerManager
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_IAppInstallerManagerStatics[] = L"Windows.Management.Deployment.IAppInstallerManagerStatics";
+typedef struct __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStaticsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* GetDefault)(__x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics* This,
+        __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager** result);
+    HRESULT (STDMETHODCALLTYPE* GetForSystem)(__x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics* This,
+        __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager** result);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStaticsVtbl;
+
+interface __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics
+{
+    CONST_VTBL struct __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStaticsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics_GetDefault(This, result) \
+    ((This)->lpVtbl->GetDefault(This, result))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics_GetForSystem(This, result) \
+    ((This)->lpVtbl->GetForSystem(This, result))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManagerStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.IAutoUpdateSettingsOptions
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.AutoUpdateSettingsOptions
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_IAutoUpdateSettingsOptions[] = L"Windows.Management.Deployment.IAutoUpdateSettingsOptions";
+typedef struct __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Version)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions* This,
+        struct __x_ABI_CWindows_CApplicationModel_CPackageVersion* value);
+    HRESULT (STDMETHODCALLTYPE* put_Version)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions* This,
+        struct __x_ABI_CWindows_CApplicationModel_CPackageVersion value);
+    HRESULT (STDMETHODCALLTYPE* get_AppInstallerUri)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions* This,
+        __x_ABI_CWindows_CFoundation_CIUriRuntimeClass** value);
+    HRESULT (STDMETHODCALLTYPE* put_AppInstallerUri)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions* This,
+        __x_ABI_CWindows_CFoundation_CIUriRuntimeClass* value);
+    HRESULT (STDMETHODCALLTYPE* get_OnLaunch)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions* This,
+        boolean* value);
+    HRESULT (STDMETHODCALLTYPE* put_OnLaunch)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions* This,
+        boolean value);
+    HRESULT (STDMETHODCALLTYPE* get_HoursBetweenUpdateChecks)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions* This,
+        UINT32* value);
+    HRESULT (STDMETHODCALLTYPE* put_HoursBetweenUpdateChecks)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions* This,
+        UINT32 value);
+    HRESULT (STDMETHODCALLTYPE* get_ShowPrompt)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions* This,
+        boolean* value);
+    HRESULT (STDMETHODCALLTYPE* put_ShowPrompt)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions* This,
+        boolean value);
+    HRESULT (STDMETHODCALLTYPE* get_UpdateBlocksActivation)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions* This,
+        boolean* value);
+    HRESULT (STDMETHODCALLTYPE* put_UpdateBlocksActivation)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions* This,
+        boolean value);
+    HRESULT (STDMETHODCALLTYPE* get_AutomaticBackgroundTask)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions* This,
+        boolean* value);
+    HRESULT (STDMETHODCALLTYPE* put_AutomaticBackgroundTask)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions* This,
+        boolean value);
+    HRESULT (STDMETHODCALLTYPE* get_ForceUpdateFromAnyVersion)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions* This,
+        boolean* value);
+    HRESULT (STDMETHODCALLTYPE* put_ForceUpdateFromAnyVersion)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions* This,
+        boolean value);
+    HRESULT (STDMETHODCALLTYPE* get_IsAutoRepairEnabled)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions* This,
+        boolean* value);
+    HRESULT (STDMETHODCALLTYPE* put_IsAutoRepairEnabled)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions* This,
+        boolean value);
+    HRESULT (STDMETHODCALLTYPE* get_UpdateUris)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions* This,
+        __FIVector_1_Windows__CFoundation__CUri** value);
+    HRESULT (STDMETHODCALLTYPE* get_RepairUris)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions* This,
+        __FIVector_1_Windows__CFoundation__CUri** value);
+    HRESULT (STDMETHODCALLTYPE* get_DependencyPackageUris)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions* This,
+        __FIVector_1_Windows__CFoundation__CUri** value);
+    HRESULT (STDMETHODCALLTYPE* get_OptionalPackageUris)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions* This,
+        __FIVector_1_Windows__CFoundation__CUri** value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsVtbl;
+
+interface __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions
+{
+    CONST_VTBL struct __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_get_Version(This, value) \
+    ((This)->lpVtbl->get_Version(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_put_Version(This, value) \
+    ((This)->lpVtbl->put_Version(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_get_AppInstallerUri(This, value) \
+    ((This)->lpVtbl->get_AppInstallerUri(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_put_AppInstallerUri(This, value) \
+    ((This)->lpVtbl->put_AppInstallerUri(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_get_OnLaunch(This, value) \
+    ((This)->lpVtbl->get_OnLaunch(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_put_OnLaunch(This, value) \
+    ((This)->lpVtbl->put_OnLaunch(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_get_HoursBetweenUpdateChecks(This, value) \
+    ((This)->lpVtbl->get_HoursBetweenUpdateChecks(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_put_HoursBetweenUpdateChecks(This, value) \
+    ((This)->lpVtbl->put_HoursBetweenUpdateChecks(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_get_ShowPrompt(This, value) \
+    ((This)->lpVtbl->get_ShowPrompt(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_put_ShowPrompt(This, value) \
+    ((This)->lpVtbl->put_ShowPrompt(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_get_UpdateBlocksActivation(This, value) \
+    ((This)->lpVtbl->get_UpdateBlocksActivation(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_put_UpdateBlocksActivation(This, value) \
+    ((This)->lpVtbl->put_UpdateBlocksActivation(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_get_AutomaticBackgroundTask(This, value) \
+    ((This)->lpVtbl->get_AutomaticBackgroundTask(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_put_AutomaticBackgroundTask(This, value) \
+    ((This)->lpVtbl->put_AutomaticBackgroundTask(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_get_ForceUpdateFromAnyVersion(This, value) \
+    ((This)->lpVtbl->get_ForceUpdateFromAnyVersion(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_put_ForceUpdateFromAnyVersion(This, value) \
+    ((This)->lpVtbl->put_ForceUpdateFromAnyVersion(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_get_IsAutoRepairEnabled(This, value) \
+    ((This)->lpVtbl->get_IsAutoRepairEnabled(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_put_IsAutoRepairEnabled(This, value) \
+    ((This)->lpVtbl->put_IsAutoRepairEnabled(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_get_UpdateUris(This, value) \
+    ((This)->lpVtbl->get_UpdateUris(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_get_RepairUris(This, value) \
+    ((This)->lpVtbl->get_RepairUris(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_get_DependencyPackageUris(This, value) \
+    ((This)->lpVtbl->get_DependencyPackageUris(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_get_OptionalPackageUris(This, value) \
+    ((This)->lpVtbl->get_OptionalPackageUris(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.IAutoUpdateSettingsOptionsStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.AutoUpdateSettingsOptions
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_IAutoUpdateSettingsOptionsStatics[] = L"Windows.Management.Deployment.IAutoUpdateSettingsOptionsStatics";
+typedef struct __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStaticsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* CreateFromAppInstallerInfo)(__x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics* This,
+        __x_ABI_CWindows_CApplicationModel_CIAppInstallerInfo* appInstallerInfo,
+        __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptions** result);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStaticsVtbl;
+
+interface __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics
+{
+    CONST_VTBL struct __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStaticsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics_CreateFromAppInstallerInfo(This, appInstallerInfo, result) \
+    ((This)->lpVtbl->CreateFromAppInstallerInfo(This, appInstallerInfo, result))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIAutoUpdateSettingsOptionsStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.ICreateSharedPackageContainerOptions
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.CreateSharedPackageContainerOptions
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_ICreateSharedPackageContainerOptions[] = L"Windows.Management.Deployment.ICreateSharedPackageContainerOptions";
+typedef struct __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptionsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Members)(__x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions* This,
+        __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember** value);
+    HRESULT (STDMETHODCALLTYPE* get_ForceAppShutdown)(__x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions* This,
+        boolean* value);
+    HRESULT (STDMETHODCALLTYPE* put_ForceAppShutdown)(__x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions* This,
+        boolean value);
+    HRESULT (STDMETHODCALLTYPE* get_CreateCollisionOption)(__x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions* This,
+        enum __x_ABI_CWindows_CManagement_CDeployment_CSharedPackageContainerCreationCollisionOptions* value);
+    HRESULT (STDMETHODCALLTYPE* put_CreateCollisionOption)(__x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions* This,
+        enum __x_ABI_CWindows_CManagement_CDeployment_CSharedPackageContainerCreationCollisionOptions value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptionsVtbl;
+
+interface __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions
+{
+    CONST_VTBL struct __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptionsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions_get_Members(This, value) \
+    ((This)->lpVtbl->get_Members(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions_get_ForceAppShutdown(This, value) \
+    ((This)->lpVtbl->get_ForceAppShutdown(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions_put_ForceAppShutdown(This, value) \
+    ((This)->lpVtbl->put_ForceAppShutdown(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions_get_CreateCollisionOption(This, value) \
+    ((This)->lpVtbl->get_CreateCollisionOption(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions_put_CreateCollisionOption(This, value) \
+    ((This)->lpVtbl->put_CreateCollisionOption(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions_INTERFACE_DEFINED__) */
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.ICreateSharedPackageContainerResult
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.CreateSharedPackageContainerResult
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_ICreateSharedPackageContainerResult[] = L"Windows.Management.Deployment.ICreateSharedPackageContainerResult";
+typedef struct __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResultVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Container)(__x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult* This,
+        __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer** value);
+    HRESULT (STDMETHODCALLTYPE* get_Status)(__x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult* This,
+        enum __x_ABI_CWindows_CManagement_CDeployment_CSharedPackageContainerOperationStatus* value);
+    HRESULT (STDMETHODCALLTYPE* get_ExtendedError)(__x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult* This,
+        HRESULT* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResultVtbl;
+
+interface __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult
+{
+    CONST_VTBL struct __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResultVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult_get_Container(This, value) \
+    ((This)->lpVtbl->get_Container(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult_get_Status(This, value) \
+    ((This)->lpVtbl->get_Status(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult_get_ExtendedError(This, value) \
+    ((This)->lpVtbl->get_ExtendedError(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult_INTERFACE_DEFINED__) */
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.IDeleteSharedPackageContainerOptions
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.DeleteSharedPackageContainerOptions
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_IDeleteSharedPackageContainerOptions[] = L"Windows.Management.Deployment.IDeleteSharedPackageContainerOptions";
+typedef struct __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptionsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_ForceAppShutdown)(__x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions* This,
+        boolean* value);
+    HRESULT (STDMETHODCALLTYPE* put_ForceAppShutdown)(__x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions* This,
+        boolean value);
+    HRESULT (STDMETHODCALLTYPE* get_AllUsers)(__x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions* This,
+        boolean* value);
+    HRESULT (STDMETHODCALLTYPE* put_AllUsers)(__x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions* This,
+        boolean value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptionsVtbl;
+
+interface __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions
+{
+    CONST_VTBL struct __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptionsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions_get_ForceAppShutdown(This, value) \
+    ((This)->lpVtbl->get_ForceAppShutdown(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions_put_ForceAppShutdown(This, value) \
+    ((This)->lpVtbl->put_ForceAppShutdown(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions_get_AllUsers(This, value) \
+    ((This)->lpVtbl->get_AllUsers(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions_put_AllUsers(This, value) \
+    ((This)->lpVtbl->put_AllUsers(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions_INTERFACE_DEFINED__) */
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.IDeleteSharedPackageContainerResult
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.DeleteSharedPackageContainerResult
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_IDeleteSharedPackageContainerResult[] = L"Windows.Management.Deployment.IDeleteSharedPackageContainerResult";
+typedef struct __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResultVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Status)(__x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult* This,
+        enum __x_ABI_CWindows_CManagement_CDeployment_CSharedPackageContainerOperationStatus* value);
+    HRESULT (STDMETHODCALLTYPE* get_ExtendedError)(__x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult* This,
+        HRESULT* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResultVtbl;
+
+interface __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult
+{
+    CONST_VTBL struct __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResultVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult_get_Status(This, value) \
+    ((This)->lpVtbl->get_Status(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult_get_ExtendedError(This, value) \
+    ((This)->lpVtbl->get_ExtendedError(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult_INTERFACE_DEFINED__) */
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
  * Interface Windows.Management.Deployment.IDeploymentResult
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -5823,6 +9260,164 @@ interface __x_ABI_CWindows_CManagement_CDeployment_CIDeploymentResult2
 EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIDeploymentResult2;
 #endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIDeploymentResult2_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x40000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.IFindSharedPackageContainerOptions
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.FindSharedPackageContainerOptions
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_IFindSharedPackageContainerOptions[] = L"Windows.Management.Deployment.IFindSharedPackageContainerOptions";
+typedef struct __x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptionsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Name)(__x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* put_Name)(__x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions* This,
+        HSTRING value);
+    HRESULT (STDMETHODCALLTYPE* get_PackageFamilyName)(__x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* put_PackageFamilyName)(__x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions* This,
+        HSTRING value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptionsVtbl;
+
+interface __x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions
+{
+    CONST_VTBL struct __x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptionsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions_get_Name(This, value) \
+    ((This)->lpVtbl->get_Name(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions_put_Name(This, value) \
+    ((This)->lpVtbl->put_Name(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions_get_PackageFamilyName(This, value) \
+    ((This)->lpVtbl->get_PackageFamilyName(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions_put_PackageFamilyName(This, value) \
+    ((This)->lpVtbl->put_PackageFamilyName(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions_INTERFACE_DEFINED__) */
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.IPackageAllUserProvisioningOptions
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.PackageAllUserProvisioningOptions
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_IPackageAllUserProvisioningOptions[] = L"Windows.Management.Deployment.IPackageAllUserProvisioningOptions";
+typedef struct __x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptionsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_OptionalPackageFamilyNames)(__x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions* This,
+        __FIVector_1_HSTRING** value);
+    HRESULT (STDMETHODCALLTYPE* get_ProjectionOrderPackageFamilyNames)(__x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions* This,
+        __FIVector_1_HSTRING** value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptionsVtbl;
+
+interface __x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions
+{
+    CONST_VTBL struct __x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptionsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions_get_OptionalPackageFamilyNames(This, value) \
+    ((This)->lpVtbl->get_OptionalPackageFamilyNames(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions_get_ProjectionOrderPackageFamilyNames(This, value) \
+    ((This)->lpVtbl->get_ProjectionOrderPackageFamilyNames(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *
@@ -5995,6 +9590,77 @@ interface __x_ABI_CWindows_CManagement_CDeployment_CIPackageManager
 EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIPackageManager;
 #endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIPackageManager_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.IPackageManager10
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.PackageManager
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_IPackageManager10[] = L"Windows.Management.Deployment.IPackageManager10";
+typedef struct __x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* ProvisionPackageForAllUsersWithOptionsAsync)(__x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10* This,
+        HSTRING mainPackageFamilyName,
+        __x_ABI_CWindows_CManagement_CDeployment_CIPackageAllUserProvisioningOptions* options,
+        __FIAsyncOperationWithProgress_2_Windows__CManagement__CDeployment__CDeploymentResult_Windows__CManagement__CDeployment__CDeploymentProgress** operation);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10Vtbl;
+
+interface __x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10
+{
+    CONST_VTBL struct __x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10_ProvisionPackageForAllUsersWithOptionsAsync(This, mainPackageFamilyName, options, operation) \
+    ((This)->lpVtbl->ProvisionPackageForAllUsersWithOptionsAsync(This, mainPackageFamilyName, options, operation))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIPackageManager10_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *
@@ -7444,6 +11110,411 @@ EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIRegisterPackag
 
 /*
  *
+ * Interface Windows.Management.Deployment.ISharedPackageContainer
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.SharedPackageContainer
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_ISharedPackageContainer[] = L"Windows.Management.Deployment.ISharedPackageContainer";
+typedef struct __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Name)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* get_Id)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* GetMembers)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer* This,
+        __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainerMember** result);
+    HRESULT (STDMETHODCALLTYPE* RemovePackageFamily)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer* This,
+        HSTRING packageFamilyName,
+        __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions* options,
+        __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult** result);
+    HRESULT (STDMETHODCALLTYPE* ResetData)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer* This,
+        __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult** result);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerVtbl;
+
+interface __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer
+{
+    CONST_VTBL struct __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer_get_Name(This, value) \
+    ((This)->lpVtbl->get_Name(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer_get_Id(This, value) \
+    ((This)->lpVtbl->get_Id(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer_GetMembers(This, result) \
+    ((This)->lpVtbl->GetMembers(This, result))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer_RemovePackageFamily(This, packageFamilyName, options, result) \
+    ((This)->lpVtbl->RemovePackageFamily(This, packageFamilyName, options, result))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer_ResetData(This, result) \
+    ((This)->lpVtbl->ResetData(This, result))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer_INTERFACE_DEFINED__) */
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.ISharedPackageContainerManager
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.SharedPackageContainerManager
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_ISharedPackageContainerManager[] = L"Windows.Management.Deployment.ISharedPackageContainerManager";
+typedef struct __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* CreateContainer)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager* This,
+        HSTRING name,
+        __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerOptions* options,
+        __x_ABI_CWindows_CManagement_CDeployment_CICreateSharedPackageContainerResult** result);
+    HRESULT (STDMETHODCALLTYPE* DeleteContainer)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager* This,
+        HSTRING id,
+        __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerOptions* options,
+        __x_ABI_CWindows_CManagement_CDeployment_CIDeleteSharedPackageContainerResult** result);
+    HRESULT (STDMETHODCALLTYPE* GetContainer)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager* This,
+        HSTRING id,
+        __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainer** result);
+    HRESULT (STDMETHODCALLTYPE* FindContainers)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager* This,
+        __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer** result);
+    HRESULT (STDMETHODCALLTYPE* FindContainersWithOptions)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager* This,
+        __x_ABI_CWindows_CManagement_CDeployment_CIFindSharedPackageContainerOptions* options,
+        __FIVector_1_Windows__CManagement__CDeployment__CSharedPackageContainer** result);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerVtbl;
+
+interface __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager
+{
+    CONST_VTBL struct __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager_CreateContainer(This, name, options, result) \
+    ((This)->lpVtbl->CreateContainer(This, name, options, result))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager_DeleteContainer(This, id, options, result) \
+    ((This)->lpVtbl->DeleteContainer(This, id, options, result))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager_GetContainer(This, id, result) \
+    ((This)->lpVtbl->GetContainer(This, id, result))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager_FindContainers(This, result) \
+    ((This)->lpVtbl->FindContainers(This, result))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager_FindContainersWithOptions(This, options, result) \
+    ((This)->lpVtbl->FindContainersWithOptions(This, options, result))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager_INTERFACE_DEFINED__) */
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.ISharedPackageContainerManagerStatics
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.SharedPackageContainerManager
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_ISharedPackageContainerManagerStatics[] = L"Windows.Management.Deployment.ISharedPackageContainerManagerStatics";
+typedef struct __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStaticsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* GetDefault)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics* This,
+        __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager** result);
+    HRESULT (STDMETHODCALLTYPE* GetForUser)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics* This,
+        HSTRING userSid,
+        __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager** result);
+    HRESULT (STDMETHODCALLTYPE* GetForProvisioning)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics* This,
+        __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManager** result);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStaticsVtbl;
+
+interface __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics
+{
+    CONST_VTBL struct __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStaticsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics_GetDefault(This, result) \
+    ((This)->lpVtbl->GetDefault(This, result))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics_GetForUser(This, userSid, result) \
+    ((This)->lpVtbl->GetForUser(This, userSid, result))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics_GetForProvisioning(This, result) \
+    ((This)->lpVtbl->GetForProvisioning(This, result))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerManagerStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.ISharedPackageContainerMember
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.SharedPackageContainerMember
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_ISharedPackageContainerMember[] = L"Windows.Management.Deployment.ISharedPackageContainerMember";
+typedef struct __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_PackageFamilyName)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember* This,
+        HSTRING* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberVtbl;
+
+interface __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember
+{
+    CONST_VTBL struct __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember_get_PackageFamilyName(This, value) \
+    ((This)->lpVtbl->get_PackageFamilyName(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember_INTERFACE_DEFINED__) */
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.ISharedPackageContainerMemberFactory
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.SharedPackageContainerMember
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_ISharedPackageContainerMemberFactory[] = L"Windows.Management.Deployment.ISharedPackageContainerMemberFactory";
+typedef struct __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactoryVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* CreateInstance)(__x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory* This,
+        HSTRING packageFamilyName,
+        __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMember** value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactoryVtbl;
+
+interface __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory
+{
+    CONST_VTBL struct __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactoryVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory_CreateInstance(This, packageFamilyName, value) \
+    ((This)->lpVtbl->CreateInstance(This, packageFamilyName, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CISharedPackageContainerMemberFactory_INTERFACE_DEFINED__) */
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
  * Interface Windows.Management.Deployment.IStagePackageOptions
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 10.0
@@ -7618,6 +11689,164 @@ EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOp
 
 /*
  *
+ * Interface Windows.Management.Deployment.IUpdateSharedPackageContainerOptions
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.UpdateSharedPackageContainerOptions
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_IUpdateSharedPackageContainerOptions[] = L"Windows.Management.Deployment.IUpdateSharedPackageContainerOptions";
+typedef struct __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptionsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_ForceAppShutdown)(__x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions* This,
+        boolean* value);
+    HRESULT (STDMETHODCALLTYPE* put_ForceAppShutdown)(__x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions* This,
+        boolean value);
+    HRESULT (STDMETHODCALLTYPE* get_RequirePackagesPresent)(__x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions* This,
+        boolean* value);
+    HRESULT (STDMETHODCALLTYPE* put_RequirePackagesPresent)(__x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions* This,
+        boolean value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptionsVtbl;
+
+interface __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions
+{
+    CONST_VTBL struct __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptionsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions_get_ForceAppShutdown(This, value) \
+    ((This)->lpVtbl->get_ForceAppShutdown(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions_put_ForceAppShutdown(This, value) \
+    ((This)->lpVtbl->put_ForceAppShutdown(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions_get_RequirePackagesPresent(This, value) \
+    ((This)->lpVtbl->get_RequirePackagesPresent(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions_put_RequirePackagesPresent(This, value) \
+    ((This)->lpVtbl->put_RequirePackagesPresent(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions_INTERFACE_DEFINED__) */
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.IUpdateSharedPackageContainerResult
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.UpdateSharedPackageContainerResult
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_IUpdateSharedPackageContainerResult[] = L"Windows.Management.Deployment.IUpdateSharedPackageContainerResult";
+typedef struct __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResultVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Status)(__x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult* This,
+        enum __x_ABI_CWindows_CManagement_CDeployment_CSharedPackageContainerOperationStatus* value);
+    HRESULT (STDMETHODCALLTYPE* get_ExtendedError)(__x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult* This,
+        HRESULT* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResultVtbl;
+
+interface __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult
+{
+    CONST_VTBL struct __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResultVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult_get_Status(This, value) \
+    ((This)->lpVtbl->get_Status(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult_get_ExtendedError(This, value) \
+    ((This)->lpVtbl->get_ExtendedError(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerResult_INTERFACE_DEFINED__) */
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
  * Class Windows.Management.Deployment.AddPackageOptions
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 10.0
@@ -7637,6 +11866,143 @@ EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOp
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Management_Deployment_AddPackageOptions[] = L"Windows.Management.Deployment.AddPackageOptions";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
+
+/*
+ *
+ * Class Windows.Management.Deployment.AppInstallerManager
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.Management.Deployment.IAppInstallerManagerStatics interface starting with version 13.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Management.Deployment.IAppInstallerManager ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#ifndef RUNTIMECLASS_Windows_Management_Deployment_AppInstallerManager_DEFINED
+#define RUNTIMECLASS_Windows_Management_Deployment_AppInstallerManager_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Management_Deployment_AppInstallerManager[] = L"Windows.Management.Deployment.AppInstallerManager";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Class Windows.Management.Deployment.AutoUpdateSettingsOptions
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * RuntimeClass can be activated.
+ *   Type can be activated via RoActivateInstance starting with version 13.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.Management.Deployment.IAutoUpdateSettingsOptionsStatics interface starting with version 13.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Management.Deployment.IAutoUpdateSettingsOptions ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#ifndef RUNTIMECLASS_Windows_Management_Deployment_AutoUpdateSettingsOptions_DEFINED
+#define RUNTIMECLASS_Windows_Management_Deployment_AutoUpdateSettingsOptions_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Management_Deployment_AutoUpdateSettingsOptions[] = L"Windows.Management.Deployment.AutoUpdateSettingsOptions";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Class Windows.Management.Deployment.CreateSharedPackageContainerOptions
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * RuntimeClass can be activated.
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Management.Deployment.SharedPackageContainerContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Management.Deployment.ICreateSharedPackageContainerOptions ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#ifndef RUNTIMECLASS_Windows_Management_Deployment_CreateSharedPackageContainerOptions_DEFINED
+#define RUNTIMECLASS_Windows_Management_Deployment_CreateSharedPackageContainerOptions_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Management_Deployment_CreateSharedPackageContainerOptions[] = L"Windows.Management.Deployment.CreateSharedPackageContainerOptions";
+#endif
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Class Windows.Management.Deployment.CreateSharedPackageContainerResult
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.Management.Deployment.ICreateSharedPackageContainerResult ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#ifndef RUNTIMECLASS_Windows_Management_Deployment_CreateSharedPackageContainerResult_DEFINED
+#define RUNTIMECLASS_Windows_Management_Deployment_CreateSharedPackageContainerResult_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Management_Deployment_CreateSharedPackageContainerResult[] = L"Windows.Management.Deployment.CreateSharedPackageContainerResult";
+#endif
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Class Windows.Management.Deployment.DeleteSharedPackageContainerOptions
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * RuntimeClass can be activated.
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Management.Deployment.SharedPackageContainerContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Management.Deployment.IDeleteSharedPackageContainerOptions ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#ifndef RUNTIMECLASS_Windows_Management_Deployment_DeleteSharedPackageContainerOptions_DEFINED
+#define RUNTIMECLASS_Windows_Management_Deployment_DeleteSharedPackageContainerOptions_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Management_Deployment_DeleteSharedPackageContainerOptions[] = L"Windows.Management.Deployment.DeleteSharedPackageContainerOptions";
+#endif
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Class Windows.Management.Deployment.DeleteSharedPackageContainerResult
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.Management.Deployment.IDeleteSharedPackageContainerResult ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#ifndef RUNTIMECLASS_Windows_Management_Deployment_DeleteSharedPackageContainerResult_DEFINED
+#define RUNTIMECLASS_Windows_Management_Deployment_DeleteSharedPackageContainerResult_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Management_Deployment_DeleteSharedPackageContainerResult[] = L"Windows.Management.Deployment.DeleteSharedPackageContainerResult";
+#endif
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
 
 /*
  *
@@ -7660,6 +12026,54 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 
 /*
  *
+ * Class Windows.Management.Deployment.FindSharedPackageContainerOptions
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * RuntimeClass can be activated.
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Management.Deployment.SharedPackageContainerContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Management.Deployment.IFindSharedPackageContainerOptions ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#ifndef RUNTIMECLASS_Windows_Management_Deployment_FindSharedPackageContainerOptions_DEFINED
+#define RUNTIMECLASS_Windows_Management_Deployment_FindSharedPackageContainerOptions_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Management_Deployment_FindSharedPackageContainerOptions[] = L"Windows.Management.Deployment.FindSharedPackageContainerOptions";
+#endif
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Class Windows.Management.Deployment.PackageAllUserProvisioningOptions
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * RuntimeClass can be activated.
+ *   Type can be activated via RoActivateInstance starting with version 13.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Management.Deployment.IPackageAllUserProvisioningOptions ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#ifndef RUNTIMECLASS_Windows_Management_Deployment_PackageAllUserProvisioningOptions_DEFINED
+#define RUNTIMECLASS_Windows_Management_Deployment_PackageAllUserProvisioningOptions_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Management_Deployment_PackageAllUserProvisioningOptions[] = L"Windows.Management.Deployment.PackageAllUserProvisioningOptions";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
  * Class Windows.Management.Deployment.PackageManager
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -7677,6 +12091,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *    Windows.Management.Deployment.IPackageManager7
  *    Windows.Management.Deployment.IPackageManager8
  *    Windows.Management.Deployment.IPackageManager9
+ *    Windows.Management.Deployment.IPackageManager10
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -7776,6 +12191,73 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 
 /*
  *
+ * Class Windows.Management.Deployment.SharedPackageContainer
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.Management.Deployment.ISharedPackageContainer ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#ifndef RUNTIMECLASS_Windows_Management_Deployment_SharedPackageContainer_DEFINED
+#define RUNTIMECLASS_Windows_Management_Deployment_SharedPackageContainer_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Management_Deployment_SharedPackageContainer[] = L"Windows.Management.Deployment.SharedPackageContainer";
+#endif
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Class Windows.Management.Deployment.SharedPackageContainerManager
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.Management.Deployment.ISharedPackageContainerManagerStatics interface starting with version 1.0 of the Windows.Management.Deployment.SharedPackageContainerContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Management.Deployment.ISharedPackageContainerManager ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#ifndef RUNTIMECLASS_Windows_Management_Deployment_SharedPackageContainerManager_DEFINED
+#define RUNTIMECLASS_Windows_Management_Deployment_SharedPackageContainerManager_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Management_Deployment_SharedPackageContainerManager[] = L"Windows.Management.Deployment.SharedPackageContainerManager";
+#endif
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Class Windows.Management.Deployment.SharedPackageContainerMember
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * RuntimeClass can be activated.
+ *   Type can be activated via the Windows.Management.Deployment.ISharedPackageContainerMemberFactory interface starting with version 1.0 of the Windows.Management.Deployment.SharedPackageContainerContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Management.Deployment.ISharedPackageContainerMember ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#ifndef RUNTIMECLASS_Windows_Management_Deployment_SharedPackageContainerMember_DEFINED
+#define RUNTIMECLASS_Windows_Management_Deployment_SharedPackageContainerMember_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Management_Deployment_SharedPackageContainerMember[] = L"Windows.Management.Deployment.SharedPackageContainerMember";
+#endif
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
  * Class Windows.Management.Deployment.StagePackageOptions
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 10.0
@@ -7795,6 +12277,49 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Management_Deployment_StagePackageOptions[] = L"Windows.Management.Deployment.StagePackageOptions";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
+
+/*
+ *
+ * Class Windows.Management.Deployment.UpdateSharedPackageContainerOptions
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * RuntimeClass can be activated.
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Management.Deployment.SharedPackageContainerContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Management.Deployment.IUpdateSharedPackageContainerOptions ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#ifndef RUNTIMECLASS_Windows_Management_Deployment_UpdateSharedPackageContainerOptions_DEFINED
+#define RUNTIMECLASS_Windows_Management_Deployment_UpdateSharedPackageContainerOptions_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Management_Deployment_UpdateSharedPackageContainerOptions[] = L"Windows.Management.Deployment.UpdateSharedPackageContainerOptions";
+#endif
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Class Windows.Management.Deployment.UpdateSharedPackageContainerResult
+ *
+ * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.Management.Deployment.IUpdateSharedPackageContainerResult ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
+#ifndef RUNTIMECLASS_Windows_Management_Deployment_UpdateSharedPackageContainerResult_DEFINED
+#define RUNTIMECLASS_Windows_Management_Deployment_UpdateSharedPackageContainerResult_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Management_Deployment_UpdateSharedPackageContainerResult[] = L"Windows.Management.Deployment.UpdateSharedPackageContainerResult";
+#endif
+#endif // WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION >= 0x10000
 
 #endif // defined(__cplusplus)
 #pragma pop_macro("MIDL_CONST_ID")

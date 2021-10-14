@@ -30,11 +30,6 @@ typedef UINT64 GUEST_VIRTUAL_ADDRESS;
 typedef UINT64 GUEST_PHYSICAL_ADDRESS;
 
 //
-// Define verbose function pointer type
-//
-typedef void (*VM_SAVED_STATE_DUMP_VERBOSE_HANDLER)(LPCWSTR Message);
-
-//
 // Define paging modes
 //
 typedef enum PAGING_MODE
@@ -44,6 +39,7 @@ typedef enum PAGING_MODE
     Paging_32Bit,
     Paging_Pae,
     Paging_Long,
+    Paging_Armv8,
 } PAGING_MODE;
 
 
@@ -66,123 +62,87 @@ typedef enum VIRTUAL_PROCESSOR_ARCH
     Arch_Unknown = 0,
     Arch_x86,
     Arch_x64,
+    Arch_Armv8,
 } VIRTUAL_PROCESSOR_ARCH;
 
 
-typedef enum REGISTER_ID_X86
+//
+// Define Processor Vendor dump information.
+//
+
+typedef enum VIRTUAL_PROCESSOR_VENDOR
+{
+    ProcessorVendor_Unknown,
+    ProcessorVendor_Amd,
+    ProcessorVendor_Intel,
+    ProcessorVendor_Hygon,
+    ProcessorVendor_Arm,
+} VIRTUAL_PROCESSOR_VENDOR;
+
+
+//
+// Define Guest OS information.
+//
+
+typedef enum GUEST_OS_VENDOR
+{
+    GuestOsVendorUndefined  = 0x0000,
+    GuestOsVendorMicrosoft  = 0x0001,
+    GuestOsVendorHPE        = 0x0002,
+    GuestOsVendorLANCOM     = 0x0200,
+} GUEST_OS_VENDOR;
+
+
+typedef enum GUEST_OS_MICROSOFT_IDS
+{
+    GuestOsMicrosoftUndefined   = 0x00,
+    GuestOsMicrosoftMSDOS       = 0x01,
+    GuestOsMicrosoftWindows3x   = 0x02,
+    GuestOsMicrosoftWindows9x   = 0x03,
+    GuestOsMicrosoftWindowsNT   = 0x04,
+    GuestOsMicrosoftWindowsCE   = 0x05,
+} GUEST_OS_MICROSOFT_IDS;
+
+
+typedef enum GUEST_OS_OPENSOURCE_IDS
+{
+    GuestOsOpenSourceUndefined  = 0x00,
+    GuestOsOpenSourceLinux      = 0x01,
+    GuestOsOpenSourceFreeBSD    = 0x02,
+    GuestOsOpenSourceXen        = 0x03,
+    GuestOsOpenSourceIllumos    = 0x04,
+} GUEST_OS_OPENSOURCE_IDS;
+
+
+typedef union GUEST_OS_INFO
+{
+    UINT64 AsUINT64;
+    struct
+    {
+        UINT64 BuildNumber    : 16;
+        UINT64 ServiceVersion : 8; // Service Pack, etc.
+        UINT64 MinorVersion   : 8;
+        UINT64 MajorVersion   : 8;
+        UINT64 OsId           : 8;
+        UINT64 VendorId       : 16;
+    } ClosedSource;
+
+    struct
+    {
+        UINT64 VendorSpecific1 : 16;
+        UINT64 Version         : 32;
+        UINT64 VendorSpecific2 : 8;
+        UINT64 OsId            : 7;
+        UINT64 IsOpenSource    : 1;
+    } OpenSource;
+} GUEST_OS_INFO;
+
+typedef enum REGISTER_ID
 {
     //
-    // General Purpose Registers
+    // X86 / X64 registers:
     //
 
-    X86_RegisterEax = 0,
-    X86_RegisterEcx,
-    X86_RegisterEdx,
-    X86_RegisterEbx,
-    X86_RegisterEsp,
-    X86_RegisterEbp,
-    X86_RegisterEsi,
-    X86_RegisterEdi,
-    X86_RegisterEip,
-    X86_RegisterEFlags,
-
-    //
-    // Floating Point Registers
-    //
-
-    X86_RegisterLowXmm0,
-    X86_RegisterHighXmm0,
-    X86_RegisterLowXmm1,
-    X86_RegisterHighXmm1,
-    X86_RegisterLowXmm2,
-    X86_RegisterHighXmm2,
-    X86_RegisterLowXmm3,
-    X86_RegisterHighXmm3,
-    X86_RegisterLowXmm4,
-    X86_RegisterHighXmm4,
-    X86_RegisterLowXmm5,
-    X86_RegisterHighXmm5,
-    X86_RegisterLowXmm6,
-    X86_RegisterHighXmm6,
-    X86_RegisterLowXmm7,
-    X86_RegisterHighXmm7,
-    X86_RegisterLowXmm8,
-    X86_RegisterHighXmm8,
-    X86_RegisterLowXmm9,
-    X86_RegisterHighXmm9,
-    X86_RegisterLowXmm10,
-    X86_RegisterHighXmm10,
-    X86_RegisterLowXmm11,
-    X86_RegisterHighXmm11,
-    X86_RegisterLowXmm12,
-    X86_RegisterHighXmm12,
-    X86_RegisterLowXmm13,
-    X86_RegisterHighXmm13,
-    X86_RegisterLowXmm14,
-    X86_RegisterHighXmm14,
-    X86_RegisterLowXmm15,
-    X86_RegisterHighXmm15,
-    X86_RegisterLowXmmControlStatus,
-    X86_RegisterHighXmmControlStatus,
-    X86_RegisterLowFpControlStatus,
-    X86_RegisterHighFpControlStatus,
-
-    //
-    // Control Registers
-    //
-
-    X86_RegisterCr0,
-    X86_RegisterCr2,
-    X86_RegisterCr3,
-    X86_RegisterCr4,
-    X86_RegisterCr8,
-    X86_RegisterEfer,
-
-    //
-    // Debug Registers
-    //
-
-    X86_RegisterDr0,
-    X86_RegisterDr1,
-    X86_RegisterDr2,
-    X86_RegisterDr3,
-    X86_RegisterDr6,
-    X86_RegisterDr7,
-
-    //
-    // Segment Registers
-    //
-
-    X86_RegisterBaseGs,
-    X86_RegisterBaseFs,
-    X86_RegisterSegCs,
-    X86_RegisterSegDs,
-    X86_RegisterSegEs,
-    X86_RegisterSegFs,
-    X86_RegisterSegGs,
-    X86_RegisterSegSs,
-    X86_RegisterTr,
-    X86_RegisterLdtr,
-
-    //
-    // Table Registers
-    //
-
-    X86_RegisterBaseIdtr,
-    X86_RegisterLimitIdtr,
-    X86_RegisterBaseGdtr,
-    X86_RegisterLimitGdtr,
-
-    //
-    // Register Count
-    //
-
-    X86_RegisterCount,
-} REGISTER_ID_X86;
-
-
-typedef enum REGISTER_ID_X64
-{
     //
     // General Purpose Registers
     //
@@ -210,42 +170,32 @@ typedef enum REGISTER_ID_X64
     // Floating Point Registers
     //
 
-    X64_RegisterLowXmm0,
-    X64_RegisterHighXmm0,
-    X64_RegisterLowXmm1,
-    X64_RegisterHighXmm1,
-    X64_RegisterLowXmm2,
-    X64_RegisterHighXmm2,
-    X64_RegisterLowXmm3,
-    X64_RegisterHighXmm3,
-    X64_RegisterLowXmm4,
-    X64_RegisterHighXmm4,
-    X64_RegisterLowXmm5,
-    X64_RegisterHighXmm5,
-    X64_RegisterLowXmm6,
-    X64_RegisterHighXmm6,
-    X64_RegisterLowXmm7,
-    X64_RegisterHighXmm7,
-    X64_RegisterLowXmm8,
-    X64_RegisterHighXmm8,
-    X64_RegisterLowXmm9,
-    X64_RegisterHighXmm9,
-    X64_RegisterLowXmm10,
-    X64_RegisterHighXmm10,
-    X64_RegisterLowXmm11,
-    X64_RegisterHighXmm11,
-    X64_RegisterLowXmm12,
-    X64_RegisterHighXmm12,
-    X64_RegisterLowXmm13,
-    X64_RegisterHighXmm13,
-    X64_RegisterLowXmm14,
-    X64_RegisterHighXmm14,
-    X64_RegisterLowXmm15,
-    X64_RegisterHighXmm15,
-    X64_RegisterLowXmmControlStatus,
-    X64_RegisterHighXmmControlStatus,
-    X64_RegisterLowFpControlStatus,
-    X64_RegisterHighFpControlStatus,
+    X64_RegisterXmm0,
+    X64_RegisterXmm1,
+    X64_RegisterXmm2,
+    X64_RegisterXmm3,
+    X64_RegisterXmm4,
+    X64_RegisterXmm5,
+    X64_RegisterXmm6,
+    X64_RegisterXmm7,
+    X64_RegisterXmm8,
+    X64_RegisterXmm9,
+    X64_RegisterXmm10,
+    X64_RegisterXmm11,
+    X64_RegisterXmm12,
+    X64_RegisterXmm13,
+    X64_RegisterXmm14,
+    X64_RegisterXmm15,
+    X64_RegisterFpMmx0,
+    X64_RegisterFpMmx1,
+    X64_RegisterFpMmx2,
+    X64_RegisterFpMmx3,
+    X64_RegisterFpMmx4,
+    X64_RegisterFpMmx5,
+    X64_RegisterFpMmx6,
+    X64_RegisterFpMmx7,
+    X64_RegisterFpControlStatus,
+    X64_RegisterXmmControlStatus,
 
     //
     // Control Registers
@@ -273,46 +223,281 @@ typedef enum REGISTER_ID_X64
     // Segment Registers
     //
 
-    X64_RegisterBaseGs,
-    X64_RegisterBaseFs,
-    X64_RegisterSegCs,
-    X64_RegisterSegDs,
-    X64_RegisterSegEs,
-    X64_RegisterSegFs,
-    X64_RegisterSegGs,
-    X64_RegisterSegSs,
-    X64_RegisterTr,
+    X64_RegisterEs,
+    X64_RegisterCs,
+    X64_RegisterSs,
+    X64_RegisterDs,
+    X64_RegisterFs,
+    X64_RegisterGs,
     X64_RegisterLdtr,
+    X64_RegisterTr,
 
     //
     // Table Registers
     //
 
-    X64_RegisterBaseIdtr,
-    X64_RegisterLimitIdtr,
-    X64_RegisterBaseGdtr,
-    X64_RegisterLimitGdtr,
+    X64_RegisterIdtr,
+    X64_RegisterGdtr,
+
+    X64_RegisterMax, // Sentinel value.
 
     //
-    // Register Count
+    // ARM64 registers:
     //
 
-    X64_RegisterCount,
-} REGISTER_ID_X64;
+    ARM64_RegisterX0,
+    ARM64_RegisterX1,
+    ARM64_RegisterX2,
+    ARM64_RegisterX3,
+    ARM64_RegisterX4,
+    ARM64_RegisterX5,
+    ARM64_RegisterX6,
+    ARM64_RegisterX7,
+    ARM64_RegisterX8,
+    ARM64_RegisterX9,
+    ARM64_RegisterX10,
+    ARM64_RegisterX11,
+    ARM64_RegisterX12,
+    ARM64_RegisterX13,
+    ARM64_RegisterX14,
+    ARM64_RegisterX15,
+    ARM64_RegisterX16,
+    ARM64_RegisterX17,
+    ARM64_RegisterX18,
+    ARM64_RegisterX19,
+    ARM64_RegisterX20,
+    ARM64_RegisterX21,
+    ARM64_RegisterX22,
+    ARM64_RegisterX23,
+    ARM64_RegisterX24,
+    ARM64_RegisterX25,
+    ARM64_RegisterX26,
+    ARM64_RegisterX27,
+    ARM64_RegisterX28,
+    ARM64_RegisterXFp,
+    ARM64_RegisterXLr,
+    ARM64_RegisterPc,
+    ARM64_RegisterSpEl0,
+    ARM64_RegisterSpEl1,
+    ARM64_RegisterCpsr,
 
+    //
+    // Floating Point Registers
+    //
 
-/// This struct, when used in a call to GetRegisterValue, its Architecture and RegisterId fields
-/// are inputs and the register value is an output.
-typedef struct VIRTUAL_PROCESSOR_REGISTER
+    ARM64_RegisterQ0,
+    ARM64_RegisterQ1,
+    ARM64_RegisterQ2,
+    ARM64_RegisterQ3,
+    ARM64_RegisterQ4,
+    ARM64_RegisterQ5,
+    ARM64_RegisterQ6,
+    ARM64_RegisterQ7,
+    ARM64_RegisterQ8,
+    ARM64_RegisterQ9,
+    ARM64_RegisterQ10,
+    ARM64_RegisterQ11,
+    ARM64_RegisterQ12,
+    ARM64_RegisterQ13,
+    ARM64_RegisterQ14,
+    ARM64_RegisterQ15,
+    ARM64_RegisterQ16,
+    ARM64_RegisterQ17,
+    ARM64_RegisterQ18,
+    ARM64_RegisterQ19,
+    ARM64_RegisterQ20,
+    ARM64_RegisterQ21,
+    ARM64_RegisterQ22,
+    ARM64_RegisterQ23,
+    ARM64_RegisterQ24,
+    ARM64_RegisterQ25,
+    ARM64_RegisterQ26,
+    ARM64_RegisterQ27,
+    ARM64_RegisterQ28,
+    ARM64_RegisterQ29,
+    ARM64_RegisterQ30,
+    ARM64_RegisterQ31,
+    ARM64_RegisterFpStatus,
+    ARM64_RegisterFpControl,
+
+    //
+    // Control registers.
+    //
+
+    ARM64_RegisterEsrEl1,
+    ARM64_RegisterSpsrEl1,
+    ARM64_RegisterFarEl1,
+    ARM64_RegisterParEl1,
+    ARM64_RegisterElrEl1,
+    ARM64_RegisterTtbr0El1,
+    ARM64_RegisterTtbr1El1,
+    ARM64_RegisterVbarEl1,
+    ARM64_RegisterSctlrEl1,
+    ARM64_RegisterActlrEl1,
+    ARM64_RegisterTcrEl1,
+    ARM64_RegisterMairEl1,
+    ARM64_RegisterAmairEl1,
+    ARM64_RegisterTpidrEl0,
+    ARM64_RegisterTpidrroEl0,
+    ARM64_RegisterTpidrEl1,
+    ARM64_RegisterContextIdrEl1,
+    ARM64_RegisterCpacrEl1,
+    ARM64_RegisterCsselrEl1,
+    ARM64_RegisterCntkctlEl1,
+    ARM64_RegisterCntvCvalEl0,
+    ARM64_RegisterCntvCtlEl0,
+
+    ARM64_RegisterMax, // Sentinel value
+
+} REGISTER_ID;
+
+#pragma warning (push)
+#pragma warning(disable : 4201) // nameless struct/union
+
+/// This struct represents a register value.
+typedef union VIRTUAL_PROCESSOR_REGISTER
 {
-    VIRTUAL_PROCESSOR_ARCH  Architecture;
-    UINT64                  RegisterValue;
-    union{
-        DWORD               RegisterId;
-        REGISTER_ID_X86     RegisterId_x86;
-        REGISTER_ID_X64     RegisterId_x64;
-    };
+    UINT64 Reg64;
+    UINT32 Reg32;
+    UINT16 Reg16;
+    UINT8 Reg8;
+
+    // 128 bit value.
+    struct
+    {
+        UINT64 Low64;
+        UINT64 High64;
+    } Reg128;
+
+    union
+    {
+        // X64 segment register including hidden state.
+        struct
+        {
+            UINT64 Base;
+            UINT32 Limit;
+            UINT16 Selector;
+            union
+            {
+                UINT16 Attributes;
+                struct
+                {
+                    UINT16 SegmentType:4;
+                    UINT16 NonSystemSegment:1;
+                    UINT16 DescriptorPrivilegeLevel:2;
+                    UINT16 Present:1;
+                    UINT16 Reserved:4;
+                    UINT16 Available:1;
+                    UINT16 Long:1;
+                    UINT16 Default:1;
+                    UINT16 Granularity:1;
+                };
+            };
+        } Segment;
+
+        // X64 table register.
+        struct
+        {
+            UINT16 Limit;
+            UINT64 Base;
+        } Table;
+
+        // X64 FP control status register.
+        struct
+        {
+            UINT16 FpControl;
+            UINT16 FpStatus;
+            UINT8  FpTag;
+            UINT8  Reserved;
+            UINT16 LastFpOp;
+            union
+            {
+                // Long Mode
+                UINT64 LastFpRip;
+
+                // 32 Bit Mode
+                struct
+                {
+                    UINT32 LastFpEip;
+                    UINT16 LastFpCs;
+                };
+            };
+        } FpControlStatus;
+
+        // X64 XMM control status register.
+        struct
+        {
+            union
+            {
+                // Long Mode
+                UINT64 LastFpRdp;
+
+                // 32 Bit Mode
+                struct
+                {
+                    UINT32 LastFpDp;
+                    UINT16 LastFpDs;
+                };
+            };
+
+            UINT32 XmmStatusControl;
+            UINT32 XmmStatusControlMask;
+        } XmmControlStatus;
+    } X64;
+
+#ifdef __cplusplus
+
+    VIRTUAL_PROCESSOR_REGISTER()
+    {
+        Reg128.Low64 = 0;
+        Reg128.High64 = 0;
+    }
+
+    VIRTUAL_PROCESSOR_REGISTER(UINT64 Value)
+    {
+        Reg128.Low64 = Value;
+        Reg128.High64 = 0;
+    }
+
+#endif // __cplusplus
+
 } VIRTUAL_PROCESSOR_REGISTER;
+
+#pragma warning(pop)
+
+/// Struct that defines a DOS Image.
+typedef struct _DOS_IMAGE_INFO
+{
+    LPCSTR PdbName;
+    GUEST_VIRTUAL_ADDRESS ImageBaseAddress;
+    DWORD ImageSize;
+    UINT32 Timestamp;
+} DOS_IMAGE_INFO, *PDOS_IMAGE_INFO;
+
+
+/// Function type for the guest symbol provider debug info callback.
+///
+/// \param InfoMessage  Supplies a debug info message.
+///
+typedef void (CALLBACK *GUEST_SYMBOLS_PROVIDER_DEBUG_INFO_CALLBACK)(_In_ LPCSTR InfoMessage);
+
+
+/// Function type for the dos image scan callback.
+///
+/// \param ImageInfo  Supplies a found valid DOS image in the virtual address space.
+///                   Do not assume the PdbName string's pointer will be valid after the callback has returned.
+///
+/// \return FALSE if the caller wants the scan to continue.
+///         TRUE if the caller has found an image it was looking for and wishes to stop the scan.
+///
+typedef BOOL (CALLBACK *FOUND_IMAGE_CALLBACK)(_In_ PVOID Context, _In_ PDOS_IMAGE_INFO ImageInfo);
+
+
+typedef struct _MODULE_INFO
+{
+    LPCSTR ProcessImageName;
+    DOS_IMAGE_INFO Image;
+} MODULE_INFO, *PMODULE_INFO;
 
 #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 #pragma endregion

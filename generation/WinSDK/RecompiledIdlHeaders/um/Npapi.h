@@ -106,6 +106,18 @@ typedef DWORD (APIENTRY *PF_NPCancelConnection) (
     _In_ BOOL    fForce
     );
 
+DWORD APIENTRY
+NPCancelConnection2 (
+    _In_ LPWSTR  lpName,
+    _In_ BOOL    fForce,
+    _In_ DWORD   dwFlags
+    );
+
+typedef DWORD (APIENTRY *PF_NPCancelConnection2) (
+    _In_ LPWSTR  lpName,
+    _In_ BOOL    fForce,
+    _In_ DWORD   dwFlags
+    );
 
 DWORD APIENTRY
 NPGetConnection (
@@ -195,7 +207,7 @@ NPEnumResource (
 typedef DWORD (APIENTRY *PF_NPEnumResource) (
     _In_    HANDLE  hEnum,
     _Inout_ LPDWORD lpcCount,
-    _Out_writes_bytes_(*lpbufferSize) LPVOID  lpBuffer,
+    _Out_writes_bytes_(*lpBufferSize) LPVOID  lpBuffer,
     _Inout_ LPDWORD lpBufferSize
     );
 
@@ -230,6 +242,7 @@ typedef DWORD (APIENTRY *PF_NPCloseEnum) (
 #define WNNC_CON_GETCONNECTIONS          0x00000004
 #define WNNC_CON_ADDCONNECTION3          0x00000008
 #define WNNC_CON_ADDCONNECTION4          0x00000010
+#define WNNC_CON_CANCELCONNECTION2       0x00000020
 #define WNNC_CON_GETPERFORMANCE          0x00000040
 #define WNNC_CON_DEFER                   0x00000080
 
@@ -260,7 +273,7 @@ typedef DWORD (APIENTRY *PF_NPCloseEnum) (
 
 #if (_WIN32_WINNT >= _WIN32_WINNT_WIN10)  
 
-#define WNNC_CF_MAXIMUM (WNNC_CF_DEFAULT | CONNECT_DEFERRED | CONNECT_COMMANDLINE | CONNECT_CMD_SAVECRED | CONNECT_CRED_RESET | CONNECT_REQUIRE_INTEGRITY | CONNECT_REQUIRE_PRIVACY | CONNECT_WRITE_THROUGH_SEMANTICS | CONNECT_COMPRESS_NETWORK_TRAFFIC)
+#define WNNC_CF_MAXIMUM (WNNC_CF_DEFAULT | CONNECT_UPDATE_PROFILE | CONNECT_DEFERRED | CONNECT_COMMANDLINE | CONNECT_CMD_SAVECRED | CONNECT_CRED_RESET | CONNECT_REQUIRE_INTEGRITY | CONNECT_REQUIRE_PRIVACY | CONNECT_WRITE_THROUGH_SEMANTICS | CONNECT_GLOBAL_MAPPING)
 
 #else
 

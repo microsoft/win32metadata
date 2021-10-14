@@ -162,7 +162,7 @@ extern "C" {
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
 
-#endif  DHCP_OPTIONS_DEFINED
+#endif // DHCP_OPTIONS_DEFINED
 
 #pragma region Application Family or OneCore Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
@@ -180,7 +180,7 @@ typedef struct _DHCPAPI_PARAMS {                  // use this structure to reque
     #endif
     DWORD                          nBytesData;    // how many bytes of data are there in Data?
 } DHCPAPI_PARAMS, *PDHCPAPI_PARAMS, *LPDHCPAPI_PARAMS;
-#endif DHCPAPI_PARAMS_DEFINED
+#endif // DHCPAPI_PARAMS_DEFINED
 
 typedef struct _DHCPAPI_PARAMS
 DHCPCAPI_PARAMS, *PDHCPCAPI_PARAMS, *LPDHCPCAPI_PARAMS;
@@ -296,5 +296,5 @@ DhcpGetOriginalSubnetMask(
 //================================================================================
 // end of file
 //================================================================================
-#endif _DHCPCSDK_
+#endif // _DHCPCSDK_
 

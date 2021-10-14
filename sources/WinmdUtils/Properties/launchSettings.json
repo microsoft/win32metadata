@@ -34,7 +34,7 @@
     },
     "createLibRsp": {
       "commandName": "Project",
-      "commandLineArgs": "createLibRsp --lib \"C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.19041.0\\um\\x64\\onecoreuap.lib;C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.19041.0\\um\\x64\\kernel32.lib;C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.19041.0\\um\\x64\\d3d10.lib\" --libDir \"C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.19041.0\\um\\x64\" --inputRsp d:\\repos\\win32metadata\\generation\\WinSDK\\libMappings.old.rsp --outputRsp d:\\repos\\win32metadata\\generation\\WinSDK\\libMappings.rsp"
+      "commandLineArgs": "createLibRsp --lib \"C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.19041.0\\um\\x64\\onecoreuap.lib\" \"C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.19041.0\\um\\x64\\kernel32.lib\" \"C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.19041.0\\um\\x64\\d3d10.lib\" --libDir \"C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.19041.0\\um\\x64\" --inputRsp d:\\repos\\win32metadata\\generation\\WinSDK\\libMappings.old.rsp --outputRsp d:\\repos\\win32metadata\\generation\\WinSDK\\libMappings.rsp --exclude DllMain ServiceMain GetDeviceID"
     }
   }
 }

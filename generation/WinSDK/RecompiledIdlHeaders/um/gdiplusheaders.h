@@ -692,15 +692,15 @@ private:
     CustomLineCap& operator=(const CustomLineCap &);
 
 protected:
-    CustomLineCap(GpCustomLineCap* nativeCap, Status status)
+    CustomLineCap(GpCustomLineCap* nativeCapArg, Status status)
     {
         lastResult = status;
-        SetNativeCap(nativeCap);
+        SetNativeCap(nativeCapArg);
     }
 
-    VOID SetNativeCap(GpCustomLineCap* nativeCap)
+    VOID SetNativeCap(GpCustomLineCap* nativeCapArg)
     {
-        this->nativeCap = nativeCap;
+        this->nativeCap = nativeCapArg;
     }
 
     _Post_equal_to_(status)

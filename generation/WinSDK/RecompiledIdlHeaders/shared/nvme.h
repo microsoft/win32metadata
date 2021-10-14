@@ -36,6 +36,13 @@ Revision:
 //
 // 3.1.1  Offset 00h: CAP (Controller Capabilities)
 //
+typedef enum {
+
+    NVME_AMS_ROUND_ROBIN                    = 0,
+    NVME_AMS_WEIGHTED_ROUND_ROBIN_URGENT    = 1,
+
+} NVME_AMS_OPTION;
+
 typedef union {
 
     struct {
@@ -60,8 +67,8 @@ typedef union {
         ULONGLONG CSS_Reserved2         : 1;    // Bit 40: Reserved
         ULONGLONG CSS_Reserved3         : 1;    // Bit 41: Reserved
         ULONGLONG CSS_Reserved4         : 1;    // Bit 42: Reserved
-        ULONGLONG CSS_Reserved5         : 1;    // Bit 43: Reserved
-        ULONGLONG CSS_Reserved6         : 1;    // Bit 44: Reserved
+        ULONGLONG CSS_MultipleIo        : 1;    // Bit 43: One or more IO command sets
+        ULONGLONG CSS_AdminOnly         : 1;    // Bit 44: Only Admin command set (no IO command set)
 
         ULONGLONG Reserved2 : 3;    // RO - bit 45 ~ 47
         ULONGLONG MPSMIN    : 4;    // RO - Memory Page Size Minimum (MPSMIN)
@@ -102,6 +109,14 @@ typedef enum {
     NVME_CC_SHN_ABRUPT_SHUTDOWN     = 2,
 
 } NVME_CC_SHN_SHUTDOWN_NOTIFICATIONS;
+
+typedef enum {
+
+    NVME_CSS_NVM_COMMAND_SET                = 0,
+    NVME_CSS_ALL_SUPPORTED_IO_COMMAND_SET   = 6,
+    NVME_CSS_ADMIN_COMMAND_SET_ONLY         = 7,
+
+} NVME_CSS_COMMAND_SETS;
 
 typedef union {
 
@@ -345,7 +360,7 @@ typedef union {
 typedef struct {
 
     ULONG   DW0;
-    ULONG   Reserved;
+    ULONG   DW1;
 
     union {
         struct {
@@ -411,9 +426,15 @@ typedef enum {
 //
 typedef enum {
 
-    NVME_ASYNC_NOTICE_NAMESPACE_ATTRIBUTE_CHANGED       = 0,
-    NVME_ASYNC_NOTICE_FIRMWARE_ACTIVATION_STARTING      = 1,
-    NVME_ASYNC_NOTICE_TELEMETRY_LOG_CHANGED             = 2,
+    NVME_ASYNC_NOTICE_NAMESPACE_ATTRIBUTE_CHANGED                       = 0,
+    NVME_ASYNC_NOTICE_FIRMWARE_ACTIVATION_STARTING                      = 1,
+    NVME_ASYNC_NOTICE_TELEMETRY_LOG_CHANGED                             = 2,
+    NVME_ASYNC_NOTICE_ASYMMETRIC_ACCESS_CHANGE                          = 3,
+    NVME_ASYNC_NOTICE_PREDICTABLE_LATENCY_EVENT_AGGREGATE_LOG_CHANGE    = 4,
+    NVME_ASYNC_NOTICE_LBA_STATUS_INFORMATION_ALERT                      = 5,
+    NVME_ASYNC_NOTICE_ENDURANCE_GROUP_EVENT_AGGREGATE_LOG_CHANGE        = 6,
+
+    NVME_ASYNC_NOTICE_ZONE_DESCRIPTOR_CHANGED                           = 0xEF,
 
 } NVME_ASYNC_EVENT_NOTICE_CODES;
 
@@ -422,8 +443,9 @@ typedef enum {
 //
 typedef enum {
 
-    NVME_ASYNC_IO_CMD_SET_RESERVATION_LOG_PAGE_AVAILABLE    = 0,
-    NVME_ASYNC_IO_CMD_SANITIZE_OPERATION_COMPLETED          = 1,
+    NVME_ASYNC_IO_CMD_SET_RESERVATION_LOG_PAGE_AVAILABLE                                = 0,
+    NVME_ASYNC_IO_CMD_SANITIZE_OPERATION_COMPLETED                                      = 1,
+    NVME_ASYNC_IO_CMD_SANITIZE_OPERATION_COMPLETED_WITH_UNEXPECTED_DEALLOCATION         = 2,
 
 } NVME_ASYNC_EVENT_IO_COMMAND_SET_STATUS_CODES;
 
@@ -543,11 +565,32 @@ typedef enum {
     NVME_STATUS_INVALID_NUMBER_OF_CONTROLLER_RESOURCES              = 0x21,         // Virtualization Management
     NVME_STATUS_INVALID_RESOURCE_IDENTIFIER                         = 0x22,         // Virtualization Management
 
+    NVME_STATUS_SANITIZE_PROHIBITED_ON_PERSISTENT_MEMORY            = 0x23,         // Sanitize
+
+    NVME_STATUS_INVALID_ANA_GROUP_IDENTIFIER                        = 0x24,         // Namespace Management
+    NVME_STATUS_ANA_ATTACH_FAILED                                   = 0x25,         // Namespace Attachment
+
+    NVME_IO_COMMAND_SET_NOT_SUPPORTED                               = 0x29,         // Namespace Attachment/Management
+    NVME_IO_COMMAND_SET_NOT_ENABLED                                 = 0x2A,         // Namespace Attachment
+    NVME_IO_COMMAND_SET_COMBINATION_REJECTED                        = 0x2B,         // Set Features
+    NVME_IO_COMMAND_SET_INVALID                                     = 0x2C,         // Identify
+
     NVME_STATUS_STREAM_RESOURCE_ALLOCATION_FAILED                   = 0x7F,         // Streams Directive
+    NVME_STATUS_ZONE_INVALID_FORMAT                                 = 0x7F,         // Namespace Management
 
     NVME_STATUS_NVM_CONFLICTING_ATTRIBUTES                          = 0x80,         // Dataset Management, Read, Write
     NVME_STATUS_NVM_INVALID_PROTECTION_INFORMATION                  = 0x81,         // Compare, Read, Write, Write Zeroes
     NVME_STATUS_NVM_ATTEMPTED_WRITE_TO_READ_ONLY_RANGE              = 0x82,         // Dataset Management, Write, Write Uncorrectable, Write Zeroes
+    NVME_STATUS_NVM_COMMAND_SIZE_LIMIT_EXCEEDED                     = 0x83,         // Dataset Management
+
+    NVME_STATUS_ZONE_BOUNDARY_ERROR                                 = 0xB8,         // Compare, Read, Verify, Write, Write Uncorrectable, Write Zeroes, Copy, Zone Append
+    NVME_STATUS_ZONE_FULL                                           = 0xB9,         // Write, Write Uncorrectable, Write Zeroes, Copy, Zone Append
+    NVME_STATUS_ZONE_READ_ONLY                                      = 0xBA,         // Write, Write Uncorrectable, Write Zeroes, Copy, Zone Append
+    NVME_STATUS_ZONE_OFFLINE                                        = 0xBB,         // Compare, Read, Verify, Write, Write Uncorrectable, Write Zeroes, Copy, Zone Append
+    NVME_STATUS_ZONE_INVALID_WRITE                                  = 0xBC,         // Write, Write Uncorrectable, Write Zeroes, Copy
+    NVME_STATUS_ZONE_TOO_MANY_ACTIVE                                = 0xBD,         // Write, Write Uncorrectable, Write Zeroes, Copy, Zone Append, Zone Management Send
+    NVME_STATUS_ZONE_TOO_MANY_OPEN                                  = 0xBE,         // Write, Write Uncorrectable, Write Zeroes, Copy, Zone Append, Zone Management Send
+    NVME_STATUS_ZONE_INVALID_STATE_TRANSITION                       = 0xBF,         // Zone Management Send
 
 } NVME_STATUS_COMMAND_SPECIFIC_CODES;
 
@@ -602,6 +645,7 @@ typedef enum {
     NVME_ADMIN_COMMAND_SECURITY_SEND            = 0x81,
     NVME_ADMIN_COMMAND_SECURITY_RECEIVE         = 0x82,
     NVME_ADMIN_COMMAND_SANITIZE                 = 0x84,
+    NVME_ADMIN_COMMAND_GET_LBA_STATUS           = 0x86,
 
 } NVME_ADMIN_COMMANDS;
 
@@ -627,11 +671,31 @@ typedef enum {
     NVME_FEATURE_KEEP_ALIVE                             = 0x0F,
     NVME_FEATURE_HOST_CONTROLLED_THERMAL_MANAGEMENT     = 0x10,
     NVME_FEATURE_NONOPERATIONAL_POWER_STATE             = 0x11,
+    NVME_FEATURE_READ_RECOVERY_LEVEL_CONFIG             = 0x12,
+    NVME_FEATURE_PREDICTABLE_LATENCY_MODE_CONFIG        = 0x13,
+    NVME_FEATURE_PREDICTABLE_LATENCY_MODE_WINDOW        = 0x14,
+    NVME_FEATURE_LBA_STATUS_INFORMATION_REPORT_INTERVAL = 0x15,
+    NVME_FEATURE_HOST_BEHAVIOR_SUPPORT                  = 0x16,
+    NVME_FEATURE_SANITIZE_CONFIG                        = 0x17,
+    NVME_FEATURE_ENDURANCE_GROUP_EVENT_CONFIG           = 0x18,
+    NVME_FEATURE_IO_COMMAND_SET_PROFILE                 = 0x19,
+
+    NVME_FEATURE_ENHANCED_CONTROLLER_METADATA           = 0x7D,
+    NVME_FEATURE_CONTROLLER_METADATA                    = 0x7E,
+    NVME_FEATURE_NAMESPACE_METADATA                     = 0x7F,
 
     NVME_FEATURE_NVM_SOFTWARE_PROGRESS_MARKER           = 0x80,
     NVME_FEATURE_NVM_HOST_IDENTIFIER                    = 0x81,
     NVME_FEATURE_NVM_RESERVATION_NOTIFICATION_MASK      = 0x82,
     NVME_FEATURE_NVM_RESERVATION_PERSISTANCE            = 0x83,
+    NVME_FEATURE_NVM_NAMESPACE_WRITE_PROTECTION_CONFIG  = 0x84,
+
+    NVME_FEATURE_ERROR_INJECTION                        = 0xC0, // This is from OCP NVMe Cloud SSD spec.
+    NVME_FEATURE_CLEAR_FW_UPDATE_HISTORY                = 0xC1, // This is from OCP NVMe Cloud SSD spec.
+    NVME_FEATURE_READONLY_WRITETHROUGH_MODE             = 0xC2, // This is from OCP NVMe Cloud SSD spec.
+    NVME_FEATURE_CLEAR_PCIE_CORRECTABLE_ERROR_COUNTERS  = 0xC3, // This is from OCP NVMe Cloud SSD spec.
+    NVME_FEATURE_ENABLE_IEEE1667_SILO                   = 0xC4, // This is from OCP NVMe Cloud SSD spec.
+    NVME_FEATURE_PLP_HEALTH_MONITOR                     = 0xC5, // This is from OCP NVMe Cloud SSD spec.
 
 } NVME_FEATURES;
 
@@ -651,24 +715,52 @@ typedef union {
 } NVME_CDW10_ABORT, *PNVME_CDW10_ABORT;
 
 //
-// Identify Command
+// Identify Command of Controller or Namespace Structure (CNS)
 //
 typedef enum {
 
-    NVME_IDENTIFY_CNS_SPECIFIC_NAMESPACE            = 0,
-    NVME_IDENTIFY_CNS_CONTROLLER                    = 1,
-    NVME_IDENTIFY_CNS_ACTIVE_NAMESPACES             = 2,       // A list of up to 1024 active namespace IDs is returned to the host containing active namespaces with a namespace identifier greater than the value specified in the Namespace Identifier (CDW1.NSID) field.
-    NVME_IDENTIFY_CNS_DESCRIPTOR_NAMESPACE          = 3,
-    NVME_IDENTIFY_CNS_NVM_SET                       = 4,
+    NVME_IDENTIFY_CNS_SPECIFIC_NAMESPACE                    = 0x0,
+    NVME_IDENTIFY_CNS_CONTROLLER                            = 0x1,
+    NVME_IDENTIFY_CNS_ACTIVE_NAMESPACES                     = 0x2,       // A list of up to 1024 active namespace IDs is returned to the host containing active namespaces with a namespace identifier greater than the value specified in the Namespace Identifier (CDW1.NSID) field.
+    NVME_IDENTIFY_CNS_DESCRIPTOR_NAMESPACE                  = 0x3,
+    NVME_IDENTIFY_CNS_NVM_SET                               = 0x4,
+
+    NVME_IDENTIFY_CNS_SPECIFIC_NAMESPACE_IO_COMMAND_SET     = 0x5,
+    NVME_IDENTIFY_CNS_SPECIFIC_CONTROLLER_IO_COMMAND_SET    = 0x6,
+    NVME_IDENTIFY_CNS_ACTIVE_NAMESPACE_LIST_IO_COMMAND_SET  = 0x7, 
+
+    NVME_IDENTIFY_CNS_ALLOCATED_NAMESPACE_LIST              = 0x10,
+    NVME_IDENTIFY_CNS_ALLOCATED_NAMESPACE                   = 0x11,
+    NVME_IDENTIFY_CNS_CONTROLLER_LIST_OF_NSID               = 0x12,
+    NVME_IDENTIFY_CNS_CONTROLLER_LIST_OF_NVM_SUBSYSTEM      = 0x13,
+    NVME_IDENTIFY_CNS_PRIMARY_CONTROLLER_CAPABILITIES       = 0x14,
+    NVME_IDENTIFY_CNS_SECONDARY_CONTROLLER_LIST             = 0x15,
+    NVME_IDENTIFY_CNS_NAMESPACE_GRANULARITY_LIST            = 0x16,
+    NVME_IDENTIFY_CNS_UUID_LIST                             = 0x17,
+    NVME_IDENTIFY_CNS_DOMAIN_LIST                           = 0x18,
+    NVME_IDENTIFY_CNS_ENDURANCE_GROUP_LIST                  = 0x19,
+
+    NVME_IDENTIFY_CNS_ALLOCATED_NAMSPACE_LIST_IO_COMMAND_SET= 0x1A,
+    NVME_IDENTIFY_CNS_ALLOCATED_NAMESPACE_IO_COMMAND_SET    = 0x1B,
+    NVME_IDENTIFY_CNS_IO_COMMAND_SET                        = 0x1C,
 
 } NVME_IDENTIFY_CNS_CODES;
+
+//
+// Identify Command Set Identifiers (CSI)
+//
+typedef enum {
+    NVME_COMMAND_SET_NVM                                = 0x0,
+    NVME_COMMAND_SET_KEY_VALUE                          = 0x1,
+    NVME_COMMAND_SET_ZONED_NAMESPACE                    = 0x2,
+} NVME_COMMAND_SET_IDENTIFIERS;
 
 typedef union {
 
     struct {
-        UCHAR   CNS;            // Controller or Namespace Structure (CNS)
-        UCHAR   Reserved;
-        USHORT  CNTID;          // Controller Identifier (CNTID)
+        ULONG   CNS         : 8;         // Controller or Namespace Structure (CNS, Defined in NVME_IDENTIFY_CNS_CODES)
+        ULONG   Reserved    : 8;
+        ULONG   CNTID       : 16;        // Controller Identifier (CNTID)
     } DUMMYSTRUCTNAME;
 
     ULONG AsUlong;
@@ -678,15 +770,181 @@ typedef union {
 typedef union {
 
     struct {
-        USHORT  NVMSETID;       // NVM Set Identifier
+        USHORT  NVMSETID;               // NVM Set Identifier
         USHORT  Reserved;
     } DUMMYSTRUCTNAME;
+    
+    struct {
+        ULONG   CNSID       : 16;       // CNS Specific Identifier (NVM Set ID/Domain ID/Endurance Group ID) 
+        ULONG   Reserved2   : 8;
+        ULONG   CSI         : 8;        // Command Set Identifier (CSI, Defined in NVME_COMMAND_SET_IDENTIFIERS)
+    } DUMMYSTRUCTNAME2;
 
     ULONG AsUlong;
 
 } NVME_CDW11_IDENTIFY, *PNVME_CDW11_IDENTIFY;
 
+//
+// Output of NVME_IDENTIFY_CNS_SPECIFIC_NAMESPACE (0x0)
+//
+typedef union {
 
+    struct {
+        USHORT  MS;                 // bit 0:15     Metadata Size (MS)
+        UCHAR   LBADS;              // bit 16:23    LBA  Data  Size (LBADS)
+
+        UCHAR   RP          : 2;    // bit 24:25    Relative Performance (RP)
+        UCHAR   Reserved0   : 6;    // bit 26:31
+    } DUMMYSTRUCTNAME;
+
+    ULONG   AsUlong;
+
+} NVME_LBA_FORMAT, *PNVME_LBA_FORMAT;
+
+typedef union {
+
+    struct {
+        UCHAR   PersistThroughPowerLoss                     : 1;
+        UCHAR   WriteExclusiveReservation                   : 1;
+        UCHAR   ExclusiveAccessReservation                  : 1;
+        UCHAR   WriteExclusiveRegistrantsOnlyReservation    : 1;
+        UCHAR   ExclusiveAccessRegistrantsOnlyReservation   : 1;
+        UCHAR   WriteExclusiveAllRegistrantsReservation     : 1;
+        UCHAR   ExclusiveAccessAllRegistrantsReservation    : 1;
+        UCHAR   Reserved                                    : 1;
+    } DUMMYSTRUCTNAME;
+
+    UCHAR AsUchar;
+} NVM_RESERVATION_CAPABILITIES, *PNVME_RESERVATION_CAPABILITIES;
+
+typedef struct {
+
+    ULONGLONG   NSZE;                   // byte 0:7.    M - Namespace Size (NSZE)
+    ULONGLONG   NCAP;                   // byte 8:15    M - Namespace Capacity (NCAP)
+    ULONGLONG   NUSE;                   // byte 16:23   M - Namespace Utilization (NUSE)
+
+    struct {
+        UCHAR   ThinProvisioning            : 1;
+        UCHAR   NameSpaceAtomicWriteUnit    : 1;
+        UCHAR   DeallocatedOrUnwrittenError : 1;
+        UCHAR   SkipReuseUI                 : 1;
+        UCHAR   NameSpaceIoOptimization     : 1;
+        UCHAR   Reserved                    : 3;
+    } NSFEAT;                           // byte 24      M - Namespace Features (NSFEAT)
+
+    UCHAR   NLBAF;                      // byte 25      M - Number of LBA Formats (NLBAF)
+
+    struct {
+        UCHAR   LbaFormatIndex              : 4;
+        UCHAR   MetadataInExtendedDataLBA   : 1;
+        UCHAR   Reserved                    : 3;
+    } FLBAS;                            // byte 26      M - Formatted LBA Size (FLBAS)
+
+    struct {
+        UCHAR   MetadataInExtendedDataLBA   : 1;
+        UCHAR   MetadataInSeparateBuffer    : 1;
+        UCHAR   Reserved                    : 6;
+    } MC;                               // byte 27      M - Metadata Capabilities (MC)
+
+    struct {
+        UCHAR   ProtectionInfoType1         : 1;
+        UCHAR   ProtectionInfoType2         : 1;
+        UCHAR   ProtectionInfoType3         : 1;
+        UCHAR   InfoAtBeginningOfMetadata   : 1;
+        UCHAR   InfoAtEndOfMetadata         : 1;
+        UCHAR   Reserved                    : 3;
+    } DPC;                              // byte 28      M - End-to-end Data Protection Capabilities (DPC)
+
+    struct {
+        UCHAR   ProtectionInfoTypeEnabled   : 3;    // 0 - not enabled; 1 ~ 3: enabled type; 4 ~ 7: reserved
+        UCHAR   InfoAtBeginningOfMetadata   : 1;
+        UCHAR   Reserved                    : 4;
+    } DPS;                              // byte 29      M - End-to-end Data Protection Type Settings (DPS)
+
+    struct {
+        UCHAR   SharedNameSpace     : 1;
+        UCHAR   Reserved            : 7;
+    } NMIC;                             // byte 30      O - Namespace Multi-path I/O and Namespace Sharing Capabilities (NMIC)
+
+    NVM_RESERVATION_CAPABILITIES RESCAP;    // byte 31      O - Reservation Capabilities (RESCAP)
+
+
+    struct {
+        UCHAR   PercentageRemained  : 7;// Bits 6:0: indicate the percentage of the namespace that remains to be formatted
+        UCHAR   Supported           : 1;// Bit 7: if set to 1 indicates that the namespace supports the Format Progress Indicator.
+    } FPI;                              // byte 32      O - Format Progress Indicator (FPI)
+
+    struct {
+        UCHAR  ReadBehavior         : 3;// Bits 2:0: indicate deallocated logical block read behavior
+        UCHAR  WriteZeroes          : 1;// Bit 3: indicate controller supports the deallocate bit in Write Zeroes
+        UCHAR  GuardFieldWithCRC    : 1;// Bit 4: indicate guard field for deallocated logical blocks is set to CRC
+        UCHAR  Reserved             : 3;
+    } DLFEAT;                                  // byte 33
+
+    USHORT          NAWUN;              // byte 34:35 O - Namespace Atomic Write Unit Normal (NAWUN)
+    USHORT          NAWUPF;             // byte 36:37 O - Namespace Atomic Write Unit Power Fail (NAWUPF)
+    USHORT          NACWU;              // byte 38:39 O - Namespace Atomic Compare & Write Unit (NACWU)
+    USHORT          NABSN;              // byte 40:41 O - Namespace Atomic Boundary Size Normal (NABSN)
+    USHORT          NABO;               // byte 42:43 O - Namespace Atomic Boundary Offset (NABO)
+    USHORT          NABSPF;             // byte 44:45 O - Namespace Atomic Boundary Size Power Fail (NABSPF)
+    USHORT          NOIOB;              // byte 46:47 O - Namespace Optimal IO Boundary (NOIOB)
+
+    UCHAR           NVMCAP[16];         // byte 48:63 O - NVM Capacity (NVMCAP)
+
+    USHORT          NPWG;               // byte 64:65 O - Namespace Preferred Write Granularity (NPWG)
+    USHORT          NPWA;               // byte 66:67 O - Namespace Preferred Write Alignment (NPWA)
+    USHORT          NPDG;               // byte 68:69 O - Namespace Preferred Deallocate Granularity (NPDG)
+    USHORT          NPDA;               // byte 70:71 O - Namespace Preferred Deallocate Alignment (NPDA)
+    USHORT          NOWS;               // byte 72:73 O - Namespace Optimal Write Size (NOWS)
+
+    USHORT          MSSRL;              // byte 74:75 O - Maximum Single Source Range Length(MSSRL)
+    ULONG           MCL;                // byte 76:79 O - Maximum Copy Length(MCL)
+    UCHAR           MSRC;               // byte 80 O - Maximum Source Range Count(MSRC)
+    UCHAR           Reserved2[11];      // byte 81:91
+
+    ULONG           ANAGRPID;           // byte 92:95 O - ANA Group Identifier (ANAGRPID)
+
+    UCHAR           Reserved3[3];       // byte 96:98
+
+    struct {
+        UCHAR   WriteProtected      : 1;// Write Protected
+        UCHAR   Reserved            : 7;
+    } NSATTR;                           // byte 99 O - Namespace Attributes
+
+    USHORT          NVMSETID;           // byte 100:101 O - Associated NVM Set Identifier
+
+    USHORT          ENDGID;             // byte 102:103 O - Associated Endurance Group Identier
+
+    UCHAR           NGUID[16];          // byte 104:119 O - Namespace Globally Unique Identifier (NGUID)
+
+    UCHAR           EUI64[8];           // byte 120:127 M - IEEE Extended Unique Identifier (EUI64)
+
+    NVME_LBA_FORMAT LBAF[16];           // byte 128:131 M - LBA Format 0 Support (LBAF0)
+                                        // byte 132:135 O - LBA Format 1 Support (LBAF1)
+                                        // byte 136:139 O - LBA Format 2 Support (LBAF2)
+                                        // byte 140:143 O - LBA Format 3 Support (LBAF3)
+                                        // byte 144:147 O - LBA Format 4 Support (LBAF4)
+                                        // byte 148:151 O - LBA Format 5 Support (LBAF5)
+                                        // byte 152:155 O - LBA Format 6 Support (LBAF6)
+                                        // byte 156:159 O - LBA Format 7 Support (LBAF7)
+                                        // byte 160:163 O - LBA Format 8 Support (LBAF8)
+                                        // byte 164:167 O - LBA Format 9 Support (LBAF9)
+                                        // byte 168:171 O - LBA Format 10 Support (LBAF10)
+                                        // byte 172:175 O - LBA Format 11 Support (LBAF11)
+                                        // byte 176:179 O - LBA Format 12 Support (LBAF12)
+                                        // byte 180:183 O - LBA Format 13 Support (LBAF13)
+                                        // byte 184:187 O - LBA Format 14 Support (LBAF14)
+                                        // byte 188:191 O - LBA Format 15 Support (LBAF15)
+
+    UCHAR           Reserved4[192];     // byte 192:383
+
+    UCHAR           VS[3712];           // byte 384:4095 O - Vendor Specific (VS): This range of bytes is allocated for vendor specific usage.
+
+} NVME_IDENTIFY_NAMESPACE_DATA, *PNVME_IDENTIFY_NAMESPACE_DATA;
+
+//
+// Output of NVME_IDENTIFY_CNS_CONTROLLER (0x01)
+//
 typedef struct {
     USHORT  MP;                 // bit 0:15.    Maximum  Power (MP)
 
@@ -730,32 +988,6 @@ typedef struct {
 } NVME_POWER_STATE_DESC, *PNVME_POWER_STATE_DESC;
 
 typedef struct {
-
-    USHORT      Identifier;
-    USHORT      ENDGID;
-
-    ULONG       Reserved1;
-
-    ULONG       Random4KBReadTypical;
-    ULONG       OptimalWriteSize;
-    UCHAR       TotalCapacity[16];
-    UCHAR       UnallocatedCapacity[16];
-
-    UCHAR       Reserved2[80];
-} NVME_SET_ATTRIBUTES_ENTRY, *PNVME_SET_ATTRIBUTES_ENTRY;
-
-
-typedef struct {
-
-    UCHAR       IdentifierCount;
-
-    UCHAR       Reserved[127];
-
-    NVME_SET_ATTRIBUTES_ENTRY       Entry[ANYSIZE_ARRAY];
-
-} NVM_SET_LIST, *PNVM_SET_LIST;
-
-typedef struct {
     //
     // byte 0 : 255, Controller Capabilities and Features
     //
@@ -784,7 +1016,14 @@ typedef struct {
         ULONG   Reserved0                   : 8;
         ULONG   NamespaceAttributeChanged   : 1;
         ULONG   FirmwareActivation          : 1;
-        ULONG   Reserved1                   : 22;
+        ULONG   Reserved1                   : 1;
+        ULONG   AsymmetricAccessChanged     : 1;
+        ULONG   PredictableLatencyAggregateLogChanged   : 1;
+        ULONG   LbaStatusChanged            : 1;
+        ULONG   EnduranceGroupAggregateLogChanged       : 1;
+        ULONG   Reserved2                   : 12;
+        ULONG   ZoneInformation             : 1;
+        ULONG   Reserved3                   : 4;
     } OAES;                     // byte 92:95.   M - Optional Asynchronous Events Supported (OAES)
 
    struct {
@@ -793,10 +1032,43 @@ typedef struct {
         ULONG   NVMSets                     : 1;
         ULONG   ReadRecoveryLevels          : 1;
         ULONG   EnduranceGroups             : 1;
-        ULONG   Reserved0                   : 27;
+        ULONG   PredictableLatencyMode      : 1;
+        ULONG   TBKAS                       : 1;    // Traffic Based Keep Alive Support
+        ULONG   NamespaceGranularity        : 1;
+        ULONG   SQAssociations              : 1;
+        ULONG   UUIDList                    : 1;
+        ULONG   Reserved0                   : 22;
     } CTRATT;                   // byte 96:99.   M - Controller Attributes (CTRATT)
 
-    UCHAR   Reserved0[140];     // byte 100:239.
+    struct {
+        USHORT  ReadRecoveryLevel0          : 1;
+        USHORT  ReadRecoveryLevel1          : 1;
+        USHORT  ReadRecoveryLevel2          : 1;
+        USHORT  ReadRecoveryLevel3          : 1;
+        USHORT  ReadRecoveryLevel4          : 1;
+        USHORT  ReadRecoveryLevel5          : 1;
+        USHORT  ReadRecoveryLevel6          : 1;
+        USHORT  ReadRecoveryLevel7          : 1;
+        USHORT  ReadRecoveryLevel8          : 1;
+        USHORT  ReadRecoveryLevel9          : 1;
+        USHORT  ReadRecoveryLevel10         : 1;
+        USHORT  ReadRecoveryLevel11         : 1;
+        USHORT  ReadRecoveryLevel12         : 1;
+        USHORT  ReadRecoveryLevel13         : 1;
+        USHORT  ReadRecoveryLevel14         : 1;
+        USHORT  ReadRecoveryLevel15         : 1;
+    } RRLS;                     // byte 100:101. O - Read Recovery Levels Supported (RRLS)
+
+    UCHAR   Reserved0[9];       // byte 102:110.
+    
+    UCHAR   CNTRLTYPE;          // byte 111.     M - Controller Type
+    UCHAR   FGUID[16];          // byte 112:127. O - FRU Globally Unique Identifier (FGUID)
+
+    USHORT  CRDT1;              // byte 128:129. O - Command Retry Delay Time 1 
+    USHORT  CRDT2;              // byte 130:131. O - Command Retry Delay Time 1
+    USHORT  CRDT3;              // byte 132:133. O - Command Retry Delay Time 1
+
+    UCHAR   Reserved0_1[106];   // byte 134:239.
     UCHAR   ReservedForManagement[16];     // byte 240:255.  Refer to the NVMe Management Interface Specification for definition.
 
     //
@@ -809,7 +1081,11 @@ typedef struct {
         USHORT  NamespaceCommands   : 1;
         USHORT  DeviceSelfTest      : 1;
         USHORT  Directives          : 1;
-        USHORT  Reserved            : 10;
+        USHORT  NVMeMICommands      : 1;
+        USHORT  VirtualizationMgmt  : 1;
+        USHORT  DoorBellBufferConfig: 1;
+        USHORT  GetLBAStatus        : 1;
+        USHORT  Reserved            : 6;
     } OACS;                     // byte 256:257. M - Optional Admin Command Support (OACS)
 
     UCHAR   ACL;                // byte 258.    M - Abort Command Limit (ACL)
@@ -827,7 +1103,10 @@ typedef struct {
         UCHAR   CommandEffectsLog       : 1;
         UCHAR   LogPageExtendedData     : 1;
         UCHAR   TelemetrySupport        : 1;
-        UCHAR   Reserved                : 4;
+        UCHAR   PersistentEventLog      : 1;
+        UCHAR   Reserved0               : 1;
+        UCHAR   TelemetryDataArea4      : 1;
+        UCHAR   Reserved1               : 1;
     } LPA;                      // byte 261.    M - Log Page Attributes (LPA)
 
     UCHAR   ELPE;               // byte 262.    M - Error Log Page Entries (ELPE)
@@ -876,12 +1155,36 @@ typedef struct {
         ULONG   CryptoErase             : 1;     // Controller supports Crypto Erase Sanitize
         ULONG   BlockErase              : 1;     // Controller supports Block Erase Sanitize
         ULONG   Overwrite               : 1;     // Controller supports Overwrite Santize
-        ULONG   Reserved                : 29;
+        ULONG   Reserved                : 26;
+        ULONG   NDI                     : 1;     // No-Deallocate Inhibited (NDI)
+        ULONG   NODMMAS                 : 2;     // No-Deallocate Modifies Media After Sanitize (NODMMAS)
     } SANICAP;                  // byte 328:331  O - Sanitize Capabilities (SANICAP)
 
-    USHORT  NSETIDMAX;          // byte 332:333  O - NVM Set Identifier Maximum
+    ULONG   HMMINDS;            // byte 332:335  O - Host Memory Buffer Minimum Descriptor Entry Size (HMMINDS)
+    USHORT  HMMAXD;             // byte 336:337  O - Host Memory Maxiumum Descriptors Entries (HMMAXD)
 
-    UCHAR   Reserved1[178];     // byte 334:511.
+    USHORT  NSETIDMAX;          // byte 338:339  O - NVM Set Identifier Maximum
+    USHORT  ENDGIDMAX;          // byte 340:341  O - Endurance Group Identifier Maximum (ENDGIDMAX)
+    
+    UCHAR   ANATT;              // byte 342      O - ANA Transition Time (ANATT)
+
+    struct {
+        UCHAR   OptimizedState          : 1;     // Report ANA Optimized State
+        UCHAR   NonOptimizedState       : 1;     // Report ANA Non-Optimized State
+        UCHAR   InaccessibleState       : 1;     // Report ANA Inaccessible State
+        UCHAR   PersistentLossState     : 1;     // Report ANA Persistent Loss State
+        UCHAR   ChangeState             : 1;     // Report ANA Change State
+        UCHAR   Reserved                : 1;
+        UCHAR   StaticANAGRPID          : 1;     // If set, ANAGRPID in Identify Namespace doesn't change
+        UCHAR   SupportNonZeroANAGRPID  : 1;     // If set, Controller supports a non-zero value in ANAGRPID field of Namespace Mgmt Command
+    } ANACAP;                   // byte 343      O - Asymmetric Namespace Access Capabilities (ANACAP)
+   
+    ULONG  ANAGRPMAX;           // byte 344:347  O - ANA Group Identifier Maximum (ANAGRPMAX)
+    ULONG  NANAGRPID;           // byte 348:351  O - Number of ANA Group Identifiers (NANAGRPID)
+
+    ULONG   PELS;               // byte 352:355  O - Persistent Event Log Size (PELS)
+    
+    UCHAR   Reserved1[156];     // byte 356:511.
 
     //
     // byte 512 : 703, NVM Command Set Attributes
@@ -896,7 +1199,7 @@ typedef struct {
         UCHAR   MaxEntrySize        : 4;    // This value is larger than or equal to the required CQ entry size. The value is in bytes and is reported as a power of two (2^n).
     } CQES;                     // byte 513.    M - Completion Queue Entry Size (CQES)
 
-    UCHAR   Reserved2[2];       // byte 514:515.
+    USHORT  MAXCMD;             // byte 514:515. M - Maximum Outstanding Commands (MAXCMD)
 
     ULONG   NN;                 // byte 516:519. M - Number of Namespaces (NN)
 
@@ -908,8 +1211,9 @@ typedef struct {
         USHORT  FeatureField        : 1;
         USHORT  Reservations        : 1;
         USHORT  Timestamp           : 1;
+        USHORT  Verify              : 1;
 
-        USHORT  Reserved            : 9;
+        USHORT  Reserved            : 8;
     } ONCS;                     // byte 520:521. M - Optional NVM Command Support (ONCS)
 
     struct {
@@ -921,12 +1225,14 @@ typedef struct {
         UCHAR   FormatApplyToAll                : 1;
         UCHAR   SecureEraseApplyToAll           : 1;
         UCHAR   CryptographicEraseSupported     : 1;
-        UCHAR   Reserved                        : 5;
+        UCHAR   FormatSupportNSIDAllF           : 1;
+        UCHAR   Reserved                        : 4;
     } FNA;                      // byte 524.     M - Format NVM Attributes (FNA)
 
     struct {
-        UCHAR   Present     : 1;
-        UCHAR   Reserved    : 7;
+        UCHAR   Present         : 1;
+        UCHAR   FlushBehavior   : 2;
+        UCHAR   Reserved        : 5;
     } VWC;                      // byte 525.     M - Volatile Write Cache (VWC)
 
     USHORT  AWUN;               // byte 526:527. M - Atomic Write Unit Normal (AWUN)
@@ -937,27 +1243,40 @@ typedef struct {
         UCHAR   Reserved            : 7;
     } NVSCC;                    // byte 530.     M - NVM Vendor Specific Command Configuration (NVSCC)
 
-    UCHAR   Reserved3;          // byte 531.
+    struct {
+        UCHAR   WriteProtect        : 1;
+        UCHAR   UntilPowerCycle     : 1;
+        UCHAR   Permanent           : 1;
+        UCHAR   Reserved            : 5;
+    } NWPC;                     // byte 531.     M - Namespace Write Protection Capabilities (NWPC)
+
 
     USHORT  ACWU;               // byte 532:533  O - Atomic Compare & Write Unit (ACWU)
 
     UCHAR   Reserved4[2];       // byte 534:535.
 
     struct {
-        ULONG   SGLSupported            : 1;
-        ULONG   Reserved0               : 15;
+        ULONG   SGLSupported            : 2;
+        ULONG   KeyedSGLData            : 1;
+        ULONG   Reserved0               : 13;
         ULONG   BitBucketDescrSupported : 1;
         ULONG   ByteAlignedContiguousPhysicalBuffer : 1;
         ULONG   SGLLengthLargerThanDataLength       : 1;
-        ULONG   Reserved1               : 13;
+        ULONG   MPTRSGLDescriptor       : 1;
+        ULONG   AddressFieldSGLDataBlock: 1;
+        ULONG   TransportSGLData        : 1;
+        ULONG   Reserved1               : 10;
     } SGLS;                     // byte 536:539. O - SGL Support (SGLS)
 
-    UCHAR   Reserved5[164];     // byte 540:703.
+    ULONG   MNAN;               // byte 540:543. O - Maximum Number of Allowed Namespace (MNAN)
 
-    //
-    // byte 704 : 2047, I/O Command Set Attributes
-    //
-    UCHAR   Reserved6[1344];    // byte 704:2047.
+    UCHAR   Reserved6[224];     // byte 544:767.
+
+    UCHAR   SUBNQN[256];        // byte 768:1023. M - NVM Subsystem NVMe Qualified Name (SUBNQN)
+
+    UCHAR   Reserved7[768];     // byte 1024:1791
+
+    UCHAR   Reserved8[256];     // byte 1792:2047. Refer to NVMe over Fabrics Specification
 
     //
     // byte 2048 : 3071, Power State Descriptors
@@ -1002,6 +1321,152 @@ typedef struct {
 
 } NVME_IDENTIFY_CONTROLLER_DATA, *PNVME_IDENTIFY_CONTROLLER_DATA;
 
+//
+// Namespace Identfier Type (NIDT)
+//
+typedef enum {
+    NVME_IDENTIFIER_TYPE_EUI64      = 0x1,
+    NVME_IDENTIFIER_TYPE_NGUID      = 0x2,
+    NVME_IDENTIFIER_TYPE_UUID       = 0x3,
+    NVME_IDENTIFIER_TYPE_CSI        = 0x4,
+    
+} NVME_IDENTIFIER_TYPE;
+
+//
+// Namespace Identfier Length (NIDL) for a given type defined by NVME_IDENTIFIER_TYPE
+//
+typedef enum {
+    NVME_IDENTIFIER_TYPE_EUI64_LENGTH      = 0x8,
+    NVME_IDENTIFIER_TYPE_NGUID_LENGTH      = 0x10,
+    NVME_IDENTIFIER_TYPE_UUID_LENGTH       = 0x10,
+    NVME_IDENTIFIER_TYPE_CSI_LENGTH        = 0x1,
+    
+} NVME_IDENTIFIER_TYPE_LENGTH;
+
+//
+// Output of NVME_IDENTIFY_CNS_DESCRIPTOR_NAMESPACE (0x03)
+//
+
+#define NVME_IDENTIFY_CNS_DESCRIPTOR_NAMESPACE_SIZE 0x1000
+
+typedef struct {
+    UCHAR           NIDT;                           // Namespace Identifier Type as defined in NVME_IDENTIFIER_TYPE
+    UCHAR           NIDL;                           // Namespace Identifier Length
+    UCHAR           Reserved[2];
+    UCHAR           NID[ANYSIZE_ARRAY];             // Namespace Identifier (Based on NVME_IDENTIFIER_TYPE)
+} NVME_IDENTIFY_NAMESPACE_DESCRIPTOR, *PNVME_IDENTIFY_NAMESPACE_DESCRIPTOR;
+
+//
+// Output of NVME_IDENTIFY_CNS_NVM_SET (0x04)
+//
+typedef struct {
+
+    USHORT      Identifier;
+    USHORT      ENDGID;
+
+    ULONG       Reserved1;
+
+    ULONG       Random4KBReadTypical;
+    ULONG       OptimalWriteSize;
+    UCHAR       TotalCapacity[16];
+    UCHAR       UnallocatedCapacity[16];
+
+    UCHAR       Reserved2[80];
+} NVME_SET_ATTRIBUTES_ENTRY, *PNVME_SET_ATTRIBUTES_ENTRY;
+
+typedef struct {
+
+    UCHAR       IdentifierCount;
+
+    UCHAR       Reserved[127];
+
+    NVME_SET_ATTRIBUTES_ENTRY       Entry[ANYSIZE_ARRAY];
+
+} NVM_SET_LIST, *PNVM_SET_LIST;
+
+//
+// Output of NVME_IDENTIFY_CNS_SPECIFIC_NAMESPACE_IO_COMMAND_SET (0x05)
+//
+typedef struct {
+
+    ULONGLONG   ZoneSize;           // bit 0:63     Zone Size (MS)
+    UCHAR       ZDES;               // bit 64:71    Zone Descriptor Extension Size (ZDES)
+    UCHAR       Reserved[7];
+
+} NVME_LBA_ZONE_FORMAT, *PNVME_LBA_ZONE_FORMAT;
+
+typedef struct {
+
+    struct {
+        USHORT  VariableZoneCapacity                        : 1;
+        USHORT  ZoneExcursions                              : 1;
+        USHORT  Reserved                                    : 14;
+    } ZOC;                  // Zone Operation Characteristics
+
+    struct {
+        USHORT  ReadAcrossZoneBoundaries                    : 1;
+        USHORT  Reserved                                    : 15;
+    } OZCS;                 // Optional Zoned Command Support
+
+    ULONG   MAR;            // Maximum Active Resources (MAR)
+    ULONG   MOR;            // Maximum Open Resources (MOR)
+    ULONG   RRL;            // Reset Recommended Limit (RRL)
+    ULONG   FRL;            // Finish Recommended Limit (FRL)
+
+    UCHAR   Reserved0[2796];
+
+    NVME_LBA_ZONE_FORMAT LBAEF[16];     // byte 2816:2831 M - LBA Format 0 Extension (LBAFE0)
+                                        // byte 2832:2847 O - LBA Format 1 Extension (LBAFE1)
+                                        // byte 2848:2863 O - LBA Format 2 Extension (LBAFE2)
+                                        // byte 2864:2879 O - LBA Format 3 Extension (LBAFE3)
+                                        // byte 2880:2895 O - LBA Format 4 Extension (LBAFE4)
+                                        // byte 2896:2911 O - LBA Format 5 Extension (LBAFE5)
+                                        // byte 2912:2927 O - LBA Format 6 Extension (LBAFE6)
+                                        // byte 2928:2943 O - LBA Format 7 Extension (LBAFE7)
+                                        // byte 2944:2959 O - LBA Format 8 Extension (LBAFE8)
+                                        // byte 2960:2975 O - LBA Format 9 Extension (LBAFE9)
+                                        // byte 2976:2991 O - LBA Format 10 Extension (LBAFE10)
+                                        // byte 2992:3007 O - LBA Format 11 Extension (LBAFE11)
+                                        // byte 3008:3023 O - LBA Format 12 Extension (LBAFE12)
+                                        // byte 3024:3039 O - LBA Format 13 Extension (LBAFE13)
+                                        // byte 3040:3055 O - LBA Format 14 Extension (LBAFE14)
+                                        // byte 3056:3971 O - LBA Format 15 Extension (LBAFE15)
+
+    UCHAR           Reserved1[768];     // byte 3072:3839
+
+    UCHAR           VS[256];            // byte 3840:4095 O - Vendor Specific (VS): This range of bytes is allocated for vendor specific usage.
+
+} NVME_IDENTIFY_SPECIFIC_NAMESPACE_IO_COMMAND_SET, *PNVME_IDENTIFY_SPECIFIC_NAMESPACE_IO_COMMAND_SET;
+
+//
+// Output of NVME_IDENTIFY_CNS_SPECIFIC_CONTROLLER_IO_COMMAND_SET (0x06) with Command Set Identifier (0x00)
+//
+typedef struct {
+    UCHAR           VSL;                // byte 0       O - Verify Size Limit (VZL)
+    UCHAR           WZSL;               // byte 1       O - Write Zeroes Size Limit (WZSL)
+    UCHAR           WUSL;               // byte 2       O - Write Uncorrectable Size Limit (WUSL)
+
+    UCHAR           DMRL;               // byte 3       O - Dataset Management Ranges Limit (DMRL)
+    ULONG           DMRSL;              // byte 4:7     O - Dataset Management Range Size Limit (DMRSL)
+    ULONGLONG       DMSL;               // byte 8:15    O - Dataset Management Size Limit (DMSL)
+
+    UCHAR           Reserved[4080];     // byte 16:4095
+
+} NVME_IDENTIFY_NVM_SPECIFIC_CONTROLLER_IO_COMMAND_SET, *PNVME_IDENTIFY_NVM_SPECIFIC_CONTROLLER_IO_COMMAND_SET;
+
+//
+// Output of NVME_IDENTIFY_CNS_SPECIFIC_CONTROLLER_IO_COMMAND_SET (0x06) with Command Set Identifier (0x02)
+//
+typedef struct {
+    UCHAR           ZASL;               // byte 0.          O - Zone Append Size Limit (ZASL)
+
+    UCHAR           Reserved[4095];     // byte 1:4095
+
+} NVME_IDENTIFY_ZNS_SPECIFIC_CONTROLLER_IO_COMMAND_SET, *PNVME_IDENTIFY_ZNS_SPECIFIC_CONTROLLER_IO_COMMAND_SET;
+
+//
+// Output of NVME_IDENTIFY_CNS_CONTROLLER_LIST_OF_NSID (0x12)/NVME_IDENTIFY_CNS_CONTROLLER_LIST_OF_NVM_SUBSYSTEM (0x13)
+//
 typedef struct {
 
     USHORT  NumberOfIdentifiers;
@@ -1009,128 +1474,14 @@ typedef struct {
 
 } NVME_CONTROLLER_LIST, *PNVME_CONTROLLER_LIST;
 
-typedef union {
-
-    struct {
-        USHORT  MS;                 // bit 0:15     Metadata Size (MS)
-        UCHAR   LBADS;              // bit 16:23    LBA  Data  Size (LBADS)
-
-        UCHAR   RP          : 2;    // bit 24:25    Relative Performance (RP)
-        UCHAR   Reserved0   : 6;    // bit 26:31
-    } DUMMYSTRUCTNAME;
-
-    ULONG   AsUlong;
-
-} NVME_LBA_FORMAT, *PNVME_LBA_FORMAT;
-
+//
+// Output of NVME_IDENTIFY_CNS_IO_COMMAND_SET (0x1C)
+//
 typedef struct {
+    
+    ULONGLONG       IOCommandSetVector[512];
 
-    ULONGLONG   NSZE;                   // byte 0:7.    M - Namespace Size (NSZE)
-    ULONGLONG   NCAP;                   // byte 8:15    M - Namespace Capacity (NCAP)
-    ULONGLONG   NUSE;                   // byte 16:23   M - Namespace Utilization (NUSE)
-
-    struct {
-        UCHAR   ThinProvisioning            : 1;
-        UCHAR   NameSpaceAtomicWriteUnit    : 1;
-        UCHAR   DeallocatedOrUnwrittenError : 1;
-        UCHAR   SkipReuseUI                 : 1;
-        UCHAR   Reserved                    : 4;
-    } NSFEAT;                           // byte 24      M - Namespace Features (NSFEAT)
-
-    UCHAR   NLBAF;                      // byte 25      M - Number of LBA Formats (NLBAF)
-
-    struct {
-        UCHAR   LbaFormatIndex              : 4;
-        UCHAR   MetadataInExtendedDataLBA   : 1;
-        UCHAR   Reserved                    : 3;
-    } FLBAS;                            // byte 26      M - Formatted LBA Size (FLBAS)
-
-    struct {
-        UCHAR   MetadataInExtendedDataLBA   : 1;
-        UCHAR   MetadataInSeparateBuffer    : 1;
-        UCHAR   Reserved                    : 6;
-    } MC;                               // byte 27      M - Metadata Capabilities (MC)
-
-    struct {
-        UCHAR   ProtectionInfoType1         : 1;
-        UCHAR   ProtectionInfoType2         : 1;
-        UCHAR   ProtectionInfoType3         : 1;
-        UCHAR   InfoAtBeginningOfMetadata   : 1;
-        UCHAR   InfoAtEndOfMetadata         : 1;
-        UCHAR   Reserved                    : 3;
-    } DPC;                              // byte 28      M - End-to-end Data Protection Capabilities (DPC)
-
-    struct {
-        UCHAR   ProtectionInfoTypeEnabled   : 3;    // 0 - not enabled; 1 ~ 3: enabled type; 4 ~ 7: reserved
-        UCHAR   InfoAtBeginningOfMetadata   : 1;
-        UCHAR   Reserved                    : 4;
-    } DPS;                              // byte 29      M - End-to-end Data Protection Type Settings (DPS)
-
-    struct {
-        UCHAR   SharedNameSpace     : 1;
-        UCHAR   Reserved            : 7;
-    } NMIC;                             // byte 30      O - Namespace Multi-path I/O and Namespace Sharing Capabilities (NMIC)
-
-    struct {
-        UCHAR   PersistThroughPowerLoss                     : 1;
-        UCHAR   WriteExclusiveReservation                   : 1;
-        UCHAR   ExclusiveAccessReservation                  : 1;
-        UCHAR   WriteExclusiveRegistrantsOnlyReservation    : 1;
-        UCHAR   ExclusiveAccessRegistrantsOnlyReservation   : 1;
-        UCHAR   WriteExclusiveAllRegistrantsReservation     : 1;
-        UCHAR   ExclusiveAccessAllRegistrantsReservation    : 1;
-        UCHAR   Reserved                                    : 1;
-    } RESCAP;                           // byte 31      O - Reservation Capabilities (RESCAP)
-
-    struct {
-        UCHAR   PercentageRemained  : 7;    // Bits 6:0: indicate the percentage of the namespace that remains to be formatted
-        UCHAR   Supported           : 1;    // Bit 7: if set to 1 indicates that the namespace supports the Format Progress Indicator.
-    } FPI;                              // byte 32      O - Format Progress Indicator (FPI)
-
-    UCHAR           Reserved0;          // byte 33
-
-    USHORT          NAWUN;              // byte 34:35 O - Namespace Atomic Write Unit Normal (NAWUN)
-    USHORT          NAWUPF;             // byte 36:37 O - Namespace Atomic Write Unit Power Fail (NAWUPF)
-    USHORT          NACWU;              // byte 38:39 O - Namespace Atomic Compare & Write Unit (NACWU)
-    USHORT          NABSN;              // byte 40:41 O - Namespace Atomic Boundary Size Normal (NABSN)
-    USHORT          NABO;               // byte 42:43 O - Namespace Atomic Boundary Offset (NABO)
-    USHORT          NABSPF;             // byte 44:45 O - Namespace Atomic Boundary Size Power Fail (NABSPF)
-    USHORT          NOIOB;              // byte 46:47 O - Namespace Optimal IO Boundary (NOIOB)
-
-    UCHAR           NVMCAP[16];         // byte 48:63 O - NVM Capacity (NVMCAP)
-
-    UCHAR           Reserved2[36];      // byte 64:99
-
-    USHORT          NVMSETID;           // byte 100:101 O - Associated NVM Set Identifier
-
-    USHORT          ENDGID;             // byte 102:103 O - Associated Endurance Group Identier
-
-    UCHAR           NGUID[16];          // byte 104:119 O - NAmespace Globally Unique Identifier (NGUID)
-
-    UCHAR           EUI64[8];           // byte 120:127 M - IEEE Extended Unique Identifier (EUI64)
-
-    NVME_LBA_FORMAT LBAF[16];           // byte 128:131 M - LBA Format 0 Support (LBAF0)
-                                        // byte 132:135 O - LBA Format 1 Support (LBAF1)
-                                        // byte 136:139 O - LBA Format 2 Support (LBAF2)
-                                        // byte 140:143 O - LBA Format 3 Support (LBAF3)
-                                        // byte 144:147 O - LBA Format 4 Support (LBAF4)
-                                        // byte 148:151 O - LBA Format 5 Support (LBAF5)
-                                        // byte 152:155 O - LBA Format 6 Support (LBAF6)
-                                        // byte 156:159 O - LBA Format 7 Support (LBAF7)
-                                        // byte 160:163 O - LBA Format 8 Support (LBAF8)
-                                        // byte 164:167 O - LBA Format 9 Support (LBAF9)
-                                        // byte 168:171 O - LBA Format 10 Support (LBAF10)
-                                        // byte 172:175 O - LBA Format 11 Support (LBAF11)
-                                        // byte 176:179 O - LBA Format 12 Support (LBAF12)
-                                        // byte 180:183 O - LBA Format 13 Support (LBAF13)
-                                        // byte 184:187 O - LBA Format 14 Support (LBAF14)
-                                        // byte 188:191 O - LBA Format 15 Support (LBAF15)
-
-    UCHAR           Reserved3[192];     // byte 192:383
-
-    UCHAR           VS[3712];           // byte 384:4095 O - Vendor Specific (VS): This range of bytes is allocated for vendor specific usage.
-
-} NVME_IDENTIFY_NAMESPACE_DATA, *PNVME_IDENTIFY_NAMESPACE_DATA;
+} NVME_IDENTIFY_IO_COMMAND_SET, *PNVME_IDENTIFY_IO_COMMAND_SET;
 
 //
 // Data Structure of LBA Range Type entry
@@ -1160,6 +1511,222 @@ typedef struct {
     UCHAR       Reserved1[16];
 } NVME_LBA_RANGET_TYPE_ENTRY, *PNVME_LBA_RANGET_TYPE_ENTRY;
 
+//
+// Vendor defined log pages
+//
+typedef enum {
+    NVME_LOG_PAGE_WCS_DEVICE_SMART_ATTRIBUTES = 0xC0,          // WCS device SMART Attributes log page
+    NVME_LOG_PAGE_WCS_DEVICE_ERROR_RECOVERY   = 0xC1           // WCS device Error Recovery log page
+} NVME_VENDOR_LOG_PAGES;
+
+//
+// SMART Attributes Log Page GUID is defined in spec as byte stream: 0xAFD514C97C6F4F9CA4F2BFEA2810AFC5
+// which is converted to GUID format as: {2810AFC5-BFEA-A4F2-9C4F-6F7CC914D5AF}
+//
+#define GUID_WCS_DEVICE_SMART_ATTRIBUTESGuid { 0x2810AFC5, 0xBFEA, 0xA4F2, { 0x9C, 0x4F, 0x6F, 0x7C, 0xC9, 0x14, 0xD5, 0xAF} }
+DEFINE_GUID(GUID_WCS_DEVICE_SMART_ATTRIBUTES, 0x2810AFC5, 0xBFEA, 0xA4F2, 0x9C, 0x4F, 0x6F, 0x7C, 0xC9, 0x14, 0xD5, 0xAF);
+
+//
+// Error Recovery Log Page GUID is defined in spec as byte stream: 0x5A1983BA3DFD4DABAE3430FE2131D944
+// which is converted to GUID format as: {2131D944-30FE-AE34-AB4D-FD3DBA83195A}
+//
+#define GUID_WCS_DEVICE_ERROR_RECOVERYGuid { 0x2131D944, 0x30FE, 0xAE34, {0xAB, 0x4D, 0xFD, 0x3D, 0xBA, 0x83, 0x19, 0x5A} }
+DEFINE_GUID(GUID_WCS_DEVICE_ERROR_RECOVERY, 0x2131D944, 0x30FE, 0xAE34, 0xAB, 0x4D, 0xFD, 0x3D, 0xBA, 0x83, 0x19, 0x5A);
+
+//
+// Notice Status: NVME_ASYNC_EVENT_TYPE_VENDOR_SPECIFIC
+//
+typedef enum {
+
+    NVME_ASYNC_EVENT_TYPE_VENDOR_SPECIFIC_RESERVED = 0,
+    NVME_ASYNC_EVENT_TYPE_VENDOR_SPECIFIC_DEVICE_PANIC = 1,
+
+} NVME_ASYNC_EVENT_TYPE_VENDOR_SPECIFIC_CODES;
+
+//
+// Device recommended reset action on firmware assert for Windows Cloud Server Devices
+//
+typedef struct _NVME_WCS_DEVICE_RESET_ACTION {
+    union {
+        struct {
+            UCHAR ControllerReset : 1;
+            UCHAR NVMeSubsystemReset : 1;
+            UCHAR PCIeFLR : 1;
+            UCHAR PERST : 1;
+            UCHAR PowerCycle : 1;
+            UCHAR PCIeConventionalHotReset : 1;
+            UCHAR Reserved : 2;
+        };
+
+        UCHAR AsUCHAR;
+    };
+
+} NVME_WCS_DEVICE_RESET_ACTION, * PNVME_WCS_DEVICE_RESET_ACTION;
+
+//
+// Windows Cloud Server device capabilities
+//
+typedef struct _NVME_WCS_DEVICE_CAPABILITIES {
+    union {
+        struct {
+            ULONG PanicAEN : 1;
+            ULONG PanicCFS : 1;
+            ULONG Reserved : 30;
+        };
+
+        ULONG AsULONG;
+    };
+
+} NVME_WCS_DEVICE_CAPABILITIES, * PNVME_WCS_DEVICE_CAPABILITIES;
+
+//
+// Device recovery action on device panic
+//
+typedef enum _NVME_WCS_DEVICE_RECOVERY_ACTION
+{
+    NVMeDeviceRecoveryNoAction = 0,          // Requires no action
+    NVMeDeviceRecoveryFormatNVM,             // Requires Format NVM
+    NVMeDeviceRecoveryVendorSpecificCommand, // Requires Vendor Specific Command 
+    NVMeDeviceRecoveryVendorAnalysis,        // Requires Vendor Analysis
+    NVMeDeviceRecoveryDeviceReplacement,     // Requires Device Replacement
+    NVMeDeviceRecoverySanitize,              // Requires Sanitize
+    NVMeDeviceRecoveryMax = 15               // Not an actual action, denotes max action.
+} NVME_WCS_DEVICE_RECOVERY_ACTION, * PNVME_WCS_DEVICE_RECOVERY_ACTION;
+
+#pragma pack(push, 1)
+//
+// Log page defintion of NVME_LOG_PAGE_WCS_DEVICE_SMART_ATTRIBUTES. Size 512 bytes
+//
+
+// Version independent structure to perform basic validation
+
+typedef struct _NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG {
+
+    UCHAR VersionSpecificData[494];
+
+    USHORT LogPageVersionNumber;
+
+    GUID LogPageGUID;           // Shall be set to GUID_WCS_DEVICE_SMART_ATTRIBUTES
+
+} NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG, *PNVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG;
+
+C_ASSERT(sizeof(NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG) == 512);
+
+// Version 2
+
+#define NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG_VERSION_2        0x0002
+
+typedef struct _NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG_V2 {
+
+    UCHAR MediaUnitsWritten[16];
+    UCHAR MediaUnitsRead[16];
+
+    struct {
+        UCHAR RawCount[6];
+        UCHAR Normalized[2];
+    } BadUserNANDBlockCount;
+
+    struct {
+        UCHAR RawCount[6];
+        UCHAR Normalized[2];
+    } BadSystemNANDBlockCount;
+
+    ULONGLONG XORRecoveryCount;
+    ULONGLONG UnrecoverableReadErrorCount;
+    ULONGLONG SoftECCErrorCount;
+
+    struct {
+        ULONG DetectedCounts;
+        ULONG CorrectedCounts;
+    } EndToEndCorrectionCounts;
+
+    UCHAR PercentageSystemDataUsed;
+    UCHAR RefreshCount[7];
+
+    struct {
+        ULONG MaximumCount;
+        ULONG MinimumCount;
+    } UserDataEraseCounts;
+
+    struct {
+        UCHAR EventCount;
+        UCHAR Status;
+    } ThermalThrottling;
+
+    UCHAR Reserved0[6];
+
+    ULONGLONG PCIeCorrectableErrorCount;
+    ULONG IncompleteShutdownCount;
+
+    ULONG Reserved1;
+
+    UCHAR PercentageFreeBlocks;
+
+    UCHAR Reserved2[7];
+
+    USHORT CapacitorHealth;
+
+    UCHAR Reserved3[6];
+
+    ULONGLONG UnalignedIOCount;
+    ULONGLONG SecurityVersionNumber;
+    ULONGLONG NUSE;
+
+    UCHAR PLPStartCount[16];
+    UCHAR EnduranceEstimate[16];
+
+    UCHAR Reserved4[302];
+
+    USHORT LogPageVersionNumber;
+
+    GUID LogPageGUID;           // Shall be set to GUID_WCS_DEVICE_SMART_ATTRIBUTES
+
+} NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG_V2, *PNVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG_V2;
+
+C_ASSERT(sizeof(NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG_V2) == sizeof(NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG));
+
+//
+// Log page definition of NVME_LOG_PAGE_WCS_DEVICE_ERROR_RECOVERY (Version 1)
+//
+typedef struct _NVME_WCS_DEVICE_ERROR_RECOVERY_LOG {
+
+    // Amount of time to wait for device panic workflow to complete in msec. Delay the reset accordingly
+    USHORT PanicResetWaitTime;
+
+    // Reset actions on firmware assert, multiple options could be set
+    NVME_WCS_DEVICE_RESET_ACTION PanicResetAction;
+
+    //Recovery action for device panic condition
+    UCHAR DriveRecoveryAction;
+
+    // Id to identify the panic condition
+    ULONGLONG  PanicId;
+
+    // Device capabilities
+    NVME_WCS_DEVICE_CAPABILITIES DeviceCapabilities;
+
+    // Vendor specific command opcode to recover device from panic condition
+    UCHAR VendorSpecificRecoveryCode;
+
+    UCHAR Reserved0[3];
+
+    // CDW12 value for the Vendor Specific command to recover device from panic condition
+    ULONG VendorSpecificCommandCDW12;
+
+    // CDW13 value for the Vendor Specific command to recover device from panic condition
+    ULONG VendorSpecificCommandCDW13;
+
+    UCHAR Reserved1[466];
+
+    USHORT LogPageVersionNumber;
+
+    GUID LogPageGUID;           // Shall be set to GUID_WCS_DEVICE_ERROR_RECOVERY
+
+} NVME_WCS_DEVICE_ERROR_RECOVERY_LOG, *PNVME_WCS_DEVICE_ERROR_RECOVERY_LOG;
+
+C_ASSERT(sizeof(NVME_WCS_DEVICE_ERROR_RECOVERY_LOG) == 512);
+
+#pragma pack(pop)
 
 //
 // Parameters for NVME_ADMIN_COMMAND_CREATE_IO_CQ
@@ -1216,7 +1783,7 @@ typedef union {
 } NVME_CDW11_CREATE_IO_SQ, *PNVME_CDW11_CREATE_IO_SQ;
 
 //
-// Parameters for NVME_ADMIN_COMMAND_GET_FEATURES or NVME_ADMIN_COMMAND_SET_FEATURES
+// Output and Parameters for NVME_ADMIN_COMMAND_GET_FEATURES or NVME_ADMIN_COMMAND_SET_FEATURES
 //
 typedef enum {
 
@@ -1360,11 +1927,20 @@ typedef union {
 typedef union {
 
     struct {
-        ULONG   CriticalWarnings    : 8;  // SMART / Health Critical Warnings
-        ULONG   NsAttributeNotices  : 1;  // Namespace Attributes Notices
-        ULONG   FwActivationNotices : 1;  // Firmware Activation Notices
-        ULONG   TelemetryLogNotices : 1;  // Telemetry Log Notices
-        ULONG   Reserved0           : 21;
+        ULONG   CriticalWarnings            : 8;  // SMART / Health Critical Warnings
+        ULONG   NsAttributeNotices          : 1;  // Namespace Attributes Notices
+        ULONG   FwActivationNotices         : 1;  // Firmware Activation Notices
+        ULONG   TelemetryLogNotices         : 1;  // Telemetry Log Notices
+        ULONG   ANAChangeNotices            : 1;  // Asymmetric Namespace Access Change Notices
+        ULONG   PredictableLogChangeNotices : 1;  // Predictable Latency Event Aggregate Log Change Notices
+        ULONG   LBAStatusNotices            : 1;  // LBA Status Information Notices
+        ULONG   EnduranceEventNotices       : 1;  // Endurance Group Event Aggregate Log Change Notices
+
+        ULONG   Reserved0                   : 12;
+
+        ULONG   ZoneDescriptorNotices       : 1;  // Zone Descriptor Changed Notices
+
+        ULONG   Reserved1                   : 4;
     } DUMMYSTRUCTNAME;
 
     ULONG   AsUlong;
@@ -1436,6 +2012,17 @@ typedef union {
 
 } NVME_CDW11_FEATURE_TEMPERATURE_THRESHOLD, *PNVME_CDW11_FEATURE_TEMPERATURE_THRESHOLD;
 
+//
+// Parameter for NVME_FEATURE_ERROR_RECOVERY
+//
+typedef union {
+    struct {
+        ULONG   TLER        : 16;       // Time limited error recovery (TLER)
+        ULONG   DULBE       : 1;        // Deallocated or unwritten logical block error enable (DULBE)
+        ULONG   Reserved0   : 15;
+    } DUMMYSTRUCTNAME;
+    ULONG AsUlong;
+} NVME_CDW11_FEATURE_ERROR_RECOVERY, *PNVME_CDW11_FEATURE_ERROR_RECOVERY;
 
 //
 // Parameters for NVME_FEATURE_HOST_MEMORY_BUFFER
@@ -1492,49 +2079,330 @@ typedef struct {
     ULONG Reserved;
 } NVME_HOST_MEMORY_BUFFER_DESCRIPTOR_ENTRY, *PNVME_HOST_MEMORY_BUFFER_DESCRIPTOR_ENTRY;
 
-
 //
-// Parameters for SECURITY SEND / RECEIVE Commands
+// Parameters for NVME_FEATURE_IO_COMMAND_SET_PROFILE
 //
 typedef union {
 
     struct {
-        ULONG   Reserved0   : 8;
-        ULONG   SPSP        : 16;       // SP Specific (SPSP)
-        ULONG   SECP        : 8;        // Security Protocol (SECP)
+        ULONG   IOCSCI     : 8;           // I/O command Set Profile
+        ULONG   Reserved   : 24;
     } DUMMYSTRUCTNAME;
 
     ULONG   AsUlong;
 
-} NVME_CDW10_SECURITY_SEND_RECEIVE, *PNVME_CDW10_SECURITY_SEND_RECEIVE;
+} NVME_CDW11_FEATURE_IO_COMMAND_SET_PROFILE, *PNVME_CDW11_FEATURE_IO_COMMAND_SET_PROFILE;
 
-typedef struct {
+//
+// Parameters for NVME_FEATURE_ENHANDED_CONTROLLER_METADATA, NVME_FEATURE_CONTROLLER_METADATA, NVME_FEATURE_NAMESPACE_METADATA
+//
+typedef union {
 
-    ULONG   TL;                         // Transfer Length  (TL):
+    struct {
+        ULONG GDHM      : 1;    // Generate Default Host Metadata (GDHM)
+        ULONG Reserved  : 31;
+    } DUMMYSTRUCTNAME;
 
-} NVME_CDW11_SECURITY_SEND, *PNVME_CDW11_SECURITY_SEND;
+    ULONG AsUlong;
 
-typedef struct {
+} NVME_CDW11_FEATURE_GET_HOST_METADATA, *PNVME_CDW11_FEATURE_GET_HOST_METADATA;
 
-    ULONG   AL;                         // Transfer Length  (AL)
+typedef enum {
 
-} NVME_CDW11_SECURITY_RECEIVE, *PNVME_CDW11_SECURITY_RECEIVE;
+    NVME_HOST_METADATA_ADD_REPLACE_ENTRY        = 0,
+    NVME_HOST_METADATA_DELETE_ENTRY_MULTIPLE    = 1,
+    NVME_HOST_METADATA_ADD_ENTRY_MULTIPLE       = 2,
 
+} NVME_HOST_METADATA_ELEMENT_ACTIONS;
 
 typedef union {
-    NVME_CDW11_FEATURE_NUMBER_OF_QUEUES     NumberOfQueues;
-    NVME_CDW11_FEATURE_INTERRUPT_COALESCING InterruptCoalescing;
-    NVME_CDW11_FEATURE_INTERRUPT_VECTOR_CONFIG InterruptVectorConfig;
-    NVME_CDW11_FEATURE_LBA_RANGE_TYPE       LbaRangeType;
-    NVME_CDW11_FEATURE_ARBITRATION          Arbitration;
-    NVME_CDW11_FEATURE_VOLATILE_WRITE_CACHE VolatileWriteCache;
-    NVME_CDW11_FEATURE_ASYNC_EVENT_CONFIG   AsyncEventConfig;
-    NVME_CDW11_FEATURE_POWER_MANAGEMENT     PowerManagement;
-    NVME_CDW11_FEATURE_AUTO_POWER_STATE_TRANSITION  AutoPowerStateTransition;
-    NVME_CDW11_FEATURE_TEMPERATURE_THRESHOLD TemperatureThreshold;
-    NVME_CDW11_FEATURE_HOST_MEMORY_BUFFER   HostMemoryBuffer;
-    NVME_CDW11_FEATURE_WRITE_ATOMICITY_NORMAL WriteAtomicityNormal;
-    NVME_CDW11_FEATURE_NON_OPERATIONAL_POWER_STATE NonOperationalPowerState;
+
+    struct {
+        ULONG Reserved0 : 13;
+
+        ULONG EA        : 2;    // Element Action (EA), value defined in enum NVME_HOST_METADATA_ELEMENT_ACTIONS
+
+        ULONG Reserved1 : 17;
+    } DUMMYSTRUCTNAME;
+
+    ULONG AsUlong;
+
+} NVME_CDW11_FEATURE_SET_HOST_METADATA, *PNVME_CDW11_FEATURE_SET_HOST_METADATA;
+
+typedef enum {
+
+    NVME_CONTROLLER_METADATA_OPERATING_SYSTEM_CONTROLLER_NAME   = 0x1,
+    NVME_CONTROLLER_METADATA_OPERATING_SYSTEM_DRIVER_NAME       = 0x2,
+    NVME_CONTROLLER_METADATA_OPERATING_SYSTEM_DRIVER_VERSION    = 0x3,
+    NVME_CONTROLLER_METADATA_PREBOOT_CONTROLLER_NAME            = 0x4,
+    NVME_CONTROLLER_METADATA_PREBOOT_DRIVER_NAME                = 0x5,
+    NVME_CONTROLLER_METADATA_PREBOOT_DRIVER_VERSION             = 0x6,
+    NVME_CONTROLLER_METADATA_SYSTEM_PROCESSOR_MODEL             = 0x7,
+    NVME_CONTROLLER_METADATA_CHIPSET_DRIVER_NAME                = 0x8,
+    NVME_CONTROLLER_METADATA_CHIPSET_DRIVER_VERSION             = 0x9,
+    NVME_CONTROLLER_METADATA_OPERATING_SYSTEM_NAME_AND_BUILD    = 0xA,
+    NVME_CONTROLLER_METADATA_SYSTEM_PRODUCT_NAME                = 0xB,
+    NVME_CONTROLLER_METADATA_FIRMWARE_VERSION                   = 0xC,
+    NVME_CONTROLLER_METADATA_OPERATING_SYSTEM_DRIVER_FILENAME   = 0xD,
+    NVME_CONTROLLER_METADATA_DISPLAY_DRIVER_NAME                = 0xE,
+    NVME_CONTROLLER_METADATA_DISPLAY_DRIVER_VERSION             = 0xF,
+    NVME_CONTROLLER_METADATA_HOST_DETERMINED_FAILURE_RECORD     = 0x10,
+
+} NVME_CONTROLLER_METADATA_ELEMENT_TYPES;
+
+typedef enum {
+
+    NVME_NAMESPACE_METADATA_OPERATING_SYSTEM_NAMESPACE_NAME             = 0x1,
+    NVME_NAMESPACE_METADATA_PREBOOT_NAMESPACE_NAME                      = 0x2,
+    NVME_NAMESPACE_METADATA_OPERATING_SYSTEM_NAMESPACE_NAME_QUALIFIER_1 = 0x3,
+    NVME_NAMESPACE_METADATA_OPERATING_SYSTEM_NAMESPACE_NAME_QUALIFIER_2 = 0x4,
+
+} NVME_NAMESPACE_METADATA_ELEMENT_TYPES;
+
+typedef struct {
+
+    ULONG ET        : 6;        // Element Type (ET), value defined in enum NVME_CONTROLLER_METADATA_ELEMENT_TYPES, NVME_NAMESPACE_METADATA_ELEMENT_TYPES
+
+    ULONG Reserved0 : 2;
+
+    ULONG ER        : 4;        // Element Revision (ER)
+
+    ULONG Reserved1 : 4;
+
+    ULONG ELEN      : 16;       // Element Length (ELEN), element value length in bytes
+
+    UCHAR EVAL[ANYSIZE_ARRAY];  // Element Value (EVAL), UTF-8 string
+
+} NVME_HOST_METADATA_ELEMENT_DESCRIPTOR, *PNVME_HOST_METADATA_ELEMENT_DESCRIPTOR;
+
+typedef struct {
+
+    UCHAR NumberOfMetadataElementDescriptors;
+
+    UCHAR Reserved0;
+
+    UCHAR MetadataElementDescriptors[4094]; // Use NVME_HOST_METADATA_ELEMENT_DESCRIPTOR to access this list.
+
+} NVME_FEATURE_HOST_METADATA_DATA, *PNVME_FEATURE_HOST_METADATA_DATA;
+
+//
+// Parameter for NVME_FEATURE_ERROR_INJECTION
+// This is from OCP NVMe Cloud SSD spec.
+//
+typedef union {
+
+    struct {
+        ULONG NUM       : 7;    // Number of Error Injections.
+        ULONG Reserved0 : 25;
+    } DUMMYSTRUCTNAME;
+
+    ULONG AsUlong;
+
+} NVME_CDW11_FEATURE_ERROR_INJECTION, *PNVME_CDW11_FEATURE_ERROR_INJECTION;
+
+//
+// DWORD 0 for get feature command (Error Injection) shares the same format with DWORD 11 for set feature command (Error Injection).
+//
+typedef NVME_CDW11_FEATURE_ERROR_INJECTION NVME_CDW0_FEATURE_ERROR_INJECTION, *PNVME_CDW0_FEATURE_ERROR_INJECTION;
+
+typedef struct {
+
+    union {
+
+        struct {
+
+            UCHAR Enable         : 1; // A value of 0 indicates error injection is not enabled. A value of 1 indicates error injection is enabled.
+
+            UCHAR SingleInstance : 1; // A value of 0 indicates error injection is enabled until disable.
+                                      // A value of 1 indicates a single instance error injection where a single error is injected.
+                                      // After a single instance error has been created, the value of the Enable field shall be 0 in the results from Get Features command.
+            UCHAR Reserved0      : 6;
+
+        } DUMMYSTRUCTNAME;
+
+        UCHAR AsUchar;
+
+    } Flags;
+
+    UCHAR  Reserved1;
+    USHORT ErrorInjectionType;             // Specifies the Type of Error Injection.
+    UCHAR  ErrorInjectionTypeSpecific[28]; // Error Injection Type specific definition.
+
+} NVME_ERROR_INJECTION_ENTRY, *PNVME_ERROR_INJECTION_ENTRY;
+
+//
+// Definitions are used in "Error Injection Type" field.
+//
+typedef enum {
+
+    NVME_ERROR_INJECTION_TYPE_RESERVED0 = 0,
+    NVME_ERROR_INJECTION_TYPE_DEVICE_PANIC_CPU_CONTROLLER_HANG,         // 0x1
+    NVME_ERROR_INJECTION_TYPE_DEVICE_PANIC_NAND_HANG,                   // 0x2
+    NVME_ERROR_INJECTION_TYPE_DEVICE_PANIC_PLP_DEFECT,                  // 0x3
+    NVME_ERROR_INJECTION_TYPE_DEVICE_PANIC_LOGICAL_FW_ERROR,            // 0x4
+    NVME_ERROR_INJECTION_TYPE_DEVICE_PANIC_DRAM_CORRUPTION_CRITICAL,    // 0x5
+    NVME_ERROR_INJECTION_TYPE_DEVICE_PANIC_DRAM_CORRUPTION_NONCRITICAL, // 0x6
+    NVME_ERROR_INJECTION_TYPE_DEVICE_PANIC_NAND_CORRUPTION,             // 0x7
+    NVME_ERROR_INJECTION_TYPE_DEVICE_PANIC_SRAM_CORRUPTION,             // 0x8
+    NVME_ERROR_INJECTION_TYPE_DEVICE_PANIC_HW_MALFUNCTION,              // 0x9
+
+    NVME_ERROR_INJECTION_TYPE_RESERVED1,                                // 0xA
+
+    NVME_ERROR_INJECTION_TYPE_MAX = 0xFFFF
+
+} NVME_ERROR_INJECTION_TYPES;
+
+//
+// Parameter for set feature NVME_FEATURE_CLEAR_FW_UPDATE_HISTORY
+// This is from OCP NVMe Cloud SSD spec.
+//
+typedef union {
+
+    struct {
+        ULONG Reserved0 : 31;
+        ULONG Clear     : 1;    // Clear Firmware Update History Log.
+    } DUMMYSTRUCTNAME;
+
+    ULONG AsUlong;
+
+} NVME_CDW11_FEATURE_CLEAR_FW_UPDATE_HISTORY, *PNVME_CDW11_FEATURE_CLEAR_FW_UPDATE_HISTORY;
+
+//
+// Parameter for set feature NVME_FEATURE_READONLY_WRITETHROUGH_MODE
+// This is from OCP NVMe Cloud SSD spec.
+//
+typedef union {
+
+    struct {
+        ULONG Reserved0   : 30;
+        ULONG EOLBehavior : 2;    // End of Life Behavior.
+    } DUMMYSTRUCTNAME;
+
+    ULONG AsUlong;
+
+} NVME_CDW11_FEATURE_READONLY_WRITETHROUGH_MODE, *PNVME_CDW11_FEATURE_READONLY_WRITETHROUGH_MODE;
+
+//
+// Output for get feature NVME_FEATURE_READONLY_WRITETHROUGH_MODE
+// This is from OCP NVMe Cloud SSD spec.
+//
+typedef union {
+
+    struct {
+        ULONG EOLBehavior : 3;    // End of Life Behavior.
+        ULONG Reserved0   : 29;
+    } DUMMYSTRUCTNAME;
+
+    ULONG AsUlong;
+
+} NVME_CDW0_FEATURE_READONLY_WRITETHROUGH_MODE, *PNVME_CDW0_FEATURE_READONLY_WRITETHROUGH_MODE;
+
+//
+// Parameter for set feature NVME_FEATURE_CLEAR_PCIE_CORRECTABLE_ERROR_COUNTERS
+// This is from OCP NVMe Cloud SSD spec.
+//
+typedef union {
+
+    struct {
+        ULONG Reserved0 : 31;
+        ULONG Clear     : 1;    // Clear PCIe Error Counters.
+    } DUMMYSTRUCTNAME;
+
+    ULONG AsUlong;
+
+} NVME_CDW11_FEATURE_CLEAR_PCIE_CORRECTABLE_ERROR_COUNTERS, *PNVME_CDW11_FEATURE_CLEAR_PCIE_CORRECTABLE_ERROR_COUNTERS;
+
+//
+// Parameter for set feature NVME_FEATURE_ENABLE_IEEE1667_SILO
+// This is from OCP NVMe Cloud SSD spec.
+//
+typedef union {
+
+    struct {
+        ULONG Reserved0 : 31;
+        ULONG Enable    : 1;    // Enable IEEE1667 Silo.
+    } DUMMYSTRUCTNAME;
+
+    ULONG AsUlong;
+
+} NVME_CDW11_FEATURE_ENABLE_IEEE1667_SILO, *PNVME_CDW11_FEATURE_ENABLE_IEEE1667_SILO;
+
+//
+// Output for get feature NVME_FEATURE_ENABLE_IEEE1667_SILO
+// This is from OCP NVMe Cloud SSD spec.
+//
+typedef union {
+
+    struct {
+        ULONG Enabled   : 3;    // IEEE1667 Silo Enabled.
+        ULONG Reserved0 : 29;
+    } DUMMYSTRUCTNAME;
+
+    ULONG AsUlong;
+
+} NVME_CDW0_FEATURE_ENABLE_IEEE1667_SILO, *PNVME_CDW0_FEATURE_ENABLE_IEEE1667_SILO;
+
+//
+// Parameters for NVME_FEATURE_NVM_HOST_IDENTIFIER
+//
+#define NVME_MAX_HOST_IDENTIFIER_SIZE       16  // 16 Bytes, 128 Bits
+#define NVME_HOST_IDENTIFIER_SIZE           8   // 8 Bytes, 64 Bits
+#define NVME_EXTENDED_HOST_IDENTIFIER_SIZE  16  // 16 Bytes, 128 Bits
+
+typedef struct {
+
+    ULONG EXHID     : 1;                // Enable Extended Host Identifier (EXHID)
+    ULONG Reserved  : 31;
+
+} NVME_CDW11_FEATURE_HOST_IDENTIFIER, *PNVME_CDW11_FEATURE_HOST_IDENTIFIER;
+
+typedef struct {
+
+    UCHAR HOSTID[NVME_MAX_HOST_IDENTIFIER_SIZE];    // Host Identifier (HOSTID)
+
+} NVME_FEATURE_HOST_IDENTIFIER_DATA, *PNVME_FEATURE_HOST_IDENTIFIER_DATA;
+
+typedef struct {
+
+    ULONG PTPL      : 1;                // Persist Through Power Loss (PTPL)
+    ULONG Reserved  : 31;
+
+} NVME_CDW11_FEATURE_RESERVATION_PERSISTENCE, *PNVME_CDW11_FEATURE_RESERVATION_PERSISTENCE;
+
+typedef struct {
+
+    ULONG Reserved      : 1;
+
+    ULONG REGPRE        : 1;            // Mask Registration Preempted Notification (REGPRE)
+    ULONG RESREL        : 1;            // Mask Reservation Released Notification (RESREL)
+    ULONG RESPRE        : 1;            // Mast Reservation Preempted Notification (RESPRE)
+
+    ULONG Reserved1     : 28;
+
+} NVME_CDW11_FEATURE_RESERVATION_NOTIFICATION_MASK, *PNVME_CDW11_FEATURE_RESERVATION_NOTIFICATION_MASK;
+
+typedef union {
+    NVME_CDW11_FEATURE_NUMBER_OF_QUEUES                 NumberOfQueues;
+    NVME_CDW11_FEATURE_INTERRUPT_COALESCING             InterruptCoalescing;
+    NVME_CDW11_FEATURE_INTERRUPT_VECTOR_CONFIG          InterruptVectorConfig;
+    NVME_CDW11_FEATURE_LBA_RANGE_TYPE                   LbaRangeType;
+    NVME_CDW11_FEATURE_ARBITRATION                      Arbitration;
+    NVME_CDW11_FEATURE_VOLATILE_WRITE_CACHE             VolatileWriteCache;
+    NVME_CDW11_FEATURE_ASYNC_EVENT_CONFIG               AsyncEventConfig;
+    NVME_CDW11_FEATURE_POWER_MANAGEMENT                 PowerManagement;
+    NVME_CDW11_FEATURE_AUTO_POWER_STATE_TRANSITION      AutoPowerStateTransition;
+    NVME_CDW11_FEATURE_TEMPERATURE_THRESHOLD            TemperatureThreshold;
+    NVME_CDW11_FEATURE_ERROR_RECOVERY                   ErrorRecovery;
+    NVME_CDW11_FEATURE_HOST_MEMORY_BUFFER               HostMemoryBuffer;
+    NVME_CDW11_FEATURE_WRITE_ATOMICITY_NORMAL           WriteAtomicityNormal;
+    NVME_CDW11_FEATURE_NON_OPERATIONAL_POWER_STATE      NonOperationalPowerState;
+    NVME_CDW11_FEATURE_IO_COMMAND_SET_PROFILE           IoCommandSetProfile;
+    NVME_CDW11_FEATURE_ERROR_INJECTION                  ErrorInjection;
+    NVME_CDW11_FEATURE_HOST_IDENTIFIER                  HostIdentifier;
+    NVME_CDW11_FEATURE_RESERVATION_PERSISTENCE          ReservationPersistence;
+    NVME_CDW11_FEATURE_RESERVATION_NOTIFICATION_MASK    ReservationNotificationMask;
+    NVME_CDW11_FEATURE_GET_HOST_METADATA                GetHostMetadata;
+    NVME_CDW11_FEATURE_SET_HOST_METADATA                SetHostMetadata;
 
     ULONG   AsUlong;
 } NVME_CDW11_FEATURES, *PNVME_CDW11_FEATURES;
@@ -1573,18 +2441,26 @@ typedef union {
 //
 typedef enum {
 
-    NVME_LOG_PAGE_ERROR_INFO                    = 0x01,
-    NVME_LOG_PAGE_HEALTH_INFO                   = 0x02,
-    NVME_LOG_PAGE_FIRMWARE_SLOT_INFO            = 0x03,
-    NVME_LOG_PAGE_CHANGED_NAMESPACE_LIST        = 0x04,
-    NVME_LOG_PAGE_COMMAND_EFFECTS               = 0x05,
-    NVME_LOG_PAGE_DEVICE_SELF_TEST              = 0x06,
-    NVME_LOG_PAGE_TELEMETRY_HOST_INITIATED      = 0x07,
-    NVME_LOG_PAGE_TELEMETRY_CTLR_INITIATED      = 0x08,
-    NVME_LOG_PAGE_ENDURANCE_GROUP_INFORMATION   = 0x09,
+    NVME_LOG_PAGE_ERROR_INFO                            = 0x01,
+    NVME_LOG_PAGE_HEALTH_INFO                           = 0x02,
+    NVME_LOG_PAGE_FIRMWARE_SLOT_INFO                    = 0x03,
+    NVME_LOG_PAGE_CHANGED_NAMESPACE_LIST                = 0x04,
+    NVME_LOG_PAGE_COMMAND_EFFECTS                       = 0x05,
+    NVME_LOG_PAGE_DEVICE_SELF_TEST                      = 0x06,
+    NVME_LOG_PAGE_TELEMETRY_HOST_INITIATED              = 0x07,
+    NVME_LOG_PAGE_TELEMETRY_CTLR_INITIATED              = 0x08,
+    NVME_LOG_PAGE_ENDURANCE_GROUP_INFORMATION           = 0x09,
+    NVME_LOG_PAGE_PREDICTABLE_LATENCY_NVM_SET           = 0x0A,
+    NVME_LOG_PAGE_PREDICTABLE_LATENCY_EVENT_AGGREGATE   = 0x0B,
+    NVME_LOG_PAGE_ASYMMETRIC_NAMESPACE_ACCESS           = 0x0C,
+    NVME_LOG_PAGE_PERSISTENT_EVENT_LOG                  = 0x0D,
+    NVME_LOG_PAGE_LBA_STATUS_INFORMATION                = 0x0E,
+    NVME_LOG_PAGE_ENDURANCE_GROUP_EVENT_AGGREGATE       = 0x0F,
 
-    NVME_LOG_PAGE_RESERVATION_NOTIFICATION      = 0x80,
-    NVME_LOG_PAGE_SANITIZE_STATUS               = 0x81,
+    NVME_LOG_PAGE_RESERVATION_NOTIFICATION              = 0x80,
+    NVME_LOG_PAGE_SANITIZE_STATUS                       = 0x81,
+
+    NVME_LOG_PAGE_CHANGED_ZONE_LIST                     = 0xBF,
 
 } NVME_LOG_PAGES;
 
@@ -1613,7 +2489,7 @@ typedef union {
         ULONG   LID         : 8;        // Log Page Identifier (LID)
         ULONG   LSP         : 4;        // Log Specific Field (LSP)
         ULONG   Reserved0   : 3;
-        ULONG   RAE         : 1;        // Reset Asynchronous Event (RAE)
+        ULONG   RAE         : 1;        // Retain Asynchronous Event (RAE)
         ULONG   NUMDL       : 16;       // Number of Lower Dwords (NUMDL)
     } DUMMYSTRUCTNAME;
 
@@ -1644,6 +2520,18 @@ typedef struct {
 
 
 } NVME_CDW13_GET_LOG_PAGE, *PNVME_CDW13_GET_LOG_PAGE;
+
+typedef union {
+
+    struct {
+        ULONG   UUIDIndex               : 7;       // UUID Index
+        ULONG   Reserved                : 17;   
+        ULONG   CommandSetIdentifier    : 8;       // Command Set Identifier
+    } DUMMYSTRUCTNAME;
+
+    ULONG   AsUlong;
+
+} NVME_CDW14_GET_LOG_PAGE, *PNVME_CDW14_GET_LOG_PAGE;
 
 //
 // Information of log: NVME_LOG_PAGE_ERROR_INFO. Size: 64 bytes
@@ -1728,8 +2616,6 @@ typedef struct {
 // "Telemetry Host-Initiated Log" structure definition.
 //
 
-#define NVME_TELEMETRY_HOST_INITIATED_LOG_IDENTIFIER    0x7
-
 #define NVME_TELEMETRY_DATA_BLOCK_SIZE                  0x200 // All NVMe Telemetry Data Blocks are 512 bytes in size.
 
 typedef struct _NVME_TELEMETRY_HOST_INITIATED_LOG {
@@ -1740,12 +2626,35 @@ typedef struct _NVME_TELEMETRY_HOST_INITIATED_LOG {
     USHORT  Area1LastBlock;                     // Bytes 8-9
     USHORT  Area2LastBlock;                     // Bytes 10-11
     USHORT  Area3LastBlock;                     // Bytes 12-13
-    UCHAR   Reserved1[368];                     // Bytes 14-381
+    UCHAR   Reserved1[2];                       // Bytes 14-15
+    ULONG   Area4LastBlock;                     // Bytes 16-19
+    UCHAR   Reserved2[361];                     // Bytes 20-380
+    UCHAR   HostInitiatedDataGenerationNumber;  // Byte 381
     UCHAR   ControllerInitiatedDataAvailable;   // Byte 382
     UCHAR   ControllerInitiatedDataGenerationNumber; // Byte 383
     UCHAR   ReasonIdentifier[128];              // Bytes 384-511
 
 } NVME_TELEMETRY_HOST_INITIATED_LOG, *PNVME_TELEMETRY_HOST_INITIATED_LOG;
+
+//
+// "Telemetry Controller-Initiated Log" structure definition.
+//
+typedef struct _NVME_TELEMETRY_CONTROLLER_INITIATED_LOG {
+
+    UCHAR   LogIdentifier;                      // Byte 0
+    UCHAR   Reserved0[4];                       // Bytes 1-4
+    UCHAR   OrganizationID[3];                  // Bytes 5-7 - IEEE OUI Identifier
+    USHORT  Area1LastBlock;                     // Bytes 8-9
+    USHORT  Area2LastBlock;                     // Bytes 10-11
+    USHORT  Area3LastBlock;                     // Bytes 12-13
+    UCHAR   Reserved1[2];                       // Bytes 14-15
+    ULONG   Area4LastBlock;                     // Bytes 16-19
+    UCHAR   Reserved2[362];                     // Bytes 20-381
+    UCHAR   ControllerInitiatedDataAvailable;   // Byte 382
+    UCHAR   ControllerInitiatedDataGenerationNumber; // Byte 383
+    UCHAR   ReasonIdentifier[128];              // Bytes 384-511
+
+} NVME_TELEMETRY_CONTROLLER_INITIATED_LOG, *PNVME_TELEMETRY_CONTROLLER_INITIATED_LOG;
 
 //
 // Information of log: NVME_LOG_PAGE_FIRMWARE_SLOT_INFO. Size: 512 bytes
@@ -1775,6 +2684,18 @@ typedef struct {
     ULONG   NSID[1024];                        // List of Namespace ID upto 1024 entries
 
 } NVME_CHANGED_NAMESPACE_LIST_LOG, *PNVME_CHANGED_NAMESPACE_LIST_LOG;
+
+//
+// Information of log: NVME_LOG_PAGE_CHANGED_ZONE_LIST. Size: 4096 bytes
+//
+typedef struct {
+
+    USHORT  ZoneIdentifiersCount;               // Number of Zone Identifiers
+    UCHAR   Reserved[6];
+
+    ULONGLONG   ZoneIdentifier[511];            // List of Zone Identifiers upto 511 entries. Identifier contains Zone Start Logical Block Address(ZSLBA)
+
+} NVME_CHANGED_ZONE_LIST_LOG, *PNVME_CHANGED_ZONE_LIST_LOG;
 
 
 //
@@ -1894,6 +2815,76 @@ typedef struct {
 
 } NVME_ENDURANCE_GROUP_LOG, *PNVME_ENDURANCE_GROUP_LOG;
 
+//
+// Information of log: NVME_LOG_PAGE_PERSISTENT_EVENT_LOG. Header Size: 512 bytes
+//
+typedef struct {
+
+    UCHAR     LogIdentifier;                      // Byte 0      - Shall be set to 0x0D
+    UCHAR     Reserved0[3];                       // Bytes 1-3
+    ULONG     TotalNumberOfEvents;                // Bytes 4-7   - Contains the number of event entries in the log.
+    ULONGLONG TotalLogLength;                     // Bytes 8-15  - Contains the total number of bytes of persistent event log page data available, including the header.
+    UCHAR     LogRevision;                        // Bytes 16    - Contains a number indicating the revision of the Get Log Page data structure that this log page data complies with.
+    UCHAR     Reserved1;                          // Bytes 17
+    USHORT    LogHeaderLength;                    // Bytes 18-19 - Contains the length in bytes of the log header information that follows. The total length of the log header in bytes is the value in this field plus 20.
+    ULONGLONG Timestamp;                          // Bytes 20-27
+    UCHAR     PowerOnHours[16];                   // Bytes 28-43 - Indicates the number of power-on hours at the time the Persistent Event log was retrieved.
+    ULONGLONG PowerCycleCount;                    // Bytes 44-51 - Contains the number of power cycles for the controller.
+    USHORT    PciVendorId;                        // Bytes 52-53 - Same value as reported in the Identify Controller data PCI Vendor ID field.
+    USHORT    PciSubsystemVendorId;               // Bytes 54-55 - Same value as reported in the Identify Controller data PCI Subsystem Vendor ID field.
+    UCHAR     SerialNumber[20];                   // Bytes 56-75 - Same value as reported in the Identify Controller data Serial Number field.
+    UCHAR     ModelNumber[40];                    // Bytes 76-115 - Same value as reported in the Identify Controller data Model Number field.
+    UCHAR     NVMSubsystemNVMeQualifiedName[256]; // Bytes 116-371 - Same value as reported in the Identify Controller data.
+    UCHAR     Reserved[108];                      // Bytes 372-479
+    UCHAR     SupportedEventsBitmap[32];          // Bytes 480-511 - Contains a bitmap indicating support for the persistent event log events.
+
+} NVME_PERSISTENT_EVENT_LOG_HEADER, *PNVME_PERSISTENT_EVENT_LOG_HEADER;
+
+typedef struct {
+
+    UCHAR     EventType;                          // Byte 0      - Indicates the event type for this entry.
+    UCHAR     EventTypeRevision;                  // Byte 1      - Contains a number indicating the revision of the event data.
+    UCHAR     EventHeaderLength;                  // Byte 2      - Contains the length in bytes of the event header information that follows.
+    UCHAR     Reserved0;                          // Byte 3
+    USHORT    ControllerIdentifier;               // Bytes 4-5   - Contains the NVM subsystem unique controller identifier for the controller that created this event.
+    ULONGLONG EventTimestamp;                     // Bytes 6-13
+    UCHAR     Reserved1[6];                       // Bytes 14-19
+    USHORT    VendorSpecificInformationLength;    // Bytes 20-21 - Indicates the length in bytes of the Vendor Specific Information.
+    USHORT    EventLength;                        // Bytes 22-23 - Indicates the length in bytes of the Vendor Specific Information.
+
+} NVME_PERSISTENT_EVENT_LOG_EVENT_HEADER, *PNVME_PERSISTENT_EVENT_LOG_EVENT_HEADER;
+
+typedef enum {
+
+    NVME_PERSISTENT_EVENT_TYPE_RESERVED0                    = 0x00,
+
+    NVME_PERSISTENT_EVENT_TYPE_SMART_HEALTH_LOG_SNAPSHOT    = 0x01,
+    NVME_PERSISTENT_EVENT_TYPE_FIRMWARE_COMMIT              = 0x02,
+    NVME_PERSISTENT_EVENT_TYPE_TIMESTAMP_CHANGE             = 0x03,
+    NVME_PERSISTENT_EVENT_TYPE_POWER_ON_OR_RESET            = 0x04,
+    NVME_PERSISTENT_EVENT_TYPE_NVM_SUBSYSTEM_HARDWARE_ERROR = 0x05,
+    NVME_PERSISTENT_EVENT_TYPE_CHANGE_NAMESPACE             = 0x06,
+    NVME_PERSISTENT_EVENT_TYPE_FORMAT_NVM_START             = 0x07,
+    NVME_PERSISTENT_EVENT_TYPE_FORMAT_NVM_COMPLETION        = 0x08,
+    NVME_PERSISTENT_EVENT_TYPE_SANITIZE_START               = 0x09,
+    NVME_PERSISTENT_EVENT_TYPE_SANITIZE_COMPLETION          = 0x0A,
+    NVME_PERSISTENT_EVENT_TYPE_SET_FEATURE                  = 0x0B,
+    NVME_PERSISTENT_EVENT_TYPE_TELEMETRY_LOG_CREATED        = 0x0C,
+    NVME_PERSISTENT_EVENT_TYPE_THERMAL_EXCURSION            = 0x0D,
+
+    NVME_PERSISTENT_EVENT_TYPE_RESERVED1_BEGIN              = 0x0E,
+    NVME_PERSISTENT_EVENT_TYPE_RESERVED1_END                = 0xDD,
+
+    NVME_PERSISTENT_EVENT_TYPE_VENDOR_SPECIFIC_EVENT        = 0xDE,
+    NVME_PERSISTENT_EVENT_TYPE_TCG_DEFINED                  = 0xDF,
+
+    NVME_PERSISTENT_EVENT_TYPE_RESERVED2_BEGIN              = 0xE0,
+    NVME_PERSISTENT_EVENT_TYPE_RESERVED2_END                = 0xFF,
+
+    NVME_PERSISTENT_EVENT_TYPE_MAX                          = 0xFF,
+
+} NVME_PERSISTENT_EVENT_LOG_EVENT_TYPES;
+
 #pragma pack(pop)
 
 //
@@ -1918,6 +2909,119 @@ typedef struct {
     UCHAR       Reserved1[48];
 
 } NVME_RESERVATION_NOTIFICATION_LOG, *PNVME_RESERVATION_NOTIFICATION_LOG;
+
+//
+// Information of log: NVME_SANITIZE_STATUS_LOG. Size: 512 bytes
+//
+typedef enum {
+
+    //
+    // The NVM subsystem has never been sanitized.
+    //
+    NVME_SANITIZE_OPERATION_NONE                                = 0,
+
+    //
+    // The most recent sanitize operation completed successfully including
+    // any additional media modification.
+    //
+    NVME_SANITIZE_OPERATION_SUCCEEDED                           = 1,
+
+    //
+    // A sanitize operation is currently in progress.
+    //
+    NVME_SANITIZE_OPERATION_IN_PROGRESS                         = 2,
+
+    //
+    // The most recent sanitize operation failed.
+    //
+    NVME_SANITIZE_OPERATION_FAILED                              = 3,
+
+    //
+    // The most recent sanitize operation for which No-Deallocate After Sanitize was Requested
+    // has completed successfully with deallocation of all LBAs.
+    //
+    NVME_SANITIZE_OPERATION_SUCCEEDED_WITH_FORCED_DEALLOCATION  = 4
+
+} NVME_SANITIZE_OPERATION_STATUS, *PNVME_SANITIZE_OPERATION_STATUS;
+
+typedef struct {
+
+    //
+    // This contains the status of the most recent sanitize operation.
+    // The value of this field is defined in enum NVME_SANITIZE_OPERATION_STATUS.
+    //
+    USHORT MostRecentSanitizeOperationStatus    : 3;
+
+    //
+    // This contains the number of completed passes if the most recent sanitize operation
+    // was an Overwrite.
+    //
+    USHORT NumberCompletedPassesOfOverwrite     : 4;
+
+    //
+    // If set to 1, then no namespace logical block in the NVM subsystem has been written to
+    // and no Persistent Memory Region in the NVM subsystem has been enabled since manufactured
+    // or most recent successfully sanitized operation.
+    //
+    // If set to 0, then a namespace logical block in the NVM subsystem has been written to
+    // or a Persistent Memory Region in the NVM subsystem has been enabled since manufactured
+    // or most recent successfully sanitized operation.
+    //
+    USHORT GlobalDataErased                     : 1;
+
+    USHORT Reserved                             : 8;
+
+} NVME_SANITIZE_STATUS, *PNVME_SANITIZE_STATUS;
+
+typedef struct {
+
+    //
+    // Sanitize Progress (SPROG)
+    // This field indicates the fraction complete of the sanitize operation. The value is a numerator
+    // of the fraction complete that has 65536 (10000h) as its denominator. This value shall be set to
+    // FFFFh if bits 2:0 of the SSTAT field are not set to 10b.
+    //
+    USHORT                  SPROG;
+
+    //
+    // Sanitize Status (SSTAT)
+    // This field indicates the status associated with the most recent sanitize operation.
+    //
+    NVME_SANITIZE_STATUS    SSTAT;
+
+    //
+    // Sanitize Command Dword 10 Information (SCDW10)
+    // This field contains the value of the Command Dword 10 field of the Sanitize command that started
+    // the sanitize operation whose status is reported in the SSTAT field.
+    //
+    ULONG                   SCDW10;
+
+    //
+    // These fields below indicates the number of seconds required to complete the sanitize operation
+    // of Overwrite/Block Erase/Crypto Erase methods when the No-Deallocate Modifies Media After Sanitize
+    // field is not set to 10b. A value of 0 indicates that the sanitize operation is expected to be
+    // completed in the background when the Sanitize command that started that operation is completed.
+    // A value of FFFFFFFFh indicates that no time period is reported.
+    //
+    ULONG                   EstimatedTimeForOverwrite;
+    ULONG                   EstimatedTimeForBlockErase;
+    ULONG                   EstimatedTimeForCryptoErase;
+
+    //
+    // These fields below indicates the number of seconds required to complete the sanitize operation
+    // of Overwrite/Block Erase/CryptoErase methods and the associated additional media modification
+    // after the sanitize operation. A value of 0 indicates that the sanitize operation is expected
+    // to be completed in the background when the Sanitize command that started that operation is completed.
+    // A value of FFFFFFFFh indicates that no time period is reported.
+    //
+    ULONG                   EstimatedTimeForOverwriteWithNoDeallocateMediaModification;
+    ULONG                   EstimatedTimeForBlockEraseWithNoDeallocateMediaModification;
+    ULONG                   EstimatedTimeForCryptoEraseWithNoDeallocateMediaModification;
+
+    UCHAR                   Reserved[480];
+
+} NVME_SANITIZE_STATUS_LOG, *PNVME_SANITIZE_STATUS_LOG;
+
 
 //
 // Parameters for FIRMWARE IMAGE DOWNLOAD Command
@@ -1986,16 +3090,369 @@ typedef union {
         ULONG   PI          : 3;                // Protection Information (PI)
         ULONG   PIL         : 1;                // Protection Information Location (PIL)
         ULONG   SES         : 3;                // Secure Erase Settings (SES)
+        ULONG   ZF          : 2;                // Zone Format (ZF)
 
-        ULONG   Reserved    : 20;
+        ULONG   Reserved    : 18;
     } DUMMYSTRUCTNAME;
 
     ULONG   AsUlong;
 
 } NVME_CDW10_FORMAT_NVM, *PNVME_CDW10_FORMAT_NVM;
 
+typedef enum {
+
+    //
+    // Additional media modification after sanitize is not defined.
+    //
+    NVME_MEDIA_ADDITIONALLY_MODIFIED_AFTER_SANITIZE_NOT_DEFINED = 0,
+
+    //
+    // Media is not additionally modified after sanitize completes successfully.
+    //
+    NVME_MEDIA_NOT_ADDITIONALLY_MODIFIED_AFTER_SANITIZE         = 1,
+
+    //
+    // Media is additionally modified after sanitize completes sucessfully. The Sanitize Operation Completed event
+    // does not occur until the additional media modification associated with this field has completed.
+    //
+    NVME_MEDIA_ADDITIONALLY_MOFIDIED_AFTER_SANITIZE             = 2
+
+} NVME_NO_DEALLOCATE_MODIFIES_MEDIA_AFTER_SANITIZE, *PNVME_NO_DEALLOCATE_MODIFIES_MEDIA_AFTER_SANITIZE;
+
+//
+// Parameters for Sanitize.
+//
+
+typedef enum {
+
+    NVME_SANITIZE_ACTION_RESERVED                       = 0,
+    NVME_SANITIZE_ACTION_EXIT_FAILURE_MODE              = 1,
+    NVME_SANITIZE_ACTION_START_BLOCK_ERASE_SANITIZE     = 2,
+    NVME_SANITIZE_ACTION_START_OVERWRITE_SANITIZE       = 3,
+    NVME_SANITIZE_ACTION_START_CRYPTO_ERASE_SANITIZE    = 4
+
+} NVME_SANITIZE_ACTION, *PNVME_SANITIZE_ACTION;
+
+typedef union {
+
+    struct {
+
+        //
+        // Sanitize Action (SANACT)
+        // The value of this field is defined in enum NVME_SANTIZE_ACTION.
+        //
+        ULONG   SANACT      : 3;    // Sanitize Action (SANACT)
+
+        //
+        // Allow Unrestricted Sanitize Exit (AUSE)
+        // This bit is ignored if Sanitize Action is in Exit Failure Mode (001b).
+        //
+        ULONG   AUSE        : 1;    // Allow Unrestricted Sanitize Exit (AUSE)
+
+        //
+        // Overwrite Pass Count (OWPASS)
+        // This field specifies the number of overwrite passes using the data from Overwrite Pattern.
+        // A value of 0h specified 16 overwrite passes. This is ignored unless Sanitize Action is Overwrite (011b).
+        //
+        ULONG   OWPASS      : 4;    // Overwrite Pass Count (OWPASS)
+
+        //
+        // Overwrite Invert Pattern Between Passes (OIPBP)
+        // This field indicates if Overwrite Pattern shall be inverted between passes.
+        // This is ignored unless Sanitize Action is Overwrite (011b).
+        //
+        ULONG   OIPBP       : 1;    // Overwrite Invert Pattern Between Passes (OIPBP)
+
+        //
+        // No Deallocate After Sanitize
+        // If set to 1 and No-Deallocate Inhibited bit is 0,
+        //     controller shall not deallocate any logical blocks after sanitize completed successfully.
+        // If set to 1 and No-Deallocate Inhibited bit is 1, or if set to 0,
+        //     controller shall deallocate logical blocks after sanitize completed successfully.
+        // This bit is ignored if Sanitize Action is Exit Failure Mode (001b).
+        //
+        ULONG   NDAS        : 1;    // No Deallocate After Sanitize
+
+        ULONG   Reserved    : 22;
+
+    } DUMMYSTRUCTNAME;
+
+    ULONG AsUlong;
+} NVME_CDW10_SANITIZE, *PNVME_CDW10_SANITIZE;
+
+typedef union {
+
+    struct {
+
+        //
+        // Overwrite Pattern
+        // This field is ignored unless the Sanitize Action field in Command Dword 10 is set to 011b (Overwrite).
+        // This field specifies a 32-bit pattern that is used for the Overwrite sanitize operation.
+        //
+        ULONG OVRPAT;
+    } DUMMYSTRUCTNAME;
+
+    ULONG AsUlong;
+} NVME_CDW11_SANITIZE;
+
+//
+// Parameters for RESERVATION Commands
+//
+typedef enum {
+
+    NVME_RESERVATION_TYPE_RESERVED                              = 0,
+    NVME_RESERVATION_TYPE_WRITE_EXCLUSIVE                       = 1,
+    NVME_RESERVATION_TYPE_EXCLUSIVE_ACCESS                      = 2,
+    NVME_RESERVATION_TYPE_WRITE_EXCLUSIVE_REGISTRANTS_ONLY      = 3,
+    NVME_RESERVATION_TYPE_EXCLUSIVE_ACCESS_REGISTRANTS_ONLY     = 4,
+    NVME_RESERVATION_TYPE_WRITE_EXCLUSIVE_ALL_REGISTRANTS       = 5,
+    NVME_RESERVATION_TYPE_EXCLUSIVE_ACCESS_ALL_REGISTRANTS      = 6,
+
+} NVME_RESERVATION_TYPES;
+
+//
+// Parameters for RESERVATION ACQUIRE Commands
+//
+typedef enum {
+
+    NVME_RESERVATION_ACQUIRE_ACTION_ACQUIRE             = 0,
+    NVME_RESERVATION_ACQUIRE_ACTION_PREEMPT             = 1,
+    NVME_RESERVATION_ACQUIRE_ACTION_PREEMPT_AND_ABORT   = 2,
+
+} NVME_RESERVATION_ACQUIRE_ACTIONS;
+
+typedef struct {
+
+    ULONG PTPL          : 1;        // Persist Through Power Loss (PTPL)
+    ULONG Reserved      : 31;
+
+} NVME_CDW0_RESERVATION_PERSISTENCE, *PNVME_CDW0_RESERVATION_PERSISTENCE;
+
+typedef union {
+
+    struct {
+        ULONG RACQA         : 3;    // Reservation Acquire Action (RACQA)
+        ULONG IEKEY         : 1;    // Ignore Existing Key (IEKEY)
+        ULONG Reserved      : 4;
+        ULONG RTYPE         : 8;    // Reservation Type (RTYPE)
+
+        ULONG Reserved1     : 16;
+    } DUMMYSTRUCTNAME;
+
+    ULONG AsUlong;
+} NVME_CDW10_RESERVATION_ACQUIRE, *PNVME_CDW10_RESERVATION_ACQUIRE;
 
 
+//
+// Reservation Acquire Data Structure
+//
+typedef struct {
+
+    ULONGLONG CRKEY;    // Current Reservation Key (CRKEY)
+
+    //
+    // If the Reseravation Acquire Action is set to 001b (Preempt) or 010b (Preempt and Abort),
+    // then this field specifies the reservation key to be unregistered from the namespace.
+    // For all other Reservation Acquire Action values, this field is reserved.
+    //
+    ULONGLONG PRKEY;    // Preempt Reservation Key (PRKEY)
+
+} NVME_RESERVATION_ACQUIRE_DATA_STRUCTURE, *PNVME_RESERVATION_ACQUIRE_DATA_STRUCTURE;
+
+//
+// Parameters for RESERVATION REGISTER Commands
+//
+typedef enum {
+
+    NVME_RESERVATION_REGISTER_ACTION_REGISTER       = 0,
+    NVME_RESERVATION_REGISTER_ACTION_UNREGISTER     = 1,
+    NVME_RESERVATION_REGISTER_ACTION_REPLACE        = 2,
+
+} NVME_RESERVATION_REGISTER_ACTIONS;
+
+typedef enum {
+
+    NVME_RESERVATION_REGISTER_PTPL_STATE_NO_CHANGE  = 0,
+    NVME_RESERVATION_REGISTER_PTPL_STATE_RESERVED   = 1,
+    NVME_RESERVATION_REGISTER_PTPL_STATE_SET_TO_0   = 2,    // Reservations are released and registrants are cleared on a power on.
+    NVME_RESERVATION_REGISTER_PTPL_STATE_SET_TO_1   = 3,    // Reservations and registrants persist across a power loss.
+
+} NVME_RESERVATION_REGISTER_PTPL_STATE_CHANGES;
+
+typedef union {
+
+    struct {
+        ULONG RREGA         : 3;        // Reservation Register Action (RREGA)
+        ULONG IEKEY         : 1;        // Ignore Existing Key (IEKEY)
+        ULONG Reserved      : 26;
+        ULONG CPTPL         : 2;        // Change Persist Through Power Loss State (CPTPL)
+    } DUMMYSTRUCTNAME;
+
+    ULONG AsUlong;
+} NVME_CDW10_RESERVATION_REGISTER, *PNVME_CDW10_RESERVATION_REGISTER;
+
+//
+// Reservation Register Data Structure
+//
+typedef struct {
+
+    ULONGLONG CRKEY;    // Current Reservation Key (CRKEY)
+
+    //
+    // If the Reseravation Acquire Action is set to 001b (Preempt) or 010b (Preempt and Abort),
+    // then this field specifies the reservation key to be unregistered from the namespace.
+    // For all other Reservation Acquire Action values, this field is reserved.
+    //
+    ULONGLONG NRKEY;    // New Reservation Key (NRKEY)
+
+} NVME_RESERVATION_REGISTER_DATA_STRUCTURE, *PNVME_RESERVATION_REGISTER_DATA_STRUCTURE;
+
+//
+// Parameters for RESERVATION RELEASE Commands
+//
+typedef enum {
+
+    NVME_RESERVATION_RELEASE_ACTION_RELEASE     = 0,
+    NVME_RESERVATION_RELEASE_ACTION_CLEAR       = 1,
+
+} NVME_RESERVATION_RELEASE_ACTIONS;
+
+typedef union {
+
+    struct {
+        ULONG RRELA         : 3;        // Reservation Release Action (RRELA)
+        ULONG IEKEY         : 1;        // IgnoreExistingKey (IEKEY)
+        ULONG Reserved      : 4;
+        ULONG RTYPE         : 8;        // Reservation Type (RTYPE)
+
+        ULONG Reserved1     : 16;
+    } DUMMYSTRUCTNAME;
+
+    ULONG AsUlong;
+
+} NVME_CDW10_RESERVATION_RELEASE, *PNVME_CDW10_RESERVATION_RELEASE;
+
+//
+// Reservation Release Data Structure
+//
+typedef struct {
+
+    ULONGLONG CRKEY;    // Current Reservation Key (CRKEY)
+
+} NVME_RESERVATION_RELEASE_DATA_STRUCTURE, *PNVME_RESERVATION_RELEASE_DATA_STRUCTURE;
+
+//
+// Parameters for RESERVATION REPORT Commands
+//
+
+typedef union {
+
+    struct {
+        ULONG NUMD;     // Number of Dwords (NUMD), NOTE: 0's based value.
+    } DUMMYSTRUCTNAME;
+
+    ULONG AsUlong;
+
+} NVME_CDW10_RESERVATION_REPORT, *PNVME_CDW10_RESERVATION_REPORT;
+
+typedef union {
+
+    struct {
+        ULONG EDS           : 1;    // Extended Data Structure (EDS)
+
+        ULONG Reserved      : 31;
+    } DUMMYSTRUCTNAME;
+
+    ULONG AsUlong;
+
+} NVME_CDW11_RESERVATION_REPORT, *PNVME_CDW11_RESERVATION_REPORT;
+
+#pragma pack(push, 1)
+typedef struct {
+
+    //
+    // This field is a counter that increments any time the below occurs:
+    //      a. a Reservation Register command completes successfully on any controller associated with the namespace;
+    //      b. a Reservation Release command with Reservation Release Action set to 001b (Clear) completes successfully
+    //         on any controller associated with the name space;
+    //      c. a Reservation Acquire command with Reservation Acquire Action set to 001b (Preempt) or 010b (Preempt and Abort)
+    //         completes successfully on any controller associated with the namespace.
+    // If the value of this field is FFFFFFFFh, then the field shall be cleared to 0b when incremented.
+    //
+    ULONG GEN;          // Generation (Gen)
+
+    UCHAR RTYPE;        // Reservation Type (RTYPE)
+
+    USHORT REGCTL;      // Number of Registered Controllers (REGCTL)
+
+    UCHAR Reserved[2];
+
+    UCHAR PTPLS;        // Persist Through Power Loss State (PTPLS)
+
+    UCHAR Reserved1[14];
+
+} NVME_RESERVATION_REPORT_STATUS_HEADER, *PNVME_RESERVATION_REPORT_STATUS_HEADER;
+#pragma pack(pop)
+
+C_ASSERT(sizeof(NVME_RESERVATION_REPORT_STATUS_HEADER) == 24);
+
+typedef struct {
+
+    USHORT CNTLID;                  // Controller ID (CNTLID)
+
+    struct {
+        UCHAR HoldReservation : 1;
+
+        UCHAR Reserved        : 7;
+    } RCSTS;                        // Reservation Status (RCSTS)
+
+    UCHAR Reserved[5];
+
+    UCHAR HOSTID[8];                // Host Identifier (HOSTID)
+    ULONGLONG RKEY;                 // Reservation Key (RKEY)
+
+} NVME_REGISTERED_CONTROLLER_DATA, *PNVME_REGISTERED_CONTROLLER_DATA;
+
+C_ASSERT(sizeof(NVME_REGISTERED_CONTROLLER_DATA) == 24);
+
+typedef struct {
+
+    NVME_RESERVATION_REPORT_STATUS_HEADER Header;
+
+    NVME_REGISTERED_CONTROLLER_DATA RegisteredControllersData[ANYSIZE_ARRAY];
+
+} NVME_RESERVATION_REPORT_STATUS_DATA_STRUCTURE, *PNVME_RESERVATION_REPORT_STATUS_DATA_STRUCTURE;
+
+typedef struct {
+
+    USHORT CNTLID;                  // Controller ID (CNTLID)
+
+    struct {
+        UCHAR HoldReservation : 1;
+
+        UCHAR Reserved        : 7;
+    } RCSTS;                        // Reservation Status (RCSTS)
+
+    UCHAR Reserved[5];
+
+    ULONGLONG RKEY;             // Reservation Key (RKEY)
+    UCHAR HOSTID[16];           // 128-bit Host Identifier (HOSTID)
+
+    UCHAR Reserved1[32];
+
+} NVME_REGISTERED_CONTROLLER_EXTENDED_DATA, *PNVME_REGISTERED_CONTROLLER_EXTENDED_DATA;
+
+C_ASSERT(sizeof(NVME_REGISTERED_CONTROLLER_EXTENDED_DATA) == 64);
+
+typedef struct {
+
+    NVME_RESERVATION_REPORT_STATUS_HEADER Header;
+
+    UCHAR Reserved1[40];
+
+    NVME_REGISTERED_CONTROLLER_EXTENDED_DATA RegisteredControllersExtendedData[ANYSIZE_ARRAY];
+
+} NVME_RESERVATION_REPORT_STATUS_EXTENDED_DATA_STRUCTURE, *PNVME_RESERVATION_REPORT_STATUS_EXTENDED_DATA_STRUCTURE;
 
 //
 // Parameters for Directives.
@@ -2186,6 +3643,33 @@ typedef union {
 } NVME_CDW12_DIRECTIVE_RECEIVE;
 
 //
+// Parameters for SECURITY SEND / RECEIVE Commands
+//
+typedef union {
+
+    struct {
+        ULONG   Reserved0   : 8;
+        ULONG   SPSP        : 16;       // SP Specific (SPSP)
+        ULONG   SECP        : 8;        // Security Protocol (SECP)
+    } DUMMYSTRUCTNAME;
+
+    ULONG   AsUlong;
+
+} NVME_CDW10_SECURITY_SEND_RECEIVE, *PNVME_CDW10_SECURITY_SEND_RECEIVE;
+
+typedef struct {
+
+    ULONG   TL;                         // Transfer Length  (TL):
+
+} NVME_CDW11_SECURITY_SEND, *PNVME_CDW11_SECURITY_SEND;
+
+typedef struct {
+
+    ULONG   AL;                         // Transfer Length  (AL)
+
+} NVME_CDW11_SECURITY_RECEIVE, *PNVME_CDW11_SECURITY_RECEIVE;
+
+//
 // NVM Command Set
 //
 typedef enum {
@@ -2198,10 +3682,16 @@ typedef enum {
     NVME_NVM_COMMAND_COMPARE                = 0x05,
     NVME_NVM_COMMAND_WRITE_ZEROES           = 0x08,
     NVME_NVM_COMMAND_DATASET_MANAGEMENT     = 0x09,
+    NVME_NVM_COMMAND_VERIFY                 = 0x0C,    
     NVME_NVM_COMMAND_RESERVATION_REGISTER   = 0x0D,
     NVME_NVM_COMMAND_RESERVATION_REPORT     = 0x0E,
     NVME_NVM_COMMAND_RESERVATION_ACQUIRE    = 0x11,
     NVME_NVM_COMMAND_RESERVATION_RELEASE    = 0x15,
+    NVME_NVM_COMMAND_COPY                   = 0x19, 
+
+    NVME_NVM_COMMAND_ZONE_MANAGEMENT_SEND       = 0x79,
+    NVME_NVM_COMMAND_ZONE_MANAGEMENT_RECEIVE    = 0x7A,
+    NVME_NVM_COMMAND_ZONE_APPEND                = 0x7D,
 
 } NVME_NVM_COMMANDS;
 
@@ -2337,7 +3827,195 @@ typedef union {
 
 } NVME_CDW11_DATASET_MANAGEMENT, *PNVME_CDW11_DATASET_MANAGEMENT;
 
+//
+// Zone Descriptor
+//
+typedef struct {
 
+    struct {
+        UCHAR       ZT          : 4;    // Zone Type
+        UCHAR       Reserved1   : 4;
+    } DUMMYSTRUCTNAME;
+
+    struct {
+        UCHAR       Reserved2   : 4;
+        UCHAR       ZS          : 4;    // Zone State
+    } DUMMYSTRUCTNAME;
+
+    struct {
+        UCHAR       ZFC         : 1;    // Zone Finished by Controller (ZFC)
+        UCHAR       FZR         : 1;    // Finish Zone Recommended (FZR)
+        UCHAR       RZR         : 1;    // Reset Zone Recommended (RZR)
+        UCHAR       Reserved    : 4;
+        UCHAR       ZDEV        : 1;    // Zone Descriptor Extension Valid (ZDEV)
+    } ZA;                           // Zone Attribute
+
+    UCHAR       Reserved3[5];
+
+    ULONGLONG   ZCAP;       // Zone Capacity
+
+    ULONGLONG   ZSLBA;              // Zone Start Logical Block Address
+
+    ULONGLONG   WritePointer;       // Current Write pointer of the Zone
+
+    UCHAR       Reserved4[32];
+
+} NVME_ZONE_DESCRIPTOR, *PNVME_ZONE_DESCRIPTOR;
+
+
+//
+// Zone States
+//
+typedef enum {
+    NVME_STATE_ZSE      = 0x1,    // Zone State Empty
+    NVME_STATE_ZSIO     = 0x2,    // Zone State Implicitly Opened
+    NVME_STATE_ZSEO     = 0x3,    // Zone State Explicitly Opened
+    NVME_STATE_ZSC      = 0x4,    // Zone State Closed
+
+    NVME_STATE_ZSRO     = 0xD,    // Zone State Read-Only
+    NVME_STATE_ZSF      = 0xE,    // Zone State Full
+    NVME_STATE_ZSO      = 0xF,    // Zone State Offline
+
+} ZONE_STATE;
+
+//
+// Data structure of CDW13 for Zone Management Send command
+//
+typedef enum {
+    NVME_ZONE_SEND_CLOSE        = 1,    // Close one or more zones
+    NVME_ZONE_SEND_FINISH       = 2,    // Finish one or more zones
+    NVME_ZONE_SEND_OPEN         = 3,    // Open one or more zones
+    NVME_ZONE_SEND_RESET        = 4,    // Reset one or more zones  
+    NVME_ZONE_SEND_OFFLINE      = 5,    // Offline one or more zones  
+
+    NVME_ZONE_SEND_SET_ZONE_DESCRIPTOR      = 0x10,    // Attach Zone Descriptor Extension data to a zone in the Empty state and 
+                                                       // transition the zone to the Closed state
+} NVME_ZONE_SEND_ACTION;
+
+typedef struct {
+
+    ULONGLONG               SLBA;       // Starting LBA (SLBA)
+
+} NVME_CDW10_ZONE_MANAGEMENT_SEND, *PNVME_CDW10_ZONE_MANAGEMENT_SEND;
+
+typedef union {
+
+    struct {
+        ULONG   ZSA         : 8;        // Zone Send Action, as defined in NVME_ZONE_SEND_ACTION
+        ULONG   SelectAll   : 1;        // Select all the zones. SLBA is ignored if set
+        ULONG   Reserved    : 23;
+    } DUMMYSTRUCTNAME;
+
+    ULONG   AsUlong;
+
+} NVME_CDW13_ZONE_MANAGEMENT_SEND, *PNVME_CDW13_ZONE_MANAGEMENT_SEND;
+
+//
+// Report Zone Data Structure
+//
+typedef struct {
+
+    ULONGLONG               ZoneCount;      //Number of Zones
+    ULONGLONG               Reserved[7];
+
+    NVME_ZONE_DESCRIPTOR    ZoneDescriptor[ANYSIZE_ARRAY];
+} NVME_REPORT_ZONE_INFO, *PNVME_REPORT_ZONE_INFO;
+
+//
+// Extended Report Zone Data Structure and related defines
+//
+typedef struct{
+
+    UCHAR   ZoneDescriptorExtensionInfo[64];
+
+} NVME_ZONE_DESCRIPTOR_EXTENSION, *PNVME_ZONE_DESCRIPTOR_EXTENSION;
+
+typedef struct {
+
+    NVME_ZONE_DESCRIPTOR            ZoneDescriptor;
+    NVME_ZONE_DESCRIPTOR_EXTENSION  ZoneDescriptorExtension[ANYSIZE_ARRAY];
+
+} NVME_ZONE_EXTENDED_REPORT_ZONE_DESC, *PNVME_ZONE_EXTENDED_REPORT_ZONE_DESC;
+
+typedef struct {
+
+    ULONGLONG               ZoneCount;      //Number of Zones
+    ULONGLONG               Reserved[7];
+
+    NVME_ZONE_EXTENDED_REPORT_ZONE_DESC Desc[ANYSIZE_ARRAY];
+} NVME_EXTENDED_REPORT_ZONE_INFO, *PNVME_EXTENDED_REPORT_ZONE_INFO;
+
+//
+// Data structure of CDW13 for Zone Management Receive command and related defines
+//
+typedef enum {
+    NVME_ZONE_RECEIVE_REPORT_ZONES          = 0,    // Returns report zone Descriptors
+    NVME_ZONE_RECEIVE_EXTENDED_REPORT_ZONES = 1,    // Returns report zone descriptors with extended report zone information
+
+} NVME_ZONE_RECEIVE_ACTION;
+
+typedef enum {
+    NVME_ZRA_ALL_ZONES              = 0,    // List all zones
+    NVME_ZRA_EMPTY_STATE_ZONES      = 1,    // List zones with state Zone State Empty
+    NVME_ZRA_IO_STATE_ZONES         = 2,    // List zones with state Zone State Implicitly Opened
+    NVME_ZRA_EO_STATE_ZONES         = 3,    // List zones with state Zone State Explicitly Opened
+    NVME_ZRA_CLOSED_STATE_ZONES     = 4,    // List zones with state Zone State Closed
+    NVME_ZRA_FULL_STATE_ZONES       = 5,    // List zones with state Zone State Full
+    NVME_ZRA_RO_STATE_ZONES         = 6,    // List zones with state Zone State Read-Only
+    NVME_ZRA_OFFLINE_STATE_ZONES    = 7,    // List zones with state Zone State Offline
+
+} NVME_ZONE_RECEIVE_ACTION_SPECIFIC;
+
+typedef struct {
+
+    ULONGLONG               SLBA;       // Starting LBA (SLBA)
+
+} NVME_CDW10_ZONE_MANAGEMENT_RECEIVE, *PNVME_CDW10_ZONE_MANAGEMENT_RECEIVE;
+
+typedef union {
+
+    struct {
+        ULONG   ZRA             : 8;        // Zone Receive Action, as defined in NVME_ZONE_RECEIVE_ACTION
+        ULONG   ZRASpecific     : 8;        // Zone Receive Action Specific field, as defined in NVME_ZONE_RECEIVE_ACTION_SPECIFIC
+        ULONG   Partial         : 1;        // Report Zones and Extended Report Zones: Partial Report
+        ULONG   Reserved        : 15;
+    } DUMMYSTRUCTNAME;
+
+    ULONG   AsUlong;
+
+} NVME_CDW13_ZONE_MANAGEMENT_RECEIVE, *PNVME_CDW13_ZONE_MANAGEMENT_RECEIVE;
+
+typedef struct {
+
+    ULONGLONG               SLBA;       // Starting LBA (SLBA)
+
+} NVME_CDW10_ZONE_APPEND, *PNVME_CDW10_ZONE_APPEND;
+
+typedef union {
+
+    struct {
+        ULONG   NLB             : 16;       // Number of Logical Blocks (NLB)
+        ULONG   Reserved        : 9;
+        ULONG   PIREMAP         : 1;        // Protection Information Remap (PIREMAP)
+        ULONG   PRINFO          : 4;        // Protection Information Field (PRINFO)
+        ULONG   FUA             : 1;        // Force Unit Access (FUA)
+        ULONG   LR              : 1;        // Limited Retry(LR);
+    } DUMMYSTRUCTNAME;
+
+    ULONG   AsUlong;
+
+} NVME_CDW12_ZONE_APPEND, *PNVME_CDW12_ZONE_APPEND;
+
+typedef union {
+
+    struct {
+        ULONG   LBAT            : 16;       // Logical Bloack Application Tag
+        ULONG   LBATM           : 16;       // Logical Block Application Tag Mask (LBATM)
+    } DUMMYSTRUCTNAME;
+
+    ULONG   AsUlong;
+
+} NVME_CDW15_ZONE_APPEND, *PNVME_CDW15_ZONE_APPEND;
 
 //
 // Command Dword 0
@@ -2477,7 +4155,7 @@ typedef struct {
             NVME_CDW11_GET_LOG_PAGE CDW11;
             NVME_CDW12_GET_LOG_PAGE CDW12;
             NVME_CDW13_GET_LOG_PAGE CDW13;
-            ULONG                   CDW14;
+            NVME_CDW14_GET_LOG_PAGE CDW14;
             ULONG                   CDW15;
         } GETLOGPAGE;
 
@@ -2602,6 +4280,18 @@ typedef struct {
         } DIRECTIVESEND;
 
         //
+        // Admin Command: SANITIZE
+        //
+        struct {
+            NVME_CDW10_SANITIZE                 CDW10;
+            NVME_CDW11_SANITIZE                 CDW11;
+            ULONG   CDW12;
+            ULONG   CDW13;
+            ULONG   CDW14;
+            ULONG   CDW15;
+        } SANITIZE;
+        
+        //
         // NVM Command: Read/Write
         //
         struct {
@@ -2613,11 +4303,93 @@ typedef struct {
             NVME_CDW15_READ_WRITE   CDW15;
         } READWRITE;
 
+        //
+        // NVM Command: RESERVATION ACQUIRE
+        //
+        struct {
+            NVME_CDW10_RESERVATION_ACQUIRE      CDW10;
+            ULONG   CDW11;
+            ULONG   CDW12;
+            ULONG   CDW13;
+            ULONG   CDW14;
+            ULONG   CDW15;
+        } RESERVATIONACQUIRE;
+
+        //
+        // NVM Command: RESERVATION REGISTER
+        //
+        struct {
+            NVME_CDW10_RESERVATION_REGISTER     CDW10;
+            ULONG   CDW11;
+            ULONG   CDW12;
+            ULONG   CDW13;
+            ULONG   CDW14;
+            ULONG   CDW15;
+        } RESERVATIONREGISTER;
+
+        //
+        // NVM Command: RESERVATION RELEASE
+        //
+        struct {
+            NVME_CDW10_RESERVATION_RELEASE      CDW10;
+            ULONG   CDW11;
+            ULONG   CDW12;
+            ULONG   CDW13;
+            ULONG   CDW14;
+            ULONG   CDW15;
+        } RESERVATIONRELEASE;
+
+        //
+        // NVM Command: RESERVATION REPORT
+        //
+        struct {
+            NVME_CDW10_RESERVATION_REPORT       CDW10;
+            NVME_CDW11_RESERVATION_REPORT       CDW11;
+            ULONG   CDW12;
+            ULONG   CDW13;
+            ULONG   CDW14;
+            ULONG   CDW15;
+        } RESERVATIONREPORT;
+
+        //
+        // NVM Command: Zone Management Send
+        //
+        struct {
+            NVME_CDW10_ZONE_MANAGEMENT_SEND CDW1011;
+            ULONG                           CDW12;
+            NVME_CDW13_ZONE_MANAGEMENT_SEND CDW13;
+            ULONG                           CDW14;
+            ULONG                           CDW15;
+        } ZONEMANAGEMENTSEND;
+
+        //
+        // NVM Command: Zone Management Receive
+        //
+        struct {
+            NVME_CDW10_ZONE_MANAGEMENT_RECEIVE  CDW1011;
+            ULONG                               DWORDCOUNT;
+            NVME_CDW13_ZONE_MANAGEMENT_RECEIVE  CDW13;
+            ULONG                               CDW14;
+            ULONG                               CDW15;
+        } ZONEMANAGEMENTRECEIVE;
+
+        //
+        // NVM Command: Zone Append
+        //
+        struct {
+            NVME_CDW10_ZONE_APPEND              CDW1011;
+            NVME_CDW12_ZONE_APPEND              CDW12;
+            ULONG                               CDW13;
+            ULONG                               ILBRT;
+            NVME_CDW15_ZONE_APPEND              CDW15;
+        } ZONEAPPEND;
+
     } u;
 
 } NVME_COMMAND, *PNVME_COMMAND;
 
-
+C_ASSERT(sizeof(NVME_COMMAND) == 64); // NVMe commands are always 64 bytes
+                                      // (defined by constant STORAGE_PROTOCOL_COMMAND_LENGTH_NVME)
 
 //
 // The SCSI name string identifier used for the page 83 descriptor in NVMe to SCSI translation
@@ -2639,6 +4411,7 @@ typedef struct {
 #pragma warning(default:4201)
 #pragma warning(default:4200)
 #endif
+
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_STORAGE) */
 #pragma endregion

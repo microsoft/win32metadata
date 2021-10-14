@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xa0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_MEDIA_MEDIACONTROLCONTRACT_VERSION)
@@ -1465,6 +1465,21 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CMedia_CCore_CITimedMetadataTrackProvider_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CMedia_CCore_CITimedTextBouten_FWD_DEFINED__
+#define ____x_ABI_CWindows_CMedia_CCore_CITimedTextBouten_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Core {
+                interface ITimedTextBouten;
+            } /* Core */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextBouten ABI::Windows::Media::Core::ITimedTextBouten
+
+#endif // ____x_ABI_CWindows_CMedia_CCore_CITimedTextBouten_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CMedia_CCore_CITimedTextCue_FWD_DEFINED__
 #define ____x_ABI_CWindows_CMedia_CCore_CITimedTextCue_FWD_DEFINED__
 namespace ABI {
@@ -1509,6 +1524,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CMedia_CCore_CITimedTextRegion ABI::Windows::Media::Core::ITimedTextRegion
 
 #endif // ____x_ABI_CWindows_CMedia_CCore_CITimedTextRegion_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CMedia_CCore_CITimedTextRuby_FWD_DEFINED__
+#define ____x_ABI_CWindows_CMedia_CCore_CITimedTextRuby_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Core {
+                interface ITimedTextRuby;
+            } /* Core */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextRuby ABI::Windows::Media::Core::ITimedTextRuby
+
+#endif // ____x_ABI_CWindows_CMedia_CCore_CITimedTextRuby_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CMedia_CCore_CITimedTextSource_FWD_DEFINED__
 #define ____x_ABI_CWindows_CMedia_CCore_CITimedTextSource_FWD_DEFINED__
@@ -1599,6 +1629,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CMedia_CCore_CITimedTextStyle2 ABI::Windows::Media::Core::ITimedTextStyle2
 
 #endif // ____x_ABI_CWindows_CMedia_CCore_CITimedTextStyle2_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3_FWD_DEFINED__
+#define ____x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Core {
+                interface ITimedTextStyle3;
+            } /* Core */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3 ABI::Windows::Media::Core::ITimedTextStyle3
+
+#endif // ____x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CMedia_CCore_CITimedTextSubformat_FWD_DEFINED__
 #define ____x_ABI_CWindows_CMedia_CCore_CITimedTextSubformat_FWD_DEFINED__
@@ -5393,6 +5438,26 @@ namespace ABI {
     namespace Windows {
         namespace Media {
             namespace Core {
+                typedef enum TimedTextBoutenPosition : int TimedTextBoutenPosition;
+            } /* Core */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Core {
+                typedef enum TimedTextBoutenType : int TimedTextBoutenType;
+            } /* Core */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Core {
                 typedef enum TimedTextDisplayAlignment : int TimedTextDisplayAlignment;
             } /* Core */
         } /* Media */
@@ -5424,6 +5489,36 @@ namespace ABI {
         namespace Media {
             namespace Core {
                 typedef enum TimedTextLineAlignment : int TimedTextLineAlignment;
+            } /* Core */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Core {
+                typedef enum TimedTextRubyAlign : int TimedTextRubyAlign;
+            } /* Core */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Core {
+                typedef enum TimedTextRubyPosition : int TimedTextRubyPosition;
+            } /* Core */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Core {
+                typedef enum TimedTextRubyReserve : int TimedTextRubyReserve;
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -5713,7 +5808,27 @@ namespace ABI {
     namespace Windows {
         namespace Media {
             namespace Core {
+                class TimedTextBouten;
+            } /* Core */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Core {
                 class TimedTextRegion;
+            } /* Core */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Core {
+                class TimedTextRuby;
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -6181,6 +6296,59 @@ namespace ABI {
 
 /*
  *
+ * Struct Windows.Media.Core.TimedTextBoutenPosition
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 12.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Core {
+                enum TimedTextBoutenPosition : int
+                {
+                    TimedTextBoutenPosition_Before = 0,
+                    TimedTextBoutenPosition_After = 1,
+                    TimedTextBoutenPosition_Outside = 2,
+                };
+            } /* Core */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+
+/*
+ *
+ * Struct Windows.Media.Core.TimedTextBoutenType
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 12.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Core {
+                enum TimedTextBoutenType : int
+                {
+                    TimedTextBoutenType_None = 0,
+                    TimedTextBoutenType_Auto = 1,
+                    TimedTextBoutenType_FilledCircle = 2,
+                    TimedTextBoutenType_OpenCircle = 3,
+                    TimedTextBoutenType_FilledDot = 4,
+                    TimedTextBoutenType_OpenDot = 5,
+                    TimedTextBoutenType_FilledSesame = 6,
+                    TimedTextBoutenType_OpenSesame = 7,
+                };
+            } /* Core */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+
+/*
+ *
  * Struct Windows.Media.Core.TimedTextDisplayAlignment
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -6273,6 +6441,83 @@ namespace ABI {
     } /* Windows */
 } /* ABI */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Struct Windows.Media.Core.TimedTextRubyAlign
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 12.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Core {
+                enum TimedTextRubyAlign : int
+                {
+                    TimedTextRubyAlign_Center = 0,
+                    TimedTextRubyAlign_Start = 1,
+                    TimedTextRubyAlign_End = 2,
+                    TimedTextRubyAlign_SpaceAround = 3,
+                    TimedTextRubyAlign_SpaceBetween = 4,
+                    TimedTextRubyAlign_WithBase = 5,
+                };
+            } /* Core */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+
+/*
+ *
+ * Struct Windows.Media.Core.TimedTextRubyPosition
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 12.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Core {
+                enum TimedTextRubyPosition : int
+                {
+                    TimedTextRubyPosition_Before = 0,
+                    TimedTextRubyPosition_After = 1,
+                    TimedTextRubyPosition_Outside = 2,
+                };
+            } /* Core */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+
+/*
+ *
+ * Struct Windows.Media.Core.TimedTextRubyReserve
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 12.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Core {
+                enum TimedTextRubyReserve : int
+                {
+                    TimedTextRubyReserve_None = 0,
+                    TimedTextRubyReserve_Before = 1,
+                    TimedTextRubyReserve_After = 2,
+                    TimedTextRubyReserve_Both = 3,
+                    TimedTextRubyReserve_Outside = 4,
+                };
+            } /* Core */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 
 /*
  *
@@ -10585,6 +10830,57 @@ EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CCore_CITimedMetadataTrackProvide
 
 /*
  *
+ * Interface Windows.Media.Core.ITimedTextBouten
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 12.0
+ *
+ * Interface is a part of the implementation of type Windows.Media.Core.TimedTextBouten
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+#if !defined(____x_ABI_CWindows_CMedia_CCore_CITimedTextBouten_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CMedia_CCore_CITimedTextBouten_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Media_Core_ITimedTextBouten[] = L"Windows.Media.Core.ITimedTextBouten";
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Core {
+                MIDL_INTERFACE("d9062783-5597-5092-820c-8f738e0f774a")
+                ITimedTextBouten : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_Type(
+                        ABI::Windows::Media::Core::TimedTextBoutenType* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_Type(
+                        ABI::Windows::Media::Core::TimedTextBoutenType value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_Color(
+                        ABI::Windows::UI::Color* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_Color(
+                        ABI::Windows::UI::Color value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_Position(
+                        ABI::Windows::Media::Core::TimedTextBoutenPosition* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_Position(
+                        ABI::Windows::Media::Core::TimedTextBoutenPosition value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_ITimedTextBouten = _uuidof(ITimedTextBouten);
+            } /* Core */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CCore_CITimedTextBouten;
+#endif /* !defined(____x_ABI_CWindows_CMedia_CCore_CITimedTextBouten_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+
+/*
+ *
  * Interface Windows.Media.Core.ITimedTextCue
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -10780,6 +11076,63 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CCore_CITimedTextRegion;
 #endif /* !defined(____x_ABI_CWindows_CMedia_CCore_CITimedTextRegion_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.Media.Core.ITimedTextRuby
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 12.0
+ *
+ * Interface is a part of the implementation of type Windows.Media.Core.TimedTextRuby
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+#if !defined(____x_ABI_CWindows_CMedia_CCore_CITimedTextRuby_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CMedia_CCore_CITimedTextRuby_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Media_Core_ITimedTextRuby[] = L"Windows.Media.Core.ITimedTextRuby";
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Core {
+                MIDL_INTERFACE("10335c29-5b3c-5693-9959-d05a0bd24628")
+                ITimedTextRuby : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_Text(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_Text(
+                        HSTRING value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_Position(
+                        ABI::Windows::Media::Core::TimedTextRubyPosition* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_Position(
+                        ABI::Windows::Media::Core::TimedTextRubyPosition value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_Align(
+                        ABI::Windows::Media::Core::TimedTextRubyAlign* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_Align(
+                        ABI::Windows::Media::Core::TimedTextRubyAlign value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_Reserve(
+                        ABI::Windows::Media::Core::TimedTextRubyReserve* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_Reserve(
+                        ABI::Windows::Media::Core::TimedTextRubyReserve value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_ITimedTextRuby = _uuidof(ITimedTextRuby);
+            } /* Core */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CCore_CITimedTextRuby;
+#endif /* !defined(____x_ABI_CWindows_CMedia_CCore_CITimedTextRuby_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 
 /*
  *
@@ -11127,6 +11480,57 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CCore_CITimedTextStyle2;
 #endif /* !defined(____x_ABI_CWindows_CMedia_CCore_CITimedTextStyle2_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x40000
+
+/*
+ *
+ * Interface Windows.Media.Core.ITimedTextStyle3
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 12.0
+ *
+ * Interface is a part of the implementation of type Windows.Media.Core.TimedTextStyle
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+#if !defined(____x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Media_Core_ITimedTextStyle3[] = L"Windows.Media.Core.ITimedTextStyle3";
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Core {
+                MIDL_INTERFACE("f803f93b-3e99-595e-bbb7-78a2fa13c270")
+                ITimedTextStyle3 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_Ruby(
+                        ABI::Windows::Media::Core::ITimedTextRuby** value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_Bouten(
+                        ABI::Windows::Media::Core::ITimedTextBouten** value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_IsTextCombined(
+                        boolean* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_IsTextCombined(
+                        boolean value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_FontAngleInDegrees(
+                        DOUBLE* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_FontAngleInDegrees(
+                        DOUBLE value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_ITimedTextStyle3 = _uuidof(ITimedTextStyle3);
+            } /* Core */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3;
+#endif /* !defined(____x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 
 /*
  *
@@ -12014,9 +12418,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics2 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics4 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics2 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
@@ -12752,6 +13156,25 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 
 /*
  *
+ * Class Windows.Media.Core.TimedTextBouten
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 12.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.Media.Core.ITimedTextBouten ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+#ifndef RUNTIMECLASS_Windows_Media_Core_TimedTextBouten_DEFINED
+#define RUNTIMECLASS_Windows_Media_Core_TimedTextBouten_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Media_Core_TimedTextBouten[] = L"Windows.Media.Core.TimedTextBouten";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+
+/*
+ *
  * Class Windows.Media.Core.TimedTextCue
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -12825,13 +13248,32 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 
 /*
  *
+ * Class Windows.Media.Core.TimedTextRuby
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 12.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.Media.Core.ITimedTextRuby ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+#ifndef RUNTIMECLASS_Windows_Media_Core_TimedTextRuby_DEFINED
+#define RUNTIMECLASS_Windows_Media_Core_TimedTextRuby_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Media_Core_TimedTextRuby[] = L"Windows.Media.Core.TimedTextRuby";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+
+/*
+ *
  * Class Windows.Media.Core.TimedTextSource
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Media.Core.ITimedTextSourceStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Media.Core.ITimedTextSourceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Media.Core.ITimedTextSourceStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Media.Core.ITimedTextSource ** Default Interface **
@@ -12881,6 +13323,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class implements the following interfaces:
  *    Windows.Media.Core.ITimedTextStyle ** Default Interface **
  *    Windows.Media.Core.ITimedTextStyle2
+ *    Windows.Media.Core.ITimedTextStyle3
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -13600,6 +14043,12 @@ typedef interface __x_ABI_CWindows_CMedia_CCore_CITimedMetadataTrackProvider __x
 
 #endif // ____x_ABI_CWindows_CMedia_CCore_CITimedMetadataTrackProvider_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CMedia_CCore_CITimedTextBouten_FWD_DEFINED__
+#define ____x_ABI_CWindows_CMedia_CCore_CITimedTextBouten_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CMedia_CCore_CITimedTextBouten __x_ABI_CWindows_CMedia_CCore_CITimedTextBouten;
+
+#endif // ____x_ABI_CWindows_CMedia_CCore_CITimedTextBouten_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CMedia_CCore_CITimedTextCue_FWD_DEFINED__
 #define ____x_ABI_CWindows_CMedia_CCore_CITimedTextCue_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CMedia_CCore_CITimedTextCue __x_ABI_CWindows_CMedia_CCore_CITimedTextCue;
@@ -13617,6 +14066,12 @@ typedef interface __x_ABI_CWindows_CMedia_CCore_CITimedTextLine __x_ABI_CWindows
 typedef interface __x_ABI_CWindows_CMedia_CCore_CITimedTextRegion __x_ABI_CWindows_CMedia_CCore_CITimedTextRegion;
 
 #endif // ____x_ABI_CWindows_CMedia_CCore_CITimedTextRegion_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CMedia_CCore_CITimedTextRuby_FWD_DEFINED__
+#define ____x_ABI_CWindows_CMedia_CCore_CITimedTextRuby_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CMedia_CCore_CITimedTextRuby __x_ABI_CWindows_CMedia_CCore_CITimedTextRuby;
+
+#endif // ____x_ABI_CWindows_CMedia_CCore_CITimedTextRuby_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CMedia_CCore_CITimedTextSource_FWD_DEFINED__
 #define ____x_ABI_CWindows_CMedia_CCore_CITimedTextSource_FWD_DEFINED__
@@ -13653,6 +14108,12 @@ typedef interface __x_ABI_CWindows_CMedia_CCore_CITimedTextStyle __x_ABI_CWindow
 typedef interface __x_ABI_CWindows_CMedia_CCore_CITimedTextStyle2 __x_ABI_CWindows_CMedia_CCore_CITimedTextStyle2;
 
 #endif // ____x_ABI_CWindows_CMedia_CCore_CITimedTextStyle2_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3_FWD_DEFINED__
+#define ____x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3 __x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3;
+
+#endif // ____x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CMedia_CCore_CITimedTextSubformat_FWD_DEFINED__
 #define ____x_ABI_CWindows_CMedia_CCore_CITimedTextSubformat_FWD_DEFINED__
@@ -19948,6 +20409,10 @@ typedef enum __x_ABI_CWindows_CMedia_CCore_CTimedMetadataKind __x_ABI_CWindows_C
 
 typedef enum __x_ABI_CWindows_CMedia_CCore_CTimedMetadataTrackErrorCode __x_ABI_CWindows_CMedia_CCore_CTimedMetadataTrackErrorCode;
 
+typedef enum __x_ABI_CWindows_CMedia_CCore_CTimedTextBoutenPosition __x_ABI_CWindows_CMedia_CCore_CTimedTextBoutenPosition;
+
+typedef enum __x_ABI_CWindows_CMedia_CCore_CTimedTextBoutenType __x_ABI_CWindows_CMedia_CCore_CTimedTextBoutenType;
+
 typedef enum __x_ABI_CWindows_CMedia_CCore_CTimedTextDisplayAlignment __x_ABI_CWindows_CMedia_CCore_CTimedTextDisplayAlignment;
 
 typedef enum __x_ABI_CWindows_CMedia_CCore_CTimedTextFlowDirection __x_ABI_CWindows_CMedia_CCore_CTimedTextFlowDirection;
@@ -19955,6 +20420,12 @@ typedef enum __x_ABI_CWindows_CMedia_CCore_CTimedTextFlowDirection __x_ABI_CWind
 typedef enum __x_ABI_CWindows_CMedia_CCore_CTimedTextFontStyle __x_ABI_CWindows_CMedia_CCore_CTimedTextFontStyle;
 
 typedef enum __x_ABI_CWindows_CMedia_CCore_CTimedTextLineAlignment __x_ABI_CWindows_CMedia_CCore_CTimedTextLineAlignment;
+
+typedef enum __x_ABI_CWindows_CMedia_CCore_CTimedTextRubyAlign __x_ABI_CWindows_CMedia_CCore_CTimedTextRubyAlign;
+
+typedef enum __x_ABI_CWindows_CMedia_CCore_CTimedTextRubyPosition __x_ABI_CWindows_CMedia_CCore_CTimedTextRubyPosition;
+
+typedef enum __x_ABI_CWindows_CMedia_CCore_CTimedTextRubyReserve __x_ABI_CWindows_CMedia_CCore_CTimedTextRubyReserve;
 
 typedef enum __x_ABI_CWindows_CMedia_CCore_CTimedTextScrollMode __x_ABI_CWindows_CMedia_CCore_CTimedTextScrollMode;
 
@@ -20272,6 +20743,43 @@ enum __x_ABI_CWindows_CMedia_CCore_CTimedMetadataTrackErrorCode
 
 /*
  *
+ * Struct Windows.Media.Core.TimedTextBoutenPosition
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 12.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+enum __x_ABI_CWindows_CMedia_CCore_CTimedTextBoutenPosition
+{
+    TimedTextBoutenPosition_Before = 0,
+    TimedTextBoutenPosition_After = 1,
+    TimedTextBoutenPosition_Outside = 2,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+
+/*
+ *
+ * Struct Windows.Media.Core.TimedTextBoutenType
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 12.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+enum __x_ABI_CWindows_CMedia_CCore_CTimedTextBoutenType
+{
+    TimedTextBoutenType_None = 0,
+    TimedTextBoutenType_Auto = 1,
+    TimedTextBoutenType_FilledCircle = 2,
+    TimedTextBoutenType_OpenCircle = 3,
+    TimedTextBoutenType_FilledDot = 4,
+    TimedTextBoutenType_OpenDot = 5,
+    TimedTextBoutenType_FilledSesame = 6,
+    TimedTextBoutenType_OpenSesame = 7,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+
+/*
+ *
  * Struct Windows.Media.Core.TimedTextDisplayAlignment
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -20332,6 +20840,59 @@ enum __x_ABI_CWindows_CMedia_CCore_CTimedTextLineAlignment
     TimedTextLineAlignment_Center = 2,
 };
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Struct Windows.Media.Core.TimedTextRubyAlign
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 12.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+enum __x_ABI_CWindows_CMedia_CCore_CTimedTextRubyAlign
+{
+    TimedTextRubyAlign_Center = 0,
+    TimedTextRubyAlign_Start = 1,
+    TimedTextRubyAlign_End = 2,
+    TimedTextRubyAlign_SpaceAround = 3,
+    TimedTextRubyAlign_SpaceBetween = 4,
+    TimedTextRubyAlign_WithBase = 5,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+
+/*
+ *
+ * Struct Windows.Media.Core.TimedTextRubyPosition
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 12.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+enum __x_ABI_CWindows_CMedia_CCore_CTimedTextRubyPosition
+{
+    TimedTextRubyPosition_Before = 0,
+    TimedTextRubyPosition_After = 1,
+    TimedTextRubyPosition_Outside = 2,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+
+/*
+ *
+ * Struct Windows.Media.Core.TimedTextRubyReserve
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 12.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+enum __x_ABI_CWindows_CMedia_CCore_CTimedTextRubyReserve
+{
+    TimedTextRubyReserve_None = 0,
+    TimedTextRubyReserve_Before = 1,
+    TimedTextRubyReserve_After = 2,
+    TimedTextRubyReserve_Both = 3,
+    TimedTextRubyReserve_Outside = 4,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 
 /*
  *
@@ -27949,6 +28510,100 @@ EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CCore_CITimedMetadataTrackProvide
 
 /*
  *
+ * Interface Windows.Media.Core.ITimedTextBouten
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 12.0
+ *
+ * Interface is a part of the implementation of type Windows.Media.Core.TimedTextBouten
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+#if !defined(____x_ABI_CWindows_CMedia_CCore_CITimedTextBouten_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CMedia_CCore_CITimedTextBouten_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Media_Core_ITimedTextBouten[] = L"Windows.Media.Core.ITimedTextBouten";
+typedef struct __x_ABI_CWindows_CMedia_CCore_CITimedTextBoutenVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CMedia_CCore_CITimedTextBouten* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CMedia_CCore_CITimedTextBouten* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CMedia_CCore_CITimedTextBouten* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CMedia_CCore_CITimedTextBouten* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CMedia_CCore_CITimedTextBouten* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CMedia_CCore_CITimedTextBouten* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Type)(__x_ABI_CWindows_CMedia_CCore_CITimedTextBouten* This,
+        enum __x_ABI_CWindows_CMedia_CCore_CTimedTextBoutenType* value);
+    HRESULT (STDMETHODCALLTYPE* put_Type)(__x_ABI_CWindows_CMedia_CCore_CITimedTextBouten* This,
+        enum __x_ABI_CWindows_CMedia_CCore_CTimedTextBoutenType value);
+    HRESULT (STDMETHODCALLTYPE* get_Color)(__x_ABI_CWindows_CMedia_CCore_CITimedTextBouten* This,
+        struct __x_ABI_CWindows_CUI_CColor* value);
+    HRESULT (STDMETHODCALLTYPE* put_Color)(__x_ABI_CWindows_CMedia_CCore_CITimedTextBouten* This,
+        struct __x_ABI_CWindows_CUI_CColor value);
+    HRESULT (STDMETHODCALLTYPE* get_Position)(__x_ABI_CWindows_CMedia_CCore_CITimedTextBouten* This,
+        enum __x_ABI_CWindows_CMedia_CCore_CTimedTextBoutenPosition* value);
+    HRESULT (STDMETHODCALLTYPE* put_Position)(__x_ABI_CWindows_CMedia_CCore_CITimedTextBouten* This,
+        enum __x_ABI_CWindows_CMedia_CCore_CTimedTextBoutenPosition value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CMedia_CCore_CITimedTextBoutenVtbl;
+
+interface __x_ABI_CWindows_CMedia_CCore_CITimedTextBouten
+{
+    CONST_VTBL struct __x_ABI_CWindows_CMedia_CCore_CITimedTextBoutenVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextBouten_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextBouten_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextBouten_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextBouten_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextBouten_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextBouten_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextBouten_get_Type(This, value) \
+    ((This)->lpVtbl->get_Type(This, value))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextBouten_put_Type(This, value) \
+    ((This)->lpVtbl->put_Type(This, value))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextBouten_get_Color(This, value) \
+    ((This)->lpVtbl->get_Color(This, value))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextBouten_put_Color(This, value) \
+    ((This)->lpVtbl->put_Color(This, value))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextBouten_get_Position(This, value) \
+    ((This)->lpVtbl->get_Position(This, value))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextBouten_put_Position(This, value) \
+    ((This)->lpVtbl->put_Position(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CCore_CITimedTextBouten;
+#endif /* !defined(____x_ABI_CWindows_CMedia_CCore_CITimedTextBouten_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+
+/*
+ *
  * Interface Windows.Media.Core.ITimedTextCue
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -28301,6 +28956,110 @@ interface __x_ABI_CWindows_CMedia_CCore_CITimedTextRegion
 EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CCore_CITimedTextRegion;
 #endif /* !defined(____x_ABI_CWindows_CMedia_CCore_CITimedTextRegion_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.Media.Core.ITimedTextRuby
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 12.0
+ *
+ * Interface is a part of the implementation of type Windows.Media.Core.TimedTextRuby
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+#if !defined(____x_ABI_CWindows_CMedia_CCore_CITimedTextRuby_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CMedia_CCore_CITimedTextRuby_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Media_Core_ITimedTextRuby[] = L"Windows.Media.Core.ITimedTextRuby";
+typedef struct __x_ABI_CWindows_CMedia_CCore_CITimedTextRubyVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CMedia_CCore_CITimedTextRuby* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CMedia_CCore_CITimedTextRuby* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CMedia_CCore_CITimedTextRuby* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CMedia_CCore_CITimedTextRuby* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CMedia_CCore_CITimedTextRuby* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CMedia_CCore_CITimedTextRuby* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Text)(__x_ABI_CWindows_CMedia_CCore_CITimedTextRuby* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* put_Text)(__x_ABI_CWindows_CMedia_CCore_CITimedTextRuby* This,
+        HSTRING value);
+    HRESULT (STDMETHODCALLTYPE* get_Position)(__x_ABI_CWindows_CMedia_CCore_CITimedTextRuby* This,
+        enum __x_ABI_CWindows_CMedia_CCore_CTimedTextRubyPosition* value);
+    HRESULT (STDMETHODCALLTYPE* put_Position)(__x_ABI_CWindows_CMedia_CCore_CITimedTextRuby* This,
+        enum __x_ABI_CWindows_CMedia_CCore_CTimedTextRubyPosition value);
+    HRESULT (STDMETHODCALLTYPE* get_Align)(__x_ABI_CWindows_CMedia_CCore_CITimedTextRuby* This,
+        enum __x_ABI_CWindows_CMedia_CCore_CTimedTextRubyAlign* value);
+    HRESULT (STDMETHODCALLTYPE* put_Align)(__x_ABI_CWindows_CMedia_CCore_CITimedTextRuby* This,
+        enum __x_ABI_CWindows_CMedia_CCore_CTimedTextRubyAlign value);
+    HRESULT (STDMETHODCALLTYPE* get_Reserve)(__x_ABI_CWindows_CMedia_CCore_CITimedTextRuby* This,
+        enum __x_ABI_CWindows_CMedia_CCore_CTimedTextRubyReserve* value);
+    HRESULT (STDMETHODCALLTYPE* put_Reserve)(__x_ABI_CWindows_CMedia_CCore_CITimedTextRuby* This,
+        enum __x_ABI_CWindows_CMedia_CCore_CTimedTextRubyReserve value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CMedia_CCore_CITimedTextRubyVtbl;
+
+interface __x_ABI_CWindows_CMedia_CCore_CITimedTextRuby
+{
+    CONST_VTBL struct __x_ABI_CWindows_CMedia_CCore_CITimedTextRubyVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextRuby_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextRuby_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextRuby_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextRuby_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextRuby_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextRuby_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextRuby_get_Text(This, value) \
+    ((This)->lpVtbl->get_Text(This, value))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextRuby_put_Text(This, value) \
+    ((This)->lpVtbl->put_Text(This, value))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextRuby_get_Position(This, value) \
+    ((This)->lpVtbl->get_Position(This, value))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextRuby_put_Position(This, value) \
+    ((This)->lpVtbl->put_Position(This, value))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextRuby_get_Align(This, value) \
+    ((This)->lpVtbl->get_Align(This, value))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextRuby_put_Align(This, value) \
+    ((This)->lpVtbl->put_Align(This, value))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextRuby_get_Reserve(This, value) \
+    ((This)->lpVtbl->get_Reserve(This, value))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextRuby_put_Reserve(This, value) \
+    ((This)->lpVtbl->put_Reserve(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CCore_CITimedTextRuby;
+#endif /* !defined(____x_ABI_CWindows_CMedia_CCore_CITimedTextRuby_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 
 /*
  *
@@ -28922,6 +29681,100 @@ interface __x_ABI_CWindows_CMedia_CCore_CITimedTextStyle2
 EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CCore_CITimedTextStyle2;
 #endif /* !defined(____x_ABI_CWindows_CMedia_CCore_CITimedTextStyle2_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x40000
+
+/*
+ *
+ * Interface Windows.Media.Core.ITimedTextStyle3
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 12.0
+ *
+ * Interface is a part of the implementation of type Windows.Media.Core.TimedTextStyle
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+#if !defined(____x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Media_Core_ITimedTextStyle3[] = L"Windows.Media.Core.ITimedTextStyle3";
+typedef struct __x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Ruby)(__x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3* This,
+        __x_ABI_CWindows_CMedia_CCore_CITimedTextRuby** value);
+    HRESULT (STDMETHODCALLTYPE* get_Bouten)(__x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3* This,
+        __x_ABI_CWindows_CMedia_CCore_CITimedTextBouten** value);
+    HRESULT (STDMETHODCALLTYPE* get_IsTextCombined)(__x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3* This,
+        boolean* value);
+    HRESULT (STDMETHODCALLTYPE* put_IsTextCombined)(__x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3* This,
+        boolean value);
+    HRESULT (STDMETHODCALLTYPE* get_FontAngleInDegrees)(__x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3* This,
+        DOUBLE* value);
+    HRESULT (STDMETHODCALLTYPE* put_FontAngleInDegrees)(__x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3* This,
+        DOUBLE value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3Vtbl;
+
+interface __x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3
+{
+    CONST_VTBL struct __x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3_get_Ruby(This, value) \
+    ((This)->lpVtbl->get_Ruby(This, value))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3_get_Bouten(This, value) \
+    ((This)->lpVtbl->get_Bouten(This, value))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3_get_IsTextCombined(This, value) \
+    ((This)->lpVtbl->get_IsTextCombined(This, value))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3_put_IsTextCombined(This, value) \
+    ((This)->lpVtbl->put_IsTextCombined(This, value))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3_get_FontAngleInDegrees(This, value) \
+    ((This)->lpVtbl->get_FontAngleInDegrees(This, value))
+
+#define __x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3_put_FontAngleInDegrees(This, value) \
+    ((This)->lpVtbl->put_FontAngleInDegrees(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3;
+#endif /* !defined(____x_ABI_CWindows_CMedia_CCore_CITimedTextStyle3_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
 
 /*
  *
@@ -30136,9 +30989,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics2 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics4 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics2 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
@@ -30874,6 +31727,25 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 
 /*
  *
+ * Class Windows.Media.Core.TimedTextBouten
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 12.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.Media.Core.ITimedTextBouten ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+#ifndef RUNTIMECLASS_Windows_Media_Core_TimedTextBouten_DEFINED
+#define RUNTIMECLASS_Windows_Media_Core_TimedTextBouten_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Media_Core_TimedTextBouten[] = L"Windows.Media.Core.TimedTextBouten";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+
+/*
+ *
  * Class Windows.Media.Core.TimedTextCue
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -30947,13 +31819,32 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 
 /*
  *
+ * Class Windows.Media.Core.TimedTextRuby
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 12.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.Media.Core.ITimedTextRuby ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+#ifndef RUNTIMECLASS_Windows_Media_Core_TimedTextRuby_DEFINED
+#define RUNTIMECLASS_Windows_Media_Core_TimedTextRuby_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Media_Core_TimedTextRuby[] = L"Windows.Media.Core.TimedTextRuby";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+
+/*
+ *
  * Class Windows.Media.Core.TimedTextSource
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Media.Core.ITimedTextSourceStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Media.Core.ITimedTextSourceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Media.Core.ITimedTextSourceStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Media.Core.ITimedTextSource ** Default Interface **
@@ -31003,6 +31894,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class implements the following interfaces:
  *    Windows.Media.Core.ITimedTextStyle ** Default Interface **
  *    Windows.Media.Core.ITimedTextStyle2
+ *    Windows.Media.Core.ITimedTextStyle3
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *

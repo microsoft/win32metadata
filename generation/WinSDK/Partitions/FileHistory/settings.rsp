@@ -1,5 +1,7 @@
 --traverse
 <IncludeRoot>/um/FhCfg.h
 <IncludeRoot>/um/FhSvcCtl.h
+<IncludeRoot>/um/fherrors.h
+<IncludeRoot>/um/fhstatus.h
 --namespace
 Windows.Win32.Storage.FileHistory

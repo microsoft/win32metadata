@@ -32,7 +32,6 @@ EncodePointer(
     _In_opt_ PVOID Ptr
     );
 
-
 WINBASEAPI
 _Ret_maybenull_
 PVOID
@@ -40,7 +39,6 @@ WINAPI
 DecodePointer(
     _In_opt_ PVOID Ptr
     );
-
 
 WINBASEAPI
 _Ret_maybenull_
@@ -50,7 +48,6 @@ EncodeSystemPointer(
     _In_opt_ PVOID Ptr
     );
 
-
 WINBASEAPI
 _Ret_maybenull_
 PVOID
@@ -58,7 +55,6 @@ WINAPI
 DecodeSystemPointer(
     _In_opt_ PVOID Ptr
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion
@@ -75,7 +71,6 @@ EncodeRemotePointer(
     _Out_ PVOID* EncodedPtr
     );
 
-
 WINBASEAPI
 HRESULT
 WINAPI
@@ -84,7 +79,6 @@ DecodeRemotePointer(
     _In_opt_ PVOID Ptr,
     _Out_ PVOID* DecodedPtr
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
@@ -99,7 +93,6 @@ Beep(
     _In_ DWORD dwFreq,
     _In_ DWORD dwDuration
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_PC_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion

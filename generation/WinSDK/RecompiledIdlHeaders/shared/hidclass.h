@@ -89,11 +89,21 @@ DEFINE_DEVPROPKEY(DEVPKEY_DeviceInterface_HID_ProductId, 0xcbf38310, 0x4a17, 0x4
 //  Version number of HID device
 DEFINE_DEVPROPKEY(DEVPKEY_DeviceInterface_HID_VersionNumber, 0xcbf38310, 0x4a17, 0x4310, 0xa1, 0xeb, 0x24, 0x7f, 0xb, 0x67, 0x59, 0x3b, 7);
 
+
 //  Type:     Boolean - DEVPROP_TYPE_BOOLEAN
 //  FormatID: {CBF38310-4A17-4310-A1EB-247F0B67593B}, 8
 //
 //  Allow access from background tasks to this HID device
 DEFINE_DEVPROPKEY(DEVPKEY_DeviceInterface_HID_BackgroundAccess, 0xcbf38310, 0x4a17, 0x4310, 0xa1, 0xeb, 0x24, 0x7f, 0xb, 0x67, 0x59, 0x3b, 8);
+
+
+//  Type:     DEVPROP_TYPE_BOOLEAN
+//  FormatID: {CBF38310-4A17-4310-A1EB-247F0B67593B}, 9
+//
+//  Do NOT alter this property. The HID stack in the OS sets it automatically.
+//  This property indicates whether the HID collection input is capable of turning on the screen.
+//
+DEFINE_DEVPROPKEY(DEVPKEY_DeviceInterface_HID_WakeScreenOnInputCapable, 0xcbf38310, 0x4a17, 0x4310, 0xa1, 0xeb, 0x24, 0x7f, 0xb, 0x67, 0x59, 0x3b, 9);
 
 #endif
 

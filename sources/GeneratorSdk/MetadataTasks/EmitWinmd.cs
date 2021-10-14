@@ -12,6 +12,7 @@ namespace MetadataTasks
     {
         private string outputWinmdFullPath;
         private string partitionsWithoutCrossarchDifferences;
+        private StringBuilder fullOutput = new StringBuilder();
 
         [Required]
         public string ToolsBinDir { get; set; }
@@ -128,7 +129,7 @@ namespace MetadataTasks
             int exitCode = base.ExecuteTool(pathToTool, responseFileCommands, commandLineCommands);
             if (exitCode != 0)
             {
-                this.Log.LogError($"ClangSharpSourceToWinmd.dll failed.");
+                this.Log.LogError($"ClangSharpSourceToWinmd failed. Full output:\r\n{this.fullOutput}");
                 return exitCode;
             }
 
@@ -161,6 +162,8 @@ namespace MetadataTasks
                         singleLine.Substring(lastColon + 1).Trim().Replace(',', ';');
                 }
             }
+
+            this.fullOutput.AppendLine(singleLine);
 
             base.LogEventsFromTextOutput(singleLine, messageImportance);
         }

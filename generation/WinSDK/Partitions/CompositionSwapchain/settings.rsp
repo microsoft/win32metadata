@@ -1,0 +1,6 @@
+--traverse
+<IncludeRoot>/um/presentation.h
+<IncludeRoot>/um/presentationtypes.h
+--namespace
+Windows.Win32.Graphics.CompositionSwapchain
+

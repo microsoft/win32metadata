@@ -108,7 +108,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xa0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -313,20 +313,32 @@ namespace ABI {
             namespace Preview {
                 namespace Holographic {
                     MIDL_INTERFACE("c8a8ce3a-dfde-5a14-8d5f-182c526dd9c4")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+                    DEPRECATED("Use Windows.ApplicationModel.Holographic.HolographicKeyboard instead of Windows.ApplicationModel.Preview.Holographic.HolographicKeyboardPlacementOverridePreview. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
                     IHolographicKeyboardPlacementOverridePreview : public IInspectable
                     {
                     public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+                        DEPRECATED("Use Windows.ApplicationModel.Holographic.HolographicKeyboard instead of Windows.ApplicationModel.Preview.Holographic.HolographicKeyboardPlacementOverridePreview. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
                         virtual HRESULT STDMETHODCALLTYPE SetPlacementOverride(
                             ABI::Windows::Perception::Spatial::ISpatialCoordinateSystem* coordinateSystem,
                             ABI::Windows::Foundation::Numerics::Vector3 topCenterPosition,
                             ABI::Windows::Foundation::Numerics::Vector3 normal
                             ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+                        DEPRECATED("Use Windows.ApplicationModel.Holographic.HolographicKeyboard instead of Windows.ApplicationModel.Preview.Holographic.HolographicKeyboardPlacementOverridePreview. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
                         virtual HRESULT STDMETHODCALLTYPE SetPlacementOverrideWithMaxSize(
                             ABI::Windows::Perception::Spatial::ISpatialCoordinateSystem* coordinateSystem,
                             ABI::Windows::Foundation::Numerics::Vector3 topCenterPosition,
                             ABI::Windows::Foundation::Numerics::Vector3 normal,
                             ABI::Windows::Foundation::Numerics::Vector2 maxSize
                             ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+                        DEPRECATED("Use Windows.ApplicationModel.Holographic.HolographicKeyboard instead of Windows.ApplicationModel.Preview.Holographic.HolographicKeyboardPlacementOverridePreview. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
                         virtual HRESULT STDMETHODCALLTYPE ResetPlacementOverride(void) = 0;
                     };
 
@@ -360,9 +372,15 @@ namespace ABI {
             namespace Preview {
                 namespace Holographic {
                     MIDL_INTERFACE("202e6039-1ff6-5a06-aac4-a5e24fa3ec4b")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+                    DEPRECATED("Use Windows.ApplicationModel.Holographic.HolographicKeyboard instead of Windows.ApplicationModel.Preview.Holographic.HolographicKeyboardPlacementOverridePreview. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
                     IHolographicKeyboardPlacementOverridePreviewStatics : public IInspectable
                     {
                     public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+                        DEPRECATED("Use Windows.ApplicationModel.Holographic.HolographicKeyboard instead of Windows.ApplicationModel.Preview.Holographic.HolographicKeyboardPlacementOverridePreview. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
                         virtual HRESULT STDMETHODCALLTYPE GetForCurrentView(
                             ABI::Windows::ApplicationModel::Preview::Holographic::IHolographicKeyboardPlacementOverridePreview** result
                             ) = 0;
@@ -420,6 +438,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x80000
 #ifndef RUNTIMECLASS_Windows_ApplicationModel_Preview_Holographic_HolographicKeyboardPlacementOverridePreview_DEFINED
 #define RUNTIMECLASS_Windows_ApplicationModel_Preview_Holographic_HolographicKeyboardPlacementOverridePreview_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+DEPRECATED("Use Windows.ApplicationModel.Holographic.HolographicKeyboard instead of Windows.ApplicationModel.Preview.Holographic.HolographicKeyboardPlacementOverridePreview. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_Preview_Holographic_HolographicKeyboardPlacementOverridePreview[] = L"Windows.ApplicationModel.Preview.Holographic.HolographicKeyboardPlacementOverridePreview";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x80000
@@ -552,7 +573,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CPreview_CHolographic_
 #if !defined(____x_ABI_CWindows_CApplicationModel_CPreview_CHolographic_CIHolographicKeyboardPlacementOverridePreview_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CPreview_CHolographic_CIHolographicKeyboardPlacementOverridePreview_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Preview_Holographic_IHolographicKeyboardPlacementOverridePreview[] = L"Windows.ApplicationModel.Preview.Holographic.IHolographicKeyboardPlacementOverridePreview";
-typedef struct __x_ABI_CWindows_CApplicationModel_CPreview_CHolographic_CIHolographicKeyboardPlacementOverridePreviewVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+DEPRECATED("Use Windows.ApplicationModel.Holographic.HolographicKeyboard instead of Windows.ApplicationModel.Preview.Holographic.HolographicKeyboardPlacementOverridePreview. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+__x_ABI_CWindows_CApplicationModel_CPreview_CHolographic_CIHolographicKeyboardPlacementOverridePreviewVtbl
 {
     BEGIN_INTERFACE
 
@@ -568,15 +593,24 @@ typedef struct __x_ABI_CWindows_CApplicationModel_CPreview_CHolographic_CIHologr
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CPreview_CHolographic_CIHolographicKeyboardPlacementOverridePreview* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+    DEPRECATED("Use Windows.ApplicationModel.Holographic.HolographicKeyboard instead of Windows.ApplicationModel.Preview.Holographic.HolographicKeyboardPlacementOverridePreview. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
     HRESULT (STDMETHODCALLTYPE* SetPlacementOverride)(__x_ABI_CWindows_CApplicationModel_CPreview_CHolographic_CIHolographicKeyboardPlacementOverridePreview* This,
         __x_ABI_CWindows_CPerception_CSpatial_CISpatialCoordinateSystem* coordinateSystem,
         struct __x_ABI_CWindows_CFoundation_CNumerics_CVector3 topCenterPosition,
         struct __x_ABI_CWindows_CFoundation_CNumerics_CVector3 normal);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+    DEPRECATED("Use Windows.ApplicationModel.Holographic.HolographicKeyboard instead of Windows.ApplicationModel.Preview.Holographic.HolographicKeyboardPlacementOverridePreview. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
     HRESULT (STDMETHODCALLTYPE* SetPlacementOverrideWithMaxSize)(__x_ABI_CWindows_CApplicationModel_CPreview_CHolographic_CIHolographicKeyboardPlacementOverridePreview* This,
         __x_ABI_CWindows_CPerception_CSpatial_CISpatialCoordinateSystem* coordinateSystem,
         struct __x_ABI_CWindows_CFoundation_CNumerics_CVector3 topCenterPosition,
         struct __x_ABI_CWindows_CFoundation_CNumerics_CVector3 normal,
         struct __x_ABI_CWindows_CFoundation_CNumerics_CVector2 maxSize);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+    DEPRECATED("Use Windows.ApplicationModel.Holographic.HolographicKeyboard instead of Windows.ApplicationModel.Preview.Holographic.HolographicKeyboardPlacementOverridePreview. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
     HRESULT (STDMETHODCALLTYPE* ResetPlacementOverride)(__x_ABI_CWindows_CApplicationModel_CPreview_CHolographic_CIHolographicKeyboardPlacementOverridePreview* This);
 
     END_INTERFACE
@@ -607,12 +641,21 @@ interface __x_ABI_CWindows_CApplicationModel_CPreview_CHolographic_CIHolographic
 #define __x_ABI_CWindows_CApplicationModel_CPreview_CHolographic_CIHolographicKeyboardPlacementOverridePreview_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+    DEPRECATED("Use Windows.ApplicationModel.Holographic.HolographicKeyboard instead of Windows.ApplicationModel.Preview.Holographic.HolographicKeyboardPlacementOverridePreview. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
 #define __x_ABI_CWindows_CApplicationModel_CPreview_CHolographic_CIHolographicKeyboardPlacementOverridePreview_SetPlacementOverride(This, coordinateSystem, topCenterPosition, normal) \
     ((This)->lpVtbl->SetPlacementOverride(This, coordinateSystem, topCenterPosition, normal))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+    DEPRECATED("Use Windows.ApplicationModel.Holographic.HolographicKeyboard instead of Windows.ApplicationModel.Preview.Holographic.HolographicKeyboardPlacementOverridePreview. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
 #define __x_ABI_CWindows_CApplicationModel_CPreview_CHolographic_CIHolographicKeyboardPlacementOverridePreview_SetPlacementOverrideWithMaxSize(This, coordinateSystem, topCenterPosition, normal, maxSize) \
     ((This)->lpVtbl->SetPlacementOverrideWithMaxSize(This, coordinateSystem, topCenterPosition, normal, maxSize))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+    DEPRECATED("Use Windows.ApplicationModel.Holographic.HolographicKeyboard instead of Windows.ApplicationModel.Preview.Holographic.HolographicKeyboardPlacementOverridePreview. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
 #define __x_ABI_CWindows_CApplicationModel_CPreview_CHolographic_CIHolographicKeyboardPlacementOverridePreview_ResetPlacementOverride(This) \
     ((This)->lpVtbl->ResetPlacementOverride(This))
 
@@ -635,7 +678,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CPreview_CHolographic_
 #if !defined(____x_ABI_CWindows_CApplicationModel_CPreview_CHolographic_CIHolographicKeyboardPlacementOverridePreviewStatics_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CPreview_CHolographic_CIHolographicKeyboardPlacementOverridePreviewStatics_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Preview_Holographic_IHolographicKeyboardPlacementOverridePreviewStatics[] = L"Windows.ApplicationModel.Preview.Holographic.IHolographicKeyboardPlacementOverridePreviewStatics";
-typedef struct __x_ABI_CWindows_CApplicationModel_CPreview_CHolographic_CIHolographicKeyboardPlacementOverridePreviewStaticsVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+DEPRECATED("Use Windows.ApplicationModel.Holographic.HolographicKeyboard instead of Windows.ApplicationModel.Preview.Holographic.HolographicKeyboardPlacementOverridePreview. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+__x_ABI_CWindows_CApplicationModel_CPreview_CHolographic_CIHolographicKeyboardPlacementOverridePreviewStaticsVtbl
 {
     BEGIN_INTERFACE
 
@@ -651,6 +698,9 @@ typedef struct __x_ABI_CWindows_CApplicationModel_CPreview_CHolographic_CIHologr
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CPreview_CHolographic_CIHolographicKeyboardPlacementOverridePreviewStatics* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+    DEPRECATED("Use Windows.ApplicationModel.Holographic.HolographicKeyboard instead of Windows.ApplicationModel.Preview.Holographic.HolographicKeyboardPlacementOverridePreview. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
     HRESULT (STDMETHODCALLTYPE* GetForCurrentView)(__x_ABI_CWindows_CApplicationModel_CPreview_CHolographic_CIHolographicKeyboardPlacementOverridePreviewStatics* This,
         __x_ABI_CWindows_CApplicationModel_CPreview_CHolographic_CIHolographicKeyboardPlacementOverridePreview** result);
 
@@ -682,6 +732,9 @@ interface __x_ABI_CWindows_CApplicationModel_CPreview_CHolographic_CIHolographic
 #define __x_ABI_CWindows_CApplicationModel_CPreview_CHolographic_CIHolographicKeyboardPlacementOverridePreviewStatics_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+    DEPRECATED("Use Windows.ApplicationModel.Holographic.HolographicKeyboard instead of Windows.ApplicationModel.Preview.Holographic.HolographicKeyboardPlacementOverridePreview. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
 #define __x_ABI_CWindows_CApplicationModel_CPreview_CHolographic_CIHolographicKeyboardPlacementOverridePreviewStatics_GetForCurrentView(This, result) \
     ((This)->lpVtbl->GetForCurrentView(This, result))
 
@@ -732,6 +785,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x80000
 #ifndef RUNTIMECLASS_Windows_ApplicationModel_Preview_Holographic_HolographicKeyboardPlacementOverridePreview_DEFINED
 #define RUNTIMECLASS_Windows_ApplicationModel_Preview_Holographic_HolographicKeyboardPlacementOverridePreview_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+DEPRECATED("Use Windows.ApplicationModel.Holographic.HolographicKeyboard instead of Windows.ApplicationModel.Preview.Holographic.HolographicKeyboardPlacementOverridePreview. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_Preview_Holographic_HolographicKeyboardPlacementOverridePreview[] = L"Windows.ApplicationModel.Preview.Holographic.HolographicKeyboardPlacementOverridePreview";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x80000

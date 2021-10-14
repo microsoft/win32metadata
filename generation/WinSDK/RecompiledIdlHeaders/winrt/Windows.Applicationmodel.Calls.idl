@@ -81,7 +81,15 @@ namespace Windows
 
             typedef enum CellularDtmfMode CellularDtmfMode;
 
+            typedef enum DtmfKey DtmfKey;
+
+            typedef enum DtmfToneAudioPlayback DtmfToneAudioPlayback;
+
             typedef enum PhoneAudioRoutingEndpoint PhoneAudioRoutingEndpoint;
+
+            typedef enum PhoneCallAudioDevice PhoneCallAudioDevice;
+
+            typedef enum PhoneCallDirection PhoneCallDirection;
 
             typedef enum PhoneCallHistoryEntryMedia PhoneCallHistoryEntryMedia;
 
@@ -97,7 +105,13 @@ namespace Windows
 
             typedef enum PhoneCallMedia PhoneCallMedia;
 
+            typedef enum PhoneCallOperationStatus PhoneCallOperationStatus;
+
+            typedef enum PhoneCallStatus PhoneCallStatus;
+
             typedef enum PhoneLineNetworkOperatorDisplayTextLocation PhoneLineNetworkOperatorDisplayTextLocation;
+
+            typedef enum PhoneLineOperationStatus PhoneLineOperationStatus;
 
             typedef enum PhoneLineTransport PhoneLineTransport;
 
@@ -108,6 +122,8 @@ namespace Windows
             typedef enum PhoneSimState PhoneSimState;
 
             typedef enum PhoneVoicemailType PhoneVoicemailType;
+
+            typedef enum TransportDeviceAudioRoutingStatus TransportDeviceAudioRoutingStatus;
 
             typedef enum VoipPhoneCallMedia VoipPhoneCallMedia;
 
@@ -131,6 +147,8 @@ namespace Windows
 
             interface IMuteChangeEventArgs;
 
+            interface IPhoneCall;
+
             interface IPhoneCallBlockingStatics;
 
             interface IPhoneCallHistoryEntry;
@@ -151,9 +169,13 @@ namespace Windows
 
             interface IPhoneCallHistoryStore;
 
+            interface IPhoneCallInfo;
+
             interface IPhoneCallManagerStatics;
 
             interface IPhoneCallManagerStatics2;
+
+            interface IPhoneCallStatics;
 
             interface IPhoneCallStore;
 
@@ -161,19 +183,27 @@ namespace Windows
 
             interface IPhoneCallVideoCapabilitiesManagerStatics;
 
+            interface IPhoneCallsResult;
+
             interface IPhoneDialOptions;
 
             interface IPhoneLine;
 
             interface IPhoneLine2;
 
+            interface IPhoneLine3;
+
             interface IPhoneLineCellularDetails;
 
             interface IPhoneLineConfiguration;
 
+            interface IPhoneLineDialResult;
+
             interface IPhoneLineStatics;
 
             interface IPhoneLineTransportDevice;
+
+            interface IPhoneLineTransportDevice2;
 
             interface IPhoneLineTransportDeviceStatics;
 
@@ -213,6 +243,8 @@ namespace Windows
 
             runtimeclass MuteChangeEventArgs;
 
+            runtimeclass PhoneCall;
+
             runtimeclass PhoneCallBlocking;
 
             runtimeclass PhoneCallHistoryEntry;
@@ -229,6 +261,8 @@ namespace Windows
 
             runtimeclass PhoneCallHistoryStore;
 
+            runtimeclass PhoneCallInfo;
+
             runtimeclass PhoneCallManager;
 
             runtimeclass PhoneCallStore;
@@ -237,6 +271,8 @@ namespace Windows
 
             runtimeclass PhoneCallVideoCapabilitiesManager;
 
+            runtimeclass PhoneCallsResult;
+
             runtimeclass PhoneDialOptions;
 
             runtimeclass PhoneLine;
@@ -244,6 +280,8 @@ namespace Windows
             runtimeclass PhoneLineCellularDetails;
 
             runtimeclass PhoneLineConfiguration;
+
+            runtimeclass PhoneLineDialResult;
 
             runtimeclass PhoneLineTransportDevice;
 
@@ -269,9 +307,15 @@ namespace Windows
         {
             declare
             {
+                interface Windows.Foundation.Collections.IIterable<Windows.ApplicationModel.Calls.PhoneCall*>;
+
                 interface Windows.Foundation.Collections.IIterable<Windows.ApplicationModel.Calls.PhoneCallHistoryEntry*>;
 
+                interface Windows.Foundation.Collections.IIterator<Windows.ApplicationModel.Calls.PhoneCall*>;
+
                 interface Windows.Foundation.Collections.IIterator<Windows.ApplicationModel.Calls.PhoneCallHistoryEntry*>;
+
+                interface Windows.Foundation.Collections.IVectorView<Windows.ApplicationModel.Calls.PhoneCall*>;
 
                 interface Windows.Foundation.Collections.IVectorView<Windows.ApplicationModel.Calls.PhoneCallHistoryEntry*>;
 
@@ -279,11 +323,19 @@ namespace Windows
 
                 interface Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Calls.PhoneCallHistoryStore*>;
 
+                interface Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Calls.PhoneCallInfo*>;
+
+                interface Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Calls.PhoneCallOperationStatus>;
+
                 interface Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Calls.PhoneCallStore*>;
 
                 interface Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Calls.PhoneCallVideoCapabilities*>;
 
+                interface Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Calls.PhoneCallsResult*>;
+
                 interface Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Calls.PhoneLine*>;
+
+                interface Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Calls.PhoneLineDialResult*>;
 
                 interface Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Calls.VoipPhoneCallResourceReservationStatus>;
 
@@ -293,7 +345,11 @@ namespace Windows
 
                 interface Windows.Foundation.TypedEventHandler<Windows.ApplicationModel.Calls.LockScreenCallUI*, Windows.ApplicationModel.Calls.LockScreenCallEndRequestedEventArgs*>;
 
+                interface Windows.Foundation.TypedEventHandler<Windows.ApplicationModel.Calls.PhoneCall*, IInspectable*>;
+
                 interface Windows.Foundation.TypedEventHandler<Windows.ApplicationModel.Calls.PhoneLine*, IInspectable*>;
+
+                interface Windows.Foundation.TypedEventHandler<Windows.ApplicationModel.Calls.PhoneLineTransportDevice*, IInspectable*>;
 
                 interface Windows.Foundation.TypedEventHandler<Windows.ApplicationModel.Calls.PhoneLineWatcher*, IInspectable*>;
 
@@ -336,12 +392,52 @@ namespace Windows
                 Burst      = 1
             };
 
+            [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 6.0)]
+            enum DtmfKey
+            {
+                D0    = 0,
+                D1    = 1,
+                D2    = 2,
+                D3    = 3,
+                D4    = 4,
+                D5    = 5,
+                D6    = 6,
+                D7    = 7,
+                D8    = 8,
+                D9    = 9,
+                Star  = 10,
+                Pound = 11
+            };
+
+            [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 6.0)]
+            enum DtmfToneAudioPlayback
+            {
+                Play      = 0,
+                DoNotPlay = 1
+            };
+
             [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 1.0)]
             enum PhoneAudioRoutingEndpoint
             {
                 Default      = 0,
                 Bluetooth    = 1,
                 Speakerphone = 2
+            };
+
+            [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 6.0)]
+            enum PhoneCallAudioDevice
+            {
+                Unknown      = 0,
+                LocalDevice  = 1,
+                RemoteDevice = 2
+            };
+
+            [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 6.0)]
+            enum PhoneCallDirection
+            {
+                Unknown  = 0,
+                Incoming = 1,
+                Outgoing = 2
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -399,6 +495,27 @@ namespace Windows
                 AudioAndRealTimeText = 2
             };
 
+            [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 6.0)]
+            enum PhoneCallOperationStatus
+            {
+                Succeeded        = 0,
+                OtherFailure     = 1,
+                TimedOut         = 2,
+                ConnectionLost   = 3,
+                InvalidCallState = 4
+            };
+
+            [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 6.0)]
+            enum PhoneCallStatus
+            {
+                Lost     = 0,
+                Incoming = 1,
+                Dialing  = 2,
+                Talking  = 3,
+                Held     = 4,
+                Ended    = 5
+            };
+
             [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 1.0)]
             enum PhoneLineNetworkOperatorDisplayTextLocation
             {
@@ -406,6 +523,16 @@ namespace Windows
                 Tile     = 1,
                 Dialer   = 2,
                 InCallUI = 3
+            };
+
+            [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 6.0)]
+            enum PhoneLineOperationStatus
+            {
+                Succeeded        = 0,
+                OtherFailure     = 1,
+                TimedOut         = 2,
+                ConnectionLost   = 3,
+                InvalidCallState = 4
             };
 
             [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 1.0)]
@@ -458,6 +585,14 @@ namespace Windows
                 None        = 0,
                 Traditional = 1,
                 Visual      = 2
+            };
+
+            [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 6.0)]
+            enum TransportDeviceAudioRoutingStatus
+            {
+                Unknown                  = 0,
+                CanRouteToLocalDevice    = 1,
+                CannotRouteToLocalDevice = 2
             };
 
             [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 1.0)]
@@ -557,6 +692,43 @@ namespace Windows
             interface IMuteChangeEventArgs : IInspectable
             {
                 [propget] HRESULT Muted([out] [retval] boolean* value);
+            }
+
+            [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 6.0)]
+            [exclusiveto(Windows.ApplicationModel.Calls.PhoneCall)]
+            [uuid(C14ED0F8-C17D-59D2-9628-66E545B6CD21)]
+            interface IPhoneCall : IInspectable
+            {
+                [eventadd] HRESULT StatusChanged([in] Windows.Foundation.TypedEventHandler<Windows.ApplicationModel.Calls.PhoneCall*, IInspectable*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT StatusChanged([in] EventRegistrationToken token);
+                [eventadd] HRESULT AudioDeviceChanged([in] Windows.Foundation.TypedEventHandler<Windows.ApplicationModel.Calls.PhoneCall*, IInspectable*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT AudioDeviceChanged([in] EventRegistrationToken token);
+                [eventadd] HRESULT IsMutedChanged([in] Windows.Foundation.TypedEventHandler<Windows.ApplicationModel.Calls.PhoneCall*, IInspectable*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT IsMutedChanged([in] EventRegistrationToken token);
+                [propget] HRESULT CallId([out] [retval] HSTRING* value);
+                [propget] HRESULT IsMuted([out] [retval] boolean* value);
+                [propget] HRESULT Status([out] [retval] Windows.ApplicationModel.Calls.PhoneCallStatus* value);
+                [propget] HRESULT AudioDevice([out] [retval] Windows.ApplicationModel.Calls.PhoneCallAudioDevice* value);
+                HRESULT GetPhoneCallInfo([out] [retval] Windows.ApplicationModel.Calls.PhoneCallInfo** result);
+                HRESULT GetPhoneCallInfoAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Calls.PhoneCallInfo*>** operation);
+                HRESULT End([out] [retval] Windows.ApplicationModel.Calls.PhoneCallOperationStatus* result);
+                HRESULT EndAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Calls.PhoneCallOperationStatus>** operation);
+                HRESULT SendDtmfKey([in] Windows.ApplicationModel.Calls.DtmfKey key, [in] Windows.ApplicationModel.Calls.DtmfToneAudioPlayback dtmfToneAudioPlayback, [out] [retval] Windows.ApplicationModel.Calls.PhoneCallOperationStatus* result);
+                HRESULT SendDtmfKeyAsync([in] Windows.ApplicationModel.Calls.DtmfKey key, [in] Windows.ApplicationModel.Calls.DtmfToneAudioPlayback dtmfToneAudioPlayback, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Calls.PhoneCallOperationStatus>** operation);
+                HRESULT AcceptIncoming([out] [retval] Windows.ApplicationModel.Calls.PhoneCallOperationStatus* result);
+                HRESULT AcceptIncomingAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Calls.PhoneCallOperationStatus>** operation);
+                HRESULT Hold([out] [retval] Windows.ApplicationModel.Calls.PhoneCallOperationStatus* result);
+                HRESULT HoldAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Calls.PhoneCallOperationStatus>** operation);
+                HRESULT ResumeFromHold([out] [retval] Windows.ApplicationModel.Calls.PhoneCallOperationStatus* result);
+                HRESULT ResumeFromHoldAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Calls.PhoneCallOperationStatus>** operation);
+                HRESULT Mute([out] [retval] Windows.ApplicationModel.Calls.PhoneCallOperationStatus* result);
+                HRESULT MuteAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Calls.PhoneCallOperationStatus>** operation);
+                HRESULT Unmute([out] [retval] Windows.ApplicationModel.Calls.PhoneCallOperationStatus* result);
+                HRESULT UnmuteAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Calls.PhoneCallOperationStatus>** operation);
+                HRESULT RejectIncoming([out] [retval] Windows.ApplicationModel.Calls.PhoneCallOperationStatus* result);
+                HRESULT RejectIncomingAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Calls.PhoneCallOperationStatus>** operation);
+                HRESULT ChangeAudioDevice([in] Windows.ApplicationModel.Calls.PhoneCallAudioDevice endpoint, [out] [retval] Windows.ApplicationModel.Calls.PhoneCallOperationStatus* result);
+                HRESULT ChangeAudioDeviceAsync([in] Windows.ApplicationModel.Calls.PhoneCallAudioDevice endpoint, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Calls.PhoneCallOperationStatus>** operation);
             }
 
             [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 1.0)]
@@ -697,6 +869,19 @@ namespace Windows
                 HRESULT MarkSourcesAsSeenAsync([in] Windows.Foundation.Collections.IIterable<HSTRING>* sourceIds, [out] [retval] Windows.Foundation.IAsyncAction** result);
             }
 
+            [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 6.0)]
+            [exclusiveto(Windows.ApplicationModel.Calls.PhoneCallInfo)]
+            [uuid(22B42577-3E4D-5DC6-89C2-469FE5FFC189)]
+            interface IPhoneCallInfo : IInspectable
+            {
+                [propget] HRESULT LineId([out] [retval] GUID* value);
+                [propget] HRESULT IsHoldSupported([out] [retval] boolean* value);
+                [propget] HRESULT StartTime([out] [retval] Windows.Foundation.DateTime* value);
+                [propget] HRESULT PhoneNumber([out] [retval] HSTRING* value);
+                [propget] HRESULT DisplayName([out] [retval] HSTRING* value);
+                [propget] HRESULT CallDirection([out] [retval] Windows.ApplicationModel.Calls.PhoneCallDirection* value);
+            }
+
             [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 1.0)]
             [exclusiveto(Windows.ApplicationModel.Calls.PhoneCallManager)]
             [uuid(60EDAC78-78A6-4872-A3EF-98325EC8B843)]
@@ -716,6 +901,14 @@ namespace Windows
                 [propget] HRESULT IsCallIncoming([out] [retval] boolean* value);
                 HRESULT ShowPhoneCallSettingsUI();
                 HRESULT RequestStoreAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Calls.PhoneCallStore*>** result);
+            }
+
+            [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 6.0)]
+            [exclusiveto(Windows.ApplicationModel.Calls.PhoneCall)]
+            [uuid(2218EEAB-F60B-53E7-BA13-5AEAFBC22957)]
+            interface IPhoneCallStatics : IInspectable
+            {
+                HRESULT GetFromId([in] HSTRING callId, [out] [retval] Windows.ApplicationModel.Calls.PhoneCall** result);
             }
 
             [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 1.0)]
@@ -742,6 +935,15 @@ namespace Windows
             interface IPhoneCallVideoCapabilitiesManagerStatics : IInspectable
             {
                 HRESULT GetCapabilitiesAsync([in] HSTRING phoneNumber, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Calls.PhoneCallVideoCapabilities*>** result);
+            }
+
+            [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 6.0)]
+            [exclusiveto(Windows.ApplicationModel.Calls.PhoneCallsResult)]
+            [uuid(1BFAD365-57CF-57DD-986D-B057C91EAC33)]
+            interface IPhoneCallsResult : IInspectable
+            {
+                [propget] HRESULT OperationStatus([out] [retval] Windows.ApplicationModel.Calls.PhoneLineOperationStatus* value);
+                [propget] HRESULT AllActivePhoneCalls([out] [retval] Windows.Foundation.Collections.IVectorView<Windows.ApplicationModel.Calls.PhoneCall*>** value);
             }
 
             [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 1.0)]
@@ -796,6 +998,17 @@ namespace Windows
                 [propget] HRESULT TransportDeviceId([out] [retval] HSTRING* value);
             }
 
+            [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 6.0)]
+            [exclusiveto(Windows.ApplicationModel.Calls.PhoneLine)]
+            [uuid(E2E33CF7-2406-57F3-826A-E5A5F40D6FB5)]
+            interface IPhoneLine3 : IInspectable
+            {
+                HRESULT DialWithResult([in] HSTRING number, [in] HSTRING displayName, [out] [retval] Windows.ApplicationModel.Calls.PhoneLineDialResult** result);
+                HRESULT DialWithResultAsync([in] HSTRING number, [in] HSTRING displayName, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Calls.PhoneLineDialResult*>** operation);
+                HRESULT GetAllActivePhoneCalls([out] [retval] Windows.ApplicationModel.Calls.PhoneCallsResult** result);
+                HRESULT GetAllActivePhoneCallsAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Calls.PhoneCallsResult*>** operation);
+            }
+
             [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 1.0)]
             [exclusiveto(Windows.ApplicationModel.Calls.PhoneLineCellularDetails)]
             [uuid(192601D5-147C-4769-B673-98A5EC8426CB)]
@@ -815,6 +1028,15 @@ namespace Windows
             {
                 [propget] HRESULT IsVideoCallingEnabled([out] [retval] boolean* value);
                 [propget] HRESULT ExtendedProperties([out] [retval] Windows.Foundation.Collections.IMapView<HSTRING, IInspectable*>** value);
+            }
+
+            [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 6.0)]
+            [exclusiveto(Windows.ApplicationModel.Calls.PhoneLineDialResult)]
+            [uuid(E825A30A-5C7F-546F-B918-3AD2FE70FB34)]
+            interface IPhoneLineDialResult : IInspectable
+            {
+                [propget] HRESULT DialCallStatus([out] [retval] Windows.ApplicationModel.Calls.PhoneCallOperationStatus* value);
+                [propget] HRESULT DialedCall([out] [retval] Windows.ApplicationModel.Calls.PhoneCall** value);
             }
 
             [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 1.0)]
@@ -840,6 +1062,19 @@ namespace Windows
                 HRESULT IsRegistered([out] [retval] boolean* result);
                 HRESULT Connect([out] [retval] boolean* result);
                 HRESULT ConnectAsync([out] [retval] Windows.Foundation.IAsyncOperation<boolean>** operation);
+            }
+
+            [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 6.0)]
+            [exclusiveto(Windows.ApplicationModel.Calls.PhoneLineTransportDevice)]
+            [uuid(64C885F2-ECF4-5761-8C04-3C248CE61690)]
+            interface IPhoneLineTransportDevice2 : IInspectable
+            {
+                [propget] HRESULT AudioRoutingStatus([out] [retval] Windows.ApplicationModel.Calls.TransportDeviceAudioRoutingStatus* value);
+                [eventadd] HRESULT AudioRoutingStatusChanged([in] Windows.Foundation.TypedEventHandler<Windows.ApplicationModel.Calls.PhoneLineTransportDevice*, IInspectable*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT AudioRoutingStatusChanged([in] EventRegistrationToken token);
+                [propget] HRESULT InBandRingingEnabled([out] [retval] boolean* value);
+                [eventadd] HRESULT InBandRingingEnabledChanged([in] Windows.Foundation.TypedEventHandler<Windows.ApplicationModel.Calls.PhoneLineTransportDevice*, IInspectable*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT InBandRingingEnabledChanged([in] EventRegistrationToken token);
             }
 
             [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 5.0)]
@@ -1045,6 +1280,15 @@ namespace Windows
                 [default] interface Windows.ApplicationModel.Calls.IMuteChangeEventArgs;
             }
 
+            [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 6.0)]
+            [marshaling_behavior(agile)]
+            [static(Windows.ApplicationModel.Calls.IPhoneCallStatics, Windows.ApplicationModel.Calls.CallsPhoneContract, 6.0)]
+            [threading(both)]
+            runtimeclass PhoneCall
+            {
+                [default] interface Windows.ApplicationModel.Calls.IPhoneCall;
+            }
+
             [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 1.0)]
             [marshaling_behavior(agile)]
             [static(Windows.ApplicationModel.Calls.IPhoneCallBlockingStatics, Windows.ApplicationModel.Calls.CallsPhoneContract, 1.0)]
@@ -1113,6 +1357,13 @@ namespace Windows
                 [default] interface Windows.ApplicationModel.Calls.IPhoneCallHistoryStore;
             }
 
+            [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 6.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass PhoneCallInfo
+            {
+                [default] interface Windows.ApplicationModel.Calls.IPhoneCallInfo;
+            }
+
             [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 1.0)]
             [marshaling_behavior(agile)]
             [static(Windows.ApplicationModel.Calls.IPhoneCallManagerStatics, Windows.ApplicationModel.Calls.CallsPhoneContract, 1.0)]
@@ -1146,6 +1397,13 @@ namespace Windows
             {
             }
 
+            [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 6.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass PhoneCallsResult
+            {
+                [default] interface Windows.ApplicationModel.Calls.IPhoneCallsResult;
+            }
+
             [activatable(Windows.ApplicationModel.Calls.CallsPhoneContract, 1.0)]
             [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 1.0)]
             [marshaling_behavior(agile)]
@@ -1163,6 +1421,7 @@ namespace Windows
             {
                 [default] interface Windows.ApplicationModel.Calls.IPhoneLine;
                 [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 5.0)] interface Windows.ApplicationModel.Calls.IPhoneLine2;
+                [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 6.0)] interface Windows.ApplicationModel.Calls.IPhoneLine3;
             }
 
             [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 1.0)]
@@ -1181,6 +1440,13 @@ namespace Windows
                 [default] interface Windows.ApplicationModel.Calls.IPhoneLineConfiguration;
             }
 
+            [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 6.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass PhoneLineDialResult
+            {
+                [default] interface Windows.ApplicationModel.Calls.IPhoneLineDialResult;
+            }
+
             [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 5.0)]
             [marshaling_behavior(agile)]
             [static(Windows.ApplicationModel.Calls.IPhoneLineTransportDeviceStatics, Windows.ApplicationModel.Calls.CallsPhoneContract, 5.0)]
@@ -1188,6 +1454,7 @@ namespace Windows
             runtimeclass PhoneLineTransportDevice
             {
                 [default] interface Windows.ApplicationModel.Calls.IPhoneLineTransportDevice;
+                [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 6.0)] interface Windows.ApplicationModel.Calls.IPhoneLineTransportDevice2;
             }
 
             [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 1.0)]

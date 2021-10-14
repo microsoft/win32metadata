@@ -1636,5 +1636,13 @@ typedef HRESULT DRM_RESULT;
 */
 #define MSPR_E_SAMPLE_ENCRYPTION_TYPE_DOES_NOT_MATCH_LICENSE        MAKE_DRM_RESULT(DRM_SEVERITY_ERROR,  DRM_FACILITY_ITF, DRM_E_MSPRSDK_BASECODE+0x00D3)
 
+/*
+*    MessageId:    MSPR_E_SET_SERVER_CERTIFICATE_REQUIRED
+*    Message Meaning:
+*       A call to the MediaKeys.setServerCertificate method in EME is required before this operation can be performed.
+*    Hex Value:    0x8004B8D4
+*/
+#define MSPR_E_SET_SERVER_CERTIFICATE_REQUIRED                      MAKE_DRM_RESULT(DRM_SEVERITY_ERROR,  DRM_FACILITY_ITF, DRM_E_MSPRSDK_BASECODE+0x00D4)
+
 #endif /* __WINDOWS_MEDIA_PROTECTION_PLAYREADY_ERRORS_H_ */
 

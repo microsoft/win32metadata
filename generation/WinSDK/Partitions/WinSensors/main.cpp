@@ -8,3 +8,7 @@
 
 #include <sensorsapi.h>
 #include <sensors.h>
+#include <sensorsdef.h>
+#include <sensorsstructures.h>
+#include <sensorsutils.h>
+

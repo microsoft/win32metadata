@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -171,6 +179,7 @@ EXTERN_C const IID IID_IRouterProtocolConfig;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRouterProtocolConfig * This,
             /* [annotation][in] */ 
@@ -178,12 +187,15 @@ EXTERN_C const IID IID_IRouterProtocolConfig;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IRouterProtocolConfig * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IRouterProtocolConfig * This);
         
+        DECLSPEC_XFGVIRT(IRouterProtocolConfig, AddProtocol)
         HRESULT ( STDMETHODCALLTYPE *AddProtocol )( 
             IRouterProtocolConfig * This,
             /* [annotation][string][in] */ 
@@ -201,6 +213,7 @@ EXTERN_C const IID IID_IRouterProtocolConfig;
             /* [annotation][in] */ 
             _In_  ULONG_PTR uReserved1);
         
+        DECLSPEC_XFGVIRT(IRouterProtocolConfig, RemoveProtocol)
         HRESULT ( STDMETHODCALLTYPE *RemoveProtocol )( 
             IRouterProtocolConfig * This,
             /* [annotation][string][in] */ 
@@ -344,6 +357,7 @@ EXTERN_C const IID IID_IAuthenticationProviderConfig;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAuthenticationProviderConfig * This,
             /* [annotation][in] */ 
@@ -351,12 +365,15 @@ EXTERN_C const IID IID_IAuthenticationProviderConfig;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAuthenticationProviderConfig * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IAuthenticationProviderConfig * This);
         
+        DECLSPEC_XFGVIRT(IAuthenticationProviderConfig, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IAuthenticationProviderConfig * This,
             /* [annotation][string][in] */ 
@@ -364,11 +381,13 @@ EXTERN_C const IID IID_IAuthenticationProviderConfig;
             /* [annotation][out] */ 
             _Out_  ULONG_PTR *puConnectionParam);
         
+        DECLSPEC_XFGVIRT(IAuthenticationProviderConfig, Uninitialize)
         HRESULT ( STDMETHODCALLTYPE *Uninitialize )( 
             IAuthenticationProviderConfig * This,
             /* [annotation][in] */ 
             _In_  ULONG_PTR uConnectionParam);
         
+        DECLSPEC_XFGVIRT(IAuthenticationProviderConfig, Configure)
         HRESULT ( STDMETHODCALLTYPE *Configure )( 
             IAuthenticationProviderConfig * This,
             /* [annotation][in] */ 
@@ -382,6 +401,7 @@ EXTERN_C const IID IID_IAuthenticationProviderConfig;
             /* [annotation][in] */ 
             _In_  ULONG_PTR uReserved2);
         
+        DECLSPEC_XFGVIRT(IAuthenticationProviderConfig, Activate)
         HRESULT ( STDMETHODCALLTYPE *Activate )( 
             IAuthenticationProviderConfig * This,
             /* [annotation][in] */ 
@@ -391,6 +411,7 @@ EXTERN_C const IID IID_IAuthenticationProviderConfig;
             /* [annotation][in] */ 
             _In_  ULONG_PTR uReserved2);
         
+        DECLSPEC_XFGVIRT(IAuthenticationProviderConfig, Deactivate)
         HRESULT ( STDMETHODCALLTYPE *Deactivate )( 
             IAuthenticationProviderConfig * This,
             /* [annotation][in] */ 
@@ -543,6 +564,7 @@ EXTERN_C const IID IID_IAccountingProviderConfig;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAccountingProviderConfig * This,
             /* [annotation][in] */ 
@@ -550,12 +572,15 @@ EXTERN_C const IID IID_IAccountingProviderConfig;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAccountingProviderConfig * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IAccountingProviderConfig * This);
         
+        DECLSPEC_XFGVIRT(IAccountingProviderConfig, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IAccountingProviderConfig * This,
             /* [annotation][string][in] */ 
@@ -563,11 +588,13 @@ EXTERN_C const IID IID_IAccountingProviderConfig;
             /* [annotation][out] */ 
             _Out_  ULONG_PTR *puConnectionParam);
         
+        DECLSPEC_XFGVIRT(IAccountingProviderConfig, Uninitialize)
         HRESULT ( STDMETHODCALLTYPE *Uninitialize )( 
             IAccountingProviderConfig * This,
             /* [annotation][in] */ 
             _In_  ULONG_PTR uConnectionParam);
         
+        DECLSPEC_XFGVIRT(IAccountingProviderConfig, Configure)
         HRESULT ( STDMETHODCALLTYPE *Configure )( 
             IAccountingProviderConfig * This,
             /* [annotation][in] */ 
@@ -581,6 +608,7 @@ EXTERN_C const IID IID_IAccountingProviderConfig;
             /* [annotation][in] */ 
             _In_  ULONG_PTR uReserved2);
         
+        DECLSPEC_XFGVIRT(IAccountingProviderConfig, Activate)
         HRESULT ( STDMETHODCALLTYPE *Activate )( 
             IAccountingProviderConfig * This,
             /* [annotation][in] */ 
@@ -590,6 +618,7 @@ EXTERN_C const IID IID_IAccountingProviderConfig;
             /* [annotation][in] */ 
             _In_  ULONG_PTR uReserved2);
         
+        DECLSPEC_XFGVIRT(IAccountingProviderConfig, Deactivate)
         HRESULT ( STDMETHODCALLTYPE *Deactivate )( 
             IAccountingProviderConfig * This,
             /* [annotation][in] */ 
@@ -769,6 +798,7 @@ EXTERN_C const IID IID_IEAPProviderConfig;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEAPProviderConfig * This,
             /* [annotation][in] */ 
@@ -776,12 +806,15 @@ EXTERN_C const IID IID_IEAPProviderConfig;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IEAPProviderConfig * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IEAPProviderConfig * This);
         
+        DECLSPEC_XFGVIRT(IEAPProviderConfig, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IEAPProviderConfig * This,
             /* [annotation][string][in] */ 
@@ -791,6 +824,7 @@ EXTERN_C const IID IID_IEAPProviderConfig;
             /* [annotation][out] */ 
             _Out_  ULONG_PTR *puConnectionParam);
         
+        DECLSPEC_XFGVIRT(IEAPProviderConfig, Uninitialize)
         HRESULT ( STDMETHODCALLTYPE *Uninitialize )( 
             IEAPProviderConfig * This,
             /* [annotation][in] */ 
@@ -798,6 +832,7 @@ EXTERN_C const IID IID_IEAPProviderConfig;
             /* [annotation][in] */ 
             _In_  ULONG_PTR uConnectionParam);
         
+        DECLSPEC_XFGVIRT(IEAPProviderConfig, ServerInvokeConfigUI)
         HRESULT ( STDMETHODCALLTYPE *ServerInvokeConfigUI )( 
             IEAPProviderConfig * This,
             /* [annotation][in] */ 
@@ -811,6 +846,7 @@ EXTERN_C const IID IID_IEAPProviderConfig;
             /* [annotation][in] */ 
             _In_  ULONG_PTR uReserved2);
         
+        DECLSPEC_XFGVIRT(IEAPProviderConfig, RouterInvokeConfigUI)
         HRESULT ( STDMETHODCALLTYPE *RouterInvokeConfigUI )( 
             IEAPProviderConfig * This,
             /* [annotation][in] */ 
@@ -830,6 +866,7 @@ EXTERN_C const IID IID_IEAPProviderConfig;
             /* [annotation][out] */ 
             _Out_  DWORD *pdwSizeOfConnectionDataOut);
         
+        DECLSPEC_XFGVIRT(IEAPProviderConfig, RouterInvokeCredentialsUI)
         HRESULT ( STDMETHODCALLTYPE *RouterInvokeCredentialsUI )( 
             IEAPProviderConfig * This,
             /* [annotation][in] */ 
@@ -940,6 +977,7 @@ EXTERN_C const IID IID_IEAPProviderConfig2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEAPProviderConfig2 * This,
             /* [annotation][in] */ 
@@ -947,12 +985,15 @@ EXTERN_C const IID IID_IEAPProviderConfig2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IEAPProviderConfig2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IEAPProviderConfig2 * This);
         
+        DECLSPEC_XFGVIRT(IEAPProviderConfig, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IEAPProviderConfig2 * This,
             /* [annotation][string][in] */ 
@@ -962,6 +1003,7 @@ EXTERN_C const IID IID_IEAPProviderConfig2;
             /* [annotation][out] */ 
             _Out_  ULONG_PTR *puConnectionParam);
         
+        DECLSPEC_XFGVIRT(IEAPProviderConfig, Uninitialize)
         HRESULT ( STDMETHODCALLTYPE *Uninitialize )( 
             IEAPProviderConfig2 * This,
             /* [annotation][in] */ 
@@ -969,6 +1011,7 @@ EXTERN_C const IID IID_IEAPProviderConfig2;
             /* [annotation][in] */ 
             _In_  ULONG_PTR uConnectionParam);
         
+        DECLSPEC_XFGVIRT(IEAPProviderConfig, ServerInvokeConfigUI)
         HRESULT ( STDMETHODCALLTYPE *ServerInvokeConfigUI )( 
             IEAPProviderConfig2 * This,
             /* [annotation][in] */ 
@@ -982,6 +1025,7 @@ EXTERN_C const IID IID_IEAPProviderConfig2;
             /* [annotation][in] */ 
             _In_  ULONG_PTR uReserved2);
         
+        DECLSPEC_XFGVIRT(IEAPProviderConfig, RouterInvokeConfigUI)
         HRESULT ( STDMETHODCALLTYPE *RouterInvokeConfigUI )( 
             IEAPProviderConfig2 * This,
             /* [annotation][in] */ 
@@ -1001,6 +1045,7 @@ EXTERN_C const IID IID_IEAPProviderConfig2;
             /* [annotation][out] */ 
             _Out_  DWORD *pdwSizeOfConnectionDataOut);
         
+        DECLSPEC_XFGVIRT(IEAPProviderConfig, RouterInvokeCredentialsUI)
         HRESULT ( STDMETHODCALLTYPE *RouterInvokeCredentialsUI )( 
             IEAPProviderConfig2 * This,
             /* [annotation][in] */ 
@@ -1024,6 +1069,7 @@ EXTERN_C const IID IID_IEAPProviderConfig2;
             /* [annotation][out] */ 
             _Out_  DWORD *pdwSizeOfUserDataOut);
         
+        DECLSPEC_XFGVIRT(IEAPProviderConfig2, ServerInvokeConfigUI2)
         HRESULT ( STDMETHODCALLTYPE *ServerInvokeConfigUI2 )( 
             IEAPProviderConfig2 * This,
             DWORD dwEapTypeId,
@@ -1034,6 +1080,7 @@ EXTERN_C const IID IID_IEAPProviderConfig2;
             BYTE **ppConfigDataOut,
             DWORD *pdwSizeOfConfigDataOut);
         
+        DECLSPEC_XFGVIRT(IEAPProviderConfig2, GetGlobalConfig)
         HRESULT ( STDMETHODCALLTYPE *GetGlobalConfig )( 
             IEAPProviderConfig2 * This,
             DWORD dwEapTypeId,
@@ -1130,6 +1177,7 @@ EXTERN_C const IID IID_IEAPProviderConfig3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEAPProviderConfig3 * This,
             /* [annotation][in] */ 
@@ -1137,12 +1185,15 @@ EXTERN_C const IID IID_IEAPProviderConfig3;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IEAPProviderConfig3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IEAPProviderConfig3 * This);
         
+        DECLSPEC_XFGVIRT(IEAPProviderConfig, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IEAPProviderConfig3 * This,
             /* [annotation][string][in] */ 
@@ -1152,6 +1203,7 @@ EXTERN_C const IID IID_IEAPProviderConfig3;
             /* [annotation][out] */ 
             _Out_  ULONG_PTR *puConnectionParam);
         
+        DECLSPEC_XFGVIRT(IEAPProviderConfig, Uninitialize)
         HRESULT ( STDMETHODCALLTYPE *Uninitialize )( 
             IEAPProviderConfig3 * This,
             /* [annotation][in] */ 
@@ -1159,6 +1211,7 @@ EXTERN_C const IID IID_IEAPProviderConfig3;
             /* [annotation][in] */ 
             _In_  ULONG_PTR uConnectionParam);
         
+        DECLSPEC_XFGVIRT(IEAPProviderConfig, ServerInvokeConfigUI)
         HRESULT ( STDMETHODCALLTYPE *ServerInvokeConfigUI )( 
             IEAPProviderConfig3 * This,
             /* [annotation][in] */ 
@@ -1172,6 +1225,7 @@ EXTERN_C const IID IID_IEAPProviderConfig3;
             /* [annotation][in] */ 
             _In_  ULONG_PTR uReserved2);
         
+        DECLSPEC_XFGVIRT(IEAPProviderConfig, RouterInvokeConfigUI)
         HRESULT ( STDMETHODCALLTYPE *RouterInvokeConfigUI )( 
             IEAPProviderConfig3 * This,
             /* [annotation][in] */ 
@@ -1191,6 +1245,7 @@ EXTERN_C const IID IID_IEAPProviderConfig3;
             /* [annotation][out] */ 
             _Out_  DWORD *pdwSizeOfConnectionDataOut);
         
+        DECLSPEC_XFGVIRT(IEAPProviderConfig, RouterInvokeCredentialsUI)
         HRESULT ( STDMETHODCALLTYPE *RouterInvokeCredentialsUI )( 
             IEAPProviderConfig3 * This,
             /* [annotation][in] */ 
@@ -1214,6 +1269,7 @@ EXTERN_C const IID IID_IEAPProviderConfig3;
             /* [annotation][out] */ 
             _Out_  DWORD *pdwSizeOfUserDataOut);
         
+        DECLSPEC_XFGVIRT(IEAPProviderConfig2, ServerInvokeConfigUI2)
         HRESULT ( STDMETHODCALLTYPE *ServerInvokeConfigUI2 )( 
             IEAPProviderConfig3 * This,
             DWORD dwEapTypeId,
@@ -1224,12 +1280,14 @@ EXTERN_C const IID IID_IEAPProviderConfig3;
             BYTE **ppConfigDataOut,
             DWORD *pdwSizeOfConfigDataOut);
         
+        DECLSPEC_XFGVIRT(IEAPProviderConfig2, GetGlobalConfig)
         HRESULT ( STDMETHODCALLTYPE *GetGlobalConfig )( 
             IEAPProviderConfig3 * This,
             DWORD dwEapTypeId,
             BYTE **ppConfigDataOut,
             DWORD *pdwSizeOfConfigDataOut);
         
+        DECLSPEC_XFGVIRT(IEAPProviderConfig3, ServerInvokeCertificateConfigUI)
         HRESULT ( STDMETHODCALLTYPE *ServerInvokeCertificateConfigUI )( 
             IEAPProviderConfig3 * This,
             DWORD dwEapTypeId,

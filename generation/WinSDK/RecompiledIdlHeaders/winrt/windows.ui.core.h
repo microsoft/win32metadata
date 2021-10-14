@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xa0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -114,6 +114,7 @@
 #include "Windows.Foundation.h"
 #include "Windows.System.h"
 #include "Windows.UI.h"
+#include "Windows.UI.Composition.h"
 #include "Windows.UI.Input.h"
 #include "Windows.UI.Popups.h"
 // Importing Collections header
@@ -360,6 +361,36 @@ namespace ABI {
 #define __x_ABI_CWindows_CUI_CCore_CICoreDispatcherWithTaskPriority ABI::Windows::UI::Core::ICoreDispatcherWithTaskPriority
 
 #endif // ____x_ABI_CWindows_CUI_CCore_CICoreDispatcherWithTaskPriority_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Core {
+                interface ICoreIndependentInputSourceController;
+            } /* Core */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController ABI::Windows::UI::Core::ICoreIndependentInputSourceController
+
+#endif // ____x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Core {
+                interface ICoreIndependentInputSourceControllerStatics;
+            } /* Core */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics ABI::Windows::UI::Core::ICoreIndependentInputSourceControllerStatics
+
+#endif // ____x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CUI_CCore_CICoreInputSourceBase_FWD_DEFINED__
 #define ____x_ABI_CWindows_CUI_CCore_CICoreInputSourceBase_FWD_DEFINED__
@@ -2113,6 +2144,19 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CFoundation_CIAsyncAction_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CFoundation_CIClosable_FWD_DEFINED__
+#define ____x_ABI_CWindows_CFoundation_CIClosable_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Foundation {
+            interface IClosable;
+        } /* Foundation */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CFoundation_CIClosable ABI::Windows::Foundation::IClosable
+
+#endif // ____x_ABI_CWindows_CFoundation_CIClosable_FWD_DEFINED__
+
 namespace ABI {
     namespace Windows {
         namespace Foundation {
@@ -2173,6 +2217,46 @@ namespace ABI {
         } /* System */
     } /* Windows */
 } /* ABI */
+
+#ifndef ____x_ABI_CWindows_CUI_CComposition_CIVisualElement_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CComposition_CIVisualElement_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Composition {
+                interface IVisualElement;
+            } /* Composition */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CUI_CComposition_CIVisualElement ABI::Windows::UI::Composition::IVisualElement
+
+#endif // ____x_ABI_CWindows_CUI_CComposition_CIVisualElement_FWD_DEFINED__
+
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Composition {
+                class Visual;
+            } /* Composition */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+#ifndef ____x_ABI_CWindows_CUI_CComposition_CIVisual_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CComposition_CIVisual_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Composition {
+                interface IVisual;
+            } /* Composition */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CUI_CComposition_CIVisual ABI::Windows::UI::Composition::IVisual
+
+#endif // ____x_ABI_CWindows_CUI_CComposition_CIVisual_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CUI_CPopups_CIUICommandInvokedHandler_FWD_DEFINED__
 #define ____x_ABI_CWindows_CUI_CPopups_CIUICommandInvokedHandler_FWD_DEFINED__
@@ -2254,6 +2338,26 @@ namespace ABI {
     namespace Windows {
         namespace UI {
             namespace Core {
+                typedef enum CoreIndependentInputFilters : unsigned int CoreIndependentInputFilters;
+            } /* Core */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Core {
+                typedef enum CoreInputDeviceTypes : unsigned int CoreInputDeviceTypes;
+            } /* Core */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Core {
                 typedef enum CoreProcessEventsOption : int CoreProcessEventsOption;
             } /* Core */
         } /* UI */
@@ -2325,6 +2429,26 @@ namespace ABI {
         namespace UI {
             namespace Core {
                 class CoreCursor;
+            } /* Core */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Core {
+                class CoreIndependentInputSource;
+            } /* Core */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Core {
+                class CoreIndependentInputSourceController;
             } /* Core */
         } /* UI */
     } /* Windows */
@@ -2503,6 +2627,35 @@ namespace ABI {
     } /* Windows */
 } /* ABI */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Struct Windows.UI.Core.CoreIndependentInputFilters
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Core {
+                enum CoreIndependentInputFilters : unsigned int
+                {
+                    CoreIndependentInputFilters_None = 0,
+                    CoreIndependentInputFilters_MouseButton = 0x1,
+                    CoreIndependentInputFilters_MouseWheel = 0x2,
+                    CoreIndependentInputFilters_MouseHover = 0x4,
+                    CoreIndependentInputFilters_PenWithBarrel = 0x8,
+                    CoreIndependentInputFilters_PenInverted = 0x10,
+                };
+
+                DEFINE_ENUM_FLAG_OPERATORS(CoreIndependentInputFilters)
+            } /* Core */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *
@@ -3387,6 +3540,103 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CUI_CCore_CICoreDispatcherWithTaskPriority;
 #endif /* !defined(____x_ABI_CWindows_CUI_CCore_CICoreDispatcherWithTaskPriority_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.UI.Core.ICoreIndependentInputSourceController
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.Core.CoreIndependentInputSourceController
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_Core_ICoreIndependentInputSourceController[] = L"Windows.UI.Core.ICoreIndependentInputSourceController";
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Core {
+                MIDL_INTERFACE("0963261c-84fe-578a-83ca-6425309ccde4")
+                ICoreIndependentInputSourceController : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_IsTransparentForUncontrolledInput(
+                        boolean* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_IsTransparentForUncontrolledInput(
+                        boolean value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_IsPalmRejectionEnabled(
+                        boolean* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_IsPalmRejectionEnabled(
+                        boolean value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_Source(
+                        ABI::Windows::UI::Core::ICoreInputSourceBase** value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE SetControlledInput(
+                        ABI::Windows::UI::Core::CoreInputDeviceTypes inputTypes
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE SetControlledInputWithFilters(
+                        ABI::Windows::UI::Core::CoreInputDeviceTypes inputTypes,
+                        ABI::Windows::UI::Core::CoreIndependentInputFilters required,
+                        ABI::Windows::UI::Core::CoreIndependentInputFilters excluded
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_ICoreIndependentInputSourceController = _uuidof(ICoreIndependentInputSourceController);
+            } /* Core */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController;
+#endif /* !defined(____x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.UI.Core.ICoreIndependentInputSourceControllerStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.Core.CoreIndependentInputSourceController
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_Core_ICoreIndependentInputSourceControllerStatics[] = L"Windows.UI.Core.ICoreIndependentInputSourceControllerStatics";
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Core {
+                MIDL_INTERFACE("3edc4e20-9a8a-5691-8586-fca4cb57526d")
+                ICoreIndependentInputSourceControllerStatics : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE CreateForVisual(
+                        ABI::Windows::UI::Composition::IVisual* visual,
+                        ABI::Windows::UI::Core::ICoreIndependentInputSourceController** result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE CreateForIVisualElement(
+                        ABI::Windows::UI::Composition::IVisualElement* visualElement,
+                        ABI::Windows::UI::Core::ICoreIndependentInputSourceController** result
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_ICoreIndependentInputSourceControllerStatics = _uuidof(ICoreIndependentInputSourceControllerStatics);
+            } /* Core */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics;
+#endif /* !defined(____x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *
@@ -5328,6 +5578,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *    Windows.UI.Core.ICoreInputSourceBase ** Default Interface **
  *    Windows.UI.Core.ICorePointerInputSource
  *    Windows.UI.Core.ICorePointerInputSource2
+ *    Windows.UI.Core.ICorePointerRedirector
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -5338,6 +5589,31 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_UI_Core_CoreIndependentInputSource[] = L"Windows.UI.Core.CoreIndependentInputSource";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Class Windows.UI.Core.CoreIndependentInputSourceController
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.UI.Core.ICoreIndependentInputSourceControllerStatics interface starting with version 13.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.UI.Core.ICoreIndependentInputSourceController ** Default Interface **
+ *    Windows.Foundation.IClosable
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#ifndef RUNTIMECLASS_Windows_UI_Core_CoreIndependentInputSourceController_DEFINED
+#define RUNTIMECLASS_Windows_UI_Core_CoreIndependentInputSourceController_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_UI_Core_CoreIndependentInputSourceController[] = L"Windows.UI.Core.CoreIndependentInputSourceController";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *
@@ -5753,6 +6029,18 @@ typedef interface __x_ABI_CWindows_CUI_CCore_CICoreDispatcher2 __x_ABI_CWindows_
 typedef interface __x_ABI_CWindows_CUI_CCore_CICoreDispatcherWithTaskPriority __x_ABI_CWindows_CUI_CCore_CICoreDispatcherWithTaskPriority;
 
 #endif // ____x_ABI_CWindows_CUI_CCore_CICoreDispatcherWithTaskPriority_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController;
+
+#endif // ____x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics;
+
+#endif // ____x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CUI_CCore_CICoreInputSourceBase_FWD_DEFINED__
 #define ____x_ABI_CWindows_CUI_CCore_CICoreInputSourceBase_FWD_DEFINED__
@@ -8113,6 +8401,12 @@ typedef interface __x_ABI_CWindows_CFoundation_CIAsyncAction __x_ABI_CWindows_CF
 
 #endif // ____x_ABI_CWindows_CFoundation_CIAsyncAction_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CFoundation_CIClosable_FWD_DEFINED__
+#define ____x_ABI_CWindows_CFoundation_CIClosable_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CFoundation_CIClosable __x_ABI_CWindows_CFoundation_CIClosable;
+
+#endif // ____x_ABI_CWindows_CFoundation_CIClosable_FWD_DEFINED__
+
 typedef struct __x_ABI_CWindows_CFoundation_CPoint __x_ABI_CWindows_CFoundation_CPoint;
 
 typedef struct __x_ABI_CWindows_CFoundation_CRect __x_ABI_CWindows_CFoundation_CRect;
@@ -8128,6 +8422,18 @@ typedef interface __x_ABI_CWindows_CSystem_CIDispatcherQueue __x_ABI_CWindows_CS
 typedef enum __x_ABI_CWindows_CSystem_CVirtualKey __x_ABI_CWindows_CSystem_CVirtualKey;
 
 typedef enum __x_ABI_CWindows_CSystem_CVirtualKeyModifiers __x_ABI_CWindows_CSystem_CVirtualKeyModifiers;
+
+#ifndef ____x_ABI_CWindows_CUI_CComposition_CIVisualElement_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CComposition_CIVisualElement_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CUI_CComposition_CIVisualElement __x_ABI_CWindows_CUI_CComposition_CIVisualElement;
+
+#endif // ____x_ABI_CWindows_CUI_CComposition_CIVisualElement_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CComposition_CIVisual_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CComposition_CIVisual_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CUI_CComposition_CIVisual __x_ABI_CWindows_CUI_CComposition_CIVisual;
+
+#endif // ____x_ABI_CWindows_CUI_CComposition_CIVisual_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CUI_CPopups_CIUICommandInvokedHandler_FWD_DEFINED__
 #define ____x_ABI_CWindows_CUI_CPopups_CIUICommandInvokedHandler_FWD_DEFINED__
@@ -8148,6 +8454,10 @@ typedef enum __x_ABI_CWindows_CUI_CCore_CCoreAcceleratorKeyEventType __x_ABI_CWi
 typedef enum __x_ABI_CWindows_CUI_CCore_CCoreCursorType __x_ABI_CWindows_CUI_CCore_CCoreCursorType;
 
 typedef enum __x_ABI_CWindows_CUI_CCore_CCoreDispatcherPriority __x_ABI_CWindows_CUI_CCore_CCoreDispatcherPriority;
+
+typedef enum __x_ABI_CWindows_CUI_CCore_CCoreIndependentInputFilters __x_ABI_CWindows_CUI_CCore_CCoreIndependentInputFilters;
+
+typedef enum __x_ABI_CWindows_CUI_CCore_CCoreInputDeviceTypes __x_ABI_CWindows_CUI_CCore_CCoreInputDeviceTypes;
 
 typedef enum __x_ABI_CWindows_CUI_CCore_CCoreProcessEventsOption __x_ABI_CWindows_CUI_CCore_CCoreProcessEventsOption;
 
@@ -8254,6 +8564,25 @@ enum __x_ABI_CWindows_CUI_CCore_CCoreDispatcherPriority
     CoreDispatcherPriority_High = 1,
 };
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Struct Windows.UI.Core.CoreIndependentInputFilters
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+enum __x_ABI_CWindows_CUI_CCore_CCoreIndependentInputFilters
+{
+    CoreIndependentInputFilters_None = 0,
+    CoreIndependentInputFilters_MouseButton = 0x1,
+    CoreIndependentInputFilters_MouseWheel = 0x2,
+    CoreIndependentInputFilters_MouseHover = 0x4,
+    CoreIndependentInputFilters_PenWithBarrel = 0x8,
+    CoreIndependentInputFilters_PenInverted = 0x10,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *
@@ -9606,6 +9935,183 @@ interface __x_ABI_CWindows_CUI_CCore_CICoreDispatcherWithTaskPriority
 EXTERN_C const IID IID___x_ABI_CWindows_CUI_CCore_CICoreDispatcherWithTaskPriority;
 #endif /* !defined(____x_ABI_CWindows_CUI_CCore_CICoreDispatcherWithTaskPriority_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.UI.Core.ICoreIndependentInputSourceController
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.Core.CoreIndependentInputSourceController
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_Core_ICoreIndependentInputSourceController[] = L"Windows.UI.Core.ICoreIndependentInputSourceController";
+typedef struct __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_IsTransparentForUncontrolledInput)(__x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController* This,
+        boolean* value);
+    HRESULT (STDMETHODCALLTYPE* put_IsTransparentForUncontrolledInput)(__x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController* This,
+        boolean value);
+    HRESULT (STDMETHODCALLTYPE* get_IsPalmRejectionEnabled)(__x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController* This,
+        boolean* value);
+    HRESULT (STDMETHODCALLTYPE* put_IsPalmRejectionEnabled)(__x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController* This,
+        boolean value);
+    HRESULT (STDMETHODCALLTYPE* get_Source)(__x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController* This,
+        __x_ABI_CWindows_CUI_CCore_CICoreInputSourceBase** value);
+    HRESULT (STDMETHODCALLTYPE* SetControlledInput)(__x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController* This,
+        enum __x_ABI_CWindows_CUI_CCore_CCoreInputDeviceTypes inputTypes);
+    HRESULT (STDMETHODCALLTYPE* SetControlledInputWithFilters)(__x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController* This,
+        enum __x_ABI_CWindows_CUI_CCore_CCoreInputDeviceTypes inputTypes,
+        enum __x_ABI_CWindows_CUI_CCore_CCoreIndependentInputFilters required,
+        enum __x_ABI_CWindows_CUI_CCore_CCoreIndependentInputFilters excluded);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerVtbl;
+
+interface __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController
+{
+    CONST_VTBL struct __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController_get_IsTransparentForUncontrolledInput(This, value) \
+    ((This)->lpVtbl->get_IsTransparentForUncontrolledInput(This, value))
+
+#define __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController_put_IsTransparentForUncontrolledInput(This, value) \
+    ((This)->lpVtbl->put_IsTransparentForUncontrolledInput(This, value))
+
+#define __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController_get_IsPalmRejectionEnabled(This, value) \
+    ((This)->lpVtbl->get_IsPalmRejectionEnabled(This, value))
+
+#define __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController_put_IsPalmRejectionEnabled(This, value) \
+    ((This)->lpVtbl->put_IsPalmRejectionEnabled(This, value))
+
+#define __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController_get_Source(This, value) \
+    ((This)->lpVtbl->get_Source(This, value))
+
+#define __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController_SetControlledInput(This, inputTypes) \
+    ((This)->lpVtbl->SetControlledInput(This, inputTypes))
+
+#define __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController_SetControlledInputWithFilters(This, inputTypes, required, excluded) \
+    ((This)->lpVtbl->SetControlledInputWithFilters(This, inputTypes, required, excluded))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController;
+#endif /* !defined(____x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.UI.Core.ICoreIndependentInputSourceControllerStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.Core.CoreIndependentInputSourceController
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_Core_ICoreIndependentInputSourceControllerStatics[] = L"Windows.UI.Core.ICoreIndependentInputSourceControllerStatics";
+typedef struct __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStaticsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* CreateForVisual)(__x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics* This,
+        __x_ABI_CWindows_CUI_CComposition_CIVisual* visual,
+        __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController** result);
+    HRESULT (STDMETHODCALLTYPE* CreateForIVisualElement)(__x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics* This,
+        __x_ABI_CWindows_CUI_CComposition_CIVisualElement* visualElement,
+        __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceController** result);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStaticsVtbl;
+
+interface __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics
+{
+    CONST_VTBL struct __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStaticsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics_CreateForVisual(This, visual, result) \
+    ((This)->lpVtbl->CreateForVisual(This, visual, result))
+
+#define __x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics_CreateForIVisualElement(This, visualElement, result) \
+    ((This)->lpVtbl->CreateForIVisualElement(This, visualElement, result))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics;
+#endif /* !defined(____x_ABI_CWindows_CUI_CCore_CICoreIndependentInputSourceControllerStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *
@@ -13008,6 +13514,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *    Windows.UI.Core.ICoreInputSourceBase ** Default Interface **
  *    Windows.UI.Core.ICorePointerInputSource
  *    Windows.UI.Core.ICorePointerInputSource2
+ *    Windows.UI.Core.ICorePointerRedirector
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -13018,6 +13525,31 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_UI_Core_CoreIndependentInputSource[] = L"Windows.UI.Core.CoreIndependentInputSource";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Class Windows.UI.Core.CoreIndependentInputSourceController
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.UI.Core.ICoreIndependentInputSourceControllerStatics interface starting with version 13.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.UI.Core.ICoreIndependentInputSourceController ** Default Interface **
+ *    Windows.Foundation.IClosable
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#ifndef RUNTIMECLASS_Windows_UI_Core_CoreIndependentInputSourceController_DEFINED
+#define RUNTIMECLASS_Windows_UI_Core_CoreIndependentInputSourceController_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_UI_Core_CoreIndependentInputSourceController[] = L"Windows.UI.Core.CoreIndependentInputSourceController";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *

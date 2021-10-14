@@ -574,6 +574,9 @@ typedef struct _PSFEATURE_CUSTPAPER {
 
 #define GDI_OBJ_LAST        OBJ_COLORSPACE
 
+#define GDI_MIN_OBJ_TYPE    OBJ_PEN
+#define GDI_MAX_OBJ_TYPE    GDI_OBJ_LAST
+
 /* xform stuff */
 #define MWT_IDENTITY        1
 #define MWT_LEFTMULTIPLY    2
@@ -2819,6 +2822,7 @@ typedef enum
     DISPLAYCONFIG_OUTPUT_TECHNOLOGY_MIRACAST                = 15,
     DISPLAYCONFIG_OUTPUT_TECHNOLOGY_INDIRECT_WIRED          = 16,
     DISPLAYCONFIG_OUTPUT_TECHNOLOGY_INDIRECT_VIRTUAL        = 17,
+    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_DISPLAYPORT_USB_TUNNEL  = 18,
     DISPLAYCONFIG_OUTPUT_TECHNOLOGY_INTERNAL                = 0x80000000,
     DISPLAYCONFIG_OUTPUT_TECHNOLOGY_FORCE_UINT32            = 0xFFFFFFFF
 } DISPLAYCONFIG_VIDEO_OUTPUT_TECHNOLOGY;
@@ -3012,7 +3016,7 @@ typedef struct DISPLAYCONFIG_PATH_INFO
 #define DISPLAYCONFIG_PATH_ACTIVE               0x00000001
 #define DISPLAYCONFIG_PATH_PREFERRED_UNSCALED   0x00000004 // Not implemented
 #define DISPLAYCONFIG_PATH_SUPPORT_VIRTUAL_MODE 0x00000008
-#define DISPLAYCONFIG_PATH_VALID_FLAGS          0x0000000D
+#define DISPLAYCONFIG_PATH_VALID_FLAGS          0x0000001D
 
 typedef enum DISPLAYCONFIG_TOPOLOGY_ID
 {
@@ -3037,6 +3041,8 @@ typedef enum
       DISPLAYCONFIG_DEVICE_INFO_GET_ADVANCED_COLOR_INFO         = 9,
       DISPLAYCONFIG_DEVICE_INFO_SET_ADVANCED_COLOR_STATE        = 10,
       DISPLAYCONFIG_DEVICE_INFO_GET_SDR_WHITE_LEVEL             = 11,
+      DISPLAYCONFIG_DEVICE_INFO_GET_MONITOR_SPECIALIZATION      = 12,
+      DISPLAYCONFIG_DEVICE_INFO_SET_MONITOR_SPECIALIZATION      = 13,
       DISPLAYCONFIG_DEVICE_INFO_FORCE_UINT32                = 0xFFFFFFFF
 } DISPLAYCONFIG_DEVICE_INFO_TYPE;
 
@@ -3200,6 +3206,41 @@ typedef struct _DISPLAYCONFIG_SDR_WHITE_LEVEL
     ULONG SDRWhiteLevel;
 } DISPLAYCONFIG_SDR_WHITE_LEVEL;
 
+typedef struct _DISPLAYCONFIG_GET_MONITOR_SPECIALIZATION
+{
+    DISPLAYCONFIG_DEVICE_INFO_HEADER    header;
+    union
+    {
+        struct
+        {
+            UINT32 isSpecializationEnabled : 1;
+            UINT32 isSpecializationAvailableForMonitor : 1;
+            UINT32 isSpecializationAvailableForSystem : 1;
+            UINT32 reserved                : 29;
+        } DUMMYSTRUCTNAME;
+        UINT32 value;
+    } DUMMYUNIONNAME;
+} DISPLAYCONFIG_GET_MONITOR_SPECIALIZATION;
+
+typedef struct _DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION
+{
+    DISPLAYCONFIG_DEVICE_INFO_HEADER    header;
+    union
+    {
+        struct
+        {
+            UINT32 isSpecializationEnabled : 1;
+            UINT32 reserved             : 31;
+        } DUMMYSTRUCTNAME;
+        UINT32 value;
+    } DUMMYUNIONNAME;
+
+    GUID specializationType;
+    GUID specializationSubType;
+
+    WCHAR specializationApplicationName[128];
+} DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION;
+
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
 
@@ -3213,6 +3254,7 @@ typedef struct _DISPLAYCONFIG_SDR_WHITE_LEVEL
 #define QDC_DATABASE_CURRENT                          0x00000004
 #define QDC_VIRTUAL_MODE_AWARE                        0x00000010
 #define QDC_INCLUDE_HMD                               0x00000020
+#define QDC_VIRTUAL_REFRESH_RATE_AWARE                0x00000040
 
 //
 // Definitions used by SetDisplayConfig.
@@ -3235,6 +3277,9 @@ typedef struct _DISPLAYCONFIG_SDR_WHITE_LEVEL
 #define SDC_FORCE_MODE_ENUMERATION       0x00001000
 #define SDC_ALLOW_PATH_ORDER_CHANGES     0x00002000
 #define SDC_VIRTUAL_MODE_AWARE           0x00008000
+
+
+#define SDC_VIRTUAL_REFRESH_RATE_AWARE   0x00020000
 
 
 #endif /* WINVER >= 0x0601 */
@@ -4129,6 +4174,7 @@ WINGDIAPI HMETAFILE   WINAPI GetMetaFileW( _In_ LPCWSTR lpName);
 #endif // !UNICODE
 WINGDIAPI COLORREF WINAPI GetNearestColor( _In_ HDC hdc, _In_ COLORREF color);
 WINGDIAPI UINT  WINAPI GetNearestPaletteIndex( _In_ HPALETTE h, _In_ COLORREF color);
+_Post_satisfies_((return == 0) || (return >= GDI_MIN_OBJ_TYPE && return <= GDI_MAX_OBJ_TYPE))
 WINGDIAPI DWORD WINAPI GetObjectType( _In_ HGDIOBJ h);
 
 #ifndef NOTEXTMETRIC

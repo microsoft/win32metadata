@@ -878,8 +878,13 @@ DNS_WIRE_RECORD, *PDNS_WIRE_RECORD;
 #define IS_QWORD_ALIGNED(p)     ( !((UINT_PTR)(p) & (UINT_PTR)7) )
 
 
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+#pragma endregion
 
-
+#pragma region Desktop Family or OneCore Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+
+
 //
 //  DNS config API
 //
@@ -944,6 +949,13 @@ DnsQueryConfig(
     _Out_writes_bytes_to_opt_(*pBufLen, *pBufLen) PVOID               pBuffer,
     _Inout_                                   PDWORD              pBufLen
     );
+
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+#pragma endregion
+
+#pragma region Desktop Family or OneCore Family or Games Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+
 
 //
 //  DNS resource record structure
@@ -1877,6 +1889,12 @@ DNS_RRSET, *PDNS_RRSET;
         }
 
 
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+#pragma endregion
+
+#pragma region Desktop Family or OneCore Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+
 
 typedef
 VOID
@@ -1897,6 +1915,7 @@ typedef struct DNS_PROXY_INFORMATION {
                 _Out_ DNS_PROXY_INFORMATION_TYPE proxyInformationType;
                 _Out_opt_ PWSTR proxyName;
 } DNS_PROXY_INFORMATION;
+
 
 //
 //  Record set manipulation
@@ -1985,7 +2004,18 @@ DnsRecordSetDetach(
     _Inout_         PDNS_RECORD     pRecordList
     );
 
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+
+//
+//  Backward compatibility with Win2K, do not use for XP+ applications
+//
+//  To free record lists, code
+//      DnsFree( pRecordList, DnsFreeRecordList );
+//
+
+#define DnsFreeRecordListDeep   DnsFreeRecordList
+
+
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
 
 #pragma region Application Family or OneCore Family or Games Family
@@ -2021,15 +2051,6 @@ DnsFree(
 #pragma region Desktop Family or OneCore Family or Games Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
-//
-//  Backward compatibility with Win2K, do not use for XP+ applications
-//
-//  To free record lists, code
-//      DnsFree( pRecordList, DnsFreeRecordList );
-//
-
-#define DnsFreeRecordListDeep   DnsFreeRecordList
-
 #if(_WIN32_WINNT >= 0x0501)
 #define DnsRecordListFree(p,t)  DnsFree(p,DnsFreeRecordList)
 #else
@@ -2041,6 +2062,11 @@ DnsRecordListFree(
     );
 #endif /* _WIN32_WINNT >= 0x0501 */
 
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+#pragma endregion
+
+#pragma region Desktop Family or OneCore Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 
 //
 //  DNS Query API
@@ -2120,11 +2146,22 @@ DnsQuery_W(
 #define DnsQuery DnsQuery_A
 #endif
 
-#if !defined ( USE_PRIVATE_DNS_ADDR ) || defined (MIDL_PASS)
+
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+#pragma endregion
+
+#pragma region Desktop Family or OneCore Family or Games Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+
 
 //
 //  DnsQueryEx
 //
+
+#if !defined ( USE_PRIVATE_DNS_ADDR ) || defined (MIDL_PASS)
+#define DNS_QUERY_REQUEST_VERSION1  0x1
+#define DNS_QUERY_REQUEST_VERSION2  0x2
+#endif
 
 #define DNS_QUERY_RESULTS_VERSION1  0x1
 
@@ -2148,7 +2185,15 @@ DNS_QUERY_COMPLETION_ROUTINE(
 
 typedef DNS_QUERY_COMPLETION_ROUTINE *PDNS_QUERY_COMPLETION_ROUTINE;
 
-#define DNS_QUERY_REQUEST_VERSION1  0x1
+
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+#pragma endregion
+
+#pragma region Desktop Family or OneCore Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+
+
+#if !defined ( USE_PRIVATE_DNS_ADDR ) || defined (MIDL_PASS)
 
 typedef struct _DNS_QUERY_REQUEST
 {
@@ -2183,7 +2228,112 @@ DnsCancelQuery(
     _In_        PDNS_QUERY_CANCEL    pCancelHandle
     );
 
+#define DNS_QUERY_REQUEST_VERSION3  0x3
+
+#define DNS_CUSTOM_SERVER_TYPE_UDP 0x1
+#define DNS_CUSTOM_SERVER_TYPE_DOH 0x2
+
+#define DNS_CUSTOM_SERVER_UDP_FALLBACK 0x1
+
+#pragma warning(push)
+#pragma warning(disable: 4201) // nameless struct/unions
+
+#ifdef MIDL_PASS
+
+typedef struct _DNS_CUSTOM_SERVER
+{
+    DWORD    dwServerType;
+    ULONG64  ullFlags;
+
+    [switch_type(DWORD)]
+    [switch_is(dwServerType)]
+    union
+    {
+        [case(DNS_CUSTOM_SERVER_TYPE_DOH)] PWSTR  pwszTemplate;
+        [case(DNS_CUSTOM_SERVER_TYPE_UDP)] ;
+    };
+
+    CHAR MaxSa[DNS_ADDR_MAX_SOCKADDR_LENGTH];
+} DNS_CUSTOM_SERVER;
+
+#else
+
+typedef struct _DNS_CUSTOM_SERVER
+{
+    DWORD    dwServerType;
+    ULONG64  ullFlags;
+
+    union
+    {
+        PWSTR pwszTemplate;
+    };
+
+    union
+    {
+#ifdef _WS2TCPIP_H_
+        SOCKADDR_INET ServerAddr;
 #endif
+        CHAR          MaxSa[DNS_ADDR_MAX_SOCKADDR_LENGTH];
+    };
+} DNS_CUSTOM_SERVER;
+
+#endif // MIDL_PASS
+
+#pragma warning(pop)
+
+typedef struct _DNS_QUERY_REQUEST3
+{
+    ULONG           Version;
+    PCWSTR          QueryName;
+    WORD            QueryType;
+    ULONG64         QueryOptions;
+    PDNS_ADDR_ARRAY pDnsServerList;
+    ULONG           InterfaceIndex;
+    PDNS_QUERY_COMPLETION_ROUTINE   pQueryCompletionCallback;
+    PVOID           pQueryContext;
+    BOOL            IsNetworkQueryRequired;
+    DWORD           RequiredNetworkIndex;
+    DWORD           cCustomServers;
+
+#ifdef MIDL_PASS
+    [size_is(cCustomServers)]
+#endif
+    _Field_size_(cCustomServers)
+    DNS_CUSTOM_SERVER *pCustomServers;
+}
+DNS_QUERY_REQUEST3, *PDNS_QUERY_REQUEST3;
+
+#define DNS_APP_SETTINGS_VERSION1 0x1
+
+#define DNS_APP_SETTINGS_EXCLUSIVE_SERVERS 0x1
+
+typedef struct _DNS_APPLICATION_SETTINGS
+{
+    ULONG Version;
+    ULONG64 Flags;
+} DNS_APPLICATION_SETTINGS;
+
+VOID
+DnsFreeCustomServers(
+    _Inout_  DWORD               *pcServers,
+    _Inout_  DNS_CUSTOM_SERVER   **ppServers
+    );
+
+DWORD
+DnsGetApplicationSettings(
+    _Out_                              DWORD                    *pcServers,
+    _Outptr_result_buffer_(*pcServers) DNS_CUSTOM_SERVER        **ppDefaultServers,
+    _Out_opt_                          DNS_APPLICATION_SETTINGS *pSettings
+    );
+
+DWORD
+DnsSetApplicationSettings(
+    _In_                 DWORD                           cServers,
+    _In_reads_(cServers) const DNS_CUSTOM_SERVER         *pServers,
+    _In_opt_             const DNS_APPLICATION_SETTINGS  *pSettings
+    );
+
+#endif // !defined ( USE_PRIVATE_DNS_ADDR ) || defined (MIDL_PASS)
 
 //
 //  DNS Update API
@@ -2699,10 +2849,19 @@ typedef struct _DNS_CONNECTION_POLICY_ENTRY
 {
     PCWSTR pwszHost;
     PCWSTR pwszAppId;
+
     DWORD cbAppSid;
+#ifdef MIDL_PASS
+    [size_is(cbAppSid)]
+#endif
     PBYTE pbAppSid;
+
     DWORD nConnections;
+#ifdef MIDL_PASS
+    [size_is(nConnections)]
+#endif
     PCWSTR *ppwszConnections;
+
     DWORD dwPolicyEntryFlags;
 } DNS_CONNECTION_POLICY_ENTRY, *PDNS_CONNECTION_POLICY_ENTRY;
 
@@ -2733,6 +2892,13 @@ DWORD
 DnsConnectionDeletePolicyEntries(
     _In_ DNS_CONNECTION_POLICY_TAG PolicyEntryTag
 );
+
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+#pragma endregion
+
+#pragma region Desktop Family or OneCore Family or Games Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+
 
 #ifdef __midl
 typedef[string] wchar_t *DNSSD_RPC_STRING;
@@ -2774,6 +2940,7 @@ typedef struct _DNS_SERVICE_INSTANCE
 #ifndef __midl
 
 PDNS_SERVICE_INSTANCE
+WINAPI
 DnsServiceConstructInstance(
     _In_ PCWSTR pServiceName,
     _In_ PCWSTR pHostName,
@@ -2788,11 +2955,13 @@ DnsServiceConstructInstance(
     );
 
 PDNS_SERVICE_INSTANCE
+WINAPI
 DnsServiceCopyInstance(
     _In_ PDNS_SERVICE_INSTANCE pOrig
     );
 
 VOID
+WINAPI
 DnsServiceFreeInstance(
     _In_ PDNS_SERVICE_INSTANCE pInstance
     );
@@ -2820,31 +2989,6 @@ DNS_SERVICE_BROWSE_CALLBACK(
 
 typedef DNS_SERVICE_BROWSE_CALLBACK *PDNS_SERVICE_BROWSE_CALLBACK;
 
-#if defined(USE_PRIVATE_DNS_ADDR)
-
-#define DNS_QUERY_RESULTS_VERSION1  0x1
-
-typedef struct _DNS_QUERY_RESULT
-{
-    _In_        ULONG           Version;
-    _Out_       DNS_STATUS      QueryStatus;
-    _Out_       ULONG64         QueryOptions;
-    _Out_       PDNS_RECORD     pQueryRecords;
-    _Inout_opt_ PVOID           Reserved;
-}
-DNS_QUERY_RESULT, *PDNS_QUERY_RESULT;
-
-typedef
-VOID
-WINAPI
-DNS_QUERY_COMPLETION_ROUTINE(
-    _In_        PVOID               pQueryContext,
-    _Inout_     PDNS_QUERY_RESULT   pQueryResults
-);
-
-typedef DNS_QUERY_COMPLETION_ROUTINE *PDNS_QUERY_COMPLETION_ROUTINE;
-
-#endif
 
 #pragma warning(push)
 #pragma warning(disable: 4201)
@@ -2943,18 +3087,21 @@ typedef struct _DNS_SERVICE_REGISTER_REQUEST{
 } DNS_SERVICE_REGISTER_REQUEST, *PDNS_SERVICE_REGISTER_REQUEST;
 
 DWORD
+WINAPI
 DnsServiceRegister(
     _In_    PDNS_SERVICE_REGISTER_REQUEST   pRequest,
     _Inout_opt_ PDNS_SERVICE_CANCEL             pCancel
     );
 
 DWORD
+WINAPI
 DnsServiceDeRegister(
     _In_    PDNS_SERVICE_REGISTER_REQUEST   pRequest,
     _Inout_opt_ PDNS_SERVICE_CANCEL             pCancel
     );
 
 DWORD
+WINAPI
 DnsServiceRegisterCancel(
     _In_ PDNS_SERVICE_CANCEL pCancelHandle
     );

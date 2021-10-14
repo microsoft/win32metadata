@@ -9,3 +9,5 @@
 //#include <vds.h> Can't also use vdshwprv.h
 #include <vdshwprv.h>
 #include <vdslun.h>
+#include <vdssys.h>
+#include <vdserr.h>

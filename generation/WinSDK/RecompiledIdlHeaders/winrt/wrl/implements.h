@@ -591,6 +591,8 @@ struct VerifyInheritanceHelper<I, Nil>
 
 } // namespace Details
 
+// note: Due to potential shutdown ordering issues, the results of GetModuleBase
+// should always be checked for null on reference counting and cleanup operations.
 inline Details::ModuleBase* GetModuleBase() throw()
 {
     return Details::ModuleBase::module_;
@@ -832,7 +834,7 @@ struct __declspec(novtable) ImplementsHelper<RuntimeClassFlagsT, doStrictCheck, 
     I0,
     AdjustImplements<RuntimeClassFlagsT, true, TInterfaces...>::Type
 {
-    template <typename RuntimeClassFlagsT, bool doStrictCheck, typename ...TInterfaces> friend struct ImplementsHelper;
+    template <typename OtherRuntimeClassFlagsT, bool OtherDoStrictCheck, typename ...TOtherInterfaces> friend struct ImplementsHelper;
     template <unsigned int RuntimeClassTypeT> friend class RuntimeClassBaseT;
 
 protected:
@@ -882,7 +884,7 @@ struct __declspec(novtable) ImplementsHelper<RuntimeClassFlagsT, doStrictCheck, 
     Selector<I0, ImplementsHelper<RuntimeClassFlagsT, doStrictCheck, ImplementsMarker<I0>, TInterfaces...>>,
     Selector<typename AdjustImplements<RuntimeClassFlagsT, true, TInterfaces...>::Type, ImplementsHelper<RuntimeClassFlagsT, doStrictCheck, ImplementsMarker<I0>, TInterfaces...>>
 {
-    template <typename RuntimeClassFlagsT, bool doStrictCheck, typename ...TInterfaces> friend struct ImplementsHelper;
+    template <typename OtherRuntimeClassFlagsT, bool OtherDoStrictCheck, typename ...TOtherInterfaces> friend struct ImplementsHelper;
     template <unsigned int RuntimeClassTypeT> friend class RuntimeClassBaseT;
 
 protected:
@@ -927,7 +929,7 @@ struct __declspec(novtable) ImplementsHelper<RuntimeClassFlagsT, doStrictCheck, 
     AdjustImplements<RuntimeClassFlagsT, doStrictCheck, I0>::Type,
     AdjustImplements<RuntimeClassFlagsT, true, I1, TInterfaces...>::Type
 {
-    template <typename RuntimeClassFlagsT, bool doStrictCheck, typename ...TInterfaces> friend struct ImplementsHelper;
+    template <typename OtherRuntimeClassFlagsT, bool OtherDoStrictCheck, typename ...TOtherInterfaces> friend struct ImplementsHelper;
     template <unsigned int RuntimeClassTypeT> friend class Details::RuntimeClassBaseT;
 
 protected:
@@ -968,7 +970,7 @@ template <typename RuntimeClassFlagsT, bool doStrictCheck, typename I0>
 struct __declspec(novtable) ImplementsHelper<RuntimeClassFlagsT, doStrictCheck, CloakedIid<I0>> :
     AdjustImplements<RuntimeClassFlagsT, doStrictCheck, I0>::Type
 {
-    template <typename RuntimeClassFlagsT, bool doStrictCheck, typename ...TInterfaces> friend struct ImplementsHelper;
+    template <typename OtherRuntimeClassFlagsT, bool OtherDoStrictCheck, typename ...TInterfaces> friend struct ImplementsHelper;
     template <unsigned int RuntimeClassTypeT> friend class Details::RuntimeClassBaseT;
 
 protected:
@@ -1004,7 +1006,7 @@ protected:
 template <typename RuntimeClassFlagsT, bool doStrictCheck>
 struct __declspec(novtable) ImplementsHelper<RuntimeClassFlagsT, doStrictCheck>
 {
-    template <typename RuntimeClassFlagsT, bool doStrictCheck, typename ...TInterfaces> friend struct ImplementsHelper;
+    template <typename OtherRuntimeClassFlagsT, bool OtherDoStrictCheck, typename ...TInterfaces> friend struct ImplementsHelper;
     template <unsigned int RuntimeClassTypeT> friend class RuntimeClassBaseT;
 
 protected:
@@ -1033,7 +1035,7 @@ struct __declspec(novtable) ImplementsHelper<RuntimeClassFlagsT, doStrictCheck, 
     ChainInterfaces<C0, C1, C2, C3, C4, C5, C6, C7, C8, C9>,
     AdjustImplements<RuntimeClassFlagsT, true, TInterfaces...>::Type
 {
-    template <typename RuntimeClassFlagsT, bool doStrictCheck, typename ...TInterfaces> friend struct ImplementsHelper;
+    template <typename OtherRuntimeClassFlagsT, bool OtherDoStrictCheck, typename ...TOtherInterfaces> friend struct ImplementsHelper;
     template <unsigned int RuntimeClassTypeT> friend class RuntimeClassBaseT;
 
 protected:
@@ -1078,7 +1080,7 @@ struct __declspec(novtable) ImplementsHelper<RuntimeClassFlagsT, doStrictCheck, 
 {
     static_assert(hasImplements, "Cannot use MixIn to with a class not deriving from \"Implements\"");
 
-    template <typename RuntimeClassFlagsT, bool doStrictCheck, typename ...TInterfaces> friend struct ImplementsHelper;
+    template <typename OtherRuntimeClassFlagsT, bool OtherDoStrictCheck, typename ...TOtherInterfaces> friend struct ImplementsHelper;
     template <unsigned int RuntimeClassTypeT> friend class RuntimeClassBaseT;
 
 protected:
@@ -1140,7 +1142,7 @@ template <typename RuntimeClassFlagsT, typename FactoryInterface, bool doStrictC
 struct __declspec(novtable) ImplementsHelper<RuntimeClassFlagsT, doStrictCheck, ComposableBase<FactoryInterface>, TInterfaces...> :
     ImplementsHelper<RuntimeClassFlagsT, true, ComposableBase<FactoryInterface>>
 {
-    template <typename RuntimeClassFlagsT, bool doStrictCheck, typename ...TInterfaces> friend struct ImplementsHelper;
+    template <typename OtherRuntimeClassFlagsT, bool OtherDoStrictCheck, typename ...TOtherInterfaces> friend struct ImplementsHelper;
     template <unsigned int RuntimeClassTypeT> friend class RuntimeClassBaseT;
 
 protected:
@@ -1176,7 +1178,7 @@ protected:
 template <typename RuntimeClassFlagsT, typename FactoryInterface, bool doStrictCheck>
 struct __declspec(novtable) ImplementsHelper<RuntimeClassFlagsT, doStrictCheck, ComposableBase<FactoryInterface>>
 {
-    template <typename RuntimeClassFlagsT, bool doStrictCheck, typename ...TInterfaces> friend struct ImplementsHelper;
+    template <typename OtherRuntimeClassFlagsT, bool OtherDoStrictCheck, typename ...TInterfaces> friend struct ImplementsHelper;
     template <unsigned int RuntimeClassTypeT> friend class RuntimeClassBaseT;
 
 protected:
@@ -1274,7 +1276,7 @@ public:
     typedef I0 FirstInterface;
 protected:
     typedef typename Details::AdjustImplements<RuntimeClassFlags<WinRt>, true, I0, TInterfaces...>::Type BaseType;
-    template <typename RuntimeClassFlagsT, bool doStrictCheck, typename ...TInterfaces> friend struct Details::ImplementsHelper;
+    template <typename RuntimeClassFlagsT, bool doStrictCheck, typename ...TOtherInterfaces> friend struct Details::ImplementsHelper;
     template <unsigned int RuntimeClassTypeT> friend class Details::RuntimeClassBaseT;
 
     HRESULT CanCastTo(REFIID riid, _Outptr_ void **ppv) throw()
@@ -1309,7 +1311,7 @@ public:
 protected:
 
     typedef typename Details::AdjustImplements<RuntimeClassFlags<flags>, true, I0, TInterfaces...>::Type BaseType;
-    template <typename RuntimeClassFlagsT, bool doStrictCheck, typename ...TInterfaces> friend struct Details::ImplementsHelper;
+    template <typename RuntimeClassFlagsT, bool doStrictCheck, typename ...TOtherInterfaces> friend struct Details::ImplementsHelper;
     template <unsigned int RuntimeClassTypeT> friend class Details::RuntimeClassBaseT;
 
     HRESULT CanCastTo(REFIID riid, _Outptr_ void **ppv) throw()
@@ -1515,6 +1517,8 @@ private:
 #define UnknownInterlockedCompareExchangePointer InterlockedCompareExchangePointer
 #define UnknownInterlockedCompareExchangePointerForIncrement InterlockedCompareExchangePointer
 #define UnknownInterlockedCompareExchangePointerForRelease InterlockedCompareExchangePointer
+#define UnknownInterlockedCompareExchangeForIncrement InterlockedCompareExchange
+#define UnknownInterlockedCompareExchangeForRelease InterlockedCompareExchange
 
 #elif defined(_ARM_)
 
@@ -1524,6 +1528,8 @@ private:
 #define UnknownInterlockedCompareExchangePointer InterlockedCompareExchangePointer
 #define UnknownInterlockedCompareExchangePointerForIncrement InterlockedCompareExchangePointerNoFence
 #define UnknownInterlockedCompareExchangePointerForRelease InterlockedCompareExchangePointerRelease
+#define UnknownInterlockedCompareExchangeForIncrement InterlockedCompareExchangeNoFence
+#define UnknownInterlockedCompareExchangeForRelease InterlockedCompareExchangeRelease
 
 #elif defined(_ARM64_)
 
@@ -1533,6 +1539,8 @@ private:
 #define UnknownInterlockedCompareExchangePointer InterlockedCompareExchangePointer
 #define UnknownInterlockedCompareExchangePointerForIncrement InterlockedCompareExchangePointerNoFence
 #define UnknownInterlockedCompareExchangePointerForRelease InterlockedCompareExchangePointerRelease
+#define UnknownInterlockedCompareExchangeForIncrement InterlockedCompareExchangeNoFence
+#define UnknownInterlockedCompareExchangeForRelease InterlockedCompareExchangeRelease
 
 #else
 
@@ -1553,6 +1561,37 @@ class __declspec(novtable) RuntimeClassImpl;
 #pragma warning(push)
 // PREFast cannot see through template instantiation for AsIID()
 #pragma warning(disable: 6388)
+
+// Reference counting functions that check overflow. If overflow is detected, ref count value will stop at LONG_MAX, and the object being
+// reference-counted will be leaked.
+inline unsigned long SafeUnknownIncrementReference(long volatile &refcount) throw()
+{
+    long oldValue = refcount;
+    while (oldValue != LONG_MAX && (UnknownInterlockedCompareExchangeForIncrement(&refcount, oldValue + 1, oldValue) != oldValue))
+    {
+        oldValue = refcount;
+    }
+
+    if (oldValue != LONG_MAX)
+    {
+        return oldValue + 1;
+    }
+    else
+    {
+        return LONG_MAX;
+    }
+}
+
+inline unsigned long SafeUnknownDecrementReference(long volatile &refcount) throw()
+{
+    long oldValue = refcount;
+    while (oldValue != LONG_MAX && (UnknownInterlockedCompareExchangeForRelease(&refcount, oldValue - 1, oldValue) != oldValue))
+    {
+        oldValue = refcount;
+    }
+
+    return oldValue - 1;
+}
 
 template <class RuntimeClassFlagsT, bool implementsWeakReferenceSource, bool implementsFtmBase, typename ...TInterfaces>
 class __declspec(novtable) RuntimeClassImpl<RuntimeClassFlagsT, implementsWeakReferenceSource, false, implementsFtmBase, TInterfaces...> :
@@ -1616,7 +1655,7 @@ protected:
 #ifdef _PERF_COUNTERS
         IncrementAddRefCount();
 #endif
-        return UnknownIncrementReference(&refcount_);
+        return SafeUnknownIncrementReference(refcount_);
     }
 
     unsigned long InternalRelease() throw()
@@ -1626,7 +1665,7 @@ protected:
 #endif
         // A release fence is required to ensure all guarded memory accesses are
         // complete before any thread can begin destroying the object.
-        unsigned long newValue = UnknownDecrementReference(&refcount_);
+        unsigned long newValue = SafeUnknownDecrementReference(refcount_);
         if (newValue == 0)
         {
             // An acquire fence is required before object destruction to ensure
@@ -1778,7 +1817,7 @@ protected:
 #ifdef _PERF_COUNTERS
         IncrementAddRefCount();
 #endif
-        return UnknownIncrementReference(&refcount_);
+        return SafeUnknownIncrementReference(refcount_);
     }
 
     unsigned long InternalRelease() throw()
@@ -1788,7 +1827,7 @@ protected:
 #endif
         // A release fence is required to ensure all guarded memory accesses are
         // complete before any thread can begin destroying the object.
-        unsigned long newValue = UnknownDecrementReference(&refcount_);
+        unsigned long newValue = SafeUnknownDecrementReference(refcount_);
         if (newValue == 0)
         {
             // An acquire fence is required before object destruction to ensure
@@ -1820,14 +1859,14 @@ public:
 
     unsigned long IncrementStrongReference() throw()
     {
-        return UnknownIncrementReference(&strongRefCount_);
+        return SafeUnknownIncrementReference(strongRefCount_);
     }
 
     unsigned long DecrementStrongReference() throw()
     {
         // A release fence is required to ensure all guarded memory accesses are
         // complete before any thread can begin destroying the object.
-        unsigned long newValue = UnknownDecrementReference(&strongRefCount_);
+        unsigned long newValue = SafeUnknownDecrementReference(strongRefCount_);
         if (newValue == 0)
         {
             // An acquire fence is required before object destruction to ensure
@@ -2281,6 +2320,11 @@ unsigned long RuntimeClassImpl<RuntimeClassFlagsT, true, true, false, I0, TInter
     {
         if (!IsValueAPointerToWeakReference(currentValue.rawValue))
         {
+            if (static_cast<long>(currentValue.refCount) == LONG_MAX)
+            {
+                return LONG_MAX;
+            }
+
             UINT_PTR updateValue = currentValue.refCount + 1;
 
 #ifdef __WRL_UNITTEST__
@@ -2316,6 +2360,11 @@ unsigned long RuntimeClassImpl<RuntimeClassFlagsT, true, true, false, I0, TInter
     {
         if (!IsValueAPointerToWeakReference(currentValue.rawValue))
         {
+            if (static_cast<long>(currentValue.refCount) == LONG_MAX)
+            {
+                return LONG_MAX - 1;
+            }
+
             UINT_PTR updateValue = currentValue.refCount - 1;
 
 #ifdef __WRL_UNITTEST__
@@ -2339,7 +2388,7 @@ unsigned long RuntimeClassImpl<RuntimeClassFlagsT, true, true, false, I0, TInter
 }
 
 template <class RuntimeClassFlagsT, typename I0, typename ...TInterfaces>
-HRESULT RuntimeClassImpl<RuntimeClassFlagsT, true, true, false, I0, TInterfaces...>::GetWeakReference(_Outptr_ IWeakReference **weakReference)
+COM_DECLSPEC_NOTHROW HRESULT RuntimeClassImpl<RuntimeClassFlagsT, true, true, false, I0, TInterfaces...>::GetWeakReference(_Outptr_ IWeakReference **weakReference)
 {
     WeakReferenceImpl* weakRef = nullptr;
     INT_PTR encodedWeakRef = 0;
@@ -2424,13 +2473,18 @@ public:
         // Allocate memory with operator new(size, nothrow) only
         // This will allow developer to override one operator only
         // to enable different memory allocation model
-        buffer_ = (char*) (operator new (sizeof(T), std::nothrow));
-        return buffer_;
+#ifdef __cpp_aligned_new
+        if constexpr (alignof(T) > __STDCPP_DEFAULT_NEW_ALIGNMENT__) 
+        {
+            return buffer_ = (char*) operator new (sizeof(T), static_cast<std::align_val_t>(alignof(T)), ::std::nothrow);
+        }
+#endif // /std:c++17 or later
+        return buffer_ = (char*) operator new (sizeof(T), ::std::nothrow);
     }
 
     void Detach() throw()
     {
-        buffer_ = nullptr;
+        buffer_ = nullptr;  
     }
 private:
     char* buffer_;
@@ -2518,7 +2572,7 @@ namespace Details
         { \
             return trustLevel; \
         } \
-        STDMETHOD(GetRuntimeClassName)(_Out_ HSTRING* runtimeName) \
+        STDMETHOD(GetRuntimeClassName)(_Out_ HSTRING* runtimeName) override \
         { \
             *runtimeName = nullptr; \
             HRESULT hr = S_OK; \
@@ -2529,7 +2583,7 @@ namespace Details
             } \
             return hr; \
         } \
-        STDMETHOD(GetTrustLevel)(_Out_ ::TrustLevel* trustLvl) \
+        STDMETHOD(GetTrustLevel)(_Out_ ::TrustLevel* trustLvl) override \
         { \
             *trustLvl = trustLevel; \
             return S_OK; \
@@ -2537,22 +2591,22 @@ namespace Details
         STDMETHOD(GetIids)(_Out_ ULONG *iidCount, \
             _When_(*iidCount == 0, _At_(*iids, _Post_null_)) \
             _When_(*iidCount > 0, _At_(*iids, _Post_notnull_)) \
-            _Result_nullonfailure_ IID **iids) \
+            _Result_nullonfailure_ IID **iids) override \
         { \
             return RuntimeClassT::GetIids(iidCount, iids); \
         } \
-        STDMETHOD(QueryInterface)(REFIID riid, _Outptr_result_nullonfailure_ void **ppvObject) \
+        STDMETHOD(QueryInterface)(REFIID riid, _Outptr_result_nullonfailure_ void **ppvObject) override \
         { \
             bool handled = false; \
             HRESULT hr = this->CustomQueryInterface(riid, ppvObject, &handled); \
             if (FAILED(hr) || handled) return hr; \
             return RuntimeClassT::QueryInterface(riid, ppvObject); \
         } \
-        STDMETHOD_(ULONG, Release)() \
+        STDMETHOD_(ULONG, Release)() override \
         { \
             return RuntimeClassT::Release(); \
         } \
-        STDMETHOD_(ULONG, AddRef)() \
+        STDMETHOD_(ULONG, AddRef)() override \
         { \
             return RuntimeClassT::AddRef(); \
         } \

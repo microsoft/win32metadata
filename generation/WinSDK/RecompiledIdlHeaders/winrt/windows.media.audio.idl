@@ -322,6 +322,8 @@ namespace Windows
 
             interface ISpatialAudioFormatSubtypeStatics;
 
+            interface ISpatialAudioFormatSubtypeStatics2;
+
             runtimeclass AudioDeviceInputNode;
 
             runtimeclass AudioDeviceOutputNode;
@@ -1372,6 +1374,14 @@ namespace Windows
                 [propget] HRESULT DTSXUltra([out] [retval] HSTRING* value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [exclusiveto(Windows.Media.Audio.SpatialAudioFormatSubtype)]
+            [uuid(4565E6CB-D95B-5621-B6AF-0E8849C57C80)]
+            interface ISpatialAudioFormatSubtypeStatics2 : IInspectable
+            {
+                [propget] HRESULT DTSXForHomeTheater([out] [retval] HSTRING* value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [marshaling_behavior(agile)]
             [threading(both)]
@@ -1733,6 +1743,7 @@ namespace Windows
             [contract(Windows.Foundation.UniversalApiContract, 7.0)]
             [marshaling_behavior(agile)]
             [static(Windows.Media.Audio.ISpatialAudioFormatSubtypeStatics, Windows.Foundation.UniversalApiContract, 7.0)]
+            [static(Windows.Media.Audio.ISpatialAudioFormatSubtypeStatics2, Windows.Foundation.UniversalApiContract, 12.0)]
             [threading(both)]
             runtimeclass SpatialAudioFormatSubtype
             {

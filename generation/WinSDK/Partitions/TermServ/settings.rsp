@@ -19,5 +19,6 @@
 <IncludeRoot>/um/WRdsGraphicsChannels.h
 <IncludeRoot>/um/wtsprotocol.h
 <IncludeRoot>/winrt/rdpappcontainerclient.h
+<IncludeRoot>/um/remotesystemadditionalinfo.h
 --namespace
 Windows.Win32.System.RemoteDesktop

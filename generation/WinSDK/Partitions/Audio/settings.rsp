@@ -11,8 +11,11 @@ IKsPropertySet
 <IncludeRoot>/um/dsound.h
 <IncludeRoot>/shared/dmdls.h
 <IncludeRoot>/shared/dls1.h
+<IncludeRoot>/shared/dls2.h
 <IncludeRoot>/um/audioenginebaseapo.h
 <IncludeRoot>/um/dmusics.h
 <IncludeRoot>/um/audiomediatype.h
+<IncludeRoot>/um/dsconf.h
+<IncludeRoot>/um/dv.h
 --namespace
 Windows.Win32.Media.Audio.DirectMusic

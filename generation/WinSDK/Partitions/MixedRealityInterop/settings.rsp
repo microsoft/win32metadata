@@ -1,0 +1,5 @@
+--traverse
+<IncludeRoot>/um/SpatialInteractionManagerInterop.h
+<IncludeRoot>/um/HolographicSpaceInterop.h
+--namespace
+Windows.Win32.System.WinRT

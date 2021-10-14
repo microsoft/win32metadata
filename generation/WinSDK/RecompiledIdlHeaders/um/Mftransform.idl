@@ -853,6 +853,16 @@ cpp_quote( "EXTERN_C const DECLSPEC_SELECTANY GUID MF_SA_D3D11_HW_PROTECTED =   
 // Specifies the # of buffers (of the same size, etc) that should be allocated for every sample.
 cpp_quote( "EXTERN_C const DECLSPEC_SELECTANY GUID MF_SA_BUFFERS_PER_SAMPLE =    { 0x873c5171, 0x1e3d, 0x4e25, { 0x98, 0x8d, 0xb4, 0x33, 0xce, 0x04, 0x19, 0x83 } };")
 
+// MF_SA_D3D11_ALLOCATE_DISPLAYABLE_RESOURCES 
+// Data type: UINT32 
+// If present and set to a nonzero value, indicates to the decoder MFT that it should allocate its D3D
+// resources using the D3D11_RESOURCE_MISC_SHARED_DISPLAYABLE misc flag.
+// The Media Foundation pipeline will set this attribute if appropriate;
+// applications using this transform in a topology using the MF pipeline should
+// not set it directly.
+// {EEFACE6D-2EA9-4ADF-BBDF-7BBC482A1B6D} 
+cpp_quote( "EXTERN_C const DECLSPEC_SELECTANY GUID MF_SA_D3D11_ALLOCATE_DISPLAYABLE_RESOURCES = { 0xeeface6d, 0x2ea9, 0x4adf, { 0xbb, 0xdf, 0x7b, 0xbc, 0x48, 0x2a, 0x1b, 0x6d } };" ) 
+
 // MFT_DECODER_EXPOSE_OUTPUT_TYPES_IN_NATIVE_ORDER
 // Data Type: UINT32 (treat as BOOL)
 // Specifies whether the codec should expose the types in native preferred order instead of reordering to expose NV12 (for example) first

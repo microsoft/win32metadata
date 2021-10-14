@@ -1656,6 +1656,33 @@ typedef JET_ERR (JET_API *JET_PFNDURABLECOMMITCALLBACK)(
 
 #endif // JET_VERSION >= 0x0602
 
+typedef struct
+{
+    long                    lRBSGeneration;             //  Revert snapshot generation.
+
+    JET_LOGTIME             logtimeCreate;              //  date time file creation
+    JET_LOGTIME             logtimeCreatePrevRBS;       //  date time prev file creation
+
+    unsigned long           ulMajor;                    //  major version number
+    unsigned long           ulMinor;                    //  minor version number
+
+    unsigned long long      cbLogicalFileSize;          //  Logical file size
+} JET_RBSINFOMISC;
+
+typedef struct
+{
+    long                    lGenMinRevertStart;         // Min log generation across databases at start of revert.
+    long                    lGenMaxRevertStart;         // Max log generation across databases at start of revert.
+
+    long                    lGenMinRevertEnd;           // Min log generation across databases at end of revert.
+    long                    lGenMaxRevertEnd;           // Max log generation across databases at end of revert.
+
+    JET_LOGTIME             logtimeRevertFrom;          // The time we started reverting from. We will skip adding reverting to time as the caller already gets that info as part of prepare call.
+
+    unsigned long long      cSecRevert;                 // Total secs spent in revert process.
+    unsigned long long      cPagesReverted;             // Total pages reverted across all the database files as part of the revert.
+} JET_RBSREVERTINFOMISC;
+
 /************************************************************************/
 /*************************     JET CONSTANTS     ************************/
 /************************************************************************/
@@ -1791,7 +1818,7 @@ typedef enum
 #define JET_configDynamicMediumMemory           0x0020  //  Set appropriate parameters to optimize the engine to use a modest amount of memory/working set at the cost of CPU efficiency, dynamically adjusting for bursts in activity.
 #define JET_configLowPower                      0x0040  //  Set appropriate parameters to optimize the engine to attempt to conserve power over keeping everything the most up to date, or memory usage.
 #define JET_configSSDProfileIO                  0x0080  //  Set appropriate parameters to optimize the engine to be using the SSD profile IO parameters.
-#define JET_configRunSilent                     0x0100  //  Turns off all externally visible signs of the library running (event logs, perfmon, tracing, etc).
+#define JET_configRunSilent                     0x0100  //  Turns off all externally visible signs of the library running (event logs, perfmon, tracing, etc).  NOTE: This makes debugging issues difficult, best if app policy has way to configure this off or on.
 #if ( JET_VERSION >= 0x0A00 )
 #define JET_configUnthrottledMemory             0x0200  //  Allows ESE to grow to most of memory because this is likely a single purpose server for this machine, or wants to allow our variable memory caches to grow to use most of memory if in use.
 #define JET_configHighConcurrencyScaling        0x0400  //  Ensures ESE uses all its high concurrency scaling methods to achieve high levels of performance on multi-CPU systems (SMP, Multi-Core, Hyper-Threading, etc) for server scale applications, at a higher fixed memory overhead.
@@ -2024,7 +2051,7 @@ typedef enum
 #define JET_paramDefragmentSequentialBTrees     160 //  Turn on/off automatic sequential B-tree defragmentation tasks (On by default, but also requires JET_SPACEHINTS flags / JET_bitRetrieveHintTableScan* to trigger on any given tables).
 #define JET_paramDefragmentSequentialBTreesDensityCheckFrequency    161 //  Determine how frequently B-tree density is checked
 #define JET_paramIOThrottlingTimeQuanta         162 //  Max time (in MS) that the I/O throttling mechanism gives a task to run for it to be considered 'completed'.
-#define JET_paramLVChunkSizeMost                163 //  Max LV chuck size supported wrt the chosen page size (R/O)
+#define JET_paramLVChunkSizeMost                163 //  Max LV chunk size supported wrt the chosen page size (R/O)
 #define JET_paramMaxCoalesceReadSize            164 //  Max number of bytes that can be grouped for a coalesced read operation.
 #define JET_paramMaxCoalesceWriteSize           165 //  Max number of bytes that can be grouped for a coalesced write operation.
 #define JET_paramMaxCoalesceReadGapSize         166 //  Max number of bytes that can be gapped for a coalesced read IO operation.
@@ -2083,7 +2110,7 @@ typedef enum
 
 // Parameters added in Windows 8.1.
 #if ( JET_VERSION >= 0x0603 )
-#define JET_paramEnableSqm                      188 //  Enable SQM logging (Software Quality Metrics)
+#define JET_paramEnableSqm                      188 //  Deprecated / ignored param.
 #endif // JET_VERSION >= 0x0603
 
 // Parameters added in Windows 10.
@@ -2094,8 +2121,16 @@ typedef enum
 
 #endif // JET_VERSION >= 0x0A00
 
+#if ( JET_VERSION >= 0x0A01 )
+#define JET_paramUseFlushForWriteDurability     214 //  This controls whether ESE uses Flush or FUA to make sure a write to disk is durable.
 
-#define JET_paramMaxValueInvalid                212 //  This is not a valid parameter. It can change from release to release!
+#define JET_paramEnableRBS                      215 // Turns on revert snapshot. Not an ESE flight as we will let the variant be controlled outside ESE (like HA can enable this when lag is disabled)
+#define JET_paramRBSFilePath                    216 // path to the revert snapshot directory
+
+#endif // JET_VERSION >= 0x0A01
+
+
+#define JET_paramMaxValueInvalid                217 //  This is not a valid parameter. It can change from release to release!
 
 
 
@@ -2108,7 +2143,7 @@ typedef enum
 #define JET_sesparamTransactionLevel        4099    //  Retrieves (read-only, no set) the current number of nested levels of transactions begun.  0 = not in a transaction.
 #define JET_sesparamOperationContext        4100    //  a client context that the engine uses to track and trace operations (such as IOs)
 #define JET_sesparamCorrelationID           4101    //  an ID that is logged in traces and can be used by clients to correlate ESE actions with their activity
-#define JET_sesparamMaxValueInvalid         4109    //  This is not a valid session parameter. It can change from release to release!
+#define JET_sesparamMaxValueInvalid         4110    //  This is not a valid session parameter. It can change from release to release!
 
 typedef struct
 {
@@ -2798,14 +2833,29 @@ typedef struct
 
     //  supported file types (returned from JetGetDatabaseFileInfo with JET_DbInfoFileType)
 
-#define JET_filetypeUnknown         0
-#define JET_filetypeDatabase        1
-#define JET_filetypeLog             3
-#define JET_filetypeCheckpoint      4
-#define JET_filetypeTempDatabase    5
-#define JET_filetypeFlushMap        7
+#define JET_filetypeUnknown                 0
+#define JET_filetypeDatabase                1
+#define JET_filetypeLog                     3
+#define JET_filetypeCheckpoint              4
+#define JET_filetypeTempDatabase            5
+#define JET_filetypeFlushMap                7
 
 #endif // JET_VERSION >= 0x0600
+
+    /* RBS revert states */
+
+#if ( JET_VERSION >= 0x0A01 )
+#define JET_revertstateNone                 0   // Revert has not yet started/default state.
+#define JET_revertstateInProgress           1   // Revert snapshots are currently being applied to the databases.
+#define JET_revertstateCopingLogs           2   // The required logs to bring databases to a clean state are being copied to the log directory after revert.
+#define JET_revertstateCompleted            3   // Revert snapshots have been finished applying.
+#endif // JET_VERSION >= 0x0A01
+
+    /* RBS revert grbits */
+
+#if ( JET_VERSION >= 0x0A01 )
+#define JET_bitDeleteAllExistingLogs  0x00000001  /* Delete all the existing log files at the end of revert. */
+#endif // JET_VERSION >= 0x0A01
 
     /* Column data types */
 
@@ -2954,6 +3004,12 @@ typedef struct
 
 #endif // JET_VERSION >= 0x0600
 
+#if ( JET_VERSION >= 0x0A01 )
+
+#define JET_InstanceMiscInfoRBS             2U // Retrieve revert snapshot info for the instance.
+
+#endif // JET_VERSION >= 0x0A01
+
 
 
     /* Engine Object Types */
@@ -3088,6 +3144,8 @@ typedef struct
 #define wrnBTNotVisibleRejected              352  /* Current entry is not visible because it has been rejected by a move filter */
 #define wrnBTNotVisibleAccumulated           353  /* Current entry is not visible because it is being accumulated by a move filter */
 #define JET_errBadLineCount                 -354  /* Number of lines on the page is too few compared to the line being operated on */
+#define JET_errPageTagCorrupted             -357  // A tag / line on page is logically corrupted, offset or size is bad, or tag count on page is bad.
+#define JET_errNodeCorrupted                -358  // A node or prefix node is logically corrupted, the key suffix size is larger than the node or line's size.
 
 /*  RECORD MANAGER errors
 /**/
@@ -5571,7 +5629,7 @@ JET_ERR JET_API
 JetGetRecordSize(
     _In_ JET_SESID          sesid,
     _In_ JET_TABLEID        tableid,
-    _Out_ JET_RECSIZE *     precsize,
+    _Inout_ JET_RECSIZE *   precsize,
     _In_ const JET_GRBIT    grbit );
 
 #endif // JET_VERSION >= 0x0600
@@ -5588,13 +5646,14 @@ JET_ERR JET_API
 JetGetRecordSize2(
     _In_ JET_SESID          sesid,
     _In_ JET_TABLEID        tableid,
-    _Out_ JET_RECSIZE2 *    precsize,
+    _Inout_ JET_RECSIZE2 *  precsize,
     _In_ const JET_GRBIT    grbit );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
 
 #endif // JET_VERSION >= 0x0601
+
 
 #pragma region Application Family or Esent Package
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)

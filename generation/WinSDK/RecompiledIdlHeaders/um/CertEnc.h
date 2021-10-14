@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -263,28 +271,34 @@ EXTERN_C const IID IID_ICertEncodeStringArray;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICertEncodeStringArray * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICertEncodeStringArray * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICertEncodeStringArray * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICertEncodeStringArray * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICertEncodeStringArray * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICertEncodeStringArray * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -293,6 +307,7 @@ EXTERN_C const IID IID_ICertEncodeStringArray;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICertEncodeStringArray * This,
             /* [annotation][in] */ 
@@ -312,33 +327,40 @@ EXTERN_C const IID IID_ICertEncodeStringArray;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICertEncodeStringArray, Decode)
         HRESULT ( STDMETHODCALLTYPE *Decode )( 
             __RPC__in ICertEncodeStringArray * This,
             /* [in] */ __RPC__in const BSTR strBinary);
         
+        DECLSPEC_XFGVIRT(ICertEncodeStringArray, GetStringType)
         HRESULT ( STDMETHODCALLTYPE *GetStringType )( 
             __RPC__in ICertEncodeStringArray * This,
             /* [retval][out] */ __RPC__out LONG *pStringType);
         
+        DECLSPEC_XFGVIRT(ICertEncodeStringArray, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in ICertEncodeStringArray * This,
             /* [retval][out] */ __RPC__out LONG *pCount);
         
+        DECLSPEC_XFGVIRT(ICertEncodeStringArray, GetValue)
         HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             __RPC__in ICertEncodeStringArray * This,
             /* [in] */ LONG Index,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstr);
         
+        DECLSPEC_XFGVIRT(ICertEncodeStringArray, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in ICertEncodeStringArray * This,
             /* [in] */ LONG Count,
             /* [in] */ LONG StringType);
         
+        DECLSPEC_XFGVIRT(ICertEncodeStringArray, SetValue)
         HRESULT ( STDMETHODCALLTYPE *SetValue )( 
             __RPC__in ICertEncodeStringArray * This,
             /* [in] */ LONG Index,
             /* [in] */ __RPC__in const BSTR str);
         
+        DECLSPEC_XFGVIRT(ICertEncodeStringArray, Encode)
         HRESULT ( STDMETHODCALLTYPE *Encode )( 
             __RPC__in ICertEncodeStringArray * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrBinary);
@@ -443,28 +465,34 @@ EXTERN_C const IID IID_ICertEncodeStringArray2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICertEncodeStringArray2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICertEncodeStringArray2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICertEncodeStringArray2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICertEncodeStringArray2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICertEncodeStringArray2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICertEncodeStringArray2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -473,6 +501,7 @@ EXTERN_C const IID IID_ICertEncodeStringArray2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICertEncodeStringArray2 * This,
             /* [annotation][in] */ 
@@ -492,42 +521,51 @@ EXTERN_C const IID IID_ICertEncodeStringArray2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICertEncodeStringArray, Decode)
         HRESULT ( STDMETHODCALLTYPE *Decode )( 
             __RPC__in ICertEncodeStringArray2 * This,
             /* [in] */ __RPC__in const BSTR strBinary);
         
+        DECLSPEC_XFGVIRT(ICertEncodeStringArray, GetStringType)
         HRESULT ( STDMETHODCALLTYPE *GetStringType )( 
             __RPC__in ICertEncodeStringArray2 * This,
             /* [retval][out] */ __RPC__out LONG *pStringType);
         
+        DECLSPEC_XFGVIRT(ICertEncodeStringArray, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in ICertEncodeStringArray2 * This,
             /* [retval][out] */ __RPC__out LONG *pCount);
         
+        DECLSPEC_XFGVIRT(ICertEncodeStringArray, GetValue)
         HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             __RPC__in ICertEncodeStringArray2 * This,
             /* [in] */ LONG Index,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstr);
         
+        DECLSPEC_XFGVIRT(ICertEncodeStringArray, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in ICertEncodeStringArray2 * This,
             /* [in] */ LONG Count,
             /* [in] */ LONG StringType);
         
+        DECLSPEC_XFGVIRT(ICertEncodeStringArray, SetValue)
         HRESULT ( STDMETHODCALLTYPE *SetValue )( 
             __RPC__in ICertEncodeStringArray2 * This,
             /* [in] */ LONG Index,
             /* [in] */ __RPC__in const BSTR str);
         
+        DECLSPEC_XFGVIRT(ICertEncodeStringArray, Encode)
         HRESULT ( STDMETHODCALLTYPE *Encode )( 
             __RPC__in ICertEncodeStringArray2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrBinary);
         
+        DECLSPEC_XFGVIRT(ICertEncodeStringArray2, DecodeBlob)
         HRESULT ( STDMETHODCALLTYPE *DecodeBlob )( 
             __RPC__in ICertEncodeStringArray2 * This,
             /* [in] */ __RPC__in const BSTR strEncodedData,
             /* [defaultvalue][in] */ EncodingType Encoding);
         
+        DECLSPEC_XFGVIRT(ICertEncodeStringArray2, EncodeBlob)
         HRESULT ( STDMETHODCALLTYPE *EncodeBlob )( 
             __RPC__in ICertEncodeStringArray2 * This,
             /* [defaultvalue][in] */ EncodingType Encoding,
@@ -652,28 +690,34 @@ EXTERN_C const IID IID_ICertEncodeLongArray;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICertEncodeLongArray * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICertEncodeLongArray * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICertEncodeLongArray * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICertEncodeLongArray * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICertEncodeLongArray * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICertEncodeLongArray * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -682,6 +726,7 @@ EXTERN_C const IID IID_ICertEncodeLongArray;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICertEncodeLongArray * This,
             /* [annotation][in] */ 
@@ -701,28 +746,34 @@ EXTERN_C const IID IID_ICertEncodeLongArray;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICertEncodeLongArray, Decode)
         HRESULT ( STDMETHODCALLTYPE *Decode )( 
             __RPC__in ICertEncodeLongArray * This,
             /* [in] */ __RPC__in const BSTR strBinary);
         
+        DECLSPEC_XFGVIRT(ICertEncodeLongArray, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in ICertEncodeLongArray * This,
             /* [retval][out] */ __RPC__out LONG *pCount);
         
+        DECLSPEC_XFGVIRT(ICertEncodeLongArray, GetValue)
         HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             __RPC__in ICertEncodeLongArray * This,
             /* [in] */ LONG Index,
             /* [retval][out] */ __RPC__out LONG *pValue);
         
+        DECLSPEC_XFGVIRT(ICertEncodeLongArray, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in ICertEncodeLongArray * This,
             /* [in] */ LONG Count);
         
+        DECLSPEC_XFGVIRT(ICertEncodeLongArray, SetValue)
         HRESULT ( STDMETHODCALLTYPE *SetValue )( 
             __RPC__in ICertEncodeLongArray * This,
             /* [in] */ LONG Index,
             /* [in] */ LONG Value);
         
+        DECLSPEC_XFGVIRT(ICertEncodeLongArray, Encode)
         HRESULT ( STDMETHODCALLTYPE *Encode )( 
             __RPC__in ICertEncodeLongArray * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrBinary);
@@ -824,28 +875,34 @@ EXTERN_C const IID IID_ICertEncodeLongArray2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICertEncodeLongArray2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICertEncodeLongArray2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICertEncodeLongArray2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICertEncodeLongArray2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICertEncodeLongArray2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICertEncodeLongArray2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -854,6 +911,7 @@ EXTERN_C const IID IID_ICertEncodeLongArray2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICertEncodeLongArray2 * This,
             /* [annotation][in] */ 
@@ -873,37 +931,45 @@ EXTERN_C const IID IID_ICertEncodeLongArray2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICertEncodeLongArray, Decode)
         HRESULT ( STDMETHODCALLTYPE *Decode )( 
             __RPC__in ICertEncodeLongArray2 * This,
             /* [in] */ __RPC__in const BSTR strBinary);
         
+        DECLSPEC_XFGVIRT(ICertEncodeLongArray, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in ICertEncodeLongArray2 * This,
             /* [retval][out] */ __RPC__out LONG *pCount);
         
+        DECLSPEC_XFGVIRT(ICertEncodeLongArray, GetValue)
         HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             __RPC__in ICertEncodeLongArray2 * This,
             /* [in] */ LONG Index,
             /* [retval][out] */ __RPC__out LONG *pValue);
         
+        DECLSPEC_XFGVIRT(ICertEncodeLongArray, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in ICertEncodeLongArray2 * This,
             /* [in] */ LONG Count);
         
+        DECLSPEC_XFGVIRT(ICertEncodeLongArray, SetValue)
         HRESULT ( STDMETHODCALLTYPE *SetValue )( 
             __RPC__in ICertEncodeLongArray2 * This,
             /* [in] */ LONG Index,
             /* [in] */ LONG Value);
         
+        DECLSPEC_XFGVIRT(ICertEncodeLongArray, Encode)
         HRESULT ( STDMETHODCALLTYPE *Encode )( 
             __RPC__in ICertEncodeLongArray2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrBinary);
         
+        DECLSPEC_XFGVIRT(ICertEncodeLongArray2, DecodeBlob)
         HRESULT ( STDMETHODCALLTYPE *DecodeBlob )( 
             __RPC__in ICertEncodeLongArray2 * This,
             /* [in] */ __RPC__in const BSTR strEncodedData,
             /* [defaultvalue][in] */ EncodingType Encoding);
         
+        DECLSPEC_XFGVIRT(ICertEncodeLongArray2, EncodeBlob)
         HRESULT ( STDMETHODCALLTYPE *EncodeBlob )( 
             __RPC__in ICertEncodeLongArray2 * This,
             /* [defaultvalue][in] */ EncodingType Encoding,
@@ -1025,28 +1091,34 @@ EXTERN_C const IID IID_ICertEncodeDateArray;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICertEncodeDateArray * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICertEncodeDateArray * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICertEncodeDateArray * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICertEncodeDateArray * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICertEncodeDateArray * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICertEncodeDateArray * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1055,6 +1127,7 @@ EXTERN_C const IID IID_ICertEncodeDateArray;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICertEncodeDateArray * This,
             /* [annotation][in] */ 
@@ -1074,28 +1147,34 @@ EXTERN_C const IID IID_ICertEncodeDateArray;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICertEncodeDateArray, Decode)
         HRESULT ( STDMETHODCALLTYPE *Decode )( 
             __RPC__in ICertEncodeDateArray * This,
             /* [in] */ __RPC__in const BSTR strBinary);
         
+        DECLSPEC_XFGVIRT(ICertEncodeDateArray, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in ICertEncodeDateArray * This,
             /* [retval][out] */ __RPC__out LONG *pCount);
         
+        DECLSPEC_XFGVIRT(ICertEncodeDateArray, GetValue)
         HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             __RPC__in ICertEncodeDateArray * This,
             /* [in] */ LONG Index,
             /* [retval][out] */ __RPC__out DATE *pValue);
         
+        DECLSPEC_XFGVIRT(ICertEncodeDateArray, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in ICertEncodeDateArray * This,
             /* [in] */ LONG Count);
         
+        DECLSPEC_XFGVIRT(ICertEncodeDateArray, SetValue)
         HRESULT ( STDMETHODCALLTYPE *SetValue )( 
             __RPC__in ICertEncodeDateArray * This,
             /* [in] */ LONG Index,
             /* [in] */ DATE Value);
         
+        DECLSPEC_XFGVIRT(ICertEncodeDateArray, Encode)
         HRESULT ( STDMETHODCALLTYPE *Encode )( 
             __RPC__in ICertEncodeDateArray * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrBinary);
@@ -1197,28 +1276,34 @@ EXTERN_C const IID IID_ICertEncodeDateArray2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICertEncodeDateArray2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICertEncodeDateArray2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICertEncodeDateArray2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICertEncodeDateArray2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICertEncodeDateArray2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICertEncodeDateArray2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1227,6 +1312,7 @@ EXTERN_C const IID IID_ICertEncodeDateArray2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICertEncodeDateArray2 * This,
             /* [annotation][in] */ 
@@ -1246,37 +1332,45 @@ EXTERN_C const IID IID_ICertEncodeDateArray2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICertEncodeDateArray, Decode)
         HRESULT ( STDMETHODCALLTYPE *Decode )( 
             __RPC__in ICertEncodeDateArray2 * This,
             /* [in] */ __RPC__in const BSTR strBinary);
         
+        DECLSPEC_XFGVIRT(ICertEncodeDateArray, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in ICertEncodeDateArray2 * This,
             /* [retval][out] */ __RPC__out LONG *pCount);
         
+        DECLSPEC_XFGVIRT(ICertEncodeDateArray, GetValue)
         HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             __RPC__in ICertEncodeDateArray2 * This,
             /* [in] */ LONG Index,
             /* [retval][out] */ __RPC__out DATE *pValue);
         
+        DECLSPEC_XFGVIRT(ICertEncodeDateArray, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in ICertEncodeDateArray2 * This,
             /* [in] */ LONG Count);
         
+        DECLSPEC_XFGVIRT(ICertEncodeDateArray, SetValue)
         HRESULT ( STDMETHODCALLTYPE *SetValue )( 
             __RPC__in ICertEncodeDateArray2 * This,
             /* [in] */ LONG Index,
             /* [in] */ DATE Value);
         
+        DECLSPEC_XFGVIRT(ICertEncodeDateArray, Encode)
         HRESULT ( STDMETHODCALLTYPE *Encode )( 
             __RPC__in ICertEncodeDateArray2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrBinary);
         
+        DECLSPEC_XFGVIRT(ICertEncodeDateArray2, DecodeBlob)
         HRESULT ( STDMETHODCALLTYPE *DecodeBlob )( 
             __RPC__in ICertEncodeDateArray2 * This,
             /* [in] */ __RPC__in const BSTR strEncodedData,
             /* [defaultvalue][in] */ EncodingType Encoding);
         
+        DECLSPEC_XFGVIRT(ICertEncodeDateArray2, EncodeBlob)
         HRESULT ( STDMETHODCALLTYPE *EncodeBlob )( 
             __RPC__in ICertEncodeDateArray2 * This,
             /* [defaultvalue][in] */ EncodingType Encoding,
@@ -1414,28 +1508,34 @@ EXTERN_C const IID IID_ICertEncodeCRLDistInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICertEncodeCRLDistInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICertEncodeCRLDistInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICertEncodeCRLDistInfo * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICertEncodeCRLDistInfo * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICertEncodeCRLDistInfo * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICertEncodeCRLDistInfo * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1444,6 +1544,7 @@ EXTERN_C const IID IID_ICertEncodeCRLDistInfo;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICertEncodeCRLDistInfo * This,
             /* [annotation][in] */ 
@@ -1463,40 +1564,48 @@ EXTERN_C const IID IID_ICertEncodeCRLDistInfo;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICertEncodeCRLDistInfo, Decode)
         HRESULT ( STDMETHODCALLTYPE *Decode )( 
             __RPC__in ICertEncodeCRLDistInfo * This,
             /* [in] */ __RPC__in const BSTR strBinary);
         
+        DECLSPEC_XFGVIRT(ICertEncodeCRLDistInfo, GetDistPointCount)
         HRESULT ( STDMETHODCALLTYPE *GetDistPointCount )( 
             __RPC__in ICertEncodeCRLDistInfo * This,
             /* [retval][out] */ __RPC__out LONG *pDistPointCount);
         
+        DECLSPEC_XFGVIRT(ICertEncodeCRLDistInfo, GetNameCount)
         HRESULT ( STDMETHODCALLTYPE *GetNameCount )( 
             __RPC__in ICertEncodeCRLDistInfo * This,
             /* [in] */ LONG DistPointIndex,
             /* [retval][out] */ __RPC__out LONG *pNameCount);
         
+        DECLSPEC_XFGVIRT(ICertEncodeCRLDistInfo, GetNameChoice)
         HRESULT ( STDMETHODCALLTYPE *GetNameChoice )( 
             __RPC__in ICertEncodeCRLDistInfo * This,
             /* [in] */ LONG DistPointIndex,
             /* [in] */ LONG NameIndex,
             /* [retval][out] */ __RPC__out LONG *pNameChoice);
         
+        DECLSPEC_XFGVIRT(ICertEncodeCRLDistInfo, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in ICertEncodeCRLDistInfo * This,
             /* [in] */ LONG DistPointIndex,
             /* [in] */ LONG NameIndex,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrName);
         
+        DECLSPEC_XFGVIRT(ICertEncodeCRLDistInfo, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in ICertEncodeCRLDistInfo * This,
             /* [in] */ LONG DistPointCount);
         
+        DECLSPEC_XFGVIRT(ICertEncodeCRLDistInfo, SetNameCount)
         HRESULT ( STDMETHODCALLTYPE *SetNameCount )( 
             __RPC__in ICertEncodeCRLDistInfo * This,
             /* [in] */ LONG DistPointIndex,
             /* [in] */ LONG NameCount);
         
+        DECLSPEC_XFGVIRT(ICertEncodeCRLDistInfo, SetNameEntry)
         HRESULT ( STDMETHODCALLTYPE *SetNameEntry )( 
             __RPC__in ICertEncodeCRLDistInfo * This,
             /* [in] */ LONG DistPointIndex,
@@ -1504,6 +1613,7 @@ EXTERN_C const IID IID_ICertEncodeCRLDistInfo;
             /* [in] */ LONG NameChoice,
             /* [in] */ __RPC__in const BSTR strName);
         
+        DECLSPEC_XFGVIRT(ICertEncodeCRLDistInfo, Encode)
         HRESULT ( STDMETHODCALLTYPE *Encode )( 
             __RPC__in ICertEncodeCRLDistInfo * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrBinary);
@@ -1614,28 +1724,34 @@ EXTERN_C const IID IID_ICertEncodeCRLDistInfo2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICertEncodeCRLDistInfo2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICertEncodeCRLDistInfo2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICertEncodeCRLDistInfo2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICertEncodeCRLDistInfo2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICertEncodeCRLDistInfo2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICertEncodeCRLDistInfo2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1644,6 +1760,7 @@ EXTERN_C const IID IID_ICertEncodeCRLDistInfo2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICertEncodeCRLDistInfo2 * This,
             /* [annotation][in] */ 
@@ -1663,40 +1780,48 @@ EXTERN_C const IID IID_ICertEncodeCRLDistInfo2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICertEncodeCRLDistInfo, Decode)
         HRESULT ( STDMETHODCALLTYPE *Decode )( 
             __RPC__in ICertEncodeCRLDistInfo2 * This,
             /* [in] */ __RPC__in const BSTR strBinary);
         
+        DECLSPEC_XFGVIRT(ICertEncodeCRLDistInfo, GetDistPointCount)
         HRESULT ( STDMETHODCALLTYPE *GetDistPointCount )( 
             __RPC__in ICertEncodeCRLDistInfo2 * This,
             /* [retval][out] */ __RPC__out LONG *pDistPointCount);
         
+        DECLSPEC_XFGVIRT(ICertEncodeCRLDistInfo, GetNameCount)
         HRESULT ( STDMETHODCALLTYPE *GetNameCount )( 
             __RPC__in ICertEncodeCRLDistInfo2 * This,
             /* [in] */ LONG DistPointIndex,
             /* [retval][out] */ __RPC__out LONG *pNameCount);
         
+        DECLSPEC_XFGVIRT(ICertEncodeCRLDistInfo, GetNameChoice)
         HRESULT ( STDMETHODCALLTYPE *GetNameChoice )( 
             __RPC__in ICertEncodeCRLDistInfo2 * This,
             /* [in] */ LONG DistPointIndex,
             /* [in] */ LONG NameIndex,
             /* [retval][out] */ __RPC__out LONG *pNameChoice);
         
+        DECLSPEC_XFGVIRT(ICertEncodeCRLDistInfo, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in ICertEncodeCRLDistInfo2 * This,
             /* [in] */ LONG DistPointIndex,
             /* [in] */ LONG NameIndex,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrName);
         
+        DECLSPEC_XFGVIRT(ICertEncodeCRLDistInfo, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in ICertEncodeCRLDistInfo2 * This,
             /* [in] */ LONG DistPointCount);
         
+        DECLSPEC_XFGVIRT(ICertEncodeCRLDistInfo, SetNameCount)
         HRESULT ( STDMETHODCALLTYPE *SetNameCount )( 
             __RPC__in ICertEncodeCRLDistInfo2 * This,
             /* [in] */ LONG DistPointIndex,
             /* [in] */ LONG NameCount);
         
+        DECLSPEC_XFGVIRT(ICertEncodeCRLDistInfo, SetNameEntry)
         HRESULT ( STDMETHODCALLTYPE *SetNameEntry )( 
             __RPC__in ICertEncodeCRLDistInfo2 * This,
             /* [in] */ LONG DistPointIndex,
@@ -1704,15 +1829,18 @@ EXTERN_C const IID IID_ICertEncodeCRLDistInfo2;
             /* [in] */ LONG NameChoice,
             /* [in] */ __RPC__in const BSTR strName);
         
+        DECLSPEC_XFGVIRT(ICertEncodeCRLDistInfo, Encode)
         HRESULT ( STDMETHODCALLTYPE *Encode )( 
             __RPC__in ICertEncodeCRLDistInfo2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrBinary);
         
+        DECLSPEC_XFGVIRT(ICertEncodeCRLDistInfo2, DecodeBlob)
         HRESULT ( STDMETHODCALLTYPE *DecodeBlob )( 
             __RPC__in ICertEncodeCRLDistInfo2 * This,
             /* [in] */ __RPC__in const BSTR strEncodedData,
             /* [defaultvalue][in] */ EncodingType Encoding);
         
+        DECLSPEC_XFGVIRT(ICertEncodeCRLDistInfo2, EncodeBlob)
         HRESULT ( STDMETHODCALLTYPE *EncodeBlob )( 
             __RPC__in ICertEncodeCRLDistInfo2 * This,
             /* [defaultvalue][in] */ EncodingType Encoding,
@@ -1860,28 +1988,34 @@ EXTERN_C const IID IID_ICertEncodeAltName;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICertEncodeAltName * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICertEncodeAltName * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICertEncodeAltName * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICertEncodeAltName * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICertEncodeAltName * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICertEncodeAltName * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1890,6 +2024,7 @@ EXTERN_C const IID IID_ICertEncodeAltName;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICertEncodeAltName * This,
             /* [annotation][in] */ 
@@ -1909,34 +2044,41 @@ EXTERN_C const IID IID_ICertEncodeAltName;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICertEncodeAltName, Decode)
         HRESULT ( STDMETHODCALLTYPE *Decode )( 
             __RPC__in ICertEncodeAltName * This,
             /* [in] */ __RPC__in const BSTR strBinary);
         
+        DECLSPEC_XFGVIRT(ICertEncodeAltName, GetNameCount)
         HRESULT ( STDMETHODCALLTYPE *GetNameCount )( 
             __RPC__in ICertEncodeAltName * This,
             /* [retval][out] */ __RPC__out LONG *pNameCount);
         
+        DECLSPEC_XFGVIRT(ICertEncodeAltName, GetNameChoice)
         HRESULT ( STDMETHODCALLTYPE *GetNameChoice )( 
             __RPC__in ICertEncodeAltName * This,
             /* [in] */ LONG NameIndex,
             /* [retval][out] */ __RPC__out LONG *pNameChoice);
         
+        DECLSPEC_XFGVIRT(ICertEncodeAltName, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in ICertEncodeAltName * This,
             /* [in] */ LONG NameIndex,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrName);
         
+        DECLSPEC_XFGVIRT(ICertEncodeAltName, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in ICertEncodeAltName * This,
             /* [in] */ LONG NameCount);
         
+        DECLSPEC_XFGVIRT(ICertEncodeAltName, SetNameEntry)
         HRESULT ( STDMETHODCALLTYPE *SetNameEntry )( 
             __RPC__in ICertEncodeAltName * This,
             /* [in] */ LONG NameIndex,
             /* [in] */ LONG NameChoice,
             /* [in] */ __RPC__in const BSTR strName);
         
+        DECLSPEC_XFGVIRT(ICertEncodeAltName, Encode)
         HRESULT ( STDMETHODCALLTYPE *Encode )( 
             __RPC__in ICertEncodeAltName * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrBinary);
@@ -2052,28 +2194,34 @@ EXTERN_C const IID IID_ICertEncodeAltName2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICertEncodeAltName2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICertEncodeAltName2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICertEncodeAltName2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICertEncodeAltName2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICertEncodeAltName2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICertEncodeAltName2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2082,6 +2230,7 @@ EXTERN_C const IID IID_ICertEncodeAltName2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICertEncodeAltName2 * This,
             /* [annotation][in] */ 
@@ -2101,54 +2250,65 @@ EXTERN_C const IID IID_ICertEncodeAltName2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICertEncodeAltName, Decode)
         HRESULT ( STDMETHODCALLTYPE *Decode )( 
             __RPC__in ICertEncodeAltName2 * This,
             /* [in] */ __RPC__in const BSTR strBinary);
         
+        DECLSPEC_XFGVIRT(ICertEncodeAltName, GetNameCount)
         HRESULT ( STDMETHODCALLTYPE *GetNameCount )( 
             __RPC__in ICertEncodeAltName2 * This,
             /* [retval][out] */ __RPC__out LONG *pNameCount);
         
+        DECLSPEC_XFGVIRT(ICertEncodeAltName, GetNameChoice)
         HRESULT ( STDMETHODCALLTYPE *GetNameChoice )( 
             __RPC__in ICertEncodeAltName2 * This,
             /* [in] */ LONG NameIndex,
             /* [retval][out] */ __RPC__out LONG *pNameChoice);
         
+        DECLSPEC_XFGVIRT(ICertEncodeAltName, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in ICertEncodeAltName2 * This,
             /* [in] */ LONG NameIndex,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrName);
         
+        DECLSPEC_XFGVIRT(ICertEncodeAltName, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in ICertEncodeAltName2 * This,
             /* [in] */ LONG NameCount);
         
+        DECLSPEC_XFGVIRT(ICertEncodeAltName, SetNameEntry)
         HRESULT ( STDMETHODCALLTYPE *SetNameEntry )( 
             __RPC__in ICertEncodeAltName2 * This,
             /* [in] */ LONG NameIndex,
             /* [in] */ LONG NameChoice,
             /* [in] */ __RPC__in const BSTR strName);
         
+        DECLSPEC_XFGVIRT(ICertEncodeAltName, Encode)
         HRESULT ( STDMETHODCALLTYPE *Encode )( 
             __RPC__in ICertEncodeAltName2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrBinary);
         
+        DECLSPEC_XFGVIRT(ICertEncodeAltName2, DecodeBlob)
         HRESULT ( STDMETHODCALLTYPE *DecodeBlob )( 
             __RPC__in ICertEncodeAltName2 * This,
             /* [in] */ __RPC__in const BSTR strEncodedData,
             /* [defaultvalue][in] */ EncodingType Encoding);
         
+        DECLSPEC_XFGVIRT(ICertEncodeAltName2, EncodeBlob)
         HRESULT ( STDMETHODCALLTYPE *EncodeBlob )( 
             __RPC__in ICertEncodeAltName2 * This,
             /* [defaultvalue][in] */ EncodingType Encoding,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrEncodedData);
         
+        DECLSPEC_XFGVIRT(ICertEncodeAltName2, GetNameBlob)
         HRESULT ( STDMETHODCALLTYPE *GetNameBlob )( 
             __RPC__in ICertEncodeAltName2 * This,
             /* [in] */ LONG NameIndex,
             /* [defaultvalue][in] */ EncodingType Encoding,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrName);
         
+        DECLSPEC_XFGVIRT(ICertEncodeAltName2, SetNameEntryBlob)
         HRESULT ( STDMETHODCALLTYPE *SetNameEntryBlob )( 
             __RPC__in ICertEncodeAltName2 * This,
             /* [in] */ LONG NameIndex,
@@ -2275,28 +2435,34 @@ EXTERN_C const IID IID_ICertEncodeBitString;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICertEncodeBitString * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICertEncodeBitString * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICertEncodeBitString * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICertEncodeBitString * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICertEncodeBitString * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICertEncodeBitString * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2305,6 +2471,7 @@ EXTERN_C const IID IID_ICertEncodeBitString;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICertEncodeBitString * This,
             /* [annotation][in] */ 
@@ -2324,18 +2491,22 @@ EXTERN_C const IID IID_ICertEncodeBitString;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICertEncodeBitString, Decode)
         HRESULT ( STDMETHODCALLTYPE *Decode )( 
             __RPC__in ICertEncodeBitString * This,
             /* [in] */ __RPC__in const BSTR strBinary);
         
+        DECLSPEC_XFGVIRT(ICertEncodeBitString, GetBitCount)
         HRESULT ( STDMETHODCALLTYPE *GetBitCount )( 
             __RPC__in ICertEncodeBitString * This,
             /* [retval][out] */ __RPC__out LONG *pBitCount);
         
+        DECLSPEC_XFGVIRT(ICertEncodeBitString, GetBitString)
         HRESULT ( STDMETHODCALLTYPE *GetBitString )( 
             __RPC__in ICertEncodeBitString * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrBitString);
         
+        DECLSPEC_XFGVIRT(ICertEncodeBitString, Encode)
         HRESULT ( STDMETHODCALLTYPE *Encode )( 
             __RPC__in ICertEncodeBitString * This,
             /* [in] */ LONG BitCount,
@@ -2440,28 +2611,34 @@ EXTERN_C const IID IID_ICertEncodeBitString2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICertEncodeBitString2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICertEncodeBitString2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICertEncodeBitString2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICertEncodeBitString2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICertEncodeBitString2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICertEncodeBitString2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2470,6 +2647,7 @@ EXTERN_C const IID IID_ICertEncodeBitString2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICertEncodeBitString2 * This,
             /* [annotation][in] */ 
@@ -2489,29 +2667,35 @@ EXTERN_C const IID IID_ICertEncodeBitString2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICertEncodeBitString, Decode)
         HRESULT ( STDMETHODCALLTYPE *Decode )( 
             __RPC__in ICertEncodeBitString2 * This,
             /* [in] */ __RPC__in const BSTR strBinary);
         
+        DECLSPEC_XFGVIRT(ICertEncodeBitString, GetBitCount)
         HRESULT ( STDMETHODCALLTYPE *GetBitCount )( 
             __RPC__in ICertEncodeBitString2 * This,
             /* [retval][out] */ __RPC__out LONG *pBitCount);
         
+        DECLSPEC_XFGVIRT(ICertEncodeBitString, GetBitString)
         HRESULT ( STDMETHODCALLTYPE *GetBitString )( 
             __RPC__in ICertEncodeBitString2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrBitString);
         
+        DECLSPEC_XFGVIRT(ICertEncodeBitString, Encode)
         HRESULT ( STDMETHODCALLTYPE *Encode )( 
             __RPC__in ICertEncodeBitString2 * This,
             /* [in] */ LONG BitCount,
             /* [in] */ __RPC__in BSTR strBitString,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrBinary);
         
+        DECLSPEC_XFGVIRT(ICertEncodeBitString2, DecodeBlob)
         HRESULT ( STDMETHODCALLTYPE *DecodeBlob )( 
             __RPC__in ICertEncodeBitString2 * This,
             /* [in] */ __RPC__in const BSTR strEncodedData,
             /* [defaultvalue][in] */ EncodingType Encoding);
         
+        DECLSPEC_XFGVIRT(ICertEncodeBitString2, EncodeBlob)
         HRESULT ( STDMETHODCALLTYPE *EncodeBlob )( 
             __RPC__in ICertEncodeBitString2 * This,
             /* [in] */ LONG BitCount,
@@ -2520,6 +2704,7 @@ EXTERN_C const IID IID_ICertEncodeBitString2;
             /* [defaultvalue][in] */ EncodingType Encoding,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrEncodedData);
         
+        DECLSPEC_XFGVIRT(ICertEncodeBitString2, GetBitStringBlob)
         HRESULT ( STDMETHODCALLTYPE *GetBitStringBlob )( 
             __RPC__in ICertEncodeBitString2 * This,
             /* [defaultvalue][in] */ EncodingType Encoding,

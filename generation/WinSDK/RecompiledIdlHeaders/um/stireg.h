@@ -110,6 +110,19 @@ Revision History:
 
 DEFINE_DEVPROPKEY(DEVPKEY_WIA_DeviceType, 0x6bdd1fc6, 0x810f, 0x11d0, 0xbe, 0xc7, 0x08, 0x00, 0x2b, 0xe2, 0x09, 0x2f, 2);
 
+//
+// DEVPKEY_WIA_USDClassId
+//
+// Type: DEVPROP_TYPE_STRING
+//
+// This property specifies the CLASSID of a WIA minidriver DLL.
+// With DEVPKEY_WIA_USDClassId, a scan class monitor can create a devnode and register its interface with this property, allowing the WIA service to find the associated
+// minidriver without a kernel mode device driver and INF file.
+// Previously, a scan class monitor had to use a combination of a kernel mode device driver plus an INF file to set the device registry value USDClass in order to point
+// the WIA service to the associated minidriver DLL.
+//
+DEFINE_DEVPROPKEY(DEVPKEY_WIA_USDClassId, 0x6bdd1fc6, 0x810f, 0x11d0, 0xbe, 0xc7, 0x08, 0x00, 0x2b, 0xe2, 0x09, 0x2f, 3);
+
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
 

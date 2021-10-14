@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -255,68 +263,83 @@ EXTERN_C const IID IID_IDiscRecorder;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDiscRecorder * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDiscRecorder * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDiscRecorder * This);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder, Init)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Init )( 
             __RPC__in IDiscRecorder * This,
             /* [size_is][in] */ __RPC__in_ecount_full(nulIDSize) byte *pbyUniqueID,
             /* [in] */ ULONG nulIDSize,
             /* [in] */ ULONG nulDriveNumber);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder, GetRecorderGUID)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetRecorderGUID )( 
             __RPC__in IDiscRecorder * This,
             /* [size_is][unique][out][in] */ __RPC__inout_ecount_full_opt(ulBufferSize) byte *pbyUniqueID,
             /* [in] */ ULONG ulBufferSize,
             /* [out] */ __RPC__out ULONG *pulReturnSizeRequired);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder, GetRecorderType)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetRecorderType )( 
             __RPC__in IDiscRecorder * This,
             /* [out] */ __RPC__out long *fTypeCode);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder, GetDisplayNames)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetDisplayNames )( 
             __RPC__in IDiscRecorder * This,
             /* [unique][out][in] */ __RPC__deref_opt_inout_opt BSTR *pbstrVendorID,
             /* [unique][out][in] */ __RPC__deref_opt_inout_opt BSTR *pbstrProductID,
             /* [unique][out][in] */ __RPC__deref_opt_inout_opt BSTR *pbstrRevision);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder, GetBasePnPID)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetBasePnPID )( 
             __RPC__in IDiscRecorder * This,
             /* [out] */ __RPC__deref_out_opt BSTR *pbstrBasePnPID);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder, GetPath)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPath )( 
             __RPC__in IDiscRecorder * This,
             /* [out] */ __RPC__deref_out_opt BSTR *pbstrPath);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder, GetRecorderProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetRecorderProperties )( 
             __RPC__in IDiscRecorder * This,
             /* [out] */ __RPC__deref_out_opt IPropertyStorage **ppPropStg);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder, SetRecorderProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetRecorderProperties )( 
             __RPC__in IDiscRecorder * This,
             /* [in] */ __RPC__in_opt IPropertyStorage *pPropStg);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder, GetRecorderState)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetRecorderState )( 
             __RPC__in IDiscRecorder * This,
             /* [out] */ __RPC__out ULONG *pulDevStateFlags);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder, OpenExclusive)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *OpenExclusive )( 
             __RPC__in IDiscRecorder * This);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder, QueryMediaType)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryMediaType )( 
             __RPC__in IDiscRecorder * This,
             /* [out] */ __RPC__out long *fMediaType,
             /* [out] */ __RPC__out long *fMediaFlags);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder, QueryMediaInfo)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryMediaInfo )( 
             __RPC__in IDiscRecorder * This,
             /* [out] */ __RPC__out byte *pbSessions,
@@ -325,13 +348,16 @@ EXTERN_C const IID IID_IDiscRecorder;
             /* [out] */ __RPC__out ULONG *ulNextWritable,
             /* [out] */ __RPC__out ULONG *ulFreeBlocks);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder, Eject)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Eject )( 
             __RPC__in IDiscRecorder * This);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder, Erase)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Erase )( 
             __RPC__in IDiscRecorder * This,
             /* [in] */ boolean bFullErase);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder, Close)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Close )( 
             __RPC__in IDiscRecorder * This);
         
@@ -451,31 +477,38 @@ EXTERN_C const IID IID_IEnumDiscRecorders;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumDiscRecorders * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumDiscRecorders * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumDiscRecorders * This);
         
+        DECLSPEC_XFGVIRT(IEnumDiscRecorders, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumDiscRecorders * This,
             /* [in] */ ULONG cRecorders,
             /* [length_is][size_is][out] */ __RPC__out_ecount_part(cRecorders, *pcFetched) IDiscRecorder **ppRecorder,
             /* [out] */ __RPC__out ULONG *pcFetched);
         
+        DECLSPEC_XFGVIRT(IEnumDiscRecorders, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumDiscRecorders * This,
             /* [in] */ ULONG cRecorders);
         
+        DECLSPEC_XFGVIRT(IEnumDiscRecorders, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumDiscRecorders * This);
         
+        DECLSPEC_XFGVIRT(IEnumDiscRecorders, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumDiscRecorders * This,
             /* [out] */ __RPC__deref_out_opt IEnumDiscRecorders **ppEnum);
@@ -563,31 +596,38 @@ EXTERN_C const IID IID_IEnumDiscMasterFormats;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumDiscMasterFormats * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumDiscMasterFormats * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumDiscMasterFormats * This);
         
+        DECLSPEC_XFGVIRT(IEnumDiscMasterFormats, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumDiscMasterFormats * This,
             /* [in] */ ULONG cFormats,
             /* [length_is][size_is][out] */ __RPC__out_ecount_part(cFormats, *pcFetched) LPIID lpiidFormatID,
             /* [out] */ __RPC__out ULONG *pcFetched);
         
+        DECLSPEC_XFGVIRT(IEnumDiscMasterFormats, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumDiscMasterFormats * This,
             /* [in] */ ULONG cFormats);
         
+        DECLSPEC_XFGVIRT(IEnumDiscMasterFormats, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumDiscMasterFormats * This);
         
+        DECLSPEC_XFGVIRT(IEnumDiscMasterFormats, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumDiscMasterFormats * This,
             /* [out] */ __RPC__deref_out_opt IEnumDiscMasterFormats **ppEnum);
@@ -686,47 +726,58 @@ EXTERN_C const IID IID_IRedbookDiscMaster;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRedbookDiscMaster * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IRedbookDiscMaster * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IRedbookDiscMaster * This);
         
+        DECLSPEC_XFGVIRT(IRedbookDiscMaster, GetTotalAudioTracks)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetTotalAudioTracks )( 
             __RPC__in IRedbookDiscMaster * This,
             /* [retval][out] */ __RPC__out long *pnTracks);
         
+        DECLSPEC_XFGVIRT(IRedbookDiscMaster, GetTotalAudioBlocks)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetTotalAudioBlocks )( 
             __RPC__in IRedbookDiscMaster * This,
             /* [retval][out] */ __RPC__out long *pnBlocks);
         
+        DECLSPEC_XFGVIRT(IRedbookDiscMaster, GetUsedAudioBlocks)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetUsedAudioBlocks )( 
             __RPC__in IRedbookDiscMaster * This,
             /* [retval][out] */ __RPC__out long *pnBlocks);
         
+        DECLSPEC_XFGVIRT(IRedbookDiscMaster, GetAvailableAudioTrackBlocks)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetAvailableAudioTrackBlocks )( 
             __RPC__in IRedbookDiscMaster * This,
             /* [retval][out] */ __RPC__out long *pnBlocks);
         
+        DECLSPEC_XFGVIRT(IRedbookDiscMaster, GetAudioBlockSize)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetAudioBlockSize )( 
             __RPC__in IRedbookDiscMaster * This,
             /* [retval][out] */ __RPC__out long *pnBlockBytes);
         
+        DECLSPEC_XFGVIRT(IRedbookDiscMaster, CreateAudioTrack)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateAudioTrack )( 
             __RPC__in IRedbookDiscMaster * This,
             /* [in] */ long nBlocks);
         
+        DECLSPEC_XFGVIRT(IRedbookDiscMaster, AddAudioTrackBlocks)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AddAudioTrackBlocks )( 
             __RPC__in IRedbookDiscMaster * This,
             /* [size_is][in] */ __RPC__in_ecount_full(cb) byte *pby,
             /* [in] */ long cb);
         
+        DECLSPEC_XFGVIRT(IRedbookDiscMaster, CloseAudioTrack)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CloseAudioTrack )( 
             __RPC__in IRedbookDiscMaster * This);
         
@@ -831,39 +882,48 @@ EXTERN_C const IID IID_IJolietDiscMaster;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IJolietDiscMaster * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IJolietDiscMaster * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IJolietDiscMaster * This);
         
+        DECLSPEC_XFGVIRT(IJolietDiscMaster, GetTotalDataBlocks)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetTotalDataBlocks )( 
             __RPC__in IJolietDiscMaster * This,
             /* [retval][out] */ __RPC__out long *pnBlocks);
         
+        DECLSPEC_XFGVIRT(IJolietDiscMaster, GetUsedDataBlocks)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetUsedDataBlocks )( 
             __RPC__in IJolietDiscMaster * This,
             /* [retval][out] */ __RPC__out long *pnBlocks);
         
+        DECLSPEC_XFGVIRT(IJolietDiscMaster, GetDataBlockSize)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetDataBlockSize )( 
             __RPC__in IJolietDiscMaster * This,
             /* [retval][out] */ __RPC__out long *pnBlockBytes);
         
+        DECLSPEC_XFGVIRT(IJolietDiscMaster, AddData)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AddData )( 
             __RPC__in IJolietDiscMaster * This,
             /* [in] */ __RPC__in_opt IStorage *pStorage,
             long lFileOverwrite);
         
+        DECLSPEC_XFGVIRT(IJolietDiscMaster, GetJolietProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetJolietProperties )( 
             __RPC__in IJolietDiscMaster * This,
             /* [out] */ __RPC__deref_out_opt IPropertyStorage **ppPropStg);
         
+        DECLSPEC_XFGVIRT(IJolietDiscMaster, SetJolietProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetJolietProperties )( 
             __RPC__in IJolietDiscMaster * This,
             /* [in] */ __RPC__in_opt IPropertyStorage *pPropStg);
@@ -973,52 +1033,64 @@ EXTERN_C const IID IID_IDiscMasterProgressEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDiscMasterProgressEvents * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDiscMasterProgressEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDiscMasterProgressEvents * This);
         
+        DECLSPEC_XFGVIRT(IDiscMasterProgressEvents, QueryCancel)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryCancel )( 
             __RPC__in IDiscMasterProgressEvents * This,
             /* [retval][out] */ __RPC__out boolean *pbCancel);
         
+        DECLSPEC_XFGVIRT(IDiscMasterProgressEvents, NotifyPnPActivity)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *NotifyPnPActivity )( 
             __RPC__in IDiscMasterProgressEvents * This);
         
+        DECLSPEC_XFGVIRT(IDiscMasterProgressEvents, NotifyAddProgress)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *NotifyAddProgress )( 
             __RPC__in IDiscMasterProgressEvents * This,
             /* [in] */ long nCompletedSteps,
             /* [in] */ long nTotalSteps);
         
+        DECLSPEC_XFGVIRT(IDiscMasterProgressEvents, NotifyBlockProgress)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *NotifyBlockProgress )( 
             __RPC__in IDiscMasterProgressEvents * This,
             /* [in] */ long nCompleted,
             /* [in] */ long nTotal);
         
+        DECLSPEC_XFGVIRT(IDiscMasterProgressEvents, NotifyTrackProgress)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *NotifyTrackProgress )( 
             __RPC__in IDiscMasterProgressEvents * This,
             /* [in] */ long nCurrentTrack,
             /* [in] */ long nTotalTracks);
         
+        DECLSPEC_XFGVIRT(IDiscMasterProgressEvents, NotifyPreparingBurn)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *NotifyPreparingBurn )( 
             __RPC__in IDiscMasterProgressEvents * This,
             /* [in] */ long nEstimatedSeconds);
         
+        DECLSPEC_XFGVIRT(IDiscMasterProgressEvents, NotifyClosingDisc)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *NotifyClosingDisc )( 
             __RPC__in IDiscMasterProgressEvents * This,
             /* [in] */ long nEstimatedSeconds);
         
+        DECLSPEC_XFGVIRT(IDiscMasterProgressEvents, NotifyBurnComplete)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *NotifyBurnComplete )( 
             __RPC__in IDiscMasterProgressEvents * This,
             /* [in] */ HRESULT status);
         
+        DECLSPEC_XFGVIRT(IDiscMasterProgressEvents, NotifyEraseComplete)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *NotifyEraseComplete )( 
             __RPC__in IDiscMasterProgressEvents * This,
             /* [in] */ HRESULT status);
@@ -1144,63 +1216,78 @@ EXTERN_C const IID IID_IDiscMaster;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDiscMaster * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDiscMaster * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDiscMaster * This);
         
+        DECLSPEC_XFGVIRT(IDiscMaster, Open)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Open )( 
             __RPC__in IDiscMaster * This);
         
+        DECLSPEC_XFGVIRT(IDiscMaster, EnumDiscMasterFormats)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *EnumDiscMasterFormats )( 
             __RPC__in IDiscMaster * This,
             /* [out] */ __RPC__deref_out_opt IEnumDiscMasterFormats **ppEnum);
         
+        DECLSPEC_XFGVIRT(IDiscMaster, GetActiveDiscMasterFormat)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetActiveDiscMasterFormat )( 
             __RPC__in IDiscMaster * This,
             /* [out] */ __RPC__out LPIID lpiid);
         
+        DECLSPEC_XFGVIRT(IDiscMaster, SetActiveDiscMasterFormat)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetActiveDiscMasterFormat )( 
             __RPC__in IDiscMaster * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [iid_is][out] */ __RPC__deref_out_opt void **ppUnk);
         
+        DECLSPEC_XFGVIRT(IDiscMaster, EnumDiscRecorders)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *EnumDiscRecorders )( 
             __RPC__in IDiscMaster * This,
             /* [out] */ __RPC__deref_out_opt IEnumDiscRecorders **ppEnum);
         
+        DECLSPEC_XFGVIRT(IDiscMaster, GetActiveDiscRecorder)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetActiveDiscRecorder )( 
             __RPC__in IDiscMaster * This,
             /* [out] */ __RPC__deref_out_opt IDiscRecorder **ppRecorder);
         
+        DECLSPEC_XFGVIRT(IDiscMaster, SetActiveDiscRecorder)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetActiveDiscRecorder )( 
             __RPC__in IDiscMaster * This,
             /* [in] */ __RPC__in_opt IDiscRecorder *pRecorder);
         
+        DECLSPEC_XFGVIRT(IDiscMaster, ClearFormatContent)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ClearFormatContent )( 
             __RPC__in IDiscMaster * This);
         
+        DECLSPEC_XFGVIRT(IDiscMaster, ProgressAdvise)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ProgressAdvise )( 
             __RPC__in IDiscMaster * This,
             /* [in] */ __RPC__in_opt IDiscMasterProgressEvents *pEvents,
             /* [retval][out] */ __RPC__out UINT_PTR *pvCookie);
         
+        DECLSPEC_XFGVIRT(IDiscMaster, ProgressUnadvise)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ProgressUnadvise )( 
             __RPC__in IDiscMaster * This,
             /* [in] */ UINT_PTR vCookie);
         
+        DECLSPEC_XFGVIRT(IDiscMaster, RecordDisc)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RecordDisc )( 
             __RPC__in IDiscMaster * This,
             /* [in] */ boolean bSimulate,
             /* [in] */ boolean bEjectAfterBurn);
         
+        DECLSPEC_XFGVIRT(IDiscMaster, Close)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Close )( 
             __RPC__in IDiscMaster * This);
         

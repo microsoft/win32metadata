@@ -1,6 +1,6 @@
 /* Header file automatically generated from winrtbase.idl */
 /*
- * File built with Microsoft(R) MIDLRT Compiler Engine Version 10.00.0229 
+ * File built with Microsoft(R) MIDLRT Compiler Engine Version 10.00.0231 
  */
 
 #pragma warning( disable: 4049 )  /* more than 64k source lines */

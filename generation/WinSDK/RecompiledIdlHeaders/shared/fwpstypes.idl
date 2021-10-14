@@ -47,7 +47,6 @@ typedef struct FWPS_ACTION0_
    FWP_ACTION_TYPE type;
    // LUID of the callout if FWP_ACTION_FLAG_CALLOUT is set in the action type.
    // Otherwise, it's ignored.
-   // This calloutId field can be used for bitmapIndex, in which case, type is set to FWP_ACTION_BITMAP_INDEX_SET
    UINT32 calloutId;
 } FWPS_ACTION0;
 
@@ -64,7 +63,10 @@ cpp_quote("#define FWPS_FILTER_FLAG_SILENT_MODE     (0x0010)")
 // (used for s2s IPsec tunnel policies) 
 // Do not initiate IPsec acquire, if packet matches a IPsec policy from a filter with this flag
 cpp_quote("#define FWPS_FILTER_FLAG_IPSEC_NO_ACQUIRE_INITIATE (0x0020)")
-
+// The flag is reserved
+cpp_quote("#define FWPS_FILTER_FLAG_RESERVED0 (0x0040)")
+// The flag is reserved
+cpp_quote("#define FWPS_FILTER_FLAG_RESERVED1 (0x0080)")
 
 typedef struct FWPM_PROVIDER_CONTEXT0_ FWPM_PROVIDER_CONTEXT0;
 

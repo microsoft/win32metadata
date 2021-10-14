@@ -8,4 +8,9 @@
 
 #include <WinHvPlatform.h>
 #include <WinHvEmulation.h>
+#include <hvsocket.h>
+#include <vmgenerationcounter.h>
+#include <hypervdevicevirtualization.h>
+#include <vmsavedstatedump.h>
+#include <vmsavedstatedumpdefs.h>
 

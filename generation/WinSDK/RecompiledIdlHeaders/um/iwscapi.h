@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -208,28 +216,34 @@ EXTERN_C const IID IID_IWscProduct;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWscProduct * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWscProduct * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWscProduct * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWscProduct * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWscProduct * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWscProduct * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -238,6 +252,7 @@ EXTERN_C const IID IID_IWscProduct;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWscProduct * This,
             /* [annotation][in] */ 
@@ -257,30 +272,37 @@ EXTERN_C const IID IID_IWscProduct;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWscProduct, get_ProductName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProductName )( 
             __RPC__in IWscProduct * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(IWscProduct, get_ProductState)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProductState )( 
             __RPC__in IWscProduct * This,
             /* [retval][out] */ __RPC__out WSC_SECURITY_PRODUCT_STATE *pVal);
         
+        DECLSPEC_XFGVIRT(IWscProduct, get_SignatureStatus)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SignatureStatus )( 
             __RPC__in IWscProduct * This,
             /* [retval][out] */ __RPC__out WSC_SECURITY_SIGNATURE_STATUS *pVal);
         
+        DECLSPEC_XFGVIRT(IWscProduct, get_RemediationPath)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RemediationPath )( 
             __RPC__in IWscProduct * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(IWscProduct, get_ProductStateTimestamp)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProductStateTimestamp )( 
             __RPC__in IWscProduct * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(IWscProduct, get_ProductGuid)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProductGuid )( 
             __RPC__in IWscProduct * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(IWscProduct, get_ProductIsDefault)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProductIsDefault )( 
             __RPC__in IWscProduct * This,
             /* [retval][out] */ __RPC__out BOOL *pVal);
@@ -395,28 +417,34 @@ EXTERN_C const IID IID_IWscProduct2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWscProduct2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWscProduct2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWscProduct2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWscProduct2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWscProduct2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWscProduct2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -425,6 +453,7 @@ EXTERN_C const IID IID_IWscProduct2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWscProduct2 * This,
             /* [annotation][in] */ 
@@ -444,54 +473,67 @@ EXTERN_C const IID IID_IWscProduct2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWscProduct, get_ProductName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProductName )( 
             __RPC__in IWscProduct2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(IWscProduct, get_ProductState)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProductState )( 
             __RPC__in IWscProduct2 * This,
             /* [retval][out] */ __RPC__out WSC_SECURITY_PRODUCT_STATE *pVal);
         
+        DECLSPEC_XFGVIRT(IWscProduct, get_SignatureStatus)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SignatureStatus )( 
             __RPC__in IWscProduct2 * This,
             /* [retval][out] */ __RPC__out WSC_SECURITY_SIGNATURE_STATUS *pVal);
         
+        DECLSPEC_XFGVIRT(IWscProduct, get_RemediationPath)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RemediationPath )( 
             __RPC__in IWscProduct2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(IWscProduct, get_ProductStateTimestamp)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProductStateTimestamp )( 
             __RPC__in IWscProduct2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(IWscProduct, get_ProductGuid)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProductGuid )( 
             __RPC__in IWscProduct2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(IWscProduct, get_ProductIsDefault)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProductIsDefault )( 
             __RPC__in IWscProduct2 * This,
             /* [retval][out] */ __RPC__out BOOL *pVal);
         
+        DECLSPEC_XFGVIRT(IWscProduct2, get_AntivirusScanSubstatus)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AntivirusScanSubstatus )( 
             __RPC__in IWscProduct2 * This,
             /* [retval][out] */ __RPC__out WSC_SECURITY_PRODUCT_SUBSTATUS *peStatus);
         
+        DECLSPEC_XFGVIRT(IWscProduct2, get_AntivirusSettingsSubstatus)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AntivirusSettingsSubstatus )( 
             __RPC__in IWscProduct2 * This,
             /* [retval][out] */ __RPC__out WSC_SECURITY_PRODUCT_SUBSTATUS *peStatus);
         
+        DECLSPEC_XFGVIRT(IWscProduct2, get_AntivirusProtectionUpdateSubstatus)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AntivirusProtectionUpdateSubstatus )( 
             __RPC__in IWscProduct2 * This,
             /* [retval][out] */ __RPC__out WSC_SECURITY_PRODUCT_SUBSTATUS *peStatus);
         
+        DECLSPEC_XFGVIRT(IWscProduct2, get_FirewallDomainProfileSubstatus)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FirewallDomainProfileSubstatus )( 
             __RPC__in IWscProduct2 * This,
             /* [retval][out] */ __RPC__out WSC_SECURITY_PRODUCT_SUBSTATUS *peStatus);
         
+        DECLSPEC_XFGVIRT(IWscProduct2, get_FirewallPrivateProfileSubstatus)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FirewallPrivateProfileSubstatus )( 
             __RPC__in IWscProduct2 * This,
             /* [retval][out] */ __RPC__out WSC_SECURITY_PRODUCT_SUBSTATUS *peStatus);
         
+        DECLSPEC_XFGVIRT(IWscProduct2, get_FirewallPublicProfileSubstatus)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FirewallPublicProfileSubstatus )( 
             __RPC__in IWscProduct2 * This,
             /* [retval][out] */ __RPC__out WSC_SECURITY_PRODUCT_SUBSTATUS *peStatus);
@@ -610,28 +652,34 @@ EXTERN_C const IID IID_IWscProduct3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWscProduct3 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWscProduct3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWscProduct3 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWscProduct3 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWscProduct3 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWscProduct3 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -640,6 +688,7 @@ EXTERN_C const IID IID_IWscProduct3;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWscProduct3 * This,
             /* [annotation][in] */ 
@@ -659,58 +708,72 @@ EXTERN_C const IID IID_IWscProduct3;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWscProduct, get_ProductName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProductName )( 
             __RPC__in IWscProduct3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(IWscProduct, get_ProductState)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProductState )( 
             __RPC__in IWscProduct3 * This,
             /* [retval][out] */ __RPC__out WSC_SECURITY_PRODUCT_STATE *pVal);
         
+        DECLSPEC_XFGVIRT(IWscProduct, get_SignatureStatus)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SignatureStatus )( 
             __RPC__in IWscProduct3 * This,
             /* [retval][out] */ __RPC__out WSC_SECURITY_SIGNATURE_STATUS *pVal);
         
+        DECLSPEC_XFGVIRT(IWscProduct, get_RemediationPath)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RemediationPath )( 
             __RPC__in IWscProduct3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(IWscProduct, get_ProductStateTimestamp)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProductStateTimestamp )( 
             __RPC__in IWscProduct3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(IWscProduct, get_ProductGuid)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProductGuid )( 
             __RPC__in IWscProduct3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(IWscProduct, get_ProductIsDefault)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProductIsDefault )( 
             __RPC__in IWscProduct3 * This,
             /* [retval][out] */ __RPC__out BOOL *pVal);
         
+        DECLSPEC_XFGVIRT(IWscProduct2, get_AntivirusScanSubstatus)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AntivirusScanSubstatus )( 
             __RPC__in IWscProduct3 * This,
             /* [retval][out] */ __RPC__out WSC_SECURITY_PRODUCT_SUBSTATUS *peStatus);
         
+        DECLSPEC_XFGVIRT(IWscProduct2, get_AntivirusSettingsSubstatus)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AntivirusSettingsSubstatus )( 
             __RPC__in IWscProduct3 * This,
             /* [retval][out] */ __RPC__out WSC_SECURITY_PRODUCT_SUBSTATUS *peStatus);
         
+        DECLSPEC_XFGVIRT(IWscProduct2, get_AntivirusProtectionUpdateSubstatus)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AntivirusProtectionUpdateSubstatus )( 
             __RPC__in IWscProduct3 * This,
             /* [retval][out] */ __RPC__out WSC_SECURITY_PRODUCT_SUBSTATUS *peStatus);
         
+        DECLSPEC_XFGVIRT(IWscProduct2, get_FirewallDomainProfileSubstatus)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FirewallDomainProfileSubstatus )( 
             __RPC__in IWscProduct3 * This,
             /* [retval][out] */ __RPC__out WSC_SECURITY_PRODUCT_SUBSTATUS *peStatus);
         
+        DECLSPEC_XFGVIRT(IWscProduct2, get_FirewallPrivateProfileSubstatus)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FirewallPrivateProfileSubstatus )( 
             __RPC__in IWscProduct3 * This,
             /* [retval][out] */ __RPC__out WSC_SECURITY_PRODUCT_SUBSTATUS *peStatus);
         
+        DECLSPEC_XFGVIRT(IWscProduct2, get_FirewallPublicProfileSubstatus)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FirewallPublicProfileSubstatus )( 
             __RPC__in IWscProduct3 * This,
             /* [retval][out] */ __RPC__out WSC_SECURITY_PRODUCT_SUBSTATUS *peStatus);
         
+        DECLSPEC_XFGVIRT(IWscProduct3, get_AntivirusDaysUntilExpired)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AntivirusDaysUntilExpired )( 
             __RPC__in IWscProduct3 * This,
             /* [retval][out] */ __RPC__out DWORD *pdwDays);
@@ -840,28 +903,34 @@ EXTERN_C const IID IID_IWSCProductList;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWSCProductList * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWSCProductList * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWSCProductList * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWSCProductList * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWSCProductList * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWSCProductList * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -870,6 +939,7 @@ EXTERN_C const IID IID_IWSCProductList;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWSCProductList * This,
             /* [annotation][in] */ 
@@ -889,14 +959,17 @@ EXTERN_C const IID IID_IWSCProductList;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWSCProductList, Initialize)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IWSCProductList * This,
             /* [in] */ ULONG provider);
         
+        DECLSPEC_XFGVIRT(IWSCProductList, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IWSCProductList * This,
             /* [retval][out] */ __RPC__out LONG *pVal);
         
+        DECLSPEC_XFGVIRT(IWSCProductList, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IWSCProductList * This,
             /* [in] */ ULONG index,
@@ -986,28 +1059,34 @@ EXTERN_C const IID IID_IWSCDefaultProduct;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWSCDefaultProduct * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWSCDefaultProduct * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWSCDefaultProduct * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWSCDefaultProduct * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWSCDefaultProduct * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWSCDefaultProduct * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1016,6 +1095,7 @@ EXTERN_C const IID IID_IWSCDefaultProduct;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWSCDefaultProduct * This,
             /* [annotation][in] */ 
@@ -1035,6 +1115,7 @@ EXTERN_C const IID IID_IWSCDefaultProduct;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWSCDefaultProduct, SetDefaultProduct)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetDefaultProduct )( 
             __RPC__in IWSCDefaultProduct * This,
             /* [in] */ SECURITY_PRODUCT_TYPE eType,

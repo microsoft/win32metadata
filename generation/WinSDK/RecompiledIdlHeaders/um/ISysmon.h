@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -31,6 +31,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -426,63 +434,78 @@ DEFINE_GUID(IID_ICounterItem,0x771A9520,0xEE28,0x11ce,0x94,0x1E,0x00,0x80,0x29,0
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICounterItem * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICounterItem * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICounterItem * This);
         
+        DECLSPEC_XFGVIRT(ICounterItem, get_Value)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
             __RPC__in ICounterItem * This,
             /* [retval][out] */ __RPC__out double *pdblValue);
         
+        DECLSPEC_XFGVIRT(ICounterItem, put_Color)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Color )( 
             __RPC__in ICounterItem * This,
             /* [in] */ OLE_COLOR Color);
         
+        DECLSPEC_XFGVIRT(ICounterItem, get_Color)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Color )( 
             __RPC__in ICounterItem * This,
             /* [retval][out] */ __RPC__out OLE_COLOR *pColor);
         
+        DECLSPEC_XFGVIRT(ICounterItem, put_Width)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Width )( 
             __RPC__in ICounterItem * This,
             /* [in] */ INT iWidth);
         
+        DECLSPEC_XFGVIRT(ICounterItem, get_Width)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Width )( 
             __RPC__in ICounterItem * This,
             /* [retval][out] */ __RPC__out INT *piValue);
         
+        DECLSPEC_XFGVIRT(ICounterItem, put_LineStyle)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_LineStyle )( 
             __RPC__in ICounterItem * This,
             /* [in] */ INT iLineStyle);
         
+        DECLSPEC_XFGVIRT(ICounterItem, get_LineStyle)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LineStyle )( 
             __RPC__in ICounterItem * This,
             /* [retval][out] */ __RPC__out INT *piValue);
         
+        DECLSPEC_XFGVIRT(ICounterItem, put_ScaleFactor)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ScaleFactor )( 
             __RPC__in ICounterItem * This,
             /* [in] */ INT iScale);
         
+        DECLSPEC_XFGVIRT(ICounterItem, get_ScaleFactor)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ScaleFactor )( 
             __RPC__in ICounterItem * This,
             /* [retval][out] */ __RPC__out INT *piValue);
         
+        DECLSPEC_XFGVIRT(ICounterItem, get_Path)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Path )( 
             __RPC__in ICounterItem * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrValue);
         
+        DECLSPEC_XFGVIRT(ICounterItem, GetValue)
         HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             __RPC__in ICounterItem * This,
             /* [out] */ __RPC__out double *Value,
             /* [out] */ __RPC__out long *Status);
         
+        DECLSPEC_XFGVIRT(ICounterItem, GetStatistics)
         HRESULT ( STDMETHODCALLTYPE *GetStatistics )( 
             __RPC__in ICounterItem * This,
             /* [out] */ __RPC__out double *Max,
@@ -601,63 +624,78 @@ DEFINE_GUID(IID_ICounterItem2,0xeefcd4e1,0xea1c,0x4435,0xb7,0xf4,0xe3,0x41,0xba,
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICounterItem2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICounterItem2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICounterItem2 * This);
         
+        DECLSPEC_XFGVIRT(ICounterItem, get_Value)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
             __RPC__in ICounterItem2 * This,
             /* [retval][out] */ __RPC__out double *pdblValue);
         
+        DECLSPEC_XFGVIRT(ICounterItem, put_Color)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Color )( 
             __RPC__in ICounterItem2 * This,
             /* [in] */ OLE_COLOR Color);
         
+        DECLSPEC_XFGVIRT(ICounterItem, get_Color)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Color )( 
             __RPC__in ICounterItem2 * This,
             /* [retval][out] */ __RPC__out OLE_COLOR *pColor);
         
+        DECLSPEC_XFGVIRT(ICounterItem, put_Width)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Width )( 
             __RPC__in ICounterItem2 * This,
             /* [in] */ INT iWidth);
         
+        DECLSPEC_XFGVIRT(ICounterItem, get_Width)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Width )( 
             __RPC__in ICounterItem2 * This,
             /* [retval][out] */ __RPC__out INT *piValue);
         
+        DECLSPEC_XFGVIRT(ICounterItem, put_LineStyle)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_LineStyle )( 
             __RPC__in ICounterItem2 * This,
             /* [in] */ INT iLineStyle);
         
+        DECLSPEC_XFGVIRT(ICounterItem, get_LineStyle)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LineStyle )( 
             __RPC__in ICounterItem2 * This,
             /* [retval][out] */ __RPC__out INT *piValue);
         
+        DECLSPEC_XFGVIRT(ICounterItem, put_ScaleFactor)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ScaleFactor )( 
             __RPC__in ICounterItem2 * This,
             /* [in] */ INT iScale);
         
+        DECLSPEC_XFGVIRT(ICounterItem, get_ScaleFactor)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ScaleFactor )( 
             __RPC__in ICounterItem2 * This,
             /* [retval][out] */ __RPC__out INT *piValue);
         
+        DECLSPEC_XFGVIRT(ICounterItem, get_Path)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Path )( 
             __RPC__in ICounterItem2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrValue);
         
+        DECLSPEC_XFGVIRT(ICounterItem, GetValue)
         HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             __RPC__in ICounterItem2 * This,
             /* [out] */ __RPC__out double *Value,
             /* [out] */ __RPC__out long *Status);
         
+        DECLSPEC_XFGVIRT(ICounterItem, GetStatistics)
         HRESULT ( STDMETHODCALLTYPE *GetStatistics )( 
             __RPC__in ICounterItem2 * This,
             /* [out] */ __RPC__out double *Max,
@@ -665,22 +703,27 @@ DEFINE_GUID(IID_ICounterItem2,0xeefcd4e1,0xea1c,0x4435,0xb7,0xf4,0xe3,0x41,0xba,
             /* [out] */ __RPC__out double *Avg,
             /* [out] */ __RPC__out long *Status);
         
+        DECLSPEC_XFGVIRT(ICounterItem2, put_Selected)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Selected )( 
             __RPC__in ICounterItem2 * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(ICounterItem2, get_Selected)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Selected )( 
             __RPC__in ICounterItem2 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(ICounterItem2, put_Visible)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Visible )( 
             __RPC__in ICounterItem2 * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(ICounterItem2, get_Visible)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Visible )( 
             __RPC__in ICounterItem2 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(ICounterItem2, GetDataAt)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetDataAt )( 
             __RPC__in ICounterItem2 * This,
             /* [in] */ INT iIndex,
@@ -854,63 +897,78 @@ DEFINE_GUID(IID__ICounterItemUnion,0xde1a6b74,0x9182,0x4c41,0x8e,0x2c,0x24,0xc2,
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _ICounterItemUnion * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in _ICounterItemUnion * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in _ICounterItemUnion * This);
         
+        DECLSPEC_XFGVIRT(_ICounterItemUnion, get_Value)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
             __RPC__in _ICounterItemUnion * This,
             /* [retval][out] */ __RPC__out double *pdblValue);
         
+        DECLSPEC_XFGVIRT(_ICounterItemUnion, put_Color)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Color )( 
             __RPC__in _ICounterItemUnion * This,
             /* [in] */ OLE_COLOR Color);
         
+        DECLSPEC_XFGVIRT(_ICounterItemUnion, get_Color)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Color )( 
             __RPC__in _ICounterItemUnion * This,
             /* [retval][out] */ __RPC__out OLE_COLOR *pColor);
         
+        DECLSPEC_XFGVIRT(_ICounterItemUnion, put_Width)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Width )( 
             __RPC__in _ICounterItemUnion * This,
             /* [in] */ INT iWidth);
         
+        DECLSPEC_XFGVIRT(_ICounterItemUnion, get_Width)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Width )( 
             __RPC__in _ICounterItemUnion * This,
             /* [retval][out] */ __RPC__out INT *piValue);
         
+        DECLSPEC_XFGVIRT(_ICounterItemUnion, put_LineStyle)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_LineStyle )( 
             __RPC__in _ICounterItemUnion * This,
             /* [in] */ INT iLineStyle);
         
+        DECLSPEC_XFGVIRT(_ICounterItemUnion, get_LineStyle)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LineStyle )( 
             __RPC__in _ICounterItemUnion * This,
             /* [retval][out] */ __RPC__out INT *piValue);
         
+        DECLSPEC_XFGVIRT(_ICounterItemUnion, put_ScaleFactor)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ScaleFactor )( 
             __RPC__in _ICounterItemUnion * This,
             /* [in] */ INT iScale);
         
+        DECLSPEC_XFGVIRT(_ICounterItemUnion, get_ScaleFactor)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ScaleFactor )( 
             __RPC__in _ICounterItemUnion * This,
             /* [retval][out] */ __RPC__out INT *piValue);
         
+        DECLSPEC_XFGVIRT(_ICounterItemUnion, get_Path)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Path )( 
             __RPC__in _ICounterItemUnion * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrValue);
         
+        DECLSPEC_XFGVIRT(_ICounterItemUnion, GetValue)
         HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             __RPC__in _ICounterItemUnion * This,
             /* [out] */ __RPC__out double *Value,
             /* [out] */ __RPC__out long *Status);
         
+        DECLSPEC_XFGVIRT(_ICounterItemUnion, GetStatistics)
         HRESULT ( STDMETHODCALLTYPE *GetStatistics )( 
             __RPC__in _ICounterItemUnion * This,
             /* [out] */ __RPC__out double *Max,
@@ -918,22 +976,27 @@ DEFINE_GUID(IID__ICounterItemUnion,0xde1a6b74,0x9182,0x4c41,0x8e,0x2c,0x24,0xc2,
             /* [out] */ __RPC__out double *Avg,
             /* [out] */ __RPC__out long *Status);
         
+        DECLSPEC_XFGVIRT(_ICounterItemUnion, put_Selected)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Selected )( 
             __RPC__in _ICounterItemUnion * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(_ICounterItemUnion, get_Selected)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Selected )( 
             __RPC__in _ICounterItemUnion * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(_ICounterItemUnion, put_Visible)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Visible )( 
             __RPC__in _ICounterItemUnion * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(_ICounterItemUnion, get_Visible)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Visible )( 
             __RPC__in _ICounterItemUnion * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(_ICounterItemUnion, GetDataAt)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetDataAt )( 
             __RPC__in _ICounterItemUnion * This,
             /* [in] */ INT iIndex,
@@ -1047,28 +1110,34 @@ DEFINE_GUID(DIID_DICounterItem,0xC08C4FF2,0x0E2E,0x11cf,0x94,0x2C,0x00,0x80,0x29
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in DICounterItem * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in DICounterItem * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in DICounterItem * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in DICounterItem * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in DICounterItem * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in DICounterItem * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1077,6 +1146,7 @@ DEFINE_GUID(DIID_DICounterItem,0xC08C4FF2,0x0E2E,0x11cf,0x94,0x2C,0x00,0x80,0x29
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             DICounterItem * This,
             /* [annotation][in] */ 
@@ -1181,28 +1251,34 @@ DEFINE_GUID(IID_ICounters,0x79167962,0x28FC,0x11cf,0x94,0x2F,0x00,0x80,0x29,0x00
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICounters * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICounters * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICounters * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICounters * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICounters * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICounters * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1211,6 +1287,7 @@ DEFINE_GUID(IID_ICounters,0x79167962,0x28FC,0x11cf,0x94,0x2F,0x00,0x80,0x29,0x00
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICounters * This,
             /* [annotation][in] */ 
@@ -1230,24 +1307,29 @@ DEFINE_GUID(IID_ICounters,0x79167962,0x28FC,0x11cf,0x94,0x2F,0x00,0x80,0x29,0x00
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICounters, get_Count)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ICounters * This,
             /* [retval][out] */ __RPC__out long *pLong);
         
+        DECLSPEC_XFGVIRT(ICounters, get__NewEnum)
         /* [id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ICounters * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppIunk);
         
+        DECLSPEC_XFGVIRT(ICounters, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ICounters * This,
             /* [in] */ VARIANT index,
             /* [retval][out] */ __RPC__deref_out_opt DICounterItem	**ppI);
         
+        DECLSPEC_XFGVIRT(ICounters, Add)
         HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in ICounters * This,
             /* [in] */ __RPC__in BSTR pathname,
             /* [retval][out] */ __RPC__deref_out_opt DICounterItem	**ppI);
         
+        DECLSPEC_XFGVIRT(ICounters, Remove)
         HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in ICounters * This,
             /* [in] */ VARIANT index);
@@ -1341,18 +1423,22 @@ DEFINE_GUID(IID_ILogFileItem,0xD6B518DD,0x05C7,0x418a,0x89,0xE6,0x4F,0x9C,0xE8,0
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ILogFileItem * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ILogFileItem * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ILogFileItem * This);
         
+        DECLSPEC_XFGVIRT(ILogFileItem, get_Path)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Path )( 
             __RPC__in ILogFileItem * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrValue);
@@ -1416,28 +1502,34 @@ DEFINE_GUID(DIID_DILogFileItem,0x8D093FFC,0xF777,0x4917,0x82,0xD1,0x83,0x3F,0xBC
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in DILogFileItem * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in DILogFileItem * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in DILogFileItem * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in DILogFileItem * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in DILogFileItem * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in DILogFileItem * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1446,6 +1538,7 @@ DEFINE_GUID(DIID_DILogFileItem,0x8D093FFC,0xF777,0x4917,0x82,0xD1,0x83,0x3F,0xBC
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             DILogFileItem * This,
             /* [annotation][in] */ 
@@ -1550,28 +1643,34 @@ DEFINE_GUID(IID_ILogFiles,0x6A2A97E6,0x6851,0x41ea,0x87,0xAD,0x2A,0x82,0x25,0x33
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ILogFiles * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ILogFiles * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ILogFiles * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ILogFiles * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ILogFiles * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ILogFiles * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1580,6 +1679,7 @@ DEFINE_GUID(IID_ILogFiles,0x6A2A97E6,0x6851,0x41ea,0x87,0xAD,0x2A,0x82,0x25,0x33
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ILogFiles * This,
             /* [annotation][in] */ 
@@ -1599,24 +1699,29 @@ DEFINE_GUID(IID_ILogFiles,0x6A2A97E6,0x6851,0x41ea,0x87,0xAD,0x2A,0x82,0x25,0x33
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ILogFiles, get_Count)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ILogFiles * This,
             /* [retval][out] */ __RPC__out long *pLong);
         
+        DECLSPEC_XFGVIRT(ILogFiles, get__NewEnum)
         /* [id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ILogFiles * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppIunk);
         
+        DECLSPEC_XFGVIRT(ILogFiles, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ILogFiles * This,
             /* [in] */ VARIANT index,
             /* [retval][out] */ __RPC__deref_out_opt DILogFileItem	**ppI);
         
+        DECLSPEC_XFGVIRT(ILogFiles, Add)
         HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in ILogFiles * This,
             /* [in] */ __RPC__in BSTR pathname,
             /* [retval][out] */ __RPC__deref_out_opt DILogFileItem	**ppI);
         
+        DECLSPEC_XFGVIRT(ILogFiles, Remove)
         HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in ILogFiles * This,
             /* [in] */ VARIANT index);
@@ -1930,313 +2035,392 @@ DEFINE_GUID(IID_ISystemMonitor,0x194EB241,0xC32C,0x11cf,0x93,0x98,0x00,0xAA,0x00
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISystemMonitor * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISystemMonitor * This);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_Appearance)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Appearance )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__out INT *iAppearance);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_Appearance)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Appearance )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ INT iAppearance);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_BackColor)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_BackColor )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__out OLE_COLOR *pColor);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_BackColor)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_BackColor )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ OLE_COLOR Color);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_BorderStyle)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_BorderStyle )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__out INT *iBorderStyle);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_BorderStyle)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_BorderStyle )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ INT iBorderStyle);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_ForeColor)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ForeColor )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__out OLE_COLOR *pColor);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_ForeColor)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ForeColor )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ OLE_COLOR Color);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_Font)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Font )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__deref_out_opt IFontDisp **ppFont);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, putref_Font)
         /* [propputref][id] */ HRESULT ( STDMETHODCALLTYPE *putref_Font )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ __RPC__in_opt IFontDisp *pFont);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_Counters)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Counters )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__deref_out_opt ICounters **ppICounters);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_ShowVerticalGrid)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ShowVerticalGrid )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_ShowVerticalGrid)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ShowVerticalGrid )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_ShowHorizontalGrid)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ShowHorizontalGrid )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_ShowHorizontalGrid)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ShowHorizontalGrid )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_ShowLegend)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ShowLegend )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_ShowLegend)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ShowLegend )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_ShowScaleLabels)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ShowScaleLabels )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_ShowScaleLabels)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ShowScaleLabels )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_ShowValueBar)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ShowValueBar )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_ShowValueBar)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ShowValueBar )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_MaximumScale)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MaximumScale )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ INT iValue);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_MaximumScale)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MaximumScale )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__out INT *piValue);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_MinimumScale)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MinimumScale )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ INT iValue);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_MinimumScale)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MinimumScale )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__out INT *piValue);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_UpdateInterval)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_UpdateInterval )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ FLOAT fValue);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_UpdateInterval)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_UpdateInterval )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__out FLOAT *pfValue);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_DisplayType)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DisplayType )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ DisplayTypeConstants eDisplayType);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_DisplayType)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DisplayType )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__out DisplayTypeConstants *peDisplayType);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_ManualUpdate)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ManualUpdate )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_ManualUpdate)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ManualUpdate )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_GraphTitle)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_GraphTitle )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ __RPC__in BSTR bsTitle);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_GraphTitle)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_GraphTitle )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbsTitle);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_YAxisLabel)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_YAxisLabel )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ __RPC__in BSTR bsTitle);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_YAxisLabel)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_YAxisLabel )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbsTitle);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, CollectSample)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CollectSample )( 
             __RPC__in ISystemMonitor * This);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, UpdateGraph)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *UpdateGraph )( 
             __RPC__in ISystemMonitor * This);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, BrowseCounters)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *BrowseCounters )( 
             __RPC__in ISystemMonitor * This);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, DisplayProperties)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DisplayProperties )( 
             __RPC__in ISystemMonitor * This);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, Counter)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *Counter )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ INT iIndex,
             /* [out] */ __RPC__deref_out_opt ICounterItem **ppICounter);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, AddCounter)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *AddCounter )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ __RPC__in BSTR bsPath,
             /* [out] */ __RPC__deref_out_opt ICounterItem **ppICounter);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, DeleteCounter)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteCounter )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ __RPC__in_opt ICounterItem *pCtr);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_BackColorCtl)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_BackColorCtl )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__out OLE_COLOR *pColor);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_BackColorCtl)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_BackColorCtl )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ OLE_COLOR Color);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_LogFileName)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_LogFileName )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ __RPC__in BSTR bsFileName);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_LogFileName)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LogFileName )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *bsFileName);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_LogViewStart)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_LogViewStart )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ DATE StartTime);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_LogViewStart)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LogViewStart )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__out DATE *StartTime);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_LogViewStop)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_LogViewStop )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ DATE StopTime);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_LogViewStop)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LogViewStop )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__out DATE *StopTime);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_GridColor)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_GridColor )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__out OLE_COLOR *pColor);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_GridColor)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_GridColor )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ OLE_COLOR Color);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_TimeBarColor)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_TimeBarColor )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__out OLE_COLOR *pColor);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_TimeBarColor)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_TimeBarColor )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ OLE_COLOR Color);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_Highlight)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Highlight )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_Highlight)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Highlight )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_ShowToolbar)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ShowToolbar )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_ShowToolbar)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ShowToolbar )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, Paste)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Paste )( 
             __RPC__in ISystemMonitor * This);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, Copy)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Copy )( 
             __RPC__in ISystemMonitor * This);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, Reset)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in ISystemMonitor * This);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_ReadOnly)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ReadOnly )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_ReadOnly)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ReadOnly )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_ReportValueType)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ReportValueType )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ ReportValueTypeConstants eReportValueType);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_ReportValueType)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ReportValueType )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__out ReportValueTypeConstants *peReportValueType);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_MonitorDuplicateInstances)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MonitorDuplicateInstances )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_MonitorDuplicateInstances)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MonitorDuplicateInstances )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_DisplayFilter)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DisplayFilter )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ INT iValue);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_DisplayFilter)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DisplayFilter )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__out INT *piValue);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_LogFiles)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LogFiles )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__deref_out_opt ILogFiles **ppILogFiles);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_DataSourceType)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DataSourceType )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ DataSourceTypeConstants eDataSourceType);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_DataSourceType)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DataSourceType )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__out DataSourceTypeConstants *peDataSourceType);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_SqlDsnName)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_SqlDsnName )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ __RPC__in BSTR bsSqlDsnName);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_SqlDsnName)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SqlDsnName )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *bsSqlDsnName);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_SqlLogSetName)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_SqlLogSetName )( 
             __RPC__in ISystemMonitor * This,
             /* [in] */ __RPC__in BSTR bsSqlLogSetName);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_SqlLogSetName)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SqlLogSetName )( 
             __RPC__in ISystemMonitor * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *bsSqlLogSetName);
@@ -2592,398 +2776,497 @@ DEFINE_GUID(IID_ISystemMonitor2,0x08e3206a,0x5fd2,0x4fde,0xa8,0xa5,0x8c,0xb3,0xb
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISystemMonitor2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISystemMonitor2 * This);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_Appearance)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Appearance )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__out INT *iAppearance);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_Appearance)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Appearance )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ INT iAppearance);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_BackColor)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_BackColor )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__out OLE_COLOR *pColor);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_BackColor)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_BackColor )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ OLE_COLOR Color);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_BorderStyle)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_BorderStyle )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__out INT *iBorderStyle);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_BorderStyle)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_BorderStyle )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ INT iBorderStyle);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_ForeColor)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ForeColor )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__out OLE_COLOR *pColor);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_ForeColor)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ForeColor )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ OLE_COLOR Color);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_Font)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Font )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IFontDisp **ppFont);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, putref_Font)
         /* [propputref][id] */ HRESULT ( STDMETHODCALLTYPE *putref_Font )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ __RPC__in_opt IFontDisp *pFont);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_Counters)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Counters )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__deref_out_opt ICounters **ppICounters);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_ShowVerticalGrid)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ShowVerticalGrid )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_ShowVerticalGrid)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ShowVerticalGrid )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_ShowHorizontalGrid)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ShowHorizontalGrid )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_ShowHorizontalGrid)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ShowHorizontalGrid )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_ShowLegend)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ShowLegend )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_ShowLegend)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ShowLegend )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_ShowScaleLabels)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ShowScaleLabels )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_ShowScaleLabels)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ShowScaleLabels )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_ShowValueBar)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ShowValueBar )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_ShowValueBar)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ShowValueBar )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_MaximumScale)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MaximumScale )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ INT iValue);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_MaximumScale)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MaximumScale )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__out INT *piValue);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_MinimumScale)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MinimumScale )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ INT iValue);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_MinimumScale)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MinimumScale )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__out INT *piValue);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_UpdateInterval)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_UpdateInterval )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ FLOAT fValue);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_UpdateInterval)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_UpdateInterval )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__out FLOAT *pfValue);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_DisplayType)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DisplayType )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ DisplayTypeConstants eDisplayType);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_DisplayType)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DisplayType )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__out DisplayTypeConstants *peDisplayType);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_ManualUpdate)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ManualUpdate )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_ManualUpdate)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ManualUpdate )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_GraphTitle)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_GraphTitle )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ __RPC__in BSTR bsTitle);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_GraphTitle)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_GraphTitle )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbsTitle);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_YAxisLabel)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_YAxisLabel )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ __RPC__in BSTR bsTitle);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_YAxisLabel)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_YAxisLabel )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbsTitle);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, CollectSample)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CollectSample )( 
             __RPC__in ISystemMonitor2 * This);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, UpdateGraph)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *UpdateGraph )( 
             __RPC__in ISystemMonitor2 * This);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, BrowseCounters)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *BrowseCounters )( 
             __RPC__in ISystemMonitor2 * This);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, DisplayProperties)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DisplayProperties )( 
             __RPC__in ISystemMonitor2 * This);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, Counter)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *Counter )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ INT iIndex,
             /* [out] */ __RPC__deref_out_opt ICounterItem **ppICounter);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, AddCounter)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *AddCounter )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ __RPC__in BSTR bsPath,
             /* [out] */ __RPC__deref_out_opt ICounterItem **ppICounter);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, DeleteCounter)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteCounter )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ __RPC__in_opt ICounterItem *pCtr);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_BackColorCtl)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_BackColorCtl )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__out OLE_COLOR *pColor);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_BackColorCtl)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_BackColorCtl )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ OLE_COLOR Color);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_LogFileName)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_LogFileName )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ __RPC__in BSTR bsFileName);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_LogFileName)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LogFileName )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *bsFileName);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_LogViewStart)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_LogViewStart )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ DATE StartTime);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_LogViewStart)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LogViewStart )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__out DATE *StartTime);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_LogViewStop)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_LogViewStop )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ DATE StopTime);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_LogViewStop)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LogViewStop )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__out DATE *StopTime);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_GridColor)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_GridColor )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__out OLE_COLOR *pColor);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_GridColor)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_GridColor )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ OLE_COLOR Color);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_TimeBarColor)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_TimeBarColor )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__out OLE_COLOR *pColor);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_TimeBarColor)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_TimeBarColor )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ OLE_COLOR Color);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_Highlight)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Highlight )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_Highlight)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Highlight )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_ShowToolbar)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ShowToolbar )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_ShowToolbar)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ShowToolbar )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, Paste)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Paste )( 
             __RPC__in ISystemMonitor2 * This);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, Copy)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Copy )( 
             __RPC__in ISystemMonitor2 * This);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, Reset)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in ISystemMonitor2 * This);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_ReadOnly)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ReadOnly )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_ReadOnly)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ReadOnly )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_ReportValueType)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ReportValueType )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ ReportValueTypeConstants eReportValueType);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_ReportValueType)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ReportValueType )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__out ReportValueTypeConstants *peReportValueType);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_MonitorDuplicateInstances)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MonitorDuplicateInstances )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_MonitorDuplicateInstances)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MonitorDuplicateInstances )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_DisplayFilter)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DisplayFilter )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ INT iValue);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_DisplayFilter)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DisplayFilter )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__out INT *piValue);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_LogFiles)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LogFiles )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__deref_out_opt ILogFiles **ppILogFiles);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_DataSourceType)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DataSourceType )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ DataSourceTypeConstants eDataSourceType);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_DataSourceType)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DataSourceType )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__out DataSourceTypeConstants *peDataSourceType);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_SqlDsnName)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_SqlDsnName )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ __RPC__in BSTR bsSqlDsnName);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_SqlDsnName)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SqlDsnName )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *bsSqlDsnName);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, put_SqlLogSetName)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_SqlLogSetName )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ __RPC__in BSTR bsSqlLogSetName);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor, get_SqlLogSetName)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SqlLogSetName )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *bsSqlLogSetName);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor2, put_EnableDigitGrouping)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_EnableDigitGrouping )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor2, get_EnableDigitGrouping)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_EnableDigitGrouping )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor2, put_EnableToolTips)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_EnableToolTips )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor2, get_EnableToolTips)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_EnableToolTips )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor2, put_ShowTimeAxisLabels)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ShowTimeAxisLabels )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor2, get_ShowTimeAxisLabels)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ShowTimeAxisLabels )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor2, put_ChartScroll)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ChartScroll )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ VARIANT_BOOL bScroll);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor2, get_ChartScroll)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ChartScroll )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbScroll);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor2, put_DataPointCount)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DataPointCount )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ INT iNewCount);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor2, get_DataPointCount)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DataPointCount )( 
             __RPC__in ISystemMonitor2 * This,
             /* [retval][out] */ __RPC__out INT *piDataPointCount);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor2, ScaleToFit)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ScaleToFit )( 
             __RPC__in ISystemMonitor2 * This,
             VARIANT_BOOL bSelectedCountersOnly);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor2, SaveAs)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SaveAs )( 
             __RPC__in ISystemMonitor2 * This,
             __RPC__in BSTR bstrFileName,
             SysmonFileType eSysmonFileType);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor2, Relog)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Relog )( 
             __RPC__in ISystemMonitor2 * This,
             __RPC__in BSTR bstrFileName,
             SysmonFileType eSysmonFileType,
             INT iFilter);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor2, ClearData)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ClearData )( 
             __RPC__in ISystemMonitor2 * This);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor2, get_LogSourceStartTime)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LogSourceStartTime )( 
             __RPC__in ISystemMonitor2 * This,
             /* [out] */ __RPC__out DATE *pDate);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor2, get_LogSourceStopTime)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LogSourceStopTime )( 
             __RPC__in ISystemMonitor2 * This,
             /* [out] */ __RPC__out DATE *pDate);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor2, SetLogViewRange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetLogViewRange )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ DATE StartTime,
             /* [in] */ DATE StopTime);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor2, GetLogViewRange)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetLogViewRange )( 
             __RPC__in ISystemMonitor2 * This,
             /* [out] */ __RPC__out DATE *StartTime,
             /* [out] */ __RPC__out DATE *StopTime);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor2, BatchingLock)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *BatchingLock )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ VARIANT_BOOL fLock,
             /* [in] */ SysmonBatchReason eBatchReason);
         
+        DECLSPEC_XFGVIRT(ISystemMonitor2, LoadSettings)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *LoadSettings )( 
             __RPC__in ISystemMonitor2 * This,
             /* [in] */ __RPC__in BSTR bstrSettingFileName);
@@ -3623,398 +3906,497 @@ DEFINE_GUID(IID__ISystemMonitorUnion,0xc8a77338,0x265f,0x4de5,0xaa,0x25,0xc7,0xd
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in _ISystemMonitorUnion * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in _ISystemMonitorUnion * This);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_Appearance)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Appearance )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__out INT *iAppearance);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_Appearance)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Appearance )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ INT iAppearance);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_BackColor)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_BackColor )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__out OLE_COLOR *pColor);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_BackColor)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_BackColor )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ OLE_COLOR Color);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_BorderStyle)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_BorderStyle )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__out INT *iBorderStyle);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_BorderStyle)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_BorderStyle )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ INT iBorderStyle);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_ForeColor)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ForeColor )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__out OLE_COLOR *pColor);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_ForeColor)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ForeColor )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ OLE_COLOR Color);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_Font)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Font )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__deref_out_opt IFontDisp **ppFont);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, putref_Font)
         /* [propputref][id] */ HRESULT ( STDMETHODCALLTYPE *putref_Font )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ __RPC__in_opt IFontDisp *pFont);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_Counters)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Counters )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__deref_out_opt ICounters **ppICounters);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_ShowVerticalGrid)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ShowVerticalGrid )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_ShowVerticalGrid)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ShowVerticalGrid )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_ShowHorizontalGrid)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ShowHorizontalGrid )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_ShowHorizontalGrid)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ShowHorizontalGrid )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_ShowLegend)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ShowLegend )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_ShowLegend)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ShowLegend )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_ShowScaleLabels)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ShowScaleLabels )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_ShowScaleLabels)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ShowScaleLabels )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_ShowValueBar)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ShowValueBar )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_ShowValueBar)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ShowValueBar )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_MaximumScale)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MaximumScale )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ INT iValue);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_MaximumScale)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MaximumScale )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__out INT *piValue);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_MinimumScale)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MinimumScale )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ INT iValue);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_MinimumScale)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MinimumScale )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__out INT *piValue);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_UpdateInterval)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_UpdateInterval )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ FLOAT fValue);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_UpdateInterval)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_UpdateInterval )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__out FLOAT *pfValue);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_DisplayType)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DisplayType )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ DisplayTypeConstants eDisplayType);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_DisplayType)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DisplayType )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__out DisplayTypeConstants *peDisplayType);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_ManualUpdate)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ManualUpdate )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_ManualUpdate)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ManualUpdate )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_GraphTitle)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_GraphTitle )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ __RPC__in BSTR bsTitle);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_GraphTitle)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_GraphTitle )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbsTitle);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_YAxisLabel)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_YAxisLabel )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ __RPC__in BSTR bsTitle);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_YAxisLabel)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_YAxisLabel )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbsTitle);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, CollectSample)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CollectSample )( 
             __RPC__in _ISystemMonitorUnion * This);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, UpdateGraph)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *UpdateGraph )( 
             __RPC__in _ISystemMonitorUnion * This);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, BrowseCounters)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *BrowseCounters )( 
             __RPC__in _ISystemMonitorUnion * This);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, DisplayProperties)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DisplayProperties )( 
             __RPC__in _ISystemMonitorUnion * This);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, Counter)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *Counter )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ INT iIndex,
             /* [out] */ __RPC__deref_out_opt ICounterItem **ppICounter);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, AddCounter)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *AddCounter )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ __RPC__in BSTR bsPath,
             /* [out] */ __RPC__deref_out_opt ICounterItem **ppICounter);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, DeleteCounter)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteCounter )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ __RPC__in_opt ICounterItem *pCtr);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_BackColorCtl)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_BackColorCtl )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__out OLE_COLOR *pColor);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_BackColorCtl)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_BackColorCtl )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ OLE_COLOR Color);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_LogFileName)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_LogFileName )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ __RPC__in BSTR bsFileName);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_LogFileName)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LogFileName )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *bsFileName);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_LogViewStart)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_LogViewStart )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ DATE StartTime);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_LogViewStart)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LogViewStart )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__out DATE *StartTime);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_LogViewStop)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_LogViewStop )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ DATE StopTime);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_LogViewStop)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LogViewStop )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__out DATE *StopTime);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_GridColor)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_GridColor )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__out OLE_COLOR *pColor);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_GridColor)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_GridColor )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ OLE_COLOR Color);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_TimeBarColor)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_TimeBarColor )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__out OLE_COLOR *pColor);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_TimeBarColor)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_TimeBarColor )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ OLE_COLOR Color);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_Highlight)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Highlight )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_Highlight)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Highlight )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_ShowToolbar)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ShowToolbar )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_ShowToolbar)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ShowToolbar )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, Paste)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Paste )( 
             __RPC__in _ISystemMonitorUnion * This);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, Copy)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Copy )( 
             __RPC__in _ISystemMonitorUnion * This);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, Reset)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in _ISystemMonitorUnion * This);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_ReadOnly)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ReadOnly )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_ReadOnly)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ReadOnly )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_ReportValueType)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ReportValueType )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ ReportValueTypeConstants eReportValueType);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_ReportValueType)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ReportValueType )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__out ReportValueTypeConstants *peReportValueType);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_MonitorDuplicateInstances)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MonitorDuplicateInstances )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_MonitorDuplicateInstances)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MonitorDuplicateInstances )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_DisplayFilter)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DisplayFilter )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ INT iValue);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_DisplayFilter)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DisplayFilter )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__out INT *piValue);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_LogFiles)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LogFiles )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__deref_out_opt ILogFiles **ppILogFiles);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_DataSourceType)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DataSourceType )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ DataSourceTypeConstants eDataSourceType);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_DataSourceType)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DataSourceType )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__out DataSourceTypeConstants *peDataSourceType);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_SqlDsnName)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_SqlDsnName )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ __RPC__in BSTR bsSqlDsnName);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_SqlDsnName)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SqlDsnName )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *bsSqlDsnName);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_SqlLogSetName)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_SqlLogSetName )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ __RPC__in BSTR bsSqlLogSetName);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_SqlLogSetName)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SqlLogSetName )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *bsSqlLogSetName);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_EnableDigitGrouping)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_EnableDigitGrouping )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_EnableDigitGrouping)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_EnableDigitGrouping )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_EnableToolTips)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_EnableToolTips )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_EnableToolTips)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_EnableToolTips )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_ShowTimeAxisLabels)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ShowTimeAxisLabels )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ VARIANT_BOOL bState);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_ShowTimeAxisLabels)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ShowTimeAxisLabels )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbState);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_ChartScroll)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ChartScroll )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ VARIANT_BOOL bScroll);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_ChartScroll)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ChartScroll )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbScroll);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, put_DataPointCount)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DataPointCount )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ INT iNewCount);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_DataPointCount)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DataPointCount )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [retval][out] */ __RPC__out INT *piDataPointCount);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, ScaleToFit)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ScaleToFit )( 
             __RPC__in _ISystemMonitorUnion * This,
             VARIANT_BOOL bSelectedCountersOnly);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, SaveAs)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SaveAs )( 
             __RPC__in _ISystemMonitorUnion * This,
             __RPC__in BSTR bstrFileName,
             SysmonFileType eSysmonFileType);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, Relog)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Relog )( 
             __RPC__in _ISystemMonitorUnion * This,
             __RPC__in BSTR bstrFileName,
             SysmonFileType eSysmonFileType,
             INT iFilter);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, ClearData)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ClearData )( 
             __RPC__in _ISystemMonitorUnion * This);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_LogSourceStartTime)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LogSourceStartTime )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [out] */ __RPC__out DATE *pDate);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, get_LogSourceStopTime)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LogSourceStopTime )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [out] */ __RPC__out DATE *pDate);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, SetLogViewRange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetLogViewRange )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ DATE StartTime,
             /* [in] */ DATE StopTime);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, GetLogViewRange)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetLogViewRange )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [out] */ __RPC__out DATE *StartTime,
             /* [out] */ __RPC__out DATE *StopTime);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, BatchingLock)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *BatchingLock )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ VARIANT_BOOL fLock,
             /* [in] */ SysmonBatchReason eBatchReason);
         
+        DECLSPEC_XFGVIRT(_ISystemMonitorUnion, LoadSettings)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *LoadSettings )( 
             __RPC__in _ISystemMonitorUnion * This,
             /* [in] */ __RPC__in BSTR bstrSettingFileName);
@@ -4363,28 +4745,34 @@ DEFINE_GUID(DIID_DISystemMonitor,0x13D73D81,0xC32E,0x11cf,0x93,0x98,0x00,0xAA,0x
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in DISystemMonitor * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in DISystemMonitor * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in DISystemMonitor * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in DISystemMonitor * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in DISystemMonitor * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in DISystemMonitor * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -4393,6 +4781,7 @@ DEFINE_GUID(DIID_DISystemMonitor,0x13D73D81,0xC32E,0x11cf,0x93,0x98,0x00,0xAA,0x
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             DISystemMonitor * This,
             /* [annotation][in] */ 
@@ -4478,28 +4867,34 @@ DEFINE_GUID(DIID_DISystemMonitorInternal,0x194EB242,0xC32C,0x11cf,0x93,0x98,0x00
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in DISystemMonitorInternal * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in DISystemMonitorInternal * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in DISystemMonitorInternal * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in DISystemMonitorInternal * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in DISystemMonitorInternal * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in DISystemMonitorInternal * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -4508,6 +4903,7 @@ DEFINE_GUID(DIID_DISystemMonitorInternal,0x194EB242,0xC32C,0x11cf,0x93,0x98,0x00
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             DISystemMonitorInternal * This,
             /* [annotation][in] */ 
@@ -4609,33 +5005,41 @@ DEFINE_GUID(IID_ISystemMonitorEvents,0xEE660EA0,0x4ABD,0x11cf,0x94,0x3A,0x00,0x8
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISystemMonitorEvents * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISystemMonitorEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISystemMonitorEvents * This);
         
+        DECLSPEC_XFGVIRT(ISystemMonitorEvents, OnCounterSelected)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *OnCounterSelected )( 
             __RPC__in ISystemMonitorEvents * This,
             /* [in] */ INT Index);
         
+        DECLSPEC_XFGVIRT(ISystemMonitorEvents, OnCounterAdded)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *OnCounterAdded )( 
             __RPC__in ISystemMonitorEvents * This,
             /* [in] */ INT Index);
         
+        DECLSPEC_XFGVIRT(ISystemMonitorEvents, OnCounterDeleted)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *OnCounterDeleted )( 
             __RPC__in ISystemMonitorEvents * This,
             /* [in] */ INT Index);
         
+        DECLSPEC_XFGVIRT(ISystemMonitorEvents, OnSampleCollected)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *OnSampleCollected )( 
             __RPC__in ISystemMonitorEvents * This);
         
+        DECLSPEC_XFGVIRT(ISystemMonitorEvents, OnDblClick)
         /* [helpstring][id] */ void ( STDMETHODCALLTYPE *OnDblClick )( 
             __RPC__in ISystemMonitorEvents * This,
             /* [in] */ INT Index);
@@ -4711,28 +5115,34 @@ DEFINE_GUID(DIID_DISystemMonitorEvents,0x84979930,0x4AB3,0x11cf,0x94,0x3A,0x00,0
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in DISystemMonitorEvents * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in DISystemMonitorEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in DISystemMonitorEvents * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in DISystemMonitorEvents * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in DISystemMonitorEvents * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in DISystemMonitorEvents * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -4741,6 +5151,7 @@ DEFINE_GUID(DIID_DISystemMonitorEvents,0x84979930,0x4AB3,0x11cf,0x94,0x3A,0x00,0
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             DISystemMonitorEvents * This,
             /* [annotation][in] */ 

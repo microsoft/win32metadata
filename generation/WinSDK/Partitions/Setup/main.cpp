@@ -16,3 +16,8 @@
 #include <msiquery.h>
 #include <winsxs.h>
 #include <sfc.h>
+#include <msidefs.h>
+#include <msiltcfg.h>
+#include <pacmanclientapi.h>
+#include <patchapi.h>
+#include <patchwiz.h>

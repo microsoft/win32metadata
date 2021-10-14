@@ -1,6 +1,7 @@
 --traverse
 <IncludeRoot>/um/jsrt.h
 <IncludeRoot>/um/jsrt9.h
+<IncludeRoot>/um/chakrart.h
 --exclude
 JsRuntimeVersion
 JsRuntimeVersionEdge

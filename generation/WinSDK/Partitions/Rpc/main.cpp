@@ -20,3 +20,6 @@
 #include <rpc.h>
 #include <rpcssl.h>
 //#include <rpcproxy.h> Leaving out on purpose. Requires C-only interfaces and we don't think we need proxy metadata
+#include <ndr64types.h>
+
+

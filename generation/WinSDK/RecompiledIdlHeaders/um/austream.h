@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -139,6 +147,7 @@ EXTERN_C const IID IID_IAudioMediaStream;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioMediaStream * This,
             /* [annotation][in] */ 
@@ -146,17 +155,21 @@ EXTERN_C const IID IID_IAudioMediaStream;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAudioMediaStream * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IAudioMediaStream * This);
         
+        DECLSPEC_XFGVIRT(IMediaStream, GetMultiMediaStream)
         HRESULT ( STDMETHODCALLTYPE *GetMultiMediaStream )( 
             IAudioMediaStream * This,
             /* [annotation][out] */ 
             _Out_  IMultiMediaStream **ppMultiMediaStream);
         
+        DECLSPEC_XFGVIRT(IMediaStream, GetInformation)
         HRESULT ( STDMETHODCALLTYPE *GetInformation )( 
             IAudioMediaStream * This,
             /* [annotation][out] */ 
@@ -164,6 +177,7 @@ EXTERN_C const IID IID_IAudioMediaStream;
             /* [annotation][out] */ 
             _Out_  STREAM_TYPE *pType);
         
+        DECLSPEC_XFGVIRT(IMediaStream, SetSameFormat)
         HRESULT ( STDMETHODCALLTYPE *SetSameFormat )( 
             IAudioMediaStream * This,
             /* [annotation][in] */ 
@@ -171,6 +185,7 @@ EXTERN_C const IID IID_IAudioMediaStream;
             /* [annotation][in] */ 
             _In_  DWORD dwFlags);
         
+        DECLSPEC_XFGVIRT(IMediaStream, AllocateSample)
         HRESULT ( STDMETHODCALLTYPE *AllocateSample )( 
             IAudioMediaStream * This,
             /* [annotation][in] */ 
@@ -178,6 +193,7 @@ EXTERN_C const IID IID_IAudioMediaStream;
             /* [annotation][out] */ 
             _Out_  IStreamSample **ppSample);
         
+        DECLSPEC_XFGVIRT(IMediaStream, CreateSharedSample)
         HRESULT ( STDMETHODCALLTYPE *CreateSharedSample )( 
             IAudioMediaStream * This,
             /* [annotation][in] */ 
@@ -187,20 +203,24 @@ EXTERN_C const IID IID_IAudioMediaStream;
             /* [annotation][out] */ 
             _Out_  IStreamSample **ppNewSample);
         
+        DECLSPEC_XFGVIRT(IMediaStream, SendEndOfStream)
         HRESULT ( STDMETHODCALLTYPE *SendEndOfStream )( 
             IAudioMediaStream * This,
             DWORD dwFlags);
         
+        DECLSPEC_XFGVIRT(IAudioMediaStream, GetFormat)
         HRESULT ( STDMETHODCALLTYPE *GetFormat )( 
             IAudioMediaStream * This,
             /* [annotation][out] */ 
             _Out_  WAVEFORMATEX *pWaveFormatCurrent);
         
+        DECLSPEC_XFGVIRT(IAudioMediaStream, SetFormat)
         HRESULT ( STDMETHODCALLTYPE *SetFormat )( 
             IAudioMediaStream * This,
             /* [annotation][in] */ 
             _In_  const WAVEFORMATEX *lpWaveFormat);
         
+        DECLSPEC_XFGVIRT(IAudioMediaStream, CreateSample)
         HRESULT ( STDMETHODCALLTYPE *CreateSample )( 
             IAudioMediaStream * This,
             /* [annotation][in] */ 
@@ -300,6 +320,7 @@ EXTERN_C const IID IID_IAudioStreamSample;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioStreamSample * This,
             /* [annotation][in] */ 
@@ -307,17 +328,21 @@ EXTERN_C const IID IID_IAudioStreamSample;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAudioStreamSample * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IAudioStreamSample * This);
         
+        DECLSPEC_XFGVIRT(IStreamSample, GetMediaStream)
         HRESULT ( STDMETHODCALLTYPE *GetMediaStream )( 
             IAudioStreamSample * This,
             /* [annotation][in] */ 
             _In_  IMediaStream **ppMediaStream);
         
+        DECLSPEC_XFGVIRT(IStreamSample, GetSampleTimes)
         HRESULT ( STDMETHODCALLTYPE *GetSampleTimes )( 
             IAudioStreamSample * This,
             /* [annotation][out] */ 
@@ -327,6 +352,7 @@ EXTERN_C const IID IID_IAudioStreamSample;
             /* [annotation][out] */ 
             _Out_  STREAM_TIME *pCurrentTime);
         
+        DECLSPEC_XFGVIRT(IStreamSample, SetSampleTimes)
         HRESULT ( STDMETHODCALLTYPE *SetSampleTimes )( 
             IAudioStreamSample * This,
             /* [annotation][in] */ 
@@ -334,6 +360,7 @@ EXTERN_C const IID IID_IAudioStreamSample;
             /* [annotation][in] */ 
             _In_  const STREAM_TIME *pEndTime);
         
+        DECLSPEC_XFGVIRT(IStreamSample, Update)
         HRESULT ( STDMETHODCALLTYPE *Update )( 
             IAudioStreamSample * This,
             /* [annotation][in] */ 
@@ -345,6 +372,7 @@ EXTERN_C const IID IID_IAudioStreamSample;
             /* [annotation][in] */ 
             _In_  DWORD_PTR dwAPCData);
         
+        DECLSPEC_XFGVIRT(IStreamSample, CompletionStatus)
         HRESULT ( STDMETHODCALLTYPE *CompletionStatus )( 
             IAudioStreamSample * This,
             /* [annotation][in] */ 
@@ -352,6 +380,7 @@ EXTERN_C const IID IID_IAudioStreamSample;
             /* [annotation][in] */ 
             _In_  DWORD dwMilliseconds);
         
+        DECLSPEC_XFGVIRT(IAudioStreamSample, GetAudioData)
         HRESULT ( STDMETHODCALLTYPE *GetAudioData )( 
             IAudioStreamSample * This,
             /* [annotation][out] */ 
@@ -454,6 +483,7 @@ EXTERN_C const IID IID_IMemoryData;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMemoryData * This,
             /* [annotation][in] */ 
@@ -461,12 +491,15 @@ EXTERN_C const IID IID_IMemoryData;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMemoryData * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMemoryData * This);
         
+        DECLSPEC_XFGVIRT(IMemoryData, SetBuffer)
         HRESULT ( STDMETHODCALLTYPE *SetBuffer )( 
             IMemoryData * This,
             /* [annotation][in] */ 
@@ -476,6 +509,7 @@ EXTERN_C const IID IID_IMemoryData;
             /* [annotation][in] */ 
             _In_  DWORD dwFlags);
         
+        DECLSPEC_XFGVIRT(IMemoryData, GetInfo)
         HRESULT ( STDMETHODCALLTYPE *GetInfo )( 
             IMemoryData * This,
             /* [annotation][out] */ 
@@ -485,6 +519,7 @@ EXTERN_C const IID IID_IMemoryData;
             /* [annotation][out] */ 
             _Out_  DWORD *pcbActualData);
         
+        DECLSPEC_XFGVIRT(IMemoryData, SetActual)
         HRESULT ( STDMETHODCALLTYPE *SetActual )( 
             IMemoryData * This,
             /* [annotation][in] */ 
@@ -565,6 +600,7 @@ EXTERN_C const IID IID_IAudioData;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioData * This,
             /* [annotation][in] */ 
@@ -572,12 +608,15 @@ EXTERN_C const IID IID_IAudioData;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAudioData * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IAudioData * This);
         
+        DECLSPEC_XFGVIRT(IMemoryData, SetBuffer)
         HRESULT ( STDMETHODCALLTYPE *SetBuffer )( 
             IAudioData * This,
             /* [annotation][in] */ 
@@ -587,6 +626,7 @@ EXTERN_C const IID IID_IAudioData;
             /* [annotation][in] */ 
             _In_  DWORD dwFlags);
         
+        DECLSPEC_XFGVIRT(IMemoryData, GetInfo)
         HRESULT ( STDMETHODCALLTYPE *GetInfo )( 
             IAudioData * This,
             /* [annotation][out] */ 
@@ -596,16 +636,19 @@ EXTERN_C const IID IID_IAudioData;
             /* [annotation][out] */ 
             _Out_  DWORD *pcbActualData);
         
+        DECLSPEC_XFGVIRT(IMemoryData, SetActual)
         HRESULT ( STDMETHODCALLTYPE *SetActual )( 
             IAudioData * This,
             /* [annotation][in] */ 
             _In_  DWORD cbDataValid);
         
+        DECLSPEC_XFGVIRT(IAudioData, GetFormat)
         HRESULT ( STDMETHODCALLTYPE *GetFormat )( 
             IAudioData * This,
             /* [annotation][out] */ 
             _Out_  WAVEFORMATEX *pWaveFormatCurrent);
         
+        DECLSPEC_XFGVIRT(IAudioData, SetFormat)
         HRESULT ( STDMETHODCALLTYPE *SetFormat )( 
             IAudioData * This,
             /* [annotation][in] */ 

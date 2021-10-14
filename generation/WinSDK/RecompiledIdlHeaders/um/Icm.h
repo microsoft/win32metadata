@@ -1359,156 +1359,6 @@ BOOL WINAPI WcsSetCalibrationManagementState (
 #pragma region Modern Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
 
-//
-// APIs and structures for system color state management
-//
-#if NTDDI_VERSION >= NTDDI_WIN10_RS4
-
-//
-// Structures for system color state management
-//
-
-#define COLORADAPTER_PROFILE_NAME_MAX_LENGTH 80
-
-//
-// A CIE xyY chromaticity point
-//
-typedef struct XYYPoint
-{
-    float x;
-    float y;
-    float Y;
-} XYYPoint;
-
-#if _MSC_VER > 1200
-#pragma warning(push)
-#pragma warning(disable:4201)    // nameless struct/union
-#endif
-
-//
-// WhitePoint
-//
-// Struct for encapsulating a display whitepoint in various
-// ways:
-//     Chromaticity    An xyY point, populate xyY member
-//     TEMPERATURE     A CCT point,  populate CCT member
-//     D65             The standard D65 s[c]RGB whitepoint.
-// Set the type enum to the preferred expression type and 
-// populate the corresponding data entry in the union.      
-//
-typedef struct WhitePoint
-{
-    enum {CHROMATICITY,TEMPERATURE,D65} type;
-    union
-    {
-        XYYPoint xyY;
-        float CCT;
-    };
-} WhitePoint;
-
-#if _MSC_VER > 1200
-#pragma warning(pop)
-#endif
-
-//
-// DisplayID
-//
-// Identifier for a particular display, using the DXGK target and
-// source IDs. These are obtained through QueryDisplayConfig calls
-//
-typedef struct DisplayID
-{
-    LUID targetAdapterID;
-    UINT32 sourceInfoID;
-} DisplayID;
-
-//
-// DisplayStateID
-//
-// Holds the current color state IDs for a display. These values will
-// change as the system color state changes.
-//     profileID    Identifies the currently set Color Profile 
-//     transformID  Identifies the current lookup table transform
-//     whitepointID Identifies the current target whitepoint
-//
-typedef struct DisplayStateID
-{
-    UINT32 profileID;
-    UINT32 transformID;
-    UINT32 whitepointID;
-} DisplayStateID;
-
-//
-// DisplayTransformLut
-//
-// A 16-bit, 3-channel lookup table used to modify system
-// colors.
-//
-typedef struct DisplayTransformLut
-{
-    UINT16 red[256];
-    UINT16 green[256];
-    UINT16 blue[256];
-} DisplayTransformLut;
-
-HRESULT WINAPI ColorAdapterGetSystemModifyWhitePointCaps(
-    _Out_ BOOL* whitePointAdjCapable,
-    _Out_ BOOL* isColorOverrideActive
-);
-
-HRESULT WINAPI ColorAdapterUpdateDisplayGamma(
-    _In_ DisplayID displayID,
-    _In_ DisplayTransformLut* displayTransform,
-    _In_ BOOL internal
-);
-
-HRESULT WINAPI ColorAdapterUpdateDeviceProfile(
-    _In_ DisplayID displayID,
-    _In_ LPWSTR profName
-);
-
-HRESULT WINAPI ColorAdapterGetDisplayCurrentStateID(
-    _In_ DisplayID displayID,
-    _Out_ DisplayStateID* displayStateID
-);
-
-HRESULT WINAPI ColorAdapterGetDisplayTransformData(
-    _In_ DisplayID displayID,
-    _Out_ DisplayTransformLut* displayTransformLut,
-    _Out_ UINT32* transformID
-);
-
-HRESULT WINAPI ColorAdapterGetDisplayTargetWhitePoint(
-    _In_ DisplayID displayID,
-    _Out_ WhitePoint* wtpt,
-    _Out_ UINT32* transitionTime,
-    _Out_ UINT32* whitepointID
-);
-
-HRESULT WINAPI ColorAdapterGetDisplayProfile(
-    _In_ DisplayID displayID,
-    _Out_writes_(COLORADAPTER_PROFILE_NAME_MAX_LENGTH) LPWSTR displayProfile,
-    _Out_ UINT32* profileID,
-    _Out_ BOOL* bUseAccurate
-);
-
-HRESULT WINAPI ColorAdapterGetCurrentProfileCalibration(
-    _In_ DisplayID displayID,
-    _In_ DWORD maxCalibrationBlobSize,
-    _Out_ UINT32* blobSize,
-    _Out_writes_bytes_(*blobSize) BYTE* calibrationBlob
-);
-
-HRESULT WINAPI ColorAdapterRegisterOEMColorService(
-    _Out_ HANDLE* registration
-);
-
-HRESULT WINAPI ColorAdapterUnregisterOEMColorService(
-    _In_ HANDLE registration
-);
-    
-#endif // NTDDI_VERSION >= NTDDI_WIN10_RS4
-
 #if NTDDI_VERSION >= NTDDI_WIN10_RS5
 
 /*
@@ -1627,6 +1477,52 @@ HRESULT WINAPI ColorProfileGetDisplayUserScope(
 );
 
 #endif // NTDDI_VERSION >= NTDDI_WIN10_RS5
+
+#if NTDDI_VERSION >= NTDDI_WIN10_CO
+
+struct WCS_DEVICE_VCGT_CAPABILITIES
+{
+    UINT Size;              //  Size of structure in bytes
+    BOOL SupportsVcgt;      //  Indicates if display supports VCGT 
+};
+
+struct WCS_DEVICE_MHC2_CAPABILITIES
+{
+    UINT Size;                      //  Size of structure in bytes
+    BOOL SupportsMhc2;              //  Indicates if display supports MHC2
+
+    UINT RegammaLutEntryCount;      //  Max number of entries in the regamma lut
+
+    // Color space transform (CSC) matrix (row-major)
+    UINT CscXyzMatrixRows;          //  Number of rows in the color transform matrix
+    UINT CscXyzMatrixColumns;       //  Number of columns in the color transform matrix
+};
+
+typedef enum 
+{
+    VideoCardGammaTable = 1,
+    MicrosoftHardwareColorV2 = 2,
+} WCS_DEVICE_CAPABILITIES_TYPE;
+
+/*
+ * Gets the selected display color correction capabilities
+ *
+ * Parameters:
+ *    scope                 specifies the association as system-wide or user-specific
+ *    targetAdapterID       the target adapter of the display
+ *    sourceID              the source identifier of the display  
+ *    capsType              the type of capabilities to retrieve (VCGT, MHC2)
+ *    outputCapabilities    the color correction capabilities to return
+ */
+HRESULT WINAPI ColorProfileGetDeviceCapabilities(
+    _In_ WCS_PROFILE_MANAGEMENT_SCOPE scope,
+    _In_ LUID                         targetAdapterID,
+    _In_ UINT32                       sourceID,
+    _In_ WCS_DEVICE_CAPABILITIES_TYPE capsType,
+    _Out_ PVOID                outputCapabilities
+);
+
+#endif //NTDDI_VERSION >= NTDDI_WIN10_CO
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
 #pragma endregion

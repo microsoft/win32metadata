@@ -329,6 +329,8 @@ namespace Windows
 
             interface IBackgroundExecutionManagerStatics2;
 
+            interface IBackgroundExecutionManagerStatics3;
+
             interface IBackgroundTask;
 
             interface IBackgroundTaskBuilder;
@@ -988,6 +990,16 @@ namespace Windows
                 [overload("RequestAccessKindAsync")] HRESULT RequestAccessKindAsync([in] Windows.ApplicationModel.Background.BackgroundAccessRequestKind requestedAccess, [in] HSTRING reason, [out] [retval] Windows.Foundation.IAsyncOperation<boolean>** operation);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [exclusiveto(Windows.ApplicationModel.Background.BackgroundExecutionManager)]
+            [uuid(98A5D3F6-5A25-5B6C-9192-D77A43DFEDC4)]
+            interface IBackgroundExecutionManagerStatics3 : IInspectable
+            {
+                HRESULT RequestAccessKindForModernStandbyAsync([in] Windows.ApplicationModel.Background.BackgroundAccessRequestKind requestedAccess, [in] HSTRING reason, [out] [retval] Windows.Foundation.IAsyncOperation<boolean>** operation);
+                [overload("GetAccessStatusForModernStandby")] HRESULT GetAccessStatusForModernStandby([out] [retval] Windows.ApplicationModel.Background.BackgroundAccessStatus* result);
+                [overload("GetAccessStatusForModernStandby")] HRESULT GetAccessStatusForModernStandbyForApplication([in] HSTRING applicationId, [out] [retval] Windows.ApplicationModel.Background.BackgroundAccessStatus* result);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [uuid(7D13D534-FD12-43CE-8C22-EA1FF13C06DF)]
             interface IBackgroundTask : IInspectable
@@ -1565,7 +1577,7 @@ namespace Windows
 
             [contract(Windows.ApplicationModel.Calls.Background.CallsBackgroundContract, 1.0)]
             [exclusiveto(Windows.ApplicationModel.Background.PhoneTrigger)]
-            [from_contract(Windows.ApplicationModel.Calls.CallsPhoneContract, range(1.0, 2.0))]
+            [from_contract(Windows.ApplicationModel.Calls.CallsPhoneContract, range(1.0, 3.0))]
             [uuid(8DCFE99B-D4C5-49F1-B7D3-82E87A0E9DDE)]
             interface IPhoneTrigger : IInspectable
                 requires
@@ -1577,7 +1589,7 @@ namespace Windows
 
             [contract(Windows.ApplicationModel.Calls.Background.CallsBackgroundContract, 1.0)]
             [exclusiveto(Windows.ApplicationModel.Background.PhoneTrigger)]
-            [from_contract(Windows.ApplicationModel.Calls.CallsPhoneContract, range(1.0, 2.0))]
+            [from_contract(Windows.ApplicationModel.Calls.CallsPhoneContract, range(1.0, 3.0))]
             [uuid(A0D93CDA-5FC1-48FB-A546-32262040157B)]
             interface IPhoneTriggerFactory : IInspectable
             {
@@ -1850,6 +1862,7 @@ namespace Windows
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [static(Windows.ApplicationModel.Background.IBackgroundExecutionManagerStatics, Windows.Foundation.UniversalApiContract, 1.0)]
             [static(Windows.ApplicationModel.Background.IBackgroundExecutionManagerStatics2, Windows.Foundation.UniversalApiContract, 6.0)]
+            [static(Windows.ApplicationModel.Background.IBackgroundExecutionManagerStatics3, Windows.Foundation.UniversalApiContract, 13.0)]
             runtimeclass BackgroundExecutionManager
             {
             }
@@ -1876,7 +1889,7 @@ namespace Windows
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
-            [marshaling_behavior(standard)]
+            [marshaling_behavior(agile)]
             [threading(mta)]
             runtimeclass BackgroundTaskDeferral
             {
@@ -2241,7 +2254,7 @@ namespace Windows
 
             [activatable(Windows.ApplicationModel.Background.IPhoneTriggerFactory, Windows.ApplicationModel.Calls.CallsPhoneContract, 1.0)]
             [contract(Windows.ApplicationModel.Calls.Background.CallsBackgroundContract, 1.0)]
-            [from_contract(Windows.ApplicationModel.Calls.CallsPhoneContract, range(1.0, 2.0))]
+            [from_contract(Windows.ApplicationModel.Calls.CallsPhoneContract, range(1.0, 3.0))]
             [marshaling_behavior(agile)]
             [threading(both)]
             runtimeclass PhoneTrigger

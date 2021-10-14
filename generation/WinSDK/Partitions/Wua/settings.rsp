@@ -1,4 +1,5 @@
 --traverse
 <IncludeRoot>/um/wuapi.h
+<IncludeRoot>/um/wuerror.h
 --namespace
 Windows.Win32.System.UpdateAgent

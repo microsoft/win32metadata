@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -347,6 +355,27 @@ typedef interface IMFTimedTextCueList IMFTimedTextCueList;
 #endif 	/* __IMFTimedTextCueList_FWD_DEFINED__ */
 
 
+#ifndef __IMFTimedTextRuby_FWD_DEFINED__
+#define __IMFTimedTextRuby_FWD_DEFINED__
+typedef interface IMFTimedTextRuby IMFTimedTextRuby;
+
+#endif 	/* __IMFTimedTextRuby_FWD_DEFINED__ */
+
+
+#ifndef __IMFTimedTextBouten_FWD_DEFINED__
+#define __IMFTimedTextBouten_FWD_DEFINED__
+typedef interface IMFTimedTextBouten IMFTimedTextBouten;
+
+#endif 	/* __IMFTimedTextBouten_FWD_DEFINED__ */
+
+
+#ifndef __IMFTimedTextStyle2_FWD_DEFINED__
+#define __IMFTimedTextStyle2_FWD_DEFINED__
+typedef interface IMFTimedTextStyle2 IMFTimedTextStyle2;
+
+#endif 	/* __IMFTimedTextStyle2_FWD_DEFINED__ */
+
+
 #ifndef __IMFMediaEngineEMENotify_FWD_DEFINED__
 #define __IMFMediaEngineEMENotify_FWD_DEFINED__
 typedef interface IMFMediaEngineEMENotify IMFMediaEngineEMENotify;
@@ -469,6 +498,7 @@ EXTERN_C const IID IID_IMFMediaError;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaError * This,
             /* [annotation][in] */ 
@@ -476,23 +506,29 @@ EXTERN_C const IID IID_IMFMediaError;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaError * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaError * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaError, GetErrorCode)
         USHORT ( STDMETHODCALLTYPE *GetErrorCode )( 
             IMFMediaError * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaError, GetExtendedErrorCode)
         HRESULT ( STDMETHODCALLTYPE *GetExtendedErrorCode )( 
             IMFMediaError * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaError, SetErrorCode)
         HRESULT ( STDMETHODCALLTYPE *SetErrorCode )( 
             IMFMediaError * This,
             /* [annotation][in] */ 
             _In_  MF_MEDIA_ENGINE_ERR error);
         
+        DECLSPEC_XFGVIRT(IMFMediaError, SetExtendedErrorCode)
         HRESULT ( STDMETHODCALLTYPE *SetExtendedErrorCode )( 
             IMFMediaError * This,
             /* [annotation][in] */ 
@@ -594,6 +630,7 @@ EXTERN_C const IID IID_IMFMediaTimeRange;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaTimeRange * This,
             /* [annotation][in] */ 
@@ -601,15 +638,19 @@ EXTERN_C const IID IID_IMFMediaTimeRange;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaTimeRange * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaTimeRange * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaTimeRange, GetLength)
         DWORD ( STDMETHODCALLTYPE *GetLength )( 
             IMFMediaTimeRange * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaTimeRange, GetStart)
         HRESULT ( STDMETHODCALLTYPE *GetStart )( 
             IMFMediaTimeRange * This,
             /* [annotation][in] */ 
@@ -617,6 +658,7 @@ EXTERN_C const IID IID_IMFMediaTimeRange;
             /* [annotation][out] */ 
             _Out_  double *pStart);
         
+        DECLSPEC_XFGVIRT(IMFMediaTimeRange, GetEnd)
         HRESULT ( STDMETHODCALLTYPE *GetEnd )( 
             IMFMediaTimeRange * This,
             /* [annotation][in] */ 
@@ -624,11 +666,13 @@ EXTERN_C const IID IID_IMFMediaTimeRange;
             /* [annotation][out] */ 
             _Out_  double *pEnd);
         
+        DECLSPEC_XFGVIRT(IMFMediaTimeRange, ContainsTime)
         BOOL ( STDMETHODCALLTYPE *ContainsTime )( 
             IMFMediaTimeRange * This,
             /* [annotation][in] */ 
             _In_  double time);
         
+        DECLSPEC_XFGVIRT(IMFMediaTimeRange, AddRange)
         HRESULT ( STDMETHODCALLTYPE *AddRange )( 
             IMFMediaTimeRange * This,
             /* [annotation][in] */ 
@@ -636,6 +680,7 @@ EXTERN_C const IID IID_IMFMediaTimeRange;
             /* [annotation][in] */ 
             _In_  double endTime);
         
+        DECLSPEC_XFGVIRT(IMFMediaTimeRange, Clear)
         HRESULT ( STDMETHODCALLTYPE *Clear )( 
             IMFMediaTimeRange * This);
         
@@ -775,6 +820,7 @@ EXTERN_C const IID IID_IMFMediaEngineNotify;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaEngineNotify * This,
             /* [annotation][in] */ 
@@ -782,12 +828,15 @@ EXTERN_C const IID IID_IMFMediaEngineNotify;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaEngineNotify * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaEngineNotify * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineNotify, EventNotify)
         HRESULT ( STDMETHODCALLTYPE *EventNotify )( 
             IMFMediaEngineNotify * This,
             /* [annotation][in] */ 
@@ -888,6 +937,7 @@ EXTERN_C const IID IID_IMFMediaEngineSrcElements;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaEngineSrcElements * This,
             /* [annotation][in] */ 
@@ -895,15 +945,19 @@ EXTERN_C const IID IID_IMFMediaEngineSrcElements;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaEngineSrcElements * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaEngineSrcElements * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineSrcElements, GetLength)
         DWORD ( STDMETHODCALLTYPE *GetLength )( 
             IMFMediaEngineSrcElements * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineSrcElements, GetURL)
         HRESULT ( STDMETHODCALLTYPE *GetURL )( 
             IMFMediaEngineSrcElements * This,
             /* [annotation][in] */ 
@@ -911,6 +965,7 @@ EXTERN_C const IID IID_IMFMediaEngineSrcElements;
             /* [annotation][out] */ 
             _Out_  BSTR *pURL);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineSrcElements, GetType)
         HRESULT ( STDMETHODCALLTYPE *GetType )( 
             IMFMediaEngineSrcElements * This,
             /* [annotation][in] */ 
@@ -918,6 +973,7 @@ EXTERN_C const IID IID_IMFMediaEngineSrcElements;
             /* [annotation][out] */ 
             _Out_  BSTR *pType);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineSrcElements, GetMedia)
         HRESULT ( STDMETHODCALLTYPE *GetMedia )( 
             IMFMediaEngineSrcElements * This,
             /* [annotation][in] */ 
@@ -925,6 +981,7 @@ EXTERN_C const IID IID_IMFMediaEngineSrcElements;
             /* [annotation][out] */ 
             _Out_  BSTR *pMedia);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineSrcElements, AddElement)
         HRESULT ( STDMETHODCALLTYPE *AddElement )( 
             IMFMediaEngineSrcElements * This,
             /* [annotation][in] */ 
@@ -934,6 +991,7 @@ EXTERN_C const IID IID_IMFMediaEngineSrcElements;
             /* [annotation][in] */ 
             _In_opt_  BSTR pMedia);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineSrcElements, RemoveAllElements)
         HRESULT ( STDMETHODCALLTYPE *RemoveAllElements )( 
             IMFMediaEngineSrcElements * This);
         
@@ -1207,6 +1265,7 @@ EXTERN_C const IID IID_IMFMediaEngine;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaEngine * This,
             /* [annotation][in] */ 
@@ -1214,56 +1273,69 @@ EXTERN_C const IID IID_IMFMediaEngine;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaEngine * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetError)
         HRESULT ( STDMETHODCALLTYPE *GetError )( 
             IMFMediaEngine * This,
             /* [annotation][out] */ 
             _Outptr_  IMFMediaError **ppError);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetErrorCode)
         HRESULT ( STDMETHODCALLTYPE *SetErrorCode )( 
             IMFMediaEngine * This,
             /* [annotation][in] */ 
             _In_  MF_MEDIA_ENGINE_ERR error);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetSourceElements)
         HRESULT ( STDMETHODCALLTYPE *SetSourceElements )( 
             IMFMediaEngine * This,
             /* [annotation][in] */ 
             _In_  IMFMediaEngineSrcElements *pSrcElements);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetSource)
         HRESULT ( STDMETHODCALLTYPE *SetSource )( 
             IMFMediaEngine * This,
             /* [annotation][in] */ 
             _In_  BSTR pUrl);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetCurrentSource)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentSource )( 
             IMFMediaEngine * This,
             /* [annotation][out] */ 
             _Out_  BSTR *ppUrl);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetNetworkState)
         USHORT ( STDMETHODCALLTYPE *GetNetworkState )( 
             IMFMediaEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetPreload)
         MF_MEDIA_ENGINE_PRELOAD ( STDMETHODCALLTYPE *GetPreload )( 
             IMFMediaEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetPreload)
         HRESULT ( STDMETHODCALLTYPE *SetPreload )( 
             IMFMediaEngine * This,
             /* [annotation][in] */ 
             _In_  MF_MEDIA_ENGINE_PRELOAD Preload);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetBuffered)
         HRESULT ( STDMETHODCALLTYPE *GetBuffered )( 
             IMFMediaEngine * This,
             /* [annotation][out] */ 
             _Outptr_  IMFMediaTimeRange **ppBuffered);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, Load)
         HRESULT ( STDMETHODCALLTYPE *Load )( 
             IMFMediaEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, CanPlayType)
         HRESULT ( STDMETHODCALLTYPE *CanPlayType )( 
             IMFMediaEngine * This,
             /* [annotation][in] */ 
@@ -1271,102 +1343,129 @@ EXTERN_C const IID IID_IMFMediaEngine;
             /* [annotation][out] */ 
             _Out_  MF_MEDIA_ENGINE_CANPLAY *pAnswer);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetReadyState)
         USHORT ( STDMETHODCALLTYPE *GetReadyState )( 
             IMFMediaEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, IsSeeking)
         BOOL ( STDMETHODCALLTYPE *IsSeeking )( 
             IMFMediaEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetCurrentTime)
         double ( STDMETHODCALLTYPE *GetCurrentTime )( 
             IMFMediaEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetCurrentTime)
         HRESULT ( STDMETHODCALLTYPE *SetCurrentTime )( 
             IMFMediaEngine * This,
             /* [annotation][in] */ 
             _In_  double seekTime);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetStartTime)
         double ( STDMETHODCALLTYPE *GetStartTime )( 
             IMFMediaEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetDuration)
         double ( STDMETHODCALLTYPE *GetDuration )( 
             IMFMediaEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, IsPaused)
         BOOL ( STDMETHODCALLTYPE *IsPaused )( 
             IMFMediaEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetDefaultPlaybackRate)
         double ( STDMETHODCALLTYPE *GetDefaultPlaybackRate )( 
             IMFMediaEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetDefaultPlaybackRate)
         HRESULT ( STDMETHODCALLTYPE *SetDefaultPlaybackRate )( 
             IMFMediaEngine * This,
             /* [annotation][in] */ 
             _In_  double Rate);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetPlaybackRate)
         double ( STDMETHODCALLTYPE *GetPlaybackRate )( 
             IMFMediaEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetPlaybackRate)
         HRESULT ( STDMETHODCALLTYPE *SetPlaybackRate )( 
             IMFMediaEngine * This,
             /* [annotation][in] */ 
             _In_  double Rate);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetPlayed)
         HRESULT ( STDMETHODCALLTYPE *GetPlayed )( 
             IMFMediaEngine * This,
             /* [annotation][out] */ 
             _Outptr_  IMFMediaTimeRange **ppPlayed);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetSeekable)
         HRESULT ( STDMETHODCALLTYPE *GetSeekable )( 
             IMFMediaEngine * This,
             /* [annotation][out] */ 
             _Outptr_  IMFMediaTimeRange **ppSeekable);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, IsEnded)
         BOOL ( STDMETHODCALLTYPE *IsEnded )( 
             IMFMediaEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetAutoPlay)
         BOOL ( STDMETHODCALLTYPE *GetAutoPlay )( 
             IMFMediaEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetAutoPlay)
         HRESULT ( STDMETHODCALLTYPE *SetAutoPlay )( 
             IMFMediaEngine * This,
             /* [annotation][in] */ 
             _In_  BOOL AutoPlay);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetLoop)
         BOOL ( STDMETHODCALLTYPE *GetLoop )( 
             IMFMediaEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetLoop)
         HRESULT ( STDMETHODCALLTYPE *SetLoop )( 
             IMFMediaEngine * This,
             /* [annotation][in] */ 
             _In_  BOOL Loop);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, Play)
         HRESULT ( STDMETHODCALLTYPE *Play )( 
             IMFMediaEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, Pause)
         HRESULT ( STDMETHODCALLTYPE *Pause )( 
             IMFMediaEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetMuted)
         BOOL ( STDMETHODCALLTYPE *GetMuted )( 
             IMFMediaEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetMuted)
         HRESULT ( STDMETHODCALLTYPE *SetMuted )( 
             IMFMediaEngine * This,
             /* [annotation][in] */ 
             _In_  BOOL Muted);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetVolume)
         double ( STDMETHODCALLTYPE *GetVolume )( 
             IMFMediaEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetVolume)
         HRESULT ( STDMETHODCALLTYPE *SetVolume )( 
             IMFMediaEngine * This,
             /* [annotation][in] */ 
             _In_  double Volume);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, HasVideo)
         BOOL ( STDMETHODCALLTYPE *HasVideo )( 
             IMFMediaEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, HasAudio)
         BOOL ( STDMETHODCALLTYPE *HasAudio )( 
             IMFMediaEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetNativeVideoSize)
         HRESULT ( STDMETHODCALLTYPE *GetNativeVideoSize )( 
             IMFMediaEngine * This,
             /* [annotation][out] */ 
@@ -1374,6 +1473,7 @@ EXTERN_C const IID IID_IMFMediaEngine;
             /* [annotation][out] */ 
             _Out_opt_  DWORD *cy);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetVideoAspectRatio)
         HRESULT ( STDMETHODCALLTYPE *GetVideoAspectRatio )( 
             IMFMediaEngine * This,
             /* [annotation][out] */ 
@@ -1381,9 +1481,11 @@ EXTERN_C const IID IID_IMFMediaEngine;
             /* [annotation][out] */ 
             _Out_opt_  DWORD *cy);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, Shutdown)
         HRESULT ( STDMETHODCALLTYPE *Shutdown )( 
             IMFMediaEngine * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, TransferVideoFrame)
         HRESULT ( STDMETHODCALLTYPE *TransferVideoFrame )( 
             IMFMediaEngine * This,
             /* [annotation][in] */ 
@@ -1395,6 +1497,7 @@ EXTERN_C const IID IID_IMFMediaEngine;
             /* [annotation][in] */ 
             _In_opt_  const MFARGB *pBorderClr);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, OnVideoStreamTick)
         HRESULT ( STDMETHODCALLTYPE *OnVideoStreamTick )( 
             IMFMediaEngine * This,
             /* [annotation][out] */ 
@@ -1782,6 +1885,7 @@ EXTERN_C const IID IID_IMFMediaEngineEx;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
@@ -1789,56 +1893,69 @@ EXTERN_C const IID IID_IMFMediaEngineEx;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaEngineEx * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaEngineEx * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetError)
         HRESULT ( STDMETHODCALLTYPE *GetError )( 
             IMFMediaEngineEx * This,
             /* [annotation][out] */ 
             _Outptr_  IMFMediaError **ppError);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetErrorCode)
         HRESULT ( STDMETHODCALLTYPE *SetErrorCode )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
             _In_  MF_MEDIA_ENGINE_ERR error);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetSourceElements)
         HRESULT ( STDMETHODCALLTYPE *SetSourceElements )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
             _In_  IMFMediaEngineSrcElements *pSrcElements);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetSource)
         HRESULT ( STDMETHODCALLTYPE *SetSource )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
             _In_  BSTR pUrl);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetCurrentSource)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentSource )( 
             IMFMediaEngineEx * This,
             /* [annotation][out] */ 
             _Out_  BSTR *ppUrl);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetNetworkState)
         USHORT ( STDMETHODCALLTYPE *GetNetworkState )( 
             IMFMediaEngineEx * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetPreload)
         MF_MEDIA_ENGINE_PRELOAD ( STDMETHODCALLTYPE *GetPreload )( 
             IMFMediaEngineEx * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetPreload)
         HRESULT ( STDMETHODCALLTYPE *SetPreload )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
             _In_  MF_MEDIA_ENGINE_PRELOAD Preload);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetBuffered)
         HRESULT ( STDMETHODCALLTYPE *GetBuffered )( 
             IMFMediaEngineEx * This,
             /* [annotation][out] */ 
             _Outptr_  IMFMediaTimeRange **ppBuffered);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, Load)
         HRESULT ( STDMETHODCALLTYPE *Load )( 
             IMFMediaEngineEx * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, CanPlayType)
         HRESULT ( STDMETHODCALLTYPE *CanPlayType )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
@@ -1846,102 +1963,129 @@ EXTERN_C const IID IID_IMFMediaEngineEx;
             /* [annotation][out] */ 
             _Out_  MF_MEDIA_ENGINE_CANPLAY *pAnswer);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetReadyState)
         USHORT ( STDMETHODCALLTYPE *GetReadyState )( 
             IMFMediaEngineEx * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, IsSeeking)
         BOOL ( STDMETHODCALLTYPE *IsSeeking )( 
             IMFMediaEngineEx * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetCurrentTime)
         double ( STDMETHODCALLTYPE *GetCurrentTime )( 
             IMFMediaEngineEx * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetCurrentTime)
         HRESULT ( STDMETHODCALLTYPE *SetCurrentTime )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
             _In_  double seekTime);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetStartTime)
         double ( STDMETHODCALLTYPE *GetStartTime )( 
             IMFMediaEngineEx * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetDuration)
         double ( STDMETHODCALLTYPE *GetDuration )( 
             IMFMediaEngineEx * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, IsPaused)
         BOOL ( STDMETHODCALLTYPE *IsPaused )( 
             IMFMediaEngineEx * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetDefaultPlaybackRate)
         double ( STDMETHODCALLTYPE *GetDefaultPlaybackRate )( 
             IMFMediaEngineEx * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetDefaultPlaybackRate)
         HRESULT ( STDMETHODCALLTYPE *SetDefaultPlaybackRate )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
             _In_  double Rate);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetPlaybackRate)
         double ( STDMETHODCALLTYPE *GetPlaybackRate )( 
             IMFMediaEngineEx * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetPlaybackRate)
         HRESULT ( STDMETHODCALLTYPE *SetPlaybackRate )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
             _In_  double Rate);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetPlayed)
         HRESULT ( STDMETHODCALLTYPE *GetPlayed )( 
             IMFMediaEngineEx * This,
             /* [annotation][out] */ 
             _Outptr_  IMFMediaTimeRange **ppPlayed);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetSeekable)
         HRESULT ( STDMETHODCALLTYPE *GetSeekable )( 
             IMFMediaEngineEx * This,
             /* [annotation][out] */ 
             _Outptr_  IMFMediaTimeRange **ppSeekable);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, IsEnded)
         BOOL ( STDMETHODCALLTYPE *IsEnded )( 
             IMFMediaEngineEx * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetAutoPlay)
         BOOL ( STDMETHODCALLTYPE *GetAutoPlay )( 
             IMFMediaEngineEx * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetAutoPlay)
         HRESULT ( STDMETHODCALLTYPE *SetAutoPlay )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
             _In_  BOOL AutoPlay);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetLoop)
         BOOL ( STDMETHODCALLTYPE *GetLoop )( 
             IMFMediaEngineEx * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetLoop)
         HRESULT ( STDMETHODCALLTYPE *SetLoop )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
             _In_  BOOL Loop);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, Play)
         HRESULT ( STDMETHODCALLTYPE *Play )( 
             IMFMediaEngineEx * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, Pause)
         HRESULT ( STDMETHODCALLTYPE *Pause )( 
             IMFMediaEngineEx * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetMuted)
         BOOL ( STDMETHODCALLTYPE *GetMuted )( 
             IMFMediaEngineEx * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetMuted)
         HRESULT ( STDMETHODCALLTYPE *SetMuted )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
             _In_  BOOL Muted);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetVolume)
         double ( STDMETHODCALLTYPE *GetVolume )( 
             IMFMediaEngineEx * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, SetVolume)
         HRESULT ( STDMETHODCALLTYPE *SetVolume )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
             _In_  double Volume);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, HasVideo)
         BOOL ( STDMETHODCALLTYPE *HasVideo )( 
             IMFMediaEngineEx * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, HasAudio)
         BOOL ( STDMETHODCALLTYPE *HasAudio )( 
             IMFMediaEngineEx * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetNativeVideoSize)
         HRESULT ( STDMETHODCALLTYPE *GetNativeVideoSize )( 
             IMFMediaEngineEx * This,
             /* [annotation][out] */ 
@@ -1949,6 +2093,7 @@ EXTERN_C const IID IID_IMFMediaEngineEx;
             /* [annotation][out] */ 
             _Out_opt_  DWORD *cy);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, GetVideoAspectRatio)
         HRESULT ( STDMETHODCALLTYPE *GetVideoAspectRatio )( 
             IMFMediaEngineEx * This,
             /* [annotation][out] */ 
@@ -1956,9 +2101,11 @@ EXTERN_C const IID IID_IMFMediaEngineEx;
             /* [annotation][out] */ 
             _Out_opt_  DWORD *cy);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, Shutdown)
         HRESULT ( STDMETHODCALLTYPE *Shutdown )( 
             IMFMediaEngineEx * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, TransferVideoFrame)
         HRESULT ( STDMETHODCALLTYPE *TransferVideoFrame )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
@@ -1970,11 +2117,13 @@ EXTERN_C const IID IID_IMFMediaEngineEx;
             /* [annotation][in] */ 
             _In_opt_  const MFARGB *pBorderClr);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngine, OnVideoStreamTick)
         HRESULT ( STDMETHODCALLTYPE *OnVideoStreamTick )( 
             IMFMediaEngineEx * This,
             /* [annotation][out] */ 
             _Out_  LONGLONG *pPts);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, SetSourceFromByteStream)
         HRESULT ( STDMETHODCALLTYPE *SetSourceFromByteStream )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
@@ -1982,6 +2131,7 @@ EXTERN_C const IID IID_IMFMediaEngineEx;
             /* [annotation][in] */ 
             _In_  BSTR pURL);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, GetStatistics)
         HRESULT ( STDMETHODCALLTYPE *GetStatistics )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
@@ -1989,6 +2139,7 @@ EXTERN_C const IID IID_IMFMediaEngineEx;
             /* [annotation][out] */ 
             _Out_  PROPVARIANT *pStatistic);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, UpdateVideoStream)
         HRESULT ( STDMETHODCALLTYPE *UpdateVideoStream )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
@@ -1998,29 +2149,35 @@ EXTERN_C const IID IID_IMFMediaEngineEx;
             /* [annotation][in] */ 
             _In_opt_  const MFARGB *pBorderClr);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, GetBalance)
         double ( STDMETHODCALLTYPE *GetBalance )( 
             IMFMediaEngineEx * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, SetBalance)
         HRESULT ( STDMETHODCALLTYPE *SetBalance )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
             _In_  double balance);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, IsPlaybackRateSupported)
         BOOL ( STDMETHODCALLTYPE *IsPlaybackRateSupported )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
             _In_  double rate);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, FrameStep)
         HRESULT ( STDMETHODCALLTYPE *FrameStep )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
             _In_  BOOL Forward);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, GetResourceCharacteristics)
         HRESULT ( STDMETHODCALLTYPE *GetResourceCharacteristics )( 
             IMFMediaEngineEx * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pCharacteristics);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, GetPresentationAttribute)
         HRESULT ( STDMETHODCALLTYPE *GetPresentationAttribute )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
@@ -2028,11 +2185,13 @@ EXTERN_C const IID IID_IMFMediaEngineEx;
             /* [annotation][out] */ 
             _Out_  PROPVARIANT *pvValue);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, GetNumberOfStreams)
         HRESULT ( STDMETHODCALLTYPE *GetNumberOfStreams )( 
             IMFMediaEngineEx * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pdwStreamCount);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, GetStreamAttribute)
         HRESULT ( STDMETHODCALLTYPE *GetStreamAttribute )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
@@ -2042,6 +2201,7 @@ EXTERN_C const IID IID_IMFMediaEngineEx;
             /* [annotation][out] */ 
             _Out_  PROPVARIANT *pvValue);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, GetStreamSelection)
         HRESULT ( STDMETHODCALLTYPE *GetStreamSelection )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
@@ -2049,6 +2209,7 @@ EXTERN_C const IID IID_IMFMediaEngineEx;
             /* [annotation][out] */ 
             _Out_  BOOL *pEnabled);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, SetStreamSelection)
         HRESULT ( STDMETHODCALLTYPE *SetStreamSelection )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
@@ -2056,14 +2217,17 @@ EXTERN_C const IID IID_IMFMediaEngineEx;
             /* [annotation][in] */ 
             _In_  BOOL Enabled);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, ApplyStreamSelections)
         HRESULT ( STDMETHODCALLTYPE *ApplyStreamSelections )( 
             IMFMediaEngineEx * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, IsProtected)
         HRESULT ( STDMETHODCALLTYPE *IsProtected )( 
             IMFMediaEngineEx * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pProtected);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, InsertVideoEffect)
         HRESULT ( STDMETHODCALLTYPE *InsertVideoEffect )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
@@ -2071,6 +2235,7 @@ EXTERN_C const IID IID_IMFMediaEngineEx;
             /* [annotation][in] */ 
             _In_  BOOL fOptional);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, InsertAudioEffect)
         HRESULT ( STDMETHODCALLTYPE *InsertAudioEffect )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
@@ -2078,90 +2243,109 @@ EXTERN_C const IID IID_IMFMediaEngineEx;
             /* [annotation][in] */ 
             _In_  BOOL fOptional);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, RemoveAllEffects)
         HRESULT ( STDMETHODCALLTYPE *RemoveAllEffects )( 
             IMFMediaEngineEx * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, SetTimelineMarkerTimer)
         HRESULT ( STDMETHODCALLTYPE *SetTimelineMarkerTimer )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
             _In_  double timeToFire);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, GetTimelineMarkerTimer)
         HRESULT ( STDMETHODCALLTYPE *GetTimelineMarkerTimer )( 
             IMFMediaEngineEx * This,
             /* [annotation][out] */ 
             _Out_  double *pTimeToFire);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, CancelTimelineMarkerTimer)
         HRESULT ( STDMETHODCALLTYPE *CancelTimelineMarkerTimer )( 
             IMFMediaEngineEx * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, IsStereo3D)
         BOOL ( STDMETHODCALLTYPE *IsStereo3D )( 
             IMFMediaEngineEx * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, GetStereo3DFramePackingMode)
         HRESULT ( STDMETHODCALLTYPE *GetStereo3DFramePackingMode )( 
             IMFMediaEngineEx * This,
             /* [annotation][out] */ 
             _Out_  MF_MEDIA_ENGINE_S3D_PACKING_MODE *packMode);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, SetStereo3DFramePackingMode)
         HRESULT ( STDMETHODCALLTYPE *SetStereo3DFramePackingMode )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
             _In_  MF_MEDIA_ENGINE_S3D_PACKING_MODE packMode);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, GetStereo3DRenderMode)
         HRESULT ( STDMETHODCALLTYPE *GetStereo3DRenderMode )( 
             IMFMediaEngineEx * This,
             /* [annotation][out] */ 
             _Out_  MF3DVideoOutputType *outputType);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, SetStereo3DRenderMode)
         HRESULT ( STDMETHODCALLTYPE *SetStereo3DRenderMode )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
             _In_  MF3DVideoOutputType outputType);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, EnableWindowlessSwapchainMode)
         HRESULT ( STDMETHODCALLTYPE *EnableWindowlessSwapchainMode )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
             _In_  BOOL fEnable);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, GetVideoSwapchainHandle)
         HRESULT ( STDMETHODCALLTYPE *GetVideoSwapchainHandle )( 
             IMFMediaEngineEx * This,
             /* [annotation][out] */ 
             _Out_  HANDLE *phSwapchain);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, EnableHorizontalMirrorMode)
         HRESULT ( STDMETHODCALLTYPE *EnableHorizontalMirrorMode )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
             _In_  BOOL fEnable);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, GetAudioStreamCategory)
         HRESULT ( STDMETHODCALLTYPE *GetAudioStreamCategory )( 
             IMFMediaEngineEx * This,
             /* [annotation][out] */ 
             _Out_  UINT32 *pCategory);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, SetAudioStreamCategory)
         HRESULT ( STDMETHODCALLTYPE *SetAudioStreamCategory )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
             _In_  UINT32 category);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, GetAudioEndpointRole)
         HRESULT ( STDMETHODCALLTYPE *GetAudioEndpointRole )( 
             IMFMediaEngineEx * This,
             /* [annotation][out] */ 
             _Out_  UINT32 *pRole);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, SetAudioEndpointRole)
         HRESULT ( STDMETHODCALLTYPE *SetAudioEndpointRole )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
             _In_  UINT32 role);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, GetRealTimeMode)
         HRESULT ( STDMETHODCALLTYPE *GetRealTimeMode )( 
             IMFMediaEngineEx * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfEnabled);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, SetRealTimeMode)
         HRESULT ( STDMETHODCALLTYPE *SetRealTimeMode )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
             _In_  BOOL fEnable);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, SetCurrentTimeEx)
         HRESULT ( STDMETHODCALLTYPE *SetCurrentTimeEx )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
@@ -2169,6 +2353,7 @@ EXTERN_C const IID IID_IMFMediaEngineEx;
             /* [annotation][in] */ 
             _In_  MF_MEDIA_ENGINE_SEEK_MODE seekMode);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEx, EnableTimeUpdateTimer)
         HRESULT ( STDMETHODCALLTYPE *EnableTimeUpdateTimer )( 
             IMFMediaEngineEx * This,
             /* [annotation][in] */ 
@@ -2478,6 +2663,7 @@ EXTERN_C const IID IID_IMFMediaEngineAudioEndpointId;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaEngineAudioEndpointId * This,
             /* [annotation][in] */ 
@@ -2485,17 +2671,21 @@ EXTERN_C const IID IID_IMFMediaEngineAudioEndpointId;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaEngineAudioEndpointId * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaEngineAudioEndpointId * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineAudioEndpointId, SetAudioEndpointId)
         HRESULT ( STDMETHODCALLTYPE *SetAudioEndpointId )( 
             IMFMediaEngineAudioEndpointId * This,
             /* [annotation][in] */ 
             _In_opt_  LPCWSTR pszEndpointId);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineAudioEndpointId, GetAudioEndpointId)
         HRESULT ( STDMETHODCALLTYPE *GetAudioEndpointId )( 
             IMFMediaEngineAudioEndpointId * This,
             /* [annotation][out] */ 
@@ -2612,6 +2802,7 @@ EXTERN_C const IID IID_IMFMediaEngineExtension;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaEngineExtension * This,
             /* [annotation][in] */ 
@@ -2619,12 +2810,15 @@ EXTERN_C const IID IID_IMFMediaEngineExtension;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaEngineExtension * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaEngineExtension * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineExtension, CanPlayType)
         HRESULT ( STDMETHODCALLTYPE *CanPlayType )( 
             IMFMediaEngineExtension * This,
             /* [annotation][in] */ 
@@ -2634,6 +2828,7 @@ EXTERN_C const IID IID_IMFMediaEngineExtension;
             /* [annotation][out] */ 
             _Out_  MF_MEDIA_ENGINE_CANPLAY *pAnswer);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineExtension, BeginCreateObject)
         HRESULT ( STDMETHODCALLTYPE *BeginCreateObject )( 
             IMFMediaEngineExtension * This,
             /* [annotation][in] */ 
@@ -2649,11 +2844,13 @@ EXTERN_C const IID IID_IMFMediaEngineExtension;
             /* [annotation][in] */ 
             _In_opt_  IUnknown *punkState);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineExtension, CancelObjectCreation)
         HRESULT ( STDMETHODCALLTYPE *CancelObjectCreation )( 
             IMFMediaEngineExtension * This,
             /* [annotation][in] */ 
             _In_  IUnknown *pIUnknownCancelCookie);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineExtension, EndCreateObject)
         HRESULT ( STDMETHODCALLTYPE *EndCreateObject )( 
             IMFMediaEngineExtension * This,
             /* [annotation][in] */ 
@@ -2780,6 +2977,7 @@ EXTERN_C const IID IID_IMFMediaEngineProtectedContent;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaEngineProtectedContent * This,
             /* [annotation][in] */ 
@@ -2787,27 +2985,33 @@ EXTERN_C const IID IID_IMFMediaEngineProtectedContent;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaEngineProtectedContent * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaEngineProtectedContent * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineProtectedContent, ShareResources)
         HRESULT ( STDMETHODCALLTYPE *ShareResources )( 
             IMFMediaEngineProtectedContent * This,
             /* [annotation] */ 
             _In_  IUnknown *pUnkDeviceContext);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineProtectedContent, GetRequiredProtections)
         HRESULT ( STDMETHODCALLTYPE *GetRequiredProtections )( 
             IMFMediaEngineProtectedContent * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pFrameProtectionFlags);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineProtectedContent, SetOPMWindow)
         HRESULT ( STDMETHODCALLTYPE *SetOPMWindow )( 
             IMFMediaEngineProtectedContent * This,
             /* [annotation][in] */ 
             _In_  HWND hwnd);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineProtectedContent, TransferVideoFrame)
         HRESULT ( STDMETHODCALLTYPE *TransferVideoFrame )( 
             IMFMediaEngineProtectedContent * This,
             /* [annotation][in] */ 
@@ -2821,11 +3025,13 @@ EXTERN_C const IID IID_IMFMediaEngineProtectedContent;
             /* [annotation][out] */ 
             _Out_  DWORD *pFrameProtectionFlags);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineProtectedContent, SetContentProtectionManager)
         HRESULT ( STDMETHODCALLTYPE *SetContentProtectionManager )( 
             IMFMediaEngineProtectedContent * This,
             /* [annotation][in] */ 
             _In_opt_  IMFContentProtectionManager *pCPM);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineProtectedContent, SetApplicationCertificate)
         HRESULT ( STDMETHODCALLTYPE *SetApplicationCertificate )( 
             IMFMediaEngineProtectedContent * This,
             /* [annotation][in] */ 
@@ -2929,6 +3135,7 @@ EXTERN_C const IID IID_IAudioSourceProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioSourceProvider * This,
             /* [annotation][in] */ 
@@ -2936,12 +3143,15 @@ EXTERN_C const IID IID_IAudioSourceProvider;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAudioSourceProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IAudioSourceProvider * This);
         
+        DECLSPEC_XFGVIRT(IAudioSourceProvider, ProvideInput)
         HRESULT ( STDMETHODCALLTYPE *ProvideInput )( 
             IAudioSourceProvider * This,
             /* [annotation][in] */ 
@@ -3022,6 +3232,7 @@ EXTERN_C const IID IID_IMFMediaEngineWebSupport;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaEngineWebSupport * This,
             /* [annotation][in] */ 
@@ -3029,15 +3240,19 @@ EXTERN_C const IID IID_IMFMediaEngineWebSupport;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaEngineWebSupport * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaEngineWebSupport * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineWebSupport, ShouldDelayTheLoadEvent)
         BOOL ( STDMETHODCALLTYPE *ShouldDelayTheLoadEvent )( 
             IMFMediaEngineWebSupport * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineWebSupport, ConnectWebAudio)
         HRESULT ( STDMETHODCALLTYPE *ConnectWebAudio )( 
             IMFMediaEngineWebSupport * This,
             /* [annotation][in] */ 
@@ -3045,6 +3260,7 @@ EXTERN_C const IID IID_IMFMediaEngineWebSupport;
             /* [annotation][out] */ 
             _COM_Outptr_  IAudioSourceProvider **ppSourceProvider);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineWebSupport, DisconnectWebAudio)
         HRESULT ( STDMETHODCALLTYPE *DisconnectWebAudio )( 
             IMFMediaEngineWebSupport * This);
         
@@ -3154,6 +3370,7 @@ EXTERN_C const IID IID_IMFMediaSourceExtensionNotify;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaSourceExtensionNotify * This,
             /* [annotation][in] */ 
@@ -3161,18 +3378,23 @@ EXTERN_C const IID IID_IMFMediaSourceExtensionNotify;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaSourceExtensionNotify * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaSourceExtensionNotify * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaSourceExtensionNotify, OnSourceOpen)
         void ( STDMETHODCALLTYPE *OnSourceOpen )( 
             IMFMediaSourceExtensionNotify * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaSourceExtensionNotify, OnSourceEnded)
         void ( STDMETHODCALLTYPE *OnSourceEnded )( 
             IMFMediaSourceExtensionNotify * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaSourceExtensionNotify, OnSourceClose)
         void ( STDMETHODCALLTYPE *OnSourceClose )( 
             IMFMediaSourceExtensionNotify * This);
         
@@ -3247,6 +3469,7 @@ EXTERN_C const IID IID_IMFBufferListNotify;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFBufferListNotify * This,
             /* [annotation][in] */ 
@@ -3254,15 +3477,19 @@ EXTERN_C const IID IID_IMFBufferListNotify;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFBufferListNotify * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFBufferListNotify * This);
         
+        DECLSPEC_XFGVIRT(IMFBufferListNotify, OnAddSourceBuffer)
         void ( STDMETHODCALLTYPE *OnAddSourceBuffer )( 
             IMFBufferListNotify * This);
         
+        DECLSPEC_XFGVIRT(IMFBufferListNotify, OnRemoveSourceBuffer)
         void ( STDMETHODCALLTYPE *OnRemoveSourceBuffer )( 
             IMFBufferListNotify * This);
         
@@ -3342,6 +3569,7 @@ EXTERN_C const IID IID_IMFSourceBufferNotify;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFSourceBufferNotify * This,
             /* [annotation][in] */ 
@@ -3349,26 +3577,33 @@ EXTERN_C const IID IID_IMFSourceBufferNotify;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFSourceBufferNotify * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFSourceBufferNotify * This);
         
+        DECLSPEC_XFGVIRT(IMFSourceBufferNotify, OnUpdateStart)
         void ( STDMETHODCALLTYPE *OnUpdateStart )( 
             IMFSourceBufferNotify * This);
         
+        DECLSPEC_XFGVIRT(IMFSourceBufferNotify, OnAbort)
         void ( STDMETHODCALLTYPE *OnAbort )( 
             IMFSourceBufferNotify * This);
         
+        DECLSPEC_XFGVIRT(IMFSourceBufferNotify, OnError)
         void ( STDMETHODCALLTYPE *OnError )( 
             IMFSourceBufferNotify * This,
             /* [annotation][in] */ 
             _In_  HRESULT hr);
         
+        DECLSPEC_XFGVIRT(IMFSourceBufferNotify, OnUpdate)
         void ( STDMETHODCALLTYPE *OnUpdate )( 
             IMFSourceBufferNotify * This);
         
+        DECLSPEC_XFGVIRT(IMFSourceBufferNotify, OnUpdateEnd)
         void ( STDMETHODCALLTYPE *OnUpdateEnd )( 
             IMFSourceBufferNotify * This);
         
@@ -3489,6 +3724,7 @@ EXTERN_C const IID IID_IMFSourceBuffer;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFSourceBuffer * This,
             /* [annotation][in] */ 
@@ -3496,44 +3732,55 @@ EXTERN_C const IID IID_IMFSourceBuffer;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFSourceBuffer * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFSourceBuffer * This);
         
+        DECLSPEC_XFGVIRT(IMFSourceBuffer, GetUpdating)
         BOOL ( STDMETHODCALLTYPE *GetUpdating )( 
             IMFSourceBuffer * This);
         
+        DECLSPEC_XFGVIRT(IMFSourceBuffer, GetBuffered)
         HRESULT ( STDMETHODCALLTYPE *GetBuffered )( 
             IMFSourceBuffer * This,
             /* [annotation][out] */ 
             _Outptr_  IMFMediaTimeRange **ppBuffered);
         
+        DECLSPEC_XFGVIRT(IMFSourceBuffer, GetTimeStampOffset)
         double ( STDMETHODCALLTYPE *GetTimeStampOffset )( 
             IMFSourceBuffer * This);
         
+        DECLSPEC_XFGVIRT(IMFSourceBuffer, SetTimeStampOffset)
         HRESULT ( STDMETHODCALLTYPE *SetTimeStampOffset )( 
             IMFSourceBuffer * This,
             /* [annotation][in] */ 
             _In_  double offset);
         
+        DECLSPEC_XFGVIRT(IMFSourceBuffer, GetAppendWindowStart)
         double ( STDMETHODCALLTYPE *GetAppendWindowStart )( 
             IMFSourceBuffer * This);
         
+        DECLSPEC_XFGVIRT(IMFSourceBuffer, SetAppendWindowStart)
         HRESULT ( STDMETHODCALLTYPE *SetAppendWindowStart )( 
             IMFSourceBuffer * This,
             /* [annotation][in] */ 
             _In_  double time);
         
+        DECLSPEC_XFGVIRT(IMFSourceBuffer, GetAppendWindowEnd)
         double ( STDMETHODCALLTYPE *GetAppendWindowEnd )( 
             IMFSourceBuffer * This);
         
+        DECLSPEC_XFGVIRT(IMFSourceBuffer, SetAppendWindowEnd)
         HRESULT ( STDMETHODCALLTYPE *SetAppendWindowEnd )( 
             IMFSourceBuffer * This,
             /* [annotation][in] */ 
             _In_  double time);
         
+        DECLSPEC_XFGVIRT(IMFSourceBuffer, Append)
         HRESULT ( STDMETHODCALLTYPE *Append )( 
             IMFSourceBuffer * This,
             /* [annotation][in] */ 
@@ -3541,6 +3788,7 @@ EXTERN_C const IID IID_IMFSourceBuffer;
             /* [annotation][in] */ 
             _In_  DWORD len);
         
+        DECLSPEC_XFGVIRT(IMFSourceBuffer, AppendByteStream)
         HRESULT ( STDMETHODCALLTYPE *AppendByteStream )( 
             IMFSourceBuffer * This,
             /* [annotation][in] */ 
@@ -3548,9 +3796,11 @@ EXTERN_C const IID IID_IMFSourceBuffer;
             /* [annotation][in] */ 
             _In_opt_  DWORDLONG *pMaxLen);
         
+        DECLSPEC_XFGVIRT(IMFSourceBuffer, Abort)
         HRESULT ( STDMETHODCALLTYPE *Abort )( 
             IMFSourceBuffer * This);
         
+        DECLSPEC_XFGVIRT(IMFSourceBuffer, Remove)
         HRESULT ( STDMETHODCALLTYPE *Remove )( 
             IMFSourceBuffer * This,
             /* [annotation][in] */ 
@@ -3674,6 +3924,7 @@ EXTERN_C const IID IID_IMFSourceBufferAppendMode;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFSourceBufferAppendMode * This,
             /* [annotation][in] */ 
@@ -3681,15 +3932,19 @@ EXTERN_C const IID IID_IMFSourceBufferAppendMode;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFSourceBufferAppendMode * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFSourceBufferAppendMode * This);
         
+        DECLSPEC_XFGVIRT(IMFSourceBufferAppendMode, GetAppendMode)
         MF_MSE_APPEND_MODE ( STDMETHODCALLTYPE *GetAppendMode )( 
             IMFSourceBufferAppendMode * This);
         
+        DECLSPEC_XFGVIRT(IMFSourceBufferAppendMode, SetAppendMode)
         HRESULT ( STDMETHODCALLTYPE *SetAppendMode )( 
             IMFSourceBufferAppendMode * This,
             /* [annotation][in] */ 
@@ -3774,6 +4029,7 @@ EXTERN_C const IID IID_IMFSourceBufferList;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFSourceBufferList * This,
             /* [annotation][in] */ 
@@ -3781,15 +4037,19 @@ EXTERN_C const IID IID_IMFSourceBufferList;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFSourceBufferList * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFSourceBufferList * This);
         
+        DECLSPEC_XFGVIRT(IMFSourceBufferList, GetLength)
         DWORD ( STDMETHODCALLTYPE *GetLength )( 
             IMFSourceBufferList * This);
         
+        DECLSPEC_XFGVIRT(IMFSourceBufferList, GetSourceBuffer)
         IMFSourceBuffer *( STDMETHODCALLTYPE *GetSourceBuffer )( 
             IMFSourceBufferList * This,
             /* [annotation][in] */ 
@@ -3920,6 +4180,7 @@ EXTERN_C const IID IID_IMFMediaSourceExtension;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaSourceExtension * This,
             /* [annotation][in] */ 
@@ -3927,29 +4188,37 @@ EXTERN_C const IID IID_IMFMediaSourceExtension;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaSourceExtension * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaSourceExtension * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaSourceExtension, GetSourceBuffers)
         IMFSourceBufferList *( STDMETHODCALLTYPE *GetSourceBuffers )( 
             IMFMediaSourceExtension * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaSourceExtension, GetActiveSourceBuffers)
         IMFSourceBufferList *( STDMETHODCALLTYPE *GetActiveSourceBuffers )( 
             IMFMediaSourceExtension * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaSourceExtension, GetReadyState)
         MF_MSE_READY ( STDMETHODCALLTYPE *GetReadyState )( 
             IMFMediaSourceExtension * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaSourceExtension, GetDuration)
         double ( STDMETHODCALLTYPE *GetDuration )( 
             IMFMediaSourceExtension * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaSourceExtension, SetDuration)
         HRESULT ( STDMETHODCALLTYPE *SetDuration )( 
             IMFMediaSourceExtension * This,
             /* [annotation][in] */ 
             _In_  double duration);
         
+        DECLSPEC_XFGVIRT(IMFMediaSourceExtension, AddSourceBuffer)
         HRESULT ( STDMETHODCALLTYPE *AddSourceBuffer )( 
             IMFMediaSourceExtension * This,
             /* [annotation][in] */ 
@@ -3959,21 +4228,25 @@ EXTERN_C const IID IID_IMFMediaSourceExtension;
             /* [annotation][out] */ 
             _Outptr_  IMFSourceBuffer **ppSourceBuffer);
         
+        DECLSPEC_XFGVIRT(IMFMediaSourceExtension, RemoveSourceBuffer)
         HRESULT ( STDMETHODCALLTYPE *RemoveSourceBuffer )( 
             IMFMediaSourceExtension * This,
             /* [annotation][in] */ 
             _In_  IMFSourceBuffer *pSourceBuffer);
         
+        DECLSPEC_XFGVIRT(IMFMediaSourceExtension, SetEndOfStream)
         HRESULT ( STDMETHODCALLTYPE *SetEndOfStream )( 
             IMFMediaSourceExtension * This,
             /* [annotation][in] */ 
             _In_  MF_MSE_ERROR error);
         
+        DECLSPEC_XFGVIRT(IMFMediaSourceExtension, IsTypeSupported)
         BOOL ( STDMETHODCALLTYPE *IsTypeSupported )( 
             IMFMediaSourceExtension * This,
             /* [annotation][in] */ 
             _In_  BSTR type);
         
+        DECLSPEC_XFGVIRT(IMFMediaSourceExtension, GetSourceBuffer)
         IMFSourceBuffer *( STDMETHODCALLTYPE *GetSourceBuffer )( 
             IMFMediaSourceExtension * This,
             /* [annotation][in] */ 
@@ -4075,6 +4348,7 @@ EXTERN_C const IID IID_IMFMediaSourceExtensionLiveSeekableRange;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaSourceExtensionLiveSeekableRange * This,
             /* [annotation][in] */ 
@@ -4082,12 +4356,15 @@ EXTERN_C const IID IID_IMFMediaSourceExtensionLiveSeekableRange;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaSourceExtensionLiveSeekableRange * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaSourceExtensionLiveSeekableRange * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaSourceExtensionLiveSeekableRange, SetLiveSeekableRange)
         HRESULT ( STDMETHODCALLTYPE *SetLiveSeekableRange )( 
             IMFMediaSourceExtensionLiveSeekableRange * This,
             /* [annotation][in] */ 
@@ -4095,6 +4372,7 @@ EXTERN_C const IID IID_IMFMediaSourceExtensionLiveSeekableRange;
             /* [annotation][in] */ 
             _In_  double end);
         
+        DECLSPEC_XFGVIRT(IMFMediaSourceExtensionLiveSeekableRange, ClearLiveSeekableRange)
         HRESULT ( STDMETHODCALLTYPE *ClearLiveSeekableRange )( 
             IMFMediaSourceExtensionLiveSeekableRange * This);
         
@@ -4183,6 +4461,7 @@ EXTERN_C const IID IID_IMFMediaEngineEME;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaEngineEME * This,
             /* [annotation][in] */ 
@@ -4190,17 +4469,21 @@ EXTERN_C const IID IID_IMFMediaEngineEME;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaEngineEME * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaEngineEME * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEME, get_Keys)
         HRESULT ( STDMETHODCALLTYPE *get_Keys )( 
             IMFMediaEngineEME * This,
             /* [annotation] */ 
             _COM_Outptr_result_maybenull_  IMFMediaKeys **keys);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEME, SetMediaKeys)
         HRESULT ( STDMETHODCALLTYPE *SetMediaKeys )( 
             IMFMediaEngineEME * This,
             /* [annotation] */ 
@@ -4286,6 +4569,7 @@ EXTERN_C const IID IID_IMFMediaEngineSrcElementsEx;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaEngineSrcElementsEx * This,
             /* [annotation][in] */ 
@@ -4293,15 +4577,19 @@ EXTERN_C const IID IID_IMFMediaEngineSrcElementsEx;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaEngineSrcElementsEx * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaEngineSrcElementsEx * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineSrcElements, GetLength)
         DWORD ( STDMETHODCALLTYPE *GetLength )( 
             IMFMediaEngineSrcElementsEx * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineSrcElements, GetURL)
         HRESULT ( STDMETHODCALLTYPE *GetURL )( 
             IMFMediaEngineSrcElementsEx * This,
             /* [annotation][in] */ 
@@ -4309,6 +4597,7 @@ EXTERN_C const IID IID_IMFMediaEngineSrcElementsEx;
             /* [annotation][out] */ 
             _Out_  BSTR *pURL);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineSrcElements, GetType)
         HRESULT ( STDMETHODCALLTYPE *GetType )( 
             IMFMediaEngineSrcElementsEx * This,
             /* [annotation][in] */ 
@@ -4316,6 +4605,7 @@ EXTERN_C const IID IID_IMFMediaEngineSrcElementsEx;
             /* [annotation][out] */ 
             _Out_  BSTR *pType);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineSrcElements, GetMedia)
         HRESULT ( STDMETHODCALLTYPE *GetMedia )( 
             IMFMediaEngineSrcElementsEx * This,
             /* [annotation][in] */ 
@@ -4323,6 +4613,7 @@ EXTERN_C const IID IID_IMFMediaEngineSrcElementsEx;
             /* [annotation][out] */ 
             _Out_  BSTR *pMedia);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineSrcElements, AddElement)
         HRESULT ( STDMETHODCALLTYPE *AddElement )( 
             IMFMediaEngineSrcElementsEx * This,
             /* [annotation][in] */ 
@@ -4332,9 +4623,11 @@ EXTERN_C const IID IID_IMFMediaEngineSrcElementsEx;
             /* [annotation][in] */ 
             _In_opt_  BSTR pMedia);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineSrcElements, RemoveAllElements)
         HRESULT ( STDMETHODCALLTYPE *RemoveAllElements )( 
             IMFMediaEngineSrcElementsEx * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineSrcElementsEx, AddElementEx)
         HRESULT ( STDMETHODCALLTYPE *AddElementEx )( 
             IMFMediaEngineSrcElementsEx * This,
             /* [annotation] */ 
@@ -4346,6 +4639,7 @@ EXTERN_C const IID IID_IMFMediaEngineSrcElementsEx;
             /* [annotation] */ 
             _In_opt_  BSTR keySystem);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineSrcElementsEx, GetKeySystem)
         HRESULT ( STDMETHODCALLTYPE *GetKeySystem )( 
             IMFMediaEngineSrcElementsEx * This,
             /* [annotation] */ 
@@ -4452,6 +4746,7 @@ EXTERN_C const IID IID_IMFMediaEngineNeedKeyNotify;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaEngineNeedKeyNotify * This,
             /* [annotation][in] */ 
@@ -4459,12 +4754,15 @@ EXTERN_C const IID IID_IMFMediaEngineNeedKeyNotify;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaEngineNeedKeyNotify * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaEngineNeedKeyNotify * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineNeedKeyNotify, NeedKey)
         void ( STDMETHODCALLTYPE *NeedKey )( 
             IMFMediaEngineNeedKeyNotify * This,
             /* [annotation] */ 
@@ -4559,6 +4857,7 @@ EXTERN_C const IID IID_IMFMediaKeys;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaKeys * This,
             /* [annotation][in] */ 
@@ -4566,12 +4865,15 @@ EXTERN_C const IID IID_IMFMediaKeys;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaKeys * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaKeys * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeys, CreateSession)
         HRESULT ( STDMETHODCALLTYPE *CreateSession )( 
             IMFMediaKeys * This,
             /* [annotation] */ 
@@ -4589,14 +4891,17 @@ EXTERN_C const IID IID_IMFMediaKeys;
             /* [annotation] */ 
             _COM_Outptr_  IMFMediaKeySession **ppSession);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeys, get_KeySystem)
         HRESULT ( STDMETHODCALLTYPE *get_KeySystem )( 
             IMFMediaKeys * This,
             /* [annotation] */ 
             _COM_Outptr_  BSTR *keySystem);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeys, Shutdown)
         HRESULT ( STDMETHODCALLTYPE *Shutdown )( 
             IMFMediaKeys * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeys, GetSuspendNotify)
         HRESULT ( STDMETHODCALLTYPE *GetSuspendNotify )( 
             IMFMediaKeys * This,
             /* [annotation] */ 
@@ -4713,6 +5018,7 @@ EXTERN_C const IID IID_IMFMediaKeySession;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaKeySession * This,
             /* [annotation][in] */ 
@@ -4720,12 +5026,15 @@ EXTERN_C const IID IID_IMFMediaKeySession;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaKeySession * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaKeySession * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeySession, GetError)
         HRESULT ( STDMETHODCALLTYPE *GetError )( 
             IMFMediaKeySession * This,
             /* [annotation] */ 
@@ -4733,16 +5042,19 @@ EXTERN_C const IID IID_IMFMediaKeySession;
             /* [annotation] */ 
             _Out_  DWORD *systemCode);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeySession, get_KeySystem)
         HRESULT ( STDMETHODCALLTYPE *get_KeySystem )( 
             IMFMediaKeySession * This,
             /* [annotation] */ 
             _COM_Outptr_  BSTR *keySystem);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeySession, get_SessionId)
         HRESULT ( STDMETHODCALLTYPE *get_SessionId )( 
             IMFMediaKeySession * This,
             /* [annotation] */ 
             _COM_Outptr_  BSTR *sessionId);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeySession, Update)
         HRESULT ( STDMETHODCALLTYPE *Update )( 
             IMFMediaKeySession * This,
             /* [annotation] */ 
@@ -4750,6 +5062,7 @@ EXTERN_C const IID IID_IMFMediaKeySession;
             /* [annotation] */ 
             _In_  DWORD cb);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeySession, Close)
         HRESULT ( STDMETHODCALLTYPE *Close )( 
             IMFMediaKeySession * This);
         
@@ -4842,6 +5155,7 @@ EXTERN_C const IID IID_IMFMediaKeySessionNotify;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaKeySessionNotify * This,
             /* [annotation][in] */ 
@@ -4849,12 +5163,15 @@ EXTERN_C const IID IID_IMFMediaKeySessionNotify;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaKeySessionNotify * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaKeySessionNotify * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeySessionNotify, KeyMessage)
         void ( STDMETHODCALLTYPE *KeyMessage )( 
             IMFMediaKeySessionNotify * This,
             /* [annotation] */ 
@@ -4864,9 +5181,11 @@ EXTERN_C const IID IID_IMFMediaKeySessionNotify;
             /* [annotation] */ 
             _In_  DWORD cb);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeySessionNotify, KeyAdded)
         void ( STDMETHODCALLTYPE *KeyAdded )( 
             IMFMediaKeySessionNotify * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeySessionNotify, KeyError)
         void ( STDMETHODCALLTYPE *KeyError )( 
             IMFMediaKeySessionNotify * This,
             /* [annotation] */ 
@@ -4945,6 +5264,7 @@ EXTERN_C const IID IID_IMFCdmSuspendNotify;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMFCdmSuspendNotify * This,
             /* [annotation][in] */ 
@@ -4952,15 +5272,19 @@ EXTERN_C const IID IID_IMFCdmSuspendNotify;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMFCdmSuspendNotify * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMFCdmSuspendNotify * This);
         
+        DECLSPEC_XFGVIRT(IMFCdmSuspendNotify, Begin)
         HRESULT ( STDMETHODCALLTYPE *Begin )( 
             __RPC__in IMFCdmSuspendNotify * This);
         
+        DECLSPEC_XFGVIRT(IMFCdmSuspendNotify, End)
         HRESULT ( STDMETHODCALLTYPE *End )( 
             __RPC__in IMFCdmSuspendNotify * This);
         
@@ -5054,6 +5378,7 @@ EXTERN_C const IID IID_IMFHDCPStatus;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFHDCPStatus * This,
             /* [annotation][in] */ 
@@ -5061,12 +5386,15 @@ EXTERN_C const IID IID_IMFHDCPStatus;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFHDCPStatus * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFHDCPStatus * This);
         
+        DECLSPEC_XFGVIRT(IMFHDCPStatus, Query)
         HRESULT ( STDMETHODCALLTYPE *Query )( 
             IMFHDCPStatus * This,
             /* [annotation][in] */ 
@@ -5074,6 +5402,7 @@ EXTERN_C const IID IID_IMFHDCPStatus;
             /* [annotation][in] */ 
             _Inout_  BOOL *pfStatus);
         
+        DECLSPEC_XFGVIRT(IMFHDCPStatus, Set)
         HRESULT ( STDMETHODCALLTYPE *Set )( 
             IMFHDCPStatus * This,
             /* [annotation][in] */ 
@@ -5168,6 +5497,7 @@ EXTERN_C const IID IID_IMFMediaEngineOPMInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaEngineOPMInfo * This,
             /* [annotation][in] */ 
@@ -5175,12 +5505,15 @@ EXTERN_C const IID IID_IMFMediaEngineOPMInfo;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaEngineOPMInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaEngineOPMInfo * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineOPMInfo, GetOPMInfo)
         HRESULT ( STDMETHODCALLTYPE *GetOPMInfo )( 
             IMFMediaEngineOPMInfo * This,
             /* [annotation][out] */ 
@@ -5359,6 +5692,7 @@ EXTERN_C const IID IID_IMFMediaEngineClassFactory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaEngineClassFactory * This,
             /* [annotation][in] */ 
@@ -5366,12 +5700,15 @@ EXTERN_C const IID IID_IMFMediaEngineClassFactory;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaEngineClassFactory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaEngineClassFactory * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineClassFactory, CreateInstance)
         HRESULT ( STDMETHODCALLTYPE *CreateInstance )( 
             IMFMediaEngineClassFactory * This,
             /* [annotation][in] */ 
@@ -5381,11 +5718,13 @@ EXTERN_C const IID IID_IMFMediaEngineClassFactory;
             /* [annotation][out] */ 
             _Outptr_  IMFMediaEngine **ppPlayer);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineClassFactory, CreateTimeRange)
         HRESULT ( STDMETHODCALLTYPE *CreateTimeRange )( 
             IMFMediaEngineClassFactory * This,
             /* [annotation][out] */ 
             _Outptr_  IMFMediaTimeRange **ppTimeRange);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineClassFactory, CreateError)
         HRESULT ( STDMETHODCALLTYPE *CreateError )( 
             IMFMediaEngineClassFactory * This,
             /* [annotation][out] */ 
@@ -5494,6 +5833,7 @@ EXTERN_C const IID IID_IMFMediaEngineClassFactoryEx;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaEngineClassFactoryEx * This,
             /* [annotation][in] */ 
@@ -5501,12 +5841,15 @@ EXTERN_C const IID IID_IMFMediaEngineClassFactoryEx;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaEngineClassFactoryEx * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaEngineClassFactoryEx * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineClassFactory, CreateInstance)
         HRESULT ( STDMETHODCALLTYPE *CreateInstance )( 
             IMFMediaEngineClassFactoryEx * This,
             /* [annotation][in] */ 
@@ -5516,16 +5859,19 @@ EXTERN_C const IID IID_IMFMediaEngineClassFactoryEx;
             /* [annotation][out] */ 
             _Outptr_  IMFMediaEngine **ppPlayer);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineClassFactory, CreateTimeRange)
         HRESULT ( STDMETHODCALLTYPE *CreateTimeRange )( 
             IMFMediaEngineClassFactoryEx * This,
             /* [annotation][out] */ 
             _Outptr_  IMFMediaTimeRange **ppTimeRange);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineClassFactory, CreateError)
         HRESULT ( STDMETHODCALLTYPE *CreateError )( 
             IMFMediaEngineClassFactoryEx * This,
             /* [annotation][out] */ 
             _Outptr_  IMFMediaError **ppError);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineClassFactoryEx, CreateMediaSourceExtension)
         HRESULT ( STDMETHODCALLTYPE *CreateMediaSourceExtension )( 
             IMFMediaEngineClassFactoryEx * This,
             /* [annotation][in] */ 
@@ -5535,6 +5881,7 @@ EXTERN_C const IID IID_IMFMediaEngineClassFactoryEx;
             /* [annotation][out] */ 
             _COM_Outptr_  IMFMediaSourceExtension **ppMSE);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineClassFactoryEx, CreateMediaKeys)
         HRESULT ( STDMETHODCALLTYPE *CreateMediaKeys )( 
             IMFMediaEngineClassFactoryEx * This,
             /* [annotation] */ 
@@ -5544,6 +5891,7 @@ EXTERN_C const IID IID_IMFMediaEngineClassFactoryEx;
             /* [annotation] */ 
             _COM_Outptr_  IMFMediaKeys **ppKeys);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineClassFactoryEx, IsTypeSupported)
         HRESULT ( STDMETHODCALLTYPE *IsTypeSupported )( 
             IMFMediaEngineClassFactoryEx * This,
             /* [annotation] */ 
@@ -5640,6 +5988,7 @@ EXTERN_C const IID IID_IMFMediaEngineClassFactory2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaEngineClassFactory2 * This,
             /* [annotation][in] */ 
@@ -5647,12 +5996,15 @@ EXTERN_C const IID IID_IMFMediaEngineClassFactory2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaEngineClassFactory2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaEngineClassFactory2 * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineClassFactory2, CreateMediaKeys2)
         HRESULT ( STDMETHODCALLTYPE *CreateMediaKeys2 )( 
             IMFMediaEngineClassFactory2 * This,
             /* [annotation] */ 
@@ -5733,6 +6085,7 @@ EXTERN_C const IID IID_IMFExtendedDRMTypeSupport;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFExtendedDRMTypeSupport * This,
             /* [annotation][in] */ 
@@ -5740,12 +6093,15 @@ EXTERN_C const IID IID_IMFExtendedDRMTypeSupport;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFExtendedDRMTypeSupport * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFExtendedDRMTypeSupport * This);
         
+        DECLSPEC_XFGVIRT(IMFExtendedDRMTypeSupport, IsTypeSupportedEx)
         HRESULT ( STDMETHODCALLTYPE *IsTypeSupportedEx )( 
             IMFExtendedDRMTypeSupport * This,
             /* [annotation] */ 
@@ -5836,6 +6192,7 @@ EXTERN_C const IID IID_IMFMediaEngineSupportsSourceTransfer;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaEngineSupportsSourceTransfer * This,
             /* [annotation][in] */ 
@@ -5843,17 +6200,21 @@ EXTERN_C const IID IID_IMFMediaEngineSupportsSourceTransfer;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaEngineSupportsSourceTransfer * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaEngineSupportsSourceTransfer * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineSupportsSourceTransfer, ShouldTransferSource)
         HRESULT ( STDMETHODCALLTYPE *ShouldTransferSource )( 
             IMFMediaEngineSupportsSourceTransfer * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfShouldTransfer);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineSupportsSourceTransfer, DetachMediaSource)
         HRESULT ( STDMETHODCALLTYPE *DetachMediaSource )( 
             IMFMediaEngineSupportsSourceTransfer * This,
             /* [annotation][out] */ 
@@ -5863,6 +6224,7 @@ EXTERN_C const IID IID_IMFMediaEngineSupportsSourceTransfer;
             /* [annotation][out] */ 
             _COM_Outptr_  IMFMediaSourceExtension **ppMSE);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineSupportsSourceTransfer, AttachMediaSource)
         HRESULT ( STDMETHODCALLTYPE *AttachMediaSource )( 
             IMFMediaEngineSupportsSourceTransfer * This,
             /* [annotation][in] */ 
@@ -5952,6 +6314,7 @@ EXTERN_C const IID IID_IMFMediaEngineTransferSource;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaEngineTransferSource * This,
             /* [annotation][in] */ 
@@ -5959,12 +6322,15 @@ EXTERN_C const IID IID_IMFMediaEngineTransferSource;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaEngineTransferSource * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaEngineTransferSource * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineTransferSource, TransferSourceToMediaEngine)
         HRESULT ( STDMETHODCALLTYPE *TransferSourceToMediaEngine )( 
             IMFMediaEngineTransferSource * This,
             /* [annotation][in] */ 
@@ -6119,6 +6485,56 @@ enum MF_TIMED_TEXT_TRACK_READY_STATE
         MF_TIMED_TEXT_TRACK_READY_STATE_ERROR	= ( MF_TIMED_TEXT_TRACK_READY_STATE_LOADED + 1 ) 
     } 	MF_TIMED_TEXT_TRACK_READY_STATE;
 
+typedef 
+enum MF_TIMED_TEXT_RUBY_POSITION
+    {
+        MF_TIMED_TEXT_RUBY_POSITION_BEFORE	= 0,
+        MF_TIMED_TEXT_RUBY_POSITION_AFTER	= 1,
+        MF_TIMED_TEXT_RUBY_POSITION_OUTSIDE	= 2
+    } 	MF_TIMED_TEXT_RUBY_POSITION;
+
+typedef 
+enum MF_TIMED_TEXT_RUBY_ALIGN
+    {
+        MF_TIMED_TEXT_RUBY_ALIGN_CENTER	= 0,
+        MF_TIMED_TEXT_RUBY_ALIGN_START	= 1,
+        MF_TIMED_TEXT_RUBY_ALIGN_END	= 2,
+        MF_TIMED_TEXT_RUBY_ALIGN_SPACEAROUND	= 3,
+        MF_TIMED_TEXT_RUBY_ALIGN_SPACEBETWEEN	= 4,
+        MF_TIMED_TEXT_RUBY_ALIGN_WITHBASE	= 5
+    } 	MF_TIMED_TEXT_RUBY_ALIGN;
+
+typedef 
+enum MF_TIMED_TEXT_RUBY_RESERVE
+    {
+        MF_TIMED_TEXT_RUBY_RESERVE_NONE	= 0,
+        MF_TIMED_TEXT_RUBY_RESERVE_BEFORE	= 1,
+        MF_TIMED_TEXT_RUBY_RESERVE_AFTER	= 2,
+        MF_TIMED_TEXT_RUBY_RESERVE_BOTH	= 3,
+        MF_TIMED_TEXT_RUBY_RESERVE_OUTSIDE	= 4
+    } 	MF_TIMED_TEXT_RUBY_RESERVE;
+
+typedef 
+enum MF_TIMED_TEXT_BOUTEN_TYPE
+    {
+        MF_TIMED_TEXT_BOUTEN_TYPE_NONE	= 0,
+        MF_TIMED_TEXT_BOUTEN_TYPE_AUTO	= 1,
+        MF_TIMED_TEXT_BOUTEN_TYPE_FILLEDCIRCLE	= 2,
+        MF_TIMED_TEXT_BOUTEN_TYPE_OPENCIRCLE	= 3,
+        MF_TIMED_TEXT_BOUTEN_TYPE_FILLEDDOT	= 4,
+        MF_TIMED_TEXT_BOUTEN_TYPE_OPENDOT	= 5,
+        MF_TIMED_TEXT_BOUTEN_TYPE_FILLEDSESAME	= 6,
+        MF_TIMED_TEXT_BOUTEN_TYPE_OPENSESAME	= 7
+    } 	MF_TIMED_TEXT_BOUTEN_TYPE;
+
+typedef 
+enum MF_TIMED_TEXT_BOUTEN_POSITION
+    {
+        MF_TIMED_TEXT_BOUTEN_POSITION_BEFORE	= 0,
+        MF_TIMED_TEXT_BOUTEN_POSITION_AFTER	= 1,
+        MF_TIMED_TEXT_BOUTEN_POSITION_OUTSIDE	= 2
+    } 	MF_TIMED_TEXT_BOUTEN_POSITION;
+
 
 
 
@@ -6240,6 +6656,7 @@ EXTERN_C const IID IID_IMFTimedText;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFTimedText * This,
             /* [annotation][in] */ 
@@ -6247,17 +6664,21 @@ EXTERN_C const IID IID_IMFTimedText;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFTimedText * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFTimedText * This);
         
+        DECLSPEC_XFGVIRT(IMFTimedText, RegisterNotifications)
         HRESULT ( STDMETHODCALLTYPE *RegisterNotifications )( 
             IMFTimedText * This,
             /* [annotation][in] */ 
             _In_opt_  IMFTimedTextNotify *notify);
         
+        DECLSPEC_XFGVIRT(IMFTimedText, SelectTrack)
         HRESULT ( STDMETHODCALLTYPE *SelectTrack )( 
             IMFTimedText * This,
             /* [annotation][in] */ 
@@ -6265,6 +6686,7 @@ EXTERN_C const IID IID_IMFTimedText;
             /* [annotation][in] */ 
             _In_  BOOL selected);
         
+        DECLSPEC_XFGVIRT(IMFTimedText, AddDataSource)
         HRESULT ( STDMETHODCALLTYPE *AddDataSource )( 
             IMFTimedText * This,
             /* [annotation][in] */ 
@@ -6280,6 +6702,7 @@ EXTERN_C const IID IID_IMFTimedText;
             /* [annotation][in] */ 
             _Out_  DWORD *trackId);
         
+        DECLSPEC_XFGVIRT(IMFTimedText, AddDataSourceFromUrl)
         HRESULT ( STDMETHODCALLTYPE *AddDataSourceFromUrl )( 
             IMFTimedText * This,
             /* [annotation][in] */ 
@@ -6295,6 +6718,7 @@ EXTERN_C const IID IID_IMFTimedText;
             /* [annotation][in] */ 
             _Out_  DWORD *trackId);
         
+        DECLSPEC_XFGVIRT(IMFTimedText, AddTrack)
         HRESULT ( STDMETHODCALLTYPE *AddTrack )( 
             IMFTimedText * This,
             /* [annotation][in] */ 
@@ -6306,46 +6730,55 @@ EXTERN_C const IID IID_IMFTimedText;
             /* [annotation][out] */ 
             _COM_Outptr_  IMFTimedTextTrack **track);
         
+        DECLSPEC_XFGVIRT(IMFTimedText, RemoveTrack)
         HRESULT ( STDMETHODCALLTYPE *RemoveTrack )( 
             IMFTimedText * This,
             /* [annotation][in] */ 
             _In_  IMFTimedTextTrack *track);
         
+        DECLSPEC_XFGVIRT(IMFTimedText, GetCueTimeOffset)
         HRESULT ( STDMETHODCALLTYPE *GetCueTimeOffset )( 
             IMFTimedText * This,
             /* [annotation][out] */ 
             _Out_  double *offset);
         
+        DECLSPEC_XFGVIRT(IMFTimedText, SetCueTimeOffset)
         HRESULT ( STDMETHODCALLTYPE *SetCueTimeOffset )( 
             IMFTimedText * This,
             /* [annotation][in] */ 
             _In_  double offset);
         
+        DECLSPEC_XFGVIRT(IMFTimedText, GetTracks)
         HRESULT ( STDMETHODCALLTYPE *GetTracks )( 
             IMFTimedText * This,
             /* [annotation][out] */ 
             _COM_Outptr_  IMFTimedTextTrackList **tracks);
         
+        DECLSPEC_XFGVIRT(IMFTimedText, GetActiveTracks)
         HRESULT ( STDMETHODCALLTYPE *GetActiveTracks )( 
             IMFTimedText * This,
             /* [annotation][out] */ 
             _COM_Outptr_  IMFTimedTextTrackList **activeTracks);
         
+        DECLSPEC_XFGVIRT(IMFTimedText, GetTextTracks)
         HRESULT ( STDMETHODCALLTYPE *GetTextTracks )( 
             IMFTimedText * This,
             /* [annotation][out] */ 
             _COM_Outptr_  IMFTimedTextTrackList **textTracks);
         
+        DECLSPEC_XFGVIRT(IMFTimedText, GetMetadataTracks)
         HRESULT ( STDMETHODCALLTYPE *GetMetadataTracks )( 
             IMFTimedText * This,
             /* [annotation][out] */ 
             _COM_Outptr_  IMFTimedTextTrackList **metadataTracks);
         
+        DECLSPEC_XFGVIRT(IMFTimedText, SetInBandEnabled)
         HRESULT ( STDMETHODCALLTYPE *SetInBandEnabled )( 
             IMFTimedText * This,
             /* [annotation][in] */ 
             _In_  BOOL enabled);
         
+        DECLSPEC_XFGVIRT(IMFTimedText, IsInBandEnabled)
         BOOL ( STDMETHODCALLTYPE *IsInBandEnabled )( 
             IMFTimedText * This);
         
@@ -6485,6 +6918,7 @@ EXTERN_C const IID IID_IMFTimedTextNotify;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFTimedTextNotify * This,
             /* [annotation][in] */ 
@@ -6492,22 +6926,27 @@ EXTERN_C const IID IID_IMFTimedTextNotify;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFTimedTextNotify * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFTimedTextNotify * This);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextNotify, TrackAdded)
         void ( STDMETHODCALLTYPE *TrackAdded )( 
             IMFTimedTextNotify * This,
             /* [annotation][in] */ 
             _In_  DWORD trackId);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextNotify, TrackRemoved)
         void ( STDMETHODCALLTYPE *TrackRemoved )( 
             IMFTimedTextNotify * This,
             /* [annotation][in] */ 
             _In_  DWORD trackId);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextNotify, TrackSelected)
         void ( STDMETHODCALLTYPE *TrackSelected )( 
             IMFTimedTextNotify * This,
             /* [annotation][in] */ 
@@ -6515,11 +6954,13 @@ EXTERN_C const IID IID_IMFTimedTextNotify;
             /* [annotation][in] */ 
             _In_  BOOL selected);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextNotify, TrackReadyStateChanged)
         void ( STDMETHODCALLTYPE *TrackReadyStateChanged )( 
             IMFTimedTextNotify * This,
             /* [annotation][in] */ 
             _In_  DWORD trackId);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextNotify, Error)
         void ( STDMETHODCALLTYPE *Error )( 
             IMFTimedTextNotify * This,
             /* [annotation][in] */ 
@@ -6529,6 +6970,7 @@ EXTERN_C const IID IID_IMFTimedTextNotify;
             /* [annotation][in] */ 
             _In_  DWORD sourceTrackId);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextNotify, Cue)
         void ( STDMETHODCALLTYPE *Cue )( 
             IMFTimedTextNotify * This,
             /* [annotation][in] */ 
@@ -6538,6 +6980,7 @@ EXTERN_C const IID IID_IMFTimedTextNotify;
             /* [annotation][in] */ 
             _In_opt_  IMFTimedTextCue *cue);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextNotify, Reset)
         void ( STDMETHODCALLTYPE *Reset )( 
             IMFTimedTextNotify * This);
         
@@ -6658,6 +7101,7 @@ EXTERN_C const IID IID_IMFTimedTextTrack;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFTimedTextTrack * This,
             /* [annotation][in] */ 
@@ -6665,58 +7109,73 @@ EXTERN_C const IID IID_IMFTimedTextTrack;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFTimedTextTrack * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFTimedTextTrack * This);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextTrack, GetId)
         DWORD ( STDMETHODCALLTYPE *GetId )( 
             IMFTimedTextTrack * This);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextTrack, GetLabel)
         HRESULT ( STDMETHODCALLTYPE *GetLabel )( 
             IMFTimedTextTrack * This,
             /* [annotation][out] */ 
             _Outptr_  LPWSTR *label);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextTrack, SetLabel)
         HRESULT ( STDMETHODCALLTYPE *SetLabel )( 
             IMFTimedTextTrack * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR label);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextTrack, GetLanguage)
         HRESULT ( STDMETHODCALLTYPE *GetLanguage )( 
             IMFTimedTextTrack * This,
             /* [annotation][out] */ 
             _Outptr_  LPWSTR *language);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextTrack, GetTrackKind)
         MF_TIMED_TEXT_TRACK_KIND ( STDMETHODCALLTYPE *GetTrackKind )( 
             IMFTimedTextTrack * This);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextTrack, IsInBand)
         BOOL ( STDMETHODCALLTYPE *IsInBand )( 
             IMFTimedTextTrack * This);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextTrack, GetInBandMetadataTrackDispatchType)
         HRESULT ( STDMETHODCALLTYPE *GetInBandMetadataTrackDispatchType )( 
             IMFTimedTextTrack * This,
             /* [annotation][out] */ 
             _Outptr_  LPWSTR *dispatchType);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextTrack, IsActive)
         BOOL ( STDMETHODCALLTYPE *IsActive )( 
             IMFTimedTextTrack * This);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextTrack, GetErrorCode)
         MF_TIMED_TEXT_ERROR_CODE ( STDMETHODCALLTYPE *GetErrorCode )( 
             IMFTimedTextTrack * This);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextTrack, GetExtendedErrorCode)
         HRESULT ( STDMETHODCALLTYPE *GetExtendedErrorCode )( 
             IMFTimedTextTrack * This);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextTrack, GetDataFormat)
         HRESULT ( STDMETHODCALLTYPE *GetDataFormat )( 
             IMFTimedTextTrack * This,
             /* [annotation][out] */ 
             _Out_  GUID *format);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextTrack, GetReadyState)
         MF_TIMED_TEXT_TRACK_READY_STATE ( STDMETHODCALLTYPE *GetReadyState )( 
             IMFTimedTextTrack * This);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextTrack, GetCueList)
         HRESULT ( STDMETHODCALLTYPE *GetCueList )( 
             IMFTimedTextTrack * This,
             /* [annotation][out] */ 
@@ -6833,6 +7292,7 @@ EXTERN_C const IID IID_IMFTimedTextTrackList;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFTimedTextTrackList * This,
             /* [annotation][in] */ 
@@ -6840,15 +7300,19 @@ EXTERN_C const IID IID_IMFTimedTextTrackList;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFTimedTextTrackList * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFTimedTextTrackList * This);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextTrackList, GetLength)
         DWORD ( STDMETHODCALLTYPE *GetLength )( 
             IMFTimedTextTrackList * This);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextTrackList, GetTrack)
         HRESULT ( STDMETHODCALLTYPE *GetTrack )( 
             IMFTimedTextTrackList * This,
             /* [annotation][in] */ 
@@ -6856,6 +7320,7 @@ EXTERN_C const IID IID_IMFTimedTextTrackList;
             /* [annotation][out] */ 
             _COM_Outptr_  IMFTimedTextTrack **track);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextTrackList, GetTrackById)
         HRESULT ( STDMETHODCALLTYPE *GetTrackById )( 
             IMFTimedTextTrackList * This,
             /* [annotation][in] */ 
@@ -6964,6 +7429,7 @@ EXTERN_C const IID IID_IMFTimedTextCue;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFTimedTextCue * This,
             /* [annotation][in] */ 
@@ -6971,50 +7437,63 @@ EXTERN_C const IID IID_IMFTimedTextCue;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFTimedTextCue * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFTimedTextCue * This);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextCue, GetId)
         DWORD ( STDMETHODCALLTYPE *GetId )( 
             IMFTimedTextCue * This);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextCue, GetOriginalId)
         HRESULT ( STDMETHODCALLTYPE *GetOriginalId )( 
             IMFTimedTextCue * This,
             /* [annotation][out] */ 
             _Outptr_  LPWSTR *originalId);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextCue, GetCueKind)
         MF_TIMED_TEXT_TRACK_KIND ( STDMETHODCALLTYPE *GetCueKind )( 
             IMFTimedTextCue * This);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextCue, GetStartTime)
         double ( STDMETHODCALLTYPE *GetStartTime )( 
             IMFTimedTextCue * This);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextCue, GetDuration)
         double ( STDMETHODCALLTYPE *GetDuration )( 
             IMFTimedTextCue * This);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextCue, GetTrackId)
         DWORD ( STDMETHODCALLTYPE *GetTrackId )( 
             IMFTimedTextCue * This);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextCue, GetData)
         HRESULT ( STDMETHODCALLTYPE *GetData )( 
             IMFTimedTextCue * This,
             /* [annotation][out] */ 
             _COM_Outptr_result_maybenull_  IMFTimedTextBinary **data);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextCue, GetRegion)
         HRESULT ( STDMETHODCALLTYPE *GetRegion )( 
             IMFTimedTextCue * This,
             /* [annotation][out] */ 
             _COM_Outptr_result_maybenull_  IMFTimedTextRegion **region);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextCue, GetStyle)
         HRESULT ( STDMETHODCALLTYPE *GetStyle )( 
             IMFTimedTextCue * This,
             /* [annotation][out] */ 
             _COM_Outptr_result_maybenull_  IMFTimedTextStyle **style);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextCue, GetLineCount)
         DWORD ( STDMETHODCALLTYPE *GetLineCount )( 
             IMFTimedTextCue * This);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextCue, GetLine)
         HRESULT ( STDMETHODCALLTYPE *GetLine )( 
             IMFTimedTextCue * This,
             /* [annotation][in] */ 
@@ -7129,6 +7608,7 @@ EXTERN_C const IID IID_IMFTimedTextFormattedText;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFTimedTextFormattedText * This,
             /* [annotation][in] */ 
@@ -7136,20 +7616,25 @@ EXTERN_C const IID IID_IMFTimedTextFormattedText;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFTimedTextFormattedText * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFTimedTextFormattedText * This);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextFormattedText, GetText)
         HRESULT ( STDMETHODCALLTYPE *GetText )( 
             IMFTimedTextFormattedText * This,
             /* [annotation][out] */ 
             _Outptr_result_maybenull_  LPWSTR *text);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextFormattedText, GetSubformattingCount)
         DWORD ( STDMETHODCALLTYPE *GetSubformattingCount )( 
             IMFTimedTextFormattedText * This);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextFormattedText, GetSubformatting)
         HRESULT ( STDMETHODCALLTYPE *GetSubformatting )( 
             IMFTimedTextFormattedText * This,
             /* [annotation][in] */ 
@@ -7286,6 +7771,7 @@ EXTERN_C const IID IID_IMFTimedTextStyle;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFTimedTextStyle * This,
             /* [annotation][in] */ 
@@ -7293,25 +7779,31 @@ EXTERN_C const IID IID_IMFTimedTextStyle;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFTimedTextStyle * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFTimedTextStyle * This);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextStyle, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             IMFTimedTextStyle * This,
             /* [annotation][out] */ 
             _Outptr_  LPWSTR *name);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextStyle, IsExternal)
         BOOL ( STDMETHODCALLTYPE *IsExternal )( 
             IMFTimedTextStyle * This);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextStyle, GetFontFamily)
         HRESULT ( STDMETHODCALLTYPE *GetFontFamily )( 
             IMFTimedTextStyle * This,
             /* [annotation][out] */ 
             _Outptr_  LPWSTR *fontFamily);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextStyle, GetFontSize)
         HRESULT ( STDMETHODCALLTYPE *GetFontSize )( 
             IMFTimedTextStyle * This,
             /* [annotation][out] */ 
@@ -7319,46 +7811,55 @@ EXTERN_C const IID IID_IMFTimedTextStyle;
             /* [annotation][out] */ 
             _Out_  MF_TIMED_TEXT_UNIT_TYPE *unitType);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextStyle, GetColor)
         HRESULT ( STDMETHODCALLTYPE *GetColor )( 
             IMFTimedTextStyle * This,
             /* [annotation][out] */ 
             _Out_  MFARGB *color);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextStyle, GetBackgroundColor)
         HRESULT ( STDMETHODCALLTYPE *GetBackgroundColor )( 
             IMFTimedTextStyle * This,
             /* [annotation][out] */ 
             _Out_  MFARGB *bgColor);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextStyle, GetShowBackgroundAlways)
         HRESULT ( STDMETHODCALLTYPE *GetShowBackgroundAlways )( 
             IMFTimedTextStyle * This,
             /* [annotation][out] */ 
             _Out_  BOOL *showBackgroundAlways);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextStyle, GetFontStyle)
         HRESULT ( STDMETHODCALLTYPE *GetFontStyle )( 
             IMFTimedTextStyle * This,
             /* [annotation][out] */ 
             _Out_  MF_TIMED_TEXT_FONT_STYLE *fontStyle);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextStyle, GetBold)
         HRESULT ( STDMETHODCALLTYPE *GetBold )( 
             IMFTimedTextStyle * This,
             /* [annotation][out] */ 
             _Out_  BOOL *bold);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextStyle, GetRightToLeft)
         HRESULT ( STDMETHODCALLTYPE *GetRightToLeft )( 
             IMFTimedTextStyle * This,
             /* [annotation][out] */ 
             _Out_  BOOL *rightToLeft);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextStyle, GetTextAlignment)
         HRESULT ( STDMETHODCALLTYPE *GetTextAlignment )( 
             IMFTimedTextStyle * This,
             /* [annotation][out] */ 
             _Out_  MF_TIMED_TEXT_ALIGNMENT *textAlign);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextStyle, GetTextDecoration)
         HRESULT ( STDMETHODCALLTYPE *GetTextDecoration )( 
             IMFTimedTextStyle * This,
             /* [annotation][out] */ 
             _Out_  DWORD *textDecoration);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextStyle, GetTextOutline)
         HRESULT ( STDMETHODCALLTYPE *GetTextOutline )( 
             IMFTimedTextStyle * This,
             /* [annotation][out] */ 
@@ -7533,6 +8034,7 @@ EXTERN_C const IID IID_IMFTimedTextRegion;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFTimedTextRegion * This,
             /* [annotation][in] */ 
@@ -7540,17 +8042,21 @@ EXTERN_C const IID IID_IMFTimedTextRegion;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFTimedTextRegion * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFTimedTextRegion * This);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextRegion, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             IMFTimedTextRegion * This,
             /* [annotation][out] */ 
             _Outptr_  LPWSTR *name);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextRegion, GetPosition)
         HRESULT ( STDMETHODCALLTYPE *GetPosition )( 
             IMFTimedTextRegion * This,
             /* [annotation][out] */ 
@@ -7560,6 +8066,7 @@ EXTERN_C const IID IID_IMFTimedTextRegion;
             /* [annotation][out] */ 
             _Out_  MF_TIMED_TEXT_UNIT_TYPE *unitType);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextRegion, GetExtent)
         HRESULT ( STDMETHODCALLTYPE *GetExtent )( 
             IMFTimedTextRegion * This,
             /* [annotation][out] */ 
@@ -7569,21 +8076,25 @@ EXTERN_C const IID IID_IMFTimedTextRegion;
             /* [annotation][out] */ 
             _Out_  MF_TIMED_TEXT_UNIT_TYPE *unitType);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextRegion, GetBackgroundColor)
         HRESULT ( STDMETHODCALLTYPE *GetBackgroundColor )( 
             IMFTimedTextRegion * This,
             /* [annotation][out] */ 
             _Out_  MFARGB *bgColor);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextRegion, GetWritingMode)
         HRESULT ( STDMETHODCALLTYPE *GetWritingMode )( 
             IMFTimedTextRegion * This,
             /* [annotation][out] */ 
             _Out_  MF_TIMED_TEXT_WRITING_MODE *writingMode);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextRegion, GetDisplayAlignment)
         HRESULT ( STDMETHODCALLTYPE *GetDisplayAlignment )( 
             IMFTimedTextRegion * This,
             /* [annotation][out] */ 
             _Out_  MF_TIMED_TEXT_DISPLAY_ALIGNMENT *displayAlign);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextRegion, GetLineHeight)
         HRESULT ( STDMETHODCALLTYPE *GetLineHeight )( 
             IMFTimedTextRegion * This,
             /* [annotation][out] */ 
@@ -7591,11 +8102,13 @@ EXTERN_C const IID IID_IMFTimedTextRegion;
             /* [annotation][out] */ 
             _Out_  MF_TIMED_TEXT_UNIT_TYPE *unitType);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextRegion, GetClipOverflow)
         HRESULT ( STDMETHODCALLTYPE *GetClipOverflow )( 
             IMFTimedTextRegion * This,
             /* [annotation][out] */ 
             _Out_  BOOL *clipOverflow);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextRegion, GetPadding)
         HRESULT ( STDMETHODCALLTYPE *GetPadding )( 
             IMFTimedTextRegion * This,
             /* [annotation][out] */ 
@@ -7609,16 +8122,19 @@ EXTERN_C const IID IID_IMFTimedTextRegion;
             /* [annotation][out] */ 
             _Out_  MF_TIMED_TEXT_UNIT_TYPE *unitType);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextRegion, GetWrap)
         HRESULT ( STDMETHODCALLTYPE *GetWrap )( 
             IMFTimedTextRegion * This,
             /* [annotation][out] */ 
             _Out_  BOOL *wrap);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextRegion, GetZIndex)
         HRESULT ( STDMETHODCALLTYPE *GetZIndex )( 
             IMFTimedTextRegion * This,
             /* [annotation][out] */ 
             _Out_  INT32 *zIndex);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextRegion, GetScrollMode)
         HRESULT ( STDMETHODCALLTYPE *GetScrollMode )( 
             IMFTimedTextRegion * This,
             /* [annotation][out] */ 
@@ -7724,6 +8240,7 @@ EXTERN_C const IID IID_IMFTimedTextBinary;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFTimedTextBinary * This,
             /* [annotation][in] */ 
@@ -7731,12 +8248,15 @@ EXTERN_C const IID IID_IMFTimedTextBinary;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFTimedTextBinary * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFTimedTextBinary * This);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextBinary, GetData)
         HRESULT ( STDMETHODCALLTYPE *GetData )( 
             IMFTimedTextBinary * This,
             /* [annotation][out] */ 
@@ -7851,6 +8371,7 @@ EXTERN_C const IID IID_IMFTimedTextCueList;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFTimedTextCueList * This,
             /* [annotation][in] */ 
@@ -7858,15 +8379,19 @@ EXTERN_C const IID IID_IMFTimedTextCueList;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFTimedTextCueList * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFTimedTextCueList * This);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextCueList, GetLength)
         DWORD ( STDMETHODCALLTYPE *GetLength )( 
             IMFTimedTextCueList * This);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextCueList, GetCueByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetCueByIndex )( 
             IMFTimedTextCueList * This,
             /* [annotation][in] */ 
@@ -7874,6 +8399,7 @@ EXTERN_C const IID IID_IMFTimedTextCueList;
             /* [annotation][out] */ 
             _COM_Outptr_  IMFTimedTextCue **cue);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextCueList, GetCueById)
         HRESULT ( STDMETHODCALLTYPE *GetCueById )( 
             IMFTimedTextCueList * This,
             /* [annotation][in] */ 
@@ -7881,6 +8407,7 @@ EXTERN_C const IID IID_IMFTimedTextCueList;
             /* [annotation][out] */ 
             _COM_Outptr_  IMFTimedTextCue **cue);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextCueList, GetCueByOriginalId)
         HRESULT ( STDMETHODCALLTYPE *GetCueByOriginalId )( 
             IMFTimedTextCueList * This,
             /* [annotation][in] */ 
@@ -7888,6 +8415,7 @@ EXTERN_C const IID IID_IMFTimedTextCueList;
             /* [annotation][out] */ 
             _COM_Outptr_  IMFTimedTextCue **cue);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextCueList, AddTextCue)
         HRESULT ( STDMETHODCALLTYPE *AddTextCue )( 
             IMFTimedTextCueList * This,
             /* [annotation][in] */ 
@@ -7899,6 +8427,7 @@ EXTERN_C const IID IID_IMFTimedTextCueList;
             /* [annotation][out] */ 
             _COM_Outptr_opt_  IMFTimedTextCue **cue);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextCueList, AddDataCue)
         HRESULT ( STDMETHODCALLTYPE *AddDataCue )( 
             IMFTimedTextCueList * This,
             /* [annotation][in] */ 
@@ -7912,6 +8441,7 @@ EXTERN_C const IID IID_IMFTimedTextCueList;
             /* [annotation][out] */ 
             _COM_Outptr_opt_  IMFTimedTextCue **cue);
         
+        DECLSPEC_XFGVIRT(IMFTimedTextCueList, RemoveCue)
         HRESULT ( STDMETHODCALLTYPE *RemoveCue )( 
             IMFTimedTextCueList * This,
             /* [annotation][in] */ 
@@ -7972,7 +8502,372 @@ EXTERN_C const IID IID_IMFTimedTextCueList;
 #endif 	/* __IMFTimedTextCueList_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_mfmediaengine_0000_0044 */
+#ifndef __IMFTimedTextRuby_INTERFACE_DEFINED__
+#define __IMFTimedTextRuby_INTERFACE_DEFINED__
+
+/* interface IMFTimedTextRuby */
+/* [local][unique][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IMFTimedTextRuby;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("76c6a6f5-4955-4de5-b27b-14b734cc14b4")
+    IMFTimedTextRuby : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE GetRubyText( 
+            /* [annotation][out] */ 
+            _Outptr_  LPWSTR *rubyText) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetRubyPosition( 
+            /* [annotation][out] */ 
+            _Out_  MF_TIMED_TEXT_RUBY_POSITION *value) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetRubyAlign( 
+            /* [annotation][out] */ 
+            _Out_  MF_TIMED_TEXT_RUBY_ALIGN *value) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetRubyReserve( 
+            /* [annotation][out] */ 
+            _Out_  MF_TIMED_TEXT_RUBY_RESERVE *value) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IMFTimedTextRubyVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IMFTimedTextRuby * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IMFTimedTextRuby * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IMFTimedTextRuby * This);
+        
+        DECLSPEC_XFGVIRT(IMFTimedTextRuby, GetRubyText)
+        HRESULT ( STDMETHODCALLTYPE *GetRubyText )( 
+            IMFTimedTextRuby * This,
+            /* [annotation][out] */ 
+            _Outptr_  LPWSTR *rubyText);
+        
+        DECLSPEC_XFGVIRT(IMFTimedTextRuby, GetRubyPosition)
+        HRESULT ( STDMETHODCALLTYPE *GetRubyPosition )( 
+            IMFTimedTextRuby * This,
+            /* [annotation][out] */ 
+            _Out_  MF_TIMED_TEXT_RUBY_POSITION *value);
+        
+        DECLSPEC_XFGVIRT(IMFTimedTextRuby, GetRubyAlign)
+        HRESULT ( STDMETHODCALLTYPE *GetRubyAlign )( 
+            IMFTimedTextRuby * This,
+            /* [annotation][out] */ 
+            _Out_  MF_TIMED_TEXT_RUBY_ALIGN *value);
+        
+        DECLSPEC_XFGVIRT(IMFTimedTextRuby, GetRubyReserve)
+        HRESULT ( STDMETHODCALLTYPE *GetRubyReserve )( 
+            IMFTimedTextRuby * This,
+            /* [annotation][out] */ 
+            _Out_  MF_TIMED_TEXT_RUBY_RESERVE *value);
+        
+        END_INTERFACE
+    } IMFTimedTextRubyVtbl;
+
+    interface IMFTimedTextRuby
+    {
+        CONST_VTBL struct IMFTimedTextRubyVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IMFTimedTextRuby_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IMFTimedTextRuby_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IMFTimedTextRuby_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IMFTimedTextRuby_GetRubyText(This,rubyText)	\
+    ( (This)->lpVtbl -> GetRubyText(This,rubyText) ) 
+
+#define IMFTimedTextRuby_GetRubyPosition(This,value)	\
+    ( (This)->lpVtbl -> GetRubyPosition(This,value) ) 
+
+#define IMFTimedTextRuby_GetRubyAlign(This,value)	\
+    ( (This)->lpVtbl -> GetRubyAlign(This,value) ) 
+
+#define IMFTimedTextRuby_GetRubyReserve(This,value)	\
+    ( (This)->lpVtbl -> GetRubyReserve(This,value) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IMFTimedTextRuby_INTERFACE_DEFINED__ */
+
+
+#ifndef __IMFTimedTextBouten_INTERFACE_DEFINED__
+#define __IMFTimedTextBouten_INTERFACE_DEFINED__
+
+/* interface IMFTimedTextBouten */
+/* [local][unique][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IMFTimedTextBouten;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("3c5f3e8a-90c0-464e-8136-898d2975f847")
+    IMFTimedTextBouten : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE GetBoutenType( 
+            /* [annotation][out] */ 
+            _Out_  MF_TIMED_TEXT_BOUTEN_TYPE *value) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetBoutenColor( 
+            /* [annotation][out] */ 
+            _Out_  MFARGB *value) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetBoutenPosition( 
+            /* [annotation][out] */ 
+            _Out_  MF_TIMED_TEXT_BOUTEN_POSITION *value) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IMFTimedTextBoutenVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IMFTimedTextBouten * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IMFTimedTextBouten * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IMFTimedTextBouten * This);
+        
+        DECLSPEC_XFGVIRT(IMFTimedTextBouten, GetBoutenType)
+        HRESULT ( STDMETHODCALLTYPE *GetBoutenType )( 
+            IMFTimedTextBouten * This,
+            /* [annotation][out] */ 
+            _Out_  MF_TIMED_TEXT_BOUTEN_TYPE *value);
+        
+        DECLSPEC_XFGVIRT(IMFTimedTextBouten, GetBoutenColor)
+        HRESULT ( STDMETHODCALLTYPE *GetBoutenColor )( 
+            IMFTimedTextBouten * This,
+            /* [annotation][out] */ 
+            _Out_  MFARGB *value);
+        
+        DECLSPEC_XFGVIRT(IMFTimedTextBouten, GetBoutenPosition)
+        HRESULT ( STDMETHODCALLTYPE *GetBoutenPosition )( 
+            IMFTimedTextBouten * This,
+            /* [annotation][out] */ 
+            _Out_  MF_TIMED_TEXT_BOUTEN_POSITION *value);
+        
+        END_INTERFACE
+    } IMFTimedTextBoutenVtbl;
+
+    interface IMFTimedTextBouten
+    {
+        CONST_VTBL struct IMFTimedTextBoutenVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IMFTimedTextBouten_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IMFTimedTextBouten_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IMFTimedTextBouten_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IMFTimedTextBouten_GetBoutenType(This,value)	\
+    ( (This)->lpVtbl -> GetBoutenType(This,value) ) 
+
+#define IMFTimedTextBouten_GetBoutenColor(This,value)	\
+    ( (This)->lpVtbl -> GetBoutenColor(This,value) ) 
+
+#define IMFTimedTextBouten_GetBoutenPosition(This,value)	\
+    ( (This)->lpVtbl -> GetBoutenPosition(This,value) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IMFTimedTextBouten_INTERFACE_DEFINED__ */
+
+
+#ifndef __IMFTimedTextStyle2_INTERFACE_DEFINED__
+#define __IMFTimedTextStyle2_INTERFACE_DEFINED__
+
+/* interface IMFTimedTextStyle2 */
+/* [local][unique][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IMFTimedTextStyle2;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("db639199-c809-4c89-bfca-d0bbb9729d6e")
+    IMFTimedTextStyle2 : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE GetRuby( 
+            /* [annotation][out] */ 
+            _COM_Outptr_result_maybenull_  IMFTimedTextRuby **ruby) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetBouten( 
+            /* [annotation][out] */ 
+            _COM_Outptr_result_maybenull_  IMFTimedTextBouten **bouten) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE IsTextCombined( 
+            /* [annotation][out] */ 
+            _Out_  BOOL *value) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetFontAngleInDegrees( 
+            /* [annotation][out] */ 
+            _Out_  double *value) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IMFTimedTextStyle2Vtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IMFTimedTextStyle2 * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IMFTimedTextStyle2 * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IMFTimedTextStyle2 * This);
+        
+        DECLSPEC_XFGVIRT(IMFTimedTextStyle2, GetRuby)
+        HRESULT ( STDMETHODCALLTYPE *GetRuby )( 
+            IMFTimedTextStyle2 * This,
+            /* [annotation][out] */ 
+            _COM_Outptr_result_maybenull_  IMFTimedTextRuby **ruby);
+        
+        DECLSPEC_XFGVIRT(IMFTimedTextStyle2, GetBouten)
+        HRESULT ( STDMETHODCALLTYPE *GetBouten )( 
+            IMFTimedTextStyle2 * This,
+            /* [annotation][out] */ 
+            _COM_Outptr_result_maybenull_  IMFTimedTextBouten **bouten);
+        
+        DECLSPEC_XFGVIRT(IMFTimedTextStyle2, IsTextCombined)
+        HRESULT ( STDMETHODCALLTYPE *IsTextCombined )( 
+            IMFTimedTextStyle2 * This,
+            /* [annotation][out] */ 
+            _Out_  BOOL *value);
+        
+        DECLSPEC_XFGVIRT(IMFTimedTextStyle2, GetFontAngleInDegrees)
+        HRESULT ( STDMETHODCALLTYPE *GetFontAngleInDegrees )( 
+            IMFTimedTextStyle2 * This,
+            /* [annotation][out] */ 
+            _Out_  double *value);
+        
+        END_INTERFACE
+    } IMFTimedTextStyle2Vtbl;
+
+    interface IMFTimedTextStyle2
+    {
+        CONST_VTBL struct IMFTimedTextStyle2Vtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IMFTimedTextStyle2_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IMFTimedTextStyle2_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IMFTimedTextStyle2_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IMFTimedTextStyle2_GetRuby(This,ruby)	\
+    ( (This)->lpVtbl -> GetRuby(This,ruby) ) 
+
+#define IMFTimedTextStyle2_GetBouten(This,bouten)	\
+    ( (This)->lpVtbl -> GetBouten(This,bouten) ) 
+
+#define IMFTimedTextStyle2_IsTextCombined(This,value)	\
+    ( (This)->lpVtbl -> IsTextCombined(This,value) ) 
+
+#define IMFTimedTextStyle2_GetFontAngleInDegrees(This,value)	\
+    ( (This)->lpVtbl -> GetFontAngleInDegrees(This,value) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IMFTimedTextStyle2_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_mfmediaengine_0000_0047 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
@@ -8004,8 +8899,8 @@ EXTERN_GUID(MF_MEDIA_ENGINE_EME_CALLBACK,
 0x494553a7, 0xa481, 0x4cb7, 0xbe, 0xc5, 0x38, 0x09, 0x03, 0x51, 0x37, 0x31);
 
 
-extern RPC_IF_HANDLE __MIDL_itf_mfmediaengine_0000_0044_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_mfmediaengine_0000_0044_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mfmediaengine_0000_0047_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mfmediaengine_0000_0047_v0_0_s_ifspec;
 
 #ifndef __IMFMediaEngineEMENotify_INTERFACE_DEFINED__
 #define __IMFMediaEngineEMENotify_INTERFACE_DEFINED__
@@ -8041,6 +8936,7 @@ EXTERN_C const IID IID_IMFMediaEngineEMENotify;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaEngineEMENotify * This,
             /* [annotation][in] */ 
@@ -8048,12 +8944,15 @@ EXTERN_C const IID IID_IMFMediaEngineEMENotify;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaEngineEMENotify * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaEngineEMENotify * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEMENotify, Encrypted)
         void ( STDMETHODCALLTYPE *Encrypted )( 
             IMFMediaEngineEMENotify * This,
             /* [annotation] */ 
@@ -8063,6 +8962,7 @@ EXTERN_C const IID IID_IMFMediaEngineEMENotify;
             /* [annotation] */ 
             _In_  BSTR bstrInitDataType);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineEMENotify, WaitingForKey)
         void ( STDMETHODCALLTYPE *WaitingForKey )( 
             IMFMediaEngineEMENotify * This);
         
@@ -8106,9 +9006,15 @@ EXTERN_C const IID IID_IMFMediaEngineEMENotify;
 #endif 	/* __IMFMediaEngineEMENotify_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_mfmediaengine_0000_0045 */
+/* interface __MIDL_itf_mfmediaengine_0000_0048 */
 /* [local] */ 
 
+#endif // (WINVER >= _WIN32_WINNT_WINTHRESHOLD) 
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+#pragma endregion
+#pragma region Application Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+#if (WINVER >= _WIN32_WINNT_WINTHRESHOLD) 
 typedef 
 enum MF_MEDIAKEYS_REQUIREMENT
     {
@@ -8117,10 +9023,16 @@ enum MF_MEDIAKEYS_REQUIREMENT
         MF_MEDIAKEYS_REQUIREMENT_NOT_ALLOWED	= 3
     } 	MF_MEDIAKEYS_REQUIREMENT;
 
+#endif // (WINVER >= _WIN32_WINNT_WINTHRESHOLD) 
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
+#pragma endregion
+#pragma region Desktop Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+#if (WINVER >= _WIN32_WINNT_WINTHRESHOLD) 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_mfmediaengine_0000_0045_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_mfmediaengine_0000_0045_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mfmediaengine_0000_0048_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mfmediaengine_0000_0048_v0_0_s_ifspec;
 
 #ifndef __IMFMediaKeySessionNotify2_INTERFACE_DEFINED__
 #define __IMFMediaKeySessionNotify2_INTERFACE_DEFINED__
@@ -8158,6 +9070,7 @@ EXTERN_C const IID IID_IMFMediaKeySessionNotify2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaKeySessionNotify2 * This,
             /* [annotation][in] */ 
@@ -8165,12 +9078,15 @@ EXTERN_C const IID IID_IMFMediaKeySessionNotify2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaKeySessionNotify2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaKeySessionNotify2 * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeySessionNotify, KeyMessage)
         void ( STDMETHODCALLTYPE *KeyMessage )( 
             IMFMediaKeySessionNotify2 * This,
             /* [annotation] */ 
@@ -8180,9 +9096,11 @@ EXTERN_C const IID IID_IMFMediaKeySessionNotify2;
             /* [annotation] */ 
             _In_  DWORD cb);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeySessionNotify, KeyAdded)
         void ( STDMETHODCALLTYPE *KeyAdded )( 
             IMFMediaKeySessionNotify2 * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeySessionNotify, KeyError)
         void ( STDMETHODCALLTYPE *KeyError )( 
             IMFMediaKeySessionNotify2 * This,
             /* [annotation] */ 
@@ -8190,6 +9108,7 @@ EXTERN_C const IID IID_IMFMediaKeySessionNotify2;
             /* [annotation] */ 
             _In_  DWORD systemCode);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeySessionNotify2, KeyMessage2)
         void ( STDMETHODCALLTYPE *KeyMessage2 )( 
             IMFMediaKeySessionNotify2 * This,
             /* [annotation] */ 
@@ -8201,6 +9120,7 @@ EXTERN_C const IID IID_IMFMediaKeySessionNotify2;
             /* [annotation] */ 
             _In_  DWORD cbMessage);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeySessionNotify2, KeyStatusChange)
         void ( STDMETHODCALLTYPE *KeyStatusChange )( 
             IMFMediaKeySessionNotify2 * This);
         
@@ -8292,6 +9212,7 @@ EXTERN_C const IID IID_IMFMediaKeySystemAccess;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaKeySystemAccess * This,
             /* [annotation][in] */ 
@@ -8299,12 +9220,15 @@ EXTERN_C const IID IID_IMFMediaKeySystemAccess;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaKeySystemAccess * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaKeySystemAccess * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeySystemAccess, CreateMediaKeys)
         HRESULT ( STDMETHODCALLTYPE *CreateMediaKeys )( 
             IMFMediaKeySystemAccess * This,
             /* [annotation] */ 
@@ -8312,11 +9236,13 @@ EXTERN_C const IID IID_IMFMediaKeySystemAccess;
             /* [annotation] */ 
             _COM_Outptr_  IMFMediaKeys2 **ppKeys);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeySystemAccess, get_SupportedConfiguration)
         HRESULT ( STDMETHODCALLTYPE *get_SupportedConfiguration )( 
             IMFMediaKeySystemAccess * This,
             /* [annotation] */ 
             _COM_Outptr_  IPropertyStore **ppSupportedConfiguration);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeySystemAccess, get_KeySystem)
         HRESULT ( STDMETHODCALLTYPE *get_KeySystem )( 
             IMFMediaKeySystemAccess * This,
             /* [annotation] */ 
@@ -8399,6 +9325,7 @@ EXTERN_C const IID IID_IMFMediaEngineClassFactory3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaEngineClassFactory3 * This,
             /* [annotation][in] */ 
@@ -8406,12 +9333,15 @@ EXTERN_C const IID IID_IMFMediaEngineClassFactory3;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaEngineClassFactory3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaEngineClassFactory3 * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineClassFactory3, CreateMediaKeySystemAccess)
         HRESULT ( STDMETHODCALLTYPE *CreateMediaKeySystemAccess )( 
             IMFMediaEngineClassFactory3 * This,
             /* [annotation] */ 
@@ -8460,9 +9390,15 @@ EXTERN_C const IID IID_IMFMediaEngineClassFactory3;
 #endif 	/* __IMFMediaEngineClassFactory3_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_mfmediaengine_0000_0048 */
+/* interface __MIDL_itf_mfmediaengine_0000_0051 */
 /* [local] */ 
 
+#endif // (WINVER >= _WIN32_WINNT_WINTHRESHOLD) 
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+#pragma endregion
+#pragma region Application Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+#if (WINVER >= _WIN32_WINNT_WINTHRESHOLD) 
 EXTERN_C const DECLSPEC_SELECTANY PROPERTYKEY MF_EME_INITDATATYPES =     { { 0x497d231b, 0x4eb9, 0x4df0, { 0xb4, 0x74, 0xb9, 0xaf, 0xeb, 0x0a, 0xdf, 0x38 } }, PID_FIRST_USABLE+0x00000001 }; 
 EXTERN_C const DECLSPEC_SELECTANY PROPERTYKEY MF_EME_DISTINCTIVEID =     { { 0x7dc9c4a5, 0x12be, 0x497e, { 0x8b, 0xff, 0x9b, 0x60, 0xb2, 0xdc, 0x58, 0x45 } }, PID_FIRST_USABLE+0x00000002 }; 
 EXTERN_C const DECLSPEC_SELECTANY PROPERTYKEY MF_EME_PERSISTEDSTATE =    { { 0x5d4df6ae, 0x9af1, 0x4e3d, { 0x95, 0x5b, 0x0e, 0x4b, 0xd2, 0x2f, 0xed, 0xf0 } }, PID_FIRST_USABLE+0x00000003 }; 
@@ -8474,10 +9410,16 @@ EXTERN_C const DECLSPEC_SELECTANY PROPERTYKEY MF_EME_ROBUSTNESS =  { { 0x9d3d2b9
 EXTERN_C const DECLSPEC_SELECTANY PROPERTYKEY MF_EME_CONTENTTYPE = { { 0x289fb1fc, 0xd9c4, 0x4cc7, { 0xb2, 0xbe, 0x97, 0x2b, 0x0e, 0x9b, 0x28, 0x3a } }, PID_FIRST_USABLE+0x00000002 }; 
 EXTERN_C const DECLSPEC_SELECTANY PROPERTYKEY MF_EME_CDM_INPRIVATESTOREPATH = { { 0xec305fd9, 0x039f, 0x4ac8, { 0x98, 0xda, 0xe7, 0x92, 0x1e, 0x00, 0x6a, 0x90 } }, PID_FIRST_USABLE+0x00000001 }; 
 EXTERN_C const DECLSPEC_SELECTANY PROPERTYKEY MF_EME_CDM_STOREPATH =          { { 0xf795841e, 0x99f9, 0x44d7, { 0xaf, 0xc0, 0xd3, 0x09, 0xc0, 0x4c, 0x94, 0xab } }, PID_FIRST_USABLE+0x00000002 }; 
+#endif // (WINVER >= _WIN32_WINNT_WINTHRESHOLD) 
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
+#pragma endregion
+#pragma region Desktop Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+#if (WINVER >= _WIN32_WINNT_WINTHRESHOLD) 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_mfmediaengine_0000_0048_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_mfmediaengine_0000_0048_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mfmediaengine_0000_0051_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mfmediaengine_0000_0051_v0_0_s_ifspec;
 
 #ifndef __IMFMediaKeys2_INTERFACE_DEFINED__
 #define __IMFMediaKeys2_INTERFACE_DEFINED__
@@ -8523,6 +9465,7 @@ EXTERN_C const IID IID_IMFMediaKeys2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaKeys2 * This,
             /* [annotation][in] */ 
@@ -8530,12 +9473,15 @@ EXTERN_C const IID IID_IMFMediaKeys2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaKeys2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaKeys2 * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeys, CreateSession)
         HRESULT ( STDMETHODCALLTYPE *CreateSession )( 
             IMFMediaKeys2 * This,
             /* [annotation] */ 
@@ -8553,19 +9499,23 @@ EXTERN_C const IID IID_IMFMediaKeys2;
             /* [annotation] */ 
             _COM_Outptr_  IMFMediaKeySession **ppSession);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeys, get_KeySystem)
         HRESULT ( STDMETHODCALLTYPE *get_KeySystem )( 
             IMFMediaKeys2 * This,
             /* [annotation] */ 
             _COM_Outptr_  BSTR *keySystem);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeys, Shutdown)
         HRESULT ( STDMETHODCALLTYPE *Shutdown )( 
             IMFMediaKeys2 * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeys, GetSuspendNotify)
         HRESULT ( STDMETHODCALLTYPE *GetSuspendNotify )( 
             IMFMediaKeys2 * This,
             /* [annotation] */ 
             _COM_Outptr_  IMFCdmSuspendNotify **notify);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeys2, CreateSession2)
         HRESULT ( STDMETHODCALLTYPE *CreateSession2 )( 
             IMFMediaKeys2 * This,
             /* [annotation] */ 
@@ -8575,6 +9525,7 @@ EXTERN_C const IID IID_IMFMediaKeys2;
             /* [annotation] */ 
             _COM_Outptr_  IMFMediaKeySession2 **ppSession);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeys2, SetServerCertificate)
         HRESULT ( STDMETHODCALLTYPE *SetServerCertificate )( 
             IMFMediaKeys2 * This,
             /* [annotation] */ 
@@ -8582,6 +9533,7 @@ EXTERN_C const IID IID_IMFMediaKeys2;
             /* [annotation] */ 
             _In_  DWORD cb);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeys2, GetDOMException)
         HRESULT ( STDMETHODCALLTYPE *GetDOMException )( 
             IMFMediaKeys2 * This,
             /* [annotation] */ 
@@ -8697,6 +9649,7 @@ EXTERN_C const IID IID_IMFMediaKeySession2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaKeySession2 * This,
             /* [annotation][in] */ 
@@ -8704,12 +9657,15 @@ EXTERN_C const IID IID_IMFMediaKeySession2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaKeySession2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaKeySession2 * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeySession, GetError)
         HRESULT ( STDMETHODCALLTYPE *GetError )( 
             IMFMediaKeySession2 * This,
             /* [annotation] */ 
@@ -8717,16 +9673,19 @@ EXTERN_C const IID IID_IMFMediaKeySession2;
             /* [annotation] */ 
             _Out_  DWORD *systemCode);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeySession, get_KeySystem)
         HRESULT ( STDMETHODCALLTYPE *get_KeySystem )( 
             IMFMediaKeySession2 * This,
             /* [annotation] */ 
             _COM_Outptr_  BSTR *keySystem);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeySession, get_SessionId)
         HRESULT ( STDMETHODCALLTYPE *get_SessionId )( 
             IMFMediaKeySession2 * This,
             /* [annotation] */ 
             _COM_Outptr_  BSTR *sessionId);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeySession, Update)
         HRESULT ( STDMETHODCALLTYPE *Update )( 
             IMFMediaKeySession2 * This,
             /* [annotation] */ 
@@ -8734,9 +9693,11 @@ EXTERN_C const IID IID_IMFMediaKeySession2;
             /* [annotation] */ 
             _In_  DWORD cb);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeySession, Close)
         HRESULT ( STDMETHODCALLTYPE *Close )( 
             IMFMediaKeySession2 * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeySession2, get_KeyStatuses)
         HRESULT ( STDMETHODCALLTYPE *get_KeyStatuses )( 
             IMFMediaKeySession2 * This,
             /* [annotation] */ 
@@ -8744,6 +9705,7 @@ EXTERN_C const IID IID_IMFMediaKeySession2;
             /* [annotation] */ 
             _Out_  UINT *puSize);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeySession2, Load)
         HRESULT ( STDMETHODCALLTYPE *Load )( 
             IMFMediaKeySession2 * This,
             /* [annotation] */ 
@@ -8751,6 +9713,7 @@ EXTERN_C const IID IID_IMFMediaKeySession2;
             /* [annotation] */ 
             _Out_  BOOL *pfLoaded);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeySession2, GenerateRequest)
         HRESULT ( STDMETHODCALLTYPE *GenerateRequest )( 
             IMFMediaKeySession2 * This,
             /* [annotation] */ 
@@ -8760,14 +9723,17 @@ EXTERN_C const IID IID_IMFMediaKeySession2;
             /* [annotation] */ 
             _In_  DWORD cb);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeySession2, get_Expiration)
         HRESULT ( STDMETHODCALLTYPE *get_Expiration )( 
             IMFMediaKeySession2 * This,
             /* [annotation] */ 
             _Out_  double *dblExpiration);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeySession2, Remove)
         HRESULT ( STDMETHODCALLTYPE *Remove )( 
             IMFMediaKeySession2 * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaKeySession2, Shutdown)
         HRESULT ( STDMETHODCALLTYPE *Shutdown )( 
             IMFMediaKeySession2 * This);
         
@@ -8839,6 +9805,20 @@ EXTERN_C const IID IID_IMFMediaKeySession2;
 #endif 	/* __IMFMediaKeySession2_INTERFACE_DEFINED__ */
 
 
+/* interface __MIDL_itf_mfmediaengine_0000_0053 */
+/* [local] */ 
+
+#endif // (WINVER >= _WIN32_WINNT_WINTHRESHOLD) 
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+#pragma endregion
+#pragma region Application Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+#if (WINVER >= _WIN32_WINNT_WINTHRESHOLD) 
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mfmediaengine_0000_0053_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mfmediaengine_0000_0053_v0_0_s_ifspec;
+
 #ifndef __IMFMediaEngineClassFactory4_INTERFACE_DEFINED__
 #define __IMFMediaEngineClassFactory4_INTERFACE_DEFINED__
 
@@ -8871,6 +9851,7 @@ EXTERN_C const IID IID_IMFMediaEngineClassFactory4;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaEngineClassFactory4 * This,
             /* [annotation][in] */ 
@@ -8878,12 +9859,15 @@ EXTERN_C const IID IID_IMFMediaEngineClassFactory4;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFMediaEngineClassFactory4 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFMediaEngineClassFactory4 * This);
         
+        DECLSPEC_XFGVIRT(IMFMediaEngineClassFactory4, CreateContentDecryptionModuleFactory)
         HRESULT ( STDMETHODCALLTYPE *CreateContentDecryptionModuleFactory )( 
             IMFMediaEngineClassFactory4 * This,
             /* [annotation][in] */ 
@@ -8930,16 +9914,16 @@ EXTERN_C const IID IID_IMFMediaEngineClassFactory4;
 #endif 	/* __IMFMediaEngineClassFactory4_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_mfmediaengine_0000_0051 */
+/* interface __MIDL_itf_mfmediaengine_0000_0054 */
 /* [local] */ 
 
 #endif // (WINVER >= _WIN32_WINNT_WINTHRESHOLD) 
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
 #pragma endregion
 
 
-extern RPC_IF_HANDLE __MIDL_itf_mfmediaengine_0000_0051_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_mfmediaengine_0000_0051_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mfmediaengine_0000_0054_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mfmediaengine_0000_0054_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 

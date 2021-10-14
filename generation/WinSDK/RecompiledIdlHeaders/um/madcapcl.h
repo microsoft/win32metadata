@@ -266,4 +266,4 @@ McastReleaseAddress(
 #ifdef __cplusplus
 }
 #endif 
-#endif _MADCAPCL_H_
+#endif // _MADCAPCL_H_

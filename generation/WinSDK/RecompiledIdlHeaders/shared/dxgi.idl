@@ -28,7 +28,7 @@ cpp_quote( "#define DXGI_CPU_ACCESS_SCRATCH    ( 3 )" )
 cpp_quote( "#define DXGI_CPU_ACCESS_FIELD        15" )
 
 //
-// DXGI is a 15-bit field containing DXGI-defined usages. In DXGI’s first revision, these usages refer only to 2D
+// DXGI is a 15-bit field containing DXGI-defined usages. In DXGI's first revision, these usages refer only to 2D
 //    non-mipped resources: the only resource type that DXGI intends to share cross-process, cross-API. Further
 //    2D non-mipped uses can be added here (for example, DXVA extensions)
 //
@@ -491,7 +491,7 @@ interface IDXGIDevice :
         [in] UINT NumSurfaces,
         [in] DXGI_USAGE Usage,
         [in, annotation("_In_opt_")] const DXGI_SHARED_RESOURCE *pSharedResource,
-        [out, annotation("_COM_Outptr_")] IDXGISurface **ppSurface );
+        [out, size_is(NumSurfaces), annotation("_Out_writes_(NumSurfaces)")] IDXGISurface **ppSurface );
     HRESULT QueryResourceResidency(
         [in, size_is(NumResources), annotation("_In_reads_(NumResources)")] IUnknown *const *ppResources,
         [out, size_is(NumResources), annotation("_Out_writes_(NumResources)")] DXGI_RESIDENCY *pResidencyStatus,

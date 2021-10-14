@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -149,6 +157,7 @@ EXTERN_C const IID IID_IImgErrorInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IImgErrorInfo * This,
             /* [annotation][in] */ 
@@ -156,52 +165,63 @@ EXTERN_C const IID IID_IImgErrorInfo;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IImgErrorInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IImgErrorInfo * This);
         
+        DECLSPEC_XFGVIRT(IErrorInfo, GetGUID)
         HRESULT ( STDMETHODCALLTYPE *GetGUID )( 
             IImgErrorInfo * This,
             /* [annotation][out] */ 
             _Out_  GUID *pGUID);
         
+        DECLSPEC_XFGVIRT(IErrorInfo, GetSource)
         HRESULT ( STDMETHODCALLTYPE *GetSource )( 
             IImgErrorInfo * This,
             /* [annotation][out] */ 
             _Out_  BSTR *pBstrSource);
         
+        DECLSPEC_XFGVIRT(IErrorInfo, GetDescription)
         HRESULT ( STDMETHODCALLTYPE *GetDescription )( 
             IImgErrorInfo * This,
             /* [annotation][out] */ 
             _Out_  BSTR *pBstrDescription);
         
+        DECLSPEC_XFGVIRT(IErrorInfo, GetHelpFile)
         HRESULT ( STDMETHODCALLTYPE *GetHelpFile )( 
             IImgErrorInfo * This,
             /* [annotation][out] */ 
             _Out_  BSTR *pBstrHelpFile);
         
+        DECLSPEC_XFGVIRT(IErrorInfo, GetHelpContext)
         HRESULT ( STDMETHODCALLTYPE *GetHelpContext )( 
             IImgErrorInfo * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pdwHelpContext);
         
+        DECLSPEC_XFGVIRT(IImgErrorInfo, GetDeveloperDescription)
         HRESULT ( STDMETHODCALLTYPE *GetDeveloperDescription )( 
             IImgErrorInfo * This,
             /* [annotation][out] */ 
             _Out_  BSTR *pbstrDevDescription);
         
+        DECLSPEC_XFGVIRT(IImgErrorInfo, GetUserErrorId)
         HRESULT ( STDMETHODCALLTYPE *GetUserErrorId )( 
             IImgErrorInfo * This,
             /* [annotation][out] */ 
             _Out_  GUID *pErrorId);
         
+        DECLSPEC_XFGVIRT(IImgErrorInfo, GetUserParameterCount)
         HRESULT ( STDMETHODCALLTYPE *GetUserParameterCount )( 
             IImgErrorInfo * This,
             /* [annotation][out] */ 
             _Out_  ULONG *pcUserParams);
         
+        DECLSPEC_XFGVIRT(IImgErrorInfo, GetUserParameter)
         HRESULT ( STDMETHODCALLTYPE *GetUserParameter )( 
             IImgErrorInfo * This,
             /* [annotation][in] */ 
@@ -209,16 +229,19 @@ EXTERN_C const IID IID_IImgErrorInfo;
             /* [annotation][out] */ 
             _Out_  BSTR *pbstrParam);
         
+        DECLSPEC_XFGVIRT(IImgErrorInfo, GetUserFallback)
         HRESULT ( STDMETHODCALLTYPE *GetUserFallback )( 
             IImgErrorInfo * This,
             /* [annotation][out] */ 
             _Out_  BSTR *pbstrFallback);
         
+        DECLSPEC_XFGVIRT(IImgErrorInfo, GetExceptionId)
         HRESULT ( STDMETHODCALLTYPE *GetExceptionId )( 
             IImgErrorInfo * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pExceptionId);
         
+        DECLSPEC_XFGVIRT(IImgErrorInfo, DetachErrorInfo)
         HRESULT ( STDMETHODCALLTYPE *DetachErrorInfo )( 
             IImgErrorInfo * This,
             /* [annotation][out] */ 
@@ -323,6 +346,7 @@ EXTERN_C const IID IID_IImgCreateErrorInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IImgCreateErrorInfo * This,
             /* [annotation][in] */ 
@@ -330,37 +354,45 @@ EXTERN_C const IID IID_IImgCreateErrorInfo;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IImgCreateErrorInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IImgCreateErrorInfo * This);
         
+        DECLSPEC_XFGVIRT(ICreateErrorInfo, SetGUID)
         HRESULT ( STDMETHODCALLTYPE *SetGUID )( 
             IImgCreateErrorInfo * This,
             /* [annotation][in] */ 
             _In_  REFGUID rguid);
         
+        DECLSPEC_XFGVIRT(ICreateErrorInfo, SetSource)
         HRESULT ( STDMETHODCALLTYPE *SetSource )( 
             IImgCreateErrorInfo * This,
             /* [annotation][in] */ 
             _In_  LPOLESTR szSource);
         
+        DECLSPEC_XFGVIRT(ICreateErrorInfo, SetDescription)
         HRESULT ( STDMETHODCALLTYPE *SetDescription )( 
             IImgCreateErrorInfo * This,
             /* [annotation][in] */ 
             _In_  LPOLESTR szDescription);
         
+        DECLSPEC_XFGVIRT(ICreateErrorInfo, SetHelpFile)
         HRESULT ( STDMETHODCALLTYPE *SetHelpFile )( 
             IImgCreateErrorInfo * This,
             /* [annotation][in] */ 
             _In_  LPOLESTR szHelpFile);
         
+        DECLSPEC_XFGVIRT(ICreateErrorInfo, SetHelpContext)
         HRESULT ( STDMETHODCALLTYPE *SetHelpContext )( 
             IImgCreateErrorInfo * This,
             /* [annotation][in] */ 
             _In_  DWORD dwHelpContext);
         
+        DECLSPEC_XFGVIRT(IImgCreateErrorInfo, AttachToErrorInfo)
         HRESULT ( STDMETHODCALLTYPE *AttachToErrorInfo )( 
             IImgCreateErrorInfo * This,
             /* [annotation][out][in] */ 

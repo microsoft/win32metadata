@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
@@ -161,7 +162,7 @@ namespace MetadataTasks
             return scriptOutput;
         }
 
-        public static int ExecuteCmd(string cmd, string args, out string output, TaskLoggingHelper log, string extraPath = null)
+        public static int ExecuteCmd(string cmd, string args, out string output, out string error, TaskLoggingHelper log, string extraPath = null)
         {
             output = null;
 
@@ -178,10 +179,10 @@ namespace MetadataTasks
                 env["PATH"] = env["PATH"] + ";" + extraPath;
             }
 
-            string errorText = null;
+            StringBuilder errorText = new StringBuilder();
             process.StartInfo.RedirectStandardError = true;
             process.ErrorDataReceived +=
-                new DataReceivedEventHandler((sender, e) => { errorText += e.Data; });
+                new DataReceivedEventHandler((sender, e) => { errorText.AppendLine(e.Data); });
 
             process.StartInfo.FileName = cmd;
             process.StartInfo.Arguments = args;
@@ -190,9 +191,21 @@ namespace MetadataTasks
             process.BeginErrorReadLine();
             output = process.StandardOutput.ReadToEnd();
             process.WaitForExit();
-            output += errorText;
+
+            error = errorText.ToString();
 
             return process.ExitCode;
+        }
+
+        public static int ExecuteCmd(string cmd, string args, out string output, TaskLoggingHelper log, string extraPath = null)
+        {
+            string fullOutput;
+            int ret = ExecuteCmd(cmd, args, out fullOutput, out var error, log, extraPath);
+            fullOutput += error;
+
+            output = fullOutput;
+
+            return ret;
         }
     }
 }

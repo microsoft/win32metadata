@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -279,6 +287,7 @@ EXTERN_C const IID IID_IWbemPathKeyList;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWbemPathKeyList * This,
             /* [annotation][in] */ 
@@ -286,17 +295,21 @@ EXTERN_C const IID IID_IWbemPathKeyList;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWbemPathKeyList * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWbemPathKeyList * This);
         
+        DECLSPEC_XFGVIRT(IWbemPathKeyList, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             IWbemPathKeyList * This,
             /* [annotation][out] */ 
             _Out_  ULONG *puKeyCount);
         
+        DECLSPEC_XFGVIRT(IWbemPathKeyList, SetKey)
         HRESULT ( STDMETHODCALLTYPE *SetKey )( 
             IWbemPathKeyList * This,
             /* [annotation][string][in] */ 
@@ -308,6 +321,7 @@ EXTERN_C const IID IID_IWbemPathKeyList;
             /* [annotation][in] */ 
             _In_  LPVOID pKeyVal);
         
+        DECLSPEC_XFGVIRT(IWbemPathKeyList, SetKey2)
         HRESULT ( STDMETHODCALLTYPE *SetKey2 )( 
             IWbemPathKeyList * This,
             /* [annotation][string][in] */ 
@@ -319,6 +333,7 @@ EXTERN_C const IID IID_IWbemPathKeyList;
             /* [annotation][in] */ 
             _In_  VARIANT *pKeyVal);
         
+        DECLSPEC_XFGVIRT(IWbemPathKeyList, GetKey)
         HRESULT ( STDMETHODCALLTYPE *GetKey )( 
             IWbemPathKeyList * This,
             /* [annotation][in] */ 
@@ -336,6 +351,7 @@ EXTERN_C const IID IID_IWbemPathKeyList;
             /* [annotation][out] */ 
             _Out_  ULONG *puApparentCimType);
         
+        DECLSPEC_XFGVIRT(IWbemPathKeyList, GetKey2)
         HRESULT ( STDMETHODCALLTYPE *GetKey2 )( 
             IWbemPathKeyList * This,
             /* [annotation][in] */ 
@@ -351,6 +367,7 @@ EXTERN_C const IID IID_IWbemPathKeyList;
             /* [annotation][out] */ 
             _Out_  ULONG *puApparentCimType);
         
+        DECLSPEC_XFGVIRT(IWbemPathKeyList, RemoveKey)
         HRESULT ( STDMETHODCALLTYPE *RemoveKey )( 
             IWbemPathKeyList * This,
             /* [annotation][string][in] */ 
@@ -358,16 +375,19 @@ EXTERN_C const IID IID_IWbemPathKeyList;
             /* [annotation][in] */ 
             _In_  ULONG uFlags);
         
+        DECLSPEC_XFGVIRT(IWbemPathKeyList, RemoveAllKeys)
         HRESULT ( STDMETHODCALLTYPE *RemoveAllKeys )( 
             IWbemPathKeyList * This,
             /* [annotation][in] */ 
             _In_  ULONG uFlags);
         
+        DECLSPEC_XFGVIRT(IWbemPathKeyList, MakeSingleton)
         HRESULT ( STDMETHODCALLTYPE *MakeSingleton )( 
             IWbemPathKeyList * This,
             /* [annotation][in] */ 
             _In_  boolean bSet);
         
+        DECLSPEC_XFGVIRT(IWbemPathKeyList, GetInfo)
         HRESULT ( STDMETHODCALLTYPE *GetInfo )( 
             IWbemPathKeyList * This,
             /* [annotation][in] */ 
@@ -375,6 +395,7 @@ EXTERN_C const IID IID_IWbemPathKeyList;
             /* [annotation][out] */ 
             _Out_  ULONGLONG *puResponse);
         
+        DECLSPEC_XFGVIRT(IWbemPathKeyList, GetText)
         HRESULT ( STDMETHODCALLTYPE *GetText )( 
             IWbemPathKeyList * This,
             /* [annotation][in] */ 
@@ -612,6 +633,7 @@ EXTERN_C const IID IID_IWbemPath;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWbemPath * This,
             /* [annotation][in] */ 
@@ -619,12 +641,15 @@ EXTERN_C const IID IID_IWbemPath;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWbemPath * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWbemPath * This);
         
+        DECLSPEC_XFGVIRT(IWbemPath, SetText)
         HRESULT ( STDMETHODCALLTYPE *SetText )( 
             IWbemPath * This,
             /* [annotation][in] */ 
@@ -632,6 +657,7 @@ EXTERN_C const IID IID_IWbemPath;
             /* [annotation][in] */ 
             _In_  LPCWSTR pszPath);
         
+        DECLSPEC_XFGVIRT(IWbemPath, GetText)
         HRESULT ( STDMETHODCALLTYPE *GetText )( 
             IWbemPath * This,
             /* [annotation][in] */ 
@@ -641,6 +667,7 @@ EXTERN_C const IID IID_IWbemPath;
             /* [annotation][string][out][in] */ 
             _Out_writes_(*puBuffLength)  LPWSTR pszText);
         
+        DECLSPEC_XFGVIRT(IWbemPath, GetInfo)
         HRESULT ( STDMETHODCALLTYPE *GetInfo )( 
             IWbemPath * This,
             /* [annotation][in] */ 
@@ -648,11 +675,13 @@ EXTERN_C const IID IID_IWbemPath;
             /* [annotation][out] */ 
             _Out_  ULONGLONG *puResponse);
         
+        DECLSPEC_XFGVIRT(IWbemPath, SetServer)
         HRESULT ( STDMETHODCALLTYPE *SetServer )( 
             IWbemPath * This,
             /* [annotation][string][in] */ 
             _In_  LPCWSTR Name);
         
+        DECLSPEC_XFGVIRT(IWbemPath, GetServer)
         HRESULT ( STDMETHODCALLTYPE *GetServer )( 
             IWbemPath * This,
             /* [annotation][out][in] */ 
@@ -660,11 +689,13 @@ EXTERN_C const IID IID_IWbemPath;
             /* [annotation][string][out][in] */ 
             _Out_writes_(*puNameBufLength)  LPWSTR pName);
         
+        DECLSPEC_XFGVIRT(IWbemPath, GetNamespaceCount)
         HRESULT ( STDMETHODCALLTYPE *GetNamespaceCount )( 
             IWbemPath * This,
             /* [annotation][out] */ 
             _Out_  ULONG *puCount);
         
+        DECLSPEC_XFGVIRT(IWbemPath, SetNamespaceAt)
         HRESULT ( STDMETHODCALLTYPE *SetNamespaceAt )( 
             IWbemPath * This,
             /* [annotation][in] */ 
@@ -672,6 +703,7 @@ EXTERN_C const IID IID_IWbemPath;
             /* [annotation][string][in] */ 
             _In_  LPCWSTR pszName);
         
+        DECLSPEC_XFGVIRT(IWbemPath, GetNamespaceAt)
         HRESULT ( STDMETHODCALLTYPE *GetNamespaceAt )( 
             IWbemPath * This,
             /* [annotation][in] */ 
@@ -681,19 +713,23 @@ EXTERN_C const IID IID_IWbemPath;
             /* [annotation][string][out][in] */ 
             _Out_writes_(*puNameBufLength)  LPWSTR pName);
         
+        DECLSPEC_XFGVIRT(IWbemPath, RemoveNamespaceAt)
         HRESULT ( STDMETHODCALLTYPE *RemoveNamespaceAt )( 
             IWbemPath * This,
             /* [annotation][in] */ 
             _In_  ULONG uIndex);
         
+        DECLSPEC_XFGVIRT(IWbemPath, RemoveAllNamespaces)
         HRESULT ( STDMETHODCALLTYPE *RemoveAllNamespaces )( 
             IWbemPath * This);
         
+        DECLSPEC_XFGVIRT(IWbemPath, GetScopeCount)
         HRESULT ( STDMETHODCALLTYPE *GetScopeCount )( 
             IWbemPath * This,
             /* [annotation][out] */ 
             _Out_  ULONG *puCount);
         
+        DECLSPEC_XFGVIRT(IWbemPath, SetScope)
         HRESULT ( STDMETHODCALLTYPE *SetScope )( 
             IWbemPath * This,
             /* [annotation][in] */ 
@@ -701,6 +737,7 @@ EXTERN_C const IID IID_IWbemPath;
             /* [annotation][in] */ 
             _In_  LPWSTR pszClass);
         
+        DECLSPEC_XFGVIRT(IWbemPath, SetScopeFromText)
         HRESULT ( STDMETHODCALLTYPE *SetScopeFromText )( 
             IWbemPath * This,
             /* [annotation][in] */ 
@@ -708,6 +745,7 @@ EXTERN_C const IID IID_IWbemPath;
             /* [annotation][in] */ 
             _In_  LPWSTR pszText);
         
+        DECLSPEC_XFGVIRT(IWbemPath, GetScope)
         HRESULT ( STDMETHODCALLTYPE *GetScope )( 
             IWbemPath * This,
             /* [annotation][in] */ 
@@ -719,6 +757,7 @@ EXTERN_C const IID IID_IWbemPath;
             /* [annotation][out] */ 
             _Out_  IWbemPathKeyList **pKeyList);
         
+        DECLSPEC_XFGVIRT(IWbemPath, GetScopeAsText)
         HRESULT ( STDMETHODCALLTYPE *GetScopeAsText )( 
             IWbemPath * This,
             /* [annotation][in] */ 
@@ -728,19 +767,23 @@ EXTERN_C const IID IID_IWbemPath;
             /* [annotation][out][in] */ 
             _Out_writes_(*puTextBufSize)  LPWSTR pszText);
         
+        DECLSPEC_XFGVIRT(IWbemPath, RemoveScope)
         HRESULT ( STDMETHODCALLTYPE *RemoveScope )( 
             IWbemPath * This,
             /* [annotation][in] */ 
             _In_  ULONG uIndex);
         
+        DECLSPEC_XFGVIRT(IWbemPath, RemoveAllScopes)
         HRESULT ( STDMETHODCALLTYPE *RemoveAllScopes )( 
             IWbemPath * This);
         
+        DECLSPEC_XFGVIRT(IWbemPath, SetClassName)
         HRESULT ( STDMETHODCALLTYPE *SetClassName )( 
             IWbemPath * This,
             /* [annotation][string][in] */ 
             _In_  LPCWSTR Name);
         
+        DECLSPEC_XFGVIRT(IWbemPath, GetClassName)
         HRESULT ( STDMETHODCALLTYPE *GetClassName )( 
             IWbemPath * This,
             /* [annotation][out][in] */ 
@@ -748,11 +791,13 @@ EXTERN_C const IID IID_IWbemPath;
             /* [annotation][string][out][in] */ 
             _Out_writes_opt_(*puBuffLength)  LPWSTR pszName);
         
+        DECLSPEC_XFGVIRT(IWbemPath, GetKeyList)
         HRESULT ( STDMETHODCALLTYPE *GetKeyList )( 
             IWbemPath * This,
             /* [annotation][out] */ 
             _Out_  IWbemPathKeyList **pOut);
         
+        DECLSPEC_XFGVIRT(IWbemPath, CreateClassPart)
         HRESULT ( STDMETHODCALLTYPE *CreateClassPart )( 
             IWbemPath * This,
             /* [annotation][in] */ 
@@ -760,11 +805,13 @@ EXTERN_C const IID IID_IWbemPath;
             /* [annotation][string][in] */ 
             _In_  LPCWSTR Name);
         
+        DECLSPEC_XFGVIRT(IWbemPath, DeleteClassPart)
         HRESULT ( STDMETHODCALLTYPE *DeleteClassPart )( 
             IWbemPath * This,
             /* [annotation][in] */ 
             _In_  long lFlags);
         
+        DECLSPEC_XFGVIRT(IWbemPath, IsRelative)
         BOOL ( STDMETHODCALLTYPE *IsRelative )( 
             IWbemPath * This,
             /* [annotation][string][in] */ 
@@ -772,6 +819,7 @@ EXTERN_C const IID IID_IWbemPath;
             /* [annotation][string][in] */ 
             _In_  LPWSTR wszNamespace);
         
+        DECLSPEC_XFGVIRT(IWbemPath, IsRelativeOrChild)
         BOOL ( STDMETHODCALLTYPE *IsRelativeOrChild )( 
             IWbemPath * This,
             /* [annotation][string][in] */ 
@@ -781,11 +829,13 @@ EXTERN_C const IID IID_IWbemPath;
             /* [annotation][in] */ 
             _In_  long lFlags);
         
+        DECLSPEC_XFGVIRT(IWbemPath, IsLocal)
         BOOL ( STDMETHODCALLTYPE *IsLocal )( 
             IWbemPath * This,
             /* [annotation][string][in] */ 
             _In_  LPCWSTR wszMachine);
         
+        DECLSPEC_XFGVIRT(IWbemPath, IsSameClassName)
         BOOL ( STDMETHODCALLTYPE *IsSameClassName )( 
             IWbemPath * This,
             /* [annotation][string][in] */ 
@@ -983,6 +1033,7 @@ EXTERN_C const IID IID_IWbemQuery;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWbemQuery * This,
             /* [annotation][in] */ 
@@ -990,15 +1041,19 @@ EXTERN_C const IID IID_IWbemQuery;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWbemQuery * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWbemQuery * This);
         
+        DECLSPEC_XFGVIRT(IWbemQuery, Empty)
         HRESULT ( STDMETHODCALLTYPE *Empty )( 
             IWbemQuery * This);
         
+        DECLSPEC_XFGVIRT(IWbemQuery, SetLanguageFeatures)
         HRESULT ( STDMETHODCALLTYPE *SetLanguageFeatures )( 
             IWbemQuery * This,
             /* [annotation][in] */ 
@@ -1008,6 +1063,7 @@ EXTERN_C const IID IID_IWbemQuery;
             /* [annotation][in] */ 
             _In_  ULONG *puFeatures);
         
+        DECLSPEC_XFGVIRT(IWbemQuery, TestLanguageFeatures)
         HRESULT ( STDMETHODCALLTYPE *TestLanguageFeatures )( 
             IWbemQuery * This,
             /* [annotation][in] */ 
@@ -1017,6 +1073,7 @@ EXTERN_C const IID IID_IWbemQuery;
             /* [annotation][out] */ 
             _Out_  ULONG *puFeatures);
         
+        DECLSPEC_XFGVIRT(IWbemQuery, Parse)
         HRESULT ( STDMETHODCALLTYPE *Parse )( 
             IWbemQuery * This,
             /* [annotation][in] */ 
@@ -1026,6 +1083,7 @@ EXTERN_C const IID IID_IWbemQuery;
             /* [annotation][in] */ 
             _In_  ULONG uFlags);
         
+        DECLSPEC_XFGVIRT(IWbemQuery, GetAnalysis)
         HRESULT ( STDMETHODCALLTYPE *GetAnalysis )( 
             IWbemQuery * This,
             /* [annotation][in] */ 
@@ -1035,11 +1093,13 @@ EXTERN_C const IID IID_IWbemQuery;
             /* [annotation][out] */ 
             _Out_  LPVOID *pAnalysis);
         
+        DECLSPEC_XFGVIRT(IWbemQuery, FreeMemory)
         HRESULT ( STDMETHODCALLTYPE *FreeMemory )( 
             IWbemQuery * This,
             /* [annotation][in] */ 
             _In_  LPVOID pMem);
         
+        DECLSPEC_XFGVIRT(IWbemQuery, GetQueryInfo)
         HRESULT ( STDMETHODCALLTYPE *GetQueryInfo )( 
             IWbemQuery * This,
             /* [annotation][in] */ 

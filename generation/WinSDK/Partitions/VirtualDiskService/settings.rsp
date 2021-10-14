@@ -2,5 +2,7 @@
 <IncludeRoot>/um/vds.h
 <IncludeRoot>/um/vdshwprv.h
 <IncludeRoot>/um/vdslun.h
+<IncludeRoot>/um/vdssys.h
+<IncludeRoot>/um/vdserr.h
 --namespace
 Windows.Win32.Storage.VirtualDiskService

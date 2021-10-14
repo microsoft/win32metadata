@@ -42,7 +42,6 @@ InitializeSRWLock(
     _Out_ PSRWLOCK SRWLock
     );
 
-
 WINBASEAPI
 _Releases_exclusive_lock_(*SRWLock)
 VOID
@@ -50,7 +49,6 @@ WINAPI
 ReleaseSRWLockExclusive(
     _Inout_ PSRWLOCK SRWLock
     );
-
 
 WINBASEAPI
 _Releases_shared_lock_(*SRWLock)
@@ -60,7 +58,6 @@ ReleaseSRWLockShared(
     _Inout_ PSRWLOCK SRWLock
     );
 
-
 WINBASEAPI
 _Acquires_exclusive_lock_(*SRWLock)
 VOID
@@ -68,7 +65,6 @@ WINAPI
 AcquireSRWLockExclusive(
     _Inout_ PSRWLOCK SRWLock
     );
-
 
 WINBASEAPI
 _Acquires_shared_lock_(*SRWLock)
@@ -78,7 +74,6 @@ AcquireSRWLockShared(
     _Inout_ PSRWLOCK SRWLock
     );
 
-
 WINBASEAPI
 _When_(return!=0, _Acquires_exclusive_lock_(*SRWLock))
 BOOLEAN
@@ -87,7 +82,6 @@ TryAcquireSRWLockExclusive(
     _Inout_ PSRWLOCK SRWLock
     );
 
-
 WINBASEAPI
 _When_(return!=0, _Acquires_shared_lock_(*SRWLock))
 BOOLEAN
@@ -95,7 +89,6 @@ WINAPI
 TryAcquireSRWLockShared(
     _Inout_ PSRWLOCK SRWLock
     );
-
 
 #endif // (_WIN32_WINNT >= 0x0600)
 
@@ -118,7 +111,6 @@ InitializeCriticalSection(
     _Out_ LPCRITICAL_SECTION lpCriticalSection
     );
 
-
 #endif  // (_WIN32_WINNT < 0x0600)
 
 WINBASEAPI
@@ -128,14 +120,12 @@ EnterCriticalSection(
     _Inout_ LPCRITICAL_SECTION lpCriticalSection
     );
 
-
 WINBASEAPI
 VOID
 WINAPI
 LeaveCriticalSection(
     _Inout_ LPCRITICAL_SECTION lpCriticalSection
     );
-
 
 WINBASEAPI
 _Must_inspect_result_
@@ -145,7 +135,6 @@ InitializeCriticalSectionAndSpinCount(
     _Out_ LPCRITICAL_SECTION lpCriticalSection,
     _In_ DWORD dwSpinCount
     );
-
 
 #if (_WIN32_WINNT >= 0x0600)
 
@@ -158,7 +147,6 @@ InitializeCriticalSectionEx(
     _In_ DWORD Flags
     );
 
-
 #endif // (_WIN32_WINNT >= 0x0600)
 
 WINBASEAPI
@@ -169,7 +157,6 @@ SetCriticalSectionSpinCount(
     _In_ DWORD dwSpinCount
     );
 
-
 #if (_WIN32_WINNT >= 0x0400)
 
 WINBASEAPI
@@ -179,7 +166,6 @@ TryEnterCriticalSection(
     _Inout_ LPCRITICAL_SECTION lpCriticalSection
     );
 
-
 #endif /* _WIN32_WINNT >= 0x0400 */
 
 WINBASEAPI
@@ -188,7 +174,6 @@ WINAPI
 DeleteCriticalSection(
     _Inout_ LPCRITICAL_SECTION lpCriticalSection
     );
-
 
 //
 // Define one-time initialization primitive
@@ -232,7 +217,6 @@ InitOnceInitialize(
     _Out_ PINIT_ONCE InitOnce
     );
 
-
 WINBASEAPI
 BOOL
 WINAPI
@@ -242,7 +226,6 @@ InitOnceExecuteOnce(
     _Inout_opt_ PVOID Parameter,
     _Outptr_opt_result_maybenull_ LPVOID* Context
     );
-
 
 WINBASEAPI
 BOOL
@@ -254,7 +237,6 @@ InitOnceBeginInitialize(
     _Outptr_opt_result_maybenull_ LPVOID* lpContext
     );
 
-
 WINBASEAPI
 BOOL
 WINAPI
@@ -263,7 +245,6 @@ InitOnceComplete(
     _In_ DWORD dwFlags,
     _In_opt_ LPVOID lpContext
     );
-
 
 #endif // (_WIN32_WINNT >= 0x0600)
 
@@ -294,7 +275,6 @@ InitializeConditionVariable(
     _Out_ PCONDITION_VARIABLE ConditionVariable
     );
 
-
 WINBASEAPI
 VOID
 WINAPI
@@ -302,14 +282,12 @@ WakeConditionVariable(
     _Inout_ PCONDITION_VARIABLE ConditionVariable
     );
 
-
 WINBASEAPI
 VOID
 WINAPI
 WakeAllConditionVariable(
     _Inout_ PCONDITION_VARIABLE ConditionVariable
     );
-
 
 WINBASEAPI
 BOOL
@@ -319,7 +297,6 @@ SleepConditionVariableCS(
     _Inout_ PCRITICAL_SECTION CriticalSection,
     _In_ DWORD dwMilliseconds
     );
-
 
 WINBASEAPI
 BOOL
@@ -331,7 +308,6 @@ SleepConditionVariableSRW(
     _In_ ULONG Flags
     );
 
-
 #endif // (_WIN32_WINNT >= 0x0600)
 
 WINBASEAPI
@@ -341,14 +317,12 @@ SetEvent(
     _In_ HANDLE hEvent
     );
 
-
 WINBASEAPI
 BOOL
 WINAPI
 ResetEvent(
     _In_ HANDLE hEvent
     );
-
 
 WINBASEAPI
 BOOL
@@ -359,14 +333,12 @@ ReleaseSemaphore(
     _Out_opt_ LPLONG lpPreviousCount
     );
 
-
 WINBASEAPI
 BOOL
 WINAPI
 ReleaseMutex(
     _In_ HANDLE hMutex
     );
-
 
 WINBASEAPI
 DWORD
@@ -376,7 +348,6 @@ WaitForSingleObject(
     _In_ DWORD dwMilliseconds
     );
 
-
 WINBASEAPI
 DWORD
 WINAPI
@@ -384,7 +355,6 @@ SleepEx(
     _In_ DWORD dwMilliseconds,
     _In_ BOOL bAlertable
     );
-
 
 WINBASEAPI
 DWORD
@@ -394,7 +364,6 @@ WaitForSingleObjectEx(
     _In_ DWORD dwMilliseconds,
     _In_ BOOL bAlertable
     );
-
 
 WINBASEAPI
 DWORD
@@ -406,7 +375,6 @@ WaitForMultipleObjectsEx(
     _In_ DWORD dwMilliseconds,
     _In_ BOOL bAlertable
     );
-
 
 //
 // Synchronization APIs
@@ -434,7 +402,6 @@ CreateMutexW(
     _In_ BOOL bInitialOwner,
     _In_opt_ LPCWSTR lpName
     );
-
 #ifdef UNICODE
 #define CreateMutex  CreateMutexW
 #else
@@ -450,7 +417,6 @@ OpenMutexW(
     _In_ BOOL bInheritHandle,
     _In_ LPCWSTR lpName
     );
-
 
 #ifdef UNICODE
 #define OpenMutex  OpenMutexW
@@ -477,7 +443,6 @@ CreateEventW(
     _In_ BOOL bInitialState,
     _In_opt_ LPCWSTR lpName
     );
-
 #ifdef UNICODE
 #define CreateEvent  CreateEventW
 #else
@@ -503,7 +468,6 @@ OpenEventW(
     _In_ BOOL bInheritHandle,
     _In_ LPCWSTR lpName
     );
-
 #ifdef UNICODE
 #define OpenEvent  OpenEventW
 #else
@@ -519,7 +483,6 @@ OpenSemaphoreW(
     _In_ BOOL bInheritHandle,
     _In_ LPCWSTR lpName
     );
-
 
 #ifdef UNICODE
 #define OpenSemaphore  OpenSemaphoreW
@@ -545,7 +508,6 @@ OpenWaitableTimerW(
     _In_ LPCWSTR lpTimerName
     );
 
-
 #ifdef UNICODE
 #define OpenWaitableTimer  OpenWaitableTimerW
 #endif
@@ -564,7 +526,6 @@ SetWaitableTimerEx(
     _In_ ULONG TolerableDelay
     );
 
-
 #endif // (_WIN32_WINNT >= _WIN32_WINNT_WIN7)
 
 WINBASEAPI
@@ -579,14 +540,12 @@ SetWaitableTimer(
     _In_ BOOL fResume
     );
 
-
 WINBASEAPI
 BOOL
 WINAPI
 CancelWaitableTimer(
     _In_ HANDLE hTimer
     );
-
 
 #if (_WIN32_WINNT >= 0x0600)
 
@@ -613,7 +572,6 @@ CreateMutexExW(
     _In_ DWORD dwFlags,
     _In_ DWORD dwDesiredAccess
     );
-
 #ifdef UNICODE
 #define CreateMutexEx  CreateMutexExW
 #else
@@ -644,7 +602,6 @@ CreateEventExW(
     _In_ DWORD dwFlags,
     _In_ DWORD dwDesiredAccess
     );
-
 #ifdef UNICODE
 #define CreateEventEx  CreateEventExW
 #else
@@ -663,7 +620,6 @@ CreateSemaphoreExW(
     _Reserved_ DWORD dwFlags,
     _In_ DWORD dwDesiredAccess
     );
-
 
 #ifdef UNICODE
 #define CreateSemaphoreEx  CreateSemaphoreExW
@@ -684,7 +640,6 @@ CreateWaitableTimerExW(
     _In_ DWORD dwFlags,
     _In_ DWORD dwDesiredAccess
     );
-
 
 #ifdef UNICODE
 #define CreateWaitableTimerEx  CreateWaitableTimerExW
@@ -709,7 +664,6 @@ EnterSynchronizationBarrier(
     _In_ DWORD dwFlags
     );
 
-
 BOOL
 WINAPI
 InitializeSynchronizationBarrier(
@@ -718,13 +672,11 @@ InitializeSynchronizationBarrier(
     _In_ LONG lSpinCount
     );
 
-
 BOOL
 WINAPI
 DeleteSynchronizationBarrier(
     _Inout_ LPSYNCHRONIZATION_BARRIER lpBarrier
     );
-
 
 WINBASEAPI
 VOID
@@ -732,7 +684,6 @@ WINAPI
 Sleep(
     _In_ DWORD dwMilliseconds
     );
-
 
 BOOL
 WINAPI
@@ -743,20 +694,17 @@ WaitOnAddress(
     _In_opt_ DWORD dwMilliseconds
     );
 
-
 VOID
 WINAPI
 WakeByAddressSingle(
     _In_ PVOID Address
     );
 
-
 VOID
 WINAPI
 WakeByAddressAll(
     _In_ PVOID Address
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion
@@ -776,7 +724,6 @@ SignalObjectAndWait(
     _In_ BOOL bAlertable
     );
 
-
 #endif
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
@@ -795,7 +742,6 @@ WaitForMultipleObjects(
     _In_ DWORD dwMilliseconds
     );
 
-
 WINBASEAPI
 HANDLE
 WINAPI
@@ -805,7 +751,6 @@ CreateSemaphoreW(
     _In_ LONG lMaximumCount,
     _In_opt_ LPCWSTR lpName
     );
-
 
 #ifdef UNICODE
 #define CreateSemaphore  CreateSemaphoreW
@@ -820,7 +765,6 @@ CreateWaitableTimerW(
     _In_ BOOL bManualReset,
     _In_opt_ LPCWSTR lpTimerName
     );
-
 
 #ifdef UNICODE
 #define CreateWaitableTimer  CreateWaitableTimerW

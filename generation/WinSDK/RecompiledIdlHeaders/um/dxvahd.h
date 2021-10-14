@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -577,6 +585,7 @@ EXTERN_C const IID IID_IDXVAHD_Device;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDXVAHD_Device * This,
             /* [annotation][in] */ 
@@ -584,12 +593,15 @@ EXTERN_C const IID IID_IDXVAHD_Device;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDXVAHD_Device * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDXVAHD_Device * This);
         
+        DECLSPEC_XFGVIRT(IDXVAHD_Device, CreateVideoSurface)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoSurface )( 
             IDXVAHD_Device * This,
             /* [annotation][in] */ 
@@ -611,11 +623,13 @@ EXTERN_C const IID IID_IDXVAHD_Device;
             /* [annotation][out][in] */ 
             _Inout_opt_  HANDLE *pSharedHandle);
         
+        DECLSPEC_XFGVIRT(IDXVAHD_Device, GetVideoProcessorDeviceCaps)
         HRESULT ( STDMETHODCALLTYPE *GetVideoProcessorDeviceCaps )( 
             IDXVAHD_Device * This,
             /* [annotation][out] */ 
             _Out_  DXVAHD_VPDEVCAPS *pCaps);
         
+        DECLSPEC_XFGVIRT(IDXVAHD_Device, GetVideoProcessorOutputFormats)
         HRESULT ( STDMETHODCALLTYPE *GetVideoProcessorOutputFormats )( 
             IDXVAHD_Device * This,
             /* [annotation][in] */ 
@@ -623,6 +637,7 @@ EXTERN_C const IID IID_IDXVAHD_Device;
             /* [annotation][size_is][out] */ 
             _Out_writes_(Count)  D3DFORMAT *pFormats);
         
+        DECLSPEC_XFGVIRT(IDXVAHD_Device, GetVideoProcessorInputFormats)
         HRESULT ( STDMETHODCALLTYPE *GetVideoProcessorInputFormats )( 
             IDXVAHD_Device * This,
             /* [annotation][in] */ 
@@ -630,6 +645,7 @@ EXTERN_C const IID IID_IDXVAHD_Device;
             /* [annotation][size_is][out] */ 
             _Out_writes_(Count)  D3DFORMAT *pFormats);
         
+        DECLSPEC_XFGVIRT(IDXVAHD_Device, GetVideoProcessorCaps)
         HRESULT ( STDMETHODCALLTYPE *GetVideoProcessorCaps )( 
             IDXVAHD_Device * This,
             /* [annotation][in] */ 
@@ -637,6 +653,7 @@ EXTERN_C const IID IID_IDXVAHD_Device;
             /* [annotation][size_is][out] */ 
             _Out_writes_(Count)  DXVAHD_VPCAPS *pCaps);
         
+        DECLSPEC_XFGVIRT(IDXVAHD_Device, GetVideoProcessorCustomRates)
         HRESULT ( STDMETHODCALLTYPE *GetVideoProcessorCustomRates )( 
             IDXVAHD_Device * This,
             /* [annotation][in] */ 
@@ -646,6 +663,7 @@ EXTERN_C const IID IID_IDXVAHD_Device;
             /* [annotation][size_is][out] */ 
             _Out_writes_(Count)  DXVAHD_CUSTOM_RATE_DATA *pRates);
         
+        DECLSPEC_XFGVIRT(IDXVAHD_Device, GetVideoProcessorFilterRange)
         HRESULT ( STDMETHODCALLTYPE *GetVideoProcessorFilterRange )( 
             IDXVAHD_Device * This,
             /* [annotation][in] */ 
@@ -653,6 +671,7 @@ EXTERN_C const IID IID_IDXVAHD_Device;
             /* [annotation][out] */ 
             _Out_  DXVAHD_FILTER_RANGE_DATA *pRange);
         
+        DECLSPEC_XFGVIRT(IDXVAHD_Device, CreateVideoProcessor)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoProcessor )( 
             IDXVAHD_Device * This,
             /* [annotation][in] */ 
@@ -788,6 +807,7 @@ EXTERN_C const IID IID_IDXVAHD_VideoProcessor;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDXVAHD_VideoProcessor * This,
             /* [annotation][in] */ 
@@ -795,12 +815,15 @@ EXTERN_C const IID IID_IDXVAHD_VideoProcessor;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDXVAHD_VideoProcessor * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDXVAHD_VideoProcessor * This);
         
+        DECLSPEC_XFGVIRT(IDXVAHD_VideoProcessor, SetVideoProcessBltState)
         HRESULT ( STDMETHODCALLTYPE *SetVideoProcessBltState )( 
             IDXVAHD_VideoProcessor * This,
             /* [annotation][in] */ 
@@ -810,6 +833,7 @@ EXTERN_C const IID IID_IDXVAHD_VideoProcessor;
             /* [annotation][in] */ 
             _In_reads_bytes_(DataSize)  const void *pData);
         
+        DECLSPEC_XFGVIRT(IDXVAHD_VideoProcessor, GetVideoProcessBltState)
         HRESULT ( STDMETHODCALLTYPE *GetVideoProcessBltState )( 
             IDXVAHD_VideoProcessor * This,
             /* [annotation][in] */ 
@@ -819,6 +843,7 @@ EXTERN_C const IID IID_IDXVAHD_VideoProcessor;
             /* [annotation][out] */ 
             _Inout_updates_bytes_(DataSize)  void *pData);
         
+        DECLSPEC_XFGVIRT(IDXVAHD_VideoProcessor, SetVideoProcessStreamState)
         HRESULT ( STDMETHODCALLTYPE *SetVideoProcessStreamState )( 
             IDXVAHD_VideoProcessor * This,
             /* [annotation][in] */ 
@@ -830,6 +855,7 @@ EXTERN_C const IID IID_IDXVAHD_VideoProcessor;
             /* [annotation][in] */ 
             _In_reads_bytes_(DataSize)  const void *pData);
         
+        DECLSPEC_XFGVIRT(IDXVAHD_VideoProcessor, GetVideoProcessStreamState)
         HRESULT ( STDMETHODCALLTYPE *GetVideoProcessStreamState )( 
             IDXVAHD_VideoProcessor * This,
             /* [annotation][in] */ 
@@ -841,6 +867,7 @@ EXTERN_C const IID IID_IDXVAHD_VideoProcessor;
             /* [annotation][out] */ 
             _Inout_updates_bytes_(DataSize)  void *pData);
         
+        DECLSPEC_XFGVIRT(IDXVAHD_VideoProcessor, VideoProcessBltHD)
         HRESULT ( STDMETHODCALLTYPE *VideoProcessBltHD )( 
             IDXVAHD_VideoProcessor * This,
             /* [annotation][in] */ 

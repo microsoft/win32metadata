@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -31,6 +31,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -216,28 +224,34 @@ DEFINE_GUID(IID_IAMCollection,0x56a868b9,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAMCollection * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAMCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAMCollection * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAMCollection * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAMCollection * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAMCollection * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -246,6 +260,7 @@ DEFINE_GUID(IID_IAMCollection,0x56a868b9,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAMCollection * This,
             /* [annotation][in] */ 
@@ -265,15 +280,18 @@ DEFINE_GUID(IID_IAMCollection,0x56a868b9,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAMCollection, get_Count)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IAMCollection * This,
             /* [retval][out] */ __RPC__out LONG *plCount);
         
+        DECLSPEC_XFGVIRT(IAMCollection, Item)
         HRESULT ( STDMETHODCALLTYPE *Item )( 
             __RPC__in IAMCollection * This,
             /* [in] */ long lItem,
             /* [out] */ __RPC__deref_out_opt IUnknown **ppUnk);
         
+        DECLSPEC_XFGVIRT(IAMCollection, get__NewEnum)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IAMCollection * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppUnk);
@@ -383,28 +401,34 @@ DEFINE_GUID(IID_IMediaControl,0x56a868b1,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMediaControl * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMediaControl * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMediaControl * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMediaControl * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMediaControl * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMediaControl * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -413,6 +437,7 @@ DEFINE_GUID(IID_IMediaControl,0x56a868b1,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMediaControl * This,
             /* [annotation][in] */ 
@@ -432,37 +457,46 @@ DEFINE_GUID(IID_IMediaControl,0x56a868b1,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMediaControl, Run)
         HRESULT ( STDMETHODCALLTYPE *Run )( 
             __RPC__in IMediaControl * This);
         
+        DECLSPEC_XFGVIRT(IMediaControl, Pause)
         HRESULT ( STDMETHODCALLTYPE *Pause )( 
             __RPC__in IMediaControl * This);
         
+        DECLSPEC_XFGVIRT(IMediaControl, Stop)
         HRESULT ( STDMETHODCALLTYPE *Stop )( 
             __RPC__in IMediaControl * This);
         
+        DECLSPEC_XFGVIRT(IMediaControl, GetState)
         HRESULT ( STDMETHODCALLTYPE *GetState )( 
             __RPC__in IMediaControl * This,
             /* [in] */ LONG msTimeout,
             /* [out] */ __RPC__out OAFilterState *pfs);
         
+        DECLSPEC_XFGVIRT(IMediaControl, RenderFile)
         HRESULT ( STDMETHODCALLTYPE *RenderFile )( 
             __RPC__in IMediaControl * This,
             /* [in] */ __RPC__in BSTR strFilename);
         
+        DECLSPEC_XFGVIRT(IMediaControl, AddSourceFilter)
         HRESULT ( STDMETHODCALLTYPE *AddSourceFilter )( 
             __RPC__in IMediaControl * This,
             /* [in] */ __RPC__in BSTR strFilename,
             /* [out] */ __RPC__deref_out_opt IDispatch **ppUnk);
         
+        DECLSPEC_XFGVIRT(IMediaControl, get_FilterCollection)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FilterCollection )( 
             __RPC__in IMediaControl * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppUnk);
         
+        DECLSPEC_XFGVIRT(IMediaControl, get_RegFilterCollection)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RegFilterCollection )( 
             __RPC__in IMediaControl * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppUnk);
         
+        DECLSPEC_XFGVIRT(IMediaControl, StopWhenReady)
         HRESULT ( STDMETHODCALLTYPE *StopWhenReady )( 
             __RPC__in IMediaControl * This);
         
@@ -588,28 +622,34 @@ DEFINE_GUID(IID_IMediaEvent,0x56a868b6,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0x
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMediaEvent * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMediaEvent * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMediaEvent * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMediaEvent * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMediaEvent * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMediaEvent * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -618,6 +658,7 @@ DEFINE_GUID(IID_IMediaEvent,0x56a868b6,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0x
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMediaEvent * This,
             /* [annotation][in] */ 
@@ -637,10 +678,12 @@ DEFINE_GUID(IID_IMediaEvent,0x56a868b6,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0x
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMediaEvent, GetEventHandle)
         HRESULT ( STDMETHODCALLTYPE *GetEventHandle )( 
             __RPC__in IMediaEvent * This,
             /* [out] */ __RPC__out OAEVENT *hEvent);
         
+        DECLSPEC_XFGVIRT(IMediaEvent, GetEvent)
         HRESULT ( STDMETHODCALLTYPE *GetEvent )( 
             __RPC__in IMediaEvent * This,
             /* [out] */ __RPC__out long *lEventCode,
@@ -648,19 +691,23 @@ DEFINE_GUID(IID_IMediaEvent,0x56a868b6,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0x
             /* [out] */ __RPC__out LONG_PTR *lParam2,
             /* [in] */ long msTimeout);
         
+        DECLSPEC_XFGVIRT(IMediaEvent, WaitForCompletion)
         HRESULT ( STDMETHODCALLTYPE *WaitForCompletion )( 
             __RPC__in IMediaEvent * This,
             /* [in] */ long msTimeout,
             /* [out] */ __RPC__out long *pEvCode);
         
+        DECLSPEC_XFGVIRT(IMediaEvent, CancelDefaultHandling)
         HRESULT ( STDMETHODCALLTYPE *CancelDefaultHandling )( 
             __RPC__in IMediaEvent * This,
             /* [in] */ long lEvCode);
         
+        DECLSPEC_XFGVIRT(IMediaEvent, RestoreDefaultHandling)
         HRESULT ( STDMETHODCALLTYPE *RestoreDefaultHandling )( 
             __RPC__in IMediaEvent * This,
             /* [in] */ long lEvCode);
         
+        DECLSPEC_XFGVIRT(IMediaEvent, FreeEventParams)
         HRESULT ( STDMETHODCALLTYPE *FreeEventParams )( 
             __RPC__in IMediaEvent * This,
             /* [in] */ long lEvCode,
@@ -767,28 +814,34 @@ DEFINE_GUID(IID_IMediaEventEx,0x56a868c0,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMediaEventEx * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMediaEventEx * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMediaEventEx * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMediaEventEx * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMediaEventEx * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMediaEventEx * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -797,6 +850,7 @@ DEFINE_GUID(IID_IMediaEventEx,0x56a868c0,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMediaEventEx * This,
             /* [annotation][in] */ 
@@ -816,10 +870,12 @@ DEFINE_GUID(IID_IMediaEventEx,0x56a868c0,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMediaEvent, GetEventHandle)
         HRESULT ( STDMETHODCALLTYPE *GetEventHandle )( 
             __RPC__in IMediaEventEx * This,
             /* [out] */ __RPC__out OAEVENT *hEvent);
         
+        DECLSPEC_XFGVIRT(IMediaEvent, GetEvent)
         HRESULT ( STDMETHODCALLTYPE *GetEvent )( 
             __RPC__in IMediaEventEx * This,
             /* [out] */ __RPC__out long *lEventCode,
@@ -827,35 +883,42 @@ DEFINE_GUID(IID_IMediaEventEx,0x56a868c0,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,
             /* [out] */ __RPC__out LONG_PTR *lParam2,
             /* [in] */ long msTimeout);
         
+        DECLSPEC_XFGVIRT(IMediaEvent, WaitForCompletion)
         HRESULT ( STDMETHODCALLTYPE *WaitForCompletion )( 
             __RPC__in IMediaEventEx * This,
             /* [in] */ long msTimeout,
             /* [out] */ __RPC__out long *pEvCode);
         
+        DECLSPEC_XFGVIRT(IMediaEvent, CancelDefaultHandling)
         HRESULT ( STDMETHODCALLTYPE *CancelDefaultHandling )( 
             __RPC__in IMediaEventEx * This,
             /* [in] */ long lEvCode);
         
+        DECLSPEC_XFGVIRT(IMediaEvent, RestoreDefaultHandling)
         HRESULT ( STDMETHODCALLTYPE *RestoreDefaultHandling )( 
             __RPC__in IMediaEventEx * This,
             /* [in] */ long lEvCode);
         
+        DECLSPEC_XFGVIRT(IMediaEvent, FreeEventParams)
         HRESULT ( STDMETHODCALLTYPE *FreeEventParams )( 
             __RPC__in IMediaEventEx * This,
             /* [in] */ long lEvCode,
             /* [in] */ LONG_PTR lParam1,
             /* [in] */ LONG_PTR lParam2);
         
+        DECLSPEC_XFGVIRT(IMediaEventEx, SetNotifyWindow)
         HRESULT ( STDMETHODCALLTYPE *SetNotifyWindow )( 
             __RPC__in IMediaEventEx * This,
             /* [in] */ OAHWND hwnd,
             /* [in] */ long lMsg,
             /* [in] */ LONG_PTR lInstanceData);
         
+        DECLSPEC_XFGVIRT(IMediaEventEx, SetNotifyFlags)
         HRESULT ( STDMETHODCALLTYPE *SetNotifyFlags )( 
             __RPC__in IMediaEventEx * This,
             /* [in] */ long lNoNotifyFlags);
         
+        DECLSPEC_XFGVIRT(IMediaEventEx, GetNotifyFlags)
         HRESULT ( STDMETHODCALLTYPE *GetNotifyFlags )( 
             __RPC__in IMediaEventEx * This,
             /* [out] */ __RPC__out long *lplNoNotifyFlags);
@@ -992,28 +1055,34 @@ DEFINE_GUID(IID_IMediaPosition,0x56a868b2,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMediaPosition * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMediaPosition * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMediaPosition * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMediaPosition * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMediaPosition * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMediaPosition * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1022,6 +1091,7 @@ DEFINE_GUID(IID_IMediaPosition,0x56a868b2,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMediaPosition * This,
             /* [annotation][in] */ 
@@ -1041,46 +1111,57 @@ DEFINE_GUID(IID_IMediaPosition,0x56a868b2,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMediaPosition, get_Duration)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Duration )( 
             __RPC__in IMediaPosition * This,
             /* [retval][out] */ __RPC__out REFTIME *plength);
         
+        DECLSPEC_XFGVIRT(IMediaPosition, put_CurrentPosition)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_CurrentPosition )( 
             __RPC__in IMediaPosition * This,
             /* [in] */ REFTIME llTime);
         
+        DECLSPEC_XFGVIRT(IMediaPosition, get_CurrentPosition)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentPosition )( 
             __RPC__in IMediaPosition * This,
             /* [retval][out] */ __RPC__out REFTIME *pllTime);
         
+        DECLSPEC_XFGVIRT(IMediaPosition, get_StopTime)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_StopTime )( 
             __RPC__in IMediaPosition * This,
             /* [retval][out] */ __RPC__out REFTIME *pllTime);
         
+        DECLSPEC_XFGVIRT(IMediaPosition, put_StopTime)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_StopTime )( 
             __RPC__in IMediaPosition * This,
             /* [in] */ REFTIME llTime);
         
+        DECLSPEC_XFGVIRT(IMediaPosition, get_PrerollTime)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PrerollTime )( 
             __RPC__in IMediaPosition * This,
             /* [retval][out] */ __RPC__out REFTIME *pllTime);
         
+        DECLSPEC_XFGVIRT(IMediaPosition, put_PrerollTime)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_PrerollTime )( 
             __RPC__in IMediaPosition * This,
             /* [in] */ REFTIME llTime);
         
+        DECLSPEC_XFGVIRT(IMediaPosition, put_Rate)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Rate )( 
             __RPC__in IMediaPosition * This,
             /* [in] */ double dRate);
         
+        DECLSPEC_XFGVIRT(IMediaPosition, get_Rate)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Rate )( 
             __RPC__in IMediaPosition * This,
             /* [retval][out] */ __RPC__out double *pdRate);
         
+        DECLSPEC_XFGVIRT(IMediaPosition, CanSeekForward)
         HRESULT ( STDMETHODCALLTYPE *CanSeekForward )( 
             __RPC__in IMediaPosition * This,
             /* [retval][out] */ __RPC__out LONG *pCanSeekForward);
         
+        DECLSPEC_XFGVIRT(IMediaPosition, CanSeekBackward)
         HRESULT ( STDMETHODCALLTYPE *CanSeekBackward )( 
             __RPC__in IMediaPosition * This,
             /* [retval][out] */ __RPC__out LONG *pCanSeekBackward);
@@ -1201,28 +1282,34 @@ DEFINE_GUID(IID_IBasicAudio,0x56a868b3,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0x
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBasicAudio * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IBasicAudio * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IBasicAudio * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IBasicAudio * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IBasicAudio * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IBasicAudio * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1231,6 +1318,7 @@ DEFINE_GUID(IID_IBasicAudio,0x56a868b3,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0x
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IBasicAudio * This,
             /* [annotation][in] */ 
@@ -1250,18 +1338,22 @@ DEFINE_GUID(IID_IBasicAudio,0x56a868b3,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0x
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IBasicAudio, put_Volume)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Volume )( 
             __RPC__in IBasicAudio * This,
             /* [in] */ long lVolume);
         
+        DECLSPEC_XFGVIRT(IBasicAudio, get_Volume)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Volume )( 
             __RPC__in IBasicAudio * This,
             /* [retval][out] */ __RPC__out long *plVolume);
         
+        DECLSPEC_XFGVIRT(IBasicAudio, put_Balance)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Balance )( 
             __RPC__in IBasicAudio * This,
             /* [in] */ long lBalance);
         
+        DECLSPEC_XFGVIRT(IBasicAudio, get_Balance)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Balance )( 
             __RPC__in IBasicAudio * This,
             /* [retval][out] */ __RPC__out long *plBalance);
@@ -1480,28 +1572,34 @@ DEFINE_GUID(IID_IVideoWindow,0x56a868b4,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVideoWindow * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVideoWindow * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVideoWindow * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IVideoWindow * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IVideoWindow * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IVideoWindow * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1510,6 +1608,7 @@ DEFINE_GUID(IID_IVideoWindow,0x56a868b4,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IVideoWindow * This,
             /* [annotation][in] */ 
@@ -1529,130 +1628,162 @@ DEFINE_GUID(IID_IVideoWindow,0x56a868b4,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, put_Caption)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Caption )( 
             __RPC__in IVideoWindow * This,
             /* [in] */ __RPC__in BSTR strCaption);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, get_Caption)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Caption )( 
             __RPC__in IVideoWindow * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *strCaption);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, put_WindowStyle)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_WindowStyle )( 
             __RPC__in IVideoWindow * This,
             /* [in] */ long WindowStyle);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, get_WindowStyle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_WindowStyle )( 
             __RPC__in IVideoWindow * This,
             /* [retval][out] */ __RPC__out long *WindowStyle);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, put_WindowStyleEx)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_WindowStyleEx )( 
             __RPC__in IVideoWindow * This,
             /* [in] */ long WindowStyleEx);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, get_WindowStyleEx)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_WindowStyleEx )( 
             __RPC__in IVideoWindow * This,
             /* [retval][out] */ __RPC__out long *WindowStyleEx);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, put_AutoShow)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_AutoShow )( 
             __RPC__in IVideoWindow * This,
             /* [in] */ long AutoShow);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, get_AutoShow)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AutoShow )( 
             __RPC__in IVideoWindow * This,
             /* [retval][out] */ __RPC__out long *AutoShow);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, put_WindowState)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_WindowState )( 
             __RPC__in IVideoWindow * This,
             /* [in] */ long WindowState);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, get_WindowState)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_WindowState )( 
             __RPC__in IVideoWindow * This,
             /* [retval][out] */ __RPC__out long *WindowState);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, put_BackgroundPalette)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_BackgroundPalette )( 
             __RPC__in IVideoWindow * This,
             /* [in] */ long BackgroundPalette);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, get_BackgroundPalette)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_BackgroundPalette )( 
             __RPC__in IVideoWindow * This,
             /* [retval][out] */ __RPC__out long *pBackgroundPalette);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, put_Visible)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Visible )( 
             __RPC__in IVideoWindow * This,
             /* [in] */ long Visible);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, get_Visible)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Visible )( 
             __RPC__in IVideoWindow * This,
             /* [retval][out] */ __RPC__out long *pVisible);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, put_Left)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Left )( 
             __RPC__in IVideoWindow * This,
             /* [in] */ long Left);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, get_Left)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Left )( 
             __RPC__in IVideoWindow * This,
             /* [retval][out] */ __RPC__out long *pLeft);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, put_Width)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Width )( 
             __RPC__in IVideoWindow * This,
             /* [in] */ long Width);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, get_Width)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Width )( 
             __RPC__in IVideoWindow * This,
             /* [retval][out] */ __RPC__out long *pWidth);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, put_Top)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Top )( 
             __RPC__in IVideoWindow * This,
             /* [in] */ long Top);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, get_Top)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Top )( 
             __RPC__in IVideoWindow * This,
             /* [retval][out] */ __RPC__out long *pTop);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, put_Height)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Height )( 
             __RPC__in IVideoWindow * This,
             /* [in] */ long Height);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, get_Height)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Height )( 
             __RPC__in IVideoWindow * This,
             /* [retval][out] */ __RPC__out long *pHeight);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, put_Owner)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Owner )( 
             __RPC__in IVideoWindow * This,
             /* [in] */ OAHWND Owner);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, get_Owner)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Owner )( 
             __RPC__in IVideoWindow * This,
             /* [retval][out] */ __RPC__out OAHWND *Owner);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, put_MessageDrain)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MessageDrain )( 
             __RPC__in IVideoWindow * This,
             /* [in] */ OAHWND Drain);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, get_MessageDrain)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MessageDrain )( 
             __RPC__in IVideoWindow * This,
             /* [retval][out] */ __RPC__out OAHWND *Drain);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, get_BorderColor)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_BorderColor )( 
             __RPC__in IVideoWindow * This,
             /* [retval][out] */ __RPC__out long *Color);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, put_BorderColor)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_BorderColor )( 
             __RPC__in IVideoWindow * This,
             /* [in] */ long Color);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, get_FullScreenMode)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FullScreenMode )( 
             __RPC__in IVideoWindow * This,
             /* [retval][out] */ __RPC__out long *FullScreenMode);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, put_FullScreenMode)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_FullScreenMode )( 
             __RPC__in IVideoWindow * This,
             /* [in] */ long FullScreenMode);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, SetWindowForeground)
         HRESULT ( STDMETHODCALLTYPE *SetWindowForeground )( 
             __RPC__in IVideoWindow * This,
             /* [in] */ long Focus);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, NotifyOwnerMessage)
         HRESULT ( STDMETHODCALLTYPE *NotifyOwnerMessage )( 
             __RPC__in IVideoWindow * This,
             /* [in] */ OAHWND hwnd,
@@ -1660,6 +1791,7 @@ DEFINE_GUID(IID_IVideoWindow,0x56a868b4,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0
             /* [in] */ LONG_PTR wParam,
             /* [in] */ LONG_PTR lParam);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, SetWindowPosition)
         HRESULT ( STDMETHODCALLTYPE *SetWindowPosition )( 
             __RPC__in IVideoWindow * This,
             /* [in] */ long Left,
@@ -1667,6 +1799,7 @@ DEFINE_GUID(IID_IVideoWindow,0x56a868b4,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0
             /* [in] */ long Width,
             /* [in] */ long Height);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, GetWindowPosition)
         HRESULT ( STDMETHODCALLTYPE *GetWindowPosition )( 
             __RPC__in IVideoWindow * This,
             /* [out] */ __RPC__out long *pLeft,
@@ -1674,16 +1807,19 @@ DEFINE_GUID(IID_IVideoWindow,0x56a868b4,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0
             /* [out] */ __RPC__out long *pWidth,
             /* [out] */ __RPC__out long *pHeight);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, GetMinIdealImageSize)
         HRESULT ( STDMETHODCALLTYPE *GetMinIdealImageSize )( 
             __RPC__in IVideoWindow * This,
             /* [out] */ __RPC__out long *pWidth,
             /* [out] */ __RPC__out long *pHeight);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, GetMaxIdealImageSize)
         HRESULT ( STDMETHODCALLTYPE *GetMaxIdealImageSize )( 
             __RPC__in IVideoWindow * This,
             /* [out] */ __RPC__out long *pWidth,
             /* [out] */ __RPC__out long *pHeight);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, GetRestorePosition)
         HRESULT ( STDMETHODCALLTYPE *GetRestorePosition )( 
             __RPC__in IVideoWindow * This,
             /* [out] */ __RPC__out long *pLeft,
@@ -1691,10 +1827,12 @@ DEFINE_GUID(IID_IVideoWindow,0x56a868b4,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0
             /* [out] */ __RPC__out long *pWidth,
             /* [out] */ __RPC__out long *pHeight);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, HideCursor)
         HRESULT ( STDMETHODCALLTYPE *HideCursor )( 
             __RPC__in IVideoWindow * This,
             /* [in] */ long HideCursor);
         
+        DECLSPEC_XFGVIRT(IVideoWindow, IsCursorHidden)
         HRESULT ( STDMETHODCALLTYPE *IsCursorHidden )( 
             __RPC__in IVideoWindow * This,
             /* [out] */ __RPC__out long *CursorHidden);
@@ -1996,28 +2134,34 @@ DEFINE_GUID(IID_IBasicVideo,0x56a868b5,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0x
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBasicVideo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IBasicVideo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IBasicVideo * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IBasicVideo * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IBasicVideo * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IBasicVideo * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2026,6 +2170,7 @@ DEFINE_GUID(IID_IBasicVideo,0x56a868b5,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0x
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IBasicVideo * This,
             /* [annotation][in] */ 
@@ -2045,90 +2190,112 @@ DEFINE_GUID(IID_IBasicVideo,0x56a868b5,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0x
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, get_AvgTimePerFrame)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AvgTimePerFrame )( 
             __RPC__in IBasicVideo * This,
             /* [retval][out] */ __RPC__out REFTIME *pAvgTimePerFrame);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, get_BitRate)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_BitRate )( 
             __RPC__in IBasicVideo * This,
             /* [retval][out] */ __RPC__out long *pBitRate);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, get_BitErrorRate)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_BitErrorRate )( 
             __RPC__in IBasicVideo * This,
             /* [retval][out] */ __RPC__out long *pBitErrorRate);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, get_VideoWidth)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_VideoWidth )( 
             __RPC__in IBasicVideo * This,
             /* [retval][out] */ __RPC__out long *pVideoWidth);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, get_VideoHeight)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_VideoHeight )( 
             __RPC__in IBasicVideo * This,
             /* [retval][out] */ __RPC__out long *pVideoHeight);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, put_SourceLeft)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_SourceLeft )( 
             __RPC__in IBasicVideo * This,
             /* [in] */ long SourceLeft);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, get_SourceLeft)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SourceLeft )( 
             __RPC__in IBasicVideo * This,
             /* [retval][out] */ __RPC__out long *pSourceLeft);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, put_SourceWidth)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_SourceWidth )( 
             __RPC__in IBasicVideo * This,
             /* [in] */ long SourceWidth);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, get_SourceWidth)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SourceWidth )( 
             __RPC__in IBasicVideo * This,
             /* [retval][out] */ __RPC__out long *pSourceWidth);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, put_SourceTop)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_SourceTop )( 
             __RPC__in IBasicVideo * This,
             /* [in] */ long SourceTop);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, get_SourceTop)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SourceTop )( 
             __RPC__in IBasicVideo * This,
             /* [retval][out] */ __RPC__out long *pSourceTop);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, put_SourceHeight)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_SourceHeight )( 
             __RPC__in IBasicVideo * This,
             /* [in] */ long SourceHeight);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, get_SourceHeight)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SourceHeight )( 
             __RPC__in IBasicVideo * This,
             /* [retval][out] */ __RPC__out long *pSourceHeight);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, put_DestinationLeft)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_DestinationLeft )( 
             __RPC__in IBasicVideo * This,
             /* [in] */ long DestinationLeft);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, get_DestinationLeft)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DestinationLeft )( 
             __RPC__in IBasicVideo * This,
             /* [retval][out] */ __RPC__out long *pDestinationLeft);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, put_DestinationWidth)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_DestinationWidth )( 
             __RPC__in IBasicVideo * This,
             /* [in] */ long DestinationWidth);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, get_DestinationWidth)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DestinationWidth )( 
             __RPC__in IBasicVideo * This,
             /* [retval][out] */ __RPC__out long *pDestinationWidth);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, put_DestinationTop)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_DestinationTop )( 
             __RPC__in IBasicVideo * This,
             /* [in] */ long DestinationTop);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, get_DestinationTop)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DestinationTop )( 
             __RPC__in IBasicVideo * This,
             /* [retval][out] */ __RPC__out long *pDestinationTop);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, put_DestinationHeight)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_DestinationHeight )( 
             __RPC__in IBasicVideo * This,
             /* [in] */ long DestinationHeight);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, get_DestinationHeight)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DestinationHeight )( 
             __RPC__in IBasicVideo * This,
             /* [retval][out] */ __RPC__out long *pDestinationHeight);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, SetSourcePosition)
         HRESULT ( STDMETHODCALLTYPE *SetSourcePosition )( 
             __RPC__in IBasicVideo * This,
             /* [in] */ long Left,
@@ -2136,6 +2303,7 @@ DEFINE_GUID(IID_IBasicVideo,0x56a868b5,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0x
             /* [in] */ long Width,
             /* [in] */ long Height);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, GetSourcePosition)
         HRESULT ( STDMETHODCALLTYPE *GetSourcePosition )( 
             __RPC__in IBasicVideo * This,
             /* [out] */ __RPC__out long *pLeft,
@@ -2143,9 +2311,11 @@ DEFINE_GUID(IID_IBasicVideo,0x56a868b5,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0x
             /* [out] */ __RPC__out long *pWidth,
             /* [out] */ __RPC__out long *pHeight);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, SetDefaultSourcePosition)
         HRESULT ( STDMETHODCALLTYPE *SetDefaultSourcePosition )( 
             __RPC__in IBasicVideo * This);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, SetDestinationPosition)
         HRESULT ( STDMETHODCALLTYPE *SetDestinationPosition )( 
             __RPC__in IBasicVideo * This,
             /* [in] */ long Left,
@@ -2153,6 +2323,7 @@ DEFINE_GUID(IID_IBasicVideo,0x56a868b5,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0x
             /* [in] */ long Width,
             /* [in] */ long Height);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, GetDestinationPosition)
         HRESULT ( STDMETHODCALLTYPE *GetDestinationPosition )( 
             __RPC__in IBasicVideo * This,
             /* [out] */ __RPC__out long *pLeft,
@@ -2160,14 +2331,17 @@ DEFINE_GUID(IID_IBasicVideo,0x56a868b5,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0x
             /* [out] */ __RPC__out long *pWidth,
             /* [out] */ __RPC__out long *pHeight);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, SetDefaultDestinationPosition)
         HRESULT ( STDMETHODCALLTYPE *SetDefaultDestinationPosition )( 
             __RPC__in IBasicVideo * This);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, GetVideoSize)
         HRESULT ( STDMETHODCALLTYPE *GetVideoSize )( 
             __RPC__in IBasicVideo * This,
             /* [out] */ __RPC__out long *pWidth,
             /* [out] */ __RPC__out long *pHeight);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, GetVideoPaletteEntries)
         HRESULT ( STDMETHODCALLTYPE *GetVideoPaletteEntries )( 
             __RPC__in IBasicVideo * This,
             /* [in] */ long StartIndex,
@@ -2175,14 +2349,17 @@ DEFINE_GUID(IID_IBasicVideo,0x56a868b5,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0x
             /* [out] */ __RPC__out long *pRetrieved,
             /* [out] */ __RPC__out long *pPalette);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, GetCurrentImage)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentImage )( 
             __RPC__in IBasicVideo * This,
             /* [out][in] */ __RPC__inout long *pBufferSize,
             /* [out] */ __RPC__out long *pDIBImage);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, IsUsingDefaultSource)
         HRESULT ( STDMETHODCALLTYPE *IsUsingDefaultSource )( 
             __RPC__in IBasicVideo * This);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, IsUsingDefaultDestination)
         HRESULT ( STDMETHODCALLTYPE *IsUsingDefaultDestination )( 
             __RPC__in IBasicVideo * This);
         
@@ -2357,28 +2534,34 @@ DEFINE_GUID(IID_IBasicVideo2,0x329bb360,0xf6ea,0x11d1,0x90,0x38,0x00,0xa0,0xc9,0
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBasicVideo2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IBasicVideo2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IBasicVideo2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IBasicVideo2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IBasicVideo2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IBasicVideo2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2387,6 +2570,7 @@ DEFINE_GUID(IID_IBasicVideo2,0x329bb360,0xf6ea,0x11d1,0x90,0x38,0x00,0xa0,0xc9,0
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IBasicVideo2 * This,
             /* [annotation][in] */ 
@@ -2406,90 +2590,112 @@ DEFINE_GUID(IID_IBasicVideo2,0x329bb360,0xf6ea,0x11d1,0x90,0x38,0x00,0xa0,0xc9,0
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, get_AvgTimePerFrame)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AvgTimePerFrame )( 
             __RPC__in IBasicVideo2 * This,
             /* [retval][out] */ __RPC__out REFTIME *pAvgTimePerFrame);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, get_BitRate)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_BitRate )( 
             __RPC__in IBasicVideo2 * This,
             /* [retval][out] */ __RPC__out long *pBitRate);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, get_BitErrorRate)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_BitErrorRate )( 
             __RPC__in IBasicVideo2 * This,
             /* [retval][out] */ __RPC__out long *pBitErrorRate);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, get_VideoWidth)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_VideoWidth )( 
             __RPC__in IBasicVideo2 * This,
             /* [retval][out] */ __RPC__out long *pVideoWidth);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, get_VideoHeight)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_VideoHeight )( 
             __RPC__in IBasicVideo2 * This,
             /* [retval][out] */ __RPC__out long *pVideoHeight);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, put_SourceLeft)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_SourceLeft )( 
             __RPC__in IBasicVideo2 * This,
             /* [in] */ long SourceLeft);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, get_SourceLeft)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SourceLeft )( 
             __RPC__in IBasicVideo2 * This,
             /* [retval][out] */ __RPC__out long *pSourceLeft);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, put_SourceWidth)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_SourceWidth )( 
             __RPC__in IBasicVideo2 * This,
             /* [in] */ long SourceWidth);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, get_SourceWidth)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SourceWidth )( 
             __RPC__in IBasicVideo2 * This,
             /* [retval][out] */ __RPC__out long *pSourceWidth);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, put_SourceTop)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_SourceTop )( 
             __RPC__in IBasicVideo2 * This,
             /* [in] */ long SourceTop);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, get_SourceTop)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SourceTop )( 
             __RPC__in IBasicVideo2 * This,
             /* [retval][out] */ __RPC__out long *pSourceTop);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, put_SourceHeight)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_SourceHeight )( 
             __RPC__in IBasicVideo2 * This,
             /* [in] */ long SourceHeight);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, get_SourceHeight)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SourceHeight )( 
             __RPC__in IBasicVideo2 * This,
             /* [retval][out] */ __RPC__out long *pSourceHeight);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, put_DestinationLeft)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_DestinationLeft )( 
             __RPC__in IBasicVideo2 * This,
             /* [in] */ long DestinationLeft);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, get_DestinationLeft)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DestinationLeft )( 
             __RPC__in IBasicVideo2 * This,
             /* [retval][out] */ __RPC__out long *pDestinationLeft);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, put_DestinationWidth)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_DestinationWidth )( 
             __RPC__in IBasicVideo2 * This,
             /* [in] */ long DestinationWidth);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, get_DestinationWidth)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DestinationWidth )( 
             __RPC__in IBasicVideo2 * This,
             /* [retval][out] */ __RPC__out long *pDestinationWidth);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, put_DestinationTop)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_DestinationTop )( 
             __RPC__in IBasicVideo2 * This,
             /* [in] */ long DestinationTop);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, get_DestinationTop)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DestinationTop )( 
             __RPC__in IBasicVideo2 * This,
             /* [retval][out] */ __RPC__out long *pDestinationTop);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, put_DestinationHeight)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_DestinationHeight )( 
             __RPC__in IBasicVideo2 * This,
             /* [in] */ long DestinationHeight);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, get_DestinationHeight)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DestinationHeight )( 
             __RPC__in IBasicVideo2 * This,
             /* [retval][out] */ __RPC__out long *pDestinationHeight);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, SetSourcePosition)
         HRESULT ( STDMETHODCALLTYPE *SetSourcePosition )( 
             __RPC__in IBasicVideo2 * This,
             /* [in] */ long Left,
@@ -2497,6 +2703,7 @@ DEFINE_GUID(IID_IBasicVideo2,0x329bb360,0xf6ea,0x11d1,0x90,0x38,0x00,0xa0,0xc9,0
             /* [in] */ long Width,
             /* [in] */ long Height);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, GetSourcePosition)
         HRESULT ( STDMETHODCALLTYPE *GetSourcePosition )( 
             __RPC__in IBasicVideo2 * This,
             /* [out] */ __RPC__out long *pLeft,
@@ -2504,9 +2711,11 @@ DEFINE_GUID(IID_IBasicVideo2,0x329bb360,0xf6ea,0x11d1,0x90,0x38,0x00,0xa0,0xc9,0
             /* [out] */ __RPC__out long *pWidth,
             /* [out] */ __RPC__out long *pHeight);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, SetDefaultSourcePosition)
         HRESULT ( STDMETHODCALLTYPE *SetDefaultSourcePosition )( 
             __RPC__in IBasicVideo2 * This);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, SetDestinationPosition)
         HRESULT ( STDMETHODCALLTYPE *SetDestinationPosition )( 
             __RPC__in IBasicVideo2 * This,
             /* [in] */ long Left,
@@ -2514,6 +2723,7 @@ DEFINE_GUID(IID_IBasicVideo2,0x329bb360,0xf6ea,0x11d1,0x90,0x38,0x00,0xa0,0xc9,0
             /* [in] */ long Width,
             /* [in] */ long Height);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, GetDestinationPosition)
         HRESULT ( STDMETHODCALLTYPE *GetDestinationPosition )( 
             __RPC__in IBasicVideo2 * This,
             /* [out] */ __RPC__out long *pLeft,
@@ -2521,14 +2731,17 @@ DEFINE_GUID(IID_IBasicVideo2,0x329bb360,0xf6ea,0x11d1,0x90,0x38,0x00,0xa0,0xc9,0
             /* [out] */ __RPC__out long *pWidth,
             /* [out] */ __RPC__out long *pHeight);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, SetDefaultDestinationPosition)
         HRESULT ( STDMETHODCALLTYPE *SetDefaultDestinationPosition )( 
             __RPC__in IBasicVideo2 * This);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, GetVideoSize)
         HRESULT ( STDMETHODCALLTYPE *GetVideoSize )( 
             __RPC__in IBasicVideo2 * This,
             /* [out] */ __RPC__out long *pWidth,
             /* [out] */ __RPC__out long *pHeight);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, GetVideoPaletteEntries)
         HRESULT ( STDMETHODCALLTYPE *GetVideoPaletteEntries )( 
             __RPC__in IBasicVideo2 * This,
             /* [in] */ long StartIndex,
@@ -2536,17 +2749,21 @@ DEFINE_GUID(IID_IBasicVideo2,0x329bb360,0xf6ea,0x11d1,0x90,0x38,0x00,0xa0,0xc9,0
             /* [out] */ __RPC__out long *pRetrieved,
             /* [out] */ __RPC__out long *pPalette);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, GetCurrentImage)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentImage )( 
             __RPC__in IBasicVideo2 * This,
             /* [out][in] */ __RPC__inout long *pBufferSize,
             /* [out] */ __RPC__out long *pDIBImage);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, IsUsingDefaultSource)
         HRESULT ( STDMETHODCALLTYPE *IsUsingDefaultSource )( 
             __RPC__in IBasicVideo2 * This);
         
+        DECLSPEC_XFGVIRT(IBasicVideo, IsUsingDefaultDestination)
         HRESULT ( STDMETHODCALLTYPE *IsUsingDefaultDestination )( 
             __RPC__in IBasicVideo2 * This);
         
+        DECLSPEC_XFGVIRT(IBasicVideo2, GetPreferredAspectRatio)
         HRESULT ( STDMETHODCALLTYPE *GetPreferredAspectRatio )( 
             __RPC__in IBasicVideo2 * This,
             /* [out] */ __RPC__out long *plAspectX,
@@ -2734,29 +2951,36 @@ DEFINE_GUID(IID_IDeferredCommand,0x56a868b8,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0x
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDeferredCommand * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDeferredCommand * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDeferredCommand * This);
         
+        DECLSPEC_XFGVIRT(IDeferredCommand, Cancel)
         HRESULT ( STDMETHODCALLTYPE *Cancel )( 
             __RPC__in IDeferredCommand * This);
         
+        DECLSPEC_XFGVIRT(IDeferredCommand, Confidence)
         HRESULT ( STDMETHODCALLTYPE *Confidence )( 
             __RPC__in IDeferredCommand * This,
             /* [out] */ __RPC__out LONG *pConfidence);
         
+        DECLSPEC_XFGVIRT(IDeferredCommand, Postpone)
         HRESULT ( STDMETHODCALLTYPE *Postpone )( 
             __RPC__in IDeferredCommand * This,
             /* [in] */ REFTIME newtime);
         
+        DECLSPEC_XFGVIRT(IDeferredCommand, GetHResult)
         HRESULT ( STDMETHODCALLTYPE *GetHResult )( 
             __RPC__in IDeferredCommand * This,
             /* [out] */ __RPC__out HRESULT *phrResult);
@@ -2853,18 +3077,22 @@ DEFINE_GUID(IID_IQueueCommand,0x56a868b7,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IQueueCommand * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IQueueCommand * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IQueueCommand * This);
         
+        DECLSPEC_XFGVIRT(IQueueCommand, InvokeAtStreamTime)
         HRESULT ( STDMETHODCALLTYPE *InvokeAtStreamTime )( 
             __RPC__in IQueueCommand * This,
             /* [out] */ __RPC__deref_out_opt IDeferredCommand **pCmd,
@@ -2877,6 +3105,7 @@ DEFINE_GUID(IID_IQueueCommand,0x56a868b7,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,
             /* [out][in] */ __RPC__inout VARIANT *pvarResult,
             /* [out] */ __RPC__out short *puArgErr);
         
+        DECLSPEC_XFGVIRT(IQueueCommand, InvokeAtPresentationTime)
         HRESULT ( STDMETHODCALLTYPE *InvokeAtPresentationTime )( 
             __RPC__in IQueueCommand * This,
             /* [out] */ __RPC__deref_out_opt IDeferredCommand **pCmd,
@@ -2986,28 +3215,34 @@ DEFINE_GUID(IID_IFilterInfo,0x56a868ba,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0x
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFilterInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFilterInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFilterInfo * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFilterInfo * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFilterInfo * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFilterInfo * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -3016,6 +3251,7 @@ DEFINE_GUID(IID_IFilterInfo,0x56a868ba,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0x
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFilterInfo * This,
             /* [annotation][in] */ 
@@ -3035,35 +3271,43 @@ DEFINE_GUID(IID_IFilterInfo,0x56a868ba,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0x
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFilterInfo, FindPin)
         HRESULT ( STDMETHODCALLTYPE *FindPin )( 
             __RPC__in IFilterInfo * This,
             /* [in] */ __RPC__in BSTR strPinID,
             /* [out] */ __RPC__deref_out_opt IDispatch **ppUnk);
         
+        DECLSPEC_XFGVIRT(IFilterInfo, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IFilterInfo * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *strName);
         
+        DECLSPEC_XFGVIRT(IFilterInfo, get_VendorInfo)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_VendorInfo )( 
             __RPC__in IFilterInfo * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *strVendorInfo);
         
+        DECLSPEC_XFGVIRT(IFilterInfo, get_Filter)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Filter )( 
             __RPC__in IFilterInfo * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppUnk);
         
+        DECLSPEC_XFGVIRT(IFilterInfo, get_Pins)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Pins )( 
             __RPC__in IFilterInfo * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppUnk);
         
+        DECLSPEC_XFGVIRT(IFilterInfo, get_IsFileSource)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsFileSource )( 
             __RPC__in IFilterInfo * This,
             /* [retval][out] */ __RPC__out LONG *pbIsSource);
         
+        DECLSPEC_XFGVIRT(IFilterInfo, get_Filename)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Filename )( 
             __RPC__in IFilterInfo * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrFilename);
         
+        DECLSPEC_XFGVIRT(IFilterInfo, put_Filename)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Filename )( 
             __RPC__in IFilterInfo * This,
             /* [in] */ __RPC__in BSTR strFilename);
@@ -3169,28 +3413,34 @@ DEFINE_GUID(IID_IRegFilterInfo,0x56a868bb,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRegFilterInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IRegFilterInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IRegFilterInfo * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IRegFilterInfo * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IRegFilterInfo * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IRegFilterInfo * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -3199,6 +3449,7 @@ DEFINE_GUID(IID_IRegFilterInfo,0x56a868bb,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IRegFilterInfo * This,
             /* [annotation][in] */ 
@@ -3218,10 +3469,12 @@ DEFINE_GUID(IID_IRegFilterInfo,0x56a868bb,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IRegFilterInfo, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IRegFilterInfo * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *strName);
         
+        DECLSPEC_XFGVIRT(IRegFilterInfo, Filter)
         HRESULT ( STDMETHODCALLTYPE *Filter )( 
             __RPC__in IRegFilterInfo * This,
             /* [out] */ __RPC__deref_out_opt IDispatch **ppUnk);
@@ -3309,28 +3562,34 @@ DEFINE_GUID(IID_IMediaTypeInfo,0x56a868bc,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMediaTypeInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMediaTypeInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMediaTypeInfo * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMediaTypeInfo * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMediaTypeInfo * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMediaTypeInfo * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -3339,6 +3598,7 @@ DEFINE_GUID(IID_IMediaTypeInfo,0x56a868bc,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMediaTypeInfo * This,
             /* [annotation][in] */ 
@@ -3358,10 +3618,12 @@ DEFINE_GUID(IID_IMediaTypeInfo,0x56a868bc,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMediaTypeInfo, get_Type)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in IMediaTypeInfo * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *strType);
         
+        DECLSPEC_XFGVIRT(IMediaTypeInfo, get_Subtype)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Subtype )( 
             __RPC__in IMediaTypeInfo * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *strType);
@@ -3481,28 +3743,34 @@ DEFINE_GUID(IID_IPinInfo,0x56a868bd,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0x0b,
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPinInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPinInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPinInfo * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IPinInfo * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IPinInfo * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IPinInfo * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -3511,6 +3779,7 @@ DEFINE_GUID(IID_IPinInfo,0x56a868bd,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0x0b,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IPinInfo * This,
             /* [annotation][in] */ 
@@ -3530,54 +3799,67 @@ DEFINE_GUID(IID_IPinInfo,0x56a868bd,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0x0b,
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IPinInfo, get_Pin)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Pin )( 
             __RPC__in IPinInfo * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppUnk);
         
+        DECLSPEC_XFGVIRT(IPinInfo, get_ConnectedTo)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConnectedTo )( 
             __RPC__in IPinInfo * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppUnk);
         
+        DECLSPEC_XFGVIRT(IPinInfo, get_ConnectionMediaType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConnectionMediaType )( 
             __RPC__in IPinInfo * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppUnk);
         
+        DECLSPEC_XFGVIRT(IPinInfo, get_FilterInfo)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FilterInfo )( 
             __RPC__in IPinInfo * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppUnk);
         
+        DECLSPEC_XFGVIRT(IPinInfo, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IPinInfo * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *ppUnk);
         
+        DECLSPEC_XFGVIRT(IPinInfo, get_Direction)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Direction )( 
             __RPC__in IPinInfo * This,
             /* [retval][out] */ __RPC__out LONG *ppDirection);
         
+        DECLSPEC_XFGVIRT(IPinInfo, get_PinID)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PinID )( 
             __RPC__in IPinInfo * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *strPinID);
         
+        DECLSPEC_XFGVIRT(IPinInfo, get_MediaTypes)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaTypes )( 
             __RPC__in IPinInfo * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppUnk);
         
+        DECLSPEC_XFGVIRT(IPinInfo, Connect)
         HRESULT ( STDMETHODCALLTYPE *Connect )( 
             __RPC__in IPinInfo * This,
             /* [in] */ __RPC__in_opt IUnknown *pPin);
         
+        DECLSPEC_XFGVIRT(IPinInfo, ConnectDirect)
         HRESULT ( STDMETHODCALLTYPE *ConnectDirect )( 
             __RPC__in IPinInfo * This,
             /* [in] */ __RPC__in_opt IUnknown *pPin);
         
+        DECLSPEC_XFGVIRT(IPinInfo, ConnectWithType)
         HRESULT ( STDMETHODCALLTYPE *ConnectWithType )( 
             __RPC__in IPinInfo * This,
             /* [in] */ __RPC__in_opt IUnknown *pPin,
             /* [in] */ __RPC__in_opt IDispatch *pMediaType);
         
+        DECLSPEC_XFGVIRT(IPinInfo, Disconnect)
         HRESULT ( STDMETHODCALLTYPE *Disconnect )( 
             __RPC__in IPinInfo * This);
         
+        DECLSPEC_XFGVIRT(IPinInfo, Render)
         HRESULT ( STDMETHODCALLTYPE *Render )( 
             __RPC__in IPinInfo * This);
         
@@ -3725,28 +4007,34 @@ DEFINE_GUID(IID_IAMStats,0xbc9bcf80,0xdcd2,0x11d2,0xab,0xf6,0x00,0xa0,0xc9,0x05,
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAMStats * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAMStats * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAMStats * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAMStats * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAMStats * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAMStats * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -3755,6 +4043,7 @@ DEFINE_GUID(IID_IAMStats,0xbc9bcf80,0xdcd2,0x11d2,0xab,0xf6,0x00,0xa0,0xc9,0x05,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAMStats * This,
             /* [annotation][in] */ 
@@ -3774,13 +4063,16 @@ DEFINE_GUID(IID_IAMStats,0xbc9bcf80,0xdcd2,0x11d2,0xab,0xf6,0x00,0xa0,0xc9,0x05,
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IAMStats, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IAMStats * This);
         
+        DECLSPEC_XFGVIRT(IAMStats, get_Count)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IAMStats * This,
             /* [retval][out] */ __RPC__out LONG *plCount);
         
+        DECLSPEC_XFGVIRT(IAMStats, GetValueByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetValueByIndex )( 
             __RPC__in IAMStats * This,
             /* [in] */ long lIndex,
@@ -3792,6 +4084,7 @@ DEFINE_GUID(IID_IAMStats,0xbc9bcf80,0xdcd2,0x11d2,0xab,0xf6,0x00,0xa0,0xc9,0x05,
             /* [out] */ __RPC__out double *dMin,
             /* [out] */ __RPC__out double *dMax);
         
+        DECLSPEC_XFGVIRT(IAMStats, GetValueByName)
         HRESULT ( STDMETHODCALLTYPE *GetValueByName )( 
             __RPC__in IAMStats * This,
             /* [in] */ __RPC__in BSTR szName,
@@ -3803,12 +4096,14 @@ DEFINE_GUID(IID_IAMStats,0xbc9bcf80,0xdcd2,0x11d2,0xab,0xf6,0x00,0xa0,0xc9,0x05,
             /* [out] */ __RPC__out double *dMin,
             /* [out] */ __RPC__out double *dMax);
         
+        DECLSPEC_XFGVIRT(IAMStats, GetIndex)
         HRESULT ( STDMETHODCALLTYPE *GetIndex )( 
             __RPC__in IAMStats * This,
             /* [in] */ __RPC__in BSTR szName,
             /* [in] */ long lCreate,
             /* [out] */ __RPC__out long *plIndex);
         
+        DECLSPEC_XFGVIRT(IAMStats, AddValue)
         HRESULT ( STDMETHODCALLTYPE *AddValue )( 
             __RPC__in IAMStats * This,
             /* [in] */ long lIndex,

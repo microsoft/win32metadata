@@ -3,5 +3,8 @@
 <IncludeRoot>/um/WbemCli.h
 <IncludeRoot>/um/WbemProv.h
 <IncludeRoot>/um/WbemDisp.h
+<IncludeRoot>/um/wbemads.h
+<IncludeRoot>/um/wbemidl.h
+<IncludeRoot>/um/wbemtran.h
 --namespace
 Windows.Win32.System.Wmi

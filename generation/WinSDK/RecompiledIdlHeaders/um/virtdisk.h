@@ -191,6 +191,12 @@ typedef enum _OPEN_VIRTUAL_DISK_FLAG
     // Open the backing store even if it is a compressed file.
     OPEN_VIRTUAL_DISK_FLAG_SUPPORT_COMPRESSED_VOLUMES = 0x00000200,
 
+    // Open the backing store even if it is a sparse file, on any file system.
+    OPEN_VIRTUAL_DISK_FLAG_SUPPORT_SPARSE_FILES_ANY_FS = 0x00000400,
+
+    // Open the backing store even if it is an encrypted file.
+    OPEN_VIRTUAL_DISK_FLAG_SUPPORT_ENCRYPTED_FILES = 0x00000800,
+
 } OPEN_VIRTUAL_DISK_FLAG;
 
 #if !defined(VIRTDISK_DEFINE_FLAGS)
@@ -366,6 +372,18 @@ typedef enum _CREATE_VIRTUAL_DISK_FLAG
     // Creates a VHD suitable as the backing store for a virtual persistent memory device.
     //
     CREATE_VIRTUAL_DISK_FLAG_PMEM_COMPATIBLE = 0x100,
+
+    //
+    // Allow a VHD to be created on a compressed volume.
+    //
+    CREATE_VIRTUAL_DISK_FLAG_SUPPORT_COMPRESSED_VOLUMES = 0x200,
+
+    //
+    // Allow a VHD to be created when it may be marked as a sparse file. This flag is a companion
+    // to CREATE_VIRTUAL_DISK_FLAG_SPARSE_FILE, and overrides the behavior that only
+    // allows sparse files on file systems that support sparse VDLs.
+    //
+    CREATE_VIRTUAL_DISK_FLAG_SUPPORT_SPARSE_FILES_ANY_FS = 0x400,
 
 } CREATE_VIRTUAL_DISK_FLAG;
 
@@ -603,6 +621,17 @@ typedef enum _DEPENDENT_DISK_FLAG
     // can be a compressed volume.
     //
     DEPENDENT_DISK_FLAG_SUPPORT_COMPRESSED_VOLUMES   = 0x00000800,
+
+    //
+    // Allow the file to be mounted, even if it is sparse and the
+    // volume on which it sits does not support a sparse VDL.
+    //
+    DEPENDENT_DISK_FLAG_ALWAYS_ALLOW_SPARSE          = 0x00001000,
+
+    //
+    // Allow the file to be mounted, even if it is encrypted.
+    //
+    DEPENDENT_DISK_FLAG_SUPPORT_ENCRYPTED_FILES      = 0x00002000,
 
 } DEPENDENT_DISK_FLAG;
 
@@ -1061,6 +1090,7 @@ typedef struct _EXPAND_VIRTUAL_DISK_PARAMETERS
 typedef enum _EXPAND_VIRTUAL_DISK_FLAG
 {
     EXPAND_VIRTUAL_DISK_FLAG_NONE                 = 0x00000000,
+    EXPAND_VIRTUAL_DISK_FLAG_NOTIFY_CHANGE        = 0x00000001,
 
 } EXPAND_VIRTUAL_DISK_FLAG;
 

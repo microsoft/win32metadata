@@ -798,7 +798,6 @@ SHSTDAPI SHCreateShellItem(_In_opt_ PCIDLIST_ABSOLUTE pidlParent, _In_opt_ IShel
 // registry entries for special paths are kept in :
 #define REGSTR_PATH_SPECIAL_FOLDERS     REGSTR_PATH_EXPLORER TEXT("\\Shell Folders")
 
-
 #define CSIDL_DESKTOP                   0x0000        // <desktop>
 #define CSIDL_INTERNET                  0x0001        // Internet Explorer (icon on desktop)
 #define CSIDL_PROGRAMS                  0x0002        // Start Menu\Programs

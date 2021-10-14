@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -327,36 +335,44 @@ EXTERN_C const IID IID_ID3D11ShaderTrace;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D11ShaderTrace * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ID3D11ShaderTrace * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ID3D11ShaderTrace * This);
         
+        DECLSPEC_XFGVIRT(ID3D11ShaderTrace, TraceReady)
         HRESULT ( STDMETHODCALLTYPE *TraceReady )( 
             ID3D11ShaderTrace * This,
             /* [annotation] */ 
             _Out_opt_  UINT64 *pTestCount);
         
+        DECLSPEC_XFGVIRT(ID3D11ShaderTrace, ResetTrace)
         void ( STDMETHODCALLTYPE *ResetTrace )( 
             ID3D11ShaderTrace * This);
         
+        DECLSPEC_XFGVIRT(ID3D11ShaderTrace, GetTraceStats)
         HRESULT ( STDMETHODCALLTYPE *GetTraceStats )( 
             ID3D11ShaderTrace * This,
             /* [annotation] */ 
             _Out_  D3D11_TRACE_STATS *pTraceStats);
         
+        DECLSPEC_XFGVIRT(ID3D11ShaderTrace, PSSelectStamp)
         HRESULT ( STDMETHODCALLTYPE *PSSelectStamp )( 
             ID3D11ShaderTrace * This,
             /* [annotation] */ 
             _In_  UINT stampIndex);
         
+        DECLSPEC_XFGVIRT(ID3D11ShaderTrace, GetInitialRegisterContents)
         HRESULT ( STDMETHODCALLTYPE *GetInitialRegisterContents )( 
             ID3D11ShaderTrace * This,
             /* [annotation] */ 
@@ -364,6 +380,7 @@ EXTERN_C const IID IID_ID3D11ShaderTrace;
             /* [annotation] */ 
             _Out_  D3D11_TRACE_VALUE *pValue);
         
+        DECLSPEC_XFGVIRT(ID3D11ShaderTrace, GetStep)
         HRESULT ( STDMETHODCALLTYPE *GetStep )( 
             ID3D11ShaderTrace * This,
             /* [annotation] */ 
@@ -371,6 +388,7 @@ EXTERN_C const IID IID_ID3D11ShaderTrace;
             /* [annotation] */ 
             _Out_  D3D11_TRACE_STEP *pTraceStep);
         
+        DECLSPEC_XFGVIRT(ID3D11ShaderTrace, GetWrittenRegister)
         HRESULT ( STDMETHODCALLTYPE *GetWrittenRegister )( 
             ID3D11ShaderTrace * This,
             /* [annotation] */ 
@@ -382,6 +400,7 @@ EXTERN_C const IID IID_ID3D11ShaderTrace;
             /* [annotation] */ 
             _Out_  D3D11_TRACE_VALUE *pValue);
         
+        DECLSPEC_XFGVIRT(ID3D11ShaderTrace, GetReadRegister)
         HRESULT ( STDMETHODCALLTYPE *GetReadRegister )( 
             ID3D11ShaderTrace * This,
             /* [annotation] */ 
@@ -483,18 +502,22 @@ EXTERN_C const IID IID_ID3D11ShaderTraceFactory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D11ShaderTraceFactory * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ID3D11ShaderTraceFactory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ID3D11ShaderTraceFactory * This);
         
+        DECLSPEC_XFGVIRT(ID3D11ShaderTraceFactory, CreateShaderTrace)
         HRESULT ( STDMETHODCALLTYPE *CreateShaderTrace )( 
             ID3D11ShaderTraceFactory * This,
             /* [annotation] */ 

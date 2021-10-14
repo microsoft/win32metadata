@@ -1725,6 +1725,41 @@ cpp_quote ("EXTERN_C const GUID  IID_ICallbackWithNoReentrancyToApplicationSTA;"
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */")
 #pragma endregion
 
+#pragma region Application Family or OneCore Family
+cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
+
+typedef struct MachineGlobalObjectTableRegistrationToken__{
+    int unused;
+}* MachineGlobalObjectTableRegistrationToken;
+
+[
+    local,
+    object,
+    uuid(26d709ac-f70b-4421-a96f-d2878fafb00d),
+    pointer_default(unique)
+]
+
+interface IMachineGlobalObjectTable : IUnknown
+{
+    HRESULT RegisterObject(
+        [in] REFCLSID clsid,
+        [in] LPCWSTR identifier,
+        [in] IUnknown *object,
+        [out] MachineGlobalObjectTableRegistrationToken *token);
+
+    HRESULT GetObject(
+        [in] REFCLSID clsid,
+        [in] LPCWSTR identifier,
+        [in] REFIID riid,
+        [out, iid_is(riid)] void **ppv);
+
+    HRESULT RevokeObject(
+        [in] MachineGlobalObjectTableRegistrationToken token);
+};
+
+cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */")
+#pragma endregion
+
 cpp_quote("#define _OBJIDLBASE_")
 cpp_quote("#endif") //_OBJIDLBASE_
 

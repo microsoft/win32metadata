@@ -1,4 +1,5 @@
 --traverse
+<IncludeRoot>/shared/gnssdriver.h
 <IncludeRoot>/um/locationapi.h
 --namespace
 Windows.Win32.Devices.Geolocation

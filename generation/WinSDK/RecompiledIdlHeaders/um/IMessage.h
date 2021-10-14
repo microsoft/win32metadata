@@ -23,6 +23,18 @@ extern "C"
 {
 #endif
 
+#ifndef WIN_NOEXCEPT
+	#ifdef __cplusplus
+		#if _MSC_VER >= 1900
+			#define WIN_NOEXCEPT noexcept
+		#else
+			#define WIN_NOEXCEPT throw()
+		#endif
+	#else
+		#define WIN_NOEXCEPT
+	#endif
+#endif
+
 typedef struct _MSGSESS		FAR * LPMSGSESS;
 
 /*	Typedef of optional callback routine to be called on last release of
@@ -122,7 +134,7 @@ STDAPI_(SCODE) OpenIMsgOnIStg(
 	MSGCALLRELEASE FAR *lpfMsgCallRelease,	/* -> release callback rtn (opt) */
 	ULONG			ulCallerData,		/* caller data returned in callback  */
 	ULONG			ulFlags,			/* -> flags (controls istg commit)   */
-	LPMESSAGE		FAR *lppMsg );		/* <- open message object			 */
+	LPMESSAGE		FAR *lppMsg ) WIN_NOEXCEPT;	/* <- open message object			 */
 
 #define IMSG_NO_ISTG_COMMIT		((ULONG) 0x00000001)
 
@@ -170,7 +182,7 @@ _Check_return_
 STDAPI GetAttribIMsgOnIStg(
 	LPVOID					lpObject,
 	LPSPropTagArray			lpPropTagArray,
-	LPSPropAttrArray FAR 	*lppPropAttrArray );
+	LPSPropAttrArray FAR 	*lppPropAttrArray ) WIN_NOEXCEPT;
 
 /*	SetAttribIMsgOnIStg - To set attributes on properties
  *
@@ -182,7 +194,7 @@ STDAPI SetAttribIMsgOnIStg(
 	LPVOID					lpObject,
 	LPSPropTagArray			lpPropTags,
 	LPSPropAttrArray		lpPropAttrs,
-	LPSPropProblemArray FAR	*lppPropProblems );
+	LPSPropProblemArray FAR	*lppPropProblems ) WIN_NOEXCEPT;
 
 /*	MapStorageSCode - To map an IStorage hResult to a MAPI sCode value
  *
@@ -194,7 +206,7 @@ STDAPI SetAttribIMsgOnIStg(
  *	WARNING:	There is no guarantee that this entry point will exist in
  *	shipped versions of mapiu.dll.
  */
-STDAPI_(SCODE) MapStorageSCode( SCODE StgSCode );
+STDAPI_(SCODE) MapStorageSCode( SCODE StgSCode ) WIN_NOEXCEPT;
 
 
 #ifdef __cplusplus

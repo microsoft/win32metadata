@@ -318,11 +318,11 @@ typedef long (DIAMONDAPI *PFNFCISTATUS)(UINT   typeStatus,
  *      temporary files before giving up.
  */
 typedef BOOL (DIAMONDAPI *PFNFCIGETTEMPFILE)(_Out_writes_bytes_(cbTempName) char *pszTempName,
-                                             _In_range_(>=, MAX_PATH) int   cbTempName,
+                                             _In_range_(<=, 260) int   cbTempName,
                                              void FAR *pv); /* pfnfcigtf */
 
 #define FNFCIGETTEMPFILE(fn) BOOL DIAMONDAPI fn(_Out_writes_bytes_(cbTempName) char *pszTempName, \
-                                                _In_range_(>=, MAX_PATH) int   cbTempName, \
+                                                _In_range_(<=, 260) int   cbTempName, \
                                                 void FAR *pv)
 
 

@@ -1876,6 +1876,107 @@ NetErrorLogWrite (
      * changed the password.
      */
      
+#define NELOG_NetlogonDnsHostNameLowerCasingFailed       (ERRLOG2_BASE + 125)
+    /*
+     * The system failed to lowercase the currently configured host name. This
+     * conversion failed with the error code below. This may affect the system's
+     * ability to register SRV records, potentially affecting clients' ability
+     * to locate domain controllers.
+     *
+     * Error code: %1
+     *
+     * More information is available at https://aka.ms/lowercasehostnamesrvrecord
+     */
+
+#define NETLOG_NetlogonNonWindowsSupportsSecureRpc (ERRLOG2_BASE + 126)
+    /*
+     * The Netlogon service detected a non-windows account using secure RPC.
+     *
+     * %n%n Machine SamAccountName: %1
+     * %n Domain: %2
+     * %n Account Type: %3
+     * %n Machine Os: %4
+     * %n Machine Os Build Version: %5
+     * %n Machine Os Service Pack: %6
+     */
+
+#define NETLOG_NetlogonUnsecureRpcClient    (ERRLOG2_BASE + 127)
+    /*
+     * The Netlogon service denied a vulnerable Netlogon secure channel connection from a machine account.
+     *
+     * %n%n Machine SamAccountName: %1
+     * %n Domain: %2
+     * %n Account Type: %3
+     * %n Machine Operating System: %4
+     * %n Machine Operating System Build: %5
+     * %n Machine Operating System Service Pack: %6
+     *
+     * %n%nFor more information about why this was denied, please visit  https://go.microsoft.com/fwlink/?linkid=2133485.
+     */
+
+#define NETLOG_NetlogonUnsecureRpcTrust    (ERRLOG2_BASE + 128)
+    /*
+     * The Netlogon service denied a vulnerable Netlogon secure channel connection using a trust account.
+     *
+     * %n%n Account Type: %1
+     * %n Trust Name: %2
+     * %n Trust Target: %3
+     * %n Client IP Address: %4
+     *
+     * %n%nFor more information about why this was denied, please visit  https://go.microsoft.com/fwlink/?linkid=2133485.
+     */
+
+#define NETLOG_NetlogonUnsecuredRpcMachineTemporarilyAllowed (ERRLOG2_BASE + 129)
+    /*
+     * The Netlogon service allowed a vulnerable Netlogon secure channel connection.
+     *
+     * %n%nWarning: This connection will be denied once the enforcement phase is released. To better understand the enforcement phase, 
+     * please visit  https://go.microsoft.com/fwlink/?linkid=2133485.
+     *
+     * %n%n Machine SamAccountName: %1
+     * %n Domain: %2
+     * %n Account Type: %3
+     * %n Machine Operating System: %4
+     * %n Machine Operating System Build: %5
+     * %n Machine Operating System Service Pack: %6
+     * 
+     */
+
+#define NETLOG_NetlogonUnsecureRpcMachineAllowedBySsdl (ERRLOG2_BASE + 130)
+    /*
+     * The Netlogon service allowed a vulnerable Netlogon secure channel connection because the machine account is allowed in the 
+     * "Domain controller: Allow vulnerable Netlogon secure channel connections" group policy.
+     * 
+     * %n%nWarning: Using vulnerable Netlogon secure channels will expose the domain-joined devices to attack. To protect your device from attack, 
+     * remove a machine account from "Domain controller: Allow vulnerable Netlogon secure channel connections" group policy after the third-party 
+     * Netlogon client has been updated. To better understand the risk of configuring machine accounts to be allowed to use vulnerable Netlogon 
+     * secure channel connections, please visit  https://go.microsoft.com/fwlink/?linkid=2133485.
+     * 
+     * %n%n Machine SamAccountName: %1
+     * %n Domain: %2
+     * %n Account Type: %3
+     * %n Machine Os: %4
+     * %n Machine Os Build Version: %5
+     * %n Machine Os Service Pack: %6
+     */
+
+#define NETLOG_NetlogonUnsecureRpcTrustAllowedBySsdl (ERRLOG2_BASE + 131)
+    /*
+     * The Netlogon service allowed a vulnerable Netlogon secure channel connection because the trust account is allowed in the 
+     * "Domain controller: Allow vulnerable Netlogon secure channel connections" group policy.
+     * 
+     * %n%nWarning: Using vulnerable Netlogon secure channels will expose Active Directory forests to attack. To protect your 
+     * Active Directory forests from attack, all trusts must use secure RPC with Netlogon secure channel. Remove a trust account from 
+     * "Domain controller: Allow vulnerable Netlogon secure channel connections" group policy after the third-party Netlogon client on the domain controllers 
+     * have been updated. To better understand the risk of configuring trust accounts to be allowed to use vulnerable Netlogon secure channel connections, 
+     * please visit  https://go.microsoft.com/fwlink/?linkid=2133485.
+     * 
+     * %n%n Account Type: %1
+     * %n Trust Name: %2
+     * %n Trust Target: %3
+     * %n Client IP Address: %4
+     */
+
 #ifdef __cplusplus
 }
 #endif

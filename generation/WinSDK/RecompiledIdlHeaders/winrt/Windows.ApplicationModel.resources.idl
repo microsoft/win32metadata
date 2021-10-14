@@ -47,6 +47,8 @@ namespace Windows
 
             interface IResourceLoaderStatics3;
 
+            interface IResourceLoaderStatics4;
+
             runtimeclass ResourceLoader;
         }
     }
@@ -112,6 +114,14 @@ namespace Windows
                 HRESULT GetForUIContext([in] Windows.UI.UIContext* context, [out] [retval] Windows.ApplicationModel.Resources.ResourceLoader** result);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [exclusiveto(Windows.ApplicationModel.Resources.ResourceLoader)]
+            [uuid(9FB36C32-6C8C-4316-962E-909539B5C259)]
+            interface IResourceLoaderStatics4 : IInspectable
+            {
+                HRESULT GetDefaultPriPath([in] HSTRING packageFullName, [out] [retval] HSTRING* value);
+            }
+
             [activatable(Windows.ApplicationModel.Resources.IResourceLoaderFactory, Windows.Foundation.UniversalApiContract, 1.0)]
             [activatable(Windows.Foundation.UniversalApiContract, 1.0)]
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -119,6 +129,7 @@ namespace Windows
             [static(Windows.ApplicationModel.Resources.IResourceLoaderStatics, Windows.Foundation.UniversalApiContract, 1.0)]
             [static(Windows.ApplicationModel.Resources.IResourceLoaderStatics2, Windows.Foundation.UniversalApiContract, 1.0)]
             [static(Windows.ApplicationModel.Resources.IResourceLoaderStatics3, Windows.Foundation.UniversalApiContract, 8.0)]
+            [static(Windows.ApplicationModel.Resources.IResourceLoaderStatics4, Windows.Foundation.UniversalApiContract, 12.0)]
             [threading(both)]
             runtimeclass ResourceLoader
             {

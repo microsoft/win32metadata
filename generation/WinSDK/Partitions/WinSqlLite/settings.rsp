@@ -1,0 +1,8 @@
+--exclude
+__SQLITESESSION_H_
+--traverse
+<IncludeRoot>/um/winsqlite/winsqlite3.h
+<IncludeRoot>/um/winsqlite/winsqlite3ext.h
+--namespace
+Windows.Win32.System.SqlLite
+

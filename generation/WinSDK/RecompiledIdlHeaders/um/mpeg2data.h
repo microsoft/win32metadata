@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -242,6 +250,7 @@ EXTERN_C const IID IID_IMpeg2TableFilter;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMpeg2TableFilter * This,
             /* [annotation][in] */ 
@@ -249,36 +258,44 @@ EXTERN_C const IID IID_IMpeg2TableFilter;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMpeg2TableFilter * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMpeg2TableFilter * This);
         
+        DECLSPEC_XFGVIRT(IMpeg2TableFilter, AddPID)
         HRESULT ( STDMETHODCALLTYPE *AddPID )( 
             __RPC__in IMpeg2TableFilter * This,
             PID p);
         
+        DECLSPEC_XFGVIRT(IMpeg2TableFilter, AddTable)
         HRESULT ( STDMETHODCALLTYPE *AddTable )( 
             __RPC__in IMpeg2TableFilter * This,
             PID p,
             TID t);
         
+        DECLSPEC_XFGVIRT(IMpeg2TableFilter, AddExtension)
         HRESULT ( STDMETHODCALLTYPE *AddExtension )( 
             __RPC__in IMpeg2TableFilter * This,
             PID p,
             TID t,
             TEID e);
         
+        DECLSPEC_XFGVIRT(IMpeg2TableFilter, RemovePID)
         HRESULT ( STDMETHODCALLTYPE *RemovePID )( 
             __RPC__in IMpeg2TableFilter * This,
             PID p);
         
+        DECLSPEC_XFGVIRT(IMpeg2TableFilter, RemoveTable)
         HRESULT ( STDMETHODCALLTYPE *RemoveTable )( 
             __RPC__in IMpeg2TableFilter * This,
             PID p,
             TID t);
         
+        DECLSPEC_XFGVIRT(IMpeg2TableFilter, RemoveExtension)
         HRESULT ( STDMETHODCALLTYPE *RemoveExtension )( 
             __RPC__in IMpeg2TableFilter * This,
             PID p,
@@ -350,7 +367,9 @@ typedef struct Mpeg2TableSampleHdr
 // {752845F1-758F-4c83-A043-4270C593308E}
 DEFINE_GUID(CLSID_Mpeg2TableFilter,
 0x752845f1, 0x758f, 0x4c83, 0xa0, 0x43, 0x42, 0x70, 0xc5, 0x93, 0x30, 0x8e);
+#ifdef __cplusplus
 class DECLSPEC_UUID("DBAF6C1B-B6A4-4898-AE65-204F0D9509A1") Mpeg2DataLib;
+#endif
 
 
 extern RPC_IF_HANDLE __MIDL_itf_mpeg2data_0000_0001_v0_0_c_ifspec;
@@ -426,6 +445,7 @@ EXTERN_C const IID IID_IMpeg2Data;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMpeg2Data * This,
             /* [annotation][in] */ 
@@ -433,12 +453,15 @@ EXTERN_C const IID IID_IMpeg2Data;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMpeg2Data * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMpeg2Data * This);
         
+        DECLSPEC_XFGVIRT(IMpeg2Data, GetSection)
         HRESULT ( STDMETHODCALLTYPE *GetSection )( 
             __RPC__in IMpeg2Data * This,
             /* [annotation][in] */ 
@@ -452,6 +475,7 @@ EXTERN_C const IID IID_IMpeg2Data;
             /* [annotation][out] */ 
             _Out_  ISectionList **ppSectionList);
         
+        DECLSPEC_XFGVIRT(IMpeg2Data, GetTable)
         HRESULT ( STDMETHODCALLTYPE *GetTable )( 
             __RPC__in IMpeg2Data * This,
             /* [annotation][in] */ 
@@ -465,6 +489,7 @@ EXTERN_C const IID IID_IMpeg2Data;
             /* [annotation][out] */ 
             _Out_  ISectionList **ppSectionList);
         
+        DECLSPEC_XFGVIRT(IMpeg2Data, GetStreamOfSections)
         HRESULT ( STDMETHODCALLTYPE *GetStreamOfSections )( 
             __RPC__in IMpeg2Data * This,
             /* [annotation][in] */ 
@@ -587,6 +612,7 @@ EXTERN_C const IID IID_ISectionList;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISectionList * This,
             /* [annotation][in] */ 
@@ -594,12 +620,15 @@ EXTERN_C const IID IID_ISectionList;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISectionList * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISectionList * This);
         
+        DECLSPEC_XFGVIRT(ISectionList, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in ISectionList * This,
             /* [annotation][in] */ 
@@ -619,19 +648,23 @@ EXTERN_C const IID IID_ISectionList;
             /* [annotation][in] */ 
             _In_  HANDLE hDoneEvent);
         
+        DECLSPEC_XFGVIRT(ISectionList, InitializeWithRawSections)
         HRESULT ( STDMETHODCALLTYPE *InitializeWithRawSections )( 
             __RPC__in ISectionList * This,
             /* [annotation][in] */ 
             _In_  PMPEG_PACKET_LIST pmplSections);
         
+        DECLSPEC_XFGVIRT(ISectionList, CancelPendingRequest)
         HRESULT ( STDMETHODCALLTYPE *CancelPendingRequest )( 
             __RPC__in ISectionList * This);
         
+        DECLSPEC_XFGVIRT(ISectionList, GetNumberOfSections)
         HRESULT ( STDMETHODCALLTYPE *GetNumberOfSections )( 
             __RPC__in ISectionList * This,
             /* [annotation][out] */ 
             _Out_  WORD *pCount);
         
+        DECLSPEC_XFGVIRT(ISectionList, GetSectionData)
         HRESULT ( STDMETHODCALLTYPE *GetSectionData )( 
             __RPC__in ISectionList * This,
             /* [annotation][in] */ 
@@ -641,10 +674,12 @@ EXTERN_C const IID IID_ISectionList;
             /* [annotation][out] */ 
             _Out_  PSECTION *ppSection);
         
+        DECLSPEC_XFGVIRT(ISectionList, GetProgramIdentifier)
         HRESULT ( STDMETHODCALLTYPE *GetProgramIdentifier )( 
             __RPC__in ISectionList * This,
             __RPC__in PID *pPid);
         
+        DECLSPEC_XFGVIRT(ISectionList, GetTableIdentifier)
         HRESULT ( STDMETHODCALLTYPE *GetTableIdentifier )( 
             __RPC__in ISectionList * This,
             __RPC__in TID *pTableId);
@@ -748,6 +783,7 @@ EXTERN_C const IID IID_IMpeg2Stream;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMpeg2Stream * This,
             /* [annotation][in] */ 
@@ -755,12 +791,15 @@ EXTERN_C const IID IID_IMpeg2Stream;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMpeg2Stream * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMpeg2Stream * This);
         
+        DECLSPEC_XFGVIRT(IMpeg2Stream, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IMpeg2Stream * This,
             /* [annotation][in] */ 
@@ -778,6 +817,7 @@ EXTERN_C const IID IID_IMpeg2Stream;
             /* [annotation][in] */ 
             _In_  HANDLE hDataReadyEvent);
         
+        DECLSPEC_XFGVIRT(IMpeg2Stream, SupplyDataBuffer)
         HRESULT ( STDMETHODCALLTYPE *SupplyDataBuffer )( 
             __RPC__in IMpeg2Stream * This,
             /* [annotation][in] */ 

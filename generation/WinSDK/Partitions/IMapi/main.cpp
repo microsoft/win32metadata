@@ -6,8 +6,14 @@
 #include "windows.fixed.h"
 #include <sdkddkver.h>
 
+#include <wabdefs.h>
+
 #include <imapi2.h>
 #include <imapi2fs.h>
 #include <imapi2error.h>
 #include <imapi.h>
 #include <imapierror.h>
+#include <imessage.h>
+#include <mailmsgprops.h>
+#include <smtpguid.h>
+

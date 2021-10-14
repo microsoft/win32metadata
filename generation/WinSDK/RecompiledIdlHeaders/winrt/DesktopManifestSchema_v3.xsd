@@ -8,12 +8,14 @@
            xmlns:desktop3="http://schemas.microsoft.com/appx/manifest/desktop/windows10/3"
            xmlns:desktop4="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"
            xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
+           xmlns:uap11="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"
            >
 
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/types"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/foundation/windows10"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"/>
+  <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"/>
 
   <xs:element name="Extension" substitutionGroup="f:ApplicationExtensionChoice">
     <xs:complexType>
@@ -24,6 +26,7 @@
       <xs:attribute name="Category" type="t:ST_ApplicationExtensionCategory_Desktop3" use="required"/>
       <xs:attributeGroup ref="t:ExtensionBaseAttributes"/>
       <xs:attributeGroup ref="uap10:TrustLevelGroup"/>
+      <xs:attributeGroup ref="uap11:ManganeseExtensionAttributesGroup"/>
     </xs:complexType>
   </xs:element>
 
@@ -48,20 +51,12 @@
     <xs:sequence minOccurs="0">
       <xs:element name="Verb" maxOccurs="10000">
         <xs:complexType>
-          <xs:attribute name="Id" type="ST_CloudFilesContextMenusVerbId" use="required" />
+          <xs:attribute name="Id" type="t:ST_FileTypeAssociationSupportedVerbId" use="required" />
           <xs:attribute name="Clsid" type="t:ST_GUID"/>
         </xs:complexType>
       </xs:element>
     </xs:sequence>
   </xs:complexType>
-
-  <xs:simpleType name="ST_CloudFilesContextMenusVerbId">
-    <xs:restriction base="t:ST_NonEmptyString">
-      <xs:minLength value="3"/>
-      <xs:maxLength value="64"/>
-      <xs:pattern value="([A-Za-z0-9]*)"/>
-    </xs:restriction>
-  </xs:simpleType>
 
   <xs:complexType name="CT_AutoPlayHandler">
     <xs:sequence minOccurs="0" maxOccurs="1000">

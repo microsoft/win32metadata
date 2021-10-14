@@ -10,3 +10,6 @@
 #include <handleapi.h>
 #include <winerror.h>
 #include <ntstatus.h>
+#include <cierror.h>
+#include <mprerror.h>
+#include <winsdkver.h>

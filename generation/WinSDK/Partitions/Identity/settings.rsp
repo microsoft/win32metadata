@@ -9,6 +9,7 @@ _SecHandle
 <IncludeRoot>/shared/secext.h
 <IncludeRoot>/shared/security.h
 <IncludeRoot>/shared/sspi.h
+<IncludeRoot>/shared/issper16.h
 <IncludeRoot>/um/lsalookup.h
 <IncludeRoot>/um/minschannel.h
 <IncludeRoot>/um/ntlsa.h
@@ -19,5 +20,9 @@ _SecHandle
 <IncludeRoot>/um/slpublic.h
 <IncludeRoot>/um/SubAuth.h
 <IncludeRoot>/um/tokenbinding.h
+<IncludeRoot>/um/ccgplugins.h
+<IncludeRoot>/um/schnlsp.h
+<IncludeRoot>/um/slerror.h
+<IncludeRoot>/um/sliddefs.h
 --namespace
 Windows.Win32.Security.Authentication.Identity.Core

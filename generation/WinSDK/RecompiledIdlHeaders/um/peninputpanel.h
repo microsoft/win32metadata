@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -31,6 +31,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -385,28 +393,34 @@ EXTERN_C const IID IID_IPenInputPanel;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPenInputPanel * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPenInputPanel * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPenInputPanel * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IPenInputPanel * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IPenInputPanel * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IPenInputPanel * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -415,6 +429,7 @@ EXTERN_C const IID IID_IPenInputPanel;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IPenInputPanel * This,
             /* [annotation][in] */ 
@@ -434,101 +449,126 @@ EXTERN_C const IID IID_IPenInputPanel;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IPenInputPanel, get_Busy)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Busy )( 
             __RPC__in IPenInputPanel * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Busy);
         
+        DECLSPEC_XFGVIRT(IPenInputPanel, get_Factoid)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Factoid )( 
             __RPC__in IPenInputPanel * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Factoid);
         
+        DECLSPEC_XFGVIRT(IPenInputPanel, put_Factoid)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Factoid )( 
             __RPC__in IPenInputPanel * This,
             /* [in] */ __RPC__in BSTR Factoid);
         
+        DECLSPEC_XFGVIRT(IPenInputPanel, get_AttachedEditWindow)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AttachedEditWindow )( 
             __RPC__in IPenInputPanel * This,
             /* [retval][out] */ __RPC__out LONG32 *AttachedEditWindow);
         
+        DECLSPEC_XFGVIRT(IPenInputPanel, put_AttachedEditWindow)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_AttachedEditWindow )( 
             __RPC__in IPenInputPanel * This,
             /* [in] */ LONG32 AttachedEditWindow);
         
+        DECLSPEC_XFGVIRT(IPenInputPanel, get_CurrentPanel)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentPanel )( 
             __RPC__in IPenInputPanel * This,
             /* [retval][out] */ __RPC__out PanelType *CurrentPanel);
         
+        DECLSPEC_XFGVIRT(IPenInputPanel, put_CurrentPanel)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_CurrentPanel )( 
             __RPC__in IPenInputPanel * This,
             /* [in] */ PanelType CurrentPanel);
         
+        DECLSPEC_XFGVIRT(IPenInputPanel, get_DefaultPanel)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultPanel )( 
             __RPC__in IPenInputPanel * This,
             /* [retval][out] */ __RPC__out PanelType *pDefaultPanel);
         
+        DECLSPEC_XFGVIRT(IPenInputPanel, put_DefaultPanel)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DefaultPanel )( 
             __RPC__in IPenInputPanel * This,
             /* [in] */ PanelType DefaultPanel);
         
+        DECLSPEC_XFGVIRT(IPenInputPanel, get_Visible)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Visible )( 
             __RPC__in IPenInputPanel * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Visible);
         
+        DECLSPEC_XFGVIRT(IPenInputPanel, put_Visible)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Visible )( 
             __RPC__in IPenInputPanel * This,
             /* [in] */ VARIANT_BOOL Visible);
         
+        DECLSPEC_XFGVIRT(IPenInputPanel, get_Top)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Top )( 
             __RPC__in IPenInputPanel * This,
             /* [retval][out] */ __RPC__out long *Top);
         
+        DECLSPEC_XFGVIRT(IPenInputPanel, get_Left)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Left )( 
             __RPC__in IPenInputPanel * This,
             /* [retval][out] */ __RPC__out long *Left);
         
+        DECLSPEC_XFGVIRT(IPenInputPanel, get_Width)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Width )( 
             __RPC__in IPenInputPanel * This,
             /* [retval][out] */ __RPC__out long *Width);
         
+        DECLSPEC_XFGVIRT(IPenInputPanel, get_Height)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Height )( 
             __RPC__in IPenInputPanel * This,
             /* [retval][out] */ __RPC__out long *Height);
         
+        DECLSPEC_XFGVIRT(IPenInputPanel, get_VerticalOffset)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_VerticalOffset )( 
             __RPC__in IPenInputPanel * This,
             /* [retval][out] */ __RPC__out long *VerticalOffset);
         
+        DECLSPEC_XFGVIRT(IPenInputPanel, put_VerticalOffset)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_VerticalOffset )( 
             __RPC__in IPenInputPanel * This,
             /* [in] */ long VerticalOffset);
         
+        DECLSPEC_XFGVIRT(IPenInputPanel, get_HorizontalOffset)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_HorizontalOffset )( 
             __RPC__in IPenInputPanel * This,
             /* [retval][out] */ __RPC__out long *HorizontalOffset);
         
+        DECLSPEC_XFGVIRT(IPenInputPanel, put_HorizontalOffset)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_HorizontalOffset )( 
             __RPC__in IPenInputPanel * This,
             /* [in] */ long HorizontalOffset);
         
+        DECLSPEC_XFGVIRT(IPenInputPanel, get_AutoShow)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AutoShow )( 
             __RPC__in IPenInputPanel * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pAutoShow);
         
+        DECLSPEC_XFGVIRT(IPenInputPanel, put_AutoShow)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_AutoShow )( 
             __RPC__in IPenInputPanel * This,
             /* [in] */ VARIANT_BOOL AutoShow);
         
+        DECLSPEC_XFGVIRT(IPenInputPanel, MoveTo)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *MoveTo )( 
             __RPC__in IPenInputPanel * This,
             /* [in] */ long Left,
             /* [in] */ long Top);
         
+        DECLSPEC_XFGVIRT(IPenInputPanel, CommitPendingInput)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CommitPendingInput )( 
             __RPC__in IPenInputPanel * This);
         
+        DECLSPEC_XFGVIRT(IPenInputPanel, Refresh)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IPenInputPanel * This);
         
+        DECLSPEC_XFGVIRT(IPenInputPanel, EnableTsf)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnableTsf )( 
             __RPC__in IPenInputPanel * This,
             /* [in] */ VARIANT_BOOL Enable);
@@ -677,28 +717,34 @@ EXTERN_C const IID DIID__IPenInputPanelEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _IPenInputPanelEvents * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in _IPenInputPanelEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in _IPenInputPanelEvents * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in _IPenInputPanelEvents * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in _IPenInputPanelEvents * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in _IPenInputPanelEvents * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -707,6 +753,7 @@ EXTERN_C const IID DIID__IPenInputPanelEvents;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             _IPenInputPanelEvents * This,
             /* [annotation][in] */ 
@@ -804,24 +851,29 @@ EXTERN_C const IID IID_IHandwrittenTextInsertion;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IHandwrittenTextInsertion * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IHandwrittenTextInsertion * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IHandwrittenTextInsertion * This);
         
+        DECLSPEC_XFGVIRT(IHandwrittenTextInsertion, InsertRecognitionResultsArray)
         HRESULT ( STDMETHODCALLTYPE *InsertRecognitionResultsArray )( 
             __RPC__in IHandwrittenTextInsertion * This,
             /* [in] */ __RPC__in SAFEARRAY * psaAlternates,
             /* [in] */ LCID locale,
             /* [in] */ BOOL fAlternateContainsAutoSpacingInformation);
         
+        DECLSPEC_XFGVIRT(IHandwrittenTextInsertion, InsertInkRecognitionResult)
         HRESULT ( STDMETHODCALLTYPE *InsertInkRecognitionResult )( 
             __RPC__in IHandwrittenTextInsertion * This,
             /* [in] */ __RPC__in_opt IInkRecognitionResult *pIInkRecoResult,
@@ -954,72 +1006,87 @@ EXTERN_C const IID IID_ITextInputPanelEventSink;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITextInputPanelEventSink * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITextInputPanelEventSink * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITextInputPanelEventSink * This);
         
+        DECLSPEC_XFGVIRT(ITextInputPanelEventSink, InPlaceStateChanging)
         HRESULT ( STDMETHODCALLTYPE *InPlaceStateChanging )( 
             __RPC__in ITextInputPanelEventSink * This,
             /* [in] */ InPlaceState oldInPlaceState,
             /* [in] */ InPlaceState newInPlaceState);
         
+        DECLSPEC_XFGVIRT(ITextInputPanelEventSink, InPlaceStateChanged)
         HRESULT ( STDMETHODCALLTYPE *InPlaceStateChanged )( 
             __RPC__in ITextInputPanelEventSink * This,
             /* [in] */ InPlaceState oldInPlaceState,
             /* [in] */ InPlaceState newInPlaceState);
         
+        DECLSPEC_XFGVIRT(ITextInputPanelEventSink, InPlaceSizeChanging)
         HRESULT ( STDMETHODCALLTYPE *InPlaceSizeChanging )( 
             __RPC__in ITextInputPanelEventSink * This,
             /* [in] */ RECT oldBoundingRectangle,
             /* [in] */ RECT newBoundingRectangle);
         
+        DECLSPEC_XFGVIRT(ITextInputPanelEventSink, InPlaceSizeChanged)
         HRESULT ( STDMETHODCALLTYPE *InPlaceSizeChanged )( 
             __RPC__in ITextInputPanelEventSink * This,
             /* [in] */ RECT oldBoundingRectangle,
             /* [in] */ RECT newBoundingRectangle);
         
+        DECLSPEC_XFGVIRT(ITextInputPanelEventSink, InputAreaChanging)
         HRESULT ( STDMETHODCALLTYPE *InputAreaChanging )( 
             __RPC__in ITextInputPanelEventSink * This,
             /* [in] */ PanelInputArea oldInputArea,
             /* [in] */ PanelInputArea newInputArea);
         
+        DECLSPEC_XFGVIRT(ITextInputPanelEventSink, InputAreaChanged)
         HRESULT ( STDMETHODCALLTYPE *InputAreaChanged )( 
             __RPC__in ITextInputPanelEventSink * This,
             /* [in] */ PanelInputArea oldInputArea,
             /* [in] */ PanelInputArea newInputArea);
         
+        DECLSPEC_XFGVIRT(ITextInputPanelEventSink, CorrectionModeChanging)
         HRESULT ( STDMETHODCALLTYPE *CorrectionModeChanging )( 
             __RPC__in ITextInputPanelEventSink * This,
             /* [in] */ CorrectionMode oldCorrectionMode,
             /* [in] */ CorrectionMode newCorrectionMode);
         
+        DECLSPEC_XFGVIRT(ITextInputPanelEventSink, CorrectionModeChanged)
         HRESULT ( STDMETHODCALLTYPE *CorrectionModeChanged )( 
             __RPC__in ITextInputPanelEventSink * This,
             /* [in] */ CorrectionMode oldCorrectionMode,
             /* [in] */ CorrectionMode newCorrectionMode);
         
+        DECLSPEC_XFGVIRT(ITextInputPanelEventSink, InPlaceVisibilityChanging)
         HRESULT ( STDMETHODCALLTYPE *InPlaceVisibilityChanging )( 
             __RPC__in ITextInputPanelEventSink * This,
             /* [in] */ BOOL oldVisible,
             /* [in] */ BOOL newVisible);
         
+        DECLSPEC_XFGVIRT(ITextInputPanelEventSink, InPlaceVisibilityChanged)
         HRESULT ( STDMETHODCALLTYPE *InPlaceVisibilityChanged )( 
             __RPC__in ITextInputPanelEventSink * This,
             /* [in] */ BOOL oldVisible,
             /* [in] */ BOOL newVisible);
         
+        DECLSPEC_XFGVIRT(ITextInputPanelEventSink, TextInserting)
         HRESULT ( STDMETHODCALLTYPE *TextInserting )( 
             __RPC__in ITextInputPanelEventSink * This,
             /* [in] */ __RPC__in SAFEARRAY * Ink);
         
+        DECLSPEC_XFGVIRT(ITextInputPanelEventSink, TextInserted)
         HRESULT ( STDMETHODCALLTYPE *TextInserted )( 
             __RPC__in ITextInputPanelEventSink * This,
             /* [in] */ __RPC__in SAFEARRAY * Ink);
@@ -1196,117 +1263,145 @@ EXTERN_C const IID IID_ITextInputPanel;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITextInputPanel * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITextInputPanel * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITextInputPanel * This);
         
+        DECLSPEC_XFGVIRT(ITextInputPanel, get_AttachedEditWindow)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AttachedEditWindow )( 
             __RPC__in ITextInputPanel * This,
             /* [retval][out] */ __RPC__deref_out_opt HWND *AttachedEditWindow);
         
+        DECLSPEC_XFGVIRT(ITextInputPanel, put_AttachedEditWindow)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_AttachedEditWindow )( 
             __RPC__in ITextInputPanel * This,
             /* [in] */ __RPC__in HWND AttachedEditWindow);
         
+        DECLSPEC_XFGVIRT(ITextInputPanel, get_CurrentInteractionMode)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentInteractionMode )( 
             __RPC__in ITextInputPanel * This,
             /* [retval][out] */ __RPC__out InteractionMode *CurrentInteractionMode);
         
+        DECLSPEC_XFGVIRT(ITextInputPanel, get_DefaultInPlaceState)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultInPlaceState )( 
             __RPC__in ITextInputPanel * This,
             /* [retval][out] */ __RPC__out InPlaceState *State);
         
+        DECLSPEC_XFGVIRT(ITextInputPanel, put_DefaultInPlaceState)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_DefaultInPlaceState )( 
             __RPC__in ITextInputPanel * This,
             /* [in] */ InPlaceState State);
         
+        DECLSPEC_XFGVIRT(ITextInputPanel, get_CurrentInPlaceState)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentInPlaceState )( 
             __RPC__in ITextInputPanel * This,
             /* [retval][out] */ __RPC__out InPlaceState *State);
         
+        DECLSPEC_XFGVIRT(ITextInputPanel, get_DefaultInputArea)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultInputArea )( 
             __RPC__in ITextInputPanel * This,
             /* [retval][out] */ __RPC__out PanelInputArea *Area);
         
+        DECLSPEC_XFGVIRT(ITextInputPanel, put_DefaultInputArea)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_DefaultInputArea )( 
             __RPC__in ITextInputPanel * This,
             /* [in] */ PanelInputArea Area);
         
+        DECLSPEC_XFGVIRT(ITextInputPanel, get_CurrentInputArea)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentInputArea )( 
             __RPC__in ITextInputPanel * This,
             /* [retval][out] */ __RPC__out PanelInputArea *Area);
         
+        DECLSPEC_XFGVIRT(ITextInputPanel, get_CurrentCorrectionMode)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentCorrectionMode )( 
             __RPC__in ITextInputPanel * This,
             /* [retval][out] */ __RPC__out CorrectionMode *Mode);
         
+        DECLSPEC_XFGVIRT(ITextInputPanel, get_PreferredInPlaceDirection)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PreferredInPlaceDirection )( 
             __RPC__in ITextInputPanel * This,
             /* [retval][out] */ __RPC__out InPlaceDirection *Direction);
         
+        DECLSPEC_XFGVIRT(ITextInputPanel, put_PreferredInPlaceDirection)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_PreferredInPlaceDirection )( 
             __RPC__in ITextInputPanel * This,
             /* [in] */ InPlaceDirection Direction);
         
+        DECLSPEC_XFGVIRT(ITextInputPanel, get_ExpandPostInsertionCorrection)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ExpandPostInsertionCorrection )( 
             __RPC__in ITextInputPanel * This,
             /* [retval][out] */ __RPC__out BOOL *Expand);
         
+        DECLSPEC_XFGVIRT(ITextInputPanel, put_ExpandPostInsertionCorrection)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ExpandPostInsertionCorrection )( 
             __RPC__in ITextInputPanel * This,
             /* [in] */ BOOL Expand);
         
+        DECLSPEC_XFGVIRT(ITextInputPanel, get_InPlaceVisibleOnFocus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InPlaceVisibleOnFocus )( 
             __RPC__in ITextInputPanel * This,
             /* [retval][out] */ __RPC__out BOOL *Visible);
         
+        DECLSPEC_XFGVIRT(ITextInputPanel, put_InPlaceVisibleOnFocus)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_InPlaceVisibleOnFocus )( 
             __RPC__in ITextInputPanel * This,
             /* [in] */ BOOL Visible);
         
+        DECLSPEC_XFGVIRT(ITextInputPanel, get_InPlaceBoundingRectangle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InPlaceBoundingRectangle )( 
             __RPC__in ITextInputPanel * This,
             /* [retval][out] */ __RPC__out RECT *BoundingRectangle);
         
+        DECLSPEC_XFGVIRT(ITextInputPanel, get_PopUpCorrectionHeight)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PopUpCorrectionHeight )( 
             __RPC__in ITextInputPanel * This,
             /* [retval][out] */ __RPC__out int *Height);
         
+        DECLSPEC_XFGVIRT(ITextInputPanel, get_PopDownCorrectionHeight)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PopDownCorrectionHeight )( 
             __RPC__in ITextInputPanel * This,
             /* [retval][out] */ __RPC__out int *Height);
         
+        DECLSPEC_XFGVIRT(ITextInputPanel, CommitPendingInput)
         HRESULT ( STDMETHODCALLTYPE *CommitPendingInput )( 
             __RPC__in ITextInputPanel * This);
         
+        DECLSPEC_XFGVIRT(ITextInputPanel, SetInPlaceVisibility)
         HRESULT ( STDMETHODCALLTYPE *SetInPlaceVisibility )( 
             __RPC__in ITextInputPanel * This,
             BOOL Visible);
         
+        DECLSPEC_XFGVIRT(ITextInputPanel, SetInPlacePosition)
         HRESULT ( STDMETHODCALLTYPE *SetInPlacePosition )( 
             __RPC__in ITextInputPanel * This,
             int xPosition,
             int yPosition,
             CorrectionPosition position);
         
+        DECLSPEC_XFGVIRT(ITextInputPanel, SetInPlaceHoverTargetPosition)
         HRESULT ( STDMETHODCALLTYPE *SetInPlaceHoverTargetPosition )( 
             __RPC__in ITextInputPanel * This,
             int xPosition,
             int yPosition);
         
+        DECLSPEC_XFGVIRT(ITextInputPanel, Advise)
         HRESULT ( STDMETHODCALLTYPE *Advise )( 
             __RPC__in ITextInputPanel * This,
             __RPC__in_opt ITextInputPanelEventSink *EventSink,
             DWORD EventMask);
         
+        DECLSPEC_XFGVIRT(ITextInputPanel, Unadvise)
         HRESULT ( STDMETHODCALLTYPE *Unadvise )( 
             __RPC__in ITextInputPanel * This,
             __RPC__in_opt ITextInputPanelEventSink *EventSink);
@@ -1456,30 +1551,37 @@ EXTERN_C const IID IID_IInputPanelWindowHandle;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInputPanelWindowHandle * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInputPanelWindowHandle * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInputPanelWindowHandle * This);
         
+        DECLSPEC_XFGVIRT(IInputPanelWindowHandle, get_AttachedEditWindow32)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AttachedEditWindow32 )( 
             __RPC__in IInputPanelWindowHandle * This,
             /* [retval][out] */ __RPC__out LONG32 *AttachedEditWindow);
         
+        DECLSPEC_XFGVIRT(IInputPanelWindowHandle, put_AttachedEditWindow32)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_AttachedEditWindow32 )( 
             __RPC__in IInputPanelWindowHandle * This,
             /* [in] */ LONG32 AttachedEditWindow);
         
+        DECLSPEC_XFGVIRT(IInputPanelWindowHandle, get_AttachedEditWindow64)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AttachedEditWindow64 )( 
             __RPC__in IInputPanelWindowHandle * This,
             /* [retval][out] */ __RPC__out LONG64 *AttachedEditWindow);
         
+        DECLSPEC_XFGVIRT(IInputPanelWindowHandle, put_AttachedEditWindow64)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_AttachedEditWindow64 )( 
             __RPC__in IInputPanelWindowHandle * This,
             /* [in] */ LONG64 AttachedEditWindow);
@@ -1557,18 +1659,22 @@ EXTERN_C const IID IID_ITextInputPanelRunInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITextInputPanelRunInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITextInputPanelRunInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITextInputPanelRunInfo * This);
         
+        DECLSPEC_XFGVIRT(ITextInputPanelRunInfo, IsTipRunning)
         HRESULT ( STDMETHODCALLTYPE *IsTipRunning )( 
             __RPC__in ITextInputPanelRunInfo * This,
             /* [out] */ __RPC__out BOOL *pfRunning);

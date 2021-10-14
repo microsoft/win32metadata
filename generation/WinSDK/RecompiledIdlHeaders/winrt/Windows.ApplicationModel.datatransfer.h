@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xa0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SECURITY_ENTERPRISEDATA_ENTERPRISEDATACONTRACT_VERSION)
@@ -4038,7 +4038,7 @@ namespace ABI {
                         HSTRING value
                         ) = 0;
                     virtual HRESULT STDMETHODCALLTYPE GetDeferral(
-                        ABI::Windows::ApplicationModel::DataTransfer::IDataRequestDeferral** value
+                        ABI::Windows::ApplicationModel::DataTransfer::IDataRequestDeferral** result
                         ) = 0;
                 };
 
@@ -4144,18 +4144,18 @@ namespace ABI {
                 {
                 public:
                     virtual HRESULT STDMETHODCALLTYPE add_DataRequested(
-                        __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CDataTransferManager_Windows__CApplicationModel__CDataTransfer__CDataRequestedEventArgs* eventHandler,
-                        EventRegistrationToken* eventCookie
+                        __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CDataTransferManager_Windows__CApplicationModel__CDataTransfer__CDataRequestedEventArgs* handler,
+                        EventRegistrationToken* token
                         ) = 0;
                     virtual HRESULT STDMETHODCALLTYPE remove_DataRequested(
-                        EventRegistrationToken eventCookie
+                        EventRegistrationToken token
                         ) = 0;
                     virtual HRESULT STDMETHODCALLTYPE add_TargetApplicationChosen(
-                        __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CDataTransferManager_Windows__CApplicationModel__CDataTransfer__CTargetApplicationChosenEventArgs* eventHandler,
-                        EventRegistrationToken* eventCookie
+                        __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CDataTransferManager_Windows__CApplicationModel__CDataTransfer__CTargetApplicationChosenEventArgs* handler,
+                        EventRegistrationToken* token
                         ) = 0;
                     virtual HRESULT STDMETHODCALLTYPE remove_TargetApplicationChosen(
-                        EventRegistrationToken eventCookie
+                        EventRegistrationToken token
                         ) = 0;
                 };
 
@@ -4232,7 +4232,7 @@ namespace ABI {
                 public:
                     virtual HRESULT STDMETHODCALLTYPE ShowShareUI(void) = 0;
                     virtual HRESULT STDMETHODCALLTYPE GetForCurrentView(
-                        ABI::Windows::ApplicationModel::DataTransfer::IDataTransferManager** value
+                        ABI::Windows::ApplicationModel::DataTransfer::IDataTransferManager** result
                         ) = 0;
                 };
 
@@ -4268,7 +4268,7 @@ namespace ABI {
                 {
                 public:
                     virtual HRESULT STDMETHODCALLTYPE IsSupported(
-                        boolean* value
+                        boolean* result
                         ) = 0;
                 };
 
@@ -4623,7 +4623,7 @@ namespace ABI {
                         ABI::Windows::ApplicationModel::DataTransfer::IDataPackageView** value
                         ) = 0;
                     virtual HRESULT STDMETHODCALLTYPE GetDeferral(
-                        ABI::Windows::Foundation::IDeferral** value
+                        ABI::Windows::Foundation::IDeferral** result
                         ) = 0;
                 };
 
@@ -5233,13 +5233,15 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IDataTransferManagerStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IDataTransferManagerStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IDataTransferManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IDataTransferManagerStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IDataTransferManagerStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.DataTransfer.IDataTransferManager ** Default Interface **
  *    Windows.ApplicationModel.DataTransfer.IDataTransferManager2
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
  * Class Marshaling Behavior:  Standard - Class marshals using the standard marshaler
  *
@@ -5436,9 +5438,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IStandardDataFormatsStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IStandardDataFormatsStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IStandardDataFormatsStatics3 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IStandardDataFormatsStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -11777,7 +11779,7 @@ typedef struct __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataRequestVtb
     HRESULT (STDMETHODCALLTYPE* FailWithDisplayText)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataRequest* This,
         HSTRING value);
     HRESULT (STDMETHODCALLTYPE* GetDeferral)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataRequest* This,
-        __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataRequestDeferral** value);
+        __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataRequestDeferral** result);
 
     END_INTERFACE
 } __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataRequestVtbl;
@@ -11819,8 +11821,8 @@ interface __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataRequest
 #define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataRequest_FailWithDisplayText(This, value) \
     ((This)->lpVtbl->FailWithDisplayText(This, value))
 
-#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataRequest_GetDeferral(This, value) \
-    ((This)->lpVtbl->GetDeferral(This, value))
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataRequest_GetDeferral(This, result) \
+    ((This)->lpVtbl->GetDeferral(This, result))
 
 #endif /* COBJMACROS */
 
@@ -11995,15 +11997,15 @@ typedef struct __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferMa
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManager* This,
         TrustLevel* trustLevel);
     HRESULT (STDMETHODCALLTYPE* add_DataRequested)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManager* This,
-        __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CDataTransferManager_Windows__CApplicationModel__CDataTransfer__CDataRequestedEventArgs* eventHandler,
-        EventRegistrationToken* eventCookie);
+        __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CDataTransferManager_Windows__CApplicationModel__CDataTransfer__CDataRequestedEventArgs* handler,
+        EventRegistrationToken* token);
     HRESULT (STDMETHODCALLTYPE* remove_DataRequested)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManager* This,
-        EventRegistrationToken eventCookie);
+        EventRegistrationToken token);
     HRESULT (STDMETHODCALLTYPE* add_TargetApplicationChosen)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManager* This,
-        __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CDataTransferManager_Windows__CApplicationModel__CDataTransfer__CTargetApplicationChosenEventArgs* eventHandler,
-        EventRegistrationToken* eventCookie);
+        __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CDataTransferManager_Windows__CApplicationModel__CDataTransfer__CTargetApplicationChosenEventArgs* handler,
+        EventRegistrationToken* token);
     HRESULT (STDMETHODCALLTYPE* remove_TargetApplicationChosen)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManager* This,
-        EventRegistrationToken eventCookie);
+        EventRegistrationToken token);
 
     END_INTERFACE
 } __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManagerVtbl;
@@ -12033,17 +12035,17 @@ interface __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManager
 #define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManager_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
-#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManager_add_DataRequested(This, eventHandler, eventCookie) \
-    ((This)->lpVtbl->add_DataRequested(This, eventHandler, eventCookie))
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManager_add_DataRequested(This, handler, token) \
+    ((This)->lpVtbl->add_DataRequested(This, handler, token))
 
-#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManager_remove_DataRequested(This, eventCookie) \
-    ((This)->lpVtbl->remove_DataRequested(This, eventCookie))
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManager_remove_DataRequested(This, token) \
+    ((This)->lpVtbl->remove_DataRequested(This, token))
 
-#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManager_add_TargetApplicationChosen(This, eventHandler, eventCookie) \
-    ((This)->lpVtbl->add_TargetApplicationChosen(This, eventHandler, eventCookie))
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManager_add_TargetApplicationChosen(This, handler, token) \
+    ((This)->lpVtbl->add_TargetApplicationChosen(This, handler, token))
 
-#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManager_remove_TargetApplicationChosen(This, eventCookie) \
-    ((This)->lpVtbl->remove_TargetApplicationChosen(This, eventCookie))
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManager_remove_TargetApplicationChosen(This, token) \
+    ((This)->lpVtbl->remove_TargetApplicationChosen(This, token))
 
 #endif /* COBJMACROS */
 
@@ -12157,7 +12159,7 @@ typedef struct __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferMa
         TrustLevel* trustLevel);
     HRESULT (STDMETHODCALLTYPE* ShowShareUI)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManagerStatics* This);
     HRESULT (STDMETHODCALLTYPE* GetForCurrentView)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManagerStatics* This,
-        __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManager** value);
+        __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManager** result);
 
     END_INTERFACE
 } __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManagerStaticsVtbl;
@@ -12190,8 +12192,8 @@ interface __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManager
 #define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManagerStatics_ShowShareUI(This) \
     ((This)->lpVtbl->ShowShareUI(This))
 
-#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManagerStatics_GetForCurrentView(This, value) \
-    ((This)->lpVtbl->GetForCurrentView(This, value))
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManagerStatics_GetForCurrentView(This, result) \
+    ((This)->lpVtbl->GetForCurrentView(This, result))
 
 #endif /* COBJMACROS */
 
@@ -12229,7 +12231,7 @@ typedef struct __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferMa
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManagerStatics2* This,
         TrustLevel* trustLevel);
     HRESULT (STDMETHODCALLTYPE* IsSupported)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManagerStatics2* This,
-        boolean* value);
+        boolean* result);
 
     END_INTERFACE
 } __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManagerStatics2Vtbl;
@@ -12259,8 +12261,8 @@ interface __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManager
 #define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManagerStatics2_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
-#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManagerStatics2_IsSupported(This, value) \
-    ((This)->lpVtbl->IsSupported(This, value))
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataTransferManagerStatics2_IsSupported(This, result) \
+    ((This)->lpVtbl->IsSupported(This, result))
 
 #endif /* COBJMACROS */
 
@@ -12894,7 +12896,7 @@ typedef struct __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIShareProviders
     HRESULT (STDMETHODCALLTYPE* get_Data)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CIShareProvidersRequestedEventArgs* This,
         __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataPackageView** value);
     HRESULT (STDMETHODCALLTYPE* GetDeferral)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CIShareProvidersRequestedEventArgs* This,
-        __x_ABI_CWindows_CFoundation_CIDeferral** value);
+        __x_ABI_CWindows_CFoundation_CIDeferral** result);
 
     END_INTERFACE
 } __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIShareProvidersRequestedEventArgsVtbl;
@@ -12930,8 +12932,8 @@ interface __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIShareProvidersReque
 #define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIShareProvidersRequestedEventArgs_get_Data(This, value) \
     ((This)->lpVtbl->get_Data(This, value))
 
-#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIShareProvidersRequestedEventArgs_GetDeferral(This, value) \
-    ((This)->lpVtbl->GetDeferral(This, value))
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIShareProvidersRequestedEventArgs_GetDeferral(This, result) \
+    ((This)->lpVtbl->GetDeferral(This, result))
 
 #endif /* COBJMACROS */
 
@@ -13793,13 +13795,15 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IDataTransferManagerStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IDataTransferManagerStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IDataTransferManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IDataTransferManagerStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IDataTransferManagerStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.DataTransfer.IDataTransferManager ** Default Interface **
  *    Windows.ApplicationModel.DataTransfer.IDataTransferManager2
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
  * Class Marshaling Behavior:  Standard - Class marshals using the standard marshaler
  *
@@ -13996,9 +14000,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IStandardDataFormatsStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IStandardDataFormatsStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IStandardDataFormatsStatics3 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IStandardDataFormatsStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *

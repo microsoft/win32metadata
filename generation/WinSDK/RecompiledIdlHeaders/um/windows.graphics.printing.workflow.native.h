@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -37,6 +37,14 @@
 #pragma once
 #endif
 
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
+#endif
+
 /* Forward Declarations */ 
 
 #ifndef __IPrintWorkflowXpsReceiver_FWD_DEFINED__
@@ -44,6 +52,13 @@
 typedef interface IPrintWorkflowXpsReceiver IPrintWorkflowXpsReceiver;
 
 #endif 	/* __IPrintWorkflowXpsReceiver_FWD_DEFINED__ */
+
+
+#ifndef __IPrintWorkflowXpsReceiver2_FWD_DEFINED__
+#define __IPrintWorkflowXpsReceiver2_FWD_DEFINED__
+typedef interface IPrintWorkflowXpsReceiver2 IPrintWorkflowXpsReceiver2;
+
+#endif 	/* __IPrintWorkflowXpsReceiver2_FWD_DEFINED__ */
 
 
 #ifndef __IPrintWorkflowObjectModelSourceFileContentNative_FWD_DEFINED__
@@ -149,6 +164,7 @@ EXTERN_C const IID IID_IPrintWorkflowXpsReceiver;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPrintWorkflowXpsReceiver * This,
             /* [annotation][in] */ 
@@ -156,22 +172,27 @@ EXTERN_C const IID IID_IPrintWorkflowXpsReceiver;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPrintWorkflowXpsReceiver * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPrintWorkflowXpsReceiver * This);
         
+        DECLSPEC_XFGVIRT(IPrintWorkflowXpsReceiver, SetDocumentSequencePrintTicket)
         HRESULT ( STDMETHODCALLTYPE *SetDocumentSequencePrintTicket )( 
             __RPC__in IPrintWorkflowXpsReceiver * This,
             /* [annotation][in] */ 
             _In_  IStream *documentSequencePrintTicket);
         
+        DECLSPEC_XFGVIRT(IPrintWorkflowXpsReceiver, SetDocumentSequenceUri)
         HRESULT ( STDMETHODCALLTYPE *SetDocumentSequenceUri )( 
             __RPC__in IPrintWorkflowXpsReceiver * This,
             /* [annotation][in] */ 
             _In_  PCWSTR documentSequenceUri);
         
+        DECLSPEC_XFGVIRT(IPrintWorkflowXpsReceiver, AddDocumentData)
         HRESULT ( STDMETHODCALLTYPE *AddDocumentData )( 
             __RPC__in IPrintWorkflowXpsReceiver * This,
             /* [annotation][in] */ 
@@ -181,6 +202,7 @@ EXTERN_C const IID IID_IPrintWorkflowXpsReceiver;
             /* [annotation][in] */ 
             _In_  PCWSTR documentUri);
         
+        DECLSPEC_XFGVIRT(IPrintWorkflowXpsReceiver, AddPage)
         HRESULT ( STDMETHODCALLTYPE *AddPage )( 
             __RPC__in IPrintWorkflowXpsReceiver * This,
             /* [annotation][in] */ 
@@ -192,6 +214,7 @@ EXTERN_C const IID IID_IPrintWorkflowXpsReceiver;
             /* [annotation][in] */ 
             _In_  PCWSTR pageUri);
         
+        DECLSPEC_XFGVIRT(IPrintWorkflowXpsReceiver, Close)
         HRESULT ( STDMETHODCALLTYPE *Close )( 
             __RPC__in IPrintWorkflowXpsReceiver * This);
         
@@ -244,6 +267,147 @@ EXTERN_C const IID IID_IPrintWorkflowXpsReceiver;
 #endif 	/* __IPrintWorkflowXpsReceiver_INTERFACE_DEFINED__ */
 
 
+#ifndef __IPrintWorkflowXpsReceiver2_INTERFACE_DEFINED__
+#define __IPrintWorkflowXpsReceiver2_INTERFACE_DEFINED__
+
+/* interface IPrintWorkflowXpsReceiver2 */
+/* [unique][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IPrintWorkflowXpsReceiver2;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("023BCC0C-DFAB-4A61-B074-490C6995580D")
+    IPrintWorkflowXpsReceiver2 : public IPrintWorkflowXpsReceiver
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE Failed( 
+            /* [annotation][in] */ 
+            _In_  HRESULT XpsError) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IPrintWorkflowXpsReceiver2Vtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in IPrintWorkflowXpsReceiver2 * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in IPrintWorkflowXpsReceiver2 * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in IPrintWorkflowXpsReceiver2 * This);
+        
+        DECLSPEC_XFGVIRT(IPrintWorkflowXpsReceiver, SetDocumentSequencePrintTicket)
+        HRESULT ( STDMETHODCALLTYPE *SetDocumentSequencePrintTicket )( 
+            __RPC__in IPrintWorkflowXpsReceiver2 * This,
+            /* [annotation][in] */ 
+            _In_  IStream *documentSequencePrintTicket);
+        
+        DECLSPEC_XFGVIRT(IPrintWorkflowXpsReceiver, SetDocumentSequenceUri)
+        HRESULT ( STDMETHODCALLTYPE *SetDocumentSequenceUri )( 
+            __RPC__in IPrintWorkflowXpsReceiver2 * This,
+            /* [annotation][in] */ 
+            _In_  PCWSTR documentSequenceUri);
+        
+        DECLSPEC_XFGVIRT(IPrintWorkflowXpsReceiver, AddDocumentData)
+        HRESULT ( STDMETHODCALLTYPE *AddDocumentData )( 
+            __RPC__in IPrintWorkflowXpsReceiver2 * This,
+            /* [annotation][in] */ 
+            _In_  UINT32 documentId,
+            /* [annotation][in] */ 
+            _In_  IStream *documentPrintTicket,
+            /* [annotation][in] */ 
+            _In_  PCWSTR documentUri);
+        
+        DECLSPEC_XFGVIRT(IPrintWorkflowXpsReceiver, AddPage)
+        HRESULT ( STDMETHODCALLTYPE *AddPage )( 
+            __RPC__in IPrintWorkflowXpsReceiver2 * This,
+            /* [annotation][in] */ 
+            _In_  UINT32 documentId,
+            /* [annotation][in] */ 
+            _In_  UINT32 pageId,
+            /* [annotation][in] */ 
+            _In_  IXpsOMPageReference *pageReference,
+            /* [annotation][in] */ 
+            _In_  PCWSTR pageUri);
+        
+        DECLSPEC_XFGVIRT(IPrintWorkflowXpsReceiver, Close)
+        HRESULT ( STDMETHODCALLTYPE *Close )( 
+            __RPC__in IPrintWorkflowXpsReceiver2 * This);
+        
+        DECLSPEC_XFGVIRT(IPrintWorkflowXpsReceiver2, Failed)
+        HRESULT ( STDMETHODCALLTYPE *Failed )( 
+            __RPC__in IPrintWorkflowXpsReceiver2 * This,
+            /* [annotation][in] */ 
+            _In_  HRESULT XpsError);
+        
+        END_INTERFACE
+    } IPrintWorkflowXpsReceiver2Vtbl;
+
+    interface IPrintWorkflowXpsReceiver2
+    {
+        CONST_VTBL struct IPrintWorkflowXpsReceiver2Vtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IPrintWorkflowXpsReceiver2_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IPrintWorkflowXpsReceiver2_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IPrintWorkflowXpsReceiver2_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IPrintWorkflowXpsReceiver2_SetDocumentSequencePrintTicket(This,documentSequencePrintTicket)	\
+    ( (This)->lpVtbl -> SetDocumentSequencePrintTicket(This,documentSequencePrintTicket) ) 
+
+#define IPrintWorkflowXpsReceiver2_SetDocumentSequenceUri(This,documentSequenceUri)	\
+    ( (This)->lpVtbl -> SetDocumentSequenceUri(This,documentSequenceUri) ) 
+
+#define IPrintWorkflowXpsReceiver2_AddDocumentData(This,documentId,documentPrintTicket,documentUri)	\
+    ( (This)->lpVtbl -> AddDocumentData(This,documentId,documentPrintTicket,documentUri) ) 
+
+#define IPrintWorkflowXpsReceiver2_AddPage(This,documentId,pageId,pageReference,pageUri)	\
+    ( (This)->lpVtbl -> AddPage(This,documentId,pageId,pageReference,pageUri) ) 
+
+#define IPrintWorkflowXpsReceiver2_Close(This)	\
+    ( (This)->lpVtbl -> Close(This) ) 
+
+
+#define IPrintWorkflowXpsReceiver2_Failed(This,XpsError)	\
+    ( (This)->lpVtbl -> Failed(This,XpsError) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IPrintWorkflowXpsReceiver2_INTERFACE_DEFINED__ */
+
+
 #ifndef __IPrintWorkflowObjectModelSourceFileContentNative_INTERFACE_DEFINED__
 #define __IPrintWorkflowObjectModelSourceFileContentNative_INTERFACE_DEFINED__
 
@@ -276,6 +440,7 @@ EXTERN_C const IID IID_IPrintWorkflowObjectModelSourceFileContentNative;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPrintWorkflowObjectModelSourceFileContentNative * This,
             /* [annotation][in] */ 
@@ -283,17 +448,21 @@ EXTERN_C const IID IID_IPrintWorkflowObjectModelSourceFileContentNative;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPrintWorkflowObjectModelSourceFileContentNative * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPrintWorkflowObjectModelSourceFileContentNative * This);
         
+        DECLSPEC_XFGVIRT(IPrintWorkflowObjectModelSourceFileContentNative, StartXpsOMGeneration)
         HRESULT ( STDMETHODCALLTYPE *StartXpsOMGeneration )( 
             __RPC__in IPrintWorkflowObjectModelSourceFileContentNative * This,
             /* [annotation][in] */ 
             _In_  IPrintWorkflowXpsReceiver *receiver);
         
+        DECLSPEC_XFGVIRT(IPrintWorkflowObjectModelSourceFileContentNative, get_ObjectFactory)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ObjectFactory )( 
             __RPC__in IPrintWorkflowObjectModelSourceFileContentNative * This,
             /* [annotation][retval][out] */ 
@@ -367,6 +536,7 @@ EXTERN_C const IID IID_IPrintWorkflowXpsObjectModelTargetPackageNative;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPrintWorkflowXpsObjectModelTargetPackageNative * This,
             /* [annotation][in] */ 
@@ -374,12 +544,15 @@ EXTERN_C const IID IID_IPrintWorkflowXpsObjectModelTargetPackageNative;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPrintWorkflowXpsObjectModelTargetPackageNative * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPrintWorkflowXpsObjectModelTargetPackageNative * This);
         
+        DECLSPEC_XFGVIRT(IPrintWorkflowXpsObjectModelTargetPackageNative, get_DocumentPackageTarget)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DocumentPackageTarget )( 
             __RPC__in IPrintWorkflowXpsObjectModelTargetPackageNative * This,
             /* [annotation][retval][out] */ 
@@ -458,6 +631,7 @@ EXTERN_C const IID IID_IPrintWorkflowConfigurationNative;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPrintWorkflowConfigurationNative * This,
             /* [annotation][in] */ 
@@ -465,22 +639,27 @@ EXTERN_C const IID IID_IPrintWorkflowConfigurationNative;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPrintWorkflowConfigurationNative * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPrintWorkflowConfigurationNative * This);
         
+        DECLSPEC_XFGVIRT(IPrintWorkflowConfigurationNative, get_PrinterQueue)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PrinterQueue )( 
             __RPC__in IPrintWorkflowConfigurationNative * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IPrinterQueue **value);
         
+        DECLSPEC_XFGVIRT(IPrintWorkflowConfigurationNative, get_DriverProperties)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DriverProperties )( 
             __RPC__in IPrintWorkflowConfigurationNative * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IPrinterPropertyBag **value);
         
+        DECLSPEC_XFGVIRT(IPrintWorkflowConfigurationNative, get_UserProperties)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserProperties )( 
             __RPC__in IPrintWorkflowConfigurationNative * This,
             /* [annotation][retval][out] */ 

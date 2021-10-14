@@ -14,11 +14,10 @@
 
 #include <winapifamily.h>
 
-#pragma region Desktop Family or OneCore Family
+
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
-
-
 #include <wbemcli.h>
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
 
 //
 // Define API decoration for direct importing of DLL references.
@@ -34,6 +33,9 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+#pragma region Desktop Family or OneCore Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 
 //=============================================================================
 //
@@ -1489,33 +1491,6 @@ GetAppContainerFolderPath(
 
 //=============================================================================
 //
-//  DeriveAppContainerSidFromAppContainerName()
-//
-//  Derives the SID of an AppContainer from its name.
-//
-//  pszAppContainerName    - Name from which the SID is derived.
-//  ppsidAppContainerSid   - Derived SID. Must be freed using FreeSid.
-//
-//  Return:     S_OK : Successfully created the profile
-//              E_INVALIDARG : NULL or invalid name was provided.
-//              Others : Standard HRESULT error codes.
-//                          
-//  Comments:   
-//=============================================================================
-
-#if(WINVER >= 0x0602)
-
-USERENVAPI
-HRESULT
-WINAPI
-DeriveAppContainerSidFromAppContainerName(
-    _In_ PCWSTR pszAppContainerName,
-    _Outptr_ PSID *ppsidAppContainerSid);
-
-#endif /* WINVER >= 0x0602 */
-
-//=============================================================================
-//
 //  DeriveRestrictedAppContainerSidFromAppContainerSidAndRestrictedName()
 //
 //  Derives the SID of an AppContainer from its name.
@@ -1545,13 +1520,47 @@ DeriveRestrictedAppContainerSidFromAppContainerSidAndRestrictedName(
 #endif /* WINVER >= 0x0603 */
 
 
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+#pragma endregion
+
+#pragma region Application Family or OneCore Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+
+//=============================================================================
+//
+//  DeriveAppContainerSidFromAppContainerName()
+//
+//  Derives the SID of an AppContainer from its name.
+//
+//  pszAppContainerName    - Name from which the SID is derived.
+//  ppsidAppContainerSid   - Derived SID. Must be freed using FreeSid.
+//
+//  Return:     S_OK : Successfully created the profile
+//              E_INVALIDARG : NULL or invalid name was provided.
+//              Others : Standard HRESULT error codes.
+//                          
+//  Comments:   
+//=============================================================================
+
+#if(WINVER >= 0x0602)
+
+USERENVAPI
+HRESULT
+WINAPI
+DeriveAppContainerSidFromAppContainerName(
+    _In_ PCWSTR pszAppContainerName,
+    _Outptr_ PSID *ppsidAppContainerSid);
+
+#endif /* WINVER >= 0x0602 */
+
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
+#pragma endregion
+
+
 #ifdef __cplusplus
 }
 #endif
 
-
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
-#pragma endregion
 
 #endif // _INC_USERENV
 

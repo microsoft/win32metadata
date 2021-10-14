@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -234,6 +242,7 @@ EXTERN_C const IID IID_IItemEnumerator;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IItemEnumerator * This,
             /* [annotation][in] */ 
@@ -241,22 +250,27 @@ EXTERN_C const IID IID_IItemEnumerator;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IItemEnumerator * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IItemEnumerator * This);
         
+        DECLSPEC_XFGVIRT(IItemEnumerator, Current)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Current )( 
             IItemEnumerator * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  VARIANT *Item);
         
+        DECLSPEC_XFGVIRT(IItemEnumerator, MoveNext)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *MoveNext )( 
             IItemEnumerator * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BOOL *ItemValid);
         
+        DECLSPEC_XFGVIRT(IItemEnumerator, Reset)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Reset )( 
             IItemEnumerator * This);
         
@@ -368,6 +382,7 @@ EXTERN_C const IID IID_ISettingsIdentity;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISettingsIdentity * This,
             /* [annotation][in] */ 
@@ -375,12 +390,15 @@ EXTERN_C const IID IID_ISettingsIdentity;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISettingsIdentity * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISettingsIdentity * This);
         
+        DECLSPEC_XFGVIRT(ISettingsIdentity, GetAttribute)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetAttribute )( 
             ISettingsIdentity * This,
             /* [annotation][in] */ 
@@ -390,6 +408,7 @@ EXTERN_C const IID IID_ISettingsIdentity;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *Value);
         
+        DECLSPEC_XFGVIRT(ISettingsIdentity, SetAttribute)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetAttribute )( 
             ISettingsIdentity * This,
             /* [annotation][in] */ 
@@ -399,11 +418,13 @@ EXTERN_C const IID IID_ISettingsIdentity;
             /* [annotation][string][in] */ 
             _In_  const WCHAR *Value);
         
+        DECLSPEC_XFGVIRT(ISettingsIdentity, GetFlags)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetFlags )( 
             ISettingsIdentity * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  DWORD *Flags);
         
+        DECLSPEC_XFGVIRT(ISettingsIdentity, SetFlags)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetFlags )( 
             ISettingsIdentity * This,
             /* [annotation][in] */ 
@@ -589,6 +610,7 @@ EXTERN_C const IID IID_ITargetInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ITargetInfo * This,
             /* [annotation][in] */ 
@@ -596,52 +618,63 @@ EXTERN_C const IID IID_ITargetInfo;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ITargetInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ITargetInfo * This);
         
+        DECLSPEC_XFGVIRT(ITargetInfo, GetTargetMode)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetTargetMode )( 
             ITargetInfo * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  WcmTargetMode *TargetMode);
         
+        DECLSPEC_XFGVIRT(ITargetInfo, SetTargetMode)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetTargetMode )( 
             ITargetInfo * This,
             /* [annotation][in] */ 
             _In_  WcmTargetMode TargetMode);
         
+        DECLSPEC_XFGVIRT(ITargetInfo, GetTemporaryStoreLocation)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetTemporaryStoreLocation )( 
             ITargetInfo * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *TemporaryStoreLocation);
         
+        DECLSPEC_XFGVIRT(ITargetInfo, SetTemporaryStoreLocation)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetTemporaryStoreLocation )( 
             ITargetInfo * This,
             /* [annotation][string][in] */ 
             _In_  const WCHAR *TemporaryStoreLocation);
         
+        DECLSPEC_XFGVIRT(ITargetInfo, GetTargetID)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetTargetID )( 
             ITargetInfo * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *TargetID);
         
+        DECLSPEC_XFGVIRT(ITargetInfo, SetTargetID)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetTargetID )( 
             ITargetInfo * This,
             /* [annotation][in] */ 
             _In_  GUID TargetID);
         
+        DECLSPEC_XFGVIRT(ITargetInfo, GetTargetProcessorArchitecture)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetTargetProcessorArchitecture )( 
             ITargetInfo * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *ProcessorArchitecture);
         
+        DECLSPEC_XFGVIRT(ITargetInfo, SetTargetProcessorArchitecture)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetTargetProcessorArchitecture )( 
             ITargetInfo * This,
             /* [annotation][string][in] */ 
             _In_  const WCHAR *ProcessorArchitecture);
         
+        DECLSPEC_XFGVIRT(ITargetInfo, GetProperty)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             ITargetInfo * This,
             /* [annotation][in] */ 
@@ -651,6 +684,7 @@ EXTERN_C const IID IID_ITargetInfo;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *Value);
         
+        DECLSPEC_XFGVIRT(ITargetInfo, SetProperty)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             ITargetInfo * This,
             /* [annotation][in] */ 
@@ -660,11 +694,13 @@ EXTERN_C const IID IID_ITargetInfo;
             /* [annotation][string][in] */ 
             _In_  const WCHAR *Value);
         
+        DECLSPEC_XFGVIRT(ITargetInfo, GetEnumerator)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetEnumerator )( 
             ITargetInfo * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IItemEnumerator **Enumerator);
         
+        DECLSPEC_XFGVIRT(ITargetInfo, ExpandTarget)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ExpandTarget )( 
             ITargetInfo * This,
             /* [annotation][in] */ 
@@ -674,6 +710,7 @@ EXTERN_C const IID IID_ITargetInfo;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *ExpandedLocation);
         
+        DECLSPEC_XFGVIRT(ITargetInfo, ExpandTargetPath)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ExpandTargetPath )( 
             ITargetInfo * This,
             /* [annotation][in] */ 
@@ -683,6 +720,7 @@ EXTERN_C const IID IID_ITargetInfo;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *ExpandedLocation);
         
+        DECLSPEC_XFGVIRT(ITargetInfo, SetModulePath)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetModulePath )( 
             ITargetInfo * This,
             /* [annotation][string][in] */ 
@@ -690,6 +728,7 @@ EXTERN_C const IID IID_ITargetInfo;
             /* [annotation][string][in] */ 
             _In_  const WCHAR *Path);
         
+        DECLSPEC_XFGVIRT(ITargetInfo, LoadModule)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *LoadModule )( 
             ITargetInfo * This,
             /* [annotation][string][in] */ 
@@ -697,6 +736,7 @@ EXTERN_C const IID IID_ITargetInfo;
             /* [annotation][retval][out] */ 
             _Out_retval_  HMODULE *ModuleHandle);
         
+        DECLSPEC_XFGVIRT(ITargetInfo, SetWow64Context)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetWow64Context )( 
             ITargetInfo * This,
             /* [annotation][string][in] */ 
@@ -704,6 +744,7 @@ EXTERN_C const IID IID_ITargetInfo;
             /* [annotation][in] */ 
             _In_  BYTE *Wow64Context);
         
+        DECLSPEC_XFGVIRT(ITargetInfo, TranslateWow64)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *TranslateWow64 )( 
             ITargetInfo * This,
             /* [annotation][string][in] */ 
@@ -713,21 +754,25 @@ EXTERN_C const IID IID_ITargetInfo;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *TranslatedValue);
         
+        DECLSPEC_XFGVIRT(ITargetInfo, SetSchemaHiveLocation)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetSchemaHiveLocation )( 
             ITargetInfo * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR pwzHiveDir);
         
+        DECLSPEC_XFGVIRT(ITargetInfo, GetSchemaHiveLocation)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSchemaHiveLocation )( 
             ITargetInfo * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pHiveLocation);
         
+        DECLSPEC_XFGVIRT(ITargetInfo, SetSchemaHiveMountName)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetSchemaHiveMountName )( 
             ITargetInfo * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR pwzMountName);
         
+        DECLSPEC_XFGVIRT(ITargetInfo, GetSchemaHiveMountName)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSchemaHiveMountName )( 
             ITargetInfo * This,
             /* [annotation][retval][out] */ 
@@ -957,6 +1002,7 @@ EXTERN_C const IID IID_ISettingsEngine;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISettingsEngine * This,
             /* [annotation][in] */ 
@@ -964,12 +1010,15 @@ EXTERN_C const IID IID_ISettingsEngine;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISettingsEngine * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISettingsEngine * This);
         
+        DECLSPEC_XFGVIRT(ISettingsEngine, GetNamespaces)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetNamespaces )( 
             ISettingsEngine * This,
             /* [annotation][in] */ 
@@ -979,6 +1028,7 @@ EXTERN_C const IID IID_ISettingsEngine;
             /* [annotation][retval][out] */ 
             _Out_retval_  IItemEnumerator **Namespaces);
         
+        DECLSPEC_XFGVIRT(ISettingsEngine, GetNamespace)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetNamespace )( 
             ISettingsEngine * This,
             /* [annotation][in] */ 
@@ -990,6 +1040,7 @@ EXTERN_C const IID IID_ISettingsEngine;
             /* [annotation][retval][out] */ 
             _Out_retval_  ISettingsNamespace **NamespaceItem);
         
+        DECLSPEC_XFGVIRT(ISettingsEngine, GetErrorDescription)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetErrorDescription )( 
             ISettingsEngine * This,
             /* [annotation][in] */ 
@@ -997,11 +1048,13 @@ EXTERN_C const IID IID_ISettingsEngine;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *Message);
         
+        DECLSPEC_XFGVIRT(ISettingsEngine, CreateSettingsIdentity)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateSettingsIdentity )( 
             ISettingsEngine * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  ISettingsIdentity **SettingsID);
         
+        DECLSPEC_XFGVIRT(ISettingsEngine, GetStoreStatus)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetStoreStatus )( 
             ISettingsEngine * This,
             /* [annotation][in] */ 
@@ -1009,16 +1062,19 @@ EXTERN_C const IID IID_ISettingsEngine;
             /* [annotation][out] */ 
             _Out_  WcmUserStatus *Status);
         
+        DECLSPEC_XFGVIRT(ISettingsEngine, LoadStore)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *LoadStore )( 
             ISettingsEngine * This,
             /* [annotation][in] */ 
             _In_  DWORD Flags);
         
+        DECLSPEC_XFGVIRT(ISettingsEngine, UnloadStore)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *UnloadStore )( 
             ISettingsEngine * This,
             /* [annotation][in] */ 
             _In_  void *Reserved);
         
+        DECLSPEC_XFGVIRT(ISettingsEngine, RegisterNamespace)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RegisterNamespace )( 
             ISettingsEngine * This,
             /* [annotation][in] */ 
@@ -1030,6 +1086,7 @@ EXTERN_C const IID IID_ISettingsEngine;
             /* [annotation][retval][out] */ 
             _Out_retval_  VARIANT *Results);
         
+        DECLSPEC_XFGVIRT(ISettingsEngine, UnregisterNamespace)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *UnregisterNamespace )( 
             ISettingsEngine * This,
             /* [annotation][in] */ 
@@ -1037,21 +1094,25 @@ EXTERN_C const IID IID_ISettingsEngine;
             /* [annotation][in] */ 
             _In_  BOOL RemoveSettings);
         
+        DECLSPEC_XFGVIRT(ISettingsEngine, CreateTargetInfo)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateTargetInfo )( 
             ISettingsEngine * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  ITargetInfo **Target);
         
+        DECLSPEC_XFGVIRT(ISettingsEngine, GetTargetInfo)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetTargetInfo )( 
             ISettingsEngine * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  ITargetInfo **Target);
         
+        DECLSPEC_XFGVIRT(ISettingsEngine, SetTargetInfo)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetTargetInfo )( 
             ISettingsEngine * This,
             /* [annotation][in] */ 
             _In_  ITargetInfo *Target);
         
+        DECLSPEC_XFGVIRT(ISettingsEngine, CreateSettingsContext)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateSettingsContext )( 
             ISettingsEngine * This,
             /* [annotation][in] */ 
@@ -1061,11 +1122,13 @@ EXTERN_C const IID IID_ISettingsEngine;
             /* [annotation][retval][out] */ 
             _Out_retval_  ISettingsContext **SettingsContext);
         
+        DECLSPEC_XFGVIRT(ISettingsEngine, SetSettingsContext)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetSettingsContext )( 
             ISettingsEngine * This,
             /* [annotation][in] */ 
             _In_  ISettingsContext *SettingsContext);
         
+        DECLSPEC_XFGVIRT(ISettingsEngine, ApplySettingsContext)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ApplySettingsContext )( 
             ISettingsEngine * This,
             /* [annotation][in] */ 
@@ -1075,6 +1138,7 @@ EXTERN_C const IID IID_ISettingsEngine;
             /* [annotation][retval][out] */ 
             _Out_retval_  SIZE_T *pcIdentities);
         
+        DECLSPEC_XFGVIRT(ISettingsEngine, GetSettingsContext)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSettingsContext )( 
             ISettingsEngine * This,
             /* [annotation][retval][out] */ 
@@ -1294,6 +1358,7 @@ EXTERN_C const IID IID_ISettingsItem;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISettingsItem * This,
             /* [annotation][in] */ 
@@ -1301,37 +1366,45 @@ EXTERN_C const IID IID_ISettingsItem;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISettingsItem * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISettingsItem * This);
         
+        DECLSPEC_XFGVIRT(ISettingsItem, GetName)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetName )( 
             ISettingsItem * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *Name);
         
+        DECLSPEC_XFGVIRT(ISettingsItem, GetValue)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             ISettingsItem * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  VARIANT *Value);
         
+        DECLSPEC_XFGVIRT(ISettingsItem, SetValue)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetValue )( 
             ISettingsItem * This,
             /* [annotation][in] */ 
             _In_  const VARIANT *Value);
         
+        DECLSPEC_XFGVIRT(ISettingsItem, GetSettingType)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSettingType )( 
             ISettingsItem * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  WcmSettingType *Type);
         
+        DECLSPEC_XFGVIRT(ISettingsItem, GetDataType)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetDataType )( 
             ISettingsItem * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  WcmDataType *Type);
         
+        DECLSPEC_XFGVIRT(ISettingsItem, GetValueRaw)
         HRESULT ( STDMETHODCALLTYPE *GetValueRaw )( 
             ISettingsItem * This,
             /* [annotation][size_is][size_is][out] */ 
@@ -1339,6 +1412,7 @@ EXTERN_C const IID IID_ISettingsItem;
             /* [annotation][retval][out] */ 
             _Out_retval_  ULONG *DataSize);
         
+        DECLSPEC_XFGVIRT(ISettingsItem, SetValueRaw)
         HRESULT ( STDMETHODCALLTYPE *SetValueRaw )( 
             ISettingsItem * This,
             /* [annotation][in] */ 
@@ -1348,16 +1422,19 @@ EXTERN_C const IID IID_ISettingsItem;
             /* [annotation][in] */ 
             _In_  ULONG DataSize);
         
+        DECLSPEC_XFGVIRT(ISettingsItem, HasChild)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *HasChild )( 
             ISettingsItem * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BOOL *ItemHasChild);
         
+        DECLSPEC_XFGVIRT(ISettingsItem, Children)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Children )( 
             ISettingsItem * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IItemEnumerator **Children);
         
+        DECLSPEC_XFGVIRT(ISettingsItem, GetChild)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetChild )( 
             ISettingsItem * This,
             /* [annotation][string][in] */ 
@@ -1365,6 +1442,7 @@ EXTERN_C const IID IID_ISettingsItem;
             /* [annotation][retval][out] */ 
             _Out_retval_  ISettingsItem **Child);
         
+        DECLSPEC_XFGVIRT(ISettingsItem, GetSettingByPath)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSettingByPath )( 
             ISettingsItem * This,
             /* [annotation][string][in] */ 
@@ -1372,6 +1450,7 @@ EXTERN_C const IID IID_ISettingsItem;
             /* [annotation][retval][out] */ 
             _Out_retval_  ISettingsItem **Setting);
         
+        DECLSPEC_XFGVIRT(ISettingsItem, CreateSettingByPath)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateSettingByPath )( 
             ISettingsItem * This,
             /* [annotation][string][in] */ 
@@ -1379,11 +1458,13 @@ EXTERN_C const IID IID_ISettingsItem;
             /* [annotation][retval][out] */ 
             _Out_retval_  ISettingsItem **Setting);
         
+        DECLSPEC_XFGVIRT(ISettingsItem, RemoveSettingByPath)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RemoveSettingByPath )( 
             ISettingsItem * This,
             /* [annotation][string][in] */ 
             _In_  const WCHAR *Path);
         
+        DECLSPEC_XFGVIRT(ISettingsItem, GetListKeyInformation)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetListKeyInformation )( 
             ISettingsItem * This,
             /* [annotation][out] */ 
@@ -1391,6 +1472,7 @@ EXTERN_C const IID IID_ISettingsItem;
             /* [annotation][retval][out] */ 
             _Out_retval_  WcmDataType *DataType);
         
+        DECLSPEC_XFGVIRT(ISettingsItem, CreateListElement)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateListElement )( 
             ISettingsItem * This,
             /* [annotation][in] */ 
@@ -1398,16 +1480,19 @@ EXTERN_C const IID IID_ISettingsItem;
             /* [annotation][retval][out] */ 
             _Out_retval_  ISettingsItem **Child);
         
+        DECLSPEC_XFGVIRT(ISettingsItem, RemoveListElement)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RemoveListElement )( 
             ISettingsItem * This,
             /* [annotation][string][in] */ 
             _In_  LPCWSTR ElementName);
         
+        DECLSPEC_XFGVIRT(ISettingsItem, Attributes)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Attributes )( 
             ISettingsItem * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IItemEnumerator **Attributes);
         
+        DECLSPEC_XFGVIRT(ISettingsItem, GetAttribute)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetAttribute )( 
             ISettingsItem * This,
             /* [annotation][string][in] */ 
@@ -1415,16 +1500,19 @@ EXTERN_C const IID IID_ISettingsItem;
             /* [annotation][retval][out] */ 
             _Out_retval_  VARIANT *Value);
         
+        DECLSPEC_XFGVIRT(ISettingsItem, GetPath)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPath )( 
             ISettingsItem * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *Path);
         
+        DECLSPEC_XFGVIRT(ISettingsItem, GetRestrictionFacets)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetRestrictionFacets )( 
             ISettingsItem * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  WcmRestrictionFacets *RestrictionFacets);
         
+        DECLSPEC_XFGVIRT(ISettingsItem, GetRestriction)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetRestriction )( 
             ISettingsItem * This,
             /* [annotation][in] */ 
@@ -1432,6 +1520,7 @@ EXTERN_C const IID IID_ISettingsItem;
             /* [annotation][retval][out] */ 
             _Out_retval_  VARIANT *FacetData);
         
+        DECLSPEC_XFGVIRT(ISettingsItem, GetKeyValue)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetKeyValue )( 
             ISettingsItem * This,
             /* [annotation][retval][out] */ 
@@ -1597,6 +1686,7 @@ EXTERN_C const IID IID_ISettingsNamespace;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISettingsNamespace * This,
             /* [annotation][in] */ 
@@ -1604,22 +1694,27 @@ EXTERN_C const IID IID_ISettingsNamespace;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISettingsNamespace * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISettingsNamespace * This);
         
+        DECLSPEC_XFGVIRT(ISettingsNamespace, GetIdentity)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetIdentity )( 
             ISettingsNamespace * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  ISettingsIdentity **SettingsID);
         
+        DECLSPEC_XFGVIRT(ISettingsNamespace, Settings)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Settings )( 
             ISettingsNamespace * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IItemEnumerator **Settings);
         
+        DECLSPEC_XFGVIRT(ISettingsNamespace, Save)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Save )( 
             ISettingsNamespace * This,
             /* [annotation][in] */ 
@@ -1627,6 +1722,7 @@ EXTERN_C const IID IID_ISettingsNamespace;
             /* [annotation][retval][out] */ 
             _Out_retval_  ISettingsResult **Result);
         
+        DECLSPEC_XFGVIRT(ISettingsNamespace, GetSettingByPath)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSettingByPath )( 
             ISettingsNamespace * This,
             /* [annotation][string][in] */ 
@@ -1634,6 +1730,7 @@ EXTERN_C const IID IID_ISettingsNamespace;
             /* [annotation][retval][out] */ 
             _Out_retval_  ISettingsItem **Setting);
         
+        DECLSPEC_XFGVIRT(ISettingsNamespace, CreateSettingByPath)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateSettingByPath )( 
             ISettingsNamespace * This,
             /* [annotation][string][in] */ 
@@ -1641,11 +1738,13 @@ EXTERN_C const IID IID_ISettingsNamespace;
             /* [annotation][retval][out] */ 
             _Out_retval_  ISettingsItem **Setting);
         
+        DECLSPEC_XFGVIRT(ISettingsNamespace, RemoveSettingByPath)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RemoveSettingByPath )( 
             ISettingsNamespace * This,
             /* [annotation][string][in] */ 
             _In_  const WCHAR *Path);
         
+        DECLSPEC_XFGVIRT(ISettingsNamespace, GetAttribute)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetAttribute )( 
             ISettingsNamespace * This,
             /* [annotation][string][in] */ 
@@ -1756,6 +1855,7 @@ EXTERN_C const IID IID_ISettingsResult;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISettingsResult * This,
             /* [annotation][in] */ 
@@ -1763,37 +1863,45 @@ EXTERN_C const IID IID_ISettingsResult;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISettingsResult * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISettingsResult * This);
         
+        DECLSPEC_XFGVIRT(ISettingsResult, GetDescription)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetDescription )( 
             ISettingsResult * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *description);
         
+        DECLSPEC_XFGVIRT(ISettingsResult, GetErrorCode)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetErrorCode )( 
             ISettingsResult * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  HRESULT *hrOut);
         
+        DECLSPEC_XFGVIRT(ISettingsResult, GetContextDescription)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetContextDescription )( 
             ISettingsResult * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *description);
         
+        DECLSPEC_XFGVIRT(ISettingsResult, GetLine)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetLine )( 
             ISettingsResult * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  DWORD *dwLine);
         
+        DECLSPEC_XFGVIRT(ISettingsResult, GetColumn)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetColumn )( 
             ISettingsResult * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  DWORD *dwColumn);
         
+        DECLSPEC_XFGVIRT(ISettingsResult, GetSource)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSource )( 
             ISettingsResult * This,
             /* [annotation][retval][out] */ 
@@ -1928,6 +2036,7 @@ EXTERN_C const IID IID_ISettingsContext;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISettingsContext * This,
             /* [annotation][in] */ 
@@ -1935,12 +2044,15 @@ EXTERN_C const IID IID_ISettingsContext;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISettingsContext * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISettingsContext * This);
         
+        DECLSPEC_XFGVIRT(ISettingsContext, Serialize)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Serialize )( 
             ISettingsContext * This,
             /* [annotation][in] */ 
@@ -1948,6 +2060,7 @@ EXTERN_C const IID IID_ISettingsContext;
             /* [annotation][in] */ 
             _In_  ITargetInfo *pTarget);
         
+        DECLSPEC_XFGVIRT(ISettingsContext, Deserialize)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Deserialize )( 
             ISettingsContext * This,
             /* [annotation][in] */ 
@@ -1959,21 +2072,25 @@ EXTERN_C const IID IID_ISettingsContext;
             /* [annotation][retval][out] */ 
             _Out_retval_  SIZE_T *pcResultCount);
         
+        DECLSPEC_XFGVIRT(ISettingsContext, SetUserData)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetUserData )( 
             ISettingsContext * This,
             /* [annotation][in] */ 
             _In_  void *pUserData);
         
+        DECLSPEC_XFGVIRT(ISettingsContext, GetUserData)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetUserData )( 
             ISettingsContext * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  void **pUserData);
         
+        DECLSPEC_XFGVIRT(ISettingsContext, GetNamespaces)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetNamespaces )( 
             ISettingsContext * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IItemEnumerator **ppNamespaceIds);
         
+        DECLSPEC_XFGVIRT(ISettingsContext, GetStoredSettings)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetStoredSettings )( 
             ISettingsContext * This,
             /* [annotation][in] */ 
@@ -1985,6 +2102,7 @@ EXTERN_C const IID IID_ISettingsContext;
             /* [annotation][out] */ 
             _Out_  IItemEnumerator **ppDeletedSettings);
         
+        DECLSPEC_XFGVIRT(ISettingsContext, RevertSetting)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RevertSetting )( 
             ISettingsContext * This,
             /* [annotation][in] */ 

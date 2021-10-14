@@ -18,5 +18,8 @@ _DDVIDEOPORTCONNECT
 <IncludeRoot>/um/endpointvolume.h
 <IncludeRoot>/um/audiopolicy.h
 <IncludeRoot>/um/SpatialAudioMetadata.h
+<IncludeRoot>/um/audioclientactivationparams.h
+<IncludeRoot>/um/audioengineextensionapo.h
+<IncludeRoot>/um/audiostatemonitorapi.h
 --namespace
 Windows.Win32.Media.Audio.CoreAudio

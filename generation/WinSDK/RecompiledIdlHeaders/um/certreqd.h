@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -116,18 +124,22 @@ EXTERN_C const IID IID_ICertRequestD;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICertRequestD * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICertRequestD * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICertRequestD * This);
         
+        DECLSPEC_XFGVIRT(ICertRequestD, Request)
         HRESULT ( STDMETHODCALLTYPE *Request )( 
             __RPC__in ICertRequestD * This,
             /* [in] */ DWORD dwFlags,
@@ -140,12 +152,14 @@ EXTERN_C const IID IID_ICertRequestD;
             /* [ref][out] */ __RPC__out CERTTRANSBLOB *pctbEncodedCert,
             /* [ref][out] */ __RPC__out CERTTRANSBLOB *pctbDispositionMessage);
         
+        DECLSPEC_XFGVIRT(ICertRequestD, GetCACert)
         HRESULT ( STDMETHODCALLTYPE *GetCACert )( 
             __RPC__in ICertRequestD * This,
             /* [in] */ DWORD fchain,
             /* [range][unique][string][in] */ __RPC__in_opt_string const wchar_t *pwszAuthority,
             /* [ref][out] */ __RPC__out CERTTRANSBLOB *pctbOut);
         
+        DECLSPEC_XFGVIRT(ICertRequestD, Ping)
         HRESULT ( STDMETHODCALLTYPE *Ping )( 
             __RPC__in ICertRequestD * This,
             /* [range][unique][string][in] */ __RPC__in_opt_string const wchar_t *pwszAuthority);
@@ -244,18 +258,22 @@ EXTERN_C const IID IID_ICertRequestD2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICertRequestD2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICertRequestD2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICertRequestD2 * This);
         
+        DECLSPEC_XFGVIRT(ICertRequestD, Request)
         HRESULT ( STDMETHODCALLTYPE *Request )( 
             __RPC__in ICertRequestD2 * This,
             /* [in] */ DWORD dwFlags,
@@ -268,16 +286,19 @@ EXTERN_C const IID IID_ICertRequestD2;
             /* [ref][out] */ __RPC__out CERTTRANSBLOB *pctbEncodedCert,
             /* [ref][out] */ __RPC__out CERTTRANSBLOB *pctbDispositionMessage);
         
+        DECLSPEC_XFGVIRT(ICertRequestD, GetCACert)
         HRESULT ( STDMETHODCALLTYPE *GetCACert )( 
             __RPC__in ICertRequestD2 * This,
             /* [in] */ DWORD fchain,
             /* [range][unique][string][in] */ __RPC__in_opt_string const wchar_t *pwszAuthority,
             /* [ref][out] */ __RPC__out CERTTRANSBLOB *pctbOut);
         
+        DECLSPEC_XFGVIRT(ICertRequestD, Ping)
         HRESULT ( STDMETHODCALLTYPE *Ping )( 
             __RPC__in ICertRequestD2 * This,
             /* [range][unique][string][in] */ __RPC__in_opt_string const wchar_t *pwszAuthority);
         
+        DECLSPEC_XFGVIRT(ICertRequestD2, Request2)
         HRESULT ( STDMETHODCALLTYPE *Request2 )( 
             __RPC__in ICertRequestD2 * This,
             /* [range][unique][string][in] */ __RPC__in_opt_string const wchar_t *pwszAuthority,
@@ -291,6 +312,7 @@ EXTERN_C const IID IID_ICertRequestD2;
             /* [ref][out] */ __RPC__out CERTTRANSBLOB *pctbEncodedCert,
             /* [ref][out] */ __RPC__out CERTTRANSBLOB *pctbDispositionMessage);
         
+        DECLSPEC_XFGVIRT(ICertRequestD2, GetCAProperty)
         HRESULT ( STDMETHODCALLTYPE *GetCAProperty )( 
             __RPC__in ICertRequestD2 * This,
             /* [range][unique][string][in] */ __RPC__in_opt_string const wchar_t *pwszAuthority,
@@ -299,12 +321,14 @@ EXTERN_C const IID IID_ICertRequestD2;
             /* [in] */ LONG PropType,
             /* [ref][out] */ __RPC__out CERTTRANSBLOB *pctbPropertyValue);
         
+        DECLSPEC_XFGVIRT(ICertRequestD2, GetCAPropertyInfo)
         HRESULT ( STDMETHODCALLTYPE *GetCAPropertyInfo )( 
             __RPC__in ICertRequestD2 * This,
             /* [range][unique][string][in] */ __RPC__in_opt_string const wchar_t *pwszAuthority,
             /* [out] */ __RPC__out LONG *pcProperty,
             /* [ref][out] */ __RPC__out CERTTRANSBLOB *pctbPropInfo);
         
+        DECLSPEC_XFGVIRT(ICertRequestD2, Ping2)
         HRESULT ( STDMETHODCALLTYPE *Ping2 )( 
             __RPC__in ICertRequestD2 * This,
             /* [range][unique][string][in] */ __RPC__in_opt_string const wchar_t *pwszAuthority);

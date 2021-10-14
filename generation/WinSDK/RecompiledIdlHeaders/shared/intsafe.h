@@ -96,7 +96,7 @@ typedef ULONG_PTR   SIZE_T;
 
 #undef _USE_INTRINSIC_MULTIPLY128
 
-#if !defined(_M_CEE) && (defined(_AMD64_) || (defined(_IA64_) && (_MSC_VER >= 1400)))
+#if !defined(_M_CEE) && ((defined(_AMD64_) && !defined(_ARM64EC_)) || (defined(_IA64_) && (_MSC_VER >= 1400)))
 #define _USE_INTRINSIC_MULTIPLY128
 #endif
 
@@ -105,14 +105,25 @@ typedef ULONG_PTR   SIZE_T;
 extern "C" {
 #endif
 
+#if !defined(_ARM64EC_)
+
 #define UnsignedMultiply128 _umul128
+
+#else
+
+#define _umul128 Multiply128
+
+#endif // defined(_ARM64EC_)
 
 ULONG64
 UnsignedMultiply128(
     _In_ ULONGLONG ullMultiplicand,
     _In_ ULONGLONG ullMultiplier,
     _Out_ _Deref_out_range_(==, ullMultiplicand * ullMultiplier) ULONGLONG* pullResultHigh);
+
+#if !defined(_ARM64EC_)
 #pragma intrinsic(_umul128)
+#endif
 
 #ifdef __cplusplus
 }
@@ -158,9 +169,13 @@ typedef _Return_type_success_(return >= 0) long HRESULT;
 #define INT8_MIN        (-127i8 - 1)
 #define SHORT_MIN       (-32768)
 #define INT16_MIN       (-32767i16 - 1)
+#ifndef INT_MIN
 #define INT_MIN         (-2147483647 - 1)
+#endif
 #define INT32_MIN       (-2147483647i32 - 1)
+#ifndef LONG_MIN
 #define LONG_MIN        (-2147483647L - 1)
+#endif
 #define LONGLONG_MIN    (-9223372036854775807i64 - 1)
 #define LONG64_MIN      (-9223372036854775807i64 - 1)
 #define INT64_MIN       (-9223372036854775807i64 - 1)
@@ -186,12 +201,20 @@ typedef _Return_type_success_(return >= 0) long HRESULT;
 #define USHORT_MAX      0xffff
 #define UINT16_MAX      0xffffui16
 #define WORD_MAX        0xffff
+#ifndef INT_MAX
 #define INT_MAX         2147483647
+#endif
 #define INT32_MAX       2147483647i32
+#ifndef UINT_MAX
 #define UINT_MAX        0xffffffff
+#endif
 #define UINT32_MAX      0xffffffffui32
+#ifndef LONG_MAX
 #define LONG_MAX        2147483647L
+#endif
+#ifndef ULONG_MAX
 #define ULONG_MAX       0xffffffffUL
+#endif
 #define DWORD_MAX       0xffffffffUL
 #define LONGLONG_MAX    9223372036854775807i64
 #define LONG64_MAX      9223372036854775807i64
@@ -7841,7 +7864,15 @@ ULongLongMult(
 extern "C" {
 #endif
 
+#if !defined(_ARM64EC_)
+
 #define Multiply128 _mul128
+
+#else
+
+#define _mul128 Multiply128
+
+#endif // defined(_ARM64EC_)
 
 LONG64
 Multiply128(
@@ -7849,7 +7880,12 @@ Multiply128(
     _In_ LONG64  Multiplicand,
     _Out_ LONG64 *HighProduct
     );
+
+#if !defined(_ARM64EC_)
+
 #pragma intrinsic(_mul128)
+
+#endif // !defined(_ARM64EC_)
 
 #ifdef __cplusplus
 }
@@ -8559,10 +8595,10 @@ SSIZETMult(
 // depend on being defined here.
 //
 #ifndef LOWORD
-#define LOWORD(_dw)     ((WORD)(((DWORD_PTR)(_dw)) & 0xffff))
+#define LOWORD(l)     ((WORD)(((DWORD_PTR)(l)) & 0xffff))
 #endif
 #ifndef HIWORD
-#define HIWORD(_dw)     ((WORD)((((DWORD_PTR)(_dw)) >> 16) & 0xffff))
+#define HIWORD(l)     ((WORD)((((DWORD_PTR)(l)) >> 16) & 0xffff))
 #endif
 #ifndef LODWORD
 #define LODWORD(_qw)    ((DWORD)(_qw))

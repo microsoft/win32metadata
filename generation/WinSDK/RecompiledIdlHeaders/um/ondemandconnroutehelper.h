@@ -102,7 +102,7 @@ STDAPI GetInterfaceContextTableForHostName(
 //
 // InterfaceContextTable                - Interface context table retrieved using GetInterfaceContextTableForHostName.
 //
-STDAPI_(VOID) FreeInterfaceContextTable(_In_ NET_INTERFACE_CONTEXT_TABLE* InterfaceContextTable);
+STDAPI_(void) FreeInterfaceContextTable(_In_ NET_INTERFACE_CONTEXT_TABLE* InterfaceContextTable);
 
 #endif // NTDDI_VERSION >= NTDDI_WINTHRESHOLD
 

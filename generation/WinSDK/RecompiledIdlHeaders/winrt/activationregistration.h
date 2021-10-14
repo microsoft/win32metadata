@@ -1,6 +1,6 @@
 /* Header file automatically generated from activationregistration.idl */
 /*
- * File built with Microsoft(R) MIDLRT Compiler Engine Version 10.00.0229 
+ * File built with Microsoft(R) MIDLRT Compiler Engine Version 10.00.0231 
  */
 
 #pragma warning( disable: 4049 )  /* more than 64k source lines */
@@ -50,7 +50,7 @@
 //  API Contract Inclusion Definitions
 #if !defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
 #if !defined(WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION)
-#define WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION 0x50000
+#define WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION 0x60000
 #endif // defined(WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
@@ -58,7 +58,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xa0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_NETWORKING_SOCKETS_CONTROLCHANNELTRIGGERCONTRACT_VERSION)
@@ -459,7 +459,7 @@ namespace ABI {
                 
             };
 
-            extern MIDL_CONST_ID IID & IID_IActivatableClassRegistration=_uuidof(IActivatableClassRegistration);
+            MIDL_CONST_ID IID & IID_IActivatableClassRegistration=_uuidof(IActivatableClassRegistration);
             
         } /* Foundation */
     } /* Windows */
@@ -494,7 +494,7 @@ namespace ABI {
                 
             };
 
-            extern MIDL_CONST_ID IID & IID_IDllServerActivatableClassRegistration=_uuidof(IDllServerActivatableClassRegistration);
+            MIDL_CONST_ID IID & IID_IDllServerActivatableClassRegistration=_uuidof(IDllServerActivatableClassRegistration);
             
         } /* Foundation */
     } /* Windows */
@@ -526,7 +526,7 @@ namespace ABI {
                 
             };
 
-            extern MIDL_CONST_ID IID & IID_IExeServerActivatableClassRegistration=_uuidof(IExeServerActivatableClassRegistration);
+            MIDL_CONST_ID IID & IID_IExeServerActivatableClassRegistration=_uuidof(IExeServerActivatableClassRegistration);
             
         } /* Foundation */
     } /* Windows */
@@ -579,7 +579,7 @@ namespace ABI {
                 
             };
 
-            extern MIDL_CONST_ID IID & IID_IExeServerRegistration=_uuidof(IExeServerRegistration);
+            MIDL_CONST_ID IID & IID_IExeServerRegistration=_uuidof(IExeServerRegistration);
             
         } /* Foundation */
     } /* Windows */

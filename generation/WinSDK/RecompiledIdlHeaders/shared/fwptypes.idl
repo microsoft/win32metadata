@@ -92,8 +92,6 @@ typedef [v1_enum] enum FWP_DATA_TYPE_
    FWP_TOKEN_ACCESS_INFORMATION_TYPE,
    FWP_UNICODE_STRING_TYPE,
    FWP_BYTE_ARRAY6_TYPE,
-   FWP_BITMAP_INDEX_TYPE,
-   FWP_BITMAP_ARRAY64_TYPE,
    FWP_SINGLE_DATA_TYPE_MAX = 0xFF,
    FWP_V4_ADDR_MASK,
    FWP_V6_ADDR_MASK,
@@ -101,14 +99,7 @@ typedef [v1_enum] enum FWP_DATA_TYPE_
    FWP_DATA_TYPE_MAX
 } FWP_DATA_TYPE;
 
-// Stores an bitmap-array of exactly 64 bits 
-typedef struct FWP_BITMAP_ARRAY64_
-{
-    UINT8 bitmapArray64[8];
-} FWP_BITMAP_ARRAY64;
-
 cpp_quote("#define FWP_BYTEMAP_ARRAY64_SIZE 8")
-cpp_quote("#define FWP_BITMAP_ARRAY64_SIZE 64")
 
 // Stores an array of exactly 6 bytes -- useful for Ethernet/802.11 addresses.
 typedef struct FWP_BYTE_ARRAY6_
@@ -151,7 +142,7 @@ typedef struct FWP_VALUE0_
    {
       [case(FWP_EMPTY)]
          ;
-      [case(FWP_UINT8, FWP_BITMAP_INDEX_TYPE)]
+      [case(FWP_UINT8)]
          UINT8 uint8;
       [case(FWP_UINT16)]
          UINT16 uint16;
@@ -187,8 +178,6 @@ typedef struct FWP_VALUE0_
          [string] LPWSTR unicodeString;
       [case(FWP_BYTE_ARRAY6_TYPE)]
          [unique] FWP_BYTE_ARRAY6* byteArray6;
-      [case(FWP_BITMAP_ARRAY64_TYPE)]
-         [unique] FWP_BITMAP_ARRAY64* bitmapArray64;
    };
 } FWP_VALUE0;
 
@@ -266,7 +255,7 @@ typedef struct FWP_CONDITION_VALUE0_
    {
       [case(FWP_EMPTY)]
          ;
-      [case(FWP_UINT8, FWP_BITMAP_INDEX_TYPE)]
+      [case(FWP_UINT8)]
          UINT8 uint8;
       [case(FWP_UINT16)]
          UINT16 uint16;
@@ -302,8 +291,6 @@ typedef struct FWP_CONDITION_VALUE0_
          [string] LPWSTR unicodeString;
       [case(FWP_BYTE_ARRAY6_TYPE)]
          [unique] FWP_BYTE_ARRAY6* byteArray6;
-      [case(FWP_BITMAP_ARRAY64_TYPE)]
-         [unique] FWP_BITMAP_ARRAY64* bitmapArray64;
       [case(FWP_V4_ADDR_MASK)]
          [unique] FWP_V4_ADDR_AND_MASK* v4AddrMask;
       [case(FWP_V6_ADDR_MASK)]
@@ -421,9 +408,6 @@ cpp_quote("#define FWP_ACTION_NONE (0x00000007)")
 // No filter matched.
 cpp_quote("#define FWP_ACTION_NONE_NO_MATCH (0x00000008)")
 
-// Set a Bitmap Index.
-cpp_quote("#define FWP_ACTION_BITMAP_INDEX_SET (0x00000009)")
-
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Definitions for flags that can be filtered against on certain layers.
@@ -468,12 +452,7 @@ cpp_quote("#define FWP_CONDITION_REAUTHORIZE_REASON_MID_STREAM_INSPECTION     (0
 cpp_quote("#define FWP_CONDITION_REAUTHORIZE_REASON_SOCKET_PROPERTY_CHANGED   (0x00000080)")
 cpp_quote("#define FWP_CONDITION_REAUTHORIZE_REASON_NEW_INBOUND_MCAST_BCAST_PACKET   (0x00000100)")
 cpp_quote("#define FWP_CONDITION_REAUTHORIZE_REASON_EDP_POLICY_CHANGED        (0x00000200)")
-cpp_quote("#define FWP_CONDITION_REAUTHORIZE_REASON_PRECLASSIFY_LOCALADDR_LAYER_CHANGE         (0x00000400)")
-cpp_quote("#define FWP_CONDITION_REAUTHORIZE_REASON_PRECLASSIFY_REMOTEADDR_LAYER_CHANGE        (0x00000800)")
-cpp_quote("#define FWP_CONDITION_REAUTHORIZE_REASON_PRECLASSIFY_LOCALPORT_LAYER_CHANGE         (0x00001000)")
-cpp_quote("#define FWP_CONDITION_REAUTHORIZE_REASON_PRECLASSIFY_REMOTEPORT_LAYER_CHANGE        (0x00002000)")
 cpp_quote("#define FWP_CONDITION_REAUTHORIZE_REASON_PROXY_HANDLE_CHANGED                       (0x00004000)")
-cpp_quote("#define FWP_CONDITION_REAUTHORIZE_REASON_PRECLASSIFY_POLICY_CHANGED                 (0x00008000)")
 cpp_quote("#define FWP_CONDITION_REAUTHORIZE_REASON_CHECK_OFFLOAD                              (0x00010000)")
 
 cpp_quote("#define FWP_CONDITION_SOCKET_PROPERTY_FLAG_IS_SYSTEM_PORT_RPC      (0x00000001)")
@@ -551,6 +530,9 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN10_19H1)")
 cpp_quote("#define FWP_CALLOUT_FLAG_ALLOW_USO                   (0x00000100)")
 cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN10_VB)")
 cpp_quote("#define FWP_CALLOUT_FLAG_ALLOW_URO                   (0x00000200)")
+cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN10_CO)")
+cpp_quote("#define FWP_CALLOUT_FLAG_RESERVED2                   (0x00000400)")
+cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)")
 cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN10_VB)")
 cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN10_19H1)")
 cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN8)")

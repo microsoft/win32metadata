@@ -1039,6 +1039,66 @@ typedef struct _PRINTPROVIDOR
     DWORD (*fpRegeneratePrintDeviceCapabilities)(
         _In_    HANDLE  hPrinter
         );
+
+    HRESULT (*fpPrintSupportOperation)
+    (
+        _In_ HANDLE hPrinter,
+        _In_ DWORD JobId,
+        _In_ DWORD dwOperationType,
+        _In_reads_bytes_opt_(cbInputData) LPBYTE pInputData,
+        _In_ DWORD cbInputData,
+        _Out_ LPDWORD pcWritten
+        );
+
+    HRESULT (*fpIppCreateJobOnPrinter)
+    (
+        _In_ HANDLE hPrinter,
+        _In_ DWORD jobId,
+        _In_ PCWSTR pdlFormat,
+        _In_ DWORD jobAttributesBufferSize,
+        _In_reads_bytes_(jobAttributesBufferSize) PBYTE jobAttributeGroupBuffer,
+        _Out_ PDWORD ippResponseBufferSize,
+        _Outptr_result_bytebuffer_(*ippResponseBufferSize) PBYTE* ippResponseBuffer
+        );
+
+    HRESULT (*fpIppGetJobAttributes)
+    (
+        _In_ HANDLE hPrinter,
+        _In_ DWORD JobId,
+        _In_ DWORD attributeNameCount,
+        _In_reads_(attributeNameCount) const wchar_t** attributeNames,
+        _Out_ DWORD* ippResponseBufferSize,
+        _Outptr_result_bytebuffer_(*ippResponseBufferSize) BYTE** ippResponseBuffer
+        );
+
+    HRESULT (*fpIppSetJobAttributes)
+    (
+        _In_ HANDLE hPrinter,
+        _In_ DWORD JobId,
+        _In_ DWORD jobAttributeGroupBufferSize,
+        _In_reads_bytes_(jobAttributeGroupBufferSize) BYTE* jobAttributeGroupBuffer,
+        _Out_ DWORD* ippResponseBufferSize,
+        _Outptr_result_bytebuffer_(*ippResponseBufferSize) BYTE** ippResponseBuffer
+        );
+
+    HRESULT (*fpIppGetPrinterAttributes)
+    (
+        _In_ HANDLE hPrinter,
+        _In_ DWORD attributeNameCount,
+        _In_reads_(attributeNameCount) const wchar_t** attributeNames,
+        _Out_ DWORD* ippResponseBufferSize,
+        _Outptr_result_bytebuffer_(*ippResponseBufferSize) BYTE** ippResponseBuffer
+        );
+
+    HRESULT (*fpIppSetPrinterAttributes)
+    (
+        _In_ HANDLE hPrinter,
+        _In_ DWORD jobAttributeGroupBufferSize,
+        _In_reads_bytes_(jobAttributeGroupBufferSize) BYTE* jobAttributeGroupBuffer,
+        _Out_ DWORD* ippResponseBufferSize,
+        _Outptr_result_bytebuffer_(*ippResponseBufferSize) BYTE** ippResponseBuffer
+        );
+
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_19H1)
 }
 PRINTPROVIDOR, *LPPRINTPROVIDOR;

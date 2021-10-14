@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 #pragma warning( disable: 4049 )  /* more than 64k source lines */
@@ -31,6 +31,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -182,63 +190,77 @@ EXTERN_C const IID IID_IWMPEffects;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPEffects * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPEffects * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPEffects * This);
         
+        DECLSPEC_XFGVIRT(IWMPEffects, Render)
         /* [helpstring][local] */ HRESULT ( STDMETHODCALLTYPE *Render )( 
             IWMPEffects * This,
             /* [in] */ TimedLevel *pLevels,
             /* [in] */ HDC hdc,
             /* [in] */ RECT *prc);
         
+        DECLSPEC_XFGVIRT(IWMPEffects, MediaInfo)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *MediaInfo )( 
             IWMPEffects * This,
             /* [in] */ LONG lChannelCount,
             /* [in] */ LONG lSampleRate,
             /* [in] */ BSTR bstrTitle);
         
+        DECLSPEC_XFGVIRT(IWMPEffects, GetCapabilities)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetCapabilities )( 
             IWMPEffects * This,
             /* [out] */ DWORD *pdwCapabilities);
         
+        DECLSPEC_XFGVIRT(IWMPEffects, GetTitle)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetTitle )( 
             IWMPEffects * This,
             /* [out] */ BSTR *bstrTitle);
         
+        DECLSPEC_XFGVIRT(IWMPEffects, GetPresetTitle)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPresetTitle )( 
             IWMPEffects * This,
             /* [in] */ LONG nPreset,
             /* [out] */ BSTR *bstrPresetTitle);
         
+        DECLSPEC_XFGVIRT(IWMPEffects, GetPresetCount)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPresetCount )( 
             IWMPEffects * This,
             /* [out] */ LONG *pnPresetCount);
         
+        DECLSPEC_XFGVIRT(IWMPEffects, SetCurrentPreset)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetCurrentPreset )( 
             IWMPEffects * This,
             /* [in] */ LONG nPreset);
         
+        DECLSPEC_XFGVIRT(IWMPEffects, GetCurrentPreset)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetCurrentPreset )( 
             IWMPEffects * This,
             /* [out] */ LONG *pnPreset);
         
+        DECLSPEC_XFGVIRT(IWMPEffects, DisplayPropertyPage)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *DisplayPropertyPage )( 
             IWMPEffects * This,
             /* [in] */ HWND hwndOwner);
         
+        DECLSPEC_XFGVIRT(IWMPEffects, GoFullscreen)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GoFullscreen )( 
             IWMPEffects * This,
             /* [in] */ BOOL fFullScreen);
         
+        DECLSPEC_XFGVIRT(IWMPEffects, RenderFullScreen)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RenderFullScreen )( 
             IWMPEffects * This,
             /* [in] */ TimedLevel *pLevels);
@@ -355,82 +377,101 @@ EXTERN_C const IID IID_IWMPEffects2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPEffects2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPEffects2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPEffects2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEffects, Render)
         /* [helpstring][local] */ HRESULT ( STDMETHODCALLTYPE *Render )( 
             IWMPEffects2 * This,
             /* [in] */ TimedLevel *pLevels,
             /* [in] */ HDC hdc,
             /* [in] */ RECT *prc);
         
+        DECLSPEC_XFGVIRT(IWMPEffects, MediaInfo)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *MediaInfo )( 
             IWMPEffects2 * This,
             /* [in] */ LONG lChannelCount,
             /* [in] */ LONG lSampleRate,
             /* [in] */ BSTR bstrTitle);
         
+        DECLSPEC_XFGVIRT(IWMPEffects, GetCapabilities)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetCapabilities )( 
             IWMPEffects2 * This,
             /* [out] */ DWORD *pdwCapabilities);
         
+        DECLSPEC_XFGVIRT(IWMPEffects, GetTitle)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetTitle )( 
             IWMPEffects2 * This,
             /* [out] */ BSTR *bstrTitle);
         
+        DECLSPEC_XFGVIRT(IWMPEffects, GetPresetTitle)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPresetTitle )( 
             IWMPEffects2 * This,
             /* [in] */ LONG nPreset,
             /* [out] */ BSTR *bstrPresetTitle);
         
+        DECLSPEC_XFGVIRT(IWMPEffects, GetPresetCount)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPresetCount )( 
             IWMPEffects2 * This,
             /* [out] */ LONG *pnPresetCount);
         
+        DECLSPEC_XFGVIRT(IWMPEffects, SetCurrentPreset)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetCurrentPreset )( 
             IWMPEffects2 * This,
             /* [in] */ LONG nPreset);
         
+        DECLSPEC_XFGVIRT(IWMPEffects, GetCurrentPreset)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetCurrentPreset )( 
             IWMPEffects2 * This,
             /* [out] */ LONG *pnPreset);
         
+        DECLSPEC_XFGVIRT(IWMPEffects, DisplayPropertyPage)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *DisplayPropertyPage )( 
             IWMPEffects2 * This,
             /* [in] */ HWND hwndOwner);
         
+        DECLSPEC_XFGVIRT(IWMPEffects, GoFullscreen)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GoFullscreen )( 
             IWMPEffects2 * This,
             /* [in] */ BOOL fFullScreen);
         
+        DECLSPEC_XFGVIRT(IWMPEffects, RenderFullScreen)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RenderFullScreen )( 
             IWMPEffects2 * This,
             /* [in] */ TimedLevel *pLevels);
         
+        DECLSPEC_XFGVIRT(IWMPEffects2, SetCore)
         HRESULT ( STDMETHODCALLTYPE *SetCore )( 
             IWMPEffects2 * This,
             /* [in] */ IWMPCore *pPlayer);
         
+        DECLSPEC_XFGVIRT(IWMPEffects2, Create)
         HRESULT ( STDMETHODCALLTYPE *Create )( 
             IWMPEffects2 * This,
             /* [in] */ HWND hwndParent);
         
+        DECLSPEC_XFGVIRT(IWMPEffects2, Destroy)
         HRESULT ( STDMETHODCALLTYPE *Destroy )( 
             IWMPEffects2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPEffects2, NotifyNewMedia)
         HRESULT ( STDMETHODCALLTYPE *NotifyNewMedia )( 
             IWMPEffects2 * This,
             /* [in] */ IWMPMedia *pMedia);
         
+        DECLSPEC_XFGVIRT(IWMPEffects2, OnWindowMessage)
         HRESULT ( STDMETHODCALLTYPE *OnWindowMessage )( 
             IWMPEffects2 * This,
             /* [in] */ UINT msg,
@@ -438,6 +479,7 @@ EXTERN_C const IID IID_IWMPEffects2;
             /* [in] */ LPARAM LParam,
             /* [in] */ LRESULT *plResultParam);
         
+        DECLSPEC_XFGVIRT(IWMPEffects2, RenderWindowed)
         HRESULT ( STDMETHODCALLTYPE *RenderWindowed )( 
             IWMPEffects2 * This,
             /* [in] */ TimedLevel *pData,

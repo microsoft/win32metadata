@@ -1,5 +1,6 @@
 --traverse
 <IncludeRoot>/um/SensAPI.h
 <IncludeRoot>/um/SensEvts.h
+<IncludeRoot>/um/sens.h
 --namespace
 Windows.Win32.System.EventNotificationService

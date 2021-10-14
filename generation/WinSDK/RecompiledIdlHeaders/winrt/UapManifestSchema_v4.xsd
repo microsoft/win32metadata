@@ -12,6 +12,7 @@
            xmlns:uap6="http://schemas.microsoft.com/appx/manifest/uap/windows10/6"
            xmlns:uap8="http://schemas.microsoft.com/appx/manifest/uap/windows10/8"
            xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
+           xmlns:uap11="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"
            >
 
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/types"/>
@@ -22,6 +23,7 @@
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/6"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/8"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"/>
+  <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"/>
 
   <xs:element name="MainPackageDependency" substitutionGroup="f:MainPackageDependencyChoice2">
     <xs:complexType>
@@ -89,6 +91,7 @@
       <xs:attribute name="Category" type="t:ST_ApplicationExtensionCategory_Uap4" use="required"/>
       <xs:attributeGroup ref="t:ExtensionBaseAttributes"/>
       <xs:attributeGroup ref="uap10:TrustLevelGroup"/>
+      <xs:attributeGroup ref="uap11:ManganeseExtensionAttributesGroup"/>
     </xs:complexType>
     <xs:unique name="SharedFonts_File">
       <xs:selector xpath="uap4:SharedFonts/uap4:Font"/>

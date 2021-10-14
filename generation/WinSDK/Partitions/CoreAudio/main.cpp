@@ -21,3 +21,6 @@
 #include <audiosessiontypes.h>
 #include <functiondiscoverykeys_devpkey.h>
 #include <audioenginebaseapo.h>
+#include <audioclientactivationparams.h>
+#include <audioengineextensionapo.h>
+#include <audiostatemonitorapi.h>

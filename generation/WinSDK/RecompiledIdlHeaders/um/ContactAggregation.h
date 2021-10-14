@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -278,6 +286,7 @@ EXTERN_C const IID IID_IContactAggregationManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IContactAggregationManager * This,
             /* [annotation][in] */ 
@@ -285,12 +294,15 @@ EXTERN_C const IID IID_IContactAggregationManager;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IContactAggregationManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IContactAggregationManager * This);
         
+        DECLSPEC_XFGVIRT(IContactAggregationManager, GetVersionInfo)
         HRESULT ( STDMETHODCALLTYPE *GetVersionInfo )( 
             __RPC__in IContactAggregationManager * This,
             /* [annotation][out] */ 
@@ -298,6 +310,7 @@ EXTERN_C const IID IID_IContactAggregationManager;
             /* [annotation][out] */ 
             _Out_  long *plMinorVersion);
         
+        DECLSPEC_XFGVIRT(IContactAggregationManager, CreateOrOpenGroup)
         HRESULT ( STDMETHODCALLTYPE *CreateOrOpenGroup )( 
             __RPC__in IContactAggregationManager * This,
             /* [annotation][in] */ 
@@ -309,24 +322,29 @@ EXTERN_C const IID IID_IContactAggregationManager;
             /* [annotation][retval][out] */ 
             _Out_retval_  IContactAggregationGroup **ppGroup);
         
+        DECLSPEC_XFGVIRT(IContactAggregationManager, CreateExternalContact)
         HRESULT ( STDMETHODCALLTYPE *CreateExternalContact )( 
             __RPC__in IContactAggregationManager * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IContactAggregationContact **ppItem);
         
+        DECLSPEC_XFGVIRT(IContactAggregationManager, CreateServerPerson)
         HRESULT ( STDMETHODCALLTYPE *CreateServerPerson )( 
             __RPC__in IContactAggregationManager * This,
             /* [annotation][out] */ 
             _Out_  IContactAggregationServerPerson **ppServerPerson);
         
+        DECLSPEC_XFGVIRT(IContactAggregationManager, CreateServerContactLink)
         HRESULT ( STDMETHODCALLTYPE *CreateServerContactLink )( 
             __RPC__in IContactAggregationManager * This,
             /* [annotation][out] */ 
             _Out_  IContactAggregationLink **ppServerContactLink);
         
+        DECLSPEC_XFGVIRT(IContactAggregationManager, Flush)
         HRESULT ( STDMETHODCALLTYPE *Flush )( 
             __RPC__in IContactAggregationManager * This);
         
+        DECLSPEC_XFGVIRT(IContactAggregationManager, OpenAggregateContact)
         HRESULT ( STDMETHODCALLTYPE *OpenAggregateContact )( 
             __RPC__in IContactAggregationManager * This,
             /* [annotation][in] */ 
@@ -334,6 +352,7 @@ EXTERN_C const IID IID_IContactAggregationManager;
             /* [annotation][out] */ 
             _Out_  IContactAggregationAggregate **ppItem);
         
+        DECLSPEC_XFGVIRT(IContactAggregationManager, OpenContact)
         HRESULT ( STDMETHODCALLTYPE *OpenContact )( 
             __RPC__in IContactAggregationManager * This,
             /* [annotation][in] */ 
@@ -341,6 +360,7 @@ EXTERN_C const IID IID_IContactAggregationManager;
             /* [annotation][out] */ 
             _Out_  IContactAggregationContact **ppItem);
         
+        DECLSPEC_XFGVIRT(IContactAggregationManager, OpenServerContactLink)
         HRESULT ( STDMETHODCALLTYPE *OpenServerContactLink )( 
             __RPC__in IContactAggregationManager * This,
             /* [annotation][in] */ 
@@ -348,6 +368,7 @@ EXTERN_C const IID IID_IContactAggregationManager;
             /* [annotation][out] */ 
             _Out_  IContactAggregationLink **ppItem);
         
+        DECLSPEC_XFGVIRT(IContactAggregationManager, OpenServerPerson)
         HRESULT ( STDMETHODCALLTYPE *OpenServerPerson )( 
             __RPC__in IContactAggregationManager * This,
             /* [annotation][in] */ 
@@ -355,6 +376,7 @@ EXTERN_C const IID IID_IContactAggregationManager;
             /* [annotation][out] */ 
             _Out_  IContactAggregationServerPerson **ppItem);
         
+        DECLSPEC_XFGVIRT(IContactAggregationManager, get_Contacts)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Contacts )( 
             __RPC__in IContactAggregationManager * This,
             /* [annotation][in] */ 
@@ -362,6 +384,7 @@ EXTERN_C const IID IID_IContactAggregationManager;
             /* [annotation][retval][out] */ 
             _Out_retval_  IContactAggregationContactCollection **ppItems);
         
+        DECLSPEC_XFGVIRT(IContactAggregationManager, get_AggregateContacts)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AggregateContacts )( 
             __RPC__in IContactAggregationManager * This,
             /* [annotation][in] */ 
@@ -369,6 +392,7 @@ EXTERN_C const IID IID_IContactAggregationManager;
             /* [annotation][out] */ 
             _Out_  IContactAggregationAggregateCollection **ppAggregates);
         
+        DECLSPEC_XFGVIRT(IContactAggregationManager, get_Groups)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Groups )( 
             __RPC__in IContactAggregationManager * This,
             /* [annotation][in] */ 
@@ -376,11 +400,13 @@ EXTERN_C const IID IID_IContactAggregationManager;
             /* [annotation][out] */ 
             _Out_  IContactAggregationGroupCollection **ppGroups);
         
+        DECLSPEC_XFGVIRT(IContactAggregationManager, get_ServerPersons)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ServerPersons )( 
             __RPC__in IContactAggregationManager * This,
             /* [annotation][out] */ 
             _Out_  IContactAggregationServerPersonCollection **ppServerPersonCollection);
         
+        DECLSPEC_XFGVIRT(IContactAggregationManager, get_ServerContactLinks)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ServerContactLinks )( 
             __RPC__in IContactAggregationManager * This,
             /* [annotation][in] */ 
@@ -566,6 +592,7 @@ EXTERN_C const IID IID_IContactAggregationContact;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IContactAggregationContact * This,
             /* [annotation][in] */ 
@@ -573,91 +600,111 @@ EXTERN_C const IID IID_IContactAggregationContact;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IContactAggregationContact * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IContactAggregationContact * This);
         
+        DECLSPEC_XFGVIRT(IContactAggregationContact, Delete)
         HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in IContactAggregationContact * This);
         
+        DECLSPEC_XFGVIRT(IContactAggregationContact, Save)
         HRESULT ( STDMETHODCALLTYPE *Save )( 
             __RPC__in IContactAggregationContact * This);
         
+        DECLSPEC_XFGVIRT(IContactAggregationContact, MoveToAggregate)
         HRESULT ( STDMETHODCALLTYPE *MoveToAggregate )( 
             __RPC__in IContactAggregationContact * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR pAggregateId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationContact, Unlink)
         HRESULT ( STDMETHODCALLTYPE *Unlink )( 
             __RPC__in IContactAggregationContact * This);
         
+        DECLSPEC_XFGVIRT(IContactAggregationContact, get_AccountId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AccountId )( 
             __RPC__in IContactAggregationContact * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  LPWSTR *ppAccountId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationContact, put_AccountId)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_AccountId )( 
             __RPC__in IContactAggregationContact * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR pAccountId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationContact, get_AggregateId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AggregateId )( 
             __RPC__in IContactAggregationContact * This,
             /* [annotation][out] */ 
             _Out_  LPWSTR *ppAggregateId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationContact, get_Id)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IContactAggregationContact * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  LPWSTR *ppItemId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationContact, get_IsMe)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsMe )( 
             __RPC__in IContactAggregationContact * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BOOL *pIsMe);
         
+        DECLSPEC_XFGVIRT(IContactAggregationContact, get_IsExternal)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsExternal )( 
             __RPC__in IContactAggregationContact * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BOOL *pIsExternal);
         
+        DECLSPEC_XFGVIRT(IContactAggregationContact, get_NetworkSourceId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_NetworkSourceId )( 
             __RPC__in IContactAggregationContact * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  ULONG *pNetworkSourceId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationContact, put_NetworkSourceId)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_NetworkSourceId )( 
             __RPC__in IContactAggregationContact * This,
             /* [annotation][in] */ 
             _In_  ULONG networkSourceId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationContact, get_NetworkSourceIdString)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_NetworkSourceIdString )( 
             __RPC__in IContactAggregationContact * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  LPWSTR *ppNetworkSourceId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationContact, put_NetworkSourceIdString)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_NetworkSourceIdString )( 
             __RPC__in IContactAggregationContact * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR pNetworkSourceId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationContact, get_RemoteObjectId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RemoteObjectId )( 
             __RPC__in IContactAggregationContact * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  CONTACT_AGGREGATION_BLOB **ppRemoteObjectId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationContact, put_RemoteObjectId)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RemoteObjectId )( 
             __RPC__in IContactAggregationContact * This,
             /* [annotation][in] */ 
             _In_  const CONTACT_AGGREGATION_BLOB *pRemoteObjectId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationContact, get_SyncIdentityHash)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SyncIdentityHash )( 
             __RPC__in IContactAggregationContact * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  CONTACT_AGGREGATION_BLOB **ppSyncIdentityHash);
         
+        DECLSPEC_XFGVIRT(IContactAggregationContact, put_SyncIdentityHash)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_SyncIdentityHash )( 
             __RPC__in IContactAggregationContact * This,
             /* [annotation][in] */ 
@@ -816,6 +863,7 @@ EXTERN_C const IID IID_IContactAggregationContactCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IContactAggregationContactCollection * This,
             /* [annotation][in] */ 
@@ -823,22 +871,27 @@ EXTERN_C const IID IID_IContactAggregationContactCollection;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IContactAggregationContactCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IContactAggregationContactCollection * This);
         
+        DECLSPEC_XFGVIRT(IContactAggregationContactCollection, FindFirst)
         HRESULT ( STDMETHODCALLTYPE *FindFirst )( 
             __RPC__in IContactAggregationContactCollection * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IContactAggregationContact **ppItem);
         
+        DECLSPEC_XFGVIRT(IContactAggregationContactCollection, FindNext)
         HRESULT ( STDMETHODCALLTYPE *FindNext )( 
             __RPC__in IContactAggregationContactCollection * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IContactAggregationContact **ppItem);
         
+        DECLSPEC_XFGVIRT(IContactAggregationContactCollection, FindFirstByIdentityHash)
         HRESULT ( STDMETHODCALLTYPE *FindFirstByIdentityHash )( 
             __RPC__in IContactAggregationContactCollection * This,
             /* [annotation][in] */ 
@@ -850,11 +903,13 @@ EXTERN_C const IID IID_IContactAggregationContactCollection;
             /* [annotation][retval][out] */ 
             _Out_retval_  IContactAggregationContact **ppItem);
         
+        DECLSPEC_XFGVIRT(IContactAggregationContactCollection, get_Count)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IContactAggregationContactCollection * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  int *pCount);
         
+        DECLSPEC_XFGVIRT(IContactAggregationContactCollection, FindFirstByRemoteId)
         HRESULT ( STDMETHODCALLTYPE *FindFirstByRemoteId )( 
             __RPC__in IContactAggregationContactCollection * This,
             /* [annotation][in] */ 
@@ -984,6 +1039,7 @@ EXTERN_C const IID IID_IContactAggregationAggregate;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IContactAggregationAggregate * This,
             /* [annotation][in] */ 
@@ -991,25 +1047,31 @@ EXTERN_C const IID IID_IContactAggregationAggregate;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IContactAggregationAggregate * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IContactAggregationAggregate * This);
         
+        DECLSPEC_XFGVIRT(IContactAggregationAggregate, Save)
         HRESULT ( STDMETHODCALLTYPE *Save )( 
             __RPC__in IContactAggregationAggregate * This);
         
+        DECLSPEC_XFGVIRT(IContactAggregationAggregate, GetComponentItems)
         HRESULT ( STDMETHODCALLTYPE *GetComponentItems )( 
             __RPC__in IContactAggregationAggregate * This,
             /* [annotation][out] */ 
             _Out_  IContactAggregationContactCollection **pComponentItems);
         
+        DECLSPEC_XFGVIRT(IContactAggregationAggregate, Link)
         HRESULT ( STDMETHODCALLTYPE *Link )( 
             __RPC__in IContactAggregationAggregate * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR pAggregateId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationAggregate, get_Groups)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Groups )( 
             __RPC__in IContactAggregationAggregate * This,
             /* [annotation][in] */ 
@@ -1017,26 +1079,31 @@ EXTERN_C const IID IID_IContactAggregationAggregate;
             /* [annotation][out] */ 
             _Out_  IContactAggregationGroupCollection **ppGroups);
         
+        DECLSPEC_XFGVIRT(IContactAggregationAggregate, get_AntiLink)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AntiLink )( 
             __RPC__in IContactAggregationAggregate * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  LPWSTR *ppAntiLink);
         
+        DECLSPEC_XFGVIRT(IContactAggregationAggregate, put_AntiLink)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_AntiLink )( 
             __RPC__in IContactAggregationAggregate * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR pAntiLink);
         
+        DECLSPEC_XFGVIRT(IContactAggregationAggregate, get_FavoriteOrder)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FavoriteOrder )( 
             __RPC__in IContactAggregationAggregate * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  ULONG *pFavoriteOrder);
         
+        DECLSPEC_XFGVIRT(IContactAggregationAggregate, put_FavoriteOrder)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_FavoriteOrder )( 
             __RPC__in IContactAggregationAggregate * This,
             /* [annotation][in] */ 
             _In_  ULONG favoriteOrder);
         
+        DECLSPEC_XFGVIRT(IContactAggregationAggregate, get_Id)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IContactAggregationAggregate * This,
             /* [annotation][retval][out] */ 
@@ -1154,6 +1221,7 @@ EXTERN_C const IID IID_IContactAggregationAggregateCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IContactAggregationAggregateCollection * This,
             /* [annotation][in] */ 
@@ -1161,17 +1229,21 @@ EXTERN_C const IID IID_IContactAggregationAggregateCollection;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IContactAggregationAggregateCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IContactAggregationAggregateCollection * This);
         
+        DECLSPEC_XFGVIRT(IContactAggregationAggregateCollection, FindFirst)
         HRESULT ( STDMETHODCALLTYPE *FindFirst )( 
             __RPC__in IContactAggregationAggregateCollection * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IContactAggregationAggregate **ppAggregate);
         
+        DECLSPEC_XFGVIRT(IContactAggregationAggregateCollection, FindFirstByAntiLinkId)
         HRESULT ( STDMETHODCALLTYPE *FindFirstByAntiLinkId )( 
             __RPC__in IContactAggregationAggregateCollection * This,
             /* [annotation][in] */ 
@@ -1179,11 +1251,13 @@ EXTERN_C const IID IID_IContactAggregationAggregateCollection;
             /* [annotation][retval][out] */ 
             _Out_retval_  IContactAggregationAggregate **ppAggregate);
         
+        DECLSPEC_XFGVIRT(IContactAggregationAggregateCollection, FindNext)
         HRESULT ( STDMETHODCALLTYPE *FindNext )( 
             __RPC__in IContactAggregationAggregateCollection * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IContactAggregationAggregate **ppAggregate);
         
+        DECLSPEC_XFGVIRT(IContactAggregationAggregateCollection, get_Count)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IContactAggregationAggregateCollection * This,
             /* [annotation][retval][out] */ 
@@ -1304,6 +1378,7 @@ EXTERN_C const IID IID_IContactAggregationGroup;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IContactAggregationGroup * This,
             /* [annotation][in] */ 
@@ -1311,53 +1386,65 @@ EXTERN_C const IID IID_IContactAggregationGroup;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IContactAggregationGroup * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IContactAggregationGroup * This);
         
+        DECLSPEC_XFGVIRT(IContactAggregationGroup, Delete)
         HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in IContactAggregationGroup * This);
         
+        DECLSPEC_XFGVIRT(IContactAggregationGroup, Save)
         HRESULT ( STDMETHODCALLTYPE *Save )( 
             __RPC__in IContactAggregationGroup * This);
         
+        DECLSPEC_XFGVIRT(IContactAggregationGroup, Add)
         HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in IContactAggregationGroup * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR pAggregateId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationGroup, Remove)
         HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in IContactAggregationGroup * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR pAggregateId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationGroup, get_Members)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Members )( 
             __RPC__in IContactAggregationGroup * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IContactAggregationAggregateCollection **ppAggregateContactCollection);
         
+        DECLSPEC_XFGVIRT(IContactAggregationGroup, get_GlobalObjectId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_GlobalObjectId )( 
             __RPC__in IContactAggregationGroup * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  GUID *pGlobalObjectId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationGroup, put_GlobalObjectId)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_GlobalObjectId )( 
             __RPC__in IContactAggregationGroup * This,
             /* [annotation][in] */ 
             _In_  const GUID *pGlobalObjectId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationGroup, get_Id)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IContactAggregationGroup * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  LPWSTR *ppItemId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationGroup, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IContactAggregationGroup * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  LPWSTR *ppName);
         
+        DECLSPEC_XFGVIRT(IContactAggregationGroup, put_Name)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IContactAggregationGroup * This,
             /* [annotation][in] */ 
@@ -1478,6 +1565,7 @@ EXTERN_C const IID IID_IContactAggregationGroupCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IContactAggregationGroupCollection * This,
             /* [annotation][in] */ 
@@ -1485,17 +1573,21 @@ EXTERN_C const IID IID_IContactAggregationGroupCollection;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IContactAggregationGroupCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IContactAggregationGroupCollection * This);
         
+        DECLSPEC_XFGVIRT(IContactAggregationGroupCollection, FindFirst)
         HRESULT ( STDMETHODCALLTYPE *FindFirst )( 
             __RPC__in IContactAggregationGroupCollection * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IContactAggregationGroup **ppGroup);
         
+        DECLSPEC_XFGVIRT(IContactAggregationGroupCollection, FindFirstByGlobalObjectId)
         HRESULT ( STDMETHODCALLTYPE *FindFirstByGlobalObjectId )( 
             __RPC__in IContactAggregationGroupCollection * This,
             /* [annotation][in] */ 
@@ -1503,11 +1595,13 @@ EXTERN_C const IID IID_IContactAggregationGroupCollection;
             /* [annotation][retval][out] */ 
             _Out_retval_  IContactAggregationGroup **ppGroup);
         
+        DECLSPEC_XFGVIRT(IContactAggregationGroupCollection, FindNext)
         HRESULT ( STDMETHODCALLTYPE *FindNext )( 
             __RPC__in IContactAggregationGroupCollection * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IContactAggregationGroup **ppGroup);
         
+        DECLSPEC_XFGVIRT(IContactAggregationGroupCollection, get_Count)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IContactAggregationGroupCollection * This,
             /* [annotation][retval][out] */ 
@@ -1656,6 +1750,7 @@ EXTERN_C const IID IID_IContactAggregationLink;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IContactAggregationLink * This,
             /* [annotation][in] */ 
@@ -1663,88 +1758,107 @@ EXTERN_C const IID IID_IContactAggregationLink;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IContactAggregationLink * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IContactAggregationLink * This);
         
+        DECLSPEC_XFGVIRT(IContactAggregationLink, Delete)
         HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in IContactAggregationLink * This);
         
+        DECLSPEC_XFGVIRT(IContactAggregationLink, Save)
         HRESULT ( STDMETHODCALLTYPE *Save )( 
             __RPC__in IContactAggregationLink * This);
         
+        DECLSPEC_XFGVIRT(IContactAggregationLink, get_AccountId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AccountId )( 
             __RPC__in IContactAggregationLink * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  LPWSTR *ppAccountId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationLink, put_AccountId)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_AccountId )( 
             __RPC__in IContactAggregationLink * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR pAccountId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationLink, get_Id)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IContactAggregationLink * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  LPWSTR *ppItemId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationLink, get_IsLinkResolved)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsLinkResolved )( 
             __RPC__in IContactAggregationLink * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BOOL *pIsLinkResolved);
         
+        DECLSPEC_XFGVIRT(IContactAggregationLink, put_IsLinkResolved)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_IsLinkResolved )( 
             __RPC__in IContactAggregationLink * This,
             /* [annotation][in] */ 
             _In_  BOOL isLinkResolved);
         
+        DECLSPEC_XFGVIRT(IContactAggregationLink, get_NetworkSourceIdString)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_NetworkSourceIdString )( 
             __RPC__in IContactAggregationLink * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  LPWSTR *ppNetworkSourceId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationLink, put_NetworkSourceIdString)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_NetworkSourceIdString )( 
             __RPC__in IContactAggregationLink * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR pNetworkSourceId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationLink, get_RemoteObjectId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RemoteObjectId )( 
             __RPC__in IContactAggregationLink * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  CONTACT_AGGREGATION_BLOB **ppRemoteObjectId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationLink, put_RemoteObjectId)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RemoteObjectId )( 
             __RPC__in IContactAggregationLink * This,
             /* [annotation][in] */ 
             _In_  const CONTACT_AGGREGATION_BLOB *pRemoteObjectId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationLink, get_ServerPerson)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ServerPerson )( 
             __RPC__in IContactAggregationLink * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  LPWSTR *ppServerPersonId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationLink, put_ServerPerson)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ServerPerson )( 
             __RPC__in IContactAggregationLink * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR pServerPersonId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationLink, get_ServerPersonBaseline)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ServerPersonBaseline )( 
             __RPC__in IContactAggregationLink * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  LPWSTR *ppServerPersonId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationLink, put_ServerPersonBaseline)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ServerPersonBaseline )( 
             __RPC__in IContactAggregationLink * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR pServerPersonId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationLink, get_SyncIdentityHash)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SyncIdentityHash )( 
             __RPC__in IContactAggregationLink * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  CONTACT_AGGREGATION_BLOB **ppSyncIdentityHash);
         
+        DECLSPEC_XFGVIRT(IContactAggregationLink, put_SyncIdentityHash)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_SyncIdentityHash )( 
             __RPC__in IContactAggregationLink * This,
             /* [annotation][in] */ 
@@ -1890,6 +2004,7 @@ EXTERN_C const IID IID_IContactAggregationLinkCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IContactAggregationLinkCollection * This,
             /* [annotation][in] */ 
@@ -1897,17 +2012,21 @@ EXTERN_C const IID IID_IContactAggregationLinkCollection;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IContactAggregationLinkCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IContactAggregationLinkCollection * This);
         
+        DECLSPEC_XFGVIRT(IContactAggregationLinkCollection, FindFirst)
         HRESULT ( STDMETHODCALLTYPE *FindFirst )( 
             __RPC__in IContactAggregationLinkCollection * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IContactAggregationLink **ppServerContactLink);
         
+        DECLSPEC_XFGVIRT(IContactAggregationLinkCollection, FindFirstByRemoteId)
         HRESULT ( STDMETHODCALLTYPE *FindFirstByRemoteId )( 
             __RPC__in IContactAggregationLinkCollection * This,
             /* [annotation][in] */ 
@@ -1919,11 +2038,13 @@ EXTERN_C const IID IID_IContactAggregationLinkCollection;
             /* [annotation][retval][out] */ 
             _Out_retval_  IContactAggregationLink **ppServerContactLink);
         
+        DECLSPEC_XFGVIRT(IContactAggregationLinkCollection, FindNext)
         HRESULT ( STDMETHODCALLTYPE *FindNext )( 
             __RPC__in IContactAggregationLinkCollection * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IContactAggregationLink **ppServerContactLink);
         
+        DECLSPEC_XFGVIRT(IContactAggregationLinkCollection, get_Count)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IContactAggregationLinkCollection * This,
             /* [annotation][retval][out] */ 
@@ -2096,6 +2217,7 @@ EXTERN_C const IID IID_IContactAggregationServerPerson;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IContactAggregationServerPerson * This,
             /* [annotation][in] */ 
@@ -2103,118 +2225,143 @@ EXTERN_C const IID IID_IContactAggregationServerPerson;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IContactAggregationServerPerson * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IContactAggregationServerPerson * This);
         
+        DECLSPEC_XFGVIRT(IContactAggregationServerPerson, Delete)
         HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in IContactAggregationServerPerson * This);
         
+        DECLSPEC_XFGVIRT(IContactAggregationServerPerson, Save)
         HRESULT ( STDMETHODCALLTYPE *Save )( 
             __RPC__in IContactAggregationServerPerson * This);
         
+        DECLSPEC_XFGVIRT(IContactAggregationServerPerson, get_AggregateId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AggregateId )( 
             __RPC__in IContactAggregationServerPerson * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  LPWSTR *ppAggregateId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationServerPerson, put_AggregateId)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_AggregateId )( 
             __RPC__in IContactAggregationServerPerson * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR pAggregateId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationServerPerson, get_AntiLink)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AntiLink )( 
             __RPC__in IContactAggregationServerPerson * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  LPWSTR *ppAntiLink);
         
+        DECLSPEC_XFGVIRT(IContactAggregationServerPerson, put_AntiLink)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_AntiLink )( 
             __RPC__in IContactAggregationServerPerson * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR pAntiLink);
         
+        DECLSPEC_XFGVIRT(IContactAggregationServerPerson, get_AntiLinkBaseline)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AntiLinkBaseline )( 
             __RPC__in IContactAggregationServerPerson * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  LPWSTR *ppAntiLink);
         
+        DECLSPEC_XFGVIRT(IContactAggregationServerPerson, put_AntiLinkBaseline)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_AntiLinkBaseline )( 
             __RPC__in IContactAggregationServerPerson * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR pAntiLink);
         
+        DECLSPEC_XFGVIRT(IContactAggregationServerPerson, get_FavoriteOrder)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FavoriteOrder )( 
             __RPC__in IContactAggregationServerPerson * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  ULONG *pFavoriteOrder);
         
+        DECLSPEC_XFGVIRT(IContactAggregationServerPerson, put_FavoriteOrder)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_FavoriteOrder )( 
             __RPC__in IContactAggregationServerPerson * This,
             /* [annotation][in] */ 
             _In_  ULONG favoriteOrder);
         
+        DECLSPEC_XFGVIRT(IContactAggregationServerPerson, get_FavoriteOrderBaseline)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FavoriteOrderBaseline )( 
             __RPC__in IContactAggregationServerPerson * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  ULONG *pFavoriteOrder);
         
+        DECLSPEC_XFGVIRT(IContactAggregationServerPerson, put_FavoriteOrderBaseline)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_FavoriteOrderBaseline )( 
             __RPC__in IContactAggregationServerPerson * This,
             /* [annotation][in] */ 
             _In_  ULONG favoriteOrder);
         
+        DECLSPEC_XFGVIRT(IContactAggregationServerPerson, get_Groups)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Groups )( 
             __RPC__in IContactAggregationServerPerson * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  CONTACT_AGGREGATION_BLOB **pGroups);
         
+        DECLSPEC_XFGVIRT(IContactAggregationServerPerson, put_Groups)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Groups )( 
             __RPC__in IContactAggregationServerPerson * This,
             /* [annotation][in] */ 
             _In_  const CONTACT_AGGREGATION_BLOB *pGroups);
         
+        DECLSPEC_XFGVIRT(IContactAggregationServerPerson, get_GroupsBaseline)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_GroupsBaseline )( 
             __RPC__in IContactAggregationServerPerson * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  CONTACT_AGGREGATION_BLOB **ppGroups);
         
+        DECLSPEC_XFGVIRT(IContactAggregationServerPerson, put_GroupsBaseline)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_GroupsBaseline )( 
             __RPC__in IContactAggregationServerPerson * This,
             /* [annotation][in] */ 
             _In_  const CONTACT_AGGREGATION_BLOB *pGroups);
         
+        DECLSPEC_XFGVIRT(IContactAggregationServerPerson, get_Id)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IContactAggregationServerPerson * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  LPWSTR *ppId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationServerPerson, get_IsTombstone)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsTombstone )( 
             __RPC__in IContactAggregationServerPerson * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BOOL *pIsTombstone);
         
+        DECLSPEC_XFGVIRT(IContactAggregationServerPerson, put_IsTombstone)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_IsTombstone )( 
             __RPC__in IContactAggregationServerPerson * This,
             /* [annotation][in] */ 
             _In_  BOOL isTombstone);
         
+        DECLSPEC_XFGVIRT(IContactAggregationServerPerson, get_LinkedAggregateId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LinkedAggregateId )( 
             __RPC__in IContactAggregationServerPerson * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  LPWSTR *ppLinkedAggregateId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationServerPerson, put_LinkedAggregateId)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LinkedAggregateId )( 
             __RPC__in IContactAggregationServerPerson * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR pLinkedAggregateId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationServerPerson, get_ObjectId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ObjectId )( 
             __RPC__in IContactAggregationServerPerson * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  LPWSTR *ppObjectId);
         
+        DECLSPEC_XFGVIRT(IContactAggregationServerPerson, put_ObjectId)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ObjectId )( 
             __RPC__in IContactAggregationServerPerson * This,
             /* [annotation][in] */ 
@@ -2386,6 +2533,7 @@ EXTERN_C const IID IID_IContactAggregationServerPersonCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IContactAggregationServerPersonCollection * This,
             /* [annotation][in] */ 
@@ -2393,17 +2541,21 @@ EXTERN_C const IID IID_IContactAggregationServerPersonCollection;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IContactAggregationServerPersonCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IContactAggregationServerPersonCollection * This);
         
+        DECLSPEC_XFGVIRT(IContactAggregationServerPersonCollection, FindFirst)
         HRESULT ( STDMETHODCALLTYPE *FindFirst )( 
             __RPC__in IContactAggregationServerPersonCollection * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IContactAggregationServerPerson **ppServerPerson);
         
+        DECLSPEC_XFGVIRT(IContactAggregationServerPersonCollection, FindFirstByServerId)
         HRESULT ( STDMETHODCALLTYPE *FindFirstByServerId )( 
             __RPC__in IContactAggregationServerPersonCollection * This,
             /* [annotation][in] */ 
@@ -2411,6 +2563,7 @@ EXTERN_C const IID IID_IContactAggregationServerPersonCollection;
             /* [annotation][retval][out] */ 
             _Out_retval_  IContactAggregationServerPerson **ppServerPerson);
         
+        DECLSPEC_XFGVIRT(IContactAggregationServerPersonCollection, FindFirstByAggregateId)
         HRESULT ( STDMETHODCALLTYPE *FindFirstByAggregateId )( 
             __RPC__in IContactAggregationServerPersonCollection * This,
             /* [annotation][in] */ 
@@ -2418,6 +2571,7 @@ EXTERN_C const IID IID_IContactAggregationServerPersonCollection;
             /* [annotation][retval][out] */ 
             _Out_retval_  IContactAggregationServerPerson **ppServerPerson);
         
+        DECLSPEC_XFGVIRT(IContactAggregationServerPersonCollection, FindFirstByLinkedAggregateId)
         HRESULT ( STDMETHODCALLTYPE *FindFirstByLinkedAggregateId )( 
             __RPC__in IContactAggregationServerPersonCollection * This,
             /* [annotation][in] */ 
@@ -2425,11 +2579,13 @@ EXTERN_C const IID IID_IContactAggregationServerPersonCollection;
             /* [annotation][retval][out] */ 
             _Out_retval_  IContactAggregationServerPerson **ppServerPerson);
         
+        DECLSPEC_XFGVIRT(IContactAggregationServerPersonCollection, FindNext)
         HRESULT ( STDMETHODCALLTYPE *FindNext )( 
             __RPC__in IContactAggregationServerPersonCollection * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IContactAggregationServerPerson **ppServerPerson);
         
+        DECLSPEC_XFGVIRT(IContactAggregationServerPersonCollection, get_Count)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IContactAggregationServerPersonCollection * This,
             /* [annotation][retval][out] */ 

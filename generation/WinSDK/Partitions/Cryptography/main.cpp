@@ -25,3 +25,5 @@ typedef NTSTATUS* PNTSTATUS;
 #include <cryptxml.h>
 #include <cryptdlg.h>
 #include <cryptuiapi.h>
+#include <i_cryptasn1tls.h>
+#include <infocard.h>

@@ -15,3 +15,6 @@
 #include <contentpartner.h>
 #include <subscriptionservices.h>
 #include <wmpdevices.h>
+#include <msfeedsid.h>
+#include <wmpids.h>
+#include <wmsysprf.h>

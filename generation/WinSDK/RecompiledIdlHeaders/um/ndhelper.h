@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -296,6 +304,7 @@ EXTERN_C const IID IID_INetDiagHelper;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INetDiagHelper * This,
             /* [annotation][in] */ 
@@ -303,12 +312,15 @@ EXTERN_C const IID IID_INetDiagHelper;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in INetDiagHelper * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in INetDiagHelper * This);
         
+        DECLSPEC_XFGVIRT(INetDiagHelper, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in INetDiagHelper * This,
             /* [annotation][in] */ 
@@ -316,11 +328,13 @@ EXTERN_C const IID IID_INetDiagHelper;
             /* [annotation][size_is][in] */ 
             _In_reads_(celt)  HELPER_ATTRIBUTE rgAttributes[  ]);
         
+        DECLSPEC_XFGVIRT(INetDiagHelper, GetDiagnosticsInfo)
         HRESULT ( STDMETHODCALLTYPE *GetDiagnosticsInfo )( 
             __RPC__in INetDiagHelper * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  DiagnosticsInfo **ppInfo);
         
+        DECLSPEC_XFGVIRT(INetDiagHelper, GetKeyAttributes)
         HRESULT ( STDMETHODCALLTYPE *GetKeyAttributes )( 
             __RPC__in INetDiagHelper * This,
             /* [annotation][out] */ 
@@ -328,6 +342,7 @@ EXTERN_C const IID IID_INetDiagHelper;
             /* [annotation][size_is][size_is][out] */ 
             _Out_writes_(*pcelt)  HELPER_ATTRIBUTE **pprgAttributes);
         
+        DECLSPEC_XFGVIRT(INetDiagHelper, LowHealth)
         HRESULT ( STDMETHODCALLTYPE *LowHealth )( 
             __RPC__in INetDiagHelper * This,
             /* [annotation][unique][string][in] */ 
@@ -339,6 +354,7 @@ EXTERN_C const IID IID_INetDiagHelper;
             /* [annotation][out] */ 
             _Out_  DIAGNOSIS_STATUS *pStatus);
         
+        DECLSPEC_XFGVIRT(INetDiagHelper, HighUtilization)
         HRESULT ( STDMETHODCALLTYPE *HighUtilization )( 
             __RPC__in INetDiagHelper * This,
             /* [annotation][unique][string][in] */ 
@@ -350,6 +366,7 @@ EXTERN_C const IID IID_INetDiagHelper;
             /* [annotation][out] */ 
             _Out_  DIAGNOSIS_STATUS *pStatus);
         
+        DECLSPEC_XFGVIRT(INetDiagHelper, GetLowerHypotheses)
         HRESULT ( STDMETHODCALLTYPE *GetLowerHypotheses )( 
             __RPC__in INetDiagHelper * This,
             /* [annotation][out] */ 
@@ -357,6 +374,7 @@ EXTERN_C const IID IID_INetDiagHelper;
             /* [annotation][size_is][size_is][out] */ 
             _Out_writes_(*pcelt)  HYPOTHESIS **pprgHypotheses);
         
+        DECLSPEC_XFGVIRT(INetDiagHelper, GetDownStreamHypotheses)
         HRESULT ( STDMETHODCALLTYPE *GetDownStreamHypotheses )( 
             __RPC__in INetDiagHelper * This,
             /* [annotation][out] */ 
@@ -364,6 +382,7 @@ EXTERN_C const IID IID_INetDiagHelper;
             /* [annotation][size_is][size_is][out] */ 
             _Out_writes_(*pcelt)  HYPOTHESIS **pprgHypotheses);
         
+        DECLSPEC_XFGVIRT(INetDiagHelper, GetHigherHypotheses)
         HRESULT ( STDMETHODCALLTYPE *GetHigherHypotheses )( 
             __RPC__in INetDiagHelper * This,
             /* [annotation][out] */ 
@@ -371,6 +390,7 @@ EXTERN_C const IID IID_INetDiagHelper;
             /* [annotation][size_is][size_is][out] */ 
             _Out_writes_(*pcelt)  HYPOTHESIS **pprgHypotheses);
         
+        DECLSPEC_XFGVIRT(INetDiagHelper, GetUpStreamHypotheses)
         HRESULT ( STDMETHODCALLTYPE *GetUpStreamHypotheses )( 
             __RPC__in INetDiagHelper * This,
             /* [annotation][out] */ 
@@ -378,6 +398,7 @@ EXTERN_C const IID IID_INetDiagHelper;
             /* [annotation][size_is][size_is][out] */ 
             _Out_writes_(*pcelt)  HYPOTHESIS **pprgHypotheses);
         
+        DECLSPEC_XFGVIRT(INetDiagHelper, Repair)
         HRESULT ( STDMETHODCALLTYPE *Repair )( 
             __RPC__in INetDiagHelper * This,
             /* [annotation][in] */ 
@@ -387,6 +408,7 @@ EXTERN_C const IID IID_INetDiagHelper;
             /* [annotation][out] */ 
             _Out_  REPAIR_STATUS *pStatus);
         
+        DECLSPEC_XFGVIRT(INetDiagHelper, Validate)
         HRESULT ( STDMETHODCALLTYPE *Validate )( 
             __RPC__in INetDiagHelper * This,
             /* [annotation][in] */ 
@@ -396,6 +418,7 @@ EXTERN_C const IID IID_INetDiagHelper;
             /* [annotation][out] */ 
             _Out_  REPAIR_STATUS *pStatus);
         
+        DECLSPEC_XFGVIRT(INetDiagHelper, GetRepairInfo)
         HRESULT ( STDMETHODCALLTYPE *GetRepairInfo )( 
             __RPC__in INetDiagHelper * This,
             /* [annotation][in] */ 
@@ -405,21 +428,25 @@ EXTERN_C const IID IID_INetDiagHelper;
             /* [annotation][size_is][size_is][out] */ 
             _Out_writes_(*pcelt)  RepairInfo **ppInfo);
         
+        DECLSPEC_XFGVIRT(INetDiagHelper, GetLifeTime)
         HRESULT ( STDMETHODCALLTYPE *GetLifeTime )( 
             __RPC__in INetDiagHelper * This,
             /* [annotation][out] */ 
             _Out_  LIFE_TIME *pLifeTime);
         
+        DECLSPEC_XFGVIRT(INetDiagHelper, SetLifeTime)
         HRESULT ( STDMETHODCALLTYPE *SetLifeTime )( 
             __RPC__in INetDiagHelper * This,
             /* [annotation][in] */ 
             _In_  LIFE_TIME lifeTime);
         
+        DECLSPEC_XFGVIRT(INetDiagHelper, GetCacheTime)
         HRESULT ( STDMETHODCALLTYPE *GetCacheTime )( 
             __RPC__in INetDiagHelper * This,
             /* [annotation][out] */ 
             _Out_  FILETIME *pCacheTime);
         
+        DECLSPEC_XFGVIRT(INetDiagHelper, GetAttributes)
         HRESULT ( STDMETHODCALLTYPE *GetAttributes )( 
             __RPC__in INetDiagHelper * This,
             /* [annotation][out] */ 
@@ -427,9 +454,11 @@ EXTERN_C const IID IID_INetDiagHelper;
             /* [annotation][size_is][size_is][out] */ 
             _Out_writes_(*pcelt)  HELPER_ATTRIBUTE **pprgAttributes);
         
+        DECLSPEC_XFGVIRT(INetDiagHelper, Cancel)
         HRESULT ( STDMETHODCALLTYPE *Cancel )( 
             __RPC__in INetDiagHelper * This);
         
+        DECLSPEC_XFGVIRT(INetDiagHelper, Cleanup)
         HRESULT ( STDMETHODCALLTYPE *Cleanup )( 
             __RPC__in INetDiagHelper * This);
         
@@ -565,6 +594,7 @@ EXTERN_C const IID IID_INetDiagHelperUtilFactory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INetDiagHelperUtilFactory * This,
             /* [annotation][in] */ 
@@ -572,12 +602,15 @@ EXTERN_C const IID IID_INetDiagHelperUtilFactory;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in INetDiagHelperUtilFactory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in INetDiagHelperUtilFactory * This);
         
+        DECLSPEC_XFGVIRT(INetDiagHelperUtilFactory, CreateUtilityInstance)
         HRESULT ( STDMETHODCALLTYPE *CreateUtilityInstance )( 
             __RPC__in INetDiagHelperUtilFactory * This,
             /* [annotation][in] */ 
@@ -662,6 +695,7 @@ EXTERN_C const IID IID_INetDiagHelperEx;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INetDiagHelperEx * This,
             /* [annotation][in] */ 
@@ -669,12 +703,15 @@ EXTERN_C const IID IID_INetDiagHelperEx;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in INetDiagHelperEx * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in INetDiagHelperEx * This);
         
+        DECLSPEC_XFGVIRT(INetDiagHelperEx, ReconfirmLowHealth)
         HRESULT ( STDMETHODCALLTYPE *ReconfirmLowHealth )( 
             __RPC__in INetDiagHelperEx * This,
             /* [annotation][in] */ 
@@ -686,11 +723,13 @@ EXTERN_C const IID IID_INetDiagHelperEx;
             /* [annotation][out] */ 
             _Out_  DIAGNOSIS_STATUS *pUpdatedStatus);
         
+        DECLSPEC_XFGVIRT(INetDiagHelperEx, SetUtilities)
         HRESULT ( STDMETHODCALLTYPE *SetUtilities )( 
             __RPC__in INetDiagHelperEx * This,
             /* [annotation][in] */ 
             _In_  INetDiagHelperUtilFactory *pUtilities);
         
+        DECLSPEC_XFGVIRT(INetDiagHelperEx, ReproduceFailure)
         HRESULT ( STDMETHODCALLTYPE *ReproduceFailure )( 
             __RPC__in INetDiagHelperEx * This);
         
@@ -767,6 +806,7 @@ EXTERN_C const IID IID_INetDiagHelperInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INetDiagHelperInfo * This,
             /* [annotation][in] */ 
@@ -774,12 +814,15 @@ EXTERN_C const IID IID_INetDiagHelperInfo;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in INetDiagHelperInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in INetDiagHelperInfo * This);
         
+        DECLSPEC_XFGVIRT(INetDiagHelperInfo, GetAttributeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetAttributeInfo )( 
             __RPC__in INetDiagHelperInfo * This,
             /* [annotation][out] */ 
@@ -858,6 +901,7 @@ EXTERN_C const IID IID_INetDiagExtensibleHelper;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INetDiagExtensibleHelper * This,
             /* [annotation][in] */ 
@@ -865,12 +909,15 @@ EXTERN_C const IID IID_INetDiagExtensibleHelper;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in INetDiagExtensibleHelper * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in INetDiagExtensibleHelper * This);
         
+        DECLSPEC_XFGVIRT(INetDiagExtensibleHelper, ResolveAttributes)
         HRESULT ( STDMETHODCALLTYPE *ResolveAttributes )( 
             __RPC__in INetDiagExtensibleHelper * This,
             /* [annotation][in] */ 

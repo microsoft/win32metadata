@@ -1,5 +1,3 @@
-$defaultWinSDKNugetVersion = "10.0.19041.5"
-
 $rootDir = [System.IO.Path]::GetFullPath("$PSScriptRoot\..")
 $toolsDir = "$rootDir\tools"
 $binDir = "$rootDir\bin"
@@ -12,7 +10,10 @@ $metadataToolsBin = "$binDir\release\net5.0"
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
-$PSDefaultParameterValues['*:ErrorAction']='Stop'
+
+# This messes up parallel loops
+#$PSDefaultParameterValues['*:ErrorAction']='Stop'
+
 function ThrowOnNativeProcessError
 {
     if (-not $?)
@@ -147,23 +148,6 @@ function Invoke-RecompileMidlHeaders
             return
         }
 
-        Create-Directory $recompiledIdlHeadersDir
-
-        $cppPkgPath = Get-WinSdkCppPkgPath
-        $sdkIncludeDir = (Get-ChildItem -Path "$cppPkgPath\c\include").FullName
-
-        Write-Output "Copying headers from Win SDK...$sdkIncludeDir to $recompiledIdlHeadersDir"
-        copy-item -Path "$sdkIncludeDir\um" -destination "$recompiledIdlHeadersDir" -recurse
-        copy-item -Path "$sdkIncludeDir\shared" -destination "$recompiledIdlHeadersDir" -recurse
-        copy-item -Path "$sdkIncludeDir\winrt" -destination "$recompiledIdlHeadersDir" -recurse
-
-        Write-Output "Recompiling midl headers with SAL annotations in $recompiledIdlHeadersDir"
-
-        $version = $defaultWinSDKNugetVersion
-        $sdkParts = $version.Split('.')
-        $sdkVersion = "$($sdkParts[0]).$($sdkParts[1]).$($sdkParts[2]).0"
-
-        $sdkBinDir = "$cppPkgPath\c\bin\$sdkVersion\x86"
         & $PSScriptRoot\RecompileIdlFilesForScraping.ps1 -sdkBinDir $sdkBinDir -includeDir $recompiledIdlHeadersDir
 
         Write-Output "Compressing headers to $zipFile..."

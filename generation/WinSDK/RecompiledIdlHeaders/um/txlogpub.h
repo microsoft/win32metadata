@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -193,6 +201,7 @@ EXTERN_C const IID IID_ILog;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ILog * This,
             /* [annotation][in] */ 
@@ -200,17 +209,21 @@ EXTERN_C const IID IID_ILog;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ILog * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ILog * This);
         
+        DECLSPEC_XFGVIRT(ILog, Force)
         HRESULT ( STDMETHODCALLTYPE *Force )( 
             __RPC__in ILog * This,
             /* [annotation][in] */ 
             _In_  LSN lsnMinToForce);
         
+        DECLSPEC_XFGVIRT(ILog, AppendRecord)
         HRESULT ( STDMETHODCALLTYPE *AppendRecord )( 
             __RPC__in ILog * This,
             /* [annotation][size_is][in] */ 
@@ -222,6 +235,7 @@ EXTERN_C const IID IID_ILog;
             /* [annotation][unique][in][out] */ 
             _Inout_  LSN *plsn);
         
+        DECLSPEC_XFGVIRT(ILog, ReadRecord)
         HRESULT ( STDMETHODCALLTYPE *ReadRecord )( 
             __RPC__in ILog * This,
             /* [annotation][in] */ 
@@ -235,6 +249,7 @@ EXTERN_C const IID IID_ILog;
             /* [annotation][out] */ 
             _Out_  ULONG *pcbData);
         
+        DECLSPEC_XFGVIRT(ILog, ReadRecordPrefix)
         HRESULT ( STDMETHODCALLTYPE *ReadRecordPrefix )( 
             __RPC__in ILog * This,
             /* [annotation][in] */ 
@@ -250,6 +265,7 @@ EXTERN_C const IID IID_ILog;
             /* [annotation][out] */ 
             _Out_  ULONG *pcbRecord);
         
+        DECLSPEC_XFGVIRT(ILog, GetLogLimits)
         HRESULT ( STDMETHODCALLTYPE *GetLogLimits )( 
             __RPC__in ILog * This,
             /* [annotation][unique][in][out] */ 
@@ -257,11 +273,13 @@ EXTERN_C const IID IID_ILog;
             /* [annotation][unique][in][out] */ 
             _Inout_  LSN *plsnLast);
         
+        DECLSPEC_XFGVIRT(ILog, TruncatePrefix)
         HRESULT ( STDMETHODCALLTYPE *TruncatePrefix )( 
             __RPC__in ILog * This,
             /* [annotation][in] */ 
             _In_  LSN lsnFirstToKeep);
         
+        DECLSPEC_XFGVIRT(ILog, SetAccessPolicyHint)
         HRESULT ( STDMETHODCALLTYPE *SetAccessPolicyHint )( 
             __RPC__in ILog * This,
             /* [annotation][in] */ 
@@ -367,6 +385,7 @@ EXTERN_C const IID IID_IFileBasedLogInit;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFileBasedLogInit * This,
             /* [annotation][in] */ 
@@ -374,12 +393,15 @@ EXTERN_C const IID IID_IFileBasedLogInit;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFileBasedLogInit * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFileBasedLogInit * This);
         
+        DECLSPEC_XFGVIRT(IFileBasedLogInit, InitNew)
         HRESULT ( STDMETHODCALLTYPE *InitNew )( 
             __RPC__in IFileBasedLogInit * This,
             /* [annotation][in] */ 

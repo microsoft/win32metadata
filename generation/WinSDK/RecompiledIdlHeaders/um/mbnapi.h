@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -742,6 +750,7 @@ EXTERN_C const IID IID_IDummyMBNUCMExt;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDummyMBNUCMExt * This,
             /* [annotation][in] */ 
@@ -749,17 +758,21 @@ EXTERN_C const IID IID_IDummyMBNUCMExt;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDummyMBNUCMExt * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDummyMBNUCMExt * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDummyMBNUCMExt * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDummyMBNUCMExt * This,
             /* [annotation][in] */ 
@@ -769,6 +782,7 @@ EXTERN_C const IID IID_IDummyMBNUCMExt;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDummyMBNUCMExt * This,
             /* [annotation][in] */ 
@@ -781,6 +795,7 @@ EXTERN_C const IID IID_IDummyMBNUCMExt;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IDummyMBNUCMExt * This,
             /* [annotation][in] */ 
@@ -1355,6 +1370,7 @@ EXTERN_C const IID IID_IMbnConnection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnConnection * This,
             /* [annotation][in] */ 
@@ -1362,20 +1378,25 @@ EXTERN_C const IID IID_IMbnConnection;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnConnection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnConnection * This);
         
+        DECLSPEC_XFGVIRT(IMbnConnection, get_ConnectionID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConnectionID )( 
             __RPC__in IMbnConnection * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *ConnectionID);
         
+        DECLSPEC_XFGVIRT(IMbnConnection, get_InterfaceID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InterfaceID )( 
             __RPC__in IMbnConnection * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *InterfaceID);
         
+        DECLSPEC_XFGVIRT(IMbnConnection, Connect)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Connect )( 
             __RPC__in IMbnConnection * This,
             /* [annotation][in] */ 
@@ -1385,20 +1406,24 @@ EXTERN_C const IID IID_IMbnConnection;
             /* [annotation][out] */ 
             _Out_  ULONG *requestID);
         
+        DECLSPEC_XFGVIRT(IMbnConnection, Disconnect)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Disconnect )( 
             __RPC__in IMbnConnection * This,
             /* [annotation][out] */ 
             _Out_  ULONG *requestID);
         
+        DECLSPEC_XFGVIRT(IMbnConnection, GetConnectionState)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetConnectionState )( 
             __RPC__in IMbnConnection * This,
             /* [ref][out] */ __RPC__out MBN_ACTIVATION_STATE *ConnectionState,
             /* [ref][out] */ __RPC__deref_out_opt BSTR *ProfileName);
         
+        DECLSPEC_XFGVIRT(IMbnConnection, GetVoiceCallState)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetVoiceCallState )( 
             __RPC__in IMbnConnection * This,
             /* [retval][ref][out] */ __RPC__out MBN_VOICE_CALL_STATE *voiceCallState);
         
+        DECLSPEC_XFGVIRT(IMbnConnection, GetActivationNetworkError)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetActivationNetworkError )( 
             __RPC__in IMbnConnection * This,
             /* [retval][ref][out] */ __RPC__out ULONG *networkError);
@@ -1506,6 +1531,7 @@ EXTERN_C const IID IID_IMbnConnectionEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnConnectionEvents * This,
             /* [annotation][in] */ 
@@ -1513,12 +1539,15 @@ EXTERN_C const IID IID_IMbnConnectionEvents;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnConnectionEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnConnectionEvents * This);
         
+        DECLSPEC_XFGVIRT(IMbnConnectionEvents, OnConnectComplete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnConnectComplete )( 
             __RPC__in IMbnConnectionEvents * This,
             /* [annotation][in] */ 
@@ -1528,6 +1557,7 @@ EXTERN_C const IID IID_IMbnConnectionEvents;
             /* [annotation][in] */ 
             _In_  HRESULT status);
         
+        DECLSPEC_XFGVIRT(IMbnConnectionEvents, OnDisconnectComplete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnDisconnectComplete )( 
             __RPC__in IMbnConnectionEvents * This,
             /* [annotation][in] */ 
@@ -1537,11 +1567,13 @@ EXTERN_C const IID IID_IMbnConnectionEvents;
             /* [annotation][in] */ 
             _In_  HRESULT status);
         
+        DECLSPEC_XFGVIRT(IMbnConnectionEvents, OnConnectStateChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnConnectStateChange )( 
             __RPC__in IMbnConnectionEvents * This,
             /* [annotation][in] */ 
             _In_  IMbnConnection *newConnection);
         
+        DECLSPEC_XFGVIRT(IMbnConnectionEvents, OnVoiceCallStateChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnVoiceCallStateChange )( 
             __RPC__in IMbnConnectionEvents * This,
             /* [annotation][in] */ 
@@ -1659,6 +1691,7 @@ EXTERN_C const IID IID_IMbnInterface;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnInterface * This,
             /* [annotation][in] */ 
@@ -1666,41 +1699,51 @@ EXTERN_C const IID IID_IMbnInterface;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnInterface * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnInterface * This);
         
+        DECLSPEC_XFGVIRT(IMbnInterface, get_InterfaceID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InterfaceID )( 
             __RPC__in IMbnInterface * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *InterfaceID);
         
+        DECLSPEC_XFGVIRT(IMbnInterface, GetInterfaceCapability)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetInterfaceCapability )( 
             __RPC__in IMbnInterface * This,
             /* [retval][ref][out] */ __RPC__out MBN_INTERFACE_CAPS *interfaceCaps);
         
+        DECLSPEC_XFGVIRT(IMbnInterface, GetSubscriberInformation)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetSubscriberInformation )( 
             __RPC__in IMbnInterface * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IMbnSubscriberInformation **subscriberInformation);
         
+        DECLSPEC_XFGVIRT(IMbnInterface, GetReadyState)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetReadyState )( 
             __RPC__in IMbnInterface * This,
             /* [retval][ref][out] */ __RPC__out MBN_READY_STATE *readyState);
         
+        DECLSPEC_XFGVIRT(IMbnInterface, InEmergencyMode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InEmergencyMode )( 
             __RPC__in IMbnInterface * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *emergencyMode);
         
+        DECLSPEC_XFGVIRT(IMbnInterface, GetHomeProvider)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetHomeProvider )( 
             __RPC__in IMbnInterface * This,
             /* [retval][ref][out] */ __RPC__out MBN_PROVIDER *homeProvider);
         
+        DECLSPEC_XFGVIRT(IMbnInterface, GetPreferredProviders)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetPreferredProviders )( 
             __RPC__in IMbnInterface * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *preferredProviders);
         
+        DECLSPEC_XFGVIRT(IMbnInterface, SetPreferredProviders)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetPreferredProviders )( 
             __RPC__in IMbnInterface * This,
             /* [annotation][in] */ 
@@ -1708,6 +1751,7 @@ EXTERN_C const IID IID_IMbnInterface;
             /* [annotation][out] */ 
             _Out_  ULONG *requestID);
         
+        DECLSPEC_XFGVIRT(IMbnInterface, GetVisibleProviders)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetVisibleProviders )( 
             __RPC__in IMbnInterface * This,
             /* [annotation][out] */ 
@@ -1715,11 +1759,13 @@ EXTERN_C const IID IID_IMbnInterface;
             /* [annotation][retval][out] */ 
             _Out_retval_  SAFEARRAY * *visibleProviders);
         
+        DECLSPEC_XFGVIRT(IMbnInterface, ScanNetwork)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ScanNetwork )( 
             __RPC__in IMbnInterface * This,
             /* [annotation][out] */ 
             _Out_  ULONG *requestID);
         
+        DECLSPEC_XFGVIRT(IMbnInterface, GetConnection)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetConnection )( 
             __RPC__in IMbnInterface * This,
             /* [annotation][retval][out] */ 
@@ -1856,6 +1902,7 @@ EXTERN_C const IID IID_IMbnInterfaceEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnInterfaceEvents * This,
             /* [annotation][in] */ 
@@ -1863,42 +1910,51 @@ EXTERN_C const IID IID_IMbnInterfaceEvents;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnInterfaceEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnInterfaceEvents * This);
         
+        DECLSPEC_XFGVIRT(IMbnInterfaceEvents, OnInterfaceCapabilityAvailable)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnInterfaceCapabilityAvailable )( 
             __RPC__in IMbnInterfaceEvents * This,
             /* [annotation][in] */ 
             _In_  IMbnInterface *newInterface);
         
+        DECLSPEC_XFGVIRT(IMbnInterfaceEvents, OnSubscriberInformationChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnSubscriberInformationChange )( 
             __RPC__in IMbnInterfaceEvents * This,
             /* [annotation][in] */ 
             _In_  IMbnInterface *newInterface);
         
+        DECLSPEC_XFGVIRT(IMbnInterfaceEvents, OnReadyStateChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnReadyStateChange )( 
             __RPC__in IMbnInterfaceEvents * This,
             /* [annotation][in] */ 
             _In_  IMbnInterface *newInterface);
         
+        DECLSPEC_XFGVIRT(IMbnInterfaceEvents, OnEmergencyModeChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnEmergencyModeChange )( 
             __RPC__in IMbnInterfaceEvents * This,
             /* [annotation][in] */ 
             _In_  IMbnInterface *newInterface);
         
+        DECLSPEC_XFGVIRT(IMbnInterfaceEvents, OnHomeProviderAvailable)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnHomeProviderAvailable )( 
             __RPC__in IMbnInterfaceEvents * This,
             /* [annotation][in] */ 
             _In_  IMbnInterface *newInterface);
         
+        DECLSPEC_XFGVIRT(IMbnInterfaceEvents, OnPreferredProvidersChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnPreferredProvidersChange )( 
             __RPC__in IMbnInterfaceEvents * This,
             /* [annotation][in] */ 
             _In_  IMbnInterface *newInterface);
         
+        DECLSPEC_XFGVIRT(IMbnInterfaceEvents, OnSetPreferredProvidersComplete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnSetPreferredProvidersComplete )( 
             __RPC__in IMbnInterfaceEvents * This,
             /* [annotation][in] */ 
@@ -1908,6 +1964,7 @@ EXTERN_C const IID IID_IMbnInterfaceEvents;
             /* [annotation][in] */ 
             _In_  HRESULT status);
         
+        DECLSPEC_XFGVIRT(IMbnInterfaceEvents, OnScanNetworkComplete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnScanNetworkComplete )( 
             __RPC__in IMbnInterfaceEvents * This,
             /* [annotation][in] */ 
@@ -2007,6 +2064,7 @@ EXTERN_C const IID IID_IMbnInterfaceManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnInterfaceManager * This,
             /* [annotation][in] */ 
@@ -2014,18 +2072,22 @@ EXTERN_C const IID IID_IMbnInterfaceManager;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnInterfaceManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnInterfaceManager * This);
         
+        DECLSPEC_XFGVIRT(IMbnInterfaceManager, GetInterface)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetInterface )( 
             __RPC__in IMbnInterfaceManager * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR interfaceID,
             /* [retval][ref][out] */ __RPC__deref_out_opt IMbnInterface **mbnInterface);
         
+        DECLSPEC_XFGVIRT(IMbnInterfaceManager, GetInterfaces)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetInterfaces )( 
             __RPC__in IMbnInterfaceManager * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *mbnInterfaces);
@@ -2102,6 +2164,7 @@ EXTERN_C const IID IID_IMbnInterfaceManagerEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnInterfaceManagerEvents * This,
             /* [annotation][in] */ 
@@ -2109,17 +2172,21 @@ EXTERN_C const IID IID_IMbnInterfaceManagerEvents;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnInterfaceManagerEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnInterfaceManagerEvents * This);
         
+        DECLSPEC_XFGVIRT(IMbnInterfaceManagerEvents, OnInterfaceArrival)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnInterfaceArrival )( 
             __RPC__in IMbnInterfaceManagerEvents * This,
             /* [annotation][in] */ 
             _In_  IMbnInterface *newInterface);
         
+        DECLSPEC_XFGVIRT(IMbnInterfaceManagerEvents, OnInterfaceRemoval)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnInterfaceRemoval )( 
             __RPC__in IMbnInterfaceManagerEvents * This,
             /* [annotation][in] */ 
@@ -2226,6 +2293,7 @@ EXTERN_C const IID IID_IMbnRegistration;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnRegistration * This,
             /* [annotation][in] */ 
@@ -2233,48 +2301,60 @@ EXTERN_C const IID IID_IMbnRegistration;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnRegistration * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnRegistration * This);
         
+        DECLSPEC_XFGVIRT(IMbnRegistration, GetRegisterState)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetRegisterState )( 
             __RPC__in IMbnRegistration * This,
             /* [retval][ref][out] */ __RPC__out MBN_REGISTER_STATE *registerState);
         
+        DECLSPEC_XFGVIRT(IMbnRegistration, GetRegisterMode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetRegisterMode )( 
             __RPC__in IMbnRegistration * This,
             /* [retval][ref][out] */ __RPC__out MBN_REGISTER_MODE *registerMode);
         
+        DECLSPEC_XFGVIRT(IMbnRegistration, GetProviderID)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetProviderID )( 
             __RPC__in IMbnRegistration * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *providerID);
         
+        DECLSPEC_XFGVIRT(IMbnRegistration, GetProviderName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetProviderName )( 
             __RPC__in IMbnRegistration * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *providerName);
         
+        DECLSPEC_XFGVIRT(IMbnRegistration, GetRoamingText)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetRoamingText )( 
             __RPC__in IMbnRegistration * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *roamingText);
         
+        DECLSPEC_XFGVIRT(IMbnRegistration, GetAvailableDataClasses)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetAvailableDataClasses )( 
             __RPC__in IMbnRegistration * This,
             /* [retval][ref][out] */ __RPC__out ULONG *availableDataClasses);
         
+        DECLSPEC_XFGVIRT(IMbnRegistration, GetCurrentDataClass)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetCurrentDataClass )( 
             __RPC__in IMbnRegistration * This,
             /* [retval][ref][out] */ __RPC__out ULONG *currentDataClass);
         
+        DECLSPEC_XFGVIRT(IMbnRegistration, GetRegistrationNetworkError)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetRegistrationNetworkError )( 
             __RPC__in IMbnRegistration * This,
             /* [retval][ref][out] */ __RPC__out ULONG *registrationNetworkError);
         
+        DECLSPEC_XFGVIRT(IMbnRegistration, GetPacketAttachNetworkError)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetPacketAttachNetworkError )( 
             __RPC__in IMbnRegistration * This,
             /* [retval][ref][out] */ __RPC__out ULONG *packetAttachNetworkError);
         
+        DECLSPEC_XFGVIRT(IMbnRegistration, SetRegisterMode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetRegisterMode )( 
             __RPC__in IMbnRegistration * This,
             /* [annotation][in] */ 
@@ -2394,6 +2474,7 @@ EXTERN_C const IID IID_IMbnRegistrationEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnRegistrationEvents * This,
             /* [annotation][in] */ 
@@ -2401,27 +2482,33 @@ EXTERN_C const IID IID_IMbnRegistrationEvents;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnRegistrationEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnRegistrationEvents * This);
         
+        DECLSPEC_XFGVIRT(IMbnRegistrationEvents, OnRegisterModeAvailable)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnRegisterModeAvailable )( 
             __RPC__in IMbnRegistrationEvents * This,
             /* [annotation][in] */ 
             _In_  IMbnRegistration *newInterface);
         
+        DECLSPEC_XFGVIRT(IMbnRegistrationEvents, OnRegisterStateChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnRegisterStateChange )( 
             __RPC__in IMbnRegistrationEvents * This,
             /* [annotation][in] */ 
             _In_  IMbnRegistration *newInterface);
         
+        DECLSPEC_XFGVIRT(IMbnRegistrationEvents, OnPacketServiceStateChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnPacketServiceStateChange )( 
             __RPC__in IMbnRegistrationEvents * This,
             /* [annotation][in] */ 
             _In_  IMbnRegistration *newInterface);
         
+        DECLSPEC_XFGVIRT(IMbnRegistrationEvents, OnSetRegisterModeComplete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnSetRegisterModeComplete )( 
             __RPC__in IMbnRegistrationEvents * This,
             /* [annotation][in] */ 
@@ -2509,6 +2596,7 @@ EXTERN_C const IID IID_IMbnConnectionManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnConnectionManager * This,
             /* [annotation][in] */ 
@@ -2516,18 +2604,22 @@ EXTERN_C const IID IID_IMbnConnectionManager;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnConnectionManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnConnectionManager * This);
         
+        DECLSPEC_XFGVIRT(IMbnConnectionManager, GetConnection)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetConnection )( 
             __RPC__in IMbnConnectionManager * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR connectionID,
             /* [retval][ref][out] */ __RPC__deref_out_opt IMbnConnection **mbnConnection);
         
+        DECLSPEC_XFGVIRT(IMbnConnectionManager, GetConnections)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetConnections )( 
             __RPC__in IMbnConnectionManager * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *mbnConnections);
@@ -2604,6 +2696,7 @@ EXTERN_C const IID IID_IMbnConnectionManagerEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnConnectionManagerEvents * This,
             /* [annotation][in] */ 
@@ -2611,17 +2704,21 @@ EXTERN_C const IID IID_IMbnConnectionManagerEvents;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnConnectionManagerEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnConnectionManagerEvents * This);
         
+        DECLSPEC_XFGVIRT(IMbnConnectionManagerEvents, OnConnectionArrival)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnConnectionArrival )( 
             __RPC__in IMbnConnectionManagerEvents * This,
             /* [annotation][in] */ 
             _In_  IMbnConnection *newConnection);
         
+        DECLSPEC_XFGVIRT(IMbnConnectionManagerEvents, OnConnectionRemoval)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnConnectionRemoval )( 
             __RPC__in IMbnConnectionManagerEvents * This,
             /* [annotation][in] */ 
@@ -2703,6 +2800,7 @@ EXTERN_C const IID IID_IMbnPinManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnPinManager * This,
             /* [annotation][in] */ 
@@ -2710,22 +2808,27 @@ EXTERN_C const IID IID_IMbnPinManager;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnPinManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnPinManager * This);
         
+        DECLSPEC_XFGVIRT(IMbnPinManager, GetPinList)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetPinList )( 
             __RPC__in IMbnPinManager * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *pinList);
         
+        DECLSPEC_XFGVIRT(IMbnPinManager, GetPin)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetPin )( 
             __RPC__in IMbnPinManager * This,
             /* [annotation][in] */ 
             _In_  MBN_PIN_TYPE pinType,
             /* [retval][ref][out] */ __RPC__deref_out_opt IMbnPin **pin);
         
+        DECLSPEC_XFGVIRT(IMbnPinManager, GetPinState)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetPinState )( 
             __RPC__in IMbnPinManager * This,
             /* [annotation][out] */ 
@@ -2812,6 +2915,7 @@ EXTERN_C const IID IID_IMbnPinManagerEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnPinManagerEvents * This,
             /* [annotation][in] */ 
@@ -2819,17 +2923,21 @@ EXTERN_C const IID IID_IMbnPinManagerEvents;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnPinManagerEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnPinManagerEvents * This);
         
+        DECLSPEC_XFGVIRT(IMbnPinManagerEvents, OnPinListAvailable)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnPinListAvailable )( 
             __RPC__in IMbnPinManagerEvents * This,
             /* [annotation][in] */ 
             _In_  IMbnPinManager *pinManager);
         
+        DECLSPEC_XFGVIRT(IMbnPinManagerEvents, OnGetPinStateComplete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnGetPinStateComplete )( 
             __RPC__in IMbnPinManagerEvents * This,
             /* [annotation][in] */ 
@@ -2950,6 +3058,7 @@ EXTERN_C const IID IID_IMbnPinEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnPinEvents * This,
             /* [annotation][in] */ 
@@ -2957,12 +3066,15 @@ EXTERN_C const IID IID_IMbnPinEvents;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnPinEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnPinEvents * This);
         
+        DECLSPEC_XFGVIRT(IMbnPinEvents, OnEnableComplete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnEnableComplete )( 
             __RPC__in IMbnPinEvents * This,
             /* [annotation][in] */ 
@@ -2973,6 +3085,7 @@ EXTERN_C const IID IID_IMbnPinEvents;
             /* [annotation][in] */ 
             _In_  HRESULT status);
         
+        DECLSPEC_XFGVIRT(IMbnPinEvents, OnDisableComplete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnDisableComplete )( 
             __RPC__in IMbnPinEvents * This,
             /* [annotation][in] */ 
@@ -2983,6 +3096,7 @@ EXTERN_C const IID IID_IMbnPinEvents;
             /* [annotation][in] */ 
             _In_  HRESULT status);
         
+        DECLSPEC_XFGVIRT(IMbnPinEvents, OnEnterComplete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnEnterComplete )( 
             __RPC__in IMbnPinEvents * This,
             /* [annotation][in] */ 
@@ -2993,6 +3107,7 @@ EXTERN_C const IID IID_IMbnPinEvents;
             /* [annotation][in] */ 
             _In_  HRESULT status);
         
+        DECLSPEC_XFGVIRT(IMbnPinEvents, OnChangeComplete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnChangeComplete )( 
             __RPC__in IMbnPinEvents * This,
             /* [annotation][in] */ 
@@ -3003,6 +3118,7 @@ EXTERN_C const IID IID_IMbnPinEvents;
             /* [annotation][in] */ 
             _In_  HRESULT status);
         
+        DECLSPEC_XFGVIRT(IMbnPinEvents, OnUnblockComplete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnUnblockComplete )( 
             __RPC__in IMbnPinEvents * This,
             /* [annotation][in] */ 
@@ -3107,6 +3223,7 @@ EXTERN_C const IID IID_IMbnSubscriberInformation;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnSubscriberInformation * This,
             /* [annotation][in] */ 
@@ -3114,20 +3231,25 @@ EXTERN_C const IID IID_IMbnSubscriberInformation;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnSubscriberInformation * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnSubscriberInformation * This);
         
+        DECLSPEC_XFGVIRT(IMbnSubscriberInformation, get_SubscriberID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SubscriberID )( 
             __RPC__in IMbnSubscriberInformation * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *SubscriberID);
         
+        DECLSPEC_XFGVIRT(IMbnSubscriberInformation, get_SimIccID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SimIccID )( 
             __RPC__in IMbnSubscriberInformation * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *SimIccID);
         
+        DECLSPEC_XFGVIRT(IMbnSubscriberInformation, get_TelephoneNumbers)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TelephoneNumbers )( 
             __RPC__in IMbnSubscriberInformation * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *TelephoneNumbers);
@@ -3205,6 +3327,7 @@ EXTERN_C const IID IID_IMbnSignal;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnSignal * This,
             /* [annotation][in] */ 
@@ -3212,16 +3335,20 @@ EXTERN_C const IID IID_IMbnSignal;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnSignal * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnSignal * This);
         
+        DECLSPEC_XFGVIRT(IMbnSignal, GetSignalStrength)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetSignalStrength )( 
             __RPC__in IMbnSignal * This,
             /* [retval][ref][out] */ __RPC__out ULONG *signalStrength);
         
+        DECLSPEC_XFGVIRT(IMbnSignal, GetSignalError)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetSignalError )( 
             __RPC__in IMbnSignal * This,
             /* [retval][ref][out] */ __RPC__out ULONG *signalError);
@@ -3294,6 +3421,7 @@ EXTERN_C const IID IID_IMbnSignalEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnSignalEvents * This,
             /* [annotation][in] */ 
@@ -3301,12 +3429,15 @@ EXTERN_C const IID IID_IMbnSignalEvents;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnSignalEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnSignalEvents * This);
         
+        DECLSPEC_XFGVIRT(IMbnSignalEvents, OnSignalStateChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnSignalStateChange )( 
             __RPC__in IMbnSignalEvents * This,
             /* [annotation][in] */ 
@@ -3384,6 +3515,7 @@ EXTERN_C const IID IID_IMbnConnectionContext;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnConnectionContext * This,
             /* [annotation][in] */ 
@@ -3391,16 +3523,20 @@ EXTERN_C const IID IID_IMbnConnectionContext;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnConnectionContext * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnConnectionContext * This);
         
+        DECLSPEC_XFGVIRT(IMbnConnectionContext, GetProvisionedContexts)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetProvisionedContexts )( 
             __RPC__in IMbnConnectionContext * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *provisionedContexts);
         
+        DECLSPEC_XFGVIRT(IMbnConnectionContext, SetProvisionedContext)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetProvisionedContext )( 
             __RPC__in IMbnConnectionContext * This,
             /* [annotation][in] */ 
@@ -3486,6 +3622,7 @@ EXTERN_C const IID IID_IMbnConnectionContextEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnConnectionContextEvents * This,
             /* [annotation][in] */ 
@@ -3493,17 +3630,21 @@ EXTERN_C const IID IID_IMbnConnectionContextEvents;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnConnectionContextEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnConnectionContextEvents * This);
         
+        DECLSPEC_XFGVIRT(IMbnConnectionContextEvents, OnProvisionedContextListChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnProvisionedContextListChange )( 
             __RPC__in IMbnConnectionContextEvents * This,
             /* [annotation][in] */ 
             _In_  IMbnConnectionContext *newInterface);
         
+        DECLSPEC_XFGVIRT(IMbnConnectionContextEvents, OnSetProvisionedContextComplete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnSetProvisionedContextComplete )( 
             __RPC__in IMbnConnectionContextEvents * This,
             /* [annotation][in] */ 
@@ -3593,6 +3734,7 @@ EXTERN_C const IID IID_IMbnConnectionProfileManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnConnectionProfileManager * This,
             /* [annotation][in] */ 
@@ -3600,18 +3742,22 @@ EXTERN_C const IID IID_IMbnConnectionProfileManager;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnConnectionProfileManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnConnectionProfileManager * This);
         
+        DECLSPEC_XFGVIRT(IMbnConnectionProfileManager, GetConnectionProfiles)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetConnectionProfiles )( 
             __RPC__in IMbnConnectionProfileManager * This,
             /* [annotation][in] */ 
             _In_  IMbnInterface *mbnInterface,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *connectionProfiles);
         
+        DECLSPEC_XFGVIRT(IMbnConnectionProfileManager, GetConnectionProfile)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetConnectionProfile )( 
             __RPC__in IMbnConnectionProfileManager * This,
             /* [annotation][in] */ 
@@ -3620,6 +3766,7 @@ EXTERN_C const IID IID_IMbnConnectionProfileManager;
             _In_  LPCWSTR profileName,
             /* [retval][ref][out] */ __RPC__deref_out_opt IMbnConnectionProfile **connectionProfile);
         
+        DECLSPEC_XFGVIRT(IMbnConnectionProfileManager, CreateConnectionProfile)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateConnectionProfile )( 
             __RPC__in IMbnConnectionProfileManager * This,
             /* [annotation][string][in] */ 
@@ -3701,6 +3848,7 @@ EXTERN_C const IID IID_IMbnConnectionProfile;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnConnectionProfile * This,
             /* [annotation][in] */ 
@@ -3708,21 +3856,26 @@ EXTERN_C const IID IID_IMbnConnectionProfile;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnConnectionProfile * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnConnectionProfile * This);
         
+        DECLSPEC_XFGVIRT(IMbnConnectionProfile, GetProfileXmlData)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetProfileXmlData )( 
             __RPC__in IMbnConnectionProfile * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *profileData);
         
+        DECLSPEC_XFGVIRT(IMbnConnectionProfile, UpdateProfile)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *UpdateProfile )( 
             __RPC__in IMbnConnectionProfile * This,
             /* [annotation][string][in] */ 
             _In_  LPCWSTR strProfile);
         
+        DECLSPEC_XFGVIRT(IMbnConnectionProfile, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in IMbnConnectionProfile * This);
         
@@ -3797,6 +3950,7 @@ EXTERN_C const IID IID_IMbnConnectionProfileEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnConnectionProfileEvents * This,
             /* [annotation][in] */ 
@@ -3804,12 +3958,15 @@ EXTERN_C const IID IID_IMbnConnectionProfileEvents;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnConnectionProfileEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnConnectionProfileEvents * This);
         
+        DECLSPEC_XFGVIRT(IMbnConnectionProfileEvents, OnProfileUpdate)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnProfileUpdate )( 
             __RPC__in IMbnConnectionProfileEvents * This,
             /* [annotation][in] */ 
@@ -3896,6 +4053,7 @@ EXTERN_C const IID IID_IMbnSmsConfiguration;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnSmsConfiguration * This,
             /* [annotation][in] */ 
@@ -3903,33 +4061,41 @@ EXTERN_C const IID IID_IMbnSmsConfiguration;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnSmsConfiguration * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnSmsConfiguration * This);
         
+        DECLSPEC_XFGVIRT(IMbnSmsConfiguration, get_ServiceCenterAddress)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ServiceCenterAddress )( 
             __RPC__in IMbnSmsConfiguration * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *scAddress);
         
+        DECLSPEC_XFGVIRT(IMbnSmsConfiguration, put_ServiceCenterAddress)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ServiceCenterAddress )( 
             __RPC__in IMbnSmsConfiguration * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR scAddress);
         
+        DECLSPEC_XFGVIRT(IMbnSmsConfiguration, get_MaxMessageIndex)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MaxMessageIndex )( 
             __RPC__in IMbnSmsConfiguration * This,
             /* [retval][ref][out] */ __RPC__out ULONG *index);
         
+        DECLSPEC_XFGVIRT(IMbnSmsConfiguration, get_CdmaShortMsgSize)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CdmaShortMsgSize )( 
             __RPC__in IMbnSmsConfiguration * This,
             /* [retval][ref][out] */ __RPC__out ULONG *shortMsgSize);
         
+        DECLSPEC_XFGVIRT(IMbnSmsConfiguration, get_SmsFormat)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SmsFormat )( 
             __RPC__in IMbnSmsConfiguration * This,
             /* [retval][ref][out] */ __RPC__out MBN_SMS_FORMAT *smsFormat);
         
+        DECLSPEC_XFGVIRT(IMbnSmsConfiguration, put_SmsFormat)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SmsFormat )( 
             __RPC__in IMbnSmsConfiguration * This,
             /* [annotation][in] */ 
@@ -4023,6 +4189,7 @@ EXTERN_C const IID IID_IMbnSmsReadMsgPdu;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnSmsReadMsgPdu * This,
             /* [annotation][in] */ 
@@ -4030,24 +4197,30 @@ EXTERN_C const IID IID_IMbnSmsReadMsgPdu;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnSmsReadMsgPdu * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnSmsReadMsgPdu * This);
         
+        DECLSPEC_XFGVIRT(IMbnSmsReadMsgPdu, get_Index)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Index )( 
             __RPC__in IMbnSmsReadMsgPdu * This,
             /* [retval][ref][out] */ __RPC__out ULONG *Index);
         
+        DECLSPEC_XFGVIRT(IMbnSmsReadMsgPdu, get_Status)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
             __RPC__in IMbnSmsReadMsgPdu * This,
             /* [retval][ref][out] */ __RPC__out MBN_MSG_STATUS *Status);
         
+        DECLSPEC_XFGVIRT(IMbnSmsReadMsgPdu, get_PduData)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PduData )( 
             __RPC__in IMbnSmsReadMsgPdu * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *PduData);
         
+        DECLSPEC_XFGVIRT(IMbnSmsReadMsgPdu, get_Message)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Message )( 
             __RPC__in IMbnSmsReadMsgPdu * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *Message);
@@ -4146,6 +4319,7 @@ EXTERN_C const IID IID_IMbnSmsReadMsgTextCdma;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnSmsReadMsgTextCdma * This,
             /* [annotation][in] */ 
@@ -4153,40 +4327,50 @@ EXTERN_C const IID IID_IMbnSmsReadMsgTextCdma;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnSmsReadMsgTextCdma * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnSmsReadMsgTextCdma * This);
         
+        DECLSPEC_XFGVIRT(IMbnSmsReadMsgTextCdma, get_Index)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Index )( 
             __RPC__in IMbnSmsReadMsgTextCdma * This,
             /* [retval][ref][out] */ __RPC__out ULONG *Index);
         
+        DECLSPEC_XFGVIRT(IMbnSmsReadMsgTextCdma, get_Status)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
             __RPC__in IMbnSmsReadMsgTextCdma * This,
             /* [retval][ref][out] */ __RPC__out MBN_MSG_STATUS *Status);
         
+        DECLSPEC_XFGVIRT(IMbnSmsReadMsgTextCdma, get_Address)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Address )( 
             __RPC__in IMbnSmsReadMsgTextCdma * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *Address);
         
+        DECLSPEC_XFGVIRT(IMbnSmsReadMsgTextCdma, get_Timestamp)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Timestamp )( 
             __RPC__in IMbnSmsReadMsgTextCdma * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *Timestamp);
         
+        DECLSPEC_XFGVIRT(IMbnSmsReadMsgTextCdma, get_EncodingID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EncodingID )( 
             __RPC__in IMbnSmsReadMsgTextCdma * This,
             /* [retval][ref][out] */ __RPC__out MBN_SMS_CDMA_ENCODING *EncodingID);
         
+        DECLSPEC_XFGVIRT(IMbnSmsReadMsgTextCdma, get_LanguageID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LanguageID )( 
             __RPC__in IMbnSmsReadMsgTextCdma * This,
             /* [retval][ref][out] */ __RPC__out MBN_SMS_CDMA_LANG *LanguageID);
         
+        DECLSPEC_XFGVIRT(IMbnSmsReadMsgTextCdma, get_SizeInCharacters)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SizeInCharacters )( 
             __RPC__in IMbnSmsReadMsgTextCdma * This,
             /* [retval][ref][out] */ __RPC__out ULONG *SizeInCharacters);
         
+        DECLSPEC_XFGVIRT(IMbnSmsReadMsgTextCdma, get_Message)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Message )( 
             __RPC__in IMbnSmsReadMsgTextCdma * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *Message);
@@ -4325,6 +4509,7 @@ EXTERN_C const IID IID_IMbnSms;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnSms * This,
             /* [annotation][in] */ 
@@ -4332,16 +4517,20 @@ EXTERN_C const IID IID_IMbnSms;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnSms * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnSms * This);
         
+        DECLSPEC_XFGVIRT(IMbnSms, GetSmsConfiguration)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetSmsConfiguration )( 
             __RPC__in IMbnSms * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt IMbnSmsConfiguration **smsConfiguration);
         
+        DECLSPEC_XFGVIRT(IMbnSms, SetSmsConfiguration)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetSmsConfiguration )( 
             __RPC__in IMbnSms * This,
             /* [annotation][in] */ 
@@ -4349,6 +4538,7 @@ EXTERN_C const IID IID_IMbnSms;
             /* [annotation][out] */ 
             _Out_  ULONG *requestID);
         
+        DECLSPEC_XFGVIRT(IMbnSms, SmsSendPdu)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SmsSendPdu )( 
             __RPC__in IMbnSms * This,
             /* [annotation][in] */ 
@@ -4358,6 +4548,7 @@ EXTERN_C const IID IID_IMbnSms;
             /* [annotation][out] */ 
             _Out_  ULONG *requestID);
         
+        DECLSPEC_XFGVIRT(IMbnSms, SmsSendCdma)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SmsSendCdma )( 
             __RPC__in IMbnSms * This,
             /* [annotation][in] */ 
@@ -4373,6 +4564,7 @@ EXTERN_C const IID IID_IMbnSms;
             /* [annotation][out] */ 
             _Out_  ULONG *requestID);
         
+        DECLSPEC_XFGVIRT(IMbnSms, SmsSendCdmaPdu)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SmsSendCdmaPdu )( 
             __RPC__in IMbnSms * This,
             /* [annotation][in] */ 
@@ -4380,6 +4572,7 @@ EXTERN_C const IID IID_IMbnSms;
             /* [annotation][out] */ 
             _Out_  ULONG *requestID);
         
+        DECLSPEC_XFGVIRT(IMbnSms, SmsRead)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SmsRead )( 
             __RPC__in IMbnSms * This,
             /* [ref][in] */ __RPC__in MBN_SMS_FILTER *smsFilter,
@@ -4388,12 +4581,14 @@ EXTERN_C const IID IID_IMbnSms;
             /* [annotation][out] */ 
             _Out_  ULONG *requestID);
         
+        DECLSPEC_XFGVIRT(IMbnSms, SmsDelete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SmsDelete )( 
             __RPC__in IMbnSms * This,
             /* [ref][in] */ __RPC__in MBN_SMS_FILTER *smsFilter,
             /* [annotation][out] */ 
             _Out_  ULONG *requestID);
         
+        DECLSPEC_XFGVIRT(IMbnSms, GetSmsStatus)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetSmsStatus )( 
             __RPC__in IMbnSms * This,
             /* [ref][out] */ __RPC__out MBN_SMS_STATUS_INFO *smsStatusInfo);
@@ -4534,6 +4729,7 @@ EXTERN_C const IID IID_IMbnSmsEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnSmsEvents * This,
             /* [annotation][in] */ 
@@ -4541,17 +4737,21 @@ EXTERN_C const IID IID_IMbnSmsEvents;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnSmsEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnSmsEvents * This);
         
+        DECLSPEC_XFGVIRT(IMbnSmsEvents, OnSmsConfigurationChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnSmsConfigurationChange )( 
             __RPC__in IMbnSmsEvents * This,
             /* [annotation][in] */ 
             _In_  IMbnSms *sms);
         
+        DECLSPEC_XFGVIRT(IMbnSmsEvents, OnSetSmsConfigurationComplete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnSetSmsConfigurationComplete )( 
             __RPC__in IMbnSmsEvents * This,
             /* [annotation][in] */ 
@@ -4561,6 +4761,7 @@ EXTERN_C const IID IID_IMbnSmsEvents;
             /* [annotation][in] */ 
             _In_  HRESULT status);
         
+        DECLSPEC_XFGVIRT(IMbnSmsEvents, OnSmsSendComplete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnSmsSendComplete )( 
             __RPC__in IMbnSmsEvents * This,
             /* [annotation][in] */ 
@@ -4570,6 +4771,7 @@ EXTERN_C const IID IID_IMbnSmsEvents;
             /* [annotation][in] */ 
             _In_  HRESULT status);
         
+        DECLSPEC_XFGVIRT(IMbnSmsEvents, OnSmsReadComplete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnSmsReadComplete )( 
             __RPC__in IMbnSmsEvents * This,
             /* [annotation][in] */ 
@@ -4585,6 +4787,7 @@ EXTERN_C const IID IID_IMbnSmsEvents;
             /* [annotation][in] */ 
             _In_  HRESULT status);
         
+        DECLSPEC_XFGVIRT(IMbnSmsEvents, OnSmsNewClass0Message)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnSmsNewClass0Message )( 
             __RPC__in IMbnSmsEvents * This,
             /* [annotation][in] */ 
@@ -4594,6 +4797,7 @@ EXTERN_C const IID IID_IMbnSmsEvents;
             /* [annotation][in] */ 
             _In_  SAFEARRAY * readMsgs);
         
+        DECLSPEC_XFGVIRT(IMbnSmsEvents, OnSmsDeleteComplete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnSmsDeleteComplete )( 
             __RPC__in IMbnSmsEvents * This,
             /* [annotation][in] */ 
@@ -4603,6 +4807,7 @@ EXTERN_C const IID IID_IMbnSmsEvents;
             /* [annotation][in] */ 
             _In_  HRESULT status);
         
+        DECLSPEC_XFGVIRT(IMbnSmsEvents, OnSmsStatusChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnSmsStatusChange )( 
             __RPC__in IMbnSmsEvents * This,
             /* [annotation][in] */ 
@@ -4693,6 +4898,7 @@ EXTERN_C const IID IID_IMbnServiceActivation;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnServiceActivation * This,
             /* [annotation][in] */ 
@@ -4700,12 +4906,15 @@ EXTERN_C const IID IID_IMbnServiceActivation;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnServiceActivation * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnServiceActivation * This);
         
+        DECLSPEC_XFGVIRT(IMbnServiceActivation, Activate)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Activate )( 
             __RPC__in IMbnServiceActivation * This,
             /* [annotation][in] */ 
@@ -4786,6 +4995,7 @@ EXTERN_C const IID IID_IMbnServiceActivationEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnServiceActivationEvents * This,
             /* [annotation][in] */ 
@@ -4793,12 +5003,15 @@ EXTERN_C const IID IID_IMbnServiceActivationEvents;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnServiceActivationEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnServiceActivationEvents * This);
         
+        DECLSPEC_XFGVIRT(IMbnServiceActivationEvents, OnActivationComplete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnActivationComplete )( 
             __RPC__in IMbnServiceActivationEvents * This,
             /* [annotation][in] */ 
@@ -4878,6 +5091,7 @@ EXTERN_C const IID IID_IMbnVendorSpecificOperation;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnVendorSpecificOperation * This,
             /* [annotation][in] */ 
@@ -4885,12 +5099,15 @@ EXTERN_C const IID IID_IMbnVendorSpecificOperation;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnVendorSpecificOperation * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnVendorSpecificOperation * This);
         
+        DECLSPEC_XFGVIRT(IMbnVendorSpecificOperation, SetVendorSpecific)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetVendorSpecific )( 
             __RPC__in IMbnVendorSpecificOperation * This,
             /* [ref][in] */ __RPC__in SAFEARRAY * vendorSpecificData,
@@ -4972,6 +5189,7 @@ EXTERN_C const IID IID_IMbnVendorSpecificEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnVendorSpecificEvents * This,
             /* [annotation][in] */ 
@@ -4979,12 +5197,15 @@ EXTERN_C const IID IID_IMbnVendorSpecificEvents;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnVendorSpecificEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnVendorSpecificEvents * This);
         
+        DECLSPEC_XFGVIRT(IMbnVendorSpecificEvents, OnEventNotification)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnEventNotification )( 
             __RPC__in IMbnVendorSpecificEvents * This,
             /* [annotation][in] */ 
@@ -4992,6 +5213,7 @@ EXTERN_C const IID IID_IMbnVendorSpecificEvents;
             /* [annotation][in] */ 
             _In_  SAFEARRAY * vendorSpecificData);
         
+        DECLSPEC_XFGVIRT(IMbnVendorSpecificEvents, OnSetVendorSpecificComplete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnSetVendorSpecificComplete )( 
             __RPC__in IMbnVendorSpecificEvents * This,
             /* [annotation][in] */ 
@@ -5073,6 +5295,7 @@ EXTERN_C const IID IID_IMbnConnectionProfileManagerEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnConnectionProfileManagerEvents * This,
             /* [annotation][in] */ 
@@ -5080,17 +5303,21 @@ EXTERN_C const IID IID_IMbnConnectionProfileManagerEvents;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnConnectionProfileManagerEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnConnectionProfileManagerEvents * This);
         
+        DECLSPEC_XFGVIRT(IMbnConnectionProfileManagerEvents, OnConnectionProfileArrival)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnConnectionProfileArrival )( 
             __RPC__in IMbnConnectionProfileManagerEvents * This,
             /* [annotation][in] */ 
             _In_  IMbnConnectionProfile *newConnectionProfile);
         
+        DECLSPEC_XFGVIRT(IMbnConnectionProfileManagerEvents, OnConnectionProfileRemoval)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnConnectionProfileRemoval )( 
             __RPC__in IMbnConnectionProfileManagerEvents * This,
             /* [annotation][in] */ 
@@ -5172,6 +5399,7 @@ EXTERN_C const IID IID_IMbnRadio;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnRadio * This,
             /* [annotation][in] */ 
@@ -5179,20 +5407,25 @@ EXTERN_C const IID IID_IMbnRadio;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnRadio * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnRadio * This);
         
+        DECLSPEC_XFGVIRT(IMbnRadio, get_SoftwareRadioState)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SoftwareRadioState )( 
             __RPC__in IMbnRadio * This,
             /* [retval][ref][out] */ __RPC__out MBN_RADIO *SoftwareRadioState);
         
+        DECLSPEC_XFGVIRT(IMbnRadio, get_HardwareRadioState)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_HardwareRadioState )( 
             __RPC__in IMbnRadio * This,
             /* [retval][ref][out] */ __RPC__out MBN_RADIO *HardwareRadioState);
         
+        DECLSPEC_XFGVIRT(IMbnRadio, SetSoftwareRadioState)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetSoftwareRadioState )( 
             __RPC__in IMbnRadio * This,
             /* [annotation][in] */ 
@@ -5279,6 +5512,7 @@ EXTERN_C const IID IID_IMbnRadioEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnRadioEvents * This,
             /* [annotation][in] */ 
@@ -5286,17 +5520,21 @@ EXTERN_C const IID IID_IMbnRadioEvents;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnRadioEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnRadioEvents * This);
         
+        DECLSPEC_XFGVIRT(IMbnRadioEvents, OnRadioStateChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnRadioStateChange )( 
             __RPC__in IMbnRadioEvents * This,
             /* [annotation][in] */ 
             _In_  IMbnRadio *newInterface);
         
+        DECLSPEC_XFGVIRT(IMbnRadioEvents, OnSetSoftwareRadioStateComplete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnSetSoftwareRadioStateComplete )( 
             __RPC__in IMbnRadioEvents * This,
             /* [annotation][in] */ 
@@ -5395,6 +5633,7 @@ EXTERN_C const IID IID_IMbnMultiCarrier;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnMultiCarrier * This,
             /* [annotation][in] */ 
@@ -5402,12 +5641,15 @@ EXTERN_C const IID IID_IMbnMultiCarrier;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnMultiCarrier * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnMultiCarrier * This);
         
+        DECLSPEC_XFGVIRT(IMbnMultiCarrier, SetHomeProvider)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetHomeProvider )( 
             __RPC__in IMbnMultiCarrier * This,
             /* [annotation][in] */ 
@@ -5415,10 +5657,12 @@ EXTERN_C const IID IID_IMbnMultiCarrier;
             /* [annotation][out] */ 
             _Out_  ULONG *requestID);
         
+        DECLSPEC_XFGVIRT(IMbnMultiCarrier, GetPreferredProviders)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetPreferredProviders )( 
             __RPC__in IMbnMultiCarrier * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *preferredMulticarrierProviders);
         
+        DECLSPEC_XFGVIRT(IMbnMultiCarrier, GetVisibleProviders)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetVisibleProviders )( 
             __RPC__in IMbnMultiCarrier * This,
             /* [annotation][out] */ 
@@ -5426,14 +5670,17 @@ EXTERN_C const IID IID_IMbnMultiCarrier;
             /* [annotation][retval][out] */ 
             _Out_retval_  SAFEARRAY * *visibleProviders);
         
+        DECLSPEC_XFGVIRT(IMbnMultiCarrier, GetSupportedCellularClasses)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetSupportedCellularClasses )( 
             __RPC__in IMbnMultiCarrier * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *cellularClasses);
         
+        DECLSPEC_XFGVIRT(IMbnMultiCarrier, GetCurrentCellularClass)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetCurrentCellularClass )( 
             __RPC__in IMbnMultiCarrier * This,
             /* [retval][ref][out] */ __RPC__out MBN_CELLULAR_CLASS *currentCellularClass);
         
+        DECLSPEC_XFGVIRT(IMbnMultiCarrier, ScanNetwork)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ScanNetwork )( 
             __RPC__in IMbnMultiCarrier * This,
             /* [annotation][out] */ 
@@ -5543,6 +5790,7 @@ EXTERN_C const IID IID_IMbnMultiCarrierEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnMultiCarrierEvents * This,
             /* [annotation][in] */ 
@@ -5550,12 +5798,15 @@ EXTERN_C const IID IID_IMbnMultiCarrierEvents;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnMultiCarrierEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnMultiCarrierEvents * This);
         
+        DECLSPEC_XFGVIRT(IMbnMultiCarrierEvents, OnSetHomeProviderComplete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnSetHomeProviderComplete )( 
             __RPC__in IMbnMultiCarrierEvents * This,
             /* [annotation][in] */ 
@@ -5565,16 +5816,19 @@ EXTERN_C const IID IID_IMbnMultiCarrierEvents;
             /* [annotation][in] */ 
             _In_  HRESULT status);
         
+        DECLSPEC_XFGVIRT(IMbnMultiCarrierEvents, OnCurrentCellularClassChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnCurrentCellularClassChange )( 
             __RPC__in IMbnMultiCarrierEvents * This,
             /* [annotation][in] */ 
             _In_  IMbnMultiCarrier *mbnInterface);
         
+        DECLSPEC_XFGVIRT(IMbnMultiCarrierEvents, OnPreferredProvidersChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnPreferredProvidersChange )( 
             __RPC__in IMbnMultiCarrierEvents * This,
             /* [annotation][in] */ 
             _In_  IMbnMultiCarrier *mbnInterface);
         
+        DECLSPEC_XFGVIRT(IMbnMultiCarrierEvents, OnScanNetworkComplete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnScanNetworkComplete )( 
             __RPC__in IMbnMultiCarrierEvents * This,
             /* [annotation][in] */ 
@@ -5584,6 +5838,7 @@ EXTERN_C const IID IID_IMbnMultiCarrierEvents;
             /* [annotation][in] */ 
             _In_  HRESULT status);
         
+        DECLSPEC_XFGVIRT(IMbnMultiCarrierEvents, OnInterfaceCapabilityChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnInterfaceCapabilityChange )( 
             __RPC__in IMbnMultiCarrierEvents * This,
             /* [annotation][in] */ 
@@ -5668,6 +5923,7 @@ EXTERN_C const IID IID_IMbnDeviceServiceStateEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnDeviceServiceStateEvents * This,
             /* [annotation][in] */ 
@@ -5675,12 +5931,15 @@ EXTERN_C const IID IID_IMbnDeviceServiceStateEvents;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnDeviceServiceStateEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnDeviceServiceStateEvents * This);
         
+        DECLSPEC_XFGVIRT(IMbnDeviceServiceStateEvents, OnSessionsStateChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnSessionsStateChange )( 
             __RPC__in IMbnDeviceServiceStateEvents * This,
             /* [annotation][in] */ 
@@ -5766,6 +6025,7 @@ EXTERN_C const IID IID_IMbnDeviceServicesManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnDeviceServicesManager * This,
             /* [annotation][in] */ 
@@ -5773,12 +6033,15 @@ EXTERN_C const IID IID_IMbnDeviceServicesManager;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnDeviceServicesManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnDeviceServicesManager * This);
         
+        DECLSPEC_XFGVIRT(IMbnDeviceServicesManager, GetDeviceServicesContext)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetDeviceServicesContext )( 
             __RPC__in IMbnDeviceServicesManager * This,
             /* [annotation][in] */ 
@@ -5861,6 +6124,7 @@ EXTERN_C const IID IID_IMbnDeviceServicesContext;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnDeviceServicesContext * This,
             /* [annotation][in] */ 
@@ -5868,27 +6132,33 @@ EXTERN_C const IID IID_IMbnDeviceServicesContext;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnDeviceServicesContext * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnDeviceServicesContext * This);
         
+        DECLSPEC_XFGVIRT(IMbnDeviceServicesContext, EnumerateDeviceServices)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateDeviceServices )( 
             __RPC__in IMbnDeviceServicesContext * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  SAFEARRAY * *deviceServices);
         
+        DECLSPEC_XFGVIRT(IMbnDeviceServicesContext, GetDeviceService)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetDeviceService )( 
             __RPC__in IMbnDeviceServicesContext * This,
             /* [annotation][in] */ 
             _In_  BSTR deviceServiceID,
             /* [retval][ref][out] */ __RPC__deref_out_opt IMbnDeviceService **mbnDeviceService);
         
+        DECLSPEC_XFGVIRT(IMbnDeviceServicesContext, get_MaxCommandSize)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MaxCommandSize )( 
             __RPC__in IMbnDeviceServicesContext * This,
             /* [retval][ref][out] */ __RPC__out ULONG *maxCommandSize);
         
+        DECLSPEC_XFGVIRT(IMbnDeviceServicesContext, get_MaxDataSize)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MaxDataSize )( 
             __RPC__in IMbnDeviceServicesContext * This,
             /* [retval][ref][out] */ __RPC__out ULONG *maxDataSize);
@@ -6057,6 +6327,7 @@ EXTERN_C const IID IID_IMbnDeviceServicesEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnDeviceServicesEvents * This,
             /* [annotation][in] */ 
@@ -6064,12 +6335,15 @@ EXTERN_C const IID IID_IMbnDeviceServicesEvents;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnDeviceServicesEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnDeviceServicesEvents * This);
         
+        DECLSPEC_XFGVIRT(IMbnDeviceServicesEvents, OnQuerySupportedCommandsComplete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnQuerySupportedCommandsComplete )( 
             __RPC__in IMbnDeviceServicesEvents * This,
             /* [annotation][in] */ 
@@ -6081,6 +6355,7 @@ EXTERN_C const IID IID_IMbnDeviceServicesEvents;
             /* [annotation][in] */ 
             _In_  ULONG requestID);
         
+        DECLSPEC_XFGVIRT(IMbnDeviceServicesEvents, OnOpenCommandSessionComplete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnOpenCommandSessionComplete )( 
             __RPC__in IMbnDeviceServicesEvents * This,
             /* [annotation][in] */ 
@@ -6090,6 +6365,7 @@ EXTERN_C const IID IID_IMbnDeviceServicesEvents;
             /* [annotation][in] */ 
             _In_  ULONG requestID);
         
+        DECLSPEC_XFGVIRT(IMbnDeviceServicesEvents, OnCloseCommandSessionComplete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnCloseCommandSessionComplete )( 
             __RPC__in IMbnDeviceServicesEvents * This,
             /* [annotation][in] */ 
@@ -6099,6 +6375,7 @@ EXTERN_C const IID IID_IMbnDeviceServicesEvents;
             /* [annotation][in] */ 
             _In_  ULONG requestID);
         
+        DECLSPEC_XFGVIRT(IMbnDeviceServicesEvents, OnSetCommandComplete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnSetCommandComplete )( 
             __RPC__in IMbnDeviceServicesEvents * This,
             /* [annotation][in] */ 
@@ -6112,6 +6389,7 @@ EXTERN_C const IID IID_IMbnDeviceServicesEvents;
             /* [annotation][in] */ 
             _In_  ULONG requestID);
         
+        DECLSPEC_XFGVIRT(IMbnDeviceServicesEvents, OnQueryCommandComplete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnQueryCommandComplete )( 
             __RPC__in IMbnDeviceServicesEvents * This,
             /* [annotation][in] */ 
@@ -6125,6 +6403,7 @@ EXTERN_C const IID IID_IMbnDeviceServicesEvents;
             /* [annotation][in] */ 
             _In_  ULONG requestID);
         
+        DECLSPEC_XFGVIRT(IMbnDeviceServicesEvents, OnEventNotification)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnEventNotification )( 
             __RPC__in IMbnDeviceServicesEvents * This,
             /* [annotation][in] */ 
@@ -6134,6 +6413,7 @@ EXTERN_C const IID IID_IMbnDeviceServicesEvents;
             /* [annotation][in] */ 
             _In_  SAFEARRAY * deviceServiceData);
         
+        DECLSPEC_XFGVIRT(IMbnDeviceServicesEvents, OnOpenDataSessionComplete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnOpenDataSessionComplete )( 
             __RPC__in IMbnDeviceServicesEvents * This,
             /* [annotation][in] */ 
@@ -6143,6 +6423,7 @@ EXTERN_C const IID IID_IMbnDeviceServicesEvents;
             /* [annotation][in] */ 
             _In_  ULONG requestID);
         
+        DECLSPEC_XFGVIRT(IMbnDeviceServicesEvents, OnCloseDataSessionComplete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnCloseDataSessionComplete )( 
             __RPC__in IMbnDeviceServicesEvents * This,
             /* [annotation][in] */ 
@@ -6152,6 +6433,7 @@ EXTERN_C const IID IID_IMbnDeviceServicesEvents;
             /* [annotation][in] */ 
             _In_  ULONG requestID);
         
+        DECLSPEC_XFGVIRT(IMbnDeviceServicesEvents, OnWriteDataComplete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnWriteDataComplete )( 
             __RPC__in IMbnDeviceServicesEvents * This,
             /* [annotation][in] */ 
@@ -6161,6 +6443,7 @@ EXTERN_C const IID IID_IMbnDeviceServicesEvents;
             /* [annotation][in] */ 
             _In_  ULONG requestID);
         
+        DECLSPEC_XFGVIRT(IMbnDeviceServicesEvents, OnReadData)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnReadData )( 
             __RPC__in IMbnDeviceServicesEvents * This,
             /* [annotation][in] */ 
@@ -6168,6 +6451,7 @@ EXTERN_C const IID IID_IMbnDeviceServicesEvents;
             /* [annotation][in] */ 
             _In_  SAFEARRAY * deviceServiceData);
         
+        DECLSPEC_XFGVIRT(IMbnDeviceServicesEvents, OnInterfaceStateChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnInterfaceStateChange )( 
             __RPC__in IMbnDeviceServicesEvents * This,
             /* [annotation][in] */ 
@@ -6318,6 +6602,7 @@ EXTERN_C const IID IID_IMbnDeviceService;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnDeviceService * This,
             /* [annotation][in] */ 
@@ -6325,27 +6610,33 @@ EXTERN_C const IID IID_IMbnDeviceService;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnDeviceService * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnDeviceService * This);
         
+        DECLSPEC_XFGVIRT(IMbnDeviceService, QuerySupportedCommands)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *QuerySupportedCommands )( 
             __RPC__in IMbnDeviceService * This,
             /* [annotation][out] */ 
             _Out_  ULONG *requestID);
         
+        DECLSPEC_XFGVIRT(IMbnDeviceService, OpenCommandSession)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OpenCommandSession )( 
             __RPC__in IMbnDeviceService * This,
             /* [annotation][out] */ 
             _Out_  ULONG *requestID);
         
+        DECLSPEC_XFGVIRT(IMbnDeviceService, CloseCommandSession)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CloseCommandSession )( 
             __RPC__in IMbnDeviceService * This,
             /* [annotation][out] */ 
             _Out_  ULONG *requestID);
         
+        DECLSPEC_XFGVIRT(IMbnDeviceService, SetCommand)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetCommand )( 
             __RPC__in IMbnDeviceService * This,
             /* [annotation][in] */ 
@@ -6354,6 +6645,7 @@ EXTERN_C const IID IID_IMbnDeviceService;
             /* [annotation][out] */ 
             _Out_  ULONG *requestID);
         
+        DECLSPEC_XFGVIRT(IMbnDeviceService, QueryCommand)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *QueryCommand )( 
             __RPC__in IMbnDeviceService * This,
             /* [annotation][in] */ 
@@ -6362,16 +6654,19 @@ EXTERN_C const IID IID_IMbnDeviceService;
             /* [annotation][out] */ 
             _Out_  ULONG *requestID);
         
+        DECLSPEC_XFGVIRT(IMbnDeviceService, OpenDataSession)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OpenDataSession )( 
             __RPC__in IMbnDeviceService * This,
             /* [annotation][out] */ 
             _Out_  ULONG *requestID);
         
+        DECLSPEC_XFGVIRT(IMbnDeviceService, CloseDataSession)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CloseDataSession )( 
             __RPC__in IMbnDeviceService * This,
             /* [annotation][out] */ 
             _Out_  ULONG *requestID);
         
+        DECLSPEC_XFGVIRT(IMbnDeviceService, WriteData)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *WriteData )( 
             __RPC__in IMbnDeviceService * This,
             /* [annotation][in] */ 
@@ -6379,18 +6674,22 @@ EXTERN_C const IID IID_IMbnDeviceService;
             /* [annotation][out] */ 
             _Out_  ULONG *requestID);
         
+        DECLSPEC_XFGVIRT(IMbnDeviceService, get_InterfaceID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InterfaceID )( 
             __RPC__in IMbnDeviceService * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *InterfaceID);
         
+        DECLSPEC_XFGVIRT(IMbnDeviceService, get_DeviceServiceID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DeviceServiceID )( 
             __RPC__in IMbnDeviceService * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *DeviceServiceID);
         
+        DECLSPEC_XFGVIRT(IMbnDeviceService, get_IsCommandSessionOpen)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsCommandSessionOpen )( 
             __RPC__in IMbnDeviceService * This,
             /* [retval][ref][out] */ __RPC__out BOOL *value);
         
+        DECLSPEC_XFGVIRT(IMbnDeviceService, get_IsDataSessionOpen)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsDataSessionOpen )( 
             __RPC__in IMbnDeviceService * This,
             /* [retval][ref][out] */ __RPC__out BOOL *value);
@@ -6633,6 +6932,7 @@ EXTERN_C const IID IID_IMbnPin;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMbnPin * This,
             /* [annotation][in] */ 
@@ -6640,50 +6940,61 @@ EXTERN_C const IID IID_IMbnPin;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMbnPin * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMbnPin * This);
         
+        DECLSPEC_XFGVIRT(IMbnPin, get_PinType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PinType )( 
             __RPC__in IMbnPin * This,
             /* [retval][ref][out] */ __RPC__out MBN_PIN_TYPE *PinType);
         
+        DECLSPEC_XFGVIRT(IMbnPin, get_PinFormat)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PinFormat )( 
             __RPC__in IMbnPin * This,
             /* [retval][ref][out] */ __RPC__out MBN_PIN_FORMAT *PinFormat);
         
+        DECLSPEC_XFGVIRT(IMbnPin, get_PinLengthMin)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PinLengthMin )( 
             __RPC__in IMbnPin * This,
             /* [retval][ref][out] */ __RPC__out ULONG *PinLengthMin);
         
+        DECLSPEC_XFGVIRT(IMbnPin, get_PinLengthMax)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PinLengthMax )( 
             __RPC__in IMbnPin * This,
             /* [retval][ref][out] */ __RPC__out ULONG *PinLengthMax);
         
+        DECLSPEC_XFGVIRT(IMbnPin, get_PinMode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PinMode )( 
             __RPC__in IMbnPin * This,
             /* [retval][ref][out] */ __RPC__out MBN_PIN_MODE *PinMode);
         
+        DECLSPEC_XFGVIRT(IMbnPin, Enable)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Enable )( 
             __RPC__in IMbnPin * This,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pin,
             /* [annotation][out] */ 
             _Out_  ULONG *requestID);
         
+        DECLSPEC_XFGVIRT(IMbnPin, Disable)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Disable )( 
             __RPC__in IMbnPin * This,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pin,
             /* [annotation][out] */ 
             _Out_  ULONG *requestID);
         
+        DECLSPEC_XFGVIRT(IMbnPin, Enter)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Enter )( 
             __RPC__in IMbnPin * This,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pin,
             /* [annotation][out] */ 
             _Out_  ULONG *requestID);
         
+        DECLSPEC_XFGVIRT(IMbnPin, Change)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Change )( 
             __RPC__in IMbnPin * This,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pin,
@@ -6691,6 +7002,7 @@ EXTERN_C const IID IID_IMbnPin;
             /* [annotation][out] */ 
             _Out_  ULONG *requestID);
         
+        DECLSPEC_XFGVIRT(IMbnPin, Unblock)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Unblock )( 
             __RPC__in IMbnPin * This,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR puk,
@@ -6698,6 +7010,7 @@ EXTERN_C const IID IID_IMbnPin;
             /* [annotation][out] */ 
             _Out_  ULONG *requestID);
         
+        DECLSPEC_XFGVIRT(IMbnPin, GetPinManager)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetPinManager )( 
             __RPC__in IMbnPin * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt IMbnPinManager **pinManager);

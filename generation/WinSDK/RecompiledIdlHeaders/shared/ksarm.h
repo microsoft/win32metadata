@@ -208,6 +208,7 @@
 #define PS_MITIGATION_OPTION_RETURN_FLOW_GUARD 0x10
 #define PS_MITIGATION_OPTION_RESTRICT_SET_THREAD_CONTEXT 0x13
 #define PS_MITIGATION_OPTION_CET_USER_SHADOW_STACKS 0x1f
+#define PsneKiUserCallbackDispatcher 0x18
 
 //
 // User Shared Data Structure Offset Definitions
@@ -368,7 +369,7 @@
 #define DpDpcData 0x1c
 #define DpcObjectLength 0x20
 
-#define KI_DPC_ALL_FLAGS 0x3f
+#define KI_DPC_ALL_FLAGS 0xbf
 #define KI_DPC_ANY_DPC_ACTIVE 0x10001
 
 //
@@ -455,6 +456,7 @@
 #define PrKernelTime 0x98
 #define PrUserTime 0x9c
 #define PrInstrumentationCallback 0xa4
+#define PrMitigationFlags2 0x55c
 #define KernelProcessObjectLength 0xe0
 #define ExecutiveProcessObjectLength 0x600
 #define Win32BatchFlushCallout 0x7
@@ -473,9 +475,9 @@
 #define PfBuffer 0x1c
 #define PfSegment 0x20
 #define PfAffinity 0x24
-#define PfSource 0x30
-#define PfStarted 0x32
-#define ProfileObjectLength 0x34
+#define PfSource 0x34
+#define PfStarted 0x36
+#define ProfileObjectLength 0x38
 
 //
 // Queue Object Structure Offset Definitions
@@ -492,8 +494,8 @@
 // Thread Object Structure Offset Definitions
 //
 
-#define EtCid 0x2a4
-#define EtPicoContext 0x374
+#define EtCid 0x2cc
+#define EtPicoContext 0x39c
 
 #define ThType 0x0
 #define ThSize 0x2
@@ -506,9 +508,9 @@
 #define THREAD_FLAGS_COUNTER_PROFILING_LOCK 0x20000
 #define THREAD_FLAGS_GROUP_SCHEDULING 0x4
 #define THREAD_FLAGS_AFFINITY_SET 0x8
-#define THREAD_FLAGS_ACCOUNTING_CSWITCH 0x36
+#define THREAD_FLAGS_ACCOUNTING_CSWITCH 0xb6
 #define THREAD_FLAGS_ACCOUNTING_INTERRUPT 0x72
-#define THREAD_FLAGS_ACCOUNTING_ANY 0x3e
+#define THREAD_FLAGS_ACCOUNTING_ANY 0xbe
 #define ThDebugActive 0x3
 #define ThThreadControlFlags 0x2
 #define ThSignalState 0x4
@@ -542,6 +544,7 @@
 #define KTHREAD_QUEUE_DEFER_PREEMPTION_BIT 0xb
 #define KTHREAD_BAM_QOS_LEVEL_MASK 0xff
 #define KTHREAD_CET_USER_SHADOW_STACK_BIT 0x14
+#define KTHREAD_CET_KERNEL_SHADOW_STACK_BIT 0x16
 
 #define DEBUG_ACTIVE_ALT_SYSCALL_HANDLER 0x24
 #define PsSystemCallMapToSystem 0x1
@@ -559,8 +562,8 @@
 #define ThWin32Thread 0x11c
 #define ThStackBase 0x28
 #define ThLegoData 0x1b8
-#define KernelThreadObjectLength 0x278
-#define ExecutiveThreadObjectLength 0x4d8
+#define KernelThreadObjectLength 0x2a0
+#define ExecutiveThreadObjectLength 0x530
 
 #define KF_VFP_32REG 0x10
 
@@ -611,7 +614,7 @@
 #define PeBeingDebugged 0x2
 #define PeProcessParameters 0x10
 #define PeKernelCallbackTable 0x2c
-#define ProcessEnvironmentBlockLength 0x480
+#define ProcessEnvironmentBlockLength 0x488
 
 //
 // Process Parameters Block Structure Offset Definitions
@@ -677,8 +680,8 @@
 #define TeGdiBatchCount 0xf70
 #define TeGuaranteedStackBytes 0xf78
 #define TeFlsData 0xfb4
-#define ThreadEnvironmentBlockLength 0x1000
-#define CmThreadEnvironmentBlockOffset 0x1000
+#define ThreadEnvironmentBlockLength 0x1018
+#define CmThreadEnvironmentBlockOffset 0x2000
 #define TLS_MINIMUM_AVAILABLE 0x40
 #define TLS_EXPANSION_SLOTS 0x400
 
@@ -739,6 +742,8 @@
 #define CxxLegacyLength 0xc
 #define CxxXStateOffset 0x10
 #define CxxXStateLength 0x14
+#define CxxKernelCetOffset 0x18
+#define CxxKernelCetLength 0x1c
 
 //
 // KAFFINITY_EX offsets
@@ -746,11 +751,17 @@
 
 #define AfCount 0x0
 #define AfBitmap 0x8
-#define PbEntropyCount 0x97c
-#define PbEntropyBuffer 0x980
+#define PbEntropyCount 0x980
+#define PbEntropyBuffer 0x984
 #define KENTROPY_TIMING_INTERRUPTS_PER_BUFFER 0x400
 #define KENTROPY_TIMING_BUFFER_MASK 0x7ff
 #define KENTROPY_TIMING_ANALYSIS 0x0
+
+//
+// Priority state definitions
+//
+
+#define KPRIORITY_STATE_PRIORITY_BITMASK 0x7f
 
 //
 // Special Register Structure Offset Definition
@@ -854,13 +865,13 @@
 #define PcDeferredReadyListHead 0xb84
 #define PcInterruptCount 0xe80
 #define PcSystemCalls 0xbb0
-#define PcDpcRoutineActive 0xc5a
+#define PcDpcRoutineActive 0xc62
 #define PcDeferredReadyListHead 0xb84
 #define PcSkipTick 0xe98
 #define PcStartCycles 0xec8
-#define PcSpBase 0xc44
+#define PcSpBase 0xc4c
 #define PcCycleCounterHigh 0xef0
-#define ProcessorControlRegisterLength 0x6ae0
+#define ProcessorControlRegisterLength 0x70e0
 
 //
 // Defines for user shared data
@@ -912,7 +923,7 @@
 #define PbPacketBarrier 0x600
 #define PbDeferredReadyListHead 0x604
 #define PbLookasideIrpFloat 0x650
-#define PbRequestMailbox 0x6100
+#define PbRequestMailbox 0x6700
 #define PbMailbox 0x680
 #define PbDpcGate 0x700
 #define PbWaitListHead 0x780
@@ -931,17 +942,17 @@
 #define PbDpcList 0x690
 #define PbDpcLock 0x698
 #define PbDpcCount 0x6a0
-#define PbDpcStack 0x6c0
-#define PbSpBase 0x6c4
-#define PbMaximumDpcQueueDepth 0x6c8
-#define PbDpcRequestRate 0x6cc
-#define PbMinimumDpcRate 0x6d0
-#define PbDpcRoutineActive 0x6da
-#define PbDpcRequestSummary 0x6dc
-#define PbNormalDpcState 0x6dc
-#define PbDpcLastCount 0x6d4
-#define PbQuantumEnd 0x6d9
-#define PbIdleSchedule 0x6db
+#define PbDpcStack 0x6c8
+#define PbSpBase 0x6cc
+#define PbMaximumDpcQueueDepth 0x6d0
+#define PbDpcRequestRate 0x6d4
+#define PbMinimumDpcRate 0x6d8
+#define PbDpcRoutineActive 0x6e2
+#define PbDpcRequestSummary 0x6e4
+#define PbNormalDpcState 0x6e4
+#define PbDpcLastCount 0x6dc
+#define PbQuantumEnd 0x6e1
+#define PbIdleSchedule 0x6e3
 #define PbDispatcherReadyListHead 0x800
 #define PbInterruptCount 0x900
 #define PbKernelTime 0x904
@@ -949,20 +960,19 @@
 #define PbDpcTime 0x90c
 #define PbInterruptTime 0x910
 #define PbAdjustDpcThreshold 0x914
-#define PbParentNode 0x938
 #define PbStartCycles 0x948
-#define PbPageColor 0xaac
-#define PbNodeColor 0xab0
-#define PbNodeShiftedColor 0xab4
-#define PbSecondaryColorMask 0xab8
-#define PbCycleTime 0xac0
+#define PbPageColor 0xabc
+#define PbNodeColor 0xac0
+#define PbNodeShiftedColor 0xac4
+#define PbSecondaryColorMask 0xac8
+#define PbCycleTime 0xad0
 #define PbFastReadNoWait 0x638
 #define PbFastReadWait 0x63c
 #define PbFastReadNotPossible 0x640
 #define PbCopyReadNoWait 0x644
 #define PbCopyReadWait 0x648
 #define PbCopyReadNoWaitMiss 0x64c
-#define PbAlignmentFixupCount 0xd00
+#define PbAlignmentFixupCount 0xd08
 #define PbExceptionDispatchCount 0x934
 #define PbProcessorVendorString 0x508
 #define PbFeatureBits 0x50c
@@ -974,8 +984,8 @@
 #define PbPanicMiniStack 0xfd0
 #define PbCycleCounterHigh 0x970
 #define ThNpxState 0x85
-#define ThUserRoBase 0x378
-#define ThUserRwBase 0x37c
+#define ThUserRoBase 0x3a0
+#define ThUserRwBase 0x3a4
 
 //
 // KTHREAD state
@@ -1493,7 +1503,7 @@
 #define KI_EXCEPTION_INVALID_OP 0x10000002
 #define KI_EXCEPTION_ACCESS_VIOLATION 0x10000004
 #define KI_EXCEPTION_HARDWARE_ERROR 0x10000005
-#define KI_DPC_INTERRUPT_FLAGS 0x2f
+#define KI_DPC_INTERRUPT_FLAGS 0xaf
 
 //
 // Exception Frame Offset Definitions and Length

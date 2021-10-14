@@ -1,0 +1,6 @@
+--traverse
+<IncludeRoot>/um/computedefs.h
+<IncludeRoot>/um/computecore.h
+<IncludeRoot>/um/computestorage.h
+--namespace
+Windows.Win32.System.HostComputeSystem

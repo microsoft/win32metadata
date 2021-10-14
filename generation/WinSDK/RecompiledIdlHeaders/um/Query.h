@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -396,28 +404,34 @@ EXTERN_C const IID IID_ISearchQueryHits;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISearchQueryHits * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISearchQueryHits * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISearchQueryHits * This);
         
+        DECLSPEC_XFGVIRT(ISearchQueryHits, Init)
         SCODE ( STDMETHODCALLTYPE *Init )( 
             ISearchQueryHits * This,
             /* [in] */ IFilter *pflt,
             /* [in] */ ULONG ulFlags);
         
+        DECLSPEC_XFGVIRT(ISearchQueryHits, NextHitMoniker)
         SCODE ( STDMETHODCALLTYPE *NextHitMoniker )( 
             ISearchQueryHits * This,
             /* [out][in] */ ULONG *pcMnk,
             /* [size_is][out] */ IMoniker ***papMnk);
         
+        DECLSPEC_XFGVIRT(ISearchQueryHits, NextHitOffset)
         SCODE ( STDMETHODCALLTYPE *NextHitOffset )( 
             ISearchQueryHits * This,
             /* [out][in] */ ULONG *pcRegion,
@@ -504,22 +518,27 @@ EXTERN_C const IID IID_IRowsetQueryStatus;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRowsetQueryStatus * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IRowsetQueryStatus * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IRowsetQueryStatus * This);
         
+        DECLSPEC_XFGVIRT(IRowsetQueryStatus, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             IRowsetQueryStatus * This,
             /* [out] */ DWORD *pdwStatus);
         
+        DECLSPEC_XFGVIRT(IRowsetQueryStatus, GetStatusEx)
         HRESULT ( STDMETHODCALLTYPE *GetStatusEx )( 
             IRowsetQueryStatus * This,
             /* [out] */ DWORD *pdwStatus,

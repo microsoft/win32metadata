@@ -364,6 +364,12 @@ typedef struct _SecPkgContext_TokenBinding
     _Field_size_bytes_(KeyParametersSize) PBYTE KeyParameters; // IDs of the negotiated Token Binding key parameters.
 } SecPkgContext_TokenBinding, * PSecPkgContext_TokenBinding;
 
+typedef struct _SecPkgContext_CertificateValidationResult
+{
+    DWORD dwChainErrorStatus;    // Contains chain build error flags set by CertGetCertificateChain.
+    HRESULT hrVerifyChainStatus; // Certificate validation policy error returned by CertVerifyCertificateChainPolicy.
+} SecPkgContext_CertificateValidationResult, *PSecPkgContext_CertificateValidationResult;
+
 //
 // Schannel credentials data structure.
 //
@@ -546,6 +552,17 @@ typedef struct _SCHANNEL_CERT_HASH_STORE
 //      specify this flag, so that there's at least a chance they'll run
 //      correctly on NT5.
 //
+// SCH_CRED_DEFERRED_CRED_VALIDATION
+//      This flag is intended for use by client applications only. If this
+//      flag is set, then schannel will attempt to validate the received
+//      server certificate chain, however, schannel will not terminate the
+//      handshake with an error if the chain has any issues. Rather, the
+//      client is expected to retrieve the the result of the chain build
+//      using SECPKG_ATTR_CERT_CHECK_RESULT at any point after
+//      receiving the server certificate or by using 
+//      SECPKG_ATTR_CERT_CHECK_RESULT_INPROC after the handshake
+//      has concluded.
+//
 // SCH_CRED_NO_DEFAULT_CREDS
 //      This flag is intended for use by client applications only. If this
 //      flag is set, and the server requests client authentication, then
@@ -652,6 +669,7 @@ typedef struct _SCHANNEL_CERT_HASH_STORE
 #define SCH_USE_PRESHAREDKEY_ONLY                    0x00800000
 #define SCH_USE_DTLS_ONLY                            0x01000000
 #define SCH_ALLOW_NULL_ENCRYPTION                    0x02000000
+#define SCH_CRED_DEFERRED_CRED_VALIDATION            0x04000000
 
 //
 //

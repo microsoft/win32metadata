@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -119,22 +127,27 @@ EXTERN_C const IID IID_ICoreWindowInterop;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICoreWindowInterop * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICoreWindowInterop * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICoreWindowInterop * This);
         
+        DECLSPEC_XFGVIRT(ICoreWindowInterop, get_WindowHandle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_WindowHandle )( 
             __RPC__in ICoreWindowInterop * This,
             /* [retval][out] */ __RPC__deref_out_opt HWND *hwnd);
         
+        DECLSPEC_XFGVIRT(ICoreWindowInterop, put_MessageHandled)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MessageHandled )( 
             __RPC__in ICoreWindowInterop * This,
             /* [in] */ boolean value);
@@ -219,22 +232,27 @@ EXTERN_C const IID IID_ICoreInputInterop;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICoreInputInterop * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICoreInputInterop * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICoreInputInterop * This);
         
+        DECLSPEC_XFGVIRT(ICoreInputInterop, SetInputSource)
         HRESULT ( STDMETHODCALLTYPE *SetInputSource )( 
             __RPC__in ICoreInputInterop * This,
             /* [in] */ __RPC__in_opt IUnknown *value);
         
+        DECLSPEC_XFGVIRT(ICoreInputInterop, put_MessageHandled)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MessageHandled )( 
             __RPC__in ICoreInputInterop * This,
             /* [in] */ boolean value);
@@ -331,24 +349,29 @@ EXTERN_C const IID IID_ICoreWindowComponentInterop;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICoreWindowComponentInterop * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICoreWindowComponentInterop * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICoreWindowComponentInterop * This);
         
+        DECLSPEC_XFGVIRT(ICoreWindowComponentInterop, ConfigureComponentInput)
         HRESULT ( STDMETHODCALLTYPE *ConfigureComponentInput )( 
             __RPC__in ICoreWindowComponentInterop * This,
             /* [in] */ UINT32 hostViewInstanceId,
             /* [in] */ __RPC__in HWND hwndHost,
             /* [in] */ __RPC__in_opt IUnknown *inputSourceVisual);
         
+        DECLSPEC_XFGVIRT(ICoreWindowComponentInterop, GetViewInstanceId)
         HRESULT ( STDMETHODCALLTYPE *GetViewInstanceId )( 
             __RPC__in ICoreWindowComponentInterop * This,
             /* [out] */ __RPC__out UINT32 *componentViewInstanceId);
@@ -418,6 +441,9 @@ EXTERN_C const IID IID_ICoreWindowAdapterInterop;
     ICoreWindowAdapterInterop : public IInspectable
     {
     public:
+        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_AppActivationClientAdapter( 
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **value) = 0;
+        
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ApplicationViewClientAdapter( 
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **value) = 0;
         
@@ -425,6 +451,9 @@ EXTERN_C const IID IID_ICoreWindowAdapterInterop;
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_HoloViewClientAdapter( 
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **value) = 0;
+        
+        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_PositionerClientAdapter( 
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_SystemNavigationClientAdapter( 
@@ -445,51 +474,73 @@ EXTERN_C const IID IID_ICoreWindowAdapterInterop;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICoreWindowAdapterInterop * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICoreWindowAdapterInterop * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICoreWindowAdapterInterop * This);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetIids)
         HRESULT ( STDMETHODCALLTYPE *GetIids )( 
             __RPC__in ICoreWindowAdapterInterop * This,
             /* [out] */ __RPC__out ULONG *iidCount,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*iidCount) IID **iids);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetRuntimeClassName)
         HRESULT ( STDMETHODCALLTYPE *GetRuntimeClassName )( 
             __RPC__in ICoreWindowAdapterInterop * This,
             /* [out] */ __RPC__deref_out_opt HSTRING *className);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetTrustLevel)
         HRESULT ( STDMETHODCALLTYPE *GetTrustLevel )( 
             __RPC__in ICoreWindowAdapterInterop * This,
             /* [out] */ __RPC__out TrustLevel *trustLevel);
         
+        DECLSPEC_XFGVIRT(ICoreWindowAdapterInterop, get_AppActivationClientAdapter)
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AppActivationClientAdapter )( 
+            __RPC__in ICoreWindowAdapterInterop * This,
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **value);
+        
+        DECLSPEC_XFGVIRT(ICoreWindowAdapterInterop, get_ApplicationViewClientAdapter)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplicationViewClientAdapter )( 
             __RPC__in ICoreWindowAdapterInterop * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **value);
         
+        DECLSPEC_XFGVIRT(ICoreWindowAdapterInterop, get_CoreApplicationViewClientAdapter)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CoreApplicationViewClientAdapter )( 
             __RPC__in ICoreWindowAdapterInterop * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **value);
         
+        DECLSPEC_XFGVIRT(ICoreWindowAdapterInterop, get_HoloViewClientAdapter)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_HoloViewClientAdapter )( 
             __RPC__in ICoreWindowAdapterInterop * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **value);
         
+        DECLSPEC_XFGVIRT(ICoreWindowAdapterInterop, get_PositionerClientAdapter)
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PositionerClientAdapter )( 
+            __RPC__in ICoreWindowAdapterInterop * This,
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **value);
+        
+        DECLSPEC_XFGVIRT(ICoreWindowAdapterInterop, get_SystemNavigationClientAdapter)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SystemNavigationClientAdapter )( 
             __RPC__in ICoreWindowAdapterInterop * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **value);
         
+        DECLSPEC_XFGVIRT(ICoreWindowAdapterInterop, get_TitleBarClientAdapter)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_TitleBarClientAdapter )( 
             __RPC__in ICoreWindowAdapterInterop * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **value);
         
+        DECLSPEC_XFGVIRT(ICoreWindowAdapterInterop, SetWindowClientAdapter)
         HRESULT ( STDMETHODCALLTYPE *SetWindowClientAdapter )( 
             __RPC__in ICoreWindowAdapterInterop * This,
             /* [in] */ __RPC__in_opt IUnknown *value);
@@ -527,6 +578,9 @@ EXTERN_C const IID IID_ICoreWindowAdapterInterop;
     ( (This)->lpVtbl -> GetTrustLevel(This,trustLevel) ) 
 
 
+#define ICoreWindowAdapterInterop_get_AppActivationClientAdapter(This,value)	\
+    ( (This)->lpVtbl -> get_AppActivationClientAdapter(This,value) ) 
+
 #define ICoreWindowAdapterInterop_get_ApplicationViewClientAdapter(This,value)	\
     ( (This)->lpVtbl -> get_ApplicationViewClientAdapter(This,value) ) 
 
@@ -535,6 +589,9 @@ EXTERN_C const IID IID_ICoreWindowAdapterInterop;
 
 #define ICoreWindowAdapterInterop_get_HoloViewClientAdapter(This,value)	\
     ( (This)->lpVtbl -> get_HoloViewClientAdapter(This,value) ) 
+
+#define ICoreWindowAdapterInterop_get_PositionerClientAdapter(This,value)	\
+    ( (This)->lpVtbl -> get_PositionerClientAdapter(This,value) ) 
 
 #define ICoreWindowAdapterInterop_get_SystemNavigationClientAdapter(This,value)	\
     ( (This)->lpVtbl -> get_SystemNavigationClientAdapter(This,value) ) 

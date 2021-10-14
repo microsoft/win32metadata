@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -31,6 +31,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -263,28 +271,34 @@ EXTERN_C const IID IID_IReplica;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IReplica * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IReplica * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IReplica * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IReplica * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IReplica * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IReplica * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -293,6 +307,7 @@ EXTERN_C const IID IID_IReplica;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IReplica * This,
             /* [annotation][in] */ 
@@ -312,62 +327,77 @@ EXTERN_C const IID IID_IReplica;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IReplica, putref_ActiveConnection)
         /* [helpcontext][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_ActiveConnection )( 
             __RPC__in IReplica * This,
             /* [in] */ __RPC__in_opt IDispatch *pconn);
         
+        DECLSPEC_XFGVIRT(IReplica, put_ActiveConnection)
         /* [helpcontext][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ActiveConnection )( 
             __RPC__in IReplica * This,
             /* [in] */ VARIANT vConn);
         
+        DECLSPEC_XFGVIRT(IReplica, get_ActiveConnection)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ActiveConnection )( 
             __RPC__in IReplica * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppconn);
         
+        DECLSPEC_XFGVIRT(IReplica, get_ConflictFunction)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConflictFunction )( 
             __RPC__in IReplica * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(IReplica, put_ConflictFunction)
         /* [helpcontext][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ConflictFunction )( 
             __RPC__in IReplica * This,
             /* [in] */ __RPC__in BSTR bstr);
         
+        DECLSPEC_XFGVIRT(IReplica, get_ConflictTables)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConflictTables )( 
             __RPC__in IReplica * This,
             /* [retval][out] */ __RPC__deref_out_opt /* external definition not present */ _Recordset **pprset);
         
+        DECLSPEC_XFGVIRT(IReplica, get_DesignMasterId)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DesignMasterId )( 
             __RPC__in IReplica * This,
             /* [retval][out] */ __RPC__out VARIANT *pvar);
         
+        DECLSPEC_XFGVIRT(IReplica, put_DesignMasterId)
         /* [helpcontext][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DesignMasterId )( 
             __RPC__in IReplica * This,
             /* [in] */ VARIANT var);
         
+        DECLSPEC_XFGVIRT(IReplica, get_Priority)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Priority )( 
             __RPC__in IReplica * This,
             /* [retval][out] */ __RPC__out long *pl);
         
+        DECLSPEC_XFGVIRT(IReplica, get_ReplicaId)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReplicaId )( 
             __RPC__in IReplica * This,
             /* [retval][out] */ __RPC__out VARIANT *pvar);
         
+        DECLSPEC_XFGVIRT(IReplica, get_ReplicaType)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReplicaType )( 
             __RPC__in IReplica * This,
             /* [retval][out] */ __RPC__out ReplicaTypeEnum *pl);
         
+        DECLSPEC_XFGVIRT(IReplica, get_RetentionPeriod)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RetentionPeriod )( 
             __RPC__in IReplica * This,
             /* [retval][out] */ __RPC__out long *pl);
         
+        DECLSPEC_XFGVIRT(IReplica, put_RetentionPeriod)
         /* [helpcontext][propput] */ HRESULT ( STDMETHODCALLTYPE *put_RetentionPeriod )( 
             __RPC__in IReplica * This,
             /* [in] */ long l);
         
+        DECLSPEC_XFGVIRT(IReplica, get_Visibility)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Visibility )( 
             __RPC__in IReplica * This,
             /* [retval][out] */ __RPC__out VisibilityEnum *pl);
         
+        DECLSPEC_XFGVIRT(IReplica, CreateReplica)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *CreateReplica )( 
             __RPC__in IReplica * This,
             /* [in] */ __RPC__in BSTR replicaName,
@@ -377,33 +407,39 @@ EXTERN_C const IID IID_IReplica;
             /* [defaultvalue][in] */ long priority,
             /* [defaultvalue][in] */ UpdatabilityEnum updatability);
         
+        DECLSPEC_XFGVIRT(IReplica, GetObjectReplicability)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *GetObjectReplicability )( 
             __RPC__in IReplica * This,
             /* [in] */ __RPC__in BSTR objectName,
             /* [in] */ __RPC__in BSTR objectType,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *replicability);
         
+        DECLSPEC_XFGVIRT(IReplica, SetObjectReplicability)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *SetObjectReplicability )( 
             __RPC__in IReplica * This,
             /* [in] */ __RPC__in BSTR objectName,
             /* [in] */ __RPC__in BSTR objectType,
             /* [in] */ VARIANT_BOOL replicability);
         
+        DECLSPEC_XFGVIRT(IReplica, MakeReplicable)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *MakeReplicable )( 
             __RPC__in IReplica * This,
             /* [defaultvalue][in] */ __RPC__in BSTR connectionString,
             /* [defaultvalue][in] */ VARIANT_BOOL columnTracking);
         
+        DECLSPEC_XFGVIRT(IReplica, PopulatePartial)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *PopulatePartial )( 
             __RPC__in IReplica * This,
             /* [in] */ __RPC__in BSTR FullReplica);
         
+        DECLSPEC_XFGVIRT(IReplica, Synchronize)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Synchronize )( 
             __RPC__in IReplica * This,
             /* [in] */ __RPC__in BSTR target,
             /* [defaultvalue][in] */ SyncTypeEnum syncType,
             /* [defaultvalue][in] */ SyncModeEnum syncMode);
         
+        DECLSPEC_XFGVIRT(IReplica, get_Filters)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Filters )( 
             __RPC__in IReplica * This,
             /* [retval][out] */ __RPC__deref_out_opt Filters **ppFilters);
@@ -551,28 +587,34 @@ EXTERN_C const IID IID_Filter;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in Filter * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in Filter * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in Filter * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in Filter * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in Filter * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in Filter * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -581,6 +623,7 @@ EXTERN_C const IID IID_Filter;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             Filter * This,
             /* [annotation][in] */ 
@@ -600,14 +643,17 @@ EXTERN_C const IID IID_Filter;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(Filter, get_TableName)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TableName )( 
             __RPC__in Filter * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(Filter, get_FilterType)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FilterType )( 
             __RPC__in Filter * This,
             /* [retval][out] */ __RPC__out FilterTypeEnum *ptype);
         
+        DECLSPEC_XFGVIRT(Filter, get_FilterCriteria)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FilterCriteria )( 
             __RPC__in Filter * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
@@ -712,28 +758,34 @@ EXTERN_C const IID IID_Filters;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in Filters * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in Filters * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in Filters * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in Filters * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in Filters * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in Filters * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -742,6 +794,7 @@ EXTERN_C const IID IID_Filters;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             Filters * This,
             /* [annotation][in] */ 
@@ -761,28 +814,34 @@ EXTERN_C const IID IID_Filters;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(Filters, Refresh)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in Filters * This);
         
+        DECLSPEC_XFGVIRT(Filters, _NewEnum)
         /* [id][restricted] */ HRESULT ( STDMETHODCALLTYPE *_NewEnum )( 
             __RPC__in Filters * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppvObject);
         
+        DECLSPEC_XFGVIRT(Filters, get_Count)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in Filters * This,
             /* [retval][out] */ __RPC__out long *c);
         
+        DECLSPEC_XFGVIRT(Filters, get_Item)
         /* [id][helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in Filters * This,
             /* [in] */ VARIANT Index,
             /* [retval][out] */ __RPC__deref_out_opt Filter **ppvObject);
         
+        DECLSPEC_XFGVIRT(Filters, Append)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Append )( 
             __RPC__in Filters * This,
             /* [in] */ __RPC__in BSTR tableName,
             /* [in] */ FilterTypeEnum filterType,
             /* [in] */ __RPC__in BSTR filterCriteria);
         
+        DECLSPEC_XFGVIRT(Filters, Delete)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in Filters * This,
             /* [in] */ VARIANT Index);
@@ -883,28 +942,34 @@ EXTERN_C const IID IID_IJetEngine;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IJetEngine * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IJetEngine * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IJetEngine * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IJetEngine * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IJetEngine * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IJetEngine * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -913,6 +978,7 @@ EXTERN_C const IID IID_IJetEngine;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IJetEngine * This,
             /* [annotation][in] */ 
@@ -932,11 +998,13 @@ EXTERN_C const IID IID_IJetEngine;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IJetEngine, CompactDatabase)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *CompactDatabase )( 
             __RPC__in IJetEngine * This,
             /* [in] */ __RPC__in BSTR SourceConnection,
             /* [in] */ __RPC__in BSTR Destconnection);
         
+        DECLSPEC_XFGVIRT(IJetEngine, RefreshCache)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *RefreshCache )( 
             __RPC__in IJetEngine * This,
             /* [in] */ __RPC__in /* external definition not present */ _Connection *Connection);

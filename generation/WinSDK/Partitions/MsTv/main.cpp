@@ -29,3 +29,7 @@
 #include <bdamedia.h>
 //#include <bdaiface_enums.h>
 #include <mpeg2bits.h>
+#include <atsmedia.h>
+//#include <tune.h> -- C++ classes
+//#include <tvratings_enum.h> -- duplicates stuff from above
+

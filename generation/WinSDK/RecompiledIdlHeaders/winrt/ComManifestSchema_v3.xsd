@@ -25,7 +25,8 @@
     <xs:attribute name="ServiceName" type="t:ST_NonEmptyString" use="required"/>
     <xs:attribute name="Arguments" type="t:ST_NonEmptyString"/>
     <xs:attribute name="DisplayName" type="t:ST_DisplayName"/>
-    <xs:attribute name="LaunchAndActivationPermission" type="com:ST_Permissions" />
+    <xs:attribute name="LaunchAndActivationPermission" type="t:ST_PermissionsCom" />
   </xs:complexType>
 
 </xs:schema>
+

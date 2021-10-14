@@ -39,8 +39,8 @@ Abstract:
 #define _WIN32_WINNT_WIN7                   0x0601
 #define _WIN32_WINNT_WIN8                   0x0602
 #define _WIN32_WINNT_WINBLUE                0x0603
-#define _WIN32_WINNT_WINTHRESHOLD           0x0A00 /* ABRACADABRA_THRESHOLD*/
-#define _WIN32_WINNT_WIN10                  0x0A00 /* ABRACADABRA_THRESHOLD*/
+#define _WIN32_WINNT_WINTHRESHOLD           0x0A00
+#define _WIN32_WINNT_WIN10                  0x0A00
 
 //
 // _WIN32_IE_ version constants
@@ -60,7 +60,7 @@ Abstract:
 #define _WIN32_IE_IE80                      0x0800
 #define _WIN32_IE_IE90                      0x0900
 #define _WIN32_IE_IE100                     0x0A00
-#define _WIN32_IE_IE110                     0x0A00  /* ABRACADABRA_THRESHOLD */
+#define _WIN32_IE_IE110                     0x0A00
 
 //
 // IE <-> OS version mapping
@@ -95,13 +95,15 @@ Abstract:
 #define _WIN32_IE_WIN7                      _WIN32_IE_IE80
 #define _WIN32_IE_WIN8                      _WIN32_IE_IE100
 #define _WIN32_IE_WINBLUE                   _WIN32_IE_IE100
-#define _WIN32_IE_WINTHRESHOLD              _WIN32_IE_IE110  /* ABRACADABRA_THRESHOLD */
-#define _WIN32_IE_WIN10                     _WIN32_IE_IE110  /* ABRACADABRA_THRESHOLD */
+#define _WIN32_IE_WINTHRESHOLD              _WIN32_IE_IE110
+#define _WIN32_IE_WIN10                     _WIN32_IE_IE110
 
 
 //
 // NTDDI version constants
 //
+#define NTDDI_WIN4                          0x04000000
+
 #define NTDDI_WIN2K                         0x05000000
 #define NTDDI_WIN2KSP1                      0x05000100
 #define NTDDI_WIN2KSP2                      0x05000200
@@ -132,7 +134,7 @@ Abstract:
 #define NTDDI_VISTASP3                      NTDDI_WIN6SP3
 #define NTDDI_VISTASP4                      NTDDI_WIN6SP4
 
-#define NTDDI_LONGHORN  NTDDI_VISTA
+#define NTDDI_LONGHORN                      NTDDI_VISTA
 
 #define NTDDI_WS08                          NTDDI_WIN6SP1
 #define NTDDI_WS08SP2                       NTDDI_WIN6SP2
@@ -142,18 +144,21 @@ Abstract:
 #define NTDDI_WIN7                          0x06010000
 #define NTDDI_WIN8                          0x06020000
 #define NTDDI_WINBLUE                       0x06030000
-#define NTDDI_WINTHRESHOLD                  0x0A000000  /* ABRACADABRA_THRESHOLD */
-#define NTDDI_WIN10                         0x0A000000  /* ABRACADABRA_THRESHOLD */
-#define NTDDI_WIN10_TH2                     0x0A000001  /* ABRACADABRA_WIN10_TH2 */
-#define NTDDI_WIN10_RS1                     0x0A000002  /* ABRACADABRA_WIN10_RS1 */
-#define NTDDI_WIN10_RS2                     0x0A000003  /* ABRACADABRA_WIN10_RS2 */
-#define NTDDI_WIN10_RS3                     0x0A000004  /* ABRACADABRA_WIN10_RS3 */
-#define NTDDI_WIN10_RS4                     0x0A000005  /* ABRACADABRA_WIN10_RS4 */
-#define NTDDI_WIN10_RS5                     0x0A000006  /* ABRACADABRA_WIN10_RS5 */
-#define NTDDI_WIN10_19H1                    0x0A000007  /* ABRACADABRA_WIN10_19H1*/
-#define NTDDI_WIN10_VB                      0x0A000008  /* ABRACADABRA_WIN10_VB */
+#define NTDDI_WINTHRESHOLD                  0x0A000000
+#define NTDDI_WIN10                         0x0A000000
+#define NTDDI_WIN10_TH2                     0x0A000001
+#define NTDDI_WIN10_RS1                     0x0A000002
+#define NTDDI_WIN10_RS2                     0x0A000003
+#define NTDDI_WIN10_RS3                     0x0A000004
+#define NTDDI_WIN10_RS4                     0x0A000005
+#define NTDDI_WIN10_RS5                     0x0A000006
+#define NTDDI_WIN10_19H1                    0x0A000007
+#define NTDDI_WIN10_VB                      0x0A000008
+#define NTDDI_WIN10_MN                      0x0A000009
+#define NTDDI_WIN10_FE                      0x0A00000A
+#define NTDDI_WIN10_CO                      0x0A00000B
 
-#define WDK_NTDDI_VERSION                   NTDDI_WIN10_VB /* ABRACADABRA_WIN10_VB */
+#define WDK_NTDDI_VERSION                   NTDDI_WIN10_CO
 
 
 //
@@ -225,11 +230,11 @@ Abstract:
 #define NTDDI_VERSION   NTDDI_VERSION_FROM_WIN32_WINNT(_WIN32_WINNT)
 #elif (_WIN32_WINNT >= _WIN32_WINNT_WIN10)
 // set NTDDI_VERSION to default to WDK_NTDDI_VERSION
-#define NTDDI_VERSION   WDK_NTDDI_VERSION 
+#define NTDDI_VERSION   WDK_NTDDI_VERSION
 #endif // (_WIN32_WINNT <= _WIN32_WINNT_WINBLUE)
 #else
 // set NTDDI_VERSION to default to latest if _WIN32_WINNT isn't set
-#define NTDDI_VERSION   0x0A000008
+#define NTDDI_VERSION   0x0A00000B
 #endif // _WIN32_WINNT
 #endif // NTDDI_VERSION
 

@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -31,6 +31,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -219,28 +227,34 @@ EXTERN_C const IID IID_IADsTSUserEx;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IADsTSUserEx * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IADsTSUserEx * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IADsTSUserEx * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IADsTSUserEx * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IADsTSUserEx * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IADsTSUserEx * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -249,6 +263,7 @@ EXTERN_C const IID IID_IADsTSUserEx;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IADsTSUserEx * This,
             /* [annotation][in] */ 
@@ -268,122 +283,152 @@ EXTERN_C const IID IID_IADsTSUserEx;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IADsTSUserEx, get_TerminalServicesProfilePath)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TerminalServicesProfilePath )( 
             __RPC__in IADsTSUserEx * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(IADsTSUserEx, put_TerminalServicesProfilePath)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_TerminalServicesProfilePath )( 
             __RPC__in IADsTSUserEx * This,
             /* [in] */ __RPC__in BSTR pNewVal);
         
+        DECLSPEC_XFGVIRT(IADsTSUserEx, get_TerminalServicesHomeDirectory)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TerminalServicesHomeDirectory )( 
             __RPC__in IADsTSUserEx * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(IADsTSUserEx, put_TerminalServicesHomeDirectory)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_TerminalServicesHomeDirectory )( 
             __RPC__in IADsTSUserEx * This,
             /* [in] */ __RPC__in BSTR pNewVal);
         
+        DECLSPEC_XFGVIRT(IADsTSUserEx, get_TerminalServicesHomeDrive)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TerminalServicesHomeDrive )( 
             __RPC__in IADsTSUserEx * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(IADsTSUserEx, put_TerminalServicesHomeDrive)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_TerminalServicesHomeDrive )( 
             __RPC__in IADsTSUserEx * This,
             /* [in] */ __RPC__in BSTR pNewVal);
         
+        DECLSPEC_XFGVIRT(IADsTSUserEx, get_AllowLogon)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AllowLogon )( 
             __RPC__in IADsTSUserEx * This,
             /* [retval][out] */ __RPC__out LONG *pVal);
         
+        DECLSPEC_XFGVIRT(IADsTSUserEx, put_AllowLogon)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AllowLogon )( 
             __RPC__in IADsTSUserEx * This,
             /* [in] */ LONG NewVal);
         
+        DECLSPEC_XFGVIRT(IADsTSUserEx, get_EnableRemoteControl)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EnableRemoteControl )( 
             __RPC__in IADsTSUserEx * This,
             /* [retval][out] */ __RPC__out LONG *pVal);
         
+        DECLSPEC_XFGVIRT(IADsTSUserEx, put_EnableRemoteControl)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_EnableRemoteControl )( 
             __RPC__in IADsTSUserEx * This,
             /* [in] */ LONG NewVal);
         
+        DECLSPEC_XFGVIRT(IADsTSUserEx, get_MaxDisconnectionTime)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MaxDisconnectionTime )( 
             __RPC__in IADsTSUserEx * This,
             /* [retval][out] */ __RPC__out LONG *pVal);
         
+        DECLSPEC_XFGVIRT(IADsTSUserEx, put_MaxDisconnectionTime)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MaxDisconnectionTime )( 
             __RPC__in IADsTSUserEx * This,
             /* [in] */ LONG NewVal);
         
+        DECLSPEC_XFGVIRT(IADsTSUserEx, get_MaxConnectionTime)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MaxConnectionTime )( 
             __RPC__in IADsTSUserEx * This,
             /* [retval][out] */ __RPC__out LONG *pVal);
         
+        DECLSPEC_XFGVIRT(IADsTSUserEx, put_MaxConnectionTime)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MaxConnectionTime )( 
             __RPC__in IADsTSUserEx * This,
             /* [in] */ LONG NewVal);
         
+        DECLSPEC_XFGVIRT(IADsTSUserEx, get_MaxIdleTime)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MaxIdleTime )( 
             __RPC__in IADsTSUserEx * This,
             /* [retval][out] */ __RPC__out LONG *pVal);
         
+        DECLSPEC_XFGVIRT(IADsTSUserEx, put_MaxIdleTime)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MaxIdleTime )( 
             __RPC__in IADsTSUserEx * This,
             /* [in] */ LONG NewVal);
         
+        DECLSPEC_XFGVIRT(IADsTSUserEx, get_ReconnectionAction)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReconnectionAction )( 
             __RPC__in IADsTSUserEx * This,
             /* [retval][out] */ __RPC__out LONG *pNewVal);
         
+        DECLSPEC_XFGVIRT(IADsTSUserEx, put_ReconnectionAction)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ReconnectionAction )( 
             __RPC__in IADsTSUserEx * This,
             /* [in] */ LONG NewVal);
         
+        DECLSPEC_XFGVIRT(IADsTSUserEx, get_BrokenConnectionAction)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BrokenConnectionAction )( 
             __RPC__in IADsTSUserEx * This,
             /* [retval][out] */ __RPC__out LONG *pNewVal);
         
+        DECLSPEC_XFGVIRT(IADsTSUserEx, put_BrokenConnectionAction)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_BrokenConnectionAction )( 
             __RPC__in IADsTSUserEx * This,
             /* [in] */ LONG NewVal);
         
+        DECLSPEC_XFGVIRT(IADsTSUserEx, get_ConnectClientDrivesAtLogon)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConnectClientDrivesAtLogon )( 
             __RPC__in IADsTSUserEx * This,
             /* [retval][out] */ __RPC__out LONG *pNewVal);
         
+        DECLSPEC_XFGVIRT(IADsTSUserEx, put_ConnectClientDrivesAtLogon)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ConnectClientDrivesAtLogon )( 
             __RPC__in IADsTSUserEx * This,
             /* [in] */ LONG NewVal);
         
+        DECLSPEC_XFGVIRT(IADsTSUserEx, get_ConnectClientPrintersAtLogon)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConnectClientPrintersAtLogon )( 
             __RPC__in IADsTSUserEx * This,
             /* [retval][out] */ __RPC__out LONG *pVal);
         
+        DECLSPEC_XFGVIRT(IADsTSUserEx, put_ConnectClientPrintersAtLogon)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ConnectClientPrintersAtLogon )( 
             __RPC__in IADsTSUserEx * This,
             /* [in] */ LONG NewVal);
         
+        DECLSPEC_XFGVIRT(IADsTSUserEx, get_DefaultToMainPrinter)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultToMainPrinter )( 
             __RPC__in IADsTSUserEx * This,
             /* [retval][out] */ __RPC__out LONG *pVal);
         
+        DECLSPEC_XFGVIRT(IADsTSUserEx, put_DefaultToMainPrinter)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DefaultToMainPrinter )( 
             __RPC__in IADsTSUserEx * This,
             /* [in] */ LONG NewVal);
         
+        DECLSPEC_XFGVIRT(IADsTSUserEx, get_TerminalServicesWorkDirectory)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TerminalServicesWorkDirectory )( 
             __RPC__in IADsTSUserEx * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(IADsTSUserEx, put_TerminalServicesWorkDirectory)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_TerminalServicesWorkDirectory )( 
             __RPC__in IADsTSUserEx * This,
             /* [in] */ __RPC__in BSTR pNewVal);
         
+        DECLSPEC_XFGVIRT(IADsTSUserEx, get_TerminalServicesInitialProgram)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TerminalServicesInitialProgram )( 
             __RPC__in IADsTSUserEx * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(IADsTSUserEx, put_TerminalServicesInitialProgram)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_TerminalServicesInitialProgram )( 
             __RPC__in IADsTSUserEx * This,
             /* [in] */ __RPC__in BSTR pNewVal);

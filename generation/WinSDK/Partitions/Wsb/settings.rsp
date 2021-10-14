@@ -1,5 +1,7 @@
 --traverse
 <IncludeRoot>/um/wsbapp.h
 <IncludeRoot>/um/wsbonline.h
+<IncludeRoot>/um/wsbapperror.h
+<IncludeRoot>/um/wsbonlineerror.h
 --namespace
 Windows.Win32.System.ServerBackup

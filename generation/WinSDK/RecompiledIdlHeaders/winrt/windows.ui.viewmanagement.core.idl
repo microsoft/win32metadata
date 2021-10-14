@@ -19,6 +19,8 @@ namespace Windows
     {
         typedef struct Rect Rect;
 
+        typedef struct TimeSpan TimeSpan;
+
         apicontract UniversalApiContract;
     }
 }
@@ -43,6 +45,14 @@ namespace Windows
 
                 typedef enum CoreInputViewXYFocusTransferDirection CoreInputViewXYFocusTransferDirection;
 
+                interface ICoreFrameworkInputView;
+
+                interface ICoreFrameworkInputViewAnimationStartingEventArgs;
+
+                interface ICoreFrameworkInputViewOcclusionsChangedEventArgs;
+
+                interface ICoreFrameworkInputViewStatics;
+
                 interface ICoreInputView;
 
                 interface ICoreInputView2;
@@ -50,6 +60,10 @@ namespace Windows
                 interface ICoreInputView3;
 
                 interface ICoreInputView4;
+
+                interface ICoreInputView5;
+
+                interface ICoreInputViewAnimationStartingEventArgs;
 
                 interface ICoreInputViewHidingEventArgs;
 
@@ -69,7 +83,15 @@ namespace Windows
 
                 interface IUISettingsControllerStatics;
 
+                runtimeclass CoreFrameworkInputView;
+
+                runtimeclass CoreFrameworkInputViewAnimationStartingEventArgs;
+
+                runtimeclass CoreFrameworkInputViewOcclusionsChangedEventArgs;
+
                 runtimeclass CoreInputView;
+
+                runtimeclass CoreInputViewAnimationStartingEventArgs;
 
                 runtimeclass CoreInputViewHidingEventArgs;
 
@@ -106,7 +128,13 @@ namespace Windows
 
                     interface Windows.Foundation.IAsyncOperation<Windows.UI.ViewManagement.Core.UISettingsController*>;
 
+                    interface Windows.Foundation.TypedEventHandler<Windows.UI.ViewManagement.Core.CoreFrameworkInputView*, Windows.UI.ViewManagement.Core.CoreFrameworkInputViewAnimationStartingEventArgs*>;
+
+                    interface Windows.Foundation.TypedEventHandler<Windows.UI.ViewManagement.Core.CoreFrameworkInputView*, Windows.UI.ViewManagement.Core.CoreFrameworkInputViewOcclusionsChangedEventArgs*>;
+
                     interface Windows.Foundation.TypedEventHandler<Windows.UI.ViewManagement.Core.CoreInputView*, IInspectable*>;
+
+                    interface Windows.Foundation.TypedEventHandler<Windows.UI.ViewManagement.Core.CoreInputView*, Windows.UI.ViewManagement.Core.CoreInputViewAnimationStartingEventArgs*>;
 
                     interface Windows.Foundation.TypedEventHandler<Windows.UI.ViewManagement.Core.CoreInputView*, Windows.UI.ViewManagement.Core.CoreInputViewHidingEventArgs*>;
 
@@ -138,7 +166,11 @@ namespace Windows
                     Handwriting = 2,
                     Emoji       = 3,
                     [contract(Windows.Foundation.UniversalApiContract, 10.0)]
-                    Symbols     = 4
+                    Symbols     = 4,
+                    [contract(Windows.Foundation.UniversalApiContract, 11.0)]
+                    Clipboard   = 5,
+                    [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+                    Dictation   = 6
                 };
 
                 [contract(Windows.Foundation.UniversalApiContract, 5.0)]
@@ -157,6 +189,45 @@ namespace Windows
                     Down  = 2,
                     Left  = 3
                 };
+
+                [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+                [exclusiveto(Windows.UI.ViewManagement.Core.CoreFrameworkInputView)]
+                [uuid(D77C94AE-46B8-5D4A-9489-8DDEC3D639A6)]
+                interface ICoreFrameworkInputView : IInspectable
+                {
+                    [eventadd] HRESULT PrimaryViewAnimationStarting([in] Windows.Foundation.TypedEventHandler<Windows.UI.ViewManagement.Core.CoreFrameworkInputView*, Windows.UI.ViewManagement.Core.CoreFrameworkInputViewAnimationStartingEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
+                    [eventremove] HRESULT PrimaryViewAnimationStarting([in] EventRegistrationToken token);
+                    [eventadd] HRESULT OcclusionsChanged([in] Windows.Foundation.TypedEventHandler<Windows.UI.ViewManagement.Core.CoreFrameworkInputView*, Windows.UI.ViewManagement.Core.CoreFrameworkInputViewOcclusionsChangedEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
+                    [eventremove] HRESULT OcclusionsChanged([in] EventRegistrationToken token);
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+                [exclusiveto(Windows.UI.ViewManagement.Core.CoreFrameworkInputViewAnimationStartingEventArgs)]
+                [uuid(C0EC901C-BBA4-501B-AE8B-65C9E756A719)]
+                interface ICoreFrameworkInputViewAnimationStartingEventArgs : IInspectable
+                {
+                    [propget] HRESULT Occlusions([out] [retval] Windows.Foundation.Collections.IVectorView<Windows.UI.ViewManagement.Core.CoreInputViewOcclusion*>** value);
+                    [propget] HRESULT FrameworkAnimationRecommended([out] [retval] boolean* value);
+                    [propget] HRESULT AnimationDuration([out] [retval] Windows.Foundation.TimeSpan* value);
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+                [exclusiveto(Windows.UI.ViewManagement.Core.CoreFrameworkInputViewOcclusionsChangedEventArgs)]
+                [uuid(F36F4949-C82C-53D1-A75D-2B2BAF0D9B0D)]
+                interface ICoreFrameworkInputViewOcclusionsChangedEventArgs : IInspectable
+                {
+                    [propget] HRESULT Occlusions([out] [retval] Windows.Foundation.Collections.IVectorView<Windows.UI.ViewManagement.Core.CoreInputViewOcclusion*>** value);
+                    [propget] HRESULT Handled([out] [retval] boolean* value);
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+                [exclusiveto(Windows.UI.ViewManagement.Core.CoreFrameworkInputView)]
+                [uuid(6EEBD9B6-EAC2-5F8B-975F-772EE3E42EEB)]
+                interface ICoreFrameworkInputViewStatics : IInspectable
+                {
+                    HRESULT GetForUIContext([in] Windows.UI.UIContext* context, [out] [retval] Windows.UI.ViewManagement.Core.CoreFrameworkInputView** result);
+                    HRESULT GetForCurrentView([out] [retval] Windows.UI.ViewManagement.Core.CoreFrameworkInputView** result);
+                }
 
                 [contract(Windows.Foundation.UniversalApiContract, 5.0)]
                 [exclusiveto(Windows.UI.ViewManagement.Core.CoreInputView)]
@@ -201,6 +272,29 @@ namespace Windows
                     [eventremove] HRESULT PrimaryViewShowing([in] EventRegistrationToken token);
                     [eventadd] HRESULT PrimaryViewHiding([in] Windows.Foundation.TypedEventHandler<Windows.UI.ViewManagement.Core.CoreInputView*, Windows.UI.ViewManagement.Core.CoreInputViewHidingEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
                     [eventremove] HRESULT PrimaryViewHiding([in] EventRegistrationToken token);
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+                [exclusiveto(Windows.UI.ViewManagement.Core.CoreInputView)]
+                [uuid(136316E0-C6D5-5C57-811E-1AD8A99BA6AB)]
+                interface ICoreInputView5 : IInspectable
+                {
+                    HRESULT IsKindSupported([in] Windows.UI.ViewManagement.Core.CoreInputViewKind type, [out] [retval] boolean* result);
+                    [eventadd] HRESULT SupportedKindsChanged([in] Windows.Foundation.TypedEventHandler<Windows.UI.ViewManagement.Core.CoreInputView*, IInspectable*>* handler, [out] [retval] EventRegistrationToken* token);
+                    [eventremove] HRESULT SupportedKindsChanged([in] EventRegistrationToken token);
+                    [eventadd] HRESULT PrimaryViewAnimationStarting([in] Windows.Foundation.TypedEventHandler<Windows.UI.ViewManagement.Core.CoreInputView*, Windows.UI.ViewManagement.Core.CoreInputViewAnimationStartingEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
+                    [eventremove] HRESULT PrimaryViewAnimationStarting([in] EventRegistrationToken token);
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+                [exclusiveto(Windows.UI.ViewManagement.Core.CoreInputViewAnimationStartingEventArgs)]
+                [uuid(A9144AF2-B55C-5EA1-B8AB-5340F3E94897)]
+                interface ICoreInputViewAnimationStartingEventArgs : IInspectable
+                {
+                    [propget] HRESULT Occlusions([out] [retval] Windows.Foundation.Collections.IVectorView<Windows.UI.ViewManagement.Core.CoreInputViewOcclusion*>** value);
+                    [propget] HRESULT Handled([out] [retval] boolean* value);
+                    [propput] HRESULT Handled([in] boolean value);
+                    [propget] HRESULT AnimationDuration([out] [retval] Windows.Foundation.TimeSpan* value);
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 10.0)]
@@ -287,6 +381,29 @@ namespace Windows
                     HRESULT RequestDefaultAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.UI.ViewManagement.Core.UISettingsController*>** operation);
                 }
 
+                [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+                [marshaling_behavior(agile)]
+                [static(Windows.UI.ViewManagement.Core.ICoreFrameworkInputViewStatics, Windows.Foundation.UniversalApiContract, 13.0)]
+                [threading(both)]
+                runtimeclass CoreFrameworkInputView
+                {
+                    [default] interface Windows.UI.ViewManagement.Core.ICoreFrameworkInputView;
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+                [marshaling_behavior(agile)]
+                runtimeclass CoreFrameworkInputViewAnimationStartingEventArgs
+                {
+                    [default] interface Windows.UI.ViewManagement.Core.ICoreFrameworkInputViewAnimationStartingEventArgs;
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+                [marshaling_behavior(agile)]
+                runtimeclass CoreFrameworkInputViewOcclusionsChangedEventArgs
+                {
+                    [default] interface Windows.UI.ViewManagement.Core.ICoreFrameworkInputViewOcclusionsChangedEventArgs;
+                }
+
                 [contract(Windows.Foundation.UniversalApiContract, 5.0)]
                 [marshaling_behavior(agile)]
                 [static(Windows.UI.ViewManagement.Core.ICoreInputViewStatics, Windows.Foundation.UniversalApiContract, 5.0)]
@@ -298,6 +415,14 @@ namespace Windows
                     [contract(Windows.Foundation.UniversalApiContract, 6.0)] interface Windows.UI.ViewManagement.Core.ICoreInputView2;
                     [contract(Windows.Foundation.UniversalApiContract, 7.0)] interface Windows.UI.ViewManagement.Core.ICoreInputView3;
                     [contract(Windows.Foundation.UniversalApiContract, 10.0)] interface Windows.UI.ViewManagement.Core.ICoreInputView4;
+                    [contract(Windows.Foundation.UniversalApiContract, 13.0)] interface Windows.UI.ViewManagement.Core.ICoreInputView5;
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+                [marshaling_behavior(agile)]
+                runtimeclass CoreInputViewAnimationStartingEventArgs
+                {
+                    [default] interface Windows.UI.ViewManagement.Core.ICoreInputViewAnimationStartingEventArgs;
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 10.0)]

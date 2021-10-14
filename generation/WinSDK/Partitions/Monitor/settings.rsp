@@ -2,5 +2,6 @@
 <IncludeRoot>/um/lowlevelmonitorconfigurationapi.h
 <IncludeRoot>/um/highlevelmonitorconfigurationapi.h
 <IncludeRoot>/um/physicalmonitorenumerationapi.h
+<IncludeRoot>/um/cloneviewhelper.h
 --namespace
 Windows.Win32.Devices.Display

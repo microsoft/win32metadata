@@ -4,5 +4,7 @@ XHR_CERT_ERROR_FLAG=uint
 --traverse
 <IncludeRoot>/um/msxml.h
 <IncludeRoot>/um/MsXml6.h
+<IncludeRoot>/um/msxml6did.h
+<IncludeRoot>/um/msxmldid.h
 --namespace
 Windows.Win32.Data.Xml.MsXml

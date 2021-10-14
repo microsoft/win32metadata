@@ -14,10 +14,13 @@
 #pragma warning(push)
 #pragma warning(disable: _UCRT_DISABLED_WARNINGS)
 _UCRT_DISABLE_CLANG_WARNINGS
-
 _CRT_BEGIN_C_HEADER
 
+#if _CRT_HAS_C11
 
+#define static_assert _Static_assert
+
+#endif // _CRT_HAS_C11
 
 #undef assert
 

@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -256,6 +264,7 @@ EXTERN_C const IID IID_IDot11AdHocManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDot11AdHocManager * This,
             /* [annotation][in] */ 
@@ -263,12 +272,15 @@ EXTERN_C const IID IID_IDot11AdHocManager;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDot11AdHocManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDot11AdHocManager * This);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocManager, CreateNetwork)
         HRESULT ( STDMETHODCALLTYPE *CreateNetwork )( 
             IDot11AdHocManager * This,
             /* [annotation][string][in] */ 
@@ -286,6 +298,7 @@ EXTERN_C const IID IID_IDot11AdHocManager;
             /* [annotation][out] */ 
             _Out_  IDot11AdHocNetwork **pIAdHoc);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocManager, CommitCreatedNetwork)
         HRESULT ( STDMETHODCALLTYPE *CommitCreatedNetwork )( 
             IDot11AdHocManager * This,
             /* [annotation][in] */ 
@@ -295,6 +308,7 @@ EXTERN_C const IID IID_IDot11AdHocManager;
             /* [annotation][in] */ 
             _In_  BOOLEAN fMakeSavedProfileUserSpecific);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocManager, GetIEnumDot11AdHocNetworks)
         HRESULT ( STDMETHODCALLTYPE *GetIEnumDot11AdHocNetworks )( 
             IDot11AdHocManager * This,
             /* [annotation][in] */ 
@@ -302,11 +316,13 @@ EXTERN_C const IID IID_IDot11AdHocManager;
             /* [annotation][out] */ 
             _Out_  IEnumDot11AdHocNetworks **ppEnum);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocManager, GetIEnumDot11AdHocInterfaces)
         HRESULT ( STDMETHODCALLTYPE *GetIEnumDot11AdHocInterfaces )( 
             IDot11AdHocManager * This,
             /* [annotation][out] */ 
             _Out_  IEnumDot11AdHocInterfaces **ppEnum);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocManager, GetNetwork)
         HRESULT ( STDMETHODCALLTYPE *GetNetwork )( 
             IDot11AdHocManager * This,
             /* [annotation][in] */ 
@@ -403,6 +419,7 @@ EXTERN_C const IID IID_IDot11AdHocManagerNotificationSink;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDot11AdHocManagerNotificationSink * This,
             /* [annotation][in] */ 
@@ -410,27 +427,33 @@ EXTERN_C const IID IID_IDot11AdHocManagerNotificationSink;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDot11AdHocManagerNotificationSink * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDot11AdHocManagerNotificationSink * This);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocManagerNotificationSink, OnNetworkAdd)
         HRESULT ( STDMETHODCALLTYPE *OnNetworkAdd )( 
             IDot11AdHocManagerNotificationSink * This,
             /* [annotation][in] */ 
             _In_  IDot11AdHocNetwork *pIAdHocNetwork);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocManagerNotificationSink, OnNetworkRemove)
         HRESULT ( STDMETHODCALLTYPE *OnNetworkRemove )( 
             IDot11AdHocManagerNotificationSink * This,
             /* [annotation][in] */ 
             _In_  GUID *Signature);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocManagerNotificationSink, OnInterfaceAdd)
         HRESULT ( STDMETHODCALLTYPE *OnInterfaceAdd )( 
             IDot11AdHocManagerNotificationSink * This,
             /* [annotation][in] */ 
             _In_  IDot11AdHocInterface *pIAdHocInterface);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocManagerNotificationSink, OnInterfaceRemove)
         HRESULT ( STDMETHODCALLTYPE *OnInterfaceRemove )( 
             IDot11AdHocManagerNotificationSink * This,
             /* [annotation][in] */ 
@@ -524,6 +547,7 @@ EXTERN_C const IID IID_IEnumDot11AdHocNetworks;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnumDot11AdHocNetworks * This,
             /* [annotation][in] */ 
@@ -531,12 +555,15 @@ EXTERN_C const IID IID_IEnumDot11AdHocNetworks;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IEnumDot11AdHocNetworks * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IEnumDot11AdHocNetworks * This);
         
+        DECLSPEC_XFGVIRT(IEnumDot11AdHocNetworks, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumDot11AdHocNetworks * This,
             /* [annotation][in] */ 
@@ -546,14 +573,17 @@ EXTERN_C const IID IID_IEnumDot11AdHocNetworks;
             /* [annotation][out] */ 
             _Out_  ULONG *pcEltFetched);
         
+        DECLSPEC_XFGVIRT(IEnumDot11AdHocNetworks, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             IEnumDot11AdHocNetworks * This,
             /* [annotation][in] */ 
             _In_  ULONG cElt);
         
+        DECLSPEC_XFGVIRT(IEnumDot11AdHocNetworks, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             IEnumDot11AdHocNetworks * This);
         
+        DECLSPEC_XFGVIRT(IEnumDot11AdHocNetworks, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             IEnumDot11AdHocNetworks * This,
             /* [annotation][out] */ 
@@ -681,6 +711,7 @@ EXTERN_C const IID IID_IDot11AdHocNetwork;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDot11AdHocNetwork * This,
             /* [annotation][in] */ 
@@ -688,35 +719,43 @@ EXTERN_C const IID IID_IDot11AdHocNetwork;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDot11AdHocNetwork * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDot11AdHocNetwork * This);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocNetwork, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             IDot11AdHocNetwork * This,
             /* [annotation][out][in] */ 
             _Inout_  DOT11_ADHOC_NETWORK_CONNECTION_STATUS *eStatus);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocNetwork, GetSSID)
         HRESULT ( STDMETHODCALLTYPE *GetSSID )( 
             IDot11AdHocNetwork * This,
             /* [annotation][string][out] */ 
             _Out_  LPWSTR *ppszwSSID);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocNetwork, HasProfile)
         HRESULT ( STDMETHODCALLTYPE *HasProfile )( 
             IDot11AdHocNetwork * This,
             /* [annotation][out][in] */ 
             _Inout_  BOOLEAN *pf11d);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocNetwork, GetProfileName)
         HRESULT ( STDMETHODCALLTYPE *GetProfileName )( 
             IDot11AdHocNetwork * This,
             /* [annotation][string][out] */ 
             _Out_  LPWSTR *ppszwProfileName);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocNetwork, DeleteProfile)
         HRESULT ( STDMETHODCALLTYPE *DeleteProfile )( 
             IDot11AdHocNetwork * This);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocNetwork, GetSignalQuality)
         HRESULT ( STDMETHODCALLTYPE *GetSignalQuality )( 
             IDot11AdHocNetwork * This,
             /* [annotation][out] */ 
@@ -724,26 +763,31 @@ EXTERN_C const IID IID_IDot11AdHocNetwork;
             /* [annotation][out] */ 
             _Out_  ULONG *puStrengthMax);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocNetwork, GetSecuritySetting)
         HRESULT ( STDMETHODCALLTYPE *GetSecuritySetting )( 
             IDot11AdHocNetwork * This,
             /* [annotation][out] */ 
             _Out_  IDot11AdHocSecuritySettings **pAdHocSecuritySetting);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocNetwork, GetContextGuid)
         HRESULT ( STDMETHODCALLTYPE *GetContextGuid )( 
             IDot11AdHocNetwork * This,
             /* [annotation][out][in] */ 
             _Inout_  GUID *pContextGuid);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocNetwork, GetSignature)
         HRESULT ( STDMETHODCALLTYPE *GetSignature )( 
             IDot11AdHocNetwork * This,
             /* [annotation][out][in] */ 
             _Inout_  GUID *pSignature);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocNetwork, GetInterface)
         HRESULT ( STDMETHODCALLTYPE *GetInterface )( 
             IDot11AdHocNetwork * This,
             /* [annotation][out] */ 
             _Out_  IDot11AdHocInterface **pAdHocInterface);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocNetwork, Connect)
         HRESULT ( STDMETHODCALLTYPE *Connect )( 
             IDot11AdHocNetwork * This,
             /* [annotation][string][in] */ 
@@ -755,6 +799,7 @@ EXTERN_C const IID IID_IDot11AdHocNetwork;
             /* [annotation][in] */ 
             _In_  BOOLEAN fMakeSavedProfileUserSpecific);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocNetwork, Disconnect)
         HRESULT ( STDMETHODCALLTYPE *Disconnect )( 
             IDot11AdHocNetwork * This);
         
@@ -858,6 +903,7 @@ EXTERN_C const IID IID_IDot11AdHocNetworkNotificationSink;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDot11AdHocNetworkNotificationSink * This,
             /* [annotation][in] */ 
@@ -865,16 +911,20 @@ EXTERN_C const IID IID_IDot11AdHocNetworkNotificationSink;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDot11AdHocNetworkNotificationSink * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDot11AdHocNetworkNotificationSink * This);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocNetworkNotificationSink, OnStatusChange)
         HRESULT ( STDMETHODCALLTYPE *OnStatusChange )( 
             IDot11AdHocNetworkNotificationSink * This,
             DOT11_ADHOC_NETWORK_CONNECTION_STATUS eStatus);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocNetworkNotificationSink, OnConnectFail)
         HRESULT ( STDMETHODCALLTYPE *OnConnectFail )( 
             IDot11AdHocNetworkNotificationSink * This,
             DOT11_ADHOC_CONNECT_FAIL_REASON eFailReason);
@@ -981,6 +1031,7 @@ EXTERN_C const IID IID_IDot11AdHocInterface;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDot11AdHocInterface * This,
             /* [annotation][in] */ 
@@ -988,47 +1039,57 @@ EXTERN_C const IID IID_IDot11AdHocInterface;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDot11AdHocInterface * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDot11AdHocInterface * This);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocInterface, GetDeviceSignature)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceSignature )( 
             IDot11AdHocInterface * This,
             /* [annotation][out][in] */ 
             _Inout_  GUID *pSignature);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocInterface, GetFriendlyName)
         HRESULT ( STDMETHODCALLTYPE *GetFriendlyName )( 
             IDot11AdHocInterface * This,
             /* [annotation][string][out] */ 
             _Out_  LPWSTR *ppszName);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocInterface, IsDot11d)
         HRESULT ( STDMETHODCALLTYPE *IsDot11d )( 
             IDot11AdHocInterface * This,
             /* [annotation][out][in] */ 
             _Inout_  BOOLEAN *pf11d);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocInterface, IsAdHocCapable)
         HRESULT ( STDMETHODCALLTYPE *IsAdHocCapable )( 
             IDot11AdHocInterface * This,
             /* [annotation][out][in] */ 
             _Inout_  BOOLEAN *pfAdHocCapable);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocInterface, IsRadioOn)
         HRESULT ( STDMETHODCALLTYPE *IsRadioOn )( 
             IDot11AdHocInterface * This,
             /* [annotation][out][in] */ 
             _Inout_  BOOLEAN *pfIsRadioOn);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocInterface, GetActiveNetwork)
         HRESULT ( STDMETHODCALLTYPE *GetActiveNetwork )( 
             IDot11AdHocInterface * This,
             /* [annotation][out] */ 
             _Out_  IDot11AdHocNetwork **ppNetwork);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocInterface, GetIEnumSecuritySettings)
         HRESULT ( STDMETHODCALLTYPE *GetIEnumSecuritySettings )( 
             IDot11AdHocInterface * This,
             /* [annotation][out] */ 
             _Out_  IEnumDot11AdHocSecuritySettings **ppEnum);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocInterface, GetIEnumDot11AdHocNetworks)
         HRESULT ( STDMETHODCALLTYPE *GetIEnumDot11AdHocNetworks )( 
             IDot11AdHocInterface * This,
             /* [annotation][in] */ 
@@ -1036,6 +1097,7 @@ EXTERN_C const IID IID_IDot11AdHocInterface;
             /* [annotation][out] */ 
             _Out_  IEnumDot11AdHocNetworks **ppEnum);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocInterface, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             IDot11AdHocInterface * This,
             /* [annotation][out][in] */ 
@@ -1144,6 +1206,7 @@ EXTERN_C const IID IID_IEnumDot11AdHocInterfaces;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnumDot11AdHocInterfaces * This,
             /* [annotation][in] */ 
@@ -1151,12 +1214,15 @@ EXTERN_C const IID IID_IEnumDot11AdHocInterfaces;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IEnumDot11AdHocInterfaces * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IEnumDot11AdHocInterfaces * This);
         
+        DECLSPEC_XFGVIRT(IEnumDot11AdHocInterfaces, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumDot11AdHocInterfaces * This,
             /* [annotation][in] */ 
@@ -1166,14 +1232,17 @@ EXTERN_C const IID IID_IEnumDot11AdHocInterfaces;
             /* [annotation][out] */ 
             _Out_  ULONG *pcEltFetched);
         
+        DECLSPEC_XFGVIRT(IEnumDot11AdHocInterfaces, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             IEnumDot11AdHocInterfaces * This,
             /* [annotation][in] */ 
             _In_  ULONG cElt);
         
+        DECLSPEC_XFGVIRT(IEnumDot11AdHocInterfaces, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             IEnumDot11AdHocInterfaces * This);
         
+        DECLSPEC_XFGVIRT(IEnumDot11AdHocInterfaces, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             IEnumDot11AdHocInterfaces * This,
             /* [annotation][out] */ 
@@ -1267,6 +1336,7 @@ EXTERN_C const IID IID_IEnumDot11AdHocSecuritySettings;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnumDot11AdHocSecuritySettings * This,
             /* [annotation][in] */ 
@@ -1274,12 +1344,15 @@ EXTERN_C const IID IID_IEnumDot11AdHocSecuritySettings;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IEnumDot11AdHocSecuritySettings * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IEnumDot11AdHocSecuritySettings * This);
         
+        DECLSPEC_XFGVIRT(IEnumDot11AdHocSecuritySettings, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumDot11AdHocSecuritySettings * This,
             /* [annotation][in] */ 
@@ -1289,14 +1362,17 @@ EXTERN_C const IID IID_IEnumDot11AdHocSecuritySettings;
             /* [annotation][out] */ 
             _Out_  ULONG *pcEltFetched);
         
+        DECLSPEC_XFGVIRT(IEnumDot11AdHocSecuritySettings, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             IEnumDot11AdHocSecuritySettings * This,
             /* [annotation][in] */ 
             _In_  ULONG cElt);
         
+        DECLSPEC_XFGVIRT(IEnumDot11AdHocSecuritySettings, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             IEnumDot11AdHocSecuritySettings * This);
         
+        DECLSPEC_XFGVIRT(IEnumDot11AdHocSecuritySettings, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             IEnumDot11AdHocSecuritySettings * This,
             /* [annotation][out] */ 
@@ -1380,6 +1456,7 @@ EXTERN_C const IID IID_IDot11AdHocSecuritySettings;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDot11AdHocSecuritySettings * This,
             /* [annotation][in] */ 
@@ -1387,17 +1464,21 @@ EXTERN_C const IID IID_IDot11AdHocSecuritySettings;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDot11AdHocSecuritySettings * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDot11AdHocSecuritySettings * This);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocSecuritySettings, GetDot11AuthAlgorithm)
         HRESULT ( STDMETHODCALLTYPE *GetDot11AuthAlgorithm )( 
             IDot11AdHocSecuritySettings * This,
             /* [annotation][out][in] */ 
             _Inout_  DOT11_ADHOC_AUTH_ALGORITHM *pAuth);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocSecuritySettings, GetDot11CipherAlgorithm)
         HRESULT ( STDMETHODCALLTYPE *GetDot11CipherAlgorithm )( 
             IDot11AdHocSecuritySettings * This,
             /* [annotation][out][in] */ 
@@ -1470,6 +1551,7 @@ EXTERN_C const IID IID_IDot11AdHocInterfaceNotificationSink;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDot11AdHocInterfaceNotificationSink * This,
             /* [annotation][in] */ 
@@ -1477,12 +1559,15 @@ EXTERN_C const IID IID_IDot11AdHocInterfaceNotificationSink;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDot11AdHocInterfaceNotificationSink * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDot11AdHocInterfaceNotificationSink * This);
         
+        DECLSPEC_XFGVIRT(IDot11AdHocInterfaceNotificationSink, OnConnectionStatusChange)
         HRESULT ( STDMETHODCALLTYPE *OnConnectionStatusChange )( 
             IDot11AdHocInterfaceNotificationSink * This,
             DOT11_ADHOC_NETWORK_CONNECTION_STATUS eStatus);

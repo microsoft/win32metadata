@@ -176,6 +176,33 @@ extern _Function_ignore_lock_checking_(*plock) void _Internal_suppress_lock_chec
  */
 #define _Has_lock_kind_(kind)  _SAL2_Source_(_Has_lock_kind_, (kind), _SA_annotes1(SAL_has_lock_property,#kind))
 
+/*
+ * smart locks (RAII lock wrappers)
+ */
+#ifdef __cplusplus
+} // extern "C"
+
+extern "C++"
+{
+    template<class _SmartLockType> _Acquires_lock_(_smartLock) void _Internal_acquires_smart_lock_(const _SmartLockType& _smartLock);
+    template<class _SmartLockType> _Releases_lock_(_smartLock) void _Internal_releases_smart_lock_(const _SmartLockType& _smartLock);
+} // extern "C++"
+
+#define _Analysis_assume_smart_lock_acquired_(lock) _Internal_acquires_smart_lock_((lock))
+#define _Analysis_assume_smart_lock_released_(lock) _Internal_releases_smart_lock_((lock))
+
+extern "C" {
+#endif
+
+/*
+ * move semantics
+ */
+#define _Internal_swap_lock_ 0
+
+#define _Detaches_lock_(detached, lock) _Post_same_lock_(_Internal_swap_lock_, (lock)) _Post_same_lock_((detached), _Internal_swap_lock_)
+#define _Moves_lock_(target, source) _Post_same_lock_(_Internal_swap_lock_, (source)) _Post_same_lock_((target), _Internal_swap_lock_)
+#define _Replaces_lock_(target, source) _Post_same_lock_(_Internal_swap_lock_, (target)) _Post_same_lock_((target), (source)) _Releases_lock_(_Internal_swap_lock_)
+#define _Swaps_locks_(left, right) _Post_same_lock_(_Internal_swap_lock_, (left)) _Post_same_lock_((left), (right)) _Post_same_lock_((right), _Internal_swap_lock_)
 
 /*
  * Old spelling
@@ -310,6 +337,16 @@ extern __function_ignore_lock_checking(*plock) void __internal_suppress_lock_che
 #define _No_competing_thread_end_ __pragma(warning(pop))
 
 #define _Has_lock_kind_(kind)
+
+#ifdef __cplusplus
+#define _Analysis_assume_smart_lock_acquired_(lock)
+#define _Analysis_assume_smart_lock_released_(lock)
+#endif
+
+#define _Detaches_lock_(detached, lock)
+#define _Moves_lock_(target, source)
+#define _Replaces_lock_(target, source)
+#define _Swaps_locks_(left, right)
 
 /*
  * Old spelling: will be deprecated

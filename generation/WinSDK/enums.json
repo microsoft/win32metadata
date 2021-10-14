@@ -156,6 +156,21 @@
     ]
   },
   {
+    "name": "COMMON_DLG_ERRORS",
+    "type": "uint",
+    "autoPopulate": {
+      "filter": ".+",
+      "header": "cderr.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "CommDlgExtendedError",
+        "parameter": "return"
+      }
+    ]
+  },
+  {
     "name": "CHOOSECOLOR_FLAGS",
     "flags": true,
     "autoPopulate": {
@@ -1204,6 +1219,10 @@
         "value": "(CFE_EFFECTS.CFE_SUBSCRIPT | CFE_EFFECTS.CFE_SUPERSCRIPT)"
       },
       {
+        "name": "CFM_SUPERSCRIPT",
+        "value": "CFM_SUBSCRIPT"
+      },
+      {
         "name": "CFM_EFFECTS",
         "value": "(CFM_BOLD | CFM_ITALIC | CFM_UNDERLINE | CFM_COLOR | CFM_STRIKEOUT | CFE_EFFECTS.CFE_PROTECTED | CFM_LINK)"
       },
@@ -1705,7 +1724,12 @@
         "name": "THREAD_PRIORITY_IDLE"
       },
       {
-        "name": "THREAD_PRIORITY_LOWEST"
+        "name": "THREAD_PRIORITY_MIN",
+        "value": "-2"
+      },
+      {
+        "name": "THREAD_PRIORITY_LOWEST",
+        "value": "THREAD_PRIORITY_MIN"
       },
       {
         "name": "THREAD_PRIORITY_NORMAL",
@@ -3690,6 +3714,15 @@
         "field": "dwStatus"
       }
     ]
+  },
+  {
+    "namespace": "Windows.Win32.System.Diagnostics.Debug",
+    "type": "uint",
+    "name": "BUGCHECK_ERROR",
+    "autoPopulate": {
+      "filter": ".*",
+      "header": "bugcodes.h"
+    }
   },
   {
     "namespace": "Windows.Win32.System.Rpc",
@@ -9998,7 +10031,6 @@
       "header": "winnt.h",
       "filter": "DUPLICATE_"
     },
-    "members": [],
     "uses": [
       {
         "method": "DuplicateHandle",
@@ -23760,13 +23792,16 @@
         "name": "AM_TIMECODE_FILMSEQUENCE_TYPE"
       },
       {
-        "name": "ED_DEVCAP_TIMECODE_READ"
+        "name": "ED_DEVCAP_TIMECODE_READ",
+        "value": "ED_BASE+25"
       },
       {
-        "name": "ED_DEVCAP_ATN_READ"
+        "name": "ED_DEVCAP_ATN_READ",
+        "value": "ED_BASE+951"
       },
       {
-        "name": "ED_DEVCAP_RTC_READ"
+        "name": "ED_DEVCAP_RTC_READ",
+        "value": "ED_BASE+954"
       }
     ],
     "uses": [

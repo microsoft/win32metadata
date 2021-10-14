@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -330,6 +338,7 @@ EXTERN_C const IID IID_ITfLangBarMgr;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITfLangBarMgr * This,
             /* [annotation][in] */ 
@@ -337,12 +346,15 @@ EXTERN_C const IID IID_ITfLangBarMgr;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITfLangBarMgr * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITfLangBarMgr * This);
         
+        DECLSPEC_XFGVIRT(ITfLangBarMgr, AdviseEventSink)
         HRESULT ( STDMETHODCALLTYPE *AdviseEventSink )( 
             __RPC__in ITfLangBarMgr * This,
             /* [annotation][in] */ 
@@ -354,11 +366,13 @@ EXTERN_C const IID IID_ITfLangBarMgr;
             /* [annotation][in] */ 
             _In_  DWORD *pdwCookie);
         
+        DECLSPEC_XFGVIRT(ITfLangBarMgr, UnadviseEventSink)
         HRESULT ( STDMETHODCALLTYPE *UnadviseEventSink )( 
             __RPC__in ITfLangBarMgr * This,
             /* [annotation][in] */ 
             _In_  DWORD dwCookie);
         
+        DECLSPEC_XFGVIRT(ITfLangBarMgr, GetThreadMarshalInterface)
         HRESULT ( STDMETHODCALLTYPE *GetThreadMarshalInterface )( 
             __RPC__in ITfLangBarMgr * This,
             /* [annotation][in] */ 
@@ -370,6 +384,7 @@ EXTERN_C const IID IID_ITfLangBarMgr;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  IUnknown **ppunk);
         
+        DECLSPEC_XFGVIRT(ITfLangBarMgr, GetThreadLangBarItemMgr)
         HRESULT ( STDMETHODCALLTYPE *GetThreadLangBarItemMgr )( 
             __RPC__in ITfLangBarMgr * This,
             /* [annotation][in] */ 
@@ -379,6 +394,7 @@ EXTERN_C const IID IID_ITfLangBarMgr;
             /* [annotation][out] */ 
             _Out_  DWORD *pdwThreadid);
         
+        DECLSPEC_XFGVIRT(ITfLangBarMgr, GetInputProcessorProfiles)
         HRESULT ( STDMETHODCALLTYPE *GetInputProcessorProfiles )( 
             __RPC__in ITfLangBarMgr * This,
             /* [annotation][in] */ 
@@ -388,6 +404,7 @@ EXTERN_C const IID IID_ITfLangBarMgr;
             /* [annotation][out] */ 
             _Out_  DWORD *pdwThreadid);
         
+        DECLSPEC_XFGVIRT(ITfLangBarMgr, RestoreLastFocus)
         HRESULT ( STDMETHODCALLTYPE *RestoreLastFocus )( 
             __RPC__in ITfLangBarMgr * This,
             /* [annotation][out] */ 
@@ -395,6 +412,7 @@ EXTERN_C const IID IID_ITfLangBarMgr;
             /* [annotation][in] */ 
             _In_  BOOL fPrev);
         
+        DECLSPEC_XFGVIRT(ITfLangBarMgr, SetModalInput)
         HRESULT ( STDMETHODCALLTYPE *SetModalInput )( 
             __RPC__in ITfLangBarMgr * This,
             /* [annotation][in] */ 
@@ -404,11 +422,13 @@ EXTERN_C const IID IID_ITfLangBarMgr;
             /* [annotation][in] */ 
             _In_  DWORD dwFlags);
         
+        DECLSPEC_XFGVIRT(ITfLangBarMgr, ShowFloating)
         HRESULT ( STDMETHODCALLTYPE *ShowFloating )( 
             __RPC__in ITfLangBarMgr * This,
             /* [annotation][in] */ 
             _In_  DWORD dwFlags);
         
+        DECLSPEC_XFGVIRT(ITfLangBarMgr, GetShowFloatingStatus)
         HRESULT ( STDMETHODCALLTYPE *GetShowFloatingStatus )( 
             __RPC__in ITfLangBarMgr * This,
             /* [annotation][out] */ 
@@ -533,6 +553,7 @@ EXTERN_C const IID IID_ITfLangBarEventSink;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITfLangBarEventSink * This,
             /* [annotation][in] */ 
@@ -540,27 +561,33 @@ EXTERN_C const IID IID_ITfLangBarEventSink;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITfLangBarEventSink * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITfLangBarEventSink * This);
         
+        DECLSPEC_XFGVIRT(ITfLangBarEventSink, OnSetFocus)
         HRESULT ( STDMETHODCALLTYPE *OnSetFocus )( 
             __RPC__in ITfLangBarEventSink * This,
             /* [annotation][in] */ 
             _In_  DWORD dwThreadId);
         
+        DECLSPEC_XFGVIRT(ITfLangBarEventSink, OnThreadTerminate)
         HRESULT ( STDMETHODCALLTYPE *OnThreadTerminate )( 
             __RPC__in ITfLangBarEventSink * This,
             /* [annotation][in] */ 
             _In_  DWORD dwThreadId);
         
+        DECLSPEC_XFGVIRT(ITfLangBarEventSink, OnThreadItemChange)
         HRESULT ( STDMETHODCALLTYPE *OnThreadItemChange )( 
             __RPC__in ITfLangBarEventSink * This,
             /* [annotation][in] */ 
             _In_  DWORD dwThreadId);
         
+        DECLSPEC_XFGVIRT(ITfLangBarEventSink, OnModalInput)
         HRESULT ( STDMETHODCALLTYPE *OnModalInput )( 
             __RPC__in ITfLangBarEventSink * This,
             /* [annotation][in] */ 
@@ -572,11 +599,13 @@ EXTERN_C const IID IID_ITfLangBarEventSink;
             /* [annotation][in] */ 
             _In_  LPARAM lParam);
         
+        DECLSPEC_XFGVIRT(ITfLangBarEventSink, ShowFloating)
         HRESULT ( STDMETHODCALLTYPE *ShowFloating )( 
             __RPC__in ITfLangBarEventSink * This,
             /* [annotation][in] */ 
             _In_  DWORD dwFlags);
         
+        DECLSPEC_XFGVIRT(ITfLangBarEventSink, GetItemFloatingRect)
         HRESULT ( STDMETHODCALLTYPE *GetItemFloatingRect )( 
             __RPC__in ITfLangBarEventSink * This,
             /* [annotation][in] */ 
@@ -666,6 +695,7 @@ EXTERN_C const IID IID_ITfLangBarItemSink;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITfLangBarItemSink * This,
             /* [annotation][in] */ 
@@ -673,12 +703,15 @@ EXTERN_C const IID IID_ITfLangBarItemSink;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITfLangBarItemSink * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITfLangBarItemSink * This);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItemSink, OnUpdate)
         HRESULT ( STDMETHODCALLTYPE *OnUpdate )( 
             __RPC__in ITfLangBarItemSink * This,
             /* [annotation][in] */ 
@@ -763,6 +796,7 @@ EXTERN_C const IID IID_IEnumTfLangBarItems;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumTfLangBarItems * This,
             /* [annotation][in] */ 
@@ -770,17 +804,21 @@ EXTERN_C const IID IID_IEnumTfLangBarItems;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumTfLangBarItems * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumTfLangBarItems * This);
         
+        DECLSPEC_XFGVIRT(IEnumTfLangBarItems, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumTfLangBarItems * This,
             /* [annotation][out] */ 
             _Out_  IEnumTfLangBarItems **ppEnum);
         
+        DECLSPEC_XFGVIRT(IEnumTfLangBarItems, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumTfLangBarItems * This,
             /* [annotation][in] */ 
@@ -790,9 +828,11 @@ EXTERN_C const IID IID_IEnumTfLangBarItems;
             /* [annotation][unique][out][in] */ 
             _Inout_  ULONG *pcFetched);
         
+        DECLSPEC_XFGVIRT(IEnumTfLangBarItems, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumTfLangBarItems * This);
         
+        DECLSPEC_XFGVIRT(IEnumTfLangBarItems, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumTfLangBarItems * This,
             /* [annotation][in] */ 
@@ -973,6 +1013,7 @@ EXTERN_C const IID IID_ITfLangBarItemMgr;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITfLangBarItemMgr * This,
             /* [annotation][in] */ 
@@ -980,17 +1021,21 @@ EXTERN_C const IID IID_ITfLangBarItemMgr;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITfLangBarItemMgr * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITfLangBarItemMgr * This);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItemMgr, EnumItems)
         HRESULT ( STDMETHODCALLTYPE *EnumItems )( 
             __RPC__in ITfLangBarItemMgr * This,
             /* [annotation][out] */ 
             _Out_  IEnumTfLangBarItems **ppEnum);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItemMgr, GetItem)
         HRESULT ( STDMETHODCALLTYPE *GetItem )( 
             __RPC__in ITfLangBarItemMgr * This,
             /* [annotation][in] */ 
@@ -998,16 +1043,19 @@ EXTERN_C const IID IID_ITfLangBarItemMgr;
             /* [annotation][out] */ 
             _Out_  ITfLangBarItem **ppItem);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItemMgr, AddItem)
         HRESULT ( STDMETHODCALLTYPE *AddItem )( 
             __RPC__in ITfLangBarItemMgr * This,
             /* [annotation][in] */ 
             _In_  ITfLangBarItem *punk);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItemMgr, RemoveItem)
         HRESULT ( STDMETHODCALLTYPE *RemoveItem )( 
             __RPC__in ITfLangBarItemMgr * This,
             /* [annotation][in] */ 
             _In_  ITfLangBarItem *punk);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItemMgr, AdviseItemSink)
         HRESULT ( STDMETHODCALLTYPE *AdviseItemSink )( 
             __RPC__in ITfLangBarItemMgr * This,
             /* [annotation][in] */ 
@@ -1017,11 +1065,13 @@ EXTERN_C const IID IID_ITfLangBarItemMgr;
             /* [annotation][in] */ 
             _In_  REFGUID rguidItem);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItemMgr, UnadviseItemSink)
         HRESULT ( STDMETHODCALLTYPE *UnadviseItemSink )( 
             __RPC__in ITfLangBarItemMgr * This,
             /* [annotation][in] */ 
             _In_  DWORD dwCookie);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItemMgr, GetItemFloatingRect)
         HRESULT ( STDMETHODCALLTYPE *GetItemFloatingRect )( 
             __RPC__in ITfLangBarItemMgr * This,
             /* [annotation][in] */ 
@@ -1031,6 +1081,7 @@ EXTERN_C const IID IID_ITfLangBarItemMgr;
             /* [annotation][out] */ 
             _Out_  RECT *prc);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItemMgr, GetItemsStatus)
         HRESULT ( STDMETHODCALLTYPE *GetItemsStatus )( 
             __RPC__in ITfLangBarItemMgr * This,
             /* [annotation][in] */ 
@@ -1040,11 +1091,13 @@ EXTERN_C const IID IID_ITfLangBarItemMgr;
             /* [annotation][size_is][out] */ 
             _Out_writes_(ulCount)  DWORD *pdwStatus);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItemMgr, GetItemNum)
         HRESULT ( STDMETHODCALLTYPE *GetItemNum )( 
             __RPC__in ITfLangBarItemMgr * This,
             /* [annotation][out] */ 
             _Out_  ULONG *pulCount);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItemMgr, GetItems)
         HRESULT ( STDMETHODCALLTYPE *GetItems )( 
             __RPC__in ITfLangBarItemMgr * This,
             /* [annotation][in] */ 
@@ -1058,6 +1111,7 @@ EXTERN_C const IID IID_ITfLangBarItemMgr;
             /* [annotation][unique][out][in] */ 
             _Inout_  ULONG *pcFetched);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItemMgr, AdviseItemsSink)
         HRESULT ( STDMETHODCALLTYPE *AdviseItemsSink )( 
             __RPC__in ITfLangBarItemMgr * This,
             /* [annotation][in] */ 
@@ -1069,6 +1123,7 @@ EXTERN_C const IID IID_ITfLangBarItemMgr;
             /* [annotation][size_is][out] */ 
             _Out_writes_(ulCount)  DWORD *pdwCookie);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItemMgr, UnadviseItemsSink)
         HRESULT ( STDMETHODCALLTYPE *UnadviseItemsSink )( 
             __RPC__in ITfLangBarItemMgr * This,
             /* [annotation][in] */ 
@@ -1198,6 +1253,7 @@ EXTERN_C const IID IID_ITfLangBarItem;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITfLangBarItem * This,
             /* [annotation][in] */ 
@@ -1205,27 +1261,33 @@ EXTERN_C const IID IID_ITfLangBarItem;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITfLangBarItem * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITfLangBarItem * This);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItem, GetInfo)
         HRESULT ( STDMETHODCALLTYPE *GetInfo )( 
             __RPC__in ITfLangBarItem * This,
             /* [annotation][out] */ 
             _Out_  TF_LANGBARITEMINFO *pInfo);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItem, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in ITfLangBarItem * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pdwStatus);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItem, Show)
         HRESULT ( STDMETHODCALLTYPE *Show )( 
             __RPC__in ITfLangBarItem * This,
             /* [annotation][in] */ 
             _In_  BOOL fShow);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItem, GetTooltipString)
         HRESULT ( STDMETHODCALLTYPE *GetTooltipString )( 
             __RPC__in ITfLangBarItem * This,
             /* [annotation][out] */ 
@@ -1321,6 +1383,7 @@ EXTERN_C const IID IID_ITfSystemLangBarItemSink;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITfSystemLangBarItemSink * This,
             /* [annotation][in] */ 
@@ -1328,17 +1391,21 @@ EXTERN_C const IID IID_ITfSystemLangBarItemSink;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITfSystemLangBarItemSink * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITfSystemLangBarItemSink * This);
         
+        DECLSPEC_XFGVIRT(ITfSystemLangBarItemSink, InitMenu)
         HRESULT ( STDMETHODCALLTYPE *InitMenu )( 
             __RPC__in ITfSystemLangBarItemSink * This,
             /* [annotation][in] */ 
             _In_  ITfMenu *pMenu);
         
+        DECLSPEC_XFGVIRT(ITfSystemLangBarItemSink, OnMenuSelect)
         HRESULT ( STDMETHODCALLTYPE *OnMenuSelect )( 
             __RPC__in ITfSystemLangBarItemSink * This,
             /* [annotation][in] */ 
@@ -1418,6 +1485,7 @@ EXTERN_C const IID IID_ITfSystemLangBarItem;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITfSystemLangBarItem * This,
             /* [annotation][in] */ 
@@ -1425,17 +1493,21 @@ EXTERN_C const IID IID_ITfSystemLangBarItem;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITfSystemLangBarItem * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITfSystemLangBarItem * This);
         
+        DECLSPEC_XFGVIRT(ITfSystemLangBarItem, SetIcon)
         HRESULT ( STDMETHODCALLTYPE *SetIcon )( 
             __RPC__in ITfSystemLangBarItem * This,
             /* [annotation][in] */ 
             _In_  HICON hIcon);
         
+        DECLSPEC_XFGVIRT(ITfSystemLangBarItem, SetTooltipString)
         HRESULT ( STDMETHODCALLTYPE *SetTooltipString )( 
             __RPC__in ITfSystemLangBarItem * This,
             /* [annotation][size_is][in] */ 
@@ -1517,6 +1589,7 @@ EXTERN_C const IID IID_ITfSystemLangBarItemText;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITfSystemLangBarItemText * This,
             /* [annotation][in] */ 
@@ -1524,12 +1597,15 @@ EXTERN_C const IID IID_ITfSystemLangBarItemText;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITfSystemLangBarItemText * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITfSystemLangBarItemText * This);
         
+        DECLSPEC_XFGVIRT(ITfSystemLangBarItemText, SetItemText)
         HRESULT ( STDMETHODCALLTYPE *SetItemText )( 
             __RPC__in ITfSystemLangBarItemText * This,
             /* [annotation][size_is][in] */ 
@@ -1537,6 +1613,7 @@ EXTERN_C const IID IID_ITfSystemLangBarItemText;
             /* [annotation][in] */ 
             _In_  ULONG cch);
         
+        DECLSPEC_XFGVIRT(ITfSystemLangBarItemText, GetItemText)
         HRESULT ( STDMETHODCALLTYPE *GetItemText )( 
             __RPC__in ITfSystemLangBarItemText * This,
             /* [annotation][out] */ 
@@ -1614,6 +1691,7 @@ EXTERN_C const IID IID_ITfSystemDeviceTypeLangBarItem;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITfSystemDeviceTypeLangBarItem * This,
             /* [annotation][in] */ 
@@ -1621,17 +1699,21 @@ EXTERN_C const IID IID_ITfSystemDeviceTypeLangBarItem;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITfSystemDeviceTypeLangBarItem * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITfSystemDeviceTypeLangBarItem * This);
         
+        DECLSPEC_XFGVIRT(ITfSystemDeviceTypeLangBarItem, SetIconMode)
         HRESULT ( STDMETHODCALLTYPE *SetIconMode )( 
             __RPC__in ITfSystemDeviceTypeLangBarItem * This,
             /* [annotation][in] */ 
             _In_  DWORD dwFlags);
         
+        DECLSPEC_XFGVIRT(ITfSystemDeviceTypeLangBarItem, GetIconMode)
         HRESULT ( STDMETHODCALLTYPE *GetIconMode )( 
             __RPC__in ITfSystemDeviceTypeLangBarItem * This,
             /* [annotation][out] */ 
@@ -1748,6 +1830,7 @@ EXTERN_C const IID IID_ITfLangBarItemButton;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITfLangBarItemButton * This,
             /* [annotation][in] */ 
@@ -1755,32 +1838,39 @@ EXTERN_C const IID IID_ITfLangBarItemButton;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITfLangBarItemButton * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITfLangBarItemButton * This);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItem, GetInfo)
         HRESULT ( STDMETHODCALLTYPE *GetInfo )( 
             __RPC__in ITfLangBarItemButton * This,
             /* [annotation][out] */ 
             _Out_  TF_LANGBARITEMINFO *pInfo);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItem, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in ITfLangBarItemButton * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pdwStatus);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItem, Show)
         HRESULT ( STDMETHODCALLTYPE *Show )( 
             __RPC__in ITfLangBarItemButton * This,
             /* [annotation][in] */ 
             _In_  BOOL fShow);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItem, GetTooltipString)
         HRESULT ( STDMETHODCALLTYPE *GetTooltipString )( 
             __RPC__in ITfLangBarItemButton * This,
             /* [annotation][out] */ 
             _Out_  BSTR *pbstrToolTip);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItemButton, OnClick)
         HRESULT ( STDMETHODCALLTYPE *OnClick )( 
             __RPC__in ITfLangBarItemButton * This,
             /* [annotation][in] */ 
@@ -1790,21 +1880,25 @@ EXTERN_C const IID IID_ITfLangBarItemButton;
             /* [annotation][in] */ 
             _In_  const RECT *prcArea);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItemButton, InitMenu)
         HRESULT ( STDMETHODCALLTYPE *InitMenu )( 
             __RPC__in ITfLangBarItemButton * This,
             /* [annotation][in] */ 
             _In_  ITfMenu *pMenu);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItemButton, OnMenuSelect)
         HRESULT ( STDMETHODCALLTYPE *OnMenuSelect )( 
             __RPC__in ITfLangBarItemButton * This,
             /* [annotation][in] */ 
             _In_  UINT wID);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItemButton, GetIcon)
         HRESULT ( STDMETHODCALLTYPE *GetIcon )( 
             __RPC__in ITfLangBarItemButton * This,
             /* [annotation][out] */ 
             _Out_  HICON *phIcon);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItemButton, GetText)
         HRESULT ( STDMETHODCALLTYPE *GetText )( 
             __RPC__in ITfLangBarItemButton * This,
             /* [annotation][out] */ 
@@ -1934,6 +2028,7 @@ EXTERN_C const IID IID_ITfLangBarItemBitmapButton;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITfLangBarItemBitmapButton * This,
             /* [annotation][in] */ 
@@ -1941,32 +2036,39 @@ EXTERN_C const IID IID_ITfLangBarItemBitmapButton;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITfLangBarItemBitmapButton * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITfLangBarItemBitmapButton * This);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItem, GetInfo)
         HRESULT ( STDMETHODCALLTYPE *GetInfo )( 
             __RPC__in ITfLangBarItemBitmapButton * This,
             /* [annotation][out] */ 
             _Out_  TF_LANGBARITEMINFO *pInfo);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItem, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in ITfLangBarItemBitmapButton * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pdwStatus);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItem, Show)
         HRESULT ( STDMETHODCALLTYPE *Show )( 
             __RPC__in ITfLangBarItemBitmapButton * This,
             /* [annotation][in] */ 
             _In_  BOOL fShow);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItem, GetTooltipString)
         HRESULT ( STDMETHODCALLTYPE *GetTooltipString )( 
             __RPC__in ITfLangBarItemBitmapButton * This,
             /* [annotation][out] */ 
             _Out_  BSTR *pbstrToolTip);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItemBitmapButton, OnClick)
         HRESULT ( STDMETHODCALLTYPE *OnClick )( 
             __RPC__in ITfLangBarItemBitmapButton * This,
             /* [annotation][in] */ 
@@ -1976,16 +2078,19 @@ EXTERN_C const IID IID_ITfLangBarItemBitmapButton;
             /* [annotation][in] */ 
             _In_  const RECT *prcArea);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItemBitmapButton, InitMenu)
         HRESULT ( STDMETHODCALLTYPE *InitMenu )( 
             __RPC__in ITfLangBarItemBitmapButton * This,
             /* [annotation][in] */ 
             _In_  ITfMenu *pMenu);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItemBitmapButton, OnMenuSelect)
         HRESULT ( STDMETHODCALLTYPE *OnMenuSelect )( 
             __RPC__in ITfLangBarItemBitmapButton * This,
             /* [annotation][in] */ 
             _In_  UINT wID);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItemBitmapButton, GetPreferredSize)
         HRESULT ( STDMETHODCALLTYPE *GetPreferredSize )( 
             __RPC__in ITfLangBarItemBitmapButton * This,
             /* [annotation][in] */ 
@@ -1993,6 +2098,7 @@ EXTERN_C const IID IID_ITfLangBarItemBitmapButton;
             /* [annotation][out] */ 
             _Out_  SIZE *psz);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItemBitmapButton, DrawBitmap)
         HRESULT ( STDMETHODCALLTYPE *DrawBitmap )( 
             __RPC__in ITfLangBarItemBitmapButton * This,
             /* [annotation][in] */ 
@@ -2006,6 +2112,7 @@ EXTERN_C const IID IID_ITfLangBarItemBitmapButton;
             /* [annotation][out] */ 
             _Out_  HBITMAP *phbmpMask);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItemBitmapButton, GetText)
         HRESULT ( STDMETHODCALLTYPE *GetText )( 
             __RPC__in ITfLangBarItemBitmapButton * This,
             /* [annotation][out] */ 
@@ -2126,6 +2233,7 @@ EXTERN_C const IID IID_ITfLangBarItemBitmap;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITfLangBarItemBitmap * This,
             /* [annotation][in] */ 
@@ -2133,32 +2241,39 @@ EXTERN_C const IID IID_ITfLangBarItemBitmap;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITfLangBarItemBitmap * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITfLangBarItemBitmap * This);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItem, GetInfo)
         HRESULT ( STDMETHODCALLTYPE *GetInfo )( 
             __RPC__in ITfLangBarItemBitmap * This,
             /* [annotation][out] */ 
             _Out_  TF_LANGBARITEMINFO *pInfo);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItem, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in ITfLangBarItemBitmap * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pdwStatus);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItem, Show)
         HRESULT ( STDMETHODCALLTYPE *Show )( 
             __RPC__in ITfLangBarItemBitmap * This,
             /* [annotation][in] */ 
             _In_  BOOL fShow);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItem, GetTooltipString)
         HRESULT ( STDMETHODCALLTYPE *GetTooltipString )( 
             __RPC__in ITfLangBarItemBitmap * This,
             /* [annotation][out] */ 
             _Out_  BSTR *pbstrToolTip);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItemBitmap, OnClick)
         HRESULT ( STDMETHODCALLTYPE *OnClick )( 
             __RPC__in ITfLangBarItemBitmap * This,
             /* [annotation][in] */ 
@@ -2168,6 +2283,7 @@ EXTERN_C const IID IID_ITfLangBarItemBitmap;
             /* [annotation][in] */ 
             _In_  const RECT *prcArea);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItemBitmap, GetPreferredSize)
         HRESULT ( STDMETHODCALLTYPE *GetPreferredSize )( 
             __RPC__in ITfLangBarItemBitmap * This,
             /* [annotation][in] */ 
@@ -2175,6 +2291,7 @@ EXTERN_C const IID IID_ITfLangBarItemBitmap;
             /* [annotation][out] */ 
             _Out_  SIZE *psz);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItemBitmap, DrawBitmap)
         HRESULT ( STDMETHODCALLTYPE *DrawBitmap )( 
             __RPC__in ITfLangBarItemBitmap * This,
             /* [annotation][in] */ 
@@ -2312,6 +2429,7 @@ EXTERN_C const IID IID_ITfLangBarItemBalloon;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITfLangBarItemBalloon * This,
             /* [annotation][in] */ 
@@ -2319,32 +2437,39 @@ EXTERN_C const IID IID_ITfLangBarItemBalloon;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITfLangBarItemBalloon * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITfLangBarItemBalloon * This);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItem, GetInfo)
         HRESULT ( STDMETHODCALLTYPE *GetInfo )( 
             __RPC__in ITfLangBarItemBalloon * This,
             /* [annotation][out] */ 
             _Out_  TF_LANGBARITEMINFO *pInfo);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItem, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in ITfLangBarItemBalloon * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pdwStatus);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItem, Show)
         HRESULT ( STDMETHODCALLTYPE *Show )( 
             __RPC__in ITfLangBarItemBalloon * This,
             /* [annotation][in] */ 
             _In_  BOOL fShow);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItem, GetTooltipString)
         HRESULT ( STDMETHODCALLTYPE *GetTooltipString )( 
             __RPC__in ITfLangBarItemBalloon * This,
             /* [annotation][out] */ 
             _Out_  BSTR *pbstrToolTip);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItemBalloon, OnClick)
         HRESULT ( STDMETHODCALLTYPE *OnClick )( 
             __RPC__in ITfLangBarItemBalloon * This,
             /* [annotation][in] */ 
@@ -2354,6 +2479,7 @@ EXTERN_C const IID IID_ITfLangBarItemBalloon;
             /* [annotation][in] */ 
             _In_  const RECT *prcArea);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItemBalloon, GetPreferredSize)
         HRESULT ( STDMETHODCALLTYPE *GetPreferredSize )( 
             __RPC__in ITfLangBarItemBalloon * This,
             /* [annotation][in] */ 
@@ -2361,6 +2487,7 @@ EXTERN_C const IID IID_ITfLangBarItemBalloon;
             /* [annotation][out] */ 
             _Out_  SIZE *psz);
         
+        DECLSPEC_XFGVIRT(ITfLangBarItemBalloon, GetBalloonInfo)
         HRESULT ( STDMETHODCALLTYPE *GetBalloonInfo )( 
             __RPC__in ITfLangBarItemBalloon * This,
             /* [annotation][out] */ 
@@ -2484,6 +2611,7 @@ EXTERN_C const IID IID_ITfMenu;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITfMenu * This,
             /* [annotation][in] */ 
@@ -2491,12 +2619,15 @@ EXTERN_C const IID IID_ITfMenu;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITfMenu * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITfMenu * This);
         
+        DECLSPEC_XFGVIRT(ITfMenu, AddMenuItem)
         HRESULT ( STDMETHODCALLTYPE *AddMenuItem )( 
             __RPC__in ITfMenu * This,
             /* [annotation][in] */ 

@@ -906,6 +906,29 @@ TdhEnumerateProviders(
     _Inout_ ULONG* pBufferSize
     );
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_MN)
+/*
+Retrieves a filtered list of providers that have registered on the computer.
+
+To retrieve the providers that have registered a manifest on the computer,
+call TdhEnumerateProvidersForDecodingSource(DecodingSourceXMLFile, ...).
+
+To retrieve the providers that have registered a MOF class on the computer,
+call TdhEnumerateProvidersForDecodingSource(DecodingSourceWbem, ...).
+
+To retrieve all providers that have registered on the computer, use
+TdhEnumerateProviders instead of TdhEnumerateProvidersForDecodingSource.
+*/
+TDHSTATUS
+__stdcall
+TdhEnumerateProvidersForDecodingSource(
+    DECODING_SOURCE filter,
+    _Out_writes_bytes_to_opt_(bufferSize, *bufferRequired) PROVIDER_ENUMERATION_INFO* buffer,
+    ULONG bufferSize,
+    _Out_ ULONG* bufferRequired
+    );
+#endif
+
 TDHSTATUS
 __stdcall
 TdhQueryProviderFieldInformation(
@@ -957,7 +980,7 @@ TdhLoadManifest(
     );
 #endif
 
-#if (WINVER >= _WIN32_WINNT_WIN10)
+#if (NTDDI_VERSION >= NTDDI_WIN10_19H1)
 TDHSTATUS
 __stdcall
 TdhLoadManifestFromMemory(
@@ -974,7 +997,7 @@ TdhUnloadManifest(
     );
 #endif
 
-#if (WINVER >= _WIN32_WINNT_WIN10)
+#if (NTDDI_VERSION >= NTDDI_WIN10_19H1)
 TDHSTATUS
 __stdcall
 TdhUnloadManifestFromMemory(

@@ -19,6 +19,7 @@ typedef enum _NET_EXTENSION_TYPE
 {
     NetExtensionTypePacket = 1,
     NetExtensionTypeFragment,
+    NetExtensionTypeBuffer,
 } NET_EXTENSION_TYPE;
 
 typedef struct _NET_EXTENSION
