@@ -15,7 +15,7 @@ stages:
   jobs:
   - deployment: create
     pool:
-      name: Package ES Standard Build
+      vmImage: windows-2019
     environment: No-Approval 2
     strategy:
       runOnce:
@@ -51,7 +51,7 @@ stages:
   jobs:
   - deployment: push
     pool:
-      name: Package ES Standard Build
+      vmImage: windows-2019
     environment: No-Approval 2
     strategy:
       runOnce:
