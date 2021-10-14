@@ -21,3 +21,4 @@
 #include <pacmanclientapi.h>
 #include <patchapi.h>
 #include <patchwiz.h>
+#include <msdelta.h>

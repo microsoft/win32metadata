@@ -217,7 +217,6 @@ File,Skipping,Reason
 /um/minidrv.h,true,Macros we can't use
 /um/msado15_backcompat.h,true,Empty of anything
 /um/msado15.h,true,Empty of anything
-/um/msdelta.h,false,TODO: Where to put this
 /um/mspcoll.h,true,Can't use C++ classes
 /um/mspenum.h,true,Can't use C++ classes
 /um/msplog.h,true,Can't use C++ classes
